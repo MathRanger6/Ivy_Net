@@ -22,9 +22,9 @@ then, Cells 6A–6B and any CLI use of this file are entirely API-based.
 
 API courtesy
 ------------
-All requests use mailto=dzk3ja@virginia.edu (elevated rate-limit pool).
-Polite spacing between requests is controlled by module ``_DELAY`` (see code;
-defaults may differ from historical doc comments).
+Requests use ``mailto=`` from env ``OPENALEX_MAILTO`` and optional Bearer
+``OPENALEX_API_KEY`` (see module-level config). Polite spacing between requests
+is controlled by ``_DELAY``.
 
 Confidence tiers
 ----------------
@@ -62,7 +62,7 @@ class RateLimitExhausted(Exception):
 # ---------------------------------------------------------------------------
 # API config  (secrets: set OPENALEX_API_KEY in environment or workspace `.env` — not committed)
 # ---------------------------------------------------------------------------
-_MAILTO = (os.environ.get("OPENALEX_MAILTO") or "hgt6rn@virginia.edu").strip()
+_MAILTO = (os.environ.get("OPENALEX_MAILTO") or "").strip()
 _BASE = "https://api.openalex.org"
 _DELAY = 1.0  # seconds between requests — standard rate until elevated limit confirmed
 # Bearer token optional; without it OpenAlex uses the polite pool (mailto-only).
@@ -118,7 +118,8 @@ def _get(endpoint: str, params: dict) -> dict:
     url    = f"{_BASE}/{endpoint}?{urlencode(params)}"
     _api_metrics["n_calls"] += 1
 
-    headers = {"User-Agent": f"TenurePipeline/1.0 ({_MAILTO})"}
+    _ua = f"TenurePipeline/1.0 ({_MAILTO})" if _MAILTO else "TenurePipeline/1.0"
+    headers = {"User-Agent": _ua}
     if _API_KEY:
         headers["Authorization"] = f"Bearer {_API_KEY}"
 
@@ -313,7 +314,7 @@ def resolve_authors(panel_records: list,
 
     # ── Pre-run plan ──────────────────────────────────────────────────────────
     est_total_sec = n_todo * delay
-    key_status = f"API key set ({_API_KEY[:8]}…)" if _API_KEY else "no API key — polite pool only"
+    key_status = "API key set (Bearer)" if _API_KEY else "no API key — polite pool only"
     print(f"\n  Faculty to resolve : {n_todo:,}  ({len(done_ids):,} already done, {len(seen):,} total)")
     print(f"  API delay          : {delay:.2f}s / request  │  {key_status}")
     print(f"  Est. total time    : {_hms(est_total_sec)}  (network latency will add ~30–60%)")

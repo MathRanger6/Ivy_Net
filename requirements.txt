@@ -1,0 +1,2 @@
+# Minimal deps for repo-root workflows (e.g. tenure notebook `.env` loading)
+python-dotenv>=1.0.0
