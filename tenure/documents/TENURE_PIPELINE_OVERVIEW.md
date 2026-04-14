@@ -470,6 +470,12 @@ Test downloads confirmed all pages were rich with data (67–128 professor menti
 
 **Primary path (in code):** `tenure_pipeline/openalex_resolver.py`, invoked from **`540`** CELL **6A** (institution + author IDs) and **6B** (publication counts by year via OpenAlex `group_by`). Polite API use with `mailto` and optional API key; outputs under `tenure_pipeline/openalex_*.json` / `*.jsonl` (see CELL 0 constants: `STAGE6_*`).
 
+**Stage 6 pilot ordering (`stage6_pilot.py`, CELL 0):** Optional **coverage-first** run: schools are ranked by **unique panel faculty** (then row count); **`STAGE6_PILOT_TOP_N`** keeps only the top *N* schools for 6A–6B. **`STAGE6_PILOT_MODE = False`** restores alphabetical order and the full panel.
+
+- **`STAGE6_SANITY_MAX_NONE_FRAC`** — Upper bound on **bad parse files** for a school, as measured in **`faculty_snapshots_strategy_audit.jsonl`**: for each audit row, `winner == 'none'` means the HTML parser picked no winning strategy for that file. For school *S*, **`frac_none`** = (number of audit rows with `winner == 'none'`) / (rows for *S*). If **`frac_none`** is **greater than** this threshold **and** the school has enough audit rows (see next bullet), that school is **excluded** from Stage 6 so you do not burn OpenAlex quota on pages that mostly failed to parse. Example: `0.35` drops schools where more than **35%** of audited files are `none`.
+
+- **`STAGE6_SANITY_MIN_AUDIT_ROWS`** — Minimum number of **audit rows** (parsed HTML files recorded in the strategy audit) for a school **before** the none-fraction rule applies. If a school has **fewer** than this many rows (e.g. only one or two snapshots), the rule is **skipped** for that school: we do not exclude it for being “too none-heavy” on thin evidence. Example: `3` means we need at least three audited files to judge `frac_none` against **`STAGE6_SANITY_MAX_NONE_FRAC`**.
+
 **Confidence tiers (6A):** HIGH / MEDIUM / LOW / MULTI / NONE — `openalex_low_confidence.jsonl` holds rows needing human review. **Advisor constraint:** do **not** hand-merge OpenAlex IDs for a subset unless the same rule could apply everywhere (bias).
 
 **DBLP:** Per-year JSONL in `dblp_parsed/` remains the **bibliographic spine** for name/year matching experiments and cross-checks; full string-matching pipeline for “CELL 6 ↔ DBLP only” is **not** the main track if OpenAlex coverage is sufficient.
