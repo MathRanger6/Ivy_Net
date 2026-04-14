@@ -42,6 +42,7 @@ deleted_files/
 
 # --- Large ad-hoc assets at root (optional) ---
 Gephi/
+1-Various_PDE_and_Chat_stuff
 
 # --- Large data / outputs (Dropbox + local only; too big for GitHub) ---
 # DBLP dump may live under datasets/ (not only python_packages/)
