@@ -21,6 +21,7 @@
 	},
 	"markdownlint.ignore": [
 			"**/reference_documents/**"
-	]
+	],
+	"specstory.cloudSync.enabled": "always"
 	}
 }
