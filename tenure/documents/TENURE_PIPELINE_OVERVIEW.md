@@ -142,7 +142,7 @@ CELL 0 is the control panel for the entire pipeline. It imports all libraries, s
 - `CDX_DEFERRED_DELAY` — 3.0 seconds between requests in pass 2 (slower, gentler retry pace)
 - `STAGE3C_TARGETS` — `tenure_pipeline/faculty_subpage_targets.json`
 - `STAGE3C_INDEX` — `tenure_pipeline/faculty_subpage_index.jsonl`
-- `CDX_HEADERS` — includes academic research User-Agent with `charles.levine@virginia.edu`
+- `CDX_HEADERS` — academic research User-Agent; optional contact via env `HTTP_CONTACT_EMAIL` (see CELL 0)
 
 **Libraries loaded:** `requests`, `lxml`, `tqdm`, `pandas`, `numpy`, `json`, `time`, `datetime`, `pathlib`, and the custom `functionsG_working.py` utilities (`time_start`, `time_stop`, `hms_string`, `tymeout`, `tyme`).
 
@@ -554,7 +554,7 @@ These decisions were made in conversation and are recorded here as reference.
 | In-scope departments | 168 in `PILOT_SCHOOLS` (April 2026) | Expanded from the original pilot; see `r1_schools_data.py` |
 | URL strategy | Union all URLs per school | Handles domain changes over time (UIUC, Georgia Tech, UVA, Purdue) |
 | Rate limiting | 2.0 sec between requests | Conservative vs. Internet Archive’s ~60 req/min guidance |
-| Name in User-Agent | `charles.levine@virginia.edu` | Standard academic crawler courtesy |
+| Contact in User-Agent | `HTTP_CONTACT_EMAIL` in `.env` (optional) | Standard academic crawler courtesy |
 | Analysis time axis | **Exact Wayback `timestamp`** (derive `snpsht_dt`); `year`/`season` = CDX culling strata | See **Temporal keys** below |
 | Duplicate / ambiguous names | **Multiplicity + conflict flags** when needed; `faculty_linker` = default baseline, not only story | See **Collisions** below |
 
