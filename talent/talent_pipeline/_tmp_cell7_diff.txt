@@ -1,0 +1,27 @@
+--- 20Mar
++++ live
+@@ -79,15 +79,15 @@
+             else:
+                 print_v("✅ prestige_sum already exists (likely from 502 output)")
+                 # Still create prestige_mean if missing
+-                if 'prestige_mean' not in df_time_varying.columns:
+-                    prestige_mean_act = "Creating prestige_mean"
+-                    prestige_mean_timer = time_start(prestige_mean_act, nest=1)
+-                    df_time_varying = df_time_varying.sort_values(by=['pid_pde', 'snpsht_dt'])
+-                    df_time_varying['prestige_mean'] = df_time_varying.groupby('pid_pde')['prestige_unit'].transform(
+-                        lambda x: x.expanding().mean()
+-                    )
+-                    time_stop(prestige_mean_timer, action=prestige_mean_act, nest=1)
+-                    print_v("✅ Created prestige_mean")
++                # if 'prestige_mean' not in df_time_varying.columns:
++                #     prestige_mean_act = "Creating prestige_mean"
++                #     prestige_mean_timer = time_start(prestige_mean_act, nest=1)
++                #     df_time_varying = df_time_varying.sort_values(by=['pid_pde', 'snpsht_dt'])
++                #     df_time_varying['prestige_mean'] = df_time_varying.groupby('pid_pde')['prestige_unit'].transform(
++                #         lambda x: x.expanding().mean()
++                #     )
++                #     time_stop(prestige_mean_timer, action=prestige_mean_act, nest=1)
++                #     print_v("✅ Created prestige_mean")
+         
+         # === 7.3. CREATE DIVISION NAME + METRICS (Optional) ===
+         if DIVISION_CONFIG.get('enabled', False):

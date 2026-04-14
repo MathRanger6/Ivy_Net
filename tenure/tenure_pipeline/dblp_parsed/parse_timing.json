@@ -1,0 +1,961 @@
+{
+  "20260403_174349": {
+    "run_id": "20260403_174349",
+    "year_min": 2015,
+    "year_max": 2015,
+    "xml_bytes": 5102119206,
+    "total_recs_scanned": 8111781,
+    "total_recs_kept": 291671,
+    "total_elapsed_sec": 196.59,
+    "recs_per_sec": 41261.6,
+    "bytes_per_rec": 629.0,
+    "per_year": {
+      "2015": {
+        "records": 291671,
+        "est_elapsed_sec": 7.07
+      }
+    }
+  },
+  "20260403_174728": {
+    "run_id": "20260403_174728",
+    "year_min": 2014,
+    "year_max": 2015,
+    "xml_bytes": 5102119206,
+    "total_recs_scanned": 8111781,
+    "total_recs_kept": 279034,
+    "total_elapsed_sec": 191.92,
+    "recs_per_sec": 42266.7,
+    "bytes_per_rec": 629.0,
+    "per_year": {
+      "2014": {
+        "records": 279034,
+        "est_elapsed_sec": 6.6
+      }
+    }
+  },
+  "20260403_175606": {
+    "run_id": "20260403_175606",
+    "year_min": 2012,
+    "year_max": 2015,
+    "xml_bytes": 5102119206,
+    "total_recs_scanned": 8111781,
+    "total_recs_kept": 524001,
+    "total_elapsed_sec": 281.73,
+    "recs_per_sec": 28793.0,
+    "bytes_per_rec": 629.0,
+    "per_year": {
+      "2012": {
+        "records": 254154,
+        "est_elapsed_sec": 8.83
+      },
+      "2013": {
+        "records": 269847,
+        "est_elapsed_sec": 9.37
+      }
+    }
+  },
+  "20260403_190114": {
+    "run_id": "20260403_190114",
+    "year_min": 2010,
+    "year_max": 2017,
+    "xml_bytes": 5102119206,
+    "total_recs_scanned": 8111781,
+    "total_recs_kept": 1088717,
+    "total_elapsed_sec": 664.39,
+    "recs_per_sec": 12209.3,
+    "bytes_per_rec": 629.0,
+    "per_year": {
+      "2010": {
+        "records": 219230,
+        "est_elapsed_sec": 17.96
+      },
+      "2011": {
+        "records": 238253,
+        "est_elapsed_sec": 19.51
+      },
+      "2016": {
+        "records": 303920,
+        "est_elapsed_sec": 24.89
+      },
+      "2017": {
+        "records": 327314,
+        "est_elapsed_sec": 26.81
+      }
+    }
+  },
+  "20260403_191258": {
+    "run_id": "20260403_191258",
+    "year_min": 2005,
+    "year_max": 2020,
+    "xml_bytes": 5102119206,
+    "total_recs_scanned": 8111781,
+    "total_recs_kept": 904759,
+    "total_elapsed_sec": 613.83,
+    "recs_per_sec": 13215.1,
+    "bytes_per_rec": 629.0,
+    "per_year": {
+      "2005": {
+        "records": 152053,
+        "est_elapsed_sec": 11.51
+      },
+      "2006": {
+        "records": 170207,
+        "est_elapsed_sec": 12.88
+      },
+      "2007": {
+        "records": 182292,
+        "est_elapsed_sec": 13.79
+      },
+      "2008": {
+        "records": 192666,
+        "est_elapsed_sec": 14.58
+      },
+      "2009": {
+        "records": 207541,
+        "est_elapsed_sec": 15.7
+      }
+    }
+  },
+  "20260403_193431": {
+    "run_id": "20260403_193431",
+    "year_min": 2000,
+    "year_max": 2020,
+    "xml_bytes": 5102119206,
+    "total_recs_scanned": 8111781,
+    "total_recs_kept": 502651,
+    "total_elapsed_sec": 363.59,
+    "recs_per_sec": 22310.3,
+    "bytes_per_rec": 629.0,
+    "per_year": {
+      "2000": {
+        "records": 78421,
+        "est_elapsed_sec": 3.52
+      },
+      "2001": {
+        "records": 83947,
+        "est_elapsed_sec": 3.76
+      },
+      "2002": {
+        "records": 94811,
+        "est_elapsed_sec": 4.25
+      },
+      "2003": {
+        "records": 113336,
+        "est_elapsed_sec": 5.08
+      },
+      "2004": {
+        "records": 132136,
+        "est_elapsed_sec": 5.92
+      }
+    }
+  },
+  "20260403_200550": {
+    "run_id": "20260403_200550",
+    "year_min": 2000,
+    "year_max": 2025,
+    "xml_bytes": 5102119206,
+    "total_recs_scanned": 8111781,
+    "total_recs_kept": 2572680,
+    "total_elapsed_sec": 1353.16,
+    "recs_per_sec": 5994.7,
+    "bytes_per_rec": 629.0,
+    "per_year": {
+      "2021": {
+        "records": 455329,
+        "est_elapsed_sec": 75.96
+      },
+      "2022": {
+        "records": 474302,
+        "est_elapsed_sec": 79.12
+      },
+      "2023": {
+        "records": 515678,
+        "est_elapsed_sec": 86.02
+      },
+      "2024": {
+        "records": 574036,
+        "est_elapsed_sec": 95.76
+      },
+      "2025": {
+        "records": 553335,
+        "est_elapsed_sec": 92.3
+      }
+    }
+  },
+  "20260403_202603": {
+    "run_id": "20260403_202603",
+    "year_min": 1995,
+    "year_max": 2026,
+    "xml_bytes": 5102119206,
+    "total_recs_scanned": 8111781,
+    "total_recs_kept": 385604,
+    "total_elapsed_sec": 362.57,
+    "recs_per_sec": 22373.0,
+    "bytes_per_rec": 629.0,
+    "per_year": {
+      "1995": {
+        "records": 45054,
+        "est_elapsed_sec": 2.01
+      },
+      "1996": {
+        "records": 50102,
+        "est_elapsed_sec": 2.24
+      },
+      "1997": {
+        "records": 53945,
+        "est_elapsed_sec": 2.41
+      },
+      "1998": {
+        "records": 62029,
+        "est_elapsed_sec": 2.77
+      },
+      "1999": {
+        "records": 67654,
+        "est_elapsed_sec": 3.02
+      },
+      "2026": {
+        "records": 106820,
+        "est_elapsed_sec": 4.77
+      }
+    }
+  },
+  "20260404_141357": {
+    "run_id": "20260404_141357",
+    "year_min": 1975,
+    "year_max": 2027,
+    "xml_bytes": 5102119206,
+    "total_recs_scanned": 8111781,
+    "total_recs_kept": 332545,
+    "total_elapsed_sec": 207.66,
+    "recs_per_sec": 39063.3,
+    "bytes_per_rec": 629.0,
+    "per_year": {
+      "1975": {
+        "records": 4971,
+        "est_elapsed_sec": 0.13
+      },
+      "1976": {
+        "records": 5393,
+        "est_elapsed_sec": 0.14
+      },
+      "1977": {
+        "records": 5684,
+        "est_elapsed_sec": 0.15
+      },
+      "1978": {
+        "records": 6462,
+        "est_elapsed_sec": 0.17
+      },
+      "1979": {
+        "records": 6589,
+        "est_elapsed_sec": 0.17
+      },
+      "1980": {
+        "records": 7320,
+        "est_elapsed_sec": 0.19
+      },
+      "1981": {
+        "records": 7905,
+        "est_elapsed_sec": 0.2
+      },
+      "1982": {
+        "records": 9056,
+        "est_elapsed_sec": 0.23
+      },
+      "1983": {
+        "records": 9967,
+        "est_elapsed_sec": 0.26
+      },
+      "1984": {
+        "records": 11211,
+        "est_elapsed_sec": 0.29
+      },
+      "1985": {
+        "records": 12751,
+        "est_elapsed_sec": 0.33
+      },
+      "1986": {
+        "records": 15395,
+        "est_elapsed_sec": 0.39
+      },
+      "1987": {
+        "records": 16413,
+        "est_elapsed_sec": 0.42
+      },
+      "1988": {
+        "records": 20514,
+        "est_elapsed_sec": 0.53
+      },
+      "1989": {
+        "records": 22619,
+        "est_elapsed_sec": 0.58
+      },
+      "1990": {
+        "records": 26710,
+        "est_elapsed_sec": 0.68
+      },
+      "1991": {
+        "records": 29473,
+        "est_elapsed_sec": 0.75
+      },
+      "1992": {
+        "records": 32792,
+        "est_elapsed_sec": 0.84
+      },
+      "1993": {
+        "records": 38372,
+        "est_elapsed_sec": 0.98
+      },
+      "1994": {
+        "records": 42948,
+        "est_elapsed_sec": 1.1
+      },
+      "2027": {
+        "records": 0,
+        "est_elapsed_sec": 0.0
+      }
+    }
+  },
+  "20260404_150155": {
+    "run_id": "20260404_150155",
+    "year_min": 1900,
+    "year_max": 2028,
+    "xml_bytes": 5102119206,
+    "total_recs_scanned": 8111781,
+    "total_recs_kept": 8111778,
+    "total_elapsed_sec": 2632.19,
+    "recs_per_sec": 3081.8,
+    "bytes_per_rec": 629.0,
+    "per_year": {
+      "1900": {
+        "records": 0,
+        "est_elapsed_sec": 0.0
+      },
+      "1901": {
+        "records": 0,
+        "est_elapsed_sec": 0.0
+      },
+      "1902": {
+        "records": 0,
+        "est_elapsed_sec": 0.0
+      },
+      "1903": {
+        "records": 0,
+        "est_elapsed_sec": 0.0
+      },
+      "1904": {
+        "records": 0,
+        "est_elapsed_sec": 0.0
+      },
+      "1905": {
+        "records": 0,
+        "est_elapsed_sec": 0.0
+      },
+      "1906": {
+        "records": 0,
+        "est_elapsed_sec": 0.0
+      },
+      "1907": {
+        "records": 0,
+        "est_elapsed_sec": 0.0
+      },
+      "1908": {
+        "records": 0,
+        "est_elapsed_sec": 0.0
+      },
+      "1909": {
+        "records": 0,
+        "est_elapsed_sec": 0.0
+      },
+      "1910": {
+        "records": 0,
+        "est_elapsed_sec": 0.0
+      },
+      "1911": {
+        "records": 0,
+        "est_elapsed_sec": 0.0
+      },
+      "1912": {
+        "records": 0,
+        "est_elapsed_sec": 0.0
+      },
+      "1913": {
+        "records": 0,
+        "est_elapsed_sec": 0.0
+      },
+      "1914": {
+        "records": 0,
+        "est_elapsed_sec": 0.0
+      },
+      "1915": {
+        "records": 0,
+        "est_elapsed_sec": 0.0
+      },
+      "1916": {
+        "records": 0,
+        "est_elapsed_sec": 0.0
+      },
+      "1917": {
+        "records": 0,
+        "est_elapsed_sec": 0.0
+      },
+      "1918": {
+        "records": 0,
+        "est_elapsed_sec": 0.0
+      },
+      "1919": {
+        "records": 0,
+        "est_elapsed_sec": 0.0
+      },
+      "1920": {
+        "records": 0,
+        "est_elapsed_sec": 0.0
+      },
+      "1921": {
+        "records": 0,
+        "est_elapsed_sec": 0.0
+      },
+      "1922": {
+        "records": 0,
+        "est_elapsed_sec": 0.0
+      },
+      "1923": {
+        "records": 0,
+        "est_elapsed_sec": 0.0
+      },
+      "1924": {
+        "records": 0,
+        "est_elapsed_sec": 0.0
+      },
+      "1925": {
+        "records": 0,
+        "est_elapsed_sec": 0.0
+      },
+      "1926": {
+        "records": 0,
+        "est_elapsed_sec": 0.0
+      },
+      "1927": {
+        "records": 0,
+        "est_elapsed_sec": 0.0
+      },
+      "1928": {
+        "records": 0,
+        "est_elapsed_sec": 0.0
+      },
+      "1929": {
+        "records": 0,
+        "est_elapsed_sec": 0.0
+      },
+      "1930": {
+        "records": 0,
+        "est_elapsed_sec": 0.0
+      },
+      "1931": {
+        "records": 0,
+        "est_elapsed_sec": 0.0
+      },
+      "1932": {
+        "records": 0,
+        "est_elapsed_sec": 0.0
+      },
+      "1933": {
+        "records": 0,
+        "est_elapsed_sec": 0.0
+      },
+      "1934": {
+        "records": 0,
+        "est_elapsed_sec": 0.0
+      },
+      "1935": {
+        "records": 0,
+        "est_elapsed_sec": 0.0
+      },
+      "1936": {
+        "records": 12,
+        "est_elapsed_sec": 0.0
+      },
+      "1937": {
+        "records": 16,
+        "est_elapsed_sec": 0.01
+      },
+      "1938": {
+        "records": 10,
+        "est_elapsed_sec": 0.0
+      },
+      "1939": {
+        "records": 18,
+        "est_elapsed_sec": 0.01
+      },
+      "1940": {
+        "records": 10,
+        "est_elapsed_sec": 0.0
+      },
+      "1941": {
+        "records": 13,
+        "est_elapsed_sec": 0.0
+      },
+      "1942": {
+        "records": 13,
+        "est_elapsed_sec": 0.0
+      },
+      "1943": {
+        "records": 8,
+        "est_elapsed_sec": 0.0
+      },
+      "1944": {
+        "records": 5,
+        "est_elapsed_sec": 0.0
+      },
+      "1945": {
+        "records": 9,
+        "est_elapsed_sec": 0.0
+      },
+      "1946": {
+        "records": 31,
+        "est_elapsed_sec": 0.01
+      },
+      "1947": {
+        "records": 10,
+        "est_elapsed_sec": 0.0
+      },
+      "1948": {
+        "records": 40,
+        "est_elapsed_sec": 0.01
+      },
+      "1949": {
+        "records": 50,
+        "est_elapsed_sec": 0.02
+      },
+      "1950": {
+        "records": 25,
+        "est_elapsed_sec": 0.01
+      },
+      "1951": {
+        "records": 38,
+        "est_elapsed_sec": 0.01
+      },
+      "1952": {
+        "records": 109,
+        "est_elapsed_sec": 0.04
+      },
+      "1953": {
+        "records": 166,
+        "est_elapsed_sec": 0.05
+      },
+      "1954": {
+        "records": 209,
+        "est_elapsed_sec": 0.07
+      },
+      "1955": {
+        "records": 200,
+        "est_elapsed_sec": 0.06
+      },
+      "1956": {
+        "records": 338,
+        "est_elapsed_sec": 0.11
+      },
+      "1957": {
+        "records": 333,
+        "est_elapsed_sec": 0.11
+      },
+      "1958": {
+        "records": 448,
+        "est_elapsed_sec": 0.15
+      },
+      "1959": {
+        "records": 699,
+        "est_elapsed_sec": 0.23
+      },
+      "1960": {
+        "records": 592,
+        "est_elapsed_sec": 0.19
+      },
+      "1961": {
+        "records": 877,
+        "est_elapsed_sec": 0.28
+      },
+      "1962": {
+        "records": 1149,
+        "est_elapsed_sec": 0.37
+      },
+      "1963": {
+        "records": 996,
+        "est_elapsed_sec": 0.32
+      },
+      "1964": {
+        "records": 1062,
+        "est_elapsed_sec": 0.34
+      },
+      "1965": {
+        "records": 1236,
+        "est_elapsed_sec": 0.4
+      },
+      "1966": {
+        "records": 1435,
+        "est_elapsed_sec": 0.47
+      },
+      "1967": {
+        "records": 1699,
+        "est_elapsed_sec": 0.55
+      },
+      "1968": {
+        "records": 2102,
+        "est_elapsed_sec": 0.68
+      },
+      "1969": {
+        "records": 2020,
+        "est_elapsed_sec": 0.66
+      },
+      "1970": {
+        "records": 2096,
+        "est_elapsed_sec": 0.68
+      },
+      "1971": {
+        "records": 2922,
+        "est_elapsed_sec": 0.95
+      },
+      "1972": {
+        "records": 3539,
+        "est_elapsed_sec": 1.15
+      },
+      "1973": {
+        "records": 4187,
+        "est_elapsed_sec": 1.36
+      },
+      "1974": {
+        "records": 4774,
+        "est_elapsed_sec": 1.55
+      },
+      "1975": {
+        "records": 4971,
+        "est_elapsed_sec": 1.61
+      },
+      "1976": {
+        "records": 5393,
+        "est_elapsed_sec": 1.75
+      },
+      "1977": {
+        "records": 5684,
+        "est_elapsed_sec": 1.84
+      },
+      "1978": {
+        "records": 6462,
+        "est_elapsed_sec": 2.1
+      },
+      "1979": {
+        "records": 6589,
+        "est_elapsed_sec": 2.14
+      },
+      "1980": {
+        "records": 7320,
+        "est_elapsed_sec": 2.38
+      },
+      "1981": {
+        "records": 7905,
+        "est_elapsed_sec": 2.57
+      },
+      "1982": {
+        "records": 9056,
+        "est_elapsed_sec": 2.94
+      },
+      "1983": {
+        "records": 9967,
+        "est_elapsed_sec": 3.23
+      },
+      "1984": {
+        "records": 11211,
+        "est_elapsed_sec": 3.64
+      },
+      "1985": {
+        "records": 12751,
+        "est_elapsed_sec": 4.14
+      },
+      "1986": {
+        "records": 15395,
+        "est_elapsed_sec": 5.0
+      },
+      "1987": {
+        "records": 16413,
+        "est_elapsed_sec": 5.33
+      },
+      "1988": {
+        "records": 20514,
+        "est_elapsed_sec": 6.66
+      },
+      "1989": {
+        "records": 22619,
+        "est_elapsed_sec": 7.34
+      },
+      "1990": {
+        "records": 26710,
+        "est_elapsed_sec": 8.67
+      },
+      "1991": {
+        "records": 29473,
+        "est_elapsed_sec": 9.56
+      },
+      "1992": {
+        "records": 32792,
+        "est_elapsed_sec": 10.64
+      },
+      "1993": {
+        "records": 38372,
+        "est_elapsed_sec": 12.45
+      },
+      "1994": {
+        "records": 42948,
+        "est_elapsed_sec": 13.94
+      },
+      "1995": {
+        "records": 45054,
+        "est_elapsed_sec": 14.62
+      },
+      "1996": {
+        "records": 50102,
+        "est_elapsed_sec": 16.26
+      },
+      "1997": {
+        "records": 53945,
+        "est_elapsed_sec": 17.5
+      },
+      "1998": {
+        "records": 62029,
+        "est_elapsed_sec": 20.13
+      },
+      "1999": {
+        "records": 67654,
+        "est_elapsed_sec": 21.95
+      },
+      "2000": {
+        "records": 78421,
+        "est_elapsed_sec": 25.45
+      },
+      "2001": {
+        "records": 83947,
+        "est_elapsed_sec": 27.24
+      },
+      "2002": {
+        "records": 94811,
+        "est_elapsed_sec": 30.77
+      },
+      "2003": {
+        "records": 113336,
+        "est_elapsed_sec": 36.78
+      },
+      "2004": {
+        "records": 132136,
+        "est_elapsed_sec": 42.88
+      },
+      "2005": {
+        "records": 152053,
+        "est_elapsed_sec": 49.34
+      },
+      "2006": {
+        "records": 170207,
+        "est_elapsed_sec": 55.23
+      },
+      "2007": {
+        "records": 182292,
+        "est_elapsed_sec": 59.15
+      },
+      "2008": {
+        "records": 192666,
+        "est_elapsed_sec": 62.52
+      },
+      "2009": {
+        "records": 207541,
+        "est_elapsed_sec": 67.34
+      },
+      "2010": {
+        "records": 219230,
+        "est_elapsed_sec": 71.14
+      },
+      "2011": {
+        "records": 238253,
+        "est_elapsed_sec": 77.31
+      },
+      "2012": {
+        "records": 254154,
+        "est_elapsed_sec": 82.47
+      },
+      "2013": {
+        "records": 269847,
+        "est_elapsed_sec": 87.56
+      },
+      "2014": {
+        "records": 279034,
+        "est_elapsed_sec": 90.54
+      },
+      "2015": {
+        "records": 291671,
+        "est_elapsed_sec": 94.64
+      },
+      "2016": {
+        "records": 303920,
+        "est_elapsed_sec": 98.62
+      },
+      "2017": {
+        "records": 327314,
+        "est_elapsed_sec": 106.21
+      },
+      "2018": {
+        "records": 362923,
+        "est_elapsed_sec": 117.76
+      },
+      "2019": {
+        "records": 407701,
+        "est_elapsed_sec": 132.29
+      },
+      "2020": {
+        "records": 425996,
+        "est_elapsed_sec": 138.23
+      },
+      "2021": {
+        "records": 455329,
+        "est_elapsed_sec": 147.75
+      },
+      "2022": {
+        "records": 474302,
+        "est_elapsed_sec": 153.91
+      },
+      "2023": {
+        "records": 515678,
+        "est_elapsed_sec": 167.33
+      },
+      "2024": {
+        "records": 574036,
+        "est_elapsed_sec": 186.27
+      },
+      "2025": {
+        "records": 553335,
+        "est_elapsed_sec": 179.55
+      },
+      "2026": {
+        "records": 106820,
+        "est_elapsed_sec": 34.66
+      },
+      "2027": {
+        "records": 0,
+        "est_elapsed_sec": 0.0
+      },
+      "2028": {
+        "records": 0,
+        "est_elapsed_sec": 0.0
+      }
+    }
+  },
+  "20260406_111132": {
+    "run_id": "20260406_111132",
+    "year_min": 2000,
+    "year_max": 2024,
+    "xml_bytes": 5102119206,
+    "total_recs_scanned": 8111781,
+    "total_recs_kept": 6806798,
+    "total_elapsed_sec": 1592.92,
+    "recs_per_sec": 5092.4,
+    "bytes_per_rec": 629.0,
+    "per_year": {
+      "2000": {
+        "records": 78421,
+        "est_elapsed_sec": 15.4
+      },
+      "2001": {
+        "records": 83947,
+        "est_elapsed_sec": 16.48
+      },
+      "2002": {
+        "records": 94811,
+        "est_elapsed_sec": 18.62
+      },
+      "2003": {
+        "records": 113336,
+        "est_elapsed_sec": 22.26
+      },
+      "2004": {
+        "records": 132136,
+        "est_elapsed_sec": 25.95
+      },
+      "2005": {
+        "records": 152053,
+        "est_elapsed_sec": 29.86
+      },
+      "2006": {
+        "records": 170207,
+        "est_elapsed_sec": 33.42
+      },
+      "2007": {
+        "records": 182292,
+        "est_elapsed_sec": 35.8
+      },
+      "2008": {
+        "records": 192666,
+        "est_elapsed_sec": 37.83
+      },
+      "2009": {
+        "records": 207541,
+        "est_elapsed_sec": 40.76
+      },
+      "2010": {
+        "records": 219230,
+        "est_elapsed_sec": 43.05
+      },
+      "2011": {
+        "records": 238253,
+        "est_elapsed_sec": 46.79
+      },
+      "2012": {
+        "records": 254154,
+        "est_elapsed_sec": 49.91
+      },
+      "2013": {
+        "records": 269847,
+        "est_elapsed_sec": 52.99
+      },
+      "2014": {
+        "records": 279034,
+        "est_elapsed_sec": 54.79
+      },
+      "2015": {
+        "records": 291671,
+        "est_elapsed_sec": 57.28
+      },
+      "2016": {
+        "records": 303920,
+        "est_elapsed_sec": 59.68
+      },
+      "2017": {
+        "records": 327314,
+        "est_elapsed_sec": 64.28
+      },
+      "2018": {
+        "records": 362923,
+        "est_elapsed_sec": 71.27
+      },
+      "2019": {
+        "records": 407701,
+        "est_elapsed_sec": 80.06
+      },
+      "2020": {
+        "records": 425996,
+        "est_elapsed_sec": 83.65
+      },
+      "2021": {
+        "records": 455329,
+        "est_elapsed_sec": 89.41
+      },
+      "2022": {
+        "records": 474302,
+        "est_elapsed_sec": 93.14
+      },
+      "2023": {
+        "records": 515678,
+        "est_elapsed_sec": 101.26
+      },
+      "2024": {
+        "records": 574036,
+        "est_elapsed_sec": 112.72
+      }
+    }
+  }
+}

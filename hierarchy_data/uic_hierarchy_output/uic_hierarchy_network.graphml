@@ -1,0 +1,2482 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d10" for="node" attr.name="BRANCH" attr.type="string"/>
+<key id="d9" for="node" attr.name="STATE" attr.type="string"/>
+<key id="d8" for="node" attr.name="CITY" attr.type="string"/>
+<key id="d7" for="node" attr.name="is_top_level" attr.type="boolean"/>
+<key id="d6" for="node" attr.name="COMPO" attr.type="double"/>
+<key id="d5" for="node" attr.name="UICTYPE" attr.type="string"/>
+<key id="d4" for="node" attr.name="SIMPLENAME" attr.type="string"/>
+<key id="d3" for="node" attr.name="uic" attr.type="string"/>
+<key id="d2" for="graph" attr.name="creation_date" attr.type="string"/>
+<key id="d1" for="graph" attr.name="top_uics" attr.type="string"/>
+<key id="d0" for="graph" attr.name="description" attr.type="string"/>
+<graph edgedefault="directed"><data key="d0">UIC Hierarchy Network for 3 top-level units</data>
+<data key="d1">WAT3FF, WAT3AA, WAT395</data>
+<data key="d2">2025-08-26T17:48:37.507315</data>
+<node id="WAT3FF">
+  <data key="d3">WAT3FF</data>
+  <data key="d4">(CORPS) I Corps</data>
+  <data key="d5">TITULAR</data>
+  <data key="d6">1.0</data>
+  <data key="d7">True</data>
+</node>
+<node id="W5AAFF">
+  <data key="d3">W5AAFF</data>
+  <data key="d4">(DIV) 7ID</data>
+  <data key="d5">TITULAR</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="W5AAAA">
+  <data key="d3">W5AAAA</data>
+  <data key="d4">HQ 7ID</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="W5AAR1">
+  <data key="d3">W5AAR1</data>
+  <data key="d4">W5AAR1</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">3.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="W5AAX1">
+  <data key="d3">W5AAX1</data>
+  <data key="d4">W5AAX1</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WA0UFF">
+  <data key="d3">WA0UFF</data>
+  <data key="d4">(FA BDE) 17 FAB</data>
+  <data key="d5">TITULAR</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WA0UAA">
+  <data key="d3">WA0UAA</data>
+  <data key="d4">HHB 17 FAB</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">FA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WA0U98">
+  <data key="d3">WA0U98</data>
+  <data key="d4">Aug17FAB</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d7">False</data>
+</node>
+<node id="WA0U99">
+  <data key="d3">WA0U99</data>
+  <data key="d4">Aug 17FAB</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WAF7AA">
+  <data key="d3">WAF7AA</data>
+  <data key="d4">1-94 FA</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">FA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WAF7A0">
+  <data key="d3">WAF7A0</data>
+  <data key="d4">FA Btry</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WAF7B0">
+  <data key="d3">WAF7B0</data>
+  <data key="d4">FA Btry</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WAF7T0">
+  <data key="d3">WAF7T0</data>
+  <data key="d4">HHB FA Bn</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJHNAA">
+  <data key="d3">WJHNAA</data>
+  <data key="d4">125 Spt Co</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">CS</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WCBGAA">
+  <data key="d3">WCBGAA</data>
+  <data key="d4">308 Spt Bn</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">CS</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WH9XAA">
+  <data key="d3">WH9XAA</data>
+  <data key="d4">5-3 FA</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">FA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WB1UAA">
+  <data key="d3">WB1UAA</data>
+  <data key="d4">657 Spt Co</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">CS</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WH9XA0">
+  <data key="d3">WH9XA0</data>
+  <data key="d4">FA Btry</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WH9XB0">
+  <data key="d3">WH9XB0</data>
+  <data key="d4">FA Btry</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WH9XT0">
+  <data key="d3">WH9XT0</data>
+  <data key="d4">HHB FA Bn</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WHUEAA">
+  <data key="d3">WHUEAA</data>
+  <data key="d4">256 SC Co</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">SC</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WAH9FF">
+  <data key="d3">WAH9FF</data>
+  <data key="d4">(SBCT) 1-2ID</data>
+  <data key="d5">TITULAR</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WAH9AA">
+  <data key="d3">WAH9AA</data>
+  <data key="d4">HHC 1-2ID</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">IN</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WAH999">
+  <data key="d3">WAH999</data>
+  <data key="d4">Aug 1-2ID</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WAJKAA">
+  <data key="d3">WAJKAA</data>
+  <data key="d4">5-20 IN</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">IN</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WAJKA0">
+  <data key="d3">WAJKA0</data>
+  <data key="d4">Rifle Co</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WAJKB0">
+  <data key="d3">WAJKB0</data>
+  <data key="d4">Rifle Co</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WAJKC0">
+  <data key="d3">WAJKC0</data>
+  <data key="d4">Rifle Co</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WAJKT0">
+  <data key="d3">WAJKT0</data>
+  <data key="d4">HHC IN Bn</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WARNAA">
+  <data key="d3">WARNAA</data>
+  <data key="d4">1-23 IN</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">IN</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WARNA0">
+  <data key="d3">WARNA0</data>
+  <data key="d4">Rifle Co</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WARNB0">
+  <data key="d3">WARNB0</data>
+  <data key="d4">Rifle Co</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WARNC0">
+  <data key="d3">WARNC0</data>
+  <data key="d4">Rifle Co</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WARNT0">
+  <data key="d3">WARNT0</data>
+  <data key="d4">HHC IN Bn</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WAZ7AA">
+  <data key="d3">WAZ7AA</data>
+  <data key="d4">23 EN Bn</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">EN</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WAZ799">
+  <data key="d3">WAZ799</data>
+  <data key="d4">Aug 23 EN</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WAZ7A0">
+  <data key="d3">WAZ7A0</data>
+  <data key="d4">Cbt EN Co</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WAZ7B0">
+  <data key="d3">WAZ7B0</data>
+  <data key="d4">Cbt EN Co</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WAZ7C0">
+  <data key="d3">WAZ7C0</data>
+  <data key="d4">Bde SC Co</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WAZ7D0">
+  <data key="d3">WAZ7D0</data>
+  <data key="d4">NOS</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WAZ7T0">
+  <data key="d3">WAZ7T0</data>
+  <data key="d4">HHC BEB</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WE4QAA">
+  <data key="d3">WE4QAA</data>
+  <data key="d4">296 Spt Bn</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">CS</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WE4QA0">
+  <data key="d3">WE4QA0</data>
+  <data key="d4">DistrCoBSB</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WE4QB0">
+  <data key="d3">WE4QB0</data>
+  <data key="d4">Fld Mnt Co</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WE4QC0">
+  <data key="d3">WE4QC0</data>
+  <data key="d4">MD Co BSB</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WE4QD0">
+  <data key="d3">WE4QD0</data>
+  <data key="d4">FSC BSB</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d7">False</data>
+</node>
+<node id="WE4QE0">
+  <data key="d3">WE4QE0</data>
+  <data key="d4">FSC BSB</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WE4QF0">
+  <data key="d3">WE4QF0</data>
+  <data key="d4">FSC BSB</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WE4QG0">
+  <data key="d3">WE4QG0</data>
+  <data key="d4">FSC BSB</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WE4QH0">
+  <data key="d3">WE4QH0</data>
+  <data key="d4">FSC BSB</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WE4QJ0">
+  <data key="d3">WE4QJ0</data>
+  <data key="d4">FSC BSB</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WE4QT0">
+  <data key="d3">WE4QT0</data>
+  <data key="d4">HHC BSB</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJFJAA">
+  <data key="d3">WJFJAA</data>
+  <data key="d4">1-37 FA</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">FA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJFJA0">
+  <data key="d3">WJFJA0</data>
+  <data key="d4">FA Btry</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJFJB0">
+  <data key="d3">WJFJB0</data>
+  <data key="d4">FA Btry</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJFJC0">
+  <data key="d3">WJFJC0</data>
+  <data key="d4">FA Btry</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJFJT0">
+  <data key="d3">WJFJT0</data>
+  <data key="d4">HHB FA Bn</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJHHAA">
+  <data key="d3">WJHHAA</data>
+  <data key="d4">2-3 IN</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">IN</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJHHA0">
+  <data key="d3">WJHHA0</data>
+  <data key="d4">Rifle Co</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJHHB0">
+  <data key="d3">WJHHB0</data>
+  <data key="d4">Rifle Co</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJHHC0">
+  <data key="d3">WJHHC0</data>
+  <data key="d4">Rifle Co</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJHHT0">
+  <data key="d3">WJHHT0</data>
+  <data key="d4">HHC IN Bn</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJHJAA">
+  <data key="d3">WJHJAA</data>
+  <data key="d4">1-14 CAV</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">AR</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJHJA0">
+  <data key="d3">WJHJA0</data>
+  <data key="d4">CAV Sqdrn</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJHJB0">
+  <data key="d3">WJHJB0</data>
+  <data key="d4">CAV Sqdrn</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJHJC0">
+  <data key="d3">WJHJC0</data>
+  <data key="d4">CAV Sqdrn</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJHJD0">
+  <data key="d3">WJHJD0</data>
+  <data key="d4">WpnTrpSBCT</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJHJT0">
+  <data key="d3">WJHJT0</data>
+  <data key="d4">HHTCAVSqdn</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d7">False</data>
+</node>
+<node id="WAZTFF">
+  <data key="d3">WAZTFF</data>
+  <data key="d4">555 EN Bde</data>
+  <data key="d5">TITULAR</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WAZTAA">
+  <data key="d3">WAZTAA</data>
+  <data key="d4">HHC 555 EN</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">EN</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WAZT99">
+  <data key="d3">WAZT99</data>
+  <data key="d4">Aug 55 EN</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WC22AA">
+  <data key="d3">WC22AA</data>
+  <data key="d4">537 EN Det</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">EN</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WCW4AA">
+  <data key="d3">WCW4AA</data>
+  <data key="d4">864 EN Bn</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">EN</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WBB0AA">
+  <data key="d3">WBB0AA</data>
+  <data key="d4">557 EN Co</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">EN</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WCW4A0">
+  <data key="d3">WCW4A0</data>
+  <data key="d4">FSC EN Bn</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WCW4T0">
+  <data key="d3">WCW4T0</data>
+  <data key="d4">HHC EN Bn</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WDXXAA">
+  <data key="d3">WDXXAA</data>
+  <data key="d4">610 EN Co</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">EN</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WE3VAA">
+  <data key="d3">WE3VAA</data>
+  <data key="d4">22 EN Co</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WG81AA">
+  <data key="d3">WG81AA</data>
+  <data key="d4">570 EN Co</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">EN</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WHFBAA">
+  <data key="d3">WHFBAA</data>
+  <data key="d4">571 EN Co</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WCZ2AA">
+  <data key="d3">WCZ2AA</data>
+  <data key="d4">573 EN Det</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">EN</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WGDPFF">
+  <data key="d3">WGDPFF</data>
+  <data key="d4">(CAB) 16 CAB</data>
+  <data key="d5">TITULAR</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="W1J7AA">
+  <data key="d3">W1J7AA</data>
+  <data key="d4">Air Amb De</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">YAKIMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WAX2AA">
+  <data key="d3">WAX2AA</data>
+  <data key="d4">2-158 AV</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">AV</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WAX2A0">
+  <data key="d3">WAX2A0</data>
+  <data key="d4">AsltCoUH60</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WAX2B0">
+  <data key="d3">WAX2B0</data>
+  <data key="d4">AsltCoUH60</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WAX2C0">
+  <data key="d3">WAX2C0</data>
+  <data key="d4">AsltCoUH60</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WAX2D0">
+  <data key="d3">WAX2D0</data>
+  <data key="d4">AVUMCoUH60</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WAX2E0">
+  <data key="d3">WAX2E0</data>
+  <data key="d4">FSC AsltBn</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WAX2T0">
+  <data key="d3">WAX2T0</data>
+  <data key="d4">HHC AsltBn</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WEW5AA">
+  <data key="d3">WEW5AA</data>
+  <data key="d4">46 Spt Bn</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">CS</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WEW5A0">
+  <data key="d3">WEW5A0</data>
+  <data key="d4">DistrCoASB</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WEW5B0">
+  <data key="d3">WEW5B0</data>
+  <data key="d4">ASC AVIM</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WEW5C0">
+  <data key="d3">WEW5C0</data>
+  <data key="d4">Bde SC Co</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WEW5T0">
+  <data key="d3">WEW5T0</data>
+  <data key="d4">HSC ASB</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WFAJAA">
+  <data key="d3">WFAJAA</data>
+  <data key="d4">1-229 AV</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">AV</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WFAJA0">
+  <data key="d3">WFAJA0</data>
+  <data key="d4">Atk/Rec Co</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WFAJB0">
+  <data key="d3">WFAJB0</data>
+  <data key="d4">Atk/Rec Co</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WFAJC0">
+  <data key="d3">WFAJC0</data>
+  <data key="d4">Atk/Rec Co</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WFAJD0">
+  <data key="d3">WFAJD0</data>
+  <data key="d4">AVUMCoAH64</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WFAJE0">
+  <data key="d3">WFAJE0</data>
+  <data key="d4">FSC</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WFAJT0">
+  <data key="d3">WFAJT0</data>
+  <data key="d4">HHC A/R Bn</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WGDPAA">
+  <data key="d3">WGDPAA</data>
+  <data key="d4">HHC 16 CAB</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">AV</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WGDP99">
+  <data key="d3">WGDP99</data>
+  <data key="d4">Aug 16 CAB</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WHZZAA">
+  <data key="d3">WHZZAA</data>
+  <data key="d4">1-25 AV</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">AV</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WGQTAA">
+  <data key="d3">WGQTAA</data>
+  <data key="d4">343 AV Det</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">FAIRBANKS</data>
+  <data key="d9">AK</data>
+  <data key="d10">AV</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WHZZA0">
+  <data key="d3">WHZZA0</data>
+  <data key="d4">Atk/RecTrp</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WHZZB0">
+  <data key="d3">WHZZB0</data>
+  <data key="d4">Atk/RecTrp</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WHZZC0">
+  <data key="d3">WHZZC0</data>
+  <data key="d4">Atk/RecTrp</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WHZZD0">
+  <data key="d3">WHZZD0</data>
+  <data key="d4">AVUM Trp</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WHZZE0">
+  <data key="d3">WHZZE0</data>
+  <data key="d4">FST ARS</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WHZZT0">
+  <data key="d3">WHZZT0</data>
+  <data key="d4">HHT ARSHvy</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJMKFF">
+  <data key="d3">WJMKFF</data>
+  <data key="d4">(SBCT) 2-2ID</data>
+  <data key="d5">TITULAR</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WAZ0AA">
+  <data key="d3">WAZ0AA</data>
+  <data key="d4">14 EN Bn</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">EN</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WAZ099">
+  <data key="d3">WAZ099</data>
+  <data key="d4">Aug 14 EN</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WAZ0A0">
+  <data key="d3">WAZ0A0</data>
+  <data key="d4">Cbt EN Co</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WAZ0B0">
+  <data key="d3">WAZ0B0</data>
+  <data key="d4">Cbt EN Co</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WAZ0C0">
+  <data key="d3">WAZ0C0</data>
+  <data key="d4">Bde SC Co</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WAZ0D0">
+  <data key="d3">WAZ0D0</data>
+  <data key="d4">NOS</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WAZ0T0">
+  <data key="d3">WAZ0T0</data>
+  <data key="d4">HHC BEB</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJMJAA">
+  <data key="d3">WJMJAA</data>
+  <data key="d4">8-1 CAV</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">AR</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJMJA0">
+  <data key="d3">WJMJA0</data>
+  <data key="d4">CAV Sqdrn</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJMJB0">
+  <data key="d3">WJMJB0</data>
+  <data key="d4">CAV Sqdrn</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJMJC0">
+  <data key="d3">WJMJC0</data>
+  <data key="d4">CAV Sqdrn</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJMJD0">
+  <data key="d3">WJMJD0</data>
+  <data key="d4">WpnTrpSBCT</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJMJT0">
+  <data key="d3">WJMJT0</data>
+  <data key="d4">HHTCAVSqdn</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJMKAA">
+  <data key="d3">WJMKAA</data>
+  <data key="d4">HHC 2-2ID</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">IN</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJMK99">
+  <data key="d3">WJMK99</data>
+  <data key="d4">Aug 2-2ID</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJMLAA">
+  <data key="d3">WJMLAA</data>
+  <data key="d4">2-1 IN</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">IN</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJMLA0">
+  <data key="d3">WJMLA0</data>
+  <data key="d4">Rifle Co</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJMLB0">
+  <data key="d3">WJMLB0</data>
+  <data key="d4">Rifle Co</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJMLC0">
+  <data key="d3">WJMLC0</data>
+  <data key="d4">Rifle Co</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJMLT0">
+  <data key="d3">WJMLT0</data>
+  <data key="d4">HHC IN Bn</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJMMAA">
+  <data key="d3">WJMMAA</data>
+  <data key="d4">1-17 IN</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">IN</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJMMA0">
+  <data key="d3">WJMMA0</data>
+  <data key="d4">Rifle Co</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJMMB0">
+  <data key="d3">WJMMB0</data>
+  <data key="d4">Rifle Co</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJMMC0">
+  <data key="d3">WJMMC0</data>
+  <data key="d4">Rifle Co</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJMMT0">
+  <data key="d3">WJMMT0</data>
+  <data key="d4">HHC IN Bn</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJMNAA">
+  <data key="d3">WJMNAA</data>
+  <data key="d4">4-23 IN</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">IN</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJMNA0">
+  <data key="d3">WJMNA0</data>
+  <data key="d4">Rifle Co</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJMNB0">
+  <data key="d3">WJMNB0</data>
+  <data key="d4">Rifle Co</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJMNC0">
+  <data key="d3">WJMNC0</data>
+  <data key="d4">Rifle Co</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJMNT0">
+  <data key="d3">WJMNT0</data>
+  <data key="d4">HHC IN Bn</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJMQAA">
+  <data key="d3">WJMQAA</data>
+  <data key="d4">2-17 FA</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">FA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJMQA0">
+  <data key="d3">WJMQA0</data>
+  <data key="d4">FA Btry</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJMQB0">
+  <data key="d3">WJMQB0</data>
+  <data key="d4">FA Btry</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJMQC0">
+  <data key="d3">WJMQC0</data>
+  <data key="d4">FA Btry</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJMQT0">
+  <data key="d3">WJMQT0</data>
+  <data key="d4">HHB FA Bn</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJMSAA">
+  <data key="d3">WJMSAA</data>
+  <data key="d4">2 Spt Bn</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">CS</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJMSA0">
+  <data key="d3">WJMSA0</data>
+  <data key="d4">DistrCoBSB</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJMSB0">
+  <data key="d3">WJMSB0</data>
+  <data key="d4">Fld Mnt Co</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJMSC0">
+  <data key="d3">WJMSC0</data>
+  <data key="d4">MD Co BSB</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJMSD0">
+  <data key="d3">WJMSD0</data>
+  <data key="d4">FSC BSB</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJMSE0">
+  <data key="d3">WJMSE0</data>
+  <data key="d4">FSC BSB</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJMSF0">
+  <data key="d3">WJMSF0</data>
+  <data key="d4">FSC BSB</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJMSG0">
+  <data key="d3">WJMSG0</data>
+  <data key="d4">FSC BSB</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJMSH0">
+  <data key="d3">WJMSH0</data>
+  <data key="d4">FSC BSB</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJMSJ0">
+  <data key="d3">WJMSJ0</data>
+  <data key="d4">FSC BSB</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJMST0">
+  <data key="d3">WJMST0</data>
+  <data key="d4">HHC BSB</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WKASFF">
+  <data key="d3">WKASFF</data>
+  <data key="d4">(DIVARTY) 2 DIVARTY</data>
+  <data key="d5">TITULAR</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WKASAA">
+  <data key="d3">WKASAA</data>
+  <data key="d4">HHB 2DIVAR</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">FA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WKASA1">
+  <data key="d3">WKASA1</data>
+  <data key="d4">WKASA1</data>
+  <data key="d5">LOCATION</data>
+  <data key="d8">TONGDUCH'ON</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WA96FF">
+  <data key="d3">WA96FF</data>
+  <data key="d4">593 SusCmd</data>
+  <data key="d5">TITULAR</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WA6WAA">
+  <data key="d3">WA6WAA</data>
+  <data key="d4">112 AG Det</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">AG</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WA96AA">
+  <data key="d3">WA96AA</data>
+  <data key="d4">HHC 593 SC</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">CS</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WA9699">
+  <data key="d3">WA9699</data>
+  <data key="d4">Aug</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WBHBFF">
+  <data key="d3">WBHBFF</data>
+  <data key="d4">62 MD Bde</data>
+  <data key="d5">TITULAR</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WBHBAA">
+  <data key="d3">WBHBAA</data>
+  <data key="d4">HHC 62 MP</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">MD</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WBHB99">
+  <data key="d3">WBHB99</data>
+  <data key="d4">Aug 62 MD</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WBHKFF">
+  <data key="d3">WBHKFF</data>
+  <data key="d4">56 MD Bn</data>
+  <data key="d5">TITULAR</data>
+  <data key="d7">False</data>
+</node>
+<node id="WBHKAA">
+  <data key="d3">WBHKAA</data>
+  <data key="d4">HHD 56 MD</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">MD</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WBN5AA">
+  <data key="d3">WBN5AA</data>
+  <data key="d4">520 MD Co</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">MD</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WBN8AA">
+  <data key="d3">WBN8AA</data>
+  <data key="d4">547 MD Co</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">MD</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WBNNAA">
+  <data key="d3">WBNNAA</data>
+  <data key="d4">575 MD Co</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">MD</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WBRFAA">
+  <data key="d3">WBRFAA</data>
+  <data key="d4">255 MD Det</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">MD</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WD2KAA">
+  <data key="d3">WD2KAA</data>
+  <data key="d4">153 MD Det</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">MD</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WD2QAA">
+  <data key="d3">WD2QAA</data>
+  <data key="d4">166 MD Det</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">MD</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WD60AA">
+  <data key="d3">WD60AA</data>
+  <data key="d4">227 MD Det</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">MD</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WD6DAA">
+  <data key="d3">WD6DAA</data>
+  <data key="d4">514 MD Co</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">MD</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WD6EAA">
+  <data key="d3">WD6EAA</data>
+  <data key="d4">551 MD Co</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">MD</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WC70AA">
+  <data key="d3">WC70AA</data>
+  <data key="d4">673 MD Co</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">MD</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WG4UFF">
+  <data key="d3">WG4UFF</data>
+  <data key="d4">47 CSH</data>
+  <data key="d5">TITULAR</data>
+  <data key="d7">False</data>
+</node>
+<node id="WBR3AA">
+  <data key="d3">WBR3AA</data>
+  <data key="d4">102 MD Det</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">MD</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WBTGAA">
+  <data key="d3">WBTGAA</data>
+  <data key="d4">98 MD Det</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">MD</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WBTLAA">
+  <data key="d3">WBTLAA</data>
+  <data key="d4">Aug 53 MD</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">MD</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WC47AA">
+  <data key="d3">WC47AA</data>
+  <data key="d4">758 MD Det</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">MD</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WG4UAA">
+  <data key="d3">WG4UAA</data>
+  <data key="d4">HHC 47 CSH</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">MD</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WG4UA0">
+  <data key="d3">WG4UA0</data>
+  <data key="d4">Hsp Co164</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d7">False</data>
+</node>
+<node id="WG4UB0">
+  <data key="d3">WG4UB0</data>
+  <data key="d4">Hsp Co 84</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d7">False</data>
+</node>
+<node id="WG4UT0">
+  <data key="d3">WG4UT0</data>
+  <data key="d4">HHD CSH248</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d7">False</data>
+</node>
+<node id="WH5GAA">
+  <data key="d3">WH5GAA</data>
+  <data key="d4">250 MD Det</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">MD</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WHGDAA">
+  <data key="d3">WHGDAA</data>
+  <data key="d4">218 MD Det</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">MD</data>
+  <data key="d7">False</data>
+</node>
+<node id="WC30FF">
+  <data key="d3">WC30FF</data>
+  <data key="d4">42 MP Bde</data>
+  <data key="d5">TITULAR</data>
+  <data key="d7">False</data>
+</node>
+<node id="WBXAFF">
+  <data key="d3">WBXAFF</data>
+  <data key="d4">504 MP Bn</data>
+  <data key="d5">TITULAR</data>
+  <data key="d7">False</data>
+</node>
+<node id="WBXAAA">
+  <data key="d3">WBXAAA</data>
+  <data key="d4">HHD 504 MP</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">MP</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WC4VAA">
+  <data key="d3">WC4VAA</data>
+  <data key="d4">66 MP Co</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">MP</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WHL3AA">
+  <data key="d3">WHL3AA</data>
+  <data key="d4">170 MP Co</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">MP</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WHWMAA">
+  <data key="d3">WHWMAA</data>
+  <data key="d4">571 MP Co</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">MP</data>
+  <data key="d7">False</data>
+</node>
+<node id="WJJFAA">
+  <data key="d3">WJJFAA</data>
+  <data key="d4">54 MP Co</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">MP</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WC30AA">
+  <data key="d3">WC30AA</data>
+  <data key="d4">HHC 42 MP</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">MP</data>
+  <data key="d7">False</data>
+</node>
+<node id="WC3099">
+  <data key="d3">WC3099</data>
+  <data key="d4">Aug 42 MP</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d7">False</data>
+</node>
+<node id="WE00AA">
+  <data key="d3">WE00AA</data>
+  <data key="d4">95 MP Det</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">MP</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WG04FF">
+  <data key="d3">WG04FF</data>
+  <data key="d4">508 MP Bn</data>
+  <data key="d5">TITULAR</data>
+  <data key="d7">False</data>
+</node>
+<node id="WBXKAA">
+  <data key="d3">WBXKAA</data>
+  <data key="d4">67 MP Co</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">MP</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WG04AA">
+  <data key="d3">WG04AA</data>
+  <data key="d4">HHC 508 MP</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">MP</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WHJEAA">
+  <data key="d3">WHJEAA</data>
+  <data key="d4">595 MP Co</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">MP</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WHNQAA">
+  <data key="d3">WHNQAA</data>
+  <data key="d4">51 MP Det</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">MP</data>
+  <data key="d7">False</data>
+</node>
+<node id="WET1FF">
+  <data key="d3">WET1FF</data>
+  <data key="d4">13 Spt Bn</data>
+  <data key="d5">TITULAR</data>
+  <data key="d7">False</data>
+</node>
+<node id="WC7EAA">
+  <data key="d3">WC7EAA</data>
+  <data key="d4">24 QM Co</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">QM</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WCLYAA">
+  <data key="d3">WCLYAA</data>
+  <data key="d4">21 TC Co</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">TC</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WCPBAA">
+  <data key="d3">WCPBAA</data>
+  <data key="d4">513 TC Co</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">TC</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WET1AA">
+  <data key="d3">WET1AA</data>
+  <data key="d4">HHC13SptBn</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">CS</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WET4AA">
+  <data key="d3">WET4AA</data>
+  <data key="d4">63 OD Co</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">OD</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WEXQAA">
+  <data key="d3">WEXQAA</data>
+  <data key="d4">542 Mnt Co</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">OD</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WFR8AA">
+  <data key="d3">WFR8AA</data>
+  <data key="d4">523 TC Co</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">TC</data>
+  <data key="d7">False</data>
+</node>
+<node id="WHEBAA">
+  <data key="d3">WHEBAA</data>
+  <data key="d4">140 TC Det</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">TC</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WAT3AA">
+  <data key="d3">WAT3AA</data>
+  <data key="d4">HHBNICorps</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">HQ</data>
+  <data key="d6">1.0</data>
+  <data key="d7">True</data>
+</node>
+<node id="WAT395">
+  <data key="d3">WAT395</data>
+  <data key="d4">Aug 1Corps</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">True</data>
+</node>
+<node id="WAT399">
+  <data key="d3">WAT399</data>
+  <data key="d4">Aug 1Corps</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WAT3A0">
+  <data key="d3">WAT3A0</data>
+  <data key="d4">SIS Co</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WAT3T0">
+  <data key="d3">WAT3T0</data>
+  <data key="d4">HSC Corps</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WC0WAA">
+  <data key="d3">WC0WAA</data>
+  <data key="d4">56 Band</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">AG</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WCC9FF">
+  <data key="d3">WCC9FF</data>
+  <data key="d4">(MIB) 201 MIB</data>
+  <data key="d5">TITULAR</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WBVEAA">
+  <data key="d3">WBVEAA</data>
+  <data key="d4">502 MI Bn</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">MI</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WBVEA0">
+  <data key="d3">WBVEA0</data>
+  <data key="d4">CI&amp;HUMINT</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WBVEB0">
+  <data key="d3">WBVEB0</data>
+  <data key="d4">MICoC&amp;E</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WBVEB1">
+  <data key="d3">WBVEB1</data>
+  <data key="d4">WBVEB1</data>
+  <data key="d5">LOCATION</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d7">False</data>
+</node>
+<node id="WBVEB2">
+  <data key="d3">WBVEB2</data>
+  <data key="d4">WBVEB2</data>
+  <data key="d5">LOCATION</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d7">False</data>
+</node>
+<node id="WBVEB3">
+  <data key="d3">WBVEB3</data>
+  <data key="d4">WBVEB3</data>
+  <data key="d5">LOCATION</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d7">False</data>
+</node>
+<node id="WBVEB4">
+  <data key="d3">WBVEB4</data>
+  <data key="d4">WBVEB4</data>
+  <data key="d5">LOCATION</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d7">False</data>
+</node>
+<node id="WBVEB5">
+  <data key="d3">WBVEB5</data>
+  <data key="d4">WBVEB5</data>
+  <data key="d5">LOCATION</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d7">False</data>
+</node>
+<node id="WBVEB7">
+  <data key="d3">WBVEB7</data>
+  <data key="d4">WBVEB7</data>
+  <data key="d5">LOCATION</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d7">False</data>
+</node>
+<node id="WBVET0">
+  <data key="d3">WBVET0</data>
+  <data key="d4">HHD E-MIB</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WBVET1">
+  <data key="d3">WBVET1</data>
+  <data key="d4">WBVET1</data>
+  <data key="d5">LOCATION</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d7">False</data>
+</node>
+<node id="WCC9AA">
+  <data key="d3">WCC9AA</data>
+  <data key="d4">HHC 201MIB</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">MI</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WCC999">
+  <data key="d3">WCC999</data>
+  <data key="d4">Aug 201MIB</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WH66AA">
+  <data key="d3">WH66AA</data>
+  <data key="d4">109 MI Bn</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">MI</data>
+  <data key="d7">False</data>
+</node>
+<node id="WH66A0">
+  <data key="d3">WH66A0</data>
+  <data key="d4">CI&amp;HUMINT</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d7">False</data>
+</node>
+<node id="WH66B0">
+  <data key="d3">WH66B0</data>
+  <data key="d4">MICoC&amp;E</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d7">False</data>
+</node>
+<node id="WH66T0">
+  <data key="d3">WH66T0</data>
+  <data key="d4">HHD E-MIB</data>
+  <data key="d5">STRUCTURE</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d7">False</data>
+</node>
+<node id="WE4NAA">
+  <data key="d3">WE4NAA</data>
+  <data key="d4">31 AG Ctr</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">AG</data>
+  <data key="d7">False</data>
+</node>
+<node id="WFNLFF">
+  <data key="d3">WFNLFF</data>
+  <data key="d4">5 PAD Det</data>
+  <data key="d5">TITULAR</data>
+  <data key="d7">False</data>
+</node>
+<node id="WFNLAA">
+  <data key="d3">WFNLAA</data>
+  <data key="d4">HHD 5 PAD</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">PI</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WKANAA">
+  <data key="d3">WKANAA</data>
+  <data key="d4">275 JA Tm</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">JA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WKAPAA">
+  <data key="d3">WKAPAA</data>
+  <data key="d4">276 JA Tm</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">JA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<node id="WKBPAA">
+  <data key="d3">WKBPAA</data>
+  <data key="d4">283 JA Tm</data>
+  <data key="d5">PARENT</data>
+  <data key="d8">TACOMA</data>
+  <data key="d9">WA</data>
+  <data key="d10">JA</data>
+  <data key="d6">1.0</data>
+  <data key="d7">False</data>
+</node>
+<edge source="WAT3FF" target="W5AAFF"/>
+<edge source="WAT3FF" target="WA96FF"/>
+<edge source="WAT3FF" target="WAT3AA"/>
+<edge source="WAT3FF" target="WC0WAA"/>
+<edge source="WAT3FF" target="WCC9FF"/>
+<edge source="WAT3FF" target="WE4NAA"/>
+<edge source="WAT3FF" target="WFNLFF"/>
+<edge source="WAT3FF" target="WKANAA"/>
+<edge source="WAT3FF" target="WKAPAA"/>
+<edge source="WAT3FF" target="WKBPAA"/>
+<edge source="W5AAFF" target="W5AAAA"/>
+<edge source="W5AAFF" target="WA0UFF"/>
+<edge source="W5AAFF" target="WAH9FF"/>
+<edge source="W5AAFF" target="WAZTFF"/>
+<edge source="W5AAFF" target="WGDPFF"/>
+<edge source="W5AAFF" target="WJMKFF"/>
+<edge source="W5AAFF" target="WKASFF"/>
+<edge source="W5AAAA" target="W5AAR1"/>
+<edge source="W5AAAA" target="W5AAX1"/>
+<edge source="WA0UFF" target="WA0UAA"/>
+<edge source="WA0UFF" target="WAF7AA"/>
+<edge source="WA0UFF" target="WCBGAA"/>
+<edge source="WA0UFF" target="WH9XAA"/>
+<edge source="WA0UFF" target="WHUEAA"/>
+<edge source="WA0UAA" target="WA0U98"/>
+<edge source="WA0UAA" target="WA0U99"/>
+<edge source="WAF7AA" target="WAF7A0"/>
+<edge source="WAF7AA" target="WAF7B0"/>
+<edge source="WAF7AA" target="WAF7T0"/>
+<edge source="WAF7AA" target="WJHNAA"/>
+<edge source="WH9XAA" target="WB1UAA"/>
+<edge source="WH9XAA" target="WH9XA0"/>
+<edge source="WH9XAA" target="WH9XB0"/>
+<edge source="WH9XAA" target="WH9XT0"/>
+<edge source="WAH9FF" target="WAH9AA"/>
+<edge source="WAH9FF" target="WAJKAA"/>
+<edge source="WAH9FF" target="WARNAA"/>
+<edge source="WAH9FF" target="WAZ7AA"/>
+<edge source="WAH9FF" target="WE4QAA"/>
+<edge source="WAH9FF" target="WJFJAA"/>
+<edge source="WAH9FF" target="WJHHAA"/>
+<edge source="WAH9FF" target="WJHJAA"/>
+<edge source="WAH9AA" target="WAH999"/>
+<edge source="WAJKAA" target="WAJKA0"/>
+<edge source="WAJKAA" target="WAJKB0"/>
+<edge source="WAJKAA" target="WAJKC0"/>
+<edge source="WAJKAA" target="WAJKT0"/>
+<edge source="WARNAA" target="WARNA0"/>
+<edge source="WARNAA" target="WARNB0"/>
+<edge source="WARNAA" target="WARNC0"/>
+<edge source="WARNAA" target="WARNT0"/>
+<edge source="WAZ7AA" target="WAZ799"/>
+<edge source="WAZ7AA" target="WAZ7A0"/>
+<edge source="WAZ7AA" target="WAZ7B0"/>
+<edge source="WAZ7AA" target="WAZ7C0"/>
+<edge source="WAZ7AA" target="WAZ7D0"/>
+<edge source="WAZ7AA" target="WAZ7T0"/>
+<edge source="WE4QAA" target="WE4QA0"/>
+<edge source="WE4QAA" target="WE4QB0"/>
+<edge source="WE4QAA" target="WE4QC0"/>
+<edge source="WE4QAA" target="WE4QD0"/>
+<edge source="WE4QAA" target="WE4QE0"/>
+<edge source="WE4QAA" target="WE4QF0"/>
+<edge source="WE4QAA" target="WE4QG0"/>
+<edge source="WE4QAA" target="WE4QH0"/>
+<edge source="WE4QAA" target="WE4QJ0"/>
+<edge source="WE4QAA" target="WE4QT0"/>
+<edge source="WJFJAA" target="WJFJA0"/>
+<edge source="WJFJAA" target="WJFJB0"/>
+<edge source="WJFJAA" target="WJFJC0"/>
+<edge source="WJFJAA" target="WJFJT0"/>
+<edge source="WJHHAA" target="WJHHA0"/>
+<edge source="WJHHAA" target="WJHHB0"/>
+<edge source="WJHHAA" target="WJHHC0"/>
+<edge source="WJHHAA" target="WJHHT0"/>
+<edge source="WJHJAA" target="WJHJA0"/>
+<edge source="WJHJAA" target="WJHJB0"/>
+<edge source="WJHJAA" target="WJHJC0"/>
+<edge source="WJHJAA" target="WJHJD0"/>
+<edge source="WJHJAA" target="WJHJT0"/>
+<edge source="WAZTFF" target="WAZTAA"/>
+<edge source="WAZTFF" target="WC22AA"/>
+<edge source="WAZTFF" target="WCW4AA"/>
+<edge source="WAZTFF" target="WCZ2AA"/>
+<edge source="WAZTAA" target="WAZT99"/>
+<edge source="WCW4AA" target="WBB0AA"/>
+<edge source="WCW4AA" target="WCW4A0"/>
+<edge source="WCW4AA" target="WCW4T0"/>
+<edge source="WCW4AA" target="WDXXAA"/>
+<edge source="WCW4AA" target="WE3VAA"/>
+<edge source="WCW4AA" target="WG81AA"/>
+<edge source="WCW4AA" target="WHFBAA"/>
+<edge source="WGDPFF" target="W1J7AA"/>
+<edge source="WGDPFF" target="WAX2AA"/>
+<edge source="WGDPFF" target="WEW5AA"/>
+<edge source="WGDPFF" target="WFAJAA"/>
+<edge source="WGDPFF" target="WGDPAA"/>
+<edge source="WGDPFF" target="WHZZAA"/>
+<edge source="WAX2AA" target="WAX2A0"/>
+<edge source="WAX2AA" target="WAX2B0"/>
+<edge source="WAX2AA" target="WAX2C0"/>
+<edge source="WAX2AA" target="WAX2D0"/>
+<edge source="WAX2AA" target="WAX2E0"/>
+<edge source="WAX2AA" target="WAX2T0"/>
+<edge source="WEW5AA" target="WEW5A0"/>
+<edge source="WEW5AA" target="WEW5B0"/>
+<edge source="WEW5AA" target="WEW5C0"/>
+<edge source="WEW5AA" target="WEW5T0"/>
+<edge source="WFAJAA" target="WFAJA0"/>
+<edge source="WFAJAA" target="WFAJB0"/>
+<edge source="WFAJAA" target="WFAJC0"/>
+<edge source="WFAJAA" target="WFAJD0"/>
+<edge source="WFAJAA" target="WFAJE0"/>
+<edge source="WFAJAA" target="WFAJT0"/>
+<edge source="WGDPAA" target="WGDP99"/>
+<edge source="WHZZAA" target="WGQTAA"/>
+<edge source="WHZZAA" target="WHZZA0"/>
+<edge source="WHZZAA" target="WHZZB0"/>
+<edge source="WHZZAA" target="WHZZC0"/>
+<edge source="WHZZAA" target="WHZZD0"/>
+<edge source="WHZZAA" target="WHZZE0"/>
+<edge source="WHZZAA" target="WHZZT0"/>
+<edge source="WJMKFF" target="WAZ0AA"/>
+<edge source="WJMKFF" target="WJMJAA"/>
+<edge source="WJMKFF" target="WJMKAA"/>
+<edge source="WJMKFF" target="WJMLAA"/>
+<edge source="WJMKFF" target="WJMMAA"/>
+<edge source="WJMKFF" target="WJMNAA"/>
+<edge source="WJMKFF" target="WJMQAA"/>
+<edge source="WJMKFF" target="WJMSAA"/>
+<edge source="WAZ0AA" target="WAZ099"/>
+<edge source="WAZ0AA" target="WAZ0A0"/>
+<edge source="WAZ0AA" target="WAZ0B0"/>
+<edge source="WAZ0AA" target="WAZ0C0"/>
+<edge source="WAZ0AA" target="WAZ0D0"/>
+<edge source="WAZ0AA" target="WAZ0T0"/>
+<edge source="WJMJAA" target="WJMJA0"/>
+<edge source="WJMJAA" target="WJMJB0"/>
+<edge source="WJMJAA" target="WJMJC0"/>
+<edge source="WJMJAA" target="WJMJD0"/>
+<edge source="WJMJAA" target="WJMJT0"/>
+<edge source="WJMKAA" target="WJMK99"/>
+<edge source="WJMLAA" target="WJMLA0"/>
+<edge source="WJMLAA" target="WJMLB0"/>
+<edge source="WJMLAA" target="WJMLC0"/>
+<edge source="WJMLAA" target="WJMLT0"/>
+<edge source="WJMMAA" target="WJMMA0"/>
+<edge source="WJMMAA" target="WJMMB0"/>
+<edge source="WJMMAA" target="WJMMC0"/>
+<edge source="WJMMAA" target="WJMMT0"/>
+<edge source="WJMNAA" target="WJMNA0"/>
+<edge source="WJMNAA" target="WJMNB0"/>
+<edge source="WJMNAA" target="WJMNC0"/>
+<edge source="WJMNAA" target="WJMNT0"/>
+<edge source="WJMQAA" target="WJMQA0"/>
+<edge source="WJMQAA" target="WJMQB0"/>
+<edge source="WJMQAA" target="WJMQC0"/>
+<edge source="WJMQAA" target="WJMQT0"/>
+<edge source="WJMSAA" target="WJMSA0"/>
+<edge source="WJMSAA" target="WJMSB0"/>
+<edge source="WJMSAA" target="WJMSC0"/>
+<edge source="WJMSAA" target="WJMSD0"/>
+<edge source="WJMSAA" target="WJMSE0"/>
+<edge source="WJMSAA" target="WJMSF0"/>
+<edge source="WJMSAA" target="WJMSG0"/>
+<edge source="WJMSAA" target="WJMSH0"/>
+<edge source="WJMSAA" target="WJMSJ0"/>
+<edge source="WJMSAA" target="WJMST0"/>
+<edge source="WKASFF" target="WKASAA"/>
+<edge source="WKASAA" target="WKASA1"/>
+<edge source="WA96FF" target="WA6WAA"/>
+<edge source="WA96FF" target="WA96AA"/>
+<edge source="WA96FF" target="WBHBFF"/>
+<edge source="WA96FF" target="WC30FF"/>
+<edge source="WA96FF" target="WET1FF"/>
+<edge source="WA96AA" target="WA9699"/>
+<edge source="WBHBFF" target="WBHBAA"/>
+<edge source="WBHBFF" target="WBHKFF"/>
+<edge source="WBHBFF" target="WC70AA"/>
+<edge source="WBHBFF" target="WG4UFF"/>
+<edge source="WBHBAA" target="WBHB99"/>
+<edge source="WBHKFF" target="WBHKAA"/>
+<edge source="WBHKFF" target="WBN5AA"/>
+<edge source="WBHKFF" target="WBN8AA"/>
+<edge source="WBHKFF" target="WBNNAA"/>
+<edge source="WBHKFF" target="WBRFAA"/>
+<edge source="WBHKFF" target="WD2KAA"/>
+<edge source="WBHKFF" target="WD2QAA"/>
+<edge source="WBHKFF" target="WD60AA"/>
+<edge source="WBHKFF" target="WD6DAA"/>
+<edge source="WBHKFF" target="WD6EAA"/>
+<edge source="WG4UFF" target="WBR3AA"/>
+<edge source="WG4UFF" target="WBTGAA"/>
+<edge source="WG4UFF" target="WBTLAA"/>
+<edge source="WG4UFF" target="WC47AA"/>
+<edge source="WG4UFF" target="WG4UAA"/>
+<edge source="WG4UFF" target="WH5GAA"/>
+<edge source="WG4UFF" target="WHGDAA"/>
+<edge source="WG4UAA" target="WG4UA0"/>
+<edge source="WG4UAA" target="WG4UB0"/>
+<edge source="WG4UAA" target="WG4UT0"/>
+<edge source="WC30FF" target="WBXAFF"/>
+<edge source="WC30FF" target="WC30AA"/>
+<edge source="WC30FF" target="WE00AA"/>
+<edge source="WC30FF" target="WG04FF"/>
+<edge source="WC30FF" target="WHNQAA"/>
+<edge source="WBXAFF" target="WBXAAA"/>
+<edge source="WBXAFF" target="WC4VAA"/>
+<edge source="WBXAFF" target="WHL3AA"/>
+<edge source="WBXAFF" target="WHWMAA"/>
+<edge source="WBXAFF" target="WJJFAA"/>
+<edge source="WC30AA" target="WC3099"/>
+<edge source="WG04FF" target="WBXKAA"/>
+<edge source="WG04FF" target="WG04AA"/>
+<edge source="WG04FF" target="WHJEAA"/>
+<edge source="WET1FF" target="WC7EAA"/>
+<edge source="WET1FF" target="WCLYAA"/>
+<edge source="WET1FF" target="WCPBAA"/>
+<edge source="WET1FF" target="WET1AA"/>
+<edge source="WET1FF" target="WET4AA"/>
+<edge source="WET1FF" target="WEXQAA"/>
+<edge source="WET1FF" target="WFR8AA"/>
+<edge source="WET1FF" target="WHEBAA"/>
+<edge source="WAT3AA" target="WAT395"/>
+<edge source="WAT3AA" target="WAT399"/>
+<edge source="WAT3AA" target="WAT3A0"/>
+<edge source="WAT3AA" target="WAT3T0"/>
+<edge source="WCC9FF" target="WBVEAA"/>
+<edge source="WCC9FF" target="WCC9AA"/>
+<edge source="WCC9FF" target="WH66AA"/>
+<edge source="WBVEAA" target="WBVEA0"/>
+<edge source="WBVEAA" target="WBVEB0"/>
+<edge source="WBVEAA" target="WBVET0"/>
+<edge source="WBVEB0" target="WBVEB1"/>
+<edge source="WBVEB0" target="WBVEB2"/>
+<edge source="WBVEB0" target="WBVEB3"/>
+<edge source="WBVEB0" target="WBVEB4"/>
+<edge source="WBVEB0" target="WBVEB5"/>
+<edge source="WBVEB0" target="WBVEB7"/>
+<edge source="WBVET0" target="WBVET1"/>
+<edge source="WCC9AA" target="WCC999"/>
+<edge source="WH66AA" target="WH66A0"/>
+<edge source="WH66AA" target="WH66B0"/>
+<edge source="WH66AA" target="WH66T0"/>
+<edge source="WFNLFF" target="WFNLAA"/>
+</graph></graphml>

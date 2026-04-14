@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sports_pipeline"
+version = "0.1.0"
+description = "College MBB pipeline stages for 530_sports_pipeline conductor"
+requires-python = ">=3.9"
+dependencies = [
+  "pandas>=1.5",
+  "numpy>=1.23",
+  "matplotlib>=3.7",
+]
+[project.optional-dependencies]
+stats = ["statsmodels>=0.14"]
+scrape = ["requests>=2.28", "beautifulsoup4>=4.12", "lxml>=4.9", "tqdm>=4.66"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["sports_pipeline*"]

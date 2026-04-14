@@ -1,0 +1,63 @@
+# --- Secrets & local env ---
+.env
+.env.local
+*.pem
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+.venv/
+venv/
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# --- Jupyter ---
+.ipynb_checkpoints/
+
+# --- OS / editor ---
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# --- Tenure pipeline: large / binary / sync-heavy (stay on disk + Dropbox, not Git) ---
+**/faculty_snapshots/
+# DBLP full dump (multi-GB) — keep parsers in repo, not the XML
+python_packages/dblp-parser/dblp.xml
+python_packages/dblp-parser/dblp.dtd
+
+# --- Optional large trees (uncomment if you want them out of Git) ---
+big_dfs/
+zips/
+deleted_files/
+
+# --- Legacy quarantine (huge; exclude from v1 repo) ---
+obsolete_files/
+obsolete_documents/
+deleted_files/
+
+# --- Large ad-hoc assets at root (optional) ---
+Gephi/
+
+# --- Large data / outputs (Dropbox + local only; too big for GitHub) ---
+# DBLP dump may live under datasets/ (not only python_packages/)
+datasets/tenure/dblp.xml
+datasets/tenure/*.xml
+# Men’s basketball raw extracts + sqlite (multi-GB)
+datasets/mbb/
+# Derived / snapshot JSONL (hundreds of MB–GB)
+tenure/tenure_pipeline/faculty_panel.jsonl
+tenure/tenure_pipeline/faculty_snapshots_parsed.jsonl
+tenure/tenure_pipeline/faculty_snapshots_index.jsonl
+tenure/tenure_pipeline/dblp_parsed/dblp_*.jsonl
+# IPEDS probe CSVs (tens of MB)
+tenure/tenure_pipeline/_ipeds_probe/*.csv
+# Hierarchy zips
+hierarchy_data/**/*.zip
+# Large slide exports (optional)
+current_documents/Show_me/*.pptx
+current_documents/Show_me/*.pptm

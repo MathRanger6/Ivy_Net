@@ -1,0 +1,428 @@
+--- 20Mar
++++ live
+@@ -16,14 +16,9 @@
+             format_plot_title, format_plot_subtitle, format_legend_label,
+             add_configuration_box, save_plot_metadata_card,
+-            plot_competing_risks_cif_bars, composite_cif_curve_and_bars
++            plot_competing_risks_cif_bars
+         )
+         
+-        # Load Cox-ready data (when use_for_model=True we need z-scored data so z_ columns exist for CR plots)
+-        if STANDARDIZE_CONFIG.get('use_for_model', False):
+-            load_act = "Loading df_pipeline_10_5_cox_zscored (standardized)"
+-            load_timer = time_start(load_act, nest=1)
+-            df_cox = load_feather('df_pipeline_10_5_cox_zscored')
+-            time_stop(load_timer, action=load_act, nest=1)
+-        elif 'df_cox' not in locals():
++        # Load Cox-ready data
++        if 'df_cox' not in locals():
+             load_act = "Loading df_pipeline_10_5_cox_zscored"
+             load_timer = time_start(load_act, nest=1)
+@@ -85,5 +80,5 @@
+             print_v(f"⚠️ Time-varying columns not found (will be skipped): {missing_tv}")
+         
+-        # Add model time-varying columns (interactions, quadratics) so they exist in df_analysis for plotting
++        # Add model time_varying columns (interactions, quadratics) do they exist in df_analysis for plotting
+         model_tv = COLUMN_CONFIG.get('model_time_varying_cols', [])
+         for col in model_tv:
+@@ -93,5 +88,5 @@
+         if added_model_tv:
+             print_v(f"  • Added model time-varying columns for plotting: {added_model_tv}")
+-        
++            
+         # Option A: auto-incude z_ columns created in Cell 11
+         if PLOT_CONFIG.get('include_z_cols', False):
+@@ -137,11 +132,11 @@
+         print_v(f"\n📊 Analysis Dataset Summary:")
+         print_v(f"  • Total columns: {len(df_analysis.columns):,}")
+-        print_v(f"Columns:{df_analysis.columns}")
++        # print_v(f"Columns:{df_analysis.columns}")
+         print_v(f"  • Basic demographic: {len(COLUMN_CONFIG['basic_demographic_cols'])}")
+         print_v(f"  • Static columns: {len([c for c in COLUMN_CONFIG['static_cols'] if c in df_analysis.columns])}")
+-        print_v(f"  • Time-varying columns: {[c for c in COLUMN_CONFIG['time_varying_cols'] if c in df_analysis.columns]}")
++        print_v(f"  • Time-varying columns: {len([c for c in COLUMN_CONFIG['time_varying_cols'] if c in df_analysis.columns])}")
+         print_v(f"\n📊 Available columns for analysis:")
+-        print_v(f"  • Static: {[c for c in COLUMN_CONFIG['static_cols'] if c in df_analysis.columns]}")
+-        print_v(f"  • Time-varying: {[c for c in COLUMN_CONFIG['time_varying_cols'] if c in df_analysis.columns]}")
++        print_v(f"  • Static: {len([c for c in COLUMN_CONFIG['static_cols'] if c in df_analysis.columns])}")
++        print_v(f"  • Time-varying: {len([c for c in COLUMN_CONFIG['time_varying_cols'] if c in df_analysis.columns])}")
+         
+         time_stop(prep_timer, action=prep_act, nest=1)
+@@ -251,10 +246,10 @@
+         
+         # Reference line colors
+-        c1 = 'cornflowerblue'  # Primary zone line color
+-        c2 = 'mediumblue'      # Primary zone label color
+-        c3 = 'xkcd:golden rod' # Above zone line color
++        c1 = 'gray'  # Primary zone line color
++        c2 = 'xkcd:golden rod'      # Primary zone label color
++        c3 = 'black' # Above zone line color
+         c4 = 'xkcd:hazel'      # Above zone label color
+         
+-        def get_plot_scales(fig_sz, fnt_sz=None, show=False):
++        def get_plot_scales(fig_sz, fnt_sz=None, show=True):
+             """
+             Get plot scale relationships (proportional font sizes)
+@@ -281,5 +276,5 @@
+             ref_ln_label_sz = fnt_sz * 0.4
+             tick_sz = fnt_sz * 0.5
+-            lgnd_sz = fnt_sz * 0.4
++            lgnd_sz = fnt_sz * 0.5
+             
+             if show:
+@@ -306,5 +301,5 @@
+                 ax.axvline(x=pz_ref_line, color=c1, linestyle='--', linewidth=1.5, alpha=0.7)
+                 ax.text(pz_ref_line,
+-                        0.9,  # Slightly offset y-position
++                        0.95,  # Slightly offset y-position
+                         f'  begin\n  Primary Zone',
+                         color=c2,
+@@ -333,5 +328,5 @@
+                 ax.axvline(x=az_ref_line, color=c3, linestyle='--', linewidth=1.5, alpha=0.7)
+                 ax.text(az_ref_line,
+-                        0.8,  # Slightly offset y-position
++                        0.9,  # Slightly offset y-position
+                         f'  end\n  Primary Zone',
+                         color=c4,
+@@ -469,7 +464,7 @@
+                             f"⚠️ Quantile bins collapsed for {variable}: "
+                             f"{len(binned.cat.categories)}/{n_bins} bins. "
+-                            "Keeping collapsed bins to preserve value separation."
++                            "Switching to strict equal-N bins."
+                         )
+-                        return _label_by_edges(binned, prefix="Q")
++                        return create_bins(df, variable, n_bins=n_bins, method='quantile',strict_equal_n=True)
+                     return _label_by_edges(binned, prefix="Q")
+                 except Exception as e:
+@@ -505,12 +500,16 @@
+             # Now work with officer-level data
+             working_df = officer_df.copy()
+-
++            # print(f"\n\n\n WORKING_DF.COLUMNS:  {working_df.columns}") #####################  DEBUG ######################
+             # DEBUG: time alignment for backward evals (uses last snapshot per officer)
++            # print_v(f"🔸🔸🔸🔸🔸🔸🔸🔸 Variable: {plot_spec.get('variable')}")
+             if plot_spec.get('variable') and '_bwd' in str(plot_spec.get('variable')):
+                 if 'eval_thru_dt_bwd' in working_df.columns and 'snpsht_dt' in working_df.columns:
+                     bwd_missing = working_df['eval_thru_dt_bwd'].isna().mean()
+                     bwd_future = (working_df['eval_thru_dt_bwd'] > working_df['snpsht_dt']).mean()
+-                    print_v(f"  • DEBUG bwd time alignment: missing eval_thru_dt_bwd={bwd_missing:.1%}, eval_thru_dt_bwd after snpsht_dt={bwd_future:.1%}")
+-            
++                    print_v(f"🔸🔸🔸🔹🔹🔹🔸🔸DEBUG!!!!! bwd time alignment: missing_eval_thru_dt={bwd_missing:.1%}, eval_thru_dt_bwd after snpsht_dt={bwd_future:.1%}\n\n")
++                else:
++                    print_v(f"🔹🔹🔹🔸🔸DEBUG!!!!   'eval_thru_dt_bwd' in working_df.columns and 'snpsht_dt' in working_df.columns ====>  FALSE!")
++                
++                
+             # Filter out officers with NO OER data if requested and variable is OER-related
+             # NOTE: We only filter officers who have NO OER data at all (NaN), not those with OER data but 0 top blocks
+@@ -559,9 +558,9 @@
+                         )
+                         print_v(f"  • Remaining officers: {len(working_df):,}")
+-
++            
+             # DEBUG: report slice used for binning
+             print_v(f"  • DEBUG slice for {plot_spec['variable']}: rows={len(working_df):,}")
+             if plot_spec['variable'] in working_df.columns:
+-                print_v(f"    non-null rate: {working_df[plot_spec['variable']].notna().mean():.3f}")
++                print_v(f"  non-null rate: {working_df[plot_spec['variable']].notna().mean():.3f}")
+             
+             # Optionally drop rows where the group_by variable is NaN
+@@ -754,8 +753,9 @@
+             
+             ax.set_title(main_title, fontsize=title_sz, fontweight='bold', pad=22)
+-            ax.text(0.5, 1.00, subtitle, transform=ax.transAxes, fontsize=axis_sz*0.8,
+-                   ha='center', va='bottom', style='italic', color='gray')
+-            
+-            ax.set_xlabel('Days from DOR CPT', fontsize=axis_sz)
++            # Remove subtile for paper
++            # ax.text(0.5, 1.00, subtitle, transform=ax.transAxes, fontsize=axis_sz*0.8,
++            #        ha='center', va='bottom', style='italic', color='gray')
++            
++            ax.set_xlabel('Days from Promotion to CPT', fontsize=axis_sz)
+             ax.set_ylabel('Probability of Promotion', fontsize=axis_sz)
+             ax.legend(title='Group', bbox_to_anchor=(1.05, 1), loc='upper left', fontsize=lgnd_sz, title_fontsize=lgnd_sz)
+@@ -769,8 +769,7 @@
+             x_min_days = plot_spec.get('x_min_days')
+             if x_min_days is not None:
+-                ax.set_xlim(left=x_min_days)
+-            
++                ax.set_xlim(left=x_min_days)            
+             # Add configuration box
+-            add_configuration_box(ax, plot_spec, metadata, font_size=lgnd_sz)
++            # add_configuration_box(ax, plot_spec, metadata, font_size=lgnd_sz)
+             
+             # Add reference lines if enabled
+@@ -899,14 +898,14 @@
+             promo_palette = plot_spec.get('cif_bar_palette_promo') or ["#d7e6f5", "#1f5aa6"]
+             attr_palette = plot_spec.get('cif_bar_palette_attr') or ["#fde2cf", "#c0581a"]
+-
++            
+             promo_palette = _build_hex_gradient(promo_palette, len(ordered_groups))
+             attr_palette = _build_hex_gradient(attr_palette, len(ordered_groups))
+-
++            
+             promo_color_map = {g: promo_palette[i] for i, g in enumerate(ordered_groups)}
+             attr_color_map = {g: attr_palette[i] for i, g in enumerate(ordered_groups)}
+-
++            
+             promo_colors = [promo_color_map.get(g, '#4c4c4c') for g in groups]
+             attr_colors = [attr_color_map.get(g, '#4c4c4c') for g in groups]
+-    
++            # print("# Plot 1: Promotion events (event == 1)******************************************************")
+             # Plot 1: Promotion events (event == 1)
+             for i, group in enumerate(groups):
+@@ -915,5 +914,5 @@
+                 if len(group_data) == 0:
+                     continue
+-                
++                # print("# Filter out invalid data)******************************************************")
+                 # Filter out invalid data
+                 valid_mask = (group_data['stop_time'].notna()) & (group_data['stop_time'] > 0)
+@@ -923,8 +922,8 @@
+                     print_v(f"  ⚠️ No valid officers in group '{group}' after filtering")
+                     continue
+-                
++                # print("# Calculate CIF for promotion using simple proportion approach)******************************************************")
+                 # Calculate CIF for promotion using simple proportion approach
+                 times, promotion_cif = calculate_cif(group_data, event_type=1)
+-                
++                # print("# Debug: Check final CIF value******************************************************")
+                 # Debug: Check final CIF value
+                 final_cif = promotion_cif[-1] if len(promotion_cif) > 0 else 0
+@@ -932,5 +931,5 @@
+                 n_total = len(group_data)
+                 print_v(f"  • Group '{group}': Promotion CIF final={final_cif:.3f}, actual rate={n_promoted/n_total:.3f} ({n_promoted:,}/{n_total:,})")
+-                
++                # print("# ACTUAL PLOT COMMAND ax1.plot(times, promotion_cif, ******************************************************")
+                 # Use enhanced legend label
+                 legend_label = format_legend_label(plot_spec, group, df, var_name)
+@@ -943,8 +942,10 @@
+             
+             ax1.set_title(f"Promotion Probability (CIF): {main_title}", fontsize=title_sz, fontweight='bold', pad=22)
+-            ax1.text(0.5, 1.00, subtitle, transform=ax1.transAxes, fontsize=axis_sz*0.8, 
+-                   ha='center', va='bottom', style='italic', color='gray')
+-            ax1.set_xlabel('Days from DOR CPT', fontsize=axis_sz)
++            # Remove subtile for paper
++            # ax1.text(0.5, 1.00, subtitle, transform=ax1.transAxes, fontsize=axis_sz*0.8, 
++            #        ha='center', va='bottom', style='italic', color='gray')
++            ax1.set_xlabel('Days from Promotion to CPT', fontsize=axis_sz)
+             ax1.set_ylabel('Cumulative Incidence of Promotion', fontsize=axis_sz)
++            # ax1.legend(title='Group', bbox_to_anchor=(1.05, 1), loc='upper left', fontsize=lgnd_sz, title_fontsize=lgnd_sz)
+             ax1.legend(title='Group', loc='upper left', fontsize=lgnd_sz, title_fontsize=lgnd_sz)
+             ax1.grid(True, alpha=0.3)
+@@ -958,7 +959,7 @@
+             if x_min_days is not None:
+                 ax1.set_xlim(left=x_min_days)
+-            
+-            # Add configuration box to first subplot
+-            add_configuration_box(ax1, plot_spec, metadata, font_size=lgnd_sz)
++                
++            # Add configuration box to first subplot REMOVED FOR PAPER
++            # add_configuration_box(ax1, plot_spec, metadata, font_size=lgnd_sz)
+             
+             # Add reference lines if enabled
+@@ -967,5 +968,5 @@
+             if PLOT_CONFIG['reference_lines']['show_az_line']:
+                 insert_az_line(ax1, pz_ref_line, START_TIME, fnt_sz, ref_ln_label_sz, c3, c4)
+-            
++            # print("# Plot 2: Attrition events (event == 2)******************************************************")
+             # Plot 2: Attrition events (event == 2)
+             for i, group in enumerate(groups):
+@@ -974,5 +975,5 @@
+                 if len(group_data) == 0:
+                     continue
+-                
++                # print("# Filter out invalid data)******************************************************")              
+                 # Filter out invalid data
+                 valid_mask = (group_data['stop_time'].notna()) & (group_data['stop_time'] > 0)
+@@ -981,8 +982,8 @@
+                 if len(group_data) == 0:
+                     continue
+-                
++                # print("# Calculate CIF for promotion using simple proportion approach)******************************************************")                
+                 # Calculate CIF for attrition using simple proportion approach
+                 times, attrition_cif = calculate_cif(group_data, event_type=2)
+-                
++                # print("# Debug: Check final CIF value******************************************************")                
+                 # Debug: Check final CIF value
+                 final_cif = attrition_cif[-1] if len(attrition_cif) > 0 else 0
+@@ -990,5 +991,5 @@
+                 n_total = len(group_data)
+                 print_v(f"  • Group '{group}': Attrition CIF final={final_cif:.3f}, actual rate={n_attrited/n_total:.3f} ({n_attrited:,}/{n_total:,})")
+-                
++                # print("# ACTUAL PLOT COMMAND ax2.plot(times, attrition_cif,  ******************************************************")                
+                 # Use enhanced legend label
+                 legend_label = format_legend_label(plot_spec, group, df, var_name)
+@@ -998,8 +999,10 @@
+             # Enhanced formatting for attrition plot
+             ax2.set_title(f"Attrition Probability (CIF): {main_title}", fontsize=title_sz, fontweight='bold', pad=22)
+-            ax2.text(0.5, 1.00, subtitle, transform=ax2.transAxes, fontsize=axis_sz*0.8, 
+-                   ha='center', va='bottom', style='italic', color='gray')
+-            ax2.set_xlabel('Days from DOR CPT', fontsize=axis_sz)
++            # Remove subtile for paper
++            # ax2.text(0.5, 1.00, subtitle, transform=ax2.transAxes, fontsize=axis_sz*0.8, 
++            #        ha='center', va='bottom', style='italic', color='gray')
++            ax2.set_xlabel('Days from Promotion to CPT', fontsize=axis_sz)
+             ax2.set_ylabel('Cumulative Incidence of Attrition', fontsize=axis_sz)
++            # ax2.legend(title='Group', bbox_to_anchor=(1.05, 1), loc='upper left', fontsize=lgnd_sz, title_fontsize=lgnd_sz)
+             ax2.legend(title='Group', loc='upper left', fontsize=lgnd_sz, title_fontsize=lgnd_sz)
+             ax2.grid(True, alpha=0.3)
+@@ -1013,5 +1016,5 @@
+             if x_min_days is not None:
+                 ax2.set_xlim(left=x_min_days)
+-            
++                
+             # Add reference lines if enabled
+             if PLOT_CONFIG['reference_lines']['show_pz_line']:
+@@ -1039,9 +1042,10 @@
+         plots_created = 0
+         plots_skipped = 0
+-
++        
+         # === 11.7A. DIAGNOSTIC: Raw vs Z (tb_ratio_bwd_snr) ===
+         diag_var = TB_RATIO_SNR_COL
+         diag_z = f"{Z_PREFIX}{diag_var}"
+         base_spec = None
++        # print("# === 11.7A. DIAGNOSTIC: Raw vs Z (tb_ratio_bwd_snr) ===  ******************************************************")                
+         for ps in PLOT_CONFIG['plots']:
+             if ps.get('variable') == diag_var and ps.get('plot_type') == 'competing_risks':
+@@ -1059,6 +1063,6 @@
+                     print_v(f"  ✅ Created temporary {diag_z} for diagnostics")
+                 else:
+-                    print_v(f"  ⚠️ Skipping z diagnostic (std=0 for {diag_var})")
+-
++                    print_v(f"   ⚠️SKIPPING z diagnostic (std=0 for {diag_var})")     
++        
+             if diag_z in df_analysis.columns:
+                 for label, var in [("raw", diag_var), ("z", diag_z)]:
+@@ -1066,20 +1070,19 @@
+                     diag_spec['variable'] = var
+                     diag_spec['name'] = f"diag_cr_{label}_{var}"
+-                    print_v(f"\n  🧪 Diagnostic plot: {diag_spec['name']}")
+-
++                    print_v(f" $$$$$ Diagnostic plot: {diag_spec['name']}")
++    
+                     plot_df = prepare_plot_data(df_analysis, diag_spec)
+                     if plot_df is None:
+-                        print_v("  ⚠️ Diagnostic skipped (no data)")
++                        print_v(f"    ⚠️ Diagnostic skipped :  no data")
+                         continue
+-
++    
+                     metadata = get_plot_metadata(diag_spec, df_analysis, plot_df)
+                     filename_base = generate_plot_filename(diag_spec, metadata['data_stats'])
+                     filename_base = f"diag_{label}_{filename_base}"
+                     save_path = os.path.join(PLOT_CONFIG['plot_dir'], filename_base)
+-
++                    # print("# === 11.7A. DIAGNOSTIC:plot_competing_risks(plot_df, diag_spec, save_path, metadata)  ******************************************************")         
+                     plot_competing_risks(plot_df, diag_spec, save_path, metadata)
+                     if diag_spec.get('plot_cif_bars', False) or PLOT_CONFIG.get('plot_cif_bars', False):
+-                        _cif_figsize = (PLOT_CONFIG['figsize'][0], PLOT_CONFIG['figsize'][1] * 1.5)
+-                        bar_path = plot_competing_risks_cif_bars(
++                        plot_competing_risks_cif_bars(
+                             plot_df,
+                             diag_spec,
+@@ -1087,17 +1090,12 @@
+                             output_dir=PLOT_CONFIG['plot_dir'],
+                             filename_base=filename_base,
+-                            dpi=PLOT_CONFIG.get('dpi', 300),
+-                            figsize=_cif_figsize,
+-                            tick_sz=tick_sz,
++                            dpi = PLOT_CONFIG.get('dpi', 300),
++                            figsize=PLOT_CONFIG.get('figsize', [10,8]),
+                             legend_outside=PLOT_CONFIG.get('cif_bar_legend_outside', True)
+                         )
+-                        if bar_path and os.path.isfile(save_path):
+-                            _base = filename_base.replace('.png', '')
+-                            _composite_path = os.path.join(PLOT_CONFIG['plot_dir'], f"{_base}_cif_composite.png")
+-                            composite_cif_curve_and_bars(save_path, bar_path, _composite_path, dpi=PLOT_CONFIG.get('dpi', 300))
+-                            print_v(f"  ✅ Created CIF composite (for slides): {_base}_cif_composite.png")
+         else:
+-            print_v("  ⚠️ Diagnostic raw vs z skipped (base plot or z column missing)")
+-        
++            print_v(" ⚠️ Diagnostic raw vs z skipped (base plot or z columns missing)")
++        
++        # print("THIS IS THE BEGINNING OF REAL (NON-DIAGNOSTIC) PLOTS!!!!! ******************************************************") 
+         # Use df_analysis (with selected columns) for plotting
+         for plot_spec in PLOT_CONFIG['plots']:
+@@ -1107,8 +1105,9 @@
+             print_v(f"     Group by: {plot_spec.get('group_by', 'None')}")
+             print_v(f"     Plot type: {plot_spec.get('plot_type', 'None')}")
+-            
++
+             # Prepare data
+             plot_df = prepare_plot_data(df_analysis, plot_spec)
+-            
++            # print("plot_df = prepare_plot_data(df_analysis, plot_spec)  ******************************************************")         
++           
+             if plot_df is None:
+                 print_v(f"  ❌ Skipped plot: {plot_name}")
+@@ -1117,6 +1116,6 @@
+             
+             print_v(f"  ✅ Data prepared: {len(plot_df):,} rows, {plot_df['plot_group'].nunique()} groups")
+-
+-            # DEBUG: event rates by bin for key TB ratios
++            # print("# ================>>>>>>>>>>>>      DEBUG: event rates by bin for ket TB ratios  ******************************************************")         
++            # DEBUG: event rates by bin for ket TB ratios
+             debug_vars = {
+                 'tb_ratio_fwd_snr',
+@@ -1126,20 +1125,21 @@
+             if plot_spec.get('variable') in debug_vars:
+                 try:
+-                    grp = plot_df.groupby('plot_group')
+-                    promo_rate = grp['event'].apply(lambda s: (s == 1).mean())
+-                    attr_rate = grp['event'].apply(lambda s: (s == 2).mean())
+-                    print_v("  • DEBUG event rates by bin (promotion / attrition):")
++                    grp = plot_df.groupby('plot_group', dropna=False)
++                    promo_rate=grp['event'].apply(lambda s: (s == 1).mean())
++                    attr_rate=grp['event'].apply(lambda s: (s == 2).mean())            
++                    print_v(f"  DEBUG event rates by bin (promotion / attrition):")
+                     for g in promo_rate.index:
+-                        print_v(f"    {g}: {promo_rate[g]:.3f} / {attr_rate[g]:.3f}")
++                        print_v(f"     {g}: {promo_rate[g]:.3f} / {attr_rate[g]:.3f}")
+                 except Exception as e:
+-                    print_v(f"  ⚠️ DEBUG event rate calc failed: {e}")
+-            
++                    print_v(f"⚠️ DEBUG event rate calc failed: {e}")
++            # print("# ================>>>>>>>>>>>>      DEBUG: event rates by bin for ket TB ratios  ******************************************************")  
++            # print(f"\n# Generate metadata ******************************************************")                                  
+             # Generate metadata
+             metadata = get_plot_metadata(plot_spec, df_analysis, plot_df)
+-            
++            # print("# Generate enhanced filename ******************************************************")                     
+             # Generate enhanced filename
+             filename_base = generate_plot_filename(plot_spec, metadata['data_stats'])
+             save_path = os.path.join(PLOT_CONFIG['plot_dir'], filename_base)
+-            
++            # print("# HERE'S AN ACTUL PLOT(S) !!!!!!  Create plot based on type  ******************************************************")                     
+             # Create plot based on type
+             if plot_spec['plot_type'] == 'kaplan_meier':
+@@ -1154,6 +1154,7 @@
+                 # Optional bar chart of final CIF by bin
+                 if plot_spec.get('plot_cif_bars', False) or PLOT_CONFIG.get('plot_cif_bars', False):
+-                    _cif_figsize = (PLOT_CONFIG['figsize'][0], PLOT_CONFIG['figsize'][1] * 1.5)
+-                    bar_path = plot_competing_risks_cif_bars(
++                    # print("# Optional bar chart of final CIF by bin  ******************************************************")
++                    _cif_figsize = (PLOT_CONFIG['figsize'][0], PLOT_CONFIG['figsize'][1] )
++                    plot_competing_risks_cif_bars(
+                         plot_df,
+                         plot_spec,
+@@ -1161,16 +1162,11 @@
+                         output_dir=PLOT_CONFIG['plot_dir'],
+                         filename_base=filename_base,
+-                        dpi=PLOT_CONFIG.get('dpi', 300),
++                        dpi=PLOT_CONFIG.get('dpi', 400),
+                         figsize=_cif_figsize,
+                         tick_sz=tick_sz,
+                         legend_outside=PLOT_CONFIG.get('cif_bar_legend_outside', True)
+                     )
+-                    print_v(f"  ✅ Created CIF bar plot: {filename_base.replace('.png','')}_cif_bars.png")
+-                    # Composite for slides: promo curve + promo bar (left), attrition curve + attrition bar (right)
+-                    if bar_path and os.path.isfile(save_path):
+-                        _base = filename_base.replace('.png', '')
+-                        _composite_path = os.path.join(PLOT_CONFIG['plot_dir'], f"{_base}_cif_composite.png")
+-                        composite_cif_curve_and_bars(save_path, bar_path, _composite_path, dpi=PLOT_CONFIG.get('dpi', 300))
+-                        print_v(f"  ✅ Created CIF composite (for slides): {_base}_cif_composite.png")
++
++                    print_v(f"  ✅ Created CIF bar plot: {filename_base.replace('.png','')}_cif_bars.png, {plot_spec['n_bins']} bins, {plot_spec['bin_method']}, jobs: {filtering_params['filter_job_codes']['include_specific']}")
+             else:
+                 print_v(f"⚠️ Unknown plot type: {plot_spec['plot_type']}, skipping")

@@ -1,0 +1,1378 @@
+<?xml version='1.0' encoding='utf-8'?>
+<gexf xmlns="http://www.gexf.net/1.2draft" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd" version="1.2">
+  <meta lastmodifieddate="2025-08-26">
+    <creator>NetworkX 3.3</creator>
+  </meta>
+  <graph defaultedgetype="directed" mode="static" name="">
+    <attributes mode="static" class="node">
+      <attribute id="0" title="uic" type="string" />
+      <attribute id="1" title="SIMPLENAME" type="string" />
+      <attribute id="2" title="UICTYPE" type="string" />
+      <attribute id="3" title="DOCTPE" type="string" />
+      <attribute id="4" title="DRRSANAME" type="string" />
+      <attribute id="5" title="CMD" type="string" />
+      <attribute id="6" title="COMPO" type="double" />
+      <attribute id="7" title="FY" type="long" />
+      <attribute id="8" title="is_top_level" type="boolean" />
+      <attribute id="9" title="LOCNM" type="string" />
+      <attribute id="10" title="CITY" type="string" />
+      <attribute id="11" title="STATE" type="string" />
+      <attribute id="12" title="COUNTRY" type="string" />
+      <attribute id="13" title="BRANCH" type="string" />
+    </attributes>
+    <nodes>
+      <node id="WDSTFF" label="WDSTFF">
+        <attvalues>
+          <attvalue for="0" value="WDSTFF" />
+          <attvalue for="1" value="(SOF) 160 AV" />
+          <attvalue for="2" value="TITULAR" />
+          <attvalue for="3" value="ROLLUP" />
+          <attvalue for="4" value="0160 AV RGT    SP OPS AVN RGT" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="true" />
+        </attvalues>
+      </node>
+      <node id="W028AA" label="W028AA">
+        <attvalues>
+          <attvalue for="0" value="W028AA" />
+          <attvalue for="1" value="Eqp Set" />
+          <attvalue for="2" value="PARENT" />
+          <attvalue for="3" value="TDA" />
+          <attvalue for="4" value="W028 0160 AV HHC ETDA" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT CAMPBELL (KY)" />
+          <attvalue for="10" value="FORT CAMPBELL" />
+          <attvalue for="11" value="KY" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="W02AAA" label="W02AAA">
+        <attvalues>
+          <attvalue for="0" value="W02AAA" />
+          <attvalue for="1" value="Eqp Set" />
+          <attvalue for="2" value="PARENT" />
+          <attvalue for="3" value="TDA" />
+          <attvalue for="4" value="W02A 0160 AV 01 BN ETDA" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT BRAGG" />
+          <attvalue for="10" value="FAYETTEVILLE" />
+          <attvalue for="11" value="NC" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="W02BAA" label="W02BAA">
+        <attvalues>
+          <attvalue for="0" value="W02BAA" />
+          <attvalue for="1" value="Eqp Set" />
+          <attvalue for="2" value="PARENT" />
+          <attvalue for="3" value="TDA" />
+          <attvalue for="4" value="W02B 0160 AV 04 BN ETDA" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT LEWIS" />
+          <attvalue for="10" value="TACOMA" />
+          <attvalue for="11" value="WA" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="W02CAA" label="W02CAA">
+        <attvalues>
+          <attvalue for="0" value="W02CAA" />
+          <attvalue for="1" value="Eqp Set" />
+          <attvalue for="2" value="PARENT" />
+          <attvalue for="3" value="TDA" />
+          <attvalue for="4" value="W02C 0160 AV 03 BN ETDA" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="HUNTER ARMY AIRFIELD" />
+          <attvalue for="10" value="SAVANNAH" />
+          <attvalue for="11" value="GA" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="W02DAA" label="W02DAA">
+        <attvalues>
+          <attvalue for="0" value="W02DAA" />
+          <attvalue for="1" value="Eqp Set" />
+          <attvalue for="2" value="PARENT" />
+          <attvalue for="3" value="TDA" />
+          <attvalue for="4" value="W02D 0160 AV 02 BN ETDA" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT BRAGG" />
+          <attvalue for="10" value="FAYETTEVILLE" />
+          <attvalue for="11" value="NC" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WC3JAA" label="WC3JAA">
+        <attvalues>
+          <attvalue for="0" value="WC3JAA" />
+          <attvalue for="1" value="3-160 SOAR" />
+          <attvalue for="2" value="PARENT" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0160 AV BN  03 SPECIAL OPERATI" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="HUNTER ARMY AIRFIELD" />
+          <attvalue for="10" value="SAVANNAH" />
+          <attvalue for="11" value="GA" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="13" value="AV" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WC3JA0" label="WC3JA0">
+        <attvalues>
+          <attvalue for="0" value="WC3JA0" />
+          <attvalue for="1" value="Hvy AH Co" />
+          <attvalue for="2" value="STRUCTURE" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0160 AV BN  03 CO A HVY ASLT" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="HUNTER ARMY AIRFIELD" />
+          <attvalue for="10" value="SAVANNAH" />
+          <attvalue for="11" value="GA" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WC3JB0" label="WC3JB0">
+        <attvalues>
+          <attvalue for="0" value="WC3JB0" />
+          <attvalue for="1" value="Hvy AH Co" />
+          <attvalue for="2" value="STRUCTURE" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0160 AV BN  03 CO B HVY ASLT" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="HUNTER ARMY AIRFIELD" />
+          <attvalue for="10" value="SAVANNAH" />
+          <attvalue for="11" value="GA" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WC3JC0" label="WC3JC0">
+        <attvalues>
+          <attvalue for="0" value="WC3JC0" />
+          <attvalue for="1" value="MedAsltHel" />
+          <attvalue for="2" value="STRUCTURE" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0160 AV BN  03 CO C MED ASLT H" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="HUNTER ARMY AIRFIELD" />
+          <attvalue for="10" value="SAVANNAH" />
+          <attvalue for="11" value="GA" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WC3JD0" label="WC3JD0">
+        <attvalues>
+          <attvalue for="0" value="WC3JD0" />
+          <attvalue for="1" value="AVUM Co" />
+          <attvalue for="2" value="STRUCTURE" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0160 AV BN  03 CO D AVUM-AVIM" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="HUNTER ARMY AIRFIELD" />
+          <attvalue for="10" value="SAVANNAH" />
+          <attvalue for="11" value="GA" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WC3JT0" label="WC3JT0">
+        <attvalues>
+          <attvalue for="0" value="WC3JT0" />
+          <attvalue for="1" value="HHCSO AVBn" />
+          <attvalue for="2" value="STRUCTURE" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0160 AV BN  03 HHC SF AVIATION" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="HUNTER ARMY AIRFIELD" />
+          <attvalue for="10" value="SAVANNAH" />
+          <attvalue for="11" value="GA" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WDSRAA" label="WDSRAA">
+        <attvalues>
+          <attvalue for="0" value="WDSRAA" />
+          <attvalue for="1" value="1-160 SOAR" />
+          <attvalue for="2" value="PARENT" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0160 AV BN  01 SPECIAL OPERATI" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT CAMPBELL (KY)" />
+          <attvalue for="10" value="FORT CAMPBELL" />
+          <attvalue for="11" value="KY" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="13" value="AV" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WDSRA0" label="WDSRA0">
+        <attvalues>
+          <attvalue for="0" value="WDSRA0" />
+          <attvalue for="1" value="LtAslHelCo" />
+          <attvalue for="2" value="STRUCTURE" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0160 AV BN  01 CO A LT ASLT HE" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT CAMPBELL (KY)" />
+          <attvalue for="10" value="FORT CAMPBELL" />
+          <attvalue for="11" value="KY" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WDSRB0" label="WDSRB0">
+        <attvalues>
+          <attvalue for="0" value="WDSRB0" />
+          <attvalue for="1" value="LtAtkHelCo" />
+          <attvalue for="2" value="STRUCTURE" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0160 AV BN  01 CO B LT ATK HEL" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT CAMPBELL (KY)" />
+          <attvalue for="10" value="FORT CAMPBELL" />
+          <attvalue for="11" value="KY" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WDSRC0" label="WDSRC0">
+        <attvalues>
+          <attvalue for="0" value="WDSRC0" />
+          <attvalue for="1" value="AttkHeliCo" />
+          <attvalue for="2" value="STRUCTURE" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0160 AV BN  01 CO C MED ASLT N" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT CAMPBELL (KY)" />
+          <attvalue for="10" value="FORT CAMPBELL" />
+          <attvalue for="11" value="KY" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WDSRD0" label="WDSRD0">
+        <attvalues>
+          <attvalue for="0" value="WDSRD0" />
+          <attvalue for="1" value="AsltHeliCo" />
+          <attvalue for="2" value="STRUCTURE" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0160 AV BN  01 CO D MED ASLT N" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT CAMPBELL (KY)" />
+          <attvalue for="10" value="FORT CAMPBELL" />
+          <attvalue for="11" value="KY" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WDSRE0" label="WDSRE0">
+        <attvalues>
+          <attvalue for="0" value="WDSRE0" />
+          <attvalue for="1" value="AsltHeliCo" />
+          <attvalue for="2" value="STRUCTURE" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0160 AV BN  01 CO E MED ASLT N" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT CAMPBELL (KY)" />
+          <attvalue for="10" value="FORT CAMPBELL" />
+          <attvalue for="11" value="KY" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WDSRF0" label="WDSRF0">
+        <attvalues>
+          <attvalue for="0" value="WDSRF0" />
+          <attvalue for="1" value="AVUM Co NM" />
+          <attvalue for="2" value="STRUCTURE" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0160 AV BN  01 CO F AVUM-AVIM" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT CAMPBELL (KY)" />
+          <attvalue for="10" value="FORT CAMPBELL" />
+          <attvalue for="11" value="KY" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WDSRT0" label="WDSRT0">
+        <attvalues>
+          <attvalue for="0" value="WDSRT0" />
+          <attvalue for="1" value="HHC SOAVBn" />
+          <attvalue for="2" value="STRUCTURE" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0160 AV BN  01 HHC SP OPS NATL" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT CAMPBELL (KY)" />
+          <attvalue for="10" value="FORT CAMPBELL" />
+          <attvalue for="11" value="KY" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WDSSAA" label="WDSSAA">
+        <attvalues>
+          <attvalue for="0" value="WDSSAA" />
+          <attvalue for="1" value="2-160 SOAR" />
+          <attvalue for="2" value="PARENT" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0160 AV BN  02 SPECIAL OPERATI" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT CAMPBELL (KY)" />
+          <attvalue for="10" value="FORT CAMPBELL" />
+          <attvalue for="11" value="KY" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="13" value="AV" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WDSSA0" label="WDSSA0">
+        <attvalues>
+          <attvalue for="0" value="WDSSA0" />
+          <attvalue for="1" value="Hvy AH Co" />
+          <attvalue for="2" value="STRUCTURE" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0160 AV BN  02 CO A HVY ASLT" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT CAMPBELL (KY)" />
+          <attvalue for="10" value="FORT CAMPBELL" />
+          <attvalue for="11" value="KY" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WDSSB0" label="WDSSB0">
+        <attvalues>
+          <attvalue for="0" value="WDSSB0" />
+          <attvalue for="1" value="Hvy AH Co" />
+          <attvalue for="2" value="STRUCTURE" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0160 AV BN  02 CO B HVY ASLT" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT CAMPBELL (KY)" />
+          <attvalue for="10" value="FORT CAMPBELL" />
+          <attvalue for="11" value="KY" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WDSSC0" label="WDSSC0">
+        <attvalues>
+          <attvalue for="0" value="WDSSC0" />
+          <attvalue for="1" value="MedAsltHel" />
+          <attvalue for="2" value="STRUCTURE" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0160 AV BN  02 CO C MED ASLT H" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT CAMPBELL (KY)" />
+          <attvalue for="10" value="FORT CAMPBELL" />
+          <attvalue for="11" value="KY" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WDSSD0" label="WDSSD0">
+        <attvalues>
+          <attvalue for="0" value="WDSSD0" />
+          <attvalue for="1" value="AVUM Co" />
+          <attvalue for="2" value="STRUCTURE" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0160 AV BN  02 CO D AVUM-AVIM" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT CAMPBELL (KY)" />
+          <attvalue for="10" value="FORT CAMPBELL" />
+          <attvalue for="11" value="KY" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WDSST0" label="WDSST0">
+        <attvalues>
+          <attvalue for="0" value="WDSST0" />
+          <attvalue for="1" value="HHCSO AVBn" />
+          <attvalue for="2" value="STRUCTURE" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0160 AV BN  02 HHC SF AVIATION" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT CAMPBELL (KY)" />
+          <attvalue for="10" value="FORT CAMPBELL" />
+          <attvalue for="11" value="KY" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WDSTAA" label="WDSTAA">
+        <attvalues>
+          <attvalue for="0" value="WDSTAA" />
+          <attvalue for="1" value="HHC160AV" />
+          <attvalue for="2" value="PARENT" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0160 AV HQ     HHC SPECIAL OPE" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT CAMPBELL (KY)" />
+          <attvalue for="10" value="FORT CAMPBELL" />
+          <attvalue for="11" value="KY" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="13" value="AV" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WDST99" label="WDST99">
+        <attvalues>
+          <attvalue for="0" value="WDST99" />
+          <attvalue for="1" value="Aug160 AV" />
+          <attvalue for="2" value="PARENT" />
+          <attvalue for="3" value="AUGTDA" />
+          <attvalue for="4" value="0160 AV HQ     AUGMENTATION" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT CAMPBELL (KY)" />
+          <attvalue for="10" value="FORT CAMPBELL" />
+          <attvalue for="11" value="KY" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WDSVAA" label="WDSVAA">
+        <attvalues>
+          <attvalue for="0" value="WDSVAA" />
+          <attvalue for="1" value="E-160 AV" />
+          <attvalue for="2" value="PARENT" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0160 AV CO     GRAY EAGLE UAS" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT CAMPBELL (KY)" />
+          <attvalue for="10" value="FORT CAMPBELL" />
+          <attvalue for="11" value="KY" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="13" value="AV" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="W029AA" label="W029AA">
+        <attvalues>
+          <attvalue for="0" value="W029AA" />
+          <attvalue for="1" value="Eqp Set" />
+          <attvalue for="2" value="PARENT" />
+          <attvalue for="3" value="TDA" />
+          <attvalue for="4" value="W029 0160 AV CO E ETDA" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT BRAGG" />
+          <attvalue for="10" value="FAYETTEVILLE" />
+          <attvalue for="11" value="NC" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WJH1AA" label="WJH1AA">
+        <attvalues>
+          <attvalue for="0" value="WJH1AA" />
+          <attvalue for="1" value="F Co" />
+          <attvalue for="2" value="PARENT" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0160 AV CO     GRAY EAGLE UAS" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT CAMPBELL (KY)" />
+          <attvalue for="10" value="FORT CAMPBELL" />
+          <attvalue for="11" value="KY" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="13" value="AV" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WJMFAA" label="WJMFAA">
+        <attvalues>
+          <attvalue for="0" value="WJMFAA" />
+          <attvalue for="1" value="4-160 SOAR" />
+          <attvalue for="2" value="PARENT" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0160 AV BN  04 SPECIAL OPERATI" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT LEWIS" />
+          <attvalue for="10" value="TACOMA" />
+          <attvalue for="11" value="WA" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="13" value="AV" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WJMFA0" label="WJMFA0">
+        <attvalues>
+          <attvalue for="0" value="WJMFA0" />
+          <attvalue for="1" value="Hvy AH Co" />
+          <attvalue for="2" value="STRUCTURE" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0160 AV BN  04 CO A HVY ASLT" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT LEWIS" />
+          <attvalue for="10" value="TACOMA" />
+          <attvalue for="11" value="WA" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WJMFB0" label="WJMFB0">
+        <attvalues>
+          <attvalue for="0" value="WJMFB0" />
+          <attvalue for="1" value="Hvy AH Co" />
+          <attvalue for="2" value="STRUCTURE" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0160 AV BN  04 CO B HVY ASLT" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT LEWIS" />
+          <attvalue for="10" value="TACOMA" />
+          <attvalue for="11" value="WA" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WJMFC0" label="WJMFC0">
+        <attvalues>
+          <attvalue for="0" value="WJMFC0" />
+          <attvalue for="1" value="MedAsltHel" />
+          <attvalue for="2" value="STRUCTURE" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0160 AV BN  04 CO C MED ASLT H" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT LEWIS" />
+          <attvalue for="10" value="TACOMA" />
+          <attvalue for="11" value="WA" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WJMFD0" label="WJMFD0">
+        <attvalues>
+          <attvalue for="0" value="WJMFD0" />
+          <attvalue for="1" value="AVUM Co" />
+          <attvalue for="2" value="STRUCTURE" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0160 AV BN  04 CO D AVUM-AVIM" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT LEWIS" />
+          <attvalue for="10" value="TACOMA" />
+          <attvalue for="11" value="WA" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WJMFT0" label="WJMFT0">
+        <attvalues>
+          <attvalue for="0" value="WJMFT0" />
+          <attvalue for="1" value="HHCSO AVBn" />
+          <attvalue for="2" value="STRUCTURE" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0160 AV BN  04 HHC SF AVIATION" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT LEWIS" />
+          <attvalue for="10" value="TACOMA" />
+          <attvalue for="11" value="WA" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WDDDFF" label="WDDDFF">
+        <attvalues>
+          <attvalue for="0" value="WDDDFF" />
+          <attvalue for="1" value="(SOF) 75 RR" />
+          <attvalue for="2" value="TITULAR" />
+          <attvalue for="3" value="ROLLUP" />
+          <attvalue for="4" value="0075 IN RGT    RANGER RGT ABN" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="true" />
+        </attvalues>
+      </node>
+      <node id="W6Z1AA" label="W6Z1AA">
+        <attvalues>
+          <attvalue for="0" value="W6Z1AA" />
+          <attvalue for="1" value="EqpSet75RR" />
+          <attvalue for="2" value="PARENT" />
+          <attvalue for="3" value="TDA" />
+          <attvalue for="4" value="W6Z1 0075 IN HHC ETDA" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT BENNING" />
+          <attvalue for="10" value="FORT BENNING" />
+          <attvalue for="11" value="GA" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WDDDAA" label="WDDDAA">
+        <attvalues>
+          <attvalue for="0" value="WDDDAA" />
+          <attvalue for="1" value="HHC 75 RR" />
+          <attvalue for="2" value="PARENT" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0075 IN HHC    HHC RANGER REGI" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT BENNING" />
+          <attvalue for="10" value="FORT BENNING" />
+          <attvalue for="11" value="GA" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="13" value="IN" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WDDD99" label="WDDD99">
+        <attvalues>
+          <attvalue for="0" value="WDDD99" />
+          <attvalue for="1" value="Aug 75RGR" />
+          <attvalue for="2" value="PARENT" />
+          <attvalue for="3" value="AUGTDA" />
+          <attvalue for="4" value="0075 IN HHC    AUG TDA" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT BENNING" />
+          <attvalue for="10" value="FORT BENNING" />
+          <attvalue for="11" value="GA" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WH3LAA" label="WH3LAA">
+        <attvalues>
+          <attvalue for="0" value="WH3LAA" />
+          <attvalue for="1" value="1-75 RR" />
+          <attvalue for="2" value="PARENT" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0075 IN BN  01 RANGER BATTALIO" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="HUNTER ARMY AIRFIELD" />
+          <attvalue for="10" value="SAVANNAH" />
+          <attvalue for="11" value="GA" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="13" value="IN" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="W6ZFAA" label="W6ZFAA">
+        <attvalues>
+          <attvalue for="0" value="W6ZFAA" />
+          <attvalue for="1" value="Eqp Set" />
+          <attvalue for="2" value="PARENT" />
+          <attvalue for="3" value="TDA" />
+          <attvalue for="4" value="W6ZF 0075 IN BN 01 ETDA" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="HUNTER ARMY AIRFIELD" />
+          <attvalue for="10" value="SAVANNAH" />
+          <attvalue for="11" value="GA" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WH3L99" label="WH3L99">
+        <attvalues>
+          <attvalue for="0" value="WH3L99" />
+          <attvalue for="1" value="Aug 1-75RR" />
+          <attvalue for="2" value="PARENT" />
+          <attvalue for="3" value="AUGTDA" />
+          <attvalue for="4" value="0075 IN BN  01 AUG TDA" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="HUNTER (WEATHER STATION)" />
+          <attvalue for="10" value="SAVANNAH" />
+          <attvalue for="11" value="GA" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WH3LA0" label="WH3LA0">
+        <attvalues>
+          <attvalue for="0" value="WH3LA0" />
+          <attvalue for="1" value="RflCoRngBn" />
+          <attvalue for="2" value="STRUCTURE" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0075 IN BN  01 CO A RIFLE COMP" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="HUNTER ARMY AIRFIELD" />
+          <attvalue for="10" value="SAVANNAH" />
+          <attvalue for="11" value="GA" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WH3LB0" label="WH3LB0">
+        <attvalues>
+          <attvalue for="0" value="WH3LB0" />
+          <attvalue for="1" value="RflCoRngBn" />
+          <attvalue for="2" value="STRUCTURE" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0075 IN BN  01 CO B RIFLE COMP" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="HUNTER ARMY AIRFIELD" />
+          <attvalue for="10" value="SAVANNAH" />
+          <attvalue for="11" value="GA" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WH3LC0" label="WH3LC0">
+        <attvalues>
+          <attvalue for="0" value="WH3LC0" />
+          <attvalue for="1" value="RflCoRngBn" />
+          <attvalue for="2" value="STRUCTURE" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0075 IN BN  01 CO C RIFLE COMP" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="HUNTER ARMY AIRFIELD" />
+          <attvalue for="10" value="SAVANNAH" />
+          <attvalue for="11" value="GA" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WH3LD0" label="WH3LD0">
+        <attvalues>
+          <attvalue for="0" value="WH3LD0" />
+          <attvalue for="1" value="RflCoRngBn" />
+          <attvalue for="2" value="STRUCTURE" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0075 IN BN  01 CO D RANGER OPE" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="HUNTER ARMY AIRFIELD" />
+          <attvalue for="10" value="SAVANNAH" />
+          <attvalue for="11" value="GA" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WH3LE0" label="WH3LE0">
+        <attvalues>
+          <attvalue for="0" value="WH3LE0" />
+          <attvalue for="1" value="Rgr Spt Tm" />
+          <attvalue for="2" value="STRUCTURE" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0075 IN BN  01 CO E RANGER SUP" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="HUNTER ARMY AIRFIELD" />
+          <attvalue for="10" value="SAVANNAH" />
+          <attvalue for="11" value="GA" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WH3LT0" label="WH3LT0">
+        <attvalues>
+          <attvalue for="0" value="WH3LT0" />
+          <attvalue for="1" value="HHC RngrBn" />
+          <attvalue for="2" value="STRUCTURE" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0075 IN BN  01 HHC RANGER BN" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="HUNTER ARMY AIRFIELD" />
+          <attvalue for="10" value="SAVANNAH" />
+          <attvalue for="11" value="GA" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WH3MAA" label="WH3MAA">
+        <attvalues>
+          <attvalue for="0" value="WH3MAA" />
+          <attvalue for="1" value="2-75 RR" />
+          <attvalue for="2" value="PARENT" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0075 IN BN  02 RANGER BATTALIO" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT LEWIS" />
+          <attvalue for="10" value="TACOMA" />
+          <attvalue for="11" value="WA" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="13" value="IN" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="W6ZEAA" label="W6ZEAA">
+        <attvalues>
+          <attvalue for="0" value="W6ZEAA" />
+          <attvalue for="1" value="Eqp Set" />
+          <attvalue for="2" value="PARENT" />
+          <attvalue for="3" value="TDA" />
+          <attvalue for="4" value="W6ZE 0075 IN BN 02 ETDA" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT LEWIS" />
+          <attvalue for="10" value="TACOMA" />
+          <attvalue for="11" value="WA" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WH3M99" label="WH3M99">
+        <attvalues>
+          <attvalue for="0" value="WH3M99" />
+          <attvalue for="1" value="Aug 2-75RR" />
+          <attvalue for="2" value="PARENT" />
+          <attvalue for="3" value="AUGTDA" />
+          <attvalue for="4" value="0075 IN BN  02 AUG TDA" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT LEWIS" />
+          <attvalue for="10" value="TACOMA" />
+          <attvalue for="11" value="WA" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WH3MA0" label="WH3MA0">
+        <attvalues>
+          <attvalue for="0" value="WH3MA0" />
+          <attvalue for="1" value="RflCoRngBn" />
+          <attvalue for="2" value="STRUCTURE" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0075 IN BN  02 CO A RIFLE COMP" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT LEWIS" />
+          <attvalue for="10" value="TACOMA" />
+          <attvalue for="11" value="WA" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WH3MB0" label="WH3MB0">
+        <attvalues>
+          <attvalue for="0" value="WH3MB0" />
+          <attvalue for="1" value="RflCoRngBn" />
+          <attvalue for="2" value="STRUCTURE" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0075 IN BN  02 CO B RIFLE COMP" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT LEWIS" />
+          <attvalue for="10" value="TACOMA" />
+          <attvalue for="11" value="WA" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WH3MC0" label="WH3MC0">
+        <attvalues>
+          <attvalue for="0" value="WH3MC0" />
+          <attvalue for="1" value="RflCoRngBn" />
+          <attvalue for="2" value="STRUCTURE" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0075 IN BN  02 CO C RIFLE COMP" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT LEWIS" />
+          <attvalue for="10" value="TACOMA" />
+          <attvalue for="11" value="WA" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WH3MD0" label="WH3MD0">
+        <attvalues>
+          <attvalue for="0" value="WH3MD0" />
+          <attvalue for="1" value="RflCoRngBn" />
+          <attvalue for="2" value="STRUCTURE" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0075 IN BN  02 CO D RANGER OPE" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT LEWIS" />
+          <attvalue for="10" value="TACOMA" />
+          <attvalue for="11" value="WA" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WH3ME0" label="WH3ME0">
+        <attvalues>
+          <attvalue for="0" value="WH3ME0" />
+          <attvalue for="1" value="Rgr Spt Tm" />
+          <attvalue for="2" value="STRUCTURE" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0075 IN BN  02 CO E RANGER SUP" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT LEWIS" />
+          <attvalue for="10" value="TACOMA" />
+          <attvalue for="11" value="WA" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WH3MT0" label="WH3MT0">
+        <attvalues>
+          <attvalue for="0" value="WH3MT0" />
+          <attvalue for="1" value="HHC RngrBn" />
+          <attvalue for="2" value="STRUCTURE" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0075 IN BN  02 HHC RANGER BN" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT LEWIS" />
+          <attvalue for="10" value="TACOMA" />
+          <attvalue for="11" value="WA" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WJBLAA" label="WJBLAA">
+        <attvalues>
+          <attvalue for="0" value="WJBLAA" />
+          <attvalue for="1" value="3-75 RR" />
+          <attvalue for="2" value="PARENT" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0075 IN BN  03 RANGER BATTALIO" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT BENNING" />
+          <attvalue for="10" value="FORT BENNING" />
+          <attvalue for="11" value="GA" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="13" value="IN" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="W6ZDAA" label="W6ZDAA">
+        <attvalues>
+          <attvalue for="0" value="W6ZDAA" />
+          <attvalue for="1" value="Eqp Set" />
+          <attvalue for="2" value="PARENT" />
+          <attvalue for="3" value="TDA" />
+          <attvalue for="4" value="W6ZD 0075 IN BN 03 ETDA" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT BENNING" />
+          <attvalue for="10" value="FORT BENNING" />
+          <attvalue for="11" value="GA" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WJBL99" label="WJBL99">
+        <attvalues>
+          <attvalue for="0" value="WJBL99" />
+          <attvalue for="1" value="Aug 3-75RR" />
+          <attvalue for="2" value="PARENT" />
+          <attvalue for="3" value="AUGTDA" />
+          <attvalue for="4" value="0075 IN BN  03 AUG TDA" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT BENNING" />
+          <attvalue for="10" value="FORT BENNING" />
+          <attvalue for="11" value="GA" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WJBLA0" label="WJBLA0">
+        <attvalues>
+          <attvalue for="0" value="WJBLA0" />
+          <attvalue for="1" value="RflCoRngBn" />
+          <attvalue for="2" value="STRUCTURE" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0075 IN BN  03 CO A RIFLE COMP" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT BENNING" />
+          <attvalue for="10" value="FORT BENNING" />
+          <attvalue for="11" value="GA" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WJBLB0" label="WJBLB0">
+        <attvalues>
+          <attvalue for="0" value="WJBLB0" />
+          <attvalue for="1" value="RflCoRngBn" />
+          <attvalue for="2" value="STRUCTURE" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0075 IN BN  03 CO B RIFLE COMP" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT BENNING" />
+          <attvalue for="10" value="FORT BENNING" />
+          <attvalue for="11" value="GA" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WJBLC0" label="WJBLC0">
+        <attvalues>
+          <attvalue for="0" value="WJBLC0" />
+          <attvalue for="1" value="RflCoRngBn" />
+          <attvalue for="2" value="STRUCTURE" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0075 IN BN  03 CO C RIFLE COMP" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT BENNING" />
+          <attvalue for="10" value="FORT BENNING" />
+          <attvalue for="11" value="GA" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WJBLD0" label="WJBLD0">
+        <attvalues>
+          <attvalue for="0" value="WJBLD0" />
+          <attvalue for="1" value="RflCoRngBn" />
+          <attvalue for="2" value="STRUCTURE" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0075 IN BN  03 CO D RANGER OPE" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT BENNING" />
+          <attvalue for="10" value="FORT BENNING" />
+          <attvalue for="11" value="GA" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WJBLE0" label="WJBLE0">
+        <attvalues>
+          <attvalue for="0" value="WJBLE0" />
+          <attvalue for="1" value="Rgr Spt Tm" />
+          <attvalue for="2" value="STRUCTURE" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0075 IN BN  03 CO E RANGER SUP" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT BENNING" />
+          <attvalue for="10" value="FORT BENNING" />
+          <attvalue for="11" value="GA" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WJBLT0" label="WJBLT0">
+        <attvalues>
+          <attvalue for="0" value="WJBLT0" />
+          <attvalue for="1" value="HHC RngrBn" />
+          <attvalue for="2" value="STRUCTURE" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0075 IN BN  03 HHC RANGER BN" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT BENNING" />
+          <attvalue for="10" value="FORT BENNING" />
+          <attvalue for="11" value="GA" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WJP8AA" label="WJP8AA">
+        <attvalues>
+          <attvalue for="0" value="WJP8AA" />
+          <attvalue for="1" value="STB-75 RR" />
+          <attvalue for="2" value="PARENT" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0075 IN BN     REGIMENTAL SPEC" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT BENNING" />
+          <attvalue for="10" value="FORT BENNING" />
+          <attvalue for="11" value="GA" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="13" value="IN" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="W6ZCAA" label="W6ZCAA">
+        <attvalues>
+          <attvalue for="0" value="W6ZCAA" />
+          <attvalue for="1" value="Eqp Set" />
+          <attvalue for="2" value="PARENT" />
+          <attvalue for="3" value="TDA" />
+          <attvalue for="4" value="W6ZC 0075 IN RTSB ETDA" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT BENNING" />
+          <attvalue for="10" value="FORT BENNING" />
+          <attvalue for="11" value="GA" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WJP8A0" label="WJP8A0">
+        <attvalues>
+          <attvalue for="0" value="WJP8A0" />
+          <attvalue for="1" value="Recon Co" />
+          <attvalue for="2" value="STRUCTURE" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0075 IN BN     CO A REGIMENTAL" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT BENNING" />
+          <attvalue for="10" value="FORT BENNING" />
+          <attvalue for="11" value="GA" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WJP8B0" label="WJP8B0">
+        <attvalues>
+          <attvalue for="0" value="WJP8B0" />
+          <attvalue for="1" value="SC Co RSTB" />
+          <attvalue for="2" value="STRUCTURE" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0075 IN BN     CO B SIGNAL CO" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT BENNING" />
+          <attvalue for="10" value="FORT BENNING" />
+          <attvalue for="11" value="GA" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WJP8C0" label="WJP8C0">
+        <attvalues>
+          <attvalue for="0" value="WJP8C0" />
+          <attvalue for="1" value="RMIC" />
+          <attvalue for="2" value="STRUCTURE" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="9" value="FORT BENNING" />
+          <attvalue for="10" value="FORT BENNING" />
+          <attvalue for="11" value="GA" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WJP8D0" label="WJP8D0">
+        <attvalues>
+          <attvalue for="0" value="WJP8D0" />
+          <attvalue for="1" value="RSTC" />
+          <attvalue for="2" value="STRUCTURE" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0075 IN BN     CO D RANGER OPE" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT BENNING" />
+          <attvalue for="10" value="FORT BENNING" />
+          <attvalue for="11" value="GA" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+      <node id="WJP8T0" label="WJP8T0">
+        <attvalues>
+          <attvalue for="0" value="WJP8T0" />
+          <attvalue for="1" value="HHC RSTB" />
+          <attvalue for="2" value="STRUCTURE" />
+          <attvalue for="3" value="MTOE" />
+          <attvalue for="4" value="0075 IN BN     HHC REGIMENTAL" />
+          <attvalue for="5" value="SP" />
+          <attvalue for="6" value="1.0" />
+          <attvalue for="9" value="FORT BENNING" />
+          <attvalue for="10" value="FORT BENNING" />
+          <attvalue for="11" value="GA" />
+          <attvalue for="12" value="USA" />
+          <attvalue for="7" value="2018" />
+          <attvalue for="8" value="false" />
+        </attvalues>
+      </node>
+    </nodes>
+    <edges>
+      <edge source="WDSTFF" target="W028AA" id="0" />
+      <edge source="WDSTFF" target="WC3JAA" id="1" />
+      <edge source="WDSTFF" target="WDSRAA" id="2" />
+      <edge source="WDSTFF" target="WDSSAA" id="3" />
+      <edge source="WDSTFF" target="WDSTAA" id="4" />
+      <edge source="WDSTFF" target="WDSVAA" id="5" />
+      <edge source="WDSTFF" target="WJH1AA" id="6" />
+      <edge source="WDSTFF" target="WJMFAA" id="7" />
+      <edge source="W028AA" target="W02AAA" id="8" />
+      <edge source="W028AA" target="W02BAA" id="9" />
+      <edge source="W028AA" target="W02CAA" id="10" />
+      <edge source="W028AA" target="W02DAA" id="11" />
+      <edge source="WC3JAA" target="WC3JA0" id="12" />
+      <edge source="WC3JAA" target="WC3JB0" id="13" />
+      <edge source="WC3JAA" target="WC3JC0" id="14" />
+      <edge source="WC3JAA" target="WC3JD0" id="15" />
+      <edge source="WC3JAA" target="WC3JT0" id="16" />
+      <edge source="WDSRAA" target="WDSRA0" id="17" />
+      <edge source="WDSRAA" target="WDSRB0" id="18" />
+      <edge source="WDSRAA" target="WDSRC0" id="19" />
+      <edge source="WDSRAA" target="WDSRD0" id="20" />
+      <edge source="WDSRAA" target="WDSRE0" id="21" />
+      <edge source="WDSRAA" target="WDSRF0" id="22" />
+      <edge source="WDSRAA" target="WDSRT0" id="23" />
+      <edge source="WDSSAA" target="WDSSA0" id="24" />
+      <edge source="WDSSAA" target="WDSSB0" id="25" />
+      <edge source="WDSSAA" target="WDSSC0" id="26" />
+      <edge source="WDSSAA" target="WDSSD0" id="27" />
+      <edge source="WDSSAA" target="WDSST0" id="28" />
+      <edge source="WDSTAA" target="WDST99" id="29" />
+      <edge source="WDSVAA" target="W029AA" id="30" />
+      <edge source="WJMFAA" target="WJMFA0" id="31" />
+      <edge source="WJMFAA" target="WJMFB0" id="32" />
+      <edge source="WJMFAA" target="WJMFC0" id="33" />
+      <edge source="WJMFAA" target="WJMFD0" id="34" />
+      <edge source="WJMFAA" target="WJMFT0" id="35" />
+      <edge source="WDDDFF" target="W6Z1AA" id="36" />
+      <edge source="WDDDFF" target="WDDDAA" id="37" />
+      <edge source="WDDDFF" target="WH3LAA" id="38" />
+      <edge source="WDDDFF" target="WH3MAA" id="39" />
+      <edge source="WDDDFF" target="WJBLAA" id="40" />
+      <edge source="WDDDFF" target="WJP8AA" id="41" />
+      <edge source="WDDDAA" target="WDDD99" id="42" />
+      <edge source="WH3LAA" target="W6ZFAA" id="43" />
+      <edge source="WH3LAA" target="WH3L99" id="44" />
+      <edge source="WH3LAA" target="WH3LA0" id="45" />
+      <edge source="WH3LAA" target="WH3LB0" id="46" />
+      <edge source="WH3LAA" target="WH3LC0" id="47" />
+      <edge source="WH3LAA" target="WH3LD0" id="48" />
+      <edge source="WH3LAA" target="WH3LE0" id="49" />
+      <edge source="WH3LAA" target="WH3LT0" id="50" />
+      <edge source="WH3MAA" target="W6ZEAA" id="51" />
+      <edge source="WH3MAA" target="WH3M99" id="52" />
+      <edge source="WH3MAA" target="WH3MA0" id="53" />
+      <edge source="WH3MAA" target="WH3MB0" id="54" />
+      <edge source="WH3MAA" target="WH3MC0" id="55" />
+      <edge source="WH3MAA" target="WH3MD0" id="56" />
+      <edge source="WH3MAA" target="WH3ME0" id="57" />
+      <edge source="WH3MAA" target="WH3MT0" id="58" />
+      <edge source="WJBLAA" target="W6ZDAA" id="59" />
+      <edge source="WJBLAA" target="WJBL99" id="60" />
+      <edge source="WJBLAA" target="WJBLA0" id="61" />
+      <edge source="WJBLAA" target="WJBLB0" id="62" />
+      <edge source="WJBLAA" target="WJBLC0" id="63" />
+      <edge source="WJBLAA" target="WJBLD0" id="64" />
+      <edge source="WJBLAA" target="WJBLE0" id="65" />
+      <edge source="WJBLAA" target="WJBLT0" id="66" />
+      <edge source="WJP8AA" target="W6ZCAA" id="67" />
+      <edge source="WJP8AA" target="WJP8A0" id="68" />
+      <edge source="WJP8AA" target="WJP8B0" id="69" />
+      <edge source="WJP8AA" target="WJP8C0" id="70" />
+      <edge source="WJP8AA" target="WJP8D0" id="71" />
+      <edge source="WJP8AA" target="WJP8T0" id="72" />
+    </edges>
+  </graph>
+</gexf>

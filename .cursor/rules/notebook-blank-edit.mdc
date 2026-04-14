@@ -1,0 +1,36 @@
+---
+description: Always perform a visible blank edit to Cell 1 before any other notebook edits in a session
+alwaysApply: true
+---
+
+# Notebook Blank Edit — Always First
+
+Before making ANY edit to ANY `.ipynb` notebook in a session, the FIRST action must be a visible blank edit to **Cell index 1** (the burn-slot cell). This ensures the user can see all subsequent edits in the diff view.
+
+## Required first action every session
+
+```python
+# Read Cell 1 first, then edit it with a visible session marker:
+# Old:
+##### EDIT BLANK ###### DISCARD
+# session: <previous date>
+
+# New:
+##### EDIT BLANK ###### DISCARD
+# session: <today's date> — <brief topic>
+```
+
+## Rules
+
+- Do this BEFORE any other notebook tool call, no exceptions.
+- Announce it explicitly: "Blank edit done — Cell 1 updated."
+- The change must be visually distinct (update the date or topic comment).
+- If the notebook is not being edited in this session, the blank edit is not required.
+- Never skip this step even for "small" edits — the user verifies all changes via diff view.
+
+## Tool rules for ALL .ipynb notebook edits
+
+- ALL cell content edits must use the **`EditNotebook`** tool (Cursor native). This is the only way edits are visible to the user in the diff view.
+- **NEVER use `notebook_edit_cell`** under any circumstances — it bypasses the diff view entirely.
+- For `notebook_bulk_add_cells`, `notebook_move_cell`, `notebook_split_cell`, `notebook_merge_cells`, and `notebook_duplicate_cell`: these are rare structural operations. **Ask the user for permission before using any of them.**
+- All other notebook_mcp tools (read, search, outline, metadata reads, validation, etc.) are fine to use freely without asking.

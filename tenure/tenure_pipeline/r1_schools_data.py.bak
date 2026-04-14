@@ -1,0 +1,1831 @@
+# tenure_pipeline/r1_schools_data.py
+# ---------------------------------------------------------------------------
+# Master list of R1 CS departments for the PEER tenure pipeline.
+# Each school has a flat "urls" list — all URLs are equal candidates.
+# Add new URLs directly to the list; the pipeline tracks per-URL stats.
+#
+# To add a new URL for a school: put it in the 'new_url' column of
+# url_update_worksheet.csv and run apply_url_updates.py.
+# Cell 3A will query any URL not yet in the plan — no other action needed.
+#
+# Wave history:
+#   Original 9  : Cornell, UIUC, Indiana, UT Austin, UW-Madison, Purdue,
+#                 Georgia Tech, UMD, Brown
+#   Wave 2 +25  : Added April 4, 2026
+#   Wave 3 +80  : Added April 5, 2026
+# ---------------------------------------------------------------------------
+
+PILOT_SCHOOLS = [
+    {
+        "university" : "Cornell University",
+        "dept_name"  : "Computer Science",
+        "urls"       : ["https://www.cs.cornell.edu/people"],
+        "notes"      : "General people page \u2014 faculty mixed with postdocs and staff; filter by title at parse time",
+    },
+    {
+        "university" : "University of Illinois Urbana-Champaign",
+        "dept_name"  : "Computer Science (Siebel School of Computing and Data Science from 2024)",
+        "urls"       : [
+            "https://cs.illinois.edu/about/people/all-faculty/department-faculty",
+            "http://www.cs.uiuc.edu/people/faculty",
+            "http://cs.uiuc.edu/people/faculty"
+        ],
+        "notes"      : "Old domain cs.uiuc.edu used before ~2009 university rebrand to Illinois; renamed Siebel School 2024",
+    },
+    {
+        "university" : "Indiana University",
+        "dept_name"  : "Computer Science (Luddy School of Informatics, Computing, and Engineering)",
+        "urls"       : [
+            "https://cs.indiana.edu/people/index.html",
+            "http://www.cs.indiana.edu/People/",
+            "http://www.cs.indiana.edu/people/",
+            "https://www.soic.indiana.edu/faculty/index.html"
+        ],
+        "notes"      : "CS within Luddy School (renamed from SOIC 2019); old domain cs.indiana.edu stable; soic.indiana.edu for 2010s era",
+    },
+    {
+        "university" : "University of Texas at Austin",
+        "dept_name"  : "Computer Science",
+        "urls"       : ["https://www.cs.utexas.edu/people"],
+        "notes"      : "General people page \u2014 includes faculty, research scientists, postdocs; filter by title at parse time",
+    },
+    {
+        "university" : "University of Wisconsin-Madison",
+        "dept_name"  : "Computer Sciences",
+        "urls"       : [
+            "https://www.cs.wisc.edu/people/faculty",
+            "https://www.cs.wisc.edu/people/",
+            "http://www.cs.wisc.edu/people/faculty"
+        ],
+        "notes"      : "Faculty list at /people/faculty; original scrape mistakenly used /people/pb (Paul Barford bio page) \u2014 corrected",
+    },
+    {
+        "university" : "Purdue University",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://cs.purdue.edu/people/faculty/index.html",
+            "http://www.cs.purdue.edu/people/faculty/index.html",
+            "http://www.cs.purdue.edu/people/faculty/"
+        ],
+        "notes"      : "Primary URL lacks www. prefix; old snapshots likely under www.cs.purdue.edu",
+    },
+    {
+        "university" : "Georgia Institute of Technology",
+        "dept_name"  : "School of Computer Science",
+        "urls"       : [
+            "https://scs.gatech.edu/people/faculty",
+            "http://www.cc.gatech.edu/people/faculty"
+        ],
+        "notes"      : "SCS within College of Computing; old snapshots likely under cc.gatech.edu before SCS separation",
+    },
+    {
+        "university" : "University of Maryland",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.cs.umd.edu/people/faculty",
+            "https://www.cs.umd.edu/people"
+        ],
+        "notes"      : "General people page \u2014 includes faculty, postdocs, staff; filter by title at parse time",
+    },
+    {
+        "university" : "Brown University",
+        "dept_name"  : "Computer Science",
+        "urls"       : ["https://www.cs.brown.edu/people/faculty/"],
+        "notes"      : "",
+    },
+    {
+        "university" : "Carnegie Mellon University",
+        "dept_name"  : "Computer Science (School of Computer Science)",
+        "urls"       : [
+            "https://www.cs.cmu.edu/people/faculty",
+            "http://www.cs.cmu.edu/~faculty/",
+            "http://www.csd.cs.cmu.edu/people"
+        ],
+        "notes"      : "SCS houses multiple depts; filtering to CSD. Old directory at ~faculty/",
+    },
+    {
+        "university" : "Massachusetts Institute of Technology",
+        "dept_name"  : "Computer Science (EECS / CSAIL)",
+        "urls"       : [
+            "https://www.eecs.mit.edu/people/",
+            "https://www.eecs.mit.edu/role/faculty/",
+            "https://www.eecs.mit.edu/role/faculty-cs/",
+            "http://www.eecs.mit.edu/faculty/",
+            "https://www.csail.mit.edu/people",
+            "http://www.ai.mit.edu/people/",
+            "http://www.csail.mit.edu/biographies/"
+        ],
+        "notes"      : "EECS dept is primary home for CS faculty; eecs.mit.edu added 2026 \u2014 better Wayback coverage than CSAIL; CSAIL formed 2003 from AI Lab + LCS",
+    },
+    {
+        "university" : "University of California San Diego",
+        "dept_name"  : "Computer Science and Engineering",
+        "urls"       : [
+            "https://cse.ucsd.edu/faculty",
+            "http://www-cse.ucsd.edu/people/faculty",
+            "http://www.cse.ucsd.edu/people/faculty",
+            "http://www-cse.ucsd.edu/",
+            "http://www.cse.ucsd.edu/"
+        ],
+        "notes"      : "UC system likely Drupal; old domain was www-cse.ucsd.edu (note hyphen); base domains added for CDX wildcard coverage",
+    },
+    {
+        "university" : "Columbia University",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.cs.columbia.edu/people/faculty/",
+            "http://www.cs.columbia.edu/people/faculty/",
+            "http://www.cs.columbia.edu/~faculty/"
+        ],
+        "notes"      : "Standalone CS dept in Fu Foundation School of Engineering; /people/ is nav-only hub \u2014 actual faculty list at /people/faculty/",
+    },
+    {
+        "university" : "Duke University",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://cs.duke.edu/people/",
+            "https://cs.duke.edu/people/faculty",
+            "http://www.cs.duke.edu/faculty/",
+            "http://www.cs.duke.edu/people/faculty/",
+            "http://www.cs.duke.edu/people/"
+        ],
+        "notes"      : "Standalone CS dept in Trinity College of Arts and Sciences; /people/ path added for broader Wayback coverage",
+    },
+    {
+        "university" : "University of Massachusetts Amherst",
+        "dept_name"  : "College of Information and Computer Sciences",
+        "urls"       : [
+            "https://www.cics.umass.edu/people/faculty",
+            "http://www.cs.umass.edu/csinfo/people/faculty",
+            "http://www.cs.umass.edu/faculty/"
+        ],
+        "notes"      : "Became standalone CICS college 2012; before was CS dept; domain cs.umass.edu \u2192 cics.umass.edu",
+    },
+    {
+        "university" : "University of North Carolina Chapel Hill",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://cs.unc.edu/people/faculty/",
+            "http://www.cs.unc.edu/~faculty/",
+            "http://www.cs.unc.edu/people/faculty/"
+        ],
+        "notes"      : "Standalone CS dept; old directory used ~faculty/ tilde paths",
+    },
+    {
+        "university" : "Rice University",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://cs.rice.edu/people",
+            "http://www.cs.rice.edu/CS/Faculty/",
+            "http://cs.rice.edu/CS/Faculty/"
+        ],
+        "notes"      : "Small CS dept; expected clean static HTML for early years",
+    },
+    {
+        "university" : "Rutgers University",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.cs.rutgers.edu/people/faculty-members",
+            "http://www.cs.rutgers.edu/faculty/",
+            "http://cs.rutgers.edu/research/faculty/",
+            "http://www.cs.rutgers.edu/"
+        ],
+        "notes"      : "New Brunswick campus; large public R1",
+    },
+    {
+        "university" : "Ohio State University",
+        "dept_name"  : "Computer Science and Engineering",
+        "urls"       : [
+            "https://cse.osu.edu/people/faculty",
+            "http://www.cse.ohio-state.edu/people/faculty",
+            "http://www.cis.ohio-state.edu/faculty.html",
+            "http://www.cis.ohio-state.edu/",
+            "http://www.cse.ohio-state.edu/"
+        ],
+        "notes"      : "Combined CSE dept; even older domain was cis.ohio-state.edu; base domains added for CDX wildcard coverage",
+    },
+    {
+        "university" : "Penn State University",
+        "dept_name"  : "Computer Science and Engineering",
+        "urls"       : [
+            "https://www.cse.psu.edu/people/faculty",
+            "http://www.cse.psu.edu/faculty/",
+            "http://www.cse.psu.edu/research/faculty/",
+            "http://www.cse.psu.edu/"
+        ],
+        "notes"      : "CSE dept at University Park campus; base domain added for CDX wildcard coverage",
+    },
+    {
+        "university" : "Virginia Tech",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://cs.vt.edu/people/faculty.html",
+            "http://www.cs.vt.edu/people/faculty.html",
+            "http://cs.vt.edu/faculty/",
+            "http://www.cs.vt.edu/"
+        ],
+        "notes"      : "Standalone CS dept; expected clean table-based HTML for older years; base domain added for CDX wildcard coverage",
+    },
+    {
+        "university" : "North Carolina State University",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://csc.ncsu.edu/group/faculty/",
+            "https://csc.ncsu.edu/group/faculty/professors/",
+            "https://csc.ncsu.edu/directories/faculty.php"
+        ],
+        "notes"      : "group/faculty/ and /faculty/ are redirect-only in Wayback; actual table-based content at /directories/faculty.php",
+    },
+    {
+        "university" : "University of Florida",
+        "dept_name"  : "Computer and Information Science and Engineering",
+        "urls"       : [
+            "https://cise.ufl.edu/people/faculty/",
+            "https://www.cise.ufl.edu/research/faculty/",
+            "http://www.cise.ufl.edu/people/faculty/",
+            "http://cise.ufl.edu/research/faculty/"
+        ],
+        "notes"      : "CISE dept; research/faculty sub-page covers tenure-track faculty",
+    },
+    {
+        "university" : "Stony Brook University",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.cs.stonybrook.edu/people/faculty",
+            "http://www.cs.sunysb.edu/people/faculty/",
+            "http://www.cs.sunysb.edu/faculty/",
+            "http://www.cs.stonybrook.edu/about-us/People/Faculty",
+            "http://www.cs.sunysb.edu/research/faculty/"
+        ],
+        "notes"      : "SUNY system; old domain cs.sunysb.edu (pre-2013 rebrand); /people/faculty/ added on old domain for historical coverage",
+    },
+    {
+        "university" : "University of Pittsburgh",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.cs.pitt.edu/people/faculty",
+            "http://www.cs.pitt.edu/faculty/",
+            "http://cs.pitt.edu/people/faculty/"
+        ],
+        "notes"      : "Standalone CS dept in School of Computing and Information",
+    },
+    {
+        "university" : "University of Arizona",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://cs.arizona.edu/people/faculty",
+            "http://www.cs.arizona.edu/people/faculty/",
+            "http://cs.arizona.edu/faculty/"
+        ],
+        "notes"      : "Standalone CS dept; expected clean HTML faculty pages",
+    },
+    {
+        "university" : "University of California Los Angeles",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.cs.ucla.edu/people/faculty/",
+            "http://www.cs.ucla.edu/faculty/",
+            "http://cs.ucla.edu/people/faculty/"
+        ],
+        "notes"      : "UC system; standalone CS dept in Henry Samueli School of Engineering",
+    },
+    {
+        "university" : "University of Utah",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.cs.utah.edu/research/faculty/",
+            "http://www.cs.utah.edu/research/faculty/",
+            "http://www.cs.utah.edu/people/faculty/"
+        ],
+        "notes"      : "Standalone CS dept; historically strong graphics and systems",
+    },
+    {
+        "university" : "University of Colorado Boulder",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.colorado.edu/cs/people/faculty",
+            "http://www.cs.colorado.edu/people/faculty/",
+            "http://cs.colorado.edu/people/faculty/"
+        ],
+        "notes"      : "Dept URL moved from cs.colorado.edu to colorado.edu/cs",
+    },
+    {
+        "university" : "University of Rochester",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.cs.rochester.edu/people/faculty/",
+            "http://www.cs.rochester.edu/u/faculty/",
+            "http://cs.rochester.edu/people/faculty/"
+        ],
+        "notes"      : "Standalone CS dept; old directory used ~faculty/ tilde paths",
+    },
+    {
+        "university" : "Dartmouth College",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://web.cs.dartmouth.edu/people",
+            "https://web.cs.dartmouth.edu/people/faculty",
+            "http://www.cs.dartmouth.edu/faculty.html",
+            "http://www.cs.dartmouth.edu/people/faculty/"
+        ],
+        "notes"      : "Small Ivy CS dept; domain www.cs.dartmouth.edu \u2192 web.cs.dartmouth.edu",
+    },
+    {
+        "university" : "Johns Hopkins University",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.cs.jhu.edu/people/",
+            "http://www.cs.jhu.edu/~faculty/",
+            "http://cs.jhu.edu/people/faculty/",
+            "http://www.cs.jhu.edu/people_f.html",
+            "http://www.cs.jhu.edu/people_rf.html",
+            "http://www.cs.jhu.edu/people_ap.html"
+        ],
+        "notes"      : "Standalone CS dept in Whiting School of Engineering",
+    },
+    {
+        "university" : "University of Minnesota",
+        "dept_name"  : "Computer Science and Engineering",
+        "urls"       : [
+            "https://cse.umn.edu/cs/faculty",
+            "http://www.cs.umn.edu/research/faculty/",
+            "http://www.cs.umn.edu/directory/faculty.html"
+        ],
+        "notes"      : "CS within CSE dept at Twin Cities campus",
+    },
+    {
+        "university" : "Michigan State University",
+        "dept_name"  : "Computer Science and Engineering",
+        "urls"       : [
+            "https://www.cse.msu.edu/people/faculty/",
+            "http://www.cse.msu.edu/people/faculty/",
+            "http://www.cse.msu.edu/~cse_tech/faculty/",
+            "http://cse.msu.edu/people/faculty/"
+        ],
+        "notes"      : "Combined CSE dept; ~cse_tech/faculty/ legacy; http(s)://www.cse.msu.edu/people/faculty/ are the same page (CDX may canonicalize to :80)",
+    },
+    {
+        "university" : "University of Washington",
+        "dept_name"  : "Computer Science and Engineering (Paul G. Allen School)",
+        "urls"       : [
+            "https://www.cs.washington.edu/people/faculty/",
+            "http://www.cs.washington.edu/research/faculty/",
+            "http://www.cs.washington.edu/people/"
+        ],
+        "notes"      : "Top-ranked program; Allen School; old snapshots at www.cs.washington.edu",
+    },
+    {
+        "university" : "University of Virginia",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://engineering.virginia.edu/departments/computer-science/faculty",
+            "http://www.cs.virginia.edu/people/faculty/",
+            "http://www.cs.virginia.edu/~faculty/",
+            "http://www.cs.virginia.edu/people/",
+            "http://www.cs.virginia.edu/people/faculty.html"
+        ],
+        "notes"      : "CS in Engineering; old domain www.cs.virginia.edu; URL moved to engineering.virginia.edu",
+    },
+    {
+        "university" : "Stanford University",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.cs.stanford.edu/people",
+            "http://www-cs-faculty.stanford.edu/",
+            "http://www.cs.stanford.edu/faculty.html"
+        ],
+        "notes"      : "Top-ranked program; old tilde-style faculty list at www-cs-faculty.stanford.edu",
+    },
+    {
+        "university" : "UC Berkeley",
+        "dept_name"  : "Electrical Engineering and Computer Sciences (EECS)",
+        "urls"       : [
+            "https://www2.eecs.berkeley.edu/Faculty/Lists/CS/faculty.html",
+            "https://www2.eecs.berkeley.edu/Faculty/Lists/faculty.html",
+            "https://eecs.berkeley.edu/research/faculty/",
+            "http://www.eecs.berkeley.edu/Faculty/",
+            "http://www.cs.berkeley.edu/people/faculty/",
+            "http://www.eecs.berkeley.edu/Faculty/Lists/CS/list.shtml"
+        ],
+        "notes"      : "EECS dept; CS and EE share faculty; old domain www.cs.berkeley.edu",
+    },
+    {
+        "university" : "University of Michigan",
+        "dept_name"  : "Electrical Engineering and Computer Science (EECS)",
+        "urls"       : [
+            "https://cse.engin.umich.edu/people/faculty/",
+            "http://www.eecs.umich.edu/eecs/faculty/",
+            "http://www.cse.umich.edu/~CSE/"
+        ],
+        "notes"      : "EECS dept; CSE section within EECS; both eecs.umich.edu and cse.umich.edu domains used",
+    },
+    {
+        "university" : "Harvard University",
+        "dept_name"  : "Computer Science (SEAS / EECS)",
+        "urls"       : [
+            "https://www.seas.harvard.edu/computer-science/faculty",
+            "http://www.eecs.harvard.edu/people/",
+            "http://www.eecs.harvard.edu/research/",
+            "http://www.deas.harvard.edu/people/faculty/",
+            "http://www.eecs.harvard.edu/",
+            "http://www.deas.harvard.edu/",
+            "http://www.seas.harvard.edu/ourfaculty/viewalpha/index.html"
+        ],
+        "notes"      : "EECS dept within SEAS; old domain was DEAS before ~2007; base domains added for CDX wildcard coverage",
+    },
+    {
+        "university" : "Northwestern University",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.mccormick.northwestern.edu/computer-science/people/faculty/",
+            "http://www.cs.northwestern.edu/people/faculty.html",
+            "http://www.eecs.northwestern.edu/faculty/",
+            "http://www.cs.northwestern.edu/"
+        ],
+        "notes"      : "CS within McCormick School; old domain www.cs.northwestern.edu; EECS umbrella in some eras",
+    },
+    {
+        "university" : "New York University",
+        "dept_name"  : "Computer Science (Courant / Tandon)",
+        "urls"       : [
+            "https://cs.nyu.edu/dynamic/people/faculty/",
+            "https://cs.nyu.edu/dynamic/people/researchers/",
+            "https://cs.nyu.edu/dynamic/people/phd_students/",
+            "https://cs.nyu.edu/dynamic/people/staff/",
+            "http://www.cs.nyu.edu/faculty/",
+            "http://cs.nyu.edu/cs/full-faculty.html"
+        ],
+        "notes"      : "Courant Institute CS; /dynamic/people/ has separate pages for faculty, researchers, phd_students, staff \u2014 all scraped via alt_urls",
+    },
+    {
+        "university" : "Yale University",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://cpsc.yale.edu/people/faculty",
+            "https://cpsc.yale.edu/people",
+            "http://www.cs.yale.edu/people/faculty.html",
+            "http://www.cs.yale.edu/people/",
+            "http://www.cs.yale.edu/faculty/"
+        ],
+        "notes"      : "Dept code CPSC; old domain www.cs.yale.edu (pre-2013); moved to cpsc.yale.edu; /people paths added for broader Wayback coverage",
+    },
+    {
+        "university" : "University of Pennsylvania",
+        "dept_name"  : "Computer and Information Science",
+        "urls"       : [
+            "https://directory.seas.upenn.edu/computer-and-information-science/",
+            "https://www.cis.upenn.edu/people/faculty/",
+            "http://www.cis.upenn.edu/index.php/people/",
+            "http://www.cis.upenn.edu/faculty/",
+            "http://www.cis.upenn.edu/"
+        ],
+        "notes"      : "CIS dept in SEAS; www.cis.upenn.edu domain stable; older pages used index.php; base domain added for CDX wildcard coverage",
+    },
+    {
+        "university" : "University of Chicago",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://cs.uchicago.edu/people/faculty/",
+            "http://www.cs.uchicago.edu/people/faculty/",
+            "http://www.cs.uchicago.edu/faculty/"
+        ],
+        "notes"      : "Standalone CS dept; cs.uchicago.edu; historically strong theory group",
+    },
+    {
+        "university" : "UC Santa Barbara",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.cs.ucsb.edu/people/faculty",
+            "http://www.cs.ucsb.edu/research/faculty/",
+            "http://www.cs.ucsb.edu/people/"
+        ],
+        "notes"      : "UC system; cs.ucsb.edu domain stable; strong networking and security groups",
+    },
+    {
+        "university" : "UC Irvine",
+        "dept_name"  : "Computer Science (Donald Bren School of ICS)",
+        "urls"       : [
+            "https://www.ics.uci.edu/faculty/",
+            "http://www.ics.uci.edu/people/faculty/",
+            "http://www.cs.uci.edu/faculty/"
+        ],
+        "notes"      : "ICS school; CS + informatics + stats share faculty list; www.ics.uci.edu domain",
+    },
+    {
+        "university" : "UC Davis",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://cs.ucdavis.edu/people",
+            "https://www.cs.ucdavis.edu/research/faculty/",
+            "http://www.cs.ucdavis.edu/people/faculty/",
+            "http://www.cs.ucdavis.edu/faculty/"
+        ],
+        "notes"      : "UC system; cs.ucdavis.edu domain stable; research/faculty subpage used",
+    },
+    {
+        "university" : "University of Southern California",
+        "dept_name"  : "Computer Science (Viterbi School)",
+        "urls"       : [
+            "https://www.cs.usc.edu/directory/faculty/",
+            "https://www.cs.usc.edu/research/faculty/",
+            "http://www.cs.usc.edu/people/faculty/",
+            "http://www.usc.edu/dept/cs/faculty/"
+        ],
+        "notes"      : "CS in Viterbi School; www.cs.usc.edu domain; research/faculty subpage covers tenure-track",
+    },
+    {
+        "university" : "University of Oregon",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://cas.uoregon.edu/directory/computer-and-data-sciences",
+            "https://www.cs.uoregon.edu/people/faculty/",
+            "http://www.cs.uoregon.edu/research/faculty/",
+            "http://www.cs.uoregon.edu/faculty/"
+        ],
+        "notes"      : "Dept now part of School of Computer and Data Sciences (SCDS); faculty dir moved to cas.uoregon.edu",
+    },
+    {
+        "university" : "Oregon State University",
+        "dept_name"  : "Electrical Engineering and Computer Science",
+        "urls"       : [
+            "https://engineering.oregonstate.edu/EECS/About/People",
+            "https://eecs.oregonstate.edu/research/people/faculty/",
+            "http://www.cs.orst.edu/faculty/",
+            "http://www.eecs.oregonstate.edu/faculty/"
+        ],
+        "notes"      : "EECS dept; old domain was cs.orst.edu before rename to oregonstate.edu/eecs",
+    },
+    {
+        "university" : "Washington State University",
+        "dept_name"  : "Electrical Engineering and Computer Science",
+        "urls"       : [
+            "https://school.eecs.wsu.edu/faculty/",
+            "https://school.eecs.wsu.edu/people/faculty/",
+            "http://www.eecs.wsu.edu/people/faculty/",
+            "http://www.cs.wsu.edu/people/faculty/"
+        ],
+        "notes"      : "EECS school; older domains include www.cs.wsu.edu and www.eecs.wsu.edu",
+    },
+    {
+        "university" : "University of Nevada Las Vegas",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.unlv.edu/cs/about/faculty",
+            "http://www.cs.unlv.edu/people/faculty/",
+            "http://www.cs.unlv.edu/faculty/",
+            "http://www.cs.unlv.edu/"
+        ],
+        "notes"      : "CS in Consolidated School of Engineering; old domain www.cs.unlv.edu; base domain added for CDX wildcard coverage",
+    },
+    {
+        "university" : "University of Nevada Reno",
+        "dept_name"  : "Computer Science and Engineering",
+        "urls"       : [
+            "https://www.cse.unr.edu/research/faculty/",
+            "http://www.cse.unr.edu/faculty/",
+            "http://www.cs.unr.edu/faculty/",
+            "http://www.cse.unr.edu/",
+            "http://www.cs.unr.edu/",
+            "http://www.unr.edu/cse/people/faculty"
+        ],
+        "notes"      : "CSE dept; cse.unr.edu domain; old alt was cs.unr.edu; base domains added for CDX wildcard coverage",
+    },
+    {
+        "university" : "Colorado State University",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.cs.colostate.edu/people/faculty/",
+            "http://www.cs.colostate.edu/faculty/",
+            "http://www.cs.colostate.edu/",
+            "http://www.engr.colostate.edu/ece/facultystaff/index.cfm"
+        ],
+        "notes"      : "Standalone CS dept; cs.colostate.edu domain stable across eras",
+    },
+    {
+        "university" : "Iowa State University",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.cs.iastate.edu/people/faculty/",
+            "http://www.cs.iastate.edu/faculty/",
+            "http://www.cs.iastate.edu/",
+            "https://www.cs.iastate.edu/people"
+        ],
+        "notes"      : "Standalone CS dept; cs.iastate.edu domain stable; large land-grant R1",
+    },
+    {
+        "university" : "University of Iowa",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://cs.uiowa.edu/people/faculty/",
+            "http://www.cs.uiowa.edu/people/faculty/",
+            "http://www.cs.uiowa.edu/faculty/"
+        ],
+        "notes"      : "Standalone CS dept; cs.uiowa.edu domain; public flagship R1",
+    },
+    {
+        "university" : "University of Nebraska-Lincoln",
+        "dept_name"  : "Computer Science and Engineering",
+        "urls"       : [
+            "https://computing.unl.edu/faculty-staff/",
+            "https://computing.unl.edu/faculty-research-directory/",
+            "https://computing.unl.edu/directory/",
+            "https://cse.unl.edu/people/faculty/",
+            "http://www.cse.unl.edu/people/",
+            "http://www.cse.unl.edu/research/faculty/",
+            "http://www.cse.unl.edu/"
+        ],
+        "notes"      : "Dept renamed to School of Computing 2023; computing.unl.edu is new domain; faculty-research-directory added 2026; old cse.unl.edu still archived",
+    },
+    {
+        "university" : "Kansas State University",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.cs.ksu.edu/about/people/faculty/",
+            "https://www.cs.ksu.edu/people/faculty/",
+            "http://www.cis.ksu.edu/content/faculty/",
+            "http://www.cis.ksu.edu/faculty/"
+        ],
+        "notes"      : "CS dept; old domain was cis.ksu.edu (Computing and Information Sciences) before rebrand",
+    },
+    {
+        "university" : "University of Kansas",
+        "dept_name"  : "Electrical Engineering and Computer Science",
+        "urls"       : [
+            "https://www.eecs.ku.edu/people/faculty/",
+            "http://www.eecs.ku.edu/faculty/",
+            "http://www.ittc.ku.edu/faculty/"
+        ],
+        "notes"      : "EECS dept; eecs.ku.edu domain; ITTC (IT&T Center) also hosted faculty lists",
+    },
+    {
+        "university" : "University of Missouri",
+        "dept_name"  : "Electrical Engineering and Computer Science",
+        "urls"       : [
+            "https://engineering.missouri.edu/departments/eecs/eecs-faculty/",
+            "https://eecs.missouri.edu/people/faculty/",
+            "http://www.cs.missouri.edu/people/faculty/",
+            "http://www.cs.missouri.edu/faculty/",
+            "http://www.cs.missouri.edu/"
+        ],
+        "notes"      : "CS merged into EECS dept; old domain www.cs.missouri.edu; Columbia campus; base domain added for CDX wildcard coverage",
+    },
+    {
+        "university" : "University of Kentucky",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://cs.engr.uky.edu/people-4",
+            "https://www.cs.uky.edu/people/faculty/",
+            "http://www.cs.uky.edu/faculty/",
+            "http://www.engr.uky.edu/research/academics/departments/cs/"
+        ],
+        "notes"      : "CS in College of Engineering; cs.uky.edu domain; old snapshots may be under engr.uky.edu",
+    },
+    {
+        "university" : "Wayne State University",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://engineering.wayne.edu/computer-science/faculty",
+            "https://cs.wayne.edu/people/faculty/",
+            "http://www.cs.wayne.edu/people/faculty/",
+            "http://www.cs.wayne.edu/faculty/",
+            "http://www.cs.wayne.edu/"
+        ],
+        "notes"      : "Urban R1; cs.wayne.edu domain; Detroit, Michigan; base domain added for CDX wildcard coverage",
+    },
+    {
+        "university" : "University of Notre Dame",
+        "dept_name"  : "Computer Science and Engineering",
+        "urls"       : [
+            "https://cse.nd.edu/people/faculty/",
+            "http://www.cse.nd.edu/people/faculty/",
+            "http://www.cse.nd.edu/research/faculty/"
+        ],
+        "notes"      : "CSE dept in College of Engineering; cse.nd.edu domain stable",
+    },
+    {
+        "university" : "Texas A&M University",
+        "dept_name"  : "Computer Science and Engineering",
+        "urls"       : [
+            "https://engineering.tamu.edu/cse/profiles/index.html#Research%20Staff",
+            "http://www.cse.tamu.edu/research/faculty/",
+            "http://www.cs.tamu.edu/faculty/"
+        ],
+        "notes"      : "CSE dept in College of Engineering; cse.tamu.edu domain; College Station campus",
+    },
+    {
+        "university" : "University of Houston",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.uh.edu/nsm/computer-science/people/faculty/index.php",
+            "https://www.cs.uh.edu/people/faculty/",
+            "http://www.cs.uh.edu/faculty/",
+            "http://www.uh.edu/nsm/computer-science/faculty/"
+        ],
+        "notes"      : "CS in NSM (Natural Sciences and Mathematics); cs.uh.edu domain",
+    },
+    {
+        "university" : "University of Texas at Dallas",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://cs.utdallas.edu/people/faculty/",
+            "http://www.cs.utdallas.edu/people/faculty/",
+            "http://www.utdallas.edu/~faculty/cs/"
+        ],
+        "notes"      : "Standalone CS dept; cs.utdallas.edu domain; UTD grew rapidly in 2000s",
+    },
+    {
+        "university" : "University of Texas at Arlington",
+        "dept_name"  : "Computer Science and Engineering",
+        "urls"       : [
+            "https://www.uta.edu/academics/schools-colleges/engineering/academics/departments/cse/faculty-directory",
+            "https://www.uta.edu/academics/schools-colleges/engineering/departments/cse/people/faculty",
+            "http://www.cse.uta.edu/people/faculty/",
+            "http://www.cse.uta.edu/faculty/"
+        ],
+        "notes"      : "CSE dept in College of Engineering; old domain www.cse.uta.edu",
+    },
+    {
+        "university" : "Texas Tech University",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.depts.ttu.edu/cs/people/faculty/",
+            "http://www.cs.ttu.edu/people/faculty/",
+            "http://www.cs.ttu.edu/faculty/"
+        ],
+        "notes"      : "CS in College of Engineering; depts.ttu.edu/cs path; old domain www.cs.ttu.edu",
+    },
+    {
+        "university" : "University of Oklahoma",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.ou.edu/coe/cs/people/faculty",
+            "http://www.cs.ou.edu/faculty/",
+            "http://www.ou.edu/~cs/faculty/"
+        ],
+        "notes"      : "CS in Gallogly College of Engineering; cs.ou.edu domain",
+    },
+    {
+        "university" : "Oklahoma State University",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://cas.okstate.edu/computer_science/about_us/faculty_staff.html",
+            "https://www.cs.okstate.edu/people/faculty/",
+            "http://www.cs.okstate.edu/faculty/",
+            "http://www.eecs.okstate.edu/people/faculty/",
+            "http://www.cs.okstate.edu/"
+        ],
+        "notes"      : "CS in Stillwater; old EECS umbrella domain also used; base domain added for CDX wildcard coverage",
+    },
+    {
+        "university" : "Louisiana State University",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.csc.lsu.edu/people/faculty/",
+            "http://www.csc.lsu.edu/people/",
+            "http://www.cse.lsu.edu/people/faculty/",
+            "https://www.lsu.edu/eng/cse/people/faculty/index.php"
+        ],
+        "notes"      : "CS (csc) dept; csc.lsu.edu domain; older pages may be under cse.lsu.edu",
+    },
+    {
+        "university" : "University of Tennessee",
+        "dept_name"  : "Electrical Engineering and Computer Science",
+        "urls"       : [
+            "https://eecs.utk.edu/faculty/",
+            "https://www.eecs.utk.edu/people/faculty/",
+            "http://www.cs.utk.edu/people/faculty/",
+            "http://www.cs.utk.edu/faculty/"
+        ],
+        "notes"      : "EECS dept; Knoxville campus; old CS-only domain www.cs.utk.edu",
+    },
+    {
+        "university" : "Vanderbilt University",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://engineering.vanderbilt.edu/people/computer-science/",
+            "https://www.cs.vanderbilt.edu/people/faculty/",
+            "http://www.vuse.vanderbilt.edu/~cs/faculty/",
+            "http://www.eecs.vanderbilt.edu/people/faculty/",
+            "http://www.cs.vanderbilt.edu/",
+            "http://www.eecs.vanderbilt.edu/"
+        ],
+        "notes"      : "CS in School of Engineering; old path used VUSE; base domains added for CDX wildcard coverage",
+    },
+    {
+        "university" : "Clemson University",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.clemson.edu/cecas/departments/computing/people/",
+            "https://www.clemson.edu/science/departments/cs/people/faculty.html",
+            "http://www.cs.clemson.edu/people/faculty/",
+            "http://www.cs.clemson.edu/faculty/",
+            "http://www.cs.clemson.edu/",
+            "http://clemson.edu/computing/faculty.php"
+        ],
+        "notes"      : "CS in College of Science; old domain www.cs.clemson.edu; base domain added for CDX wildcard coverage",
+    },
+    {
+        "university" : "University of Alabama",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.cs.ua.edu/people/faculty/",
+            "http://www.cs.ua.edu/faculty/",
+            "http://cs.ua.edu/people/faculty/",
+            "http://www.cs.ua.edu/",
+            "https://eng.ua.edu/departments/computer-science/",
+            "http://cs.ua.edu/people/researchfaculty.asp",
+            "http://cs.ua.edu/people/index.asp",
+            "http://cs.ua.edu/staff.html"
+        ],
+        "notes"      : "CS in College of Engineering; cs.ua.edu domain; Tuscaloosa campus; base domain added for CDX wildcard coverage",
+    },
+    {
+        "university" : "Auburn University",
+        "dept_name"  : "Computer Science and Software Engineering",
+        "urls"       : [
+            "https://eng.auburn.edu/csse/people/",
+            "https://www.eng.auburn.edu/department/csse/faculty.html",
+            "http://www.eng.auburn.edu/dept/csse/faculty.html",
+            "http://www.cs.auburn.edu/faculty/",
+            "http://www.cs.auburn.edu/"
+        ],
+        "notes"      : "CSSE dept in Samuel Ginn College of Engineering; new URL eng.auburn.edu/csse/people/ (found Apr 2026); old faculty.html path had 0 Wayback snapshots; cs.auburn.edu old domain",
+    },
+    {
+        "university" : "Mississippi State University",
+        "dept_name"  : "Computer Science and Engineering",
+        "urls"       : [
+            "https://www.cs.msstate.edu/people/faculty/",
+            "http://www.cse.msstate.edu/people/faculty/",
+            "http://www.cs.msstate.edu/faculty/"
+        ],
+        "notes"      : "CSE dept; domain was cse.msstate.edu then moved to cs.msstate.edu",
+    },
+    {
+        "university" : "University of South Carolina",
+        "dept_name"  : "Computer Science and Engineering",
+        "urls"       : [
+            "https://www.cse.sc.edu/research/faculty",
+            "http://www.cse.sc.edu/people/faculty/",
+            "http://www.cs.sc.edu/faculty/",
+            "http://www.cse.sc.edu/",
+            "http://www.cs.sc.edu/"
+        ],
+        "notes"      : "CSE dept in College of Engineering; cse.sc.edu domain; old cs.sc.edu; base domains added for CDX wildcard coverage",
+    },
+    {
+        "university" : "University of Central Florida",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.cs.ucf.edu/people/faculty/",
+            "http://www.cs.ucf.edu/faculty/",
+            "http://www.eecs.ucf.edu/people/faculty/"
+        ],
+        "notes"      : "CS in CECS; large program; cs.ucf.edu domain; strong growth post-2000",
+    },
+    {
+        "university" : "Florida State University",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.cs.fsu.edu/people/faculty/",
+            "http://www.cs.fsu.edu/research/faculty/",
+            "http://www.cs.fsu.edu/faculty/"
+        ],
+        "notes"      : "Standalone CS dept; cs.fsu.edu domain stable; Tallahassee campus",
+    },
+    {
+        "university" : "University of South Florida",
+        "dept_name"  : "Computer Science and Engineering",
+        "urls"       : [
+            "https://www.usf.edu/ai-cybersecurity-computing/people/faculty/index.aspx",
+            "https://www.usf.edu/engineering/cse/people/faculty/",
+            "http://www.cse.usf.edu/people/faculty/",
+            "http://www.csee.usf.edu/people/faculty/"
+        ],
+        "notes"      : "Dept now in Bellini College of AI, Cybersecurity and Computing (2025); old CSE domain still in Wayback",
+    },
+    {
+        "university" : "Tulane University",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://sse.tulane.edu/cs/faculty",
+            "http://www.cs.tulane.edu/people/faculty/",
+            "http://www.cs.tulane.edu/faculty/",
+            "http://tulane.edu/sse/faculty/departments/faculty-compsci.cfm"
+        ],
+        "notes"      : "CS in SSE (School of Science and Engineering); old domain www.cs.tulane.edu",
+    },
+    {
+        "university" : "West Virginia University",
+        "dept_name"  : "Computer Science and Electrical Engineering",
+        "urls"       : [
+            "https://www.csee.wvu.edu/research/people/faculty/",
+            "http://www.cs.wvu.edu/people/faculty/",
+            "http://www.csee.wvu.edu/people/faculty/",
+            "http://www.csee.wvu.edu/",
+            "http://www.cs.wvu.edu/",
+            "http://www.lcsee.cemr.wvu.edu/faculty/directory.php",
+            "http://www.statler.wvu.edu/faculty/directory.php?order=Alpha",
+            "http://www.cemr.wvu.edu/faculty/directory.php?dept=2&type=faculty&deptabbr=Lane+Department"
+        ],
+        "notes"      : "CSEE dept; csee.wvu.edu domain; old CS-only domain www.cs.wvu.edu; base domains added for CDX wildcard coverage",
+    },
+    {
+        "university" : "Drexel University",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://drexel.edu/cci/academics/computer-science-department/faculty/",
+            "https://drexel.edu/cci/research/cs-department/faculty/",
+            "http://www.cs.drexel.edu/about/faculty/",
+            "http://www.cs.drexel.edu/faculty/",
+            "http://www.cs.drexel.edu/"
+        ],
+        "notes"      : "CS in CCI (College of Computing and Informatics); old domain www.cs.drexel.edu; base domain added for CDX wildcard coverage",
+    },
+    {
+        "university" : "Temple University",
+        "dept_name"  : "Computer and Information Sciences",
+        "urls"       : [
+            "https://www.cis.temple.edu/people/faculty/",
+            "http://www.cis.temple.edu/faculty/",
+            "http://www.cis.temple.edu/~faculty/"
+        ],
+        "notes"      : "CIS dept in College of Science and Technology; cis.temple.edu domain",
+    },
+    {
+        "university" : "Lehigh University",
+        "dept_name"  : "Computer Science and Engineering",
+        "urls"       : [
+            "https://www.cse.lehigh.edu/about/faculty/",
+            "http://www.cse.lehigh.edu/faculty/",
+            "http://www.cse.lehigh.edu/~faculty/",
+            "http://www.cse.lehigh.edu/",
+            "http://www.cse.lehigh.edu/people/directory.html"
+        ],
+        "notes"      : "CSE dept; cse.lehigh.edu domain; private R1 in Bethlehem PA; base domain added for CDX wildcard coverage",
+    },
+    {
+        "university" : "George Mason University",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://cs.gmu.edu/about/faculty/",
+            "http://www.cs.gmu.edu/~faculty/",
+            "http://www.cs.gmu.edu/people/faculty/",
+            "http://www.cs.gmu.edu/"
+        ],
+        "notes"      : "CS in Volgenau School of Engineering; old tilde-style faculty list; base domain added for CDX wildcard coverage",
+    },
+    {
+        "university" : "Old Dominion University",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.odu.edu/computer-science/about/people/faculty",
+            "http://www.cs.odu.edu/~faculty/",
+            "http://www.cs.odu.edu/people/faculty/",
+            "http://www.cs.odu.edu/"
+        ],
+        "notes"      : "CS in Batten College of Engineering; old tilde-style faculty list at cs.odu.edu; base domain added for CDX wildcard coverage",
+    },
+    {
+        "university" : "College of William & Mary",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.wm.edu/as/computerscience/people/",
+            "http://www.cs.wm.edu/people/faculty/",
+            "http://www.cs.wm.edu/faculty/"
+        ],
+        "notes"      : "CS in Arts and Sciences; old domain www.cs.wm.edu stable; base domain added for CDX wildcard coverage",
+    },
+    {
+        "university" : "George Washington University",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.cs.gwu.edu/people/faculty",
+            "http://www.cs.gwu.edu/faculty/",
+            "http://www.gwu.edu/~eecs/faculty/"
+        ],
+        "notes"      : "CS in SEAS; cs.gwu.edu domain; older pages may be under gwu.edu/~eecs",
+    },
+    {
+        "university" : "University of Maryland Baltimore County",
+        "dept_name"  : "Computer Science and Electrical Engineering",
+        "urls"       : [
+            "https://www.csee.umbc.edu/people/faculty/",
+            "http://www.csee.umbc.edu/faculty/",
+            "http://www.cs.umbc.edu/faculty/"
+        ],
+        "notes"      : "CSEE dept; csee.umbc.edu domain; UMBC known for strong CS undergrad pipeline",
+    },
+    {
+        "university" : "University of Delaware",
+        "dept_name"  : "Computer and Information Sciences",
+        "urls"       : [
+            "https://www.cis.udel.edu/faculty/",
+            "http://www.cis.udel.edu/people/faculty/",
+            "http://www.cis.udel.edu/about/people/faculty/"
+        ],
+        "notes"      : "CIS dept; cis.udel.edu domain; Newark campus",
+    },
+    {
+        "university" : "University of Connecticut",
+        "dept_name"  : "Computer Science and Engineering",
+        "urls"       : [
+            "https://www.cse.uconn.edu/about/faculty/",
+            "http://www.cse.uconn.edu/people/faculty/",
+            "http://www.cse.uconn.edu/faculty/"
+        ],
+        "notes"      : "CSE dept; cse.uconn.edu domain; Storrs campus",
+    },
+    {
+        "university" : "Tufts University",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.cs.tufts.edu/people/faculty/",
+            "http://www.cs.tufts.edu/faculty/",
+            "http://www.cs.tufts.edu/",
+            "http://www.cs.tufts.edu/People/faculty.html"
+        ],
+        "notes"      : "CS in SEAS; cs.tufts.edu domain; private R1 in Medford MA",
+    },
+    {
+        "university" : "Boston University",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.bu.edu/cs/people/faculty/",
+            "http://www.cs.bu.edu/people/faculty/",
+            "http://www.cs.bu.edu/faculty/"
+        ],
+        "notes"      : "CS in Questrom/CAS; bu.edu/cs and cs.bu.edu both used; large urban R1",
+    },
+    {
+        "university" : "Case Western Reserve University",
+        "dept_name"  : "Electrical, Computer, and Systems Engineering",
+        "urls"       : [
+            "https://case.edu/engineering/about/faculty-and-staff-directory",
+            "https://engineering.case.edu/EECS/faculty/category/tenure-track-faculty",
+            "http://www.eecs.cwru.edu/people/faculty/",
+            "http://www.eecs.case.edu/faculty/"
+        ],
+        "notes"      : "EECS dept; old domain eecs.cwru.edu (pre-rename); now engineering.case.edu",
+    },
+    {
+        "university" : "Syracuse University",
+        "dept_name"  : "Electrical Engineering and Computer Science",
+        "urls"       : [
+            "https://www.lcs.syr.edu/people/faculty/",
+            "http://www.eecs.syr.edu/people/faculty/",
+            "http://www.ecs.syr.edu/faculty/cs/",
+            "http://www.eecs.syr.edu/",
+            "http://www.ecs.syr.edu/",
+            "https://ecs.syracuse.edu/faculty-staff/?category=electrical-engineering-and-computer-science&people="
+        ],
+        "notes"      : "EECS / LCS dept; multiple domain transitions; LC Smith college; base domains added for CDX wildcard coverage",
+    },
+    {
+        "university" : "Rensselaer Polytechnic Institute",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://compsci.rpi.edu/people",
+            "https://www.cs.rpi.edu/people/faculty/",
+            "http://www.cs.rpi.edu/people/",
+            "http://www.cs.rpi.edu/faculty/",
+            "http://www.cs.rpi.edu/people/faculty.html"
+        ],
+        "notes"      : "CS in ECSE; cs.rpi.edu domain; Troy NY; historically strong AI group",
+    },
+    {
+        "university" : "University at Buffalo (SUNY)",
+        "dept_name"  : "Computer Science and Engineering",
+        "urls"       : [
+            "https://engineering.buffalo.edu/computer-science-engineering/people/faculty-directory.html",
+            "http://www.cse.buffalo.edu/faculty/",
+            "http://www.cse.buffalo.edu/people/faculty/"
+        ],
+        "notes"      : "CSE dept in School of Engineering; cse.buffalo.edu domain; SUNY flagship",
+    },
+    {
+        "university" : "Binghamton University (SUNY)",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.binghamton.edu/computer-science/people/",
+            "http://www.cs.binghamton.edu/people/faculty/",
+            "http://www.cs.binghamton.edu/faculty/"
+        ],
+        "notes"      : "CS in Watson School of Engineering; cs.binghamton.edu old domain",
+    },
+    {
+        "university" : "Worcester Polytechnic Institute",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.wpi.edu/academics/departments/computer-science/faculty-staff",
+            "https://www.wpi.edu/academics/departments/computer-science/people/faculty",
+            "http://www.cs.wpi.edu/people/faculty/",
+            "http://www.cs.wpi.edu/faculty/"
+        ],
+        "notes"      : "CS dept; cs.wpi.edu old domain; private R1 in Worcester MA",
+    },
+    {
+        "university" : "University of Vermont",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.uvm.edu/cems/cs/faculty",
+            "http://www.uvm.edu/~cems/cs/",
+            "http://www.cs.uvm.edu/people/faculty/",
+            "http://www.cs.uvm.edu/faculty/",
+            "http://www.uvm.edu/~cems/cs/?Page=employee/facstaff.php&SM=employee/_employeemenu.html",
+            "http://www.uvm.edu/~cems/cs/?Page=faculty.php&SM=employee/_employeemenu.html",
+            "http://www.uvm.edu/~cems/cs/?Page=employee/default.php&SM=employee/_employeemenu.html"
+        ],
+        "notes"      : "CS in CEMS; ~cems/cs/ is legacy dept home (good Wayback-era path); cs.uvm.edu older faculty URLs",
+    },
+    {
+        "university" : "Emory University",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.cs.emory.edu/people/faculty/",
+            "http://www.mathcs.emory.edu/people/",
+            "http://www.cs.emory.edu/faculty/"
+        ],
+        "notes"      : "CS (and math) in Emory College; old domain was mathcs.emory.edu; separated later",
+    },
+    {
+        "university" : "University of Wyoming",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.uwyo.edu/soc/people/faculty/index.html",
+            "https://www.uwyo.edu/soc/people/index.html",
+            "https://www.cs.uwyo.edu/research/faculty/",
+            "http://www.cs.uwyo.edu/people/faculty/",
+            "http://www.cs.uwyo.edu/faculty/",
+            "http://cs.uwyo.edu/faculty/a-z.html",
+            "http://www.cs.uwyo.edu/faculty/a-z.html"
+        ],
+        "notes"      : "CS now called School of Computing (SoC) at uwyo.edu/soc; old cs.uwyo.edu domain in Wayback",
+    },
+    {
+        "university" : "Montana State University",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.cs.montana.edu/people/faculty/",
+            "http://www.cs.montana.edu/faculty/",
+            "http://www.cs.montana.edu/",
+            "http://www.cs.montana.edu/faculty/faculty.html"
+        ],
+        "notes"      : "CS in College of Engineering; cs.montana.edu domain; Bozeman campus",
+    },
+    {
+        "university" : "University of Idaho",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://directory.uidaho.edu/departments?criteria=Computer+Science+Department",
+            "http://www.cs.uidaho.edu/people/faculty/",
+            "http://www.cs.uidaho.edu/faculty/",
+            "https://www.uidaho.edu/engr/departments/cs/our-people/faculty"
+        ],
+        "notes"      : "CS in College of Engineering; cs.uidaho.edu old domain; Moscow campus",
+    },
+    {
+        "university" : "New Mexico State University",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.cs.nmsu.edu/people/faculty/",
+            "http://www.cs.nmsu.edu/faculty/",
+            "http://www.nmsu.edu/~cs/faculty/",
+            "https://computerscience.nmsu.edu/facultydirectory/faculty-staff-directory.html"
+        ],
+        "notes"      : "cs.nmsu.edu/ homepage (HTTPS) was ~1.9KB redirect in Wayback \u2014 removed; HTTP-specific faculty paths kept",
+    },
+    {
+        "university" : "University of Hawaii",
+        "dept_name"  : "Information and Computer Sciences",
+        "urls"       : [
+            "https://www.ics.hawaii.edu/people/faculty/",
+            "http://www.ics.hawaii.edu/faculty/",
+            "http://www.ics.hawaii.edu/"
+        ],
+        "notes"      : "ICS dept; ics.hawaii.edu domain; Manoa campus; stable across eras",
+    },
+    {
+        "university" : "University of North Texas",
+        "dept_name"  : "Computer Science and Engineering",
+        "urls"       : [
+            "https://engineering.unt.edu/cse/people/index.html?department=Computer+Science+and+Engineering",
+            "http://www.cse.unt.edu/people/faculty/",
+            "http://www.cse.unt.edu/faculty/",
+            "http://www.cs.unt.edu/people/faculty.php"
+        ],
+        "notes"      : "CSE dept; cse.unt.edu old domain; also cs.unt.edu; base domains added for CDX wildcard coverage",
+    },
+    {
+        "university" : "University of Texas at San Antonio",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://caicc.utsa.edu/computer-science/faculty/index.html",
+            "https://www.utsa.edu/sciences/computer-science/faculty/",
+            "http://www.cs.utsa.edu/people/faculty/",
+            "http://www.cs.utsa.edu/faculty/"
+        ],
+        "notes"      : "CS in College of Sciences; cs.utsa.edu old domain; growing R1",
+    },
+    {
+        "university" : "University of Arkansas",
+        "dept_name"  : "Computer Science and Computer Engineering",
+        "urls"       : [
+            "https://engineering.uark.edu/computer-science-computer-engineering/people/faculty/",
+            "http://www.csce.uark.edu/faculty/",
+            "http://www.csce.uark.edu/people/faculty/",
+            "http://www.csce.uark.edu/"
+        ],
+        "notes"      : "CSCE dept in College of Engineering; csce.uark.edu old domain; Fayetteville; base domain added for CDX wildcard coverage",
+    },
+    {
+        "university" : "UC Riverside",
+        "dept_name"  : "Computer Science and Engineering",
+        "urls"       : [
+            "https://www1.cs.ucr.edu/people/faculty",
+            "https://www1.cs.ucr.edu/about/faculty-directory/",
+            "http://www.cs.ucr.edu/people/faculty/",
+            "http://www.cs.ucr.edu/faculty/"
+        ],
+        "notes"      : "UC system; CS/CSE dept; www1.cs.ucr.edu unusual subdomain; growing R1 program",
+    },
+    {
+        "university" : "UC Santa Cruz",
+        "dept_name"  : "Computer Science and Engineering",
+        "urls"       : [
+            "https://www.soe.ucsc.edu/departments/computer-science/people/faculty",
+            "http://www.cs.ucsc.edu/people/faculty/",
+            "http://www.cs.ucsc.edu/faculty/"
+        ],
+        "notes"      : "CS in Baskin School of Engineering (SOE); old domain www.cs.ucsc.edu",
+    },
+    {
+        "university" : "Arizona State University",
+        "dept_name"  : "Computer Science (SCAI / CIDSE)",
+        "urls"       : [
+            "https://faculty.engineering.asu.edu/directory/scai/computer-science-and-engineering/",
+            "https://faculty.engineering.asu.edu/directory/scai/rank/",
+            "http://www.public.asu.edu/~agein/faculty.html",
+            "https://cidse.engineering.asu.edu/faculty/",
+            "https://engineering.asu.edu/computer-science-engineering/people/faculty/"
+        ],
+        "notes"      : "Large R1; CS in SCAI (School of Computing and AI) since ~2023, previously CIDSE; main Tempe campus; /directory/scai/rank/ is same Fulton faculty directory, faculty-by-rank view (useful CDX union with discipline listing)",
+    },
+    {
+        "university" : "University of Georgia",
+        "dept_name"  : "Computer Science (School of Computing)",
+        "urls"       : [
+            "https://computing.uga.edu/directory/faculty",
+            "https://www.cs.uga.edu/directory/faculty",
+            "http://www.cs.uga.edu/directory/faculty",
+            "http://www.cs.uga.edu/people/faculty"
+        ],
+        "notes"      : "Athens campus; dept rebranded as 'School of Computing' (computing.uga.edu); old cs.uga.edu domain; ~47 faculty on page (Apr 2026)",
+    },
+    {
+        "university" : "Georgia State University",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://csds.gsu.edu/directory/?wpvcomputerscienceroles=core-faculty&wpv_aux_current_post_id=329&wpv_view_count=5249-TCPID329",
+            "https://csds.gsu.edu/directory/",
+            "http://www.cs.gsu.edu/faculty/",
+            "http://www.cs.gsu.edu/people/faculty/"
+        ],
+        "notes"      : "Atlanta urban R1; separate from Georgia Tech; CS dept in College of Arts & Sciences",
+    },
+    {
+        "university" : "Florida International University",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.cs.fiu.edu/faculty/",
+            "https://www.cis.fiu.edu/faculty-staff/",
+            "http://www.cs.fiu.edu/faculty/"
+        ],
+        "notes"      : "Miami-area R1; CS in College of Engineering & Computing; large Hispanic-serving institution",
+    },
+    {
+        "university" : "University of Alabama Birmingham",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.uab.edu/cas/computerscience/people/faculty-directory",
+            "http://www.cis.uab.edu/people/faculty/",
+            "https://www.uab.edu/cas/computerscience/faculty"
+        ],
+        "notes"      : "UAB; R1 research university; CS in College of Engineering",
+    },
+    {
+        "university" : "Virginia Commonwealth University",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://egr.vcu.edu/departments/computer-science/people/faculty/",
+            "https://egr.vcu.edu/departments/computer-science/people/",
+            "http://www.cs.vcu.edu/about/people/faculty.html",
+            "https://www.cs.vcu.edu/about/people/",
+            "http://computer-science.egr.vcu.edu/faculty/"
+        ],
+        "notes"      : "Richmond VA; urban R1; CS in College of Engineering",
+    },
+    {
+        "university" : "University of Texas El Paso",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.utep.edu/science/computational-science/people/faculty-and-staff.html",
+            "http://www.cs.utep.edu/people/faculty/",
+            "http://cs.utep.edu/people/faculty/"
+        ],
+        "notes"      : "UTEP; border R1; Hispanic-serving institution; CS dept in College of Engineering",
+    },
+    {
+        "university" : "University of New Mexico",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://cs.unm.edu/people/faculty/",
+            "http://www.cs.unm.edu/people/faculty/",
+            "http://www.cs.unm.edu/~faculty/"
+        ],
+        "notes"      : "Albuquerque R1; CS dept in School of Engineering; long-standing program",
+    },
+    {
+        "university" : "Baylor University",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.baylor.edu/cs/index.php?id=6",
+            "https://www.ecs.baylor.edu/cs/index.php?id=6",
+            "https://www.ecs.baylor.edu/departments/computer-science/computer-science-faculty"
+        ],
+        "notes"      : "Waco TX; cs.baylor.edu/ homepage was ~1.8KB redirect-only in Wayback \u2014 removed",
+    },
+    {
+        "university" : "University of Louisville",
+        "dept_name"  : "Computer Science and Engineering",
+        "urls"       : [
+            "https://engineering.louisville.edu/academics/departments/cse/faculty/",
+            "https://engineering.louisville.edu/academics/faculty/",
+            "http://www.cecs.louisville.edu/ece/about/faculty-and-staff/",
+            "http://www.cecs.louisville.edu/cs/people/faculty/"
+        ],
+        "notes"      : "Kentucky R1; CSE in J.B. Speed School of Engineering; NOTE: engineering.louisville.edu/academics/faculty/ is full-college page (all depts, paginated 14 pages) \u2014 CS-specific dept URL preferred; CS dept alt added for Wayback coverage",
+    },
+    {
+        "university" : "New Jersey Institute of Technology",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://cs.njit.edu/faculty",
+            "http://www.cs.njit.edu/faculty/",
+            "https://computing.njit.edu/faculty",
+            "http://ece.njit.edu/people/ece_faculty_alpha.php"
+        ],
+        "notes"      : "NJIT; Newark NJ; public polytechnic R1; strong CS/CE programs",
+    },
+    {
+        "university" : "University of Cincinnati",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.ceas.uc.edu/academics/departments/computer-science/computer-science-people.html",
+            "https://eecs.ceas.uc.edu/people/faculty/",
+            "http://www.eecs.uc.edu/people/faculty/",
+            "http://www.ece.uc.edu/people/faculty/"
+        ],
+        "notes"      : "Ohio R1; CS dept in CEAS; ~17 primary + secondary faculty on page (Apr 2026); dept head Justin Zhan; old eecs.ceas.uc.edu path now separate",
+    },
+    {
+        "university" : "Michigan Technological University",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.mtu.edu/cs/department/faculty-staff/",
+            "http://www.cs.mtu.edu/people/faculty/",
+            "https://www.mtu.edu/cs/faculty/"
+        ],
+        "notes"      : "Houghton MI; public R1; strong CS and engineering programs",
+    },
+    {
+        "university" : "University of Massachusetts Lowell",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.uml.edu/sciences/computer-science/faculty/",
+            "http://www.cs.uml.edu/faculty/",
+            "http://www.cs.uml.edu/people/faculty/"
+        ],
+        "notes"      : "UMass Lowell; R1 commuter research university; CS in College of Sciences",
+    },
+    {
+        "university" : "University of New Hampshire",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://ceps.unh.edu/computer-science/faculty-staff-directory",
+            "https://www.cs.unh.edu/people/faculty",
+            "http://www.cs.unh.edu/people/faculty/",
+            "http://www.cs.unh.edu/faculty/"
+        ],
+        "notes"      : "Durham NH; flagship NH R1; CS in College of Engineering & Physical Sciences",
+    },
+    {
+        "university" : "University of Rhode Island",
+        "dept_name"  : "Computer Science and Statistics",
+        "urls"       : [
+            "https://web.uri.edu/cs/people/",
+            "http://www.cs.uri.edu/faculty/",
+            "http://www.cs.uri.edu/people/faculty/"
+        ],
+        "notes"      : "Kingston RI; flagship RI R1; CS in College of Arts & Sciences",
+    },
+    {
+        "university" : "University of Colorado Denver",
+        "dept_name"  : "Computer Science and Engineering",
+        "urls"       : [
+            "https://engineering.ucdenver.edu/computer-science-and-engineering/faculty-and-staff",
+            "http://www.cs.ucdenver.edu/people/faculty/",
+            "https://cse.ucdenver.edu/faculty/"
+        ],
+        "notes"      : "UC Denver; urban R1; separate from CU Boulder; CSE in College of Engineering",
+    },
+    {
+        "university" : "Colorado School of Mines",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://cs.mines.edu/faculty-and-staff/",
+            "http://www.cs.mines.edu/faculty/",
+            "http://www.cs.mines.edu/people/faculty/"
+        ],
+        "notes"      : "Golden CO; STEM-focused public R1; CS dept in College of Engineering",
+    },
+    {
+        "university" : "Utah State University",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://engineering.usu.edu/cs/directory/faculty/",
+            "https://cs.usu.edu/people/faculty/index",
+            "https://engineering.usu.edu/cs/faculty/",
+            "http://www.cs.usu.edu/faculty/",
+            "https://www.cs.usu.edu/people/faculty/"
+        ],
+        "notes"      : "Logan UT; R1 land-grant; CS in College of Engineering; strong aerospace/defense ties",
+    },
+    {
+        "university" : "North Dakota State University",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.ndsu.edu/cs/people/faculty/",
+            "http://www.cs.ndsu.nodak.edu/faculty/",
+            "http://www.ndsu.edu/cs/people/"
+        ],
+        "notes"      : "Fargo ND; land-grant R1; CS dept in College of Engineering",
+    },
+    {
+        "university" : "University of Mississippi",
+        "dept_name"  : "Computer and Information Science",
+        "urls"       : [
+            "https://cs.olemiss.edu/people/",
+            "http://www.cs.olemiss.edu/people/",
+            "http://www.cs.olemiss.edu/faculty/"
+        ],
+        "notes"      : "Ole Miss; Oxford MS; R1 flagship; CS/CIS in School of Engineering",
+    },
+    {
+        "university" : "University of Memphis",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.memphis.edu/cs/people/",
+            "http://www.cs.memphis.edu/about/faculty.php",
+            "http://www.cs.memphis.edu/people/faculty/"
+        ],
+        "notes"      : "Memphis TN; urban R1; CS in Herff College of Engineering",
+    },
+    {
+        "university" : "San Diego State University",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.cs.sdsu.edu/people/",
+            "http://www.cs.sdsu.edu/people/",
+            "http://www.cs.sdsu.edu/faculty/"
+        ],
+        "notes"      : "San Diego CA; CSU system R1; large CS program; close to UC San Diego",
+    },
+    {
+        "university" : "Portland State University",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.pdx.edu/computer-science/faculty-and-staff-directory",
+            "https://www.pdx.edu/engineering/directory",
+            "http://www.cs.pdx.edu/people/faculty/",
+            "http://www.cs.pdx.edu/faculty/"
+        ],
+        "notes"      : "Portland OR; urban R1; CS in Maseeh College of Engineering; strong systems/PL group",
+    },
+    {
+        "university" : "University of Wisconsin Milwaukee",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://uwm.edu/engineering/people-category/faculty/computer-science/",
+            "http://www.cs.uwm.edu/people/faculty/",
+            "https://uwm.edu/engineering/ece/faculty/",
+            "http://www.cs.uwm.edu/html/csFaculty.html",
+            "http://www.cs.uwm.edu/html/csStaff.html"
+        ],
+        "notes"      : "Milwaukee WI; UW system R1; separate from UW-Madison; CS in College of Engineering",
+    },
+    {
+        "university" : "Princeton University",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.cs.princeton.edu/people/faculty",
+            "http://www.cs.princeton.edu/people/faculty",
+            "http://www.cs.princeton.edu/faculty/"
+        ],
+        "notes"      : "Princeton NJ; Ivy League R1; strong theory, systems, ML; old domain cs.princeton.edu stable",
+    },
+    {
+        "university" : "Washington University in St. Louis",
+        "dept_name"  : "Computer Science & Engineering",
+        "urls"       : [
+            "https://cse.wustl.edu/faculty/Pages/default.aspx",
+            "http://www.cse.wustl.edu/people/faculty/"
+        ],
+        "notes"      : "St. Louis MO; private R1; CSE dept in McKelvey School of Engineering; strong systems/networking",
+    },
+    {
+        "university" : "Northeastern University",
+        "dept_name"  : "Computer Science (Khoury College of Computer Sciences)",
+        "urls"       : [
+            "https://www.khoury.northeastern.edu/people/?position=faculty",
+            "https://www.khoury.northeastern.edu/people/",
+            "http://www.ccs.neu.edu/people/faculty/"
+        ],
+        "notes"      : "Boston MA; private R1; Khoury College (renamed from CCIS 2017); strong co-op model; all faculty types on people page",
+    },
+    {
+        "university" : "California Institute of Technology",
+        "dept_name"  : "Computing + Mathematical Sciences",
+        "urls"       : [
+            "https://www.cms.caltech.edu/people/faculty",
+            "https://www.cms.caltech.edu/people",
+            "http://www.cms.caltech.edu/people/faculty"
+        ],
+        "notes"      : "Pasadena CA; private R1; CMS dept covers CS, Control & Dynamical Systems, and math-CS; very small but elite faculty",
+    },
+    {
+        "university" : "Brigham Young University",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://cs.byu.edu/department/directories/faculty-directory/",
+            "https://cs.byu.edu/department/directory/",
+            "http://www.cs.byu.edu/faculty/"
+        ],
+        "notes"      : "Provo UT; private R1 (LDS-affiliated); CS in College of Computational Mathematical & Physical Sciences",
+    },
+    {
+        "university" : "University of Illinois Chicago",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://cs.uic.edu/faculty/",
+            "http://www.cs.uic.edu/people/faculty/",
+            "http://www.cs.uic.edu/faculty/"
+        ],
+        "notes"      : "Chicago IL; UIC is the urban flagship R1 of the U of Illinois system; separate from UIUC; strong data mining/NLP group",
+    },
+    {
+        "university" : "University of Miami",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.as.miami.edu/csc/faculty/people/faculty/index.html",
+            "http://www.cs.miami.edu/home/faculty/index.html",
+            "http://www.as.miami.edu/csc/faculty/people/faculty/index.html",
+            "https://csc.as.miami.edu/people/index.html"
+        ],
+        "notes"      : "Coral Gables FL; private R1; CS in College of Arts & Sciences; research spans ML, bioinformatics, algorithms",
+    },
+    {
+        "university" : "Southern Methodist University",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.smu.edu/lyle/departments/cs/people/faculty",
+            "http://www.cs.smu.edu/people/faculty/"
+        ],
+        "notes"      : "Dallas TX; private R1; CS in Lyle School of Engineering; strength in cybersecurity (Deason Institute) and AI",
+    },
+    {
+        "university" : "Georgetown University",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://cs.georgetown.edu/faculty/",
+            "http://www.cs.georgetown.edu/faculty/",
+            "http://cs.georgetown.edu/people/faculty/"
+        ],
+        "notes"      : "Washington DC; Jesuit private R1; small CS dept; strong security (Blaze, Nissim) and NLP groups",
+    },
+    {
+        "university" : "University of North Carolina Charlotte",
+        "dept_name"  : "Computer Science (College of Computing and Informatics)",
+        "urls"       : [
+            "https://cci.charlotte.edu/departments/department-of-computer-science/about-computer-science/cs-faculty/",
+            "https://cci.charlotte.edu/directory/faculty/",
+            "http://www.cci.uncc.edu/faculty/"
+        ],
+        "notes"      : "Charlotte NC; public R1; CS in College of Computing and Informatics; ~40 full-time faculty; strength in visualization, HPC",
+    },
+    {
+        "university" : "Missouri University of Science and Technology",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://cs.mst.edu/people/faculty-directory/",
+            "http://cs.mst.edu/people/faculty-directory/",
+            "http://www.cs.mst.edu/people/faculty/"
+        ],
+        "notes"      : "Rolla MO; public R1 (UM system); oldest CS program in Missouri; strength in cybersecurity, networks, HPC",
+    },
+    {
+        "university" : "University at Albany SUNY",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.albany.edu/computer-science/faculty-staff",
+            "https://www.albany.edu/computer-science/faculty",
+            "http://www.cs.albany.edu/faculty.shtml",
+            "http://www.cs.albany.edu/people/faculty/"
+        ],
+        "notes"      : "Albany NY; SUNY flagship R1; CS in College of Engineering & Applied Sciences; strength in cybersecurity, algorithms",
+    },
+    {
+        "university" : "Kent State University",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.kent.edu/cs/faculty-staff",
+            "http://www.cs.kent.edu/faculty/",
+            "http://www.cs.kent.edu/people/"
+        ],
+        "notes"      : "Kent OH; public R1; CS dept in Mathematical Sciences Building; PhD program active; strength in distributed systems, algorithms",
+    },
+    {
+        "university" : "Boston College",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.bc.edu/content/bc-web/schools/morrissey/departments/computer-science/people/faculty.html",
+            "https://www.bc.edu/content/bc-web/schools/mcas/departments/computer-science/faculty-and-research.html",
+            "http://www.cs.bc.edu/people/faculty/",
+            "https://www.bc.edu/bc-web/schools/morrissey/departments/computer-science/people.html"
+        ],
+        "notes"      : "Chestnut Hill MA; Jesuit private R1; CS in Morrissey College of Arts & Sciences (formerly MCAS); relatively small dept",
+    },
+    {
+        "university" : "Howard University",
+        "dept_name"  : "Electrical Engineering and Computer Science",
+        "urls"       : [
+            "https://cea.howard.edu/academics/departments/electrical-engineering-and-computer-science/people-eecs",
+            "http://www.eece.cea.howard.edu/faculty",
+            "http://www.cs.howard.edu/faculty/"
+        ],
+        "notes"      : "Washington DC; private HBCU R1; EECS dept in College of Engineering & Architecture; strong cybersecurity and data science group",
+    },
+    {
+        "university" : "Brandeis University",
+        "dept_name"  : "Computer Science (Michtom School)",
+        "urls"       : [
+            "https://www.brandeis.edu/computer-science/people/index.html",
+            "https://www.brandeis.edu/facultyguide/department.html?deptid=16600",
+            "http://www.cs.brandeis.edu/people/faculty.html"
+        ],
+        "notes"      : "Waltham MA; private R1; Michtom School of CS (~12 research faculty); strong AI, theory, verification; Boston-area consortium access",
+    },
+    {
+        "university" : "Florida Atlantic University",
+        "dept_name"  : "Electrical Engineering and Computer Science",
+        "urls"       : [
+            "https://www.fau.edu/engineering/eecs/directory/",
+            "https://www.fau.edu/engineering/directory/",
+            "http://www.cse.fau.edu/faculty/",
+            "http://www.fau.edu/engineering/eecs/faculty/"
+        ],
+        "notes"      : "Boca Raton FL; public R1; EECS dept in College of Engineering; ~30 CS/EE faculty; strength in machine learning, cybersecurity, robotics",
+    },
+    {
+        "university" : "Indiana University Indianapolis",
+        "dept_name"  : "Computer Science (Luddy School)",
+        "urls"       : [
+            "https://luddy.indianapolis.iu.edu/about/departments/cs/index.html",
+            "https://luddy.indianapolis.iu.edu/contact/directory/index.html",
+            "http://soic.iupui.edu/people/",
+            "http://www.cs.iupui.edu/people/faculty.shtml"
+        ],
+        "notes"      : "Indianapolis IN; public R1; formerly IUPUI; Luddy School of Informatics, Computing & Engineering; large school with CS, HCI, informatics, data science",
+    },
+    {
+        "university" : "University of Louisiana at Lafayette",
+        "dept_name"  : "Computer Science (School of Computing and Informatics)",
+        "urls"       : [
+            "https://computing.louisiana.edu/about-us/faculty-staff-0",
+            "https://computing.louisiana.edu/",
+            "http://www.cacs.louisiana.edu/people/faculty/",
+            "http://computing.louisiana.edu/faculty/"
+        ],
+        "notes"      : "Lafayette LA; public R1 (LS system); Center for Advanced Computer Studies; strong AI/ML, bioinformatics, data mining group; active PhD program",
+    },
+    {
+        "university" : "University of Denver",
+        "dept_name"  : "Computer Science (Ritchie School)",
+        "urls"       : [
+            "https://ritchieschool.du.edu/computer-science/cs-faculty-people",
+            "https://ritchieschool.du.edu/resources/facultystaff",
+            "http://cs.du.edu/people/faculty/",
+            "http://www.cs.du.edu/faculty/"
+        ],
+        "notes"      : "Denver CO; private R1; CS in Ritchie School of Engineering & Computer Science; solid mid-size dept; strength in AI, cybersecurity, HCI",
+    },
+    {
+        "university" : "Loyola University Chicago",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.luc.edu/cs/aboutus/people/full-timefaculty/",
+            "https://www.luc.edu/cs/",
+            "http://www.cs.luc.edu/people/",
+            "http://www.cs.luc.edu/faculty/"
+        ],
+        "notes"      : "Chicago IL; Jesuit private R1; CS dept active PhD program; strength in cybersecurity (Deason Institute), SE, distributed systems",
+    },
+    {
+        "university" : "Northern Arizona University",
+        "dept_name"  : "Computer Science (School of Informatics, Computing, and Cyber Systems)",
+        "urls"       : [
+            "https://in.nau.edu/school-informatics-computing-cyber-systems/faculty/",
+            "https://nau.edu/school-of-informatics-computing-and-cyber-systems/faculty/",
+            "http://www.nau.edu/siccs/faculty/",
+            "http://nau.edu/informatics/faculty/"
+        ],
+        "notes"      : "Flagstaff AZ; public R1; SICCS school covers CS, cybersecurity, bioinformatics; growing PhD program; strength in environmental/climate informatics",
+    },
+    {
+        "university" : "Ohio University",
+        "dept_name"  : "Electrical Engineering and Computer Science",
+        "urls"       : [
+            "https://www.ohio.edu/engineering/eecs/about/contact/faculty",
+            "https://www.ohio.edu/engineering/eecs/people",
+            "http://www.cs.ohiou.edu/people/faculty/",
+            "http://www.eecs.ohio.edu/faculty/"
+        ],
+        "notes"      : "Athens OH; public R1 (Ohio flagship); EECS dept in Stocker Center; active CS PhD program; strength in distributed systems, AI, networking",
+    },
+    {
+        "university" : "University of Massachusetts Boston",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://www.cs.umb.edu/faculty",
+            "https://www.umb.edu/science-mathematics/academic-departments/computer-science/faculty-staff/",
+            "http://www.cs.umb.edu/faculty.html",
+            "http://www.cs.umb.edu/people/faculty/"
+        ],
+        "notes"      : "Boston MA; public R1 (UMass system); urban commuter campus; CS active PhD program; strength in data management, ML, algorithms",
+    },
+    {
+        "university" : "University of Toledo",
+        "dept_name"  : "Electrical Engineering and Computer Science",
+        "urls"       : [
+            "https://www.utoledo.edu/engineering/electrical-engineering-computer-science/people/",
+            "https://www.utoledo.edu/engineering/electrical-engineering-computer-science/department-directory.html",
+            "http://www.eecs.utoledo.edu/faculty/",
+            "http://www.utoledo.edu/engineering/eecs/faculty/"
+        ],
+        "notes"      : "Toledo OH; public R1; EECS dept in College of Engineering; solid PhD program; strength in AI, embedded systems, signal processing",
+    },
+    {
+        "university" : "University of Missouri Kansas City",
+        "dept_name"  : "Computer Science and Information Technology",
+        "urls"       : [
+            "https://sse.umkc.edu/about-us/computer-science-and-information-technologydirectory.html",
+            "https://sse.umkc.edu/",
+            "http://www.cs.umkc.edu/people/faculty/",
+            "http://cs.umkc.edu/faculty/"
+        ],
+        "notes"      : "Kansas City MO; public R1 (UM system); CS/IT in School of Science & Engineering; PhD program; interdisciplinary research in data science, cybersecurity",
+    },
+    {
+        "university" : "University of North Dakota",
+        "dept_name"  : "Computer Science (School of Electrical Engineering & Computer Science)",
+        "urls"       : [
+            "https://engineering.und.edu/academics/electrical-and-computer-science/faculty.html",
+            "https://campus.und.edu/directory/index.html",
+            "http://www.cs.und.edu/faculty/",
+            "http://www.cs.und.edu/people/"
+        ],
+        "notes"      : "Grand Forks ND; public R1 (ND flagship); SEECS dept in College of Engineering & Mines; CS PhD program; strength in networking, autonomous systems",
+    },
+    {
+        "university" : "University of Southern Mississippi",
+        "dept_name"  : "Computer Science (School of Computing Sciences and Computer Engineering)",
+        "urls"       : [
+            "https://www.usm.edu/computing-sciences-computer-engineering/directory.php",
+            "https://www.usm.edu/faculty-directory/index.php",
+            "http://www.usm.edu/computing-sciences/faculty.aspx",
+            "http://www.cs.usm.edu/people/faculty/"
+        ],
+        "notes"      : "Hattiesburg MS; public R1; School of Computing Sciences & Computer Engineering; active PhD; strength in cybersecurity, AI, human-computer interaction",
+    },
+    {
+        "university" : "University of Maine",
+        "dept_name"  : "Computer Science",
+        "urls"       : [
+            "https://umaine.edu/cs/people/faculty/",
+            "https://umaine.edu/cs/",
+            "http://www.cs.umaine.edu/people/faculty/",
+            "http://www.cs.umaine.edu/faculty/"
+        ],
+        "notes"      : "Orono ME; public R1 (ME flagship); CS in Maine College of Engineering and Computing; relatively small but PhD program active; strength in AI, HCI, robotics",
+    },
+]

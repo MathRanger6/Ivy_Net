@@ -1,0 +1,874 @@
+/* PDF Stylesheet for Jupyter Notebooks */
+/* Optimized for notebooks with code cells and outputs */
+
+@page {
+    size: letter;
+    margin: 0.25in;
+    /* Ensure page breaks work properly */
+    orphans: 3;
+    widows: 3;
+}
+
+/* ========================================================================
+   GLOBAL PAGE BREAK RULES - Applied first, most important
+   ======================================================================== */
+
+/* Global rule: Code cells should NEVER start new pages */
+/* This applies to all code-related elements - highest priority */
+div.cell.code,
+.cell.code,
+div[class*="cell"][class*="code"],
+section.cell.code,
+section[class*="cell"][class*="code"],
+div.sourceCode,
+pre.sourceCode,
+pre[class*="python"],
+pre[class*="code"] {
+    page-break-before: avoid !important;
+    break-before: avoid !important;
+}
+
+/* Exception: H1 headings should start on new pages */
+/* This is the PRIMARY rule - it should work for all H1 elements */
+h1 {
+    page-break-before: always !important;
+    break-before: page !important;  /* CSS3 property for better support */
+    /* Force the break even if parent has conflicting rules */
+    display: block !important;
+    /* Ensure H1 creates a new formatting context */
+    position: relative !important;
+}
+
+/* CRITICAL: H1 as first child of section should ALWAYS break before */
+/* This is redundant but ensures specificity */
+section.cell.markdown > h1:first-child,
+section.cell.markdown > h1,
+section[class*="cell"][class*="markdown"] > h1:first-child {
+    page-break-before: always !important;
+    break-before: page !important;
+    display: block !important;
+}
+
+/* Make the SECTION itself break if it starts with H1 */
+/* This is critical - the section needs to break, not just the H1 */
+/* Since :has() may not work, we'll use a different approach */
+section.cell.markdown:has(> h1:first-child),
+section[class*="cell"][class*="markdown"]:has(> h1:first-child) {
+    page-break-before: always !important;
+    break-before: page !important;
+}
+
+/* Fallback: Target ALL sections and let H1 override */
+/* Remove any page-break-before: avoid that might conflict */
+section.cell.markdown {
+    /* Don't set page-break-before here - let H1 control it */
+    /* But ensure we don't have conflicting rules */
+    /* Ensure section doesn't prevent H1 from breaking */
+    overflow: visible !important;
+}
+
+/* But code cells following markdown sections should stay on same page */
+/* This is CRITICAL - code cells must NOT break after markdown sections */
+section.cell.markdown + div.cell.code,
+section.cell.markdown ~ div.cell.code,
+section[class*="cell"][class*="markdown"] + div[class*="cell"][class*="code"],
+section[class*="cell"][class*="markdown"] ~ div[class*="cell"][class*="code"] {
+    page-break-before: avoid !important;
+    break-before: avoid !important;
+    /* Force code cell to stay on same page as preceding markdown section */
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+/* CRITICAL: After any section with H1, the immediately following code cell should NOT break */
+section:has(h1) + div.cell.code,
+section:has(h1) + div[class*="cell"][class*="code"] {
+    page-break-before: avoid !important;
+    break-before: avoid !important;
+    margin-top: 2px !important;
+}
+
+/* Fallback: Any div.cell.code that comes after a section should not break */
+section + div.cell.code,
+section ~ div.cell.code:first-of-type {
+    page-break-before: avoid !important;
+}
+
+/* CRITICAL: Code cells should NEVER break, regardless of what comes before them */
+div.cell.code {
+    page-break-before: avoid !important;
+    break-before: avoid !important;
+}
+
+/* Even more specific: code cells following any element should not break */
+* + div.cell.code {
+    page-break-before: avoid !important;
+    break-before: avoid !important;
+}
+
+/* ULTIMATE FALLBACK: Any div with class containing "cell" and "code" should never break */
+div[class*="cell"][class*="code"] {
+    page-break-before: avoid !important;
+    break-before: avoid !important;
+}
+
+/* Also handle H1 followed by code cells */
+h1 ~ div.cell.code,
+h1 ~ .cell.code,
+h1 ~ pre,
+h1 ~ div.sourceCode {
+    page-break-before: avoid !important;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 0.65em;  /* Smaller base font for notebooks */
+    line-height: 1.5;   /* Tighter line height */
+    color: #333;
+    max-width: 100%;
+}
+
+h1 {
+    color: #1a1a1a;
+    border-bottom: 3px solid #4a90e2;
+    padding-bottom: 6px;
+    margin-top: 0;  /* No top margin when starting new page */
+    margin-bottom: 8px;  /* Reduced from 15px */
+    font-size: 1.5em;  /* Smaller heading */
+    page-break-before: always !important;  /* Force: Start each H1 (Cell Header) on new page */
+    page-break-after: avoid;  /* Keep content with heading */
+    page-break-inside: avoid;  /* Don't break the heading itself */
+}
+
+/* CRITICAL: Sections containing H1 should not break after themselves */
+section.cell.markdown:has(h1),
+section[class*="cell"][class*="markdown"]:has(h1) {
+    page-break-after: avoid !important;  /* Keep the following code cell on same page */
+}
+
+/* Fallback: All markdown sections should not break after (doesn't rely on :has()) */
+section.cell.markdown {
+    page-break-after: avoid !important;
+}
+
+/* Ensure markdown cells containing H1 also trigger page break */
+/* Note: :has() may not be supported in WeasyPrint, so H1 rule above should handle it */
+.cell.markdown:has(h1),
+div.cell.markdown:has(h1) {
+    page-break-before: always !important;
+    margin-top: 0 !important;
+}
+
+/* But the following code cell should stay on same page */
+.cell.markdown:has(h1) + .cell.code,
+div.cell.markdown:has(h1) + div.cell.code {
+    page-break-before: avoid !important;
+}
+
+/* Fallback: Any markdown cell followed by code cell should keep code on same page */
+div.cell.markdown + div.cell.code {
+    page-break-before: avoid !important;
+}
+
+/* Universal rule: Code cells should never start new pages */
+div.cell.code,
+.cell.code {
+    page-break-before: avoid !important;
+    break-before: avoid !important;
+}
+
+h2 {
+    color: #2c3e50;
+    border-bottom: 2px solid #7f8c8d;
+    padding-bottom: 6px;
+    margin-top: 18px;
+    margin-bottom: 12px;
+    font-size: 1.25em;  /* Smaller heading */
+    page-break-after: avoid;
+}
+
+h3 {
+    color: #34495e;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    font-size: 1.1em;  /* Smaller heading */
+    page-break-after: avoid;
+}
+
+h4 {
+    color: #555;
+    margin-top: 12px;
+    margin-bottom: 8px;
+    font-size: 0.95em;  /* Smaller heading */
+    page-break-after: avoid;
+}
+
+h5, h6 {
+    color: #666;
+    margin-top: 4px;  /* Reduced from 10px */
+    margin-bottom: 3px;  /* Reduced from 6px */
+    font-size: 0.9em;
+    page-break-after: avoid;
+}
+
+/* Inline code - smaller and more compact */
+code {
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 1px 4px;
+    font-family: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, "Courier New", monospace;
+    font-size: 1.148em;  /* 35% bigger than 0.85em */
+    color: #e83e8c;
+}
+
+/* Code blocks - optimized for notebook code cells */
+pre {
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;  /* Less padding */
+    overflow-x: auto;
+    line-height: 1.3;  /* Tighter line height */
+    page-break-inside: avoid;
+    page-break-before: avoid !important;  /* Force: Don't start code blocks on new page */
+    page-break-after: auto;  /* Allow breaking after if needed */
+    margin: 8px 0;  /* Less margin */
+    font-size: 0.945em;  /* 35% bigger than 0.7em */
+    orphans: 3;  /* Minimum lines at bottom of page */
+    widows: 3;  /* Minimum lines at top of page */
+}
+
+pre code {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    color: #333;
+    font-size: 0.945em;  /* 35% bigger than 0.7em */
+    line-height: 1.3;
+}
+
+/* Notebook-specific: code cell containers */
+div.input_area,
+div.output_area {
+    margin: 6px 0;
+    page-break-inside: avoid;
+    page-break-before: avoid;  /* Don't break before input/output areas */
+    page-break-after: avoid;  /* Don't break after output areas - keep with following content */
+}
+
+/* Output cells should not start new pages either */
+div.output_area,
+div.cell-output,
+div.output {
+    page-break-before: avoid !important;
+    page-break-after: avoid !important;  /* Critical: Don't break after outputs */
+}
+
+/* Output divs: Try forcing a break after the LAST output div before a section */
+/* This ensures the section starts on a new page */
+div.output_area:last-of-type,
+div.cell-output:last-of-type,
+div.output:last-of-type {
+    /* Don't force break here - let H1 handle it */
+    page-break-after: auto;
+}
+
+/* Output divs should not cause page breaks in the middle */
+div.output_stream,
+div.output_display,
+div.output_error {
+    page-break-after: avoid !important;
+    page-break-before: avoid !important;
+}
+
+/* CRITICAL: Sections following output divs MUST allow page breaks for H1 */
+/* The section itself needs to break, not just rely on H1 */
+div.output_area + section.cell.markdown,
+div.cell-output + section.cell.markdown,
+div.output + section.cell.markdown,
+div.output_stream + section.cell.markdown,
+div.output_display + section.cell.markdown,
+div[class*="output"] + section.cell.markdown {
+    /* Force the section to break if it contains H1 */
+    /* Since :has() may not work, we'll use a workaround */
+    page-break-before: auto !important;
+    break-before: auto !important;
+}
+
+/* WORKAROUND: If section follows output and has H1, force section to break */
+/* We can't use :has(), so we'll target by structure */
+div[class*="output"] + section.cell.markdown,
+div.output_area ~ section.cell.markdown:first-of-type {
+    /* Check if first child is H1 by using a more specific rule */
+}
+
+/* Ensure H1 in sections following output divs can break - highest priority */
+/* Use multiple selectors to catch all variations */
+div.output_area + section.cell.markdown > h1:first-child,
+div.cell-output + section.cell.markdown > h1:first-child,
+div.output + section.cell.markdown > h1:first-child,
+div[class*="output"] + section.cell.markdown > h1,
+div.output_stream + section.cell.markdown > h1,
+div.output_display + section.cell.markdown > h1,
+div.output_error + section.cell.markdown > h1,
+/* Also target any section that comes after a closing div */
+div + section.cell.markdown > h1:first-child {
+    page-break-before: always !important;
+    break-before: page !important;
+    display: block !important;
+    /* Force the break even if parent has conflicting rules */
+    position: relative !important;
+    /* Try using both old and new CSS properties */
+    page-break-before: page !important;
+}
+
+/* But the code cell following the markdown section should stay on same page */
+div.output_area + section.cell.markdown + div.cell.code,
+div.cell-output + section.cell.markdown + div.cell.code,
+div.output + section.cell.markdown + div.cell.code {
+    page-break-before: avoid !important;
+}
+
+/* Output text - smaller */
+div.output_text {
+    font-size: 0.7em;
+    line-height: 1.3;
+}
+
+/* Stream output (stdout/stderr) */
+div.output_stream {
+    font-family: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, "Courier New", monospace;
+    font-size: 0.65em;
+    line-height: 1.3;
+    background-color: #f9f9f9;
+    padding: 6px;
+    border-radius: 3px;
+    margin: 4px 0;
+}
+
+/* Error output */
+div.output_error {
+    font-size: 0.65em;
+    line-height: 1.3;
+    color: #d32f2f;
+}
+
+blockquote {
+    border-left: 3px solid #4a90e2;
+    margin: 10px 0;
+    padding-left: 15px;
+    color: #666;
+    font-style: italic;
+    font-size: 0.95em;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 10px 0;
+    page-break-inside: avoid;
+    font-size: 0.9em;  /* Smaller table text */
+}
+
+th {
+    background-color: #4a90e2;
+    color: white;
+    padding: 8px;  /* Less padding */
+    text-align: left;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+td {
+    border: 1px solid #ddd;
+    padding: 6px;  /* Less padding */
+    font-size: 0.9em;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+ul, ol {
+    margin: 4px 0;  /* Reduced from 8px */
+    padding-left: 25px;
+    margin-bottom: 2px;  /* Specifically reduce bottom margin */
+}
+
+li {
+    margin: 2px 0;  /* Tighter list spacing - reduced from 3px */
+    font-size: 0.95em;
+}
+
+/* Last list item should have minimal bottom margin */
+li:last-child {
+    margin-bottom: 0px;
+}
+
+a {
+    color: #4a90e2;
+    text-decoration: none;
+}
+
+strong {
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+em {
+    color: #555;
+}
+
+hr {
+    border: none;
+    border-top: 2px solid #ddd;
+    margin: 8px 0;  /* Reduced from 20px */
+}
+
+/* Syntax highlighting for code blocks - adjusted for smaller text */
+.hljs {
+    background: #f5f5f5;
+    color: #333;
+    font-size: 0.945em;  /* 35% bigger than 0.7em */
+    line-height: 1.3;
+}
+
+.hljs-keyword {
+    color: #0066cc;
+    font-weight: bold;
+}
+
+.hljs-string {
+    color: #008000;
+}
+
+.hljs-comment {
+    color: #808080;
+    font-style: italic;
+}
+
+.hljs-number {
+    color: #cc6600;
+}
+
+.hljs-function {
+    color: #0066cc;
+}
+
+/* Notebook cell markers - make them subtle */
+div.cell {
+    margin: 2px 0;  /* Further reduced from 4px */
+    page-break-inside: avoid;  /* Keep cell contents together */
+    page-break-before: avoid;  /* Don't break before cells (except H1 will force it) */
+}
+
+/* CRITICAL: Code cells should NEVER start new pages - override any other rules */
+div.cell.code,
+.cell.code,
+div[class*="cell"][class*="code"] {
+    page-break-before: avoid !important;
+    break-before: avoid !important;  /* CSS3 property for better support */
+}
+
+/* Handle all possible code cell structures from pandoc */
+div[class*="cell"][class*="code"],
+div.cell.code,
+.cell.code,
+div.sourceCode,
+pre.sourceCode {
+    page-break-before: avoid !important;
+    break-before: avoid !important;
+}
+
+/* Ensure that ANY element following a markdown cell with H1 doesn't break */
+div.cell.markdown:has(h1) + * {
+    page-break-before: avoid !important;
+}
+
+/* Specifically target code cells that come after any markdown cell */
+div.cell.markdown + div.cell.code,
+div.cell.markdown ~ div.cell.code:first-of-type {
+    page-break-before: avoid !important;
+}
+
+/* Markdown cells in notebooks */
+div.text_cell {
+    margin: 2px 0;  /* Further reduced from 4px */
+}
+
+/* Pandoc fenced div syntax for notebook cells - CRITICAL for gap reduction */
+div.cell.markdown,
+div.cell.code,
+section.cell.markdown,
+section.cell.code,
+.cell.markdown,
+.cell.code {
+    margin: 0 !important;
+    padding: 0 !important;
+    margin-top: 2px !important;
+    margin-bottom: 2px !important;
+    page-break-inside: avoid;  /* Keep cell contents together */
+}
+
+/* Markdown sections: Don't set default page-break-before - let H1 control it */
+/* But ensure they don't break after themselves - THIS IS CRITICAL */
+section.cell.markdown,
+section[class*="cell"][class*="markdown"] {
+    /* Don't set page-break-before here - H1 will control it via page-break-before: always */
+    page-break-after: avoid !important;  /* CRITICAL: Don't break after markdown sections - keep code cell on same page */
+    break-after: avoid !important;  /* CSS3 property for better support */
+    /* Ensure section doesn't create its own page */
+    display: block !important;
+    /* Prevent any automatic page breaks after sections */
+    orphans: 0 !important;
+    widows: 0 !important;
+}
+
+/* However, if section starts with H1, the section itself should also break */
+/* This is a fallback in case H1's page-break doesn't propagate to section */
+section.cell.markdown:first-child > h1:first-child,
+section.cell.markdown > h1:first-child {
+    /* H1 will handle the break, but ensure section doesn't block it */
+}
+
+/* Code divs should never break before */
+div.cell.code,
+section.cell.code {
+    page-break-before: avoid !important;
+}
+
+/* Markdown cells should not break before (unless they contain H1) */
+.cell.markdown,
+div.cell.markdown {
+    page-break-before: avoid;
+}
+
+/* Code cells should not start new pages - they follow markdown cells */
+.cell.code,
+div.cell.code,
+div[class*="cell.code"],
+div[class*="cell"][class*="code"] {
+    page-break-before: avoid !important;
+    page-break-after: auto;
+    orphans: 3;
+    widows: 3;
+}
+
+/* More aggressive: Target all possible code cell structures */
+div[class*="code"],
+div[class*="sourceCode"],
+div.sourceCode {
+    page-break-before: avoid !important;
+}
+
+/* Target code blocks specifically - they should never start new pages */
+pre[class*="python"],
+pre[class*="code"],
+pre.sourceCode {
+    page-break-before: avoid !important;
+}
+
+/* Ensure code cells don't break before, even if they're in different containers */
+div.cell.markdown + div.cell.code,
+.cell.markdown + .cell.code,
+div[class*="markdown"] + div[class*="code"] {
+    page-break-before: avoid !important;
+    margin-top: 2px !important;
+}
+
+/* Pandoc sometimes wraps notebook cells in divs - reduce their spacing */
+div.sourceCode,
+div.cell-output,
+div[class*="cell"] {
+    margin: 2px 0;
+}
+
+/* Reduce spacing in notebook cell containers */
+div[class*="notebook"] {
+    margin: 0;
+    padding: 0;
+}
+
+/* Target the specific pandoc fenced div containers */
+div[class*="cell.markdown"],
+div[class*="cell.code"] {
+    margin: 0 !important;
+    padding: 0 !important;
+    margin-top: 1px !important;
+    margin-bottom: 1px !important;
+}
+
+/* Reduce spacing when H5 follows H1 (common in notebook markdown cells) */
+h1 + h5 {
+    margin-top: 2px;  /* Minimal spacing when H5 follows H1 */
+}
+
+/* Reduce spacing between consecutive H5 headings */
+h5 + h5 {
+    margin-top: 2px;
+}
+
+/* Reduce spacing when H5 follows lists (the "Focus" pattern) */
+ul + h5, ol + h5, 
+ul + h6, ol + h6 {
+    margin-top: 2px !important;  /* Force minimal spacing */
+}
+
+/* Handle "Focus" as bold text (not heading) - minimal spacing after lists */
+ul + p:has(strong:first-child),
+ol + p:has(strong:first-child),
+ul + p strong:first-child,
+ol + p strong:first-child {
+    margin-top: 2px !important;
+}
+
+/* Reduce spacing for paragraphs that start with "Focus" after lists */
+ul + p,
+ol + p {
+    margin-top: 2px !important;
+}
+
+/* Specifically target paragraphs containing "Focus" after lists */
+ul ~ p:has-text("Focus"),
+ol ~ p:has-text("Focus") {
+    margin-top: 2px !important;
+    padding-top: 0 !important;
+}
+
+/* Reduce spacing when H5 follows paragraphs */
+p + h5 {
+    margin-top: 2px;
+}
+
+/* Reduce spacing in paragraphs */
+p {
+    margin: 4px 0;  /* Reduced from 6px */
+}
+
+/* Special handling for paragraphs that follow lists (like "Focus" lines) */
+ul + p,
+ol + p {
+    margin-top: 2px !important;  /* Minimal spacing after lists */
+    margin-bottom: 4px;
+}
+
+/* Reduce spacing after lists when followed by headings */
+ul + h5, ol + h5 {
+    margin-top: 2px;  /* Minimal spacing - reduced from 4px */
+}
+
+/* Reduce spacing when H5 follows a list (common pattern in notebooks) */
+li:last-child {
+    margin-bottom: 2px;  /* Reduce bottom margin of last list item */
+}
+
+ul:last-child, ol:last-child {
+    margin-bottom: 4px;  /* Reduce bottom margin of lists */
+}
+
+/* DataFrames and tables from notebook outputs */
+.dataframe {
+    font-size: 0.7em;
+    margin: 6px 0;
+}
+
+/* Images from notebook outputs */
+img {
+    max-width: 100%;
+    height: auto;
+    page-break-inside: avoid;
+    margin: 6px 0;
+}
+
+/* Better handling of long lines in code/output */
+pre, code, .output_stream {
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+/* Aggressive spacing reduction for notebook cell transitions */
+/* Pandoc may create sections or divs between cells - minimize their impact */
+section, article {
+    margin: 0;
+    padding: 0;
+}
+
+/* Reduce spacing between any elements that might be created by pandoc */
+* + h5, * + h6 {
+    margin-top: 2px !important;
+}
+
+/* Specifically target the gap between lists and H5 "Focus" headings */
+ul:last-of-type + h5,
+ol:last-of-type + h5,
+ul:last-of-type + h6,
+ol:last-of-type + h6 {
+    margin-top: 0px !important;
+    padding-top: 0px !important;
+}
+
+/* Handle the blank line between list and H5 - target empty p tags between them */
+/* WeasyPrint needs more specific targeting */
+ul + p:empty + h5,
+ol + p:empty + h5,
+ul + p:empty + h6,
+ol + p:empty + h6,
+ul ~ p:empty + h5,
+ol ~ p:empty + h5 {
+    margin-top: 0px !important;
+    padding-top: 0px !important;
+}
+
+/* Remove spacing from empty paragraphs that come between lists and headings */
+ul + p:empty,
+ol + p:empty,
+ul ~ p:empty,
+ol ~ p:empty {
+    display: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    line-height: 0 !important;
+    font-size: 0 !important;
+    visibility: hidden !important;
+}
+
+/* WeasyPrint: Force zero spacing when list is followed by any element then H5 */
+ul + * + h5,
+ol + * + h5 {
+    margin-top: 0px !important;
+}
+
+/* If there's an empty element between list and H5, make it invisible */
+ul + *:empty + h5,
+ol + *:empty + h5 {
+    margin-top: 0px !important;
+}
+
+ul + *:empty,
+ol + *:empty {
+    display: none !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Reduce spacing before code blocks (when they follow markdown cells) */
+h5 + pre, h6 + pre, p + pre, ul + pre, ol + pre {
+    margin-top: 4px;  /* Minimal spacing before code blocks */
+    page-break-before: avoid !important;  /* Code blocks should not start new pages */
+}
+
+/* Ensure code blocks following markdown cells stay on same page */
+.cell.markdown + .cell.code,
+div.cell.markdown + div.cell.code,
+section.cell.markdown + div.cell.code,
+section.cell.markdown + section.cell.code,
+.cell.markdown ~ .cell.code,
+div.cell.markdown ~ div.cell.code,
+section.cell.markdown ~ div.cell.code,
+section.cell.markdown ~ section.cell.code {
+    page-break-before: avoid !important;
+    margin-top: 2px !important;
+}
+
+/* More aggressive: Target any code-related element following markdown */
+div.cell.markdown ~ pre,
+div.cell.markdown ~ div.sourceCode,
+div.cell.markdown ~ div[class*="code"] {
+    page-break-before: avoid !important;
+}
+
+/* Target pandoc's fenced div structure more specifically */
+div.cell.markdown ~ div.cell.code pre,
+div.cell.markdown ~ div.cell.code div.sourceCode {
+    page-break-before: avoid !important;
+}
+
+/* CRITICAL: After H1 in markdown cell, next code cell should stay on same page */
+h1 ~ *,
+h1 + * {
+    page-break-before: avoid !important;
+}
+
+/* Ensure that after a markdown cell with H1, the following code cell doesn't break */
+div.cell.markdown:has(h1) ~ div.cell.code,
+div.cell.markdown:has(h1) + div.cell.code {
+    page-break-before: avoid !important;
+    margin-top: 2px !important;
+}
+
+/* Remove excessive spacing from empty paragraphs (pandoc sometimes creates these) */
+/* WeasyPrint-specific: More aggressive rules for PDF rendering */
+p:empty {
+    margin: 0 !important;
+    padding: 0 !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    display: none !important;  /* Hide completely empty paragraphs */
+    line-height: 0 !important;
+    font-size: 0 !important;
+    visibility: hidden !important;
+}
+
+/* Target paragraphs that contain only whitespace (newlines, spaces) */
+p:only-child:empty,
+p:empty:not(:first-child):not(:last-child) {
+    display: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: 0 !important;
+}
+
+/* Reduce spacing for paragraphs with minimal content */
+p br {
+    line-height: 0.5;
+}
+
+/* Target paragraphs that only contain whitespace or line breaks */
+p:has(> br:only-child),
+p:has(> :empty) {
+    margin: 0 !important;
+    padding: 0 !important;
+    height: 0 !important;
+    display: none !important;
+}
+
+/* Reduce spacing around empty divs that pandoc might create */
+div:empty {
+    margin: 0 !important;
+    padding: 0 !important;
+    height: 0 !important;
+    display: none !important;
+}
+
+/* CRITICAL: Reduce spacing inside markdown cells - especially between list and H5 */
+.cell.markdown ul:last-child,
+.cell.markdown ol:last-child,
+div.cell.markdown ul:last-child,
+div.cell.markdown ol:last-child {
+    margin-bottom: 0px !important;
+    padding-bottom: 0px !important;
+}
+
+.cell.markdown ul:last-child + h5,
+.cell.markdown ol:last-child + h5,
+div.cell.markdown ul:last-child + h5,
+div.cell.markdown ol:last-child + h5 {
+    margin-top: 0px !important;
+    padding-top: 0px !important;
+}
+
+/* Reduce spacing when H5 is the first element after a list in a markdown cell */
+.cell.markdown > ul:last-of-type + h5,
+.cell.markdown > ol:last-of-type + h5,
+div.cell.markdown > ul:last-of-type + h5,
+div.cell.markdown > ol:last-of-type + h5 {
+    margin-top: 0px !important;
+    padding-top: 0px !important;
+}
+

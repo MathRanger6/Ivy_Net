@@ -1,0 +1,23 @@
+--- 20Mar
++++ live
+@@ -296,5 +296,5 @@
+                             if log_z or use_log_xy:
+                                 title += "\n(log scale" + (" z" if log_z else "") + (" xy" if use_log_xy else "") + ")"
+-                            ax.set_title(title, fontsize=18, fontweight='bold', y=0.98, pad=0)
++                            ax.set_title(title, fontsize=18, fontweight='bold', y=1.02, pad=0)
+                             # Keep axes increasing and bring the origin to the front corner
+                             ax.set_xlim(x_min, x_max)
+@@ -334,5 +334,5 @@
+                                 ax2_inset.plot(y_1d, z_1d, color='darkorange', linewidth=2)
+                                 ax2_inset.axhline(1.0, color='gray', linestyle='--', linewidth=1)
+-                                _inset_color = 'white'  # visible on dark contour background
++                                _inset_color = 'white'  # visible on dark color background
+                                 ax2_inset.set_xlabel(var_y_label_display, fontsize=9, color=_inset_color)
+                                 ax2_inset.set_ylabel('HR (slice)', fontsize=9, color=_inset_color)
+@@ -350,5 +350,5 @@
+                             if log_z or use_log_xy:
+                                 title2 += "\n(log scale" + (" z" if log_z else "") + (" xy" if use_log_xy else "") + ")"
+-                            ax2.set_title(title2, fontsize=16, fontweight='bold')
++                            ax2.set_title(title2, fontsize=16, fontweight='bold', y=1.1, pad =0)
+                             cbar2 = fig2.colorbar(contour, label='log(Hazard Ratio)' if log_z else 'Hazard Ratio')
+                             cbar2.ax.axhline(1.0, color='red', linestyle='dotted', linewidth=2)
