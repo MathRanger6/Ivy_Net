@@ -493,7 +493,7 @@ def fetch_works_by_year(author_records: list,
 
     est_total_sec = n_todo * delay
     print(f"\n  Authors to fetch   : {n_todo:,}  ({len(done_ids):,} OpenAlex IDs already in {out_path.name})")
-    print(f"  Eligible (≤{confidence_min}) w/ ID : {len(eligible):,}  (from {len(author_records):,} author rows)")
+    print(f"  Eligible (≥{confidence_min}) w/ ID : {len(eligible):,}  (from {len(author_records):,} author rows)")
     print(f"  Confidence floor   : {confidence_min}")
     print(f"  Est. total time    : {_hms(est_total_sec)}  (network adds ~30–60%)")
     print(f"  {'─'*60}")
@@ -507,7 +507,7 @@ def fetch_works_by_year(author_records: list,
         elif not eligible:
             print(
                 "  Nothing to fetch — no author rows with both openalex_id and "
-                f"match_confidence ≤ {confidence_min}."
+                f"match_confidence ≥ {confidence_min}."
             )
         else:
             print("  Nothing to fetch — works file empty or skip_done has nothing new.")
