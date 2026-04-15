@@ -2,6 +2,8 @@
 .env
 .env.local
 *.pem
+# SSH private key (never commit — public key is ivy_net_keys.pub)
+ivy_net_keys
 
 # --- Python ---
 __pycache__/
