@@ -8,6 +8,7 @@
 # Monitor live:
 #   tail -f slurm-pipe_job-<JOBID>.out
 #   tail -f slurm-pipe_job-<JOBID>.err
+#   watch -n 5 squeue -u dzk3ja
 
 #SBATCH --time=6:00:00
 #SBATCH --nodes=1

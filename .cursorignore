@@ -1,0 +1,56 @@
+# .cursorignore — keeps Cursor's indexer off large/generated files
+# Mirrors .gitignore but focused on what would cause the file explorer to spin.
+
+# HTML snapshot archive (10s of GB)
+**/faculty_snapshots/
+
+# DBLP XML dump (multi-GB)
+python_packages/dblp-parser/dblp.xml
+python_packages/dblp-parser/dblp.dtd
+datasets/tenure/dblp.xml
+datasets/tenure/*.xml
+
+# Large generated JSONL panels
+tenure/tenure_pipeline/faculty_snapshots_plan.jsonl
+tenure/tenure_pipeline/faculty_snapshots_strategy_audit.jsonl
+tenure/tenure_pipeline/faculty_snapshots_index.jsonl
+tenure/tenure_pipeline/faculty_snapshots_parsed.jsonl
+tenure/tenure_pipeline/faculty_panel.jsonl
+tenure/tenure_pipeline/faculty_panel_collisions.jsonl
+tenure/tenure_pipeline/faculty_panel_enriched.jsonl
+tenure/tenure_pipeline/faculty_panel_with_pools.jsonl
+tenure/tenure_pipeline/faculty_panel_analysis*.jsonl
+tenure/tenure_pipeline/openalex_author_ids.jsonl
+tenure/tenure_pipeline/openalex_works_by_year.jsonl
+tenure/tenure_pipeline/openalex_low_confidence.jsonl
+
+# DBLP parsed per-year JSONL (433MB)
+tenure/tenure_pipeline/dblp_parsed/
+
+# IPEDS caches
+tenure/tenure_pipeline/_ipeds_cache/
+tenure/tenure_pipeline/_ipeds_probe/
+
+# Basketball / large datasets
+datasets/mbb/
+
+# Large legacy / ad-hoc trees
+obsolete_files/
+obsolete_documents/
+deleted_files/
+big_dfs/
+zips/
+Gephi/
+1-Various_PDE_and_Chat_stuff/
+hierarchy_data/**/*.zip
+
+# Python / Jupyter noise
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# OS noise
+.DS_Store
+Thumbs.db
