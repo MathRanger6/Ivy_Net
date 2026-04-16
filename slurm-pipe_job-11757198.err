@@ -1606,3 +1606,27 @@ Executing Cell 35--------------------------------------
     match → HIGH 139(19%)  MED 186  LOW 20  MULTI 161  NONE 244
     API: 750 calls  100.0% OK  avg 272ms  p95 429ms  │  429×0  5xx×0  timeout×0  empty×223
 
+  [  775/1,221]  63.5%  elapsed 16:13  ETA 9:20  rate 48/min
+    match → HIGH 148(19%)  MED 188  LOW 22  MULTI 166  NONE 251
+    API: 775 calls  100.0% OK  avg 267ms  p95 421ms  │  429×0  5xx×0  timeout×0  empty×228
+
+  [  800/1,221]  65.5%  elapsed 16:45  ETA 8:49  rate 48/min
+    match → HIGH 154(19%)  MED 191  LOW 22  MULTI 172  NONE 261
+    API: 800 calls  100.0% OK  avg 266ms  p95 414ms  │  429×0  5xx×0  timeout×0  empty×238
+
+  [  825/1,221]  67.6%  elapsed 17:16  ETA 8:17  rate 48/min
+    match → HIGH 159(19%)  MED 193  LOW 22  MULTI 178  NONE 273
+    API: 825 calls  100.0% OK  avg 266ms  p95 396ms  │  429×0  5xx×0  timeout×0  empty×250
+
+  [  850/1,221]  69.6%  elapsed 17:48  ETA 7:46  rate 48/min
+    match → HIGH 166(20%)  MED 195  LOW 22  MULTI 182  NONE 285
+    API: 850 calls  100.0% OK  avg 267ms  p95 414ms  │  429×0  5xx×0  timeout×0  empty×261
+
+  [  875/1,221]  71.7%  elapsed 18:20  ETA 7:15  rate 48/min
+    match → HIGH 172(20%)  MED 197  LOW 23  MULTI 187  NONE 296
+    API: 875 calls  100.0% OK  avg 268ms  p95 423ms  │  429×0  5xx×0  timeout×0  empty×271
+
+  [  900/1,221]  73.7%  elapsed 18:52  ETA 6:43  rate 48/min
+    match → HIGH 184(20%)  MED 197  LOW 23  MULTI 192  NONE 304
+    API: 900 calls  100.0% OK  avg 272ms  p95 434ms  │  429×0  5xx×0  timeout×0  empty×278
+
