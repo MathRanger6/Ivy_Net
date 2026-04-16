@@ -67,12 +67,58 @@ if [ ! -f "$CSS_FILE" ]; then
     CSS_FILE=""
 fi
 
-# Activate conda environment and run conversion
-source /opt/anaconda3/etc/profile.d/conda.sh
-conda activate talent_net
+# Activate conda environment and run conversion (HPC Miniforge + Mac Anaconda)
+# Override env name:   IVY_NET_PDF_ENV=talent_net ./generate_pdf_playwright.sh ...
+# Default: tenure_net if present, else talent_net (legacy Mac).
+init_conda_shell() {
+    if [[ -f /opt/anaconda3/etc/profile.d/conda.sh ]]; then
+        # shellcheck source=/dev/null
+        source /opt/anaconda3/etc/profile.d/conda.sh
+        return 0
+    fi
+    for _conda_sh in "${HOME}/miniforge3/etc/profile.d/conda.sh" \
+                     "${HOME}/.conda/etc/profile.d/conda.sh"; do
+        if [[ -f "$_conda_sh" ]]; then
+            # shellcheck source=/dev/null
+            source "$_conda_sh"
+            return 0
+        fi
+    done
+    if command -v conda >/dev/null 2>&1; then
+        eval "$(conda shell.bash hook)"
+        return 0
+    fi
+    return 1
+}
 
-# Ensure we use the conda environment's Python (not system python3)
-CONDA_PYTHON="/opt/anaconda3/envs/talent_net/bin/python"
+if [[ "${IVY_NET_PDF_FORCE_ACTIVATE:-}" != "1" && -n "${CONDA_PREFIX:-}" && -x "${CONDA_PREFIX}/bin/python" ]]; then
+    case "${CONDA_DEFAULT_ENV:-}" in
+        tenure_net|talent_net)
+            echo "Using already-activated conda: ${CONDA_PREFIX}"
+            CONDA_PYTHON="${CONDA_PREFIX}/bin/python"
+            ;;
+        *)
+            _need_activate=1
+            ;;
+    esac
+fi
+if [[ "${_need_activate:-0}" == "1" ]] || [[ -z "${CONDA_PYTHON:-}" ]]; then
+    if ! init_conda_shell; then
+        echo "❌ Error: conda not found. On Rivanna: module load miniforge && re-run."
+        exit 1
+    fi
+    if [[ -n "${IVY_NET_PDF_ENV:-}" ]]; then
+        conda activate "${IVY_NET_PDF_ENV}"
+    elif conda env list | awk '{print $1}' | grep -qx 'tenure_net'; then
+        conda activate tenure_net
+    elif conda env list | awk '{print $1}' | grep -qx 'talent_net'; then
+        conda activate talent_net
+    else
+        echo "❌ Error: No tenure_net (or talent_net) env. Create tenure_net or set IVY_NET_PDF_ENV."
+        exit 1
+    fi
+    CONDA_PYTHON="${CONDA_PREFIX}/bin/python"
+fi
 
 # Step 0: Convert Jupyter notebook to markdown if needed
 if [ "$IS_NOTEBOOK" = true ]; then

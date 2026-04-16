@@ -9,16 +9,23 @@ Two-phase pipeline:
     Output: openalex_author_ids.jsonl
 
   Phase B  fetch_works_by_year()
-    For each resolved author, pull publication counts grouped by year via
-    OpenAlex's group_by endpoint (one request per author, very efficient).
+    For each resolved author, aggregate publication counts by calendar year.
     Output: openalex_works_by_year.jsonl
 
-Data source (API only)
-----------------------
-This module talks **only** to ``https://api.openalex.org`` (see ``_get`` / ``_BASE``).
-It does **not** read a local OpenAlex bulk snapshot (e.g. downloaded ``.csv.gz`` table
-shards). Those are a possible future optimization when a mount path exists; until
-then, Cells 6A–6B and any CLI use of this file are entirely API-based.
+Data source for Phase B
+-----------------------
+* **API (default):** ``https://api.openalex.org`` group_by on works
+  (see ``_get`` / ``_BASE``) — one HTTP request per author.
+
+* **Bulk snapshot (optional):** pass ``snapshot_root`` to ``fetch_works_by_year``,
+  pointing at an OpenAlex-style tree such as ``~/cdh/OpenAlex1125`` on Rivanna.
+  Uses **relational CSV exports** (not ``data/works`` JSONL):
+
+  - ``publicationauthoraffiliation/*.csv.gz`` — PublicationId ↔ AuthorId
+  - ``pub2year.csv.gz`` (at snapshot root) — PublicationId → Year
+
+  This performs full scans of those tables (batch/HPC use); no API key required
+  for Phase B in that mode.
 
 API courtesy
 ------------
@@ -42,13 +49,18 @@ scholarly works, authors, venues, institutions, and concepts. ArXiv.
 https://arxiv.org/abs/2205.01833
 """
 
+import csv
+import glob
+import gzip
 import json
 import os
 import time
 import re
 import unicodedata
-from collections import deque
+from collections import Counter, defaultdict, deque
 from pathlib import Path
+
+from tqdm.auto import tqdm
 from urllib.request import urlopen, Request
 from urllib.parse import urlencode, quote
 from urllib.error import HTTPError, URLError
@@ -445,6 +457,190 @@ def resolve_authors(panel_records: list,
 
 
 # ---------------------------------------------------------------------------
+# Phase B helpers: bulk snapshot (CDH / OpenAlex relational CSVs)
+# ---------------------------------------------------------------------------
+
+def openalex_author_url_to_int(openalex_id: str):
+    """
+    Map an API-style OpenAlex author id (URL or ``A123...``) to the integer
+    ``AuthorId`` used in ``publicationauthoraffiliation*.csv.gz``.
+    """
+    if not openalex_id:
+        return None
+    s = str(openalex_id).strip()
+    s = s.replace("https://openalex.org/", "")
+    if s.startswith("A"):
+        s = s[1:]
+    try:
+        return int(s)
+    except ValueError:
+        return None
+
+
+def _fetch_works_by_year_snapshot(
+    author_records: list,
+    out_path: Path,
+    snapshot_root: Path,
+    confidence_min: str,
+    skip_done: bool,
+) -> list:
+    """
+    Build the same JSONL as the API path using:
+
+      * ``publicationauthoraffiliation/*.csv.gz`` — link AuthorId → PublicationId
+      * ``pub2year.csv.gz`` — PublicationId → Year
+
+    Full scans of both — intended for HPC batch runs over local NVMe/Lustre.
+    """
+    TIER_RANK = {"HIGH": 0, "MEDIUM": 1, "LOW": 2, "MULTI": 3, "NONE": 4}
+    min_rank = TIER_RANK.get(confidence_min, 1)
+
+    out_path = Path(out_path)
+    done_ids: set = set()
+    if skip_done and out_path.exists():
+        with open(out_path, encoding="utf-8") as f:
+            for line in f:
+                try:
+                    done_ids.add(json.loads(line)["openalex_id"])
+                except Exception:
+                    pass
+
+    def _eligible(r: dict) -> bool:
+        return bool(r.get("openalex_id")) and (
+            TIER_RANK.get(r.get("match_confidence", "NONE"), 99) <= min_rank
+        )
+
+    eligible = [r for r in author_records if _eligible(r)]
+    todo = [r for r in eligible if r["openalex_id"] not in done_ids]
+    n_todo = len(todo)
+
+    print(f"\n  Authors to aggregate : {n_todo:,}  ({len(done_ids):,} OpenAlex IDs already in {out_path.name})")
+    print(f"  Eligible (≥{confidence_min}) w/ ID : {len(eligible):,}  (from {len(author_records):,} author rows)")
+    print(f"  Data source          : bulk snapshot (relational CSVs, no HTTP)")
+    print(f"  {'─'*60}")
+
+    if not todo:
+        if eligible and done_ids:
+            print(
+                "  Nothing to fetch — every eligible author ID already has ≥1 row in the works file "
+                "(skip_done). Delete or rename the works file to rebuild, or set skip_done=False."
+            )
+        elif not eligible:
+            print(
+                "  Nothing to fetch — no author rows with both openalex_id and "
+                f"match_confidence ≥ {confidence_min}."
+            )
+        else:
+            print("  Nothing to fetch — works file empty or skip_done has nothing new.")
+        return []
+
+    target_ints: set = set()
+    int_to_auth: dict = {}
+    for auth in todo:
+        aid = openalex_author_url_to_int(auth["openalex_id"])
+        if aid is None:
+            continue
+        target_ints.add(aid)
+        int_to_auth[aid] = auth
+
+    if not target_ints:
+        print("  Nothing to fetch — could not parse any OpenAlex author ids for the todo list.")
+        return []
+
+    paa_dir = snapshot_root / "publicationauthoraffiliation"
+    p2y_path = snapshot_root / "pub2year.csv.gz"
+
+    pubs_by_author: dict = defaultdict(set)
+    paa_files = sorted(glob.glob(str(paa_dir / "*.csv.gz")))
+    if not paa_files:
+        print(f"  ERROR: no *.csv.gz under {paa_dir}")
+        return []
+
+    print(f"  Scanning {len(paa_files):,} publicationauthoraffiliation shards …")
+    for fp in tqdm(paa_files, desc="  PAA shards", unit="file"):
+        with gzip.open(fp, "rt", encoding="utf-8", newline="") as gz:
+            reader = csv.DictReader(gz)
+            for row in reader:
+                try:
+                    aid = int(row["AuthorId"])
+                    pid = int(row["PublicationId"])
+                except (KeyError, ValueError, TypeError):
+                    continue
+                if aid in target_ints:
+                    pubs_by_author[aid].add(pid)
+
+    all_pids: set = set()
+    for s in pubs_by_author.values():
+        all_pids.update(s)
+
+    print(f"  Unique publication ids for target authors : {len(all_pids):,}")
+    print(f"  Scanning pub2year.csv.gz …")
+
+    pub_year: dict = {}
+    with gzip.open(p2y_path, "rt", encoding="utf-8", newline="") as gz:
+        reader = csv.DictReader(gz)
+        for row in tqdm(reader, desc="  pub2year rows", unit=" rows"):
+            try:
+                pid = int(row["PublicationId"])
+            except (KeyError, ValueError, TypeError):
+                continue
+            if pid not in all_pids:
+                continue
+            try:
+                y = int(row["Year"])
+            except (KeyError, ValueError, TypeError):
+                continue
+            pub_year[pid] = y
+
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    results = []
+    t_start = time.time()
+
+    with open(out_path, "a", encoding="utf-8") as fout:
+        for i, auth in enumerate(todo, 1):
+            aid = openalex_author_url_to_int(auth["openalex_id"])
+            if aid is None:
+                continue
+            pids = pubs_by_author.get(aid)
+            if not pids:
+                continue
+            counts = Counter()
+            for pid in pids:
+                y = pub_year.get(pid)
+                if y is None:
+                    continue
+                counts[y] += 1
+            for year in sorted(counts.keys()):
+                rec = {
+                    "openalex_id": auth["openalex_id"],
+                    "faculty_id": auth["faculty_id"],
+                    "uni_slug": auth["uni_slug"],
+                    "year": year,
+                    "n_works": counts[year],
+                }
+                fout.write(json.dumps(rec) + "\n")
+                results.append(rec)
+            fout.flush()
+
+            if i % 100 == 0 or i == n_todo:
+                elapsed = time.time() - t_start
+                rate = i / elapsed if elapsed > 0 else 0
+                remain = (n_todo - i) / rate if rate > 0 else 0
+                print(
+                    f"  [{i:>5,}/{n_todo:,}] {i/n_todo*100:5.1f}%  "
+                    f"elapsed {_hms(elapsed)}  ETA {_hms(remain)}  "
+                    f"rate {rate*60:.0f}/min  │  {len(results):,} year-records written",
+                    flush=True,
+                )
+
+    total_elapsed = time.time() - t_start
+    print(f"\n  {'─'*60}")
+    print(f"  Aggregated works for {n_todo:,} authors in {_hms(total_elapsed)} (snapshot)")
+    print(f"  Total year-records : {len(results):,}")
+    return results
+
+
+# ---------------------------------------------------------------------------
 # Phase B: Works by year
 # ---------------------------------------------------------------------------
 
@@ -452,23 +648,43 @@ def fetch_works_by_year(author_records: list,
                         out_path: Path,
                         confidence_min: str = "MEDIUM",
                         delay: float = _DELAY,
-                        skip_done: bool = True) -> list:
+                        skip_done: bool = True,
+                        snapshot_root: Path | None = None) -> list:
     """
-    For each resolved author (confidence >= confidence_min), fetch publication
-    counts grouped by year using OpenAlex group_by (1 request per author).
+    For each resolved author (confidence >= confidence_min), aggregate publication
+    counts by calendar year — either from a **bulk snapshot** (``snapshot_root``) or
+    via the OpenAlex **API** (group_by, one request per author).
 
     Parameters
     ----------
     author_records  : list[dict]  — from openalex_author_ids.jsonl
     out_path        : Path        — write JSONL results here incrementally
     confidence_min  : str         — minimum confidence to include ('HIGH'|'MEDIUM'|'LOW')
-    delay           : float       — seconds between requests
+    delay           : float       — seconds between API requests (ignored for snapshot mode)
+    snapshot_root   : Path | None  — optional OpenAlex tree with relational CSVs (see module doc)
 
     Returns
     -------
     list[dict]  — one record per (openalex_id, year):
-        openalex_id, faculty_id, year, n_works, n_works_oa (open-access)
+        openalex_id, faculty_id, uni_slug, year, n_works
+
+    snapshot_root
+        If set and ``…/publicationauthoraffiliation`` + ``…/pub2year.csv.gz`` exist,
+        uses bulk CSV scans (no HTTP). Otherwise uses the API (``delay`` between calls).
     """
+    if snapshot_root is not None:
+        sr = Path(snapshot_root).expanduser()
+        paa = sr / "publicationauthoraffiliation"
+        p2y = sr / "pub2year.csv.gz"
+        if sr.is_dir() and paa.is_dir() and p2y.is_file():
+            return _fetch_works_by_year_snapshot(
+                author_records, out_path, sr, confidence_min, skip_done
+            )
+        print(
+            f"\n  Stage 6B: snapshot_root {sr} missing publicationauthoraffiliation/ or "
+            f"pub2year.csv.gz — using OpenAlex API."
+        )
+
     TIER_RANK = {"HIGH": 0, "MEDIUM": 1, "LOW": 2, "MULTI": 3, "NONE": 4}
     min_rank  = TIER_RANK.get(confidence_min, 1)
 
@@ -583,7 +799,6 @@ def fetch_works_by_year(author_records: list,
 
 def match_summary(author_records: list) -> dict:
     """Print and return a confidence-tier breakdown."""
-    from collections import Counter
     counts = Counter(r.get("match_confidence", "NONE") for r in author_records)
     total  = len(author_records)
     print(f"\n  {'Tier':<10} {'N':>6}  {'%':>6}")

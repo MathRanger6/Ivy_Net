@@ -1,0 +1,11 @@
+{
+  "exclude": [
+    "datasets",
+    "backups",
+    "python_packages",
+    "random",
+    "**/__pycache__",
+    "**/.ipynb_checkpoints",
+    "**/node_modules"
+  ]
+}

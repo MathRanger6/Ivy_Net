@@ -60,6 +60,9 @@ dependencies:
       - nameparser==1.1.3
       - numba==0.65.0
       - openapi-pydantic==0.5.1
+      # fastmcp 2.10 + cursor-notebook-mcp: Pydantic 2.12+ breaks Settings (TypeError: default and default_factory)
+      - pydantic==2.10.6
+      - pydantic-settings==2.6.1
       - paramiko==4.0.0
       - partd==1.4.2
       - pynacl==1.6.2

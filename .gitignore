@@ -1,6 +1,8 @@
 # --- Secrets & local env ---
 .env
 .env.local
+# Slurm: optional post-step hook (copy from myjob.local.sh.example)
+myjob.local.sh
 *.pem
 # SSH private key (never commit — public key is ivy_net_keys.pub)
 ivy_net_keys

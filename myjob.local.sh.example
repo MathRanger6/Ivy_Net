@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# Optional Slurm hook: copy this file to myjob.local.sh (same directory as myjob.slurm).
+# myjob.local.sh is gitignored — put machine-specific or one-off commands here.
+#
+# Runs at the end of myjob.slurm, after conda env create/update, with:
+#   SLURM_SUBMIT_DIR  repo root (Ivy_Net)
+#   ENV_NAME          default tenure_net
+#   ENV_FILE          default environment-tenure_net.yml
+#
+# conda is on PATH; the env from the YAML already exists or was just updated.
+
+# Example — extra pip pins after a YAML change (often not needed if ENV_FILE already lists them):
+# conda run -n "${ENV_NAME:-tenure_net}" pip install "pydantic==2.10.6" "pydantic-settings==2.6.1"
+
+# Example — sanity check:
+# conda run -n "${ENV_NAME:-tenure_net}" python -c "import pydantic; print('pydantic', pydantic.__version__)"
+
+true
