@@ -28,7 +28,8 @@ Thumbs.db
 *.swp
 *.swo
 
-# --- Tenure pipeline: large / binary / sync-heavy (stay on disk + Dropbox, not Git) ---
+# --- Tenure pipeline: large / binary / sync-heavy (disk + rsync, not Git) ---
+# HTML snapshot tree — grows to 10s of GB as URL coverage + school count expand
 **/faculty_snapshots/
 # DBLP full dump (multi-GB) — keep parsers in repo, not the XML
 python_packages/dblp-parser/dblp.xml
@@ -48,19 +49,42 @@ deleted_files/
 Gephi/
 1-Various_PDE_and_Chat_stuff
 
-# --- Large data / outputs (Dropbox + local only; too big for GitHub) ---
+# --- Large data / outputs (disk + rsync only; too big or too volatile for GitHub) ---
 # DBLP dump may live under datasets/ (not only python_packages/)
 datasets/tenure/dblp.xml
 datasets/tenure/*.xml
-# Men’s basketball raw extracts + sqlite (multi-GB)
+# Men's basketball raw extracts + sqlite (multi-GB)
 datasets/mbb/
-# Derived / snapshot JSONL (hundreds of MB–GB)
-tenure/tenure_pipeline/faculty_panel.jsonl
-tenure/tenure_pipeline/faculty_snapshots_parsed.jsonl
+
+# ── tenure/tenure_pipeline: generated data (rsync, not git) ──────────────────
+# These grow as pipeline expands (more URLs → more snapshots → more parsing → bigger panels):
+
+# Wayback plan + audit (16MB now; grows as more school URLs are added/fixed)
+tenure/tenure_pipeline/faculty_snapshots_plan.jsonl
+tenure/tenure_pipeline/faculty_snapshots_strategy_audit.jsonl
+# Download log + parsed output (18MB / 415MB now; grows with each scrape round)
 tenure/tenure_pipeline/faculty_snapshots_index.jsonl
+tenure/tenure_pipeline/faculty_snapshots_parsed.jsonl
+# Cell 5: longitudinal panel (895MB now; grows with more schools + snapshots)
+tenure/tenure_pipeline/faculty_panel.jsonl
+tenure/tenure_pipeline/faculty_panel_collisions.jsonl
+# Cells 7–9: enriched + pool + analysis panels (grow with schools + OA coverage)
+tenure/tenure_pipeline/faculty_panel_enriched.jsonl
+tenure/tenure_pipeline/faculty_panel_with_pools.jsonl
+tenure/tenure_pipeline/faculty_panel_analysis*.jsonl
+# Cells 6A–6B: OA outputs (5–9MB now; will hit 50MB+ as all 168 schools are processed)
+tenure/tenure_pipeline/openalex_author_ids.jsonl
+tenure/tenure_pipeline/openalex_works_by_year.jsonl
+tenure/tenure_pipeline/openalex_low_confidence.jsonl
+tenure/tenure_pipeline/openalex_inst_map.json
+# DBLP parsed per-year JSONL (433MB total; re-parseable from XML)
 tenure/tenure_pipeline/dblp_parsed/dblp_*.jsonl
-# IPEDS probe CSVs (tens of MB)
-tenure/tenure_pipeline/_ipeds_probe/*.csv
+# IPEDS download caches (hundreds of MB of zips; regenerable)
+tenure/tenure_pipeline/_ipeds_cache/
+tenure/tenure_pipeline/_ipeds_probe/
+# Backup files
+*.bak
+
 # Hierarchy zips
 hierarchy_data/**/*.zip
 # Large slide exports (optional)
