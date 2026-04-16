@@ -3,11 +3,11 @@
 # Currently: RUN_CELL6A=True, RUN_CELL6B=True (OpenAlex author IDs + works by year).
 #
 # Submit from the Ivy_Net repo root:
-#   cd /path/to/Ivy_Net && sbatch 6d_job.slurm
+#   cd /path/to/Ivy_Net && sbatch pipe_job.slurm
 #
 # Monitor live:
-#   tail -f slurm-6d_job-<JOBID>.out
-#   tail -f slurm-6d_job-<JOBID>.err
+#   tail -f slurm-pipe_job-<JOBID>.out
+#   tail -f slurm-pipe_job-<JOBID>.err
 
 #SBATCH --time=6:00:00
 #SBATCH --nodes=1
@@ -15,7 +15,7 @@
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=64G
 #SBATCH --partition=standard
-#SBATCH --job-name=6d_job
+#SBATCH --job-name=pipe_job
 #SBATCH --output=slurm-%x-%j.out
 #SBATCH --error=slurm-%x-%j.err
 #SBATCH --mail-user=dzk3ja@virginia.edu
@@ -39,7 +39,7 @@ fi
 
 ENV_NAME="${ENV_NAME:-tenure_net}"
 NB_IN="540_tenure_pipeline.ipynb"
-NB_OUT="slurm-6d_job-${SLURM_JOB_ID}-output.ipynb"
+NB_OUT="slurm-pipe_job-${SLURM_JOB_ID}-output.ipynb"
 
 command -v conda >/dev/null || { echo "ERROR: conda not on PATH after module load." >&2; exit 1; }
 conda env list | awk '{print $1}' | grep -qx "${ENV_NAME}" \

@@ -1,6 +1,7 @@
 {
   "exclude": [
     "datasets",
+    "deleted_files",
     "backups",
     "python_packages",
     "random",
