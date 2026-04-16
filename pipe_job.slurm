@@ -13,7 +13,7 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=8
-#SBATCH --mem=64G
+#SBATCH --mem=16G
 #SBATCH --partition=standard
 #SBATCH --job-name=pipe_job
 #SBATCH --output=slurm-%x-%j.out
