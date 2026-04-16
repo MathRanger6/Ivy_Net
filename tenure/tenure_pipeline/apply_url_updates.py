@@ -115,9 +115,9 @@ def faculty_source_id(url: str) -> str:
     return hashlib.sha256(nu.encode('utf-8')).hexdigest()[:8]
 
 
-def load_disk_html_by_slug() -> dict[str, int]:
+def load_disk_html_by_slug():
     """uni_slug → count of *.html on disk (one scan of faculty_snapshots/)."""
-    out: dict[str, int] = {}
+    out = {}
     if not HTML_DIR.is_dir():
         return out
     for d in HTML_DIR.iterdir():
@@ -126,7 +126,7 @@ def load_disk_html_by_slug() -> dict[str, int]:
     return out
 
 
-def iter_school_html_files(school_dir: Path) -> list[Path]:
+def iter_school_html_files(school_dir):
     """
     All ``*.html`` under ``faculty_snapshots/<uni_slug>/``: top-level (legacy flat),
     ``legacy/``, ``<source_id>/``, etc. — same rule as Cell 4 and 3D/3E rescue cells.
@@ -190,7 +190,7 @@ def save_schools(schools: list) -> None:
 
 
 # ── Load plan state (URL-level) ────────────────────────────────────────────
-def load_url_stats() -> tuple[set, dict, dict, dict, dict]:
+def load_url_stats():
     """
     Returns:
         tried_urls   : set of all source URLs that have been CDX-queried

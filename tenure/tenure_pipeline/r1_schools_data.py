@@ -177,7 +177,9 @@ PILOT_SCHOOLS = [
         "urls"       : [
             "https://cs.rice.edu/people",
             "http://www.cs.rice.edu/CS/Faculty/",
-            "http://cs.rice.edu/CS/Faculty/"
+            "http://cs.rice.edu/CS/Faculty/",
+            "http://compsci.rice.edu/people.cfm?doc_id=3460",
+            "https://www.cs.rice.edu/faculty"
         ],
         "notes"      : "Small CS dept; expected clean static HTML for early years",
     },

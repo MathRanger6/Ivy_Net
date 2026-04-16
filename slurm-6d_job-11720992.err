@@ -1,0 +1,1755 @@
+Input Notebook:  540_tenure_pipeline.ipynb
+Output Notebook: slurm-6d_job-11720992-output.ipynb
+Executing notebook with kernel: python3
+Executing Cell 1---------------------------------------
+Ending Cell 1------------------------------------------
+Executing Cell 2---------------------------------------
+Ending Cell 2------------------------------------------
+Executing Cell 3---------------------------------------
+  Workspace root   : /sfs/gpfs/tardis/home/dzk3ja/Ivy_Net
+  DBLP XML         : /sfs/gpfs/tardis/home/dzk3ja/Ivy_Net/python_packages/dblp-parser/dblp.xml  (not found — add dump or ignore if not running Stage 1)
+  Stage 1 out dir  : /sfs/gpfs/tardis/home/dzk3ja/Ivy_Net/tenure/tenure_pipeline/dblp_parsed
+  STAGE3_HTML_DIR  : /sfs/gpfs/tardis/home/dzk3ja/Ivy_Net/tenure/tenure_pipeline/faculty_snapshots  (FACULTY_SNAPSHOTS_STORAGE='workspace')
+  3B write root      : /sfs/gpfs/tardis/home/dzk3ja/Ivy_Net/tenure/tenure_pipeline/faculty_snapshots  (WRITE_ROOT_MODE='workspace')
+  NOTE: Skip/resume + Cell 4 search: 3B write root, STAGE3_HTML_DIR, workspace …/faculty_snapshots, ~/Desktop/faculty_snapshots.
+  Target types     : ['article', 'inproceedings']
+  OpenAlex 6B       : snapshot OK → /home/dzk3ja/cdh/OpenAlex1125 (CSV mode, no API)
+
+  Ready. 04:16:28 (EST) Thu, 16 Apr 2026
+
+Ending Cell 3------------------------------------------
+Executing Cell 4---------------------------------------
+Edit BLANK: 04/16/2026 04:16:28
+
+Ending Cell 4------------------------------------------
+Executing Cell 5---------------------------------------
+Ending Cell 5------------------------------------------
+Executing Cell 6---------------------------------------
+  CELL 1 skipped  (RUN_CELL1 = False in CELL 0)  04:16:28 (EST) Thu, 16 Apr 2026
+
+Ending Cell 6------------------------------------------
+Executing Cell 7---------------------------------------
+Ending Cell 7------------------------------------------
+Executing Cell 8---------------------------------------
+[92m[1mStart Stage 2 — Build Pilot University List at 04:16:28 (EST) Thu, 16 Apr 2026[0m
+
+  Universities written : 168
+  Output               : /sfs/gpfs/tardis/home/dzk3ja/Ivy_Net/tenure/tenure_pipeline/r1_cs_departments.csv
+
+    #  University                                    URLs
+  ---  --------------------------------------------- ------------------------------------------------------------
+    1.  Cornell University                            https://www.cs.cornell.edu/people
+         [General people page — faculty mixed with postdocs and staff; filter by title at parse time]
+    2.  University of Illinois Urbana-Champaign       https://cs.illinois.edu/about/people/all-faculty/department-faculty
+                                                       + http://www.cs.uiuc.edu/people/faculty
+                                                       + http://cs.uiuc.edu/people/faculty
+         [Old domain cs.uiuc.edu used before ~2009 university rebrand to Illinois; renamed Siebel Sc]
+    3.  Indiana University                            https://cs.indiana.edu/people/index.html
+                                                       + http://www.cs.indiana.edu/People/
+                                                       + http://www.cs.indiana.edu/people/
+                                                       + https://www.soic.indiana.edu/faculty/index.html
+         [CS within Luddy School (renamed from SOIC 2019); old domain cs.indiana.edu stable; soic.in]
+    4.  University of Texas at Austin                 https://www.cs.utexas.edu/people
+         [General people page — includes faculty, research scientists, postdocs; filter by title at ]
+    5.  University of Wisconsin-Madison               https://www.cs.wisc.edu/people/faculty
+                                                       + https://www.cs.wisc.edu/people/
+                                                       + http://www.cs.wisc.edu/people/faculty
+         [Faculty list at /people/faculty; original scrape mistakenly used /people/pb (Paul Barford ]
+    6.  Purdue University                             https://cs.purdue.edu/people/faculty/index.html
+                                                       + http://www.cs.purdue.edu/people/faculty/index.html
+                                                       + http://www.cs.purdue.edu/people/faculty/
+         [Primary URL lacks www. prefix; old snapshots likely under www.cs.purdue.edu]
+    7.  Georgia Institute of Technology               https://scs.gatech.edu/people/faculty
+                                                       + http://www.cc.gatech.edu/people/faculty
+         [SCS within College of Computing; old snapshots likely under cc.gatech.edu before SCS separ]
+    8.  University of Maryland                        https://www.cs.umd.edu/people/faculty
+                                                       + https://www.cs.umd.edu/people
+         [General people page — includes faculty, postdocs, staff; filter by title at parse time]
+    9.  Brown University                              https://www.cs.brown.edu/people/faculty/
+   10.  Carnegie Mellon University                    https://www.cs.cmu.edu/people/faculty
+                                                       + http://www.cs.cmu.edu/~faculty/
+                                                       + http://www.csd.cs.cmu.edu/people
+         [SCS houses multiple depts; filtering to CSD. Old directory at ~faculty/]
+   11.  Massachusetts Institute of Technology         https://www.eecs.mit.edu/people/
+                                                       + https://www.eecs.mit.edu/role/faculty/
+                                                       + https://www.eecs.mit.edu/role/faculty-cs/
+                                                       + http://www.eecs.mit.edu/faculty/
+                                                       + https://www.csail.mit.edu/people
+                                                       + http://www.ai.mit.edu/people/
+                                                       + http://www.csail.mit.edu/biographies/
+         [EECS dept is primary home for CS faculty; eecs.mit.edu added 2026 — better Wayback coverag]
+   12.  University of California San Diego            https://cse.ucsd.edu/faculty
+                                                       + http://www-cse.ucsd.edu/people/faculty
+                                                       + http://www.cse.ucsd.edu/people/faculty
+                                                       + http://www-cse.ucsd.edu/
+                                                       + http://www.cse.ucsd.edu/
+         [UC system likely Drupal; old domain was www-cse.ucsd.edu (note hyphen); base domains added]
+   13.  Columbia University                           https://www.cs.columbia.edu/people/faculty/
+                                                       + http://www.cs.columbia.edu/people/faculty/
+                                                       + http://www.cs.columbia.edu/~faculty/
+         [Standalone CS dept in Fu Foundation School of Engineering; /people/ is nav-only hub — actu]
+   14.  Duke University                               https://cs.duke.edu/people/
+                                                       + https://cs.duke.edu/people/faculty
+                                                       + http://www.cs.duke.edu/faculty/
+                                                       + http://www.cs.duke.edu/people/faculty/
+                                                       + http://www.cs.duke.edu/people/
+         [Standalone CS dept in Trinity College of Arts and Sciences; /people/ path added for broade]
+   15.  University of Massachusetts Amherst           https://www.cics.umass.edu/people/faculty
+                                                       + http://www.cs.umass.edu/csinfo/people/faculty
+                                                       + http://www.cs.umass.edu/faculty/
+         [Became standalone CICS college 2012; before was CS dept; domain cs.umass.edu → cics.umass.]
+   16.  University of North Carolina Chapel Hill      https://cs.unc.edu/people/faculty/
+                                                       + http://www.cs.unc.edu/~faculty/
+                                                       + http://www.cs.unc.edu/people/faculty/
+         [Standalone CS dept; old directory used ~faculty/ tilde paths]
+   17.  Rice University                               https://cs.rice.edu/people
+                                                       + http://www.cs.rice.edu/CS/Faculty/
+                                                       + http://cs.rice.edu/CS/Faculty/
+                                                       + http://compsci.rice.edu/people.cfm?doc_id=3460
+                                                       + https://www.cs.rice.edu/faculty
+         [Small CS dept; expected clean static HTML for early years]
+   18.  Rutgers University                            https://www.cs.rutgers.edu/people/faculty-members
+                                                       + http://www.cs.rutgers.edu/faculty/
+                                                       + http://cs.rutgers.edu/research/faculty/
+                                                       + http://www.cs.rutgers.edu/
+         [New Brunswick campus; large public R1]
+   19.  Ohio State University                         https://cse.osu.edu/people/faculty
+                                                       + http://www.cse.ohio-state.edu/people/faculty
+                                                       + http://www.cis.ohio-state.edu/faculty.html
+                                                       + http://www.cis.ohio-state.edu/
+                                                       + http://www.cse.ohio-state.edu/
+         [Combined CSE dept; even older domain was cis.ohio-state.edu; base domains added for CDX wi]
+   20.  Penn State University                         https://www.cse.psu.edu/people/faculty
+                                                       + http://www.cse.psu.edu/faculty/
+                                                       + http://www.cse.psu.edu/research/faculty/
+                                                       + http://www.cse.psu.edu/
+         [CSE dept at University Park campus; base domain added for CDX wildcard coverage]
+   21.  Virginia Tech                                 https://cs.vt.edu/people/faculty.html
+                                                       + http://www.cs.vt.edu/people/faculty.html
+                                                       + http://cs.vt.edu/faculty/
+                                                       + http://www.cs.vt.edu/
+         [Standalone CS dept; expected clean table-based HTML for older years; base domain added for]
+   22.  North Carolina State University               https://csc.ncsu.edu/group/faculty/
+                                                       + https://csc.ncsu.edu/group/faculty/professors/
+                                                       + https://csc.ncsu.edu/directories/faculty.php
+         [group/faculty/ and /faculty/ are redirect-only in Wayback; actual table-based content at /]
+   23.  University of Florida                         https://cise.ufl.edu/people/faculty/
+                                                       + https://www.cise.ufl.edu/research/faculty/
+                                                       + http://www.cise.ufl.edu/people/faculty/
+                                                       + http://cise.ufl.edu/research/faculty/
+         [CISE dept; research/faculty sub-page covers tenure-track faculty]
+   24.  Stony Brook University                        https://www.cs.stonybrook.edu/people/faculty
+                                                       + http://www.cs.sunysb.edu/people/faculty/
+                                                       + http://www.cs.sunysb.edu/faculty/
+                                                       + http://www.cs.stonybrook.edu/about-us/People/Faculty
+                                                       + http://www.cs.sunysb.edu/research/faculty/
+         [SUNY system; old domain cs.sunysb.edu (pre-2013 rebrand); /people/faculty/ added on old do]
+   25.  University of Pittsburgh                      https://www.cs.pitt.edu/people/faculty
+                                                       + http://www.cs.pitt.edu/faculty/
+                                                       + http://cs.pitt.edu/people/faculty/
+         [Standalone CS dept in School of Computing and Information]
+   26.  University of Arizona                         https://cs.arizona.edu/people/faculty
+                                                       + http://www.cs.arizona.edu/people/faculty/
+                                                       + http://cs.arizona.edu/faculty/
+         [Standalone CS dept; expected clean HTML faculty pages]
+   27.  University of California Los Angeles          https://www.cs.ucla.edu/people/faculty/
+                                                       + http://www.cs.ucla.edu/faculty/
+                                                       + http://cs.ucla.edu/people/faculty/
+         [UC system; standalone CS dept in Henry Samueli School of Engineering]
+   28.  University of Utah                            https://www.cs.utah.edu/research/faculty/
+                                                       + http://www.cs.utah.edu/research/faculty/
+                                                       + http://www.cs.utah.edu/people/faculty/
+         [Standalone CS dept; historically strong graphics and systems]
+   29.  University of Colorado Boulder                https://www.colorado.edu/cs/people/faculty
+                                                       + http://www.cs.colorado.edu/people/faculty/
+                                                       + http://cs.colorado.edu/people/faculty/
+         [Dept URL moved from cs.colorado.edu to colorado.edu/cs]
+   30.  University of Rochester                       https://www.cs.rochester.edu/people/faculty/
+                                                       + http://www.cs.rochester.edu/u/faculty/
+                                                       + http://cs.rochester.edu/people/faculty/
+         [Standalone CS dept; old directory used ~faculty/ tilde paths]
+   31.  Dartmouth College                             https://web.cs.dartmouth.edu/people
+                                                       + https://web.cs.dartmouth.edu/people/faculty
+                                                       + http://www.cs.dartmouth.edu/faculty.html
+                                                       + http://www.cs.dartmouth.edu/people/faculty/
+         [Small Ivy CS dept; domain www.cs.dartmouth.edu → web.cs.dartmouth.edu]
+   32.  Johns Hopkins University                      https://www.cs.jhu.edu/people/
+                                                       + http://www.cs.jhu.edu/~faculty/
+                                                       + http://cs.jhu.edu/people/faculty/
+                                                       + http://www.cs.jhu.edu/people_f.html
+                                                       + http://www.cs.jhu.edu/people_rf.html
+                                                       + http://www.cs.jhu.edu/people_ap.html
+         [Standalone CS dept in Whiting School of Engineering]
+   33.  University of Minnesota                       https://cse.umn.edu/cs/faculty
+                                                       + http://www.cs.umn.edu/research/faculty/
+                                                       + http://www.cs.umn.edu/directory/faculty.html
+         [CS within CSE dept at Twin Cities campus]
+   34.  Michigan State University                     https://www.cse.msu.edu/people/faculty/
+                                                       + http://www.cse.msu.edu/people/faculty/
+                                                       + http://www.cse.msu.edu/~cse_tech/faculty/
+                                                       + http://cse.msu.edu/people/faculty/
+         [Combined CSE dept; ~cse_tech/faculty/ legacy; http(s)://www.cse.msu.edu/people/faculty/ ar]
+   35.  University of Washington                      https://www.cs.washington.edu/people/faculty/
+                                                       + http://www.cs.washington.edu/research/faculty/
+                                                       + http://www.cs.washington.edu/people/
+         [Top-ranked program; Allen School; old snapshots at www.cs.washington.edu]
+   36.  University of Virginia                        https://engineering.virginia.edu/departments/computer-science/faculty
+                                                       + http://www.cs.virginia.edu/people/faculty/
+                                                       + http://www.cs.virginia.edu/~faculty/
+                                                       + http://www.cs.virginia.edu/people/
+                                                       + http://www.cs.virginia.edu/people/faculty.html
+         [CS in Engineering; old domain www.cs.virginia.edu; URL moved to engineering.virginia.edu]
+   37.  Stanford University                           https://www.cs.stanford.edu/people
+                                                       + http://www-cs-faculty.stanford.edu/
+                                                       + http://www.cs.stanford.edu/faculty.html
+         [Top-ranked program; old tilde-style faculty list at www-cs-faculty.stanford.edu]
+   38.  UC Berkeley                                   https://www2.eecs.berkeley.edu/Faculty/Lists/CS/faculty.html
+                                                       + https://www2.eecs.berkeley.edu/Faculty/Lists/faculty.html
+                                                       + https://eecs.berkeley.edu/research/faculty/
+                                                       + http://www.eecs.berkeley.edu/Faculty/
+                                                       + http://www.cs.berkeley.edu/people/faculty/
+                                                       + http://www.eecs.berkeley.edu/Faculty/Lists/CS/list.shtml
+         [EECS dept; CS and EE share faculty; old domain www.cs.berkeley.edu]
+   39.  University of Michigan                        https://cse.engin.umich.edu/people/faculty/
+                                                       + http://www.eecs.umich.edu/eecs/faculty/
+                                                       + http://www.cse.umich.edu/~CSE/
+         [EECS dept; CSE section within EECS; both eecs.umich.edu and cse.umich.edu domains used]
+   40.  Harvard University                            https://www.seas.harvard.edu/computer-science/faculty
+                                                       + http://www.eecs.harvard.edu/people/
+                                                       + http://www.eecs.harvard.edu/research/
+                                                       + http://www.deas.harvard.edu/people/faculty/
+                                                       + http://www.eecs.harvard.edu/
+                                                       + http://www.deas.harvard.edu/
+                                                       + http://www.seas.harvard.edu/ourfaculty/viewalpha/index.html
+         [EECS dept within SEAS; old domain was DEAS before ~2007; base domains added for CDX wildca]
+   41.  Northwestern University                       https://www.mccormick.northwestern.edu/computer-science/people/faculty/
+                                                       + http://www.cs.northwestern.edu/people/faculty.html
+                                                       + http://www.eecs.northwestern.edu/faculty/
+                                                       + http://www.cs.northwestern.edu/
+         [CS within McCormick School; old domain www.cs.northwestern.edu; EECS umbrella in some eras]
+   42.  New York University                           https://cs.nyu.edu/dynamic/people/faculty/
+                                                       + https://cs.nyu.edu/dynamic/people/researchers/
+                                                       + https://cs.nyu.edu/dynamic/people/phd_students/
+                                                       + https://cs.nyu.edu/dynamic/people/staff/
+                                                       + http://www.cs.nyu.edu/faculty/
+                                                       + http://cs.nyu.edu/cs/full-faculty.html
+         [Courant Institute CS; /dynamic/people/ has separate pages for faculty, researchers, phd_st]
+   43.  Yale University                               https://cpsc.yale.edu/people/faculty
+                                                       + https://cpsc.yale.edu/people
+                                                       + http://www.cs.yale.edu/people/faculty.html
+                                                       + http://www.cs.yale.edu/people/
+                                                       + http://www.cs.yale.edu/faculty/
+         [Dept code CPSC; old domain www.cs.yale.edu (pre-2013); moved to cpsc.yale.edu; /people pat]
+   44.  University of Pennsylvania                    https://directory.seas.upenn.edu/computer-and-information-science/
+                                                       + https://www.cis.upenn.edu/people/faculty/
+                                                       + http://www.cis.upenn.edu/index.php/people/
+                                                       + http://www.cis.upenn.edu/faculty/
+                                                       + http://www.cis.upenn.edu/
+         [CIS dept in SEAS; www.cis.upenn.edu domain stable; older pages used index.php; base domain]
+   45.  University of Chicago                         https://cs.uchicago.edu/people/faculty/
+                                                       + http://www.cs.uchicago.edu/people/faculty/
+                                                       + http://www.cs.uchicago.edu/faculty/
+         [Standalone CS dept; cs.uchicago.edu; historically strong theory group]
+   46.  UC Santa Barbara                              https://www.cs.ucsb.edu/people/faculty
+                                                       + http://www.cs.ucsb.edu/research/faculty/
+                                                       + http://www.cs.ucsb.edu/people/
+         [UC system; cs.ucsb.edu domain stable; strong networking and security groups]
+   47.  UC Irvine                                     https://www.ics.uci.edu/faculty/
+                                                       + http://www.ics.uci.edu/people/faculty/
+                                                       + http://www.cs.uci.edu/faculty/
+         [ICS school; CS + informatics + stats share faculty list; www.ics.uci.edu domain]
+   48.  UC Davis                                      https://cs.ucdavis.edu/people
+                                                       + https://www.cs.ucdavis.edu/research/faculty/
+                                                       + http://www.cs.ucdavis.edu/people/faculty/
+                                                       + http://www.cs.ucdavis.edu/faculty/
+         [UC system; cs.ucdavis.edu domain stable; research/faculty subpage used]
+   49.  University of Southern California             https://www.cs.usc.edu/directory/faculty/
+                                                       + https://www.cs.usc.edu/research/faculty/
+                                                       + http://www.cs.usc.edu/people/faculty/
+                                                       + http://www.usc.edu/dept/cs/faculty/
+         [CS in Viterbi School; www.cs.usc.edu domain; research/faculty subpage covers tenure-track]
+   50.  University of Oregon                          https://cas.uoregon.edu/directory/computer-and-data-sciences
+                                                       + https://www.cs.uoregon.edu/people/faculty/
+                                                       + http://www.cs.uoregon.edu/research/faculty/
+                                                       + http://www.cs.uoregon.edu/faculty/
+         [Dept now part of School of Computer and Data Sciences (SCDS); faculty dir moved to cas.uor]
+   51.  Oregon State University                       https://engineering.oregonstate.edu/EECS/About/People
+                                                       + https://eecs.oregonstate.edu/research/people/faculty/
+                                                       + http://www.cs.orst.edu/faculty/
+                                                       + http://www.eecs.oregonstate.edu/faculty/
+         [EECS dept; old domain was cs.orst.edu before rename to oregonstate.edu/eecs]
+   52.  Washington State University                   https://school.eecs.wsu.edu/faculty/
+                                                       + https://school.eecs.wsu.edu/people/faculty/
+                                                       + http://www.eecs.wsu.edu/people/faculty/
+                                                       + http://www.cs.wsu.edu/people/faculty/
+         [EECS school; older domains include www.cs.wsu.edu and www.eecs.wsu.edu]
+   53.  University of Nevada Las Vegas                https://www.unlv.edu/cs/about/faculty
+                                                       + http://www.cs.unlv.edu/people/faculty/
+                                                       + http://www.cs.unlv.edu/faculty/
+                                                       + http://www.cs.unlv.edu/
+         [CS in Consolidated School of Engineering; old domain www.cs.unlv.edu; base domain added fo]
+   54.  University of Nevada Reno                     https://www.cse.unr.edu/research/faculty/
+                                                       + http://www.cse.unr.edu/faculty/
+                                                       + http://www.cs.unr.edu/faculty/
+                                                       + http://www.cse.unr.edu/
+                                                       + http://www.cs.unr.edu/
+                                                       + http://www.unr.edu/cse/people/faculty
+         [CSE dept; cse.unr.edu domain; old alt was cs.unr.edu; base domains added for CDX wildcard ]
+   55.  Colorado State University                     https://www.cs.colostate.edu/people/faculty/
+                                                       + http://www.cs.colostate.edu/faculty/
+                                                       + http://www.cs.colostate.edu/
+                                                       + http://www.engr.colostate.edu/ece/facultystaff/index.cfm
+         [Standalone CS dept; cs.colostate.edu domain stable across eras]
+   56.  Iowa State University                         https://www.cs.iastate.edu/people/faculty/
+                                                       + http://www.cs.iastate.edu/faculty/
+                                                       + http://www.cs.iastate.edu/
+                                                       + https://www.cs.iastate.edu/people
+         [Standalone CS dept; cs.iastate.edu domain stable; large land-grant R1]
+   57.  University of Iowa                            https://cs.uiowa.edu/people/faculty/
+                                                       + http://www.cs.uiowa.edu/people/faculty/
+                                                       + http://www.cs.uiowa.edu/faculty/
+         [Standalone CS dept; cs.uiowa.edu domain; public flagship R1]
+   58.  University of Nebraska-Lincoln                https://computing.unl.edu/faculty-staff/
+                                                       + https://computing.unl.edu/faculty-research-directory/
+                                                       + https://computing.unl.edu/directory/
+                                                       + https://cse.unl.edu/people/faculty/
+                                                       + http://www.cse.unl.edu/people/
+                                                       + http://www.cse.unl.edu/research/faculty/
+                                                       + http://www.cse.unl.edu/
+         [Dept renamed to School of Computing 2023; computing.unl.edu is new domain; faculty-researc]
+   59.  Kansas State University                       https://www.cs.ksu.edu/about/people/faculty/
+                                                       + https://www.cs.ksu.edu/people/faculty/
+                                                       + http://www.cis.ksu.edu/content/faculty/
+                                                       + http://www.cis.ksu.edu/faculty/
+         [CS dept; old domain was cis.ksu.edu (Computing and Information Sciences) before rebrand]
+   60.  University of Kansas                          https://www.eecs.ku.edu/people/faculty/
+                                                       + http://www.eecs.ku.edu/faculty/
+                                                       + http://www.ittc.ku.edu/faculty/
+         [EECS dept; eecs.ku.edu domain; ITTC (IT&T Center) also hosted faculty lists]
+   61.  University of Missouri                        https://engineering.missouri.edu/departments/eecs/eecs-faculty/
+                                                       + https://eecs.missouri.edu/people/faculty/
+                                                       + http://www.cs.missouri.edu/people/faculty/
+                                                       + http://www.cs.missouri.edu/faculty/
+                                                       + http://www.cs.missouri.edu/
+         [CS merged into EECS dept; old domain www.cs.missouri.edu; Columbia campus; base domain add]
+   62.  University of Kentucky                        https://cs.engr.uky.edu/people-4
+                                                       + https://www.cs.uky.edu/people/faculty/
+                                                       + http://www.cs.uky.edu/faculty/
+                                                       + http://www.engr.uky.edu/research/academics/departments/cs/
+         [CS in College of Engineering; cs.uky.edu domain; old snapshots may be under engr.uky.edu]
+   63.  Wayne State University                        https://engineering.wayne.edu/computer-science/faculty
+                                                       + https://cs.wayne.edu/people/faculty/
+                                                       + http://www.cs.wayne.edu/people/faculty/
+                                                       + http://www.cs.wayne.edu/faculty/
+                                                       + http://www.cs.wayne.edu/
+         [Urban R1; cs.wayne.edu domain; Detroit, Michigan; base domain added for CDX wildcard cover]
+   64.  University of Notre Dame                      https://cse.nd.edu/people/faculty/
+                                                       + http://www.cse.nd.edu/people/faculty/
+                                                       + http://www.cse.nd.edu/research/faculty/
+         [CSE dept in College of Engineering; cse.nd.edu domain stable]
+   65.  Texas A&M University                          https://engineering.tamu.edu/cse/profiles/index.html#Research%20Staff
+                                                       + http://www.cse.tamu.edu/research/faculty/
+                                                       + http://www.cs.tamu.edu/faculty/
+         [CSE dept in College of Engineering; cse.tamu.edu domain; College Station campus]
+   66.  University of Houston                         https://www.uh.edu/nsm/computer-science/people/faculty/index.php
+                                                       + https://www.cs.uh.edu/people/faculty/
+                                                       + http://www.cs.uh.edu/faculty/
+                                                       + http://www.uh.edu/nsm/computer-science/faculty/
+         [CS in NSM (Natural Sciences and Mathematics); cs.uh.edu domain]
+   67.  University of Texas at Dallas                 https://cs.utdallas.edu/people/faculty/
+                                                       + http://www.cs.utdallas.edu/people/faculty/
+                                                       + http://www.utdallas.edu/~faculty/cs/
+         [Standalone CS dept; cs.utdallas.edu domain; UTD grew rapidly in 2000s]
+   68.  University of Texas at Arlington              https://www.uta.edu/academics/schools-colleges/engineering/academics/departments/cse/faculty-directory
+                                                       + https://www.uta.edu/academics/schools-colleges/engineering/departments/cse/people/faculty
+                                                       + http://www.cse.uta.edu/people/faculty/
+                                                       + http://www.cse.uta.edu/faculty/
+         [CSE dept in College of Engineering; old domain www.cse.uta.edu]
+   69.  Texas Tech University                         https://www.depts.ttu.edu/cs/people/faculty/
+                                                       + http://www.cs.ttu.edu/people/faculty/
+                                                       + http://www.cs.ttu.edu/faculty/
+         [CS in College of Engineering; depts.ttu.edu/cs path; old domain www.cs.ttu.edu]
+   70.  University of Oklahoma                        https://www.ou.edu/coe/cs/people/faculty
+                                                       + http://www.cs.ou.edu/faculty/
+                                                       + http://www.ou.edu/~cs/faculty/
+         [CS in Gallogly College of Engineering; cs.ou.edu domain]
+   71.  Oklahoma State University                     https://cas.okstate.edu/computer_science/about_us/faculty_staff.html
+                                                       + https://www.cs.okstate.edu/people/faculty/
+                                                       + http://www.cs.okstate.edu/faculty/
+                                                       + http://www.eecs.okstate.edu/people/faculty/
+                                                       + http://www.cs.okstate.edu/
+         [CS in Stillwater; old EECS umbrella domain also used; base domain added for CDX wildcard c]
+   72.  Louisiana State University                    https://www.csc.lsu.edu/people/faculty/
+                                                       + http://www.csc.lsu.edu/people/
+                                                       + http://www.cse.lsu.edu/people/faculty/
+                                                       + https://www.lsu.edu/eng/cse/people/faculty/index.php
+         [CS (csc) dept; csc.lsu.edu domain; older pages may be under cse.lsu.edu]
+   73.  University of Tennessee                       https://eecs.utk.edu/faculty/
+                                                       + https://www.eecs.utk.edu/people/faculty/
+                                                       + http://www.cs.utk.edu/people/faculty/
+                                                       + http://www.cs.utk.edu/faculty/
+         [EECS dept; Knoxville campus; old CS-only domain www.cs.utk.edu]
+   74.  Vanderbilt University                         https://engineering.vanderbilt.edu/people/computer-science/
+                                                       + https://www.cs.vanderbilt.edu/people/faculty/
+                                                       + http://www.vuse.vanderbilt.edu/~cs/faculty/
+                                                       + http://www.eecs.vanderbilt.edu/people/faculty/
+                                                       + http://www.cs.vanderbilt.edu/
+                                                       + http://www.eecs.vanderbilt.edu/
+         [CS in School of Engineering; old path used VUSE; base domains added for CDX wildcard cover]
+   75.  Clemson University                            https://www.clemson.edu/cecas/departments/computing/people/
+                                                       + https://www.clemson.edu/science/departments/cs/people/faculty.html
+                                                       + http://www.cs.clemson.edu/people/faculty/
+                                                       + http://www.cs.clemson.edu/faculty/
+                                                       + http://www.cs.clemson.edu/
+                                                       + http://clemson.edu/computing/faculty.php
+         [CS in College of Science; old domain www.cs.clemson.edu; base domain added for CDX wildcar]
+   76.  University of Alabama                         https://www.cs.ua.edu/people/faculty/
+                                                       + http://www.cs.ua.edu/faculty/
+                                                       + http://cs.ua.edu/people/faculty/
+                                                       + http://www.cs.ua.edu/
+                                                       + https://eng.ua.edu/departments/computer-science/
+                                                       + http://cs.ua.edu/people/researchfaculty.asp
+                                                       + http://cs.ua.edu/people/index.asp
+                                                       + http://cs.ua.edu/staff.html
+         [CS in College of Engineering; cs.ua.edu domain; Tuscaloosa campus; base domain added for C]
+   77.  Auburn University                             https://eng.auburn.edu/csse/people/
+                                                       + https://www.eng.auburn.edu/department/csse/faculty.html
+                                                       + http://www.eng.auburn.edu/dept/csse/faculty.html
+                                                       + http://www.cs.auburn.edu/faculty/
+                                                       + http://www.cs.auburn.edu/
+                                                       + http://eng.auburn.edu/programs/csse/staff/faculty.html
+         [CSSE dept in Samuel Ginn College of Engineering; new URL eng.auburn.edu/csse/people/ (foun]
+   78.  Mississippi State University                  https://www.cs.msstate.edu/people/faculty/
+                                                       + http://www.cse.msstate.edu/people/faculty/
+                                                       + http://www.cs.msstate.edu/faculty/
+         [CSE dept; domain was cse.msstate.edu then moved to cs.msstate.edu]
+   79.  University of South Carolina                  https://www.cse.sc.edu/research/faculty
+                                                       + http://www.cse.sc.edu/people/faculty/
+                                                       + http://www.cs.sc.edu/faculty/
+                                                       + http://www.cse.sc.edu/
+                                                       + http://www.cs.sc.edu/
+         [CSE dept in College of Engineering; cse.sc.edu domain; old cs.sc.edu; base domains added f]
+   80.  University of Central Florida                 https://www.cs.ucf.edu/people/faculty/
+                                                       + http://www.cs.ucf.edu/faculty/
+                                                       + http://www.eecs.ucf.edu/people/faculty/
+         [CS in CECS; large program; cs.ucf.edu domain; strong growth post-2000]
+   81.  Florida State University                      https://www.cs.fsu.edu/people/faculty/
+                                                       + http://www.cs.fsu.edu/research/faculty/
+                                                       + http://www.cs.fsu.edu/faculty/
+         [Standalone CS dept; cs.fsu.edu domain stable; Tallahassee campus]
+   82.  University of South Florida                   https://www.usf.edu/ai-cybersecurity-computing/people/faculty/index.aspx
+                                                       + https://www.usf.edu/engineering/cse/people/faculty/
+                                                       + http://www.cse.usf.edu/people/faculty/
+                                                       + http://www.csee.usf.edu/people/faculty/
+         [Dept now in Bellini College of AI, Cybersecurity and Computing (2025); old CSE domain stil]
+   83.  Tulane University                             https://sse.tulane.edu/cs/faculty
+                                                       + http://www.cs.tulane.edu/people/faculty/
+                                                       + http://www.cs.tulane.edu/faculty/
+                                                       + http://tulane.edu/sse/faculty/departments/faculty-compsci.cfm
+         [CS in SSE (School of Science and Engineering); old domain www.cs.tulane.edu]
+   84.  West Virginia University                      https://www.csee.wvu.edu/research/people/faculty/
+                                                       + http://www.cs.wvu.edu/people/faculty/
+                                                       + http://www.csee.wvu.edu/people/faculty/
+                                                       + http://www.csee.wvu.edu/
+                                                       + http://www.cs.wvu.edu/
+                                                       + http://www.lcsee.cemr.wvu.edu/faculty/directory.php
+                                                       + http://www.statler.wvu.edu/faculty/directory.php?order=Alpha
+                                                       + http://www.cemr.wvu.edu/faculty/directory.php?dept=2&type=faculty&deptabbr=Lane+Department
+         [CSEE dept; csee.wvu.edu domain; old CS-only domain www.cs.wvu.edu; base domains added for ]
+   85.  Drexel University                             https://drexel.edu/cci/academics/computer-science-department/faculty/
+                                                       + https://drexel.edu/cci/research/cs-department/faculty/
+                                                       + http://www.cs.drexel.edu/about/faculty/
+                                                       + http://www.cs.drexel.edu/faculty/
+                                                       + http://www.cs.drexel.edu/
+         [CS in CCI (College of Computing and Informatics); old domain www.cs.drexel.edu; base domai]
+   86.  Temple University                             https://www.cis.temple.edu/people/faculty/
+                                                       + http://www.cis.temple.edu/faculty/
+                                                       + http://www.cis.temple.edu/~faculty/
+         [CIS dept in College of Science and Technology; cis.temple.edu domain]
+   87.  Lehigh University                             https://www.cse.lehigh.edu/about/faculty/
+                                                       + http://www.cse.lehigh.edu/faculty/
+                                                       + http://www.cse.lehigh.edu/~faculty/
+                                                       + http://www.cse.lehigh.edu/
+                                                       + http://www.cse.lehigh.edu/people/directory.html
+         [CSE dept; cse.lehigh.edu domain; private R1 in Bethlehem PA; base domain added for CDX wil]
+   88.  George Mason University                       https://cs.gmu.edu/about/faculty/
+                                                       + http://www.cs.gmu.edu/~faculty/
+                                                       + http://www.cs.gmu.edu/people/faculty/
+                                                       + http://www.cs.gmu.edu/
+         [CS in Volgenau School of Engineering; old tilde-style faculty list; base domain added for ]
+   89.  Old Dominion University                       https://www.odu.edu/computer-science/about/people/faculty
+                                                       + http://www.cs.odu.edu/~faculty/
+                                                       + http://www.cs.odu.edu/people/faculty/
+                                                       + http://www.cs.odu.edu/
+         [CS in Batten College of Engineering; old tilde-style faculty list at cs.odu.edu; base doma]
+   90.  College of William & Mary                     https://www.wm.edu/as/computerscience/people/
+                                                       + http://www.cs.wm.edu/people/faculty/
+                                                       + http://www.cs.wm.edu/faculty/
+         [CS in Arts and Sciences; old domain www.cs.wm.edu stable; base domain added for CDX wildca]
+   91.  George Washington University                  https://www.cs.gwu.edu/people/faculty
+                                                       + http://www.cs.gwu.edu/faculty/
+                                                       + http://www.gwu.edu/~eecs/faculty/
+         [CS in SEAS; cs.gwu.edu domain; older pages may be under gwu.edu/~eecs]
+   92.  University of Maryland Baltimore County       https://www.csee.umbc.edu/people/faculty/
+                                                       + http://www.csee.umbc.edu/faculty/
+                                                       + http://www.cs.umbc.edu/faculty/
+         [CSEE dept; csee.umbc.edu domain; UMBC known for strong CS undergrad pipeline]
+   93.  University of Delaware                        https://www.cis.udel.edu/faculty/
+                                                       + http://www.cis.udel.edu/people/faculty/
+                                                       + http://www.cis.udel.edu/about/people/faculty/
+         [CIS dept; cis.udel.edu domain; Newark campus]
+   94.  University of Connecticut                     https://www.cse.uconn.edu/about/faculty/
+                                                       + http://www.cse.uconn.edu/people/faculty/
+                                                       + http://www.cse.uconn.edu/faculty/
+         [CSE dept; cse.uconn.edu domain; Storrs campus]
+   95.  Tufts University                              https://www.cs.tufts.edu/people/faculty/
+                                                       + http://www.cs.tufts.edu/faculty/
+                                                       + http://www.cs.tufts.edu/
+                                                       + http://www.cs.tufts.edu/People/faculty.html
+         [CS in SEAS; cs.tufts.edu domain; private R1 in Medford MA]
+   96.  Boston University                             https://www.bu.edu/cs/people/faculty/
+                                                       + http://www.cs.bu.edu/people/faculty/
+                                                       + http://www.cs.bu.edu/faculty/
+         [CS in Questrom/CAS; bu.edu/cs and cs.bu.edu both used; large urban R1]
+   97.  Case Western Reserve University               https://case.edu/engineering/about/faculty-and-staff-directory
+                                                       + https://engineering.case.edu/EECS/faculty/category/tenure-track-faculty
+                                                       + http://www.eecs.cwru.edu/people/faculty/
+                                                       + http://www.eecs.case.edu/faculty/
+         [EECS dept; old domain eecs.cwru.edu (pre-rename); now engineering.case.edu]
+   98.  Syracuse University                           https://www.lcs.syr.edu/people/faculty/
+                                                       + http://www.eecs.syr.edu/people/faculty/
+                                                       + http://www.ecs.syr.edu/faculty/cs/
+                                                       + http://www.eecs.syr.edu/
+                                                       + http://www.ecs.syr.edu/
+                                                       + https://ecs.syracuse.edu/faculty-staff/?category=electrical-engineering-and-computer-science&people=
+         [EECS / LCS dept; multiple domain transitions; LC Smith college; base domains added for CDX]
+   99.  Rensselaer Polytechnic Institute              https://compsci.rpi.edu/people
+                                                       + https://www.cs.rpi.edu/people/faculty/
+                                                       + http://www.cs.rpi.edu/people/
+                                                       + http://www.cs.rpi.edu/faculty/
+                                                       + http://www.cs.rpi.edu/people/faculty.html
+         [CS in ECSE; cs.rpi.edu domain; Troy NY; historically strong AI group]
+  100.  University at Buffalo (SUNY)                  https://engineering.buffalo.edu/computer-science-engineering/people/faculty-directory.html
+                                                       + http://www.cse.buffalo.edu/faculty/
+                                                       + http://www.cse.buffalo.edu/people/faculty/
+         [CSE dept in School of Engineering; cse.buffalo.edu domain; SUNY flagship]
+  101.  Binghamton University (SUNY)                  https://www.binghamton.edu/computer-science/people/
+                                                       + http://www.cs.binghamton.edu/people/faculty/
+                                                       + http://www.cs.binghamton.edu/faculty/
+         [CS in Watson School of Engineering; cs.binghamton.edu old domain]
+  102.  Worcester Polytechnic Institute               https://www.wpi.edu/academics/departments/computer-science/faculty-staff
+                                                       + https://www.wpi.edu/academics/departments/computer-science/people/faculty
+                                                       + http://www.cs.wpi.edu/people/faculty/
+                                                       + http://www.cs.wpi.edu/faculty/
+         [CS dept; cs.wpi.edu old domain; private R1 in Worcester MA]
+  103.  University of Vermont                         https://www.uvm.edu/cems/cs/faculty
+                                                       + http://www.uvm.edu/~cems/cs/
+                                                       + http://www.cs.uvm.edu/people/faculty/
+                                                       + http://www.cs.uvm.edu/faculty/
+                                                       + http://www.uvm.edu/~cems/cs/?Page=employee/facstaff.php&SM=employee/_employeemenu.html
+                                                       + http://www.uvm.edu/~cems/cs/?Page=faculty.php&SM=employee/_employeemenu.html
+                                                       + http://www.uvm.edu/~cems/cs/?Page=employee/default.php&SM=employee/_employeemenu.html
+         [CS in CEMS; ~cems/cs/ is legacy dept home (good Wayback-era path); cs.uvm.edu older facult]
+  104.  Emory University                              https://www.cs.emory.edu/people/faculty/
+                                                       + http://www.mathcs.emory.edu/people/
+                                                       + http://www.cs.emory.edu/faculty/
+         [CS (and math) in Emory College; old domain was mathcs.emory.edu; separated later]
+  105.  University of Wyoming                         https://www.uwyo.edu/soc/people/faculty/index.html
+                                                       + https://www.uwyo.edu/soc/people/index.html
+                                                       + https://www.cs.uwyo.edu/research/faculty/
+                                                       + http://www.cs.uwyo.edu/people/faculty/
+                                                       + http://www.cs.uwyo.edu/faculty/
+                                                       + http://cs.uwyo.edu/faculty/a-z.html
+                                                       + http://www.cs.uwyo.edu/faculty/a-z.html
+         [CS now called School of Computing (SoC) at uwyo.edu/soc; old cs.uwyo.edu domain in Wayback]
+  106.  Montana State University                      https://www.cs.montana.edu/people/faculty/
+                                                       + http://www.cs.montana.edu/faculty/
+                                                       + http://www.cs.montana.edu/
+                                                       + http://www.cs.montana.edu/faculty/faculty.html
+         [CS in College of Engineering; cs.montana.edu domain; Bozeman campus]
+  107.  University of Idaho                           https://directory.uidaho.edu/departments?criteria=Computer+Science+Department
+                                                       + http://www.cs.uidaho.edu/people/faculty/
+                                                       + http://www.cs.uidaho.edu/faculty/
+                                                       + https://www.uidaho.edu/engr/departments/cs/our-people/faculty
+         [CS in College of Engineering; cs.uidaho.edu old domain; Moscow campus]
+  108.  New Mexico State University                   https://www.cs.nmsu.edu/people/faculty/
+                                                       + http://www.cs.nmsu.edu/faculty/
+                                                       + http://www.nmsu.edu/~cs/faculty/
+                                                       + https://computerscience.nmsu.edu/facultydirectory/faculty-staff-directory.html
+         [cs.nmsu.edu/ homepage (HTTPS) was ~1.9KB redirect in Wayback — removed; HTTP-specific facu]
+  109.  University of Hawaii                          https://www.ics.hawaii.edu/people/faculty/
+                                                       + http://www.ics.hawaii.edu/faculty/
+                                                       + http://www.ics.hawaii.edu/
+         [ICS dept; ics.hawaii.edu domain; Manoa campus; stable across eras]
+  110.  University of North Texas                     https://engineering.unt.edu/cse/people/index.html?department=Computer+Science+and+Engineering
+                                                       + http://www.cse.unt.edu/people/faculty/
+                                                       + http://www.cse.unt.edu/faculty/
+                                                       + http://www.cs.unt.edu/people/faculty.php
+         [CSE dept; cse.unt.edu old domain; also cs.unt.edu; base domains added for CDX wildcard cov]
+  111.  University of Texas at San Antonio            https://caicc.utsa.edu/computer-science/faculty/index.html
+                                                       + https://www.utsa.edu/sciences/computer-science/faculty/
+                                                       + http://www.cs.utsa.edu/people/faculty/
+                                                       + http://www.cs.utsa.edu/faculty/
+         [CS in College of Sciences; cs.utsa.edu old domain; growing R1]
+  112.  University of Arkansas                        https://engineering.uark.edu/computer-science-computer-engineering/people/faculty/
+                                                       + http://www.csce.uark.edu/faculty/
+                                                       + http://www.csce.uark.edu/people/faculty/
+                                                       + http://www.csce.uark.edu/
+         [CSCE dept in College of Engineering; csce.uark.edu old domain; Fayetteville; base domain a]
+  113.  UC Riverside                                  https://www1.cs.ucr.edu/people/faculty
+                                                       + https://www1.cs.ucr.edu/about/faculty-directory/
+                                                       + http://www.cs.ucr.edu/people/faculty/
+                                                       + http://www.cs.ucr.edu/faculty/
+         [UC system; CS/CSE dept; www1.cs.ucr.edu unusual subdomain; growing R1 program]
+  114.  UC Santa Cruz                                 https://www.soe.ucsc.edu/departments/computer-science/people/faculty
+                                                       + http://www.cs.ucsc.edu/people/faculty/
+                                                       + http://www.cs.ucsc.edu/faculty/
+         [CS in Baskin School of Engineering (SOE); old domain www.cs.ucsc.edu]
+  115.  Arizona State University                      https://faculty.engineering.asu.edu/directory/scai/computer-science-and-engineering/
+                                                       + https://faculty.engineering.asu.edu/directory/scai/rank/
+                                                       + http://www.public.asu.edu/~agein/faculty.html
+                                                       + https://cidse.engineering.asu.edu/faculty/
+                                                       + https://engineering.asu.edu/computer-science-engineering/people/faculty/
+         [Large R1; CS in SCAI (School of Computing and AI) since ~2023, previously CIDSE; main Temp]
+  116.  University of Georgia                         https://computing.uga.edu/directory/faculty
+                                                       + https://www.cs.uga.edu/directory/faculty
+                                                       + http://www.cs.uga.edu/directory/faculty
+                                                       + http://www.cs.uga.edu/people/faculty
+         [Athens campus; dept rebranded as 'School of Computing' (computing.uga.edu); old cs.uga.edu]
+  117.  Georgia State University                      https://csds.gsu.edu/directory/?wpvcomputerscienceroles=core-faculty&wpv_aux_current_post_id=329&wpv_view_count=5249-TCPID329
+                                                       + https://csds.gsu.edu/directory/
+                                                       + http://www.cs.gsu.edu/faculty/
+                                                       + http://www.cs.gsu.edu/people/faculty/
+         [Atlanta urban R1; separate from Georgia Tech; CS dept in College of Arts & Sciences]
+  118.  Florida International University              https://www.cs.fiu.edu/faculty/
+                                                       + https://www.cis.fiu.edu/faculty-staff/
+                                                       + http://www.cs.fiu.edu/faculty/
+         [Miami-area R1; CS in College of Engineering & Computing; large Hispanic-serving institutio]
+  119.  University of Alabama Birmingham              https://www.uab.edu/cas/computerscience/people/faculty-directory
+                                                       + http://www.cis.uab.edu/people/faculty/
+                                                       + https://www.uab.edu/cas/computerscience/faculty
+         [UAB; R1 research university; CS in College of Engineering]
+  120.  Virginia Commonwealth University              https://egr.vcu.edu/departments/computer-science/people/faculty/
+                                                       + https://egr.vcu.edu/departments/computer-science/people/
+                                                       + http://www.cs.vcu.edu/about/people/faculty.html
+                                                       + https://www.cs.vcu.edu/about/people/
+                                                       + http://computer-science.egr.vcu.edu/faculty/
+         [Richmond VA; urban R1; CS in College of Engineering]
+  121.  University of Texas El Paso                   https://www.utep.edu/science/computational-science/people/faculty-and-staff.html
+                                                       + http://www.cs.utep.edu/people/faculty/
+                                                       + http://cs.utep.edu/people/faculty/
+         [UTEP; border R1; Hispanic-serving institution; CS dept in College of Engineering]
+  122.  University of New Mexico                      https://cs.unm.edu/people/faculty/
+                                                       + http://www.cs.unm.edu/people/faculty/
+                                                       + http://www.cs.unm.edu/~faculty/
+         [Albuquerque R1; CS dept in School of Engineering; long-standing program]
+  123.  Baylor University                             https://www.baylor.edu/cs/index.php?id=6
+                                                       + https://www.ecs.baylor.edu/cs/index.php?id=6
+                                                       + https://www.ecs.baylor.edu/departments/computer-science/computer-science-faculty
+         [Waco TX; cs.baylor.edu/ homepage was ~1.8KB redirect-only in Wayback — removed]
+  124.  University of Louisville                      https://engineering.louisville.edu/academics/departments/cse/faculty/
+                                                       + https://engineering.louisville.edu/academics/faculty/
+                                                       + http://www.cecs.louisville.edu/ece/about/faculty-and-staff/
+                                                       + http://www.cecs.louisville.edu/cs/people/faculty/
+         [Kentucky R1; CSE in J.B. Speed School of Engineering; NOTE: engineering.louisville.edu/aca]
+  125.  New Jersey Institute of Technology            https://cs.njit.edu/faculty
+                                                       + http://www.cs.njit.edu/faculty/
+                                                       + https://computing.njit.edu/faculty
+                                                       + http://ece.njit.edu/people/ece_faculty_alpha.php
+         [NJIT; Newark NJ; public polytechnic R1; strong CS/CE programs]
+  126.  University of Cincinnati                      https://www.ceas.uc.edu/academics/departments/computer-science/computer-science-people.html
+                                                       + https://eecs.ceas.uc.edu/people/faculty/
+                                                       + http://www.eecs.uc.edu/people/faculty/
+                                                       + http://www.ece.uc.edu/people/faculty/
+         [Ohio R1; CS dept in CEAS; ~17 primary + secondary faculty on page (Apr 2026); dept head Ju]
+  127.  Michigan Technological University             https://www.mtu.edu/cs/department/faculty-staff/
+                                                       + http://www.cs.mtu.edu/people/faculty/
+                                                       + https://www.mtu.edu/cs/faculty/
+         [Houghton MI; public R1; strong CS and engineering programs]
+  128.  University of Massachusetts Lowell            https://www.uml.edu/sciences/computer-science/faculty/
+                                                       + http://www.cs.uml.edu/faculty/
+                                                       + http://www.cs.uml.edu/people/faculty/
+         [UMass Lowell; R1 commuter research university; CS in College of Sciences]
+  129.  University of New Hampshire                   https://ceps.unh.edu/computer-science/faculty-staff-directory
+                                                       + https://www.cs.unh.edu/people/faculty
+                                                       + http://www.cs.unh.edu/people/faculty/
+                                                       + http://www.cs.unh.edu/faculty/
+         [Durham NH; flagship NH R1; CS in College of Engineering & Physical Sciences]
+  130.  University of Rhode Island                    https://web.uri.edu/cs/people/
+                                                       + http://www.cs.uri.edu/faculty/
+                                                       + http://www.cs.uri.edu/people/faculty/
+         [Kingston RI; flagship RI R1; CS in College of Arts & Sciences]
+  131.  University of Colorado Denver                 https://engineering.ucdenver.edu/computer-science-and-engineering/faculty-and-staff
+                                                       + http://www.cs.ucdenver.edu/people/faculty/
+                                                       + https://cse.ucdenver.edu/faculty/
+         [UC Denver; urban R1; separate from CU Boulder; CSE in College of Engineering]
+  132.  Colorado School of Mines                      https://cs.mines.edu/faculty-and-staff/
+                                                       + http://www.cs.mines.edu/faculty/
+                                                       + http://www.cs.mines.edu/people/faculty/
+         [Golden CO; STEM-focused public R1; CS dept in College of Engineering]
+  133.  Utah State University                         https://engineering.usu.edu/cs/directory/faculty/
+                                                       + https://cs.usu.edu/people/faculty/index
+                                                       + https://engineering.usu.edu/cs/faculty/
+                                                       + http://www.cs.usu.edu/faculty/
+                                                       + https://www.cs.usu.edu/people/faculty/
+         [Logan UT; R1 land-grant; CS in College of Engineering; strong aerospace/defense ties]
+  134.  North Dakota State University                 https://www.ndsu.edu/cs/people/faculty/
+                                                       + http://www.cs.ndsu.nodak.edu/faculty/
+                                                       + http://www.ndsu.edu/cs/people/
+         [Fargo ND; land-grant R1; CS dept in College of Engineering]
+  135.  University of Mississippi                     https://cs.olemiss.edu/people/
+                                                       + http://www.cs.olemiss.edu/people/
+                                                       + http://www.cs.olemiss.edu/faculty/
+         [Ole Miss; Oxford MS; R1 flagship; CS/CIS in School of Engineering]
+  136.  University of Memphis                         https://www.memphis.edu/cs/people/
+                                                       + http://www.cs.memphis.edu/about/faculty.php
+                                                       + http://www.cs.memphis.edu/people/faculty/
+         [Memphis TN; urban R1; CS in Herff College of Engineering]
+  137.  San Diego State University                    https://www.cs.sdsu.edu/people/
+                                                       + http://www.cs.sdsu.edu/people/
+                                                       + http://www.cs.sdsu.edu/faculty/
+         [San Diego CA; CSU system R1; large CS program; close to UC San Diego]
+  138.  Portland State University                     https://www.pdx.edu/computer-science/faculty-and-staff-directory
+                                                       + https://www.pdx.edu/engineering/directory
+                                                       + http://www.cs.pdx.edu/people/faculty/
+                                                       + http://www.cs.pdx.edu/faculty/
+         [Portland OR; urban R1; CS in Maseeh College of Engineering; strong systems/PL group]
+  139.  University of Wisconsin Milwaukee             https://uwm.edu/engineering/people-category/faculty/computer-science/
+                                                       + http://www.cs.uwm.edu/people/faculty/
+                                                       + https://uwm.edu/engineering/ece/faculty/
+                                                       + http://www.cs.uwm.edu/html/csFaculty.html
+                                                       + http://www.cs.uwm.edu/html/csStaff.html
+         [Milwaukee WI; UW system R1; separate from UW-Madison; CS in College of Engineering]
+  140.  Princeton University                          https://www.cs.princeton.edu/people/faculty
+                                                       + http://www.cs.princeton.edu/people/faculty
+                                                       + http://www.cs.princeton.edu/faculty/
+         [Princeton NJ; Ivy League R1; strong theory, systems, ML; old domain cs.princeton.edu stabl]
+  141.  Washington University in St. Louis            https://cse.wustl.edu/faculty/Pages/default.aspx
+                                                       + http://www.cse.wustl.edu/people/faculty/
+         [St. Louis MO; private R1; CSE dept in McKelvey School of Engineering; strong systems/netwo]
+  142.  Northeastern University                       https://www.khoury.northeastern.edu/people/?position=faculty
+                                                       + https://www.khoury.northeastern.edu/people/
+                                                       + http://www.ccs.neu.edu/people/faculty/
+         [Boston MA; private R1; Khoury College (renamed from CCIS 2017); strong co-op model; all fa]
+  143.  California Institute of Technology            https://www.cms.caltech.edu/people/faculty
+                                                       + https://www.cms.caltech.edu/people
+                                                       + http://www.cms.caltech.edu/people/faculty
+         [Pasadena CA; private R1; CMS dept covers CS, Control & Dynamical Systems, and math-CS; ver]
+  144.  Brigham Young University                      https://cs.byu.edu/department/directories/faculty-directory/
+                                                       + https://cs.byu.edu/department/directory/
+                                                       + http://www.cs.byu.edu/faculty/
+         [Provo UT; private R1 (LDS-affiliated); CS in College of Computational Mathematical & Physi]
+  145.  University of Illinois Chicago                https://cs.uic.edu/faculty/
+                                                       + http://www.cs.uic.edu/people/faculty/
+                                                       + http://www.cs.uic.edu/faculty/
+         [Chicago IL; UIC is the urban flagship R1 of the U of Illinois system; separate from UIUC; ]
+  146.  University of Miami                           https://www.as.miami.edu/csc/faculty/people/faculty/index.html
+                                                       + http://www.cs.miami.edu/home/faculty/index.html
+                                                       + http://www.as.miami.edu/csc/faculty/people/faculty/index.html
+                                                       + https://csc.as.miami.edu/people/index.html
+         [Coral Gables FL; private R1; CS in College of Arts & Sciences; research spans ML, bioinfor]
+  147.  Southern Methodist University                 https://www.smu.edu/lyle/departments/cs/people/faculty
+                                                       + http://www.cs.smu.edu/people/faculty/
+         [Dallas TX; private R1; CS in Lyle School of Engineering; strength in cybersecurity (Deason]
+  148.  Georgetown University                         https://cs.georgetown.edu/faculty/
+                                                       + http://www.cs.georgetown.edu/faculty/
+                                                       + http://cs.georgetown.edu/people/faculty/
+         [Washington DC; Jesuit private R1; small CS dept; strong security (Blaze, Nissim) and NLP g]
+  149.  University of North Carolina Charlotte        https://cci.charlotte.edu/departments/department-of-computer-science/about-computer-science/cs-faculty/
+                                                       + https://cci.charlotte.edu/directory/faculty/
+                                                       + http://www.cci.uncc.edu/faculty/
+         [Charlotte NC; public R1; CS in College of Computing and Informatics; ~40 full-time faculty]
+  150.  Missouri University of Science and Technology https://cs.mst.edu/people/faculty-directory/
+                                                       + http://cs.mst.edu/people/faculty-directory/
+                                                       + http://www.cs.mst.edu/people/faculty/
+         [Rolla MO; public R1 (UM system); oldest CS program in Missouri; strength in cybersecurity,]
+  151.  University at Albany SUNY                     https://www.albany.edu/computer-science/faculty-staff
+                                                       + https://www.albany.edu/computer-science/faculty
+                                                       + http://www.cs.albany.edu/faculty.shtml
+                                                       + http://www.cs.albany.edu/people/faculty/
+         [Albany NY; SUNY flagship R1; CS in College of Engineering & Applied Sciences; strength in ]
+  152.  Kent State University                         https://www.kent.edu/cs/faculty-staff
+                                                       + http://www.cs.kent.edu/faculty/
+                                                       + http://www.cs.kent.edu/people/
+         [Kent OH; public R1; CS dept in Mathematical Sciences Building; PhD program active; strengt]
+  153.  Boston College                                https://www.bc.edu/content/bc-web/schools/morrissey/departments/computer-science/people/faculty.html
+                                                       + https://www.bc.edu/content/bc-web/schools/mcas/departments/computer-science/faculty-and-research.html
+                                                       + http://www.cs.bc.edu/people/faculty/
+                                                       + https://www.bc.edu/bc-web/schools/morrissey/departments/computer-science/people.html
+         [Chestnut Hill MA; Jesuit private R1; CS in Morrissey College of Arts & Sciences (formerly ]
+  154.  Howard University                             https://cea.howard.edu/academics/departments/electrical-engineering-and-computer-science/people-eecs
+                                                       + http://www.eece.cea.howard.edu/faculty
+                                                       + http://www.cs.howard.edu/faculty/
+         [Washington DC; private HBCU R1; EECS dept in College of Engineering & Architecture; strong]
+  155.  Brandeis University                           https://www.brandeis.edu/computer-science/people/index.html
+                                                       + https://www.brandeis.edu/facultyguide/department.html?deptid=16600
+                                                       + http://www.cs.brandeis.edu/people/faculty.html
+         [Waltham MA; private R1; Michtom School of CS (~12 research faculty); strong AI, theory, ve]
+  156.  Florida Atlantic University                   https://www.fau.edu/engineering/eecs/directory/
+                                                       + https://www.fau.edu/engineering/directory/
+                                                       + http://www.cse.fau.edu/faculty/
+                                                       + http://www.fau.edu/engineering/eecs/faculty/
+         [Boca Raton FL; public R1; EECS dept in College of Engineering; ~30 CS/EE faculty; strength]
+  157.  Indiana University Indianapolis               https://luddy.indianapolis.iu.edu/about/departments/cs/index.html
+                                                       + https://luddy.indianapolis.iu.edu/contact/directory/index.html
+                                                       + http://soic.iupui.edu/people/
+                                                       + http://www.cs.iupui.edu/people/faculty.shtml
+         [Indianapolis IN; public R1; formerly IUPUI; Luddy School of Informatics, Computing & Engin]
+  158.  University of Louisiana at Lafayette          https://computing.louisiana.edu/about-us/faculty-staff-0
+                                                       + https://computing.louisiana.edu/
+                                                       + http://www.cacs.louisiana.edu/people/faculty/
+                                                       + http://computing.louisiana.edu/faculty/
+         [Lafayette LA; public R1 (LS system); Center for Advanced Computer Studies; strong AI/ML, b]
+  159.  University of Denver                          https://ritchieschool.du.edu/computer-science/cs-faculty-people
+                                                       + https://ritchieschool.du.edu/resources/facultystaff
+                                                       + http://cs.du.edu/people/faculty/
+                                                       + http://www.cs.du.edu/faculty/
+         [Denver CO; private R1; CS in Ritchie School of Engineering & Computer Science; solid mid-s]
+  160.  Loyola University Chicago                     https://www.luc.edu/cs/aboutus/people/full-timefaculty/
+                                                       + https://www.luc.edu/cs/
+                                                       + http://www.cs.luc.edu/people/
+                                                       + http://www.cs.luc.edu/faculty/
+         [Chicago IL; Jesuit private R1; CS dept active PhD program; strength in cybersecurity (Deas]
+  161.  Northern Arizona University                   https://in.nau.edu/school-informatics-computing-cyber-systems/faculty/
+                                                       + https://nau.edu/school-of-informatics-computing-and-cyber-systems/faculty/
+                                                       + http://www.nau.edu/siccs/faculty/
+                                                       + http://nau.edu/informatics/faculty/
+         [Flagstaff AZ; public R1; SICCS school covers CS, cybersecurity, bioinformatics; growing Ph]
+  162.  Ohio University                               https://www.ohio.edu/engineering/eecs/about/contact/faculty
+                                                       + https://www.ohio.edu/engineering/eecs/people
+                                                       + http://www.cs.ohiou.edu/people/faculty/
+                                                       + http://www.eecs.ohio.edu/faculty/
+         [Athens OH; public R1 (Ohio flagship); EECS dept in Stocker Center; active CS PhD program; ]
+  163.  University of Massachusetts Boston            https://www.cs.umb.edu/faculty
+                                                       + https://www.umb.edu/science-mathematics/academic-departments/computer-science/faculty-staff/
+                                                       + http://www.cs.umb.edu/faculty.html
+                                                       + http://www.cs.umb.edu/people/faculty/
+         [Boston MA; public R1 (UMass system); urban commuter campus; CS active PhD program; strengt]
+  164.  University of Toledo                          https://www.utoledo.edu/engineering/electrical-engineering-computer-science/people/
+                                                       + https://www.utoledo.edu/engineering/electrical-engineering-computer-science/department-directory.html
+                                                       + http://www.eecs.utoledo.edu/faculty/
+                                                       + http://www.utoledo.edu/engineering/eecs/faculty/
+         [Toledo OH; public R1; EECS dept in College of Engineering; solid PhD program; strength in ]
+  165.  University of Missouri Kansas City            https://sse.umkc.edu/about-us/computer-science-and-information-technologydirectory.html
+                                                       + https://sse.umkc.edu/
+                                                       + http://www.cs.umkc.edu/people/faculty/
+                                                       + http://cs.umkc.edu/faculty/
+         [Kansas City MO; public R1 (UM system); CS/IT in School of Science & Engineering; PhD progr]
+  166.  University of North Dakota                    https://engineering.und.edu/academics/electrical-and-computer-science/faculty.html
+                                                       + https://campus.und.edu/directory/index.html
+                                                       + http://www.cs.und.edu/faculty/
+                                                       + http://www.cs.und.edu/people/
+         [Grand Forks ND; public R1 (ND flagship); SEECS dept in College of Engineering & Mines; CS ]
+  167.  University of Southern Mississippi            https://www.usm.edu/computing-sciences-computer-engineering/directory.php
+                                                       + https://www.usm.edu/faculty-directory/index.php
+                                                       + http://www.usm.edu/computing-sciences/faculty.aspx
+                                                       + http://www.cs.usm.edu/people/faculty/
+         [Hattiesburg MS; public R1; School of Computing Sciences & Computer Engineering; active PhD]
+  168.  University of Maine                           https://umaine.edu/cs/people/faculty/
+                                                       + https://umaine.edu/cs/
+                                                       + http://www.cs.umaine.edu/people/faculty/
+                                                       + http://www.cs.umaine.edu/faculty/
+         [Orono ME; public R1 (ME flagship); CS in Maine College of Engineering and Computing; relat]
+[91m[1m...complete. duration: 00.02 seconds at 04:16:28 (EST) Thu, 16 Apr 2026[0m
+
+Ending Cell 8------------------------------------------
+Executing Cell 9---------------------------------------
+Ending Cell 9------------------------------------------
+Executing Cell 10--------------------------------------
+  CELL 3A skipped — loaded 34,266 planned downloads from disk  04:16:29 (EST) Thu, 16 Apr 2026
+
+Ending Cell 10-----------------------------------------
+Executing Cell 11--------------------------------------
+Ending Cell 11-----------------------------------------
+Executing Cell 12--------------------------------------
+  ↺  reload_py_files: html_parser.py, viz_pipeline.py, faculty_linker.py, r1_schools_data.py, panel_builder.py, pool_metrics.py, stage9_analysis.py
+
+<Figure size 2200x1800 with 3 Axes>
+  Saved → /sfs/gpfs/tardis/home/dzk3ja/Ivy_Net/tenure/tenure_pipeline/stage3a_summary.png
+
+<Figure size 2000x1200 with 3 Axes>
+  Saved → /sfs/gpfs/tardis/home/dzk3ja/Ivy_Net/tenure/tenure_pipeline/stage3a_enrollment_bin_heatmap.png
+
+Ending Cell 12-----------------------------------------
+Executing Cell 13--------------------------------------
+Ending Cell 13-----------------------------------------
+Executing Cell 14--------------------------------------
+Ending Cell 14-----------------------------------------
+Executing Cell 15--------------------------------------
+  CELL 3A-RETRY skipped — set RUN_CELL3_RETRY = True to run  04:16:32 (EST) Thu, 16 Apr 2026
+
+Ending Cell 15-----------------------------------------
+Executing Cell 16--------------------------------------
+Ending Cell 16-----------------------------------------
+Executing Cell 17--------------------------------------
+  CELL 3B skipped — 35,303 downloads in index (35,024 OK)  04:16:32 (EST) Thu, 16 Apr 2026
+
+Ending Cell 17-----------------------------------------
+Executing Cell 18--------------------------------------
+Ending Cell 18-----------------------------------------
+Executing Cell 19--------------------------------------
+  ↺  reload_py_files: html_parser.py, viz_pipeline.py, faculty_linker.py, r1_schools_data.py, panel_builder.py, pool_metrics.py, stage9_analysis.py
+
+<Figure size 2200x1800 with 4 Axes>
+  Saved → /sfs/gpfs/tardis/home/dzk3ja/Ivy_Net/tenure/tenure_pipeline/stage3b_summary.png
+
+Ending Cell 19-----------------------------------------
+Executing Cell 20--------------------------------------
+Ending Cell 20-----------------------------------------
+Executing Cell 21--------------------------------------
+RUN_CELL3C=False — index not yet on disk (run Cell 3C first)
+
+Ending Cell 21-----------------------------------------
+Executing Cell 22--------------------------------------
+Ending Cell 22-----------------------------------------
+Executing Cell 23--------------------------------------
+RUN_CELL3D=False — index not yet on disk (run Cell 3D first)
+
+Ending Cell 23-----------------------------------------
+Executing Cell 24--------------------------------------
+Ending Cell 24-----------------------------------------
+Executing Cell 25--------------------------------------
+RUN_CELL3E=False — index not yet on disk (run Cell 3E first)
+
+Ending Cell 25-----------------------------------------
+Executing Cell 26--------------------------------------
+Ending Cell 26-----------------------------------------
+Executing Cell 27--------------------------------------
+  ↺  reload_py_files: html_parser.py, viz_pipeline.py, faculty_linker.py, r1_schools_data.py, panel_builder.py, pool_metrics.py, stage9_analysis.py
+[92m[1mStart Stage 4 — HTML Faculty Parse (all schools, all ranks) at 04:16:37 (EST) Thu, 16 Apr 2026[0m
+
+  Schools with HTML : 168
+
+  Checkpoint loaded  : 168 school(s) with existing records  (45,718 files already parsed)
+
+  Override (plan)    : re-parsing despite Cell 4 sentinel — university_of_north_texas
+
+  Schools to parse   : 119  (~17,740 HTML files)
+  ──────────────────────────────────────────────────────────
+
+  [  1/119]    1%  ── Binghamton University Suny  (24 files)  elapsed 0:00  │  0 recs so far
+
+     → 0 files  │  0 records  │  avg 0.0/file  │  winner: n/a
+
+
+  [  2/119]    2%  ── Boston College  (16 files)  elapsed 0:00  │  0 recs so far
+
+     → 0 files  │  0 records  │  avg 0.0/file  │  winner: n/a
+
+
+  [  3/119]    3%  ── Boston University  (294 files)  elapsed 0:00  │  0 recs so far
+
+     → 0 files  │  0 records  │  avg 0.0/file  │  winner: n/a
+
+
+  [  4/119]    3%  ── Carnegie Mellon University  (74 files)  elapsed 0:00  │  0 recs so far
+
+     → 0 files  │  0 records  │  avg 0.0/file  │  winner: n/a
+
+
+  [  5/119]    4%  ── Clemson University  (58 files)  elapsed 0:00  │  0 recs so far
+
+     → 0 files  │  0 records  │  avg 0.0/file  │  winner: n/a
+
+
+  [  6/119]    5%  ── Drexel University  (178 files)  elapsed 0:00  │  0 recs so far
+
+     → 0 files  │  0 records  │  avg 0.0/file  │  winner: n/a
+
+
+  [  7/119]    6%  ── Duke University  (1140 files)  elapsed 0:00  │  0 recs so far
+
+     → 0 files  │  0 records  │  avg 0.0/file  │  winner: n/a
+
+
+  [  8/119]    7%  ── Florida Atlantic University  (62 files)  elapsed 0:01  │  0 recs so far
+
+     → 0 files  │  0 records  │  avg 0.0/file  │  winner: n/a
+
+
+  [  9/119]    8%  ── George Mason University  (456 files)  elapsed 0:01  │  0 recs so far
+
+     → 0 files  │  0 records  │  avg 0.0/file  │  winner: n/a
+
+
+  [ 10/119]    8%  ── Harvard University  (274 files)  elapsed 0:01  │  0 recs so far
+
+     → 0 files  │  0 records  │  avg 0.0/file  │  winner: n/a
+
+
+  [ 11/119]    9%  ── Johns Hopkins University  (304 files)  elapsed 0:02  │  0 recs so far
+
+     → 0 files  │  0 records  │  avg 0.0/file  │  winner: n/a
+
+
+  [ 12/119]   10%  ── Kent State University  (118 files)  elapsed 0:02  │  0 recs so far
+
+     → 0 files  │  0 records  │  avg 0.0/file  │  winner: n/a
+
+
+  [ 13/119]   11%  ── Lehigh University  (290 files)  elapsed 0:02  │  0 recs so far
+
+     → 0 files  │  0 records  │  avg 0.0/file  │  winner: n/a
+
+
+  [ 14/119]   12%  ── Loyola University Chicago  (490 files)  elapsed 0:03  │  0 recs so far
+
+     → 0 files  │  0 records  │  avg 0.0/file  │  winner: n/a
+
+
+  [ 15/119]   13%  ── Massachusetts Institute Of Technology  (446 files)  elapsed 0:05  ETA 0:40  │  0 recs so far
+
+     → 0 files  │  0 records  │  avg 0.0/file  │  winner: n/a
+
+
+  [ 16/119]   13%  ── Mississippi State University  (102 files)  elapsed 0:06  ETA 0:40  │  0 recs so far
+
+     → 0 files  │  0 records  │  avg 0.0/file  │  winner: n/a
+
+
+  [ 17/119]   14%  ── Montana State University  (412 files)  elapsed 0:06  ETA 0:40  │  0 recs so far
+
+     → 0 files  │  0 records  │  avg 0.0/file  │  winner: n/a
+
+
+  [ 18/119]   15%  ── Ohio State University  (294 files)  elapsed 0:07  ETA 0:40  │  0 recs so far
+
+     → 0 files  │  0 records  │  avg 0.0/file  │  winner: n/a
+
+
+  [ 19/119]   16%  ── Oklahoma State University  (298 files)  elapsed 0:07  ETA 0:39  │  0 recs so far
+
+     → 0 files  │  0 records  │  avg 0.0/file  │  winner: n/a
+
+
+  [ 20/119]   17%  ── Old Dominion University  (436 files)  elapsed 0:07  ETA 0:37  │  0 recs so far
+
+     → 0 files  │  0 records  │  avg 0.0/file  │  winner: n/a
+
+
+  [ 21/119]   18%  ── Penn State University  (224 files)  elapsed 0:07  ETA 0:36  │  0 recs so far
+
+     → 0 files  │  0 records  │  avg 0.0/file  │  winner: n/a
+
+
+  [ 22/119]   18%  ── Purdue University  (384 files)  elapsed 0:08  ETA 0:37  │  0 recs so far
+
+     → 0 files  │  0 records  │  avg 0.0/file  │  winner: n/a
+
+
+  [ 23/119]   19%  ── Rensselaer Polytechnic Institute  (372 files)  elapsed 0:08  ETA 0:36  │  0 recs so far
+
+     → 0 files  │  0 records  │  avg 0.0/file  │  winner: n/a
+
+
+  [ 24/119]   20%  ── Rice University  (152 files)  elapsed 0:08  ETA 0:35  │  0 recs so far
+
+     → 0 files  │  0 records  │  avg 0.0/file  │  winner: n/a
+
+
+  [ 25/119]   21%  ── Rutgers University  (458 files)  elapsed 0:09  ETA 0:33  │  0 recs so far
+
+     → 0 files  │  0 records  │  avg 0.0/file  │  winner: n/a
+
+
+  [ 26/119]   22%  ── Stony Brook University  (134 files)  elapsed 0:09  ETA 0:33  │  0 recs so far
+
+     → 0 files  │  0 records  │  avg 0.0/file  │  winner: n/a
+
+
+  [ 27/119]   23%  ── Syracuse University  (312 files)  elapsed 0:09  ETA 0:32  │  0 recs so far
+
+     → 0 files  │  0 records  │  avg 0.0/file  │  winner: n/a
+
+
+  [ 28/119]   24%  ── Texas A M University  (188 files)  elapsed 0:09  ETA 0:32  │  0 recs so far
+
+     → 0 files  │  0 records  │  avg 0.0/file  │  winner: n/a
+
+
+  [ 29/119]   24%  ── Tufts University  (568 files)  elapsed 0:10  ETA 0:33  │  0 recs so far
+
+     → 0 files  │  0 records  │  avg 0.0/file  │  winner: n/a
+
+
+  [ 30/119]   25%  ── Tulane University  (82 files)  elapsed 0:11  ETA 0:33  │  0 recs so far
+
+     → 0 files  │  0 records  │  avg 0.0/file  │  winner: n/a
+
+
+  [ 31/119]   26%  ── Uc Berkeley  (382 files)  elapsed 0:11  ETA 0:32  │  0 recs so far
+
+     → 0 files  │  0 records  │  avg 0.0/file  │  winner: n/a
+
+
+  [ 32/119]   27%  ── Uc Davis  (382 files)  elapsed 0:11  ETA 0:31  │  0 recs so far
+
+     → 0 files  │  0 records  │  avg 0.0/file  │  winner: n/a
+
+
+  [ 33/119]   28%  ── Uc Santa Barbara  (426 files)  elapsed 0:12  ETA 0:32  │  0 recs so far
+
+     → 426 files  │  18,662 records  │  avg 43.8/file  │  winner: strategy_1_drupal
+
+
+  [ 34/119]   29%  ── Uc Santa Cruz  (74 files)  elapsed 0:26  ETA 1:05  │  18,662 recs so far
+
+     → 74 files  │  5,788 records  │  avg 78.2/file  │  winner: strategy_4_profile_links
+
+
+  [ 35/119]   29%  ── University At Albany Suny  (106 files)  elapsed 0:30  ETA 1:12  │  24,450 recs so far
+
+     → 106 files  │  2,126 records  │  avg 20.1/file  │  winner: strategy_5_generic
+
+
+  [ 36/119]   30%  ── University At Buffalo Suny  (182 files)  elapsed 0:33  ETA 1:17  │  26,576 recs so far
+
+     → 146 files  │  5,744 records  │  avg 39.3/file  │  winner: strategy_5_generic
+
+
+  [ 37/119]   31%  ── University Of Alabama  (510 files)  elapsed 0:43  ETA 1:37  │  32,320 recs so far
+
+     → 428 files  │  3,670 records  │  avg 8.6/file  │  winner: strategy_4_profile_links
+
+
+  [ 38/119]   32%  ── University Of Alabama Birmingham  (94 files)  elapsed 0:48  ETA 1:44  │  35,990 recs so far
+
+     → 94 files  │  2,242 records  │  avg 23.9/file  │  winner: strategy_5_generic
+
+
+  [ 39/119]   33%  ── University Of Arizona  (24 files)  elapsed 0:50  ETA 1:44  │  38,232 recs so far
+
+     → 24 files  │  1,392 records  │  avg 58.0/file  │  winner: strategy_4_profile_links
+
+
+  [ 40/119]   34%  ── University Of Arkansas  (276 files)  elapsed 0:52  ETA 1:43  │  39,624 recs so far
+
+     → 268 files  │  2,718 records  │  avg 10.1/file  │  winner: strategy_4_profile_links
+
+
+  [ 41/119]   34%  ── University Of California Los Angeles  (136 files)  elapsed 0:55  ETA 1:44  │  42,342 recs so far
+
+     → 136 files  │  8,518 records  │  avg 62.6/file  │  winner: strategy_4_profile_links
+
+
+  [ 42/119]   35%  ── University Of California San Diego  (658 files)  elapsed 1:01  ETA 1:52  │  50,860 recs so far
+
+     → 622 files  │  31,106 records  │  avg 50.0/file  │  winner: strategy_4_profile_links
+
+
+  [ 43/119]   36%  ── University Of Central Florida  (62 files)  elapsed 1:25  ETA 2:31  │  81,966 recs so far
+
+     → 28 files  │  1,510 records  │  avg 53.9/file  │  winner: strategy_3_div_cards
+
+
+  [ 44/119]   37%  ── University Of Chicago  (200 files)  elapsed 1:26  ETA 2:28  │  83,476 recs so far
+
+     → 200 files  │  21,282 records  │  avg 106.4/file  │  winner: strategy_5_generic
+
+
+  [ 45/119]   38%  ── University Of Cincinnati  (40 files)  elapsed 1:40  ETA 2:44  │  104,758 recs so far
+
+     → 40 files  │  1,386 records  │  avg 34.6/file  │  winner: strategy_4_profile_links
+
+
+  [ 46/119]   39%  ── University Of Colorado Boulder  (120 files)  elapsed 1:43  ETA 2:43  │  106,144 recs so far
+
+     → 120 files  │  7,304 records  │  avg 60.9/file  │  winner: strategy_4_profile_links
+
+
+  [ 47/119]   39%  ── University Of Colorado Denver  (30 files)  elapsed 1:48  ETA 2:45  │  113,448 recs so far
+
+     → 30 files  │  630 records  │  avg 21.0/file  │  winner: strategy_3_div_cards
+
+
+  [ 48/119]   40%  ── University Of Connecticut  (156 files)  elapsed 1:49  ETA 2:41  │  114,078 recs so far
+
+     → 156 files  │  5,094 records  │  avg 32.7/file  │  winner: strategy_5_generic
+
+
+  [ 49/119]   41%  ── University Of Delaware  (114 files)  elapsed 1:53  ETA 2:42  │  119,172 recs so far
+
+     → 114 files  │  3,248 records  │  avg 28.5/file  │  winner: strategy_4_profile_links
+
+
+  [ 50/119]   42%  ── University Of Denver  (56 files)  elapsed 1:57  ETA 2:41  │  122,420 recs so far
+
+     → 56 files  │  1,038 records  │  avg 18.5/file  │  winner: strategy_4_profile_links
+
+
+  [ 51/119]   43%  ── University Of Florida  (420 files)  elapsed 1:58  ETA 2:37  │  123,458 recs so far
+
+     → 420 files  │  14,364 records  │  avg 34.2/file  │  winner: strategy_3_div_cards
+
+
+  [ 52/119]   44%  ── University Of Georgia  (144 files)  elapsed 2:09  ETA 2:46  │  137,822 recs so far
+
+     → 144 files  │  6,742 records  │  avg 46.8/file  │  winner: strategy_1_drupal
+
+
+  [ 53/119]   45%  ── University Of Hawaii  (378 files)  elapsed 2:17  ETA 2:51  │  144,564 recs so far
+
+     → 324 files  │  2,610 records  │  avg 8.1/file  │  winner: strategy_4_profile_links
+
+
+  [ 54/119]   45%  ── University Of Houston  (82 files)  elapsed 2:22  ETA 2:51  │  147,174 recs so far
+
+     → 82 files  │  4,804 records  │  avg 58.6/file  │  winner: strategy_4_profile_links
+
+
+  [ 55/119]   46%  ── University Of Idaho  (84 files)  elapsed 2:25  ETA 2:49  │  151,978 recs so far
+
+     → 82 files  │  1,290 records  │  avg 15.7/file  │  winner: strategy_3_div_cards
+
+
+  [ 56/119]   47%  ── University Of Illinois Chicago  (12 files)  elapsed 2:28  ETA 2:47  │  153,268 recs so far
+
+     → 12 files  │  640 records  │  avg 53.3/file  │  winner: strategy_4_profile_links
+
+
+  [ 57/119]   48%  ── University Of Illinois Urbana Champaign  (182 files)  elapsed 2:29  ETA 2:42  │  153,908 recs so far
+
+     → 182 files  │  17,638 records  │  avg 96.9/file  │  winner: strategy_4_profile_links
+
+
+  [ 58/119]   49%  ── University Of Iowa  (176 files)  elapsed 2:43  ETA 2:51  │  171,546 recs so far
+
+     → 176 files  │  4,368 records  │  avg 24.8/file  │  winner: strategy_3_div_cards
+
+
+  [ 59/119]   50%  ── University Of Kansas  (212 files)  elapsed 2:48  ETA 2:51  │  175,914 recs so far
+
+     → 212 files  │  18,740 records  │  avg 88.4/file  │  winner: strategy_3_div_cards
+
+
+  [ 60/119]   50%  ── University Of Kentucky  (220 files)  elapsed 3:03  ETA 3:00  │  194,654 recs so far
+
+     → 220 files  │  4,116 records  │  avg 18.7/file  │  winner: strategy_5_generic
+
+
+  [ 61/119]   51%  ── University Of Louisiana At Lafayette  (212 files)  elapsed 3:06  ETA 2:57  │  198,770 recs so far
+
+     → 106 files  │  2,408 records  │  avg 22.7/file  │  winner: strategy_2_table
+
+
+  [ 62/119]   52%  ── University Of Louisville  (60 files)  elapsed 3:10  ETA 2:54  │  201,178 recs so far
+
+     → 60 files  │  7,348 records  │  avg 122.5/file  │  winner: strategy_3_div_cards
+
+
+  [ 63/119]   53%  ── University Of Maine  (234 files)  elapsed 3:16  ETA 2:55  │  208,526 recs so far
+
+     → 234 files  │  9,946 records  │  avg 42.5/file  │  winner: strategy_4_profile_links
+
+
+  [ 64/119]   54%  ── University Of Maryland  (402 files)  elapsed 3:23  ETA 2:54  │  218,472 recs so far
+
+     → 402 files  │  43,168 records  │  avg 107.4/file  │  winner: strategy_4_profile_links
+
+
+  [ 65/119]   55%  ── University Of Maryland Baltimore County  (160 files)  elapsed 3:53  ETA 3:13  │  261,640 recs so far
+
+     → 74 files  │  2,090 records  │  avg 28.2/file  │  winner: strategy_4_profile_links
+
+
+  [ 66/119]   55%  ── University Of Massachusetts Amherst  (10 files)  elapsed 3:55  ETA 3:09  │  263,730 recs so far
+
+     → 10 files  │  1,488 records  │  avg 148.8/file  │  winner: strategy_4_profile_links
+
+
+  [ 67/119]   56%  ── University Of Massachusetts Boston  (110 files)  elapsed 3:56  ETA 3:03  │  265,218 recs so far
+
+     → 110 files  │  4,038 records  │  avg 36.7/file  │  winner: strategy_5_generic
+
+
+  [ 68/119]   57%  ── University Of Massachusetts Lowell  (30 files)  elapsed 3:59  ETA 2:59  │  269,256 recs so far
+
+     → 30 files  │  914 records  │  avg 30.5/file  │  winner: strategy_3_div_cards
+
+
+  [ 69/119]   58%  ── University Of Memphis  (48 files)  elapsed 4:00  ETA 2:54  │  270,170 recs so far
+
+     → 48 files  │  3,156 records  │  avg 65.8/file  │  winner: strategy_4_profile_links
+
+
+  [ 70/119]   59%  ── University Of Miami  (34 files)  elapsed 4:02  ETA 2:49  │  273,326 recs so far
+
+     → 34 files  │  1,024 records  │  avg 30.1/file  │  winner: strategy_3_div_cards
+
+
+  [ 71/119]   60%  ── University Of Michigan  (88 files)  elapsed 4:04  ETA 2:45  │  274,350 recs so far
+
+     → 84 files  │  12,020 records  │  avg 143.1/file  │  winner: strategy_5_generic
+
+
+  [ 72/119]   61%  ── University Of Minnesota  (38 files)  elapsed 4:12  ETA 2:44  │  286,370 recs so far
+
+     → 38 files  │  3,468 records  │  avg 91.3/file  │  winner: strategy_3_div_cards
+
+
+  [ 73/119]   61%  ── University Of Mississippi  (452 files)  elapsed 4:16  ETA 2:41  │  289,838 recs so far
+
+     → 432 files  │  5,726 records  │  avg 13.3/file  │  winner: strategy_3_div_cards
+
+
+  [ 74/119]   62%  ── University Of Missouri  (178 files)  elapsed 4:21  ETA 2:39  │  295,564 recs so far
+
+     → 124 files  │  1,736 records  │  avg 14.0/file  │  winner: strategy_4_profile_links
+
+
+  [ 75/119]   63%  ── University Of Missouri Kansas City  (70 files)  elapsed 4:23  ETA 2:34  │  297,300 recs so far
+
+     → 62 files  │  1,080 records  │  avg 17.4/file  │  winner: strategy_4_profile_links
+
+
+  [ 76/119]   64%  ── University Of Nebraska Lincoln  (390 files)  elapsed 4:24  ETA 2:29  │  298,380 recs so far
+
+     → 178 files  │  3,524 records  │  avg 19.8/file  │  winner: strategy_4_profile_links
+
+
+  [ 77/119]   65%  ── University Of Nevada Las Vegas  (276 files)  elapsed 4:29  ETA 2:26  │  301,904 recs so far
+
+     → 272 files  │  2,552 records  │  avg 9.4/file  │  winner: strategy_4_profile_links
+
+
+  [ 78/119]   66%  ── University Of Nevada Reno  (302 files)  elapsed 4:31  ETA 2:22  │  304,456 recs so far
+
+     → 170 files  │  1,204 records  │  avg 7.1/file  │  winner: strategy_4_profile_links
+
+
+  [ 79/119]   66%  ── University Of New Hampshire  (76 files)  elapsed 4:33  ETA 2:18  │  305,660 recs so far
+
+     → 76 files  │  1,750 records  │  avg 23.0/file  │  winner: strategy_4_profile_links
+
+
+  [ 80/119]   67%  ── University Of New Mexico  (268 files)  elapsed 4:35  ETA 2:14  │  307,410 recs so far
+
+     → 268 files  │  16,328 records  │  avg 60.9/file  │  winner: strategy_4_profile_links
+
+
+  [ 81/119]   68%  ── University Of North Carolina Chapel Hill  (232 files)  elapsed 4:45  ETA 2:13  │  323,738 recs so far
+
+     → 232 files  │  2,544 records  │  avg 11.0/file  │  winner: strategy_5_generic
+
+
+  [ 82/119]   69%  ── University Of North Carolina Charlotte  (46 files)  elapsed 4:52  ETA 2:11  │  326,282 recs so far
+
+     → 46 files  │  1,326 records  │  avg 28.8/file  │  winner: strategy_3_div_cards
+
+
+  [ 83/119]   70%  ── University Of North Dakota  (100 files)  elapsed 4:53  ETA 2:07  │  327,608 recs so far
+
+     → 100 files  │  2,450 records  │  avg 24.5/file  │  winner: strategy_3_div_cards
+
+
+  [ 84/119]   71%  ── University Of North Texas  (62 files)  elapsed 4:56  ETA 2:03  │  330,058 recs so far
+
+     → 60 files  │  1,758 records  │  avg 29.3/file  │  winner: strategy_4_profile_links
+
+
+  [ 85/119]   71%  ── University Of Notre Dame  (200 files)  elapsed 4:57  ETA 1:59  │  331,816 recs so far
+
+     → 200 files  │  8,892 records  │  avg 44.5/file  │  winner: strategy_4_profile_links
+
+
+  [ 86/119]   72%  ── University Of Oklahoma  (98 files)  elapsed 5:05  ETA 1:57  │  340,708 recs so far
+
+     → 92 files  │  2,292 records  │  avg 24.9/file  │  winner: strategy_3_div_cards
+
+
+  [ 87/119]   73%  ── University Of Oregon  (166 files)  elapsed 5:08  ETA 1:53  │  343,000 recs so far
+
+     → 164 files  │  7,344 records  │  avg 44.8/file  │  winner: strategy_4_profile_links
+
+
+  [ 88/119]   74%  ── University Of Pennsylvania  (480 files)  elapsed 5:13  ETA 1:50  │  350,344 recs so far
+
+     → 480 files  │  13,390 records  │  avg 27.9/file  │  winner: strategy_5_generic
+
+
+  [ 89/119]   75%  ── University Of Pittsburgh  (72 files)  elapsed 5:28  ETA 1:50  │  363,734 recs so far
+
+     → 68 files  │  1,938 records  │  avg 28.5/file  │  winner: strategy_4_profile_links
+
+
+  [ 90/119]   76%  ── University Of Rhode Island  (24 files)  elapsed 5:30  ETA 1:46  │  365,672 recs so far
+
+     → 24 files  │  682 records  │  avg 28.4/file  │  winner: strategy_4_profile_links
+
+
+  [ 91/119]   76%  ── University Of Rochester  (176 files)  elapsed 5:30  ETA 1:41  │  366,354 recs so far
+
+     → 176 files  │  5,712 records  │  avg 32.5/file  │  winner: strategy_3_div_cards
+
+
+  [ 92/119]   77%  ── University Of South Carolina  (466 files)  elapsed 5:36  ETA 1:38  │  372,066 recs so far
+
+     → 464 files  │  11,838 records  │  avg 25.5/file  │  winner: strategy_4_profile_links
+
+
+  [ 93/119]   78%  ── University Of South Florida  (10 files)  elapsed 5:47  ETA 1:37  │  383,904 recs so far
+
+     → 10 files  │  238 records  │  avg 23.8/file  │  winner: strategy_2_table
+
+
+  [ 94/119]   79%  ── University Of Southern California  (148 files)  elapsed 5:47  ETA 1:32  │  384,142 recs so far
+
+     → 148 files  │  18,688 records  │  avg 126.3/file  │  winner: strategy_4_profile_links
+
+
+  [ 95/119]   80%  ── University Of Southern Mississippi  (82 files)  elapsed 6:00  ETA 1:31  │  402,830 recs so far
+
+     → 82 files  │  3,316 records  │  avg 40.4/file  │  winner: strategy_4_profile_links
+
+
+  [ 96/119]   81%  ── University Of Tennessee  (236 files)  elapsed 6:02  ETA 1:26  │  406,146 recs so far
+
+     → 234 files  │  13,178 records  │  avg 56.3/file  │  winner: strategy_3_div_cards
+
+
+  [ 97/119]   82%  ── University Of Texas At Arlington  (180 files)  elapsed 6:11  ETA 1:24  │  419,324 recs so far
+
+     → 180 files  │  10,050 records  │  avg 55.8/file  │  winner: strategy_5_generic
+
+
+  [ 98/119]   82%  ── University Of Texas At Austin  (128 files)  elapsed 6:19  ETA 1:21  │  429,374 recs so far
+
+     → 128 files  │  12,070 records  │  avg 94.3/file  │  winner: strategy_4_profile_links
+
+
+  [ 99/119]   83%  ── University Of Texas At Dallas  (364 files)  elapsed 6:28  ETA 1:18  │  441,444 recs so far
+
+     → 364 files  │  33,608 records  │  avg 92.3/file  │  winner: strategy_5_generic
+
+
+  [100/119]   84%  ── University Of Texas At San Antonio  (38 files)  elapsed 6:52  ETA 1:18  │  475,052 recs so far
+
+     → 38 files  │  1,654 records  │  avg 43.5/file  │  winner: strategy_4_profile_links
+
+
+  [101/119]   85%  ── University Of Texas El Paso  (24 files)  elapsed 6:54  ETA 1:13  │  476,706 recs so far
+
+     → 24 files  │  1,898 records  │  avg 79.1/file  │  winner: strategy_4_profile_links
+
+
+  [102/119]   86%  ── University Of Toledo  (132 files)  elapsed 6:55  ETA 1:09  │  478,604 recs so far
+
+     → 132 files  │  2,796 records  │  avg 21.2/file  │  winner: strategy_4_profile_links
+
+
+  [103/119]   87%  ── University Of Utah  (196 files)  elapsed 6:58  ETA 1:04  │  481,400 recs so far
+
+     → 196 files  │  15,298 records  │  avg 78.1/file  │  winner: strategy_5_generic
+
+
+  [104/119]   87%  ── University Of Vermont  (164 files)  elapsed 7:14  ETA 1:02  │  496,698 recs so far
+
+     → 102 files  │  3,030 records  │  avg 29.7/file  │  winner: strategy_3_div_cards
+
+
+  [105/119]   88%  ── University Of Virginia  (404 files)  elapsed 7:16  ETA 0:58  │  499,728 recs so far
+
+     → 396 files  │  11,000 records  │  avg 27.8/file  │  winner: strategy_4_profile_links
+
+
+  [106/119]   89%  ── University Of Washington  (724 files)  elapsed 7:26  ETA 0:54  │  510,728 recs so far
+
+     → 724 files  │  23,608 records  │  avg 32.6/file  │  winner: strategy_4_profile_links
+
+
+  [107/119]   90%  ── University Of Wisconsin Madison  (272 files)  elapsed 7:49  ETA 0:52  │  534,336 recs so far
+
+     → 272 files  │  11,314 records  │  avg 41.6/file  │  winner: strategy_4_profile_links
+
+
+  [108/119]   91%  ── University Of Wisconsin Milwaukee  (146 files)  elapsed 7:58  ETA 0:48  │  545,650 recs so far
+
+     → 146 files  │  2,988 records  │  avg 20.5/file  │  winner: strategy_3_div_cards
+
+
+  [109/119]   92%  ── University Of Wyoming  (306 files)  elapsed 8:01  ETA 0:44  │  548,638 recs so far
+
+     → 304 files  │  7,292 records  │  avg 24.0/file  │  winner: strategy_4_profile_links
+
+
+  [110/119]   92%  ── Utah State University  (62 files)  elapsed 8:06  ETA 0:39  │  555,930 recs so far
+
+     → 32 files  │  1,322 records  │  avg 41.3/file  │  winner: strategy_4_profile_links
+
+
+  [111/119]   93%  ── Vanderbilt University  (80 files)  elapsed 8:07  ETA 0:35  │  557,252 recs so far
+
+     → 64 files  │  378 records  │  avg 5.9/file  │  winner: strategy_4_profile_links
+
+
+  [112/119]   94%  ── Virginia Commonwealth University  (66 files)  elapsed 8:08  ETA 0:30  │  557,630 recs so far
+
+     → 66 files  │  826 records  │  avg 12.5/file  │  winner: strategy_5_generic
+
+
+  [113/119]   95%  ── Virginia Tech  (418 files)  elapsed 8:08  ETA 0:25  │  558,456 recs so far
+
+     → 412 files  │  8,044 records  │  avg 19.5/file  │  winner: strategy_4_profile_links
+
+
+  [114/119]   96%  ── Washington State University  (144 files)  elapsed 8:17  ETA 0:21  │  566,500 recs so far
+
+     → 144 files  │  6,924 records  │  avg 48.1/file  │  winner: strategy_4_profile_links
+
+
+  [115/119]   97%  ── Washington University In St Louis  (28 files)  elapsed 8:22  ETA 0:17  │  573,424 recs so far
+
+     → 28 files  │  370 records  │  avg 13.2/file  │  winner: strategy_2_table
+
+
+  [116/119]   97%  ── Wayne State University  (188 files)  elapsed 8:23  ETA 0:13  │  573,794 recs so far
+
+     → 162 files  │  2,382 records  │  avg 14.7/file  │  winner: strategy_5_generic
+
+
+  [117/119]   98%  ── West Virginia University  (308 files)  elapsed 8:27  ETA 0:08  │  576,176 recs so far
+
+     → 138 files  │  8,092 records  │  avg 58.6/file  │  winner: strategy_4_profile_links
+
+
+  [118/119]   99%  ── Worcester Polytechnic Institute  (144 files)  elapsed 8:32  ETA 0:04  │  584,268 recs so far
+
+     → 144 files  │  5,508 records  │  avg 38.2/file  │  winner: strategy_4_profile_links
+
+
+  [119/119]  100%  ── Yale University  (202 files)  elapsed 8:38  ETA 0:00  │  589,776 recs so far
+
+     → 200 files  │  7,074 records  │  avg 35.4/file  │  winner: strategy_5_generic
+
+
+School                                            Files  Records  Avg/file
+--------------------------------------------------------------------------------
+  ❌ binghamton_university_suny                          0        0       0.0
+  ❌ boston_college                                      0        0       0.0
+  ❌ boston_university                                   0        0       0.0
+  ❌ carnegie_mellon_university                          0        0       0.0
+  ❌ clemson_university                                  0        0       0.0
+  ❌ drexel_university                                   0        0       0.0
+  ❌ duke_university                                     0        0       0.0
+  ❌ florida_atlantic_university                         0        0       0.0
+  ❌ george_mason_university                             0        0       0.0
+  ❌ harvard_university                                  0        0       0.0
+  ❌ johns_hopkins_university                            0        0       0.0
+  ❌ kent_state_university                               0        0       0.0
+  ❌ lehigh_university                                   0        0       0.0
+  ❌ loyola_university_chicago                           0        0       0.0
+  ❌ massachusetts_institute_of_technology               0        0       0.0
+  ❌ mississippi_state_university                        0        0       0.0
+  ❌ montana_state_university                            0        0       0.0
+  ❌ ohio_state_university                               0        0       0.0
+  ❌ oklahoma_state_university                           0        0       0.0
+  ❌ old_dominion_university                             0        0       0.0
+  ❌ penn_state_university                               0        0       0.0
+  ❌ purdue_university                                   0        0       0.0
+  ❌ rensselaer_polytechnic_institute                    0        0       0.0
+  ❌ rice_university                                     0        0       0.0
+  ❌ rutgers_university                                  0        0       0.0
+  ❌ stony_brook_university                              0        0       0.0
+  ❌ syracuse_university                                 0        0       0.0
+  ❌ texas_a_m_university                                0        0       0.0
+  ❌ tufts_university                                    0        0       0.0
+  ❌ tulane_university                                   0        0       0.0
+  ❌ uc_berkeley                                         0        0       0.0
+  ❌ uc_davis                                            0        0       0.0
+  ✅ uc_santa_barbara                                  426   18,662      43.8
+  ✅ uc_santa_cruz                                      74    5,788      78.2
+  ✅ university_at_albany_suny                         106    2,126      20.1
+  ✅ university_at_buffalo_suny                        146    5,744      39.3
+  ⚠️  university_of_alabama                             428    3,670       8.6
+  ✅ university_of_alabama_birmingham                   94    2,242      23.9
+  ✅ university_of_arizona                              24    1,392      58.0
+  ✅ university_of_arkansas                            268    2,718      10.1
+  ✅ university_of_california_los_angeles              136    8,518      62.6
+  ✅ university_of_california_san_diego                622   31,106      50.0
+  ✅ university_of_central_florida                      28    1,510      53.9
+  ✅ university_of_chicago                             200   21,282     106.4
+  ✅ university_of_cincinnati                           40    1,386      34.6
+  ✅ university_of_colorado_boulder                    120    7,304      60.9
+  ✅ university_of_colorado_denver                      30      630      21.0
+  ✅ university_of_connecticut                         156    5,094      32.7
+  ✅ university_of_delaware                            114    3,248      28.5
+  ✅ university_of_denver                               56    1,038      18.5
+  ✅ university_of_florida                             420   14,364      34.2
+  ✅ university_of_georgia                             144    6,742      46.8
+  ⚠️  university_of_hawaii                              324    2,610       8.1
+  ✅ university_of_houston                              82    4,804      58.6
+  ✅ university_of_idaho                                82    1,290      15.7
+  ✅ university_of_illinois_chicago                     12      640      53.3
+  ✅ university_of_illinois_urbana_champaign           182   17,638      96.9
+  ✅ university_of_iowa                                176    4,368      24.8
+  ✅ university_of_kansas                              212   18,740      88.4
+  ✅ university_of_kentucky                            220    4,116      18.7
+  ✅ university_of_louisiana_at_lafayette              106    2,408      22.7
+  ✅ university_of_louisville                           60    7,348     122.5
+  ✅ university_of_maine                               234    9,946      42.5
+  ✅ university_of_maryland                            402   43,168     107.4
+  ✅ university_of_maryland_baltimore_county            74    2,090      28.2
+  ✅ university_of_massachusetts_amherst                10    1,488     148.8
+  ✅ university_of_massachusetts_boston                110    4,038      36.7
+  ✅ university_of_massachusetts_lowell                 30      914      30.5
+  ✅ university_of_memphis                              48    3,156      65.8
+  ✅ university_of_miami                                34    1,024      30.1
+  ✅ university_of_michigan                             84   12,020     143.1
+  ✅ university_of_minnesota                            38    3,468      91.3
+  ✅ university_of_mississippi                         432    5,726      13.3
+  ✅ university_of_missouri                            124    1,736      14.0
+  ✅ university_of_missouri_kansas_city                 62    1,080      17.4
+  ✅ university_of_nebraska_lincoln                    178    3,524      19.8
+  ⚠️  university_of_nevada_las_vegas                    272    2,552       9.4
+  ⚠️  university_of_nevada_reno                         170    1,204       7.1
+  ✅ university_of_new_hampshire                        76    1,750      23.0
+  ✅ university_of_new_mexico                          268   16,328      60.9
+  ✅ university_of_north_carolina_chapel_hill          232    2,544      11.0
+  ✅ university_of_north_carolina_charlotte             46    1,326      28.8
+  ✅ university_of_north_dakota                        100    2,450      24.5
+  ✅ university_of_north_texas                          60    1,758      29.3
+  ✅ university_of_notre_dame                          200    8,892      44.5
+  ✅ university_of_oklahoma                             92    2,292      24.9
+  ✅ university_of_oregon                              164    7,344      44.8
+  ✅ university_of_pennsylvania                        480   13,390      27.9
+  ✅ university_of_pittsburgh                           68    1,938      28.5
+  ✅ university_of_rhode_island                         24      682      28.4
+  ✅ university_of_rochester                           176    5,712      32.5
+  ✅ university_of_south_carolina                      464   11,838      25.5
+  ✅ university_of_south_florida                        10      238      23.8
+  ✅ university_of_southern_california                 148   18,688     126.3
+  ✅ university_of_southern_mississippi                 82    3,316      40.4
+  ✅ university_of_tennessee                           234   13,178      56.3
+  ✅ university_of_texas_at_arlington                  180   10,050      55.8
+  ✅ university_of_texas_at_austin                     128   12,070      94.3
+  ✅ university_of_texas_at_dallas                     364   33,608      92.3
+  ✅ university_of_texas_at_san_antonio                 38    1,654      43.5
+  ✅ university_of_texas_el_paso                        24    1,898      79.1
+  ✅ university_of_toledo                              132    2,796      21.2
+  ✅ university_of_utah                                196   15,298      78.1
+  ✅ university_of_vermont                             102    3,030      29.7
+  ✅ university_of_virginia                            396   11,000      27.8
+  ✅ university_of_washington                          724   23,608      32.6
+  ✅ university_of_wisconsin_madison                   272   11,314      41.6
+  ✅ university_of_wisconsin_milwaukee                 146    2,988      20.5
+  ✅ university_of_wyoming                             304    7,292      24.0
+  ✅ utah_state_university                              32    1,322      41.3
+  ⚠️  vanderbilt_university                              64      378       5.9
+  ✅ virginia_commonwealth_university                   66      826      12.5
+  ✅ virginia_tech                                     412    8,044      19.5
+  ✅ washington_state_university                       144    6,924      48.1
+  ✅ washington_university_in_st_louis                  28      370      13.2
+  ✅ wayne_state_university                            162    2,382      14.7
+  ✅ west_virginia_university                          138    8,092      58.6
+  ✅ worcester_polytechnic_institute                   144    5,508      38.2
+  ✅ yale_university                                   200    7,074      35.4
+
+  Total records written : 596,850
+  Total files parsed    : 14,710
+  Output                : faculty_snapshots_parsed.jsonl
+  Strategy audit        : faculty_snapshots_strategy_audit.jsonl
+[91m[1m...complete. duration: 09:26.90 minutes at 04:26:04 (EST) Thu, 16 Apr 2026[0m
+
+Ending Cell 27-----------------------------------------
+Executing Cell 28--------------------------------------
+Ending Cell 28-----------------------------------------
+Executing Cell 29--------------------------------------
+  ↺  reload_py_files: html_parser.py, viz_pipeline.py, faculty_linker.py, r1_schools_data.py, panel_builder.py, pool_metrics.py, stage9_analysis.py
+
+  Loaded 2,580,266 parsed records from disk for viz.
+
+<Figure size 2000x5104 with 4 Axes>
+
+  Saved -> /sfs/gpfs/tardis/home/dzk3ja/Ivy_Net/tenure/tenure_pipeline/stage4_parse_diagnostic.png
+
+Ending Cell 29-----------------------------------------
+Executing Cell 30--------------------------------------
+Ending Cell 30-----------------------------------------
+Executing Cell 31--------------------------------------
+  ↺  reload_py_files: html_parser.py, viz_pipeline.py, faculty_linker.py, r1_schools_data.py, panel_builder.py, pool_metrics.py, stage9_analysis.py
+
+  CELL 5 skipped — loaded 1,278,820 panel rows  |  29,177 faculty  |  168 schools  04:26:40 (EST) Thu, 16 Apr 2026
+
+Ending Cell 31-----------------------------------------
+Executing Cell 32--------------------------------------
+Ending Cell 32-----------------------------------------
+Executing Cell 33--------------------------------------
+  ↺  reload_py_files: html_parser.py, viz_pipeline.py, faculty_linker.py, r1_schools_data.py, panel_builder.py, pool_metrics.py, stage9_analysis.py
+
+<Figure size 2000x1400 with 4 Axes>
+
+  Saved -> /sfs/gpfs/tardis/home/dzk3ja/Ivy_Net/tenure/tenure_pipeline/stage5_panel_summary.png
+
+Ending Cell 33-----------------------------------------
+Executing Cell 34--------------------------------------
+Ending Cell 34-----------------------------------------
+Executing Cell 35--------------------------------------
+  CELL 6A skipped — loaded 14,597 author records from disk.
+
+  Tier            N       %
+  ---------- ------  ------
+  HIGH        2,722   18.6%
+  MEDIUM      2,049   14.0%
+  LOW           446    3.1%
+  MULTI       2,225   15.2%
+  NONE        7,155   49.0%
+  TOTAL      14,597
+
+Ending Cell 35-----------------------------------------
+Executing Cell 36--------------------------------------
+Ending Cell 36-----------------------------------------
+Executing Cell 37--------------------------------------
+  CELL 6B skipped — loaded 54,577 works records for 2,701 authors  04:26:52 (EST) Thu, 16 Apr 2026
+
+Ending Cell 37-----------------------------------------
+Executing Cell 38--------------------------------------
+                                             faculty_id  \
+0                       boston_university|aaron stevens   
+8315         university_of_south_carolina|video contest   
+8253         university_of_south_carolina|the telegraph   
+8254  university_of_south_carolina|the top three pos...   
+8255            university_of_south_carolina|their time   
+
+                     name_display                      uni_slug  \
+0            Aaron Stevens Senior             boston_university   
+8315                Video Contest  university_of_south_carolina   
+8253                The Telegraph  university_of_south_carolina   
+8254  The Top Three Positions You  university_of_south_carolina   
+8255                   Their Time  university_of_south_carolina   
+
+                        university openalex_id openalex_name match_confidence  \
+0                Boston University                                       NONE   
+8315  University Of South Carolina                                       NONE   
+8253  University Of South Carolina                                       NONE   
+8254  University Of South Carolina                                       NONE   
+8255  University Of South Carolina                                       NONE   
+
+      works_count  cited_by_count orcid  n_candidates  
+0               0               0                   0  
+8315            0               0                   0  
+8253            0               0                   4  
+8254            0               0                   0  
+8255            0               0                   1  
+Ending Cell 38-----------------------------------------
+Executing Cell 39--------------------------------------
+Ending Cell 39-----------------------------------------
+Executing Cell 40--------------------------------------
+Ending Cell 40-----------------------------------------
+Executing Cell 41--------------------------------------
+  CELL 7 skipped — loaded 106,144 rows from faculty_panel_enriched.jsonl  04:26:54 (EST) Thu, 16 Apr 2026
+
+Ending Cell 41-----------------------------------------
+Executing Cell 42--------------------------------------
+Ending Cell 42-----------------------------------------
+Executing Cell 43--------------------------------------
+  CELL 8 skipped — loaded 106,144 rows from faculty_panel_with_pools.jsonl  04:26:55 (EST) Thu, 16 Apr 2026
+
+Ending Cell 43-----------------------------------------
+Executing Cell 44--------------------------------------
+Ending Cell 44-----------------------------------------
+Executing Cell 45--------------------------------------
+  CELL 9 skipped — no plot on disk; set RUN_CELL9=True in CELL 0, re-run CELL 0, then run this cell.  04:26:55 (EST) Thu, 16 Apr 2026
+
+Ending Cell 45-----------------------------------------
+Executing Cell 46--------------------------------------
+Ending Cell 46-----------------------------------------

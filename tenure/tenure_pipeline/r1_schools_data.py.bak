@@ -177,7 +177,8 @@ PILOT_SCHOOLS = [
         "urls"       : [
             "https://cs.rice.edu/people",
             "http://www.cs.rice.edu/CS/Faculty/",
-            "http://cs.rice.edu/CS/Faculty/"
+            "http://cs.rice.edu/CS/Faculty/",
+            "http://compsci.rice.edu/people.cfm?doc_id=3460"
         ],
         "notes"      : "Small CS dept; expected clean static HTML for early years",
     },
@@ -847,7 +848,8 @@ PILOT_SCHOOLS = [
             "https://www.eng.auburn.edu/department/csse/faculty.html",
             "http://www.eng.auburn.edu/dept/csse/faculty.html",
             "http://www.cs.auburn.edu/faculty/",
-            "http://www.cs.auburn.edu/"
+            "http://www.cs.auburn.edu/",
+            "http://eng.auburn.edu/programs/csse/staff/faculty.html"
         ],
         "notes"      : "CSSE dept in Samuel Ginn College of Engineering; new URL eng.auburn.edu/csse/people/ (found Apr 2026); old faculty.html path had 0 Wayback snapshots; cs.auburn.edu old domain",
     },
