@@ -21,10 +21,10 @@
 #   - Time limit is 12h to be safe; typical runtime is 3–5h.
 #   - 32G RAM needed to hold the PAA hit table in memory during the scan phase.
 
-#SBATCH --time=12:00:00
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=4
+#SBATCH --cpus-per-task=2    # was 4 — script is single-threaded I/O; 2 is plenty
+#SBATCH --time=08:00:00      # was 12h — 8h gives buffer + shorter jobs queue faster
 #SBATCH --mem=32G
 #SBATCH --partition=standard
 #SBATCH --job-name=oa_cache
