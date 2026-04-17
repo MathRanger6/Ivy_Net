@@ -75,6 +75,7 @@ tenure/tenure_pipeline/faculty_panel_analysis*.jsonl
 # Cells 6A–6B: OA outputs (5–9MB now; will hit 50MB+ as all 168 schools are processed)
 tenure/tenure_pipeline/openalex_author_ids.jsonl
 tenure/tenure_pipeline/openalex_works_by_year.jsonl
+tenure/tenure_pipeline/openalex_snapshot_cache.jsonl
 tenure/tenure_pipeline/openalex_low_confidence.jsonl
 tenure/tenure_pipeline/openalex_inst_map.json
 # DBLP parsed per-year JSONL (433MB total; re-parseable from XML)

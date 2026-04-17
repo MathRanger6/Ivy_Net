@@ -457,6 +457,48 @@ def resolve_authors(panel_records: list,
 
 
 # ---------------------------------------------------------------------------
+# Phase B helpers: snapshot cache (persistent, incremental)
+# ---------------------------------------------------------------------------
+
+def _load_snapshot_cache(cache_path: Path) -> dict:
+    """
+    Load openalex_snapshot_cache.jsonl → {openalex_id: {year: n_works}}.
+    Returns empty dict if file does not exist.
+    """
+    cache = {}
+    cache_path = Path(cache_path)
+    if not cache_path.exists():
+        return cache
+    with open(cache_path, encoding="utf-8") as f:
+        for line in f:
+            try:
+                rec = json.loads(line)
+                oa_id = rec.get("openalex_id")
+                wby = rec.get("works_by_year")
+                if oa_id and isinstance(wby, dict):
+                    cache[oa_id] = {int(k): v for k, v in wby.items()}
+            except Exception:
+                pass
+    return cache
+
+
+def _append_snapshot_cache(new_entries: dict, cache_path: Path) -> None:
+    """
+    Append new {openalex_id: {year: n_works}} entries to the cache file.
+    Each author gets one line.
+    """
+    cache_path = Path(cache_path)
+    cache_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(cache_path, "a", encoding="utf-8") as f:
+        for oa_id, works_by_year in new_entries.items():
+            rec = {
+                "openalex_id":   oa_id,
+                "works_by_year": {str(k): v for k, v in sorted(works_by_year.items())},
+            }
+            f.write(json.dumps(rec) + "\n")
+
+
+# ---------------------------------------------------------------------------
 # Phase B helpers: bulk snapshot (CDH / OpenAlex relational CSVs)
 # ---------------------------------------------------------------------------
 
@@ -483,6 +525,7 @@ def _fetch_works_by_year_snapshot(
     snapshot_root: Path,
     confidence_min: str,
     skip_done: bool,
+    cache_path: Path = None,
 ) -> list:
     """
     Build the same JSONL as the API path using:
@@ -490,7 +533,16 @@ def _fetch_works_by_year_snapshot(
       * ``publicationauthoraffiliation/*.csv.gz`` — link AuthorId → PublicationId
       * ``pub2year.csv.gz`` — PublicationId → Year
 
-    Full scans of both — intended for HPC batch runs over local NVMe/Lustre.
+    With incremental cache
+    ---------------------
+    If ``cache_path`` is provided (recommended), extracted works-by-year data is
+    stored in ``openalex_snapshot_cache.jsonl``.  On subsequent runs only
+    **new** author IDs — not already in the cache — trigger a snapshot scan.
+    This means adding schools later costs only a marginal scan for the new
+    authors, not a full re-scan of the entire snapshot.
+
+    Cache format: one line per author —
+        {"openalex_id": "...", "works_by_year": {"2010": 1, "2015": 3, ...}}
     """
     TIER_RANK = {"HIGH": 0, "MEDIUM": 1, "LOW": 2, "MULTI": 3, "NONE": 4}
     min_rank = TIER_RANK.get(confidence_min, 1)
@@ -510,33 +562,61 @@ def _fetch_works_by_year_snapshot(
             TIER_RANK.get(r.get("match_confidence", "NONE"), 99) <= min_rank
         )
 
-    eligible = [r for r in author_records if _eligible(r)]
-    todo = [r for r in eligible if r["openalex_id"] not in done_ids]
-    n_todo = len(todo)
+    eligible  = [r for r in author_records if _eligible(r)]
+    # Authors not yet in out_path at all
+    need_out  = [r for r in eligible if r["openalex_id"] not in done_ids]
 
-    print(f"\n  Authors to aggregate : {n_todo:,}  ({len(done_ids):,} OpenAlex IDs already in {out_path.name})")
-    print(f"  Eligible (≥{confidence_min}) w/ ID : {len(eligible):,}  (from {len(author_records):,} author rows)")
-    print(f"  Data source          : bulk snapshot (relational CSVs, no HTTP)")
+    # ── Cache layer ───────────────────────────────────────────────────────────
+    cache: dict = {}   # {openalex_id: {year(int): n_works}}
+    if cache_path is not None:
+        cache_path = Path(cache_path)
+        cache = _load_snapshot_cache(cache_path)
+        n_cached = len(cache)
+    else:
+        n_cached = 0
+
+    # Authors that need output AND are already in the cache (no scan needed)
+    from_cache  = [r for r in need_out if r["openalex_id"] in cache]
+    # Authors that need output AND are NOT in the cache (need snapshot scan)
+    need_scan   = [r for r in need_out if r["openalex_id"] not in cache]
+    n_todo      = len(need_scan)
+
+    print(f"\n  Authors eligible (≥{confidence_min}) : {len(eligible):,}  (from {len(author_records):,} rows)")
+    print(f"  Already in output  : {len(done_ids):,}")
+    print(f"  Cache loaded       : {n_cached:,} authors  "
+          f"({'no cache file' if cache_path is None else cache_path.name})")
+    print(f"  Served from cache  : {len(from_cache):,}")
+    print(f"  Need snapshot scan : {n_todo:,}")
     print(f"  {'─'*60}")
 
-    if not todo:
-        if eligible and done_ids:
-            print(
-                "  Nothing to fetch — every eligible author ID already has ≥1 row in the works file "
-                "(skip_done). Delete or rename the works file to rebuild, or set skip_done=False."
-            )
-        elif not eligible:
-            print(
-                "  Nothing to fetch — no author rows with both openalex_id and "
-                f"match_confidence ≥ {confidence_min}."
-            )
-        else:
-            print("  Nothing to fetch — works file empty or skip_done has nothing new.")
-        return []
+    # ── Write cache-hits to output first ─────────────────────────────────────
+    results = []
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    if from_cache:
+        with open(out_path, "a", encoding="utf-8") as fout:
+            for auth in from_cache:
+                wby = cache[auth["openalex_id"]]
+                for year in sorted(wby.keys()):
+                    rec = {
+                        "openalex_id": auth["openalex_id"],
+                        "faculty_id":  auth["faculty_id"],
+                        "uni_slug":    auth["uni_slug"],
+                        "year":        year,
+                        "n_works":     wby[year],
+                    }
+                    fout.write(json.dumps(rec) + "\n")
+                    results.append(rec)
+        print(f"  Wrote {len(results):,} year-records from cache (no snapshot scan needed).")
 
+    if not need_scan:
+        print(f"\n  {'─'*60}")
+        print(f"  All {len(eligible):,} eligible authors served from cache + existing output — snapshot scan skipped.")
+        return results
+
+    # ── Snapshot scan for uncached authors ────────────────────────────────────
     target_ints: set = set()
     int_to_auth: dict = {}
-    for auth in todo:
+    for auth in need_scan:
         aid = openalex_author_url_to_int(auth["openalex_id"])
         if aid is None:
             continue
@@ -544,19 +624,19 @@ def _fetch_works_by_year_snapshot(
         int_to_auth[aid] = auth
 
     if not target_ints:
-        print("  Nothing to fetch — could not parse any OpenAlex author ids for the todo list.")
-        return []
+        print("  Nothing to scan — could not parse any OpenAlex author ids for the todo list.")
+        return results
 
-    paa_dir = snapshot_root / "publicationauthoraffiliation"
+    paa_dir  = snapshot_root / "publicationauthoraffiliation"
     p2y_path = snapshot_root / "pub2year.csv.gz"
 
     pubs_by_author: dict = defaultdict(set)
     paa_files = sorted(glob.glob(str(paa_dir / "*.csv.gz")))
     if not paa_files:
         print(f"  ERROR: no *.csv.gz under {paa_dir}")
-        return []
+        return results
 
-    print(f"  Scanning {len(paa_files):,} publicationauthoraffiliation shards …")
+    print(f"  Scanning {len(paa_files):,} PAA shards for {len(target_ints):,} new author IDs …")
     for fp in tqdm(paa_files, desc="  PAA shards", unit="file"):
         with gzip.open(fp, "rt", encoding="utf-8", newline="") as gz:
             reader = csv.DictReader(gz)
@@ -592,31 +672,31 @@ def _fetch_works_by_year_snapshot(
                 continue
             pub_year[pid] = y
 
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    results = []
+    # ── Aggregate, write output, and update cache ─────────────────────────────
+    new_cache_entries: dict = {}
     t_start = time.time()
 
     with open(out_path, "a", encoding="utf-8") as fout:
-        for i, auth in enumerate(todo, 1):
+        for i, auth in enumerate(need_scan, 1):
             aid = openalex_author_url_to_int(auth["openalex_id"])
             if aid is None:
                 continue
-            pids = pubs_by_author.get(aid)
-            if not pids:
-                continue
+            pids   = pubs_by_author.get(aid)
             counts = Counter()
-            for pid in pids:
-                y = pub_year.get(pid)
-                if y is None:
-                    continue
-                counts[y] += 1
+            if pids:
+                for pid in pids:
+                    y = pub_year.get(pid)
+                    if y is not None:
+                        counts[y] += 1
+            # Always cache (even authors with 0 publications) to avoid re-scanning
+            new_cache_entries[auth["openalex_id"]] = dict(counts)
             for year in sorted(counts.keys()):
                 rec = {
                     "openalex_id": auth["openalex_id"],
-                    "faculty_id": auth["faculty_id"],
-                    "uni_slug": auth["uni_slug"],
-                    "year": year,
-                    "n_works": counts[year],
+                    "faculty_id":  auth["faculty_id"],
+                    "uni_slug":    auth["uni_slug"],
+                    "year":        year,
+                    "n_works":     counts[year],
                 }
                 fout.write(json.dumps(rec) + "\n")
                 results.append(rec)
@@ -624,8 +704,8 @@ def _fetch_works_by_year_snapshot(
 
             if i % 100 == 0 or i == n_todo:
                 elapsed = time.time() - t_start
-                rate = i / elapsed if elapsed > 0 else 0
-                remain = (n_todo - i) / rate if rate > 0 else 0
+                rate    = i / elapsed if elapsed > 0 else 0
+                remain  = (n_todo - i) / rate if rate > 0 else 0
                 print(
                     f"  [{i:>5,}/{n_todo:,}] {i/n_todo*100:5.1f}%  "
                     f"elapsed {_hms(elapsed)}  ETA {_hms(remain)}  "
@@ -633,62 +713,54 @@ def _fetch_works_by_year_snapshot(
                     flush=True,
                 )
 
+    # Persist new cache entries
+    if new_cache_entries and cache_path is not None:
+        _append_snapshot_cache(new_cache_entries, cache_path)
+        print(f"  Cache updated — appended {len(new_cache_entries):,} authors to {cache_path.name}")
+
     total_elapsed = time.time() - t_start
     print(f"\n  {'─'*60}")
-    print(f"  Aggregated works for {n_todo:,} authors in {_hms(total_elapsed)} (snapshot)")
-    print(f"  Total year-records : {len(results):,}")
+    print(f"  Scanned snapshot for {n_todo:,} new authors in {_hms(total_elapsed)}")
+    print(f"  Total year-records this run : {len(results):,}")
     return results
 
 
 # ---------------------------------------------------------------------------
-# Phase B: Works by year
+# Phase B helpers: cache-only mode (Mac / no snapshot access)
 # ---------------------------------------------------------------------------
 
-def fetch_works_by_year(author_records: list,
-                        out_path: Path,
-                        confidence_min: str = "MEDIUM",
-                        delay: float = _DELAY,
-                        skip_done: bool = True,
-                        snapshot_root: Path | None = None) -> list:
+def _fetch_works_by_year_cache_only(
+    author_records: list,
+    out_path: Path,
+    cache_path: Path,
+    confidence_min: str,
+    skip_done: bool,
+    api_fallback: bool,
+    delay: float,
+) -> list:
     """
-    For each resolved author (confidence >= confidence_min), aggregate publication
-    counts by calendar year — either from a **bulk snapshot** (``snapshot_root``) or
-    via the OpenAlex **API** (group_by, one request per author).
+    Serve works-by-year from the snapshot cache — no HPC or snapshot required.
 
-    Parameters
-    ----------
-    author_records  : list[dict]  — from openalex_author_ids.jsonl
-    out_path        : Path        — write JSONL results here incrementally
-    confidence_min  : str         — minimum confidence to include ('HIGH'|'MEDIUM'|'LOW')
-    delay           : float       — seconds between API requests (ignored for snapshot mode)
-    snapshot_root   : Path | None  — optional OpenAlex tree with relational CSVs (see module doc)
+    Called by ``fetch_works_by_year`` when the snapshot root is unreachable
+    (e.g. running on a laptop away from the HPC).  Two sub-cases:
 
-    Returns
-    -------
-    list[dict]  — one record per (openalex_id, year):
-        openalex_id, faculty_id, uni_slug, year, n_works
+    All authors in cache
+        Write to output immediately.  No scan, no API.  Fast.
 
-    snapshot_root
-        If set and ``…/publicationauthoraffiliation`` + ``…/pub2year.csv.gz`` exist,
-        uses bulk CSV scans (no HTTP). Otherwise uses the API (``delay`` between calls).
+    Some authors NOT in cache
+        Write the cached ones, then:
+        - If ``api_fallback=False`` (default / recommended):
+          Print exact SSH + rsync commands to run the cache builder on Rivanna
+          and sync the result back.  Return what was written from cache.
+        - If ``api_fallback=True``:
+          Use the OpenAlex API for the uncached subset.  Slow and rate-limited
+          but functional as a temporary fallback.
     """
-    if snapshot_root is not None:
-        sr = Path(snapshot_root).expanduser()
-        paa = sr / "publicationauthoraffiliation"
-        p2y = sr / "pub2year.csv.gz"
-        if sr.is_dir() and paa.is_dir() and p2y.is_file():
-            return _fetch_works_by_year_snapshot(
-                author_records, out_path, sr, confidence_min, skip_done
-            )
-        print(
-            f"\n  Stage 6B: snapshot_root {sr} missing publicationauthoraffiliation/ or "
-            f"pub2year.csv.gz — using OpenAlex API."
-        )
-
     TIER_RANK = {"HIGH": 0, "MEDIUM": 1, "LOW": 2, "MULTI": 3, "NONE": 4}
     min_rank  = TIER_RANK.get(confidence_min, 1)
+    out_path  = Path(out_path)
 
-    out_path = Path(out_path)
+    # Load existing output to honour skip_done
     done_ids: set = set()
     if skip_done and out_path.exists():
         with open(out_path, encoding="utf-8") as f:
@@ -704,34 +776,287 @@ def fetch_works_by_year(author_records: list,
         )
 
     eligible = [r for r in author_records if _eligible(r)]
-    todo = [r for r in eligible if r["openalex_id"] not in done_ids]
-    n_todo = len(todo)
+    need_out = [r for r in eligible if r["openalex_id"] not in done_ids]
+
+    cache      = _load_snapshot_cache(cache_path)
+    from_cache = [r for r in need_out if r["openalex_id"] in cache]
+    uncached   = [r for r in need_out if r["openalex_id"] not in cache]
+
+    print(f"\n  Stage 6B — cache-only mode  (snapshot root not accessible on this machine)")
+    print(f"  {'─'*60}")
+    print(f"  Cache file        : {cache_path.name}  ({len(cache):,} authors cached)")
+    print(f"  Eligible (≥{confidence_min})   : {len(eligible):,}  (from {len(author_records):,} rows)")
+    print(f"  Already in output : {len(done_ids):,}  (skip_done)")
+    print(f"  Served from cache : {len(from_cache):,}")
+    print(f"  Not in cache yet  : {len(uncached):,}")
+    if uncached:
+        status = "→ API fallback ENABLED" if api_fallback else "→ instructions below"
+        print(f"  Uncached action   : {status}")
+    print(f"  {'─'*60}")
+
+    results: list = []
+
+    # ── Write cache-hits straight to output ──────────────────────────────────
+    if from_cache:
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(out_path, "a", encoding="utf-8") as fout:
+            for auth in from_cache:
+                wby = cache[auth["openalex_id"]]
+                for year in sorted(wby.keys()):
+                    rec = {
+                        "openalex_id": auth["openalex_id"],
+                        "faculty_id":  auth["faculty_id"],
+                        "uni_slug":    auth["uni_slug"],
+                        "year":        year,
+                        "n_works":     wby[year],
+                    }
+                    fout.write(json.dumps(rec) + "\n")
+                    results.append(rec)
+        print(f"  Wrote {len(results):,} year-records from cache.")
+
+    # ── Handle uncached authors ───────────────────────────────────────────────
+    if not uncached:
+        print(f"\n  All {len(eligible):,} eligible authors served — done.")
+        return results
+
+    if api_fallback:
+        # Use OpenAlex API for the uncached subset.
+        # Note: API results are NOT written to the cache (cache = snapshot data only).
+        print(f"\n  {len(uncached):,} uncached authors → OpenAlex API (api_fallback=True) …")
+        n_todo = len(uncached)
+        est = n_todo * delay
+        print(f"  Est. time : {_hms(est)}  (network adds ~30–60%)")
+        print(f"  {'─'*60}")
+        reset_api_metrics()
+        t_start = time.time()
+        with open(out_path, "a", encoding="utf-8") as fout:
+            for i, auth in enumerate(uncached, 1):
+                oa_id = auth["openalex_id"].replace("https://openalex.org/", "")
+                try:
+                    data = _get("works", {
+                        "filter":   f"authorships.author.id:{oa_id}",
+                        "group_by": "publication_year",
+                        "per_page": 200,
+                    })
+                except RateLimitExhausted as exc:
+                    print(f"\n  *** RATE LIMIT EXHAUSTED after {i-1:,} authors ***  {exc}")
+                    print(f"  Re-run Cell 6B tomorrow (api_fallback) or build the cache on Rivanna.\n")
+                    break
+                for g in data.get("group_by", []):
+                    try:
+                        year = int(g.get("key"))
+                    except (TypeError, ValueError):
+                        continue
+                    rec = {
+                        "openalex_id": auth["openalex_id"],
+                        "faculty_id":  auth["faculty_id"],
+                        "uni_slug":    auth["uni_slug"],
+                        "year":        year,
+                        "n_works":     g.get("count", 0),
+                    }
+                    fout.write(json.dumps(rec) + "\n")
+                    results.append(rec)
+                fout.flush()
+                if i % 50 == 0 or i == n_todo:
+                    elapsed = time.time() - t_start
+                    rate    = i / elapsed if elapsed > 0 else 0
+                    remain  = (n_todo - i) / rate if rate > 0 else 0
+                    print(
+                        f"  [{i:>4,}/{n_todo:,}] {i/n_todo*100:4.1f}%  "
+                        f"elapsed {_hms(elapsed)}  ETA {_hms(remain)}  "
+                        f"{len(results):,} records\n    {api_metrics_line()}",
+                        flush=True,
+                    )
+                time.sleep(delay)
+        total_elapsed = time.time() - t_start
+        print(f"\n  {'─'*60}")
+        print(f"  API fallback done for {n_todo:,} authors in {_hms(total_elapsed)}")
+        print(f"  {api_metrics_line()}")
+
+    else:
+        # ── No API fallback — print exact instructions ────────────────────────
+        print(f"""
+  ╔══════════════════════════════════════════════════════════════════╗
+  ║  ACTION REQUIRED — {len(uncached):,} new author IDs need a snapshot scan  ║
+  ╚══════════════════════════════════════════════════════════════════╝
+
+  You are NOT on Rivanna (snapshot root unreachable).
+  Works data for {len(from_cache):,} cached author(s) was written above.
+  The remaining {len(uncached):,} author(s) need the OpenAlex snapshot scan.
+
+  Step 1 — Submit the cache builder job on Rivanna:
+    ssh rivanna 'cd ~/Ivy_Net && sbatch build_openalex_cache.slurm'
+
+  Step 2 — Monitor progress (takes ~3–5 hours first run):
+    ssh rivanna '~/Ivy_Net/scripts/track_slurm.sh'
+
+  Step 3 — When done, rsync both data files to this machine:
+    rsync -avz --progress \\
+      rivanna:~/Ivy_Net/tenure/tenure_pipeline/openalex_snapshot_cache.jsonl \\
+      {cache_path}
+    rsync -avz --progress \\
+      rivanna:~/Ivy_Net/tenure/tenure_pipeline/openalex_works_by_year.jsonl \\
+      {out_path}
+
+  Step 4 — Re-run this cell.  All authors will be served from cache.
+
+  Alternative: Set STAGE6B_API_FALLBACK = True in Cell 0 to use the
+  OpenAlex API as a temporary fallback (slow, rate-limited, ~{_hms(len(uncached)*1.0)}
+  at 1 req/sec).  API results are NOT added to the cache.
+  ─────────────────────────────────────────────────────────────────""")
+
+    return results
+
+
+# ---------------------------------------------------------------------------
+# Phase B: Works by year — main entry point
+# ---------------------------------------------------------------------------
+
+def fetch_works_by_year(author_records: list,
+                        out_path: Path,
+                        confidence_min: str = "MEDIUM",
+                        delay: float = _DELAY,
+                        skip_done: bool = True,
+                        snapshot_root: Path | None = None,
+                        cache_path: Path | None = None,
+                        api_fallback: bool = False) -> list:
+    """
+    Aggregate publication counts by calendar year for each resolved author.
+
+    ROUTING LOGIC — THREE MODES
+    ───────────────────────────
+    This function auto-detects the best data source in priority order:
+
+    Route 1 — Snapshot mode  (Rivanna / HPC)
+        snapshot_root is set AND the PAA + pub2year files are accessible.
+        Performs bulk CSV scans of the OpenAlex relational snapshot.
+        Uses the incremental cache (cache_path) so already-scanned authors
+        are never re-scanned, even across runs.  This is the primary mode.
+
+    Route 2 — Cache-only mode  (Mac / coffee shop / no HPC connection)
+        Snapshot root is unreachable (or not set) AND cache_path exists.
+        Serves all cached authors from cache immediately — no scan, no API.
+        For any NEW authors not yet in the cache:
+          • api_fallback=False (default): prints SSH + rsync instructions
+            and returns partial results.  Recommended.
+          • api_fallback=True: uses the OpenAlex API for the uncached subset.
+            Functional but slow and rate-limited; API results are NOT written
+            to the cache (cache = snapshot data only).
+
+    Route 3 — API-only mode  (no snapshot, no cache file)
+        Only if api_fallback=True.  One HTTP request per author.
+        Use for exploratory runs or small author lists where HPC is not
+        worth the overhead.
+
+    Route 4 — Blocked  (no snapshot, no cache, api_fallback=False)
+        Prints a clear error and returns [].  Default safe behavior.
+
+    Parameters
+    ----------
+    author_records  : list[dict]  — from openalex_author_ids.jsonl
+    out_path        : Path        — write JSONL results here incrementally
+    confidence_min  : str         — minimum tier to include ('HIGH'|'MEDIUM'|'LOW')
+    delay           : float       — seconds between API requests (Routes 2/3 only)
+    skip_done       : bool        — skip authors already in out_path
+    snapshot_root   : Path | None — path to OpenAlex relational CSV tree on HPC
+                                    (see module docstring for layout).
+    cache_path      : Path | None — persistent per-author cache built by snapshot
+                                    scans.  Set to STAGE6_WORKS_CACHE in Cell 0.
+                                    Required to enable Route 2 (cache-only mode).
+    api_fallback    : bool        — set True (STAGE6B_API_FALLBACK in Cell 0) to
+                                    allow the OpenAlex API as a fallback.  False by
+                                    default — deliberately requires an explicit opt-in
+                                    so the snapshot / cache path is always preferred.
+
+    Returns
+    -------
+    list[dict]  — one record per (openalex_id, year):
+        openalex_id, faculty_id, uni_slug, year, n_works
+    """
+
+    # ── Route 1: Snapshot mode (Rivanna — bulk CSV scan) ─────────────────────
+    # Primary path when running on HPC with access to the CDH OpenAlex snapshot.
+    # Internally uses the incremental cache so only new authors are ever scanned.
+    if snapshot_root is not None:
+        sr  = Path(snapshot_root).expanduser()
+        paa = sr / "publicationauthoraffiliation"
+        p2y = sr / "pub2year.csv.gz"
+        if sr.is_dir() and paa.is_dir() and p2y.is_file():
+            return _fetch_works_by_year_snapshot(
+                author_records, out_path, sr, confidence_min, skip_done,
+                cache_path=cache_path,
+            )
+        # Snapshot configured but unreachable (e.g. running on local Mac).
+        # Fall through to Route 2 (cache) or Route 3/4 (API / blocked).
+        print(f"\n  Stage 6B: snapshot root not accessible: {sr}")
+        print(f"  → Trying cache-only mode …")
+
+    # ── Route 2: Cache-only mode (Mac / no HPC connection) ───────────────────
+    # When the snapshot is unreachable but a cache file exists from a prior
+    # Rivanna run (or rsync'd to this machine), serve from cache instantly.
+    # For any new authors not yet in the cache, either print rsync instructions
+    # (api_fallback=False) or fall back to the API (api_fallback=True).
+    if cache_path is not None and Path(cache_path).exists():
+        return _fetch_works_by_year_cache_only(
+            author_records, out_path, Path(cache_path),
+            confidence_min, skip_done, api_fallback, delay,
+        )
+
+    # ── Route 3 / 4: API or blocked ──────────────────────────────────────────
+    # Reached only when BOTH snapshot root and cache file are unavailable.
+    # Route 3 (api_fallback=True):  use OpenAlex API — one request per author.
+    # Route 4 (api_fallback=False): print instructions and return [].
+    if not api_fallback:
+        cp_hint = str(cache_path) if cache_path else "STAGE6_WORKS_CACHE (see Cell 0)"
+        print(
+            f"\n  Stage 6B: no snapshot and no cache file found.\n"
+            f"  snapshot_root : {snapshot_root}\n"
+            f"  cache_path    : {cp_hint}\n\n"
+            f"  Options:\n"
+            f"  1. Run  sbatch build_openalex_cache.slurm  on Rivanna to build the cache,\n"
+            f"     then rsync  openalex_snapshot_cache.jsonl  to this machine.\n"
+            f"  2. Set  STAGE6B_API_FALLBACK = True  in Cell 0 to use the OpenAlex API\n"
+            f"     (slow / rate-limited; useful only for small exploratory runs)."
+        )
+        return []
+
+    # API-only path (api_fallback=True, no snapshot, no cache).
+    TIER_RANK = {"HIGH": 0, "MEDIUM": 1, "LOW": 2, "MULTI": 3, "NONE": 4}
+    min_rank  = TIER_RANK.get(confidence_min, 1)
+    out_path  = Path(out_path)
+
+    done_ids: set = set()
+    if skip_done and out_path.exists():
+        with open(out_path, encoding="utf-8") as f:
+            for line in f:
+                try:
+                    done_ids.add(json.loads(line)["openalex_id"])
+                except Exception:
+                    pass
+
+    def _eligible(r: dict) -> bool:
+        return bool(r.get("openalex_id")) and (
+            TIER_RANK.get(r.get("match_confidence", "NONE"), 99) <= min_rank
+        )
+
+    eligible = [r for r in author_records if _eligible(r)]
+    todo     = [r for r in eligible if r["openalex_id"] not in done_ids]
+    n_todo   = len(todo)
 
     est_total_sec = n_todo * delay
-    print(f"\n  Authors to fetch   : {n_todo:,}  ({len(done_ids):,} OpenAlex IDs already in {out_path.name})")
-    print(f"  Eligible (≥{confidence_min}) w/ ID : {len(eligible):,}  (from {len(author_records):,} author rows)")
-    print(f"  Confidence floor   : {confidence_min}")
+    print(f"\n  Stage 6B — API mode  (api_fallback=True, no snapshot, no cache)")
+    print(f"  Authors to fetch   : {n_todo:,}  ({len(done_ids):,} already in {out_path.name})")
+    print(f"  Eligible (≥{confidence_min}) w/ ID : {len(eligible):,}  (from {len(author_records):,} rows)")
     print(f"  Est. total time    : {_hms(est_total_sec)}  (network adds ~30–60%)")
     print(f"  {'─'*60}")
 
     if not todo:
-        if eligible and done_ids:
-            print(
-                "  Nothing to fetch — every eligible author ID already has ≥1 row in the works file "
-                "(skip_done). Delete or rename the works file to rebuild, or set skip_done=False."
-            )
-        elif not eligible:
-            print(
-                "  Nothing to fetch — no author rows with both openalex_id and "
-                f"match_confidence ≥ {confidence_min}."
-            )
-        else:
-            print("  Nothing to fetch — works file empty or skip_done has nothing new.")
+        print("  Nothing to fetch — every eligible author already in output (skip_done).")
         return []
 
     reset_api_metrics()
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    results = []
+    results: list = []
     t_start = time.time()
 
     with open(out_path, "a", encoding="utf-8") as fout:
@@ -749,12 +1074,9 @@ def fetch_works_by_year(author_records: list,
                 print(f"  Checkpoint saved through author {i-1:,} of {n_todo:,}.")
                 print(f"  Re-run Cell 6B tomorrow — it will resume from here.\n")
                 break
-            groups = data.get("group_by", [])
-            n_new  = 0
-            for g in groups:
-                year = g.get("key")
+            for g in data.get("group_by", []):
                 try:
-                    year = int(year)
+                    year = int(g.get("key"))
                 except (TypeError, ValueError):
                     continue
                 rec = {
@@ -766,8 +1088,6 @@ def fetch_works_by_year(author_records: list,
                 }
                 fout.write(json.dumps(rec) + "\n")
                 results.append(rec)
-                n_new += 1
-
             fout.flush()
 
             if i % 100 == 0 or i == n_todo:
@@ -777,12 +1097,10 @@ def fetch_works_by_year(author_records: list,
                 print(
                     f"  [{i:>5,}/{n_todo:,}] {i/n_todo*100:5.1f}%  "
                     f"elapsed {_hms(elapsed)}  ETA {_hms(remain)}  "
-                    f"rate {rate*60:.0f}/min  │  "
-                    f"{len(results):,} year-records written\n"
+                    f"rate {rate*60:.0f}/min  │  {len(results):,} year-records written\n"
                     f"    {api_metrics_line()}",
-                    flush=True
+                    flush=True,
                 )
-
             time.sleep(delay)
 
     total_elapsed = time.time() - t_start

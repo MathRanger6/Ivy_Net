@@ -1,0 +1,99 @@
+---
+description: Jupyter notebook editing workflow for 540_tenure_pipeline.ipynb — blank edit, editor tool, structural ops
+globs: **/*.ipynb
+alwaysApply: false
+---
+
+# Jupyter Notebook Editing Workflow (540_tenure_pipeline.ipynb)
+
+## WHY THESE RULES EXIST — READ THIS FIRST
+
+There is a known quirk in how Cursor's AI edits `.ipynb` files using `EditNotebook`:
+**the very first `EditNotebook` call in a session does not show the red/green diff
+acceptance UI.** The change goes straight to disk invisibly. The user cannot review
+or reject it. Every edit *after* the first one shows correctly.
+
+To work around this, a **sacrificial "burn slot" cell** exists in the notebook.
+The first edit of every session targets that cell with a visible, meaningful change.
+If the editor skips the diff for that first call — fine, it was sacrificial.
+All real edits that follow will show correctly with red/green acceptance.
+
+---
+
+## THE EDIT BLANK CELL
+
+In `540_tenure_pipeline.ipynb`, cell **index 3** is the burn slot:
+
+```python
+##### EDIT BLANK ###### DISCARD
+# session: 2026-04-15 — Cell 9: log_bin param ...
+# session: 2026-04-14 — ...
+```
+
+- It is a **code cell** (not markdown).
+- It is a **session log**: each entry records what changed in that pass.
+- It sits right after the title markdown (index 0), the ToC/Cell 0 header markdown
+  (index 1), and the Cell 0 metadata markdown (index 2 — do NOT use this for the
+  burn edit; it is content).
+- **Do not delete it. Do not restructure it. Do not use it for real code.**
+
+---
+
+## THE BLANK EDIT — EXACT PROCEDURE
+
+**This must be the VERY FIRST `EditNotebook` call in any session that will touch
+`540_tenure_pipeline.ipynb`, no matter what else is happening, no exceptions.**
+
+Add one new `# session:` line at the TOP of the burn cell's content:
+
+```
+old_string:
+  ##### EDIT BLANK ###### DISCARD
+  # session: 2026-04-15 — <previous entry>
+
+new_string:
+  ##### EDIT BLANK ###### DISCARD
+  # session: YYYY-MM-DD — <brief summary of THIS session's changes>
+  # session: 2026-04-15 — <previous entry>
+```
+
+The session summary should be a short phrase: what stage/cell you changed and why.
+It is the user's git-alternative history for "what did PEER change in this pass."
+
+After the call succeeds, announce: **"Blank edit done — EDIT BLANK cell updated."**
+
+---
+
+## WHICH EDITOR TO USE
+
+| Operation | Tool |
+|-----------|------|
+| Any cell content edit | **`EditNotebook`** (Cursor-native) — ALWAYS |
+| Cell content edit | **NEVER `notebook_edit_cell`** (MCP tool) |
+| Structural ops (bulk add, move, split, merge, duplicate) | **Ask user first**, then use MCP |
+
+The reason `notebook_edit_cell` (MCP) is banned for content: it writes directly to
+disk and bypasses Cursor's editor sync, so the user's open editor view does not
+update and red/green diffs never appear.
+
+---
+
+## COMMON MISTAKES TO AVOID
+
+1. **Editing the wrong cell for the blank edit.** Cell index 1 is a markdown header
+   — do NOT edit that. The burn slot is at index **3**.
+
+2. **Using an invisible change** (HTML comment, trailing space) instead of a real
+   `# session:` line. The blank edit should be *visible* — a real log entry — not
+   a no-op disguised to satisfy the tool.
+
+3. **Announcing "Blank edit done" without it actually succeeding.** If `EditNotebook`
+   returns an error, the blank edit did NOT happen. Fix the error first.
+
+4. **Using `Shell` + Python JSON manipulation to edit cell content.** This writes
+   to disk bypassing the editor, same problem as `notebook_edit_cell`. Only use
+   Shell/JSON for structural changes that `EditNotebook` cannot handle.
+
+5. **Skipping the blank edit "because the session already started."** It must be
+   first. If you forgot and already made other edits, do it now — it will resync
+   the editor for all *future* edits in the same session.
