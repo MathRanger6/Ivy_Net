@@ -1,5 +1,5 @@
 # Tenure Pipeline: End-to-End Overview
-**Agent: PEER** | **Notebook: `540_tenure_pipeline.ipynb`** | **Updated: 2026-04-16 (rev 15)**
+**Agent: PEER** | **Notebook: `540_tenure_pipeline.ipynb`** | **Updated: 2026-04-16 (rev 16)**
 
 ---
 
@@ -768,6 +768,41 @@ if m:
 
 **Diagnostic check for this pattern:** If all files for a school are < 5 KB and identical in size, it's almost certainly redirect shells. The meta-refresh tag will be visible in the first 20 lines of the file.
 
+### Rule 8: Save as you go — incremental write + flush for every long-running loop
+
+> **Any script with a multi-iteration loop over network or disk I/O must write and flush results after each iteration, not batch at the end.**
+
+The cost of an `f.flush()` is microseconds. The cost of a 2-hour job dying before
+its final write is re-running everything from scratch.
+
+**The pattern:**
+```python
+# ✅ Correct — append + flush after each unit of work
+with open(OUT_JSONL, 'a', encoding='utf-8') as f:
+    for item in big_collection:
+        result = expensive_operation(item)     # network / snapshot / HPC scan
+        f.write(json.dumps(result) + '\n')
+        f.flush()                              # push to OS — survives kill signals
+
+# ✅ Always pair with a resume check at startup
+done = {rec['id'] for rec in _read_jsonl(OUT_JSONL)}
+for item in big_collection:
+    if item['id'] in done:
+        continue    # already processed in a previous (interrupted) run
+    ...
+```
+
+**Scripts in this project that follow this pattern:**
+
+| Script | Unit of work | Checkpoint file |
+|--------|-------------|-----------------|
+| `build_openalex_cache.py` | one author ID | `openalex_snapshot_cache.jsonl` |
+| `discover_faculty_urls.py` | one school | `faculty_url_suggestions.jsonl` |
+
+This rule is enforced as a Cursor project rule: `.cursor/rules/incremental-writes.mdc`.
+
+---
+
 ### Rule 7: CDX wildcard queries reveal what paths were actually captured
 
 For schools where the specific faculty page URL has zero snapshots, query the base domain with a wildcard to discover what *was* crawled:
@@ -826,6 +861,68 @@ Called from **`540`** after Cells **3A**, **3B**, **4**, **5** (see notebook “
 
 **Enrollment inputs:** `STAGE3_ENROLLMENT` → `school_enrollment_annual.csv` (rebuild via notebook **`541_ipeds_enrollment.ipynb`** / `build_school_enrollment_from_ipeds.py`). Tier cutpoints (`ENROLLMENT_SMALL_MAX`, `ENROLLMENT_MEDIUM_MAX`) live in `viz_pipeline.py`.
 
+### 7.7 Automated faculty URL discovery (`tenure_pipeline/discover_faculty_urls.py`)
+
+**Purpose:** Replace the manual "browse Wayback Machine in a browser" workflow for finding better faculty page URLs at schools with low parse quality.
+
+**The problem it solves:** After Cell 4 runs, some schools yield very few parsed faculty records per file (low `mean_recs` in `faculty_snapshots_strategy_audit.jsonl`). This usually means the URLs we queried in CDX point to the wrong path — the wrong subdirectory, a JS-rendered hub, or a redirect shell. The fix is finding a better URL and adding it to the school's list. Manually doing this in a browser takes 20–30 minutes per school. With 36 low-quality schools, that's a full day's work.
+
+**Algorithm** (rev 2 — apex-domain-first, mirrors manual Wayback workflow):
+1. Read audit data → compute `mean_recs` per file per school → rank worst schools
+2. For each low-quality school, strip known URLs down to their **apex domain**
+   (e.g., `cs.vanderbilt.edu` → `vanderbilt.edu`) and fire one CDX
+   `matchType=domain` query — this discovers **all subdomains** at once:
+   `cs.vanderbilt.edu`, `engineering.vanderbilt.edu`, `www.vanderbilt.edu`, etc.
+   This mirrors the manual workflow: start at the university root, then navigate
+   to wherever CS lived that year, rather than starting from a known subdomain
+   that might not cover all years.
+3. Score each discovered URL:
+   - **Keyword score** — path contains `faculty`, `people`, `staff`, `phonebook`, `directory`, etc.
+   - **CS-subdomain bonus** — subdomain is a CS/engineering token (`cs.*`, `eecs.*`, `computing.*`) → +15 pts; CS tokens in path → +8 pts
+   - **Depth score** — prefer 1–3 path segments (not too generic, not too deep)
+   - **Penalty** — courses, events, publications, static assets → hard skip
+   - **Snapshot count** — how often Wayback captured it (more = better-archived)
+   - **Year span** — did Wayback capture it consistently across many years?
+   - **Novelty** — bonus if the URL is not already in our school list
+4. Refine top candidates with exact snapshot counts + year ranges (follow-up CDX call)
+5. Print ranked candidates per school with scores + snapshot counts + year range
+6. Write `faculty_url_suggestions.jsonl` + `faculty_url_suggestions.csv`
+
+**Run it:**
+```bash
+cd ~/Ivy_Net
+python tenure/tenure_pipeline/discover_faculty_urls.py
+
+# With live test-parse (downloads + parses one snapshot per candidate):
+TEST_PARSE=1 python tenure/tenure_pipeline/discover_faculty_urls.py
+```
+
+**Configuration constants** (edit at top of script):
+
+| Constant | Default | Meaning |
+|----------|---------|---------|
+| `QUALITY_THRESHOLD_MEAN_RECS` | `20` | Schools below this mean records/file are investigated |
+| `TOP_N_CANDIDATES` | `8` | Ranked candidates per school |
+| `SKIP_KNOWN_URLS` | `True` | Suppress URLs already in the school list |
+| `CDX_LIMIT` | `200,000` | Max Wayback rows per wildcard CDX query |
+| `TEST_PARSE` | `False` | Download + parse one snapshot per candidate to score live |
+
+**Output files:**
+
+| File | Description |
+|------|-------------|
+| `faculty_url_suggestions.jsonl` | One record per school with ranked candidate list |
+| `faculty_url_suggestions.csv` | One row per candidate URL — paste `suggested_url` into `new_url` in `url_update_worksheet.csv` |
+
+**Workflow after running:**
+1. Open `faculty_url_suggestions.csv` — review `suggested_url` column, filter to rank ≤ 3
+2. Paste promising URLs into `new_url` in `url_update_worksheet.csv`
+3. `python tenure/tenure_pipeline/apply_url_updates.py`
+4. Notebook: Cell 0 → Cell 2 → Cell 3A → Cell 3B → Cell 4
+5. Re-run `discover_faculty_urls.py` to confirm quality improved
+
+**Current state (April 2026):** 36 of 168 schools have `mean_recs < 20`. Running the script queries ~50 CDX domains and takes ~15–20 minutes (mostly polite CDX delays). Vanderbilt, Nevada Reno, Mississippi State, Penn State, and Hawaii are the worst-ranked.
+
 ---
 
 ## 8. Expansion Plan: Current State → Broader R1 Coverage
@@ -845,4 +942,4 @@ Called from **`540`** after Cells **3A**, **3B**, **4**, **5** (see notebook “
 
 ---
 
-*Document written by PEER, April 4, 2026. Revised **2026-04-16 (rev 15):** **§4** CELL 6A–6B section rewritten: CDH bulk snapshot **implemented** (not pending), incremental snapshot cache (`openalex_snapshot_cache.jsonl`), `build_openalex_cache.py` / `build_openalex_cache.slurm` standalone cache builder, four-route auto-detection logic (snapshot → cache-only → API → blocked), `STAGE6B_API_FALLBACK` constant, coffee-shop / offline workflow with rsync; **§2** pipeline table updated; **§6** file list updated with new artifacts.  Revised April 5, 2026 (rev 3) for Wave 3 and Cells 3D/3E. Revised April 7, 2026 (rev 4) for **168-school `PILOT_SCHOOLS`**, CDX 2s delay / 20s timeout / retry queue + Cell 3A-RETRY, bookmark/`tried_urls` behavior, Cell 4 outputs (`faculty_snapshots_parsed.jsonl`), and removal of stale 71/114 coverage snapshot. Revised April 8, 2026 (rev 5) for **Option B** on-disk paths (`faculty_snapshots/<uni_slug>/<source_id>/…`), `faculty_source_id()` / `iter_school_html_files()`, and `legacy/`. Revised April 10, 2026 (rev 6): **§0** clarifies split vs **`TENURE_DATA_GAMEPLAN.md`** (gameplan restructured to mirror sports gameplan). Revised April 10, 2026 (rev 7): **§0** adds **§G1–§G14** gameplan anchors + gameplan stage map ↔ overview §2–§4 table; gameplan working agreement links to this §0. Revised April 2026 (rev 8): **§5** adds **Temporal keys** (exact Wayback timestamps vs spring/fall design strata) and **Collisions** (blending, contradiction flags, linker as baseline). Revised April 2026 (rev 9): **CELL 5** panel + plan join; pipeline table renumbered (6–9); **`faculty_linker`** basename fallback for legacy HTML paths. Revised April 2026 (rev 10): **CELL 3A** multi-capture per season band (`CDX_SNAPS_PER_SEASON`); timestamped filenames; **CELL 5** panel dedupe includes **`local_path`**; gameplan **Snapshot identity** + working agreement **fix plumbing early**. Revised **2026-04-11 (rev 11):** **`CDX_SNAPS_PER_SEASON` = 12**, **`CDX_SPACING_POOL_MULT`**, **`CDX_SLEEP_BEFORE_RETRY_SEC`** bridge cell; CDX timeouts **45s / 60s**; **`tried_urls`** / clean-slate semantics; Option B examples + index schemas use **`<year>_<season>_<timestamp>.html`**; **429** vs timeout; Cell 4 condemn = **default off** (`CELL4_CONDEMN_ON_FAILURE`). Revised **2026-04-10 (rev 12):** **§7.5** IPEDS fall enrollment (`541` / `build_school_enrollment_from_ipeds.py`): artifacts, **`HD_YEAR`** (directory vs enrollment years), **`ipeds_download_errors.jsonl`** outcomes table, HTTP backoff behavior. Revised **2026-04-12 (rev 13):** **§4** CELL **6A–6B** OpenAlex (`openalex_resolver.py`) + **bulk snapshot at UVA pending access**; pipeline table updated; **§7.5** `stale_cache_removed` outcome + auto-cache validation; **§7.6** Stage viz (`plot_stage3a`, **`plot_stage3a_enrollment_bin_heatmap`**, etc.); **§6** file list — enrollment + OpenAlex + IPEDS artifacts. Revised **2026-04-14 (rev 14):** **§0** adds cross-reference to **`HPC_SETUP_CHECKLIST.md`** (Git vs `rsync`, `.env`, conda, canonical `tenure_pipeline/` paths on Rivanna).*
+*Document written by PEER, April 4, 2026. Revised **2026-04-16 (rev 18):** **§7** Rule 8 added — incremental write+flush pattern for all long-running pipeline scripts; `.cursor/rules/incremental-writes.mdc` created; `Pertinent_Thoughts_Tenure.md` updated with same. Revised **2026-04-16 (rev 17):** **§7.7** `discover_faculty_urls.py` algorithm upgraded to `matchType=domain` (apex-domain-first strategy): one CDX query per university discovers all subdomains, new CS-subdomain scoring bonus (+15 pts), mirrors manual Wayback navigate-from-root workflow. Revised **2026-04-16 (rev 16):** **§7.7** `discover_faculty_urls.py` — automated CDX wildcard discovery, path scoring, and URL suggestion for low-quality schools (36 schools below threshold; replaces manual Wayback browsing workflow). Revised **2026-04-16 (rev 15):** **§4** CELL 6A–6B section rewritten: CDH bulk snapshot **implemented** (not pending), incremental snapshot cache (`openalex_snapshot_cache.jsonl`), `build_openalex_cache.py` / `build_openalex_cache.slurm` standalone cache builder, four-route auto-detection logic (snapshot → cache-only → API → blocked), `STAGE6B_API_FALLBACK` constant, coffee-shop / offline workflow with rsync; **§2** pipeline table updated; **§6** file list updated with new artifacts.  Revised April 5, 2026 (rev 3) for Wave 3 and Cells 3D/3E. Revised April 7, 2026 (rev 4) for **168-school `PILOT_SCHOOLS`**, CDX 2s delay / 20s timeout / retry queue + Cell 3A-RETRY, bookmark/`tried_urls` behavior, Cell 4 outputs (`faculty_snapshots_parsed.jsonl`), and removal of stale 71/114 coverage snapshot. Revised April 8, 2026 (rev 5) for **Option B** on-disk paths (`faculty_snapshots/<uni_slug>/<source_id>/…`), `faculty_source_id()` / `iter_school_html_files()`, and `legacy/`. Revised April 10, 2026 (rev 6): **§0** clarifies split vs **`TENURE_DATA_GAMEPLAN.md`** (gameplan restructured to mirror sports gameplan). Revised April 10, 2026 (rev 7): **§0** adds **§G1–§G14** gameplan anchors + gameplan stage map ↔ overview §2–§4 table; gameplan working agreement links to this §0. Revised April 2026 (rev 8): **§5** adds **Temporal keys** (exact Wayback timestamps vs spring/fall design strata) and **Collisions** (blending, contradiction flags, linker as baseline). Revised April 2026 (rev 9): **CELL 5** panel + plan join; pipeline table renumbered (6–9); **`faculty_linker`** basename fallback for legacy HTML paths. Revised April 2026 (rev 10): **CELL 3A** multi-capture per season band (`CDX_SNAPS_PER_SEASON`); timestamped filenames; **CELL 5** panel dedupe includes **`local_path`**; gameplan **Snapshot identity** + working agreement **fix plumbing early**. Revised **2026-04-11 (rev 11):** **`CDX_SNAPS_PER_SEASON` = 12**, **`CDX_SPACING_POOL_MULT`**, **`CDX_SLEEP_BEFORE_RETRY_SEC`** bridge cell; CDX timeouts **45s / 60s**; **`tried_urls`** / clean-slate semantics; Option B examples + index schemas use **`<year>_<season>_<timestamp>.html`**; **429** vs timeout; Cell 4 condemn = **default off** (`CELL4_CONDEMN_ON_FAILURE`). Revised **2026-04-10 (rev 12):** **§7.5** IPEDS fall enrollment (`541` / `build_school_enrollment_from_ipeds.py`): artifacts, **`HD_YEAR`** (directory vs enrollment years), **`ipeds_download_errors.jsonl`** outcomes table, HTTP backoff behavior. Revised **2026-04-12 (rev 13):** **§4** CELL **6A–6B** OpenAlex (`openalex_resolver.py`) + **bulk snapshot at UVA pending access**; pipeline table updated; **§7.5** `stale_cache_removed` outcome + auto-cache validation; **§7.6** Stage viz (`plot_stage3a`, **`plot_stage3a_enrollment_bin_heatmap`**, etc.); **§6** file list — enrollment + OpenAlex + IPEDS artifacts. Revised **2026-04-14 (rev 14):** **§0** adds cross-reference to **`HPC_SETUP_CHECKLIST.md`** (Git vs `rsync`, `.env`, conda, canonical `tenure_pipeline/` paths on Rivanna).*

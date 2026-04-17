@@ -206,7 +206,8 @@ def _aggregate_bins(rows_sorted, n_bins, exclude_censored):
 # ── Plot ───────────────────────────────────────────────────────────────────────
 
 def _plot_inverted_u(bins, out_path, n_bins, exclude_censored,
-                     bin_method='quantile', z_score=False, log_bin=False):
+                     bin_method='quantile', z_score=False, log_bin=False,
+                     n_persons=None):
     try:
         import matplotlib
     except ImportError:
@@ -249,13 +250,39 @@ def _plot_inverted_u(bins, out_path, n_bins, exclude_censored,
     method_label = 'quantile bins (≈equal N)' if bin_method == 'quantile' else 'equal-width bins'
     pop_note = 'resolved' if exclude_censored else 'all (incl. censored)'
 
-    fig, axes = plt.subplots(2, 1, figsize=(9, 7), sharex=True)
-    fig.suptitle(
+    # Build the population line for the title
+    if n_persons is not None:
+        n_tot  = n_persons.get('n_with_loo', 0)
+        n_ten  = n_persons.get('n_tenure', 0)
+        n_att  = n_persons.get('n_attrition', 0)
+        n_cens = n_persons.get('n_censored', 0)
+        n_res  = n_persons.get('n_resolved', 0)
+        pct = lambda a, b: '{:.0f}%'.format(a / b * 100) if b > 0 else 'n/a'
+        pop_line = (
+            'N = {:,} persons total  ·  '
+            'tenure {:,} ({})  ·  '
+            'attrition {:,} ({})  ·  '
+            'censored {:,} ({})  ·  '
+            'resolved {:,}'.format(
+                n_tot,
+                n_ten,  pct(n_ten,  n_tot),
+                n_att,  pct(n_att,  n_tot),
+                n_cens, pct(n_cens, n_tot),
+                n_res,
+            )
+        )
+    else:
+        pop_line = ''
+
+    fig, axes = plt.subplots(2, 1, figsize=(9, 7.5), sharex=True)
+    title_lines = (
         "Inverted-U Check: Tenure / Attrition Rate by LOO Peer Pool Quality\n"
         "{} bins, {}; N above point = {} cases; 95% Wilson CI".format(
-            n_bins, method_label, pop_note),
-        fontsize=10.5, fontweight='bold', y=0.99
+            n_bins, method_label, pop_note)
     )
+    if pop_line:
+        title_lines += '\n' + pop_line
+    fig.suptitle(title_lines, fontsize=10.5, fontweight='bold', y=0.99)
 
     colors = {'tenure': '#2166AC', 'attrition': '#D6604D'}
 
@@ -423,7 +450,14 @@ def build_inverted_u(in_path, out_dir, n_bins=12, exclude_censored=True,
     # ── Plot ──────────────────────────────────────────────────────────────────
     png_path = out_dir / 'stage9_inverted_u.png'
     _plot_inverted_u(bins, png_path, n_bins, exclude_censored,
-                     bin_method=bin_method, z_score=z_score, log_bin=log_bin)
+                     bin_method=bin_method, z_score=z_score, log_bin=log_bin,
+                     n_persons={
+                         'n_with_loo':  n_with_loo,
+                         'n_tenure':    n_tenure,
+                         'n_attrition': n_attrition,
+                         'n_censored':  n_censored,
+                         'n_resolved':  n_resolved,
+                     })
     print("  PNG  → {}".format(png_path))
 
     return {

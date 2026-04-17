@@ -1,8 +1,159 @@
-# HPC setup checklist (UVA / remote + local workflow)
+# HPC Setup Checklist (UVA / Remote + Local Workflow)
 
 This document pulls together how **Git**, **conda**, **large data**, **Cursor/SpecStory**, and **storage** (Dropbox, OneDrive, HPC) fit together when you work on the tenure project **on a cluster**, **over VPN**, or **sometimes on your Mac**. It is meant to be read once for orientation and used as a step list when you stand up a new machine.
 
 **Pipeline semantics** (cells, stages, `tenure_pipeline/` outputs): see **`TENURE_PIPELINE_OVERVIEW.md`** in this same folder (`tenure/documents/`).
+
+---
+
+## 0. The Three Working Scenarios — Quick Orientation
+
+You have three distinct ways to work on this project. All are valid. This section defines each one precisely, explains what is and is not possible in each, and answers the most common workflow questions. Everything else in this document is setup detail that supports these scenarios.
+
+---
+
+### Scenario A — Rivanna
+
+**What it is:** Your Mac running Cursor with the **Remote SSH extension** connected to Rivanna. The Cursor workspace, file tree, terminal, and notebook kernel all live **on Rivanna**. You are editing and running code directly on the HPC filesystem.
+
+**What you need:** UVA network (at desk) **or** UVA Anywhere VPN (anywhere).
+
+**What you can do:**
+- Run all pipeline cells natively, including Cell 6B in snapshot mode (full CDH bulk scan)
+- Submit Slurm batch jobs from the integrated terminal (`sbatch build_openalex_cache.slurm`)
+- Access the full OpenAlex snapshot at `~/cdh/OpenAlex1125/`
+- Run `discover_faculty_urls.py` (internet access available on Rivanna login node)
+- Generate PDFs with `convert_single_md_to_pdf.sh` (Playwright/Chromium installed on Rivanna)
+
+**What you cannot do without extra steps:**
+- Anything requiring outbound internet from a **compute node** (Slurm jobs run on compute nodes which may block outbound HTTP — CDX queries in batch jobs will fail)
+
+**Best for:** Heavy compute (cache building, snapshot scans, large parsing runs), submitting and monitoring Slurm jobs, anything that needs the CDH data tree.
+
+---
+
+### Scenario B — Mac Local
+
+**What it is:** Your Mac running Cursor with a **local git clone** (e.g., inside your Dropbox workspace). No SSH connection to Rivanna. Code runs on your Mac's own CPU and RAM.
+
+**What you need:** Nothing — works entirely offline except for cells that make external API calls.
+
+**Why this is useful:** Running pipeline code on your Mac does not burden the Rivanna login node (which is shared and not meant for heavy compute). For stages that are pure Python/pandas (Stages 7–9), your Mac is fast enough and there is no reason to use Slurm at all.
+
+**What you can do:**
+- Stages 7, 8, 9 — full runs, no HPC needed
+- Cell 6B in **cache-only mode** — instant, if you have rsync'd the cache file (see below)
+- `discover_faculty_urls.py` — CDX queries work fine with any internet connection
+- All code editing and documentation
+
+**What you cannot do:**
+- Cell 6B snapshot scan — the CDH data tree is on Rivanna, not your Mac
+- Submit Slurm jobs (no SSH to Rivanna without network access or VPN)
+
+**Best for:** Offline or low-connectivity work, Stages 7–9, editing code without touching the HPC.
+
+---
+
+### Scenario C — Coffee Shop
+
+You are on public Wi-Fi away from UVA. This is actually just Scenario B or Scenario A depending on whether you use the VPN:
+
+| Sub-scenario | VPN needed? | What you get |
+|---|---|---|
+| **C-i** Pure Mac local, no Rivanna at all | None | Scenario B — everything that runs locally |
+| **C-ii** Mac local + VPN | UVA Anywhere | Scenario B + ability to SSH/rsync to Rivanna |
+| **C-iii** Cursor Remote SSH to Rivanna + VPN | UVA Anywhere | Full Scenario A from any location |
+| **C-iv** Remote Slurm submission | UVA Anywhere | SSH to Rivanna → `sbatch` → job runs on HPC |
+
+**Rule:** Anything that requires reaching Rivanna (SSH, rsync, Slurm submission) requires either being on the UVA network at your desk or using **UVA Anywhere VPN**. The OpenAlex CDX API and Wayback CDX API are public internet — no VPN needed for those.
+
+---
+
+### VPN Quick Reference
+
+| Task | On UVA Network | Coffee Shop (no VPN) | Coffee Shop (UVA Anywhere VPN) |
+|---|---|---|---|
+| Run Mac-local pipeline code | ✅ | ✅ | ✅ |
+| `discover_faculty_urls.py` (CDX queries) | ✅ | ✅ | ✅ |
+| SSH to Rivanna | ✅ | ❌ | ✅ |
+| `rsync` Rivanna ↔ Mac | ✅ | ❌ | ✅ |
+| Submit `sbatch` job remotely | ✅ | ❌ | ✅ |
+| Cursor Remote SSH to Rivanna | ✅ | ❌ | ✅ |
+
+---
+
+### Workflow Questions — Cache, Slurm, and rsync
+
+#### Q: What file does `build_openalex_cache.slurm` check for new authors?
+
+It runs `build_openalex_cache.py`, which reads **`openalex_author_ids.jsonl`** (written by Cell 6A — the list of every faculty member with a resolved OpenAlex ID) and compares it against **`openalex_snapshot_cache.jsonl`** (the accumulated cache). Authors present in `openalex_author_ids.jsonl` but **absent from the cache** are scanned from the snapshot. Authors already in the cache are skipped entirely. So yes — every Slurm run is incremental and only processes new authors.
+
+#### Q: How does rsync compare the Mac cache against the Rivanna cache?
+
+rsync is **not automatic** — you run it manually when you want to sync. It compares file contents (checksums or modification times) and transfers only what has changed. At the coffee shop this requires UVA Anywhere VPN. The commands:
+
+```bash
+# ── OpenAlex cache: pull from Rivanna to Mac after a cache build ──────────
+rsync -avz --progress \
+  rivanna:~/Ivy_Net/tenure/tenure_pipeline/openalex_snapshot_cache.jsonl \
+  ~/path/to/Ivy_Net/tenure/tenure_pipeline/
+
+rsync -avz --progress \
+  rivanna:~/Ivy_Net/tenure/tenure_pipeline/openalex_works_by_year.jsonl \
+  ~/path/to/Ivy_Net/tenure/tenure_pipeline/
+
+# Push new author IDs from Mac to Rivanna before a Slurm run:
+rsync -avz --progress \
+  ~/path/to/Ivy_Net/tenure/tenure_pipeline/openalex_author_ids.jsonl \
+  rivanna:~/Ivy_Net/tenure/tenure_pipeline/
+
+# ── Faculty URL discovery: pull results from Rivanna after discover_faculty_urls.slurm ──
+# These are the output files you review to find better school URLs.
+# Run after sbatch discover_faculty_urls.slurm completes (check email or squeue).
+rsync -avz --progress \
+  rivanna:~/Ivy_Net/tenure/tenure_pipeline/faculty_url_suggestions.jsonl \
+  ~/path/to/Ivy_Net/tenure/tenure_pipeline/
+
+rsync -avz --progress \
+  rivanna:~/Ivy_Net/tenure/tenure_pipeline/faculty_url_suggestions.csv \
+  ~/path/to/Ivy_Net/tenure/tenure_pipeline/
+```
+
+#### Q: In Mac local or coffee shop mode, what happens in Cell 6B when there are uncached authors?
+
+Cell 6B's `fetch_works_by_year` function auto-detects the environment and follows **Route 2 (cache-only mode)**:
+
+1. **All authors already in cache** → writes results to `openalex_works_by_year.jsonl` instantly. Done. No action needed.
+
+2. **Some authors NOT in cache** (e.g., you added new schools since the last Rivanna run):
+   - Cached authors are served and written to the works file immediately
+   - The notebook then **prints a clear instruction box** with the exact commands to run, and returns partial results:
+     ```
+     ╔══════════════════════════════════════════════════════════════╗
+     ║  ACTION REQUIRED — N new author IDs need a snapshot scan    ║
+     ╚══════════════════════════════════════════════════════════════╝
+     Step 1 — ssh rivanna 'cd ~/Ivy_Net && sbatch build_openalex_cache.slurm'
+     Step 2 — Monitor: ssh rivanna '~/Ivy_Net/scripts/track_slurm.sh'
+     Step 3 — rsync both files back to this machine
+     Step 4 — Re-run this cell
+     ```
+   - **The notebook does NOT automatically SSH, submit Slurm jobs, or rsync.** That would require your credentials and network access, which code should not handle silently.
+   - Downstream cells (7, 8, 9) can still run on the partial data if you choose.
+
+3. **Emergency fallback — `STAGE6B_API_FALLBACK = True` in Cell 0:**
+   - Uses the OpenAlex HTTP API for uncached authors
+   - Works at the coffee shop without VPN (public internet)
+   - Slow (~1 request/second, rate-limited) and results are NOT written to the cache
+   - Use only for small numbers of new authors or exploratory runs
+   - Default is `False` — must be explicitly enabled
+
+**Summary of Cell 6B behavior by scenario:**
+
+| Scenario | All cached | New authors, `api_fallback=False` | New authors, `api_fallback=True` |
+|---|---|---|---|
+| Rivanna (snapshot accessible) | Instant from cache | Scans snapshot for new ones | N/A — snapshot takes priority |
+| Mac local / Coffee shop + cache | Instant from cache | Prints instructions, returns partial | Uses OpenAlex API for new ones |
+| Mac local / Coffee shop, no cache | — | Prints instructions, returns [] | Uses OpenAlex API for all |
 
 ---
 
@@ -354,4 +505,4 @@ A quick check of **`tenure/tenure_pipeline/*.py`** shows **no** hardcoded `/User
 
 ---
 
-*Last updated: sections 9–11 — per-machine config (`.env` vs Git), canonical `tenure_pipeline/` rsync targets, path audit. Adjust hostnames (e.g. Rivanna) to match UVA’s current documentation.*
+*Last updated: **2026-04-16** — added **Section 0** (three working scenarios: Rivanna / Mac local / Coffee shop; VPN matrix; cache + Slurm + rsync workflow Q&A; Cell 6B route table). Prior: sections 9–11 — per-machine config (`.env` vs Git), canonical `tenure_pipeline/` rsync targets, path audit. Adjust hostnames (e.g. Rivanna) to match UVA’s current documentation.*
