@@ -97,3 +97,16 @@ update and red/green diffs never appear.
 5. **Skipping the blank edit "because the session already started."** It must be
    first. If you forgot and already made other edits, do it now — it will resync
    the editor for all *future* edits in the same session.
+
+6. **Making two separate `EditNotebook` calls to the same cell in the same session.**
+   Cursor only shows the red/green line diff for the FIRST edit to a given cell.
+   The second edit to that same cell shows a "keep cell" button WITHOUT the line-level
+   red/green detail inside it — the user cannot see exactly what changed.
+   **Rule: if you need to change multiple lines in the same cell, do it in ONE
+   `EditNotebook` call** with a single `old_string`/`new_string` pair that covers
+   all the changes together.
+
+   WHY THIS MATTERS: The user must manually transcribe every edit by hand into a
+   locked-down system (US Army AWS JupyterLab) where copy/paste is not available.
+   Line-level red/green diffs are their only way to know exactly what to type.
+   A "keep cell" button without internal diffs is not actionable.
