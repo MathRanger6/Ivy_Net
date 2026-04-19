@@ -1,29 +1,29 @@
 {
 	"folders": [
 		{
-			"path": "."
+			"path": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE"
 		}
 	],
 	"settings": {
-		"terminal.integrated.defaultProfile.windows": "PowerShell",
-		"terminal.integrated.profiles.windows": {
-			"PowerShell": {
-				"source": "PowerShell",
-				"args": ["-NoExit", "-Command", "& 'C:\\ProgramData\\Anaconda3\\Scripts\\conda.exe' 'shell.powershell' 'hook' | Out-String | Invoke-Expression; conda activate talent_net"]
+		"terminal.integrated.profiles.osx": {
+			"tenure_net": {
+				"path": "bash",
+				"args": ["-c", "conda activate tenure_net && bash"]
 			}
 		},
+		"terminal.integrated.defaultProfile.osx": "tenure_net",
 		"terminal.integrated.fontSize": 11,
 		"terminal.integrated.fontFamily": "Consolas, 'Courier New', monospace",
-	"markdownlint.config": {
+		"markdownlint.config": {
 			"MD013": false,
 			"MD033": false,
 			"MD041": false
-	},
-	"markdownlint.ignore": [
+		},
+		"markdownlint.ignore": [
 			"**/reference_documents/**"
-	],
-	"specstory.cloudSync.enabled": "always",
-	"specstory.outputPath": ".specstory/history",
-	"specstory.coordinatedUniversalTimezone": false
+		],
+		"specstory.cloudSync.enabled": "always",
+		"specstory.outputPath": ".specstory/history",
+		"specstory.coordinatedUniversalTimezone": false
 	}
 }

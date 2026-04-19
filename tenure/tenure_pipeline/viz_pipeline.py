@@ -766,15 +766,25 @@ def plot_stage3b(index_records, df_schools, out_path, index_path=None,
         ax_b.invert_yaxis()
 
     # ── Panel B: Status donut ─────────────────────────────────────────────────
+    # Labels are placed in a legend (not on slices) so tiny slivers like
+    # TIMEOUT never collide with the OK label or each other.
     ax_d = fig.add_subplot(gs[0, 1])
     ev   = df_i['err_cat'].value_counts()
-    ax_d.pie(
+    wedges, _ = ax_d.pie(
         ev.values,
-        labels=[f'{k}\n({v:,})' for k, v in ev.items()],
         colors=[SCOL.get(k, '#9E9E9E') for k in ev.index],
         startangle=90,
         wedgeprops=dict(width=0.55, edgecolor='white', linewidth=2.5),
-        textprops=dict(fontsize=9),
+    )
+    # Legend instead of slice labels — no collision possible
+    ax_d.legend(
+        wedges,
+        [f'{k}  ({v:,})' for k, v in ev.items()],
+        loc='lower center',
+        bbox_to_anchor=(0.5, -0.18),
+        fontsize=8,
+        frameon=False,
+        ncol=1,
     )
     ax_d.text(0, 0, f'{n_ok_tot:,}\nOK', ha='center', va='center',
               fontsize=15, fontweight='bold', color='#2E7D32')

@@ -1,0 +1,20 @@
+{
+    "folders": [
+        {
+            "uri": "vscode-remote://ssh-remote+rivanna/home/dzk3ja"
+        }
+    ],
+    "remoteAuthority": "ssh-remote+rivanna",
+    "settings": {
+        "specstory.cloudSync.enabled": "always",
+        "terminal.integrated.profiles.linux": {
+            "ivy_net": {
+                "path": "bash",
+                "args": [
+                    "-c", "cd ~/Ivy_Net && module load miniforge && conda activate tenure_net && bash"
+                ]
+            }
+        },
+        "terminal.integrated.defaultProfile.linux": "ivy_net"
+    }
+}
