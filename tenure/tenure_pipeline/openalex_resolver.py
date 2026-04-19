@@ -636,8 +636,12 @@ def _fetch_works_by_year_snapshot(
         print(f"  ERROR: no *.csv.gz under {paa_dir}")
         return results
 
-    print(f"  Scanning {len(paa_files):,} PAA shards for {len(target_ints):,} new author IDs …")
-    for fp in tqdm(paa_files, desc="  PAA shards", unit="file"):
+    n_shards = len(paa_files)
+    report_every_shards = max(1, n_shards // 20)  # report every ~5%
+    print(f"  Scanning {n_shards:,} PAA shards for {len(target_ints):,} new author IDs …")
+    print(f"  (progress every {report_every_shards} shards / ~5%)", flush=True)
+    _t_paa_start = time.time()
+    for i, fp in enumerate(paa_files, 1):
         with gzip.open(fp, "rt", encoding="utf-8", newline="") as gz:
             reader = csv.DictReader(gz)
             for row in reader:
@@ -648,18 +652,34 @@ def _fetch_works_by_year_snapshot(
                     continue
                 if aid in target_ints:
                     pubs_by_author[aid].add(pid)
+        if i % report_every_shards == 0 or i == n_shards:
+            pct = i / n_shards * 100
+            elapsed = time.time() - _t_paa_start
+            rate = i / elapsed if elapsed > 0 else 0
+            eta = (n_shards - i) / rate if rate > 0 else 0
+            print(
+                f"  PAA shards: {i:,}/{n_shards:,} ({pct:.0f}%)  "
+                f"hits so far: {sum(len(v) for v in pubs_by_author.values()):,}  "
+                f"elapsed: {_hms(elapsed)}  ETA: {_hms(eta)}",
+                flush=True,
+            )
 
     all_pids: set = set()
     for s in pubs_by_author.values():
         all_pids.update(s)
 
     print(f"  Unique publication ids for target authors : {len(all_pids):,}")
-    print(f"  Scanning pub2year.csv.gz …")
+    print(f"  Scanning pub2year.csv.gz …", flush=True)
 
     pub_year: dict = {}
+    _p2y_rows = 0
+    _p2y_hits = 0
+    _t_p2y_start = time.time()
+    _last_p2y_report = _t_p2y_start
     with gzip.open(p2y_path, "rt", encoding="utf-8", newline="") as gz:
         reader = csv.DictReader(gz)
-        for row in tqdm(reader, desc="  pub2year rows", unit=" rows"):
+        for row in reader:
+            _p2y_rows += 1
             try:
                 pid = int(row["PublicationId"])
             except (KeyError, ValueError, TypeError):
@@ -671,6 +691,18 @@ def _fetch_works_by_year_snapshot(
             except (KeyError, ValueError, TypeError):
                 continue
             pub_year[pid] = y
+            _p2y_hits += 1
+            # report every 60 seconds
+            _now = time.time()
+            if _now - _last_p2y_report >= 60:
+                _last_p2y_report = _now
+                _elapsed = _now - _t_p2y_start
+                print(
+                    f"  pub2year: {_p2y_rows:,} rows scanned  "
+                    f"hits: {_p2y_hits:,}/{len(all_pids):,}  "
+                    f"elapsed: {_hms(_elapsed)}",
+                    flush=True,
+                )
 
     # ── Aggregate, write output, and update cache ─────────────────────────────
     new_cache_entries: dict = {}
