@@ -39,7 +39,7 @@ else
 fi
 
 ENV_NAME="${ENV_NAME:-tenure_net}"
-NB_IN="540_tenure_pipeline.ipynb"
+NB_IN="tenure/540_tenure_pipeline.ipynb"
 NB_OUT="slurm-pipe_job-${SLURM_JOB_ID}-output.ipynb"
 
 command -v conda >/dev/null || { echo "ERROR: conda not on PATH after module load." >&2; exit 1; }

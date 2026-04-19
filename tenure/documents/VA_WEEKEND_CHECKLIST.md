@@ -3,172 +3,168 @@
 
 ---
 
-## Before You Start — Orientation
+## ⚡ TONIGHT — Do These Two Things Before You Log Off
 
-| Workspace | When to Use |
-|-----------|------------|
-| `Rivanna.code-workspace` | Slurm jobs, OpenAlex snapshot, HPC data |
-| `Ivy_Net.code-workspace` | Code edits, git, rsync, local pipeline runs (Cells 7–9) |
+> Cell 0 flags are **already set correctly** — do NOT change them. Just commit and launch.
 
-**Rule:** Code changes → git commit + push. Data files → rsync only (never git).
+### 1. Commit everything in Cursor Source Control
+- Stage all → paste this message → commit → push:
+```
+cleanup: remove current_documents symlink deps, fix broken notebook path + Cell 0 flags for overnight run
+```
+
+### 2. Launch both Slurm jobs from the terminal
+```bash
+cd ~/Ivy_Net
+sbatch build_openalex_cache.slurm   # overnight cache builder — runs alone, no conflicts
+sbatch pipe_job.slurm               # fills HTML gaps + rebuilds panel + runs analysis
+```
+
+### 3. Verify both jobs are queued
+```bash
+squeue -u dzk3ja
+# Should see TWO jobs listed
+```
+
+### 4. Log off — both jobs run unattended overnight
+
+**What runs tonight in pipe_job:**
+- Cell 3 Download → fills 553 missing HTML files
+- Cell 3 Retry → retries any CDX failures (CDX discovery is OFF — quota protected)
+- Cell 4 → re-parses all HTML
+- Cell 5 → rebuilds longitudinal panel
+- Cell 7 → enriched annual panel (GAP_TOLERANCE = 4)
+- Cell 8 → LOO peer pool metrics
+- Cell 9 → inverted-U plot
+
+**What does NOT run (intentional):**
+- Cell 6A — author ID resolution (not needed yet)
+- Cell 6B — OpenAlex works fetch — OFF to avoid conflict with cache builder writing same file
 
 ---
 
-## Phase 1 — Fill Gaps in Current Data (Rivanna)
+## ☀️ TOMORROW MORNING — Check Results
 
-### Step 1 — Fill 553 missing HTML downloads
-- [ ] In Cell 0: set `RUN_CELL3_DOWNLOAD = True`, all others `False`
-- [ ] `cd ~/Ivy_Net && sbatch pipe_job.slurm`
-- [ ] Monitor: `tail -f slurm-pipe_job-<JOBID>.out`
-- [ ] Confirm: 4 partial schools → complete (164 → 168 complete schools)
+### Check jobs finished
+```bash
+squeue -u dzk3ja         # should be empty if both finished
+ls -lh ~/Ivy_Net/slurm-*.out   # check log files exist
+tail -50 slurm-pipe_job-*.out  # read pipe_job summary
+tail -20 slurm-build_openalex_cache-*.out  # read cache builder summary
+```
 
-### Step 2 — Re-parse all HTML
-- [ ] In Cell 0: set `RUN_CELL4 = True`, all others `False`
-- [ ] `sbatch pipe_job.slurm`
-- [ ] Confirm output: parsed_records count increases from 2,580,266
+### If pipe_job finished — check the output
+Look for in the log:
+- `Panel rows` count (should be > previous run)
+- `Unique faculty` count
+- Stage 9 inverted-U plot saved
+- No ERROR lines
 
-### Step 3 — Rebuild longitudinal panel
-- [ ] In Cell 0: set `RUN_CELL5 = True`, all others `False`
-- [ ] `sbatch pipe_job.slurm`  *(or run interactively — takes ~30 sec)*
-- [ ] Confirm: panel rows, unique faculty, rank breakdown printed
-- [ ] Check: tenure-track % looks reasonable (~60–70%)
-
----
-
-## Phase 2 — Grow the OpenAlex Cache (Rivanna, run overnight)
-
-### Step 4 — Run cache builder
-- [ ] `cd ~/Ivy_Net && sbatch build_openalex_cache.slurm`
-- [ ] Let run overnight — it resumes from checkpoint if interrupted
-- [ ] Current cache: 836K (sparse). Target: covers all 168-school faculty
+### If cache builder finished — run Cell 6B
+```bash
+# In the notebook Cell 0, change:
+#   RUN_CELL6B = False  →  RUN_CELL6B = True
+#   (all other flags: set to False except 6B)
+cd ~/Ivy_Net && sbatch pipe_job.slurm
+```
 
 ---
 
-## Phase 3 — Expand Pilot to Top-40 Schools (Rivanna)
+## 📋 NEXT STEPS (After overnight jobs) — In Order
 
-### Step 5 — Resolve author IDs for schools 21–40 (Cell 6A)
+### Phase 3 — Expand Pilot to Top-40 Schools
+
+**Step A — Resolve author IDs for schools 21–40 (Cell 6A)**
 - [ ] In Cell 0: set `STAGE6_PILOT_TOP_N = 40`
 - [ ] Set `RUN_CELL6A = True`, all others `False`
-- [ ] `sbatch pipe_job.slurm`  *(network-heavy — let Slurm handle it)*
+- [ ] `sbatch pipe_job.slurm`
 - [ ] Confirm: author ID count grows from 15,519
-- [ ] Note: MULTI confidence cases (2,419) may be worth a manual heuristic pass later
 
-### Step 6 — Fetch works by year for new authors (Cell 6B)
+**Step B — Fetch works by year for new authors (Cell 6B)**
 - [ ] In Cell 0: set `RUN_CELL6B = True`, all others `False`
 - [ ] `sbatch pipe_job.slurm`
 - [ ] Confirm: works file grows; snapshot cache used where available
 
----
-
-## Phase 4 — Run Analysis with GAP_TOLERANCE = 4 (Mac Local or Rivanna)
-
-### Step 7 — Enriched panel + pool metrics + inverted-U (Cells 7, 8, 9)
-- [ ] In Cell 0: set `RUN_CELL7 = True`, `RUN_CELL8 = True`, `RUN_CELL9 = True`
-- [ ] `STAGE7_GAP_TOLERANCE = 4`  *(already set)*
+**Step C — Re-run full analysis**
+- [ ] In Cell 0: set `RUN_CELL7 = True`, `RUN_CELL8 = True`, `RUN_CELL9 = True`, all others `False`
 - [ ] `sbatch pipe_job.slurm`
-- [ ] Compare Stage 9 inverted-U plot to previous run (GAP_TOLERANCE = 3)
-- [ ] Note changes in resolved cases, censored %, tenure/attrition rates
+- [ ] Compare Stage 9 inverted-U plot to previous run
 
 ---
 
-## Phase 5 — Git Sync (after each Phase above)
+### Phase 4 — Review URL Suggestions (Mac Local)
 
-Run after completing each phase — commit code changes only, never data:
+*Do this AFTER Phase 3 is complete and results look stable.*
 
+**Step D — rsync results back to Mac**
 ```bash
-cd ~/Ivy_Net
-git add -A
-git status        # verify: no *.jsonl, no *.html, no slurm-*.out staged
-git commit -m "Weekend run: <brief description of what changed>"
-git push
-```
-
-**Best commit points:**
-- After changing Cell 0 flags (before each sbatch)
-- After any code/`.py` edits
-- After this checklist itself is updated
-
----
-
-## Phase 6 — Review URL Suggestions (Mac Local)
-
-*Do this AFTER Phases 1–5 are complete and results look stable.*
-
-### Step 8 — rsync results back to Mac
-```bash
-# From your Mac:
+# From your Mac terminal:
 ./scripts/rsync_pull_from_hpc.sh
 ```
 
-### Step 9 — Review suggestions CSV
+**Step E — Review suggestions CSV**
 - [ ] Open: `tenure/tenure_pipeline/faculty_url_suggestions.csv`
 - [ ] Sort by `mean_recs` ascending (worst schools first)
 - [ ] For each school: check `suggested_url` — does it look like a **CS faculty page**?
 - [ ] **Red flags:** generic university staff directories, aging/CTE/HR pages
 - [ ] **Green flags:** subdomain has `cs`, `eecs`, `cse`, `computing`; path has `faculty`, `people`
-- [ ] Promising leads to investigate first:
+- [ ] Promising leads:
   - Rice University (score 97, 2000–2024) — `rice.edu/Computer/facultystaff.html`
   - Kent State (score 84, 2019–2025) — `kent.edu/cs/faculty-staff-directory`
   - Lehigh (score 83, 2014–2026) — `lehigh.edu/academics/faculty`
   - Northwestern (score 83, 2012–2024) — check if it's the CS directory
 
-### Step 10 — Add good URLs to the pipeline
+**Step F — Add good URLs to the pipeline**
 ```bash
-# Edit r1_cs_departments.csv or use apply_url_updates.py
-# Then re-run Cell 0 → Cell 2 → Cell 3A → Cell 3B → Cell 4
+# Edit tenure/tenure_pipeline/r1_cs_departments.csv
+# Then re-run: Cell 2 → Cell 3A → Cell 3B → Cell 4 → Cell 5
 ```
 
 ---
 
-## Workspace File Notes
+## Git Sync Rule — After Every sbatch + Results Look Good
 
-### `Rivanna.code-workspace`
-- Opens Cursor → SSH Remote → Rivanna
-- Terminal auto-activates `tenure_net` conda env in `~/Ivy_Net`
-- Use for: Slurm, HPC data, remote debugging
-
-### `Ivy_Net.code-workspace` (Mac local)
-- Opens Dropbox workspace locally
-- Use for: code edits, git, rsync, Cells 7–9 offline
-- TODO: add Mac terminal profile to auto-activate `tenure_net`
-  ```json
-  "terminal.integrated.profiles.osx": {
-      "tenure_net": {
-          "path": "bash",
-          "args": ["-c", "conda activate tenure_net && bash"]
-      }
-  },
-  "terminal.integrated.defaultProfile.osx": "tenure_net"
-  ```
-- TODO: remove stale Windows PowerShell settings (harmless but cluttered)
+```bash
+cd ~/Ivy_Net
+git add -A
+git status        # verify: no *.jsonl, no *.html, no slurm-*.out staged
+git commit -m "Weekend run: <brief description>"
+git push
+```
 
 ---
 
 ## Quick Reference — Key Commands
 
 ```bash
-# Submit a job
-cd ~/Ivy_Net && sbatch pipe_job.slurm
-
-# Monitor live
-tail -f slurm-pipe_job-<JOBID>.out
-
 # Check queue
 squeue -u dzk3ja
 
-# Pull results to Mac
+# Monitor a job live
+tail -f slurm-<JOBNAME>-<JOBID>.out
+
+# Submit jobs
+cd ~/Ivy_Net && sbatch pipe_job.slurm
+cd ~/Ivy_Net && sbatch build_openalex_cache.slurm
+
+# Pull data to Mac (run from Mac terminal)
 ./scripts/rsync_pull_from_hpc.sh
 
-# Push code to Rivanna
+# Push code to Rivanna (run from Mac terminal)
 ./scripts/rsync_push_to_hpc.sh
-
-# Cache builder
-sbatch build_openalex_cache.slurm
-
-# URL discovery
-sbatch discover_faculty_urls.slurm
 ```
 
 ---
 
-*Created by PEER — 2026-04-18*
+## Workspace Notes
+
+| Workspace | When to Use |
+|-----------|------------|
+| `Rivanna.code-workspace` | Slurm jobs, HPC data, remote debugging |
+| `Ivy_Net.code-workspace` | Code edits, git, rsync, local runs |
+
+Explorer shows 3 roots: `Ivy_Net`, `tenure`, `sports` — notebooks are directly visible, no symlinks.
+
+---
+
+*Last updated: 2026-04-15 — overnight run plan + for-dummies rewrite*

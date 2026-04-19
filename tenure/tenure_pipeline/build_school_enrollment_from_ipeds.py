@@ -22,7 +22,7 @@ Years **2000–2003** are skipped (``ef*a`` files use a different layout without
 
 **Errors:** Events append to ``ipeds_download_errors.jsonl`` (JSONL: one JSON object per line) —
 ``http_404``, ``retry_exhausted``, ``stale_cache_removed``, ``bad_zipfile``, ``ef_year_skip``, ``hd_schema``, etc., with ``url`` where applicable.
-**Reference:** ``current_documents/tenure_documents/TENURE_PIPELINE_OVERVIEW.md`` section **7.5** (outcome meanings and ``HD_YEAR``).
+**Reference:** ``tenure/documents/TENURE_PIPELINE_OVERVIEW.md`` section **7.5** (outcome meanings and ``HD_YEAR``).
 
 Requires: pandas, requests (stdlib zipfile/io otherwise ok)
 """

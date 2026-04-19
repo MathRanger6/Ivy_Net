@@ -41,12 +41,12 @@ fi
 chmod +x "$GENERATE_PDF_SCRIPT"
 
 # Activate conda environment
-echo "🔧 Activating conda environment: talent_net"
+echo "🔧 Activating conda environment: tenure_net"
 source /opt/anaconda3/etc/profile.d/conda.sh
-conda activate talent_net
+conda activate tenure_net
 
 if [ $? -ne 0 ]; then
-    echo "❌ Error: Failed to activate conda environment 'talent_net'"
+    echo "❌ Error: Failed to activate conda environment 'tenure_net'"
     exit 1
 fi
 

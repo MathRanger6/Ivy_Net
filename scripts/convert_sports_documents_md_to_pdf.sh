@@ -1,7 +1,7 @@
 #!/bin/bash
-# Convert only .md files in current_documents/sports_documents/ to PDF
+# Convert only .md files in sports/documents/ to PDF
 # Uses generate_pdf_playwright.sh for each file
-# PDFs are created in current_documents/sports_documents/
+# PDFs are created in sports/documents/
 # Usage: ./convert_sports_documents_md_to_pdf.sh [--keep-html]
 
 # Parse optional flags
@@ -41,22 +41,22 @@ fi
 chmod +x "$GENERATE_PDF_SCRIPT"
 
 # Activate conda environment
-echo "🔧 Activating conda environment: talent_net"
+echo "🔧 Activating conda environment: tenure_net"
 source /opt/anaconda3/etc/profile.d/conda.sh
-conda activate talent_net
+conda activate tenure_net
 
 if [ $? -ne 0 ]; then
-    echo "❌ Error: Failed to activate conda environment 'talent_net'"
+    echo "❌ Error: Failed to activate conda environment 'tenure_net'"
     exit 1
 fi
 
 echo "✅ Conda environment activated"
 echo ""
 
-# Only look in current_documents/sports_documents
-SPORTS_DOCS_DIR="$WORKSPACE_DIR/current_documents/sports_documents"
+# Look directly in sports/documents/ (the real directory, no symlink needed)
+SPORTS_DOCS_DIR="$WORKSPACE_DIR/sports/documents"
 if [ ! -d "$SPORTS_DOCS_DIR" ]; then
-    echo "❌ Error: sports_documents directory not found at: $SPORTS_DOCS_DIR"
+    echo "❌ Error: sports/documents directory not found at: $SPORTS_DOCS_DIR"
     exit 1
 fi
 
@@ -93,7 +93,7 @@ while IFS= read -r md_file; do
     # Get directory and filename
     MD_DIR=$(dirname "$md_file")
     MD_BASENAME=$(basename "$md_file")
-    # Save PDF in sports_documents directory
+    # Save PDF alongside the source .md in sports/documents/
     PDF_FILE="$SPORTS_DOCS_DIR/${MD_BASENAME%.md}.pdf"
     
     # Make path relative to workspace for cleaner output
@@ -151,7 +151,7 @@ echo "📊 Conversion Summary:"
 echo "   Total files: $TOTAL_FILES"
 echo "   ✅ Successful: $SUCCESS_COUNT"
 echo "   ❌ Failed: $FAIL_COUNT"
-echo "   📁 PDFs saved to: current_documents/sports_documents/"
+   echo "   📁 PDFs saved to: sports/documents/"
 echo ""
 
 if [ "$FAIL_COUNT" -eq 0 ]; then

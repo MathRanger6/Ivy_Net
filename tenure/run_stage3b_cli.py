@@ -65,8 +65,6 @@ def main() -> None:
     nb_path = args.notebook
     if nb_path is None:
         nb_path = repo_root / "tenure" / "540_tenure_pipeline.ipynb"
-        if not nb_path.is_file():
-            nb_path = repo_root / "540_tenure_pipeline.ipynb"
     nb_path = nb_path.resolve()
     if not nb_path.is_file():
         print(f"ERROR: notebook not found: {nb_path}", file=sys.stderr)
