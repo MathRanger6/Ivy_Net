@@ -669,40 +669,58 @@ def _fetch_works_by_year_snapshot(
         all_pids.update(s)
 
     print(f"  Unique publication ids for target authors : {len(all_pids):,}")
-    print(f"  Scanning pub2year.csv.gz …", flush=True)
+
+    # Use compressed file size as a proxy for progress — gzip doesn't expose total
+    # decompressed row count up front, but bytes-read / total-bytes is a reliable
+    # ~95% accurate proxy for fraction-complete and gives a usable ETA.
+    _p2y_file_bytes = p2y_path.stat().st_size
+    print(
+        f"  Scanning pub2year.csv.gz  "
+        f"({_p2y_file_bytes / 1_073_741_824:.2f} GB compressed) …",
+        flush=True,
+    )
 
     pub_year: dict = {}
     _p2y_rows = 0
     _p2y_hits = 0
     _t_p2y_start = time.time()
     _last_p2y_report = _t_p2y_start
-    with gzip.open(p2y_path, "rt", encoding="utf-8", newline="") as gz:
-        reader = csv.DictReader(gz)
-        for row in reader:
-            _p2y_rows += 1
-            try:
-                pid = int(row["PublicationId"])
-            except (KeyError, ValueError, TypeError):
-                continue
-            if pid not in all_pids:
-                continue
-            try:
-                y = int(row["Year"])
-            except (KeyError, ValueError, TypeError):
-                continue
-            pub_year[pid] = y
-            _p2y_hits += 1
-            # report every 60 seconds
-            _now = time.time()
-            if _now - _last_p2y_report >= 60:
-                _last_p2y_report = _now
-                _elapsed = _now - _t_p2y_start
-                print(
-                    f"  pub2year: {_p2y_rows:,} rows scanned  "
-                    f"hits: {_p2y_hits:,}/{len(all_pids):,}  "
-                    f"elapsed: {_hms(_elapsed)}",
-                    flush=True,
-                )
+
+    # Open the raw file in binary mode so we can track compressed bytes read;
+    # wrap it with gzip so the CSV reader still sees plain text.
+    with open(p2y_path, "rb") as _raw:
+        with gzip.open(_raw, "rt", encoding="utf-8", newline="") as gz:
+            reader = csv.DictReader(gz)
+            for row in reader:
+                _p2y_rows += 1
+                try:
+                    pid = int(row["PublicationId"])
+                except (KeyError, ValueError, TypeError):
+                    continue
+                if pid not in all_pids:
+                    continue
+                try:
+                    y = int(row["Year"])
+                except (KeyError, ValueError, TypeError):
+                    continue
+                pub_year[pid] = y
+                _p2y_hits += 1
+                # Report every 60 seconds with %, ETA, and hits-vs-needed
+                _now = time.time()
+                if _now - _last_p2y_report >= 60:
+                    _last_p2y_report = _now
+                    _elapsed = _now - _t_p2y_start
+                    _bytes_done = _raw.tell()
+                    _pct = _bytes_done / _p2y_file_bytes * 100 if _p2y_file_bytes else 0
+                    _rate = _bytes_done / _elapsed if _elapsed > 0 else 1
+                    _eta = (_p2y_file_bytes - _bytes_done) / _rate if _rate > 0 else 0
+                    print(
+                        f"  pub2year: {_pct:.1f}%  "
+                        f"rows: {_p2y_rows:,}  "
+                        f"hits: {_p2y_hits:,}/{len(all_pids):,}  "
+                        f"elapsed: {_hms(_elapsed)}  ETA: {_hms(_eta)}",
+                        flush=True,
+                    )
 
     # ── Aggregate, write output, and update cache ─────────────────────────────
     new_cache_entries: dict = {}
