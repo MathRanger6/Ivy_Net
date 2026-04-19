@@ -90,6 +90,8 @@ tenure/tenure_pipeline/_ipeds_cache/
 tenure/tenure_pipeline/_ipeds_probe/
 # Backup files
 *.bak
+# PAA scan mid-run checkpoint (auto-deleted on success; resume file on crash)
+tenure/tenure_pipeline/_paa_scan_checkpoint.json
 
 # Slurm job logs and executed output notebooks (transient — never commit)
 slurm-*.out

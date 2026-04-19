@@ -630,18 +630,56 @@ def _fetch_works_by_year_snapshot(
     paa_dir  = snapshot_root / "publicationauthoraffiliation"
     p2y_path = snapshot_root / "pub2year.csv.gz"
 
-    pubs_by_author: dict = defaultdict(set)
     paa_files = sorted(glob.glob(str(paa_dir / "*.csv.gz")))
     if not paa_files:
         print(f"  ERROR: no *.csv.gz under {paa_dir}")
         return results
 
     n_shards = len(paa_files)
-    report_every_shards = max(1, n_shards // 20)  # report every ~5%
-    print(f"  Scanning {n_shards:,} PAA shards for {len(target_ints):,} new author IDs …")
-    print(f"  (progress every {report_every_shards} shards / ~5%)", flush=True)
+    # Write a checkpoint every ~5% of shards so an interrupted job can resume
+    # without re-scanning shards already processed.  Checkpoint lives next to
+    # the cache file (or next to the output file if no cache_path is set).
+    _ckpt_dir  = cache_path.parent if cache_path is not None else out_path.parent
+    _ckpt_file = _ckpt_dir / "_paa_scan_checkpoint.json"
+    checkpoint_every = max(1, n_shards // 20)   # ~5%
+    report_every_shards = checkpoint_every       # also report at same interval
+
+    # ── Resume from checkpoint if one exists for the same target set ─────────
+    pubs_by_author: dict = defaultdict(set)
+    _resume_from = 0   # index into paa_files; 0 means start from the beginning
+    if _ckpt_file.exists():
+        try:
+            with open(_ckpt_file, "r", encoding="utf-8") as _cf:
+                _ckpt = json.load(_cf)
+            # Checkpoint is valid only if it was built for the same author set
+            if set(_ckpt.get("target_ints", [])) == {str(x) for x in target_ints}:
+                _resume_from = int(_ckpt.get("last_shard_index", 0))
+                for _aid_str, _pids in _ckpt.get("pubs_by_author", {}).items():
+                    pubs_by_author[int(_aid_str)] = set(_pids)
+                print(
+                    f"  PAA checkpoint found — resuming from shard "
+                    f"{_resume_from + 1:,}/{n_shards:,}  "
+                    f"({_resume_from / n_shards * 100:.0f}% already done)  "
+                    f"hits so far: {sum(len(v) for v in pubs_by_author.values()):,}",
+                    flush=True,
+                )
+            else:
+                print(f"  PAA checkpoint found but author set changed — starting fresh.", flush=True)
+                _ckpt_file.unlink(missing_ok=True)
+                _resume_from = 0
+        except Exception as _e:
+            print(f"  PAA checkpoint unreadable ({_e}) — starting fresh.", flush=True)
+            _ckpt_file.unlink(missing_ok=True)
+            _resume_from = 0
+
+    print(f"  Scanning {n_shards - _resume_from:,} remaining PAA shards "
+          f"(of {n_shards:,} total) for {len(target_ints):,} author IDs …")
+    print(f"  (checkpoint + progress every {checkpoint_every} shards / ~5%)", flush=True)
+
     _t_paa_start = time.time()
     for i, fp in enumerate(paa_files, 1):
+        if i <= _resume_from:
+            continue   # already processed in a previous run
         with gzip.open(fp, "rt", encoding="utf-8", newline="") as gz:
             reader = csv.DictReader(gz)
             for row in reader:
@@ -652,10 +690,12 @@ def _fetch_works_by_year_snapshot(
                     continue
                 if aid in target_ints:
                     pubs_by_author[aid].add(pid)
-        if i % report_every_shards == 0 or i == n_shards:
+
+        # Save checkpoint + report progress every ~5% of total shards
+        if i % checkpoint_every == 0 or i == n_shards:
             pct = i / n_shards * 100
             elapsed = time.time() - _t_paa_start
-            rate = i / elapsed if elapsed > 0 else 0
+            rate = (i - _resume_from) / elapsed if elapsed > 0 else 0
             eta = (n_shards - i) / rate if rate > 0 else 0
             print(
                 f"  PAA shards: {i:,}/{n_shards:,} ({pct:.0f}%)  "
@@ -663,6 +703,25 @@ def _fetch_works_by_year_snapshot(
                 f"elapsed: {_hms(elapsed)}  ETA: {_hms(eta)}",
                 flush=True,
             )
+            # Write checkpoint so we can resume if interrupted
+            try:
+                _ckpt_data = {
+                    "last_shard_index": i,
+                    "target_ints": [str(x) for x in target_ints],
+                    "pubs_by_author": {
+                        str(aid): list(pids)
+                        for aid, pids in pubs_by_author.items()
+                    },
+                }
+                _tmp = _ckpt_file.with_suffix(".tmp")
+                with open(_tmp, "w", encoding="utf-8") as _cf:
+                    json.dump(_ckpt_data, _cf)
+                _tmp.replace(_ckpt_file)   # atomic rename — never leaves a corrupt file
+            except Exception as _e:
+                print(f"  WARNING: could not write PAA checkpoint: {_e}", flush=True)
+
+    # Clean up checkpoint — scan is complete, no need to keep it
+    _ckpt_file.unlink(missing_ok=True)
 
     all_pids: set = set()
     for s in pubs_by_author.values():
