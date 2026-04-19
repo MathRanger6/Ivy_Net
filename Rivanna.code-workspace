@@ -1,7 +1,12 @@
 {
     "folders": [
         {
+            "name": "Ivy_Net (root)",
             "uri": "vscode-remote://ssh-remote+rivanna/home/dzk3ja"
+        },
+        {
+            "name": "tenure (notebooks + docs)",
+            "uri": "vscode-remote://ssh-remote+rivanna/home/dzk3ja/Ivy_Net/tenure"
         }
     ],
     "remoteAuthority": "ssh-remote+rivanna",
