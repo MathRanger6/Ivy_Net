@@ -7,6 +7,10 @@
         {
             "name": "tenure (notebooks + docs)",
             "uri": "vscode-remote://ssh-remote+rivanna/home/dzk3ja/Ivy_Net/tenure"
+        },
+        {
+            "name": "sports (notebooks + docs)",
+            "uri": "vscode-remote://ssh-remote+rivanna/home/dzk3ja/Ivy_Net/sports"
         }
     ],
     "remoteAuthority": "ssh-remote+rivanna",
