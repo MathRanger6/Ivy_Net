@@ -56,6 +56,7 @@ _IVY_RSYNC_COMMON_EXCLUDES=(
   "--exclude=*.pyo"
   "--exclude=.ipynb_checkpoints/"
   "--exclude=.DS_Store"
+  "--exclude=*.html"                   # intermediate HTML from md-to-pdf conversion
 )
 
 # Extra excludes for PUSH (Mac → HPC): don't overwrite HPC-generated large data

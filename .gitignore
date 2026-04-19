@@ -91,9 +91,10 @@ tenure/tenure_pipeline/_ipeds_probe/
 # Backup files
 *.bak
 
-# Slurm job logs (transient — check with tail -f, not git)
+# Slurm job logs and executed output notebooks (transient — never commit)
 slurm-*.out
 slurm-*.err
+slurm-*-output.ipynb
 
 # Generated HTML from md-to-pdf conversion (source .md is versioned; HTML is intermediate)
 tenure/documents/*.html
