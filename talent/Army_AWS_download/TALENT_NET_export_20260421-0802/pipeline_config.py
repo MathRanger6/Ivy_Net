@@ -799,24 +799,6 @@ _tv_cols = (
 COLUMN_CONFIG['time_varying_cols'] = list(dict.fromkeys(_tv_cols))
 
 # ============================================================================
-# === 6b. COMPETING RISKS: STRATIFY BY OFFICER OWN TB RATIO (CELL 11 ADD-ON) ===
-# ============================================================================
-# When enabled, 520 Cell 11 runs the **main** plot loop as usual, then **repeats** each
-# **competing_risks** plot (and optional CIF bar panels) for **low / med / high** tertiles
-# of the officer's **own** TB column (``tb_stratify_col``), using the **last** snapshot per
-# officer. Pool quality binning, timeline, and ``plot_spec`` are unchanged; only the
-# officer set is restricted. Set ``enabled`` True when your advisor wants faceted
-# promotion/attrition bar charts by own-TB stratum.
-CR_TB_STRATIFY_CONFIG = {
-    "enabled": False,
-    "tb_stratify_col": "z_tb_ratio_fwd_snr",  # must exist on df_cox / df_analysis (own TB)
-    "n_strata": 3,
-    "stratum_labels": ("low_tb", "med_tb", "high_tb"),
-    "stratum_col": "_cr_tb_stratum",  # column added in memory (not required in COLUMN_CONFIG)
-    "only_competing_risks": True,  # if False, also repeats KM (usually leave True)
-}
-
-# ============================================================================
 # === 7. PLOT CONFIGURATION (CELL 11) ===
 # ============================================================================
 # Configuration for Kaplan-Meier and competing risks plots

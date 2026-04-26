@@ -14,12 +14,12 @@
 		}
 	],
 	"settings": {
-		"terminal.integrated.profiles.osx": {
-			"tenure_net": {
-				"path": "bash",
-				"args": ["-c", "conda activate tenure_net && bash"]
-			}
-		},
+		# "terminal.integrated.profiles.osx": {
+		# 	"tenure_net": {
+		# 		"path": "bash",
+		# 		"args": ["-c", "conda activate tenure_net && bash"]
+		# 	}
+		# },
 		"terminal.integrated.defaultProfile.osx": "tenure_net",
 		"terminal.integrated.fontSize": 11,
 		"terminal.integrated.fontFamily": "Consolas, 'Courier New', monospace",
