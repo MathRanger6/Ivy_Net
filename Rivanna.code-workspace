@@ -20,7 +20,7 @@
             "ivy_net": {
                 "path": "bash",
                 "args": [
-                    "-c", "cd ~/Ivy_Net && module load miniforge && eval \"$(conda shell.bash hook)\" && conda activate tenure_net && export PATH=\"$CONDA_PREFIX/bin:$PATH\" && exec bash"
+                    "-c", "cd ~/Ivy_Net && module load miniforge && eval \"$(conda shell.bash hook)\" && conda activate tenure_net && export PATH=\"$CONDA_PREFIX/bin:$PATH\" && export PS1=\"(tenure_net) \\u@\\h:\\w\\$ \" && exec bash"
                 ]
             }
         },
