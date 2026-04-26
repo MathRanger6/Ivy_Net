@@ -7,7 +7,7 @@ This module provides:
 - add_pool_ranks_pct_zscores(): compute pool rank/pct/z for fwd+bwd
 """
 
-    import pandas as pd
+import pandas as pd
 import numpy as np
 
 
@@ -308,7 +308,7 @@ def _add_pool_mean_size(df, group_cols, value_col, prefix, suffix, pool_min_size
     if exclude_self:
         denom = count - is_self
         numer = sum_vals - df[value_col].fillna(0)
-                    else:
+    else:
         denom = count
         numer = sum_vals
 

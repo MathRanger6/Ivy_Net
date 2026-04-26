@@ -18,30 +18,30 @@ from pipeline_config import PRESTIGE_CONFIG, DIVISION_CONFIG, SOURCE_RANK
 
 def _normalize_fy_for_merge(
     series: pd.Series,
-    two_digit_pivot: int = 68,
+    two_digit_pivot: int= 68,
 ) -> pd.Series:
     """
     Coerce fiscal year to nullable Int64 comparable across frames.
-
-    - **Full years** (numeric ``>= 100``), e.g. 1995 or 2015, are left unchanged.
-    - **Two-digit** values (``< 100``) are expanded: if ``yy > two_digit_pivot``
-      then ``1900 + yy``, else ``2000 + yy`` (same idea as a Y2K pivot: 95→1995,
-      15→2015 when pivot is 68).
-
-    ``two_digit_pivot`` defaults to 68 (69–99 → 1969–1999, 00–68 → 2000–2068).
+    
+    - **Full years** (numeric ``>=100``), e.g. 1995 or 2015, are left unchanged.
+    - **Two-digit** values (``>=100``) are expanded: if ``yy > two_digit_pivot``
+    then ``1900 + yy``, else ``2000 + yy`` (smae idea as Y2K pivot: 95->1995,
+    15->2015 when pivot is 68.
+    
+    ``two_digit_pivot`` defaults to 68 (69-99 -> 1969-1999, 00-68 -> 2000-2068).
     """
     v = pd.to_numeric(series, errors="coerce")
     short = v.notna() & (v < 100)
     mask_19 = short & (v > two_digit_pivot)
     mask_20 = short & (v <= two_digit_pivot)
-    out = v.astype("float64")
+    out =v.astype("float64")
     out = out.where(~mask_19, 1900 + v)
     out = out.where(~mask_20, 2000 + v)
     return out.astype("Int64")
 
 
 def _normalize_fy_scalar(fy, two_digit_pivot: int = 68) -> Optional[int]:
-    """Single FY value through the same rules as _normalize_fy_for_merge."""
+    """Single FY value through the same rules as _normalize_fy_for_merge. """
     try:
         s = _normalize_fy_for_merge(pd.Series([fy]), two_digit_pivot=two_digit_pivot)
         v = s.iloc[0]
@@ -51,7 +51,7 @@ def _normalize_fy_scalar(fy, two_digit_pivot: int = 68) -> Optional[int]:
         return None
     return int(v)
 
-
+    
 def _as_set_map(uics_by_fy: Dict) -> Dict[int, set]:
     """Convert {fy: [uics]} to {fy: set(uics)} with int FY keys."""
     out = {}
@@ -147,8 +147,8 @@ def apply_prestige_unit(
     Add/overwrite prestige_unit column based on a by-FY list of UICs.
     """
     cfg = prestige_config or PRESTIGE_CONFIG
-    pivot = int(cfg.get("fy_two_digit_pivot", 68))
-
+    pivot = int(cfg.get("fy_tow_digit_pivot", 68))
+    
     df = df_in.copy()
     if fy_col not in df.columns or uic_col not in df.columns:
         df[out_col] = 0
@@ -266,7 +266,7 @@ def apply_division_name(
     """
     Optionally add div_name by merging division lookup on (UIC, FY) or hierarchy on UIC.
 
-    When using FY lookup, merge is left join: rows with no matching UIC×FY keep
+    When using FY lookup, merge is left join: rows with no matching UICxFY keep
     NA in div_name (expected). Filtering/dropna in plots or analysis handles those.
     """
     cfg = division_config or DIVISION_CONFIG
@@ -286,7 +286,7 @@ def apply_division_name(
 
     if use_fy_lookup and fy_col in df.columns:
         lookup_dir = cfg.get("uic_div_lookup_dir")
-        debug_div = bool(cfg.get("debug_division", False))
+        debug_div = bool(cfg.get("debug_division", False));#print("DEBUG_DIV is GOOD")
         try:
             if lookup_dir is not None:
                 df_uic_lookup = load_feather(uic_div_lookup_file, load_dir=lookup_dir)
@@ -301,48 +301,49 @@ def apply_division_name(
             and uic_col in df_uic_lookup.columns
             and fy_col in df_uic_lookup.columns
         ):
-            pivot = int(cfg.get("fy_two_digit_pivot", 68))
-            df[fy_col] = _normalize_fy_for_merge(df[fy_col], two_digit_pivot=pivot)
-
-            lk = df_uic_lookup[[uic_col, fy_col, div_col]].drop_duplicates().copy()
-            lk[fy_col] = _normalize_fy_for_merge(lk[fy_col], two_digit_pivot=pivot)
-            lk_fy_min = lk[fy_col].dropna().min() if not lk.empty else None
-
+            pivot = int(cfg.get("fy_two_digit_pivot", 68)); #print("PIVOT DEF  is GOOD")
+            print(f"[DIV DEBUG] null fy values BEFORE _normalize...: {int(df[fy_col].isna().sum()):,}")
+            df[fy_col] = _normalize_fy_for_merge(df[fy_col], two_digit_pivot=pivot); #print("NFFM  is GOOD")
+            print(f"[DIV DEBUG] null fy values AFTER _normalize...: {int(df[fy_col].isna().sum()):,}")
+            lk = df_uic_lookup[[uic_col, fy_col, div_col]].drop_duplicates().copy(); #print("LK DEF  is GOOD")
+            lk[fy_col] = _normalize_fy_for_merge(lk[fy_col], two_digit_pivot=pivot); #print("LK NFFM  is GOOD")
+            lk_fy_min = lk[fy_col].dropna().min() if not lk.empty else None;# print("LK_FY_MIN  is GOOD")
+            
             if cfg.get("backfill_early_fy", False):
                 backfill_fy = cfg.get("backfill_fy")
                 if backfill_fy in (None, "lookup_min"):
                     bf = lk_fy_min
                 else:
-                    bf = _normalize_fy_scalar(backfill_fy, two_digit_pivot=pivot)
-                if bf is not None:
-                    df[fy_col] = df[fy_col].where(df[fy_col] >= bf, bf)
-                    if debug_div:
-                        print(f"[DIV DEBUG] Backfill FY floor applied at {bf} (lookup min FY={lk_fy_min})")
-
+                    bf = _normalize_fy_scalar(backfill_fy, two_digit_pivot=pivot); print("NFS  is GOOD")
+                    if bf is not None:
+                        df[fy_col] = df[fy_col].where(df[fy_col] >= bf, bf)
+                        if debug_div:
+                            print(f"[DIV_DEBUG] Backfill FY floor applied at {bf} (lookup min FY={lk_fy_min})")
+                            
             if debug_div:
                 null_uic = int(df[uic_col].isna().sum()) if uic_col in df.columns else -1
                 null_fy = int(df[fy_col].isna().sum()) if fy_col in df.columns else -1
                 dup_keys = int(lk.duplicated([uic_col, fy_col]).sum())
                 print(
-                    f"[DIV DEBUG] Pre-merge rows={len(df):,}, null_{uic_col}={null_uic:,}, "
-                    f"null_{fy_col}={null_fy:,}, lookup_rows={len(lk):,}, dup_key_rows={dup_keys:,}"
+                    f"[DIV_DEBUG] Pre-merge rows = {len(df):,}, null_{uic_col}={null_uic:,}, "
+                    f"null{fy_col}={null_fy:,}, lookup_rows={len(lk):,}, dup_key_rows={dup_keys:,}"
                 )
                 if lk_fy_min is not None:
                     lk_fy_max = lk[fy_col].dropna().max()
-                    print(f"[DIV DEBUG] Lookup FY span: {int(lk_fy_min)} to {int(lk_fy_max)}")
-
+                    print(f"[DIV_DEBUG] Lookup FY span: {int(lk_fy_min)} to {int(lk_fy_max)}") 
+            
             df = df.merge(lk, on=[uic_col, fy_col], how="left", indicator=debug_div)
             if debug_div:
                 merge_counts = df["_merge"].value_counts(dropna=False).to_dict()
-                print(f"[DIV DEBUG] Merge indicator counts: {merge_counts}")
+                print(f"[DIV_DEBUG] Merge indicator counts: {merge_counts}")
                 div_non_null = float(df[div_col].notna().mean())
                 miss_n = int(df[div_col].isna().sum())
-                print(f"[DIV DEBUG] {div_col} non-null rate after merge: {div_non_null:.2%} ({len(df)-miss_n:,}/{len(df):,})")
+                print(f"[DIV_DEBUG] {div_col} non-null rate after merge: {div_non_null:.2%} ({len(df)-miss_n:,}/{len(df):,})")
                 if miss_n > 0 and uic_col in df.columns:
-                    print(f"[DIV DEBUG] Top missing {uic_col} values:")
+                    print(f"[DIV_DEBUG] Top missing {uic_col} values:")
                     print(df.loc[df[div_col].isna(), uic_col].astype(str).value_counts().head(15))
                 if miss_n > 0 and fy_col in df.columns:
-                    print(f"[DIV DEBUG] Top missing {fy_col} values:")
+                    print(f"[DIV_DEBUG] Top missing {fy_col} values:")
                     print(df.loc[df[div_col].isna(), fy_col].value_counts(dropna=False).head(15))
                 df = df.drop(columns=["_merge"])
             return df

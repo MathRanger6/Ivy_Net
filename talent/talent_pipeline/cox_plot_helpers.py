@@ -385,6 +385,9 @@ def format_plot_config_text(plot_spec, metadata):
             lines.append(f"N officers: {stats['total_officers']:,}")  # Total number of officers
         if stats.get('n_groups'):
             lines.append(f"Groups: {stats['n_groups']}")  # Number of groups in plot
+
+    if plot_spec.get("cr_tb_stratify_title_suffix"):
+        lines.append(f"CR add-on: {plot_spec['cr_tb_stratify_title_suffix']}")
     
     # Join all lines with newlines for multi-line display
     return "\n".join(lines)
@@ -433,7 +436,12 @@ def format_plot_title(plot_spec):
     else:
         # Title without grouping: "Kaplan-Meier: Variable"
         title = f"{plot_type_display}: {var_display}"
-    
+
+    # Cell 11 TB-stratify add-on: second line (own-TB stratum + quantile vs equal width)
+    _tb_note = plot_spec.get("cr_tb_stratify_title_suffix")
+    if _tb_note:
+        title = f"{title}\n{_tb_note}"
+
     return title
 
 

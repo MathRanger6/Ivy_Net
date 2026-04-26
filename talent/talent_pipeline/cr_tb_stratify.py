@@ -12,10 +12,14 @@ Does **not** automatically run Kaplan–Meier specs (only ``plot_type == 'compet
 from __future__ import annotations
 
 import os
+import re
 import warnings
-from typing import Any, Callable, Optional, Tuple
+from typing import Any, Callable, Optional, Tuple, Literal
 
+import numpy as np
 import pandas as pd
+
+StratumMethod = Literal["quantile", "equal_width"]
 
 
 def add_cr_tb_stratum_column(
@@ -26,10 +30,16 @@ def add_cr_tb_stratum_column(
     n_strata: int = 3,
     labels: Tuple[str, ...] = ("low_tb", "med_tb", "high_tb"),
     new_col: str = "_cr_tb_stratum",
+    stratum_method: StratumMethod = "quantile",
 ) -> pd.DataFrame:
     """
-    Assign each officer to a tertile of **own** ``tb_col`` (value from last row by
+    Assign each officer to a stratum of **own** ``tb_col`` (value from last row by
     ``stop_time``), then map that label to **all** intervals for that officer.
+
+    * ``stratum_method == "quantile"`` — ``pd.qcut`` (roughly equal officer counts per
+      stratum, subject to ties / ``duplicates`` handling).
+    * ``stratum_method == "equal_width"`` — ``pd.cut`` with ``bins=n`` on the value
+      range (same-width intervals on the ``tb_col`` scale, counts can differ a lot).
     """
     if tb_col not in df.columns:
         raise KeyError(f"tb_stratify column {tb_col!r} not in dataframe")
@@ -53,12 +63,52 @@ def add_cr_tb_stratum_column(
         raise ValueError(
             f"Not enough officers with non-NaN {tb_col} for {n_strata} strata: n={len(tb_ok)}"
         )
-    try:
-        strata = pd.qcut(tb_ok, q=n_strata, labels=list(labels), duplicates="drop")
-    except Exception as e:
-        warnings.warn(f"pd.qcut failed ({e!r}); falling back to rank-based qcut.")
-        rk = tb_ok.rank(method="first")
-        strata = pd.qcut(rk, q=n_strata, labels=list(labels), duplicates="drop")
+
+    method: StratumMethod
+    sraw = str(stratum_method or "quantile").lower().strip()
+    if sraw in ("q", "quantile", "tertile", "tertiles"):
+        method = "quantile"
+    elif sraw in ("ew", "equal", "equal_width", "width"):
+        method = "equal_width"
+    else:
+        raise ValueError("stratum_method must be 'quantile' or 'equal_width'")
+
+    if method == "quantile":
+        try:
+            strata = pd.qcut(tb_ok, q=n_strata, labels=list(labels), duplicates="drop")
+        except Exception as e:
+            warnings.warn(f"pd.qcut failed ({e!r}); falling back to rank-based qcut.")
+            rk = tb_ok.rank(method="first")
+            strata = pd.qcut(rk, q=n_strata, labels=list(labels), duplicates="drop")
+    else:
+        rng = float(tb_ok.max()) - float(tb_ok.min())
+        if not np.isfinite(rng) or rng <= 0.0:
+            mid = (n_strata - 1) // 2
+            label_one = str(labels[min(max(mid, 0), n_strata - 1)])
+            warnings.warn(
+                f"add_cr_tb_stratum_column: equal_width with zero range on {tb_col!r}; "
+                f"assigning all to stratum {label_one!r}."
+            )
+            m = {pid: label_one for pid in tb_ok.index}
+            out[new_col] = out[pid_col].map(m)
+            return out
+        try:
+            strata = pd.cut(
+                tb_ok,
+                bins=n_strata,
+                labels=list(labels)[:n_strata],
+                include_lowest=True,
+                duplicates="drop",
+            )
+        except (ValueError, TypeError) as e:
+            warnings.warn(
+                f"pd.cut equal_width failed ({e!r}); falling back to equal-width on ranks."
+            )
+            rk = tb_ok.rank(method="first")
+            strata = pd.cut(
+                rk, bins=n_strata, labels=list(labels)[:n_strata], include_lowest=True, duplicates="drop"
+            )
+
     m = strata.to_dict()
     out[new_col] = out[pid_col].map(m)
     return out
@@ -91,17 +141,36 @@ def run_tb_stratified_cr_after_main(
     labels = tuple(CR_TB_STRATIFY_CONFIG.get("stratum_labels", ("low_tb", "med_tb", "high_tb")))
     scol = str(CR_TB_STRATIFY_CONFIG.get("stratum_col", "_cr_tb_stratum"))
     only_cr = bool(CR_TB_STRATIFY_CONFIG.get("only_competing_risks", True))
+    stratum_method = str(CR_TB_STRATIFY_CONFIG.get("stratum_method", "quantile"))
     if len(labels) != n_strata:
         print_v("⚠️ CR_TB_STRATIFY: stratum_labels length != n_strata; abort TB stratify.")
         return (0, 0)
 
+    _sm = stratum_method.lower().strip()
+    if _sm in ("q", "quantile", "tertile", "tertiles"):
+        sm_display = "quantile (roughly equal N per stratum)"
+        sm_file = "q"
+    elif _sm in ("ew", "equal", "equal_width", "width"):
+        sm_display = "equal width (same z/TB range per stratum)"
+        sm_file = "ew"
+    else:
+        sm_display = f"stratum method: {stratum_method!r}"
+        sm_file = "sm"
+
     try:
         df_tagged = add_cr_tb_stratum_column(
-            df_analysis, tb_col=tb_col, n_strata=n_strata, labels=labels, new_col=scol
+            df_analysis,
+            tb_col=tb_col,
+            n_strata=n_strata,
+            labels=labels,
+            new_col=scol,
+            stratum_method=stratum_method,  # type: ignore[arg-type]
         )
     except Exception as e:
         print_v(f"❌ TB stratify: add_cr_tb_stratum_column failed: {e}")
         return (0, 0)
+
+    print_v(f"  • CR_TB_STRATIFY: column {tb_col!r}, {sm_display}")
 
     fp = filtering_params or {}
     jobs = []
@@ -124,7 +193,12 @@ def run_tb_stratified_cr_after_main(
                 continue
             if plot_spec.get("plot_type") != "competing_risks":
                 continue
-            ps = {**plot_spec, "name": f"{plot_spec['name']}_{stratum}"}
+            title_note = f"Own-TB stratum: {stratum} — {sm_display} on {tb_col!r}"
+            ps = {
+                **plot_spec,
+                "name": f"{plot_spec['name']}_{stratum}",
+                "cr_tb_stratify_title_suffix": title_note,
+            }
             df_in = df_tagged[df_tagged[scol] == stratum].copy()
             if len(df_in) == 0:
                 print_v(f"  ⚠️ TB stratum {stratum}: no rows, skip {ps['name']}")
@@ -140,6 +214,10 @@ def run_tb_stratified_cr_after_main(
                 continue
             metadata = get_plot_metadata(ps, df_in, plot_df)
             filename_base = generate_plot_filename(ps, metadata["data_stats"])
+            # Disambiguate outputs across strata and methods (generate_plot_filename does not use plot `name`)
+            _root, _ext = os_module.path.splitext(filename_base)
+            _safe = re.sub(r"[^a-zA-Z0-9._-]+", "_", str(stratum))
+            filename_base = f"{_root}_tb{sm_file}_{_safe}{_ext}"
             save_path = os_module.path.join(PLOT_CONFIG["plot_dir"], filename_base)
             plot_competing_risks(plot_df, ps, save_path, metadata)
             created += 1
