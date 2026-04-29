@@ -809,7 +809,8 @@ PILOT_SCHOOLS = [
             "http://www.vuse.vanderbilt.edu/~cs/faculty/",
             "http://www.eecs.vanderbilt.edu/people/faculty/",
             "http://www.cs.vanderbilt.edu/",
-            "http://www.eecs.vanderbilt.edu/"
+            "http://www.eecs.vanderbilt.edu/",
+            "http://frontweb.vuse.vanderbilt.edu/vuse_web/directory/dirfaculty2.asp"
         ],
         "notes"      : "CS in School of Engineering; old path used VUSE; base domains added for CDX wildcard coverage",
     },
