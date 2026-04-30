@@ -47,7 +47,9 @@ deleted_files/
 
 # --- Large ad-hoc assets at root (optional) ---
 Gephi/
-# 1-Various_PDE_and_Chat_stuff
+1-Various_PDE_and_Chat_stuff/*
+!1-Various_PDE_and_Chat_stuff/5-Manuscript/
+!1-Various_PDE_and_Chat_stuff/5-Manuscript/**
 backups/
 
 # --- Large data / outputs (disk + rsync only; too big or too volatile for GitHub) ---
