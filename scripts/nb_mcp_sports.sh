@@ -2,10 +2,10 @@
 # Start cursor-notebook-mcp for Cursor MCP (Mac laptop or Rivanna over SSH).
 #
 # Usage:
-#   ./scripts/nb_mcp.sh
+#   ./scripts/nb_mcp_sports.sh
 #
 # Optional env:
-#   CONDA_ENV              default: tenure_net  (e.g. talent_net on an older Mac checkout)
+#   CONDA_ENV              default: sports_net  (e.g. talent_net on an older Mac checkout)
 #   NOTEBOOK_MCP_ALLOW_ROOT  repo root allowed by the server; default: parent of scripts/
 #   NOTEBOOK_MCP_PORT      default: 8080 (match ~/.cursor/mcp.json url)
 #   NOTEBOOK_MCP_BACKGROUND  default: 1  (set 0 to run in foreground for logs)
@@ -17,16 +17,17 @@
 # On Rivanna you may need:  module load miniforge
 # Ensure:  conda activate $CONDA_ENV && which cursor-notebook-mcp
 #
-# If the server crashes with Pydantic "default and default_factory", try:
-#   pip install "pydantic>=2.7,<2.12"
-# then re-run this script.
+# If the server crashes with Pydantic "default and default_factory", run:
+#   conda activate "$CONDA_ENV" && pip install -r scripts/requirements-notebook-mcp.txt
+# or: pip install "pydantic>=2.7,<2.12"
+# (Pydantic 2.12+ currently breaks fastmcp / cursor-notebook-mcp at import.)
 
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 
-CONDA_ENV="${CONDA_ENV:-tenure_net}"
+CONDA_ENV="${CONDA_ENV:-sports_net}"
 ALLOW_ROOT="${NOTEBOOK_MCP_ALLOW_ROOT:-$REPO_ROOT}"
 PORT="${NOTEBOOK_MCP_PORT:-8080}"
 BACKGROUND="${NOTEBOOK_MCP_BACKGROUND:-1}"
@@ -55,6 +56,16 @@ _init_conda() {
 
 _init_conda
 conda activate "${CONDA_ENV}"
+
+# fastmcp breaks on pydantic 2.12+ (__init__.py Settings Field)
+_pyver="$(python -c "import pydantic; print(pydantic.__version__)" 2>/dev/null || echo "0.0.0")"
+_py_minor="${_pyver#*.}"
+_py_minor="${_py_minor%%.*}"
+if [[ "${_pyver}" == 2.* ]] && [[ "${_py_minor:-0}" -ge 12 ]]; then
+  echo "ERROR: pydantic ${_pyver} breaks cursor-notebook-mcp. In env ${CONDA_ENV} run:" >&2
+  echo "  pip install \"pydantic>=2.7,<2.12\"" >&2
+  exit 1
+fi
 
 if ! command -v cursor-notebook-mcp >/dev/null 2>&1; then
   echo "ERROR: cursor-notebook-mcp not on PATH in env ${CONDA_ENV}. Try: pip install cursor-notebook-mcp" >&2

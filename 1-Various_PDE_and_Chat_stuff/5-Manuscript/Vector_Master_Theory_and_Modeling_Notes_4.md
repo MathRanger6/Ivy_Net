@@ -750,30 +750,22 @@ Yes.
 
 Because the network framework separates:
 
-\[
-\textbf{comparison effects}
-\]
-
-from
-
-\[
-\textbf{exposure effects}
-\]
+$$\textbf{comparison effects} \quad \quad from \quad \quad \textbf{exposure effects}$$
 
 ---
 
 ## Comparison Effects
 
-Who I compete against.
+Whom I compete against.
 
 ---
 
 ## Exposure Effects
 
-Who I learn from
-who I can access
-who shapes my visibility
-and where I sit relative to concentrated talent.
+• Whom I learn from
+• Whom I can access
+• Who shapes my visibility
+• Where I sit relative to concentrated talent.
 
 This distinction may become central to the dissertation’s theoretical identity.
 
@@ -1086,9 +1078,9 @@ Examples:   • SR pools   • roster peers   • tenure cohorts
 
 ## Exposure Effects
 
-Who I learn from
-who shapes my visibility
-and where I sit relative to concentrated talent.
+• Whom I learn from
+• Who shapes my visibility
+• Where I sit relative to concentrated talent.
 
 This distinction may become foundational.
 

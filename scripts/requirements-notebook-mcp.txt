@@ -1,0 +1,4 @@
+# Pin for cursor-notebook-mcp + fastmcp (avoid pydantic 2.12+ Settings bug).
+# Install in the same conda env as cursor-notebook-mcp, e.g.:
+#   conda activate sports_net && pip install -r scripts/requirements-notebook-mcp.txt
+pydantic>=2.7,<2.12
