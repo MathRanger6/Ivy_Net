@@ -2,7 +2,19 @@
 # Script to generate PDF from markdown or Jupyter notebooks using pandoc and Playwright
 # Playwright uses a real browser engine and has much better page break support than WeasyPrint
 # Usage: ./generate_pdf_playwright.sh [input.md|input.ipynb] [output.pdf] [styles.css] [--keep-html]
-
+#
+# Host troubleshooting (Linux/HPC): If Chromium exits with SIGTRAP / TargetClosedError:
+#   export IVY_NET_CHROMIUM_PATH=/path/to/google-chrome   # or chromium-browser
+# This script auto-tries Playwright's FULL chromium (~/.cache/ms-playwright/chromium-*/chrome-linux/chrome)
+# before chrome-headless-shell (often SIGTRAP on EL8-class login nodes).
+#   export IVY_NET_PLAYWRIGHT_SINGLE_PROCESS=1   # append --single-process to stubborn hosts
+#   export IVY_NET_PLAYWRIGHT_CHROMIUM_EXTRA_ARGS="--foo --bar"
+#
+# Rivanna / module-loaded Miniforge: after conda activate, plain `python` may still be
+# /apps/software/.../miniforge/.../python → "No module named playwright". Use the env binary:
+#   ~/.conda/envs/tenure_net/bin/python -m playwright install chromium
+# Quick check:  which python  — should show .../envs/tenure_net/bin/python
+#
 set -euo pipefail
 
 # Run relative to workspace root (so default CSS paths and inputs resolve when invoked from PATH)
@@ -212,54 +224,211 @@ PYTHON_EOF
 # Step 3: Convert HTML to PDF using Playwright (much better page break support)
 echo "Converting HTML to PDF using Playwright..."
 "$CONDA_PYTHON" << PYTHON_EOF
+import os
+import shutil
 import sys
 from pathlib import Path
 
 html_file = "$HTML_FILE"
 pdf_file = "$PDF_FILE"
 
+
+def _playwright_browser_roots():
+    bp = os.environ.get("PLAYWRIGHT_BROWSERS_PATH")
+    roots = []
+    if bp:
+        roots.append(Path(bp))
+    roots.append(Path.home() / ".cache" / "ms-playwright")
+    return roots
+
+
+def _find_playwright_full_chromium_exes():
+    """Full chromium (chrome-linux/chrome), NOT chrome-headless-shell — avoids SIGTRAP on many HPC hosts."""
+    seen = set()
+    out = []
+    for root in _playwright_browser_roots():
+        if not root.is_dir():
+            continue
+        # chromium-1234 — numeric build folders from playwright install chromium
+        subs = sorted(
+            [p for p in root.glob("chromium-[0-9]*") if p.is_dir()],
+            key=lambda p: p.name,
+            reverse=True,
+        )
+        for sub in subs:
+            exe = sub / "chrome-linux" / "chrome"
+            if exe.is_file() and os.access(exe, os.X_OK):
+                s = str(exe)
+                if s not in seen:
+                    seen.add(s)
+                    out.append(s)
+    return out
+
+
+def _launch_chromium(p):
+    extra_env = os.environ.get("IVY_NET_PLAYWRIGHT_CHROMIUM_EXTRA_ARGS", "")
+    extra_args = [x for x in extra_env.split() if x.strip()]
+    base_args = [
+        "--disable-gpu",
+        "--disable-software-rasterizer",
+        "--disable-accelerated-video-decode",
+        "--disable-accelerated-video-encode",
+        "--disable-background-networking",
+    ]
+    launch_args = base_args + extra_args
+    single_proc = os.environ.get("IVY_NET_PLAYWRIGHT_SINGLE_PROCESS", "").strip() == "1"
+
+    user_exe = (
+        os.environ.get("IVY_NET_CHROMIUM_PATH")
+        or os.environ.get("PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH")
+        or ""
+    ).strip()
+
+    def opts_variants(path_kw=None):
+        """Yield launch kwargs dicts for one executable or bundled launcher."""
+        shells = []
+        if path_kw:
+            shells.append({**path_kw, "headless": True, "chromium_sandbox": False})
+        else:
+            shells.append({"headless": True, "chromium_sandbox": False})
+
+        variants = []
+        for base in shells:
+            variants.extend(
+                [
+                    {
+                        **base,
+                        "args": launch_args,
+                        "ignore_default_args": ["--enable-unsafe-swiftshader"],
+                    },
+                    {**base, "args": launch_args},
+                ]
+            )
+            if single_proc:
+                sp = launch_args + ["--single-process"]
+                variants.extend(
+                    [
+                        {
+                            **base,
+                            "args": sp,
+                            "ignore_default_args": ["--enable-unsafe-swiftshader"],
+                        },
+                        {**base, "args": sp},
+                    ]
+                )
+        return variants
+
+    attempts = []
+
+    if user_exe:
+        attempts.extend(opts_variants({"executable_path": user_exe}))
+
+    gc = shutil.which("google-chrome") or shutil.which("google-chrome-stable")
+    if gc:
+        attempts.extend(opts_variants({"channel": "chrome"}))
+
+    full_list = _find_playwright_full_chromium_exes()
+    for fc in full_list:
+        attempts.extend(opts_variants({"executable_path": fc}))
+
+    # Extra tries: newest full chromium with --single-process (helps some locked-down login nodes).
+    if full_list:
+        fc0 = full_list[0]
+        sp_args = launch_args + ["--single-process"]
+        attempts.extend(
+            [
+                {
+                    "executable_path": fc0,
+                    "headless": True,
+                    "chromium_sandbox": False,
+                    "args": sp_args,
+                    "ignore_default_args": ["--enable-unsafe-swiftshader"],
+                },
+                {
+                    "executable_path": fc0,
+                    "headless": True,
+                    "chromium_sandbox": False,
+                    "args": sp_args,
+                },
+            ]
+        )
+
+    # Last resort: Playwright default (often chrome-headless-shell — SIGTRAP on some clusters).
+    attempts.extend(opts_variants(None))
+
+    last_err = None
+    for i, kw in enumerate(attempts):
+        try:
+            return p.chromium.launch(**kw), kw
+        except Exception as e:
+            last_err = e
+            hint = kw.get("executable_path") or kw.get("channel") or "(bundled)"
+            print(f"⚠️ Chromium launch attempt {i + 1}/{len(attempts)} [{hint}] failed: {e}")
+    raise last_err
+
+
 try:
     from playwright.sync_api import sync_playwright
 
     with sync_playwright() as p:
-        browser = p.chromium.launch()
-        page = browser.new_page()
+        browser, _opts = _launch_chromium(p)
+        try:
+            page = browser.new_page()
 
-        # Load the HTML file
-        html_path = Path(html_file).absolute()
-        page.goto(html_path.as_uri(), wait_until="networkidle")
+            # Load the HTML file
+            html_path = Path(html_file).absolute()
+            page.goto(html_path.as_uri(), wait_until="networkidle")
 
-        # KaTeX loads from CDN; networkidle + short delay lets it finish rendering
-        page.wait_for_timeout(1200)
-        page.emulate_media(media="print")
+            # KaTeX loads from CDN; networkidle + short delay lets it finish rendering
+            page.wait_for_timeout(1200)
+            page.emulate_media(media="print")
 
-        # Generate PDF with proper page break settings
-        page.pdf(
-            path=pdf_file,
-            format="Letter",
-            margin={
-                "top": "0.25in",
-                "right": "0.25in",
-                "bottom": "0.25in",
-                "left": "0.25in"
-            },
-            print_background=True,
-            prefer_css_page_size=True
-        )
-
-        browser.close()
+            # Generate PDF with proper page break settings
+            page.pdf(
+                path=pdf_file,
+                format="Letter",
+                margin={
+                    "top": "0.25in",
+                    "right": "0.25in",
+                    "bottom": "0.25in",
+                    "left": "0.25in",
+                },
+                print_background=True,
+                prefer_css_page_size=True,
+            )
+        finally:
+            browser.close()
 
     print("✅ Successfully created PDF using Playwright")
 
 except ImportError:
-    print("❌ Error: Playwright not installed")
-    print("   Install it with: pip install playwright")
-    print("   Then run: playwright install chromium")
+    print("❌ Error: Playwright not installed for this Python interpreter:")
+    print(f"   {sys.executable}")
+    print("   pip install playwright")
+    print(f"   {sys.executable} -m playwright install chromium")
+    print(
+        "   (On Rivanna: if `python -m playwright` fails, use ~/.conda/envs/tenure_net/bin/python explicitly.)"
+    )
     sys.exit(1)
 except Exception as e:
     print(f"❌ Error: {e}")
     import traceback
+
     traceback.print_exc()
+    fl = _find_playwright_full_chromium_exes()
+    if not fl:
+        print(
+            "\nℹ️  No full Chromium found under ~/.cache/ms-playwright/chromium-*/chrome-linux/chrome .\n"
+            f"   Run (same Python as PDF script):  {sys.executable} -m playwright install chromium\n"
+            "   Or set IVY_NET_CHROMIUM_PATH to google-chrome / chromium.\n"
+            "   Or try:  export IVY_NET_PLAYWRIGHT_SINGLE_PROCESS=1"
+        )
+    else:
+        print(
+            "\nℹ️  Full Chromium exists but launch still failed — try:\n"
+            "   export IVY_NET_PLAYWRIGHT_SINGLE_PROCESS=1\n"
+            "   export IVY_NET_CHROMIUM_PATH=/path/to/google-chrome"
+        )
     sys.exit(1)
 PYTHON_EOF
 

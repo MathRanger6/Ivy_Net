@@ -6,9 +6,9 @@
 #   cd /path/to/Ivy_Net && sbatch pipe_job.slurm
 #
 # Monitor live:
-#   tail -f slurm-pipe_job-<JOBID>.out
-#   tail -f slurm-pipe_job-<JOBID>.err
-#   watch -n 5 squeue -u dzk3ja
+#   tail -f slurm-pipe_job-<JOBID>.out   # stdout — prints (JOBID from sbatch reply)
+#   tail -f slurm-pipe_job-<JOBID>.err   # stderr — tqdm/progress often here; "-f" streams new lines as written
+#   watch -n 5 squeue -u dzk3ja          # Ctrl+C leaves tail/watch only; does not kill the compute job.
 
 #SBATCH --time=6:00:00
 #SBATCH --nodes=1
