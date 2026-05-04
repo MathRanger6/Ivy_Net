@@ -3,8 +3,7 @@
 # repo root = directory containing .git (walk upward from this script), not "parent of Beau_guide".
 #
 # Usage: ./track_slurm_reference_beau.sh [JOBID]
-# Example from Ivy_Net root:
-#   ./1-Various_PDE_and_Chat_stuff/5-Manuscript/Beau_guide/track_slurm_reference_beau.sh 11766185
+# Example from unpacked Beau_guide/:   ./track_slurm_reference_beau.sh 11766185
 
 set -euo pipefail
 

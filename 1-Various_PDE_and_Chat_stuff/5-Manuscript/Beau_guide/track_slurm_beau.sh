@@ -1,15 +1,19 @@
 #!/usr/bin/env bash
 # =============================================================================
-# track_slurm_beau.sh — tail -f your job’s stderr log (Rivanna)
-# Folder: 1-Various_PDE_and_Chat_stuff/5-Manuscript/Beau_guide/
-# =============================================================================
+# track_slurm_beau.sh — tail -f a Slurm job's stderr log (Rivanna)
 #
-# Usage (from project root — the directory that contains .git):
-#   chmod +x 1-Various_PDE_and_Chat_stuff/5-Manuscript/Beau_guide/track_slurm_beau.sh
-#   ./1-Various_PDE_and_Chat_stuff/5-Manuscript/Beau_guide/track_slurm_beau.sh [JOBID]
+# Ships inside Beau_guide/ (zip unpack root). Typical use after sbatch from Beau_guide/:
+#   cd ~/Beau_guide && ./track_slurm_beau.sh [JOBID]
 #
-# Override project root if needed:
-#   export PROJECT_ROOT=/path/to/repo
+# Slurm writes slurm-<jobname>-<jobid>.err in the directory where you ran sbatch.
+# Run this script from THAT SAME DIRECTORY (default), or set PROJECT_ROOT there.
+#
+# Usage:
+#   cd ~/Beau_guide           # or wherever you ran sbatch
+#   chmod +x ./track_slurm_beau.sh    # once
+#   ./track_slurm_beau.sh [JOBID]
+#
+# Omit JOBID to follow the newest slurm-*.err in PROJECT_ROOT or this script's folder.
 #
 # =============================================================================
 
@@ -17,28 +21,15 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-_find_repo_root_from() {
-  local d="$SCRIPT_DIR"
-  while [[ "$d" != "/" ]]; do
-    if [[ -e "$d/.git" ]]; then
-      printf '%s\n' "$d"
-      return 0
-    fi
-    d="$(dirname "$d")"
-  done
-  return 1
-}
-
-if [[ -z "${PROJECT_ROOT:-}" ]]; then
-  PROJECT_ROOT="$(_find_repo_root_from)" || {
-    echo "Cannot find repo root (no .git walking up from ${SCRIPT_DIR}). Set PROJECT_ROOT export."
-    exit 1
-  }
+if [[ -n "${PROJECT_ROOT:-}" ]]; then
+  SEARCH_ROOT="$(cd "${PROJECT_ROOT}" && pwd)"
+else
+  SEARCH_ROOT="$(pwd)"
 fi
 
 _pick_latest_slurm_err() {
   local a b
-  a=$(ls -t "${PROJECT_ROOT}"/slurm-*.err 2>/dev/null | head -1)
+  a=$(ls -t "${SEARCH_ROOT}"/slurm-*.err 2>/dev/null | head -1)
   b=$(ls -t "${SCRIPT_DIR}"/slurm-*.err 2>/dev/null | head -1)
   if [[ -z "$a" ]]; then printf '%s\n' "$b"; return; fi
   if [[ -z "$b" ]]; then printf '%s\n' "$a"; return; fi
@@ -47,7 +38,7 @@ _pick_latest_slurm_err() {
 
 _find_err_for_job() {
   local jid="$1" f
-  for d in "${PROJECT_ROOT}" "${SCRIPT_DIR}"; do
+  for d in "${SEARCH_ROOT}" "${SCRIPT_DIR}"; do
     f=$(ls "${d}"/slurm-*"${jid}"*.err 2>/dev/null | head -1)
     [[ -n "$f" ]] && { printf '%s\n' "$f"; return 0; }
   done
@@ -57,7 +48,8 @@ _find_err_for_job() {
 if [[ $# -lt 1 ]]; then
     LATEST_ERR="$(_pick_latest_slurm_err)"
     if [[ -z "$LATEST_ERR" ]]; then
-        echo "No slurm .err files found in ${PROJECT_ROOT} or ${SCRIPT_DIR}"
+        echo "No slurm .err files found in ${SEARCH_ROOT} or ${SCRIPT_DIR}"
+        echo "Hint: cd to the directory where you ran sbatch, then retry."
         echo "Usage: $(basename "$0") [JOBID]"
         exit 1
     fi
@@ -71,7 +63,8 @@ fi
 ERR_FILE="$(_find_err_for_job "$JOBID")"
 
 if [[ -z "$ERR_FILE" ]]; then
-    echo "No .err file found for job ID $JOBID in ${PROJECT_ROOT} or ${SCRIPT_DIR}"
+    echo "No .err file found for job ID $JOBID in ${SEARCH_ROOT} or ${SCRIPT_DIR}"
+    echo "Try: cd /directory/where/you/ran/sbatch"
     squeue -j "$JOBID" 2>/dev/null || echo "  (job not found in queue)"
     exit 1
 fi
@@ -79,7 +72,7 @@ fi
 echo "Job $JOBID — queue:"
 squeue -j "$JOBID" 2>/dev/null || echo "  (job not in queue — may have finished)"
 echo ""
-echo "Tailing stderr (tqdm/warnings often here; Ctrl+C stops tail only):"
+echo "Tailing stderr (tqdm/warnings often here; Ctrl+C stops tail only — not the job):"
 echo "$ERR_FILE"
 echo "─────────────────────────────────────────"
 tail -f "$ERR_FILE"
