@@ -9,11 +9,18 @@
 # before chrome-headless-shell (often SIGTRAP on EL8-class login nodes).
 #   export IVY_NET_PLAYWRIGHT_SINGLE_PROCESS=1   # append --single-process to stubborn hosts
 #   export IVY_NET_PLAYWRIGHT_CHROMIUM_EXTRA_ARGS="--foo --bar"
+#   export IVY_NET_PLAYWRIGHT_AUTO_INSTALL=1     # after a failed run, run: same-python -m playwright install chromium
+#
+# Note: Playwright may print a one-line `playwright` CLI "Usage" banner during driver startup on some installs; harmless.
 #
 # Rivanna / module-loaded Miniforge: after conda activate, plain `python` may still be
 # /apps/software/.../miniforge/.../python → "No module named playwright". Use the env binary:
 #   ~/.conda/envs/tenure_net/bin/python -m playwright install chromium
 # Quick check:  which python  — should show .../envs/tenure_net/bin/python
+#
+# During install you may see (repeated): "BEWARE: your OS is not officially supported …
+# downloading fallback build for ubuntu24.04-x64" — normal on RHEL 8 / Rocky / Rivanna login nodes.
+# Full chromium (~/.cache/ms-playwright/chromium-*/chrome-linux/chrome) usually works anyway.
 #
 set -euo pipefail
 
@@ -249,7 +256,7 @@ def _find_playwright_full_chromium_exes():
     for root in _playwright_browser_roots():
         if not root.is_dir():
             continue
-        # chromium-1234 — numeric build folders from playwright install chromium
+        # Prefer direct chromium-NNNN/chrome-linux/chrome (fast), then recursive (unusual layouts).
         subs = sorted(
             [p for p in root.glob("chromium-[0-9]*") if p.is_dir()],
             key=lambda p: p.name,
@@ -262,7 +269,26 @@ def _find_playwright_full_chromium_exes():
                 if s not in seen:
                     seen.add(s)
                     out.append(s)
+        for exe in sorted(root.glob("**/chrome-linux/chrome"), reverse=True):
+            if not exe.is_file() or not os.access(exe, os.X_OK):
+                continue
+            # Skip anything under headless-shell trees (different binary layout).
+            parts = exe.parts
+            if any("headless" in x.lower() or "shell" in x.lower() for x in parts):
+                continue
+            s = str(exe)
+            if s not in seen:
+                seen.add(s)
+                out.append(s)
     return out
+
+
+def _has_only_headless_shell():
+    roots = _playwright_browser_roots()
+    for root in roots:
+        if root.is_dir() and list(root.glob("chromium_headless_shell-*")):
+            return True
+    return False
 
 
 def _launch_chromium(p):
@@ -323,8 +349,18 @@ def _launch_chromium(p):
     if user_exe:
         attempts.extend(opts_variants({"executable_path": user_exe}))
 
-    gc = shutil.which("google-chrome") or shutil.which("google-chrome-stable")
-    if gc:
+    for bin_name in (
+        "google-chrome-stable",
+        "google-chrome",
+        "chromium",
+        "chromium-browser",
+    ):
+        gc = shutil.which(bin_name)
+        if gc:
+            attempts.extend(opts_variants({"executable_path": gc}))
+
+    # Channel lookup (standard install locations); keep after explicit PATH exes.
+    if shutil.which("google-chrome") or shutil.which("google-chrome-stable"):
         attempts.extend(opts_variants({"channel": "chrome"}))
 
     full_list = _find_playwright_full_chromium_exes()
@@ -417,12 +453,35 @@ except Exception as e:
     traceback.print_exc()
     fl = _find_playwright_full_chromium_exes()
     if not fl:
+        hint_shell = ""
+        if _has_only_headless_shell():
+            hint_shell = (
+                "\n   Detected Playwright chrome-headless-shell only (common default). "
+                "That binary often dies with SIGTRAP on RHEL 8–class hosts — "
+                "install the full Chromium bundle:\n"
+            )
         print(
-            "\nℹ️  No full Chromium found under ~/.cache/ms-playwright/chromium-*/chrome-linux/chrome .\n"
-            f"   Run (same Python as PDF script):  {sys.executable} -m playwright install chromium\n"
-            "   Or set IVY_NET_CHROMIUM_PATH to google-chrome / chromium.\n"
+            f"{hint_shell}"
+            "\nℹ️  No full Chromium found under ~/.cache/ms-playwright/**/chrome-linux/chrome .\n"
+            f"   Run (same Python as this script — required):\n"
+            f"      {sys.executable} -m playwright install chromium\n"
+            "   That adds chromium-NNNN/chrome-linux/chrome (large download). "
+            "Then re-run this PDF script.\n"
+            "   Or set IVY_NET_CHROMIUM_PATH to system google-chrome / chromium.\n"
             "   Or try:  export IVY_NET_PLAYWRIGHT_SINGLE_PROCESS=1"
         )
+        if os.environ.get("IVY_NET_PLAYWRIGHT_AUTO_INSTALL", "").strip() == "1":
+            import subprocess
+
+            print(
+                f"\n   IVY_NET_PLAYWRIGHT_AUTO_INSTALL=1 — running: {sys.executable} -m playwright install chromium\n"
+            )
+            r = subprocess.run(
+                [sys.executable, "-m", "playwright", "install", "chromium"],
+                stdin=subprocess.DEVNULL,
+            )
+            if r.returncode == 0 and _find_playwright_full_chromium_exes():
+                print("   Install finished; re-run this script (same command) to generate the PDF.")
     else:
         print(
             "\nℹ️  Full Chromium exists but launch still failed — try:\n"

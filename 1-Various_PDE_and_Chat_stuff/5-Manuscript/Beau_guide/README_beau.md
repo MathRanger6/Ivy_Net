@@ -1,70 +1,36 @@
-# Beau_guide bundle
+# Beau_guide — generic Slurm + Jupyter notebook
 
-Self-contained folder under **`Ivy_Net/5-Manuscript/Beau_guide/`**. Maintainer: Charles.
-
-Everything Beau needs for **Slurm + notebook pipeline onboarding**, plus reference copies of scripts the **`540`** notebook or **`pipe_job`** workflow mentions. Filenames use **`_beau`** (documents / primary Beau scripts) or **`_reference_beau`** (verbatim-ish copies from elsewhere in Ivy_Net for comparison).
-
----
-
-## Read first
-
-| File | Purpose |
-|------|---------|
-| **`HPC_SLURM_PIPELINE_GUIDE_beau.md`** | Full Rivanna walkthrough (stdout/stderr, **`tail -f`**, **`sbatch`**, placeholders). |
-| **`pipe_job_beau.slurm`** | Annotated batch job — edit **`YOUR_*`**, then **`sbatch`** from Ivy_Net root. |
+**Location:** `1-Various_PDE_and_Chat_stuff/5-Manuscript/Beau_guide/`  
+**Purpose:** Help Beau run **his own** main notebook on Rivanna via **`sbatch`**, without tying him to Charles’s tenure/OpenAlex/Wayback tooling.
 
 ---
 
-## Notebook format example
+## Files
 
-| File | Purpose |
-|------|---------|
-| **`540_tenure_pipeline_beau.ipynb`** | Copy of **`tenure/540_tenure_pipeline.ipynb`** — shows Cell 0 paths, **`RUN_CELL*`** flags, and skip/reload pattern. **`pipe_job_beau.slurm`** defaults **`NB_IN`** here so Beau can execute the example without touching production paths (still requires full Ivy_Net tree + conda deps). |
+| File | What it is |
+|------|------------|
+| **`HPC_SLURM_PIPELINE_GUIDE_beau.md`** | **Start here** — numbered steps + optional “deep dive” notes (blockquote margins). |
+| **`pipe_job_beau.slurm`** | Batch script: edit **`NB_IN`**, allocation, conda env → **`sbatch`**. |
+| **`track_slurm_beau.sh`** | **`tail -f`** the **`.err`** log for a Slurm job ID. **`chmod +x`** once. |
+| **`pipe_job_reference_beau.slurm`** | Charles’s minimal **`pipe_job.slurm`** copy for comparison only. |
+| **`track_slurm_reference_beau.sh`** | Minimal **`scripts/track_slurm.sh`** copy (expects `.git` project root). |
+| **`myjob_reference_beau.slurm`** | Optional pattern for installing conda deps via Slurm (reference only). |
+| **`.env.example_beau`** | Optional template if **your** notebook loads secrets from repo-root **`.env`**. |
 
----
-
-## Beau scripts (primary)
-
-| File | Purpose |
-|------|---------|
-| **`pipe_job_beau.slurm`** | Batch-execute **`NB_IN`** with papermill/nbconvert. |
-| **`track_slurm_beau.sh`** | **`tail -f`** on **`slurm-*-<JOBID>.err`** — repo root + Beau_guide aware. **`chmod +x`** once. |
-
----
-
-## Reference scripts (Charles / notebook-mentioned)
-
-Same contents as upstream paths unless noted — rename only so this folder stays grep-friendly.
-
-| File | Upstream / notes |
-|------|------------------|
-| **`pipe_job_reference_beau.slurm`** | Repo-root **`pipe_job.slurm`** — minimal Charles launcher. |
-| **`track_slurm_reference_beau.sh`** | **`scripts/track_slurm.sh`** — minimal **`tail -f`** helper (expects logs in repo root). |
-| **`build_openalex_cache_reference_beau.slurm`** | Repo-root **`build_openalex_cache.slurm`** — **`540`** mentions **`sbatch build_openalex_cache.slurm`**. |
-| **`apply_url_updates_reference_beau.sh`** | Repo-root **`apply_url_updates.sh`** — referenced in notebook session log comments. |
-| **`myjob_reference_beau.slurm`** | Repo-root **`myjob.slurm`** — conda env bootstrap pattern (sometimes cited when conda env missing). |
+There is **no** bundled pipeline notebook — you point **`NB_IN`** at whatever `.ipynb` you maintain.
 
 ---
 
-## Environment template
+## One-line paths (copy-paste)
 
-| File | Purpose |
-|------|---------|
-| **`.env.example_beau`** | Copy of repo **`.env.example`**. Copy to **Ivy_Net repo root** as **`.env`** (never commit secrets); notebook loads **`OPENALEX_*`** etc. from there. |
-
----
-
-## Commands (from Ivy_Net repo root)
+Replace **`/path/to/Ivy_Net`** with your clone root (must contain **`.git`**).
 
 ```bash
-# one-time
-chmod +x 5-Manuscript/Beau_guide/track_slurm_beau.sh
-
-# submit
-sbatch 5-Manuscript/Beau_guide/pipe_job_beau.slurm
-
-# watch stderr
-./5-Manuscript/Beau_guide/track_slurm_beau.sh <JOBID>
+export BEAU='1-Various_PDE_and_Chat_stuff/5-Manuscript/Beau_guide'
+chmod +x "$BEAU/track_slurm_beau.sh"
+cd /path/to/Ivy_Net
+sbatch "$BEAU/pipe_job_beau.slurm"
+./"$BEAU/track_slurm_beau.sh" <JOBID>
 ```
 
-Canonical copy of this guide may also be updated at **`tenure/HPC_SLURM_PIPELINE_GUIDE.md`**; **`HPC_SLURM_PIPELINE_GUIDE_beau.md`** here is the bundle-local duplicate.
+Canonical tenure-focused narrative (Charles’s **`540`** pipeline) lives at **`tenure/HPC_SLURM_PIPELINE_GUIDE.md`** when he works inside Ivy_Net’s tenure stack — **this folder is the simplified pass for Beau.**

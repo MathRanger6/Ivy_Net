@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>HPC_SLURM_PIPELINE_GUIDE_beau</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="/home/dzk3ja/Ivy_Net/pdf_styles.css" />
+</head>
+<body>
+<h1 id="rivanna-run-your-jupyter-notebook-with-slurm-beau">Rivanna — run
+<strong>your</strong> Jupyter notebook with Slurm (Beau)</h1>
+<p><strong>Bundle path:</strong>
+<code>1-Various_PDE_and_Chat_stuff/5-Manuscript/Beau_guide/</code><br />
+<strong>Maintainer:</strong> Charles · <strong>Audience:</strong> Beau
+(or anyone with a <strong>main notebook</strong> + Rivanna)</p>
+<p>This guide is <strong>generic</strong>: you supply the
+<strong><code>.ipynb</code></strong> path. It is <strong>not</strong>
+tied to OpenAlex, Wayback, or repo-specific maintenance scripts.</p>
+<p><strong>How to read this file</strong></p>
+<ul>
+<li><strong>Normal body text</strong> = do this in order (the “main
+lane”).</li>
+<li><strong>Indented blockquotes</strong> (<code>&gt;</code>) = optional
+explanations if a term or step is unfamiliar — skip them anytime without
+losing the thread.</li>
+</ul>
+<hr />
+<h2 id="step-1-preconditions">Step 1 — Preconditions</h2>
+<ol type="1">
+<li>Rivanna SSH or OnDemand terminal works.</li>
+<li>You know your <strong>Slurm allocation</strong>
+(<code>#SBATCH --account=</code>) and <strong>partition</strong> (often
+<code>standard</code>); your PI or <a
+href="https://www.rc.virginia.edu/userinfo/rivanna/">RC docs</a> explain
+these.</li>
+<li>Your work lives in a <strong>Git project</strong> (the folder
+contains a <strong><code>.git</code></strong> entry) <em>or</em> you
+will set <strong><code>BEAU_PROJECT_ROOT</code></strong> inside
+<code>pipe_job_beau.slurm</code> to your project root path.</li>
+<li>You have (or will create) a <strong>conda environment</strong> that
+can import everything your notebook needs, with
+<strong><code>papermill</code></strong> or
+<strong><code>jupyter</code></strong> installed.</li>
+</ol>
+<blockquote>
+<p><strong>Deep dive — why <code>.git</code>?</strong><br />
+<code>pipe_job_beau.slurm</code> finds your <em>project root</em> by
+walking upward from where you ran <code>sbatch</code> until it sees
+<strong><code>.git</code></strong>, then <code>cd</code>s there before
+running <code>papermill</code>. That way your notebook path
+(<code>NB_IN</code>) can be written <strong>relative</strong> to project
+root (e.g. <code>notebooks/main.ipynb</code>). If you don’t use Git,
+fill in <strong><code>BEAU_PROJECT_ROOT</code></strong> in the script
+with an absolute path.</p>
+</blockquote>
+<blockquote>
+<p><strong>Deep dive — login node vs compute</strong><br />
+Light edits and <code>sbatch</code> are fine on the login node.
+Heavy/long notebook runs belong in a batch job so you get reserved
+CPUs/RAM and don’t violate login-node policies.</p>
+</blockquote>
+<hr />
+<h2 id="step-2-edit-pipe_job_beau.slurm">Step 2 — Edit
+<code>pipe_job_beau.slurm</code></h2>
+<p>Open <strong><code>pipe_job_beau.slurm</code></strong> and fix every
+<strong><code>## EDIT</code></strong> /
+<strong><code>YOUR_*</code></strong>:</p>
+<table>
+<colgroup>
+<col style="width: 42%" />
+<col style="width: 57%" />
+</colgroup>
+<thead>
+<tr>
+<th>Item</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>YOUR_NETID@virginia.edu</code></strong></td>
+<td>Your UVa email for Slurm mail</td>
+</tr>
+<tr>
+<td><strong><code>YOUR_SLURM_ALLOCATION</code></strong></td>
+<td>Billing group</td>
+</tr>
+<tr>
+<td><strong><code>--partition</code></strong>,
+<strong><code>--mem</code></strong>,
+<strong><code>--cpus</code></strong>,
+<strong><code>--time</code></strong></td>
+<td>Match your workload</td>
+</tr>
+<tr>
+<td><strong><code>ENV_NAME</code></strong></td>
+<td>Conda env name (default shown in file)</td>
+</tr>
+<tr>
+<td><strong><code>NB_IN</code></strong></td>
+<td><strong>Your</strong> notebook path <strong>relative to project
+root</strong>, e.g. <code>notebooks/beau_main.ipynb</code></td>
+</tr>
+<tr>
+<td><strong><code>BEAU_PROJECT_ROOT</code></strong></td>
+<td>Only if auto <strong><code>.git</code></strong> discovery fails —
+set to absolute project root</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Deep dive — <code>NB_IN</code> must exist after
+<code>cd</code> to root</strong><br />
+The batch script checks that <code>NB_IN</code> is a real file under
+project root. If you get “not found”, your path or
+<code>BEAU_PROJECT_ROOT</code> is wrong.</p>
+</blockquote>
+<hr />
+<h2 id="step-3-optional-notebook-design-flags-in-cell-0">Step 3 —
+(Optional) Notebook design: flags in Cell 0</h2>
+<p>If you want <strong>checkpoint-style</strong> behavior: put tunables
+(paths, booleans like <code>RUN_STEP2 = True</code>) in an early code
+cell; in later cells use <code>if RUN_STEP2:</code> / <code>else:</code>
+to skip and load saved data. <strong>Totally optional</strong> — a plain
+linear notebook works with <code>papermill</code> too.</p>
+<blockquote>
+<p><strong>Deep dive — why people do this</strong><br />
+One <code>sbatch</code> runs the notebook <strong>top to bottom
+once</strong>. Booleans let you turn off expensive cells without
+maintaining multiple copies of the notebook.</p>
+</blockquote>
+<p>The job script prints any code-cell lines starting with
+<strong><code>RUN_CELL</code></strong> before execute (harmless if you
+use different names).</p>
+<hr />
+<h2 id="step-4-submit-from-project-root-recommended">Step 4 — Submit
+from project root (recommended)</h2>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /path/to/your/project/root    <span class="co"># directory that contains .git</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> 1-Various_PDE_and_Chat_stuff/5-Manuscript/Beau_guide/pipe_job_beau.slurm</span></code></pre></div>
+<p>Slurm prints a <strong>job ID</strong>. Log files:</p>
+<ul>
+<li><strong><code>slurm-&lt;jobname&gt;-&lt;JOBID&gt;.out</code></strong>
+— stdout<br />
+</li>
+<li><strong><code>slurm-&lt;jobname&gt;-&lt;JOBID&gt;.err</code></strong>
+— stderr (often <strong>tqdm</strong> / warnings; not “errors
+only”)</li>
+</ul>
+<p>They are created in the directory you were in when you typed
+<strong><code>sbatch</code></strong> (same as
+<strong><code>SLURM_SUBMIT_DIR</code></strong>).</p>
+<blockquote>
+<p><strong>Deep dive — JOBID</strong><br />
+The integer in the <code>Submitted batch job …</code> line is the
+<strong>JOBID</strong>; it appears in the log filenames.</p>
+</blockquote>
+<hr />
+<h2 id="step-5-watch-logs">Step 5 — Watch logs</h2>
+<p><strong>Stderr</strong> (usually livelier):</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x 1-Various_PDE_and_Chat_stuff/5-Manuscript/Beau_guide/track_slurm_beau.sh   <span class="co"># once</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./1-Various_PDE_and_Chat_stuff/5-Manuscript/Beau_guide/track_slurm_beau.sh</span> <span class="op">&lt;</span>JOBID<span class="op">&gt;</span></span></code></pre></div>
+<p>Or omit <strong><code>&lt;JOBID&gt;</code></strong> to pick the
+newest <strong><code>slurm-*.err</code></strong> under project root or
+this folder.</p>
+<p><strong>Stdout:</strong></p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span> <span class="at">-f</span> slurm-pipe_job_beau-<span class="op">&lt;</span>JOBID<span class="op">&gt;</span>.out</span></code></pre></div>
+<blockquote>
+<p><strong>Deep dive — <code>tail</code> vs
+<code>tail -f</code></strong><br />
+<code>tail file</code> prints the <strong>end</strong> of the file once.
+<strong><code>tail -f</code></strong> (“follow”) keeps printing
+<strong>new</strong> lines as Slurm writes them — like a live feed.
+<strong>Ctrl+C</strong> stops <code>tail</code>; it does
+<strong>not</strong> cancel the job (use
+<strong><code>scancel JOBID</code></strong>).</p>
+</blockquote>
+<blockquote>
+<p><strong>Deep dive — <code>chmod +x</code> and
+<code>./script.sh</code></strong><br />
+<strong><code>chmod +x</code></strong> marks the script as executable.
+<strong><code>./</code></strong> means “run this file from the current
+directory” instead of searching <code>PATH</code>.</p>
+</blockquote>
+<hr />
+<h2 id="step-6-artifacts-when-the-job-finishes">Step 6 — Artifacts when
+the job finishes</h2>
+<table>
+<colgroup>
+<col style="width: 47%" />
+<col style="width: 52%" />
+</colgroup>
+<thead>
+<tr>
+<th>Output</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>slurm-*-&lt;JOBID&gt;-output.ipynb</code></strong></td>
+<td>Executed notebook <strong>with outputs</strong> (good to archive or
+share).</td>
+</tr>
+</tbody>
+</table>
+<p>Path is under <strong>project root</strong> (where
+<code>papermill</code> ran).</p>
+<hr />
+<h2 id="step-7-cancel-a-job">Step 7 — Cancel a job</h2>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">scancel</span> <span class="op">&lt;</span>JOBID<span class="op">&gt;</span></span></code></pre></div>
+<hr />
+<h2 id="optional-secrets-.env">Optional: secrets
+(<code>.env</code>)</h2>
+<p>If <strong>your</strong> notebook loads
+<strong><code>python-dotenv</code></strong> or similar from project
+root:</p>
+<ol type="1">
+<li>Copy <strong><code>.env.example_beau</code></strong> ideas into a
+repo-root <strong><code>.env</code></strong> (keep
+<strong><code>.env</code></strong> git-ignored).</li>
+<li>Never commit API keys.</li>
+</ol>
+<blockquote>
+<p>This bundle does <strong>not</strong> require OpenAlex or
+URL-maintenance scripts — only what <strong>you</strong> choose to use
+in your notebook.</p>
+</blockquote>
+<hr />
+<h2 id="troubleshooting-quick">Troubleshooting (quick)</h2>
+<table>
+<colgroup>
+<col style="width: 52%" />
+<col style="width: 47%" />
+</colgroup>
+<thead>
+<tr>
+<th>Symptom</th>
+<th>Check</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>No <code>.git</code> found</strong></td>
+<td><code>cd</code> to project root before <code>sbatch</code>, or set
+<strong><code>BEAU_PROJECT_ROOT</code></strong>.</td>
+</tr>
+<tr>
+<td><strong><code>NB_IN</code> not found</strong></td>
+<td>Path is relative to <strong>project root</strong>, not to
+<code>Beau_guide/</code>.</td>
+</tr>
+<tr>
+<td><strong>Wrong <code>python</code> / no
+<code>playwright</code></strong> (unrelated to Slurm, for local PDF
+hacks)</td>
+<td>On Rivanna, <code>which python</code> must point into your conda env
+— use <code>~/.../envs/your_env/bin/python</code> if needed.</td>
+</tr>
+<tr>
+<td><strong><code>Permission denied</code></strong> on
+<code>track_slurm_beau.sh</code></td>
+<td><code>chmod +x .../track_slurm_beau.sh</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="reference-copies-in-this-folder">Reference copies in this
+folder</h2>
+<p><strong><code>pipe_job_reference_beau.slurm</code></strong> /
+<strong><code>track_slurm_reference_beau.sh</code></strong> mirror
+Charles’s Ivy_Net production helpers. <strong>Ignore them</strong>
+unless you want to compare style; they are not required for your
+workflow.</p>
+<p><strong><code>myjob_reference_beau.slurm</code></strong> shows a
+pattern for heavier one-time conda installs via Slurm — optional.</p>
+<hr />
+<h2 id="naming-note">Naming note</h2>
+<p>Some people say “pip_job” — the file is
+<strong><code>pipe_job_beau.slurm</code></strong> (<strong>pipe</strong>
+= pipeline-style batch job).</p>
+</body>
+</html>

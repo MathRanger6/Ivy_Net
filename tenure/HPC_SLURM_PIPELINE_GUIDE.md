@@ -2,9 +2,9 @@
 
 **Maintainer:** Charles (Ivy_Net / tenure pipeline).
 
-Two layers: **this guide** explains the big picture and day-to-day steps; **`pipe_job_beau.slurm`** and **`track_slurm_beau.sh`** under **`5-Manuscript/Beau_guide/`** repeat the same ideas inline with **`YOUR_*` placeholders** you edit once.
+Two layers: **this guide** explains the big picture and day-to-day steps; **`pipe_job_beau.slurm`** and **`track_slurm_beau.sh`** under **`1-Various_PDE_and_Chat_stuff/5-Manuscript/Beau_guide/`** repeat the same ideas inline with **`YOUR_*` placeholders** you edit once.
 
-Charles keeps his production launcher as **`pipe_job.slurm`** at repo root (minimal comments). Beau’s annotated copies live in **`Ivy_Net/5-Manuscript/Beau_guide/`** (anything matching **`*_beau.*`**).
+Charles keeps his production launcher as **`pipe_job.slurm`** at repo root (minimal comments). Beau’s annotated copies live in **`Ivy_Net/1-Various_PDE_and_Chat_stuff/5-Manuscript/Beau_guide/`** (anything matching **`*_beau.*`**).
 
 ---
 
@@ -14,7 +14,7 @@ Slurm writes plain-text **log files** next to the directory you were in when you
 
 ### What is a JOBID?
 
-When you run **`sbatch 5-Manuscript/Beau_guide/pipe_job_beau.slurm`** from repo root, Slurm replies with something like **`Submitted batch job 11807601`**. That number (**11807601**) is the **job ID**. It appears in log filenames so each run stays separate.
+When you run **`sbatch 1-Various_PDE_and_Chat_stuff/5-Manuscript/Beau_guide/pipe_job_beau.slurm`** from repo root, Slurm replies with something like **`Submitted batch job 11807601`**. That number (**11807601**) is the **job ID**. It appears in log filenames so each run stays separate.
 
 ### Two streams: `.out` vs `.err` (NOT “error-only”)
 
@@ -34,22 +34,22 @@ So **`.err` is often where you see motion first**, not necessarily because anyth
 
 Stop watching with **Ctrl+C**. That **only stops tail**; it does **not** stop the Slurm job.
 
-### Running Charles’s helper script: `./5-Manuscript/Beau_guide/track_slurm_beau.sh`
+### Running Charles’s helper script: `./1-Various_PDE_and_Chat_stuff/5-Manuscript/Beau_guide/track_slurm_beau.sh`
 
 Shell scripts must be marked **executable** once:
 
 ```bash
-chmod +x 5-Manuscript/Beau_guide/track_slurm_beau.sh
+chmod +x 1-Various_PDE_and_Chat_stuff/5-Manuscript/Beau_guide/track_slurm_beau.sh
 ```
 
-What **`chmod +x`** means in plain English: “allow this file to run as a program.” Without it, **`./5-Manuscript/Beau_guide/track_slurm_beau.sh`** may say **Permission denied.**
+What **`chmod +x`** means in plain English: “allow this file to run as a program.” Without it, **`./1-Various_PDE_and_Chat_stuff/5-Manuscript/Beau_guide/track_slurm_beau.sh`** may say **Permission denied.**
 
 The **`./`** means “run the script **from this path relative to where you **`cd`**’d**,” not a system-wide installed command.
 
 Run from **repo root**:
 
 ```bash
-./5-Manuscript/Beau_guide/track_slurm_beau.sh 11807601
+./1-Various_PDE_and_Chat_stuff/5-Manuscript/Beau_guide/track_slurm_beau.sh 11807601
 ```
 
 That finds **`slurm-*11807601*.err`** under the Ivy_Net root (or under **`Beau_guide/`** if that’s where logs landed) and **`tail -f`** it — same idea as typing **`tail -f …`** yourself, but it picks the right filename.
@@ -65,11 +65,11 @@ Give him enough to clone/run **the same workflow**, not necessarily every asset 
 | What | Why |
 |------|-----|
 | Full **`Ivy_Net`** repo | Notebook imports `functionsG_working.py`, `tenure/tenure_pipeline/*.py`, paths under `tenure/`. |
-| **`5-Manuscript/Beau_guide/`** | **`README_beau.md`** indexes **`pipe_job_beau.slurm`**, **`track_slurm_beau.sh`**, **`540_tenure_pipeline_beau.ipynb`** (format example), **`HPC_SLURM_PIPELINE_GUIDE_beau.md`**, **`.env.example_beau`**, and **`*_reference_beau.*`** copies of scripts the **`540`** notebook or repo mentions. |
+| **`1-Various_PDE_and_Chat_stuff/5-Manuscript/Beau_guide/`** | **Generic Rivanna onboarding** for Beau: **`README_beau.md`**, **`HPC_SLURM_PIPELINE_GUIDE_beau.md`** (numbered steps + blockquote “deep dives”), **`pipe_job_beau.slurm`**, **`track_slurm_beau.sh`**, optional **`.env.example_beau`**, and **`*_reference_beau.*`** copies of Charles’s minimal **`pipe_job`** / **`track_slurm`** — **no bundled pipeline notebook**; Beau sets **`NB_IN`** to **his own** `.ipynb`. |
 
-**`pipe_job_beau.slurm`** defaults **`NB_IN`** to **`5-Manuscript/Beau_guide/540_tenure_pipeline_beau.ipynb`** — switch **`NB_IN`** to **`tenure/540_tenure_pipeline.ipynb`** for Charles production runs.
+**`pipe_job_beau.slurm`** uses **`.git`** (walking up from **`sbatch`**) to find project root, then runs **`NB_IN`** relative to that root — Beau edits **`NB_IN`** to his notebook path. Charles’s **`pipe_job.slurm`** continues to target **`tenure/540_tenure_pipeline.ipynb`** by default.
 
-This tutorial (**`tenure/HPC_SLURM_PIPELINE_GUIDE.md`**) stays the canonical narrative; **`HPC_SLURM_PIPELINE_GUIDE_beau.md`** in **`Beau_guide/`** is a bundle-local duplicate. See **`README_beau.md`** in that folder for a per-file manifest.
+This tutorial (**`tenure/HPC_SLURM_PIPELINE_GUIDE.md`**) focuses on the **tenure `540`** pipeline; Beau’s **step-by-step generic** doc is **`HPC_SLURM_PIPELINE_GUIDE_beau.md`** in that folder.
 
 ### Nice additions
 
@@ -128,21 +128,21 @@ Inside the batch script: **`papermill`** (preferred; logs cell boundaries) or **
 
 ### B. Edit Beau’s batch script (once per cluster/account)
 
-Open **`5-Manuscript/Beau_guide/pipe_job_beau.slurm`** and replace every placeholder:
+Open **`1-Various_PDE_and_Chat_stuff/5-Manuscript/Beau_guide/pipe_job_beau.slurm`** and replace every placeholder:
 
 | Marker | Put here |
 |--------|-----------|
 | **`YOUR_NETID@virginia.edu`** | Your UVa email for Slurm notifications. |
 | **`YOUR_SLURM_ALLOCATION`** | Your Rivanna billing group / PI allocation string (Research Computing docs or **`accounts`** command). |
 | **`## EDIT`** sections | **`--partition`**, **`--mem`**, **`--cpus-per-task`**, **`--time`** if defaults don’t fit your notebook. |
-| **`NB_IN`** | Default in **`pipe_job_beau.slurm`** is **`5-Manuscript/Beau_guide/540_tenure_pipeline_beau.ipynb`** (format example). Use **`tenure/540_tenure_pipeline.ipynb`** for Charles production runs. |
-| **`ENV_NAME`** | If you named the conda env something other than **`tenure_net`**, change the default or run **`ENV_NAME=myenv sbatch 5-Manuscript/Beau_guide/pipe_job_beau.slurm`**. |
+| **`NB_IN`** | In **`pipe_job_beau.slurm`** Beau sets **his own** notebook path relative to project root (script discovers root via **`.git`**). For Charles’s **`pipe_job.slurm`**, the notebook is **`tenure/540_tenure_pipeline.ipynb`**. |
+| **`ENV_NAME`** | If you named the conda env something other than **`tenure_net`**, change the default or run **`ENV_NAME=myenv sbatch 1-Various_PDE_and_Chat_stuff/5-Manuscript/Beau_guide/pipe_job_beau.slurm`**. |
 
-If conda env binaries live outside **`~/.conda/envs/`**, edit the **`CONDA_PYTHON`** / **`CONDA_PAPERMILL`** / **`CONDA_NBCONVERT`** lines at the bottom of **`5-Manuscript/Beau_guide/pipe_job_beau.slurm`**.
+If conda env binaries live outside **`~/.conda/envs/`**, edit the **`CONDA_PYTHON`** / **`CONDA_PAPERMILL`** / **`CONDA_NBCONVERT`** lines at the bottom of **`1-Various_PDE_and_Chat_stuff/5-Manuscript/Beau_guide/pipe_job_beau.slurm`**.
 
 ### C. Configure the notebook run
 
-1. Open **`5-Manuscript/Beau_guide/540_tenure_pipeline_beau.ipynb`** (example), **or** **`tenure/540_tenure_pipeline.ipynb`** if **`NB_IN`** points there.
+1. Open **your** notebook path as set in **`NB_IN`** (Beau), **or** **`tenure/540_tenure_pipeline.ipynb`** when using Charles’s **`pipe_job.slurm`**.
 2. In **Cell 0**, set **`RUN_CELL*`** booleans for this submission only.
 3. **Save** the notebook.
 
@@ -150,7 +150,7 @@ If conda env binaries live outside **`~/.conda/envs/`**, edit the **`CONDA_PYTHO
 
 ```bash
 cd ~/Ivy_Net                    # INSERT: your actual Ivy_Net repo root path
-sbatch 5-Manuscript/Beau_guide/pipe_job_beau.slurm
+sbatch 1-Various_PDE_and_Chat_stuff/5-Manuscript/Beau_guide/pipe_job_beau.slurm
 ```
 
 Note the numeric **JOBID** Slurm prints (see “Reading logs” if this is unfamiliar).
@@ -164,8 +164,8 @@ tail -f slurm-pipe_job_beau-<JOBID>.out
 **Stderr** (often better “heartbeat”; tqdm lives here):
 
 ```bash
-chmod +x 5-Manuscript/Beau_guide/track_slurm_beau.sh    # once per clone
-./5-Manuscript/Beau_guide/track_slurm_beau.sh <JOBID>
+chmod +x 1-Various_PDE_and_Chat_stuff/5-Manuscript/Beau_guide/track_slurm_beau.sh    # once per clone
+./1-Various_PDE_and_Chat_stuff/5-Manuscript/Beau_guide/track_slurm_beau.sh <JOBID>
 ```
 
 Or omit JOBID to follow the newest **`slurm-*.err`** found under repo root or **`Beau_guide/`**.
@@ -192,7 +192,7 @@ scancel <JOBID>
 
 ## 4. Naming note
 
-Beau mentioned **`pip_job_beau`** — the checked-in Slurm script is **`pipe_job_beau.slurm`** (**pipe**, short for pipeline job, not Python **`pip`**) under **`5-Manuscript/Beau_guide/`**, so job names and **`sbatch`** paths stay readable.
+Beau mentioned **`pip_job_beau`** — the checked-in Slurm script is **`pipe_job_beau.slurm`** (**pipe**, short for pipeline job, not Python **`pip`**) under **`1-Various_PDE_and_Chat_stuff/5-Manuscript/Beau_guide/`**, so job names and **`sbatch`** paths stay readable.
 
 ---
 
@@ -208,12 +208,12 @@ Beau mentioned **`pip_job_beau`** — the checked-in Slurm script is **`pipe_job
 | Symptom | Check |
 |---------|--------|
 | **`conda env not found`** | **`conda env list`** — name matches **`ENV_NAME`**; **`module load miniforge`** before **`sbatch`** is inside script already. |
-| **`Notebook … not found`** | **`NB_IN`** path relative to repo root; batch script **`cd`**s there automatically — ensure **`functionsG_working.py`** exists at Ivy_Net root; **`sbatch`** should be run from inside that tree’s hierarchy so Slurm’s submit dir resolves upward correctly. |
+| **`Notebook … not found`** | **`NB_IN`** is relative to **project root**. **`pipe_job_beau.slurm`** finds root via **`.git`** walking up from **`sbatch`** (or **`BEAU_PROJECT_ROOT`**). **`pipe_job.slurm`** still assumes Ivy_Net layout with **`functionsG_working.py`**. |
 | **`Invalid account`** | **`YOUR_SLURM_ALLOCATION`** replaced with PI-approved string. |
-| **`Permission denied`** running **`./5-Manuscript/Beau_guide/track_slurm_beau.sh`** | Run **`chmod +x 5-Manuscript/Beau_guide/track_slurm_beau.sh`** once (see “Reading logs”). |
+| **`Permission denied`** running **`./1-Various_PDE_and_Chat_stuff/5-Manuscript/Beau_guide/track_slurm_beau.sh`** | Run **`chmod +x 1-Various_PDE_and_Chat_stuff/5-Manuscript/Beau_guide/track_slurm_beau.sh`** once (see “Reading logs”). |
 | **Nothing new appears with **`tail -f`** for a long time** | Normal during slow imports or blocked I/O; eventually **`PYTHONUNBUFFERED`** + **`stdbuf`** flush lines — compare Beau script behavior with **`pipe_job.slurm`** if unsure. |
-| **`tail` wrong directory / missing `.err`** | Logs land in **`SLURM_SUBMIT_DIR`** — whatever folder you **`cd`**’d to before **`sbatch`**. Prefer **`cd Ivy_Net`** then **`sbatch 5-Manuscript/Beau_guide/pipe_job_beau.slurm`**; **`track_slurm_beau.sh`** searches repo root **and** **`Beau_guide/`**. |
+| **`tail` wrong directory / missing `.err`** | Logs land in **`SLURM_SUBMIT_DIR`** — whatever folder you **`cd`**’d to before **`sbatch`**. Prefer **`cd Ivy_Net`** then **`sbatch 1-Various_PDE_and_Chat_stuff/5-Manuscript/Beau_guide/pipe_job_beau.slurm`**; **`track_slurm_beau.sh`** searches repo root **and** **`Beau_guide/`**. |
 
 ---
 
-Questions are mostly **allocation/partition** and **conda package parity** with **Charles** — everything else is already parameterized in **`5-Manuscript/Beau_guide/pipe_job_beau.slurm`**.
+Questions are mostly **allocation/partition** and **conda package parity** with **Charles** — everything else is already parameterized in **`1-Various_PDE_and_Chat_stuff/5-Manuscript/Beau_guide/pipe_job_beau.slurm`**.

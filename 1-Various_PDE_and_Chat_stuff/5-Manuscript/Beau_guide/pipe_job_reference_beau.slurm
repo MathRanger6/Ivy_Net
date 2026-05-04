@@ -1,4 +1,7 @@
 #!/bin/bash
+# Reference copy — Charles Ivy_Net tenure **`pipe_job.slurm`** workflow (fixed **`NB_IN=tenure/540_tenure_pipeline.ipynb`**).
+# Beau uses **`pipe_job_beau.slurm`** with **`NB_IN`** set to his own notebook instead.
+#
 # Run 540_tenure_pipeline.ipynb with the RUN_CELL* flags as-set in CELL 0.
 # Currently: RUN_CELL6A=True, RUN_CELL6B=True (OpenAlex author IDs + works by year).
 #
