@@ -423,3 +423,31 @@ Among Combat Support and Combat Service Support Army officers in year groups 200
 
 ---
 
+## Senior Rater Pools — Algorithm and Pool Size (Cross-Domain Priority)
+
+**Topic**: How senior rater pools are defined, who is in each pool, and how **pool size** affects comparative metrics (e.g. pool minus mean, percentiles, z-scores)
+
+**Content to consider including**:
+
+Pool-relative measures are central to the dissertation story across **three domains**: Army officer talent (OER / senior rater pools), **basketball** (sports pipeline analogues of peer or league-relative performance), and **university tenure** (peer or cohort-relative signals). As analyses tighten, **the size and composition of each pool** will drive both the meaning and the stability of comparative statistics. We need a deliberate review of the **senior rater pool algorithm** in code and in prose: inclusion rules (who counts as “in pool” at each snapshot), handling of small pools, ties, missing raters, and whether pools should be fixed by hierarchy, by time window, or by a minimum-N rule. Document choices, edge cases, and sensitivity analyses (e.g. varying minimum pool size or alternative pool definitions) so Army, sports, and tenure chapters can use a **consistent conceptual frame** even when the raw data differ.
+
+**Potential placement**:
+- Methods section (pool construction and comparative metrics)
+- Limitations section (small-N pools, time-varying membership)
+- Cross-domain synthesis (one subsection on “relative standing within a reference set”)
+
+**Key points**:
+- Pool size and membership directly affect pool-minus-mean, ranks, and z-scores used in models and plots
+- Same conceptual issue recurs in Army, basketball, and tenure pipelines — worth harmonizing language and diagnostics
+- Senior rater pool algorithm deserves a dedicated audit pass in `talent` (and parallels in `sports` / `tenure` as applicable)
+- Small or unstable pools may deserve explicit flags, winsorization or pooling rules, or robustness checks
+- Any change to pool logic should be versioned and reproducible (config + documented defaults)
+
+**Code-linked notes (do not forget — interpretability of “pool size”)**:
+- In `add_cum_oer_metrics_mod_working.py`, senior-rater side pools are built by grouping the long snapshot frame on **`[snapshot_date_col, snr_col]`** (same calendar snapshot + same senior-rater key), then computing pool mean / minus-mean / size from the relevant **TB ratio** column in that group. That is a **statistical reference set on the merged data**, not automatically “the 6–12 officers on one OER board.”
+- With **`exclude_self=True`** (default in that helper), the mean uses everyone **except the focal row** in that group; the stored **`pool_size_*`** reflects that **effective** denominator for the mean (like “others in the bucket”), not a literal headcount of a single rating event.
+- **Large pool sizes (e.g. over 100)** can therefore be *consistent with the current definition* if: (a) `snr_col` is broader than a single person (e.g. org / UIC / shared key), (b) many officers share the same snapshot date, or (c) many rows survive joins and still fall in the same `(date, snr)` bucket with a non-null ratio. That is a **definition vs. intuition** issue, not proof the Army “board” had 100+ people.
+- **Sanity checks to run when back at the desk:** tabulate worst cases (`pool_size_snr_*` large); for each, report **`snr_col`**, **`snapshot_date_col`**, **`nunique(pid_pde)`** in that group, and a few context columns (`yg`, `div_name`, etc.); confirm **`CELL6_COLUMN_MAPPING` / `snr_col`** is the identifier you want for the *estimand* (person-level senior rater vs org-level key).
+- If the research estimand is truly **“co-rated on the same board / same rating action,”** the grouping key likely needs to be **richer than `(snapshot_date, snr)` alone** (e.g. evaluation window + rated unit + board or file identifiers if available in source data). Otherwise prose should describe pools exactly as implemented: **peer reference set at snapshot for a given senior-rater key.**
+
+---

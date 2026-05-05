@@ -3,23 +3,11 @@
 		{
 			"name": "Ivy_Net (root)",
 			"path": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE"
-		},
-		{
-			"name": "tenure (notebooks + docs)",
-			"path": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/tenure"
-		},
-		{
-			"name": "sports (notebooks + docs)",
-			"path": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports"
 		}
 	],
 	"settings": {
-		# "terminal.integrated.profiles.osx": {
-		# 	"tenure_net": {
-		# 		"path": "bash",
-		# 		"args": ["-c", "conda activate tenure_net && bash"]
-		# 	}
-		# },
+		// Default shell profile (define "sports_net" in user settings if needed).
+		// Legacy tenure_net profile was removed; conda env is tenure_net vs sports_net by project.
 		"terminal.integrated.defaultProfile.osx": "sports_net",
 		"terminal.integrated.fontSize": 11,
 		"terminal.integrated.fontFamily": "Consolas, 'Courier New', monospace",

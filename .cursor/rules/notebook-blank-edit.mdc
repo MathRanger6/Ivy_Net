@@ -1,11 +1,28 @@
 ---
-description: Always perform a visible blank edit to Cell 1 before any other notebook edits in a session
+description: Always perform a visible blank edit to Cell 1 before any other notebook edits in a session; MCP bootstrap exception for brand-new notebooks only
 alwaysApply: true
 ---
 
-# Notebook Blank Edit — Always First
+# Notebook Blank Edit — Always First (after any bootstrap)
 
-Before making ANY edit to ANY `.ipynb` notebook in a session, the FIRST action must be a visible blank edit to **Cell index 1** (the burn-slot cell). This ensures the user can see all subsequent edits in the diff view.
+## One-time exception — brand-new `.ipynb`
+
+When **creating a notebook from scratch** at the user’s request, it is acceptable to use **notebook MCP** for **`notebook_create`** and a **single** initial scaffold (e.g. one `notebook_bulk_add_cells` pass: title, **EDIT BLANK** burn cell at index 1, and minimal placeholder cells only). That avoids an empty file with no burn slot.
+
+**After that bootstrap file exists, the exception ends.** Every later change to **cell bodies** or **new substantive cells** must follow:
+
+1. **`EditNotebook`** visible blank edit on the burn cell (see below).
+2. **`EditNotebook`** for all further content (or ask first for rare structural MCP — see Tool rules).
+
+Do **not** use **`notebook_add_cell`**, **`notebook_bulk_add_cells`**, or **`notebook_edit_cell`** to inject real code or markdown after bootstrap unless the user explicitly approved that structural path for that step.
+
+For **`540_tenure_pipeline.ipynb`**, use burn slot at **cell index 3** and follow **`.cursor/rules/jupyter-notebook-workflow.mdc`** (not index 1).
+
+---
+
+# Notebook Blank Edit — session workflow
+
+Before making ANY **further** edit to ANY `.ipynb` notebook in a session (after any allowed bootstrap), the **first `EditNotebook` action** must be a visible blank edit to **Cell index 1** (the burn-slot cell) — **except** `540`, which uses index **3** per `jupyter-notebook-workflow.mdc`. This ensures the user can see subsequent edits in the diff view.
 
 ## Required first action every session
 
@@ -22,15 +39,16 @@ Before making ANY edit to ANY `.ipynb` notebook in a session, the FIRST action m
 
 ## Rules
 
-- Do this BEFORE any other notebook tool call, no exceptions.
-- Announce it explicitly: "Blank edit done — Cell 1 updated."
+- After any allowed bootstrap, do this **before** any other **content** change to the notebook in that session.
+- For **`540_tenure_pipeline.ipynb`**, the burn slot is **index 3** — announce: **"Blank edit done — EDIT BLANK cell updated."** For other notebooks (e.g. **`535_sports_tier_1.ipynb`**), burn slot is **index 1** — announce: **"Blank edit done — Cell 1 updated."**
 - The change must be visually distinct (update the date or topic comment).
 - If the notebook is not being edited in this session, the blank edit is not required.
 - Never skip this step even for "small" edits — the user verifies all changes via diff view.
 
-## Tool rules for ALL .ipynb notebook edits
+## Tool rules for ALL `.ipynb` notebook edits
 
-- ALL cell content edits must use the **`EditNotebook`** tool (Cursor native). This is the only way edits are visible to the user in the diff view.
-- **NEVER use `notebook_edit_cell`** under any circumstances — it bypasses the diff view entirely.
-- For `notebook_bulk_add_cells`, `notebook_move_cell`, `notebook_split_cell`, `notebook_merge_cells`, and `notebook_duplicate_cell`: these are rare structural operations. **Ask the user for permission before using any of them.**
-- All other notebook_mcp tools (read, search, outline, metadata reads, validation, etc.) are fine to use freely without asking.
+- ALL **cell body** edits and **new substantive cells** must be authored with **`EditNotebook`** (Cursor native) after the blank edit — so edits show in the diff view.
+- **NEVER use `notebook_edit_cell`** (MCP) — it bypasses the diff view.
+- **`notebook_add_cell`** with real content is treated like smuggling cell bodies through MCP — **do not use** after bootstrap; use **`EditNotebook`** (`is_new_cell: true`) or split work across explicit user-approved steps.
+- **`notebook_bulk_add_cells`**, **`notebook_move_cell`**, **`notebook_split_cell`**, **`notebook_merge_cells`**, **`notebook_duplicate_cell`**: rare structural ops — **ask the user first**, except for the **one-time bootstrap** described at the top of this file.
+- Other notebook MCP (**read**, **search**, **outline**, **metadata**, **validation**, **`notebook_create`** for an empty/new file only, path context, etc.) is fine without asking.

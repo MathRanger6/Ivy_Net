@@ -4,7 +4,11 @@ globs: **/*.ipynb
 alwaysApply: false
 ---
 
-# Jupyter Notebook Editing Workflow (540_tenure_pipeline.ipynb)
+# Jupyter Notebook Editing Workflow (`540_tenure_pipeline.ipynb`)
+
+For **all other** notebooks (e.g. `535_sports_tier_1.ipynb`), follow **`.cursor/rules/notebook-blank-edit.mdc`** (burn slot at **cell index 1**, plus the **one-time MCP bootstrap** exception for brand-new files).
+
+---
 
 ## WHY THESE RULES EXIST — READ THIS FIRST
 
@@ -70,7 +74,7 @@ After the call succeeds, announce: **"Blank edit done — EDIT BLANK cell update
 |-----------|------|
 | Any cell content edit | **`EditNotebook`** (Cursor-native) — ALWAYS |
 | Cell content edit | **NEVER `notebook_edit_cell`** (MCP tool) |
-| Structural ops (bulk add, move, split, merge, duplicate) | **Ask user first**, then use MCP |
+| Structural ops (bulk add, move, split, merge, duplicate, add cell with content) | **Ask user first**, then use MCP — **except** the **one-time bootstrap** for a brand-new notebook allowed in **`notebook-blank-edit.mdc`** |
 
 The reason `notebook_edit_cell` (MCP) is banned for content: it writes directly to
 disk and bypasses Cursor's editor sync, so the user's open editor view does not
