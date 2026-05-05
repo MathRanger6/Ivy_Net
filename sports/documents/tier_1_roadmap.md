@@ -20,7 +20,7 @@ Optional depth (broader VECTOR notes): `Vector_Master_Theory_and_Modeling_Notes*
 
 ## Pipeline (numbered)
 
-1. **Load the panel** — `load_panel(CFG)` → `df` from `player_season_panel_530.csv` (paths via `sports_pipeline.paths.panel_530_csv()`).
+1. **Load the panel** — `load_panel(CFG)` → `df` from `player_season_panel_530.csv` at **workspace root** `datasets/mbb/` (via `sports_pipeline.paths.panel_530_csv()`, same as **530** conductor).
 
 2. **Set `perf` from a metric** — e.g. PPM via `assign_perf_from_metric(df, PERF_METRIC)` with `PERF_METRIC` defined in **CELL 0**.
 
@@ -39,6 +39,8 @@ Optional depth (broader VECTOR notes): `Vector_Master_Theory_and_Modeling_Notes*
    - `congestion_crowding` — LOO **sum** teammate `perf`.
    - `congestion_crowding_weighted` — optional weighted variant (minutes × `perf` logic); gated by **CELL 0** `COMPUTE_WEIGHTED_CROWDING`.
    - If `MIN_MINUTES_TIER1` is set in **CELL 0**, rows below that **minutes** threshold are dropped **before** group stats.
+
+5. **CELL 4 — Tier 1 EDA** (notebook): On a sample with valid **`PRIMARY_POOL_MODE`** pool column, **`congestion_crowding`**, **`minutes`**, **`Y_draft`**: descriptive `describe()`; **binned** mean draft vs Q using **`assign_poolq_bin_labels`** with **`CFG.ventiles`** and **`CFG.poolq_binning`** (530-style); numpy **LPM** `Y ~ 1 + Q + Q²`; multivariate linear `Y ~ 1 + Q + Q² + C + minutes` when Q is quality (if Q is crowding, **omit duplicate C**); **PD-style** predicted curve over a Q grid with C and minutes at sample medians (linear approx, clipped to [0,1]).
 
 ---
 
@@ -63,6 +65,7 @@ Optional depth (broader VECTOR notes): `Vector_Master_Theory_and_Modeling_Notes*
 | Run gate | `RUN_CELL1` | Environment · imports · panel path |
 | Run gate | `RUN_CELL2` | Load panel · PPM · legacy `poolq_loo` |
 | Run gate | `RUN_CELL3` | Tier 1 mechanism variables |
+| Run gate | `RUN_CELL4` | Tier 1 EDA (bins, LPM, PDP-style Q grid) |
 | Knob | `PERF_METRIC` | Passed to `assign_perf_from_metric` (default `"ppm"`) |
 | Knob | `MIN_MINUTES_TIER1` | Optional row filter before Tier 1 group stats; `None` = full sample |
 | Knob | `PRIMARY_POOL_MODE` | `"quality"` vs `"crowding"` for `tier1_primary_pool_column` (regressions later) |
@@ -74,7 +77,7 @@ Optional depth (broader VECTOR notes): `Vector_Master_Theory_and_Modeling_Notes*
 
 ## Next (placeholder)
 
-- Descriptives, logit/LPM probes, partial dependence on \(Q\) at fixed \(C, O\) — see in-notebook **Roadmap** bullet 3 in CELL 1 markdown; extend this section when CELL 4+ exist.
+- **CELL 5+:** proper logit / `statsmodels`; cluster SEs; season or team FE; richer PDP; export figures to `CFG.exports_dir` if you want parity with **530** PNG exports.
 
 ---
 
@@ -82,5 +85,7 @@ Optional depth (broader VECTOR notes): `Vector_Master_Theory_and_Modeling_Notes*
 
 | Date | Note |
 |------|------|
+| 2026-05-06 | **CELL 4** in 535: binned draft vs Q, quadratic LPM, C + minutes controls, PDP-style Q grid; `RUN_CELL4` in CELL 0. |
+| 2026-05-06 | `paths.project_root` = Ivy_Net workspace root so `datasets/mbb/` matches 530 output (not `sports/datasets/mbb/`). |
 | 2026-05-05 | File lives under `sports/documents/`; contract vs theory section + links to `5-Manuscript`. |
 | 2026-03-31 | Initial file: pipeline steps, recompute rationale, `df` contract, CELL 0 table. |

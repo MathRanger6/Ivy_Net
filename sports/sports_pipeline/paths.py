@@ -1,25 +1,26 @@
 """
 Filesystem layout for the college MBB pipeline.
 
-- **`mbb/`** — working / regenerable CSVs (panel exports, draft diagnostics, …).
-- **`mbb/DO_NOT_ERASE/`** — long-lived inputs: aliases, SR scrape/match, draft register
+- **`datasets/mbb/`** — working / regenerable CSVs (panel exports, draft diagnostics, …);
+  lives at the **workspace root** (same tree as ``530_sports_pipeline.ipynb`` conductor output).
+- **`datasets/mbb/DO_NOT_ERASE/`** — long-lived inputs: aliases, SR scrape/match, draft register
   copies, etc. (see `datasets/mbb/DO_NOT_ERASE/README.txt`).
 
-All functions return absolute `Path` objects anchored at the repo root (the directory
-that contains `datasets/` and `sports_pipeline/`).
+Package file layout: ``<workspace>/sports/sports_pipeline/paths.py``. Workspace root is
+``parents[2]`` (parent of ``sports/``), not ``sports/`` itself.
 """
 
 from __future__ import annotations
 
 from pathlib import Path
 
-# This file lives at repo_root/sports_pipeline/paths.py → parents[1] == repo root.
-_REPO_ROOT = Path(__file__).resolve().parents[1]
+# sports/sports_pipeline/paths.py → parents[1]=sports, parents[2]=workspace (Ivy_Net) root.
+_WORKSPACE_ROOT = Path(__file__).resolve().parents[2]
 
 
 def project_root() -> Path:
-    """Repository root (contains `datasets/mbb/`)."""
-    return _REPO_ROOT
+    """Workspace root: directory that contains ``datasets/mbb/`` and ``sports/sports_pipeline/``."""
+    return _WORKSPACE_ROOT
 
 
 def mbb_dir() -> Path:
