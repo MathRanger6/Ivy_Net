@@ -12,6 +12,7 @@
 
 - `Vector_to_Scout_Tier1_Modeling_Direction.md` — main Tier 1 modeling direction.
 - `tier_1_model.md` — model layer notes.
+- `Tier1_Brifing_Outline.md` — outline answering Alex's May 5 briefing guidance: model components, assumptions, fitting plan, and turning point.
 - `2026_0430_Paper7_feedback.md` — theory vs minimal model; scarcity.
 
 Optional depth (broader VECTOR notes): `Vector_Master_Theory_and_Modeling_Notes*.md`, `Vector_Questions_and_Modeling_Thoughts.md`, `Vector_Evans_Reaction_and_Theoretical_Expansion_Notes.md` — pull excerpts into this roadmap only when a line becomes a **coded rule** or sample definition.
@@ -113,6 +114,7 @@ Keep this section open while working in `535_sports_tier_1.ipynb`. Green items a
 
 | Date | Note |
 | ------ | ------ |
+| 2026-05-06 | Added manuscript briefing outline link for Alex's May 5 guidance: model components, assumptions, fitting plan, and \(Q^*\) turning point. |
 | 2026-05-05 | Added “Where We Have Been / Where We Are Going” dashboard; documented 530 source-of-truth workflow and weighted-crowding CELL 4 behavior. |
 | 2026-05-06 | **CELL 4** in 535: binned draft vs Q, quadratic LPM, C + minutes controls, PDP-style Q grid; `RUN_CELL4` in CELL 0. |
 | 2026-05-06 | `paths.project_root` = Ivy_Net workspace root so `datasets/mbb/` matches 530 output (not `sports/datasets/mbb/`). |
