@@ -87,8 +87,8 @@ if [ ! -f "$CSS_FILE" ]; then
 fi
 
 # Activate conda environment and run conversion (HPC Miniforge + Mac Anaconda)
-# Override env name:   IVY_NET_PDF_ENV=talent_net ./generate_pdf_playwright.sh ...
-# Default: tenure_net if present, else talent_net (legacy Mac).
+# Override env name:   IVY_NET_PDF_ENV=sports_net ./generate_pdf_playwright.sh ...
+# Default: sports_net if present, else tenure_net, else talent_net (legacy Mac).
 init_conda_shell() {
     if [[ -f /opt/anaconda3/etc/profile.d/conda.sh ]]; then
         # shellcheck source=/dev/null
@@ -112,7 +112,7 @@ init_conda_shell() {
 
 if [[ "${IVY_NET_PDF_FORCE_ACTIVATE:-}" != "1" && -n "${CONDA_PREFIX:-}" && -x "${CONDA_PREFIX}/bin/python" ]]; then
     case "${CONDA_DEFAULT_ENV:-}" in
-        tenure_net|talent_net)
+        sports_net|tenure_net|talent_net)
             echo "Using already-activated conda: ${CONDA_PREFIX}"
             CONDA_PYTHON="${CONDA_PREFIX}/bin/python"
             ;;
@@ -128,12 +128,14 @@ if [[ "${_need_activate:-0}" == "1" ]] || [[ -z "${CONDA_PYTHON:-}" ]]; then
     fi
     if [[ -n "${IVY_NET_PDF_ENV:-}" ]]; then
         conda activate "${IVY_NET_PDF_ENV}"
+    elif conda env list | awk '{print $1}' | grep -qx 'sports_net'; then
+        conda activate sports_net
     elif conda env list | awk '{print $1}' | grep -qx 'tenure_net'; then
         conda activate tenure_net
     elif conda env list | awk '{print $1}' | grep -qx 'talent_net'; then
         conda activate talent_net
     else
-        echo "❌ Error: No tenure_net (or talent_net) env. Create tenure_net or set IVY_NET_PDF_ENV."
+        echo "❌ Error: No sports_net, tenure_net, or talent_net env. Create one or set IVY_NET_PDF_ENV."
         exit 1
     fi
     CONDA_PYTHON="${CONDA_PREFIX}/bin/python"
@@ -230,10 +232,13 @@ PYTHON_EOF
 
 # Step 3: Convert HTML to PDF using Playwright (much better page break support)
 echo "Converting HTML to PDF using Playwright..."
-"$CONDA_PYTHON" << PYTHON_EOF
+_PW_LOG="$(mktemp "${TMPDIR:-/tmp}/ivy_net_playwright.XXXXXX.log")"
+if "$CONDA_PYTHON" > "$_PW_LOG" 2>&1 << PYTHON_EOF
 import os
 import shutil
 import sys
+import tempfile
+from contextlib import contextmanager
 from pathlib import Path
 
 html_file = "$HTML_FILE"
@@ -245,41 +250,64 @@ def _playwright_browser_roots():
     roots = []
     if bp:
         roots.append(Path(bp))
+    # macOS default Playwright cache.
+    roots.append(Path.home() / "Library" / "Caches" / "ms-playwright")
+    # Linux/HPC default Playwright cache.
     roots.append(Path.home() / ".cache" / "ms-playwright")
     return roots
 
 
 def _find_playwright_full_chromium_exes():
-    """Full chromium (chrome-linux/chrome), NOT chrome-headless-shell — avoids SIGTRAP on many HPC hosts."""
+    """Full Chromium/Chrome-for-Testing, NOT chrome-headless-shell — avoids SIGTRAP on many HPC hosts."""
     seen = set()
     out = []
     for root in _playwright_browser_roots():
         if not root.is_dir():
             continue
-        # Prefer direct chromium-NNNN/chrome-linux/chrome (fast), then recursive (unusual layouts).
+        # Prefer direct chromium-NNNN layouts (fast), then recursive (unusual layouts).
         subs = sorted(
             [p for p in root.glob("chromium-[0-9]*") if p.is_dir()],
             key=lambda p: p.name,
             reverse=True,
         )
         for sub in subs:
-            exe = sub / "chrome-linux" / "chrome"
-            if exe.is_file() and os.access(exe, os.X_OK):
+            candidates = [
+                sub / "chrome-linux" / "chrome",
+                sub
+                / "chrome-mac-arm64"
+                / "Google Chrome for Testing.app"
+                / "Contents"
+                / "MacOS"
+                / "Google Chrome for Testing",
+                sub
+                / "chrome-mac"
+                / "Google Chrome for Testing.app"
+                / "Contents"
+                / "MacOS"
+                / "Google Chrome for Testing",
+            ]
+            for exe in candidates:
+                if exe.is_file() and os.access(exe, os.X_OK):
+                    s = str(exe)
+                    if s not in seen:
+                        seen.add(s)
+                        out.append(s)
+        recursive_patterns = [
+            "**/chrome-linux/chrome",
+            "**/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing",
+        ]
+        for pattern in recursive_patterns:
+            for exe in sorted(root.glob(pattern), reverse=True):
+                if not exe.is_file() or not os.access(exe, os.X_OK):
+                    continue
+                # Skip anything under headless-shell trees (different binary layout).
+                parts = exe.parts
+                if any("headless" in x.lower() or "shell" in x.lower() for x in parts):
+                    continue
                 s = str(exe)
                 if s not in seen:
                     seen.add(s)
                     out.append(s)
-        for exe in sorted(root.glob("**/chrome-linux/chrome"), reverse=True):
-            if not exe.is_file() or not os.access(exe, os.X_OK):
-                continue
-            # Skip anything under headless-shell trees (different binary layout).
-            parts = exe.parts
-            if any("headless" in x.lower() or "shell" in x.lower() for x in parts):
-                continue
-            s = str(exe)
-            if s not in seen:
-                seen.add(s)
-                out.append(s)
     return out
 
 
@@ -403,39 +431,81 @@ def _launch_chromium(p):
     raise last_err
 
 
+@contextmanager
+def _capture_playwright_output():
+    """
+    Capture fd-level stdout/stderr from Playwright's Node driver.
+
+    Some Playwright installs print CLI usage text during otherwise-successful driver
+    startup. Keep normal script output clean, but replay captured output on failure.
+    """
+    sys.stdout.flush()
+    sys.stderr.flush()
+    old_stdout = os.dup(1)
+    old_stderr = os.dup(2)
+    tmp = tempfile.TemporaryFile(mode="w+b")
+    try:
+        os.dup2(tmp.fileno(), 1)
+        os.dup2(tmp.fileno(), 2)
+        yield tmp
+    finally:
+        sys.stdout.flush()
+        sys.stderr.flush()
+        os.dup2(old_stdout, 1)
+        os.dup2(old_stderr, 2)
+        os.close(old_stdout)
+        os.close(old_stderr)
+        tmp.seek(0)
+
+
 try:
-    from playwright.sync_api import sync_playwright
+    _cap = None
+    _captured_output = ""
+    try:
+        with _capture_playwright_output() as _cap:
+            from playwright.sync_api import sync_playwright
 
-    with sync_playwright() as p:
-        browser, _opts = _launch_chromium(p)
-        try:
-            page = browser.new_page()
+            with sync_playwright() as p:
+                browser, _opts = _launch_chromium(p)
+                try:
+                    page = browser.new_page()
 
-            # Load the HTML file
-            html_path = Path(html_file).absolute()
-            page.goto(html_path.as_uri(), wait_until="networkidle")
+                    # Load the HTML file
+                    html_path = Path(html_file).absolute()
+                    page.goto(html_path.as_uri(), wait_until="networkidle")
 
-            # KaTeX loads from CDN; networkidle + short delay lets it finish rendering
-            page.wait_for_timeout(1200)
-            page.emulate_media(media="print")
+                    # KaTeX loads from CDN; networkidle + short delay lets it finish rendering
+                    page.wait_for_timeout(1200)
+                    page.emulate_media(media="print")
 
-            # Generate PDF with proper page break settings
-            page.pdf(
-                path=pdf_file,
-                format="Letter",
-                margin={
-                    "top": "0.25in",
-                    "right": "0.25in",
-                    "bottom": "0.25in",
-                    "left": "0.25in",
-                },
-                print_background=True,
-                prefer_css_page_size=True,
-            )
-        finally:
-            browser.close()
+                    # Generate PDF with proper page break settings
+                    page.pdf(
+                        path=pdf_file,
+                        format="Letter",
+                        margin={
+                            "top": "0.25in",
+                            "right": "0.25in",
+                            "bottom": "0.25in",
+                            "left": "0.25in",
+                        },
+                        print_background=True,
+                        prefer_css_page_size=True,
+                    )
+                finally:
+                    browser.close()
+            _captured_output = _cap.read().decode("utf-8", errors="replace")
+    except Exception:
+        if _cap is not None:
+            noisy = _cap.read().decode("utf-8", errors="replace")
+            if noisy:
+                print(noisy, end="")
+        raise
+    finally:
+        if _cap is not None:
+            _cap.close()
 
-    print("✅ Successfully created PDF using Playwright")
+    if os.environ.get("IVY_NET_PLAYWRIGHT_VERBOSE", "").strip() == "1" and _captured_output:
+        print(_captured_output, end="")
 
 except ImportError:
     print("❌ Error: Playwright not installed for this Python interpreter:")
@@ -490,12 +560,19 @@ except Exception as e:
         )
     sys.exit(1)
 PYTHON_EOF
-
-if [ $? -ne 0 ]; then
+then
+    if [ "${IVY_NET_PLAYWRIGHT_VERBOSE:-}" = "1" ]; then
+        cat "$_PW_LOG"
+    fi
+    rm -f "$_PW_LOG"
+else
+    cat "$_PW_LOG"
+    rm -f "$_PW_LOG"
     echo "Error: PDF conversion failed"
     exit 1
 fi
 
+echo "✅ Successfully created PDF using Playwright"
 echo "✅ Successfully created PDF: $PDF_FILE"
 if [ "$KEEP_HTML" = true ]; then
     echo "   HTML file: $HTML_FILE (kept for inspection)"
