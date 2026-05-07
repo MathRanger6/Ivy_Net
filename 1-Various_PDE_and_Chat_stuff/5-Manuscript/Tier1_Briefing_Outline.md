@@ -13,6 +13,8 @@ This note directly answers Alex's May 5 guidance for the next briefing:
 
 The goal for tomorrow is not to present the final dissertation model. The goal is to show a disciplined, minimal, fit-able model function that can be connected to the current basketball data and extended later.
 
+Companion narrative: `Tier1_Narrative_Outline.md` gives the fuller story arc: competing local forces, \(L\)-first Tier 1 framing, \(\Lambda\), fitting plan, variable domains, and reference addenda.
+
 ## 1. Unit Of Modeling
 
 Primary unit: \((i,j,t)\), where \(i\) is player, \(j\) is team / local opportunity pool, and \(t\) is season.
@@ -171,7 +173,31 @@ The goal is mechanism sufficiency: can the minimal structure reproduce the obser
 
 ### A5. Shape Comes From Competing Margins
 
-The central mechanism is that the net local-environment term can have competing margins: \(\frac{\partial B(Q)}{\partial Q} > 0\), but at high local pool quality or high congestion, \(\frac{\partial O}{\partial Q} < 0\) or \(\frac{\partial O}{\partial C} < 0\).
+The central mechanism is that the net local-environment term has competing margins:
+
+\[
+L_{\text{net}}(Q)=B(Q)-D(Q)
+\]
+
+where \(B(Q)\) is the benefit side of stronger local peers and \(D(Q)\) is the downside / drag side.
+
+At low-to-moderate local peer quality:
+
+\[
+B'(Q) > D'(Q)
+\]
+
+At high local peer quality:
+
+\[
+D'(Q) > B'(Q)
+\]
+
+The turning point is where:
+
+\[
+B'(Q^*) = D'(Q^*)
+\]
 
 So the advancement probability can rise with local environment at first and fall once the costly part of that same environment dominates.
 
@@ -276,7 +302,8 @@ Fit no model first:
 
 - bin \(Q\),
 - plot mean `Y_draft` by bin,
-- compare `poolq_loo`, `congestion_quality`, plain `congestion_crowding`, and weighted crowding.
+- compare first proxies for \(L\): `poolq_loo` and `congestion_quality`,
+- treat plain `congestion_crowding` and weighted crowding as decomposition diagnostics after the reduced-form shape is clear.
 
 Purpose:
 
@@ -432,7 +459,7 @@ This gives the estimated local-environment level that maximizes predicted advanc
 
 Implement CELL 5 in `sports/535_sports_tier_1.ipynb`:
 
-1. Prepare standardized variables \(Y, A, Q, C, O\).
+1. Prepare standardized variables \(Y, A, L\), starting with \(L=Q\); keep \(C\), weighted \(C\), and \(O\) available as decomposition diagnostics.
 2. Fit minimal diagnostic LPM: \(Y \sim L + L^2 + A\), first with \(L=Q\).
 3. Print coefficients, unclipped predictions, and \(L^*\) / \(Q^*\).
 4. Fit logit/probit equivalent.

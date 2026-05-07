@@ -12,7 +12,8 @@
 
 - `Vector_to_Scout_Tier1_Modeling_Direction.md` — main Tier 1 modeling direction.
 - `tier_1_model.md` — model layer notes.
-- `Tier1_Brifing_Outline.md` — outline answering Alex's May 5 briefing guidance: model components, assumptions, fitting plan, and turning point.
+- `Tier1_Briefing_Outline.md` — outline answering Alex's May 5 briefing guidance: model components, assumptions, fitting plan, and turning point.
+- `Tier1_Narrative_Outline.md` — current narrative flow: competing local forces, \(L\)-first Tier 1 model, \(\Lambda\), fitting plan, variable domains, and reference addenda.
 - `2026_0430_Paper7_feedback.md` — theory vs minimal model; scarcity.
 
 Optional depth (broader VECTOR notes): `Vector_Master_Theory_and_Modeling_Notes*.md`, `Vector_Questions_and_Modeling_Thoughts.md`, `Vector_Evans_Reaction_and_Theoretical_Expansion_Notes.md` — pull excerpts into this roadmap only when a line becomes a **coded rule** or sample definition.
@@ -36,9 +37,9 @@ Keep this section open while working in `535_sports_tier_1.ipynb`. Green items a
 
 ### Next / TODO
 
-- TODO — Decide the Tier 1 core variables: likely start with `congestion_quality` and plain `congestion_crowding`; treat `congestion_crowding_weighted` as exploratory unless it earns a clearer interpretation.
+- TODO — Decide the first empirical proxy for \(L_{ijt}\): likely start with `poolq_loo` / `congestion_quality`; treat `congestion_crowding`, `congestion_crowding_weighted`, and `minutes` as later decomposition diagnostics unless they earn a clearer first-pass role.
 - TODO — Fix or demote the right-panel dashed model curve: current clipped LPM / PD-style curves can be misleading; print unclipped predictions and coefficients before trusting the curve.
-- TODO — Add a cleaner CELL 5 regression block: start with `Y_draft ~ Q + Q² + C + minutes`, then test `Q + C + Q*C + minutes` and appropriate robustness specs.
+- TODO — Add a cleaner CELL 5 regression block: start with \(Y \sim L + L^2 + A\) where \(L\) is first proxied by `poolq_loo` / `congestion_quality`; then add one decomposition diagnostic at a time (`congestion_crowding`, weighted crowding, `minutes`, interactions) after the minimal shape is clear.
 - TODO — Decide binning defaults by purpose: use `equal_width` when matching a 530 export slug; use `quantile` first for Tier 1 mechanism diagnostics so bins are populated.
 - TODO — Add export behavior for 535 figures/tables only after the Tier 1 specs settle enough to save reproducible outputs.
 - TODO — Update theory language after EDA: distinguish reduced-form `poolq_loo` from mechanism variables (`quality`, `crowding`, weighted crowding).
@@ -114,6 +115,7 @@ Keep this section open while working in `535_sports_tier_1.ipynb`. Green items a
 
 | Date | Note |
 | ------ | ------ |
+| 2026-05-07 | Added `Tier1_Narrative_Outline.md` to related theory and updated TODOs to reflect the current \(L\)-first Tier 1 framing with crowding/minutes as decomposition diagnostics. |
 | 2026-05-06 | Added manuscript briefing outline link for Alex's May 5 guidance: model components, assumptions, fitting plan, and \(Q^*\) turning point. |
 | 2026-05-05 | Added “Where We Have Been / Where We Are Going” dashboard; documented 530 source-of-truth workflow and weighted-crowding CELL 4 behavior. |
 | 2026-05-06 | **CELL 4** in 535: binned draft vs Q, quadratic LPM, C + minutes controls, PDP-style Q grid; `RUN_CELL4` in CELL 0. |
