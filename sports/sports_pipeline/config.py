@@ -42,7 +42,7 @@ class PipelineConfig:
     min_minutes: float = 0.0
     #: Number of bins for nonparametric draft-rate vs ``poolq_loo`` EDA (see ``poolq_binning``).
     ventiles: int = 20
-    #: ``quantile`` — ``pd.qcut`` (~equal count per bin; 20 bins = traditional *ventiles*).
+    #: ``quantile`` — rank-based bins (~equal count per bin; robust to winsorized ties).
     #: ``equal_width`` — ``pd.cut`` on the min–max range of ``poolq_loo`` (same idea as 520 ``equal_width``).
     poolq_binning: str = "quantile"
     #: Where PNG/CSV exports from `panel_build.run_ventile_eda` are written.

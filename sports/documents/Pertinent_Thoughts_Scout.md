@@ -116,6 +116,37 @@ Discussion with advisor: add **high school** (or recruiting) data so players are
 
 ---
 
+## Sorting Noise Robustness Thought
+
+**Topic**: Later robustness version for noisy assortative sorting in `537_Sports_Simulation.ipynb`.
+
+**Content to consider including**:
+
+For the first noisy-sorting implementation, use raw Gaussian sorting noise:
+
+`sorting_signal_i = A_i + epsilon_i`, where `epsilon_i ~ Normal(0, SORTING_NOISE_SD)`.
+
+This keeps the first version easy to explain: true ability `A_i` is unchanged, but the pool assignment process observes a noisy version of ability. When `SORTING_NOISE_SD = 0`, sorting is perfectly assortative; as it increases, pool assignment becomes less perfectly ordered.
+
+Later, revisit a relative-noise version:
+
+`epsilon_sd = SORTING_NOISE_FRACTION * sd(A_i)`.
+
+That version may be more portable across different ability distributions because the noise scale adjusts to the observed spread of ability. Hold this for a robustness/sensitivity branch after the raw-noise version is clear.
+
+**Potential placement**:
+
+- Simulation appendix or robustness subsection
+- Notes around noisy sorting in `537_Sports_Simulation.ipynb`
+
+**Key points**:
+
+- Noise is **only for sorting into pools**, not for true ability or promotion weights.
+- Raw `SORTING_NOISE_SD` is easier to teach first.
+- Relative `SORTING_NOISE_FRACTION * sd(A_i)` is the later robustness idea to remember.
+
+---
+
 ## Small Things to Check Later
 
 - Confirm whether **`Y_draft`** should be “ever drafted” vs draft **in or after** season *k* for causal timing stories.

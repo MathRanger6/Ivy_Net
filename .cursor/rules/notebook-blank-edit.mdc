@@ -1,9 +1,19 @@
 ---
-description: Always perform a visible blank edit to Cell 1 before any other notebook edits in a session; MCP bootstrap exception for brand-new notebooks only
+description: Each Agent message resets obligation; first EditNotebook per .ipynb in that turn must be burn-slot; MCP bootstrap exception for brand-new notebooks only
 alwaysApply: true
 ---
 
-# Notebook Blank Edit — Always First (after any bootstrap)
+# Notebook Blank Edit — first edit per Agent interaction
+
+## What counts as a new obligation (“interaction”)
+
+For this rule, **one interaction** = **one user message** submitted in the **Agent** chat (each time you type something and press Enter to send).
+
+- A new user message **starts a fresh obligation**: if you will edit any `.ipynb` in that reply, the burn-slot edit comes **first** for that file (see below).
+- Reads, search, MCP **read/outline** (no cell-body change) **do not** satisfy or replace the burn edit; they can happen before it.
+- **Once per notebook file per interaction**: for each `.ipynb` that receives **`EditNotebook`** in that reply, the **first** `EditNotebook` targeting **that file** must be the visible burn-slot edit only. After that, all other cell edits in that file follow in the same interaction.
+
+If the agent will **not** use `EditNotebook` on any notebook in that reply, **no** burn edit is required.
 
 ## One-time exception — brand-new `.ipynb`
 
@@ -20,14 +30,14 @@ For **`540_tenure_pipeline.ipynb`**, use burn slot at **cell index 3** and follo
 
 ---
 
-# Notebook Blank Edit — session workflow
+# Burn-slot workflow (per notebook, per interaction)
 
-Before making ANY **further** edit to ANY `.ipynb` notebook in a session (after any allowed bootstrap), the **first `EditNotebook` action** must be a visible blank edit to **Cell index 1** (the burn-slot cell) — **except** `540`, which uses index **3** per `jupyter-notebook-workflow.mdc`. This ensures the user can see subsequent edits in the diff view.
+Before any **`EditNotebook`** that changes **cell bodies** or adds **substantive** cells in a given `.ipynb` in the **current** user message’s reply, the **first** `EditNotebook` on **that file** must be a visible blank edit to the burn-slot cell (**Cell index 1**, **except** `540_tenure_pipeline.ipynb` → index **3**). This keeps subsequent edits visible in the diff view.
 
-## Required first action every session
+## Required first `EditNotebook` per file
 
 ```python
-# Read Cell 1 first, then edit it with a visible session marker:
+# Read the burn cell first, then edit it with a visible session marker:
 # Old:
 ##### EDIT BLANK ###### DISCARD
 # session: <previous date>
@@ -39,15 +49,14 @@ Before making ANY **further** edit to ANY `.ipynb` notebook in a session (after 
 
 ## Rules
 
-- After any allowed bootstrap, do this **before** any other **content** change to the notebook in that session.
-- For **`540_tenure_pipeline.ipynb`**, the burn slot is **index 3** — announce: **"Blank edit done — EDIT BLANK cell updated."** For other notebooks (e.g. **`535_sports_tier_1.ipynb`**), burn slot is **index 1** — announce: **"Blank edit done — Cell 1 updated."**
+- **Order**: Burn-slot edit **before** any other cell-body edit in **that** notebook **in this interaction**. Do **not** do substantive edits first and the burn edit last in the same reply.
+- For **`540_tenure_pipeline.ipynb`**, burn slot is **index 3** — announce: **"Blank edit done — EDIT BLANK cell updated."** For other notebooks (e.g. **`535_sports_tier_1.ipynb`**, **`537_Sports_Simulation.ipynb`**), burn slot is **index 1** — announce: **"Blank edit done — Cell 1 updated."**
 - The change must be visually distinct (update the date or topic comment).
-- If the notebook is not being edited in this session, the blank edit is not required.
-- Never skip this step even for "small" edits — the user verifies all changes via diff view.
+- Never skip this step for “small” notebook edits in an interaction where you are editing that file — the user verifies changes via diff view.
 
 ## Tool rules for ALL `.ipynb` notebook edits
 
-- ALL **cell body** edits and **new substantive cells** must be authored with **`EditNotebook`** (Cursor native) after the blank edit — so edits show in the diff view.
+- ALL **cell body** edits and **new substantive cells** must use **`EditNotebook`** (Cursor native) **after** the burn-slot edit for that file in that interaction — so edits show in the diff view.
 - **NEVER use `notebook_edit_cell`** (MCP) — it bypasses the diff view.
 - **`notebook_add_cell`** with real content is treated like smuggling cell bodies through MCP — **do not use** after bootstrap; use **`EditNotebook`** (`is_new_cell: true`) or split work across explicit user-approved steps.
 - **`notebook_bulk_add_cells`**, **`notebook_move_cell`**, **`notebook_split_cell`**, **`notebook_merge_cells`**, **`notebook_duplicate_cell`**: rare structural ops — **ask the user first**, except for the **one-time bootstrap** described at the top of this file.

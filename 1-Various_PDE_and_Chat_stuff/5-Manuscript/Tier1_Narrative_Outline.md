@@ -213,7 +213,21 @@ follows the observed inverted-U as \(Q_{ijt}\) increases.
 
 If it does, then Tier 1 has done its first job: it has represented the core nonlinear phenomenon using a minimal local/global structure.
 
-## 9. The Internal Tension Inside The Local Term
+## 9. Minimal Assumptions For Tier 1
+
+The Tier 1 model needs a small number of assumptions. These are not claims that the world is simple. They are the assumptions that make the first fitted model disciplined enough to explain, test, and extend.
+
+1. **Advancement is globally scarce.** There is a limited amount of distinction available in each period. In basketball, this is represented by the finite number of NBA draft selections.
+2. **Local environments matter.** An individual's chance of receiving global distinction depends partly on the local pool in which the individual develops, competes, and is evaluated.
+3. **The local term can contain competing forces.** The same local pool can create benefits, such as development and credible signaling, and costs, such as congestion, reduced opportunity, and harder individual distinction.
+4. **The first local proxy can be reduced-form.** Tier 1 does not need to separately estimate every local mechanism at first. It can begin with local peer quality \(Q\) as a rolled-up empirical proxy for the net local environment \(L\).
+5. **The individual is excluded from their own local-quality measure.** The first \(Q\) proxy is leave-self-out peer quality, so a player's own performance is not mechanically included in the local peer-quality variable.
+6. **The first test is descriptive and model-based, not fully causal.** The goal is to see whether the reduced-form local term reproduces the inverted-U and yields an interpretable turning point \(Q^*\).
+7. **Later controls and decompositions are extensions, not core Tier 1 assumptions.** Own ability, minutes, crowding, visibility, and recognition can be added after the minimal pattern is established.
+
+Taken together, these assumptions let the model say something precise without overbuilding: local environments are consequential, global distinction is scarce, and the local term may have an internal benefit-versus-drag structure.
+
+## 10. The Internal Tension Inside The Local Term
 
 The next step is to name the competing elements inside the local term without turning them into a large model too soon.
 
@@ -254,7 +268,7 @@ This is the controlled version of the "phase shift" idea. It does not require cl
 
 In later decomposed models, \(B\) may be proxied by peer quality, team strength, and visibility, while \(D\) may be proxied by crowding, minutes/opportunity, within-team rank, and recognition dilution. For Tier 1, this remains a reference direction rather than the first model.
 
-## 10. How Tier 1 Connects To Data
+## 11. How Tier 1 Connects To Data
 
 The next question you asked is how this abstract structure gets fit to data. The first answer should be simple: map each model object to an observable proxy, fit the reduced-form curve, and extract the turning point.
 
@@ -267,6 +281,14 @@ Initial mapping:
 | \(\Lambda_t\) | global distinction capacity | basketball: NBA draft slots in year \(t\) |
 | \(B(Q)-D(Q)\) | net benefit minus downside of local peer quality | inferred from the shape of \(\Pr(Y_i=1)\) over \(Q\), not separately estimated at first |
 | \(A_{ijt}\) | own ability / performance | later control or sorting variable; basketball: own performance metric |
+
+The first basketball diagnostic is the binned draft-rate curve from `535_sports_tier_1.ipynb`.
+
+<p align="center">
+  <img src="../../sports/outputs/tier1_figures/535_tier1_eda_tier1_congestion_quality_quantile_20bins_bins_bars_520_20260507_131250.png" alt="Tier 1 binned draft-rate diagnostic from 535" width="100%">
+</p>
+
+**Figure note.** The left panel bins player-seasons by local peer quality and plots the observed mean draft rate in each bin. The right panel overlays a simple univariate quadratic linear-probability fit, \(Y \sim 1 + Q + Q^2\), evaluated at the bin means. The vertical \(Q^*\) marker is the fitted turning point: the estimated local peer-quality level where the benefit side of the local environment and the congestion/distinction-cost side are approximately balanced. This is not yet the final causal model; it is the first visual check that the reduced-form Tier 1 object can reproduce the inverted-U pattern and produce a concrete point to discuss.
 
 The first empirical move is descriptive:
 
@@ -314,7 +336,7 @@ Later, after this minimal fit is clear, we can open \(L\) into additional pieces
 
 But the first fitting task is not to estimate every component. The first task is to show that the minimal local/global structure can reproduce and quantify the observed nonlinear pattern.
 
-## 11. What Would Count As A Tier 1 Success?
+## 12. What Would Count As A Tier 1 Success?
 
 Tier 1 succeeds if the minimal local/global structure is enough to reproduce and quantify the core pattern without adding every possible mechanism.
 
@@ -346,7 +368,7 @@ This matters because high-ability people often sort into higher-talent local poo
 
 If these conditions hold, then Tier 1 has done its job. It has not explained every mechanism, but it has shown that a minimal model based on local environment and global scarcity can generate the observed nonlinear advancement pattern.
 
-## 12. Variable Domains And Normalization
+## 13. Variable Domains And Normalization
 
 The model also needs each object to have a clear mathematical type. This is the point of specifying variable domains.
 
@@ -361,7 +383,7 @@ The model also needs each object to have a clear mathematical type. This is the 
 
 The practical rule is simple: binary outcomes stay binary, probabilities must stay between 0 and 1, and continuous predictors such as \(Q\), \(L\), and \(A\) should usually be standardized before fitting so that coefficient scales are interpretable and numerically stable.
 
-## 13. Reference Note: Linear Index, Logit, And Probit
+## 14. Reference Note: Linear Index, Logit, And Probit
 
 In the logit/probit version, the model first creates a raw score:
 
@@ -405,7 +427,7 @@ In plain language:
 
 The linear probability model is simpler because it uses the raw score directly as the probability. That makes it easy to inspect, but it can sometimes predict invalid values below 0 or above 1.
 
-## 14. Reference Note: Candidate Decompositions Of \(B\) And \(D\)
+## 15. Reference Note: Candidate Decompositions Of \(B\) And \(D\)
 
 For now:
 
@@ -454,7 +476,7 @@ D(Q) \approx d_1 C + d_2(1-O) + d_3 \text{relative-rank pressure}
 
 But the first Tier 1 task is not to estimate these pieces separately. The first task is to test whether the reduced-form local term can reproduce the inverted-U and produce a stable turning point.
 
-## 15. Addendum: Fitting Plan And Method Refresher
+## 16. Addendum: Fitting Plan And Method Refresher
 
 This addendum restates the fitting plan in one place and defines the estimation terms.
 

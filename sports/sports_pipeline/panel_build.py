@@ -162,22 +162,32 @@ def filter_panel(df: pd.DataFrame, cfg: Any) -> pd.DataFrame:
 
 def assign_poolq_bin_labels(poolq: pd.Series, n_bins: int, mode: str) -> pd.Series:
     """
-    Integer bin labels 0.. on ``poolq`` (``poolq_loo``): ``quantile`` → ``pd.qcut``,
-    ``equal_width`` → ``pd.cut`` on the observed range.
+    Integer bin labels 0.. on ``poolq`` (``poolq_loo``).
+
+    ``quantile`` uses rank-based bins so winsorized / tied edge values do not
+    collapse into oversized first and last bins. ``equal_width`` uses ``pd.cut``
+    on the observed range.
     """
     m = str(mode).strip().lower()
-    s = pd.to_numeric(poolq, errors="coerce")
+    n = int(n_bins)
+    s = pd.Series(pd.to_numeric(poolq, errors="coerce"), index=poolq.index, name=poolq.name)
     if m == "equal_width":
         try:
-            return pd.cut(s, bins=int(n_bins), labels=False, include_lowest=True)
+            cut_labels = pd.cut(s.to_numpy(), bins=n, labels=False, include_lowest=True)
+            return pd.Series(cut_labels, index=s.index, dtype="Int64")
         except (ValueError, TypeError) as e:
             warnings.warn(
                 f"poolq_binning='equal_width' failed ({e!r}); falling back to quantile bins.",
                 UserWarning,
                 stacklevel=2,
             )
-            return pd.qcut(s, q=int(n_bins), labels=False, duplicates="drop")
-    return pd.qcut(s, q=int(n_bins), labels=False, duplicates="drop")
+    out = pd.Series(pd.NA, index=s.index, dtype="Int64")
+    valid = s.notna()
+    if valid.any():
+        ranks = s.loc[valid].rank(method="first").to_numpy()
+        labels = np.floor((ranks - 1.0) * n / len(ranks)).astype(int)
+        out.loc[valid] = np.minimum(labels, n - 1)
+    return out
 
 
 def ventile_table(df: pd.DataFrame, cfg: Any) -> pd.DataFrame:
@@ -244,7 +254,7 @@ def ventile_provenance_lines(
     lines.append(
         f"poolq_loo EDA bins: poolq_binning={bin_mode!r}, ventiles={nv} (number of bins). "
         + (
-            "quantile: ~equal counts per bin (pd.qcut); 20 bins = traditional ventiles."
+            "quantile: rank-based ~equal counts per bin; 20 bins = traditional ventiles."
             if bin_mode == "quantile"
             else "equal_width: equal intervals from min to max poolq_loo (pd.cut)."
         )
