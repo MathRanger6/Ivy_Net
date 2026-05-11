@@ -114,6 +114,26 @@ echo "Stage 1: $j1"
 echo "Stage 2: $j2"
 ```
 
+**How to enter Step 4 (terminal mechanics):**
+
+1. Use a **bash** shell on Rivanna (the default login shell is usually fine).
+2. **`cd`** to **Ivy_Net repo root** first (same as Step 2), so paths like `sports/outputs/...` exist.
+3. Copy the **whole block** above and paste it once. Lines ending in `\` mean “continued on the next line”; the shell runs it as one multi-line command sequence. Press **Enter** after the last line (`echo "Stage 2: $j2"`).
+4. What it does:
+   - **`sbatch --parsable`** prints **only the numeric job ID** (no extra words), so it can be stored in **`j1`** / **`j2`**.
+   - **`--dependency=afterok:JOBID`** tells Slurm: start this job only after that job **finishes with exit code 0**.
+5. The **merge** job is submitted by the third line; Slurm prints its job ID on that line — note it if you want to **`track_slurm.sh MERGE_JOBID`**.
+
+Same logic **without** line breaks (easier to type line-by-line):
+
+```bash
+j1=$(sbatch --parsable sports/outputs/simulation_sweeps/rivanna_stage1_faithful_537.slurm)
+j2=$(sbatch --parsable --dependency=afterok:$j1 sports/outputs/simulation_sweeps/rivanna_stage2_array_faithful_537.slurm)
+sbatch --dependency=afterok:$j2 sports/outputs/simulation_sweeps/rivanna_merge_faithful_537.slurm
+echo "Stage 1: $j1"
+echo "Stage 2: $j2"
+```
+
 Because: Stage 2 needs Stage 1 output, and Merge needs all Stage 2 shard outputs. The dependency chain prevents starting a later stage too early.
 
 Be careful of: do not submit Stage 2 by itself unless `stage1_results.csv` already exists.

@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Rivanna_Faithful_537_Sweep_For_Dummies</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="/home/dzk3ja/Ivy_Net/pdf_styles.css" />
+</head>
+<body>
+<h1 id="rivanna-faithful-537-sweep-for-dummies">Rivanna Faithful 537
+Sweep — For Dummies</h1>
+<p>This guide runs the <strong>faithful 537 simulation sweep</strong> on
+Rivanna. “Faithful” means it uses the current
+<code>537_Sports_Simulation.ipynb</code> mechanics only: no new
+congestion or opportunity penalty terms.</p>
+<h2 id="what-the-rivanna-agent-needs-to-know">What The Rivanna Agent
+Needs To Know</h2>
+<p>If you open a fresh Cursor window on Rivanna, tell the agent:</p>
+<pre class="text"><code>Please run the faithful 537 Rivanna sweep.
+
+Use this runbook:
+sports/documents/Rivanna_Faithful_537_Sweep_For_Dummies.md
+
+First do the preflight checks in that file.
+Then submit Stage 1, Stage 2, and Merge with Slurm dependencies.
+Track the jobs with scripts/track_slurm.sh and squeue.
+Do not edit the model unless I ask.</code></pre>
+<p>The required files are:</p>
+<pre class="text"><code>sports/outputs/simulation_sweeps/faithful_537_sweep.py
+sports/outputs/simulation_sweeps/faithful_537_sweep_rivanna_worker.py
+sports/outputs/simulation_sweeps/rivanna_stage1_faithful_537.slurm
+sports/outputs/simulation_sweeps/rivanna_stage2_array_faithful_537.slurm
+sports/outputs/simulation_sweeps/rivanna_merge_faithful_537.slurm
+scripts/track_slurm.sh
+scripts/clear_slurm.sh</code></pre>
+<h2 id="for-this-sweep-the-simple-step-by-step">For This Sweep: The
+Simple Step-By-Step</h2>
+<h3 id="step-1-on-the-mac-push-only-the-sweep-files">Step 1: On The Mac,
+Push Only The Sweep Files</h3>
+<p>Do:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./scripts/rsync_push_to_hpc.sh</span> sweep</span></code></pre></div>
+<p>Because: Rivanna needs the sweep Python scripts, Slurm scripts, and
+this guide before the jobs can run.</p>
+<p>Be careful of: do <strong>not</strong> use
+<code>./scripts/rsync_push_to_hpc.sh all</code> for this sweep. That
+broad sync can touch unrelated project folders.</p>
+<p>In case of trouble: run a dry run first:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="va">DRY_RUN</span><span class="op">=</span>1 <span class="ex">./scripts/rsync_push_to_hpc.sh</span> sweep</span></code></pre></div>
+<p>The dry run should mention
+<code>sports/outputs/simulation_sweeps/</code>, not
+<code>python_packages/dblp-parser</code> or
+<code>tenure/tenure_pipeline</code>.</p>
+<h3 id="step-2-open-cursor-on-rivanna-and-go-to-the-repo">Step 2: Open
+Cursor On Rivanna And Go To The Repo</h3>
+<p>Do:</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/Ivy_Net</span></code></pre></div>
+<p>Because: the Slurm scripts assume you submit from the repo root,
+where <code>sports/</code>, <code>scripts/</code>, and
+<code>pipe_job.slurm</code> live.</p>
+<p>Be careful of: if your Rivanna repo is not at <code>~/Ivy_Net</code>,
+use the actual repo path.</p>
+<p>In case of trouble: check where you are:</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> sports scripts pipe_job.slurm</span></code></pre></div>
+<h3 id="step-3-run-the-preflight-checks">Step 3: Run The Preflight
+Checks</h3>
+<p>Do:</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> sports/outputs/simulation_sweeps/faithful_537_sweep.py</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> sports/outputs/simulation_sweeps/faithful_537_sweep_rivanna_worker.py</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> sports/outputs/simulation_sweeps/rivanna_stage1_faithful_537.slurm</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> sports/outputs/simulation_sweeps/rivanna_stage2_array_faithful_537.slurm</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> sports/outputs/simulation_sweeps/rivanna_merge_faithful_537.slurm</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> scripts/track_slurm.sh</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load miniforge</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="ex">~/.conda/envs/sports_net/bin/python</span> <span class="at">--version</span></span></code></pre></div>
+<p>Because: this catches missing files or environment problems before
+submitting a multi-hour job chain.</p>
+<p>Be careful of: if <code>sports_net</code> is missing, the scripts may
+fall back to another Python. That might work, but only if it has
+<code>numpy</code> and <code>pandas</code>.</p>
+<p>In case of trouble: either fix the environment on Rivanna or submit
+with a different env name, for example:</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="va">ENV_NAME</span><span class="op">=</span>my_env_name <span class="ex">sbatch</span> sports/outputs/simulation_sweeps/rivanna_stage1_faithful_537.slurm</span></code></pre></div>
+<h3
+id="step-4-submit-stage-1-stage-2-and-merge-in-one-dependency-chain">Step
+4: Submit Stage 1, Stage 2, And Merge In One Dependency Chain</h3>
+<p>Do:</p>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="va">j1</span><span class="op">=</span><span class="va">$(</span><span class="ex">sbatch</span> <span class="at">--parsable</span> <span class="dt">\</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  sports/outputs/simulation_sweeps/rivanna_stage1_faithful_537.slurm<span class="va">)</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="va">j2</span><span class="op">=</span><span class="va">$(</span><span class="ex">sbatch</span> <span class="at">--parsable</span> <span class="at">--dependency</span><span class="op">=</span>afterok:<span class="va">$j1</span> <span class="dt">\</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  sports/outputs/simulation_sweeps/rivanna_stage2_array_faithful_537.slurm<span class="va">)</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> <span class="at">--dependency</span><span class="op">=</span>afterok:<span class="va">$j2</span> <span class="dt">\</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  sports/outputs/simulation_sweeps/rivanna_merge_faithful_537.slurm</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;Stage 1: </span><span class="va">$j1</span><span class="st">&quot;</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;Stage 2: </span><span class="va">$j2</span><span class="st">&quot;</span></span></code></pre></div>
+<p><strong>How to enter Step 4 (terminal mechanics):</strong></p>
+<ol type="1">
+<li>Use a <strong>bash</strong> shell on Rivanna (the default login
+shell is usually fine).</li>
+<li><strong><code>cd</code></strong> to <strong>Ivy_Net repo
+root</strong> first (same as Step 2), so paths like
+<code>sports/outputs/...</code> exist.</li>
+<li>Copy the <strong>whole block</strong> above and paste it once. Lines
+ending in <code>\</code> mean “continued on the next line”; the shell
+runs it as one multi-line command sequence. Press <strong>Enter</strong>
+after the last line (<code>echo "Stage 2: $j2"</code>).</li>
+<li>What it does:
+<ul>
+<li><strong><code>sbatch --parsable</code></strong> prints <strong>only
+the numeric job ID</strong> (no extra words), so it can be stored in
+<strong><code>j1</code></strong> /
+<strong><code>j2</code></strong>.</li>
+<li><strong><code>--dependency=afterok:JOBID</code></strong> tells
+Slurm: start this job only after that job <strong>finishes with exit
+code 0</strong>.</li>
+</ul></li>
+<li>The <strong>merge</strong> job is submitted by the third line; Slurm
+prints its job ID on that line — note it if you want to
+<strong><code>track_slurm.sh MERGE_JOBID</code></strong>.</li>
+</ol>
+<p>Same logic <strong>without</strong> line breaks (easier to type
+line-by-line):</p>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="va">j1</span><span class="op">=</span><span class="va">$(</span><span class="ex">sbatch</span> <span class="at">--parsable</span> sports/outputs/simulation_sweeps/rivanna_stage1_faithful_537.slurm<span class="va">)</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="va">j2</span><span class="op">=</span><span class="va">$(</span><span class="ex">sbatch</span> <span class="at">--parsable</span> <span class="at">--dependency</span><span class="op">=</span>afterok:<span class="va">$j1</span> sports/outputs/simulation_sweeps/rivanna_stage2_array_faithful_537.slurm<span class="va">)</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> <span class="at">--dependency</span><span class="op">=</span>afterok:<span class="va">$j2</span> sports/outputs/simulation_sweeps/rivanna_merge_faithful_537.slurm</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;Stage 1: </span><span class="va">$j1</span><span class="st">&quot;</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;Stage 2: </span><span class="va">$j2</span><span class="st">&quot;</span></span></code></pre></div>
+<p>Because: Stage 2 needs Stage 1 output, and Merge needs all Stage 2
+shard outputs. The dependency chain prevents starting a later stage too
+early.</p>
+<p>Be careful of: do not submit Stage 2 by itself unless
+<code>stage1_results.csv</code> already exists.</p>
+<p>In case of trouble: check the queue:</p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">-u</span> dzk3ja</span></code></pre></div>
+<h3 id="step-5-track-the-jobs">Step 5: Track The Jobs</h3>
+<p>Do:</p>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./scripts/track_slurm.sh</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">-u</span> dzk3ja</span></code></pre></div>
+<p>Because: <code>track_slurm.sh</code> tails the latest Slurm error
+log, while <code>squeue</code> shows whether the jobs are queued,
+running, or finished.</p>
+<p>Be careful of: <code>Ctrl+C</code> only stops watching a log. It does
+not cancel the Slurm job.</p>
+<p>In case of trouble: cancel a bad job only if needed:</p>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">scancel</span> JOBID</span></code></pre></div>
+<h3 id="step-6-check-results-on-rivanna">Step 6: Check Results On
+Rivanna</h3>
+<p>Do:</p>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-lh</span> sports/outputs/simulation_sweeps/rivanna_faithful_537/</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> sports/outputs/simulation_sweeps/rivanna_faithful_537/stage2_shards/ <span class="kw">|</span> <span class="fu">head</span></span></code></pre></div>
+<p>Because: the final results should land under
+<code>rivanna_faithful_537/</code>, with merged candidate files and
+plots.</p>
+<p>Be careful of: if <code>stage2_shards/</code> is empty, Stage 2
+probably has not started, failed early, or is still queued.</p>
+<p>In case of trouble: inspect the relevant Slurm logs:</p>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span> <span class="at">-f</span> slurm-537_stage1-<span class="pp">*</span>.out</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span> <span class="at">-f</span> slurm-537_stage2-<span class="pp">*</span>_0.out</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span> <span class="at">-f</span> slurm-537_merge-<span class="pp">*</span>.out</span></code></pre></div>
+<h3 id="step-7-on-the-mac-pull-only-the-sweep-results-back">Step 7: On
+The Mac, Pull Only The Sweep Results Back</h3>
+<p>Do:</p>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./scripts/rsync_pull_from_hpc.sh</span> sweep</span></code></pre></div>
+<p>Because: this brings back generated sweep results without using Git
+and without pulling source code back from Rivanna over your local
+edits.</p>
+<p>Be careful of: do <strong>not</strong> use
+<code>./scripts/rsync_pull_from_hpc.sh all</code> for this sweep.</p>
+<p>In case of trouble: dry run first:</p>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="va">DRY_RUN</span><span class="op">=</span>1 <span class="ex">./scripts/rsync_pull_from_hpc.sh</span> sweep</span></code></pre></div>
+<h3 id="step-8-inspect-the-candidate-file">Step 8: Inspect The Candidate
+File</h3>
+<p>Do:</p>
+<pre class="text"><code>sports/outputs/simulation_sweeps/rivanna_faithful_537/grouped_candidates.csv</code></pre>
+<p>Because: this is the first file to inspect for stable right-side
+downturn candidates.</p>
+<p>Be careful of: one lucky seed is not enough. Look for rows where the
+grouped/stability columns show the downturn repeats across seeds.</p>
+<p>In case of trouble: open:</p>
+<pre class="text"><code>sports/outputs/simulation_sweeps/rivanna_faithful_537/README.md</code></pre>
+<p>That file should summarize what the merge step found.</p>
+<h2 id="do-i-run-the-stage-files-in-succession">Do I Run The Stage Files
+In Succession?</h2>
+<p>Yes. The stages depend on each other:</p>
+<ol type="1">
+<li><strong>Stage 1</strong> runs a broad screen and writes
+<code>stage1_results.csv</code>.</li>
+<li><strong>Stage 2</strong> reads <code>stage1_results.csv</code>, then
+runs a Slurm array to verify candidate settings across seeds.</li>
+<li><strong>Merge</strong> reads all Stage 2 shard files and creates the
+final ranked candidate table and plots.</li>
+</ol>
+<p>The easiest way is to submit them with Slurm dependencies, so each
+starts only after the prior stage finishes successfully.</p>
+<h2 id="start-in-cursor-on-rivanna">Start In Cursor On Rivanna</h2>
+<p>Open Rivanna using <code>Rivanna.code-workspace</code>.</p>
+<p>In the Rivanna terminal, go to the repo root, meaning the folder that
+contains <code>sports/</code>, <code>scripts/</code>, and
+<code>pipe_job.slurm</code>.</p>
+<div class="sourceCode" id="cb20"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/Ivy_Net</span></code></pre></div>
+<p>If your repo is somewhere else on Rivanna, <code>cd</code> there
+instead.</p>
+<h2 id="preflight-checks-on-rivanna">Preflight Checks On Rivanna</h2>
+<p>Before submitting, run these from the repo root:</p>
+<div class="sourceCode" id="cb21"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> sports/outputs/simulation_sweeps/faithful_537_sweep.py</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> sports/outputs/simulation_sweeps/faithful_537_sweep_rivanna_worker.py</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> sports/outputs/simulation_sweeps/rivanna_stage1_faithful_537.slurm</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> sports/outputs/simulation_sweeps/rivanna_stage2_array_faithful_537.slurm</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> sports/outputs/simulation_sweeps/rivanna_merge_faithful_537.slurm</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> scripts/track_slurm.sh</span></code></pre></div>
+<p>Check that Rivanna can see Python in the <code>sports_net</code>
+environment:</p>
+<div class="sourceCode" id="cb22"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load miniforge</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="ex">~/.conda/envs/sports_net/bin/python</span> <span class="at">--version</span></span></code></pre></div>
+<p>If that path does not exist, find Python with:</p>
+<div class="sourceCode" id="cb23"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span> python</span></code></pre></div>
+<p>The Slurm scripts will fall back to <code>command -v python</code>,
+but the preferred environment is <code>sports_net</code>.</p>
+<p>Optional quick import check:</p>
+<div class="sourceCode" id="cb24"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">~/.conda/envs/sports_net/bin/python</span> <span class="at">-</span> <span class="op">&lt;&lt;&#39;PY&#39;</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="st">import numpy, pandas</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="st">print(&quot;numpy&quot;, numpy.__version__)</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="st">print(&quot;pandas&quot;, pandas.__version__)</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="st">try:</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="st">    import matplotlib</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="st">    print(&quot;matplotlib&quot;, matplotlib.__version__)</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="st">except ModuleNotFoundError:</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="st">    print(&quot;matplotlib missing; numeric sweep can still run, plots may be skipped&quot;)</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="op">PY</span></span></code></pre></div>
+<p>If files are missing on Rivanna, go back to the Mac Cursor window and
+push only the sweep folder:</p>
+<div class="sourceCode" id="cb25"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./scripts/rsync_push_to_hpc.sh</span> sweep</span></code></pre></div>
+<p>Do <strong>not</strong> use
+<code>./scripts/rsync_push_to_hpc.sh all</code> for this sweep. The
+<code>all</code> shortcut is a broad project sync and includes unrelated
+folders such as <code>python_packages/dblp-parser</code>.</p>
+<h2 id="submit-the-whole-chain">Submit The Whole Chain</h2>
+<p>From the repo root:</p>
+<div class="sourceCode" id="cb26"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="va">j1</span><span class="op">=</span><span class="va">$(</span><span class="ex">sbatch</span> <span class="at">--parsable</span> <span class="dt">\</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  sports/outputs/simulation_sweeps/rivanna_stage1_faithful_537.slurm<span class="va">)</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="va">j2</span><span class="op">=</span><span class="va">$(</span><span class="ex">sbatch</span> <span class="at">--parsable</span> <span class="at">--dependency</span><span class="op">=</span>afterok:<span class="va">$j1</span> <span class="dt">\</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  sports/outputs/simulation_sweeps/rivanna_stage2_array_faithful_537.slurm<span class="va">)</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="ex">sbatch</span> <span class="at">--dependency</span><span class="op">=</span>afterok:<span class="va">$j2</span> <span class="dt">\</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  sports/outputs/simulation_sweeps/rivanna_merge_faithful_537.slurm</span></code></pre></div>
+<p>That submits:</p>
+<ul>
+<li>Stage 1 as one job.</li>
+<li>Stage 2 as a 64-task array.</li>
+<li>Merge as one final job after all Stage 2 tasks succeed.</li>
+</ul>
+<p>Print the job IDs so you can track them:</p>
+<div class="sourceCode" id="cb27"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;Stage 1: </span><span class="va">$j1</span><span class="st">&quot;</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;Stage 2: </span><span class="va">$j2</span><span class="st">&quot;</span></span></code></pre></div>
+<p>The final merge job ID is printed by the last <code>sbatch</code>
+command.</p>
+<h2 id="monitor-progress">Monitor Progress</h2>
+<p>Use the existing tracker:</p>
+<div class="sourceCode" id="cb28"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./scripts/track_slurm.sh</span></span></code></pre></div>
+<p>With no argument, it tails the most recent <code>slurm-*.err</code>
+file. With a job ID, it tails that job’s <code>.err</code> file:</p>
+<div class="sourceCode" id="cb29"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./scripts/track_slurm.sh</span> JOBID</span></code></pre></div>
+<p>Or check the queue:</p>
+<div class="sourceCode" id="cb30"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="ex">squeue</span> <span class="at">-u</span> dzk3ja</span></code></pre></div>
+<p>Or tail logs directly. Stage 1 and Merge write one log each:</p>
+<div class="sourceCode" id="cb31"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span> <span class="at">-f</span> slurm-537_stage1-<span class="pp">*</span>.out</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span> <span class="at">-f</span> slurm-537_merge-<span class="pp">*</span>.out</span></code></pre></div>
+<p>Stage 2 is an array job, so it writes one log per array task:</p>
+<div class="sourceCode" id="cb32"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span> <span class="at">-f</span> slurm-537_stage2-<span class="pp">*</span>_0.out</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span> <span class="at">-f</span> slurm-537_stage2-<span class="pp">*</span>_0.err</span></code></pre></div>
+<p>Press <code>Ctrl+C</code> to stop watching a log. That does
+<strong>not</strong> cancel the job.</p>
+<p>To cancel a job:</p>
+<div class="sourceCode" id="cb33"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="ex">scancel</span> JOBID</span></code></pre></div>
+<p>To clean old Slurm logs before a new run:</p>
+<div class="sourceCode" id="cb34"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./scripts/clear_slurm.sh</span></span></code></pre></div>
+<p>Use that only if you no longer need the old logs.</p>
+<h2 id="where-results-land">Where Results Land</h2>
+<p>Rivanna outputs land here:</p>
+<pre class="text"><code>sports/outputs/simulation_sweeps/rivanna_faithful_537/</code></pre>
+<p>Important files after completion:</p>
+<pre class="text"><code>stage1_results.csv
+stage2_results_merged.csv
+grouped_candidates.csv
+candidate_plots/
+README.md</code></pre>
+<p>The file to inspect first is:</p>
+<pre class="text"><code>sports/outputs/simulation_sweeps/rivanna_faithful_537/grouped_candidates.csv</code></pre>
+<p>Look for rows where:</p>
+<pre class="text"><code>moderate_stable = True</code></pre>
+<p>That means the setting produced a stable moderate right-side downturn
+under the rule we chose.</p>
+<p>During the run, quick progress checks:</p>
+<div class="sourceCode" id="cb39"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-lh</span> sports/outputs/simulation_sweeps/rivanna_faithful_537/</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> sports/outputs/simulation_sweeps/rivanna_faithful_537/stage2_shards/ <span class="kw">|</span> <span class="fu">head</span></span></code></pre></div>
+<h2 id="syncing-between-mac-and-rivanna">Syncing Between Mac And
+Rivanna</h2>
+<p>The rsync shortcut for this job is:</p>
+<pre class="text"><code>sweep</code></pre>
+<p>Push code/scripts to Rivanna:</p>
+<div class="sourceCode" id="cb41"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./scripts/rsync_push_to_hpc.sh</span> sweep</span></code></pre></div>
+<p>Pull results back to your Mac:</p>
+<div class="sourceCode" id="cb42"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./scripts/rsync_pull_from_hpc.sh</span> sweep</span></code></pre></div>
+<p>Generated results are gitignored, but rsync can still move them.</p>
+<p>Important safety rule:</p>
+<ul>
+<li>Use <code>./scripts/rsync_push_to_hpc.sh sweep</code> to send sweep
+code/scripts to Rivanna.</li>
+<li>Use <code>./scripts/rsync_pull_from_hpc.sh sweep</code> to bring
+generated sweep results back.</li>
+<li>Do <strong>not</strong> use broad <code>all</code> syncs for the
+sweep run.</li>
+<li>Use <code>DRY_RUN=1</code> before a sync when unsure:</li>
+</ul>
+<div class="sourceCode" id="cb43"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="va">DRY_RUN</span><span class="op">=</span>1 <span class="ex">./scripts/rsync_push_to_hpc.sh</span> sweep</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="va">DRY_RUN</span><span class="op">=</span>1 <span class="ex">./scripts/rsync_pull_from_hpc.sh</span> sweep</span></code></pre></div>
+<p>Rsync does not know Git history. The sweep shortcut is intentionally
+directional: push excludes generated results, and pull brings back
+generated results only so it does not overwrite sweep source code on the
+Mac.</p>
+<h2 id="if-i-accidentally-ran-a-broad-sync">If I Accidentally Ran A
+Broad Sync</h2>
+<p>If you accidentally ran:</p>
+<div class="sourceCode" id="cb44"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./scripts/rsync_push_to_hpc.sh</span> all</span></code></pre></div>
+<p>and it started pushing unrelated files, stop it with
+<code>Ctrl+C</code>.</p>
+<p>For this sweep, <code>all</code> is not the right command. Use:</p>
+<div class="sourceCode" id="cb45"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./scripts/rsync_push_to_hpc.sh</span> sweep</span></code></pre></div>
+<p>The warning below is from SSH and is not the immediate problem:</p>
+<pre class="text"><code>WARNING: connection is not using a post-quantum key exchange algorithm.</code></pre>
+<p>The real problem is that <code>all</code> can sync unrelated project
+trees. We specifically do not want accidental DBLP XML pushes or broad
+code/data overwrites while preparing this sweep.</p>
+<h3 id="on-rivanna-check-for-a-partial-dblp-transfer">On Rivanna: Check
+For A Partial DBLP Transfer</h3>
+<p>If the accidental sync reached <code>dblp.xml</code> and you
+interrupted it, check Rivanna for partial temp files:</p>
+<div class="sourceCode" id="cb47"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-lh</span> ~/Ivy_Net/python_packages/dblp-parser/dblp.xml<span class="pp">*</span> <span class="dt">\</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  ~/Ivy_Net/python_packages/dblp-parser/.dblp.xml<span class="pp">*</span> <span class="dt">\</span></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2</span><span class="op">&gt;</span>/dev/null</span></code></pre></div>
+<p>Normal <code>rsync</code> usually writes a hidden temporary file
+first and renames it only after a successful transfer. That means
+interrupting usually does <strong>not</strong> replace the existing
+remote <code>dblp.xml</code>, but it can leave a hidden partial temp
+file.</p>
+<p>If you see a hidden temp file like <code>.dblp.xml.*</code>, remove
+only that temp file:</p>
+<div class="sourceCode" id="cb48"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-f</span> ~/Ivy_Net/python_packages/dblp-parser/.dblp.xml<span class="pp">*</span></span></code></pre></div>
+<p>Do <strong>not</strong> delete the real <code>dblp.xml</code> unless
+you intentionally want to remove the full DBLP dump.</p>
+<h3 id="on-the-mac-use-dry-runs-before-syncing">On The Mac: Use Dry Runs
+Before Syncing</h3>
+<p>Before pushing or pulling when unsure:</p>
+<div class="sourceCode" id="cb49"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="va">DRY_RUN</span><span class="op">=</span>1 <span class="ex">./scripts/rsync_push_to_hpc.sh</span> sweep</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="va">DRY_RUN</span><span class="op">=</span>1 <span class="ex">./scripts/rsync_pull_from_hpc.sh</span> sweep</span></code></pre></div>
+<p>The dry run should show only:</p>
+<pre class="text"><code>sports/outputs/simulation_sweeps/</code></pre>
+<p>If it shows <code>python_packages/dblp-parser</code>,
+<code>tenure/tenure_pipeline</code>, or another unrelated tree, stop and
+do not run the real command.</p>
+<h3 id="git-vs-rsync-mental-model">Git vs Rsync Mental Model</h3>
+<p>Use Git for code and history. Use rsync for generated
+data/results.</p>
+<p>Git understands commits, branches, and conflict detection. Rsync only
+compares files and paths. It can overwrite a newer local file with a
+remote file if you ask it to pull that path. That is why the sweep pull
+command is intentionally narrow: it pulls generated sweep outputs only
+and avoids pulling sweep source code back from Rivanna.</p>
+<p>Safe commands for this sweep:</p>
+<div class="sourceCode" id="cb51"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./scripts/rsync_push_to_hpc.sh</span> sweep</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./scripts/rsync_pull_from_hpc.sh</span> sweep</span></code></pre></div>
+<p>Avoid for this sweep:</p>
+<div class="sourceCode" id="cb52"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./scripts/rsync_push_to_hpc.sh</span> all</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./scripts/rsync_pull_from_hpc.sh</span> all</span></code></pre></div>
+<h2 id="can-i-delete-the-old-local-results-file">Can I Delete The Old
+Local Results File?</h2>
+<p>Yes. The old local file:</p>
+<pre class="text"><code>sports/outputs/simulation_sweeps/faithful_537_sweep_results.jsonl</code></pre>
+<p>came from the aborted local run. It is safe to delete if you are
+switching to the Rivanna run.</p>
+<p>The Rivanna run writes new outputs under:</p>
+<pre class="text"><code>sports/outputs/simulation_sweeps/rivanna_faithful_537/</code></pre>
+<h2 id="common-problems">Common Problems</h2>
+<h3 id="stage1_results.csv-missing"><code>stage1_results.csv</code>
+missing</h3>
+<p>Stage 2 needs Stage 1 output. Run Stage 1 first, or use the
+dependency chain above.</p>
+<h3 id="sports_net-not-found"><code>sports_net</code> not found</h3>
+<p>The Slurm scripts default to:</p>
+<div class="sourceCode" id="cb55"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="va">ENV_NAME</span><span class="op">=</span><span class="st">&quot;</span><span class="va">${ENV_NAME</span><span class="op">:-</span>sports_net<span class="va">}</span><span class="st">&quot;</span></span></code></pre></div>
+<p>If your Rivanna env has a different name:</p>
+<div class="sourceCode" id="cb56"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="va">ENV_NAME</span><span class="op">=</span>my_env_name <span class="ex">sbatch</span> <span class="dt">\</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>  sports/outputs/simulation_sweeps/rivanna_stage1_faithful_537.slurm</span></code></pre></div>
+<p>Do the same for Stage 2 and Merge.</p>
+<h3 id="i-changed-the-number-of-shards">I changed the number of
+shards</h3>
+<p>If you edit Stage 2 from 64 shards to another number, make the Slurm
+array and <code>N_SHARDS</code> match.</p>
+<p>For example, 128 shards:</p>
+<div class="sourceCode" id="cb57"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --array=0-127</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="va">N_SHARDS</span><span class="op">=</span>128 <span class="ex">sbatch</span> <span class="dt">\</span></span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>  sports/outputs/simulation_sweeps/rivanna_stage2_array_faithful_537.slurm</span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a><span class="va">N_SHARDS</span><span class="op">=</span>128 <span class="ex">sbatch</span> <span class="dt">\</span></span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>  sports/outputs/simulation_sweeps/rivanna_merge_faithful_537.slurm</span></code></pre></div>
+</body>
+</html>

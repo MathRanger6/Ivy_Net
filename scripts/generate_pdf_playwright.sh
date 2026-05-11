@@ -5,9 +5,13 @@
 #
 # Host troubleshooting (Linux/HPC): If Chromium exits with SIGTRAP / TargetClosedError:
 #   export IVY_NET_CHROMIUM_PATH=/path/to/google-chrome   # or chromium-browser
-# This script auto-tries Playwright's FULL chromium (~/.cache/ms-playwright/chromium-*/chrome-linux/chrome)
+# This script auto-tries Playwright's FULL chromium
+# (~/.cache/ms-playwright/chromium-*/chrome-linux64/chrome or …/chrome-linux/chrome)
 # before chrome-headless-shell (often SIGTRAP on EL8-class login nodes).
-#   export IVY_NET_PLAYWRIGHT_SINGLE_PROCESS=1   # append --single-process to stubborn hosts
+#   export IVY_NET_PLAYWRIGHT_SINGLE_PROCESS=1   # append --single-process early (all variants)
+#   export IVY_NET_PLAYWRIGHT_USE_NO_ZYGOTE=1   # optional; default OFF (can SIGTRAP headless-shell)
+#   export IVY_NET_PLAYWRIGHT_BUNDLED_SINGLE_PROCESS=1   # rarely: --single-process on bundled chromium only
+#   export IVY_NET_PLAYWRIGHT_SINGLE_PROCESS_BEFORE_BUNDLED=0   # skip auto single-process on full Chromium (default: on)
 #   export IVY_NET_PLAYWRIGHT_CHROMIUM_EXTRA_ARGS="--foo --bar"
 #   export IVY_NET_PLAYWRIGHT_AUTO_INSTALL=1     # after a failed run, run: same-python -m playwright install chromium
 #
@@ -20,7 +24,8 @@
 #
 # During install you may see (repeated): "BEWARE: your OS is not officially supported …
 # downloading fallback build for ubuntu24.04-x64" — normal on RHEL 8 / Rocky / Rivanna login nodes.
-# Full chromium (~/.cache/ms-playwright/chromium-*/chrome-linux/chrome) usually works anyway.
+# On many Rivanna nodes that cache binary still hits SIGTRAP ("Trace/breakpoint trap"); use a Mac for
+# this script, set IVY_NET_CHROMIUM_PATH to a host Chrome if you have one, or use generate_pdf_pandoc.sh .
 #
 set -euo pipefail
 
@@ -262,17 +267,40 @@ def _find_playwright_full_chromium_exes():
     """Full Chromium/Chrome-for-Testing, NOT chrome-headless-shell — avoids SIGTRAP on many HPC hosts."""
     seen = set()
     out = []
+
+    def _headless_shell_revisions(r: Path):
+        revs = set()
+        for p in r.glob("chromium_headless_shell-*"):
+            if p.is_dir():
+                suffix = p.name.split("-")[-1]
+                if suffix.isdigit():
+                    revs.add(suffix)
+        return revs
+
+    def _sort_chromium_dirs(r: Path, subs: list):
+        """Prefer chromium-REV when chromium_headless_shell-REV exists (matches Playwright's driver revision)."""
+        preferred = _headless_shell_revisions(r)
+
+        def keyfn(p: Path):
+            rev = p.name.rsplit("-", 1)[-1]
+            try:
+                n = int(rev)
+            except ValueError:
+                n = 0
+            if rev in preferred:
+                return (0, n)
+            return (1, -n)
+
+        return sorted(subs, key=keyfn)
+
     for root in _playwright_browser_roots():
         if not root.is_dir():
             continue
-        # Prefer direct chromium-NNNN layouts (fast), then recursive (unusual layouts).
-        subs = sorted(
-            [p for p in root.glob("chromium-[0-9]*") if p.is_dir()],
-            key=lambda p: p.name,
-            reverse=True,
-        )
+        raw_subs = [p for p in root.glob("chromium-[0-9]*") if p.is_dir()]
+        subs = _sort_chromium_dirs(root, raw_subs)
         for sub in subs:
             candidates = [
+                sub / "chrome-linux64" / "chrome",
                 sub / "chrome-linux" / "chrome",
                 sub
                 / "chrome-mac-arm64"
@@ -294,6 +322,7 @@ def _find_playwright_full_chromium_exes():
                         seen.add(s)
                         out.append(s)
         recursive_patterns = [
+            "**/chrome-linux64/chrome",
             "**/chrome-linux/chrome",
             "**/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing",
         ]
@@ -323,13 +352,22 @@ def _has_only_headless_shell():
 def _launch_chromium(p):
     extra_env = os.environ.get("IVY_NET_PLAYWRIGHT_CHROMIUM_EXTRA_ARGS", "")
     extra_args = [x for x in extra_env.split() if x.strip()]
+    # Extra flags for explicit Chrome/Chromium paths only — NOT for Playwright's bundled headless-shell
+    # (mixing --no-zygote / --single-process with headless-shell often yields SIGTRAP on RHEL-class hosts).
     base_args = [
         "--disable-gpu",
         "--disable-software-rasterizer",
         "--disable-accelerated-video-decode",
         "--disable-accelerated-video-encode",
         "--disable-background-networking",
+        "--disable-dev-shm-usage",
     ]
+    if os.environ.get("IVY_NET_PLAYWRIGHT_USE_NO_ZYGOTE", "").strip() in (
+        "1",
+        "true",
+        "yes",
+    ):
+        base_args.append("--no-zygote")
     launch_args = base_args + extra_args
     single_proc = os.environ.get("IVY_NET_PLAYWRIGHT_SINGLE_PROCESS", "").strip() == "1"
 
@@ -339,13 +377,9 @@ def _launch_chromium(p):
         or ""
     ).strip()
 
-    def opts_variants(path_kw=None):
-        """Yield launch kwargs dicts for one executable or bundled launcher."""
-        shells = []
-        if path_kw:
-            shells.append({**path_kw, "headless": True, "chromium_sandbox": False})
-        else:
-            shells.append({"headless": True, "chromium_sandbox": False})
+    def opts_variants(path_kw):
+        """Launch kwargs for an explicit executable_path or channel — full HPC arg list."""
+        shells = [{**path_kw, "headless": True, "chromium_sandbox": False}]
 
         variants = []
         for base in shells:
@@ -373,6 +407,41 @@ def _launch_chromium(p):
                 )
         return variants
 
+    def bundled_launch_attempts():
+        """
+        Last resort: Playwright-managed chromium (often chrome-headless-shell).
+        Do not inject launch_args — our HPC flags break headless-shell on some kernels.
+        """
+        out = [
+            {"headless": True, "chromium_sandbox": False},
+            {
+                "headless": True,
+                "chromium_sandbox": False,
+                "ignore_default_args": ["--enable-unsafe-swiftshader"],
+            },
+        ]
+        if os.environ.get("IVY_NET_PLAYWRIGHT_BUNDLED_SINGLE_PROCESS", "").strip() in (
+            "1",
+            "true",
+            "yes",
+        ):
+            out.extend(
+                [
+                    {
+                        "headless": True,
+                        "chromium_sandbox": False,
+                        "args": ["--single-process"],
+                    },
+                    {
+                        "headless": True,
+                        "chromium_sandbox": False,
+                        "args": ["--single-process"],
+                        "ignore_default_args": ["--enable-unsafe-swiftshader"],
+                    },
+                ]
+            )
+        return out
+
     attempts = []
 
     if user_exe:
@@ -396,30 +465,34 @@ def _launch_chromium(p):
     for fc in full_list:
         attempts.extend(opts_variants({"executable_path": fc}))
 
-    # Extra tries: newest full chromium with --single-process (helps some locked-down login nodes).
+    # Last resort before bundled headless-shell: single-process each full Chromium (HPC / EL8).
     if full_list:
-        fc0 = full_list[0]
-        sp_args = launch_args + ["--single-process"]
-        attempts.extend(
-            [
-                {
-                    "executable_path": fc0,
-                    "headless": True,
-                    "chromium_sandbox": False,
-                    "args": sp_args,
-                    "ignore_default_args": ["--enable-unsafe-swiftshader"],
-                },
-                {
-                    "executable_path": fc0,
-                    "headless": True,
-                    "chromium_sandbox": False,
-                    "args": sp_args,
-                },
-            ]
-        )
+        auto_sp = os.environ.get(
+            "IVY_NET_PLAYWRIGHT_SINGLE_PROCESS_BEFORE_BUNDLED", "1"
+        ).strip() not in ("0", "false", "no")
+        if auto_sp:
+            sp_base = launch_args + ["--single-process"]
+            for fc in full_list:
+                attempts.extend(
+                    [
+                        {
+                            "executable_path": fc,
+                            "headless": True,
+                            "chromium_sandbox": False,
+                            "args": sp_base,
+                            "ignore_default_args": ["--enable-unsafe-swiftshader"],
+                        },
+                        {
+                            "executable_path": fc,
+                            "headless": True,
+                            "chromium_sandbox": False,
+                            "args": sp_base,
+                        },
+                    ]
+                )
 
-    # Last resort: Playwright default (often chrome-headless-shell — SIGTRAP on some clusters).
-    attempts.extend(opts_variants(None))
+    # Last resort: Playwright default browser only — no custom args (see bundled_launch_attempts).
+    attempts.extend(bundled_launch_attempts())
 
     last_err = None
     for i, kw in enumerate(attempts):
@@ -533,10 +606,10 @@ except Exception as e:
             )
         print(
             f"{hint_shell}"
-            "\nℹ️  No full Chromium found under ~/.cache/ms-playwright/**/chrome-linux/chrome .\n"
+            "\nℹ️  No full Chromium found under ~/.cache/ms-playwright/chromium-*/ (chrome-linux64/chrome or chrome-linux/chrome).\n"
             f"   Run (same Python as this script — required):\n"
             f"      {sys.executable} -m playwright install chromium\n"
-            "   That adds chromium-NNNN/chrome-linux/chrome (large download). "
+            "   That adds chromium-NNNN/chrome-linux64/chrome (or chrome-linux/chrome; large download). "
             "Then re-run this PDF script.\n"
             "   Or set IVY_NET_CHROMIUM_PATH to system google-chrome / chromium.\n"
             "   Or try:  export IVY_NET_PLAYWRIGHT_SINGLE_PROCESS=1"
@@ -556,8 +629,10 @@ except Exception as e:
     else:
         print(
             "\nℹ️  Full Chromium exists but launch still failed — try:\n"
-            "   export IVY_NET_PLAYWRIGHT_SINGLE_PROCESS=1\n"
-            "   export IVY_NET_CHROMIUM_PATH=/path/to/google-chrome"
+            "   export IVY_NET_CHROMIUM_PATH=/path/to/google-chrome   # module-loaded Chrome on Rivanna, if any\n"
+            "   export IVY_NET_PLAYWRIGHT_USE_NO_ZYGOTE=1            # only if an admin suggests it\n"
+            "   Generate the PDF on your laptop instead of this node.\n"
+            "   Ubuntu-distributed Chromium often SIGTRAPs on RHEL 8–class login nodes; a host-built Chrome may work."
         )
     sys.exit(1)
 PYTHON_EOF
