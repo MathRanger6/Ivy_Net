@@ -1,0 +1,17 @@
+{
+  "ability": "A",
+  "additive": 0.1,
+  "binning_mode": "pool_equal_width",
+  "bins": 20,
+  "min_A_promote": 0.275,
+  "n_indiv": 1000,
+  "noise": 0.125,
+  "person_x_binning": "equal_count",
+  "pool": "B",
+  "pool_bins": 10,
+  "runs": 500,
+  "score": "local_rank_plus_ability",
+  "use_batch": false,
+  "view": "pool_global",
+  "winner": "A"
+}

@@ -30,9 +30,11 @@ In `540_tenure_pipeline.ipynb`, cell **index 3** is the burn slot:
 
 ```python
 ##### EDIT BLANK ###### DISCARD
-# session: 2026-04-15 — Cell 9: log_bin param ...
-# session: 2026-04-14 — ...
+# session: 2026-04-15 14:30 — Cell 9: log_bin param ...
+# session: 2026-04-15 09:12 — ...
 ```
+
+Use **`YYYY-MM-DD HH:MM`** (local 24h) after the date on each `# session:` line, same as **`.cursor/rules/notebook-blank-edit.mdc`**, so entries sort and read clearly.
 
 - It is a **code cell** (not markdown).
 - It is a **session log**: each entry records what changed in that pass.
@@ -53,12 +55,12 @@ Add one new `# session:` line at the TOP of the burn cell's content:
 ```
 old_string:
   ##### EDIT BLANK ###### DISCARD
-  # session: 2026-04-15 — <previous entry>
+  # session: 2026-04-15 14:30 — <previous entry>
 
 new_string:
   ##### EDIT BLANK ###### DISCARD
-  # session: YYYY-MM-DD — <brief summary of THIS session's changes>
-  # session: 2026-04-15 — <previous entry>
+  # session: YYYY-MM-DD HH:MM — <brief summary of THIS session's changes>
+  # session: 2026-04-15 14:30 — <previous entry>
 ```
 
 The session summary should be a short phrase: what stage/cell you changed and why.

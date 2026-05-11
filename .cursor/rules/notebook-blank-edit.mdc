@@ -40,12 +40,23 @@ Before any **`EditNotebook`** that changes **cell bodies** or adds **substantive
 # Read the burn cell first, then edit it with a visible session marker:
 # Old:
 ##### EDIT BLANK ###### DISCARD
-# session: <previous date>
+# session: <previous YYYY-MM-DD HH:MM> — <old topic>
 
 # New:
 ##### EDIT BLANK ###### DISCARD
-# session: <today's date> — <brief topic>
+# session: <YYYY-MM-DD HH:MM> — <brief topic>
 ```
+
+Use **local time** in **24-hour** form (`HH:MM`), e.g. `2026-05-11 13:07`. When editing, obtain a fresh timestamp (e.g. shell `date '+%Y-%m-%d %H:%M'`) so the burn cell reflects **when** the row was written.
+
+### Session line vs history stack (`# - Session marker:`)
+
+- Use the **authoritative calendar date the user gives** for “today” when they state it; do not invent a different day. **Time** should still be filled in from the actual moment of the edit (or the user’s stated time if they give one).
+- **Do not delete, dedupe, or reorder** existing burn-cell lines unless the user explicitly asks. The user prunes the log.
+- The line **`# session: …`** directly under `##### EDIT BLANK` is the **current** interaction marker (update it each time).
+- **Timestamp in each new history row:** After **`# - Session marker:`**, use **`YYYY-MM-DD HH:MM`** (same local-time rule as `# session:`), then **` — `**, then the note. Do not use an older “event” date for new rows—even when the note describes work from another day.
+- When preserving the **superseded** `# session: …` text, **copy it** to a new history line **`# - Session marker: <YYYY-MM-DD HH:MM> — <same topic text as after the old session em dash>`** (timestamp = when you append the row), then write the new `# session:` line.
+- **All new `# - Session marker:` lines are appended at the bottom** of the burn cell (after the last existing `# - Session marker:` line). Never insert a new batch **above** older markers or start a second “stack” at the top.
 
 ## Rules
 
@@ -57,6 +68,7 @@ Before any **`EditNotebook`** that changes **cell bodies** or adds **substantive
 ## Tool rules for ALL `.ipynb` notebook edits
 
 - ALL **cell body** edits and **new substantive cells** must use **`EditNotebook`** (Cursor native) **after** the burn-slot edit for that file in that interaction — so edits show in the diff view.
+- **Never without asking first:** do not change cell bodies by patching the raw `.ipynb` (shell one-liners, `sed`, Python that `json.load`/`dump`s the notebook, etc.). That bypasses Cursor’s per-cell red/green diff. If the user explicitly approves a bulk JSON patch for a defined task, you may use it; otherwise use **`EditNotebook`**.
 - **NEVER use `notebook_edit_cell`** (MCP) — it bypasses the diff view.
 - **`notebook_add_cell`** with real content is treated like smuggling cell bodies through MCP — **do not use** after bootstrap; use **`EditNotebook`** (`is_new_cell: true`) or split work across explicit user-approved steps.
 - **`notebook_bulk_add_cells`**, **`notebook_move_cell`**, **`notebook_split_cell`**, **`notebook_merge_cells`**, **`notebook_duplicate_cell`**: rare structural ops — **ask the user first**, except for the **one-time bootstrap** described at the top of this file.

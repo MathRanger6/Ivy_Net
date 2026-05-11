@@ -7,7 +7,7 @@ This note describes **`537_Sports_Simulation.ipynb`**, **`sports/sim_config.py`*
 ## Quick start
 
 1. Edit **`sports/sim_config.py`** (population size, pools, seeds, defaults).
-2. In Jupyter: run **Cell 0** (optional), **Cell 1** (helpers), **Cell 10** (widgets).
+2. In Jupyter: run **Cell 0** (optional), **Cell 1** (helpers), **Cell 10** (widgets). **Cell 11** (optional): PPM histogram from **`datasets/mbb/player_season_panel_530.csv`**.
 3. Cell 10 calls **`reload_sim_config()`** at the top; re-run it after saving `sim_config.py` to refresh globals and widget sync when using batch lock.
 
 Batch diagnostic cells (**2–9**) were dropped from the live notebook on 2026-05-08. A freeze of the earlier version lives at **`obsolete_files/sports_gameplan_old/537_Sports_Simulation_pre_archive_8MAy.ipynb`**.
@@ -62,6 +62,8 @@ Weights passed into **winner draw** are built from:
 | **B** | Bernoulli | Each person promoted independently with probability capped by `min(normalized_weight * K, 1)` (see notebook `choose_winners`). |
 | **C** | Top-K | Deterministic: highest **K** weights win. |
 
+Anyone with **true** \(A_i <\) **`MIN_ABILITY_FOR_PROMOTION`** gets promotion weight **0** before the draw, so they cannot be selected. If too few people pass the cutoff in a run, **fewer than K** may be promoted for modes **A** and **C**.
+
 ---
 
 ## Pool assignment (`pool` / `LOCAL_POOL_ASSIGNMENT` patterns)
@@ -78,11 +80,43 @@ Caption under plots switches to "noisy assortative / disassortative" when **SORT
 
 ---
 
+## Cell 10: widgets (reference)
+
+Order is **top → bottom** as in the notebook UI (roughly: global options, then plot/bins, then simulation scales, then **Run / refresh**).
+
+| UI label (ipywidgets `description`) | Control | Maps to / internal | Persist key (`sports/cell10_playground_state.json`) |
+|------------------------------------|---------|---------------------|------------------------------------------------------|
+| *EDA blurb* | HTML | — | — |
+| **Batch lock: N, runs, bins, pool bins, min A promote ← sim_config** | Checkbox | `INTERACTIVE_USE_MAIN_SCALES` default | `use_batch` |
+| **Binning** | Dropdown | **`individual_qcut`** / **`pool_equal_count`** / **`pool_equal_width`** | `binning_mode` |
+| **Plot (x-axis)** | Dropdown | **`pool_local`** / **`pool_global`** / **`pool_A`** / **`nopool_global`** | `view` |
+| **A_i distribution** | Dropdown | **`A`** / **`B`** / **`C`** → `ABILITY_DISTRIBUTION_CHOICE` | `ability` |
+| **Winner draw** | Dropdown | **`A`** / **`B`** / **`C`** → `WINNER_SELECTION_CHOICE` | `winner` |
+| **Min A to promote** | FloatSlider [0, 1] | **`MIN_ABILITY_FOR_PROMOTION`** | `min_A_promote` |
+| **Sorting noise sd** | FloatSlider | **`SORTING_NOISE_SD`**; max from **`INTERACTIVE_SORTING_NOISE_MAX`** | `noise` |
+| **ADDITIVE w (local-rank share)** | FloatSlider [0, 1] | **`ADDITIVE_LOCAL_RANK_WEIGHT`**; **disabled** when promotion score is **Local rank only** | `additive` |
+| **Runs (playground)** | IntSlider | **`INTERACTIVE_N_RUNS`**; batch lock → **`N_RUNS`** | `runs` |
+| **N individuals** | IntSlider | **`INTERACTIVE_N_INDIVIDUALS`**; batch lock → **`N_INDIVIDUALS`** | `n_indiv` |
+| **Person bins (#)** | IntSlider | **`INTERACTIVE_N_BINS`**; batch lock → **`N_BINS`**. **Disabled** unless **Binning** = Individuals | `bins` |
+| **Person x edges** | Dropdown | **`equal_count`** / **`equal_width`** → `summarize_by_bins(..., person_binning=...)`. **Disabled** unless **Binning** = Individuals | `person_x_binning` |
+| **Pool–talent bins (K)** | IntSlider | **`INTERACTIVE_N_POOL_AGG_BINS`**; batch lock → **`N_POOL_AGG_BINS`**. **Disabled** unless **Binning** is a **Pools:** mode | `pool_bins` |
+| **Pool assignment** | Dropdown | **`A`** / **`B`** / **`C`** (random / assortative / disassortative) | `pool` |
+| **Promotion score** | Dropdown | **`local_rank`** / **`local_rank_plus_ability`** | `score` |
+| **Run / refresh** | Button | Triggers redraw | — |
+
+**Persistence:** On each successful plot refresh, Cell 10 writes the knob dict to **`sports/cell10_playground_state.json`** (path relative to the kernel working directory; repo-root `cwd` is assumed—see notebook intro). Delete that file to restore pure **sim_config** defaults on the next Cell 10 run.
+
+**Batch lock:** When checked, Cell 10 **syncs** **N individuals**, **Runs**, **Person bins**, **Pool–talent bins**, and **Min A to promote** from **`sim_config.py`** and **disables** those sliders until you unlock.
+
+---
+
 ## Cell 10: binning modes (how the x-axis is built)
 
-### A) Individuals: `pd.qcut` on **x**
+### A) Individuals: bin **x** (person-level rows)
 
-- **Person bins** slider (or **`N_BINS`** when batch lock): number of **equal-count** quantile bins over **all person-rows** in the simulation output, on the chosen x column (`local_rank_score`, `global_rank_score`, or `A`).
+- **Binning** dropdown (Cell 10): **Individuals** = slice the plotted **x** into bins over all person-rows (`local_rank_score`, `global_rank_score`, or `A`).
+- **Person x edges** (Cell 10): **equal count** uses rank + `pd.qcut`; **equal width** uses `pd.cut` on \[min(x), max(x)\] in `summarize_by_bins` — same **Person bins** count, different edge rule.
+- **Person bins** slider (or **`N_BINS`** when batch lock): number of bins on **x**.
 - Plot: **line** (`plot_bin_summary`): x ≈ bin mean of x, y = mean `promoted` in bin.
 
 ### B) Pools: **equal pool count** per bin (`method="equal_count"`)
@@ -90,14 +124,15 @@ Caption under plots switches to "noisy assortative / disassortative" when **SORT
 - **Pool–talent bins** **K** (or **`N_POOL_AGG_BINS`** with batch lock).
 - **Within each run:** compute each pool's mean **A**; **sort pools** by that mean; split pool IDs into **K** contiguous blocks with **`numpy.array_split`** (as close to equal **number of pools per bin** as possible).
 - **Constraint:** need **`N_POOLS ≥ K`**.
-- **Across runs:** average bin-level mean **A** and promotion rate (see `summarize_by_pool_mean_A_bins`).
-- Plot: **bars** Q1…QK (`plot_pool_A_bin_summary`) with Q1 = lowest mean-talent bin.
+- **Across runs:** average promotion rate and **mean leave-one-out peer A** in each bin (`summarize_by_pool_mean_A_bins`; column `poolq_loo` per row — same *role* as empirical **`poolq_loo`**).
+- **Plot:** **line** (`plot_pool_A_bin_summary`): **x** = mean **`poolq_loo`** in the pool–talent bin, **y** = mean `promoted`. There is **no separate UI toggle** — choose **Binning →** a **Pools:** option in Cell 10 (and a **pooled** plot view).
 
 ### C) Pools: **equal width** on mean A (`method="equal_width"`)
 
 - Same **K**, but **within each run** build **K** equal-width intervals from **min** to **max** of **pool mean A** (`pd.cut`).
-- **Some intervals may contain zero pools** in a given run; those bins vanish or carry no mass for that run—fewer than **K** bars can appear after averaging.
+- **Some intervals may contain zero pools** in a given run; those bins vanish or carry no mass for that run—fewer than **K** points can appear after averaging.
 - Use when you want bins comparable to **equal-width** talent bands rather than equal team counts.
+- **Plot:** same as (B): **x** = mean LOO peer **A** in bin, not Q1…QK bar positions.
 
 ---
 
@@ -105,9 +140,9 @@ Caption under plots switches to "noisy assortative / disassortative" when **SORT
 
 | Knob | Primary location | Notes |
 |------|----------------|-------|
-| **N, K, N_POOLS, seeds, N_BINS, N_POOL_AGG_BINS, noise default, w default** | `sim_config.py` | Reload via Cell 0 / Cell 10 start or `reload_sim_config()`. |
-| **Batch lock** | Cell 10 checkbox | When on: **N**, **runs**, **both bin counts** track `N_INDIVIDUALS`, `N_RUNS`, `N_BINS`, `N_POOL_AGG_BINS`. |
-| **Ability, winner draw, pool mode, promotion score, w, noise, plot view, binning mode** | Cell 10 widgets | Override config for interactive EDA without editing file (except **N_POOLS**, **K** still from config unless you change file). |
+| **N, K, N_POOLS, seeds, N_BINS, N_POOL_AGG_BINS, noise default, w default, min A for promotion** | `sim_config.py` | Reload via Cell 0 / Cell 10 start or `reload_sim_config()`. |
+| **Batch lock** | Cell 10 checkbox | When on: **N**, **runs**, **both bin counts**, **min A to promote** track `N_INDIVIDUALS`, `N_RUNS`, `N_BINS`, `N_POOL_AGG_BINS`, `MIN_ABILITY_FOR_PROMOTION`. |
+| **Ability, winner draw, pool mode, promotion score, w, noise, min A cutoff, plot view, binning mode** | Cell 10 widgets | Override config for interactive EDA without editing file (except **N_POOLS**, **K** still from config unless you change file). |
 | **Figure size** | `FIG_PLAYGROUND_EDA_INCHES` in `sim_config.py` | Inches (width, height) for the single EDA figure. |
 
 ---
@@ -116,8 +151,8 @@ Caption under plots switches to "noisy assortative / disassortative" when **SORT
 
 | Path | Role |
 |------|------|
-| `sports/sim_config.py` | **`RUN_CELL1`**, **`RUN_CELL_PLAYGROUND`**, **N**, **K**, **N_POOLS**, **N_BINS**, **N_POOL_AGG_BINS**, seeds, figure size, default A/B/C choices, sorting noise default, additive **w** default. |
-| `sports/537_Sports_Simulation.ipynb` | **Cell 1:** helpers (`simulate_population_rows`, binning, plotting). **Cell 10:** widgets. |
+| `sports/sim_config.py` | **`RUN_CELL1`**, **`RUN_CELL_PLAYGROUND`**, **`RUN_CELL11`**, **N**, **K**, **N_POOLS**, **N_BINS**, **N_POOL_AGG_BINS**, **`MIN_ABILITY_FOR_PROMOTION`**, seeds, figure size, default A/B/C choices, sorting noise default, additive **w** default. |
+| `sports/537_Sports_Simulation.ipynb` | **Cell 1:** helpers. **Cell 10:** playground widgets. **Cell 11:** optional PPM histogram from **`player_season_panel_530.csv`**. Optional state: **`sports/cell10_playground_state.json`**. |
 | `obsolete_files/sports_gameplan_old/537_Sports_Simulation_pre_archive_8MAy.ipynb` | Snapshot **before** batch cells 2–9 were removed from the live notebook (2026-05-08). |
 | `sports/documents/537_Manual.md` | This document. |
 
@@ -130,7 +165,7 @@ Caption under plots switches to "noisy assortative / disassortative" when **SORT
 | `NameError` for helpers | Run **Cell 1** (`RUN_CELL1 = True`). |
 | Pool binning + no pools | Choose a **pooled** plot view or switch binning to individuals. |
 | "N_POOLS must be ≥ K" | **Equal-count** pool binning only; lower **K** or raise **N_POOLS** in `sim_config.py`. |
-| Fewer than **K** pool bars (equal width) | Some width bins empty in some runs—normal for **equal-width** on sparse pool means. |
+| Fewer than **K** pool points (equal width) | Some width bins empty in some runs—normal for **equal-width** on sparse pool means. |
 
 ---
 

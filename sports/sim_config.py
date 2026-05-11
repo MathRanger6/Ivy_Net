@@ -11,9 +11,10 @@ Edit this file, then re-run **Cell 10** (or **Cell 0**) so ``reload_sim_config()
 # ``obsolete_files/sports_gameplan_old/537_Sports_Simulation_pre_archive_8MAy.ipynb``
 RUN_CELL1 = True  # Imports and simulation helpers (required for Cell 10)
 RUN_CELL_PLAYGROUND = True  # Cell 10 — interactive EDA widgets
+RUN_CELL11 = True  # Cell 11 — optional PPM histogram / draft overlay from panel_530 CSV
 
 # --- Simulation size -----------------------------------------------------------
-RANDOM_SEED = 27569507
+RANDOM_SEED = 27876507
 N_INDIVIDUALS = 1_000
 N_WINNERS = 50
 N_POOLS = 50
@@ -68,6 +69,10 @@ SORTING_NOISE_SD = 0.01
 
 # Additive blend: score = w * local_rank_score + (1 - w) * A_i.
 ADDITIVE_LOCAL_RANK_WEIGHT = 0.0
+
+# Individuals with true A_i below this value cannot be promoted: their weights
+# are zeroed before the winner draw (fewer than K promotions if not enough pass).
+MIN_ABILITY_FOR_PROMOTION = 0.0
 
 # --- Interactive playground (Cell 10) -----------------------------------------
 # Single-panel figure size (width, height) in inches — nearly square so the plot
