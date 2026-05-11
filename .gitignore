@@ -100,6 +100,14 @@ slurm-*.out
 slurm-*.err
 slurm-*-output.ipynb
 
+# Sports 537 simulation sweep outputs (sync with Rivanna, don't commit)
+sports/outputs/simulation_sweeps/faithful_537_sweep_results.jsonl
+sports/outputs/simulation_sweeps/faithful_537_sweep_stage*_results.csv
+sports/outputs/simulation_sweeps/faithful_537_sweep_grouped_candidates.csv
+sports/outputs/simulation_sweeps/faithful_537_sweep_README.md
+sports/outputs/simulation_sweeps/candidate_plots/
+sports/outputs/simulation_sweeps/rivanna_faithful_537/
+
 # Generated HTML from md-to-pdf conversion (source .md is versioned; HTML is intermediate)
 tenure/documents/*.html
 
