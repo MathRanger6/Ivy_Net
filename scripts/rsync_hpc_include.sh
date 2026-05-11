@@ -7,7 +7,8 @@
 #
 # Default targets (for the "all" shortcut):
 #   tenure/tenure_pipeline   — code + all generated data outputs (with excludes below)
-#   python_packages/dblp-parser  — XML dump + DTD (multi-GB; only sync when needed)
+# Do not include DBLP XML dumps in "all"; sync those manually and intentionally.
+# Sweep shortcut:
 #   sports/outputs/simulation_sweeps — 537 sweep code up, result files back
 #
 # Exclude logic (applied to EVERY push and pull):
@@ -43,9 +44,10 @@ REMOTE="${HPC_USER}@${HPC_HOST}"
 # Default relative paths (under repo root) for "all" shortcut.
 IVY_RSYNC_DEFAULT_TARGETS=(
   "tenure/tenure_pipeline"
-  "python_packages/dblp-parser"
-  "sports/outputs/simulation_sweeps"
 )
+
+# Narrow shortcut for the faithful 537 sweep.
+IVY_RSYNC_SWEEP_TARGET="sports/outputs/simulation_sweeps"
 
 # Excludes applied to EVERY rsync (push + pull).
 _IVY_RSYNC_COMMON_EXCLUDES=(
@@ -59,6 +61,9 @@ _IVY_RSYNC_COMMON_EXCLUDES=(
   "--exclude=.ipynb_checkpoints/"
   "--exclude=.DS_Store"
   "--exclude=*.html"                   # intermediate HTML from md-to-pdf conversion
+  "--exclude=dblp.xml"                  # multi-GB DBLP dump — never sync accidentally
+  "--exclude=dblp.xml.gz"               # multi-GB DBLP dump — never sync accidentally
+  "--exclude=dblp.xml.gz.md5"           # companion checksum — sync manually if needed
 )
 
 # Extra excludes for PUSH (Mac → HPC): don't overwrite HPC-generated large data
@@ -127,6 +132,32 @@ ivy_rsync_pull() {
   mkdir -p "${dst}"
   rsync "${RSYNC_OPTS[@]}" \
     "${_IVY_RSYNC_COMMON_EXCLUDES[@]}" \
+    "${src}" "${dst}"
+  echo "==> Done."
+}
+
+# Usage: ivy_rsync_pull_sweep
+#   Pulls generated faithful 537 sweep outputs only. It deliberately does not pull
+#   sweep source code back from HPC, because rsync is not Git and can overwrite
+#   local edits if the remote copy is newer.
+ivy_rsync_pull_sweep() {
+  _ivy_rsync_build_opts
+  local rel="${IVY_RSYNC_SWEEP_TARGET}"
+  local src="${REMOTE}:${HPC_REPO}/${rel}/"
+  local dst="${REPO_ROOT}/${rel}/"
+  echo "==> Pull faithful 537 sweep results only"
+  echo "    from: ${src}"
+  echo "    to:   ${dst}"
+  mkdir -p "${dst}"
+  rsync "${RSYNC_OPTS[@]}" \
+    "${_IVY_RSYNC_COMMON_EXCLUDES[@]}" \
+    "--include=/rivanna_faithful_537/***" \
+    "--include=/faithful_537_sweep_results.jsonl" \
+    "--include=/faithful_537_sweep_stage*_results.csv" \
+    "--include=/faithful_537_sweep_grouped_candidates.csv" \
+    "--include=/faithful_537_sweep_README.md" \
+    "--include=/candidate_plots/***" \
+    "--exclude=*" \
     "${src}" "${dst}"
   echo "==> Done."
 }

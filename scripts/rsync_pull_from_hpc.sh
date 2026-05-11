@@ -5,6 +5,7 @@
 #   ./scripts/rsync_pull_from_hpc.sh
 #   ./scripts/rsync_pull_from_hpc.sh tenure/tenure_pipeline
 #   ./scripts/rsync_pull_from_hpc.sh python_packages/dblp-parser
+#   ./scripts/rsync_pull_from_hpc.sh sweep
 #   ./scripts/rsync_pull_from_hpc.sh all
 # Dry run: DRY_RUN=1 ./scripts/rsync_pull_from_hpc.sh
 #
@@ -25,6 +26,8 @@ if [[ "${1:-}" == "all" ]]; then
   for rel in "${IVY_RSYNC_DEFAULT_TARGETS[@]}"; do
     _run "${rel}"
   done
+elif [[ "${1:-}" == "sweep" ]]; then
+  ivy_rsync_pull_sweep
 else
   _run "${1:-tenure/tenure_pipeline}"
 fi

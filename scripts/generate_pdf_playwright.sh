@@ -232,7 +232,8 @@ PYTHON_EOF
 
 # Step 3: Convert HTML to PDF using Playwright (much better page break support)
 echo "Converting HTML to PDF using Playwright..."
-_PW_LOG="$(mktemp "${TMPDIR:-/tmp}/ivy_net_playwright.XXXXXX.log")"
+_PW_LOG_DIR="$(mktemp -d "${TMPDIR:-/tmp}/ivy_net_playwright.XXXXXX")"
+_PW_LOG="${_PW_LOG_DIR}/playwright.log"
 if "$CONDA_PYTHON" > "$_PW_LOG" 2>&1 << PYTHON_EOF
 import os
 import shutil
@@ -564,10 +565,10 @@ then
     if [ "${IVY_NET_PLAYWRIGHT_VERBOSE:-}" = "1" ]; then
         cat "$_PW_LOG"
     fi
-    rm -f "$_PW_LOG"
+    rm -rf "$_PW_LOG_DIR"
 else
     cat "$_PW_LOG"
-    rm -f "$_PW_LOG"
+    rm -rf "$_PW_LOG_DIR"
     echo "Error: PDF conversion failed"
     exit 1
 fi
