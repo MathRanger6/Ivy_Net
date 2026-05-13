@@ -36,6 +36,24 @@ and fall back to `python` on PATH.
 
 ## Submit From Repo Root
 
+### One file (like `pipe_job.slurm`)
+
+From the **repository root** (same directory as `pipe_job.slurm`):
+
+```bash
+sbatch sim_job.slurm
+```
+
+That driver job submits **Stage 1 array → Merge Stage 1 → Stage 2 array → final merge** and uses `sbatch --wait` on each step so one `sbatch` submission runs the full pipeline. Override shard counts if needed:
+
+```bash
+N_STAGE1_SHARDS=64 N_SHARDS=64 sbatch sim_job.slurm
+```
+
+The driver needs a long enough `#SBATCH --time` (default **12 hours**) because it stays active until all child jobs finish.
+
+### Manual dependency chain
+
 On Rivanna, `cd` to the repository root (the directory containing `sports/`), then use a dependency chain so **Merge Stage 1** runs only after **all** Stage 1 array tasks finish:
 
 ```bash

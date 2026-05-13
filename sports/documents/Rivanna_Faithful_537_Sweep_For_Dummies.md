@@ -100,6 +100,16 @@ ENV_NAME=my_env_name sbatch sports/outputs/simulation_sweeps/rivanna_stage1_fait
 
 ### Step 4: Submit Stage 1 Array, Stage 1 Merge, Stage 2 Array, Final Merge
 
+**One submission (like `pipe_job.slurm`):** From the **Ivy_Net repo root**, if `sim_job.slurm` is present (see runbook), you can run the full dependency chain with:
+
+```bash
+sbatch sim_job.slurm
+```
+
+Optional: `N_STAGE1_SHARDS=64 N_SHARDS=64 ENV_NAME=sports_net sbatch sim_job.slurm`. The driver job holds a long wall time while it `sbatch --wait`s each child step.
+
+**Manual chain (equivalent):**
+
 Do:
 
 ```bash
