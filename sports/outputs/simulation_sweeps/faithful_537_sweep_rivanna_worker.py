@@ -3,6 +3,8 @@
 
 Usage:
   python faithful_537_sweep_rivanna_worker.py stage1
+  python faithful_537_sweep_rivanna_worker.py stage1-shard --shard-id 0 --n-shards 64
+  python faithful_537_sweep_rivanna_worker.py merge-stage1 --n-shards 64
   python faithful_537_sweep_rivanna_worker.py stage2-shard --shard-id 0 --n-shards 64
   python faithful_537_sweep_rivanna_worker.py merge --n-shards 64
 """
@@ -23,6 +25,7 @@ import faithful_537_sweep as sweep
 
 BASE = Path(__file__).resolve().parent
 RIVANNA_DIR = BASE / "rivanna_faithful_537"
+STAGE1_SHARD_DIR = RIVANNA_DIR / "stage1_shards"
 SHARD_DIR = RIVANNA_DIR / "stage2_shards"
 PLOT_DIR = RIVANNA_DIR / "candidate_plots"
 STAGE1_CSV = RIVANNA_DIR / "stage1_results.csv"
@@ -95,6 +98,55 @@ def run_stage1(reset: bool) -> None:
             print(f"stage1 {idx:,}/{len(scenarios):,}; best tail drop={best:.3f}", flush=True)
     write_csv(STAGE1_CSV, rows)
     print(f"Wrote {STAGE1_CSV}", flush=True)
+
+
+def run_stage1_shard(shard_id: int, n_shards: int, reset: bool) -> None:
+    RIVANNA_DIR.mkdir(parents=True, exist_ok=True)
+    STAGE1_SHARD_DIR.mkdir(parents=True, exist_ok=True)
+    shard_csv = STAGE1_SHARD_DIR / f"stage1_shard_{shard_id:04d}_of_{n_shards:04d}.csv"
+    shard_jsonl = STAGE1_SHARD_DIR / f"stage1_shard_{shard_id:04d}_of_{n_shards:04d}.jsonl"
+    if reset:
+        shard_csv.unlink(missing_ok=True)
+        shard_jsonl.unlink(missing_ok=True)
+    all_scenarios = list(sweep.iter_stage1())
+    scenarios = [sc for i, sc in enumerate(all_scenarios) if i % n_shards == shard_id]
+    print(
+        f"Rivanna stage1 shard {shard_id}/{n_shards}: {len(scenarios):,} of {len(all_scenarios):,}",
+        flush=True,
+    )
+    rows: list[dict] = []
+    for idx, sc in enumerate(scenarios, start=1):
+        row = sweep.run_scenario(sc)
+        rows.append(row)
+        append_jsonl(shard_jsonl, row)
+        if idx % 100 == 0 or idx == len(scenarios):
+            best = max(
+                (float(r["tail_drop_frac"]) for r in rows if math.isfinite(float(r["tail_drop_frac"]))),
+                default=float("nan"),
+            )
+            print(f"stage1 shard {shard_id}: {idx:,}/{len(scenarios):,}; best tail drop={best:.3f}", flush=True)
+    write_csv(shard_csv, rows)
+    print(f"Wrote {shard_csv}", flush=True)
+
+
+def merge_stage1(n_shards: int) -> None:
+    shard_paths = sorted(STAGE1_SHARD_DIR.glob(f"stage1_shard_*_of_{n_shards:04d}.csv"))
+    if len(shard_paths) != n_shards:
+        raise FileNotFoundError(
+            f"merge-stage1: expected {n_shards} shard CSVs matching "
+            f"stage1_shard_*_of_{n_shards:04d}.csv in {STAGE1_SHARD_DIR}, "
+            f"found {len(shard_paths)}"
+        )
+    expected = len(list(sweep.iter_stage1()))
+    frames = [pd.read_csv(path) for path in shard_paths]
+    merged = pd.concat(frames, ignore_index=True)
+    if len(merged) != expected:
+        raise ValueError(
+            f"merge-stage1: expected {expected} rows (full Stage 1 grid), got {len(merged)} "
+            f"from {len(shard_paths)} shards — check shard tasks completed successfully."
+        )
+    merged.to_csv(STAGE1_CSV, index=False)
+    print(f"Wrote {STAGE1_CSV} ({len(merged):,} rows)", flush=True)
 
 
 def run_stage2_shard(shard_id: int, n_shards: int, reset: bool) -> None:
@@ -175,7 +227,10 @@ def merge(n_shards: int) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("command", choices=["stage1", "stage2-shard", "merge"])
+    parser.add_argument(
+        "command",
+        choices=["stage1", "stage1-shard", "merge-stage1", "stage2-shard", "merge"],
+    )
     parser.add_argument("--shard-id", type=int, default=0)
     parser.add_argument("--n-shards", type=int, default=64)
     parser.add_argument("--reset", action="store_true")
@@ -183,6 +238,12 @@ def main() -> None:
 
     if args.command == "stage1":
         run_stage1(reset=args.reset)
+    elif args.command == "stage1-shard":
+        if not (0 <= args.shard_id < args.n_shards):
+            raise ValueError("--shard-id must be in [0, n_shards)")
+        run_stage1_shard(args.shard_id, args.n_shards, reset=args.reset)
+    elif args.command == "merge-stage1":
+        merge_stage1(args.n_shards)
     elif args.command == "stage2-shard":
         if not (0 <= args.shard_id < args.n_shards):
             raise ValueError("--shard-id must be in [0, n_shards)")

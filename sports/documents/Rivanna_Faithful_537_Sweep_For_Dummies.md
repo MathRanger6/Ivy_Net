@@ -13,7 +13,7 @@ Use this runbook:
 sports/documents/Rivanna_Faithful_537_Sweep_For_Dummies.md
 
 First do the preflight checks in that file.
-Then submit Stage 1, Stage 2, and Merge with Slurm dependencies.
+Then submit Stage 1 array, Merge Stage 1, Stage 2 array, and final merge with Slurm dependencies.
 Track the jobs with scripts/track_slurm.sh and squeue.
 Do not edit the model unless I ask.
 ```
@@ -24,6 +24,7 @@ The required files are:
 sports/outputs/simulation_sweeps/faithful_537_sweep.py
 sports/outputs/simulation_sweeps/faithful_537_sweep_rivanna_worker.py
 sports/outputs/simulation_sweeps/rivanna_stage1_faithful_537.slurm
+sports/outputs/simulation_sweeps/rivanna_merge_stage1_faithful_537.slurm
 sports/outputs/simulation_sweeps/rivanna_stage2_array_faithful_537.slurm
 sports/outputs/simulation_sweeps/rivanna_merge_faithful_537.slurm
 scripts/track_slurm.sh
@@ -79,6 +80,7 @@ Do:
 ls sports/outputs/simulation_sweeps/faithful_537_sweep.py
 ls sports/outputs/simulation_sweeps/faithful_537_sweep_rivanna_worker.py
 ls sports/outputs/simulation_sweeps/rivanna_stage1_faithful_537.slurm
+ls sports/outputs/simulation_sweeps/rivanna_merge_stage1_faithful_537.slurm
 ls sports/outputs/simulation_sweeps/rivanna_stage2_array_faithful_537.slurm
 ls sports/outputs/simulation_sweeps/rivanna_merge_faithful_537.slurm
 ls scripts/track_slurm.sh
@@ -96,7 +98,7 @@ In case of trouble: either fix the environment on Rivanna or submit with a diffe
 ENV_NAME=my_env_name sbatch sports/outputs/simulation_sweeps/rivanna_stage1_faithful_537.slurm
 ```
 
-### Step 4: Submit Stage 1, Stage 2, And Merge In One Dependency Chain
+### Step 4: Submit Stage 1 Array, Stage 1 Merge, Stage 2 Array, Final Merge
 
 Do:
 
@@ -104,39 +106,49 @@ Do:
 j1=$(sbatch --parsable \
   sports/outputs/simulation_sweeps/rivanna_stage1_faithful_537.slurm)
 
-j2=$(sbatch --parsable --dependency=afterok:$j1 \
+j1m=$(sbatch --parsable --dependency=afterok:$j1 \
+  sports/outputs/simulation_sweeps/rivanna_merge_stage1_faithful_537.slurm)
+
+j2=$(sbatch --parsable --dependency=afterok:$j1m \
   sports/outputs/simulation_sweeps/rivanna_stage2_array_faithful_537.slurm)
 
 sbatch --dependency=afterok:$j2 \
   sports/outputs/simulation_sweeps/rivanna_merge_faithful_537.slurm
 
-echo "Stage 1: $j1"
-echo "Stage 2: $j2"
+echo "Stage 1 array: $j1"
+echo "Stage 1 merge: $j1m"
+echo "Stage 2 array: $j2"
 ```
 
 **How to enter Step 4 (terminal mechanics):**
 
 1. Use a **bash** shell on Rivanna (the default login shell is usually fine).
 2. **`cd`** to **Ivy_Net repo root** first (same as Step 2), so paths like `sports/outputs/...` exist.
-3. Copy the **whole block** above and paste it once. Lines ending in `\` mean “continued on the next line”; the shell runs it as one multi-line command sequence. Press **Enter** after the last line (`echo "Stage 2: $j2"`).
+3. Copy the **whole block** above and paste it once. Lines ending in `\` mean “continued on the next line”; the shell runs it as one multi-line command sequence. Press **Enter** after the last line (`echo "Stage 2 array: $j2"`).
 4. What it does:
-   - **`sbatch --parsable`** prints **only the numeric job ID** (no extra words), so it can be stored in **`j1`** / **`j2`**.
-   - **`--dependency=afterok:JOBID`** tells Slurm: start this job only after that job **finishes with exit code 0**.
-5. The **merge** job is submitted by the third line; Slurm prints its job ID on that line — note it if you want to **`track_slurm.sh MERGE_JOBID`**.
+   - **`sbatch --parsable`** prints **only the numeric job ID** (no extra words), so it can be stored in **`j1`** / **`j1m`** / **`j2`**.
+   - **`--dependency=afterok:JOBID`** tells Slurm: start this job only after that job **finishes with exit code 0**. For **Stage 1**, `JOBID` is the array **job id**; Slurm waits until **all** array tasks finish successfully before starting Stage 1 merge.
+5. The **final merge** job is submitted by the fourth `sbatch` line; Slurm prints its job ID on that line.
 
 Same logic **without** line breaks (easier to type line-by-line):
 
 ```bash
 j1=$(sbatch --parsable sports/outputs/simulation_sweeps/rivanna_stage1_faithful_537.slurm)
-j2=$(sbatch --parsable --dependency=afterok:$j1 sports/outputs/simulation_sweeps/rivanna_stage2_array_faithful_537.slurm)
+j1m=$(sbatch --parsable --dependency=afterok:$j1 sports/outputs/simulation_sweeps/rivanna_merge_stage1_faithful_537.slurm)
+j2=$(sbatch --parsable --dependency=afterok:$j1m sports/outputs/simulation_sweeps/rivanna_stage2_array_faithful_537.slurm)
 sbatch --dependency=afterok:$j2 sports/outputs/simulation_sweeps/rivanna_merge_faithful_537.slurm
-echo "Stage 1: $j1"
-echo "Stage 2: $j2"
+echo "Stage 1 array: $j1"
+echo "Stage 1 merge: $j1m"
+echo "Stage 2 array: $j2"
 ```
 
-Because: Stage 2 needs Stage 1 output, and Merge needs all Stage 2 shard outputs. The dependency chain prevents starting a later stage too early.
+**Shard counts:** Stage 1 defaults to **64** tasks (`N_STAGE1_SHARDS`). If you change `#SBATCH --array=0-63` to another range, set the same count when submitting merge, e.g. `N_STAGE1_SHARDS=128 sbatch ... rivanna_merge_stage1_faithful_537.slurm`. Stage 2 still uses **`N_SHARDS`** (default 64) in `rivanna_stage2_array_faithful_537.slurm` and `rivanna_merge_faithful_537.slurm`.
 
-Be careful of: do not submit Stage 2 by itself unless `stage1_results.csv` already exists.
+Because: Stage 1 now runs as a **parallel array**; each shard does about **1/64** of the old single-core Stage 1 work (typically **a few minutes to tens of minutes** per task, not ~1.5 hours). **Merge Stage 1** builds a single `stage1_results.csv`. Stage 2 needs that file. The **final merge** needs all Stage 2 shard CSVs.
+
+Be careful of: do not submit Stage 2 until `stage1_results.csv` exists. Do not submit **merge-stage1** before all Stage 1 array tasks finish.
+
+**Single-node Stage 1 (legacy, not Slurm array):** from repo root, `python sports/outputs/simulation_sweeps/faithful_537_sweep_rivanna_worker.py stage1 --reset` writes `stage1_results.csv` directly (debug / small tests only).
 
 In case of trouble: check the queue:
 
@@ -169,17 +181,19 @@ Do:
 
 ```bash
 ls -lh sports/outputs/simulation_sweeps/rivanna_faithful_537/
+ls sports/outputs/simulation_sweeps/rivanna_faithful_537/stage1_shards/ | head
 ls sports/outputs/simulation_sweeps/rivanna_faithful_537/stage2_shards/ | head
 ```
 
-Because: the final results should land under `rivanna_faithful_537/`, with merged candidate files and plots.
+Because: the final results should land under `rivanna_faithful_537/`, with merged candidate files and plots. While Stage 1 is running you should see **`stage1_shards/stage1_shard_*_of_0064.csv`** accumulating; after **Merge Stage 1**, **`stage1_results.csv`** appears at the top level of that folder.
 
-Be careful of: if `stage2_shards/` is empty, Stage 2 probably has not started, failed early, or is still queued.
+Be careful of: if **`stage1_shards/`** never fills, Stage 1 array tasks may still be queued. If **`stage1_results.csv`** is missing after merge, check **`slurm-537_merge_s1-*.out`**. If **`stage2_shards/`** is empty, Stage 2 probably has not started, failed early, or is still queued.
 
 In case of trouble: inspect the relevant Slurm logs:
 
 ```bash
-tail -f slurm-537_stage1-*.out
+tail -f slurm-537_stage1-*_0.out
+tail -f slurm-537_merge_s1-*.out
 tail -f slurm-537_stage2-*_0.out
 tail -f slurm-537_merge-*.out
 ```
@@ -226,11 +240,12 @@ That file should summarize what the merge step found.
 
 Yes. The stages depend on each other:
 
-1. **Stage 1** runs a broad screen and writes `stage1_results.csv`.
-2. **Stage 2** reads `stage1_results.csv`, then runs a Slurm array to verify candidate settings across seeds.
-3. **Merge** reads all Stage 2 shard files and creates the final ranked candidate table and plots.
+1. **Stage 1** runs as a **Slurm array** of shards; each task writes a CSV under `rivanna_faithful_537/stage1_shards/`.
+2. **Merge Stage 1** concatenates those shards into **`stage1_results.csv`** (exact row count is validated).
+3. **Stage 2** reads `stage1_results.csv`, then runs a Slurm array to verify candidate settings across seeds.
+4. **Final merge** reads all Stage 2 shard files and creates the ranked **`grouped_candidates.csv`** and plots.
 
-The easiest way is to submit them with Slurm dependencies, so each starts only after the prior stage finishes successfully.
+The easiest way is to submit them with Slurm dependencies, so each starts only after the prior step finishes successfully.
 
 ## Start In Cursor On Rivanna
 
@@ -253,6 +268,7 @@ pwd
 ls sports/outputs/simulation_sweeps/faithful_537_sweep.py
 ls sports/outputs/simulation_sweeps/faithful_537_sweep_rivanna_worker.py
 ls sports/outputs/simulation_sweeps/rivanna_stage1_faithful_537.slurm
+ls sports/outputs/simulation_sweeps/rivanna_merge_stage1_faithful_537.slurm
 ls sports/outputs/simulation_sweeps/rivanna_stage2_array_faithful_537.slurm
 ls sports/outputs/simulation_sweeps/rivanna_merge_faithful_537.slurm
 ls scripts/track_slurm.sh
@@ -298,13 +314,16 @@ Do **not** use `./scripts/rsync_push_to_hpc.sh all` for this sweep. The `all` sh
 
 ## Submit The Whole Chain
 
-From the repo root:
+From the repo root (same **four-step** dependency chain as Step 4):
 
 ```bash
 j1=$(sbatch --parsable \
   sports/outputs/simulation_sweeps/rivanna_stage1_faithful_537.slurm)
 
-j2=$(sbatch --parsable --dependency=afterok:$j1 \
+j1m=$(sbatch --parsable --dependency=afterok:$j1 \
+  sports/outputs/simulation_sweeps/rivanna_merge_stage1_faithful_537.slurm)
+
+j2=$(sbatch --parsable --dependency=afterok:$j1m \
   sports/outputs/simulation_sweeps/rivanna_stage2_array_faithful_537.slurm)
 
 sbatch --dependency=afterok:$j2 \
@@ -313,15 +332,17 @@ sbatch --dependency=afterok:$j2 \
 
 That submits:
 
-- Stage 1 as one job.
-- Stage 2 as a 64-task array.
-- Merge as one final job after all Stage 2 tasks succeed.
+- **Stage 1** as a **64-task array** (shard CSVs under `stage1_shards/`).
+- **Merge Stage 1** → **`stage1_results.csv`**.
+- **Stage 2** as a 64-task array (unless you changed `N_SHARDS`).
+- **Final merge** after all Stage 2 tasks succeed.
 
 Print the job IDs so you can track them:
 
 ```bash
-echo "Stage 1: $j1"
-echo "Stage 2: $j2"
+echo "Stage 1 array: $j1"
+echo "Stage 1 merge: $j1m"
+echo "Stage 2 array: $j2"
 ```
 
 The final merge job ID is printed by the last `sbatch` command.
@@ -346,10 +367,16 @@ Or check the queue:
 squeue -u dzk3ja
 ```
 
-Or tail logs directly. Stage 1 and Merge write one log each:
+Or tail logs directly. **Stage 1** is an array job (one log per task). **Merge Stage 1** job name is **`537_merge_s1`**.
 
 ```bash
-tail -f slurm-537_stage1-*.out
+tail -f slurm-537_stage1-*_0.out
+tail -f slurm-537_merge_s1-*.out
+```
+
+**Final merge** (Stage 2 outputs):
+
+```bash
 tail -f slurm-537_merge-*.out
 ```
 
@@ -387,7 +414,9 @@ sports/outputs/simulation_sweeps/rivanna_faithful_537/
 Important files after completion:
 
 ```text
+stage1_shards/stage1_shard_*.csv
 stage1_results.csv
+stage2_shards/stage2_shard_*.csv
 stage2_results_merged.csv
 grouped_candidates.csv
 candidate_plots/
@@ -412,6 +441,7 @@ During the run, quick progress checks:
 
 ```bash
 ls -lh sports/outputs/simulation_sweeps/rivanna_faithful_537/
+ls sports/outputs/simulation_sweeps/rivanna_faithful_537/stage1_shards/ | head
 ls sports/outputs/simulation_sweeps/rivanna_faithful_537/stage2_shards/ | head
 ```
 
@@ -552,7 +582,13 @@ sports/outputs/simulation_sweeps/rivanna_faithful_537/
 
 ### `stage1_results.csv` missing
 
-Stage 2 needs Stage 1 output. Run Stage 1 first, or use the dependency chain above.
+Stage 2 needs **`stage1_results.csv`**. With the array workflow: (**1**) wait until **all** Stage 1 array tasks finish, (**2**) run **`rivanna_merge_stage1_faithful_537.slurm`** (or use the full dependency chain in Step 4). If merge fails, check **`slurm-537_merge_s1-*.err`** and that **`stage1_shards/`** contains **`stage1_shard_*_of_NNNN.csv`** for every shard.
+
+If you change **`N_STAGE1_SHARDS`**, you must update **`#SBATCH --array=...`** in **`rivanna_stage1_faithful_537.slurm`** and pass the **same** value to the merge script.
+
+### `merge-stage1` fails with wrong row count
+
+Some Stage 1 tasks may have failed or **`N_STAGE1_SHARDS`** does not match the Slurm array. Fix failed tasks or remove stale shard CSVs and re-run Stage 1 + merge.
 
 ### `sports_net` not found
 
@@ -569,9 +605,18 @@ ENV_NAME=my_env_name sbatch \
   sports/outputs/simulation_sweeps/rivanna_stage1_faithful_537.slurm
 ```
 
-Do the same for Stage 2 and Merge.
+Do the same for **Merge Stage 1**, Stage 2 array, and the **final merge** if you submit those jobs separately.
 
-### I changed the number of shards
+### I changed the Stage 1 shard count
+
+If you edit **`rivanna_stage1_faithful_537.slurm`** so the array is not `0-63`, set **`N_STAGE1_SHARDS`** to the same task count when submitting **`rivanna_merge_stage1_faithful_537.slurm`**:
+
+```bash
+N_STAGE1_SHARDS=128 sbatch \
+  sports/outputs/simulation_sweeps/rivanna_merge_stage1_faithful_537.slurm
+```
+
+### I changed the number of Stage 2 shards
 
 If you edit Stage 2 from 64 shards to another number, make the Slurm array and `N_SHARDS` match.
 

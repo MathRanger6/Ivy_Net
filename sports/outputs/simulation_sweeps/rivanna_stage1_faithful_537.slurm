@@ -1,18 +1,22 @@
 #!/bin/bash
 #SBATCH --job-name=537_stage1
 #SBATCH --partition=standard
+#SBATCH --array=0-63
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=8G
-#SBATCH --time=02:00:00
-#SBATCH --job-name=537_stage1
-#SBATCH --output=slurm-%x-%j.out
-#SBATCH --error=slurm-%x-%j.err
+#SBATCH --time=01:00:00
+#SBATCH --output=slurm-%x-%A_%a.out
+#SBATCH --error=slurm-%x-%A_%a.err
 #SBATCH --mail-user=dzk3ja@virginia.edu
 #SBATCH --mail-type=END,FAIL
 #SBATCH --constraint=rivanna
 #SBATCH --account=sds_ag
+#
+# Stage 1 broad screen, sharded across Slurm tasks (default 64).
+# Keep #SBATCH --array=0-(N-1) in sync with N_STAGE1_SHARDS below.
+# Single-node legacy run: use faithful_537_sweep_rivanna_worker.py stage1
 
 set -euo pipefail
 
@@ -34,12 +38,19 @@ if [[ ! -x "${CONDA_PYTHON}" ]]; then
   CONDA_PYTHON="$(command -v python)"
 fi
 
-echo "==> Job       : ${SLURM_JOB_NAME} ${SLURM_JOB_ID}"
+N_STAGE1_SHARDS="${N_STAGE1_SHARDS:-64}"
+
+echo "==> Job       : ${SLURM_JOB_NAME} ${SLURM_ARRAY_JOB_ID}_${SLURM_ARRAY_TASK_ID}"
 echo "==> Work dir  : ${PWD}"
 echo "==> Python    : ${CONDA_PYTHON}"
+echo "==> Shard     : ${SLURM_ARRAY_TASK_ID}/${N_STAGE1_SHARDS}"
 echo "==> Watch live:"
-echo "    tail -f ${SLURM_SUBMIT_DIR}/slurm-${SLURM_JOB_NAME}-${SLURM_JOB_ID}.out"
-echo "    tail -f ${SLURM_SUBMIT_DIR}/slurm-${SLURM_JOB_NAME}-${SLURM_JOB_ID}.err"
+echo "    tail -f ${SLURM_SUBMIT_DIR}/slurm-${SLURM_JOB_NAME}-${SLURM_ARRAY_JOB_ID}_${SLURM_ARRAY_TASK_ID}.out"
+echo "    tail -f ${SLURM_SUBMIT_DIR}/slurm-${SLURM_JOB_NAME}-${SLURM_ARRAY_JOB_ID}_${SLURM_ARRAY_TASK_ID}.err"
 echo ""
 
-run "${CONDA_PYTHON}" sports/outputs/simulation_sweeps/faithful_537_sweep_rivanna_worker.py stage1 --reset
+run "${CONDA_PYTHON}" sports/outputs/simulation_sweeps/faithful_537_sweep_rivanna_worker.py \
+  stage1-shard \
+  --shard-id "$SLURM_ARRAY_TASK_ID" \
+  --n-shards "$N_STAGE1_SHARDS" \
+  --reset

@@ -1,17 +1,17 @@
 {
-  "ability": "A",
-  "additive": 0.1,
-  "binning_mode": "pool_equal_width",
+  "ability": "B",
+  "additive": 1.0,
+  "binning_mode": "pool_equal_count",
   "bins": 20,
-  "min_A_promote": 0.275,
+  "min_A_promote": 0.0,
   "n_indiv": 1000,
-  "noise": 0.125,
+  "noise": 0.0,
   "person_x_binning": "equal_count",
   "pool": "B",
-  "pool_bins": 10,
+  "pool_bins": 8,
   "runs": 500,
   "score": "local_rank_plus_ability",
-  "use_batch": false,
-  "view": "pool_global",
-  "winner": "A"
+  "use_batch": true,
+  "view": "pool_local",
+  "winner": "B"
 }
