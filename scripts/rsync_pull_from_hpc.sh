@@ -1,9 +1,13 @@
 #!/usr/bin/env bash
 # Pull a repo subtree: UVA HPC → local clone (run on your Mac).
 #
+# Full sync strategy: see scripts/DATA_SYNC.md
+# After Slurm jobs / sim_job: consider  ./scripts/rsync_pull_recent_hpc.sh quick
+#
 # Usage:
 #   ./scripts/rsync_pull_from_hpc.sh
 #   ./scripts/rsync_pull_from_hpc.sh tenure/tenure_pipeline
+#   ./scripts/rsync_pull_from_hpc.sh slurm_out              # Slurm logs → local slurm_out/
 #   ./scripts/rsync_pull_from_hpc.sh python_packages/dblp-parser
 #   ./scripts/rsync_pull_from_hpc.sh sweep
 #   ./scripts/rsync_pull_from_hpc.sh all

@@ -28,8 +28,8 @@
 #SBATCH --mem=32G
 #SBATCH --partition=standard
 #SBATCH --job-name=oa_cache
-#SBATCH --output=slurm-%x-%j.out
-#SBATCH --error=slurm-%x-%j.err
+#SBATCH --output=slurm_out/slurm-%x-%j.out
+#SBATCH --error=slurm_out/slurm-%x-%j.err
 #SBATCH --mail-user=dzk3ja@virginia.edu
 #SBATCH --mail-type=BEGIN,END,FAIL
 #SBATCH --constraint=rivanna

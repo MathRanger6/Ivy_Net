@@ -8,12 +8,14 @@
 #SBATCH --mem=8G
 #SBATCH --time=04:00:00
 #SBATCH --job-name=537_stage2
-#SBATCH --output=slurm-%x-%A_%a.out
-#SBATCH --error=slurm-%x-%A_%a.err
+#SBATCH --output=slurm_out/slurm-%x-%A_%a.out
+#SBATCH --error=slurm_out/slurm-%x-%A_%a.err
 #SBATCH --mail-user=dzk3ja@virginia.edu
 #SBATCH --mail-type=END,FAIL
 #SBATCH --constraint=rivanna
 #SBATCH --account=sds_ag
+#
+# Stage 2 refinement, sharded. Submit from Ivy_Net repo root so logs land in slurm_out/.
 
 set -euo pipefail
 
@@ -42,8 +44,8 @@ echo "==> Work dir  : ${PWD}"
 echo "==> Python    : ${CONDA_PYTHON}"
 echo "==> Shard     : ${SLURM_ARRAY_TASK_ID}/${N_SHARDS}"
 echo "==> Watch live:"
-echo "    tail -f ${SLURM_SUBMIT_DIR}/slurm-${SLURM_JOB_NAME}-${SLURM_ARRAY_JOB_ID}_${SLURM_ARRAY_TASK_ID}.out"
-echo "    tail -f ${SLURM_SUBMIT_DIR}/slurm-${SLURM_JOB_NAME}-${SLURM_ARRAY_JOB_ID}_${SLURM_ARRAY_TASK_ID}.err"
+echo "    tail -f ${SLURM_SUBMIT_DIR}/slurm_out/slurm-${SLURM_JOB_NAME}-${SLURM_ARRAY_JOB_ID}_${SLURM_ARRAY_TASK_ID}.out"
+echo "    tail -f ${SLURM_SUBMIT_DIR}/slurm_out/slurm-${SLURM_JOB_NAME}-${SLURM_ARRAY_JOB_ID}_${SLURM_ARRAY_TASK_ID}.err"
 echo ""
 
 run "${CONDA_PYTHON}" sports/outputs/simulation_sweeps/faithful_537_sweep_rivanna_worker.py \

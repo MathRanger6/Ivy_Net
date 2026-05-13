@@ -1,5 +1,7 @@
 # Shared rsync settings for Ivy_Net ↔ UVA HPC (sourced by rsync_* wrappers).
 #
+# Human-readable policy + workflows: scripts/DATA_SYNC.md
+#
 # Callers must set:
 #   IVY_NET_SCRIPTS_DIR   Absolute path to this scripts/ directory (dirname of the wrapper).
 #

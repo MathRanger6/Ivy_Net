@@ -20,7 +20,7 @@
 # Monitor live:
 #   ./scripts/track_slurm.sh          # auto-finds the most recent job
 #   ./scripts/track_slurm.sh <JOBID>  # specific job
-#   tail -f slurm-discover_urls-<JOBID>.out
+#   tail -f slurm_out/slurm-discover_urls-<JOBID>.out
 #
 # To enable live test-parse (downloads + HTML-parses one Wayback snapshot per
 # candidate — adds real faculty record counts but ~3–5s extra per candidate):
@@ -49,8 +49,8 @@
 #SBATCH --mem=4G                 # CDX results fit easily; 4G is generous
 #SBATCH --partition=standard
 #SBATCH --job-name=discover_urls
-#SBATCH --output=slurm-%x-%j.out
-#SBATCH --error=slurm-%x-%j.err
+#SBATCH --output=slurm_out/slurm-%x-%j.out
+#SBATCH --error=slurm_out/slurm-%x-%j.err
 #SBATCH --mail-user=dzk3ja@virginia.edu
 #SBATCH --mail-type=BEGIN,END,FAIL
 #SBATCH --constraint=rivanna

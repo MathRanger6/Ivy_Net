@@ -10,8 +10,8 @@
 #SBATCH --cpus-per-task=4
 #SBATCH --partition=standard
 #SBATCH --job-name=tenure_net_env_install
-#SBATCH --output=slurm-%x-%j.out
-#SBATCH --error=slurm-%x-%j.err
+#SBATCH --output=slurm_out/slurm-%x-%j.out
+#SBATCH --error=slurm_out/slurm-%x-%j.err
 #SBATCH --mail-user=dzk3ja@virginia.edu
 #SBATCH --mail-type=END,FAIL
 #SBATCH --constraint=rivanna
@@ -24,9 +24,9 @@ module load miniforge
 # Directory you submitted from (recommended: Ivy_Net repo root).
 cd "${SLURM_SUBMIT_DIR}"
 
-# Slurm already writes this script's stdout/stderr to slurm-%x-%j.out — no need to run
+# Slurm already writes this script's stdout/stderr to slurm_out/slurm-%x-%j.out — no need to run
 # tail inside the job. These settings help the log file flush often so a login-node
-#   tail -f slurm-<jobname>-<jobid>.out
+#   tail -f slurm_out/slurm-<jobname>-<jobid>.out
 # shows live progress instead of big silent gaps.
 export PYTHONUNBUFFERED=1
 export PIP_PROGRESS_BAR=on
@@ -47,9 +47,9 @@ export ENV_NAME ENV_FILE SLURM_SUBMIT_DIR
 
 test -f "${ENV_FILE}" || { echo "ERROR: missing ${ENV_FILE} in ${PWD}" >&2; exit 1; }
 
-# Matches #SBATCH --output/--error slurm-%x-%j.{out,err}
-OUT_FILE="slurm-${SLURM_JOB_NAME}-${SLURM_JOB_ID}.out"
-ERR_FILE="slurm-${SLURM_JOB_NAME}-${SLURM_JOB_ID}.err"
+# Matches #SBATCH --output/--error slurm_out/slurm-%x-%j.{out,err}
+OUT_FILE="slurm_out/slurm-${SLURM_JOB_NAME}-${SLURM_JOB_ID}.out"
+ERR_FILE="slurm_out/slurm-${SLURM_JOB_NAME}-${SLURM_JOB_ID}.err"
 echo "==> Watch this job live (from another terminal, same directory):"
 echo "    tail -f ${SLURM_SUBMIT_DIR}/${OUT_FILE}"
 echo "    tail -f ${SLURM_SUBMIT_DIR}/${ERR_FILE}"

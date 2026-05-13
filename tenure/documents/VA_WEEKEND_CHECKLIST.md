@@ -48,9 +48,9 @@ squeue -u dzk3ja
 ### Check jobs finished
 ```bash
 squeue -u dzk3ja         # should be empty if both finished
-ls -lh ~/Ivy_Net/slurm-*.out   # check log files exist
-tail -50 slurm-pipe_job-*.out  # read pipe_job summary
-tail -20 slurm-build_openalex_cache-*.out  # read cache builder summary
+ls -lh ~/Ivy_Net/slurm_out/*.out   # check log files exist
+tail -50 ~/Ivy_Net/slurm_out/slurm-pipe_job-*.out  # read pipe_job summary
+tail -20 ~/Ivy_Net/slurm_out/slurm-oa_cache-*.out  # read cache builder summary
 ```
 
 ### If pipe_job finished — check the output
@@ -127,7 +127,7 @@ cd ~/Ivy_Net && sbatch pipe_job.slurm
 ```bash
 cd ~/Ivy_Net
 git add -A
-git status        # verify: no *.jsonl, no *.html, no slurm-*.out staged
+git status        # verify: no *.jsonl, no *.html, no slurm-*.out / slurm_out noise staged
 git commit -m "Weekend run: <brief description>"
 git push
 ```
@@ -141,14 +141,15 @@ git push
 squeue -u dzk3ja
 
 # Monitor a job live
-tail -f slurm-<JOBNAME>-<JOBID>.out
+tail -f ~/Ivy_Net/slurm_out/slurm-<JOBNAME>-<JOBID>.out
 
 # Submit jobs
 cd ~/Ivy_Net && sbatch pipe_job.slurm
 cd ~/Ivy_Net && sbatch build_openalex_cache.slurm
 
-# Pull data to Mac (run from Mac terminal)
-./scripts/rsync_pull_from_hpc.sh
+# Pull HPC outputs to Mac (what Git ignores — see ../../scripts/DATA_SYNC.md)
+./scripts/rsync_pull_recent_hpc.sh quick   # slurm_out + sweep; use `all` to add tenure/tenure_pipeline
+./scripts/rsync_pull_from_hpc.sh           # default: tenure/tenure_pipeline only
 
 # Push code to Rivanna (run from Mac terminal)
 ./scripts/rsync_push_to_hpc.sh

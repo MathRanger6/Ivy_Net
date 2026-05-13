@@ -95,7 +95,8 @@ tenure/tenure_pipeline/_ipeds_probe/
 # PAA scan mid-run checkpoint (auto-deleted on success; resume file on crash)
 tenure/tenure_pipeline/_paa_scan_checkpoint.json
 
-# Slurm job logs and executed output notebooks (transient — never commit)
+# Slurm job logs and executed output notebooks (transient; see VA_WEEKEND_CHECKLIST — avoid staging)
+# Patterns match these filenames in any subdir (e.g. slurm_out/slurm-*.out).
 slurm-*.out
 slurm-*.err
 slurm-*-output.ipynb

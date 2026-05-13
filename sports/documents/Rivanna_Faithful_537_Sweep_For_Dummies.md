@@ -61,7 +61,7 @@ Do:
 cd ~/Ivy_Net
 ```
 
-Because: the Slurm scripts assume you submit from the repo root, where `sports/`, `scripts/`, and `pipe_job.slurm` live.
+Because: the Slurm scripts assume you submit from the repo root, where `sports/`, `scripts/`, and `pipe_job.slurm` live. Stdout/stderr logs go to **`slurm_out/`** here (e.g. `~/Ivy_Net/slurm_out/slurm-*.out`).
 
 Be careful of: if your Rivanna repo is not at `~/Ivy_Net`, use the actual repo path.
 
@@ -197,15 +197,15 @@ ls sports/outputs/simulation_sweeps/rivanna_faithful_537/stage2_shards/ | head
 
 Because: the final results should land under `rivanna_faithful_537/`, with merged candidate files and plots. While Stage 1 is running you should see **`stage1_shards/stage1_shard_*_of_0064.csv`** accumulating; after **Merge Stage 1**, **`stage1_results.csv`** appears at the top level of that folder.
 
-Be careful of: if **`stage1_shards/`** never fills, Stage 1 array tasks may still be queued. If **`stage1_results.csv`** is missing after merge, check **`slurm-537_merge_s1-*.out`**. If **`stage2_shards/`** is empty, Stage 2 probably has not started, failed early, or is still queued.
+Be careful of: if **`stage1_shards/`** never fills, Stage 1 array tasks may still be queued. If **`stage1_results.csv`** is missing after merge, check **`slurm_out/slurm-537_merge_s1-*.out`**. If **`stage2_shards/`** is empty, Stage 2 probably has not started, failed early, or is still queued.
 
 In case of trouble: inspect the relevant Slurm logs:
 
 ```bash
-tail -f slurm-537_stage1-*_0.out
-tail -f slurm-537_merge_s1-*.out
-tail -f slurm-537_stage2-*_0.out
-tail -f slurm-537_merge-*.out
+tail -f slurm_out/slurm-537_stage1-*_0.out
+tail -f slurm_out/slurm-537_merge_s1-*.out
+tail -f slurm_out/slurm-537_stage2-*_0.out
+tail -f slurm_out/slurm-537_merge-*.out
 ```
 
 ### Step 7: On The Mac, Pull Only The Sweep Results Back
@@ -215,6 +215,14 @@ Do:
 ```bash
 ./scripts/rsync_pull_from_hpc.sh sweep
 ```
+
+Optional: pull **sweep results and** Rivanna **`slurm_out/`** logs in one go (useful for Cursor on your Mac):
+
+```bash
+./scripts/rsync_pull_recent_hpc.sh quick
+```
+
+Full **Git vs rsync** reference: `scripts/DATA_SYNC.md`.
 
 Because: this brings back generated sweep results without using Git and without pulling source code back from Rivanna over your local edits.
 
@@ -365,7 +373,7 @@ Use the existing tracker:
 ./scripts/track_slurm.sh
 ```
 
-With no argument, it tails the most recent `slurm-*.err` file. With a job ID, it tails that job's `.err` file:
+With no argument, it tails the most recent `slurm_out/slurm-*.err` file (or a legacy repo-root `slurm-*.err`). With a job ID, it tails that job's `.err` file:
 
 ```bash
 ./scripts/track_slurm.sh JOBID
@@ -380,21 +388,21 @@ squeue -u dzk3ja
 Or tail logs directly. **Stage 1** is an array job (one log per task). **Merge Stage 1** job name is **`537_merge_s1`**.
 
 ```bash
-tail -f slurm-537_stage1-*_0.out
-tail -f slurm-537_merge_s1-*.out
+tail -f slurm_out/slurm-537_stage1-*_0.out
+tail -f slurm_out/slurm-537_merge_s1-*.out
 ```
 
 **Final merge** (Stage 2 outputs):
 
 ```bash
-tail -f slurm-537_merge-*.out
+tail -f slurm_out/slurm-537_merge-*.out
 ```
 
 Stage 2 is an array job, so it writes one log per array task:
 
 ```bash
-tail -f slurm-537_stage2-*_0.out
-tail -f slurm-537_stage2-*_0.err
+tail -f slurm_out/slurm-537_stage2-*_0.out
+tail -f slurm_out/slurm-537_stage2-*_0.err
 ```
 
 Press `Ctrl+C` to stop watching a log. That does **not** cancel the job.
@@ -592,7 +600,7 @@ sports/outputs/simulation_sweeps/rivanna_faithful_537/
 
 ### `stage1_results.csv` missing
 
-Stage 2 needs **`stage1_results.csv`**. With the array workflow: (**1**) wait until **all** Stage 1 array tasks finish, (**2**) run **`rivanna_merge_stage1_faithful_537.slurm`** (or use the full dependency chain in Step 4). If merge fails, check **`slurm-537_merge_s1-*.err`** and that **`stage1_shards/`** contains **`stage1_shard_*_of_NNNN.csv`** for every shard.
+Stage 2 needs **`stage1_results.csv`**. With the array workflow: (**1**) wait until **all** Stage 1 array tasks finish, (**2**) run **`rivanna_merge_stage1_faithful_537.slurm`** (or use the full dependency chain in Step 4). If merge fails, check **`slurm_out/*.err`** and that **`stage1_shards/`** contains **`stage1_shard_*_of_NNNN.csv`** for every shard.
 
 If you change **`N_STAGE1_SHARDS`**, you must update **`#SBATCH --array=...`** in **`rivanna_stage1_faithful_537.slurm`** and pass the **same** value to the merge script.
 

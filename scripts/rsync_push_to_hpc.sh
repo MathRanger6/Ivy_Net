@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # Push a repo subtree: local clone → UVA HPC (run on your Mac).
 #
+# Full sync strategy: see scripts/DATA_SYNC.md
+#
 # Usage:
 #   ./scripts/rsync_push_to_hpc.sh
 #   ./scripts/rsync_push_to_hpc.sh tenure/tenure_pipeline

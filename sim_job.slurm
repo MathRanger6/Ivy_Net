@@ -13,11 +13,11 @@
 #   N_SHARDS=64         — must match Stage 2 array + rivanna_merge_faithful_537.slurm
 #   ENV_NAME=sports_net — Python conda env for worker scripts
 #
-# Monitor driver logs:
-#   tail -f slurm-sim_job-<JOBID>.out
-#   tail -f slurm-sim_job-<JOBID>.err
+# Monitor driver logs (under repo slurm_out/):
+#   tail -f slurm_out/slurm-sim_job-<JOBID>.out
+#   tail -f slurm_out/slurm-sim_job-<JOBID>.err
 #
-# Child jobs write the usual slurm-537_* and slurm-537_merge* logs in the same directory.
+# Child jobs (sbatch from this driver) use the same submit directory — logs are also under slurm_out/.
 
 #SBATCH --time=12:00:00
 #SBATCH --nodes=1
@@ -26,8 +26,8 @@
 #SBATCH --mem=4G
 #SBATCH --partition=standard
 #SBATCH --job-name=sim_job
-#SBATCH --output=slurm-%x-%j.out
-#SBATCH --error=slurm-%x-%j.err
+#SBATCH --output=slurm_out/slurm-%x-%j.out
+#SBATCH --error=slurm_out/slurm-%x-%j.err
 #SBATCH --mail-user=dzk3ja@virginia.edu
 #SBATCH --mail-type=END,FAIL
 #SBATCH --constraint=rivanna

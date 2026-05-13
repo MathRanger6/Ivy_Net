@@ -6,14 +6,15 @@
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=8G
 #SBATCH --time=00:30:00
-#SBATCH --output=slurm-%x-%j.out
-#SBATCH --error=slurm-%x-%j.err
+#SBATCH --output=slurm_out/slurm-%x-%j.out
+#SBATCH --error=slurm_out/slurm-%x-%j.err
 #SBATCH --mail-user=dzk3ja@virginia.edu
 #SBATCH --mail-type=END,FAIL
 #SBATCH --constraint=rivanna
 #SBATCH --account=sds_ag
 #
 # Concatenate Stage 1 shard CSVs → rivanna_faithful_537/stage1_results.csv
+# Submit from Ivy_Net repo root so logs land in slurm_out/.
 # N_STAGE1_SHARDS must match rivanna_stage1_faithful_537.slurm array size.
 
 set -euo pipefail
