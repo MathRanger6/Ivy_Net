@@ -53,3 +53,6 @@ venv/
 # OS noise
 .DS_Store
 Thumbs.db
+
+# Always Sequestered
+2-Sequestered

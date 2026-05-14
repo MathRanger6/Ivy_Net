@@ -117,3 +117,6 @@ hierarchy_data/**/*.zip
 # Large slide exports (optional)
 current_documents/Show_me/*.pptx
 current_documents/Show_me/*.pptm
+
+# Always Sequestered
+2-Sequestered/
