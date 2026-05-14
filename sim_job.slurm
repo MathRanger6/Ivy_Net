@@ -37,8 +37,7 @@ set -euo pipefail
 
 module load miniforge
 
-# SLURM_SUBMIT_DIR="Ivy_Net/"
-# cd "${SLURM_SUBMIT_DIR}"
+cd "${SLURM_SUBMIT_DIR}"
 
 export PYTHONUNBUFFERED=1
 
