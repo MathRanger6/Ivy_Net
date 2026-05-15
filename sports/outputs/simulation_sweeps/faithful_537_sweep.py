@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import importlib.util
 import itertools
 import json
 import math
@@ -36,6 +37,11 @@ try:
 except ModuleNotFoundError:  # keep the numerical sweep runnable in lean shells
     plt = None
 
+_CELL10_CATALOG = Path(__file__).resolve().parents[2] / "cell10_knob_catalog.py"
+_spec_cat = importlib.util.spec_from_file_location("cell10_knob_catalog", _CELL10_CATALOG)
+_cell10_catalog = importlib.util.module_from_spec(_spec_cat)
+assert _spec_cat.loader is not None
+_spec_cat.loader.exec_module(_cell10_catalog)
 
 OUT_DIR = Path(__file__).resolve().parent
 RESULTS_JSONL = OUT_DIR / "faithful_537_sweep_results.jsonl"
@@ -563,13 +569,8 @@ def plot_top(stage2_rows: list[dict], grouped: pd.DataFrame, n_plots: int = 12) 
         ax.plot(x, y_mean, "o-", color="steelblue", label="mean across seeds")
         ax.set_xlabel(xlabel)
         ax.set_ylabel("Promotion probability")
-        title = (
-            f"#{idx+1}: pool={grow.pool_assignment}, score={grow.score_mode}, "
-            f"w={grow.local_rank_weight:.2f}, draw={grow.winner_choice}, "
-            f"A={grow.ability_choice}, noise={grow.sorting_noise_sd:g}, "
-            f"K={int(grow.k)}, pools={int(grow.n_pools)}, minA={grow.min_ability_for_promotion:g}"
-        )
-        ax.set_title(title, fontsize=10)
+        title = _cell10_catalog.format_faithful_sweep_plot_title(idx + 1, grow.to_dict())
+        ax.set_title(title, fontsize=8)
         ax.grid(True, alpha=0.3)
         ax.legend(loc="best", fontsize=8)
         fig.tight_layout()
@@ -610,7 +611,7 @@ A grouped setting is marked `moderate_stable=True` when:
 - `{STAGE1_CSV.name}`: broad screen results.
 - `{STAGE2_CSV.name}`: verified results.
 - `{GROUPED_CSV.name}`: grouped candidate ranking.
-- `candidate_plots/`: plots for the top grouped settings.
+- `candidate_plots/`: plots for the top grouped settings (titles use the same knob phrases as Cell 10 via `cell10_knob_catalog.py`).
 
 ## Counts
 

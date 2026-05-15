@@ -2,7 +2,7 @@
 
 See **`sports/documents/537_Manual.md`** for a full operator guide (variables, binning modes, widget map).
 
-Edit this file, then re-run **Cell 10** (or **Cell 0**) so ``reload_sim_config()`` picks up changes.
+Edit **`sports/sim_config.py`**, then reload (**Cell 0**) so ``reload_sim_config()`` picks up changes. **Cell 10** widgets are *authoritative* for plots; use **“Load defaults from sim_config.py”** there to copy these values into sliders. Shared knob labels for sweep PNG titles live in ``cell10_knob_catalog.py``.
 """
 
 # --- Run gates -----------------------------------------------------------------
@@ -88,6 +88,7 @@ INTERACTIVE_N_BINS = 20
 # Pool-talent bins default for playground sliders; batch lock uses N_POOL_AGG_BINS.
 INTERACTIVE_N_POOL_AGG_BINS = 8
 INTERACTIVE_SORTING_NOISE_MAX = 0.5  # upper end of the sorting-noise slider
-# When True, Cell 10 checks “batch lock” and syncs N, runs, both bin sliders from config.
+# When True, older Cell 10 builds exposed a “batch lock” tied to this flag.
+# Current Cell 10 ignores this; use “Load defaults from sim_config.py” in the notebook instead.
 INTERACTIVE_USE_MAIN_SCALES = False
 
