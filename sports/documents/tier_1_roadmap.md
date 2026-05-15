@@ -4,6 +4,8 @@
 
 **Notebook:** `sports/535_sports_tier_1.ipynb`
 
+**Alex-sequenced modeling notebook:** `sports/538_alex_tier1_model_and_fit.ipynb` (mirrors `5-Manuscript/Alex_Tier1_Sequential_Model_Outline.md`; `537` remains the simulation-only lab).
+
 **Purpose:** Single place for the mechanical pipeline, the `df` column contract after each stage, and **CELL 0** switches. Update this file as CELL 4+ and modeling land.
 
 **Contract (what “must be true” for implementation):** this file + the **module docstrings / function contracts** in `sports_pipeline/tier1_mechanism_vars.py` and `sports_pipeline/panel_build.py` (especially LOO / `poolq_loo` behavior). Manuscripts in `5-Manuscript` are **design intent and exposition**, not the execution contract unless we explicitly mirror a rule here.
@@ -13,6 +15,7 @@
 - `Vector_to_Scout_Tier1_Modeling_Direction.md` — main Tier 1 modeling direction.
 - `tier_1_model.md` — model layer notes.
 - `Tier1_Briefing_Outline.md` — outline answering Alex's May 5 briefing guidance: model components, assumptions, fitting plan, and turning point.
+- `Alex_Tier1_Sequential_Model_Outline.md` — **advisor-order spine** (minimal model → data → fit → `L^*`); links here and to `538_alex_tier1_model_and_fit.ipynb`.
 - `Tier1_Narrative_Outline.md` — current narrative flow: competing local forces, \(L\)-first Tier 1 model, \(\Lambda\), fitting plan, variable domains, and reference addenda.
 - `2026_0430_Paper7_feedback.md` — theory vs minimal model; scarcity.
 
@@ -115,6 +118,7 @@ Keep this section open while working in `535_sports_tier_1.ipynb`. Green items a
 
 | Date | Note |
 | ------ | ------ |
+| 2026-05-12 | Added `Alex_Tier1_Sequential_Model_Outline.md` and bootstrap `538_alex_tier1_model_and_fit.ipynb` for Alex-ordered exposition; `537` unchanged (simulation). |
 | 2026-05-07 | Added `Tier1_Narrative_Outline.md` to related theory and updated TODOs to reflect the current \(L\)-first Tier 1 framing with crowding/minutes as decomposition diagnostics. |
 | 2026-05-06 | Added manuscript briefing outline link for Alex's May 5 guidance: model components, assumptions, fitting plan, and \(Q^*\) turning point. |
 | 2026-05-05 | Added “Where We Have Been / Where We Are Going” dashboard; documented 530 source-of-truth workflow and weighted-crowding CELL 4 behavior. |

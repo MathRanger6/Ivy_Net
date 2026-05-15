@@ -2,6 +2,8 @@
 
 ## Purpose
 
+**Advisor-order companion:** `Alex_Tier1_Sequential_Model_Outline.md` restates the same material in Alex’s preferred sequence (for talking points + `sports/538_alex_tier1_model_and_fit.ipynb`).
+
 This note directly answers Alex's May 5 guidance for the next briefing:
 
 1. Articulate the minimal Tier 1 model.
