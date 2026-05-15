@@ -80,8 +80,10 @@ Important outputs:
 - `stage2_shards/stage2_shard_*.csv`
 - `stage2_results_merged.csv`
 - `grouped_candidates.csv`
-- `candidate_plots/`
+- `candidate_plots/` — PNGs from the **final merge** step only; see note below.
 - `README.md`
+
+**Plots:** `candidate_plots/` is created next to `grouped_candidates.csv` under `rivanna_faithful_537/`, not under `simulation_sweeps/` alone. If the folder is missing after a successful merge, the usual cause is **no matplotlib** in the conda env used by `rivanna_merge_faithful_537.slurm` (defaults to `sports_net`). Check that job’s `slurm_out/slurm-537_merge-*.out` for: `skipping candidate_plots/ — matplotlib is not installed`. Fix: on Rivanna, `conda activate sports_net` (or your `ENV_NAME`) and `python -m pip install matplotlib`, then re-run the merge job or the full `sim_job.slurm`.
 
 ## Shards
 

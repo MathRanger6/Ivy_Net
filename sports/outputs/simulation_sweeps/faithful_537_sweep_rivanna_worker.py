@@ -198,6 +198,9 @@ def merge(n_shards: int) -> None:
     sweep.PLOT_DIR = PLOT_DIR
     try:
         sweep.plot_top(rows, grouped, n_plots=20)
+        if sweep.plt is not None and PLOT_DIR.is_dir():
+            n_png = len(list(PLOT_DIR.glob("*.png")))
+            print(f"==> candidate_plots: {n_png} PNG(s) -> {PLOT_DIR.resolve()}", flush=True)
     finally:
         sweep.PLOT_DIR = old_plot_dir
 

@@ -508,6 +508,11 @@ def grouped_candidates(stage2_rows: list[dict]) -> pd.DataFrame:
 
 def plot_top(stage2_rows: list[dict], grouped: pd.DataFrame, n_plots: int = 12) -> None:
     if plt is None:
+        print(
+            "faithful_537_sweep: skipping candidate_plots/ — matplotlib is not installed "
+            "(install in your conda env, e.g. pip install matplotlib)",
+            flush=True,
+        )
         return
     if grouped.empty:
         return
