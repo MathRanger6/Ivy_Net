@@ -5,6 +5,11 @@
 # Submit from the Ivy_Net repo root (same as pipe_job.slurm):
 #   cd /path/to/Ivy_Net && sbatch sim_job.slurm
 #
+# Wipe prior outputs + 537/sim_job logs before a fresh run:
+#   ./scripts/clean_rivanna_faithful_537_sweep.sh --dry-run
+#   ./scripts/clean_rivanna_faithful_537_sweep.sh --yes
+# (see sports/documents/RIVANNA_RUNBOOK.md)
+#
 # This driver job stays RUNNING until all child jobs finish (--wait), so give it a wall
 # time that covers the slowest Stage 1/2 shards plus merges (see #SBATCH --time below).
 #

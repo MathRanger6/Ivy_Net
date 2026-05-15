@@ -9,10 +9,12 @@ If you open a fresh Cursor window on Rivanna, tell the agent:
 ```text
 Please run the faithful 537 Rivanna sweep.
 
-Use this runbook:
-sports/documents/Rivanna_Faithful_537_Sweep_For_Dummies.md
+Use these docs:
 
-First do the preflight checks in that file.
+- `sports/documents/Rivanna_Faithful_537_Sweep_For_Dummies.md` (step-by-step)
+- `sports/documents/RIVANNA_RUNBOOK.md` (Slurm reference, **clean slate script**, **fresh-run checklist**, `sim_job.slurm`)
+
+First do the preflight checks in the Dummies guide.
 Then submit Stage 1 array, Merge Stage 1, Stage 2 array, and final merge with Slurm dependencies.
 Track the jobs with scripts/track_slurm.sh and squeue.
 Do not edit the model unless I ask.

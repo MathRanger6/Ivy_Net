@@ -113,3 +113,66 @@ If you change the Stage 2 array range, set `N_SHARDS` to match for **both** the 
 N_SHARDS=128 sbatch sports/outputs/simulation_sweeps/rivanna_stage2_array_faithful_537.slurm
 N_SHARDS=128 sbatch sports/outputs/simulation_sweeps/rivanna_merge_faithful_537.slurm
 ```
+
+## Clean slate before a new `sim_job.slurm`
+
+Sweep outputs and shard CSVs must not mix with an old run. From **repo root**:
+
+```bash
+./scripts/clean_rivanna_faithful_537_sweep.sh --dry-run   # list what would be deleted
+./scripts/clean_rivanna_faithful_537_sweep.sh --yes       # actually delete
+```
+
+This removes:
+
+- `sports/outputs/simulation_sweeps/rivanna_faithful_537/` (entire tree)
+- `slurm_out/slurm-537_*` and `slurm_out/slurm-sim_job-*` logs
+- legacy `slurm-537_*` / `slurm-sim_job-*` in the repo root, if any
+
+It does **not** delete other jobs’ logs under `slurm_out/` (for example `pipe_job`). To wipe **all** Slurm logs:
+
+```bash
+./scripts/clear_slurm.sh
+```
+
+Optional: `./scripts/clean_rivanna_faithful_537_sweep.sh --yes --slurm-all` runs `clear_slurm.sh` after the sweep-specific deletes.
+
+## Fresh run checklist (Rivanna / Terminus + Mac)
+
+Use this when you want a **full reset**, a new **`sbatch sim_job.slurm`**, and **results on your laptop**.
+
+### 1. On Rivanna (SSH or Terminus on iPhone)
+
+Working directory: **Ivy_Net repo root** (`cd` to the folder that contains `sports/`, `scripts/`, and `sim_job.slurm`).
+
+| Step | Action |
+|------|--------|
+| 1a | Optional: cancel bad or duplicate jobs — `squeue -u $USER`, then `scancel <JOBID>` if needed. |
+| 1b | Wipe prior sweep artifacts — `./scripts/clean_rivanna_faithful_537_sweep.sh --dry-run` then `./scripts/clean_rivanna_faithful_537_sweep.sh --yes`. |
+| 1c | Submit — `sbatch sim_job.slurm` (optional: `N_STAGE1_SHARDS=64 N_SHARDS=64 ENV_NAME=sports_net` on the same line). |
+| 1d | Monitor — `tail -f slurm_out/slurm-sim_job-<JOBID>.out` (job ID is printed when you submit). |
+
+### 2. Sync results to the Mac
+
+On the Mac, from **repo root** (after jobs finish):
+
+```bash
+./scripts/rsync_pull_recent_hpc.sh quick
+```
+
+`quick` pulls **`slurm_out/`** plus sweep outputs under `sports/outputs/simulation_sweeps/` per the usual include/exclude rules. Use `./scripts/rsync_pull_recent_hpc.sh all` if you also need `tenure/tenure_pipeline`.
+
+Narrow alternatives: `./scripts/rsync_pull_from_hpc.sh sweep` and/or `./scripts/rsync_pull_from_hpc.sh slurm_out`.
+
+### 3. Git
+
+`rivanna_faithful_537/` and Slurm `slurm-*.out` / `slurm-*.err` are **gitignored** — you typically **do not** `git add` sweep CSVs or plots.
+
+- **Commit / push** when you change **source**: Python worker, `*.slurm`, `sim_job.slurm`, docs, `faithful_537_sweep.py`, etc.
+- After `git push`, on Rivanna run **`git pull`** in the same repo path so HPC matches Mac before the next `sbatch`.
+
+**Note:** `./scripts/rsync_push_to_hpc.sh sweep` only syncs `sports/outputs/simulation_sweeps/` — not repo-root `sim_job.slurm`. If you edit `sim_job.slurm` on the Mac, use **git pull on Rivanna** or `scp`/`rsync` that file explicitly.
+
+### Where this doc lives
+
+Markdown source: `sports/documents/RIVANNA_RUNBOOK.md`. Generated PDF (if present) is alongside it for reading on iPad/iPhone.
