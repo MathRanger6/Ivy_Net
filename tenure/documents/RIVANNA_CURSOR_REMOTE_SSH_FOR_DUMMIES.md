@@ -5,7 +5,7 @@
 
 This is **not** official UVA Research Computing documentation. For cluster policy, quotas, modules, and Slurm, use [Research Computing](https://www.rc.virginia.edu/). For SSH login details, see [ssh on UVA HPC](https://www.rc.virginia.edu/userinfo/hpc/logintools/rivanna-ssh/).
 
-**Related (same folder, `tenure_documents`):** **`GIT_MULTIPLE_MACHINES_ELEMENTARY.md`**, **`TENURE_STREAMLINING_AND_RESEARCH_PRIORITIES.md`** (conda vs Git, research roadmap, **print checklist**).
+**Related:** [**`GIT_MULTIPLE_MACHINES_ELEMENTARY.md`**](../docs/GIT_MULTIPLE_MACHINES_ELEMENTARY.md), [**`TENURE_STREAMLINING_AND_RESEARCH_PRIORITIES.md`**](./TENURE_STREAMLINING_AND_RESEARCH_PRIORITIES.md) (conda vs Git, research roadmap, **print checklist**). **Central doc index:** [**`docs/README.md`**](../docs/README.md).
 
 ---
 
@@ -199,7 +199,7 @@ In Cursor, **AI chat and Composer** are features of the **Cursor application** o
 
 1. **PEER, CODA, SPORT** — **Long-running Cursor agents** with **months** of shared conversation history (especially CODA). **Losing access** means losing that **thread context**, not necessarily losing Cursor itself. Mitigation: **Part 6** above + a **PROJECT_MEMORY** file in the repo.
 
-2. **Git** — Project is currently **Dropbox-only**; you **want** to use Git. You already have a **GitHub account** (lesson plans at USMA). **What a remote is and first push/clone:** see **`GIT_MULTIPLE_MACHINES_ELEMENTARY.md`** in this folder (`tenure_documents`).
+2. **Git** — Project is currently **Dropbox-only**; you **want** to use Git. You already have a **GitHub account** (lesson plans at USMA). **What a remote is and first push/clone:** see [**`GIT_MULTIPLE_MACHINES_ELEMENTARY.md`**](../docs/GIT_MULTIPLE_MACHINES_ELEMENTARY.md) in **`docs/`**.
 
 3. **Your own space on the HPC** — You use a **`cdh`** (Connected Data Hub) path with **`Chas_Working`** for your files and separate folders for **OpenAlex**. **Write down** absolute paths once (`pwd` in each place) for env vars; **do not** commit OpenAlex into Git.
 
@@ -224,7 +224,7 @@ You asked what the **options** are. At a high level:
 
 ## Part 9c — Follow-ups (updated)
 
-1. **Git remote** — You will use **GitHub** (existing account). See **`GIT_MULTIPLE_MACHINES_ELEMENTARY.md`** for what “remote” means and the exact push/pull/clone dance.
+1. **Git remote** — You will use **GitHub** (existing account). See [**`GIT_MULTIPLE_MACHINES_ELEMENTARY.md`**](../docs/GIT_MULTIPLE_MACHINES_ELEMENTARY.md) for what “remote” means and the exact push/pull/clone dance.
 2. **Extra-private data** — **None required** for repo choice right now; private repo on GitHub is still a good default habit.
 3. **Paths on Rivanna** — **`cdh`** → **`Chas_Working`** + OpenAlex trees; keep paths in a small **git-ignored** env file or `PROJECT_MEMORY.md` (not the giant data itself).
 
@@ -249,7 +249,7 @@ You asked what the **options** are. At a high level:
 
 ---
 
-## Appendix — Research priorities (self-contained; same as `TENURE_STREAMLINING_AND_RESEARCH_PRIORITIES.md` Part 3)
+## Appendix — Research priorities (self-contained; same as [**`TENURE_STREAMLINING_AND_RESEARCH_PRIORITIES.md`**](./TENURE_STREAMLINING_AND_RESEARCH_PRIORITIES.md) Part 3)
 
 After SSH / Git / Rivanna connectivity is working, the **first scientific priority** is **rough counts** to see if the research agenda is viable.
 
@@ -265,5 +265,5 @@ After SSH / Git / Rivanna connectivity is working, the **first scientific priori
 
 ---
 
-*Document updated with user notes on long-running agents (CODA/PEER/SPORT), Dropbox vs Git, and HPC space (`cdh` / `Chas_Working` / OpenAlex). Companion doc: **`GIT_MULTIPLE_MACHINES_ELEMENTARY.md`**. PDF + sun still recommended.*
+*Document updated with user notes on long-running agents (CODA/PEER/SPORT), Dropbox vs Git, and HPC space (`cdh` / `Chas_Working` / OpenAlex). Companion: [**`GIT_MULTIPLE_MACHINES_ELEMENTARY.md`**](../docs/GIT_MULTIPLE_MACHINES_ELEMENTARY.md). PDF + sun still recommended.*
 

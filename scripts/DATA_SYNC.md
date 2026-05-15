@@ -2,6 +2,8 @@
 
 This document is the **single place** to answer: *What lives in Git? What is gitignored? What do I `rsync`? How do I get Slurm logs and sweep results onto my Mac for Cursor?*
 
+**Cross-domain guides (Git, filing):** [`docs/README.md`](../docs/README.md)
+
 **Related scripts**
 
 | Script | Purpose |

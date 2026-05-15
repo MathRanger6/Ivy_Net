@@ -1,10 +1,16 @@
 # Git + GitHub for Two (or More) Machines — Elementary Version
 
+**Central doc index:** [**`docs/README.md`**](README.md) — when to use `docs/` vs domain `documents/` folders.
+
 **For:** You, moving from “Dropbox only” to “my code can live on my laptop **and** on Rivanna **and** still be one story.”  
+
+**Practical cheat sheet (stash, rebase, fix staging, recovery):**  
+[`GIT_FOR_DUMMIES.md`](./GIT_FOR_DUMMIES.md)
+
 **You already know one piece of this:** at West Point you used GitHub to **pull** new lesson plans. That was you saying: “GitHub has the newest version; copy it down to my computer.” We will use the **same idea**, but you will also learn to **send** your work **up** to GitHub (`push`), and **download** it on another machine (`pull` or `clone`).
 
-**Related docs (same folder, `tenure_documents`):**  
-**`TENURE_STREAMLINING_AND_RESEARCH_PRIORITIES.md`** — conda env names vs folder layout, how Git helps clutter, **research priorities** after connectivity, and **which .md files to print** for a reading packet.
+**Related docs (tenure stream in this monorepo):**  
+[**`TENURE_STREAMLINING_AND_RESEARCH_PRIORITIES.md`**](../tenure/documents/TENURE_STREAMLINING_AND_RESEARCH_PRIORITIES.md) — conda env names vs folder layout, how Git helps clutter, **research priorities** after connectivity, and **which .md files to print** for a reading packet.
 
 ---
 
@@ -209,12 +215,12 @@ git push
 
 ## Part 8a — `talent_net`, `sports_net`, `tenure_net` (conda) vs “cloning environments”
 
-Your **conda environments** are named things like **`talent_net`**, **`sports_net`**, **`tenure_net`**. Those go with **projects** (talent, sports, tenure) and folders like **`tenure_pipeline/`**, **`tenure_documents/`**.
+Your **conda environments** are named things like **`talent_net`**, **`sports_net`**, **`tenure_net`**. Those go with **projects** (talent, sports, tenure) and folders like **`tenure/tenure_pipeline/`**, **`tenure/documents/`**.
 
 - **`git clone`** brings **code** (and `environment.yml` / `requirements.txt` if you add them) to Rivanna — **not** a copy of your whole Mac conda folder.
 - On the cluster you **recreate** an environment with **`conda env create -f environment.yml`** (or similar), not by cloning “the env” as if it were a repo.
 
-**Git helps** keep **one story for source files** across machines. **Conda** still defines **what Python packages** each project uses. See the longer discussion in **`TENURE_STREAMLINING_AND_RESEARCH_PRIORITIES.md`**.
+**Git helps** keep **one story for source files** across machines. **Conda** still defines **what Python packages** each project uses. See the longer discussion in [**`TENURE_STREAMLINING_AND_RESEARCH_PRIORITIES.md`**](../tenure/documents/TENURE_STREAMLINING_AND_RESEARCH_PRIORITIES.md).
 
 ---
 
@@ -242,7 +248,7 @@ Your **conda environments** are named things like **`talent_net`**, **`sports_ne
 
 ---
 
-## Appendix — Research priorities (self-contained; same as `TENURE_STREAMLINING_AND_RESEARCH_PRIORITIES.md` Part 3)
+## Appendix — Research priorities (self-contained; same as [`TENURE_STREAMLINING_AND_RESEARCH_PRIORITIES.md`](../tenure/documents/TENURE_STREAMLINING_AND_RESEARCH_PRIORITIES.md) Part 3)
 
 After SSH / Git / Rivanna connectivity is working, the **first scientific priority** is **rough counts** to see if the research agenda is viable.
 

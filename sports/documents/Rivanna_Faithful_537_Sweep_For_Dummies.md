@@ -13,6 +13,7 @@ Use these docs:
 
 - `sports/documents/Rivanna_Faithful_537_Sweep_For_Dummies.md` (step-by-step)
 - `sports/documents/RIVANNA_RUNBOOK.md` (Slurm reference, **clean slate script**, **fresh-run checklist**, `sim_job.slurm`)
+- **`docs/README.md`** — if you need **Git** or other **cross-domain** guides, look under `docs/` next (e.g. `docs/GIT_FOR_DUMMIES.md`).
 
 First do the preflight checks in the Dummies guide.
 Then submit Stage 1 array, Merge Stage 1, Stage 2 array, and final merge with Slurm dependencies.

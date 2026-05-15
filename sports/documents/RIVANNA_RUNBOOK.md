@@ -166,6 +166,8 @@ Narrow alternatives: `./scripts/rsync_pull_from_hpc.sh sweep` and/or `./scripts/
 
 ### 3. Git
 
+**Workflow cheat sheet:** [**`docs/GIT_FOR_DUMMIES.md`**](../../docs/GIT_FOR_DUMMIES.md) (stash, pull/rebase, recovery). **Concepts:** [**`docs/GIT_MULTIPLE_MACHINES_ELEMENTARY.md`**](../../docs/GIT_MULTIPLE_MACHINES_ELEMENTARY.md). **Doc index:** [**`docs/README.md`**](../../docs/README.md).
+
 `rivanna_faithful_537/` and Slurm `slurm-*.out` / `slurm-*.err` are **gitignored** — you typically **do not** `git add` sweep CSVs or plots.
 
 - **Commit / push** when you change **source**: Python worker, `*.slurm`, `sim_job.slurm`, docs, `faithful_537_sweep.py`, etc.
@@ -176,3 +178,5 @@ Narrow alternatives: `./scripts/rsync_pull_from_hpc.sh sweep` and/or `./scripts/
 ### Where this doc lives
 
 Markdown source: `sports/documents/RIVANNA_RUNBOOK.md`. Generated PDF (if present) is alongside it for reading on iPad/iPhone.
+
+**Not sports-specific:** centralized guides (Git, cross-domain notes) live under **`docs/`** — start at [`docs/README.md`](../../docs/README.md).

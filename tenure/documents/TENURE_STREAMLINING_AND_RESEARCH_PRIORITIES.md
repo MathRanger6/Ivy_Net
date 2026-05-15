@@ -105,7 +105,8 @@ Those names are the **first** candidates for OA matching (you already have API-b
 | File | What it is |
 |------|------------|
 | **`TENURE_STREAMLINING_AND_RESEARCH_PRIORITIES.md`** | **This file** — conda vs Git, clutter, research priorities. |
-| **`GIT_MULTIPLE_MACHINES_ELEMENTARY.md`** | Git remote, push/pull, first repo on GitHub, two machines. |
+| **[`GIT_MULTIPLE_MACHINES_ELEMENTARY.md`](../docs/GIT_MULTIPLE_MACHINES_ELEMENTARY.md)** | Git remote, push/pull, first repo on GitHub, two machines. |
+| **[`GIT_FOR_DUMMIES.md`](../docs/GIT_FOR_DUMMIES.md)** *(optional)* | Stash, rebase, fix staging — cheat sheet after you know the basics. |
 | **`RIVANNA_CURSOR_REMOTE_SSH_FOR_DUMMIES.md`** | Remote SSH, workspaces, agents (CODA/PEER/SPORT), `cdh` / `Chas_Working`, OpenAlex not in Git. |
 
 **Optional add-ons (longer / more technical):**
@@ -116,7 +117,7 @@ Those names are the **first** candidates for OA matching (you already have API-b
 | **`TENURE_DATA_GAMEPLAN.md`** | If it still matches your data strategy; skim for overlap with Part 3 above first. |
 | **`Pertinent_Thoughts_Tenure.md`** | If you use it as a running notebook of ideas. |
 
-**Tip:** Print the **three core** files first; add overviews only if you want a **thick** binder.
+**Tip:** Print the **core** files first (**this file**, **elementary Git**, **Rivanna/Cursor SSH**); add **[`GIT_FOR_DUMMIES`](../docs/GIT_FOR_DUMMIES.md)** if you want the cheat sheet on paper; add overviews only if you want a **thick** binder.
 
 ---
 
@@ -127,13 +128,13 @@ Those names are the **first** candidates for OA matching (you already have API-b
 
 ---
 
-## Part 6 — File locations (all under the dissertation workspace)
+## Part 6 — File locations
 
-These guides live in:
+**Central (cross-domain) docs:** `docs/` — start at **[`docs/README.md`](../docs/README.md)**.
 
-`…/Cursor Workspace PDE/current_documents/tenure_documents/`
+**This tenure stream:** `tenure/documents/` (this file, Rivanna/Cursor SSH guide, pipeline overviews, etc.).
 
-Same folder as `TENURE_PIPELINE_OVERVIEW.md` and related tenure docs.
+**Other domains:** `sports/documents/`, `talent/documents/`.
 
 ---
 
