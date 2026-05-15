@@ -31,16 +31,42 @@ rsports() {
     echo "  Fix: export IVY_NET_ROOT=/path/to/Ivy_Net  or move/clone the repo to ~/Ivy_Net" >&2
     return 1
   fi
-  if ! command -v conda >/dev/null 2>&1; then
+
+  # Make `conda activate` work without `conda init` in ~/.bashrc (module-provided conda
+  # is often on PATH but hook is not loaded). Prefer hook; fall back to conda.sh.
+  _rsports_load_conda_hook() {
+    if command -v conda >/dev/null 2>&1; then
+      local base
+      base="$(dirname "$(dirname "$(command -v conda)")")"
+      if [[ -f "$base/etc/profile.d/conda.sh" ]]; then
+        # shellcheck source=/dev/null
+        . "$base/etc/profile.d/conda.sh"
+        return 0
+      fi
+      eval "$(conda shell.bash hook)"
+      return 0
+    fi
+    if command -v module >/dev/null 2>&1; then
+      # shellcheck disable=SC1090
+      if module load miniforge 2>/dev/null; then
+        _rsports_load_conda_hook
+        return $?
+      fi
+    fi
     if [[ -f "$HOME/miniforge3/etc/profile.d/conda.sh" ]]; then
       # shellcheck source=/dev/null
       . "$HOME/miniforge3/etc/profile.d/conda.sh"
-    elif [[ -f "$HOME/mambaforge/etc/profile.d/conda.sh" ]]; then
+      return 0
+    fi
+    if [[ -f "$HOME/mambaforge/etc/profile.d/conda.sh" ]]; then
       # shellcheck source=/dev/null
       . "$HOME/mambaforge/etc/profile.d/conda.sh"
+      return 0
     fi
-  fi
-  if ! command -v conda >/dev/null 2>&1; then
+    return 1
+  }
+
+  if ! _rsports_load_conda_hook; then
     echo "rsports: conda not found. On Rivanna try: module load miniforge" >&2
     return 1
   fi
