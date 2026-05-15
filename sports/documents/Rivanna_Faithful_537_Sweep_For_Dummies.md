@@ -453,7 +453,7 @@ Look for rows where:
 moderate_stable = True
 ```
 
-That means the setting produced a stable moderate right-side downturn under the rule we chose.
+That means the setting produced a **stable inverted-U** shape under the sweep rule: interior peak, both endpoints below the peak, and mean left-side and right-side drops from the peak each at least 5%, on ≥60% of seeds.
 
 During the run, quick progress checks:
 

@@ -61,8 +61,10 @@ def read_rows(path: Path) -> list[dict]:
             "sorting_noise_sd",
             "min_ability_for_promotion",
             "tail_drop_frac",
+            "left_lift_frac",
             "tail_slope_last3",
             "peak_y",
+            "first_bin_y",
             "final_y",
         ]:
             if key in row:
@@ -210,8 +212,8 @@ def merge(n_shards: int) -> None:
                 f"Stage 2 shard CSVs merged: {len(shard_paths):,}",
                 f"Stable moderate downturn settings: {stable:,}",
                 "",
-                "Moderate stable rule: at least 60% of seeds have an interior peak with final bin",
-                "at least 5% below that peak, and mean tail drop is at least 5%.",
+                "Moderate stable: ≥60% seeds with strict inverted-U (interior peak; first & last bins",
+                "below peak; mean left_lift_frac and mean tail_drop_frac each ≥ 0.05).",
                 "",
                 f"Grouped candidates: `{GROUPED_CSV.name}`",
                 f"Candidate plots: `{PLOT_DIR.name}/`",
