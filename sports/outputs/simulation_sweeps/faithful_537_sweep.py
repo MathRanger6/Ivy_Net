@@ -535,16 +535,28 @@ def plot_top(stage2_rows: list[dict], grouped: pd.DataFrame, n_plots: int = 12) 
         if sub.empty:
             continue
         curves_y = np.array([json.loads(v) for v in sub["curve_y"]], dtype=float)
-        curves_x = np.array([json.loads(v) for v in sub["curve_x"]], dtype=float)
+        curves_x_list = [json.loads(v) for v in sub["curve_x"]]
+        curves_x = np.array(
+            [
+                [np.nan if (v is None or (isinstance(v, float) and np.isnan(v))) else float(v) for v in row]
+                for row in curves_x_list
+            ],
+            dtype=float,
+        )
         x = np.nanmean(curves_x, axis=0)
         y_mean = np.nanmean(curves_y, axis=0)
         y_min = np.nanmin(curves_y, axis=0)
         y_max = np.nanmax(curves_y, axis=0)
+        if not np.any(np.isfinite(x)):
+            x = np.arange(len(y_mean), dtype=float)
+            xlabel = "Pool-quality bin index (0 = lowest-Q bin)"
+        else:
+            xlabel = "Mean leave-one-out peer A in pool-quality bin"
 
         fig, ax = plt.subplots(figsize=(8.2, 5.4))
         ax.fill_between(x, y_min, y_max, color="steelblue", alpha=0.20, label="seed range")
         ax.plot(x, y_mean, "o-", color="steelblue", label="mean across seeds")
-        ax.set_xlabel("Mean leave-one-out peer A in pool-quality bin")
+        ax.set_xlabel(xlabel)
         ax.set_ylabel("Promotion probability")
         title = (
             f"#{idx+1}: pool={grow.pool_assignment}, score={grow.score_mode}, "
