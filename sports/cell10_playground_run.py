@@ -194,6 +194,10 @@ else:
         bmode = str(w_binning_mode.value)
         smode = str(w_score.value)
         w_additive.disabled = smode == "local_rank"
+        if smode == "loo_gap_plus_ability":
+            w_additive.description = "ADDITIVE w (LOO-gap share)"
+        else:
+            w_additive.description = "ADDITIVE w (local-rank share)"
         w_bins.disabled = bmode != "individual_qcut"
         w_person_x_binning.disabled = bmode != "individual_qcut"
         w_pool_bins.disabled = bmode not in ("pool_equal_count", "pool_equal_width")

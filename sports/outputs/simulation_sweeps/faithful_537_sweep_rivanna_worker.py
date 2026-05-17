@@ -7,6 +7,10 @@ Usage:
   python faithful_537_sweep_rivanna_worker.py merge-stage1 --n-shards 64
   python faithful_537_sweep_rivanna_worker.py stage2-shard --shard-id 0 --n-shards 64
   python faithful_537_sweep_rivanna_worker.py merge --n-shards 64
+
+  # Rebuild candidate_plots/ from a synced stage2 CSV only (no Slurm / no sim):
+  python faithful_537_sweep_rivanna_worker.py plot-candidates --n-plots 20
+  python faithful_537_sweep_rivanna_worker.py plot-candidates --stage2-csv /path/to/stage2_results_merged.csv
 """
 
 from __future__ import annotations
@@ -230,15 +234,92 @@ def merge(n_shards: int) -> None:
     print(f"Wrote {README}", flush=True)
 
 
+def plot_candidates_only(
+    *,
+    stage2_csv: Path | None = None,
+    plot_dir: Path | None = None,
+    grouped_csv: Path | None = None,
+    n_plots: int = 20,
+) -> None:
+    """Rebuild ``candidate_plots/*.png`` from an existing merged Stage 2 CSV (matplotlib only)."""
+    s2 = stage2_csv if stage2_csv is not None else STAGE2_CSV
+    if not s2.is_file():
+        raise FileNotFoundError(
+            f"plot-candidates: missing Stage 2 CSV: {s2}\n"
+            "  Sync `rivanna_faithful_537/stage2_results_merged.csv` from the cluster, "
+            "or pass --stage2-csv."
+        )
+    rows = read_rows(s2)
+    grouped = sweep.grouped_candidates(rows)
+
+    if grouped_csv is not None:
+        g_out = grouped_csv
+    elif stage2_csv is not None:
+        g_out = s2.parent / "grouped_candidates.csv"
+    else:
+        g_out = GROUPED_CSV
+    g_out.parent.mkdir(parents=True, exist_ok=True)
+    grouped.to_csv(g_out, index=False)
+    print(f"Wrote {g_out}", flush=True)
+
+    if plot_dir is not None:
+        p_out = plot_dir
+    elif stage2_csv is not None:
+        p_out = s2.parent / "candidate_plots"
+    else:
+        p_out = PLOT_DIR
+
+    old_plot_dir = sweep.PLOT_DIR
+    sweep.PLOT_DIR = p_out
+    try:
+        sweep.plot_top(rows, grouped, n_plots=n_plots)
+        if sweep.plt is not None and p_out.is_dir():
+            n_png = len(list(p_out.glob("candidate_*.png")))
+            print(f"==> candidate_plots: {n_png} PNG(s) -> {p_out.resolve()}", flush=True)
+    finally:
+        sweep.PLOT_DIR = old_plot_dir
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "command",
-        choices=["stage1", "stage1-shard", "merge-stage1", "stage2-shard", "merge"],
+        choices=[
+            "stage1",
+            "stage1-shard",
+            "merge-stage1",
+            "stage2-shard",
+            "merge",
+            "plot-candidates",
+        ],
     )
     parser.add_argument("--shard-id", type=int, default=0)
     parser.add_argument("--n-shards", type=int, default=64)
     parser.add_argument("--reset", action="store_true")
+    parser.add_argument(
+        "--stage2-csv",
+        type=Path,
+        default=None,
+        help="For plot-candidates: merged Stage 2 CSV (default: rivanna_faithful_537/stage2_results_merged.csv).",
+    )
+    parser.add_argument(
+        "--plot-dir",
+        type=Path,
+        default=None,
+        help="For plot-candidates: output directory for PNGs (default: rivanna_faithful_537/candidate_plots).",
+    )
+    parser.add_argument(
+        "--grouped-csv",
+        type=Path,
+        default=None,
+        help="For plot-candidates: where to write grouped_candidates.csv (default: next to stage2 CSV tree).",
+    )
+    parser.add_argument(
+        "--n-plots",
+        type=int,
+        default=20,
+        help="For plot-candidates: how many top grouped rows get PNGs (default: 20).",
+    )
     args = parser.parse_args()
 
     if args.command == "stage1":
@@ -255,6 +336,13 @@ def main() -> None:
         run_stage2_shard(args.shard_id, args.n_shards, reset=args.reset)
     elif args.command == "merge":
         merge(args.n_shards)
+    elif args.command == "plot-candidates":
+        plot_candidates_only(
+            stage2_csv=args.stage2_csv,
+            plot_dir=args.plot_dir,
+            grouped_csv=args.grouped_csv,
+            n_plots=args.n_plots,
+        )
 
 
 if __name__ == "__main__":

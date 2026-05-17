@@ -10,6 +10,10 @@ congestion measure — the name pairs with ``congestion_crowding`` for modeling 
 Legacy ``poolq_loo`` from ``recompute_teammate_loo_pool_quality`` may differ slightly
 when some roster rows have missing ``perf``, because that helper uses teammate
 *count* = all roster rows, not count of non-null ``perf``.
+
+``peer_perf_sd_loo`` is the LOO *sample standard deviation* (ddof=1) of teammate
+``perf`` over teammates with valid ``perf``, excluding self. NaN when the
+team-season has fewer than three valid ``perf`` rows or fewer than two LOO peers.
 """
 
 from __future__ import annotations
@@ -23,6 +27,7 @@ import pandas as pd
 TIER1_QUALITY_COL = "congestion_quality"
 TIER1_CROWDING_COL = "congestion_crowding"
 TIER1_CROWDING_WEIGHTED_COL = "congestion_crowding_weighted"
+TIER1_PEER_PERF_SD_LOO_COL = "peer_perf_sd_loo"
 
 GROUP_COLS = ("team_id", "season")
 REQUIRED_FOR_LOO = frozenset({"athlete_id", "team_id", "season", "perf"})
@@ -59,6 +64,7 @@ def add_tier1_mechanism_variables(
 
     - ``congestion_quality`` — LOO mean teammate ``perf`` (VALID ``perf`` only).
     - ``congestion_crowding`` — LOO sum teammate ``perf`` (VALID ``perf`` only).
+    - ``peer_perf_sd_loo`` — LOO std (ddof=1) of teammate ``perf`` among valid teammates.
     - ``congestion_crowding_weighted`` — optional; NaN when disabled or invalid inputs.
     """
     miss = REQUIRED_FOR_LOO - set(df.columns)
@@ -83,6 +89,22 @@ def add_tier1_mechanism_variables(
 
     out[TIER1_CROWDING_COL] = crowding_sum
     out[TIER1_QUALITY_COL] = quality_loo
+
+    sd_series = pd.Series(np.nan, index=out.index, dtype=float)
+    for _, sub in out.groupby(list(GROUP_COLS), observed=True):
+        p = pd.to_numeric(sub[perf_col], errors="coerce")
+        arr = p.to_numpy(dtype=float)
+        st = np.full(len(sub), np.nan, dtype=float)
+        valid = np.isfinite(arr)
+        iv = np.flatnonzero(valid)
+        if iv.size >= 3:
+            vals = arr[iv]
+            for k in range(iv.size):
+                peers = np.delete(vals, k)
+                if peers.size >= 2:
+                    st[iv[k]] = float(np.std(peers, ddof=1))
+        sd_series.loc[sub.index] = st
+    out[TIER1_PEER_PERF_SD_LOO_COL] = sd_series
 
     if compute_weighted_crowding:
         if minutes_col not in out.columns:

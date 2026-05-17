@@ -1,17 +1,18 @@
 {
-  "ability": "B",
-  "additive": 1.0,
+  "ability": "C",
+  "additive": 0.99,
   "binning_mode": "pool_equal_count",
   "bins": 20,
   "min_A_promote": 0.0,
   "n_indiv": 1000,
-  "noise": 0.0,
+  "n_pools": 100,
+  "n_winners": 60,
+  "noise": 0.06,
   "person_x_binning": "equal_count",
   "pool": "B",
-  "pool_bins": 8,
-  "runs": 500,
-  "score": "local_rank_plus_ability",
-  "use_batch": true,
-  "view": "pool_local",
-  "winner": "B"
+  "pool_bins": 10,
+  "runs": 290,
+  "score": "loo_gap_plus_ability",
+  "view": "pool_global",
+  "winner": "A"
 }

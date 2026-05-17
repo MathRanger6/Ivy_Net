@@ -219,6 +219,10 @@ def run_scenario(sc: Scenario) -> dict:
         elif sc.score_mode == "local_rank_plus_ability":
             w = float(sc.local_rank_weight)
             weights = w * local_rank + (1.0 - w) * ability
+        elif sc.score_mode == "loo_gap_plus_ability":
+            w = float(sc.local_rank_weight)
+            base = w * (ability - poolq_loo) + (1.0 - w) * ability
+            weights = np.where(np.isfinite(poolq_loo), base, ability)
         else:
             raise ValueError(f"unknown score mode {sc.score_mode!r}")
 
@@ -564,16 +568,37 @@ def plot_top(stage2_rows: list[dict], grouped: pd.DataFrame, n_plots: int = 12) 
         else:
             xlabel = "Mean leave-one-out peer A in pool-quality bin"
 
-        fig, ax = plt.subplots(figsize=(8.2, 5.4))
+        fig = plt.figure(figsize=(8.4, 7.8))
+        gs = fig.add_gridspec(2, 1, height_ratios=[2.35, 1.0], hspace=0.28)
+        ax = fig.add_subplot(gs[0])
+        ax_meta = fig.add_subplot(gs[1])
+
         ax.fill_between(x, y_min, y_max, color="steelblue", alpha=0.20, label="seed range")
         ax.plot(x, y_mean, "o-", color="steelblue", label="mean across seeds")
         ax.set_xlabel(xlabel)
         ax.set_ylabel("Promotion probability")
         title = _cell10_catalog.format_faithful_sweep_plot_title(idx + 1, grow.to_dict())
-        ax.set_title(title, fontsize=8)
+        ax.set_title(title, fontsize=10)
         ax.grid(True, alpha=0.3)
         ax.legend(loc="best", fontsize=8)
-        fig.tight_layout()
+
+        ax_meta.set_axis_off()
+        meta_lines = _cell10_catalog.format_faithful_sweep_plot_metadata_lines(
+            idx + 1, grow.to_dict()
+        )
+        ax_meta.text(
+            0.01,
+            0.99,
+            "\n".join(meta_lines),
+            transform=ax_meta.transAxes,
+            fontsize=7,
+            verticalalignment="top",
+            horizontalalignment="left",
+            linespacing=1.22,
+            wrap=False,
+        )
+
+        fig.subplots_adjust(left=0.09, right=0.97, top=0.94, bottom=0.04)
         fig.savefig(PLOT_DIR / f"candidate_{idx+1:02d}.png", dpi=180)
         plt.close(fig)
 
@@ -611,7 +636,7 @@ A grouped setting is marked `moderate_stable=True` when:
 - `{STAGE1_CSV.name}`: broad screen results.
 - `{STAGE2_CSV.name}`: verified results.
 - `{GROUPED_CSV.name}`: grouped candidate ranking.
-- `candidate_plots/`: plots for the top grouped settings (titles use the same knob phrases as Cell 10 via `cell10_knob_catalog.py`).
+- `candidate_plots/`: plots for the top grouped settings — short title on the curve; **full Cell 10–worded settings** as multi-line **metadata under the plot** (`cell10_knob_catalog.py`).
 
 ## Counts
 

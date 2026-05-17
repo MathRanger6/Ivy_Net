@@ -6,7 +6,7 @@ Slurm job arrays, without adding any new mechanisms.
 ## Files
 
 - `faithful_537_sweep.py` — sweep grid and scenario runner.
-- `faithful_537_sweep_rivanna_worker.py` — Rivanna worker (`stage1-shard`, `merge-stage1`, `stage2-shard`, `merge`).
+- `faithful_537_sweep_rivanna_worker.py` — Rivanna worker (`stage1-shard`, `merge-stage1`, `stage2-shard`, `merge`, **`plot-candidates`**).
 - `rivanna_stage1_faithful_537.slurm` — **Stage 1 array** (default 64 tasks): shard CSVs under `stage1_shards/`.
 - `rivanna_merge_stage1_faithful_537.slurm` — **`merge-stage1`**: concatenate shards → `stage1_results.csv`.
 - `rivanna_stage2_array_faithful_537.slurm` — Stage 2 verification array (default 64 tasks).
@@ -84,6 +84,14 @@ Important outputs:
 - `README.md`
 
 **Plots:** `candidate_plots/` is created next to `grouped_candidates.csv` under `rivanna_faithful_537/`, not under `simulation_sweeps/` alone. If the folder is missing after a successful merge, the usual cause is **no matplotlib** in the conda env used by `rivanna_merge_faithful_537.slurm` (defaults to `sports_net`). Check that job’s `slurm_out/slurm-537_merge-*.out` for: `skipping candidate_plots/ — matplotlib is not installed`. Fix: on Rivanna, `conda activate sports_net` (or your `ENV_NAME`) and `python -m pip install matplotlib`, then re-run the merge job or the full `sim_job.slurm`.
+
+**Regenerate PNGs locally (no sim):** after Dropbox/rsync has `rivanna_faithful_537/stage2_results_merged.csv`, from the **Ivy_Net repo root**:
+
+```bash
+python sports/outputs/simulation_sweeps/faithful_537_sweep_rivanna_worker.py plot-candidates --n-plots 20
+```
+
+Uses matplotlib only; refreshes `candidate_plots/` and `grouped_candidates.csv` beside that CSV. Optional: `--stage2-csv` / `--plot-dir` / `--grouped-csv` for non-default paths.
 
 ## Shards
 

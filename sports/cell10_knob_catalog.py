@@ -20,6 +20,7 @@ POOL_ASSIGNMENT_OPTIONS: list[tuple[str, str]] = [
 SCORE_MODE_OPTIONS: list[tuple[str, str]] = [
     ("Local rank only", "local_rank"),
     ("w·local rank + (1-w)·A_i", "local_rank_plus_ability"),
+    ("w·(A_i−LOO pool q)+(1-w)·A_i", "loo_gap_plus_ability"),
 ]
 
 BINNING_MODE_OPTIONS: list[tuple[str, str]] = [
@@ -66,23 +67,30 @@ def _label(options: Sequence[tuple[str, str]], value: str) -> str:
     return str(value)
 
 
-def format_faithful_sweep_plot_title(rank: int, row: dict[str, Any]) -> str:
-    """One-line title using the same phrases as Cell 10 widget descriptions."""
+def format_faithful_sweep_plot_metadata_lines(rank: int, row: dict[str, Any]) -> list[str]:
+    """Human-readable lines: same Cell 10 wording as the playground widgets.
+
+    Used below the axis in ``faithful_537_sweep.plot_top`` so long settings stay legible.
+    """
     pool_l = _label(POOL_ASSIGNMENT_OPTIONS, str(row["pool_assignment"]))
     score_l = _label(SCORE_MODE_OPTIONS, str(row["score_mode"]))
     abil_l = _label(ABILITY_OPTIONS, str(row["ability_choice"]))
     win_l = _label(WINNER_OPTIONS, str(row["winner_choice"]))
-    parts: list[str] = [
-        f"#{int(rank)}",
+    lines: list[str] = [
+        f"Candidate #{int(rank)} — settings (Cell 10 labels)",
         f"Pool assignment: {pool_l}",
         f"Promotion score: {score_l}",
     ]
     smode = str(row["score_mode"])
     if smode == "local_rank_plus_ability":
-        parts.append(
+        lines.append(
             f"ADDITIVE w (local-rank share): {float(row['local_rank_weight']):.2f}"
         )
-    parts.extend(
+    elif smode == "loo_gap_plus_ability":
+        lines.append(
+            f"ADDITIVE w (LOO-gap share): {float(row['local_rank_weight']):.2f}"
+        )
+    lines.extend(
         [
             f"Winner draw: {win_l}",
             f"A_i distribution: {abil_l}",
@@ -95,4 +103,9 @@ def format_faithful_sweep_plot_title(rank: int, row: dict[str, Any]) -> str:
             f"Pool–talent bins (#): {int(row['n_pool_bins'])}",
         ]
     )
-    return " · ".join(parts)
+    return lines
+
+
+def format_faithful_sweep_plot_title(rank: int, row: dict[str, Any]) -> str:
+    """Compact chart title only; full settings live in :func:`format_faithful_sweep_plot_metadata_lines`."""
+    return f"#{int(rank)} — mean promotion vs pool-quality bin (shaded = seed range)"
