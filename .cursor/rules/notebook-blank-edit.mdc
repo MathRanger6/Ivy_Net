@@ -1,9 +1,23 @@
 ---
-description: Each Agent message resets obligation; first EditNotebook per .ipynb in that turn must be burn-slot; MCP bootstrap exception for brand-new notebooks only
+description: MANDATORY — notebook burn first, one substantive EditNotebook per assistant reply per .ipynb (review visibility); MCP bootstrap exception only
 alwaysApply: true
 ---
 
 # Notebook Blank Edit — first edit per Agent interaction
+
+## MANDATORY — read before any `.ipynb` cell-body change
+
+**This file is `alwaysApply: true`.** It is part of every Agent turn. **Follow it; do not “summarize it away.”**
+
+**Project policy:** The user **accepts or rejects** notebook edits using Cursor’s **per-cell red/green diff**. Edits that **auto-apply without** that UI are **unacceptable** for production notebooks.
+
+- **Burn slot first** — sacrificial first `EditNotebook` so a “lost” diff hits throwaway content (see below).
+- **One substantive `EditNotebook` per assistant reply, per notebook file** — after the burn: **at most one** additional `EditNotebook` on that `.ipynb` in the same reply. For more cells, **stop**; the user sends another message (e.g. “continue”) and you run **burn again** (new user message = new obligation) then the next single edit. **Exception:** the user **explicitly** approves a batch for a named scope (“apply all markdown headers in one go,” etc.).
+- If anything conflicts with speed or convenience, **review visibility wins** unless the user waived batching in writing in that thread.
+
+**Also read:** `.cursor/rules/jupyter-notebook-workflow.mdc` for `540_tenure_pipeline.ipynb` (burn at **index 3**) and same-cell merge rules.
+
+---
 
 ## What counts as a new obligation (“interaction”)
 
@@ -11,7 +25,12 @@ For this rule, **one interaction** = **one user message** submitted in the **Age
 
 - A new user message **starts a fresh obligation**: if you will edit any `.ipynb` in that reply, the burn-slot edit comes **first** for that file (see below).
 - Reads, search, MCP **read/outline** (no cell-body change) **do not** satisfy or replace the burn edit; they can happen before it.
-- **Once per notebook file per interaction**: for each `.ipynb` that receives **`EditNotebook`** in that reply, the **first** `EditNotebook` targeting **that file** must be the visible burn-slot edit only. After that, all other cell edits in that file follow in the same interaction.
+- **Once per notebook file per interaction**:
+  1. The **first** `EditNotebook` on that file **must** be **only** the burn — no other cell in that call.
+  2. The **second** `EditNotebook` on that file (if any) is the **single** allowed substantive edit for that file in that reply (one cell created/changed, with all line changes to **that** cell merged into **one** `old_string`/`new_string` per `jupyter-notebook-workflow.mdc`).
+  3. **No third, fourth, …** substantive `EditNotebook` on the same file in the same reply unless the user **explicitly** approved batching.
+
+**Why one substantive edit:** In practice, **chaining** many `EditNotebook` calls in one assistant turn often results in **only the first** showing a proper accept/reject diff; later edits may **apply silently**. The burn absorbs the first “invisible” hit; **capping at one real edit per turn** keeps each change **reviewable**.
 
 If the agent will **not** use `EditNotebook` on any notebook in that reply, **no** burn edit is required.
 
@@ -22,7 +41,8 @@ When **creating a notebook from scratch** at the user’s request, it is accepta
 **After that bootstrap file exists, the exception ends.** Every later change to **cell bodies** or **new substantive cells** must follow:
 
 1. **`EditNotebook`** visible blank edit on the burn cell (see below).
-2. **`EditNotebook`** for all further content (or ask first for rare structural MCP — see Tool rules).
+2. **`EditNotebook`** for **exactly one** substantive change **per assistant reply** (unless the user explicitly approved batching for this task).
+3. Further changes: wait for the **next user message**, then repeat from (1).
 
 Do **not** use **`notebook_add_cell`**, **`notebook_bulk_add_cells`**, or **`notebook_edit_cell`** to inject real code or markdown after bootstrap unless the user explicitly approved that structural path for that step.
 
@@ -32,7 +52,7 @@ For **`540_tenure_pipeline.ipynb`**, use burn slot at **cell index 3** and follo
 
 # Burn-slot workflow (per notebook, per interaction)
 
-Before any **`EditNotebook`** that changes **cell bodies** or adds **substantive** cells in a given `.ipynb` in the **current** user message’s reply, the **first** `EditNotebook` on **that file** must be a visible blank edit to the burn-slot cell (**Cell index 1**, **except** `540_tenure_pipeline.ipynb` → index **3**). This keeps subsequent edits visible in the diff view.
+Before any **`EditNotebook`** that changes **cell bodies** or adds **substantive** cells in a given `.ipynb` in the **current** user message’s reply, the **first** `EditNotebook` on **that file** must be a visible blank edit to the burn-slot cell (**Cell index 1**, **except** `540_tenure_pipeline.ipynb` → index **3**). This **sacrifices** the first edit so the user’s review UI is not “spent” on real content.
 
 ## Required first `EditNotebook` per file
 
@@ -67,9 +87,10 @@ Use **local time** in **24-hour** form (`HH:MM`), e.g. `2026-05-11 13:07`. When 
 
 ## Tool rules for ALL `.ipynb` notebook edits
 
-- ALL **cell body** edits and **new substantive cells** must use **`EditNotebook`** (Cursor native) **after** the burn-slot edit for that file in that interaction — so edits show in the diff view.
+- ALL **cell body** edits and **new substantive cells** must use **`EditNotebook`** (Cursor native) **after** the burn-slot edit for that file in that interaction.
+- **Throughput:** Default = **one** substantive `EditNotebook` **after** burn **per assistant reply per file** (see **MANDATORY** above). Do not issue a chain of substantive notebook edits in one reply to “save turns” unless the user explicitly waived batching.
 - **Never without asking first:** do not change cell bodies by patching the raw `.ipynb` (shell one-liners, `sed`, Python that `json.load`/`dump`s the notebook, etc.). That bypasses Cursor’s per-cell red/green diff. If the user explicitly approves a bulk JSON patch for a defined task, you may use it; otherwise use **`EditNotebook`**.
 - **NEVER use `notebook_edit_cell`** (MCP) — it bypasses the diff view.
-- **`notebook_add_cell`** with real content is treated like smuggling cell bodies through MCP — **do not use** after bootstrap; use **`EditNotebook`** (`is_new_cell: true`) or split work across explicit user-approved steps.
+- **`notebook_add_cell`** with real content is treated like smuggling cell bodies through MCP — **do not use** after bootstrap; use **`EditNotebook`** (`is_new_cell: true`) or split work across **user messages** (burn + one new cell per reply by default).
 - **`notebook_bulk_add_cells`**, **`notebook_move_cell`**, **`notebook_split_cell`**, **`notebook_merge_cells`**, **`notebook_duplicate_cell`**: rare structural ops — **ask the user first**, except for the **one-time bootstrap** described at the top of this file.
 - Other notebook MCP (**read**, **search**, **outline**, **metadata**, **validation**, **`notebook_create`** for an empty/new file only, path context, etc.) is fine without asking.

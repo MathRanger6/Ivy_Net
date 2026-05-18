@@ -6,21 +6,18 @@ alwaysApply: false
 
 # Jupyter Notebook Editing Workflow (`540_tenure_pipeline.ipynb`)
 
-For **all other** notebooks (e.g. `535_sports_tier_1.ipynb`), follow **`.cursor/rules/notebook-blank-edit.mdc`** (burn slot at **cell index 1**, plus the **one-time MCP bootstrap** exception for brand-new files).
+For **all other** notebooks (e.g. `535_sports_tier_1.ipynb`), follow **`.cursor/rules/notebook-blank-edit.mdc`** (burn slot at **cell index 1**, plus the **one-time MCP bootstrap** exception for brand-new files). That file is **`alwaysApply: true`** and includes the **one substantive `EditNotebook` per assistant reply per notebook** rule unless the user waives batching.
 
 ---
 
 ## WHY THESE RULES EXIST — READ THIS FIRST
 
-There is a known quirk in how Cursor's AI edits `.ipynb` files using `EditNotebook`:
-**the very first `EditNotebook` call in a session does not show the red/green diff
-acceptance UI.** The change goes straight to disk invisibly. The user cannot review
-or reject it. Every edit *after* the first one shows correctly.
+Cursor’s `EditNotebook` path does **not** reliably give the user a red/green **accept/reject** diff for **every** edit in a **single** assistant reply.
 
-To work around this, a **sacrificial "burn slot" cell** exists in the notebook.
-The first edit of every session targets that cell with a visible, meaningful change.
-If the editor skips the diff for that first call — fine, it was sacrificial.
-All real edits that follow will show correctly with red/green acceptance.
+1. **First `EditNotebook` in a turn** often **does not** show the line-level diff UI; it may apply invisibly. Hence the **burn slot**: the **first** edit **only** touches that disposable cell.
+2. **Chaining many** `EditNotebook` calls on the same `.ipynb` in **one** assistant reply also often results in **only one** visible review step; later edits may **auto-apply** without the user’s per-cell diff. Hence **`.cursor/rules/notebook-blank-edit.mdc`** caps substantive edits to **one per reply per file** after the burn, unless the user **explicitly** approves a batch.
+
+The user may need **line-accurate** diffs (e.g. to transcribe into locked-down environments). **Review visibility is mandatory** — see **`notebook-blank-edit.mdc`**.
 
 ---
 
@@ -116,3 +113,7 @@ update and red/green diffs never appear.
    locked-down system (US Army AWS JupyterLab) where copy/paste is not available.
    Line-level red/green diffs are their only way to know exactly what to type.
    A "keep cell" button without internal diffs is not actionable.
+
+7. **Issuing many `EditNotebook` calls on the same notebook across different cells in one assistant reply.**
+   Even when each call targets a **different** cell, extra calls in the **same** reply often **do not** surface separate accept/reject diffs and may auto-apply.
+   **Default:** follow **`notebook-blank-edit.mdc`** — **burn**, then **one** substantive edit, then **stop** until the user sends another message (unless they explicitly approved batching).
