@@ -1,0 +1,20 @@
+{
+  "ability_draw": "normal_clipped",
+  "bin_mode": "quantile",
+  "kernel": "gaussian",
+  "loo_gap_weight": 0.6,
+  "n_bins": 12,
+  "n_selected": 250,
+  "n_teams": 1303,
+  "pref_alpha": 0.2,
+  "roster_size": 20,
+  "score_mode": "loo_gap_plus_ability",
+  "seed": 46940,
+  "show_chop": false,
+  "show_plot_a": true,
+  "t_high": 2.05,
+  "t_low": -2.0,
+  "target_dist": "normal_clipped",
+  "tau": 0.34,
+  "winner_selection": "A"
+}

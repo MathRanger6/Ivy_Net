@@ -20,8 +20,10 @@ When 538 grows generative cells, import this module the same way 537 imports `si
 # sports_pipeline.config — do not duplicate those knobs here.
 
 # --- Pool count (PD11: J must be >> number of ventile bins) --------------------
-N_TEAMS = 50
-# 538/530 ventiles often 8–20; keep N_TEAMS several times larger.
+N_TEAMS = 100
+# 538/530 ventiles often 8–20; keep N_TEAMS several times larger than K bins.
+# CELL 10 slider max (widget cap, not a hard algorithmic limit):
+N_TEAMS_SLIDER_MAX = 2500
 
 ROSTER_SIZE = 15
 # Fixed roster size per team-season in synthetic data (tune vs empirical minutes/roster).
@@ -69,7 +71,24 @@ EMPIRIC_MEDIAN_ROSTER_SD_Z = 0.80
 EMPIRIC_COVERAGE_PEAK_ORDER = 3000
 # Order-of-magnitude; re-read 530 printout after panel refresh
 
+# --- Generative selection / inverted-U replay (CELL 10–12) --------------------
+# Selection = draft pick, tenure, promotion, etc. Bins are on LOO pool Q (not teams).
+GENERATIVE_N_BINS = 12
+GENERATIVE_POOLQ_BINNING = "quantile"  # "quantile" | "equal_width"
+N_SELECTED = 200
+# Selection score: "ability" | "loo_gap_plus_ability"
+SELECTION_SCORE_MODE = "loo_gap_plus_ability"
+LOO_GAP_WEIGHT = 0.5
+# Winner draw: "A" weighted | "B" Bernoulli | "C" top-K (deterministic)
+WINNER_SELECTION = "C"
+
+# Deprecated aliases (rename only — same values)
+N_PROMOTED = N_SELECTED
+PROMOTION_SCORE_MODE = SELECTION_SCORE_MODE
+
 # --- 538 notebook run gates (when generative cells exist) ----------------------
 RUN_GENERATIVE_ASSIGNMENT_DEMO = False
 RUN_REPLAY_530_STYLE_CHECKS = False
 RANDOM_SEED = 42
+# CELL 10 playground: render interval-overlap Plot A (530 CELL 8 analog)
+SHOW_PLOT_A = True

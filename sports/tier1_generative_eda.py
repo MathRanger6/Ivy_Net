@@ -1,0 +1,191 @@
+"""Shared generative EDA: inverted-U bins, params from CELL 10 state JSON."""
+
+from __future__ import annotations
+
+import json
+from dataclasses import dataclass
+from pathlib import Path
+from typing import TYPE_CHECKING
+
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+
+if TYPE_CHECKING:
+    from tier1_pool_assignment import AssignmentParams
+
+
+def _outcome_col(players: pd.DataFrame) -> str:
+    if "Y_selected" in players.columns:
+        return "Y_selected"
+    if "Y_promoted" in players.columns:
+        return "Y_promoted"
+    raise KeyError("players need Y_selected or Y_promoted")
+
+
+@dataclass(frozen=True)
+class SelectionConfig:
+    n_bins: int
+    bin_mode: str
+    n_selected: int
+    score_mode: str
+    loo_gap_weight: float
+    winner_selection: str
+
+    @classmethod
+    def from_module(cls, mod) -> SelectionConfig:
+        n_sel = getattr(mod, "N_SELECTED", None)
+        if n_sel is None:
+            n_sel = getattr(mod, "N_PROMOTED", 40)
+        score = getattr(mod, "SELECTION_SCORE_MODE", None)
+        if score is None:
+            score = getattr(mod, "PROMOTION_SCORE_MODE", "loo_gap_plus_ability")
+        return cls(
+            n_bins=int(getattr(mod, "GENERATIVE_N_BINS", 12)),
+            bin_mode=str(getattr(mod, "GENERATIVE_POOLQ_BINNING", "quantile")),
+            n_selected=int(n_sel),
+            score_mode=str(score),
+            loo_gap_weight=float(getattr(mod, "LOO_GAP_WEIGHT", 0.5)),
+            winner_selection=str(getattr(mod, "WINNER_SELECTION", "C")),
+        )
+
+    @classmethod
+    def from_state(cls, state: dict, base: SelectionConfig) -> SelectionConfig:
+        n_sel = state.get("n_selected", state.get("n_promoted", base.n_selected))
+        return cls(
+            n_bins=int(state.get("n_bins", base.n_bins)),
+            bin_mode=str(state.get("bin_mode", base.bin_mode)),
+            n_selected=int(n_sel),
+            score_mode=str(state.get("score_mode", base.score_mode)),
+            loo_gap_weight=float(state.get("loo_gap_weight", base.loo_gap_weight)),
+            winner_selection=str(state.get("winner_selection", base.winner_selection)),
+        )
+
+
+# Deprecated alias
+PromotionConfig = SelectionConfig
+
+
+def assignment_params_from_state(
+    sports: Path,
+    state: dict | None,
+    *,
+    tpa,
+) -> AssignmentParams:
+    base = tpa.AssignmentParams.from_tier1_sim_config(sports / "tier1_sim_config.py")
+    if not state:
+        return base
+    return tpa.AssignmentParams(
+        n_teams=int(state.get("n_teams", base.n_teams)),
+        roster_size=int(state.get("roster_size", base.roster_size)),
+        target_mean_dist=state.get("target_dist", base.target_mean_dist),
+        target_mean_low=float(state.get("t_low", base.target_mean_low)),
+        target_mean_high=float(state.get("t_high", base.target_mean_high)),
+        target_mean_mu=base.target_mean_mu,
+        target_mean_sigma=base.target_mean_sigma,
+        assignment_kernel=state.get("kernel", base.assignment_kernel),
+        assignment_temperature=float(state.get("tau", base.assignment_temperature)),
+        preferential_alpha=float(state.get("pref_alpha", base.preferential_alpha)),
+        preferential_k=base.preferential_k,
+        ability_draw=state.get("ability_draw", base.ability_draw),
+        ability_mean=base.ability_mean,
+        ability_sd=base.ability_sd,
+        ability_clip_low=base.ability_clip_low,
+        ability_clip_high=base.ability_clip_high,
+        ability_student_t_df=base.ability_student_t_df,
+        ability_student_t_scale=base.ability_student_t_scale,
+        sorting_noise_sd=base.sorting_noise_sd,
+    )
+
+
+def load_playground_state(sports: Path) -> dict:
+    path = sports / "tier1_cell10_playground_state.json"
+    if not path.is_file():
+        return {}
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+
+
+def inverted_u_bin_table(
+    players: pd.DataFrame,
+    sel: SelectionConfig,
+    *,
+    assign_poolq_bin_labels,
+) -> pd.DataFrame:
+    """Requires poolq_loo and Y_selected (or legacy Y_promoted)."""
+    ycol = _outcome_col(players)
+    use = players.dropna(subset=["poolq_loo", ycol]).copy()
+    use["bin"] = assign_poolq_bin_labels(use["poolq_loo"], sel.n_bins, sel.bin_mode)
+    return (
+        use.dropna(subset=["bin"])
+        .groupby("bin", observed=True)
+        .agg(
+            n=(ycol, "size"),
+            selection_rate=(ycol, "mean"),
+            mean_loo_q=("poolq_loo", "mean"),
+        )
+        .reset_index()
+        .sort_values("mean_loo_q")
+    )
+
+
+def figure_inverted_u(
+    summ: pd.DataFrame,
+    *,
+    title: str,
+    n_bins: int,
+    n_teams: int,
+) -> plt.Figure:
+    fig, ax = plt.subplots(figsize=(8.5, 4.2))
+    x = summ["mean_loo_q"].to_numpy(dtype=float)
+    rate_col = (
+        "selection_rate"
+        if "selection_rate" in summ.columns
+        else "promo_rate"
+    )
+    y = summ[rate_col].to_numpy(dtype=float)
+    ax.plot(x, y, "o-", color="C0", lw=2.0, ms=7)
+    ax.fill_between(x, 0, y, alpha=0.12, color="C0")
+    ax.set_xlabel("Bin mean LOO pool quality (poolq_loo)")
+    ax.set_ylabel("Mean selection rate")
+    ax.set_title(title)
+    ymax = float(y.max()) if len(y) else 0.0
+    ymin = float(y.min()) if len(y) else 0.0
+    if ymax <= 0:
+        ax.set_ylim(0, 0.01)
+    else:
+        span = ymax - max(ymin, 0.0)
+        pad = max(span * 0.12, ymax * 0.08, 1e-4)
+        ax.set_ylim(0, min(1.0, ymax + pad))
+    fig.tight_layout()
+    return fig
+
+
+def run_inverted_u_pipeline(
+    params: AssignmentParams,
+    sel: SelectionConfig,
+    rng,
+    *,
+    tpa,
+    assign_poolq_bin_labels,
+) -> tuple[pd.DataFrame, pd.DataFrame, plt.Figure]:
+    """Soft assign → select K → bin table → figure."""
+    players, _, _ = tpa.simulate_generative_rosters(params, rng=rng, method="soft")
+    players = tpa.assign_selection(
+        players,
+        rng,
+        n_selected=sel.n_selected,
+        score_mode=sel.score_mode,
+        loo_gap_weight=sel.loo_gap_weight,
+        winner_selection=sel.winner_selection,
+    )
+    summ = inverted_u_bin_table(players, sel, assign_poolq_bin_labels=assign_poolq_bin_labels)
+    fig = figure_inverted_u(
+        summ,
+        title=f"Inverted-U preview ({sel.n_bins} bins, J={params.n_teams})",
+        n_bins=sel.n_bins,
+        n_teams=params.n_teams,
+    )
+    return players, summ, fig

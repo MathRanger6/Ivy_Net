@@ -172,6 +172,7 @@ Conceptual move from rank-only:
 | File | Role |
 |------|------|
 | `sports/documents/Tier1_Presorting_Design_Note.md` | This document |
+| `sports/documents/538_Cell10_Generative_Manual.md` | **CELL 10 widget glossary** (operator manual) |
 | `sports/tier1_sim_config.py` | Generative assignment defaults for **538** (not 537) |
 | `sports/sim_config.py` | **537 only** — run gates, Cell 10 default snapshot |
 | `sports/cell10_knob_catalog.py` | 537 widget labels / sweep titles |
