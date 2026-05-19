@@ -39,6 +39,7 @@ There is intentional overlap in *rules*: `.gitignore` tells Git “don’t commi
 | Slurm `.out` / `.err` | `slurm_out/slurm-*.{out,err}` (and legacy repo root) | **No** | Yes — `logs` or `quick` / `all` | Rarely needed |
 | Papermill output notebook | `slurm-*-output.ipynb` (often repo root) | **No** | Use same pull as parent dir or copy manually | Optional |
 | Faithful 537 sweep tree | `sports/outputs/simulation_sweeps/rivanna_faithful_537/`, CSVs, plots | **No** | Yes — `sweep` or `quick` | Sweep **code** yes; **results** pull-only via excludes |
+| Faithful 538 sweep tree | `rivanna_faithful_538/`, `faithful_538_*` CSVs/plots | **No** | Yes — `sweep` or `quick` | Also `rsync_push … sweep538-deps` for Tier 1 + `empirical_perf_fit.json` |
 | DBLP XML | `python_packages/dblp-parser/dblp.xml`, `datasets/` | **No** | Manual / intentional only | Manual |
 
 ---
@@ -64,7 +65,7 @@ There is intentional overlap in *rules*: `.gitignore` tells Git “don’t commi
    ./scripts/rsync_pull_recent_hpc.sh all
    ```
 
-4. Open **Cursor** on the Mac repo; the agent can read **`slurm_out/`**, **`sports/outputs/simulation_sweeps/rivanna_faithful_537/`**, and pulled JSONLs/CSVs.
+4. Open **Cursor** on the Mac repo; the agent can read **`slurm_out/`**, **`rivanna_faithful_537/`** / **`rivanna_faithful_538/`**, and pulled JSONLs/CSVs.
 
 **Git** does *not* replace this step for logs or sweep results — those paths are gitignored by design.
 

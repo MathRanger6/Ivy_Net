@@ -41,7 +41,8 @@ def fit_perf_array(
     *,
     metric_key: str = "perf",
     z_within_season: bool = True,
-    n_sample_for_fit: int | None = 50_000,
+    n_sample_for_fit: int | None = 100_000,
+    n_bins: int = 60,
 ) -> dict[str, Any]:
     """Fit parametric laws; pick lowest AIC among successful fits."""
     arr = np.asarray(x, dtype=float)
@@ -83,7 +84,7 @@ def fit_perf_array(
     if not ok:
         raise RuntimeError("no distribution fit succeeded")
     best = min(ok, key=lambda r: r["aic"])
-    hist_counts, hist_edges = np.histogram(arr, bins=60)
+    hist_counts, hist_edges = np.histogram(arr, bins=n_bins)
     return {
         "version": 1,
         "source": "530_sports_pipeline CELL 5b",
@@ -97,7 +98,7 @@ def fit_perf_array(
             "max": float(np.max(arr)),
         },
         "histogram": {
-            "n_bins": 60,
+            "n_bins": n_bins,
             "edges": [float(x) for x in hist_edges],
             "counts": [int(x) for x in hist_counts],
         },

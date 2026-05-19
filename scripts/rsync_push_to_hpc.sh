@@ -7,7 +7,8 @@
 #   ./scripts/rsync_push_to_hpc.sh
 #   ./scripts/rsync_push_to_hpc.sh tenure/tenure_pipeline
 #   ./scripts/rsync_push_to_hpc.sh python_packages/dblp-parser
-#   ./scripts/rsync_push_to_hpc.sh sweep  # faithful 537 sweep files only
+#   ./scripts/rsync_push_to_hpc.sh sweep       # 537 + 538 sweep scripts (simulation_sweeps/)
+#   ./scripts/rsync_push_to_hpc.sh sweep538-deps  # Tier 1 + empirical_perf_fit.json
 #   ./scripts/rsync_push_to_hpc.sh all    # default project targets; excludes DBLP XML dumps
 # Dry run: DRY_RUN=1 ./scripts/rsync_push_to_hpc.sh
 #
@@ -30,6 +31,8 @@ if [[ "${1:-}" == "all" ]]; then
   done
 elif [[ "${1:-}" == "sweep" ]]; then
   _run "${IVY_RSYNC_SWEEP_TARGET}"
+elif [[ "${1:-}" == "sweep538-deps" ]]; then
+  ivy_rsync_push_faithful_538_deps
 else
   _run "${1:-tenure/tenure_pipeline}"
 fi

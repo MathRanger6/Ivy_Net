@@ -48,7 +48,7 @@ IVY_RSYNC_DEFAULT_TARGETS=(
   "tenure/tenure_pipeline"
 )
 
-# Narrow shortcut for the faithful 537 sweep.
+# Narrow shortcut for faithful 537 / 538 sweeps (code push; results pull).
 IVY_RSYNC_SWEEP_TARGET="sports/outputs/simulation_sweeps"
 
 # Excludes applied to EVERY rsync (push + pull).
@@ -93,6 +93,12 @@ _IVY_RSYNC_PUSH_EXCLUDES=(
   "--exclude=faithful_537_sweep_README.md"
   "--exclude=candidate_plots/"
   "--exclude=rivanna_faithful_537/"            # HPC-generated sweep outputs — pull only
+  "--exclude=faithful_538_sweep_results.jsonl"
+  "--exclude=faithful_538_sweep_stage*_results.csv"
+  "--exclude=faithful_538_sweep_grouped_candidates.csv"
+  "--exclude=faithful_538_sweep_README.md"
+  "--exclude=faithful_538_candidate_plots/"
+  "--exclude=rivanna_faithful_538/"
 )
 
 _ivy_rsync_build_opts() {
@@ -139,15 +145,14 @@ ivy_rsync_pull() {
 }
 
 # Usage: ivy_rsync_pull_sweep
-#   Pulls generated faithful 537 sweep outputs only. It deliberately does not pull
-#   sweep source code back from HPC, because rsync is not Git and can overwrite
-#   local edits if the remote copy is newer.
+#   Pulls generated faithful 537 + 538 sweep outputs only. It deliberately does not
+#   pull sweep source code back from HPC, because rsync can overwrite local edits.
 ivy_rsync_pull_sweep() {
   _ivy_rsync_build_opts
   local rel="${IVY_RSYNC_SWEEP_TARGET}"
   local src="${REMOTE}:${HPC_REPO}/${rel}/"
   local dst="${REPO_ROOT}/${rel}/"
-  echo "==> Pull faithful 537 sweep results only"
+  echo "==> Pull faithful 537 + 538 sweep results only"
   echo "    from: ${src}"
   echo "    to:   ${dst}"
   mkdir -p "${dst}"
@@ -159,7 +164,45 @@ ivy_rsync_pull_sweep() {
     "--include=/faithful_537_sweep_grouped_candidates.csv" \
     "--include=/faithful_537_sweep_README.md" \
     "--include=/candidate_plots/***" \
+    "--include=/rivanna_faithful_538/***" \
+    "--include=/faithful_538_sweep_results.jsonl" \
+    "--include=/faithful_538_sweep_stage*_results.csv" \
+    "--include=/faithful_538_sweep_grouped_candidates.csv" \
+    "--include=/faithful_538_sweep_README.md" \
+    "--include=/faithful_538_candidate_plots/***" \
     "--exclude=*" \
     "${src}" "${dst}"
+  echo "==> Done."
+}
+
+# Usage: ivy_rsync_push_faithful_538_deps
+#   Push Tier-1 generative modules + 530 empirical perf fit JSON (Mac → HPC).
+ivy_rsync_push_faithful_538_deps() {
+  local fit="${REPO_ROOT}/sports/datasets/mbb/empirical_perf_fit.json"
+  if [[ ! -f "$fit" ]]; then
+    echo "ERROR: missing ${fit} — run 530 CELL 5b (fit_perf_array → save_fit) on Mac first." >&2
+    exit 1
+  fi
+  echo "==> Push faithful 538 model dependencies"
+  ivy_rsync_push "sports/sports_pipeline"
+  local files=(
+    "sports/tier1_sim_config.py"
+    "sports/tier1_pool_assignment.py"
+    "sports/tier1_generative_eda.py"
+    "sports/datasets/mbb/empirical_perf_fit.json"
+  )
+  _ivy_rsync_build_opts
+  for rel in "${files[@]}"; do
+    local src="${REPO_ROOT}/${rel}"
+    if [[ ! -f "$src" ]]; then
+      echo "ERROR: missing ${src}" >&2
+      exit 1
+    fi
+    local dst="${REMOTE}:${HPC_REPO}/${rel}"
+    echo "    ${rel}"
+    rsync "${RSYNC_OPTS[@]}" \
+      "${_IVY_RSYNC_COMMON_EXCLUDES[@]}" \
+      "${src}" "${dst}"
+  done
   echo "==> Done."
 }

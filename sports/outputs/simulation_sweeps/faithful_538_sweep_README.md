@@ -42,4 +42,19 @@ python faithful_538_sweep.py --reset
 
 ## Rivanna
 
-Use `faithful_538_sweep_rivanna_worker.py` (mirror of 537 worker). Push with `./scripts/rsync_push_to_hpc.sh sweep`.
+Step-by-step: `sports/documents/Rivanna_Faithful_538_Sweep_For_Dummies.md`.
+
+```bash
+# Mac
+./scripts/rsync_push_to_hpc.sh sweep
+./scripts/rsync_push_to_hpc.sh sweep538-deps   # tier1 + empirical_perf_fit.json
+
+# Rivanna (repo root)
+sbatch sim_job_538.slurm
+# Pilot: PILOT=1 sbatch sim_job_538.slurm
+
+# Mac — pull results
+./scripts/rsync_pull_from_hpc.sh sweep
+```
+
+Slurm scripts: `rivanna_stage1_faithful_538.slurm`, `rivanna_merge_stage1_faithful_538.slurm`, `rivanna_stage2_array_faithful_538.slurm`, `rivanna_merge_faithful_538.slurm`.
