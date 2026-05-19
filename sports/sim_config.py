@@ -34,6 +34,7 @@ SHOW_CONVERGENCE_PLOTS = False
 RUN_CHECKPOINTS = [5, 10, 25, 50, 100, 250, 500, 1_000]
 
 # --- Legacy assignment & promotion (sort-and-chop family) ----------------------
+# "empirical_530" = draw A_i from 530 CELL 5b fit (sports/datasets/mbb/empirical_perf_fit.json)
 ABILITY_DISTRIBUTION_CHOICE = "B"
 
 PROMOTION_WEIGHT_RULE_CHOICE_SIM1 = "A"

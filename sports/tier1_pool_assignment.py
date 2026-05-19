@@ -20,8 +20,13 @@ import numpy as np
 import pandas as pd
 
 AssignmentKernel = Literal["gaussian", "cauchy"]
-TargetMeanDist = Literal["uniform", "normal_clipped"]
-AbilityDraw = Literal["uniform_01", "normal_clipped", "normal_plus_student_t"]
+TargetMeanDist = Literal["uniform", "normal_clipped", "empirical_530"]
+AbilityDraw = Literal[
+    "uniform_01",
+    "normal_clipped",
+    "normal_plus_student_t",
+    "empirical_530",
+]
 AssignmentMethod = Literal["soft", "sort_chop"]
 
 
@@ -127,6 +132,10 @@ def draw_abilities(
             noise = rng.standard_t(df=ability_student_t_df, size=n)
             base = base + ability_student_t_scale * noise
         return np.clip(base, ability_clip_low, ability_clip_high)
+    if ability_draw == "empirical_530":
+        from sports_pipeline.empirical_perf_fit import draw_empirical_abilities
+
+        return draw_empirical_abilities(rng, n)
     raise ValueError(f"unknown ability_draw {ability_draw!r}")
 
 
@@ -146,6 +155,10 @@ def draw_target_means(
     if target_mean_dist == "normal_clipped":
         raw = rng.normal(loc=target_mean_mu, scale=target_mean_sigma, size=n_teams)
         return np.clip(raw, target_mean_low, target_mean_high)
+    if target_mean_dist == "empirical_530":
+        from sports_pipeline.empirical_perf_fit import draw_empirical_abilities
+
+        return draw_empirical_abilities(rng, n_teams)
     raise ValueError(f"unknown target_mean_dist {target_mean_dist!r}")
 
 

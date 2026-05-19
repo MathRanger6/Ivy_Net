@@ -79,6 +79,10 @@ def generate_ability(rng: np.random.Generator, n: int, choice: str) -> np.ndarra
         vals = rng.beta(a=2.0, b=5.0, size=n)
         vmax = float(vals.max())
         return vals / vmax if vmax > 0 else vals
+    if choice in ("D", "empirical_530"):
+        from sports_pipeline.empirical_perf_fit import draw_empirical_abilities
+
+        return draw_empirical_abilities(rng, n)
     raise ValueError(f"unknown ability choice {choice!r}")
 
 

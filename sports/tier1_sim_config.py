@@ -32,6 +32,7 @@ N_INDIVIDUALS = N_TEAMS * ROSTER_SIZE
 
 # --- Target team means T_j ------------------------------------------------------
 # "uniform" | "normal_clipped"
+# "empirical_530" = draw T_j from scipy fit saved by 530 CELL 5b (same law as empirical A_i)
 TARGET_MEAN_DIST = "uniform"
 TARGET_MEAN_LOW = -0.5
 TARGET_MEAN_HIGH = 0.5
@@ -51,6 +52,7 @@ PREFERENTIAL_K = 1.0
 
 # --- Ability draw A_i ----------------------------------------------------------
 # "uniform_01" | "normal_clipped" | "normal_plus_student_t"
+# "empirical_530" = draw A_i from scipy fit saved by 530 CELL 5b (within-season z perf)
 ABILITY_DRAW = "normal_clipped"
 ABILITY_MEAN = 0.0
 ABILITY_SD = 1.0

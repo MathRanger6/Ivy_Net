@@ -137,6 +137,7 @@ def figure_inverted_u(
     title: str,
     n_bins: int,
     n_teams: int,
+    show_bin_n: bool = True,
 ) -> plt.Figure:
     fig, ax = plt.subplots(figsize=(8.5, 4.2))
     x = summ["mean_loo_q"].to_numpy(dtype=float)
@@ -159,6 +160,22 @@ def figure_inverted_u(
         span = ymax - max(ymin, 0.0)
         pad = max(span * 0.12, ymax * 0.08, 1e-4)
         ax.set_ylim(0, min(1.0, ymax + pad))
+
+    if show_bin_n and "n" in summ.columns and len(summ):
+        y_top = ax.get_ylim()[1]
+        for xi, yi, ni in zip(x, y, summ["n"].to_numpy(dtype=int), strict=True):
+            label_y = min(float(yi) + y_top * 0.04, y_top * 0.98)
+            ax.text(
+                xi,
+                label_y,
+                f"n={int(ni):,}",
+                ha="center",
+                va="bottom",
+                fontsize=7,
+                color="0.35",
+                clip_on=True,
+            )
+
     fig.tight_layout()
     return fig
 

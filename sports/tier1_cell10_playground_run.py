@@ -3,10 +3,12 @@
 
 from __future__ import annotations
 
+import base64
 import importlib.util
 import io
 import json
 import sys
+from collections.abc import Callable
 from pathlib import Path
 
 import matplotlib.pyplot as plt
@@ -35,6 +37,38 @@ else:
     _SPORTS = _sports_dir()
     if str(_SPORTS) not in sys.path:
         sys.path.insert(0, str(_SPORTS))
+
+    _PLOT_A_DPI = 120
+    _PLOT_A_MAX_WIDTH_PX = int(9.0 * _PLOT_A_DPI)
+    _PLOT_B_DPI = 120
+    _PLOT_B_MAX_WIDTH_PX = int(8.5 * _PLOT_B_DPI)
+    _PLOT_C_DPI = 120
+    _PLOT_C_MAX_WIDTH_PX = int(8.5 * _PLOT_C_DPI)
+
+    def _make_responsive_plot_widget(
+        *,
+        max_width_px: int,
+        placeholder: str = "(no plot yet)",
+    ) -> tuple[widgets.HTML, Callable[[bytes | None], None]]:
+        """HTML img wrapper so widening the notebook scales uniformly, not sideways stretch."""
+
+        holder = widgets.HTML(
+            value=f"<i>{placeholder}</i>",
+            layout=widgets.Layout(align_self="flex-start"),
+        )
+
+        def set_png(data: bytes | None) -> None:
+            if not data:
+                holder.value = f"<i>{placeholder}</i>"
+                return
+            b64 = base64.b64encode(data).decode("ascii")
+            holder.value = (
+                f'<img alt="plot" src="data:image/png;base64,{b64}" '
+                f'style="display:block;width:auto;height:auto;'
+                f'max-width:min(100%, {max_width_px}px);" />'
+            )
+
+        return holder, set_png
 
     from tier1_generative_eda import (
         SelectionConfig,
@@ -152,12 +186,20 @@ else:
         style=style,
         layout=lay,
     )
+    _TARGET_DIST_OPTIONS = [
+        ("Uniform", "uniform"),
+        ("Normal clipped", "normal_clipped"),
+        ("530 fitted perf (within-season z)", "empirical_530"),
+    ]
+    _target_val = str(_st.get("target_dist", "uniform")).strip().lower()
+    if _target_val not in {v for _, v in _TARGET_DIST_OPTIONS}:
+        _target_val = "uniform"
     w_target = widgets.Dropdown(
-        options=["uniform", "normal_clipped"],
-        value=str(_st["target_dist"]),
+        options=_TARGET_DIST_OPTIONS,
+        value=_target_val,
         description=f"Target {_T} law",
         style=style,
-        layout=lay,
+        layout=widgets.Layout(width="520px"),
     )
     w_t_low = widgets.FloatSlider(
         value=float(_st["t_low"]),
@@ -172,7 +214,7 @@ else:
     w_t_high = widgets.FloatSlider(
         value=float(_st["t_high"]),
         min=-1.0,
-        max=3.0,
+        max=20.0,
         step=0.05,
         description=f"{_T} high",
         continuous_update=False,
@@ -191,7 +233,12 @@ else:
         layout=lay,
     )
     w_ability = widgets.Dropdown(
-        options=["normal_clipped", "normal_plus_student_t", "uniform_01"],
+        options=[
+            "normal_clipped",
+            "normal_plus_student_t",
+            "uniform_01",
+            "empirical_530",
+        ],
         value=str(_st["ability_draw"]),
         description=f"{_A} draw",
         style=style,
@@ -227,6 +274,20 @@ else:
         continuous_update=False,
         style=style,
         layout=lay,
+    )
+    _BIN_MODE_OPTIONS = [
+        ("Equal count (quantile)", "quantile"),
+        ("Equal width on LOO Q", "equal_width"),
+    ]
+    _bin_mode_val = str(_st.get("bin_mode", "quantile")).strip().lower()
+    if _bin_mode_val not in {"quantile", "equal_width"}:
+        _bin_mode_val = "quantile"
+    w_bin_mode = widgets.Dropdown(
+        options=_BIN_MODE_OPTIONS,
+        value=_bin_mode_val,
+        description="Plot B binning",
+        style=style,
+        layout=widgets.Layout(width="520px"),
     )
     w_n_select = widgets.IntSlider(
         value=int(_st.get("n_selected", _st.get("n_promoted", 200))),
@@ -319,16 +380,51 @@ else:
         button_style="primary",
         layout=widgets.Layout(width="200px"),
     )
+    btn_seed_change = widgets.Button(
+        description="Seed change",
+        layout=widgets.Layout(width="140px"),
+    )
 
     plot_a_label = widgets.HTML(
         value="<b>Plot A — interval overlap (530 CELL 8)</b>"
     )
-    plot_img_overlap = widgets.Image(
-        format="png", layout=widgets.Layout(width="auto", max_height="520px")
+    plot_widget_overlap, set_plot_overlap = _make_responsive_plot_widget(
+        max_width_px=_PLOT_A_MAX_WIDTH_PX,
+        placeholder="(Plot A hidden)",
     )
-    plot_a_box = widgets.VBox([plot_a_label, plot_img_overlap])
-    plot_img_inverted_u = widgets.Image(
-        format="png", layout=widgets.Layout(width="auto", max_height="520px")
+    plot_a_box = widgets.VBox(
+        [plot_a_label, plot_widget_overlap],
+        layout=widgets.Layout(
+            align_items="flex-start",
+            max_width=f"{_PLOT_A_MAX_WIDTH_PX}px",
+        ),
+    )
+    plot_widget_inverted_u, set_plot_inverted_u = _make_responsive_plot_widget(
+        max_width_px=_PLOT_B_MAX_WIDTH_PX,
+        placeholder="(no plot yet)",
+    )
+    plot_b_box = widgets.VBox(
+        [widgets.HTML(value="<b>Plot B — selection rate vs LOO Q bins (inverted-U)</b>"), plot_widget_inverted_u],
+        layout=widgets.Layout(
+            align_items="flex-start",
+            max_width=f"{_PLOT_B_MAX_WIDTH_PX}px",
+        ),
+    )
+    plot_widget_ability, set_plot_ability = _make_responsive_plot_widget(
+        max_width_px=_PLOT_C_MAX_WIDTH_PX,
+        placeholder="(no plot yet)",
+    )
+    plot_c_box = widgets.VBox(
+        [
+            widgets.HTML(
+                value="<b>Plot C — synthetic $A_i$ vs 530 player-season perf</b>"
+            ),
+            plot_widget_ability,
+        ],
+        layout=widgets.Layout(
+            align_items="flex-start",
+            max_width=f"{_PLOT_C_MAX_WIDTH_PX}px",
+        ),
     )
     summary_html = widgets.HTML(value="", layout=widgets.Layout(width="100%"))
     _pg = {"busy": False, "listeners_on": False}
@@ -361,7 +457,7 @@ else:
         base = SelectionConfig.from_module(_tier1_cfg)
         return SelectionConfig(
             n_bins=int(w_n_bins.value),
-            bin_mode=base.bin_mode,
+            bin_mode=str(w_bin_mode.value),
             n_selected=int(w_n_select.value),
             score_mode=str(w_score.value),
             loo_gap_weight=float(w_loo_w.value),
@@ -387,9 +483,7 @@ else:
                         "show_chop": bool(w_show_chop.value),
                         "show_plot_a": bool(w_show_plot_a.value),
                         "n_bins": int(w_n_bins.value),
-                        "bin_mode": str(
-                            SelectionConfig.from_module(_tier1_cfg).bin_mode
-                        ),
+                        "bin_mode": str(w_bin_mode.value),
                         "n_selected": int(w_n_select.value),
                         "score_mode": str(w_score.value),
                         "loo_gap_weight": float(w_loo_w.value),
@@ -416,6 +510,46 @@ else:
             cov += (grid >= a) & (grid <= b)
         return cov
 
+    def _figure_ability_distribution(
+        ability: np.ndarray,
+        ability_draw: str,
+        *,
+        n_draw: int,
+    ) -> plt.Figure:
+        from sports_pipeline.empirical_perf_fit import overlay_530_reference_on_axis
+
+        a = np.asarray(ability, dtype=float)
+        fig, ax = plt.subplots(figsize=(8.5, 4.2))
+        n_bins = int(min(60, max(24, round(np.sqrt(a.size)))))
+        ax.hist(
+            a,
+            bins=n_bins,
+            density=True,
+            color="steelblue",
+            edgecolor="white",
+            alpha=0.82,
+            label=rf"synthetic $A_i$ (N={n_draw:,})",
+        )
+        xlab, had_hist = overlay_530_reference_on_axis(ax)
+        if not had_hist:
+            ax.text(
+                0.02,
+                0.97,
+                "Re-run 530 CELL 5b to save 530 histogram overlay",
+                transform=ax.transAxes,
+                fontsize=8,
+                va="top",
+                color="#555",
+            )
+        ax.set_xlabel(xlab)
+        ax.set_ylabel("Density")
+        ax.set_title(
+            f"538 CELL 10 — $A_i$ distribution vs 530  |  draw={ability_draw!r}"
+        )
+        ax.legend(fontsize=8, loc="upper right")
+        fig.tight_layout()
+        return fig
+
     def redraw(_=None):
         if _pg["busy"]:
             return
@@ -439,6 +573,16 @@ else:
                 ability_student_t_df=params.ability_student_t_df,
                 ability_student_t_scale=params.ability_student_t_scale,
             )
+            fig_c = _figure_ability_distribution(
+                ability,
+                params.ability_draw,
+                n_draw=n,
+            )
+            buf_c = io.BytesIO()
+            fig_c.savefig(buf_c, format="png", dpi=_PLOT_C_DPI, bbox_inches="tight")
+            plt.close(fig_c)
+            set_plot_ability(buf_c.getvalue())
+
             team_targets = draw_target_means(
                 rng,
                 params.n_teams,
@@ -503,9 +647,9 @@ else:
                 buf = io.BytesIO()
                 fig.savefig(buf, format="png", dpi=120, bbox_inches="tight")
                 plt.close(fig)
-                plot_img_overlap.value = buf.getvalue()
+                set_plot_overlap(buf.getvalue())
             else:
-                plot_img_overlap.value = b""
+                set_plot_overlap(None)
 
             sel = _selection_from_widgets()
             players_sel = assign_selection(
@@ -525,7 +669,7 @@ else:
                 summ_u,
                 title=(
                     f"538 CELL 10 — inverted-U preview "
-                    f"({sel.n_bins} bins, K={sel.n_selected})"
+                    f"({sel.n_bins} bins, {sel.bin_mode}, K={sel.n_selected})"
                 ),
                 n_bins=sel.n_bins,
                 n_teams=params.n_teams,
@@ -533,7 +677,7 @@ else:
             buf_u = io.BytesIO()
             fig_u.savefig(buf_u, format="png", dpi=120, bbox_inches="tight")
             plt.close(fig_u)
-            plot_img_inverted_u.value = buf_u.getvalue()
+            set_plot_inverted_u(buf_u.getvalue())
 
             selection_rate = float(players_sel["Y_selected"].mean())
             peak_bin_rate = (
@@ -560,11 +704,17 @@ else:
                 "<pre>"
                 f"J={params.n_teams}  roster={params.roster_size}  N={n}  "
                 f"τ={params.assignment_temperature:.3f}  kernel={params.assignment_kernel!r}  "
-                f"{_T}={params.target_mean_dist} [{params.target_mean_low:.2f}, {params.target_mean_high:.2f}]  "
+                f"{_T}={params.target_mean_dist}"
+                + (
+                    " (530 empirical fit)"
+                    if params.target_mean_dist == "empirical_530"
+                    else f" [{params.target_mean_low:.2f}, {params.target_mean_high:.2f}]"
+                )
+                + "  "
                 f"α_pref={params.preferential_alpha:.2f}\n"
                 f"{cov_line}  |  {chop_line}{slow_note}\n"
                 f"select: K={sel.n_selected}  score={sel.score_mode!r}  w={sel.loo_gap_weight:.2f}  "
-                f"winner={sel.winner_selection!r}  bins={sel.n_bins}  "
+                f"winner={sel.winner_selection!r}  bins={sel.n_bins}  binning={sel.bin_mode!r}  "
                 f"overall_rate={selection_rate:.4f}  peak_bin_rate={peak_bin_rate:.4f}\n"
                 "Pools: 530 CELL 8 analog (peak≫1). Selection: inverted-U vs LOO Q bins."
                 "</pre>"
@@ -576,6 +726,10 @@ else:
             else:
                 plt.ioff()
             _pg["busy"] = False
+
+    def _seed_change(_=None):
+        """New random seed, then redraw (via w_seed value observer)."""
+        w_seed.value = int(np.random.default_rng().integers(0, 100_000))
 
     def _load_defaults(_=None):
         _spec.loader.exec_module(_tier1_cfg)  # type: ignore[union-attr]
@@ -593,6 +747,7 @@ else:
         w_show_chop.value = bool(d["show_chop"])
         w_show_plot_a.value = bool(d["show_plot_a"])
         w_n_bins.value = int(d["n_bins"])
+        w_bin_mode.value = str(d["bin_mode"])
         w_n_select.value = int(d["n_selected"])
         w_score.value = str(d["score_mode"])
         w_loo_w.value = float(d["loo_gap_weight"])
@@ -617,6 +772,7 @@ else:
             w_show_chop,
             w_show_plot_a,
             w_n_bins,
+            w_bin_mode,
             w_n_select,
             w_score,
             w_loo_w,
@@ -627,6 +783,7 @@ else:
         w_score.observe(_update_score_formula_html, names="value")
         w_loo_w.observe(_update_score_formula_html, names="value")
         btn_run.on_click(redraw)
+        btn_seed_change.on_click(_seed_change)
         btn_defaults.on_click(_load_defaults)
         _pg["listeners_on"] = True
 
@@ -634,7 +791,7 @@ else:
         [
             widgets.HTML(
                 "<b>538 CELL 10</b> — generative lab (pools + selection). "
-                "Adjust sliders → both plots refresh. State → "
+                "Adjust sliders → plots refresh. State → "
                 "<code>tier1_cell10_playground_state.json</code>."
             ),
             widgets.HTML("<b>Pools (Thread A)</b>"),
@@ -653,17 +810,19 @@ else:
             w_show_plot_a,
             widgets.HTML("<b>Selection (inverted-U preview)</b>"),
             w_n_bins,
+            w_bin_mode,
             w_n_select,
             w_score,
             w_loo_w,
             score_formula_html,
             w_winner,
-            widgets.HBox([btn_defaults, btn_run]),
+            widgets.HBox([btn_defaults, btn_run, btn_seed_change]),
             summary_html,
+            plot_c_box,
             plot_a_box,
-            widgets.HTML("<b>Plot B — selection rate vs LOO Q bins (inverted-U)</b>"),
-            plot_img_inverted_u,
-        ]
+            plot_b_box,
+        ],
+        layout=widgets.Layout(align_items="flex-start"),
     )
     display(panel)
     _wire_listeners()

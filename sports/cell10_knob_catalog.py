@@ -46,6 +46,7 @@ ABILITY_OPTIONS: list[tuple[str, str]] = [
     ("A — Uniform(0,1)", "A"),
     ("B — clipped Normal(0.5, 0.18)", "B"),
     ("C — scaled Beta(2,5)", "C"),
+    ("D — 530 fitted perf (within-season z)", "empirical_530"),
 ]
 
 WINNER_OPTIONS: list[tuple[str, str]] = [
