@@ -618,6 +618,98 @@ def run_dirty_lpm(df: pd.DataFrame, cfg: Any) -> Any | pd.Series:
     return sm.OLS(y, X, missing="drop").fit()
 
 
+def drafted_perf_rows_for_theta(
+    df: pd.DataFrame,
+    *,
+    prior_draft_season_only: bool = False,
+    perf_col: str = "perf",
+) -> pd.DataFrame:
+    """
+    Player-season rows used to calibrate viability ``theta`` (530 CELL 5c/5d).
+
+    ``prior_draft_season_only=False``: all collegiate seasons for athletes who
+    eventually appear in ``athlete_id_draft_lookup.csv``.
+    ``True``: only ``season == draft_year - 1`` for those athletes.
+    """
+    import pandas as pd
+
+    from sports_pipeline import paths
+
+    base = df.copy()
+    for c in ("athlete_id", "season", perf_col):
+        if c not in base.columns:
+            raise KeyError(f"drafted_perf_rows_for_theta missing {c!r}")
+    base["athlete_id"] = pd.to_numeric(base["athlete_id"], errors="coerce")
+    base["season"] = pd.to_numeric(base["season"], errors="coerce")
+    base = base.dropna(subset=["athlete_id", "season", perf_col])
+    base["athlete_id"] = base["athlete_id"].astype(int)
+    base["season"] = base["season"].astype(int)
+
+    lu_path = paths.draft_lookup_csv()
+    if not lu_path.is_file():
+        raise FileNotFoundError(f"Missing draft lookup: {lu_path}")
+    lu = pd.read_csv(lu_path, usecols=["athlete_id", "draft_year"], low_memory=False)
+    lu["athlete_id"] = pd.to_numeric(lu["athlete_id"], errors="coerce")
+    lu["draft_year"] = pd.to_numeric(lu["draft_year"], errors="coerce")
+    lu = lu.dropna(subset=["athlete_id", "draft_year"]).drop_duplicates("athlete_id", keep="first")
+    lu["draft_year"] = lu["draft_year"].astype(int)
+    drafted_ids = set(lu["athlete_id"].astype(int))
+    base["ever_drafted"] = base["athlete_id"].isin(drafted_ids).astype(int)
+    base = base.merge(lu.rename(columns={"draft_year": "nba_draft_year"}), on="athlete_id", how="left")
+
+    if prior_draft_season_only:
+        mask = base["ever_drafted"].eq(1) & base["nba_draft_year"].notna()
+        prior_season = base["nba_draft_year"] - 1
+        return base.loc[mask & (base["season"] == prior_season)].copy()
+    return base.loc[base["ever_drafted"].eq(1)].copy()
+
+
+def viability_theta_drafted_perf(
+    df: pd.DataFrame,
+    *,
+    stat: str = "median",
+    perf_col: str = "perf",
+    drafted_mask: pd.Series | None = None,
+) -> float:
+    """
+    Viability threshold from drafted player-season ``perf`` (``median`` or ``max``).
+
+    Use the same ``df`` (and ``perf`` scale) as ``add_tier1_mechanism_variables`` —
+    i.e. after ``apply_perf_metric_for_analysis`` and the same draft-season filter
+    as CELL 5c (``PRIOR_DRAFT_SEASON_ONLY``).
+    """
+    if drafted_mask is None:
+        if "ever_drafted" in df.columns:
+            drafted_mask = pd.to_numeric(df["ever_drafted"], errors="coerce").fillna(0).astype(int).eq(1)
+        elif "Y_draft" in df.columns:
+            drafted_mask = pd.to_numeric(df["Y_draft"], errors="coerce").fillna(0).astype(int).eq(1)
+        else:
+            raise KeyError(
+                "viability_theta_drafted_perf needs ever_drafted, Y_draft, or drafted_mask"
+            )
+    p = pd.to_numeric(df.loc[drafted_mask, perf_col], errors="coerce").dropna()
+    if p.empty:
+        raise ValueError(f"No valid drafted perf rows to compute theta (stat={stat!r}).")
+    s = str(stat).strip().lower()
+    if s == "median":
+        return float(p.median())
+    if s == "max":
+        return float(p.max())
+    raise ValueError(f"stat must be 'median' or 'max', got {stat!r}")
+
+
+def viability_theta_max_drafted_perf(
+    df: pd.DataFrame,
+    *,
+    perf_col: str = "perf",
+    drafted_mask: pd.Series | None = None,
+) -> float:
+    """Alias: max drafted ``perf`` (legacy starting θ)."""
+    return viability_theta_drafted_perf(
+        df, stat="max", perf_col=perf_col, drafted_mask=drafted_mask
+    )
+
+
 def export_panel(df: pd.DataFrame, cfg: Any, dest: Path | None = None) -> Path:
     """Write panel CSV (default: overwrite canonical path)."""
     target = dest or paths.panel_530_csv()

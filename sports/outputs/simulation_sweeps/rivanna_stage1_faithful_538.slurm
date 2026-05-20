@@ -16,7 +16,7 @@
 #
 # Stage 1 broad screen (538 generative soft assign + selection), sharded (default 64).
 # Submit from Ivy_Net repo root. Keep #SBATCH --array in sync with N_STAGE1_SHARDS.
-# Pilot grid (~96 scenarios):  PILOT=1 sbatch ... (adds --pilot to worker).
+# Pilot grid (~192 scenarios):  PILOT=1 sbatch ... (adds --pilot to worker).
 # Requires sports/datasets/mbb/empirical_perf_fit.json when grid uses empirical_530.
 
 set -euo pipefail

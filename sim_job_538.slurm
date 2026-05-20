@@ -5,7 +5,7 @@
 # Submit from the Ivy_Net repo root:
 #   cd /path/to/Ivy_Net && sbatch sim_job_538.slurm
 #
-# Pilot grid (~96 Stage-1 scenarios):
+# Pilot grid (~192 Stage-1 scenarios):
 #   PILOT=1 sbatch sim_job_538.slurm
 #
 # Wipe prior outputs:

@@ -76,14 +76,17 @@ EMPIRIC_COVERAGE_PEAK_ORDER = 3000
 # --- Generative selection / inverted-U replay (CELL 10–12) --------------------
 # Selection = draft pick, tenure, promotion, etc. Bins are on LOO pool L (not teams).
 # LOO_POOL_L_MODE: "quality" → L_Q (LOO mean teammate A, poolq_loo);
-#                  "crowding" → L_C (LOO sum teammate A, pool_c_loo).
+#                  "crowding" → L_C (viable-peer share: count above θ / LOO pool size, pool_c_loo).
 LOO_POOL_L_MODE = "quality"
+# 530 CELL 5d: median drafted within-season z perf (PPM panel, ever-drafted rows).
+VIABILITY_THETA = 0.7546158731868137
 GENERATIVE_N_BINS = 12
 GENERATIVE_POOLQ_BINNING = "quantile"  # "quantile" | "equal_width"
 N_SELECTED = 200
 # Selection score: "ability" | "loo_gap_plus_ability"
+# loo_gap_plus_ability: quality → A − w·L_Q (gap); crowding → A − w·L_C (count, not a gap)
 SELECTION_SCORE_MODE = "loo_gap_plus_ability"
-LOO_GAP_WEIGHT = 0.5
+LOO_GAP_WEIGHT = 0.5  # w on L_Q gap; crowding mode reuses same knob as "crowding weight"
 # Winner draw: "A" weighted | "B" Bernoulli | "C" top-K (deterministic)
 WINNER_SELECTION = "C"
 
@@ -97,3 +100,5 @@ RUN_REPLAY_530_STYLE_CHECKS = False
 RANDOM_SEED = 42
 # CELL 10 playground: render interval-overlap Plot A (530 CELL 8 analog)
 SHOW_PLOT_A = True
+# CELL 10 playground: render ability histogram Plot C (530 CELL 5b overlay)
+SHOW_PLOT_C = True

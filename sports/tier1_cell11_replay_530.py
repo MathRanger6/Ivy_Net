@@ -62,6 +62,7 @@ def _params_from_playground_state(sports: Path, tpa) -> object:
         ability_student_t_df=base.ability_student_t_df,
         ability_student_t_scale=base.ability_student_t_scale,
         sorting_noise_sd=base.sorting_noise_sd,
+        viability_theta=float(st.get("viability_theta", base.viability_theta)),
     )
 
 

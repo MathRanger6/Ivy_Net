@@ -146,6 +146,7 @@ else:
             "seed": int(getattr(_tier1_cfg, "RANDOM_SEED", 42)),
             "show_chop": True,
             "show_plot_a": bool(getattr(_tier1_cfg, "SHOW_PLOT_A", True)),
+            "show_plot_c": bool(getattr(_tier1_cfg, "SHOW_PLOT_C", True)),
             "n_bins": sel.n_bins,
             "bin_mode": sel.bin_mode,
             "n_selected": sel.n_selected,
@@ -153,6 +154,7 @@ else:
             "loo_gap_weight": sel.loo_gap_weight,
             "winner_selection": sel.winner_selection,
             "loo_pool_l_mode": sel.loo_pool_l_mode,
+            "viability_theta": float(getattr(p, "viability_theta", 0.7546158731868137)),
         }
 
     _st = {**_defaults(), **_state_load()}
@@ -274,6 +276,11 @@ else:
         description="Show Plot A (overlap)",
         style=style,
     )
+    w_show_plot_c = widgets.Checkbox(
+        value=bool(_st.get("show_plot_c", True)),
+        description="Show Plot C ($A_i$ vs 530)",
+        style=style,
+    )
 
     _LOO_L_MODE_OPTIONS = pool_l_dropdown_options()
     _loo_l_val = str(_st.get("loo_pool_l_mode", "quality")).strip().lower()
@@ -285,6 +292,18 @@ else:
         description="Pool L (LOO)",
         style=style,
         layout=widgets.Layout(width="520px"),
+    )
+    _theta_default = float(_st.get("viability_theta", getattr(_tier1_cfg, "VIABILITY_THETA", 0.755)))
+    w_viability_theta = widgets.FloatSlider(
+        value=_theta_default,
+        min=-1.0,
+        max=3.5,
+        step=0.01,
+        readout_format=".3f",
+        description="Viability θ",
+        continuous_update=False,
+        style=style,
+        layout=lay,
     )
     loo_l_hint_html = widgets.HTML(
         layout=widgets.Layout(width="520px", margin="0 0 4px 0")
@@ -324,7 +343,7 @@ else:
         layout=lay,
     )
     _SCORE_MODE_OPTIONS = [
-        ("LOO gap + ability (w slider below)", "loo_gap_plus_ability"),
+        ("Pool-adjusted ability — w slider below", "loo_gap_plus_ability"),
         ("Ability only (ignores w)", "ability"),
     ]
     _WINNER_OPTIONS = [
@@ -358,7 +377,7 @@ else:
         max=1.0,
         step=0.05,
         readout_format=".2f",
-        description="LOO-gap weight w",
+        description="Quality-gap weight w",
         continuous_update=False,
         style=style,
         layout=lay,
@@ -377,8 +396,12 @@ else:
     def _update_loo_l_hint_html(_=None):
         mode = str(w_loo_l_mode.value)
         l_html = pool_l_html_label(mode)
+        th = float(w_viability_theta.value)
         if mode == "crowding":
-            detail = "LOO <b>sum</b> of teammate ability (crowding)"
+            detail = (
+                f"LOO <b>viable-peer share</b> (count above θ / pool size; "
+                f"<b>θ={th:.3f}</b>; 530 median drafted z)"
+            )
         else:
             detail = "LOO <b>mean</b> of teammate ability (quality)"
         loo_l_hint_html.value = (
@@ -387,13 +410,34 @@ else:
             "</div>"
         )
 
+    def _loo_w_slider_label(pool_l_mode: str) -> str:
+        """Slider caption: w on (A − L_Q) gap vs w on viable-peer count L_C (not a gap)."""
+        if str(pool_l_mode).strip().lower() == "crowding":
+            return "Crowding weight w"
+        return "Quality-gap weight w"
+
     def _update_score_formula_html(_=None):
+        pool_mode = str(w_loo_l_mode.value)
+        w_loo_w.description = _loo_w_slider_label(pool_mode)
         w = float(w_loo_w.value)
-        l_html = pool_l_html_label(str(w_loo_l_mode.value))
+        l_html = pool_l_html_label(pool_mode)
         if str(w_score.value) == "ability":
             score_formula_html.value = (
                 f"<div style='{_SCORE_HELP_STYLE}'>"
                 "<b>Score</b> = A<sub>i</sub> (ability only; <i>w</i> unused)."
+                "</div>"
+            )
+            return
+        if pool_mode == "crowding":
+            score_formula_html.value = (
+                f"<div style='{_SCORE_HELP_STYLE}'>"
+                f"<b>Score</b> = A<sub>i</sub> − <i>w</i>·{l_html} &nbsp;&nbsp;|&nbsp;&nbsp; "
+                f"<b><i>w</i> = {w:.2f}</b><br>"
+                f"<span style='color:#444;font-size:12px'>"
+                f"{l_html} is viable-peer <b>share</b> (count above θ / LOO pool size; not a mean gap)."
+                f"</span><br><br>"
+                f"<b><i>w</i> = 1</b> → ability minus viable-peer share only.<br>"
+                f"<b><i>w</i> = 0</b> → ability only; crowding ignored."
                 "</div>"
             )
             return
@@ -403,8 +447,8 @@ else:
             f"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= "
             f"A<sub>i</sub> − <i>w</i>·{l_html} &nbsp;&nbsp;|&nbsp;&nbsp; "
             f"<b><i>w</i> = {w:.2f}</b><br><br>"
-            f"<b><i>w</i> = 1</b> → LOO gap only "
-            f"(A<sub>i</sub> − {l_html}); ability level drops out.<br>"
+            f"<b><i>w</i> = 1</b> → quality gap only "
+            f"(A<sub>i</sub> − {l_html}); own level drops out.<br>"
             f"<b><i>w</i> = 0</b> → ability only; {l_html} ignored."
             "</div>"
         )
@@ -447,7 +491,7 @@ else:
     plot_b_box = widgets.VBox(
         [
             widgets.HTML(
-                value="<b>Plot B — selection rate vs LOO L bins (inverted-U)</b>"
+                value="<b>Plot B — selection rate vs LOO L<sub>Q</sub> bins (inverted-U)</b>"
             ),
             plot_widget_inverted_u,
         ],
@@ -458,7 +502,7 @@ else:
     )
     plot_widget_ability, set_plot_ability = _make_responsive_plot_widget(
         max_width_px=_PLOT_C_MAX_WIDTH_PX,
-        placeholder="(no plot yet)",
+        placeholder="(Plot C hidden)",
     )
     plot_c_box = widgets.VBox(
         [
@@ -497,6 +541,7 @@ else:
             ability_student_t_df=base.ability_student_t_df,
             ability_student_t_scale=base.ability_student_t_scale,
             sorting_noise_sd=base.sorting_noise_sd,
+            viability_theta=float(w_viability_theta.value),
         )
 
     def _selection_from_widgets() -> SelectionConfig:
@@ -529,6 +574,7 @@ else:
                         "seed": int(w_seed.value),
                         "show_chop": bool(w_show_chop.value),
                         "show_plot_a": bool(w_show_plot_a.value),
+                        "show_plot_c": bool(w_show_plot_c.value),
                         "n_bins": int(w_n_bins.value),
                         "bin_mode": str(w_bin_mode.value),
                         "n_selected": int(w_n_select.value),
@@ -536,6 +582,7 @@ else:
                         "loo_gap_weight": float(w_loo_w.value),
                         "winner_selection": str(w_winner.value),
                         "loo_pool_l_mode": str(w_loo_l_mode.value),
+                        "viability_theta": float(w_viability_theta.value),
                     },
                     indent=2,
                     sort_keys=True,
@@ -549,6 +596,10 @@ else:
     def _sync_plot_a_visibility():
         disp = "" if w_show_plot_a.value else "none"
         plot_a_box.layout.display = disp
+
+    def _sync_plot_c_visibility():
+        disp = "" if w_show_plot_c.value else "none"
+        plot_c_box.layout.display = disp
 
     def _coverage_curve(teams, grid: np.ndarray) -> np.ndarray:
         lo = teams["min"].to_numpy(dtype=float)
@@ -621,15 +672,19 @@ else:
                 ability_student_t_df=params.ability_student_t_df,
                 ability_student_t_scale=params.ability_student_t_scale,
             )
-            fig_c = _figure_ability_distribution(
-                ability,
-                params.ability_draw,
-                n_draw=n,
-            )
-            buf_c = io.BytesIO()
-            fig_c.savefig(buf_c, format="png", dpi=_PLOT_C_DPI, bbox_inches="tight")
-            plt.close(fig_c)
-            set_plot_ability(buf_c.getvalue())
+            _sync_plot_c_visibility()
+            if w_show_plot_c.value:
+                fig_c = _figure_ability_distribution(
+                    ability,
+                    params.ability_draw,
+                    n_draw=n,
+                )
+                buf_c = io.BytesIO()
+                fig_c.savefig(buf_c, format="png", dpi=_PLOT_C_DPI, bbox_inches="tight")
+                plt.close(fig_c)
+                set_plot_ability(buf_c.getvalue())
+            else:
+                set_plot_ability(None)
 
             team_targets = draw_target_means(
                 rng,
@@ -708,6 +763,7 @@ else:
                 loo_gap_weight=sel.loo_gap_weight,
                 winner_selection=sel.winner_selection,
                 pool_l_mode=sel.loo_pool_l_mode,
+                viability_theta=params.viability_theta,
             )
             summ_u = inverted_u_bin_table(
                 players_sel,
@@ -715,12 +771,13 @@ else:
                 assign_poolq_bin_labels=assign_poolq_bin_labels,
                 tpa=_tpa,
             )
+            score_l = pool_l_short_label(sel.loo_pool_l_mode)
             fig_u = figure_inverted_u(
                 summ_u,
                 title=(
                     f"538 CELL 10 — inverted-U preview "
                     f"({sel.n_bins} bins, {sel.bin_mode}, "
-                    f"{pool_l_short_label(sel.loo_pool_l_mode)}, K={sel.n_selected})"
+                    f"x=L_Q, score={score_l}, K={sel.n_selected})"
                 ),
                 n_bins=sel.n_bins,
                 n_teams=params.n_teams,
@@ -768,6 +825,7 @@ else:
                 f"{cov_line}  |  {chop_line}{slow_note}\n"
                 f"select: K={sel.n_selected}  score={sel.score_mode!r}  w={sel.loo_gap_weight:.2f}  "
                 f"winner={sel.winner_selection!r}  L={sel.loo_pool_l_mode!r}  "
+                f"θ={params.viability_theta:.3f}  "
                 f"bins={sel.n_bins}  binning={sel.bin_mode!r}  "
                 f"overall_rate={selection_rate:.4f}  peak_bin_rate={peak_bin_rate:.4f}\n"
                 "Pools: 530 CELL 8 analog (peak≫1). Selection: inverted-U vs LOO L bins."
@@ -800,6 +858,7 @@ else:
         w_seed.value = int(d["seed"])
         w_show_chop.value = bool(d["show_chop"])
         w_show_plot_a.value = bool(d["show_plot_a"])
+        w_show_plot_c.value = bool(d["show_plot_c"])
         w_n_bins.value = int(d["n_bins"])
         w_bin_mode.value = str(d["bin_mode"])
         w_n_select.value = int(d["n_selected"])
@@ -807,6 +866,7 @@ else:
         w_loo_w.value = float(d["loo_gap_weight"])
         w_winner.value = str(d["winner_selection"])
         w_loo_l_mode.value = str(d["loo_pool_l_mode"])
+        w_viability_theta.value = float(d["viability_theta"])
         _update_loo_l_hint_html()
         _update_score_formula_html()
         redraw()
@@ -827,7 +887,9 @@ else:
             w_seed,
             w_show_chop,
             w_show_plot_a,
+            w_show_plot_c,
             w_loo_l_mode,
+            w_viability_theta,
             w_n_bins,
             w_bin_mode,
             w_n_select,
@@ -841,6 +903,7 @@ else:
         w_loo_w.observe(_update_score_formula_html, names="value")
         w_loo_l_mode.observe(_update_score_formula_html, names="value")
         w_loo_l_mode.observe(_update_loo_l_hint_html, names="value")
+        w_viability_theta.observe(_update_loo_l_hint_html, names="value")
         btn_run.on_click(redraw)
         btn_seed_change.on_click(_seed_change)
         btn_defaults.on_click(_load_defaults)
@@ -867,8 +930,10 @@ else:
             w_seed,
             w_show_chop,
             w_show_plot_a,
+            w_show_plot_c,
             widgets.HTML("<b>Selection (inverted-U preview)</b>"),
             w_loo_l_mode,
+            w_viability_theta,
             loo_l_hint_html,
             w_n_bins,
             w_bin_mode,

@@ -100,6 +100,9 @@ def assignment_params_from_state(
         ability_student_t_df=base.ability_student_t_df,
         ability_student_t_scale=base.ability_student_t_scale,
         sorting_noise_sd=base.sorting_noise_sd,
+        viability_theta=float(
+            state.get("viability_theta", base.viability_theta)
+        ),
     )
 
 
@@ -120,24 +123,29 @@ def inverted_u_bin_table(
     assign_poolq_bin_labels,
     tpa=None,
 ) -> pd.DataFrame:
-    """Requires LOO pool L column and Y_selected (or legacy Y_promoted)."""
+    """Binned inverted-U table: x-axis always L_Q (``poolq_loo``), not crowding.
+
+    ``sel.loo_pool_l_mode`` affects the selection score only (via ``assign_selection``);
+    bins are always on LOO mean teammate ability so Plot B stays comparable across
+    quality vs crowding score modes.
+    """
     if tpa is None:
         import tier1_pool_assignment as tpa  # noqa: PLC0415
 
     ycol = _outcome_col(players)
-    lcol = tpa.pool_l_column(sel.loo_pool_l_mode)
-    use = players.dropna(subset=[lcol, ycol]).copy()
-    use["bin"] = assign_poolq_bin_labels(use[lcol], sel.n_bins, sel.bin_mode)
+    bin_lcol = tpa.POOL_L_QUALITY_COL
+    use = players.dropna(subset=[bin_lcol, ycol]).copy()
+    use["bin"] = assign_poolq_bin_labels(use[bin_lcol], sel.n_bins, sel.bin_mode)
     return (
         use.dropna(subset=["bin"])
         .groupby("bin", observed=True)
         .agg(
             n=(ycol, "size"),
             selection_rate=(ycol, "mean"),
-            mean_loo_l=(lcol, "mean"),
+            mean_loo_q=(bin_lcol, "mean"),
         )
         .reset_index()
-        .sort_values("mean_loo_l")
+        .sort_values("mean_loo_q")
     )
 
 
@@ -155,7 +163,12 @@ def figure_inverted_u(
         import tier1_pool_assignment as tpa  # noqa: PLC0415
 
     fig, ax = plt.subplots(figsize=(8.5, 4.2))
-    xcol = "mean_loo_l" if "mean_loo_l" in summ.columns else "mean_loo_q"
+    if "mean_loo_q" in summ.columns:
+        xcol = "mean_loo_q"
+    elif "mean_loo_l" in summ.columns:
+        xcol = "mean_loo_l"
+    else:
+        raise KeyError("summ needs mean_loo_q (or legacy mean_loo_l)")
     x = summ[xcol].to_numpy(dtype=float)
     rate_col = (
         "selection_rate"
@@ -165,9 +178,7 @@ def figure_inverted_u(
     y = summ[rate_col].to_numpy(dtype=float)
     ax.plot(x, y, "o-", color="C0", lw=2.0, ms=7)
     ax.fill_between(x, 0, y, alpha=0.12, color="C0")
-    ax.set_xlabel(
-        f"Bin mean {tpa.pool_l_short_label(loo_pool_l_mode)}"
-    )
+    ax.set_xlabel(f"Bin mean {tpa.pool_l_short_label('quality')}")
     ax.set_ylabel("Mean selection rate")
     ax.set_title(title)
     ymax = float(y.max()) if len(y) else 0.0
@@ -216,6 +227,7 @@ def run_inverted_u_pipeline(
         loo_gap_weight=sel.loo_gap_weight,
         winner_selection=sel.winner_selection,
         pool_l_mode=sel.loo_pool_l_mode,
+        viability_theta=params.viability_theta,
     )
     summ = inverted_u_bin_table(
         players, sel, assign_poolq_bin_labels=assign_poolq_bin_labels, tpa=tpa

@@ -31,7 +31,8 @@ AssignmentMethod = Literal["soft", "sort_chop"]
 LooPoolLMode = Literal["quality", "crowding"]
 
 POOL_L_QUALITY_COL = "poolq_loo"  # L_Q — LOO mean teammate ability
-POOL_L_CROWDING_COL = "pool_c_loo"  # L_C — LOO sum teammate ability
+POOL_L_CROWDING_COL = "pool_c_loo"  # L_C — LOO viable-peer share (count above θ / pool size)
+POOL_L_CROWDING_SUM_COL = "pool_c_loo_sum"  # legacy LOO sum (diagnostic)
 
 
 def pool_l_column(mode: str) -> str:
@@ -50,7 +51,7 @@ def pool_l_short_label(mode: str) -> str:
     """Plain-text label (matplotlib axes, sweep logs)."""
     m = str(mode).strip().lower()
     if m in ("crowding", "l_c", POOL_L_CROWDING_COL):
-        return "L_C (LOO sum)"
+        return "L_C (viable share)"
     return "L_Q (LOO mean)"
 
 
@@ -66,7 +67,7 @@ def pool_l_dropdown_options() -> list[tuple[str, str]]:
     """(display label, value) — mode name only; symbol shown in loo_l_hint_html."""
     return [
         ("Quality — LOO mean", "quality"),
-        ("Crowding — LOO sum", "crowding"),
+        ("Crowding — viable share (A > θ)", "crowding"),
     ]
 
 
@@ -94,6 +95,8 @@ class AssignmentParams:
     ability_student_t_scale: float
     sorting_noise_sd: float = 0.0
     """Only used for sort_chop benchmark (537-style noise on sort signal)."""
+    viability_theta: float = 0.7546158731868137
+    """Viable-peer cutoff on synthetic ability (530 median drafted z)."""
 
     @property
     def n_individuals(self) -> int:
@@ -121,6 +124,7 @@ class AssignmentParams:
             ability_student_t_df=float(mod.ABILITY_STUDENT_T_DF),
             ability_student_t_scale=float(mod.ABILITY_STUDENT_T_SCALE),
             sorting_noise_sd=float(getattr(mod, "SORTING_NOISE_SD", 0.0)),
+            viability_theta=float(getattr(mod, "VIABILITY_THETA", 0.7546158731868137)),
         )
 
     @classmethod
@@ -331,16 +335,54 @@ def build_roster_dataframe(
     )
 
 
-def add_loo_pool_columns(players: pd.DataFrame) -> pd.DataFrame:
-    """Add L_Q (``poolq_loo``) and L_C (``pool_c_loo``) leave-one-out teammate stats."""
+def _default_viability_theta() -> float:
+    try:
+        return float(
+            AssignmentParams.from_tier1_sim_config().viability_theta
+        )
+    except Exception:
+        return 0.7546158731868137
+
+
+def add_loo_pool_columns(
+    players: pd.DataFrame,
+    *,
+    viability_theta: float | None = None,
+) -> pd.DataFrame:
+    """Add L_Q (``poolq_loo``) and L_C (``pool_c_loo``) leave-one-out teammate stats.
+
+    ``pool_c_loo`` is the LOO *share* of teammates with ``ability > viability_theta``
+    (viable-peer count / LOO pool size; same rule as empirical ``congestion_crowding``).
+    ``pool_c_loo_sum`` keeps the legacy LOO sum of teammate ability for diagnostics.
+    """
+    theta = (
+        float(viability_theta)
+        if viability_theta is not None
+        else _default_viability_theta()
+    )
     out = players.copy()
     g = out.groupby("pool_id", observed=True)["ability"]
     ssum = g.transform("sum")
     cnt = g.transform("count").astype(float)
     den = (cnt - 1.0).replace(0.0, np.nan)
-    loo_sum = ssum - out["ability"]
-    out[POOL_L_CROWDING_COL] = loo_sum
+    own = pd.to_numeric(out["ability"], errors="coerce")
+    loo_sum = ssum - own
+    out[POOL_L_CROWDING_SUM_COL] = loo_sum
     out[POOL_L_QUALITY_COL] = loo_sum / den
+
+    above = (own > theta).astype(float)
+    out["_above_theta"] = above
+    sum_above = out.groupby("pool_id", observed=True)["_above_theta"].transform("sum")
+    own_above = out["_above_theta"].where(own.notna(), np.nan)
+    loo_count = sum_above - own_above.fillna(0.0)
+    loo_count = loo_count.where(own.notna(), np.nan)
+    # LOO pool size = roster count − 1 (exclude self), same denominator as L_Q
+    loo_pool_n = (cnt - 1.0).replace(0.0, np.nan)
+    loo_share = loo_count / loo_pool_n
+    loo_share = loo_share.where(own.notna(), np.nan)
+    loo_share = loo_share.where(cnt >= 2.0, np.nan)
+    out[POOL_L_CROWDING_COL] = loo_share
+    out = out.drop(columns=["_above_theta"])
     return out
 
 
@@ -418,9 +460,10 @@ def assign_selection(
     loo_gap_weight: float,
     winner_selection: str,
     pool_l_mode: str = "quality",
+    viability_theta: float | None = None,
 ) -> pd.DataFrame:
     """Mark K selected players (draft / tenure / promotion — domain-agnostic)."""
-    out = add_loo_pool_columns(players)
+    out = add_loo_pool_columns(players, viability_theta=viability_theta)
     w = selection_weights(
         out,
         score_mode=score_mode,

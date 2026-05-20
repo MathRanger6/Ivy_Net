@@ -1,6 +1,8 @@
 # Rivanna Faithful 538 Sweep — For Dummies
 
-This guide runs the **faithful 538 generative Tier 1 sweep** on Rivanna. It mirrors the 537 sweep workflow but targets **538** mechanics: soft assign to fixed \(T_j\), LOO pool-Q bins, selection score, and optional **`empirical_530`** draws for \(A_i\) and \(T_j\) (530 CELL 5b fit).
+This guide runs the **faithful 538 generative Tier 1 sweep** on Rivanna. It mirrors the 537 sweep workflow but targets **538** mechanics: soft assign to fixed \(T_j\), LOO **L_Q** / **L_C** (viable-peer **share**), selection score, and optional **`empirical_530`** draws (530 CELL 5b).
+
+**Start on your Mac first:** `sports/documents/Mac_Faithful_538_Sweep_For_Dummies.md` (pilot → push → Slurm → pull).
 
 For generic Slurm habits, `track_slurm.sh`, and Git vs rsync policy, also see:
 
@@ -88,7 +90,7 @@ module load miniforge
 sbatch sim_job_538.slurm
 ```
 
-**Pilot grid** (~96 Stage-1 scenarios, good smoke test):
+**Pilot grid** (~192 Stage-1 scenarios, good smoke test):
 
 ```bash
 PILOT=1 sbatch sim_job_538.slurm
@@ -176,8 +178,10 @@ Requires `../../datasets/mbb/empirical_perf_fit.json`.
 
 ## Grid Notes (538 vs 537)
 
-- **Stage 1 full grid:** on the order of **~51,840** scenarios (ability/target `empirical_530`, `bin_mode` quantile vs equal_width, etc.).
-- **Pilot:** **~96** Stage-1 scenarios; use `PILOT=1` on Rivanna for a fast end-to-end check.
+- **L_C:** `pool_c_loo` = viable-peer **share** (÷ pool−1); θ from `tier1_sim_config.VIABILITY_THETA`.
+- **Curves:** `loo_pool_l_mode=quality` bins on `poolq_loo`; `crowding` bins on `pool_c_loo`.
+- **Stage 1 full grid:** **~103,680** scenarios (`bin_mode`, `empirical_530`, both L modes, etc.).
+- **Pilot:** **~192** Stage-1 scenarios; use `PILOT=1` on Rivanna for a fast end-to-end check.
 - **Not** the 537 sort-and-chop / pool-mean bin sweep — do not mix result folders (`rivanna_faithful_537` vs `rivanna_faithful_538`).
 
 ## Troubleshooting
