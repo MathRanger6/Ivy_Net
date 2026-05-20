@@ -31,6 +31,7 @@ class SelectionConfig:
     score_mode: str
     loo_gap_weight: float
     winner_selection: str
+    loo_pool_l_mode: str = "quality"
 
     @classmethod
     def from_module(cls, mod) -> SelectionConfig:
@@ -47,6 +48,7 @@ class SelectionConfig:
             score_mode=str(score),
             loo_gap_weight=float(getattr(mod, "LOO_GAP_WEIGHT", 0.5)),
             winner_selection=str(getattr(mod, "WINNER_SELECTION", "C")),
+            loo_pool_l_mode=str(getattr(mod, "LOO_POOL_L_MODE", "quality")),
         )
 
     @classmethod
@@ -59,6 +61,9 @@ class SelectionConfig:
             score_mode=str(state.get("score_mode", base.score_mode)),
             loo_gap_weight=float(state.get("loo_gap_weight", base.loo_gap_weight)),
             winner_selection=str(state.get("winner_selection", base.winner_selection)),
+            loo_pool_l_mode=str(
+                state.get("loo_pool_l_mode", base.loo_pool_l_mode)
+            ),
         )
 
 
@@ -113,21 +118,26 @@ def inverted_u_bin_table(
     sel: SelectionConfig,
     *,
     assign_poolq_bin_labels,
+    tpa=None,
 ) -> pd.DataFrame:
-    """Requires poolq_loo and Y_selected (or legacy Y_promoted)."""
+    """Requires LOO pool L column and Y_selected (or legacy Y_promoted)."""
+    if tpa is None:
+        import tier1_pool_assignment as tpa  # noqa: PLC0415
+
     ycol = _outcome_col(players)
-    use = players.dropna(subset=["poolq_loo", ycol]).copy()
-    use["bin"] = assign_poolq_bin_labels(use["poolq_loo"], sel.n_bins, sel.bin_mode)
+    lcol = tpa.pool_l_column(sel.loo_pool_l_mode)
+    use = players.dropna(subset=[lcol, ycol]).copy()
+    use["bin"] = assign_poolq_bin_labels(use[lcol], sel.n_bins, sel.bin_mode)
     return (
         use.dropna(subset=["bin"])
         .groupby("bin", observed=True)
         .agg(
             n=(ycol, "size"),
             selection_rate=(ycol, "mean"),
-            mean_loo_q=("poolq_loo", "mean"),
+            mean_loo_l=(lcol, "mean"),
         )
         .reset_index()
-        .sort_values("mean_loo_q")
+        .sort_values("mean_loo_l")
     )
 
 
@@ -138,9 +148,15 @@ def figure_inverted_u(
     n_bins: int,
     n_teams: int,
     show_bin_n: bool = True,
+    loo_pool_l_mode: str = "quality",
+    tpa=None,
 ) -> plt.Figure:
+    if tpa is None:
+        import tier1_pool_assignment as tpa  # noqa: PLC0415
+
     fig, ax = plt.subplots(figsize=(8.5, 4.2))
-    x = summ["mean_loo_q"].to_numpy(dtype=float)
+    xcol = "mean_loo_l" if "mean_loo_l" in summ.columns else "mean_loo_q"
+    x = summ[xcol].to_numpy(dtype=float)
     rate_col = (
         "selection_rate"
         if "selection_rate" in summ.columns
@@ -149,7 +165,9 @@ def figure_inverted_u(
     y = summ[rate_col].to_numpy(dtype=float)
     ax.plot(x, y, "o-", color="C0", lw=2.0, ms=7)
     ax.fill_between(x, 0, y, alpha=0.12, color="C0")
-    ax.set_xlabel("Bin mean LOO pool quality (poolq_loo)")
+    ax.set_xlabel(
+        f"Bin mean {tpa.pool_l_short_label(loo_pool_l_mode)}"
+    )
     ax.set_ylabel("Mean selection rate")
     ax.set_title(title)
     ymax = float(y.max()) if len(y) else 0.0
@@ -197,12 +215,17 @@ def run_inverted_u_pipeline(
         score_mode=sel.score_mode,
         loo_gap_weight=sel.loo_gap_weight,
         winner_selection=sel.winner_selection,
+        pool_l_mode=sel.loo_pool_l_mode,
     )
-    summ = inverted_u_bin_table(players, sel, assign_poolq_bin_labels=assign_poolq_bin_labels)
+    summ = inverted_u_bin_table(
+        players, sel, assign_poolq_bin_labels=assign_poolq_bin_labels, tpa=tpa
+    )
     fig = figure_inverted_u(
         summ,
         title=f"Inverted-U preview ({sel.n_bins} bins, J={params.n_teams})",
         n_bins=sel.n_bins,
         n_teams=params.n_teams,
+        loo_pool_l_mode=sel.loo_pool_l_mode,
+        tpa=tpa,
     )
     return players, summ, fig

@@ -74,7 +74,10 @@ EMPIRIC_COVERAGE_PEAK_ORDER = 3000
 # Order-of-magnitude; re-read 530 printout after panel refresh
 
 # --- Generative selection / inverted-U replay (CELL 10–12) --------------------
-# Selection = draft pick, tenure, promotion, etc. Bins are on LOO pool Q (not teams).
+# Selection = draft pick, tenure, promotion, etc. Bins are on LOO pool L (not teams).
+# LOO_POOL_L_MODE: "quality" → L_Q (LOO mean teammate A, poolq_loo);
+#                  "crowding" → L_C (LOO sum teammate A, pool_c_loo).
+LOO_POOL_L_MODE = "quality"
 GENERATIVE_N_BINS = 12
 GENERATIVE_POOLQ_BINNING = "quantile"  # "quantile" | "equal_width"
 N_SELECTED = 200

@@ -85,6 +85,7 @@ class Scenario:
     winner_selection: str
     n_bins: int
     bin_mode: str
+    loo_pool_l_mode: str
     n_runs: int
     seed: int
 
@@ -197,19 +198,19 @@ def run_scenario(sc: Scenario) -> dict:
             score_mode=sc.score_mode,
             loo_gap_weight=sc.loo_gap_weight,
             winner_selection=sc.winner_selection,
+            pool_l_mode=sc.loo_pool_l_mode,
         )
-        use = players.dropna(subset=["poolq_loo", "Y_selected"]).copy()
+        lcol = tpa.pool_l_column(sc.loo_pool_l_mode)
+        use = players.dropna(subset=[lcol, "Y_selected"]).copy()
         if use.empty:
             continue
-        use["bin"] = assign_poolq_bin_labels(
-            use["poolq_loo"], n_bins, sc.bin_mode
-        )
+        use["bin"] = assign_poolq_bin_labels(use[lcol], n_bins, sc.bin_mode)
         for b in range(n_bins):
             mask = use["bin"] == b
             if not np.any(mask):
                 continue
             sum_rate[b] += float(use.loc[mask, "Y_selected"].mean())
-            sum_x[b] += float(use.loc[mask, "poolq_loo"].mean())
+            sum_x[b] += float(use.loc[mask, lcol].mean())
             sum_n[b] += float(mask.sum())
             seen[b] += 1.0
 
@@ -263,6 +264,7 @@ def scenario_key(row: dict) -> tuple:
         "winner_selection",
         "n_bins",
         "bin_mode",
+        "loo_pool_l_mode",
     ]
     return tuple(row[f] for f in fields)
 
@@ -306,6 +308,7 @@ def _yield_scenarios(
         winners = ["C"]
         targets = ["uniform", "empirical_530"]
         bin_modes = ["quantile", "equal_width"]
+        loo_l_modes = ["quality", "crowding"]
     else:
         taus = [0.25, 0.45, 0.65, 0.9]
         n_teams_vals = [50, 100, 150]
@@ -323,6 +326,7 @@ def _yield_scenarios(
         winners = ["A", "B", "C"]
         targets = ["uniform", "normal_clipped", "empirical_530"]
         bin_modes = ["quantile", "equal_width"]
+        loo_l_modes = ["quality", "crowding"]
 
     for (
         tau,
@@ -336,6 +340,7 @@ def _yield_scenarios(
         winner,
         target_dist,
         bin_mode,
+        loo_l_mode,
     ) in itertools.product(
         taus,
         n_teams_vals,
@@ -348,6 +353,7 @@ def _yield_scenarios(
         winners,
         targets,
         bin_modes,
+        loo_l_modes,
     ):
         if score == "ability" and loo_w != 0.0:
             continue
@@ -370,6 +376,7 @@ def _yield_scenarios(
             winner_selection=winner,
             n_bins=n_bins,
             bin_mode=str(bin_mode),
+            loo_pool_l_mode=str(loo_l_mode),
             n_runs=n_runs,
             seed=seed,
         )
@@ -425,6 +432,9 @@ def iter_stage2(stage1_rows: list[dict], *, pilot: bool = False) -> Iterable[Sce
                 winner_selection=str(row["winner_selection"]),
                 n_bins=int(row["n_bins"]),
                 bin_mode=str(row["bin_mode"]),
+                loo_pool_l_mode=str(
+                    row.get("loo_pool_l_mode", getattr(_cfg_mod, "LOO_POOL_L_MODE", "quality"))
+                ),
                 n_runs=n_runs,
                 seed=seed,
             )
@@ -466,6 +476,7 @@ def grouped_candidates(stage2_rows: list[dict]) -> pd.DataFrame:
         "winner_selection",
         "n_bins",
         "bin_mode",
+        "loo_pool_l_mode",
         "n_runs",
     ]
     grouped = (
@@ -504,6 +515,7 @@ def _format_plot_title(rank: int, row: pd.Series) -> str:
         f"538 sweep #{rank}: τ={row['assignment_temperature']:.2f} "
         f"J={int(row['n_teams'])} K={int(row['n_selected'])} "
         f"A={row['ability_draw']} T={row['target_mean_dist']} "
+        f"L={row.get('loo_pool_l_mode', 'quality')} "
         f"bins={row['bin_mode']} w={row['loo_gap_weight']:.2f} "
         f"winner={row['winner_selection']}"
     )
@@ -530,6 +542,7 @@ def plot_top(stage2_rows: list[dict], grouped: pd.DataFrame, n_plots: int = 12) 
         "winner_selection",
         "n_bins",
         "bin_mode",
+        "loo_pool_l_mode",
         "n_runs",
     ]
     for idx, grow in grouped.head(n_plots).reset_index(drop=True).iterrows():
@@ -557,9 +570,10 @@ def plot_top(stage2_rows: list[dict], grouped: pd.DataFrame, n_plots: int = 12) 
         y_max = np.nanmax(curves_y, axis=0)
         if not np.any(np.isfinite(x)):
             x = np.arange(len(y_mean), dtype=float)
-            xlabel = "LOO Q bin index"
+            xlabel = "LOO L bin index"
         else:
-            xlabel = "Bin mean LOO pool quality (poolq_loo)"
+            lmode = str(grow.get("loo_pool_l_mode", "quality"))
+            xlabel = f"Bin mean {tpa.pool_l_short_label(lmode)}"
 
         fig, ax = plt.subplots(figsize=(8.2, 5.0))
         ax.fill_between(x, y_min, y_max, color="C0", alpha=0.18, label="seed range")

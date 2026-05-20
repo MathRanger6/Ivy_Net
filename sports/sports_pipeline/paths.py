@@ -100,3 +100,32 @@ def draft_match_diagnostic_summary_csv() -> Path:
 def draft_unmapped_colleges_csv() -> Path:
     """Colleges from the draft register that did not map to ESPN (QA from draft-match stage)."""
     return mbb_dir() / "draft_unmapped_colleges.csv"
+
+
+def draft_combine_stats_csv() -> Path:
+    """NBA ``DraftCombineStats`` extract (``DO_NOT_ERASE/basketball/csv``)."""
+    return durable_mbb_dir() / "basketball" / "csv" / "draft_combine_stats.csv"
+
+
+def draft_history_csv() -> Path:
+    """NBA draft history (includes ``person_id`` for combine bridge)."""
+    return durable_mbb_dir() / "basketball" / "csv" / "draft_history.csv"
+
+
+def nba_player_csv() -> Path:
+    """NBA common player index (``id`` aligns with combine ``player_id`` / ``person_id``)."""
+    return durable_mbb_dir() / "basketball" / "csv" / "player.csv"
+
+
+def combine_player_id_bridge_csv() -> Path:
+    """One row per combine participant: NBA ``player_id`` + optional ESPN ``athlete_id``."""
+    return mbb_dir() / "combine_player_id_bridge.csv"
+
+
+def athlete_id_combine_lookup_csv() -> Path:
+    """One row per ESPN ``athlete_id`` linked to combine (ever)."""
+    return mbb_dir() / "athlete_id_combine_lookup.csv"
+
+
+def combine_bridge_diagnostic_csv() -> Path:
+    return mbb_dir() / "combine_bridge_diagnostic_summary.csv"

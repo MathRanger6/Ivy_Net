@@ -75,6 +75,7 @@ else:
         figure_inverted_u,
         inverted_u_bin_table,
     )
+    import tier1_pool_assignment as _tpa
     from tier1_pool_assignment import (
         AssignmentParams,
         assign_selection,
@@ -82,6 +83,9 @@ else:
         build_roster_dataframe,
         draw_abilities,
         draw_target_means,
+        pool_l_dropdown_options,
+        pool_l_html_label,
+        pool_l_short_label,
         roster_team_stats,
         soft_assign,
     )
@@ -105,13 +109,18 @@ else:
     lay = widgets.Layout(width="460px")
     _sym_legend = widgets.HTML(
         value=(
-            "<div style='font-size:11px;color:#555;margin:0 0 6px 0'>"
+            "<div style='font-size:12px;color:#555;margin:0 0 6px 0'>"
             f"<b>{_A}</b> = latent ability (player <i>i</i>) &nbsp;|&nbsp; "
-            f"<b>{_T}</b> = fixed team target mean (team <i>j</i>)"
+            f"<b>{_T}</b> = fixed team target mean (team <i>j</i>) &nbsp;|&nbsp; "
+            "<b>L<sub>q</sub></b>/<b>L<sub>c</sub></b> = LOO pool (mean / sum)"
             "</div>"
         ),
         layout=widgets.Layout(width="520px"),
     )
+    _SCORE_HELP_STYLE = (
+        "font-size:14px;color:#222;line-height:1.55;margin:6px 0 8px 0"
+    )
+    _HINT_STYLE = "font-size:12px;color:#555;line-height:1.45;margin:0 0 4px 0"
 
     def _state_load() -> dict:
         if not PLAYGROUND_STATE_PATH.is_file():
@@ -143,6 +152,7 @@ else:
             "score_mode": sel.score_mode,
             "loo_gap_weight": sel.loo_gap_weight,
             "winner_selection": sel.winner_selection,
+            "loo_pool_l_mode": sel.loo_pool_l_mode,
         }
 
     _st = {**_defaults(), **_state_load()}
@@ -265,19 +275,33 @@ else:
         style=style,
     )
 
+    _LOO_L_MODE_OPTIONS = pool_l_dropdown_options()
+    _loo_l_val = str(_st.get("loo_pool_l_mode", "quality")).strip().lower()
+    if _loo_l_val not in {v for _, v in _LOO_L_MODE_OPTIONS}:
+        _loo_l_val = "quality"
+    w_loo_l_mode = widgets.Dropdown(
+        options=_LOO_L_MODE_OPTIONS,
+        value=_loo_l_val,
+        description="Pool L (LOO)",
+        style=style,
+        layout=widgets.Layout(width="520px"),
+    )
+    loo_l_hint_html = widgets.HTML(
+        layout=widgets.Layout(width="520px", margin="0 0 4px 0")
+    )
     w_n_bins = widgets.IntSlider(
         value=int(_st.get("n_bins", 12)),
         min=5,
         max=30,
         step=1,
-        description="LOO Q bins (#)",
+        description="LOO L bins (#)",
         continuous_update=False,
         style=style,
         layout=lay,
     )
     _BIN_MODE_OPTIONS = [
         ("Equal count (quantile)", "quantile"),
-        ("Equal width on LOO Q", "equal_width"),
+        ("Equal width on LOO L", "equal_width"),
     ]
     _bin_mode_val = str(_st.get("bin_mode", "quantile")).strip().lower()
     if _bin_mode_val not in {"quantile", "equal_width"}:
@@ -350,25 +374,42 @@ else:
         layout=widgets.Layout(width="520px"),
     )
 
+    def _update_loo_l_hint_html(_=None):
+        mode = str(w_loo_l_mode.value)
+        l_html = pool_l_html_label(mode)
+        if mode == "crowding":
+            detail = "LOO <b>sum</b> of teammate ability (crowding)"
+        else:
+            detail = "LOO <b>mean</b> of teammate ability (quality)"
+        loo_l_hint_html.value = (
+            f"<div style='{_HINT_STYLE}'>"
+            f"Active regressor: <b>{l_html}</b> — {detail}"
+            "</div>"
+        )
+
     def _update_score_formula_html(_=None):
         w = float(w_loo_w.value)
+        l_html = pool_l_html_label(str(w_loo_l_mode.value))
         if str(w_score.value) == "ability":
             score_formula_html.value = (
-                "<div style='font-size:11px;color:#444;line-height:1.35'>"
-                "<b>Score</b> = A<sub>i</sub> (ability only; w unused)."
+                f"<div style='{_SCORE_HELP_STYLE}'>"
+                "<b>Score</b> = A<sub>i</sub> (ability only; <i>w</i> unused)."
                 "</div>"
             )
             return
         score_formula_html.value = (
-            "<div style='font-size:11px;color:#444;line-height:1.35'>"
-            "<b>Score</b> = w·(A<sub>i</sub> − LOO&nbsp;Q) + (1−w)·A<sub>i</sub> "
-            "= A<sub>i</sub> − w·LOO&nbsp;Q &nbsp;|&nbsp; "
-            f"<b>w={w:.2f}</b><br>"
-            "w=1 → <b>LOO gap only</b> (A<sub>i</sub> − LOO&nbsp;Q); ability level drops out. "
-            "w=0 → <b>ability only</b>; LOO gap ignored."
+            f"<div style='{_SCORE_HELP_STYLE}'>"
+            f"<b>Score</b> = <i>w</i>·(A<sub>i</sub> − {l_html}) + (1−<i>w</i>)·A<sub>i</sub><br>"
+            f"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= "
+            f"A<sub>i</sub> − <i>w</i>·{l_html} &nbsp;&nbsp;|&nbsp;&nbsp; "
+            f"<b><i>w</i> = {w:.2f}</b><br><br>"
+            f"<b><i>w</i> = 1</b> → LOO gap only "
+            f"(A<sub>i</sub> − {l_html}); ability level drops out.<br>"
+            f"<b><i>w</i> = 0</b> → ability only; {l_html} ignored."
             "</div>"
         )
 
+    _update_loo_l_hint_html()
     _update_score_formula_html()
 
     btn_defaults = widgets.Button(
@@ -404,7 +445,12 @@ else:
         placeholder="(no plot yet)",
     )
     plot_b_box = widgets.VBox(
-        [widgets.HTML(value="<b>Plot B — selection rate vs LOO Q bins (inverted-U)</b>"), plot_widget_inverted_u],
+        [
+            widgets.HTML(
+                value="<b>Plot B — selection rate vs LOO L bins (inverted-U)</b>"
+            ),
+            plot_widget_inverted_u,
+        ],
         layout=widgets.Layout(
             align_items="flex-start",
             max_width=f"{_PLOT_B_MAX_WIDTH_PX}px",
@@ -462,6 +508,7 @@ else:
             score_mode=str(w_score.value),
             loo_gap_weight=float(w_loo_w.value),
             winner_selection=str(w_winner.value),
+            loo_pool_l_mode=str(w_loo_l_mode.value),
         )
 
     def _persist():
@@ -488,6 +535,7 @@ else:
                         "score_mode": str(w_score.value),
                         "loo_gap_weight": float(w_loo_w.value),
                         "winner_selection": str(w_winner.value),
+                        "loo_pool_l_mode": str(w_loo_l_mode.value),
                     },
                     indent=2,
                     sort_keys=True,
@@ -659,20 +707,25 @@ else:
                 score_mode=sel.score_mode,
                 loo_gap_weight=sel.loo_gap_weight,
                 winner_selection=sel.winner_selection,
+                pool_l_mode=sel.loo_pool_l_mode,
             )
             summ_u = inverted_u_bin_table(
                 players_sel,
                 sel,
                 assign_poolq_bin_labels=assign_poolq_bin_labels,
+                tpa=_tpa,
             )
             fig_u = figure_inverted_u(
                 summ_u,
                 title=(
                     f"538 CELL 10 — inverted-U preview "
-                    f"({sel.n_bins} bins, {sel.bin_mode}, K={sel.n_selected})"
+                    f"({sel.n_bins} bins, {sel.bin_mode}, "
+                    f"{pool_l_short_label(sel.loo_pool_l_mode)}, K={sel.n_selected})"
                 ),
                 n_bins=sel.n_bins,
                 n_teams=params.n_teams,
+                loo_pool_l_mode=sel.loo_pool_l_mode,
+                tpa=_tpa,
             )
             buf_u = io.BytesIO()
             fig_u.savefig(buf_u, format="png", dpi=120, bbox_inches="tight")
@@ -714,9 +767,10 @@ else:
                 f"α_pref={params.preferential_alpha:.2f}\n"
                 f"{cov_line}  |  {chop_line}{slow_note}\n"
                 f"select: K={sel.n_selected}  score={sel.score_mode!r}  w={sel.loo_gap_weight:.2f}  "
-                f"winner={sel.winner_selection!r}  bins={sel.n_bins}  binning={sel.bin_mode!r}  "
+                f"winner={sel.winner_selection!r}  L={sel.loo_pool_l_mode!r}  "
+                f"bins={sel.n_bins}  binning={sel.bin_mode!r}  "
                 f"overall_rate={selection_rate:.4f}  peak_bin_rate={peak_bin_rate:.4f}\n"
-                "Pools: 530 CELL 8 analog (peak≫1). Selection: inverted-U vs LOO Q bins."
+                "Pools: 530 CELL 8 analog (peak≫1). Selection: inverted-U vs LOO L bins."
                 "</pre>"
             )
             _persist()
@@ -752,6 +806,8 @@ else:
         w_score.value = str(d["score_mode"])
         w_loo_w.value = float(d["loo_gap_weight"])
         w_winner.value = str(d["winner_selection"])
+        w_loo_l_mode.value = str(d["loo_pool_l_mode"])
+        _update_loo_l_hint_html()
         _update_score_formula_html()
         redraw()
 
@@ -771,6 +827,7 @@ else:
             w_seed,
             w_show_chop,
             w_show_plot_a,
+            w_loo_l_mode,
             w_n_bins,
             w_bin_mode,
             w_n_select,
@@ -782,6 +839,8 @@ else:
             w.observe(redraw, names="value")
         w_score.observe(_update_score_formula_html, names="value")
         w_loo_w.observe(_update_score_formula_html, names="value")
+        w_loo_l_mode.observe(_update_score_formula_html, names="value")
+        w_loo_l_mode.observe(_update_loo_l_hint_html, names="value")
         btn_run.on_click(redraw)
         btn_seed_change.on_click(_seed_change)
         btn_defaults.on_click(_load_defaults)
@@ -809,6 +868,8 @@ else:
             w_show_chop,
             w_show_plot_a,
             widgets.HTML("<b>Selection (inverted-U preview)</b>"),
+            w_loo_l_mode,
+            loo_l_hint_html,
             w_n_bins,
             w_bin_mode,
             w_n_select,

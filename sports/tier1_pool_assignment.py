@@ -28,6 +28,46 @@ AbilityDraw = Literal[
     "empirical_530",
 ]
 AssignmentMethod = Literal["soft", "sort_chop"]
+LooPoolLMode = Literal["quality", "crowding"]
+
+POOL_L_QUALITY_COL = "poolq_loo"  # L_Q — LOO mean teammate ability
+POOL_L_CROWDING_COL = "pool_c_loo"  # L_C — LOO sum teammate ability
+
+
+def pool_l_column(mode: str) -> str:
+    """Column name for generative LOO pool regressor L (quality vs crowding)."""
+    m = str(mode).strip().lower()
+    if m in ("quality", "l_q", POOL_L_QUALITY_COL):
+        return POOL_L_QUALITY_COL
+    if m in ("crowding", "l_c", POOL_L_CROWDING_COL):
+        return POOL_L_CROWDING_COL
+    raise ValueError(
+        f"loo_pool_l_mode must be 'quality' or 'crowding', got {mode!r}"
+    )
+
+
+def pool_l_short_label(mode: str) -> str:
+    """Plain-text label (matplotlib axes, sweep logs)."""
+    m = str(mode).strip().lower()
+    if m in ("crowding", "l_c", POOL_L_CROWDING_COL):
+        return "L_C (LOO sum)"
+    return "L_Q (LOO mean)"
+
+
+def pool_l_html_label(mode: str) -> str:
+    """HTML for widgets.HTML — real subscripts via <sub> (not Unicode modifier letters)."""
+    m = str(mode).strip().lower()
+    if m in ("crowding", "l_c", POOL_L_CROWDING_COL):
+        return "L<sub>c</sub>"
+    return "L<sub>q</sub>"
+
+
+def pool_l_dropdown_options() -> list[tuple[str, str]]:
+    """(display label, value) — mode name only; symbol shown in loo_l_hint_html."""
+    return [
+        ("Quality — LOO mean", "quality"),
+        ("Crowding — LOO sum", "crowding"),
+    ]
 
 
 @dataclass(frozen=True)
@@ -291,15 +331,22 @@ def build_roster_dataframe(
     )
 
 
-def add_poolq_loo(players: pd.DataFrame) -> pd.DataFrame:
-    """Leave-one-out mean teammate ability (LOO pool quality L / poolq_loo)."""
+def add_loo_pool_columns(players: pd.DataFrame) -> pd.DataFrame:
+    """Add L_Q (``poolq_loo``) and L_C (``pool_c_loo``) leave-one-out teammate stats."""
     out = players.copy()
     g = out.groupby("pool_id", observed=True)["ability"]
     ssum = g.transform("sum")
     cnt = g.transform("count").astype(float)
     den = (cnt - 1.0).replace(0.0, np.nan)
-    out["poolq_loo"] = (ssum - out["ability"]) / den
+    loo_sum = ssum - out["ability"]
+    out[POOL_L_CROWDING_COL] = loo_sum
+    out[POOL_L_QUALITY_COL] = loo_sum / den
     return out
+
+
+def add_poolq_loo(players: pd.DataFrame) -> pd.DataFrame:
+    """Backward-compatible alias: adds both L_Q and L_C columns."""
+    return add_loo_pool_columns(players)
 
 
 def selection_weights(
@@ -307,9 +354,11 @@ def selection_weights(
     *,
     score_mode: str,
     loo_gap_weight: float,
+    pool_l_mode: str = "quality",
 ) -> np.ndarray:
     a = players["ability"].to_numpy(dtype=float)
-    q = players["poolq_loo"].to_numpy(dtype=float)
+    lcol = pool_l_column(pool_l_mode)
+    q = players[lcol].to_numpy(dtype=float)
     mode = str(score_mode).strip().lower()
     if mode == "ability":
         w = a.copy()
@@ -368,11 +417,15 @@ def assign_selection(
     score_mode: str,
     loo_gap_weight: float,
     winner_selection: str,
+    pool_l_mode: str = "quality",
 ) -> pd.DataFrame:
     """Mark K selected players (draft / tenure / promotion — domain-agnostic)."""
-    out = add_poolq_loo(players)
+    out = add_loo_pool_columns(players)
     w = selection_weights(
-        out, score_mode=score_mode, loo_gap_weight=loo_gap_weight
+        out,
+        score_mode=score_mode,
+        loo_gap_weight=loo_gap_weight,
+        pool_l_mode=pool_l_mode,
     )
     out["Y_selected"] = choose_selected(
         rng, w, int(n_selected), str(winner_selection)
