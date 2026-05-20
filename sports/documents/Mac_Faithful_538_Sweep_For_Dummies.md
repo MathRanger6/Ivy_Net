@@ -206,7 +206,8 @@ Key paths after merge:
 |------|---------|
 | `sports/outputs/simulation_sweeps/rivanna_faithful_538/stage1_results.csv` | Merged Stage 1 |
 | `sports/outputs/simulation_sweeps/rivanna_faithful_538/grouped_candidates.csv` | Stable inverted-U settings |
-| `sports/outputs/simulation_sweeps/rivanna_faithful_538/candidate_plots/` | PNG curves |
+| `sports/outputs/simulation_sweeps/rivanna_faithful_538/candidate_plots/` | PNG curves (Rivanna merge / `plot-candidates`) |
+| `sports/outputs/simulation_sweeps/faithful_538_candidate_plots/` | PNG curves from **local** `faithful_538_sweep.py` only — not the Rivanna folder |
 | `sports/outputs/simulation_sweeps/rivanna_faithful_538/README.md` | Counts summary |
 
 Filter crowding runs in pandas:
@@ -231,10 +232,25 @@ print(c[["moderate_downturn", "curve_bin_l_col", "viability_theta"]].head())
 
 ---
 
+## Re-plot after pulling (strict metrics / new sort)
+
+**Use the Rivanna tree**, not `faithful_538_candidate_plots/`:
+
+```bash
+cd sports/outputs/simulation_sweeps
+python faithful_538_sweep_rivanna_worker.py plot-candidates
+open rivanna_faithful_538/candidate_plots/
+```
+
+Check timestamps: `ls -lt rivanna_faithful_538/candidate_plots/ | head`
+
+---
+
 ## Troubleshooting
 
 | Symptom | Fix |
 |---------|-----|
+| Refreshed plots but PNGs unchanged | You updated `faithful_538_candidate_plots/`; re-run `plot-candidates` above for `rivanna_faithful_538/candidate_plots/` |
 | `empirical_perf_fit.json` missing | 530 CELL 5b, commit `datasets/mbb/empirical_perf_fit.json`, `git pull` on Rivanna |
 | Crowding rows still bin on `poolq_loo` | Pull latest `faithful_538_sweep.py` (uses `pool_l_column`) |
 | Pilot “96 scenarios” in old notes | Grid is **192** pilot / **103,680** full Stage 1 |
