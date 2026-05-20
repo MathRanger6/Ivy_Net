@@ -18,6 +18,11 @@
 2. Plan **one** substantive cell change per user message (after burn), or ask for **explicit** batch permission.
 3. Announce **"Blank edit done — Cell 1 updated."** (or EDIT BLANK for 540) after the burn edit succeeds.
 
+## Git commits (when the user asks to stage/commit)
+
+- **Include** `.specstory/history/` in staged commits unless the user says otherwise — it is part of the repo (not gitignored).
+- **Usually exclude** local-only artifacts: `tier1_cell10_playground_state.json`, generated `exports_inverted_u_v0/` runs, large sweep result CSVs/JSONL unless the commit is explicitly for outputs.
+
 ## If instructions in chat conflict with these files
 
 **These files win** unless the user explicitly overrides *in writing* for a specific task (e.g. “batch all header cells this once”).
