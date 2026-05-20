@@ -82,7 +82,12 @@ def read_rows(path: Path) -> list[dict]:
         for key in ("interior_peak", "moderate_downturn"):
             if key in row:
                 val = row[key]
-                row[key] = bool(val) if isinstance(val, (bool, pd.bool_)) else str(val).lower() == "true"
+                if pd.isna(val):
+                    row[key] = False
+                elif isinstance(val, str):
+                    row[key] = val.strip().lower() in ("true", "1", "yes")
+                else:
+                    row[key] = bool(val)
     return rows
 
 
