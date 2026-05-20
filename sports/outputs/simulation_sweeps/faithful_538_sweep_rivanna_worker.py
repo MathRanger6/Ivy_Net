@@ -76,10 +76,11 @@ def read_rows(path: Path) -> list[dict]:
             "n_runs",
             "seed",
             "peak_bin",
+            "tail_bins_declining",
         ):
             if key in row and not pd.isna(row[key]):
                 row[key] = int(row[key])
-        for key in ("interior_peak", "moderate_downturn"):
+        for key in ("interior_peak", "moderate_downturn", "moderate_downturn_strict"):
             if key in row:
                 val = row[key]
                 if pd.isna(val):

@@ -60,6 +60,9 @@ GROUPED_CSV = OUT_DIR / "faithful_538_sweep_grouped_candidates.csv"
 README = OUT_DIR / "faithful_538_sweep_README.md"
 PLOT_DIR = OUT_DIR / "faithful_538_candidate_plots"
 
+# Stricter inverted-U: ≥2 declining bins after interior peak (not a one-bin cliff).
+MIN_TAIL_BINS_DECLINING_STRICT = 2
+
 _BASE_PARAMS = tpa.AssignmentParams.from_tier1_sim_config(_SPORTS / "tier1_sim_config.py")
 _spec_cfg = importlib.util.spec_from_file_location(
     "tier1_sim_config", _SPORTS / "tier1_sim_config.py"
@@ -137,8 +140,10 @@ def _curve_metrics(y_valid: np.ndarray) -> dict:
             "tail_drop_frac": float("nan"),
             "left_lift_frac": float("nan"),
             "tail_slope_last3": float("nan"),
+            "tail_bins_declining": 0,
             "interior_peak": False,
             "moderate_downturn": False,
+            "moderate_downturn_strict": False,
         }
     peak_idx = int(np.argmax(y_valid))
     peak_y = float(y_valid[peak_idx])
@@ -152,6 +157,10 @@ def _curve_metrics(y_valid: np.ndarray) -> dict:
         tail_slope = float(y_valid[-1] - y_valid[-2])
     else:
         tail_slope = float("nan")
+    tail_bins_declining = 0
+    for i in range(peak_idx + 1, y_valid.size):
+        if y_valid[i] < y_valid[i - 1]:
+            tail_bins_declining += 1
     interior_peak = bool(y_valid.size >= 3 and 1 <= peak_idx <= y_valid.size - 2)
     both_ends_below = bool(first_y < peak_y and final_y < peak_y)
     moderate_downturn = bool(
@@ -161,6 +170,13 @@ def _curve_metrics(y_valid: np.ndarray) -> dict:
         and left_lift_frac >= 0.05
         and tail_drop_frac >= 0.05
     )
+    min_bins_after_peak = MIN_TAIL_BINS_DECLINING_STRICT
+    peak_not_at_penultimate = bool(peak_idx <= y_valid.size - 1 - min_bins_after_peak)
+    moderate_downturn_strict = bool(
+        moderate_downturn
+        and peak_not_at_penultimate
+        and tail_bins_declining >= MIN_TAIL_BINS_DECLINING_STRICT
+    )
     return {
         "peak_bin": peak_idx,
         "peak_y": peak_y,
@@ -169,9 +185,30 @@ def _curve_metrics(y_valid: np.ndarray) -> dict:
         "tail_drop_frac": tail_drop_frac,
         "left_lift_frac": left_lift_frac,
         "tail_slope_last3": tail_slope,
+        "tail_bins_declining": int(tail_bins_declining),
         "interior_peak": interior_peak,
         "moderate_downturn": moderate_downturn,
+        "moderate_downturn_strict": moderate_downturn_strict,
     }
+
+
+def enrich_legacy_curve_metrics(row: dict) -> dict:
+    """Backfill strict metrics when reading older CSV shards without new columns."""
+    if "moderate_downturn_strict" in row:
+        return row
+    cy = row.get("curve_y")
+    if cy is None or (isinstance(cy, float) and pd.isna(cy)):
+        return row
+    y_list = json.loads(cy) if isinstance(cy, str) else cy
+    y = np.array(
+        [np.nan if v is None else float(v) for v in y_list],
+        dtype=float,
+    )
+    valid = np.isfinite(y)
+    if not np.any(valid):
+        return row
+    row.update(_curve_metrics(y[valid]))
+    return row
 
 
 def run_scenario(sc: Scenario) -> dict:
@@ -393,12 +430,24 @@ def iter_stage1(*, pilot: bool = False) -> Iterable[Scenario]:
     yield from _yield_scenarios(stage="stage1", n_runs=n_runs, seed=538001, pilot=pilot)
 
 
+def _stage2_candidate(row: dict) -> bool:
+    row = enrich_legacy_curve_metrics(row)
+    if bool(row.get("moderate_downturn_strict")):
+        return True
+    if bool(row.get("moderate_downturn")):
+        return True
+    return bool(row.get("interior_peak")) and float(row["tail_drop_frac"]) > 0.02
+
+
 def iter_stage2(stage1_rows: list[dict], *, pilot: bool = False) -> Iterable[Scenario]:
+    enriched = [enrich_legacy_curve_metrics(dict(r)) for r in stage1_rows]
     ranked = sorted(
-        stage1_rows,
+        enriched,
         key=lambda r: (
+            not bool(r.get("moderate_downturn_strict")),
             not bool(r["moderate_downturn"]),
             not bool(r["interior_peak"]),
+            -int(r.get("tail_bins_declining", 0) or 0),
             -float(r["tail_drop_frac"]) if math.isfinite(float(r["tail_drop_frac"])) else 0.0,
             -float(r.get("coverage_peak", 0) or 0),
         ),
@@ -407,13 +456,13 @@ def iter_stage2(stage1_rows: list[dict], *, pilot: bool = False) -> Iterable[Sce
     seen_keys: set[tuple] = set()
     cap = 80 if pilot else 200
     for row in ranked:
-        if bool(row["moderate_downturn"]) or (
-            bool(row["interior_peak"]) and float(row["tail_drop_frac"]) > 0.02
-        ):
-            key = scenario_key(row)
-            if key not in seen_keys:
-                candidates.append(row)
-                seen_keys.add(key)
+        if not _stage2_candidate(row):
+            continue
+        key = scenario_key(row)
+        if key in seen_keys:
+            continue
+        candidates.append(row)
+        seen_keys.add(key)
         if len(candidates) >= cap:
             break
 
@@ -465,6 +514,7 @@ def write_csv(path: Path, rows: list[dict]) -> None:
 def grouped_candidates(stage2_rows: list[dict]) -> pd.DataFrame:
     if not stage2_rows:
         return pd.DataFrame()
+    stage2_rows = [enrich_legacy_curve_metrics(dict(r)) for r in stage2_rows]
     df = pd.DataFrame(stage2_rows)
     group_cols = [
         "n_teams",
@@ -490,7 +540,9 @@ def grouped_candidates(stage2_rows: list[dict]) -> pd.DataFrame:
         .agg(
             seeds=("seed", "nunique"),
             moderate_seed_count=("moderate_downturn", "sum"),
+            moderate_strict_seed_count=("moderate_downturn_strict", "sum"),
             interior_seed_count=("interior_peak", "sum"),
+            mean_tail_bins_declining=("tail_bins_declining", "mean"),
             mean_left_lift_frac=("left_lift_frac", "mean"),
             mean_tail_drop_frac=("tail_drop_frac", "mean"),
             min_tail_drop_frac=("tail_drop_frac", "min"),
@@ -508,9 +560,23 @@ def grouped_candidates(stage2_rows: list[dict]) -> pd.DataFrame:
         & (grouped["mean_tail_drop_frac"] >= 0.05)
         & (grouped["mean_left_lift_frac"] >= 0.05)
     )
+    grouped["moderate_stable_strict"] = (
+        (grouped["seeds"] >= 3)
+        & (grouped["moderate_strict_seed_count"] >= np.ceil(grouped["seeds"] * 0.6))
+        & (grouped["mean_tail_bins_declining"] >= float(MIN_TAIL_BINS_DECLINING_STRICT))
+        & (grouped["mean_tail_drop_frac"] >= 0.05)
+        & (grouped["mean_left_lift_frac"] >= 0.05)
+    )
     grouped = grouped.sort_values(
-        ["moderate_stable", "mean_tail_drop_frac", "mean_left_lift_frac", "interior_seed_count"],
-        ascending=[False, False, False, False],
+        [
+            "moderate_stable_strict",
+            "moderate_stable",
+            "mean_tail_bins_declining",
+            "mean_tail_drop_frac",
+            "mean_left_lift_frac",
+            "interior_seed_count",
+        ],
+        ascending=[False, False, False, False, False, False],
         kind="mergesort",
     )
     return grouped
@@ -597,6 +663,9 @@ def plot_top(stage2_rows: list[dict], grouped: pd.DataFrame, n_plots: int = 12) 
 
 def write_readme(stage1_rows: list[dict], stage2_rows: list[dict], grouped: pd.DataFrame) -> None:
     stable = int(grouped["moderate_stable"].sum()) if not grouped.empty else 0
+    stable_strict = (
+        int(grouped["moderate_stable_strict"].sum()) if not grouped.empty else 0
+    )
     text = f"""# Faithful 538 generative sweep
 
 Generated by `faithful_538_sweep.py`.
@@ -615,10 +684,12 @@ Generated by `faithful_538_sweep.py`.
 
 Requires `{EMPIRICAL_FIT_PATH.name}` when the grid includes `empirical_530`.
 
-## Moderate downturn rule
+## Moderate downturn rules
 
-Same as 537 sweep: interior peak, both ends ≥5% below peak (`moderate_downturn`).
-Grouped `moderate_stable` when ≥60% of seeds pass across Stage 2.
+- **`moderate_downturn`:** same as 537 — interior peak, both ends ≥5% below peak.
+- **`moderate_downturn_strict`:** above plus peak at least two bins from the right edge and
+  ≥{MIN_TAIL_BINS_DECLINING_STRICT} strictly declining bins after the peak (filters one-bin cliffs).
+- **`moderate_stable` / `moderate_stable_strict`:** ≥60% of Stage-2 seeds pass the matching rule.
 
 ## Pool diagnostics (last run per scenario)
 
@@ -636,6 +707,7 @@ Grouped `moderate_stable` when ≥60% of seeds pass across Stage 2.
 - Stage 1: {len(stage1_rows):,}
 - Stage 2: {len(stage2_rows):,}
 - Stable moderate downturn settings: {stable:,}
+- Stable **strict** downturn settings: {stable_strict:,}
 
 ## Local commands
 
