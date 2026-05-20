@@ -12,7 +12,7 @@
 #   ./scripts/clean_rivanna_faithful_538_sweep.sh --dry-run
 #   ./scripts/clean_rivanna_faithful_538_sweep.sh --yes
 #
-# Prerequisite on Rivanna: sports/datasets/mbb/empirical_perf_fit.json (530 CELL 5b).
+# Prerequisite on Rivanna: datasets/mbb/empirical_perf_fit.json (530 CELL 5b; Git-tracked).
 #
 # Optional overrides:
 #   N_STAGE1_SHARDS=64   — match rivanna_stage1_faithful_538.slurm --array
@@ -59,7 +59,7 @@ STAGE1="${SWEEP}/rivanna_stage1_faithful_538.slurm"
 MERGE1="${SWEEP}/rivanna_merge_stage1_faithful_538.slurm"
 STAGE2="${SWEEP}/rivanna_stage2_array_faithful_538.slurm"
 MERGE2="${SWEEP}/rivanna_merge_faithful_538.slurm"
-FIT="sports/datasets/mbb/empirical_perf_fit.json"
+FIT="datasets/mbb/empirical_perf_fit.json"
 
 for f in "$WORKER" "$STAGE1" "$MERGE1" "$STAGE2" "$MERGE2"; do
   test -f "$f" || {

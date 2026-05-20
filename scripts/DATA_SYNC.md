@@ -39,7 +39,7 @@ There is intentional overlap in *rules*: `.gitignore` tells Git “don’t commi
 | Slurm `.out` / `.err` | `slurm_out/slurm-*.{out,err}` (and legacy repo root) | **No** | Yes — `logs` or `quick` / `all` | Rarely needed |
 | Papermill output notebook | `slurm-*-output.ipynb` (often repo root) | **No** | Use same pull as parent dir or copy manually | Optional |
 | Faithful 537 sweep tree | `sports/outputs/simulation_sweeps/rivanna_faithful_537/`, CSVs, plots | **No** | Yes — `sweep` or `quick` | Sweep **code** yes; **results** pull-only via excludes |
-| Faithful 538 sweep tree | `rivanna_faithful_538/`, `faithful_538_*` CSVs/plots | **No** | Yes — `sweep` or `quick` | Also `rsync_push … sweep538-deps` for Tier 1 + `empirical_perf_fit.json` |
+| Faithful 538 sweep tree | `rivanna_faithful_538/`, `faithful_538_*` CSVs/plots | **No** | Yes — `sweep` or `quick` | Sweep **code** via `sweep` or Git; `empirical_perf_fit.json` is **Git-tracked** at `datasets/mbb/` (see `README_TRACKED_ARTIFACTS.md`) |
 | DBLP XML | `python_packages/dblp-parser/dblp.xml`, `datasets/` | **No** | Manual / intentional only | Manual |
 
 ---

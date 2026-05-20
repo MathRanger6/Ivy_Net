@@ -34,7 +34,7 @@ sports/outputs/simulation_sweeps/rivanna_stage1_faithful_538.slurm
 sports/outputs/simulation_sweeps/rivanna_merge_stage1_faithful_538.slurm
 sports/outputs/simulation_sweeps/rivanna_stage2_array_faithful_538.slurm
 sports/outputs/simulation_sweeps/rivanna_merge_faithful_538.slurm
-sports/datasets/mbb/empirical_perf_fit.json
+datasets/mbb/empirical_perf_fit.json
 scripts/track_slurm.sh
 scripts/clean_rivanna_faithful_538_sweep.sh
 ```
@@ -57,15 +57,20 @@ DRY_RUN=1 ./scripts/rsync_push_to_hpc.sh sweep
 
 ### Step 2: Tier 1 model + empirical fit (538 only)
 
-After **530 CELL 5b** saves `empirical_perf_fit.json` on your Mac:
+**Preferred:** `empirical_perf_fit.json` lives at **`datasets/mbb/empirical_perf_fit.json`** and is **Git-tracked** (530 CELL 5b). After `git push` on Mac, on Rivanna:
+
+```bash
+git pull
+ls datasets/mbb/empirical_perf_fit.json
+```
+
+**Optional rsync** (Python only; JSON already in Git):
 
 ```bash
 ./scripts/rsync_push_to_hpc.sh sweep538-deps
 ```
 
-Pushes `tier1_*.py`, `sports/sports_pipeline/`, and `sports/datasets/mbb/empirical_perf_fit.json`.
-
-Be careful: without the JSON, any grid point with `ability_draw=empirical_530` or `target_mean_dist=empirical_530` will fail on Rivanna.
+Pushes `tier1_*.py` and `sports/sports_pipeline/`. Without the JSON, any `empirical_530` grid point fails on Rivanna.
 
 ## Rivanna: Preflight
 
@@ -77,7 +82,7 @@ ls sim_job_538.slurm
 ls sports/outputs/simulation_sweeps/faithful_538_sweep.py
 ls sports/outputs/simulation_sweeps/faithful_538_sweep_rivanna_worker.py
 ls sports/outputs/simulation_sweeps/rivanna_stage1_faithful_538.slurm
-ls sports/datasets/mbb/empirical_perf_fit.json
+ls datasets/mbb/empirical_perf_fit.json
 module load miniforge
 ~/.conda/envs/sports_net/bin/python -c "import numpy, pandas, matplotlib; print('ok')"
 ```

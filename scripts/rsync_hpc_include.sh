@@ -176,12 +176,12 @@ ivy_rsync_pull_sweep() {
 }
 
 # Usage: ivy_rsync_push_faithful_538_deps
-#   Push Tier-1 generative modules + 530 empirical perf fit JSON (Mac → HPC).
+#   Push Tier-1 generative modules (Mac → HPC). empirical_perf_fit.json is Git-tracked
+#   at datasets/mbb/ — use git pull on Rivanna; rsync copy below is optional backup.
 ivy_rsync_push_faithful_538_deps() {
-  local fit="${REPO_ROOT}/sports/datasets/mbb/empirical_perf_fit.json"
+  local fit="${REPO_ROOT}/datasets/mbb/empirical_perf_fit.json"
   if [[ ! -f "$fit" ]]; then
-    echo "ERROR: missing ${fit} — run 530 CELL 5b (fit_perf_array → save_fit) on Mac first." >&2
-    exit 1
+    echo "WARN: missing ${fit} — run 530 CELL 5b and commit, or git pull on HPC." >&2
   fi
   echo "==> Push faithful 538 model dependencies"
   ivy_rsync_push "sports/sports_pipeline"
@@ -189,7 +189,7 @@ ivy_rsync_push_faithful_538_deps() {
     "sports/tier1_sim_config.py"
     "sports/tier1_pool_assignment.py"
     "sports/tier1_generative_eda.py"
-    "sports/datasets/mbb/empirical_perf_fit.json"
+    "datasets/mbb/empirical_perf_fit.json"
   )
   _ivy_rsync_build_opts
   for rel in "${files[@]}"; do

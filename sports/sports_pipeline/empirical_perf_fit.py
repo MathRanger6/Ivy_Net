@@ -25,7 +25,9 @@ _CANDIDATES: tuple[tuple[str, Any], ...] = (
 
 
 def default_fit_path() -> Path:
-  return Path(__file__).resolve().parents[1] / "datasets" / "mbb" / "empirical_perf_fit.json"
+    from sports_pipeline.paths import mbb_dir
+
+    return mbb_dir() / "empirical_perf_fit.json"
 
 
 def _params_to_list(params: tuple[float, ...]) -> list[float]:

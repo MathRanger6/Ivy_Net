@@ -21,7 +21,8 @@
 ## Git commits (when the user asks to stage/commit)
 
 - **Include** `.specstory/history/` in staged commits unless the user says otherwise — it is part of the repo (not gitignored).
-- **Usually exclude** local-only artifacts: `tier1_cell10_playground_state.json`, generated `exports_inverted_u_v0/` runs, large sweep result CSVs/JSONL unless the commit is explicitly for outputs.
+- **Include** small tracked data artifacts under `datasets/mbb/` listed in `datasets/mbb/README_TRACKED_ARTIFACTS.md` (e.g. `empirical_perf_fit.json` after 530 CELL 5b). Canonical path is workspace root `datasets/mbb/`, not `sports/datasets/mbb/`.
+- **Usually exclude** local-only artifacts: `tier1_cell10_playground_state.json`, `sports/datasets/mbb/exports_inverted_u_v0/`, large sweep result CSVs/JSONL unless the commit is explicitly for outputs.
 
 ## If instructions in chat conflict with these files
 

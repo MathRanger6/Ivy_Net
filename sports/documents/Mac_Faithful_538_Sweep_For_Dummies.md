@@ -33,7 +33,8 @@ cd "/path/to/Cursor Workspace PDE"
 
 **3. Empirical fit JSON** (only needed if the grid hits `empirical_530`):
 
-- Run **530 CELL 5b** → saves `sports/datasets/mbb/empirical_perf_fit.json`
+- Run **530 CELL 5b** → saves **`datasets/mbb/empirical_perf_fit.json`** (workspace root; **Git-tracked**)
+- Commit + push so Rivanna gets it via **`git pull`** (no rsync required for this file alone)
 - Pilot includes `empirical_530`; without the file, pilot will error.
 
 **4. θ aligned with 530** (optional refresh):
@@ -109,12 +110,14 @@ Most people **skip** full local and go to Rivanna after a successful `--pilot`.
 From repo root:
 
 ```bash
-# Sweep scripts + Slurm (538 + 537)
+# Sweep scripts + Slurm (538 + 537) — if you already git push + pull on Rivanna, optional
 ./scripts/rsync_push_to_hpc.sh sweep
 
-# tier1_pool_assignment.py, tier1_sim_config.py, empirical JSON
+# Tier 1 Python modules only (empirical_perf_fit.json is in Git at datasets/mbb/)
 ./scripts/rsync_push_to_hpc.sh sweep538-deps
 ```
+
+**Git-first workflow:** `git push` on Mac → `git pull` on Rivanna covers code + `datasets/mbb/empirical_perf_fit.json`. Use rsync when you have not pushed yet or Rivanna clone is stale.
 
 Dry run first:
 
@@ -135,7 +138,7 @@ SSH to Rivanna, `cd` to repo root (`~/Ivy_Net` or your clone):
 pwd
 ls sim_job_538.slurm
 ls sports/outputs/simulation_sweeps/faithful_538_sweep.py
-ls sports/datasets/mbb/empirical_perf_fit.json
+ls datasets/mbb/empirical_perf_fit.json
 module load miniforge
 ~/.conda/envs/sports_net/bin/python -c "import numpy, pandas, matplotlib; print('ok')"
 ```
@@ -230,7 +233,7 @@ print(c[["moderate_downturn", "curve_bin_l_col", "viability_theta"]].head())
 
 | Symptom | Fix |
 |---------|-----|
-| `empirical_perf_fit.json` missing | 530 CELL 5b + `rsync_push sweep538-deps` |
+| `empirical_perf_fit.json` missing | 530 CELL 5b, commit `datasets/mbb/empirical_perf_fit.json`, `git pull` on Rivanna |
 | Crowding rows still bin on `poolq_loo` | Pull latest `faithful_538_sweep.py` (uses `pool_l_column`) |
 | Pilot “96 scenarios” in old notes | Grid is **192** pilot / **103,680** full Stage 1 |
 | Stage 1 timeout | 538 soft-assign is heavy; see `rivanna_stage1_faithful_538.slurm` time limit |

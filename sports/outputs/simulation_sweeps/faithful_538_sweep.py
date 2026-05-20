@@ -48,10 +48,11 @@ for _p in (_SPORTS, _REPO):
 
 import tier1_pool_assignment as tpa  # noqa: E402
 from sports_pipeline.panel_build import assign_poolq_bin_labels  # noqa: E402
+from sports_pipeline.paths import mbb_dir  # noqa: E402
 from tier1_generative_eda import SelectionConfig  # noqa: E402
 
 OUT_DIR = Path(__file__).resolve().parent
-EMPIRICAL_FIT_PATH = _SPORTS / "datasets" / "mbb" / "empirical_perf_fit.json"
+EMPIRICAL_FIT_PATH = mbb_dir() / "empirical_perf_fit.json"
 RESULTS_JSONL = OUT_DIR / "faithful_538_sweep_results.jsonl"
 STAGE1_CSV = OUT_DIR / "faithful_538_sweep_stage1_results.csv"
 STAGE2_CSV = OUT_DIR / "faithful_538_sweep_stage2_results.csv"
