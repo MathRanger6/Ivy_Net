@@ -1,119 +1,56 @@
 ---
-description: Jupyter notebook editing workflow for 540_tenure_pipeline.ipynb — blank edit, editor tool, structural ops
+description: 540_tenure_pipeline burn index + same-cell merge; points to notebook prime directive
 globs: **/*.ipynb
 alwaysApply: false
 ---
 
-# Jupyter Notebook Editing Workflow (`540_tenure_pipeline.ipynb`)
+# Jupyter notebooks — workflow supplement
 
-For **all other** notebooks (e.g. `535_sports_tier_1.ipynb`), follow **`.cursor/rules/notebook-blank-edit.mdc`** (burn slot at **cell index 1**, plus the **one-time MCP bootstrap** exception for brand-new files). That file is **`alwaysApply: true`** and includes the **one substantive `EditNotebook` per assistant reply per notebook** rule unless the user waives batching.
+**Primary rule:** `.cursor/rules/notebook-blank-edit.mdc` (`alwaysApply: true`) — **prime directive:** line/cluster red/green for every notebook change; **burn-first** each user message unless `skip burn`; **ask** when unsure; **no** per-reply cell-count cap.
 
----
-
-## WHY THESE RULES EXIST — READ THIS FIRST
-
-Cursor’s `EditNotebook` path does **not** reliably give the user a red/green **accept/reject** diff for **every** edit in a **single** assistant reply.
-
-1. **First `EditNotebook` in a turn** often **does not** show the line-level diff UI; it may apply invisibly. Hence the **burn slot**: the **first** edit **only** touches that disposable cell.
-2. **Chaining many** `EditNotebook` calls on the same `.ipynb` in **one** assistant reply also often results in **only one** visible review step; later edits may **auto-apply** without the user’s per-cell diff. Hence **`.cursor/rules/notebook-blank-edit.mdc`** caps substantive edits to **one per reply per file** after the burn, unless the user **explicitly** approves a batch.
-
-The user may need **line-accurate** diffs (e.g. to transcribe into locked-down environments). **Review visibility is mandatory** — see **`notebook-blank-edit.mdc`**.
+This file adds **540-specific** details only.
 
 ---
 
-## THE EDIT BLANK CELL
+## Why tactics exist (not caps)
 
-In `540_tenure_pipeline.ipynb`, cell **index 3** is the burn slot:
+Cursor `EditNotebook` on `.ipynb` is **unreliable**: first call may auto-apply; chaining may hide later diffs; a **second** edit to the **same** cell in one reply often shows only “keep cell” without line detail. The **burn slot** sacrifices the first hit; **merging** all line changes in one call per cell per pass protects line-level review. The user may still edit **many cells** in one reply — goal is **all** changes reviewable, not fewer edits.
+
+---
+
+## `540_tenure_pipeline.ipynb`
+
+- Burn slot: cell index **3** (not 1). Indices 0–2 are title / ToC / Cell 0 metadata — do not use for burn.
+- After burn: **"Blank edit done — EDIT BLANK cell updated."**
 
 ```python
 ##### EDIT BLANK ###### DISCARD
-# session: 2026-04-15 14:30 — Cell 9: log_bin param ...
-# session: 2026-04-15 09:12 — ...
+# session: YYYY-MM-DD HH:MM — brief summary of this pass
+# - Session marker: …  (older entries appended at bottom per notebook-blank-edit.mdc)
 ```
-
-Use **`YYYY-MM-DD HH:MM`** (local 24h) after the date on each `# session:` line, same as **`.cursor/rules/notebook-blank-edit.mdc`**, so entries sort and read clearly.
-
-- It is a **code cell** (not markdown).
-- It is a **session log**: each entry records what changed in that pass.
-- It sits right after the title markdown (index 0), the ToC/Cell 0 header markdown
-  (index 1), and the Cell 0 metadata markdown (index 2 — do NOT use this for the
-  burn edit; it is content).
-- **Do not delete it. Do not restructure it. Do not use it for real code.**
 
 ---
 
-## THE BLANK EDIT — EXACT PROCEDURE
+## Same cell — one `EditNotebook` per pass
 
-**This must be the VERY FIRST `EditNotebook` call in any session that will touch
-`540_tenure_pipeline.ipynb`, no matter what else is happening, no exceptions.**
-
-Add one new `# session:` line at the TOP of the burn cell's content:
-
-```
-old_string:
-  ##### EDIT BLANK ###### DISCARD
-  # session: 2026-04-15 14:30 — <previous entry>
-
-new_string:
-  ##### EDIT BLANK ###### DISCARD
-  # session: YYYY-MM-DD HH:MM — <brief summary of THIS session's changes>
-  # session: 2026-04-15 14:30 — <previous entry>
-```
-
-The session summary should be a short phrase: what stage/cell you changed and why.
-It is the user's git-alternative history for "what did PEER change in this pass."
-
-After the call succeeds, announce: **"Blank edit done — EDIT BLANK cell updated."**
+If multiple lines in one cell change, use **one** `old_string` / `new_string` covering **all** of them. Do not make two content edits to the same cell in one reply if one merged edit can do the job.
 
 ---
 
-## WHICH EDITOR TO USE
+## Tools
 
 | Operation | Tool |
 |-----------|------|
-| Any cell content edit | **`EditNotebook`** (Cursor-native) — ALWAYS |
-| Cell content edit | **NEVER `notebook_edit_cell`** (MCP tool) |
-| Structural ops (bulk add, move, split, merge, duplicate, add cell with content) | **Ask user first**, then use MCP — **except** the **one-time bootstrap** for a brand-new notebook allowed in **`notebook-blank-edit.mdc`** |
-
-The reason `notebook_edit_cell` (MCP) is banned for content: it writes directly to
-disk and bypasses Cursor's editor sync, so the user's open editor view does not
-update and red/green diffs never appear.
+| Cell body edits | **`EditNotebook`** |
+| Never for content | **`notebook_edit_cell`** (MCP) |
+| Structural / MCP content | **Ask user first** (except bootstrap per `notebook-blank-edit.mdc`) |
 
 ---
 
-## COMMON MISTAKES TO AVOID
+## Common mistakes
 
-1. **Editing the wrong cell for the blank edit.** Cell index 1 is a markdown header
-   — do NOT edit that. The burn slot is at index **3**.
-
-2. **Using an invisible change** (HTML comment, trailing space) instead of a real
-   `# session:` line. The blank edit should be *visible* — a real log entry — not
-   a no-op disguised to satisfy the tool.
-
-3. **Announcing "Blank edit done" without it actually succeeding.** If `EditNotebook`
-   returns an error, the blank edit did NOT happen. Fix the error first.
-
-4. **Using `Shell` + Python JSON manipulation to edit cell content.** This writes
-   to disk bypassing the editor, same problem as `notebook_edit_cell`. Only use
-   Shell/JSON for structural changes that `EditNotebook` cannot handle.
-
-5. **Skipping the blank edit "because the session already started."** It must be
-   first. If you forgot and already made other edits, do it now — it will resync
-   the editor for all *future* edits in the same session.
-
-6. **Making two separate `EditNotebook` calls to the same cell in the same session.**
-   Cursor only shows the red/green line diff for the FIRST edit to a given cell.
-   The second edit to that same cell shows a "keep cell" button WITHOUT the line-level
-   red/green detail inside it — the user cannot see exactly what changed.
-   **Rule: if you need to change multiple lines in the same cell, do it in ONE
-   `EditNotebook` call** with a single `old_string`/`new_string` pair that covers
-   all the changes together.
-
-   WHY THIS MATTERS: The user must manually transcribe every edit by hand into a
-   locked-down system (US Army AWS JupyterLab) where copy/paste is not available.
-   Line-level red/green diffs are their only way to know exactly what to type.
-   A "keep cell" button without internal diffs is not actionable.
-
-7. **Issuing many `EditNotebook` calls on the same notebook across different cells in one assistant reply.**
-   Even when each call targets a **different** cell, extra calls in the **same** reply often **do not** surface separate accept/reject diffs and may auto-apply.
-   **Default:** follow **`notebook-blank-edit.mdc`** — **burn**, then **one** substantive edit, then **stop** until the user sends another message (unless they explicitly approved batching).
+1. Burn on **index 1** in 540 (wrong — use **3**).
+2. Invisible burn (whitespace only) — use a real `# session:` update.
+3. Announcing burn done when `EditNotebook` failed.
+4. Shell + JSON to patch cell bodies (bypasses review UI).
+5. Assuming user intent from scrolling “thought” text — **ask in the reply**.

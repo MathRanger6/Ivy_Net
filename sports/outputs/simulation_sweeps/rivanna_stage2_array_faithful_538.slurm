@@ -6,7 +6,7 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=8G
-#SBATCH --time=06:00:00
+#SBATCH --time=12:00:00
 #SBATCH --output=slurm_out/slurm-%x-%A_%a.out
 #SBATCH --error=slurm_out/slurm-%x-%A_%a.err
 #SBATCH --mail-user=dzk3ja@virginia.edu

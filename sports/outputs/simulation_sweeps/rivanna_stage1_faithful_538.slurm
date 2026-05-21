@@ -6,7 +6,7 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=8G
-#SBATCH --time=02:00:00
+#SBATCH --time=12:00:00
 #SBATCH --output=slurm_out/slurm-%x-%A_%a.out
 #SBATCH --error=slurm_out/slurm-%x-%A_%a.err
 #SBATCH --mail-user=dzk3ja@virginia.edu
@@ -17,6 +17,8 @@
 # Stage 1 broad screen (538 generative soft assign + selection), sharded (default 64).
 # Submit from Ivy_Net repo root. Keep #SBATCH --array in sync with N_STAGE1_SHARDS.
 # Pilot grid (~192 scenarios):  PILOT=1 sbatch ... (adds --pilot to worker).
+# Full grid (~103k): shards need >>2h; default 12h (sacct TIMEOUT at 02:00:00 is under-provisioned).
+# Retry failed array tasks without wiping completed shards:  RESET=0 sbatch --array=0,1,2,... ...
 # Requires datasets/mbb/empirical_perf_fit.json when grid uses empirical_530 (Git-tracked).
 
 set -euo pipefail
@@ -44,6 +46,10 @@ PILOT_FLAG=()
 if [[ "${PILOT:-0}" == "1" ]]; then
   PILOT_FLAG=(--pilot)
 fi
+RESET_FLAG=(--reset)
+if [[ "${RESET:-1}" == "0" ]]; then
+  RESET_FLAG=()
+fi
 
 echo "==> Job       : ${SLURM_JOB_NAME} ${SLURM_ARRAY_JOB_ID}_${SLURM_ARRAY_TASK_ID}"
 echo "==> Work dir  : ${PWD}"
@@ -59,4 +65,4 @@ run "${CONDA_PYTHON}" sports/outputs/simulation_sweeps/faithful_538_sweep_rivann
   --shard-id "$SLURM_ARRAY_TASK_ID" \
   --n-shards "$N_STAGE1_SHARDS" \
   "${PILOT_FLAG[@]}" \
-  --reset
+  "${RESET_FLAG[@]}"

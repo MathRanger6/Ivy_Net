@@ -20,7 +20,7 @@
 #   ENV_NAME=sports_net
 #   PILOT=1              — pilot grid (~192 Stage-1 scenarios) instead of full ~103,680
 
-#SBATCH --time=24:00:00
+#SBATCH --time=7-00:00:00
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1

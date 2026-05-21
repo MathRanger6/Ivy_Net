@@ -1,29 +1,25 @@
 # Agent instructions — read before editing this repository
 
-**These are binding project rules, not suggestions.**
+**Binding project rules, not suggestions.**
 
-## Always-on rules
+## Always-on
 
-1. **`.cursor/rules/notebook-blank-edit.mdc`** — `alwaysApply: true`.  
-   **Every** Agent run that might touch a Jupyter notebook must follow it **verbatim**: burn-slot first, **at most one substantive `EditNotebook` per assistant reply per `.ipynb`** (unless the user explicitly waives batching in chat), no raw JSON notebook patching for cell bodies, no `notebook_edit_cell` for content.
+1. **`.cursor/rules/notebook-blank-edit.mdc`** — Notebook **prime directive:** every `.ipynb` change in a reply should be **line/cluster red/green** reviewable. Each **user message**: usually **burn** first (`skip burn` if user says so), then substantive edits; **ask** when unsure; **`EditNotebook`** for cell bodies (no MCP `notebook_edit_cell` / raw JSON unless user says **`yes, skip rules for this`**). No cap on cells per reply.
+2. **`.cursor/rules/incremental-writes.mdc`** — Network/large I/O loops: append + flush + resume-skip.
+3. **`.cursor/rules/jupyter-notebook-workflow.mdc`** — `540_tenure_pipeline.ipynb`: burn at **cell index 3**; same-cell merge rule.
 
-2. **`.cursor/rules/incremental-writes.mdc`** — `alwaysApply: true`.  
-   Loops over network/large I/O must append + flush each iteration and resume-skip when applicable.
+## Notebooks
 
-3. **`.cursor/rules/jupyter-notebook-workflow.mdc`** — Applies when editing `**/*.ipynb` (globs); **`540_tenure_pipeline.ipynb`** uses burn cell **index 3** and the same-cell “one `EditNotebook` per cell per pass” merge rule. It **reinforces** `notebook-blank-edit.mdc` and explains **why** review visibility matters.
+- Follow **`notebook-blank-edit.mdc`** before any cell-body edit.
+- If review UI fails: **ask** the user — do not plow ahead.
+- New notebook scaffold via MCP: **ask first**.
 
-## Before you edit `.ipynb` files
+## Git commits (when the user asks)
 
-1. Open and follow **`notebook-blank-edit.mdc`** (it is injected, but **read** it when planning notebook work).
-2. Plan **one** substantive cell change per user message (after burn), or ask for **explicit** batch permission.
-3. Announce **"Blank edit done — Cell 1 updated."** (or EDIT BLANK for 540) after the burn edit succeeds.
+- Include `.specstory/history/` unless they say otherwise.
+- Include small tracked artifacts under `datasets/mbb/` per `datasets/mbb/README_TRACKED_ARTIFACTS.md`.
+- Usually exclude `tier1_cell10_playground_state.json`, large sweep outputs, etc.
 
-## Git commits (when the user asks to stage/commit)
+## Conflicts
 
-- **Include** `.specstory/history/` in staged commits unless the user says otherwise — it is part of the repo (not gitignored).
-- **Include** small tracked data artifacts under `datasets/mbb/` listed in `datasets/mbb/README_TRACKED_ARTIFACTS.md` (e.g. `empirical_perf_fit.json` after 530 CELL 5b). Canonical path is workspace root `datasets/mbb/`, not `sports/datasets/mbb/`.
-- **Usually exclude** local-only artifacts: `tier1_cell10_playground_state.json`, `sports/datasets/mbb/exports_inverted_u_v0/`, large sweep result CSVs/JSONL unless the commit is explicitly for outputs.
-
-## If instructions in chat conflict with these files
-
-**These files win** unless the user explicitly overrides *in writing* for a specific task (e.g. “batch all header cells this once”).
+These files win unless the user overrides **in that message** (e.g. `skip burn`, `yes, skip rules for this`).
