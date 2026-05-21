@@ -60,8 +60,10 @@ GROUPED_CSV = OUT_DIR / "faithful_538_sweep_grouped_candidates.csv"
 README = OUT_DIR / "faithful_538_sweep_README.md"
 PLOT_DIR = OUT_DIR / "faithful_538_candidate_plots"
 
-# Stricter inverted-U: ≥2 declining bins after interior peak (not a one-bin cliff).
-MIN_TAIL_BINS_DECLINING_STRICT = 2
+# Stricter inverted-U: multi-bin right-tail decline (not a one-bin cliff on bin 19→20).
+MIN_TAIL_BINS_DECLINING_STRICT = 3
+MIN_BINS_AFTER_PEAK_STRICT = 3  # peak at least this many bins from the right edge
+MIN_TAIL_DECLINE_STREAK_STRICT = 2  # consecutive post-peak decreases at the start of the tail
 
 _BASE_PARAMS = tpa.AssignmentParams.from_tier1_sim_config(_SPORTS / "tier1_sim_config.py")
 _spec_cfg = importlib.util.spec_from_file_location(
@@ -141,6 +143,7 @@ def _curve_metrics(y_valid: np.ndarray) -> dict:
             "left_lift_frac": float("nan"),
             "tail_slope_last3": float("nan"),
             "tail_bins_declining": 0,
+            "tail_decline_streak": 0,
             "interior_peak": False,
             "moderate_downturn": False,
             "moderate_downturn_strict": False,
@@ -161,6 +164,12 @@ def _curve_metrics(y_valid: np.ndarray) -> dict:
     for i in range(peak_idx + 1, y_valid.size):
         if y_valid[i] < y_valid[i - 1]:
             tail_bins_declining += 1
+    tail_decline_streak = 0
+    for i in range(peak_idx + 1, y_valid.size):
+        if y_valid[i] < y_valid[i - 1]:
+            tail_decline_streak += 1
+        else:
+            break
     interior_peak = bool(y_valid.size >= 3 and 1 <= peak_idx <= y_valid.size - 2)
     both_ends_below = bool(first_y < peak_y and final_y < peak_y)
     moderate_downturn = bool(
@@ -170,12 +179,14 @@ def _curve_metrics(y_valid: np.ndarray) -> dict:
         and left_lift_frac >= 0.05
         and tail_drop_frac >= 0.05
     )
-    min_bins_after_peak = MIN_TAIL_BINS_DECLINING_STRICT
-    peak_not_at_penultimate = bool(peak_idx <= y_valid.size - 1 - min_bins_after_peak)
+    peak_has_room_for_multibin_tail = bool(
+        peak_idx <= y_valid.size - 1 - MIN_BINS_AFTER_PEAK_STRICT
+    )
     moderate_downturn_strict = bool(
         moderate_downturn
-        and peak_not_at_penultimate
+        and peak_has_room_for_multibin_tail
         and tail_bins_declining >= MIN_TAIL_BINS_DECLINING_STRICT
+        and tail_decline_streak >= MIN_TAIL_DECLINE_STREAK_STRICT
     )
     return {
         "peak_bin": peak_idx,
@@ -186,6 +197,7 @@ def _curve_metrics(y_valid: np.ndarray) -> dict:
         "left_lift_frac": left_lift_frac,
         "tail_slope_last3": tail_slope,
         "tail_bins_declining": int(tail_bins_declining),
+        "tail_decline_streak": int(tail_decline_streak),
         "interior_peak": interior_peak,
         "moderate_downturn": moderate_downturn,
         "moderate_downturn_strict": moderate_downturn_strict,
@@ -431,10 +443,19 @@ def iter_stage1(*, pilot: bool = False) -> Iterable[Scenario]:
 
 
 def _stage2_candidate(row: dict) -> bool:
+    """Prefer multi-bin right-tail downturns; skip one-bin cliff specs when possible."""
     row = enrich_legacy_curve_metrics(row)
     if bool(row.get("moderate_downturn_strict")):
         return True
-    if bool(row.get("moderate_downturn")):
+    tail_decl = int(row.get("tail_bins_declining", 0) or 0)
+    n_bins = int(row.get("n_bins", 20) or 20)
+    peak_bin = int(row.get("peak_bin", -1) or -1)
+    if (
+        bool(row.get("moderate_downturn"))
+        and tail_decl >= MIN_TAIL_DECLINE_STREAK_STRICT
+        and peak_bin >= 0
+        and peak_bin <= n_bins - 1 - MIN_BINS_AFTER_PEAK_STRICT
+    ):
         return True
     return bool(row.get("interior_peak")) and float(row["tail_drop_frac"]) > 0.02
 
@@ -543,6 +564,7 @@ def grouped_candidates(stage2_rows: list[dict]) -> pd.DataFrame:
             moderate_strict_seed_count=("moderate_downturn_strict", "sum"),
             interior_seed_count=("interior_peak", "sum"),
             mean_tail_bins_declining=("tail_bins_declining", "mean"),
+            mean_tail_decline_streak=("tail_decline_streak", "mean"),
             mean_left_lift_frac=("left_lift_frac", "mean"),
             mean_tail_drop_frac=("tail_drop_frac", "mean"),
             min_tail_drop_frac=("tail_drop_frac", "min"),
@@ -564,6 +586,7 @@ def grouped_candidates(stage2_rows: list[dict]) -> pd.DataFrame:
         (grouped["seeds"] >= 3)
         & (grouped["moderate_strict_seed_count"] >= np.ceil(grouped["seeds"] * 0.6))
         & (grouped["mean_tail_bins_declining"] >= float(MIN_TAIL_BINS_DECLINING_STRICT))
+        & (grouped["mean_tail_decline_streak"] >= float(MIN_TAIL_DECLINE_STREAK_STRICT))
         & (grouped["mean_tail_drop_frac"] >= 0.05)
         & (grouped["mean_left_lift_frac"] >= 0.05)
     )
@@ -572,6 +595,7 @@ def grouped_candidates(stage2_rows: list[dict]) -> pd.DataFrame:
             "moderate_stable_strict",
             "moderate_stable",
             "mean_tail_bins_declining",
+            "mean_tail_decline_streak",
             "mean_tail_drop_frac",
             "mean_left_lift_frac",
             "interior_seed_count",
@@ -584,13 +608,49 @@ def grouped_candidates(stage2_rows: list[dict]) -> pd.DataFrame:
 
 def _format_plot_title(rank: int, row: pd.Series) -> str:
     return (
-        f"538 sweep #{rank}: τ={row['assignment_temperature']:.2f} "
-        f"J={int(row['n_teams'])} K={int(row['n_selected'])} "
-        f"A={row['ability_draw']} T={row['target_mean_dist']} "
-        f"L={row.get('loo_pool_l_mode', 'quality')} "
-        f"bins={row['bin_mode']} w={row['loo_gap_weight']:.2f} "
-        f"winner={row['winner_selection']}"
+        f"538 #{rank}: mean selection vs L — "
+        f"{row.get('loo_pool_l_mode', 'quality')} · {row['bin_mode']}"
     )
+
+
+def _format_plot_metadata_lines(rank: int, row: pd.Series) -> list[str]:
+    """Full knob settings (readable panel below the curve)."""
+    lmode = str(row.get("loo_pool_l_mode", "quality"))
+    l_label = tpa.pool_l_short_label(lmode)
+    score = str(row["score_mode"])
+    score_note = (
+        f"LOO-gap weight w={float(row['loo_gap_weight']):.2f} on {l_label}"
+        if score == "loo_gap_plus_ability"
+        else "ability only (w ignored)"
+    )
+    strict = row.get("moderate_stable_strict", False)
+    return [
+        f"Candidate #{rank} — 538 generative sweep (Cell 10 Thread A)",
+        f"Teams J={int(row['n_teams'])} · roster={int(row['roster_size'])} · select K={int(row['n_selected'])}",
+        f"Soft assign: {row['assignment_kernel']} · τ={float(row['assignment_temperature']):.2f} · pref α={float(row['preferential_alpha']):.2f}",
+        f"Target means T: {row['target_mean_dist']} [{float(row['target_mean_low']):g}, {float(row['target_mean_high']):g}]",
+        f"Ability draw A: {row['ability_draw']}",
+        f"Selection score: {score} · {score_note}",
+        f"Winner: {row['winner_selection']}",
+        f"Curve L mode: {lmode} ({l_label}) · bins={int(row['n_bins'])} · binning={row['bin_mode']}",
+        f"Stage-2 runs/seed: {int(row['n_runs'])} · seeds in group: {int(row.get('seeds', 0))}",
+        (
+            f"Tail: mean declining bins={float(row.get('mean_tail_bins_declining', 0)):.1f} "
+            f"(need ≥{MIN_TAIL_BINS_DECLINING_STRICT}) · "
+            f"streak={float(row.get('mean_tail_decline_streak', 0)):.1f} · "
+            f"moderate_stable_strict={strict}"
+        ),
+    ]
+
+
+def _plot_order(grouped: pd.DataFrame, n_plots: int) -> pd.DataFrame:
+    if grouped.empty:
+        return grouped
+    if "moderate_stable_strict" not in grouped.columns:
+        return grouped.head(n_plots)
+    strict = grouped[grouped["moderate_stable_strict"]]
+    rest = grouped[~grouped["moderate_stable_strict"]]
+    return pd.concat([strict, rest], ignore_index=True).head(n_plots)
 
 
 def plot_top(stage2_rows: list[dict], grouped: pd.DataFrame, n_plots: int = 12) -> None:
@@ -617,7 +677,7 @@ def plot_top(stage2_rows: list[dict], grouped: pd.DataFrame, n_plots: int = 12) 
         "loo_pool_l_mode",
         "n_runs",
     ]
-    for idx, grow in grouped.head(n_plots).reset_index(drop=True).iterrows():
+    for idx, grow in _plot_order(grouped, n_plots).reset_index(drop=True).iterrows():
         mask = np.ones(len(df), dtype=bool)
         for col in group_cols:
             mask &= df[col].to_numpy() == grow[col]
@@ -648,16 +708,34 @@ def plot_top(stage2_rows: list[dict], grouped: pd.DataFrame, n_plots: int = 12) 
             lmode = str(grow.get("loo_pool_l_mode", "quality"))
             xlabel = f"Bin mean {tpa.pool_l_short_label(lmode)}"
 
-        fig, ax = plt.subplots(figsize=(8.2, 5.0))
+        fig = plt.figure(figsize=(8.6, 8.4))
+        gs = fig.add_gridspec(2, 1, height_ratios=[2.35, 1.15], hspace=0.32)
+        ax = fig.add_subplot(gs[0])
+        ax_meta = fig.add_subplot(gs[1])
+
         ax.fill_between(x, y_min, y_max, color="C0", alpha=0.18, label="seed range")
         ax.plot(x, y_mean, "o-", color="C0", label="mean across seeds")
         ax.set_xlabel(xlabel)
         ax.set_ylabel("Mean selection rate")
-        ax.set_title(_format_plot_title(idx + 1, grow), fontsize=10)
+        ax.set_title(_format_plot_title(idx + 1, grow), fontsize=11)
         ax.grid(True, alpha=0.3)
         ax.legend(loc="best", fontsize=8)
-        fig.tight_layout()
-        fig.savefig(PLOT_DIR / f"candidate_{idx + 1:02d}.png", dpi=160)
+
+        ax_meta.set_axis_off()
+        ax_meta.text(
+            0.01,
+            0.99,
+            "\n".join(_format_plot_metadata_lines(idx + 1, grow)),
+            transform=ax_meta.transAxes,
+            fontsize=7.5,
+            verticalalignment="top",
+            horizontalalignment="left",
+            linespacing=1.25,
+            family="monospace",
+        )
+
+        fig.subplots_adjust(left=0.09, right=0.97, top=0.94, bottom=0.04)
+        fig.savefig(PLOT_DIR / f"candidate_{idx + 1:02d}.png", dpi=180)
         plt.close(fig)
 
 
@@ -687,8 +765,10 @@ Requires `{EMPIRICAL_FIT_PATH.name}` when the grid includes `empirical_530`.
 ## Moderate downturn rules
 
 - **`moderate_downturn`:** same as 537 — interior peak, both ends ≥5% below peak.
-- **`moderate_downturn_strict`:** above plus peak at least two bins from the right edge and
-  ≥{MIN_TAIL_BINS_DECLINING_STRICT} strictly declining bins after the peak (filters one-bin cliffs).
+- **`moderate_downturn_strict`:** above plus peak ≥{MIN_BINS_AFTER_PEAK_STRICT} bins from the right,
+  ≥{MIN_TAIL_BINS_DECLINING_STRICT} declining bins after the peak, and ≥
+  {MIN_TAIL_DECLINE_STREAK_STRICT} consecutive declines at the start of the tail.
+- **Bins:** `GENERATIVE_N_BINS` in `tier1_sim_config.py` (default **20** for sweep).
 - **`moderate_stable` / `moderate_stable_strict`:** ≥60% of Stage-2 seeds pass the matching rule.
 
 ## Pool diagnostics (last run per scenario)

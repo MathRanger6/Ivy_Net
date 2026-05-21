@@ -233,7 +233,7 @@ print(c[["moderate_downturn", "curve_bin_l_col", "viability_theta"]].head())
 ## Reading results
 
 - **`moderate_downturn`:** interior peak on the binned curve; both ends ≥5% below peak.
-- **`moderate_downturn_strict`:** above plus ≥2 declining bins after the peak (peak not penultimate).
+- **`moderate_downturn_strict`:** multi-bin right tail — ≥3 declining bins after peak, peak ≥3 bins from right edge, ≥2 consecutive post-peak declines (`GENERATIVE_N_BINS=20`).
 - **`moderate_stable` / `moderate_stable_strict`:** (Stage 2 grouped) same rule on ≥60% of seeds.
 - Stage 2 ranking prefers **`moderate_downturn_strict`**; plots sort by **`moderate_stable_strict`** first.
 - **`loo_pool_l_mode=crowding`:** curve is over **viable-peer share** (0–1), not LOO mean ability.

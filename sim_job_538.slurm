@@ -18,7 +18,7 @@
 #   N_STAGE1_SHARDS=64   — match rivanna_stage1_faithful_538.slurm --array
 #   N_SHARDS=64          — Stage 2 array + final merge
 #   ENV_NAME=sports_net
-#   PILOT=1              — pilot grid instead of full ~51k Stage-1 scenarios
+#   PILOT=1              — pilot grid (~192 Stage-1 scenarios) instead of full ~103,680
 
 #SBATCH --time=24:00:00
 #SBATCH --nodes=1

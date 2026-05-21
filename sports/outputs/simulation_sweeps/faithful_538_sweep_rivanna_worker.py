@@ -78,6 +78,7 @@ def read_rows(path: Path) -> list[dict]:
             "seed",
             "peak_bin",
             "tail_bins_declining",
+            "tail_decline_streak",
         ):
             if key in row and not pd.isna(row[key]):
                 row[key] = int(row[key])

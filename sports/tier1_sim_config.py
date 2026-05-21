@@ -80,7 +80,7 @@ EMPIRIC_COVERAGE_PEAK_ORDER = 3000
 LOO_POOL_L_MODE = "quality"
 # 530 CELL 5d: median drafted within-season z perf (PPM panel, ever-drafted rows).
 VIABILITY_THETA = 0.7546158731868137
-GENERATIVE_N_BINS = 12
+GENERATIVE_N_BINS = 20
 GENERATIVE_POOLQ_BINNING = "quantile"  # "quantile" | "equal_width"
 N_SELECTED = 200
 # Selection score: "ability" | "loo_gap_plus_ability"
