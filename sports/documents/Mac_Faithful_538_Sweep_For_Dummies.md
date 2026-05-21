@@ -196,6 +196,15 @@ Stage 1 is an **array** (~103k tasks sharded); Stage 2 re-runs top Stage-1 specs
 
 ## Phase 7 — Pull results to Mac
 
+**Optional — wipe old local 538 outputs before pull** (pilot shards/CSVs/plots):
+
+```bash
+./scripts/clean_mac_faithful_538_sweep.sh --dry-run
+./scripts/clean_mac_faithful_538_sweep.sh --yes
+# optional: also remove pulled Slurm logs
+./scripts/clean_mac_faithful_538_sweep.sh --yes --slurm-logs
+```
+
 ```bash
 ./scripts/rsync_pull_from_hpc.sh sweep
 ```
