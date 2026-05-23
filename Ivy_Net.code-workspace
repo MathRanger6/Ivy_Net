@@ -21,6 +21,7 @@
 		],
 		"specstory.cloudSync.enabled": "always",
 		"specstory.outputPath": ".specstory/history",
-		"specstory.coordinatedUniversalTimezone": false
+		"specstory.coordinatedUniversalTimezone": false,
+		"jupyter.widgetScriptSources": ["jsdelivr.com", "unpkg.com"]
 	}
 }

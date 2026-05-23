@@ -62,8 +62,9 @@ def run_cell12(*, seed: int | None = None) -> pd.DataFrame:
 
     print(
         f"CELL 12: soft assign J={params.n_teams} N={params.n_individuals} "
-        f"L={sel.loo_pool_l_mode!r} bins={sel.n_bins} K={sel.n_selected} "
-        f"score={sel.score_mode!r} winner={sel.winner_selection!r} seed={seed}"
+        f"Plot B bins on L_Q: n={sel.n_bins} ({sel.bin_mode}) K={sel.n_selected} "
+        f"rank={sel.score_mode!r} pool_L_in_score={sel.loo_pool_l_mode!r} "
+        f"w={sel.loo_gap_weight:.2f} winner={sel.winner_selection!r} seed={seed}"
     )
     if state:
         print("  (pool + selection knobs from tier1_cell10_playground_state.json)")
@@ -78,8 +79,8 @@ def run_cell12(*, seed: int | None = None) -> pd.DataFrame:
     )
     print(summ.to_string(index=False))
     fig.axes[0].set_title(
-        f"538 CELL 12 — inverted-U ({tpa.pool_l_short_label(sel.loo_pool_l_mode)}, "
-        f"{sel.n_bins} bins, J={params.n_teams})"
+        tge.plot_b_figure_title(sel, header="538 CELL 12 — Plot B", tpa=tpa),
+        fontsize=10,
     )
     plt.show()
     plt.close(fig)
