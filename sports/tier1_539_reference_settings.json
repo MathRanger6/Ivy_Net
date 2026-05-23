@@ -1,0 +1,11 @@
+{
+  "assortativity": 0.88,
+  "N": 30000,
+  "team_size": 15,
+  "n_teams": 2000,
+  "seed": 1,
+  "noise_sd": 0.12,
+  "lambda_": 0.55,
+  "viability_threshold": 0.72,
+  "viability_sharpness": 10
+}

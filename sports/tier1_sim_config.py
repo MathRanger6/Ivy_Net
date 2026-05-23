@@ -20,10 +20,10 @@ When 538 grows generative cells, import this module the same way 537 imports `si
 # sports_pipeline.config — do not duplicate those knobs here.
 
 # --- Pool count (PD11: J must be >> number of ventile bins) --------------------
-N_TEAMS = 100
+N_TEAMS = 1000
 # 538/530 ventiles often 8–20; keep N_TEAMS several times larger than K bins.
 # CELL 10 slider max (widget cap, not a hard algorithmic limit):
-N_TEAMS_SLIDER_MAX = 2500
+N_TEAMS_SLIDER_MAX = 3000
 
 ROSTER_SIZE = 15
 # Fixed roster size per team-season in synthetic data (tune vs empirical minutes/roster).
@@ -44,14 +44,14 @@ TARGET_MEAN_SIGMA = 0.35
 # "gaussian" | "cauchy"
 ASSIGNMENT_KERNEL = "gaussian"
 # Temperature tau: larger => more cross-team mixing / overlap
-ASSIGNMENT_TEMPERATURE = 0.45
+ASSIGNMENT_TEMPERATURE = 0.65
 
 # Optional preferential attachment (0 = off): pi_ij *= (n_j + k)^alpha
 PREFERENTIAL_ALPHA = 0.0
 PREFERENTIAL_K = 1.0
 
 # --- Ability draw A_i ----------------------------------------------------------
-# "uniform_01" | "normal_clipped" | "normal_plus_student_t"
+# "uniform_01" | "beta_2_2" (539 Alex) | "normal_clipped" | "normal_plus_student_t"
 # "empirical_530" = draw A_i from scipy fit saved by 530 CELL 5b (within-season z perf)
 ABILITY_DRAW = "normal_clipped"
 ABILITY_MEAN = 0.0
@@ -75,20 +75,34 @@ EMPIRIC_COVERAGE_PEAK_ORDER = 3000
 
 # --- Generative selection / inverted-U replay (CELL 10–12) --------------------
 # Selection = draft pick, tenure, promotion, etc. Bins are on LOO pool L (not teams).
-# LOO_POOL_L_MODE: "quality" → L_Q (LOO mean teammate A, poolq_loo);
-#                  "crowding" → L_C (viable-peer share: count above θ / LOO pool size, pool_c_loo).
+# LOO_POOL_L_MODE: "quality" → L_Q (poolq_loo);
+#                  "crowding" → L_C hard share (pool_c_loo);
+#                  "crowding_smooth" → LOO mean σ(γ(A−θ)) (pool_c_smooth_loo; 539 Alex).
 LOO_POOL_L_MODE = "quality"
 # 530 CELL 5d: median drafted within-season z perf (PPM panel, ever-drafted rows).
 VIABILITY_THETA = 0.7546158731868137
+# 539 simulate_viable_peer_congestion: expit(γ(A−θ)); higher γ → sharper hard threshold.
+VIABILITY_SHARPNESS = 18.0
 GENERATIVE_N_BINS = 20
 GENERATIVE_POOLQ_BINNING = "quantile"  # "quantile" | "equal_width"
-N_SELECTED = 200
+N_SELECTED = 1500
 # Selection score: "ability" | "loo_gap_plus_ability"
 # loo_gap_plus_ability: quality → A − w·L_Q (gap); crowding → A − w·L_C (count, not a gap)
 SELECTION_SCORE_MODE = "loo_gap_plus_ability"
 LOO_GAP_WEIGHT = 0.5  # w on L_Q gap; crowding mode reuses same knob as "crowding weight"
 # Winner draw: "A" weighted | "B" Bernoulli | "C" top-K (deterministic)
 WINNER_SELECTION = "C"
+
+# --- CELL 10 minimal preset (null generative floor model) -----------------------
+# Applied by "Minimal preset" in tier1_cell10_playground_run.py. Pool soft-assign
+# stays on; preferential attachment, congestion in score, and stochastic winners off.
+MINIMAL_ABILITY_DRAW = "normal_clipped"
+MINIMAL_TARGET_MEAN_DIST = "uniform"
+MINIMAL_PREFERENTIAL_ALPHA = 0.0
+MINIMAL_SELECTION_SCORE_MODE = "ability"
+MINIMAL_LOO_GAP_WEIGHT = 0.0
+MINIMAL_LOO_POOL_L_MODE = "quality"
+MINIMAL_WINNER_SELECTION = "C"
 
 # Deprecated aliases (rename only — same values)
 N_PROMOTED = N_SELECTED
@@ -100,5 +114,7 @@ RUN_REPLAY_530_STYLE_CHECKS = False
 RANDOM_SEED = 42
 # CELL 10 playground: render interval-overlap Plot A (530 CELL 8 analog)
 SHOW_PLOT_A = True
+# CELL 10 playground: render inverted-U Plot B (selection rate vs LOO L bins)
+SHOW_PLOT_B = True
 # CELL 10 playground: render ability histogram Plot C (530 CELL 5b overlay)
 SHOW_PLOT_C = True

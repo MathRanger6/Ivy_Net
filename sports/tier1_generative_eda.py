@@ -70,6 +70,56 @@ class SelectionConfig:
 # Deprecated alias
 PromotionConfig = SelectionConfig
 
+# Plot B always bins on poolq_loo (L_Q), regardless of Pool L in the selection score.
+PLOT_B_XAXIS_LABEL = (
+    "Bin mean L_Q (LOO mean teammate ability)\n"
+    "[x-axis fixed — Pool L dropdown affects selection score only]"
+)
+PLOT_B_YAXIS_LABEL = "Mean selection rate (Y_selected) per bin"
+
+
+def selection_rank_formula(
+    score_mode: str,
+    *,
+    loo_gap_weight: float,
+    pool_l_mode: str,
+    tpa=None,
+) -> str:
+    """Plain-text formula for who wins top-K (not the Plot B bin axis)."""
+    if tpa is None:
+        import tier1_pool_assignment as tpa  # noqa: PLC0415
+
+    mode = str(score_mode).strip().lower()
+    if mode == "ability":
+        return "Selection rank = A_i only (top-K; w unused)"
+    w = float(loo_gap_weight)
+    l_short = tpa.pool_l_short_label(pool_l_mode)
+    if tpa.is_crowding_l_mode(pool_l_mode):
+        return (
+            f"Selection rank = A_i − w·{l_short} "
+            f"(w={w:.2f}; Pool L in score={pool_l_mode!r})"
+        )
+    return f"Selection rank = w·(A_i−L_Q)+(1−w)·A_i (w={w:.2f})"
+
+
+def plot_b_figure_title(
+    sel: SelectionConfig,
+    *,
+    header: str = "538 CELL 10 — Plot B",
+    tpa=None,
+) -> str:
+    """Two-line matplotlib title: y vs L_Q bins + selection-rank recipe."""
+    rank = selection_rank_formula(
+        sel.score_mode,
+        loo_gap_weight=sel.loo_gap_weight,
+        pool_l_mode=sel.loo_pool_l_mode,
+        tpa=tpa,
+    )
+    return (
+        f"{header}: mean Y_selected vs L_Q bins\n"
+        f"{rank} | K={sel.n_selected} | {sel.n_bins} bins ({sel.bin_mode})"
+    )
+
 
 def assignment_params_from_state(
     sports: Path,
@@ -102,6 +152,9 @@ def assignment_params_from_state(
         sorting_noise_sd=base.sorting_noise_sd,
         viability_theta=float(
             state.get("viability_theta", base.viability_theta)
+        ),
+        viability_sharpness=float(
+            state.get("viability_sharpness", base.viability_sharpness)
         ),
     )
 
@@ -178,9 +231,9 @@ def figure_inverted_u(
     y = summ[rate_col].to_numpy(dtype=float)
     ax.plot(x, y, "o-", color="C0", lw=2.0, ms=7)
     ax.fill_between(x, 0, y, alpha=0.12, color="C0")
-    ax.set_xlabel(f"Bin mean {tpa.pool_l_short_label('quality')}")
-    ax.set_ylabel("Mean selection rate")
-    ax.set_title(title)
+    ax.set_xlabel(PLOT_B_XAXIS_LABEL)
+    ax.set_ylabel(PLOT_B_YAXIS_LABEL)
+    ax.set_title(title, fontsize=10)
     ymax = float(y.max()) if len(y) else 0.0
     ymin = float(y.min()) if len(y) else 0.0
     if ymax <= 0:
@@ -228,13 +281,18 @@ def run_inverted_u_pipeline(
         winner_selection=sel.winner_selection,
         pool_l_mode=sel.loo_pool_l_mode,
         viability_theta=params.viability_theta,
+        viability_sharpness=params.viability_sharpness,
     )
     summ = inverted_u_bin_table(
         players, sel, assign_poolq_bin_labels=assign_poolq_bin_labels, tpa=tpa
     )
     fig = figure_inverted_u(
         summ,
-        title=f"Inverted-U preview ({sel.n_bins} bins, J={params.n_teams})",
+        title=plot_b_figure_title(
+            sel,
+            header=f"Inverted-U preview (J={params.n_teams})",
+            tpa=tpa,
+        ),
         n_bins=sel.n_bins,
         n_teams=params.n_teams,
         loo_pool_l_mode=sel.loo_pool_l_mode,

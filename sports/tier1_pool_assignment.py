@@ -23,16 +23,31 @@ AssignmentKernel = Literal["gaussian", "cauchy"]
 TargetMeanDist = Literal["uniform", "normal_clipped", "empirical_530"]
 AbilityDraw = Literal[
     "uniform_01",
+    "beta_2_2",
     "normal_clipped",
     "normal_plus_student_t",
     "empirical_530",
 ]
 AssignmentMethod = Literal["soft", "sort_chop"]
-LooPoolLMode = Literal["quality", "crowding"]
+LooPoolLMode = Literal["quality", "crowding", "crowding_smooth"]
 
 POOL_L_QUALITY_COL = "poolq_loo"  # L_Q — LOO mean teammate ability
 POOL_L_CROWDING_COL = "pool_c_loo"  # L_C — LOO viable-peer share (count above θ / pool size)
+POOL_L_CROWDING_SMOOTH_COL = "pool_c_smooth_loo"  # L_C smooth — LOO mean σ(γ(A−θ)) (539-style)
 POOL_L_CROWDING_SUM_COL = "pool_c_loo_sum"  # legacy LOO sum (diagnostic)
+
+
+def is_crowding_l_mode(mode: str) -> bool:
+    m = str(mode).strip().lower()
+    return m in (
+        "crowding",
+        "l_c",
+        POOL_L_CROWDING_COL,
+        "crowding_smooth",
+        "smooth_crowding",
+        "smooth",
+        POOL_L_CROWDING_SMOOTH_COL,
+    )
 
 
 def pool_l_column(mode: str) -> str:
@@ -40,16 +55,20 @@ def pool_l_column(mode: str) -> str:
     m = str(mode).strip().lower()
     if m in ("quality", "l_q", POOL_L_QUALITY_COL):
         return POOL_L_QUALITY_COL
+    if m in ("crowding_smooth", "smooth_crowding", "smooth", POOL_L_CROWDING_SMOOTH_COL):
+        return POOL_L_CROWDING_SMOOTH_COL
     if m in ("crowding", "l_c", POOL_L_CROWDING_COL):
         return POOL_L_CROWDING_COL
     raise ValueError(
-        f"loo_pool_l_mode must be 'quality' or 'crowding', got {mode!r}"
+        f"loo_pool_l_mode must be 'quality', 'crowding', or 'crowding_smooth', got {mode!r}"
     )
 
 
 def pool_l_short_label(mode: str) -> str:
     """Plain-text label (matplotlib axes, sweep logs)."""
     m = str(mode).strip().lower()
+    if m in ("crowding_smooth", "smooth_crowding", "smooth", POOL_L_CROWDING_SMOOTH_COL):
+        return "L_C (smooth viability)"
     if m in ("crowding", "l_c", POOL_L_CROWDING_COL):
         return "L_C (viable share)"
     return "L_Q (LOO mean)"
@@ -58,6 +77,8 @@ def pool_l_short_label(mode: str) -> str:
 def pool_l_html_label(mode: str) -> str:
     """HTML for widgets.HTML — real subscripts via <sub> (not Unicode modifier letters)."""
     m = str(mode).strip().lower()
+    if m in ("crowding_smooth", "smooth_crowding", "smooth", POOL_L_CROWDING_SMOOTH_COL):
+        return "L<sub>c</sub><sup>smooth</sup>"
     if m in ("crowding", "l_c", POOL_L_CROWDING_COL):
         return "L<sub>c</sub>"
     return "L<sub>q</sub>"
@@ -68,6 +89,7 @@ def pool_l_dropdown_options() -> list[tuple[str, str]]:
     return [
         ("Quality — LOO mean", "quality"),
         ("Crowding — viable share (A > θ)", "crowding"),
+        ("Crowding — smooth viability (539)", "crowding_smooth"),
     ]
 
 
@@ -97,6 +119,8 @@ class AssignmentParams:
     """Only used for sort_chop benchmark (537-style noise on sort signal)."""
     viability_theta: float = 0.7546158731868137
     """Viable-peer cutoff on synthetic ability (530 median drafted z)."""
+    viability_sharpness: float = 18.0
+    """Logistic sharpness γ for smooth viability σ(γ(A−θ)) (539 Alex sim)."""
 
     @property
     def n_individuals(self) -> int:
@@ -125,6 +149,7 @@ class AssignmentParams:
             ability_student_t_scale=float(mod.ABILITY_STUDENT_T_SCALE),
             sorting_noise_sd=float(getattr(mod, "SORTING_NOISE_SD", 0.0)),
             viability_theta=float(getattr(mod, "VIABILITY_THETA", 0.7546158731868137)),
+            viability_sharpness=float(getattr(mod, "VIABILITY_SHARPNESS", 18.0)),
         )
 
     @classmethod
@@ -164,6 +189,9 @@ def draw_abilities(
     """Draw A_i for n synthetic players."""
     if ability_draw == "uniform_01":
         return rng.uniform(0.0, 1.0, size=n)
+    if ability_draw == "beta_2_2":
+        # 539 Alex sim: Beta(2,2) on [0,1], unimodal, mean 0.5
+        return rng.beta(2.0, 2.0, size=n)
     if ability_draw == "normal_clipped":
         return np.clip(
             rng.normal(loc=ability_mean, scale=ability_sd, size=n),
@@ -344,15 +372,25 @@ def _default_viability_theta() -> float:
         return 0.7546158731868137
 
 
+def _viability_logistic(ability: pd.Series, *, theta: float, gamma: float) -> pd.Series:
+    """σ(γ(A−θ)) elementwise; NaN where ability is NaN."""
+    a = pd.to_numeric(ability, errors="coerce")
+    z = gamma * (a - theta)
+    z = z.clip(-500.0, 500.0)
+    return (1.0 / (1.0 + np.exp(-z))).where(a.notna(), np.nan)
+
+
 def add_loo_pool_columns(
     players: pd.DataFrame,
     *,
     viability_theta: float | None = None,
+    viability_sharpness: float = 18.0,
 ) -> pd.DataFrame:
-    """Add L_Q (``poolq_loo``) and L_C (``pool_c_loo``) leave-one-out teammate stats.
+    """Add L_Q (``poolq_loo``) and L_C leave-one-out teammate stats.
 
     ``pool_c_loo`` is the LOO *share* of teammates with ``ability > viability_theta``
     (viable-peer count / LOO pool size; same rule as empirical ``congestion_crowding``).
+    ``pool_c_smooth_loo`` is LOO mean teammate viability σ(γ(A−θ)) (539 Option B).
     ``pool_c_loo_sum`` keeps the legacy LOO sum of teammate ability for diagnostics.
     """
     theta = (
@@ -360,6 +398,7 @@ def add_loo_pool_columns(
         if viability_theta is not None
         else _default_viability_theta()
     )
+    gamma = float(viability_sharpness)
     out = players.copy()
     g = out.groupby("pool_id", observed=True)["ability"]
     ssum = g.transform("sum")
@@ -382,7 +421,16 @@ def add_loo_pool_columns(
     loo_share = loo_share.where(own.notna(), np.nan)
     loo_share = loo_share.where(cnt >= 2.0, np.nan)
     out[POOL_L_CROWDING_COL] = loo_share
-    out = out.drop(columns=["_above_theta"])
+
+    viability = _viability_logistic(out["ability"], theta=theta, gamma=gamma)
+    out["_viability"] = viability
+    sum_v = out.groupby("pool_id", observed=True)["_viability"].transform("sum")
+    own_v = viability
+    loo_smooth = (sum_v - own_v) / den
+    loo_smooth = loo_smooth.where(own.notna(), np.nan)
+    loo_smooth = loo_smooth.where(cnt >= 2.0, np.nan)
+    out[POOL_L_CROWDING_SMOOTH_COL] = loo_smooth
+    out = out.drop(columns=["_above_theta", "_viability"])
     return out
 
 
@@ -461,9 +509,19 @@ def assign_selection(
     winner_selection: str,
     pool_l_mode: str = "quality",
     viability_theta: float | None = None,
+    viability_sharpness: float | None = None,
 ) -> pd.DataFrame:
     """Mark K selected players (draft / tenure / promotion — domain-agnostic)."""
-    out = add_loo_pool_columns(players, viability_theta=viability_theta)
+    gamma = (
+        float(viability_sharpness)
+        if viability_sharpness is not None
+        else float(AssignmentParams.from_tier1_sim_config().viability_sharpness)
+    )
+    out = add_loo_pool_columns(
+        players,
+        viability_theta=viability_theta,
+        viability_sharpness=gamma,
+    )
     w = selection_weights(
         out,
         score_mode=score_mode,

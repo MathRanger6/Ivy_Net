@@ -119,6 +119,7 @@ def _assignment_params(sc: Scenario) -> tpa.AssignmentParams:
         ability_student_t_scale=_BASE_PARAMS.ability_student_t_scale,
         sorting_noise_sd=_BASE_PARAMS.sorting_noise_sd,
         viability_theta=_BASE_PARAMS.viability_theta,
+        viability_sharpness=_BASE_PARAMS.viability_sharpness,
     )
 
 
@@ -252,6 +253,7 @@ def run_scenario(sc: Scenario) -> dict:
             winner_selection=sc.winner_selection,
             pool_l_mode=sc.loo_pool_l_mode,
             viability_theta=params.viability_theta,
+            viability_sharpness=params.viability_sharpness,
         )
         bin_lcol = tpa.pool_l_column(sc.loo_pool_l_mode)
         use = players.dropna(subset=[bin_lcol, "Y_selected"]).copy()
