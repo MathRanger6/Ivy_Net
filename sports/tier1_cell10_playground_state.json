@@ -18,8 +18,8 @@
   "t_high": 0.5,
   "t_low": -0.5,
   "target_dist": "uniform",
-  "tau": 0.65,
-  "viability_sharpness": 18.0,
-  "viability_theta": 0.7546158731868137,
+  "tau": 0.108,
+  "viability_sharpness": 10.0,
+  "viability_theta": 0.72,
   "winner_selection": "C"
 }

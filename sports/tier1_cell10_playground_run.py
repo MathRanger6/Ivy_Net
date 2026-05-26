@@ -183,28 +183,83 @@ else:
                 ),
             }
 
-        def _minimal_defaults() -> dict:
-            """Null generative floor: soft pools + ability-only top-K selection."""
+        def _pool_530_defaults() -> dict:
+            """530 forensics pool cal: high overlap, median roster SD ~0.8 (NOT 539)."""
             d = _defaults()
             mod = _tier1_cfg
             d.update(
                 {
-                    "pref_alpha": float(getattr(mod, "MINIMAL_PREFERENTIAL_ALPHA", 0.0)),
+                    "tau": float(
+                        getattr(mod, "POOL_530_ASSIGNMENT_TEMPERATURE", 0.65)
+                    ),
+                    "pref_alpha": float(
+                        getattr(mod, "POOL_530_PREFERENTIAL_ALPHA", 0.0)
+                    ),
                     "ability_draw": str(
-                        getattr(mod, "MINIMAL_ABILITY_DRAW", "uniform_01")
+                        getattr(mod, "POOL_530_ABILITY_DRAW", "normal_clipped")
                     ),
                     "target_dist": str(
-                        getattr(mod, "MINIMAL_TARGET_MEAN_DIST", "uniform")
+                        getattr(mod, "POOL_530_TARGET_MEAN_DIST", "uniform")
                     ),
                     "score_mode": str(
-                        getattr(mod, "MINIMAL_SELECTION_SCORE_MODE", "ability")
+                        getattr(mod, "POOL_530_SELECTION_SCORE_MODE", "ability")
                     ),
-                    "loo_gap_weight": float(getattr(mod, "MINIMAL_LOO_GAP_WEIGHT", 0.0)),
+                    "loo_gap_weight": float(
+                        getattr(mod, "POOL_530_LOO_GAP_WEIGHT", 0.0)
+                    ),
                     "loo_pool_l_mode": str(
-                        getattr(mod, "MINIMAL_LOO_POOL_L_MODE", "quality")
+                        getattr(mod, "POOL_530_LOO_POOL_L_MODE", "quality")
                     ),
                     "winner_selection": str(
-                        getattr(mod, "MINIMAL_WINNER_SELECTION", "C")
+                        getattr(mod, "POOL_530_WINNER_SELECTION", "C")
+                    ),
+                }
+            )
+            return d
+
+        def _minimal_defaults() -> dict:
+            """Deprecated alias — same as 530 pool cal."""
+            return _pool_530_defaults()
+
+        def _match_539_defaults() -> dict:
+            """539 assignment mimicry Layer 0: τ from CELL 10c, ability-only top-K."""
+            d = _defaults()
+            mod = _tier1_cfg
+            d.update(
+                {
+                    "n_teams": int(getattr(mod, "MATCH_539_N_TEAMS", 1000)),
+                    "roster_size": int(getattr(mod, "MATCH_539_ROSTER_SIZE", 15)),
+                    "tau": float(getattr(mod, "MATCH_539_ASSIGNMENT_TEMPERATURE", 0.108)),
+                    "pref_alpha": float(
+                        getattr(mod, "MATCH_539_PREFERENTIAL_ALPHA", 0.0)
+                    ),
+                    "ability_draw": str(
+                        getattr(mod, "MATCH_539_ABILITY_DRAW", "normal_clipped")
+                    ),
+                    "target_dist": str(
+                        getattr(mod, "MATCH_539_TARGET_MEAN_DIST", "uniform")
+                    ),
+                    "t_low": float(getattr(mod, "MATCH_539_TARGET_MEAN_LOW", -0.5)),
+                    "t_high": float(getattr(mod, "MATCH_539_TARGET_MEAN_HIGH", 0.5)),
+                    "seed": int(getattr(mod, "MATCH_539_RANDOM_SEED", 42)),
+                    "n_selected": int(getattr(mod, "MATCH_539_N_SELECTED", 1500)),
+                    "score_mode": str(
+                        getattr(mod, "MATCH_539_SELECTION_SCORE_MODE", "ability")
+                    ),
+                    "loo_gap_weight": float(
+                        getattr(mod, "MATCH_539_LOO_GAP_WEIGHT", 0.0)
+                    ),
+                    "loo_pool_l_mode": str(
+                        getattr(mod, "MATCH_539_LOO_POOL_L_MODE", "quality")
+                    ),
+                    "winner_selection": str(
+                        getattr(mod, "MATCH_539_WINNER_SELECTION", "C")
+                    ),
+                    "viability_theta": float(
+                        getattr(mod, "MATCH_539_VIABILITY_THETA", 0.72)
+                    ),
+                    "viability_sharpness": float(
+                        getattr(mod, "MATCH_539_VIABILITY_SHARPNESS", 10.0)
                     ),
                 }
             )
@@ -574,14 +629,23 @@ else:
             description="Load defaults from tier1_sim_config.py",
             layout=widgets.Layout(width="360px"),
         )
-        btn_minimal = widgets.Button(
-            description="Minimal preset (null model)",
+        btn_pool_530 = widgets.Button(
+            description="530 pool cal",
             button_style="info",
             tooltip=(
-                "Floor model: uniform A, soft assign, pref=0, score=ability only "
-                "(w=0), winner C. Pool size / τ / K unchanged."
+                "530 forensics track: τ≈0.65, normal_clipped A, ability-only top-K. "
+                "High overlap / median roster SD ~0.8 — NOT 539 assignment."
             ),
-            layout=widgets.Layout(width="240px"),
+            layout=widgets.Layout(width="160px"),
+        )
+        btn_match_539 = widgets.Button(
+            description="539 assign cal",
+            button_style="warning",
+            tooltip=(
+                "539 Layer 0: τ from CELL 10c (~0.108), ability-only top-K, w=0. "
+                "Re-run 10c after changing A draw, J, or seed."
+            ),
+            layout=widgets.Layout(width="160px"),
         )
         btn_run = widgets.Button(
             description="Run / refresh plot",
@@ -1079,9 +1143,17 @@ else:
             _sync_gamma_slider_visibility()
             redraw()
 
-        def _load_minimal(_=None):
+        def _load_pool_530(_=None):
             _spec.loader.exec_module(_tier1_cfg)  # type: ignore[union-attr]
-            _apply_widget_state(_minimal_defaults())
+            _apply_widget_state(_pool_530_defaults())
+            _update_loo_l_hint_html()
+            _update_score_formula_html()
+            _sync_gamma_slider_visibility()
+            redraw()
+
+        def _load_match_539(_=None):
+            _spec.loader.exec_module(_tier1_cfg)  # type: ignore[union-attr]
+            _apply_widget_state(_match_539_defaults())
             _update_loo_l_hint_html()
             _update_score_formula_html()
             _sync_gamma_slider_visibility()
@@ -1122,7 +1194,8 @@ else:
             btn_run.on_click(redraw)
             btn_seed_change.on_click(_seed_change)
             btn_defaults.on_click(_load_defaults)
-            btn_minimal.on_click(_load_minimal)
+            btn_pool_530.on_click(_load_pool_530)
+            btn_match_539.on_click(_load_match_539)
             _pg["listeners_on"] = True
 
         _CELL10_SLIDER_WIDGETS = (
@@ -1214,7 +1287,9 @@ else:
         )
         _footer_panel = widgets.VBox(
             [
-                widgets.HBox([btn_defaults, btn_minimal, btn_run, btn_seed_change]),
+                widgets.HBox(
+                    [btn_defaults, btn_pool_530, btn_match_539, btn_run, btn_seed_change]
+                ),
                 _summary_row,
                 summary_footnote_html,
                 plot_c_box,
