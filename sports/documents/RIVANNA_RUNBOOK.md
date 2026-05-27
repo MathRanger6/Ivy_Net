@@ -189,4 +189,4 @@ Narrow alternatives: `./scripts/rsync_pull_from_hpc.sh sweep` and/or `./scripts/
 
 Markdown source: `sports/documents/RIVANNA_RUNBOOK.md`. Generated PDF (if present) is alongside it for reading on iPad/iPhone.
 
-**Not sports-specific:** centralized guides (Git, cross-domain notes) live under **`docs/`** — start at [`docs/README.md`](../../docs/README.md).
+**Not sports-specific:** centralized guides (Git, cross-domain notes) live under **`docs/`** — start at [`docs/README.md`](../../docs/README.md). Shell/Slurm/rsync one-pager: [`docs/HPC_AND_SHELL_QUICKREF.md`](../../docs/HPC_AND_SHELL_QUICKREF.md).
