@@ -57,6 +57,7 @@ ABILITY_DRAW = "normal_clipped"
 ABILITY_MEAN = 0.0
 ABILITY_SD = 1.0
 ABILITY_CLIP_LOW = -2.5
+
 ABILITY_CLIP_HIGH = 3.5
 
 # Heavy tail on ability (0 = off); used when ABILITY_DRAW includes student-t noise
@@ -93,16 +94,64 @@ LOO_GAP_WEIGHT = 0.5  # w on L_Q gap; crowding mode reuses same knob as "crowdin
 # Winner draw: "A" weighted | "B" Bernoulli | "C" top-K (deterministic)
 WINNER_SELECTION = "C"
 
-# --- CELL 10 minimal preset (null generative floor model) -----------------------
-# Applied by "Minimal preset" in tier1_cell10_playground_run.py. Pool soft-assign
-# stays on; preferential attachment, congestion in score, and stochastic winners off.
-MINIMAL_ABILITY_DRAW = "normal_clipped"
-MINIMAL_TARGET_MEAN_DIST = "uniform"
-MINIMAL_PREFERENTIAL_ALPHA = 0.0
-MINIMAL_SELECTION_SCORE_MODE = "ability"
-MINIMAL_LOO_GAP_WEIGHT = 0.0
-MINIMAL_LOO_POOL_L_MODE = "quality"
-MINIMAL_WINNER_SELECTION = "C"
+# --- CELL 10 presets (two calibration tracks — do not mix) --------------------
+#
+# Track A — POOL_530_* ("530 pool cal" button): match real MBB forensics (530 CELLs 5–8).
+#   τ ≈ 0.65 → median roster SD ~0.8, coverage peak ≫ 1. NOT the 539 Alex assignment story.
+#
+# Track B — MATCH_539_* ("539 assign cal" button): mimic 539 sort-chop assignment (CELL 10b/10c)
+#   before congestion in the selection score. τ from auto_calibrate_tau; re-run 10c after
+#   changing ability_draw, J, or seed. Soft assign cannot fully match hard sort-chop — 10b
+#   will still show a gap on roster SD / coverage.
+#
+# Layer 0 (both tracks): ability-only top-K (w=0). Layer 2+: turn on crowding_smooth + w.
+
+# Track A — 530 empirical pool calibration
+POOL_530_ASSIGNMENT_TEMPERATURE = 0.65
+POOL_530_ABILITY_DRAW = "normal_clipped"
+POOL_530_TARGET_MEAN_DIST = "uniform"
+POOL_530_PREFERENTIAL_ALPHA = 0.0
+POOL_530_SELECTION_SCORE_MODE = "ability"
+POOL_530_LOO_GAP_WEIGHT = 0.0
+POOL_530_LOO_POOL_L_MODE = "quality"
+POOL_530_WINNER_SELECTION = "C"
+
+# Deprecated aliases (530 track)
+MINIMAL_ABILITY_DRAW = POOL_530_ABILITY_DRAW
+MINIMAL_TARGET_MEAN_DIST = POOL_530_TARGET_MEAN_DIST
+MINIMAL_PREFERENTIAL_ALPHA = POOL_530_PREFERENTIAL_ALPHA
+MINIMAL_SELECTION_SCORE_MODE = POOL_530_SELECTION_SCORE_MODE
+MINIMAL_LOO_GAP_WEIGHT = POOL_530_LOO_GAP_WEIGHT
+MINIMAL_LOO_POOL_L_MODE = POOL_530_LOO_POOL_L_MODE
+MINIMAL_WINNER_SELECTION = POOL_530_WINNER_SELECTION
+
+# Track B — 539 assignment mimicry (Layer 0; τ from CELL 10c at J=1000, seed=42, rho=0.88)
+MATCH_539_ASSIGNMENT_TEMPERATURE = 0.108
+MATCH_539_N_TEAMS = 1000
+MATCH_539_ROSTER_SIZE = 15
+MATCH_539_RANDOM_SEED = 42
+MATCH_539_ABILITY_DRAW = "normal_clipped"
+MATCH_539_TARGET_MEAN_DIST = "uniform"
+MATCH_539_TARGET_MEAN_LOW = -0.5
+MATCH_539_TARGET_MEAN_HIGH = 0.5
+MATCH_539_PREFERENTIAL_ALPHA = 0.0
+MATCH_539_N_SELECTED = 1500
+MATCH_539_SELECTION_SCORE_MODE = "ability"
+MATCH_539_LOO_GAP_WEIGHT = 0.0
+MATCH_539_LOO_POOL_L_MODE = "quality"
+MATCH_539_WINNER_SELECTION = "C"
+MATCH_539_VIABILITY_THETA = 0.72
+MATCH_539_VIABILITY_SHARPNESS = 10.0
+# Full-scale 539 notebook reference (tier1_539_reference_settings.json): N=30_000, J=2000, seed=1,
+# ability=beta_2_2 on [0,1], T_j uniform [0,1], n_selected=3000 (10%). Re-run 10c after switching.
+# Sweep hint (J=1000): beta_2_2 → τ≈0.116 (seed 42) or τ≈0.149 (seed 1); 538 SD ~0.21 vs 539 ~0.11.
+MATCH_539_FULL_N_TEAMS = 2000
+MATCH_539_FULL_ROSTER_SIZE = 15
+MATCH_539_FULL_RANDOM_SEED = 1
+MATCH_539_FULL_ABILITY_DRAW = "beta_2_2"
+MATCH_539_FULL_TARGET_MEAN_LOW = 0.0
+MATCH_539_FULL_TARGET_MEAN_HIGH = 1.0
+MATCH_539_FULL_N_SELECTED = 3000
 
 # Deprecated aliases (rename only — same values)
 N_PROMOTED = N_SELECTED
