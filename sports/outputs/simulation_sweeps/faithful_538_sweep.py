@@ -602,7 +602,7 @@ def grouped_candidates(stage2_rows: list[dict]) -> pd.DataFrame:
             "mean_left_lift_frac",
             "interior_seed_count",
         ],
-        ascending=[False, False, False, False, False, False],
+        ascending=[False, False, False, False, False, False, False],
         kind="mergesort",
     )
     return grouped
