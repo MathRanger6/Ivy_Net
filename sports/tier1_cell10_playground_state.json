@@ -1,16 +1,16 @@
 {
   "ability_draw": "normal_clipped",
-  "bin_mode": "quantile",
+  "bin_mode": "equal_width",
   "kernel": "gaussian",
-  "loo_gap_weight": 0.0,
-  "loo_pool_l_mode": "quality",
+  "loo_gap_weight": 0.55,
+  "loo_pool_l_mode": "crowding",
   "n_bins": 20,
   "n_selected": 1500,
   "n_teams": 1000,
   "pref_alpha": 0.0,
   "roster_size": 15,
-  "score_mode": "ability",
-  "seed": 42,
+  "score_mode": "loo_gap_plus_ability",
+  "seed": 15174,
   "show_chop": false,
   "show_plot_a": true,
   "show_plot_b": true,
@@ -18,8 +18,8 @@
   "t_high": 0.5,
   "t_low": -0.5,
   "target_dist": "uniform",
-  "tau": 0.108,
+  "tau": 0.65,
   "viability_sharpness": 10.0,
   "viability_theta": 0.72,
-  "winner_selection": "C"
+  "winner_selection": "A"
 }
