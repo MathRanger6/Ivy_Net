@@ -439,23 +439,72 @@ def add_poolq_loo(players: pd.DataFrame) -> pd.DataFrame:
     return add_loo_pool_columns(players)
 
 
+def ability_on_unit_interval(ability: np.ndarray) -> bool:
+    """True when synthetic A_i looks drawn on [0, 1] (539 beta/uniform), not z-scored."""
+    finite = np.asarray(ability, dtype=float)
+    finite = finite[np.isfinite(finite)]
+    if finite.size == 0:
+        return False
+    return float(finite.min()) >= -0.05 and float(finite.max()) <= 1.05
+
+
+def default_crowding_l_z_scale(ability: np.ndarray) -> float:
+    """Map L_C ∈ [0, 1] to ability units when A_i is z-scored (530-style draws)."""
+    finite = np.asarray(ability, dtype=float)
+    finite = finite[np.isfinite(finite)]
+    if finite.size < 10:
+        return 4.0
+    spread = float(np.nanpercentile(finite, 90) - np.nanpercentile(finite, 10))
+    return spread if spread > 1e-6 else 4.0
+
+
+def effective_l_for_selection(
+    l_values: np.ndarray,
+    ability: np.ndarray,
+    *,
+    pool_l_mode: str,
+    l_term_scale: float | None = None,
+) -> np.ndarray:
+    """L term in the same units as ability for subtractive selection scores.
+
+    L_Q (quality) is already in ability units. L_C crowding terms live on [0, 1];
+    when ability is z-scored, multiply L_C by a spread factor so w·L is commensurate
+    with A_i (539 uses both on [0, 1] and needs no scaling).
+    """
+    l = np.asarray(l_values, dtype=float)
+    if not is_crowding_l_mode(pool_l_mode):
+        return l
+    if ability_on_unit_interval(ability):
+        return l
+    scale = (
+        float(l_term_scale)
+        if l_term_scale is not None and np.isfinite(l_term_scale) and l_term_scale > 0
+        else default_crowding_l_z_scale(ability)
+    )
+    return l * scale
+
+
 def selection_weights(
     players: pd.DataFrame,
     *,
     score_mode: str,
     loo_gap_weight: float,
     pool_l_mode: str = "quality",
+    l_term_scale: float | None = None,
 ) -> np.ndarray:
     a = players["ability"].to_numpy(dtype=float)
     lcol = pool_l_column(pool_l_mode)
-    q = players[lcol].to_numpy(dtype=float)
+    q_raw = players[lcol].to_numpy(dtype=float)
+    q = effective_l_for_selection(
+        q_raw, a, pool_l_mode=pool_l_mode, l_term_scale=l_term_scale
+    )
     mode = str(score_mode).strip().lower()
     if mode == "ability":
         w = a.copy()
     elif mode == "loo_gap_plus_ability":
         wgt = float(loo_gap_weight)
         w = wgt * (a - q) + (1.0 - wgt) * a
-        w = np.where(np.isfinite(q), w, a)
+        w = np.where(np.isfinite(q_raw), w, a)
     else:
         raise ValueError(f"unknown selection score_mode {score_mode!r}")
     w = np.where(np.isfinite(w), w, 0.0)
@@ -499,6 +548,35 @@ def choose_selected(
     raise ValueError(f"unknown winner_selection {choice!r}")
 
 
+def resolve_crowding_l_z_scale(
+    crowding_l_z_scale: float | None,
+    *,
+    pool_l_mode: str,
+) -> float | None:
+    """``l_term_scale`` for ``selection_weights`` (None → auto p90−p10 of A_i).
+
+    Explicit positive ``crowding_l_z_scale`` wins. Otherwise reads
+    ``CROWDING_L_Z_SCALE`` from ``tier1_sim_config.py`` when set and finite.
+    """
+    if crowding_l_z_scale is not None:
+        val = float(crowding_l_z_scale)
+        if np.isfinite(val) and val > 0:
+            return val
+        return None
+    if not is_crowding_l_mode(pool_l_mode):
+        return None
+    try:
+        mod = load_tier1_sim_config()
+        raw = getattr(mod, "CROWDING_L_Z_SCALE", None)
+        if raw is not None:
+            val = float(raw)
+            if np.isfinite(val) and val > 0:
+                return val
+    except (ImportError, OSError, TypeError, ValueError):
+        pass
+    return None
+
+
 def assign_selection(
     players: pd.DataFrame,
     rng: np.random.Generator,
@@ -510,8 +588,14 @@ def assign_selection(
     pool_l_mode: str = "quality",
     viability_theta: float | None = None,
     viability_sharpness: float | None = None,
+    crowding_l_z_scale: float | None = None,
 ) -> pd.DataFrame:
-    """Mark K selected players (draft / tenure / promotion — domain-agnostic)."""
+    """Mark K selected players (draft / tenure / promotion — domain-agnostic).
+
+    ``crowding_l_z_scale``: multiply L_C by this when ability is z-scored so w·L
+    matches A_i units. ``None`` uses ``CROWDING_L_Z_SCALE`` from config, else auto
+    p90−p10 spread of A_i. Ignored for [0,1] ability draws and quality (L_Q) mode.
+    """
     gamma = (
         float(viability_sharpness)
         if viability_sharpness is not None
@@ -522,11 +606,15 @@ def assign_selection(
         viability_theta=viability_theta,
         viability_sharpness=gamma,
     )
+    l_scale = resolve_crowding_l_z_scale(
+        crowding_l_z_scale, pool_l_mode=pool_l_mode
+    )
     w = selection_weights(
         out,
         score_mode=score_mode,
         loo_gap_weight=loo_gap_weight,
         pool_l_mode=pool_l_mode,
+        l_term_scale=l_scale,
     )
     out["Y_selected"] = choose_selected(
         rng, w, int(n_selected), str(winner_selection)
@@ -548,6 +636,10 @@ def assign_promotion(
     score_mode: str,
     loo_gap_weight: float,
     winner_selection: str,
+    pool_l_mode: str = "quality",
+    viability_theta: float | None = None,
+    viability_sharpness: float | None = None,
+    crowding_l_z_scale: float | None = None,
 ) -> pd.DataFrame:
     out = assign_selection(
         players,
@@ -556,6 +648,10 @@ def assign_promotion(
         score_mode=score_mode,
         loo_gap_weight=loo_gap_weight,
         winner_selection=winner_selection,
+        pool_l_mode=pool_l_mode,
+        viability_theta=viability_theta,
+        viability_sharpness=viability_sharpness,
+        crowding_l_z_scale=crowding_l_z_scale,
     )
     out["Y_promoted"] = out["Y_selected"]
     out["promotion_weight"] = out["selection_weight"]

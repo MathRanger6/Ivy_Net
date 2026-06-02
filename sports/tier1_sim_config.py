@@ -105,6 +105,10 @@ WINNER_SELECTION = "C"
 #   will still show a gap on roster SD / coverage.
 #
 # Layer 0 (both tracks): ability-only top-K (w=0). Layer 2+: turn on crowding_smooth + w.
+#
+# Layer 2 — 539 teaching selection (CELL 10 "539 selection" button):
+#   beta_2_2 A on [0,1], T_j uniform [0,1], crowding_smooth, w = λ from reference JSON.
+#   Keeps 530 pool assignment (τ≈0.65) unless you switch to 539 assign cal separately.
 
 # Track A — 530 empirical pool calibration
 POOL_530_ASSIGNMENT_TEMPERATURE = 0.65
@@ -152,6 +156,20 @@ MATCH_539_FULL_ABILITY_DRAW = "beta_2_2"
 MATCH_539_FULL_TARGET_MEAN_LOW = 0.0
 MATCH_539_FULL_TARGET_MEAN_HIGH = 1.0
 MATCH_539_FULL_N_SELECTED = 3000
+
+# Layer 2 — 539 selection score on 530-calibrated pools (commensurate [0,1] A and L_C)
+SELECTION_539_ABILITY_DRAW = "beta_2_2"
+SELECTION_539_TARGET_MEAN_LOW = 0.0
+SELECTION_539_TARGET_MEAN_HIGH = 1.0
+SELECTION_539_LOO_POOL_L_MODE = "crowding_smooth"
+SELECTION_539_LOO_GAP_WEIGHT = 0.55  # λ in tier1_539_reference_settings.json
+SELECTION_539_SELECTION_SCORE_MODE = "loo_gap_plus_ability"
+SELECTION_539_VIABILITY_THETA = 0.72
+SELECTION_539_VIABILITY_SHARPNESS = 10.0
+SELECTION_539_WINNER_SELECTION = "C"
+# When using z-scored ability + crowding L, assign_selection auto-scales L_C (p90−p10 of A_i).
+# Set a positive float to pin the multiplier (e.g. 4.0); None = auto.
+CROWDING_L_Z_SCALE = None
 
 # Deprecated aliases (rename only — same values)
 N_PROMOTED = N_SELECTED

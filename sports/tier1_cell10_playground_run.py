@@ -265,6 +265,51 @@ else:
             )
             return d
 
+        def _selection_539_defaults() -> dict:
+            """539 Layer 2: beta_2_2 on [0,1], crowding_smooth, w=λ; keeps 530 pool τ."""
+            d = _pool_530_defaults()
+            mod = _tier1_cfg
+            lam = float(getattr(mod, "SELECTION_539_LOO_GAP_WEIGHT", 0.55))
+            try:
+                from tier1_cell10_539_calibration_compare import load_539_reference_settings
+
+                lam = float(load_539_reference_settings(_SPORTS).get("lambda_", lam))
+            except Exception:
+                pass
+            d.update(
+                {
+                    "ability_draw": str(
+                        getattr(mod, "SELECTION_539_ABILITY_DRAW", "beta_2_2")
+                    ),
+                    "target_dist": "uniform",
+                    "t_low": float(getattr(mod, "SELECTION_539_TARGET_MEAN_LOW", 0.0)),
+                    "t_high": float(
+                        getattr(mod, "SELECTION_539_TARGET_MEAN_HIGH", 1.0)
+                    ),
+                    "score_mode": str(
+                        getattr(
+                            mod,
+                            "SELECTION_539_SELECTION_SCORE_MODE",
+                            "loo_gap_plus_ability",
+                        )
+                    ),
+                    "loo_gap_weight": lam,
+                    "loo_pool_l_mode": str(
+                        getattr(mod, "SELECTION_539_LOO_POOL_L_MODE", "crowding_smooth")
+                    ),
+                    "winner_selection": str(
+                        getattr(mod, "SELECTION_539_WINNER_SELECTION", "C")
+                    ),
+                    "viability_theta": float(
+                        getattr(mod, "SELECTION_539_VIABILITY_THETA", 0.72)
+                    ),
+                    "viability_sharpness": float(
+                        getattr(mod, "SELECTION_539_VIABILITY_SHARPNESS", 10.0)
+                    ),
+                }
+            )
+            return d
+
         _st = {**_defaults(), **_state_load()}
 
         def _cell10_plot_flag(
@@ -594,11 +639,21 @@ else:
                         f"{l_html} is viable-peer <b>share</b> "
                         f"(count above θ / LOO pool size; hard threshold)."
                     )
+                a_draw = str(w_ability.value).strip().lower()
+                scale_line = ""
+                if a_draw not in ("beta_2_2", "uniform_01"):
+                    scale_line = (
+                        "<br><span style='color:#444;font-size:11px'>"
+                        "Z-scored A: L<sub>c</sub> is auto-scaled to A spread (p90−p10) "
+                        "so w·L is commensurate with A<sub>i</sub>."
+                        "</span>"
+                    )
                 score_formula_html.value = (
                     f"<div style='{_SCORE_HELP_STYLE}'>"
                     f"<b>Selection rank</b> = A<sub>i</sub> − <i>w</i>·{l_html} &nbsp;&nbsp;|&nbsp;&nbsp; "
                     f"<b><i>w</i> = {w:.2f}</b><br>"
-                    f"<span style='color:#444;font-size:12px'>{sub}</span><br>"
+                    f"<span style='color:#444;font-size:12px'>{sub}</span>"
+                    f"{scale_line}<br>"
                     "<span style='color:#444;font-size:11px'>"
                     "Plot B x-axis = L<sub>q</sub> bins only (not this L)."
                     "</span><br><br>"
@@ -644,6 +699,15 @@ else:
             tooltip=(
                 "539 Layer 0: τ from CELL 10c (~0.108), ability-only top-K, w=0. "
                 "Re-run 10c after changing A draw, J, or seed."
+            ),
+            layout=widgets.Layout(width="160px"),
+        )
+        btn_selection_539 = widgets.Button(
+            description="539 selection",
+            button_style="success",
+            tooltip=(
+                "539 Layer 2: beta_2_2 A on [0,1], crowding_smooth, w=λ (~0.55). "
+                "530 pool assignment (τ≈0.65). Teaching model for inverted-U."
             ),
             layout=widgets.Layout(width="160px"),
         )
@@ -1159,6 +1223,14 @@ else:
             _sync_gamma_slider_visibility()
             redraw()
 
+        def _load_selection_539(_=None):
+            _spec.loader.exec_module(_tier1_cfg)  # type: ignore[union-attr]
+            _apply_widget_state(_selection_539_defaults())
+            _update_loo_l_hint_html()
+            _update_score_formula_html()
+            _sync_gamma_slider_visibility()
+            redraw()
+
         def _wire_listeners():
             if _pg["listeners_on"]:
                 return
@@ -1188,6 +1260,7 @@ else:
             w_score.observe(_update_score_formula_html, names="value")
             w_loo_w.observe(_update_score_formula_html, names="value")
             w_loo_l_mode.observe(_update_score_formula_html, names="value")
+            w_ability.observe(_update_score_formula_html, names="value")
             w_loo_l_mode.observe(_on_loo_pool_context_change, names="value")
             w_viability_theta.observe(_on_loo_pool_context_change, names="value")
             w_viability_gamma.observe(_on_loo_pool_context_change, names="value")
@@ -1196,6 +1269,7 @@ else:
             btn_defaults.on_click(_load_defaults)
             btn_pool_530.on_click(_load_pool_530)
             btn_match_539.on_click(_load_match_539)
+            btn_selection_539.on_click(_load_selection_539)
             _pg["listeners_on"] = True
 
         _CELL10_SLIDER_WIDGETS = (
@@ -1288,7 +1362,14 @@ else:
         _footer_panel = widgets.VBox(
             [
                 widgets.HBox(
-                    [btn_defaults, btn_pool_530, btn_match_539, btn_run, btn_seed_change]
+                    [
+                        btn_defaults,
+                        btn_pool_530,
+                        btn_match_539,
+                        btn_selection_539,
+                        btn_run,
+                        btn_seed_change,
+                    ]
                 ),
                 _summary_row,
                 summary_footnote_html,
