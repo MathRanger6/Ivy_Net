@@ -183,5 +183,7 @@ RANDOM_SEED = 42
 SHOW_PLOT_A = True
 # CELL 10 playground: render inverted-U Plot B (selection rate vs LOO L bins)
 SHOW_PLOT_B = True
+# False → Plot B x = L_Q (530 comparability); True → x = pool team_mean (539 notebook style)
+SHOW_PLOT_B_TEAM_MEAN = False
 # CELL 10 playground: render ability histogram Plot C (530 CELL 5b overlay)
 SHOW_PLOT_C = True

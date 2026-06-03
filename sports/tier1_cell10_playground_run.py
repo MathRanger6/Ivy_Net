@@ -339,6 +339,14 @@ else:
                 "CELL10_SHOW_PLOT_C", "show_plot_c", "SHOW_PLOT_C", default=False
             )
 
+        def _plot_b_team_mean_enabled() -> bool:
+            return _cell10_plot_flag(
+                "CELL10_PLOT_B_TEAM_MEAN",
+                "plot_b_team_mean",
+                "SHOW_PLOT_B_TEAM_MEAN",
+                default=False,
+            )
+
         _j_max = int(getattr(_tier1_cfg, "N_TEAMS_SLIDER_MAX", 2500))
         w_n_teams = widgets.IntSlider(
             value=min(int(_st["n_teams"]), _j_max),
@@ -942,8 +950,11 @@ else:
             import matplotlib.pyplot as plt
 
             from tier1_generative_eda import (
+                PLOT_B_XAXIS_LABEL,
+                PLOT_B_XAXIS_TEAM_MEAN_LABEL,
                 figure_inverted_u,
                 inverted_u_bin_table,
+                inverted_u_bin_table_team_mean,
                 plot_b_figure_title,
                 selection_rank_formula,
             )
@@ -1066,31 +1077,51 @@ else:
                     viability_theta=params.viability_theta,
                     viability_sharpness=params.viability_sharpness,
                 )
-                summ_u = inverted_u_bin_table(
+                summ_u = inverted_u_bin_table_team_mean(
+                    players_sel,
+                    sel,
+                    assign_poolq_bin_labels=assign_poolq_bin_labels,
+                ) if _plot_b_team_mean_enabled() else inverted_u_bin_table(
                     players_sel,
                     sel,
                     assign_poolq_bin_labels=assign_poolq_bin_labels,
                     tpa=_tpa,
                 )
+                _plot_b_539_axis = _plot_b_team_mean_enabled()
                 rank_line = selection_rank_formula(
                     sel.score_mode,
                     loo_gap_weight=sel.loo_gap_weight,
                     pool_l_mode=sel.loo_pool_l_mode,
                     tpa=_tpa,
                 )
-                plot_b_header_html.value = (
-                    f"<b>Plot B</b> — mean Y<sub>selected</sub> vs <b>L<sub>q</sub></b> bins "
-                    f"(x-axis fixed)<br>"
-                    f"<span style='font-size:11px;color:#444'>{rank_line}</span>"
-                )
+                if _plot_b_539_axis:
+                    plot_b_header_html.value = (
+                        "<b>Plot B′</b> — mean Y<sub>selected</sub> vs "
+                        "<b>team_mean</b> bins (539-style)<br>"
+                        f"<span style='font-size:11px;color:#444'>{rank_line}</span>"
+                    )
+                else:
+                    plot_b_header_html.value = (
+                        f"<b>Plot B</b> — mean Y<sub>selected</sub> vs <b>L<sub>q</sub></b> bins "
+                        f"(530-style)<br>"
+                        f"<span style='font-size:11px;color:#444'>{rank_line}</span>"
+                    )
                 _sync_plot_b_visibility()
                 if _show_plot_b_enabled():
                     fig_u = figure_inverted_u(
                         summ_u,
-                        title=plot_b_figure_title(sel, tpa=_tpa),
+                        title=plot_b_figure_title(
+                            sel, tpa=_tpa, team_mean_axis=_plot_b_539_axis
+                        ),
                         n_bins=sel.n_bins,
                         n_teams=params.n_teams,
                         loo_pool_l_mode=sel.loo_pool_l_mode,
+                        x_col="mean_team_mean" if _plot_b_539_axis else None,
+                        xlabel=(
+                            PLOT_B_XAXIS_TEAM_MEAN_LABEL
+                            if _plot_b_539_axis
+                            else PLOT_B_XAXIS_LABEL
+                        ),
                         tpa=_tpa,
                     )
                     buf_u = io.BytesIO()
@@ -1143,12 +1174,17 @@ else:
                     f"{chop_line}{slow_note}"
                     "</div>"
                 )
+                plot_b_axis_line = (
+                    "Plot B′ bins: team_mean (539-style)"
+                    if _plot_b_539_axis
+                    else "Plot B bins: L<sub>q</sub> (530-style)"
+                )
                 summary_sel_html.value = (
                     f"<div style='{_summary_col_style}'>"
                     "<b>Selection</b><br>"
                     f"{rank_line}<br>"
                     f"K={sel.n_selected} &nbsp; winner={sel.winner_selection!r}<br>"
-                    f"Plot B bins: always L<sub>q</sub> &nbsp; "
+                    f"{plot_b_axis_line} &nbsp; "
                     f"({sel.n_bins} {sel.bin_mode})<br>"
                     f"Pool L in score={sel.loo_pool_l_mode!r} &nbsp; "
                     f"w={sel.loo_gap_weight:.2f} &nbsp; θ={params.viability_theta:.3f}<br>"
@@ -1157,10 +1193,15 @@ else:
                     f"peak_bin_rate={peak_bin_rate:.4f}"
                     "</div>"
                 )
+                plot_b_footnote = (
+                    "Plot B′: y = mean Y_selected; x = pool team_mean (539 notebook style)."
+                    if _plot_b_539_axis
+                    else "Plot B: y = mean Y_selected; x = L_Q (530 comparability)."
+                )
                 summary_footnote_html.value = (
                     "<span style='color:#555;font-size:10px;font-family:ui-monospace,Menlo,monospace'>"
                     "Plot A: 530 CELL 8 overlap. "
-                    "Plot B: y = mean Y_selected; x = L_Q always (independent of Pool L in score)."
+                    f"{plot_b_footnote} Pool L in score is independent of Plot B x-axis."
                     "</span>"
                 )
                 _persist()

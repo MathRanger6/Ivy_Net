@@ -70,10 +70,14 @@ class SelectionConfig:
 # Deprecated alias
 PromotionConfig = SelectionConfig
 
-# Plot B always bins on poolq_loo (L_Q), regardless of Pool L in the selection score.
+# Plot B default bins on poolq_loo (L_Q); optional 539-style team_mean axis (see config flag).
 PLOT_B_XAXIS_LABEL = (
     "Bin mean L_Q (LOO mean teammate ability)\n"
     "[x-axis fixed — Pool L dropdown affects selection score only]"
+)
+PLOT_B_XAXIS_TEAM_MEAN_LABEL = (
+    "Bin mean team ability (pool mean; 539-style)\n"
+    "[Pool L dropdown affects selection score only]"
 )
 PLOT_B_YAXIS_LABEL = "Mean selection rate (Y_selected) per bin"
 
@@ -106,17 +110,19 @@ def plot_b_figure_title(
     sel: SelectionConfig,
     *,
     header: str = "538 CELL 10 — Plot B",
+    team_mean_axis: bool = False,
     tpa=None,
 ) -> str:
-    """Two-line matplotlib title: y vs L_Q bins + selection-rank recipe."""
+    """Two-line matplotlib title: y vs Plot B bins + selection-rank recipe."""
     rank = selection_rank_formula(
         sel.score_mode,
         loo_gap_weight=sel.loo_gap_weight,
         pool_l_mode=sel.loo_pool_l_mode,
         tpa=tpa,
     )
+    x_label = "team_mean bins (539-style)" if team_mean_axis else "L_Q bins"
     return (
-        f"{header}: mean Y_selected vs L_Q bins\n"
+        f"{header}: mean Y_selected vs {x_label}\n"
         f"{rank} | K={sel.n_selected} | {sel.n_bins} bins ({sel.bin_mode})"
     )
 
@@ -202,6 +208,31 @@ def inverted_u_bin_table(
     )
 
 
+def inverted_u_bin_table_team_mean(
+    players: pd.DataFrame,
+    sel: SelectionConfig,
+    *,
+    assign_poolq_bin_labels,
+) -> pd.DataFrame:
+    """539-style Plot B′: binned selection rate vs realized pool (team) mean ability."""
+    ycol = _outcome_col(players)
+    use = players.copy()
+    use["pool_mean"] = use.groupby("pool_id", observed=True)["ability"].transform("mean")
+    use = use.dropna(subset=["pool_mean", ycol])
+    use["bin"] = assign_poolq_bin_labels(use["pool_mean"], sel.n_bins, sel.bin_mode)
+    return (
+        use.dropna(subset=["bin"])
+        .groupby("bin", observed=True)
+        .agg(
+            n=(ycol, "size"),
+            selection_rate=(ycol, "mean"),
+            mean_team_mean=("pool_mean", "mean"),
+        )
+        .reset_index()
+        .sort_values("mean_team_mean")
+    )
+
+
 def figure_inverted_u(
     summ: pd.DataFrame,
     *,
@@ -210,18 +241,24 @@ def figure_inverted_u(
     n_teams: int,
     show_bin_n: bool = True,
     loo_pool_l_mode: str = "quality",
+    x_col: str | None = None,
+    xlabel: str | None = None,
     tpa=None,
 ) -> plt.Figure:
     if tpa is None:
         import tier1_pool_assignment as tpa  # noqa: PLC0415
 
     fig, ax = plt.subplots(figsize=(8.5, 4.2))
-    if "mean_loo_q" in summ.columns:
+    if x_col is not None:
+        xcol = x_col
+    elif "mean_team_mean" in summ.columns:
+        xcol = "mean_team_mean"
+    elif "mean_loo_q" in summ.columns:
         xcol = "mean_loo_q"
     elif "mean_loo_l" in summ.columns:
         xcol = "mean_loo_l"
     else:
-        raise KeyError("summ needs mean_loo_q (or legacy mean_loo_l)")
+        raise KeyError("summ needs mean_loo_q, mean_team_mean, or legacy mean_loo_l")
     x = summ[xcol].to_numpy(dtype=float)
     rate_col = (
         "selection_rate"
@@ -231,7 +268,7 @@ def figure_inverted_u(
     y = summ[rate_col].to_numpy(dtype=float)
     ax.plot(x, y, "o-", color="C0", lw=2.0, ms=7)
     ax.fill_between(x, 0, y, alpha=0.12, color="C0")
-    ax.set_xlabel(PLOT_B_XAXIS_LABEL)
+    ax.set_xlabel(xlabel or PLOT_B_XAXIS_LABEL)
     ax.set_ylabel(PLOT_B_YAXIS_LABEL)
     ax.set_title(title, fontsize=10)
     ymax = float(y.max()) if len(y) else 0.0
