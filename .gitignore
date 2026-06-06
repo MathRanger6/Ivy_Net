@@ -31,9 +31,13 @@ Thumbs.db
 # --- Tenure pipeline: large / binary / sync-heavy (disk + rsync, not Git) ---
 # HTML snapshot tree — grows to 10s of GB as URL coverage + school count expand
 **/faculty_snapshots/
+
 # DBLP full dump (multi-GB) — keep parsers in repo, not the XML
 python_packages/dblp-parser/dblp.xml
 python_packages/dblp-parser/dblp.dtd
+
+# All python packages!
+python_packages/
 
 # --- Optional large trees (uncomment if you want them out of Git) ---
 big_dfs/
