@@ -4,6 +4,33 @@ Use this doc when starting a new Cursor thread so the next session has context. 
 
 ---
 
+## COMPASS initiative (June 2026 — Charles)
+
+Charles is creating a **cross-project master plan** spanning **CODA** (`talent/`), **SCOUT** (`sports/`), **PEER** (`tenure/`), and **VECTOR** (manuscript in `1-Various_PDE_and_Chat_stuff/5-Manuscript/`). Each agent contributes **`3-Master_Plan/{AGENT}_report_to_COMPASS.md`**. CODA’s file: **`3-Master_Plan/CODA_report_to_COMPASS.md`**. **Agents must not draft the master plan** until Charles assigns the COMPASS agent.
+
+---
+
+## April 2026 session — TB stratify, AWS sync, pool-size audit (Coda)
+
+### Done
+- **Advisor add-on:** `cr_tb_stratify.py` + `CR_TB_STRATIFY_CONFIG` in `pipeline_config.py` + Cell 11 hook in `520_pipeline_cox_working.ipynb`. Re-runs **competing_risks** (+ CIF bars) for low/med/high **own-TB** strata (last snapshot per officer). **`stratum_method`:** `quantile` vs `equal_width`.
+- **AWS workflow:** Overlay from `TALENT_NET_export_20260421-0802` into `talent/talent_pipeline/`; re-merged TB-stratify pieces; backup at `obsolete_files/talent_pre_bar_stratify/talent/`. **Ground truth** = live tree outside `Army_AWS_download/`.
+- **Docs:** `CR_TB_STRATIFY_Advisor_Three_Panels.md`, `CR_Red_Line_Flow_Explanation.md`, `Pertinent_Thoughts.md` (§ Senior Rater Pools + code-linked pool-size notes), `README_Talent_Layout_Symlinks_And_AWS_Export.md`.
+- **Plot labels:** `cr_tb_stratify_title_suffix` in titles/metadata; filename disambiguation `_tbq_` / `_tbew_` + stratum in `cr_tb_stratify.py`.
+
+### Army AWS upload set (vs export)
+- `520_pipeline_cox_working.ipynb`, `pipeline_config.py`, `cox_plot_helpers.py`, **`cr_tb_stratify.py`** (new).
+
+### Open / not done
+- **Senior rater pool sizes >100:** Likely **definition vs intuition** — pools are `groupby([snapshot_date, snr_col])` in `add_cum_oer_metrics_mod_working.py`, not literal OER boards. Audit when back at desk (see `Pertinent_Thoughts.md`).
+- **525 / UIC consistency:** Still planned (`525_plans.md`).
+- **Enable TB stratify on AWS:** Set `CR_TB_STRATIFY_CONFIG["enabled"] = True`, run Cell 11, verify counts.
+
+### Interpretation refs
+- **`CR_Red_Line_Flow_Explanation.md`** — Cell 11 collapses to **last row per officer** for plot bins; CR y-axis is **cumulative**, not instantaneous; pool bins ≠ own-TB strata.
+
+---
+
 ## What We Fixed (This Session)
 
 ### Run profile and CR plot simplification (config + overrides)

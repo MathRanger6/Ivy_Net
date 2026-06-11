@@ -1,7 +1,7 @@
 # Tenure PDE — Streamlining, Conda vs Git, and Research Priorities (Printable Digest)
 
 **Purpose:** One place to read (and print) how your **projects**, **conda environments**, and **Git** fit together, plus **where the science goes next** after Rivanna connectivity.  
-**Last updated:** Session notes consolidated for PDF / paper markup.
+**Last updated:** 2026-06-08 (PEER tenure lane — see **`3-Master_Plan/PEER_report_to_COMPASS.md`** for COMPASS handoff).
 
 ---
 
@@ -56,45 +56,49 @@ So: **Git streamlines “one true copy of the code” across machines.** It does
 
 ---
 
-## Part 3 — After connectivity: research priorities (are we barking up the right tree?)
+## Part 3 — Research priorities (updated June 2026)
 
-Once SSH / Git / Rivanna paths are working, the **first scientific priority** is **rough, honest counts** — not perfect models — to see if the agenda is viable.
+**Status:** Charles’s April 2026 “rough counts first” agenda (Questions A–D below) has been **substantially executed**. The pipeline now runs **Cells 0–9 complete**, with **Cells 10 / 10.5 wired** (Cox not yet formally reported) and **543** advisor CSV export. See **`PEER_Status_Update_for_VECTOR_2026-06-03.md`** and **`3-Master_Plan/PEER_report_to_COMPASS.md`** for numbers.
 
-### Question A — Certainty about role, place, and time
+### Current panel snapshot (`faculty_panel_with_pools.jsonl`, May 2026 run)
 
-**Goal:** Count how many individuals you have **high certainty** for as:
+| Metric | Value |
+|--------|-------|
+| Person–year rows | ~106,600 |
+| Unique faculty (`faculty_id`) | ~29,300 |
+| Universities (`uni_slug`) in panel | **168** (full `PILOT_SCHOOLS` roster represented) |
+| Calendar years | 2000–2024 |
+| Persons ever observed as assistant | ~2,330 |
+| Person-level outcomes (ever-assistant) | tenure ~422; attrition ~570; censored ~1,340 |
+| OpenAlex `match_confidence` (row-level) | HIGH ~17%; MEDIUM ~10%; MULTI ~13%; LOW ~2%; NONE ~58% |
 
-- **Assistant professor**
-- At a **specific school**
-- At a **specific time** (year / season / snapshot, per your panel design)
+**Interpretation:** Roster **breadth** (168 schools) is better than early “~60 usable departments” language implied — but **depth** (parse quality, OA linkage, resolved tenure outcomes) varies sharply by school. Treat “usable for inference” as a **filter**, not the raw school count.
 
-This is the core “do we have enough signal?” question before investing in heavy OpenAlex econometrics.
+### Question A — Certainty about role, place, and time — **partially answered**
 
-### Question B — Outcomes: promotion vs “got out”
+We can count assistant-professor observations with school + year. **`rank=assistant`** person–years (~6,600) and **`ever_assistant`** persons (~2,330) are documented in the panel. **`n_snapshots`** and strategy audit support per-school QA. Remaining work: tighten tenure-track filtering (compound titles, adjunct misclassification — see **`Pertinent_Thoughts_Tenure.md`**).
 
-**Goal:** Among those assistant-professor–identified people, quantify:
+### Question B — Outcomes: promotion vs “got out” — **implemented**
 
-- How many **promoted to Associate** (or equivalent), **within your data window and rules**, and  
-- How many **left** the assistant rank without promotion in the sense you define (“got out” — move to industry, leave academia, move institutions, etc., depending on definition).
+`tenure_event`, `attrition`, `censored`, `year_of_tenure` are in the panel (`panel_builder.py`, `gap_tolerance=2`). Competing-risk framing aligns with Army (CODA) and manuscript **`advancement_under_constrained_distinction_dakota_feedback_v03.rtf`**. Lateral moves vs true exit remain **unobserved** (limitation).
 
-Exact operational definitions (titles, years, censoring) will be tightened in analysis — this digest only captures **intent**.
+### Question C — Who gets OpenAlex first — **superseded by full 6A–6B pass**
 
-### Question C — Who gets OpenAlex first
+The pipeline ran OpenAlex resolution on the full panel, not only a high-confidence assistant subset. **`match_confidence`** tiers (HIGH / MEDIUM / MULTI / LOW / NONE) document quality. Publication analyses should filter to HIGH (+ optionally MEDIUM); see **`PANEL_CSV_GLOSSARY.md`**.
 
-**Goal:** Restrict the **first** OpenAlex author disambiguation pass to faculty you already classify as **high confidence** in your pipeline **and** **assistant professor** (per your parsed HTML / panel rules). **Quantify** that set (N = ?).
+### Question D — Performance metrics on Rivanna — **implemented**
 
-Those names are the **first** candidates for OA matching (you already have API-based resolution in the pipeline; bulk OA on HPC comes next for scale).
+CDH bulk snapshot + **`openalex_snapshot_cache.jsonl`** + **`build_openalex_cache.py`** / Slurm job documented in **`TENURE_PIPELINE_OVERVIEW.md` §4**. Mac workflow: rsync cache, run Stages 7–9 offline.
 
-### Question D — Performance metrics on Rivanna
+### Question E — Inverted-U (added June 2026) — **preliminary yes**
 
-**Goal:** Use **downloaded OpenAlex data** on the HPC (not the public API for bulk everything) to attach **works** and **citations** (and derived metrics) as **performance** measures for those disambiguated authors.
+**Stage 9:** 18 bins of `poolq_loo_mean` → tenure rate plot shows **non-monotone** pattern with **drop at top bin** (`stage9_inverted_u.png`, `stage9_binned_table.csv`). **Not** final Cox evidence — run Cells 10 / 10.5 → 12 next.
 
-**Order of operations (high level):**
+**Order of operations going forward:**
 
-1. **Panel / parse certainty** → assistant + school + time counts.  
-2. **High-confidence assistant subset** → count + list for OA work.  
-3. **OA disambiguation** (existing pipeline + HPC bulk as needed).  
-4. **Works / citations** → outcome and performance analysis layers.
+1. **Formal Cox / competing risks** on assistant spell (Cells 10–12).  
+2. **Robustness:** peer-group definitions, OA confidence filters, prestige controls.  
+3. **Coverage polish** (URL worksheet, bad schools) — secondary to analysis lock-in per advisor Apr 2026 direction.
 
 ---
 

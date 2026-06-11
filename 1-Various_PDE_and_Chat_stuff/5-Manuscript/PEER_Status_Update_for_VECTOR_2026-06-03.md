@@ -14,8 +14,8 @@
 | Pipeline (scrape → parse → panel → pool metrics) | **Complete end-to-end** for the current corpus |
 | Inverted-U signal | **Yes — present in preliminary analysis** (stage 9; see §4) |
 | Cox survival model | **Wired and runnable** (Cell 10); z-scored covariates in Cell 10.5 |
-| Coverage completeness | **Partial** — pipeline covers ~60+ R1 CS departments with usable data; full 187-school roster is a publication-time goal |
-| OpenAlex linkage | **API-based** (not bulk); ~30–40% HIGH confidence matches; MULTI and NONE coverage is a known limitation |
+| Coverage completeness | **168 schools** in panel roster (`uni_slug`); **variable** parse/OA quality per school — filter for inference, don't treat all schools as equally "usable" |
+| OpenAlex linkage | **Rivanna:** CDH bulk + cache (`openalex_snapshot_cache.jsonl`); **Mac:** rsync cache or API fallback. ~32% HIGH confidence in current panel sample; MULTI/NONE are known limitations |
 | Formal model results ready to quote | **Not yet** — preliminary binned curve is the current artifact; regression/Cox output is the next step |
 
 **Bottom line for VECTOR:** The tenure setting has a **working pipeline, a longitudinal panel, and a preliminary empirical result consistent with the inverted-U hypothesis**. It is not as polished as Army/CODA or basketball/SCOUT. The right framing for the manuscript is "preliminary third-setting replication" — honest about coverage limitations, with the stage 9 figure as the anchor.
@@ -42,10 +42,11 @@
 **Internet Archive (Wayback Machine)** — CDX API to plan captures, then HTML downloads and custom parser (`html_parser.py`) to extract faculty name + rank from each archived page.
 
 ### Coverage
-- **Schools planned:** ~187 R1 CS departments in scope
-- **Schools with usable scraped data:** ~60+ departments have parseable HTML in the current run
-- **Time window:** approximately **2000–2023** (availability varies by school; earlier years are sparser)
-- **Key limitation schools:** Auburn (robots.txt / Wayback exclusion), NC State (redirect shells), some schools with JS-heavy pages that CDX captured as near-empty HTML
+- **Schools in roster (`PILOT_SCHOOLS`):** 168 R1 CS departments in `r1_schools_data.py`
+- **Schools with at least one panel row:** **168** (`uni_slug` in `faculty_panel_with_pools.jsonl`)
+- **Parse / inference quality:** **Highly variable** — some schools have rich multi-year assistant spells + OA linkage; others have sparse snapshots, bad URLs, or low parse rates. Do **not** equate "168 in panel" with "168 publication-ready departments."
+- **Time window:** approximately **2000–2024** (availability varies by school)
+- **Known problem schools:** Auburn (Wayback exclusion), NC State (redirect shells), UIUC/UW-Madison (sub-page / era gaps), UCLA/Duke (bad URL history — see `url_update_worksheet.csv`)
 
 ### Panel structure
 Each row in the panel = **one person × one year** with:

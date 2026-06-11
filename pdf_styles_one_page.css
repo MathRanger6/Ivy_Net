@@ -1,0 +1,77 @@
+/* One-page advisor memo — 3rd arg to convert_single_md_to_pdf.sh */
+
+@page {
+    size: letter;
+    margin: 0.18in;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 0.68em;
+    line-height: 1.08;
+    color: #222;
+}
+
+body > p:first-of-type strong {
+    display: block;
+    border-bottom: 1.5px solid #4a90e2;
+    padding-bottom: 1px;
+    margin: 0 0 3px 0;
+    font-size: 1.12em;
+    color: #1a1a1a;
+}
+
+h1 {
+    border-bottom: 1.5px solid #4a90e2;
+    padding-bottom: 1px;
+    margin: 0 0 3px 0;
+    font-size: 1.15em;
+}
+
+h2 {
+    border-bottom: 1px solid #aaa;
+    margin: 5px 0 2px 0;
+    font-size: 0.98em;
+    padding-bottom: 1px;
+}
+
+p {
+    margin: 0.1em 0;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 2px 0;
+    font-size: 0.97em;
+}
+
+th {
+    background-color: #4a90e2;
+    color: white;
+    padding: 2px 4px;
+    font-weight: 600;
+}
+
+td {
+    border: 1px solid #ccc;
+    padding: 2px 4px;
+    vertical-align: top;
+}
+
+ul, ol {
+    margin: 0.08em 0;
+    padding-left: 1.1em;
+}
+
+li {
+    margin: 0;
+}
+
+strong {
+    font-weight: 600;
+}
+
+em {
+    font-style: italic;
+}

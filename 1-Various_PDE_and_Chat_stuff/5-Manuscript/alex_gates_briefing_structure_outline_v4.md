@@ -138,10 +138,12 @@ Important refinement:
 - “global vs local” is now treated as a domain-specific structural parameter,
 - not the universal invariant itself.
 
-Current status:
+Current status (June 2026):
 
-- empirical replication relatively strong,
-- generative explanation under active construction.
+- empirical replication **strong** (Army, basketball; academia **preliminary** — PEER stage 9),
+- minimal congestion score **implemented** (`A - λ L_C` in CELL 10),
+- generative inverted-U **yes** vs team_mean (539-style); **open** vs \(L_Q\) LOO (530 axis),
+- do **not** claim “538D decomposes 539” — see `Scout_Status_Update_for_VECTOR_Laszlo_Briefing_2026-06-02.md`.
 
 ---
 **Questions for Alex**

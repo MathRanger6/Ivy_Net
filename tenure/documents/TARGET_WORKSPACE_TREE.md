@@ -19,6 +19,7 @@ Cursor Workspace PDE/
 ├── tenure/                        # dissertation / R1 CS pipeline
 │   ├── 540_tenure_pipeline.ipynb
 │   ├── 541_ipeds_enrollment.ipynb
+│   ├── 543_package_panel.ipynb      # advisor CSV export from faculty_panel_with_pools
 │   ├── run_stage3b_cli.py         # Stage 3B CLI (tenure-specific)
 │   ├── tenure_pipeline/           # code + faculty_snapshots + JSONL outputs
 │   └── documents/                 # was current_documents/tenure_documents/

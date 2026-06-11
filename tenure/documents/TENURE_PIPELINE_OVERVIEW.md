@@ -1,5 +1,5 @@
 # Tenure Pipeline: End-to-End Overview
-**Agent: PEER** | **Notebook: `540_tenure_pipeline.ipynb`** | **Updated: 2026-04-16 (rev 16)**
+**Agent: PEER** | **Notebook: `540_tenure_pipeline.ipynb`** | **Updated: 2026-06-08 (rev 19)**
 
 ---
 
@@ -32,9 +32,9 @@ Headings below are **Find targets** (outline / search). **§G*n*** is the order 
 | **G8** | Stage 2 — R1 school list (Cell 2) | Schools CSV + URL workflow. |
 | **G9** | Stage 3 — Wayback scrape (Cells 3A–3E) | CDX / download / rescues. |
 | **G10** | Stage 4 — HTML parse (Cell 4) | Parsed roster JSONL, Option B + `legacy/`. |
-| **G11** | Stages 6–9 — Match, enriched panel, pools, analysis (planned) | Future cells after longitudinal panel (Cell 5)—cell numbers in overview §4. |
-| **G12** | Fast path — first inverted-U checkpoint (dirty OK) | Early curve + binned table checklist. |
-| **G13** | Open points (negotiate next) | Peer groups, attrition vs move, coverage vs lock-in. |
+| **G11** | Stages 6–9 — Match, enriched panel, pools, analysis | Cells 6A–9 **complete** (May–June 2026); Cox Cells 10/10.5 wired — see overview §2 table. |
+| **G12** | Fast path — first inverted-U checkpoint (dirty OK) | **✅ Complete** — `stage9_inverted_u.png`, `stage9_binned_table.csv` (18 bins). |
+| **G13** | Open points — Updated June 2026 | Peer-group robustness, formal Cox output, coverage expansion, bulk OA. |
 | **G14** | Document history | Changelog of the gameplan itself. |
 
 ### Gameplan stage map ↔ sections *in this overview*
@@ -47,7 +47,8 @@ The gameplan **Stage map** table cites **Overview §2–§4** as follows (number
 | 1–2 | Cells 1–2 | **§3** What Has Been Built (DBLP + schools / CSV). |
 | 3A–3E | Wayback chain | **§3** (plan/download/index) and **§4** where parse boundary is discussed. |
 | 4 | Cell 4 | **§3** (Cell 4 outputs) and parser notes in **§5**. |
-| 5+ | Planned | **§4** What Is Planned; file inventory **§6**. |
+| 6A–9 | Cells 6A–9 | **§2** pipeline table + **§4** implementation notes (enriched panel, pools, stage 9). |
+| 10+ | Cells 10, 10.5, 543 | **§4** Cox + advisor package; file inventory **§6**. |
 
 ---
 
@@ -112,9 +113,11 @@ RUN_CELL3E         = False   # Redirect rescue (NC State)    — optional; see �
 | CELL 4 | Faculty page parsing | ✅ Implemented | `faculty_snapshots_parsed.jsonl` + `faculty_snapshots_strategy_audit.jsonl` |
 | CELL 5 | Longitudinal panel (within-school link + Wayback plan join) | ✅ Implemented | `faculty_panel.jsonl`, `faculty_panel_collisions.jsonl` |
 | CELL 6A–6B | OpenAlex: institution map, author ID resolution, works-by-year (`openalex_resolver.py`, CDH bulk snapshot + incremental cache) | ✅ Implemented — toggle **`RUN_CELL6A` / `RUN_CELL6B`** in CELL 0; see **§4** for cache + coffee-shop workflow | `openalex_inst_map.json`, `openalex_author_ids.jsonl`, `openalex_works_by_year.jsonl`, **`openalex_snapshot_cache.jsonl`**, `openalex_low_confidence.jsonl` |
-| CELL 7 | Enriched panel (pubs + events) | 📋 Planned | `faculty_panel.*` (parquet/feather TBD) |
-| CELL 8 | Pool metrics (leave-self-out) | 📋 Planned | Added to panel |
-| CELL 9 | Analysis (inverted-U check) | 📋 Planned | Figures + regression output |
+| CELL 7 | Enriched panel (pubs + events) | ✅ Complete | `faculty_panel_enriched.jsonl` (55 MB) |
+| CELL 8 | Pool metrics (leave-self-out) | ✅ Complete | `faculty_panel_with_pools.jsonl` (72 MB); `pool_metrics.py` |
+| CELL 9 | Analysis (inverted-U check) | ✅ Complete | `stage9_inverted_u.png`, `stage9_binned_table.csv` |
+| CELL 10 | Cox survival model (time-varying covariates) | ✅ Wired / runnable | `df_pipeline_09_filtered`; toggle `RUN_CELL10` |
+| CELL 10.5 | Z-score + feature engineering for Cox | ✅ Implemented | `df_pipeline_10_5_cox_zscored`; creates `z_*`, `*_sq`, `star_pool_interaction` |
 
 ---
 
@@ -438,7 +441,7 @@ Test downloads confirmed all pages were rich with data (67–128 professor menti
 
 ---
 
-## 4. What Is Planned (Stages 6–9) — Through Cell 5 Implemented
+## 4. Stages 6–10.5 — Implementation Notes (All Complete as of May 2026)
 
 ### CELL 4 — Faculty Page Parsing (implemented)
 
@@ -520,63 +523,121 @@ Each author's extracted works-by-year is persisted to this JSONL after their fir
 
 ---
 
-### CELL 7 — Panel Build (enriched)
+### CELL 7 — Panel Build (enriched) — ✅ Complete
 
-**Goal:** Construct the analysis-ready panel: one row per `(person × year)` (or finer), combining **CELL 5** roster observations with DBLP publication counts and derived events.
+**Goal:** Construct the analysis-ready panel: one row per `(person × year)`, combining **CELL 5** roster observations with **OpenAlex** publication counts (from Cell 6B) and derived tenure/attrition/censoring events. Output: `faculty_panel_enriched.jsonl` (55 MB).
 
-**Panel grain:** `(uni_slug, name_clean, year)` — one row per person per year they appear in any faculty snapshot.
+**Panel grain:** `(faculty_id, year)` — one row per person per year they appear in any faculty snapshot.
 
-**Key columns:**
+**Actual columns in output:**
 
 | Column | Source | Description |
 |--------|--------|-------------|
-| `university` | CELL 4 | Institution |
-| `dept_rank` | CELL 4 parsed | `assistant` / `associate` / `full` / `other` |
-| `year` | CELL 4 | Academic year of observation |
-| `tenure_event` | Derived | 1 if promoted Asst → Assoc in this year, 0 otherwise |
-| `attrition` | Derived | 1 if person disappears from page without promotion |
-| `pubs_year` | CELL 1 DBLP | Publications in this calendar year |
-| `pubs_cumulative` | CELL 1 DBLP | Cumulative publications through this year |
-| `h_index_est` | CELL 1 DBLP | Estimated h-index through this year |
-| `years_on_track` | Derived | Years observed as Assistant Professor |
+| `faculty_id` | CELL 5 | Internal unique person identifier |
+| `name_display` | CELL 4 | Name as scraped |
+| `name_key` | CELL 5 | Normalized name for linking |
+| `university` / `uni_slug` | CELL 4 | Institution |
+| `rank` | CELL 4 | `assistant` / `associate` / `full` / `unknown` / etc. |
+| `year` | CELL 4 | Calendar year of observation |
+| `n_snapshots` | CELL 5 | Number of snapshots in this year |
+| `pubs_year` | CELL 6B (OpenAlex) | Publications in this calendar year |
+| `pubs_cumulative` | CELL 6B (OpenAlex) | Cumulative publications through this year |
+| `years_as_asst_so_far` | Derived | Years accumulated as assistant professor (non-null only when `rank=assistant`) |
+| `ever_assistant` | Derived | True if person ever observed as assistant |
+| `first_asst_year` / `last_asst_year` | Derived | Spell boundaries |
+| `tenure_event` | Derived | True if promoted Asst→Assoc within `gap_tolerance=2` years |
+| `year_of_tenure` | Derived | Year of promotion event |
+| `attrition` | Derived | True if last observed as assistant, disappeared before end of window |
+| `censored` | Derived | True if still assistant near end of observation window |
+| `openalex_id` | CELL 6A | OpenAlex author ID |
+| `match_confidence` | CELL 6A | HIGH / MEDIUM / MULTI / LOW / NONE (see `openalex_resolver.py` §1) |
 
-**Attrition detection:** A person who appears as Assistant Professor in year T and does not appear in the faculty snapshot in year T+1 (or T+2 to allow for snapshot gaps) is flagged as a probable attrition case. This population — denied tenure, departed before the clock, or laterally moved — is essential for the research design. Studying only the survivors would bias every estimate.
+> **Note:** DBLP (`dblp_parsed/`) remains on disk as a cross-check spine but is **not** the primary publication source. OpenAlex (CDH bulk snapshot via `build_openalex_cache.py` + `openalex_snapshot_cache.jsonl`) is the canonical source for `pubs_year` / `pubs_cumulative`.
+
+**Attrition detection:** A person who appears as Assistant Professor in year T and does not appear in the faculty snapshot in year T+1 (or T+2 to allow for snapshot gaps) is flagged as a probable attrition case. This population — denied tenure, departed before the clock, or laterally moved — is essential for the research design. `panel_builder.py` implements outcome assignment; `gap_tolerance=2` is the default.
 
 ---
 
-### CELL 8 — Pool Metrics (Leave-Self-Out Peer Quality)
+### CELL 8 — Pool Metrics (Leave-Self-Out Peer Quality) — ✅ Complete
 
-**Goal:** For each `(university, year)` combination, compute the leave-self-out (LOO) peer quality measure — the central independent variable in the analysis.
+**Goal:** For each `(university, year)` combination, compute the leave-self-out (LOO) peer quality measure — the central independent variable in the analysis. **Code:** `pool_metrics.py`. **Output:** `faculty_panel_with_pools.jsonl` (72 MB).
 
-**The LOO measure:** For person *i* in department *d* in year *t*, peer quality is the mean publication rate of all other faculty in the same department-year, excluding person *i*:
+**The LOO measure:** For person *i* in department *d* in year *t*, peer quality is the mean publication rate of all **other OpenAlex-matched assistant professors** in the same department-year, excluding person *i*:
 
 ```
-poolq_loo(i, d, t) = mean( pubs_year(j, t) for j in dept(d,t) if j ≠ i )
+poolq_loo(i, d, t) = mean( pubs_year(j, t) for j in dept(d,t) if j ≠ i AND j has OA data )
 ```
 
 This mirrors the Army setting (where each officer's pool mean excluded their own OER score) and the basketball setting (where each player's teammate quality excluded themselves).
 
 **Why leave-self-out?** Including person *i* in their own peer quality measure creates mechanical correlation between the independent variable and the outcome. The LOO approach breaks this endogeneity.
 
-**Additional pool metrics to compute:**
-- `pool_size` — number of tenure-track faculty in the department-year
-- `pool_sd` — standard deviation of publication rates (measures pool dispersion)
-- `pool_rank_loo` — person *i*'s rank within their pool (relative standing)
+**Actual pool columns added to panel:**
+- `pool_size_all` — total assistant professors in dept-year (all ranks, regardless of OA)
+- `pool_size_oa` — assistants with OpenAlex data in dept-year
+- `pool_size_oa_loo` — OA assistants excluding person *i*
+- `poolq_loo_mean` — LOO mean pubs/year (primary regressor; `None` if `pool_size_oa_loo=0`)
+- `poolq_loo_sd` — LOO std dev (`None` if `pool_size_oa_loo < 2`)
+- `pool_rank_loo` — ordinal rank of person *i* in full OA pool (1=lowest)
+- `pool_pctile_loo` — percentile (0–100) in OA pool
 
 ---
 
-### CELL 9 — Analysis: Inverted-U Check
+### CELL 9 — Analysis: Inverted-U Check — ✅ Complete (preliminary)
 
-**Goal:** Test whether the inverted-U pattern from the Army and basketball settings also appears in academic tenure.
+**Goal:** Test whether the inverted-U pattern from the Army and basketball settings also appears in academic tenure. **Code:** `stage9_analysis.py`. **Artifacts:** `stage9_inverted_u.png`, `stage9_binned_table.csv`.
 
-**Primary analysis:** Bin departments by their LOO peer quality measure (ventiles or deciles, as in the basketball analysis). For each bin, compute the tenure rate (probability that an Assistant Professor is promoted to Associate within 7 years). Plot tenure rate vs bin index.
+**What was done:** Faculty-years binned into **18 equal-width bins** of `poolq_loo_mean`. For each bin: `tenure_rate = n_tenure / n_resolved` (resolved = tenure + attrition; right-censored excluded). 95% CI via Wilson interval.
 
-**The prediction:** If the pattern holds, the curve should rise from low-quality pools, peak somewhere in the middle of the quality distribution, and fall back at the highest quality pools — mirroring the Army and basketball figures.
+**Result (May 2026):** Non-monotone pattern consistent with inverted-U hypothesis:
+- Lowest bins (~bin 1–2, LOO median ≤0.74 pubs/yr): tenure rate ~0.30–0.35
+- Mid bins (~bin 3, 7, 9–11, LOO median 1.3–3.8): tenure rate ~0.49–0.56
+- Upper bins (~bin 16–17, LOO median 7.6–8.6): tenure rate 0.67–0.70
+- Top bin (bin 18, LOO median 12.7): tenure rate drops to 0.42 ← **key inverted-U signal**
 
-**Secondary analyses:**
-- Linear Probability Model (LPM): `tenure_event ~ poolq_loo + poolq_loo² + pubs_cumulative + years_on_track + dept FE`
-- Survival analysis (time-to-tenure): Cox proportional hazards model
-- Heterogeneity: Does the inverted-U differ by subfield (systems vs theory vs ML)?
+**Caveats:** Unconditional bins (no controls); high right-censoring (~50–60%); ~18–46 resolved cases per bin; OA linkage partial (~32% HIGH confidence).
+
+**Secondary analyses — status:**
+- Linear Probability Model: **not yet estimated**
+- Survival analysis (Cox proportional hazards): **wired in Cell 10 / 10.5** — see below
+- Heterogeneity by subfield: **not yet implemented**
+
+---
+
+### CELL 10 — Cox Survival Model — ✅ Wired / Runnable
+
+**Goal:** Time-to-tenure Cox proportional hazards model with time-varying covariates. Toggle via `RUN_CELL10` in Cell 0.
+
+**Input frame:** `df_pipeline_09_filtered` (assistant-professor rows filtered from the enriched panel).
+
+**Key time-varying covariate columns (from `COLUMN_CONFIG`):** `cum_tb_fwd_rtr`, `pool_minus_mean_snr_fwd`, `tb_ratio_fwd_snr`, `pool_tb_ratio_rank_rtr_fwd`, and variants (raw, binned, lagged). These columns come from snapshot data (`df_pipeline_09_filtered`) — **not** from Cell 10.5 z-scored frame.
+
+**Warning at Cell 10 output:** If `z_*`, `*_sq`, or `star_pool_interaction` columns appear in the missing-covariate warning, that is **expected** — those are created by Cell 10.5, not by Cell 9. Run Cell 10.5 first if the model spec includes those terms.
+
+---
+
+### CELL 10.5 — Z-Score + Feature Engineering for Cox — ✅ Implemented
+
+**Goal:** Scale continuous covariates and engineer quadratic / interaction terms for the Cox model. Output: `df_pipeline_10_5_cox_zscored`.
+
+**Columns created here (not available on raw snapshots):**
+- `z_tb_ratio_fwd_snr` — z-scored forward TB ratio
+- `z_pool_minus_mean_snr_fwd` — z-scored LOO pool quality difference
+- `z_tb_ratio_fwd_snr_sq` — quadratic term
+- `z_pool_minus_mean_snr_fwd_sq` — quadratic term (for inverted-U test)
+- `star_pool_interaction` — interaction term
+
+**Cell 12 loads `df_pipeline_10_5_cox_zscored`** when `RUN_SCALE` is set in Cell 0. This is the frame used for model fitting.
+
+---
+
+### 543 — Package Panel for Advisor / External Use — ✅ Created (May 2026)
+
+**Notebook:** `tenure/543_package_panel.ipynb`
+
+Reads `faculty_panel_with_pools.jsonl`, reorders columns (human-readable priority columns first, then remaining), and writes `faculty_panel_advisor.csv` to `tenure_pipeline/`. Also produces `R1_tenure_data.csv` (same data, alternative name used in some contexts).
+
+**Column glossary:** `tenure/documents/PANEL_CSV_GLOSSARY.md` — full definitions for all 27 columns including `match_confidence` tier explanations.
 
 ---
 
@@ -623,10 +684,15 @@ This matches the broader rule: **capture wide, resolve narrow** — metadata and
 
 ---
 
-## 6. Files on Disk (Current State — April 2026)
+## 6. Files on Disk (Current State — June 2026)
 
 ```
 540_tenure_pipeline.ipynb              ← pipeline conductor notebook (workspace root)
+543_package_panel.ipynb                ← advisor CSV export (tenure/)
+
+tenure/documents/
+  PANEL_CSV_GLOSSARY.md                ← column definitions for advisor CSV
+  PEER handoff: see 3-Master_Plan/PEER_report to master planner.md
 
 tenure_pipeline/
   dblp_parsed/
@@ -639,7 +705,16 @@ tenure_pipeline/
   faculty_snapshots_parsed.jsonl           ← parsed faculty records (CELL 4)
   faculty_snapshots_strategy_audit.jsonl   ← parser strategy metadata (CELL 4)
   faculty_panel.jsonl                      ← longitudinal panel + Wayback timestamps (CELL 5)
-  faculty_panel_collisions.jsonl             ← name-key collision QA (CELL 5)
+  faculty_panel_collisions.jsonl           ← name-key collision QA (CELL 5)
+  faculty_panel_enriched.jsonl             ← CELL 7: pubs + tenure/attrition/censoring (55 MB)
+  faculty_panel_with_pools.jsonl           ← CELL 8: LOO pool metrics (72 MB; analysis spine)
+  faculty_panel_advisor.csv                ← CELL 543 / export: flat CSV for advisors (27 cols)
+  R1_tenure_data.csv                       ← same panel as CSV (alternate filename in use)
+  stage9_inverted_u.png                    ← CELL 9: binned tenure rate vs pool quality
+  stage9_binned_table.csv                  ← CELL 9: 18 bins + Wilson CIs
+  stage9_analysis.py                       ← stage 9 logic (importable)
+  panel_builder.py                         ← enriched panel + outcome flags
+  pool_metrics.py                          ← LOO pool quality columns
   school_enrollment_annual.csv             ← IPEDS fall headcount by school/year (rebuild: `541` / `build_school_enrollment_from_ipeds.py`)
   ipeds_unitid_crosswalk.json              ← name → UNITID (IPEDS builder)
   ipeds_download_errors.jsonl              ← IPEDS HTTP/cache outcomes (see §7.5)
@@ -941,5 +1016,7 @@ TEST_PARSE=1 python tenure/tenure_pipeline/discover_faculty_urls.py
 4. **Scope:** The `dept_name` and `notes` columns track EECS vs CS naming and oddball cases.
 
 ---
+
+*Revised **2026-06-08 (rev 19):** **§2** pipeline table updated — Cells 7, 8, 9 marked ✅ Complete with actual output files; Cells 10 and 10.5 added. **§4** heading updated from "What Is Planned" to "Implementation Notes"; Cell 7 description corrected (OpenAlex replaces DBLP as pub source; actual column names from `panel_builder.py`); Cell 8 corrected to actual `pool_metrics.py` output columns; Cell 9 updated with actual stage 9 results (inverted-U signal confirmed, May 2026); Cells 10, 10.5, and 543 (`package_panel`) documented. References to `PANEL_CSV_GLOSSARY.md`, `PEER_Status_Update_for_VECTOR_2026-06-03.md`, and `advancement_under_constrained_distinction_dakota_feedback_v03.rtf` (Dakota briefing, June 2026) noted.*
 
 *Document written by PEER, April 4, 2026. Revised **2026-04-16 (rev 18):** **§7** Rule 8 added — incremental write+flush pattern for all long-running pipeline scripts; `.cursor/rules/incremental-writes.mdc` created; `Pertinent_Thoughts_Tenure.md` updated with same. Revised **2026-04-16 (rev 17):** **§7.7** `discover_faculty_urls.py` algorithm upgraded to `matchType=domain` (apex-domain-first strategy): one CDX query per university discovers all subdomains, new CS-subdomain scoring bonus (+15 pts), mirrors manual Wayback navigate-from-root workflow. Revised **2026-04-16 (rev 16):** **§7.7** `discover_faculty_urls.py` — automated CDX wildcard discovery, path scoring, and URL suggestion for low-quality schools (36 schools below threshold; replaces manual Wayback browsing workflow). Revised **2026-04-16 (rev 15):** **§4** CELL 6A–6B section rewritten: CDH bulk snapshot **implemented** (not pending), incremental snapshot cache (`openalex_snapshot_cache.jsonl`), `build_openalex_cache.py` / `build_openalex_cache.slurm` standalone cache builder, four-route auto-detection logic (snapshot → cache-only → API → blocked), `STAGE6B_API_FALLBACK` constant, coffee-shop / offline workflow with rsync; **§2** pipeline table updated; **§6** file list updated with new artifacts.  Revised April 5, 2026 (rev 3) for Wave 3 and Cells 3D/3E. Revised April 7, 2026 (rev 4) for **168-school `PILOT_SCHOOLS`**, CDX 2s delay / 20s timeout / retry queue + Cell 3A-RETRY, bookmark/`tried_urls` behavior, Cell 4 outputs (`faculty_snapshots_parsed.jsonl`), and removal of stale 71/114 coverage snapshot. Revised April 8, 2026 (rev 5) for **Option B** on-disk paths (`faculty_snapshots/<uni_slug>/<source_id>/…`), `faculty_source_id()` / `iter_school_html_files()`, and `legacy/`. Revised April 10, 2026 (rev 6): **§0** clarifies split vs **`TENURE_DATA_GAMEPLAN.md`** (gameplan restructured to mirror sports gameplan). Revised April 10, 2026 (rev 7): **§0** adds **§G1–§G14** gameplan anchors + gameplan stage map ↔ overview §2–§4 table; gameplan working agreement links to this §0. Revised April 2026 (rev 8): **§5** adds **Temporal keys** (exact Wayback timestamps vs spring/fall design strata) and **Collisions** (blending, contradiction flags, linker as baseline). Revised April 2026 (rev 9): **CELL 5** panel + plan join; pipeline table renumbered (6–9); **`faculty_linker`** basename fallback for legacy HTML paths. Revised April 2026 (rev 10): **CELL 3A** multi-capture per season band (`CDX_SNAPS_PER_SEASON`); timestamped filenames; **CELL 5** panel dedupe includes **`local_path`**; gameplan **Snapshot identity** + working agreement **fix plumbing early**. Revised **2026-04-11 (rev 11):** **`CDX_SNAPS_PER_SEASON` = 12**, **`CDX_SPACING_POOL_MULT`**, **`CDX_SLEEP_BEFORE_RETRY_SEC`** bridge cell; CDX timeouts **45s / 60s**; **`tried_urls`** / clean-slate semantics; Option B examples + index schemas use **`<year>_<season>_<timestamp>.html`**; **429** vs timeout; Cell 4 condemn = **default off** (`CELL4_CONDEMN_ON_FAILURE`). Revised **2026-04-10 (rev 12):** **§7.5** IPEDS fall enrollment (`541` / `build_school_enrollment_from_ipeds.py`): artifacts, **`HD_YEAR`** (directory vs enrollment years), **`ipeds_download_errors.jsonl`** outcomes table, HTTP backoff behavior. Revised **2026-04-12 (rev 13):** **§4** CELL **6A–6B** OpenAlex (`openalex_resolver.py`) + **bulk snapshot at UVA pending access**; pipeline table updated; **§7.5** `stale_cache_removed` outcome + auto-cache validation; **§7.6** Stage viz (`plot_stage3a`, **`plot_stage3a_enrollment_bin_heatmap`**, etc.); **§6** file list — enrollment + OpenAlex + IPEDS artifacts. Revised **2026-04-14 (rev 14):** **§0** adds cross-reference to **`HPC_SETUP_CHECKLIST.md`** (Git vs `rsync`, `.env`, conda, canonical `tenure_pipeline/` paths on Rivanna).*

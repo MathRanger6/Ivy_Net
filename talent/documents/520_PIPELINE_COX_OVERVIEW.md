@@ -544,6 +544,8 @@ Pool stats are computed using one groupby per pool key and reused for mean, size
 **Cell 11: Plots and analysis dataset**
 - Output: `df_pipeline_11_cox_analysis`
 - Builds `df_analysis` from basic_demographic_cols, static_cols, time_varying_cols, and **model_time_varying_cols** (so interaction/quadratic columns from the run config are available for CR plots).
+- **Main loop:** KM and competing-risks plots from `PLOT_CONFIG['plots']` (pool-quality binned CIF curves + optional CIF bar panels).
+- **Optional add-on (advisor):** When `CR_TB_STRATIFY_CONFIG["enabled"]` is True, **`cr_tb_stratify.run_tb_stratified_cr_after_main`** runs **after** the main loop and re-runs each **competing_risks** spec (+ CIF bars when enabled) for low / med / high **own-TB** strata (last snapshot per officer). Default is **off**. See **`CR_TB_STRATIFY_Advisor_Three_Panels.md`**.
 
 **Cell 12: Cox regression**
 - 12.1 prepares data and validates structure.
@@ -570,6 +572,22 @@ Pool stats are computed using one groupby per pool key and reused for mean, size
 - `cif_bar_legend_outside`: legend placement
 - `include_z_cols`: auto include z cols for plotting when enabled
 - `log_x`, `log_y`: optional log scaling in `plot_var_distribution()`
+
+### Optional own-TB stratified CR add-on (Cell 11)
+
+**Purpose:** Advisor-facing **faceted** competing-risks outputs: same pool binning and timeline as the main inverted-U plots, but restricted to officers in tertiles of **own** TB (default column `z_tb_ratio_fwd_snr` on the **last** interval per `pid_pde`).
+
+**Config:** `pipeline_config.py` → **`CR_TB_STRATIFY_CONFIG`**
+- `enabled`: default **False** (main full-sample plots always run first)
+- `tb_stratify_col`: own-performance column for stratum assignment
+- `stratum_method`: **`quantile`** (roughly equal N) or **`equal_width`** (equal range on TB/z scale)
+- `stratum_labels`: e.g. `low_tb`, `med_tb`, `high_tb`
+
+**Code:** `cr_tb_stratify.py`; Cell 11 calls `run_tb_stratified_cr_after_main` after the main plot loop. Plot titles/metadata get **`cr_tb_stratify_title_suffix`**; filenames include **`_tbq_`** or **`_tbew_`** plus stratum so outputs do not overwrite.
+
+**Interpretation (important):** Strata filter **which officers**; **within-panel pool bins** still come from the plot spec’s `variable` / `n_bins` (usually pool-quality, not own-TB). For CR curve mechanics (last row per officer, cumulative CIF), see **`CR_Red_Line_Flow_Explanation.md`**.
+
+**Docs:** `CR_TB_STRATIFY_Advisor_Three_Panels.md`
 
 ## Quadratic Terms and CIF Bar Alignment
 

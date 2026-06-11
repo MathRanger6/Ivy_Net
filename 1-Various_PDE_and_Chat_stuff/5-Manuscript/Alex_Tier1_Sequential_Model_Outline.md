@@ -83,19 +83,19 @@ One table: object → meaning → `df` column / construction step (`530` / panel
 ## 6A. Paper Directions 11 — pool formation, promotion rules, and where they live
 
 **Source:** `transcripts/20260515_Paper_Directions_11_otter_ai_transcript.pdf` (2026-05-15).  
-**Do not confuse with §6:** §6 is the **Wang-style empirical ladder** on **realized** pools. PD11 is about **questioning the rules** that put people in pools and that turn pool context into promotion — especially **pre-sorting / team building** in a **generative** layer (planned **`538`**; **`537` frozen**), not re-running more parameter grids.
+**Do not confuse with §6:** §6 is the **Wang-style empirical ladder** on **realized** pools. PD11 is about **questioning the rules** that put people in pools and that turn pool context into promotion — especially **pre-sorting / team building** in a **generative** layer (**implemented** in **`538` / `538D` CELL 10–12** + `tier1_pool_assignment.py`; **`537` frozen**), not re-running more parameter grids.
 
 ### What PD11 is *not* asking for (here)
 
 - Replacing §6 with new bins/LPM/logit specs alone.
 - Calibrating the generative model by **copying observed college team means** — Alex: misleading for a **multi-domain** minimal story (forensic checks on overlap/inequality across domains are fine).
-- Treating **538** as if it had already solved pool formation — it has not (see **Where each thread lives** below).
+- Treating **538** generative as **finished science** — assignment + congestion score are **implemented** (June 2026), but **L_Q-axis inverted-U match to 530** is still open (see **Where each thread lives** and `Scout_Status_Update_for_VECTOR_Laszlo_Briefing_2026-06-02.md`).
 
 ### Three threads (meeting order of emphasis)
 
 | # | Thread | Question | Priority in code |
 |---|--------|----------|------------------|
-| **A** | **Pre-sorting / how teams (pools) are built** | How do we **assign** individuals to local pools so pools **overlap** in talent, are not rigidly ordered slices, and **# pools ≫ # quantile bins**? | **`538`** (planned generative cells + `tier1_sim_config.py`). **`537` frozen** (legacy sort-and-chop in `assign_pool_ids`). Forensics: **`530` CELL 8–9.** |
+| **A** | **Pre-sorting / how teams (pools) are built** | How do we **assign** individuals to local pools so pools **overlap** in talent, are not rigidly ordered slices, and **# pools ≫ # quantile bins**? | **`538` / `538D` CELL 10–12** + `tier1_pool_assignment.py` + `tier1_sim_config.py` (**live**). **`537` frozen** (legacy sort-and-chop). Forensics: **`530` CELL 8–9.** |
 | **B** | **Pool mean × pool dispersion** | Does advancement depend on LOO **mean** peer ability *and* LOO **SD** of peer ability (crowding vs distinction)? | **`538` CELL 4B, 4C** (exploratory EDA). Columns: `congestion_quality`, `peer_perf_sd_loo` (`tier1_mechanism_vars.py`). |
 | **C** | **Promotion score vs local rank** | Should promotion weight **gap to pool mean** (\(A_i - \bar A_{\text{pool}}\)) rather than **rank within pool** (same rank whether peers are tight or spread)? | **`537`** first — e.g. `ADDITIVE_LOCAL_RANK_WEIGHT` / score mode in `sim_config.py`, Cell 10 playground. **Then** revisit **A** if shape does not move. |
 
@@ -150,7 +150,7 @@ One table: object → meaning → `df` column / construction step (`530` / panel
 
 | Layer | Pools | PD11 threads |
 |-------|--------|----------------|
-| **`538`** | **Empirical:** fixed panel (`team_id`, `season`). **Generative (planned):** soft assignment calibrated to 530 | **B** (4B/4C) + §6 ladder; **A** when generative cells land |
+| **`538` / `538D`** | **Empirical:** fixed panel (`team_id`, `season`). **Generative (June 2026):** soft τ≈0.65 assignment + congestion score \(A - w L_C\); Plot B axis toggle (`SHOW_PLOT_B_TEAM_MEAN`) | **B** (4B/4C) + §6 ladder; **A** (CELL 10–12); **4D** heterogeneity wired, narrative parked |
 | **`537`** | **Frozen** legacy sim — sort-and-chop + Cell 10 widgets | **C** (promotion score); compare old assignment only |
 | **`530` CELL 5–9** | Real panel forensics | Mean/SD histograms, mean×SD, interval overlap |
 | **`535` / `tier_1_roadmap.md`** | Pipeline + heavy EDA on same realized pools | Mechanism columns; not generative reassignment |
@@ -170,7 +170,7 @@ One table: object → meaning → `df` column / construction step (`530` / panel
 ## 7. Where simulation fits (`537` vs `538`)
 
 - **`538` (empirical):** §4–§6 ladder on **real** `(team_id, season)` pools — primary Alex deliverable.
-- **`538` (generative, planned):** soft assignment + replay **530-style** overlap checks; knobs in `tier1_sim_config.py`.
+- **`538` / `538D` (generative, June 2026):** soft assignment + **congestion-adjusted selection** + Plot A/B; **539 selection** preset imports score + [0,1] scales (not full 539 DGP). Open: inverted-U on **\(L_Q\)** LOO axis vs empirical 530. Knobs: `tier1_sim_config.py`, `538_Cell10_Generative_Manual.md`.
 - **`537` (frozen):** legacy sort-and-chop lab + Cell 10 widgets; use only to compare **old** assignment or to try **promotion-score** (Thread C) tweaks via `sim_config.py`.
 - **`530` CELL 5–9:** forensic targets for calibrating generative assignment (not simulation).
 
@@ -220,7 +220,7 @@ Alex’s sequence is how you **lock a minimal empirical model** in one domain. T
 | §6.2 | Quadratic LPM + \(L^*\) | **5** | Overlay: binned means + fitted LPM (\(\tilde A=0\)). |
 | §6.3 | Logit + \(L^*\) | **6** | Same z-scores as **5**; needs `statsmodels`. |
 | §6.4 | Inference / robustness | **7+** | Not implemented yet. |
-| §6A (PD11-A) | Generative pool assignment (planned) | **`538`** + `tier1_sim_config.py` | Calibrate to **530** CELL 8–9. |
+| §6A (PD11-A) | Generative pool assignment + selection | **`538` / `538D` CELL 10–12** + `tier1_pool_assignment.py` | Calibrate Plot A to **530** CELL 8–9; congestion score + axis toggle per June Scout update. |
 | §6A (PD11-C) | Promotion score experiments | **`537`** Cell 10, `sim_config.py` | Legacy only; optional compare to 538. |
 | §7 | Forensics / legacy sim | **530** CELL 5–9; **`537`** frozen | Empirical ladder in **538** §4–§6. |
 
@@ -230,8 +230,8 @@ Alex’s sequence is how you **lock a minimal empirical model** in one domain. T
 
 ## What this document is *not*
 
-- **Not “PD11 = only the heatmap.”** PD11’s **center of gravity** is **pre-sorting / pool construction** (**§6A thread A**, planned in **`538`**; **`537` frozen**). The **Q × peer SD** block (**4B** / **4C**, **§6A thread B**) is one empirical check; **promotion vs rank** (**§6A thread C**) can still be probed in **537** Cell 10.
-- **Not “538 solves pool formation.”** **538** §6 assumes **realized** `(team_id, season)` pools; see **§6A**.
+- **Not “PD11 = only the heatmap.”** PD11’s **center of gravity** is **pre-sorting / pool construction** (**§6A thread A**, **CELL 10–12** in **`538` / `538D`**; **`537` frozen**). The **Q × peer SD** block (**4B** / **4C**, **§6A thread B**) is one empirical check; **promotion vs rank** (**§6A thread C**) can still be probed in **537** Cell 10.
+- **Not “generative replicates 530 bin-for-bin.”** Empirical §6 uses **realized** pools; generative **CELL 10** produces inverted-U vs **team_mean** (539-style) more readily than vs **\(L_Q\)** LOO — see June Scout status doc.
 - **Not the same as `tier_1_roadmap.md`.** That file is the **living checklist for `535`** (pipeline contract, `df` columns, 535 CELL 0). **538** follows *this* outline §4–§6; the roadmap *links* here but still centers **535** for mechanism EDA and exports.
 - **Spine for Alex meetings:** §1–§6 + §10 (**538** empirical). **Generative rulebook:** **§6A** + `Tier1_Presorting_Design_Note.md` + `tier1_sim_config.py` (**538**, when coded). **Legacy sim:** **537** only.
 
@@ -245,4 +245,5 @@ Alex’s sequence is how you **lock a minimal empirical model** in one domain. T
 | 2026-05-18 | **§6A:** PD11 pool formation, promotion rules, 538 vs 537 split; §3/§7/§10/“What this is not” cross-refs. |
 | 2026-05-18 | §10: `538` cell map; §4/§6 cross-refs; clarify vs `tier_1_roadmap` and Paper Directions 11. |
 | 2026-05-12 | §9: Wang-style cross-domain program — same skeleton, measurement bridge per domain; `537` for comparative statics. |
+| 2026-06-08 | §6A/§7/§10: generative **implemented** (CELL 10–12, congestion score, `SHOW_PLOT_B_TEAM_MEAN`); 538D parallel lab; L_Q match still open. |
 | 2026-05-12 | Initial skeleton: Alex-sequenced spine; links to existing briefing + new `538` notebook. |

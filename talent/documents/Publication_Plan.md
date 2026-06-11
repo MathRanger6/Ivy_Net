@@ -17,7 +17,8 @@ This document covers: mechanism articulation, research communities/venues, and e
 - **Research**: We study whether **rating-pool quality** (mean performance of peers in your evaluation pool) predicts **promotion probability** for U.S. Army officers. Pools are defined by senior rater × time (and optionally rank/branch); performance is "top block" (TB) share; outcome is promotion (e.g., CPT→MAJ), analyzed with competing-risks CIF.
 - **Data we use**: Personnel snapshots (502), OERs (512), and a Cox/pool pipeline (520) that builds cohort, pool definitions, pool-level metrics (mean TB, pool-minus-mean), and time-to-promotion. Unit (UIC) data exist for future division/battalion/brigade linkage. Data are proprietary; we cannot share.
 - **Coding**: 502 → 512 (OER assignment) → 520 (pool metrics, Cox, CIF). Run 1 (17_1): TB ratio and pool-minus-mean as predictors; equal-width bins; CIF and Final CIF by bin.
-- **Initial finding**: **Inverted U**: Promotion probability **increases** as pool quality increases, then **decreases** at very high pool quality (diminishing returns). Result holds with 8 and 25 equal-width bins. We want to test whether this pattern replicates in other settings using **public** data — hence the external data search.
+- **Initial finding**: **Inverted U**: Promotion probability **increases** as pool quality increases, then **decreases** at very high pool quality (diminishing returns). Result holds with 8 and 25 equal-width bins.
+- **Replication status (June 2026):** **Basketball (SCOUT)** — inverted-U on LOO teammate pool quality vs NBA draft (**replicated**). **Academia (PEER)** — preliminary inverted-U on LOO dept pub rate vs tenure (**stage 9**, dirty-OK). Army remains **Setting 1** anchor; three-setting story is now **empirically underway**, not only aspirational.
 
 ---
 

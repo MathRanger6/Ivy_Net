@@ -338,11 +338,12 @@ Alex separated four threads. They are **not** the same task.
 
 `Alex_model.md` lists example thresholds for $\mathbb{1}(a_j > \theta)$: top PPM share, draft probability, McDonald’s All-American, future pro, **combine invitation**.
 
-| Signal | Role in $C_{i,t}$ | Repo status (May 2026) |
+| Signal | Role in $C_{i,t}$ | Repo status (June 2026) |
 |--------|-------------------|-------------------------|
 | `perf` / BPM / WS/40 | Continuous $a_j$ for $\theta$ or smooth $v_j$ | `perf` on 530 panel; SR merge |
-| LOO mean `poolq_loo` | $\bar{a}_t$-like **quality**, not crowding | 530, 538 CELL 10 |
-| LOO sum `pool_c_loo` | Near-redundant with mean at fixed $n$ | 538 crowding mode |
+| LOO mean `poolq_loo` | $\bar{a}_t$-like **quality**, not crowding | 530, 538/538D empirical + Plot B (\(L_Q\) axis) |
+| `crowding_smooth` / `pool_c_smooth_loo` | LOO mean \(\sigma(\gamma(A-\theta))\) — **viable-peer congestion** | **Implemented** in `tier1_pool_assignment.py` + CELL 10; 539 preset (θ≈0.72, γ≈10) |
+| LOO sum `pool_c_loo` | Near-redundant with mean at fixed $n$ | Legacy crowding mode; prefer `crowding_smooth` |
 | $Y_{\text{draft}}$ | Outcome + possible $\theta$ component | `athlete_id_draft_lookup` |
 | Combine | Prospect visibility / $\theta$ | `combine_bridge.py` → `athlete_id_combine_lookup.csv`; **measurement row**, not full invite list |
 | Labeled union $Y_{\text{nba\_signal}}$ | “Serious NBA-facing peer” for **thicker** $\theta$ | Design discussed; not in panel export yet |
@@ -363,7 +364,7 @@ Alex separated four threads. They are **not** the same task.
 ### Suggested implementation order (repo)
 
 1. **`tier1_mechanism_vars.py` / 530 export:** `peer_viable_count_loo` (and optional smooth $C_{i,t}$ from `539` logic); keep `poolq_loo` as quality leg.
-2. **538 CELL 10:** Third playground mode or replace “crowding = LOO sum” with **viable-peer count**; label UI clearly (quality vs. crowding).
+2. **538 / 538D CELL 10:** `crowding_smooth` mode live; optional next step = **viable-peer count** hard threshold; Plot B axis toggle (`SHOW_PLOT_B_TEAM_MEAN`) documents quality vs team_mean conditioning.
 3. **`539_alex_model.ipynb`:** Cells for Priority 1–2 (fit / identifiability, parameter kill switches).
 4. **`panel_rebuild` / `combine_bridge`:** Optional `Y_combine_meas`, `Y_nba_signal` on `player_season_panel_530.csv` for $\theta$ robustness.
 5. **Writing:** Short PD12 cross-ref in advisor briefs; do **not** claim all six mechanisms are separately identified in MBB v1.
@@ -383,4 +384,4 @@ Alex separated four threads. They are **not** the same task.
 - NHL (or other) **negative case** data feasibility for Priority 4.
 - Country-level economics as fourth **positive** domain vs. falsification case.
 
-*Addendum last updated to reflect PD12 transcript and repo state as of May 2026.*
+*Addendum last updated to reflect PD12 transcript and repo state as of June 2026 (congestion score in CELL 10; see `Scout_Status_Update_for_VECTOR_Laszlo_Briefing_2026-06-02.md`).*

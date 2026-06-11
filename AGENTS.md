@@ -20,6 +20,19 @@
 - Include small tracked artifacts under `datasets/mbb/` per `datasets/mbb/README_TRACKED_ARTIFACTS.md`.
 - Usually exclude `tier1_cell10_playground_state.json`, large sweep outputs, etc.
 
+## External-facing documents (advisor briefs, etc.)
+
+- COMPASS drafts **markdown**; **Charles approves content** before send.
+- **Charles runs PDF conversion** (`./scripts/convert_single_md_to_pdf.sh …`) unless he says otherwise in that message.
+- Do not aggressively condense, reframe as “decision memos,” or regenerate PDFs without explicit ask.
+
+## Cross-project planning agent — COMPASS
+
+- **COMPASS** (formerly “Master Planner”) — scientific coherence, sequencing, near-term plan. Does not own domain code or manuscript prose.
+- Canonical guidance: `3-Master_Plan/COMPASS_Initial_Guidance_v6.md`, identity note: `3-Master_Plan/COMPASS_AGENT_IDENTITY.md`.
+- Agent handoffs: `3-Master_Plan/{CODA,SCOUT,PEER}_report_to_COMPASS.md`.
+- Question files: `3-Master_Plan/YYYYMMDD_HHMM_COMPASS_to_{AGENT}_questions.md`.
+
 ## Conflicts
 
 These files win unless the user overrides **in that message** (e.g. `skip burn`, `yes, skip rules for this`).

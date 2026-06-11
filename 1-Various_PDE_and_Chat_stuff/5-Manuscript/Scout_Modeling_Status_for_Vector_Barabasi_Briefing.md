@@ -1,5 +1,7 @@
 # Scout → VECTOR: Modeling Status Brief (Barabási / Vespignani / Gates briefing)
 
+> **⚠️ Superseded for generative / June status:** Use **`Scout_Status_Update_for_VECTOR_Laszlo_Briefing_2026-06-02.md`** for current ground truth (congestion score, 539 vs 538D, Plot B axis, L_Q tension). This May 2026 file remains useful for **Wang framing** and **advisory context** (§1–§3).
+
 **Date:** 2026-05-24  
 **Purpose:** Give **VECTOR** (manuscript LLM) an accurate picture of **hard-won findings, current implementation, and forward work** so Charles and Alex can brief **László Barabási** and committee member **Alessandro Vespignani** in Boston (~late May 2026).  
 **Author:** **Scout** — Cursor coding agent on the Ivy_Net workspace (pipelines, generative sims, notebooks, HPC). Scout implements and stress-tests; **VECTOR** carries theory and prose; **Alex Gates** shapes sequencing and publication logic.

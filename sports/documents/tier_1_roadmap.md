@@ -4,7 +4,7 @@
 
 **Notebook:** `sports/535_sports_tier_1.ipynb`
 
-**Alex-sequenced modeling notebook:** `sports/538_alex_tier1_model_and_fit.ipynb` (mirrors `5-Manuscript/Alex_Tier1_Sequential_Model_Outline.md`; `537` remains the simulation-only lab).
+**Alex-sequenced modeling notebooks:** `sports/538_alex_tier1_model_and_fit.ipynb` (empirical + generative CELL 10–12); **`sports/538D_development.ipynb`** (modular lab, June 2026 generative work). `537` remains the **frozen** legacy simulation lab.
 
 **Purpose:** Single place for the mechanical pipeline, the `df` column contract after each stage, and **CELL 0** switches. Update this file as CELL 4+ and modeling land.
 
@@ -38,7 +38,18 @@ Keep this section open while working in `535_sports_tier_1.ipynb`. Green items a
 - <span style="color: green;">DONE — Weighted crowding behavior made explicit:</span> when `PRIMARY_POOL_MODE = "crowding"` and `COMPUTE_WEIGHTED_CROWDING = True`, CELL 4 plots `congestion_crowding_weighted`; when the boolean is false, it plots plain `congestion_crowding`.
 - <span style="color: green;">DONE — First Tier 1 EDA pass:</span> binned bars for `congestion_quality`, plain `congestion_crowding`, and weighted crowding have been compared against the original `poolq_loo` pattern.
 
-### Next / TODO
+### 538 / 538D generative (June 2026)
+
+- <span style="color: green;">DONE — Soft assignment (Thread A):</span> `tier1_pool_assignment.py` + CELL 10–12; τ≈0.65 calibrated to 530 overlap forensics.
+- <span style="color: green;">DONE — Congestion selection score:</span> \(S_i = A_i - w \cdot L_C\) with `crowding_smooth` (LOO mean of \(\sigma(\gamma(A-\theta))\)); `crowding_l_z_scale` auto when ability is z-scored.
+- <span style="color: green;">DONE — 539 selection preset:</span> Beta(2,2) on [0,1], θ≈0.72, γ≈10, w≈0.55 — imports **score + scales**, not full 539 DGP.
+- <span style="color: green;">DONE — Plot B axis toggle:</span> `SHOW_PLOT_B_TEAM_MEAN` in `tier1_sim_config.py` — **False** = \(L_Q\) LOO (530); **True** = team_mean (539-style).
+- <span style="color: orange;">OPEN — L_Q inverted-U match:</span> same congestion score yields inverted-U vs **team_mean**; mostly **decreasing** vs **\(L_Q\)** LOO — empirical 530 axis still harder than 539 readout.
+- <span style="color: orange;">PARKED — CELL 4D heterogeneity:</span> `HETEROGENEITY_TOP_TAIL` wired in 538D; narrative deferred.
+
+**Status doc:** `5-Manuscript/Scout_Status_Update_for_VECTOR_Laszlo_Briefing_2026-06-02.md`. **Operator manual:** `sports/documents/538_Cell10_Generative_Manual.md`.
+
+### Next / TODO (535 empirical path)
 
 - TODO — Decide the first empirical proxy for \(L_{ijt}\): likely start with `poolq_loo` / `congestion_quality`; treat `congestion_crowding`, `congestion_crowding_weighted`, and `minutes` as later decomposition diagnostics unless they earn a clearer first-pass role.
 - TODO — Fix or demote the right-panel dashed model curve: current clipped LPM / PD-style curves can be misleading; print unclipped predictions and coefficients before trusting the curve.
@@ -118,6 +129,7 @@ Keep this section open while working in `535_sports_tier_1.ipynb`. Green items a
 
 | Date | Note |
 | ------ | ------ |
+| 2026-06-08 | Added **538/538D generative** progress block (congestion score, 539 preset, Plot B axis); cross-links June Scout status + CELL 10 manual. |
 | 2026-05-12 | Added `Alex_Tier1_Sequential_Model_Outline.md` and bootstrap `538_alex_tier1_model_and_fit.ipynb` for Alex-ordered exposition; `537` unchanged (simulation). |
 | 2026-05-07 | Added `Tier1_Narrative_Outline.md` to related theory and updated TODOs to reflect the current \(L\)-first Tier 1 framing with crowding/minutes as decomposition diagnostics. |
 | 2026-05-06 | Added manuscript briefing outline link for Alex's May 5 guidance: model components, assumptions, fitting plan, and \(Q^*\) turning point. |

@@ -1,7 +1,7 @@
 # Coda → Scout & Vector: Post-replication sync (Army thread)
 
 **From:** Coda (Army / `520` Cox & competing-risks plotting thread with Charles)  
-**Date:** 2026-04-02 (update as needed)  
+**Date:** 2026-06-08 (rev 2 — third setting PEER active)  
 **Purpose:** Align all three agents on what the Army side **did** and **showed**, now that Scout has reproduced the **inverted-U** pattern in college basketball.
 
 ---
@@ -34,11 +34,15 @@ Charles and Scout replicated the **qualitative shape** of the Army finding in a 
 
 | Item | Role |
 |------|------|
-| `520_pipeline_cox_working.ipynb` | End-to-end Cox + Cell 11 plotting (KM / competing risks, binning, filters). |
-| `cox_plot_helpers.py` | `plot_competing_risks_cif_bars`, palettes, `apply_unknown_group_by_filter`, etc. |
-| `pipeline_config.py` / overrides (e.g. `pipeline_config_div_name.py`) | Plot specs, bin counts, filters. |
-| `current_documents/Army_to_College_Basketball_Replication_Handoff.md` | Longer **replication design** handoff (still useful for history). |
-| `current_documents/Agent_Read_First_Coda_Runbook.md` | Short runbook + copy-paste message to Scout. |
+| **`520_pipeline_cox_working.ipynb`** | End-to-end Cox + Cell 11 plotting (KM / competing risks, binning, filters). **Cell 11 add-on:** `cr_tb_stratify` when `CR_TB_STRATIFY_CONFIG["enabled"]`. |
+| **`cr_tb_stratify.py`** | Own-TB stratum tertiles (quantile or equal-width); re-runs CR + CIF bars per stratum after main Cell 11 loop. |
+| **`cox_plot_helpers.py`** | `plot_competing_risks_cif_bars`, palettes, TB-stratify title suffix, etc. |
+| **`pipeline_config.py` / overrides (e.g. `pipeline_config_19_1.py`, `pipeline_config_div_name.py`)** | Plot specs, bin counts, filters, **`CR_TB_STRATIFY_CONFIG`**. |
+| **`talent/documents/CR_TB_STRATIFY_Advisor_Three_Panels.md`** | Advisor-facing TB-stratify feature doc (enable, upload list, interpretation). |
+| **`talent/documents/CR_Red_Line_Flow_Explanation.md`** | Plain-English Cell 11 CR curve / bin construction. |
+| **`talent/documents/README_Talent_Layout_Symlinks_And_AWS_Export.md`** | Canonical paths, AWS export vs ground truth. |
+| **`talent/documents/Army_to_College_Basketball_Replication_Handoff.md`** | Longer **replication design** handoff (still useful for history). |
+| **`talent/documents/Agent_Read_First_Coda_Runbook.md`** | Short runbook + copy-paste message to Scout. |
 
 ---
 
@@ -61,10 +65,21 @@ Please keep your companion note **technical**: grain (**player–season**), **`p
 
 ---
 
-## 8. Next horizon (tenure / academia)
+## 8. Third setting — PEER (academia / tenure) — **active June 2026**
 
-Charles noted a possible **third setting**: academic careers and tenure. Coda’s stack is **not** the vehicle for that; Vector + Charles should specify **grain** (person-year? department?), **pool** (LOO coauthor? department peers?), and **outcome** (tenure, placement). Army + basketball docs become **templates** for measurement discipline, not copy-paste code.
+Charles and **PEER** (`tenure/`, `540_tenure_pipeline.ipynb`) are now building Setting 3: CS faculty at R1 universities, Wayback rosters + OpenAlex pubs, LOO dept peer quality (`poolq_loo_mean`), outcome = tenure (Asst → Assoc). **Stage 9** (May–June 2026) shows a **preliminary inverted-U** in binned tenure rates (peak bins 16–17, drop bin 18). Coda’s Cox/competing-risks stack is **not** the implementation vehicle, but Army’s **advancement vs attrition** framing is the template PEER is adapting (see `tenure/documents/TENURE_DATA_GAMEPLAN.md`, `5-Manuscript/PEER_Status_Update_for_VECTOR_2026-06-03.md`). Cross-domain committee brief: `5-Manuscript/advancement_under_constrained_distinction_dakota_feedback_v03.rtf`.
 
 ---
 
-*End Coda summary.*
+## 9. April 2026 Army coding updates (Coda thread — post-replication)
+
+| Item | Status |
+|------|--------|
+| **Own-TB stratified CR add-on** | Implemented; default **off**; enable in `CR_TB_STRATIFY_CONFIG`. |
+| **AWS export merge** | Aligned live tree to `TALENT_NET_export_20260421-0802`; TB-stratify re-applied; backup in `obsolete_files/talent_pre_bar_stratify/`. |
+| **Senior rater pool size audit** | **Open concern:** `pool_size_snr_*` can exceed 100 under current `(snapshot_date, snr_col)` grouping — may be definitional, not data error. See `Pertinent_Thoughts.md`. |
+| **Cross-agent master plan** | Charles initiating **COMPASS** agent; feed **`3-Master_Plan/CODA_report_to_COMPASS.md`** (+ SCOUT/PEER/VECTOR reports). **Do not** start planning until Charles assigns the agent. |
+
+---
+
+*End Coda summary. Last updated 2026-06-08.*

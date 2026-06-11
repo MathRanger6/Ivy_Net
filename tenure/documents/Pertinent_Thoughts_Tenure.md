@@ -2,11 +2,27 @@
 
 Observations worth carrying into **dissertation prose**, **limitations**, or **methods** — not a substitute for **`TENURE_PIPELINE_OVERVIEW.md`** (implementation) or **`TENURE_DATA_GAMEPLAN.md`** (contract).
 
-**Re-verify after each major scrape/parse:** Coverage counts, “red tier” schools, and rescue outcomes change when you re-run Cells 3A–4. Use current **`faculty_snapshots_plan.jsonl`**, **`pipeline_health_audit.csv`**, and **stage 4 viz** as ground truth, not the illustrative numbers below unless you have re-checked them. For **enrollment-colored** Stage 3 figures and **IPEDS** rebuild steps, see overview **§7.5–§7.6** (notebook **`541`** / `build_school_enrollment_from_ipeds.py`). **OpenAlex bulk** at UVA is **not** available yet — see overview **§4** and gameplan advisor direction.
+**Re-verify after each major scrape/parse:** Coverage counts, “red tier” schools, and rescue outcomes change when you re-run Cells 3A–4. Use current **`faculty_snapshots_plan.jsonl`**, **`pipeline_health_audit.csv`**, and **stage 4 viz** as ground truth, not the illustrative numbers below unless you have re-checked them. For **enrollment-colored** Stage 3 figures and **IPEDS** rebuild steps, see overview **§7.5–§7.6** (notebook **`541`** / `build_school_enrollment_from_ipeds.py`). **OpenAlex on Rivanna:** CDH bulk snapshot path is **documented and implemented** in overview **§4** (`build_openalex_cache.py`, `openalex_snapshot_cache.jsonl`); Mac/offline workflow uses **rsync’d cache**. Author resolution (6A) may still use API when bulk is unavailable locally.
 
 ---
 
-## Internet Archive / URL limitations (school-level)
+## Stage 9 — Preliminary inverted-U (May 2026)
+
+**Artifacts:** `tenure_pipeline/stage9_inverted_u.png`, `stage9_binned_table.csv` (`stage9_analysis.py`).
+
+**Method (v0):** 18 equal-width bins of **`poolq_loo_mean`** (LOO mean annual pubs among OA-matched assistants in same dept-year). Tenure rate = resolved tenure events / (tenure + attrition); right-censored excluded from denominator.
+
+**Pattern:** Rates rise from weak pools through mid/upper bins; **peak** around bins 16–17 (LOO median ~8–9 pubs/yr; tenure rate ~0.67–0.70); **drop** in bin 18 (LOO median ~12.7; tenure rate ~0.42). Consistent with **elite-tier congestion** story shared with Army (CODA) and basketball (SCOUT).
+
+**For prose — do not over-claim:**
+- Unconditional bins only (no dept FE, no individual controls).
+- High censoring (~58% of ever-assistant persons still censored).
+- OA linkage partial (`NONE` ~58% of person–years); pool quality itself depends on OA-matched peers.
+- N per bin modest (~18–46 resolved cases).
+
+**Next:** Cox with `z_pool_minus_mean_snr_fwd` + quadratic (Cells 10 / 10.5 → 12). Manuscript framing: **`PEER_Status_Update_for_VECTOR_2026-06-03.md`**, Dakota brief §4 (`advancement_under_constrained_distinction_dakota_feedback_v03.rtf`).
+
+---
 
 ### Auburn — often no usable Wayback replay
 
@@ -192,8 +208,4 @@ The pattern is codified as a Cursor project rule in
 
 ---
 
-*Last tightened: **2026-04-16** — added Rivanna operational notes: Playwright
-two-step install gotcha; Cursor Remote SSH vs local Mac workflows; git vs
-rsync data management. Prior: **2026-04-12** — cross-links to overview
-§7.5–§7.6 (IPEDS + viz) and §4 / gameplan (OpenAlex API vs bulk access
-pending).*
+*Last tightened: **2026-06-08** — OpenAlex bulk/cache wording aligned with overview §4 (Rivanna CDH + rsync workflow). Prior: **2026-04-16** — Rivanna operational notes (Playwright two-step install; Cursor Remote SSH; git vs rsync). Prior: **2026-04-12** — IPEDS + viz cross-links.*

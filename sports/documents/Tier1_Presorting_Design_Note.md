@@ -1,6 +1,6 @@
 # Tier 1 pre-sorting design note — pools, overlap, and calibration
 
-**Print date:** 2026-05-18  
+**Print date:** 2026-06-08 (rev 2)  
 **Purpose:** Take-home reference for Alex / PD11 team-building and the Wang-style empirical ladder.  
 **Sources:** Paper Directions 11 transcript (`transcripts/20260515_Paper_Directions_11_otter_ai_transcript.pdf`), `Alex_Tier1_Sequential_Model_Outline.md` §6A, `530_sports_pipeline.ipynb` **CELLs 5–9**.
 
@@ -11,7 +11,7 @@
 | Layer | Question | Where it lives |
 |-------|----------|----------------|
 | **Empirical (realized pools)** | Given actual rosters, what is LOO pool quality \(Q\), dispersion, draft rate, \(L^*\)? | **`538_alex_tier1_model_and_fit.ipynb`** — bins → LPM → logit on `(team_id, season)` from the panel. |
-| **Generative (assignment rules)** | How *should* we put people in pools so overlap and mean–SD patterns look plausible before we simulate promotion? | **Planned in `538`** (new cells + `tier1_sim_config.py`). **`537` stays frozen** as the legacy sort-and-chop + Cell 10 playground lab. |
+| **Generative (assignment rules)** | How *should* we put people in pools so overlap and mean–SD patterns look plausible before we simulate promotion? | **`538` / `538D` CELL 10–12** + `tier1_pool_assignment.py` + `tier1_sim_config.py` (**implemented** June 2026). **`537` stays frozen** as the legacy sort-and-chop + Cell 10 playground lab. |
 | **Forensics (what real data look like)** | Do team talent windows overlap? Mean vs within-team SD? | **`530` CELLs 5–9** on basketball panel (PPM, within-season z). |
 
 **538 does not re-sort the panel.** It measures pools the world already formed. The **new approach** is: (1) use 530 to set **targets** for a generative assigner; (2) implement that assigner in **538** (or a small module `sports/tier1_pool_assignment.py` called from 538); (3) keep **537** unchanged for historical comparison.
@@ -141,11 +141,12 @@ Conceptual move from rank-only:
        sim_config.py + Cell 10 widgets (authoritative for 537)
        assign_pool_ids: sort + chop (A/B/C)
 
-538  — Alex empirical ladder (REAL pools) + NEW generative (planned)
+538 / 538D — Alex empirical ladder (REAL pools) + generative lab (June 2026)
        CELLs 0–6: perf, LOO Q, bins, LPM, logit, L*
-       CELL 4B/4C: mean Q × peer SD (PD11-B)
-       tier1_sim_config.py: defaults for soft assignment (when coded)
-       Future CELLs: simulate pools → replay 530-style checks in-notebook
+       CELL 4B/4C: mean Q × peer SD (PD11-B); 4D heterogeneity (wired, parked)
+       CELL 10–12: soft assign + congestion score A−w·L_C; Plot A overlap + Plot B
+       tier1_sim_config.py + 538_Cell10_Generative_Manual.md
+       SHOW_PLOT_B_TEAM_MEAN: L_Q (530) vs team_mean (539-style)
 ```
 
 ---
@@ -156,14 +157,15 @@ Conceptual move from rank-only:
 
 ---
 
-## 9. Suggested next steps (ordered)
+## 9. Suggested next steps (ordered) — updated June 2026
 
-1. [ ] Read this note + `Alex_Tier1_Sequential_Model_Outline.md` §6A.  
-2. [ ] **538:** finish empirical ladder (CELL 7 inference / robustness) on real pools.  
-3. [ ] **538:** add `tier1_pool_assignment.py` + CELL “simulate rosters” using `tier1_sim_config.py`.  
-4. [ ] Replay **530-style** coverage + mean–SD plots on **simulated** data inside 538.  
-5. [ ] Only if needed: compare to **537** Cell 10 on same promotion rule (C) with old vs new assignment.  
-6. [ ] Update `Alex_Tier1` §10 table when new 538 cells exist.
+1. [x] **538 / 538D:** `tier1_pool_assignment.py` + CELL 10–12 generative playground.  
+2. [x] Replay **530-style** coverage (Plot A) on simulated rosters; calibrate τ≈0.65.  
+3. [x] Congestion selection score \(A - w L_C\) with `crowding_smooth` + scale fix for z-scored ability.  
+4. [ ] **Open:** Match empirical **inverted-U on \(L_Q\)** LOO axis (Plot B with `SHOW_PLOT_B_TEAM_MEAN=False`) — may need assignment noise, threshold rule, or extra terms.  
+5. [ ] **538:** finish empirical ladder (CELL 7 inference / robustness) on real pools.  
+6. [ ] **4D:** return to top-tail heterogeneity narrative when scaffolding is ready.  
+7. [x] Update `Alex_Tier1` §10 table (2026-06-08).
 
 ---
 

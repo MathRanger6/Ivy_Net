@@ -31,9 +31,11 @@
 | **UIC × strong pools; consistency over time** | **Planned + specified** | **`525_plans.md`** lays out UIC aggregation (rated officer company → battalion/brigade), pool-strength definition (mean TB in pool), and senior-rater-first design; notebook still **planning / not yet executed** as primary deliverable. |
 | **Senior rater × consistent strong pools** | **Planned** | Same doc; parameterized for senior rater now, rater role extensible later. |
 | **Division / unit context for pools** | **In progress** | **`div_name`** (and division-aware plots) depends on **DIVISION_CONFIG** path + columns flowing through 08 → 09 → 10 → 11; currently **troubleshooting in 520** (nearly resolved). |
-| **520 core result (inverted U, CIF, Cox)** | **Stable baseline** | Run profile **17_1** and pipeline outputs remain the empirical backbone; refinements are **structure** (divisions, UIC, rater consistency) not replacement of core finding. |
+| **520 core result (inverted U, CIF, Cox)** | **Stable baseline** | Run profile **17_1** / **19_1** and pipeline outputs remain the empirical backbone; refinements are **structure** (divisions, UIC, rater consistency) not replacement of core finding. |
+| **Own-TB stratified CR add-on (Cell 11)** | **Implemented; default off** | `cr_tb_stratify.py` + `CR_TB_STRATIFY_CONFIG`; tertiles of own TB (last snapshot); `stratum_method` quantile vs equal-width. Upload set ready for Army AWS. |
+| **Senior rater pool size audit** | **Open concern** | `pool_size_snr_*` can exceed 100 under `(snapshot_date, snr_col)` grouping — likely definitional; see `Pertinent_Thoughts.md` code-linked notes. |
 
-**One-line summary for you:** *Data integration ahead of the transcript (LT OERs on snapshots) is in place; 525 is fully planned on paper; execution is next once division/UIC plumbing in 520 is clean.*
+**One-line summary for you:** *Data integration ahead of the transcript (LT OERs on snapshots) is in place; 525 is fully planned on paper; execution is next once division plumbing is stable. April–June 2026: TB-stratify add-on coded; pool-size algorithm audit is the next high-priority methods item.*
 
 ---
 
@@ -60,7 +62,7 @@
 | Senior raters / people vs orgs | `525_plans.md` §2.2; `Publication_Plan.md` §1 item 3 |
 | LT OER longitudinal | Snapshot merge in 520; `525_plans.md` §2.2, §8 (Cell 10 caveat) |
 | Mechanism + multi-community framing | `venues_and_mechanism_articulation_llm_brief.md` |
-| External data / “three settings” | `External_Data_Search_Brief.md`, `replication_data_search.md` |
+| External data / “three settings” | `External_Data_Search_Brief.md`, `replication_data_search.md` — **basketball replicated** (Scout); **academia preliminary** (PEER stage 9, June 2026) |
 | Integrated roadmap | `Publication_Plan.md`, `525_plans.md` |
 
 ---
@@ -95,4 +97,18 @@
 
 ---
 
-*Prepared as a briefing aid; numbers and “done” refer to state as described by the student for this meeting.*
+---
+
+## 8. Cross-domain status addendum (June 2026)
+
+| Setting | Agent | Empirical inverted-U | Notes |
+|---------|-------|---------------------|--------|
+| Army | CODA | **Established** (520 CIF/Cox) | Backbone; 525/UIC extensions planned |
+| Basketball | SCOUT | **Replicated** (530 `poolq_loo`) | Generative congestion score live; L_Q-axis generative match open |
+| Academia | PEER | **Preliminary** (stage 9 bins) | Cox wired; formal HR output pending |
+
+Committee-facing whole-project summary: `1-Various_PDE_and_Chat_stuff/5-Manuscript/advancement_under_constrained_distinction_dakota_feedback_v03.rtf`.
+
+---
+
+*Prepared as a briefing aid; numbers and “done” refer to state as described by the student for this meeting. Addendum 2026-06-08.*

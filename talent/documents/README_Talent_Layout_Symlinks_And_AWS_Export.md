@@ -26,14 +26,16 @@
 
 - **Role:** Staging area for **snapshots of “live” code** pulled from the **Army AWS** environment (e.g. `TALENT_NET_export_YYYYMMDD-hhmm/`) so you can **diff, merge, or reapply** changes **locally** in step with advisor guidance.
 - **Not** the day-to-day working tree: treat it as a **source for comparison** until you explicitly fold files into `talent/talent_pipeline/`.
-- **After** merging: note in your commit or lab notebook which export folder you aligned to (avoids “which 520 is truth?” later).
+- **Ground truth (Charles, April 2026):** Everything **outside** `Army_AWS_download/` is authoritative for local work; upload **from** `talent/talent_pipeline/` **to** Army AWS live when ready.
+- **After** merging: note in your commit or lab notebook which export folder you aligned to (avoids “which 520 is truth?” later). Pre-overlay backup example: `obsolete_files/talent_pre_bar_stratify/talent/`.
 
 ---
 
-## 3. Agent conversations and SpecStory
+## 3. Agent conversations, SpecStory, and COMPASS
 
-- **SpecStory** stores portable chat history under **`.specstory/history/`** in the repo (dated `*.md` files).  
-- Use that when you need the **narrative** for why a move or symlink was made (e.g. Phase 1 / roadmap work with Peer); the **architectural** answer is still **`TARGET_WORKSPACE_TREE.md`**.
+- **SpecStory** stores portable chat history under **`.specstory/history/`** in the repo (dated `*.md` files). Charles wants **full history tracked in git** (not ignored).
+- Use SpecStory when you need the **narrative** for why a move or symlink was made; the **architectural** answer is still **`tenure/documents/TARGET_WORKSPACE_TREE.md`**.
+- **Cross-project master plan (2026):** Charles is assembling a **COMPASS** agent (Cursor) fed by **`3-Master_Plan/{AGENT}_report_to_COMPASS.md`** from **CODA** (`talent/`), **SCOUT** (`sports/`), **PEER** (`tenure/`), and **VECTOR** (`5-Manuscript/`). CODA’s report: **`3-Master_Plan/CODA_report_to_COMPASS.md`**. Planning work starts **only when Charles assigns** that agent.
 
 ---
 
@@ -44,6 +46,7 @@
 | Edit 520 / helpers | `talent/talent_pipeline/` (or `talent_pipeline/` at root — same files) |
 | Handoff / Cox / Coda memos | `talent/documents/` |
 | Compare to AWS | `talent/Army_AWS_download/TALENT_NET_export_*/` |
+| COMPASS handoff (CODA) | `3-Master_Plan/CODA_report_to_COMPASS.md` |
 | Workspace move rationale | `tenure/documents/TARGET_WORKSPACE_TREE.md` |
 
 ---

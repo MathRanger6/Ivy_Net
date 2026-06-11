@@ -516,12 +516,20 @@ Important conceptual influences include:
 
 # Final Note
 
-Current priority:
-- get the Tier 1 variables operationalized cleanly,
-- test candidate congestion formulations,
-- and begin exploratory model fitting/simulation.
+**June 2026 addendum (see `Scout_Status_Update_for_VECTOR_Laszlo_Briefing_2026-06-02.md`):**
 
-The immediate goal is not perfection.
+| Rung | Status |
+|------|--------|
+| Empirical inverted-U on realized \(L_Q\) | ✅ 530 / 538 |
+| Talent-only generative baseline | ✅ Fails (monotone) — expected |
+| Congestion score \(A - \lambda L_C\) | ✅ Implemented in CELL 10 |
+| Inverted-U vs **team_mean** (539-style) | ✅ With 539 selection preset |
+| Inverted-U vs **\(L_Q\)** LOO (530 axis) | ⏳ Open — same score, different conditioning |
+
+Current priority:
+- close the **\(L_Q\)-axis** gap (assignment, selection rule, noise placement),
+- finish **538** empirical CELL 7 robustness,
+- keep **three-level** framing honest (stylized fact → minimal score → predictions).
 
 The immediate goal is:
 

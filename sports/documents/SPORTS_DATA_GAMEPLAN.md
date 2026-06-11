@@ -160,16 +160,32 @@ Exact cell order, winsorization, and robustness toggles will be written here or 
 
 **Rule:** Do **not** delete or overwrite anything under **`datasets/mbb/DO_NOT_ERASE/`** while experimenting; write working copies under **`datasets/mbb/`** with a dated suffix if you need variants.
 
-**Checklist**
+**Checklist** — **✅ completed** on refreshed 530 panel (inverted-U on `poolq_loo` ventiles; see `530_sports_pipeline.ipynb` and `tier_1_roadmap.md`).
 
-- [ ] **1. Inputs present.** Confirm you can load: **`datasets/mbb/mbb_df_player_box.csv`** (spine), **`datasets/mbb/athlete_id_draft_lookup.csv`** (or equivalent for **`Y_draft`**), and—if you want SR-backed **`perf`**—**`datasets/mbb/DO_NOT_ERASE/bpm_player_season_matched.csv`**. If **`player_season_panel_530.csv`** already exists from an old run and you trust it, you may start there instead of rebuilding.
-- [ ] **2. Lock v0 definitions (one short note in the notebook).** State: **grain** (player–season), **season range**, **minimum minutes** (or games) if any, **`PERF_METRIC`** for this run (**`ppm`**, **`minutes`**, or SR **`bpm`** / **`obpm`** / **`dbpm`** only if the merge file loads clean), and how **`Y_draft`** is coded (ever-draft v0 is enough).
-- [ ] **3. Build **`perf`** and **`poolq_loo`**.** Reuse logic from the **530** backup if possible: teammate leave-one-out pool quality on **`perf`** for each row. Skip winsorization at first if it slows you down; add a comment that it is “v0 raw.”
-- [ ] **4. Ventiles or bins.** Split **`poolq_loo`** into **ventiles** or **deciles**; within each bin, compute the **mean** or **share** of **`Y_draft`** and **N**. Plot bin midpoints vs draft outcome; overlay a simple smoother if you like. **Inverted-U** = draft prop **rises then falls** as pool quality increases (or your pre-specified direction).
-- [ ] **5. Save advisor-facing artifacts.** Export the **figure** (PNG/PDF) with a **filename that includes the date**; write a **CSV snapshot** of the underlying binned table; keep **one** Markdown or notebook markdown cell with: paths used, row count, and **`PERF_METRIC`**. If the shape looks null or wrong-way, you still “win” the checkpoint—you learned early.
-- [ ] **6. Optional same session: baseline LPM.** Regress **`Y_draft`** on **`poolq_loo`** + **`poolq_sq`** (and minimal controls if you already have them in the panel). Cluster-robust SE by player or team if copy-paste from old code is easy; otherwise OLS for a **dirty** sign check only.
+- [x] **1. Inputs present.** Confirm you can load: **`datasets/mbb/mbb_df_player_box.csv`** (spine), **`datasets/mbb/athlete_id_draft_lookup.csv`** (or equivalent for **`Y_draft`**), and—if you want SR-backed **`perf`**—**`datasets/mbb/DO_NOT_ERASE/bpm_player_season_matched.csv`**. If **`player_season_panel_530.csv`** already exists from an old run and you trust it, you may start there instead of rebuilding.
+- [x] **2. Lock v0 definitions (one short note in the notebook).** State: **grain** (player–season), **season range**, **minimum minutes** (or games) if any, **`PERF_METRIC`** for this run (**`ppm`**, **`minutes`**, or SR **`bpm`** / **`obpm`** / **`dbpm`** only if the merge file loads clean), and how **`Y_draft`** is coded (ever-draft v0 is enough).
+- [x] **3. Build `perf` and `poolq_loo`.** Reuse logic from the **530** backup if possible: teammate leave-one-out pool quality on **`perf`** for each row. Skip winsorization at first if it slows you down; add a comment that it is “v0 raw.”
+- [x] **4. Ventiles or bins.** Split **`poolq_loo`** into **ventiles** or **deciles**; within each bin, compute the **mean** or **share** of **`Y_draft`** and **N**. Plot bin midpoints vs draft outcome; overlay a simple smoother if you like. **Inverted-U** = draft prop **rises then falls** as pool quality increases (or your pre-specified direction).
+- [x] **5. Save advisor-facing artifacts.** Export the **figure** (PNG/PDF) with a **filename that includes the date**; write a **CSV snapshot** of the underlying binned table; keep **one** Markdown or notebook markdown cell with: paths used, row count, and **`PERF_METRIC`**. If the shape looks null or wrong-way, you still “win” the checkpoint—you learned early.
+- [x] **6. Optional same session: baseline LPM.** Regress **`Y_draft`** on **`poolq_loo`** + **`poolq_sq`** (and minimal controls if you already have them in the panel). Cluster-robust SE by player or team if copy-paste from old code is easy; otherwise OLS for a **dirty** sign check only.
 
 **After this checkpoint:** If the pattern is promising, return to **Open points** and the clean conductor; if not, archive the scratch notebook and avoid polishing the full pipeline until the next design pivot.
+
+---
+
+## Stage 5 — Tier 1 modeling & generative lab (538 / 538D)
+
+**Status (June 2026):** Empirical Wang ladder on realized pools in **`538_alex_tier1_model_and_fit.ipynb`**; active generative work in **`538D_development.ipynb`** CELL 10–12.
+
+| Piece | Status | Where |
+|--------|--------|--------|
+| Empirical inverted-U on `poolq_loo` | ✅ Replicated | `530`, `538` CELL 4–6 |
+| Soft pool assignment (Thread A) | ✅ Live | `tier1_pool_assignment.py`, CELL 10 Plot A |
+| Congestion selection \(A - w L_C\) | ✅ Live | CELL 10, `tier1_sim_config.py` |
+| Plot B axis (530 \(L_Q\) vs 539 team_mean) | ✅ Toggle | `SHOW_PLOT_B_TEAM_MEAN` |
+| Generative match to empirical \(L_Q\) U-shape | ⏳ Open | June Scout status doc |
+
+**Docs:** `Alex_Tier1_Sequential_Model_Outline.md`, `tier_1_roadmap.md`, `538_Cell10_Generative_Manual.md`, `Scout_Status_Update_for_VECTOR_Laszlo_Briefing_2026-06-02.md`.
 
 ---
 
@@ -194,4 +210,5 @@ Exact cell order, winsorization, and robustness toggles will be written here or 
 - **2026-03-31:** **Durable CSV mapping equity** — gameplan documents **`college_aliases`**, **`sr_school_slug_crosswalk`**, **`sr_school_slug_aliases`**, and points implementers at **`DO_NOT_ERASE/README.txt`**; stages **2a** and **3** call out **when** to load and **when** to extend those files.
 - **2026-04-01:** **SR expensive artifacts in `DO_NOT_ERASE`** — **`bpm_player_season_raw.csv`**, **`bpm_player_season_matched.csv`**, **`sr_school_slug_crosswalk.csv`**, and schema backup **`bpm_player_season_raw.csv.bak_before_fieldcount_repair`** moved under **`datasets/mbb/DO_NOT_ERASE/`**; **`old_scraped`** (trash recovery) removed; **`README.txt`** updated.
 - **2026-04-01:** **Conductor + package scaffold** — restored **`530_sports_pipeline.ipynb`** as the named conductor; added **`sports_pipeline/`** (`paths`, `config`, **`ingest_box`**, **`draft_match`**, **`sr_bpm`**, **`panel_build`**) and **`pyproject.toml`**. Stages 1–3 are **stubs** (file-exists checks); panel EDA loads **`player_season_panel_530.csv`** and matches prior ventile/LPM scratch behavior.
+- **2026-06-08:** Fast-path checklist marked **complete**; added **Stage 5 — Tier 1 / generative** (538/538D June status).
 - **2026-04-01:** **Fast path checklist** — added **first inverted-U checkpoint** (dirty OK) so exploratory results precede packaging / open-point resolution.

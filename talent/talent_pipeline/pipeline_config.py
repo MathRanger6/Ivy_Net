@@ -814,6 +814,7 @@ CR_TB_STRATIFY_CONFIG = {
     "stratum_labels": ("low_tb", "med_tb", "high_tb"),
     "stratum_col": "_cr_tb_stratum",  # column added in memory (not required in COLUMN_CONFIG)
     "only_competing_risks": True,  # if False, also repeats KM (usually leave True)
+    "stratum_method": "quantile",  # "quantile" (equal-N tertiles) or "equal_width" (equal range on tb_stratify_col)
 }
 
 # ============================================================================

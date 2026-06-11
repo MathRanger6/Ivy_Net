@@ -73,6 +73,10 @@
 | **`tenure_pipeline/dblp_parsed/*.jsonl`** | Per-year DBLP extracts (Cell 1). |
 | **`tenure_pipeline/school_enrollment_annual.csv`** | IPEDS fall headcount by school × year (for viz; rebuild `541` / `build_school_enrollment_from_ipeds.py`). |
 | **`tenure_pipeline/openalex_*.json` / `*.jsonl`** | Cells 6A–6B outputs when run (institution map, author IDs, works-by-year, low-confidence queue). |
+| **`tenure_pipeline/faculty_panel_enriched.jsonl`** | Cell 7: pubs + tenure/attrition/censoring flags. |
+| **`tenure_pipeline/faculty_panel_with_pools.jsonl`** | Cell 8: LOO peer pool metrics (`poolq_loo_mean`, etc.). |
+| **`tenure_pipeline/stage9_inverted_u.png`** / **`stage9_binned_table.csv`** | Cell 9: preliminary inverted-U artifacts. |
+| **`tenure_pipeline/faculty_panel_advisor.csv`** / **`R1_tenure_data.csv`** | Cell 543: flat CSV for advisors / committee (`PANEL_CSV_GLOSSARY.md`). |
 
 **Option B on disk:** `faculty_snapshots/<uni_slug>/<source_id>/<year>_<season>_<timestamp>.html` (multi-capture) or legacy `<year>_<season>.html`; `source_id = faculty_source_id(url)`—see overview.
 
@@ -89,7 +93,10 @@
 | **4** | Cell 4 | Parse HTML → names/ranks | `faculty_snapshots_parsed.jsonl` | Overview §4 |
 | **5** | Cell 5 | Within-school longitudinal panel + Wayback plan join (`snpsht_dt`, etc.) | `faculty_panel.jsonl`, `faculty_panel_collisions.jsonl` | Overview §4 |
 | **6A–6B** | Cells 6A–6B | OpenAlex institution + author resolution + works-by-year (API) | `openalex_*.json` / `*.jsonl` | Overview §4 |
-| **7+** | Future cells | Enriched panel, pool metrics, analysis | enriched `faculty_panel.*`, figures | Overview §4 planned |
+| **7** | Cell 7 | Enriched panel (pubs + tenure/attrition events) | `faculty_panel_enriched.jsonl` | Overview §2 |
+| **8** | Cell 8 | LOO peer pool metrics | `faculty_panel_with_pools.jsonl` | Overview §2 |
+| **9** | Cell 9 | Binned inverted-U check | `stage9_inverted_u.png`, `stage9_binned_table.csv` | Overview §2; §G12 |
+| **10+** | Cells 10, 10.5, 543 | Cox survival + advisor CSV package | `df_pipeline_*`, `faculty_panel_advisor.csv` | Overview §4 |
 
 Full **sentinel rules**, **CDX timeouts**, **3B ghost retries**, and **parser strategies** are **not** duplicated here—see **`TENURE_PIPELINE_OVERVIEW.md`**.
 
@@ -104,7 +111,7 @@ Full **sentinel rules**, **CDX timeouts**, **3B ghost retries**, and **parser st
 3. **Core ingredients to plan explicitly:** (a) **success metric**—tenure / promotion to associate; (b) **peer group(s)**—nested definitions (immediate peers vs broader assistant cohorts—flexible, characterize alternatives); (c) **performance metric**—publications/citations via **OpenAlex** (and ORCID for disambiguation); expect to **try several** specifications.
 4. **Faculty-per-snapshot distribution:** Treat as **department pool size**; very large counts may include non–tenure-track listings—**filter later**, but start measuring.
 5. **Name matching (v0):** Basic **within-school / within-department** consistency before exotic global merges.
-6. **OpenAlex at scale:** Prefer **bulk** OpenAlex (UVA **Connected Data Hub** / HPC: **`.csv.gz`** table shards—authors, works, author–work–affiliation) over hand-fixing author IDs for subsets; **do not** manually merge three OpenAlex IDs unless the same rule can apply **everywhere** (otherwise bias). **Status (Apr 2026):** bulk snapshot access is **not yet provisioned**; Stage **6A–6B** use the **API** (`openalex_resolver.py`) until a mount path exists. See **`TENURE_PIPELINE_OVERVIEW.md` §4** + transcript `2-Way_Ahead/20260410_Paper_directions_4_otter_ai.pdf`.
+6. **OpenAlex at scale:** Prefer **bulk** OpenAlex (UVA **Connected Data Hub** / HPC: **`.csv.gz`** table shards) over hand-fixing author IDs for subsets; **do not** manually merge three OpenAlex IDs unless the same rule could apply **everywhere** (otherwise bias). **Status (June 2026):** **`build_openalex_cache.py`** + **`openalex_snapshot_cache.jsonl`** implement bulk works-by-year on Rivanna when CDH mount is available; Mac uses **rsync’d cache** (see **`HPC_SETUP_CHECKLIST.md`**, overview **§4**). Cell **6A** author resolution may still use API when not on HPC.
 7. **Sanity check literature:** Use **Dakota**-style tenure/productivity work (and any shared **tenure rates**) only to compare **orders of magnitude**—not as the main theoretical anchor.
 8. **Field:** **CS** aligns with DBLP; if linkage rates collapse, **other hard sciences** are acceptable—decide on evidence.
 9. **Working style:** Drive toward a **first end-to-end curve** (even with messy data); **log sample loss** at each filter; **re-run the pipeline** after a day of cleaning rather than cleaning for a week without integrated results. (Rough time split discussed: **most** time on getting the model through; **small** slice on new URLs / edge HTML.)
@@ -135,18 +142,19 @@ Full **sentinel rules**, **CDX timeouts**, **3B ghost retries**, and **parser st
 
 ---
 
-## Stages 6–9 — Match, enriched panel, pools, analysis (planned)
+## Stages 6–10 — Match, enriched panel, pools, analysis, Cox (implemented May–June 2026)
 
-**We will** (order subject to refinement):
+**Delivered** (see **`PEER_Status_Update_for_VECTOR_2026-06-03.md`** and overview §2):
 
 | Piece | Intent |
 |--------|--------|
 | **Entity resolution** | Faculty names ↔ **OpenAlex** (Cells 6A–6B in `540`; `openalex_resolver.py`) with **scalable** rules; DBLP JSONL for cross-checks; optional QA CSV for overrides. **Bulk** OpenAlex at UVA when access exists. |
 | **Panel** | `(person × year)` (or equivalent) with rank transitions, attrition flags, and publication metrics. |
 | **Peer quality** | Leave–self–out (or pre-specified) pool metrics on agreed performance measure. |
-| **Inference / EDA** | Binned tenure rates vs pool quality, regressions / survival as pre-specified—inverted‑U read first. |
+| **Inference / EDA** | Binned tenure rates vs pool quality — **stage 9 complete** (non-monotone pattern, 18 bins). |
+| **Cox / survival** | Cells 10 / 10.5 wired with time-varying covariates; **formal HR output** still to run (Cell 12). |
 
-Exact notebook cell numbers and file names will be frozen in **`TENURE_PIPELINE_OVERVIEW.md`** as cells land.
+Cell numbers and artifacts are documented in **`TENURE_PIPELINE_OVERVIEW.md`** §2–§4.
 
 ---
 
@@ -156,31 +164,46 @@ Exact notebook cell numbers and file names will be frozen in **`TENURE_PIPELINE_
 
 **Rule:** Do not delete canonical under **`tenure_pipeline/`** while experimenting; write scratch outputs with dated suffixes if needed.
 
-**Checklist (adapted from sports gameplan logic)**
+**Checklist (adapted from sports gameplan logic) — ✅ ALL COMPLETE as of May 2026**
 
-- [ ] **Inputs:** Parsed rosters + at least a v0 **panel** slice with rank and year; some **performance** column (even crude pub counts).
-- [ ] **Define v0 outcomes:** assistant→associate within window; **disappear** from roster without promotion (attrition)—document assumptions.
-- [ ] **Define v0 peer pool:** e.g. LOO mean pubs among assistants in same dept-year (or advisor-agreed variant).
-- [ ] **Bins:** ventiles/deciles of pool quality; compute event rates + N per bin; plot.
-- [ ] **Save artifacts:** dated figure + CSV of binned table + one paragraph of definitions.
-- [ ] **Optional:** LPM with pool + pool² as sign check.
+- [x] **Inputs:** `faculty_panel_with_pools.jsonl` (72 MB) — panel with rank, year, `pubs_year`, `pubs_cumulative`, outcome flags.
+- [x] **Define v0 outcomes:** `tenure_event` / `attrition` / `censored` flags; `gap_tolerance=2` years; implemented in `panel_builder.py`.
+- [x] **Define v0 peer pool:** `poolq_loo_mean` — LOO mean pubs among OpenAlex-matched assistants in same dept-year; implemented in `pool_metrics.py`.
+- [x] **Bins:** 18 equal-width bins of `poolq_loo_mean`; tenure rates with Wilson 95% CI per bin.
+- [x] **Save artifacts:** `stage9_inverted_u.png` + `stage9_binned_table.csv` (18 bins × 17 columns).
+- [x] **Optional — LPM:** Not yet estimated (Cox model wired in Cells 10/10.5 as primary spec).
 
-If the shape is null, that is still a **result**—inform peer-group and metric choices before heavy polish.
+**Result:** Non-monotone pattern consistent with inverted-U. Peak tenure rates at bins 16–17 (LOO median ~8–9 pubs/yr), with a drop at the very top bin 18 (LOO median ~12.7 pubs/yr). See `PEER_Status_Update_for_VECTOR_2026-06-03.md` for full binned results and caveats.
 
 ---
 
-## Open points (negotiate next)
+## Open points — Updated June 2026
 
-- Exact **peer-group** definitions and robustness set.
-- **OpenAlex vs DBLP** weighting for performance; handling of missing authors.
-- **Attrition** vs **move** (other institution) when snapshots lack national placement data.
-- Panel **grain** and **tenure-clock** window for “success.”
-- When to resume aggressive **coverage** expansion vs **analysis** lock-in.
+**Resolved since April 2026:**
+- ✅ Panel grain and tenure-clock window: `(faculty_id × year)`, `gap_tolerance=2` years; implemented in `panel_builder.py`.
+- ✅ Peer-group v0: LOO mean pubs among OA-matched assistants in same dept-year; `pool_metrics.py`.
+- ✅ OpenAlex as primary pub source (DBLP retained as cross-check spine only).
+- ✅ First inverted-U check (stage 9): signal present; binned artifacts saved.
+- ✅ Cox model wired (Cell 10 / 10.5) with time-varying covariates.
+- ✅ Advisor-facing CSV + glossary produced (`faculty_panel_advisor.csv`, `PANEL_CSV_GLOSSARY.md`).
+- ✅ External briefing prepared: `advancement_under_constrained_distinction_dakota_feedback_v03.rtf` (June 2026, Dakota / academic-careers committee member).
+
+**Still open:**
+- Exact **peer-group robustness** set — alternative definitions (broader cohort, field-weighted, citation-based).
+- **LPM / logit** sign check (`tenure_event ~ poolq_loo + poolq_loo² + covariates`).
+- **Formal Cox output**: run Cell 10 / 10.5 → Cell 12; report HR estimates and inverted-U test.
+- **Attrition vs lateral move**: snapshots cannot distinguish “left academia” from “moved institution” — competing-risk framing hedges this; note as limitation.
+- **Coverage expansion**: current ~60 usable schools; 168 in `PILOT_SCHOOLS`; publication-time goal is defensible breadth. Prioritize analysis lock-in over URL chasing for now.
+- **OA bulk access upgrade**: UVA CDH bulk snapshot for author resolution (would improve HIGH confidence rate beyond current ~32%).
+- **Heterogeneity**: subfield (ML vs systems vs theory), cohort-year, and dept prestige tier effects.
+- **Prestige covariate**: merge NRC rankings or USNews CS tier into panel for controls.
 
 ---
 
 ## Document history
 
+- **2026-06-08:** Stage map rows **7–10+** updated (Cells 7–9 complete; Cox wired). §G11 heading reframed from “planned” to implemented. Open points + fast-path checklist marked complete.
+- **2026-06-08:** **`PEER_report_to_COMPASS.md`** created in `3-Master_Plan/`. **`TENURE_STREAMLINING_AND_RESEARCH_PRIORITIES.md`** Part 3 rewritten with current panel stats + stage 9 status. **`Pertinent_Thoughts_Tenure.md`** § Stage 9 inverted-U added. Durable files table extended (enriched panel, pools, stage 9, advisor CSV). **`PEER_Status_Update_for_VECTOR_2026-06-03.md`** coverage corrected (168 schools vs quality filter). fast-path checklist marked complete; resolved items noted; still-open items updated. Stage 9 inverted-U result documented. Cox model (Cells 10/10.5), 543 package notebook, `faculty_panel_advisor.csv`, `PANEL_CSV_GLOSSARY.md`, `PEER_Status_Update_for_VECTOR_2026-06-03.md`, and Dakota briefing (`advancement_under_constrained_distinction_dakota_feedback_v03.rtf`) added to resolved items.
 - **2026-04-03 — 2026-04-08:** Earlier iterations of **`TENURE_DATA_GAMEPLAN.md`** (roster size, sentinels, URL workflow, Cell 3A-RETRY)—superseded in structure by this file; technical detail preserved in **`TENURE_PIPELINE_OVERVIEW.md`**.
 - **2026-04-10:** **Restructured to mirror `SPORTS_DATA_GAMEPLAN.md`**: split **gameplan** vs **overview**; added **Advisor direction (2026-04-09)** from Otter transcript; condensed duplicate cell-by-cell specs in favor of cross-links to **`TENURE_PIPELINE_OVERVIEW.md`**.
 - **2026-04-10 (later):** Working agreement item 1 points to **`TENURE_PIPELINE_OVERVIEW.md` §0** for **§G1–§G14** stable anchors to each `##` heading here.

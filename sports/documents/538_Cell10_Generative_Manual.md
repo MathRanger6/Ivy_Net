@@ -1,6 +1,8 @@
 # 538 notebook — CELL 10 generative pool manual
 
-Operator reference for **`538_alex_tier1_model_and_fit.ipynb` CELL 10** (Thread A: soft pre-sorting). This is **not** the **537** legacy score playground — see **`sports/documents/537_Manual.md`** for sort-and-chop, winner draws, and local-rank weights.
+Operator reference for **CELL 10** in **`538_alex_tier1_model_and_fit.ipynb`** and **`538D_development.ipynb`** (Thread A: soft pre-sorting + congestion selection). This is **not** the **537** legacy score playground — see **`sports/documents/537_Manual.md`** for sort-and-chop, winner draws, and local-rank weights.
+
+**June 2026 status:** Assignment + congestion score \(S_i = A_i - w \cdot L_C\) are **implemented**. Inverted-U appears on Plot B when **`SHOW_PLOT_B_TEAM_MEAN = True`** (539-style); **\(L_Q\)** LOO axis (`False`) is mostly decreasing with the same knobs — see `Scout_Status_Update_for_VECTOR_Laszlo_Briefing_2026-06-02.md`.
 
 **Terminology:** **Selection** is domain-neutral (Army promotion, NBA draft, tenure). The generative stack uses `Y_selected`, `N_SELECTED`, etc. Empirical CELLs 0–6 may still use Army-specific outcome names.
 
@@ -25,7 +27,7 @@ You do **not** need CELL 1–6 (real panel) for CELL 10.
 
 ## What this cell does (one sentence)
 
-Draw **team target means** \(T_j\), draw **abilities** \(A_i\), assign with **soft probabilities** \(\pi_{ij} \propto f(A_i - T_j)\), then **select** top-\(K\) players by score (LOO gap + ability by default). You get **two** live plots: **interval overlap** (530 CELL 8 analog) and **selection rate vs LOO Q bins** (inverted-U preview, same logic as CELL 12).
+Draw **team target means** \(T_j\), draw **abilities** \(A_i\), assign with **soft probabilities** \(\pi_{ij} \propto f(A_i - T_j)\), then **select** top-\(K\) players by score. Default score modes include **LOO gap + ability** and **congestion** \(A_i - w \cdot L_C\) where \(L_C\) is LOO viable-peer congestion (`crowding_smooth`: LOO mean of \(\sigma(\gamma(A-\theta))\)). You get **two** live plots: **interval overlap** (530 CELL 8 analog) and **selection rate vs bins** (inverted-U preview; x-axis configurable — see Plot B below).
 
 ---
 
@@ -119,9 +121,11 @@ When **α > 0**, weights multiply by \((n_j + k)^\alpha\) where \(n_j\) is the c
 | **Show Plot A (overlap)** | Checkbox | `SHOW_PLOT_A` | `show_plot_a` |
 | **LOO Q bins (#)** | IntSlider [5, 30] | `GENERATIVE_N_BINS` | `n_bins` |
 | **Selections K** | IntSlider [5, 2000] | `N_SELECTED` | `n_selected` |
-| **Selection score** | Dropdown (labeled modes) | `SELECTION_SCORE_MODE` | `score_mode` |
-| **LOO-gap weight w** | FloatSlider [0, 1] | `LOO_GAP_WEIGHT` | `loo_gap_weight` |
-| *(formula reminder)* | HTML under w | — | updates live: score = w·(A−LOO Q)+(1−w)·A; **w=1** → gap only, **w=0** → ability only |
+| **Selection score** | Dropdown (labeled modes) | `SELECTION_SCORE_MODE` (`loo_gap_plus_ability`, `crowding_smooth`, …) | `score_mode` |
+| **LOO-gap / congestion weight w** | FloatSlider [0, 1] | `LOO_GAP_WEIGHT` | `loo_gap_weight` |
+| **539 selection preset** | Button | Loads `SELECTION_539_*` from `tier1_sim_config.py` (Beta(2,2), [0,1] scales, θ≈0.72, γ≈10, w≈0.55) | — |
+| *(formula reminder)* | HTML under w | — | gap mode: \(w(A-L_Q)+(1-w)A\); crowding: \(A - w L_C\) (auto `crowding_l_z_scale` when A is z-scored) |
+| **Plot B x-axis** | Checkbox / CELL 0 | `SHOW_PLOT_B_TEAM_MEAN` | `False` → **\(L_Q\)** LOO (530); `True` → **team_mean** (539-style) |
 | **Winner draw** | Dropdown (labeled A/B/C) | `WINNER_SELECTION` | `winner_selection` |
 | **Load defaults from tier1_sim_config.py** | Button | Reloads config file → copies into sliders → redraw | — |
 | **Run / refresh plot** | Button | Redraw both plots | — |
@@ -159,9 +163,12 @@ Grid default: 81 points on \([-2, 2]\) (synthetic ability axis, not panel PPM un
 
 | Element | Meaning |
 |---------|--------|
-| **X** | Bin mean LOO `poolq_loo` (quantile bins by default) |
+| **X (default)** | Bin mean LOO `poolq_loo` when `SHOW_PLOT_B_TEAM_MEAN=False` (**530 / \(L_Q\)** axis) |
+| **X (539-style)** | Bin mean **team_mean** (realized roster mean ability) when `SHOW_PLOT_B_TEAM_MEAN=True` |
 | **Y** | Mean `Y_selected` in bin |
 | **Summary line** | `overall_rate` = K/N; `peak_bin_rate` = max bin rate |
+
+**Calibration note:** Inverted-U on **team_mean** is easier to obtain with the **539 selection** preset; **\(L_Q\)** axis with the same score often trends **down** as peer quality rises — not a bug, a conditioning difference (June 2026 finding).
 
 Shared code: `sports/tier1_generative_eda.py`. **CELL 12** re-runs the same pipeline as a static figure using saved CELL 10 state.
 
@@ -188,6 +195,7 @@ Always compare Plot A to the **red dashed** overlay and **530 CELL 8** — the t
 | File | Role |
 |------|------|
 | `sports/538_alex_tier1_model_and_fit.ipynb` | CELL 10 UI entry (`exec` of playground script) |
+| `sports/538D_development.ipynb` | Primary **June 2026** generative lab (CELL 10 + 4D heterogeneity) |
 | `sports/tier1_cell10_playground_run.py` | ipywidgets + dual plots |
 | `sports/tier1_generative_eda.py` | Shared inverted-U bin table + figure |
 | `sports/tier1_pool_assignment.py` | Assignment engine |
@@ -228,4 +236,4 @@ Defaults live in **`tier1_sim_config.py`**; **CELL 10 widgets** override them an
 
 ---
 
-*Last aligned with CELL 10–12 scripts and `tier1_sim_config.py` — 2026-05-19.*
+*Last aligned with CELL 10–12 scripts and `tier1_sim_config.py` — 2026-06-08 (congestion score, 539 preset, `SHOW_PLOT_B_TEAM_MEAN`, 538D).*

@@ -48,7 +48,7 @@
 
 **Done in repo:**
 
-- **`tenure/`** — `540_tenure_pipeline.ipynb`, `541_ipeds_enrollment.ipynb`, `tenure_pipeline/`, `documents/` (ex–`tenure_documents`), `run_stage3b_cli.py`.
+- **`tenure/`** — `540_tenure_pipeline.ipynb`, `541_ipeds_enrollment.ipynb`, **`543_package_panel.ipynb`**, `tenure_pipeline/`, `documents/` (ex–`tenure_documents`), `run_stage3b_cli.py`.
 - **`sports/`** — `530_sports_pipeline.ipynb`, `sports_pipeline/`, `documents/`.
 - **`talent/`** — `talent_pipeline/`, `documents/`.
 - **Root compatibility symlinks:** `tenure_pipeline` → `tenure/tenure_pipeline`, `540_tenure_pipeline.ipynb` → `tenure/…`, `sports_pipeline`, `talent_pipeline`, `530_sports_pipeline.ipynb`, `run_stage3b_cli.py` → `tenure/run_stage3b_cli.py`.

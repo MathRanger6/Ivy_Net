@@ -6,6 +6,20 @@ This document mirrors **Pertinent_Thoughts.md** (Army / OER work): important dis
 
 ---
 
+## Generative Tier 1 Lab (538D, June 2026)
+
+**Topic**: Soft assignment + congestion selection vs empirical 530 conditioning.
+
+**Key points**:
+
+- **Thread A implemented:** `tier1_pool_assignment.py`, CELL 10–12; τ≈0.65; Plot A calibrated to 530 CELL 8 overlap.
+- **Minimal score:** \(S_i = A_i - w L_C\) with `crowding_smooth`; z-scored ability needs `crowding_l_z_scale` (p90−p10 of \(A\)).
+- **539 vs 538D:** 539 is a **bundled DGP** (sort-chop, score noise, 90th percentile); 538D is a **modular lab** anchored to 530 — not parent/child decomposition.
+- **Plot B axis:** `SHOW_PLOT_B_TEAM_MEAN` — inverted-U on **team_mean**; mostly **decreasing** on **\(L_Q\)** LOO with same knobs.
+- **Status doc:** `5-Manuscript/Scout_Status_Update_for_VECTOR_Laszlo_Briefing_2026-06-02.md`.
+
+---
+
 ## SR–ESPN School Slugs, Small Colleges, and Coverage Equity
 
 **Topic**: Unmatched schools after `bpm_merge.run_match`; manual crosswalk / alias loop; re-scrape behavior.
