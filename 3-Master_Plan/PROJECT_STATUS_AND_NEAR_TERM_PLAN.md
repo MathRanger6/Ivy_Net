@@ -7,7 +7,7 @@
 **Companion docs:**  
 - [20260611_COMPASS_Initial_Review.md](20260611_COMPASS_Initial_Review.md)  
 - Advisor plan update: [20260611_Brief_for_Alex_Gates_brief.md](20260611_Brief_for_Alex_Gates_brief.md) · [full](20260611_Brief_for_Alex_Gates_full.md)  
-- Agent questions: `20260611_1626_COMPASS_to_{VECTOR,SCOUT,PEER,CODA}_questions.md` · SCOUT coherence: `20260611_1626_COMPASS_to_SCOUT_model_coherence_questions.md` · Agent responses: `YYYYMMDD_HHMM_{AGENT}_to_COMPASS.md` in `3-Master_Plan/`  
+- Agent questions: `20260611_1626_COMPASS_to_{VECTOR,SCOUT,PEER,CODA}_questions.md` · SCOUT coherence: `20260611_1626_COMPASS_to_SCOUT_model_coherence_questions.md` · Agent responses: `YYYYMMDD_HHMM_{AGENT}_to_COMPASS.md` in `3-Master_Plan/` — **CODA filed:** [20260611_1633_CODA_to_COMPASS.md](20260611_1633_CODA_to_COMPASS.md) (replies to COMPASS Q3–Q12; Q1/Q9 paused pending AWS sync)
 - Operating procedure: [COMPASS_Initial_Guidance_v6.md](COMPASS_Initial_Guidance_v6.md)
 
 ---
@@ -286,7 +286,7 @@ S_i = A_i - \lambda L_{C,i}
 | Step | Owner | Output |
 |------|-------|--------|
 | A1 | COMPASS + Charles | Initial Review + plan largely locked (2026-06-11); revise on agent answers |
-| A2 | Charles → agents | Answers as `YYYYMMDD_HHMM_{AGENT}_to_COMPASS.md` (see each question file § How to respond) |
+| A2 | Charles → agents | Answers as `YYYYMMDD_HHMM_{AGENT}_to_COMPASS.md` (see each question file § How to respond) — **CODA:** [20260611_1633_CODA_to_COMPASS.md](20260611_1633_CODA_to_COMPASS.md) |
 | A3 | VECTOR | Claim language table (supported / preliminary / not supported) |
 | A4 | All agents | Shared glossary: pool quality, LOO, distinction, inverted-U |
 
@@ -381,7 +381,7 @@ gantt
 
 ```text
 PEER Cell 12 ──► VECTOR Setting 3 §
-CODA estimand sentences ──► VECTOR Methods
+CODA estimand sentences ──► VECTOR Methods  *(filed 2026-06-11: [20260611_1633_CODA_to_COMPASS.md](20260611_1633_CODA_to_COMPASS.md))*
 SCOUT axis table ──► VECTOR Generative §
 Claim language table ──► All sections
 Charles locked Q1–3 ──► Sequence lock (CODA Q4+ open)
