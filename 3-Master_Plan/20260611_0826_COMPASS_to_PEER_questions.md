@@ -7,15 +7,15 @@
 
 Charles: please route to PEER.
 
-> **Charles decision (2026-06-11, Q2):** **Soft gate** — stage 9 + honest limitations sufficient for VECTOR to **start** Setting 3 prose; **one Cell 12 Cox** in parallel before submission; Fine–Gray deferred. PEER: confirm effort/timeline below; do not treat Cox as pre-draft blocker.
+> **Charles decisions (2026-06-11):** **Soft gate (Q2)** — stage 9 + honest limitations sufficient for VECTOR to **start** Setting 3 prose; **one basic Cell 12 Cox** before **submission** (not a pre-draft blocker); Fine–Gray deferred. **Cell 12 urgency (Q4):** **no hurry during draft phase** — `stage9_inverted_u.png` is legitimate preliminary evidence; Layer B (Cells 10/10.5/12) is **planned** in `540` (port from Army `520`), not wired yet. See `PROJECT_STATUS_AND_NEAR_TERM_PLAN.md` and `PEER_report_to_COMPASS.md` §2.5.
 
 ---
 
 ## A. Setting 3 maturity target
 
-1. **Charles answer: soft gate** (above). **PEER:** confirm Cell 12 effort estimate and any caveats for manuscript language.
+1. **Charles answers: soft gate + no hurry on Cell 12 during draft** (above). **PEER:** confirm Layer B build effort estimate and any caveats for manuscript language.
 
-2. If Cox is required, **estimated effort**: hours to run Cell 12, archive HR tables, and produce one advisor-ready table — on Mac vs Rivanna?
+2. **Estimated effort** for Layer B (build Cells 10/10.5/12 in `540`, run Cell 12, archive HR tables, one advisor-ready table) — on Mac vs Rivanna? **Not urgent until pre-submission window.**
 
 3. **Is Fine–Gray / explicit competing-risks Cox required** for parity with Dakota §4 prose, or is cause-specific Cox + binned stage 9 enough if prose is corrected?
 

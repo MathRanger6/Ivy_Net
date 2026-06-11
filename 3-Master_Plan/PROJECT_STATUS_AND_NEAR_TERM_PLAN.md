@@ -27,6 +27,7 @@ The dissertation program is a **three-setting cross-domain study** of **advancem
 | 1 | Hard deadline | **Summer–Fall 2026** for core manuscript draft/submission |
 | 2 | Tenure Cox gate | **Soft gate (B):** stage 9 + honest limitations OK for VECTOR to draft Setting 3; **one basic Cell 12 Cox run in parallel** before submission (not a pre-draft blocker); Fine–Gray deferred |
 | 3 | SCOUT generative priority | **A — manuscript-first (Path II):** draft with honest layering; generative LOO-pool-quality match **deferred**; Alex score = constraint-leg POC on **pool mean** axis; empirical decomposition for predictions; explicit nesting required in prose |
+| 4 | Tenure Cell 12 urgency | **Charles confirmed (2026-06-11):** no hurry on planned Cell 12 for `540` during **draft phase**. Current **CELL 9** binned plot (`stage9_inverted_u.png`) is **legitimate preliminary descriptive evidence** for process trust and VECTOR Setting 3 prose (with limitations). **Basic Cox** remains pre-**submission** parallel work (PEER-owned); **Fine–Gray** may return before publication if estimand requires it — not gating draft |
 | — | Scientific north star | Unified decomposable generative on LOO axis — **parallel**, does not gate first draft |
 | — | Terminology lock | Any quantity **excluding self** must include **`LOO`** in the name (`poolq_loo` = LOO pool quality; `team_mean` / pool mean = whole roster, not LOO) |
 | — | Model coherence | `20260611_0911_COMPASS_to_SCOUT_model_coherence_questions.md` **revised** for locked Path II — SCOUT must supply nesting chain + deliverables D1–D11, not path choice |
@@ -161,9 +162,10 @@ flowchart LR
 
 | Dimension | Status |
 |-----------|--------|
-| Pipeline | `540_tenure_pipeline.ipynb` Cells 0–9 complete; 10/10.5 wired |
-| Inverted-U | **Preliminary** — stage 9, 18 bins, elite bin dip |
-| Cox | Cell 12 **not archived** |
+| Pipeline | `540_tenure_pipeline.ipynb` Cells 0–9 complete; Layer B (10/10.5/12) **planned** |
+| Inverted-U | **Preliminary** — stage 9, 18 bins, elite bin dip; **Charles: trustworthy for draft** (unconditional bins; see `Pertinent_Thoughts_Tenure.md`) |
+| Cox | Layer B **planned** (port `520` → `540`); Cell 12 **not archived** — **not urgent for draft**; basic run before submission (soft gate) |
+| Fine–Gray | **Deferred** — revisit before publication if needed; not required for first VECTOR pass |
 | Data limits | ~58% OA NONE; high censoring; 168 schools variable quality |
 | Confidence | **Low–medium** |
 
@@ -292,7 +294,7 @@ S_i = A_i - \lambda L_{C,i}
 
 | Step | Owner | Output | Priority |
 |------|-------|--------|----------|
-| B1 | PEER | Run Cell 12; archive HR tables | **Medium** — parallel before submission; not blocking first VECTOR draft (soft gate) |
+| B1 | PEER | Run Cell 12; archive HR tables | **Low for now** — Charles: no hurry during draft; schedule before **submission** only (soft gate); PEER-owned when routed |
 | B2 | CODA | Manuscript figure exports + estimand sentences | **High** |
 | B3 | SCOUT | Manuscript empirical exports; generative axis figure for supplement | **High** |
 | B4 | SCOUT | LOO-pool-quality generative match | **Deferred** — parallel only (Charles Path A); nesting prose + axis table are blocking |
@@ -394,7 +396,7 @@ Charles locked Q1–3 ──► Sequence lock (CODA Q4+ open)
 **Path:**
 
 1. **Accept** Tier 1 equation + soft assignment as minimal model **without** waiting for \(L_Q\) generative identity.  
-2. **Run** tenure Cell 12 Cox in parallel before submission (soft gate — not blocking first VECTOR draft).  
+2. **Run** tenure Cell 12 Cox before submission (soft gate — **not urgent during draft**; Charles confirmed CELL 9 sufficient for Setting 3 draft with limitations).  
 3. **Draft** manuscript immediately after Week 2 exports — empirical triad is already the strongest contribution.  
 4. **Add** two predictions with one new figure (heterogeneity or dispersion).  
 5. **Submit** interdisciplinary science-of-science target (venue TBD via `Publication_Plan.md`); network extensions = discussion future work.

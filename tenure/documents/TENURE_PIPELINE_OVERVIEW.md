@@ -1,5 +1,5 @@
 # Tenure Pipeline: End-to-End Overview
-**Agent: PEER** | **Notebook: `540_tenure_pipeline.ipynb`** | **Updated: 2026-06-08 (rev 19)**
+**Agent: PEER** | **Notebook: `540_tenure_pipeline.ipynb`** | **Updated: 2026-06-11 (rev 20)**
 
 ---
 
@@ -32,9 +32,9 @@ Headings below are **Find targets** (outline / search). **§G*n*** is the order 
 | **G8** | Stage 2 — R1 school list (Cell 2) | Schools CSV + URL workflow. |
 | **G9** | Stage 3 — Wayback scrape (Cells 3A–3E) | CDX / download / rescues. |
 | **G10** | Stage 4 — HTML parse (Cell 4) | Parsed roster JSONL, Option B + `legacy/`. |
-| **G11** | Stages 6–9 — Match, enriched panel, pools, analysis | Cells 6A–9 **complete** (May–June 2026); Cox Cells 10/10.5 wired — see overview §2 table. |
+| **G11** | Stages 6–9 — Match, enriched panel, pools, analysis | Cells 6A–9 **complete** (May–June 2026); **Layer B** Cox (Cells 10/10.5/12) **planned** — port from Army `520`; see overview §2 table + §4. |
 | **G12** | Fast path — first inverted-U checkpoint (dirty OK) | **✅ Complete** — `stage9_inverted_u.png`, `stage9_binned_table.csv` (18 bins). |
-| **G13** | Open points — Updated June 2026 | Peer-group robustness, formal Cox output, coverage expansion, bulk OA. |
+| **G13** | Open points — Updated June 2026 | Peer-group robustness, **Layer B Cox build**, coverage expansion, bulk OA. |
 | **G14** | Document history | Changelog of the gameplan itself. |
 
 ### Gameplan stage map ↔ sections *in this overview*
@@ -48,7 +48,7 @@ The gameplan **Stage map** table cites **Overview §2–§4** as follows (number
 | 3A–3E | Wayback chain | **§3** (plan/download/index) and **§4** where parse boundary is discussed. |
 | 4 | Cell 4 | **§3** (Cell 4 outputs) and parser notes in **§5**. |
 | 6A–9 | Cells 6A–9 | **§2** pipeline table + **§4** implementation notes (enriched panel, pools, stage 9). |
-| 10+ | Cells 10, 10.5, 543 | **§4** Cox + advisor package; file inventory **§6**. |
+| 10+ | Cells 10, 10.5, 12 (+ 543 ✅) | **§4** Layer B Cox (planned) + advisor package (543 done); file inventory **§6**. |
 
 ---
 
@@ -116,8 +116,9 @@ RUN_CELL3E         = False   # Redirect rescue (NC State)    — optional; see �
 | CELL 7 | Enriched panel (pubs + events) | ✅ Complete | `faculty_panel_enriched.jsonl` (55 MB) |
 | CELL 8 | Pool metrics (leave-self-out) | ✅ Complete | `faculty_panel_with_pools.jsonl` (72 MB); `pool_metrics.py` |
 | CELL 9 | Analysis (inverted-U check) | ✅ Complete | `stage9_inverted_u.png`, `stage9_binned_table.csv` |
-| CELL 10 | Cox survival model (time-varying covariates) | ✅ Wired / runnable | `df_pipeline_09_filtered`; toggle `RUN_CELL10` |
-| CELL 10.5 | Z-score + feature engineering for Cox | ✅ Implemented | `df_pipeline_10_5_cox_zscored`; creates `z_*`, `*_sq`, `star_pool_interaction` |
+| CELL 10 | Cox survival model (Layer B) | 📋 **Planned** — add to `540`; template: `talent/520_pipeline_cox_working.ipynb` | Survival intervals from assistant spells |
+| CELL 10.5 | Z-score + quadratic for Cox (Layer B) | 📋 **Planned** | Tenure covariates: `poolq_loo_mean`, `pubs_year`, etc. |
+| CELL 12 | Cox model fit + HR tables (Layer B) | 📋 **Planned** | Inverted-U test on quadratic pool-quality term |
 
 ---
 
@@ -441,7 +442,7 @@ Test downloads confirmed all pages were rich with data (67–128 professor menti
 
 ---
 
-## 4. Stages 6–10.5 — Implementation Notes (All Complete as of May 2026)
+## 4. Stages 6–9 Complete; Layer B (Cells 10–12) Planned — Implementation Notes
 
 ### CELL 4 — Faculty Page Parsing (implemented)
 
@@ -599,37 +600,25 @@ This mirrors the Army setting (where each officer's pool mean excluded their own
 
 **Secondary analyses — status:**
 - Linear Probability Model: **not yet estimated**
-- Survival analysis (Cox proportional hazards): **wired in Cell 10 / 10.5** — see below
+- Survival analysis (Cox proportional hazards): **📋 planned** — build Cells 10 / 10.5 / 12 in `540` by adapting Army **`520`** pattern (not yet in notebook)
 - Heterogeneity by subfield: **not yet implemented**
 
 ---
 
-### CELL 10 — Cox Survival Model — ✅ Wired / Runnable
+### CELL 10 / 10.5 / 12 — Cox Survival (Layer B) — 📋 Planned
 
-**Goal:** Time-to-tenure Cox proportional hazards model with time-varying covariates. Toggle via `RUN_CELL10` in Cell 0.
+**Goal:** Time-to-tenure **Cox proportional hazards** with pool-quality linear + **quadratic** terms — the tenure analogue of Army Layer B in **`talent/520_pipeline_cox_working.ipynb`**.
 
-**Input frame:** `df_pipeline_09_filtered` (assistant-professor rows filtered from the enriched panel).
+**Status (corrected 2026-06-11):** **`540_tenure_pipeline.ipynb` currently ends at Cell 9.** There are **no** Cell 10, 10.5, or 12 cells yet. Do **not** confuse Army Cell 10 output (officers, `tb_ratio_fwd_snr`, `pool_minus_mean_snr_fwd`) with tenure work.
 
-**Key time-varying covariate columns (from `COLUMN_CONFIG`):** `cum_tb_fwd_rtr`, `pool_minus_mean_snr_fwd`, `tb_ratio_fwd_snr`, `pool_tb_ratio_rank_rtr_fwd`, and variants (raw, binned, lagged). These columns come from snapshot data (`df_pipeline_09_filtered`) — **not** from Cell 10.5 z-scored frame.
+**Planned inputs:** `faculty_panel_with_pools.jsonl` — spell fields (`first_asst_year`, `last_asst_year`, `tenure_event`, `attrition`, `censored`), `poolq_loo_mean`, `pubs_year`, `pool_rank_loo`, etc.
 
-**Warning at Cell 10 output:** If `z_*`, `*_sq`, or `star_pool_interaction` columns appear in the missing-covariate warning, that is **expected** — those are created by Cell 10.5, not by Cell 9. Run Cell 10.5 first if the model spec includes those terms.
+**Planned steps (520 analogue):**
+1. **Cell 10** — construct survival intervals from assistant spells → Cox-ready long frame
+2. **Cell 10.5** — z-score continuous covariates; add `z_poolq_loo_mean_sq` (and optional interaction with own pubs)
+3. **Cell 12** — fit Cox with `scikit-survival`; archive HR tables and inverted-U test on quadratic term
 
----
-
-### CELL 10.5 — Z-Score + Feature Engineering for Cox — ✅ Implemented
-
-**Goal:** Scale continuous covariates and engineer quadratic / interaction terms for the Cox model. Output: `df_pipeline_10_5_cox_zscored`.
-
-**Columns created here (not available on raw snapshots):**
-- `z_tb_ratio_fwd_snr` — z-scored forward TB ratio
-- `z_pool_minus_mean_snr_fwd` — z-scored LOO pool quality difference
-- `z_tb_ratio_fwd_snr_sq` — quadratic term
-- `z_pool_minus_mean_snr_fwd_sq` — quadratic term (for inverted-U test)
-- `star_pool_interaction` — interaction term
-
-**Cell 12 loads `df_pipeline_10_5_cox_zscored`** when `RUN_SCALE` is set in Cell 0. This is the frame used for model fitting.
-
----
+**Competing risks:** Attrition flag exists in panel; Fine–Gray / explicit competing-risks Cox **not yet estimated**.
 
 ### 543 — Package Panel for Advisor / External Use — ✅ Created (May 2026)
 
@@ -1016,6 +1005,8 @@ TEST_PARSE=1 python tenure/tenure_pipeline/discover_faculty_urls.py
 4. **Scope:** The `dept_name` and `notes` columns track EECS vs CS naming and oddball cases.
 
 ---
+
+*Revised **2026-06-11 (rev 20):** **Layer B correction** — Cells 10 / 10.5 / 12 reframed as **📋 planned** (port from Army `520`); `540` ends at Cell 9. Removed Army covariate names (`tb_ratio_fwd_snr`, etc.) from tenure Cox sections. §4 header split: Stages 6–9 complete vs Layer B planned.*
 
 *Revised **2026-06-08 (rev 19):** **§2** pipeline table updated — Cells 7, 8, 9 marked ✅ Complete with actual output files; Cells 10 and 10.5 added. **§4** heading updated from "What Is Planned" to "Implementation Notes"; Cell 7 description corrected (OpenAlex replaces DBLP as pub source; actual column names from `panel_builder.py`); Cell 8 corrected to actual `pool_metrics.py` output columns; Cell 9 updated with actual stage 9 results (inverted-U signal confirmed, May 2026); Cells 10, 10.5, and 543 (`package_panel`) documented. References to `PANEL_CSV_GLOSSARY.md`, `PEER_Status_Update_for_VECTOR_2026-06-03.md`, and `advancement_under_constrained_distinction_dakota_feedback_v03.rtf` (Dakota briefing, June 2026) noted.*
 

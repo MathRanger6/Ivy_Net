@@ -70,7 +70,7 @@ The program is **not** stuck on whether the empirical U exists. The work ahead i
 | **Timeline** | Core manuscript draft/submission **Summer–Fall 2026** |
 | **Generative path** | **Manuscript-first:** draft on empirical LOO U + honest generative POC (pool-mean readout) + explicit **two-row axis table**; **not** blocking on generative LOO-pool-quality bin-for-bin match before first draft |
 | **Mechanism prose** | Alex score = **constraint-leg POC**; empirical decomposition for predictions — **one** \(L = B - D\) story in §3–§4 (SCOUT to supply nesting chain for VECTOR) |
-| **Tenure (Setting 3)** | Stage 9 + limitations → start Setting 3 prose now; **one Cell 12 Cox** in parallel before submission; Fine–Gray deferred |
+| **Tenure (Setting 3)** | Stage 9 + limitations → start Setting 3 prose now; **Cell 12 Cox not urgent during draft** — basic Layer B run (port `520` → `540`) before **submission**; Fine–Gray deferred |
 | **Deferred** | Army 525/TB-stratify · network extensions · full HPC sweeps · LOO generative bin-for-bin match |
 
 ### Manuscript layers (what blocks draft vs not)
@@ -92,7 +92,7 @@ I still think the cleanest end state is a **single decomposable generative model
 
 ```text
 Week 1–2   Lock claim language · SCOUT exports (empirical Fig 2 + generative + axis table)
-           · PEER Cell 12 Cox in parallel (not blocking first VECTOR draft)
+           · VECTOR drafts Setting 3 on CELL 9 (PEER Cell 12 Cox deferred — not urgent until pre-submission)
            · CODA manuscript figures + estimand-checked captions
 
 Week 2–4   VECTOR drafts Wang-structure manuscript (empirical triad → minimal model → predictions)
@@ -122,8 +122,8 @@ This follows your April–May themes (theory ≠ minimal model; quadratic as dia
 
 ## 7. Tenure (Setting 3) — how I'm applying your April direction
 
-- **Stage 9 binned figure** + honest limitations: sufficient for VECTOR to **start** Setting 3 prose.
-- **One basic Cell 12 Cox run** (mirror Army: z-scored LOO pool quality, quadratic, own-performance control) — **parallel before submission**, not a pre-draft blocker.
+- **Stage 9 binned figure** + honest limitations: sufficient for VECTOR to **start** Setting 3 prose now (**Charles confirmed** — legitimate preliminary evidence).
+- **One basic Cell 12 Cox run** (mirror Army: z-scored LOO pool quality, quadratic, own-performance control) — **before submission**, not urgent during draft; Layer B not yet in `540` (planned PEER build).
 - **Fine–Gray:** deferred.
 - Matches your “end-to-end on existing data, log sample loss, then move on” guidance as I'm interpreting it.
 

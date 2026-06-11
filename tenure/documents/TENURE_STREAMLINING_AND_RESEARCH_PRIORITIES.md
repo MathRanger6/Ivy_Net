@@ -58,7 +58,7 @@ So: **Git streamlines “one true copy of the code” across machines.** It does
 
 ## Part 3 — Research priorities (updated June 2026)
 
-**Status:** Charles’s April 2026 “rough counts first” agenda (Questions A–D below) has been **substantially executed**. The pipeline now runs **Cells 0–9 complete**, with **Cells 10 / 10.5 wired** (Cox not yet formally reported) and **543** advisor CSV export. See **`PEER_Status_Update_for_VECTOR_2026-06-03.md`** and **`3-Master_Plan/PEER_report_to_COMPASS.md`** for numbers.
+**Status:** Charles’s April 2026 “rough counts first” agenda (Questions A–D below) has been **substantially executed**. The pipeline now runs **Cells 0–9 complete** (Layer A stage 9 inverted-U preliminary). **Layer B** Cox (Cells 10 / 10.5 / 12) is **planned** — port from Army `520`, not yet in `540`. **543** advisor CSV export is done. See **`PEER_Status_Update_for_VECTOR_2026-06-03.md`** and **`3-Master_Plan/PEER_report_to_COMPASS.md`** for numbers.
 
 ### Current panel snapshot (`faculty_panel_with_pools.jsonl`, May 2026 run)
 
@@ -92,11 +92,11 @@ CDH bulk snapshot + **`openalex_snapshot_cache.jsonl`** + **`build_openalex_cach
 
 ### Question E — Inverted-U (added June 2026) — **preliminary yes**
 
-**Stage 9:** 18 bins of `poolq_loo_mean` → tenure rate plot shows **non-monotone** pattern with **drop at top bin** (`stage9_inverted_u.png`, `stage9_binned_table.csv`). **Not** final Cox evidence — run Cells 10 / 10.5 → 12 next.
+**Stage 9:** 18 bins of `poolq_loo_mean` → tenure rate plot shows **non-monotone** pattern with **drop at top bin** (`stage9_inverted_u.png`, `stage9_binned_table.csv`). **Not** final Cox evidence — **build Layer B** (Cells 10 / 10.5 / 12 in `540`) next.
 
 **Order of operations going forward:**
 
-1. **Formal Cox / competing risks** on assistant spell (Cells 10–12).  
+1. **Formal Cox / competing risks** — build Layer B in `540` (Cells 10–12; adapt `520` pattern).  
 2. **Robustness:** peer-group definitions, OA confidence filters, prestige controls.  
 3. **Coverage polish** (URL worksheet, bad schools) — secondary to analysis lock-in per advisor Apr 2026 direction.
 

@@ -105,7 +105,7 @@
 |---------|-------|---------------------|--------|
 | Army | CODA | **Established** (520 CIF/Cox) | Backbone; 525/UIC extensions planned |
 | Basketball | SCOUT | **Replicated** (530 `poolq_loo`) | Generative congestion score live; L_Q-axis generative match open |
-| Academia | PEER | **Preliminary** (stage 9 bins) | Cox wired; formal HR output pending |
+| Academia | PEER | **Preliminary** (stage 9 bins / Layer A) | Layer B Cox **planned** (`540` ends at Cell 9; port `520`) |
 
 Committee-facing whole-project summary: `1-Various_PDE_and_Chat_stuff/5-Manuscript/advancement_under_constrained_distinction_dakota_feedback_v03.rtf`.
 

@@ -13,7 +13,7 @@
 |-------|--------|
 | Pipeline (scrape → parse → panel → pool metrics) | **Complete end-to-end** for the current corpus |
 | Inverted-U signal | **Yes — present in preliminary analysis** (stage 9; see §4) |
-| Cox survival model | **Wired and runnable** (Cell 10); z-scored covariates in Cell 10.5 |
+| Cox survival model | **📋 Planned (Layer B)** — not yet in `540`; adapt Army `520` pattern |
 | Coverage completeness | **168 schools** in panel roster (`uni_slug`); **variable** parse/OA quality per school — filter for inference, don't treat all schools as equally "usable" |
 | OpenAlex linkage | **Rivanna:** CDH bulk + cache (`openalex_snapshot_cache.jsonl`); **Mac:** rsync cache or API fallback. ~32% HIGH confidence in current panel sample; MULTI/NONE are known limitations |
 | Formal model results ready to quote | **Not yet** — preliminary binned curve is the current artifact; regression/Cox output is the next step |
@@ -110,20 +110,20 @@ The **critical inverted-U feature** — a **peak followed by a decline at the to
 ### Caveats to communicate to VECTOR
 
 1. **High censoring:** ~50–60% of person-years are right-censored (still assistant near end of data window). Tenure rates are computed on resolved cases only; N per bin is small (~18–46 resolved cases).
-2. **Preliminary / dirty-OK standard:** This is the "fast path first curve" per advisor guidance — not the final survival analysis. The Cox model (Cell 10 / 10.5) is the intended main specification.
+2. **Preliminary / dirty-OK standard:** This is the "fast path first curve" per advisor guidance — not the final survival analysis. **Layer B** Cox (Cells 10 / 10.5 / 12) is the **planned** main specification — build in `540` by adapting Army `520`.
 3. **Pool quality measure is noisy:** Only faculty with HIGH or MEDIUM OpenAlex matches contribute to `poolq_loo_mean`. Departments with poor OA coverage have noisier pool quality estimates.
 4. **Coverage is partial:** ~60 departments ≠ full R1 universe. Elite departments (top 10 CS programs) may be over- or under-represented depending on which schools have clean Wayback data.
 5. **No controls yet:** The binned plot is **unconditional** — no cohort fixed effects, no school prestige controls, no individual ability controls. The shape could shift with proper modeling.
 
 ---
 
-## 5. What Is Wired But Not Yet Finalized
+## 5. What Is Next (Layer B — Not Yet Built)
 
 | Element | Status |
 |---------|--------|
-| **Cox survival model** (Cell 10) | Code complete; time-varying covariates (`tb_ratio_fwd_snr`, pool metrics) specified in `COLUMN_CONFIG`; z-scored frame in Cell 10.5 |
-| **Inverted-U test columns** (`z_pool_minus_mean_snr_fwd`, `*_sq`, `star_pool_interaction`) | Created in Cell 10.5 on Cox-ready frame (not on raw snapshots — this is expected behavior, not a bug) |
-| **Formal model output** | Not yet run / reported |
+| **Cox survival model** (Cells 10 / 10.5 / 12) | 📋 **Planned** — `540` ends at Cell 9; port workflow from `talent/520_pipeline_cox_working.ipynb` with tenure covariates (`poolq_loo_mean`, `pubs_year`, spell outcomes) |
+| **Inverted-U test (quadratic pool quality)** | Planned in Cell 10.5 / 12 — e.g. `z_poolq_loo_mean_sq` |
+| **Formal model output** | Not yet — blocked on Layer B build |
 | **School-level prestige covariate** | Not yet merged into panel (planned: NRC rankings or USNews tier) |
 | **Attrition as competing risk** | Flag exists in panel; competing-risks model not yet estimated |
 

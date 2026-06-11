@@ -23,7 +23,7 @@ Keeping you in the loop on status, the modeling tension, and **what I'm going wi
 | **Timeline** | Core manuscript draft/submission **Summer–Fall 2026** |
 | **Generative path** | **Manuscript-first:** draft on empirical LOO U + honest generative POC (pool-mean readout) + explicit axis table; **not** blocking on generative LOO-pool-quality match before first draft |
 | **Mechanism prose** | Alex score = constraint-leg POC; empirical decomposition for predictions — **one** \(L=B-D\) story in writing (SCOUT to supply nesting chain for VECTOR §3) |
-| **Tenure (Setting 3)** | Stage 9 + limitations → start prose now; **one Cell 12 Cox** in parallel before submission; Fine–Gray deferred |
+| **Tenure (Setting 3)** | Stage 9 + limitations → start prose now; **Cell 12 Cox not urgent during draft** — basic run before **submission**; Fine–Gray deferred |
 | **Deferred** | Army 525/TB-stratify · network extensions · full HPC sweeps · LOO generative bin-for-bin match |
 
 **Scientific north star (longer run):** unified decomposable generative model that reads out on LOO pool quality — parallel work if time allows; does not gate the first draft.

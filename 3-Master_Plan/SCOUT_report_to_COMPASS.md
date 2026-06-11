@@ -230,7 +230,7 @@ Charles’s dissertation tests **advancement under constrained distinction**: in
 | Outcome | Promotion / separation | `Y_draft` | `tenure_event` / `attrition` |
 | Inverted-U evidence | Established CIF panels | Established ventiles | Preliminary 18-bin stage 9 |
 | Generative layer | Less central in CODA report | **Active** (538D CELL 10) | Not SCOUT’s scope |
-| Competing risks framing | Native (Cell 11) | Draft yes/no (no time-to-event in ventile EDA) | Cox wired (Cells 10/10.5) |
+| Competing risks framing | Native (Cell 11) | Draft yes/no (no time-to-event in ventile EDA) | Cox **planned** (Layer B; Cells 10/10.5/12 — not in `540` yet) |
 
 **Shared mechanism phrase (VECTOR/Dakota):** “Advancement under constrained distinction” — developmental benefits vs competitive constraints; finite distinction capacity in local comparison environments.
 

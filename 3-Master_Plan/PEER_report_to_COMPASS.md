@@ -13,7 +13,7 @@
 ## 0. What this document is (and is not)
 
 ### What it is
-- A **ground-truth status snapshot** of the academia/tenure lane as PEER understands it after work through **June 2026** (pipeline Cells 0–9 complete, Cox wired, stage 9 inverted-U preliminary, advisor CSV, Dakota committee brief, Rivanna/conda/Git ops).
+- A **ground-truth status snapshot** of the academia/tenure lane as PEER understands it after work through **June 2026** (pipeline **Cells 0–9 complete**; **Layer A** stage 9 inverted-U preliminary; **Layer B** Cox **not yet in `540`** — see §2.5; advisor CSV; Dakota committee brief; Rivanna/conda/Git ops).
 - A **research narrative** (§2) for a COMPASS with **zero prior context**: why academic careers and tenure matter, what PEER is testing, why the findings matter, and how the **inverted-U** links Army and basketball — not just file paths.
 - A **file map** so the COMPASS can navigate without re-deriving context from chat logs or SpecStory `.md` exports alone.
 - A **list of open questions** where Charles’s intent is not fully locked — PEER prefers explicit answers over assumptions.
@@ -120,11 +120,17 @@ That is the **same qualitative target** as Army (promotion vs senior-rater pool 
   - **Elite-tier dip (bin 18):** ~**0.42** (LOO median ~12.7 pubs/yr) ← **inverted-U feature**
 - **Honest label:** **Preliminary / unconditional** — no dept fixed effects, no individual controls, no formal p-values on curvature.
 
-#### Layer B — Cells 10 / 10.5 / 12: **Cox survival** (wired, not yet reported)
+#### Layer B — Cells 10 / 10.5 / 12: **Cox survival** (📋 planned — port from Army `520` pattern)
 
-- **Intent:** Time-to-tenure with time-varying pool metrics; z-scored covariates + **quadratic** + interaction (mirroring Army).
-- **Status:** Intervals and z-scored frame exist; **Cell 12 model fit and HR tables not yet archived**.
-- **Competing risks:** Attrition flag exists; **Fine-Gray / explicit competing-risks Cox not yet estimated** — same honesty as CODA handoff on estimands.
+- **Intent:** Time-to-tenure **Cox proportional hazards** with pool-quality linear + **quadratic** terms (mirroring Army Cell 12), using **`scikit-survival`** as in **`talent/520_pipeline_cox_working.ipynb`**.
+- **Status (corrected 2026-06-11):** **`540_tenure_pipeline.ipynb` currently ends at Cell 9.** There are **no** Cell 10, 10.5, or 12 cells in the tenure notebook yet. Layer B is **not wired** — it is the **next build**, adapting the **520 workflow** to tenure covariates and outcomes.
+- **Do not confuse with Army:** Cell 10 output mentioning “officers,” `z_tb_ratio_fwd_snr`, or `pool_minus_mean_snr_fwd` is **`520` (CODA)**, not `540`.
+- **Planned tenure inputs (from existing panel):** `faculty_panel_with_pools.jsonl` — spell fields (`first_asst_year`, `last_asst_year`, `tenure_event`, `attrition`, `censored`), `poolq_loo_mean`, `pubs_year`, `pool_rank_loo`, etc. — **not** Army OER/TB columns.
+- **Planned steps (520 analogue):**
+  1. **Cell 10** — survival intervals from assistant spells → Cox-ready long frame
+  2. **Cell 10.5** — z-score + quadratic on pool quality (+ optional interaction with own pubs)
+  3. **Cell 12** — fit Cox; archive HR tables and inverted-U test on quadratic term
+- **Competing risks:** Attrition flag exists; **Fine–Gray / explicit competing-risks Cox not yet estimated** — same honesty as CODA handoff on estimands.
 
 **Conceptual bridge:** Stage 9 answers “what does the **binned tenure curve** look like by dept peer quality?” Cox (when run) answers “holding time and covariates fixed, what are **hazard ratios** for pool quality and curvature?”
 
@@ -180,8 +186,8 @@ Charles’s dissertation requires **all three** in one manuscript (Charles confi
 | OpenAlex 6A–6B | ✅ | `openalex_author_ids.jsonl`, `openalex_works_by_year.jsonl`, `openalex_snapshot_cache.jsonl` |
 | Enriched panel (Cell 7) | ✅ | `faculty_panel_enriched.jsonl` (55 MB) |
 | Pool metrics (Cell 8) | ✅ | `faculty_panel_with_pools.jsonl` (72 MB); `pool_metrics.py` |
-| Stage 9 inverted-U | ✅ preliminary | `stage9_inverted_u.png`, `stage9_binned_table.csv` |
-| Cox survival (Cells 10 / 10.5) | ✅ wired, not formally reported | `df_pipeline_09_filtered`, `df_pipeline_10_5_cox_zscored` |
+| Stage 9 inverted-U (Layer A) | ✅ preliminary | `stage9_inverted_u.png`, `stage9_binned_table.csv` |
+| Cox survival (Layer B; Cells 10 / 10.5 / 12) | 📋 **Planned** — port from `520` | Not in `540` yet; panel + outcomes ready |
 | Advisor export (543) | ✅ | `faculty_panel_advisor.csv`, `R1_tenure_data.csv`; `543_package_panel.ipynb` |
 | IPEDS enrollment viz (541) | ✅ | `school_enrollment_annual.csv`, `541_ipeds_enrollment.ipynb` |
 
@@ -214,7 +220,7 @@ Charles’s dissertation requires **all three** in one manuscript (Charles confi
 
 ### Not done / open
 
-- **Cell 12 Cox output** — run and archive HR tables, inverted-U test on `z_pool_minus_mean_snr_fwd_sq`
+- **Layer B — Cells 10 / 10.5 / 12 in `540`** — build survival-interval + Cox stack (adapt **`520`** pattern; tenure covariates); archive HR tables and quadratic pool-quality test
 - **Fine-Gray / explicit competing risks** — flags exist; formal model not estimated
 - **School prestige covariate** — NRC / USNews merge not in panel
 - **Subfield heterogeneity** — not implemented
@@ -260,10 +266,10 @@ Charles runs a **monorepo** (`Cursor Workspace PDE/`) containing `talent/`, `spo
 | 6A–6B | OpenAlex institution + authors + works | ✅ |
 | 7 | Enriched panel | ✅ |
 | 8 | LOO pool metrics | ✅ |
-| 9 | Binned inverted-U | ✅ preliminary |
-| 10 | Cox intervals / survival setup | ✅ wired |
-| 10.5 | Z-score + quadratic + interaction | ✅ implemented |
-| 12 | Model fit | ⏳ run pending |
+| 9 | Binned inverted-U (Layer A) | ✅ preliminary |
+| 10 | Cox intervals / survival setup (Layer B) | 📋 planned — add to `540`; template: `520` |
+| 10.5 | Z-score + quadratic (+ interaction) | 📋 planned |
+| 12 | Cox model fit + HR tables | 📋 planned |
 
 **Related notebooks:**
 - **`541_ipeds_enrollment.ipynb`** — IPEDS headcount for stage 3 viz
@@ -374,7 +380,7 @@ These are **conceptual** links across settings; implementations differ by necess
 |---|--------|--------|
 | 1 | COMPASS identity | **Assigned** — cross-project planner COMPASS |
 | 2 | Single paper vs chapters | **One manuscript** (all settings) — CODA §10 |
-| 3 | Tenure maturity target | **Resolved — soft gate:** stage 9 + limitations → start VECTOR prose; one Cell 12 Cox parallel before submission |
+| 3 | Tenure maturity target | **Resolved — soft gate:** stage 9 + limitations → start VECTOR prose now; **Cell 12 not urgent during draft**; basic Cox before submission; Fine–Gray deferred |
 
 **Still open:**
 
@@ -396,7 +402,7 @@ These are **conceptual** links across settings; implementations differ by necess
 2. Read **`advancement_under_constrained_distinction_dakota_feedback_v03.rtf`** as the current **external-facing** synthesis.
 3. Build a **maturity matrix**: figure ready / model ready / manuscript paragraph ready — per setting.
 4. Resolve **shared glossary** for “pool quality,” “LOO,” “congestion,” “inverted-U” across CODA/SCOUT/PEER docs.
-5. Timeline: VECTOR may draft Setting 3 on stage 9 now; PEER Cell 12 Cox in parallel before submission.
+5. Timeline: VECTOR may draft Setting 3 on stage 9 now; PEER Layer B (Cell 12 Cox) **before submission only** — not urgent during draft phase (Charles 2026-06-11).
 6. Git + data policy: what COMPASS treats as **release artifacts** vs **local-only** (snapshots, cache JSONL).
 
 ---

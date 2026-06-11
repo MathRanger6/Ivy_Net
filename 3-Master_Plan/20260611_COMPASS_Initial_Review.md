@@ -29,7 +29,7 @@ The project is transitioning from **empirical discovery** to **explanatory model
 |---------|-------|---------|----------------|------------|----------------|-------------------|
 | **1 — Army** | CODA | CPT→MAJ promotion vs attrition | Senior-rater LOO pool TB (`pool minus mean`) | **Established** — CIF Q-bins + Cox quadratics | **Yes** — Cell 11 CIF + Cell 12 cause-specific Cox | **Strongest** — figures + HR tables exist; estimand language needs care |
 | **2 — Basketball** | SCOUT | NBA draft (`Y_draft`) | LOO teammate `poolq_loo` | **Replicated** — ventile/binned draft rate | **Partial** — Wang ladder (bins→LPM→logit); not time-to-event CR | **Strong empirical**; generative claims must be qualified |
-| **3 — Academia** | PEER | Tenure (Asst→Assoc) vs attrition | LOO dept `poolq_loo_mean` | **Preliminary** — stage 9, 18 bins, elite bin dip | **Wired, not reported** — Cells 10/10.5; Cell 12 pending | **Preliminary figure + honest limitations** only |
+| **3 — Academia** | PEER | Tenure (Asst→Assoc) vs attrition | LOO dept `poolq_loo_mean` | **Preliminary** — stage 9, 18 bins, elite bin dip | **📋 Planned (Layer B)** — `540` ends at Cell 9; port `520` → Cells 10/10.5/12 | **Preliminary figure + honest limitations** only |
 
 ### Confidence tags (COMPASS)
 
@@ -80,7 +80,7 @@ where \(L_C\) = LOO viable-peer congestion. This is the **domain-agnostic minima
 | Gap | Severity | Notes |
 |-----|----------|-------|
 | Generative inverted-U on **same axis** as 530 (`poolq_loo`) | **High** | Same score, different Plot B axis → different shape (June 2026) |
-| PEER Cell 12 Cox not archived | **High** for formal Setting 3 | Stage 9 alone may suffice for dissertation *figure* but weakens parity with Army |
+| PEER Layer B Cox not archived | **Medium for draft / High for submission** | **Soft gate:** CELL 9 + limitations OK for VECTOR draft now; basic Cell 12 before submission; not urgent during draft phase (Charles 2026-06-11) |
 | Mechanism decomposition (B vs D) not separately identified | **Medium** | Tier 1 intentionally rolled-up; predictions list underdeveloped |
 | Evans structural misclassification integrated in theory, not in minimal sim | **Medium** | Manuscript optional for v1 |
 | Network-science extensions (exposure vs comparison nets) | **Low for v1** | Dakota §8 + Barabási brief — explicitly defer |
@@ -122,7 +122,7 @@ where \(L_C\) = LOO viable-peer congestion. This is the **domain-agnostic minima
 
 | # | Issue | Status (2026-06-11) |
 |---|-------|---------------------|
-| 1 | **Cell 12 Cox on tenure** before Setting 3 prose | **Resolved — soft gate:** stage 9 + limitations OK for VECTOR draft; one Cell 12 Cox parallel before submission; Fine–Gray deferred |
+| 1 | **Cell 12 Cox on tenure** before Setting 3 prose | **Resolved — soft gate:** CELL 9 + limitations OK for VECTOR draft now; **Cell 12 not urgent during draft**; basic Cox before submission; Fine–Gray deferred |
 | 2 | **SCOUT generative priority** | **Resolved — manuscript-first (Path A / Path II):** honest layering + axis table; LOO generative match **deferred**; nesting prose blocking |
 | 3 | **CODA parallel track** (525/TB-stratify vs pool audit vs manuscript) | **Open** — Charles has not ranked; default **defer** per near-term plan |
 | 4 | **OpenAlex confidence filter** for tenure inference sample | **Open** — HIGH only vs HIGH+MEDIUM vs MULTI with disclaimer |
@@ -234,7 +234,7 @@ SCOUT: Manuscript exports + axis table + nesting chain for VECTOR §3
     ↓
 VECTOR: Draft Wang-structure manuscript — empirical triad → minimal model → predictions
     ↓
-PEER: Cell 12 Cox in parallel (soft gate — not blocking first VECTOR draft)
+PEER: Layer B Cell 12 Cox before submission only (not urgent during draft; CELL 9 OK for VECTOR now)
     ↓
 CODA: Manuscript figures + estimand-checked captions; 525/TB-stratify deferred
     ↓

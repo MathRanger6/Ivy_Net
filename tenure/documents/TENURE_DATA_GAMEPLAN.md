@@ -96,7 +96,7 @@
 | **7** | Cell 7 | Enriched panel (pubs + tenure/attrition events) | `faculty_panel_enriched.jsonl` | Overview §2 |
 | **8** | Cell 8 | LOO peer pool metrics | `faculty_panel_with_pools.jsonl` | Overview §2 |
 | **9** | Cell 9 | Binned inverted-U check | `stage9_inverted_u.png`, `stage9_binned_table.csv` | Overview §2; §G12 |
-| **10+** | Cells 10, 10.5, 543 | Cox survival + advisor CSV package | `df_pipeline_*`, `faculty_panel_advisor.csv` | Overview §4 |
+| **10+** | Cells 10, 10.5, 12 (+ 543 ✅) | Layer B Cox survival (**planned**) + advisor CSV package (**done**) | `faculty_panel_advisor.csv`; Cox artifacts TBD | Overview §4 |
 
 Full **sentinel rules**, **CDX timeouts**, **3B ghost retries**, and **parser strategies** are **not** duplicated here—see **`TENURE_PIPELINE_OVERVIEW.md`**.
 
@@ -142,7 +142,7 @@ Full **sentinel rules**, **CDX timeouts**, **3B ghost retries**, and **parser st
 
 ---
 
-## Stages 6–10 — Match, enriched panel, pools, analysis, Cox (implemented May–June 2026)
+## Stages 6–9 — Match, enriched panel, pools, analysis (implemented May–June 2026)
 
 **Delivered** (see **`PEER_Status_Update_for_VECTOR_2026-06-03.md`** and overview §2):
 
@@ -151,10 +151,22 @@ Full **sentinel rules**, **CDX timeouts**, **3B ghost retries**, and **parser st
 | **Entity resolution** | Faculty names ↔ **OpenAlex** (Cells 6A–6B in `540`; `openalex_resolver.py`) with **scalable** rules; DBLP JSONL for cross-checks; optional QA CSV for overrides. **Bulk** OpenAlex at UVA when access exists. |
 | **Panel** | `(person × year)` (or equivalent) with rank transitions, attrition flags, and publication metrics. |
 | **Peer quality** | Leave–self–out (or pre-specified) pool metrics on agreed performance measure. |
-| **Inference / EDA** | Binned tenure rates vs pool quality — **stage 9 complete** (non-monotone pattern, 18 bins). |
-| **Cox / survival** | Cells 10 / 10.5 wired with time-varying covariates; **formal HR output** still to run (Cell 12). |
+| **Inference / EDA (Layer A)** | Binned tenure rates vs pool quality — **stage 9 complete** (non-monotone pattern, 18 bins). |
 
 Cell numbers and artifacts are documented in **`TENURE_PIPELINE_OVERVIEW.md`** §2–§4.
+
+---
+
+## Layer B — Cox survival (Cells 10 / 10.5 / 12) — 📋 Planned
+
+**Intent:** Time-to-tenure Cox with pool-quality linear + quadratic terms — adapt Army **`520`** workflow to tenure covariates (`poolq_loo_mean`, `pubs_year`, etc.).
+
+**Status (corrected 2026-06-11):** **`540_tenure_pipeline.ipynb` ends at Cell 9.** Layer B is **not wired** yet. **543** advisor CSV export is complete separately.
+
+| Piece | Status |
+|--------|--------|
+| **Cox / survival (Layer B)** | 📋 **Planned** — build Cells 10 / 10.5 / 12 in `540`; template: `talent/520_pipeline_cox_working.ipynb` |
+| **Formal HR output** | Not yet — blocked on Layer B build |
 
 ---
 
@@ -171,7 +183,7 @@ Cell numbers and artifacts are documented in **`TENURE_PIPELINE_OVERVIEW.md`** �
 - [x] **Define v0 peer pool:** `poolq_loo_mean` — LOO mean pubs among OpenAlex-matched assistants in same dept-year; implemented in `pool_metrics.py`.
 - [x] **Bins:** 18 equal-width bins of `poolq_loo_mean`; tenure rates with Wilson 95% CI per bin.
 - [x] **Save artifacts:** `stage9_inverted_u.png` + `stage9_binned_table.csv` (18 bins × 17 columns).
-- [x] **Optional — LPM:** Not yet estimated (Cox model wired in Cells 10/10.5 as primary spec).
+- [x] **Optional — LPM:** Not yet estimated (Layer B Cox is the **planned** main spec — not yet in `540`).
 
 **Result:** Non-monotone pattern consistent with inverted-U. Peak tenure rates at bins 16–17 (LOO median ~8–9 pubs/yr), with a drop at the very top bin 18 (LOO median ~12.7 pubs/yr). See `PEER_Status_Update_for_VECTOR_2026-06-03.md` for full binned results and caveats.
 
@@ -183,15 +195,14 @@ Cell numbers and artifacts are documented in **`TENURE_PIPELINE_OVERVIEW.md`** �
 - ✅ Panel grain and tenure-clock window: `(faculty_id × year)`, `gap_tolerance=2` years; implemented in `panel_builder.py`.
 - ✅ Peer-group v0: LOO mean pubs among OA-matched assistants in same dept-year; `pool_metrics.py`.
 - ✅ OpenAlex as primary pub source (DBLP retained as cross-check spine only).
-- ✅ First inverted-U check (stage 9): signal present; binned artifacts saved.
-- ✅ Cox model wired (Cell 10 / 10.5) with time-varying covariates.
+- ✅ First inverted-U check (stage 9 / Layer A): signal present; binned artifacts saved.
 - ✅ Advisor-facing CSV + glossary produced (`faculty_panel_advisor.csv`, `PANEL_CSV_GLOSSARY.md`).
 - ✅ External briefing prepared: `advancement_under_constrained_distinction_dakota_feedback_v03.rtf` (June 2026, Dakota / academic-careers committee member).
 
 **Still open:**
 - Exact **peer-group robustness** set — alternative definitions (broader cohort, field-weighted, citation-based).
 - **LPM / logit** sign check (`tenure_event ~ poolq_loo + poolq_loo² + covariates`).
-- **Formal Cox output**: run Cell 10 / 10.5 → Cell 12; report HR estimates and inverted-U test.
+- **Layer B — Cox survival**: build Cells 10 / 10.5 / 12 in `540` (adapt `520` pattern); report HR estimates and inverted-U test on quadratic pool-quality term.
 - **Attrition vs lateral move**: snapshots cannot distinguish “left academia” from “moved institution” — competing-risk framing hedges this; note as limitation.
 - **Coverage expansion**: current ~60 usable schools; 168 in `PILOT_SCHOOLS`; publication-time goal is defensible breadth. Prioritize analysis lock-in over URL chasing for now.
 - **OA bulk access upgrade**: UVA CDH bulk snapshot for author resolution (would improve HIGH confidence rate beyond current ~32%).
@@ -202,7 +213,8 @@ Cell numbers and artifacts are documented in **`TENURE_PIPELINE_OVERVIEW.md`** �
 
 ## Document history
 
-- **2026-06-08:** Stage map rows **7–10+** updated (Cells 7–9 complete; Cox wired). §G11 heading reframed from “planned” to implemented. Open points + fast-path checklist marked complete.
+- **2026-06-11:** **Layer B correction** — Cox (Cells 10 / 10.5 / 12) reframed as **planned** (`540` ends at Cell 9); split § "Stages 6–9" from Layer B; removed "Cox wired" from resolved open points.
+- **2026-06-08:** Stage map rows **7–10+** updated (Cells 7–9 complete). §G11 heading reframed from “planned” to implemented for Cells 6–9. Open points + fast-path checklist marked complete.
 - **2026-06-08:** **`PEER_report_to_COMPASS.md`** created in `3-Master_Plan/`. **`TENURE_STREAMLINING_AND_RESEARCH_PRIORITIES.md`** Part 3 rewritten with current panel stats + stage 9 status. **`Pertinent_Thoughts_Tenure.md`** § Stage 9 inverted-U added. Durable files table extended (enriched panel, pools, stage 9, advisor CSV). **`PEER_Status_Update_for_VECTOR_2026-06-03.md`** coverage corrected (168 schools vs quality filter). fast-path checklist marked complete; resolved items noted; still-open items updated. Stage 9 inverted-U result documented. Cox model (Cells 10/10.5), 543 package notebook, `faculty_panel_advisor.csv`, `PANEL_CSV_GLOSSARY.md`, `PEER_Status_Update_for_VECTOR_2026-06-03.md`, and Dakota briefing (`advancement_under_constrained_distinction_dakota_feedback_v03.rtf`) added to resolved items.
 - **2026-04-03 — 2026-04-08:** Earlier iterations of **`TENURE_DATA_GAMEPLAN.md`** (roster size, sentinels, URL workflow, Cell 3A-RETRY)—superseded in structure by this file; technical detail preserved in **`TENURE_PIPELINE_OVERVIEW.md`**.
 - **2026-04-10:** **Restructured to mirror `SPORTS_DATA_GAMEPLAN.md`**: split **gameplan** vs **overview**; added **Advisor direction (2026-04-09)** from Otter transcript; condensed duplicate cell-by-cell specs in favor of cross-links to **`TENURE_PIPELINE_OVERVIEW.md`**.

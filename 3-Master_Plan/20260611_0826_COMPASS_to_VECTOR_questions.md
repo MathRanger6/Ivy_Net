@@ -7,7 +7,7 @@
 
 Charles: please route to VECTOR. Answers will refine near-term manuscript sequencing.
 
-> **Charles decisions (2026-06-11):** **Summer–Fall 2026** target · **Manuscript-first generative path** (honest pool-mean POC + axis table; LOO generative match **deferred**) · **Tenure soft Cox gate** · LOO terminology lock. See `20260611_Brief_for_Alex_Gates_full.md`.
+> **Charles decisions (2026-06-11):** **Summer–Fall 2026** target · **Manuscript-first generative path** (honest pool-mean POC + axis table; LOO generative match **deferred**) · **Tenure soft Cox gate** · **Cell 12 not urgent during draft** (CELL 9 + limitations OK for Setting 3 prose; basic Cox before submission only) · LOO terminology lock. See `20260611_Brief_for_Alex_Gates_full.md` and `PROJECT_STATUS_AND_NEAR_TERM_PLAN.md` row 4.
 
 ---
 
@@ -42,7 +42,7 @@ Charles: please route to VECTOR. Answers will refine near-term manuscript sequen
 | Section | Ready? | Blocker |
 |---------|--------|---------|
 | Abstract / framing | ? | |
-| §1 Empirical triad (3 panels) | ? | PEER Cox beneficial pre-submit; not blocking first draft |
+| §1 Empirical triad (3 panels) | ? | Tenure: CELL 9 preliminary figure OK for draft; PEER Layer B Cox before submission only |
 | §2 Theory (local/global, distinction) | ? | |
 | §3 Minimal model + generative | ? | L_Q axis tension |
 | §4 Predictions | ? | List not locked |

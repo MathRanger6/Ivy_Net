@@ -20,7 +20,7 @@ Observations worth carrying into **dissertation prose**, **limitations**, or **m
 - OA linkage partial (`NONE` ~58% of person–years); pool quality itself depends on OA-matched peers.
 - N per bin modest (~18–46 resolved cases).
 
-**Next:** Cox with `z_pool_minus_mean_snr_fwd` + quadratic (Cells 10 / 10.5 → 12). Manuscript framing: **`PEER_Status_Update_for_VECTOR_2026-06-03.md`**, Dakota brief §4 (`advancement_under_constrained_distinction_dakota_feedback_v03.rtf`).
+**Next:** Build **Layer B** in `540` — Cox with `poolq_loo_mean` + quadratic (Cells 10 / 10.5 / 12; adapt Army `520` pattern). Manuscript framing: **`PEER_Status_Update_for_VECTOR_2026-06-03.md`**, Dakota brief §4 (`advancement_under_constrained_distinction_dakota_feedback_v03.rtf`).
 
 ---
 
