@@ -1,11 +1,25 @@
 # COMPASS → PEER: Questions
 
-**Date:** 2026-06-11 08:26  
+**Date:** 2026-06-11 16:26 (finalized)  
+**Created:** 2026-06-11 08:26  
 **From:** COMPASS  
 **To:** PEER (tenure / academia agent)  
 **Context:** Initial review complete. See `20260611_COMPASS_Initial_Review.md` and `PEER_Status_Update_for_VECTOR_2026-06-03.md`.
 
 Charles: please route to PEER.
+
+---
+
+## How to respond (naming & location)
+
+| Field | Rule |
+|-------|------|
+| **Location** | `3-Master_Plan/` |
+| **Filename** | `YYYYMMDD_HHMM_PEER_to_COMPASS.md` — mirror this file (`COMPASS_to_PEER` → `PEER_to_COMPASS`); use **your local response date/time** (24h) as the prefix |
+| **Example** | `20260611_1700_PEER_to_COMPASS.md` |
+| **Format** | Markdown; numbered replies matching question numbers below; prose welcome |
+
+Save the response file in `3-Master_Plan/` and notify Charles/COMPASS when complete. Do **not** edit this question file unless Charles asks.
 
 > **Charles decisions (2026-06-11):** **Soft gate (Q2)** — stage 9 + honest limitations sufficient for VECTOR to **start** Setting 3 prose; **one basic Cell 12 Cox** before **submission** (not a pre-draft blocker); Fine–Gray deferred. **Cell 12 urgency (Q4):** **no hurry during draft phase** — `stage9_inverted_u.png` is legitimate preliminary evidence; Layer B (Cells 10/10.5/12) is **planned** in `540` (port from Army `520`), not wired yet. See `PROJECT_STATUS_AND_NEAR_TERM_PLAN.md` and `PEER_report_to_COMPASS.md` §2.5.
 
@@ -62,4 +76,4 @@ Charles: please route to PEER.
 
 ---
 
-*Please answer in prose; numbered replies welcome.*
+*Please answer in prose; numbered replies welcome. Save as `YYYYMMDD_HHMM_PEER_to_COMPASS.md` in `3-Master_Plan/` (see § How to respond).*

@@ -211,10 +211,10 @@ Full `MENTAL_MODEL_OF_ALEX.md` deferred to Phase 1 embed in near-term plan; prel
 
 | File | Rationale |
 |------|-----------|
-| `20260611_0826_COMPASS_to_VECTOR_questions.md` | Minimal model closure criteria; prediction prioritization; manuscript section ownership |
-| `20260611_0826_COMPASS_to_SCOUT_questions.md` | Generative \(L_Q\) gap vs manuscript scope; axis figure requirements |
-| `20260611_0826_COMPASS_to_PEER_questions.md` | Setting 3 maturity target; Cox timeline; inference sample definition |
-| `20260611_0826_COMPASS_to_CODA_questions.md` | Army estimand language for manuscript; deferred TB-stratify / pool audit |
+| `20260611_1626_COMPASS_to_VECTOR_questions.md` | Minimal model closure criteria; prediction prioritization; manuscript section ownership |
+| `20260611_1626_COMPASS_to_SCOUT_questions.md` | Generative \(L_Q\) gap vs manuscript scope; axis figure requirements |
+| `20260611_1626_COMPASS_to_PEER_questions.md` | Setting 3 maturity target; Cox timeline; inference sample definition |
+| `20260611_1626_COMPASS_to_CODA_questions.md` | Army estimand language for manuscript; deferred TB-stratify / pool audit |
 
 Charles routes these to agents; COMPASS will not assume answers.
 

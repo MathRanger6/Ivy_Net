@@ -71,7 +71,7 @@ The program is **not** stuck on whether the empirical U exists. The work ahead i
 | **Generative path** | **Manuscript-first:** draft on empirical LOO U + honest generative POC (pool-mean readout) + explicit **two-row axis table**; **not** blocking on generative LOO-pool-quality bin-for-bin match before first draft |
 | **Mechanism prose** | Alex score = **constraint-leg POC**; empirical decomposition for predictions — **one** \(L = B - D\) story in §3–§4 (SCOUT to supply nesting chain for VECTOR) |
 | **Tenure (Setting 3)** | Stage 9 + limitations → start Setting 3 prose now; **Cell 12 Cox not urgent during draft** — basic Layer B run (port `520` → `540`) before **submission**; Fine–Gray deferred |
-| **Deferred** | Army 525/TB-stratify · network extensions · full HPC sweeps · LOO generative bin-for-bin match |
+| **Deferred** | Army 525/TB-stratify · network extensions · full HPC sweeps · LOO generative bin-for-bin match · *open Alex Qs →* [`20260611_Alex_Gates_Talking_Points.md`](20260611_Alex_Gates_Talking_Points.md) |
 
 ### Manuscript layers (what blocks draft vs not)
 
@@ -107,7 +107,7 @@ Parallel   Optional SCOUT work toward LOO generative nesting (north star)
 
 ## 6. Internal next step (SCOUT — for your awareness)
 
-Charles routes to SCOUT: `3-Master_Plan/20260611_0911_COMPASS_to_SCOUT_model_coherence_questions.md`
+Charles routes to SCOUT: `3-Master_Plan/20260611_1626_COMPASS_to_SCOUT_model_coherence_questions.md`
 
 Under the manuscript-first plan, SCOUT will supply:
 
@@ -149,6 +149,7 @@ Not asking you to choose a path — the table in §4 is my call. If anything bel
 | `3-Master_Plan/SCOUT_report_to_COMPASS.md` | Basketball / generative status |
 | `3-Master_Plan/PEER_report_to_COMPASS.md` | Tenure status |
 | `3-Master_Plan/CODA_report_to_COMPASS.md` | Army status |
+| `3-Master_Plan/20260611_Alex_Gates_Talking_Points.md` | Next-meeting bullets (TB-stratify, estimand, tabled items) |
 | `sports/documents/538_Cell10_Generative_Manual.md` | CELL 10 implementation reference |
 
 ---

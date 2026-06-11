@@ -1,11 +1,27 @@
 # COMPASS → SCOUT: Model coherence — Alex score vs decomposable L model
 
-**Date:** 2026-06-11 (revised after Charles Q3 decision)  
+**Date:** 2026-06-11 16:26 (finalized)  
+**Created:** 2026-06-11 09:11  
 **From:** COMPASS  
 **To:** SCOUT  
 **Priority:** **Central** — VECTOR cannot draft §3 (minimal model) without your nesting story under the locked plan.
 
 Charles: please route to SCOUT. Answers update near-term plan and VECTOR prose guidance.
+
+---
+
+## How to respond (naming & location)
+
+| Field | Rule |
+|-------|------|
+| **Location** | `3-Master_Plan/` |
+| **Filename** | `YYYYMMDD_HHMM_SCOUT_to_COMPASS_model_coherence.md` — mirror this file (`COMPASS_to_SCOUT_model_coherence` → `SCOUT_to_COMPASS_model_coherence`); use **your local response date/time** (24h) as the prefix |
+| **Example** | `20260611_1700_SCOUT_to_COMPASS_model_coherence.md` |
+| **Format** | Markdown; address deliverables D1–D11 and §B–§C questions; prose welcome |
+
+**Artifacts / lab scope (separate queue):** reply to `20260611_1626_COMPASS_to_SCOUT_questions.md` as `YYYYMMDD_HHMM_SCOUT_to_COMPASS.md`.
+
+Save each response file in `3-Master_Plan/` and notify Charles/COMPASS when complete. Do **not** edit this question file unless Charles asks.
 
 ---
 
@@ -152,18 +168,18 @@ Charles does **not** need generative LOO-pool-quality replication before draft. 
 
 ---
 
-## 4. Relationship to `20260611_0826_COMPASS_to_SCOUT_questions.md`
+## 4. Relationship to `20260611_1626_COMPASS_to_SCOUT_questions.md`
 
-| 0826 question | Status after Charles Path A |
+| 1626 SCOUT questions (artifacts) | Status after Charles Path A |
 |---------------|----------------------------|
 | A1 — \(L_Q\) generative gap required? | **Answered: No** for v1 (honest axis table + limitations) |
 | A2 — Both Plot B axes in manuscript? | **Still need SCOUT** — likely supplement or methods; confirm |
 | A3 — CELL 7 hard gate? | **Still need SCOUT** |
 | B4 — Priority order | **Prefilled:** (e) manuscript support → (c) CELL 7 → (b) 4D → (d) sweep → (a) LOO generative match **deferred** — confirm or revise |
 | B5 — Minimum 4-week deliverable | **Replaced by D10** in this doc |
-| C, D, E in 0826 | **Still open** — answer in 0826 or here |
+| C, D, E in 1626 SCOUT questions | **Still open** — answer in `20260611_1626_COMPASS_to_SCOUT_questions.md` or here |
 
-This document is **authoritative for model coherence and nesting**; 0826 remains authoritative for artifacts, `PERF_METRIC`, 535/539 status.
+This document is **authoritative for model coherence and nesting**; `20260611_1626_COMPASS_to_SCOUT_questions.md` remains authoritative for artifacts, `PERF_METRIC`, 535/539 status.
 
 ---
 
@@ -187,4 +203,4 @@ Please respond with enough detail that VECTOR can draft §3 without contradictio
 
 ---
 
-*End model coherence questions (Path II locked).*
+*End model coherence questions (Path II locked). Save as `YYYYMMDD_HHMM_SCOUT_to_COMPASS_model_coherence.md` in `3-Master_Plan/` (see § How to respond).*

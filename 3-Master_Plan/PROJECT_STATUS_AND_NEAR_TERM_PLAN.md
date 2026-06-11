@@ -7,7 +7,7 @@
 **Companion docs:**  
 - [20260611_COMPASS_Initial_Review.md](20260611_COMPASS_Initial_Review.md)  
 - Advisor plan update: [20260611_Brief_for_Alex_Gates_brief.md](20260611_Brief_for_Alex_Gates_brief.md) · [full](20260611_Brief_for_Alex_Gates_full.md)  
-- Agent questions: `20260611_0826_COMPASS_to_{VECTOR,SCOUT,PEER,CODA}_questions.md` · SCOUT coherence: `20260611_0911_COMPASS_to_SCOUT_model_coherence_questions.md`  
+- Agent questions: `20260611_1626_COMPASS_to_{VECTOR,SCOUT,PEER,CODA}_questions.md` · SCOUT coherence: `20260611_1626_COMPASS_to_SCOUT_model_coherence_questions.md` · Agent responses: `YYYYMMDD_HHMM_{AGENT}_to_COMPASS.md` in `3-Master_Plan/`  
 - Operating procedure: [COMPASS_Initial_Guidance_v6.md](COMPASS_Initial_Guidance_v6.md)
 
 ---
@@ -30,7 +30,7 @@ The dissertation program is a **three-setting cross-domain study** of **advancem
 | 4 | Tenure Cell 12 urgency | **Charles confirmed (2026-06-11):** no hurry on planned Cell 12 for `540` during **draft phase**. Current **CELL 9** binned plot (`stage9_inverted_u.png`) is **legitimate preliminary descriptive evidence** for process trust and VECTOR Setting 3 prose (with limitations). **Basic Cox** remains pre-**submission** parallel work (PEER-owned); **Fine–Gray** may return before publication if estimand requires it — not gating draft |
 | — | Scientific north star | Unified decomposable generative on LOO axis — **parallel**, does not gate first draft |
 | — | Terminology lock | Any quantity **excluding self** must include **`LOO`** in the name (`poolq_loo` = LOO pool quality; `team_mean` / pool mean = whole roster, not LOO) |
-| — | Model coherence | `20260611_0911_COMPASS_to_SCOUT_model_coherence_questions.md` **revised** for locked Path II — SCOUT must supply nesting chain + deliverables D1–D11, not path choice |
+| — | Model coherence | `20260611_1626_COMPASS_to_SCOUT_model_coherence_questions.md` **revised** for locked Path II — SCOUT must supply nesting chain + deliverables D1–D11, not path choice |
 | — | Alex comms | Plan update briefs — Charles's sequencing calls; optional perspective welcome, not a decision questionnaire |
 
 ---
@@ -286,7 +286,7 @@ S_i = A_i - \lambda L_{C,i}
 | Step | Owner | Output |
 |------|-------|--------|
 | A1 | COMPASS + Charles | Initial Review + plan largely locked (2026-06-11); revise on agent answers |
-| A2 | Charles → agents | Answers to `20260611_0826_COMPASS_to_*` questions |
+| A2 | Charles → agents | Answers as `YYYYMMDD_HHMM_{AGENT}_to_COMPASS.md` (see each question file § How to respond) |
 | A3 | VECTOR | Claim language table (supported / preliminary / not supported) |
 | A4 | All agents | Shared glossary: pool quality, LOO, distinction, inverted-U |
 
@@ -408,7 +408,7 @@ Charles locked Q1–3 ──► Sequence lock (CODA Q4+ open)
 # Part VIII — COMPASS next actions
 
 1. Continue Charles clarification thread (CODA parallel track, OpenAlex policy, etc.).  
-2. Incorporate agent answers from `20260611_0826_COMPASS_to_*` and SCOUT 0911 doc.  
+2. Incorporate agent answers from `*_to_COMPASS.md` files in `3-Master_Plan/`.  
 3. Charles routes SCOUT coherence questions; VECTOR drafts after Week 2 exports.  
 4. Phase 2 artifacts (`DECISION_LOG.md`, `OPEN_QUESTIONS.md`) when Charles requests.  
 5. Do **not** direct implementation agents to code without Charles routing.  

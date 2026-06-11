@@ -413,4 +413,4 @@ This report was authored by **PEER** in Cursor sessions covering tenure pipeline
 
 ---
 
-*End PEER handoff. COMPASS active — see `PROJECT_STATUS_AND_NEAR_TERM_PLAN.md` and `20260611_0826_COMPASS_to_PEER_questions.md`.*
+*End PEER handoff. COMPASS active — see `PROJECT_STATUS_AND_NEAR_TERM_PLAN.md` and `20260611_1626_COMPASS_to_PEER_questions.md`.*

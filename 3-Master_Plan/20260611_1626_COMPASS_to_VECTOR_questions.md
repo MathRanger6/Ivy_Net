@@ -1,11 +1,25 @@
 # COMPASS → VECTOR: Questions
 
-**Date:** 2026-06-11 08:26  
+**Date:** 2026-06-11 16:26 (finalized)  
+**Created:** 2026-06-11 08:26  
 **From:** COMPASS  
 **To:** VECTOR (theory / manuscript agent)  
 **Context:** Initial review complete. See `20260611_COMPASS_Initial_Review.md`.
 
 Charles: please route to VECTOR. Answers will refine near-term manuscript sequencing.
+
+---
+
+## How to respond (naming & location)
+
+| Field | Rule |
+|-------|------|
+| **Location** | `3-Master_Plan/` |
+| **Filename** | `YYYYMMDD_HHMM_VECTOR_to_COMPASS.md` — mirror this file (`COMPASS_to_VECTOR` → `VECTOR_to_COMPASS`); use **your local response date/time** (24h) as the prefix |
+| **Example** | `20260611_1700_VECTOR_to_COMPASS.md` |
+| **Format** | Markdown; numbered replies matching question numbers below; prose welcome |
+
+Save the response file in `3-Master_Plan/` and notify Charles/COMPASS when complete. Do **not** edit this question file unless Charles asks.
 
 > **Charles decisions (2026-06-11):** **Summer–Fall 2026** target · **Manuscript-first generative path** (honest pool-mean POC + axis table; LOO generative match **deferred**) · **Tenure soft Cox gate** · **Cell 12 not urgent during draft** (CELL 9 + limitations OK for Setting 3 prose; basic Cox before submission only) · LOO terminology lock. See `20260611_Brief_for_Alex_Gates_full.md` and `PROJECT_STATUS_AND_NEAR_TERM_PLAN.md` row 4.
 
@@ -63,4 +77,4 @@ Charles: please route to VECTOR. Answers will refine near-term manuscript sequen
 
 ---
 
-*Please answer in prose; numbered replies welcome. COMPASS will not infer answers.*
+*Please answer in prose; numbered replies welcome. COMPASS will not infer answers. Save as `YYYYMMDD_HHMM_VECTOR_to_COMPASS.md` in `3-Master_Plan/` (see § How to respond).*

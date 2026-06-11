@@ -260,7 +260,7 @@ COMPASS may absorb that map or supersede it — SCOUT does not treat the `.curso
 
 ### B. Basketball generative priorities
 
-5. **Resolved — manuscript-first (e):** exports + axis table + nesting chain; LOO generative match **deferred**. Detail: `20260611_0911_COMPASS_to_SCOUT_model_coherence_questions.md`.
+5. **Resolved — manuscript-first (e):** exports + axis table + nesting chain; LOO generative match **deferred**. Detail: `20260611_1626_COMPASS_to_SCOUT_model_coherence_questions.md`.
 6. Should COMPASS treat **539** as deprecated, reference-only, or still active for Alex demos?
 7. Is **team_mean** vs **\(L_Q\)** axis choice a **manuscript figure requirement** (show both) or internal lab detail?
 
@@ -299,4 +299,4 @@ If a future Cursor session is labeled “SCOUT,” it should read this report + 
 
 ---
 
-*SCOUT handoff report ends. COMPASS active — see `20260611_0911_COMPASS_to_SCOUT_model_coherence_questions.md` and `20260611_0826_COMPASS_to_SCOUT_questions.md`.*
+*SCOUT handoff report ends. COMPASS active — see `20260611_1626_COMPASS_to_SCOUT_model_coherence_questions.md` and `20260611_1626_COMPASS_to_SCOUT_questions.md`.*

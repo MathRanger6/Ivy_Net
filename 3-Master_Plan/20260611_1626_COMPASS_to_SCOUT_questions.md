@@ -1,13 +1,29 @@
 # COMPASS → SCOUT: Questions
 
-**Date:** 2026-06-11 08:26 (partially superseded for coherence — see note)  
+**Date:** 2026-06-11 16:26 (finalized)  
+**Created:** 2026-06-11 08:26  
 **From:** COMPASS  
 **To:** SCOUT (basketball / Tier 1 generative agent)  
-**Context:** Initial review complete. See `20260611_COMPASS_Initial_Review.md` and `Scout_Status_Update_for_VECTOR_Laszlo_Briefing_2026-06-02.md`.
+**Context:** Initial review complete. See `20260611_COMPASS_Initial_Review.md` and `Scout_Status_Update_for_Vector_Laszlo_Briefing_2026-06-02.md`.
 
 Charles: please route to SCOUT.
 
-> **Charles decision (2026-06-11, Q3):** **Path A — manuscript-first** (= **Path II — Separate layers** in `20260611_0911_COMPASS_to_SCOUT_model_coherence_questions.md`). Generative LOO-pool-quality match is **not** a v1 blocker. **Nesting / axis / deliverable questions** live in the 0911 doc; this file covers artifacts, metrics, and lab scope.
+> **Charles decision (2026-06-11, Q3):** **Path A — manuscript-first** (= **Path II — Separate layers** in `20260611_1626_COMPASS_to_SCOUT_model_coherence_questions.md`). Generative LOO-pool-quality match is **not** a v1 blocker. **Nesting / axis / deliverable questions** live in the model-coherence doc; this file covers artifacts, metrics, and lab scope.
+
+---
+
+## How to respond (naming & location)
+
+| Field | Rule |
+|-------|------|
+| **Location** | `3-Master_Plan/` |
+| **Filename** | `YYYYMMDD_HHMM_SCOUT_to_COMPASS.md` — mirror this file (`COMPASS_to_SCOUT` → `SCOUT_to_COMPASS`); use **your local response date/time** (24h) as the prefix |
+| **Example** | `20260611_1700_SCOUT_to_COMPASS.md` |
+| **Format** | Markdown; numbered replies matching question numbers below; prose welcome |
+
+**Model coherence (separate queue):** reply to `20260611_1626_COMPASS_to_SCOUT_model_coherence_questions.md` as `YYYYMMDD_HHMM_SCOUT_to_COMPASS_model_coherence.md`.
+
+Save each response file in `3-Master_Plan/` and notify Charles/COMPASS when complete. Do **not** edit this question file unless Charles asks.
 
 ---
 
@@ -32,7 +48,7 @@ Charles: please route to SCOUT.
    - **(d) HPC sweep** — defer  
    - **(a) LOO-pool-quality generative match** — **deferred** (parallel science)
 
-5. **Minimum generative deliverable for VECTOR (next ~4 weeks):** see **D10** in `20260611_0911_COMPASS_to_SCOUT_model_coherence_questions.md` (single next coding task under Path II). Reply there; brief cross-reference here if helpful.
+5. **Minimum generative deliverable for VECTOR (next ~4 weeks):** see **D10** in `20260611_1626_COMPASS_to_SCOUT_model_coherence_questions.md` (single next coding task under Path II). Reply there; brief cross-reference here if helpful.
 
 6. **539 status:** Deprecated reference-only, or still active for Alex demos? Should COMPASS treat 539 as **citation-only** in planning docs?
 
@@ -64,4 +80,4 @@ Charles: please route to SCOUT.
 
 ---
 
-*Please answer in prose; numbered replies welcome.*
+*Please answer in prose; numbered replies welcome. Save as `YYYYMMDD_HHMM_SCOUT_to_COMPASS.md` in `3-Master_Plan/` (see § How to respond).*

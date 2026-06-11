@@ -346,4 +346,4 @@ This report was authored by **CODA** in the Cursor session covering Army talent 
 
 ---
 
-*End CODA handoff. COMPASS active — see `20260611_0826_COMPASS_to_CODA_questions.md` for open Army sequencing items.*
+*End CODA handoff. COMPASS active — see `20260611_1626_COMPASS_to_CODA_questions.md` for open Army sequencing items.*
