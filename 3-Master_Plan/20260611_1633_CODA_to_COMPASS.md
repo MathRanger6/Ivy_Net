@@ -160,7 +160,7 @@ Reference: `talent/documents/Pertinent_Thoughts.md` § Senior Rater Pools (code-
 |---------|------------------------|
 | **Army** | Full competing risks + cause-specific Cox (mature) |
 | **SCOUT** | **Binned draft rates** vs LOO pool quality (replicated inverted-U); generative congestion work is **parallel north star**, not v1 gate |
-| **PEER** | Preliminary **binned tenure rates** (stage 9); Cox wired but not yet reported |
+| **PEER** | Preliminary **binned tenure rates** (stage 9); **Layer B (Cox) planned, Cell 12 not yet archived** — soft gate pre-submission per Charles |
 
 **Manuscript methods:** One shared **conceptual** frame (nested pools, LOO peer quality, inverted-U qualitative target). **Setting-specific methods subsections** with honest maturity labels: Army = survival/competing risks; basketball = stratified draft incidence; tenure = preliminary stratified tenure rates (+ Cox forthcoming).
 
