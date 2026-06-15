@@ -31,8 +31,9 @@ Charles: **Round 2 deliverable complete.** Path II unchanged. **Five greens, two
 | **C3** | **Axis table** frozen: model quantity ↔ empirical quantity ↔ setting | **PARTIAL** | Prose + two-row logic in [`20260611_1640_SCOUT_to_COMPASS_model_coherence.md`](20260611_1640_SCOUT_to_COMPASS_model_coherence.md) §A3; **no** standalone `axis_table_generative_readouts.md` on disk yet | SCOUT D10 | **Yellow** → Green after D10 |
 | **C4** | **Score equation one-pager** frozen with λ / soft-assignment semantics | **PARTIAL** | `sports/tier1_sim_config.py` (`SELECTION_539_*` constants); [`538_Cell10_Generative_Manual.md`](../sports/documents/538_Cell10_Generative_Manual.md) | SCOUT: extract to `score_equation_one_pager.md` in bundle | **Yellow** → Green after D10 |
 | **C5** | **Honest limitation prose** drafted (Rung 2 axis ≠ Rung 1 axis) | **DONE** | Exact VECTOR sentence in [`20260611_1640_SCOUT_to_COMPASS_model_coherence.md`](20260611_1640_SCOUT_to_COMPASS_model_coherence.md) §A3 | VECTOR ink | **Green** (prose ready; VECTOR pastes) |
-| **C6** | ≥ **two predictions** traceable to mechanism (not curve replication) | **PARTIAL** | **(1) Near-threshold heterogeneity:** `datasets/mbb/exports_inverted_u_v0/heterogeneity_ventiles_top_tail.{png,csv}` (538D CELL 4D, 2026-06-02). **(2) Peak shift with global Λ:** **not basketball-owned** — Army/CODA natural home; basketball K-slots secondary | Prediction #2 = CODA + VECTOR prose; #1 export refresh optional in D10 | **Yellow** (1 of 2 strong in SCOUT lane) |
-| **C7** | **Manuscript export bundle** on disk (D10): empirical Fig 2 + generative contrast + manifest | **MISSING** | Script specified in [`20260611_1640_SCOUT_to_COMPASS_model_coherence.md`](20260611_1640_SCOUT_to_COMPASS_model_coherence.md) §D; **not yet built** | SCOUT D10; Charles **C9** path lock | **Yellow** until built |
+| **C6** | ≥ **two predictions** traceable to mechanism (not curve replication); **includes model-guided measurable** (quality vs congestion) | **PARTIAL** | **(1) Near-threshold heterogeneity:** `datasets/mbb/exports_inverted_u_v0/heterogeneity_ventiles_top_tail.{png,csv}` (538D CELL 4D, 2026-06-02). **(2) Peak shift with global Λ:** **not basketball-owned** — Army/CODA natural home; basketball K-slots secondary | Prediction #2 = CODA + VECTOR prose; #1 export refresh optional in D10 | **Yellow** (1 of 2 strong in SCOUT lane) |
+| **C7** | **Manuscript export bundle** on disk (D10): empirical Fig 2 + generative contrast + **Tier 2.5 feature panel** + manifest | **MISSING** | Script specified in [`20260611_1640_SCOUT_to_COMPASS_model_coherence.md`](20260611_1640_SCOUT_to_COMPASS_model_coherence.md) §D; **not yet built** | SCOUT D10; Charles **C9** path lock | **Yellow** until built |
+| **C8** *(PD12 optional)* | **Quality vs congestion** distinction **exported** in D10 (axis table row + congestion column/panel) | **PARTIAL** | `crowding_smooth` in pipeline; not yet named closure row on disk | SCOUT D10 | **Yellow** → Green after D10 |
 
 **SCOUT closure rule:** Items C1–C4 + C7 go **green** when D10 lands. C5 already green. C6 stays **yellow** until cross-domain prediction map names Army Λ + basketball near-threshold — acceptable for v1 §3 closure; §4 can carry yellow honestly.
 
@@ -134,7 +135,9 @@ Under Path II, Charles does **not** need to “apply the generative model” in 
 
 ## §7 — One sentence for Charles (Alex script)
 
-> **“We will call the minimal model complete when the basketball generative score POC is frozen in a manuscript export bundle — talent-only fails, congestion-in-score bends curves on pool mean, axis table and limitation prose are on disk — while Army and tenure stay empirical inverted-U legs at honest maturity, without generative LOO bin-for-bin match.”**
+> **“We will call the minimal model complete when the basketball generative score POC is frozen in a manuscript export bundle — talent-only fails, congestion-in-score bends curves on pool mean, at least one model-guided empirical quantity is exported (team quality vs viable-peer congestion), at least one prediction readout is on disk (near-threshold heterogeneity), axis table and limitation prose are frozen — while Army and tenure stay empirical inverted-U legs at honest maturity, without generative LOO bin-for-bin match or full 3-domain parameter identifiability.”**
+
+*PD12 B-lite closure — see [`20260615_1200_COMPASS_PD12_reassessment.md`](20260615_1200_COMPASS_PD12_reassessment.md) §Q2.*
 
 ---
 

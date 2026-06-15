@@ -2,9 +2,11 @@
 
 > **Maintained by:** **COMPASS** (cross-project planner; renamed 2026-06-11 from “Master Planner”). See [COMPASS_AGENT_IDENTITY.md](COMPASS_AGENT_IDENTITY.md).
 
-**Date:** 2026-06-11  
+**Date:** 2026-06-15 (PD12 ladder patch)  
 **Author:** COMPASS  
 **Companion docs:**  
+- [20260615_1200_COMPASS_PD12_reassessment.md](20260615_1200_COMPASS_PD12_reassessment.md)  
+- [20260615_1045_COMPASS_to_Charles_forward_plan_and_questions.md](20260615_1045_COMPASS_to_Charles_forward_plan_and_questions.md)  
 - [20260611_COMPASS_Initial_Review.md](20260611_COMPASS_Initial_Review.md)  
 - Advisor plan update: [20260611_Brief_for_Alex_Gates_brief.md](20260611_Brief_for_Alex_Gates_brief.md) · [full](20260611_Brief_for_Alex_Gates_full.md)  
 - Agent questions: `20260611_1626_COMPASS_to_{VECTOR,SCOUT,PEER,CODA}_questions.md` · SCOUT coherence: `20260611_1626_COMPASS_to_SCOUT_model_coherence_questions.md` · Agent responses: `YYYYMMDD_HHMM_{AGENT}_to_COMPASS.md` in `3-Master_Plan/` — **CODA filed:** [20260611_1633_CODA_to_COMPASS.md](20260611_1633_CODA_to_COMPASS.md) (replies to COMPASS Q3–Q12; Q1/Q9 paused pending AWS sync)
@@ -14,7 +16,9 @@
 
 ## Executive summary
 
-The dissertation program is a **three-setting cross-domain study** of **advancement under constrained distinction**, with Army as anchor, basketball as replication, and academia as preliminary third leg. Empirical inverted-U patterns are **established** (Army, basketball) and **preliminary** (tenure). The scientific bottleneck has shifted from discovery to **convergence**: close the **minimal generative model** (honest claims), lock **2–3 testable predictions**, and draft a **Wang-style manuscript** — while **deferring** 525/UIC deep dives, network-science extensions, and generative LOO-pool-quality bin-for-bin matching unless Charles or Alex elevates them.
+The dissertation program is a **three-setting cross-domain study** of **advancement under constrained distinction**, with Army as anchor, basketball as replication, and academia as preliminary third leg. Empirical inverted-U patterns are **established** (Army, basketball) and **preliminary** (tenure). The scientific bottleneck has shifted from discovery to **convergence**: close the **minimal generative model** (honest claims), export **model-guided empirical features** (PD12 Priority 3 — quality vs congestion), lock **2–3 testable predictions**, and draft a **Wang-style manuscript** — while **deferring** 525/UIC deep dives, network-science extensions, 3-domain parametric identifiability (PD12 P1), fourth-domain falsification (PD12 P4), and generative LOO-pool-quality bin-for-bin matching unless Charles or Alex elevates them.
+
+**PD12 alignment (2026-06-15):** v1 delivers Priority 3 + partial Priority 2 (talent-only fail). P1 and P4 deferred explicitly — not silent drift. See [reassessment memo](20260615_1200_COMPASS_PD12_reassessment.md).
 
 **Target:** core manuscript draft/submission **Summer–Fall 2026** (~3–6 months).
 
@@ -73,19 +77,20 @@ The dissertation program is a **three-setting cross-domain study** of **advancem
 | Cross-domain minimal story | PD11, Alex Tier 1 spine | Don't calibrate generative on observed team means only |
 | Parallel tracks: code + publication | `advisor_brief_twofold_status.md` | But **manuscript now beats 525** for near-term |
 
-### Alex priorities (inferred)
+### Alex priorities (PD12 + inferred)
 
-1. Empirical replication credibility.  
-2. Minimal generative proof (ability-only fails; congestion bends curve).  
-3. Honest conditioning-axis language.  
-4. Predictions beyond curve-fitting.  
-5. Sample-loss transparency (tenure).
+| Priority | PD12 name | v1 status |
+|----------|-----------|-----------|
+| **P3** | Model-guided empirical features (congestion vs quality) | **In scope** — SCOUT D10 export + VECTOR §3 |
+| **P2** | Extreme events / kill switches | **Partial** — talent-only fail; full 539 sweeps deferred |
+| **P1** | Parameter identifiability (3-domain fit) | **Deferred** — post-v1 / dissertation |
+| **P4** | Falsification / 4th domain | **Deferred** — post-v1 |
 
 ### Alex concerns
 
-- Over-claiming generative replication on \(L_Q\).  
-- Presenting quadratic as theory.  
-- Fine–Gray / estimand sloppiness.  
+- Over-claiming generative replication on \(L_Q\).
+- Presenting quadratic as theory.
+- Fine–Gray / estimand sloppiness.
 - Endless data expansion without curves.
 
 ---
@@ -95,7 +100,7 @@ The dissertation program is a **three-setting cross-domain study** of **advancem
 | Question | Working answer |
 |----------|----------------|
 | What problem are we solving? | Nonlinear advancement from **local pool quality × finite distinction**, explained by **minimal generative mechanism**, replicated cross-domain. |
-| What evidence convinces him? | 3-panel empirical U; generative ability-only null; congestion score POC; 1–2 sharp predictions tested or test-ready. |
+| What evidence convinces him? | 3-panel empirical U; generative ability-only null; congestion score POC; **model-guided features exported**; 1–2 sharp predictions tested or test-ready. |
 | What would he cut? | Network extensions pre-paper; 537; "538D decomposes 539"; causal overclaim. |
 | What would he prioritize? | PD11 thread C→A; Wang ladder empirical; one heterogeneity prediction. |
 | Top risks he watches | Axis/estimand confusion; distraction from writing; tenure overclaim without Cox. |
@@ -175,6 +180,16 @@ flowchart LR
 
 ## Modeling status
 
+### Scientific progression ladder (PD12-aligned)
+
+```text
+Rung 1  Phenomenon (inverted-U on LOO proxy — triad)
+Rung 2  Minimal mechanism (Path II generative POC — basketball)
+Rung 2.5  Model-guided empirical features (quality vs congestion — export in D10)
+Rung 3  Predictions (near-threshold; Λ)
+Rung 4  Manuscript
+```
+
 ### Minimal model (VECTOR / Tier 1)
 
 **Equation-level claim:**
@@ -190,6 +205,7 @@ S_i = A_i - \lambda L_{C,i}
 | Empirical U on \(Q\) | ✅ Army, basketball; preliminary tenure |
 | Ability-only generative null | ✅ Confirmed |
 | Congestion score implemented | ✅ |
+| **Model-guided features (quality vs congestion)** | ✅ in pipeline; **D10 export pending** |
 | Inverted-U generative (team_mean) | ✅ |
 | Inverted-U generative (\(L_Q\) LOO) | ❌ Not matched |
 | \(B(Q)-D(Q)\) decomposition estimated | ❌ Deferred |
