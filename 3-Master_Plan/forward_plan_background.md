@@ -5,8 +5,9 @@
 **To:** Charles Levine  
 **Status:** Temporary reader's guide — you do not need to read Round 1–5 correspondence files to move forward.
 
+**Reading order + glossary:** [`forward_plan_reading_guide.md`](forward_plan_reading_guide.md) — **start here if shorthand loses you**  
 **Canonical action doc:** [`20260615_1045_COMPASS_to_Charles_forward_plan_and_questions.md`](20260615_1045_COMPASS_to_Charles_forward_plan_and_questions.md)  
-**PD12 reassessment:** [`20260615_1200_COMPASS_PD12_reassessment.md`](20260615_1200_COMPASS_PD12_reassessment.md)
+**PD12 reassessment:** [`20260615_1200_COMPASS_PD12_reassessment.md`](20260615_1200_COMPASS_PD12_reassessment.md) — read **after** action doc + PD12 guidance (see reading guide)
 
 ---
 
@@ -155,11 +156,15 @@ You    → schedule Alex for Army estimand + TB-stratify (Tier 3)
 
 ---
 
-## If you read only three more files
+## If you read only a few more files
 
-1. **[Forward plan](20260615_1045_COMPASS_to_Charles_forward_plan_and_questions.md)** — where you are + your questions in order  
-2. **[VECTOR claim table](20260615_1100_VECTOR_claim_language_table.md)** — what the paper may say (especially §F “Do Say / Do Not Say”)  
-3. **[SCOUT closure](20260615_1012_SCOUT_to_COMPASS_minimal_model_closure.md)** — §7 one sentence for Alex: when is the “minimal model complete enough?”
+**Full order:** see **[reading guide](forward_plan_reading_guide.md)** (print this with doc 1).
+
+1. **[Forward plan](20260615_1045_COMPASS_to_Charles_forward_plan_and_questions.md)** — where you are + your questions in order (**before** PD12 reassessment)  
+2. **[PD12 guidance](../sports/documents/20260520_Transcript_12_guidance.md)** — Alex’s four priorities  
+3. **[PD12 reassessment](20260615_1200_COMPASS_PD12_reassessment.md)** — ladder relabel  
+4. **[VECTOR claim table](20260615_1100_VECTOR_claim_language_table.md)** — §F “Do Say / Do Not Say”  
+5. **[SCOUT closure](20260615_1012_SCOUT_to_COMPASS_minimal_model_closure.md)** — §7 one sentence for Alex
 
 ---
 
