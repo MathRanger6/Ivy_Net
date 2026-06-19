@@ -15,6 +15,7 @@ Use this folder for guides that apply to **more than one** project area (**talen
 
 | File | Purpose |
 |------|---------|
+| [`INSIGHT_NUGGETS.md`](../3-Master_Plan/INSIGHT_NUGGETS.md) | **Cross-project pivotal insights** (framing nuggets — not domain technical notes) |
 | [`HPC_AND_SHELL_QUICKREF.md`](./HPC_AND_SHELL_QUICKREF.md) | **One-page** bash / Git / Slurm / rsync cheat sheet; links to long-form docs. |
 | [`GIT_MULTIPLE_MACHINES_ELEMENTARY.md`](./GIT_MULTIPLE_MACHINES_ELEMENTARY.md) | Git/GitHub mental model: laptop, HPC, GitHub; first push/clone/pull. |
 | [`GIT_FOR_DUMMIES.md`](./GIT_FOR_DUMMIES.md) | Practical Git recipes: stash, rebase, fix staging, recovery. |

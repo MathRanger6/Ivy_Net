@@ -5,7 +5,7 @@
 **To:** Charles Levine  
 **Purpose:** One-page companion for sun reading. Use this when shorthand in other docs loses you.
 
-**Start here if lost:** this file → then the numbered list below.
+**Start here if lost:** this file → [`INSIGHT_NUGGETS.md`](INSIGHT_NUGGETS.md) (pivotal framing) → then the numbered list below.
 
 ---
 
@@ -15,6 +15,8 @@ Read in sequence. Later docs assume earlier ones.
 
 | Step | Document | Read for |
 |------|----------|----------|
+| **0a** | [`INSIGHT_NUGGETS.md`](INSIGHT_NUGGETS.md) | **Pivotal perspectives** — keep while reading everything else |
+| **0b** | [`docs/Menger/`](../docs/Menger/) — paper + `Complete_Companion.pdf` | **Menger deep read** (optional; after nuggets + claim table) |
 | **0** | **This file** | Order + glossary |
 | **1** | [`forward_plan_background.md`](forward_plan_background.md) | Plain-English story; mini jargon sheet |
 | **2** | [`20260615_1045_COMPASS_to_Charles_forward_plan_and_questions.md`](20260615_1045_COMPASS_to_Charles_forward_plan_and_questions.md) | Action plan; **§6–§7 your locks** (what C1, D10, V1 mean) |

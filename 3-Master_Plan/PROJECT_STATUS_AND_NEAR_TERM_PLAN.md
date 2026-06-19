@@ -41,6 +41,8 @@ The dissertation program is a **three-setting cross-domain study** of **advancem
 
 # Part I — Foundational context
 
+**Pivotal insights (nuggets):** [`INSIGHT_NUGGETS.md`](INSIGHT_NUGGETS.md) — cross-project framing worth keeping while reading this doc and the forward plan.
+
 ## Foundational project summary (dissertation origins)
 
 **Original vision (Aug 2024 proposal):** *Deciphering the Talent Mosaic* — use Army PDE/OER data and network methods (Officer Career Network, Officer Professional Network) to quantify **unit prestige**, **peer effects**, and **rater evaluation tradeoffs** across three Army chapters (Q1–Q3). Methods: eigenvector centrality, survival analysis, West Point Post Night validation.

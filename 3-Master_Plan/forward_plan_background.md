@@ -6,6 +6,7 @@
 **Status:** Temporary reader's guide — you do not need to read Round 1–5 correspondence files to move forward.
 
 **Reading order + glossary:** [`forward_plan_reading_guide.md`](forward_plan_reading_guide.md) — **start here if shorthand loses you**  
+**Pivotal insights (nuggets):** [`INSIGHT_NUGGETS.md`](INSIGHT_NUGGETS.md) — cross-project framing worth keeping  
 **Canonical action doc:** [`20260615_1045_COMPASS_to_Charles_forward_plan_and_questions.md`](20260615_1045_COMPASS_to_Charles_forward_plan_and_questions.md)  
 **PD12 reassessment:** [`20260615_1200_COMPASS_PD12_reassessment.md`](20260615_1200_COMPASS_PD12_reassessment.md) — read **after** action doc + PD12 guidance (see reading guide)
 
