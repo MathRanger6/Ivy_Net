@@ -115,6 +115,22 @@
 
 ---
 
+### 2026-06-19 — Non-routine work creates demand for talent narratives
+
+**Nugget:** In routine work, performance can often be evaluated through procedures, checklists, and observable outputs. In **non-routine work**, future success is uncertain, quality is difficult to define, and performance is hard to measure. Under those conditions, organizations increasingly rely on concepts such as **talent**, **potential**, **promise**, and **genius** as evaluation shortcuts.
+
+**Why it matters:** Provides an important bridge between Menger's talent framework and Barabási's work on success and recognition. Non-routine environments create uncertainty; talent labels become mechanisms for managing that uncertainty.
+
+**Not the same as:** Claiming talent is fictitious. Menger's point is that talent labels often help evaluators cope with uncertainty when performance cannot be fully specified in advance.
+
+**Key connection:** Talent acts as a **complexity-reduction device**. The more non-routine the work, the more attractive talent narratives become.
+
+**One-sentence takeaway:** Non-routine work is work whose value cannot be fully specified in advance and whose performance cannot be evaluated using a simple rulebook.
+
+**Tags:** `menger` · `cross` · `manuscript`
+
+---
+
 ### 2026-06-15 — Quality ≠ congestion (two legs of the story)
 
 **Nugget:** **Team quality** (mean peer performance, `poolq_loo`) and **viable-peer congestion** (`crowding_smooth`, \(C_{i,t}\)) are **different quantities**. Elite environments often raise **both** talent and **substitutability**.
@@ -126,6 +142,22 @@
 **Sources:** [`sports/documents/20260520_Transcript_12_guidance.md`](../sports/documents/20260520_Transcript_12_guidance.md) §Priority 3; [`20260615_1200_COMPASS_PD12_reassessment.md`](20260615_1200_COMPASS_PD12_reassessment.md)
 
 **Tags:** `cross` · `alex` · `scout` · `manuscript`
+
+---
+
+### 2026-06-19 — Inclusive rhetoric, exclusive allocation
+
+**Nugget:** Menger argues that although talent-management literature appears to oscillate between **inclusive** and **exclusive** conceptions of talent, organizations frequently behave as if the **exclusive** model is true. Public rhetoric emphasizes development and broad human potential, while consequential decisions often assume talent is scarce, concentrated, measurable, and deserving of special treatment.
+
+**Why it matters:** This observation helps explain why talent management repeatedly generates ranking systems, elite pipelines, differential rewards, and hierarchy formation. It is one of the clearest bridges between talent discourse and inequality.
+
+**Not the same as:** Claiming organizations consciously reject employee development. The point is that resource allocation decisions often reveal a different operating logic than public-facing talent language.
+
+**Deepest reading:** Talent-management literature publicly presents itself as developmental and inclusive. But when organizations make consequential decisions, they usually act as if talent is rare, concentrated, measurable, and deserving of special treatment. Therefore the exclusive model is the true operating logic of modern talent management. Once you see this, much of Menger's manuscript can be read as an investigation of the consequences of taking that assumption seriously.
+
+**One-sentence takeaway:** The inclusive model dominates organizational rhetoric; the exclusive model often dominates organizational behavior.
+
+**Tags:** `menger` · `cross` · `manuscript`
 
 ---
 
