@@ -9,8 +9,6 @@
 		}
 	],
 	"settings": {
-		// Default shell profile (define "sports_net" in user settings if needed).
-		// Legacy tenure_net profile was removed; conda env is tenure_net vs sports_net by project.
 		"terminal.integrated.defaultProfile.osx": "sports_net",
 		"terminal.integrated.fontSize": 11,
 		"terminal.integrated.fontFamily": "Consolas, 'Courier New', monospace",
@@ -23,8 +21,10 @@
 			"**/reference_documents/**"
 		],
 		"specstory.cloudSync.enabled": "always",
+		"specstory.autoSave.enabled": true,
 		"specstory.outputPath": ".specstory/history",
 		"specstory.coordinatedUniversalTimezone": false,
+		"specstory.showDeveloperTools": true,
 		"jupyter.widgetScriptSources": ["jsdelivr.com", "unpkg.com"]
 	}
 }
