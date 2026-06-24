@@ -399,6 +399,20 @@
 
 ---
 
+### 2026-06-24 — Additive v1; multiplicative deferred (stop rule)
+
+**Nugget:** Menger/Shockley **multiplicative** bundles and Wang **log-normal success** explain distribution tails and inequality amplification — different objects from v1’s **additive selection score** \(S = A - \lambda C\) and **\(L_{\text{net}} = B - D\)** decomposition. Reading them does **not** mandate a generative rewrite before draft.
+
+**Why it matters:** Prevents sideways drift from Tier 1 locks → D10 → VECTOR draft.
+
+**Not the same as:** Claiming multiplicative talent is wrong — it belongs in §5 discussion and post-v1 \(B(Q)-D(Q)\) work.
+
+**Sources:** [`Model_Nesting_Note_v1.md`](../1-Various_PDE_and_Chat_stuff/5-Manuscript/Model_Nesting_Note_v1.md) §7; [`20260617_COMPASS_Menger_conceptual_calibration.md`](20260617_COMPASS_Menger_conceptual_calibration.md); Wang et al. 2025 Ch 40
+
+**Tags:** `cross` · `vector` · `compass` · `manuscript`
+
+---
+
 ## Related domain scratch pads
 
 - **Menger corpus:** [`docs/Menger/`](../docs/Menger/) — paper, `Complete_Companion.pdf`, chapter docs, LLM packet

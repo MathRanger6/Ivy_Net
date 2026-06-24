@@ -1,0 +1,42 @@
+{
+  "artifact": "faculty_panel_inference_v1.csv",
+  "created_utc": "2026-06-24T18:45:17.488449+00:00",
+  "charles_locks": "20260611_Charles_Tier1_locks.md",
+  "filter": {
+    "match_confidence": [
+      "HIGH",
+      "MEDIUM"
+    ],
+    "exclude": [
+      "MULTI",
+      "LOW",
+      "NONE"
+    ],
+    "require_poolq_loo_mean": true
+  },
+  "source": {
+    "path": "tenure_pipeline/R1_tenure_data.csv",
+    "rows": 106559,
+    "persons": 29274,
+    "departments": 168,
+    "match_confidence_counts": {
+      "NONE": 62099,
+      "HIGH": 18332,
+      "MULTI": 13647,
+      "MEDIUM": 10531,
+      "LOW": 1950
+    }
+  },
+  "inference_sample": {
+    "rows": 2396,
+    "persons": 796,
+    "departments": 52,
+    "assistant_person_years": 2396,
+    "assistant_persons": 796,
+    "rows_dropped_missing_poolq": 26467
+  },
+  "prose_guidance": {
+    "roster_n": "168 R1 CS departments in data construction",
+    "lead_with": "inference_sample persons/departments above"
+  }
+}

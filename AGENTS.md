@@ -16,7 +16,8 @@
 
 ## Git commits (when the user asks)
 
-- Include `.specstory/history/` unless they say otherwise.
+- Include `.specstory/history/*.md` (agent chat archives) unless they say otherwise.
+- Do **not** commit `.specstory/debug/` or `.specstory/history/debug/` (SpecStory CLI diagnostics; may contain auth paths and session IDs).
 - Include small tracked artifacts under `datasets/mbb/` per `datasets/mbb/README_TRACKED_ARTIFACTS.md`.
 - Usually exclude `tier1_cell10_playground_state.json`, large sweep outputs, etc.
 

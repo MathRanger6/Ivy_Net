@@ -128,7 +128,7 @@ Agents locked **two prediction slots** for manuscript structure — **not** “t
 | **Wang structure** | Paper arc: phenomenon → mechanism → predictions |
 | **Wang move** | Predict something you did **not** use to find the curve |
 | **Layer B** | Tenure Cox cells 10–12 in `540` — pre-**submission**, not draft blocker |
-| **Dakota v03** | Dissertation RTF spine VECTOR uses for section order |
+| **Dakota Murray v03** | Committee RTF spine + [`dakota_murray_v03_spine_and_ink_map.md`](../1-Various_PDE_and_Chat_stuff/5-Manuscript/dakota_murray_v03_spine_and_ink_map.md) |
 | **Generative POC** | Small sim showing talent-only fails and congestion bends curves |
 | **Pool mean** | Whole-roster average — generative readout axis (≠ LOO axis) |
 | **PD12-A** | Accept 5-rung ladder relabel? (COMPASS rec: yes) |

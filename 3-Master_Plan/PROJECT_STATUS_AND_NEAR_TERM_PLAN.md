@@ -2,9 +2,13 @@
 
 > **Maintained by:** **COMPASS** (cross-project planner; renamed 2026-06-11 from “Master Planner”). See [COMPASS_AGENT_IDENTITY.md](COMPASS_AGENT_IDENTITY.md).
 
-**Date:** 2026-06-15 (PD12 ladder patch)  
+**Date:** 2026-06-24 (Phase A execution complete)  
 **Author:** COMPASS  
 **Companion docs:**  
+- [20260611_Charles_Tier1_locks.md](20260611_Charles_Tier1_locks.md) — **Tier 1 locks filed**  
+- [20260624_SCOUT_D10_bundle_complete.md](20260624_SCOUT_D10_bundle_complete.md)  
+- [20260624_PEER_inference_export_complete.md](20260624_PEER_inference_export_complete.md)  
+- [20260624_VECTOR_manuscript_draft_v1_sections.md](20260624_VECTOR_manuscript_draft_v1_sections.md)  
 - [20260615_1200_COMPASS_PD12_reassessment.md](20260615_1200_COMPASS_PD12_reassessment.md)  
 - [20260615_1045_COMPASS_to_Charles_forward_plan_and_questions.md](20260615_1045_COMPASS_to_Charles_forward_plan_and_questions.md)  
 - [20260611_COMPASS_Initial_Review.md](20260611_COMPASS_Initial_Review.md)  
@@ -17,6 +21,8 @@
 ## Executive summary
 
 The dissertation program is a **three-setting cross-domain study** of **advancement under constrained distinction**, with Army as anchor, basketball as replication, and academia as preliminary third leg. Empirical inverted-U patterns are **established** (Army, basketball) and **preliminary** (tenure). The scientific bottleneck has shifted from discovery to **convergence**: close the **minimal generative model** (honest claims), export **model-guided empirical features** (PD12 Priority 3 — quality vs congestion), lock **2–3 testable predictions**, and draft a **Wang-style manuscript** — while **deferring** 525/UIC deep dives, network-science extensions, 3-domain parametric identifiability (PD12 P1), fourth-domain falsification (PD12 P4), and generative LOO-pool-quality bin-for-bin matching unless Charles or Alex elevates them.
+
+**Phase A (2026-06-24):** Tier 1 locks filed; SCOUT D10 bundle on disk; PEER `faculty_panel_inference_v1.csv` exported (796 persons / 52 depts); VECTOR §2–§5 draft sections written. **Next:** ink into **Dakota Murray v03** spine ([`dakota_murray_v03_spine_and_ink_map.md`](../1-Various_PDE_and_Chat_stuff/5-Manuscript/dakota_murray_v03_spine_and_ink_map.md)); Army AWS sync + Alex Tier 3; Layer B Cox pre-submission.
 
 **PD12 alignment (2026-06-15):** v1 delivers Priority 3 + partial Priority 2 (talent-only fail). P1 and P4 deferred explicitly — not silent drift. See [reassessment memo](20260615_1200_COMPASS_PD12_reassessment.md).
 
@@ -59,7 +65,7 @@ The dissertation program is a **three-setting cross-domain study** of **advancem
 3. Non-obvious predictions distinguishing competing explanations.  
 4. Foundation for network-science extensions (deferred).
 
-**Committee expectations:** Barabási — universality, minimal models, high impact; Gates — day-to-day direction, generative discipline, Wang ladder; Dakota — tenure setting expertise (v03 brief sent); Vespignani — complex systems audience.
+**Committee expectations:** Barabási — universality, minimal models, high impact; Gates — day-to-day direction, generative discipline, Wang ladder; **Dakota Murray** — tenure setting expertise (v03 brief sent); Vespignani — complex systems audience.
 
 ---
 

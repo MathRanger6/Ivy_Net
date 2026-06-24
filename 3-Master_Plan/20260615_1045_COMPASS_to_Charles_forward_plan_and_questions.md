@@ -270,4 +270,4 @@ Correspondence experiment: complete. All agents execute Phase A per COMPASS forw
 
 ---
 
-*End forward plan. Answer Tier 1 (§6–§7) to move.*
+*End forward plan. **Charles Tier 1 locks filed:** [`20260611_Charles_Tier1_locks.md`](20260611_Charles_Tier1_locks.md) (2026-06-24). D10 + inference export complete — see `20260624_SCOUT_D10_bundle_complete.md`, `20260624_PEER_inference_export_complete.md`, `20260624_VECTOR_manuscript_draft_v1_sections.md`.*

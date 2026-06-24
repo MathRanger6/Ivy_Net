@@ -133,5 +133,9 @@ hierarchy_data/**/*.zip
 # current_documents/Show_me/*.pptx
 # current_documents/Show_me/*.pptm
 
+# --- SpecStory: chat markdown only (see AGENTS.md); not CLI debug dumps ---
+.specstory/debug/
+.specstory/history/debug/
+
 # Always Sequestered
 2-Sequestered/
