@@ -1,5 +1,8 @@
 # Cross-Project Insight Nuggets
 
+**Canonical name:** `13_INSIGHT_NUGGETS.md`  
+**Former name:** `INSIGHT_NUGGETS.md` (renamed in place)
+
 **Maintained by:** COMPASS (with VECTOR, domain agents, Charles)  
 **Purpose:** Capture **profound or pivotal perspectives** from conversations — framing that must not get lost inside forward plans, correspondence, or domain scratch pads.
 

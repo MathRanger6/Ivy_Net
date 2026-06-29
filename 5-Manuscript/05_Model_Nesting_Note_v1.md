@@ -1,5 +1,8 @@
 # Model Nesting Note (v1)
 
+**Canonical name:** `05_Model_Nesting_Note_v1.md`  
+**Former name:** `Model_Nesting_Note_v1.md` (renamed in place)
+
 **Date:** 2026-06-24  
 **Author:** COMPASS (Charles Tier 1 execution)  
 **Audience:** VECTOR §3, Alex read-through, committee  
@@ -119,7 +122,7 @@ Rung 4   Manuscript
 | Axis table | `.../axis_table_generative_readouts.md` |
 | Score one-pager | `.../score_equation_one_pager.md` |
 | Tenure inference sample | `tenure_pipeline/faculty_panel_inference_v1.csv` |
-| Claim discipline | `3-Master_Plan/20260615_1100_VECTOR_claim_language_table.md` |
+| Claim discipline | `3-Master_Plan/07_Claim_language_guardrails.md` |
 
 ---
 
