@@ -31,6 +31,7 @@
 | **11** | `../5-Manuscript/11_Dakota_feedback_decision_points.md` | Dakota email → evaluate, not auto-follow |
 | **12** | `../5-Manuscript/12_Manuscript_staging_prose.md` | Copy-from paragraphs |
 | **13** | `13_INSIGHT_NUGGETS.md` | Pivotal framing (optional skim) |
+| **14** | `14_PD12_reassessment_memo.md` | PD12 ladder relabel; B-lite closure (optional) |
 
 Long original names → `obsolete/original_filenames/`.
 
@@ -56,7 +57,7 @@ Use only if you want the full history behind the locks. **Not required** for man
 | **1** | [`04_Project_story_plain_English.md`](04_Project_story_plain_English.md) | Plain-English story |
 | **2** | [`20260615_1045_COMPASS_to_Charles_forward_plan_and_questions.md`](20260615_1045_COMPASS_to_Charles_forward_plan_and_questions.md) | Original action plan; §6–§7 locks (**superseded by #02**) |
 | **3** | [`20260520_Transcript_12_guidance.md`](20260520_Transcript_12_guidance.md) | Alex PD12: four priorities |
-| **4** | [`20260615_1200_COMPASS_PD12_reassessment.md`](20260615_1200_COMPASS_PD12_reassessment.md) | Ladder relabel; B-lite closure |
+| **4** | [`14_PD12_reassessment_memo.md`](14_PD12_reassessment_memo.md) | Ladder relabel; B-lite closure |
 | **5** | [`07_Claim_language_guardrails.md`](07_Claim_language_guardrails.md) | Claim discipline — §E, §F |
 | **6** | [`06_Generative_closure_checklist.md`](06_Generative_closure_checklist.md) | Green/yellow checklist |
 

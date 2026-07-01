@@ -138,7 +138,7 @@ Under Path II, Charles does **not** need to “apply the generative model” in 
 
 > **“We will call the minimal model complete when the basketball generative score POC is frozen in a manuscript export bundle — talent-only fails, congestion-in-score bends curves on pool mean, at least one model-guided empirical quantity is exported (team quality vs viable-peer congestion), at least one prediction readout is on disk (near-threshold heterogeneity), axis table and limitation prose are frozen — while Army and tenure stay empirical inverted-U legs at honest maturity, without generative LOO bin-for-bin match or full 3-domain parameter identifiability.”**
 
-*PD12 B-lite closure — see [`20260615_1200_COMPASS_PD12_reassessment.md`](20260615_1200_COMPASS_PD12_reassessment.md) §Q2.*
+*PD12 B-lite closure — see [`14_PD12_reassessment_memo.md`](14_PD12_reassessment_memo.md) §Q2.*
 
 ---
 

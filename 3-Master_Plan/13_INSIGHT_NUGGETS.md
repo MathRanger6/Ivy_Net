@@ -142,7 +142,7 @@
 
 **Not the same as:** LOO pool **sum** at fixed roster size (redundant with mean).
 
-**Sources:** [`sports/documents/20260520_Transcript_12_guidance.md`](../sports/documents/20260520_Transcript_12_guidance.md) §Priority 3; [`20260615_1200_COMPASS_PD12_reassessment.md`](20260615_1200_COMPASS_PD12_reassessment.md)
+**Sources:** [`sports/documents/20260520_Transcript_12_guidance.md`](../sports/documents/20260520_Transcript_12_guidance.md) §Priority 3; [`14_PD12_reassessment_memo.md`](14_PD12_reassessment_memo.md)
 
 **Tags:** `cross` · `alex` · `scout` · `manuscript`
 
@@ -186,7 +186,7 @@
 
 **Not the same as:** Treating D10 as “mere packaging” with no scientific content.
 
-**Sources:** [`20260615_1200_COMPASS_PD12_reassessment.md`](20260615_1200_COMPASS_PD12_reassessment.md); [`forward_plan_background.md`](forward_plan_background.md)
+**Sources:** [`14_PD12_reassessment_memo.md`](14_PD12_reassessment_memo.md); [`04_Project_story_plain_English.md`](04_Project_story_plain_English.md)
 
 **Tags:** `cross` · `alex` · `compass`
 

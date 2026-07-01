@@ -14,7 +14,7 @@
 | VECTOR deep-reading notes | [`docs/Menger/Menger_2024_Deep_Reading_Notes_for_Advancement_Project.docx`](../docs/Menger/Menger_2024_Deep_Reading_Notes_for_Advancement_Project.docx) |
 | VECTOR outline summary | [`docs/Menger/Menger_2024_Outline_Summary_for_Charles.docx`](../docs/Menger/Menger_2024_Outline_Summary_for_Charles.docx) |
 | Companion protocol / lessons | [`docs/Menger/Companion_Volume_Lessons_Learned.md`](../docs/Menger/Companion_Volume_Lessons_Learned.md) |
-| Locked v1 plan | [`20260615_1200_COMPASS_PD12_reassessment.md`](20260615_1200_COMPASS_PD12_reassessment.md), [`20260615_1045_COMPASS_to_Charles_forward_plan_and_questions.md`](20260615_1045_COMPASS_to_Charles_forward_plan_and_questions.md) |
+| Locked v1 plan | [`14_PD12_reassessment_memo.md`](14_PD12_reassessment_memo.md), [`20260615_1045_COMPASS_to_Charles_forward_plan_and_questions.md`](20260615_1045_COMPASS_to_Charles_forward_plan_and_questions.md) |
 | Claim discipline | [`20260615_1100_VECTOR_claim_language_table.md`](20260615_1100_VECTOR_claim_language_table.md) |
 
 **Constraint honored:** No plan revision, no new workstreams, no scope expansion, Path II and Tier 1 locks unchanged.

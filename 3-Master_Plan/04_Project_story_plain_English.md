@@ -12,7 +12,7 @@
 **Print stack:** [`Charles_reading_list.md`](Charles_reading_list.md)  
 **Pivotal insights (nuggets):** [`13_INSIGHT_NUGGETS.md`](13_INSIGHT_NUGGETS.md) — cross-project framing worth keeping  
 **Canonical action doc:** [`20260615_1045_COMPASS_to_Charles_forward_plan_and_questions.md`](20260615_1045_COMPASS_to_Charles_forward_plan_and_questions.md)  
-**PD12 reassessment:** [`20260615_1200_COMPASS_PD12_reassessment.md`](20260615_1200_COMPASS_PD12_reassessment.md) — read **after** action doc + PD12 guidance (see reading guide)
+**PD12 reassessment:** [`14_PD12_reassessment_memo.md`](14_PD12_reassessment_memo.md) — read **after** action doc + PD12 guidance (optional; see reading guide)
 
 ---
 
@@ -169,7 +169,7 @@ Optional deep history (not required for inking):
 
 1. **[Forward plan questions](20260615_1045_COMPASS_to_Charles_forward_plan_and_questions.md)** — superseded by [`02_Charles_decisions_locked.md`](02_Charles_decisions_locked.md)  
 2. **[PD12 guidance](20260520_Transcript_12_guidance.md)** — Alex’s four priorities  
-3. **[PD12 reassessment](20260615_1200_COMPASS_PD12_reassessment.md)** — ladder relabel  
+3. **[PD12 reassessment](14_PD12_reassessment_memo.md)** — ladder relabel  
 4. **[Claim guardrails](07_Claim_language_guardrails.md)** — §F “Do Say / Do Not Say”  
 5. **[Generative closure](06_Generative_closure_checklist.md)** — SCOUT C1–C8
 

@@ -1,6 +1,6 @@
 # Charles — print and read list (June 2026 return)
 
-**Purpose:** One ordered stack. Files use **numbered prefixes** (`01_` … `13_`) so print order matches filename sort. Long original names live in `obsolete/original_filenames/` with provenance.
+**Purpose:** One ordered stack. Files use **numbered prefixes** (`01_` … `14_`) so print order matches filename sort. Long original names live in `obsolete/original_filenames/` with provenance.
 
 **Advisor vs committee framing (binding):**
 - **Alex Gates** → scientific **guidance** (method order, measurements, what the paper must show).
@@ -25,7 +25,7 @@ Do not start Word inking until you finish these.
 
 ---
 
-## REFERENCE — print all 7; keep handy while inking Word (lookup, not cover-to-cover)
+## REFERENCE — print #7–#14; keep handy while inking Word (lookup, not cover-to-cover)
 
 | # | Print this file | When to open it |
 |---|-----------------|-----------------|
@@ -36,14 +36,15 @@ Do not start Word inking until you finish these.
 | **11** | [`../5-Manuscript/11_Dakota_feedback_decision_points.md`](../5-Manuscript/11_Dakota_feedback_decision_points.md) | Before §4 tenure — **evaluate** each point; do not auto-rewrite |
 | **12** | [`../5-Manuscript/12_Manuscript_staging_prose.md`](../5-Manuscript/12_Manuscript_staging_prose.md) | Copy-from paragraphs while inking (do not read linearly) |
 | **13** | [`13_INSIGHT_NUGGETS.md`](13_INSIGHT_NUGGETS.md) | Optional skim — pivotal framing only |
+| **14** | [`14_PD12_reassessment_memo.md`](14_PD12_reassessment_memo.md) | Optional — why Rung 2.5 / B-lite / Alex ladder relabel |
 
 ---
 
-## Quick filename map (all 13)
+## Quick filename map (all 14)
 
 | # | Path |
 |---|------|
-| 1–4, 6–9, 13 | `3-Master_Plan/0N_*.md` |
+| 1–4, 6–9, 13–14 | `3-Master_Plan/0N_*.md` |
 | 5, 10–12 | `5-Manuscript/0N_*.md` |
 
 ---

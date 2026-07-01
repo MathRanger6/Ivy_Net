@@ -14,7 +14,7 @@
 - [09_Tenure_export_on_disk.md](09_Tenure_export_on_disk.md) — inference export  
 - [10_Manuscript_ink_map.md](../5-Manuscript/10_Manuscript_ink_map.md) — Word routing  
 - [12_Manuscript_staging_prose.md](../5-Manuscript/12_Manuscript_staging_prose.md) — copy-from prose  
-- [20260615_1200_COMPASS_PD12_reassessment.md](20260615_1200_COMPASS_PD12_reassessment.md) — PD12 ladder (reference)  
+- [14_PD12_reassessment_memo.md](14_PD12_reassessment_memo.md) — PD12 ladder (reference)  
 - Pre–Tier 1 correspondence → [`obsolete/`](obsolete/README.md)
 
 ---
@@ -25,7 +25,7 @@ The dissertation program is a **three-setting cross-domain study** of **advancem
 
 **Phase A (2026-06-24):** Tier 1 locks filed; SCOUT D10 bundle on disk; PEER `faculty_panel_inference_v1.csv` exported (796 persons / 52 depts); staging prose written ([`12_Manuscript_staging_prose.md`](../5-Manuscript/12_Manuscript_staging_prose.md)). **Next:** ink **`Manuscript_working_outline_v1.docx`** using [`10_Manuscript_ink_map.md`](../5-Manuscript/10_Manuscript_ink_map.md) (§5 → §1 → §4); Army AWS sync + Alex Tier 3; Layer B Cox pre-submission.
 
-**PD12 alignment (2026-06-15):** v1 delivers Priority 3 + partial Priority 2 (talent-only fail). P1 and P4 deferred explicitly — not silent drift. See [reassessment memo](20260615_1200_COMPASS_PD12_reassessment.md).
+**PD12 alignment (2026-06-15):** v1 delivers Priority 3 + partial Priority 2 (talent-only fail). P1 and P4 deferred explicitly — not silent drift. See [reassessment memo](14_PD12_reassessment_memo.md).
 
 **Target:** core manuscript draft/submission **Summer–Fall 2026** (~3–6 months).
 
