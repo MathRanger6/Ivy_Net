@@ -6,7 +6,7 @@
 **Date:** 2026-06-15 11:00  
 **From:** VECTOR  
 **To:** COMPASS, Charles, CODA, SCOUT, PEER  
-**Purpose:** Unified manuscript claim-status table and Round 3 VECTOR sign-off.
+**Purpose:** Unified manuscript claim-status table and Round 3 VECTOR sign-off. **`§` in section headers below = subsections of this file** (A–H), not manuscript sections — see `#01` Symbol systems.
 
 ---
 
@@ -30,7 +30,7 @@
 | A talent-only generative baseline is insufficient to reproduce the observed nonlinear story. | Mechanism | **Supported** | SCOUT closure: talent-only / ability-only baseline fails qualitatively relative to the inverted-U stylized fact. |
 | A congestion-in-score mechanism can bend advancement curves beyond talent-only selection. | Mechanism | **Supported with caveat** | Supported as a Path II generative proof-of-concept on pool-mean axis, not as bin-for-bin replication of empirical LOO axis. |
 | The generative model reproduces the empirical LOO-pool-quality inverted-U bin-for-bin. | Mechanism | **Unsupported** | Explicitly do not claim. Current generative readout differs by conditioning axis. |
-| The minimal model is complete enough for v1 manuscript §3 under Path II. | Mechanism | **Supported with caveat** | Complete enough once D10 export bundle freezes axis table, score equation, talent-only contrast, and congestion POC. Not complete as a full LOO-axis generative explanation. |
+| The minimal model is complete enough for v1 **manuscript §5** (Minimal Generative Modeling) under Path II. | Mechanism | **Supported with caveat** | Complete enough once D10 export bundle freezes axis table, score equation, talent-only contrast, and congestion POC. Not complete as a full LOO-axis generative explanation. |
 | The manuscript should follow Wang-style structure: empirical phenomenon → minimal mechanism → predictions. | Manuscript | **Supported** | This is the correct organizing structure for v1. Scaling laws and phase-transition formalism are aspirational, not required. |
 | Network science extensions are required for v1 submission. | Manuscript | **Defer** | Exposure/comparison networks, prestige, and talent centers of gravity should be preserved for later, not manuscript-critical now. |
 
@@ -56,12 +56,12 @@
 
 | Claim | Setting | Status | Evidence / caveat |
 |---|---|---|---|
-| LOO teammate pool quality (`poolq_loo`) and NBA draft rate show an inverted-U with elite-tier dip. | Basketball | **Supported** | 530 / 538 empirical ladder and ventile exports. |
+| LOO teammate pool quality (`poolq_loo`) and NBA draft rate show an inverted-U with elite-tier dip. | Basketball | **Supported** | `sports/530_sports_pipeline.ipynb` / `sports/538_alex_tier1_model_and_fit.ipynb` empirical ladder and ventile exports. |
 | Basketball provides the cleanest empirical replication of the Army stylized fact. | Basketball | **Supported** | Draft outcome and team-season pool quality provide a strong Setting 2 replication. |
-| Talent-only generative selection fails to reproduce the nonlinear pattern. | Basketball / Mechanism | **Supported** | 538D CELL 10; export pending D10. |
+| Talent-only generative selection fails to reproduce the nonlinear pattern. | Basketball / Mechanism | **Supported** | `sports/538D_development.ipynb` CELL 10; frozen in D10 (`#08`). |
 | Congestion-in-score generates peak-and-decline behavior on whole-roster pool mean. | Basketball / Mechanism | **Supported with caveat** | Path II POC; must state axis difference. |
 | The generative POC reproduces the empirical `poolq_loo` inverted-U. | Basketball / Mechanism | **Unsupported** | Do not claim. Current LOO-axis generative readout is not the manuscript claim. |
-| Near-threshold heterogeneity is a primary prediction candidate. | Basketball / Prediction | **Supported** | CELL 4D exports; best current prediction-facing basketball artifact. |
+| Near-threshold heterogeneity is a primary prediction candidate. | Basketball / Prediction | **Supported** | `sports/538D_development.ipynb` CELL 4D → `heterogeneity_ventiles_top_tail.png` (D10, `#08`). |
 | Peak shift with global Λ is already demonstrated in basketball generative simulations. | Basketball / Prediction | **Unsupported / Defer** | Treat Λ as cross-domain / Army-led hook unless new SCOUT export is built. |
 | Basketball time-to-draft Cox modeling is required for v1. | Basketball | **Out of scope** | V1 uses binned draft rates and Wang ladder, not survival modeling. |
 | Mean × dispersion interactions are required for v1. | Basketball / Prediction | **Defer** | Potential supplement / later mechanism diagnostic, not primary prediction. |
@@ -77,7 +77,7 @@
 | Tenure provides a plausible third empirical setting that stress-tests generality. | Tenure | **Supported with caveat** | Use as preliminary third panel with limitations. |
 | 168 R1 CS departments are in the panel roster. | Tenure | **Supported** | PEER reports roster coverage. |
 | All 168 departments are inference-ready. | Tenure | **Unsupported** | Inference-ready subset is much smaller because LOO pool computation and linkage are limiting. |
-| Formal Cox hazard-ratio evidence exists for tenure pool-quality curvature. | Tenure | **Unsupported until Layer B run** | 540 currently ends at Cell 9; Layer B planned before submission. |
+| Formal Cox hazard-ratio evidence exists for tenure pool-quality curvature. | Tenure | **Unsupported until Layer B run** | `540_tenure_pipeline.ipynb` currently ends at Cell 9; Layer B planned before submission. |
 | Fine–Gray tenure models are required for the draft. | Tenure | **Defer** | Cause-specific / basic Cox before submission is enough unless elevated. |
 | Attrition cleanly distinguishes leaving academia from lateral moves. | Tenure | **Unsupported** | Single-institution panel limitation; lateral moves may appear as attrition. |
 | Tenure requires its own generative simulation for v1 model closure. | Tenure | **Out of scope** | Tenure is an empirical leg under Path II, not a generative leg. |
@@ -115,7 +115,7 @@
 |---|---|---|
 | **M1** | Accept SCOUT Tier 2 closure rule? | **Yes, with caveat:** Tier 2 is complete enough for v1 once D10 freezes exports; it is not a full LOO-axis generative explanation. |
 | **M2** | Accept Path II architecture? | **Yes.** Basketball generative POC; Army and tenure empirical legs. |
-| **M3** | Accept SCOUT §6 ink rules? | **Yes.** Ready / caveat / do-not-ink distinctions are correct. |
+| **M3** | Accept SCOUT **`#06` §6** handoff / ink rules? | **Yes.** Ready / caveat / do-not-ink distinctions are correct. |
 | **M4** | Any unresolved scientific disagreement with CODA, PEER, or SCOUT? | **No.** I see no scientific conflict; remaining issues are claim discipline, exports, and Charles locks. |
 | **M5** | After filing this table, is VECTOR waiting on Charles? | **Yes.** VECTOR is waiting on Charles / COMPASS routing for next manuscript artifact, plus SCOUT D10 bundle when Charles gives go. |
 

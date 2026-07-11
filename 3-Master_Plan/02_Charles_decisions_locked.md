@@ -6,7 +6,7 @@
 **Date:** 2026-06-24  
 **From:** Charles Levine  
 **To:** SCOUT, PEER, VECTOR, CODA, COMPASS  
-**In reply to:** [`20260615_1045_COMPASS_to_Charles_forward_plan_and_questions.md`](20260615_1045_COMPASS_to_Charles_forward_plan_and_questions.md) §6–§7
+**In reply to:** [`20260615_1045_COMPASS_to_Charles_forward_plan_and_questions.md`](20260615_1045_COMPASS_to_Charles_forward_plan_and_questions.md) — **that file’s** §6–§7 question batch (superseded for daily use by this file)
 
 ---
 
@@ -37,7 +37,7 @@ Charles Tier 1 locks:
 | Q-FIG2 | June-dated Fig 2 re-export in D10 — yes |
 | C10–C11 | Defer prestige controls and subfield heterogeneity |
 | G1–G3 | Stage 9 OK for draft; Layer B pre-submission; Fine–Gray deferred |
-| C-Λ-1 | CODA Λ stub in VECTOR §4 prose-only — OK for v1 |
+| C-Λ-1 | CODA Λ stub in **manuscript §7** / staging **`#12` §4.2** prose-only — OK for v1 |
 
 ---
 
@@ -54,7 +54,7 @@ Charles Tier 1 locks:
 
 ## Model-form note (additive vs multiplicative)
 
-**v1 unchanged:** additive selection score \(S = A - \lambda C\) and \(L_{\text{net}} = B - D\) ontology. Menger/Wang multiplicative framing → §5 discussion and future decomposition only — not a generative rewrite before manuscript draft.
+**v1 unchanged:** additive selection score \(S = A - \lambda C\) and \(L_{\text{net}} = B - D\) ontology. Menger/Wang multiplicative framing → **manuscript §5–§6** / staging **`#12` §5** discussion only — not a generative rewrite before manuscript draft.
 
 See [`05_Model_Nesting_Note_v1.md`](../5-Manuscript/05_Model_Nesting_Note_v1.md).
 
@@ -66,7 +66,7 @@ See [`05_Model_Nesting_Note_v1.md`](../5-Manuscript/05_Model_Nesting_Note_v1.md)
 |-------|--------|
 | **SCOUT** | D10 go — bundle per closure `1012` including Tier 2.5 exports |
 | **PEER** | C1–C2 locked — produce `faculty_panel_inference_v1.csv` |
-| **VECTOR** | §2/§5 now; §3–§4 after D10 + inference export |
+| **VECTOR** | Ink manuscript per `#10` (locked first pass: **manuscript §5 → §1 → §4**); predictions → **§7** from staging `#12` §4 |
 | **CODA** | Hold until AWS sync or Alex Tier 3 |
 | **COMPASS** | Living plan updated when this file lands |
 

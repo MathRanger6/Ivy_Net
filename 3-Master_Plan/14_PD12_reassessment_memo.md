@@ -33,7 +33,7 @@ The fix is **not** to reopen identifiability (PD12 Priority 1), full extreme-eve
 |--------------------------------|--------------------------|-----------|
 | Phenomenon (inverted-U, three settings) | Locked triad; tenure preliminary | ✅ |
 | Minimal model organizes inquiry | Path II; Alex score; soft assignment | ✅ |
-| Model suggests **new measurements** | **Implemented in repo** (`crowding_smooth`, viable-peer logic, 4D heterogeneity) but **not named as a plan stage** | ⚠️ **Under-labeled** |
+| Model suggests **new measurements** | **Implemented in repo** (`crowding_smooth`, viable-peer logic, `sports/538D_development.ipynb` CELL 4D heterogeneity) but **not named as a plan stage** | ⚠️ **Under-labeled** |
 | Model generates predictions | #1 near-threshold, #2 Λ peak-shift locked | ✅ (#2 prose-heavy) |
 | Parameter identifiability / 3-domain fit | Explicitly **deferred** | ✅ intentional deferral |
 | Falsification / 4th domain | **Deferred** | ✅ intentional deferral |
@@ -60,6 +60,8 @@ Re-label the locked ladder in all planning docs as **five rungs** (Rung 2.5 = mo
 
 ### Verdict: **Upgrade the definition one notch — do not replace it**
 
+**Name origin:** **B-lite** is a **COMPASS label** (this memo, 2026-06-15), not terminology from Alex. It names the middle option between “too weak” (curve only) and “too strong for v1” (full parametric identifiability — PD12 Priority 1).
+
 | Option | Standard | COMPASS recommendation |
 |--------|----------|------------------------|
 | **A** | Model reproduces phenomenon | **Too weak** for PD12 |
@@ -75,7 +77,7 @@ Re-label the locked ladder in all planning docs as **five rungs** (Rung 2.5 = mo
 (3) At least one model-guided measurable quantity exported or cited:
       e.g. crowding_smooth / viable-peer congestion vs poolq_loo (quality)
 (4) At least one prediction-facing readout tied to mechanism:
-      e.g. near-threshold heterogeneity (4D); Λ hook prose (#2)
+      e.g. near-threshold heterogeneity (`538D` CELL 4D); Λ hook prose (#2)
 (5) Honest limitation prose (axis mismatch; tenure preliminary; no causal claims)
 (6) Frozen export bundle (D10)
 ```
@@ -95,7 +97,7 @@ Re-label the locked ladder in all planning docs as **five rungs** (Rung 2.5 = mo
 | Domain | Feature(s) | Status | Agent |
 |--------|------------|--------|-------|
 | **Basketball** | Quality `poolq_loo` vs congestion `crowding_smooth` / \(C_{i,t}\) | Implemented; export in **D10** | SCOUT |
-| **Basketball** | Near-threshold heterogeneity (4D ventiles) | On disk | SCOUT |
+| **Basketball** | Near-threshold heterogeneity (`538D` CELL 4D ventiles) | On disk (`#08`) | SCOUT |
 | **Army** | Pool minus mean (quality); pool size / Λ hook | Empirical | CODA |
 | **Tenure** | `poolq_loo_mean` (quality); `pool_size_oa_loo` as congestion proxy | On panel; stage 9 uses quality only | PEER |
 
@@ -104,7 +106,7 @@ Re-label the locked ladder in all planning docs as **five rungs** (Rung 2.5 = mo
 ```text
 Phenomenon (Rung 1 — done)
     ↓
-Minimal model POC (Rung 2 — CELL 10; talent-only fail)
+Minimal model POC (Rung 2 — `sports/538D_development.ipynb` CELL 10; talent-only fail)
     ↓
 Model-guided empirical features (Rung 2.5 — EXPORT + label)   ← ADD THIS STAGE NAME
     ↓
@@ -113,7 +115,7 @@ Predictions (Rung 3 — near-threshold; Λ prose)
 Manuscript (Rung 4)
 ```
 
-**Relative to forward plan:** D10 must package Tier 2.5 artifacts; VECTOR §3 introduces measurements before §4 predictions.
+**Relative to forward plan:** D10 must package Tier 2.5 artifacts; staging **`#12` §3** (Methods) introduces measurements before **`#12` §4** (Predictions → manuscript **§7**).
 
 **Optional (Charles only — PD12-C):** PEER supplementary bin read on `pool_size_oa_loo` (~0.5–1 session, existing panel). Strengthens tenure on P3 slide; **not required** for v1.
 
@@ -126,10 +128,10 @@ Manuscript (Rung 4)
 | Step | Action | Owner | PD12 link |
 |------|--------|-------|-----------|
 | **1** | Charles **Tier A batch** (unchanged): D10 go, C1–C2, V1–V3 | Charles | Unblocks packaging |
-| **2** | **SCOUT D10** — generative contrast, **axis table (quality vs congestion)**, **4D heterogeneity**, score one-pager, refreshed empirical Fig 2 | SCOUT | Priority 3 export |
+| **2** | **SCOUT D10** — generative contrast, **axis table (quality vs congestion)**, near-threshold heterogeneity (`538D` CELL 4D), score one-pager, refreshed empirical Fig 2 | SCOUT | Priority 3 export |
 | **3** | **VECTOR** — Wang spine with **Tier 2.5 subsection**; PD12 one-paragraph sentence (quality vs \(C_{i,t}\)) | VECTOR | Theory → measurements |
-| **4** | **VECTOR §4** — #1 as empirical test of congestion story; #2 Λ conceptual (Army prose) | VECTOR | Predictions |
-| **5** | **PEER** inference CSV (C1–C2); tenure §1 + limitations | PEER | Rung 1 leg honest |
+| **4** | **Manuscript §7** (from staging `#12` §4) — #1 as empirical test of congestion story; #2 Λ conceptual (Army prose) | VECTOR | Predictions |
+| **5** | **PEER** inference CSV (C1–C2); **manuscript §4** tenure + limitations | PEER | Rung 1 leg honest |
 | **6** | **Alex meeting** — present 5-rung ladder; confirm v1 **deferrals** (P1, P4) acceptable for submission draft | Charles + Alex | Manage expectations |
 
 **Explicitly not on this path:** full 3-domain generative fit (P1); NHL / fourth-domain falsification (P4); generative LOO bin-for-bin match.
@@ -157,10 +159,10 @@ Charles requested all agents read [`obsolete/pd12_reassessment_duplicates/202606
 | Agent | Read receipt | Action after reassessment |
 |-------|--------------|---------------------------|
 | **COMPASS** | ✅ | This document + living doc patches |
-| **SCOUT** | [`obsolete/pd12_reassessment_duplicates/20260615_1156_SCOUT_to_COMPASS_PD12_reassessment_input.md`](obsolete/pd12_reassessment_duplicates/20260615_1156_SCOUT_to_COMPASS_PD12_reassessment_input.md) | D10 manifest lists Tier 2.5 exports (quality vs congestion panel, 4D heterogeneity); optional C8 row |
+| **SCOUT** | [`obsolete/pd12_reassessment_duplicates/20260615_1156_SCOUT_to_COMPASS_PD12_reassessment_input.md`](obsolete/pd12_reassessment_duplicates/20260615_1156_SCOUT_to_COMPASS_PD12_reassessment_input.md) | D10 manifest lists Tier 2.5 exports (quality vs congestion panel, `538D` CELL 4D heterogeneity); optional C8 row |
 | **CODA** | [`obsolete/pd12_reassessment_duplicates/20260615_1156_CODA_read_receipt_PD12_reassessment.md`](obsolete/pd12_reassessment_duplicates/20260615_1156_CODA_read_receipt_PD12_reassessment.md) | Army lane unchanged; axis table gloss for quality leg; Λ / pool-size for prediction #2 |
 | **PEER** | [`obsolete/pd12_reassessment_duplicates/20260615_1156_PEER_read_receipt_Charles_to_COMPASS.md`](obsolete/pd12_reassessment_duplicates/20260615_1156_PEER_read_receipt_Charles_to_COMPASS.md) | C1–C2 path unchanged; optional PD12-C pool_size read on Charles route |
-| **VECTOR** | Co-requester via Charles; no separate receipt on disk | §2–§3: measurements before predictions; PD12 quality/congestion paragraph in draft |
+| **VECTOR** | Co-requester via Charles; no separate receipt on disk | Staging `#12` §2–§3 before §4; PD12 quality/congestion paragraph in draft |
 
 **No new correspondence round** unless a conflict appears.
 

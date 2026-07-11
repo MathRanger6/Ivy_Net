@@ -26,7 +26,7 @@
 
 ## VECTOR use
 
-Setting 3 Methods/Results: lead with inference-ready N; label stage 9 figure **preliminary**; Layer B Cox pre-submission.
+Setting 3 Methods/Results: lead with inference-ready N; label stage 9 figure **preliminary**; Layer B Cox in `540_tenure_pipeline.ipynb` — pre-submission.
 
 ---
 

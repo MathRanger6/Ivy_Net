@@ -9,6 +9,8 @@ Charles: Path II unchanged. **C1–C4 + C7 → green** after D10 bundle. C6 part
 
 > **Note:** Body below retains June 15 “pre-D10” color counts in places; trust the **June 24** status line above and [`08_Basketball_figures_on_disk.md`](08_Basketball_figures_on_disk.md) for what is on disk today.
 
+> **§ ambiguity:** Headings **§1–§6 below** are subsections **of this checklist file**. Manuscript sections use different numbers — see `#01` **Symbol systems**.
+
 ---
 
 ## Summary (one screen for Alex)
@@ -17,7 +19,7 @@ Charles: Path II unchanged. **C1–C4 + C7 → green** after D10 bundle. C6 part
 |-------|-------|---------|
 | **Green** | 3 now → **5 after D10** | Scientifically demonstrated; needs packaging only |
 | **Yellow** | 4 now → **2 after D10** | Done in notebook/playground; not yet frozen for manuscript |
-| **Red** | **0** | Nothing missing that blocks §3 draft under Path II |
+| **Red** | **0** | Nothing missing that blocks manuscript **§5** (generative) draft under Path II |
 
 **Single next task:** D10 manuscript export bundle (`export_scout_manuscript_bundle_v1.py`) — **1–2 sessions**, packaging only.
 
@@ -36,7 +38,7 @@ Charles: Path II unchanged. **C1–C4 + C7 → green** after D10 bundle. C6 part
 | **C7** | **Manuscript export bundle** on disk (D10): empirical Fig 2 + generative contrast + **Tier 2.5 feature panel** + manifest | **MISSING** | Script specified in [`20260611_1640_SCOUT_to_COMPASS_model_coherence.md`](20260611_1640_SCOUT_to_COMPASS_model_coherence.md) §D; **not yet built** | SCOUT D10; Charles **C9** path lock | **Yellow** until built |
 | **C8** *(PD12 optional)* | **Quality vs congestion** distinction **exported** in D10 (axis table row + congestion column/panel) | **PARTIAL** | `crowding_smooth` in pipeline; not yet named closure row on disk | SCOUT D10 | **Yellow** → Green after D10 |
 
-**SCOUT closure rule:** Items C1–C4 + C7 go **green** when D10 lands. C5 already green. C6 stays **yellow** until cross-domain prediction map names Army Λ + basketball near-threshold — acceptable for v1 §3 closure; §4 can carry yellow honestly.
+**SCOUT closure rule:** Items C1–C4 + C7 go **green** when D10 lands. C5 already green. C6 stays **yellow** until cross-domain prediction map names Army Λ + basketball near-threshold — acceptable for v1 **manuscript §5** (generative) closure; **manuscript §7** (predictions) can carry yellow honestly.
 
 ---
 
@@ -44,15 +46,15 @@ Charles: Path II unchanged. **C1–C4 + C7 → green** after D10 bundle. C6 part
 
 ### Rung 1 — Empirical inverted-U on LOO pool quality
 
-**Publication-ready for basketball** with one housekeeping refresh. The inverted-U on `poolq_loo` is established in `530`/`538`; best frozen artifacts on disk are April 2026 ventile exports (`inverted_u_ventiles_ppm_zwithinseason_2026-04-06.png` + CSV under `datasets/mbb/exports_inverted_u_v0/`). **Single refresh:** re-run 530 export with a June dated slug before VECTOR locks Figure 2 captions — science unchanged, provenance hygiene only. No generative machinery required for Rung 1.
+**Publication-ready for basketball** with one housekeeping refresh. The inverted-U on `poolq_loo` is established in `sports/530_sports_pipeline.ipynb` / `sports/538_alex_tier1_model_and_fit.ipynb`; best frozen artifacts on disk are April 2026 ventile exports (`inverted_u_ventiles_ppm_zwithinseason_2026-04-06.png` + CSV under `datasets/mbb/exports_inverted_u_v0/`). **Single refresh:** re-run `530` export with a June dated slug before VECTOR locks Figure 2 captions — science unchanged, provenance hygiene only. No generative machinery required for Rung 1.
 
-### Rung 2 — Minimal generative mechanism (CELL 10)
+### Rung 2 — Minimal generative mechanism (`sports/538D_development.ipynb` CELL 10)
 
 **Demonstrated interactively, not yet manuscript-frozen.** Score \(S_i = A_i - \lambda L_{C,\text{LOO}}\) with soft assignment runs in 538D CELL 10; 539 preset loads `SELECTION_539_*`; talent-only fails; congestion-in-score shows peak-and-decline on **pool mean**. **Playground-only today:** generative PNGs live in widget output + `tier1_cell10_playground_state.json`, not in `exports_inverted_u_v0/`. **Exportable in one session** via D10 script.
 
 ### Rung 3 — Predictions / decomposition
 
-**One prediction artifact exists on disk; one is cross-domain.** Near-threshold heterogeneity (CELL 4D) exported June 2026. Mean×SD (4B/4C) and full Wang-ladder LPM exports remain notebook-only — supplement tier, not closure blockers. Peak-shift-with-Λ is conceptual in basketball; CODA owns Army instantiation.
+**One prediction artifact exists on disk; one is cross-domain.** Near-threshold heterogeneity (`sports/538D_development.ipynb` **CELL 4D**) exported June 2026. Mean×SD (CELL 4B/4C) and full Wang-ladder LPM exports remain notebook-only — supplement tier, not closure blockers. Peak-shift-with-Λ is conceptual in basketball; CODA owns Army instantiation.
 
 ---
 
@@ -103,7 +105,7 @@ Under Path II, Charles does **not** need to “apply the generative model” in 
 |-------|--------|
 | **Task** | Build **`sports/scripts/export_scout_manuscript_bundle_v1.py`** → output **`datasets/mbb/exports_inverted_u_v0/scout_manuscript_v1/`** (unless Charles locks C9 alternate path) |
 | **Unlocks** | **C1, C2, C3, C4, C7 → green**; refreshes empirical Fig 2 slug; freezes generative contrast PNGs (ability-only vs 539 preset; pool-mean + LOO-pool-quality readout panels); writes `manifest.json`, `axis_table_generative_readouts.md`, `score_equation_one_pager.md` |
-| **Effort** | **1–2 sessions** — packaging + one 530 re-export; no new science |
+| **Effort** | **1–2 sessions** — packaging + one `sports/530_sports_pipeline.ipynb` re-export; no new science |
 | **Charles locks needed first?** | **Y — C9 only** (bundle directory path). C7–C8 (PERF_METRIC, bin count) already SCOUT-defaulted in [`20260611_1640_SCOUT_to_COMPASS.md`](20260611_1640_SCOUT_to_COMPASS.md); proceed with defaults if Charles silent |
 
 ---
@@ -112,7 +114,7 @@ Under Path II, Charles does **not** need to “apply the generative model” in 
 
 ### Ready to ink (now)
 
-- Rung 1 empirical claim: inverted-U on **LOO pool quality** in college basketball (530/538).
+- Rung 1 empirical claim: inverted-U on **LOO pool quality** in college basketball (`530` / `538` notebooks).
 - Path II architecture sentence: generative POC ≠ LOO-axis replication.
 - Nesting chain from [`20260611_1640_SCOUT_to_COMPASS_model_coherence.md`](20260611_1640_SCOUT_to_COMPASS_model_coherence.md) §B5.
 - Limitation sentence from same file §A3 (Rung 2 vs Rung 1 axis).
@@ -138,19 +140,19 @@ Under Path II, Charles does **not** need to “apply the generative model” in 
 
 > **“We will call the minimal model complete when the basketball generative score POC is frozen in a manuscript export bundle — talent-only fails, congestion-in-score bends curves on pool mean, at least one model-guided empirical quantity is exported (team quality vs viable-peer congestion), at least one prediction readout is on disk (near-threshold heterogeneity), axis table and limitation prose are frozen — while Army and tenure stay empirical inverted-U legs at honest maturity, without generative LOO bin-for-bin match or full 3-domain parameter identifiability.”**
 
-*PD12 B-lite closure — see [`14_PD12_reassessment_memo.md`](14_PD12_reassessment_memo.md) §Q2.*
+*PD12 **B-lite** closure (COMPASS label, not Alex’s word) — see [`14_PD12_reassessment_memo.md`](14_PD12_reassessment_memo.md) Q2 and `#01` glossary.*
 
 ---
 
 ## Round 2 — SCOUT read receipt (all correspondence)
 
-SCOUT read **all** agent-facing files in `3-Master_Plan/` (37 files). **Reading everything was helpful** for §4 (CODA Army row, PEER tenure row) and for COMPASS stale-reference flags (April Fig 2 slug, PEER Cox wording).
+SCOUT read **all** agent-facing files in `3-Master_Plan/` (37 files). **Reading everything was helpful** for **this file’s §4** (CODA Army row, PEER tenure row) and for COMPASS stale-reference flags (April Fig 2 slug, PEER Cox wording).
 
 | New since Round 1 | SCOUT action |
 |-------------------|--------------|
-| [`obsolete/correspondence_rounds/20260615_1012_PEER_to_SCOUT_round2.md`](obsolete/correspondence_rounds/20260615_1012_PEER_to_SCOUT_round2.md) | Incorporated §4 tenure row; bin-spec defer accepted |
+| [`obsolete/correspondence_rounds/20260615_1012_PEER_to_SCOUT_round2.md`](obsolete/correspondence_rounds/20260615_1012_PEER_to_SCOUT_round2.md) | Incorporated **checklist §4** tenure row; bin-spec defer accepted |
 | [`20260615_1010_COMPASS_Round1_correspondence_audit.md`](20260615_1010_COMPASS_Round1_correspondence_audit.md) | Confirms 1626 round complete; this file closes June 15 queue |
-| [`20260615_1008_CODA_Round1_agent_mailbox.md`](20260615_1008_CODA_Round1_agent_mailbox.md) | Incorporated Army §4 row |
+| [`20260615_1008_CODA_Round1_agent_mailbox.md`](20260615_1008_CODA_Round1_agent_mailbox.md) | Incorporated Army **checklist §4** row |
 | [`20260615_1008_PEER_round1_inbox_and_cross_agent.md`](20260615_1008_PEER_round1_inbox_and_cross_agent.md) | Read; aligned |
 
 **SCOUT holds** after this file unless Charles routes D10 implementation or VECTOR asks axis-table wording for tenure proxy row.

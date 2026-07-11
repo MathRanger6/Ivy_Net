@@ -21,11 +21,15 @@
 - Include small tracked artifacts under `datasets/mbb/` per `datasets/mbb/README_TRACKED_ARTIFACTS.md`.
 - Usually exclude `tier1_cell10_playground_state.json`, large sweep outputs, etc.
 
+## PDF from markdown
+
+- **Charles runs PDF conversion** (`./scripts/convert_single_md_to_pdf.sh …` or `./scripts/convert_multiple_md_to_pdf.sh 01_ 02_ …`) on his machine unless he explicitly asks COMPASS to run it in that message.
+- COMPASS may edit `.md` and suggest CSS (e.g. `pdf_styles_narrow.css`); **do not** run convert scripts or regenerate `.pdf` files unprompted — agent-side Playwright/Chrome often mis-renders or crashes vs Charles’s local run.
+- Do not aggressively condense, reframe as “decision memos,” or regenerate PDFs without explicit ask.
+
 ## External-facing documents (advisor briefs, etc.)
 
 - COMPASS drafts **markdown**; **Charles approves content** before send.
-- **Charles runs PDF conversion** (`./scripts/convert_single_md_to_pdf.sh …`) unless he says otherwise in that message.
-- Do not aggressively condense, reframe as “decision memos,” or regenerate PDFs without explicit ask.
 
 ## Cross-project planning agent — COMPASS
 

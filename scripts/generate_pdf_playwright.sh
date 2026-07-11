@@ -553,14 +553,16 @@ try:
                     page.emulate_media(media="print")
 
                     # Generate PDF with proper page break settings
+                    _css_file = "$CSS_FILE"
+                    _margin = "0.1in" if "narrow" in _css_file.lower() else "0.25in"
                     page.pdf(
                         path=pdf_file,
                         format="Letter",
                         margin={
-                            "top": "0.25in",
-                            "right": "0.25in",
-                            "bottom": "0.25in",
-                            "left": "0.25in",
+                            "top": _margin,
+                            "right": _margin,
+                            "bottom": _margin,
+                            "left": _margin,
                         },
                         print_background=True,
                         prefer_css_page_size=True,

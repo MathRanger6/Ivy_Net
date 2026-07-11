@@ -13,6 +13,8 @@
 
 **Purpose:** Map each section of the Dakota Murray v03 spine to **what to paste**, **what to update**, and **what is still missing**. Use this when inking into the RTF (or a `.docx` copy of it).
 
+**Symbol reminder:** Section numbers **0–9 below = manuscript Word outline**. Staging `#12` uses **different** § numbers — see [`01_forward_plan_reading_guide.md`](../3-Master_Plan/01_forward_plan_reading_guide.md) **Symbol systems** (e.g. staging §4 Predictions → manuscript **§7**).
+
 ---
 
 ## How to use this map
@@ -138,7 +140,9 @@
 
 ## Staging draft → Dakota section quick reference
 
-| Staging file section | Primary Dakota destination |
+**Left column = staging `#12` § · Right column = manuscript Word §**
+
+| Staging `#12` § | Primary manuscript § |
 |----------------------|----------------------------|
 | §2.1 | Dakota §2, §3 |
 | §2.2 | Dakota §1 |

@@ -23,14 +23,14 @@
 | `generative_ability_only_pool_mean.{png,csv}` | Talent-only fails |
 | `generative_congestion_539_pool_mean.{png,csv}` | Rung 2 POC (pool mean) |
 | `generative_congestion_539_loo_quality.{png,csv}` | Honest limitation readout |
-| `heterogeneity_ventiles_top_tail.{png,csv}` | Prediction #1 |
+| `heterogeneity_ventiles_top_tail.{png,csv}` | Prediction #1 — from `sports/538D_development.ipynb` CELL 4D |
 | `axis_table_generative_readouts.{md,csv}` | Cross-setting quantity map |
 | `score_equation_one_pager.md` | Frozen λ / score semantics |
 | `MANIFEST.json` | Provenance |
 
-## Closure status (SCOUT 1012)
+## Closure status (SCOUT 1012 — **B-lite** standard)
 
-**C1–C4, C7–C8 → green.** Five-green stop rule satisfied for minimal model closure.
+**B-lite** = COMPASS closure label (`#14` Q2, `#01` glossary): mechanism POC + model-guided exports + prediction readout + limits + this bundle. **C1–C4, C7–C8 → green.** Five-green stop rule satisfied.
 
 ---
 

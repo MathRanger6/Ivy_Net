@@ -7,7 +7,7 @@
 
 **Date:** 2026-06-24 (Phase A execution complete)  
 **Author:** COMPASS  
-**Print stack:** [`Charles_reading_list.md`](Charles_reading_list.md)  
+**Print stack:** [`Charles_reading_list.md`](Charles_reading_list.md) — symbol decoder: [`01_forward_plan_reading_guide.md`](01_forward_plan_reading_guide.md) **Symbol systems**  
 **Companion docs (active numbered):**  
 - [02_Charles_decisions_locked.md](02_Charles_decisions_locked.md) — **Tier 1 locks filed**  
 - [08_Basketball_figures_on_disk.md](08_Basketball_figures_on_disk.md) — D10 bundle  
@@ -23,7 +23,7 @@
 
 The dissertation program is a **three-setting cross-domain study** of **advancement under constrained distinction**, with Army as anchor, basketball as replication, and academia as preliminary third leg. Empirical inverted-U patterns are **established** (Army, basketball) and **preliminary** (tenure). The scientific bottleneck has shifted from discovery to **convergence**: close the **minimal generative model** (honest claims), export **model-guided empirical features** (PD12 Priority 3 — quality vs congestion), lock **2–3 testable predictions**, and draft a **Wang-style manuscript** — while **deferring** 525/UIC deep dives, network-science extensions, 3-domain parametric identifiability (PD12 P1), fourth-domain falsification (PD12 P4), and generative LOO-pool-quality bin-for-bin matching unless Charles or Alex elevates them.
 
-**Phase A (2026-06-24):** Tier 1 locks filed; SCOUT D10 bundle on disk; PEER `faculty_panel_inference_v1.csv` exported (796 persons / 52 depts); staging prose written ([`12_Manuscript_staging_prose.md`](../5-Manuscript/12_Manuscript_staging_prose.md)). **Next:** ink **`Manuscript_working_outline_v1.docx`** using [`10_Manuscript_ink_map.md`](../5-Manuscript/10_Manuscript_ink_map.md) (§5 → §1 → §4); Army AWS sync + Alex Tier 3; Layer B Cox pre-submission.
+**Phase A (2026-06-24):** Tier 1 locks filed; SCOUT D10 bundle on disk; PEER `faculty_panel_inference_v1.csv` exported (796 persons / 52 depts); staging prose written ([`12_Manuscript_staging_prose.md`](../5-Manuscript/12_Manuscript_staging_prose.md)). **Next:** ink **`Manuscript_working_outline_v1.docx`** using [`10_Manuscript_ink_map.md`](../5-Manuscript/10_Manuscript_ink_map.md) (**manuscript §5 → §1 → §4** — see `#01` symbol decoder); Army AWS sync + Alex Tier 3; Layer B Cox pre-submission.
 
 **PD12 alignment (2026-06-15):** v1 delivers Priority 3 + partial Priority 2 (talent-only fail). P1 and P4 deferred explicitly — not silent drift. See [reassessment memo](14_PD12_reassessment_memo.md).
 
@@ -38,7 +38,7 @@ The dissertation program is a **three-setting cross-domain study** of **advancem
 | 1 | Hard deadline | **Summer–Fall 2026** for core manuscript draft/submission |
 | 2 | Tenure Cox gate | **Soft gate (B):** stage 9 + honest limitations OK for VECTOR to draft Setting 3; **one basic Cell 12 Cox run in parallel** before submission (not a pre-draft blocker); Fine–Gray deferred |
 | 3 | SCOUT generative priority | **A — manuscript-first (Path II):** draft with honest layering; generative LOO-pool-quality match **deferred**; Alex score = constraint-leg POC on **pool mean** axis; empirical decomposition for predictions; explicit nesting required in prose |
-| 4 | Tenure Cell 12 urgency | **Charles confirmed (2026-06-11):** no hurry on planned Cell 12 for `540` during **draft phase**. Current **CELL 9** binned plot (`stage9_inverted_u.png`) is **legitimate preliminary descriptive evidence** for process trust and VECTOR Setting 3 prose (with limitations). **Basic Cox** remains pre-**submission** parallel work (PEER-owned); **Fine–Gray** may return before publication if estimand requires it — not gating draft |
+| 4 | Tenure Cell 12 urgency | **Charles confirmed (2026-06-11):** no hurry on planned Cell 12 in `540_tenure_pipeline.ipynb` during **draft phase**. Current **CELL 9** binned plot (`stage9_inverted_u.png`) is **legitimate preliminary descriptive evidence** for process trust and VECTOR Setting 3 prose (with limitations). **Basic Cox** remains pre-**submission** parallel work (PEER-owned); **Fine–Gray** may return before publication if estimand requires it — not gating draft |
 | — | Scientific north star | Unified decomposable generative on LOO axis — **parallel**, does not gate first draft |
 | — | Terminology lock | Any quantity **excluding self** must include **`LOO`** in the name (`poolq_loo` = LOO pool quality; `team_mean` / pool mean = whole roster, not LOO) |
 | — | Model coherence | `20260611_1626_COMPASS_to_SCOUT_model_coherence_questions.md` **revised** for locked Path II — SCOUT must supply nesting chain + deliverables D1–D11, not path choice |
@@ -80,7 +80,7 @@ The dissertation program is a **three-setting cross-domain study** of **advancem
 | Theme | Source | Implication |
 |-------|--------|-------------|
 | Theory ≠ minimal model | `2026_0430_Paper7_feedback.md` | Rich theory; sparse formal model |
-| Quadratic is diagnostic, not mechanism | `2026_0507_Alex_Gates_Post_Meeting_Simulation_Memo.md` | Keep in 538 empirical; generative story is sorting + comparison |
+| Quadratic is diagnostic, not mechanism | `2026_0507_Alex_Gates_Post_Meeting_Simulation_Memo.md` | Keep in `sports/538_alex_tier1_model_and_fit.ipynb` empirical work; generative story is sorting + comparison |
 | Assortative pools + local comparison | PD10–PD12, `Alex_model_interpreted.md` | PD11 threads A/B/C ordering |
 | End-to-end measurement before perfection | PEER Apr 2026 advisor direction | Stage 9 before infinite scrape |
 | Cross-domain minimal story | PD11, Alex Tier 1 spine | Don't calibrate generative on observed team means only |
@@ -90,7 +90,7 @@ The dissertation program is a **three-setting cross-domain study** of **advancem
 
 | Priority | PD12 name | v1 status |
 |----------|-----------|-----------|
-| **P3** | Model-guided empirical features (congestion vs quality) | **In scope** — SCOUT D10 export + VECTOR §3 |
+| **P3** | Model-guided empirical features (congestion vs quality) | **In scope** — SCOUT D10 export + staging **`#12` §3** (Methods) |
 | **P2** | Extreme events / kill switches | **Partial** — talent-only fail; full 539 sweeps deferred |
 | **P1** | Parameter identifiability (3-domain fit) | **Deferred** — post-v1 / dissertation |
 | **P4** | Falsification / 4th domain | **Deferred** — post-v1 |
@@ -110,7 +110,7 @@ The dissertation program is a **three-setting cross-domain study** of **advancem
 |----------|----------------|
 | What problem are we solving? | Nonlinear advancement from **local pool quality × finite distinction**, explained by **minimal generative mechanism**, replicated cross-domain. |
 | What evidence convinces him? | 3-panel empirical U; generative ability-only null; congestion score POC; **model-guided features exported**; 1–2 sharp predictions tested or test-ready. |
-| What would he cut? | Network extensions pre-paper; 537; "538D decomposes 539"; causal overclaim. |
+| What would he cut? | Network extensions pre-paper; legacy `sports/537_tier1_benchmark.ipynb`; "538D decomposes 539"; causal overclaim. |
 | What would he prioritize? | PD11 thread C→A; Wang ladder empirical; one heterogeneity prediction. |
 | Top risks he watches | Axis/estimand confusion; distraction from writing; tenure overclaim without Cox. |
 
@@ -166,8 +166,8 @@ flowchart LR
 | Panel | `530_sports_pipeline.ipynb` → `datasets/mbb/player_season_panel_530.csv` |
 | Inverted-U | **Replicated** on `poolq_loo` |
 | Empirical ladder | `538_alex_tier1_model_and_fit.ipynb` — bins, LPM, logit, \(L^*\) |
-| Generative | `538D` CELL 10; \(S_i = A_i - w L_C\); inverted-U on **team_mean**, not \(L_Q\) match |
-| Open issues | \(L_Q\) generative gap; CELL 7 robustness; 4D heterogeneity parked |
+| Generative | `sports/538D_development.ipynb` CELL 10; \(S_i = A_i - w L_C\); inverted-U on **team_mean**, not \(L_Q\) match |
+| Open issues | \(L_Q\) generative gap; CELL 7 robustness in `sports/538_alex_tier1_model_and_fit.ipynb`; near-threshold export parked (now in D10 — `#08`) |
 | Confidence | **High** empirical; **medium** generative (conditional) |
 
 **Assumptions carrying weight:** PPM+z performance; LOO teammate pool; ever-draft outcome.
@@ -189,7 +189,7 @@ flowchart LR
 
 ## Modeling status
 
-### Scientific progression ladder (PD12-aligned)
+### Scientific progression ladder (PD12-aligned — defs in `#01`)
 
 ```text
 Rung 1  Phenomenon (inverted-U on LOO proxy — triad)
@@ -240,7 +240,7 @@ S_i = A_i - \lambda L_{C,i}
 
 | Candidate prediction | Readiness | Validation work |
 |---------------------|-----------|-----------------|
-| Near-threshold heterogeneity (borderline suffer most in elite pools) | Wired in 538D 4D; narrative parked | Un-park + one figure |
+| Near-threshold heterogeneity (borderline suffer most in elite pools) | Wired in `sports/538D_development.ipynb` CELL 4D; narrative parked | Un-park + one figure (now in D10 — `#08`) |
 | Peak shifts with \(\Lambda\) (draft class size / board size) | Conceptual | Cross-domain parameter sweep — defer |
 | Mean × SD peer dispersion (4B/4C) | Exploratory EDA done | Decide main vs supplement |
 | Own-TB stratified pool-U differs by own performance | CODA coded; default off | Run if Alex wants |
@@ -261,7 +261,7 @@ S_i = A_i - \lambda L_{C,i}
 | Generative figures | ⚠️ | team_mean POC; \(L_Q\) caveat |
 | Predictions | ❌ | List + one test |
 | Limitations | ✅ Agent reports | Merge tenure OA gaps |
-| Network extensions | Defer | §8 Dakota |
+| Network extensions | Defer | **Manuscript §8** (Dakota v03) |
 
 ### Publication risks
 
@@ -329,16 +329,16 @@ S_i = A_i - \lambda L_{C,i}
 | Step | Owner | Output |
 |------|-------|--------|
 | C1 | VECTOR | Outline from Dakota v03 + Wang structure |
-| C2 | VECTOR | §1–2 empirical + theory draft |
-| C3 | VECTOR | §3 minimal model + honest generative status |
-| C4 | VECTOR | §4 predictions (2 locked) |
+| C2 | VECTOR | **Manuscript §1–§2** empirical + theory (from staging `#12` §2) |
+| C3 | VECTOR | **Manuscript §5** minimal generative model + honest status (staging `#12` §2.3 + §3.2) |
+| C4 | VECTOR | **Manuscript §7** predictions (staging `#12` §4; #1 and #2 locked) |
 | C5 | Charles + Alex | Advisor read; revise claims |
 
 ## Phase D — Prediction execution (parallel Weeks 4–6)
 
 | Step | Owner | Output |
 |------|-------|--------|
-| D1 | SCOUT | Un-park 4D heterogeneity OR own-TB analog |
+| D1 | SCOUT | Near-threshold heterogeneity export refresh (`sports/538D_development.ipynb` CELL 4D) OR own-TB analog |
 | D2 | PEER | One robustness: alternate bins or OA filter |
 | D3 | CODA | TB-stratify panels **if** Alex requests |
 
@@ -376,12 +376,12 @@ gantt
 | 525 UIC / senior-rater consistency | CODA | Army depth; not required for 3-setting paper |
 | Pool-size >100 audit | CODA | Methods note; disclaimer may suffice v1 |
 | Full \(L_Q\) generative match | SCOUT | High cost; empirical U already replicated |
-| 538 CELL 7+ FE/clustering | SCOUT | Robustness post-draft |
+| 538 CELL 7+ FE/clustering | SCOUT | Robustness post-draft (`sports/538_alex_tier1_model_and_fit.ipynb`) |
 | HPC parameter sweeps | SCOUT | Exploration |
-| 537 legacy sim | SCOUT | Frozen |
+| 537 legacy sim | SCOUT | Frozen benchmark (`sports/537_tier1_benchmark.ipynb`) |
 | Tenure URL scrape expansion | PEER | Alex: measure on hand first |
 | NRC/USNews prestige merge | PEER | v2 |
-| Network science §8 extensions | VECTOR | Dakota marks exploratory |
+| Network science **manuscript §8** extensions | VECTOR | Dakota marks exploratory |
 | OCN eigenvector prestige chapters | CODA/VECTOR | Original dissertation Ch1–3; future dissertation scope |
 | `Publication_Plan.md` §2 mechanism paragraphs | VECTOR/Charles | Fill after draft skeleton |
 | Phase 2 planning files | COMPASS | After this plan approved |

@@ -1,0 +1,179 @@
+/* Dense reading notes — narrow margins, max info per page.
+ * Usage: ./scripts/convert_single_md_to_pdf.sh path/to/doc.md [out.pdf] pdf_styles_narrow.css
+ * Default pdf_styles.css uses 0.25in; this uses 0.1in. */
+
+@page {
+    size: letter;
+    margin: 0.1in;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 0.72em;
+    line-height: 1.32;
+    color: #333;
+    max-width: 100%;
+}
+
+h1 {
+    color: #1a1a1a;
+    border-bottom: 2px solid #4a90e2;
+    padding-bottom: 4px;
+    margin-top: 8px;
+    margin-bottom: 6px;
+    font-size: 1.45em;
+    page-break-after: avoid;
+}
+
+h2 {
+    color: #2c3e50;
+    border-bottom: 1px solid #7f8c8d;
+    padding-bottom: 3px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-size: 1.12em;
+    page-break-after: avoid;
+}
+
+h3 {
+    color: #34495e;
+    margin-top: 8px;
+    margin-bottom: 4px;
+    font-size: 1.02em;
+    page-break-after: avoid;
+}
+
+h4 {
+    color: #555;
+    margin-top: 6px;
+    margin-bottom: 3px;
+    font-size: 0.95em;
+    page-break-after: avoid;
+}
+
+p {
+    margin: 0.2em 0;
+}
+
+code {
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    padding: 1px 4px;
+    font-family: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, "Courier New", monospace;
+    font-size: 0.88em;
+    color: #e83e8c;
+}
+
+pre {
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 6px 8px;
+    overflow-x: auto;
+    line-height: 1.25;
+    page-break-inside: avoid;
+    margin: 4px 0;
+}
+
+pre code {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    color: #333;
+    font-size: 0.92em;
+}
+
+blockquote {
+    border-left: 3px solid #4a90e2;
+    margin: 6px 0;
+    padding-left: 10px;
+    color: #666;
+    font-style: italic;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 4px 0;
+    page-break-inside: avoid;
+    font-size: 0.96em;
+}
+
+th {
+    background-color: #4a90e2;
+    color: white;
+    padding: 3px 5px;
+    text-align: left;
+    font-weight: bold;
+}
+
+td {
+    border: 1px solid #ddd;
+    padding: 3px 5px;
+    vertical-align: top;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+ul, ol {
+    margin: 3px 0;
+    padding-left: 1.25em;
+}
+
+li {
+    margin: 1px 0;
+}
+
+a {
+    color: #4a90e2;
+    text-decoration: none;
+}
+
+strong {
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+em {
+    color: #555;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 8px 0;
+}
+
+math[display="block"] {
+    display: block;
+    margin: 0.25em 0;
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+math {
+    font-size: 1em;
+    line-height: 1.15;
+}
+
+.katex-display {
+    display: block;
+    margin: 0.4em 0;
+    text-align: center;
+    overflow-x: auto;
+    overflow-y: hidden;
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+.katex {
+    font-size: 1.02em;
+}
+
+.hljs {
+    background: #f5f5f5;
+    color: #333;
+}

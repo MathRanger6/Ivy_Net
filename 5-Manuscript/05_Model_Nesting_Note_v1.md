@@ -5,7 +5,8 @@
 
 **Date:** 2026-06-24  
 **Author:** COMPASS (Charles Tier 1 execution)  
-**Audience:** VECTOR §3, Alex read-through, committee  
+**Audience:** Manuscript **§5** + staging **`#12` §3**; Alex read-through; committee  
+**Ladder terms:** Rung / Path II / B-lite → [`01_forward_plan_reading_guide.md`](../3-Master_Plan/01_forward_plan_reading_guide.md)
 **Status:** Frozen for v1 manuscript — no new equations
 
 ---
@@ -58,7 +59,7 @@ Rung 2.5 Model-guided empirical features (PD12 P3)
          → theory proposes measurements, not only fits old curves
 
 Rung 3   Predictions (named candidates — not all proven)
-         #1 Near-threshold heterogeneity (MBB 4D export)
+         #1 Near-threshold heterogeneity (`sports/538D_development.ipynb` CELL 4D → `#08`)
          #2 Peak shift with global Λ (Army-led prose hook)
 
 Rung 4   Manuscript
@@ -91,7 +92,7 @@ Rung 4   Manuscript
 | Setting | Rung 1 | Rung 2 generative | Rung 2.5 | Rung 3 |
 |---------|--------|-------------------|----------|--------|
 | **Army** | CIF inverted-U on LOO pool minus mean | None (empirical leg) | Pool size / Λ proxies | Near-threshold; Λ peak-shift |
-| **Basketball** | LOO `poolq_loo` inverted-U | Alex score POC (539 preset) | Quality vs `crowding_smooth` | 4D near-threshold |
+| **Basketball** | LOO `poolq_loo` inverted-U | Alex score POC (`sports/538D_development.ipynb` CELL 10) | Quality vs `crowding_smooth` | Near-threshold (`538D` CELL 4D) |
 | **Tenure** | Stage 9 on `poolq_loo_mean` (preliminary) | None | `pool_size_oa_loo` optional | Deferred for v1 |
 
 ---
@@ -100,7 +101,7 @@ Rung 4   Manuscript
 
 | Item | Why deferred |
 |------|--------------|
-| Multiplicative talent production function (Menger/Shockley) | §5 discussion; not v1 mechanism rewrite |
+| Multiplicative talent production function (Menger/Shockley) | **Manuscript §5–§6** discussion; not v1 mechanism rewrite |
 | Full generative \(B(Q) - D(Q)\) decomposition | Not estimated in v1 |
 | LOO generative bin-for-bin match | Parallel north star; honest limitation |
 | 3-domain parametric identifiability (PD12 P1) | Post-draft |

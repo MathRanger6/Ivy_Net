@@ -8,7 +8,7 @@
 **To:** Charles Levine  
 **Status:** Temporary reader's guide — you do not need to read Round 1–5 correspondence files to move forward.
 
-**Reading order + glossary:** [`01_forward_plan_reading_guide.md`](01_forward_plan_reading_guide.md) — **start here if shorthand loses you**  
+**Reading order + glossary:** [`01_forward_plan_reading_guide.md`](01_forward_plan_reading_guide.md) — **start with “Symbol systems”** and **“B-lite closure”** if Rung / Path II / `§` lose you  
 **Print stack:** [`Charles_reading_list.md`](Charles_reading_list.md)  
 **Pivotal insights (nuggets):** [`13_INSIGHT_NUGGETS.md`](13_INSIGHT_NUGGETS.md) — cross-project framing worth keeping  
 **Canonical action doc:** [`20260615_1045_COMPASS_to_Charles_forward_plan_and_questions.md`](20260615_1045_COMPASS_to_Charles_forward_plan_and_questions.md)  
@@ -62,7 +62,7 @@ Alex’s May 20 guidance: the theory should **propose new measurements**, not on
 | **Team quality** \(\bar{a}_t\) | `poolq_loo` | Pool minus mean | `poolq_loo_mean` |
 | **Congestion** \(C_{i,t}\) | `crowding_smooth` | Pool size / Λ hook (prose) | `pool_size_oa_loo` (on panel) |
 
-**Status:** Mostly **already built** in SCOUT pipeline. D10 exports + VECTOR §3 prose make this stage explicit — **not** a new workstream.
+**Status:** Mostly **already built** in SCOUT pipeline. D10 exports + staging **`#12` §3** (Methods) make this stage explicit — **not** a new workstream.
 
 ### 3. Predictions (Tier 3 — named, not all fully tested)
 
@@ -129,7 +129,7 @@ Mean×dispersion, networks, full deconstruction — **deferred**.
 
 ## What you should do next (minimal path)
 
-You do **not** need to read 60 files. Answer **Tier 1** (or paste the batch in §7 of the forward plan):
+You do **not** need to read 60 files. Tier 1 answers are filed in [`02_Charles_decisions_locked.md`](02_Charles_decisions_locked.md) (original batch was obsolete forward plan **§6–§7**).
 
 1. **Q-SCOUT-9** — bundle path → default `datasets/mbb/exports_inverted_u_v0/scout_manuscript_v1/`
 2. **Q-D10** — **go** on SCOUT export bundle
@@ -143,7 +143,7 @@ You do **not** need to read 60 files. Answer **Tier 1** (or paste the batch in �
 ```text
 SCOUT  → build D10 bundle
 PEER   → inference CSV after C1–C2
-VECTOR → start drafting §2, §5; then §1, §3, §4 when artifacts land
+VECTOR → ink manuscript per `#10` (locked first pass: **manuscript §5 → §1 → §4**)
 You    → schedule Alex for Army estimand + TB-stratify (Tier 3)
 ```
 
@@ -170,7 +170,7 @@ Optional deep history (not required for inking):
 1. **[Forward plan questions](20260615_1045_COMPASS_to_Charles_forward_plan_and_questions.md)** — superseded by [`02_Charles_decisions_locked.md`](02_Charles_decisions_locked.md)  
 2. **[PD12 guidance](20260520_Transcript_12_guidance.md)** — Alex’s four priorities  
 3. **[PD12 reassessment](14_PD12_reassessment_memo.md)** — ladder relabel  
-4. **[Claim guardrails](07_Claim_language_guardrails.md)** — §F “Do Say / Do Not Say”  
+4. **[Claim guardrails](07_Claim_language_guardrails.md)** — **§F** “Do Say / Do Not Say” (**subsection of `#07`**, not manuscript §F)  
 5. **[Generative closure](06_Generative_closure_checklist.md)** — SCOUT C1–C8
 
 ---

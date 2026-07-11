@@ -10,7 +10,7 @@
 **Working outline (you edit):** `Manuscript_working_outline_v1.docx`  
 **Charles locks:** [`../3-Master_Plan/02_Charles_decisions_locked.md`](../3-Master_Plan/02_Charles_decisions_locked.md)
 
-**Status:** Staging prose for Summer–Fall 2026 submission track. Numbers from manifests at export time. **Copy FROM this file INTO** `Manuscript_working_outline_v1.docx` per ink map; apply Dakota digest fixes (especially §4).
+**Status:** Staging prose for Summer–Fall 2026 submission track. Numbers from manifests at export time. **Copy FROM this file INTO** `Manuscript_working_outline_v1.docx` per ink map (`#10`). Apply Dakota digest fixes before **manuscript §4** (tenure) — especially staging **§4** content, which maps to **manuscript §7** (Predictions), not manuscript §4.
 
 ---
 
@@ -51,7 +51,7 @@ Elite environments raise both average talent and substitutability; the downturn 
 
 Player-season panel with LOO pool quality (`poolq_loo`), draft outcome, and within-season performance controls. Figure 2: inverted-U on ventile bins of LOO pool quality (PPM z within-season). **Artifact:** `scout_manuscript_v1/inverted_u_ventiles_ppm_zwithinseason_2026-06-24.png`.
 
-### 3.2 Generative POC (538D CELL 10 / 539 preset)
+### 3.2 Generative POC (`sports/538D_development.ipynb` CELL 10 / 539 preset)
 
 Frozen preset: Beta(2,2) ability, uniform team targets, `crowding_smooth` congestion, \(\lambda = 0.55\), top-\(K\) selection. **Contrast panels:** ability-only (monotone) vs congestion-in-score (peak-and-decline on pool mean). **Artifacts:** `generative_ability_only_pool_mean.png`, `generative_congestion_539_pool_mean.png`, `generative_congestion_539_loo_quality.png` (limitation readout).
 
@@ -96,7 +96,7 @@ We provide (1) a cross-domain empirical regularity on LOO peer quality, (2) a mi
 
 ### 5.3 Multiplicative vs additive model form (explicit deferral)
 
-Menger and Wang discuss **multiplicative** skill bundles and log-normal success tails. v1 keeps an **additive selection score** and \(B - D\) decomposition. Multiplicative production functions motivate **future** full \(B(Q) - D(Q)\) generative work and §5 inequality discussion — **not** a v1 rewrite. See Model Nesting Note §7.
+Menger and Wang discuss **multiplicative** skill bundles and log-normal success tails. v1 keeps an **additive selection score** and \(B - D\) decomposition. Multiplicative production functions motivate **future** full \(B(Q) - D(Q)\) generative work and **manuscript §5–§6** inequality discussion — **not** a v1 rewrite. See [`05_Model_Nesting_Note_v1.md`](05_Model_Nesting_Note_v1.md) §7.
 
 ### 5.4 Limitations
 

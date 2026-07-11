@@ -24,10 +24,10 @@ Dakota’s email is enthusiastic and insightful. It is **not** a co-advisor dire
 | This file | Not this |
 |-----------|----------|
 | Decision-point notes from Dakota’s email | A fourth full manuscript draft |
-| Prompts for **§4 tenure** especially | Automatic overrides to Tier 1 locks |
+| Prompts for **manuscript §4** (tenure) especially | Automatic overrides to Tier 1 locks |
 | Companion to [`10_Manuscript_ink_map.md`](10_Manuscript_ink_map.md) | Alex-level guidance |
 
-**Workflow:** Edit **`Manuscript_working_outline_v1.docx`**. Use **ink map** for routing. Use **this file** before §4 to **decide** what to adopt. Use **`12_Manuscript_staging_prose.md`** to copy paragraphs.
+**Workflow:** Edit **`Manuscript_working_outline_v1.docx`**. Use **ink map (`#10`)** for routing. Use **this file** before **manuscript §4** (tenure) to **decide** what to adopt. Use **`12_Manuscript_staging_prose.md`** to copy paragraphs.
 
 ---
 

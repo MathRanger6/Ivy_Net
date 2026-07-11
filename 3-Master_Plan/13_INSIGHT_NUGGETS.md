@@ -18,13 +18,15 @@
 
 **Tags:** `cross` · `army` · `scout` · `peer` · `vector` · `alex` · `menger` · `manuscript`
 
+**§ in nuggets:** unless a **source file** is named, **manuscript Word §** (Dakota v03). **Predictions = manuscript §7** (ink from staging `#12` §4) — not manuscript §4 (tenure). Ladder terms → `#01`.
+
 ---
 
 ### 2026-06-19 — Selective ecology: LOO pool quality as ecology trace
 
 **Nugget:** Menger’s **selective ecology** frame treats talent as embedded in environments that sort, match, and reward — not as a fixed individual endowment. **LOO pool quality** is a measurable trace of that ecology.
 
-**Why it matters:** Strongest companion bridge (Ch 10) to your LOO proxy; §2 lit without importing network methods in v1.
+**Why it matters:** Strongest companion bridge (Ch 10) to your LOO proxy; **manuscript §2** lit without importing network methods in v1.
 
 **Not the same as:** Claiming you estimate assortative-matching *dynamics* or network assortativity coefficients.
 
@@ -66,7 +68,7 @@
 
 **Nugget:** A recurring Menger chain: **Difference → Comparison → Ranking → Opportunity → Amplification → Inequality**. Your inverted-U is a **local-competition** signature inside that chain, not the whole chain.
 
-**Why it matters:** §5 discussion vocabulary; keeps Matthew-effect amplification related but distinct.
+**Why it matters:** **Manuscript §5–§6** discussion vocabulary; keeps Matthew-effect amplification related but distinct.
 
 **Not the same as:** A fully identified causal chain in your observational v1.
 
@@ -94,7 +96,7 @@
 
 **Nugget:** Elite talent concentration is **not** uniformly good (more peers help you) or uniformly bad (peers hurt you). Strong pools can **raise development and signal quality** while **intensifying competitive constraint** — especially for near-threshold performers. The inverted-U is the empirical signature of that **both/and**.
 
-**Why it matters:** Manuscript hinge (§2 intro, §5 discussion). Answers the naive “more talent = better?” question with **neither**.
+**Why it matters:** Manuscript hinge (**manuscript §2** intro, **§5–§6** discussion). Answers the naive “more talent = better?” question with **neither**.
 
 **Not the same as:** Pure Matthew-effect inequality amplification; monotonic peer-effects story.
 
@@ -168,7 +170,7 @@
 
 **Nugget:** Near-threshold heterogeneity and Λ peak-shift are **primary prediction slots** for manuscript structure — **candidate** discriminating tests, **not** fully validated cross-domain findings.
 
-**Why it matters:** Stops over-claiming in §4; aligns Wang move with honest science.
+**Why it matters:** Stops over-claiming in **manuscript §7** (Predictions); aligns Wang move with honest science.
 
 **Not the same as:** “All predictions validated across Army, basketball, tenure.”
 
@@ -224,7 +226,7 @@
 
 **Nugget:** The Alex selection score is **not** a second competing model. It is the **operationalization of the constraint leg \(D\)** (LOO congestion penalty) inside one ontology — empirical decomposition and generative POC tell the **same story** at different rungs.
 
-**Why it matters:** Stops “two models” confusion in §3.
+**Why it matters:** Stops “two models” confusion in **manuscript §3** (Global → constrained distinction).
 
 **Not the same as:** “538D decomposes 539” or “Alex score replaces \(L_{\text{net}}\).”
 
@@ -294,7 +296,7 @@
 
 **Nugget:** A strong theory paper must **predict something you did not use to find the curve** — not only reproduce the inverted-U stylized fact.
 
-**Why it matters:** Why §4 predictions exist even when #1/#2 are not yet proven.
+**Why it matters:** Why **manuscript §7** predictions exist even when #1/#2 are not yet proven.
 
 **Not the same as:** Curve-fitting the same bins harder.
 
@@ -364,7 +366,7 @@
 
 **Nugget:** **Cumulative advantage** explains how small early gaps **amplify** into career inequality. It is **related literature**, not a substitute for your **non-monotone pool-quality ↔ advancement** claim.
 
-**Why it matters:** §5 discussion discipline when citing Menger/Merton.
+**Why it matters:** **Manuscript §5–§6** discussion discipline when citing Menger/Merton.
 
 **Not the same as:** “The inverted-U is just Matthew effect.”
 
@@ -408,7 +410,7 @@
 
 **Why it matters:** Prevents sideways drift from Tier 1 locks → D10 → VECTOR draft.
 
-**Not the same as:** Claiming multiplicative talent is wrong — it belongs in §5 discussion and post-v1 \(B(Q)-D(Q)\) work.
+**Not the same as:** Claiming multiplicative talent is wrong — it belongs in **manuscript §5–§6** discussion and post-v1 \(B(Q)-D(Q)\) work.
 
 **Sources:** [`Model_Nesting_Note_v1.md`](../1-Various_PDE_and_Chat_stuff/5-Manuscript/Model_Nesting_Note_v1.md) §7; [`20260617_COMPASS_Menger_conceptual_calibration.md`](20260617_COMPASS_Menger_conceptual_calibration.md); Wang et al. 2025 Ch 40
 
