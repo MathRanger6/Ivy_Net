@@ -56,6 +56,7 @@ Do not start Word inking until you finish these.
 | Item | Why skip for now |
 |------|------------------|
 | [`20_feedback_questions_and_observations.md`](20_feedback_questions_and_observations.md) | Living Q&A while reading — optional; not cover-to-cover |
+| [`21_Formulas_and_variables.md`](21_Formulas_and_variables.md) | **Formula decoder** — all major equations + variables; handy while finishing `#03` before `#05` |
 | `20260615_1045_COMPASS_to_Charles_forward_plan_and_questions.md` | Long; superseded for daily use by #1–#6 + obsolete archive |
 | `obsolete/` folders | Archaeology only |
 | Old PDFs in `obsolete/original_filenames/` | **Stale** — print from numbered `.md` sources above (or re-export PDF yourself) |
@@ -65,7 +66,7 @@ Do not start Word inking until you finish these.
 ## After reading — next action
 
 1. Open `5-Manuscript/Manuscript_working_outline_v1.docx`
-2. Ink **manuscript §5 → §1 → §4** (generative → empirical triad → tenure) using **`10_Manuscript_ink_map`**, **`12_Manuscript_staging_prose`**, and D10 folder (`08_Basketball_figures_on_disk` for file names)
+2. Ink **manuscript §5 → §1 → §4** (generative → empirical triad → tenure), then **§0** opening frame, using **`10_Manuscript_ink_map`**, **`12_Manuscript_staging_prose`** (staging §1 = manuscript §0), and D10 folder (`08_Basketball_figures_on_disk` for file names)
 3. Before **manuscript §4** (tenure), open **`11_Dakota_feedback_decision_points`** and decide what to adopt — predictions live in **manuscript §7** (ink from staging **`#12` §4**)
 4. Message COMPASS: **“back in the game”**
 

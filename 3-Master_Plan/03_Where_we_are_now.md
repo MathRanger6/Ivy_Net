@@ -21,9 +21,31 @@
 
 ## Executive summary
 
-The dissertation program is a **three-setting cross-domain study** of **advancement under constrained distinction**, with Army as anchor, basketball as replication, and academia as preliminary third leg. Empirical inverted-U patterns are **established** (Army, basketball) and **preliminary** (tenure). The scientific bottleneck has shifted from discovery to **convergence**: close the **minimal generative model** (honest claims), export **model-guided empirical features** (PD12 Priority 3 — quality vs congestion), lock **2–3 testable predictions**, and draft a **Wang-style manuscript** — while **deferring** 525/UIC deep dives, network-science extensions, 3-domain parametric identifiability (PD12 P1), fourth-domain falsification (PD12 P4), and generative LOO-pool-quality bin-for-bin matching unless Charles or Alex elevates them.
+The dissertation program is a **three-setting cross-domain study** of **advancement under constrained distinction**, with Army as anchor, basketball as replication, and academia as preliminary third leg.
 
-**Phase A (2026-06-24):** Tier 1 locks filed; SCOUT D10 bundle on disk; PEER `faculty_panel_inference_v1.csv` exported (796 persons / 52 depts); staging prose written ([`12_Manuscript_staging_prose.md`](../5-Manuscript/12_Manuscript_staging_prose.md)). **Next:** ink **`Manuscript_working_outline_v1.docx`** using [`10_Manuscript_ink_map.md`](../5-Manuscript/10_Manuscript_ink_map.md) (**manuscript §5 → §1 → §4** — see `#01` symbol decoder); Army AWS sync + Alex Tier 3; Layer B Cox pre-submission.
+**Convergence (now):** The scientific bottleneck has shifted from discovery to **convergence**:
+
+| | Task |
+|---|------|
+| **a.** | Empirical inverted-U patterns are **established** (Army, basketball) and **preliminary** (tenure). |
+| **b.** | Close the **minimal generative model** (honest claims). |
+| **c.** | Export **model-guided empirical features** (PD12 Priority 3 — quality vs congestion). |
+| **d.** | Lock **2–3 testable predictions**. |
+| | Draft a **Wang-style manuscript**. |
+
+**Next:** These were deferred; review next unless they should move into the current draft:
+
+| | Item | Plain English |
+|---|------|---------------|
+| **a.** | **525/UIC deep dives** | Prestige-organization / senior-rater consistency work — test whether “prestigious unit” effects hold up empirically in Army data. *(Charles: PDE issue — revisit when manuscript needs more Army mechanism meat.)* |
+| **b.** | **Network-science extensions** | Talent center-of-gravity (individual + unit), talent paradox, exposure/comparison networks — strong candidates for later manuscript §8 or dissertation chapters. |
+| **c.** | **3-domain parametric identifiability** (PD12 P1) | Estimate separate \(B(Q)\) and \(D(Q)\) legs with identifiable parameters across all three settings — beyond v1 minimal model. |
+| **d.** | **Fourth-domain falsification** (PD12 P4) | Add a fourth empirical setting to stress-test generality. |
+| **e.** | **Generative LOO-pool-quality bin-for-bin matching** | Make the basketball generative simulation reproduce the empirical `poolq_loo` curve point-for-point — north-star parallel work, not v1 blocker (Path II). |
+
+Elevate any row only if **Charles or Alex** says so; otherwise Part VII opportunity-cost rule applies.
+
+**Phase A (2026-06-24):** Tier 1 locks filed; SCOUT D10 bundle on disk; PEER `faculty_panel_inference_v1.csv` exported (796 persons / 52 depts); staging prose written ([`12_Manuscript_staging_prose.md`](../5-Manuscript/12_Manuscript_staging_prose.md)). **Next:** ink **`Manuscript_working_outline_v1.docx`** using [`10_Manuscript_ink_map.md`](../5-Manuscript/10_Manuscript_ink_map.md) (**manuscript §5 → §1 → §4**, then **§0** opening frame — see `#01` symbol decoder); Army AWS sync + Alex Tier 3; Layer B Cox pre-submission.
 
 **PD12 alignment (2026-06-15):** v1 delivers Priority 3 + partial Priority 2 (talent-only fail). P1 and P4 deferred explicitly — not silent drift. See [reassessment memo](14_PD12_reassessment_memo.md).
 
@@ -238,15 +260,27 @@ S_i = A_i - \lambda L_{C,i}
 
 ## Predictions
 
-| Candidate prediction | Readiness | Validation work |
-|---------------------|-----------|-----------------|
-| Near-threshold heterogeneity (borderline suffer most in elite pools) | Wired in `sports/538D_development.ipynb` CELL 4D; narrative parked | Un-park + one figure (now in D10 — `#08`) |
-| Peak shifts with \(\Lambda\) (draft class size / board size) | Conceptual | Cross-domain parameter sweep — defer |
-| Mean × SD peer dispersion (4B/4C) | Exploratory EDA done | Decide main vs supplement |
-| Own-TB stratified pool-U differs by own performance | CODA coded; default off | Run if Alex wants |
-| Assortativity required for U | Generative story | Already partially shown via soft assign |
+**How to read this section:** These are **candidate predictions** — directions the model suggests, not finished proofs. v1 manuscript will name **#1** and **#2** as primary; the others are exploratory or deferred. Glossary: [`01_forward_plan_reading_guide.md`](01_forward_plan_reading_guide.md).
 
-**COMPASS recommendation:** Ship v1 with **(1) near-threshold heterogeneity** + **(2) mean×SD or own-TB stratification** as two non-obvious predictions — pending agent answers.
+### v1 primary slots (manuscript **§7** / staging `#12` §4)
+
+| # | Name (shorthand) | Plain English — what would count as support? | Status today | Where in repo |
+|---|------------------|-----------------------------------------------|--------------|---------------|
+| **#1** | Near-threshold heterogeneity | Among players who are **good but not superstars**, the elite-pool dip should be **steepest** — congestion hurts people **near the cut line**, not the very best or the clearly below-average. | **Candidate.** One basketball figure exported; not a formal cross-domain test. | `sports/538D_development.ipynb` **CELL 4D** → `heterogeneity_ventiles_top_tail.png` (listed in `#08`) |
+| **#2** | Peak shift with **Λ** (Lambda) | When an organization has **more scarce advancement slots** (bigger boards, more draft picks, more tenure lines), the **top** of the inverted-U should **move** — global capacity matters, not only local peer quality. | **Conceptual only.** Prose hook for Army; no finished Λ-sweep figure. | Army narrative (CODA); defer cross-domain parameter sweep |
+
+**Do say:** “primary prediction **directions**.”  
+**Do not say:** “predictions are fully validated across all settings” (see [`07_Claim_language_guardrails.md`](07_Claim_language_guardrails.md) §F).
+
+### Other candidate predictions (exploratory / supplement / defer)
+
+| Name (shorthand) | Plain English | Status today | Next step |
+|------------------|---------------|--------------|-----------|
+| Mean × SD peer dispersion (538D CELL 4B/4C) | The downturn might depend on **how spread out** talent is within a pool (mean quality **and** dispersion), not mean alone. | Exploratory EDA done in notebook | Decide main text vs appendix |
+| Own-TB stratified pool-U (Army) | The inverted-U shape might **differ by your own performance** (own “talent bucket” / TB): same pool quality, different slope for high vs mid performers. | CODA coded; **off** by default | Run if Alex wants for Army meeting |
+| Assortativity required for U | You need **realistic overlapping pools** (soft assignment), not fake disjoint talent bins, for the generative story to work. | Partially shown — talent-only fails; soft assign + congestion bends curves | Already part of generative POC narrative (`537` falsifies sort-and-chop; `538` soft assign) |
+
+**COMPASS recommendation for v1:** Ship with **#1 (near-threshold)** as the main discriminating readout + **#2 (Λ peak-shift)** as honest prose hook — plus one of mean×SD or own-TB stratification **only if** time allows; do not block draft on the exploratory rows.
 
 ---
 
@@ -412,9 +446,83 @@ Claim language table ──► All sections
 Charles locked Q1–3 ──► Sequence lock (CODA Q4+ open)
 ```
 
+**How to read the arrows:** `──►` means the thing on the **left** must exist (or be decided) before the thing on the **right** can be written properly. This is a **coordination map** for who feeds whom — not a list of things that all block you from starting the draft today.
+
+### Chain 1: Tenure survival analysis → Tenure manuscript section
+
+**Shorthand:** `PEER Cell 12 ──► VECTOR Setting 3 §`
+
+| Term | Meaning |
+|------|---------|
+| **PEER** | Tenure/academia agent — owns `540_tenure_pipeline.ipynb` and the faculty panel export |
+| **Cell 12** | Planned notebook cell: Cox proportional hazards on tenure data (Layer B, ported from Army `520`); produces hazard-ratio tables beyond the descriptive binned plot |
+| **VECTOR** | Manuscript-writing agent (Scholar GPT) — turns staging prose into Word-ready text |
+| **Setting 3 §** | Third empirical setting (academia/tenure). Word outline = **Manuscript §4 — Academic Tenure Setting** (not staging `#12` numbering) |
+
+**What it means:** Before VECTOR can finalize the tenure section with full Cox-backed language, PEER runs Cell 12 and archives hazard-ratio tables.
+
+**Soft gate (Charles locked):** Cell 9 binned plot (`stage9_inverted_u.png`) is **legitimate for drafting** Setting 3 prose now, labeled **preliminary**. Cell 12 is **before submission**, not before first draft. Arrow = polish/submission, not “cannot write §4 yet.”
+
+### Chain 2: Army estimand language → Manuscript methods prose
+
+**Shorthand:** `CODA estimand sentences ──► VECTOR Methods`
+
+| Term | Meaning |
+|------|---------|
+| **CODA** | Army agent |
+| **Estimand sentences** | 3–5 draft sentences: what Army **Cell 11** measures vs **Cell 12**. Cell 11 = descriptive binned CIF bar panels (within-bin empirical summaries). Cell 12 = inferential cause-specific Cox (hazard-scale curvature). Related but **not** the same object — Cell 11 bars are **not** Cox-predicted curves |
+| **VECTOR Methods** | Methods/results wording in the manuscript (mostly Army language in **Manuscript §1**; Dakota spine has no separate Methods chapter) |
+
+**What it means:** VECTOR should not invent Army estimand language. Source: [`20260611_1633_CODA_to_COMPASS.md`](obsolete/pre_tier1_locks/20260611_1633_CODA_to_COMPASS.md) question 3 — still needs **Alex sign-off** before final.
+
+**Guards against:** Calling Cell 11 bars “Cox-predicted” or claiming causal effects. Enforces “associated with / consistent with” language.
+
+### Chain 3: Model-to-data table → Generative modeling section
+
+**Shorthand:** `SCOUT axis table ──► VECTOR Generative §`
+
+| Term | Meaning |
+|------|---------|
+| **SCOUT** | Basketball/generative agent |
+| **Axis table** | `axis_table_generative_readouts.md` in D10 bundle — row-by-row map: model quantity → empirical column (`poolq_loo`, `crowding_smooth`, …) → generative plot axis (often whole-roster **pool mean**, not LOO quality) → allowed v1 claim. This is the **explicit axis table** Part III cites |
+| **VECTOR Generative §** | **Manuscript §5 — Minimal Generative Modeling** (and partly §6 — Mechanism Decomposition) |
+
+**What it means:** VECTOR cannot write the generative section honestly until SCOUT freezes that table — especially the **axis mismatch** limitation (generative POC on pool mean vs empirical inverted-U on `poolq_loo`). Without it, prose over-claims.
+
+### Chain 4: Claim status labels → Every manuscript section
+
+**Shorthand:** `Claim language table ──► All sections`
+
+| Term | Meaning |
+|------|---------|
+| **Claim language table** | [`07_Claim_language_guardrails.md`](07_Claim_language_guardrails.md) — each major claim tagged **Supported**, **Preliminary**, **Unsupported**, **Defer**, or **Out of scope** |
+| **All sections** | Every Word manuscript part (empirical triad, theory, generative, predictions, limitations) |
+
+**What it means:** Guardrail layer on top of the science. VECTOR (and Charles) paste prose section by section; each claim must match its status label so “supported” does not slip in where the stack says “preliminary” or “unsupported.”
+
+### Chain 5: Early Charles decisions → Sequence locked; later CODA questions active
+
+**Shorthand:** `Charles locked Q1–3 ──► Sequence lock (CODA Q4+ open)`
+
+About COMPASS’s question file to CODA ([`20260611_1626_COMPASS_to_CODA_questions.md`](obsolete/pre_tier1_locks/20260611_1626_COMPASS_to_CODA_questions.md)) — **not** the three “Charles clarifications” rows at the top of this doc (deadline, Cox gate, Path II).
+
+**Charles locked Q1–3** (2026-06-11):
+
+| Q | Decision |
+|---|----------|
+| **Q1** (canonical Army figures) | **Paused** — wait for AWS sync; Charles names canonical cell/run/filenames; CODA does not guess |
+| **Q2** (TB-stratified panels) | **Deferred to Alex** — main text, supplement, or defer |
+| **Q3** (estimand language) | CODA drafts sentences for Charles + Alex review; not final until Alex signs off |
+
+**Sequence lock:** Those three decisions fix the agent sequence — we know what we are *not* waiting on (CODA guessing figures, CODA choosing TB-stratify placement) and what we *are* (AWS sync, Alex on TB-stratify and estimand wording).
+
+**CODA Q4+ open:** Questions 4 onward were not paused or deferred to Alex the same way — CODA answered them in the same response: pool harmonization glossary (Q4), pool-size audit timing (Q5 — draft now, audit pre-publication), near-term priority (Q6), AWS workflow (Q8–9), cross-domain harmonization (Q10–11), canonical Army doc list (Q12).
+
+**What it means:** Plan shape is locked by Q1–Q3; remaining CODA work is the “open” bucket (harmonization, doc pointers, workflow status), not re-litigating figure canon or TB-stratify placement.
+
 ---
 
-# Part VII — Shortest defensible path (answer to v6 final question)
+# Part VII — Shortest defensible path (answer to COMPASS_Initial_Guidance_v6.md final question)
 
 > Complete minimal model → robust predictions → publishable manuscript
 

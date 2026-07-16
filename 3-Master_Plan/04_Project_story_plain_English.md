@@ -143,7 +143,7 @@ You do **not** need to read 60 files. Tier 1 answers are filed in [`02_Charles_d
 ```text
 SCOUT  → build D10 bundle
 PEER   → inference CSV after C1–C2
-VECTOR → ink manuscript per `#10` (locked first pass: **manuscript §5 → §1 → §4**)
+VECTOR → ink manuscript per `#10` (locked first pass: **manuscript §5 → §1 → §4**; then **§0** opening frame from staging `#12` §1)
 You    → schedule Alex for Army estimand + TB-stratify (Tier 3)
 ```
 

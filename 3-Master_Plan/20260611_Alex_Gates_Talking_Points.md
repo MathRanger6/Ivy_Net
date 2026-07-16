@@ -4,7 +4,7 @@
 **From:** Charles Levine (COMPASS-assisted draft — edit before meeting)  
 **Companion:** Plan update [`20260611_Brief_for_Alex_Gates_full.md`](20260611_Brief_for_Alex_Gates_full.md) · near-term plan [`PROJECT_STATUS_AND_NEAR_TERM_PLAN.md`](PROJECT_STATUS_AND_NEAR_TERM_PLAN.md)
 
-**Purpose:** Bullet list for the **next** conversation — inform, ask, and record what is **tabled** vs **pre-publication revisit**. Not a replacement for the plan-update brief.
+**Purpose:** Bullet list for the **next** conversation — **questions**, tabled items, and pre-publication revisit. **Inform / path map:** [`30_Alex_Gates_inform_status_outline.md`](30_Alex_Gates_inform_status_outline.md). Not a replacement for the plan-update brief.
 
 ---
 

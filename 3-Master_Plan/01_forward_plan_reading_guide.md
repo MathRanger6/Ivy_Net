@@ -23,7 +23,7 @@ Agents reused **`§`** for three different things. That was never meant to be fo
 | Symbol | Means | Example |
 |--------|--------|---------|
 | **`#NN`** | Numbered **reading-stack** file in `3-Master_Plan/` or `5-Manuscript/` | `#07` = [`07_Claim_language_guardrails.md`](07_Claim_language_guardrails.md) |
-| **`§N` (default)** | **Manuscript Word outline** section (Dakota v03) | “Ink **§5 → §1 → §4**” = generative → empirical triad → tenure |
+| **`§N` (default)** | **Manuscript Word outline** section (Dakota v03) | “Ink **§5 → §1 → §4**” = generative → empirical triad → tenure; then **§0** polish |
 | **`§N` in `#12` only** | **Staging prose** section — **different numbering** | Staging **`§4` = Predictions** → paste into manuscript **`§7`**, not manuscript §4 |
 | **`§X` inside one `.md` file** | Subsection **of that file only** | `#07` **§F** = prediction claims table row; `#06` **§3** = non-requirements block |
 
@@ -33,6 +33,7 @@ Agents reused **`§`** for three different things. That was never meant to be fo
 
 | § | Manuscript section (Dakota v03) | Primary ink source |
 |---|----------------------------------|-------------------|
+| **§0** | **Opening framing** (problem, gap, contribution, roadmap — ½–1 pp) | `#12` **§1** |
 | **§1** | Empirical Observation (Army, basketball, tenure triad) | `#12` §2.2 + §3.4 |
 | **§2** | Why Might This Happen? (\(B\) vs \(D\)) | `#12` §2.1 + `#05` |
 | **§3** | From Global Competition to Constrained Distinction | `#12` §2.1 + `#05` |
@@ -43,12 +44,15 @@ Agents reused **`§`** for three different things. That was never meant to be fo
 | **§8** | Network Science (deferred v1) | Keep Dakota text; defer |
 | **§9** | Thoughts to Stimulate Feedback | Committee brief only |
 
-**Your ink order (locked):** manuscript **§5 → §1 → §4** first — generative POC, then empirical legs, then tenure. Open **`#11`** before manuscript **§4** (tenure), not before predictions.
+**Your ink order (locked):** manuscript **§5 → §1 → §4** first — generative POC, then empirical legs, then tenure. Then **§0** (opening frame, polish pass). Open **`#11`** before manuscript **§4** (tenure), not before predictions.
+
+**Lit review policy (v1):** No separate front-loaded lit chapter. §0 = mini-intro; §2–§3 = conceptual citations; Discussion (`#12` §5.2) = fuller literature placement.
 
 ### Staging `#12` § map (copy-from prose — not the same numbers)
 
 | Staging § | Topic | Goes to manuscript § |
 |-----------|--------|----------------------|
+| **§1** | **Opening framing** (manuscript §0) | **§0** |
 | **§2** | Theory and framing | §1–§3, §6 |
 | **§3** | Methods | §1, §4, §5 |
 | **§4** | **Predictions** | **§7** |
@@ -87,6 +91,8 @@ When an old note says “VECTOR §3” or “§4 predictions,” check whether i
 | **12** | `../5-Manuscript/12_Manuscript_staging_prose.md` | Copy-from paragraphs |
 | **13** | `13_INSIGHT_NUGGETS.md` | Pivotal framing (optional skim) |
 | **14** | `14_PD12_reassessment_memo.md` | PD12 ladder relabel; B-lite closure (optional) |
+| **21** | `21_Formulas_and_variables.md` | Formula / variable decoder |
+| **30** | `30_Alex_Gates_inform_status_outline.md` | Alex inform brief (path map + appendix) |
 
 Long original names → `obsolete/original_filenames/`.
 
@@ -241,6 +247,9 @@ Agents locked **two prediction slots** for manuscript structure — **not** “t
 | **Generative POC** | Small sim showing talent-only fails and congestion bends curves |
 | **POC** | Same as generative POC — **proof of concept** (not “model finished”) |
 | **Pool mean** | Whole-roster average — generative readout axis (≠ LOO axis) |
+| **LPM** | **Linear probability model** — OLS on a binary outcome (drafted, tenured, etc.); often `Y ~ poolq_loo + poolq_loo²` for inverted-U **shape** (`538` CELL 5; `530` ventile overlay). Not final inference — logit/Cox when you need proper 0/1 or survival |
+| **L\*** (L-star) | Peak pool-quality level from a **quadratic LPM** (where expected Y is maximized) — Alex §6 step 2 in `538_alex_tier1_model_and_fit.ipynb` |
+| **empirical ladder** | **bins → LPM → logit → L\*** — descriptive ventiles, then parametric curvature, then proper link, then peak readout (`#03` basketball row; `538`) |
 | **hook** | Named **attachment point** — where an idea lands (manuscript **§7** / staging **`#12` §4** for predictions; repo file; Menger chapter) before proof exists; not clickbait |
 | **PD12 guidance** | Alex’s May 20 meeting summary: [`20260520_Transcript_12_guidance.md`](20260520_Transcript_12_guidance.md) — **not** [`14_PD12_reassessment_memo.md`](14_PD12_reassessment_memo.md) (COMPASS ladder memo) |
 | **axis mismatch** | Empirical v1 uses **LOO pool quality**; generative POC reads out on **pool mean** — state honestly, don’t pretend they match |
@@ -252,6 +261,8 @@ Agents locked **two prediction slots** for manuscript structure — **not** “t
 | **#03 … #14** | Shorthand for numbered files in `3-Master_Plan/` (e.g. `#07` = claim guardrails) |
 | **SCOUT C1** | Talent-only generative baseline **fails** — see [`06_Generative_closure_checklist.md`](06_Generative_closure_checklist.md) |
 | **PEER C1** | OpenAlex HIGH+MEDIUM tiers for tenure — see [`02_Charles_decisions_locked.md`](02_Charles_decisions_locked.md) |
+
+**Formulas & variables (full decode):** [`21_Formulas_and_variables.md`](21_Formulas_and_variables.md) — every major equation + column map; use while reading `#03` before `#05`.
 
 **When a term isn’t here:** ask in chat or add to [`20_feedback_questions_and_observations.md`](20_feedback_questions_and_observations.md) — COMPASS should expand this table when you report a miss.
 
@@ -276,7 +287,7 @@ Shorthand keeps agents aligned; **you** should not need to decode every seventh 
 ## What to do after reading (June 2026)
 
 1. Open `5-Manuscript/Manuscript_working_outline_v1.docx`
-2. Ink **manuscript §5 → §1 → §4** (generative → empirical triad → tenure) using **`#10`**, **`#12`**, **`#08`**
+2. Ink **manuscript §5 → §1 → §4** (generative → empirical triad → tenure), then **§0** opening frame — using **`#10`**, **`#12`** (staging §1 = §0), **`#08`**
 3. Before **manuscript §4** (tenure), open **`#11`** — not staging §4 (predictions → manuscript §7 later)
 4. Message COMPASS: **“back in the game”**
 

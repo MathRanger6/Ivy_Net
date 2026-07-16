@@ -1,4 +1,4 @@
-# Manuscript staging prose (§2–§5) — **not** ChatGPT Scholar VECTOR output
+# Manuscript staging prose (§1–§5) — **not** ChatGPT Scholar VECTOR output
 
 **Canonical name:** `12_Manuscript_staging_prose.md`  
 **Original archive:** [`obsolete/original_filenames/20260624_COMPASS_manuscript_draft_v1_sections.md`](obsolete/original_filenames/20260624_COMPASS_manuscript_draft_v1_sections.md)
@@ -11,6 +11,45 @@
 **Charles locks:** [`../3-Master_Plan/02_Charles_decisions_locked.md`](../3-Master_Plan/02_Charles_decisions_locked.md)
 
 **Status:** Staging prose for Summer–Fall 2026 submission track. Numbers from manifests at export time. **Copy FROM this file INTO** `Manuscript_working_outline_v1.docx` per ink map (`#10`). Apply Dakota digest fixes before **manuscript §4** (tenure) — especially staging **§4** content, which maps to **manuscript §7** (Predictions), not manuscript §4.
+
+**Manuscript front matter:** Staging **§1** → manuscript **§0** (opening framing). **Not** a separate lit-review chapter before §1 — Wang-style phenomenon first; fuller literature placement in staging **§5.2** (Discussion).
+
+---
+
+## §1 Opening framing (manuscript §0)
+
+**Length target:** ½–1 page after §5→§1→§4 first ink pass. **Ink when:** polish pass once empirical triad + generative language exist — do not block the locked ink order.
+
+### 1.1 What §0 is (and is not)
+
+| §0 **is** | §0 **is not** |
+|-----------|----------------|
+| Short hook: problem, gap, contribution preview, roadmap | 15-page Introduction + Literature Review |
+| States the central observation in plain English | Methods dump or citation laundry list |
+| Points reader to §1 figures next | Full Menger / Barabási / Wang exposition (that lives in §2–§3 + Discussion) |
+
+**Wang arc preserved:** §0 frames → **§1 shows the inverted-U** → §2–§3 explain why → §5 mechanism → §7 predictions.
+
+### 1.2 Paste-ready opening (edit into your voice)
+
+**Problem.** Organizations advance members through selective tournaments — promotion boards, draft slots, tenure cases — where evaluators compare individuals to **local peer reference groups**. A recurring question is whether stronger peers help or hurt advancement. The answer is not monotonic: elite peer environments can raise development and visibility while simultaneously compressing returns to marginal distinction when many similarly strong substitutes compete for scarce slots.
+
+**Gap.** Sociological work on **selective ecology and assortative matching** (Menger) explains who enters elite pools; **science-of-success** minimal-model work (Barabási, Wang, Gates) asks for stylized facts and parsimonious mechanisms. Less developed is a cross-domain empirical regularity that **separates developmental upside from competitive constraint** in the same local environment — and links that decomposition to advancement outcomes under finite distinction.
+
+**Contribution (preview).** We document an inverted-U: advancement rates rise with leave-one-out (LOO) peer quality through mid-tier environments, then fall in the most elite tier — in U.S. Army officer promotion, NCAA men's basketball draft selection, and preliminary R1 computer-science tenure. We pair the stylized fact with (1) a minimal generative proof-of-concept in which congestion enters the selection score, (2) model-guided measurements distinguishing team quality from viable-peer congestion, and (3) named prediction-facing readouts. We use associational language throughout; causal identification is not claimed.
+
+**Roadmap.** Section 1 presents the cross-domain empirical pattern. Sections 2–3 develop the benefit–constraint framing (\(L_{\text{net}} = B - D\)) and the move from global competition to constrained local distinction. Section 4 details the tenure setting and limitations. Section 5 presents the minimal generative model and honest axis limitations. Sections 6–7 decompose mechanisms and state testable predictions. Discussion places the work relative to selective-ecology and minimal-model literatures.
+
+### 1.3 Literature placement (where citations land)
+
+| Literature lane | Primary manuscript home | Not here in §0 |
+|-----------------|-------------------------|----------------|
+| Menger — selective ecology, assortative matching | §2–§3 (conceptual); **§5.2** Discussion | Long exegesis |
+| Barabási / Wang — minimal models, stylized facts | §2 hook; **§5.2** Discussion | Full paper summaries |
+| Alex Gates (PD10–12) — score, quality vs congestion | §5–§6; **§5.2** Discussion | Operational detail |
+| Network-science extensions | **§8** (deferred v1) | — |
+
+**Committee brief only:** Dakota v03 **§9** (“Thoughts to stimulate feedback”) — omit from journal submission draft.
 
 ---
 

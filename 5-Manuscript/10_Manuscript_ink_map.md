@@ -31,11 +31,17 @@
 
 ## Section 0 — Title block and opening framing
 
+**Role:** Mini-introduction (½–1 page) — **not** a front-loaded lit review. Wang-style arc: frame the puzzle here, **show the inverted-U in §1**, develop theory in §2–§3, place literatures in Discussion (`#12` §5.2).
+
 | Dakota v03 block | Ink source | Action |
 |------------------|------------|--------|
 | Title + subtitle | Keep as-is | “Advancement Under Constrained Distinction” |
-| Opening “central observation” paragraph | Dakota v03 § opening + [`05_Model_Nesting_Note_v1.md`](05_Model_Nesting_Note_v1.md) §8 one-paragraph positioning | **Light refresh:** add “model-guided measurements (quality vs congestion)” and “preliminary tenure N = 796 persons / 52 depts” |
-| “Thoughts to stimulate feedback” intro | Keep for **committee brief**; trim if this becomes journal MS |
+| Opening framing (4 beats) | Staging **`#12` §1.2** (Problem → Gap → Contribution → Roadmap) | Paste; edit into your voice |
+| Literature placement rule | Staging **`#12` §1.3** + §5.2 | **Do not** expand into full lit review here — cite selectively in §2–§3; fuller map in Discussion |
+| One-paragraph positioning | [`05_Model_Nesting_Note_v1.md`](05_Model_Nesting_Note_v1.md) §8 | Light merge: model-guided measurements (quality vs congestion); preliminary tenure **796 persons / 52 depts** |
+| “Thoughts to stimulate feedback” intro | Keep for **committee brief** only | **Omit** from journal MS (Dakota §9) |
+
+**Ink when:** After first pass of locked order **§5 → §1 → §4** — §0 summarizes what exists; do not block generative/empirical ink.
 
 ---
 
@@ -144,6 +150,7 @@
 
 | Staging `#12` § | Primary manuscript § |
 |----------------------|----------------------------|
+| **§1** | **§0** (opening framing) |
 | §2.1 | Dakota §2, §3 |
 | §2.2 | Dakota §1 |
 | §2.3 | Dakota §5 |
