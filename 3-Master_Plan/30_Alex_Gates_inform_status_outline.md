@@ -201,8 +201,8 @@ Same project. **Not the same object.**
 
 | Equation | Say this |
 |----------|----------|
-| ****L_net**** | “How does the **local peer environment** net out for advancement — upside from strong peers **minus** downside from crowding them out?” |
-| ****S_i**** | “How does the **selector rank** people — own ability **minus** a penalty for viable-peer congestion?” |
+| **L_net** | “How does the **local peer environment** net out for advancement — upside from strong peers **minus** downside from crowding them out?” |
+| **S_i** | “How does the **selector rank** people — own ability **minus** a penalty for viable-peer congestion?” |
 
 ---
 
@@ -210,7 +210,7 @@ Same project. **Not the same object.**
 
 #### 1. Reduced form vs. selection rule
 
-| | ****L_net = B − D**** | ****S_i = A_i − λ·L_C**** |
+| | **L_net = B − D** | **S_i = A_i − λ·L_C** |
 |--|-------------------------------|----------------------------------|
 | **Asks** | Why does peer context help *and* hurt? | Who gets picked when pools are crowded? |
 | **Level** | Environment → advancement propensity | Individual → ranking score → selection |
@@ -220,7 +220,7 @@ Same project. **Not the same object.**
 
 #### 2. Two legs vs. one leg in the equation
 
-****L_net**** has **both**:
+**L_net** has **both**:
 
 - **B** — visibility, norms, minutes, development upside from elite peers  
 - **D** — congestion, substitutability, finite slots  
@@ -228,7 +228,7 @@ Same project. **Not the same object.**
 **Alex’s score** has **only the D-leg in the formula** (plus own ability):
 
 - Congestion **L_C** is subtracted from **A_i**  
-- **B is not a term in **S_i**** — no “minutes bonus” or “development benefit” in the score equation  
+- **B** is not a term in **S_i** — no “minutes bonus” or “development benefit” in the score equation  
 
 **Say:** “Alex’s equation is **not** **B − D**. It’s **ability minus congestion** — the constraint leg **entering selection**. The benefit leg lives in my broader frame and in **separate empirical columns** (`poolq_loo` vs `crowding_smooth`), not inside his score.”
 
@@ -236,8 +236,8 @@ Same project. **Not the same object.**
 
 #### 3. Own ability: outside vs. inside
 
-- In ****L_net****, own ability ****A_i**** is **outside** the decomposition — environment is about **peers**, not you.  
-- In ****S_i****, own ability is **inside** the score — ranking is explicitly **you vs. congestion**.
+- In **L_net**, own ability **A_i** is **outside** the decomposition — environment is about **peers**, not you.  
+- In **S_i**, own ability is **inside** the score — ranking is explicitly **you vs. congestion**.
 
 **Say:** “**L_net** is about **the pool around you**. **S_i** is about **how evaluators score you** given that pool.”
 
@@ -253,8 +253,8 @@ Same project. **Not the same object.**
 
 #### 5. What each equation is *for* in v1
 
-- ****L_net**:** Explains the **inverted-U** (both legs), guides **Rung 2.5** (quality vs. congestion columns), frames **predictions**. **Not separately estimated** as **B(Q)−D(Q)** in v1.  
-- ****S_i**:** Shows **talent-only fails** (**λ = 0**) and **congestion-in-score bends curves** — minimal Path II POC. **Not** bin-for-bin replication of empirical `poolq_loo`.
+- **L_net:** Explains the **inverted-U** (both legs), guides **Rung 2.5** (quality vs. congestion columns), frames **predictions**. **Not separately estimated** as **B(Q)−D(Q)** in v1.  
+- **S_i:** Shows **talent-only fails** (**λ = 0**) and **congestion-in-score bends curves** — minimal Path II POC. **Not** bin-for-bin replication of empirical `poolq_loo`.
 
 **Say:** “I’m not claiming we’ve estimated full **B** and **D** as functions of pool quality. Alex’s score isn’t claiming to be the whole **L_net** either. It’s the **minimal generative piece** that makes congestion matter for **who gets selected**.”
 
@@ -263,7 +263,7 @@ Same project. **Not the same object.**
 ### A.4 Thirty-second script (practice this)
 
 > “We use **one ontology, two readouts**.  
-> ****L_net = B − D**** is my reduced form: strong peers can **help** through development and visibility and **hurt** through congestion and substitutability — that’s the inverted-U story.  
+> **L_net = B − D** is my reduced form: strong peers can **help** through development and visibility and **hurt** through congestion and substitutability — that’s the inverted-U story.  
 > **Alex’s score** is narrower: **ability minus viable-peer congestion** in the **selection rule**. That operationalizes the **constraint leg** — who stands out when everyone around you is also viable — not the full benefit-minus-constraint decomposition.  
 > Empirically we see the curve on **leave-one-out pool quality**; the simulation shows congestion in the score can produce non-monotone curves on a **different axis**, with the limitation stated explicitly. Same model family, different rung.”
 
@@ -276,7 +276,7 @@ Same project. **Not the same object.**
 | “Alex’s equation **is** my model.” | “Alex’s score **nests inside** my frame as the D-leg in selection.” |
 | “We estimated **B − D**.” | “We **decompose conceptually**; v1 has quality vs. congestion **columns**, not full **B(Q)−D(Q)**.” |
 | “The sim reproduces `poolq_loo`.” | “The sim shows congestion **in the score** matters; empirical U is on **LOO quality**.” |
-| “**S_i** includes development benefits.” | “**B** shows up in theory and in proxies like minutes; **not in **S_i****.” |
+| “S_i includes development benefits.” | “B shows up in theory and in proxies like minutes; not in S_i.” |
 
 ---
 
@@ -297,13 +297,13 @@ Same project. **Not the same object.**
 
 | Symbol | Level | Plain English | In data / code |
 |--------|-------|---------------|----------------|
-| ****S_i**** | **Individual** | Ranking score: ability minus congestion penalty | **Latent** in generative sim (`538D` CELL 10); not observed in Army/MBB/tenure panels |
-| ****L_C** / λ·**L_C**** | **Individual-in-pool** | Congestion channel — **D leg inside S** | `crowding_smooth` (empirical D proxy) |
-| **`poolq_loo` / **L_Q**** | **Individual-in-pool** | LOO **teammate quality** — **mixes B and D** | Empirical **x-axis** (Rung 1); often **decreasing** on sim Plot B when `SHOW_PLOT_B_TEAM_MEAN=False` |
+| **S_i** | **Individual** | Ranking score: ability minus congestion penalty | **Latent** in generative sim (`538D` CELL 10); not observed in Army/MBB/tenure panels |
+| L_C / λ·L_C | **Individual-in-pool** | Congestion channel — **D leg inside S** | `crowding_smooth` (empirical D proxy) |
+| `poolq_loo` / L_Q | **Individual-in-pool** | LOO **teammate quality** — **mixes B and D** | Empirical **x-axis** (Rung 1); often **decreasing** on sim Plot B when `SHOW_PLOT_B_TEAM_MEAN=False` |
 | **Pool mean / `team_mean`** | **Pool** | Whole-roster average ability | Generative Plot B **x-axis** when `SHOW_PLOT_B_TEAM_MEAN=True` (539-style) |
-| ****L_net = B − D**** | **Theory** | Why environment helps **and** hurts | Conceptual spine — **not** a column you regress directly in v1 |
+| **L_net = B − D** | **Theory** | Why environment helps **and** hurts | Conceptual spine — **not** a column you regress directly in v1 |
 
-**Mnemonic:** **S = who** (rank). **L = where** (pool context on the plot). ****L_net** = why** (help minus hurt).
+**Mnemonic:** **S = who** (rank). **L = where** (pool context on the plot). **L_net** = why (help minus hurt).
 
 **Critical:** **`poolq_loo` is not ≈ λ·**L_C**.** Congestion is one ingredient in selection; pool quality is a **mixed** environment readout.
 
@@ -353,9 +353,9 @@ Same object: **advancement probability**.
 |------|-------------------|--------------|
 | **Your empirical readout** | **`poolq_loo`** (LOO pool quality) | Observable local environment — **B and D still bundled** |
 | **Alex generative readout (Plot B)** | **`team_mean`** (pool mean) — Path II default | Pool-level ability after soft assignment; **not** individual **S_i** on the axis |
-| **Alex (alternate Plot B)** | **`poolq_loo` / **L_Q**** | LOO quality axis — closer to yours, but sim often **does not** reproduce empirical U with same knobs |
+| **Alex (alternate Plot B)** | `poolq_loo` / L_Q | LOO quality axis — closer to yours, but sim often **does not** reproduce empirical U with same knobs |
 
-**Important correction:** The main generative **figure** is usually **not** “score vs draft probability.” ****S_i**** works **inside** the sim (rank everyone, take top **K**). The **published** generative plot is **“selection rate vs pool feature”** — same *kind* of figure as yours (environment on X, outcome on Y), but a **different pool statistic** on X (pool mean vs LOO quality).
+**Important correction:** The main generative **figure** is usually **not** “score vs draft probability.” **S_i** works **inside** the sim (rank everyone, take top **K**). The **published** generative plot is **“selection rate vs pool feature”** — same *kind* of figure as yours (environment on X, outcome on Y), but a **different pool statistic** on X (pool mean vs LOO quality).
 
 At the **individual** level (behind the plot):
 
@@ -377,7 +377,7 @@ Think in two steps:
 
 
 ```text
-S_i = A_i - λ L_C,i => Y_i = 1\{S_i in top K (or top )\}
+S_i = A_i - λ·L_C,i  =>  Y_i = 1 if S_i in top K (or top Λ)
 ```
 
 
@@ -393,11 +393,11 @@ E[Y | L_Q] = mean draft rate in pools with LOO quality L_Q
 
 
 ```text
-E[Y | L_Q] ≈ E[1\{S top K\} | L_Q]
+E[Y | L_Q] ≈ E[1{S in top K} | L_Q]
 ```
 
 
-The **left** is your curve (phenomenon). The **right** is what the sim **aggregates** after running the score rule inside each pool. ****L_net = B − D**** explains **why** the left-hand curve can rise then fall: mid-quality pools net-help; top pools net-hurt once **D** dominates **B**. **λ·**L_C**** in **S** is only the **congestion channel** in the ranking step — not the full mixed **L** on your x-axis.
+The **left** is your curve (phenomenon). The **right** is what the sim **aggregates** after running the score rule inside each pool. **L_net = B − D** explains **why** the left-hand curve can rise then fall: mid-quality pools net-help; top pools net-hurt once **D** dominates **B**. **λ·L_C** in **S** is only the **congestion channel** in the ranking step — not the full mixed **L** on your x-axis.
 
 #### Side-by-side (print this)
 

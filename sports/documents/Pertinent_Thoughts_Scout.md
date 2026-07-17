@@ -84,6 +84,105 @@ The 530 ventile figure bins **cross-sectional** `poolq_loo` (leave-one-out mean 
 
 ---
 
+## `min_minutes` Floor — Ventile Sensitivity (2026-07-17)
+
+**Topic**: How the playing-time floor changes who enters the panel, who enters LOO, and whether the inverted-U survives.
+
+**Content to consider including**:
+
+With **`use_prebuilt_panel_csv=False`**, **`min_minutes`** is applied in **`panel_rebuild.build_from_box`** before LOO — so it defines **both** the plotted sample and the **teammate pool** used to compute **`poolq_loo`**. Sensitivities on the same spec (quantile bins, winsor `(0.01, 0.99)`, ppm z-scored, `restrict_teams_by_draftees=False`, 2011–2021):
+
+| **`min_minutes`** | **Story (Charles, Jul 2026)** |
+|-------------------|-------------------------------|
+| **0** | Adds ~21k mostly non-drafted deep-bench rows (82,893 vs 62k at 20); **ppm** and LOO noisy; ventile curve **wobbly**, elite dip **attenuated** — dilution, not falsification. Ever-drafted count barely moves (~1,136). |
+| **10** | +~10.5k player-seasons vs 20; still only **+2** ever-drafted rows. With **20 quantile ventiles:** elite downturn **spread across bins 18→19→20** (multi-bar redundancy); noisier middle ventiles; bin 20 ~**1.1%** draft rate. |
+| **20** | **Hero candidate (provisional):** rotation-level peers in LOO. With **20 quantile ventiles:** rise → plateau bins 15–18 (~2.4–2.5%) → **single sharp cliff at bin 20** (~0.9%); cleaner mechanism read than 10. |
+| **50 → 100** | Sample collapses toward **star/rotation heavy minutes only**; inverted-U **largely washes out** — draft rate vs poolq looks flatter; “roster pressure” variation **disappears** because everyone left is a high-minute, high-talent type and teammate pools homogenize among elites. |
+
+**Charles observation — 10 vs 20 at 20 ventiles (2026-07-17):** Same **`poolq_binning='quantile'`**, **`ventiles=20`**, **`restrict_teams_by_draftees=False`**. Lowering **`min_minutes` from 20 → 10** does not add meaningful draft outcomes; it adds **10–19 minute** roster filler who distort LOO and reshuffle ventile ranks. **Bin 20 draft rate ~1.1% in both specs** — the **elite ventile dip is robust**; what changes is *presentation*: **10 min** = gradual 18–20 step-down (good for “redundant downturn” visuals); **20 min** = high plateau then **one** top-ventile cliff (good for “congestion in the highest peer tier” prose). Prefer **20** for Alex hero + paper main text; **10** (and **0**) in robustness appendix.
+
+**Model read (generative):** If congestion bites when **comparing across peer environments** (mid vs elite LOO pools), stripping the roster down to **only stars** removes the **cross-sectional contrast** the mechanism needs — so **attenuation at high `min_minutes` is consistent with the model**, not a contradiction. Low floor adds noise; very high floor removes heterogeneity.
+
+**Potential placement**:
+
+- Methods (sample definition: rotation vs full roster vs star-only)
+- Robustness appendix (`min_minutes` ∈ {0, 10, 20, 50, 100})
+- Discussion linking empirical sensitivity to sim “who counts in the pool”
+
+**Key points**:
+
+- **`min_minutes` is not a neutral filter** — it defines the estimand and LOO algebra jointly when rebuilding from box.
+- **Hero lock (provisional):** see **Hero plot candidates — three-way comparison** below — **`min_minutes=20` + 16 quantile** + winsor `(0.01, 0.99)` + `use_prebuilt_panel_csv=False`.
+- **High floor = star-only sensitivity:** document as “congestion signal requires roster depth variation.”
+- **One-liner for Alex:** “Draft rate rises with LOO teammate quality, then drops in the **highest ventile**; dip stable at 10 and 20 minutes, washes out when we star-select or include full deep bench.”
+
+**Status**: Export PNG/CSV triplet for `{0, 10, 20, 50, 100}` × `{16, 20}` quantile when archiving robustness bundle; copy locked hero to `alex_side_by_side_v0/` when final.
+
+---
+
+## Hero Plot Candidates — Three-Way Comparison (2026-07-17)
+
+**Topic**: Charles compared three ventile EDA specs on the **same rebuilt panel** before locking the Alex side-by-side hero. Shared base for all three:
+
+- **`use_prebuilt_panel_csv=False`**, **`min_minutes=20`**, **`poolq_winsor_quantiles=(0.01, 0.99)`**
+- **`perf_metric=ppm`**, **`perf_zscore_within_season=True`**, **`restrict_teams_by_draftees=False`**
+- Seasons **2011–2021** → **62,180** player-seasons, **1,134** with **`Y_draft=1`**
+- Only fork: **`poolq_binning`** × **`ventiles`**
+
+**Content to consider including**:
+
+| **Candidate** | **Spec** | **Shape (Charles, Jul 2026)** | **Per-bin n** | **Verdict** |
+|---------------|----------|-------------------------------|---------------|-------------|
+| **1** | **8 equal-width** | Low flat left → rise bins 4–6 (peak ~2.3–2.4%) → **one** drop (bin 7 ~1.1%) → **bin 8 ~0** | Extremely uneven — e.g. bin 3 **~22k**, bin 7 **~1,145** | Coarse sensitivity only; elite end = one noisy bar + empty bar |
+| **2** | **16 equal-width** | Long climb → peak ~bin 10 (~2.5%) → **several** declining bars (11→16) | Wild spread — e.g. bin 8 **9,712**, bin 15 **301**, bin 16 **844** | Matches “≥2 bars on downturn” visually, but **tail bins unreliable** (see below) |
+| **3** | **16 quantile** | Steady rise bins 2–12 → plateau bins 12–15 (~2.3–2.6%) → **sharp drop only at bin 16** (~**1.2%**) | **~3,886–3,887 every bin** | **Recommended hero** — clearest inverted-U story, equal precision per bar |
+
+**Charles observation — why 16 equal-width sends the last 2 bins to 0:**
+
+Switching from **quantile** to **`equal_width`** with **`ventiles=16`** (same **`min_minutes=20`**, same winsor) does **not** just “zoom in” on the elite tail — it **re-partitions the x-axis** on **`poolq_loo` units** via **`pd.cut`** (equal intervals from min to max winsorized LOO). After z-scoring within season, most player-seasons still pile up in the **middle** of the LOO distribution; equal-width bins therefore get **enormous n in the center** and **sparse n at both tails**.
+
+Exported CSV (`…poolqeqwidth…2026-07-17.csv`) for candidate 2:
+
+| **Bin (1-indexed)** | **n** | **Mean draft rate** | **Mean `poolq_loo`** |
+|---------------------|-------|---------------------|----------------------|
+| 14 | 433 | ~0.23% | ~0.78 |
+| **15** | **301** | **0.0%** | ~0.91 |
+| **16** | **844** | **0.0%** | ~1.09 |
+
+So the **last two equal-width bins are not empty of rows** (301 + 844 = **1,145** player-seasons in bins 15–16) — but they contain **zero drafted players** in this run. That produces a **literal cliff to 0** on the PNG, which reads like “the curve broke” rather than “congestion in the top ventile.”
+
+**Why quantile bin 16 does not do this:** **`qcut`/rank quantile** forces **~3,886 rows per bin**, including drafted rotation players, into the top **6.25%** of LOO ranks. Bin 16 still shows a dip (~**1.2%**, ~45 draft events expected-scale) — a **statistically stable** elite-tier downturn. Equal-width bins 15–16 instead isolate a **tiny tail slice in LOO space** where draft picks are **structurally rare** (~1,134 drafts total, concentrated below the extreme LOO cap).
+
+**Interpretation (not over-claiming):**
+
+- The **multi-bar downturn** on 16 equal-width is **partly real composition** (declining draft rate as mean LOO rises through bins 11–14) and **partly tail sparsity** — bins **15–16** hit **integer zero** because too few drafted players land in those narrow high-LOO intervals.
+- This is **not** the same falsification as **`min_minutes=50–100`** (star-only washout); it is a **binning artifact** that equal-width invites when **`poolq_loo`** is bell-shaped and winsor-clipped.
+- Candidate 2 remains useful as **appendix / sensitivity** if tail bars are **labeled with n** (see deferred equal-width bar-width idea below) — do **not** treat bins 15–16 at exactly 0% as standalone proof of congestion.
+
+**Recommendation (Jul 2026 Alex prep):**
+
+| Priority | Pick | Why |
+|----------|------|-----|
+| **Hero (empirical + sim side-by-side)** | **Candidate 3 — 16 quantile** | Rise + elite dip, equal **n** per bar, defensible “top ventile” language, easiest sim match |
+| **Appendix** | **Candidate 2 — 16 equal-width** | Shows multi-bar tail decline; **must annotate thin-n tail** |
+| **Coarse sensitivity** | **Candidate 1 — 8 equal-width** | Too lumpy for hero |
+
+**Potential placement**:
+
+- Methods (quantile vs equal-width binning choice)
+- Alex slide caption + `alex_side_by_side_v0/` canonical export
+- Robustness appendix (equal-width sensitivity with per-bin **n**)
+
+**Key points**:
+
+- **`poolq_binning` is a presentation / estimand choice** for EDA — not interchangeable with quantile ventiles when tails matter.
+- **Equal-width + many bins + winsorized LOO** → **expect zeros or near-zeros in top bins** even when the quantile hero shows a clean ~1% top-ventile dip.
+- **Sim must match hero binning rule** (16 quantile, same winsor, same **`min_minutes`**) — not just “poolq_loo on both axes.”
+
+**Status**: Hero triplet not yet copied to `alex_side_by_side_v0/` under quantile naming; folder still holds older **16 equal-width / winsor 0.05–0.95** triplet from earlier pass.
+
+---
+
 ## High School Performance, Teammate Pools, and Binning (Advisor Discussion)
 
 **Topic**: Enrich the panel with HS data; bin on pre-college ability while preserving leave-one-out **team** structure.
@@ -128,6 +227,10 @@ Discussion with advisor: add **high school** (or recruiting) data so players are
 - Risks truncating heterogeneity — justify and show robustness.
 - **`all_time`** vs **`season`** answers “program ever had a draftee in window” vs “this season’s roster had a draftee.”
 
+**Charles observation (2026-07-17):** Restricting to teams who have **ever** had a draftee (`restrict_teams_by_draftees=True`, `draftee_restriction="all_time"`) produces **startlingly different** ventile curves vs the full sample (`restrict_teams_by_draftees=False`). The shift is **even larger** with **`draftee_restriction="season"`** — keep only `(team_id, season)` rosters that actually had a draft pick that year. Treat this as a **major sample-definition fork**, not a minor robustness tweak: the inverted-U shape, tail bins, and draft rates can move a lot. **Alex hero plot** currently uses **`restrict_teams_by_draftees=False`**; any draftee-restricted run is a **different estimand** and must be labeled explicitly in provenance and side-by-side exports.
+
+**Status**: Sensitivity branch — compare full sample vs `all_time` vs `season` in appendix; do not silently swap for the canonical empirical curve without noting it.
+
 ---
 
 ## Sorting Noise Robustness Thought
@@ -158,6 +261,52 @@ That version may be more portable across different ability distributions because
 - Noise is **only for sorting into pools**, not for true ability or promotion weights.
 - Raw `SORTING_NOISE_SD` is easier to teach first.
 - Relative `SORTING_NOISE_FRACTION * sd(A_i)` is the later robustness idea to remember.
+
+---
+
+## Equal-Width Ventile Bars: Encode Bin *n* Visually (2026-07-17)
+
+**Topic**: When **`poolq_binning="equal_width"`**, bar counts per bin are unequal (unlike quantile/`qcut` ventiles). The draft-rate height alone can misread precision in thin tail bins.
+
+**Content to consider including**:
+
+For **`ventile_eda_plot_style="bins_bars_520"`** (530 CELL 4 / `panel_build.ventile_plot`), optionally encode **`n`** from the binned table (`ventile_table` → column **`n`**) in the bar geometry or color — e.g. **narrower or lighter bars** when a bin has fewer player-seasons, **full width / saturated color** when **`n`** is large. Goal: reader sees at a glance that equal **x-width** ≠ equal **sample size** (especially bins 1–2 and 14–16 on the current 16-bin ppm spec).
+
+**Potential placement**:
+
+- 530 ventile PNG polish (methods figure or appendix)
+- Same pattern for generative side-by-side plots once sim bins are exported with counts
+
+**Key points**:
+
+- **Deferred** — do not block Alex side-by-side / `poolq_loo` sim work (Jul 2026).
+- Quantile binning already approximates equal **`n`**; this idea matters mainly for **equal_width** runs.
+- CSV already has per-bin **`n`**; change is plotting-only in `ventile_plot`.
+
+**Status**: Idea logged; not implemented.
+
+---
+
+## Equal-Width Ventile Bars: Encode Bin *n* Visually (2026-07-17)
+
+**Topic**: When **`poolq_binning="equal_width"`**, bar counts per bin are unequal (unlike quantile/`qcut` ventiles). The draft-rate height alone can misread precision in thin tail bins.
+
+**Content to consider including**:
+
+For **`ventile_eda_plot_style="bins_bars_520"`** (530 CELL 4 / `panel_build.ventile_plot`), optionally encode **`n`** from the binned table (`ventile_table` → column **`n`**) in the bar geometry or color — e.g. **narrower or lighter bars** when a bin has fewer player-seasons, **full width / saturated color** when **`n`** is large. Goal: reader sees at a glance that equal **x-width** ≠ equal **sample size** (especially bins 1–2 and 14–16 on the current 16-bin ppm spec).
+
+**Potential placement**:
+
+- 530 ventile PNG polish (methods figure or appendix)
+- Same pattern for generative side-by-side plots once sim bins are exported with counts
+
+**Key points**:
+
+- **Deferred** — do not block Alex side-by-side / `poolq_loo` sim work (Jul 2026).
+- Quantile binning already approximates equal **`n`**; this idea matters mainly for **equal_width** runs.
+- CSV already has per-bin **`n`**; change is plotting-only in `ventile_plot`.
+
+**Status**: Idea logged; not implemented.
 
 ---
 

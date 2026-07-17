@@ -230,6 +230,25 @@ def poolq_winsor_short_note(cfg: Any) -> str:
     return f"poolq_winsor_quantiles=({float(lo_q)}, {float(hi_q)})"
 
 
+def format_ventile_provenance_text(
+    lines: list[str],
+    *,
+    width: int = 100,
+) -> str:
+    """Join provenance lines for console / notebook output or figure caption; wrap long prose."""
+    blocks: list[str] = []
+    for ln in lines:
+        if ln.strip() == "":
+            blocks.append("")
+        elif ln.startswith("  "):
+            blocks.append(ln)
+        else:
+            blocks.append(
+                textwrap.fill(ln, width=width, break_long_words=False, break_on_hyphens=False)
+            )
+    return "\n".join(blocks)
+
+
 def ventile_provenance_lines(
     use: pd.DataFrame,
     cfg: Any,
@@ -246,7 +265,7 @@ def ventile_provenance_lines(
     s = pd.to_numeric(use["season"], errors="coerce").dropna().astype(int)
     slo, shi = int(s.min()), int(s.max())
     lines.append(
-        f"Modeling sample (after dropna poolq_loo, Y_draft; min_minutes; optional team draftee filter): "
+        f"Modeling sample (after dropna poolq_loo, Y_draft; filters below): "
         f"n={n:,} player-seasons; {u_ath:,} unique athletes; collegiate seasons {slo}–{shi}."
     )
     bin_mode = str(getattr(cfg, "poolq_binning", "quantile")).strip().lower()
@@ -269,6 +288,19 @@ def ventile_provenance_lines(
             "[q_lo, q_hi] where q_lo and q_hi are the empirical quantiles of poolq_loo on all "
             "rows with defined poolq_loo at that step (before min_minutes and team-draftee filters "
             "on the ventile/LPM subsample); then poolq_sq = poolq_loo²."
+        )
+
+    mm = float(getattr(cfg, "min_minutes", 0.0))
+    if mm > 0:
+        lines.append(
+            f"min_minutes filter: min_minutes={mm:g} — keep player-season rows with "
+            f"≥{mm:g} total ESPN box minutes on (athlete_id, season, team_id); "
+            "applied in filter_panel for ventiles/LPM "
+            "(and in panel_rebuild.build_from_box when rebuilding from box)."
+        )
+    else:
+        lines.append(
+            "min_minutes filter: min_minutes=0 (no playing-time floor on ventile/LPM rows)."
         )
 
     if bool(getattr(cfg, "restrict_teams_by_draftees", True)):
@@ -457,17 +489,7 @@ def ventile_plot(
 
     cap = ""
     if provenance:
-        wrapped_blocks: list[str] = []
-        for ln in provenance:
-            if ln.strip() == "":
-                wrapped_blocks.append("")
-            elif ln.startswith("  "):
-                wrapped_blocks.append(ln)
-            else:
-                wrapped_blocks.append(
-                    textwrap.fill(ln, width=104, break_long_words=False, break_on_hyphens=False)
-                )
-        cap = "\n".join(wrapped_blocks)
+        cap = format_ventile_provenance_text(provenance, width=104)
 
     if plot_style == "bins_bars_520":
         bin_1 = bin_tab["vent"].astype(int) + 1
@@ -595,7 +617,8 @@ def run_ventile_eda(df: pd.DataFrame, cfg: Any) -> tuple[pd.DataFrame, Path]:
     prov_path = out_dir / f"ventile_eda_provenance_{plot_slug}_{stamp}.txt"
     prov_path.write_text("\n".join(prov_lines) + "\n", encoding="utf-8")
     print("--- Ventile EDA — sample / datasets / per-ventile n ---")
-    print("\n".join(prov_lines))
+    if prov_lines:
+        print(format_ventile_provenance_text(prov_lines))
     print(f"(Also wrote {prov_path.name})")
     print()
 
