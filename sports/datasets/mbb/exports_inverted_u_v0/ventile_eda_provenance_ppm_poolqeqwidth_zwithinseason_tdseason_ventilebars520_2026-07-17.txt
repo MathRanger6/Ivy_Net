@@ -1,0 +1,17 @@
+Modeling sample (after dropna poolq_loo, Y_draft; filters below): n=7,921 player-seasons; 4,314 unique athletes; collegiate seasons 2011–2021.
+poolq_loo EDA bins: poolq_binning='equal_width', ventiles=16 (number of bins). equal_width: equal intervals from min to max poolq_loo (pd.cut).
+poolq_loo winsorization: poolq_winsor_quantiles=(0.01, 0.99). After leave-one-out poolq_loo is computed on the panel, values are clipped to [q_lo, q_hi] where q_lo and q_hi are the empirical quantiles of poolq_loo on all rows with defined poolq_loo at that step (before min_minutes and team-draftee filters on the ventile/LPM subsample); then poolq_sq = poolq_loo².
+min_minutes filter: min_minutes=20 — keep player-season rows with ≥20 total ESPN box minutes on (athlete_id, season, team_id); applied in filter_panel for ventiles/LPM (and in panel_rebuild.build_from_box when rebuilding from box).
+Team draftee filter: restrict_teams_by_draftees=True, draftee_restriction='season' — only (team_id, season) with ≥1 roster member Y_draft=1.
+CFG analysis_season_min/max: 2011–2021 (plot sample uses all seasons with valid rows unless you filter upstream).
+ESPN box: panel built from game-level box; collegiate season span on sample rows: 2011–2021.
+NBA draft register (nbaplayersdraft.csv): draft `year` in file 1989–2021.
+Draft lookup (athlete_id_draft_lookup): NBA draft years 2011–2021 among lookup rows whose athlete_id appears in this sample (n_lookup_rows=520).
+Draft outcome on sample: Y_draft=1 on 1,134 player-seasons (ever-draft flag).
+SR advanced: not used for `perf` (ESPN box column 'ppm'; teammate LOO pool quality from that measure).
+
+Per-bin n (player-seasons; bin index 0 = lowest poolq_loo on the x-axis):
+  v0=3  |  v1=12  |  v2=70  |  v3=289  |  v4=683
+  v5=1,121  |  v6=1,425  |  v7=1,515  |  v8=1,319  |  v9=867
+  v10=381  |  v11=181  |  v12=47  |  v13=6  |  v14=1
+  v15=1
