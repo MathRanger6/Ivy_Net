@@ -8,13 +8,21 @@ alwaysApply: false
 
 **Primary rule:** `.cursor/rules/notebook-blank-edit.mdc` (`alwaysApply: true`) — **prime directive:** line/cluster red/green for every notebook change; **burn-first** each user message unless `skip burn`; **ask** when unsure; **no** per-reply cell-count cap.
 
-This file adds **540-specific** details only.
+This file adds **notebook-specific burn index** details (540, 530) plus same-cell merge reminders.
 
 ---
 
 ## Why tactics exist (not caps)
 
 Cursor `EditNotebook` on `.ipynb` is **unreliable**: first call may auto-apply; chaining may hide later diffs; a **second** edit to the **same** cell in one reply often shows only “keep cell” without line detail. The **burn slot** sacrifices the first hit; **merging** all line changes in one call per cell per pass protects line-level review. The user may still edit **many cells** in one reply — goal is **all** changes reviewable, not fewer edits.
+
+---
+
+## `530_sports_pipeline.ipynb`
+
+- Burn slot: cell index **1** (immediately after title markdown at index 0). Code cell `##### EDIT BLANK ###### DISCARD`.
+- **Do not** burn at the bottom of the notebook (legacy placement was wrong).
+- After burn: **"Blank edit done — Cell 1 updated."**
 
 ---
 
@@ -49,7 +57,7 @@ If multiple lines in one cell change, use **one** `old_string` / `new_string` co
 
 ## Common mistakes
 
-1. Burn on **index 1** in 540 (wrong — use **3**).
+1. Burn on wrong index — **530:** use **1**; **540:** use **3** (not 1).
 2. Invisible burn (whitespace only) — use a real `# session:` update.
 3. Announcing burn done when `EditNotebook` failed.
 4. Shell + JSON to patch cell bodies (bypasses review UI).
