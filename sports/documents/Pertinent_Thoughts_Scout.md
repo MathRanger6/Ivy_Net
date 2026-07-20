@@ -179,7 +179,7 @@ So the **last two equal-width bins are not empty of rows** (301 + 844 = **1,145*
 - **Equal-width + many bins + winsorized LOO** → **expect zeros or near-zeros in top bins** even when the quantile hero shows a clean ~1% top-ventile dip.
 - **Sim must match hero binning rule** (16 quantile, same winsor, same **`min_minutes`**) — not just “poolq_loo on both axes.”
 
-**Status**: Hero triplet not yet copied to `alex_side_by_side_v0/` under quantile naming; folder still holds older **16 equal-width / winsor 0.05–0.95** triplet from earlier pass.
+**Status**: Hero triplet + side-by-side bundle in `alex_side_by_side_v0/`; see [`Hero_Model_Three_Layers_Memo.md`](Hero_Model_Three_Layers_Memo.md) and `sports/scripts/hero_model_reset_bundle.py`.
 
 ---
 

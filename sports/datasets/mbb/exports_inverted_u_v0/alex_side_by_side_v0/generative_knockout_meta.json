@@ -1,0 +1,19 @@
+{
+  "hero_bins": 16,
+  "bin_mode": "quantile",
+  "x_axis": "poolq_loo (mean_loo_q in bin table)",
+  "talent_only": {
+    "score_mode": "ability",
+    "loo_pool_l_mode": "quality",
+    "w": 0.0
+  },
+  "congestion": {
+    "score_mode": "loo_gap_plus_ability",
+    "loo_pool_l_mode": "crowding_smooth",
+    "w": 0.5
+  },
+  "seeds": {
+    "talent_only": 42,
+    "congestion": 43
+  }
+}
