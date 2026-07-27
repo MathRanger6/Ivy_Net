@@ -87,7 +87,15 @@ chmod +x "$GENERATE_PDF_SCRIPT"
 
 CSS_FILE=""
 if [ -n "$CSS_FILE_ARG" ]; then
-    CSS_FILE="$CSS_FILE_ARG"
+    if [[ "$CSS_FILE_ARG" = /* ]] && [ -f "$CSS_FILE_ARG" ]; then
+        CSS_FILE="$CSS_FILE_ARG"
+    elif [ -f "$WORKSPACE_DIR/$CSS_FILE_ARG" ]; then
+        CSS_FILE="$WORKSPACE_DIR/$CSS_FILE_ARG"
+    elif [ -f "$CSS_FILE_ARG" ]; then
+        CSS_FILE="$(cd "$(dirname "$CSS_FILE_ARG")" && pwd)/$(basename "$CSS_FILE_ARG")"
+    else
+        CSS_FILE="$CSS_FILE_ARG"
+    fi
 else
     if [ -f "$WORKSPACE_DIR/pdf_styles.css" ]; then
         CSS_FILE="$WORKSPACE_DIR/pdf_styles.css"

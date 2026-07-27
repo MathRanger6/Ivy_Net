@@ -79,6 +79,15 @@ fi
 # Set CSS file (use provided CSS or default based on file type)
 CSS_FILE="${POSITIONAL[2]:-$DEFAULT_CSS}"
 
+# Resolve relative CSS paths against workspace root (repo root after cd above).
+if [ -n "$CSS_FILE" ] && [[ "$CSS_FILE" != /* ]]; then
+    if [ -f "$_WORKSPACE_ROOT/$CSS_FILE" ]; then
+        CSS_FILE="$_WORKSPACE_ROOT/$CSS_FILE"
+    elif [ -f "$CSS_FILE" ]; then
+        CSS_FILE="$(cd "$(dirname "$CSS_FILE")" && pwd)/$(basename "$CSS_FILE")"
+    fi
+fi
+
 # Check if input file exists
 if [ ! -f "$INPUT_FILE" ]; then
     echo "Error: Input file not found: $INPUT_FILE"
@@ -196,11 +205,29 @@ fi
 echo "Post-processing HTML to fix page breaks..."
 "$CONDA_PYTHON" << PYTHON_EOF
 import re
+from pathlib import Path
 
 html_file = "$HTML_FILE"
+css_file = "$CSS_FILE"
 
 with open(html_file, 'r', encoding='utf-8') as f:
     html = f.read()
+
+# Pandoc emits <link href="basename.css">; Playwright loads HTML from a subfolder via
+# file:// so the stylesheet 404s unless we inline it (Jul 2026 re_entry PDF bug).
+if css_file:
+    css_path = Path(css_file)
+    if css_path.is_file():
+        css_text = css_path.read_text(encoding='utf-8').replace('</style>', r'<\\/style>')
+        inline = f'<style>\\n/* inlined from {css_path.name} */\\n{css_text}\\n</style>'
+        html, replaced = re.subn(
+            r'<link\\s+rel="stylesheet"\\s+href="[^"]+"\\s*/?>',
+            inline,
+            html,
+            count=1,
+        )
+        if not replaced and '</head>' in html:
+            html = html.replace('</head>', inline + '\\n</head>', 1)
 
 # Find all sections with H1 as first child and add inline style for page break
 pattern = r'(<section[^>]*class="cell markdown"[^>]*>)\s*<h1>'
