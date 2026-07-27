@@ -1,21 +1,17 @@
-# Generative knockouts vs hero (2026-07-20)
+# Generative knockouts vs hero (2026-07-27)
 
-Spec: 16 quantile bins on poolq_loo (L_Q); J=1000 teams; K=1500 selected; seed 42/43.
-See generative_knockout_meta.json for score modes.
+Spec: 16 quantile bins on poolq_loo (L_Q); see generative_knockout_meta.json.
 
 ## Talent-only (score = A_i)
 
-- Selection rate **monotone increasing** in LOO quality: bin 1 ~0.7% → bin 16 ~27.9%.
-- **No elite ventile dip** — fails to reproduce empirical inverted-U shape on poolq_loo axis.
-- Supports claim: ability-only top-K selection is **not** sufficient for the congestion story.
+- Bin 1 → bin 16 selection rate: 0.0075 → 0.2785 (monotone increasing).
+- No elite ventile dip on poolq_loo — fails inverted-U shape test.
 
 ## Congestion in score (A_i − w·L_C, crowding_smooth, w=0.5)
 
-- Rates generally lower than talent-only at same bins (congestion penalty binds).
-- Top bin (16): **~15.9%** vs talent-only **~27.9%** at same LOO rank — elite-tail **compression** vs pure ability ranking.
-- Full empirical dip (hero bin 16 ~1.2% draft rate on real data) is **not** matched in levels — sim uses different K, base rates, and DGP.
-- Supports Path II: congestion **in the score** changes advancement curves on poolq_loo; **not** bin-for-bin replication (v1 non-claim).
+- Top bin rate 0.1590 vs talent-only 0.2785 at same LOO rank.
+- Congestion compresses elite-tail vs ability-only; not bin-for-bin hero match (Path II).
 
 ## Layer A reference (same hero estimand)
 
-- LPM: poolq_sq = −0.0247 (concave); see lpm_hero_coefficients.txt.
+- LPM: poolq_sq = -0.0247256 (concave); see lpm_hero_coefficients.txt.
