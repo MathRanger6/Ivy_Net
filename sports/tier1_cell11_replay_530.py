@@ -52,6 +52,11 @@ def _params_from_playground_state(sports: Path, tpa) -> object:
         target_mean_sigma=base.target_mean_sigma,
         assignment_kernel=st.get("kernel", base.assignment_kernel),
         assignment_temperature=float(st.get("tau", base.assignment_temperature)),
+        assignment_rho=float(st.get("rho", base.assignment_rho)),
+        assignment_sigma=float(st.get("sigma", base.assignment_sigma)),
+        use_preferential_attachment=bool(
+            st.get("use_preferential_attachment", base.use_preferential_attachment)
+        ),
         preferential_alpha=float(st.get("pref_alpha", base.preferential_alpha)),
         preferential_k=base.preferential_k,
         ability_draw=st.get("ability_draw", base.ability_draw),

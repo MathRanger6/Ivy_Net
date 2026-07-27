@@ -146,6 +146,11 @@ def assignment_params_from_state(
         target_mean_sigma=base.target_mean_sigma,
         assignment_kernel=state.get("kernel", base.assignment_kernel),
         assignment_temperature=float(state.get("tau", base.assignment_temperature)),
+        assignment_rho=float(state.get("rho", base.assignment_rho)),
+        assignment_sigma=float(state.get("sigma", base.assignment_sigma)),
+        use_preferential_attachment=bool(
+            state.get("use_preferential_attachment", base.use_preferential_attachment)
+        ),
         preferential_alpha=float(state.get("pref_alpha", base.preferential_alpha)),
         preferential_k=base.preferential_k,
         ability_draw=state.get("ability_draw", base.ability_draw),
@@ -306,9 +311,18 @@ def run_inverted_u_pipeline(
     *,
     tpa,
     assign_poolq_bin_labels,
+    method: str = "soft",
+    ability: np.ndarray | None = None,
+    team_targets: np.ndarray | None = None,
 ) -> tuple[pd.DataFrame, pd.DataFrame, plt.Figure]:
-    """Soft assign → select K → bin table → figure."""
-    players, _, _ = tpa.simulate_generative_rosters(params, rng=rng, method="soft")
+    """Assign → select K → bin table → figure."""
+    players, _, _ = tpa.simulate_generative_rosters(
+        params,
+        rng=rng,
+        method=method,
+        ability=ability,
+        team_targets=team_targets,
+    )
     players = tpa.assign_selection(
         players,
         rng,

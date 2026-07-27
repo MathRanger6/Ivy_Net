@@ -40,14 +40,19 @@ TARGET_MEAN_HIGH = 0.5
 TARGET_MEAN_MU = 0.0
 TARGET_MEAN_SIGMA = 0.35
 
-# --- Soft assignment pi_ij ∝ f(A_i - T_j) --------------------------------------
+# --- Soft assignment pi_ij (540: rho assortativity) -----------------------------
 # "gaussian" | "cauchy"
 ASSIGNMENT_KERNEL = "gaussian"
-# Temperature tau: larger => more cross-team mixing / overlap
+# ρ (rho): assignment assortativity — 0 = max mixing; ρ↑ = sharper match to T_j
+ASSIGNMENT_RHO = 1.0
+# σ: fixed ability–target scale (ρ=1, σ=0.65 ≡ legacy τ=0.65)
+ASSIGNMENT_SIGMA = 0.65
+# Legacy alias (archived docs / τ prose); keep equal to ASSIGNMENT_SIGMA
 ASSIGNMENT_TEMPERATURE = 0.65
 
-# Optional preferential attachment (0 = off): pi_ij *= (n_j + k)^alpha
-PREFERENTIAL_ALPHA = 0.0
+# Optional preferential attachment (boolean): pi_ij *= (n_j + k)^alpha when True
+USE_PREFERENTIAL_ATTACHMENT = False
+PREFERENTIAL_ALPHA = 0.35
 PREFERENTIAL_K = 1.0
 
 # --- Ability draw A_i ----------------------------------------------------------

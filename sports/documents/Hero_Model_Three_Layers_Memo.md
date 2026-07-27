@@ -3,7 +3,23 @@
 **Date:** 2026-07-20  
 **Audience:** Charles + Alex read-through  
 **Canonical hero folder:** `sports/datasets/mbb/exports_inverted_u_v0/alex_side_by_side_v0/`  
-**Related:** [`05_Model_Nesting_Note_v1.md`](../../5-Manuscript/05_Model_Nesting_Note_v1.md), [`30_Alex_Gates_inform_status_outline.md`](../../3-Master_Plan/30_Alex_Gates_inform_status_outline.md)
+**Related:** [`05_Model_Nesting_Note_v1.md`](../../5-Manuscript/05_Model_Nesting_Note_v1.md), [`30_Alex_Gates_inform_status_outline.md`](../../3-Master_Plan/30_Alex_Gates_inform_status_outline.md), [`../../3-Master_Plan/BINDING_Selection_is_its_own_step.md`](../../3-Master_Plan/BINDING_Selection_is_its_own_step.md)
+
+---
+
+## 0. BINDING — selection is its own step (Charles #1 confusion)
+
+**Do not merge** “describe the peer environment” with “who wins the scarce slot.”
+
+| Mechanism | Object | Question |
+|-----------|--------|----------|
+| **Environment** | `L_net = B(·) − D(·)` | How do peers help vs hurt (development, visibility, crowding around you)? |
+| **Selection** | Alex `S_i = A_i − λ·L_C` | **Who gets drafted?** Congestion enters the **advancement rule**. |
+
+- **Hero (Layer A):** outcome only — draft rate vs pool quality. Does **not** identify environment vs selection channel.
+- **538D (Layer C):** makes **selection explicit** — rank by score → top **K**; knockout = talent-only vs congestion-in-score.
+
+*The hero describes outcomes; Alex’s equation describes who gets selected; the sim tests congestion in the **selection rule**.*
 
 ---
 
@@ -35,7 +51,7 @@ All Layer A/C comparisons use **this** empirical spec unless explicitly noted as
 | Layer | Object | Repo anchor | What a “pass” proves | What it does **not** prove |
 |-------|--------|-------------|----------------------|----------------------------|
 | **A. Phenomenological** | `Y ~ β₀ + β₁·poolq_loo + β₂·poolq_loo²` | `530` / `panel_build.draft_poolq_quadratic_coeffs` | Inverted curvature in the **real panel** on the hero estimand | Mechanism; that NBA uses this score |
-| **B. Structural (theory)** | `L_net = B(·) − D(·)`; Alex `S_i = A_i − λ·L_C` in selection | Nesting note §2–3 | Why help and hurt can coexist; **D enters selection** | Separate estimation of B(Q) and D(Q) in v1 |
+| **B. Structural (theory)** | **Two parts:** (1) `L_net = B(·) − D(·)` environment; (2) Alex `S_i = A_i − λ·L_C` **selection rule** | Nesting note §2–3 | Environment help/hurt **and** **D enters selection** (separate step) | Separate estimation of B(Q) and D(Q) in v1; hero ≠ selection equation |
 | **C. Generative (sim)** | Soft assign → score → top-K | `538D` CELL 10–12, `tier1_generative_eda.py` | **Congestion in the score** changes selection curves; **talent-only fails** | Bin-for-bin reproduction of empirical `poolq_loo` ventiles |
 
 **Alex side-by-side (v1):** Layer **A hero PNG** + Layer **C sim PNG** on **same Y** (advancement rate), **honest X** (empirical LOO quality vs sim LOO bins), plus limitation sentence below.
@@ -53,7 +69,9 @@ All Layer A/C comparisons use **this** empirical spec unless explicitly noted as
 ### Layer B — prose + ingredient knockouts
 
 - No single estimated formula in v1.
-- **Pass:** Narrative consistency + sim shows λ=0 (ability-only) **fails** the generative congestion story.
+- **Part 1:** B − D frames the **environment** (help vs hurt among peers).
+- **Part 2:** Alex score frames **selection** — who gets the slot — as its **own step**; congestion enters the **selection rule**, not “the whole model.”
+- **Pass:** Narrative consistency + sim shows λ=0 (ability-only **selection**) **fails** the generative congestion story.
 
 ### Layer C — simulation
 

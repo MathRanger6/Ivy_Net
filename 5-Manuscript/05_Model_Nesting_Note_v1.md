@@ -20,6 +20,8 @@ The project had **one ontology** and **two readouts** that looked like two model
 
 This note states how they nest. **Path II is locked:** generative POC on pool mean; empirical stylized fact on LOO pool quality; predictions from decomposed empirical columns — **same object**, different rungs.
 
+> **Charles binding (Jul 2026):** [`BINDING_Selection_is_its_own_step.md`](../3-Master_Plan/BINDING_Selection_is_its_own_step.md) — **`L_net = B − D`** describes the **environment**; **`S_i = A_i − λ·L_{C,LOO}`** is the **selection rule** (who gets the slot). Do not treat the hero curve as the selection equation.
+
 ---
 
 ## 2. Structural object (one model)

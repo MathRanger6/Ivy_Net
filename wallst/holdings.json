@@ -1,0 +1,35 @@
+{
+  "CGNX": {
+    "lots": [
+      {"date": "2026-07-01", "shares": 7, "price": 70.23}
+    ]
+  },
+  "FUN": {
+    "lots": [
+      {"date": "2023-09-05", "shares": 2, "price": 64.26}
+    ]
+  },
+  "NVDA": {
+    "lots": [
+      {"date": "2026-05-11", "shares": 10, "price": 214.05},
+      {"date": "2026-05-11", "shares": 18, "price": 221.255},
+      {"date": "2026-05-20", "shares": 18, "price": 224.59}
+    ]
+  },
+  "RCL": {
+    "lots": [
+      {"date": "2023-09-05", "shares": 6, "price": 80.63}
+    ]
+  },
+  "SPCX": {
+    "lots": [
+      {"date": "2026-06-12", "shares": 50, "price": 160.94}
+    ]
+  },
+  "STK": {
+    "lots": [
+      {"date": "2026-05-11", "shares": 37, "price": 51.54},
+      {"date": "2026-05-20", "shares": 40, "price": 50.44}
+    ]
+  }
+}

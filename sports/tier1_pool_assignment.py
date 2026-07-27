@@ -106,6 +106,9 @@ class AssignmentParams:
     target_mean_sigma: float
     assignment_kernel: AssignmentKernel
     assignment_temperature: float
+    assignment_rho: float
+    assignment_sigma: float
+    use_preferential_attachment: bool
     preferential_alpha: float
     preferential_k: float
     ability_draw: AbilityDraw
@@ -138,6 +141,13 @@ class AssignmentParams:
             target_mean_sigma=float(mod.TARGET_MEAN_SIGMA),
             assignment_kernel=mod.ASSIGNMENT_KERNEL,
             assignment_temperature=float(mod.ASSIGNMENT_TEMPERATURE),
+            assignment_rho=float(getattr(mod, "ASSIGNMENT_RHO", 1.0)),
+            assignment_sigma=float(
+                getattr(mod, "ASSIGNMENT_SIGMA", mod.ASSIGNMENT_TEMPERATURE)
+            ),
+            use_preferential_attachment=bool(
+                getattr(mod, "USE_PREFERENTIAL_ATTACHMENT", False)
+            ),
             preferential_alpha=float(mod.PREFERENTIAL_ALPHA),
             preferential_k=float(mod.PREFERENTIAL_K),
             ability_draw=mod.ABILITY_DRAW,
@@ -239,14 +249,32 @@ def _kernel_weights(
     team_targets: np.ndarray,
     *,
     assignment_kernel: AssignmentKernel,
-    assignment_temperature: float,
+    assignment_rho: float = 1.0,
+    assignment_sigma: float = 0.65,
+    assignment_temperature: float | None = None,
 ) -> np.ndarray:
-    tau = max(float(assignment_temperature), 1e-12)
+    """Soft-match weights. ρ=0 → uniform; ρ↑ → sharper match (540 assortativity).
+
+    Legacy: pass ``assignment_temperature`` only (old τ parameterization).
+    """
     delta = float(ability_i) - np.asarray(team_targets, dtype=float)
+    if assignment_temperature is not None:
+        tau = max(float(assignment_temperature), 1e-12)
+        if assignment_kernel == "gaussian":
+            return np.exp(-0.5 * (delta / tau) ** 2)
+        if assignment_kernel == "cauchy":
+            return 1.0 / (1.0 + (delta / tau) ** 2)
+        raise ValueError(f"unknown assignment_kernel {assignment_kernel!r}")
+
+    rho = float(assignment_rho)
+    if rho <= 0.0:
+        return np.ones(len(team_targets), dtype=float)
+    sigma = max(float(assignment_sigma), 1e-12)
+    z = delta / sigma
     if assignment_kernel == "gaussian":
-        return np.exp(-0.5 * (delta / tau) ** 2)
+        return np.exp(-0.5 * rho * z**2)
     if assignment_kernel == "cauchy":
-        return 1.0 / (1.0 + (delta / tau) ** 2)
+        return 1.0 / (1.0 + rho * z**2)
     raise ValueError(f"unknown assignment_kernel {assignment_kernel!r}")
 
 
@@ -267,7 +295,9 @@ def soft_assign(
     roster_size: int,
     *,
     assignment_kernel: AssignmentKernel = "gaussian",
-    assignment_temperature: float = 0.45,
+    assignment_rho: float = 1.0,
+    assignment_sigma: float = 0.65,
+    assignment_temperature: float | None = None,
     preferential_alpha: float = 0.0,
     preferential_k: float = 1.0,
 ) -> np.ndarray:
@@ -275,6 +305,8 @@ def soft_assign(
 
     Sequential assignment on a random player order. For player i,
     pi_ij ∝ f(A_i - T_j) * (n_j + k)^alpha, zeroed for teams already at roster_size.
+
+    Default kernel (540): exp(-ρ (A_i - T_j)² / (2σ²)); ρ=0 → uniform among open teams.
     """
     ability = np.asarray(ability, dtype=float)
     team_targets = np.asarray(team_targets, dtype=float)
@@ -296,6 +328,8 @@ def soft_assign(
             ability[i],
             team_targets,
             assignment_kernel=assignment_kernel,
+            assignment_rho=assignment_rho,
+            assignment_sigma=assignment_sigma,
             assignment_temperature=assignment_temperature,
         )
         if alpha != 0.0:
@@ -674,6 +708,8 @@ def simulate_generative_rosters(
     rng: np.random.Generator | None = None,
     seed: int | None = 42,
     method: AssignmentMethod = "soft",
+    ability: np.ndarray | None = None,
+    team_targets: np.ndarray | None = None,
 ) -> tuple[pd.DataFrame, pd.DataFrame, np.ndarray]:
     """One full synthetic league draw.
 
@@ -692,25 +728,43 @@ def simulate_generative_rosters(
         rng = np.random.default_rng(seed)
 
     n = params.n_individuals
-    ability = draw_abilities(
-        rng,
-        n,
-        ability_draw=params.ability_draw,
-        ability_mean=params.ability_mean,
-        ability_sd=params.ability_sd,
-        ability_clip_low=params.ability_clip_low,
-        ability_clip_high=params.ability_clip_high,
-        ability_student_t_df=params.ability_student_t_df,
-        ability_student_t_scale=params.ability_student_t_scale,
-    )
-    team_targets = draw_target_means(
-        rng,
-        params.n_teams,
-        target_mean_dist=params.target_mean_dist,
-        target_mean_low=params.target_mean_low,
-        target_mean_high=params.target_mean_high,
-        target_mean_mu=params.target_mean_mu,
-        target_mean_sigma=params.target_mean_sigma,
+    if ability is None:
+        ability = draw_abilities(
+            rng,
+            n,
+            ability_draw=params.ability_draw,
+            ability_mean=params.ability_mean,
+            ability_sd=params.ability_sd,
+            ability_clip_low=params.ability_clip_low,
+            ability_clip_high=params.ability_clip_high,
+            ability_student_t_df=params.ability_student_t_df,
+            ability_student_t_scale=params.ability_student_t_scale,
+        )
+    else:
+        ability = np.asarray(ability, dtype=float)
+        if len(ability) != n:
+            raise ValueError(f"len(ability)={len(ability)} != n_individuals={n}")
+    if team_targets is None:
+        team_targets = draw_target_means(
+            rng,
+            params.n_teams,
+            target_mean_dist=params.target_mean_dist,
+            target_mean_low=params.target_mean_low,
+            target_mean_high=params.target_mean_high,
+            target_mean_mu=params.target_mean_mu,
+            target_mean_sigma=params.target_mean_sigma,
+        )
+    else:
+        team_targets = np.asarray(team_targets, dtype=float)
+        if len(team_targets) != params.n_teams:
+            raise ValueError(
+                f"len(team_targets)={len(team_targets)} != n_teams={params.n_teams}"
+            )
+
+    pref_alpha = (
+        float(params.preferential_alpha)
+        if params.use_preferential_attachment
+        else 0.0
     )
 
     if method == "soft":
@@ -720,8 +774,9 @@ def simulate_generative_rosters(
             team_targets,
             params.roster_size,
             assignment_kernel=params.assignment_kernel,
-            assignment_temperature=params.assignment_temperature,
-            preferential_alpha=params.preferential_alpha,
+            assignment_rho=params.assignment_rho,
+            assignment_sigma=params.assignment_sigma,
+            preferential_alpha=pref_alpha,
             preferential_k=params.preferential_k,
         )
     elif method == "sort_chop":

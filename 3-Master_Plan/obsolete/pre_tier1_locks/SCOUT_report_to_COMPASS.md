@@ -240,9 +240,9 @@ Charles’s dissertation tests **advancement under constrained distinction**: in
 
 ## 8. Prior plan-map work (Cursor artifact — not master plan)
 
-Charles and SCOUT previously mapped the doc ecosystem in [`.cursor/plans/tier1_plan_map_c0d22e58.plan.md`](../.cursor/plans/tier1_plan_map_c0d22e58.plan.md). Key conclusion: **no single master plan file existed** as of June 2026; Dakota v03 RTF is the best **committee-facing whole-project narrative**; `Alex_Tier1_Sequential_Model_Outline.md` is the best **modeling spine** for basketball Tier 1.
+Charles and SCOUT previously mapped the doc ecosystem in [`20260524_tier1_plan_map.plan.md`](../../plans/20260524_tier1_plan_map.plan.md) (repo mirror; live IDE copy may still exist under `~/.cursor/plans/`). Key conclusion: **no single master plan file existed** as of June 2026; Dakota v03 RTF is the best **committee-facing whole-project narrative**; `Alex_Tier1_Sequential_Model_Outline.md` is the best **modeling spine** for basketball Tier 1.
 
-COMPASS may absorb that map or supersede it — SCOUT does not treat the `.cursor/plans/` file as canonical repo documentation.
+COMPASS may absorb that map or supersede it — SCOUT treats **`3-Master_Plan/plans/`** (when mirrored) as the versioned plan archive, not the global `~/.cursor/plans/` folder alone.
 
 ---
 
