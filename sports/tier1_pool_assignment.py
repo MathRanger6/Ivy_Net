@@ -1,12 +1,26 @@
-"""Generative pool assignment for Tier 1 Thread A (**538**, not **537**).
+"""Generative pool assignment + score/select helpers for Tier 1 / **540 re-entry**.
+
+==============================================================================
+FOR LATER CHARLES
+==============================================================================
+Daily path: 540_READ_ME_SIM.md + hero_model_reset_bundle / 540_rho_ablation_bundle.
+This module is the SHARED ENGINE (assign → LOO pool stats → score weights → top-K).
+
+Key entry points
+  soft_assign / assign_sort_chop_benchmark / simulate_generative_rosters  → assign
+  add_loo_pool_columns / poolq_loo, pool_c_*, crowding_smooth             → L_Q / L_C
+  selection_weights / assign_selection / choose_selected                  → score → select
+  assignment_rho (ρ) — user-facing assortativity; σ = ASSIGNMENT_SIGMA
+
+Legacy UI around this engine: tier1_cell10_playground_run.py (do not use daily).
+Design / overlap forensics: documents/Tier1_Presorting_Design_Note.md
+Defaults: tier1_sim_config.py
+==============================================================================
 
 Soft assignment: draw team target means T_j, draw abilities A_i, place players on
 rosters with pi_ij ∝ f(A_i - T_j) (optional preferential attachment on fixed T_j).
 
 Benchmark: sort-and-chop (537 assortative choice B) for overlap comparisons vs 530.
-
-Design: sports/documents/Tier1_Presorting_Design_Note.md
-Defaults: sports/tier1_sim_config.py
 """
 
 from __future__ import annotations

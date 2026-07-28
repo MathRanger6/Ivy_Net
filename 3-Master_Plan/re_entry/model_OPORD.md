@@ -4,19 +4,21 @@
 **Owner:** Charles + Cursor agent (not a SCOUT handoff)  
 **Status:** **Executed** — archive, 540 surface, Pass B exports on disk.
 
+**Charles — personal checkoff:** Do **not** use this OPORD as your to-do list. Use [`CHARLES_CHECKLIST.md`](CHARLES_CHECKLIST.md) (what **you** run / prove). This file is ops history and agent phases.
+
 ---
 
 ## Intent
 
 Re-entry sim work mirrors the document re-entry pattern: **park old lab notebooks**, build a **thin `540_*` surface**, reuse **`tier1_*` engines**. Revolution = new problem approach and entry point; evolution = import battle-tested libraries.
 
-**Charles authored** the three-step **pipeline**: assign → **S_i** → top **K**. Alex endorsed it.
+**Charles authored** the three-step **pipeline**: **assign → score (`S_i`) → select (top K)**. Alex endorsed it.
 
 **User-facing assignment knob:** **ρ (rho)** = assortativity (0 = max mixing; ρ↑ = sharper match). Legacy **τ (temperature)** in archived docs = inverse mixing; **ρ = 1, σ = 0.65** maps to old **τ ≈ 0.65**.
 
 ---
 
-## Phase 0 — Preconditions
+## Phase 0 — Precondit
 
 | # | Step | Owner |
 |---|------|--------|
@@ -76,14 +78,14 @@ No mandatory COMPASS agent session.
 |---|------|-------------|
 | 5.1 | **ρ** in `tier1_pool_assignment.py` | `exp(-ρ·(A_i-T_j)²/(2σ²))`; ρ=0 → uniform among open rosters |
 | 5.2 | `USE_PREFERENTIAL_ATTACHMENT` bool in config | α=0 default |
-| 5.3 | `sports/scripts/540_rho_ablation_bundle.py` | Low ρ, high ρ, sort-and-chop; fix selection |
+| 5.3 | `sports/scripts/540_rho_ablation_bundle.py` | Low ρ, high ρ, sort-and-chop; fix **score + winner rule** |
 | 5.4 | Export `alex_rho_ablation_v0/` | CSVs, PNG, summary, caption |
 | 5.5 | `sports/540_three_step_sim.ipynb` | Thin Jupyter orchestration |
 | 5.6 | Dry-run from repo root | Green run |
 
 **Pass A (λ knockout):** already in `alex_side_by_side_v0/` — do not redo.
 
-**Pass B (ρ ablation):** fix **S_i** rule; vary assignment only.
+**Pass B (ρ ablation):** fix **score** (**S_i** / λ / **L_C**) and **select** (top K); vary assignment only.
 
 ---
 
@@ -122,7 +124,7 @@ No mandatory COMPASS agent session.
 - Empirical hero + LPM  
 - Pass A: λ knockout + `alex_side_by_side_v0/`  
 - Re-entry docs 01–03 + `Model.pdf`  
-- BINDING, unified **S_i**, **(B−D)=−L_C**
+- BINDING: **`L_net`** ≠ advancement; **score ≠ select**; unified **S_i**, **(B−D)=−L_C**
 
 ---
 
@@ -150,7 +152,8 @@ No mandatory COMPASS agent session.
 
 **Sort-and-chop:** separate benchmark (`method="sort_chop"`) — max assortativity in 537 sense; not ρ→∞.
 
-**Selection (steps 2–3):** **S_i = A_i − λ·L_C**; Pass B fixes λ, **L_C**, K.
+**Scoring (step 2):** **S_i = A_i − λ·L_C** (**λ** lives here).  
+**Selection (step 3):** winner rule — v1 **top K**; later soft / stochastic. Pass B fixes λ, **L_C**, and K.
 
 ---
 

@@ -70,7 +70,8 @@ elif [[ "$INPUT_FILE" == *.md ]]; then
     PDF_FILE="${POSITIONAL[1]:-${INPUT_FILE%.md}.pdf}"
     MD_FILE="$INPUT_FILE"
     IS_NOTEBOOK=false
-    DEFAULT_CSS="pdf_styles.css"
+    # DEFAULT_CSS="pdf_styles.css"   # previous default (wider margins)
+    DEFAULT_CSS="pdf_styles_narrow.css"
 else
     echo "Error: Input file must be .md or .ipynb"
     exit 1

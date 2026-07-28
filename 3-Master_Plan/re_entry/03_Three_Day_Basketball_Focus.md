@@ -2,22 +2,22 @@
 
 **Audience:** Charles — deadline pressure  
 **Goal:** One clear “done” for the simplified model, without scope creep.  
-**Status (2026-07-27):** Re-entry bar **reached** — narrative, slide (`Model.pdf`), Alex Pass A bundle on disk. **Pass B (ρ ablation)** in progress via `540_*` — see [`model_OPORD.md`](model_OPORD.md).
+**Status (2026-07-27):** Re-entry bar **reached** on disk (agent/project). **Your** step-by-step checkoff: [`CHARLES_CHECKLIST.md`](CHARLES_CHECKLIST.md).
 
 ---
 
 ## What “done” means (72-hour bar)
 
-**Binding check:** You can say in one breath: *Hero = outcome; **environment** = `L_net` (B − D, peers help and hurt); **selection** = `S_i` (Alex score — who gets the slot); sim = test congestion in **selection**, not one giant environment model.* ([`../BINDING_Selection_is_its_own_step.md`](../BINDING_Selection_is_its_own_step.md))
+**Binding check:** You can say in one breath: *Hero = outcome; **environment** = `L_net` (B − D); advancement = **score** (`S_i`, λ) then **select** (top K); sim tests congestion **in the score**, not one giant environment model.* ([`../BINDING_Selection_is_its_own_step.md`](../BINDING_Selection_is_its_own_step.md))
 
 You can stop spiraling when you can honestly say all four:
 
 1. **I can explain the hero** in one minute (doc 01) — including **talent baseline** vs **hero** (two empirical axes).
-2. **I can explain three layers** without merging them — unified nest **`S_i = A_i + λ(B−D)`**, Alex v1 **(B−D)=−L_C**, knockout **λ=0** (doc 02).
+2. **I can explain three layers** without merging them — **score** **`S_i = A_i + λ(B−D)`**, Alex v1 **(B−D)=−L_C**, knockout **λ=0**, then **select** top K (doc 02).
 3. **I have a side-by-side figure**: empirical hero + generative sim, same advancement rate on Y, labeled axes.
 4. **I have one limitation sentence** ready for Alex (below — copy when needed).
 
-You do **not** need: bin-for-bin sim match, Rivanna sweeps, **τ** calibrated to 530, tenure figures, manuscript Word inking, or refreshed Army plots in this window.
+You do **not** need: bin-for-bin sim match, Rivanna sweeps, **ρ** calibrated to 530, tenure figures, manuscript Word inking, or refreshed Army plots in this window.
 
 ---
 
@@ -26,19 +26,19 @@ You do **not** need: bin-for-bin sim match, Rivanna sweeps, **τ** calibrated to
 | Piece | What it is | Status |
 |-------|------------|--------|
 | **Empirical phenomenon** | **Naïve:** P(draft \| own **A_i**) ≈ monotone; **Hero:** P(draft \| **PoolQ_LOO**) with tail dip | Done (530; doc 01) |
-| **Two-step generative** | **(1)** assign to pools (**ρ**); **(2)** **S_i → top K** | `540_*` + `Model.pdf` |
-| **Unified selection** | **`S_i = A_i + λ(B−D)`**; Alex v1: **(B−D)=−L_C** ⇒ **`S_i = A_i − λ·L_C`** | Locked (doc 02) |
-| **Headline sim test** | **Knockout λ=0** (**S_i = A_i**) vs congestion in score — same league | **Done** (`hero_model_reset_bundle.py`) |
+| **Three-step generative** | **(1)** assign (**ρ**); **(2)** **score** **`S_i`**; **(3)** **select** top K | `540_*` + `Model.pdf` |
+| **Unified score** | **`S_i = A_i + λ(B−D)`**; Alex v1: **(B−D)=−L_C** ⇒ **`S_i = A_i − λ·L_C`** | Locked (doc 02) |
+| **Headline sim test** | **Knockout λ=0** (**S_i = A_i**) vs congestion in **score** — same league, same top-K | **Done** (`hero_model_reset_bundle.py`) |
 | **Side-by-side + limits** | Empirical + generative PNG; no bin-for-bin claim | **Done** (export folder) |
-| **ρ ablation** | Vary assignment assortativity, **fix** selection rule — “is sorting involved?” | **Pass B** — `540_rho_ablation_bundle.py` |
+| **ρ ablation** | Vary assignment assortativity, **fix score + winner rule** — “is sorting involved?” | **Pass B** — `540_rho_ablation_bundle.py` |
 
-**One line for Alex:** *Hero is the stylized fact; the minimal generative proof is congestion **in the selection score** (Pass A knockout done); **ρ** ablation tests whether assignment sorting moves the readout with selection held fixed.*
+**One line for Alex:** *Hero is the stylized fact; the minimal generative proof is congestion **in the score** (Pass A knockout done); **ρ** ablation tests whether assignment sorting moves the readout with score and top-K held fixed.*
 
 ---
 
 ## Limitation sentence (v1 — use as-is or lightly edit)
 
-> The empirical stylized fact uses leave-one-out teammate quality among college players; the generative proof-of-concept selects on a score that penalizes leave-one-out viable-peer congestion and plots binned selection rates on a matching quality axis. We do not claim bin-for-bin reproduction of every ventile in v1; we claim that talent-only selection is insufficient and that congestion in the score can bend advancement curves in a disciplined artificial league.
+> The empirical stylized fact uses leave-one-out teammate quality among college players; the generative proof-of-concept **scores** players with a penalty for leave-one-out viable-peer congestion, then **selects** top K, and plots binned selection rates on a matching quality axis. We do not claim bin-for-bin reproduction of every ventile in v1; we claim that talent-only **scoring** is insufficient and that congestion in the **score** can bend advancement curves in a disciplined artificial league.
 
 ---
 
@@ -60,8 +60,8 @@ Re-run bundle if needed: `python sports/scripts/hero_model_reset_bundle.py`
 ## Five-minute self-test (you’re done when these pass)
 
 1. **Hero (60 s):** Naïve vs Hero; tail dip is **outcome on pool axis**, not “NBA ignores talent.”
-2. **Binding (20 s):** doc 03 binding sentence or `Model.pdf` opener.
-3. **Knockout (20 s):** same league; **λ=0 → S_i=A_i**; else **S_i=A_i−λL_C** with **(B−D)=−L_C**.
+2. **Binding (20 s):** environment ≠ advancement; score ≠ select (doc 03 or `Model.pdf` opener).
+3. **Knockout (20 s):** same league + same top-K; **λ=0 → S_i=A_i**; else **S_i=A_i−λL_C** with **(B−D)=−L_C**.
 4. **Open side-by-side PNG** — left empirical, right generative; one honest limit.
 5. **Read limitation sentence** once without hedging.
 
@@ -73,9 +73,9 @@ Re-run bundle if needed: `python sports/scripts/hero_model_reset_bundle.py`
 
 - Empirical hero PNG + doc 01; describe tail dip and **talent baseline**.
 
-### Day 2 — Layer C (selection knockout)
+### Day 2 — Layer C (score knockout)
 
-- Side-by-side PNG + knockout CSVs; **λ** toggles **`L_C` in selection**, not **ρ**.
+- Side-by-side PNG + knockout CSVs; **λ** toggles **`L_C` in the score**, not **ρ** and not the winner rule.
 
 ### Day 3 — Package for Alex
 
@@ -85,9 +85,9 @@ Re-run bundle if needed: `python sports/scripts/hero_model_reset_bundle.py`
 
 ## Pass B: ρ sims (assignment ablation)
 
-**Question:** Is assortative grouping (**ρ**) involved? **Answer:** Yes in the **full** story (step 1 — who lands where); **not** the minimal proof that congestion in **selection** matters (Pass A — **λ / L_C**, already run).
+**Question:** Is assortative grouping (**ρ**) involved? **Answer:** Yes in the **full** story (step 1 — who lands where); **not** the minimal proof that congestion in the **score** matters (Pass A — **λ / L_C**, already run).
 
-**Run:** hold **S_i** fixed (**λ**, **L_C** rule); vary **ρ** (low vs high) + sort-and-chop benchmark; same 16-bin readout on **poolq_loo**. Script: `python sports/scripts/540_rho_ablation_bundle.py`. See [`../../sports/540_READ_ME_SIM.md`](../../sports/540_READ_ME_SIM.md).
+**Run:** hold **score and winner rule** fixed (**λ**, **L_C**, top K); vary **ρ** (low vs high) + sort-and-chop benchmark; same 16-bin readout on **poolq_loo**. Script: `python sports/scripts/540_rho_ablation_bundle.py`. See [`../../sports/540_READ_ME_SIM.md`](../../sports/540_READ_ME_SIM.md).
 
 ---
 

@@ -4,7 +4,7 @@
 
 ## Always-on
 
-0. **[`3-Master_Plan/BINDING_Selection_is_its_own_step.md`](3-Master_Plan/BINDING_Selection_is_its_own_step.md)** — **Binding:** Environment (`L_net = B − D`) ≠ **selection** (Alex `S_i = A_i − λ·L_C`). Hero = outcomes; Alex = **who gets the slot**; 538D = **selection step** in code. Never merge into “one model.” Charles #1 confusion (Jul 2026).
+0. **[`3-Master_Plan/BINDING_Selection_is_its_own_step.md`](3-Master_Plan/BINDING_Selection_is_its_own_step.md)** — **Binding:** Environment (`L_net = B − D`) ≠ advancement. Advancement = **score** (Alex `S_i = A_i − λ·L_C`) then **select** (top K now; later stochastic). Hero = outcomes; never merge into “one model.” Charles #1 confusion (Jul 2026); score≠select sharpened Jul 2026.
 
 1. **`.cursor/rules/notebook-blank-edit.mdc`** — Notebook **prime directive:** every `.ipynb` change in a reply should be **line/cluster red/green** reviewable. Each **user message**: usually **burn** first (`skip burn` if user says so), then substantive edits; **ask** when unsure; **`EditNotebook`** for cell bodies (no MCP `notebook_edit_cell` / raw JSON unless user says **`yes, skip rules for this`**). No cap on cells per reply.
 2. **`.cursor/rules/incremental-writes.mdc`** — Network/large I/O loops: append + flush + resume-skip.

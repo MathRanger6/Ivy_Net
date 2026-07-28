@@ -1,11 +1,39 @@
 #!/usr/bin/env python3
-"""Pass B — ρ assignment ablation with selection held fixed.
+"""Pass B — ρ assignment ablation (score + winner rule held fixed).
 
-Same synthetic A_i draw across arms; vary assignment only (ρ low, ρ high, sort-and-chop).
-Selection fixed: S_i = A_i − w·L_C (crowding_smooth, w=0.5).
+==============================================================================
+FOR LATER CHARLES — read this block first
+==============================================================================
+What this file is
+  One-shot script that draws ONE synthetic ability / team-target league, then
+  re-assigns that same talent under different assignment rules (ρ low / mid /
+  high soft match, plus sort-and-chop). Score and top-K stay FIXED:
+      S_i = A_i − 0.5·L_C  (crowding_smooth), then select top K.
 
-Writes to sports/datasets/mbb/exports_inverted_u_v0/alex_rho_ablation_v0/
-Run from repo root: python sports/scripts/540_rho_ablation_bundle.py
+What this file is NOT
+  - Not Pass A (λ knockout) — see hero_model_reset_bundle.py.
+  - Not proof that NBA uses ρ; not bin-for-bin hero match.
+  - Not the 538 CELL 10 widget — tier1_cell10_playground_run.py is LEGACY.
+
+Why Pass B exists
+  Pass A asks: does congestion in the SCORE matter?
+  Pass B asks: does ASSIGNMENT assortativity move the readout when score+K fixed?
+
+ρ (assortativity)
+  Soft kernel: π_ij ∝ exp(−ρ · (A_i−T_j)² / (2σ²)); σ fixed (~0.65).
+  ρ=0 → max mixing; ρ↑ → sharper match to T_j.
+  sort-and-chop = separate hard benchmark (NOT ρ→∞).
+
+Run (repo root)
+  python sports/scripts/540_rho_ablation_bundle.py
+
+Outputs
+  sports/datasets/mbb/exports_inverted_u_v0/alex_rho_ablation_v0/
+
+Spec
+  sports/540_READ_ME_SIM.md
+  3-Master_Plan/re_entry/CHARLES_CHECKLIST.md  (§4)
+==============================================================================
 """
 
 from __future__ import annotations
@@ -29,6 +57,8 @@ RHO_LOW = 0.1
 RHO_HIGH = 8.0
 RHO_MODERATE = 1.0
 
+# (export_label, assignment_method, rho_or_None)
+# soft → soft_assign with assignment_rho; sort_chop → disjoint slices benchmark
 ARMS: list[tuple[str, str, float | None]] = [
     ("rho_low", "soft", RHO_LOW),
     ("rho_moderate", "soft", RHO_MODERATE),
@@ -38,6 +68,7 @@ ARMS: list[tuple[str, str, float | None]] = [
 
 
 def _load_modules():
+    """Import engines fresh (avoids stale tier1_* if config was edited mid-session)."""
     for mod_name in list(sys.modules):
         if mod_name.startswith("tier1_"):
             del sys.modules[mod_name]
@@ -51,6 +82,7 @@ def _load_modules():
 
 
 def _draw_league_once(tpa, params, rng):
+    """Shared A_i and T_j across all arms — only assignment method/ρ changes later."""
     ability = tpa.draw_abilities(
         rng,
         params.n_individuals,
@@ -88,6 +120,7 @@ def run_one_arm(
     tpa,
     assign_poolq_bin_labels,
 ) -> pd.DataFrame:
+    """Assign (this arm) → score/select (fixed sel) → 16-bin table on poolq_loo."""
     if method == "soft":
         arm_params = replace(params, assignment_rho=float(rho))
     else:
@@ -110,6 +143,7 @@ def run_one_arm(
 
 
 def write_summary(out_dir: Path, frames: dict[str, pd.DataFrame]) -> None:
+    """Plain-text arm comparison for Alex / checklist proof."""
     lines = [
         f"# ρ assignment ablation ({date.today().isoformat()})",
         "",
@@ -142,6 +176,7 @@ def write_summary(out_dir: Path, frames: dict[str, pd.DataFrame]) -> None:
 
 
 def build_figure(out_dir: Path, frames: dict[str, pd.DataFrame]) -> None:
+    """Overlay selection-rate curves for each assignment arm."""
     fig, ax = plt.subplots(figsize=(9, 4.5))
     colors = {
         "rho_low": "steelblue",
@@ -162,7 +197,7 @@ def build_figure(out_dir: Path, frames: dict[str, pd.DataFrame]) -> None:
     ax.set_xlabel("Bin (1 = lowest poolq_loo in sim)")
     ax.set_ylabel("Mean Y_selected")
     ax.set_title(
-        "Pass B — assignment ablation (selection fixed)\n"
+        "Pass B — assignment ablation (score + top-K fixed)\n"
         "S_i = A_i − 0.5·L_C | 16 quantile on poolq_loo"
     )
     ax.legend(loc="best", fontsize=8)
@@ -175,6 +210,7 @@ def build_figure(out_dir: Path, frames: dict[str, pd.DataFrame]) -> None:
 
 
 def main() -> None:
+    """Shared A/T draw → four assignment arms → CSVs, summary, PNG, captions."""
     out_dir = OUT
     out_dir.mkdir(parents=True, exist_ok=True)
     tge, tpa, assign_poolq_bin_labels = _load_modules()
@@ -189,6 +225,7 @@ def main() -> None:
 
     base_params = tpa.AssignmentParams.from_tier1_sim_config(cfg_path)
     base_sel = tge.SelectionConfig.from_module(mod)
+    # FIXED across arms: congestion-in-score + weight + binning (Pass A–style score)
     sel = replace(
         base_sel,
         n_bins=HERO_BINS,
@@ -248,15 +285,16 @@ def main() -> None:
             [
                 "Alex Pass B caption (ρ assignment ablation)",
                 "",
-                "Same synthetic player abilities across arms; selection rule fixed",
-                "(S_i = A_i − 0.5·L_C, smooth viable-peer congestion). Only assignment differs:",
+                "Same synthetic player abilities across arms; score + winner rule fixed",
+                "(S_i = A_i − 0.5·L_C, smooth viable-peer congestion, then top K).",
+                "Only assignment differs:",
                 f"low ρ={RHO_LOW}, moderate ρ={RHO_MODERATE}, high ρ={RHO_HIGH}, and",
                 "sort-and-chop benchmark (537-style max partition assortativity).",
                 "",
                 "Y-axis: mean selection rate by 16 quantile bins on simulated poolq_loo.",
                 "",
                 "Limitation: we show whether roster-formation sorting moves the readout when",
-                "congestion-in-selection is held fixed; we do not claim bin-for-bin hero match.",
+                "congestion-in-score is held fixed; we do not claim bin-for-bin hero match.",
                 "",
                 "Pass A (λ knockout) is in ../alex_side_by_side_v0/.",
             ]

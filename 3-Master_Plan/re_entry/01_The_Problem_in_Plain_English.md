@@ -3,13 +3,13 @@
 **Audience:** Charles, re-entering after time away  
 **You do not need any other document open while reading this.**
 
-**Binding insight (read early):** The hero shows **outcomes** (draft rate vs pool quality). **Environment** = **`L_net = B − D`**; **selection** = **`S_i`** (who gets the pick) — a **separate step** from describing the peer environment. See doc **02** and [`../BINDING_Selection_is_its_own_step.md`](../BINDING_Selection_is_its_own_step.md).
+**Binding insight (read early):** The hero shows **outcomes** (draft rate vs pool quality). **Environment** = **`L_net = B − D`**. **Advancement** = **score** (**`S_i`**, λ) then **select** (top K now) — separate from describing the peer environment. See doc **02** and [`../BINDING_Selection_is_its_own_step.md`](../BINDING_Selection_is_its_own_step.md).
 
 ---
 
 ## The one-sentence dissertation idea
 
-Organizations advance some people and not others. Being surrounded by **strong peers** can **help** you (you learn, you look good by association) and **hurt** you (you are harder to notice, you compete for scarce slots). The dissertation asks whether that **tension** shows up in data — and whether a **simple mechanism** (crowding in selection) can produce curves that look like the data.
+Organizations advance some people and not others. Being surrounded by **strong peers** can **help** you (you learn, you look good by association) and **hurt** you (you are harder to notice, you compete for scarce slots). The dissertation asks whether that **tension** shows up in data — and whether a **simple mechanism** (crowding **in the score** that ranks who advances) can produce curves that look like the data.
 
 Basketball is one **test bed**: college players who get drafted to the NBA.
 
@@ -37,7 +37,7 @@ That plot is the **hero**. It is a **stylized fact** — something real in the N
 
 **First step — two axes, two curves (real data):** Before the hero is “surprising,” check the obvious axis. Bin the **same** player-seasons by **own college performance** (same ppm stat, z-scored within season) instead of teammate pool quality. Draft rate then rises **monotonically** from the bottom talent bin to the top (~0% → ~7% on the locked July 2026 sample). That is the **talent baseline** — talent matters, as it should. The **hero** bins on **pool quality** instead and gets a **different** shape: rise, plateau, then a **dip in the top pool-quality bin only**. The phenomenon is the **second** curve, not draft itself. We are **not** claiming the NBA ignores talent; we are showing that **peer environment** has its own non-monotone pattern once you look at it on its own axis.
 
-**Important:** The hero shows **who got drafted** vs pool quality. It does **not** tell you whether the bend comes from peer effects on **development** or from **congestion in the selection process itself**. That split is Layer B (doc 02): environment (B − D) vs **selection as its own step** (Alex score).
+**Important:** The hero shows **who got drafted** vs pool quality. It does **not** tell you whether the bend comes from peer effects on **development** or from **congestion in the ranking/score** that feeds who gets selected. That split is Layer B (doc 02): environment (B − D) vs **score then select**.
 
 **Sample size (locked July 2026):** about 62,000 player-seasons; about 1,100 drafted.
 
@@ -45,7 +45,7 @@ That plot is the **hero**. It is a **stylized fact** — something real in the N
 
 ## Why this matters for the “simplified model” push
 
-Alex’s scientific arc (paraphrased): show the **phenomenon**, then show a **minimal generative rule** where **talent alone is not enough** — you need something like **congestion in who gets selected** — then later add richer measurements and predictions.
+Alex’s scientific arc (paraphrased): show the **phenomenon**, then show a **minimal generative rule** where **talent alone is not enough** — you need something like **congestion in the score** — then later add richer measurements and predictions.
 
 You are **not** being asked, in the next few days, to:
 
@@ -56,7 +56,7 @@ You are **not** being asked, in the next few days, to:
 You **are** being asked to hold a clear line:
 
 1. **Here are the two empirical curves** — talent baseline (monotone) and hero (pool quality with tail dip); both on real NCAA data under the locked spec.
-2. **Here is a disciplined artificial league** where picking purely on talent gives a different curve than picking on talent **minus** a congestion penalty — side by side, honest axes, explicit limits on what we claim.
+2. **Here is a disciplined artificial league** where **scoring** purely on talent gives a different curve than scoring on talent **minus** a congestion penalty — same winner rule (top K), side by side, honest axes, explicit limits on what we claim.
 
 That is the simplified model **deliverable** for basketball v1. Slide summary: [`Model.pdf`](Model.pdf).
 
@@ -74,7 +74,7 @@ That is the simplified model **deliverable** for basketball v1. Slide summary: [
 | **Stylized fact** | A robust pattern in data under stated rules — not yet causal proof |
 | **Generative model / sim** | A computer-made fake league with explicit draft rules |
 | **Congestion** | “Too many good peers” — harder to stand out or win a scarce slot |
-| **BINDING** | Charles-locked rule: docs/agents must keep **`L_net`** (environment) and **`S_i`** (selection) separate unless you reopen it |
+| **BINDING** | Charles-locked rule: keep **`L_net`** (environment) separate from advancement; keep **score (`S_i`)** separate from **select** (top K / later noise) |
 
 ---
 

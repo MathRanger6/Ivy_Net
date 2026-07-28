@@ -1,8 +1,39 @@
 #!/usr/bin/env python3
-"""Hero model reset bundle: Layer A LPM + Layer C generative knockouts + side-by-side PNG.
+"""Pass A — Hero model reset bundle (Layer A LPM + Layer C λ knockout + side-by-side PNG).
 
-Writes to sports/datasets/mbb/exports_inverted_u_v0/alex_side_by_side_v0/
-Run from repo root: python sports/scripts/hero_model_reset_bundle.py
+==============================================================================
+FOR LATER CHARLES — read this block first
+==============================================================================
+What this file is
+  One-shot script that (1) refits the quadratic LPM on the locked hero panel,
+  (2) runs two generative leagues that differ ONLY in the SCORE step
+      (talent-only vs congestion-in-score), same top-K winner rule,
+  (3) writes CSVs + a side-by-side PNG for Alex.
+
+What this file is NOT
+  - Not the empirical hero builder (that is 530 / sports_pipeline).
+  - Not Pass B (ρ ablation) — see 540_rho_ablation_bundle.py.
+  - Not the old 538 CELL 10 widget UI — see tier1_cell10_playground_run.py
+    (LEGACY; do not use for daily re-entry).
+
+Pipeline (assign → score → select)
+  Engines: tier1_pool_assignment.py + tier1_generative_eda.py + tier1_sim_config.py
+  This script only orchestrates knockouts and exports.
+
+Pass A claim
+  λ=0 (score = A_i) fails the congestion story; λ>0 via A − w·L_C compresses
+  the elite tail. Does NOT claim bin-for-bin match to the empirical hero.
+
+Run (repo root)
+  python sports/scripts/hero_model_reset_bundle.py
+
+Outputs
+  sports/datasets/mbb/exports_inverted_u_v0/alex_side_by_side_v0/
+
+Spec
+  sports/540_READ_ME_SIM.md
+  3-Master_Plan/re_entry/CHARLES_CHECKLIST.md  (§3)
+==============================================================================
 """
 
 from __future__ import annotations
@@ -26,6 +57,7 @@ HERO_SEED = 42
 
 
 def _hero_pipeline_config():
+    """Locked Layer A estimand (same filters as the hero PNG / memo)."""
     sys.path.insert(0, str(SPORTS))
     from sports_pipeline.config import PipelineConfig
 
@@ -46,7 +78,10 @@ def _hero_pipeline_config():
 
 
 def run_layer_a_lpm(out_dir: Path) -> pd.Series:
-    """OLS Y_draft ~ poolq_loo + poolq_sq on hero-filtered panel."""
+    """Layer A: OLS Y_draft ~ poolq_loo + poolq_sq on hero-filtered panel.
+
+    Writes lpm_hero_coefficients.txt. β₂ < 0 ⇒ fitted curve concave down.
+    """
     sys.path.insert(0, str(SPORTS))
     from sports_pipeline import conductor, panel_build
     from sports_pipeline.perf_metric import perf_metric_active
@@ -81,7 +116,15 @@ def run_layer_a_lpm(out_dir: Path) -> pd.Series:
 
 
 def run_layer_c_knockouts(out_dir: Path) -> tuple[pd.DataFrame, pd.DataFrame]:
-    """Talent-only vs congestion-in-score on poolq_loo axis, 16 quantile bins."""
+    """Layer C Pass A: two score modes, same binning on simulated poolq_loo.
+
+    Arm 1 — talent_only: score_mode='ability'  → S_i = A_i  (λ = 0 story)
+    Arm 2 — congestion:  loo_gap_plus_ability + crowding_smooth, w=0.5
+                         → S_i ≈ A_i − w·L_C  (congestion in SCORE)
+
+    Winner rule (top K) and assignment come from tier1_sim_config defaults;
+    only the score ingredients change between arms.
+    """
     import importlib.util
 
     # Ensure clean imports
@@ -104,6 +147,7 @@ def run_layer_c_knockouts(out_dir: Path) -> tuple[pd.DataFrame, pd.DataFrame]:
     params = tpa.AssignmentParams.from_tier1_sim_config(cfg_path)
 
     def _one(label: str, score_mode: str, pool_l: str, w: float, seed: int) -> pd.DataFrame:
+        # SelectionConfig holds score knobs; AssignmentParams holds assign knobs.
         sel = replace(
             base_sel,
             n_bins=HERO_BINS,
@@ -113,6 +157,7 @@ def run_layer_c_knockouts(out_dir: Path) -> tuple[pd.DataFrame, pd.DataFrame]:
             loo_gap_weight=w,
         )
         rng = np.random.default_rng(seed)
+        # run_inverted_u_pipeline: draw/assign league → score → select → bin table
         _, summ, _ = tge.run_inverted_u_pipeline(
             params,
             sel,
@@ -160,6 +205,7 @@ def _write_knockout_summary(
     congest: pd.DataFrame,
     coef: pd.Series | None,
 ) -> None:
+    """Human-readable Pass A readout (bin 1→16 rates + LPM pointer)."""
     t_top = float(talent.loc[talent["bin"] == talent["bin"].max(), "selection_rate"].iloc[0])
     c_top = float(congest.loc[congest["bin"] == congest["bin"].max(), "selection_rate"].iloc[0])
     t_bot = float(talent.loc[talent["bin"] == talent["bin"].min(), "selection_rate"].iloc[0])
@@ -195,6 +241,7 @@ def _write_knockout_summary(
 
 
 def _load_empirical_bins(out_dir: Path) -> pd.DataFrame:
+    """Load locked hero ventile rates (does not rebuild 530)."""
     csv = out_dir / f"binned_draft_rate_{HERO_SLUG}.csv"
     if not csv.is_file():
         alt = (
@@ -216,7 +263,7 @@ def build_side_by_side(
     congest: pd.DataFrame,
     coef: pd.Series,
 ) -> None:
-    """Empirical ventile bars + generative congestion line on shared-style axes."""
+    """Left = empirical hero bars; right = generative congestion-in-score curve."""
     fig, axes = plt.subplots(1, 2, figsize=(12, 4.5))
 
     # Empirical (hero)
@@ -238,7 +285,7 @@ def build_side_by_side(
             va="top",
         )
 
-    # Generative congestion knockout
+    # Generative congestion knockout (score step on; not talent-only)
     ax = axes[1]
     gx = congest["bin"].to_numpy(dtype=float) + 1
     gy = congest["selection_rate"].to_numpy(dtype=float)
@@ -247,8 +294,8 @@ def build_side_by_side(
     ax.set_xlabel("Bin (1 = lowest poolq_loo in sim)")
     ax.set_ylabel("Mean Y_selected")
     ax.set_title(
-        "Generative POC (538D-style)\n"
-        "A − w·L_C crowding | 16 quantile on poolq_loo"
+        "Generative POC (540 / tier1 engines)\n"
+        "score A − w·L_C crowding | 16 quantile on poolq_loo"
     )
 
     fig.suptitle(
@@ -272,11 +319,12 @@ def build_side_by_side(
                 "Left: Empirical mean NBA draft rate by ventile of leave-one-out teammate quality",
                 "(poolq_loo), MBB 2011–2021, hero spec locked in Hero_Model_Three_Layers_Memo.md.",
                 "",
-                "Right: Generative selection rate in an artificial league with congestion in the",
-                "selection score (A − w·L_C), binned on simulated poolq_loo — same 16 quantile bins.",
+                "Right: Generative selection rate in an artificial league that SCORES with a",
+                "congestion penalty (A − w·L_C), then SELECTS top K, binned on simulated",
+                "poolq_loo — same 16 quantile bins.",
                 "",
                 "Limitation: We do not claim pointwise match between panels in v1; talent-only",
-                "selection (score = A only) fails the congestion ingredient test (see knockout CSVs).",
+                "SCORE (S_i = A only) fails the congestion ingredient test (see knockout CSVs).",
             ]
         )
         + "\n",
@@ -285,7 +333,7 @@ def build_side_by_side(
 
 
 def sync_empirical_png(out_dir: Path) -> None:
-    """Ensure hero empirical PNG exists in alex folder."""
+    """Ensure hero empirical PNG exists in alex folder (copy if missing)."""
     dst = out_dir / f"inverted_u_{HERO_SLUG}.png"
     if dst.is_file():
         return
@@ -300,6 +348,7 @@ def sync_empirical_png(out_dir: Path) -> None:
 
 
 def main() -> None:
+    """Order: ensure hero PNG → LPM → λ knockouts → summary → side-by-side figure."""
     out_dir = OUT
     out_dir.mkdir(parents=True, exist_ok=True)
     sync_empirical_png(out_dir)

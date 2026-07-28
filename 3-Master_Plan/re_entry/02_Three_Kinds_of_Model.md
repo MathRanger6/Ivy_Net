@@ -14,24 +14,27 @@ This project actually uses **three different objects**. They stack, but they are
 
 ---
 
-## BINDING insight — selection is its own step (#1 confusion)
+## BINDING insight — environment ≠ advancement; score ≠ select (#1 confusion)
 
-Charles lock (Jul 2026). Full binding doc: [`../BINDING_Selection_is_its_own_step.md`](../BINDING_Selection_is_its_own_step.md).
+Charles lock (Jul 2026; sharpened Jul 2026). Full binding doc: [`../BINDING_Selection_is_its_own_step.md`](../BINDING_Selection_is_its_own_step.md).
 
-You were merging two different mechanisms:
+You were merging mechanisms that must stay separate:
 
 1. **Environment / development** — peers affect you through benefit (B) and congestion (D). The **combined environment object** is **`L_net = B − D`**. This **describes the peer environment**, not who wins the slot.
-2. **Selection** — a **separate step**: who actually gets the scarce advancement (draft pick). **Alex’s equation is this step only:** **`S_i = A_i − λ·L_C`** — own ability minus congestion penalty among viable peers in **who gets selected**.
+2. **Advancement** — who gets the scarce slot — itself has **two** pipeline steps:
+   - **Scoring** — rank candidates: **`S_i = A_i − λ·L_C`** (**λ** lives here).
+   - **Selection (winner rule)** — turn ranks into winners: **top K** in v1 (later: soft / stochastic draw).
 
-| | Environment (`L_net` = B − D) | Selection (`S_i` = Alex score) |
-|---|-------------------------------|----------------------------------|
-| **Asks** | How do peers help vs hurt development? | **Who gets picked?** |
-| **Hero plot** | Does not separate these channels | Shows **outcome only** (draft rate vs pool quality) |
-| **Sim (538D)** | Who lands on which roster | **Rank → top K** using a **selection rule** |
+| | Environment (`L_net` = B − D) | Scoring (`S_i`) | Selection (winner rule) |
+|---|-------------------------------|-----------------|-------------------------|
+| **Asks** | How do peers help vs hurt development? | How do we **rank**? | Given ranks, **who wins**? |
+| **Knob** | (theory; not estimated in v1) | **λ** | Top K now; noise later |
+| **Hero plot** | Does not separate channels | Shows **outcome only** | — |
+| **Sim** | Who lands on which roster | Build **`S_i`** | Draft by winner rule |
 
-**Carry this sentence:** *The hero describes outcomes; **`L_net`** is the net peer environment (B − D); **`S_i`** is who gets selected; the sim tests whether congestion in the **selection rule** changes who gets selected.*
+**Carry this sentence:** *The hero describes outcomes; **`L_net`** is the peer environment; advancement = **score** then **select**; the sim tests whether congestion **in the score** changes who gets selected under a fixed winner rule.*
 
-Layer C is powerful because it **names selection as a step** — talent-only vs congestion-in-score — instead of hiding selection inside a giant environment model.
+Layer C is powerful because it **names score and select as steps** — talent-only score vs congestion-in-score, same top-K — instead of hiding advancement inside a giant environment model.
 
 ---
 
@@ -44,6 +47,13 @@ Layer C is powerful because it **names selection as a step** — talent-only vs 
 **Basketball example:** The hero plot and a quadratic regression on the same filtered rows.
 
 We fit a **quadratic** (not a line) because the hero bends at the top — it is the simplest way to ask whether draft rate is **concave** in pool quality (negative squared term) and to draw a smooth overlay on the bins. We are **not** claiming NBA teams use that formula; the **binned hero** stays the headline stylized fact.
+
+**Why the quadratic LPM is still useful (brief):** Fit `Y ≈ β₀ + β₁Q + β₂Q²` on the same hero rows (**LPM** = linear probability model = OLS on a 0/1 draft outcome). Then:
+
+- **`β₂ < 0`** ⇒ fitted curve is **concave down** (inverted-U / hill); **`β₂ > 0`** ⇒ **concave up** (U).
+- One turning point at `Q* = −β₁/(2β₂)` — a **local max** if `β₂ < 0`, a **local min** if `β₂ > 0`.
+- A pure quadratic has **no inflection point** (second derivative is constant). Do not claim inflection from this fit.
+- Speak about the **fitted quadratic**, not “the data are definitively a parabola.” Fitted values can leave `[0, 1]` — fine for **shape**, not a full probability model. Mechanism remains Layer B/C.
 
 **What success looks like:** Negative curvature — draft rate bends down at the top bins — on the **locked** hero definition (16 bins, leave-one-out quality, minutes filter, seasons 2011–2021).
 
@@ -59,7 +69,7 @@ We fit a **quadratic** (not a line) because the hero bends at the top — it is 
 
 ## Layer B — explain help vs hurt (mechanism story)
 
-**Job:** Answer *“Why could good peers both help and hurt?”* — and **separate environment from selection**.
+**Job:** Answer *“Why could good peers both help and hurt?”* — and **separate environment from advancement** (and, inside advancement, **score from select**).
 
 **Tools:** Words and symbols — not one estimated equation in v1.
 
@@ -74,60 +84,66 @@ Write this as **`L_net ≈ B − D`** (net local environment). As pool quality r
 
 **This part describes the environment — not who gets drafted.**
 
-### Part 2 — Selection (Alex score — its own step)
+### Part 2 — Advancement: score, then select
 
-**Selection is separate.** After rosters exist, someone must decide **who gets the scarce slot** (NBA draft pick).
+**Advancement is separate from environment.** After rosters exist, someone must decide **who gets the scarce slot**. That happens in **two** steps:
 
-**Alex’s equation is about that decision rule**, not the full environment:
+1. **Scoring** — compute a rank for each player.
+2. **Selection (winner rule)** — pick winners from those ranks (v1: **top K**; later: soft / stochastic draw).
 
-- **`S_i = A_i − λ·L_C`** — own **ability** minus **weight × viable-peer congestion** in **selection** (equivalently **`S_i = A_i + λ(B−D)`** with **(B−D) = −L_C** in the score for Alex v1)
-- **`L_C`** — **D-ish** congestion measured **LOO on a roster** after assignment; not full **`L_net`**, not **`L_C = f(B, D, τ)`** in v1
+**Alex’s equation is about scoring**, not the full environment and not the winner rule:
 
-That is why the simulation makes **selection explicit**: assign players → compute **selection score** → take top **K**. **Knockout** (repo shorthand — say **mechanism contrast** to Alex if you prefer): hold the fake league fixed and **remove congestion from the selection score**. Compare top-**K** on **`S_i = A_i`** only (λ = 0) vs top-**K** on **`S_i = A_i − λ·L_C`**. The **one ingredient toggled** is **`L_C` in selection** — not talent, not the whole **`L_net`** environment. We plot both curves side by side, but the logic is **turn that term off, see if the curve changes**, not two unrelated “versions” of the sim.
+- **`S_i = A_i − λ·L_C`** — own **ability** minus **weight × viable-peer congestion** in the **score** (equivalently **`S_i = A_i + λ(B−D)`** with **(B−D) = −L_C** in the score for Alex v1)
+- **`L_C`** — **D-ish** congestion measured **LOO on a roster** after assignment; not full **`L_net`**, not **`L_C = f(B, D, ρ)`** in v1
+- **λ** — weight on congestion **in the score only**
 
-**What success looks like:** The story is coherent; sim shows ability-only **fails** the congestion-in-selection story when λ = 0 or congestion is dropped from the score.
+That is why the simulation makes advancement explicit: assign → **score** → **select (top K)**. **Knockout** (repo shorthand — say **mechanism contrast** to Alex if you prefer): hold the fake league **and the winner rule** fixed; **remove congestion from the score**. Compare top-**K** on **`S_i = A_i`** only (λ = 0) vs top-**K** on **`S_i = A_i − λ·L_C`**. The **one ingredient toggled** is **`L_C` in the score** — not talent, not top-K, not the whole **`L_net`** environment.
+
+**What success looks like:** The story is coherent; sim shows ability-only **scoring** fails the congestion-in-score story when λ = 0.
 
 **What this does NOT prove in v1:**
 
 - Separate measurement of B(Q) and D(Q) on one axis.
 - That real NBA front offices compute Alex’s score literally.
-- That the hero curve proves selection channel only (hero is outcome; channel is theory + sim).
+- That the hero curve proves the scoring channel only (hero is outcome; channel is theory + sim).
 
-**In plain terms:** Layer B Part 1 = environment story (B − D). Layer B Part 2 = **selection rule** (Alex). Layer C = **run the selection step in code**.
+**In plain terms:** Layer B Part 1 = environment (B − D). Layer B Part 2 = **score (`S_i`) then select (top K)**. Layer C = **run those steps in code**.
 
 ### Unified nesting — how the pieces fit (beyond v1)
 
 One way to **nest** the symbols without merging layers:
 
-**General selection score:** **`S_i = A_i + λ·(B − D)`** (ability plus weighted net local environment in the **selection rule**).
+**General score:** **`S_i = A_i + λ·(B − D)`** (ability plus weighted net local environment **in the ranking**).
 
 | Restriction | Meaning | Score |
 |-------------|---------|--------|
-| **Knockout** | **λ = 0** — remove all of **(B − D)** from selection | **`S_i = A_i`** |
-| **Alex v1** | Only congestion enters selection: **(B − D) = −L_C** in the score (not “B is zero in the world”) | **`S_i = A_i − λ·L_C`** |
+| **Knockout** | **λ = 0** — remove all of **(B − D)** from the **score** | **`S_i = A_i`** |
+| **Alex v1** | Only congestion enters the **score**: **(B − D) = −L_C** (not “B is zero in the world”) | **`S_i = A_i − λ·L_C`** |
 | **Full (later)** | **λ ≠ 0** with both B and D in **(B − D)** | Richer; **not** what v1 runs |
 
-**Full generative pipeline** (Layer C — two steps for a minimal POC):
+**Full generative pipeline** (Layer C — Charles’s three steps):
 
 ```
-Draw A_i  →  assign to rosters (ρ = assignment assortativity)  →  compute LOO poolq_loo, L_C on rosters
-       →  S_i = A_i + λ(B−D)  [v1: (B−D)=−L_C]  →  top K  →  bin for plots
+Draw A_i  →  assign to rosters (ρ)  →  compute LOO poolq_loo, L_C on rosters
+       →  score: S_i = A_i + λ(B−D)  [v1: (B−D)=−L_C]
+       →  select: top K  [later: stochastic winner rule]  →  bin for plots
 ```
 
 | Knob | Step | Role |
 |------|------|------|
 | **ρ (rho)** | **Assignment** (who lands where) | **Assortativity** in soft match to team targets **T_j**; **ρ=0** = max mixing; **ρ↑** = sharper match; **not** inside **`S_i`** |
-| **λ** | **Selection** | Weight on **(B − D)** in the score; v1 knocks out via **λ = 0** or sets **(B − D) = −L_C** |
+| **λ** | **Scoring** | Weight on **(B − D)** in **`S_i`**; v1 knocks out via **λ = 0** or sets **(B − D) = −L_C** |
+| **Top K / noise** | **Selection (winner rule)** | How ranks become winners; v1 = deterministic top K |
 | **B, D** | **Environment (theory)** | **`L_net = B − D`** — help vs hurt among peers; not separately estimated in v1 |
 | **`L_C`** | **Computed on rosters** after assignment | **D-ish** operational congestion (LOO viable-peer crowding, e.g. `crowding_smooth`) — **not** the same object as full **`L_net`**, and **not** a clean formula **`L_C = f(B, D, ρ)`** |
 
-**Minimal generative claim (Alex v1):** some **roster step** (so LOO stats exist) **and** a **score → top-K step** (congestion in vs out of **`S_i`**). **Calibrating ρ** to 530 or matching hero bins is **not** the v1 gate.
+**Minimal generative claim (Alex v1):** some **roster step** (so LOO stats exist) **and** **score → select** (congestion in vs out of **`S_i`**, same top-K). **Calibrating ρ** to 530 or matching hero bins is **not** the v1 gate.
 
 **Hero mapping (stay honest):** The hero is **Layer A outcome** — mean draft rate by **`poolq_loo`** on the **real panel**. It **motivates** the story; it does **not** identify **(ρ, λ, B, D)** or prove **`S_i`** is the NBA rule. **`poolq_loo`** is a **pool proxy**, not measured **(B − D)**.
 
-**`L_C` and θ (viability cutline):** On a roster, **`L_C`** = LOO congestion from **viable peers**. **θ** = viability threshold (530 default: **med(perf | ever drafted)**). **Hard:** count teammates with **`A_j > θ`**. **Smooth (538D default):** LOO mean of **`σ(γ(A_j − θ))`** (`crowding_smooth`). **γ** = sharpness of the sigmoid around θ.
+**`L_C` and θ (viability cutline):** On a roster, **`L_C`** = LOO congestion from **viable peers**. **θ** = viability threshold (530 default: **med(perf | ever drafted)**). **Hard:** count teammates with **`A_j > θ`**. **Smooth (default):** LOO mean of **`σ(γ(A_j − θ))`** (`crowding_smooth`). **γ** = sharpness of the sigmoid around θ.
 
-**Optional follow-up (Alex asked Jul 2026):** **ρ** sim ablations — fix selection rule, vary assignment assortativity — test “is sorting involved?” **Not** required for v1 minimal model; the headline knockout is **λ = 0** vs **(B−D)=−L_C** in **`S_i`** (already run; see doc 03).
+**Optional follow-up (Alex asked Jul 2026):** **ρ** sim ablations — fix **score and winner rule**, vary assignment assortativity — test “is sorting involved?” **Not** required for v1 minimal model; the headline knockout is **λ = 0** vs **(B−D)=−L_C** in **`S_i`** (already run; see doc 03).
 
 ---
 
@@ -135,14 +151,14 @@ Draw A_i  →  assign to rosters (ρ = assignment assortativity)  →  compute L
 
 **Job:** Answer *“If we write explicit draft rules, does congestion in the score change who gets picked?”*
 
-**Tools:** Simulation notebook (538D path): create synthetic players → assign to teams → rank by a **selection score** → draft top K → plot draft rate by bins.
+**Tools:** Thin `540_*` / scripts (archived 538D is reference only): create synthetic players → assign to teams → **score** → **select** (top K) → plot draft rate by bins.
 
-**Headline comparison (knockout on `L_C` in selection):**
+**Headline comparison (knockout on `L_C` in the score; winner rule fixed):**
 
-- **Knockout arm (λ = 0):** **`S_i = A_i`** — congestion **removed** from the selection score.
-- **Full rule for this test:** **`S_i = A_i − λ·L_C`** — same league, congestion **in** the score.
+- **Knockout arm (λ = 0):** **`S_i = A_i`** — congestion **removed** from the **score**.
+- **Full rule for this test:** **`S_i = A_i − λ·L_C`** — same league, same top-K, congestion **in** the score.
 
-**What success looks like:** The two rules produce **different shapes** — especially, talent-only fails to show the “congestion story” (e.g. elite bin behaves differently when congestion enters).
+**What success looks like:** The two **scoring** rules produce **different shapes** under the same winner rule — especially, talent-only scoring fails to show the “congestion story.”
 
 **What this does NOT prove:**
 
@@ -158,14 +174,14 @@ Draw A_i  →  assign to rosters (ρ = assignment assortativity)  →  compute L
 ```
 Real NCAA data  →  Layer A  →  "Here is the hero curve (outcome only)"
        ↓
-Story in prose  →  Layer B  →  "Environment: L_net (B−D); Selection: S_i; unified nest (B−D)=−L_C in score for v1"
+Story in prose  →  Layer B  →  "Environment: L_net (B−D); Score: S_i; Select: top K; nest (B−D)=−L_C in score for v1"
        ↓
-Fake league code →  Layer C  →  "Assign (ρ) → score (λ, L_C) → top-K; knockout λ=0"
+Fake league code →  Layer C  →  "Assign (ρ) → score (λ, L_C) → select (top K); knockout λ=0"
        ↓
 Alex slide       →  Model.pdf + hero PNG beside sim PNG + limitation sentence
 ```
 
-You do **Layer A** first (mostly done). You need **Layer C minimal** for the simplified model deadline. **Layer B** has two parts — environment (B − D) and **selection as its own step** (Alex) — you are not failing if you have not “estimated Layer B” as one formula.
+You do **Layer A** first (mostly done). You need **Layer C minimal** for the simplified model deadline. **Layer B** has environment (B − D) plus **score then select** — you are not failing if you have not “estimated Layer B” as one formula.
 
 ---
 
@@ -177,7 +193,7 @@ Yes:
 
 - Same **kind** of Y-axis (advancement / draft rate).
 - **Honest** X-axis labels (empirical leave-one-out quality vs sim bins on the best matching axis you have).
-- One clear **limitation sentence**: we show congestion in the score can bend selection; we do **not** claim bin-for-bin replication yet.
+- One clear **limitation sentence**: we show congestion in the **score** can bend who gets selected under top-K; we do **not** claim bin-for-bin replication yet.
 
 That is enough for the simplified model chapter of work.
 
@@ -190,16 +206,17 @@ While re-entering, ignore cross-domain notation. For **basketball v1 only**, use
 | Symbol / term | Meaning **here** | Ignore for now |
 |---------------|------------------|----------------|
 | **`L_net`** | Net peer environment = **B − D** (help minus hurt among peers) | Any other “L” in old emails |
-| **`S_i`** | Selection score (Alex) — **who gets the slot** | Hero regression coefficients |
+| **`S_i`** | **Score** (Alex) — ranking for advancement; **not** the winner rule | Hero regression coefficients |
+| **Selection** | **Winner rule** — top K now; later stochastic draw from scores | Calling **`S_i`** “selection” |
 | **`L_C`** | LOO **viable-peer congestion** on a roster (used in **`S_i`**); D-ish, not full **`L_net`** | Network centrality papers |
 | **θ (theta)** | Viability cutline for “substitutable peer” — e.g. **med(A \| drafted)** | Generic threshold in other domains |
 | **γ (gamma)** | Sharpness of **`σ(γ(A_j − θ))`** in smooth **`L_C`** | — |
 | **ρ (rho)** | Assignment **assortativity** — soft match to team targets **T_j**; **ρ=0** = max mixing; **not** inside **`S_i`** | Legacy **τ (temperature)** in archived docs (opposite intuition) |
-| **Knockout** | Same generative league; **`L_C` removed from selection** (λ = 0) vs Alex score with it **in** | “Mechanism contrast” to Alex |
-| **BINDING** | Locked rule: **`L_net`** ≠ **`S_i`**; hero ≠ selection equation | — |
+| **Knockout** | Same league + same winner rule; **`L_C` removed from the score** (λ = 0) vs Alex score with it **in** | “Mechanism contrast” to Alex |
+| **BINDING** | **`L_net`** ≠ advancement; **score ≠ select**; hero ≠ scoring equation | — |
 | Pool quality (LOO) | Leave-one-out teammate quality | Army “poolq” without LOO |
 | Ability (`A_i`) | Player talent in sim / own perf in data | Tenure “productivity” |
-| Lambda (λ) | Weight on **`L_C`** in selection score | Global “slot capacity” Λ across orgs |
+| Lambda (λ) | Weight on **`L_C`** in the **score** | Global “slot capacity” Λ across orgs |
 | Hero | Empirical binned draft plot | Any other “hero” in old emails |
 
 When a doc uses shorthand without re-defining, **close it** and come back to this table.

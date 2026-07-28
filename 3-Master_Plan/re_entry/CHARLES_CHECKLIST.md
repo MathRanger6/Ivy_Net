@@ -1,0 +1,152 @@
+# Charles checklist — re-entry (manual checkoff)
+
+**Created:** 2026-07-28 16:58  
+**Purpose:** The **one** place you walk beginning → end and mark **what you personally did**.  
+**Not this file:** Agent “already done” tables in `model_OPORD.md`, doc 03, COMPASS stub, or the hero reset plan. Those are **project/agent status**. This file is **your** progress.
+
+**How to use**
+
+1. Work **top to bottom**.  
+2. Change `[ ]` → `[x]` only when **you** finished that row.  
+3. Fill **Proof** with a path, date, or one-line note.  
+4. **Do not rebuild** the empirical hero (Layer A panel) unless you choose to later.  
+5. **Do re-run** generative Pass A and Pass B yourself so you own the sim story.
+
+**Companion reads (already done — check when true):** docs `00`–`03`, hero reset plan, Three Layers memo. Optional later: `Model.pdf`, `540_READ_ME_SIM.md`.
+
+---
+
+## 0. Orientation (reading)
+
+| Done | Step | Proof (you fill) |
+|------|------|------------------|
+| [ ] | Read `00_READ_ME_FIRST.md` | |
+| [ ] | Read `01_The_Problem_in_Plain_English.md` | |
+| [ ] | Read `02_Three_Kinds_of_Model.md` | |
+| [ ] | Read `03_Three_Day_Basketball_Focus.md` | |
+| [ ] | Read hero reset plan (optional depth) | |
+| [ ] | Read Three Layers memo (optional card) | |
+| [ ] | Skim `Model.pdf` (your slide) | |
+
+---
+
+## 1. Self-test (no code) — you’re oriented when all pass
+
+Say each out loud. Check only when you can, without hedging.
+
+| Done | Step | Proof |
+|------|------|-------|
+| [ ] | **Hero:** talent baseline (own A) vs hero (poolq_loo); cliff at elite end is **outcome**, not “NBA ignores talent” | |
+| [ ] | **Binding:** environment `L_net = B−D` ≠ advancement; advancement = **score** (`S_i`, λ) then **select** (top K) | |
+| [ ] | **Nest:** `S_i = A_i + λ(B−D)` with Alex v1 `(B−D)=−L_C` ⇒ `S_i = A_i − λ·L_C`; knockout λ=0 ⇒ `S_i = A_i` | |
+| [ ] | **Hero shape honesty:** peak ~bin 12, high/wobble 13–15, **cliff at bin 16** (not “only bin 16 ever falls”) | |
+| [ ] | Read limitation sentence in doc 03 once, cold | |
+
+---
+
+## 2. Skip — empirical hero (Layer A)
+
+You are **not** rebuilding these. Treat as locked inputs.
+
+| Status | Artifact | Path |
+|--------|----------|------|
+| Use as-is | Hero PNG | `sports/datasets/mbb/exports_inverted_u_v0/alex_side_by_side_v0/inverted_u_empirical_ppm_poolq_loo_16quantile_winsor0199_min20_2011.png` |
+| Use as-is | Hero CSV | `…/binned_draft_rate_empirical_ppm_poolq_loo_16quantile_winsor0199_min20_2011.csv` |
+| Optional open | LPM coefs | `…/lpm_hero_coefficients.txt` |
+
+| Done | Optional (only if you want) | Proof |
+|------|------------------------------|-------|
+| [ ] | Open hero PNG + CSV; confirm peak ~12 / cliff at 16 yourself | |
+
+---
+
+## 3. Sim redo — Pass A (λ knockout) — **you run this**
+
+**Question:** Does congestion **in the score** change who gets selected (same top-K)?
+
+**What the code is:** Thin script calling **`tier1_*` engines** (not a from-scratch DGP). New surface = `540_*` + bundles; engines = recycled + ρ.
+
+| Done | Step | What to do | Proof |
+|------|------|------------|-------|
+| [ ] | Read sim contract | Open `sports/540_READ_ME_SIM.md` (assign → score → select; ρ; Pass A/B) | |
+| [ ] | Run Pass A bundle | From **repo root:** `python sports/scripts/hero_model_reset_bundle.py` | date + exit 0 |
+| [ ] | Inspect talent-only CSV | `alex_side_by_side_v0/generative_knockout_talent_only_16quantile.csv` — monotone rise? | |
+| [ ] | Inspect congestion CSV | `…/generative_knockout_congestion_16quantile.csv` — elite compression vs talent-only? | |
+| [ ] | Inspect side-by-side PNG | `…/inverted_u_side_by_side_empirical_vs_generative.png` | |
+| [ ] | Read summary + caption | `generative_knockout_summary.txt`, `side_by_side_caption.txt` | |
+| [ ] | One-sentence claim (yours) | Write: what Pass A proves / does **not** prove | |
+
+**Pass A done for you when:** you ran the script, looked at both knockout arms + PNG, and can state the claim without reading notes.
+
+---
+
+## 4. Sim redo — Pass B (ρ ablation) — **you run this**
+
+**Question:** Does assignment assortativity (**ρ**) move the readout when **score + top-K are fixed**?
+
+| Done | Step | What to do | Proof |
+|------|------|------------|-------|
+| [ ] | Run Pass B bundle | From **repo root:** `python sports/scripts/540_rho_ablation_bundle.py` | date + exit 0 |
+| [ ] | Inspect arms | CSVs in `alex_rho_ablation_v0/` (low / moderate / high / sort_chop) | |
+| [ ] | Inspect PNG | `…/rho_ablation_selection_by_poolq_loo.png` | |
+| [ ] | Read summary + caption + README | `rho_ablation_summary.txt`, `rho_ablation_caption.txt`, `README.txt` | |
+| [ ] | One-sentence claim (yours) | Sorting can matter for pools; **not** the minimal congestion-in-score proof; not hero bin-for-bin | |
+
+**Pass B done for you when:** you ran it and can separate Pass A vs Pass B in one breath.
+
+---
+
+## 5. Optional — see the pipeline in the notebook
+
+| Done | Step | What to do | Proof |
+|------|------|------------|-------|
+| [ ] | Open `sports/540_three_step_sim.ipynb` | Paths + display of exports; set `RUN=True` only if you want re-run from cells | |
+| [ ] | Skim `tier1_pool_assignment.py` | Find: `soft_assign` / `assignment_rho`, `assign_selection`, `choose_selected` | |
+| [ ] | Skim `tier1_sim_config.py` | Find: `ASSIGNMENT_RHO`, score mode, `N_SELECTED`, viability θ/γ | |
+
+---
+
+## 6. Package for Alex (when sims feel like *yours*)
+
+| Done | Step | What to do | Proof |
+|------|------|------------|-------|
+| [ ] | Assemble packet | `Model.pdf` + Pass A side-by-side PNG + Pass B PNG (optional) + limitation sentence (doc 03) | |
+| [ ] | Dry-run the talk | 2–3 min: layers → Pass A knockout → (optional) Pass B → limits | |
+| [ ] | Send / meet | Email or calendar | date |
+
+---
+
+## 7. Explicitly **not** on this checklist (park guilt)
+
+Do **not** check these off here; they are out of scope until you decide otherwise:
+
+- Rebuild empirical hero from `530`
+- Bin-for-bin LOO match as a gate
+- Rivanna / faithful historical sweeps
+- Preferential attachment on
+- Army / tenure figures
+- Nesting note / Pertinent Thoughts / old 14-doc stack
+- Fixing every “bin 16 only” prose line (nice polish; not blocking)
+
+Park list: [`PARKED_FOR_LATER.md`](PARKED_FOR_LATER.md).
+
+---
+
+## Where other “done” lists live (ignore for checkoff)
+
+| File | What it is |
+|------|------------|
+| `model_OPORD.md` | Ops order / agent phases (archive, ρ wiring, exports) |
+| `03_Three_Day_Basketball_Focus.md` | “72-hour bar” + project status |
+| `20260727_COMPASS_sim_reentry_status.md` | COMPASS stub |
+| Hero reset plan §7 | Plan sequence status |
+
+**Rule:** If a box here is unchecked, **you** still have work — even if another doc says “Done.”
+
+---
+
+## Next action right now
+
+If sections **0–1** are checked: start **§3** — open `540_READ_ME_SIM.md`, then run Pass A from repo root.
+
+When stuck: return to [`00_READ_ME_FIRST.md`](00_READ_ME_FIRST.md), then come back **here**.

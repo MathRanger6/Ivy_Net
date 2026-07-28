@@ -31,7 +31,7 @@ Usage: ./scripts/convert_multiple_md_to_pdf.sh [options] <prefix> [prefix ...]
 
 Options (forwarded to convert_single_md_to_pdf.sh where applicable):
   --pandoc      Use pandoc/LaTeX backend (Rivanna-friendly)
-  --narrow      Use pdf_styles_narrow.css (0.1in margins)
+  --narrow      Use pdf_styles_narrow.css (0.1in margins; now the default anyway)
   --keep-html   Keep intermediate HTML (Playwright only)
   -h, --help    Show this help
 
@@ -180,8 +180,15 @@ if [[ "$USE_NARROW" == true ]]; then
         exit 1
     fi
     CSS_ARG="$CSS_FILE"
-elif [[ -f "$WORKSPACE_DIR/pdf_styles.css" ]]; then
-    CSS_ARG="$WORKSPACE_DIR/pdf_styles.css"
+else
+    # Previous default (wider margins):
+    # if [[ -f "$WORKSPACE_DIR/pdf_styles.css" ]]; then
+    #     CSS_ARG="$WORKSPACE_DIR/pdf_styles.css"
+    # fi
+    # Markdown default is now narrow (same as generate_pdf_playwright.sh).
+    if [[ -f "$WORKSPACE_DIR/pdf_styles_narrow.css" ]]; then
+        CSS_ARG="$WORKSPACE_DIR/pdf_styles_narrow.css"
+    fi
 fi
 
 SINGLE_FLAGS=()

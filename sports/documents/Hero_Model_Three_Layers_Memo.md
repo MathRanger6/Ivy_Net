@@ -1,25 +1,28 @@
 # Hero inverted-U — three model layers (v1)
 
-**Date:** 2026-07-20  
+**Date:** 2026-07-20 · **Vocabulary sync:** 2026-07-28  
 **Audience:** Charles + Alex read-through  
 **Canonical hero folder:** `sports/datasets/mbb/exports_inverted_u_v0/alex_side_by_side_v0/`  
-**Related:** [`05_Model_Nesting_Note_v1.md`](../../5-Manuscript/05_Model_Nesting_Note_v1.md), [`30_Alex_Gates_inform_status_outline.md`](../../3-Master_Plan/30_Alex_Gates_inform_status_outline.md), [`../../3-Master_Plan/BINDING_Selection_is_its_own_step.md`](../../3-Master_Plan/BINDING_Selection_is_its_own_step.md)
+**Related:** [`05_Model_Nesting_Note_v1.md`](../../5-Manuscript/05_Model_Nesting_Note_v1.md), [`30_Alex_Gates_inform_status_outline.md`](../../3-Master_Plan/30_Alex_Gates_inform_status_outline.md), [`BINDING_Selection_is_its_own_step.md`](../../3-Master_Plan/BINDING_Selection_is_its_own_step.md), [`re_entry/02_Three_Kinds_of_Model.md`](../../3-Master_Plan/re_entry/02_Three_Kinds_of_Model.md)
 
 ---
 
-## 0. BINDING — selection is its own step (Charles #1 confusion)
+## 0. BINDING — environment ≠ advancement; score ≠ select
 
-**Do not merge** “describe the peer environment” with “who wins the scarce slot.”
+**Do not merge** “describe the peer environment” with “who wins the scarce slot.” Inside advancement, **do not call the score “selection.”**
 
 | Mechanism | Object | Question |
 |-----------|--------|----------|
 | **Environment** | `L_net = B(·) − D(·)` | How do peers help vs hurt (development, visibility, crowding around you)? |
-| **Selection** | Alex `S_i = A_i − λ·L_C` | **Who gets drafted?** Congestion enters the **advancement rule**. |
+| **Scoring** | Alex `S_i = A_i − λ·L_C` | How do we **rank** candidates? (**λ** lives here.) |
+| **Selection** | Winner rule (v1: **top K**) | Given ranks, **who wins** the scarce slot? |
 
-- **Hero (Layer A):** outcome only — draft rate vs pool quality. Does **not** identify environment vs selection channel.
-- **538D (Layer C):** makes **selection explicit** — rank by score → top **K**; knockout = talent-only vs congestion-in-score.
+**Unified nest:** `S_i = A_i + λ(B − D) = A_i − λ·L_C` when `(B − D) = −L_C` for the ranking channel. Knockout: `λ = 0` ⇒ `S_i = A_i`.
 
-*The hero describes outcomes; Alex’s equation describes who gets selected; the sim tests congestion in the **selection rule**.*
+- **Hero (Layer A):** outcome only — draft rate vs pool quality. Does **not** identify environment vs advancement channel.
+- **540 / Pass A (Layer C):** makes **score → select** explicit — rank by score → top **K**; knockout = talent-only score vs congestion-in-score.
+
+*The hero describes outcomes; `L_net` is the peer environment; advancement = score then select; the sim tests congestion in the score under a fixed winner rule.*
 
 ---
 
@@ -51,8 +54,8 @@ All Layer A/C comparisons use **this** empirical spec unless explicitly noted as
 | Layer | Object | Repo anchor | What a “pass” proves | What it does **not** prove |
 |-------|--------|-------------|----------------------|----------------------------|
 | **A. Phenomenological** | `Y ~ β₀ + β₁·poolq_loo + β₂·poolq_loo²` | `530` / `panel_build.draft_poolq_quadratic_coeffs` | Inverted curvature in the **real panel** on the hero estimand | Mechanism; that NBA uses this score |
-| **B. Structural (theory)** | **Two parts:** (1) `L_net = B(·) − D(·)` environment; (2) Alex `S_i = A_i − λ·L_C` **selection rule** | Nesting note §2–3 | Environment help/hurt **and** **D enters selection** (separate step) | Separate estimation of B(Q) and D(Q) in v1; hero ≠ selection equation |
-| **C. Generative (sim)** | Soft assign → score → top-K | `538D` CELL 10–12, `tier1_generative_eda.py` | **Congestion in the score** changes selection curves; **talent-only fails** | Bin-for-bin reproduction of empirical `poolq_loo` ventiles |
+| **B. Structural (theory)** | **Three parts:** (1) `L_net = B − D` environment; (2) Alex `S_i` **scoring**; (3) winner rule **select** | Nesting note §2–3; BINDING | Environment help/hurt **and** **D may enter the score**; select is separate | Separate estimation of B(Q) and D(Q) in v1; hero ≠ scoring equation |
+| **C. Generative (sim)** | **Assign (`ρ`) → score (`λ`) → select (top K)** | `540_READ_ME_SIM.md`, `540_three_step_sim.ipynb`, `tier1_*.py` | **Congestion in the score** changes who gets selected; **talent-only score fails** | Bin-for-bin reproduction of empirical `poolq_loo` ventiles |
 
 **Alex side-by-side (v1):** Layer **A hero PNG** + Layer **C sim PNG** on **same Y** (advancement rate), **honest X** (empirical LOO quality vs sim LOO bins), plus limitation sentence below.
 
@@ -62,23 +65,27 @@ All Layer A/C comparisons use **this** empirical spec unless explicitly noted as
 
 ### Layer A — regression on real rows
 
-- Filter panel to hero estimand → OLS `Y_draft ~ 1 + poolq_loo + poolq_sq`.
-- **Pass:** `β₂ < 0` (concave); optional overlay tracks ventile bin means.
+- Filter panel to hero estimand → OLS `Y_draft ~ 1 + poolq_loo + poolq_sq` (**LPM** = linear probability model, not linear programming).
+- **Pass:** `β₂ < 0` (fitted curve **concave down** / inverted-U tendency); optional overlay tracks ventile bin means.
+- **What the quadratic buys you:** a signed curvature claim (`β₂`) plus one turning point `Q* = −β₁/(2β₂)` (local max if `β₂ < 0`). **Not** inflection points (need richer than quadratic). Claims are about the **fitted** curve; hero **bins** stay the stylized fact. Not mechanism.
 - **Not required:** R², causal interpretation, or match to sim.
 
 ### Layer B — prose + ingredient knockouts
 
 - No single estimated formula in v1.
 - **Part 1:** B − D frames the **environment** (help vs hurt among peers).
-- **Part 2:** Alex score frames **selection** — who gets the slot — as its **own step**; congestion enters the **selection rule**, not “the whole model.”
-- **Pass:** Narrative consistency + sim shows λ=0 (ability-only **selection**) **fails** the generative congestion story.
+- **Part 2:** Alex score frames **ranking** — congestion enters the **score**, not “the whole model.”
+- **Part 3:** Top K (or later stochastic draw) is the **winner rule**.
+- **Pass:** Narrative consistency + sim shows λ=0 (ability-only **score**, same top-K) **fails** the generative congestion story.
 
 ### Layer C — simulation
 
-- Draw synthetic league → assign rosters → rank by score → select top **K** → bin by **`poolq_loo`** (16 quantile).
-- **Knockout A (talent-only):** `score_mode='ability'` → **monotone** selection rate on `poolq_loo` (bin 1 ~0.7% → bin 16 ~28%); no elite dip.
-- **Knockout B (congestion):** `score_mode='loo_gap_plus_ability'`, `loo_pool_l_mode='crowding_smooth'`, `w=0.5` → elite-tail **compression** (bin 16 ~16% vs ~28% talent-only); not pointwise hero match.
-- **Script:** `sports/scripts/hero_model_reset_bundle.py` writes CSV + side-by-side PNG.
+- Draw synthetic league → **assign** rosters (`ρ`) → **score** → **select** top **K** → bin by **`poolq_loo`** (16 quantile).
+- **Pass A (talent-only score):** `score_mode='ability'` / `λ = 0` → **monotone** selection rate on `poolq_loo` (bin 1 ~0.7% → bin 16 ~28%); no elite dip.
+- **Pass A (congestion in score):** `score_mode='loo_gap_plus_ability'`, `loo_pool_l_mode='crowding_smooth'`, `w=0.5` → elite-tail **compression** (bin 16 ~16% vs ~28% talent-only); not pointwise hero match.
+- **Pass B (`ρ` ablation):** low / moderate / high assortativity + sort-and-chop diagnostic → `alex_rho_ablation_v0/` (assignment plumbing, not the headline theorem).
+- **Scripts:** `sports/scripts/hero_model_reset_bundle.py` (Pass A); `sports/scripts/540_rho_ablation_bundle.py` (Pass B).
+- **Archived labs:** 538D etc. under `sports/archive/` — historical source; daily workspace is **540**.
 
 ---
 
@@ -87,9 +94,9 @@ All Layer A/C comparisons use **this** empirical spec unless explicitly noted as
 | Strategy | Use for | Procedure |
 |----------|---------|-----------|
 | **Bottom-up** | Layer A | Start quadratic → decompose Q only at Rung 2.5 (`poolq_loo` vs `crowding_smooth` in CELL 5d) |
-| **Top-down** | Layer C | Full generative stack → zero λ / ability-only / drop assignment knobs → record what breaks |
+| **Top-down** | Layer C | Full generative stack → zero λ / ability-only score / change `ρ` → record what breaks |
 
-Use **bottom-up first** for the hero; **top-down** for 538D mechanism strip-down.
+Use **bottom-up first** for the hero; **top-down** for 540 mechanism strip-down.
 
 ---
 
@@ -97,14 +104,17 @@ Use **bottom-up first** for the hero; **top-down** for 538D mechanism strip-down
 
 | Knob | Role | v1 gate? |
 |------|------|----------|
-| **λ / w on L_C in score** | Core mechanism | **Yes** |
-| **Top-K selection** | Scarcity | **Yes (conceptual)** |
-| **Soft assignment (τ, T_j)** | Realistic pools | Helpful, not theorem |
-| **Assortative sort-and-chop overlay** | Diagnostic (Plot A) | No |
-| **Faithful-538 empirical team sweeps** | Realism stretch | **No — see §6** |
+| **λ / w on L_C in score** | Core mechanism | **Yes** (Pass A done) |
+| **Top-K selection** | Scarcity (winner rule) | **Yes (conceptual)** |
+| **Soft assignment (`ρ`, T_j)** | Realistic pools | Helpful, not theorem (Pass B diagnostic) |
+| **Sort-and-chop overlay** | Hard assortative diagnostic | No — not `ρ → ∞` |
+| **Preferential attachment** | Boolean, default off | No — stretch |
+| **Faithful historical team sweeps** | Realism stretch | **No — see §6** |
 | **Bin-for-bin LOO match to hero** | North-star R&D | **No — see §6** |
 
-**Path II (locked):** Generative figure may bend on **LOO `poolq_loo` bins** (CELL 12 default) while empirical hero is the **replicated fact** on the same conditioning object — still **not** claiming pointwise match without a dedicated calibration pass.
+**Notation:** User-facing assignment knob is **`ρ`**. Legacy **`τ`** (temperature) appears only in archived docs. Soft crowding inside `L_C` ≠ assignment softness ≠ selection noise.
+
+**Path II (locked):** Generative figure may bend on **LOO `poolq_loo` bins** while empirical hero is the **replicated fact** on the same conditioning object — still **not** claiming pointwise match without a dedicated calibration pass.
 
 ---
 
@@ -113,9 +123,9 @@ Use **bottom-up first** for the hero; **top-down** for 538D mechanism strip-down
 Do **not** block Alex draft or side-by-side on:
 
 1. **Bin-for-bin replication** of hero ventile draft rates from sim on `poolq_loo`.
-2. **Rivanna / faithful_538** full sweeps (`outputs/simulation_sweeps/faithful_538_sweep*`) until minimal λ + K story is documented.
+2. **Rivanna / faithful** full sweeps until minimal score→select story stays locked.
 3. **Separate B(Q) and D(Q) estimation** on one axis.
-4. **Assortativity grids**, empirical team cloning, HS binning, multiplicative rewrite.
+4. **Dense assortativity grids**, preferential attachment on, empirical team cloning, HS binning, multiplicative rewrite.
 
 These remain **parallel R&D** after the minimal POC bundle is frozen.
 
@@ -123,16 +133,16 @@ These remain **parallel R&D** after the minimal POC bundle is frozen.
 
 ## 7. Limitation sentence (Alex slide / manuscript §5)
 
-> The empirical stylized fact is defined on **leave-one-out pool quality** among teammates; the minimal generative proof-of-concept selects on a **score that penalizes leave-one-out viable-peer congestion** and plots binned **selection rates on the same LOO quality axis**. We do **not** claim bin-for-bin reproduction of the empirical ventile draft rates in v1; we claim that **talent-only selection is insufficient** and that **congestion in the score** can bend advancement curves in a disciplined artificial league.
+> The empirical stylized fact is defined on **leave-one-out pool quality** among teammates; the minimal generative proof-of-concept **scores** with a term that penalizes leave-one-out viable-peer congestion, **selects** top K, and plots binned **selection rates on the same LOO quality axis**. We do **not** claim bin-for-bin reproduction of the empirical ventile draft rates in v1; we claim that **talent-only scoring is insufficient** and that **congestion in the score** can bend advancement curves in a disciplined artificial league.
 
 (Source: nesting note §4; shortened for slides.)
 
 ---
 
-## 8. Keepers vs reorder (Jul 2026 reset)
+## 8. Keepers vs reorder (Jul 2026 reset · sync Jul 28)
 
-**Keep:** `530` pipeline, hero triplet, nesting note, 538D CELL 10–12, Pertinent Thoughts sensitivities, `alex_side_by_side_v0/` exports.
+**Keep:** `530` pipeline, hero triplet, nesting note, BINDING, re_entry 00–03, **540** three-step sim, Pass A/B exports, Pertinent Thoughts sensitivities, `alex_side_by_side_v0/` / `alex_rho_ablation_v0/`.
 
-**Reorder claims:** Phenomenon first (hero) → minimal sim ingredient (λ) → theory prose — not “one formula does everything.”
+**Reorder claims:** Phenomenon first (hero) → minimal score ingredient (λ) → theory prose — not “one formula does everything.” Keep **score ≠ select** in every write-up.
 
-**Deliverables from this reset:** this memo, `lpm_hero_coefficients.txt`, generative knockout CSVs, `inverted_u_side_by_side_empirical_vs_generative.png` in `alex_side_by_side_v0/`.
+**Deliverables from this reset:** this memo, `lpm_hero_coefficients.txt`, generative knockout CSVs, `inverted_u_side_by_side_empirical_vs_generative.png` in `alex_side_by_side_v0/`, ρ ablation bundle in `alex_rho_ablation_v0/`.

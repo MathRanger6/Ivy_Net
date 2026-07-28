@@ -1,18 +1,23 @@
-"""Generative pool-assignment defaults for Tier 1 (**538**, not **537**).
+"""Generative defaults for Tier 1 / **540** soft-assignment + score/select.
+
+==============================================================================
+FOR LATER CHARLES
+==============================================================================
+This is the knob file imported by Pass A/B bundles and by tier1_pool_assignment.
+User-facing assignment: ASSIGNMENT_RHO (ρ). Scale: ASSIGNMENT_SIGMA (default 0.65).
+Score: SELECTION_SCORE_MODE, LOO_POOL_L_MODE, LOO_GAP_WEIGHT (w / λ story).
+Winner rule: N_SELECTED + WINNER_SELECTION (C = top K).
+
+Daily runners: sports/scripts/hero_model_reset_bundle.py,
+               sports/scripts/540_rho_ablation_bundle.py
+Do not open tier1_cell10_playground_run.py for re-entry checklist work.
+==============================================================================
 
 **537** (`sim_config.py` + Cell 10 widgets) stays the legacy simulation lab (sort-and-chop,
-promotion-score experiments). This file holds parameters for the **new** soft-assignment
-story calibrated against **`530_sports_pipeline.ipynb` CELLs 5–9**.
+promotion-score experiments). This file holds parameters for soft-assignment calibrated
+against **`530_sports_pipeline.ipynb` CELLs 5–9** (overlap / pool SD forensics).
 
 Design: `sports/documents/Tier1_Presorting_Design_Note.md`
-
-When 538 grows generative cells, import this module the same way 537 imports `sim_config.py`:
-
-    from pathlib import Path
-    import importlib.util
-    spec = importlib.util.spec_from_file_location("tier1_sim_config", Path("sports/tier1_sim_config.py"))
-    mod = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(mod)
 """
 
 # --- Scope ---------------------------------------------------------------------

@@ -97,8 +97,12 @@ if [ -n "$CSS_FILE_ARG" ]; then
         CSS_FILE="$CSS_FILE_ARG"
     fi
 else
-    if [ -f "$WORKSPACE_DIR/pdf_styles.css" ]; then
-        CSS_FILE="$WORKSPACE_DIR/pdf_styles.css"
+    # Previous default (wider margins):
+    # if [ -f "$WORKSPACE_DIR/pdf_styles.css" ]; then
+    #     CSS_FILE="$WORKSPACE_DIR/pdf_styles.css"
+    # fi
+    if [ -f "$WORKSPACE_DIR/pdf_styles_narrow.css" ]; then
+        CSS_FILE="$WORKSPACE_DIR/pdf_styles_narrow.css"
     fi
 fi
 

@@ -1,3 +1,23 @@
+# =============================================================================
+# LEGACY — 538 CELL 10 widget playground (NOT the 540 re-entry daily path)
+# =============================================================================
+# What this file is
+#   ipywidgets UI formerly exec()'d from archived 538 / 538D CELL 10. Plot A
+#   (interval overlap) + Plot B (selection curve) + knobs for τ-era assignment
+#   and score modes. Touched during Jul 2026 ρ work because engines changed —
+#   that does NOT mean it is on the CHARLES_CHECKLIST re-entry path.
+#
+# What to use instead (re-entry)
+#   sports/540_READ_ME_SIM.md
+#   sports/scripts/hero_model_reset_bundle.py     # Pass A
+#   sports/scripts/540_rho_ablation_bundle.py     # Pass B
+#   sports/540_three_step_sim.ipynb               # thin display / optional re-run
+#   sports/tier1_pool_assignment.py              # engines (shared)
+#
+# Open this file only if you need the old interactive lab. Do not extend it
+# for new Alex deliverables.
+# =============================================================================
+#
 # Executed by 538 notebook CELL 10 via exec(..., globals()).
 # Generative pool assignment (Thread A) — not 537 legacy score playground.
 

@@ -1,13 +1,26 @@
 # Read me first — sim re-entry (540, July 2026)
 
-**Last synced:** 2026-07-27 — ρ assortativity, archive manifest, Pass B ablation spec.
+**Last synced:** 2026-07-28 — ρ assortativity; **score ≠ select** wording; file map for later Charles.
 
-**OPORD:** [`../3-Master_Plan/re_entry/model_OPORD.md`](../3-Master_Plan/re_entry/model_OPORD.md)
+**OPORD:** [`../3-Master_Plan/re_entry/model_OPORD.md`](../3-Master_Plan/re_entry/model_OPORD.md)  
+**Your checklist:** [`../3-Master_Plan/re_entry/CHARLES_CHECKLIST.md`](../3-Master_Plan/re_entry/CHARLES_CHECKLIST.md)
 
 If you feel lost: read [`../3-Master_Plan/re_entry/00_READ_ME_FIRST.md`](../3-Master_Plan/re_entry/00_READ_ME_FIRST.md) (docs 01–03) before opening sim code.
 
 ---
 
+## What to open vs what to ignore
+
+| Use daily (re-entry) | Ignore for daily work |
+|----------------------|------------------------|
+| This file + `540_three_step_sim.ipynb` | `tier1_cell10_playground_run.py` (**LEGACY** 538 widget UI) |
+| `scripts/hero_model_reset_bundle.py` (Pass A) | Archived notebooks under `sports/archive/` |
+| `scripts/540_rho_ablation_bundle.py` (Pass B) | `539_alex_model.ipynb` (older Alex lab; not 540 path) |
+| `tier1_pool_assignment.py`, `tier1_generative_eda.py`, `tier1_sim_config.py` | Extending CELL 10 widgets |
+
+Engines (`tier1_*`) are **shared libraries**. Bundles are **thin runners**. Playground = old UI around the same engines.
+
+---
 ## Revolution vs evolution
 
 | Do | Don't |
@@ -23,15 +36,15 @@ Archived notebooks in `sports/archive/` are **SCOUT-era lab reference** — read
 ## Charles's three-step pipeline
 
 1. **Assign** — build rosters (ρ or sort-and-chop)  
-2. **Score** — **S_i = A_i − λ·L_C** (Alex v1: **(B−D)=−L_C** in selection)  
-3. **Draft** — top **K** by **S_i**
+2. **Score** — **S_i = A_i − λ·L_C** (Alex v1: **(B−D)=−L_C** **in the score**; **λ** lives here)  
+3. **Select** — winner rule: top **K** by **S_i** (later: soft / stochastic draw)
 
 **Knockouts (separate experiments):**
 
 | Pass | What toggles | Status |
 |------|--------------|--------|
-| **A** | λ=0 vs congestion in **S_i** | Done → `alex_side_by_side_v0/` |
-| **B** | ρ low / ρ high / sort-and-chop; **fix** selection | `540_rho_ablation_bundle.py` |
+| **A** | λ=0 vs congestion in **S_i** (winner rule fixed) | Done → `alex_side_by_side_v0/` |
+| **B** | ρ low / ρ high / sort-and-chop; **fix score + select** | `540_rho_ablation_bundle.py` |
 
 ---
 
