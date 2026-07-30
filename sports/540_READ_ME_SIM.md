@@ -1,11 +1,13 @@
 # Read me first — sim re-entry (540, July 2026)
 
-**Last synced:** 2026-07-28 — ρ assortativity; **score ≠ select** wording; file map for later Charles.
+**Last synced:** 2026-07-30 — ρ assortativity; **score ≠ select**; file map; **point to re_entry doc 04 before shorthand**.
 
 **OPORD:** [`../3-Master_Plan/re_entry/model_OPORD.md`](../3-Master_Plan/re_entry/model_OPORD.md)  
 **Your checklist:** [`../3-Master_Plan/re_entry/CHARLES_CHECKLIST.md`](../3-Master_Plan/re_entry/CHARLES_CHECKLIST.md)
 
-If you feel lost: read [`../3-Master_Plan/re_entry/00_READ_ME_FIRST.md`](../3-Master_Plan/re_entry/00_READ_ME_FIRST.md) (docs 01–03) before opening sim code.
+**Before this file’s knockout table:** read [`../3-Master_Plan/re_entry/04_Pass_A_and_Pass_B_in_Plain_English.md`](../3-Master_Plan/re_entry/04_Pass_A_and_Pass_B_in_Plain_English.md) — full sentences on Pass A/B, empirical vs simulated, assignment, and which scripts to run. This README is the **contract / shorthand** after that.
+
+If you feel lost: read [`../3-Master_Plan/re_entry/00_READ_ME_FIRST.md`](../3-Master_Plan/re_entry/00_READ_ME_FIRST.md) (docs 01–04) before opening sim code.
 
 ---
 
@@ -39,13 +41,14 @@ Archived notebooks in `sports/archive/` are **SCOUT-era lab reference** — read
 2. **Score** — **S_i = A_i − λ·L_C** (Alex v1: **(B−D)=−L_C** **in the score**; **λ** lives here)  
 3. **Select** — winner rule: top **K** by **S_i** (later: soft / stochastic draw)
 
-**Knockouts (separate experiments):**
+## Knockouts (shorthand — only after doc 04)
+
+Full sentences: [`../3-Master_Plan/re_entry/04_Pass_A_and_Pass_B_in_Plain_English.md`](../3-Master_Plan/re_entry/04_Pass_A_and_Pass_B_in_Plain_English.md).
 
 | Pass | What toggles | Status |
 |------|--------------|--------|
-| **A** | λ=0 vs congestion in **S_i** (winner rule fixed) | Done → `alex_side_by_side_v0/` |
-| **B** | ρ low / ρ high / sort-and-chop; **fix score + select** | `540_rho_ablation_bundle.py` |
-
+| **A** | λ=0 vs congestion in **S_i** (winner rule fixed) | Re-run yourself → `alex_side_by_side_v0/` |
+| **B** | ρ low / ρ high / sort-and-chop; **fix score + select** | Re-run yourself → `540_rho_ablation_bundle.py` |
 ---
 
 ## Three-step assignment (step 1 only)

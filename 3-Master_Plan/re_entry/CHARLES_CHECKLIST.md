@@ -12,7 +12,7 @@
 4. **Do not rebuild** the empirical hero (Layer A panel) unless you choose to later.  
 5. **Do re-run** generative Pass A and Pass B yourself so you own the sim story.
 
-**Companion reads (already done — check when true):** docs `00`–`03`, hero reset plan, Three Layers memo. Optional later: `Model.pdf`, `540_READ_ME_SIM.md`.
+**Companion reads (check when true):** docs `00`–`03`, then **`04_Pass_A_and_Pass_B_in_Plain_English.md` before any sim redo**. Optional depth: hero reset plan, Three Layers memo, `Model.pdf`. After doc 04, optional shorthand: `540_READ_ME_SIM.md`.
 
 ---
 
@@ -50,7 +50,7 @@ You are **not** rebuilding these. Treat as locked inputs.
 
 | Status | Artifact | Path |
 |--------|----------|------|
-| Use as-is | Hero PNG | `sports/datasets/mbb/exports_inverted_u_v0/alex_side_by_side_v0/inverted_u_empirical_ppm_poolq_loo_16quantile_winsor0199_min20_2011.png` |
+| Use as-is | Hero PNG | `sports/datasets/mbb/exports_inverted_u_v0/alex_side_by_side_v0/inverted_u_empirical_ppm_poolq_loo_16quantile_winsor0199_min20_2011.png` (also copies in `re_entry/HEROs/`) |
 | Use as-is | Hero CSV | `…/binned_draft_rate_empirical_ppm_poolq_loo_16quantile_winsor0199_min20_2011.csv` |
 | Optional open | LPM coefs | `…/lpm_hero_coefficients.txt` |
 
@@ -60,15 +60,28 @@ You are **not** rebuilding these. Treat as locked inputs.
 
 ---
 
-## 3. Sim redo — Pass A (λ knockout) — **you run this**
+## 2b. Bridge — read before any sim redo (required)
 
-**Question:** Does congestion **in the score** change who gets selected (same top-K)?
+**Stop.** Do not open the 540 notebook expecting it to teach Pass A/B. Read the plain-English bridge first.
 
-**What the code is:** Thin script calling **`tier1_*` engines** (not a from-scratch DGP). New surface = `540_*` + bundles; engines = recycled + ρ.
+| Done | Step | Proof |
+|------|------|-------|
+| [ ] | Read [`04_Pass_A_and_Pass_B_in_Plain_English.md`](04_Pass_A_and_Pass_B_in_Plain_English.md) | |
+| [ ] | Can say in your own words: hero = empirical; Pass A/B = simulated league | |
+| [ ] | Can say what Pass A changes vs what Pass B changes | |
+| [ ] | Optional after 04: skim `sports/540_READ_ME_SIM.md` (shorthand OK now) | |
+
+---
+
+## 3. Sim redo — Pass A — **you run this**
+
+**Full explanation:** doc **04**. Short reminder: same fake league setup and same top-K; one arm scores on ability only; the other puts congestion in the score.
+
+**What you run:** `python sports/scripts/hero_model_reset_bundle.py` (from repo root).  
+**Notebook:** `sports/540_three_step_sim.ipynb` is optional display / can call the scripts — it is **not** the full simulator by itself.
 
 | Done | Step | What to do | Proof |
 |------|------|------------|-------|
-| [ ] | Read sim contract | Open `sports/540_READ_ME_SIM.md` (assign → score → select; ρ; Pass A/B) | |
 | [ ] | Run Pass A bundle | From **repo root:** `python sports/scripts/hero_model_reset_bundle.py` | date + exit 0 |
 | [ ] | Inspect talent-only CSV | `alex_side_by_side_v0/generative_knockout_talent_only_16quantile.csv` — monotone rise? | |
 | [ ] | Inspect congestion CSV | `…/generative_knockout_congestion_16quantile.csv` — elite compression vs talent-only? | |
@@ -80,9 +93,9 @@ You are **not** rebuilding these. Treat as locked inputs.
 
 ---
 
-## 4. Sim redo — Pass B (ρ ablation) — **you run this**
+## 4. Sim redo — Pass B — **you run this**
 
-**Question:** Does assignment assortativity (**ρ**) move the readout when **score + top-K are fixed**?
+**Full explanation:** doc **04**. Short reminder: score + top-K fixed; only assignment assortativity (ρ) / sort-and-chop changes.
 
 | Done | Step | What to do | Proof |
 |------|------|------------|-------|
@@ -147,6 +160,6 @@ Park list: [`PARKED_FOR_LATER.md`](PARKED_FOR_LATER.md).
 
 ## Next action right now
 
-If sections **0–1** are checked: start **§3** — open `540_READ_ME_SIM.md`, then run Pass A from repo root.
+If sections **0–2** are checked: read **§2b / doc 04**, then start **§3** (Pass A script).
 
 When stuck: return to [`00_READ_ME_FIRST.md`](00_READ_ME_FIRST.md), then come back **here**.

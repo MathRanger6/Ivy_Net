@@ -28,11 +28,13 @@ You do **not** need: bin-for-bin sim match, Rivanna sweeps, **ρ** calibrated to
 | **Empirical phenomenon** | **Naïve:** P(draft \| own **A_i**) ≈ monotone; **Hero:** P(draft \| **PoolQ_LOO**) with tail dip | Done (530; doc 01) |
 | **Three-step generative** | **(1)** assign (**ρ**); **(2)** **score** **`S_i`**; **(3)** **select** top K | `540_*` + `Model.pdf` |
 | **Unified score** | **`S_i = A_i + λ(B−D)`**; Alex v1: **(B−D)=−L_C** ⇒ **`S_i = A_i − λ·L_C`** | Locked (doc 02) |
-| **Headline sim test** | **Knockout λ=0** (**S_i = A_i**) vs congestion in **score** — same league, same top-K | **Done** (`hero_model_reset_bundle.py`) |
-| **Side-by-side + limits** | Empirical + generative PNG; no bin-for-bin claim | **Done** (export folder) |
-| **ρ ablation** | Vary assignment assortativity, **fix score + winner rule** — “is sorting involved?” | **Pass B** — `540_rho_ablation_bundle.py` |
+| **Headline sim test** | **Knockout λ=0** (**S_i = A_i**) vs congestion in **score** — same league, same top-K | **Pass A** — see [`04_Pass_A_and_Pass_B_in_Plain_English.md`](04_Pass_A_and_Pass_B_in_Plain_English.md); script `hero_model_reset_bundle.py` |
+| **Side-by-side + limits** | Empirical + generative PNG; no bin-for-bin claim | Export folder (after you re-run Pass A) |
+| **ρ ablation** | Vary assignment assortativity, **fix score + winner rule** — “is sorting involved?” | **Pass B** — doc **04**; script `540_rho_ablation_bundle.py` |
 
-**One line for Alex:** *Hero is the stylized fact; the minimal generative proof is congestion **in the score** (Pass A knockout done); **ρ** ablation tests whether assignment sorting moves the readout with score and top-K held fixed.*
+**Before any Pass A/B shorthand:** read [`04_Pass_A_and_Pass_B_in_Plain_English.md`](04_Pass_A_and_Pass_B_in_Plain_English.md).
+
+**One line for Alex:** *Hero is the stylized fact; the minimal generative proof is congestion **in the score** (Pass A); **ρ** ablation tests whether assignment sorting moves the readout with score and top-K held fixed.*
 
 ---
 

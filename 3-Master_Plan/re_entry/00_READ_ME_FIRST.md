@@ -1,8 +1,8 @@
 # Read me first — re-entry (July 2026)
 
-**Last synced:** 2026-07-28 — score ≠ select wording; docs 01–03 + slide + sim OPORD; **ρ** via `540_*`.
+**Last synced:** 2026-07-30 — added doc **04** (Pass A/B plain English before shorthand).
 
-**If you feel lost:** you are in the right place. **Stop opening other project folders** until you finish the three documents below in order.
+**If you feel lost:** you are in the right place. **Stop opening other project folders** until you finish the documents below in order.
 
 This folder exists because the rest of the repo grew into a **reference library** for agents and for “already immersed” you. That library is still valuable. It is **not** the right entry point while you are re-orienting under time pressure.
 
@@ -18,7 +18,8 @@ Read these **in order**. Each is written to stand alone — you should not need 
 |-------|----------|------|--------------|
 | **1** | [01_The_Problem_in_Plain_English.md](01_The_Problem_in_Plain_English.md) | ~15 min | What the dissertation is asking; what the basketball “hero” curve is |
 | **2** | [02_Three_Kinds_of_Model.md](02_Three_Kinds_of_Model.md) | ~25 min | Why “the model” confused you; three separate jobs (describe / explain / simulate) |
-| **3** | [03_Three_Day_Basketball_Focus.md](03_Three_Day_Basketball_Focus.md) | ~10 min | What “done” means in the next 72 hours; what is explicitly out of scope |
+| **3** | [03_Three_Day_Basketball_Focus.md](03_Three_Day_Basketball_Focus.md) | ~10 min | What “done” means; what is out of scope |
+| **4** | [04_Pass_A_and_Pass_B_in_Plain_English.md](04_Pass_A_and_Pass_B_in_Plain_English.md) | ~15 min | **Before any sim redo:** what Pass A and Pass B are, in sentences (empirical vs simulated, assignment, code map) |
 
 **PDF:** from repo root:
 
@@ -26,6 +27,7 @@ Read these **in order**. Each is written to stand alone — you should not need 
 ./scripts/convert_single_md_to_pdf.sh 3-Master_Plan/re_entry/01_The_Problem_in_Plain_English.md
 ./scripts/convert_single_md_to_pdf.sh 3-Master_Plan/re_entry/02_Three_Kinds_of_Model.md
 ./scripts/convert_single_md_to_pdf.sh 3-Master_Plan/re_entry/03_Three_Day_Basketball_Focus.md
+./scripts/convert_single_md_to_pdf.sh 3-Master_Plan/re_entry/04_Pass_A_and_Pass_B_in_Plain_English.md
 ```
 
 ---
