@@ -164,8 +164,7 @@ python sports/scripts/hero_model_reset_bundle.py
 ```
 
 **Where outputs go:**  
-`sports/datasets/mbb/exports_inverted_u_v0/alex_side_by_side_v0/`  
-(side-by-side PNG, knockout CSVs, summary text)
+`3-Master_Plan/re_entry/HEROs_and_PASSes/` (`PASS_A_*` PNG, CSVs, summary text)
 
 ---
 
@@ -208,7 +207,7 @@ python sports/scripts/540_rho_ablation_bundle.py
 ```
 
 **Where outputs go:**  
-`sports/datasets/mbb/exports_inverted_u_v0/alex_rho_ablation_v0/`
+`3-Master_Plan/re_entry/HEROs_and_PASSes/` (`PASS_B_*` PNG, CSVs, summary / README)
 
 ---
 

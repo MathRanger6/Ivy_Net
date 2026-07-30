@@ -2,7 +2,7 @@
 
 **Date:** 2026-07-20 · **Vocabulary sync:** 2026-07-28  
 **Audience:** Charles + Alex read-through  
-**Canonical hero folder:** `sports/datasets/mbb/exports_inverted_u_v0/alex_side_by_side_v0/`  
+**Canonical hero / Pass gallery:** `3-Master_Plan/re_entry/HEROs_and_PASSes/`  
 **Related:** [`05_Model_Nesting_Note_v1.md`](../../5-Manuscript/05_Model_Nesting_Note_v1.md), [`30_Alex_Gates_inform_status_outline.md`](../../3-Master_Plan/30_Alex_Gates_inform_status_outline.md), [`BINDING_Selection_is_its_own_step.md`](../../3-Master_Plan/BINDING_Selection_is_its_own_step.md), [`re_entry/02_Three_Kinds_of_Model.md`](../../3-Master_Plan/re_entry/02_Three_Kinds_of_Model.md)
 
 ---
@@ -83,7 +83,7 @@ All Layer A/C comparisons use **this** empirical spec unless explicitly noted as
 - Draw synthetic league → **assign** rosters (`ρ`) → **score** → **select** top **K** → bin by **`poolq_loo`** (16 quantile).
 - **Pass A (talent-only score):** `score_mode='ability'` / `λ = 0` → **monotone** selection rate on `poolq_loo` (bin 1 ~0.7% → bin 16 ~28%); no elite dip.
 - **Pass A (congestion in score):** `score_mode='loo_gap_plus_ability'`, `loo_pool_l_mode='crowding_smooth'`, `w=0.5` → elite-tail **compression** (bin 16 ~16% vs ~28% talent-only); not pointwise hero match.
-- **Pass B (`ρ` ablation):** low / moderate / high assortativity + sort-and-chop diagnostic → `alex_rho_ablation_v0/` (assignment plumbing, not the headline theorem).
+- **Pass B (`ρ` ablation):** low / moderate / high assortativity + sort-and-chop diagnostic → `HEROs_and_PASSes/PASS_B_*` (assignment plumbing, not the headline theorem).
 - **Scripts:** `sports/scripts/hero_model_reset_bundle.py` (Pass A); `sports/scripts/540_rho_ablation_bundle.py` (Pass B).
 - **Archived labs:** 538D etc. under `sports/archive/` — historical source; daily workspace is **540**.
 
@@ -141,8 +141,8 @@ These remain **parallel R&D** after the minimal POC bundle is frozen.
 
 ## 8. Keepers vs reorder (Jul 2026 reset · sync Jul 28)
 
-**Keep:** `530` pipeline, hero triplet, nesting note, BINDING, re_entry 00–03, **540** three-step sim, Pass A/B exports, Pertinent Thoughts sensitivities, `alex_side_by_side_v0/` / `alex_rho_ablation_v0/`.
+**Keep:** `530` pipeline, hero triplet, nesting note, BINDING, re_entry 00–03, **540** three-step sim, Pass A/B gallery (`HEROs_and_PASSes/`), Pertinent Thoughts sensitivities.
 
 **Reorder claims:** Phenomenon first (hero) → minimal score ingredient (λ) → theory prose — not “one formula does everything.” Keep **score ≠ select** in every write-up.
 
-**Deliverables from this reset:** this memo, `lpm_hero_coefficients.txt`, generative knockout CSVs, `inverted_u_side_by_side_empirical_vs_generative.png` in `alex_side_by_side_v0/`, ρ ablation bundle in `alex_rho_ablation_v0/`.
+**Deliverables from this reset:** this memo; gallery `3-Master_Plan/re_entry/HEROs_and_PASSes/` (`PASS_A_*` LPM / knockout CSVs / side-by-side PNG; `PASS_B_*` ρ ablation).

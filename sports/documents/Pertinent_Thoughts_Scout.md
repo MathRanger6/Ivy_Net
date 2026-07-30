@@ -116,7 +116,7 @@ With **`use_prebuilt_panel_csv=False`**, **`min_minutes`** is applied in **`pane
 - **High floor = star-only sensitivity:** document as “congestion signal requires roster depth variation.”
 - **One-liner for Alex:** “Draft rate rises with LOO teammate quality, then drops in the **highest ventile**; dip stable at 10 and 20 minutes, washes out when we star-select or include full deep bench.”
 
-**Status**: Export PNG/CSV triplet for `{0, 10, 20, 50, 100}` × `{16, 20}` quantile when archiving robustness bundle; copy locked hero to `alex_side_by_side_v0/` when final.
+**Status**: Export PNG/CSV triplet for `{0, 10, 20, 50, 100}` × `{16, 20}` quantile when archiving robustness bundle; locked hero lives in `re_entry/HEROs_and_PASSes/`.
 
 ---
 
@@ -170,7 +170,7 @@ So the **last two equal-width bins are not empty of rows** (301 + 844 = **1,145*
 **Potential placement**:
 
 - Methods (quantile vs equal-width binning choice)
-- Alex slide caption + `alex_side_by_side_v0/` canonical export
+- Alex slide caption + `HEROs_and_PASSes/` gallery export
 - Robustness appendix (equal-width sensitivity with per-bin **n**)
 
 **Key points**:
@@ -179,7 +179,7 @@ So the **last two equal-width bins are not empty of rows** (301 + 844 = **1,145*
 - **Equal-width + many bins + winsorized LOO** → **expect zeros or near-zeros in top bins** even when the quantile hero shows a clean ~1% top-ventile dip.
 - **Sim must match hero binning rule** (16 quantile, same winsor, same **`min_minutes`**) — not just “poolq_loo on both axes.”
 
-**Status**: Hero triplet + side-by-side bundle in `alex_side_by_side_v0/`; see [`Hero_Model_Three_Layers_Memo.md`](Hero_Model_Three_Layers_Memo.md) and `sports/scripts/hero_model_reset_bundle.py`.
+**Status**: Hero triplet + Pass A/B bundle in `re_entry/HEROs_and_PASSes/`; see [`Hero_Model_Three_Layers_Memo.md`](Hero_Model_Three_Layers_Memo.md) and `sports/scripts/hero_model_reset_bundle.py`.
 
 ---
 

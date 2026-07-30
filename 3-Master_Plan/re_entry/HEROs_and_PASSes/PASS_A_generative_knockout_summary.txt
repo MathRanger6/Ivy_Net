@@ -1,6 +1,6 @@
-# Generative knockouts vs hero (2026-07-27)
+# Generative knockouts vs hero (2026-07-30)
 
-Spec: 16 quantile bins on poolq_loo (L_Q); see generative_knockout_meta.json.
+Spec: 16 quantile bins on poolq_loo (L_Q); see PASS_A_generative_knockout_meta.json.
 
 ## Talent-only (score = A_i)
 
@@ -14,4 +14,4 @@ Spec: 16 quantile bins on poolq_loo (L_Q); see generative_knockout_meta.json.
 
 ## Layer A reference (same hero estimand)
 
-- LPM: poolq_sq = -0.0247256 (concave); see lpm_hero_coefficients.txt.
+- LPM: poolq_sq = -0.0247256 (concave); see PASS_A_lpm_hero_coefficients.txt.

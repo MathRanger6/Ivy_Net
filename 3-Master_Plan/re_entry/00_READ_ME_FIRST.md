@@ -50,7 +50,7 @@ When the three layers make sense again, you can optionally open:
 
 - [`Model.pdf`](Model.pdf) / [`Model.pptx`](Model.pptx) — **your one-slide story** (assign → score → select, unified **S_i**, Alex v1 **(B−D)=−L_C**, empirical Naïve/Hero, knockout **λ=0**)
 - `3-Master_Plan/plans/20260721_hero_model_reset.plan.md` — longer working plan (same story, more detail)
-- `sports/datasets/mbb/exports_inverted_u_v0/alex_side_by_side_v0/` — hero + side-by-side PNG, knockout CSVs, limitation caption (paths in doc 03)
+- `3-Master_Plan/re_entry/HEROs_and_PASSes/` — hero + Pass A/B PNGs, CSVs, summaries (paths in doc 03 / checklist)
 
 **Alex v1 minimal model (Jul 2026):** empirical hero + talent baseline; generative **assign → score (`S_i`) → select (top K)** with **λ=0** vs **S_i = A_i − λ·L_C** knockout; side-by-side figure + limitation sentence. **ρ** (assignment assortativity) ablation is optional follow-up — see [`../../sports/540_READ_ME_SIM.md`](../../sports/540_READ_ME_SIM.md) and [`model_OPORD.md`](model_OPORD.md).
 

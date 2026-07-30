@@ -31,8 +31,7 @@
 - `sports/540_READ_ME_SIM.md` + `540_three_step_sim.ipynb` — re-entry sim entry
 - `sports/scripts/hero_model_reset_bundle.py` — Pass A (λ knockout)
 - `sports/scripts/540_rho_ablation_bundle.py` — Pass B (ρ ablation)
-- `sports/datasets/mbb/exports_inverted_u_v0/alex_side_by_side_v0/` — Pass A figure outputs
-- `sports/datasets/mbb/exports_inverted_u_v0/alex_rho_ablation_v0/` — Pass B figure outputs
+- `3-Master_Plan/re_entry/HEROs_and_PASSes/` — Pass A / Pass B / hero gallery outputs
 - `3-Master_Plan/re_entry/Model.pdf` — Charles slide summary (Jul 2026)
 - `3-Master_Plan/re_entry/model_OPORD.md` — sim re-entry execution order
 - `3-Master_Plan/plans/` — plan mirrors for git/Rivanna

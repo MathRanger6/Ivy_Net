@@ -1,0 +1,15 @@
+Alex Pass B caption (ρ assignment ablation)
+
+Same synthetic player abilities across arms; score + winner rule fixed
+(S_i = A_i − 0.5·L_C, smooth viable-peer congestion, then top K).
+Only assignment differs:
+low ρ=0.1, moderate ρ=1.0, high ρ=8.0,
+very high ρ=32.0, and
+sort-and-chop benchmark (537-style max partition assortativity).
+
+Y-axis: mean selection rate by 16 quantile bins on simulated poolq_loo.
+
+Limitation: we show whether roster-formation sorting moves the readout when
+congestion-in-score is held fixed; we do not claim bin-for-bin hero match.
+
+Pass A (λ knockout): PASS_A_* files in this same HEROs_and_PASSes folder.

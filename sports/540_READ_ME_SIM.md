@@ -47,8 +47,8 @@ Full sentences: [`../3-Master_Plan/re_entry/04_Pass_A_and_Pass_B_in_Plain_Englis
 
 | Pass | What toggles | Status |
 |------|--------------|--------|
-| **A** | λ=0 vs congestion in **S_i** (winner rule fixed) | Re-run yourself → `alex_side_by_side_v0/` |
-| **B** | ρ low / ρ high / sort-and-chop; **fix score + select** | Re-run yourself → `540_rho_ablation_bundle.py` |
+| **A** | λ=0 vs congestion in **S_i** (winner rule fixed) | Re-run → `HEROs_and_PASSes/PASS_A_*` |
+| **B** | ρ low / ρ high / sort-and-chop; **fixed score + select** | Re-run → `HEROs_and_PASSes/PASS_B_*` |
 ---
 
 ## Three-step assignment (step 1 only)
@@ -97,8 +97,8 @@ Slug: `empirical_ppm_poolq_loo_16quantile_winsor0199_min20_2011`
 |------|------|
 | Empirical | `530_sports_pipeline.ipynb`, `sports_pipeline/` |
 | Sim engines | `tier1_pool_assignment.py`, `tier1_generative_eda.py`, `tier1_sim_config.py` |
-| Pass A bundle | `scripts/hero_model_reset_bundle.py` → `alex_side_by_side_v0/` |
-| Pass B bundle | `scripts/540_rho_ablation_bundle.py` → `alex_rho_ablation_v0/` |
+| Pass A bundle | `scripts/hero_model_reset_bundle.py` → `re_entry/HEROs_and_PASSes/PASS_A_*` |
+| Pass B bundle | `scripts/540_rho_ablation_bundle.py` → `re_entry/HEROs_and_PASSes/PASS_B_*` |
 | Notebook | `540_three_step_sim.ipynb` |
 | Binding | `3-Master_Plan/BINDING_Selection_is_its_own_step.md` |
 | Slide | `3-Master_Plan/re_entry/Model.pdf` |
@@ -108,12 +108,13 @@ Slug: `empirical_ppm_poolq_loo_16quantile_winsor0199_min20_2011`
 ## Export naming
 
 ```
-sports/datasets/mbb/exports_inverted_u_v0/
-  alex_side_by_side_v0/          # Pass A (λ knockout)
-  alex_rho_ablation_v0/          # Pass B (ρ ablation)
+3-Master_Plan/re_entry/HEROs_and_PASSes/
+  HERO_*                         # empirical hero PNG(s)
+  PASS_A_*                       # λ knockout (PNG, CSVs, summary)
+  PASS_B_*                       # ρ ablation (PNG, CSVs, summary, README)
 ```
 
-Pass B artifacts: `generative_rho_low_16quantile.csv`, `generative_rho_high_16quantile.csv`, `generative_sort_chop_16quantile.csv`, `rho_ablation_summary.txt`, `rho_ablation_caption.txt`, PNG.
+Pass B artifacts: `PASS_B_generative_rho_{low,moderate,high,very_high}_16quantile.csv`, `PASS_B_generative_sort_chop_16quantile.csv`, `PASS_B_rho_ablation_summary.txt`, `PASS_B_rho_ablation_caption.txt`, `PASS_B_README.txt`, `PASS_B_*.png`.
 
 ---
 

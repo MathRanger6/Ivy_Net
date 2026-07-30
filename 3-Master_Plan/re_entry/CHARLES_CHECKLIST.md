@@ -50,9 +50,9 @@ You are **not** rebuilding these. Treat as locked inputs.
 
 | Status | Artifact | Path |
 |--------|----------|------|
-| Use as-is | Hero PNG | `sports/datasets/mbb/exports_inverted_u_v0/alex_side_by_side_v0/inverted_u_empirical_ppm_poolq_loo_16quantile_winsor0199_min20_2011.png` (also copies in `re_entry/HEROs/`) |
-| Use as-is | Hero CSV | `…/binned_draft_rate_empirical_ppm_poolq_loo_16quantile_winsor0199_min20_2011.csv` |
-| Optional open | LPM coefs | `…/lpm_hero_coefficients.txt` |
+| Use as-is | Hero PNG | `re_entry/HEROs_and_PASSes/HERO_inverted_u_empirical_ppm_poolq_loo_16quantile_winsor0199_min20_2011.png` |
+| Use as-is | Hero CSV | `re_entry/HEROs_and_PASSes/PASS_A_binned_draft_rate_empirical_ppm_poolq_loo_16quantile_winsor0199_min20_2011.csv` |
+| Optional open | LPM coefs | `re_entry/HEROs_and_PASSes/PASS_A_lpm_hero_coefficients.txt` |
 
 | Done | Optional (only if you want) | Proof |
 |------|------------------------------|-------|
@@ -83,10 +83,10 @@ You are **not** rebuilding these. Treat as locked inputs.
 | Done | Step | What to do | Proof |
 |------|------|------------|-------|
 | [ ] | Run Pass A bundle | From **repo root:** `python sports/scripts/hero_model_reset_bundle.py` | date + exit 0 |
-| [ ] | Inspect talent-only CSV | `alex_side_by_side_v0/generative_knockout_talent_only_16quantile.csv` — monotone rise? | |
-| [ ] | Inspect congestion CSV | `…/generative_knockout_congestion_16quantile.csv` — elite compression vs talent-only? | |
-| [ ] | Inspect side-by-side PNG | `…/inverted_u_side_by_side_empirical_vs_generative.png` | |
-| [ ] | Read summary + caption | `generative_knockout_summary.txt`, `side_by_side_caption.txt` | |
+| [ ] | Inspect talent-only CSV | `HEROs_and_PASSes/PASS_A_generative_knockout_talent_only_16quantile.csv` — monotone rise? | |
+| [ ] | Inspect congestion CSV | `HEROs_and_PASSes/PASS_A_generative_knockout_congestion_16quantile.csv` — elite compression vs talent-only? | |
+| [ ] | Inspect side-by-side PNG | `HEROs_and_PASSes/PASS_A_inverted_u_side_by_side_empirical_vs_generative.png` | |
+| [ ] | Read summary + caption | `PASS_A_generative_knockout_summary.txt`, `PASS_A_side_by_side_caption.txt` | |
 | [ ] | One-sentence claim (yours) | Write: what Pass A proves / does **not** prove | |
 
 **Pass A done for you when:** you ran the script, looked at both knockout arms + PNG, and can state the claim without reading notes.
@@ -100,9 +100,9 @@ You are **not** rebuilding these. Treat as locked inputs.
 | Done | Step | What to do | Proof |
 |------|------|------------|-------|
 | [ ] | Run Pass B bundle | From **repo root:** `python sports/scripts/540_rho_ablation_bundle.py` | date + exit 0 |
-| [ ] | Inspect arms | CSVs in `alex_rho_ablation_v0/` (low / moderate / high / sort_chop) | |
-| [ ] | Inspect PNG | `…/rho_ablation_selection_by_poolq_loo.png` | |
-| [ ] | Read summary + caption + README | `rho_ablation_summary.txt`, `rho_ablation_caption.txt`, `README.txt` | |
+| [ ] | Inspect arms | `HEROs_and_PASSes/PASS_B_generative_*_16quantile.csv` (low / moderate / high / very_high / sort_chop) | |
+| [ ] | Inspect PNG | `HEROs_and_PASSes/PASS_B_rho_ablation_selection_by_poolq_loo.png` | |
+| [ ] | Read summary + caption + README | `PASS_B_rho_ablation_summary.txt`, `PASS_B_rho_ablation_caption.txt`, `PASS_B_README.txt` | |
 | [ ] | One-sentence claim (yours) | Sorting can matter for pools; **not** the minimal congestion-in-score proof; not hero bin-for-bin | |
 
 **Pass B done for you when:** you ran it and can separate Pass A vs Pass B in one breath.

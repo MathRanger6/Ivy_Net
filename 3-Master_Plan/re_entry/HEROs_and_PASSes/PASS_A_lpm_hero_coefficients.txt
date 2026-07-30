@@ -1,4 +1,4 @@
-# Hero Layer A — quadratic LPM (2026-07-27)
+# Hero Layer A — quadratic LPM (2026-07-30)
 n=62,180 player-seasons after hero filters
 Y_draft=1 count: 1,134
 

@@ -7,7 +7,7 @@ FOR LATER CHARLES — read this block first
 What this file is
   One-shot script that draws ONE synthetic ability / team-target league, then
   re-assigns that same talent under different assignment rules (ρ low / mid /
-  high soft match, plus sort-and-chop). Score and top-K stay FIXED:
+  high / very-high soft match, plus sort-and-chop). Score and top-K stay FIXED:
       S_i = A_i − 0.5·L_C  (crowding_smooth), then select top K.
 
 What this file is NOT
@@ -23,12 +23,14 @@ Why Pass B exists
   Soft kernel: π_ij ∝ exp(−ρ · (A_i−T_j)² / (2σ²)); σ fixed (~0.65).
   ρ=0 → max mixing; ρ↑ → sharper match to T_j.
   sort-and-chop = separate hard benchmark (NOT ρ→∞).
+  Plot tip: set SHOW_SORT_CHOP_ON_FIGURE = False to hide the red spike so soft-ρ
+  curves fill the y-axis (CSV for sort_chop is still written).
 
 Run (repo root)
   python sports/scripts/540_rho_ablation_bundle.py
 
-Outputs
-  sports/datasets/mbb/exports_inverted_u_v0/alex_rho_ablation_v0/
+Outputs (only)
+  3-Master_Plan/re_entry/HEROs_and_PASSes/PASS_B_*
 
 Spec
   sports/540_READ_ME_SIM.md
@@ -50,12 +52,23 @@ import pandas as pd
 
 REPO = Path(__file__).resolve().parents[2]
 SPORTS = REPO / "sports"
-OUT = SPORTS / "datasets/mbb/exports_inverted_u_v0/alex_rho_ablation_v0"
+# Single home for Pass A / Pass B / hero gallery artifacts (no duplicate export folder).
+OUT = REPO / "3-Master_Plan" / "re_entry" / "HEROs_and_PASSes"
+PASS_B_PNG_NAME = "PASS_B_rho_ablation_selection_by_poolq_loo.png"
 HERO_BINS = 16
 HERO_SEED = 42
+# Soft-assignment assortativity ladder (σ fixed ~0.65 in config).
+# Larger ρ → sharper match of A_i to team target T_j. Still soft — not sort-and-chop.
 RHO_LOW = 0.1
-RHO_HIGH = 8.0
 RHO_MODERATE = 1.0
+RHO_HIGH = 8.0
+RHO_VERY_HIGH = 32.0  # near-hard soft assortativity; still ≠ sort_chop
+
+# Plot knob: sort-and-chop spikes (~0.9) squash the soft-ρ curves (often <0.3).
+# False → omit that line from the PNG so the y-axis can rescale to the ρ arms.
+# The sort_chop arm is still RUN and written to CSV either way (science artifact).
+# Set True when you want the crimson benchmark on the same axes again.
+SHOW_SORT_CHOP_ON_FIGURE = False
 
 # (export_label, assignment_method, rho_or_None)
 # soft → soft_assign with assignment_rho; sort_chop → disjoint slices benchmark
@@ -63,6 +76,7 @@ ARMS: list[tuple[str, str, float | None]] = [
     ("rho_low", "soft", RHO_LOW),
     ("rho_moderate", "soft", RHO_MODERATE),
     ("rho_high", "soft", RHO_HIGH),
+    ("rho_very_high", "soft", RHO_VERY_HIGH),
     ("sort_chop", "sort_chop", None),
 ]
 
@@ -172,45 +186,102 @@ def write_summary(out_dir: Path, frames: dict[str, pd.DataFrame]) -> None:
             "- ρ=0 would be uniform mixing; not run here (see 540_READ_ME_SIM.md).",
         ]
     )
-    (out_dir / "rho_ablation_summary.txt").write_text("\n".join(lines) + "\n", encoding="utf-8")
+    (out_dir / "PASS_B_rho_ablation_summary.txt").write_text(
+        "\n".join(lines) + "\n", encoding="utf-8"
+    )
 
 
-def build_figure(out_dir: Path, frames: dict[str, pd.DataFrame]) -> None:
-    """Overlay selection-rate curves for each assignment arm."""
-    fig, ax = plt.subplots(figsize=(9, 4.5))
+def build_figure(
+    out_dir: Path,
+    frames: dict[str, pd.DataFrame],
+    *,
+    assignment_sigma: float,
+) -> None:
+    """Overlay selection-rate curves for each assignment arm.
+
+    Honors SHOW_SORT_CHOP_ON_FIGURE: when False, drop the sort_chop series so the
+    soft-ρ curves are not crushed against the bottom of a 0–1 y-axis.
+
+    assignment_sigma: σ in the soft kernel (fixed across arms; ρ is what varies).
+    """
+    fig, ax = plt.subplots(figsize=(9, 4.8))
     colors = {
         "rho_low": "steelblue",
         "rho_moderate": "seagreen",
         "rho_high": "darkorange",
+        "rho_very_high": "purple",
         "sort_chop": "crimson",
     }
     labels = {
         "rho_low": f"ρ={RHO_LOW} (mixing)",
         "rho_moderate": f"ρ={RHO_MODERATE} (moderate)",
         "rho_high": f"ρ={RHO_HIGH} (assortative)",
+        "rho_very_high": f"ρ={RHO_VERY_HIGH} (very high)",
         "sort_chop": "sort-and-chop (benchmark)",
     }
-    for key, df in frames.items():
+    plot_frames = {
+        k: v
+        for k, v in frames.items()
+        if SHOW_SORT_CHOP_ON_FIGURE or k != "sort_chop"
+    }
+    for key, df in plot_frames.items():
         x = df["bin"].to_numpy(dtype=float) + 1
         y = df["selection_rate"].to_numpy(dtype=float)
         ax.plot(x, y, "o-", lw=2, ms=5, color=colors[key], label=labels[key])
     ax.set_xlabel("Bin (1 = lowest poolq_loo in sim)")
     ax.set_ylabel("Mean Y_selected")
+    title_extra = ""
+    if not SHOW_SORT_CHOP_ON_FIGURE and "sort_chop" in frames:
+        title_extra = "\n(sort-and-chop hidden on plot — CSV still saved)"
     ax.set_title(
         "Pass B — assignment ablation (score + top-K fixed)\n"
         "S_i = A_i − 0.5·L_C | 16 quantile on poolq_loo"
+        + title_extra
     )
     ax.legend(loc="best", fontsize=8)
     ax.set_ylim(bottom=0)
+
+    # Soft-assignment kernel: ρ is the Pass B knob; σ is held fixed.
+    sigma = float(assignment_sigma)
+    formula = (
+        r"Soft assign (Pass B knob $=\rho$):"
+        "\n"
+        r"$\pi_{ij}\propto\exp\!\left(-\rho\cdot"
+        r"\dfrac{(A_i-T_j)^2}{2\sigma^2}\right)$"
+        "\n"
+        rf"$\rho\uparrow$ $\Rightarrow$ sharper match to $T_j$;  "
+        rf"$\rho=0$ $\Rightarrow$ flat among open seats"
+        "\n"
+        rf"$\sigma$ fixed $={sigma:g}$ (ability units);  "
+        r"score $S_i=A_i-0.5\,L_C$ held fixed"
+    )
+    ax.text(
+        0.02,
+        0.98,
+        formula,
+        transform=ax.transAxes,
+        fontsize=8,
+        va="top",
+        ha="left",
+        family="sans-serif",
+        bbox={
+            "boxstyle": "round,pad=0.35",
+            "facecolor": "white",
+            "edgecolor": "0.6",
+            "alpha": 0.92,
+        },
+    )
+
     fig.tight_layout()
-    png = out_dir / "rho_ablation_selection_by_poolq_loo.png"
+    # Prefixed name so Pass B figures are obvious next to HERO_ / PASS_A_ PNGs.
+    png = out_dir / PASS_B_PNG_NAME
     fig.savefig(png, dpi=150, bbox_inches="tight")
     plt.close(fig)
-    print(f"Wrote {png}")
+    print(f"Wrote {png} (SHOW_SORT_CHOP_ON_FIGURE={SHOW_SORT_CHOP_ON_FIGURE})")
 
 
 def main() -> None:
-    """Shared A/T draw → four assignment arms → CSVs, summary, PNG, captions."""
+    """Shared A/T draw → five assignment arms → CSVs, summary, PNG, captions."""
     out_dir = OUT
     out_dir.mkdir(parents=True, exist_ok=True)
     tge, tpa, assign_poolq_bin_labels = _load_modules()
@@ -252,7 +323,7 @@ def main() -> None:
         ],
         "assignment_sigma": base_params.assignment_sigma,
     }
-    meta_path = out_dir / "rho_ablation_meta.json"
+    meta_path = out_dir / "PASS_B_rho_ablation_meta.json"
 
     frames: dict[str, pd.DataFrame] = {}
     for label, method, rho in ARMS:
@@ -271,15 +342,19 @@ def main() -> None:
             assign_poolq_bin_labels=assign_poolq_bin_labels,
         )
         frames[label] = df
-        csv_name = f"generative_{label}_16quantile.csv"
+        csv_name = f"PASS_B_generative_{label}_16quantile.csv"
         df.to_csv(out_dir / csv_name, index=False)
         print(f"  wrote {csv_name}")
 
     meta_path.write_text(json.dumps(meta, indent=2) + "\n", encoding="utf-8")
     write_summary(out_dir, frames)
-    build_figure(out_dir, frames)
+    build_figure(
+        out_dir,
+        frames,
+        assignment_sigma=float(base_params.assignment_sigma),
+    )
 
-    caption = out_dir / "rho_ablation_caption.txt"
+    caption = out_dir / "PASS_B_rho_ablation_caption.txt"
     caption.write_text(
         "\n".join(
             [
@@ -288,7 +363,8 @@ def main() -> None:
                 "Same synthetic player abilities across arms; score + winner rule fixed",
                 "(S_i = A_i − 0.5·L_C, smooth viable-peer congestion, then top K).",
                 "Only assignment differs:",
-                f"low ρ={RHO_LOW}, moderate ρ={RHO_MODERATE}, high ρ={RHO_HIGH}, and",
+                f"low ρ={RHO_LOW}, moderate ρ={RHO_MODERATE}, high ρ={RHO_HIGH},",
+                f"very high ρ={RHO_VERY_HIGH}, and",
                 "sort-and-chop benchmark (537-style max partition assortativity).",
                 "",
                 "Y-axis: mean selection rate by 16 quantile bins on simulated poolq_loo.",
@@ -296,23 +372,24 @@ def main() -> None:
                 "Limitation: we show whether roster-formation sorting moves the readout when",
                 "congestion-in-score is held fixed; we do not claim bin-for-bin hero match.",
                 "",
-                "Pass A (λ knockout) is in ../alex_side_by_side_v0/.",
+                "Pass A (λ knockout): PASS_A_* files in this same HEROs_and_PASSes folder.",
             ]
         )
         + "\n",
         encoding="utf-8",
     )
 
-    readme = out_dir / "README.txt"
+    readme = out_dir / "PASS_B_README.txt"
     readme.write_text(
         "\n".join(
             [
-                "alex_rho_ablation_v0 — Pass B (ρ assignment ablation)",
+                "Pass B — ρ assignment ablation",
                 "",
                 "Generated by: sports/scripts/540_rho_ablation_bundle.py",
+                "Home: 3-Master_Plan/re_entry/HEROs_and_PASSes/",
                 "Spec: sports/540_READ_ME_SIM.md",
                 "",
-                "Related: ../alex_side_by_side_v0/ (Pass A — λ knockout)",
+                "Related: PASS_A_* in this folder (λ knockout).",
             ]
         )
         + "\n",

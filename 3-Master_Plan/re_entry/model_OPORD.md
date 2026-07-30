@@ -79,11 +79,11 @@ No mandatory COMPASS agent session.
 | 5.1 | **ρ** in `tier1_pool_assignment.py` | `exp(-ρ·(A_i-T_j)²/(2σ²))`; ρ=0 → uniform among open rosters |
 | 5.2 | `USE_PREFERENTIAL_ATTACHMENT` bool in config | α=0 default |
 | 5.3 | `sports/scripts/540_rho_ablation_bundle.py` | Low ρ, high ρ, sort-and-chop; fix **score + winner rule** |
-| 5.4 | Export `alex_rho_ablation_v0/` | CSVs, PNG, summary, caption |
+| 5.4 | Export `HEROs_and_PASSes/PASS_B_*` | CSVs, PNG, summary, caption |
 | 5.5 | `sports/540_three_step_sim.ipynb` | Thin Jupyter orchestration |
 | 5.6 | Dry-run from repo root | Green run |
 
-**Pass A (λ knockout):** already in `alex_side_by_side_v0/` — do not redo.
+**Pass A (λ knockout):** already in `HEROs_and_PASSes/PASS_A_*` — do not redo.
 
 **Pass B (ρ ablation):** fix **score** (**S_i** / λ / **L_C**) and **select** (top K); vary assignment only.
 
@@ -93,8 +93,8 @@ No mandatory COMPASS agent session.
 
 | # | Step | Deliverable |
 |---|------|-------------|
-| 6.1 | Keep `alex_side_by_side_v0/` | Pass A |
-| 6.2 | `alex_rho_ablation_v0/README.txt` | Cross-link to λ knockout |
+| 6.1 | Keep `HEROs_and_PASSes/PASS_A_*` | Pass A |
+| 6.2 | `PASS_B_README.txt` | Cross-link to λ knockout |
 | 6.3 | Limitation sentence for ρ pass | caption.txt |
 
 ---
@@ -122,7 +122,7 @@ No mandatory COMPASS agent session.
 ## Already done (skip)
 
 - Empirical hero + LPM  
-- Pass A: λ knockout + `alex_side_by_side_v0/`  
+- Pass A: λ knockout + `HEROs_and_PASSes/PASS_A_*`  
 - Re-entry docs 01–03 + `Model.pdf`  
 - BINDING: **`L_net`** ≠ advancement; **score ≠ select**; unified **S_i**, **(B−D)=−L_C**
 

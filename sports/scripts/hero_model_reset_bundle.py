@@ -27,8 +27,8 @@ Pass A claim
 Run (repo root)
   python sports/scripts/hero_model_reset_bundle.py
 
-Outputs
-  sports/datasets/mbb/exports_inverted_u_v0/alex_side_by_side_v0/
+Outputs (only)
+  3-Master_Plan/re_entry/HEROs_and_PASSes/PASS_A_*  (+ HERO_* PNG if synced)
 
 Spec
   sports/540_READ_ME_SIM.md
@@ -50,8 +50,12 @@ import pandas as pd
 
 REPO = Path(__file__).resolve().parents[2]
 SPORTS = REPO / "sports"
-OUT = SPORTS / "datasets/mbb/exports_inverted_u_v0/alex_side_by_side_v0"
+# Single home for Pass A / Pass B / hero gallery artifacts (no duplicate export folder).
+OUT = REPO / "3-Master_Plan" / "re_entry" / "HEROs_and_PASSes"
+PASS_A_PNG_NAME = "PASS_A_inverted_u_side_by_side_empirical_vs_generative.png"
 HERO_SLUG = "empirical_ppm_poolq_loo_16quantile_winsor0199_min20_2011"
+HERO_PNG_NAME = f"HERO_inverted_u_{HERO_SLUG}.png"
+PASS_A_EMP_CSV = f"PASS_A_binned_draft_rate_{HERO_SLUG}.csv"
 HERO_BINS = 16
 HERO_SEED = 42
 
@@ -80,7 +84,7 @@ def _hero_pipeline_config():
 def run_layer_a_lpm(out_dir: Path) -> pd.Series:
     """Layer A: OLS Y_draft ~ poolq_loo + poolq_sq on hero-filtered panel.
 
-    Writes lpm_hero_coefficients.txt. β₂ < 0 ⇒ fitted curve concave down.
+    Writes PASS_A_lpm_hero_coefficients.txt. β₂ < 0 ⇒ fitted curve concave down.
     """
     sys.path.insert(0, str(SPORTS))
     from sports_pipeline import conductor, panel_build
@@ -109,7 +113,7 @@ def run_layer_a_lpm(out_dir: Path) -> pd.Series:
         f"Interpretation: beta_poolq_sq = {coef['poolq_sq']:.6g} "
         f"({'concave / inverted-U consistent' if coef['poolq_sq'] < 0 else 'NOT concave — investigate'})",
     ]
-    txt = out_dir / "lpm_hero_coefficients.txt"
+    txt = out_dir / "PASS_A_lpm_hero_coefficients.txt"
     txt.write_text("\n".join(lines) + "\n", encoding="utf-8")
     print("\n".join(lines))
     return coef
@@ -177,8 +181,12 @@ def run_layer_c_knockouts(out_dir: Path) -> tuple[pd.DataFrame, pd.DataFrame]:
         0.5,
         HERO_SEED + 1,
     )
-    talent.to_csv(out_dir / "generative_knockout_talent_only_16quantile.csv", index=False)
-    congest.to_csv(out_dir / "generative_knockout_congestion_16quantile.csv", index=False)
+    talent.to_csv(
+        out_dir / "PASS_A_generative_knockout_talent_only_16quantile.csv", index=False
+    )
+    congest.to_csv(
+        out_dir / "PASS_A_generative_knockout_congestion_16quantile.csv", index=False
+    )
 
     meta = {
         "hero_bins": HERO_BINS,
@@ -192,7 +200,7 @@ def run_layer_c_knockouts(out_dir: Path) -> tuple[pd.DataFrame, pd.DataFrame]:
         },
         "seeds": {"talent_only": HERO_SEED, "congestion": HERO_SEED + 1},
     }
-    (out_dir / "generative_knockout_meta.json").write_text(
+    (out_dir / "PASS_A_generative_knockout_meta.json").write_text(
         json.dumps(meta, indent=2) + "\n", encoding="utf-8"
     )
     print("Generative knockouts written (16 quantile bins on poolq_loo).")
@@ -211,14 +219,17 @@ def _write_knockout_summary(
     t_bot = float(talent.loc[talent["bin"] == talent["bin"].min(), "selection_rate"].iloc[0])
     lpm_line = ""
     if coef is not None:
-        lpm_line = f"- LPM: poolq_sq = {coef['poolq_sq']:.6g} (concave); see lpm_hero_coefficients.txt.\n"
-    txt = out_dir / "generative_knockout_summary.txt"
+        lpm_line = (
+            f"- LPM: poolq_sq = {coef['poolq_sq']:.6g} (concave); "
+            "see PASS_A_lpm_hero_coefficients.txt.\n"
+        )
+    txt = out_dir / "PASS_A_generative_knockout_summary.txt"
     txt.write_text(
         "\n".join(
             [
                 f"# Generative knockouts vs hero ({date.today().isoformat()})",
                 "",
-                "Spec: 16 quantile bins on poolq_loo (L_Q); see generative_knockout_meta.json.",
+                "Spec: 16 quantile bins on poolq_loo (L_Q); see PASS_A_generative_knockout_meta.json.",
                 "",
                 "## Talent-only (score = A_i)",
                 "",
@@ -232,7 +243,7 @@ def _write_knockout_summary(
                 "",
                 "## Layer A reference (same hero estimand)",
                 "",
-                lpm_line.rstrip() or "- See lpm_hero_coefficients.txt.",
+                lpm_line.rstrip() or "- See PASS_A_lpm_hero_coefficients.txt.",
             ]
         )
         + "\n",
@@ -242,7 +253,7 @@ def _write_knockout_summary(
 
 def _load_empirical_bins(out_dir: Path) -> pd.DataFrame:
     """Load locked hero ventile rates (does not rebuild 530)."""
-    csv = out_dir / f"binned_draft_rate_{HERO_SLUG}.csv"
+    csv = out_dir / PASS_A_EMP_CSV
     if not csv.is_file():
         alt = (
             SPORTS
@@ -305,12 +316,13 @@ def build_side_by_side(
         y=1.02,
     )
     fig.tight_layout()
-    png = out_dir / "inverted_u_side_by_side_empirical_vs_generative.png"
+    # Prefixed name so Pass A figures are obvious next to HERO_ / PASS_B_ PNGs.
+    png = out_dir / PASS_A_PNG_NAME
     fig.savefig(png, dpi=150, bbox_inches="tight")
     plt.close(fig)
     print(f"Wrote {png}")
 
-    caption = out_dir / "side_by_side_caption.txt"
+    caption = out_dir / "PASS_A_side_by_side_caption.txt"
     caption.write_text(
         "\n".join(
             [
@@ -333,8 +345,8 @@ def build_side_by_side(
 
 
 def sync_empirical_png(out_dir: Path) -> None:
-    """Ensure hero empirical PNG exists in alex folder (copy if missing)."""
-    dst = out_dir / f"inverted_u_{HERO_SLUG}.png"
+    """Ensure HERO_* empirical PNG exists in the gallery (copy if missing)."""
+    dst = out_dir / HERO_PNG_NAME
     if dst.is_file():
         return
     src = (

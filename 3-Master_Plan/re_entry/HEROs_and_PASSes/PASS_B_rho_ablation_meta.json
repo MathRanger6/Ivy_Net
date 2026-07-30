@@ -24,6 +24,11 @@
       "rho": 8.0
     },
     {
+      "label": "rho_very_high",
+      "method": "soft",
+      "rho": 32.0
+    },
+    {
       "label": "sort_chop",
       "method": "sort_chop",
       "rho": null

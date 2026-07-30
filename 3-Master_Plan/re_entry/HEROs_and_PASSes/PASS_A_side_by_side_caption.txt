@@ -3,8 +3,9 @@ Alex side-by-side caption (v1)
 Left: Empirical mean NBA draft rate by ventile of leave-one-out teammate quality
 (poolq_loo), MBB 2011–2021, hero spec locked in Hero_Model_Three_Layers_Memo.md.
 
-Right: Generative selection rate in an artificial league with congestion in the
-selection score (A − w·L_C), binned on simulated poolq_loo — same 16 quantile bins.
+Right: Generative selection rate in an artificial league that SCORES with a
+congestion penalty (A − w·L_C), then SELECTS top K, binned on simulated
+poolq_loo — same 16 quantile bins.
 
 Limitation: We do not claim pointwise match between panels in v1; talent-only
-selection (score = A only) fails the congestion ingredient test (see knockout CSVs).
+SCORE (S_i = A only) fails the congestion ingredient test (see knockout CSVs).

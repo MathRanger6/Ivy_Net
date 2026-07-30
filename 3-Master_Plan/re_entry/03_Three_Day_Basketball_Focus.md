@@ -48,10 +48,10 @@ You do **not** need: bin-for-bin sim match, Rivanna sweeps, **ρ** calibrated to
 
 | Piece | Status | Where |
 |-------|--------|--------|
-| Empirical hero (Layer A) | Done | `530`; `sports/datasets/mbb/exports_inverted_u_v0/alex_side_by_side_v0/` |
+| Empirical hero (Layer A) | Done | `530`; `re_entry/HEROs_and_PASSes/HERO_*` |
 | Quadratic LPM (β₂ < 0) | Done | `lpm_hero_coefficients.txt` in export folder |
 | Generative knockouts (λ=0 vs congestion) | Done | `generative_knockout_*_16quantile.csv`; script `sports/scripts/hero_model_reset_bundle.py` |
-| Side-by-side PNG | Done | `inverted_u_side_by_side_empirical_vs_generative.png` |
+| Side-by-side PNG | Done | `PASS_A_inverted_u_side_by_side_empirical_vs_generative.png` (`re_entry/HEROs_and_PASSes/`) |
 | Narrative slide | Done | [`Model.pdf`](Model.pdf) / `Model.pptx` |
 | Plain readout | Done | `generative_knockout_summary.txt`, `side_by_side_caption.txt` |
 
