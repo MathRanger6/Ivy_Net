@@ -1,5 +1,7 @@
 # 4. Pass A and Pass B — in plain English
 
+**Last synced:** 2026-07-30
+
 **Audience:** Charles, right before you re-run simulations  
 **Read this after:** docs 01–03 and the checklist self-test (hero PNG confirmed)  
 **Read this before:** opening `540_three_step_sim.ipynb` or running the Pass A / Pass B scripts  

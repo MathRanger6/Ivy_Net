@@ -1,5 +1,7 @@
 # 3. Three-day basketball focus
 
+**Last synced:** 2026-07-30
+
 **Audience:** Charles — deadline pressure  
 **Goal:** One clear “done” for the simplified model, without scope creep.  
 **Status (2026-07-27):** Re-entry bar **reached** on disk (agent/project). **Your** step-by-step checkoff: [`CHARLES_CHECKLIST.md`](CHARLES_CHECKLIST.md).

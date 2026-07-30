@@ -1,6 +1,6 @@
 # Model re-entry — operations order (OPORD)
 
-**Last synced:** 2026-07-27  
+**Last synced:** 2026-07-30  
 **Owner:** Charles + Cursor agent (not a SCOUT handoff)  
 **Status:** **Executed** — archive, 540 surface, Pass B exports on disk.
 

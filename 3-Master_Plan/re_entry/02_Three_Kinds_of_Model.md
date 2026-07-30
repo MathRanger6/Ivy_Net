@@ -1,5 +1,7 @@
 # 2. Three kinds of “model” (why you got lost)
 
+**Last synced:** 2026-07-28
+
 **Audience:** Charles, re-entering  
 **Standalone:** definitions are inline; no other files required.  
 **Slide summary (same story):** [`Model.pdf`](Model.pdf)

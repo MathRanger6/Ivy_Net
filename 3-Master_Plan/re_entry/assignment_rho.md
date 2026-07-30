@@ -1,5 +1,7 @@
 # Soft assignment — formula brief (ρ)
 
+**Last synced:** 2026-07-30
+
 **Front of sheet / slide notes.** Put the equation on the PPT; use the arrows/labels below for each symbol. **Back of sheet:** how \(\pi_{ij}\) is used in seating (next heading — new PDF page).
 
 ---

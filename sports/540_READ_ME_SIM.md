@@ -1,6 +1,6 @@
 # Read me first — sim re-entry (540, July 2026)
 
-**Last synced:** 2026-07-30 — ρ assortativity; **score ≠ select**; file map; **point to re_entry doc 04 before shorthand**.
+**Last synced:** 2026-07-30
 
 **OPORD:** [`../3-Master_Plan/re_entry/model_OPORD.md`](../3-Master_Plan/re_entry/model_OPORD.md)  
 **Your checklist:** [`../3-Master_Plan/re_entry/CHARLES_CHECKLIST.md`](../3-Master_Plan/re_entry/CHARLES_CHECKLIST.md)

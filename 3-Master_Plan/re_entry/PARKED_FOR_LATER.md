@@ -1,5 +1,7 @@
 # Parked for later — good work, wrong moment
 
+**Last synced:** 2026-07-30
+
 **Purpose:** These files remain in the repo. During **re-entry**, treat them as archived in place. Open only when doc `00` sends you here or when you are past the three-day basketball focus.
 
 ---

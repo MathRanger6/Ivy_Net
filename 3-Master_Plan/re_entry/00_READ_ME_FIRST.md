@@ -1,8 +1,10 @@
-# Read me first — re-entry (July 2026)
+# 0. Read me first — re-entry (July 2026)
 
-**Last synced:** 2026-07-30 — added doc **04** (Pass A/B plain English before shorthand).
+**Last synced:** 2026-07-30
 
 **If you feel lost:** you are in the right place. **Stop opening other project folders** until you finish the documents below in order.
+
+**Print hardcopies:** each re-entry doc has **`Last synced: YYYY-MM-DD`** under the title — keep the newest date when you purge old printouts.
 
 This folder exists because the rest of the repo grew into a **reference library** for agents and for “already immersed” you. That library is still valuable. It is **not** the right entry point while you are re-orienting under time pressure.
 
@@ -20,6 +22,7 @@ Read these **in order**. Each is written to stand alone — you should not need 
 | **2** | [02_Three_Kinds_of_Model.md](02_Three_Kinds_of_Model.md) | ~25 min | Why “the model” confused you; three separate jobs (describe / explain / simulate) |
 | **3** | [03_Three_Day_Basketball_Focus.md](03_Three_Day_Basketball_Focus.md) | ~10 min | What “done” means; what is out of scope |
 | **4** | [04_Pass_A_and_Pass_B_in_Plain_English.md](04_Pass_A_and_Pass_B_in_Plain_English.md) | ~15 min | **Before any sim redo:** what Pass A and Pass B are, in sentences (empirical vs simulated, assignment, code map) |
+| **5** | [05_Alex_Magnitude_Spec.md](05_Alex_Magnitude_Spec.md) | ~10 min | **After Pass A/B:** Alex Paper Directions 14 — predictive importance (Model A vs B), not hero overlay |
 
 **PDF:** from repo root:
 
@@ -28,6 +31,7 @@ Read these **in order**. Each is written to stand alone — you should not need 
 ./scripts/convert_single_md_to_pdf.sh 3-Master_Plan/re_entry/02_Three_Kinds_of_Model.md
 ./scripts/convert_single_md_to_pdf.sh 3-Master_Plan/re_entry/03_Three_Day_Basketball_Focus.md
 ./scripts/convert_single_md_to_pdf.sh 3-Master_Plan/re_entry/04_Pass_A_and_Pass_B_in_Plain_English.md
+./scripts/convert_single_md_to_pdf.sh 3-Master_Plan/re_entry/05_Alex_Magnitude_Spec.md
 ```
 
 ---

@@ -1,5 +1,7 @@
 # Charles checklist — re-entry (manual checkoff)
 
+**Last synced:** 2026-07-30
+
 **Created:** 2026-07-28 16:58  
 **Purpose:** The **one** place you walk beginning → end and mark **what you personally did**.  
 **Not this file:** Agent “already done” tables in `model_OPORD.md`, doc 03, COMPASS stub, or the hero reset plan. Those are **project/agent status**. This file is **your** progress.
@@ -109,7 +111,25 @@ You are **not** rebuilding these. Treat as locked inputs.
 
 ---
 
-## 5. Optional — see the pipeline in the notebook
+## 5. Alex magnitude — predictive importance (Paper Directions 14)
+
+**Full spec:** [`05_Alex_Magnitude_Spec.md`](05_Alex_Magnitude_Spec.md)  
+**Transcript:** `transcripts/20260730_Paper_Directions_14_otter_ai_transcript.docx`  
+**Reminder:** Hero ventile plot ≠ this task. Fit **Model A** (ability + poolq_loo + poolq_loo²) vs **Model B** (ability only); compare predicted draft probabilities and overall predictive gain.
+
+| Done | Step | What to do | Proof |
+|------|------|------------|-------|
+| [ ] | Read spec + transcript skim | Doc **05**; confirm counterfactual = λ off in **prediction**, not rewound career | |
+| [ ] | Run magnitude script (when exists) | From repo root: `python sports/scripts/hero_magnitude_predictive_comparison.py` (TBD) | date + exit 0 |
+| [ ] | Inspect model comparison | `HEROs_and_PASSes/MAGNITUDE_model_comparison.txt` (when written) | |
+| [ ] | Inspect per-person gaps | CSV: \(\hat{p}_i^{\text{full}}\), \(\hat{p}_i^{\text{ability}}\), \|Δ\| by ability ventile | |
+| [ ] | One-sentence claim (yours) | “Roster in the model improves prediction by ___; largest at top ability / few slots because ___” | |
+
+**Done for you when:** you can answer Alex’s “how much better is prediction with roster?” with numbers, not only the Hero curve shape.
+
+---
+
+## 6. Optional — see the pipeline in the notebook
 
 | Done | Step | What to do | Proof |
 |------|------|------------|-------|
@@ -119,7 +139,7 @@ You are **not** rebuilding these. Treat as locked inputs.
 
 ---
 
-## 6. Package for Alex (when sims feel like *yours*)
+## 7. Package for Alex (when sims feel like *yours*)
 
 | Done | Step | What to do | Proof |
 |------|------|------------|-------|
@@ -129,7 +149,7 @@ You are **not** rebuilding these. Treat as locked inputs.
 
 ---
 
-## 7. Explicitly **not** on this checklist (park guilt)
+## 8. Explicitly **not** on this checklist (park guilt)
 
 Do **not** check these off here; they are out of scope until you decide otherwise:
 

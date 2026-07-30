@@ -1,5 +1,7 @@
 # 1. The problem in plain English
 
+**Last synced:** 2026-07-28
+
 **Audience:** Charles, re-entering after time away  
 **You do not need any other document open while reading this.**
 

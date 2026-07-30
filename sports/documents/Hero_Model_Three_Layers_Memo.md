@@ -1,6 +1,7 @@
 # Hero inverted-U — three model layers (v1)
 
-**Date:** 2026-07-20 · **Vocabulary sync:** 2026-07-28  
+**Last synced:** 2026-07-30
+
 **Audience:** Charles + Alex read-through  
 **Canonical hero / Pass gallery:** `3-Master_Plan/re_entry/HEROs_and_PASSes/`  
 **Related:** [`05_Model_Nesting_Note_v1.md`](../../5-Manuscript/05_Model_Nesting_Note_v1.md), [`30_Alex_Gates_inform_status_outline.md`](../../3-Master_Plan/30_Alex_Gates_inform_status_outline.md), [`BINDING_Selection_is_its_own_step.md`](../../3-Master_Plan/BINDING_Selection_is_its_own_step.md), [`re_entry/02_Three_Kinds_of_Model.md`](../../3-Master_Plan/re_entry/02_Three_Kinds_of_Model.md)
