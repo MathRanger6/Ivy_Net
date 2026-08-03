@@ -1,0 +1,10 @@
+Pass B caption — generative λ knockout pair
+
+Preset: 539. Steps 1–3: ASSIGN → SCORE → SELECT.
+Step 4 VISUALIZE: bin on pool mean (not poolq_loo).
+
+Left: S_i = A_i only (λ = 0), top-K select, binned on pool mean.
+Right: S_i = A_i − 0.55·L_C (crowding_smooth), same bins.
+
+Pool mean includes self; poolq_loo excludes self (Pass A hero axis).
+See PASS_B_D10_* for SCOUT reference figures (playground / 20 bins).

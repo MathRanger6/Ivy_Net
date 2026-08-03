@@ -1,0 +1,40 @@
+{
+  "pass": "B",
+  "preset": "539",
+  "hero_bins": 16,
+  "bin_mode": "quantile",
+  "x_axis": "pool_mean",
+  "x_axis_note": "team mean ability on realized roster (includes self; not LOO)",
+  "talent_only": {
+    "score_mode": "ability",
+    "loo_pool_l_mode": "quality",
+    "w": 0.0
+  },
+  "congestion": {
+    "score_mode": "loo_gap_plus_ability",
+    "loo_pool_l_mode": "crowding_smooth",
+    "w": 0.55
+  },
+  "assignment": {
+    "ability_draw": "beta_2_2",
+    "viability_theta": 0.72,
+    "viability_sharpness": 10.0,
+    "target_mean_low": 0.0,
+    "target_mean_high": 1.0
+  },
+  "seeds": {
+    "talent_only": 42,
+    "congestion": 43
+  },
+  "playground_state_overlay": {
+    "ability_draw": "beta_2_2",
+    "target_dist": "uniform",
+    "t_low": 0.0,
+    "t_high": 1.0,
+    "viability_theta": 0.72,
+    "viability_sharpness": 10.0,
+    "n_bins": 16,
+    "n_selected": 1500,
+    "winner_selection": "C"
+  }
+}

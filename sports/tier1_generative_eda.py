@@ -1,4 +1,4 @@
-"""Shared generative EDA: inverted-U bins + the Assign→Score→Select pipeline runner.
+"""Shared generative EDA: inverted-U bins + the Assign→Score→Select→Visualize runner.
 
 ==============================================================================
 FOR LATER CHARLES — read this like a notebook CELL map
@@ -23,11 +23,11 @@ WHAT THIS FILE DOES
   summarizes selection *rate* by bins of pool quality — the sim “inverted-U”
   table and figure Pass A/B bundles look at.
 
-THREE STEPS (engine does 1–3; this file orchestrates + bins/plots)
-  (1) ASSIGN  — seat players (simulate_generative_rosters).
-  (2) SCORE   — S_i from ability ± pool L (assign_selection → selection_weights).
-  (3) SELECT  — winners Y_selected (usually top K, choice "C").
-  Then: BIN + PLOT — mean Y_selected vs bin of L_Q (or team mean).
+FOUR STEPS (engine does 1–3; this file orchestrates step 4)
+  (1) ASSIGN    — seat players (simulate_generative_rosters).
+  (2) SCORE     — S_i from ability ± pool L (assign_selection → selection_weights).
+  (3) SELECT    — winners Y_selected (usually top K, choice "C").
+  (4) VISUALIZE — bin players on chosen X (poolq_loo or pool mean); plot mean Y_selected.
 
 CORE LETTERS
   A_i, T_j, pool, S_i, K, Y_selected — same as the engine glossary.
@@ -35,11 +35,11 @@ CORE LETTERS
   l_term_scale / CROWDING_L_Z_SCALE — unit matcher for crowding L; decode in
       tier1_pool_assignment READ-FIRST GLOSSARY (l = L; term = L-piece of score).
 
-IMPORTANT AXIS RULE (easy to miss)
-  Plot B / inverted_u_bin_table X-axis is ALWAYS L_Q (poolq_loo) by default —
-  mean teammate ability — so curves stay comparable when you change which L
-  enters the *score*. Changing loo_pool_l_mode changes SCORE, not the bin axis
-  (unless you deliberately use the team_mean Plot B′ helper).
+IMPORTANT AXIS RULE (easy to miss — step 4 only)
+  Default VISUALIZE x-axis is L_Q (poolq_loo) via inverted_u_bin_table — mean
+  teammate ability — so curves stay comparable when you change which L enters
+  SCORE. Changing loo_pool_l_mode changes SCORE (step 2), not the default bin
+  axis. Pass B uses inverted_u_bin_table_team_mean (pool mean, 539-style).
 
 SELECTIONCONFIG vs ASSIGNMENTPARAMS
   AssignmentParams — league geometry + assign knobs (from tier1_sim_config).
@@ -56,7 +56,7 @@ SECTION MAP
   5. inverted_u_bin_table — binned selection rates (main Plot B data)
   6. inverted_u_bin_table_team_mean — optional 539-style X-axis
   7. figure_inverted_u — draw Plot B
-  8. run_inverted_u_pipeline — one-shot Assign→Select→bin→figure
+  8. run_inverted_u_pipeline — one-shot Assign→Score→Select→Visualize
 ==============================================================================
 """
 
@@ -532,7 +532,7 @@ def run_inverted_u_pipeline(
     ability: np.ndarray | None = None,
     team_targets: np.ndarray | None = None,
 ) -> tuple[pd.DataFrame, pd.DataFrame, plt.Figure]:
-    """Full preview: ASSIGN → SCORE/SELECT → L_Q bin table → Plot B figure.
+    """Full preview: ASSIGN → SCORE → SELECT → VISUALIZE (L_Q bins + figure).
 
     This is the thin “conductor” Pass A/B-style previews call. Heavy math is in
     tier1_pool_assignment; this function only sequences the steps.
@@ -572,7 +572,7 @@ def run_inverted_u_pipeline(
         viability_theta=params.viability_theta,
         viability_sharpness=params.viability_sharpness,
     )
-    # Bin on L_Q and draw Plot B.
+    # Step 4 — VISUALIZE: bin on L_Q and draw figure.
     summ = inverted_u_bin_table(
         players, sel, assign_poolq_bin_labels=assign_poolq_bin_labels, tpa=tpa
     )

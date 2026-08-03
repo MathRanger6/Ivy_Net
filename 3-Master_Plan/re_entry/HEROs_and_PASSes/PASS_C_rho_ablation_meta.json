@@ -1,11 +1,18 @@
 {
-  "pass": "B",
+  "pass": "C",
+  "preset": "539",
+  "visualize_x_axis": "pool_mean",
   "hero_bins": 16,
   "seed": 42,
   "selection": {
     "score_mode": "loo_gap_plus_ability",
     "loo_pool_l_mode": "crowding_smooth",
-    "w": 0.5
+    "w": 0.55
+  },
+  "assignment": {
+    "ability_draw": "beta_2_2",
+    "viability_theta": 0.72,
+    "viability_sharpness": 10.0
   },
   "arms": [
     {
