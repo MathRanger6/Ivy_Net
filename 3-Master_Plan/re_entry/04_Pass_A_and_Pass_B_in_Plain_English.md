@@ -226,7 +226,7 @@ You can explain Alex’s minimal generative claim with **Pass A** alone. Pass B 
 ## After you understand this page
 
 1. Optional skim: `sports/540_READ_ME_SIM.md` (now the shorthand tables will make sense).  
-2. Return to [`CHARLES_CHECKLIST.md`](CHARLES_CHECKLIST.md) §3 and run Pass A.  
+2. Return to [`CHARLES_CHECKLIST.md`](CHARLES_CHECKLIST.md) **Phase A** (gallery + characterization).  
 3. Then §4 and run Pass B.  
 4. Optional: open `sports/540_three_step_sim.ipynb` only to display PNGs or re-call the scripts.
 

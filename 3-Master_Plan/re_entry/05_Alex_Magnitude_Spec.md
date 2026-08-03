@@ -119,4 +119,4 @@ Pass A generative (λ = 0 vs λ > 0) is the **sim** analogue; this spec is the *
 
 ## Checklist pointer
 
-[`CHARLES_CHECKLIST.md`](CHARLES_CHECKLIST.md) **§5** — run and inspect when Pass A/B feel solid and Alex asks “how important is this?”
+[`CHARLES_CHECKLIST.md`](CHARLES_CHECKLIST.md) **Phase C** — after PD15 characterization (Phase B) is done.

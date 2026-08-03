@@ -1,4 +1,4 @@
-# Pass C — ρ assignment ablation (2026-07-31)
+# Pass C — ρ assignment ablation (2026-08-03)
 
 Preset: 539. ASSIGN (ρ) varies; SCORE + SELECT fixed.
 $S_i = A_i − 0.55·L_C$ (crowding_smooth).

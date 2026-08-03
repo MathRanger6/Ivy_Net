@@ -49,16 +49,18 @@ sys.path.insert(0, str(SCRIPTS))
 from gallery_knobs import (
     HERO_BINS,
     HERO_SEED,
+    PASS_C_PNG_SUFFIX,
     PRESET,
     RHO_HIGH,
     RHO_LOW,
     RHO_MODERATE,
     RHO_VERY_HIGH,
+    SHOW_SORT_CHOP,
 )
 OUT = REPO / "3-Master_Plan" / "re_entry" / "HEROs_and_PASSes"
-PASS_C_PNG_NAME = "PASS_C_rho_ablation_selection_by_pool_mean.png"
+PASS_C_PNG_NAME = f"PASS_C_rho_ablation_selection_by_pool_mean{PASS_C_PNG_SUFFIX}.png"
 BIN_AXIS = "pool_mean"
-SHOW_SORT_CHOP_ON_FIGURE = False
+SHOW_SORT_CHOP_ON_FIGURE = SHOW_SORT_CHOP
 
 ARMS: list[tuple[str, str, float | None]] = [
     ("rho_low", "soft", RHO_LOW),

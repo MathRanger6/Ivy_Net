@@ -3,7 +3,7 @@
 **Last synced:** 2026-07-30
 
 **OPORD:** [`../3-Master_Plan/re_entry/model_OPORD.md`](../3-Master_Plan/re_entry/model_OPORD.md)  
-**Your checklist:** [`../3-Master_Plan/re_entry/CHARLES_CHECKLIST.md`](../3-Master_Plan/re_entry/CHARLES_CHECKLIST.md)
+**Your checklist:** [`../3-Master_Plan/re_entry/CHARLES_CHECKLIST.md`](../3-Master_Plan/re_entry/CHARLES_CHECKLIST.md) (PD15 characterization — gallery labels: Pass A empirical, B = λ, C = ρ)
 
 **Before this file’s knockout table:** read [`../3-Master_Plan/re_entry/04_Pass_A_and_Pass_B_in_Plain_English.md`](../3-Master_Plan/re_entry/04_Pass_A_and_Pass_B_in_Plain_English.md) — full sentences on Pass A/B, empirical vs simulated, assignment, and which scripts to run. This README is the **contract / shorthand** after that.
 

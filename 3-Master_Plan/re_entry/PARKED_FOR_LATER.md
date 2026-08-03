@@ -6,6 +6,14 @@
 
 ---
 
+## Park the old re-entry checklist
+
+| Location | Why skip now |
+|----------|--------------|
+| [`CHARLES_CHECKLIST_archive_20260803.md`](CHARLES_CHECKLIST_archive_20260803.md) | Superseded Jul 30 re-entry path; use [`CHARLES_CHECKLIST.md`](CHARLES_CHECKLIST.md) (PD15 characterization) |
+
+---
+
 ## Park the whole old print stack
 
 | Location | Why it exists | Why skip now |

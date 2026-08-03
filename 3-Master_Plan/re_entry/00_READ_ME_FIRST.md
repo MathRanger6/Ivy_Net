@@ -22,7 +22,7 @@ Read these **in order**. Each is written to stand alone — you should not need 
 | **2** | [02_Three_Kinds_of_Model.md](02_Three_Kinds_of_Model.md) | ~25 min | Why “the model” confused you; three separate jobs (describe / explain / simulate) |
 | **3** | [03_Three_Day_Basketball_Focus.md](03_Three_Day_Basketball_Focus.md) | ~10 min | What “done” means; what is out of scope |
 | **4** | [04_Pass_A_and_Pass_B_in_Plain_English.md](04_Pass_A_and_Pass_B_in_Plain_English.md) | ~15 min | **Before any sim redo:** what Pass A and Pass B are, in sentences (empirical vs simulated, assignment, code map) |
-| **5** | [05_Alex_Magnitude_Spec.md](05_Alex_Magnitude_Spec.md) | ~10 min | **After Pass A/B:** Alex Paper Directions 14 — predictive importance (Model A vs B), not hero overlay |
+| **5** | [05_Alex_Magnitude_Spec.md](05_Alex_Magnitude_Spec.md) | ~10 min | **Phase C (after characterization):** PD14 predictive importance — parked until [`CHARLES_CHECKLIST.md`](CHARLES_CHECKLIST.md) Phase B done |
 
 **PDF:** from repo root:
 
@@ -48,7 +48,9 @@ See [PARKED_FOR_LATER.md](PARKED_FOR_LATER.md) for a honest list of “good docs
 
 ## After the three documents
 
-**Your manual checkoff (beginning → end):** [`CHARLES_CHECKLIST.md`](CHARLES_CHECKLIST.md) — mark what **you** ran, wrote, or said. Ignore “Done” tables in OPORD / doc 03 / COMPASS for personal progress; those are project/agent status.
+**Your manual checkoff (beginning → end):** [`CHARLES_CHECKLIST.md`](CHARLES_CHECKLIST.md) — PD15 **characterization** mission (Phase A gallery → Phase B sensitivity deck → Phase C fit). Mark what **you** ran, wrote, or said. Ignore “Done” tables in OPORD / doc 03 / COMPASS for personal progress.
+
+**PD15 context:** [`../../transcripts/PD15_notes.md`](../../transcripts/PD15_notes.md) (Jul 31 Alex meeting). Archived re-entry checklist: [`CHARLES_CHECKLIST_archive_20260803.md`](CHARLES_CHECKLIST_archive_20260803.md).
 
 When the three layers make sense again, you can optionally open:
 
