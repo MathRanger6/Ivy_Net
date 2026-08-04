@@ -14,6 +14,8 @@ Run (repo root):
 Outputs:
   3-Master_Plan/re_entry/HEROs_and_PASSes/theta/THETA_KN_sweep_summary.csv
   3-Master_Plan/re_entry/HEROs_and_PASSes/theta/THETA_KN_sweep_peak_bin.png
+  3-Master_Plan/re_entry/HEROs_and_PASSes/theta/THETA_KN_sweep_peak_bin_lines.png
+    (optional alternate for Slide 5 — lines connect measured θ only, no surface)
 """
 
 from __future__ import annotations
@@ -48,6 +50,18 @@ from hero_gallery_paths import THETA, ensure_hero_dirs
 OUT = THETA
 SUMMARY_CSV = OUT / "THETA_KN_sweep_summary.csv"
 PEAK_PNG = OUT / "THETA_KN_sweep_peak_bin.png"
+PEAK_LINES_PNG = OUT / "THETA_KN_sweep_peak_bin_lines.png"
+
+KN_LINE_LABELS = {
+    "mbb_draft": r"MBB-like ($K/N=1\%$)",
+    "characterization": r"Characterization ($K/N=10\%$)",
+    "army_high": r"High selectivity ($K/N=40\%$)",
+}
+KN_LINE_COLORS = {
+    "mbb_draft": "#2ca02c",
+    "characterization": "#1f77b4",
+    "army_high": "#d62728",
+}
 
 THETA_GRID = (0.50, 0.72, 0.90)
 KN_GRID = (
@@ -253,6 +267,46 @@ def build_peak_heatmap(df: pd.DataFrame) -> None:
     print(f"Wrote {PEAK_PNG}")
 
 
+def build_peak_lines(df: pd.DataFrame) -> None:
+    """Peak bin vs θ — one line per K/N preset (3 measured θ points each; no surface)."""
+    from gallery_mathtext import configure_matplotlib_mathtext
+
+    configure_matplotlib_mathtext()
+    kn_labels = [label for label, _ in KN_GRID]
+
+    fig, ax = plt.subplots(figsize=(7.5, 4.5))
+    for kn in kn_labels:
+        sub = df.loc[df["kn_preset"] == kn].sort_values("theta")
+        ax.plot(
+            sub["theta"],
+            sub["peak_bin"],
+            marker="o",
+            markersize=9,
+            linewidth=2,
+            color=KN_LINE_COLORS.get(kn, None),
+            label=KN_LINE_LABELS.get(kn, kn),
+        )
+
+    ax.set_xlim(0.45, 0.95)
+    ax.set_ylim(0.5, HERO_BINS + 0.5)
+    ax.set_yticks(range(1, HERO_BINS + 1, max(1, HERO_BINS // 8)))
+    ax.set_xlabel(r"Viability cutline $\theta$")
+    ax.set_ylabel(r"Peak pool-mean bin (1 = weakest teams)")
+    ax.set_title(
+        rf"Peak bin vs $\theta$ by $K/N$ ({PRESET})"
+        "\n"
+        rf"3$\times$3 diagnostic grid — lines join measured $\theta$ only"
+        "\n"
+        rf"soft $\rho={FIXED_RHO:g}$, $\lambda={FIXED_LAMBDA:g}$, $\gamma=10$, $N={hero_league_n()}$"
+    )
+    ax.legend(loc="lower right", fontsize=9, framealpha=0.92)
+    ax.grid(True, alpha=0.25, linestyle="--")
+    fig.tight_layout()
+    fig.savefig(PEAK_LINES_PNG, dpi=150, bbox_inches="tight")
+    plt.close(fig)
+    print(f"Wrote {PEAK_LINES_PNG}")
+
+
 def main() -> None:
     ensure_hero_dirs()
     mod = _load_cfg_module()
@@ -313,6 +367,7 @@ def main() -> None:
     )
 
     build_peak_heatmap(df)
+    build_peak_lines(df)
     print("\nPeak bin table:")
     print(df.pivot(index="kn_preset", columns="theta", values="peak_bin").to_string())
     print("\nDone.")

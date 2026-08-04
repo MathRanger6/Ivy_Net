@@ -138,7 +138,7 @@ def _add_slide(prs: Presentation, meta: dict) -> None:
     title_box = slide.shapes.add_textbox(MARGIN, title_top, CONTENT_W, title_h)
     populate_paragraph_with_latex(
         title_box.text_frame.paragraphs[0],
-        r"Phase B — Characterize $\lambda$ (congestion in score)",
+        r"Phase B — Characterize $\lambda$ (weight on $L_C$ in score)",
         font_size=20,
     )
     title_box.text_frame.paragraphs[0].font.bold = True

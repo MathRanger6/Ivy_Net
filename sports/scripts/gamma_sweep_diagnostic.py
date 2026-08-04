@@ -41,7 +41,9 @@ from hero_gallery_paths import SORT_CHOP_LAMBDA, ensure_hero_dirs
 
 OUT = SORT_CHOP_LAMBDA
 PNG = OUT / "GAMMA_sweep_lambda_curves.png"
+PNG_KEY = OUT / "GAMMA_sweep_lambda_curves_key_arms.png"
 CSV = OUT / "GAMMA_sweep_summary.csv"
+KEY_LAMBDAS = frozenset({0.0, 0.55, 1.0})
 
 GAMMA_GRID = (5.0, 10.0, 20.0)
 LAMBDA_ARMS = [
@@ -170,43 +172,101 @@ def run_arm(
     return out
 
 
-def build_figure(all_frames: dict[float, dict[str, pd.DataFrame]]) -> None:
+def _plot_gamma_panels(
+    all_frames: dict[float, dict[str, pd.DataFrame]],
+    *,
+    lambda_filter: frozenset[float] | None,
+    out_path: Path,
+    suptitle_extra: str,
+) -> None:
     from gallery_mathtext import configure_matplotlib_mathtext
 
     configure_matplotlib_mathtext()
-    fig, axes = plt.subplots(1, 3, figsize=(14, 4.8), sharey=True)
+    n_gamma = len(GAMMA_GRID)
+    fig, axes = plt.subplots(n_gamma, 1, figsize=(8.8, 9.2), sharex=True, sharey=True)
+    if n_gamma == 1:
+        axes = [axes]
+
+    legend_handles: list = []
+    legend_labels: list[str] = []
+
     for ax, gamma in zip(axes, GAMMA_GRID):
         frames = all_frames[gamma]
+        crit = 4.0 / gamma
         for label, lam in LAMBDA_ARMS:
+            if lambda_filter is not None and lam not in lambda_filter:
+                continue
             df = frames[label]
             x = df["bin"].to_numpy(dtype=float) + 1
             y = df["selection_rate"].to_numpy(dtype=float)
-            ax.plot(
+            is_key = lam in KEY_LAMBDAS
+            (line,) = ax.plot(
                 x,
                 y,
-                "o-",
-                lw=1.8,
-                ms=4,
+                marker="o",
+                lw=2.8 if is_key else 1.6,
+                ms=5 if is_key else 3,
+                alpha=1.0 if is_key else 0.55,
+                ls="-" if is_key else "--",
                 color=LAM_COLORS[lam],
                 label=rf"$\lambda={lam:g}$",
+                zorder=3 if is_key else 2,
             )
-        crit = 4.0 / gamma
-        ax.axvline(x=0, color="none")  # spacer
-        ax.set_title(rf"$\gamma={gamma:g}$  ($\lambda_{{\mathrm{{crit}}}}\approx{crit:.2f}$)")
-        ax.set_xlabel("Pool-mean bin")
-        ax.set_ylim(bottom=0)
-    axes[0].set_ylabel("Selection rate")
-    fig.suptitle(
-        rf"Sort-and-chop: λ sweep at three $\gamma$ ({PRESET})"
-        "\n"
-        rf"{league_scale_title_line()} | {HERO_BINS} bins | seed={HERO_SEED}",
-        fontsize=11,
+            if ax is axes[0]:
+                legend_handles.append(line)
+                legend_labels.append(rf"$\lambda={lam:g}$")
+        ax.axhline(1.0 / HERO_BINS, color="#bbbbbb", lw=0.8, ls=":", zorder=0)
+        ax.set_title(
+            rf"$\gamma={gamma:g}$  —  $\lambda_{{\mathrm{{crit}}}}\approx {crit:.2f}$",
+            fontsize=12,
+            loc="left",
+            pad=8,
+        )
+        ax.set_ylim(0, max(0.28, ax.get_ylim()[1]))
+        ax.grid(True, axis="y", alpha=0.25, lw=0.6)
+        ax.tick_params(labelsize=10)
+
+    axes[-1].set_xlabel("Pool-mean bin (1 = weakest teams)", fontsize=11)
+    axes[0].set_ylabel("Selection rate", fontsize=11)
+
+    subtitle = (
+        rf"Sort-and-chop assign | {league_scale_title_line()} | {HERO_BINS} bins | seed={HERO_SEED}"
     )
-    axes[-1].legend(loc="upper left", fontsize=7)
-    fig.tight_layout()
-    fig.savefig(PNG, dpi=150, bbox_inches="tight")
+    if lambda_filter is not None:
+        arms = ", ".join(rf"$\lambda={v:g}$" for _, v in LAMBDA_ARMS if v in lambda_filter)
+        subtitle += rf"\nKey arms only: {arms}"
+    else:
+        subtitle += r"\nSolid = $\lambda \in \{0, 0.55, 1.0\}$; dashed = intermediate $\lambda$"
+
+    fig.suptitle(
+        rf"$\gamma$ sweep — congestion weight in score ({PRESET}){suptitle_extra}",
+        fontsize=13,
+        y=0.995,
+    )
+    fig.text(0.5, 0.02, subtitle, ha="center", va="bottom", fontsize=9, color="#333333")
+    fig.legend(
+        legend_handles,
+        legend_labels,
+        loc="upper center",
+        bbox_to_anchor=(0.5, 0.06),
+        ncol=min(5, len(legend_labels)),
+        fontsize=10,
+        frameon=False,
+    )
+    fig.subplots_adjust(left=0.1, right=0.98, top=0.93, bottom=0.11, hspace=0.32)
+    fig.savefig(out_path, dpi=160, bbox_inches="tight")
     plt.close(fig)
-    print(f"Wrote {PNG}")
+    print(f"Wrote {out_path}")
+
+
+def build_figure(all_frames: dict[float, dict[str, pd.DataFrame]]) -> None:
+    _plot_gamma_panels(all_frames, lambda_filter=None, out_path=PNG, suptitle_extra="")
+    _plot_gamma_panels(
+        all_frames,
+        lambda_filter=KEY_LAMBDAS,
+        out_path=PNG_KEY,
+        suptitle_extra=" (readable key arms)",
+    )
 
 
 def main() -> None:

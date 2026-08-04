@@ -151,6 +151,7 @@ def _add_params_column(slide, meta: dict, *, left, top, width, height, kind: str
             rf"$\rho={LAMBDA_FIXED_RHO:g}$, $\lambda={LAMBDA_MODERATE:g}$, $\gamma={gamma:g}$ fixed",
             r"arms: $\theta \in \{0.50, 0.72, 0.90\}$",
             r"$K/N = 10\%$ ($K=560$, $N=5600$)",
+            r"$L_C$ mode: \texttt{crowding\_smooth} (hard \texttt{crowding} also in code)",
             r"VISUALIZE = mean $Y_{\mathrm{selected}}$ vs pool mean ($16$ bins)",
         ]
     else:

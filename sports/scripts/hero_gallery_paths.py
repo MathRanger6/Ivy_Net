@@ -21,6 +21,7 @@ HAND_LAMBDA_DECK = SLIDES / "CHAR_lambda_characterization.pptx"
 HAND_THETA_DECK = SLIDES / "CHAR_theta_characterization.pptx"
 HAND_GAMMA_DECK = SLIDES / "CHAR_gamma_characterization.pptx"
 # Disposable script output — always *_AUTO.pptx under SLIDES_AUTO/.
+AUTO_INTRO_DECK = SLIDES_AUTO / "CHAR_intro_characterization_AUTO.pptx"
 AUTO_RHO_DECK = SLIDES_AUTO / "CHAR_rho_characterization_AUTO.pptx"
 AUTO_LAMBDA_DECK = SLIDES_AUTO / "CHAR_lambda_characterization_AUTO.pptx"
 AUTO_THETA_DECK = SLIDES_AUTO / "CHAR_theta_characterization_AUTO.pptx"

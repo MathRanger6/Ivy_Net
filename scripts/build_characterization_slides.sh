@@ -64,6 +64,7 @@ _run_figures() {
   echo ">> γ figures ..."
   "$PYTHON" sports/scripts/gamma_sweep_diagnostic.py
   "$PYTHON" sports/scripts/build_lambda_gamma_threshold_figure.py
+  "$PYTHON" sports/scripts/build_viability_hard_vs_smooth_figure.py
 }
 
 echo "=== Phase B characterization refresh ==="
@@ -87,6 +88,9 @@ fi
 
 echo ">> Building auto slide decks (slides/auto/) ..."
 
+echo ">> intro slide ..."
+"$PYTHON" sports/scripts/build_intro_characterization_slide.py
+
 echo ">> ρ slides ..."
 "$PYTHON" sports/scripts/build_rho_characterization_slide.py
 
@@ -109,6 +113,7 @@ OUT_AUTO="$AUTO/CHAR_Phase_B_characterization_AUTO.pptx"
 echo ""
 echo ">> Merge auto deck → $OUT_AUTO"
 "$PYTHON" sports/scripts/merge_pptx.py --python "$OUT_AUTO" \
+  "$AUTO/CHAR_intro_characterization_AUTO.pptx" \
   "$AUTO/CHAR_rho_characterization_AUTO.pptx" \
   "$AUTO/CHAR_lambda_characterization_AUTO.pptx" \
   "$AUTO/CHAR_theta_characterization_AUTO.pptx" \

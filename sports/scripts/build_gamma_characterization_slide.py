@@ -28,7 +28,8 @@ from hero_gallery_paths import AUTO_GAMMA_DECK, SORT_CHOP_LAMBDA, ensure_hero_di
 OUT_PPTX = AUTO_GAMMA_DECK
 GAMMA_SCRIPT = SCRIPTS / "gamma_sweep_diagnostic.py"
 LAMBDA_FIG_SCRIPT = SCRIPTS / "build_lambda_gamma_threshold_figure.py"
-FIG_SWEEP = SORT_CHOP_LAMBDA / "GAMMA_sweep_lambda_curves.png"
+FIG_SWEEP = SORT_CHOP_LAMBDA / "GAMMA_sweep_lambda_curves_key_arms.png"
+FIG_SWEEP_FULL = SORT_CHOP_LAMBDA / "GAMMA_sweep_lambda_curves.png"
 FIG_THRESHOLD = SORT_CHOP_LAMBDA / "LAMBDA_threshold_gamma_viability.png"
 
 from gallery_mathtext import fill_bullets_latex, populate_paragraph_with_latex
@@ -61,9 +62,9 @@ SLIDE_VARIANTS = [
         "params_kind": "sweep",
         "notes": [
             r"Sort-and-chop benchmark: same rosters per $\gamma$; only $\gamma$ and $\lambda$ in score change.",
+            r"Figure uses key arms $\lambda \in \{0, 0.55, 1.0\}$ — full five-arm grid in \texttt{GAMMA\_sweep\_lambda\_curves.png}.",
             r"$\gamma=5$: $\lambda_{\mathrm{crit}}\approx 0.8$ — hump needs larger $\lambda$.",
             r"$\gamma=10$ (539): $\lambda_{\mathrm{crit}}\approx 0.4$ — curve morph near $\lambda \gtrsim 0.4$.",
-            r"$\gamma=20$: $\lambda_{\mathrm{crit}}\approx 0.2$ — congestion reorders at modest $\lambda$.",
             r"Below crit: monotone elite-edge shape; above crit: inverted-$U$ / hump.",
         ],
     },

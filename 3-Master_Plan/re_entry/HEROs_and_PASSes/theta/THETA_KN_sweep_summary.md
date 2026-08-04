@@ -25,4 +25,5 @@
 
 - `theta/THETA_KN_sweep_summary.csv`
 - `theta/THETA_KN_sweep_peak_bin.png`
+- `theta/THETA_KN_sweep_peak_bin_lines.png` (optional Slide 5 alternate)
 - `theta/THETA_KN_sweep_meta.json`
