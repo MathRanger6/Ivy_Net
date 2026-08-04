@@ -107,7 +107,10 @@ Used for **γ / λ_crit** slides only: removes assignment ambiguity → clean **
 
 ## Suggested next COMPASS / Charles actions
 
+**Live checklist:** [`CHARLES_CHECKLIST.md`](../3-Master_Plan/re_entry/CHARLES_CHECKLIST.md) (post-PD16). Archived: [`archive/checklists/`](../3-Master_Plan/re_entry/archive/checklists/README.txt).
+
 - [x] Draft PD16 one-pager for `re_entry/` → [`08_PD16_Alex_meeting_takeaways.md`](../3-Master_Plan/re_entry/08_PD16_Alex_meeting_takeaways.md)
+- [x] Refresh Charles checklist for PD16 priorities
 - [ ] Implement **team L_C** + **θ(K/N)** via **shell env vars** (`GALLERY_LC_MODE`, `GALLERY_THETA_MODE` in `gallery_knobs.py`) — **not** a new conda env; compare PNGs to current deck
 - [ ] Build **L_C distribution vs ρ** figures (whiteboard Sketch A)  
 - [ ] ρ → 0.001 arm + assortativity intuition paragraph for slide footer  

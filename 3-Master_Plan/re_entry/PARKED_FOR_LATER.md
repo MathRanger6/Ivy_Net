@@ -1,16 +1,18 @@
 # Parked for later — good work, wrong moment
 
-**Last synced:** 2026-07-30
+**Last synced:** 2026-08-04
 
 **Purpose:** These files remain in the repo. During **re-entry**, treat them as archived in place. Open only when doc `00` sends you here or when you are past the three-day basketball focus.
 
 ---
 
-## Park the old re-entry checklist
+## Park the old checklists
 
 | Location | Why skip now |
 |----------|--------------|
-| [`CHARLES_CHECKLIST_archive_20260803.md`](CHARLES_CHECKLIST_archive_20260803.md) | Superseded Jul 30 re-entry path; use [`CHARLES_CHECKLIST.md`](CHARLES_CHECKLIST.md) (PD15 characterization) |
+| [`archive/checklists/CHARLES_CHECKLIST_archive_20260804_pd15.md`](archive/checklists/CHARLES_CHECKLIST_archive_20260804_pd15.md) | Superseded Aug 4 — PD15 “build characterization deck” arc; use [`CHARLES_CHECKLIST.md`](CHARLES_CHECKLIST.md) (post-PD16) |
+| [`archive/checklists/CHARLES_CHECKLIST_archive_20260803.md`](archive/checklists/CHARLES_CHECKLIST_archive_20260803.md) | Superseded Jul 30 re-entry path |
+| [`../../transcripts/PD15_notes.md`](../../transcripts/PD15_notes.md) | Context for Phase A/B gallery mission; **near-term direction = PD16** ([`PD16_notes.md`](../../transcripts/PD16_notes.md), doc [`08`](08_PD16_Alex_meeting_takeaways.md)) |
 
 ---
 

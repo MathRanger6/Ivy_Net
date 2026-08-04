@@ -217,4 +217,4 @@ is **right**. The job now is **directed characterization** --- fewer
 checklist items, standard slides, two curves every time --- then **fit ρ
 and λ to data statistics**, not to curve shape.
 
-**Checklist:** [`3-Master_Plan/re_entry/CHARLES_CHECKLIST.md`](../3-Master_Plan/re_entry/CHARLES_CHECKLIST.md) (PD15). Archived: [`CHARLES_CHECKLIST_archive_20260803.md`](../3-Master_Plan/re_entry/CHARLES_CHECKLIST_archive_20260803.md).
+**Checklist:** [`3-Master_Plan/re_entry/CHARLES_CHECKLIST.md`](../3-Master_Plan/re_entry/CHARLES_CHECKLIST.md) (PD15). Archived: [`archive/checklists/`](../3-Master_Plan/re_entry/archive/checklists/README.txt).

@@ -1,6 +1,6 @@
 # 0. Read me first — re-entry (July 2026)
 
-**Last synced:** 2026-07-30
+**Last synced:** 2026-08-04
 
 **If you feel lost:** you are in the right place. **Stop opening other project folders** until you finish the documents below in order.
 
@@ -25,6 +25,7 @@ Read these **in order**. Each is written to stand alone — you should not need 
 | **5** | [05_Alex_Magnitude_Spec.md](05_Alex_Magnitude_Spec.md) | ~10 min | **Phase C (after characterization):** PD14 predictive importance — parked until [`CHARLES_CHECKLIST.md`](CHARLES_CHECKLIST.md) Phase B done |
 | **—** | [06_Lambda_threshold_and_KN_memo.md](06_Lambda_threshold_and_KN_memo.md) | ~10 min | **Optional now:** sort-and-chop λ threshold (4/γ), θ vs K/N open work — read when doing Phase B θ/K/N |
 | **—** | [07_Phase_B_Characterization_Slides_Explained.md](07_Phase_B_Characterization_Slides_Explained.md) | ~20 min | **When presenting Phase B deck:** plain-English slide-by-slide walkthrough |
+| **—** | [08_PD16_Alex_meeting_takeaways.md](08_PD16_Alex_meeting_takeaways.md) | ~15 min | **After PD16 (Aug 4):** team L_C, θ from K/N, L_C-vs-ρ diagnostics, calibration roadmap |
 
 **PDF:** from repo root:
 
@@ -50,9 +51,9 @@ See [PARKED_FOR_LATER.md](PARKED_FOR_LATER.md) for a honest list of “good docs
 
 ## After the three documents
 
-**Your manual checkoff (beginning → end):** [`CHARLES_CHECKLIST.md`](CHARLES_CHECKLIST.md) — PD15 **characterization** mission (Phase A gallery → Phase B sensitivity deck → Phase C fit). Mark what **you** ran, wrote, or said. Ignore “Done” tables in OPORD / doc 03 / COMPASS for personal progress.
+**Your manual checkoff (beginning → end):** [`CHARLES_CHECKLIST.md`](CHARLES_CHECKLIST.md) — **post-PD16** (Phase B deck sign-off → team L_C / θ(K/N) / L_C-vs-ρ → Phase C calibration). Mark what **you** ran, wrote, or said. Ignore “Done” tables in OPORD / doc 03 / COMPASS for personal progress.
 
-**PD15 context:** [`../../transcripts/PD15_notes.md`](../../transcripts/PD15_notes.md) (Jul 31 Alex meeting). Archived re-entry checklist: [`CHARLES_CHECKLIST_archive_20260803.md`](CHARLES_CHECKLIST_archive_20260803.md).
+**Meeting context:** [`../../transcripts/PD16_notes.md`](../../transcripts/PD16_notes.md) (Aug 4); narrative [`08_PD16_Alex_meeting_takeaways.md`](08_PD16_Alex_meeting_takeaways.md). Prior arc: [`PD15_notes.md`](../../transcripts/PD15_notes.md). Archived checklists: [`archive/checklists/`](archive/checklists/README.txt) (`CHARLES_CHECKLIST_archive_20260804_pd15.md`, `CHARLES_CHECKLIST_archive_20260803.md`).
 
 When the three layers make sense again, you can optionally open:
 

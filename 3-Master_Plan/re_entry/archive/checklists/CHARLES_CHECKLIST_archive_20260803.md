@@ -1,10 +1,12 @@
 # ARCHIVED — superseded 2026-08-03
 
-**Replaced by:** [`CHARLES_CHECKLIST.md`](CHARLES_CHECKLIST.md) (Paper Directions 15 — characterization mission).
+**Location:** `re_entry/archive/checklists/` (moved Aug 4, 2026)
+
+**Replaced by:** [`CHARLES_CHECKLIST.md`](../../CHARLES_CHECKLIST.md) (Paper Directions 15 — characterization mission; itself superseded by post-PD16 checklist).
 
 **Why archived:** Re-entry + Pass A/B redo + PD14 magnitude scaffold did its job. Alex PD15 (Jul 31, 2026) reframed the mission as **directed sensitivity characterization** (~4 days), then statistical fitting — not the old onboarding path.
 
-**Source notes:** [`../../transcripts/PD15_notes.md`](../../transcripts/PD15_notes.md)
+**Source notes:** [`../../../../transcripts/PD15_notes.md`](../../../../transcripts/PD15_notes.md)
 
 ---
 
@@ -78,7 +80,7 @@ You are **not** rebuilding these. Treat as locked inputs.
 
 | Done | Step | Proof |
 |------|------|-------|
-| [ ] | Read [`04_Pass_A_and_Pass_B_in_Plain_English.md`](04_Pass_A_and_Pass_B_in_Plain_English.md) | |
+| [ ] | Read [`../../04_Pass_A_and_Pass_B_in_Plain_English.md`](../../04_Pass_A_and_Pass_B_in_Plain_English.md) | |
 | [ ] | Can say in your own words: hero = empirical; Pass A/B = simulated league | |
 | [ ] | Can say what Pass A changes vs what Pass B changes | |
 | [ ] | Optional after 04: skim `sports/540_READ_ME_SIM.md` (shorthand OK now) | |
@@ -123,7 +125,7 @@ You are **not** rebuilding these. Treat as locked inputs.
 
 ## 5. Alex magnitude — predictive importance (Paper Directions 14)
 
-**Full spec:** [`05_Alex_Magnitude_Spec.md`](05_Alex_Magnitude_Spec.md)  
+**Full spec:** [`../../05_Alex_Magnitude_Spec.md`](../../05_Alex_Magnitude_Spec.md)  
 **Transcript:** `transcripts/20260730_Paper_Directions_14_otter_ai_transcript.docx`  
 **Reminder:** Hero ventile plot ≠ this task. Fit **Model A** (ability + poolq_loo + poolq_loo²) vs **Model B** (ability only); compare predicted draft probabilities and overall predictive gain.
 
@@ -171,7 +173,7 @@ Do **not** check these off here; they are out of scope until you decide otherwis
 - Nesting note / Pertinent Thoughts / old 14-doc stack
 - Fixing every “bin 16 only” prose line (nice polish; not blocking)
 
-Park list: [`PARKED_FOR_LATER.md`](PARKED_FOR_LATER.md).
+Park list: [`../../PARKED_FOR_LATER.md`](../../PARKED_FOR_LATER.md).
 
 ---
 
@@ -192,4 +194,4 @@ Park list: [`PARKED_FOR_LATER.md`](PARKED_FOR_LATER.md).
 
 If sections **0–2** are checked: read **§2b / doc 04**, then start **§3** (Pass A script).
 
-When stuck: return to [`00_READ_ME_FIRST.md`](00_READ_ME_FIRST.md), then come back **here**.
+When stuck: return to [`../../00_READ_ME_FIRST.md`](../../00_READ_ME_FIRST.md), then come back **here**.
