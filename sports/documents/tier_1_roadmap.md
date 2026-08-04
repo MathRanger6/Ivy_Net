@@ -16,7 +16,7 @@
 - `tier_1_model.md` — model layer notes.
 - `Tier1_Briefing_Outline.md` — outline answering Alex's May 5 briefing guidance: model components, assumptions, fitting plan, and turning point.
 - `Alex_Tier1_Sequential_Model_Outline.md` — **advisor-order spine** (minimal model → data → fit → `L^*`); links here and to `538_alex_tier1_model_and_fit.ipynb`.
-- `Tier1_Narrative_Outline.md` — current narrative flow: competing local forces, \(L\)-first Tier 1 model, \(\Lambda\), fitting plan, variable domains, and reference addenda.
+- `Tier1_Narrative_Outline.md` — current narrative flow: competing local forces, \(L\)-first Tier 1 model, \(K\), fitting plan, variable domains, and reference addenda.
 - `2026_0430_Paper7_feedback.md` — theory vs minimal model; scarcity.
 
 Optional depth (broader VECTOR notes): `Vector_Master_Theory_and_Modeling_Notes*.md`, `Vector_Questions_and_Modeling_Thoughts.md`, `Vector_Evans_Reaction_and_Theoretical_Expansion_Notes.md` — pull excerpts into this roadmap only when a line becomes a **coded rule** or sample definition.

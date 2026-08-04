@@ -1,0 +1,62 @@
+{
+  "diagnostic": "sort_chop_lambda_sweep",
+  "preset": "539",
+  "seed": 42,
+  "assignment": "sort_chop",
+  "gamma": 10.0,
+  "lambda_crit_4_over_gamma": 0.4,
+  "n_teams": 350,
+  "roster_size": 16,
+  "n_individuals": 5600,
+  "n_selected": 560,
+  "k_over_n": 0.1,
+  "arms": [
+    {
+      "label": "lambda_0",
+      "lambda": 0.0
+    },
+    {
+      "label": "lambda_01",
+      "lambda": 0.1
+    },
+    {
+      "label": "lambda_02",
+      "lambda": 0.2
+    },
+    {
+      "label": "lambda_03",
+      "lambda": 0.3
+    },
+    {
+      "label": "lambda_04",
+      "lambda": 0.4
+    },
+    {
+      "label": "lambda_05",
+      "lambda": 0.5
+    },
+    {
+      "label": "lambda_06",
+      "lambda": 0.6
+    },
+    {
+      "label": "lambda_07",
+      "lambda": 0.7
+    },
+    {
+      "label": "lambda_08",
+      "lambda": 0.8
+    },
+    {
+      "label": "lambda_09",
+      "lambda": 0.9
+    },
+    {
+      "label": "lambda_1",
+      "lambda": 1.0
+    }
+  ],
+  "visualize_x_axis": "pool_mean",
+  "hero_bins": 100,
+  "lambda_sweep_mode": "decile"
+}

@@ -5,7 +5,7 @@ Run (repo root):
   python sports/scripts/build_lambda_characterization_slide.py
 
 Regenerates Pass B λ ablation figure, then writes:
-  3-Master_Plan/re_entry/HEROs_and_PASSes/CHAR_lambda_characterization.pptx
+  HEROs_and_PASSes/slides/auto/CHAR_lambda_characterization_AUTO.pptx
 """
 
 from __future__ import annotations
@@ -21,13 +21,14 @@ from pptx.util import Inches, Pt
 
 REPO = Path(__file__).resolve().parents[2]
 SCRIPTS = Path(__file__).resolve().parent
-GALLERY = REPO / "3-Master_Plan" / "re_entry" / "HEROs_and_PASSes"
-META = GALLERY / "PASS_B_lambda_ablation_meta.json"
-OUT_PPTX = GALLERY / "CHAR_lambda_characterization.pptx"
-PASS_B_SCRIPT = SCRIPTS / "pass_b_lambda_ablation_bundle.py"
-FIG = GALLERY / "PASS_B_lambda_ablation_selection_by_pool_mean.png"
-
 sys.path.insert(0, str(SCRIPTS))
+from hero_gallery_paths import AUTO_LAMBDA_DECK, PASS_B, ensure_hero_dirs
+
+META = PASS_B / "PASS_B_lambda_ablation_meta.json"
+OUT_PPTX = AUTO_LAMBDA_DECK
+PASS_B_SCRIPT = SCRIPTS / "pass_b_lambda_ablation_bundle.py"
+FIG = PASS_B / "PASS_B_lambda_ablation_selection_by_pool_mean.png"
+
 from gallery_knobs import LAMBDA_HIGH, LAMBDA_LOW, LAMBDA_MODERATE
 from gallery_mathtext import fill_bullets_latex, populate_paragraph_with_latex
 
@@ -99,7 +100,7 @@ def _add_params_column(slide, meta: dict, *, left, top, width, height) -> None:
     eq.space_after = 4
     populate_paragraph_with_latex(
         eq,
-        r"$S_i = A_i - \lambda\,L_C$",
+        r"$S_i = A_i - \lambda \cdot L_C$",
         font_size=12,
     )
 
@@ -170,7 +171,7 @@ def _add_slide(prs: Presentation, meta: dict) -> None:
 
 
 def main() -> None:
-    GALLERY.mkdir(parents=True, exist_ok=True)
+    ensure_hero_dirs()
     _regenerate_figure()
     meta = _load_meta()
 

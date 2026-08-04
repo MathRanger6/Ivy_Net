@@ -131,7 +131,7 @@ Inverted-U on `poolq_loo` = **Rung 1**. Wang-style paper also needs **Rung 3**: 
 | # | Name | What it discriminates |
 |---|------|------------------------|
 | **#1** | Near-threshold heterogeneity | Congestion hurts **borderline elite**, not superstars or non-contenders (Alex mechanism 3) |
-| **#2** | Peak shift with **Λ** | Global slot scarcity moves the peak — finite distinction capacity vs purely local story |
+| **#2** | Peak shift with **K** | Global slot scarcity moves the peak — finite distinction capacity vs purely local story |
 
 **Wang’s example (Yin et al. 2019 — notes in `5-Manuscript/obsolete/superseded_briefings/wang_paper_model.md`):**
 
@@ -166,7 +166,7 @@ Reduced form (L_net = B − D)  Net advancement propensity (benefit minus constr
 |---|--------------------------|-------------------------------------------|
 | **Basic question** | Given local peers, how does **evaluation/selection** work under congestion? | Given institutions, **who ends up in which peer pool**, and what does that do to advancement? |
 | **Core object** | **Score** \(S_i = A_i - \lambda C_{i,t}\) → pick top *K* | **Pool assignment** + **LOO pool quality** → inverted-U |
-| **Congestion** | Viable-peer density in **selection rule** | Also `crowding_smooth`, pool overlap, finite slots (Λ) |
+| **Congestion** | Viable-peer density in **selection rule** | Also `crowding_smooth`, pool overlap, finite slots (K) |
 | **Generative POC** | Soft assignment on fixed/simulated rosters; talent-only fails | 538 pool assignment, overlap plots |
 | **Decomposition** | Narrow: A vs D in score; six Alex mechanisms | Wider: B vs D in \(L_{\text{net}}\); sorting vs selection vs opportunity suppression |
 | **v1 role** | Rung 2 POC + D-leg ontology | Rung 1 phenomenon + **distinctive** sorting/composition evidence |
@@ -286,7 +286,7 @@ Not “marketing hook” (clickbait). Not “plot hook” (narrative suspense). 
 
 Three things a hook always does:
 
-1. **Names where something belongs** so you and the agents don’t re-litigate “where does Λ live?” every week.
+1. **Names where something belongs** so you and the agents don’t re-litigate “where does K live?” every week.
 2. **Admits incompleteness honestly** — a hook is allowed to be **prose-only**, **placeholder**, or **repo-target** until evidence arrives (`#07` guardrails).
 3. **Keeps the stack connected** — theory ↔ measurement ↔ code ↔ chapter ↔ **manuscript §7** (predictions) stay linked without pretending the link is finished.
 
@@ -298,12 +298,12 @@ Three things a hook always does:
 
 | Word | Why “hook” fits better here |
 |------|-----------------------------|
-| **Placeholder** | Sounds empty. A Λ hook still carries **conceptual content** (boards, draft picks, tenure slots) — you’re allowed to write **manuscript §7** sentences about it (from staging `#12` §4.2). |
+| **Placeholder** | Sounds empty. A K hook still carries **conceptual content** (boards, draft picks, tenure slots) — you’re allowed to write **manuscript §7** sentences about it (from staging `#12` §4.2). |
 | **Anchor** | Close, but static. “Hook” implies **connection across layers** (Menger ch → project story → Army prose). |
 | **TODO** | Too task-list. Hooks are **structural** — part of the paper’s skeleton, not a stray chore. |
 | **Claim** | Too strong. A hook is what you may **point at** before you may **assert** (see `#07`: supported vs preliminary vs defer). |
 
-When docs say “Λ hook prose,” they mean: *write the conceptual paragraph now; don’t claim the sweep figure exists.*
+When docs say “K hook prose,” they mean: *write the conceptual paragraph now; don’t claim the sweep figure exists.*
 
 ---
 
@@ -322,7 +322,7 @@ When docs say “Λ hook prose,” they mean: *write the conceptual paragraph no
 
 | Usage | What it hooks **from** → **to** | Example |
 |--------|----------------------------------|---------|
-| **Prediction hook** | Mechanism → **manuscript §7** prose (figure optional) | “**Λ hook**” = global slot capacity shifts peak (prediction **#2**); Army-led prose in **§7** — **no** finished Λ-sweep figure in repo yet |
+| **Prediction hook** | Mechanism → **manuscript §7** prose (figure optional) | “**K hook**” = global slot capacity shifts peak (prediction **#2**); Army-led prose in **§7** — **no** finished K-sweep figure in repo yet |
 | **Wang-move hook** | Model logic → test beyond discovery curve | Prediction **#1** near-threshold heterogeneity — see **worked example** below (not bare “4D”) |
 | **Repo / PD12 hook** | Priority / mechanism → codebase location | “Repo hook: `sports/539_alex_model.ipynb`” in [`20260520_Transcript_12_guidance.md`](20260520_Transcript_12_guidance.md) |
 | **Literature hook** | Companion chapter → your empirical story | Menger calibration table “project hook” column (Ch 10 → selective ecology / overlap) |
@@ -344,7 +344,7 @@ When docs say “Λ hook prose,” they mean: *write the conceptual paragraph no
 
 **How to hear it in conversation**
 
-- “What’s the Λ **hook**?” → *Where in the manuscript and which domain leads the argument?* (Answer: **manuscript §7**, Army prose, boards/slots — not “we simulated Λ in `538D` CELL 10.”)
+- “What’s the K **hook**?” → *Where in the manuscript and which domain leads the argument?* (Answer: **manuscript §7**, Army prose, boards/slots — not “we simulated K in `538D` CELL 10.”)
 - “Is there a **repo hook** for near-threshold?” → *Which notebook/file owns that readout?* (`sports/538D_development.ipynb` **CELL 4D** → `heterogeneity_ventiles_top_tail.png` in D10 bundle — `#08`.)
 - “Menger **hook** for overlap?” → *Which companion chapter justifies assortative-but-overlapping pools?* (Selective ecology / matching — `#20260617` calibration doc.)
 

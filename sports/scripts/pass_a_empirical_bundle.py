@@ -25,7 +25,7 @@ Run (repo root)
   python sports/scripts/pass_a_empirical_bundle.py
 
 Outputs (only)
-  3-Master_Plan/re_entry/HEROs_and_PASSes/PASS_A_*  (+ HERO_* PNG if synced)
+  3-Master_Plan/re_entry/HEROs_and_PASSes/pass_a/PASS_A_*  (+ HERO_* PNG if synced)
 
 Spec
   sports/540_READ_ME_SIM.md
@@ -46,7 +46,9 @@ SCRIPTS = Path(__file__).resolve().parent
 SPORTS = REPO / "sports"
 sys.path.insert(0, str(SCRIPTS))
 from gallery_knobs import HERO_BINS
-OUT = REPO / "3-Master_Plan" / "re_entry" / "HEROs_and_PASSes"
+from hero_gallery_paths import PASS_A, ensure_hero_dirs
+
+OUT = PASS_A
 PASS_A_PNG_NAME = "PASS_A_empirical_talent_vs_roster_side_by_side.png"
 HERO_SLUG = "empirical_ppm_poolq_loo_16quantile_winsor0199_min20_2011"
 HERO_PNG_NAME = f"HERO_inverted_u_{HERO_SLUG}.png"

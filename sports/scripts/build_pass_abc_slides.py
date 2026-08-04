@@ -8,7 +8,7 @@ Run (repo root):
   python sports/scripts/build_pass_abc_slides.py
 
 Output:
-  3-Master_Plan/re_entry/HEROs_and_PASSes/PASS_ABC_Gallery_Slides.pptx
+  3-Master_Plan/re_entry/HEROs_and_PASSes/slides/PASS_ABC_Gallery_Slides.pptx
 """
 
 from __future__ import annotations
@@ -22,10 +22,11 @@ from pptx.util import Inches, Pt
 
 REPO = Path(__file__).resolve().parents[2]
 SCRIPTS = Path(__file__).resolve().parent
-GALLERY = REPO / "3-Master_Plan" / "re_entry" / "HEROs_and_PASSes"
-OUT_PPTX = GALLERY / "PASS_ABC_Gallery_Slides.pptx"
-
 sys.path.insert(0, str(SCRIPTS))
+from hero_gallery_paths import PASS_A, PASS_B, PASS_C_RHO, SLIDES, ensure_hero_dirs
+
+OUT_PPTX = SLIDES / "PASS_ABC_Gallery_Slides.pptx"
+
 from gallery_mathtext import fill_bullets_latex, populate_paragraph_with_latex
 
 # Standard 16:9 (PowerPoint default widescreen)
@@ -37,7 +38,7 @@ CONTENT_W = SLIDE_W - 2 * MARGIN
 SLIDES = [
     {
         "title": "Pass A — Empirical MBB: Roster Pressure in the Data",
-        "image": GALLERY / "PASS_A_empirical_talent_vs_roster_side_by_side.png",
+        "image": PASS_A / "PASS_A_empirical_talent_vs_roster_side_by_side.png",
         "bullets": [
             "Real NCAA panel (2011–2021): mean NBA draft rate by ventile.",
             r"Left — talent alone: ability (ppm $z$ within season). Monotone up.",
@@ -49,11 +50,11 @@ SLIDES = [
     },
     {
         "title": "Pass B — Generative: Congestion in Score Bends the Curve",
-        "image": GALLERY / "PASS_B_generative_lambda_knockout_side_by_side.png",
+        "image": PASS_B / "PASS_B_generative_lambda_knockout_side_by_side.png",
         "bullets": [
             r"Synthetic league: ASSIGN $\rightarrow$ SCORE $\rightarrow$ SELECT $\rightarrow$ VISUALIZE ($539$ preset).",
             r"Left — $\lambda = 0$: score $S_i = A_i$ only (talent-only ranking). Roughly monotone.",
-            r"Right — $\lambda > 0$: score $S_i = A_i - w\,L_C$ (viable-peer congestion in SCORE).",
+            r"Right — $\lambda > 0$: score $S_i = A_i - w \cdot L_C$ (viable-peer congestion in SCORE).",
             r"VISUALIZE on pool mean (team ability, includes self) — not $\mathrm{poolq\_loo}$.",
             r"Claim: roster pressure in the advancement rule bends the curve (qualitative POC).",
         ],
@@ -61,9 +62,9 @@ SLIDES = [
     },
     {
         "title": "Pass C — Generative: Assortativity Shapes the Sorted World",
-        "image": GALLERY / "PASS_C_rho_ablation_selection_by_pool_mean.png",
+        "image": PASS_C_RHO / "PASS_C_rho_ablation_selection_by_pool_mean.png",
         "bullets": [
-            r"Same $539$ score as Pass B right arm — $S_i = A_i - w\,L_C$ held fixed.",
+            r"Same $539$ score as Pass B right arm — $S_i = A_i - w \cdot L_C$ held fixed.",
             r"One draw of talent; only ASSIGN changes (soft $\rho$ ladder + sort-and-chop).",
             r"$\rho$ controls how sharply players match team targets — roster sorting.",
             r"VISUALIZE on pool mean: assortativity moves the inverted-U readout.",
@@ -136,7 +137,7 @@ def _add_slide(prs: Presentation, spec: dict) -> None:
 
 
 def main() -> None:
-    GALLERY.mkdir(parents=True, exist_ok=True)
+    ensure_hero_dirs()
     prs = Presentation()
     prs.slide_width = SLIDE_W
     prs.slide_height = SLIDE_H

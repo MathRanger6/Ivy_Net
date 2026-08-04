@@ -1,0 +1,16 @@
+# Sort-and-chop λ threshold zoom (2026-08-04)
+
+λ_crit = 4/γ = 0.4000 (γ=10), λ ∈ [0, 1], 7 below + crit + 3 above, seed 42.
+N=5600, K=560, 16 bins, x zoom bins ≥ 5.
+
+- **below_1** (λ=0): peak 1.0000 at bin 16; bin1→16 0.0000→1.0000
+- **below_2** (λ=0.057143): peak 1.0000 at bin 16; bin1→16 0.0000→1.0000
+- **below_3** (λ=0.114286): peak 1.0000 at bin 16; bin1→16 0.0000→1.0000
+- **below_4** (λ=0.171429): peak 1.0000 at bin 16; bin1→16 0.0000→1.0000
+- **below_5** (λ=0.228571): peak 1.0000 at bin 16; bin1→16 0.0000→1.0000
+- **below_6** (λ=0.285714): peak 1.0000 at bin 16; bin1→16 0.0000→1.0000
+- **below_7** (λ=0.342857): peak 1.0000 at bin 16; bin1→16 0.0000→1.0000
+- **crit** (λ=0.4): peak 1.0000 at bin 16; bin1→16 0.0000→1.0000
+- **above_1** (λ=0.6): peak 0.9400 at bin 11; bin1→16 0.0000→0.0000
+- **above_2** (λ=0.8): peak 0.9286 at bin 10; bin1→16 0.0000→0.0000
+- **above_3** (λ=1): peak 1.0000 at bin 9; bin1→16 0.0000→0.0000

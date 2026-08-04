@@ -5,7 +5,7 @@ Run (repo root):
   python sports/scripts/build_rho_characterization_slide.py
 
 Regenerates Pass C PNG variants, then writes:
-  3-Master_Plan/re_entry/HEROs_and_PASSes/CHAR_rho_characterization.pptx
+  HEROs_and_PASSes/slides/auto/CHAR_rho_characterization_AUTO.pptx
     slide 1 — sort-and-chop visible
     slide 2 — sort-and-chop suppressed (soft ρ arms only)
 """
@@ -13,7 +13,6 @@ Regenerates Pass C PNG variants, then writes:
 from __future__ import annotations
 
 import json
-import os
 import subprocess
 import sys
 from pathlib import Path
@@ -24,16 +23,17 @@ from pptx.util import Inches, Pt
 
 REPO = Path(__file__).resolve().parents[2]
 SCRIPTS = Path(__file__).resolve().parent
-GALLERY = REPO / "3-Master_Plan" / "re_entry" / "HEROs_and_PASSes"
-META = GALLERY / "PASS_C_rho_ablation_meta.json"
-OUT_PPTX = GALLERY / "CHAR_rho_characterization.pptx"
+sys.path.insert(0, str(SCRIPTS))
+from hero_gallery_paths import AUTO_RHO_DECK, PASS_C_RHO, ensure_hero_dirs
+
+META = PASS_C_RHO / "PASS_C_rho_ablation_meta.json"
+OUT_PPTX = AUTO_RHO_DECK
 PASS_C_SCRIPT = SCRIPTS / "pass_c_rho_ablation_bundle.py"
 
-FIG_WITH = GALLERY / "PASS_C_rho_ablation_selection_by_pool_mean_with_sortchop.png"
-FIG_WITHOUT = GALLERY / "PASS_C_rho_ablation_selection_by_pool_mean_no_sortchop.png"
+FIG_WITH = PASS_C_RHO / "PASS_C_rho_ablation_selection_by_pool_mean_with_sortchop.png"
+FIG_WITHOUT = PASS_C_RHO / "PASS_C_rho_ablation_selection_by_pool_mean.png"
 
-sys.path.insert(0, str(SCRIPTS))
-from gallery_mathtext import fill_bullets_latex, populate_paragraph_with_latex
+from gallery_mathtext import add_plain_latex_block, fill_bullets_latex, populate_paragraph_with_latex
 
 SLIDE_W = Inches(13.333)
 SLIDE_H = Inches(7.5)
@@ -69,23 +69,13 @@ def _load_meta() -> dict:
     return {"selection": {"w": 0.55}, "assignment_sigma": 0.65, "preset": "539"}
 
 
-def _run_pass_c(*, show_sort_chop: bool, png_suffix: str) -> None:
-    env = os.environ.copy()
-    env["GALLERY_SHOW_SORT_CHOP"] = "1" if show_sort_chop else "0"
-    env["GALLERY_PASS_C_PNG_SUFFIX"] = png_suffix
+def _regenerate_figures() -> None:
+    print("Regenerating Pass C figures (soft-only + with sort-and-chop) ...")
     subprocess.run(
         [sys.executable, str(PASS_C_SCRIPT)],
         cwd=str(REPO),
-        env=env,
         check=True,
     )
-
-
-def _regenerate_figures() -> None:
-    print("Regenerating Pass C figure (with sort-and-chop) ...")
-    _run_pass_c(show_sort_chop=True, png_suffix="_with_sortchop")
-    print("Regenerating Pass C figure (no sort-and-chop on plot) ...")
-    _run_pass_c(show_sort_chop=False, png_suffix="_no_sortchop")
 
 
 def _add_picture_fitted(slide, img_path: Path, left, top, max_width, max_height):
@@ -131,25 +121,16 @@ def _add_params_column(
     head.font.bold = True
     head.space_after = 6
 
-    eq = tf.add_paragraph()
-    eq.text = ""
-    eq.space_after = 4
-    populate_paragraph_with_latex(
-        eq,
-        r"$\pi_{ij} \propto \exp\!\left(-\rho\,\frac{(A_i-T_j)^2}{2\sigma^2}\right)$",
-        font_size=12,
+    assign_latex = (
+        r"\pi_{ij} \propto \exp\left(-\rho \cdot \frac{(A_i-T_j)^2}{2\sigma^2}\right)"
     )
+    add_plain_latex_block(tf, assign_latex, font_size=10, label="ASSIGN (knob ρ) — LaTeX:")
 
-    arms_line = (
-        rf"$\sigma={sigma:g}$ fixed"
-        "\n"
-        rf"arms: $\rho \in {{0.1, 1, 8, 32}}$"
-    )
-    if show_sortchop_on_figure:
-        arms_line += " + sort-and-chop"
     bullets = [
-        arms_line,
-        rf"$S_i = A_i - {w:g}\,L_C$ (crowding in score held constant across arms)",
+        rf"$\sigma={sigma:g}$ fixed",
+        rf"arms: $\rho \in {{0.1, 1, 8, 32}}$"
+        + (" + sort-and-chop" if show_sortchop_on_figure else ""),
+        rf"$S_i = A_i - {w:g} \cdot L_C$ (crowding in score held constant across arms)",
         r"top-$K$ by $S_i$",
         r"VISUALIZE = mean $Y_{\mathrm{selected}}$ vs pool mean ($16$ bins)",
     ]
@@ -245,7 +226,7 @@ def _add_slide(prs: Presentation, meta: dict, variant: dict) -> None:
 
 
 def main() -> None:
-    GALLERY.mkdir(parents=True, exist_ok=True)
+    ensure_hero_dirs()
     _regenerate_figures()
     meta = _load_meta()
 

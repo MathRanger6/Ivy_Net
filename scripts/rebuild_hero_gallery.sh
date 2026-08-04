@@ -16,7 +16,7 @@
 #   GALLERY_RHO_LOW / GALLERY_RHO_MODERATE / GALLERY_RHO_HIGH / GALLERY_RHO_VERY_HIGH
 #
 # Deck parts (in order) — hand-maintained slides are separate files:
-#   1. PASS_ABC_Gallery_Slides.pptx  (auto-built, in HEROs_and_PASSes/)
+#   1. PASS_ABC_Gallery_Slides.pptx  (auto-built, in HEROs_and_PASSes/slides/)
 #   2. Model.pptx                    (you edit — lives in re_entry/, not gallery/)
 #   3. Future_Work_Slides.pptx       (optional; re_entry/ or gallery/)
 #
@@ -33,6 +33,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 GALLERY="${GALLERY_DIR:-$REPO_ROOT/3-Master_Plan/re_entry/HEROs_and_PASSes}"
+SLIDES="$GALLERY/slides"
 RE_ENTRY="${RE_ENTRY_DIR:-$REPO_ROOT/3-Master_Plan/re_entry}"
 PYTHON="${PYTHON:-python}"
 
@@ -82,7 +83,8 @@ fi
 echo "=== Gallery rebuild ==="
 echo "  preset=$GALLERY_PRESET  bins=$GALLERY_HERO_BINS  seed=$GALLERY_HERO_SEED"
 echo "  gallery=$GALLERY"
-echo "  out=$GALLERY/$OUT_NAME"
+echo "  slides=$SLIDES"
+echo "  out=$SLIDES/$OUT_NAME"
 echo ""
 
 if [[ "$MERGE_ONLY" -eq 0 ]]; then
@@ -108,10 +110,10 @@ if [[ "$SLIDES_ONLY" -eq 1 ]]; then
   exit 0
 fi
 
-PASS_ABC="$GALLERY/PASS_ABC_Gallery_Slides.pptx"
+PASS_ABC="$SLIDES/PASS_ABC_Gallery_Slides.pptx"
 MODEL="${MODEL_PPTX:-$RE_ENTRY/Model.pptx}"
 FUTURE="${FUTURE_PPTX:-$RE_ENTRY/Future_Work_Slides.pptx}"
-OUT="$GALLERY/$OUT_NAME"
+OUT="$SLIDES/$OUT_NAME"
 
 if [[ ! -f "$PASS_ABC" ]]; then
   echo "ERROR: missing $PASS_ABC — run without --merge-only first." >&2

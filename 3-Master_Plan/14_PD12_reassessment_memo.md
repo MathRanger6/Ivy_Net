@@ -34,7 +34,7 @@ The fix is **not** to reopen identifiability (PD12 Priority 1), full extreme-eve
 | Phenomenon (inverted-U, three settings) | Locked triad; tenure preliminary | ✅ |
 | Minimal model organizes inquiry | Path II; Alex score; soft assignment | ✅ |
 | Model suggests **new measurements** | **Implemented in repo** (`crowding_smooth`, viable-peer logic, `sports/538D_development.ipynb` CELL 4D heterogeneity) but **not named as a plan stage** | ⚠️ **Under-labeled** |
-| Model generates predictions | #1 near-threshold, #2 Λ peak-shift locked | ✅ (#2 prose-heavy) |
+| Model generates predictions | #1 near-threshold, #2 K peak-shift locked | ✅ (#2 prose-heavy) |
 | Parameter identifiability / 3-domain fit | Explicitly **deferred** | ✅ intentional deferral |
 | Falsification / 4th domain | **Deferred** | ✅ intentional deferral |
 
@@ -77,7 +77,7 @@ Re-label the locked ladder in all planning docs as **five rungs** (Rung 2.5 = mo
 (3) At least one model-guided measurable quantity exported or cited:
       e.g. crowding_smooth / viable-peer congestion vs poolq_loo (quality)
 (4) At least one prediction-facing readout tied to mechanism:
-      e.g. near-threshold heterogeneity (`538D` CELL 4D); Λ hook prose (#2)
+      e.g. near-threshold heterogeneity (`538D` CELL 4D); K hook prose (#2)
 (5) Honest limitation prose (axis mismatch; tenure preliminary; no causal claims)
 (6) Frozen export bundle (D10)
 ```
@@ -98,7 +98,7 @@ Re-label the locked ladder in all planning docs as **five rungs** (Rung 2.5 = mo
 |--------|------------|--------|-------|
 | **Basketball** | Quality `poolq_loo` vs congestion `crowding_smooth` / \(C_{i,t}\) | Implemented; export in **D10** | SCOUT |
 | **Basketball** | Near-threshold heterogeneity (`538D` CELL 4D ventiles) | On disk (`#08`) | SCOUT |
-| **Army** | Pool minus mean (quality); pool size / Λ hook | Empirical | CODA |
+| **Army** | Pool minus mean (quality); pool size / K hook | Empirical | CODA |
 | **Tenure** | `poolq_loo_mean` (quality); `pool_size_oa_loo` as congestion proxy | On panel; stage 9 uses quality only | PEER |
 
 ### Where it sits
@@ -110,7 +110,7 @@ Minimal model POC (Rung 2 — `sports/538D_development.ipynb` CELL 10; talent-on
     ↓
 Model-guided empirical features (Rung 2.5 — EXPORT + label)   ← ADD THIS STAGE NAME
     ↓
-Predictions (Rung 3 — near-threshold; Λ prose)
+Predictions (Rung 3 — near-threshold; K prose)
     ↓
 Manuscript (Rung 4)
 ```
@@ -130,7 +130,7 @@ Manuscript (Rung 4)
 | **1** | Charles **Tier A batch** (unchanged): D10 go, C1–C2, V1–V3 | Charles | Unblocks packaging |
 | **2** | **SCOUT D10** — generative contrast, **axis table (quality vs congestion)**, near-threshold heterogeneity (`538D` CELL 4D), score one-pager, refreshed empirical Fig 2 | SCOUT | Priority 3 export |
 | **3** | **VECTOR** — Wang spine with **Tier 2.5 subsection**; PD12 one-paragraph sentence (quality vs \(C_{i,t}\)) | VECTOR | Theory → measurements |
-| **4** | **Manuscript §7** (from staging `#12` §4) — #1 as empirical test of congestion story; #2 Λ conceptual (Army prose) | VECTOR | Predictions |
+| **4** | **Manuscript §7** (from staging `#12` §4) — #1 as empirical test of congestion story; #2 K conceptual (Army prose) | VECTOR | Predictions |
 | **5** | **PEER** inference CSV (C1–C2); **manuscript §4** tenure + limitations | PEER | Rung 1 leg honest |
 | **6** | **Alex meeting** — present 5-rung ladder; confirm v1 **deferrals** (P1, P4) acceptable for submission draft | Charles + Alex | Manage expectations |
 
@@ -160,7 +160,7 @@ Charles requested all agents read [`obsolete/pd12_reassessment_duplicates/202606
 |-------|--------------|---------------------------|
 | **COMPASS** | ✅ | This document + living doc patches |
 | **SCOUT** | [`obsolete/pd12_reassessment_duplicates/20260615_1156_SCOUT_to_COMPASS_PD12_reassessment_input.md`](obsolete/pd12_reassessment_duplicates/20260615_1156_SCOUT_to_COMPASS_PD12_reassessment_input.md) | D10 manifest lists Tier 2.5 exports (quality vs congestion panel, `538D` CELL 4D heterogeneity); optional C8 row |
-| **CODA** | [`obsolete/pd12_reassessment_duplicates/20260615_1156_CODA_read_receipt_PD12_reassessment.md`](obsolete/pd12_reassessment_duplicates/20260615_1156_CODA_read_receipt_PD12_reassessment.md) | Army lane unchanged; axis table gloss for quality leg; Λ / pool-size for prediction #2 |
+| **CODA** | [`obsolete/pd12_reassessment_duplicates/20260615_1156_CODA_read_receipt_PD12_reassessment.md`](obsolete/pd12_reassessment_duplicates/20260615_1156_CODA_read_receipt_PD12_reassessment.md) | Army lane unchanged; axis table gloss for quality leg; K / pool-size for prediction #2 |
 | **PEER** | [`obsolete/pd12_reassessment_duplicates/20260615_1156_PEER_read_receipt_Charles_to_COMPASS.md`](obsolete/pd12_reassessment_duplicates/20260615_1156_PEER_read_receipt_Charles_to_COMPASS.md) | C1–C2 path unchanged; optional PD12-C pool_size read on Charles route |
 | **VECTOR** | Co-requester via Charles; no separate receipt on disk | Staging `#12` §2–§3 before §4; PD12 quality/congestion paragraph in draft |
 
@@ -183,7 +183,7 @@ Tier 1 execution locks (D10, C1–C2, V1–V3) **unchanged**.
 
 ## One paragraph for Alex
 
-> We are not walking back Path II or the correspondence consensus. The v1 manuscript will show an empirical inverted-U on LOO peer quality across three settings, a minimal generative proof that talent-only selection fails and congestion in the score can bend curves, **explicit model-guided measurements** (quality vs congestion in basketball; pool structure in Army and tenure where data already exist), and two prediction-facing readouts — near-threshold heterogeneity and a global-capacity Λ hook. Full parametric identifiability across all three domains and a formal negative fourth setting are **planned next**, not blockers for the first complete draft.
+> We are not walking back Path II or the correspondence consensus. The v1 manuscript will show an empirical inverted-U on LOO peer quality across three settings, a minimal generative proof that talent-only selection fails and congestion in the score can bend curves, **explicit model-guided measurements** (quality vs congestion in basketball; pool structure in Army and tenure where data already exist), and two prediction-facing readouts — near-threshold heterogeneity and a global-capacity K hook. Full parametric identifiability across all three domains and a formal negative fourth setting are **planned next**, not blockers for the first complete draft.
 
 ---
 

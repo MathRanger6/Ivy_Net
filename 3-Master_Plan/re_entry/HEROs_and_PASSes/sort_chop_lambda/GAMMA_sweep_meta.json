@@ -1,0 +1,35 @@
+{
+  "diagnostic": "gamma_sweep_sort_chop",
+  "date": "2026-08-04",
+  "preset": "539",
+  "seed": 42,
+  "gamma_grid": [
+    5.0,
+    10.0,
+    20.0
+  ],
+  "lambda_arms": [
+    {
+      "label": "lambda_0",
+      "lambda": 0.0
+    },
+    {
+      "label": "lambda_025",
+      "lambda": 0.25
+    },
+    {
+      "label": "lambda_055",
+      "lambda": 0.55
+    },
+    {
+      "label": "lambda_075",
+      "lambda": 0.75
+    },
+    {
+      "label": "lambda_1",
+      "lambda": 1.0
+    }
+  ],
+  "assignment": "sort_chop",
+  "theta": 0.72
+}

@@ -40,7 +40,7 @@ Charles filed [`20260615_1155_Charles_to_COMPASS.md`](3-Master_Plan/20260615_115
 |-------------------------|---------------------|----------|
 | Minimal model organizes inquiry | Path II + SCOUT closure C1–C7 | **Aligned** — ability-only null + congestion POC |
 | Model proposes **new measurements** (Priority 3) | `crowding_smooth`, viable-peer counts, quality vs congestion split **already implemented** in SCOUT pipeline ([`20260520_Transcript_12_guidance.md`](sports/documents/20260520_Transcript_12_guidance.md) § Priority 3) | **Under-named** — treated as pipeline detail, not an explicit planning stage |
-| Model generates **predictions** | #1 near-threshold (4D exports); #2 Λ peak-shift (Army-led) | **Aligned** — but predictions appear as “manuscript §4” rather than model outputs |
+| Model generates **predictions** | #1 near-threshold (4D exports); #2 K peak-shift (Army-led) | **Aligned** — but predictions appear as “manuscript §4” rather than model outputs |
 | Parameter identifiability (Priority 1) | Deferred for v1 | **Intentional deferral** — consistent with Charles constraint |
 | Falsification / 4th domain (Priority 4) | Deferred | **Intentional deferral** |
 | Extreme events / kill switches (Priority 2) | Partial (talent-only fails) | **Acceptable for v1** — formal 539 sweeps not draft-critical |
@@ -107,7 +107,7 @@ Explicitly **reject** closure = “model reproduces phenomenon” — that would
 | Viable-peer congestion `crowding_smooth` / `C_{i,t}` | Implemented | SCOUT |
 | Quality vs congestion conceptual split | PD12 + claim table | VECTOR prose |
 | Near-threshold heterogeneity readout | 4D exports exist | SCOUT |
-| Army near-threshold / Λ hooks | CODA empirical | CODA |
+| Army near-threshold / K hooks | CODA empirical | CODA |
 
 **Where it sits (relative to other stages):**
 
@@ -136,7 +136,7 @@ Measurements were built **alongside** the empirical ladder (correct for Alex); t
 
 **Shortest faithful chain:**
 
-`Triad phenomenon (Army/MBB/tenure preliminary) → Basketball generative mechanism POC → Model-guided measurements (quality + congestion) → Two predictions (#1 near-threshold, #2 Λ) → Manuscript`
+`Triad phenomenon (Army/MBB/tenure preliminary) → Basketball generative mechanism POC → Model-guided measurements (quality + congestion) → Two predictions (#1 near-threshold, #2 K) → Manuscript`
 
 ---
 
@@ -176,7 +176,7 @@ Each agent acknowledges [`20260615_1155_Charles_to_COMPASS.md`](3-Master_Plan/20
 |-------|-------------------|
 | **SCOUT** | D10 manifest explicitly lists model-guided measurement artifacts |
 | **VECTOR** | §2–§3 draft order: measurements before predictions; PD12 quality/congestion paragraph |
-| **CODA** | No code change; confirm Army rows in axis table cover near-threshold + Λ |
+| **CODA** | No code change; confirm Army rows in axis table cover near-threshold + K |
 | **PEER** | No change to C1–C2 path |
 | **COMPASS** | Apply doc revisions in §Q5 |
 

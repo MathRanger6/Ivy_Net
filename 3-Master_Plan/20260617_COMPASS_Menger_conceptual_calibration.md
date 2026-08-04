@@ -176,7 +176,7 @@ Same intellectual neighborhood — **not the same paper**.
 Rung 1   Phenomenon (inverted-U on LOO proxy)
 Rung 2   Minimal mechanism (Path II generative POC)
 Rung 2.5 Model-guided features (quality vs congestion — PD12)
-Rung 3   Predictions (#1 near-threshold, #2 Λ — candidates, not proven)
+Rung 3   Predictions (#1 near-threshold, #2 K — candidates, not proven)
 Rung 4   Manuscript
 ```
 

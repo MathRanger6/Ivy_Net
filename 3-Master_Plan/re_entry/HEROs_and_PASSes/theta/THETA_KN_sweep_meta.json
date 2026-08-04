@@ -1,0 +1,25 @@
+{
+  "diagnostic": "theta_kn_sweep",
+  "date": "2026-08-04",
+  "preset": "539",
+  "seed": 42,
+  "theta_grid": [
+    0.5,
+    0.72,
+    0.9
+  ],
+  "kn_grid": {
+    "mbb_draft": 0.01,
+    "characterization": 0.1,
+    "army_high": 0.4
+  },
+  "fixed": {
+    "rho": 8.0,
+    "lambda_weight": 0.55,
+    "gamma": 10.0,
+    "assignment": "soft"
+  },
+  "n_teams": 350,
+  "roster_size": 16,
+  "hero_bins": 16
+}

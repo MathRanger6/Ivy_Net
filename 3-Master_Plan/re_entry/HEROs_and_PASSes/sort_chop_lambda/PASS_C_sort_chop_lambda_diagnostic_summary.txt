@@ -1,0 +1,17 @@
+# Sort-and-chop λ diagnostic (2026-08-03)
+
+Same sort-and-chop rosters; only λ in score changes.
+Preset 539, seed 42, N=5600 (350×16), K=560, 100 bins on pool mean.
+λ_crit = 4/γ = 0.4000 (γ=10).
+
+- **lambda_0** (λ=0): bin1→100 0.0000→1.0000; peak 1.0000 at bin 91
+- **lambda_01** (λ=0.1): bin1→100 0.0000→1.0000; peak 1.0000 at bin 92
+- **lambda_02** (λ=0.2): bin1→100 0.0000→1.0000; peak 1.0000 at bin 92
+- **lambda_03** (λ=0.3): bin1→100 0.0000→1.0000; peak 1.0000 at bin 92
+- **lambda_04** (λ=0.4) **crit**: bin1→100 0.0000→1.0000; peak 1.0000 at bin 92
+- **lambda_05** (λ=0.5): bin1→100 0.0000→1.0000; peak 1.0000 at bin 68
+- **lambda_06** (λ=0.6): bin1→100 0.0000→0.0000; peak 1.0000 at bin 61
+- **lambda_07** (λ=0.7): bin1→100 0.0000→0.0000; peak 1.0000 at bin 57
+- **lambda_08** (λ=0.8): bin1→100 0.0000→0.0000; peak 1.0000 at bin 54
+- **lambda_09** (λ=0.9): bin1→100 0.0000→0.0000; peak 1.0000 at bin 52
+- **lambda_1** (λ=1): bin1→100 0.0000→0.0000; peak 1.0000 at bin 49

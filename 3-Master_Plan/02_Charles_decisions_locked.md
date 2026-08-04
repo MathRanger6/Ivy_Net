@@ -37,7 +37,7 @@ Charles Tier 1 locks:
 | Q-FIG2 | June-dated Fig 2 re-export in D10 — yes |
 | C10–C11 | Defer prestige controls and subfield heterogeneity |
 | G1–G3 | Stage 9 OK for draft; Layer B pre-submission; Fine–Gray deferred |
-| C-Λ-1 | CODA Λ stub in **manuscript §7** / staging **`#12` §4.2** prose-only — OK for v1 |
+| C-K-1 | CODA K stub in **manuscript §7** / staging **`#12` §4.2** prose-only — OK for v1 |
 
 ---
 

@@ -1,10 +1,26 @@
 # Pertinent Thoughts — Scout (530 College Basketball Pipeline)
 
-**Last synced:** 2026-07-30
+**Last synced:** 2026-08-03
 
 This document mirrors **Pertinent_Thoughts.md** (Army / OER work): important discoveries, reflections on code and results, open problems, and directions worth investigating for the **Scout** dissertation thread — ESPN box → SR advanced → player–season panel → leave-one-out teammate pool quality → draft outcome EDA.
 
 **How to use it**: Add dated entries or new `##` sections as you go. Each block can follow the template: **Topic** → **Content to consider including** → **Potential placement** → **Key points** (plus optional implementation notes).
+
+---
+
+## Sort-and-chop λ threshold (Aug 2026)
+
+**Topic**: When does congestion in **score** (\(S_i = A_i - \lambda L_C\)) change selection on zero–between-team-overlap rosters?
+
+**Canonical write-up:** [`3-Master_Plan/re_entry/06_Lambda_threshold_and_KN_memo.md`](../../3-Master_Plan/re_entry/06_Lambda_threshold_and_KN_memo.md) (not a substitute for re-entry docs 01–05).
+
+**Key points**:
+
+- **0.41 is λ**, not \(A_i\) or \(T_j\). Bottleneck teams sit near **θ ≈ 0.72** (539 preset).
+- On sort-and-chop, **λ_crit ≈ 4/γ** (γ = viability sharpness in \(\sigma(\gamma(A-\theta))\)); γ = 10 → ≈ 0.40.
+- **λ = 0.25** can match **λ = 0** on bin curves until λ crosses threshold.
+- **K/N** and **θ** are separate knobs today; **PD15:** sweep both and test θ–K/N co-variation (MBB ~1% vs Army ~40% selectivity).
+- Figures: `re_entry/HEROs_and_PASSes/PASS_C_sort_chop_lambda_sweep.png`, `LAMBDA_threshold_gamma_viability.png`.
 
 ---
 

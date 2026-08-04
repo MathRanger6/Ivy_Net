@@ -62,7 +62,7 @@ Rung 2.5 Model-guided empirical features (PD12 P3)
 
 Rung 3   Predictions (named candidates — not all proven)
          #1 Near-threshold heterogeneity (`sports/538D_development.ipynb` CELL 4D → `#08`)
-         #2 Peak shift with global Λ (Army-led prose hook)
+         #2 Peak shift with global K (Army-led prose hook)
 
 Rung 4   Manuscript
 ```
@@ -93,7 +93,7 @@ Rung 4   Manuscript
 
 | Setting | Rung 1 | Rung 2 generative | Rung 2.5 | Rung 3 |
 |---------|--------|-------------------|----------|--------|
-| **Army** | CIF inverted-U on LOO pool minus mean | None (empirical leg) | Pool size / Λ proxies | Near-threshold; Λ peak-shift |
+| **Army** | CIF inverted-U on LOO pool minus mean | None (empirical leg) | Pool size / K proxies | Near-threshold; K peak-shift |
 | **Basketball** | LOO `poolq_loo` inverted-U | Alex score POC (`sports/538D_development.ipynb` CELL 10) | Quality vs `crowding_smooth` | Near-threshold (`538D` CELL 4D) |
 | **Tenure** | Stage 9 on `poolq_loo_mean` (preliminary) | None | `pool_size_oa_loo` optional | Deferred for v1 |
 

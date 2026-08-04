@@ -60,7 +60,7 @@ Alex’s May 20 guidance: the theory should **propose new measurements**, not on
 | Construct | Basketball | Army | Tenure |
 |-----------|------------|------|--------|
 | **Team quality** \(\bar{a}_t\) | `poolq_loo` | Pool minus mean | `poolq_loo_mean` |
-| **Congestion** \(C_{i,t}\) | `crowding_smooth` | Pool size / Λ hook (prose) | `pool_size_oa_loo` (on panel) |
+| **Congestion** \(C_{i,t}\) | `crowding_smooth` | Pool size / K hook (prose) | `pool_size_oa_loo` (on panel) |
 
 **Status:** Mostly **already built** in SCOUT pipeline. D10 exports + staging **`#12` §3** (Methods) make this stage explicit — **not** a new workstream.
 
@@ -71,7 +71,7 @@ Alex’s May 20 guidance: the theory should **propose new measurements**, not on
 | # | Prediction | Where it lives |
 |---|------------|----------------|
 | **#1** | Near-threshold heterogeneity — elite-pool dip **strongest for borderline** performers | SCOUT has basketball export; Army can support analogously |
-| **#2** | Peak shift with global **Λ** (distinction / slot capacity) | **Army-led prose**; conceptual hook, **no finished Λ-sweep figure** in repo yet |
+| **#2** | Peak shift with global **K** (distinction / slot capacity) | **Army-led prose**; conceptual hook, **no finished K-sweep figure** in repo yet |
 
 Mean×dispersion, networks, full deconstruction — **deferred**.
 
@@ -104,7 +104,7 @@ Mean×dispersion, networks, full deconstruction — **deferred**.
 
 | Agent | Status | Waiting on you for |
 |-------|--------|-------------------|
-| **CODA** (Army) | STANDING BY | AWS figure list, Alex (estimand, TB-stratify), optional Λ stub yes/no |
+| **CODA** (Army) | STANDING BY | AWS figure list, Alex (estimand, TB-stratify), optional K stub yes/no |
 | **PEER** (Tenure) | STANDING BY | **C1–C2** (OpenAlex tier + CSV names) |
 | **SCOUT** (Basketball) | STANDING BY | **D10 go** + bundle folder path |
 | **VECTOR** (Manuscript) | STANDING BY | Confirm manuscript priority; draft after D10 + C1–C2 |

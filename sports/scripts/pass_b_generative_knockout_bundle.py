@@ -27,7 +27,7 @@ Run (repo root)
   python sports/scripts/pass_b_generative_knockout_bundle.py
 
 Outputs
-  3-Master_Plan/re_entry/HEROs_and_PASSes/PASS_B_*
+  3-Master_Plan/re_entry/HEROs_and_PASSes/pass_b/PASS_B_*
   (+ PASS_B_D10_* reference copies from scout_manuscript_v1 when present)
 
 Spec
@@ -54,7 +54,9 @@ SCRIPTS = Path(__file__).resolve().parent
 SPORTS = REPO / "sports"
 sys.path.insert(0, str(SCRIPTS))
 from gallery_knobs import HERO_BINS, HERO_SEED, PRESET
-OUT = REPO / "3-Master_Plan" / "re_entry" / "HEROs_and_PASSes"
+from hero_gallery_paths import PASS_B, ensure_hero_dirs
+
+OUT = PASS_B
 D10_DIR = REPO / "datasets" / "mbb" / "exports_inverted_u_v0" / "scout_manuscript_v1"
 D10_EXPORT_SCRIPT = SPORTS / "scripts" / "export_scout_manuscript_bundle_v1.py"
 PASS_B_PNG_NAME = "PASS_B_generative_lambda_knockout_side_by_side.png"

@@ -82,7 +82,7 @@ Cross-domain paper: **inverted-U on leave-one-out peer-pool quality** (Army → 
 **Two primary predictions (locked for version 1):**
 
 1. **Near-threshold heterogeneity** — the elite-pool dip should hit hardest for **borderline** performers (good but not stars), not the very best or the clearly below-average. One exploratory basketball figure exists; not a full tri-domain proof yet.
-2. **Peak shift with global capacity (Λ)** — when an organization has more scarce advancement slots (bigger boards, more picks, more tenure lines), the **top** of the inverted-U should move. **Conceptual / prose hook** for now — not a finished cross-domain figure.
+2. **Peak shift with global capacity (K)** — when an organization has more scarce advancement slots (bigger boards, more picks, more tenure lines), the **top** of the inverted-U should move. **Conceptual / prose hook** for now — not a finished cross-domain figure.
 
 **One line for Alex:** **Draft is unblocked** — empirical triad is the spine; generative is a disciplined supplement, not a gate.
 
@@ -377,7 +377,7 @@ Think in two steps:
 
 
 ```text
-S_i = A_i - λ·L_C,i  =>  Y_i = 1 if S_i in top K (or top Λ)
+S_i = A_i - λ·L_C,i  =>  Y_i = 1 if S_i in top K
 ```
 
 

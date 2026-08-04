@@ -9,6 +9,8 @@
 
 **Quick index:** \(L_{\text{net}}\), B/D → §1 · \(S_i\) score → §2 · `poolq_loo`, congestion → §3 · bins/LPM/logit/\(L^*\) → §4 · Alex regressions → §5 · **`538D`/`538` CELL 10** → §6 · Cox/CIF → §7 · predictions → §8 · axis mismatch → §9 · deferred → §10
 
+**Notation lock (Aug 2026):** **K** = number selected (top-K slots); code `n_selected`. **λ** = congestion weight in **score** only. **K/N** = selectivity rate (characterization default **10%**). Retired: capital **Λ** for slots (old memos).
+
 | If you see… | Start here |
 |-------------|------------|
 | \(L_{\text{net}}\), B-leg, D-leg | §1 Ontology |
@@ -18,7 +20,7 @@
 | Draft regressions, mediation | §5 Alex empirical models |
 | CELL 10, soft assign, τ, \(T_j\) | §6 Generative simulation (`538D` / `538`) |
 | CIF, Cox, tenure hazard | §7 Survival & time-to-event |
-| Λ, near-threshold, predictions | §8 Prediction hooks |
+| K, near-threshold, predictions | §8 Prediction hooks |
 | “axis mismatch” | §9 Axis discipline |
 
 ---
@@ -30,10 +32,10 @@
 | \(a_i\), \(A_i\) | Own ability / performance | `perf` (often PPM z within season) | Own talent bucket (TB) / controls | Own publication rate / controls |
 | \(\bar{a}_t\) | Team / pool mean quality | `team_mean` (generative); empirical proxy = `poolq_loo` | Pool minus mean construct | Dept context (implicit in LOO) |
 | \(L_Q\) | LOO **mean** teammate quality | `poolq_loo` | LOO pool minus mean (`pool_minus_mean` family) | `poolq_loo_mean` |
-| \(C_{i,t}\), \(L_{C,\text{LOO}}\) | Viable-peer **congestion** | `crowding_smooth` | Pool size / Λ (prose hook) | `pool_size_oa_loo` (optional) |
+| \(C_{i,t}\), \(L_{C,\text{LOO}}\) | Viable-peer **congestion** | `crowding_smooth` | Pool size / K (prose hook) | `pool_size_oa_loo` (optional) |
 | \(S_i\) | Selection / evaluation score | Generative + score modes in CELL 10 | — (empirical only v1) | — |
 | \(Y\) | Advancement outcome | `Y_draft` / draft indicator | Promotion / attrition (competing risks) | `tenure_event` |
-| \(\Lambda\) | Global slot / board capacity | Draft class size (secondary) | Board size, promotion slots | Tenure lines (prose) |
+| \(K\) | Global slot / board capacity | Draft class size (secondary) | Board size, promotion slots | Tenure lines (prose) |
 
 ---
 
@@ -403,7 +405,7 @@ h_i(t) = h_0(t)\exp\bigl(\beta_1 a_i + \beta_2 \bar{a}_t + \beta_3 C_{i,t}\bigr)
 | Prediction | Formula hook | Key variables |
 |------------|--------------|---------------|
 | **#1 Near-threshold** | §5.3 interaction | \(a_i \times C_{i,t}\) or ventile slices by own perf |
-| **#2 Peak shift with Λ** | Move \(L^*\) or peak bin with global slots | \(\Lambda\) = board size, draft class size, tenure lines |
+| **#2 Peak shift with K** | Move \(L^*\) or peak bin with global slots | \(K\) = board size, draft class size, tenure lines |
 | Mean × SD dispersion | §5.5 | `peer_perf_sd_loo` × `poolq_loo` |
 | Own-TB stratified U (Army) | Stratify CIF/Cox by own talent bucket | Own TB × pool quality |
 | Assortativity for U | §6.1 soft assign vs §6.3 null | Overlap + congestion required |

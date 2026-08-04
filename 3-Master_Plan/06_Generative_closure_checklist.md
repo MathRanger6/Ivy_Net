@@ -34,11 +34,11 @@ Charles: Path II unchanged. **C1–C4 + C7 → green** after D10 bundle. C6 part
 | **C3** | **Axis table** frozen: model quantity ↔ empirical quantity ↔ setting | **PARTIAL** | Prose + two-row logic in [`20260611_1640_SCOUT_to_COMPASS_model_coherence.md`](20260611_1640_SCOUT_to_COMPASS_model_coherence.md) §A3; **no** standalone `axis_table_generative_readouts.md` on disk yet | SCOUT D10 | **Yellow** → Green after D10 |
 | **C4** | **Score equation one-pager** frozen with λ / soft-assignment semantics | **PARTIAL** | `sports/tier1_sim_config.py` (`SELECTION_539_*` constants); [`538_Cell10_Generative_Manual.md`](../sports/documents/538_Cell10_Generative_Manual.md) | SCOUT: extract to `score_equation_one_pager.md` in bundle | **Yellow** → Green after D10 |
 | **C5** | **Honest limitation prose** drafted (Rung 2 axis ≠ Rung 1 axis) | **DONE** | Exact VECTOR sentence in [`20260611_1640_SCOUT_to_COMPASS_model_coherence.md`](20260611_1640_SCOUT_to_COMPASS_model_coherence.md) §A3 | VECTOR ink | **Green** (prose ready; VECTOR pastes) |
-| **C6** | ≥ **two predictions** traceable to mechanism (not curve replication); **includes model-guided measurable** (quality vs congestion) | **PARTIAL** | **(1) Near-threshold heterogeneity:** `datasets/mbb/exports_inverted_u_v0/heterogeneity_ventiles_top_tail.{png,csv}` (538D CELL 4D, 2026-06-02). **(2) Peak shift with global Λ:** **not basketball-owned** — Army/CODA natural home; basketball K-slots secondary | Prediction #2 = CODA + VECTOR prose; #1 export refresh optional in D10 | **Yellow** (1 of 2 strong in SCOUT lane) |
+| **C6** | ≥ **two predictions** traceable to mechanism (not curve replication); **includes model-guided measurable** (quality vs congestion) | **PARTIAL** | **(1) Near-threshold heterogeneity:** `datasets/mbb/exports_inverted_u_v0/heterogeneity_ventiles_top_tail.{png,csv}` (538D CELL 4D, 2026-06-02). **(2) Peak shift with global K:** **not basketball-owned** — Army/CODA natural home; basketball K-slots secondary | Prediction #2 = CODA + VECTOR prose; #1 export refresh optional in D10 | **Yellow** (1 of 2 strong in SCOUT lane) |
 | **C7** | **Manuscript export bundle** on disk (D10): empirical Fig 2 + generative contrast + **Tier 2.5 feature panel** + manifest | **MISSING** | Script specified in [`20260611_1640_SCOUT_to_COMPASS_model_coherence.md`](20260611_1640_SCOUT_to_COMPASS_model_coherence.md) §D; **not yet built** | SCOUT D10; Charles **C9** path lock | **Yellow** until built |
 | **C8** *(PD12 optional)* | **Quality vs congestion** distinction **exported** in D10 (axis table row + congestion column/panel) | **PARTIAL** | `crowding_smooth` in pipeline; not yet named closure row on disk | SCOUT D10 | **Yellow** → Green after D10 |
 
-**SCOUT closure rule:** Items C1–C4 + C7 go **green** when D10 lands. C5 already green. C6 stays **yellow** until cross-domain prediction map names Army Λ + basketball near-threshold — acceptable for v1 **manuscript §5** (generative) closure; **manuscript §7** (predictions) can carry yellow honestly.
+**SCOUT closure rule:** Items C1–C4 + C7 go **green** when D10 lands. C5 already green. C6 stays **yellow** until cross-domain prediction map names Army K + basketball near-threshold — acceptable for v1 **manuscript §5** (generative) closure; **manuscript §7** (predictions) can carry yellow honestly.
 
 ---
 
@@ -54,7 +54,7 @@ Charles: Path II unchanged. **C1–C4 + C7 → green** after D10 bundle. C6 part
 
 ### Rung 3 — Predictions / decomposition
 
-**One prediction artifact exists on disk; one is cross-domain.** Near-threshold heterogeneity (`sports/538D_development.ipynb` **CELL 4D**) exported June 2026. Mean×SD (CELL 4B/4C) and full Wang-ladder LPM exports remain notebook-only — supplement tier, not closure blockers. Peak-shift-with-Λ is conceptual in basketball; CODA owns Army instantiation.
+**One prediction artifact exists on disk; one is cross-domain.** Near-threshold heterogeneity (`sports/538D_development.ipynb` **CELL 4D**) exported June 2026. Mean×SD (CELL 4B/4C) and full Wang-ladder LPM exports remain notebook-only — supplement tier, not closure blockers. Peak-shift-with-K is conceptual in basketball; CODA owns Army instantiation.
 
 ---
 
@@ -86,14 +86,14 @@ SCOUT **confirms** COMPASS draft list. Charles should **ignore until post-draft:
 
 | Setting | Basketball generative enough for Tier 2 closure? | What this setting must show instead |
 |---------|--------------------------------------------------|-------------------------------------|
-| **Army (CODA)** | **Yes** — Army does **not** need generative sim for v1 | **Empirical Rung 1:** CIF inverted-U on LOO pool minus mean + cause-specific Cox with quadratics. **Predictions:** near-threshold effects; promotion vs attrition; **peak shift with board size / Λ** (CODA-owned). |
+| **Army (CODA)** | **Yes** — Army does **not** need generative sim for v1 | **Empirical Rung 1:** CIF inverted-U on LOO pool minus mean + cause-specific Cox with quadratics. **Predictions:** near-threshold effects; promotion vs attrition; **peak shift with board size / K** (CODA-owned). |
 | **Basketball (SCOUT)** | **Yes — this is where generative lives** | Rung 1 LOO inverted-U (empirical) + Rung 2 Alex score POC (generative on pool mean). |
 | **Tenure (PEER)** | **Yes** — tenure does **not** need generative sim for v1 | **Rung 1 only:** preliminary empirical inverted-U on `poolq_loo_mean` (stage 9, ~55 depts inference N). Layer B Cox = pre-submission upgrade, **not** Tier 2 closure. *(PEER Round 2 confirmed.)* |
 
 **Version B vs Version C (today):**
 
 - **Version B (qualitative cross-domain consistency):** **Satisfied** — Army established, basketball established, tenure **preliminary** (honest label). One shared phenomenon (inverted-U on LOO peer-quality proxy); setting-specific methods.
-- **Version C (prediction test from minimal model):** **Partially satisfied** — basketball near-threshold heterogeneity (SCOUT); Army near-threshold + Λ-shift (CODA); tenure **not required** for v1. Basketball generative closes the **mechanism** leg; Army/tenure close **empirical** legs at different maturity.
+- **Version C (prediction test from minimal model):** **Partially satisfied** — basketball near-threshold heterogeneity (SCOUT); Army near-threshold + K-shift (CODA); tenure **not required** for v1. Basketball generative closes the **mechanism** leg; Army/tenure close **empirical** legs at different maturity.
 
 Under Path II, Charles does **not** need to “apply the generative model” in all three domains — one generative proof-of-concept (basketball) + three empirical stylized facts (at varying maturity) is the v1 architecture.
 
@@ -131,7 +131,7 @@ Under Path II, Charles does **not** need to “apply the generative model” in 
 
 - “Generative model reproduces basketball inverted-U on LOO pool quality.”
 - “538D implements full B(Q)−D(Q) decomposition.”
-- “Peak location shifts with Λ in basketball generative sim” (unless/until CODA+SCOUT joint export exists).
+- “Peak location shifts with K in basketball generative sim” (unless/until CODA+SCOUT joint export exists).
 - Any June 2026 empirical Fig 2 caption without checking slug date in bundle manifest.
 
 ---

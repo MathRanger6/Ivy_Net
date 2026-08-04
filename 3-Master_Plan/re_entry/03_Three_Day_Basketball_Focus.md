@@ -50,10 +50,10 @@ You do **not** need: bin-for-bin sim match, Rivanna sweeps, **ρ** calibrated to
 
 | Piece | Status | Where |
 |-------|--------|--------|
-| Empirical hero (Layer A) | Done | `530`; `re_entry/HEROs_and_PASSes/HERO_*` |
+| Empirical hero (Layer A) | Done | `530`; `re_entry/HEROs_and_PASSes/pass_a/HERO_*` |
 | Quadratic LPM (β₂ < 0) | Done | `lpm_hero_coefficients.txt` in export folder |
 | Generative knockouts (λ=0 vs congestion) | Done | `generative_knockout_*_16quantile.csv`; script `sports/scripts/hero_model_reset_bundle.py` |
-| Side-by-side PNG | Done | `PASS_A_inverted_u_side_by_side_empirical_vs_generative.png` (`re_entry/HEROs_and_PASSes/`) |
+| Side-by-side PNG | Done | `PASS_A_inverted_u_side_by_side_empirical_vs_generative.png` (`re_entry/HEROs_and_PASSes/pass_a/`) |
 | Narrative slide | Done | [`Model.pdf`](Model.pdf) / `Model.pptx` |
 | Plain readout | Done | `generative_knockout_summary.txt`, `side_by_side_caption.txt` |
 
@@ -100,7 +100,7 @@ Re-run bundle if needed: `python sports/scripts/hero_model_reset_bundle.py`
 - Bin-for-bin replication of hero ventiles from simulation
 - Separate estimation of benefit vs congestion on one axis
 - **ρ** calibrated to match hero before minimal story is sent
-- Multi-domain Λ sweeps (Army slot capacity)
+- Multi-domain K sweeps (Army slot capacity)
 - Tenure Cox / Setting 3 prose
 - Re-reading agent correspondence rounds
 

@@ -1,0 +1,16 @@
+Pass C caption — ρ assignment ablation
+
+Preset: 539 (aligned with Pass B).
+Four steps: ASSIGN (ρ varies) → SCORE → SELECT → VISUALIZE (pool mean).
+
+Score + winner rule fixed: S_i = A_i − 0.55·L_C (crowding_smooth), top K.
+Only assignment differs across arms:
+ρ = 0.1, 1.0, 8.0, 32.0, plus sort-and-chop (CSV; optional second PNG).
+
+Figures: PASS_C_rho_ablation_selection_by_pool_mean.png (soft ρ only, gallery default);
+PASS_C_rho_ablation_selection_by_pool_mean_with_sortchop.png (all arms).
+
+Story: assortativity in assignment changes the curve once score is fixed —
+sorting shapes the roster environments we visualize.
+
+Related: Pass A (empirical poolq_loo hero), Pass B (λ knockout).

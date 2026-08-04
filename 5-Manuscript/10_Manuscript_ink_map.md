@@ -118,7 +118,7 @@
 |--------------|------------|-------------------|
 | **7. Predictions and Validation** | Staging §4 entire | |
 | Near-threshold heterogeneity | Staging §4.1 | **Figure:** `heterogeneity_ventiles_top_tail.png` — label **exploratory**, not pre-registered |
-| Peak shift with Λ | Staging §4.2 | Prose hook only; CODA-owned; figure TBD |
+| Peak shift with K | Staging §4.2 | Prose hook only; CODA-owned; figure TBD |
 | Assortativity / differential B vs D | Dakota v03 bullets | Keep as **future** unless SCOUT exports land before submission |
 
 ---

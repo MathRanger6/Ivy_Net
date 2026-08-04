@@ -23,7 +23,9 @@ Run (repo root)
   python sports/scripts/pass_c_rho_ablation_bundle.py
 
 Outputs (only)
-  3-Master_Plan/re_entry/HEROs_and_PASSes/PASS_C_*
+  PASS_C_rho_ablation_selection_by_pool_mean.png          — soft ρ only (gallery default)
+  PASS_C_rho_ablation_selection_by_pool_mean_with_sortchop.png — all arms
+  PASS_C_generative_* CSVs (including sort_chop)
 
 Spec
   sports/540_READ_ME_SIM.md
@@ -48,6 +50,9 @@ SPORTS = REPO / "sports"
 sys.path.insert(0, str(SCRIPTS))
 from gallery_knobs import (
     HERO_BINS,
+    HERO_N_SELECTED,
+    HERO_N_TEAMS,
+    HERO_ROSTER_SIZE,
     HERO_SEED,
     PASS_C_PNG_SUFFIX,
     PRESET,
@@ -55,20 +60,29 @@ from gallery_knobs import (
     RHO_LOW,
     RHO_MODERATE,
     RHO_VERY_HIGH,
-    SHOW_SORT_CHOP,
+    hero_k_over_n,
+    hero_league_n,
+    league_scale_title_line,
 )
-OUT = REPO / "3-Master_Plan" / "re_entry" / "HEROs_and_PASSes"
-PASS_C_PNG_NAME = f"PASS_C_rho_ablation_selection_by_pool_mean{PASS_C_PNG_SUFFIX}.png"
-BIN_AXIS = "pool_mean"
-SHOW_SORT_CHOP_ON_FIGURE = SHOW_SORT_CHOP
+from hero_gallery_paths import PASS_C_RHO, ensure_hero_dirs
 
-ARMS: list[tuple[str, str, float | None]] = [
+OUT = PASS_C_RHO
+PASS_C_PNG_SOFT_ONLY = (
+    f"PASS_C_rho_ablation_selection_by_pool_mean{PASS_C_PNG_SUFFIX}.png"
+)
+PASS_C_PNG_WITH_SORTCHOP = (
+    f"PASS_C_rho_ablation_selection_by_pool_mean_with_sortchop{PASS_C_PNG_SUFFIX}.png"
+)
+BIN_AXIS = "pool_mean"
+
+SOFT_ARMS: list[tuple[str, str, float | None]] = [
     ("rho_low", "soft", RHO_LOW),
     ("rho_moderate", "soft", RHO_MODERATE),
     ("rho_high", "soft", RHO_HIGH),
     ("rho_very_high", "soft", RHO_VERY_HIGH),
-    ("sort_chop", "sort_chop", None),
 ]
+SORT_CHOP_ARM: tuple[str, str, float | None] = ("sort_chop", "sort_chop", None)
+ARMS = SOFT_ARMS + [SORT_CHOP_ARM]
 
 
 def _load_cfg_module():
@@ -93,7 +107,9 @@ def _539_playground_state(mod) -> dict:
             getattr(mod, "SELECTION_539_VIABILITY_SHARPNESS", 10.0)
         ),
         "n_bins": HERO_BINS,
-        "n_selected": int(getattr(mod, "N_SELECTED", 1500)),
+        "n_teams": HERO_N_TEAMS,
+        "roster_size": HERO_ROSTER_SIZE,
+        "n_selected": HERO_N_SELECTED,
         "winner_selection": str(getattr(mod, "SELECTION_539_WINNER_SELECTION", "C")),
     }
 
@@ -233,6 +249,8 @@ def build_figure(
     *,
     assignment_sigma: float,
     w: float,
+    png_name: str,
+    include_sort_chop: bool,
 ) -> None:
     sys.path.insert(0, str(SCRIPTS))
     from gallery_mathtext import configure_matplotlib_mathtext
@@ -258,7 +276,7 @@ def build_figure(
     plot_frames = {
         k: v
         for k, v in frames.items()
-        if SHOW_SORT_CHOP_ON_FIGURE or k != "sort_chop"
+        if include_sort_chop or k != "sort_chop"
     }
     for key, df in plot_frames.items():
         x = df["bin"].to_numpy(dtype=float) + 1
@@ -266,14 +284,17 @@ def build_figure(
         ax.plot(x, y, "o-", lw=2, ms=5, color=colors[key], label=labels[key])
     ax.set_xlabel(r"Bin ($1$ = lowest pool mean in sim)")
     ax.set_ylabel(r"Mean $Y_{\mathrm{selected}}$")
-    title_extra = ""
-    if not SHOW_SORT_CHOP_ON_FIGURE and "sort_chop" in frames:
-        title_extra = "\n(sort-and-chop hidden on plot — CSV still saved)"
+    subtitle = (
+        "soft $\\rho$ arms only"
+        if not include_sort_chop
+        else "soft $\\rho$ + sort-and-chop benchmark"
+    )
     ax.set_title(
         rf"Pass C — assignment ablation ({PRESET}, score + top-$K$ fixed)"
         "\n"
-        rf"$S_i = A_i - {w:g}\,L_C$ | ${HERO_BINS}$ quantile on pool mean"
-        + title_extra
+        rf"$S_i = A_i - {w:g}\,L_C$ | {league_scale_title_line()} | ${HERO_BINS}$ bins"
+        "\n"
+        rf"({subtitle})"
     )
     ax.legend(loc="upper left", fontsize=8)
     ax.set_ylim(bottom=0)
@@ -297,10 +318,10 @@ def build_figure(
         transform=cap_ax.transAxes,
     )
 
-    png = out_dir / PASS_C_PNG_NAME
+    png = out_dir / png_name
     fig.savefig(png, dpi=150, bbox_inches="tight")
     plt.close(fig)
-    print(f"Wrote {png} (SHOW_SORT_CHOP_ON_FIGURE={SHOW_SORT_CHOP_ON_FIGURE})")
+    print(f"Wrote {png}")
 
 
 def main() -> None:
@@ -337,6 +358,13 @@ def main() -> None:
             "score_mode": "loo_gap_plus_ability",
             "loo_pool_l_mode": "crowding_smooth",
             "w": w,
+            "n_selected": sel.n_selected,
+            "k_over_n": hero_k_over_n(),
+        },
+        "league": {
+            "n_teams": HERO_N_TEAMS,
+            "roster_size": HERO_ROSTER_SIZE,
+            "n_individuals": hero_league_n(),
         },
         "assignment": {
             "ability_draw": base_params.ability_draw,
@@ -371,11 +399,22 @@ def main() -> None:
 
     meta_path.write_text(json.dumps(meta, indent=2) + "\n", encoding="utf-8")
     write_summary(out_dir, frames, w)
+    sigma = float(base_params.assignment_sigma)
     build_figure(
         out_dir,
         frames,
-        assignment_sigma=float(base_params.assignment_sigma),
+        assignment_sigma=sigma,
         w=w,
+        png_name=PASS_C_PNG_SOFT_ONLY,
+        include_sort_chop=False,
+    )
+    build_figure(
+        out_dir,
+        frames,
+        assignment_sigma=sigma,
+        w=w,
+        png_name=PASS_C_PNG_WITH_SORTCHOP,
+        include_sort_chop=True,
     )
 
     caption = out_dir / "PASS_C_rho_ablation_caption.txt"
@@ -389,7 +428,10 @@ def main() -> None:
                 "",
                 f"Score + winner rule fixed: S_i = A_i − {w:g}·L_C (crowding_smooth), top K.",
                 "Only assignment differs across arms:",
-                f"ρ = {RHO_LOW}, {RHO_MODERATE}, {RHO_HIGH}, {RHO_VERY_HIGH}, plus sort-and-chop.",
+                f"ρ = {RHO_LOW}, {RHO_MODERATE}, {RHO_HIGH}, {RHO_VERY_HIGH}, plus sort-and-chop (CSV; optional second PNG).",
+                "",
+                "Figures: PASS_C_rho_ablation_selection_by_pool_mean.png (soft ρ only, gallery default);",
+                "PASS_C_rho_ablation_selection_by_pool_mean_with_sortchop.png (all arms).",
                 "",
                 "Story: assortativity in assignment changes the curve once score is fixed —",
                 "sorting shapes the roster environments we visualize.",
@@ -409,7 +451,7 @@ def main() -> None:
                 "",
                 "Generated by: sports/scripts/pass_c_rho_ablation_bundle.py",
                 f"Preset: {PRESET}; VISUALIZE on pool mean.",
-                "Home: 3-Master_Plan/re_entry/HEROs_and_PASSes/",
+                "Home: 3-Master_Plan/re_entry/HEROs_and_PASSes/pass_c_rho/",
                 "",
                 "Related: PASS_A_* (empirical), PASS_B_* (λ knockout).",
             ]

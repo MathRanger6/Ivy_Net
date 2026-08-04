@@ -168,7 +168,7 @@
 
 ### 2026-06-15 — Predictions are **directions**, not proven results
 
-**Nugget:** Near-threshold heterogeneity and Λ peak-shift are **primary prediction slots** for manuscript structure — **candidate** discriminating tests, **not** fully validated cross-domain findings.
+**Nugget:** Near-threshold heterogeneity and K peak-shift are **primary prediction slots** for manuscript structure — **candidate** discriminating tests, **not** fully validated cross-domain findings.
 
 **Why it matters:** Stops over-claiming in **manuscript §7** (Predictions); aligns Wang move with honest science.
 
@@ -310,7 +310,7 @@
 
 **Nugget:** Across Army, basketball, tenure, many things are finite — but the **most general conserved quantity** may be **scarce distinction**: credible recognition under finite opportunity, not raw ability alone.
 
-**Why it matters:** Unifies Λ, slots, boards, draft picks under one prose vocabulary.
+**Why it matters:** Unifies K, slots, boards, draft picks under one prose vocabulary.
 
 **Not the same as:** Reducing everything to “talent” as a single latent trait.
 

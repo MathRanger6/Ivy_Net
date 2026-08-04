@@ -48,7 +48,7 @@ Model-guided empirical features (Rung 2.5)   ← PD12 Priority 3; explicit stage
 
 Predictions (Rung 3)
     →  #1 Near-threshold heterogeneity (strongest artifact: SCOUT 4D)
-       #2 Peak shift with global Λ (Army-led prose; TBD figure)
+       #2 Peak shift with global K (Army-led prose; TBD figure)
 
 Manuscript (Rung 4)
     →  Wang structure: phenomenon → mechanism → features → predictions
@@ -110,7 +110,7 @@ Execute in this order. Steps in **bold** need your answer first.
 |------|--------|-----|
 | B1 | Draft §2 Theory + §5 Discussion/limitations (claim table §F discipline) | VECTOR |
 | B2 | Draft §3: minimal model + **model-guided measurements** (post B′2; D10 artifacts) | VECTOR |
-| B3 | Draft §4: predictions as **tests of measurements** — #1 near-threshold; #2 Λ stub | VECTOR |
+| B3 | Draft §4: predictions as **tests of measurements** — #1 near-threshold; #2 K stub | VECTOR |
 | B4 | Draft §1 empirical triad (honest tenure caveat) | VECTOR |
 | B5 | Update Dakota v03 RTF spine as sections land | VECTOR |
 
@@ -139,7 +139,7 @@ Prep: [`20260611_Alex_Gates_Talking_Points.md`](20260611_Alex_Gates_Talking_Poin
 |------|--------|-----|
 | E1 | PEER Layer B Cox (Cells 10–12 in `540`) | PEER on **R1** route |
 | E2 | Pool-size algorithm audit + limitations | Charles / CODA |
-| E3 | Optional Army Λ empirical test | CODA on **R-Λ-EMPIR** |
+| E3 | Optional Army K empirical test | CODA on **R-K-EMPIR** |
 | E4 | Optional TB-stratify AWS run | CODA if Alex elevates |
 | E5 | Optional 525 if manuscript needs more Army meat | CODA (tabled) |
 
@@ -157,10 +157,10 @@ Prep: [`20260611_Alex_Gates_Talking_Points.md`](20260611_Alex_Gates_Talking_Poin
 | 2 | **Q-D10** | **Go** on SCOUT D10 implementation (1–2 sessions)? | Explicit **go** required | SCOUT `1038` |
 | 3 | **C1** | OpenAlex tier for tenure inference: HIGH only vs HIGH+MEDIUM vs include MULTI? | **HIGH + MEDIUM** primary; HIGH-only robustness; exclude MULTI | PEER `1038` |
 | 4 | **C2** | Release names: `R1_tenure_data.csv` + `faculty_panel_inference_v1.csv`? | **Confirm** | PEER `1038` |
-| 5 | **C12** | Confirm predictions: #1 near-threshold, #2 Λ peak-shift; defer mean×dispersion? | **Confirmed** | SCOUT `1038` / VECTOR `1700` |
+| 5 | **C12** | Confirm predictions: #1 near-threshold, #2 K peak-shift; defer mean×dispersion? | **Confirmed** | SCOUT `1038` / VECTOR `1700` |
 | 6 | **C13** | Confirm outline: Dakota spine / Tier1 voice / Alex sequential methods? | **Confirmed** | VECTOR `1700` |
 | 7 | **V1** | Immediate objective = minimal model + predictions + manuscript draft (defer dissertation planning)? | **Yes** | VECTOR `1130` |
-| 8 | **V2** | Proceed with #1 near-threshold + #2 Λ as primary predictions? | **Yes** | VECTOR `1130` |
+| 8 | **V2** | Proceed with #1 near-threshold + #2 K as primary predictions? | **Yes** | VECTOR `1130` |
 | 9 | **V3** | VECTOR begins prose after D10 + C1–C2? | **Yes** | VECTOR `1130` |
 | 10 | **Q-DEFAULTS** | Accept agent defaults for Tier 2–3 items below? | **Yes** (recommended) | COMPASS `1040` |
 
@@ -175,7 +175,7 @@ Prep: [`20260611_Alex_Gates_Talking_Points.md`](20260611_Alex_Gates_Talking_Poin
 | 15 | **C10** | Defer prestige controls (NRC/USNews)? | **Defer** | PEER `1038` |
 | 16 | **C11** | Defer subfield heterogeneity? | **Defer** | PEER `1038` |
 | 17 | **G1–G3** | Stage 9 OK for draft; Layer B pre-submission; Fine–Gray deferred? | **Assumed locked** | PEER `1038` |
-| 18 | **C-Λ-1** | Use CODA Λ stub in VECTOR §4 now (prose-only, TBD figure)? | Prose OK for v1 | CODA `1040` |
+| 18 | **C-K-1** | Use CODA K stub in VECTOR §4 now (prose-only, TBD figure)? | Prose OK for v1 | CODA `1040` |
 
 ### Tier 3 — Alex meeting (Army)
 
@@ -201,7 +201,7 @@ Prep: [`20260611_Alex_Gates_Talking_Points.md`](20260611_Alex_Gates_Talking_Poin
 | **R2** | Fix `543` notebook markdown paths | PEER |
 | **R-AWS-SYNC** | Un-pause Army figure list | CODA |
 | **R-TB-RUN** | Run TB-stratify on AWS | CODA |
-| **R-Λ-EMPIR** | Army empirical Λ test | CODA |
+| **R-K-EMPIR** | Army empirical K test | CODA |
 | **R-POOL-AUDIT** | Pool-size audit | CODA / Charles |
 
 ---

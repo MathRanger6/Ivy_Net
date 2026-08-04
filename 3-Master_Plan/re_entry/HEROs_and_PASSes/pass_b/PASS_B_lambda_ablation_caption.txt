@@ -1,0 +1,9 @@
+Pass B caption — λ score ablation (characterization)
+
+Preset: 539. One roster draw; ASSIGN (ρ) + SELECT (top-K) fixed.
+Fixed ρ = 8. Only λ in S_i = A_i − λ L_C varies.
+
+Arms: λ = 0, 0.25, 0.55, 1.
+VISUALIZE: pool mean (16 quantile bins).
+
+Story: roster pressure in score bends the curve; λ = 0 is talent-only baseline.

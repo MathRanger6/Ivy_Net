@@ -34,7 +34,7 @@ You were merging mechanisms that must stay separate:
 | **Hero plot** | Does not separate channels | Shows **outcome only** | — |
 | **Sim** | Who lands on which roster | Build **`S_i`** | Draft by winner rule |
 
-**Carry this sentence:** *The hero describes outcomes; **`L_net`** is the peer environment; advancement = **score** then **select**; the sim tests whether congestion **in the score** changes who gets selected under a fixed winner rule.*
+**Carry this sentence:** *The hero describes outcomes; **`L_net`** is the peer environment; advancement = **score** then **select**; the sim tests whether the **weight λ on L_C in the score** changes who gets selected under a fixed winner rule.*
 
 Layer C is powerful because it **names score and select as steps** — talent-only score vs congestion-in-score, same top-K — instead of hiding advancement inside a giant environment model.
 
@@ -218,10 +218,60 @@ While re-entering, ignore cross-domain notation. For **basketball v1 only**, use
 | **BINDING** | **`L_net`** ≠ advancement; **score ≠ select**; hero ≠ scoring equation | — |
 | Pool quality (LOO) | Leave-one-out teammate quality | Army “poolq” without LOO |
 | Ability (`A_i`) | Player talent in sim / own perf in data | Tenure “productivity” |
-| Lambda (λ) | Weight on **`L_C`** in the **score** | Global “slot capacity” Λ across orgs |
+| **λ (lambda)** | **Weight** on **`L_C`** in score: \(S_i = A_i - \lambda L_C\) (**λ** is not L_C itself) | — |
+| **K** | **Selection capacity** — count of winners (top-K); code: `n_selected` | Old memos used **Λ** for this — retired |
+| **K/N** | Selectivity rate (system feature); characterization default **10%** | MBB draft ~**1%** is a domain point, not the general baseline |
 | Hero | Empirical binned draft plot | Any other “hero” in old emails |
 
 When a doc uses shorthand without re-defining, **close it** and come back to this table.
+
+---
+
+## Notation addendum (Aug 2026) — read before Phase B
+
+**Purpose:** One page so **λ**, **K**, and **K/N** stop swapping roles. Full threshold notes: [`06_Lambda_threshold_and_KN_memo.md`](06_Lambda_threshold_and_KN_memo.md).
+
+### Score vs select (BINDING)
+
+| Step | Symbol | Plain English | Code |
+|------|--------|---------------|------|
+| **Score** | **λ** | **Weight** on congestion in the score — how much **L_C** is subtracted from **A_i** | `loo_gap_weight` |
+| | **L_C** | Viable-peer congestion (built with **θ**, **γ**) | `pool_c_smooth_loo` |
+| | **S_i** | Ranking number: \(S_i = A_i - \lambda L_C\) | `selection_weight` |
+| **Select** | **K** | How many get **Y = 1** (top-K) | `n_selected` |
+| | **K/N** | Selectivity rate — **system feature** | `K / (n_teams × roster_size)` |
+
+**λ is not “the congestion.”** Congestion is **L_C**. **λ** is only the **weight** on that term in **S**.
+
+**K is not λ.** **K** counts winners after scoring. Old memos used **Λ** for **K** — retired.
+
+### Characterization defaults (gallery)
+
+| Preset | N | K | K/N | When to use |
+|--------|---|---|-----|-------------|
+| **`characterization`** (default) | 5600 | 560 | **10%** | Phase B knob sweeps |
+| **`mbb_draft`** | 5600 | 56 | **~1%** | Domain calibration (later) |
+| **`army_high`** | 5600 | 2240 | **40%** | High-selectivity regime (explore) |
+
+Set via `GALLERY_K_OVER_N` or `GALLERY_N_SELECTED` (see `sports/scripts/gallery_knobs.py`).
+
+### θ — do not set by rule until tested
+
+**θ** = center of σ(γ(A−θ)) when building **L_C** (who counts as a “viable peer”).
+
+- **539 sim default:** θ = 0.72 on [0,1] Beta **A** (Alex reference JSON).
+- **530 empirical:** θ ≈ med(perf | ever drafted) on ppm **z** — different scale.
+
+**Open (PD15):** Does θ **co-vary with K/N**? Run **θ × K/N panel** *before* adopting any fixed rule for θ. Script: `sports/scripts/theta_kn_sweep_diagnostic.py`.
+
+### γ, ρ (unchanged)
+
+- **γ** — sharpness of viability sigmoid (not assignment).
+- **ρ** — assignment assortativity (not inside **S_i**).
+
+### λ_crit (sort-and-chop benchmark)
+
+**Critical λ** = first λ where **score ranking** (\(S_i = A_i - \lambda L_C\)) differs from **talent-only ranking** — not “when congestion feels big.” Full derivation and the **θ-straddle team** picture: [`06_Lambda_threshold_and_KN_memo.md`](06_Lambda_threshold_and_KN_memo.md) § Critical λ, § The θ-straddle team.
 
 ---
 

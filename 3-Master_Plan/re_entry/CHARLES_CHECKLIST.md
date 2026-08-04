@@ -13,8 +13,10 @@
 1. Work **top to bottom** (Phase A → B → C).  
 2. Change `[ ]` → `[x]` only when **you** finished that row.  
 3. Fill **Proof** with a path, date, or one-line note.  
-4. **Gallery slide labels:** Pass **A** = empirical; Pass **B** = **λ** in score; Pass **C** = **ρ** in assignment (`So_Far_.pptx` slides 1–3).  
-5. **Score on Model slide:** \(S_i = A_i - \lambda L_C\) (\(\lambda > 0\)).
+4. **Gallery slide labels:** Pass **A** = empirical; Pass **B** = **λ** (weight on L_C in score); Pass **C** = **ρ** in assignment (`So_Far_.pptx` slides 1–3).  
+5. **Score on Model slide:** \(S_i = A_i - \lambda L_C\) — **λ** = weight on congestion term; **L_C** = congestion (\(\lambda > 0\)).
+
+**Notation (Aug 2026):** [`02_Three_Kinds_of_Model.md`](02_Three_Kinds_of_Model.md) § Notation addendum — **K** = slots, **λ** = weight on **L_C**, default **K/N = 10%**.
 
 **Mission (one line):** Vary **one knob at a time** at the **539 baseline**; show how **both curves** move (binned by **A_i** and by **poolq_loo / L_C**). Not curve-fitting to the empirical Hero yet.
 
@@ -26,9 +28,9 @@
 
 | Slide | Pass | Status |
 |-------|------|--------|
-| 1 | Pass A — empirical talent vs poolq_loo | Use `PASS_A_empirical_*` in `HEROs_and_PASSes/` |
-| 2 | Pass B — λ knockout | Use `PASS_B_generative_lambda_knockout_*` |
-| 3 | Pass C — ρ ablation | Use `PASS_C_rho_ablation_*` |
+| 1 | Pass A — empirical talent vs poolq_loo | Use `pass_a/PASS_A_empirical_*` in `HEROs_and_PASSes/` |
+| 2 | Pass B — λ knockout | Use `pass_b/PASS_B_generative_lambda_knockout_*` |
+| 3 | Pass C — ρ ablation | Use `pass_c_rho/PASS_C_rho_ablation_*` |
 | 4 | Model (hand-edited) | You maintain `re_entry/Model.pptx`; script refreshes slides 1–3 only |
 
 Refresh deck: `./scripts/rebuild_hero_gallery.sh` (passes-only merge; slide 4 untouched).
@@ -60,14 +62,17 @@ Alex “puzzle pieces” before the full characterization deck.
 
 | Done | Knob | What to deliver | Proof |
 |------|------|-----------------|-------|
-| [ ] | **ρ** | OAT sweep; Pass C is the start — “matters a lot” | slide + 1-sentence claim |
-| [ ] | **λ** | OAT sweep; extend Pass B to full panel | slide + 1-sentence claim |
+| [x] | **Notation addendum** | **K** / **λ** / **K/N** locked in doc 02 | [`02_…`](02_Three_Kinds_of_Model.md) § Notation addendum |
+| [ ] | **ρ** | OAT sweep; Pass C is the start — “matters a lot” | Hand deck slide 1–2; PNGs in `pass_c_rho/` — see `slides/README.txt` |
+| [ ] | **λ** | OAT sweep; extend Pass B to full panel | Hand deck slide 3; `pass_b/PASS_B_lambda_ablation_*.png` |
+| [x] | **λ threshold memo** | Sort-and-chop findings captured | [`06_Lambda_threshold_and_KN_memo.md`](06_Lambda_threshold_and_KN_memo.md) |
 | [ ] | **Checkpoint Alex** | After ρ + λ: review slides; ask about ρ × λ if needed | date / notes |
-| [ ] | **θ** (sigmoid center) | Sweep; note tie to **K/N** (success rate), not “median of selected” | slide |
-| [ ] | **γ** (sigmoid slope) | Sweep | slide |
+| [x] | **θ × K/N panel** | Run **before** fixing θ rule; θ ∈ {0.5, 0.72, 0.9} × K/N ∈ {1%, 10%, 40%} | `theta/THETA_KN_sweep_*` — peak 6→16 as θ↑ at 1%; saturated at 40% |
+| [ ] | **θ** (sigmoid center) | OAT sweep after panel; PD15 co-variation readout | Hand deck slide 4–5; `slides/README.txt` |
+| [ ] | **γ** (sigmoid slope) | Sweep; ties to **λ_crit ≈ 4/γ** on sort-and-chop | Hand deck slide 6–7; `sort_chop_lambda/GAMMA_*`, `LAMBDA_threshold_*` |
 | [ ] | **A_i distribution** | Robustness: default + 1–2 alternatives (SI note) | slide or SI list |
 | [ ] | **t_j distribution** | Fix from empirical ballpark; brief sensitivity | slide |
-| [ ] | **K/N** | System feature: high vs low selectivity regimes | slide |
+| [x] | **K/N** | **Baseline 10%** for characterization; also ~**1%** MBB, ~**40%** Army | `gallery_knobs.py` presets + θ×K/N panel |
 
 **Done with each knob when:** you can state (1) what was fixed, (2) what varied, (3) what happened to **both curves**, (4) whether it matters for the story.
 
@@ -101,6 +106,9 @@ Park list: [`PARKED_FOR_LATER.md`](PARKED_FOR_LATER.md).
 
 ## Next action right now
 
-Start **Phase A** row 1 (**λ ablation panel**) unless `So_Far_.pptx` already needs a quick look in PowerPoint first.
+1. Keep formatting in **`HEROs_and_PASSes/slides/CHAR_Phase_B_characterization.pptx`** (hand master — scripts never overwrite).
+2. Refresh PNGs only: `./scripts/build_characterization_slides.sh` → then **Change Picture** in PowerPoint if plots changed.
+3. Mark Phase B rows `[x]` as you approve each claim; then **checkpoint Alex** (ρ + λ first).
+4. Remaining Phase B knobs: **A_i distribution**, **t_j distribution** (robustness — not built yet).
 
-When stuck: read [`PD15_notes.md`](../../transcripts/PD15_notes.md), then return here.
+Disposable auto decks (compare / copy from): `./scripts/build_characterization_slides.sh --auto-slides`

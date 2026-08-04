@@ -217,7 +217,7 @@ flowchart LR
 Rung 1  Phenomenon (inverted-U on LOO proxy — triad)
 Rung 2  Minimal mechanism (Path II generative POC — basketball)
 Rung 2.5  Model-guided empirical features (quality vs congestion — export in D10)
-Rung 3  Predictions (near-threshold; Λ)
+Rung 3  Predictions (near-threshold; K)
 Rung 4  Manuscript
 ```
 
@@ -267,7 +267,7 @@ S_i = A_i - \lambda L_{C,i}
 | # | Name (shorthand) | Plain English — what would count as support? | Status today | Where in repo |
 |---|------------------|-----------------------------------------------|--------------|---------------|
 | **#1** | Near-threshold heterogeneity | Among players who are **good but not superstars**, the elite-pool dip should be **steepest** — congestion hurts people **near the cut line**, not the very best or the clearly below-average. | **Candidate.** One basketball figure exported; not a formal cross-domain test. | `sports/538D_development.ipynb` **CELL 4D** → `heterogeneity_ventiles_top_tail.png` (listed in `#08`) |
-| **#2** | Peak shift with **Λ** (Lambda) | When an organization has **more scarce advancement slots** (bigger boards, more draft picks, more tenure lines), the **top** of the inverted-U should **move** — global capacity matters, not only local peer quality. | **Conceptual only.** Prose hook for Army; no finished Λ-sweep figure. | Army narrative (CODA); defer cross-domain parameter sweep |
+| **#2** | Peak shift with **K** (Lambda) | When an organization has **more scarce advancement slots** (bigger boards, more draft picks, more tenure lines), the **top** of the inverted-U should **move** — global capacity matters, not only local peer quality. | **Conceptual only.** Prose hook for Army; no finished K-sweep figure. | Army narrative (CODA); defer cross-domain parameter sweep |
 
 **Do say:** “primary prediction **directions**.”  
 **Do not say:** “predictions are fully validated across all settings” (see [`07_Claim_language_guardrails.md`](07_Claim_language_guardrails.md) §F).
@@ -280,7 +280,7 @@ S_i = A_i - \lambda L_{C,i}
 | Own-TB stratified pool-U (Army) | The inverted-U shape might **differ by your own performance** (own “talent bucket” / TB): same pool quality, different slope for high vs mid performers. | CODA coded; **off** by default | Run if Alex wants for Army meeting |
 | Assortativity required for U | You need **realistic overlapping pools** (soft assignment), not fake disjoint talent bins, for the generative story to work. | Partially shown — talent-only fails; soft assign + congestion bends curves | Already part of generative POC narrative (`537` falsifies sort-and-chop; `538` soft assign) |
 
-**COMPASS recommendation for v1:** Ship with **#1 (near-threshold)** as the main discriminating readout + **#2 (Λ peak-shift)** as honest prose hook — plus one of mean×SD or own-TB stratification **only if** time allows; do not block draft on the exploratory rows.
+**COMPASS recommendation for v1:** Ship with **#1 (near-threshold)** as the main discriminating readout + **#2 (K peak-shift)** as honest prose hook — plus one of mean×SD or own-TB stratification **only if** time allows; do not block draft on the exploratory rows.
 
 ---
 
@@ -324,7 +324,7 @@ S_i = A_i - \lambda L_{C,i}
 |------|-----------|
 | **Required** | 2 predictions stated; ≥1 testable with existing exports or ≤1 week SCOUT/PEER work |
 | **Beneficial** | 3 predictions; heterogeneity figure in draft |
-| **Defer** | Network-based predictions; \(\Lambda\) shift cross-domain |
+| **Defer** | Network-based predictions; \(K\) shift cross-domain |
 
 ## 3. Publishable manuscript
 

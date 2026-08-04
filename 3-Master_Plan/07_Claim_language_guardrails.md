@@ -62,7 +62,7 @@
 | Congestion-in-score generates peak-and-decline behavior on whole-roster pool mean. | Basketball / Mechanism | **Supported with caveat** | Path II POC; must state axis difference. |
 | The generative POC reproduces the empirical `poolq_loo` inverted-U. | Basketball / Mechanism | **Unsupported** | Do not claim. Current LOO-axis generative readout is not the manuscript claim. |
 | Near-threshold heterogeneity is a primary prediction candidate. | Basketball / Prediction | **Supported** | `sports/538D_development.ipynb` CELL 4D → `heterogeneity_ventiles_top_tail.png` (D10, `#08`). |
-| Peak shift with global Λ is already demonstrated in basketball generative simulations. | Basketball / Prediction | **Unsupported / Defer** | Treat Λ as cross-domain / Army-led hook unless new SCOUT export is built. |
+| Peak shift with global K is already demonstrated in basketball generative simulations. | Basketball / Prediction | **Unsupported / Defer** | Treat K as cross-domain / Army-led hook unless new SCOUT export is built. |
 | Basketball time-to-draft Cox modeling is required for v1. | Basketball | **Out of scope** | V1 uses binned draft rates and Wang ladder, not survival modeling. |
 | Mean × dispersion interactions are required for v1. | Basketball / Prediction | **Defer** | Potential supplement / later mechanism diagnostic, not primary prediction. |
 
@@ -90,8 +90,8 @@
 |---|---|---|---|
 | Prediction #1: elite-pool dip should be strongest for near-threshold / borderline performers. | Cross-domain | **Supported as primary v1 prediction** | Strongest current prediction; SCOUT has basketball artifact, Army may support analogous test. |
 | Near-threshold heterogeneity is already fully validated across all three settings. | Cross-domain | **Unsupported** | Treat as testable prediction / partially supported, not fully validated triad result. |
-| Prediction #2: peak location should shift with global distinction capacity Λ. | Cross-domain | **Supported as conceptual primary prediction** | Strong manuscript idea; current empirical anchoring is more conceptual / Army-led than fully exported. |
-| Peak shift with Λ is already empirically demonstrated across settings. | Cross-domain | **Unsupported** | Do not claim until specific analyses exist. |
+| Prediction #2: peak location should shift with global distinction capacity K. | Cross-domain | **Supported as conceptual primary prediction** | Strong manuscript idea; current empirical anchoring is more conceptual / Army-led than fully exported. |
+| Peak shift with K is already empirically demonstrated across settings. | Cross-domain | **Unsupported** | Do not claim until specific analyses exist. |
 | Mean × dispersion interactions are a primary v1 prediction. | Basketball / Cross-domain | **Defer** | Potentially useful later; not primary for current manuscript. |
 | Prediction story is required for Wang-style manuscript strength. | Manuscript | **Supported** | Should be present even if one prediction is currently framed as test-ready rather than fully validated. |
 
@@ -105,7 +105,7 @@
 | “A congestion penalty in the selection score can produce non-monotone advancement curves on a pool-mean readout.” | “The generative model reproduces the empirical LOO-pool-quality inverted-U.” |
 | “The minimal generative model supports the constraint leg of the theory.” | “538D implements the full B(Q)−D(Q) decomposition.” |
 | “Tenure is a preliminary third setting with honest limitations.” | “Tenure is equally mature evidence.” |
-| “Near-threshold heterogeneity and Λ peak-shift are the primary prediction directions.” | “All predictions are already fully validated across all settings.” |
+| “Near-threshold heterogeneity and K peak-shift are the primary prediction directions.” | “All predictions are already fully validated across all settings.” |
 
 ---
 
@@ -129,7 +129,7 @@ The manuscript should proceed under Path II:
 
 1. Empirical triad as Rung 1.
 2. Basketball generative POC as Rung 2.
-3. Near-threshold heterogeneity + Λ peak shift as Rung 3 prediction story.
+3. Near-threshold heterogeneity + K peak shift as Rung 3 prediction story.
 4. Strong limitations language around axis mismatch, tenure maturity, and causal inference.
 
 The central task now is not to reopen the model architecture. The central task is to turn this consensus into manuscript prose.

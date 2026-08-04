@@ -1,0 +1,22 @@
+# Pass B — λ score ablation (2026-08-04)
+
+Preset: 539. SCORE (λ) varies; ASSIGN + SELECT fixed.
+Fixed soft assign: $\rho=8$.
+Same $A_i$ / $T_j$ draw + one roster, seed=42.
+VISUALIZE: 16 quantile bins on pool mean (not poolq_loo).
+
+## Arms
+
+- **lambda_0** (λ=0): bin 1→16 rate 0.0000→0.3571 (peak 0.3571)
+- **lambda_low** (λ=0.25): bin 1→16 rate 0.0000→0.2571 (peak 0.2571)
+- **lambda_moderate** (λ=0.55): bin 1→16 rate 0.0000→0.0971 (peak 0.1800)
+- **lambda_high** (λ=1): bin 1→16 rate 0.0343→0.0000 (peak 0.1771)
+
+## Story
+
+- λ = 0: score is talent-only — curve stays roughly monotone on pool mean.
+- λ > 0: roster pressure in score bends the readout (congestion in SCORE).
+
+## Limitation
+
+- Qualitative POC; pool-mean axis (Pass B/C), not Pass A poolq_loo hero.

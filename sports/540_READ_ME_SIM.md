@@ -47,8 +47,8 @@ Full sentences: [`../3-Master_Plan/re_entry/04_Pass_A_and_Pass_B_in_Plain_Englis
 
 | Pass | What toggles | Status |
 |------|--------------|--------|
-| **A** | λ=0 vs congestion in **S_i** (winner rule fixed) | Re-run → `HEROs_and_PASSes/PASS_A_*` |
-| **B** | ρ low / ρ high / sort-and-chop; **fixed score + select** | Re-run → `HEROs_and_PASSes/PASS_B_*` |
+| **A** | λ=0 vs congestion in **S_i** (winner rule fixed) | Re-run → `HEROs_and_PASSes/pass_a/PASS_A_*` |
+| **B** | ρ low / ρ high / sort-and-chop; **fixed score + select** | Re-run → `HEROs_and_PASSes/pass_c_rho/PASS_C_*` |
 ---
 
 ## Three-step assignment (step 1 only)
@@ -97,8 +97,9 @@ Slug: `empirical_ppm_poolq_loo_16quantile_winsor0199_min20_2011`
 |------|------|
 | Empirical | `530_sports_pipeline.ipynb`, `sports_pipeline/` |
 | Sim engines | `tier1_pool_assignment.py`, `tier1_generative_eda.py`, `tier1_sim_config.py` |
-| Pass A bundle | `scripts/hero_model_reset_bundle.py` → `re_entry/HEROs_and_PASSes/PASS_A_*` |
-| Pass B bundle | `scripts/540_rho_ablation_bundle.py` → `re_entry/HEROs_and_PASSes/PASS_B_*` |
+| Pass A bundle | `scripts/pass_a_empirical_bundle.py` → `re_entry/HEROs_and_PASSes/pass_a/PASS_A_*` |
+| Pass B bundle | `scripts/pass_b_generative_knockout_bundle.py` → `re_entry/HEROs_and_PASSes/pass_b/PASS_B_*` |
+| Pass C bundle | `scripts/pass_c_rho_ablation_bundle.py` → `re_entry/HEROs_and_PASSes/pass_c_rho/PASS_C_*` |
 | Notebook | `540_three_step_sim.ipynb` |
 | Binding | `3-Master_Plan/BINDING_Selection_is_its_own_step.md` |
 | Slide | `3-Master_Plan/re_entry/Model.pdf` |
@@ -109,12 +110,14 @@ Slug: `empirical_ppm_poolq_loo_16quantile_winsor0199_min20_2011`
 
 ```
 3-Master_Plan/re_entry/HEROs_and_PASSes/
-  HERO_*                         # empirical hero PNG(s)
-  PASS_A_*                       # λ knockout (PNG, CSVs, summary)
-  PASS_B_*                       # ρ ablation (PNG, CSVs, summary, README)
+  README.txt                     # subfolder index
+  pass_a/                        # PASS_A_*, HERO_*
+  pass_b/                        # PASS_B_* (λ knockout / ablation)
+  pass_c_rho/                    # PASS_C_* (ρ ablation)
+  sort_chop_lambda/              # λ threshold diagnostics
+  theta/                         # θ sweeps
+  slides/                        # PASS_ABC, CHAR_*, So_Far_.pptx
 ```
-
-Pass B artifacts: `PASS_B_generative_rho_{low,moderate,high,very_high}_16quantile.csv`, `PASS_B_generative_sort_chop_16quantile.csv`, `PASS_B_rho_ablation_summary.txt`, `PASS_B_rho_ablation_caption.txt`, `PASS_B_README.txt`, `PASS_B_*.png`.
 
 ---
 

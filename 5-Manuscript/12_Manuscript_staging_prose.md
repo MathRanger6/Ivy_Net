@@ -113,9 +113,9 @@ See `scout_manuscript_v1/axis_table_generative_readouts.md` — maps model quant
 
 **Evidence status:** Exploratory readout exported (`heterogeneity_ventiles_top_tail.png`). Named primary prediction for v1; not a pre-registered confirmatory test.
 
-### 4.2 Prediction #2 — Peak shift with global \(\Lambda\) (prose hook)
+### 4.2 Prediction #2 — Peak shift with global \(K\) (prose hook)
 
-**Statement:** Where the number of scarce advancement slots per local pool rises (higher \(\Lambda\)), the peak of the inverted-U should shift — Army board-size narrative (CODA-owned).
+**Statement:** Where the number of scarce advancement slots per local pool rises (higher \(K\)), the peak of the inverted-U should shift — Army board-size narrative (CODA-owned).
 
 **Evidence status:** Prose hook for v1; empirical figure TBD. Not demonstrated in basketball generative sim for this manuscript version.
 

@@ -9,7 +9,7 @@ Run (repo root):
   python sports/scripts/pass_b_lambda_ablation_bundle.py
 
 Outputs:
-  3-Master_Plan/re_entry/HEROs_and_PASSes/PASS_B_lambda_ablation_*
+  3-Master_Plan/re_entry/HEROs_and_PASSes/pass_b/PASS_B_lambda_ablation_*
 """
 
 from __future__ import annotations
@@ -30,6 +30,9 @@ SPORTS = REPO / "sports"
 sys.path.insert(0, str(SCRIPTS))
 from gallery_knobs import (
     HERO_BINS,
+    HERO_N_SELECTED,
+    HERO_N_TEAMS,
+    HERO_ROSTER_SIZE,
     HERO_SEED,
     LAMBDA_FIXED_RHO,
     LAMBDA_HIGH,
@@ -37,9 +40,13 @@ from gallery_knobs import (
     LAMBDA_MODERATE,
     PASS_B_PNG_SUFFIX,
     PRESET,
+    hero_k_over_n,
+    hero_league_n,
+    league_scale_title_line,
 )
+from hero_gallery_paths import PASS_B, ensure_hero_dirs
 
-OUT = REPO / "3-Master_Plan" / "re_entry" / "HEROs_and_PASSes"
+OUT = PASS_B
 PASS_B_PNG_NAME = f"PASS_B_lambda_ablation_selection_by_pool_mean{PASS_B_PNG_SUFFIX}.png"
 BIN_AXIS = "pool_mean"
 
@@ -73,7 +80,9 @@ def _539_playground_state(mod) -> dict:
             getattr(mod, "SELECTION_539_VIABILITY_SHARPNESS", 10.0)
         ),
         "n_bins": HERO_BINS,
-        "n_selected": int(getattr(mod, "N_SELECTED", 1500)),
+        "n_teams": HERO_N_TEAMS,
+        "roster_size": HERO_ROSTER_SIZE,
+        "n_selected": HERO_N_SELECTED,
         "winner_selection": str(getattr(mod, "SELECTION_539_WINNER_SELECTION", "C")),
     }
 
@@ -239,7 +248,7 @@ def build_figure(
     ax.set_title(
         rf"Pass B — score ablation ({PRESET}, assign + top-$K$ fixed)"
         "\n"
-        rf"$\rho={fixed_rho:g}$ fixed | ${HERO_BINS}$ quantile on pool mean"
+        rf"$\rho={fixed_rho:g}$ fixed | {league_scale_title_line()} | ${HERO_BINS}$ bins"
     )
     ax.legend(loc="upper left", fontsize=8)
     ax.set_ylim(bottom=0)
@@ -313,6 +322,12 @@ def main() -> None:
         "selection": {
             "winner_selection": sel.winner_selection,
             "n_selected": sel.n_selected,
+            "k_over_n": hero_k_over_n(),
+        },
+        "league": {
+            "n_teams": HERO_N_TEAMS,
+            "roster_size": HERO_ROSTER_SIZE,
+            "n_individuals": hero_league_n(),
         },
         "arms": [{"label": a, "lambda": lam} for a, lam in ARMS],
     }

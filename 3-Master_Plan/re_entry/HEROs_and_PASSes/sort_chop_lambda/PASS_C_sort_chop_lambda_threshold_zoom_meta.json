@@ -1,0 +1,65 @@
+{
+  "diagnostic": "sort_chop_lambda_threshold_zoom",
+  "preset": "539",
+  "seed": 42,
+  "assignment": "sort_chop",
+  "gamma": 10.0,
+  "lambda_crit_4_over_gamma": 0.4,
+  "lambda_min": 0.0,
+  "lambda_max": 1.0,
+  "n_below": 7,
+  "n_above": 3,
+  "x_bin_zoom_lo": 5,
+  "n_teams": 350,
+  "roster_size": 16,
+  "n_individuals": 5600,
+  "n_selected": 560,
+  "k_over_n": 0.1,
+  "arms": [
+    {
+      "label": "below_1",
+      "lambda": 0.0
+    },
+    {
+      "label": "below_2",
+      "lambda": 0.057143
+    },
+    {
+      "label": "below_3",
+      "lambda": 0.114286
+    },
+    {
+      "label": "below_4",
+      "lambda": 0.171429
+    },
+    {
+      "label": "below_5",
+      "lambda": 0.228571
+    },
+    {
+      "label": "below_6",
+      "lambda": 0.285714
+    },
+    {
+      "label": "below_7",
+      "lambda": 0.342857
+    },
+    {
+      "label": "crit",
+      "lambda": 0.4
+    },
+    {
+      "label": "above_1",
+      "lambda": 0.6
+    },
+    {
+      "label": "above_2",
+      "lambda": 0.8
+    },
+    {
+      "label": "above_3",
+      "lambda": 1.0
+    }
+  ],
+  "hero_bins": 16
+}

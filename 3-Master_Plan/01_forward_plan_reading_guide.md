@@ -167,7 +167,7 @@ Docs use **Tier** for two unrelated things. Check context.
 Rung 1   Phenomenon        → inverted-U exists (Army, basketball; tenure preliminary)
 Rung 2   Minimal model     → talent-only fails; congestion-in-score POC (basketball)
 Rung 2.5 Model-guided feats → quality vs congestion columns (mostly built; D10 exports)
-Rung 3   Predictions       → #1 near-threshold, #2 Λ — candidates, not fully validated
+Rung 3   Predictions       → #1 near-threshold, #2 K — candidates, not fully validated
 Rung 4   Manuscript        → ink Word under Path II
 ```
 
@@ -213,7 +213,7 @@ Agents locked **two prediction slots** for manuscript structure — **not** “t
 | # | Name | Empirical status today |
 |---|------|------------------------|
 | **#1** | Near-threshold heterogeneity | **Candidate.** Exploratory export from `sports/538D_development.ipynb` **CELL 4D** → `heterogeneity_ventiles_top_tail.png` (`#08`); not formal cross-domain test. |
-| **#2** | Peak shift with Λ | **Placeholder / prose hook.** No finished Λ figure in repo. |
+| **#2** | Peak shift with K | **Placeholder / prose hook.** No finished K figure in repo. |
 
 **Do say:** “primary prediction **directions**.”  
 **Do not say:** “predictions are fully validated across all settings” (see [`07_Claim_language_guardrails.md`](07_Claim_language_guardrails.md) §F).
@@ -235,7 +235,7 @@ Agents locked **two prediction slots** for manuscript structure — **not** “t
 | **LOO** | Leave-one-out — peer pool **excluding yourself** |
 | **`poolq_loo`** | LOO teammate pool **quality** (main empirical x-axis) |
 | **`crowding_smooth`** | LOO **congestion** — density of viable peers above threshold |
-| **Λ (Lambda)** | Global distinction capacity (slots, boards, draft picks) |
+| **K** | Global distinction capacity (slots, boards, draft picks) |
 | **D10** | SCOUT export script — figures/tables in [`08_Basketball_figures_on_disk.md`](08_Basketball_figures_on_disk.md) |
 | **Claim table** | [`07_Claim_language_guardrails.md`](07_Claim_language_guardrails.md) |
 | **B-lite closure** | **COMPASS coinage (2026-06-15, `#14` Q2):** phenomenon + minimal mechanism POC + model-guided measurement exported + prediction readout + honest limits + D10 — **not** full 3-domain identifiability (“B full”) |

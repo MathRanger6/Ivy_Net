@@ -145,7 +145,7 @@ flowchart TD
 
 - **Write the nesting note** (2–3 pages): one diagram showing \(L_{\text{net}} = B - D\), Alex score = \(D\), empirical features = expanded observables of same object. This resolves your June 11 "two models" anxiety without changing equations.
 - **Package PD12 P3** — you already built `crowding_smooth`; stop re-deriving it from Menger.
-- **Lock prediction #1** (near-threshold heterogeneity) as primary discriminating test; #2 (Λ peak-shift) as prose hook.
+- **Lock prediction #1** (near-threshold heterogeneity) as primary discriminating test; #2 (K peak-shift) as prose hook.
 
 ### Model work to defer (explicit stop rule)
 

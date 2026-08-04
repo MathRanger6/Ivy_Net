@@ -1,0 +1,24 @@
+# Pass C — ρ assignment ablation (2026-08-04)
+
+Preset: 539. ASSIGN (ρ) varies; SCORE + SELECT fixed.
+$S_i = A_i − 0.55·L_C$ (crowding_smooth).
+Same $A_i$ / $T_j$ draw, seed=42.
+VISUALIZE: 16 quantile bins on pool mean (not poolq_loo).
+
+## Arms
+
+- **rho_low** (soft, ρ=0.1): bin 1→16 rate 0.0629→0.1000 (peak 0.1257)
+- **rho_moderate** (soft, ρ=1): bin 1→16 rate 0.0571→0.1029 (peak 0.1429)
+- **rho_high** (soft, ρ=8): bin 1→16 rate 0.0114→0.1086 (peak 0.1914)
+- **rho_very_high** (soft, ρ=32): bin 1→16 rate 0.0029→0.1629 (peak 0.2171)
+- **sort_chop** (sort_chop, ρ=—): bin 1→16 rate 0.0000→0.0086 (peak 1.0000)
+
+## Story
+
+- Pass B: congestion in SCORE bends the curve.
+- Pass C: assortativity changes that curve once score is fixed.
+
+## Limitation
+
+- Qualitative POC; not bin-for-bin match to Pass A (poolq_loo hero).
+- sort-and-chop is a separate hard-assortativity benchmark.

@@ -1,0 +1,26 @@
+{
+  "diagnostic": "theta_oat",
+  "date": "2026-08-04",
+  "preset": "539",
+  "seed": 42,
+  "k_over_n": 0.1,
+  "fixed": {
+    "rho": 8.0,
+    "lambda_weight": 0.55,
+    "gamma": 10.0
+  },
+  "theta_arms": [
+    {
+      "label": "theta_050",
+      "theta": 0.5
+    },
+    {
+      "label": "theta_072",
+      "theta": 0.72
+    },
+    {
+      "label": "theta_090",
+      "theta": 0.9
+    }
+  ]
+}

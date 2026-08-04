@@ -217,7 +217,8 @@ GENERATIVE_N_BINS = 20
 # GENERATIVE_POOLQ_BINNING: how to cut those bins. "quantile" | "equal_width"
 GENERATIVE_POOLQ_BINNING = "quantile"
 
-# N_SELECTED (K): how many players get Y_selected=1 (top K under winner "C").
+# N_SELECTED (K): how many players get Y_selected=1 (top-K under winner "C").
+# Gallery scripts default K/N = 10% via gallery_knobs (characterization baseline).
 N_SELECTED = 1500
 
 # SELECTION_SCORE_MODE: how S_i is built.
