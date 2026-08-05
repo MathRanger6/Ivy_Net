@@ -7,6 +7,12 @@ HAND MASTER (never overwritten by scripts):
 Refresh PNGs only (safe anytime):
   ./scripts/build_characterization_slides.sh
 
+PD16 parallel figures (team L_C + naive-draft θ; baseline PNGs untouched):
+  ./scripts/build_characterization_slides.sh --pd16
+
+  Writes *_pd16.png alongside originals — duplicate slide in hand deck,
+  Change Picture to the _pd16 file for side-by-side compare.
+
 Disposable auto rebuild (compare / copy layout):
   ./scripts/build_characterization_slides.sh --auto-slides
 

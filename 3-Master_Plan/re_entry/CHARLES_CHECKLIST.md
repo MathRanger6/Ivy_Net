@@ -1,6 +1,6 @@
 # Charles checklist — post-PD16 (manual checkoff)
 
-**Last synced:** 2026-08-04
+**Last synced:** 2026-08-05
 
 **Source:** Paper Directions **16** (Aug 4, 2026) — [`../../transcripts/PD16_notes.md`](../../transcripts/PD16_notes.md); narrative [`08_PD16_Alex_meeting_takeaways.md`](08_PD16_Alex_meeting_takeaways.md)
 
@@ -44,10 +44,10 @@
 
 | Done | Item | What “done” means | Proof |
 |------|------|-------------------|-------|
-| [ ] | **Intro / glossary** | You can walk equations, benchmarks (A_i, T_j), seed 42, “not curve-fitting” | Hand deck slide 0; doc 07 SLIDE 0 |
-| [ ] | **ρ OAT** | Both curves move; “assortativity matters” | Hand deck slides 1–2; `pass_c_rho/` |
-| [ ] | **λ OAT** | Talent-only vs λ>0 bend on A_i-binned curve | Hand deck slide 3; `pass_b/PASS_B_lambda_ablation_*.png` |
-| [ ] | **θ OAT** | Sigmoid center sweep (still **preset θ=0.72** in deck) | Hand deck slides 4–5 |
+| [x] | **Intro / glossary** | You can walk equations, benchmarks (A_i, T_j), seed 42, “not curve-fitting” | PD16 Aug 4; hand deck slide 0; doc 07 SLIDE 0 |
+| [x] | **ρ OAT** | Both curves move; “assortativity matters” | PD16 Aug 4; hand deck slides 1–2; `pass_c_rho/` |
+| [x] | **λ OAT** | Talent-only vs λ>0 bend on A_i-binned curve | PD16 Aug 4; hand deck slide 3; `pass_b/PASS_B_lambda_ablation_*.png` |
+| [x] | **θ OAT (preset v1)** | Sigmoid center sweep at **preset θ** (539 / 0.72 arms) | Slides 4–5; PD16 Aug 4. **Definition refresh** → PD16 row 2 below |
 | [x] | **θ × K/N panel** | Co-movement before fixing θ rule | `theta/THETA_KN_sweep_*` |
 | [ ] | **γ + λ_crit** | Sort-and-chop; readable γ sweep; λ_crit ≈ 4/γ story | Hand deck slides 6–7; doc 07 |
 | [x] | **Walkthrough PDF** | Plain-English deck guide for you / Alex | doc 07 (+ your PDF if printed) |
@@ -65,12 +65,12 @@ Implement via **shell env vars** in `gallery_knobs.py` (`GALLERY_LC_MODE`, `GALL
 
 | Done | Priority | What to do | Proof |
 |------|----------|------------|-------|
-| [ ] | **1. Team-level L_C** | Congestion = property of **team j** (same for all roster players); compare Pass B curves to LOO default | code path + PNG diff |
-| [ ] | **2. θ from K/N** | Naive-draft quantile: θ = F_A⁻¹(1 − K/N) on ability draw (Beta in sim); re-run θ OAT + θ×K/N | helper + updated PNGs |
+| [x] | **1. Team-level L_C** | Congestion = property of **team j** (same for all roster players); compare Pass B curves to LOO default | `tier1_pool_assignment.add_team_pool_columns`; `*_pd16.png` |
+| [x] | **2. θ from K/N** | Naive-draft quantile: θ = F_A⁻¹(1 − K/N) on ability draw (Beta in sim); re-run θ OAT + θ×K/N | `gallery_knobs.resolve_viability_theta`; `theta/*_pd16.png` |
 | [ ] | **3. L_C distribution vs ρ** | Whiteboard Sketch A: histogram # teams vs L_C per ρ arm; 2D heatmap team ability vs L_C | new script + slide gap filled |
 | [ ] | **4. ρ low arm + intuition** | Try **ρ → 0.001**; one clean sentence why ρ matters in *this* construction | PNG + footer note on ρ slide |
 | [ ] | **5. Update intro / doc 07** | When θ provenance shifts (539 preset → K/N quantile), refresh intro slide + walkthrough | slide + doc 07 § θ |
-| [ ] | **6. Env-var walkthrough** | You can `export GALLERY_LC_MODE=…` and regenerate without agent hand-holding | your terminal notes / date |
+| [ ] | **6. Env-var walkthrough** | You can `export GALLERY_…` or `./scripts/build_characterization_slides.sh --pd16` | run yourself in PowerPoint compare |
 
 **PD16 implementation done when:** team L_C + θ(K/N) modes run side-by-side with current deck; L_C-vs-ρ figures exist; you and Alex agree ρ/θ are **data-identifiable** in principle.
 
@@ -129,7 +129,7 @@ Alex PD16 roadmap: **A_i, K/N, θ, ρ** from data; only **γ, λ** remain free �
 
 ## Next action right now
 
-1. **Sign off Phase B deck** — open `CHAR_Phase_B_characterization.pptx`; mark rows `[x]` as you approve each slide’s claim.  
+1. **Sign off remaining Phase B rows** — **γ + λ_crit** (slides 6–7); defer **A_i / t_j** unless Alex asks.  
 2. **Start PD16 row 1** — team-level L_C in code (`GALLERY_LC_MODE=team_smooth` when ready).  
 3. **Read doc 08** if you need the whiteboard / calibration story in one sitting: [`08_PD16_Alex_meeting_takeaways.md`](08_PD16_Alex_meeting_takeaways.md).  
 4. **Defer Phase A gallery** unless Alex asks for `So_Far_.pptx` refresh before team L_C lands.

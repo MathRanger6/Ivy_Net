@@ -37,24 +37,49 @@ from gallery_knobs import (
     LAMBDA_FIXED_RHO,
     LAMBDA_MODERATE,
     PRESET,
+    THETA_MODE,
+    THETA_PNG_SUFFIX,
+    gallery_mode_subtitle,
     league_scale_title_line,
+    resolve_pool_l_mode,
+    resolve_viability_theta,
 )
 from hero_gallery_paths import THETA, ensure_hero_dirs
 
 OUT = THETA
-PNG = OUT / "THETA_OAT_selection_by_pool_mean.png"
-CSV = OUT / "THETA_OAT_summary.csv"
+PNG = OUT / f"THETA_OAT_selection_by_pool_mean{THETA_PNG_SUFFIX}.png"
+CSV = OUT / f"THETA_OAT_summary{THETA_PNG_SUFFIX}.csv"
 
-THETA_ARMS: list[tuple[str, float]] = [
+# Preset mode: classic OAT arms. k_over_n mode: single curve at naive-draft θ(K/N).
+THETA_ARMS_PRESET: list[tuple[str, float]] = [
     ("theta_050", 0.50),
     ("theta_072", 0.72),
     ("theta_090", 0.90),
 ]
-ARM_STYLES = {
+ARM_STYLES_PRESET = {
     "theta_050": ("#2ca02c", r"$\theta=0.50$"),
     "theta_072": ("#1f77b4", r"$\theta=0.72$ (539 default)"),
     "theta_090": ("#d62728", r"$\theta=0.90$"),
 }
+
+
+def _theta_arms(preset_theta: float, ability_draw: str) -> list[tuple[str, float]]:
+    if THETA_MODE in ("preset", "539", "fixed"):
+        return list(THETA_ARMS_PRESET)
+    th = resolve_viability_theta(preset=preset_theta, ability_draw=ability_draw)
+    return [("theta_k_over_n", th)]
+
+
+def _arm_styles(arms: list[tuple[str, float]]) -> dict[str, tuple[str, str]]:
+    if len(arms) == 1 and arms[0][0] == "theta_k_over_n":
+        th = arms[0][1]
+        return {
+            "theta_k_over_n": (
+                "#1f77b4",
+                rf"$\theta={th:.3f}$ ($F_A^{{-1}}(1-K/N)$, naive draft)",
+            )
+        }
+    return dict(ARM_STYLES_PRESET)
 
 
 def _load_cfg_module():
@@ -141,7 +166,7 @@ def run_arm(
         score_mode="loo_gap_plus_ability",
         loo_gap_weight=LAMBDA_MODERATE,
         winner_selection=sel.winner_selection,
-        pool_l_mode="crowding_smooth",
+        pool_l_mode=resolve_pool_l_mode(),
         viability_theta=theta,
         viability_sharpness=params.viability_sharpness,
     )
@@ -155,13 +180,13 @@ def run_arm(
     return out
 
 
-def build_figure(frames: dict[str, pd.DataFrame]) -> None:
+def build_figure(frames: dict[str, pd.DataFrame], arm_styles: dict[str, tuple[str, str]], gallery_theta: float) -> None:
     from gallery_mathtext import configure_matplotlib_mathtext
 
     configure_matplotlib_mathtext()
     fig, ax = plt.subplots(figsize=(9, 5.2))
     for label, df in frames.items():
-        color, leg = ARM_STYLES[label]
+        color, leg = arm_styles[label]
         x = df["bin"].to_numpy(dtype=float) + 1
         y = df["selection_rate"].to_numpy(dtype=float)
         ax.plot(x, y, "o-", lw=2.2, ms=6, color=color, label=leg)
@@ -172,6 +197,8 @@ def build_figure(frames: dict[str, pd.DataFrame]) -> None:
         rf"$\lambda={LAMBDA_MODERATE:g}$, $\gamma=10$"
         "\n"
         rf"{league_scale_title_line()} | {HERO_BINS} bins | seed={HERO_SEED}"
+        "\n"
+        + gallery_mode_subtitle(theta_value=gallery_theta)
     )
     ax.legend(loc="upper left", fontsize=9)
     ax.set_ylim(bottom=0)
@@ -187,6 +214,15 @@ def main() -> None:
     tge, tpa, assign_poolq_bin_labels = _load_modules()
 
     state = _539_state(mod)
+    preset_theta = float(state["viability_theta"])
+    ability_draw = str(state["ability_draw"])
+    gallery_theta = resolve_viability_theta(
+        preset=preset_theta, ability_draw=ability_draw
+    )
+    pool_l_mode = resolve_pool_l_mode()
+    theta_arms = _theta_arms(preset_theta, ability_draw)
+    arm_styles = _arm_styles(theta_arms)
+
     base_params = tge.assignment_params_from_state(SPORTS, state, tpa=tpa)
     params = replace(base_params, assignment_rho=float(LAMBDA_FIXED_RHO))
     base_sel = tge.SelectionConfig.from_module(mod)
@@ -196,7 +232,7 @@ def main() -> None:
         bin_mode="quantile",
         n_selected=HERO_N_SELECTED,
         score_mode="loo_gap_plus_ability",
-        loo_pool_l_mode="crowding_smooth",
+        loo_pool_l_mode=pool_l_mode,
         loo_gap_weight=LAMBDA_MODERATE,
         winner_selection=str(state["winner_selection"]),
     )
@@ -213,7 +249,7 @@ def main() -> None:
 
     frames: dict[str, pd.DataFrame] = {}
     summary_rows: list[dict] = []
-    for label, theta in THETA_ARMS:
+    for label, theta in theta_arms:
         print(f"Running θ={theta:g} ...")
         df = run_arm(
             label,
@@ -262,12 +298,16 @@ def main() -> None:
             "lambda_weight": LAMBDA_MODERATE,
             "gamma": params.viability_sharpness,
         },
-        "theta_arms": [{"label": a, "theta": t} for a, t in THETA_ARMS],
+        "theta_arms": [{"label": a, "theta": t} for a, t in theta_arms],
+        "gallery": {
+            "pool_l_mode": pool_l_mode,
+            "theta_mode": THETA_MODE,
+            "png_suffix": THETA_PNG_SUFFIX,
+        },
     }
-    (OUT / "THETA_OAT_meta.json").write_text(
-        json.dumps(meta, indent=2) + "\n", encoding="utf-8"
-    )
-    build_figure(frames)
+    meta_name = f"THETA_OAT_meta{THETA_PNG_SUFFIX}.json"
+    (OUT / meta_name).write_text(json.dumps(meta, indent=2) + "\n", encoding="utf-8")
+    build_figure(frames, arm_styles, gallery_theta)
     print("Done.")
 
 

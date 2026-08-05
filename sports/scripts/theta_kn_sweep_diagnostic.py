@@ -43,14 +43,19 @@ from gallery_knobs import (
     LAMBDA_FIXED_RHO,
     LAMBDA_MODERATE,
     PRESET,
+    THETA_MODE,
+    THETA_PNG_SUFFIX,
+    gallery_mode_subtitle,
     hero_league_n,
+    resolve_pool_l_mode,
+    resolve_viability_theta,
 )
 from hero_gallery_paths import THETA, ensure_hero_dirs
 
 OUT = THETA
-SUMMARY_CSV = OUT / "THETA_KN_sweep_summary.csv"
-PEAK_PNG = OUT / "THETA_KN_sweep_peak_bin.png"
-PEAK_LINES_PNG = OUT / "THETA_KN_sweep_peak_bin_lines.png"
+SUMMARY_CSV = OUT / f"THETA_KN_sweep_summary{THETA_PNG_SUFFIX}.csv"
+PEAK_PNG = OUT / f"THETA_KN_sweep_peak_bin{THETA_PNG_SUFFIX}.png"
+PEAK_LINES_PNG = OUT / f"THETA_KN_sweep_peak_bin_lines{THETA_PNG_SUFFIX}.png"
 
 KN_LINE_LABELS = {
     "mbb_draft": r"MBB-like ($K/N=1\%$)",
@@ -160,7 +165,7 @@ def _draw_roster_once(
         bin_mode="quantile",
         n_selected=k,
         score_mode="loo_gap_plus_ability",
-        loo_pool_l_mode="crowding_smooth",
+        loo_pool_l_mode=resolve_pool_l_mode(),
         loo_gap_weight=FIXED_LAMBDA,
         winner_selection=str(state["winner_selection"]),
     )
@@ -307,25 +312,91 @@ def build_peak_lines(df: pd.DataFrame) -> None:
     print(f"Wrote {PEAK_LINES_PNG}")
 
 
+def build_peak_lines_k_over_n(df: pd.DataFrame) -> None:
+    """PD16: one point per K/N when θ = F_A⁻¹(1 − K/N) tracks selectivity."""
+    from gallery_mathtext import configure_matplotlib_mathtext
+
+    configure_matplotlib_mathtext()
+    kn_labels = [label for label, _ in KN_GRID]
+    sub = df.sort_values("k_over_n")
+
+    fig, ax = plt.subplots(figsize=(7.5, 4.5))
+    ax.plot(
+        sub["k_over_n"],
+        sub["peak_bin"],
+        marker="o",
+        markersize=9,
+        linewidth=2,
+        color="#1f77b4",
+        label=r"$\theta = F_A^{-1}(1-K/N)$",
+    )
+    for _, row in sub.iterrows():
+        ax.annotate(
+            KN_LINE_LABELS.get(str(row["kn_preset"]), str(row["kn_preset"])),
+            (row["k_over_n"], row["peak_bin"]),
+            textcoords="offset points",
+            xytext=(4, 6),
+            fontsize=8,
+        )
+
+    ax.set_xlabel(r"Selectivity $K/N$")
+    ax.set_ylabel(r"Peak pool-mean bin (1 = weakest teams)")
+    ax.set_title(
+        rf"Peak bin vs $K/N$ with naive-draft $\theta$ ({PRESET})"
+        "\n"
+        rf"soft $\rho={FIXED_RHO:g}$, $\lambda={FIXED_LAMBDA:g}$, $\gamma=10$, $N={hero_league_n()}$"
+        "\n"
+        + gallery_mode_subtitle(
+            theta_value=float(sub["theta"].iloc[len(sub) // 2]) if len(sub) else None
+        )
+    )
+    ax.set_ylim(0.5, HERO_BINS + 0.5)
+    ax.grid(True, alpha=0.25, linestyle="--")
+    fig.tight_layout()
+    fig.savefig(PEAK_LINES_PNG, dpi=150, bbox_inches="tight")
+    plt.close(fig)
+    print(f"Wrote {PEAK_LINES_PNG}")
+
+
 def main() -> None:
     ensure_hero_dirs()
     mod = _load_cfg_module()
     tge, tpa, assign_poolq_bin_labels = _load_modules()
+    ability_draw = str(
+        getattr(mod, "SELECTION_539_ABILITY_DRAW", "beta_2_2")
+    )
+    preset_theta = float(getattr(mod, "SELECTION_539_VIABILITY_THETA", 0.72))
+    use_k_over_n_theta = THETA_MODE not in ("preset", "539", "fixed")
 
     rows: list[dict] = []
     for kn_label, kn in KN_GRID:
         n = hero_league_n()
         k = max(1, int(round(n * kn)))
-        print(f"Drawing roster once for {kn_label} (K/N={kn:g}, K={k}) ...")
+        theta_for_roster = (
+            resolve_viability_theta(
+                preset=preset_theta, k_over_n=kn, ability_draw=ability_draw
+            )
+            if use_k_over_n_theta
+            else preset_theta
+        )
+        print(
+            f"Drawing roster once for {kn_label} (K/N={kn:g}, K={k}, "
+            f"θ={theta_for_roster:.4f}) ..."
+        )
         players_base, sel, roster_meta = _draw_roster_once(
             k=k,
-            theta_ref=0.72,
+            theta_ref=theta_for_roster,
             mod=mod,
             tge=tge,
             tpa=tpa,
         )
         params = roster_meta["params"]
-        for theta in THETA_GRID:
+        theta_values = (
+            [resolve_viability_theta(preset=preset_theta, k_over_n=kn, ability_draw=ability_draw)]
+            if use_k_over_n_theta
+            else list(THETA_GRID)
+        )
+        for theta in theta_values:
             print(f"  θ={theta:g} ...")
             rows.append(
                 run_cell(
@@ -350,26 +421,35 @@ def main() -> None:
         "date": date.today().isoformat(),
         "preset": PRESET,
         "seed": HERO_SEED,
-        "theta_grid": list(THETA_GRID),
+        "theta_mode": THETA_MODE,
+        "theta_grid": list(THETA_GRID) if not use_k_over_n_theta else "k_over_n",
         "kn_grid": {k: v for k, v in KN_GRID},
         "fixed": {
             "rho": FIXED_RHO,
             "lambda_weight": FIXED_LAMBDA,
             "gamma": 10.0,
             "assignment": "soft",
+            "pool_l_mode": resolve_pool_l_mode(),
         },
         "n_teams": HERO_N_TEAMS,
         "roster_size": HERO_ROSTER_SIZE,
         "hero_bins": HERO_BINS,
+        "png_suffix": THETA_PNG_SUFFIX,
     }
-    (OUT / "THETA_KN_sweep_meta.json").write_text(
+    (OUT / f"THETA_KN_sweep_meta{THETA_PNG_SUFFIX}.json").write_text(
         json.dumps(meta, indent=2) + "\n", encoding="utf-8"
     )
 
-    build_peak_heatmap(df)
-    build_peak_lines(df)
+    if use_k_over_n_theta:
+        build_peak_lines_k_over_n(df)
+    else:
+        build_peak_heatmap(df)
+        build_peak_lines(df)
     print("\nPeak bin table:")
-    print(df.pivot(index="kn_preset", columns="theta", values="peak_bin").to_string())
+    if use_k_over_n_theta:
+        print(df[["kn_preset", "k_over_n", "theta", "peak_bin"]].to_string(index=False))
+    else:
+        print(df.pivot(index="kn_preset", columns="theta", values="peak_bin").to_string())
     print("\nDone.")
 
 

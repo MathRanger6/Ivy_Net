@@ -40,9 +40,13 @@ from gallery_knobs import (
     LAMBDA_MODERATE,
     PASS_B_PNG_SUFFIX,
     PRESET,
+    gallery_mode_subtitle,
+    gallery_mode_summary_lines,
     hero_k_over_n,
     hero_league_n,
     league_scale_title_line,
+    resolve_pool_l_mode,
+    resolve_viability_theta,
 )
 from hero_gallery_paths import PASS_B, ensure_hero_dirs
 
@@ -127,7 +131,7 @@ def _draw_league_once(tpa, params, rng):
 def _score_config(lam: float) -> tuple[str, str, float]:
     if lam <= 0.0:
         return "ability", "quality", 0.0
-    return "loo_gap_plus_ability", "crowding_smooth", float(lam)
+    return "loo_gap_plus_ability", resolve_pool_l_mode(), float(lam)
 
 
 def run_one_arm(
@@ -174,6 +178,7 @@ def write_summary(
     frames: dict[str, pd.DataFrame],
     *,
     fixed_rho: float,
+    gallery_theta: float,
 ) -> None:
     lines = [
         f"# Pass B — λ score ablation ({date.today().isoformat()})",
@@ -183,9 +188,9 @@ def write_summary(
         f"Same $A_i$ / $T_j$ draw + one roster, seed={HERO_SEED}.",
         f"VISUALIZE: {HERO_BINS} quantile bins on pool mean (not poolq_loo).",
         "",
-        "## Arms",
-        "",
     ]
+    lines.extend(gallery_mode_summary_lines(theta_value=gallery_theta))
+    lines.extend(["", "## Arms", ""])
     for label, df in frames.items():
         top = float(df.loc[df["bin"] == df["bin"].max(), "selection_rate"].iloc[0])
         bot = float(df.loc[df["bin"] == df["bin"].min(), "selection_rate"].iloc[0])
@@ -219,6 +224,7 @@ def build_figure(
     *,
     fixed_rho: float,
     assignment_sigma: float,
+    gallery_theta: float,
 ) -> None:
     sys.path.insert(0, str(SCRIPTS))
     from gallery_mathtext import configure_matplotlib_mathtext
@@ -249,6 +255,8 @@ def build_figure(
         rf"Pass B — score ablation ({PRESET}, assign + top-$K$ fixed)"
         "\n"
         rf"$\rho={fixed_rho:g}$ fixed | {league_scale_title_line()} | ${HERO_BINS}$ bins"
+        "\n"
+        + gallery_mode_subtitle(theta_value=gallery_theta)
     )
     ax.legend(loc="upper left", fontsize=8)
     ax.set_ylim(bottom=0)
@@ -284,8 +292,19 @@ def main() -> None:
     tge, tpa, assign_poolq_bin_labels = _load_modules()
 
     state = _539_playground_state(mod)
+    preset_theta = float(state["viability_theta"])
+    gallery_theta = resolve_viability_theta(
+        preset=preset_theta,
+        ability_draw=str(state["ability_draw"]),
+    )
+    state["viability_theta"] = gallery_theta
     base_params = tge.assignment_params_from_state(SPORTS, state, tpa=tpa)
-    params = replace(base_params, assignment_rho=float(LAMBDA_FIXED_RHO))
+    params = replace(
+        base_params,
+        assignment_rho=float(LAMBDA_FIXED_RHO),
+        viability_theta=gallery_theta,
+    )
+    pool_l_mode = resolve_pool_l_mode()
     base_sel = tge.SelectionConfig.from_module(mod)
     sel = replace(
         base_sel,
@@ -330,6 +349,11 @@ def main() -> None:
             "n_individuals": hero_league_n(),
         },
         "arms": [{"label": a, "lambda": lam} for a, lam in ARMS],
+        "gallery": {
+            "lc_mode_pool_l": pool_l_mode,
+            "theta_resolved": gallery_theta,
+            "png_suffix": PASS_B_PNG_SUFFIX,
+        },
     }
     meta_path = out_dir / "PASS_B_lambda_ablation_meta.json"
 
@@ -353,12 +377,18 @@ def main() -> None:
         print(f"  wrote {csv_name}")
 
     meta_path.write_text(json.dumps(meta, indent=2) + "\n", encoding="utf-8")
-    write_summary(out_dir, frames, fixed_rho=float(LAMBDA_FIXED_RHO))
+    write_summary(
+        out_dir,
+        frames,
+        fixed_rho=float(LAMBDA_FIXED_RHO),
+        gallery_theta=gallery_theta,
+    )
     build_figure(
         out_dir,
         frames,
         fixed_rho=float(LAMBDA_FIXED_RHO),
         assignment_sigma=float(params.assignment_sigma),
+        gallery_theta=gallery_theta,
     )
 
     caption = out_dir / "PASS_B_lambda_ablation_caption.txt"

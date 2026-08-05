@@ -14,6 +14,9 @@
 #   ./scripts/build_characterization_slides.sh --auto-slides --no-merge
 #       → per-knob auto parts only, no merged auto deck
 #
+#   ./scripts/build_characterization_slides.sh --pd16
+#       → PD16 variant: team L_C + naive-draft θ; writes *_pd16.png (baseline untouched)
+#
 # Hand deck workflow:
 #   1. Format equations/layout once in slides/CHAR_Phase_B_characterization.pptx
 #   2. Re-run default (figures-only) when sim outputs change
@@ -32,12 +35,14 @@ AUTO="$SLIDES/auto"
 HAND="$SLIDES/CHAR_Phase_B_characterization.pptx"
 MODE="figures"
 MERGE=1
+PD16=0
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --figures-only) MODE="figures" ;;
     --auto-slides) MODE="auto-slides" ;;
     --no-merge) MERGE=0 ;;
+    --pd16) PD16=1 ;;
     -h|--help)
       sed -n '2,23p' "$0" | sed 's/^# \?//'
       exit 0
@@ -49,6 +54,13 @@ done
 
 cd "$REPO_ROOT"
 mkdir -p "$AUTO"
+
+if [[ "$PD16" -eq 1 ]]; then
+  export GALLERY_LC_MODE=team_smooth
+  export GALLERY_THETA_MODE=k_over_n
+  export GALLERY_OUTPUT_SUFFIX=_pd16
+  echo "PD16 modes: team L_C + θ(K/N) → output suffix _pd16"
+fi
 
 _run_figures() {
   echo ">> ρ figures ..."
@@ -69,6 +81,7 @@ _run_figures() {
 
 echo "=== Phase B characterization refresh ==="
 echo "  mode=$MODE"
+echo "  pd16=$PD16"
 echo "  hand deck (never overwritten): $HAND"
 echo ""
 

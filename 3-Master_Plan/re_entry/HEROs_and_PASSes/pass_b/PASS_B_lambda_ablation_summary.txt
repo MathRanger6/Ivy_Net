@@ -1,16 +1,20 @@
-# Pass B — λ score ablation (2026-08-04)
+# Pass B — λ score ablation (2026-08-05)
 
 Preset: 539. SCORE (λ) varies; ASSIGN + SELECT fixed.
 Fixed soft assign: $\rho=8$.
 Same $A_i$ / $T_j$ draw + one roster, seed=42.
 VISUALIZE: 16 quantile bins on pool mean (not poolq_loo).
 
+L_C mode: team_smooth → pool_l_mode=crowding_smooth_team
+θ mode: k_over_n (θ=0.8042)
+Output suffix: _pd16
+
 ## Arms
 
 - **lambda_0** (λ=0): bin 1→16 rate 0.0000→0.3571 (peak 0.3571)
-- **lambda_low** (λ=0.25): bin 1→16 rate 0.0000→0.2571 (peak 0.2571)
-- **lambda_moderate** (λ=0.55): bin 1→16 rate 0.0000→0.0971 (peak 0.1800)
-- **lambda_high** (λ=1): bin 1→16 rate 0.0343→0.0000 (peak 0.1771)
+- **lambda_low** (λ=0.25): bin 1→16 rate 0.0000→0.2771 (peak 0.2771)
+- **lambda_moderate** (λ=0.55): bin 1→16 rate 0.0000→0.1543 (peak 0.1943)
+- **lambda_high** (λ=1): bin 1→16 rate 0.0171→0.0171 (peak 0.1714)
 
 ## Story
 

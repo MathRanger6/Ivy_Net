@@ -1,6 +1,6 @@
 # 8. PD16 — Alex meeting takeaways (Aug 4, 2026)
 
-**Last synced:** 2026-08-04
+**Last synced:** 2026-08-05
 
 **Audience:** Charles, re-entering after the Phase B characterization briefing.
 
@@ -135,18 +135,26 @@ export GALLERY_K_OVER_N=0.10
 ./scripts/build_characterization_slides.sh
 ```
 
-**Planned PD16 toggles** (names tentative until implemented):
+**PD16 toggles** (implemented in `sports/scripts/gallery_knobs.py`):
 
 | Variable | Default (unchanged deck) | PD16 experimental |
 |----------|--------------------------|-------------------|
 | `GALLERY_LC_MODE` | `loo_smooth` | `team_smooth` |
 | `GALLERY_THETA_MODE` | `preset` (0.72 from 539) | `k_over_n` (quantile from ability draw + K/N) |
+| `GALLERY_OUTPUT_SUFFIX` | `` (overwrite baseline names) | `_pd16` (parallel PNGs) |
 
-**Why flags:** Running `./scripts/build_characterization_slides.sh` with **no** exports keeps producing **today’s PNGs** for your hand deck. You opt in when ready:
+**Why flags:** Running `./scripts/build_characterization_slides.sh` with **no** exports keeps producing **today’s PNGs** for your hand deck. Opt in when ready:
+
+```bash
+./scripts/build_characterization_slides.sh --pd16
+```
+
+Or manually:
 
 ```bash
 export GALLERY_LC_MODE=team_smooth
 export GALLERY_THETA_MODE=k_over_n
+export GALLERY_OUTPUT_SUFFIX=_pd16
 ./scripts/build_characterization_slides.sh
 ```
 

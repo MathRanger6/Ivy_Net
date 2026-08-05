@@ -6,10 +6,11 @@
   "seed": 42,
   "selection": {
     "score_mode": "loo_gap_plus_ability",
-    "loo_pool_l_mode": "crowding_smooth",
+    "loo_pool_l_mode": "crowding_smooth_team",
     "w": 0.55,
     "n_selected": 560,
-    "k_over_n": 0.1
+    "k_over_n": 0.1,
+    "viability_theta": 0.8041998943409083
   },
   "league": {
     "n_teams": 350,
@@ -18,7 +19,7 @@
   },
   "assignment": {
     "ability_draw": "beta_2_2",
-    "viability_theta": 0.72,
+    "viability_theta": 0.8041998943409083,
     "viability_sharpness": 10.0
   },
   "arms": [

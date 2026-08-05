@@ -171,6 +171,8 @@ POOL_L_QUALITY_COL = "poolq_loo"
 POOL_L_CROWDING_COL = "pool_c_loo"
 # L_C smooth — LOO mean of σ(γ(A−θ)); Pass A congestion arm uses this ([0, 1])
 POOL_L_CROWDING_SMOOTH_COL = "pool_c_smooth_loo"
+# L_C smooth — team-level (PD16): mean σ(γ(A−θ)) over full roster, broadcast to all players
+POOL_L_CROWDING_SMOOTH_TEAM_COL = "pool_c_smooth_team"
 # Legacy diagnostic — LOO *sum* of teammate ability (not the default score input)
 POOL_L_CROWDING_SUM_COL = "pool_c_loo_sum"
 
@@ -193,6 +195,9 @@ def is_crowding_l_mode(mode: str) -> bool:
         "smooth_crowding",
         "smooth",
         POOL_L_CROWDING_SMOOTH_COL,
+        "crowding_smooth_team",
+        "team_smooth",
+        POOL_L_CROWDING_SMOOTH_TEAM_COL,
     )
 
 
@@ -201,17 +206,26 @@ def pool_l_column(mode: str) -> str:
 
     quality         → poolq_loo
     crowding        → pool_c_loo          (hard viable share)
-    crowding_smooth → pool_c_smooth_loo   (Pass A / Alex smooth L_C)
+    crowding_smooth → pool_c_smooth_loo   (Pass A / Alex smooth L_C, LOO)
+    crowding_smooth_team → pool_c_smooth_team (PD16 team L_C — same for whole roster)
     """
     m = str(mode).strip().lower()
     if m in ("quality", "l_q", POOL_L_QUALITY_COL):
         return POOL_L_QUALITY_COL
+    if m in (
+        "crowding_smooth_team",
+        "team_smooth",
+        "team_crowding_smooth",
+        POOL_L_CROWDING_SMOOTH_TEAM_COL,
+    ):
+        return POOL_L_CROWDING_SMOOTH_TEAM_COL
     if m in ("crowding_smooth", "smooth_crowding", "smooth", POOL_L_CROWDING_SMOOTH_COL):
         return POOL_L_CROWDING_SMOOTH_COL
     if m in ("crowding", "l_c", POOL_L_CROWDING_COL):
         return POOL_L_CROWDING_COL
     raise ValueError(
-        f"loo_pool_l_mode must be 'quality', 'crowding', or 'crowding_smooth', got {mode!r}"
+        f"loo_pool_l_mode must be 'quality', 'crowding', 'crowding_smooth', "
+        f"or 'crowding_smooth_team', got {mode!r}"
     )
 
 
@@ -219,7 +233,13 @@ def pool_l_short_label(mode: str) -> str:
     """Plain-text label for matplotlib axes / sweep logs."""
     m = str(mode).strip().lower()
     if m in ("crowding_smooth", "smooth_crowding", "smooth", POOL_L_CROWDING_SMOOTH_COL):
-        return "L_C (smooth viability)"
+        return "L_C (smooth viability, LOO)"
+    if m in (
+        "crowding_smooth_team",
+        "team_smooth",
+        POOL_L_CROWDING_SMOOTH_TEAM_COL,
+    ):
+        return "L_C (smooth viability, team)"
     if m in ("crowding", "l_c", POOL_L_CROWDING_COL):
         return "L_C (viable share)"
     return "L_Q (LOO mean)"
@@ -827,6 +847,94 @@ def add_loo_pool_columns(
     return out
 
 
+# =============================================================================
+# 5b. TEAM-LEVEL L_C (PD16) — congestion is a property of team j
+# =============================================================================
+# Alex PD16 (Aug 2026): "Congestion should be how many good players are on the team."
+# Same soft viability σ(γ(A−θ)) as LOO smooth L_C, but computed over the FULL roster
+# (include self) and broadcast — every player on team j shares one L_C value.
+#
+# LOO L_C (§5 above) excludes player i when measuring peers — fine for hero-axis
+# readouts; PD16 score story uses team-level congestion instead.
+#
+# Column written: pool_c_smooth_team ∈ [0,1]
+# L_Q (poolq_loo) is still LOO mean teammate ability for visualization compatibility.
+
+
+def add_team_pool_columns(
+    players: pd.DataFrame,
+    *,
+    viability_theta: float | None = None,
+    viability_sharpness: float = 18.0,
+) -> pd.DataFrame:
+    """Attach L_Q (LOO) + team smooth L_C (PD16) to ``players``.
+
+    Requires: ability, pool_id.
+
+    Writes
+      poolq_loo           — L_Q: LOO mean teammate ability (unchanged from §5)
+      pool_c_smooth_team  — L_C: team mean σ(γ(A−θ)) over ALL roster members
+    """
+    theta = (
+        float(viability_theta)
+        if viability_theta is not None
+        else _default_viability_theta()
+    )
+    gamma = float(viability_sharpness)
+    out = players.copy()
+
+    # --- L_Q: keep LOO mean teammate ability (hero / pool-mean bin axis) ---------
+    g = out.groupby("pool_id", observed=True)["ability"]
+    ssum = g.transform("sum")
+    cnt = g.transform("count").astype(float)
+    den = (cnt - 1.0).replace(0.0, np.nan)
+    own = pd.to_numeric(out["ability"], errors="coerce")
+    loo_sum = ssum - own
+    out[POOL_L_QUALITY_COL] = loo_sum / den
+
+    # --- Team smooth L_C: mean_j σ(γ(A_k − θ)) — include every roster member ----
+    viability = _viability_logistic(out["ability"], theta=theta, gamma=gamma)
+    out["_viability"] = viability
+    out[POOL_L_CROWDING_SMOOTH_TEAM_COL] = out.groupby("pool_id", observed=True)[
+        "_viability"
+    ].transform("mean")
+    out[POOL_L_CROWDING_SMOOTH_TEAM_COL] = out[POOL_L_CROWDING_SMOOTH_TEAM_COL].where(
+        own.notna(), np.nan
+    )
+    out[POOL_L_CROWDING_SMOOTH_TEAM_COL] = out[POOL_L_CROWDING_SMOOTH_TEAM_COL].where(
+        cnt >= 1.0, np.nan
+    )
+    out = out.drop(columns=["_viability"])
+    return out
+
+
+def _attach_pool_l_columns(
+    players: pd.DataFrame,
+    *,
+    pool_l_mode: str,
+    viability_theta: float | None,
+    viability_sharpness: float,
+) -> pd.DataFrame:
+    """Dispatch LOO vs team L_C attachment based on pool_l_mode."""
+    m = str(pool_l_mode).strip().lower()
+    if m in (
+        "crowding_smooth_team",
+        "team_smooth",
+        "team_crowding_smooth",
+        POOL_L_CROWDING_SMOOTH_TEAM_COL,
+    ):
+        return add_team_pool_columns(
+            players,
+            viability_theta=viability_theta,
+            viability_sharpness=viability_sharpness,
+        )
+    return add_loo_pool_columns(
+        players,
+        viability_theta=viability_theta,
+        viability_sharpness=viability_sharpness,
+    )
+
+
 def add_poolq_loo(players: pd.DataFrame) -> pd.DataFrame:
     """Backward-compatible alias: adds both L_Q and L_C columns."""
     return add_loo_pool_columns(players)
@@ -1102,7 +1210,7 @@ def assign_selection(
     """SCORE then SELECT on an already-assigned roster table.
 
     Pipeline inside this function (after ASSIGN already happened)
-      1. add_loo_pool_columns  → attach L_Q / L_C to each row
+      1. _attach_pool_l_columns → attach L_Q / L_C (LOO or team per pool_l_mode)
       2. selection_weights     → S_i (ranking score)
       3. choose_selected       → Y_selected ∈ {0,1}
 
@@ -1114,7 +1222,8 @@ def assign_selection(
       score_mode           — "ability" or "loo_gap_plus_ability" (Pass A toggle).
       loo_gap_weight       — w / λ in S = A − w·L (Pass A congestion strength).
       winner_selection     — "A"/"B"/"C"; Pass A/B default "C" = top K by score.
-      pool_l_mode          — which L enters the score (quality / crowding_smooth…).
+      pool_l_mode          — which L enters the score (quality / crowding_smooth /
+                             crowding_smooth_team for PD16 team L_C).
       viability_theta      — θ for L_C; None → config default.
       viability_sharpness  — γ for smooth L_C; None → config default.
       crowding_l_z_scale   — explicit l_term_scale for crowding L (None → config/auto).
@@ -1130,9 +1239,10 @@ def assign_selection(
         if viability_sharpness is not None
         else float(AssignmentParams.from_tier1_sim_config().viability_sharpness)
     )
-    # Step 1 — attach LOO L columns (L_Q and both L_C flavors).
-    out = add_loo_pool_columns(
+    # Step 1 — attach L columns (LOO or team L_C per pool_l_mode).
+    out = _attach_pool_l_columns(
         players,
+        pool_l_mode=pool_l_mode,
         viability_theta=viability_theta,
         viability_sharpness=gamma,
     )

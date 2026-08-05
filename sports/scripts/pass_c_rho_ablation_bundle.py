@@ -60,9 +60,13 @@ from gallery_knobs import (
     RHO_LOW,
     RHO_MODERATE,
     RHO_VERY_HIGH,
+    gallery_mode_subtitle,
+    gallery_mode_summary_lines,
     hero_k_over_n,
     hero_league_n,
     league_scale_title_line,
+    resolve_pool_l_mode,
+    resolve_viability_theta,
 )
 from hero_gallery_paths import PASS_C_RHO, ensure_hero_dirs
 
@@ -201,18 +205,25 @@ def run_one_arm(
     return out
 
 
-def write_summary(out_dir: Path, frames: dict[str, pd.DataFrame], w: float) -> None:
+def write_summary(
+    out_dir: Path,
+    frames: dict[str, pd.DataFrame],
+    w: float,
+    *,
+    gallery_theta: float,
+    pool_l_mode: str,
+) -> None:
     lines = [
         f"# Pass C — ρ assignment ablation ({date.today().isoformat()})",
         "",
         f"Preset: {PRESET}. ASSIGN (ρ) varies; SCORE + SELECT fixed.",
-        f"$S_i = A_i − {w:g}·L_C$ (crowding_smooth).",
+        f"$S_i = A_i − {w:g}·L_C$ ({pool_l_mode}).",
         f"Same $A_i$ / $T_j$ draw, seed={HERO_SEED}.",
         f"VISUALIZE: {HERO_BINS} quantile bins on pool mean (not poolq_loo).",
         "",
-        "## Arms",
-        "",
     ]
+    lines.extend(gallery_mode_summary_lines(theta_value=gallery_theta))
+    lines.extend(["", "## Arms", ""])
     for label, df in frames.items():
         top = float(df.loc[df["bin"] == df["bin"].max(), "selection_rate"].iloc[0])
         bot = float(df.loc[df["bin"] == df["bin"].min(), "selection_rate"].iloc[0])
@@ -251,6 +262,8 @@ def build_figure(
     w: float,
     png_name: str,
     include_sort_chop: bool,
+    gallery_theta: float,
+    pool_l_mode: str,
 ) -> None:
     sys.path.insert(0, str(SCRIPTS))
     from gallery_mathtext import configure_matplotlib_mathtext
@@ -295,6 +308,8 @@ def build_figure(
         rf"$S_i = A_i - {w:g}\,L_C$ | {league_scale_title_line()} | ${HERO_BINS}$ bins"
         "\n"
         rf"({subtitle})"
+        "\n"
+        + gallery_mode_subtitle(theta_value=gallery_theta)
     )
     ax.legend(loc="upper left", fontsize=8)
     ax.set_ylim(bottom=0)
@@ -332,7 +347,15 @@ def main() -> None:
     w = _congestion_w(mod)
 
     state = _539_playground_state(mod)
+    preset_theta = float(state["viability_theta"])
+    gallery_theta = resolve_viability_theta(
+        preset=preset_theta,
+        ability_draw=str(state["ability_draw"]),
+    )
+    state["viability_theta"] = gallery_theta
+    pool_l_mode = resolve_pool_l_mode()
     base_params = tge.assignment_params_from_state(SPORTS, state, tpa=tpa)
+    base_params = replace(base_params, viability_theta=gallery_theta)
     base_sel = tge.SelectionConfig.from_module(mod)
     sel = replace(
         base_sel,
@@ -340,7 +363,7 @@ def main() -> None:
         bin_mode="quantile",
         n_selected=int(state.get("n_selected", base_sel.n_selected)),
         score_mode="loo_gap_plus_ability",
-        loo_pool_l_mode="crowding_smooth",
+        loo_pool_l_mode=pool_l_mode,
         loo_gap_weight=w,
         winner_selection=str(state.get("winner_selection", base_sel.winner_selection)),
     )
@@ -356,10 +379,11 @@ def main() -> None:
         "seed": HERO_SEED,
         "selection": {
             "score_mode": "loo_gap_plus_ability",
-            "loo_pool_l_mode": "crowding_smooth",
+            "loo_pool_l_mode": pool_l_mode,
             "w": w,
             "n_selected": sel.n_selected,
             "k_over_n": hero_k_over_n(),
+            "viability_theta": gallery_theta,
         },
         "league": {
             "n_teams": HERO_N_TEAMS,
@@ -398,7 +422,13 @@ def main() -> None:
         print(f"  wrote {csv_name}")
 
     meta_path.write_text(json.dumps(meta, indent=2) + "\n", encoding="utf-8")
-    write_summary(out_dir, frames, w)
+    write_summary(
+        out_dir,
+        frames,
+        w,
+        gallery_theta=gallery_theta,
+        pool_l_mode=pool_l_mode,
+    )
     sigma = float(base_params.assignment_sigma)
     build_figure(
         out_dir,
@@ -407,6 +437,8 @@ def main() -> None:
         w=w,
         png_name=PASS_C_PNG_SOFT_ONLY,
         include_sort_chop=False,
+        gallery_theta=gallery_theta,
+        pool_l_mode=pool_l_mode,
     )
     build_figure(
         out_dir,
@@ -415,6 +447,8 @@ def main() -> None:
         w=w,
         png_name=PASS_C_PNG_WITH_SORTCHOP,
         include_sort_chop=True,
+        gallery_theta=gallery_theta,
+        pool_l_mode=pool_l_mode,
     )
 
     caption = out_dir / "PASS_C_rho_ablation_caption.txt"
