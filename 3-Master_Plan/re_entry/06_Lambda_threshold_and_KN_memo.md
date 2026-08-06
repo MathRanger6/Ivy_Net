@@ -87,7 +87,7 @@ On **sort-and-chop** rosters (between-team overlap = 0), talent-only and moderat
 - **Select:** global top-**K**, winner `"C"`.
 - **Bins:** 16 quantile bins on **pool mean** (visualization only — **does not** set λ threshold).
 
-**T_j** (team targets) is **not used** by sort-and-chop assignment.
+**T_{j*}** (sim assignment targets) is **not used** by sort-and-chop assignment.
 
 ---
 
@@ -142,7 +142,8 @@ Observed break is slightly **above** 4/γ because bin curves move only after reo
 |------|-------------------------|
 | **n_bins** (4–64) | None (aggregation only) |
 | **roster_size** (5–50, fixed N) | ~None (min ΔA/ΔL stays ≈ 4/γ) |
-| **T_j** | None (unused in sort-and-chop) |
+| **T_{j*}** | None (unused in sort-and-chop) |
+| **T_j** | Realized roster mean (post-chop) |
 
 ### 5. What moves the **visible** hump (secondary)
 

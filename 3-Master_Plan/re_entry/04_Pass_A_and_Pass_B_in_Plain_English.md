@@ -46,7 +46,7 @@ So you are doing **two different jobs** in the project:
 In code, roughly:
 
 1. Draw a large set of **synthetic players**, each with an ability number **A_i** (drawn from a distribution in the config — not taken from ESPN rows for these runs).
-2. Draw a set of **team targets** **T_j** (ideal “team quality” levels).
+2. Draw sim assignment targets **T_{j*}** (one scalar per team before seating).
 3. **Assign** players to teams (form rosters) using a rule you choose (soft matching with assortativity **ρ**, or a hard sort-and-chop benchmark).
 4. On each fake roster, compute leave-one-out pool statistics (quality and congestion), the same *kinds* of objects we use conceptually for the hero.
 5. **Score** every player with a ranking formula **S_i**.
@@ -85,9 +85,9 @@ Spec pointer after this prose: `sports/540_READ_ME_SIM.md`.
 
 Default story (**soft assignment**):
 
-- Each team has a target quality **T_j**.
+- Each team has an assignment target **T_{j*}** (drawn before seating). Realized **T_j** = mean **A_i** on the roster after ASSIGN.
 - Each player has ability **A_i**.
-- Players are placed on teams with probabilities that prefer teams whose **T_j** is close to **A_i**, but not perfectly — so rosters **overlap** in talent the way real college teams do (many teams’ [min, max] talent windows stack on the same ability axis).
+- Players are placed on teams with probabilities that prefer teams whose **T_{j*}** is close to **A_i**, but not perfectly — so rosters **overlap** in talent the way real college teams do (many teams’ [min, max] talent windows stack on the same ability axis).
 - The user-facing knob for “how assortative is that match?” is **ρ** (rho):  
   - **ρ near 0** → lots of mixing (weaker players can land on strong targets and vice versa).  
   - **ρ higher** → sharper matching to the nearest target.  
@@ -181,7 +181,7 @@ python sports/scripts/hero_model_reset_bundle.py
 
 - The **score** formula (congestion-in-score version, fixed weight).
 - The **winner rule** (top K).
-- The same synthetic abilities and team targets across arms (same “talent deck,” different seating charts).
+- The same synthetic **A_i** and **T_{j*}** across arms (same “talent deck,” different seating charts).
 
 **What changes in Pass B:**
 

@@ -189,9 +189,9 @@ PLOT_B_XAXIS_LABEL = (
     "Bin mean L_Q (LOO mean teammate ability)\n"
     "[x-axis fixed — Pool L dropdown affects selection score only]"
 )
-# PLOT_B_XAXIS_TEAM_MEAN_LABEL: optional 539-style X — realized team mean ability.
+# PLOT_B_XAXIS_TEAM_MEAN_LABEL: optional 539-style X — realized team talent T_j.
 PLOT_B_XAXIS_TEAM_MEAN_LABEL = (
-    "Bin mean team ability (pool mean; 539-style)\n"
+    "Bin mean $T_j$ (realized team talent; pool mean)\n"
     "[Pool L dropdown affects selection score only]"
 )
 # PLOT_B_YAXIS_LABEL: Y — mean of Y_selected inside each bin (selection rate).
@@ -405,14 +405,14 @@ def inverted_u_bin_table_team_mean(
     *,
     assign_poolq_bin_labels,
 ) -> pd.DataFrame:
-    """539-style Plot B′: binned selection rate vs realized pool (team) mean ability.
+    """539-style Plot B′: binned selection rate vs realized team talent T_j.
 
-    Differs from inverted_u_bin_table: X is each team’s mean A (including self),
-    not LOO L_Q. Use only when you deliberately want the 539 notebook axis.
+    Differs from inverted_u_bin_table: X is each team's T_j (mean A_i on roster,
+    including self), not LOO L_Q. Use only when you deliberately want the 539 notebook axis.
     """
     ycol = _outcome_col(players)
     use = players.copy()
-    # pool_mean: average ability on this player's team (realized roster mean).
+    # pool_mean: realized T_j (average A_i on this player's team roster).
     use["pool_mean"] = use.groupby("pool_id", observed=True)["ability"].transform("mean")
     use = use.dropna(subset=["pool_mean", ycol])
     use["bin"] = assign_poolq_bin_labels(use["pool_mean"], sel.n_bins, sel.bin_mode)

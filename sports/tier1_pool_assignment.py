@@ -24,9 +24,13 @@ THREE STEPS (always in this order)
   Important: SCORE ≠ SELECT. Ranking first, then a winner rule.
 
 CORE LETTERS (people / teams / score)
-  A_i   — ability of player i. A made-up talent number we draw from a distribution.
-  T_j   — team target for team j. One number per team; soft assignment tries to
-          seat players whose A is near that team’s T.
+  A_i   — ability (individual talent) of player i. Drawn or empirical; never a
+          team-level label.
+  T_{j*} — sim assignment target for team j (drawn before seating). Soft assign
+          matches A_i to teams whose T_{j*} is nearby. Not used in empirical MBB.
+  T_j   — realized team talent: mean A_i on team j’s roster (after ASSIGN). Use T
+          for any team-level summary on plots — not “mean A”.
+  T_jt  — team j in season t (empirical unit); roster mean of Â_i from data.
   pool  — same idea as “team” / roster group. pool_id = which team a player sits on.
   S_i   — selection *score* (ranking weight) for player i. Used only to rank people.
   K     — how many people get selected (N_SELECTED in config). “Top K” = the K
@@ -497,10 +501,11 @@ def draw_target_means(
     target_mean_mu: float,
     target_mean_sigma: float,
 ) -> np.ndarray:
-    """Draw fixed team target means T_j (length n_teams).
+    """Draw fixed sim assignment targets T_{j*} (length n_teams).
 
-    What T_j *is*: one number per team — the “ideal seat” soft assignment aims at.
-    Soft assignment tries to put player i on teams whose T_j ≈ A_i.
+    What T_{j*} is: one number per team — drawn before ASSIGN; soft assignment
+    seats players whose A_i is near that team's T_{j*}. Not realized roster talent
+    (that is T_j = mean A_i on the roster after seating).
 
     We do NOT copy real college means into T_j for the minimal cross-domain story
     (Alex); ranges are calibrated so overlap / SD look plausible vs 530 forensics.

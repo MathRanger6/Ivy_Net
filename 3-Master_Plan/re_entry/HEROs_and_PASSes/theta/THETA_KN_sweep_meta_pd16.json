@@ -1,6 +1,6 @@
 {
   "diagnostic": "theta_kn_sweep",
-  "date": "2026-08-05",
+  "date": "2026-08-06",
   "preset": "539",
   "seed": 42,
   "theta_mode": "k_over_n",

@@ -10,7 +10,7 @@
 
 **Working digest (agents):** `transcripts/PD16_notes.md`
 
-**Deck briefed:** `HEROs_and_PASSes/slides/CHAR_Phase_B_characterization.pptx` (+ walkthrough doc 07).
+**Deck briefed:** `HEROs_and_PASSes/slides/CHAR_Phase_B_characterization_HAND.pptx` (+ walkthrough doc 07).
 
 ---
 
@@ -55,14 +55,16 @@ You drew three panels; Alex confirmed the story.
 ### 2D heatmap: team ability vs L_C
 
 - **x:** team **L_C**
-- **y:** team ability (mean **A** on roster, or target **T_j**)
+- **y:** realized team talent **T_j** (mean **A_i** on roster; empirical **T_jt** from **Â_i**)
 - **Color:** number of teams in each cell
 
 **Question answered:** Do better teams have more congestion? **Yes** — expect an upward cloud (your wiggly diagonal in the oval).
 
 **Why this matters:** Gives ρ a **model-internal** interpretation Alex can cite, beyond “the selection-by-pool-mean plot moved.”
 
-**Not built yet:** scripts/figures for this diagnostic (checklist item in PD16_notes).
+**Built (Aug 2026):** `sports/scripts/lc_distribution_vs_rho_diagnostic.py` →
+`pass_c_rho/LC_distribution_vs_rho_1d_strip{SUFFIX}.png`, `LC_distribution_vs_rho_2d{SUFFIX}.png`.
+Included in `./scripts/build_characterization_slides.sh` (and `--pd16`).
 
 ---
 

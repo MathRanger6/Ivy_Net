@@ -2,7 +2,20 @@ slides/ — Phase B hand deck cheat sheet
 ========================================
 
 HAND MASTER (never overwritten by scripts):
-  CHAR_Phase_B_characterization.pptx
+  CHAR_Phase_B_characterization_HAND.pptx
+
+HAND SLIDE EXPORTS (for agents / visual audit):
+  HAND_slides_images/Slide1.jpeg … Slide16.jpeg
+
+  Charles exports the full hand deck to JPEG (File → Export → images, or
+  Save as Pictures). One file per slide; PowerPoint names them SlideN.jpeg.
+
+  Why: Equation Editor math in the .pptx is not readable from XML/scripts.
+  Agents use these JPEGs to see actual notation, bullets, and layout when
+  reviewing or comparing to doc 07 / regenerated gallery PNGs.
+
+  When to refresh: after substantive hand-deck edits (notation, text, layout).
+  Overwrite the same SlideN.jpeg names so paths stay stable.
 
 Refresh PNGs only (safe anytime):
   ./scripts/build_characterization_slides.sh
@@ -18,10 +31,11 @@ Disposable auto rebuild (compare / copy layout):
 
   auto/CHAR_intro_characterization_AUTO.pptx    (1 slide — text intro)
   auto/CHAR_rho_characterization_AUTO.pptx      (2 slides)
+  auto/CHAR_lc_congestion_characterization_AUTO.pptx  (2 slides — strip + 2D heatmap)
   auto/CHAR_lambda_characterization_AUTO.pptx   (1 slide)
   auto/CHAR_theta_characterization_AUTO.pptx    (2 slides)
   auto/CHAR_gamma_characterization_AUTO.pptx    (2 slides)
-  auto/CHAR_Phase_B_characterization_AUTO.pptx  (8 slides merged)
+  auto/CHAR_Phase_B_characterization_AUTO.pptx  (10 slides merged)
 
   Rule: anything in auto/ ends in _AUTO.pptx — never overwrites hand decks
   in slides/ (no _AUTO suffix).
@@ -45,6 +59,8 @@ Base folder:
 |   0   |  —   | Phase B intro (text)                  | Copy from auto/CHAR_intro_characterization_AUTO.pptx |
 |   1   |  ρ   | Characterize ρ — sort-and-chop shown  | pass_c_rho/PASS_C_rho_ablation_selection_by_pool_mean_with_sortchop.png |
 |   2   |  ρ   | Characterize ρ — sort-and-chop off    | pass_c_rho/PASS_C_rho_ablation_selection_by_pool_mean.png |
+| 2b    |  ρ   | **PD16 Sketch A — strip (slide 1)**       | slides/auto/CHAR_lc_congestion_characterization_AUTO.pptx slide 1 |
+| 2c    |  ρ   | **PD16 Sketch A — 2D heatmap (slide 2)**  | same deck slide 2 · PNG: pass_c_rho/LC_distribution_vs_rho_2d_pd16.png |
 |   3   |  λ   | Characterize λ (weight on L_C)        | pass_b/PASS_B_lambda_ablation_selection_by_pool_mean.png |
 |   4   |  θ   | θ OAT at K/N=10%                      | theta/THETA_OAT_selection_by_pool_mean.png |
 | 5heat |  θ   | θ × K/N — heatmap (hand ~slide 5)     | theta/THETA_KN_sweep_peak_bin.png |

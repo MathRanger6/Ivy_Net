@@ -1,6 +1,6 @@
 # Charles checklist — post-PD16 (manual checkoff)
 
-**Last synced:** 2026-08-05
+**Last synced:** 2026-08-06
 
 **Source:** Paper Directions **16** (Aug 4, 2026) — [`../../transcripts/PD16_notes.md`](../../transcripts/PD16_notes.md); narrative [`08_PD16_Alex_meeting_takeaways.md`](08_PD16_Alex_meeting_takeaways.md)
 
@@ -13,7 +13,7 @@
 1. Work **top to bottom**.  
 2. Change `[ ]` → `[x]` only when **you** finished that row.  
 3. Fill **Proof** with a path, date, or one-line note.  
-4. **Two decks:** `So_Far_.pptx` (Pass A/B/C gallery, slides 1–3) ≠ `CHAR_Phase_B_characterization.pptx` (OAT sensitivity deck).  
+4. **Two decks:** `So_Far_.pptx` (Pass A/B/C gallery, slides 1–3) ≠ `CHAR_Phase_B_characterization_HAND.pptx` (OAT sensitivity deck).  
 5. **Score:** \(S_i = A_i - \lambda L_C\); **λ** = weight on congestion; **L_C** = congestion (smooth sigmoid in current deck).
 
 **Notation:** [`02_Three_Kinds_of_Model.md`](02_Three_Kinds_of_Model.md) § Notation addendum — **K** = slots, **λ** = weight on **L_C**, default **K/N = 10%**.
@@ -26,9 +26,10 @@
 
 | Artifact | Location | Notes |
 |----------|----------|-------|
-| Phase B hand deck | `HEROs_and_PASSes/slides/CHAR_Phase_B_characterization.pptx` | Scripts never overwrite — you format in PowerPoint |
+| Phase B hand deck | `HEROs_and_PASSes/slides/CHAR_Phase_B_characterization_HAND.pptx` | Scripts never overwrite — you format in PowerPoint |
+| Hand deck JPEG exports | `HEROs_and_PASSes/slides/HAND_slides_images/Slide1.jpeg` … `Slide16.jpeg` | Re-export after hand edits — agents read these for layout/notation audit |
 | Auto compare deck | `HEROs_and_PASSes/slides/auto/CHAR_intro_characterization_AUTO.pptx` | `./scripts/build_characterization_slides.sh --auto-slides` |
-| Slide walkthrough | [`07_Phase_B_Characterization_Slides_Explained.md`](07_Phase_B_Characterization_Slides_Explained.md) | Seed 42, T_j, hard vs smooth L_C, sort-and-chop |
+| Slide walkthrough | [`07_Phase_B_Characterization_Slides_Explained.md`](07_Phase_B_Characterization_Slides_Explained.md) | Seed 42, T_{j*} / T_j, hard vs smooth L_C, sort-and-chop |
 | PD16 takeaways | [`08_PD16_Alex_meeting_takeaways.md`](08_PD16_Alex_meeting_takeaways.md) | Whiteboard sketches, calibration roadmap |
 | λ_crit memo | [`06_Lambda_threshold_and_KN_memo.md`](06_Lambda_threshold_and_KN_memo.md) | Sort-and-chop; λ_crit ≈ 4/γ |
 | θ×K/N sweep | `HEROs_and_PASSes/theta/THETA_KN_sweep_*` | Run with **preset θ** — revisit after θ(K/N) |
@@ -44,7 +45,7 @@
 
 | Done | Item | What “done” means | Proof |
 |------|------|-------------------|-------|
-| [x] | **Intro / glossary** | You can walk equations, benchmarks (A_i, T_j), seed 42, “not curve-fitting” | PD16 Aug 4; hand deck slide 0; doc 07 SLIDE 0 |
+| [x] | **Intro / glossary** | You can walk equations, benchmarks (A_i, T_{j*}, T_j), seed 42, “not curve-fitting” | PD16 Aug 4; hand deck slide 0; doc 07 SLIDE 0 |
 | [x] | **ρ OAT** | Both curves move; “assortativity matters” | PD16 Aug 4; hand deck slides 1–2; `pass_c_rho/` |
 | [x] | **λ OAT** | Talent-only vs λ>0 bend on A_i-binned curve | PD16 Aug 4; hand deck slide 3; `pass_b/PASS_B_lambda_ablation_*.png` |
 | [x] | **θ OAT (preset v1)** | Sigmoid center sweep at **preset θ** (539 / 0.72 arms) | Slides 4–5; PD16 Aug 4. **Definition refresh** → PD16 row 2 below |
@@ -67,7 +68,7 @@ Implement via **shell env vars** in `gallery_knobs.py` (`GALLERY_LC_MODE`, `GALL
 |------|----------|------------|-------|
 | [x] | **1. Team-level L_C** | Congestion = property of **team j** (same for all roster players); compare Pass B curves to LOO default | `tier1_pool_assignment.add_team_pool_columns`; `*_pd16.png` |
 | [x] | **2. θ from K/N** | Naive-draft quantile: θ = F_A⁻¹(1 − K/N) on ability draw (Beta in sim); re-run θ OAT + θ×K/N | `gallery_knobs.resolve_viability_theta`; `theta/*_pd16.png` |
-| [ ] | **3. L_C distribution vs ρ** | Whiteboard Sketch A: histogram # teams vs L_C per ρ arm; 2D heatmap team ability vs L_C | new script + slide gap filled |
+| [x] | **3. L_C distribution vs ρ** | Whiteboard Sketch A + slides | `pass_c_rho/LC_distribution_vs_rho_*_pd16.png`; `slides/auto/CHAR_lc_congestion_characterization_AUTO.pptx` |
 | [ ] | **4. ρ low arm + intuition** | Try **ρ → 0.001**; one clean sentence why ρ matters in *this* construction | PNG + footer note on ρ slide |
 | [ ] | **5. Update intro / doc 07** | When θ provenance shifts (539 preset → K/N quantile), refresh intro slide + walkthrough | slide + doc 07 § θ |
 | [ ] | **6. Env-var walkthrough** | You can `export GALLERY_…` or `./scripts/build_characterization_slides.sh --pd16` | run yourself in PowerPoint compare |

@@ -1,12 +1,14 @@
 # 7. Phase B characterization slides — plain-English walkthrough
 
-**Last synced:** 2026-08-04 (hard vs smooth L_C; sort-and-chop rationale)
+**Last synced:** 2026-08-06 (hand-deck JPEG exports for visual audit)
 
 **Audience:** Anyone who has **not** been in the weeds — advisor, collaborator, or future-you after time away.
 
-**Deck:** `HEROs_and_PASSes/slides/CHAR_Phase_B_characterization.pptx` (hand-edited master).
+**Deck:** `HEROs_and_PASSes/slides/CHAR_Phase_B_characterization_HAND.pptx` (hand-edited master).
 
-**Slide count:** Auto merge = **8** slides (intro + 7 characterization). Charles’s hand deck may be **9+** — add intro as slide 0; θ×K/N may split into **5heat** + **5line**; γ / λ_crit renumber accordingly.
+**Visual exports (agents):** `HEROs_and_PASSes/slides/HAND_slides_images/Slide1.jpeg` … `Slide16.jpeg` — full-deck JPEG export; re-run after hand edits so COMPASS can see Equation Editor math and layout (not scrapeable from `.pptx`).
+
+**Slide count:** Auto merge = **8** slides (intro + 7 characterization). Charles’s hand deck is **16** slides in the Aug 2026 export; θ×K/N may split into **5heat** + **5line**; γ / λ_crit renumber accordingly.
 
 **What this document is:** A slide-by-slide explanation of **what you are looking at** and **why it matters** for the dissertation story. It does not replace the technical memos; it orients a reader before they open PowerPoint.
 
@@ -16,7 +18,7 @@
 
 
 
-## SLIDE 0 — Intro (Phase B framing)talent
+## SLIDE 0 — Intro (Phase B framing)
 
 **Type:** Text-only opener — no figure. Build: `python sports/scripts/build_intro_characterization_slide.py` → `slides/auto/CHAR_intro_characterization_AUTO.pptx` (copy layout into hand deck).
 
@@ -27,9 +29,10 @@
 
 | Symbol  | Plain name                     | What it controls                                                                                        |
 | ------- | ------------------------------ | ------------------------------------------------------------------------------------------------------- |
-| **A_i** | Player ability                 | Innate talent draw (Beta(2,2) on [0,1])                                                                 |
-| **T_j** | Team talent target             | Synthetic iid Uniform[0,1] per team — ideal “seat” for soft assignment; **not** real NCAA school talent |
-| **ρ**   | Assignment assortativity       | How tightly soft assign matches players to teams with **T_j ≈ A_i**                                     |
+| **A_i** | Player ability (individual talent) | Innate talent draw (Beta(2,2) on [0,1]); empirical lane uses **Â_i** from data |
+| **T_{j*}** | Sim assignment target | Synthetic iid Uniform[0,1] per team — soft-assign attractor; **not** realized roster talent |
+| **T_j** | Realized team talent | Mean **A_i** on team *j*’s roster (post-ASSIGN); empirical **T_jt** = team-season roster mean of **Â_i** |
+| **ρ**   | Assignment assortativity       | How tightly soft assign matches **A_i** to **T_{j*}** |
 | **L_C** | Congestion **measure**         | **Smooth (deck):** LOO mean σ(γ(A_j − θ)). **Hard (code):** LOO share with A_j > θ |
 | **λ**   | Congestion **weight** in score | How hard **L_C** penalizes ranking — **not** congestion itself                                          |
 | **θ**   | Viability cutline              | Center of the sigmoid                                                                                   |
@@ -43,7 +46,7 @@
 
 1. **Not curve fitting.** Phase B asks which generative rules **bend** synthetic selection curves. Phase C (later) asks whether we can **calibrate** to the empirical hero.
 2. **Three pipeline steps + readout:** ASSIGN (ρ) → SCORE (S_i = A_i − λ·L_C) → SELECT (top-K) → VISUALIZE (pool-mean bins).
-3. **One-at-a-time + seed 42:** Each slide moves one knob; benchmarks hold elsewhere. Seed locks **A_i**, **T_j**, and soft-ρ assignment lotteries; score, top-K, and bins are deterministic.
+3. **One-at-a-time + seed 42:** Each slide moves one knob; benchmarks hold elsewhere. Seed locks **A_i**, **T_{j*}**, and soft-ρ assignment lotteries; score, top-K, and bins are deterministic.
 4. **Benchmarks while sweeping:** Fixed values (λ=0.55, θ=0.72, γ=10, ρ=8, K/N=10%) anchor to the **539 reference track** where noted — not re-estimated in Phase B. See tables below.
 
 
@@ -97,9 +100,10 @@ So the y-axis is **not** “draft rate in the real NCAA.” It is **“share of 
 
 | Symbol  | Plain name                     | What it controls                                                        |
 | ------- | ------------------------------ | ----------------------------------------------------------------------- |
-| **A_i** | Player ability                 | Innate talent draw (here: Beta(2,2) on [0,1])                           |
-| **T_j** | Team talent target             | Synthetic Uniform[0,1] per team — soft-assign ideal seat; not NCAA data |
-| **ρ**   | Assignment assortativity       | How tightly players are matched to **T_j**                              |
+| **A_i** | Player ability (individual)  | Innate talent draw (here: Beta(2,2) on [0,1]); empirical **Â_i** from data |
+| **T_{j*}** | Sim assignment target         | Synthetic Uniform[0,1] per team — soft-assign attractor; not NCAA data |
+| **T_j** | Realized team talent         | Mean **A_i** on roster *j* (post-ASSIGN); Sketch A 2D **y**-axis |
+| **ρ**   | Assignment assortativity       | How tightly **A_i** is matched to **T_{j*}**                              |
 | **λ**   | Congestion **weight** in score | Multiplier on **L_C** in S_i = A_i - \lambda L_C                        |
 | **L_C** | LOO peer viability congestion  | **Smooth (deck):** mean σ(γ(A_j − θ)); **hard (code):** share with A_j > θ |
 | **θ**   | Viability cutline              | Center of the sigmoid — who counts as a “viable” peer                   |
@@ -114,8 +118,8 @@ So the y-axis is **not** “draft rate in the real NCAA.” It is **“share of 
 **Stochastic (seed matters):**
 
 1. **Draw player abilities** A_i — Beta(2,2) on [0,1] (`draw_abilities`; 539 preset).
-2. **Draw team talent targets** T_j — see **Where T_j comes from** below.
-3. **Soft assignment (ρ arms only)** — shuffle who is processed first, then weighted random team pick per player (`assign_soft`). Each ρ arm gets its own assignment lottery; OAT slides still reuse the **same** A_i and T_j draw.
+2. **Draw sim team targets** T_{j*} — see **Where T_{j*} comes from** below.
+3. **Soft assignment (ρ arms only)** — shuffle who is processed first, then weighted random team pick per player (`assign_soft`). Each ρ arm gets its own assignment lottery; OAT slides still reuse the **same** A_i and T_{j*} draw.
 
 **Deterministic given a roster:**
 
@@ -126,11 +130,11 @@ So the y-axis is **not** “draft rate in the real NCAA.” It is **“share of 
 
 **Not used in this deck:** winner rules `"A"` / `"B"` (stochastic proportional sample / Bernoulli). Those are for later soft-selection experiments.
 
-**Why seed 42:** One league draw (A_i, T_j) per figure family so curve differences trace to the knob, not a new talent lottery. Soft-ρ arms need a second seed offset per arm so assignment differs while abilities stay fixed.
+**Why seed 42:** One league draw (A_i, T_{j*}) per figure family so curve differences trace to the knob, not a new talent lottery. Soft-ρ arms need a second seed offset per arm so assignment differs while abilities stay fixed.
 
-### Where **T_j** (team talent targets) comes from
+### Where **T_{j*}** (sim assignment targets) comes from
 
-**What T_j is:** One number per team — the **ideal talent level** that team is “aiming for” in soft assignment. Assignment tries to seat player i on teams whose T_j is close to A_i (weighted by ρ).
+**What T_{j*} is:** One number per team — drawn **before** assignment. Soft assign seats player *i* on teams whose T_{j*} is near A_i (weighted by ρ). This is **not** realized roster talent; after ASSIGN, **T_j** = mean A_i on the roster.
 
 **Where the numbers come from (Phase B / 539 gallery):**
 
@@ -143,12 +147,13 @@ So the y-axis is **not** “draft rate in the real NCAA.” It is **“share of 
 | Randomness   | Same seed as A_i draw         | `HERO_SEED = 42` in `gallery_knobs.py`                        |
 
 
-**What we are *not* doing:** We do **not** copy real NCAA team talent, conference strength, or empirical school means into T_j. The code comment in `draw_target_means` states targets are **synthetic** — chosen so soft assignment produces plausible overlap on the ability axis (commensurate with A_i on [0,1]), not so each team mirrors a real program.
+**What we are *not* doing:** We do **not** copy real NCAA team talent into T_{j*}. The draw is **synthetic** — commensurate with A_i on [0,1], not mirroring real programs.
 
-**When T_j matters vs doesn’t:**
+**When T_{j*} matters vs doesn’t:**
 
-- **Soft ρ slides (1–2, 3, 4–5):** T_j enters the assignment kernel \propto \exp(-\rho(A_i - T_j)^2 / (2\sigma^2)).
-- **Sort-and-chop (γ / λ_crit slides):** T_j is **drawn but unused** — rosters come from sorting A_i and chopping into fixed-size slices (see memo 06).
+- **Soft ρ slides (1–2, 3, 4–5):** T_{j*} enters the assignment kernel \propto \exp(-\rho(A_i - T_{j*})^2 / (2\sigma^2)).
+- **Sort-and-chop (γ / λ_crit slides):** T_{j*} is **drawn but unused** — rosters come from sorting A_i and chopping into fixed-size slices (see memo 06).
+- **PD16 Sketch A (L_C vs ρ):** 2D heatmap **y**-axis is **realized T_j** (roster mean), not T_{j*}.
 
 **Older 539 full-scale note:** `MATCH_539_FULL` also uses Uniform[0,1] for targets at N=30,000 scale. The generic `TARGET_MEAN_LOW/HIGH = ±0.5` in `tier1_sim_config.py` applies to non-539 presets; **Phase B characterization uses the 539 [0,1] band.**
 
@@ -266,7 +271,7 @@ Same claim as Slide 1, stated without the hard-sort distraction: **raising ρ** 
 | **θ, γ**   | 0.72, 10                   | 539 reference JSON                                               |
 | **K/N**    | 10%                        | Characterization default (`gallery_knobs`)                       |
 | Selection  | Top-K by score (`"C"`)     | Deterministic                                                    |
-| Seed       | 42                         | Same A_i, T_j, assignment                                        |
+| Seed       | 42                         | Same A_i, T_{j*}, assignment                                       |
 
 
 
@@ -462,7 +467,7 @@ Slides **1–2** use **soft ρ** because the knob under test is **assignment mix
 2. **Isolate score reordering** — not fighting soft-assignment noise or overlapping talent windows. Question: *given extreme seating, when does λ change who wins?*
 3. **Answer Alex’s “λ = 0 vs 0.25 looks identical” puzzle** — sub-threshold λ often **does not swap** global ranks; γ sets how sharp that threshold is.
 
-**What sort-and-chop is *not*:** It is **not** the ρ knob. ρ controls **soft** match to **T_j**. Sort-and-chop **ignores T_j** and is a **hard diagnostic benchmark** — “perfect rank sorting,” not “realistic NCAA mixing.”
+**What sort-and-chop is *not*:** It is **not** the ρ knob. ρ controls **soft** match to **T_{j*}**. Sort-and-chop **ignores T_{j*}** and is a **hard diagnostic benchmark** — “perfect rank sorting,” not “realistic NCAA mixing.”
 
 **Pairing:** Soft ρ = 8 → **realistic** assignment world (slides 1–5). Sort-and-chop → **controlled testbed** for sigmoid sharpness (γ) and critical λ (slides 6–7). Same score rule; different assignment extreme.
 
@@ -540,7 +545,8 @@ Alex asked why **λ = 0** and **λ = 0.25** can look **identical** on some diagn
 
 ## Practical notes for the reader
 
-- **Hand vs auto decks:** Scripts regenerate disposable `slides/auto/*_AUTO.pptx`; Charles’s formatted master is `slides/CHAR_Phase_B_characterization.pptx`. See `slides/README.txt` for PNG paths if figures are refreshed.
+- **Hand vs auto decks:** Scripts regenerate disposable `slides/auto/*_AUTO.pptx`; Charles’s formatted master is `slides/CHAR_Phase_B_characterization_HAND.pptx`. See `slides/README.txt` for PNG paths if figures are refreshed.
+- **Hand deck JPEG exports:** `slides/HAND_slides_images/SlideN.jpeg` — export whole deck from PowerPoint after edits; agents use these to audit notation and layout against this walkthrough.
 - **Regenerate figures only:** `./scripts/build_characterization_slides.sh` (does not touch the hand deck).
 - **Empirical hero lives elsewhere:** Pass A / `So_Far_.pptx` slides 1–3 — real MBB draft rates vs talent and poolq_loo.
 

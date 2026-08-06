@@ -1,0 +1,30 @@
+{
+  "diagnostic": "sim_league_input_distributions",
+  "date": "2026-08-06",
+  "preset": "539",
+  "seed": 42,
+  "ability_draw": "beta_2_2",
+  "target_mean_dist": "uniform",
+  "n_players": 5600,
+  "n_teams": 350,
+  "outputs": {
+    "png": "SIM_league_Ai_Tj_distributions.png",
+    "csv": "SIM_league_Ai_Tj_draws.csv"
+  },
+  "A_i": {
+    "label": "A_i",
+    "n": 5600,
+    "mean": 0.500021715099239,
+    "std": 0.2228909397617229,
+    "min": 0.003988706884776067,
+    "max": 0.9941340690499976
+  },
+  "T_j_star": {
+    "label": "T_{j*}",
+    "n": 350,
+    "mean": 0.4906584573488023,
+    "std": 0.2900027929136509,
+    "min": 0.0001711756244947571,
+    "max": 0.996812795897975
+  }
+}

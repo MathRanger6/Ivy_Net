@@ -133,7 +133,7 @@ Draw A_i  →  assign to rosters (ρ)  →  compute LOO poolq_loo, L_C on roster
 
 | Knob | Step | Role |
 |------|------|------|
-| **ρ (rho)** | **Assignment** (who lands where) | **Assortativity** in soft match to team targets **T_j**; **ρ=0** = max mixing; **ρ↑** = sharper match; **not** inside **`S_i`** |
+| **ρ (rho)** | **Assignment** (who lands where) | **Assortativity** in soft match to **T_{j*}**; **ρ=0** = max mixing; **ρ↑** = sharper match; **not** inside **`S_i`** |
 | **λ** | **Scoring** | Weight on **(B − D)** in **`S_i`**; v1 knocks out via **λ = 0** or sets **(B − D) = −L_C** |
 | **Top K / noise** | **Selection (winner rule)** | How ranks become winners; v1 = deterministic top K |
 | **B, D** | **Environment (theory)** | **`L_net = B − D`** — help vs hurt among peers; not separately estimated in v1 |
@@ -213,7 +213,7 @@ While re-entering, ignore cross-domain notation. For **basketball v1 only**, use
 | **`L_C`** | LOO **viable-peer congestion** on a roster (used in **`S_i`**); D-ish, not full **`L_net`** | Network centrality papers |
 | **θ (theta)** | Viability cutline for “substitutable peer” — e.g. **med(A \| drafted)** | Generic threshold in other domains |
 | **γ (gamma)** | Sharpness of **`σ(γ(A_j − θ))`** in smooth **`L_C`** | — |
-| **ρ (rho)** | Assignment **assortativity** — soft match to team targets **T_j**; **ρ=0** = max mixing; **not** inside **`S_i`** | Legacy **τ (temperature)** in archived docs (opposite intuition) |
+| **ρ (rho)** | Assignment **assortativity** — soft match to **T_{j*}**; **ρ=0** = max mixing; **not** inside **`S_i`** | Legacy **τ (temperature)** in archived docs (opposite intuition) |
 | **Knockout** | Same league + same winner rule; **`L_C` removed from the score** (λ = 0) vs Alex score with it **in** | “Mechanism contrast” to Alex |
 | **BINDING** | **`L_net`** ≠ advancement; **score ≠ select**; hero ≠ scoring equation | — |
 | Pool quality (LOO) | Leave-one-out teammate quality | Army “poolq” without LOO |

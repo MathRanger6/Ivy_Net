@@ -16,7 +16,7 @@ Closing energy: move from “539 preset knobs” toward **data-identified** ρ, 
 
 ## What landed well
 
-- **Intro / glossary / benchmarks** — A_i, T_j, smooth L_C, seed 42, not curve-fitting.
+- **Intro / glossary / benchmarks** — A_i, T_{j*}, T_j, smooth L_C, seed 42, not curve-fitting.
 - **ρ slides** — “Assortativity matters” accepted; Alex wants **deeper intuition** (see gaps).
 - **λ slide** — talent-only vs λ>0 bend; same story as before.
 - **θ × K/N** — co-movement readout; Alex said continue, revisit θ interpretation.
@@ -31,7 +31,7 @@ Closing energy: move from “539 preset knobs” toward **data-identified** ρ, 
 | Panel | Axes | Low **ρ** | High **ρ** |
 |-------|------|-----------|------------|
 | **1D (top/middle)** | x = **L_C**, y = **# teams** | Single **narrow hump** (Alex: nearly a **delta**, not even uniform) | **Spread** / bimodal — weak teams **L_C ≈ 0**, strong teams **L_C** high |
-| **2D (bottom)** | x = **L_C**, y = **team ability** (mean A on team or T_j) | — | Heatmap: **# teams**; expect **upward** cloud — **better teams → more congestion** |
+| **2D (bottom)** | x = **L_C**, y = **realized T_j** (team roster mean of **A_i**) | — | Heatmap: **# teams**; expect **upward** cloud — **better teams → more congestion** |
 
 **Alex lock:** **ρ dials the spread of the L_C distribution across teams** — practical interpretation of assortativity in *this* model, not only “selection curve bends.”
 
@@ -63,7 +63,7 @@ Charles linked this to sort-and-chop picture (elite vs weak team L_C) — Alex: 
 
 3. **ρ ↔ L_C distribution diagnostic (new figure / slide gap)**  
    - For each ρ arm: histogram of **team L_C** (# teams vs L_C).  
-   - 2D heatmap: team mean ability (or T_j) vs L_C.  
+   - 2D heatmap: realized **T_j** vs **L_C**.  
    - **Action:** new script or Pass C extension; fills whiteboard Sketch A.
 
 4. **ρ low arm still not flat enough**  

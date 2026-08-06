@@ -169,10 +169,10 @@ def gallery_mode_subtitle(*, theta_value: float | None = None) -> str:
     """Second-line PNG title fragment documenting active PD16 modes."""
     parts: list[str] = []
     if LC_MODE == "team_smooth":
-        parts.append("team L_C")
+        parts.append(r"team $L_C$")
     if THETA_MODE != "preset":
         th = f"{theta_value:.3f}" if theta_value is not None else "K/N quantile"
-        parts.append(rf"$\theta$={th} (naive draft)")
+        parts.append(rf"$\theta$ = {th} (naive draft)")
     if OUTPUT_SUFFIX:
         parts.append(f"suffix={OUTPUT_SUFFIX}")
     if not parts:

@@ -54,12 +54,14 @@ Full sentences: [`../3-Master_Plan/re_entry/04_Pass_A_and_Pass_B_in_Plain_Englis
 ## Three-step assignment (step 1 only)
 
 0. Draw latent abilities **A_i**  
-1. Draw team targets **T_j** (e.g. Uniform on [−0.5, 0.5])  
+1. Draw sim assignment targets **T_{j*}** (e.g. Uniform on [0, 1] for 539 gallery)  
 2. Sequential soft match with roster caps:
 
 \[
-\pi_{ij} \propto \exp\left(-\rho \cdot \frac{(A_i - T_j)^2}{2\sigma^2}\right) \times (n_j + k)^\alpha
+\pi_{ij} \propto \exp\left(-\rho \cdot \frac{(A_i - T_{j^*})^2}{2\sigma^2}\right) \times (n_j + k)^\alpha
 \]
+
+After seating, **realized team talent T_j** = mean **A_i** on each roster (Sketch A 2D **y**-axis).
 
 Optional preferential attachment: **`USE_PREFERENTIAL_ATTACHMENT = True`** → **α > 0**; default **False**.
 
@@ -67,7 +69,7 @@ Optional preferential attachment: **`USE_PREFERENTIAL_ATTACHMENT = True`** → *
 |---|---------|
 | **ρ = 0** | Uniform among teams with roster room (max **mixing**) |
 | **ρ = 1** | Moderate assortativity (≡ legacy **τ = σ ≈ 0.65**) |
-| **ρ high** | Sharper match to nearest **T_j** |
+| **ρ high** | Sharper match to nearest **T_{j*}** |
 | **sort-and-chop** | Separate code path — 537-style global sort + equal slices; **max assortativity benchmark**, not ρ→∞ |
 
 **σ** (`ASSIGNMENT_SIGMA`, default **0.65**) is a fixed scale — not the user-facing knob.

@@ -185,7 +185,7 @@ def write_summary(
         "",
         f"Preset: {PRESET}. SCORE (λ) varies; ASSIGN + SELECT fixed.",
         rf"Fixed soft assign: $\rho={fixed_rho:g}$.",
-        f"Same $A_i$ / $T_j$ draw + one roster, seed={HERO_SEED}.",
+        f"Same $A_i$ / $T_{{j^*}}$ draw + one roster, seed={HERO_SEED}.",
         f"VISUALIZE: {HERO_BINS} quantile bins on pool mean (not poolq_loo).",
         "",
     ]

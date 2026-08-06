@@ -1,8 +1,8 @@
-# Pass B — λ score ablation (2026-08-05)
+# Pass B — λ score ablation (2026-08-06)
 
 Preset: 539. SCORE (λ) varies; ASSIGN + SELECT fixed.
 Fixed soft assign: $\rho=8$.
-Same $A_i$ / $T_j$ draw + one roster, seed=42.
+Same $A_i$ / $T_{j^*}$ draw + one roster, seed=42.
 VISUALIZE: 16 quantile bins on pool mean (not poolq_loo).
 
 L_C mode: team_smooth → pool_l_mode=crowding_smooth_team

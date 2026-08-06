@@ -76,7 +76,7 @@ No mandatory COMPASS agent session.
 
 | # | Step | Deliverable |
 |---|------|-------------|
-| 5.1 | **ρ** in `tier1_pool_assignment.py` | `exp(-ρ·(A_i-T_j)²/(2σ²))`; ρ=0 → uniform among open rosters |
+| 5.1 | **ρ** in `tier1_pool_assignment.py` | `exp(-ρ·(A_i-T_{j*})²/(2σ²))`; ρ=0 → uniform among open rosters |
 | 5.2 | `USE_PREFERENTIAL_ATTACHMENT` bool in config | α=0 default |
 | 5.3 | `sports/scripts/540_rho_ablation_bundle.py` | Low ρ, high ρ, sort-and-chop; fix **score + winner rule** |
 | 5.4 | Export `HEROs_and_PASSes/PASS_B_*` | CSVs, PNG, summary, caption |
@@ -141,14 +141,14 @@ No mandatory COMPASS agent session.
 **Three-step assignment (generative step 1):**
 
 1. Draw **A_i** (abilities)  
-2. Draw **T_j** (team target means)  
-3. Soft place: \(\pi_{ij} \propto \exp\bigl(-\rho\,(A_i-T_j)^2/(2\sigma^2)\bigr)\) × optional \((n_j+k)^\alpha\)
+2. Draw **T_{j*}** (sim assignment targets)  
+3. Soft place: \(\pi_{ij} \propto \exp\bigl(-\rho\,(A_i-T_{j^*})^2/(2\sigma^2)\bigr)\) × optional \((n_j+k)^\alpha\)
 
 | ρ | Meaning |
 |---|---------|
 | **0** | Uniform among teams with roster room (max mixing) |
 | **1** | Moderate (≡ legacy τ=σ≈0.65) |
-| **High** | Sharper match to **T_j** (not sort-and-chop) |
+| **High** | Sharper match to **T_{j*}** (not sort-and-chop) |
 
 **Sort-and-chop:** separate benchmark (`method="sort_chop"`) — max assortativity in 537 sense; not ρ→∞.
 

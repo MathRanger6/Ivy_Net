@@ -1,0 +1,95 @@
+{
+  "diagnostic": "lc_distribution_vs_rho",
+  "date": "2026-08-06",
+  "preset": "539",
+  "seed": 42,
+  "theta": 0.8041998943409083,
+  "theta_mode": "k_over_n",
+  "gamma": 10.0,
+  "lc_bins": 48,
+  "lc_column": "pool_c_smooth_team",
+  "arms": [
+    {
+      "label": "rho_near_zero",
+      "rho": 0.001
+    },
+    {
+      "label": "rho_low",
+      "rho": 0.1
+    },
+    {
+      "label": "rho_moderate",
+      "rho": 1.0
+    },
+    {
+      "label": "rho_high",
+      "rho": 8.0
+    },
+    {
+      "label": "rho_very_high",
+      "rho": 32.0
+    }
+  ],
+  "outputs": {
+    "png_1d_strip": "LC_distribution_vs_rho_1d_strip_pd16.png",
+    "png_2d": "LC_distribution_vs_rho_2d_pd16.png",
+    "csv": "LC_distribution_vs_rho_teams_pd16.csv"
+  },
+  "summary": [
+    {
+      "arm": "rho_near_zero",
+      "rho": 0.001,
+      "n_teams": 350,
+      "L_C_mean": 0.15011795583316023,
+      "L_C_std": 0.0495374826087337,
+      "L_C_min": 0.036125954139812406,
+      "L_C_max": 0.33571660500160244,
+      "frac_L_C_below_0.05": 0.014285714285714285,
+      "frac_L_C_above_0.5": 0.0
+    },
+    {
+      "arm": "rho_low",
+      "rho": 0.1,
+      "n_teams": 350,
+      "L_C_mean": 0.15011795583316023,
+      "L_C_std": 0.050004602931460446,
+      "L_C_min": 0.03476819467895852,
+      "L_C_max": 0.28289274614889903,
+      "frac_L_C_below_0.05": 0.014285714285714285,
+      "frac_L_C_above_0.5": 0.0
+    },
+    {
+      "arm": "rho_moderate",
+      "rho": 1.0,
+      "n_teams": 350,
+      "L_C_mean": 0.1501179558331602,
+      "L_C_std": 0.05843399565155874,
+      "L_C_min": 0.029318160814890873,
+      "L_C_max": 0.3373875058563947,
+      "frac_L_C_below_0.05": 0.011428571428571429,
+      "frac_L_C_above_0.5": 0.0
+    },
+    {
+      "arm": "rho_high",
+      "rho": 8.0,
+      "n_teams": 350,
+      "L_C_mean": 0.1501179558331602,
+      "L_C_std": 0.12929776394443043,
+      "L_C_min": 0.004652519055061779,
+      "L_C_max": 0.46257022257424857,
+      "frac_L_C_below_0.05": 0.32,
+      "frac_L_C_above_0.5": 0.0
+    },
+    {
+      "arm": "rho_very_high",
+      "rho": 32.0,
+      "n_teams": 350,
+      "L_C_mean": 0.15011795583316026,
+      "L_C_std": 0.1620077410295383,
+      "L_C_min": 0.0028458390700919103,
+      "L_C_max": 0.5761854210327122,
+      "frac_L_C_below_0.05": 0.48,
+      "frac_L_C_above_0.5": 0.022857142857142857
+    }
+  ]
+}

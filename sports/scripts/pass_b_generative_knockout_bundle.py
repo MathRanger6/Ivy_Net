@@ -183,7 +183,7 @@ def run_knockouts(out_dir: Path) -> tuple[pd.DataFrame, pd.DataFrame, dict]:
         "hero_bins": HERO_BINS,
         "bin_mode": "quantile",
         "x_axis": BIN_AXIS,
-        "x_axis_note": "team mean ability on realized roster (includes self; not LOO)",
+        "x_axis_note": "realized T_j (team roster mean of A_i; includes self; not LOO)",
         "talent_only": {"score_mode": "ability", "loo_pool_l_mode": "quality", "w": 0.0},
         "congestion": {
             "score_mode": "loo_gap_plus_ability",

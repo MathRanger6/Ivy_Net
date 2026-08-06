@@ -49,6 +49,13 @@ CLAIM = (
     "delivers the peer-pressure inverted-$U$ readout."
 )
 
+RHO_INTUITION = (
+    "Why $\\rho$ matters here: assignment assortativity sets how spread out team "
+    "$L_C$ is across the league — at $\\rho \\approx 0$ (arm $0.001$) rosters mix "
+    "and peer pressure looks the same everywhere; at high $\\rho$ weak teams pile "
+    "up near $L_C \\approx 0$ while elite rosters face real congestion."
+)
+
 SLIDE_VARIANTS = [
     {
         "subtitle": "sort-and-chop shown",
@@ -122,7 +129,7 @@ def _add_params_column(
     head.space_after = 6
 
     assign_latex = (
-        r"\pi_{ij} \propto \exp\left(-\rho \cdot \frac{(A_i-T_j)^2}{2\sigma^2}\right)"
+        r"\pi_{ij} \propto \exp\left(-\rho \cdot \frac{(A_i-T_{j^*})^2}{2\sigma^2}\right)"
     )
     add_plain_latex_block(tf, assign_latex, font_size=10, label="ASSIGN (knob ρ) — LaTeX:")
 
@@ -152,7 +159,7 @@ def _add_oat_notes(
     show_sortchop_on_figure: bool,
 ) -> None:
     bullets = [
-        r"OAT: one draw of $A_i$, $T_j$ (seed $42$); only ASSIGN changes across arms.",
+        r"OAT: one draw of $A_i$, $T_{j^*}$ (seed $42$); only ASSIGN changes across arms.",
         r"Low $\rho$: players mix across teams — selection vs pool mean stays nearly flat.",
         r"High $\rho$: assortative matching — peer environments concentrate; inverted-$U$ emerges.",
     ]
@@ -183,10 +190,12 @@ def _add_slide(prs: Presentation, meta: dict, variant: dict) -> None:
     title_box.text_frame.paragraphs[0].font.bold = True
 
     body_top = title_top + title_h + Inches(0.1)
+    intuition_h = Inches(0.38)
     footer_h = Inches(0.52)
     footer_top = SLIDE_H - MARGIN - footer_h
+    intuition_top = footer_top - intuition_h - Inches(0.04)
     notes_h = Inches(1.35)
-    params_h = footer_top - body_top - notes_h - Inches(0.08)
+    params_h = intuition_top - body_top - notes_h - Inches(0.08)
 
     left_x = MARGIN
     right_x = MARGIN + LEFT_W + COL_GAP
@@ -213,11 +222,19 @@ def _add_slide(prs: Presentation, meta: dict, variant: dict) -> None:
     _add_oat_notes(
         slide,
         left=left_x,
-        top=footer_top - notes_h - Inches(0.06),
+        top=intuition_top - notes_h - Inches(0.06),
         width=LEFT_W + RIGHT_W + COL_GAP,
         height=notes_h,
         show_sortchop_on_figure=variant["show_sortchop_on_figure"],
     )
+
+    note_box = slide.shapes.add_textbox(MARGIN, intuition_top, CONTENT_W, intuition_h)
+    populate_paragraph_with_latex(
+        note_box.text_frame.paragraphs[0],
+        RHO_INTUITION,
+        font_size=10,
+    )
+    note_box.text_frame.paragraphs[0].alignment = PP_ALIGN.LEFT
 
     foot = slide.shapes.add_textbox(MARGIN, footer_top, CONTENT_W, footer_h)
     populate_paragraph_with_latex(foot.text_frame.paragraphs[0], CLAIM, font_size=11)

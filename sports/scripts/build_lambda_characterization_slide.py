@@ -121,7 +121,7 @@ def _add_params_column(slide, meta: dict, *, left, top, width, height) -> None:
 
 def _add_oat_notes(slide, *, left, top, width, height) -> None:
     bullets = [
-        r"OAT: one draw of $A_i$, $T_j$ + one assignment (seed $42$); only SCORE changes.",
+        r"OAT: one draw of $A_i$, $T_{j^*}$ + one assignment (seed $42$); only SCORE changes.",
         r"$\lambda=0$: $S_i = A_i$ only — selection vs pool mean stays roughly monotone.",
         r"$\lambda>0$: congestion in score — inverted-$U$ / roster-pressure readout emerges.",
         r"Pairs with Pass C: $\lambda$ bends score; $\rho$ shapes the sorted roster world.",

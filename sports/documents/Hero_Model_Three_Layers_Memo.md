@@ -107,7 +107,7 @@ Use **bottom-up first** for the hero; **top-down** for 540 mechanism strip-down.
 |------|------|----------|
 | **λ / w on L_C in score** | Core mechanism | **Yes** (Pass A done) |
 | **Top-K selection** | Scarcity (winner rule) | **Yes (conceptual)** |
-| **Soft assignment (`ρ`, T_j)** | Realistic pools | Helpful, not theorem (Pass B diagnostic) |
+| **Soft assignment (`ρ`, T_{j*})** | Realistic pools | Helpful, not theorem (Pass B diagnostic) |
 | **Sort-and-chop overlay** | Hard assortative diagnostic | No — not `ρ → ∞` |
 | **Preferential attachment** | Boolean, default off | No — stretch |
 | **Faithful historical team sweeps** | Realism stretch | **No — see §6** |

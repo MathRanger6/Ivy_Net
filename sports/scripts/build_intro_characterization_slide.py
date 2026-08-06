@@ -50,14 +50,19 @@ GLOSSARY_HEAD = r"Knobs (mini glossary)"
 GLOSSARY_ROWS = [
     (r"$A_i$", "Player ability", r"Innate talent draw — Beta(2,2) on [0,1] (539 preset)"),
     (
+        r"$T_{j^*}$",
+        "Sim assignment target",
+        r"Synthetic iid Uniform[0,1] per team (`draw_target_means`); soft-assign attractor — not realized roster talent",
+    ),
+    (
         r"$T_j$",
-        "Team talent target",
-        r"Synthetic iid Uniform[0,1] per team (`draw_target_means`); not real NCAA schools",
+        "Realized team talent",
+        r"Mean $A_i$ on team $j$'s roster after ASSIGN; empirical $T_{jt}$ from $\hat{A}_i$",
     ),
     (
         r"$\rho$",
         "Assignment assortativity",
-        r"Soft match strength: players $\to$ teams with $T_j \approx A_i$",
+        r"Soft match strength: players $\to$ teams with $T_{j^*} \approx A_i$",
     ),
     (
         r"$L_C$",
@@ -81,14 +86,15 @@ NOTES = [
     rf"Three steps: ASSIGN ($\rho$) $\to$ SCORE ($S_i = A_i - \lambda L_C$) $\to$ SELECT (top-$K$); then VISUALIZE by pool-mean bin.",
     r"$L_C$ in this deck: \texttt{crowding\_smooth} (mean $\sigma$). Code also builds hard $L_C$ = LOO share with $A_j > \theta$ — not shown here.",
     r"One-at-a-time (OAT): each slide moves one knob; other settings stay at benchmark values.",
-    rf"Seed {HERO_SEED} on stochastic steps: draw $A_i$, $T_j$; soft-$\rho$ assignment. Score, top-$K$, bins are deterministic.",
+    rf"Seed {HERO_SEED} on stochastic steps: draw $A_i$, $T_{{j^*}}$; soft-$\rho$ assignment. Score, top-$K$, bins are deterministic.",
     rf"League: $N={hero_league_n()}$, $K={HERO_N_SELECTED}$, $K/N={HERO_K_OVER_N:.0%}$ ({PRESET} preset).",
 ]
 
 BENCHMARK_HEAD = r"Benchmark values (while sweeping other knobs)"
 BENCHMARK_BULLETS = [
     rf"$A_i$: Beta(2,2) on [0,1] — \texttt{{SELECTION\_539\_ABILITY\_DRAW}}",
-    r"$T_j$: Uniform[0,1] iid per team — \texttt{draw\_target\_means}; synthetic ideal seats, not NCAA roster data",
+    r"$T_{j^*}$: Uniform[0,1] iid per team — \texttt{draw\_target\_means}; synthetic assignment targets, not NCAA roster data",
+    r"$T_j$: realized roster mean after ASSIGN — not drawn; Sketch A 2D $y$-axis",
     rf"$\lambda={LAMBDA_MODERATE:g}$ — \texttt{{tier1\_539\_reference\_settings.json}} / playground default",
     r"$\theta=0.72$, $\gamma=10$ — same 539 reference JSON",
     rf"$\rho={LAMBDA_FIXED_RHO:g}$ — gallery fixed assign for $\lambda$ / $\theta$ slides (moderate-high mixing; not a 539 JSON field)",

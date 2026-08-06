@@ -15,6 +15,8 @@ _GREEK = {
     r"\pi": "π",
     r"\beta": "β",
     r"\propto": "∝",
+    r"\sim": "∼",
+    r"\approx": "≈",
     r"\exp": "exp",
     r"\in": "∈",
     r"\cdot": "·",

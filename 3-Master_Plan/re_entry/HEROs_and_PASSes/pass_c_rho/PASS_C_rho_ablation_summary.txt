@@ -1,8 +1,8 @@
-# Pass C — ρ assignment ablation (2026-08-05)
+# Pass C — ρ assignment ablation (2026-08-06)
 
 Preset: 539. ASSIGN (ρ) varies; SCORE + SELECT fixed.
 $S_i = A_i − 0.55·L_C$ (crowding_smooth_team).
-Same $A_i$ / $T_j$ draw, seed=42.
+Same $A_i$ / $T_{j^*}$ draw, seed=42.
 VISUALIZE: 16 quantile bins on pool mean (not poolq_loo).
 
 L_C mode: team_smooth → pool_l_mode=crowding_smooth_team

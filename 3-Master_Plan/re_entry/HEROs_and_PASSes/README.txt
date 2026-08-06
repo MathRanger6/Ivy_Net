@@ -13,7 +13,7 @@ Subfolders (scripts write here via sports/scripts/hero_gallery_paths.py):
 Regenerate Phase B (figures only — does not touch your hand deck):
   ./scripts/build_characterization_slides.sh
 
-Hand-edited master: slides/CHAR_Phase_B_characterization.pptx
+Hand-edited master: slides/CHAR_Phase_B_characterization_HAND.pptx
 Change-Picture cheat sheet: slides/README.txt (slide # → PNG path)
 Disposable auto templates: slides/auto/*_AUTO.pptx  (--auto-slides)
 

@@ -2,7 +2,7 @@
 # Phase B characterization — refresh PNGs and/or auto-generated slide decks.
 #
 # YOUR HAND-EDITED DECK IS NEVER OVERWRITTEN:
-#   slides/CHAR_Phase_B_characterization.pptx
+#   slides/CHAR_Phase_B_characterization_HAND.pptx
 #
 # Usage (repo root):
 #   ./scripts/build_characterization_slides.sh
@@ -18,11 +18,13 @@
 #       → PD16 variant: team L_C + naive-draft θ; writes *_pd16.png (baseline untouched)
 #
 # Hand deck workflow:
-#   1. Format equations/layout once in slides/CHAR_Phase_B_characterization.pptx
+#   1. Format equations/layout once in slides/CHAR_Phase_B_characterization_HAND.pptx
 #   2. Re-run default (figures-only) when sim outputs change
 #   3. In PowerPoint: right-click plot → Change Picture → pick updated PNG
 #      (paths in pass_b/, pass_c_rho/, theta/, sort_chop_lambda/)
 #   4. Use --auto-slides only when you want a fresh disposable template to compare
+#   5. After hand edits: export deck → slides/HAND_slides_images/SlideN.jpeg
+#      (agents read JPEGs; Equation Editor math is not visible in .pptx XML)
 
 set -euo pipefail
 
@@ -32,7 +34,7 @@ PYTHON="${PYTHON:-python}"
 GALLERY="${GALLERY_DIR:-$REPO_ROOT/3-Master_Plan/re_entry/HEROs_and_PASSes}"
 SLIDES="$GALLERY/slides"
 AUTO="$SLIDES/auto"
-HAND="$SLIDES/CHAR_Phase_B_characterization.pptx"
+HAND="$SLIDES/CHAR_Phase_B_characterization_HAND.pptx"
 MODE="figures"
 MERGE=1
 PD16=0
@@ -63,8 +65,12 @@ if [[ "$PD16" -eq 1 ]]; then
 fi
 
 _run_figures() {
+  echo ">> sim inputs (A_i, T_{j*}) ..."
+  "$PYTHON" sports/scripts/sim_league_input_distributions.py
+
   echo ">> ρ figures ..."
   "$PYTHON" sports/scripts/pass_c_rho_ablation_bundle.py
+  "$PYTHON" sports/scripts/lc_distribution_vs_rho_diagnostic.py
 
   echo ">> λ figures ..."
   "$PYTHON" sports/scripts/pass_b_lambda_ablation_bundle.py
@@ -104,8 +110,14 @@ echo ">> Building auto slide decks (slides/auto/) ..."
 echo ">> intro slide ..."
 "$PYTHON" sports/scripts/build_intro_characterization_slide.py
 
+echo ">> sim input distributions (A_i, T_j) ..."
+"$PYTHON" sports/scripts/build_sim_input_distributions_slide.py
+
 echo ">> ρ slides ..."
 "$PYTHON" sports/scripts/build_rho_characterization_slide.py
+
+echo ">> L_C congestion slides (PD16 Sketch A) ..."
+"$PYTHON" sports/scripts/build_lc_congestion_characterization_slide.py
 
 echo ">> λ slides ..."
 "$PYTHON" sports/scripts/build_lambda_characterization_slide.py
@@ -127,7 +139,9 @@ echo ""
 echo ">> Merge auto deck → $OUT_AUTO"
 "$PYTHON" sports/scripts/merge_pptx.py --python "$OUT_AUTO" \
   "$AUTO/CHAR_intro_characterization_AUTO.pptx" \
+  "$AUTO/CHAR_sim_input_distributions_AUTO.pptx" \
   "$AUTO/CHAR_rho_characterization_AUTO.pptx" \
+  "$AUTO/CHAR_lc_congestion_characterization_AUTO.pptx" \
   "$AUTO/CHAR_lambda_characterization_AUTO.pptx" \
   "$AUTO/CHAR_theta_characterization_AUTO.pptx" \
   "$AUTO/CHAR_gamma_characterization_AUTO.pptx"

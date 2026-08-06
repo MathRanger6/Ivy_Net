@@ -218,7 +218,7 @@ def write_summary(
         "",
         f"Preset: {PRESET}. ASSIGN (ρ) varies; SCORE + SELECT fixed.",
         f"$S_i = A_i − {w:g}·L_C$ ({pool_l_mode}).",
-        f"Same $A_i$ / $T_j$ draw, seed={HERO_SEED}.",
+        f"Same $A_i$ / $T_{{j^*}}$ draw, seed={HERO_SEED}.",
         f"VISUALIZE: {HERO_BINS} quantile bins on pool mean (not poolq_loo).",
         "",
     ]
@@ -317,7 +317,7 @@ def build_figure(
     sigma = float(assignment_sigma)
     formula = (
         r"Soft assign (knob $\rho$): "
-        r"$\pi_{ij}\propto\exp\!\left(-\rho\,(A_i-T_j)^2/(2\sigma^2)\right)$ "
+        r"$\pi_{ij}\propto\exp\!\left(-\rho\,(A_i-T_{j^*})^2/(2\sigma^2)\right)$ "
         rf"with $\sigma={sigma:g}$ fixed. "
         rf"Score $S_i=A_i-{w:g}\,L_C$ held fixed; VISUALIZE on pool mean."
     )
