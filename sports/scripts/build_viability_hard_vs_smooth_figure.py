@@ -154,7 +154,7 @@ def build_figure() -> None:
     ax_soft.set_title(
         r"Smooth rule (code: crowding\_smooth)"
         "\n"
-        r"$L_C$ = mean of these weights over LOO teammates",
+        r"$L_C$ = mean of these weights over the roster (team smooth)",
         fontsize=11,
     )
     ax_soft.legend(
@@ -170,7 +170,7 @@ def build_figure() -> None:
     ax_roster = fig.add_subplot(gs[1, :])
     ax_roster.set_xlim(0, 1)
     ax_roster.set_ylim(0, 1)
-    ax_roster.set_xlabel(r"Teammate ability $A_j$ on one $\theta$-straddle roster (14 LOO peers, NCAA)")
+    ax_roster.set_xlabel(r"Teammate ability $A_j$ on one $\theta$-straddle roster (14 peers, NCAA)")
     ax_roster.set_yticks([])
     for spine in ("top", "right", "left"):
         ax_roster.spines[spine].set_visible(False)
@@ -219,7 +219,7 @@ def build_figure() -> None:
         "Example: mean peer weight → L_C for one player on a straddle roster.",
         rf"Blue numbers = soft $\sigma(\gamma(A_j-\theta))$ at $\gamma={gamma:g}$; "
         rf"gray h: = hard $\mathbb{{1}}[A_j>\theta]$ (0 or 1 only).",
-        rf"Average over 14 LOO peers: soft $\Rightarrow$ $L_C \approx {lc_soft:.2f}$ (interior); "
+        rf"Roster average (14 peers): soft $\Rightarrow$ $L_C \approx {lc_soft:.2f}$ (interior); "
         rf"hard $\Rightarrow$ $L_C = {lc_hard:.2f}$ (still interior when roster mixes above/below $\theta$).",
     ]
     for i, line in enumerate(cap_lines):

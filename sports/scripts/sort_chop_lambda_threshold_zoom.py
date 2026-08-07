@@ -41,6 +41,7 @@ from gallery_knobs import (
     HERO_SEED,
     league_scale_title_line,
     PRESET,
+    resolve_pool_l_mode,
 )
 from hero_gallery_paths import SORT_CHOP_LAMBDA, ensure_hero_dirs
 
@@ -147,7 +148,7 @@ def _draw_league_once(tpa, params, rng):
 def _score_config(lam: float) -> tuple[str, str, float]:
     if lam <= 0.0:
         return "ability", "quality", 0.0
-    return "loo_gap_plus_ability", "crowding_smooth", float(lam)
+    return "loo_gap_plus_ability", resolve_pool_l_mode(), float(lam)
 
 
 def run_arm(

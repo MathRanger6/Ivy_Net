@@ -55,7 +55,7 @@ Re-entry sim work mirrors the document re-entry pattern: **park old lab notebook
 
 | # | Step | Deliverable |
 |---|------|-------------|
-| 3.1 | `3-Master_Plan/20260727_COMPASS_sim_reentry_status.md` | ½-page status + claims guard |
+| 3.1 | `3-Master_Plan/archive/numbered_print_stack/20260727_COMPASS_sim_reentry_status.md` | ½-page status + claims guard |
 | 3.2 | Mirror plan if `~/.cursor/plans/` edited | `./scripts/mirror_plan.sh` (optional) |
 
 No mandatory COMPASS agent session.

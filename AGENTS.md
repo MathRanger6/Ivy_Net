@@ -19,7 +19,7 @@
 ## Charles re-entry (when lost or under deadline)
 
 - **Start here:** [`3-Master_Plan/re_entry/00_READ_ME_FIRST.md`](3-Master_Plan/re_entry/00_READ_ME_FIRST.md) — three standalone narrative docs; no cross-reference scavenger hunt.
-- **Do not** point Charles at `Charles_reading_list.md` (14-doc stack), shorthand memos, or agent mail until re_entry 01–03 are done.
+- **Do not** point Charles at [`archive/numbered_print_stack/Charles_reading_list.md`](3-Master_Plan/archive/numbered_print_stack/Charles_reading_list.md) (14-doc stack), shorthand memos, or agent mail until re_entry 01–03 are done.
 - New explanatory prose for Charles → write under `3-Master_Plan/re_entry/` (narrative, inline glossary). Parked docs listed in [`re_entry/PARKED_FOR_LATER.md`](3-Master_Plan/re_entry/PARKED_FOR_LATER.md).
 
 ## Cursor Plan mirrors
@@ -40,6 +40,7 @@
 
 ## PDF from markdown
 
+- **Formatting for agents:** [`3-Master_Plan/re_entry/MARKDOWN_FOR_PDF_PLAYWRIGHT.md`](3-Master_Plan/re_entry/MARKDOWN_FOR_PDF_PLAYWRIGHT.md) — math (`$…$`, `$$…$$`), symbols, tables, CSS presets for `./scripts/convert_single_md_to_pdf.sh`.
 - **Charles runs PDF conversion** (`./scripts/convert_single_md_to_pdf.sh …` or `./scripts/convert_multiple_md_to_pdf.sh 01_ 02_ …`) on his machine unless he explicitly asks COMPASS to run it in that message.
 - COMPASS may edit `.md` and suggest CSS (e.g. `pdf_styles_narrow.css`); **do not** run convert scripts or regenerate `.pdf` files unprompted — agent-side Playwright/Chrome often mis-renders or crashes vs Charles’s local run.
 - Do not aggressively condense, reframe as “decision memos,” or regenerate PDFs without explicit ask.
@@ -51,9 +52,9 @@
 ## Cross-project planning agent — COMPASS
 
 - **COMPASS** (formerly “Master Planner”) — scientific coherence, sequencing, near-term plan. Does not own domain code or manuscript prose.
-- Canonical guidance: `3-Master_Plan/COMPASS_Initial_Guidance_v6.md`, identity note: `3-Master_Plan/COMPASS_AGENT_IDENTITY.md`.
-- Agent handoffs: `3-Master_Plan/{CODA,SCOUT,PEER}_report_to_COMPASS.md`.
-- Question files: `3-Master_Plan/YYYYMMDD_HHMM_COMPASS_to_{AGENT}_questions.md`.
+- Canonical guidance: [`3-Master_Plan/obsolete/pre_tier1_locks/COMPASS_Initial_Guidance_v6.md`](3-Master_Plan/obsolete/pre_tier1_locks/COMPASS_Initial_Guidance_v6.md), identity note: [`3-Master_Plan/COMPASS_AGENT_IDENTITY.md`](3-Master_Plan/COMPASS_AGENT_IDENTITY.md).
+- Agent handoffs (PDF): [`3-Master_Plan/archive/numbered_print_stack/`](3-Master_Plan/archive/numbered_print_stack/) (`CODA_report_to_COMPASS.pdf`, etc.).
+- Question files (older rounds): [`3-Master_Plan/archive/`](3-Master_Plan/archive/) and [`3-Master_Plan/obsolete/correspondence_rounds/`](3-Master_Plan/obsolete/correspondence_rounds/).
 
 ## Conflicts
 

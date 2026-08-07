@@ -2,6 +2,7 @@
 
 Example (baseline — reproduces Phase B deck PNGs):
   export GALLERY_PRESET=539
+  export GALLERY_HERO_SEED=42   # optional; see sports/hero_seed.py
   ./scripts/build_characterization_slides.sh
 
 Example (PD16 variant — team L_C + naive-draft θ, new *_pd16.png files):
@@ -16,8 +17,8 @@ Manual equivalent:
 PD16 modes (Paper Directions 16, Aug 2026 — re_entry/08_PD16_Alex_meeting_takeaways.md)
 ---------------------------------------------------------------------------------------
 GALLERY_LC_MODE:
-  loo_smooth   — DEFAULT. L_C = LOO mean σ(γ(A−θ)); current Phase B deck.
-  team_smooth  — PD16. L_C = team-level mean σ(γ(A−θ)); same value for whole roster.
+  team_smooth  — DEFAULT. L_C = team-level mean σ(γ(A−θ)); same value for whole roster.
+  loo_smooth   — PARKED. L_C = LOO mean σ(γ(A−θ)); legacy only (set explicitly if needed).
 
 GALLERY_THETA_MODE:
   preset       — DEFAULT. θ from tier1_539_reference_settings / SELECTION_539 (0.72).
@@ -36,6 +37,15 @@ try:
     from scipy.stats import beta as _beta_dist
 except ImportError:  # pragma: no cover — scipy expected in project env
     _beta_dist = None  # type: ignore[assignment]
+
+# Canonical seed — sports/hero_seed.py (GALLERY_HERO_SEED env)
+import sys
+from pathlib import Path
+
+_SPORTS = Path(__file__).resolve().parents[1]
+if str(_SPORTS) not in sys.path:
+    sys.path.insert(0, str(_SPORTS))
+from hero_seed import HERO_SEED  # noqa: E402
 
 
 def _env_str(name: str, default: str) -> str:
@@ -60,7 +70,7 @@ def _env_float(name: str, default: float) -> float:
 # Pass A/B/C PNG generation
 PRESET = _env_str("GALLERY_PRESET", "539")  # "539" | "540"
 HERO_BINS = _env_int("GALLERY_HERO_BINS", 16)
-HERO_SEED = _env_int("GALLERY_HERO_SEED", 42)
+# HERO_SEED imported from sports/hero_seed.py
 
 # League scale — characterization default K/N = 10% (not MBB ~1%)
 # Override: GALLERY_N_TEAMS, GALLERY_ROSTER_SIZE, GALLERY_N_SELECTED, or GALLERY_K_OVER_N
@@ -98,7 +108,7 @@ LAMBDA_HIGH = _env_float("GALLERY_LAMBDA_HIGH", 1.0)
 # PD16 — team L_C, naive-draft θ, parallel output suffix (_pd16)
 # ---------------------------------------------------------------------------
 # Read once at import; unset env → baseline Phase B behavior unchanged.
-LC_MODE = _env_str("GALLERY_LC_MODE", "loo_smooth").strip().lower()
+LC_MODE = _env_str("GALLERY_LC_MODE", "team_smooth").strip().lower()
 THETA_MODE = _env_str("GALLERY_THETA_MODE", "preset").strip().lower()
 
 # Master suffix for new PD16 figures. Per-pass overrides still win if set explicitly.
@@ -176,8 +186,8 @@ def gallery_mode_subtitle(*, theta_value: float | None = None) -> str:
     if OUTPUT_SUFFIX:
         parts.append(f"suffix={OUTPUT_SUFFIX}")
     if not parts:
-        return "baseline: LOO L_C, preset θ"
-    return "PD16: " + "; ".join(parts)
+        return r"team $L_C$, preset $\theta$"
+    return "; ".join(parts)
 
 
 def gallery_mode_summary_lines(*, theta_value: float | None = None) -> list[str]:
@@ -196,7 +206,7 @@ def gallery_mode_summary_lines(*, theta_value: float | None = None) -> list[str]
     return lines
 
 # Pass C only (optional overrides)
-RHO_LOW = _env_float("GALLERY_RHO_LOW", 0.1)
+RHO_LOW = _env_float("GALLERY_RHO_LOW", 0.001)
 RHO_MODERATE = _env_float("GALLERY_RHO_MODERATE", 1.0)
 RHO_HIGH = _env_float("GALLERY_RHO_HIGH", 8.0)
 RHO_VERY_HIGH = _env_float("GALLERY_RHO_VERY_HIGH", 32.0)

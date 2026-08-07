@@ -7,7 +7,6 @@ VISUALIZE: 16 quantile bins on pool mean (not poolq_loo).
 
 L_C mode: team_smooth → pool_l_mode=crowding_smooth_team
 θ mode: k_over_n (θ=0.8042)
-Output suffix: _pd16
 
 ## Arms
 

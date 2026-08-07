@@ -38,7 +38,7 @@ $$
 ## What moving ρ does (one sentence each)
 
 - **ρ = 0** → every open team looks the same (max mixing).
-- **ρ small (e.g. 0.1)** → mild preference for \(T_{j^*} \approx A_i\); still a lot of overlap across teams.
+- **ρ small (e.g. 0.001)** → near-random mixing; \(T_{j^*} \approx A_i\) barely guides assignment; rosters overlap heavily across teams.
 - **ρ moderate (e.g. 1)** → clear soft sorting; talent windows still overlap (like real college forensics).
 - **ρ large (e.g. 8, 32)** → sharp assortativity; almost only near-matches sit together.
 - **Not on this formula:** **sort-and-chop** is a *different* hard rule (sort by ability, cut into slices). It is **not** “ρ → ∞.”

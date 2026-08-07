@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """θ OAT at K/N=10% — full bin curves after θ×K/N panel.
 
-Fixed: soft ρ=8, λ=0.55, γ=10, N=5600, K=560, seed=42.
+Fixed: soft ρ=8, λ=0.55, γ=10, N=5600, K=560 (seed from GALLERY_HERO_SEED / hero_seed.py).
 Varies: θ ∈ {0.50, 0.72, 0.90} (viability cutline in L_C).
 
 Run (repo root):

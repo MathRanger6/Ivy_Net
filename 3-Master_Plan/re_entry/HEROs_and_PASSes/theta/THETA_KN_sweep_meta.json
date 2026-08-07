@@ -1,8 +1,9 @@
 {
   "diagnostic": "theta_kn_sweep",
-  "date": "2026-08-04",
+  "date": "2026-08-07",
   "preset": "539",
   "seed": 42,
+  "theta_mode": "preset",
   "theta_grid": [
     0.5,
     0.72,
@@ -17,9 +18,11 @@
     "rho": 8.0,
     "lambda_weight": 0.55,
     "gamma": 10.0,
-    "assignment": "soft"
+    "assignment": "soft",
+    "pool_l_mode": "crowding_smooth_team"
   },
   "n_teams": 350,
   "roster_size": 16,
-  "hero_bins": 16
+  "hero_bins": 16,
+  "png_suffix": ""
 }

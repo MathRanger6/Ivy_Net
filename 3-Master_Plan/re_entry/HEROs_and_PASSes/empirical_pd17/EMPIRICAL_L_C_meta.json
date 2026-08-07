@@ -1,0 +1,43 @@
+{
+  "diagnostic": "empirical_lc_distributions",
+  "date": "2026-08-06",
+  "source": "MBB player-season panel (530 pipeline / hero filters)",
+  "seasons": "2011-2021",
+  "perf": "PPM z within season",
+  "lc_mode": "crowding_smooth_team",
+  "theta_mode": "empirical_k_over_n_quantile",
+  "theta": 2.29465596868381,
+  "gamma": 0.5,
+  "gamma_source": "CLI --gamma 0.5",
+  "gamma_note": "539 placeholder until PD17 gamma/lambda calibration",
+  "theta_K_over_N": {
+    "description": "PD17: accepted / total in filtered panel",
+    "n_accepted": 1134,
+    "n_total": 62180,
+    "K_over_N": 0.018237375361852687,
+    "theta_quantile": 0.9817626246381473
+  },
+  "L_C": {
+    "label": "L_C",
+    "n": 6492,
+    "mean": 0.2540366597810298,
+    "std": 0.03868574775408655,
+    "min": 0.09390184595398701,
+    "max": 0.5543710199139684
+  },
+  "T_j_hat": {
+    "label": "\\hat{T}_j",
+    "n": 6492,
+    "mean": 0.011498887798453658,
+    "std": 0.4006316928373786,
+    "min": -2.2391392177783933,
+    "max": 2.7551839321296203
+  },
+  "n_team_seasons": 6492,
+  "lc_bins_1d": 48,
+  "outputs": {
+    "png_1d": "EMPIRICAL_L_C_distribution.png",
+    "png_2d": "EMPIRICAL_L_C_vs_Tj_2d.png",
+    "team_csv": "EMPIRICAL_L_C_team_season.csv"
+  }
+}

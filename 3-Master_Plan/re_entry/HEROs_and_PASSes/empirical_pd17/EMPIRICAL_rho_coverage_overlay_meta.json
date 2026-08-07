@@ -1,0 +1,85 @@
+{
+  "diagnostic": "empirical_rho_coverage_overlay",
+  "date": "2026-08-06",
+  "preset": "539",
+  "seed": 42,
+  "empirical": {
+    "coverage_max": 6305,
+    "coverage_disjoint_max": 7,
+    "coverage_frac_gt_1": 0.865,
+    "n_team_seasons": 6492
+  },
+  "sim_sort_chop_peak": 1,
+  "sim_panel_mode": "three_panel",
+  "sim_legacy_arms": [
+    {
+      "arm": "rho_low",
+      "rho": 0.001,
+      "coverage_peak": 1000
+    },
+    {
+      "arm": "rho_moderate",
+      "rho": 1.0,
+      "coverage_peak": 1000
+    },
+    {
+      "arm": "rho_high",
+      "rho": 8.0,
+      "coverage_peak": 914
+    },
+    {
+      "arm": "rho_very_high",
+      "rho": 32.0,
+      "coverage_peak": 588
+    }
+  ],
+  "sim_sweep_arms": [
+    {
+      "rho": 1.0,
+      "coverage_peak": 1000
+    },
+    {
+      "rho": 1.640670712015276,
+      "coverage_peak": 1000
+    },
+    {
+      "rho": 2.6918003852647123,
+      "coverage_peak": 998
+    },
+    {
+      "rho": 4.41635805469525,
+      "coverage_peak": 989
+    },
+    {
+      "rho": 7.245789314111255,
+      "coverage_peak": 930
+    },
+    {
+      "rho": 11.88795431309559,
+      "coverage_peak": 831
+    },
+    {
+      "rho": 19.504218467271617,
+      "coverage_peak": 685
+    },
+    {
+      "rho": 32.0,
+      "coverage_peak": 588
+    }
+  ],
+  "sim_rho_sweep": [
+    1.0,
+    1.640670712015276,
+    2.6918003852647123,
+    4.41635805469525,
+    7.245789314111255,
+    11.88795431309559,
+    19.504218467271617,
+    32.0
+  ],
+  "sim_cmap": "Oranges",
+  "outputs": {
+    "png": "EMPIRICAL_rho_coverage_overlay.png",
+    "png_sim_sweep": "EMPIRICAL_rho_coverage_sim_rho_1_32_sweep.png"
+  }
+}

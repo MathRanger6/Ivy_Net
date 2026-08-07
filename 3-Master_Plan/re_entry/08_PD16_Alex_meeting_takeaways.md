@@ -1,6 +1,6 @@
 # 8. PD16 — Alex meeting takeaways (Aug 4, 2026)
 
-**Last synced:** 2026-08-05
+**Last synced:** 2026-08-07
 
 **Audience:** Charles, re-entering after the Phase B characterization briefing.
 
@@ -10,7 +10,7 @@
 
 **Working digest (agents):** `transcripts/PD16_notes.md`
 
-**Deck briefed:** `HEROs_and_PASSes/slides/CHAR_Phase_B_characterization_HAND.pptx` (+ walkthrough doc 07).
+**Deck briefed:** `HEROs_and_PASSes/slides/CHAR_PD16_HAND.pptx` (+ walkthrough doc 07).
 
 ---
 
@@ -101,14 +101,93 @@ P(A_i > A^*) = K/N
 
 ## L_C: team-level vs LOO (Alex ask)
 
-| | **LOO L_C (today)** | **Team L_C (PD16)** |
+| | **LOO L_C (parked Aug 2026)** | **Team L_C (default)** |
 |---|---------------------|---------------------|
 | **Unit** | One value per **player** *i* | One value per **team** *j* |
 | **Peers** | Teammates **excluding** *i* | Whole roster (all teammates) |
 | **Story** | “My congestion field” | “How crowded is this team?” |
-| **Alex** | Fine for hero axis; maybe over-customized in **score** | Matches “congestion = good players on the team” |
+| **Alex** | Fine for hero axis; parked in **score** | Matches “congestion = good players on the team” |
 
 Alex noted early runs that “worked” used **poolq**-style team context, not LOO, for the congestion-in-score story. He thinks team-level L_C will **come out in the wash** for rankings but wants you to **try it and compare**.
+
+---
+
+## Pass C ρ slide — why low-ρ is **not** completely flat (and should not be)
+
+**HAND16 slides 3–4** (Pass C assignment ablation). Old copy said low ρ → “nearly flat” curve. **Corrected Aug 2026** after seed sweep + CSV audit. Briefing deck trimmed to **13 slides** (`CHAR_PD16_HAND.pptx`) Aug 2026 — dropped migration compare slides (old PPT 5, 7, 10, 12).
+
+### What you see (ρ = 0.001, seed 42, current defaults)
+
+| Pool-mean bin | Selection rate (approx.) |
+|---------------|--------------------------|
+| 1 (weakest) | 0.05 |
+| 16 (strongest) | 0.14 |
+
+The blue arm **tilts upward** — it does **not** look horizontal next to ρ = 32 (flat bottom near 0, peak ~0.25 at bin 14, dip at bin 16).
+
+### Is it a seed-42 artifact?
+
+**No.** Re-ran Pass C at ρ = 0.001, λ = 0.55, team L_C, θ(K/N) for seeds {1, 7, 13, 42, 99, 123, 427, 1000}: **every seed** has bin 16 > bin 1 (delta roughly +0.04 to +0.09). Changing `GALLERY_HERO_SEED` reshapes bin noise but **does not remove** the uptilt.
+
+### Why it **should** tilt (plain English for Alex)
+
+1. **Fixed score:** **S_i = A_i − λ L_C** with λ = 0.55; global **top-K** selection (10%).
+2. **Low ρ:** rosters mix → **L_C is nearly the same on every team** (Sketch A: one narrow hump ~0.15). Assignment is **not** stratifying peer pressure yet.
+3. **X-axis:** 16 **quantile bins of realized team mean ability** (pool mean after assignment).
+4. **Selection logic:** take the best scores league-wide. Higher bins contain better players on average → **more selections from those bins**, even when L_C does not vary much.
+5. **Contrast with high ρ:** assortativity creates **different L_C worlds** → inverted-U (weak bins near zero selection, interior peak, elite-bin dip). That is the **assignment** story ρ is meant to show.
+
+**One-liner for Alex:**
+
+> At low ρ the curve isn’t flat because global top-K on talent still favors stronger pool-mean bins — what ρ adds at high values is the **inverted-U**, not the baseline slope.
+
+**Not a bug; don’t re-seed hoping ρ = 0.001 goes horizontal.** Slide claim updated to: *low ρ → weak monotone tilt (no inverted-U); high ρ → peer-pressure hump.*
+
+**At λ = 0** the same ρ = 0.001 arm tilts **more** (bin 1 → bin 16 delta ≈ +0.17 at seed 42) — congestion in score actually **moderates** the baseline slope at low ρ.
+
+---
+
+## Stochastic seed — one dial (Aug 2026)
+
+**Canonical:** `sports/hero_seed.py` → reads **`GALLERY_HERO_SEED`** (default **42**).
+
+Wired through: all Phase B gallery diagnostics (`gallery_knobs.HERO_SEED`), `tier1_sim_config.RANDOM_SEED` / `MATCH_539_RANDOM_SEED`, `build_characterization_slides.sh`, `rebuild_hero_gallery.sh`.
+
+```bash
+export GALLERY_HERO_SEED=99
+./scripts/build_characterization_slides.sh
+```
+
+**Exception (unchanged):** `MATCH_539_FULL_RANDOM_SEED = 1` for full-scale 539 reference JSON — separate calibration anchor.
+
+---
+
+## HAND16 deck trim + rename (Aug 2026)
+
+**Renamed:** `CHAR_Phase_B_characterization_HAND.pptx` → **`CHAR_PD16_HAND.pptx`** (pairs with `CHAR_PD17_HAND.pptx`).
+
+**Trimmed to 13 briefing slides** — removed:
+- Old PPT **5, 7** — ρ/λ before-after θ migration compares
+- Old PPT **10, 12** — duplicate θ×K/N line-only and heatmap
+
+**Canonical map:** `HEROs_and_PASSes/slides/README.txt` · walkthrough doc 07.
+
+---
+
+## Sort-and-chop vs soft assign — λ/γ slides (Aug 2026)
+
+**Keep** sort-and-chop γ × λ grid + λ_crit ≈ 4/γ as a **disjoint benchmark** (HAND deck — do not delete).
+
+**Add** parallel **soft-assign** γ × λ sweep (overlapping rosters, fixed ρ, team L_C, θ(K/N)) — overlaps like PD17 empirical target; **no** 4/γ claim on overlap panels.
+
+**One sentence for Alex:**
+
+> We kept sort-and-chop to show when congestion must enter the score on disjoint rosters; we’re adding the same λ/γ readouts under soft assign because that’s the overlap regime real rosters live in — and that’s where we’ll pin λ on data.
+
+**HAND workflow:** scripts write only `slides/auto/*_AUTO.pptx` and PNGs — **never** overwrite `CHAR_PD16_HAND.pptx` or `CHAR_PD17_HAND.pptx`. Charles edits HAND masters in PowerPoint; Save As backup before substantive changes recommended.
+
+**Figures:** `soft_assign_lambda/GAMMA_sweep_soft_assign_lambda_curves_key_arms.png`  
+**AUTO slide:** `slides/auto/CHAR_soft_assign_gamma_sweep_AUTO.pptx`
 
 ---
 
@@ -139,28 +218,32 @@ export GALLERY_K_OVER_N=0.10
 
 **PD16 toggles** (implemented in `sports/scripts/gallery_knobs.py`):
 
-| Variable | Default (unchanged deck) | PD16 experimental |
-|----------|--------------------------|-------------------|
-| `GALLERY_LC_MODE` | `loo_smooth` | `team_smooth` |
-| `GALLERY_THETA_MODE` | `preset` (0.72 from 539) | `k_over_n` (quantile from ability draw + K/N) |
+| Variable | Default (Aug 2026) | Legacy / parked |
+|----------|-------------------|-----------------|
+| `GALLERY_LC_MODE` | `team_smooth` | `loo_smooth` |
+| `GALLERY_THETA_MODE` | `k_over_n` (quantile from ability draw + K/N) | `preset` (0.72 from 539) |
 | `GALLERY_OUTPUT_SUFFIX` | `` (overwrite baseline names) | `_pd16` (parallel PNGs) |
+| `GALLERY_HERO_SEED` | `42` (`sports/hero_seed.py`) | any int — one dial for gallery + tier1 default RNG |
 
-**Why flags:** Running `./scripts/build_characterization_slides.sh` with **no** exports keeps producing **today’s PNGs** for your hand deck. Opt in when ready:
+**Default run** (no exports needed):
+
+```bash
+./scripts/build_characterization_slides.sh
+```
+
+Produces team $L_C$ + $\theta(K/N)$ on all characterization PNGs. For parallel `_pd16` copies only:
 
 ```bash
 ./scripts/build_characterization_slides.sh --pd16
 ```
 
-Or manually:
+Legacy LOO $L_C$ (parked):
 
 ```bash
-export GALLERY_LC_MODE=team_smooth
-export GALLERY_THETA_MODE=k_over_n
-export GALLERY_OUTPUT_SUFFIX=_pd16
+export GALLERY_LC_MODE=loo_smooth
+export GALLERY_THETA_MODE=preset
 ./scripts/build_characterization_slides.sh
 ```
-
-Then **compare** peak bins, curve shapes, and θ×K/N cells to the current deck — evidence before you change slide footers or benchmarks.
 
 ---
 

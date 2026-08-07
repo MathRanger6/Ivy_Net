@@ -15,7 +15,9 @@ Outputs:
   3-Master_Plan/re_entry/HEROs_and_PASSes/theta/THETA_KN_sweep_summary.csv
   3-Master_Plan/re_entry/HEROs_and_PASSes/theta/THETA_KN_sweep_peak_bin.png
   3-Master_Plan/re_entry/HEROs_and_PASSes/theta/THETA_KN_sweep_peak_bin_lines.png
-    (optional alternate for Slide 5 — lines connect measured θ only, no surface)
+    (θ grid — lines connect measured θ only; preset θ mode)
+  3-Master_Plan/re_entry/HEROs_and_PASSes/theta/THETA_KN_sweep_peak_bin_vs_kn.png
+    (naive-draft θ = F_A⁻¹(1−K/N); k_over_n θ mode — HAND deck right panel)
 """
 
 from __future__ import annotations
@@ -56,6 +58,7 @@ OUT = THETA
 SUMMARY_CSV = OUT / f"THETA_KN_sweep_summary{THETA_PNG_SUFFIX}.csv"
 PEAK_PNG = OUT / f"THETA_KN_sweep_peak_bin{THETA_PNG_SUFFIX}.png"
 PEAK_LINES_PNG = OUT / f"THETA_KN_sweep_peak_bin_lines{THETA_PNG_SUFFIX}.png"
+PEAK_KN_PNG = OUT / f"THETA_KN_sweep_peak_bin_vs_kn{THETA_PNG_SUFFIX}.png"
 
 KN_LINE_LABELS = {
     "mbb_draft": r"MBB-like ($K/N=1\%$)",
@@ -317,45 +320,59 @@ def build_peak_lines_k_over_n(df: pd.DataFrame) -> None:
     from gallery_mathtext import configure_matplotlib_mathtext
 
     configure_matplotlib_mathtext()
-    kn_labels = [label for label, _ in KN_GRID]
     sub = df.sort_values("k_over_n")
 
     fig, ax = plt.subplots(figsize=(7.5, 4.5))
+    x = sub["k_over_n"].to_numpy()
+    y = sub["peak_bin"].to_numpy()
+
     ax.plot(
-        sub["k_over_n"],
-        sub["peak_bin"],
-        marker="o",
-        markersize=9,
-        linewidth=2,
+        x,
+        y,
         color="#1f77b4",
-        label=r"$\theta = F_A^{-1}(1-K/N)$",
+        linewidth=2,
+        zorder=1,
+        solid_capstyle="round",
     )
     for _, row in sub.iterrows():
-        ax.annotate(
-            KN_LINE_LABELS.get(str(row["kn_preset"]), str(row["kn_preset"])),
-            (row["k_over_n"], row["peak_bin"]),
-            textcoords="offset points",
-            xytext=(4, 6),
-            fontsize=8,
+        preset = str(row["kn_preset"])
+        ax.scatter(
+            row["k_over_n"],
+            row["peak_bin"],
+            s=90,
+            color="#1f77b4",
+            edgecolors="white",
+            linewidths=1.2,
+            zorder=3,
+            label=KN_LINE_LABELS.get(preset, preset),
         )
 
     ax.set_xlabel(r"Selectivity $K/N$")
     ax.set_ylabel(r"Peak pool-mean bin (1 = weakest teams)")
+    mid_theta = float(sub["theta"].iloc[len(sub) // 2]) if len(sub) else None
     ax.set_title(
         rf"Peak bin vs $K/N$ with naive-draft $\theta$ ({PRESET})"
         "\n"
         rf"soft $\rho={FIXED_RHO:g}$, $\lambda={FIXED_LAMBDA:g}$, $\gamma=10$, $N={hero_league_n()}$"
         "\n"
-        + gallery_mode_subtitle(
-            theta_value=float(sub["theta"].iloc[len(sub) // 2]) if len(sub) else None
-        )
+        + gallery_mode_subtitle(theta_value=mid_theta),
+        fontsize=11,
     )
-    ax.set_ylim(0.5, HERO_BINS + 0.5)
+    ax.set_xlim(-0.01, 0.43)
+    ax.set_ylim(10.5, HERO_BINS + 0.8)
+    ax.set_xticks([0.0, 0.05, 0.10, 0.15, 0.20, 0.25, 0.30, 0.35, 0.40])
+    ax.legend(
+        loc="lower right",
+        fontsize=8.5,
+        framealpha=0.94,
+        borderpad=0.6,
+        handlelength=1.2,
+    )
     ax.grid(True, alpha=0.25, linestyle="--")
     fig.tight_layout()
-    fig.savefig(PEAK_LINES_PNG, dpi=150, bbox_inches="tight")
+    fig.savefig(PEAK_KN_PNG, dpi=150, bbox_inches="tight")
     plt.close(fig)
-    print(f"Wrote {PEAK_LINES_PNG}")
+    print(f"Wrote {PEAK_KN_PNG}")
 
 
 def main() -> None:

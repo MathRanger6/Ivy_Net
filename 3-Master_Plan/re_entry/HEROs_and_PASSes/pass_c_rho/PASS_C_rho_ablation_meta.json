@@ -10,7 +10,7 @@
     "w": 0.55,
     "n_selected": 560,
     "k_over_n": 0.1,
-    "viability_theta": 0.8041998943409083
+    "viability_theta": 0.72
   },
   "league": {
     "n_teams": 350,
@@ -19,14 +19,14 @@
   },
   "assignment": {
     "ability_draw": "beta_2_2",
-    "viability_theta": 0.8041998943409083,
+    "viability_theta": 0.72,
     "viability_sharpness": 10.0
   },
   "arms": [
     {
       "label": "rho_low",
       "method": "soft",
-      "rho": 0.1
+      "rho": 0.001
     },
     {
       "label": "rho_moderate",

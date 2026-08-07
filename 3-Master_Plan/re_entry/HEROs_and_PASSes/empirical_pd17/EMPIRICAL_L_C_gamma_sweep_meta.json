@@ -1,0 +1,85 @@
+{
+  "diagnostic": "empirical_gamma_lc_sweep",
+  "date": "2026-08-06",
+  "source": "MBB player-season panel (530 pipeline / hero filters)",
+  "seasons": "2011-2021",
+  "perf": "PPM z within season",
+  "lc_mode": "crowding_smooth_team",
+  "theta_mode": "empirical_k_over_n_quantile",
+  "theta": 2.29465596868381,
+  "theta_K_over_N": {
+    "n_accepted": 1134,
+    "n_total": 62180,
+    "K_over_N": 0.018237375361852687,
+    "theta_quantile": 0.9817626246381473
+  },
+  "gamma_arms": [
+    10.0,
+    5.0,
+    1.0,
+    0.5,
+    0.001
+  ],
+  "lc_bins": 48,
+  "summary": [
+    {
+      "gamma": 10.0,
+      "label": "gamma_10",
+      "n_team_seasons": 6492,
+      "L_C_mean": 0.028555770456722585,
+      "L_C_std": 0.07177966002172859,
+      "L_C_min": 2.0416330355817324e-20,
+      "L_C_max": 0.7261710621240047,
+      "frac_L_C_below_0.05": 0.835335797905114,
+      "frac_L_C_above_0.5": 0.0015403573629081946
+    },
+    {
+      "gamma": 5.0,
+      "label": "gamma_5",
+      "n_team_seasons": 6492,
+      "L_C_mean": 0.031579084781787406,
+      "L_C_std": 0.06915158276678024,
+      "L_C_min": 1.4288572479426668e-10,
+      "L_C_max": 0.7212980789364671,
+      "frac_L_C_below_0.05": 0.8222427603203943,
+      "frac_L_C_above_0.5": 0.0013863216266173752
+    },
+    {
+      "gamma": 1.0,
+      "label": "gamma_1",
+      "n_team_seasons": 6492,
+      "L_C_mean": 0.13000436710858104,
+      "L_C_std": 0.05297829978608136,
+      "L_C_min": 0.010625720412314838,
+      "L_C_max": 0.5927754274970821,
+      "frac_L_C_below_0.05": 0.016789895255699322,
+      "frac_L_C_above_0.5": 0.0007701786814540973
+    },
+    {
+      "gamma": 0.5,
+      "label": "gamma_0p5",
+      "n_team_seasons": 6492,
+      "L_C_mean": 0.2540366597810298,
+      "L_C_std": 0.03868574775408655,
+      "L_C_min": 0.09390184595398701,
+      "L_C_max": 0.5543710199139684,
+      "frac_L_C_below_0.05": 0.0,
+      "frac_L_C_above_0.5": 0.0007701786814540973
+    },
+    {
+      "gamma": 0.001,
+      "label": "gamma_approx_0",
+      "n_team_seasons": 6492,
+      "L_C_mean": 0.4994292111290765,
+      "L_C_std": 0.00010015778797606749,
+      "L_C_min": 0.4988665531449121,
+      "L_C_max": 0.5001151319640247,
+      "frac_L_C_below_0.05": 0.0,
+      "frac_L_C_above_0.5": 0.0007701786814540973
+    }
+  ],
+  "outputs": {
+    "png_strip": "EMPIRICAL_L_C_gamma_sweep_strip.png",
+    "csv": "EMPIRICAL_L_C_gamma_sweep_summary.csv"
+  }
+}

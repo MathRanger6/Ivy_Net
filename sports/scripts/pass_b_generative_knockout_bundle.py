@@ -53,7 +53,7 @@ REPO = Path(__file__).resolve().parents[2]
 SCRIPTS = Path(__file__).resolve().parent
 SPORTS = REPO / "sports"
 sys.path.insert(0, str(SCRIPTS))
-from gallery_knobs import HERO_BINS, HERO_SEED, PRESET
+from gallery_knobs import HERO_BINS, HERO_SEED, PRESET, resolve_pool_l_mode
 from hero_gallery_paths import PASS_B, ensure_hero_dirs
 
 OUT = PASS_B
@@ -164,7 +164,7 @@ def run_knockouts(out_dir: Path) -> tuple[pd.DataFrame, pd.DataFrame, dict]:
     congest = _one(
         "congestion_in_score",
         "loo_gap_plus_ability",
-        "crowding_smooth",
+        resolve_pool_l_mode(),
         w_congest,
         HERO_SEED + 1,
     )
@@ -183,11 +183,11 @@ def run_knockouts(out_dir: Path) -> tuple[pd.DataFrame, pd.DataFrame, dict]:
         "hero_bins": HERO_BINS,
         "bin_mode": "quantile",
         "x_axis": BIN_AXIS,
-        "x_axis_note": "realized T_j (team roster mean of A_i; includes self; not LOO)",
+        "x_axis_note": "realized T_j (team roster mean of A_i)",
         "talent_only": {"score_mode": "ability", "loo_pool_l_mode": "quality", "w": 0.0},
         "congestion": {
             "score_mode": "loo_gap_plus_ability",
-            "loo_pool_l_mode": "crowding_smooth",
+            "loo_pool_l_mode": resolve_pool_l_mode(),
             "w": w_congest,
         },
         "assignment": {

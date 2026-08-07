@@ -1,0 +1,34 @@
+{
+  "diagnostic": "empirical_ai_tj_distributions",
+  "date": "2026-08-06",
+  "source": "MBB player-season panel (530 pipeline / hero filters)",
+  "seasons": "2011-2021",
+  "perf": "ppm z within season",
+  "outputs": {
+    "png": "EMPIRICAL_Ai_Tj_distributions.png",
+    "team_csv": "EMPIRICAL_Ai_Tj_team_season.csv"
+  },
+  "theta_K_over_N": {
+    "description": "PD17: accepted / total in filtered panel",
+    "n_accepted": 1134,
+    "n_total": 62180,
+    "K_over_N": 0.018237375361852687
+  },
+  "A_i_hat": {
+    "label": "\\hat{A}_i",
+    "n": 62180,
+    "mean": -0.0005798203429230457,
+    "std": 0.9949995689231911,
+    "min": -2.3538055842706553,
+    "max": 9.468675228692906
+  },
+  "T_j_hat": {
+    "label": "\\hat{T}_j",
+    "n": 6492,
+    "mean": 0.011498887798453658,
+    "std": 0.4006316928373786,
+    "min": -2.2391392177783933,
+    "max": 2.7551839321296203
+  },
+  "n_team_seasons": 6492
+}

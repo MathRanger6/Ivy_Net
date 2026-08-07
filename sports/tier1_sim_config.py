@@ -281,11 +281,13 @@ MINIMAL_LOO_POOL_L_MODE = POOL_530_LOO_POOL_L_MODE
 MINIMAL_WINNER_SELECTION = POOL_530_WINNER_SELECTION
 
 # --- Track B — 539 assignment mimicry (Layer 0) --------------------------------
-# τ from CELL 10c at J=1000, seed=42, rho=0.88
+# τ from CELL 10c at J=1000, seed=42, rho=0.88 (historical note; seed now follows GALLERY_HERO_SEED)
+from hero_seed import HERO_SEED as _HERO_SEED
+
 MATCH_539_ASSIGNMENT_TEMPERATURE = 0.108
 MATCH_539_N_TEAMS = 1000
 MATCH_539_ROSTER_SIZE = 15
-MATCH_539_RANDOM_SEED = 42
+MATCH_539_RANDOM_SEED = _HERO_SEED
 MATCH_539_ABILITY_DRAW = "normal_clipped"
 MATCH_539_TARGET_MEAN_DIST = "uniform"
 MATCH_539_TARGET_MEAN_LOW = -0.5
@@ -337,7 +339,8 @@ RUN_GENERATIVE_ASSIGNMENT_DEMO = False
 RUN_REPLAY_530_STYLE_CHECKS = False
 
 # RANDOM_SEED: default RNG seed when a caller does not pass its own Generator.
-RANDOM_SEED = 42
+# Same dial as Phase B gallery: export GALLERY_HERO_SEED (sports/hero_seed.py).
+RANDOM_SEED = _HERO_SEED
 
 # SHOW_PLOT_A: CELL 10 playground — interval-overlap Plot A (530 CELL 8 analog).
 SHOW_PLOT_A = True

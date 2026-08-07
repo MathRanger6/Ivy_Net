@@ -42,7 +42,7 @@ SLIDES = [
         "bullets": [
             "Real NCAA panel (2011–2021): mean NBA draft rate by ventile.",
             r"Left — talent alone: ability (ppm $z$ within season). Monotone up.",
-            r"Right — roster context: leave-one-out teammate quality ($\mathrm{poolq\_loo}$). Inverted-U.",
+            r"Right — roster context: teammate-quality ventiles. Inverted-U.",
             r"No $\lambda$ in the empirical story — stylized fact Pass B/C echo.",
             r"Pipeline: VISUALIZE only (bin real $Y_{\mathrm{draft}}$ on ability | $\mathrm{poolq\_loo}$).",
         ],

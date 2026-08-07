@@ -24,6 +24,7 @@ from pptx.util import Inches, Pt
 REPO = Path(__file__).resolve().parents[2]
 SCRIPTS = Path(__file__).resolve().parent
 sys.path.insert(0, str(SCRIPTS))
+from gallery_knobs import RHO_HIGH, RHO_LOW, RHO_MODERATE, RHO_VERY_HIGH, HERO_SEED
 from hero_gallery_paths import AUTO_RHO_DECK, PASS_C_RHO, ensure_hero_dirs
 
 META = PASS_C_RHO / "PASS_C_rho_ablation_meta.json"
@@ -45,15 +46,17 @@ RIGHT_W = CONTENT_W - LEFT_W - COL_GAP
 
 CLAIM = (
     "Claim: at fixed score and top-$K$, $\\rho$ in assignment matters — "
-    "low-$\\rho$ mixing yields a nearly flat curve; high-$\\rho$ assortativity "
-    "delivers the peer-pressure inverted-$U$ readout."
+    "low-$\\rho$ mixing yields a weak monotone tilt (no inverted-$U$); "
+    "high-$\\rho$ assortativity delivers the peer-pressure inverted-$U$ readout."
 )
 
 RHO_INTUITION = (
     "Why $\\rho$ matters here: assignment assortativity sets how spread out team "
     "$L_C$ is across the league — at $\\rho \\approx 0$ (arm $0.001$) rosters mix "
-    "and peer pressure looks the same everywhere; at high $\\rho$ weak teams pile "
-    "up near $L_C \\approx 0$ while elite rosters face real congestion."
+    "and $L_C$ is nearly uniform; selection still tilts up pool-mean bins because "
+    "global top-$K$ favors better players on stronger teams (see doc 08). "
+    "At high $\\rho$ weak teams pile up near $L_C \\approx 0$ while elite rosters "
+    "face real congestion — the inverted-$U$ emerges."
 )
 
 SLIDE_VARIANTS = [
@@ -135,7 +138,7 @@ def _add_params_column(
 
     bullets = [
         rf"$\sigma={sigma:g}$ fixed",
-        rf"arms: $\rho \in {{0.1, 1, 8, 32}}$"
+        rf"arms: $\rho \in {{{RHO_LOW:g}, {RHO_MODERATE:g}, {RHO_HIGH:g}, {RHO_VERY_HIGH:g}}}$"
         + (" + sort-and-chop" if show_sortchop_on_figure else ""),
         rf"$S_i = A_i - {w:g} \cdot L_C$ (crowding in score held constant across arms)",
         r"top-$K$ by $S_i$",
@@ -159,9 +162,9 @@ def _add_oat_notes(
     show_sortchop_on_figure: bool,
 ) -> None:
     bullets = [
-        r"OAT: one draw of $A_i$, $T_{j^*}$ (seed $42$); only ASSIGN changes across arms.",
-        r"Low $\rho$: players mix across teams — selection vs pool mean stays nearly flat.",
-        r"High $\rho$: assortative matching — peer environments concentrate; inverted-$U$ emerges.",
+        rf"OAT: one draw of $A_i$, $T_{{j^*}}$ (seed ${HERO_SEED}$); only ASSIGN changes across arms.",
+        r"Low $\rho$: rosters mix — $L_C$ nearly uniform; curve tilts up weakly (no inverted-$U$).",
+        r"High $\rho$: assortative matching — flat bottom bins, interior peak, top-bin dip.",
     ]
     if show_sortchop_on_figure:
         bullets.append(

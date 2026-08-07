@@ -173,7 +173,7 @@ def _add_strip_slide(prs: Presentation, meta: dict) -> None:
     _add_picture_fitted(slide, FIG_STRIP, MARGIN, Inches(fig_top), CONTENT_W, Inches(fig_h))
 
     readout_texts = [
-        r"low $\rho$ = one narrow spike near $L_C\approx 0.15$. First 3 panels",
+        r"low $\rho$ ($\rho=0.001$, $1$) = one narrow spike near $L_C\approx 0.15$",
         r"High $\rho$ = mass at $L_C\approx 0$ (weak rosters) + second hump at elite $L_C$",
         _rho32_bullet(meta),
     ]

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build one-slide deck — actual $A_i$ and $T_{j^*}$ draws (seed 42).
+"""Build one-slide deck — actual $A_i$ and $T_{j^*}$ draws (gallery seed).
 
 Run (repo root):
   python sports/scripts/build_sim_input_distributions_slide.py
@@ -40,11 +40,13 @@ COL_GAP = Inches(0.2)
 SIDEBAR_W = Inches(3.35)
 FIG_W = CONTENT_W - SIDEBAR_W - COL_GAP
 
-CLAIM = (
-    "Claim: Phase B fixes one stochastic league draw (seed 42) — "
-    "$A_i$ and $T_{j^*}$ are the inputs every OAT arm reuses; "
-    "only ASSIGN / SCORE knobs change across slides."
-)
+
+def _claim_text() -> str:
+    return (
+        rf"Claim: Phase B fixes one stochastic league draw (seed {HERO_SEED}) — "
+        r"$A_i$ and $T_{j^*}$ are the inputs every OAT arm reuses; "
+        "only ASSIGN / SCORE knobs change across slides."
+    )
 
 
 def _load_meta() -> dict:
@@ -140,7 +142,7 @@ def main() -> None:
     foot = slide.shapes.add_textbox(MARGIN, footer_top, CONTENT_W, footer_h)
     foot_tf = foot.text_frame
     foot_tf.word_wrap = True
-    populate_paragraph_with_latex(foot_tf.paragraphs[0], CLAIM, font_size=10)
+    populate_paragraph_with_latex(foot_tf.paragraphs[0], _claim_text(), font_size=10)
     foot_tf.paragraphs[0].font.bold = True
     foot_tf.paragraphs[0].alignment = PP_ALIGN.LEFT
 

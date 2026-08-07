@@ -1452,7 +1452,9 @@ def _smoke_compare_overlap() -> None:
             soft median_pool_sd closer to ~0.8 z than chop.
     """
     params = AssignmentParams.from_tier1_sim_config()
-    rng = np.random.default_rng(42)
+    from tier1_sim_config import RANDOM_SEED
+
+    rng = np.random.default_rng(RANDOM_SEED)
 
     def coverage_peak(teams: pd.DataFrame, grid: np.ndarray) -> float:
         lo = teams["min"].to_numpy()

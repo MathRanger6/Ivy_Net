@@ -11,7 +11,7 @@ This script does NOT run score/select. It only:
   (3) Plot how that team-L_C distribution changes with ρ
 
 Outputs (under pass_c_rho/):
-  LC_distribution_vs_rho_1d_strip{SUFFIX}.png — five narrow panels (slide-ready)
+  LC_distribution_vs_rho_1d_strip{SUFFIX}.png — four narrow panels (slide-ready)
   LC_distribution_vs_rho_2d{SUFFIX}.png         — heatmap: realized T_j vs L_C
   LC_distribution_vs_rho_teams{SUFFIX}.csv     — one row per team × ρ arm
   LC_distribution_vs_rho_meta{SUFFIX}.json      — summary stats
@@ -68,21 +68,12 @@ PNG_2D = OUT / f"LC_distribution_vs_rho_2d{SUFFIX}.png"
 CSV_TEAMS = OUT / f"LC_distribution_vs_rho_teams{SUFFIX}.csv"
 META_JSON = OUT / f"LC_distribution_vs_rho_meta{SUFFIX}.json"
 
-RHO_NEAR_ZERO = float(os.environ.get("GALLERY_RHO_NEAR_ZERO", "0.001"))
-INCLUDE_RHO_NEAR_ZERO = os.environ.get("GALLERY_INCLUDE_RHO_NEAR_ZERO", "1").lower() in (
-    "1",
-    "true",
-    "yes",
-)
-
 SOFT_ARMS: list[tuple[str, float]] = [
     ("rho_low", RHO_LOW),
     ("rho_moderate", RHO_MODERATE),
     ("rho_high", RHO_HIGH),
     ("rho_very_high", RHO_VERY_HIGH),
 ]
-if INCLUDE_RHO_NEAR_ZERO:
-    SOFT_ARMS = [("rho_near_zero", RHO_NEAR_ZERO)] + SOFT_ARMS
 
 LC_COL = "pool_c_smooth_team"
 N_LC_BINS = int(os.environ.get("GALLERY_LC_BINS", "48"))
@@ -200,7 +191,7 @@ def _rho_panel_title(rho: float) -> str:
 
 
 def build_1d_rho_strip(frames: dict[str, pd.DataFrame], *, theta: float) -> None:
-    """One wide PNG — five narrow bar panels side by side, shared y-scale."""
+    """One wide PNG — four narrow bar panels side by side, shared y-scale."""
     from gallery_mathtext import configure_matplotlib_mathtext
 
     configure_matplotlib_mathtext()

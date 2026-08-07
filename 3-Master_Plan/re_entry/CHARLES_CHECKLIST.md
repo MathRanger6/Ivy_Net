@@ -13,7 +13,7 @@
 1. Work **top to bottom**.  
 2. Change `[ ]` → `[x]` only when **you** finished that row.  
 3. Fill **Proof** with a path, date, or one-line note.  
-4. **Two decks:** `So_Far_.pptx` (Pass A/B/C gallery, slides 1–3) ≠ `CHAR_Phase_B_characterization_HAND.pptx` (OAT sensitivity deck).  
+4. **Two decks:** `So_Far_.pptx` (Pass A/B/C gallery, slides 1–3) ≠ `CHAR_PD16_HAND.pptx` (OAT sensitivity deck).  
 5. **Score:** \(S_i = A_i - \lambda L_C\); **λ** = weight on congestion; **L_C** = congestion (smooth sigmoid in current deck).
 
 **Notation:** [`02_Three_Kinds_of_Model.md`](02_Three_Kinds_of_Model.md) § Notation addendum — **K** = slots, **λ** = weight on **L_C**, default **K/N = 10%**.
@@ -26,7 +26,7 @@
 
 | Artifact | Location | Notes |
 |----------|----------|-------|
-| Phase B hand deck | `HEROs_and_PASSes/slides/CHAR_Phase_B_characterization_HAND.pptx` | Scripts never overwrite — you format in PowerPoint |
+| Phase B hand deck (HAND16) | `HEROs_and_PASSes/slides/CHAR_PD16_HAND.pptx` | Scripts never overwrite — you format in PowerPoint |
 | Hand deck JPEG exports | `HEROs_and_PASSes/slides/HAND_slides_images/Slide1.jpeg` … `Slide16.jpeg` | Re-export after hand edits — agents read these for layout/notation audit |
 | Auto compare deck | `HEROs_and_PASSes/slides/auto/CHAR_intro_characterization_AUTO.pptx` | `./scripts/build_characterization_slides.sh --auto-slides` |
 | Slide walkthrough | [`07_Phase_B_Characterization_Slides_Explained.md`](07_Phase_B_Characterization_Slides_Explained.md) | Seed 42, T_{j*} / T_j, hard vs smooth L_C, sort-and-chop |
@@ -69,7 +69,7 @@ Implement via **shell env vars** in `gallery_knobs.py` (`GALLERY_LC_MODE`, `GALL
 | [x] | **1. Team-level L_C** | Congestion = property of **team j** (same for all roster players); compare Pass B curves to LOO default | `tier1_pool_assignment.add_team_pool_columns`; `*_pd16.png` |
 | [x] | **2. θ from K/N** | Naive-draft quantile: θ = F_A⁻¹(1 − K/N) on ability draw (Beta in sim); re-run θ OAT + θ×K/N | `gallery_knobs.resolve_viability_theta`; `theta/*_pd16.png` |
 | [x] | **3. L_C distribution vs ρ** | Whiteboard Sketch A + slides | `pass_c_rho/LC_distribution_vs_rho_*_pd16.png`; `slides/auto/CHAR_lc_congestion_characterization_AUTO.pptx` |
-| [ ] | **4. ρ low arm + intuition** | Try **ρ → 0.001**; one clean sentence why ρ matters in *this* construction | PNG + footer note on ρ slide |
+| [x] | **4. ρ low arm + intuition** | **ρ = 0.001** everywhere (`gallery_knobs`, `rebuild_hero_gallery.sh`, slide scripts); footer in `build_rho_characterization_slide.py` | Change Picture on hand ρ slides if PNGs still show 0.1 |
 | [ ] | **5. Update intro / doc 07** | When θ provenance shifts (539 preset → K/N quantile), refresh intro slide + walkthrough | slide + doc 07 § θ |
 | [ ] | **6. Env-var walkthrough** | You can `export GALLERY_…` or `./scripts/build_characterization_slides.sh --pd16` | run yourself in PowerPoint compare |
 
@@ -115,6 +115,7 @@ Alex PD16 roadmap: **A_i, K/N, θ, ρ** from data; only **γ, λ** remain free �
 | Menger multiplicative congestion | Alex OK to park; 4-sentence memo if he asks |
 | Preferential attachment sweep | After boolean default validated |
 | Old 14-doc reading stack | [`PARKED_FOR_LATER.md`](PARKED_FOR_LATER.md) |
+| **T_j\* assign attractor** | PD18 — park, do not delete; see [`09_PD18_Alex_meeting_takeaways.md`](09_PD18_Alex_meeting_takeaways.md) |
 | Rebuild empirical hero from `530` | Not a gate |
 | Army / tenure figures | Out of scope |
 
@@ -128,9 +129,21 @@ Alex PD16 roadmap: **A_i, K/N, θ, ρ** from data; only **γ, λ** remain free �
 
 ---
 
+## PD18 — ρ-only ASSIGN (Aug 7, Alex) — weekend time box
+
+| Done | Step | Pointer | Proof |
+|------|------|---------|-------|
+| [ ] | **VECTOR lit scan** | Bipartite assortative growth + fixed roster size | 3–5 papers + 1-para each |
+| [ ] | **Prototype or revert** | “Reasonably looking teams” without T_j\* | go/no-go note |
+| [ ] | **HAND17 slide 7 note** | x = ability axis; y = coverage count | slide text |
+| [ ] | **Park T_j\* in docs** | Code kept; glossary marks legacy if ρ-only wins | doc 09 |
+
+Full memo: [`09_PD18_Alex_meeting_takeaways.md`](09_PD18_Alex_meeting_takeaways.md) · digest: `transcripts/PD18_notes.md`
+
+---
+
 ## Next action right now
 
-1. **Sign off remaining Phase B rows** — **γ + λ_crit** (slides 6–7); defer **A_i / t_j** unless Alex asks.  
-2. **Start PD16 row 1** — team-level L_C in code (`GALLERY_LC_MODE=team_smooth` when ready).  
-3. **Read doc 08** if you need the whiteboard / calibration story in one sitting: [`08_PD16_Alex_meeting_takeaways.md`](08_PD16_Alex_meeting_takeaways.md).  
-4. **Defer Phase A gallery** unless Alex asks for `So_Far_.pptx` refresh before team L_C lands.
+1. **Send VECTOR brief** — § “Brief for VECTOR” in doc 09 (or copy below).  
+2. **Weekend:** lit + prototype ρ-only assign; revert to T_j\* if no-go.  
+3. **HAND17 slide 7** — add coverage x-axis one-liner before next Alex brief.

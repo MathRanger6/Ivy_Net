@@ -1,14 +1,29 @@
 # 7. Phase B characterization slides — plain-English walkthrough
 
-**Last synced:** 2026-08-06 (hand-deck JPEG exports for visual audit)
+**Last synced:** 2026-08-07 (CHAR_PD16_HAND — 13-slide briefing deck)
 
 **Audience:** Anyone who has **not** been in the weeds — advisor, collaborator, or future-you after time away.
 
-**Deck:** `HEROs_and_PASSes/slides/CHAR_Phase_B_characterization_HAND.pptx` (hand-edited master).
+**Deck:** `HEROs_and_PASSes/slides/CHAR_PD16_HAND.pptx` (hand-edited master; renamed from `CHAR_Phase_B_characterization_HAND.pptx` Aug 2026).
 
-**Visual exports (agents):** `HEROs_and_PASSes/slides/HAND_slides_images/Slide1.jpeg` … `Slide16.jpeg` — full-deck JPEG export; re-run after hand edits so COMPASS can see Equation Editor math and layout (not scrapeable from `.pptx`).
+**Visual exports (agents):** `HEROs_and_PASSes/slides/CHAR_PD16_HAND/Slide1.jpeg` … `Slide13.jpeg` — re-export after hand edits.
 
-**Slide count:** Auto merge = **8** slides (intro + 7 characterization). Charles’s hand deck is **16** slides in the Aug 2026 export; θ×K/N may split into **5heat** + **5line**; γ / λ_crit renumber accordingly.
+**Slide count:** **13** slides in the Aug 2026 briefing deck (trimmed from 17). See `slides/README.txt` for PPT map and PARKED slides.
+
+### PPT slide map (CHAR_PD16_HAND)
+
+| PPT | Content |
+|-----|---------|
+| 1 | Intro glossary + deck map |
+| 2 | Simulated inputs (A_i, T_j*) |
+| 3–4 | ρ (Pass C) — with / without sort-and-chop |
+| 5 | λ (Pass B) |
+| 6–8 | θ OAT · computed θ · θ×K/N + naive-draft θ |
+| 9–10 | γ sort-and-chop · λ_crit ≈ 4/γ |
+| 11 | Soft-assign γ×λ (overlap) |
+| 12–13 | PD16 Sketch A (L_C vs ρ strip + T_j vs L_C heatmap) |
+
+**PARKED (removed Aug 2026):** old PPT 5 & 7 (ρ/λ before-after θ migration compares); old PPT 10 & 12 (duplicate θ×K/N line/heatmap). Prose for parked content remains below where useful.
 
 **What this document is:** A slide-by-slide explanation of **what you are looking at** and **why it matters** for the dissertation story. It does not replace the technical memos; it orients a reader before they open PowerPoint.
 
@@ -33,7 +48,7 @@
 | **T_{j*}** | Sim assignment target | Synthetic iid Uniform[0,1] per team — soft-assign attractor; **not** realized roster talent |
 | **T_j** | Realized team talent | Mean **A_i** on team *j*’s roster (post-ASSIGN); empirical **T_jt** = team-season roster mean of **Â_i** |
 | **ρ**   | Assignment assortativity       | How tightly soft assign matches **A_i** to **T_{j*}** |
-| **L_C** | Congestion **measure**         | **Smooth (deck):** LOO mean σ(γ(A_j − θ)). **Hard (code):** LOO share with A_j > θ |
+| **L_C** | Congestion **measure**         | **Team smooth (deck):** mean σ(γ(A_j − θ)) over roster; same for all players on team |
 | **λ**   | Congestion **weight** in score | How hard **L_C** penalizes ranking — **not** congestion itself                                          |
 | **θ**   | Viability cutline              | Center of the sigmoid                                                                                   |
 | **γ**   | Sigmoid sharpness              | Steepness of viability step around θ                                                                    |
@@ -105,7 +120,7 @@ So the y-axis is **not** “draft rate in the real NCAA.” It is **“share of 
 | **T_j** | Realized team talent         | Mean **A_i** on roster *j* (post-ASSIGN); Sketch A 2D **y**-axis |
 | **ρ**   | Assignment assortativity       | How tightly **A_i** is matched to **T_{j*}**                              |
 | **λ**   | Congestion **weight** in score | Multiplier on **L_C** in S_i = A_i - \lambda L_C                        |
-| **L_C** | LOO peer viability congestion  | **Smooth (deck):** mean σ(γ(A_j − θ)); **hard (code):** share with A_j > θ |
+| **L_C** | Team peer viability congestion  | **Team smooth (deck):** mean σ(γ(A_j − θ)) over roster |
 | **θ**   | Viability cutline              | Center of the sigmoid — who counts as a “viable” peer                   |
 | **γ**   | Sigmoid sharpness              | How sharp the viability step is around θ                                |
 | **K/N** | Selectivity                    | Fraction of the league that gets selected (slots K ÷ players N)         |
@@ -144,7 +159,7 @@ So the y-axis is **not** “draft rate in the real NCAA.” It is **“share of 
 | Distribution | **Uniform**, iid across teams | `target_dist: "uniform"` in pass scripts                      |
 | Range        | **[0, 1]**                    | `SELECTION_539_TARGET_MEAN_LOW/HIGH` in `tier1_sim_config.py` |
 | Function     | `draw_target_means()`         | `sports/tier1_pool_assignment.py`                             |
-| Randomness   | Same seed as A_i draw         | `HERO_SEED = 42` in `gallery_knobs.py`                        |
+| Randomness   | Same seed as A_i draw         | `GALLERY_HERO_SEED` → `sports/hero_seed.py` (default 42) |
 
 
 **What we are *not* doing:** We do **not** copy real NCAA team talent into T_{j*}. The draw is **synthetic** — commensurate with A_i on [0,1], not mirroring real programs.
@@ -178,16 +193,17 @@ So the y-axis is **not** “draft rate in the real NCAA.” It is **“share of 
 
 We have **not** yet argued 0.55 is the “true” NCAA λ; it is the **Alex 539 track default** so characterization stays comparable to the playground and reference JSON.
 
-### Hard vs smooth **L_C** (both in code; deck shows smooth)
+### Hard vs smooth **L_C** (both in code; deck uses team smooth)
 
-The code builds **two** congestion columns in `add_loo_pool_columns()` (`tier1_pool_assignment.py`):
+**Aug 2026:** Gallery default is **team** `crowding_smooth_team`. LOO `crowding_smooth` is **parked** (set `GALLERY_LC_MODE=loo_smooth` for legacy only).
 
-| Mode | Config string | Formula for each teammate *j* | **L_C** for player *i* |
-|------|---------------|------------------------------|------------------------|
-| **Smooth (Phase B default)** | `crowding_smooth` | σ(γ(A_j − θ)) ∈ (0,1) | Mean over LOO teammates |
-| **Hard (available, not in deck)** | `crowding` | 1 if A_j > θ else 0 | Mean = **share** of LOO teammates above θ |
+The code builds congestion columns in `add_loo_pool_columns()` / `add_team_pool_columns()` (`tier1_pool_assignment.py`):
 
-**Every characterization figure** sets `loo_pool_l_mode="crowding_smooth"`. The playground (CELL 10) can switch modes; Phase B does not sweep hard vs smooth.
+| Mode | Config string | Formula | **L_C** |
+|------|---------------|---------|---------|
+| **Team smooth (deck default)** | `crowding_smooth_team` | σ(γ(A_j − θ)) ∈ (0,1) | Mean over **full roster** — same for all players on team |
+| **LOO smooth (parked)** | `crowding_smooth` | σ(γ(A_j − θ)) | Mean over LOO teammates |
+| **Hard (available, not in deck)** | `crowding` | 1 if A_j > θ else 0 | Mean = share above θ |
 
 **Educational figure:** `sort_chop_lambda/VIABILITY_hard_vs_smooth.png` — side-by-side peer weights on a θ-straddle roster. Regenerate: `python sports/scripts/build_viability_hard_vs_smooth_figure.py`.
 
@@ -221,15 +237,15 @@ Qualitative story (**λ > 0 bends selection**) would **survive** — congestion 
 
 Several colored curves on one plot. Each curve is a different **assignment rule** applied to the **same** pool of player talent:
 
-- **Low ρ (e.g. 0.1):** Players mix almost randomly across team talent levels → selected players spread evenly across pool-mean bins → curve stays ** fairly flat**.
-- **Moderate / high ρ (1, 8, 32):** Strong players tend to land on strong teams → selection shifts toward high pool-mean bins → curve can develop a **peak** or strong tilt to the right.
+- **Low ρ (e.g. 0.001):** Players mix almost randomly → team **L_C** is nearly uniform (Sketch A spike). Selection is still **global top-K** by **S_i = A_i − 0.55·L_C**, so better players on higher pool-mean bins win more often → a **weak monotone uptilt**, not a horizontal line and **not** an inverted-U.
+- **Moderate / high ρ (1, 8, 32):** Assortative matching stratifies peer environments → **flat bottom bins**, **interior peak**, **top-bin dip** (the peer-pressure inverted-U).
 - **Sort-and-chop arm:** A **hard** sorting benchmark (perfect rank matching within slices). Included here for comparison — it often produces an extreme **monotone** shape (selection piles into the top bins).
 
 
 
 ### What we learn
 
-**Who you play with (assignment) matters a lot** once score and selection are fixed. Low mixing → flat readout; high assortativity → peer environments concentrate and the selection-vs-pool-mean curve **bends**.
+**Who you play with (assignment) matters a lot** once score and selection are fixed. Low mixing → **weak uptilt, no hump**; high assortativity → peer environments concentrate and the selection-vs-pool-mean curve **bends into an inverted-U**.
 
 ### What we are *not* claiming
 
@@ -241,7 +257,7 @@ This is a **qualitative** proof-of-concept in a fake league. The x-axis is **poo
 
 ## SLIDE 2 — Characterize ρ (assignment): sort-and-chop suppressed
 
-**Same experiment as Slide 1**, but the **sort-and-chop** curve is **omitted from the plot** so the eye focuses on the **soft ρ ladder** only (ρ ∈ {0.1, 1, 8, 32}).
+**Same experiment as Slide 1**, but the **sort-and-chop** curve is **omitted from the plot** so the eye focuses on the **soft ρ ladder** only (ρ ∈ {0.001, 1, 8, 32}).
 
 ### Why a second slide
 
@@ -249,7 +265,7 @@ Sort-and-chop is a useful **benchmark** (zero overlap between talent slices), bu
 
 ### What we learn
 
-Same claim as Slide 1, stated without the hard-sort distraction: **raising ρ** moves the selection readout from **flat** toward **concentrated / humped** shapes on the pool-mean axis.
+Same claim as Slide 1, stated without the hard-sort distraction: **raising ρ** moves the selection readout from **weak monotone tilt (no inverted-U)** toward **concentrated / humped** shapes on the pool-mean axis.
 
 ---
 
@@ -259,7 +275,7 @@ Same claim as Slide 1, stated without the hard-sort distraction: **raising ρ** 
 
 **Knob varied:** **λ** — how heavily the congestion measure **L_C** enters **ranking**: S_i = A_i - \lambda L_C.
 
-**Terminology lock:** **L_C** is computed from teammates (LOO peer viability). **λ** is only the **scalar weight** on that term. Congestion lives in **L_C**; λ says how much it matters for who ranks high.
+**Terminology lock:** **L_C** is a **team-level** congestion measure (same value for all players on a roster). **λ** is only the **scalar weight** on that term in **S_i**. Congestion lives in **L_C**; λ says how much it matters for who ranks high.
 
 **Held fixed (benchmarks):**
 
@@ -330,7 +346,7 @@ Same *kind* of “context matters” story; Phase B does not claim bin-for-bin m
 
 **Knob varied:** **θ** — center of the logistic viability function inside **L_C**.
 
-**Held fixed:** ρ = 8, λ = 0.55, γ = 10, **K/N = 10%**. **L_C mode:** `crowding_smooth` (hard `crowding` available in code — not this slide).
+**Held fixed:** ρ = 8, λ = 0.55, γ = 10, **K/N = 10%**. **L_C mode:** `crowding_smooth_team` (team smooth — Aug 2026 default).
 
 ### The equation on the slide (what θ does)
 
@@ -338,7 +354,7 @@ Same *kind* of “context matters” story; Phase B does not claim bin-for-bin m
 L_C = \mathrm{mean}_{j \neq i}\sigma\big(\gamma(A_j - \theta)\big)
 
 
-For each player *i*, look at teammates *j*, map each teammate’s ability through a **soft step** σ centered at θ, average (leave-one-out). **Higher θ** → fewer teammates count as “viable peers” → **L_C** changes → **S_i** changes → selection shifts.
+For each team, map each roster member’s ability through a **soft step** σ centered at θ, then average over the roster. **Higher θ** → fewer peers count as “viable” → **L_C** changes → **S_i** changes → selection shifts.
 
 ### Arms
 
@@ -360,7 +376,9 @@ For each player *i*, look at teammates *j*, map each teammate’s ability throug
 
 
 
-## SLIDE 5heat — Characterize θ × K/N (heatmap)
+## SLIDE 5heat — Characterize θ × K/N (heatmap) — **PARKED**
+
+**Status (Aug 2026):** Removed from `CHAR_PD16_HAND` (was old PPT 12). Kept in doc for archive; briefing deck uses **PPT 8** (line plot + computed θ panel) instead.
 
 **Hand deck:** usually **slide 5**. **PNG:** `theta/THETA_KN_sweep_peak_bin.png`
 
@@ -411,11 +429,11 @@ Best when Alex (or you) want **exact bin numbers** at a glance, or when comparin
 
 
 
-## SLIDE 5line — Characterize θ × K/N (line plot)
+## SLIDE 5line — Characterize θ × K/N (line plot + computed θ)
 
-**Hand deck:** duplicate of 5heat, usually **slide 6**. **PNG:** `theta/THETA_KN_sweep_peak_bin_lines.png`
+**Hand deck (Aug 2026):** **PPT 8** in `CHAR_PD16_HAND`. **PNG:** `theta/THETA_KN_sweep_peak_bin_lines.png` (left) + `theta/THETA_KN_sweep_peak_bin_vs_kn.png` or `*_pd16` (right, naive-draft θ).
 
-**Same experiment as 5heat** — identical 3×3 grid, different graphic.
+**Same 3×3 θ×K/N grid as 5heat** — line plot on the left; right panel shows peak bin vs K/N at naive-draft θ ≈ 0.804.
 
 ### What this figure is
 
@@ -437,7 +455,7 @@ Markers sit at the **three measured θ** values only; line segments connect thos
 
 ### When to use this slide
 
-Best for **live presentation** — the co-variation story is visible in one glance. Use **instead of** 5heat in a tight meeting, or keep both and hide one in PowerPoint until you decide.
+Best for **live presentation** — co-variation + computed θ in one slide. Standalone line-only duplicate (**old PPT 10**) is **PARKED**.
 
 ### What we learn
 
@@ -523,19 +541,18 @@ Alex asked why **λ = 0** and **λ = 0.25** can look **identical** on some diagn
 ## How the slides fit together
 
 
-| Slide | Knob        | One-line takeaway                                                           |
-| ----- | ----------- | --------------------------------------------------------------------------- |
-| **0** | —           | Phase B = characterization, not fit; glossary + benchmarks + seed           |
-| 1–2   | **ρ**       | Sorting / assignment shapes roster environments → changes selection readout |
-| 3     | **λ**       | Congestion in **score** bends the curve vs talent-only                      |
-| 4     | **θ**       | Viability cutline moves the hump at fixed K/N = 10%                         |
-| 5heat | **θ × K/N** | Heatmap — exact peak bins; θ interacts with selectivity                     |
-| 5line | **θ × K/N** | Same grid as 5heat — trend lines for presenting                             |
-| 6     | **γ**       | Sharpness of viability sets when λ starts to matter                         |
-| 7     | **λ_crit**  | Explains “identical” low-λ curves on sort-and-chop                          |
+| PPT | Knob        | One-line takeaway                                                           |
+| --- | ----------- | --------------------------------------------------------------------------- |
+| **1** | —           | Phase B = characterization, not fit; glossary + benchmarks + seed           |
+| **2** | —           | Fixed league draw (A_i, T_j*) — reused across OAT arms                      |
+| **3–4** | **ρ**     | Sorting / assignment shapes roster environments → changes selection readout |
+| **5** | **λ**       | Congestion in **score** bends the curve vs talent-only                      |
+| **6–8** | **θ**, **K/N** | Viability cutline; computed naive-draft θ; θ co-varies with selectivity  |
+| **9–10** | **γ**, **λ_crit** | Sharpness + sort-and-chop threshold explainer                            |
+| **11** | **γ,λ** (soft) | Overlap-regime γ×λ (pairs with sort-and-chop grid)                        |
+| **12–13** | **ρ** (Sketch A) | Team L_C distribution vs ρ; T_j vs L_C co-movement                      |
 
-
-*If both 5heat and 5line stay in the hand deck, γ and λ_crit become slides **7** and **8**.*
+**PARKED (not in briefing deck):** ρ/λ before-after θ migration compares; duplicate θ×K/N line-only and heatmap slides.
 
 **Story arc for an outsider:** Real data show context matters in **outcomes**. This deck shows which **rules of a fake league** are powerful enough to bend **who gets selected** — assignment (ρ), congestion in score (λ), viability geometry (θ, γ), and league selectivity (K/N). Phase C (later) asks whether we can **fit** those knobs to data; Phase B asks whether the **model has the right moving parts**.
 
@@ -545,8 +562,8 @@ Alex asked why **λ = 0** and **λ = 0.25** can look **identical** on some diagn
 
 ## Practical notes for the reader
 
-- **Hand vs auto decks:** Scripts regenerate disposable `slides/auto/*_AUTO.pptx`; Charles’s formatted master is `slides/CHAR_Phase_B_characterization_HAND.pptx`. See `slides/README.txt` for PNG paths if figures are refreshed.
-- **Hand deck JPEG exports:** `slides/HAND_slides_images/SlideN.jpeg` — export whole deck from PowerPoint after edits; agents use these to audit notation and layout against this walkthrough.
+- **Hand vs auto decks:** Scripts regenerate disposable `slides/auto/*_AUTO.pptx`; Charles’s formatted master is `slides/CHAR_PD16_HAND.pptx`. See `slides/README.txt` for PNG paths if figures are refreshed.
+- **Hand deck JPEG exports:** `slides/CHAR_PD16_HAND/SlideN.jpeg` — export whole deck from PowerPoint after edits; agents use these to audit notation and layout against this walkthrough.
 - **Regenerate figures only:** `./scripts/build_characterization_slides.sh` (does not touch the hand deck).
 - **Empirical hero lives elsewhere:** Pass A / `So_Far_.pptx` slides 1–3 — real MBB draft rates vs talent and poolq_loo.
 

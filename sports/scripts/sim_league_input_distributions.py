@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""One-shot draw of simulated league inputs — $A_i$ and $T_{j^*}$ (seed 42).
+"""One-shot draw of simulated league inputs — $A_i$ and $T_{j^*}$ (gallery seed).
 
 Uses the same 539 preset + draw functions as Pass B/C characterization scripts.
 No assignment, score, or select — inputs only.
@@ -158,7 +158,7 @@ def build_figure(
             alpha=BAR_ALPHA,
             edgecolor=BAR_COLOR,
             linewidth=0.3,
-            label="Sim draw (seed 42)",
+            label=rf"Sim draw (seed {HERO_SEED})",
         )
         if theory_fn is not None:
             x_line = np.linspace(0.0, 1.0, 200)

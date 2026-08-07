@@ -172,6 +172,95 @@ def fill_bullets_latex(text_frame, lines: list[str], *, font_size: int = 11) -> 
         para.space_before = 0
 
 
+# PD17 hand-deck workflow: literal LaTeX in body font → highlight → Insert → Equation → LaTeX
+RAW_LATEX_FONT = "Calibri"
+
+# Typography matched to CHAR_*_HAND.pptx (Phase B / ρ / λ characterization decks).
+HAND_TITLE_PT = 20
+HAND_SUBTITLE_PT = 10
+HAND_BODY_PT = 10
+HAND_CLAIM_PT = 11
+HAND_BULLET_LEAD = "  "  # two spaces between • and bullet text (Charles HAND convention)
+HAND_BULLET_LINE_SPACING = 1.5  # line spacing on sidebar bullet boxes (Charles HAND)
+
+
+def _set_char_bullet(paragraph, *, char: str = "•") -> None:
+    """Explicit round bullet — matches HAND intro / sidebar lists."""
+    from pptx.oxml.ns import qn
+    from pptx.oxml.xmlchemy import OxmlElement
+
+    p_pr = paragraph._p.get_or_add_pPr()
+    for tag in ("a:buNone", "a:buChar", "a:buAutoNum", "a:buFont"):
+        existing = p_pr.find(qn(tag))
+        if existing is not None:
+            p_pr.remove(existing)
+    bu_char = OxmlElement("a:buChar")
+    bu_char.set("char", char)
+    p_pr.insert(0, bu_char)
+
+
+def populate_paragraph_raw_latex(
+    paragraph,
+    text: str,
+    *,
+    font_size: int = 11,
+    bold: bool = False,
+) -> None:
+    """Write literal LaTeX (e.g. \\hat{A}_{i}) — no mathtext runs, baseline 0.
+
+    Do NOT wrap in $...$ — Charles converts via highlight → Insert → Equation →
+    LaTeX to math. Use braces on subscripts (\\hat{A}_{i}) so PowerPoint Mac
+    does not auto-format _i / _j as subscript when the file opens.
+    """
+    from pptx.util import Pt
+
+    paragraph.text = ""
+    run = paragraph.add_run()
+    run.text = text
+    run.font.size = Pt(font_size)
+    run.font.name = RAW_LATEX_FONT
+    run.font.bold = bold
+    run.font.italic = False
+    r_pr = run._r.get_or_add_rPr()
+    if "baseline" in r_pr.attrib:
+        del r_pr.attrib["baseline"]
+    r_pr.set("baseline", "0")
+
+
+def fill_bullets_raw_latex(
+    text_frame,
+    lines: list[str],
+    *,
+    font_size: int = HAND_BODY_PT,
+    bullet_from: int = 0,
+    space_after: int = 0,
+) -> None:
+    """Bullet list with literal LaTeX tokens (PD17 hand-deck workflow).
+
+    bullet_from: paragraph index to start explicit • bullets (0 = all lines).
+
+    PD17 conventions (Charles HAND decks):
+    - line_spacing = 1.5 on every bullet paragraph
+    - no $...$ wrappers in slide strings — plain \\hat{A}_{i}, \\rho, etc.
+    """
+    from pptx.util import Pt
+
+    text_frame.clear()
+    text_frame.word_wrap = True
+    for i, line in enumerate(lines):
+        para = text_frame.paragraphs[0] if i == 0 else text_frame.add_paragraph()
+        text = line.rstrip()
+        if i >= bullet_from:
+            text = HAND_BULLET_LEAD + text.lstrip()
+        populate_paragraph_raw_latex(para, text, font_size=font_size)
+        para.level = 0
+        para.space_after = Pt(space_after)
+        para.space_before = Pt(0)
+        para.line_spacing = HAND_BULLET_LINE_SPACING
+        if i >= bullet_from:
+            _set_char_bullet(para)
+
+
 def add_plain_latex_block(
     text_frame,
     latex: str,
@@ -179,7 +268,7 @@ def add_plain_latex_block(
     font_size: int = 11,
     label: str | None = None,
 ) -> None:
-    """Raw LaTeX as plain text — highlight in PowerPoint → Insert → Equation."""
+    """Raw LaTeX as plain text — highlight → Insert → Equation → LaTeX to math."""
     from pptx.util import Pt
 
     if label:
@@ -198,5 +287,5 @@ def add_plain_latex_block(
     run = para.add_run()
     run.text = latex
     run.font.size = Pt(font_size)
-    run.font.name = "Courier New"
+    run.font.name = RAW_LATEX_FONT
     para.space_after = 4

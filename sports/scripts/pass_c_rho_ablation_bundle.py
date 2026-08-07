@@ -8,7 +8,7 @@ What this file is
   One-shot script that draws ONE synthetic ability / team-target league, then
   re-assigns that same talent under different assignment rules (ρ low / mid /
   high / very-high soft match, plus sort-and-chop). Score and top-K stay FIXED:
-      S_i = A_i − w·L_C  (crowding_smooth, w=0.55 @ 539 preset), then top K.
+      S_i = A_i − w·L_C  (team crowding_smooth_team, w=0.55 @ 539 preset), then top K.
   Step 4 VISUALIZE: 16 quantile bins on **pool mean** (539 preset, same as Pass B).
 
 Four steps
@@ -460,7 +460,7 @@ def main() -> None:
                 f"Preset: {PRESET} (aligned with Pass B).",
                 "Four steps: ASSIGN (ρ varies) → SCORE → SELECT → VISUALIZE (pool mean).",
                 "",
-                f"Score + winner rule fixed: S_i = A_i − {w:g}·L_C (crowding_smooth), top K.",
+                f"Score + winner rule fixed: S_i = A_i − {w:g}·L_C (team L_C), top K.",
                 "Only assignment differs across arms:",
                 f"ρ = {RHO_LOW}, {RHO_MODERATE}, {RHO_HIGH}, {RHO_VERY_HIGH}, plus sort-and-chop (CSV; optional second PNG).",
                 "",
@@ -470,7 +470,7 @@ def main() -> None:
                 "Story: assortativity in assignment changes the curve once score is fixed —",
                 "sorting shapes the roster environments we visualize.",
                 "",
-                "Related: Pass A (empirical poolq_loo hero), Pass B (λ knockout).",
+                "Related: Pass A (empirical hero), Pass B (λ knockout).",
             ]
         )
         + "\n",

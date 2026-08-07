@@ -77,14 +77,16 @@ def run_cell11(*, seed: int | None = None) -> None:
 
     params = _params_from_playground_state(sports, tpa)
     if seed is None:
+        from hero_seed import HERO_SEED
+
         state_path = sports / "tier1_cell10_playground_state.json"
         if state_path.is_file():
             try:
-                seed = int(json.loads(state_path.read_text(encoding="utf-8")).get("seed", 42))
+                seed = int(json.loads(state_path.read_text(encoding="utf-8")).get("seed", HERO_SEED))
             except (OSError, json.JSONDecodeError, TypeError, ValueError):
-                seed = 42
+                seed = HERO_SEED
         else:
-            seed = 42
+            seed = HERO_SEED
 
     print(
         f"CELL 11: sim rosters J={params.n_teams} roster={params.roster_size} "

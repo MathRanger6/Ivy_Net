@@ -20,10 +20,10 @@
 
 | Location | Why it exists | Why skip now |
 |----------|---------------|--------------|
-| `3-Master_Plan/Charles_reading_list.md` + `01_`–`14_` numbered docs | Manuscript inking phase (June 2026 return) | Six+ long docs; assumes symbol decoder already read |
-| `3-Master_Plan/03_Where_we_are_now.md` | COMPASS project status | Cross-domain; tables and locks everywhere |
-| `3-Master_Plan/30_Alex_Gates_inform_status_outline.md` | Alex comms spine | Long; mixes domains |
-| Agent mail in `3-Master_Plan/202606*_*.md` | Multi-agent experiment | Correspondence, not tutorial |
+| [`../archive/numbered_print_stack/`](../archive/numbered_print_stack/) — `Charles_reading_list.md`, `01_`–`14_`, dated COMPASS mail | Manuscript inking phase (June 2026 return) | Six+ long docs; assumes symbol decoder already read |
+| `../archive/numbered_print_stack/03_Where_we_are_now.md` | COMPASS project status | Cross-domain; tables and locks everywhere |
+| `../archive/numbered_print_stack/30_Alex_Gates_inform_status_outline.md` | Alex comms spine | Long; mixes domains |
+| Agent mail in `../archive/numbered_print_stack/202606*_*.md` | Multi-agent experiment | Correspondence, not tutorial |
 
 ---
 

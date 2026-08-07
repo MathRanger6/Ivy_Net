@@ -86,6 +86,7 @@ def _run_generative_figure(
     import matplotlib.pyplot as plt
 
     tge, tpa, assign_poolq_bin_labels = _import_generative_stack()
+    from hero_seed import HERO_SEED
     cfg = _load_cfg()
     base_sel = tge.SelectionConfig.from_module(cfg)
     sel = tge.SelectionConfig.from_state(state, base_sel)
@@ -99,7 +100,7 @@ def _run_generative_figure(
         loo_pool_l_mode=loo_pool_l_mode,
     )
     params = tge.assignment_params_from_state(SPORTS, state, tpa=tpa)
-    rng = np.random.default_rng(int(state.get("seed", 42)))
+    rng = np.random.default_rng(int(state.get("seed", HERO_SEED)))
     players, _, _ = tpa.simulate_generative_rosters(params, rng=rng, method="soft")
     players = tpa.assign_selection(
         players,
