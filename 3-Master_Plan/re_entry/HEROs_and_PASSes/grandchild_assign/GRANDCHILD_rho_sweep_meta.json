@@ -1,0 +1,51 @@
+{
+  "last_synced": "2026-08-10",
+  "module": "541_grandchild_homophily_assign",
+  "season": 2015,
+  "empirical": {
+    "season": 2015,
+    "n_players": 6030,
+    "n_teams_empirical": 635,
+    "perf": "PPM z within season",
+    "mean": 0.00036694947568937313,
+    "std": 0.9997041508768859
+  },
+  "n_teams": 402,
+  "roster_size": 15,
+  "n_realizations": 30,
+  "rho_calibration_band": [
+    0.0,
+    1.0
+  ],
+  "rho_values": [
+    0.0,
+    0.05,
+    0.1,
+    0.15000000000000002,
+    0.2,
+    0.25,
+    0.30000000000000004,
+    0.35000000000000003,
+    0.4,
+    0.45,
+    0.5,
+    0.55,
+    0.6000000000000001,
+    0.65,
+    0.7000000000000001,
+    0.75,
+    0.8,
+    0.8500000000000001,
+    0.9,
+    0.9500000000000001,
+    1.0
+  ],
+  "base_seed": 5412015,
+  "outputs": {
+    "summary_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/grandchild_assign/GRANDCHILD_rho_sweep_summary.csv",
+    "png_d_h": "3-Master_Plan/re_entry/HEROs_and_PASSes/grandchild_assign/GRANDCHILD_rho_sweep_D_H.png",
+    "png_centroid_sd": "3-Master_Plan/re_entry/HEROs_and_PASSes/grandchild_assign/GRANDCHILD_rho_sweep_centroid_sd.png",
+    "png_examples": "3-Master_Plan/re_entry/HEROs_and_PASSes/grandchild_assign/GRANDCHILD_rho_sweep_example_centroids.png"
+  },
+  "interpretation_stub": "D = within-team MSE (not assortativity). H = normalized sorting. Inspect curves for nonlinear saturation; do not assume monotonicity per realization."
+}

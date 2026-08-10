@@ -158,9 +158,10 @@ AbilityDraw = Literal[
 ]
 
 # AssignmentMethod: how players land on teams (Pass B toggles this / ρ).
-#   "soft"      — probabilistic match to T_j (overlapping talent windows)
-#   "sort_chop" — sort by ability, chop into equal slices (disjoint; diagnostic)
-AssignmentMethod = Literal["soft", "sort_chop"]
+#   "soft"        — probabilistic match to T_j (overlapping talent windows)
+#   "sort_chop"   — sort by ability, chop into equal slices (disjoint; diagnostic)
+#   "grandchild"  — 541 endogenous-centroid homophily (experimental)
+AssignmentMethod = Literal["soft", "sort_chop", "grandchild"]
 
 # LooPoolLMode: which leave-one-out pool statistic enters the SCORE as "L".
 #   "quality"         — L_Q = mean teammate ability (hero X-axis analog)
@@ -1430,10 +1431,21 @@ def simulate_generative_rosters(
             params.n_teams,
             sorting_noise_sd=params.sorting_noise_sd,
         )
+    elif method == "grandchild":
+        # 541 — endogenous centroid + Quayle-style exp homophily + stub capacity.
+        import importlib
+
+        gc = importlib.import_module("541_grandchild_homophily_assign")
+        pool_id, team_targets = gc.grandchild_assign(
+            rng,
+            ability,
+            params.roster_size,
+            rho=params.assignment_rho,
+            n_teams=params.n_teams,
+        )
     else:
         raise ValueError(f"unknown method {method!r}")
 
-    # players: one row per person; teams: one row per pool for overlap diagnostics.
     players = build_roster_dataframe(ability, pool_id, team_targets)
     teams = roster_team_stats(players)
     return players, teams, team_targets

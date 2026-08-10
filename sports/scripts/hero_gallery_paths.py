@@ -12,6 +12,7 @@ PASS_B = HERO_ROOT / "pass_b"
 PASS_C_RHO = HERO_ROOT / "pass_c_rho"
 SIM_INPUTS = HERO_ROOT / "sim_inputs"
 EMPIRICAL_PD17 = HERO_ROOT / "empirical_pd17"
+GRANDCHILD_ASSIGN = HERO_ROOT / "grandchild_assign"
 SORT_CHOP_LAMBDA = HERO_ROOT / "sort_chop_lambda"
 SOFT_ASSIGN_LAMBDA = HERO_ROOT / "soft_assign_lambda"
 THETA = HERO_ROOT / "theta"
@@ -49,6 +50,7 @@ _ALL_DIRS = (
     PASS_C_RHO,
     SIM_INPUTS,
     EMPIRICAL_PD17,
+    GRANDCHILD_ASSIGN,
     SORT_CHOP_LAMBDA,
     SOFT_ASSIGN_LAMBDA,
     THETA,
