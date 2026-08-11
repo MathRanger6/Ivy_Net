@@ -147,8 +147,9 @@ def _sim_team_lc_panel(
     theta: float,
     gamma: float,
     gc,
+    roster_size: int | None = None,
 ) -> tuple[pd.DataFrame, list[dict]]:
-    c = int(gc.ROSTER_SIZE_DEFAULT)
+    c = int(roster_size if roster_size is not None else gc.ROSTER_SIZE_DEFAULT)
     seasons = list(range(int(season_min), int(season_max) + 1))
     parts: list[pd.DataFrame] = []
     season_runs: list[dict] = []
@@ -394,6 +395,13 @@ def main() -> None:
     parser.add_argument("--season", type=int, default=None)
     parser.add_argument("--season-min", type=int, default=None)
     parser.add_argument("--season-max", type=int, default=None)
+    parser.add_argument(
+        "-C",
+        "--roster-size",
+        type=int,
+        default=None,
+        help="Grandchild roster capacity (default: 541 ROSTER_SIZE_DEFAULT=15)",
+    )
     args = parser.parse_args()
 
     season_min, season_max = _resolve_season_window(args)
@@ -422,7 +430,8 @@ def main() -> None:
     print(f"Empirical: {emp_lc.size:,} team-seasons  L_C mean={emp_lc.mean():.3f}")
 
     gc = importlib.import_module("541_grandchild_homophily_assign")
-    print(f"Running Grandchild assign (ρ={args.rho:g}) ...")
+    c = int(args.roster_size if args.roster_size is not None else gc.ROSTER_SIZE_DEFAULT)
+    print(f"Running Grandchild assign (ρ={args.rho:g}, C={c}) ...")
     sim_team, season_runs = _sim_team_lc_panel(
         season_min=season_min,
         season_max=season_max,
@@ -431,6 +440,7 @@ def main() -> None:
         theta=theta,
         gamma=gamma,
         gc=gc,
+        roster_size=c,
     )
     sim_team.to_csv(paths["sim_csv"], index=False)
     print(f"Wrote {paths['sim_csv']}")
@@ -489,6 +499,7 @@ def main() -> None:
             "method": "grandchild",
             "rho": float(args.rho),
             "seed": int(args.seed),
+            "roster_size": c,
             "n_team_seasons": int(sim_lc.size),
             "L_C": _summary("L_C", sim_lc),
             "T_j_hat": _summary(r"\hat{T}_j", sim_team["T_j_hat"].to_numpy(dtype=float)),

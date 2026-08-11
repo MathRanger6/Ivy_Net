@@ -168,6 +168,9 @@ Other files in slides/
   auto/CHAR_grandchild_h_sort_explainer_AUTO.pptx    H_sort glossary (Alex brief)
   auto/CHAR_grandchild_empirical_lc_compare_AUTO.pptx  Empirical vs sim team L_C (2011-2021)
   auto/CHAR_grandchild_ncaa_roster_size_compare_AUTO.pptx  NCAA vs LG roster sizes fed in (2011-2021)
+  auto/CHAR_hero_min_minutes_sensitivity_compare_AUTO.pptx  min_minutes ladder side-by-side (Alex)
+  auto/CHAR_hero_min_minutes_sensitivity_overlay_AUTO.pptx  min_minutes ladder overlay (Alex)
+  auto/CHAR_ncaa_roster_size_distribution_AUTO.pptx         NCAA roster sizes at min 20 (Alex)
 
   Interpret D vs H_sort (Alex brief): ../grandchild_assign/GRANDCHILD_D_and_H_sort_interpretation.md
   archive/                                  HAND backups

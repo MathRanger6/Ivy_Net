@@ -1,0 +1,453 @@
+{
+  "diagnostic": "hero_min_minutes_sensitivity_ladder",
+  "date": "2026-08-11",
+  "season_min": 2011,
+  "season_max": 2021,
+  "seasons": "2011-2021",
+  "hero_lock_min_minutes": 20,
+  "floors_run": [
+    0.0,
+    10.0,
+    20.0
+  ],
+  "panel_spec": "ppm z, 16 quantile poolq_loo, winsor (0.01, 0.99), rebuild from box",
+  "runs": [
+    {
+      "min_minutes": 0.0,
+      "n_player_seasons": 82893,
+      "n_drafted": 1136,
+      "draft_rate_panel": 0.013704414124232444,
+      "roster_summary": {
+        "n_team_seasons": 6555,
+        "mean_roster_n": 12.645766590389016,
+        "median_roster_n": 13.0,
+        "std_roster_n": 3.0334889027981355,
+        "min_roster_n": 1,
+        "max_roster_n": 27
+      },
+      "ventiles": [
+        {
+          "vent": 0,
+          "n": 5181,
+          "draft_rate": 0.007527504342790967,
+          "poolq_mean": -0.46920807839486395,
+          "poolq_median": -0.45237051477074025
+        },
+        {
+          "vent": 1,
+          "n": 5181,
+          "draft_rate": 0.008685581933989578,
+          "poolq_mean": -0.30118053564146935,
+          "poolq_median": -0.2986834882579293
+        },
+        {
+          "vent": 2,
+          "n": 5181,
+          "draft_rate": 0.011001737116386797,
+          "poolq_mean": -0.2191106748654526,
+          "poolq_median": -0.21769918241673522
+        },
+        {
+          "vent": 3,
+          "n": 5181,
+          "draft_rate": 0.010422698320787493,
+          "poolq_mean": -0.16349905848421378,
+          "poolq_median": -0.16301593680913148
+        },
+        {
+          "vent": 4,
+          "n": 5181,
+          "draft_rate": 0.011001737116386797,
+          "poolq_mean": -0.11941715169128073,
+          "poolq_median": -0.11909968424294727
+        },
+        {
+          "vent": 5,
+          "n": 5180,
+          "draft_rate": 0.015057915057915058,
+          "poolq_mean": -0.08142500310799328,
+          "poolq_median": -0.0814590930549576
+        },
+        {
+          "vent": 6,
+          "n": 5181,
+          "draft_rate": 0.011773788843852539,
+          "poolq_mean": -0.04637614571687079,
+          "poolq_median": -0.046255787903328856
+        },
+        {
+          "vent": 7,
+          "n": 5181,
+          "draft_rate": 0.010036672457054623,
+          "poolq_mean": -0.012751456363510714,
+          "poolq_median": -0.012914371272421878
+        },
+        {
+          "vent": 8,
+          "n": 5181,
+          "draft_rate": 0.01563404748118124,
+          "poolq_mean": 0.02055646625292368,
+          "poolq_median": 0.02059201348135049
+        },
+        {
+          "vent": 9,
+          "n": 5181,
+          "draft_rate": 0.015441034549314805,
+          "poolq_mean": 0.05397933073758935,
+          "poolq_median": 0.0537940143427829
+        },
+        {
+          "vent": 10,
+          "n": 5180,
+          "draft_rate": 0.01698841698841699,
+          "poolq_mean": 0.0880604791109854,
+          "poolq_median": 0.08781206437804945
+        },
+        {
+          "vent": 11,
+          "n": 5181,
+          "draft_rate": 0.01756417679984559,
+          "poolq_mean": 0.12467867583363862,
+          "poolq_median": 0.12438369360815978
+        },
+        {
+          "vent": 12,
+          "n": 5181,
+          "draft_rate": 0.017178150936112718,
+          "poolq_mean": 0.16533086421479495,
+          "poolq_median": 0.16473944993729658
+        },
+        {
+          "vent": 13,
+          "n": 5181,
+          "draft_rate": 0.01833622852731133,
+          "poolq_mean": 0.2169585728038145,
+          "poolq_median": 0.2161175840076749
+        },
+        {
+          "vent": 14,
+          "n": 5181,
+          "draft_rate": 0.0187222543910442,
+          "poolq_mean": 0.29375671061028114,
+          "poolq_median": 0.2898943627627311
+        },
+        {
+          "vent": 15,
+          "n": 5180,
+          "draft_rate": 0.013899613899613899,
+          "poolq_mean": 0.4970621405937519,
+          "poolq_median": 0.46631181874442906
+        }
+      ],
+      "curvature": {
+        "shape": "inverted_u_like",
+        "peak_bin": 14,
+        "peak_rate": 0.0187222543910442,
+        "left_rate": 0.007527504342790967,
+        "right_rate": 0.013899613899613899,
+        "bin16_rate": 0.013899613899613899,
+        "bin15_rate": 0.0187222543910442
+      },
+      "lpm": {
+        "beta_poolq_loo": 0.01148550911366351,
+        "beta_poolq_sq": -0.01946814643274298,
+        "concave": true
+      },
+      "csv": "HERO_binned_draft_rate_min0_2011_2021.csv",
+      "png_single": "HERO_inverted_u_min0_2011_2021.png"
+    },
+    {
+      "min_minutes": 10.0,
+      "n_player_seasons": 72687,
+      "n_drafted": 1136,
+      "draft_rate_panel": 0.015628654367355922,
+      "roster_summary": {
+        "n_team_seasons": 6549,
+        "mean_roster_n": 11.09894640403115,
+        "median_roster_n": 12.0,
+        "std_roster_n": 2.873998799430469,
+        "min_roster_n": 2,
+        "max_roster_n": 23
+      },
+      "ventiles": [
+        {
+          "vent": 0,
+          "n": 4543,
+          "draft_rate": 0.0013207131851199648,
+          "poolq_mean": -0.6679045158284357,
+          "poolq_median": -0.6411995654019856
+        },
+        {
+          "vent": 1,
+          "n": 4543,
+          "draft_rate": 0.009024873431653093,
+          "poolq_mean": -0.40227638792268333,
+          "poolq_median": -0.39757020432109685
+        },
+        {
+          "vent": 2,
+          "n": 4543,
+          "draft_rate": 0.015408320493066256,
+          "poolq_mean": -0.2846233596584622,
+          "poolq_median": -0.2832824725912921
+        },
+        {
+          "vent": 3,
+          "n": 4543,
+          "draft_rate": 0.014747963900506273,
+          "poolq_mean": -0.2093333715608009,
+          "poolq_median": -0.20849611884526395
+        },
+        {
+          "vent": 4,
+          "n": 4543,
+          "draft_rate": 0.014307726172132952,
+          "poolq_mean": -0.15177156603033234,
+          "poolq_median": -0.15142662121842004
+        },
+        {
+          "vent": 5,
+          "n": 4543,
+          "draft_rate": 0.015848558221439577,
+          "poolq_mean": -0.1012842608797227,
+          "poolq_median": -0.101181115786651
+        },
+        {
+          "vent": 6,
+          "n": 4543,
+          "draft_rate": 0.01672903367818622,
+          "poolq_mean": -0.055326884453805285,
+          "poolq_median": -0.05502932937779333
+        },
+        {
+          "vent": 7,
+          "n": 4543,
+          "draft_rate": 0.017829627999119524,
+          "poolq_mean": -0.01179856541241476,
+          "poolq_median": -0.011730004562981396
+        },
+        {
+          "vent": 8,
+          "n": 4543,
+          "draft_rate": 0.020471054369359455,
+          "poolq_mean": 0.030320167104382588,
+          "poolq_median": 0.030565209724884416
+        },
+        {
+          "vent": 9,
+          "n": 4543,
+          "draft_rate": 0.01937046004842615,
+          "poolq_mean": 0.07201812895742697,
+          "poolq_median": 0.07183263065938834
+        },
+        {
+          "vent": 10,
+          "n": 4543,
+          "draft_rate": 0.017169271406559543,
+          "poolq_mean": 0.11613999637737607,
+          "poolq_median": 0.11568844787332992
+        },
+        {
+          "vent": 11,
+          "n": 4543,
+          "draft_rate": 0.018269865727492847,
+          "poolq_mean": 0.16321239151372546,
+          "poolq_median": 0.1626616829455661
+        },
+        {
+          "vent": 12,
+          "n": 4543,
+          "draft_rate": 0.02223200528285274,
+          "poolq_mean": 0.21710254401668208,
+          "poolq_median": 0.21664174425086632
+        },
+        {
+          "vent": 13,
+          "n": 4543,
+          "draft_rate": 0.017829627999119524,
+          "poolq_mean": 0.2832243184896386,
+          "poolq_median": 0.28225673217626784
+        },
+        {
+          "vent": 14,
+          "n": 4543,
+          "draft_rate": 0.018710103455866166,
+          "poolq_mean": 0.37617690125614817,
+          "poolq_median": 0.37341641339302745
+        },
+        {
+          "vent": 15,
+          "n": 4542,
+          "draft_rate": 0.01078819903126376,
+          "poolq_mean": 0.600609317623658,
+          "poolq_median": 0.5626697013691064
+        }
+      ],
+      "curvature": {
+        "shape": "inverted_u_like",
+        "peak_bin": 12,
+        "peak_rate": 0.02223200528285274,
+        "left_rate": 0.0013207131851199648,
+        "right_rate": 0.01078819903126376,
+        "bin16_rate": 0.01078819903126376,
+        "bin15_rate": 0.018710103455866166
+      },
+      "lpm": {
+        "beta_poolq_loo": 0.007433934947229784,
+        "beta_poolq_sq": -0.02666275914324463,
+        "concave": true
+      },
+      "csv": "HERO_binned_draft_rate_min10_2011_2021.csv",
+      "png_single": "HERO_inverted_u_min10_2011_2021.png"
+    },
+    {
+      "min_minutes": 20.0,
+      "n_player_seasons": 62180,
+      "n_drafted": 1134,
+      "draft_rate_panel": 0.018237375361852687,
+      "roster_summary": {
+        "n_team_seasons": 6492,
+        "mean_roster_n": 9.577942082563155,
+        "median_roster_n": 11.0,
+        "std_roster_n": 3.6180803526759964,
+        "min_roster_n": 2,
+        "max_roster_n": 19
+      },
+      "ventiles": [
+        {
+          "vent": 0,
+          "n": 3887,
+          "draft_rate": 0.0012863390789812194,
+          "poolq_mean": -0.7023471494235747,
+          "poolq_median": -0.662787596386269
+        },
+        {
+          "vent": 1,
+          "n": 3886,
+          "draft_rate": 0.012352032938754504,
+          "poolq_mean": -0.40674246045259094,
+          "poolq_median": -0.4015705494762267
+        },
+        {
+          "vent": 2,
+          "n": 3886,
+          "draft_rate": 0.015697375193000514,
+          "poolq_mean": -0.29358867835474756,
+          "poolq_median": -0.2920376157973806
+        },
+        {
+          "vent": 3,
+          "n": 3886,
+          "draft_rate": 0.016212043232115284,
+          "poolq_mean": -0.22104552679276301,
+          "poolq_median": -0.22036591247926324
+        },
+        {
+          "vent": 4,
+          "n": 3887,
+          "draft_rate": 0.019037818368922047,
+          "poolq_mean": -0.1626703708881379,
+          "poolq_median": -0.16242123149339477
+        },
+        {
+          "vent": 5,
+          "n": 3886,
+          "draft_rate": 0.01827071538857437,
+          "poolq_mean": -0.11280278922836258,
+          "poolq_median": -0.11236155165930597
+        },
+        {
+          "vent": 6,
+          "n": 3886,
+          "draft_rate": 0.019814719505918683,
+          "poolq_mean": -0.06769357385183519,
+          "poolq_median": -0.0677137757553053
+        },
+        {
+          "vent": 7,
+          "n": 3886,
+          "draft_rate": 0.018528049408131755,
+          "poolq_mean": -0.024764867249653537,
+          "poolq_median": -0.024750401594641105
+        },
+        {
+          "vent": 8,
+          "n": 3887,
+          "draft_rate": 0.022125032158476974,
+          "poolq_mean": 0.01730112316388143,
+          "poolq_median": 0.017377605134155677
+        },
+        {
+          "vent": 9,
+          "n": 3886,
+          "draft_rate": 0.01930005146680391,
+          "poolq_mean": 0.060062534553911855,
+          "poolq_median": 0.060171445467966
+        },
+        {
+          "vent": 10,
+          "n": 3886,
+          "draft_rate": 0.02007205352547607,
+          "poolq_mean": 0.10423444669941008,
+          "poolq_median": 0.10402476761689844
+        },
+        {
+          "vent": 11,
+          "n": 3886,
+          "draft_rate": 0.02624806999485332,
+          "poolq_mean": 0.15429862040406545,
+          "poolq_median": 0.15394539105132793
+        },
+        {
+          "vent": 12,
+          "n": 3887,
+          "draft_rate": 0.02315410342166195,
+          "poolq_mean": 0.2128722010069917,
+          "poolq_median": 0.21245729540209654
+        },
+        {
+          "vent": 13,
+          "n": 3886,
+          "draft_rate": 0.025218733916623777,
+          "poolq_mean": 0.28535958746856516,
+          "poolq_median": 0.2847286895354391
+        },
+        {
+          "vent": 14,
+          "n": 3886,
+          "draft_rate": 0.02290272774060731,
+          "poolq_mean": 0.3914798177403189,
+          "poolq_median": 0.38610668883641913
+        },
+        {
+          "vent": 15,
+          "n": 3886,
+          "draft_rate": 0.011580030880082347,
+          "poolq_mean": 0.7323664405491449,
+          "poolq_median": 0.6528778185977541
+        }
+      ],
+      "curvature": {
+        "shape": "inverted_u_like",
+        "peak_bin": 11,
+        "peak_rate": 0.02624806999485332,
+        "left_rate": 0.0012863390789812194,
+        "right_rate": 0.011580030880082347,
+        "bin16_rate": 0.011580030880082347,
+        "bin15_rate": 0.02290272774060731
+      },
+      "lpm": {
+        "beta_poolq_loo": 0.009889287528368415,
+        "beta_poolq_sq": -0.024725642155670118,
+        "concave": true
+      },
+      "csv": "HERO_binned_draft_rate_min20_2011_2021.csv",
+      "png_single": "HERO_inverted_u_min20_2011_2021.png"
+    }
+  ],
+  "outputs": {
+    "compare_png": "HERO_min_minutes_sensitivity_compare_2011_2021.png",
+    "overlay_png": "HERO_min_minutes_sensitivity_overlay_2011_2021.png",
+    "single_png_pattern": "HERO_inverted_u_min{M}_2011_2021.png"
+  }
+}

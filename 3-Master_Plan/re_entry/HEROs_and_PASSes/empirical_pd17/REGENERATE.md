@@ -189,6 +189,7 @@ Skips PNG regeneration; rebuilds `.pptx` from existing figures + meta JSON.
 | `build_grandchild_league_analysis_slide.py` | legacy 2015 → `slides/CHAR_grandchild_league_analysis.pptx`; window → `auto/CHAR_grandchild_league_interval_overlap_*_AUTO.pptx` |
 | `build_grandchild_empirical_lc_compare_slide.py` | `auto/CHAR_grandchild_empirical_lc_compare_AUTO.pptx` |
 | `build_grandchild_ncaa_roster_size_slide.py` | `auto/CHAR_grandchild_ncaa_roster_size_compare_AUTO.pptx` |
+| `hero_min_minutes_sensitivity_ladder.py` | `grandchild_assign/HERO_min_minutes_sensitivity_*_2011_2021.png` |
 | `rebuild_pd17_interval_reference_slides.py` | orchestrates HAND rows 3–5 (never HAND) |
 
 **Optional:** gamma sweep AUTO is not in the current 7-slide HAND17 deck.
