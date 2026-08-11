@@ -116,14 +116,43 @@ HAND17 — empirical MBB deck (7 slides)
   |---|---------|--------------------------------------|
   | 1 | Frame   | PD17 glossary + deck map             |
   | 2 | Assign  | Â_i, T_j inputs                      |
-  | 3 | Assign  | Team interval overlap (ρ)            |
-  | 4 | Score   | Team L_C distribution                |
-  | 5 | Score   | Sketch A: T_j vs L_C                 |
-  | 6 | Score   | γ sweep strip                        |
+  | 3 | Assign  | Team interval overlap (ρ) + **H_sort** empirical |
+  | 4 | Assign  | Grandchild sim interval overlap + **H_sort** (ρ=0.5) |
+  | 5 | Score   | Team L_C distribution                |
+  | 6 | Score   | Sketch A: T_j vs L_C                 |
   | 7 | Assign  | Sim ρ calibration capstone (1×3)     |
 
-  Regenerate: ../empirical_pd17/REGENERATE.md
+  Regenerate all interval reference slides (3 full + 4/5 window 2015-2019):
+    /opt/anaconda3/envs/sports_net/bin/python sports/scripts/rebuild_pd17_interval_reference_slides.py
+
+  Reference outputs → copy into HAND manually:
+    Slide 3 (full 2011-2021): auto/CHAR_empirical_team_interval_overlap_AUTO.pptx
+    Slide 4 (NCAA 2015-2019): auto/CHAR_empirical_team_interval_overlap_2015_2019_AUTO.pptx
+    Slide 5 (sim 2015-2019):  auto/CHAR_grandchild_league_interval_overlap_2015_2019_AUTO.pptx
+
+  HAND master: Change Picture + bullet numbers; keep Office Math you formatted by hand.
+  Full PD17 regen cheat sheet: ../empirical_pd17/REGENERATE.md
   Planned: slide 8 — empirical Pass B λ on real MBB.
+
+----------------------------------------------------------------------
+VECTOR ASSIGN decks (Aug 2026 — moved from VECTOR_work/)
+----------------------------------------------------------------------
+  Source folder: slides/  (same as HAND16/HAND17)
+
+  VECTOR_ASSIGN_Dynamic_to_OneShot_Model.pptx
+    Parent → Child briefing (3 slides).
+    JPEG audit: VECTOR_ASSIGN_Dynamic_to_OneShot_Model/Slide1.jpeg … Slide3.jpeg
+
+  VECTOR_ASSIGN_Grandchild_Model.pptx
+    Grandchild endogenous-centroid prototype (ASSIGN-only).
+    JPEG audit: VECTOR_ASSIGN_Grandchild_Model/SlideN.jpeg  (export after edits)
+
+  CHAR_grandchild_league_analysis.pptx
+    Grandchild sim league — 2×2 interval overlap (HAND17 slide 3 analog).
+    Regenerate: /opt/anaconda3/envs/sports_net/bin/python sports/scripts/build_grandchild_league_analysis_slide.py
+    Figures: ../grandchild_assign/GRANDCHILD_league_interval_overlap.png
+
+  Markdown/PDF specs remain in 3-Master_Plan/VECTOR_work/ (not duplicated here).
 
 ----------------------------------------------------------------------
 Other files in slides/
@@ -132,6 +161,15 @@ Other files in slides/
   CHAR_PD17_HAND.pptx                       HAND17 master
   PASS_ABC_Gallery_Slides.pptx              Pass A/B/C intro
   So_Far_.pptx                              Merged Alex deck (slides 1–3)
+  VECTOR_ASSIGN_Dynamic_to_OneShot_Model.pptx
+  VECTOR_ASSIGN_Grandchild_Model.pptx
+  CHAR_grandchild_league_analysis.pptx       Grandchild sim intervals (legacy 2015)
+  auto/CHAR_grandchild_rho_assortativity_AUTO.pptx   ρ vs H_sort (Alex validation)
+  auto/CHAR_grandchild_h_sort_explainer_AUTO.pptx    H_sort glossary (Alex brief)
+  auto/CHAR_grandchild_empirical_lc_compare_AUTO.pptx  Empirical vs sim team L_C (2011-2021)
+  auto/CHAR_grandchild_ncaa_roster_size_compare_AUTO.pptx  NCAA vs LG roster sizes fed in (2011-2021)
+
+  Interpret D vs H_sort (Alex brief): ../grandchild_assign/GRANDCHILD_D_and_H_sort_interpretation.md
   archive/                                  HAND backups
   auto/                                     Script-generated *_AUTO.pptx
 

@@ -310,9 +310,17 @@ Return:
 
 These are the recent task-specific documents COMPASS may not have in the repo.
 
-### `VECTOR_ASSIGN_Dynamic_to_OneShot_Model.pptx` - this can be found in the 3-Master_Plan/VECTOR_work/VECTOR_ASSIGN_Dynamic_to_OneShot_Model folder of slide images
+### `VECTOR_ASSIGN_Dynamic_to_OneShot_Model.pptx`
 
-Two-slide briefing of Parent and Child; configuration/stub component, Quayle component, and our combined synthesis.
+**Deck:** `3-Master_Plan/re_entry/HEROs_and_PASSes/slides/VECTOR_ASSIGN_Dynamic_to_OneShot_Model.pptx`  
+**JPEG audit:** `3-Master_Plan/re_entry/HEROs_and_PASSes/slides/VECTOR_ASSIGN_Dynamic_to_OneShot_Model/Slide1.jpeg` … `Slide3.jpeg`
+
+Three-slide briefing of Parent and Child; configuration/stub component, Quayle component, and our combined synthesis.
+
+### `VECTOR_ASSIGN_Grandchild_Model.pptx`
+
+**Deck:** `3-Master_Plan/re_entry/HEROs_and_PASSes/slides/VECTOR_ASSIGN_Grandchild_Model.pptx`  
+**JPEG audit:** `3-Master_Plan/re_entry/HEROs_and_PASSes/slides/VECTOR_ASSIGN_Grandchild_Model/SlideN.jpeg` (export after edits; same naming convention as HAND decks)
 
 ### `VECTOR_One_Page_Homophilic_Initial_League_Model.md` - this can be found in the 3-Master_Plan/VECTOR_work folder
 

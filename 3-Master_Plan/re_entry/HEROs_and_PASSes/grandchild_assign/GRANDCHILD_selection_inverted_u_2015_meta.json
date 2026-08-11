@@ -1,0 +1,80 @@
+{
+  "diagnostic": "grandchild_selection_inverted_u",
+  "date": "2026-08-11",
+  "assignment": {
+    "method": "grandchild",
+    "rho": 0.5,
+    "seed": 5412015,
+    "roster_size": 15
+  },
+  "ability_source": {
+    "season": 2015,
+    "n_players": 6030,
+    "n_players_raw": 6030,
+    "n_players_dropped_for_roster_fit": 0,
+    "n_teams_empirical": 635,
+    "perf": "PPM z within season",
+    "mean": 0.00036694947568937313,
+    "std": 0.9997041508768859,
+    "roster_size": 15,
+    "n_teams_grandchild": 402
+  },
+  "selection": {
+    "season": 2015,
+    "n_total": 6030,
+    "K_over_N": 0.017412935323383085,
+    "theta_quantile": 0.9825870646766169,
+    "K": 105,
+    "score_mode": "loo_gap_plus_ability",
+    "loo_pool_l_mode": "crowding_smooth_team",
+    "loo_gap_weight": 0.55,
+    "viability_theta": 2.367248937838844
+  },
+  "curvature": {
+    "loo_pool_quality": {
+      "shape": "inverted_u_like",
+      "peak_bin": 11,
+      "peak_rate": 0.03713527851458886,
+      "left_rate": 0.010610079575596816,
+      "right_rate": 0.031914893617021274
+    },
+    "pool_mean": {
+      "shape": "monotone_increasing",
+      "peak_bin": 15,
+      "peak_rate": 0.06648936170212766,
+      "left_rate": 0.002652519893899204,
+      "right_rate": 0.06648936170212766
+    }
+  },
+  "rho_sweep": [
+    {
+      "rho": 0.0,
+      "loo_shape": "inverted_u_like",
+      "team_mean_shape": "monotone_increasing"
+    },
+    {
+      "rho": 0.25,
+      "loo_shape": "inverted_u_like",
+      "team_mean_shape": "monotone_increasing"
+    },
+    {
+      "rho": 0.5,
+      "loo_shape": "inverted_u_like",
+      "team_mean_shape": "monotone_increasing"
+    },
+    {
+      "rho": 0.75,
+      "loo_shape": "monotone_increasing",
+      "team_mean_shape": "monotone_increasing"
+    },
+    {
+      "rho": 1.0,
+      "loo_shape": "monotone_increasing",
+      "team_mean_shape": "monotone_increasing"
+    }
+  ],
+  "outputs": {
+    "png": "GRANDCHILD_selection_inverted_u_2015.png",
+    "png_rho_sweep": "GRANDCHILD_selection_inverted_u_rho_sweep.png"
+  }
+}

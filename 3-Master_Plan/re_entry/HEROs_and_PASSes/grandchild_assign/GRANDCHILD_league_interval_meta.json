@@ -1,0 +1,64 @@
+{
+  "diagnostic": "grandchild_league_interval_overlap",
+  "date": "2026-08-11",
+  "assignment": {
+    "method": "grandchild",
+    "rho": 0.5,
+    "seed": 5412015,
+    "roster_size": 15,
+    "n_teams": 402,
+    "n_players": 6030,
+    "sorting_index_h": 0.15699784616415124,
+    "H_sort": 0.15699784616415124,
+    "centroid_sd": 0.396112313057065
+  },
+  "ability_source": {
+    "season": 2015,
+    "n_players": 6030,
+    "n_teams_empirical": 635,
+    "perf": "PPM z within season",
+    "mean": 0.00036694947568937313,
+    "std": 0.9997041508768859
+  },
+  "empirical_hand17_reference": {
+    "note": "HAND17 slide 3 (empirical MBB 2011-2021)",
+    "coverage_max": 6305,
+    "coverage_disjoint_max": 7,
+    "coverage_frac_gt_1": 0.86,
+    "perf_span_mean": 2.98,
+    "perf_span_median": 2.87,
+    "n_team_seasons": 6492
+  },
+  "coverage_grid_points": 400,
+  "n_interval_sample": 80,
+  "coverage_max": 402,
+  "coverage_mean": 134.5825,
+  "coverage_frac_gt_1": 0.665,
+  "coverage_disjoint_max": 8,
+  "coverage_disjoint_mean": 0.98,
+  "n_teams": 402,
+  "n_players": 6030,
+  "H_sort": 0.15699784616415124,
+  "perf_span": {
+    "label": "perf_span",
+    "n": 402,
+    "mean": 3.3558599095054658,
+    "std": 0.8736654676526103,
+    "min": 1.5988065184509774,
+    "max": 8.367917065289692,
+    "median": 3.2443877212792973
+  },
+  "T_j_hat": {
+    "label": "\\hat{T}_j",
+    "n": 402,
+    "mean": 0.0003669494756893826,
+    "std": 0.39611231305706496,
+    "min": -1.0351754090473444,
+    "max": 1.6231169750044911,
+    "median": -0.01869631101771741
+  },
+  "outputs": {
+    "png": "GRANDCHILD_league_interval_overlap.png",
+    "team_csv": "GRANDCHILD_league_interval_team.csv"
+  }
+}

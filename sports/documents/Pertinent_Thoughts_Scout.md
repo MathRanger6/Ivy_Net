@@ -1,6 +1,6 @@
 # Pertinent Thoughts — Scout (530 College Basketball Pipeline)
 
-**Last synced:** 2026-08-03
+**Last synced:** 2026-08-11
 
 This document mirrors **Pertinent_Thoughts.md** (Army / OER work): important discoveries, reflections on code and results, open problems, and directions worth investigating for the **Scout** dissertation thread — ESPN box → SR advanced → player–season panel → leave-one-out teammate pool quality → draft outcome EDA.
 
@@ -135,6 +135,70 @@ With **`use_prebuilt_panel_csv=False`**, **`min_minutes`** is applied in **`pane
 - **One-liner for Alex:** “Draft rate rises with LOO teammate quality, then drops in the **highest ventile**; dip stable at 10 and 20 minutes, washes out when we star-select or include full deep bench.”
 
 **Status**: Export PNG/CSV triplet for `{0, 10, 20, 50, 100}` × `{16, 20}` quantile when archiving robustness bundle; locked hero lives in `re_entry/HEROs_and_PASSes/`.
+
+---
+
+## `min_minutes` — downstream effects on LG / team structure (Aug 2026)
+
+**Topic**: The ≥20-minute floor is not a cosmetic QC step. It jointly defines **who counts**, **who enters LOO**, **empirical roster sizes**, and **NCAA vs LG comparability**.
+
+**Where it enters the pipeline**:
+
+| Stage | What happens |
+|-------|----------------|
+| **`panel_rebuild.build_from_box`** (when `use_prebuilt_panel_csv=False`) | Drop player-season rows with ESPN box **`minutes` < min_minutes** *before* LOO is computed |
+| **`filter_panel`** | Same floor applied again at ventile / LPM export time |
+| **Independent of `perf_metric`** | With **`ppm`**, filter is still on **minutes** (playing time), not on the rate itself |
+
+**When / why we chose 20**:
+
+| When | What |
+|------|------|
+| **Apr 2026** early exports | **`min_minutes=0`** — full roster, max *n* (~82,893 player-seasons) |
+| **Jul 2026 sensitivity** | Charles compared `{0, 10, 20, 50, 100}` on rebuilt panel (see section above) |
+| **Jul 2026 hero lock** | **`min_minutes=20`** + **`use_prebuilt_panel_csv=False`** so LOO and plotted sample match — rotation-level peers only |
+
+**Reasons for 20 (not arbitrary)**:
+
+1. **ppm is unstable** at very low minutes (garbage-time rates).
+2. **Estimand clarity:** “Among rotation players, draft rate vs LOO quality of **other rotation players**.”
+3. **Hero shape:** cleanest inverted-U at **16 quantile** — plateau then sharp top-ventile dip; **`min=0`** wobbly, **`min=50+`** washes out heterogeneity.
+4. **Draft signal preserved:** 20 → 0 adds ~21k rows but only **+2** ever-drafted player-seasons.
+
+**Downstream effects Charles flagged (Aug 2026, roster-size plot)**:
+
+| Quantity | NCAA empirical (min=20) | LG sim (C=15) |
+|----------|-------------------------|---------------|
+| Player-seasons | 62,180 | ~62,100 (same pool, trimmed to N÷15) |
+| Team-seasons | **6,492** real `(team_id, season)` | **4,140** synthetic J = N/15 leagues |
+| Mean “roster size” | **9.6** qualifying players (median 11; range 2–19) | **15** fixed every team |
+| Share with exactly 15 players | **2.3%** | **100%** |
+
+So the minutes filter **shrinks and reshapes** what counts as a team in NCAA diagnostics, while LG **re-packs** the same ability pool into uniform 15-man synthetic rosters. That explains matching **L_C mean/sd** but mismatched **histogram counts** and **team-season *n*** — not a bug in the L_C formula.
+
+**Inverted-U vs full roster / lower floor**:
+
+| Spec | Inverted-U on LOO (hero axis)? | Comment |
+|------|-------------------------------|---------|
+| **`min_minutes=20`** (hero) | **Yes** — clearest top-ventile dip | Locked estimand |
+| **`min_minutes=10`** | **Mostly yes** — elite dip spreads across bins 18–20; +~10.5k filler rows, +2 drafted | Robustness appendix |
+| **`min_minutes=5`** (not archived yet) | **Likely between 10 and 0** — expect **noisier** than 20, **less contaminated** than 0; worth one PNG if Alex asks | Extrapolation from 0/10/20 ladder |
+| **`min_minutes=0`** (“full roster”) | **Attenuated / wobbly** — dip not falsified but **not hero-clean** | ~21k deep-bench rows dilute signal and distort LOO |
+
+**Do we simulate minutes in LG?** **No — and Charles is right to reject it.**
+
+- Minutes are an **outcome of within-team selection / usage**, not a primitive for ASSIGN-on-ability.
+- A separate minutes DGP would **overfit ESPN roster listing**, add a layer the Hero model does not claim, and **break simplicity** without fixing the core estimand mismatch (LG = fixed C, NCAA = variable real teams under a minutes floor).
+- Correct response: **state the estimand**, show **sensitivity** `{5, 10, 20}`, and compare LG on **abilities** — do not bolt on a minutes simulator.
+
+**One-liner for Alex (Aug 2026)**:
+
+> “Our hero spec uses rotation players (≥20 ESPN minutes) for both LOO and draft-rate bins — that’s why real team-season counts look like ~10 players per team while LG uses fixed 15-man leagues on the same ability pool. The minutes rule is part of the **estimand**, not neutral data cleaning; it drives roster-size diagnostics and NCAA–LG team counts, but we are **not** simulating playing-time distributions to match it.”
+
+**Figure:** `grandchild_assign/GRANDCHILD_ncaa_roster_size_distribution_2011_2021.png`  
+**Script:** `sports/scripts/grandchild_ncaa_roster_size_distribution.py`
+
+**Status**: Logged Aug 2026; optional **`min_minutes=5`** sensitivity PNG not yet run.
 
 ---
 

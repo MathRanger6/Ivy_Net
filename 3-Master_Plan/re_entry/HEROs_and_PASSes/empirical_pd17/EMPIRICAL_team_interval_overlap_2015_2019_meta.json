@@ -1,0 +1,45 @@
+{
+  "diagnostic": "empirical_team_interval_overlap",
+  "date": "2026-08-11",
+  "source": "MBB player-season panel (530 pipeline / hero filters)",
+  "seasons": "2015-2019",
+  "season_min": 2015,
+  "season_max": 2019,
+  "compare_window": true,
+  "perf": "PPM z within season",
+  "team_min_players": 2,
+  "coverage_grid_points": 400,
+  "n_interval_sample": 80,
+  "530_analog": "530_sports_pipeline.ipynb CELL 8",
+  "coverage_max": 3117,
+  "coverage_max_normalized": 0.9740625,
+  "coverage_mean": 813.9925,
+  "coverage_frac_gt_1": 0.8625,
+  "coverage_disjoint_max": 7,
+  "coverage_disjoint_mean": 0.96,
+  "n_team_seasons": 3200,
+  "n_player_seasons": 30383,
+  "H_sort": 0.10499562505936899,
+  "perf_span": {
+    "label": "perf_span",
+    "n": 3200,
+    "mean": 2.9857976652923512,
+    "std": 0.9918273512732674,
+    "min": 0.0,
+    "max": 11.677453472707114,
+    "median": 2.8535777359227454
+  },
+  "T_j_hat": {
+    "label": "\\hat{T}_j",
+    "n": 3200,
+    "mean": 0.014467968402421625,
+    "std": 0.3985416324107764,
+    "min": -2.2391392177783933,
+    "max": 2.7551839321296203,
+    "median": 0.0040171162243202736
+  },
+  "outputs": {
+    "png": "EMPIRICAL_team_interval_overlap_2015_2019.png",
+    "team_csv": "EMPIRICAL_team_interval_overlap_2015_2019_team_season.csv"
+  }
+}

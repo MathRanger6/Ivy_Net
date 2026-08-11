@@ -37,6 +37,7 @@ from hero_gallery_paths import GRANDCHILD_ASSIGN, ensure_hero_dirs
 
 OUT = GRANDCHILD_ASSIGN
 PNG_DH = OUT / "GRANDCHILD_rho_sweep_D_H.png"
+PNG_RHO_H = OUT / "GRANDCHILD_rho_vs_assortativity.png"
 PNG_SD = OUT / "GRANDCHILD_rho_sweep_centroid_sd.png"
 PNG_EX = OUT / "GRANDCHILD_rho_sweep_example_centroids.png"
 CSV_SUM = OUT / "GRANDCHILD_rho_sweep_summary.csv"
@@ -114,6 +115,62 @@ def _run_sweep(
     return detail, summary, examples
 
 
+def _plot_rho_vs_assortativity(summary: pd.DataFrame, out_path: Path) -> None:
+    """Single-panel Alex brief: homophily ρ (ASSIGN knob) vs realized assortativity H_sort."""
+    from gallery_mathtext import configure_matplotlib_mathtext
+
+    configure_matplotlib_mathtext()
+
+    n_rep = int(summary["n_realizations"].iloc[0]) if "n_realizations" in summary.columns else 30
+    fig, ax = plt.subplots(figsize=(7.5, 5))
+    x = summary["rho"].to_numpy()
+    y = summary["H_mean"].to_numpy()
+    yerr = summary["H_std"].fillna(0.0).to_numpy()
+    ax.errorbar(
+        x,
+        y,
+        yerr=yerr,
+        fmt="o-",
+        capsize=4,
+        color="#1a5490",
+        ecolor="#6a8caf",
+        markersize=6,
+        linewidth=1.5,
+        label=rf"Mean $H_{{sort}}$ ± 1 SD ({n_rep} reps)",
+    )
+    if len(x) >= 2:
+        coef = np.polyfit(x, y, 1)
+        x_line = np.linspace(float(x.min()), float(x.max()), 100)
+        ax.plot(x_line, np.polyval(coef, x_line), "--", color="#b03030", lw=1.2, alpha=0.85, label="OLS trend")
+    ax.set_xlabel(r"Homophily knob $\rho$ (Grandchild ASSIGN)", fontsize=11)
+    ax.set_ylabel(r"Realized assortativity $H_{sort}$", fontsize=11)
+    ax.set_title(
+        r"Increase homophily $\rho$ $\Rightarrow$ increase realized assortativity $H_{sort}$",
+        fontsize=12,
+        pad=10,
+    )
+    ax.set_xlim(-0.02, 1.02)
+    ax.grid(True, alpha=0.3)
+    ax.legend(fontsize=9, loc="lower right")
+    rho0 = summary.loc[summary["rho"] == summary["rho"].min(), "H_mean"]
+    rho1 = summary.loc[summary["rho"] == summary["rho"].max(), "H_mean"]
+    if len(rho0) and len(rho1):
+        ax.text(
+            0.03,
+            0.97,
+            rf"$H_{{sort}}({summary['rho'].min():g}) \approx {float(rho0.iloc[0]):.3f}$"
+            rf" $\to$ $H_{{sort}}({summary['rho'].max():g}) \approx {float(rho1.iloc[0]):.3f}$",
+            transform=ax.transAxes,
+            va="top",
+            ha="left",
+            fontsize=9,
+            bbox=dict(boxstyle="round", facecolor="white", alpha=0.9),
+        )
+    fig.tight_layout()
+    fig.savefig(out_path, dpi=150, bbox_inches="tight")
+    plt.close(fig)
+
+
 def _plot_dh(summary: pd.DataFrame, out_path: Path) -> None:
     fig, axes = plt.subplots(1, 2, figsize=(10, 4))
     x = summary["rho"].to_numpy()
@@ -184,8 +241,8 @@ def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
 
     gc, tpa = _load_modules()
-    ability, emp_meta = gc.load_empirical_abilities_season(args.season)
     c = gc.ROSTER_SIZE_DEFAULT
+    ability, emp_meta = gc.load_empirical_abilities_season(args.season, roster_size=c)
     n = len(ability)
     if n % c != 0:
         raise SystemExit(f"N={n} not divisible by C={c}")
@@ -203,6 +260,7 @@ def main() -> None:
     summary.to_csv(CSV_SUM, index=False)
 
     _plot_dh(summary, PNG_DH)
+    _plot_rho_vs_assortativity(summary, PNG_RHO_H)
     _plot_centroid_sd(summary, PNG_SD)
     _plot_examples(examples, PNG_EX)
 
@@ -220,6 +278,7 @@ def main() -> None:
         "outputs": {
             "summary_csv": str(CSV_SUM.relative_to(REPO)),
             "png_d_h": str(PNG_DH.relative_to(REPO)),
+            "png_rho_vs_assortativity": str(PNG_RHO_H.relative_to(REPO)),
             "png_centroid_sd": str(PNG_SD.relative_to(REPO)),
             "png_examples": str(PNG_EX.relative_to(REPO)),
         },
@@ -232,6 +291,7 @@ def main() -> None:
 
     print(f"Wrote {CSV_SUM}")
     print(f"Wrote {PNG_DH}")
+    print(f"Wrote {PNG_RHO_H}")
     print(summary.to_string(index=False))
 
 

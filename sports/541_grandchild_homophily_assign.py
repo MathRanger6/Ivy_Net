@@ -201,13 +201,45 @@ def within_team_mse(ability: np.ndarray, pool_id: np.ndarray, mu_final: np.ndarr
 
 
 def sorting_index_h(ability: np.ndarray, pool_id: np.ndarray, mu_final: np.ndarray) -> float:
-    """H — normalized sorting / explained-variance-style index."""
+    """H_sort — normalized realized sorting index for a fixed roster partition.
+
+    Also referenced as ``sorting_index_h`` in early 541 outputs.
+
+    .. math::
+
+        H_{sort} = 1 - \\frac{\\sum_i (A_i - \\mu_{g(i)})^2}{\\sum_i (A_i - \\bar A)^2}
+
+    where ``mu_{g(i)}`` is the realized roster mean (final centroid) for player *i*.
+    VECTOR lock: this is **realized sorting**, not the generative homophily knob rho.
+    """
     mu_player = mu_final[np.asarray(pool_id, dtype=np.int64)]
     num = float(np.sum((ability - mu_player) ** 2))
     den = float(np.sum((ability - np.mean(ability)) ** 2))
     if den <= 0.0:
         return float("nan")
     return 1.0 - num / den
+
+
+def realized_sorting_index_H_sort(
+    ability: np.ndarray,
+    pool_id: np.ndarray,
+) -> float:
+    """League-wide H_sort from ability vector and team labels (pool_id)."""
+    ability = np.asarray(ability, dtype=float)
+    pool_id = np.asarray(pool_id, dtype=np.int64)
+    if pool_id.size != ability.size:
+        raise ValueError("pool_id and ability must have same length")
+    if pool_id.size == 0:
+        return float("nan")
+    n_teams = int(pool_id.max()) + 1
+    mu_final = np.empty(n_teams, dtype=float)
+    for j in range(n_teams):
+        members = ability[pool_id == j]
+        if members.size == 0:
+            mu_final[j] = float("nan")
+        else:
+            mu_final[j] = float(members.mean())
+    return sorting_index_h(ability, pool_id, mu_final)
 
 
 def centroid_dispersion_sd(mu_final: np.ndarray) -> float:
@@ -248,8 +280,13 @@ def load_empirical_abilities_season(
     season: int = EMPIRICAL_SEASON_DEFAULT,
     *,
     repo_root: Path | None = None,
+    roster_size: int | None = None,
 ) -> tuple[np.ndarray, dict[str, Any]]:
-    """Load PPM z within-season abilities for one NCAA season (530/PD17 panel)."""
+    """Load PPM z within-season abilities for one NCAA season (530/PD17 panel).
+
+    When ``roster_size`` is set, drop lowest-minute player-seasons so N is divisible
+    by C (deterministic trim for full-capacity Grandchild leagues).
+    """
     repo = repo_root or Path(__file__).resolve().parents[1]
     scripts = repo / "scripts"
     import sys
@@ -263,15 +300,41 @@ def load_empirical_abilities_season(
     work = work.dropna(subset=["perf"])
     work["perf"] = pd.to_numeric(work["perf"], errors="coerce")
     work = work.dropna(subset=["perf"])
+
+    n_raw = int(len(work))
+    n_dropped = 0
+    if roster_size is not None:
+        c = int(roster_size)
+        if c <= 0:
+            raise ValueError(f"roster_size must be positive, got {c}")
+        usable = (n_raw // c) * c
+        if usable < c:
+            raise ValueError(
+                f"Season {season}: only {n_raw} players after filters; need at least {c} for C={c}"
+            )
+        excess = n_raw - usable
+        if excess > 0:
+            if "minutes" in work.columns:
+                drop_idx = work.nsmallest(excess, "minutes").index
+                work = work.drop(index=drop_idx)
+            else:
+                work = work.iloc[:usable].copy()
+            n_dropped = excess
+
     abilities = work["perf"].to_numpy(dtype=float)
     meta = {
         "season": int(season),
         "n_players": int(len(abilities)),
+        "n_players_raw": n_raw,
+        "n_players_dropped_for_roster_fit": n_dropped,
         "n_teams_empirical": int(work["team_id"].nunique()),
         "perf": "PPM z within season",
         "mean": float(abilities.mean()),
         "std": float(abilities.std()),
     }
+    if roster_size is not None:
+        meta["roster_size"] = int(roster_size)
+        meta["n_teams_grandchild"] = int(len(abilities) // int(roster_size))
     return abilities, meta
 
 

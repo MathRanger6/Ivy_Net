@@ -1,0 +1,166 @@
+{
+  "generated": "2026-08-11",
+  "panel": "empirical_lc_distributions._prepare_panel (PPM z, min 20 min)",
+  "season_min": 2011,
+  "season_max": 2021,
+  "seasons_label": "2011-2021",
+  "lg_roster_size_reference": 15,
+  "team_season_summary": {
+    "n": 6492,
+    "mean": 9.577942082563155,
+    "std": 3.6180803526759964,
+    "min": 2,
+    "max": 19,
+    "median": 11.0,
+    "p10": 4.0,
+    "p25": 6.0,
+    "p75": 12.0,
+    "p90": 13.0,
+    "share_eq_15": 0.02325939617991374,
+    "share_ge_15": 0.03542821934688848
+  },
+  "lg_team_season_summary": {
+    "n": 4140,
+    "mean": 15.0,
+    "std": 0.0,
+    "min": 15,
+    "max": 15,
+    "median": 15.0,
+    "p10": 15.0,
+    "p25": 15.0,
+    "p75": 15.0,
+    "p90": 15.0,
+    "share_eq_15": 1.0,
+    "share_ge_15": 1.0
+  },
+  "player_seasons": 62180,
+  "per_season": [
+    {
+      "season": 2011,
+      "n_teams": 491,
+      "mean_roster_n": 9.531568228105906,
+      "median_roster_n": 11.0,
+      "min_roster_n": 2,
+      "max_roster_n": 17,
+      "n_players": 4680,
+      "n_teams_lg_if_c15": 312,
+      "n_players_trimmed_for_lg": 0
+    },
+    {
+      "season": 2012,
+      "n_teams": 501,
+      "mean_roster_n": 9.41317365269461,
+      "median_roster_n": 11.0,
+      "min_roster_n": 2,
+      "max_roster_n": 17,
+      "n_players": 4716,
+      "n_teams_lg_if_c15": 314,
+      "n_players_trimmed_for_lg": 6
+    },
+    {
+      "season": 2013,
+      "n_teams": 527,
+      "mean_roster_n": 9.299810246679318,
+      "median_roster_n": 11.0,
+      "min_roster_n": 2,
+      "max_roster_n": 17,
+      "n_players": 4901,
+      "n_teams_lg_if_c15": 326,
+      "n_players_trimmed_for_lg": 11
+    },
+    {
+      "season": 2014,
+      "n_teams": 623,
+      "mean_roster_n": 9.62760834670947,
+      "median_roster_n": 11.0,
+      "min_roster_n": 2,
+      "max_roster_n": 17,
+      "n_players": 5998,
+      "n_teams_lg_if_c15": 399,
+      "n_players_trimmed_for_lg": 13
+    },
+    {
+      "season": 2015,
+      "n_teams": 635,
+      "mean_roster_n": 9.496062992125983,
+      "median_roster_n": 11.0,
+      "min_roster_n": 2,
+      "max_roster_n": 18,
+      "n_players": 6030,
+      "n_teams_lg_if_c15": 402,
+      "n_players_trimmed_for_lg": 0
+    },
+    {
+      "season": 2016,
+      "n_teams": 634,
+      "mean_roster_n": 9.479495268138802,
+      "median_roster_n": 11.0,
+      "min_roster_n": 2,
+      "max_roster_n": 17,
+      "n_players": 6010,
+      "n_teams_lg_if_c15": 400,
+      "n_players_trimmed_for_lg": 10
+    },
+    {
+      "season": 2017,
+      "n_teams": 634,
+      "mean_roster_n": 9.623028391167193,
+      "median_roster_n": 11.0,
+      "min_roster_n": 2,
+      "max_roster_n": 19,
+      "n_players": 6101,
+      "n_teams_lg_if_c15": 406,
+      "n_players_trimmed_for_lg": 11
+    },
+    {
+      "season": 2018,
+      "n_teams": 653,
+      "mean_roster_n": 9.447166921898928,
+      "median_roster_n": 11.0,
+      "min_roster_n": 2,
+      "max_roster_n": 16,
+      "n_players": 6169,
+      "n_teams_lg_if_c15": 411,
+      "n_players_trimmed_for_lg": 4
+    },
+    {
+      "season": 2019,
+      "n_teams": 644,
+      "mean_roster_n": 9.430124223602485,
+      "median_roster_n": 11.0,
+      "min_roster_n": 2,
+      "max_roster_n": 17,
+      "n_players": 6073,
+      "n_teams_lg_if_c15": 404,
+      "n_players_trimmed_for_lg": 13
+    },
+    {
+      "season": 2020,
+      "n_teams": 657,
+      "mean_roster_n": 9.254185692541856,
+      "median_roster_n": 10.0,
+      "min_roster_n": 2,
+      "max_roster_n": 19,
+      "n_players": 6080,
+      "n_teams_lg_if_c15": 405,
+      "n_players_trimmed_for_lg": 5
+    },
+    {
+      "season": 2021,
+      "n_teams": 493,
+      "mean_roster_n": 10.997971602434077,
+      "median_roster_n": 12.0,
+      "min_roster_n": 3,
+      "max_roster_n": 18,
+      "n_players": 5422,
+      "n_teams_lg_if_c15": 361,
+      "n_players_trimmed_for_lg": 7
+    }
+  ],
+  "outputs": {
+    "png": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/HEROs_and_PASSes/grandchild_assign/GRANDCHILD_ncaa_roster_size_distribution_2011_2021.png",
+    "png_compare": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/HEROs_and_PASSes/grandchild_assign/GRANDCHILD_ncaa_vs_lg_roster_size_compare_2011_2021.png",
+    "meta": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/HEROs_and_PASSes/grandchild_assign/GRANDCHILD_ncaa_roster_size_distribution_2011_2021_meta.json",
+    "csv": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/HEROs_and_PASSes/grandchild_assign/GRANDCHILD_ncaa_roster_size_by_team_season_2011_2021.csv"
+  }
+}

@@ -1,21 +1,25 @@
 {
   "diagnostic": "empirical_team_interval_overlap",
-  "date": "2026-08-06",
+  "date": "2026-08-11",
   "source": "MBB player-season panel (530 pipeline / hero filters)",
   "seasons": "2011-2021",
+  "season_min": null,
+  "season_max": null,
+  "compare_window": false,
   "perf": "PPM z within season",
   "team_min_players": 2,
   "coverage_grid_points": 400,
   "n_interval_sample": 80,
   "530_analog": "530_sports_pipeline.ipynb CELL 8",
-  "sim_analog": "538 CELL 10 Plot A (tier1_cell10_playground_run.py)",
   "coverage_max": 6305,
+  "coverage_max_normalized": 0.9711953173136167,
   "coverage_mean": 1630.265,
   "coverage_frac_gt_1": 0.865,
   "coverage_disjoint_max": 7,
   "coverage_disjoint_mean": 0.9325,
   "n_team_seasons": 6492,
   "n_player_seasons": 62180,
+  "H_sort": 0.10502047744680088,
   "perf_span": {
     "label": "perf_span",
     "n": 6492,
@@ -36,6 +40,6 @@
   },
   "outputs": {
     "png": "EMPIRICAL_team_interval_overlap.png",
-    "team_csv": "EMPIRICAL_team_interval_team_season.csv"
+    "team_csv": "EMPIRICAL_team_interval_overlap_team_season.csv"
   }
 }

@@ -17,6 +17,7 @@ SORT_CHOP_LAMBDA = HERO_ROOT / "sort_chop_lambda"
 SOFT_ASSIGN_LAMBDA = HERO_ROOT / "soft_assign_lambda"
 THETA = HERO_ROOT / "theta"
 SLIDES = HERO_ROOT / "slides"
+GRANDCHILD_LEAGUE_ANALYSIS_DECK = SLIDES / "CHAR_grandchild_league_analysis.pptx"
 # Hand-edited masters (scripts never write these).
 SLIDES_AUTO = SLIDES / "auto"
 HAND_PD16_DECK = SLIDES / "CHAR_PD16_HAND.pptx"

@@ -1,14 +1,18 @@
 {
-  "last_synced": "2026-08-10",
+  "last_synced": "2026-08-11",
   "module": "541_grandchild_homophily_assign",
   "season": 2015,
   "empirical": {
     "season": 2015,
     "n_players": 6030,
+    "n_players_raw": 6030,
+    "n_players_dropped_for_roster_fit": 0,
     "n_teams_empirical": 635,
     "perf": "PPM z within season",
     "mean": 0.00036694947568937313,
-    "std": 0.9997041508768859
+    "std": 0.9997041508768859,
+    "roster_size": 15,
+    "n_teams_grandchild": 402
   },
   "n_teams": 402,
   "roster_size": 15,
@@ -44,6 +48,7 @@
   "outputs": {
     "summary_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/grandchild_assign/GRANDCHILD_rho_sweep_summary.csv",
     "png_d_h": "3-Master_Plan/re_entry/HEROs_and_PASSes/grandchild_assign/GRANDCHILD_rho_sweep_D_H.png",
+    "png_rho_vs_assortativity": "3-Master_Plan/re_entry/HEROs_and_PASSes/grandchild_assign/GRANDCHILD_rho_vs_assortativity.png",
     "png_centroid_sd": "3-Master_Plan/re_entry/HEROs_and_PASSes/grandchild_assign/GRANDCHILD_rho_sweep_centroid_sd.png",
     "png_examples": "3-Master_Plan/re_entry/HEROs_and_PASSes/grandchild_assign/GRANDCHILD_rho_sweep_example_centroids.png"
   },

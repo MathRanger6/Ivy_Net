@@ -3,19 +3,19 @@
 
 For each team-season, [min, max] of player PPM z on the roster defines a talent
 window. Coverage counts how many windows cover each point on the perf axis.
-Compare actual NCAA rosters to a disjoint sort-and-chop benchmark (537 B analog).
 
 Run (repo root):
   python sports/scripts/empirical_team_interval_overlap.py
+  python sports/scripts/empirical_team_interval_overlap.py --season-min 2015 --season-max 2019
 
 Outputs (HEROs_and_PASSes/empirical_pd17/):
-  EMPIRICAL_team_interval_overlap.png   — 2×2 CELL 8 figure (slide figure)
-  EMPIRICAL_team_interval_team_season.csv
-  EMPIRICAL_team_interval_overlap_meta.json
+  Full panel: EMPIRICAL_team_interval_overlap.{png,meta.json,...}
+  Window:     EMPIRICAL_team_interval_overlap_2015_2019.{png,meta.json,...}
 """
 
 from __future__ import annotations
 
+import argparse
 import json
 import sys
 from datetime import date
@@ -30,12 +30,8 @@ SCRIPTS = Path(__file__).resolve().parent
 SPORTS = REPO / "sports"
 sys.path.insert(0, str(SCRIPTS))
 
-from hero_gallery_paths import EMPIRICAL_PD17, ensure_hero_dirs
-
-OUT = EMPIRICAL_PD17
-PNG = OUT / "EMPIRICAL_team_interval_overlap.png"
-TEAM_CSV = OUT / "EMPIRICAL_team_interval_team_season.csv"
-META_JSON = OUT / "EMPIRICAL_team_interval_overlap_meta.json"
+from hero_gallery_paths import ensure_hero_dirs
+from interval_overlap_paths import empirical_overlap_paths
 
 TEAM_MIN_PLAYERS = 2
 N_INTERVAL_SAMPLE = 80
@@ -94,7 +90,7 @@ def _summary(name: str, values: np.ndarray) -> dict:
     }
 
 
-def _team_intervals(panel: pd.DataFrame) -> pd.DataFrame:
+def _team_intervals(panel: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
     work = panel.dropna(subset=["perf", "team_id", "season"]).copy()
     work["perf"] = pd.to_numeric(work["perf"], errors="coerce")
     work = work.dropna(subset=["perf", "team_id", "season"])
@@ -121,16 +117,32 @@ def _coverage_curve(lo: np.ndarray, hi: np.ndarray, grid: np.ndarray) -> np.ndar
     return cover
 
 
-def _disjoint_benchmark(work: pd.DataFrame, n_slices: int, grid: np.ndarray) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+def _disjoint_benchmark(work: pd.DataFrame, n_slices: int, grid: np.ndarray) -> np.ndarray:
     perf_sorted = np.sort(work["perf"].to_numpy(dtype=float))
     cuts = np.array_split(perf_sorted, n_slices)
     disjoint_lo = np.array([c.min() for c in cuts if len(c)])
     disjoint_hi = np.array([c.max() for c in cuts if len(c)])
-    cover_disjoint = _coverage_curve(disjoint_lo, disjoint_hi, grid)
-    return cover_disjoint, disjoint_lo, disjoint_hi
+    return _coverage_curve(disjoint_lo, disjoint_hi, grid)
 
 
-def build_figure(iv: pd.DataFrame, work: pd.DataFrame) -> dict:
+def _coverage_stats(cover: np.ndarray, n_units: int) -> dict:
+    cov_max = int(cover.max())
+    return {
+        "coverage_max": cov_max,
+        "coverage_max_normalized": float(cov_max / n_units) if n_units else None,
+        "coverage_mean": float(cover.mean()),
+        "coverage_frac_gt_1": float((cover > 1).mean()),
+    }
+
+
+def build_figure(
+    iv: pd.DataFrame,
+    work: pd.DataFrame,
+    *,
+    png_path: Path,
+    seasons: str,
+    h_sort: float | None = None,
+) -> dict:
     from gallery_mathtext import configure_matplotlib_mathtext
 
     configure_matplotlib_mathtext()
@@ -139,7 +151,8 @@ def build_figure(iv: pd.DataFrame, work: pd.DataFrame) -> dict:
     lo = iv["A_hat_min"].to_numpy(dtype=float)
     hi = iv["A_hat_max"].to_numpy(dtype=float)
     cover = _coverage_curve(lo, hi, grid)
-    cover_disjoint, _, _ = _disjoint_benchmark(work, len(iv), grid)
+    cover_disjoint = _disjoint_benchmark(work, len(iv), grid)
+    cov_stats = _coverage_stats(cover, len(iv))
 
     iv_plot = iv.sort_values("T_j_hat").reset_index(drop=True)
     step = max(1, len(iv_plot) // N_INTERVAL_SAMPLE)
@@ -162,11 +175,11 @@ def build_figure(iv: pd.DataFrame, work: pd.DataFrame) -> dict:
     ax.set_xlabel(xlab, fontsize=10)
     ax.set_ylabel("Team-seasons covering this level", fontsize=10)
     ax.set_title("Interval overlap along talent spectrum", fontsize=11, pad=8)
-    frac_gt1 = float((cover > 1).mean())
     ax.text(
         0.02,
         0.98,
-        rf"max coverage = {cover.max():,}  |  {frac_gt1:.1%} of grid with $>$1 team",
+        rf"max coverage = {cov_stats['coverage_max']:,}  |  "
+        rf"{cov_stats['coverage_frac_gt_1']:.1%} of grid with $>$1 team",
         transform=ax.transAxes,
         va="top",
         ha="left",
@@ -221,62 +234,111 @@ def build_figure(iv: pd.DataFrame, work: pd.DataFrame) -> dict:
     )
 
     fig.suptitle(
-        "Do team talent windows overlap on real rosters?\n"
-        "530 CELL 8 forensics — empirical $\\rho$ diagnostic (PD17)",
+        rf"Empirical NCAA — team talent window overlap (MBB {seasons})"
+        + (
+            rf"\nRealized sorting $H_{{sort}}={h_sort:.3f}$ on this partition"
+            if h_sort is not None and np.isfinite(h_sort)
+            else ""
+        ),
         fontsize=12,
         y=0.98,
     )
     fig.subplots_adjust(left=0.08, right=0.96, top=0.90, bottom=0.08, hspace=0.38, wspace=0.28)
-    fig.savefig(PNG, dpi=150, bbox_inches="tight")
+    png_path.parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(png_path, dpi=150, bbox_inches="tight")
     plt.close(fig)
-    print(f"Wrote {PNG}")
+    print(f"Wrote {png_path}")
 
     return {
-        "coverage_max": int(cover.max()),
-        "coverage_mean": float(cover.mean()),
-        "coverage_frac_gt_1": frac_gt1,
+        **cov_stats,
         "coverage_disjoint_max": int(cover_disjoint.max()),
         "coverage_disjoint_mean": float(cover_disjoint.mean()),
         "n_team_seasons": int(len(iv)),
         "n_player_seasons": int(len(work)),
+        "H_sort": float(h_sort) if h_sort is not None else None,
         "perf_span": span_stats,
         "T_j_hat": _summary(r"\hat{T}_j", iv["T_j_hat"].to_numpy(dtype=float)),
     }
 
 
-def main() -> None:
-    ensure_hero_dirs()
-    panel = _prepare_panel()
-    iv, work = _team_intervals(panel)
-    iv.to_csv(TEAM_CSV, index=False)
-    print(f"Wrote {TEAM_CSV}")
+def _compute_H_sort(work: pd.DataFrame) -> float:
+    sys.path.insert(0, str(SPORTS))
+    import importlib
 
-    stats = build_figure(iv, work)
+    gc = importlib.import_module("541_grandchild_homophily_assign")
+    use = work.dropna(subset=["perf"]).copy()
+    use["pool_id"] = use.groupby(["team_id", "season"], observed=True).ngroup()
+    return float(
+        gc.realized_sorting_index_H_sort(
+            use["perf"].to_numpy(dtype=float),
+            use["pool_id"].to_numpy(dtype=np.int64),
+        )
+    )
+
+
+def run_diagnostic(*, season_min: int | None = None, season_max: int | None = None) -> dict:
+    paths = empirical_overlap_paths(season_min=season_min, season_max=season_max)
+    panel = _prepare_panel()
+    if season_min is not None and season_max is not None:
+        panel = panel.loc[
+            (panel["season"] >= season_min) & (panel["season"] <= season_max)
+        ].copy()
+
+    iv, work = _team_intervals(panel)
+    paths["csv"].parent.mkdir(parents=True, exist_ok=True)
+    iv.to_csv(paths["csv"], index=False)
+    print(f"Wrote {paths['csv']}")
+
+    h_sort = _compute_H_sort(work)
+    stats = build_figure(
+        iv,
+        work,
+        png_path=paths["png"],
+        seasons=paths["seasons"],
+        h_sort=h_sort,
+    )
 
     meta = {
         "diagnostic": "empirical_team_interval_overlap",
         "date": date.today().isoformat(),
         "source": "MBB player-season panel (530 pipeline / hero filters)",
-        "seasons": "2011-2021",
+        "seasons": paths["seasons"],
+        "season_min": season_min,
+        "season_max": season_max,
+        "compare_window": season_min is not None,
         "perf": "PPM z within season",
         "team_min_players": TEAM_MIN_PLAYERS,
         "coverage_grid_points": COVERAGE_GRID_POINTS,
         "n_interval_sample": N_INTERVAL_SAMPLE,
         "530_analog": "530_sports_pipeline.ipynb CELL 8",
-        "sim_analog": "538 CELL 10 Plot A (tier1_cell10_playground_run.py)",
         **stats,
         "outputs": {
-            "png": PNG.name,
-            "team_csv": TEAM_CSV.name,
+            "png": paths["png"].name,
+            "team_csv": paths["csv"].name,
         },
     }
-    META_JSON.write_text(json.dumps(meta, indent=2) + "\n", encoding="utf-8")
-    print(f"Wrote {META_JSON}")
+    paths["meta"].write_text(json.dumps(meta, indent=2) + "\n", encoding="utf-8")
+    print(f"Wrote {paths['meta']}")
     print(
-        f"Team-seasons: {stats['n_team_seasons']:,}  |  "
+        f"Seasons {paths['seasons']}  |  team-seasons: {stats['n_team_seasons']:,}  |  "
         f"max coverage: {stats['coverage_max']:,}  |  "
-        f"disjoint max: {stats['coverage_disjoint_max']}"
+        f"norm: {stats.get('coverage_max_normalized', 0):.3f}  |  "
+        f"H_sort: {h_sort:.3f}"
     )
+    return meta
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--season-min", type=int, default=None)
+    parser.add_argument("--season-max", type=int, default=None)
+    args = parser.parse_args()
+
+    if (args.season_min is None) ^ (args.season_max is None):
+        parser.error("--season-min and --season-max must be supplied together")
+
+    ensure_hero_dirs()
+    run_diagnostic(season_min=args.season_min, season_max=args.season_max)
     print("Done.")
 
 

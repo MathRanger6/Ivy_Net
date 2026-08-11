@@ -1,0 +1,204 @@
+{
+  "diagnostic": "grandchild_league_interval_overlap",
+  "date": "2026-08-11",
+  "assignment": {
+    "method": "grandchild",
+    "rho": 0.5,
+    "seed": 5412015,
+    "roster_size": 15,
+    "n_team_seasons": 2023,
+    "n_teams": null,
+    "n_players": 30345,
+    "sorting_index_h": 0.1455623155070941,
+    "H_sort": 0.1455623155070941,
+    "seasons": "2015-2019",
+    "season_min": 2015,
+    "season_max": 2019,
+    "season_runs": [
+      {
+        "season": 2015,
+        "n_players": 6030,
+        "n_teams": 402,
+        "H_sort": 0.14678167064575665,
+        "centroid_sd": 0.383007614853769,
+        "ability_source": {
+          "season": 2015,
+          "n_players": 6030,
+          "n_players_raw": 6030,
+          "n_players_dropped_for_roster_fit": 0,
+          "n_teams_empirical": 635,
+          "perf": "PPM z within season",
+          "mean": 0.00036694947568937313,
+          "std": 0.9997041508768859,
+          "roster_size": 15,
+          "n_teams_grandchild": 402
+        }
+      },
+      {
+        "season": 2016,
+        "n_players": 6000,
+        "n_teams": 400,
+        "H_sort": 0.16079704719668508,
+        "centroid_sd": 0.400604677332453,
+        "ability_source": {
+          "season": 2016,
+          "n_players": 6000,
+          "n_players_raw": 6010,
+          "n_players_dropped_for_roster_fit": 10,
+          "n_teams_empirical": 634,
+          "perf": "PPM z within season",
+          "mean": 0.0007989940646126949,
+          "std": 0.9990264370243589,
+          "roster_size": 15,
+          "n_teams_grandchild": 400
+        }
+      },
+      {
+        "season": 2017,
+        "n_players": 6090,
+        "n_teams": 406,
+        "H_sort": 0.13189157967367515,
+        "centroid_sd": 0.3624073069584059,
+        "ability_source": {
+          "season": 2017,
+          "n_players": 6090,
+          "n_players_raw": 6101,
+          "n_players_dropped_for_roster_fit": 11,
+          "n_teams_empirical": 634,
+          "perf": "PPM z within season",
+          "mean": 4.4301347471336624e-05,
+          "std": 0.9979031890631579,
+          "roster_size": 15,
+          "n_teams_grandchild": 406
+        }
+      },
+      {
+        "season": 2018,
+        "n_players": 6165,
+        "n_teams": 411,
+        "H_sort": 0.15208025837918293,
+        "centroid_sd": 0.38999113668586255,
+        "ability_source": {
+          "season": 2018,
+          "n_players": 6165,
+          "n_players_raw": 6169,
+          "n_players_dropped_for_roster_fit": 4,
+          "n_teams_empirical": 653,
+          "perf": "PPM z within season",
+          "mean": 8.484473813674658e-05,
+          "std": 1.000042175243427,
+          "roster_size": 15,
+          "n_teams_grandchild": 411
+        }
+      },
+      {
+        "season": 2019,
+        "n_players": 6060,
+        "n_teams": 404,
+        "H_sort": 0.13632136867945188,
+        "centroid_sd": 0.36877197074263196,
+        "ability_source": {
+          "season": 2019,
+          "n_players": 6060,
+          "n_players_raw": 6073,
+          "n_players_dropped_for_roster_fit": 13,
+          "n_teams_empirical": 644,
+          "perf": "PPM z within season",
+          "mean": 0.001293957441580128,
+          "std": 0.9987940242238854,
+          "roster_size": 15,
+          "n_teams_grandchild": 404
+        }
+      }
+    ]
+  },
+  "ability_source": {
+    "seasons": [
+      2015,
+      2016,
+      2017,
+      2018,
+      2019
+    ]
+  },
+  "ncaa_window_reference": {
+    "diagnostic": "empirical_team_interval_overlap",
+    "date": "2026-08-11",
+    "source": "MBB player-season panel (530 pipeline / hero filters)",
+    "seasons": "2015-2019",
+    "season_min": 2015,
+    "season_max": 2019,
+    "compare_window": true,
+    "perf": "PPM z within season",
+    "team_min_players": 2,
+    "coverage_grid_points": 400,
+    "n_interval_sample": 80,
+    "530_analog": "530_sports_pipeline.ipynb CELL 8",
+    "coverage_max": 3117,
+    "coverage_max_normalized": 0.9740625,
+    "coverage_mean": 813.9925,
+    "coverage_frac_gt_1": 0.8625,
+    "coverage_disjoint_max": 7,
+    "coverage_disjoint_mean": 0.96,
+    "n_team_seasons": 3200,
+    "n_player_seasons": 30383,
+    "H_sort": 0.10499562505936899,
+    "perf_span": {
+      "label": "perf_span",
+      "n": 3200,
+      "mean": 2.9857976652923512,
+      "std": 0.9918273512732674,
+      "min": 0.0,
+      "max": 11.677453472707114,
+      "median": 2.8535777359227454
+    },
+    "T_j_hat": {
+      "label": "\\hat{T}_j",
+      "n": 3200,
+      "mean": 0.014467968402421625,
+      "std": 0.3985416324107764,
+      "min": -2.2391392177783933,
+      "max": 2.7551839321296203,
+      "median": 0.0040171162243202736
+    },
+    "outputs": {
+      "png": "EMPIRICAL_team_interval_overlap_2015_2019.png",
+      "team_csv": "EMPIRICAL_team_interval_overlap_2015_2019_team_season.csv"
+    }
+  },
+  "coverage_grid_points": 400,
+  "n_interval_sample": 80,
+  "compare_window": true,
+  "coverage_max": 2020,
+  "coverage_max_normalized": 0.9985170538803757,
+  "coverage_mean": 580.7575,
+  "coverage_frac_gt_1": 0.8625,
+  "coverage_disjoint_max": 5,
+  "coverage_disjoint_mean": 0.9525,
+  "n_team_seasons": 2023,
+  "n_teams": null,
+  "n_players": 30345,
+  "H_sort": 0.1455623155070941,
+  "perf_span": {
+    "label": "perf_span",
+    "n": 2023,
+    "mean": 3.3696528942083512,
+    "std": 0.9418113224579863,
+    "min": 1.1165361420778124,
+    "max": 11.05015225309888,
+    "median": 3.2265422408460194
+  },
+  "T_j_hat": {
+    "label": "\\hat{T}_j",
+    "n": 2023,
+    "mean": 0.0005154363103895926,
+    "std": 0.38118140567740105,
+    "min": -1.1935075203482026,
+    "max": 1.410589173435971,
+    "median": -0.02087091801433578
+  },
+  "outputs": {
+    "png": "GRANDCHILD_league_interval_overlap_2015_2019.png",
+    "team_csv": "GRANDCHILD_league_interval_overlap_2015_2019_team_season.csv"
+  }
+}
