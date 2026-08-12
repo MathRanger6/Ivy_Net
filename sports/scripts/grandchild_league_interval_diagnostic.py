@@ -27,8 +27,8 @@ SPORTS = REPO / "sports"
 sys.path.insert(0, str(SPORTS))
 sys.path.insert(0, str(SCRIPTS))
 
-from hero_gallery_paths import ensure_hero_dirs
-from interval_overlap_paths import empirical_overlap_paths, grandchild_overlap_paths
+from hero_gallery_paths import GRANDCHILD_ASSIGN, ensure_hero_dirs
+from interval_overlap_paths import empirical_overlap_paths, grandchild_overlap_paths, window_tag
 
 N_INTERVAL_SAMPLE = 80
 COVERAGE_GRID_POINTS = 400
@@ -116,6 +116,8 @@ def build_figure(
     rho: float,
     h_sort: float,
     multi_season: bool,
+    roster_label: str = r"$C=15$",
+    global_wss: float | None = None,
 ) -> dict:
     from gallery_mathtext import configure_matplotlib_mathtext
 
@@ -144,7 +146,7 @@ def build_figure(
         step="mid",
         alpha=0.35,
         color=BAR_COLOR,
-        label=rf"Grandchild rosters ($\rho={rho:g}$)",
+        label=rf"LG rosters ($\rho={rho:g}$)",
     )
     ax.plot(
         grid,
@@ -217,8 +219,10 @@ def build_figure(
     )
 
     fig.suptitle(
-        rf"Grandchild ASSIGN — team talent window overlap (MBB {seasons}, $\rho={rho:g}$, $C=15$)"
-        + rf"\nRealized sorting $H_{{sort}}={h_sort:.3f}$ on this partition",
+        rf"LG ASSIGN — team talent window overlap (MBB {seasons}, $\rho={rho:g}$, {roster_label})"
+        + rf"\nRealized sorting $H_{{sort}}={h_sort:.3f}$"
+        + (rf", global\_wss={global_wss:,.0f}" if global_wss is not None else "")
+        + " on this partition",
         fontsize=12,
         y=0.98,
     )
@@ -236,9 +240,42 @@ def build_figure(
         "n_teams": int(len(iv)) if not multi_season else None,
         "n_players": int(len(work)),
         "H_sort": float(h_sort),
+        "global_wss": float(global_wss) if global_wss is not None else None,
         "perf_span": span_stats,
         "T_j_hat": _summary(r"\hat{T}_j", iv["T_j_hat"].to_numpy(dtype=float)),
     }
+
+
+def _run_one_season_empirical_caps(
+    gc,
+    *,
+    season: int,
+    rho: float,
+    seed: int,
+    team_season_offset: int,
+) -> tuple[pd.DataFrame, pd.DataFrame, dict]:
+    ability, caps, emp_meta = gc.load_empirical_roster_caps_season(int(season))
+    rng = np.random.default_rng(int(seed) + int(season))
+    res = gc.run_one_realization(
+        ability, None, float(rho), roster_caps=caps, rng=rng
+    )
+    iv, work = _team_intervals(
+        res.ability,
+        res.pool_id,
+        season=season,
+        team_season_offset=team_season_offset,
+    )
+    season_info = {
+        "season": int(season),
+        "n_players": int(len(ability)),
+        "n_teams": int(len(iv)),
+        "H_sort": float(res.sorting_index_h),
+        "global_wss": float(res.global_wss),
+        "centroid_sd": float(res.centroid_sd),
+        "roster_mode": "empirical_caps",
+        "ability_source": emp_meta,
+    }
+    return iv, work, season_info
 
 
 def _run_one_season(
@@ -297,12 +334,21 @@ def run_diagnostic(
     rho: float = DEFAULT_RHO,
     seed: int = DEFAULT_SEED,
     legacy_single: bool = False,
+    empirical_roster_caps: bool = False,
 ) -> dict:
     paths = grandchild_overlap_paths(
         season_min=season_min,
         season_max=season_max,
         single_season_legacy=legacy_single and season_min == season_max,
     )
+    if empirical_roster_caps:
+        tag = window_tag(season_min, season_max) if season_max > season_min else str(season_min)
+        paths = {
+            **paths,
+            "png": GRANDCHILD_ASSIGN / f"GRANDCHILD_league_interval_empirical_caps_{tag}.png",
+            "csv": GRANDCHILD_ASSIGN / f"GRANDCHILD_league_interval_empirical_caps_{tag}_team_season.csv",
+            "meta": GRANDCHILD_ASSIGN / f"GRANDCHILD_league_interval_empirical_caps_{tag}_meta.json",
+        }
     multi_season = season_max > season_min or (not legacy_single and season_min != season_max)
 
     gc = importlib.import_module("541_grandchild_homophily_assign")
@@ -314,24 +360,51 @@ def run_diagnostic(
     season_runs: list[dict] = []
     offset = 0
 
+    from diagnostic_progress import SeasonProgress
+
+    mode = "empirical caps" if empirical_roster_caps else f"C={c}"
+    prog = SeasonProgress(f"Interval overlap ({mode})", season_min, season_max)
+    prog.header()
+
     for season in seasons:
-        iv, work, info = _run_one_season(
-            gc,
-            season=season,
-            rho=rho,
-            seed=seed,
-            c=c,
-            team_season_offset=offset,
-        )
+        if empirical_roster_caps:
+            iv, work, info = _run_one_season_empirical_caps(
+                gc,
+                season=season,
+                rho=rho,
+                seed=seed,
+                team_season_offset=offset,
+            )
+        else:
+            iv, work, info = _run_one_season(
+                gc,
+                season=season,
+                rho=rho,
+                seed=seed,
+                c=c,
+                team_season_offset=offset,
+            )
         iv_parts.append(iv)
         work_parts.append(work)
         season_runs.append(info)
         offset += len(iv)
-        print(f"  season {season}: J={len(iv)} teams, N={info['n_players']}, H_sort={info['H_sort']:.3f}")
+        prog.tick(
+            season,
+            f"J={len(iv)} N={info['n_players']} H_sort={info['H_sort']:.3f}",
+        )
 
+    prog.finish()
+    print("Building figure ...", flush=True)
     iv_all = pd.concat(iv_parts, ignore_index=True)
     work_all = pd.concat(work_parts, ignore_index=True)
     h_sort = _compute_h_sort(work_all, gc) if multi_season else float(season_runs[0]["H_sort"])
+    global_wss = float(
+        gc.global_wss(
+            work_all["perf"].to_numpy(dtype=float),
+            work_all["team_season_id"].to_numpy(dtype=np.int64),
+        )
+    )
+    roster_label = r"empirical caps" if empirical_roster_caps else r"$C=15$"
 
     paths["csv"].parent.mkdir(parents=True, exist_ok=True)
     iv_all.to_csv(paths["csv"], index=False)
@@ -345,6 +418,8 @@ def run_diagnostic(
         rho=float(rho),
         h_sort=float(h_sort),
         multi_season=multi_season or len(seasons) > 1,
+        roster_label=roster_label,
+        global_wss=global_wss,
     )
 
     ncaa_ref = _load_ncaa_window_ref(season_min, season_max) if len(seasons) > 1 or not legacy_single else {}
@@ -353,12 +428,14 @@ def run_diagnostic(
         "method": "grandchild",
         "rho": float(rho),
         "seed": int(seed),
-        "roster_size": c,
+        "roster_size": None if empirical_roster_caps else c,
+        "roster_mode": "empirical_caps" if empirical_roster_caps else "fixed_c15",
         "n_team_seasons": int(len(iv_all)) if multi_season or len(seasons) > 1 else None,
         "n_teams": int(len(iv_all)) if len(seasons) == 1 else None,
         "n_players": int(len(work_all)),
         "sorting_index_h": float(h_sort),
         "H_sort": float(h_sort),
+        "global_wss": global_wss,
         "seasons": paths["seasons"],
         "season_min": int(season_min),
         "season_max": int(season_max),
@@ -401,6 +478,11 @@ def main() -> None:
     parser.add_argument("--season", type=int, default=None, help="Legacy single-season run (2015 default)")
     parser.add_argument("--season-min", type=int, default=None)
     parser.add_argument("--season-max", type=int, default=None)
+    parser.add_argument(
+        "--empirical-roster-caps",
+        action="store_true",
+        help="Use exact NCAA filtered roster-size multiset per season (Alex Aug 2026)",
+    )
     args = parser.parse_args()
 
     if args.season_min is not None or args.season_max is not None:
@@ -419,6 +501,7 @@ def main() -> None:
         rho=float(args.rho),
         seed=int(args.seed),
         legacy_single=legacy_single,
+        empirical_roster_caps=bool(args.empirical_roster_caps),
     )
     print("Done.")
 

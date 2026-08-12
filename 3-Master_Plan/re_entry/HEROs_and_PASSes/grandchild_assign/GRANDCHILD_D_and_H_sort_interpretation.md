@@ -1,14 +1,64 @@
-# Grandchild diagnostics — D and H_sort (slide / Alex brief notes)
+# LG diagnostics — D, global_wss, and H_sort (slide / Alex brief notes)
 
-**Use when interpreting:** `GRANDCHILD_rho_sweep_D_H.png`, `GRANDCHILD_rho_vs_assortativity.png`, interval-overlap slides, HAND17 Grandchild panels.
+**Use when interpreting:** `GRANDCHILD_rho_sweep_D_H.png`, `GRANDCHILD_rho_vs_assortativity.png`, `GRANDCHILD_rho_vs_global_wss.png`, interval-overlap slides, HAND17 LG panels.
 
 **Acronym style:** first use in prose = **Full Term (ACR)** — e.g. Sum of Squares (SS), Mean Squared Error (MSE).
 
 **VECTOR lock:** **ρ** = generative ASSIGN homophily knob. **H_sort** = realized sorting on a fixed partition (diagnostic). Score ≠ select; ASSIGN ≠ SCORE.
 
+**Alex-facing name:** **LG** (Levine–Gates sim) on slides; repo paths and code still use `grandchild_*`.
+
 ---
 
-## 1. Within-team Mean Squared Error (MSE) **D**
+## 1. Partition — the binding object
+
+Everything in this memo — **D**, **global_wss**, **H_sort** — is computed on a **fixed roster partition**: who is on which team, for a given player pool.
+
+### Definition
+
+Take all players in a league season with abilities \(\hat{A}_1, \ldots, \hat{A}_N\). A **partition** assigns every player to exactly one team:
+
+\[
+g(i) \in \{1, 2, \ldots, J\}
+\]
+
+For each team \(j\), the **realized roster mean** (final centroid after ASSIGN) is:
+
+\[
+\mu_j = \hat{T}_j = \frac{1}{|j|}\sum_{i \in j} \hat{A}_i
+\]
+
+Same **player pool** (same \(\hat{A}_i\)), different **team labels** → different partitions → different D, global_wss, and H_sort.
+
+### Examples in this project
+
+| Partition | What it is |
+|-----------|------------|
+| **NCAA empirical** | Real `(team_id, season)` rosters — who actually played together |
+| **LG sim (one ρ realization)** | Stub teams after ASSIGN — one realization per season in panel runs |
+| **Disjoint sort-and-chop** | Benchmark — sort all players by ability, chop into equal-\(n\) slices |
+
+### Why partition matters (VECTOR lock)
+
+These statistics do **not** ask “how homophilic was the assignment process?” They ask:
+
+> **On this fixed roster layout, how sorted are abilities across teams?**
+
+| Object | Layer | Role |
+|--------|-------|------|
+| **ρ** | ASSIGN (generative) | Knob in \(\exp(-\rho|\hat{A}_i - \mu_j|)\) — *builds* rosters |
+| **H_sort**, **global_wss**, **D** | Diagnostic (outcome) | Measured *after* assign on whatever partition you got |
+
+You can hold ρ fixed and still compare NCAA vs LG partitions — same formulas, two layouts, two readouts.
+
+**Do not say:** “H_sort is ρ” or “we set assortativity to 0.15.”  
+**Do say:** “At ρ = 0.5, realized H_sort ≈ 0.15 on this assign realization.”
+
+**Score ≠ select:** H_sort / global_wss / D characterize **roster geometry** (ASSIGN layer). They do not, by themselves, fix Hero inverted-U on SELECT — that lives in SCORE (\(\lambda\)) and SELECT.
+
+---
+
+## 2. Within-team Mean Squared Error (MSE) **D**
 
 ### What D is measuring
 
@@ -43,18 +93,21 @@ Even at maximum homophily, D stays around **0.68**, not zero. That’s normal:
 3. **μ is the team mean** — D is variance *around* that mean; sorted groups of 15 still have internal spread.
 4. **Abilities are fixed** — ρ only reshuffles the same player pool; it doesn’t clone talents.
 
-### D vs H_sort
+### D vs H_sort vs global_wss
 
 | Quantity | Question it answers |
 |----------|---------------------|
-| **D** | Within-team tightness (how homogeneous is each roster?) |
-| **H_sort** | Between-team separation / realized assortativity (how much does team label explain ability?) |
+| **D** | Within-team tightness per player (typical squared gap from team mean) |
+| **global_wss** | Total within-team squared deviation on the partition (raw sum) |
+| **H_sort** | How much team labels explain ability spread vs league mean (scale-free) |
 
-Both respond to ρ in the Grandchild sweep, but they are **different diagnostics**.
+All three use the same per-player squared gaps \((\hat{A}_i - \mu_{g(i)})^2\) on the **same partition**. D and global_wss always move together; H_sort is their normalized complement (see §3).
+
+Both D and H_sort respond to ρ in the LG sweep, but they are **different diagnostics**.
 
 ---
 
-## 2. **H_sort** in plain words
+## 3. **H_sort** in plain words
 
 ### Equation
 
@@ -69,6 +122,14 @@ H_{\text{sort}} = 1 - \frac{\sum_i \left(\hat{A}_i - \mu_{g(i)}\right)^2}{\sum_i
 3. **Fraction (within-team SS ÷ total SS):** What share of total “spread” is **within teams**?
 4. **H_sort = 1 minus that fraction:** How much of the league’s talent dispersion is **accounted for by team membership** — i.e. how sorted the partition is. (Same object as an explained-variance / Analysis of Variance (ANOVA)-style \(R^2\) on team labels.)
 
+Equivalently:
+
+\[
+H_{\text{sort}} = 1 - \frac{\mathrm{global\_wss}}{\mathrm{SS}_{\text{total}}}
+\]
+
+where **global_wss** is exactly the numerator (within-team SS sum) and \(\mathrm{SS}_{\text{total}} = \sum_i (\hat{A}_i - \bar{A})^2\).
+
 **One-sentence version for Alex:**
 
 > If I tell you which roster a player is on, how much of their deviation from the league average is explained by that roster’s mean? — 0 = none, 1 = completely.
@@ -80,25 +141,76 @@ H_{\text{sort}} = 1 - \frac{\sum_i \left(\hat{A}_i - \mu_{g(i)}\right)^2}{\sum_i
 | **≈ 0** | Teams look like random draws from the pool — knowing your team doesn’t explain much about your ability vs the league average. |
 | **≈ 1** | Teams are perfectly separated — everyone on a team is essentially at the same ability (each team is a point mass). |
 
-### ρ sweep (assortativity validation slide)
+### global_wss — same numerator, raw units
 
-`GRANDCHILD_rho_vs_assortativity.png` — ρ on x-axis, mean **H_sort** on y-axis (30 reps per ρ, 2015 PPM z).
+**global_wss** (global within-team sum of squares) is the code name for the H_sort numerator:
 
-Illustrative endpoints: \(H_{\text{sort}}(0) \approx 0.07 \to H_{\text{sort}}(1) \approx 0.32\).
+\[
+\mathrm{global\_wss} = \sum_{i=1}^{N} \left(\hat{A}_i - \mu_{g(i)}\right)^2
+\]
 
-**Alex story:** turning up ASSIGN homophily ρ raises **realized assortativity** H_sort on the assigned partition.
+Implemented in `541_grandchild_homophily_assign.global_wss()`; same \(\mu_j = \hat{T}_j\) as in H_sort.
+
+| | global_wss | H_sort |
+|---|------------|--------|
+| **Formula role** | Numerator (within-team SS) | \(1 - \mathrm{global\_wss}/\mathrm{SS}_{\text{total}}\) |
+| **Scale** | Grows with \(N\) and ability variance | Bounded \([0, 1]\) |
+| **Compare across \(N\)?** | Hard — more players → larger sum | Easier — normalized by pool spread |
+| **Intuition** | Raw “how much within-roster squared deviation” | “How sorted is this layout?” |
+
+**Why both exist:** On a fixed ability pool, global_wss and H_sort carry the same sorting story — ρ↑ tightens rosters → global_wss↓ → H_sort↑. H_sort is the Alex-facing assortativity index; global_wss is the monotone mirror in raw units (`GRANDCHILD_rho_vs_global_wss.png`).
+
+### D, global_wss, and H_sort — three views of one partition
+
+Fix one partition. Every player contributes the same squared gap \((\hat{A}_i - \mu_{g(i)})^2\):
+
+\[
+D = \frac{1}{N}\sum_i (\hat{A}_i - \mu_{g(i)})^2 = \frac{\mathrm{global\_wss}}{N}
+\]
+
+\[
+\mathrm{global\_wss} = N \cdot D
+\]
+
+\[
+H_{\text{sort}} = 1 - \frac{\mathrm{global\_wss}}{\mathrm{SS}_{\text{total}}}
+\]
+
+- **D** — per-player average within-team MSE (“typical” roster tightness).
+- **global_wss** — total within-team SS (sum over all players).
+- **H_sort** — share of total pool spread **explained** by team labels (complement of within-team share).
+
+If you only add players without changing roster structure, global_wss grows but D and H_sort can stay comparable; that is why H_sort and D are usually easier to compare across runs than raw global_wss alone.
+
+### ρ sweep — H_sort validation and global_wss mirror
+
+**H_sort slide:** `GRANDCHILD_rho_vs_assortativity.png` — ρ on x-axis, mean **H_sort** on y-axis (30 reps per ρ, 2015 PPM z).
+
+**global_wss slide:** `GRANDCHILD_rho_vs_global_wss.png` — same sweep, y-axis = mean **global_wss** (monotone **decrease** in ρ).
+
+Illustrative H_sort endpoints: \(H_{\text{sort}}(0) \approx 0.07 \to H_{\text{sort}}(1) \approx 0.32\).
+
+**Why the plots mirror:** Same 2015 ability pool every rep → \(\mathrm{SS}_{\text{total}}\) is fixed. Only ρ (hence the partition) changes. So:
+
+1. ρ↑ → similar players cluster on the same roster  
+2. Each \(\mu_{g(i)}\) sits closer to \(\hat{A}_i\)  
+3. **global_wss ↓** (numerator shrinks)  
+4. **H_sort ↑** (less total spread left “within” teams)
+
+**Alex story:** turning up ASSIGN homophily ρ raises **realized assortativity** H_sort on the assigned partition — and lowers global_wss on the same realizations.
 
 **Do not say:** “H_sort is ρ” or “we set assortativity to 0.15.” Say: “At ρ = 0.5, realized H_sort ≈ 0.15 on this assign realization.”
 
 ---
 
-## 3. Where H_sort appears in slides (inventory)
+## 4. Where H_sort and global_wss appear in slides (inventory)
 
 | Where | Role |
 |-------|------|
 | **`slides/auto/CHAR_grandchild_h_sort_explainer_AUTO.pptx`** | **Dedicated H_sort definition** (glossary reference — start here for Alex) |
-| **`slides/auto/CHAR_grandchild_rho_assortativity_AUTO.pptx`** | ρ vs H_sort validation plot + bullets |
-| Interval overlap AUTO slides (empirical + Grandchild) | Formula bullet + numeric readout on each partition |
+| **`slides/auto/CHAR_grandchild_rho_global_wss_AUTO.pptx`** | **Alex primary** — ρ vs global_wss (within-team SS numerator) |
+| **`slides/auto/CHAR_grandchild_rho_assortativity_AUTO.pptx`** | **Companion** — ρ vs H_sort (scale-free mirror, same sweep) |
+| Interval overlap AUTO slides (empirical + LG) | Formula bullet + numeric H_sort readout on each partition |
 | **`GRANDCHILD_D_and_H_sort_interpretation.md`** | Full memo (this file) |
 | HAND17 slide 1 glossary | **ρ** as “assignment assortativity” — does **not** define H_sort |
 
@@ -106,11 +218,11 @@ There was no standalone H_sort explainer before the AUTO glossary slide above; o
 
 ---
 
-## 4. Is H_sort a good assortativity measure for teams?
+## 5. Is H_sort a good assortativity measure for teams?
 
 ### For this project: yes — with precise wording
 
-**H_sort** is an **explained-variance** index on a **fixed roster partition** (same object as **H** in the Grandchild spec):
+**H_sort** is an **explained-variance** index on a **fixed roster partition** (same object as **H** in the LG spec):
 
 \[
 H_{\text{sort}} = 1 - \frac{\text{within-team Sum of Squares (SS)}}{\text{total Sum of Squares (SS) around } \bar{A}}
@@ -128,14 +240,14 @@ That is the right **outcome** measure to pair with generative homophily **ρ** (
 ### Why it works here
 
 1. **VECTOR lock** — ρ is the ASSIGN knob; H_sort is measured **after** assign on that partition.
-2. **Mechanism validation** — ρ sweep: H_sort rises monotonically (≈ 0.07 at ρ = 0 → ≈ 0.32 at ρ = 1 on 2015 Grandchild league).
-3. **Same player pool** — Compare NCAA vs Grandchild partitions on fixed \(\hat{A}_i\).
+2. **Mechanism validation** — ρ sweep: H_sort rises monotonically (≈ 0.07 at ρ = 0 → ≈ 0.32 at ρ = 1 on 2015 LG league); global_wss falls on the same realizations.
+3. **Same player pool** — Compare NCAA vs LG partitions on fixed \(\hat{A}_i\).
 4. **Bounded [0, 1]** — Easy on slides and in conversation.
 
 ### Caveats (say aloud to Alex)
 
 1. **Not Newman’s network assortativity coefficient** \(r\) — partition explained variance on abilities, not a graph degree–degree correlation.
-2. **Partition-dependent** — NCAA team-seasons vs Grandchild J = N/C (402 vs 635 in 2015); compare **trends** and **overlap** diagnostics, not raw levels alone.
+2. **Partition-dependent** — NCAA team-seasons vs LG \(J = N/C\) (402 vs 635 in 2015); compare **trends** and **overlap** diagnostics, not raw levels alone.
 3. **Roster size** — With C = 15, even ρ = 1 will not push H_sort near 1.
 4. **Complements interval overlap** — Overlap = geometry of talent windows; H_sort = how much labels explain spread. Use both.
 
@@ -175,7 +287,8 @@ The analysis panel keeps only player-seasons with **≥20 total ESPN box minutes
 |------|------|
 | **H_sort glossary AUTO slide** | `slides/auto/CHAR_grandchild_h_sort_explainer_AUTO.pptx` |
 | ρ sweep figures | `grandchild_assign/GRANDCHILD_rho_*.png` |
-| ρ assortativity AUTO slide | `slides/auto/CHAR_grandchild_rho_assortativity_AUTO.pptx` |
+| ρ global_wss AUTO slide (Alex primary) | `slides/auto/CHAR_grandchild_rho_global_wss_AUTO.pptx` |
+| ρ assortativity AUTO slide (H_sort companion) | `slides/auto/CHAR_grandchild_rho_assortativity_AUTO.pptx` |
 | Method note | `sports/documents/541_grandchild_homophily_assign_README.md` |
 | Regenerate H_sort explainer | `python sports/scripts/build_grandchild_h_sort_explainer_slide.py` |
-| Regenerate ρ vs H_sort slide | `python sports/scripts/build_grandchild_rho_assortativity_slide.py` |
+| Regenerate both ρ validation AUTO decks | `python sports/scripts/build_pd17_rho_validation_slides.py --slides-only` |

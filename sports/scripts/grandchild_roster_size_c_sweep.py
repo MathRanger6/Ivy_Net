@@ -168,7 +168,7 @@ def _plot_selection_sweep(
         ax.set_ylim(0, min(1.0, ymax * 1.15))
 
     fig.suptitle(
-        rf"Grandchild SELECT — capacity $C$ sweep vs empirical (MBB {seasons}, $\rho={rho:g}$)",
+        rf"LG SELECT — capacity $C$ sweep vs empirical (MBB {seasons}, $\rho={rho:g}$)",
         fontsize=11,
         y=1.02,
     )
@@ -228,8 +228,12 @@ def main() -> None:
     frames_mean: dict[int, pd.DataFrame] = {}
     run_meta: list[dict] = []
 
+    from diagnostic_progress import StepProgress
+
+    sweep = StepProgress("C sweep", roster_sizes)
+    sweep.header()
     for i, c in enumerate(roster_sizes):
-        print(f"\n=== C={c} ===")
+        sweep.begin(f"C={c}")
         sim_team, season_runs = glc._sim_team_lc_panel(
             season_min=SEASON_MIN,
             season_max=SEASON_MAX,
@@ -279,6 +283,9 @@ def main() -> None:
             }
         )
 
+    sweep.finish()
+
+    print("\nWriting figures ...", flush=True)
     _plot_lc_sweep(
         emp_lc,
         lc_by_c,

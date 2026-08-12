@@ -1,0 +1,176 @@
+{
+  "diagnostic": "grandchild_lambda_select_sweep",
+  "date": "2026-08-12",
+  "seasons": "2011",
+  "season_min": 2011,
+  "season_max": 2011,
+  "rho": 0.5,
+  "gamma": 0.5,
+  "seed": 5412015,
+  "roster_mode": "empirical_caps_multiset",
+  "score": "loo_gap_plus_ability",
+  "lambda_values": [
+    0.0,
+    0.55,
+    1.0
+  ],
+  "empirical": {
+    "curvature_loo": {
+      "shape": "inverted_u_like",
+      "peak_bin": 14,
+      "peak_rate": 0.07849829351535836,
+      "left_rate": 0.013651877133105802,
+      "right_rate": 0.023972602739726026
+    },
+    "curvature_pool_mean": {
+      "shape": "inverted_u_like",
+      "peak_bin": 14,
+      "peak_rate": 0.08532423208191127,
+      "left_rate": 0.0,
+      "right_rate": 0.04452054794520548
+    }
+  },
+  "runs": [
+    {
+      "lambda": 0.0,
+      "score_mode": "loo_gap_plus_ability",
+      "loo_gap_weight": 0.0,
+      "n_players_pooled": 4680,
+      "curvature_loo": {
+        "shape": "monotone_increasing",
+        "peak_bin": 15,
+        "peak_rate": 0.07191780821917808,
+        "left_rate": 0.010238907849829351,
+        "right_rate": 0.07191780821917808
+      },
+      "curvature_pool_mean": {
+        "shape": "monotone_increasing",
+        "peak_bin": 15,
+        "peak_rate": 0.11301369863013698,
+        "left_rate": 0.0,
+        "right_rate": 0.11301369863013698
+      },
+      "season_runs_select": [
+        {
+          "season": 2011,
+          "n_total": 4680,
+          "n_drafted_empirical": 125,
+          "K": 125,
+          "K_over_N": 0.026709401709401708,
+          "theta_quantile": 0.9732905982905983,
+          "viability_theta": 2.0330546288624154,
+          "n_players": 4680,
+          "n_players_raw": 4680,
+          "n_players_dropped_for_roster_fit": 0,
+          "n_teams_empirical": 491,
+          "n_teams_grandchild": 491,
+          "roster_caps_mean": 9.531568228105906,
+          "roster_caps_median": 11.0,
+          "roster_caps_min": 2,
+          "roster_caps_max": 17,
+          "roster_mode": "empirical_caps",
+          "perf": "PPM z within season",
+          "mean": -0.0009808431100752715,
+          "std": 0.9989494992130663,
+          "n_players_sim": 4680,
+          "n_teams_sim": 491
+        }
+      ]
+    },
+    {
+      "lambda": 0.55,
+      "score_mode": "loo_gap_plus_ability",
+      "loo_gap_weight": 0.55,
+      "n_players_pooled": 4680,
+      "curvature_loo": {
+        "shape": "monotone_increasing",
+        "peak_bin": 15,
+        "peak_rate": 0.06164383561643835,
+        "left_rate": 0.017064846416382253,
+        "right_rate": 0.06164383561643835
+      },
+      "curvature_pool_mean": {
+        "shape": "monotone_increasing",
+        "peak_bin": 15,
+        "peak_rate": 0.11301369863013698,
+        "left_rate": 0.0034129692832764505,
+        "right_rate": 0.11301369863013698
+      },
+      "season_runs_select": [
+        {
+          "season": 2011,
+          "n_total": 4680,
+          "n_drafted_empirical": 125,
+          "K": 125,
+          "K_over_N": 0.026709401709401708,
+          "theta_quantile": 0.9732905982905983,
+          "viability_theta": 2.0330546288624154,
+          "n_players": 4680,
+          "n_players_raw": 4680,
+          "n_players_dropped_for_roster_fit": 0,
+          "n_teams_empirical": 491,
+          "n_teams_grandchild": 491,
+          "roster_caps_mean": 9.531568228105906,
+          "roster_caps_median": 11.0,
+          "roster_caps_min": 2,
+          "roster_caps_max": 17,
+          "roster_mode": "empirical_caps",
+          "perf": "PPM z within season",
+          "mean": -0.0009808431100752715,
+          "std": 0.9989494992130663,
+          "n_players_sim": 4680,
+          "n_teams_sim": 491
+        }
+      ]
+    },
+    {
+      "lambda": 1.0,
+      "score_mode": "loo_gap_plus_ability",
+      "loo_gap_weight": 1.0,
+      "n_players_pooled": 4680,
+      "curvature_loo": {
+        "shape": "inverted_u_like",
+        "peak_bin": 6,
+        "peak_rate": 0.05460750853242321,
+        "left_rate": 0.020477815699658702,
+        "right_rate": 0.030821917808219176
+      },
+      "curvature_pool_mean": {
+        "shape": "monotone_increasing",
+        "peak_bin": 15,
+        "peak_rate": 0.07534246575342465,
+        "left_rate": 0.0034129692832764505,
+        "right_rate": 0.07534246575342465
+      },
+      "season_runs_select": [
+        {
+          "season": 2011,
+          "n_total": 4680,
+          "n_drafted_empirical": 125,
+          "K": 125,
+          "K_over_N": 0.026709401709401708,
+          "theta_quantile": 0.9732905982905983,
+          "viability_theta": 2.0330546288624154,
+          "n_players": 4680,
+          "n_players_raw": 4680,
+          "n_players_dropped_for_roster_fit": 0,
+          "n_teams_empirical": 491,
+          "n_teams_grandchild": 491,
+          "roster_caps_mean": 9.531568228105906,
+          "roster_caps_median": 11.0,
+          "roster_caps_min": 2,
+          "roster_caps_max": 17,
+          "roster_mode": "empirical_caps",
+          "perf": "PPM z within season",
+          "mean": -0.0009808431100752715,
+          "std": 0.9989494992130663,
+          "n_players_sim": 4680,
+          "n_teams_sim": 491
+        }
+      ]
+    }
+  ],
+  "outputs": {
+    "selection_png": "GRANDCHILD_lambda_select_sweep_2011_2011.png"
+  }
+}

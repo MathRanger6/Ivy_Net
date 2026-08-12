@@ -35,7 +35,7 @@ def empirical_overlap_bullets(meta: dict, *, paired_compare: bool = False) -> li
             rf"median={span.get('median', 0):.2f} z ({n_ts:,} team-seasons)."
         )
     if paired_compare:
-        bullets.append(r"Paired compare window — match season span to Grandchild sim slide.")
+        bullets.append(r"Paired compare window — match season span to LG sim slide.")
     else:
         bullets.append(
             r"Full panel 2011–2021 — pooled team-seasons (not 1:1 with single-season sim)."
@@ -58,7 +58,7 @@ def grandchild_overlap_bullets(meta: dict, *, paired_compare: bool = False) -> l
     bullets = [
         r"Each team-season: talent window [\min \hat{A}_{i}, \max \hat{A}_{i}] on PPM z.",
         r"Coverage = how many roster windows cover a point (530 CELL 8).",
-        rf"Grandchild ASSIGN: \rho={rho:g}, endogenous \mu_j — no T_{{j^*}}.",
+        rf"LG ASSIGN: \rho={rho:g}, endogenous \mu_j — no T_{{j^*}}.",
         r"Red dashed: disjoint sort-and-chop on same player pool (537 B analog).",
         h_sort_definition_bullet(),
     ]

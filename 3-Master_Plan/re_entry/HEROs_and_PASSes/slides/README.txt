@@ -24,7 +24,7 @@ HAND MASTER files (scripts NEVER overwrite):
 JPEG exports (for agents / visual audit)
 ----------------------------------------------------------------------
   HAND16:  CHAR_PD16_HAND/Slide1.jpeg … Slide13.jpeg  (re-export after edits)
-  HAND17:  CHAR_PD17_HAND/Slide1.jpeg … Slide7.jpeg
+  HAND17:  CHAR_PD17_HAND/Slide1.png … SlideN.png  (re-export after edits)
 
   Legacy (pre-trim): HAND_slides_images/ (16 slides), old CHAR_PD16_HAND/Slide17.jpeg
 
@@ -107,32 +107,40 @@ PARKED — removed from CHAR_PD16_HAND (Aug 2026)
   PNGs still regenerate; reuse from archive if needed for appendix.
 
 ----------------------------------------------------------------------
-HAND17 — empirical MBB deck (7 slides)
+HAND17 — empirical MBB deck (expanded Aug 2026)
 ----------------------------------------------------------------------
   Source: CHAR_PD17_HAND.pptx
-  JPEG audit: CHAR_PD17_HAND/
+  PNG audit: CHAR_PD17_HAND/
 
-  | # | Block   | Content                              |
-  |---|---------|--------------------------------------|
-  | 1 | Frame   | PD17 glossary + deck map             |
-  | 2 | Assign  | Â_i, T_j inputs                      |
-  | 3 | Assign  | Team interval overlap (ρ) + **H_sort** empirical |
-  | 4 | Assign  | Grandchild sim interval overlap + **H_sort** (ρ=0.5) |
-  | 5 | Score   | Team L_C distribution                |
-  | 6 | Score   | Sketch A: T_j vs L_C                 |
-  | 7 | Assign  | Sim ρ calibration capstone (1×3)     |
+  Suggested Assign block (after interval pair slides 4–5):
+    • global_wss ρ validation (Alex primary) — paste from AUTO below
+    • H_sort glossary (Slide 6 in current deck) OR ρ vs H_sort companion
+    • Optional appendix: 539 ρ capstone (Slide 21)
 
-  Regenerate all interval reference slides (3 full + 4/5 window 2015-2019):
-    /opt/anaconda3/envs/sports_net/bin/python sports/scripts/rebuild_pd17_interval_reference_slides.py
+  Regenerate λ SELECT sweep (empirical caps held fixed):
+    python sports/scripts/grandchild_lambda_select_sweep.py
+    python sports/scripts/build_alex_lambda_select_sweep_light_slides.py
+
+  Regenerate ρ validation AUTO decks (global_wss + H_sort companion):
+    python sports/scripts/build_pd17_rho_validation_slides.py --slides-only
+
+  Regenerate interval reference slides (full + 2015-2019 window):
+    python sports/scripts/rebuild_pd17_interval_reference_slides.py
 
   Reference outputs → copy into HAND manually:
-    Slide 3 (full 2011-2021): auto/CHAR_empirical_team_interval_overlap_AUTO.pptx
-    Slide 4 (NCAA 2015-2019): auto/CHAR_empirical_team_interval_overlap_2015_2019_AUTO.pptx
-    Slide 5 (sim 2015-2019):  auto/CHAR_grandchild_league_interval_overlap_2015_2019_AUTO.pptx
+    Interval: auto/CHAR_empirical_team_interval_overlap_AUTO.pptx (full)
+              auto/CHAR_empirical_team_interval_overlap_2015_2019_AUTO.pptx
+              auto/CHAR_grandchild_league_interval_overlap_2015_2019_AUTO.pptx
+    ρ (Alex): auto/CHAR_grandchild_rho_global_wss_AUTO.pptx  ← primary
+              auto/CHAR_grandchild_rho_assortativity_AUTO.pptx  ← H_sort companion
+    Glossary: auto/CHAR_grandchild_h_sort_explainer_AUTO.pptx
 
-  HAND master: Change Picture + bullet numbers; keep Office Math you formatted by hand.
-  Full PD17 regen cheat sheet: ../empirical_pd17/REGENERATE.md
-  Planned: slide 8 — empirical Pass B λ on real MBB.
+  Figures: grandchild_assign/GRANDCHILD_rho_vs_global_wss.png
+           grandchild_assign/GRANDCHILD_rho_vs_assortativity.png
+           grandchild_assign/GRANDCHILD_lambda_select_sweep_2011_2021.png
+
+  HAND master: Change Picture + bullets; keep Office Math you formatted by hand.
+  Memo: ../grandchild_assign/GRANDCHILD_D_and_H_sort_interpretation.md
 
 ----------------------------------------------------------------------
 VECTOR ASSIGN decks (Aug 2026 — moved from VECTOR_work/)
@@ -164,9 +172,11 @@ Other files in slides/
   VECTOR_ASSIGN_Dynamic_to_OneShot_Model.pptx
   VECTOR_ASSIGN_Grandchild_Model.pptx
   CHAR_grandchild_league_analysis.pptx       Grandchild sim intervals (legacy 2015)
-  auto/CHAR_grandchild_rho_assortativity_AUTO.pptx   ρ vs H_sort (Alex validation)
+  auto/CHAR_grandchild_rho_global_wss_AUTO.pptx       ρ vs global_wss (Alex primary)
+  auto/CHAR_grandchild_rho_assortativity_AUTO.pptx   ρ vs H_sort (companion)
   auto/CHAR_grandchild_h_sort_explainer_AUTO.pptx    H_sort glossary (Alex brief)
-  auto/CHAR_grandchild_empirical_lc_compare_AUTO.pptx  Empirical vs sim team L_C (2011-2021)
+  auto/CHAR_grandchild_empirical_roster_caps_lc_AUTO.pptx  Empirical vs sim team L_C (2011-2021)
+  auto/CHAR_grandchild_lambda_select_sweep_AUTO.pptx     λ sweep on SELECT (empirical caps)
   auto/CHAR_grandchild_ncaa_roster_size_compare_AUTO.pptx  NCAA vs LG roster sizes fed in (2011-2021)
   auto/CHAR_hero_min_minutes_sensitivity_compare_AUTO.pptx  min_minutes ladder side-by-side (Alex)
   auto/CHAR_hero_min_minutes_sensitivity_overlay_AUTO.pptx  min_minutes ladder overlay (Alex)

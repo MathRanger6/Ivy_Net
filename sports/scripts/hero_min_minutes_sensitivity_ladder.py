@@ -289,18 +289,25 @@ def main() -> None:
 
     ensure_hero_dirs()
     results_with_df: list[dict] = []
+    from diagnostic_progress import StepProgress
+
+    sweep = StepProgress("min_minutes ladder", floors)
+    sweep.header()
     for mm in floors:
-        print(f"\n=== min_minutes={mm:g} ===")
+        sweep.begin(f"min_minutes={mm:g}")
         res = _run_floor(mm)
         png = _plot_single(res)
         print(
             f"  n={res['n_player_seasons']:,}  drafted={res['n_drafted']:,}  "
             f"mean roster={res['roster_summary']['mean_roster_n']:.1f}  "
-            f"shape={res['curvature']['shape']}  bin16={res['curvature']['bin16_rate'] * 100:.2f}%"
+            f"shape={res['curvature']['shape']}  bin16={res['curvature']['bin16_rate'] * 100:.2f}%",
+            flush=True,
         )
-        print(f"  Wrote {png.name}")
+        print(f"  Wrote {png.name}", flush=True)
         results_with_df.append({**res, "png_single": png.name})
+    sweep.finish()
 
+    print("\nWriting compare figures ...", flush=True)
     compare_png = _plot_compare(results_with_df)
     overlay_png = _plot_overlay(results_with_df)
 

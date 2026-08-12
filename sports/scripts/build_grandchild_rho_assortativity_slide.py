@@ -32,7 +32,7 @@ OUT_PPTX = SLIDES_AUTO / "CHAR_grandchild_rho_assortativity_AUTO.pptx"
 
 CLAIM = (
     "Claim (Alex): Higher ASSIGN homophily \\rho should raise realized assortativity — "
-    r"Grandchild one-shot league on 2015 PPM z shows monotonic H_{sort}(\rho)."
+    r"LG one-shot league on 2015 PPM z shows monotonic H_{sort}(\rho)."
 )
 
 
@@ -40,7 +40,7 @@ def _regenerate(*, quick: bool) -> None:
     cmd = [sys.executable, str(SWEEP_SCRIPT)]
     if quick:
         cmd.append("--quick")
-    print("Running Grandchild ρ sweep ...")
+    print("Running LG ρ sweep ...")
     subprocess.run(cmd, cwd=str(REPO), check=True)
 
 
@@ -48,8 +48,8 @@ def _readout_bullets(meta: dict) -> list[str]:
     import pandas as pd
 
     bullets = [
-        r"\rho = Grandchild ASSIGN homophily knob in \exp(-\rho|\hat{A}_i - \mu_j|).",
-        r"Each point: mean \pm 1 SD of H_{sort} over stochastic Grandchild realizations.",
+        r"\rho = LG ASSIGN homophily knob in \exp(-\rho|\hat{A}_i - \mu_j|).",
+        r"Each point: mean \pm 1 SD of H_{sort} over stochastic LG realizations.",
         h_sort_definition_bullet(),
         r"H_{sort} = realized assortativity on the assigned partition (0 none, 1 full).",
     ]
@@ -94,18 +94,19 @@ def main() -> None:
     rho_band = meta.get("rho_calibration_band", [0, 1])
 
     subtitle = (
-        rf"Grandchild ASSIGN · {season} PPM z · J={n_teams}, C=15 · "
+        rf"LG ASSIGN · {season} PPM z · J={n_teams}, C=15 · "
         rf"\rho \in [{rho_band[0]:g}, {rho_band[1]:g}] · {n_rep} reps/arm"
     )
 
     build_interval_overlap_slide(
         fig_path=FIG,
         out_pptx=OUT_PPTX,
-        title=r"Homophily $\rho$ vs realized assortativity $H_{sort}$ (Grandchild sim)",
+        title=r"Homophily $\rho$ vs realized assortativity $H_{sort}$ (LG sim)",
         subtitle=subtitle,
         bullets=_readout_bullets(meta),
         claim=CLAIM,
     )
+    print(f"Wrote {OUT_PPTX}")
 
 
 if __name__ == "__main__":

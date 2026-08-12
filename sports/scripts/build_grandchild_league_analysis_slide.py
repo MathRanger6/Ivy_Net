@@ -27,11 +27,11 @@ from pd17_interval_overlap_slide import build_interval_overlap_slide, load_meta
 DIAG_SCRIPT = SCRIPTS / "grandchild_league_interval_diagnostic.py"
 
 CLAIM_LEGACY = (
-    "Claim: Grandchild ASSIGN (endogenous centroids, no T_{j^*}) on 2015 PPM z — "
+    "Claim: LG ASSIGN (endogenous centroids, no T_{j^*}) on 2015 PPM z — "
     r"legacy single-season diagnostic."
 )
 CLAIM_WINDOW = (
-    "Claim: Grandchild ASSIGN on the same season window as paired NCAA slide — "
+    "Claim: LG ASSIGN on the same season window as paired NCAA slide — "
     r"one realization per season, stacked team-seasons."
 )
 
@@ -42,7 +42,7 @@ def _regenerate(*, season_min: int, season_max: int, rho: float, seed: int, lega
         cmd += ["--season", str(season_min)]
     else:
         cmd += ["--season-min", str(season_min), "--season-max", str(season_max)]
-    print("Regenerating Grandchild interval overlap figure ...")
+    print("Regenerating LG interval overlap figure ...")
     subprocess.run(cmd, cwd=str(REPO), check=True)
 
 
@@ -96,14 +96,14 @@ def main() -> None:
     h_sort = meta.get("H_sort") or assign.get("sorting_index_h")
 
     if paired and not legacy:
-        title = rf"Grandchild sim — team \hat{{A}}_{{i}} interval overlap ({seasons})"
+        title = rf"LG sim — team \hat{{A}}_{{i}} interval overlap ({seasons})"
         claim = CLAIM_WINDOW
     else:
-        title = r"Grandchild sim — team \hat{A}_{i} interval overlap (\rho diagnostic)"
+        title = r"LG sim — team \hat{A}_{i} interval overlap (\rho diagnostic)"
         claim = CLAIM_LEGACY
 
     sub_parts = [
-        rf"MBB {seasons} · Grandchild ASSIGN · \rho={rho:g} · C={c}",
+        rf"MBB {seasons} · LG ASSIGN · \rho={rho:g} · C={c}",
     ]
     if n_players and n_units:
         sub_parts.append(rf"N={n_players:,}, {n_units:,} team-seasons")

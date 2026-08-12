@@ -295,6 +295,10 @@ def _run_panel(
     seasons = list(range(int(season_min), int(season_max) + 1))
     parts: list[pd.DataFrame] = []
     season_runs: list[dict] = []
+    from diagnostic_progress import SeasonProgress
+
+    prog = SeasonProgress(f"SELECT sim C={c}", season_min, season_max)
+    prog.header()
     for season in seasons:
         players, info = _run_one_season(
             season=season,
@@ -310,11 +314,12 @@ def _run_panel(
         )
         parts.append(players)
         season_runs.append(info)
-        print(
-            f"  season {season}: N={info['n_players_sim']:,}  K={info['K']}  "
-            f"theta={info['viability_theta']:.3f}  selected={int(players['Y_selected'].sum())}"
+        prog.tick(
+            season,
+            f"N={info['n_players_sim']:,} K={info['K']} selected={int(players['Y_selected'].sum())}",
         )
 
+    prog.finish()
     pooled = pd.concat(parts, ignore_index=True)
     summ_loo = tge.inverted_u_bin_table(
         pooled, sel_template, assign_poolq_bin_labels=assign_poolq_bin_labels, tpa=tpa
@@ -368,7 +373,7 @@ def _plot_dual(
             color="darkorange",
             lw=2.0,
             ms=6,
-            label=rf"Grandchild sim ($\rho={rho:g}$)",
+            label=rf"LG sim ($\rho={rho:g}$)",
             zorder=3,
         )
         ax.fill_between(x, 0, y, alpha=0.10, color="darkorange")
@@ -387,7 +392,7 @@ def _plot_dual(
         ax.legend(fontsize=7, loc="upper left")
 
     fig.suptitle(
-        rf"Grandchild ASSIGN ($\rho={rho:g}$) → congestion SCORE → top-$K$ SELECT"
+        rf"LG ASSIGN ($\rho={rho:g}$) → congestion SCORE → top-$K$ SELECT"
         + title_suffix,
         fontsize=11,
         y=1.02,
@@ -441,7 +446,7 @@ def _plot_rho_sweep(
         ax.set_title(xlab, fontsize=10)
 
     fig.suptitle(
-        rf"Grandchild $\rho$ sweep vs empirical — MBB {seasons} (stacked player-seasons)",
+        rf"LG $\rho$ sweep vs empirical — MBB {seasons} (stacked player-seasons)",
         fontsize=11,
         y=1.02,
     )

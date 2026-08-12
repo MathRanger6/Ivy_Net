@@ -33,7 +33,7 @@ CLAIM_FULL = (
 )
 CLAIM_WINDOW = (
     "Claim: NCAA interval overlap on a fixed season window — "
-    r"paired compare to Grandchild ASSIGN sim on the same window."
+    r"paired compare to LG ASSIGN sim on the same window."
 )
 
 

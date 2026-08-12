@@ -1,6 +1,6 @@
 {
   "diagnostic": "grandchild_league_lc",
-  "date": "2026-08-11",
+  "date": "2026-08-12",
   "assignment": {
     "method": "grandchild",
     "rho": 0.5,
@@ -15,6 +15,8 @@
   "ability_source": {
     "season": 2015,
     "n_players": 6030,
+    "n_players_raw": 6030,
+    "n_players_dropped_for_roster_fit": 0,
     "n_teams_empirical": 635,
     "perf": "PPM z within season",
     "mean": 0.00036694947568937313,
@@ -24,7 +26,7 @@
   "theta_mode": "season_panel_k_over_n_quantile",
   "theta": 2.367248937838844,
   "gamma": 0.5,
-  "gamma_source": "CLI --gamma 0.5",
+  "gamma_source": "HAND17 slide-4 default (0.5); tier1 default is 10",
   "theta_K_over_N": {
     "n_accepted": 105,
     "n_total": 6030,

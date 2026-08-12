@@ -1,0 +1,437 @@
+{
+  "diagnostic": "grandchild_roster_size_c_sweep",
+  "date": "2026-08-12",
+  "seasons": "2011-2021",
+  "rho": 0.5,
+  "gamma": 0.5,
+  "seed": 5412015,
+  "roster_sizes": [
+    10,
+    11,
+    15
+  ],
+  "empirical": {
+    "n_player_seasons": 62180,
+    "n_drafted": 1134,
+    "n_team_seasons_lc": 6492,
+    "L_C": {
+      "label": "L_C",
+      "n": 6492,
+      "mean": 0.2540366597810298,
+      "std": 0.03868574775408655,
+      "min": 0.09390184595398701,
+      "max": 0.5543710199139684,
+      "median": 0.25036477360039194
+    },
+    "curvature_loo": {
+      "shape": "inverted_u_like",
+      "peak_bin": 11,
+      "peak_rate": 0.02624806999485332,
+      "left_rate": 0.0012863390789812194,
+      "right_rate": 0.011580030880082347
+    },
+    "curvature_pool_mean": {
+      "shape": "inverted_u_like",
+      "peak_bin": 13,
+      "peak_rate": 0.03679876479670612,
+      "left_rate": 0.0002572678157962439,
+      "right_rate": 0.023674729799279464
+    }
+  },
+  "runs": [
+    {
+      "roster_size": 10,
+      "n_players_pooled": 62150,
+      "n_teams_lc": 6215,
+      "n_teams_select": 6215,
+      "L_C": {
+        "label": "L_C",
+        "n": 6215,
+        "mean": 0.25141350967023546,
+        "std": 0.04211580744504156,
+        "min": 0.13579479457156754,
+        "max": 0.4643918898673691,
+        "median": 0.2474654657016341
+      },
+      "curvature_loo": {
+        "shape": "monotone_increasing",
+        "peak_bin": 15,
+        "peak_rate": 0.046343975283213185,
+        "left_rate": 0.007464607464607464,
+        "right_rate": 0.046343975283213185
+      },
+      "curvature_pool_mean": {
+        "shape": "monotone_increasing",
+        "peak_bin": 15,
+        "peak_rate": 0.08959835221421215,
+        "left_rate": 0.0010296010296010295,
+        "right_rate": 0.08959835221421215
+      },
+      "season_runs_lc": [
+        {
+          "season": 2011,
+          "n_teams": 468,
+          "n_players": 4680,
+          "H_sort": 0.20815672294561782,
+          "within_team_mse": 0.7901804869231902,
+          "n_players_raw": 4680,
+          "n_teams_grandchild": 468
+        },
+        {
+          "season": 2012,
+          "n_teams": 471,
+          "n_players": 4710,
+          "H_sort": 0.20542033634048806,
+          "within_team_mse": 0.7914311026064457,
+          "n_players_raw": 4716,
+          "n_teams_grandchild": 471
+        },
+        {
+          "season": 2013,
+          "n_teams": 490,
+          "n_players": 4900,
+          "H_sort": 0.21898710308219926,
+          "within_team_mse": 0.7753725325879411,
+          "n_players_raw": 4901,
+          "n_teams_grandchild": 490
+        },
+        {
+          "season": 2014,
+          "n_teams": 599,
+          "n_players": 5990,
+          "H_sort": 0.19814025878605324,
+          "within_team_mse": 0.7313414891708264,
+          "n_players_raw": 5998,
+          "n_teams_grandchild": 599
+        },
+        {
+          "season": 2015,
+          "n_teams": 603,
+          "n_players": 6030,
+          "H_sort": 0.20244777529258173,
+          "within_team_mse": 0.7970803842619008,
+          "n_players_raw": 6030,
+          "n_teams_grandchild": 603
+        },
+        {
+          "season": 2016,
+          "n_teams": 601,
+          "n_players": 6010,
+          "H_sort": 0.21318297561690247,
+          "within_team_mse": 0.785908728103336,
+          "n_players_raw": 6010,
+          "n_teams_grandchild": 601
+        },
+        {
+          "season": 2017,
+          "n_teams": 610,
+          "n_players": 6100,
+          "H_sort": 0.20223920620391944,
+          "within_team_mse": 0.7970644157265163,
+          "n_players_raw": 6101,
+          "n_teams_grandchild": 610
+        },
+        {
+          "season": 2018,
+          "n_teams": 616,
+          "n_players": 6160,
+          "H_sort": 0.1928649964971002,
+          "within_team_mse": 0.8065813211433669,
+          "n_players_raw": 6169,
+          "n_teams_grandchild": 616
+        },
+        {
+          "season": 2019,
+          "n_teams": 607,
+          "n_players": 6070,
+          "H_sort": 0.20601134506715657,
+          "within_team_mse": 0.7927053552507983,
+          "n_players_raw": 6073,
+          "n_teams_grandchild": 607
+        },
+        {
+          "season": 2020,
+          "n_teams": 608,
+          "n_players": 6080,
+          "H_sort": 0.20048331840971267,
+          "within_team_mse": 0.7979375151768865,
+          "n_players_raw": 6080,
+          "n_teams_grandchild": 608
+        },
+        {
+          "season": 2021,
+          "n_teams": 542,
+          "n_players": 5420,
+          "H_sort": 0.18893827160953847,
+          "within_team_mse": 0.8103460953440338,
+          "n_players_raw": 5422,
+          "n_teams_grandchild": 542
+        }
+      ]
+    },
+    {
+      "roster_size": 11,
+      "n_players_pooled": 62117,
+      "n_teams_lc": 5647,
+      "n_teams_select": 5647,
+      "L_C": {
+        "label": "L_C",
+        "n": 5647,
+        "mean": 0.2514095432703931,
+        "std": 0.03982120962542749,
+        "min": 0.141032257683227,
+        "max": 0.4620000286514644,
+        "median": 0.24792475432617628
+      },
+      "curvature_loo": {
+        "shape": "monotone_increasing",
+        "peak_bin": 15,
+        "peak_rate": 0.04070066975785677,
+        "left_rate": 0.008756116404841618,
+        "right_rate": 0.04070066975785677
+      },
+      "curvature_pool_mean": {
+        "shape": "monotone_increasing",
+        "peak_bin": 15,
+        "peak_rate": 0.08629572385368367,
+        "left_rate": 0.0005150656708730364,
+        "right_rate": 0.08629572385368367
+      },
+      "season_runs_lc": [
+        {
+          "season": 2011,
+          "n_teams": 425,
+          "n_players": 4675,
+          "H_sort": 0.171747740943045,
+          "within_team_mse": 0.824830948588689,
+          "n_players_raw": 4680,
+          "n_teams_grandchild": 425
+        },
+        {
+          "season": 2012,
+          "n_teams": 428,
+          "n_players": 4708,
+          "H_sort": 0.18790556399540193,
+          "within_team_mse": 0.8078897941743932,
+          "n_players_raw": 4716,
+          "n_teams_grandchild": 428
+        },
+        {
+          "season": 2013,
+          "n_teams": 445,
+          "n_players": 4895,
+          "H_sort": 0.19663084847382617,
+          "within_team_mse": 0.7980362702311232,
+          "n_players_raw": 4901,
+          "n_teams_grandchild": 445
+        },
+        {
+          "season": 2014,
+          "n_teams": 545,
+          "n_players": 5995,
+          "H_sort": 0.17592733638895486,
+          "within_team_mse": 0.7511934150948296,
+          "n_players_raw": 5998,
+          "n_teams_grandchild": 545
+        },
+        {
+          "season": 2015,
+          "n_teams": 548,
+          "n_players": 6028,
+          "H_sort": 0.16918886752085316,
+          "within_team_mse": 0.8304415116818011,
+          "n_players_raw": 6030,
+          "n_teams_grandchild": 548
+        },
+        {
+          "season": 2016,
+          "n_teams": 546,
+          "n_players": 6006,
+          "H_sort": 0.16295390890699069,
+          "within_team_mse": 0.8361078222136046,
+          "n_players_raw": 6010,
+          "n_teams_grandchild": 546
+        },
+        {
+          "season": 2017,
+          "n_teams": 554,
+          "n_players": 6094,
+          "H_sort": 0.18016498097981493,
+          "within_team_mse": 0.8175981327920744,
+          "n_players_raw": 6101,
+          "n_teams_grandchild": 554
+        },
+        {
+          "season": 2018,
+          "n_teams": 560,
+          "n_players": 6160,
+          "H_sort": 0.17853750695042636,
+          "within_team_mse": 0.8208989822497128,
+          "n_players_raw": 6169,
+          "n_teams_grandchild": 560
+        },
+        {
+          "season": 2019,
+          "n_teams": 552,
+          "n_players": 6072,
+          "H_sort": 0.19379770539601437,
+          "within_team_mse": 0.8054651621858154,
+          "n_players_raw": 6073,
+          "n_teams_grandchild": 552
+        },
+        {
+          "season": 2020,
+          "n_teams": 552,
+          "n_players": 6072,
+          "H_sort": 0.19579407827603157,
+          "within_team_mse": 0.8020375234976731,
+          "n_players_raw": 6080,
+          "n_teams_grandchild": 552
+        },
+        {
+          "season": 2021,
+          "n_teams": 492,
+          "n_players": 5412,
+          "H_sort": 0.18285202859118144,
+          "within_team_mse": 0.8155768615224008,
+          "n_players_raw": 5422,
+          "n_teams_grandchild": 492
+        }
+      ]
+    },
+    {
+      "roster_size": 15,
+      "n_players_pooled": 62100,
+      "n_teams_lc": 4140,
+      "n_teams_select": 4140,
+      "L_C": {
+        "label": "L_C",
+        "n": 4140,
+        "mean": 0.2514103820829067,
+        "std": 0.03574368258908883,
+        "min": 0.14817800495111824,
+        "max": 0.3993506109257546,
+        "median": 0.24776392179925177
+      },
+      "curvature_loo": {
+        "shape": "monotone_increasing",
+        "peak_bin": 15,
+        "peak_rate": 0.04019582581808812,
+        "left_rate": 0.008500772797527048,
+        "right_rate": 0.04019582581808812
+      },
+      "curvature_pool_mean": {
+        "shape": "monotone_increasing",
+        "peak_bin": 15,
+        "peak_rate": 0.07137335738211802,
+        "left_rate": 0.0010303967027305513,
+        "right_rate": 0.07137335738211802
+      },
+      "season_runs_lc": [
+        {
+          "season": 2011,
+          "n_teams": 312,
+          "n_players": 4680,
+          "H_sort": 0.13405280374100226,
+          "within_team_mse": 0.8641287954544483,
+          "n_players_raw": 4680,
+          "n_teams_grandchild": 312
+        },
+        {
+          "season": 2012,
+          "n_teams": 314,
+          "n_players": 4710,
+          "H_sort": 0.15493577732894181,
+          "within_team_mse": 0.8417156140663683,
+          "n_players_raw": 4716,
+          "n_teams_grandchild": 314
+        },
+        {
+          "season": 2013,
+          "n_teams": 326,
+          "n_players": 4890,
+          "H_sort": 0.14774345654388488,
+          "within_team_mse": 0.8469790651874581,
+          "n_players_raw": 4901,
+          "n_teams_grandchild": 326
+        },
+        {
+          "season": 2014,
+          "n_teams": 399,
+          "n_players": 5985,
+          "H_sort": 0.14418824295836563,
+          "within_team_mse": 0.7794919911361148,
+          "n_players_raw": 5998,
+          "n_teams_grandchild": 399
+        },
+        {
+          "season": 2015,
+          "n_teams": 402,
+          "n_players": 6030,
+          "H_sort": 0.14678167064575665,
+          "within_team_mse": 0.8527135562445025,
+          "n_players_raw": 6030,
+          "n_teams_grandchild": 402
+        },
+        {
+          "season": 2016,
+          "n_teams": 400,
+          "n_players": 6000,
+          "H_sort": 0.16079704719668508,
+          "within_team_mse": 0.8375697143729464,
+          "n_players_raw": 6010,
+          "n_teams_grandchild": 400
+        },
+        {
+          "season": 2017,
+          "n_teams": 406,
+          "n_players": 6090,
+          "H_sort": 0.13189157967367515,
+          "within_team_mse": 0.8644717186055765,
+          "n_players_raw": 6101,
+          "n_teams_grandchild": 406
+        },
+        {
+          "season": 2018,
+          "n_teams": 411,
+          "n_players": 6165,
+          "H_sort": 0.15208025837918293,
+          "within_team_mse": 0.8479912655720739,
+          "n_players_raw": 6169,
+          "n_teams_grandchild": 411
+        },
+        {
+          "season": 2019,
+          "n_teams": 404,
+          "n_players": 6060,
+          "H_sort": 0.13632136867945188,
+          "within_team_mse": 0.8615967364199386,
+          "n_players_raw": 6073,
+          "n_teams_grandchild": 404
+        },
+        {
+          "season": 2020,
+          "n_teams": 405,
+          "n_players": 6075,
+          "H_sort": 0.14678022901798193,
+          "within_team_mse": 0.8514439497602444,
+          "n_players_raw": 6080,
+          "n_teams_grandchild": 405
+        },
+        {
+          "season": 2021,
+          "n_teams": 361,
+          "n_players": 5415,
+          "H_sort": 0.14996092594856225,
+          "within_team_mse": 0.8493681773518312,
+          "n_players_raw": 5422,
+          "n_teams_grandchild": 361
+        }
+      ]
+    }
+  ],
+  "outputs": {
+    "lc_png": "GRANDCHILD_roster_size_c_sweep_lc_2011_2021.png",
+    "selection_png": "GRANDCHILD_roster_size_c_sweep_selection_2011_2021.png"
+  }
+}

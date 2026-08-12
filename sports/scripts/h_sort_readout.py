@@ -1,4 +1,4 @@
-"""Shared readout lines for H_sort (realized sorting index) on PD17 / Grandchild slides."""
+"""Shared readout lines for H_sort (realized sorting index) on PD17 / LG slides."""
 
 from __future__ import annotations
 

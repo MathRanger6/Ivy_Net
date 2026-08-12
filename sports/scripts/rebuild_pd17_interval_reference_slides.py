@@ -86,7 +86,7 @@ def main() -> None:
         str(args.season_max),
     )
 
-    print(f"Slide 5 reference — Grandchild sim {args.season_min}-{args.season_max} ...")
+    print(f"Slide 5 reference — LG sim {args.season_min}-{args.season_max} ...")
     gc_flags = [
         *slide_flags,
         "--season-min",

@@ -44,6 +44,7 @@ class GrandchildAssignResult:
     seed: int | None
     within_team_mse: float
     sorting_index_h: float
+    global_wss: float
     centroid_sd: float
 
 
@@ -74,12 +75,16 @@ def grandchild_homophily_weights(
 def grandchild_assign(
     rng: np.random.Generator,
     ability: np.ndarray,
-    roster_size: int,
+    roster_size: int | None = None,
     *,
+    roster_caps: np.ndarray | None = None,
     rho: float = 1.0,
     n_teams: int | None = None,
 ) -> tuple[np.ndarray, np.ndarray]:
     """Run one Grandchild formation pass.
+
+    Fixed capacity: pass ``roster_size`` (every team has C seats).
+    Empirical capacity multiset: pass ``roster_caps`` (length J, sum = n_players).
 
     Returns
     -------
@@ -88,23 +93,39 @@ def grandchild_assign(
     """
     ability = np.asarray(ability, dtype=float)
     n_players = len(ability)
-    c = int(roster_size)
-    if n_teams is None:
-        if n_players % c != 0:
+    if roster_caps is not None:
+        caps = np.asarray(roster_caps, dtype=np.int64)
+        if caps.ndim != 1 or caps.size == 0:
+            raise ValueError("roster_caps must be a non-empty 1-D array")
+        if int(caps.min()) <= 0:
+            raise ValueError("roster_caps must be positive")
+        if int(caps.sum()) != n_players:
             raise ValueError(
-                f"len(ability)={n_players} must be divisible by roster_size={c}"
+                f"sum(roster_caps)={int(caps.sum())} != len(ability)={n_players}"
             )
-        n_teams = n_players // c
+        n_teams = int(caps.size)
+        remaining = caps.astype(float).copy()
+        c = int(caps.max())
+    elif roster_size is not None:
+        c = int(roster_size)
+        if n_teams is None:
+            if n_players % c != 0:
+                raise ValueError(
+                    f"len(ability)={n_players} must be divisible by roster_size={c}"
+                )
+            n_teams = n_players // c
+        else:
+            expected = int(n_teams) * c
+            if n_players != expected:
+                raise ValueError(
+                    f"len(ability)={n_players} != n_teams*roster_size={expected}"
+                )
+        remaining = np.full(int(n_teams), float(c), dtype=float)
     else:
-        expected = int(n_teams) * c
-        if n_players != expected:
-            raise ValueError(
-                f"len(ability)={n_players} != n_teams*roster_size={expected}"
-            )
+        raise ValueError("grandchild_assign: pass roster_size or roster_caps")
 
     mu_0 = float(np.mean(ability))
     mu = np.full(int(n_teams), mu_0, dtype=float)
-    remaining = np.full(int(n_teams), c, dtype=float)
     counts = np.zeros(int(n_teams), dtype=np.int64)
     pool_id = np.full(n_players, -1, dtype=np.int64)
 
@@ -132,6 +153,7 @@ def grandchild_assign(
         mu,
         remaining,
         roster_size=c,
+        roster_caps=roster_caps,
         rho=rho,
         mu_initial=mu_0,
     )
@@ -145,6 +167,7 @@ def validate_grandchild_assignment(
     remaining: np.ndarray,
     *,
     roster_size: int,
+    roster_caps: np.ndarray | None = None,
     rho: float,
     mu_initial: float,
 ) -> None:
@@ -156,13 +179,17 @@ def validate_grandchild_assignment(
     n_players = len(ability)
     n_teams = len(mu_final)
     c = int(roster_size)
+    caps = None if roster_caps is None else np.asarray(roster_caps, dtype=np.int64)
 
     if np.any(pool_id < 0):
         raise AssertionError("unassigned players remain")
     if pool_id.size != n_players:
         raise AssertionError("pool_id length mismatch")
     counts = np.bincount(pool_id, minlength=n_teams)
-    if not np.all(counts == c):
+    if caps is not None:
+        if not np.array_equal(np.sort(counts), np.sort(caps)):
+            raise AssertionError(f"roster counts {counts} != roster_caps {caps}")
+    elif not np.all(counts == c):
         raise AssertionError(f"uneven rosters: {counts}")
     if float(remaining.sum()) != 0.0:
         raise AssertionError(f"remaining stubs not zero: {remaining.sum()}")
@@ -185,8 +212,11 @@ def validate_grandchild_assignment(
     # Recompute centroids from rosters; match mu_final.
     for j in range(n_teams):
         members = ability[pool_id == j]
-        if len(members) != c:
-            raise AssertionError(f"team {j} roster size {len(members)} != {c}")
+        expected_n = int(caps[j]) if caps is not None else c
+        if len(members) != expected_n:
+            raise AssertionError(
+                f"team {j} roster size {len(members)} != expected {expected_n}"
+            )
         expected_mu = float(members.mean())
         if abs(expected_mu - mu_final[j]) > 1e-9:
             raise AssertionError(
@@ -198,6 +228,32 @@ def within_team_mse(ability: np.ndarray, pool_id: np.ndarray, mu_final: np.ndarr
     """D — within-team MSE (not assortativity)."""
     mu_player = mu_final[np.asarray(pool_id, dtype=np.int64)]
     return float(np.mean((ability - mu_player) ** 2))
+
+
+def global_wss(
+    ability: np.ndarray,
+    pool_id: np.ndarray,
+    mu_final: np.ndarray | None = None,
+) -> float:
+    """Global within-team sum of squares (global WSS).
+
+    .. math::
+
+        \\mathrm{global\\_wss} = \\sum_j \\sum_{i \\in j} (A_i - \\hat{T}_j)^2
+
+    with :math:`\\hat{T}_j` the realized roster mean (final centroid :math:`\\mu_j`).
+    Same numerator as ``H_sort``; not scale-free (grows with N and ability variance).
+    """
+    ability = np.asarray(ability, dtype=float)
+    pool_id = np.asarray(pool_id, dtype=np.int64)
+    if mu_final is None:
+        n_teams = int(pool_id.max()) + 1
+        mu_final = np.empty(n_teams, dtype=float)
+        for j in range(n_teams):
+            members = ability[pool_id == j]
+            mu_final[j] = float(members.mean()) if members.size else float("nan")
+    mu_player = mu_final[pool_id]
+    return float(np.sum((ability - mu_player) ** 2))
 
 
 def sorting_index_h(ability: np.ndarray, pool_id: np.ndarray, mu_final: np.ndarray) -> float:
@@ -248,23 +304,30 @@ def centroid_dispersion_sd(mu_final: np.ndarray) -> float:
 
 def run_one_realization(
     ability: np.ndarray,
-    roster_size: int,
+    roster_size: int | None,
     rho: float,
     *,
+    roster_caps: np.ndarray | None = None,
     rng: np.random.Generator | None = None,
     seed: int | None = None,
 ) -> GrandchildAssignResult:
     if rng is None:
         rng = np.random.default_rng(seed)
     pool_id, mu_final = grandchild_assign(
-        rng, ability, roster_size, rho=rho
+        rng,
+        ability,
+        roster_size,
+        roster_caps=roster_caps,
+        rho=rho,
     )
     d = within_team_mse(ability, pool_id, mu_final)
     h = sorting_index_h(ability, pool_id, mu_final)
+    g = global_wss(ability, pool_id, mu_final)
+    c_label = int(roster_size) if roster_caps is None else int(np.max(roster_caps))
     return GrandchildAssignResult(
         pool_id=pool_id,
         ability=np.asarray(ability, dtype=float),
-        roster_size=int(roster_size),
+        roster_size=c_label,
         rho=float(rho),
         mu_initial=float(np.mean(ability)),
         mu_final=mu_final,
@@ -272,6 +335,7 @@ def run_one_realization(
         seed=seed,
         within_team_mse=d,
         sorting_index_h=h,
+        global_wss=g,
         centroid_sd=centroid_dispersion_sd(mu_final),
     )
 
@@ -338,6 +402,59 @@ def load_empirical_abilities_season(
     return abilities, meta
 
 
+def load_empirical_roster_caps_season(
+    season: int = EMPIRICAL_SEASON_DEFAULT,
+    *,
+    repo_root: Path | None = None,
+) -> tuple[np.ndarray, np.ndarray, dict[str, Any]]:
+    """Load season abilities and the exact NCAA filtered roster-size multiset.
+
+    Each real team-season contributes one stub capacity; capacities sum to N.
+    No player trim — same min-minutes / PPM panel as ``load_empirical_abilities_season``.
+    """
+    repo = repo_root or Path(__file__).resolve().parents[1]
+    scripts = repo / "scripts"
+    import sys
+
+    if str(scripts) not in sys.path:
+        sys.path.insert(0, str(scripts))
+    from empirical_team_interval_overlap import _prepare_panel
+
+    panel = _prepare_panel()
+    work = panel.loc[panel["season"] == int(season)].copy()
+    work = work.dropna(subset=["perf", "team_id"])
+    work["perf"] = pd.to_numeric(work["perf"], errors="coerce")
+    work = work.dropna(subset=["perf"])
+
+    caps = (
+        work.groupby("team_id", observed=True)
+        .size()
+        .to_numpy(dtype=np.int64)
+    )
+    abilities = work["perf"].to_numpy(dtype=float)
+    if int(caps.sum()) != len(abilities):
+        raise ValueError(
+            f"Season {season}: sum(roster_caps)={int(caps.sum())} != n_players={len(abilities)}"
+        )
+    meta = {
+        "season": int(season),
+        "n_players": int(len(abilities)),
+        "n_players_raw": int(len(abilities)),
+        "n_players_dropped_for_roster_fit": 0,
+        "n_teams_empirical": int(caps.size),
+        "n_teams_grandchild": int(caps.size),
+        "roster_caps_mean": float(caps.mean()),
+        "roster_caps_median": float(np.median(caps)),
+        "roster_caps_min": int(caps.min()),
+        "roster_caps_max": int(caps.max()),
+        "roster_mode": "empirical_caps",
+        "perf": "PPM z within season",
+        "mean": float(abilities.mean()),
+        "std": float(abilities.std()),
+    }
+    return abilities, caps, meta
+
+
 def assignment_params_for_abilities(
     ability: np.ndarray,
     roster_size: int = ROSTER_SIZE_DEFAULT,
@@ -370,6 +487,14 @@ def _self_test() -> None:
     for rho in (0.0, 0.5, 4.0, 16.0):
         res = run_one_realization(ability, c, rho, rng=rng)
         assert res.within_team_mse >= 0.0
+        assert np.isfinite(res.sorting_index_h)
+    caps = np.array([3, 5, 2, 4, 1], dtype=np.int64)
+    ability_v = rng.normal(size=int(caps.sum()))
+    for rho in (0.0, 0.5, 2.0):
+        res = run_one_realization(
+            ability_v, None, rho, roster_caps=caps, rng=rng
+        )
+        assert res.n_teams == len(caps)
         assert np.isfinite(res.sorting_index_h)
     print("541_grandchild_homophily_assign: self_test OK")
 

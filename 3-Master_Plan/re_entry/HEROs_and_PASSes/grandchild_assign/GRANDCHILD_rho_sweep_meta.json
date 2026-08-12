@@ -1,5 +1,5 @@
 {
-  "last_synced": "2026-08-11",
+  "last_synced": "2026-08-12",
   "module": "541_grandchild_homophily_assign",
   "season": 2015,
   "empirical": {
@@ -49,6 +49,7 @@
     "summary_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/grandchild_assign/GRANDCHILD_rho_sweep_summary.csv",
     "png_d_h": "3-Master_Plan/re_entry/HEROs_and_PASSes/grandchild_assign/GRANDCHILD_rho_sweep_D_H.png",
     "png_rho_vs_assortativity": "3-Master_Plan/re_entry/HEROs_and_PASSes/grandchild_assign/GRANDCHILD_rho_vs_assortativity.png",
+    "png_rho_vs_global_wss": "3-Master_Plan/re_entry/HEROs_and_PASSes/grandchild_assign/GRANDCHILD_rho_vs_global_wss.png",
     "png_centroid_sd": "3-Master_Plan/re_entry/HEROs_and_PASSes/grandchild_assign/GRANDCHILD_rho_sweep_centroid_sd.png",
     "png_examples": "3-Master_Plan/re_entry/HEROs_and_PASSes/grandchild_assign/GRANDCHILD_rho_sweep_example_centroids.png"
   },

@@ -29,7 +29,7 @@ META = GRANDCHILD_ASSIGN / "GRANDCHILD_empirical_lc_compare_2011_2021_meta.json"
 OUT_PPTX = SLIDES_AUTO / "CHAR_grandchild_empirical_lc_compare_AUTO.pptx"
 
 CLAIM = (
-    "Claim (PD17 / Grandchild): Team smooth L_C on real rosters vs Grandchild sim — "
+    "Claim (PD17 / LG): Team smooth L_C on real rosters vs LG sim — "
     r"same $\sigma(\gamma(\hat{A}_j - \theta))$ formula; compare distribution shape before SCORE."
 )
 
@@ -38,7 +38,7 @@ def _regenerate(*, rho: float, gamma: float | None) -> None:
     cmd = [sys.executable, str(DIAG_SCRIPT), "--rho", str(rho)]
     if gamma is not None:
         cmd.extend(["--gamma", str(gamma)])
-    print("Running empirical vs Grandchild L_C compare ...")
+    print("Running empirical vs LG L_C compare ...")
     subprocess.run(cmd, cwd=str(REPO), check=True)
 
 
@@ -55,7 +55,7 @@ def _readout_bullets(meta: dict) -> list[str]:
 
     bullets = [
         r"Team L_C = mean_{j} \sigma(\gamma(\hat{A}_{j} - \theta)) — team-smooth congestion.",
-        r"Left panel: empirical NCAA (real rosters). Right: Grandchild ASSIGN sim.",
+        r"Left panel: empirical NCAA (real rosters). Right: LG ASSIGN sim.",
         rf"Panel: MBB {seasons} · PPM z · min 20 min · poolq winsor 0.01–0.99.",
     ]
     if theta is not None and kn:
@@ -71,12 +71,12 @@ def _readout_bullets(meta: dict) -> list[str]:
             rf"sd={emp_lc.get('std', 0):.3f} ({emp_lc.get('n', 0):,} team-seasons)."
         )
         bullets.append(
-            rf"Grandchild (\rho={rho:g}): mean L_C={sim_lc.get('mean', 0):.3f}, "
+            rf"LG (\rho={rho:g}): mean L_C={sim_lc.get('mean', 0):.3f}, "
             rf"sd={sim_lc.get('std', 0):.3f} ({sim_lc.get('n', 0):,} team-seasons)."
         )
     bullets.extend(
         [
-            r"Sim: one Grandchild league per season (J = N/15), stacked team-seasons.",
+            r"Sim: one LG league per season (J = N/15), stacked team-seasons.",
             r"ASSIGN shapes rosters; L_C is score-side input — computed after assign.",
             r"Overlay PNG: grandchild_assign/GRANDCHILD_empirical_lc_overlay_2011_2021.png",
             r"Normalized side-by-side: grandchild_assign/GRANDCHILD_empirical_lc_compare_normalized_2011_2021.png",
@@ -105,7 +105,7 @@ def main() -> None:
     k_over_n = kn.get("K_over_N")
 
     subtitle_parts = [
-        rf"MBB {seasons} · team smooth L_C · Grandchild \rho={rho:g}",
+        rf"MBB {seasons} · team smooth L_C · LG \rho={rho:g}",
         rf"\gamma={gamma:g}",
     ]
     if theta is not None and k_over_n is not None:
@@ -114,7 +114,7 @@ def main() -> None:
     build_interval_overlap_slide(
         fig_path=FIG,
         out_pptx=OUT_PPTX,
-        title=r"Empirical vs Grandchild — team $L_C$ distribution",
+        title=r"Empirical vs LG — team $L_C$ distribution",
         subtitle=" · ".join(subtitle_parts),
         bullets=_readout_bullets(meta),
         claim=CLAIM,

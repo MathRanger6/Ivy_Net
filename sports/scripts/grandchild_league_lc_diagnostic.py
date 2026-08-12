@@ -167,14 +167,14 @@ def build_1d_figure(
         alpha=BAR_ALPHA,
         edgecolor=BAR_COLOR,
         linewidth=0.3,
-        label=rf"Grandchild sim ($\rho={rho:g}$)",
+        label=rf"LG sim ($\rho={rho:g}$)",
     )
     ax.set_xlim(0.0, 1.0)
     ax.set_xticks(LC_TICKS)
     ax.set_xlabel(r"$L_C$", fontsize=11)
     ax.set_ylabel("Teams", fontsize=10)
     ax.set_title(
-        rf"Team $L_C$ on Grandchild rosters ($n={n_teams:,}$ teams)",
+        rf"Team $L_C$ on LG rosters ($n={n_teams:,}$ teams)",
         fontsize=11,
         pad=8,
     )
@@ -219,7 +219,7 @@ def build_1d_figure(
         color="0.35",
     )
     fig.suptitle(
-        rf"Grandchild ASSIGN — team smooth $L_C$ (2015 PPM z, $C=15$, $\rho={rho:g}$)",
+        rf"LG ASSIGN — team smooth $L_C$ (2015 PPM z, $C=15$, $\rho={rho:g}$)",
         fontsize=12,
         y=1.02,
     )

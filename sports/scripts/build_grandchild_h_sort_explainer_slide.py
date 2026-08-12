@@ -29,7 +29,7 @@ CLAIM = (
 )
 
 SUBTITLE = (
-    r"Realized sorting index · Grandchild / PD17 · alias \texttt{sorting\_index\_h} in code"
+    r"Realized sorting index · LG / PD17 · alias \texttt{sorting\_index\_h} in code"
 )
 
 
@@ -44,7 +44,7 @@ def _bullets() -> list[str]:
         r"Alex one-liner: knowing roster explains how much ability deviates from \bar{A}.",
         r"Not Newman network assortativity r — partition statistic on abilities.",
         r"Complements interval overlap (geometry) — use both in brief.",
-        r"\rho \uparrow \Rightarrow H_{sort} \uparrow in Grandchild sweep (see inset plot).",
+        r"\rho \uparrow \Rightarrow H_{sort} \uparrow in LG sweep (see inset plot).",
         h_sort_note_bullet(),
         r"Memo: grandchild_assign/GRANDCHILD_D_and_H_sort_interpretation.md",
     ]

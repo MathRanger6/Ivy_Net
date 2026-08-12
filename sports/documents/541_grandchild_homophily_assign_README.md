@@ -26,11 +26,12 @@
 
 ## Diagnostics
 
-- **D** — within-team Mean Squared Error (MSE) (not assortativity).
-- **H_sort** — realized sorting index on a fixed partition (alias: `sorting_index_h` in code; not generative ρ).
+- **D** — within-team Mean Squared Error (MSE) (not assortativity); equals `global_wss / N`.
+- **global_wss** — within-team Sum of Squares (SS) on the partition (H_sort numerator; raw units).
+- **H_sort** — realized sorting index on a fixed partition (alias: `sorting_index_h` in code; not generative ρ); \(1 - \mathrm{global\_wss}/\mathrm{SS}_{total}\).
 - **centroid SD** — between-team dispersion of final μ_j.
 
-**Slide / Alex brief (plain words for D and H_sort):**  
+**Slide / Alex brief (plain words for partition, D, global_wss, and H_sort):**  
 [`3-Master_Plan/re_entry/HEROs_and_PASSes/grandchild_assign/GRANDCHILD_D_and_H_sort_interpretation.md`](../../3-Master_Plan/re_entry/HEROs_and_PASSes/grandchild_assign/GRANDCHILD_D_and_H_sort_interpretation.md)
 
 **H_sort glossary AUTO slide:**  

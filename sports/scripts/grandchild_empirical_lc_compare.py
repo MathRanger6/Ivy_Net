@@ -153,6 +153,10 @@ def _sim_team_lc_panel(
     seasons = list(range(int(season_min), int(season_max) + 1))
     parts: list[pd.DataFrame] = []
     season_runs: list[dict] = []
+    from diagnostic_progress import SeasonProgress
+
+    prog = SeasonProgress(f"L_C sim C={c}", season_min, season_max)
+    prog.header()
     for season in seasons:
         ability, emp_meta = gc.load_empirical_abilities_season(int(season), roster_size=c)
         rng = np.random.default_rng(int(seed) + int(season))
@@ -175,7 +179,11 @@ def _sim_team_lc_panel(
                 **{k: emp_meta.get(k) for k in ("n_players_raw", "n_teams_grandchild")},
             }
         )
-        print(f"  season {season}: J={len(team_df)} teams  H_sort={res.sorting_index_h:.3f}")
+        prog.tick(
+            season,
+            f"J={len(team_df)} teams H_sort={res.sorting_index_h:.3f}",
+        )
+    prog.finish()
     return pd.concat(parts, ignore_index=True), season_runs
 
 
@@ -212,7 +220,7 @@ def _plot_side_by_side(
         (emp_counts, sim_counts),
         (emp_lc, sim_lc),
         (EMP_COLOR, SIM_COLOR),
-        ("Empirical NCAA (real rosters)", rf"Grandchild sim ($\rho={rho:g}$)"),
+        ("Empirical NCAA (real rosters)", rf"LG sim ($\rho={rho:g}$)"),
         (emp_lc.size, sim_lc.size),
         strict=True,
     ):
@@ -249,7 +257,7 @@ def _plot_side_by_side(
         )
 
     fig.suptitle(
-        rf"Team smooth $L_C$ — empirical vs Grandchild (MBB {paths['seasons']}, "
+        rf"Team smooth $L_C$ — empirical vs LG (MBB {paths['seasons']}, "
         rf"$\gamma={gamma:g}$, $\theta={theta:.3f}$ z, $K/N={k_over_n:.4f}$)",
         fontsize=11,
         y=1.02,
@@ -287,7 +295,7 @@ def _plot_side_by_side_normalized(
         (emp_density, sim_density),
         (emp_lc, sim_lc),
         (EMP_COLOR, SIM_COLOR),
-        ("Empirical NCAA (real rosters)", rf"Grandchild sim ($\rho={rho:g}$)"),
+        ("Empirical NCAA (real rosters)", rf"LG sim ($\rho={rho:g}$)"),
         (emp_lc.size, sim_lc.size),
         strict=True,
     ):
@@ -358,7 +366,7 @@ def _plot_overlay(
         y_sim,
         color=SIM_COLOR,
         lw=2.0,
-        label=rf"Grandchild sim $\rho={rho:g}$ (n={sim_lc.size:,})",
+        label=rf"LG sim $\rho={rho:g}$ (n={sim_lc.size:,})",
     )
     ax.fill_between(x_sim, 0, y_sim, alpha=0.12, color=SIM_COLOR)
     ax.set_xlim(0.0, 1.0)
