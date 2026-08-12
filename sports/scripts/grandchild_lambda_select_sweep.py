@@ -64,10 +64,20 @@ LAM_COLORS = {
 }
 
 
-def _lambda_color(lam: float) -> str:
-    if lam in LAM_COLORS:
-        return LAM_COLORS[lam]
-    return plt.cm.plasma(min(0.95, max(0.05, lam / 2.0)))
+def _lambda_palette(lambdas: list[float]) -> dict[float, str]:
+    """One distinct color per λ arm; defaults preserved when exact match."""
+    sorted_lams = sorted(set(float(x) for x in lambdas))
+    n = len(sorted_lams)
+    cmap = plt.cm.tab10 if n <= 10 else plt.cm.tab20
+    palette: dict[float, str] = {}
+    fallback_idx = 0
+    for lam in sorted_lams:
+        if lam in LAM_COLORS:
+            palette[lam] = LAM_COLORS[lam]
+            continue
+        palette[lam] = cmap(fallback_idx / max(n - 1, 1))
+        fallback_idx += 1
+    return palette
 
 
 def _plot_selection_sweep(
@@ -82,6 +92,7 @@ def _plot_selection_sweep(
 ) -> None:
     configure_matplotlib_mathtext()
     fig, axes = plt.subplots(1, 2, figsize=(12.0, 4.8))
+    colors = _lambda_palette(list(frames_loo))
     panels = [
         (frames_loo, emp_loo, r"LOO pool quality (poolq_loo)", "mean_loo_q"),
         (frames_mean, emp_mean, r"Pool mean (team_mean)", "mean_team_mean"),
@@ -104,7 +115,7 @@ def _plot_selection_sweep(
             x = summ[xcol].to_numpy(dtype=float)
             y = summ["selection_rate"].to_numpy(dtype=float)
             curv = gsel._curvature_label(summ)
-            color = _lambda_color(float(lam))
+            color = colors[float(lam)]
             ax.plot(
                 x,
                 y,

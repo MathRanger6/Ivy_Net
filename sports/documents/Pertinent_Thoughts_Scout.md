@@ -1,6 +1,6 @@
 # Pertinent Thoughts — Scout (530 College Basketball Pipeline)
 
-**Last synced:** 2026-08-11
+**Last synced:** 2026-08-12
 
 This document mirrors **Pertinent_Thoughts.md** (Army / OER work): important discoveries, reflections on code and results, open problems, and directions worth investigating for the **Scout** dissertation thread — ESPN box → SR advanced → player–season panel → leave-one-out teammate pool quality → draft outcome EDA.
 
@@ -199,6 +199,58 @@ So the minutes filter **shrinks and reshapes** what counts as a team in NCAA dia
 **Script:** `sports/scripts/grandchild_ncaa_roster_size_distribution.py`
 
 **Status**: Logged Aug 2026; optional **`min_minutes=5`** sensitivity PNG not yet run.
+
+**See also:** **LG input fixes vs λ for Hero inverted-U (Aug 2026)** — empirical caps close a confound but do not create curvature; λ in SCORE does.
+
+---
+
+## LG input fixes vs λ for Hero inverted-U (Aug 2026)
+
+**Topic**: After HAND17 / LG comparability work — was fixing roster inputs (empirical caps vs fixed **C=15**) worth it, now that we know **λ** (not ρ / homophily alone) flips SELECT from monotone to inverted-U?
+
+**Short answer (Charles + COMPASS, Aug 2026)**:
+
+| Question | Answer |
+|----------|--------|
+| Do empirical roster caps **create** the Hero inverted-U? | **No** — at baseline **λ ≈ 0.55**, SELECT stays **monotone ↑** with empirical caps, **C=15**, or **C ∈ {10, 11, 15}**. |
+| Does **ρ** (ASSIGN homophily) alone create it? | **No** — same monotone readout at fixed λ; H_sort / global_wss are ASSIGN diagnostics, not SELECT curvature. |
+| What **does** create inverted-U in LG? | **SCORE:** **S = A − λ·L_C** with high enough **λ** (LOO flip between **λ=1** and **λ=2**; best **peak-bin** alignment with empirical NCAA near **λ ≈ 4** on 2011–2021 panel). |
+| Was the caps / input work still worth it? | **Yes — for sequencing and Alex brief**, not because it was the missing Hero mechanism. |
+
+**Why caps work still matter**:
+
+1. **Negative result / confound closure:** Rules out “LG missed inverted-U because wrong league geometry” (team count, roster-size multiset). Without empirical caps, skeptical read: ~4,140 teams at **C=15** vs ~6,492 real team-seasons on the same **N**; **H_sort** and roster histograms do not match NCAA.
+2. **Apples-to-apples SELECT slides:** Same player pool, same **K/N**, same empirical roster-size multiset per season — then sweep **λ**. That is the defensible “vs NCAA” layer.
+3. **Separate from λ discovery:** You *could* have found the λ flip faster on **C=15 + λ sweep**; keep **C=15** only for quick **ASSIGN / ρ** geometry slides where team-count match is not the claim.
+
+**What does *not* substitute for caps:**
+
+- **`min_minutes=20`** is a different lever — **empirical estimand** (rotation-level LOO). Keep locked for NCAA hero target regardless of LG caps. See section above.
+
+**Key diagnostics (2011–2021, ρ=0.5, empirical caps unless noted)**:
+
+| Run | λ | LOO SELECT shape | Notes |
+|-----|---|------------------|-------|
+| Empirical NCAA | — | inverted-U (peak bin 11) | Target |
+| C sweep C=10, 11, 15 | ~0.55 | all monotone ↑ | `GRANDCHILD_roster_size_c_sweep_2011_2021_meta.json` |
+| Empirical caps | ~0.55 | monotone ↑ | `GRANDCHILD_empirical_roster_caps_2011_2021_meta.json` |
+| λ sweep (default arms) | 0–1 | monotone ↑ | flip at **λ=2** |
+| λ sweep (Charles) | 1 | monotone ↑ | |
+| λ sweep (Charles) | 2, 4, 8, 32 | inverted-U-like on LOO | **λ=4** peak bin **11** matches empirical |
+
+**Figures / scripts:**
+
+- `grandchild_assign/GRANDCHILD_lambda_select_sweep_2011_2021.png` (+ `_meta.json`)
+- `sports/scripts/grandchild_lambda_select_sweep.py`
+- Caps: `grandchild_empirical_roster_caps_diagnostic.py`; C sweep: `grandchild_roster_size_c_sweep.py`
+
+**One-liner for Alex:**
+
+> “Input comparability (pool, **K**, empirical roster caps) was **necessary** to show the miss wasn’t league geometry — but **not sufficient** for Hero shape. Curvature lives in **SCORE (λ)**; inverted-U on LOO emerges for **λ ≳ 2**, with best bin alignment around **λ ≈ 4**.”
+
+**Do not reopen** caps/C archaeology unless fine λ grid fits LOO shape but fails on **levels** or **peak location** — then run one **C=15 vs empirical caps** λ sanity check, not another caps detour.
+
+**Status**: Logged Aug 2026 after **1 2 4 8 32** λ sweep and Charles question on whether filtering/caps effort was worth it vs hard **C=15**.
 
 ---
 
