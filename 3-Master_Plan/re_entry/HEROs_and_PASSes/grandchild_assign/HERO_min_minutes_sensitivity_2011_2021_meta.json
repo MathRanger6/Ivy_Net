@@ -149,8 +149,8 @@
         "bin15_rate": 0.0187222543910442
       },
       "lpm": {
-        "beta_poolq_loo": 0.01148550911366351,
-        "beta_poolq_sq": -0.01946814643274298,
+        "beta_poolq_loo": 0.011485509113663497,
+        "beta_poolq_sq": -0.019468146432742153,
         "concave": true
       },
       "csv": "HERO_binned_draft_rate_min0_2011_2021.csv",
@@ -293,8 +293,8 @@
         "bin15_rate": 0.018710103455866166
       },
       "lpm": {
-        "beta_poolq_loo": 0.007433934947229784,
-        "beta_poolq_sq": -0.02666275914324463,
+        "beta_poolq_loo": 0.007433934947229621,
+        "beta_poolq_sq": -0.02666275914324487,
         "concave": true
       },
       "csv": "HERO_binned_draft_rate_min10_2011_2021.csv",
@@ -437,8 +437,8 @@
         "bin15_rate": 0.02290272774060731
       },
       "lpm": {
-        "beta_poolq_loo": 0.009889287528368415,
-        "beta_poolq_sq": -0.024725642155670118,
+        "beta_poolq_loo": 0.009889287528368266,
+        "beta_poolq_sq": -0.024725642155669445,
         "concave": true
       },
       "csv": "HERO_binned_draft_rate_min20_2011_2021.csv",

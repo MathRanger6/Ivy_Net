@@ -219,7 +219,7 @@ def _plot_compare(results: list[dict]) -> Path:
         curv = res["curvature"]
         ax.set_xlabel(r"poolq_loo ventile")
         ax.set_title(
-            rf"min = {mm:g} min  ($n={res['n_player_seasons']:,}$)\n"
+            rf"min = {mm:g} min ($n={res['n_player_seasons']:,}$) — "
             rf"{curv['shape']}; bin16={curv['bin16_rate'] * 100:.2f}\%",
             fontsize=9,
         )
@@ -234,9 +234,9 @@ def _plot_compare(results: list[dict]) -> Path:
     fig.suptitle(
         rf"Hero sensitivity — min_minutes ladder (MBB {seasons}, 16 quantile, ppm z, winsor 0.01–0.99)",
         fontsize=11,
-        y=1.03,
+        y=0.98,
     )
-    fig.tight_layout()
+    fig.tight_layout(rect=(0, 0, 1, 0.90))
     png = OUT / f"HERO_min_minutes_sensitivity_compare_{SEASON_MIN}_{SEASON_MAX}.png"
     fig.savefig(png, dpi=150, bbox_inches="tight")
     plt.close(fig)

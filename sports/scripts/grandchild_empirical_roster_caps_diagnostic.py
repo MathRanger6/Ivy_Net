@@ -242,7 +242,7 @@ def _plot_lc_compare(
         ax.set_xticks(glc.LC_TICKS)
         ax.set_xlabel(r"$L_C$")
         ax.set_title(
-            rf"{label}\n$n={stats['n']:,}$, mean={stats['mean']:.3f}, sd={stats['std']:.3f}",
+            rf"{label} ($n={stats['n']:,}$, mean={stats['mean']:.3f}, sd={stats['std']:.3f})",
             fontsize=9,
         )
         ax.legend(fontsize=8, loc="upper right")
@@ -252,9 +252,9 @@ def _plot_lc_compare(
         rf"Team $L_C$ — LG with empirical roster caps vs NCAA (MBB {seasons}, "
         rf"$\rho={rho:g}$, $\gamma={gamma:g}$)",
         fontsize=11,
-        y=1.02,
+        y=0.98,
     )
-    fig.tight_layout()
+    fig.tight_layout(rect=(0, 0, 1, 0.90))
     fig.savefig(out_path, dpi=150, bbox_inches="tight")
     plt.close(fig)
 

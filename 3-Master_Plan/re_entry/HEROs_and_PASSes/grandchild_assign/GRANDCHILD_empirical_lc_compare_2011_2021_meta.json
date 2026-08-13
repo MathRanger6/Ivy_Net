@@ -7,7 +7,7 @@
   "lc_mode": "crowding_smooth_team",
   "theta": 2.29465596868381,
   "gamma": 0.5,
-  "gamma_source": "HAND17 default (0.5); tier1 default is 10",
+  "gamma_source": "CLI --gamma 0.5",
   "theta_K_over_N": {
     "n_accepted": 1134,
     "n_total": 62180,

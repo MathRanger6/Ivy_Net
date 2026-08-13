@@ -218,11 +218,15 @@ def build_figure(
         pad=8,
     )
 
+    sort_line = rf"Realized sorting $H_{{sort}}={h_sort:.3f}$"
+    if global_wss is not None:
+        sort_line += rf", $\mathrm{{global\_wss}}={global_wss:,.0f}$"
+    sort_line += " on this partition"
+
     fig.suptitle(
         rf"LG ASSIGN — team talent window overlap (MBB {seasons}, $\rho={rho:g}$, {roster_label})"
-        + rf"\nRealized sorting $H_{{sort}}={h_sort:.3f}$"
-        + (rf", global\_wss={global_wss:,.0f}" if global_wss is not None else "")
-        + " on this partition",
+        + "\n"
+        + sort_line,
         fontsize=12,
         y=0.98,
     )
