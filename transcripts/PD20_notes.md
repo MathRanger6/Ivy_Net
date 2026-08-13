@@ -2,7 +2,8 @@
 
 **Source:** `transcripts/20260813_Paper_Directions_20_otter_ai_transcript.docx` (~5 min follow-up, same day as PD19).  
 **Context:** Charles briefed Alex well on the LG three-step pipeline (ASSIGN → SCORE → SELECT). PD19 opened **probabilistic SELECT + MLE**; PD20 **locks temperature convention** and **reorders priorities** (inverted-U survival before MLE).  
-**PD19 digest:** [`transcripts/PD19_notes.md`](PD19_notes.md)
+**PD19 digest:** [`transcripts/PD19_notes.md`](PD19_notes.md)  
+**Open questions (K draws, $\rho^*$):** [`../3-Master_Plan/Alex_stuff/PD20_K_draws_and_rho_explainer.md`](../3-Master_Plan/Alex_stuff/PD20_K_draws_and_rho_explainer.md)
 
 **Related PD19 artifacts (same day):**
 
@@ -115,7 +116,7 @@ Per [`BINDING_Selection_is_its_own_step.md`](../3-Master_Plan/BINDING_Selection_
 
 ---
 
-## Implementation notes (for code — not yet built)
+## Implementation notes (code — PD20 scaffold built Aug 2026)
 
 ### Bridging Gibbs to **K** draft slots
 
@@ -165,9 +166,11 @@ Each player **draws** a team (weighted random seat). Final $\hat{T}_j = \mu_j$.
 
 | Piece | File / pattern |
 |-------|----------------|
-| SELECT rule `"D"` (Gibbs + K draws) | `sports/tier1_pool_assignment.py` → `choose_selected` |
-| $t$ sweep diagnostic | New script mirroring `grandchild_lambda_select_sweep.py` |
-| Baseline λ sweep (already done) | `sports/scripts/grandchild_lambda_select_sweep.py` |
+| SELECT rule `"D"` (Gibbs + K draws) | `sports/tier1_pool_assignment.py` → `choose_selected`, `gibbs_select_weights` |
+| $t$ sweep diagnostic | `sports/scripts/grandchild_temperature_select_sweep.py` |
+| PD20 outputs (isolated) | `HEROs_and_PASSes/pd20_temperature/` — see `REGENERATE.md` |
+| Baseline λ sweep (rule C, PD17) | `sports/scripts/grandchild_lambda_select_sweep.py` → `grandchild_assign/` |
+| HAND deck path | `slides/CHAR_PD20_HAND.pptx` via `HAND_PD20_DECK` in `hero_gallery_paths.py` |
 | LG ASSIGN | `sports/541_grandchild_homophily_assign.py` |
 | Briefing / notation | `3-Master_Plan/re_entry/HEROs_and_PASSes/Alex_LG_three_step_briefing.md` |
 

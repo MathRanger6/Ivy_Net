@@ -1,0 +1,48 @@
+{
+  "diagnostic": "grandchild_temperature_cold_limit",
+  "date": "2026-08-13",
+  "seasons": "2011-2021",
+  "season_min": 2011,
+  "season_max": 2021,
+  "rho": 0.5,
+  "seed": 5412015,
+  "lambda": 2.0,
+  "log10_t": -3.0,
+  "temperature": 0.001,
+  "winner_c": "C",
+  "winner_d": "D",
+  "max_bin_gap_loo": 0.0,
+  "max_bin_gap_pool_mean": 0.0,
+  "curvature_loo_c": {
+    "shape": "inverted_u_like",
+    "peak_bin": 10,
+    "peak_rate": 0.025990735975295935,
+    "left_rate": 0.007460766658091073,
+    "right_rate": 0.021873391662377766
+  },
+  "curvature_loo_d": {
+    "shape": "inverted_u_like",
+    "peak_bin": 10,
+    "peak_rate": 0.025990735975295935,
+    "left_rate": 0.007460766658091073,
+    "right_rate": 0.021873391662377766
+  },
+  "curvature_pool_mean_c": {
+    "shape": "monotone_increasing",
+    "peak_bin": 15,
+    "peak_rate": 0.055069480185280496,
+    "left_rate": 0.0007718034473887317,
+    "right_rate": 0.055069480185280496
+  },
+  "curvature_pool_mean_d": {
+    "shape": "monotone_increasing",
+    "peak_bin": 15,
+    "peak_rate": 0.055069480185280496,
+    "left_rate": 0.0007718034473887317,
+    "right_rate": 0.055069480185280496
+  },
+  "cold_limit_match": true,
+  "outputs": {
+    "png": "GRANDCHILD_temperature_cold_limit_2011_2021.png"
+  }
+}

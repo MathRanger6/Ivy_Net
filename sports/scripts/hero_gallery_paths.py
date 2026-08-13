@@ -13,6 +13,7 @@ PASS_C_RHO = HERO_ROOT / "pass_c_rho"
 SIM_INPUTS = HERO_ROOT / "sim_inputs"
 EMPIRICAL_PD17 = HERO_ROOT / "empirical_pd17"
 GRANDCHILD_ASSIGN = HERO_ROOT / "grandchild_assign"
+PD20_TEMPERATURE = HERO_ROOT / "pd20_temperature"
 SORT_CHOP_LAMBDA = HERO_ROOT / "sort_chop_lambda"
 SOFT_ASSIGN_LAMBDA = HERO_ROOT / "soft_assign_lambda"
 THETA = HERO_ROOT / "theta"
@@ -22,6 +23,7 @@ GRANDCHILD_LEAGUE_ANALYSIS_DECK = SLIDES / "CHAR_grandchild_league_analysis.pptx
 SLIDES_AUTO = SLIDES / "auto"
 HAND_PD16_DECK = SLIDES / "CHAR_PD16_HAND.pptx"
 HAND_PD17_DECK = SLIDES / "CHAR_PD17_HAND.pptx"
+HAND_PD20_DECK = SLIDES / "CHAR_PD20_HAND.pptx"
 # Legacy alias (Aug 2026 rename from CHAR_Phase_B_characterization_HAND.pptx)
 HAND_PHASE_B_DECK = HAND_PD16_DECK
 HAND_RHO_DECK = SLIDES / "CHAR_rho_characterization.pptx"
@@ -43,6 +45,7 @@ AUTO_LAMBDA_DECK = SLIDES_AUTO / "CHAR_lambda_characterization_AUTO.pptx"
 AUTO_THETA_DECK = SLIDES_AUTO / "CHAR_theta_characterization_AUTO.pptx"
 AUTO_GAMMA_DECK = SLIDES_AUTO / "CHAR_gamma_characterization_AUTO.pptx"
 AUTO_SOFT_ASSIGN_GAMMA_DECK = SLIDES_AUTO / "CHAR_soft_assign_gamma_sweep_AUTO.pptx"
+AUTO_PD20_DECK = SLIDES_AUTO / "CHAR_PD20_HAND_AUTO.pptx"
 AUTO_PHASE_B_DECK = SLIDES_AUTO / "CHAR_Phase_B_characterization_AUTO.pptx"
 
 _ALL_DIRS = (
@@ -52,6 +55,7 @@ _ALL_DIRS = (
     SIM_INPUTS,
     EMPIRICAL_PD17,
     GRANDCHILD_ASSIGN,
+    PD20_TEMPERATURE,
     SORT_CHOP_LAMBDA,
     SOFT_ASSIGN_LAMBDA,
     THETA,

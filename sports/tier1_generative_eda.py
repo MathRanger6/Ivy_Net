@@ -111,7 +111,8 @@ class SelectionConfig:
       n_selected (K)   — how many players get Y_selected=1.
       score_mode       — "ability" or "loo_gap_plus_ability" (Pass A toggle).
       loo_gap_weight   — w in S = A − w·L (same role as Alex λ).
-      winner_selection — "A"/"B"/"C"; Pass A/B default "C" = top K by score.
+      winner_selection — "A"/"B"/"C"/"D"; Pass A/B default "C" = top K by score.
+      selection_temperature — t for rule "D" (Gibbs); default 1.0.
       loo_pool_l_mode  — which L enters the SCORE (quality / crowding / …).
                          Does NOT change the default Plot B bin axis (still L_Q).
     """
@@ -127,7 +128,9 @@ class SelectionConfig:
     loo_gap_weight: float
     # loo_gap_weight (w): weight on the L-term; ≈ Alex λ in the nesting.
     winner_selection: str
-    # winner_selection: "C" = top K (default); "A"/"B" = stochastic (legacy).
+    # winner_selection: "C" = top K (default); "A"/"B" = stochastic; "D" = Gibbs.
+    selection_temperature: float = 1.0
+    # selection_temperature (t): Gibbs denominator for rule "D" (PD20).
     loo_pool_l_mode: str = "quality"
     # loo_pool_l_mode: which pool L enters SCORE — not the default Plot B X-axis.
 
@@ -151,6 +154,7 @@ class SelectionConfig:
             score_mode=str(score),
             loo_gap_weight=float(getattr(mod, "LOO_GAP_WEIGHT", 0.5)),
             winner_selection=str(getattr(mod, "WINNER_SELECTION", "C")),
+            selection_temperature=float(getattr(mod, "SELECTION_TEMPERATURE", 1.0)),
             loo_pool_l_mode=str(getattr(mod, "LOO_POOL_L_MODE", "quality")),
         )
 
@@ -169,6 +173,9 @@ class SelectionConfig:
             score_mode=str(state.get("score_mode", base.score_mode)),
             loo_gap_weight=float(state.get("loo_gap_weight", base.loo_gap_weight)),
             winner_selection=str(state.get("winner_selection", base.winner_selection)),
+            selection_temperature=float(
+                state.get("selection_temperature", base.selection_temperature)
+            ),
             loo_pool_l_mode=str(
                 state.get("loo_pool_l_mode", base.loo_pool_l_mode)
             ),
@@ -571,6 +578,7 @@ def run_inverted_u_pipeline(
         pool_l_mode=sel.loo_pool_l_mode,
         viability_theta=params.viability_theta,
         viability_sharpness=params.viability_sharpness,
+        selection_temperature=sel.selection_temperature,
     )
     # Step 4 — VISUALIZE: bin on L_Q and draw figure.
     summ = inverted_u_bin_table(

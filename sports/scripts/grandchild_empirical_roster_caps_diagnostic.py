@@ -156,6 +156,7 @@ def _run_one_season_select(
         pool_l_mode=sel.loo_pool_l_mode,
         viability_theta=float(theta),
         viability_sharpness=float(getattr(cfg, "SELECTION_539_VIABILITY_SHARPNESS", 10.0)),
+        selection_temperature=float(sel.selection_temperature),
     )
     players["season"] = int(season)
     players["pool_id"] = players["pool_id"].astype(np.int64) + int(season) * POOL_ID_SEASON_OFFSET

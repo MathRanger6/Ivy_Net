@@ -1101,6 +1101,31 @@ def selection_weights(
 # =============================================================================
 # Generative step (3). v1 / Pass A–B default: choice "C" = top K by score.
 # Choices A/B are stochastic draws (kept for older 537 experiments).
+# Choice "D" (PD20): Gibbs weights exp(S/t) then K draws without replacement.
+
+
+# Below this t, rule "D" uses deterministic top-K (cold Gibbs ≈ hard cut).
+GIBBS_T_MIN = 1e-9
+
+
+def gibbs_select_weights(scores: np.ndarray, temperature: float) -> np.ndarray:
+    """Non-negative Gibbs weights proportional to exp(S / t).
+
+    Uses log-sum-exp stabilization. ``scores`` are selection scores S_i (same
+    units as ``selection_weights`` output). Temperature t is in the denominator
+    (statistical-physics convention).
+    """
+    t = float(temperature)
+    if not np.isfinite(t) or t <= 0:
+        raise ValueError(f"temperature must be positive and finite, got {temperature!r}")
+    s = np.asarray(scores, dtype=float)
+    s = np.where(np.isfinite(s), s, 0.0)
+    scaled = s / t
+    m = float(np.max(scaled)) if scaled.size else 0.0
+    log_w = scaled - m
+    w = np.exp(log_w)
+    w = np.where(np.isfinite(w), w, 0.0)
+    return np.clip(w, 0.0, None)
 
 
 def choose_selected(
@@ -1108,6 +1133,8 @@ def choose_selected(
     weights: np.ndarray,
     k: int,
     choice: str,
+    *,
+    temperature: float = 1.0,
 ) -> np.ndarray:
     """Boolean mask of length n: True = selected (drafted / advanced).
 
@@ -1118,11 +1145,13 @@ def choose_selected(
       "A" — sample K players without replacement ∝ weights (stochastic)
       "B" — independent Bernoulli with p ∝ weight (stochastic; expected ~K)
       "C" — deterministic top K by weight  ← Pass A/B default (winner rule)
+      "D" — Gibbs: w_i ∝ exp(S_i/t), then K draws without replacement (PD20)
 
     Args
-      weights — S_i from selection_weights (non-negative ranking scores).
+      weights — S_i from selection_weights (ranking scores; may be negative).
       k       — how many players get selected (N_SELECTED in config).
-      choice  — "A" / "B" / "C" as above.
+      choice  — "A" / "B" / "C" / "D" as above.
+      temperature — t for rule "D" only; ignored for A/B/C.
     """
     n = len(weights)
     w = np.asarray(weights, dtype=float)
@@ -1153,6 +1182,34 @@ def choose_selected(
     if choice == "C":
         # Deterministic: the K highest scores win (ties broken by mergesort stability).
         idx = np.argsort(w, kind="mergesort")[-k_eff:]
+        out = np.zeros(n, dtype=bool)
+        out[idx] = True
+        return out
+    if choice == "D":
+        # PD20 Gibbs SELECT: exp(S/t) weights, then same K-draw skeleton as "A".
+        t = float(temperature)
+        if not np.isfinite(t) or t <= 0:
+            raise ValueError(f"rule D requires positive temperature, got {temperature!r}")
+        if t <= GIBBS_T_MIN:
+            idx = np.argsort(w, kind="mergesort")[-k_eff:]
+            out = np.zeros(n, dtype=bool)
+            out[idx] = True
+            return out
+        g = gibbs_select_weights(w, t)
+        total = float(g.sum())
+        if total <= 0:
+            return np.zeros(n, dtype=bool)
+        p = g / total
+        # Very cold t: Gibbs weights collapse numerically → use top-K (≡ rule C).
+        max_p = float(np.max(p))
+        n_positive_g = int(np.count_nonzero(g > 0))
+        if max_p > 1.0 - 1e-12 or n_positive_g < k_eff:
+            idx = np.argsort(w, kind="mergesort")[-k_eff:]
+            out = np.zeros(n, dtype=bool)
+            out[idx] = True
+            return out
+        k_g = min(k_eff, n_positive_g)
+        idx = rng.choice(n, size=k_g, replace=False, p=p)
         out = np.zeros(n, dtype=bool)
         out[idx] = True
         return out
@@ -1212,6 +1269,7 @@ def assign_selection(
     viability_theta: float | None = None,
     viability_sharpness: float | None = None,
     crowding_l_z_scale: float | None = None,
+    selection_temperature: float = 1.0,
 ) -> pd.DataFrame:
     """SCORE then SELECT on an already-assigned roster table.
 
@@ -1227,7 +1285,8 @@ def assign_selection(
       n_selected           — K: how many get Y_selected=1 (top-K under choice C).
       score_mode           — "ability" or "loo_gap_plus_ability" (Pass A toggle).
       loo_gap_weight       — w / λ in S = A − w·L (Pass A congestion strength).
-      winner_selection     — "A"/"B"/"C"; Pass A/B default "C" = top K by score.
+      winner_selection     — "A"/"B"/"C"/"D"; Pass A/B default "C" = top K by score.
+      selection_temperature — t for rule "D" (Gibbs); ignored otherwise.
       pool_l_mode          — which L enters the score (quality / crowding_smooth /
                              crowding_smooth_team for PD16 team L_C).
       viability_theta      — θ for L_C; None → config default.
@@ -1266,7 +1325,11 @@ def assign_selection(
     )
     # Step 3 — SELECT: winner rule turns scores into 0/1 outcomes.
     out["Y_selected"] = choose_selected(
-        rng, w, int(n_selected), str(winner_selection)
+        rng,
+        w,
+        int(n_selected),
+        str(winner_selection),
+        temperature=float(selection_temperature),
     ).astype(int)
     out["selection_weight"] = w
     return out
