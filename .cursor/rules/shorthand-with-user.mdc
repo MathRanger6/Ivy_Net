@@ -1,0 +1,27 @@
+---
+description: Match Charles's shorthand level — spell out first, adopt only after he uses the term
+alwaysApply: true
+---
+
+# Shorthand — follow Charles's lead
+
+## Default
+
+When Charles has **not** used a project shorthand in the current thread, write the **full term first**, then the shortcut in parentheses if helpful:
+
+- ✅ "Grandchild assignment (LG)"
+- ✅ "sorting index ($H_{\mathrm{sort}}$)"
+- ✅ "maximum likelihood estimation (MLE)"
+- ❌ "LG calibrates ρ via H_sort" (unintroduced shortcuts)
+
+## After Charles uses the shorthand
+
+Once Charles uses a term (e.g. "LG", "ρ fit", "pseudo-likelihood"), you may use that same shorthand freely for the rest of the conversation.
+
+## Charles's shorthand is authoritative
+
+If Charles says "LG" instead of "Grandchild assign" or "bipartite configuration model," treat that as his preferred label — mirror it after first use in that thread.
+
+## Still spell out when it prevents confusion
+
+Even after adoption, re-expand on a **new** sub-topic or when two shorthands collide (e.g. "score" vs "select", sim vs empirical).

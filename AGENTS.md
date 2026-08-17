@@ -9,6 +9,7 @@
 1. **`.cursor/rules/notebook-blank-edit.mdc`** — Notebook **prime directive:** every `.ipynb` change in a reply should be **line/cluster red/green** reviewable. Each **user message**: usually **burn** first (`skip burn` if user says so), then substantive edits; **ask** when unsure; **`EditNotebook`** for cell bodies (no MCP `notebook_edit_cell` / raw JSON unless user says **`yes, skip rules for this`**). No cap on cells per reply.
 2. **`.cursor/rules/incremental-writes.mdc`** — Network/large I/O loops: append + flush + resume-skip.
 3. **`.cursor/rules/jupyter-notebook-workflow.mdc`** — `540_tenure_pipeline.ipynb`: burn at **cell index 3**; same-cell merge rule.
+4. **`.cursor/rules/shorthand-with-user.mdc`** — Spell out terms first if you wnat to use a shorthand, put it in parentheses after you spell it out; adopt Charles's shorthand only after he uses it in the thread.
 
 ## Notebooks
 

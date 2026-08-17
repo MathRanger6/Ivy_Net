@@ -14,6 +14,8 @@ SIM_INPUTS = HERO_ROOT / "sim_inputs"
 EMPIRICAL_PD17 = HERO_ROOT / "empirical_pd17"
 GRANDCHILD_ASSIGN = HERO_ROOT / "grandchild_assign"
 PD20_TEMPERATURE = HERO_ROOT / "pd20_temperature"
+PD21_MLE = HERO_ROOT / "pd21_mle"
+PD21_RHO = HERO_ROOT / "pd21_rho"
 SORT_CHOP_LAMBDA = HERO_ROOT / "sort_chop_lambda"
 SOFT_ASSIGN_LAMBDA = HERO_ROOT / "soft_assign_lambda"
 THETA = HERO_ROOT / "theta"
@@ -46,6 +48,7 @@ AUTO_THETA_DECK = SLIDES_AUTO / "CHAR_theta_characterization_AUTO.pptx"
 AUTO_GAMMA_DECK = SLIDES_AUTO / "CHAR_gamma_characterization_AUTO.pptx"
 AUTO_SOFT_ASSIGN_GAMMA_DECK = SLIDES_AUTO / "CHAR_soft_assign_gamma_sweep_AUTO.pptx"
 AUTO_PD20_DECK = SLIDES_AUTO / "CHAR_PD20_HAND_AUTO.pptx"
+AUTO_PD21_RHO_DECK = SLIDES_AUTO / "CHAR_PD21_rho_hsort_calibrate_AUTO.pptx"
 AUTO_PHASE_B_DECK = SLIDES_AUTO / "CHAR_Phase_B_characterization_AUTO.pptx"
 
 _ALL_DIRS = (
@@ -56,6 +59,8 @@ _ALL_DIRS = (
     EMPIRICAL_PD17,
     GRANDCHILD_ASSIGN,
     PD20_TEMPERATURE,
+    PD21_MLE,
+    PD21_RHO,
     SORT_CHOP_LAMBDA,
     SOFT_ASSIGN_LAMBDA,
     THETA,

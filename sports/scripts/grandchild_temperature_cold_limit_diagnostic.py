@@ -50,8 +50,39 @@ DEFAULT_LAMBDA = 2.0
 DEFAULT_LOG10_T = -3.0
 DEFAULT_T = float(10.0 ** DEFAULT_LOG10_T)
 EMP_COLOR = glc.EMP_COLOR
-C_COLOR = "darkorange"
+C_COLOR = "crimson"
 D_COLOR = "mediumpurple"
+
+
+def _plot_rule_arm(
+    ax,
+    summ: pd.DataFrame,
+    xcol: str,
+    *,
+    color: str,
+    label: str,
+    linestyle: str,
+    marker: str,
+    fillstyle: str,
+    zorder: int,
+) -> None:
+    x = summ[xcol].to_numpy(dtype=float)
+    y = summ["selection_rate"].to_numpy(dtype=float)
+    curv = gsel._curvature_label(summ)
+    ax.plot(
+        x,
+        y,
+        marker=marker,
+        linestyle=linestyle,
+        lw=2.4 if linestyle == "-" else 2.0,
+        ms=6,
+        mfc=color if fillstyle == "full" else "none",
+        mew=1.8,
+        color=color,
+        fillstyle=fillstyle,
+        label=f"{label} ({curv['shape'].replace('_', ' ')})",
+        zorder=zorder,
+    )
 
 
 def _plot_cold_limit(
@@ -67,6 +98,7 @@ def _plot_cold_limit(
     lam: float,
     temperature: float,
     out_path: Path,
+    curves_coincide: bool,
 ) -> None:
     configure_matplotlib_mathtext()
     fig, axes = plt.subplots(1, 2, figsize=(12.0, 4.8))
@@ -87,23 +119,28 @@ def _plot_cold_limit(
                 label="Empirical NCAA",
                 zorder=1,
             )
-        for summ, color, label in (
-            (summ_c, C_COLOR, r"Rule C (top-$K$)"),
-            (summ_d, D_COLOR, rf"Rule D ($t={temperature:g}$)"),
-        ):
-            x = summ[xcol].to_numpy(dtype=float)
-            y = summ["selection_rate"].to_numpy(dtype=float)
-            curv = gsel._curvature_label(summ)
-            ax.plot(
-                x,
-                y,
-                "o-",
-                lw=2.0,
-                ms=5,
-                color=color,
-                label=f"{label} ({curv['shape'].replace('_', ' ')})",
-                zorder=2,
-            )
+        _plot_rule_arm(
+            ax,
+            summ_c,
+            xcol,
+            color=C_COLOR,
+            label=r"Rule C (top-$K$)",
+            linestyle="-",
+            marker="o",
+            fillstyle="full",
+            zorder=2,
+        )
+        _plot_rule_arm(
+            ax,
+            summ_d,
+            xcol,
+            color=D_COLOR,
+            label=rf"Rule D ($t={temperature:g}$)",
+            linestyle="--",
+            marker="o",
+            fillstyle="none",
+            zorder=3,
+        )
         ax.set_xlabel(xlab, fontsize=10)
         ax.set_ylabel("Selection / draft rate", fontsize=10)
         ax.legend(fontsize=8, loc="upper left")
@@ -114,6 +151,17 @@ def _plot_cold_limit(
         for summ in (summ_c, summ_d):
             ymax = max(ymax, float(summ["selection_rate"].max()))
         ax.set_ylim(0, min(1.0, ymax * 1.15))
+
+    if curves_coincide:
+        fig.text(
+            0.99,
+            0.01,
+            r"C $\equiv$ D (bin-for-bin at cold $t$)",
+            ha="right",
+            va="bottom",
+            fontsize=9,
+            color="0.35",
+        )
 
     fig.suptitle(
         rf"Cold Gibbs check — rule C vs D ($\lambda={lam:g}$, $t={temperature:g}$, "
@@ -244,6 +292,7 @@ def main() -> None:
         lam=float(args.lam),
         temperature=temperature,
         out_path=out_png,
+        curves_coincide=gap_loo < 1e-9 and gap_mean < 1e-9,
     )
     print(f"Wrote {out_png}")
 

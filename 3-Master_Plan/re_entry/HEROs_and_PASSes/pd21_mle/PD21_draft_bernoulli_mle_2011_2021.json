@@ -1,0 +1,110 @@
+{
+  "generated": "2026-08-14",
+  "script": "sports/scripts/pd21_draft_bernoulli_mle.py",
+  "season_min": 2011,
+  "season_max": 2021,
+  "seasons": "2011-2021",
+  "gamma_fixed": 10.0,
+  "board_form": "p_i \u221d exp(A_i/t) exp(-\u03bb L^C); logits = A/t - \u03bb L^C",
+  "likelihood": "Bernoulli product; season-wise softmax; K not in formula",
+  "n_player_seasons": 62180,
+  "n_drafted": 1134,
+  "n_seasons": 11,
+  "grid_best": {
+    "lambda": 3.0,
+    "t": 1.0,
+    "loglik": -9378.135992949965,
+    "neg_loglik": 9378.135992949965,
+    "mean_topk_overlap": 8.909090909090908,
+    "mean_topk_recall": 0.08194257828398659,
+    "mean_sum_p_on_drafted": 0.038881163756154774,
+    "per_season_overlap": [
+      22,
+      18,
+      17,
+      7,
+      3,
+      2,
+      6,
+      5,
+      8,
+      8,
+      2
+    ]
+  },
+  "bfgs": {
+    "lambda_hat": 11.380839396070511,
+    "t_hat": 1.0730083769190015,
+    "loglik": -9237.877938696265,
+    "neg_loglik": 9237.877938696265,
+    "success": true,
+    "message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+    "n_iter": 13,
+    "diagnostics": {
+      "mean_topk_overlap": 9.181818181818182,
+      "mean_topk_recall": 0.08258962674870843,
+      "mean_sum_p_on_drafted": 0.03885613651125081,
+      "per_season_overlap": [
+        19,
+        13,
+        14,
+        10,
+        6,
+        6,
+        10,
+        12,
+        6,
+        5,
+        0
+      ]
+    }
+  },
+  "pd20_reference_points": [
+    {
+      "lambda": 1.5,
+      "t": 1.0,
+      "loglik": -9444.141617938096,
+      "diagnostics": {
+        "mean_topk_overlap": 7.363636363636363,
+        "mean_topk_recall": 0.06700780251601295,
+        "mean_sum_p_on_drafted": 0.03768651385948908,
+        "per_season_overlap": [
+          23,
+          18,
+          12,
+          3,
+          2,
+          2,
+          5,
+          1,
+          7,
+          6,
+          2
+        ]
+      }
+    },
+    {
+      "lambda": 2.0,
+      "t": 1.0,
+      "loglik": -9419.731517737531,
+      "diagnostics": {
+        "mean_topk_overlap": 8.272727272727273,
+        "mean_topk_recall": 0.0755243273549677,
+        "mean_sum_p_on_drafted": 0.03814305669811148,
+        "per_season_overlap": [
+          24,
+          19,
+          14,
+          4,
+          3,
+          2,
+          5,
+          3,
+          8,
+          7,
+          2
+        ]
+      }
+    }
+  ]
+}
