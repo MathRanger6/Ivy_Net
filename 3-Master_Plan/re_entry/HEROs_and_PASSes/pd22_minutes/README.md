@@ -2,6 +2,8 @@
 
 Alex (Aug 17 2026): justify playing-time floor and panel policy (drop vs PPM-zero) before defending ρ calibration.
 
+**Big-picture story (wavetops → now):** [`../PD20_22_campaign_big_picture.md`](../PD20_22_campaign_big_picture.md)
+
 **Todo list:** [`PD22_minutes_panel_investigation_todo.md`](PD22_minutes_panel_investigation_todo.md)
 
 **Box QC policy (dash `"-"` drop + min 11 games/team-season; default `min_team_season_games=10`):** [`BOX_QC_panel_build_policy.md`](BOX_QC_panel_build_policy.md)
@@ -232,6 +234,8 @@ python sports/scripts/build_pd22_interval_overlap_season_slide.py --season 2013 
 
 **Result (2013):** ρ\*=0 on locked bracket too; H_sort=0.062, 95% grid >1 team — overlap *stronger* than 2012.
 
+**Why Alex cited 2013 (ρ\* ≈ 0.07):** That was the **PD21 roster-caps slide** (pre-box-QC panel; mean $H_{\mathrm{sort}}^{\mathrm{emp}}$ ≈ 0.105). Box QC lowered empirical sorting (~0.06–0.07) and collapsed bracket ρ\* to 0 on all seasons. See `pd21_rho/PD21_rho_hsort_sensitivity.json` (`full_min20`) vs locked `PD21_rho_hsort_calibrate_2011_2021_fit_bracket.json`.
+
 ## AUTO slide (raw roster size — backup)
 
 See **Raw panel roster size** above for before/after QC commands. Legacy alias `build_pd22_raw_roster_size_slide.py` → after-QC deck.
@@ -256,3 +260,15 @@ python sports/scripts/build_pd22_team_season_games_count_after_qc_slide.py --sli
 **Figure:** `PD22_team_season_games_count_after_qc_2011_2021.png` → `slides/auto/CHAR_PD22_team_season_games_count_after_qc_AUTO.pptx`
 
 Regenerate both histograms: `python sports/scripts/pd22_team_season_games_count.py`
+
+## Item 15 — PD20–22 takeaways memo (decision slides)
+
+New **narrative memo** format: one question per slide, four blocks (Why → What → Saw → So for us). Large prose — not HAND figure+sidebar layout.
+
+```bash
+python sports/scripts/build_pd20_22_takeaways_memo.py
+```
+
+**Output:** `slides/auto/CHAR_PD20_22_takeaways_memo_AUTO.pptx` — 7 slides covering PD20 (SELECT), PD21 (ρ), PD22 (minutes + policy + ρ puzzle), and bottom-line locked decisions.
+
+**Format module:** `sports/scripts/memo_slide_common.py` (title 30 pt, body 18 pt).

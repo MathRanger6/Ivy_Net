@@ -54,10 +54,11 @@ def calibrate_claim(fit: dict) -> str:
     long = fit.get("longitudinal", {})
     err_ref = float(long.get("mean_abs_err_at_reference_rho", 0.112))
     if is_contrast_panel(fit):
-        rho_star = float(long.get("rho_star_longitudinal", 0.57))
+        rho_star = float(long.get("rho_star_longitudinal", 0.048))
         return (
-            rf"Claim (PD21 contrast): ppm0lt20 inflates longitudinal $\rho^* \approx {rho_star:.3g}$ — "
-            r"not the hero estimand; 2013$\rightarrow$2014 per-season jump traces ESPN box-depth break "
+            rf"Claim (PD21 contrast): ppm0lt20 yields modest longitudinal $\rho^* \approx {rho_star:.3g}$ "
+            r"(hero panel $=0$) — not the locked estimand; 2014$\rightarrow$2015 per-season spike "
+            r"co-moves with mid-decade $H_{\mathrm{sort}}$ on uncapped roster rows "
             r"(PD22 ESPN coverage — HAND20 slide 9)."
         )
     rho_star = float(long.get("rho_star_longitudinal", 0.0))
@@ -94,8 +95,8 @@ def hero_do_dont_bullets(fit: dict) -> list[str]:
 def contrast_do_dont_bullets() -> list[str]:
     """ppm0lt20 contrast guardrails (HAND20 slide 15)."""
     return [
-        r"Contrast slide only: ppm0lt20 (all roster rows, PPM$=0$ if min$<20$, no caps) inflates "
-        r"$\rho^*$ and the 2013$\rightarrow$2014 per-season jump — do not use for locked calibration.",
+        r"Contrast slide only: ppm0lt20 (all roster rows, PPM$=0$ if min$<20$, no caps) can yield "
+        r"positive per-season $\rho^*$ where hero drop gives $0$ — do not use for locked calibration.",
         r"Footer claim on this slide is about contrast failure mode — not the hero-panel "
         r"near-zero $\rho^*$ story on the hero calibration slide (HAND20 slide 14).",
     ]
@@ -116,9 +117,9 @@ def timeseries_title(fit: dict) -> str:
 def timeseries_claim(fit: dict) -> str:
     if is_contrast_panel(fit):
         return (
-            r"Claim (PD21 contrast): 2013$\rightarrow$2014 jump in per-season $\rho^*$ on ppm0lt20 "
-            r"is ESPN roster-depth artifact — hero min-20 panel gives flat $\rho^*$; "
-            r"see PD22 ESPN coverage (HAND20 slide 9)."
+            r"Claim (PD21 contrast): ppm0lt20 mid-decade per-season $\rho^*$ spike "
+            r"(2014$\rightarrow$2015) co-moves with empirical $H_{\mathrm{sort}}$ — hero min-20 "
+            r"panel gives flat $\rho^*$; see PD22 ESPN coverage (HAND20 slide 9)."
         )
     return (
         r"Claim (Alex): Hero panel gives flat per-season $\rho^*$ ($=0$ all seasons) — "
@@ -133,24 +134,24 @@ def _season_rho(per: list[dict], season: int) -> float | None:
     return None
 
 
-def jump_2013_2014_bullet(fit: dict) -> str | None:
+def jump_2014_2015_bullet(fit: dict) -> str | None:
     if not is_contrast_panel(fit):
         return None
     per = fit.get("per_season", [])
-    r13 = _season_rho(per, 2013)
     r14 = _season_rho(per, 2014)
-    if r13 is None or r14 is None:
+    r15 = _season_rho(per, 2015)
+    if r14 is None or r15 is None:
         return None
     return (
-        rf"2013$\rightarrow$2014 per-season $\rho^*$: {marrow(r13, r14, decimals=3)} — "
-        r"coincides with raw ESPN player-season count jump; not used for locked calibration."
+        rf"2014$\rightarrow$2015 per-season $\rho^*$: {marrow(r14, r15, decimals=3)} — "
+        r"mid-decade spike co-moves with empirical $H_{\mathrm{sort}}$; not used for locked calibration."
     )
 
 
 def inset_bullet(fit: dict) -> str:
     if is_contrast_panel(fit):
         return (
-            r"Figure bottom-right inset: per-season $\rho^*$ — red dots jump at 2014; "
+            r"Figure bottom-right inset: per-season $\rho^*$ — red dots spike at 2015–2016; "
             r"dotted line = mean $\rho^*$ across seasons."
         )
     return (

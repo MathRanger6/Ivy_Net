@@ -33,7 +33,7 @@ from pd17_interval_overlap_slide import build_figure_focus_slide, load_meta
 from pd21_slide_common import (
     calibrate_role_bullet,
     is_contrast_panel,
-    jump_2013_2014_bullet,
+    jump_2014_2015_bullet,
     panel_bullet,
     timeseries_claim,
     timeseries_title,
@@ -102,7 +102,7 @@ def _readout_bullets(fit: dict) -> list[str]:
         r"Blue (right): empirical $H_{\mathrm{sort}}$ by season; dotted blue = longitudinal mean.",
         h_sort_definition_bullet(),
     ]
-    jump = jump_2013_2014_bullet(fit)
+    jump = jump_2014_2015_bullet(fit)
     if jump:
         bullets.append(jump)
     if n_capped:
@@ -112,8 +112,8 @@ def _readout_bullets(fit: dict) -> list[str]:
         )
     if is_contrast_panel(fit):
         bullets.append(
-            r"Pair with PD22 ESPN coverage (HAND20 slide 9) — 2013$\rightarrow$2014 raw player-season "
-            r"jump explains this timeseries, not doubled games."
+            r"Pair with PD22 ESPN coverage (HAND20 slide 9) — roster-depth context for ppm0lt20; "
+            r"mid-decade $\rho^*$ spike is not the locked calibration estimand."
         )
     return bullets
 

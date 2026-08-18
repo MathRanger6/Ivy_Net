@@ -199,6 +199,13 @@ def _set_char_bullet(paragraph, *, char: str = "•") -> None:
     p_pr.insert(0, bu_char)
 
 
+def _sanitize_memo_text(text: str) -> str:
+    """Strip control chars that corrupt LaTeX tokens (e.g. \\r in \\rho → _x000D_ho in PPT)."""
+    if "\r" in text:
+        text = text.replace("\r", "")
+    return text
+
+
 def populate_paragraph_raw_latex(
     paragraph,
     text: str,
@@ -214,6 +221,7 @@ def populate_paragraph_raw_latex(
     """
     from pptx.util import Pt
 
+    text = _sanitize_memo_text(text)
     paragraph.text = ""
     run = paragraph.add_run()
     run.text = text

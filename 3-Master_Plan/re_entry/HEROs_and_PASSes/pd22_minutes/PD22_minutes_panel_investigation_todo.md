@@ -181,7 +181,9 @@ Same plot for a non-zero season (Alex suggested **2013**, ρ\* ≈ 0.07).
 
 **Done.** `python sports/scripts/pd22_interval_overlap_season.py --season 2013` → `PD22_interval_overlap_season_2013.{csv,json,png}`.
 
-**Note:** On the **locked drop-at-20 bracket** (box-QC panel), **2013 also gives ρ\* = 0** — same as 2012. Alex’s ~0.07 figure was likely pre-lock or a different panel epoch. The 2012 vs 2013 contrast is **H_sort and overlap intensity**, not bracket ρ\*.
+**Panel epoch (Alex’s ρ\* ≈ 0.07):** From the **PD21 roster-caps calibration slide** (HAND — “WITH ROSTER CAPS”): min≥20 drop, empirical roster caps, **pre-box-QC** panel. Stored readout: `pd21_rho/PD21_rho_hsort_sensitivity.json` subset `full_min20` — longitudinal ρ\* ≈ **0.067**, 2013 ρ\* ≈ **0.074**, mean $H_{\mathrm{sort}}^{\mathrm{emp}}$ ≈ **0.105** (matches the slide subtitle).
+
+**Locked hero panel (box QC):** `PD21_rho_hsort_calibrate_2011_2021_fit_bracket.json` — **2013 also gives ρ\* = 0** (same as 2012); $H_{\mathrm{sort}}^{\mathrm{emp}}$ ≈ **0.062**. Item 11 overlap plots use this locked panel. The 2012 vs 2013 contrast is **$H_{\mathrm{sort}}$ and overlap intensity**, not bracket ρ\* under the locked estimand.
 
 | | 2012 (item 10) | 2013 (item 11) |
 |---|----------------|----------------|
@@ -190,15 +192,17 @@ Same plot for a non-zero season (Alex suggested **2013**, ρ\* ≈ 0.07).
 | Team-seasons | 345 | 347 |
 | Grid fraction >1 team | 89.2% | **95.0%** |
 
-**Say it aloud:** Both zero-ρ\* seasons still show massive overlap — 2013 if anything *more* stacked than 2012. “Why ρ\* = 0?” → bracket fit on modest $H_{\mathrm{sort}}$ (~0.06–0.07), not because intervals look disjoint.
+**Say it aloud:** Both zero-ρ\* seasons still show massive overlap — 2013 if anything *more* stacked than 2012. “Why ρ\* = 0?” → bracket fit on modest $H_{\mathrm{sort}}$ (~0.06–0.07) on the locked panel, not because intervals look disjoint. Alex’s 2013 ρ\* ≈ 0.07 was on the **earlier roster-caps panel** before box QC.
 
 ---
 
-### 12. Team-rank dissection — 2012 vs 2013
+### 12. Team-rank dissection — 2012 vs 2013 *(skipped — optional)*
 
 Plot **team ranks** (or H_sort by team) for those two seasons side by side.
 
 **Goal:** “what made 2012 so different from 2013?” — roster depth, star concentration, meaningful minute-players vs bench zeros.
+
+**Status:** Skipped Aug 18 2026. Original motivation was ρ\* contrast (2012 zero vs 2013 ≈ 0.07); resolved by panel-epoch note (item 11). Items 10–11 already show overlap persists at ρ\*=0. Forensic color only — not blocking for item 15 memo.
 
 ---
 
@@ -222,16 +226,29 @@ Extend `pd21_rho_hsort_sensitivity.py` (currently 0 vs 20) to a ladder aligned w
 
 ## E. Close the loop
 
-### 15. PD22 decision memo (1–2 pages)
+### 15. PD20–22 takeaways memo ✅ (Aug 18 2026)
 
-Write up (extend this file or add a sibling `PD22_decision_memo.md`):
+**Format:** conversational **narrative memo** slides — each slide answers one question with four labeled blocks: *Why we did it → What we did → What we saw → So for us*. Large prose type (not HAND bullet diagnostics).
 
-- Chosen `min_minutes` and why (items 1–5)
-- Chosen panel policy: drop vs zero vs other (items 6–9)
-- Induced-homophily verdict (artifact vs meaningful)
-- ρ\* = 0 seasons vs overlap plots (items 10–12)
-- **Narrative line for reviewers:** minutes guard against PPM noise; no drafted player lost; assortativity level X under policy Y
-- **Non-goal:** model already works at low assortativity; don’t block SELECT / main story for perfect ρ calibration
+```bash
+python sports/scripts/build_pd20_22_takeaways_memo.py
+```
+
+**Output:** `slides/auto/CHAR_PD20_22_takeaways_memo_AUTO.pptx` (7 slides).
+
+| Slide | Question answered |
+|-------|-------------------|
+| 1 | How to read this memo |
+| 2 | Is 20 minutes arbitrary? What PPM do we drop? |
+| 3 | Drop vs set sub-20-min PPM to zero? |
+| 4 | Why $\rho^*=0$ but overlap looks sorted? |
+| 5 | What $\rho$ for PD21 calibration? |
+| 6 | Does Gibbs SELECT kill the inverted-U? |
+| 7 | Bottom line — what we lock |
+
+**Typography:** `memo_slide_common.py` — narrative blocks at 17 pt body, 14 pt section labels (vs HAND 10 pt diagnostic decks).
+
+**Say it aloud:** Drop at 20 · ρ\*≈0 on locked panel · inverted-U survives SELECT · do not over-interpret assortativity.
 
 ---
 
@@ -260,7 +277,7 @@ Alex: **~few hours total** on this thread. If item 9 picks a policy and item 15 
 3. **Two distributions:** raw PPM and empirically capped PPM; find the “natural line” for the cut.
 4. **Induced homophily:** pushing sub-20-min players to zero may inflate H_sort because “lots of zeros will be with each other.”
 5. **Sanity:** no team should be all zeros — double-check.
-6. **ρ\* puzzle:** pull one ρ\* = 0 season and one ρ\* > 0 season; compare interval plots and team ranks (e.g. 2012 vs 2013).
+6. **ρ\* puzzle:** locked panel → all ρ\* = 0; legacy roster-caps panel had non-zero seasons (2013 ρ\* ≈ 0.074). Compare interval plots and team ranks for 2012 vs 2013 on the **locked** panel (overlap intensity, not ρ\* contrast).
 7. **Scope:** few hours; model is strong even if assortativity is weak; pick a justified policy and move on.
 
 ---

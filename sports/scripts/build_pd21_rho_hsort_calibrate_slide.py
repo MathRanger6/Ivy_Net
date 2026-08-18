@@ -39,7 +39,7 @@ from pd21_slide_common import (
     hero_do_dont_bullets,
     inset_bullet,
     is_contrast_panel,
-    jump_2013_2014_bullet,
+    jump_2014_2015_bullet,
     panel_bullet,
 )
 
@@ -141,7 +141,7 @@ def _readout_bullets(fit: dict) -> list[str]:
         f"vs $\\approx {err_star_s}$ at $\\rho^*$.",
         inset_bullet(fit),
     ]
-    jump = jump_2013_2014_bullet(fit)
+    jump = jump_2014_2015_bullet(fit)
     if jump:
         bullets.append(jump)
     if is_contrast_panel(fit):

@@ -70,6 +70,7 @@ AUTO_PD22_TEAM_SEASON_GAMES_AFTER_QC_DECK = (
     SLIDES_AUTO / "CHAR_PD22_team_season_games_count_after_qc_AUTO.pptx"
 )
 AUTO_PD22_ESPN_COVERAGE_DECK = SLIDES_AUTO / "CHAR_PD22_espn_coverage_by_season_AUTO.pptx"
+AUTO_PD20_22_MEMO_DECK = SLIDES_AUTO / "CHAR_PD20_22_takeaways_memo_AUTO.pptx"
 AUTO_PHASE_B_DECK = SLIDES_AUTO / "CHAR_Phase_B_characterization_AUTO.pptx"
 
 _ALL_DIRS = (

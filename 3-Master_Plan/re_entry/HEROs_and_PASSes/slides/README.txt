@@ -27,7 +27,7 @@ JPEG exports (for agents / visual audit)
 ----------------------------------------------------------------------
   HAND16:  CHAR_PD16_HAND/Slide1.jpeg … Slide13.jpeg  (re-export after edits)
   HAND17:  CHAR_PD17_HAND/Slide1.png … SlideN.png  (re-export after edits)
-  HAND20:  CHAR_PD20_HAND/Slide1.png … Slide16.png  (re-export after edits)
+  HAND20:  CHAR_PD20_HAND/Slide1.png … Slide21.png  (re-export after edits)
 
   Legacy (pre-trim): HAND_slides_images/ (16 slides), old CHAR_PD16_HAND/Slide17.jpeg
 
@@ -146,22 +146,28 @@ HAND17 — empirical MBB deck (expanded Aug 2026)
   Memo: ../grandchild_assign/GRANDCHILD_D_and_H_sort_interpretation.md
 
 ----------------------------------------------------------------------
-HAND20 — Alex deck (PD20 + PD21 + PD22 panel backup, Aug 2026)
+HAND20 — Alex deck (PD20 + PD22 + PD21, Aug 2026)
 ----------------------------------------------------------------------
   Source: CHAR_PD20_HAND.pptx
-  PNG audit: CHAR_PD20_HAND/Slide1.png … Slide16.png
-  **16 slides** (final order locked Aug 17 2026): PD20 → PD22 panel build → PD21 ρ
+  PNG audit: CHAR_PD20_HAND/Slide1.png … Slide21.png
+  **21 slides** (Aug 18 2026): PD20 → PD22 panel build → PD21 ρ → PD22 policy/overlap
 
-  Story arc (panel build BEFORE ρ calibration):
-    Act I   PD20 Gibbs SELECT gate (slides 1–4)
-    Act II  PD22 why the hero panel exists (slides 5–13)
-    Act III PD21 ρ* on hero + ppm0lt20 contrast (slides 14–16)
+  Story arc (current deck order):
+    Act I    PD20 Gibbs SELECT gate (slides 1–4)
+    Act II   PD22 why the hero panel exists (slides 5–13)
+    Act III  PD21 ρ* on hero + ppm0lt20 contrast (slides 14–16)
+    Act IV   PD22 drop vs PPM-zero + overlap reconciliation (slides 17–21)
+
+  Suggested read-aloud order (optional reorder): Acts I → II → IV (17–19) → III (14–16)
+  → IV (20–21). Policy evidence (19) before locking ρ (14); overlap (20–21) after ρ.
 
   Save As backup before substantive edits:
     slides/archive/CHAR_PD20_HAND_backup_YYYYMMDD.pptx
 
-  HAND workflow: AUTO decks in slides/auto/*_AUTO.pptx → copy slide or Change Picture
-  + bullets/claim; keep Office Math formatting applied by hand in HAND.
+  HAND workflow: AUTO decks in slides/auto/*_AUTO.pptx → **Change Picture** for the
+  figure on the right; keep/edit **left sidebar text boxes** (title, subtitle, bullets,
+  claim) in HAND. Office Math applied by hand after paste. Slides 14–16 follow this
+  layout (editable bullets + figure — not a full-slide flatten).
 
 | PPT | Block | Title (short) | AUTO / PNG |
 |-----|-------|---------------|------------|
@@ -178,29 +184,47 @@ HAND20 — Alex deck (PD20 + PD21 + PD22 panel backup, Aug 2026)
 | 11  | PD22  | Raw panel season-minutes distribution | pd22_minutes/PD22_raw_minutes_distribution_*.png |
 | 12  | PD22  | PPM — filtered tail vs hero ASSIGN input | pd22_minutes/PD22_ppm_distribution_*.png |
 | 13  | PD22  | PPM overlay — full vs sub-20 tail | pd22_minutes/PD22_ppm_full_vs_filtered_*.png |
-| 14  | PD21  | Calibrate ρ — hero panel (locked) | pd21_rho/PD21_rho_hsort_calibrate_*_bracket.png |
-| 15  | PD21  | Calibrate ρ — ppm0lt20 contrast | pd21_rho/PD21_rho_hsort_calibrate_*_ppm0lt20_bracket.png |
-| 16  | PD21  | Per-season ρ* timeseries (contrast) | pd21_rho/…_ppm0lt20_bracket_rho_hsort_timeseries.png |
+| 14  | PD21  | Calibrate ρ — hero panel (locked) | auto/CHAR_PD21_rho_hsort_calibrate_AUTO.pptx (figure) |
+| 15  | PD21  | Calibrate ρ — ppm0lt20 contrast | auto/CHAR_PD21_rho_hsort_calibrate_ppm0lt20_AUTO.pptx |
+| 16  | PD21  | Per-season ρ* timeseries (contrast) | auto/CHAR_PD21_rho_hsort_timeseries_ppm0lt20_AUTO.pptx |
+| 17  | PD22  | PPM-zero vs drop — ability distribution | auto/CHAR_PD22_ppm_zero_ability_distribution_AUTO.pptx |
+| 18  | PD22  | Bench-zero clustering vs H_sort | auto/CHAR_PD22_ppm_zero_hsort_mechanism_AUTO.pptx |
+| 19  | PD22  | Panel policy — drop vs PPM-zero at min 20 | auto/CHAR_PD22_panel_policy_compare_AUTO.pptx |
+| 20  | PD22  | Interval overlap — season 2012 (ρ*=0) | auto/CHAR_PD22_interval_overlap_season_2012_AUTO.pptx |
+| 21  | PD22  | Interval overlap — season 2013 (ρ*=0) | auto/CHAR_PD22_interval_overlap_season_2013_AUTO.pptx |
 
   Cross-slide pairs for Alex:
     • Slides 9 + 16 — ESPN depth break explains ppm0lt20 2013→2014 jump
     • Slides 12 + 13 — PPM tails (detail vs overlay); slide 13 optional appendix trim
-    • Slide 14 — ρ*=0 is model–measurement fit, not “NCAA is random”
+    • Slides 14 vs 15 — locked hero (ρ*=0 all seasons) vs ppm0lt20 contrast (wrong estimand)
+    • Slide 14 — box QC lowered H_sort (~0.10→~0.06); pre-QC mixed ρ* archived in
+      H_sort_calibration_backups_PD20.pptx — not the locked estimand
+    • Slides 17 → 19 — PPM-zero mechanism then policy decision (drop wins)
+    • Slides 20 + 21 — overlap persists at ρ*=0; Alex's 2013 ρ*≈0.07 was pre-box-QC panel
 
   Talking thread for Alex:
-    • PD20 cleared → now calibrate ρ, but panel choices matter
+    • PD20 cleared → panel choices matter before ρ calibration
     • Raw ESPN box is messy (roster tails, one-game seasons) → box QC fixes it
     • 2013→2014 ESPN lists more bench rows — hero min-20 panel is flat (slide 9)
     • Draft-safe at min=0; hero ASSIGN uses min≥20 for PPM stability
+    • Drop at 20 (not PPM-zero): same policy slide 14 already uses — no ρ re-calibration needed
     • Hero panel: ρ*=0, modest H_sort — not “NCAA is random”
-    • ppm0lt20 contrast: inflated ρ* + 2014 jump — wrong estimand
+    • ppm0lt20 contrast: inflated ρ* + 2014 jump — illustrative only
+    • ρ*=0 but overlap plots look sorted — different questions (slides 20–21)
 
   Regenerate: pd20_temperature/REGENERATE.md, pd21_rho/README.md, pd22_minutes/README.md
   Memo (H_sort): ../grandchild_assign/GRANDCHILD_D_and_H_sort_interpretation.md
+  Takeaways memo (narrative companion): auto/CHAR_PD20_22_takeaways_memo_AUTO.pptx
+    ~46 slides — wavetops (Parts 0–2 + bridges) → snag bridge + snag + Q1–Q3 → Act bridges →
+    one narrative companion per HAND slide (footer: paste HAND N after) →
+    where we stand + what lies ahead (main line, Rung 3, parked, manuscript) → closing
+    Regenerate: python sports/scripts/build_pd20_22_takeaways_memo.py
+  Big-picture prose (wavetops → now): ../PD20_22_campaign_big_picture.md
 
-  Reorder history (Aug 17): pre-reorder had PD21 (old 5–7) before PD22 (old 8–15);
-  final deck interleaves PD22 backup block before PD21 calibration. Archive:
-  slides/H_sort_calibration_backups_PD20.pptx
+  Reorder history:
+    • Aug 17 — PD22 backup block (5–13) moved before PD21 ρ (14–16)
+    • Aug 18 — PD22 policy/overlap block appended (17–21)
+  Pre-box-QC ρ calibration figures: slides/H_sort_calibration_backups_PD20.pptx
 
 ----------------------------------------------------------------------
 VECTOR ASSIGN decks (Aug 2026 — moved from VECTOR_work/)
