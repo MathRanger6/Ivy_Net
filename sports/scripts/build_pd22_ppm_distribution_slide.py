@@ -24,7 +24,7 @@ sys.path.insert(0, str(SCRIPTS))
 
 from hero_gallery_paths import AUTO_PD22_PPM_DISTRIBUTION_DECK, PD22_MINUTES, ensure_hero_dirs
 from pd17_interval_overlap_slide import build_figure_focus_slide, load_meta
-from pd22_slide_common import BOX_QC_PANEL_NOTE, m, mgt, mlt, mpct
+from pd22_slide_common import BOX_QC_PANEL_NOTE, m, mn, mgt, mlt, mpct
 
 PPM_SCRIPT = SCRIPTS / "pd22_ppm_distribution.py"
 SEASON_MIN = 2011
@@ -33,7 +33,7 @@ STEM = f"PD22_ppm_distribution_{SEASON_MIN}_{SEASON_MAX}"
 HERO_LOCK = 20.0
 
 CLAIM = (
-    r"Claim (Alex, PD22): Minutes floor guards against noisy PPM tails — "
+    r"Claim (PD22): Minutes floor guards against noisy PPM tails — "
     r"sub-20-min rows include extreme points-per-minute spikes; hero ASSIGN uses "
     r"PPM z-scored within season on the min-20 panel."
 )
@@ -66,7 +66,7 @@ def _readout_bullets(meta: dict) -> list[str]:
         rf"({m(int(s.get('n_filtered_out_zero_minutes', 0)))} at {m(0)} min excluded from PPM hist).",
         rf"Sub-{HERO_LOCK:g}-min with PPM {mgt(1.0)}: {m(int(s.get('n_filtered_out_ppm_gt_1', 0)))}; "
         rf"max raw PPM in tail: {m(float(s.get('filtered_out_ppm_max', 0)), decimals=2)}.",
-        rf"Item 4 (right): hero panel $n =$ {m(int(s.get('n_hero_panel', 0)))} — raw PPM then "
+        rf"Item 4 (right): hero panel {mn(int(s.get('n_hero_panel', 0)))} — raw PPM then "
         r"PPM z within season (PD21 ASSIGN ability; empirical roster caps are separate).",
         rf"Hero raw PPM median = {m(float(s.get('hero_raw_ppm_median', 0)), decimals=3)}; "
         rf"standardized ability median = {m(float(s.get('hero_perf_median', 0)), decimals=2)}.",

@@ -1,0 +1,28 @@
+{
+  "diagnostic": "pd22_ppm_zero_hsort_mechanism",
+  "date": "2026-08-18",
+  "season_min": 2011,
+  "season_max": 2021,
+  "seasons": "2011-2021",
+  "panel_spec": "PPM-zero min=0 + ppm_zero_below=20; drop min=20; H_sort from realized partition on perf",
+  "summary": {
+    "ppm_zero_below_minutes": 20.0,
+    "n_team_seasons": 3842,
+    "corr_zero_fraction_vs_perf_std": 0.5335254609933684,
+    "corr_zero_fraction_vs_perf_var": 0.5107997514282441,
+    "corr_season_mean_zero_fraction_vs_h_sort_ppm_zero": 0.22714009876499133,
+    "corr_season_mean_zero_fraction_vs_h_sort_delta": 0.36290505880203433,
+    "h_sort_drop_mean": 0.0642059328442421,
+    "h_sort_ppm_zero_mean": 0.06525459364456486,
+    "h_sort_delta_mean": 0.0010486608003227517,
+    "h_sort_delta_min": -0.013480988220532009,
+    "h_sort_delta_max": 0.022339811184146074,
+    "n_team_seasons_ge_half_zeroed": 74
+  },
+  "outputs": {
+    "csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/pd22_minutes/PD22_ppm_zero_hsort_mechanism_2011_2021.csv",
+    "season_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/pd22_minutes/PD22_ppm_zero_hsort_mechanism_season_2011_2021.csv",
+    "json": "3-Master_Plan/re_entry/HEROs_and_PASSes/pd22_minutes/PD22_ppm_zero_hsort_mechanism_2011_2021.json",
+    "png": "3-Master_Plan/re_entry/HEROs_and_PASSes/pd22_minutes/PD22_ppm_zero_hsort_mechanism_2011_2021.png"
+  }
+}

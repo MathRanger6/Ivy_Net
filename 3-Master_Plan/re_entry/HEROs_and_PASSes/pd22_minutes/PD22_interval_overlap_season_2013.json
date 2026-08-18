@@ -1,0 +1,41 @@
+{
+  "diagnostic": "pd22_interval_overlap_season",
+  "pd22_item": 11,
+  "date": "2026-08-18",
+  "season": 2013,
+  "panel_spec": "drop-at-20 hero panel; PPM z within season; single season only",
+  "rho_star_drop_bracket": 0.0,
+  "question": "Does PD17-style interval overlap structure persist when bracket rho* \u2248 0?",
+  "coverage_max": 347,
+  "coverage_max_normalized": 1.0,
+  "coverage_mean": 172.4125,
+  "coverage_frac_gt_1": 0.95,
+  "coverage_disjoint_max": 2,
+  "coverage_disjoint_mean": 0.9175,
+  "n_team_seasons": 347,
+  "n_player_seasons": 4135,
+  "H_sort": 0.061979619345465475,
+  "perf_span": {
+    "label": "perf_span",
+    "n": 347,
+    "mean": 3.2584889399805665,
+    "std": 0.7628847091734753,
+    "min": 1.5322354678662942,
+    "max": 5.900664586059861,
+    "median": 3.2341405931675227
+  },
+  "T_j_hat": {
+    "label": "\\hat{T}_j",
+    "n": 347,
+    "mean": 0.005553891960354452,
+    "std": 0.24840596244335356,
+    "min": -0.676716081076348,
+    "max": 0.8212053348176447,
+    "median": 0.023146666181670283
+  },
+  "outputs": {
+    "png": "3-Master_Plan/re_entry/HEROs_and_PASSes/pd22_minutes/PD22_interval_overlap_season_2013.png",
+    "csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/pd22_minutes/PD22_interval_overlap_season_2013.csv",
+    "json": "3-Master_Plan/re_entry/HEROs_and_PASSes/pd22_minutes/PD22_interval_overlap_season_2013.json"
+  }
+}

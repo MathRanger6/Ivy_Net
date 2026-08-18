@@ -9,7 +9,7 @@ Run (repo root):
 
 Output:
   slides/auto/CHAR_PD21_rho_hsort_timeseries_AUTO.pptx              (hero — optional)
-  slides/auto/CHAR_PD21_rho_hsort_timeseries_ppm0lt20_AUTO.pptx     (slide 7 — contrast)
+  slides/auto/CHAR_PD21_rho_hsort_timeseries_ppm0lt20_AUTO.pptx   (HAND20 slide 16 — contrast)
 
 Figure: pd21_rho/PD21_rho_hsort_calibrate_2011_2021[_ppm0lt20]_bracket_rho_hsort_timeseries.png
 """
@@ -112,7 +112,7 @@ def _readout_bullets(fit: dict) -> list[str]:
         )
     if is_contrast_panel(fit):
         bullets.append(
-            r"Pair with PD22 ESPN coverage backup slide — 2013$\rightarrow$2014 raw player-season "
+            r"Pair with PD22 ESPN coverage (HAND20 slide 9) — 2013$\rightarrow$2014 raw player-season "
             r"jump explains this timeseries, not doubled games."
         )
     return bullets

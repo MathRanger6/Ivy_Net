@@ -32,7 +32,7 @@ SEASON_MAX = 2021
 STEM = f"PD22_raw_minutes_distribution_{SEASON_MIN}_{SEASON_MAX}"
 
 CLAIM = (
-    r"Claim (Alex, PD22): Minutes floor must be grounded in the raw roster distribution — "
+    r"Claim (PD22): Minutes floor must be grounded in the raw roster distribution — "
     r"not an arbitrary cut — before we defend min 20 min for $\rho$ / ASSIGN panels."
 )
 

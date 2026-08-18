@@ -1,8 +1,8 @@
 """Shared PD21 AUTO slide copy — authoritative for HAND paste (Aug 2026).
 
 Charles copies title, subtitle, bullets, and claim verbatim from AUTO decks.
-Hero panel = min-20 drop + box QC + roster caps (slide 5).
-ppm0lt20 = contrast only (slides 6–7), not the locked calibration estimand.
+Hero panel = min-20 drop + box QC + roster caps (HAND20 slide 14 — hero calibration).
+ppm0lt20 = contrast only (HAND20 slides 15–16), not the locked calibration estimand.
 """
 
 from __future__ import annotations
@@ -58,7 +58,7 @@ def calibrate_claim(fit: dict) -> str:
         return (
             rf"Claim (PD21 contrast): ppm0lt20 inflates longitudinal $\rho^* \approx {rho_star:.3g}$ — "
             r"not the hero estimand; 2013$\rightarrow$2014 per-season jump traces ESPN box-depth break "
-            r"(PD22 ESPN coverage backup slide)."
+            r"(PD22 ESPN coverage — HAND20 slide 9)."
         )
     rho_star = float(long.get("rho_star_longitudinal", 0.0))
     h_emp = float(long.get("h_sort_empirical_mean_over_seasons", 0.064))
@@ -70,7 +70,7 @@ def calibrate_claim(fit: dict) -> str:
 
 
 def hero_do_dont_bullets(fit: dict) -> list[str]:
-    """Slide 5 — block over-interpretation of $\rho^*=0$ (copy verbatim into HAND)."""
+    """Hero calibration slide — block over-interpretation of $\rho^*=0$ (HAND20 slide 14)."""
     long = fit.get("longitudinal", {})
     h_emp = float(long.get("h_sort_empirical_mean_over_seasons", 0.064))
     h_sim = float(long.get("h_sort_sim_mean_at_star", 0.082))
@@ -86,17 +86,18 @@ def hero_do_dont_bullets(fit: dict) -> list[str]:
         r"/ $\lambda$ / SELECT story is dead.",
         r"$H_{{\mathrm{{sort}}}}$ is realized sorting on a fixed roster partition (VECTOR lock) — "
         r"not the generative $\rho$ knob. Box QC lowered measured $H_{{\mathrm{{sort}}}}$ vs pre-QC "
-        r"($\sim 0.10 \rightarrow \sim 0.06$); modest $\neq$ zero. Contrast: slide 6 ppm0lt20 panel.",
+        r"($\sim 0.10 \rightarrow \sim 0.06$); modest $\neq$ zero. "
+        r"Contrast: ppm0lt20 panel (HAND20 slide 15).",
     ]
 
 
 def contrast_do_dont_bullets() -> list[str]:
-    """Slide 6 — contrast guardrails (copy verbatim into HAND)."""
+    """ppm0lt20 contrast guardrails (HAND20 slide 15)."""
     return [
         r"Contrast slide only: ppm0lt20 (all roster rows, PPM$=0$ if min$<20$, no caps) inflates "
         r"$\rho^*$ and the 2013$\rightarrow$2014 per-season jump — do not use for locked calibration.",
         r"Footer claim on this slide is about contrast failure mode — not the hero-panel "
-        r"near-zero $\rho^*$ story on slide 5.",
+        r"near-zero $\rho^*$ story on the hero calibration slide (HAND20 slide 14).",
     ]
 
 
@@ -117,7 +118,7 @@ def timeseries_claim(fit: dict) -> str:
         return (
             r"Claim (PD21 contrast): 2013$\rightarrow$2014 jump in per-season $\rho^*$ on ppm0lt20 "
             r"is ESPN roster-depth artifact — hero min-20 panel gives flat $\rho^*$; "
-            r"see PD22 ESPN coverage backup."
+            r"see PD22 ESPN coverage (HAND20 slide 9)."
         )
     return (
         r"Claim (Alex): Hero panel gives flat per-season $\rho^*$ ($=0$ all seasons) — "

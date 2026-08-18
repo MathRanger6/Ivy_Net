@@ -1,0 +1,48 @@
+{
+  "diagnostic": "pd22_ppm_zero_team_sanity",
+  "date": "2026-08-18",
+  "season_min": 2011,
+  "season_max": 2021,
+  "seasons": "2011-2021",
+  "panel_spec": "rebuild min_minutes=0 + ppm_zero_below=20; perf z-scored within season (PD21 calibration path)",
+  "summary": {
+    "n_team_seasons": 3842,
+    "ppm_zero_below_minutes": 20.0,
+    "n_all_zeroed_by_policy": 0,
+    "n_all_raw_ppm_zero": 0,
+    "n_all_identical_perf": 0,
+    "sanity_pass": true,
+    "zero_fraction_median": 0.2,
+    "zero_fraction_p90": 0.35294117647058826,
+    "zero_fraction_p99": 0.55,
+    "zero_fraction_max": 0.7441860465116279,
+    "n_zeroed_ge_half_roster": 74,
+    "teams_with_ge_k_zeros": {
+      "1": 3555,
+      "2": 3003,
+      "5": 902,
+      "8": 193,
+      "10": 102,
+      "12": 67,
+      "15": 42,
+      "18": 22,
+      "20": 10,
+      "25": 1,
+      "30": 1
+    },
+    "worst_team_season": {
+      "team_id": 2655,
+      "season": 2019,
+      "n_roster": 43,
+      "n_zeroed_by_policy": 32,
+      "zero_fraction": 0.7441860465116279,
+      "max_minutes": 1018.0
+    },
+    "all_zeroed_team_seasons": []
+  },
+  "outputs": {
+    "csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/pd22_minutes/PD22_ppm_zero_team_sanity_2011_2021.csv",
+    "json": "3-Master_Plan/re_entry/HEROs_and_PASSes/pd22_minutes/PD22_ppm_zero_team_sanity_2011_2021.json",
+    "png": "3-Master_Plan/re_entry/HEROs_and_PASSes/pd22_minutes/PD22_ppm_zero_team_sanity_2011_2021.png"
+  }
+}

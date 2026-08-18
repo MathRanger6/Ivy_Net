@@ -1,8 +1,11 @@
 """Shared PD22 AUTO slide copy (box QC policy, Aug 2026).
 
 HAND deck convention: wrap numbers and operators in one $...$ block when possible
-(e.g. $\\leq 10$ not $\\leq$ 10; $4{,}135\\rightarrow4{,}248$ not $4{,}135$ $\\rightarrow$ $4{,}248$)
+(e.g. $\\leq 10$ not $\\leq$ 10; $4{,}135\\rightarrow4{,}248$ not $4{,}135$ $\\rightarrow$ $4{,}248$;
+$n = 46{,}306$ not $n =$ $46{,}306$; $1{,}092/1{,}136$ not $1{,}092$ / $1{,}136$)
 so Charles can paste into PowerPoint formulas.
+
+Helpers: ``m`` (literal), ``mn`` / ``mn_approx`` ($n=…$ / $n\\approx…$), ``mfrac`` ($a/b$), ``marrow`` ($a\\rightarrow b$).
 """
 
 from __future__ import annotations
@@ -53,6 +56,16 @@ def msim(x: int | float) -> str:
     return rf"$\sim {x:g}$"
 
 
+def mn(n: int | float, *, decimals: int | None = None) -> str:
+    """Single math block for n = value (HAND formula paste)."""
+    return rf"$n = {_fmt_num(n, decimals=decimals)}$"
+
+
+def mn_approx(n: int | float, *, decimals: int | None = None) -> str:
+    """Single math block for n ≈ value (HAND formula paste)."""
+    return rf"$n \approx {_fmt_num(n, decimals=decimals)}$"
+
+
 def _fmt_num(n: int | float, *, decimals: int | None = None) -> str:
     """Numeric literal inside math mode (no $ delimiters)."""
     if decimals is not None:
@@ -62,6 +75,11 @@ def _fmt_num(n: int | float, *, decimals: int | None = None) -> str:
     if isinstance(n, int):
         return f"{n:,}"
     return f"{n:g}"
+
+
+def mfrac(a: int | float, b: int | float, *, decimals: int | None = None) -> str:
+    """Single math block for a/b (HAND formula paste)."""
+    return rf"${_fmt_num(a, decimals=decimals)}/{_fmt_num(b, decimals=decimals)}$"
 
 
 def marrow(a: int | float, b: int | float, *, decimals: int | None = None) -> str:

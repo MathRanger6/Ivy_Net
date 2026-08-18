@@ -77,65 +77,120 @@ Use items 2–4 plus item 1 to propose a **meaningfully justified** `min_minutes
 
 ## B. PPM-zero policy & induced homophily
 
-### 6. Performance distribution under PPM-zero
+### 6. Performance distribution under PPM-zero ✅ (Aug 18 2026)
 
 With `--ppm-zero-below-minutes 20`, plot the **post-policy ability distribution** (expect a zero spike). Compare to min-20 **drop** panel.
 
 **Goal:** quantify “zero-heavy” shift Alex flagged when bench players stay on roster at PPM = 0.
 
+**Done.** `python sports/scripts/pd22_ppm_zero_ability_distribution.py` → `PD22_ppm_zero_ability_distribution_2011_2021.{csv,json,png}`.
+
+| Headline | Drop | PPM-zero |
+|----------|------|----------|
+| Panel *n* | 46,306 | 59,283 |
+| Bench rows forced to PPM = 0 | — | 12,977 (21.9%) |
+| Raw PPM = 0 | — | 13,180 |
+| ASSIGN below −1 z | 7,356 | **14,028** |
+| Zeroed cohort median *z* | — | ≈ −1.39 (season-dependent pile-up) |
+
+**Say it aloud:** PPM-zero adds ~13k identical-at-zero bench rows back onto the roster; the ability histogram gains a fat gray left tail that drop removes entirely — Alex’s “zero-heavy” shift, visible before you even run ρ.
+
 **See Appendix D** for how zero-minute rows are handled in raw columns, PPM plots, and each panel policy (drop vs NaN-drop vs PPM-zero).
 
 ---
 
-### 7. Sanity check — no all-zero teams
+### 7. Sanity check — no all-zero teams ✅ (Aug 18 2026)
 
 Under PPM-zero policy, verify **no team-season** has all players at zero ability (Alex: “double check — real data”).
 
 Quick counts: teams with ≥ k zeros; max zero fraction per team.
 
+**Done.** `python sports/scripts/pd22_ppm_zero_team_sanity.py` → `PD22_ppm_zero_team_sanity_2011_2021.{csv,json,png}`.
+
+| Headline | Value |
+|----------|-------|
+| Team-seasons | 3,842 |
+| All-zeroed teams (every player `minutes < 20`) | **0** → **PASS** |
+| Max zero fraction | 0.74 (32/43, team 2655 · 2019; rotation player at 1,018 min) |
+| Median / p90 zero fraction | 0.20 / 0.35 |
+| Teams with ≥ half roster zeroed | 74 |
+
+**Say it aloud:** PPM-zero does pile zeros onto deep benches, but every real team-season still has at least one rotation player above the floor — no pathological all-zero rosters in 2011–2021 box data.
+
 ---
 
-### 8. Mechanism check — zeros clustering on rosters
+### 8. Mechanism check — zeros clustering on rosters ✅ (Aug 18 2026)
 
 Per team-season under PPM-zero: count sub-20-min players zeroed; correlate with **empirical H_sort**.
 
 **Hypothesis:** teams with many identical zeros inflate sorting / homophily (“high assortativity of losers”).
 
-**Deliverable:** short table or scatter — enough to say whether ρ\* jump under PPM-zero is mostly an artifact.
+**Done.** `python sports/scripts/pd22_ppm_zero_hsort_mechanism.py` → `PD22_ppm_zero_hsort_mechanism_2011_2021.{csv,json,png}`.
+
+| Headline | Value |
+|----------|-------|
+| corr(zero fraction, within-team perf std) | +0.53 (confounded by roster size — big benches have both) |
+| Mean $H_{\mathrm{sort}}$ drop | 0.0642 |
+| Mean $H_{\mathrm{sort}}$ PPM-zero | 0.0653 |
+| **Δ mean** | **+0.0010** (season range −0.003 to +0.006) |
+
+**Say it aloud:** PPM-zero barely moves empirical $H_{\mathrm{sort}}$ (~0.001 on a ~0.064 index) — the ρ\* jump to ~0.5–0.8 under PPM-zero is **not** a simple “identical zeros inflated sorting” artifact at the league level. Item 9 still needed for bracket ρ\* side-by-side.
 
 ---
 
-### 9. Compare three panel policies at the chosen floor
+### 9. Compare three panel policies at the chosen floor ✅ (Aug 18 2026)
 
-Once item 5 gives a provisional floor, at the same `min_minutes` compare:
+| Policy | Longitudinal ρ\* (current / legacy) | Mean $H_{\mathrm{sort}}^{emp}$ (current panel) | Seasons ρ\*=0 |
+|--------|-------------------------------------|-----------------------------------------------|---------------|
+| **Drop** | **0.0** | 0.0642 | 11/11 |
+| **PPM-zero** | 0.570 *(legacy JSON — pre-box-QC)* | 0.0653 | 0/11 *(legacy)* |
 
-| Policy | Behavior |
-|--------|----------|
-| **Drop** | current PD21 default |
-| **PPM-zero** | `--ppm-zero-below-minutes` |
-| *(optional)* **partial shrinkage** | e.g. minutes-weighted PPM if drop is too harsh and zero too coarse |
+**Recommendation: drop at 20.** On the **current box-QC panel**, PPM-zero moves $H_{\mathrm{sort}}$ by only **+0.001** (item 8). The stored PPM-zero bracket JSON (ρ\*≈0.57) was fit to **pre-QC** $H_{\mathrm{sort}}$ targets (~0.17) — not valid for today's panel. Drop ρ\*=0 is on the locked panel.
 
-Run empirical H_sort + bracket ρ\* (use `--quick` on 2–3 seasons first).
-
-**Goal:** pick a policy Alex can sign off on without over-engineering.
+**Say it aloud:** We considered PPM-zero; on real data it does not change sorting enough to justify ρ\*≈0.5. Drop-at-20 stays locked for PD21.
 
 ---
 
 ## C. Reconcile ρ\* = 0 vs interval-overlap story
 
-### 10. Single-season interval overlap — ρ\* = 0 year
+### 10. Single-season interval overlap — ρ\* = 0 year ✅ (Aug 18 2026)
 
 Pick a season where bracket gives ρ\* ≈ 0 (Alex suggested **2012**). Reproduce the **PD17-style interval overlap plot for that season only** (not pooled across all team-seasons).
 
 **Question:** does the “clear linear increase in mean” red line still appear when ρ\* is zero?
 
+**Done.** `python sports/scripts/pd22_interval_overlap_season.py --season 2012` → `PD22_interval_overlap_season_2012.{csv,json,png}`.
+
+| Headline | 2012 |
+|----------|------|
+| Bracket ρ\* (drop) | **0.0** |
+| $H_{\mathrm{sort}}$ | 0.0709 |
+| Team-seasons | 345 |
+| Max coverage | 345 (full stack at peak) |
+| Grid fraction with >1 team | **89.2%** |
+
+**Say it aloud:** ρ\* = 0 does **not** mean rosters look disjoint — 2012 still shows massive interval stacking and the crimson sort-and-chop benchmark sits below actual coverage. Bracket ρ\* answers a sim-calibration question; overlap plots show realized roster geometry.
+
 ---
 
-### 11. Single-season interval overlap — ρ\* > 0 year
+### 11. Single-season interval overlap — ρ\* > 0 year ✅ (Aug 18 2026)
 
 Same plot for a non-zero season (Alex suggested **2013**, ρ\* ≈ 0.07).
 
 **Goal:** answer Alex’s “why did you get zero?” when longitudinal overlap looked meaningful.
+
+**Done.** `python sports/scripts/pd22_interval_overlap_season.py --season 2013` → `PD22_interval_overlap_season_2013.{csv,json,png}`.
+
+**Note:** On the **locked drop-at-20 bracket** (box-QC panel), **2013 also gives ρ\* = 0** — same as 2012. Alex’s ~0.07 figure was likely pre-lock or a different panel epoch. The 2012 vs 2013 contrast is **H_sort and overlap intensity**, not bracket ρ\*.
+
+| | 2012 (item 10) | 2013 (item 11) |
+|---|----------------|----------------|
+| Bracket ρ\* | 0.0 | 0.0 |
+| $H_{\mathrm{sort}}$ | 0.0709 | 0.0620 |
+| Team-seasons | 345 | 347 |
+| Grid fraction >1 team | 89.2% | **95.0%** |
+
+**Say it aloud:** Both zero-ρ\* seasons still show massive overlap — 2013 if anything *more* stacked than 2012. “Why ρ\* = 0?” → bracket fit on modest $H_{\mathrm{sort}}$ (~0.06–0.07), not because intervals look disjoint.
 
 ---
 

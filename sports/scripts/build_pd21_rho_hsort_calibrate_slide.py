@@ -9,8 +9,8 @@ Run (repo root):
   python sports/scripts/build_pd21_rho_hsort_calibrate_slide.py --ppm-zero-below-minutes 20 --slides-only
 
 Output:
-  slides/auto/CHAR_PD21_rho_hsort_calibrate_AUTO.pptx              (slide 5 — hero)
-  slides/auto/CHAR_PD21_rho_hsort_calibrate_ppm0lt20_AUTO.pptx       (slide 6 — contrast)
+  slides/auto/CHAR_PD21_rho_hsort_calibrate_AUTO.pptx              (HAND20 slide 14 — hero)
+  slides/auto/CHAR_PD21_rho_hsort_calibrate_ppm0lt20_AUTO.pptx     (HAND20 slide 15 — contrast)
 
 Figure: pd21_rho/PD21_rho_hsort_calibrate_2011_2021[_ppm0lt20]_bracket.png
 """

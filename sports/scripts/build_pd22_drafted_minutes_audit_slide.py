@@ -24,7 +24,7 @@ sys.path.insert(0, str(SCRIPTS))
 
 from hero_gallery_paths import AUTO_PD22_DRAFTED_MINUTES_DECK, PD22_MINUTES, ensure_hero_dirs
 from pd17_interval_overlap_slide import build_figure_focus_slide, load_meta
-from pd22_slide_common import BOX_QC_PANEL_NOTE, m, mapprox
+from pd22_slide_common import BOX_QC_PANEL_NOTE, m, mapprox, mfrac
 
 AUDIT_SCRIPT = SCRIPTS / "pd22_drafted_minutes_audit.py"
 SEASON_MIN = 2011
@@ -32,7 +32,7 @@ SEASON_MAX = 2021
 STEM = f"PD22_drafted_minutes_audit_{SEASON_MIN}_{SEASON_MAX}"
 
 CLAIM = (
-    r"Claim (Alex, PD22): Playing-time floor must be draft-safe — retain every "
+    r"Claim (PD22): Playing-time floor must be draft-safe — retain every "
     r"ever-draft ($Y_{\mathrm{draft}}=1$) player-season before we justify min 20 min "
     r"or PPM-zero bench policy for $\rho$ / $H_{\mathrm{sort}}$ calibration."
 )
@@ -79,14 +79,14 @@ def _readout_bullets(meta: dict) -> list[str]:
     seasons = meta.get("seasons", f"{SEASON_MIN}–{SEASON_MAX}")
 
     return [
-        r"PD22 item 1 (Alex Aug 2026): audit minutes floor before defending min 20 min "
+        r"PD22 item 1: audit minutes floor before defending min 20 min "
         r"or PPM-zero bench policy.",
         rf"Panel: {seasons} MBB · rebuild min\_minutes=0 after box QC · "
         rf"$Y_{{\mathrm{{draft}}}}$ = ever-draft flag (not season-specific).",
         BOX_QC_PANEL_NOTE,
         rf"Drafted player-seasons: {m(n_all)} ({m(int(s.get('n_unique_drafted_athletes', 0)))} unique athletes).",
         rf"Minutes among drafted: min = {min_line}; draft-safe max floor (drop) {safe_line} min.",
-        rf"Hero lock min = {m(20)}: retain {m(n_ret)} / {m(n_all)}; lose {m(n_lost)} player-seasons "
+        rf"Hero lock min = {m(20)}: retain {mfrac(n_ret, n_all)}; lose {m(n_lost)} player-seasons "
         rf"({m(n_unique_lost)} unique athletes; {m(n_zero)} at {m(0)} min).",
         r"Right panel: red labels = drafted player-seasons lost vs min\_minutes=0 floor at each threshold.",
         r"PPM-zero policy: all drafted rows retained; sub-floor players get raw PPM = 0 before z-score.",
@@ -129,7 +129,7 @@ def main() -> None:
 
     subtitle = (
         rf"PD22 · drafted retention audit · {seasons} · "
-        rf"at min {m(20)} drop: {m(n_all - n_lost)}/{m(n_all)} drafted player-seasons kept"
+        rf"at min {m(20)} drop: {mfrac(n_all - n_lost, n_all)} drafted player-seasons kept"
     )
 
     build_figure_focus_slide(

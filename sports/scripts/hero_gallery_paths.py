@@ -55,6 +55,9 @@ AUTO_PD22_DRAFTED_MINUTES_DECK = SLIDES_AUTO / "CHAR_PD22_drafted_minutes_audit_
 AUTO_PD22_RAW_MINUTES_DECK = SLIDES_AUTO / "CHAR_PD22_raw_minutes_distribution_AUTO.pptx"
 AUTO_PD22_PPM_DISTRIBUTION_DECK = SLIDES_AUTO / "CHAR_PD22_ppm_distribution_AUTO.pptx"
 AUTO_PD22_PPM_OVERLAY_DECK = SLIDES_AUTO / "CHAR_PD22_ppm_full_vs_filtered_AUTO.pptx"
+AUTO_PD22_PPM_ZERO_ABILITY_DECK = SLIDES_AUTO / "CHAR_PD22_ppm_zero_ability_distribution_AUTO.pptx"
+AUTO_PD22_PPM_ZERO_HSORT_DECK = SLIDES_AUTO / "CHAR_PD22_ppm_zero_hsort_mechanism_AUTO.pptx"
+AUTO_PD22_PANEL_POLICY_COMPARE_DECK = SLIDES_AUTO / "CHAR_PD22_panel_policy_compare_AUTO.pptx"
 AUTO_PD22_RAW_ROSTER_SIZE_DECK = SLIDES_AUTO / "CHAR_PD22_raw_roster_size_distribution_AUTO.pptx"
 AUTO_PD22_RAW_ROSTER_SIZE_BEFORE_QC_DECK = (
     SLIDES_AUTO / "CHAR_PD22_raw_roster_size_distribution_before_qc_AUTO.pptx"

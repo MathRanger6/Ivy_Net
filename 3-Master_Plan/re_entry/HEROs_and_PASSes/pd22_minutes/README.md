@@ -139,6 +139,99 @@ python sports/scripts/build_pd22_ppm_full_vs_filtered_slide.py
 
 Writes `slides/auto/CHAR_PD22_ppm_full_vs_filtered_AUTO.pptx`.
 
+## Item 7 — PPM-zero team sanity (no all-zero teams)
+
+```bash
+# Full run (PPM-zero panel rebuild + CSV + JSON + PNG) — ~1 min
+python sports/scripts/pd22_ppm_zero_team_sanity.py
+
+# Regenerate figure only (after CSV exists)
+python sports/scripts/pd22_ppm_zero_team_sanity.py --plot-only
+```
+
+**Outputs**
+
+| File | Content |
+|------|---------|
+| `PD22_ppm_zero_team_sanity_2011_2021.csv` | Per team-season zero counts and fractions |
+| `PD22_ppm_zero_team_sanity_2011_2021.json` | Headline sanity stats (`sanity_pass: true`) |
+| `PD22_ppm_zero_team_sanity_2011_2021.png` | Zero-fraction histogram + ≥k ladder |
+
+**Result (Aug 18 2026):** 0 all-zero team-seasons under `--ppm-zero-below-minutes 20`; max bench-zero share 74%.
+
+## Item 6 — PPM-zero vs drop ability distribution
+
+```bash
+# Full run (two panel rebuilds + CSV + JSON + PNG) — ~1 min
+python sports/scripts/pd22_ppm_zero_ability_distribution.py
+
+# Regenerate figure only (after CSV exists)
+python sports/scripts/pd22_ppm_zero_ability_distribution.py --plot-only
+```
+
+**Outputs**
+
+| File | Content |
+|------|---------|
+| `PD22_ppm_zero_ability_distribution_2011_2021.csv` | Per-row minutes, PPM, perf under drop vs PPM-zero |
+| `PD22_ppm_zero_ability_distribution_2011_2021.json` | Headline comparison stats |
+| `PD22_ppm_zero_ability_distribution_2011_2021.png` | 2×2: raw PPM + ASSIGN ability, drop vs PPM-zero |
+
+## AUTO slide (item 6)
+
+```bash
+python sports/scripts/build_pd22_ppm_zero_ability_slide.py --slides-only
+python sports/scripts/build_pd22_ppm_zero_ability_slide.py
+```
+
+Writes `slides/auto/CHAR_PD22_ppm_zero_ability_distribution_AUTO.pptx`.
+
+## Item 8 — bench-zero clustering vs H_sort
+
+```bash
+python sports/scripts/pd22_ppm_zero_hsort_mechanism.py
+python sports/scripts/pd22_ppm_zero_hsort_mechanism.py --plot-only
+python sports/scripts/build_pd22_ppm_zero_hsort_mechanism_slide.py --slides-only
+```
+
+**Outputs:** `PD22_ppm_zero_hsort_mechanism_2011_2021.{csv,json,png}` + season CSV. AUTO: `CHAR_PD22_ppm_zero_hsort_mechanism_AUTO.pptx`.
+
+**Result (Aug 18 2026):** Mean $H_{\mathrm{sort}}$ rises only +0.001 under PPM-zero vs drop — ρ\* jump is not explained by sorting index alone.
+
+## Item 9 — panel policy compare (drop vs PPM-zero)
+
+```bash
+# Requires item 8 season CSV + PD21 bracket JSONs
+python sports/scripts/pd22_panel_policy_compare.py
+python sports/scripts/build_pd22_panel_policy_compare_slide.py --slides-only
+```
+
+**Outputs:** `PD22_panel_policy_compare_2011_2021.{csv,json,png}`. AUTO: `CHAR_PD22_panel_policy_compare_AUTO.pptx`.
+
+**Result:** Drop ρ\*=0 on current panel; PPM-zero legacy ρ\*≈0.57 targets stale pre-QC $H_{\mathrm{sort}}$. **Recommend drop.**
+
+## Item 10 — single-season interval overlap (ρ\* ≈ 0 year)
+
+```bash
+python sports/scripts/pd22_interval_overlap_season.py --season 2012
+python sports/scripts/build_pd22_interval_overlap_season_slide.py --season 2012 --slides-only
+```
+
+**Outputs:** `PD22_interval_overlap_season_2012.{csv,json,png}`. AUTO: `CHAR_PD22_interval_overlap_season_2012_AUTO.pptx`.
+
+**Result (2012):** ρ\*=0 but 89% of talent grid has >1 team covering — overlap structure persists.
+
+## Item 11 — single-season interval overlap (2013 contrast)
+
+```bash
+python sports/scripts/pd22_interval_overlap_season.py --season 2013
+python sports/scripts/build_pd22_interval_overlap_season_slide.py --season 2013 --slides-only
+```
+
+**Outputs:** `PD22_interval_overlap_season_2013.{csv,json,png}`. AUTO: `CHAR_PD22_interval_overlap_season_2013_AUTO.pptx`.
+
+**Result (2013):** ρ\*=0 on locked bracket too; H_sort=0.062, 95% grid >1 team — overlap *stronger* than 2012.
+
 ## AUTO slide (raw roster size — backup)
 
 See **Raw panel roster size** above for before/after QC commands. Legacy alias `build_pd22_raw_roster_size_slide.py` → after-QC deck.
