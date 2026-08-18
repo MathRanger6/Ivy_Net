@@ -1,7 +1,7 @@
 # Rho estimation options — plain-language guide
 
 **For:** Charles (edit freely; discuss with Alex)  
-**Last synced:** 2026-08-14  
+**Last synced:** 2026-08-17  
 **Context:** Paper Directions 21 — fit homophily knob $\rho$ (rho) on **empirical NCAA rosters**, separate from draft maximum likelihood estimation (MLE)  
 **Companions:**
 - [`../Alex_stuff/MLE_basics.md`](../Alex_stuff/MLE_basics.md) — Bernoulli draft MLE ($\lambda$, $t$); **no $\rho$** on fixed rosters
@@ -46,6 +46,61 @@ You also have a **simulation rule** for building synthetic rosters: **Grandchild
 | **Team congestion ($L_C$)** | How crowded a team is with “viable” peers (smooth viability formula). Used in scoring later; also a diagnostic for roster structure. |
 | **Stub capacity ($R_j$)** | Open seats on team $j$ during seating. Grandchild weights multiply homophily by remaining seats. |
 | **Random seed** | Grandchild assignment (LG) shuffles player order and randomizes team draws. Same $\rho$, different seed → slightly different rosters. |
+
+---
+
+## Panel policy vs roster caps (don’t conflate them)
+
+Two design choices look related but solve **different problems**. Discuss them separately with Alex.
+
+| Choice | What it controls | Tied to minutes filter? |
+|--------|------------------|-------------------------|
+| **Minutes / ability policy** | Who is on the panel and what $\hat{A}_i$ they carry | **Yes** |
+| **Empirical roster caps ($R_j$)** | Real NCAA team sizes (heterogeneous stub capacities) | **No** |
+
+**Empirical caps are not a workaround for filtering.** Teams have different roster sizes whether or not you drop bench players. Grandchild assignment (LG) still needs a capacity multiset that sums to $N$. Moving to fixed roster size $C$ would simplify the engine but **throws away** real NCAA roster-size heterogeneity — a separate modeling choice Alex already locked for PD21.
+
+### Default panel (Aug 14 baseline)
+
+- **Filter:** drop player-seasons with **under 20 minutes** (`min_minutes = 20`).
+- **Ability:** PPM z-scored within season on the **filtered** panel.
+- **Caps:** recomputed from that filtered panel (smaller $N$, fewer players per team).
+
+**Issue we saw:** on this panel, **6/11 seasons** had per-season $\rho^* = 0$ and longitudinal $\rho^* \approx 0.07$ — very low assortativity. Simulated sorting at $\rho = 0$ was already close to (or above) empirical on the **trimmed** league.
+
+### Alternative panel (Aug 17 — Alex discussion)
+
+- **Keep all roster rows** (no minutes filter).
+- **Bench rule:** set **raw PPM = 0** for players with **under 20 minutes**, then z-score within season as usual.
+- **Caps:** actual NCAA roster counts on the **full** panel.
+
+**Script flag:** `--ppm-zero-below-minutes 20` in `pd21_rho_hsort_calibrate.py` (default min-20 filter unchanged; outputs use suffix `_ppm0lt20`).
+
+**What this simplifies:** one roster universe for empirical vs simulated assignment — same bodies, same team sizes; bench carries no skill signal instead of being deleted. Fewer moving parts between “who is in emp $H_{\mathrm{sort}}$” and “who is in sim LG.”
+
+**What it does *not* simplify:**
+
+| Layer | Still need empirical caps? | Still need a minutes policy? |
+|-------|---------------------------|------------------------------|
+| **ASSIGN $\rho$ / $H_{\mathrm{sort}}$** | **Yes** — heterogeneous $R_j$ | Test ppm-zero; may replace filter here |
+| **$L_C$ / congestion diagnostics** | **Yes** | Probably align with ASSIGN panel |
+| **Hero ventiles / LOO / draft MLE ($\lambda$, $t$)** | Fixed empirical teams (no LG) | **Probably keep min $\geq$ 20** unless Alex says otherwise — draft estimand is about rotation contributors, not walk-ons |
+
+**Score $\neq$ select (binding):** ASSIGN can use full roster + zero bench while SELECT MLE uses a filtered hero panel. That is allowed and may be **correct** — different layers, different estimands.
+
+### If ppm-zero “works” (sensible interior $\rho^*$, not stuck at cap)
+
+The story is likely **panel definition**, not “drop empirical caps”:
+
+> Low homophily was partly because the minutes filter built a **different league** than raw NCAA rosters — sim at $\rho = 0$ was already “sorted enough” on the trimmed panel.
+
+That does **not** imply recalculating **everything** without filtering. Treat it **layer by layer** (see table above).
+
+### Question for Alex (next meeting)
+
+> “For draft MLE, do we keep `min_minutes = 20` on the hero panel even if ASSIGN $\rho$ calibration uses full roster + zero bench?”
+
+**Working guess:** yes for MLE; maybe full roster + zero bench only for LG / $H_{\mathrm{sort}}$ — but Alex decides.
 
 ---
 

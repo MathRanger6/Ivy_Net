@@ -1,0 +1,28 @@
+{
+  "diagnostic": "pd22_team_season_games_count_after_qc",
+  "date": "2026-08-17",
+  "season_min": 2011,
+  "season_max": 2021,
+  "seasons": "2011-2021",
+  "after_box_qc": true,
+  "n_team_seasons": 3842,
+  "games_n_min": 12,
+  "games_n_max": 41,
+  "games_n_median": 32.0,
+  "games_n_mean": 31.560645497136907,
+  "n_with_1_game": 0,
+  "pct_with_1_game": 0.0,
+  "n_with_3_or_fewer": 0,
+  "n_with_5_or_fewer": 0,
+  "n_with_10_or_fewer": 0,
+  "n_with_15_or_fewer": 12,
+  "n_with_20_or_fewer": 75,
+  "n_with_30_or_fewer": 991,
+  "n_with_ge_20_games": 3783,
+  "box_qc_report": {
+    "dash_rows_dropped": 175,
+    "team_seasons_dropped_low_games": 2715,
+    "box_rows_dropped_low_games": 67400,
+    "box_rows_after_qc": 1798642
+  }
+}

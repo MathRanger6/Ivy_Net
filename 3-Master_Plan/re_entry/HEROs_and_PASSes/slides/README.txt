@@ -1,4 +1,4 @@
-slides/ — HAND deck cheat sheet (HAND16 + HAND17)
+slides/ — HAND deck cheat sheet (HAND16 + HAND17 + HAND20)
 ==================================================
 
 Naming (Charles shorthand):
@@ -10,10 +10,12 @@ Naming (Charles shorthand):
 HAND MASTER files (scripts NEVER overwrite):
   HAND16:  CHAR_PD16_HAND.pptx
   HAND17:  CHAR_PD17_HAND.pptx
+  HAND20:  CHAR_PD20_HAND.pptx
 
   Save As backup before substantive edits, e.g.:
     slides/archive/CHAR_PD16_HAND_backup_YYYYMMDD.pptx
     slides/archive/CHAR_PD17_HAND_backup_YYYYMMDD.pptx
+    slides/archive/CHAR_PD20_HAND_backup_YYYYMMDD.pptx
 
   Scripts write only slides/auto/*_AUTO.pptx and gallery PNGs — never the HAND masters.
 
@@ -25,6 +27,7 @@ JPEG exports (for agents / visual audit)
 ----------------------------------------------------------------------
   HAND16:  CHAR_PD16_HAND/Slide1.jpeg … Slide13.jpeg  (re-export after edits)
   HAND17:  CHAR_PD17_HAND/Slide1.png … SlideN.png  (re-export after edits)
+  HAND20:  CHAR_PD20_HAND/Slide1.png … Slide16.png  (re-export after edits)
 
   Legacy (pre-trim): HAND_slides_images/ (16 slides), old CHAR_PD16_HAND/Slide17.jpeg
 
@@ -143,9 +146,66 @@ HAND17 — empirical MBB deck (expanded Aug 2026)
   Memo: ../grandchild_assign/GRANDCHILD_D_and_H_sort_interpretation.md
 
 ----------------------------------------------------------------------
+HAND20 — Alex deck (PD20 + PD21 + PD22 panel backup, Aug 2026)
+----------------------------------------------------------------------
+  Source: CHAR_PD20_HAND.pptx
+  PNG audit: CHAR_PD20_HAND/Slide1.png … Slide16.png
+  **16 slides** (final order locked Aug 17 2026): PD20 → PD22 panel build → PD21 ρ
+
+  Story arc (panel build BEFORE ρ calibration):
+    Act I   PD20 Gibbs SELECT gate (slides 1–4)
+    Act II  PD22 why the hero panel exists (slides 5–13)
+    Act III PD21 ρ* on hero + ppm0lt20 contrast (slides 14–16)
+
+  Save As backup before substantive edits:
+    slides/archive/CHAR_PD20_HAND_backup_YYYYMMDD.pptx
+
+  HAND workflow: AUTO decks in slides/auto/*_AUTO.pptx → copy slide or Change Picture
+  + bullets/claim; keep Office Math formatting applied by hand in HAND.
+
+| PPT | Block | Title (short) | AUTO / PNG |
+|-----|-------|---------------|------------|
+|  1  | PD20  | Gibbs SELECT intro | auto/CHAR_PD20_HAND_AUTO slide 1 |
+|  2  | PD20  | Temperature sweep (rule D) | pd20_temperature/GRANDCHILD_temperature_select_sweep_2011_2021.png |
+|  3  | PD20  | Cold limit — rule C vs D | pd20_temperature/GRANDCHILD_temperature_cold_limit_2011_2021.png |
+|  4  | PD20  | PD20 takeaways | text (PD20 block in CHAR_PD20_HAND_AUTO) |
+|  5  | PD22  | Roster size — raw box (before QC) | pd22_minutes/PD22_raw_roster_size_distribution_before_qc_*.png |
+|  6  | PD22  | Games per team-season — before QC | pd22_minutes/PD22_team_season_games_count_*.png |
+|  7  | PD22  | Games per team-season — after QC | pd22_minutes/PD22_team_season_games_count_after_qc_*.png |
+|  8  | PD22  | Roster size — box-QC panel vs min-20 | pd22_minutes/PD22_raw_roster_size_distribution_after_qc_*.png |
+|  9  | PD22  | ESPN coverage 2013→2014 depth break | pd22_minutes/PD22_espn_coverage_by_season_*.png |
+| 10  | PD22  | Drafted-player retention vs floor | pd22_minutes/PD22_drafted_minutes_audit_*.png |
+| 11  | PD22  | Raw panel season-minutes distribution | pd22_minutes/PD22_raw_minutes_distribution_*.png |
+| 12  | PD22  | PPM — filtered tail vs hero ASSIGN input | pd22_minutes/PD22_ppm_distribution_*.png |
+| 13  | PD22  | PPM overlay — full vs sub-20 tail | pd22_minutes/PD22_ppm_full_vs_filtered_*.png |
+| 14  | PD21  | Calibrate ρ — hero panel (locked) | pd21_rho/PD21_rho_hsort_calibrate_*_bracket.png |
+| 15  | PD21  | Calibrate ρ — ppm0lt20 contrast | pd21_rho/PD21_rho_hsort_calibrate_*_ppm0lt20_bracket.png |
+| 16  | PD21  | Per-season ρ* timeseries (contrast) | pd21_rho/…_ppm0lt20_bracket_rho_hsort_timeseries.png |
+
+  Cross-slide pairs for Alex:
+    • Slides 9 + 16 — ESPN depth break explains ppm0lt20 2013→2014 jump
+    • Slides 12 + 13 — PPM tails (detail vs overlay); slide 13 optional appendix trim
+    • Slide 14 — ρ*=0 is model–measurement fit, not “NCAA is random”
+
+  Talking thread for Alex:
+    • PD20 cleared → now calibrate ρ, but panel choices matter
+    • Raw ESPN box is messy (roster tails, one-game seasons) → box QC fixes it
+    • 2013→2014 ESPN lists more bench rows — hero min-20 panel is flat (slide 9)
+    • Draft-safe at min=0; hero ASSIGN uses min≥20 for PPM stability
+    • Hero panel: ρ*=0, modest H_sort — not “NCAA is random”
+    • ppm0lt20 contrast: inflated ρ* + 2014 jump — wrong estimand
+
+  Regenerate: pd20_temperature/REGENERATE.md, pd21_rho/README.md, pd22_minutes/README.md
+  Memo (H_sort): ../grandchild_assign/GRANDCHILD_D_and_H_sort_interpretation.md
+
+  Reorder history (Aug 17): pre-reorder had PD21 (old 5–7) before PD22 (old 8–15);
+  final deck interleaves PD22 backup block before PD21 calibration. Archive:
+  slides/H_sort_calibration_backups_PD20.pptx
+
+----------------------------------------------------------------------
 VECTOR ASSIGN decks (Aug 2026 — moved from VECTOR_work/)
 ----------------------------------------------------------------------
-  Source folder: slides/  (same as HAND16/HAND17)
+  Source folder: slides/  (same as HAND16/HAND17/HAND20)
 
   VECTOR_ASSIGN_Dynamic_to_OneShot_Model.pptx
     Parent → Child briefing (3 slides).
@@ -167,6 +227,7 @@ Other files in slides/
 ----------------------------------------------------------------------
   CHAR_PD16_HAND.pptx                       HAND16 master
   CHAR_PD17_HAND.pptx                       HAND17 master
+  CHAR_PD20_HAND.pptx                       HAND20 master (PD20+21+22 Alex deck)
   PASS_ABC_Gallery_Slides.pptx              Pass A/B/C intro
   So_Far_.pptx                              Merged Alex deck (slides 1–3)
   VECTOR_ASSIGN_Dynamic_to_OneShot_Model.pptx

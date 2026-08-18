@@ -16,6 +16,7 @@ GRANDCHILD_ASSIGN = HERO_ROOT / "grandchild_assign"
 PD20_TEMPERATURE = HERO_ROOT / "pd20_temperature"
 PD21_MLE = HERO_ROOT / "pd21_mle"
 PD21_RHO = HERO_ROOT / "pd21_rho"
+PD22_MINUTES = HERO_ROOT / "pd22_minutes"
 SORT_CHOP_LAMBDA = HERO_ROOT / "sort_chop_lambda"
 SOFT_ASSIGN_LAMBDA = HERO_ROOT / "soft_assign_lambda"
 THETA = HERO_ROOT / "theta"
@@ -49,6 +50,23 @@ AUTO_GAMMA_DECK = SLIDES_AUTO / "CHAR_gamma_characterization_AUTO.pptx"
 AUTO_SOFT_ASSIGN_GAMMA_DECK = SLIDES_AUTO / "CHAR_soft_assign_gamma_sweep_AUTO.pptx"
 AUTO_PD20_DECK = SLIDES_AUTO / "CHAR_PD20_HAND_AUTO.pptx"
 AUTO_PD21_RHO_DECK = SLIDES_AUTO / "CHAR_PD21_rho_hsort_calibrate_AUTO.pptx"
+AUTO_PD21_RHO_TIMESERIES_DECK = SLIDES_AUTO / "CHAR_PD21_rho_hsort_timeseries_AUTO.pptx"
+AUTO_PD22_DRAFTED_MINUTES_DECK = SLIDES_AUTO / "CHAR_PD22_drafted_minutes_audit_AUTO.pptx"
+AUTO_PD22_RAW_MINUTES_DECK = SLIDES_AUTO / "CHAR_PD22_raw_minutes_distribution_AUTO.pptx"
+AUTO_PD22_PPM_DISTRIBUTION_DECK = SLIDES_AUTO / "CHAR_PD22_ppm_distribution_AUTO.pptx"
+AUTO_PD22_PPM_OVERLAY_DECK = SLIDES_AUTO / "CHAR_PD22_ppm_full_vs_filtered_AUTO.pptx"
+AUTO_PD22_RAW_ROSTER_SIZE_DECK = SLIDES_AUTO / "CHAR_PD22_raw_roster_size_distribution_AUTO.pptx"
+AUTO_PD22_RAW_ROSTER_SIZE_BEFORE_QC_DECK = (
+    SLIDES_AUTO / "CHAR_PD22_raw_roster_size_distribution_before_qc_AUTO.pptx"
+)
+AUTO_PD22_RAW_ROSTER_SIZE_AFTER_QC_DECK = (
+    SLIDES_AUTO / "CHAR_PD22_raw_roster_size_distribution_after_qc_AUTO.pptx"
+)
+AUTO_PD22_TEAM_SEASON_GAMES_DECK = SLIDES_AUTO / "CHAR_PD22_team_season_games_count_AUTO.pptx"
+AUTO_PD22_TEAM_SEASON_GAMES_AFTER_QC_DECK = (
+    SLIDES_AUTO / "CHAR_PD22_team_season_games_count_after_qc_AUTO.pptx"
+)
+AUTO_PD22_ESPN_COVERAGE_DECK = SLIDES_AUTO / "CHAR_PD22_espn_coverage_by_season_AUTO.pptx"
 AUTO_PHASE_B_DECK = SLIDES_AUTO / "CHAR_Phase_B_characterization_AUTO.pptx"
 
 _ALL_DIRS = (
@@ -61,6 +79,7 @@ _ALL_DIRS = (
     PD20_TEMPERATURE,
     PD21_MLE,
     PD21_RHO,
+    PD22_MINUTES,
     SORT_CHOP_LAMBDA,
     SOFT_ASSIGN_LAMBDA,
     THETA,

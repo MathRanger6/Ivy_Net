@@ -1,0 +1,1178 @@
+athlete_id,athlete_display_name,season,team_id,minutes,ppm,points,team_short_display_name,Y_draft,lost_at_min20_drop,zeroed_at_min20_ppm0
+51323,Jordan Clarkson,2013,142,0,,0,Missouri,1,True,True
+56359,Rodney Hood,2013,150,0,,0,Duke,1,True,True
+56965,P.J. Hairston,2014,153,0,,0,North Carolina,1,True,True
+57136,Abdel Nader,2014,66,0,,0,Iowa State,1,True,True
+61438,Richaun Holmes,2014,2377,0,,0,McNeese,1,True,True
+66138,Devon Hall,2014,258,0,,0,Virginia,1,True,True
+2991143,Ricky Ledo,2014,2507,0,,0,Providence,1,True,True
+66205,George King,2015,38,0,,0,Colorado,1,True,True
+66915,Semi Ojeleye,2015,2567,0,,0,SMU,1,True,True
+3134880,Kadeem Allen,2015,12,0,,0,Arizona,1,True,True
+3147657,Mikal Bridges,2015,222,0,,0,Villanova,1,True,True
+3914283,Chimezie Metu,2015,30,0,,0,USC,1,True,True
+3917376,Jaylen Brown,2015,25,0,,0,California,1,True,True
+3917378,Ivan Rabb,2015,25,0,,0,California,1,True,True
+56933,Branden Dawson,2016,127,0,,0,Michigan St,1,True,True
+66915,Semi Ojeleye,2016,2567,0,,0,SMU,1,True,True
+67814,Nigel Williams-Goss,2016,2250,0,,0,Gonzaga,1,True,True
+67845,Derrick White,2016,38,0,,0,Colorado,1,True,True
+3133817,Eric Paschall,2016,222,0,,0,Villanova,1,True,True
+3912295,Grant Riller,2016,232,0,,0,Charleston,1,True,True
+3912332,Justin Patton,2016,156,0,,0,Creighton,1,True,True
+62208,Tyrone Wallace,2017,25,0,,0,California,1,True,True
+3138161,Cody Martin,2017,2440,0,,0,Nevada,1,True,True
+3917376,Jaylen Brown,2017,25,0,,0,California,1,True,True
+4065660,Mfiondu Kabengele,2017,52,0,,0,Florida St,1,True,True
+4065732,De'Andre Hunter,2017,258,0,,0,Virginia,1,True,True
+4065836,Omari Spellman,2017,222,0,,0,Villanova,1,True,True
+4066490,Kostas Antetokounmpo,2017,2168,0,,0,Dayton,1,True,True
+4066731,Jalen McDaniels,2017,21,0,,0,San Diego St,1,True,True
+4080610,Hamidou Diallo,2017,96,0,,0,Kentucky,1,True,True
+3138201,Marial Shayok,2018,66,0,,0,Iowa State,1,True,True
+3906665,Brandon Clarke,2018,2250,0,,0,Gonzaga,1,True,True
+4066436,De'Anthony Melton,2018,30,0,,0,USC,1,True,True
+4066446,Elijah Hughes,2018,183,0,,0,Syracuse,1,True,True
+4277850,RaiQuan Gray,2018,52,0,,0,Florida St,1,True,True
+4278355,Obi Toppin,2018,2168,0,,0,Dayton,1,True,True
+4065672,Dewan Hernandez,2019,2390,0,,0,Miami,1,True,True
+4066668,Malachi Flynn,2019,21,0,,0,San Diego St,1,True,True
+4066998,Jalen Harris,2019,2440,0,,0,Nevada,1,True,True
+4278053,Davion Mitchell,2019,239,0,,0,Baylor,1,True,True
+4397885,Dalano Banton,2020,158,0,,0,Nebraska,1,True,True
+4278580,Sandro Mamukelashvili,2021,156,0,,0,Creighton,1,True,True
+4066320,Desmond Bane,2017,264,17,0,0,Washington,1,True,True
+4066269,Skylar Mays,2017,295,18,0.333333333333,6,Old Dominion,1,True,True
+3136491,D.J. Wilson,2015,130,24,0.0833333333333,2,Michigan,1,False,False
+4066636,Markelle Fultz,2017,2628,25,1.08,27,TCU,1,False,False
+4067045,Alize Johnson,2017,305,25,0.68,17,DePaul,1,False,False
+3907498,Matisse Thybulle,2017,2628,27,0.185185185185,5,TCU,1,False,False
+4432166,Cade Cunningham,2021,2641,38,0.526315789474,20,Texas Tech,1,False,False
+3136485,Edmond Sumner,2015,2752,40,0.2,8,Xavier,1,False,False
+51418,Jordan McRae,2011,2633,53,0.339622641509,18,Tennessee,1,False,False
+4278104,Michael Porter Jr.,2018,142,53,0.566037735849,30,Missouri,1,False,False
+3934673,Donte DiVincenzo,2016,222,55,0.181818181818,10,Villanova,1,False,False
+3914044,Landry Shamet,2016,2724,59,0.440677966102,26,Wichita St,1,False,False
+66915,Semi Ojeleye,2015,150,63,0.285714285714,18,Duke,1,False,False
+4432808,James Wiseman,2020,235,69,0.855072463768,59,Memphis,1,False,False
+51361,Anthony Brown,2013,24,70,0.171428571429,12,Stanford,1,False,False
+66915,Semi Ojeleye,2014,150,80,0.35,28,Duke,1,False,False
+51478,Russ Smith,2011,97,96,0.395833333333,38,Louisville,1,False,False
+61804,Kris Dunn,2014,2507,106,0.141509433962,15,Providence,1,False,False
+3911566,Justin Wright-Foreman,2016,2275,110,0.4,44,Hofstra,1,False,False
+56115,Michael Gbinije,2012,150,111,0.297297297297,33,Duke,1,False,False
+3138196,Cameron Johnson,2015,221,115,0.313043478261,36,Pitt,1,False,False
+4066648,Rui Hachimura,2017,2250,128,0.5703125,73,Gonzaga,1,False,False
+4396907,Darius Garland,2019,238,139,0.58273381295,81,Vanderbilt,1,False,False
+4066299,Udoka Azubuike,2017,2305,142,0.387323943662,55,Kansas,1,False,False
+66205,George King,2014,38,148,0.277027027027,41,Colorado,1,False,False
+3136491,D.J. Wilson,2016,130,151,0.443708609272,67,Michigan,1,False,False
+61572,Taurean Prince,2013,239,154,0.571428571429,88,Baylor,1,False,False
+40989,Jeff Withey,2011,2305,162,0.376543209877,61,Kansas,1,False,False
+51842,Jamaal Franklin,2011,21,178,0.359550561798,64,San Diego St,1,False,False
+4066299,Udoka Azubuike,2019,2305,184,0.657608695652,121,Kansas,1,False,False
+61808,Mitch McGary,2014,130,197,0.38578680203,76,Michigan,1,False,False
+3919335,Cheick Diallo,2016,2305,202,0.40099009901,81,Kansas,1,False,False
+51123,Cady Lalanne,2012,113,208,0.451923076923,94,UMass,1,False,False
+3136779,Keita Bates-Diop,2017,194,210,0.414285714286,87,Ohio State,1,False,False
+3138161,Cody Martin,2015,152,216,0.300925925926,65,NC State,1,False,False
+4278077,Jarred Vanderbilt,2018,96,238,0.344537815126,82,Kentucky,1,False,False
+66138,Devon Hall,2015,258,244,0.172131147541,42,Virginia,1,False,False
+3134907,Kyle Kuzma,2015,254,252,0.40873015873,103,Utah,1,False,False
+3150844,Moritz Wagner,2016,130,253,0.332015810277,84,Michigan,1,False,False
+4397102,Bol Bol,2019,2483,268,0.705223880597,189,Oregon,1,False,False
+56995,Michael Carter-Williams,2012,183,269,0.260223048327,70,Syracuse,1,False,False
+56769,Frank Kaminsky,2012,275,271,0.232472324723,63,Wisconsin,1,False,False
+51088,Meyers Leonard,2011,356,272,0.25,68,Illinois,1,False,False
+51363,Josh Huestis,2011,24,276,0.228260869565,63,Stanford,1,False,False
+4066998,Jalen Harris,2018,2348,276,0.608695652174,168,Louisiana Tech,1,False,False
+4278562,Paul Reed,2018,305,276,0.36231884058,100,DePaul,1,False,False
+4432829,Balsa Koprivica,2020,52,278,0.456834532374,127,Florida St,1,False,False
+4701230,Jalen Johnson,2021,150,278,0.525179856115,146,Duke,1,False,False
+4397886,Charles Bassey,2020,98,281,0.544483985765,153,Western KY,1,False,False
+41544,Damian Lillard,2011,2692,285,0.621052631579,177,Weber St,1,False,False
+3133602,Svi Mykhailiuk,2015,2305,291,0.247422680412,72,Kansas,1,False,False
+56188,Tyler Harvey,2013,331,295,0.505084745763,149,E Washington,1,False,False
+4065649,Harry Giles III,2017,150,300,0.34,102,Duke,1,False,False
+51163,Cameron Bairstow,2011,167,301,0.265780730897,80,New Mexico,1,False,False
+61654,J.P. Tokoto,2013,153,302,0.301324503311,91,North Carolina,1,False,False
+51267,Kyrie Irving,2011,150,303,0.633663366337,192,Duke,1,False,False
+4593125,Santi Aldama,2020,2352,304,0.5,152,Loyola MD,1,False,False
+4277964,Xavier Tillman,2018,127,305,0.324590163934,99,Michigan St,1,False,False
+51545,Adreian Payne,2011,127,306,0.277777777778,85,Michigan St,1,False,False
+51343,Fab Melo,2011,183,315,0.244444444444,77,Syracuse,1,False,False
+3135045,Grayson Allen,2015,150,322,0.475155279503,153,Duke,1,False,False
+4066373,Justin Jackson,2018,120,323,0.334365325077,108,Maryland,1,False,False
+4278580,Sandro Mamukelashvili,2018,2550,325,0.267692307692,87,Seton Hall,1,False,False
+3136779,Keita Bates-Diop,2015,194,327,0.382262996942,125,Ohio State,1,False,False
+56769,Frank Kaminsky,2013,275,329,0.404255319149,133,Wisconsin,1,False,False
+4277883,Jordan Nwora,2018,97,336,0.473214285714,159,Louisville,1,False,False
+36117,Mike Scott,2011,258,337,0.471810089021,159,Virginia,1,False,False
+45990,Cory Jefferson,2012,239,342,0.327485380117,112,Baylor,1,False,False
+4395630,Devin Vassell,2019,52,353,0.42209631728,149,Florida St,1,False,False
+61810,Caris LeVert,2013,130,356,0.213483146067,76,Michigan,1,False,False
+3149010,Chandler Hutchison,2015,68,358,0.251396648045,90,Boise St,1,False,False
+4397667,Filip Petrusev,2019,2250,366,0.565573770492,207,Gonzaga,1,False,False
+3138196,Cameron Johnson,2016,221,368,0.413043478261,152,Pitt,1,False,False
+46502,CJ McCollum,2013,2329,372,0.771505376344,287,Lehigh,1,False,False
+56635,DeAndre Daniels,2012,41,376,0.25,94,UConn,1,False,False
+4066424,Ike Anigbogu,2017,26,377,0.363395225464,137,UCLA,1,False,False
+61653,Brice Johnson,2013,153,380,0.513157894737,195,North Carolina,1,False,False
+51384,Reggie Bullock,2011,153,392,0.423469387755,166,North Carolina,1,False,False
+4432173,Sharife Cooper,2021,2,397,0.609571788413,242,Auburn,1,False,False
+45577,Lamar Patterson,2011,221,401,0.209476309227,84,Pitt,1,False,False
+56996,Rakeem Christmas,2012,183,425,0.24,102,Syracuse,1,False,False
+51374,Jerian Grant,2014,87,427,0.533957845433,228,Notre Dame,1,False,False
+61810,Caris LeVert,2016,130,428,0.509345794393,218,Michigan,1,False,False
+4592204,David Johnson,2020,97,432,0.395833333333,171,Louisville,1,False,False
+51084,Carrick Felix,2011,9,436,0.31880733945,139,Arizona St,1,False,False
+61049,Jarnell Stokes,2012,2633,436,0.373853211009,163,Tennessee,1,False,False
+4066490,Kostas Antetokounmpo,2018,2168,438,0.344748858447,151,Dayton,1,False,False
+4277850,RaiQuan Gray,2019,52,441,0.319727891156,141,Florida St,1,False,False
+3908845,John Collins,2016,154,446,0.508968609865,227,Wake Forest,1,False,False
+4432168,Josh Christopher,2021,9,446,0.479820627803,214,Arizona St,1,False,False
+4432829,Balsa Koprivica,2021,52,446,0.491031390135,219,Florida St,1,False,False
+4278076,Nick Richards,2019,96,447,0.328859060403,147,Kentucky,1,False,False
+3133602,Svi Mykhailiuk,2016,2305,449,0.418708240535,188,Kansas,1,False,False
+3153165,Chris McCullough,2015,183,450,0.331111111111,149,Syracuse,1,False,False
+3143565,Kevin Hervey,2016,250,450,0.604444444444,272,UT Arlington,1,False,False
+4066212,Jordan Bone,2017,2633,450,0.368888888889,166,Tennessee,1,False,False
+4431699,Kai Jones,2020,251,450,0.215555555556,97,Texas,1,False,False
+51476,Gorgui Dieng,2011,97,451,0.363636363636,164,Louisville,1,False,False
+4066392,Isaiah Roby,2017,158,457,0.205689277899,94,Nebraska,1,False,False
+4397140,Kevin Porter Jr.,2019,30,464,0.431034482759,200,USC,1,False,False
+57379,Alex Len,2012,120,466,0.281115879828,131,Maryland,1,False,False
+4397885,Dalano Banton,2019,98,469,0.223880597015,105,Western KY,1,False,False
+46207,Kelly Olynyk,2011,2250,471,0.428874734607,202,Gonzaga,1,False,False
+4065733,Ty Jerome,2017,258,473,0.310782241015,147,Virginia,1,False,False
+4431712,James Bouknight,2021,41,475,0.591578947368,281,UConn,1,False,False
+4277956,Jordan Poole,2018,130,476,0.489495798319,233,Michigan,1,False,False
+46114,Thomas Robinson,2011,2305,482,0.520746887967,251,Kansas,1,False,False
+56965,P.J. Hairston,2012,153,482,0.439834024896,212,North Carolina,1,False,False
+57136,Abdel Nader,2013,2459,483,0.513457556936,248,N Illinois,1,False,False
+4278067,Nic Claxton,2018,61,485,0.268041237113,130,Georgia,1,False,False
+3138201,Marial Shayok,2015,258,496,0.262096774194,130,Virginia,1,False,False
+56115,Michael Gbinije,2014,183,498,0.232931726908,116,Syracuse,1,False,False
+3138201,Marial Shayok,2016,258,498,0.267068273092,133,Virginia,1,False,False
+51163,Cameron Bairstow,2012,167,501,0.223552894212,112,New Mexico,1,False,False
+4396909,Aaron Nesmith,2020,238,501,0.642714570858,322,Vanderbilt,1,False,False
+4065660,Mfiondu Kabengele,2018,52,503,0.487077534791,245,Florida St,1,False,False
+61662,Isaiah Cousins,2013,201,508,0.167322834646,85,Oklahoma,1,False,False
+4066446,Elijah Hughes,2017,151,512,0.37890625,194,East Carolina,1,False,False
+3914058,Justin James,2016,2751,516,0.325581395349,168,Wyoming,1,False,False
+4432819,Tre Mann,2020,57,516,0.300387596899,155,Florida,1,False,False
+3133601,Devonte' Graham,2015,2305,517,0.317214700193,164,Kansas,1,False,False
+51406,Deshaun Thomas,2011,194,518,0.53667953668,278,Ohio State,1,False,False
+4432170,Isaiah Jackson,2021,96,518,0.407335907336,211,Kentucky,1,False,False
+4277922,Jericho Sims,2019,251,521,0.280230326296,146,Texas,1,False,False
+4278580,Sandro Mamukelashvili,2020,2550,522,0.455938697318,238,Seton Hall,1,False,False
+56181,Darrun Hilliard,2012,222,524,0.263358778626,138,Villanova,1,False,False
+57136,Abdel Nader,2015,66,524,0.354961832061,186,Iowa State,1,False,False
+3908806,Ray Spalding,2016,97,525,0.321904761905,169,Louisville,1,False,False
+56288,Spencer Dinwiddie,2014,38,529,0.47258979206,250,Colorado,1,False,False
+51466,Josh Selby,2011,2305,530,0.388679245283,206,Kansas,1,False,False
+3918423,Admiral Schofield,2017,2633,533,0.431519699812,230,Tennessee,1,False,False
+4432161,Greg Brown III,2021,251,535,0.454205607477,243,Texas,1,False,False
+4432812,Scottie Lewis,2021,57,537,0.307262569832,165,Florida,1,False,False
+51344,Dion Waiters,2011,183,539,0.397031539889,214,Syracuse,1,False,False
+61572,Taurean Prince,2014,239,541,0.432532347505,234,Baylor,1,False,False
+56489,Josh Richardson,2012,2633,543,0.178637200737,97,Tennessee,1,False,False
+3936296,Skal Labissiere,2016,96,543,0.412523020258,224,Kentucky,1,False,False
+4278076,Nick Richards,2018,96,543,0.348066298343,189,Kentucky,1,False,False
+66620,Dakari Johnson,2014,96,550,0.367272727273,202,Kentucky,1,False,False
+4065673,Tony Bradley,2017,153,555,0.484684684685,269,North Carolina,1,False,False
+4432194,Day'Ron Sharpe,2021,153,556,0.494604316547,275,North Carolina,1,False,False
+4065672,Dewan Hernandez,2017,2390,557,0.335727109515,187,Miami,1,False,False
+4433137,Ziaire Williams,2021,24,558,0.383512544803,214,Stanford,1,False,False
+3155536,Thomas Welsh,2015,26,565,0.244247787611,138,UCLA,1,False,False
+4277850,RaiQuan Gray,2020,52,565,0.306194690265,173,Florida St,1,False,False
+67430,Frank Mason III,2014,2305,567,0.336860670194,191,Kansas,1,False,False
+41566,Colton Iverson,2011,135,568,0.294014084507,167,Minnesota,1,False,False
+4433134,Scottie Barnes,2021,52,570,0.435087719298,248,Florida St,1,False,False
+61822,Jerami Grant,2013,183,572,0.270979020979,155,Syracuse,1,False,False
+3907823,Terance Mann,2016,52,572,0.309440559441,177,Florida St,1,False,False
+46005,Khris Middleton,2012,245,575,0.457391304348,263,Texas A&M,1,False,False
+51480,Victor Oladipo,2011,84,576,0.409722222222,236,Indiana,1,False,False
+4278053,Davion Mitchell,2018,2,582,0.216494845361,126,Auburn,1,False,False
+57041,Norman Powell,2012,26,586,0.257679180887,151,UCLA,1,False,False
+4397424,Neemias Queta,2020,328,588,0.486394557823,286,Utah State,1,False,False
+56440,Larry Nance Jr.,2012,2751,590,0.230508474576,136,Wyoming,1,False,False
+3906786,Dylan Windler,2016,2057,590,0.235593220339,139,Belmont,1,False,False
+3908809,Donovan Mitchell,2016,97,591,0.387478849408,229,Louisville,1,False,False
+51075,Terrence Ross,2011,264,593,0.460370994941,273,Washington,1,False,False
+51524,Devyn Marble,2011,2294,593,0.300168634064,178,Iowa,1,False,False
+4431699,Kai Jones,2021,251,594,0.387205387205,230,Texas,1,False,False
+51162,Tony Snell,2011,167,595,0.248739495798,148,New Mexico,1,False,False
+4593125,Santi Aldama,2021,2352,595,0.606722689076,361,Loyola MD,1,False,False
+4396961,Robert Woodard II,2019,344,596,0.313758389262,187,Mississippi St,1,False,False
+3918423,Admiral Schofield,2016,2633,598,0.408026755853,244,Tennessee,1,False,False
+56357,Johnny O'Bryant III,2012,99,600,0.398333333333,239,LSU,1,False,False
+61438,Richaun Holmes,2013,189,602,0.343853820598,207,Bowling Green,1,False,False
+38505,Festus Ezeli,2012,238,603,0.434494195688,262,Vanderbilt,1,False,False
+4277957,Isaiah Livers,2018,130,604,0.226821192053,137,Michigan,1,False,False
+61550,Grant Jerrett,2013,12,606,0.290429042904,176,Arizona,1,False,False
+3912854,Jawun Evans,2016,197,608,0.462171052632,281,Oklahoma St,1,False,False
+3136477,Isaiah Whitehead,2015,2550,612,0.433006535948,265,Seton Hall,1,False,False
+51365,Dwight Powell,2012,24,614,0.328990228013,202,Stanford,1,False,False
+3149010,Chandler Hutchison,2016,68,615,0.344715447154,212,Boise St,1,False,False
+4066998,Jalen Harris,2017,2348,618,0.477346278317,295,Louisiana Tech,1,False,False
+66327,Jabari Bird,2014,25,619,0.415185783522,257,California,1,False,False
+3147366,Chinanu Onuaku,2015,97,623,0.166934189406,104,Louisville,1,False,False
+3914283,Chimezie Metu,2016,30,624,0.350961538462,219,USC,1,False,False
+56119,Malcolm Brogdon,2012,258,626,0.300319488818,188,Virginia,1,False,False
+41720,Miles Plumlee,2011,150,628,0.28025477707,176,Duke,1,False,False
+45525,Glen Rice Jr.,2012,59,628,0.436305732484,274,Georgia Tech,1,False,False
+4277922,Jericho Sims,2018,251,628,0.272292993631,171,Texas,1,False,False
+4702233,JT Thor,2021,2,628,0.402866242038,253,Auburn,1,False,False
+4278502,Tyler Bey,2018,38,629,0.31160572337,196,Colorado,1,False,False
+3937101,Deyonta Davis,2016,127,631,0.402535657686,254,Michigan St,1,False,False
+3912334,Khyri Thomas,2016,156,633,0.334913112164,212,Creighton,1,False,False
+4065730,Kyle Guy,2017,258,634,0.403785488959,256,Virginia,1,False,False
+66620,Dakari Johnson,2015,96,635,0.390551181102,248,Kentucky,1,False,False
+66207,Jordan Bell,2016,2483,636,0.330188679245,210,Oregon,1,False,False
+4592492,Bones Hyland,2020,2670,638,0.437304075235,279,VCU,1,False,False
+4277850,RaiQuan Gray,2021,52,638,0.465517241379,297,Florida St,1,False,False
+4277922,Jericho Sims,2021,251,638,0.376175548589,240,Texas,1,False,False
+56933,Branden Dawson,2012,127,640,0.4046875,259,Michigan St,1,False,False
+4065670,Bruce Brown,2018,2390,640,0.3375,216,Miami,1,False,False
+61810,Caris LeVert,2015,130,645,0.417054263566,269,Michigan,1,False,False
+67433,Joel Embiid,2014,2305,647,0.483771251932,313,Kansas,1,False,False
+66327,Jabari Bird,2015,25,648,0.371913580247,241,California,1,False,False
+4432164,Jaden Springer,2021,2633,648,0.483024691358,313,Tennessee,1,False,False
+61793,Montrezl Harrell,2013,97,649,0.348228043143,226,Louisville,1,False,False
+3908806,Ray Spalding,2017,97,653,0.306278713629,200,Louisville,1,False,False
+4431687,Patrick Williams,2020,52,653,0.410413476263,268,Florida St,1,False,False
+4278521,KZ Okpala,2018,24,655,0.352671755725,231,Stanford,1,False,False
+4395652,Nassir Little,2019,153,655,0.53893129771,353,North Carolina,1,False,False
+4277922,Jericho Sims,2020,251,655,0.35572519084,233,Texas,1,False,False
+4065732,De'Andre Hunter,2018,258,657,0.461187214612,303,Virginia,1,False,False
+4397688,Trey Murphy III,2019,242,659,0.408194233687,269,Rice,1,False,False
+51545,Adreian Payne,2012,127,661,0.391830559758,259,Michigan St,1,False,False
+61653,Brice Johnson,2014,153,661,0.531013615734,351,North Carolina,1,False,False
+3913546,Melvin Frazier Jr.,2016,2655,662,0.26586102719,176,Tulane,1,False,False
+4277957,Isaiah Livers,2020,130,662,0.409365558912,271,Michigan,1,False,False
+45911,Ryan Kelly,2013,150,664,0.44578313253,296,Duke,1,False,False
+66284,Demetrius Jackson,2014,87,666,0.271771771772,181,Notre Dame,1,False,False
+4592204,David Johnson,2021,97,667,0.359820089955,240,Louisville,1,False,False
+3136485,Edmond Sumner,2017,2752,669,0.448430493274,300,Xavier,1,False,False
+4277952,Bruno Fernando,2018,120,671,0.459016393443,308,Maryland,1,False,False
+51323,Jordan Clarkson,2011,202,672,0.46130952381,310,Tulsa,1,False,False
+4066650,Zach Collins,2017,2250,672,0.580357142857,390,Gonzaga,1,False,False
+3143565,Kevin Hervey,2015,250,673,0.326894502229,220,UT Arlington,1,False,False
+4702176,Joshua Primo,2021,333,673,0.362555720654,244,Alabama,1,False,False
+56567,Tony Mitchell,2012,249,676,0.501479289941,339,North Texas,1,False,False
+61663,Buddy Hield,2013,201,679,0.310751104566,211,Oklahoma,1,False,False
+4280151,Corey Kispert,2018,2250,679,0.347569955817,236,Gonzaga,1,False,False
+61804,Kris Dunn,2013,2507,680,0.208823529412,142,Providence,1,False,False
+3936102,Stephen Zimmerman,2016,2439,680,0.4,272,UNLV,1,False,False
+61842,Willie Cauley-Stein,2013,96,683,0.354319180088,242,Kentucky,1,False,False
+66130,Davon Reed,2014,2390,683,0.317715959004,217,Miami,1,False,False
+4395724,Immanuel Quickley,2019,96,684,0.28216374269,193,Kentucky,1,False,False
+4431823,Miles McBride,2020,277,688,0.43023255814,296,West Virginia,1,False,False
+4432192,Keon Johnson,2021,2633,688,0.44476744186,306,Tennessee,1,False,False
+4397916,Jason Preston,2021,195,691,0.454413892909,314,Ohio,1,False,False
+41720,Miles Plumlee,2012,150,697,0.324246771879,226,Duke,1,False,False
+57027,Sir'Dominic Pointer,2014,2599,698,0.277936962751,194,St John's,1,False,False
+66587,Terry Rozier,2014,97,699,0.370529327611,259,Louisville,1,False,False
+3138201,Marial Shayok,2017,258,702,0.433048433048,304,Virginia,1,False,False
+51353,Bernard James,2011,52,706,0.410764872521,290,Florida St,1,False,False
+56848,Elfrid Payton,2012,309,706,0.321529745042,227,Louisiana,1,False,False
+51123,Cady Lalanne,2013,113,706,0.381019830028,269,UMass,1,False,False
+3906665,Brandon Clarke,2016,23,708,0.374293785311,265,San José St,1,False,False
+4066269,Skylar Mays,2017,99,711,0.36005625879,256,LSU,1,False,False
+4277951,Luka Garza,2018,2294,715,0.559440559441,400,Iowa,1,False,False
+4277813,Herbert Jones,2020,333,715,0.299300699301,214,Alabama,1,False,False
+51361,Anthony Brown,2011,24,718,0.363509749304,261,Stanford,1,False,False
+66116,Sterling Brown,2014,2567,719,0.223922114047,161,SMU,1,False,False
+4277813,Herbert Jones,2019,333,719,0.300417246175,216,Alabama,1,False,False
+61766,Justin Anderson,2015,258,724,0.437845303867,317,Virginia,1,False,False
+4066382,Cassius Winston,2017,127,724,0.325966850829,236,Michigan St,1,False,False
+4066632,Justinian Jessup,2017,68,725,0.318620689655,231,Boise St,1,False,False
+4431712,James Bouknight,2020,41,725,0.502068965517,364,UConn,1,False,False
+66173,Josh Hart,2014,222,727,0.364511691884,265,Villanova,1,False,False
+4277957,Isaiah Livers,2021,130,727,0.414030261348,301,Michigan,1,False,False
+45946,Alex Oriakhi,2012,41,730,0.31095890411,227,UConn,1,False,False
+3136469,Ben Bentil,2015,2507,730,0.295890410959,216,Providence,1,False,False
+4278052,Chuma Okeke,2018,2,734,0.347411444142,255,Auburn,1,False,False
+51493,Markel Brown,2011,197,735,0.297959183673,219,Oklahoma St,1,False,False
+4397885,Dalano Banton,2021,158,736,0.350543478261,258,Nebraska,1,False,False
+51418,Jordan McRae,2012,2633,738,0.39701897019,293,Tennessee,1,False,False
+4397688,Trey Murphy III,2021,258,739,0.381596752368,282,Virginia,1,False,False
+4277813,Herbert Jones,2018,333,741,0.198380566802,147,Alabama,1,False,False
+51363,Josh Huestis,2012,24,742,0.264150943396,196,Stanford,1,False,False
+3137733,Rashad Vaughn,2015,2439,742,0.5525606469,410,UNLV,1,False,False
+45911,Ryan Kelly,2011,150,743,0.329744279946,245,Duke,1,False,False
+4397077,Jaxson Hayes,2019,251,747,0.428380187416,320,Texas,1,False,False
+61218,Steven Adams,2013,221,749,0.308411214953,231,Pitt,1,False,False
+62615,Denzel Valentine,2013,127,749,0.240320427236,180,Michigan St,1,False,False
+57136,Abdel Nader,2012,2459,750,0.428,321,N Illinois,1,False,False
+3133628,Myles Turner,2015,251,755,0.456953642384,345,Texas,1,False,False
+51365,Dwight Powell,2011,24,756,0.333333333333,252,Stanford,1,False,False
+3133603,Kelly Oubre Jr.,2015,2305,756,0.440476190476,333,Kansas,1,False,False
+61796,Jake Layman,2013,120,757,0.274768824306,208,Maryland,1,False,False
+4432162,Brandon Boston Jr.,2021,96,758,0.378627968338,287,Kentucky,1,False,False
+4277951,Luka Garza,2019,2294,759,0.552042160738,419,Iowa,1,False,False
+3147366,Chinanu Onuaku,2016,97,762,0.402887139108,307,Louisville,1,False,False
+3138196,Cameron Johnson,2018,153,762,0.423884514436,323,North Carolina,1,False,False
+51343,Fab Melo,2012,183,763,0.306684141547,234,Syracuse,1,False,False
+4277961,Jaren Jackson Jr.,2018,127,764,0.5,382,Michigan St,1,False,False
+61840,Nerlens Noel,2013,96,765,0.328104575163,251,Kentucky,1,False,False
+4066648,Rui Hachimura,2018,2250,766,0.558746736292,428,Gonzaga,1,False,False
+4592492,Bones Hyland,2021,2670,766,0.609660574413,467,VCU,1,False,False
+3943606,Jerome Robinson,2016,103,768,0.350260416667,269,Boston College,1,False,False
+4432809,Cole Anthony,2020,153,768,0.529947916667,407,North Carolina,1,False,False
+61808,Mitch McGary,2013,130,769,0.378413524057,291,Michigan,1,False,False
+4066211,Robert Williams III,2018,245,769,0.404421326398,311,Texas A&M,1,False,False
+4066392,Isaiah Roby,2018,158,769,0.36410923277,280,Nebraska,1,False,False
+3924880,Diamond Stone,2016,120,771,0.549935149157,424,Maryland,1,False,False
+4431669,Vernon Carey Jr.,2020,150,772,0.715025906736,552,Duke,1,False,False
+57041,Norman Powell,2013,26,773,0.27425614489,212,UCLA,1,False,False
+61835,Jaron Blossomgame,2014,228,774,0.209302325581,162,Clemson,1,False,False
+3912292,Jarrell Brantley,2018,232,775,0.534193548387,414,Charleston,1,False,False
+4397183,Aaron Wiggins,2019,120,775,0.363870967742,282,Maryland,1,False,False
+4432819,Tre Mann,2021,57,778,0.494858611825,385,Florida,1,False,False
+61278,Sam Dekker,2013,275,780,0.429487179487,335,Wisconsin,1,False,False
+67249,Wes Iwundu,2014,2306,780,0.282051282051,220,Kansas St,1,False,False
+67249,Wes Iwundu,2015,2306,780,0.229487179487,179,Kansas St,1,False,False
+3136485,Edmond Sumner,2016,2752,781,0.42509603073,332,Xavier,1,False,False
+3133817,Eric Paschall,2017,222,781,0.33290653009,260,Villanova,1,False,False
+4278526,Jaylen Hands,2018,26,781,0.391805377721,306,UCLA,1,False,False
+40974,Chris Singleton,2011,52,784,0.460459183673,361,Florida St,1,False,False
+51135,Alec Brown,2011,2739,786,0.405852417303,319,Green Bay,1,False,False
+4278049,Daniel Gafford,2018,8,790,0.522784810127,413,Arkansas,1,False,False
+3934723,Thomas Bryant,2016,84,791,0.524652338812,415,Indiana,1,False,False
+56933,Branden Dawson,2014,127,792,0.396464646465,314,Michigan St,1,False,False
+3134908,Jakob Poeltl,2015,254,792,0.392676767677,311,Utah,1,False,False
+4277957,Isaiah Livers,2019,130,792,0.35101010101,278,Michigan,1,False,False
+66604,Noah Vonleh,2014,84,794,0.425692695214,338,Indiana,1,False,False
+66138,Devon Hall,2016,258,794,0.18765743073,149,Virginia,1,False,False
+61766,Justin Anderson,2014,258,796,0.36432160804,290,Virginia,1,False,False
+66116,Sterling Brown,2015,2567,796,0.222361809045,177,SMU,1,False,False
+4431686,Cassius Stanley,2020,150,796,0.457286432161,364,Duke,1,False,False
+4065660,Mfiondu Kabengele,2019,52,798,0.612781954887,489,Florida St,1,False,False
+38505,Festus Ezeli,2011,238,799,0.553191489362,442,Vanderbilt,1,False,False
+3147657,Mikal Bridges,2016,222,800,0.31,248,Villanova,1,False,False
+3915195,Shake Milton,2018,2567,800,0.495,396,SMU,1,False,False
+4066211,Robert Williams III,2017,245,801,0.460674157303,369,Texas A&M,1,False,False
+4066757,Sam Merrill,2017,328,801,0.352059925094,282,Utah State,1,False,False
+61231,Joel Bolomboy,2013,2692,802,0.322942643392,259,Weber St,1,False,False
+3155536,Thomas Welsh,2017,26,802,0.430174563591,345,UCLA,1,False,False
+45911,Ryan Kelly,2012,150,803,0.45703611457,367,Duke,1,False,False
+56996,Rakeem Christmas,2014,183,803,0.245330012453,197,Syracuse,1,False,False
+66253,Jarell Martin,2014,99,803,0.393524283935,316,LSU,1,False,False
+66275,Damian Jones,2014,238,803,0.434620174346,349,Vanderbilt,1,False,False
+56965,P.J. Hairston,2013,153,804,0.615671641791,495,North Carolina,1,False,False
+3934621,Jacob Evans,2016,2132,806,0.344913151365,278,Cincinnati,1,False,False
+4066320,Desmond Bane,2017,2628,807,0.343246592317,277,TCU,1,False,False
+4396993,Tyrese Haliburton,2020,66,807,0.41511771995,335,Iowa State,1,False,False
+4066212,Jordan Bone,2018,2633,808,0.318069306931,257,Tennessee,1,False,False
+4396959,Reggie Perry,2019,344,813,0.405904059041,330,Mississippi St,1,False,False
+4066218,Grant Williams,2017,2633,814,0.493857493857,402,Tennessee,1,False,False
+4066407,Carsen Edwards,2017,2509,814,0.44226044226,360,Purdue,1,False,False
+4066731,Jalen McDaniels,2018,21,815,0.423312883436,345,San Diego St,1,False,False
+3136193,Devin Booker,2015,96,817,0.466340269278,381,Kentucky,1,False,False
+3907358,Quinndary Weatherspoon,2016,344,818,0.441320293399,361,Mississippi St,1,False,False
+56170,Pat Connaughton,2012,87,820,0.291463414634,239,Notre Dame,1,False,False
+57804,Shane Larkin,2012,2390,820,0.290243902439,238,Miami,1,False,False
+3907498,Matisse Thybulle,2016,264,820,0.257317073171,211,Washington,1,False,False
+3155942,Domantas Sabonis,2015,2250,822,0.448905109489,369,Gonzaga,1,False,False
+66130,Davon Reed,2015,2390,824,0.299757281553,247,Miami,1,False,False
+3136195,Karl-Anthony Towns,2015,96,824,0.486650485437,401,Kentucky,1,False,False
+4065672,Dewan Hernandez,2018,2390,825,0.442424242424,365,Miami,1,False,False
+66116,Sterling Brown,2016,2567,826,0.365617433414,302,SMU,1,False,False
+3136196,Trey Lyles,2015,96,828,0.378019323671,313,Kentucky,1,False,False
+66275,Damian Jones,2016,238,830,0.551807228916,458,Vanderbilt,1,False,False
+66207,Jordan Bell,2015,2483,831,0.212996389892,177,Oregon,1,False,False
+4566434,Franz Wagner,2020,130,831,0.375451263538,312,Michigan,1,False,False
+3133635,Jevon Carter,2015,277,832,0.342548076923,285,West Virginia,1,False,False
+3155536,Thomas Welsh,2016,26,832,0.418269230769,348,UCLA,1,False,False
+56996,Rakeem Christmas,2013,183,833,0.246098439376,205,Syracuse,1,False,False
+56985,Aaron White,2012,2294,834,0.466426858513,389,Iowa,1,False,False
+4397215,Daniel Oturu,2019,135,834,0.452038369305,377,Minnesota,1,False,False
+51478,Russ Smith,2012,97,837,0.536439665472,449,Louisville,1,False,False
+4397014,Quentin Grimes,2020,248,837,0.434886499403,364,Houston,1,False,False
+66205,George King,2016,38,839,0.528009535161,443,Colorado,1,False,False
+4065654,Jonathan Isaac,2017,52,839,0.456495828367,383,Florida St,1,False,False
+4278039,Nickeil Alexander-Walker,2018,259,840,0.419047619048,352,Virginia Tech,1,False,False
+61766,Justin Anderson,2013,258,841,0.316290130797,266,Virginia,1,False,False
+3133817,Eric Paschall,2015,2230,842,0.510688836105,430,Fordham,1,False,False
+3908845,John Collins,2017,154,842,0.719714964371,606,Wake Forest,1,False,False
+4431688,Jahmi'us Ramsey,2020,2641,842,0.482185273159,406,Texas Tech,1,False,False
+51163,Cameron Bairstow,2013,167,844,0.402843601896,340,New Mexico,1,False,False
+4592402,Chris Duarte,2020,2483,844,0.427725118483,361,Oregon,1,False,False
+46207,Kelly Olynyk,2013,2250,845,0.67573964497,571,Gonzaga,1,False,False
+56357,Johnny O'Bryant III,2013,99,845,0.465088757396,393,LSU,1,False,False
+51029,Andre Roberson,2011,38,847,0.302243211334,256,Colorado,1,False,False
+4592402,Chris Duarte,2021,2483,847,0.525383707202,445,Oregon,1,False,False
+3134880,Kadeem Allen,2016,12,848,0.33608490566,285,Arizona,1,False,False
+3907487,Marquese Chriss,2016,264,848,0.551886792453,468,Washington,1,False,False
+4066299,Udoka Azubuike,2018,2305,848,0.55070754717,467,Kansas,1,False,False
+3138161,Cody Martin,2016,152,850,0.234117647059,199,NC State,1,False,False
+3134907,Kyle Kuzma,2016,254,851,0.454759106933,387,Utah,1,False,False
+4397189,Jalen Smith,2019,120,851,0.453584018801,386,Maryland,1,False,False
+4397886,Charles Bassey,2021,98,851,0.580493537015,494,Western KY,1,False,False
+4566434,Franz Wagner,2021,130,852,0.409624413146,349,Michigan,1,False,False
+66327,Jabari Bird,2016,25,855,0.388304093567,332,California,1,False,False
+3134907,Kyle Kuzma,2017,254,857,0.530921820303,455,Utah,1,False,False
+4278124,Saben Lee,2018,238,857,0.394399066511,338,Vanderbilt,1,False,False
+4397667,Filip Petrusev,2020,2250,857,0.67211201867,576,Gonzaga,1,False,False
+4431680,Onyeka Okongwu,2020,30,858,0.529137529138,454,USC,1,False,False
+4066299,Udoka Azubuike,2020,2305,859,0.495925494761,426,Kansas,1,False,False
+57027,Sir'Dominic Pointer,2013,2599,860,0.256976744186,221,St John's,1,False,False
+46068,Xavier Thames,2013,21,861,0.332171893148,286,San Diego St,1,False,False
+4432813,Jeremiah Robinson-Earl,2021,222,862,0.455916473318,393,Villanova,1,False,False
+66327,Jabari Bird,2017,25,863,0.448435689455,387,California,1,False,False
+4395630,Devin Vassell,2020,52,863,0.440324449594,380,Florida St,1,False,False
+62208,Tyrone Wallace,2016,25,866,0.469976905312,407,California,1,False,False
+36392,Robert Sacre,2012,2250,867,0.442906574394,384,Gonzaga,1,False,False
+61572,Taurean Prince,2015,239,868,0.528801843318,459,Baylor,1,False,False
+4432165,Jalen Suggs,2021,2250,868,0.496543778802,431,Gonzaga,1,False,False
+41075,Kim English,2011,142,869,0.392405063291,341,Missouri,1,False,False
+56258,Marcus Thornton,2012,2729,869,0.392405063291,341,William & Mary,1,False,False
+56440,Larry Nance Jr.,2014,2751,869,0.460299194476,400,Wyoming,1,False,False
+45836,Isaiah Canaan,2011,93,870,0.41724137931,363,Murray St,1,False,False
+51545,Adreian Payne,2014,127,870,0.585057471264,509,Michigan St,1,False,False
+4397424,Neemias Queta,2021,328,871,0.497129735936,433,Utah State,1,False,False
+51162,Tony Snell,2012,167,872,0.409403669725,357,New Mexico,1,False,False
+4432812,Scottie Lewis,2020,57,872,0.292431192661,255,Florida,1,False,False
+4065663,Josh Okogie,2018,59,873,0.500572737686,437,Georgia Tech,1,False,False
+4278355,Obi Toppin,2019,2168,873,0.544100801833,475,Dayton,1,False,False
+3906671,Caleb Swanigan,2016,2509,875,0.397714285714,348,Purdue,1,False,False
+4397688,Trey Murphy III,2020,242,875,0.454857142857,398,Rice,1,False,False
+3907823,Terance Mann,2017,52,876,0.335616438356,294,Florida St,1,False,False
+46146,Jared Cunningham,2011,204,877,0.486887115165,427,Oregon St,1,False,False
+56635,DeAndre Daniels,2013,41,877,0.413911060433,363,UConn,1,False,False
+45946,Alex Oriakhi,2013,142,878,0.435079726651,382,Missouri,1,False,False
+61212,Georges Niang,2013,66,878,0.480637813212,422,Iowa State,1,False,False
+3913546,Melvin Frazier Jr.,2017,2655,879,0.391353811149,344,Tulane,1,False,False
+56614,Quincy Miller,2012,239,880,0.443181818182,390,Baylor,1,False,False
+61842,Willie Cauley-Stein,2014,96,880,0.286363636364,252,Kentucky,1,False,False
+3912292,Jarrell Brantley,2016,232,880,0.410227272727,361,Charleston,1,False,False
+4432822,Isaac Okoro,2020,2,881,0.408626560726,360,Auburn,1,False,False
+3136194,Tyler Ulis,2015,96,882,0.236961451247,209,Kentucky,1,False,False
+45525,Glen Rice Jr.,2011,59,885,0.448587570621,397,Georgia Tech,1,False,False
+3912332,Justin Patton,2017,156,885,0.51186440678,453,Creighton,1,False,False
+51361,Anthony Brown,2012,24,886,0.337471783296,299,Stanford,1,False,False
+3155526,Dillon Brooks,2017,2483,886,0.636568848758,564,Oregon,1,False,False
+4397183,Aaron Wiggins,2020,120,886,0.363431151242,322,Maryland,1,False,False
+4397916,Jason Preston,2019,195,887,0.202931228861,180,Ohio,1,False,False
+66332,Bobby Portis,2014,8,888,0.453828828829,403,Arkansas,1,False,False
+4277890,Lonnie Walker IV,2018,2390,888,0.414414414414,368,Miami,1,False,False
+51344,Dion Waiters,2012,183,891,0.524130190797,467,Syracuse,1,False,False
+45577,Lamar Patterson,2013,221,892,0.369955156951,330,Pitt,1,False,False
+61438,Richaun Holmes,2015,189,892,0.514573991031,459,Bowling Green,1,False,False
+4066636,Markelle Fultz,2017,264,892,0.649103139013,579,Washington,1,False,False
+45537,Lorenzo Brown,2011,152,893,0.323628219485,289,NC State,1,False,False
+4065651,Frank Jackson,2017,150,895,0.440223463687,394,Duke,1,False,False
+4066383,Miles Bridges,2017,127,895,0.528491620112,473,Michigan St,1,False,False
+4066851,Miye Oni,2019,43,898,0.553452115813,497,Yale,1,False,False
+4278502,Tyler Bey,2020,38,898,0.477728285078,429,Colorado,1,False,False
+4277813,Herbert Jones,2021,333,900,0.411111111111,370,Alabama,1,False,False
+51555,Joe Young,2012,248,904,0.37610619469,340,Houston,1,False,False
+61231,Joel Bolomboy,2014,2692,904,0.288716814159,261,Weber St,1,False,False
+66221,Zach LaVine,2014,26,904,0.386061946903,349,UCLA,1,False,False
+3906786,Dylan Windler,2017,2057,904,0.304203539823,275,Belmont,1,False,False
+32019,Vernon Macklin,2011,57,905,0.472928176796,428,Florida,1,False,False
+3911566,Justin Wright-Foreman,2017,2275,905,0.640883977901,580,Hofstra,1,False,False
+36392,Robert Sacre,2011,2250,906,0.484547461369,439,Gonzaga,1,False,False
+4066851,Miye Oni,2017,43,906,0.411699779249,373,Yale,1,False,False
+4277919,Mo Bamba,2018,251,906,0.427152317881,387,Texas,1,False,False
+3917376,Jaylen Brown,2016,25,907,0.531422271224,482,California,1,False,False
+4397033,Joe Wieskamp,2021,2294,907,0.507166482911,460,Iowa,1,False,False
+3150844,Moritz Wagner,2017,130,908,0.504405286344,458,Michigan,1,False,False
+51135,Alec Brown,2014,2739,909,0.506050605061,460,Green Bay,1,False,False
+51064,Joe Harris,2011,258,910,0.354945054945,323,Virginia,1,False,False
+4395695,Jared Butler,2019,239,911,0.38199780461,348,Baylor,1,False,False
+4395695,Jared Butler,2020,239,911,0.5268935236,480,Baylor,1,False,False
+4395695,Jared Butler,2021,239,911,0.551042810099,502,Baylor,1,False,False
+51383,Kendall Marshall,2011,153,912,0.252192982456,230,North Carolina,1,False,False
+66205,George King,2018,38,913,0.453450164294,414,Colorado,1,False,False
+4397036,Marcus Zegarowski,2019,156,914,0.365426695842,334,Creighton,1,False,False
+4397693,Kessler Edwards,2021,2492,916,0.507641921397,465,Pepperdine,1,False,False
+66173,Josh Hart,2015,222,917,0.398037077426,365,Villanova,1,False,False
+3912295,Grant Riller,2017,232,918,0.483660130719,444,Charleston,1,False,False
+4080610,Hamidou Diallo,2018,96,918,0.404139433551,371,Kentucky,1,False,False
+4278562,Paul Reed,2020,305,918,0.478213507625,439,DePaul,1,False,False
+51135,Alec Brown,2012,2739,919,0.429815016322,395,Green Bay,1,False,False
+41835,Romero Osby,2013,201,919,0.556039173014,511,Oklahoma,1,False,False
+3934673,Donte DiVincenzo,2017,222,919,0.346028291621,318,Villanova,1,False,False
+4066373,Justin Jackson,2017,120,919,0.377584330794,347,Maryland,1,False,False
+4278049,Daniel Gafford,2019,8,919,0.589771490751,542,Arkansas,1,False,False
+4278076,Nick Richards,2020,96,919,0.473340587595,435,Kentucky,1,False,False
+66205,George King,2017,38,922,0.404555314534,373,Colorado,1,False,False
+51545,Adreian Payne,2013,127,923,0.410617551463,379,Michigan St,1,False,False
+44654,Markieff Morris,2011,2305,926,0.55939524838,518,Kansas,1,False,False
+3907358,Quinndary Weatherspoon,2017,344,926,0.516198704104,478,Mississippi St,1,False,False
+4432811,Josh Green,2020,12,926,0.387688984881,359,Arizona,1,False,False
+3907498,Matisse Thybulle,2017,264,927,0.349514563107,324,Washington,1,False,False
+56985,Aaron White,2014,2294,928,0.456896551724,424,Iowa,1,False,False
+4396909,Aaron Nesmith,2019,238,928,0.380387931034,353,Vanderbilt,1,False,False
+51123,Cady Lalanne,2015,113,929,0.398277717976,370,UMass,1,False,False
+45677,Arsalan Kazemi,2011,242,930,0.509677419355,474,Rice,1,False,False
+62208,Tyrone Wallace,2013,25,931,0.254564983888,237,California,1,False,False
+66138,Devon Hall,2017,258,931,0.305048335124,284,Virginia,1,False,False
+3934723,Thomas Bryant,2017,84,932,0.444206008584,414,Indiana,1,False,False
+3912854,Jawun Evans,2017,197,935,0.655614973262,613,Oklahoma St,1,False,False
+4277964,Xavier Tillman,2019,127,935,0.416042780749,389,Michigan St,1,False,False
+41835,Romero Osby,2012,201,936,0.426282051282,399,Oklahoma,1,False,False
+41704,Trey Thompkins,2011,61,937,0.526147278549,493,Georgia,1,False,False
+66321,Rondae Hollis-Jefferson,2014,12,937,0.370330843116,347,Arizona,1,False,False
+3934672,Jalen Brunson,2016,222,937,0.399146211313,374,Villanova,1,False,False
+42155,Kevin Murphy,2011,2635,940,0.559574468085,526,Tennessee Tech,1,False,False
+3914058,Justin James,2017,2751,940,0.609574468085,573,Wyoming,1,False,False
+4395702,Isaiah Joe,2020,8,940,0.467021276596,439,Arkansas,1,False,False
+3913174,Luke Kennard,2016,150,941,0.449521785335,423,Duke,1,False,False
+3917378,Ivan Rabb,2016,25,942,0.437367303609,412,California,1,False,False
+4066632,Justinian Jessup,2018,68,943,0.3934252386,371,Boise St,1,False,False
+4431679,Precious Achiuwa,2020,235,943,0.518557794274,489,Memphis,1,False,False
+46309,Mike Muscala,2011,2083,944,0.537076271186,507,Bucknell,1,False,False
+61159,T.J. Warren,2013,152,944,0.450211864407,425,NC State,1,False,False
+61653,Brice Johnson,2015,153,944,0.521186440678,492,North Carolina,1,False,False
+3143565,Kevin Hervey,2017,250,945,0.631746031746,597,UT Arlington,1,False,False
+3137730,Patrick McCaw,2015,2439,947,0.324181626188,307,UNLV,1,False,False
+4397424,Neemias Queta,2019,328,947,0.43717001056,414,Utah State,1,False,False
+4278502,Tyler Bey,2019,38,948,0.512658227848,486,Colorado,1,False,False
+45913,Mason Plumlee,2011,150,949,0.279241306639,265,Duke,1,False,False
+3922230,Aaron Holiday,2017,26,949,0.464699683878,441,UCLA,1,False,False
+4278521,KZ Okpala,2019,24,949,0.514225500527,488,Stanford,1,False,False
+61902,Anthony Bennett,2013,2439,950,0.593684210526,564,UNLV,1,False,False
+40989,Jeff Withey,2012,2305,952,0.358193277311,341,Kansas,1,False,False
+61049,Jarnell Stokes,2013,2633,952,0.428571428571,408,Tennessee,1,False,False
+57041,Norman Powell,2014,26,952,0.443277310924,422,UCLA,1,False,False
+4066851,Miye Oni,2018,43,952,0.460084033613,438,Yale,1,False,False
+4396991,Talen Horton-Tucker,2019,66,952,0.43487394958,414,Iowa State,1,False,False
+3133635,Jevon Carter,2016,277,953,0.345225603358,329,West Virginia,1,False,False
+3907821,Dwayne Bacon,2016,52,954,0.552410901468,527,Florida St,1,False,False
+51084,Carrick Felix,2012,9,955,0.319371727749,305,Arizona St,1,False,False
+51123,Cady Lalanne,2014,113,956,0.391213389121,374,UMass,1,False,False
+4432166,Cade Cunningham,2021,197,956,0.569037656904,544,Oklahoma St,1,False,False
+45855,Solomon Hill,2011,12,957,0.316614420063,303,Arizona,1,False,False
+3906665,Brandon Clarke,2017,23,957,0.541274817137,518,San José St,1,False,False
+46005,Khris Middleton,2011,245,958,0.48121085595,461,Texas A&M,1,False,False
+61835,Jaron Blossomgame,2015,228,958,0.4248434238,407,Clemson,1,False,False
+57027,Sir'Dominic Pointer,2012,2599,959,0.220020855057,211,St John's,1,False,False
+4278580,Sandro Mamukelashvili,2021,2550,959,0.493222106361,473,Seton Hall,1,False,False
+41788,Quincy Acy,2011,239,960,0.401041666667,385,Baylor,1,False,False
+3914044,Landry Shamet,2017,2724,960,0.428125,411,Wichita St,1,False,False
+51480,Victor Oladipo,2012,84,961,0.405827263267,390,Indiana,1,False,False
+3149010,Chandler Hutchison,2018,68,961,0.644120707596,619,Boise St,1,False,False
+41510,Andrew Nicholson,2012,179,962,0.614345114345,591,St Bonaventure,1,False,False
+3136696,Wade Baldwin IV,2016,238,963,0.483904465213,466,Vanderbilt,1,False,False
+4396959,Reggie Perry,2020,344,963,0.558670820353,538,Mississippi St,1,False,False
+4431671,Jaden McDaniels,2020,264,963,0.417445482866,402,Washington,1,False,False
+45913,Mason Plumlee,2012,150,964,0.393153526971,379,Duke,1,False,False
+51384,Reggie Bullock,2012,153,965,0.347150259067,335,North Carolina,1,False,False
+4278562,Paul Reed,2019,305,965,0.460103626943,444,DePaul,1,False,False
+56288,Spencer Dinwiddie,2012,38,966,0.365424430642,353,Colorado,1,False,False
+4065648,Jayson Tatum,2017,150,966,0.505175983437,488,Duke,1,False,False
+57279,Andre Drummond,2012,41,967,0.351602895553,340,UConn,1,False,False
+4280151,Corey Kispert,2019,2250,967,0.307135470527,297,Gonzaga,1,False,False
+51842,Jamaal Franklin,2012,21,968,0.57541322314,557,San Diego St,1,False,False
+4397033,Joe Wieskamp,2019,2294,968,0.400826446281,388,Iowa,1,False,False
+51064,Joe Harris,2012,258,969,0.373581011352,362,Virginia,1,False,False
+56933,Branden Dawson,2013,127,969,0.331269349845,321,Michigan St,1,False,False
+45677,Arsalan Kazemi,2012,242,970,0.410309278351,398,Rice,1,False,False
+4397189,Jalen Smith,2020,120,970,0.49381443299,479,Maryland,1,False,False
+4066372,Kevin Huerter,2017,120,971,0.316168898043,307,Maryland,1,False,False
+4066436,De'Anthony Melton,2017,30,972,0.308641975309,300,USC,1,False,False
+4278053,Davion Mitchell,2020,239,972,0.305555555556,297,Baylor,1,False,False
+4397036,Marcus Zegarowski,2021,156,974,0.471252566735,459,Creighton,1,False,False
+45951,Peyton Siva,2011,97,975,0.355897435897,347,Louisville,1,False,False
+61654,J.P. Tokoto,2014,153,975,0.323076923077,315,North Carolina,1,False,False
+61662,Isaiah Cousins,2014,201,975,0.373333333333,364,Oklahoma,1,False,False
+4277951,Luka Garza,2021,2294,975,0.766153846154,747,Iowa,1,False,False
+51455,Shabazz Napier,2011,41,976,0.327868852459,320,UConn,1,False,False
+41766,Tyshawn Taylor,2011,2305,977,0.340839303992,333,Kansas,1,False,False
+3149010,Chandler Hutchison,2017,68,977,0.535312180143,523,Boise St,1,False,False
+4277928,Jarrett Culver,2018,2641,978,0.424335378323,415,Texas Tech,1,False,False
+46740,Nate Wolters,2011,2571,979,0.585291113381,573,S Dakota St,1,False,False
+51353,Bernard James,2012,52,979,0.386108273749,378,Florida St,1,False,False
+62186,Cleanthony Early,2013,2724,979,0.555669050051,544,Wichita St,1,False,False
+56909,Otto Porter Jr.,2012,46,980,0.327551020408,321,Georgetown,1,False,False
+3907822,Malik Beasley,2016,52,980,0.514285714286,504,Florida St,1,False,False
+3915195,Shake Milton,2016,2567,980,0.321428571429,315,SMU,1,False,False
+4066382,Cassius Winston,2020,127,980,0.569387755102,558,Michigan St,1,False,False
+4278355,Obi Toppin,2020,2168,981,0.633027522936,621,Dayton,1,False,False
+4431690,Zeke Nnaji,2020,12,981,0.5249745158,515,Arizona,1,False,False
+3918423,Admiral Schofield,2018,2633,982,0.494908350305,486,Tennessee,1,False,False
+56290,Nick Johnson,2012,12,983,0.317395727365,312,Arizona,1,False,False
+66130,Davon Reed,2016,2390,984,0.388211382114,382,Miami,1,False,False
+3133602,Svi Mykhailiuk,2017,2305,984,0.356707317073,351,Kansas,1,False,False
+4397002,Ayo Dosunmu,2021,356,984,0.573170731707,564,Illinois,1,False,False
+4397014,Quentin Grimes,2021,248,984,0.543699186992,535,Houston,1,False,False
+4066382,Cassius Winston,2018,127,985,0.448730964467,442,Michigan St,1,False,False
+56357,Johnny O'Bryant III,2014,99,986,0.509127789047,502,LSU,1,False,False
+4432174,Cam Thomas,2021,99,986,0.677484787018,668,LSU,1,False,False
+56241,James Ennis III,2012,299,987,0.345491388045,341,Long Beach St,1,False,False
+61732,Shabazz Muhammad,2013,26,987,0.579533941236,572,UCLA,1,False,False
+62186,Cleanthony Early,2014,2724,987,0.598784194529,591,Wichita St,1,False,False
+4277811,Collin Sexton,2018,333,987,0.640324214792,632,Alabama,1,False,False
+4277952,Bruno Fernando,2019,120,987,0.468085106383,462,Maryland,1,False,False
+45918,Erick Green,2011,259,988,0.374493927126,370,Virginia Tech,1,False,False
+4397014,Quentin Grimes,2019,2305,988,0.304655870445,301,Kansas,1,False,False
+45531,John Henson,2011,153,989,0.437815975733,433,North Carolina,1,False,False
+51237,Perry Jones,2012,239,989,0.443882709808,439,Baylor,1,False,False
+4395724,Immanuel Quickley,2020,96,989,0.487360970677,482,Kentucky,1,False,False
+41070,Justin Hamilton,2012,99,990,0.430303030303,426,LSU,1,False,False
+4395628,Zion Williamson,2019,150,990,0.753535353535,746,Duke,1,False,False
+4397166,CJ Elleby,2019,265,990,0.475757575758,471,Washington St,1,False,False
+4278053,Davion Mitchell,2021,239,990,0.424242424242,420,Baylor,1,False,False
+56181,Darrun Hilliard,2014,222,991,0.490413723512,486,Villanova,1,False,False
+4066998,Jalen Harris,2020,2440,991,0.655903128153,650,Nevada,1,False,False
+4277951,Luka Garza,2020,2294,991,0.746720484359,740,Iowa,1,False,False
+4431823,Miles McBride,2021,277,991,0.464177598385,460,West Virginia,1,False,False
+40975,Iman Shumpert,2011,59,992,0.541330645161,537,Georgia Tech,1,False,False
+56181,Darrun Hilliard,2013,222,992,0.383064516129,380,Villanova,1,False,False
+51417,Tobias Harris,2011,2633,993,0.524672708963,521,Tennessee,1,False,False
+3907823,Terance Mann,2018,52,993,0.432024169184,429,Florida St,1,False,False
+66615,Andrew Harrison,2015,96,994,0.366197183099,364,Kentucky,1,False,False
+62615,Denzel Valentine,2016,127,994,0.591549295775,588,Michigan St,1,False,False
+3908806,Ray Spalding,2018,97,995,0.446231155779,444,Louisville,1,False,False
+4277964,Xavier Tillman,2020,127,995,0.427135678392,425,Michigan St,1,False,False
+51524,Devyn Marble,2014,2294,997,0.561685055165,560,Iowa,1,False,False
+61231,Joel Bolomboy,2015,2692,997,0.400200601805,399,Weber St,1,False,False
+4067045,Alize Johnson,2017,2623,997,0.488465396189,487,Missouri St,1,False,False
+3914058,Justin James,2018,2751,997,0.607823470411,606,Wyoming,1,False,False
+4277847,Wendell Carter Jr.,2018,150,997,0.502507522568,501,Duke,1,False,False
+36117,Mike Scott,2012,258,999,0.575575575576,575,Virginia,1,False,False
+61730,Jordan Adams,2013,26,999,0.505505505506,505,UCLA,1,False,False
+4278580,Sandro Mamukelashvili,2019,2550,999,0.302302302302,302,Seton Hall,1,False,False
+4395651,Coby White,2019,153,999,0.562562562563,562,North Carolina,1,False,False
+4397002,Ayo Dosunmu,2019,356,999,0.442442442442,442,Illinois,1,False,False
+4397693,Kessler Edwards,2019,2492,1001,0.338661338661,339,Pepperdine,1,False,False
+3136779,Keita Bates-Diop,2016,194,1002,0.37125748503,372,Ohio State,1,False,False
+57379,Alex Len,2013,120,1004,0.450199203187,452,Maryland,1,False,False
+61822,Jerami Grant,2014,183,1005,0.38407960199,386,Syracuse,1,False,False
+4066320,Desmond Bane,2018,2628,1005,0.410945273632,413,TCU,1,False,False
+56567,Tony Mitchell,2013,249,1006,0.403578528827,406,North Texas,1,False,False
+66821,Alec Peters,2014,2674,1006,0.43041749503,433,Valparaiso,1,False,False
+4397002,Ayo Dosunmu,2020,356,1006,0.495029821074,498,Illinois,1,False,False
+66270,Sindarius Thornwell,2014,2579,1007,0.45084409136,454,South Carolina,1,False,False
+56181,Darrun Hilliard,2015,222,1007,0.497517378352,501,Villanova,1,False,False
+3135045,Grayson Allen,2017,150,1007,0.488579940417,492,Duke,1,False,False
+4066218,Grant Williams,2018,2633,1007,0.527308838133,531,Tennessee,1,False,False
+4397033,Joe Wieskamp,2020,2294,1007,0.431976166832,435,Iowa,1,False,False
+3907821,Dwayne Bacon,2017,52,1008,0.598214285714,603,Florida St,1,False,False
+37470,Orlando Johnson,2011,2540,1009,0.646184340932,652,UCSB,1,False,False
+3136696,Wade Baldwin IV,2015,238,1009,0.325074331021,328,Vanderbilt,1,False,False
+62613,Gary Harris,2013,127,1010,0.434653465347,439,Michigan St,1,False,False
+61572,Taurean Prince,2016,239,1010,0.521782178218,527,Baylor,1,False,False
+4431747,Tyrell Terry,2020,24,1010,0.449504950495,454,Stanford,1,False,False
+66270,Sindarius Thornwell,2015,2579,1011,0.363006923838,367,South Carolina,1,False,False
+4278067,Nic Claxton,2019,61,1011,0.410484668645,415,Georgia,1,False,False
+61842,Willie Cauley-Stein,2015,96,1012,0.344861660079,349,Kentucky,1,False,False
+3917378,Ivan Rabb,2017,25,1012,0.428853754941,434,California,1,False,False
+4278078,P.J. Washington,2018,96,1012,0.396245059289,401,Kentucky,1,False,False
+56489,Josh Richardson,2013,2633,1013,0.257650542942,261,Tennessee,1,False,False
+66146,Monte Morris,2014,66,1013,0.23988153998,243,Iowa State,1,False,False
+3922230,Aaron Holiday,2016,26,1013,0.326752221125,331,UCLA,1,False,False
+4432813,Jeremiah Robinson-Earl,2020,222,1013,0.321816386969,326,Villanova,1,False,False
+61669,Marcus Smart,2014,197,1014,0.549309664694,557,Oklahoma St,1,False,False
+3914044,Landry Shamet,2018,2724,1015,0.469950738916,477,Wichita St,1,False,False
+45677,Arsalan Kazemi,2013,2483,1016,0.322834645669,328,Oregon,1,False,False
+61796,Jake Layman,2014,120,1016,0.369094488189,375,Maryland,1,False,False
+51237,Perry Jones,2011,239,1017,0.410029498525,417,Baylor,1,False,False
+51088,Meyers Leonard,2012,356,1018,0.426326129666,434,Illinois,1,False,False
+4280151,Corey Kispert,2021,2250,1018,0.584479371316,595,Gonzaga,1,False,False
+45531,John Henson,2012,153,1019,0.470068694799,479,North Carolina,1,False,False
+51135,Alec Brown,2013,2739,1019,0.454367026497,463,Green Bay,1,False,False
+66821,Alec Peters,2017,2674,1019,0.653581943081,666,Valparaiso,1,False,False
+3134880,Kadeem Allen,2017,12,1019,0.325809617272,332,Arizona,1,False,False
+66275,Damian Jones,2015,238,1020,0.494117647059,504,Vanderbilt,1,False,False
+3155526,Dillon Brooks,2015,2483,1020,0.404901960784,413,Oregon,1,False,False
+51394,Jae Crowder,2011,269,1021,0.426052889324,435,Marquette,1,False,False
+51480,Victor Oladipo,2013,84,1021,0.480901077375,491,Indiana,1,False,False
+61652,Marcus Paige,2013,153,1021,0.280117531832,286,North Carolina,1,False,False
+41760,Draymond Green,2011,127,1023,0.418377321603,428,Michigan St,1,False,False
+51555,Joe Young,2014,2483,1023,0.628543499511,643,Oregon,1,False,False
+61438,Richaun Holmes,2014,189,1024,0.4150390625,425,Bowling Green,1,False,False
+4278078,P.J. Washington,2019,96,1024,0.5185546875,531,Kentucky,1,False,False
+4395702,Isaiah Joe,2019,8,1024,0.4599609375,471,Arkansas,1,False,False
+4397183,Aaron Wiggins,2021,120,1024,0.4375,448,Maryland,1,False,False
+56224,Cody Zeller,2012,84,1025,0.549268292683,563,Indiana,1,False,False
+61212,Georges Niang,2014,66,1025,0.553170731707,567,Iowa State,1,False,False
+4396961,Robert Woodard II,2020,344,1025,0.343414634146,352,Mississippi St,1,False,False
+51493,Markel Brown,2012,197,1026,0.33918128655,348,Oklahoma St,1,False,False
+51476,Gorgui Dieng,2013,97,1026,0.314814814815,323,Louisville,1,False,False
+4066269,Skylar Mays,2018,99,1026,0.364522417154,374,LSU,1,False,False
+4277883,Jordan Nwora,2020,97,1026,0.543859649123,558,Louisville,1,False,False
+4066668,Malachi Flynn,2017,265,1027,0.29406037001,302,Washington St,1,False,False
+56346,Kentavious Caldwell-Pope,2012,61,1028,0.410505836576,422,Georgia,1,False,False
+61188,Semaj Christon,2013,2752,1028,0.443579766537,456,Xavier,1,False,False
+4067045,Alize Johnson,2018,2623,1028,0.481517509728,495,Missouri St,1,False,False
+4395626,Tre Jones,2020,150,1028,0.458171206226,471,Duke,1,False,False
+4278526,Jaylen Hands,2019,26,1029,0.453838678328,467,UCLA,1,False,False
+46309,Mike Muscala,2012,2083,1031,0.573229873909,591,Bucknell,1,False,False
+51524,Devyn Marble,2012,2294,1031,0.389912706111,402,Iowa,1,False,False
+3138156,Justin Jackson,2015,153,1031,0.395732298739,408,North Carolina,1,False,False
+4066328,Jarrett Allen,2017,251,1031,0.422890397672,436,Texas,1,False,False
+4432810,Isaiah Stewart,2020,264,1031,0.526673132881,543,Washington,1,False,False
+45990,Cory Jefferson,2013,239,1032,0.476744186047,492,Baylor,1,False,False
+51365,Dwight Powell,2013,24,1032,0.490310077519,506,Stanford,1,False,False
+56769,Frank Kaminsky,2014,275,1032,0.513565891473,530,Wisconsin,1,False,False
+3913546,Melvin Frazier Jr.,2018,2655,1032,0.462209302326,477,Tulane,1,False,False
+4431672,Nico Mannion,2020,12,1032,0.433139534884,447,Arizona,1,False,False
+41566,Colton Iverson,2013,36,1033,0.481122942885,497,Colorado St,1,False,False
+41072,Marcus Denmon,2011,142,1035,0.554589371981,574,Missouri,1,False,False
+4066668,Malachi Flynn,2018,265,1035,0.472463768116,489,Washington St,1,False,False
+51029,Andre Roberson,2013,38,1036,0.32528957529,337,Colorado,1,False,False
+37470,Orlando Johnson,2012,2540,1038,0.575144508671,597,UCSB,1,False,False
+56241,James Ennis III,2013,299,1039,0.478344562079,497,Long Beach St,1,False,False
+66821,Alec Peters,2015,2674,1039,0.548604427334,570,Valparaiso,1,False,False
+3912295,Grant Riller,2020,232,1039,0.652550529355,678,Charleston,1,False,False
+3906665,Brandon Clarke,2019,2250,1040,0.602884615385,627,Gonzaga,1,False,False
+41465,Tyler Zeller,2011,153,1041,0.558117195005,581,North Carolina,1,False,False
+61231,Joel Bolomboy,2016,2692,1042,0.542226487524,565,Weber St,1,False,False
+4278124,Saben Lee,2019,238,1042,0.389635316699,406,Vanderbilt,1,False,False
+41836,Darius Miller,2012,96,1043,0.380632790029,397,Kentucky,1,False,False
+51455,Shabazz Napier,2013,41,1043,0.458293384468,478,UConn,1,False,False
+67249,Wes Iwundu,2016,2306,1044,0.370689655172,387,Kansas St,1,False,False
+61212,Georges Niang,2015,66,1045,0.498564593301,521,Iowa State,1,False,False
+61731,Kyle Anderson,2013,26,1046,0.323135755258,338,UCLA,1,False,False
+66332,Bobby Portis,2015,8,1046,0.601338432122,629,Arkansas,1,False,False
+3912334,Khyri Thomas,2018,156,1046,0.475143403442,497,Creighton,1,False,False
+4065733,Ty Jerome,2018,258,1046,0.346080305927,362,Virginia,1,False,False
+46068,Xavier Thames,2012,21,1048,0.298664122137,313,San Diego St,1,False,False
+51555,Joe Young,2013,248,1048,0.549618320611,576,Houston,1,False,False
+61841,Archie Goodwin,2013,96,1048,0.44465648855,466,Kentucky,1,False,False
+3149673,Pascal Siakam,2015,166,1048,0.416030534351,436,New Mexico St,1,False,False
+4066425,T.J. Leaf,2017,26,1048,0.542938931298,569,UCLA,1,False,False
+41510,Andrew Nicholson,2011,179,1049,0.614871306006,645,St Bonaventure,1,False,False
+51022,Allen Crabbe,2011,25,1049,0.394661582459,414,California,1,False,False
+61796,Jake Layman,2015,120,1049,0.416587225929,437,Maryland,1,False,False
+43058,Kyle O'Quinn,2011,2450,1050,0.500952380952,526,Norfolk St,1,False,False
+56359,Rodney Hood,2012,344,1050,0.312380952381,328,Mississippi St,1,False,False
+56115,Michael Gbinije,2015,183,1050,0.362857142857,381,Syracuse,1,False,False
+4397215,Daniel Oturu,2020,135,1050,0.593333333333,623,Minnesota,1,False,False
+4277923,Zhaire Smith,2018,2641,1051,0.396764985728,417,Texas Tech,1,False,False
+4397136,Saddiq Bey,2020,222,1051,0.474785918173,499,Villanova,1,False,False
+51323,Jordan Clarkson,2012,202,1052,0.485741444867,511,Tulsa,1,False,False
+4278124,Saben Lee,2020,238,1052,0.56463878327,594,Vanderbilt,1,False,False
+45577,Lamar Patterson,2012,221,1053,0.339031339031,357,Pitt,1,False,False
+4065670,Bruce Brown,2017,2390,1053,0.371320037987,391,Miami,1,False,False
+3914283,Chimezie Metu,2018,30,1053,0.506172839506,533,USC,1,False,False
+56933,Branden Dawson,2015,127,1055,0.39336492891,415,Michigan St,1,False,False
+4066731,Jalen McDaniels,2019,21,1056,0.512310606061,541,San Diego St,1,False,False
+56440,Larry Nance Jr.,2013,2751,1057,0.333017975402,352,Wyoming,1,False,False
+4594268,Anthony Edwards,2020,61,1057,0.577105014191,610,Georgia,1,False,False
+51029,Andre Roberson,2012,38,1059,0.383380547686,406,Colorado,1,False,False
+61663,Buddy Hield,2014,201,1059,0.514636449481,545,Oklahoma,1,False,False
+61835,Jaron Blossomgame,2016,228,1060,0.547169811321,580,Clemson,1,False,False
+3915560,Tyler Dorsey,2016,2483,1060,0.449056603774,476,Oregon,1,False,False
+4397693,Kessler Edwards,2020,2492,1061,0.41753063148,443,Pepperdine,1,False,False
+41702,Travis Leslie,2011,61,1062,0.448210922787,476,Georgia,1,False,False
+56838,Tony Wroten,2012,264,1062,0.526365348399,559,Washington,1,False,False
+56224,Cody Zeller,2013,84,1063,0.558795860771,594,Indiana,1,False,False
+67814,Nigel Williams-Goss,2014,264,1063,0.402634054563,428,Washington,1,False,False
+67249,Wes Iwundu,2017,2306,1063,0.406396989652,432,Kansas St,1,False,False
+56996,Rakeem Christmas,2015,183,1064,0.509398496241,542,Syracuse,1,False,False
+66270,Sindarius Thornwell,2017,2579,1064,0.623120300752,663,South Carolina,1,False,False
+4066259,De'Aaron Fox,2017,96,1064,0.56484962406,601,Kentucky,1,False,False
+3143565,Kevin Hervey,2018,250,1064,0.635338345865,676,UT Arlington,1,False,False
+4397136,Saddiq Bey,2019,222,1064,0.278195488722,296,Villanova,1,False,False
+51064,Joe Harris,2014,258,1066,0.415572232645,443,Virginia,1,False,False
+41523,Kris Joseph,2011,183,1067,0.437675726336,467,Syracuse,1,False,False
+52079,Ray McCallum,2011,2174,1067,0.40206185567,429,Detroit Mercy,1,False,False
+4066383,Miles Bridges,2018,127,1067,0.545454545455,582,Michigan St,1,False,False
+4397886,Charles Bassey,2019,98,1067,0.463917525773,495,Western KY,1,False,False
+4066269,Skylar Mays,2020,99,1067,0.484536082474,517,LSU,1,False,False
+66810,Kay Felder,2014,2473,1068,0.294007490637,314,Oakland,1,False,False
+3134908,Jakob Poeltl,2016,254,1068,0.565543071161,604,Utah,1,False,False
+4397166,CJ Elleby,2020,265,1068,0.551498127341,589,Washington St,1,False,False
+4431678,Tyrese Maxey,2020,96,1068,0.40543071161,433,Kentucky,1,False,False
+4395627,Cam Reddish,2019,150,1069,0.453695042095,485,Duke,1,False,False
+51259,Will Barton,2011,235,1070,0.402803738318,431,Memphis,1,False,False
+41465,Tyler Zeller,2012,153,1070,0.580373831776,621,North Carolina,1,False,False
+56985,Aaron White,2015,2294,1070,0.521495327103,558,Iowa,1,False,False
+3906786,Dylan Windler,2019,2057,1070,0.656074766355,702,Belmont,1,False,False
+4278080,Tremont Waters,2019,99,1070,0.471028037383,504,LSU,1,False,False
+4066668,Malachi Flynn,2020,21,1070,0.527102803738,564,San Diego St,1,False,False
+46502,CJ McCollum,2011,2329,1071,0.632119514472,677,Lehigh,1,False,False
+45918,Erick Green,2012,259,1071,0.450980392157,483,Virginia Tech,1,False,False
+45982,Royce White,2012,66,1072,0.425373134328,456,Iowa State,1,False,False
+45916,Jordan Williams,2011,120,1073,0.519105312209,557,Maryland,1,False,False
+41183,Arnett Moultrie,2012,344,1073,0.45852749301,492,Mississippi St,1,False,False
+42155,Kevin Murphy,2012,2635,1073,0.593662628145,637,Tennessee Tech,1,False,False
+56288,Spencer Dinwiddie,2013,38,1073,0.47064305685,505,Colorado,1,False,False
+66562,Jabari Parker,2014,150,1073,0.624417520969,670,Duke,1,False,False
+3147657,Mikal Bridges,2017,222,1073,0.327120223672,351,Villanova,1,False,False
+4397036,Marcus Zegarowski,2020,156,1073,0.465983224604,500,Creighton,1,False,False
+51270,Tim Hardaway Jr.,2011,130,1074,0.451582867784,485,Michigan,1,False,False
+4395698,Kira Lewis Jr.,2019,333,1074,0.42644320298,458,Alabama,1,False,False
+61652,Marcus Paige,2016,153,1075,0.398139534884,428,North Carolina,1,False,False
+41767,Marcus Morris Sr.,2011,2305,1076,0.60780669145,654,Kansas,1,False,False
+4066297,Josh Jackson,2017,2305,1077,0.531104921077,572,Kansas,1,False,False
+51543,Doron Lamb,2011,96,1078,0.435064935065,469,Kentucky,1,False,False
+3150844,Moritz Wagner,2018,130,1078,0.528756957328,570,Michigan,1,False,False
+3138196,Cameron Johnson,2019,153,1078,0.56400742115,608,North Carolina,1,False,False
+46309,Mike Muscala,2013,2083,1079,0.590361445783,637,Bucknell,1,False,False
+61662,Isaiah Cousins,2015,201,1079,0.379054680259,409,Oklahoma,1,False,False
+66256,Jordan Mickey,2014,99,1081,0.380203515264,411,LSU,1,False,False
+66256,Jordan Mickey,2015,99,1081,0.442183163737,478,LSU,1,False,False
+3134881,Stanley Johnson,2015,12,1081,0.483811285846,523,Arizona,1,False,False
+3136477,Isaiah Whitehead,2016,2550,1081,0.567067530065,613,Seton Hall,1,False,False
+56985,Aaron White,2013,2294,1082,0.444547134935,481,Iowa,1,False,False
+61730,Jordan Adams,2014,26,1082,0.578558225508,626,UCLA,1,False,False
+56440,Larry Nance Jr.,2015,2751,1082,0.460258780037,498,Wyoming,1,False,False
+4432171,Moses Moody,2021,8,1082,0.498151571165,539,Arkansas,1,False,False
+41838,Josh Harrellson,2011,96,1083,0.266851338873,289,Kentucky,1,False,False
+41544,Damian Lillard,2012,2692,1083,0.700831024931,759,Weber St,1,False,False
+51478,Russ Smith,2014,97,1083,0.621421975993,673,Louisville,1,False,False
+61793,Montrezl Harrell,2014,97,1084,0.478782287823,519,Louisville,1,False,False
+4066404,Tony Carr,2017,213,1084,0.40221402214,436,Penn State,1,False,False
+4277883,Jordan Nwora,2019,97,1084,0.532287822878,577,Louisville,1,False,False
+56346,Kentavious Caldwell-Pope,2013,61,1086,0.544198895028,591,Georgia,1,False,False
+67845,Derrick White,2017,38,1086,0.550644567219,598,Colorado,1,False,False
+51385,Harrison Barnes,2011,153,1087,0.533578656854,580,North Carolina,1,False,False
+51075,Terrence Ross,2012,264,1088,0.527573529412,574,Washington,1,False,False
+57136,Abdel Nader,2016,66,1088,0.415441176471,452,Iowa State,1,False,False
+61804,Kris Dunn,2016,2507,1088,0.498161764706,542,Providence,1,False,False
+4279888,Ja Morant,2018,93,1088,0.372242647059,405,Murray St,1,False,False
+3912292,Jarrell Brantley,2017,232,1089,0.444444444444,484,Charleston,1,False,False
+3943606,Jerome Robinson,2017,103,1089,0.548209366391,597,Boston College,1,False,False
+4278080,Tremont Waters,2018,99,1089,0.482093663912,525,LSU,1,False,False
+56258,Marcus Thornton,2013,2729,1090,0.518348623853,565,William & Mary,1,False,False
+62208,Tyrone Wallace,2014,25,1090,0.362385321101,395,California,1,False,False
+66321,Rondae Hollis-Jefferson,2015,12,1090,0.391743119266,427,Arizona,1,False,False
+66138,Devon Hall,2018,258,1090,0.364220183486,397,Virginia,1,False,False
+4280151,Corey Kispert,2020,2250,1090,0.420183486239,458,Gonzaga,1,False,False
+51842,Jamaal Franklin,2013,21,1091,0.51329055912,560,San Diego St,1,False,False
+4397008,Romeo Langford,2019,84,1091,0.483959670027,528,Indiana,1,False,False
+51363,Josh Huestis,2013,24,1092,0.327838827839,358,Stanford,1,False,False
+4066407,Carsen Edwards,2018,2509,1092,0.628205128205,686,Purdue,1,False,False
+41010,Malcolm Lee,2011,26,1093,0.39615736505,433,UCLA,1,False,False
+51162,Tony Snell,2013,167,1093,0.400731930467,438,New Mexico,1,False,False
+51524,Devyn Marble,2013,2294,1093,0.479414455627,524,Iowa,1,False,False
+3912334,Khyri Thomas,2017,156,1093,0.394327538884,431,Creighton,1,False,False
+4278508,Troy Brown Jr.,2018,2483,1093,0.36230558097,396,Oregon,1,False,False
+66270,Sindarius Thornwell,2016,2579,1094,0.408592321755,447,South Carolina,1,False,False
+3907498,Matisse Thybulle,2018,264,1094,0.347349177331,380,Washington,1,False,False
+4066392,Isaiah Roby,2019,158,1094,0.378427787934,414,Nebraska,1,False,False
+61654,J.P. Tokoto,2015,153,1096,0.288321167883,316,North Carolina,1,False,False
+3155536,Thomas Welsh,2018,26,1096,0.380474452555,417,UCLA,1,False,False
+4397205,Ignas Brazdeikis,2019,130,1096,0.5,548,Michigan,1,False,False
+56909,Otto Porter Jr.,2013,46,1097,0.456700091158,501,Georgetown,1,False,False
+61835,Jaron Blossomgame,2017,228,1097,0.510483135825,560,Clemson,1,False,False
+61796,Jake Layman,2016,120,1098,0.368852459016,405,Maryland,1,False,False
+3908809,Donovan Mitchell,2017,97,1098,0.481785063752,529,Louisville,1,False,False
+56290,Nick Johnson,2013,12,1099,0.36669699727,403,Arizona,1,False,False
+3138196,Cameron Johnson,2017,221,1099,0.356687898089,392,Pitt,1,False,False
+43058,Kyle O'Quinn,2012,2450,1100,0.509090909091,560,Norfolk St,1,False,False
+51384,Reggie Bullock,2013,153,1100,0.443636363636,488,North Carolina,1,False,False
+3147351,Daniel Hamilton,2015,41,1100,0.345454545455,380,UConn,1,False,False
+4066372,Kevin Huerter,2018,120,1100,0.429090909091,472,Maryland,1,False,False
+4065663,Josh Okogie,2017,59,1101,0.519527702089,572,Georgia Tech,1,False,False
+56635,DeAndre Daniels,2014,41,1102,0.450090744102,496,UConn,1,False,False
+4065730,Kyle Guy,2018,258,1102,0.436479128857,481,Virginia,1,False,False
+45990,Cory Jefferson,2014,239,1103,0.470534904805,519,Baylor,1,False,False
+67814,Nigel Williams-Goss,2015,264,1104,0.423913043478,468,Washington,1,False,False
+32376,Keith Benson,2011,2473,1105,0.550226244344,608,Oakland,1,False,False
+45892,John Jenkins,2011,238,1105,0.564705882353,624,Vanderbilt,1,False,False
+56119,Malcolm Brogdon,2015,258,1105,0.430769230769,476,Virginia,1,False,False
+4066354,Payton Pritchard,2017,2483,1105,0.260633484163,288,Oregon,1,False,False
+4278052,Chuma Okeke,2019,2,1105,0.412669683258,456,Auburn,1,False,False
+61669,Marcus Smart,2013,197,1106,0.458408679928,507,Oklahoma St,1,False,False
+4278541,Jaylen Nowell,2018,264,1106,0.492766726944,545,Washington,1,False,False
+67645,DeAndre' Bembry,2014,2603,1107,0.373080397471,413,Saint Joseph's,1,False,False
+3906522,Henry Ellenson,2016,269,1107,0.506775067751,561,Marquette,1,False,False
+41788,Quincy Acy,2012,239,1108,0.388989169675,431,Baylor,1,False,False
+51418,Jordan McRae,2013,2633,1108,0.467509025271,518,Tennessee,1,False,False
+4066446,Elijah Hughes,2019,183,1108,0.420577617329,466,Syracuse,1,False,False
+45571,Darius Johnson-Odom,2011,269,1109,0.526600541028,584,Marquette,1,False,False
+3934621,Jacob Evans,2018,2132,1109,0.422001803427,468,Cincinnati,1,False,False
+66902,Cameron Payne,2014,93,1110,0.515315315315,572,Murray St,1,False,False
+3912295,Grant Riller,2018,232,1110,0.552252252252,613,Charleston,1,False,False
+51385,Harrison Barnes,2012,153,1111,0.583258325833,648,North Carolina,1,False,False
+45836,Isaiah Canaan,2012,93,1112,0.562949640288,626,Murray St,1,False,False
+3137730,Patrick McCaw,2016,2439,1113,0.436657681941,486,UNLV,1,False,False
+51446,Tristan Thompson,2011,251,1114,0.422800718133,471,Texas,1,False,False
+51540,Terrence Jones,2012,96,1114,0.421005385996,469,Kentucky,1,False,False
+3155535,Kevon Looney,2015,26,1114,0.373429084381,416,UCLA,1,False,False
+4065697,Dennis Smith Jr.,2017,152,1114,0.520646319569,580,NC State,1,False,False
+41021,Isaiah Thomas,2011,264,1115,0.526457399103,587,Washington,1,False,False
+62615,Denzel Valentine,2014,127,1116,0.271505376344,303,Michigan St,1,False,False
+51586,Doug McDermott,2012,156,1117,0.717099373321,801,Creighton,1,False,False
+4066648,Rui Hachimura,2019,2250,1117,0.652641002686,729,Gonzaga,1,False,False
+4277848,Marvin Bagley III,2018,150,1118,0.620751341682,694,Duke,1,False,False
+3138201,Marial Shayok,2019,66,1118,0.56976744186,637,Iowa State,1,False,False
+3907498,Matisse Thybulle,2019,264,1118,0.292486583184,327,Washington,1,False,False
+51163,Cameron Bairstow,2014,167,1119,0.620196604111,694,New Mexico,1,False,False
+3934672,Jalen Brunson,2017,222,1119,0.471849865952,528,Villanova,1,False,False
+4066757,Sam Merrill,2020,328,1119,0.562109025916,629,Utah State,1,False,False
+4432158,Evan Mobley,2021,30,1119,0.482573726542,540,USC,1,False,False
+36614,Lavoy Allen,2011,218,1120,0.341071428571,382,Temple,1,False,False
+45571,Darius Johnson-Odom,2012,269,1120,0.55625,623,Marquette,1,False,False
+61653,Brice Johnson,2016,153,1121,0.604817127565,678,North Carolina,1,False,False
+3912292,Jarrell Brantley,2019,232,1121,0.57091882248,640,Charleston,1,False,False
+56489,Josh Richardson,2014,2633,1122,0.339572192513,381,Tennessee,1,False,False
+3934662,Tyler Lydon,2016,183,1122,0.33422459893,375,Syracuse,1,False,False
+51405,Jared Sullinger,2012,194,1123,0.576135351736,647,Ohio State,1,False,False
+56170,Pat Connaughton,2013,87,1123,0.276046304541,310,Notre Dame,1,False,False
+61804,Kris Dunn,2015,2507,1123,0.458593054319,515,Providence,1,False,False
+3136779,Keita Bates-Diop,2018,194,1125,0.597333333333,672,Ohio State,1,False,False
+4065836,Omari Spellman,2018,222,1125,0.385777777778,434,Villanova,1,False,False
+51493,Markel Brown,2013,197,1126,0.447602131439,504,Oklahoma St,1,False,False
+46068,Xavier Thames,2014,21,1126,0.5621669627,633,San Diego St,1,False,False
+66902,Cameron Payne,2015,93,1126,0.627886323268,707,Murray St,1,False,False
+66207,Jordan Bell,2017,2483,1126,0.379218472469,427,Oregon,1,False,False
+3914283,Chimezie Metu,2017,30,1128,0.473404255319,534,USC,1,False,False
+56112,Austin Rivers,2012,150,1129,0.466784765279,527,Duke,1,False,False
+45537,Lorenzo Brown,2013,152,1129,0.361381753764,408,NC State,1,False,False
+61155,Olivier Hanlan,2013,103,1129,0.44995571302,508,Boston College,1,False,False
+45836,Isaiah Canaan,2013,93,1131,0.597701149425,676,Murray St,1,False,False
+62613,Gary Harris,2014,127,1131,0.518125552608,586,Michigan St,1,False,False
+3133817,Eric Paschall,2018,222,1133,0.354810238305,402,Villanova,1,False,False
+4277905,Trae Young,2018,201,1133,0.773168578994,876,Oklahoma,1,False,False
+51586,Doug McDermott,2011,156,1134,0.512345679012,581,Creighton,1,False,False
+45855,Solomon Hill,2012,12,1134,0.398589065256,452,Arizona,1,False,False
+61278,Sam Dekker,2014,275,1134,0.416225749559,472,Wisconsin,1,False,False
+61663,Buddy Hield,2015,201,1135,0.537444933921,610,Oklahoma,1,False,False
+3135047,Justise Winslow,2015,150,1135,0.433480176211,492,Duke,1,False,False
+3138156,Justin Jackson,2016,153,1135,0.429074889868,487,North Carolina,1,False,False
+4066354,Payton Pritchard,2020,2483,1135,0.559471365639,635,Oregon,1,False,False
+4395723,Keldon Johnson,2019,96,1136,0.43838028169,498,Kentucky,1,False,False
+51586,Doug McDermott,2013,156,1138,0.732864674868,834,Creighton,1,False,False
+3934621,Jacob Evans,2017,2132,1138,0.427943760984,487,Cincinnati,1,False,False
+36138,Jon Leuer,2011,275,1139,0.545215100966,621,Wisconsin,1,False,False
+51064,Joe Harris,2013,258,1139,0.500438981563,570,Virginia,1,False,False
+56258,Marcus Thornton,2014,2729,1139,0.525899912204,599,William & Mary,1,False,False
+3907497,Dejounte Murray,2016,264,1139,0.481123792801,548,Washington,1,False,False
+3906671,Caleb Swanigan,2017,2509,1139,0.567164179104,646,Purdue,1,False,False
+51453,Jeremy Lamb,2011,41,1140,0.400877192982,457,UConn,1,False,False
+4066336,Lauri Markkanen,2017,12,1140,0.505263157895,576,Arizona,1,False,False
+45854,Derrick Williams,2011,12,1141,0.649430324277,741,Arizona,1,False,False
+56188,Tyler Harvey,2015,331,1142,0.61646234676,704,E Washington,1,False,False
+57027,Sir'Dominic Pointer,2015,2599,1143,0.395450568679,452,St John's,1,False,False
+3135048,Jahlil Okafor,2015,150,1143,0.574803149606,657,Duke,1,False,False
+66116,Sterling Brown,2017,2567,1143,0.411198600175,470,SMU,1,False,False
+40989,Jeff Withey,2013,2305,1144,0.444055944056,508,Kansas,1,False,False
+46502,CJ McCollum,2012,2329,1145,0.663755458515,760,Lehigh,1,False,False
+3155942,Domantas Sabonis,2016,2250,1146,0.552356020942,633,Gonzaga,1,False,False
+4066261,Bam Adebayo,2017,96,1146,0.431064572426,494,Kentucky,1,False,False
+67429,Andrew Wiggins,2014,2305,1148,0.520034843206,597,Kansas,1,False,False
+62208,Tyrone Wallace,2015,25,1148,0.491289198606,564,California,1,False,False
+56359,Rodney Hood,2014,150,1150,0.488695652174,562,Duke,1,False,False
+3907387,Ben Simmons,2016,99,1151,0.549087749783,632,LSU,1,False,False
+4066632,Justinian Jessup,2020,68,1151,0.444830582103,512,Boise St,1,False,False
+36152,E'Twaun Moore,2011,2509,1152,0.53125,612,Purdue,1,False,False
+4066320,Desmond Bane,2020,2628,1152,0.4609375,531,TCU,1,False,False
+51394,Jae Crowder,2012,269,1153,0.532523850824,614,Marquette,1,False,False
+66146,Monte Morris,2015,66,1153,0.352124891587,406,Iowa State,1,False,False
+3147351,Daniel Hamilton,2016,41,1153,0.391153512576,451,UConn,1,False,False
+37289,Kenneth Faried,2011,2413,1154,0.496533795494,573,Morehead St,1,False,False
+46171,Tyler Honeycutt,2011,26,1154,0.364818024263,421,UCLA,1,False,False
+45855,Solomon Hill,2013,12,1154,0.40554592721,468,Arizona,1,False,False
+66320,Aaron Gordon,2014,12,1154,0.407279029463,470,Arizona,1,False,False
+57023,Maurice Harkless,2012,2599,1155,0.430303030303,497,St John's,1,False,False
+3136491,D.J. Wilson,2017,130,1155,0.362770562771,419,Michigan,1,False,False
+3907358,Quinndary Weatherspoon,2019,344,1157,0.543647363872,629,Mississippi St,1,False,False
+51022,Allen Crabbe,2012,25,1158,0.445595854922,516,California,1,False,False
+56188,Tyler Harvey,2014,331,1158,0.584628670121,677,E Washington,1,False,False
+66253,Jarell Martin,2015,99,1159,0.481449525453,558,LSU,1,False,False
+4066269,Skylar Mays,2019,99,1159,0.405522001726,470,LSU,1,False,False
+46197,Jordan Hamilton,2011,251,1160,0.578448275862,671,Texas,1,False,False
+61155,Olivier Hanlan,2014,103,1160,0.510344827586,592,Boston College,1,False,False
+41460,Reggie Jackson,2011,103,1161,0.532299741602,618,Boston College,1,False,False
+3907358,Quinndary Weatherspoon,2018,344,1161,0.459948320413,534,Mississippi St,1,False,False
+51270,Tim Hardaway Jr.,2012,130,1162,0.425989672978,495,Michigan,1,False,False
+56489,Josh Richardson,2015,2633,1162,0.44148020654,513,Tennessee,1,False,False
+61212,Georges Niang,2016,66,1162,0.617900172117,718,Iowa State,1,False,False
+56119,Malcolm Brogdon,2014,258,1163,0.404127257094,470,Virginia,1,False,False
+4396993,Tyrese Haliburton,2019,66,1163,0.205503009458,239,Iowa State,1,False,False
+66236,Delon Wright,2015,254,1165,0.436909871245,509,Utah,1,False,False
+66130,Davon Reed,2017,2390,1165,0.421459227468,491,Miami,1,False,False
+51445,Cory Joseph,2011,251,1166,0.321612349914,375,Texas,1,False,False
+45918,Erick Green,2013,259,1166,0.686963979417,801,Virginia Tech,1,False,False
+51365,Dwight Powell,2014,24,1167,0.432733504713,505,Stanford,1,False,False
+4278039,Nickeil Alexander-Walker,2019,259,1167,0.471293916024,550,Virginia Tech,1,False,False
+4395698,Kira Lewis Jr.,2020,333,1167,0.491002570694,573,Alabama,1,False,False
+36162,MarShon Brooks,2011,2507,1168,0.674657534247,788,Providence,1,False,False
+3906786,Dylan Windler,2018,2057,1168,0.488869863014,571,Belmont,1,False,False
+3915560,Tyler Dorsey,2017,2483,1169,0.488451668092,571,Oregon,1,False,False
+3934673,Donte DiVincenzo,2018,222,1170,0.458974358974,537,Villanova,1,False,False
+56848,Elfrid Payton,2013,309,1171,0.448334756618,525,Louisiana,1,False,False
+3911566,Justin Wright-Foreman,2018,2275,1171,0.644748078565,755,Hofstra,1,False,False
+3138161,Cody Martin,2019,2440,1171,0.350128095645,410,Nevada,1,False,False
+3912295,Grant Riller,2019,232,1171,0.618274978651,724,Charleston,1,False,False
+4066632,Justinian Jessup,2019,68,1171,0.395388556789,463,Boise St,1,False,False
+46049,Kawhi Leonard,2011,21,1172,0.475255972696,557,San Diego St,1,False,False
+51405,Jared Sullinger,2011,194,1172,0.54180887372,635,Ohio State,1,False,False
+4278129,Deandre Ayton,2018,12,1172,0.600682593857,704,Arizona,1,False,False
+45577,Lamar Patterson,2014,221,1173,0.525149190111,616,Pitt,1,False,False
+3149673,Pascal Siakam,2016,166,1173,0.588235294118,690,New Mexico St,1,False,False
+3907823,Terance Mann,2019,52,1174,0.359454855196,422,Florida St,1,False,False
+41075,Kim English,2012,142,1175,0.431489361702,507,Missouri,1,False,False
+3918423,Admiral Schofield,2019,2633,1175,0.51914893617,610,Tennessee,1,False,False
+4066446,Elijah Hughes,2020,183,1175,0.51829787234,609,Syracuse,1,False,False
+45892,John Jenkins,2012,238,1177,0.591333899745,696,Vanderbilt,1,False,False
+36087,Justin Harper,2011,257,1178,0.561120543294,661,Richmond,1,False,False
+41836,Darius Miller,2011,96,1178,0.351443123939,414,Kentucky,1,False,False
+41026,Klay Thompson,2011,265,1179,0.62171331637,733,Washington St,1,False,False
+51586,Doug McDermott,2014,156,1181,0.790855207451,934,Creighton,1,False,False
+4066218,Grant Williams,2019,2633,1181,0.58933107536,696,Tennessee,1,False,False
+52079,Ray McCallum,2012,2174,1183,0.456466610313,540,Detroit Mercy,1,False,False
+3133635,Jevon Carter,2017,277,1184,0.422297297297,500,West Virginia,1,False,False
+66821,Alec Peters,2016,2674,1186,0.572512647555,679,Valparaiso,1,False,False
+41019,Nikola Vucevic,2011,30,1187,0.490311710194,582,USC,1,False,False
+46740,Nate Wolters,2012,2571,1188,0.595117845118,707,S Dakota St,1,False,False
+51383,Kendall Marshall,2012,153,1188,0.246632996633,293,North Carolina,1,False,False
+3136776,D'Angelo Russell,2015,194,1188,0.568181818182,675,Ohio State,1,False,False
+61809,Nik Stauskas,2013,130,1190,0.361344537815,430,Michigan,1,False,False
+56170,Pat Connaughton,2014,87,1190,0.370588235294,441,Notre Dame,1,False,False
+51455,Shabazz Napier,2012,41,1191,0.370277078086,441,UConn,1,False,False
+56652,Ben McLemore,2013,2305,1191,0.494542401343,589,Kansas,1,False,False
+51418,Jordan McRae,2014,2633,1191,0.581024349286,692,Tennessee,1,False,False
+45946,Alex Oriakhi,2011,41,1192,0.329697986577,393,UConn,1,False,False
+41523,Kris Joseph,2012,183,1192,0.41610738255,496,Syracuse,1,False,False
+46086,Alec Burks,2011,38,1193,0.652975691534,779,Colorado,1,False,False
+61806,Glenn Robinson III,2014,130,1194,0.405360134003,484,Michigan,1,False,False
+66173,Josh Hart,2017,222,1194,0.56365159129,673,Villanova,1,False,False
+51022,Allen Crabbe,2013,25,1195,0.507949790795,607,California,1,False,False
+66915,Semi Ojeleye,2017,2567,1195,0.556485355649,665,SMU,1,False,False
+51540,Terrence Jones,2011,96,1196,0.497491638796,595,Kentucky,1,False,False
+61731,Kyle Anderson,2014,26,1196,0.440635451505,527,UCLA,1,False,False
+31911,Charles Jenkins,2011,2275,1197,0.601503759398,720,Hofstra,1,False,False
+67645,DeAndre' Bembry,2015,2603,1197,0.459482038429,550,Saint Joseph's,1,False,False
+3136469,Ben Bentil,2016,2507,1198,0.616026711185,738,Providence,1,False,False
+4278075,Kevin Knox II,2018,96,1198,0.480801335559,576,Kentucky,1,False,False
+61049,Jarnell Stokes,2014,2633,1199,0.465387823186,558,Tennessee,1,False,False
+61188,Semaj Christon,2014,2752,1200,0.481666666667,578,Xavier,1,False,False
+41837,DeAndre Liggins,2011,96,1201,0.273105745212,328,Kentucky,1,False,False
+51493,Markel Brown,2014,197,1201,0.486261448793,584,Oklahoma St,1,False,False
+66236,Delon Wright,2014,254,1202,0.426788685524,513,Utah,1,False,False
+4066757,Sam Merrill,2018,328,1202,0.461730449251,555,Utah State,1,False,False
+36150,JaJuan Johnson,2011,2509,1203,0.580216126351,698,Purdue,1,False,False
+45951,Peyton Siva,2012,97,1203,0.288445552785,347,Louisville,1,False,False
+61155,Olivier Hanlan,2015,103,1204,0.519102990033,625,Boston College,1,False,False
+46114,Thomas Robinson,2012,2305,1206,0.556384742952,671,Kansas,1,False,False
+51361,Anthony Brown,2014,24,1206,0.367330016584,443,Stanford,1,False,False
+67430,Frank Mason III,2015,2305,1207,0.374482187241,452,Kansas,1,False,False
+4279888,Ja Morant,2019,93,1207,0.669428334714,808,Murray St,1,False,False
+4395725,Tyler Herro,2019,96,1207,0.429991714996,519,Kentucky,1,False,False
+52079,Ray McCallum,2013,2174,1208,0.510761589404,617,Detroit Mercy,1,False,False
+61662,Isaiah Cousins,2016,201,1209,0.374689826303,453,Oklahoma,1,False,False
+56258,Marcus Thornton,2015,2729,1210,0.544628099174,659,William & Mary,1,False,False
+51478,Russ Smith,2013,97,1211,0.617671345995,748,Louisville,1,False,False
+61652,Marcus Paige,2014,153,1211,0.4921552436,596,North Carolina,1,False,False
+41072,Marcus Denmon,2012,142,1212,0.510726072607,619,Missouri,1,False,False
+66601,Tyler Ennis,2014,183,1215,0.362139917695,440,Syracuse,1,False,False
+4066262,Malik Monk,2017,96,1218,0.619047619048,754,Kentucky,1,False,False
+4397916,Jason Preston,2020,195,1218,0.44170771757,538,Ohio,1,False,False
+42249,Shelvin Mack,2011,2086,1219,0.499589827728,609,Butler,1,False,False
+3163079,Darius Morris,2011,130,1219,0.431501230517,526,Michigan,1,False,False
+4066212,Jordan Bone,2019,2633,1219,0.408531583265,498,Tennessee,1,False,False
+3913176,Brandon Ingram,2016,150,1220,0.504918032787,616,Duke,1,False,False
+3914058,Justin James,2019,2751,1221,0.578214578215,706,Wyoming,1,False,False
+56290,Nick Johnson,2014,12,1223,0.505314799673,618,Arizona,1,False,False
+3155526,Dillon Brooks,2016,2483,1223,0.510220768602,624,Oregon,1,False,False
+51406,Deshaun Thomas,2012,194,1224,0.505718954248,619,Ohio State,1,False,False
+4277956,Jordan Poole,2019,130,1226,0.384991843393,472,Michigan,1,False,False
+56670,Trey Burke,2012,130,1227,0.41075794621,504,Michigan,1,False,False
+3934662,Tyler Lydon,2017,183,1227,0.365118174409,448,Syracuse,1,False,False
+46146,Jared Cunningham,2012,204,1228,0.511400651466,628,Oregon St,1,False,False
+51323,Jordan Clarkson,2014,142,1228,0.498371335505,612,Missouri,1,False,False
+36383,Chandler Parsons,2011,57,1229,0.3311635476,407,Florida,1,False,False
+41760,Draymond Green,2012,127,1229,0.489015459723,601,Michigan St,1,False,False
+61793,Montrezl Harrell,2015,97,1229,0.446704637917,549,Louisville,1,False,False
+66173,Josh Hart,2016,222,1231,0.493907392364,608,Villanova,1,False,False
+4395626,Tre Jones,2019,150,1231,0.274573517465,338,Duke,1,False,False
+51374,Jerian Grant,2012,87,1232,0.339285714286,418,Notre Dame,1,False,False
+66618,Julius Randle,2014,96,1233,0.485806974858,599,Kentucky,1,False,False
+3936299,Jamal Murray,2016,96,1233,0.573398215734,707,Kentucky,1,False,False
+56119,Malcolm Brogdon,2016,258,1234,0.538897893031,665,Virginia,1,False,False
+4065732,De'Andre Hunter,2019,258,1234,0.469205834684,579,Virginia,1,False,False
+4277928,Jarrett Culver,2019,2641,1234,0.570502431118,704,Texas Tech,1,False,False
+51084,Carrick Felix,2013,9,1235,0.413765182186,511,Arizona St,1,False,False
+51259,Will Barton,2012,235,1236,0.510517799353,631,Memphis,1,False,False
+3133601,Devonte' Graham,2016,2305,1237,0.34761519806,430,Kansas,1,False,False
+66146,Monte Morris,2017,66,1237,0.464834276475,575,Iowa State,1,False,False
+4066757,Sam Merrill,2019,328,1237,0.590945836702,731,Utah State,1,False,False
+61159,T.J. Warren,2014,152,1238,0.703554119548,871,NC State,1,False,False
+61278,Sam Dekker,2015,275,1239,0.448748991122,556,Wisconsin,1,False,False
+3915195,Shake Milton,2017,2567,1239,0.367231638418,455,SMU,1,False,False
+4278541,Jaylen Nowell,2019,264,1240,0.46935483871,582,Washington,1,False,False
+67814,Nigel Williams-Goss,2017,2250,1241,0.515713134569,640,Gonzaga,1,False,False
+57041,Norman Powell,2015,26,1243,0.475462590507,591,UCLA,1,False,False
+3922230,Aaron Holiday,2018,26,1244,0.539389067524,671,UCLA,1,False,False
+56352,Michael Kidd-Gilchrist,2012,96,1245,0.382329317269,476,Kentucky,1,False,False
+45951,Peyton Siva,2013,97,1247,0.321571772253,401,Louisville,1,False,False
+45913,Mason Plumlee,2013,150,1248,0.492788461538,615,Duke,1,False,False
+4278073,Shai Gilgeous-Alexander,2018,96,1248,0.426282051282,532,Kentucky,1,False,False
+51543,Doron Lamb,2012,96,1249,0.439551641313,549,Kentucky,1,False,False
+61652,Marcus Paige,2015,153,1251,0.426858513189,534,North Carolina,1,False,False
+3136194,Tyler Ulis,2016,96,1252,0.467252396166,585,Kentucky,1,False,False
+4277843,Gary Trent Jr.,2018,150,1253,0.427773343974,536,Duke,1,False,False
+46740,Nate Wolters,2013,2571,1256,0.585191082803,735,S Dakota St,1,False,False
+4065733,Ty Jerome,2019,258,1256,0.399681528662,502,Virginia,1,False,False
+56848,Elfrid Payton,2014,309,1257,0.534606205251,672,Louisiana,1,False,False
+61810,Caris LeVert,2014,130,1258,0.379968203498,478,Michigan,1,False,False
+36157,Nolan Smith,2011,150,1259,0.60683081811,764,Duke,1,False,False
+66284,Demetrius Jackson,2016,87,1259,0.439237490071,553,Notre Dame,1,False,False
+66587,Terry Rozier,2015,97,1260,0.488095238095,615,Louisville,1,False,False
+3943606,Jerome Robinson,2018,103,1260,0.575396825397,725,Boston College,1,False,False
+4066421,Lonzo Ball,2017,26,1262,0.415213946117,524,UCLA,1,False,False
+4066354,Payton Pritchard,2018,2483,1265,0.413438735178,523,Oregon,1,False,False
+51453,Jeremy Lamb,2012,41,1266,0.476303317536,603,UConn,1,False,False
+51363,Josh Huestis,2014,24,1266,0.317535545024,402,Stanford,1,False,False
+56792,Bradley Beal,2012,57,1267,0.430939226519,546,Florida,1,False,False
+66615,Andrew Harrison,2014,96,1267,0.342541436464,434,Kentucky,1,False,False
+45537,Lorenzo Brown,2012,152,1268,0.370662460568,470,NC State,1,False,False
+3133601,Devonte' Graham,2017,2305,1269,0.379038613081,481,Kansas,1,False,False
+41766,Tyshawn Taylor,2012,2305,1270,0.497637795276,632,Kansas,1,False,False
+51374,Jerian Grant,2013,87,1270,0.366141732283,465,Notre Dame,1,False,False
+66810,Kay Felder,2015,2473,1272,0.470125786164,598,Oakland,1,False,False
+67430,Frank Mason III,2016,2305,1272,0.384433962264,489,Kansas,1,False,False
+3934663,Malachi Richardson,2016,183,1272,0.389937106918,496,Syracuse,1,False,False
+3934672,Jalen Brunson,2018,222,1272,0.594339622642,756,Villanova,1,False,False
+4066407,Carsen Edwards,2019,2509,1275,0.685490196078,874,Purdue,1,False,False
+3135045,Grayson Allen,2016,150,1280,0.58515625,749,Duke,1,False,False
+3138156,Justin Jackson,2017,153,1280,0.57109375,731,North Carolina,1,False,False
+56353,Anthony Davis,2012,96,1281,0.44262295082,567,Kentucky,1,False,False
+61809,Nik Stauskas,2014,130,1281,0.491803278689,630,Michigan,1,False,False
+41080,Jimmy Butler,2011,269,1282,0.453978159126,582,Marquette,1,False,False
+3138161,Cody Martin,2018,2440,1284,0.394080996885,506,Nevada,1,False,False
+37147,Norris Cole,2011,325,1285,0.607003891051,780,Cleveland St,1,False,False
+3147657,Mikal Bridges,2018,222,1285,0.549416342412,706,Villanova,1,False,False
+36156,Kyle Singler,2011,150,1286,0.48600311042,625,Duke,1,False,False
+61663,Buddy Hield,2016,201,1286,0.700622083981,901,Oklahoma,1,False,False
+66810,Kay Felder,2016,2473,1286,0.663297045101,853,Oakland,1,False,False
+62615,Denzel Valentine,2015,127,1295,0.437837837838,567,Michigan St,1,False,False
+66613,James Young,2014,96,1296,0.44212962963,573,Kentucky,1,False,False
+3133817,Eric Paschall,2019,222,1301,0.457340507302,595,Villanova,1,False,False
+36889,Andrew Goudelock,2011,232,1302,0.673579109063,877,Charleston,1,False,False
+67430,Frank Mason III,2017,2305,1302,0.578341013825,753,Kansas,1,False,False
+56354,Marquis Teague,2012,96,1303,0.307751343054,401,Kentucky,1,False,False
+4066382,Cassius Winston,2019,127,1307,0.560826319816,733,Michigan St,1,False,False
+4066404,Tony Carr,2018,213,1308,0.554281345566,725,Penn State,1,False,False
+51406,Deshaun Thomas,2013,194,1309,0.559969442322,733,Ohio State,1,False,False
+57804,Shane Larkin,2013,2390,1311,0.398169336384,522,Miami,1,False,False
+56769,Frank Kaminsky,2015,275,1311,0.558352402746,732,Wisconsin,1,False,False
+51476,Gorgui Dieng,2012,97,1312,0.27743902439,364,Louisville,1,False,False
+61806,Glenn Robinson III,2013,130,1312,0.326219512195,428,Michigan,1,False,False
+3133635,Jevon Carter,2018,277,1313,0.48743335872,640,West Virginia,1,False,False
+3913174,Luke Kennard,2017,150,1314,0.549467275495,722,Duke,1,False,False
+4066320,Desmond Bane,2019,2628,1315,0.428136882129,563,TCU,1,False,False
+66284,Demetrius Jackson,2015,87,1318,0.35660091047,470,Notre Dame,1,False,False
+3135045,Grayson Allen,2018,150,1319,0.433661865049,572,Duke,1,False,False
+36132,Jon Diebler,2011,194,1320,0.354545454545,468,Ohio State,1,False,False
+51361,Anthony Brown,2015,24,1320,0.414393939394,547,Stanford,1,False,False
+3911566,Justin Wright-Foreman,2019,2275,1321,0.717638152914,948,Hofstra,1,False,False
+51555,Joe Young,2015,2483,1322,0.563540090772,745,Oregon,1,False,False
+3135046,Tyus Jones,2015,150,1322,0.348714069592,461,Duke,1,False,False
+36409,Jimmer Fredette,2011,252,1323,0.807256235828,1068,BYU,1,False,False
+51270,Tim Hardaway Jr.,2013,130,1324,0.416918429003,552,Michigan,1,False,False
+66146,Monte Morris,2016,66,1331,0.363636363636,484,Iowa State,1,False,False
+67645,DeAndre' Bembry,2016,2603,1341,0.467561521253,627,Saint Joseph's,1,False,False
+4395625,RJ Barrett,2019,150,1341,0.641312453393,860,Duke,1,False,False
+4065730,Kyle Guy,2019,258,1345,0.435687732342,586,Virginia,1,False,False
+3133602,Svi Mykhailiuk,2018,2305,1346,0.423476968796,570,Kansas,1,False,False
+56170,Pat Connaughton,2015,87,1351,0.351591413768,475,Notre Dame,1,False,False
+4066354,Payton Pritchard,2019,2483,1351,0.364174685418,492,Oregon,1,False,False
+51542,Brandon Knight,2011,96,1363,0.482024944974,657,Kentucky,1,False,False
+56670,Trey Burke,2013,130,1378,0.527576197388,727,Michigan,1,False,False
+56115,Michael Gbinije,2016,183,1403,0.461154668567,647,Syracuse,1,False,False
+51455,Shabazz Napier,2014,41,1404,0.512820512821,720,UConn,1,False,False
+56995,Michael Carter-Williams,2013,183,1408,0.336647727273,474,Syracuse,1,False,False
+51374,Jerian Grant,2015,87,1408,0.446022727273,628,Notre Dame,1,False,False
+3133601,Devonte' Graham,2018,2305,1474,0.457937584803,675,Kansas,1,False,False
+41515,Kemba Walker,2011,41,1543,0.625405055087,965,UConn,1,False,False

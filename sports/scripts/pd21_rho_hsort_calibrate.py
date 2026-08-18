@@ -10,6 +10,7 @@ Run (repo root):
   python sports/scripts/pd21_rho_hsort_calibrate.py --n-seeds 50 --n-jobs 8
   python sports/scripts/pd21_rho_hsort_calibrate.py --method grid --rho-max 0.5
   python sports/scripts/pd21_rho_hsort_calibrate.py --quick
+  python sports/scripts/pd21_rho_hsort_calibrate.py --ppm-zero-below-minutes 20 --fresh
 
 Outputs (HEROs_and_PASSes/pd21_rho/):
   PD21_rho_hsort_calibrate_2011_2021_detail.jsonl   — one row per (season, rho, seed)
@@ -51,8 +52,95 @@ OUT = PD21_RHO
 DEFAULT_RHO_REF = 0.5
 BASE_SEED = 54210814
 BRACKET_RHO_INIT_HI = 0.05
-BRACKET_RHO_MAX_DEFAULT = 0.5
+BRACKET_RHO_MAX_DEFAULT = 4.0
 RHO_MATCH_DECIMALS = 12
+DEFAULT_MIN_MINUTES = 20.0
+
+
+@dataclass(frozen=True)
+class PanelPrepConfig:
+    """Hero panel for empirical H_sort and sim ability vectors."""
+
+    min_minutes: float = DEFAULT_MIN_MINUTES
+    ppm_zero_below_minutes: float | None = None
+
+    @classmethod
+    def from_args(cls, *, min_minutes: float, ppm_zero_below_minutes: float | None) -> PanelPrepConfig:
+        if ppm_zero_below_minutes is not None:
+            return cls(min_minutes=float(min_minutes), ppm_zero_below_minutes=float(ppm_zero_below_minutes))
+        return cls(min_minutes=float(min_minutes), ppm_zero_below_minutes=None)
+
+    @property
+    def output_tag(self) -> str | None:
+        """Filename suffix for non-default panel modes (default min-20 filter keeps legacy names)."""
+        if self.ppm_zero_below_minutes is not None:
+            thr = self.ppm_zero_below_minutes
+            tag_mm = int(thr) if float(thr).is_integer() else thr
+            return f"ppm0lt{tag_mm}"
+        return None
+
+    def describe(self) -> str:
+        if self.ppm_zero_below_minutes is not None:
+            thr = self.ppm_zero_below_minutes
+            tag_mm = int(thr) if float(thr).is_integer() else thr
+            return f"all roster rows; raw PPM=0 if minutes<{tag_mm:g}"
+        mm = int(self.min_minutes) if float(self.min_minutes).is_integer() else self.min_minutes
+        return f"min_minutes>={mm:g} filter; PPM z within season"
+
+    def to_dict(self) -> dict:
+        return {
+            "min_minutes_filter": float(self.min_minutes),
+            "ppm_zero_below_minutes": self.ppm_zero_below_minutes,
+            "panel_mode": "ppm_zero_below" if self.ppm_zero_below_minutes is not None else "min_minutes_filter",
+            "description": self.describe(),
+        }
+
+
+def prepare_calibration_panel(cfg: PanelPrepConfig) -> pd.DataFrame:
+    """Build hero panel with optional min-minutes filter or low-minute PPM zeroing."""
+    from sports_pipeline.config import PipelineConfig
+    from sports_pipeline import conductor, panel_build
+    from sports_pipeline.perf_metric import perf_metric_active
+
+    filter_mm = 0.0 if cfg.ppm_zero_below_minutes is not None else float(cfg.min_minutes)
+    pipe_cfg = PipelineConfig(
+        perf_metric=["ppm"],
+        perf_zscore_within_season=True,
+        ventiles=16,
+        poolq_binning="quantile",
+        poolq_winsor_quantiles=(0.01, 0.99),
+        min_minutes=filter_mm,
+        restrict_teams_by_draftees=False,
+        use_prebuilt_panel_csv=False,
+        panel_season_min=FULL_PANEL_SEASON_MIN,
+        panel_season_max=FULL_PANEL_SEASON_MAX,
+        analysis_season_min=FULL_PANEL_SEASON_MIN,
+        analysis_season_max=FULL_PANEL_SEASON_MAX,
+    )
+    panel = conductor.prepare_panel(pipe_cfg)
+    if cfg.ppm_zero_below_minutes is not None:
+        if "minutes" not in panel.columns:
+            raise KeyError("Panel missing 'minutes' column — cannot apply --ppm-zero-below-minutes")
+        if "ppm" not in panel.columns:
+            raise KeyError("Panel missing 'ppm' column — cannot apply --ppm-zero-below-minutes")
+        thr = float(cfg.ppm_zero_below_minutes)
+        panel = panel.copy()
+        mins = pd.to_numeric(panel["minutes"], errors="coerce")
+        low = mins.notna() & (mins < thr)
+        n_zero = int(low.sum())
+        panel.loc[low, "ppm"] = 0.0
+        print(
+            f"Panel mode: ppm_zero_below={thr:g} — zeroed raw PPM on {n_zero:,} player-season rows "
+            f"({100.0 * n_zero / max(len(panel), 1):.1f}% of raw panel)",
+            flush=True,
+        )
+    panel = panel_build.apply_perf_metric_for_analysis(
+        panel,
+        perf_metric_active(pipe_cfg),
+        poolq_winsor_quantiles=pipe_cfg.poolq_winsor_quantiles,
+        zscore_perf_within_season=True,
+    )
+    return panel_build.filter_panel(panel, pipe_cfg)
 
 
 def normalize_rho(rho: float) -> float:
@@ -338,8 +426,13 @@ def bracket_rho_for_season(
     max_expansions: int,
     max_bisect: int,
     progress: RunProgress | None = None,
-) -> tuple[float, float, list[dict]]:
-    """Return (rho_star, h_sim_at_star, trace rows). Assumes H_sort non-decreasing in rho."""
+) -> tuple[float, float, list[dict], bool]:
+    """Return (rho_star, h_sim_at_star, trace rows, capped_at_rho_max).
+
+    Assumes H_sort non-decreasing in rho. If sim sorting never reaches the empirical
+    target before ``rho_max``, ``capped_at_rho_max`` is True and ``rho_star`` is the
+    upper bracket edge (best effort), not an interior match.
+    """
     target = float(sd.h_sort_empirical)
     trace: list[dict] = []
 
@@ -365,7 +458,7 @@ def bracket_rho_for_season(
     h_lo = ev_lo.h_sort_sim_mean
 
     if h_lo >= target:
-        return 0.0, h_lo, trace
+        return 0.0, h_lo, trace, False
 
     lo, hi = 0.0, float(BRACKET_RHO_INIT_HI)
     ev_hi = ensure_rho_evaluated(
@@ -398,7 +491,15 @@ def bracket_rho_for_season(
         best_rho = hi if abs(h_hi - target) <= abs(h_lo - target) else lo
         best_ev = cache.eval_at(sd.season, best_rho)
         assert best_ev is not None
-        return best_rho, best_ev.h_sort_sim_mean, trace
+        capped = np.isclose(best_rho, float(rho_max)) and h_hi < target
+        if capped:
+            print(
+                f"  season {sd.season}: WARNING target not reached by rho_max={rho_max:g}; "
+                f"reporting best at cap rho={best_rho:g} "
+                f"(H_sim={best_ev.h_sort_sim_mean:.4f} < target={target:.4f})",
+                flush=True,
+            )
+        return best_rho, best_ev.h_sort_sim_mean, trace, capped
 
     for step in range(int(max_bisect)):
         if hi - lo <= float(rho_tol):
@@ -428,7 +529,7 @@ def bracket_rho_for_season(
             parallel=parallel, n_jobs=n_jobs, detail_path=detail_path, progress=progress,
         )
         record(rho_star, ev_star)
-    return rho_star, ev_star.h_sort_sim_mean, trace
+    return rho_star, ev_star.h_sort_sim_mean, trace, False
 
 
 def run_bracket_search(
@@ -461,7 +562,7 @@ def run_bracket_search(
     for sd in seasons:
         jobs_at_start = progress.jobs_completed
         print(f"\nBracket season {sd.season} (H_sort_emp={sd.h_sort_empirical:.4f}) ...", flush=True)
-        rho_star, h_sim, trace = bracket_rho_for_season(
+        rho_star, h_sim, trace, capped = bracket_rho_for_season(
             sd,
             n_seeds=n_seeds,
             base_seed=base_seed,
@@ -481,6 +582,7 @@ def run_bracket_search(
             {
                 "season": sd.season,
                 "rho_star": normalize_rho(rho_star),
+                "rho_star_capped_at_max": bool(capped),
                 "h_sort_empirical": sd.h_sort_empirical,
                 "h_sort_sim_at_star": float(h_sim),
                 "h_sort_abs_err": float(best_err),
@@ -488,8 +590,9 @@ def run_bracket_search(
             }
         )
         bracket_trace.extend(trace)
+        cap_note = " (cap)" if capped else ""
         print(
-            f"  => rho*={rho_star:.4f} H_sim={h_sim:.4f} |err|={best_err:.4f}",
+            f"  => rho*={rho_star:.4f}{cap_note} H_sim={h_sim:.4f} |err|={best_err:.4f}",
             flush=True,
         )
 
@@ -531,14 +634,17 @@ class SimJob:
     seed: int
 
 
-def _output_paths(season_min: int, season_max: int) -> dict:
+def _output_paths(season_min: int, season_max: int, *, panel_tag: str | None = None) -> dict:
     tag = window_tag(season_min, season_max) if season_min != season_max else str(season_min)
     stem = f"PD21_rho_hsort_calibrate_{tag}"
+    if panel_tag:
+        stem = f"{stem}_{panel_tag}"
     return {
         "detail_jsonl": OUT / f"{stem}_detail.jsonl",
         "summary_csv": OUT / f"{stem}_summary.csv",
         "fit_json": OUT / f"{stem}_fit.json",
         "png": OUT / f"{stem}.png",
+        "timeseries_png": OUT / f"{stem}_rho_hsort_timeseries.png",
         "season_min": season_min,
         "season_max": season_max,
         "seasons": seasons_label(season_min, season_max),
@@ -559,21 +665,25 @@ def empirical_h_sort(panel_season: pd.DataFrame) -> float:
     return float(gc.realized_sorting_index_H_sort(ability, pool_id))
 
 
-def load_season_data(season: int) -> SeasonData:
-    gc = _load_gc()
-    ability, caps, meta = gc.load_empirical_roster_caps_season(int(season), repo_root=REPO)
-    from empirical_team_interval_overlap import _prepare_panel
-
-    panel = _prepare_panel()
-    sub = panel.loc[panel["season"] == int(season)]
+def load_season_data(season: int, panel: pd.DataFrame) -> SeasonData:
+    sub = panel.loc[panel["season"] == int(season)].copy()
+    sub = sub.dropna(subset=["perf", "team_id"])
+    sub["perf"] = pd.to_numeric(sub["perf"], errors="coerce")
+    sub = sub.dropna(subset=["perf"])
+    caps = sub.groupby("team_id", observed=True).size().to_numpy(dtype=np.int64)
+    ability = sub["perf"].to_numpy(dtype=float)
+    if int(caps.sum()) != len(ability):
+        raise ValueError(
+            f"Season {season}: sum(roster_caps)={int(caps.sum())} != n_players={len(ability)}"
+        )
     h_emp = empirical_h_sort(sub)
     return SeasonData(
         season=int(season),
         ability=np.asarray(ability, dtype=float),
         roster_caps=np.asarray(caps, dtype=np.int64),
         h_sort_empirical=h_emp,
-        n_players=int(meta["n_players"]),
-        n_teams=int(meta["n_teams_empirical"]),
+        n_players=int(len(ability)),
+        n_teams=int(caps.size),
     )
 
 
@@ -803,13 +913,15 @@ def _plot_x_hi(
     *,
     reference_rho: float,
     plot_xmax: float | None,
+    rho_star: float | None = None,
 ) -> float:
     if plot_xmax is not None:
         return float(plot_xmax)
     bracket = sub.loc[~np.isclose(sub["rho"], float(reference_rho)), "rho"]
-    if bracket.empty:
-        return 0.1
-    return max(float(bracket.max()) * 1.15, 0.05)
+    hi = float(bracket.max()) if not bracket.empty else 0.1
+    if rho_star is not None and np.isfinite(float(rho_star)):
+        hi = max(hi, float(rho_star))
+    return max(hi * 1.15, 0.05)
 
 
 def _plot_one_season_ax(
@@ -818,6 +930,7 @@ def _plot_one_season_ax(
     *,
     season: int,
     rho_star: float | None,
+    rho_star_capped: bool = False,
     show_ylabel: bool,
     reference_rho: float = DEFAULT_RHO_REF,
     plot_xmax: float | None = None,
@@ -842,13 +955,14 @@ def _plot_one_season_ax(
         label=rf"Empirical $H_{{\mathrm{{sort}}}}={h_emp:.3f}$",
     )
     if rho_star is not None:
+        cap_suffix = r" (cap)" if rho_star_capped else ""
         ax.axvline(
             float(rho_star),
             color="#2d6a4f",
             ls=":",
             lw=1.2,
             alpha=0.9,
-            label=rf"$\rho^*={float(rho_star):g}$",
+            label=rf"$\rho^*={float(rho_star):g}{cap_suffix}$",
         )
     ax.set_title(str(season), fontsize=10)
     ax.set_xlabel(r"Homophily $\rho$")
@@ -856,7 +970,12 @@ def _plot_one_season_ax(
         ax.set_ylabel(r"Sorting index $H_{\mathrm{sort}}$")
     ax.set_xlim(
         -0.005,
-        _plot_x_hi(sub, reference_rho=reference_rho, plot_xmax=plot_xmax),
+        _plot_x_hi(
+            sub,
+            reference_rho=reference_rho,
+            plot_xmax=plot_xmax,
+            rho_star=rho_star,
+        ),
     )
     ax.grid(True, alpha=0.25)
     ax.legend(fontsize=8, loc="upper left", framealpha=0.92)
@@ -886,6 +1005,186 @@ def _longitudinal_title_suffix(fit: dict) -> str:
     return rf"longitudinal $\rho^*={rho:.3g}$"
 
 
+def _build_cap_map(per_season: pd.DataFrame, fit: dict) -> dict[int, bool]:
+    cap_map = {
+        int(row["season"]): bool(row.get("rho_star_capped_at_max", False))
+        for row in per_season.to_dict(orient="records")
+    }
+    rho_max_fit = fit.get("bracket", {}).get("rho_max")
+    if rho_max_fit is not None:
+        for row in per_season.to_dict(orient="records"):
+            season = int(row["season"])
+            if cap_map.get(season):
+                continue
+            if np.isclose(float(row["rho_star"]), float(rho_max_fit)):
+                err = float(row.get("h_sort_abs_err", 0.0))
+                if err > 0.005:
+                    cap_map[season] = True
+    return cap_map
+
+
+def _plot_rho_star_by_season_ax(
+    ax: plt.Axes,
+    per_season: pd.DataFrame,
+    *,
+    cap_map: dict[int, bool],
+) -> None:
+    """Compact per-season rho* vs year for the empty grid cell (bottom-right)."""
+    ps = per_season.sort_values("season")
+    years = ps["season"].astype(int).to_numpy()
+    rhos = ps["rho_star"].astype(float).to_numpy()
+    mean_rho = float(np.mean(rhos))
+
+    ax.plot(years, rhos, "o-", color="#b03030", ms=4, lw=1.0, zorder=2)
+    for year, rho in zip(years, rhos):
+        if cap_map.get(int(year)):
+            ax.plot(
+                int(year),
+                float(rho),
+                "o",
+                ms=5,
+                mfc="none",
+                mec="#b03030",
+                mew=1.2,
+                zorder=3,
+            )
+
+    ax.axhline(
+        mean_rho,
+        color="#b03030",
+        ls=":",
+        lw=1.2,
+        label=rf"mean $\rho^*={mean_rho:.3g}$",
+        zorder=1,
+    )
+    ax.set_title(r"Per-season $\rho^*$", fontsize=9)
+    ax.set_xlabel("Season", fontsize=8)
+    ax.set_ylabel(r"$\rho^*$", fontsize=8)
+    ax.tick_params(labelsize=7)
+    ax.set_xticks(years)
+    ax.set_xticklabels([str(y) for y in years], rotation=45, ha="right")
+    y_lo = min(0.0, float(rhos.min()), mean_rho)
+    y_hi = max(float(rhos.max()), mean_rho)
+    pad = max(0.02, 0.08 * (y_hi - y_lo) if y_hi > y_lo else 0.05)
+    ax.set_ylim(y_lo - pad, y_hi + pad)
+    ax.grid(True, alpha=0.25)
+    ax.legend(fontsize=7, loc="upper left", framealpha=0.92)
+
+
+def _plot_rho_hsort_timeseries(
+    per_season: pd.DataFrame,
+    fit: dict,
+    out_path: Path,
+    *,
+    cap_map: dict[int, bool] | None = None,
+) -> None:
+    """Standalone dual-axis: per-season rho* (left, red) and H_sort^emp (right, blue)."""
+    from gallery_mathtext import configure_matplotlib_mathtext
+
+    configure_matplotlib_mathtext()
+    if per_season.empty:
+        return
+
+    cap_map = cap_map if cap_map is not None else _build_cap_map(per_season, fit)
+    ps = per_season.sort_values("season")
+    years = ps["season"].astype(int).to_numpy()
+    rhos = ps["rho_star"].astype(float).to_numpy()
+    h_emp = ps["h_sort_empirical"].astype(float).to_numpy()
+    mean_rho = float(np.mean(rhos))
+
+    long = fit.get("longitudinal", {})
+    mean_h = long.get("h_sort_empirical_mean_over_seasons")
+    if mean_h is None:
+        mean_h = float(np.mean(h_emp))
+    else:
+        mean_h = float(mean_h)
+
+    fig, ax_rho = plt.subplots(figsize=(7.0, 3.8))
+    ax_h = ax_rho.twinx()
+
+    rho_line, = ax_rho.plot(
+        years,
+        rhos,
+        "o-",
+        color="#b03030",
+        ms=5,
+        lw=1.2,
+        label=r"Per-season $\rho^*$",
+        zorder=3,
+    )
+    for year, rho in zip(years, rhos):
+        if cap_map.get(int(year)):
+            ax_rho.plot(
+                int(year),
+                float(rho),
+                "o",
+                ms=6,
+                mfc="none",
+                mec="#b03030",
+                mew=1.4,
+                zorder=4,
+            )
+
+    rho_mean_line = ax_rho.axhline(
+        mean_rho,
+        color="#b03030",
+        ls=":",
+        lw=1.2,
+        label=rf"Mean $\rho^*={mean_rho:.3g}$",
+        zorder=1,
+    )
+
+    h_line, = ax_h.plot(
+        years,
+        h_emp,
+        "o-",
+        color="#1a5490",
+        ms=5,
+        lw=1.2,
+        label=r"Empirical $H_{\mathrm{sort}}$",
+        zorder=3,
+    )
+    h_mean_line = ax_h.axhline(
+        mean_h,
+        color="#1a5490",
+        ls=":",
+        lw=1.2,
+        label=rf"Longitudinal $\overline{{H}}_{{\mathrm{{sort}}}}^{{\mathrm{{emp}}}}={mean_h:.3f}$",
+        zorder=1,
+    )
+
+    ax_rho.set_xlabel("Season")
+    ax_rho.set_ylabel(r"Homophily $\rho^*$", color="#b03030")
+    ax_h.set_ylabel(r"Sorting index $H_{\mathrm{sort}}$", color="#1a5490")
+    ax_rho.tick_params(axis="y", labelcolor="#b03030")
+    ax_h.tick_params(axis="y", labelcolor="#1a5490")
+    ax_rho.set_xticks(years)
+    ax_rho.set_xticklabels([str(y) for y in years], rotation=45, ha="right")
+
+    rho_lo = min(0.0, float(rhos.min()), mean_rho)
+    rho_hi = max(float(rhos.max()), mean_rho)
+    rho_pad = max(0.02, 0.08 * (rho_hi - rho_lo) if rho_hi > rho_lo else 0.05)
+    ax_rho.set_ylim(rho_lo - rho_pad, rho_hi + rho_pad)
+
+    h_lo = min(float(h_emp.min()), mean_h)
+    h_hi = max(float(h_emp.max()), mean_h)
+    h_pad = max(0.005, 0.08 * (h_hi - h_lo) if h_hi > h_lo else 0.01)
+    ax_h.set_ylim(h_lo - h_pad, h_hi + h_pad)
+
+    ax_rho.grid(True, alpha=0.25)
+    seasons_label_str = fit.get("seasons", "")
+    ax_rho.set_title(
+        rf"PD21 per-season $\rho^*$ and empirical $H_{{\mathrm{{sort}}}}$ ({seasons_label_str})",
+        fontsize=11,
+    )
+
+    handles = [rho_line, rho_mean_line, h_line, h_mean_line]
+    ax_rho.legend(handles=handles, fontsize=8, loc="upper left", framealpha=0.92)
+    fig.tight_layout()
+    fig.savefig(out_path, dpi=150, bbox_inches="tight")
+    plt.close(fig)
+
+
 def _plot_calibration(
     summary: pd.DataFrame,
     seasons: list[SeasonData],
@@ -906,6 +1205,7 @@ def _plot_calibration(
         int(row["season"]): float(row["rho_star"])
         for row in per_season.to_dict(orient="records")
     }
+    cap_map = _build_cap_map(per_season, fit)
 
     if n == 1:
         fig, ax = plt.subplots(figsize=(7.0, 4.5))
@@ -916,6 +1216,7 @@ def _plot_calibration(
             sub,
             season=season,
             rho_star=star_map.get(season),
+            rho_star_capped=cap_map.get(season, False),
             show_ylabel=True,
             reference_rho=reference_rho,
             plot_xmax=plot_xmax,
@@ -937,12 +1238,20 @@ def _plot_calibration(
                 sub,
                 season=int(season),
                 rho_star=star_map.get(int(season)),
+                rho_star_capped=cap_map.get(int(season), False),
                 show_ylabel=(idx % ncols == 0),
                 reference_rho=reference_rho,
                 plot_xmax=plot_xmax,
             )
-        for ax in axes.ravel()[n:]:
-            ax.axis("off")
+        empty_axes = list(axes.ravel()[n:])
+        if empty_axes and not per_season.empty:
+            _plot_rho_star_by_season_ax(
+                empty_axes[0],
+                per_season,
+                cap_map=cap_map,
+            )
+            for ax in empty_axes[1:]:
+                ax.axis("off")
         fig.suptitle(
             rf"PD21 $\rho$ calibration — simulated vs empirical $H_{{\mathrm{{sort}}}}$ "
             rf"({title_suffix})",
@@ -975,7 +1284,12 @@ def main() -> None:
         help="Parallel backend (default: process = stdlib ProcessPool)",
     )
     parser.add_argument("--rho-min", type=float, default=0.0)
-    parser.add_argument("--rho-max", type=float, default=0.5, help="Bracket expansion cap / grid upper rho")
+    parser.add_argument(
+        "--rho-max",
+        type=float,
+        default=BRACKET_RHO_MAX_DEFAULT,
+        help=f"Bracket expansion cap / grid upper rho (default {BRACKET_RHO_MAX_DEFAULT:g})",
+    )
     parser.add_argument("--rho-steps", type=int, default=26)
     parser.add_argument(
         "--bracket-tol",
@@ -1023,7 +1337,29 @@ def main() -> None:
         action="store_true",
         help="Ignore existing detail JSONL checkpoint",
     )
+    parser.add_argument(
+        "--min-minutes",
+        type=float,
+        default=DEFAULT_MIN_MINUTES,
+        help="Default panel: drop player-seasons with minutes below this floor (default 20)",
+    )
+    parser.add_argument(
+        "--ppm-zero-below-minutes",
+        type=float,
+        default=None,
+        metavar="M",
+        help=(
+            "Alternative panel: keep all players (no min-minutes filter); set raw PPM=0 "
+            "for minutes<M before within-season z-score. Outputs use suffix _ppm0ltM "
+            "(default method unchanged when omitted)."
+        ),
+    )
     args = parser.parse_args()
+
+    panel_cfg = PanelPrepConfig.from_args(
+        min_minutes=float(args.min_minutes),
+        ppm_zero_below_minutes=args.ppm_zero_below_minutes,
+    )
 
     ensure_hero_dirs()
     method = str(args.method)
@@ -1038,8 +1374,9 @@ def main() -> None:
         rho_grid = np.linspace(float(args.rho_min), float(args.rho_max), int(args.rho_steps))
         rho_max = float(args.rho_max)
 
-    paths = _output_paths(season_min, season_max)
+    paths = _output_paths(season_min, season_max, panel_tag=panel_cfg.output_tag)
     if method == "bracket":
+        bracket_png = paths["png"].with_name(paths["png"].stem + "_bracket.png")
         paths = {
             **paths,
             "detail_jsonl": paths["detail_jsonl"].with_name(
@@ -1049,7 +1386,10 @@ def main() -> None:
                 paths["summary_csv"].stem + "_bracket.csv"
             ),
             "fit_json": paths["fit_json"].with_name(paths["fit_json"].stem + "_bracket.json"),
-            "png": paths["png"].with_name(paths["png"].stem + "_bracket.png"),
+            "png": bracket_png,
+            "timeseries_png": bracket_png.with_name(
+                bracket_png.stem + "_rho_hsort_timeseries.png"
+            ),
         }
 
     if args.fresh and paths["detail_jsonl"].exists():
@@ -1073,13 +1413,17 @@ def main() -> None:
             reference_rho=ref_rho,
             plot_xmax=args.plot_xmax,
         )
+        _plot_rho_hsort_timeseries(per_season, fit, paths["timeseries_png"], cap_map=_build_cap_map(per_season, fit))
         print(f"Wrote {paths['png']}")
+        print(f"Wrote {paths['timeseries_png']}")
         return
 
     print(f"Loading empirical targets {paths['seasons']} ...", flush=True)
+    print(f"Panel: {panel_cfg.describe()}", flush=True)
+    panel = prepare_calibration_panel(panel_cfg)
     seasons: list[SeasonData] = []
     for season in range(int(season_min), int(season_max) + 1):
-        sd = load_season_data(season)
+        sd = load_season_data(season, panel)
         seasons.append(sd)
         print(
             f"  {season}: N={sd.n_players} J={sd.n_teams} "
@@ -1156,6 +1500,7 @@ def main() -> None:
         "generated": date.today().isoformat(),
         "script": "sports/scripts/pd21_rho_hsort_calibrate.py",
         "method": method,
+        "panel": panel_cfg.to_dict(),
         "season_min": int(season_min),
         "season_max": int(season_max),
         "seasons": paths["seasons"],
@@ -1186,6 +1531,12 @@ def main() -> None:
         reference_rho=reference_rho,
         plot_xmax=args.plot_xmax,
     )
+    _plot_rho_hsort_timeseries(
+        per_season,
+        fit,
+        paths["timeseries_png"],
+        cap_map=_build_cap_map(per_season, fit),
+    )
 
     print(
         f"\nLongitudinal rho* = {longitudinal['rho_star_longitudinal']:.4g} "
@@ -1202,6 +1553,7 @@ def main() -> None:
     print(f"Wrote {paths['summary_csv']}")
     print(f"Wrote {paths['fit_json']}")
     print(f"Wrote {paths['png']}")
+    print(f"Wrote {paths['timeseries_png']}")
 
 
 if __name__ == "__main__":

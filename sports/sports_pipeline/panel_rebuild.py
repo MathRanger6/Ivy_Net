@@ -3,10 +3,13 @@ Rebuild the 530 **player–season–team** panel from data on disk (no legacy 53
 
 **Flow (gameplan-aligned):**
 
-1. Aggregate ``mbb_df_player_box.csv`` → one row per ``(athlete_id, season, team_id)`` with
-   ``minutes``, ``points``, ``ppm``, ``games``, display names.
-2. Attach **ever-draft** ``Y_draft`` from ``athlete_id_draft_lookup.csv``.
-3. Left-merge **SR advanced** columns from ``DO_NOT_ERASE/bpm_player_season_matched.csv`` when
+1. Read ``mbb_df_player_box.csv`` (game-level; **not** rewritten on disk).
+2. **Box QC** (configurable): drop ESPN ``"-"`` placeholder names; drop ``(team_id, season)``
+   with too few distinct games in box.
+3. Aggregate → one row per ``(athlete_id, season, team_id)`` with ``minutes``, ``points``,
+   ``ppm``, ``games``, display names.
+4. Attach **ever-draft** ``Y_draft`` from ``athlete_id_draft_lookup.csv``.
+5. Left-merge **SR advanced** columns from ``DO_NOT_ERASE/bpm_player_season_matched.csv`` when
    that file exists (same keys as legacy Cell 7).
 
 Downstream, ``panel_build.apply_perf_metric_for_analysis`` sets ``perf`` and recomputes
@@ -24,6 +27,69 @@ import numpy as np
 import pandas as pd
 
 from sports_pipeline import paths
+
+# Populated by the most recent ``build_from_box`` call (for integrity / provenance reports).
+last_box_qc_report: dict[str, Any] | None = None
+
+
+def box_qc_provenance_lines(cfg: Any, report: dict[str, Any] | None = None) -> list[str]:
+    """Human-readable provenance lines for ventile exports and integrity reports."""
+    rep = report if report is not None else last_box_qc_report
+    drop_dash = bool(getattr(cfg, "drop_dash_placeholder_names", True))
+    min_g = int(getattr(cfg, "min_team_season_games", 10))
+    lines = [
+        "Box QC (panel_rebuild.build_from_box; raw mbb_df_player_box.csv untouched on disk):",
+        f"  drop_dash_placeholder_names={drop_dash}",
+        f"  min_team_season_games={min_g} (drop team-season if distinct game_id count <= this; 0=off)",
+    ]
+    if rep:
+        if drop_dash:
+            lines.append(
+                f"  dash placeholder rows dropped: {int(rep.get('dash_rows_dropped', 0)):,}"
+            )
+        if min_g > 0:
+            lines.append(
+                f"  team-seasons dropped (low games): {int(rep.get('team_seasons_dropped_low_games', 0)):,}; "
+                f"game rows removed: {int(rep.get('box_rows_dropped_low_games', 0)):,}"
+            )
+        lines.append(
+            f"  box game rows after QC: {int(rep.get('box_rows_after_qc', 0)):,} "
+            f"(read {int(rep.get('box_rows_read', 0)):,})"
+        )
+    return lines
+
+
+def _apply_box_qc(df_g: pd.DataFrame, cfg: Any) -> tuple[pd.DataFrame, dict[str, Any]]:
+    """Game-level filters before player-season aggregation."""
+    report: dict[str, Any] = {
+        "box_rows_read": int(len(df_g)),
+        "drop_dash_placeholder_names": bool(getattr(cfg, "drop_dash_placeholder_names", True)),
+        "min_team_season_games": int(getattr(cfg, "min_team_season_games", 5)),
+        "dash_rows_dropped": 0,
+        "team_seasons_dropped_low_games": 0,
+        "box_rows_dropped_low_games": 0,
+    }
+
+    if report["drop_dash_placeholder_names"]:
+        dash = df_g["athlete_display_name"].astype(str).str.strip() == "-"
+        report["dash_rows_dropped"] = int(dash.sum())
+        df_g = df_g.loc[~dash].copy()
+
+    min_g = int(report["min_team_season_games"])
+    if min_g > 0:
+        if "game_id" not in df_g.columns:
+            raise ValueError("min_team_season_games requires game_id in box read columns")
+        ts_games = df_g.groupby(["team_id", "season"], observed=True)["game_id"].nunique()
+        keep_ts = ts_games[ts_games > min_g]
+        dropped_ts = ts_games[ts_games <= min_g]
+        report["team_seasons_dropped_low_games"] = int(len(dropped_ts))
+        before = len(df_g)
+        keep_df = keep_ts.reset_index(name="_games_n")
+        df_g = df_g.merge(keep_df[["team_id", "season"]], on=["team_id", "season"], how="inner")
+        report["box_rows_dropped_low_games"] = int(before - len(df_g))
+
+    report["box_rows_after_qc"] = int(len(df_g))
+    return df_g, report
 
 
 def merge_sr_matched_into_panel(df: pd.DataFrame, matched_path: Any = None) -> pd.DataFrame:
@@ -60,11 +126,14 @@ def build_from_box(cfg: Any) -> pd.DataFrame:
     Does **not** set ``perf`` / ``poolq_loo`` — run ``panel_build.apply_perf_metric_for_analysis``
     next.
     """
+    global last_box_qc_report
+
     box_path = paths.player_box_csv()
     if not box_path.is_file():
         raise FileNotFoundError(f"Missing player box: {box_path}")
 
     usecols = [
+        "game_id",
         "athlete_id",
         "season",
         "team_id",
@@ -85,6 +154,9 @@ def build_from_box(cfg: Any) -> pd.DataFrame:
         df_g = df_g.loc[df_g["season"] >= int(lo)]
     if hi is not None:
         df_g = df_g.loc[df_g["season"] <= int(hi)]
+
+    df_g, qc_report = _apply_box_qc(df_g, cfg)
+    last_box_qc_report = qc_report
 
     agg = (
         df_g.groupby(["athlete_id", "season", "team_id"], as_index=False)
@@ -117,4 +189,6 @@ def build_from_box(cfg: Any) -> pd.DataFrame:
     agg["Y_draft"] = agg["athlete_id"].isin(drafted).astype(int)
 
     agg = merge_sr_matched_into_panel(agg)
+    qc_report["player_season_rows"] = int(len(agg))
+    last_box_qc_report = qc_report
     return agg

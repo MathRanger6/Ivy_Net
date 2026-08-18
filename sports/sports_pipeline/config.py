@@ -40,6 +40,13 @@ class PipelineConfig:
     panel_season_max: int | None = None
     #: Drop player-seasons below this many minutes before LOO / ventiles (0 = no filter).
     min_minutes: float = 0.0
+    #: In ``panel_rebuild.build_from_box``: drop game rows with ``athlete_display_name.strip() == "-"``.
+    #: Raw ``mbb_df_player_box.csv`` is never rewritten; this is panel-build hygiene only.
+    drop_dash_placeholder_names: bool = True
+    #: In ``panel_rebuild.build_from_box``: drop every game row for ``(team_id, season)`` with
+    #: ``<=`` this many distinct ``game_id`` values after dash filtering (0 = off).
+    #: Default 5 removes single-game D-II/NAIA cameos and other fragmentary ESPN coverage.
+    min_team_season_games: int = 10
     #: Number of bins for nonparametric draft-rate vs ``poolq_loo`` EDA (see ``poolq_binning``).
     ventiles: int = 20
     #: ``quantile`` — rank-based bins (~equal count per bin; robust to winsorized ties).

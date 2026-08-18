@@ -1,0 +1,261 @@
+{
+  "diagnostic": "pd22_drafted_minutes_audit",
+  "date": "2026-08-17",
+  "season_min": 2011,
+  "season_max": 2021,
+  "seasons": "2011-2021",
+  "panel_spec": "rebuild from box, min_minutes=0 at rebuild; Y_draft ever-draft flag",
+  "thresholds": [
+    0.0,
+    1.0,
+    2.0,
+    5.0,
+    8.0,
+    10.0,
+    15.0,
+    20.0,
+    25.0,
+    30.0
+  ],
+  "summary": {
+    "n_drafted_player_seasons": 1177,
+    "n_unique_drafted_athletes": 521,
+    "min_minutes_among_drafted": 0.0,
+    "max_minutes_among_drafted": 1543.0,
+    "median_minutes_among_drafted": 979.0,
+    "draft_safe_max_floor_drop": 0.0,
+    "hero_lock_min_minutes": 20.0,
+    "n_lost_at_hero_lock_drop": 44,
+    "n_unique_lost_at_hero_lock_drop": 42,
+    "n_lost_zero_minutes_at_hero_lock_drop": 42,
+    "n_retained_at_hero_lock_drop": 1133,
+    "n_lost_player_season_ids_at_20": [
+      {
+        "athlete_id": 51323,
+        "season": 2013,
+        "minutes": 0.0
+      },
+      {
+        "athlete_id": 56359,
+        "season": 2013,
+        "minutes": 0.0
+      },
+      {
+        "athlete_id": 56965,
+        "season": 2014,
+        "minutes": 0.0
+      },
+      {
+        "athlete_id": 57136,
+        "season": 2014,
+        "minutes": 0.0
+      },
+      {
+        "athlete_id": 61438,
+        "season": 2014,
+        "minutes": 0.0
+      },
+      {
+        "athlete_id": 66138,
+        "season": 2014,
+        "minutes": 0.0
+      },
+      {
+        "athlete_id": 2991143,
+        "season": 2014,
+        "minutes": 0.0
+      },
+      {
+        "athlete_id": 66205,
+        "season": 2015,
+        "minutes": 0.0
+      },
+      {
+        "athlete_id": 66915,
+        "season": 2015,
+        "minutes": 0.0
+      },
+      {
+        "athlete_id": 3134880,
+        "season": 2015,
+        "minutes": 0.0
+      },
+      {
+        "athlete_id": 3147657,
+        "season": 2015,
+        "minutes": 0.0
+      },
+      {
+        "athlete_id": 3914283,
+        "season": 2015,
+        "minutes": 0.0
+      },
+      {
+        "athlete_id": 3917376,
+        "season": 2015,
+        "minutes": 0.0
+      },
+      {
+        "athlete_id": 3917378,
+        "season": 2015,
+        "minutes": 0.0
+      },
+      {
+        "athlete_id": 56933,
+        "season": 2016,
+        "minutes": 0.0
+      },
+      {
+        "athlete_id": 66915,
+        "season": 2016,
+        "minutes": 0.0
+      },
+      {
+        "athlete_id": 67814,
+        "season": 2016,
+        "minutes": 0.0
+      },
+      {
+        "athlete_id": 67845,
+        "season": 2016,
+        "minutes": 0.0
+      },
+      {
+        "athlete_id": 3133817,
+        "season": 2016,
+        "minutes": 0.0
+      },
+      {
+        "athlete_id": 3912295,
+        "season": 2016,
+        "minutes": 0.0
+      },
+      {
+        "athlete_id": 3912332,
+        "season": 2016,
+        "minutes": 0.0
+      },
+      {
+        "athlete_id": 62208,
+        "season": 2017,
+        "minutes": 0.0
+      },
+      {
+        "athlete_id": 3138161,
+        "season": 2017,
+        "minutes": 0.0
+      },
+      {
+        "athlete_id": 3917376,
+        "season": 2017,
+        "minutes": 0.0
+      },
+      {
+        "athlete_id": 4065660,
+        "season": 2017,
+        "minutes": 0.0
+      },
+      {
+        "athlete_id": 4065732,
+        "season": 2017,
+        "minutes": 0.0
+      },
+      {
+        "athlete_id": 4065836,
+        "season": 2017,
+        "minutes": 0.0
+      },
+      {
+        "athlete_id": 4066490,
+        "season": 2017,
+        "minutes": 0.0
+      },
+      {
+        "athlete_id": 4066731,
+        "season": 2017,
+        "minutes": 0.0
+      },
+      {
+        "athlete_id": 4080610,
+        "season": 2017,
+        "minutes": 0.0
+      },
+      {
+        "athlete_id": 3138201,
+        "season": 2018,
+        "minutes": 0.0
+      },
+      {
+        "athlete_id": 3906665,
+        "season": 2018,
+        "minutes": 0.0
+      },
+      {
+        "athlete_id": 4066436,
+        "season": 2018,
+        "minutes": 0.0
+      },
+      {
+        "athlete_id": 4066446,
+        "season": 2018,
+        "minutes": 0.0
+      },
+      {
+        "athlete_id": 4277850,
+        "season": 2018,
+        "minutes": 0.0
+      },
+      {
+        "athlete_id": 4278355,
+        "season": 2018,
+        "minutes": 0.0
+      },
+      {
+        "athlete_id": 4065672,
+        "season": 2019,
+        "minutes": 0.0
+      },
+      {
+        "athlete_id": 4066668,
+        "season": 2019,
+        "minutes": 0.0
+      },
+      {
+        "athlete_id": 4066998,
+        "season": 2019,
+        "minutes": 0.0
+      },
+      {
+        "athlete_id": 4278053,
+        "season": 2019,
+        "minutes": 0.0
+      },
+      {
+        "athlete_id": 4397885,
+        "season": 2020,
+        "minutes": 0.0
+      },
+      {
+        "athlete_id": 4278580,
+        "season": 2021,
+        "minutes": 0.0
+      },
+      {
+        "athlete_id": 4066320,
+        "season": 2017,
+        "minutes": 17.0
+      },
+      {
+        "athlete_id": 4066269,
+        "season": 2017,
+        "minutes": 18.0
+      }
+    ]
+  },
+  "outputs": {
+    "csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/pd22_minutes/PD22_drafted_minutes_audit_2011_2021.csv",
+    "threshold_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/pd22_minutes/PD22_drafted_minutes_threshold_table_2011_2021.csv",
+    "json": "3-Master_Plan/re_entry/HEROs_and_PASSes/pd22_minutes/PD22_drafted_minutes_audit_2011_2021.json",
+    "png": "3-Master_Plan/re_entry/HEROs_and_PASSes/pd22_minutes/PD22_drafted_minutes_audit_2011_2021.png"
+  }
+}

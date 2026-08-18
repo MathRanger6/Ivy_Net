@@ -1,0 +1,32 @@
+{
+  "diagnostic": "pd22_raw_minutes_distribution",
+  "date": "2026-08-17",
+  "season_min": 2011,
+  "season_max": 2021,
+  "seasons": "2011-2021",
+  "panel_spec": "rebuild from box, min_minutes=0, no playing-time filter",
+  "summary": {
+    "n_player_seasons": 59283,
+    "n_drafted_player_seasons": 1177,
+    "n_zero_minutes": 7051,
+    "pct_zero_minutes": 11.89379754735759,
+    "minutes_median": 344.0,
+    "minutes_p25": 32.0,
+    "minutes_p75": 730.0,
+    "minutes_p90": 963.0,
+    "minutes_p99": 1190.1800000000003,
+    "minutes_max": 1543.0,
+    "pct_below_10": 17.73358298331731,
+    "pct_below_15": 20.04284533508763,
+    "pct_below_20": 21.889917851660677,
+    "drafted_minutes_median": 979.0,
+    "drafted_pct_below_20": 3.7383177570093453,
+    "hero_lock_min_minutes": 20.0,
+    "alt_floor_min_minutes": 10.0
+  },
+  "outputs": {
+    "csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/pd22_minutes/PD22_raw_minutes_distribution_2011_2021.csv",
+    "json": "3-Master_Plan/re_entry/HEROs_and_PASSes/pd22_minutes/PD22_raw_minutes_distribution_2011_2021.json",
+    "png": "3-Master_Plan/re_entry/HEROs_and_PASSes/pd22_minutes/PD22_raw_minutes_distribution_2011_2021.png"
+  }
+}

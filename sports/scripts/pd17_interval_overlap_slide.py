@@ -107,6 +107,66 @@ def build_interval_overlap_slide(
     print(f"Wrote {out_pptx}")
 
 
+def build_figure_focus_slide(
+    *,
+    fig_path: Path,
+    out_pptx: Path,
+    title: str,
+    subtitle: str,
+    bullets: list[str],
+    claim: str = "",
+) -> None:
+    """Large centered figure — title/subtitle top, compact bullets + optional claim below."""
+    prs = Presentation()
+    prs.slide_width = SLIDE_W
+    prs.slide_height = SLIDE_H
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+
+    title_top = Inches(0.24)
+    title_h = Inches(0.5)
+    title_box = slide.shapes.add_textbox(MARGIN, title_top, CONTENT_W, title_h)
+    populate_paragraph_raw_latex(
+        title_box.text_frame.paragraphs[0],
+        title,
+        font_size=HAND_TITLE_PT,
+        bold=True,
+    )
+
+    sub_top = title_top + title_h + Inches(0.04)
+    sub_h = Inches(0.27)
+    sub_box = slide.shapes.add_textbox(MARGIN, sub_top, CONTENT_W, sub_h)
+    populate_paragraph_raw_latex(
+        sub_box.text_frame.paragraphs[0],
+        subtitle,
+        font_size=HAND_SUBTITLE_PT,
+    )
+
+    footer_h = Inches(0.42) if claim else Inches(0.0)
+    footer_top = SLIDE_H - MARGIN - footer_h
+    bullet_h = Inches(1.05)
+    bullet_top = footer_top - bullet_h - Inches(0.06)
+    fig_top = sub_top + sub_h + Inches(0.1)
+    fig_h = bullet_top - fig_top - Inches(0.08)
+
+    add_picture_fitted(slide, fig_path, MARGIN, fig_top, CONTENT_W, fig_h)
+
+    bullet_box = slide.shapes.add_textbox(MARGIN, bullet_top, CONTENT_W, bullet_h)
+    bullet_tf = bullet_box.text_frame
+    bullet_tf.word_wrap = True
+    fill_bullets_raw_latex(bullet_tf, bullets, font_size=HAND_BODY_PT)
+
+    if claim:
+        foot = slide.shapes.add_textbox(MARGIN, footer_top, CONTENT_W, footer_h)
+        foot_tf = foot.text_frame
+        foot_tf.word_wrap = True
+        populate_paragraph_raw_latex(foot_tf.paragraphs[0], claim, font_size=HAND_CLAIM_PT, bold=True)
+        foot_tf.paragraphs[0].alignment = PP_ALIGN.LEFT
+
+    out_pptx.parent.mkdir(parents=True, exist_ok=True)
+    prs.save(str(out_pptx))
+    print(f"Wrote {out_pptx}")
+
+
 def build_text_reference_slide(
     *,
     out_pptx: Path,
