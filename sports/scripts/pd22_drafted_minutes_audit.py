@@ -38,12 +38,26 @@ from gallery_mathtext import configure_matplotlib_mathtext
 from hero_gallery_paths import PD22_MINUTES, ensure_hero_dirs
 from interval_overlap_paths import seasons_label
 
+from pd20_22_campaign_window import (
+    activate_from_args,
+    add_window_args,
+    current_window,
+)
+
+
+def _w():
+    return current_window()
+
+
+STEM_PREFIX = "PD22_drafted_minutes_audit"
+
+
+def _stem() -> str:
+    return f"{STEM_PREFIX}_{_w().tag}"
+
 OUT = PD22_MINUTES
-SEASON_MIN = 2011
-SEASON_MAX = 2021
 DEFAULT_THRESHOLDS = (0, 1, 2, 5, 8, 10, 15, 20, 25, 30)
 HERO_LOCK = 20.0
-STEM = f"PD22_drafted_minutes_audit_{SEASON_MIN}_{SEASON_MAX}"
 
 
 def _pipeline_config() -> object:
@@ -58,10 +72,10 @@ def _pipeline_config() -> object:
         min_minutes=0.0,
         restrict_teams_by_draftees=False,
         use_prebuilt_panel_csv=False,
-        panel_season_min=SEASON_MIN,
-        panel_season_max=SEASON_MAX,
-        analysis_season_min=SEASON_MIN,
-        analysis_season_max=SEASON_MAX,
+        panel_season_min=_w().season_min,
+        panel_season_max=_w().season_max,
+        analysis_season_min=_w().season_min,
+        analysis_season_max=_w().season_max,
     )
 
 
@@ -164,7 +178,7 @@ def _summary(drafted: pd.DataFrame, threshold_df: pd.DataFrame) -> dict:
 
 def _plot_audit(drafted: pd.DataFrame, threshold_df: pd.DataFrame, summary: dict, png_path: Path) -> None:
     configure_matplotlib_mathtext()
-    seasons = seasons_label(SEASON_MIN, SEASON_MAX)
+    seasons = seasons_label(_w().season_min, _w().season_max)
     mins = drafted["minutes"].dropna().to_numpy(dtype=float)
     fig, axes = plt.subplots(1, 2, figsize=(11.5, 4.6))
 
@@ -235,10 +249,10 @@ def _plot_audit(drafted: pd.DataFrame, threshold_df: pd.DataFrame, summary: dict
 
 def _artifact_paths() -> dict[str, Path]:
     return {
-        "csv": OUT / f"{STEM}.csv",
-        "threshold_csv": OUT / f"{STEM.replace('_audit_', '_threshold_table_')}.csv",
-        "json": OUT / f"{STEM}.json",
-        "png": OUT / f"{STEM}.png",
+        "csv": OUT / f"{_stem()}.csv",
+        "threshold_csv": OUT / f"{_stem().replace('_audit_', '_threshold_table_')}.csv",
+        "json": OUT / f"{_stem()}.json",
+        "png": OUT / f"{_stem()}.png",
     }
 
 
@@ -258,9 +272,9 @@ def run_audit(*, thresholds: list[float]) -> dict:
     meta = {
         "diagnostic": "pd22_drafted_minutes_audit",
         "date": date.today().isoformat(),
-        "season_min": SEASON_MIN,
-        "season_max": SEASON_MAX,
-        "seasons": seasons_label(SEASON_MIN, SEASON_MAX),
+        "season_min": _w().season_min,
+        "season_max": _w().season_max,
+        "seasons": seasons_label(_w().season_min, _w().season_max),
         "panel_spec": "rebuild from box, min_minutes=0 at rebuild; Y_draft ever-draft flag",
         "thresholds": thresholds,
         "summary": summary,
@@ -316,7 +330,9 @@ def main() -> None:
         action="store_true",
         help="Regenerate PNG from existing CSV/JSON (no panel rebuild)",
     )
+    add_window_args(parser)
     args = parser.parse_args()
+    activate_from_args(args)
 
     if args.plot_only:
         plot_only()

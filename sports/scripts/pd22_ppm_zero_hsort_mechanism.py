@@ -36,14 +36,28 @@ sys.path.insert(0, str(SCRIPTS))
 from gallery_mathtext import configure_matplotlib_mathtext
 from hero_gallery_paths import PD22_MINUTES, ensure_hero_dirs
 from interval_overlap_paths import seasons_label
+
+from pd20_22_campaign_window import (
+    activate_from_args,
+    add_window_args,
+    current_window,
+)
+
+
+def _w():
+    return current_window()
+
+
+STEM_PREFIX = "PD22_ppm_zero_hsort_mechanism"
+
+
+def _stem() -> str:
+    return f"{STEM_PREFIX}_{_w().tag}"
 from pd21_rho_hsort_calibrate import PanelPrepConfig, empirical_h_sort, prepare_calibration_panel
 
 OUT = PD22_MINUTES
-SEASON_MIN = 2011
-SEASON_MAX = 2021
 DEFAULT_PPM_ZERO = 20.0
-STEM = f"PD22_ppm_zero_hsort_mechanism_{SEASON_MIN}_{SEASON_MAX}"
-SEASON_STEM = f"{STEM.replace('_mechanism_', '_mechanism_season_')}"
+SEASON_STEM = f"{_stem().replace('_mechanism_', '_mechanism_season_')}"
 
 
 def _pipeline_config(*, min_minutes: float) -> object:
@@ -58,10 +72,10 @@ def _pipeline_config(*, min_minutes: float) -> object:
         min_minutes=float(min_minutes),
         restrict_teams_by_draftees=False,
         use_prebuilt_panel_csv=False,
-        panel_season_min=SEASON_MIN,
-        panel_season_max=SEASON_MAX,
-        analysis_season_min=SEASON_MIN,
-        analysis_season_max=SEASON_MAX,
+        panel_season_min=_w().season_min,
+        panel_season_max=_w().season_max,
+        analysis_season_min=_w().season_min,
+        analysis_season_max=_w().season_max,
     )
 
 
@@ -120,7 +134,7 @@ def _season_hsort_table(
     ppm_zero_panel: pd.DataFrame,
 ) -> pd.DataFrame:
     rows = []
-    for season in range(SEASON_MIN, SEASON_MAX + 1):
+    for season in range(_w().season_min, _w().season_max + 1):
         sub_drop = drop_panel.loc[drop_panel["season"] == season]
         sub_pz = ppm_zero_panel.loc[ppm_zero_panel["season"] == season]
         h_drop = empirical_h_sort(sub_drop)
@@ -174,7 +188,7 @@ def _summary(team_df: pd.DataFrame, season_df: pd.DataFrame, *, ppm_zero_below_m
 
 def _plot(team_df: pd.DataFrame, season_df: pd.DataFrame, summary: dict, png_path: Path) -> None:
     configure_matplotlib_mathtext()
-    seasons = seasons_label(SEASON_MIN, SEASON_MAX)
+    seasons = seasons_label(_w().season_min, _w().season_max)
     fig, axes = plt.subplots(1, 2, figsize=(11.4, 4.8))
 
     ax = axes[0]
@@ -219,10 +233,10 @@ def _plot(team_df: pd.DataFrame, season_df: pd.DataFrame, summary: dict, png_pat
 
 def _artifact_paths() -> dict[str, Path]:
     return {
-        "csv": OUT / f"{STEM}.csv",
+        "csv": OUT / f"{_stem()}.csv",
         "season_csv": OUT / f"{SEASON_STEM}.csv",
-        "json": OUT / f"{STEM}.json",
-        "png": OUT / f"{STEM}.png",
+        "json": OUT / f"{_stem()}.json",
+        "png": OUT / f"{_stem()}.png",
     }
 
 
@@ -243,9 +257,9 @@ def run(*, ppm_zero_below_minutes: float) -> dict:
     meta = {
         "diagnostic": "pd22_ppm_zero_hsort_mechanism",
         "date": date.today().isoformat(),
-        "season_min": SEASON_MIN,
-        "season_max": SEASON_MAX,
-        "seasons": seasons_label(SEASON_MIN, SEASON_MAX),
+        "season_min": _w().season_min,
+        "season_max": _w().season_max,
+        "seasons": seasons_label(_w().season_min, _w().season_max),
         "panel_spec": (
             f"PPM-zero min=0 + ppm_zero_below={ppm_zero_below_minutes:g}; "
             f"drop min={DEFAULT_PPM_ZERO:g}; H_sort from realized partition on perf"
@@ -296,7 +310,9 @@ def main() -> None:
         action="store_true",
         help="Regenerate PNG from existing CSV (no panel rebuild)",
     )
+    add_window_args(parser)
     args = parser.parse_args()
+    activate_from_args(args)
     if args.plot_only:
         plot_only()
     else:

@@ -39,15 +39,23 @@ from hero_gallery_paths import PD22_MINUTES, ensure_hero_dirs
 from interval_overlap_paths import seasons_label
 from pd22_slide_common import KEEP_MIN_TEAM_SEASON_GAMES
 
+from pd20_22_campaign_window import (
+    activate_from_args,
+    add_window_args,
+    current_window,
+)
+
+
+def _w():
+    return current_window()
+
 OUT = PD22_MINUTES
-SEASON_MIN = 2011
-SEASON_MAX = 2021
 HERO_LOCK = 20.0
 NCAA_DRESS_CAP = 15
 
 
 def _stem(*, before_qc: bool) -> str:
-    base = f"PD22_raw_roster_size_distribution_{SEASON_MIN}_{SEASON_MAX}"
+    base = f"PD22_raw_roster_size_distribution_{_w().tag}"
     return f"{base}_before_qc" if before_qc else f"{base}_after_qc"
 
 
@@ -63,10 +71,10 @@ def _pipeline_config(*, min_minutes: float, before_qc: bool) -> object:
         min_minutes=float(min_minutes),
         restrict_teams_by_draftees=False,
         use_prebuilt_panel_csv=False,
-        panel_season_min=SEASON_MIN,
-        panel_season_max=SEASON_MAX,
-        analysis_season_min=SEASON_MIN,
-        analysis_season_max=SEASON_MAX,
+        panel_season_min=_w().season_min,
+        panel_season_max=_w().season_max,
+        analysis_season_min=_w().season_min,
+        analysis_season_max=_w().season_max,
     )
     if before_qc:
         kw["drop_dash_placeholder_names"] = False
@@ -130,7 +138,7 @@ def _plot(
     before_qc: bool,
 ) -> None:
     configure_matplotlib_mathtext()
-    seasons = seasons_label(SEASON_MIN, SEASON_MAX)
+    seasons = seasons_label(_w().season_min, _w().season_max)
     arrays = [raw_sizes] if filtered_sizes is None or len(filtered_sizes) == 0 else [
         raw_sizes,
         filtered_sizes,
@@ -257,9 +265,9 @@ def run(*, before_qc: bool, write_csv: bool = True) -> dict:
         if before_qc
         else "pd22_raw_roster_size_distribution_after_qc",
         "date": date.today().isoformat(),
-        "season_min": SEASON_MIN,
-        "season_max": SEASON_MAX,
-        "seasons": seasons_label(SEASON_MIN, SEASON_MAX),
+        "season_min": _w().season_min,
+        "season_max": _w().season_max,
+        "seasons": seasons_label(_w().season_min, _w().season_max),
         "before_box_qc": before_qc,
         "ncaa_dress_cap_reference": NCAA_DRESS_CAP,
         "raw_panel_spec": (
@@ -316,7 +324,9 @@ def main() -> None:
     parser.add_argument("--before-qc-only", action="store_true", help="Legacy raw box only")
     parser.add_argument("--after-qc-only", action="store_true", help="Default box QC only")
     parser.add_argument("--plot-only", action="store_true", help="Regenerate PNG from CSV/JSON")
+    add_window_args(parser)
     args = parser.parse_args()
+    activate_from_args(args)
 
     do_before = args.before_qc_only or (not args.before_qc_only and not args.after_qc_only)
     do_after = args.after_qc_only or (not args.before_qc_only and not args.after_qc_only)

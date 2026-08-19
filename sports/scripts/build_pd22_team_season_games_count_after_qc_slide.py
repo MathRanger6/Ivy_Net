@@ -30,10 +30,26 @@ from hero_gallery_paths import (
 from pd17_interval_overlap_slide import build_figure_focus_slide, load_meta
 from pd22_slide_common import BOX_QC_PANEL_NOTE, MIN_TEAM_SEASON_GAMES, KEEP_MIN_TEAM_SEASON_GAMES, m, mgeq, mleq
 
+from pd20_22_campaign_window import (
+    activate_from_args,
+    add_window_args,
+    auto_deck_path,
+    current_window,
+    window_cli_flags,
+)
+
+
+def _w():
+    return current_window()
+
+
+STEM_PREFIX = "PD22_team_season_games_count_after_qc"
+
+
+def _stem() -> str:
+    return f"{STEM_PREFIX}_{_w().tag}"
+
 DIST_SCRIPT = SCRIPTS / "pd22_team_season_games_count.py"
-SEASON_MIN = 2011
-SEASON_MAX = 2021
-STEM = f"PD22_team_season_games_count_after_qc_{SEASON_MIN}_{SEASON_MAX}"
 DEFAULT_MIN_GAMES = MIN_TEAM_SEASON_GAMES
 KEEP_MIN_GAMES = KEEP_MIN_TEAM_SEASON_GAMES
 
@@ -44,15 +60,16 @@ CLAIM = (
 
 
 def _artifact_paths() -> tuple[Path, Path, Path]:
-    fig = PD22_MINUTES / f"{STEM}.png"
-    meta = PD22_MINUTES / f"{STEM}.json"
-    return fig, meta, AUTO_PD22_TEAM_SEASON_GAMES_AFTER_QC_DECK
+    fig = PD22_MINUTES / f"{_stem()}.png"
+    meta = PD22_MINUTES / f"{_stem()}.json"
+    return fig, meta, auto_deck_path(AUTO_PD22_TEAM_SEASON_GAMES_AFTER_QC_DECK)
 
 
 def _refresh(*, plot_only: bool) -> None:
     cmd = [sys.executable, str(DIST_SCRIPT), "--after-qc-only"]
     if plot_only:
         cmd.append("--plot-only")
+    cmd.extend(window_cli_flags())
     print("Running after-QC games count ..." if not plot_only else "Refreshing after-QC PNG ...")
     subprocess.run(cmd, cwd=str(REPO), check=True)
 
@@ -81,7 +98,9 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Build PD22 after-QC games count AUTO slide.")
     parser.add_argument("--slides-only", action="store_true", help="Use existing PNG + JSON")
     parser.add_argument("--plot-only", action="store_true", help="Regenerate PNG only")
+    add_window_args(parser)
     args = parser.parse_args()
+    activate_from_args(args)
 
     fig, meta_path, out_pptx = _artifact_paths()
     ensure_hero_dirs()
@@ -98,7 +117,7 @@ def main() -> None:
     med = float(meta.get("games_n_median", 0))
     n_ts = int(meta.get("n_team_seasons", 0))
     subtitle = (
-        rf"PD22 · games after box QC · {SEASON_MIN}–{SEASON_MAX} · "
+        rf"PD22 · games after box QC · {_w().season_min}–{_w().season_max} · "
         rf"{m(n_ts)} team-seasons · median = {m(med, decimals=0)} · min {mgeq(KEEP_MIN_GAMES)}"
     )
 

@@ -35,12 +35,38 @@ from memo_slide_common import (
     new_memo_presentation,
     save_memo_deck,
 )
+from pd20_22_campaign_window import (
+    activate_from_args,
+    add_window_args,
+    auto_deck_path,
+    current_window,
+)
 
-SWEEP_META = PD20_TEMPERATURE / "GRANDCHILD_temperature_select_sweep_2011_2021_meta.json"
-DROP_BRACKET = PD21_RHO / "PD21_rho_hsort_calibrate_2011_2021_fit_bracket.json"
-PPM0_BRACKET = PD21_RHO / "PD21_rho_hsort_calibrate_2011_2021_ppm0lt20_fit_bracket.json"
-PANEL_COMPARE = PD22_MINUTES / "PD22_panel_policy_compare_2011_2021.json"
-DRAFT_AUDIT = PD22_MINUTES / "PD22_drafted_minutes_audit_2011_2021.json"
+
+def _w():
+    return current_window()
+
+
+def _sweep_meta_path() -> Path:
+    return PD20_TEMPERATURE / f"GRANDCHILD_temperature_select_sweep_{_w().tag}_meta.json"
+
+
+def _drop_bracket_path() -> Path:
+    return PD21_RHO / f"PD21_rho_hsort_calibrate_{_w().tag}_fit_bracket.json"
+
+
+def _ppm0_bracket_path() -> Path:
+    return PD21_RHO / f"PD21_rho_hsort_calibrate_{_w().tag}_ppm0lt20_fit_bracket.json"
+
+
+def _panel_compare_path() -> Path:
+    return PD22_MINUTES / f"PD22_panel_policy_compare_{_w().tag}.json"
+
+
+def _draft_audit_path() -> Path:
+    return PD22_MINUTES / f"PD22_drafted_minutes_audit_{_w().tag}.json"
+
+
 INTERVAL_2012 = PD22_MINUTES / "PD22_interval_overlap_season_2012.json"
 INTERVAL_2013 = PD22_MINUTES / "PD22_interval_overlap_season_2013.json"
 
@@ -72,11 +98,11 @@ def _join(*parts: str) -> str:
 
 
 def _load_numbers() -> dict:
-    sweep_meta = _load_json(SWEEP_META)
-    drop_bracket = _load_json(DROP_BRACKET)
-    ppm0_bracket = _load_json(PPM0_BRACKET)
-    panel_compare = _load_json(PANEL_COMPARE)
-    draft_audit = _load_json(DRAFT_AUDIT)
+    sweep_meta = _load_json(_sweep_meta_path())
+    drop_bracket = _load_json(_drop_bracket_path())
+    ppm0_bracket = _load_json(_ppm0_bracket_path())
+    panel_compare = _load_json(_panel_compare_path())
+    draft_audit = _load_json(_draft_audit_path())
     interval_2012 = _load_json(INTERVAL_2012)
     interval_2013 = _load_json(INTERVAL_2013)
 
@@ -1098,10 +1124,16 @@ def build_deck() -> None:
     _build_act_iv(prs, n)
     _build_closing(prs, n)
 
-    save_memo_deck(prs, AUTO_PD20_22_MEMO_DECK)
+    save_memo_deck(prs, auto_deck_path(AUTO_PD20_22_MEMO_DECK))
 
 
 def main() -> None:
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Build PD20–22 narrative companion deck.")
+    add_window_args(parser)
+    args = parser.parse_args()
+    activate_from_args(args)
     build_deck()
 
 

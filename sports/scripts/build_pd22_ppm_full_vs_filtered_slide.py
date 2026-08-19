@@ -32,15 +32,35 @@ from hero_gallery_paths import (
 from pd17_interval_overlap_slide import build_figure_focus_slide, load_meta
 from pd22_slide_common import BOX_QC_PANEL_NOTE, m, mapprox, mn, mn_approx, mgeq, mgt, mpct
 
+from pd20_22_campaign_window import (
+    activate_from_args,
+    add_window_args,
+    auto_deck_path,
+    current_window,
+    window_cli_flags,
+)
+
+
+def _w():
+    return current_window()
+
 PPM_SCRIPT = SCRIPTS / "pd22_ppm_distribution.py"
-SEASON_MIN = 2011
-SEASON_MAX = 2021
-OVERLAY_STEM = f"PD22_ppm_full_vs_filtered_{SEASON_MIN}_{SEASON_MAX}"
 HERO_LOCK = 20.0
 
 ROSTER_META = GRANDCHILD_ASSIGN / "GRANDCHILD_ncaa_roster_size_distribution_2011_2021_meta.json"
-MINUTES_META = PD22_MINUTES / f"PD22_raw_minutes_distribution_{SEASON_MIN}_{SEASON_MAX}.json"
-PPM_META = PD22_MINUTES / f"PD22_ppm_distribution_{SEASON_MIN}_{SEASON_MAX}.json"
+
+
+def _overlay_stem() -> str:
+    return f"PD22_ppm_full_vs_filtered_{_w().tag}"
+
+
+def _minutes_meta_path() -> Path:
+    return PD22_MINUTES / f"PD22_raw_minutes_distribution_{_w().tag}.json"
+
+
+def _ppm_meta_path() -> Path:
+    return PD22_MINUTES / f"PD22_ppm_distribution_{_w().tag}.json"
+
 
 def _claim(ps: dict) -> str:
     n_gt1 = int(ps.get("n_filtered_out_ppm_gt_1", 0))
@@ -53,14 +73,15 @@ def _claim(ps: dict) -> str:
     )
 
 def _artifact_paths() -> tuple[Path, Path]:
-    fig = PD22_MINUTES / f"{OVERLAY_STEM}.png"
-    return fig, AUTO_PD22_PPM_OVERLAY_DECK
+    fig = PD22_MINUTES / f"{_overlay_stem()}.png"
+    return fig, auto_deck_path(AUTO_PD22_PPM_OVERLAY_DECK)
 
 
 def _refresh_overlay(*, plot_only: bool) -> None:
     cmd = [sys.executable, str(PPM_SCRIPT)]
     if plot_only:
         cmd.append("--plot-only")
+    cmd.extend(window_cli_flags())
     print("Refreshing overlay PNG ..." if plot_only else "Running PPM diagnostic ...")
     subprocess.run(cmd, cwd=str(REPO), check=True)
 
@@ -88,7 +109,7 @@ def _roster_bullet() -> str:
 def _readout_bullets(ppm: dict, minutes: dict) -> list[str]:
     ps = ppm.get("summary") or {}
     ms = minutes.get("summary") or {}
-    seasons = ppm.get("seasons") or minutes.get("seasons") or f"{SEASON_MIN}–{SEASON_MAX}"
+    seasons = ppm.get("seasons") or minutes.get("seasons") or f"{_w().season_min}–{_w().season_max}"
     n_full = int(ps.get("n_hero_panel", 0)) + int(ps.get("n_filtered_out_positive_minutes", 0))
     n_sub = int(ps.get("n_filtered_out_positive_minutes", 0))
 
@@ -117,7 +138,9 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Build PD22 PPM overlay AUTO slide.")
     parser.add_argument("--slides-only", action="store_true", help="Use existing PNG + JSON")
     parser.add_argument("--plot-only", action="store_true", help="Regenerate overlay PNG only")
+    add_window_args(parser)
     args = parser.parse_args()
+    activate_from_args(args)
 
     fig, out_pptx = _artifact_paths()
     ensure_hero_dirs()
@@ -128,13 +151,13 @@ def main() -> None:
     if not fig.is_file():
         raise SystemExit(f"Missing figure: {fig}")
 
-    ppm_meta = load_meta(PPM_META)
-    minutes_meta = load_meta(MINUTES_META)
+    ppm_meta = load_meta(_ppm_meta_path())
+    minutes_meta = load_meta(_minutes_meta_path())
     if not ppm_meta:
-        raise SystemExit(f"Missing PPM JSON: {PPM_META}")
+        raise SystemExit(f"Missing PPM JSON: {_ppm_meta_path()}")
 
     ps = ppm_meta.get("summary") or {}
-    seasons = ppm_meta.get("seasons", f"{SEASON_MIN}–{SEASON_MAX}")
+    seasons = ppm_meta.get("seasons", f"{_w().season_min}–{_w().season_max}")
     subtitle = (
         rf"PD22 · PPM overlay · {seasons} · "
         rf"{m(int(ps.get('n_filtered_out_ppm_gt_1', 0)))} sub-{HERO_LOCK:g}-min rows with PPM {mgt(1)}"

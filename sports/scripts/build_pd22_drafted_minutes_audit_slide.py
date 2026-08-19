@@ -26,10 +26,26 @@ from hero_gallery_paths import AUTO_PD22_DRAFTED_MINUTES_DECK, PD22_MINUTES, ens
 from pd17_interval_overlap_slide import build_figure_focus_slide, load_meta
 from pd22_slide_common import BOX_QC_PANEL_NOTE, m, mapprox, mfrac
 
+from pd20_22_campaign_window import (
+    activate_from_args,
+    add_window_args,
+    auto_deck_path,
+    current_window,
+    window_cli_flags,
+)
+
+
+def _w():
+    return current_window()
+
+
+STEM_PREFIX = "PD22_drafted_minutes_audit"
+
+
+def _stem() -> str:
+    return f"{STEM_PREFIX}_{_w().tag}"
+
 AUDIT_SCRIPT = SCRIPTS / "pd22_drafted_minutes_audit.py"
-SEASON_MIN = 2011
-SEASON_MAX = 2021
-STEM = f"PD22_drafted_minutes_audit_{SEASON_MIN}_{SEASON_MAX}"
 
 CLAIM = (
     r"Claim (PD22): Playing-time floor must be draft-safe — retain every "
@@ -39,15 +55,16 @@ CLAIM = (
 
 
 def _artifact_paths() -> tuple[Path, Path, Path]:
-    fig = PD22_MINUTES / f"{STEM}.png"
-    meta = PD22_MINUTES / f"{STEM}.json"
-    return fig, meta, AUTO_PD22_DRAFTED_MINUTES_DECK
+    fig = PD22_MINUTES / f"{_stem()}.png"
+    meta = PD22_MINUTES / f"{_stem()}.json"
+    return fig, meta, auto_deck_path(AUTO_PD22_DRAFTED_MINUTES_DECK)
 
 
 def _refresh_audit(*, plot_only: bool) -> None:
     cmd = [sys.executable, str(AUDIT_SCRIPT)]
     if plot_only:
         cmd.append("--plot-only")
+    cmd.extend(window_cli_flags())
     print("Running drafted-minutes audit ..." if not plot_only else "Refreshing audit PNG ...")
     subprocess.run(cmd, cwd=str(REPO), check=True)
 
@@ -76,7 +93,7 @@ def _readout_bullets(meta: dict) -> list[str]:
     safe = s.get("draft_safe_max_floor_drop")
     min_line = m(float(min_m)) if min_m is not None else r"$?$"
     safe_line = mapprox(float(safe)) if safe is not None else r"$?$"
-    seasons = meta.get("seasons", f"{SEASON_MIN}–{SEASON_MAX}")
+    seasons = meta.get("seasons", f"{_w().season_min}–{_w().season_max}")
 
     return [
         r"PD22 item 1: audit minutes floor before defending min 20 min "
@@ -108,7 +125,9 @@ def main() -> None:
         action="store_true",
         help="Regenerate PNG from CSV only, then build slide",
     )
+    add_window_args(parser)
     args = parser.parse_args()
+    activate_from_args(args)
 
     fig, meta_path, out_pptx = _artifact_paths()
     ensure_hero_dirs()
@@ -125,7 +144,7 @@ def main() -> None:
     s = meta.get("summary") or {}
     n_lost = int(s.get("n_lost_at_hero_lock_drop", 0))
     n_all = int(s.get("n_drafted_player_seasons", 0))
-    seasons = meta.get("seasons", f"{SEASON_MIN}–{SEASON_MAX}")
+    seasons = meta.get("seasons", f"{_w().season_min}–{_w().season_max}")
 
     subtitle = (
         rf"PD22 · drafted retention audit · {seasons} · "

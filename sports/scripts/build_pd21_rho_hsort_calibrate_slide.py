@@ -29,6 +29,13 @@ SCRIPTS = Path(__file__).resolve().parent
 sys.path.insert(0, str(SCRIPTS))
 
 from hero_gallery_paths import AUTO_PD21_RHO_DECK, PD21_RHO, ensure_hero_dirs
+from pd20_22_campaign_window import (
+    activate_from_args,
+    add_window_args,
+    auto_deck_path,
+    current_window,
+    window_cli_flags,
+)
 from h_sort_readout import h_sort_definition_bullet, h_sort_note_bullet
 from pd17_interval_overlap_slide import build_interval_overlap_slide, load_meta
 from pd21_slide_common import (
@@ -46,6 +53,10 @@ from pd21_slide_common import (
 CALIBRATE_SCRIPT = SCRIPTS / "pd21_rho_hsort_calibrate.py"
 
 
+def _w():
+    return current_window()
+
+
 def _panel_tag(*, ppm_zero_below_minutes: float | None) -> str | None:
     if ppm_zero_below_minutes is None:
         return None
@@ -56,22 +67,22 @@ def _panel_tag(*, ppm_zero_below_minutes: float | None) -> str | None:
 
 def _artifact_paths(*, ppm_zero_below_minutes: float | None) -> tuple[Path, Path, Path]:
     tag = _panel_tag(ppm_zero_below_minutes=ppm_zero_below_minutes)
-    stem = "PD21_rho_hsort_calibrate_2011_2021"
+    stem = f"PD21_rho_hsort_calibrate_{_w().tag}"
     if tag:
         stem = f"{stem}_{tag}"
     fig = PD21_RHO / f"{stem}_bracket.png"
     fit = PD21_RHO / f"{stem}_fit_bracket.json"
+    base_deck = AUTO_PD21_RHO_DECK
     if tag:
-        out_pptx = AUTO_PD21_RHO_DECK.with_name(
+        base_deck = AUTO_PD21_RHO_DECK.with_name(
             AUTO_PD21_RHO_DECK.stem.replace("_AUTO", f"_{tag}_AUTO") + ".pptx"
         )
-    else:
-        out_pptx = AUTO_PD21_RHO_DECK
+    out_pptx = auto_deck_path(base_deck)
     return fig, fit, out_pptx
 
 
 def _refresh_plot(*, ppm_zero_below_minutes: float | None) -> None:
-    cmd = [sys.executable, str(CALIBRATE_SCRIPT), "--plot-only"]
+    cmd = [sys.executable, str(CALIBRATE_SCRIPT), "--plot-only", *window_cli_flags()]
     if ppm_zero_below_minutes is not None:
         cmd.extend(["--ppm-zero-below-minutes", str(float(ppm_zero_below_minutes))])
     print("Refreshing bracket PNG (plot-only) ...")
@@ -166,7 +177,9 @@ def main() -> None:
         metavar="M",
         help="Build contrast AUTO deck (_ppm0ltM suffix)",
     )
+    add_window_args(parser)
     args = parser.parse_args()
+    activate_from_args(args)
 
     fig, fit_path, out_pptx = _artifact_paths(ppm_zero_below_minutes=args.ppm_zero_below_minutes)
 

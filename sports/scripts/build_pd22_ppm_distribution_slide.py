@@ -26,10 +26,26 @@ from hero_gallery_paths import AUTO_PD22_PPM_DISTRIBUTION_DECK, PD22_MINUTES, en
 from pd17_interval_overlap_slide import build_figure_focus_slide, load_meta
 from pd22_slide_common import BOX_QC_PANEL_NOTE, m, mn, mgt, mlt, mpct
 
+from pd20_22_campaign_window import (
+    activate_from_args,
+    add_window_args,
+    auto_deck_path,
+    current_window,
+    window_cli_flags,
+)
+
+
+def _w():
+    return current_window()
+
+
+STEM_PREFIX = "PD22_ppm_distribution"
+
+
+def _stem() -> str:
+    return f"{STEM_PREFIX}_{_w().tag}"
+
 PPM_SCRIPT = SCRIPTS / "pd22_ppm_distribution.py"
-SEASON_MIN = 2011
-SEASON_MAX = 2021
-STEM = f"PD22_ppm_distribution_{SEASON_MIN}_{SEASON_MAX}"
 HERO_LOCK = 20.0
 
 CLAIM = (
@@ -40,22 +56,23 @@ CLAIM = (
 
 
 def _artifact_paths() -> tuple[Path, Path, Path]:
-    fig = PD22_MINUTES / f"{STEM}.png"
-    meta = PD22_MINUTES / f"{STEM}.json"
-    return fig, meta, AUTO_PD22_PPM_DISTRIBUTION_DECK
+    fig = PD22_MINUTES / f"{_stem()}.png"
+    meta = PD22_MINUTES / f"{_stem()}.json"
+    return fig, meta, auto_deck_path(AUTO_PD22_PPM_DISTRIBUTION_DECK)
 
 
 def _refresh_ppm(*, plot_only: bool) -> None:
     cmd = [sys.executable, str(PPM_SCRIPT)]
     if plot_only:
         cmd.append("--plot-only")
+    cmd.extend(window_cli_flags())
     print("Running PPM distribution ..." if not plot_only else "Refreshing PPM PNG ...")
     subprocess.run(cmd, cwd=str(REPO), check=True)
 
 
 def _readout_bullets(meta: dict) -> list[str]:
     s = meta.get("summary") or {}
-    seasons = meta.get("seasons", f"{SEASON_MIN}–{SEASON_MAX}")
+    seasons = meta.get("seasons", f"{_w().season_min}–{_w().season_max}")
     spec = meta.get("panel_spec") or {}
 
     return [
@@ -80,7 +97,9 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Build PD22 PPM distribution AUTO slide.")
     parser.add_argument("--slides-only", action="store_true", help="Use existing PNG + JSON")
     parser.add_argument("--plot-only", action="store_true", help="Regenerate PNG from CSV only")
+    add_window_args(parser)
     args = parser.parse_args()
+    activate_from_args(args)
 
     fig, meta_path, out_pptx = _artifact_paths()
     ensure_hero_dirs()
@@ -95,7 +114,7 @@ def main() -> None:
         raise SystemExit(f"Missing figure: {fig}")
 
     s = meta.get("summary") or {}
-    seasons = meta.get("seasons", f"{SEASON_MIN}–{SEASON_MAX}")
+    seasons = meta.get("seasons", f"{_w().season_min}–{_w().season_max}")
     subtitle = (
         rf"PD22 · PPM tails · {seasons} · "
         rf"{m(int(s.get('n_filtered_out_ppm_gt_1', 0)))} sub-{HERO_LOCK:g}-min rows with PPM {mgt(1)}"

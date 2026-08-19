@@ -26,10 +26,26 @@ from hero_gallery_paths import AUTO_PD22_RAW_MINUTES_DECK, PD22_MINUTES, ensure_
 from pd17_interval_overlap_slide import build_figure_focus_slide, load_meta
 from pd22_slide_common import BOX_QC_PANEL_NOTE, m, mpct
 
+from pd20_22_campaign_window import (
+    activate_from_args,
+    add_window_args,
+    auto_deck_path,
+    current_window,
+    window_cli_flags,
+)
+
+
+def _w():
+    return current_window()
+
+
+STEM_PREFIX = "PD22_raw_minutes_distribution"
+
+
+def _stem() -> str:
+    return f"{STEM_PREFIX}_{_w().tag}"
+
 DIST_SCRIPT = SCRIPTS / "pd22_raw_minutes_distribution.py"
-SEASON_MIN = 2011
-SEASON_MAX = 2021
-STEM = f"PD22_raw_minutes_distribution_{SEASON_MIN}_{SEASON_MAX}"
 
 CLAIM = (
     r"Claim (PD22): Minutes floor must be grounded in the raw roster distribution — "
@@ -38,15 +54,16 @@ CLAIM = (
 
 
 def _artifact_paths() -> tuple[Path, Path, Path]:
-    fig = PD22_MINUTES / f"{STEM}.png"
-    meta = PD22_MINUTES / f"{STEM}.json"
-    return fig, meta, AUTO_PD22_RAW_MINUTES_DECK
+    fig = PD22_MINUTES / f"{_stem()}.png"
+    meta = PD22_MINUTES / f"{_stem()}.json"
+    return fig, meta, auto_deck_path(AUTO_PD22_RAW_MINUTES_DECK)
 
 
 def _refresh_distribution(*, plot_only: bool) -> None:
     cmd = [sys.executable, str(DIST_SCRIPT)]
     if plot_only:
         cmd.append("--plot-only")
+    cmd.extend(window_cli_flags())
     print(
         "Running raw minutes distribution ..."
         if not plot_only
@@ -57,7 +74,7 @@ def _refresh_distribution(*, plot_only: bool) -> None:
 
 def _readout_bullets(meta: dict) -> list[str]:
     s = meta.get("summary") or {}
-    seasons = meta.get("seasons", f"{SEASON_MIN}–{SEASON_MAX}")
+    seasons = meta.get("seasons", f"{_w().season_min}–{_w().season_max}")
     n_all = int(s.get("n_player_seasons", 0))
     n_draft = int(s.get("n_drafted_player_seasons", 0))
     med = s.get("minutes_median")
@@ -93,7 +110,9 @@ def main() -> None:
         action="store_true",
         help="Regenerate PNG from CSV only, then build slide",
     )
+    add_window_args(parser)
     args = parser.parse_args()
+    activate_from_args(args)
 
     fig, meta_path, out_pptx = _artifact_paths()
     ensure_hero_dirs()
@@ -108,7 +127,7 @@ def main() -> None:
         raise SystemExit(f"Missing figure: {fig}")
 
     s = meta.get("summary") or {}
-    seasons = meta.get("seasons", f"{SEASON_MIN}–{SEASON_MAX}")
+    seasons = meta.get("seasons", f"{_w().season_min}–{_w().season_max}")
     subtitle = (
         rf"PD22 · raw panel minutes · {seasons} · "
         rf"median = {m(float(s.get('minutes_median', 0)), decimals=0)} min · "

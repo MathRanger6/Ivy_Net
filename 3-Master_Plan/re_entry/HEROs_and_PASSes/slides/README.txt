@@ -213,6 +213,13 @@ HAND20 — Alex deck (PD20 + PD22 + PD21, Aug 2026)
     • ρ*=0 but overlap plots look sorted — different questions (slides 20–21)
 
   Regenerate: pd20_temperature/REGENERATE.md, pd21_rho/README.md, pd22_minutes/README.md
+
+  **2013–2021 contrast run (excludes 2011–2012, Alex PD23):**
+    ./scripts/regenerate_pd20_22_auto_13_21.sh
+    → PNG/JSON tagged *_2013_2021.* ; AUTO decks *_13_21_AUTO.pptx (parallel to full panel)
+    SLIDES_ONLY=1 ./scripts/regenerate_pd20_22_auto_13_21.sh   # decks only, if figures exist
+    Side-by-side diff checklist: slides/PD20_22_13_21_vs_full_panel_diff.md
+
   Memo (H_sort): ../grandchild_assign/GRANDCHILD_D_and_H_sort_interpretation.md
   Takeaways memo (narrative companion): auto/CHAR_PD20_22_takeaways_memo_AUTO.pptx
     ~46 slides — wavetops (Parts 0–2 + bridges) → snag bridge + snag + Q1–Q3 → Act bridges →

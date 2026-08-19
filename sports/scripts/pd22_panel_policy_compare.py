@@ -38,25 +38,47 @@ from gallery_mathtext import configure_matplotlib_mathtext
 from hero_gallery_paths import PD21_RHO, PD22_MINUTES, ensure_hero_dirs
 from interval_overlap_paths import seasons_label
 
-OUT = PD22_MINUTES
-SEASON_MIN = 2011
-SEASON_MAX = 2021
-HERO_LOCK = 20.0
-STEM = f"PD22_panel_policy_compare_{SEASON_MIN}_{SEASON_MAX}"
-CALIBRATE_SCRIPT = SCRIPTS / "pd21_rho_hsort_calibrate.py"
-MECHANISM_SEASON_CSV = OUT / f"PD22_ppm_zero_hsort_mechanism_season_{SEASON_MIN}_{SEASON_MAX}.csv"
+from pd20_22_campaign_window import (
+    activate_from_args,
+    add_window_args,
+    current_window,
+)
 
-DROP_JSON = PD21_RHO / f"PD21_rho_hsort_calibrate_{SEASON_MIN}_{SEASON_MAX}_fit_bracket.json"
-PPM0_JSON = PD21_RHO / f"PD21_rho_hsort_calibrate_{SEASON_MIN}_{SEASON_MAX}_ppm0lt{int(HERO_LOCK)}_fit_bracket.json"
+
+def _w():
+    return current_window()
+
+
+STEM_PREFIX = "PD22_panel_policy_compare"
+
+
+def _stem() -> str:
+    return f"{STEM_PREFIX}_{_w().tag}"
+
+OUT = PD22_MINUTES
+HERO_LOCK = 20.0
+CALIBRATE_SCRIPT = SCRIPTS / "pd21_rho_hsort_calibrate.py"
 HSORT_STALE_TOLERANCE = 0.01
+
+
+def _mechanism_season_csv() -> Path:
+    return OUT / f"PD22_ppm_zero_hsort_mechanism_season_{_w().tag}.csv"
+
+
+def _drop_json() -> Path:
+    return PD21_RHO / f"PD21_rho_hsort_calibrate_{_w().tag}_fit_bracket.json"
+
+
+def _ppm0_json() -> Path:
+    return PD21_RHO / f"PD21_rho_hsort_calibrate_{_w().tag}_ppm0lt{int(HERO_LOCK)}_fit_bracket.json"
 
 
 def _artifact_paths() -> dict[str, Path]:
     return {
-        "csv": OUT / f"{STEM}.csv",
-        "summary_csv": OUT / f"{STEM.replace('_compare_', '_compare_summary_')}.csv",
-        "json": OUT / f"{STEM}.json",
-        "png": OUT / f"{STEM}.png",
+        "csv": OUT / f"{_stem()}.csv",
+        "summary_csv": OUT / f"{_stem().replace('_compare_', '_compare_summary_')}.csv",
+        "json": OUT / f"{_stem()}.json",
+        "png": OUT / f"{_stem()}.png",
     }
 
 
@@ -75,11 +97,11 @@ def _empirical_targets(fit: dict) -> dict[int, dict]:
 
 
 def _load_hsort_current_panel() -> pd.DataFrame:
-    if not MECHANISM_SEASON_CSV.is_file():
+    if not _mechanism_season_csv().is_file():
         raise FileNotFoundError(
-            f"Missing item 8 season CSV — run pd22_ppm_zero_hsort_mechanism.py first: {MECHANISM_SEASON_CSV}"
+            f"Missing item 8 season CSV — run pd22_ppm_zero_hsort_mechanism.py first: {_mechanism_season_csv()}"
         )
-    df = pd.read_csv(MECHANISM_SEASON_CSV)
+    df = pd.read_csv(_mechanism_season_csv())
     return df.rename(
         columns={
             "h_sort_drop": "h_sort_emp_drop_current",
@@ -194,7 +216,7 @@ def _summary(season_df: pd.DataFrame, policy_df: pd.DataFrame, *, ppm0_stale: bo
 
 def _plot(season_df: pd.DataFrame, summary: dict, png_path: Path) -> None:
     configure_matplotlib_mathtext()
-    seasons = seasons_label(SEASON_MIN, SEASON_MAX)
+    seasons = seasons_label(_w().season_min, _w().season_max)
     xs = season_df["season"].to_numpy(dtype=int)
 
     fig, axes = plt.subplots(2, 1, figsize=(10.8, 7.0), sharex=True)
@@ -238,16 +260,16 @@ def _plot(season_df: pd.DataFrame, summary: dict, png_path: Path) -> None:
 
 
 def _maybe_run_calibration(*, quick: bool) -> None:
-    missing = [p for p in (DROP_JSON, PPM0_JSON) if not p.is_file()]
+    missing = [p for p in (_drop_json(), _ppm0_json()) if not p.is_file()]
     if not missing:
         return
     cmd_base = [sys.executable, str(CALIBRATE_SCRIPT), "--fresh"]
     if quick:
         cmd_base.append("--quick")
-    if not DROP_JSON.is_file():
+    if not _drop_json().is_file():
         print("Running drop bracket calibration ...", flush=True)
         subprocess.run(cmd_base + ["--min-minutes", str(HERO_LOCK)], cwd=str(REPO), check=True)
-    if not PPM0_JSON.is_file():
+    if not _ppm0_json().is_file():
         print("Running PPM-zero bracket calibration ...", flush=True)
         subprocess.run(
             cmd_base + ["--ppm-zero-below-minutes", str(HERO_LOCK)],
@@ -261,13 +283,13 @@ def run(*, refresh_calibration: bool, quick_calibration: bool) -> dict:
     paths = _artifact_paths()
 
     if refresh_calibration:
-        for p in (DROP_JSON, PPM0_JSON):
+        for p in (_drop_json(), _ppm0_json()):
             if p.is_file():
                 p.unlink()
     _maybe_run_calibration(quick=quick_calibration)
 
-    drop = _load_fit(DROP_JSON, policy="drop")
-    ppm0 = _load_fit(PPM0_JSON, policy="ppm_zero")
+    drop = _load_fit(_drop_json(), policy="drop")
+    ppm0 = _load_fit(_ppm0_json(), policy="ppm_zero")
     hsort_current = _load_hsort_current_panel()
     season_df = _season_table(drop, ppm0, hsort_current)
     ppm0_stale, ppm0_drift = _ppm_zero_stale(ppm0, season_df)
@@ -281,12 +303,12 @@ def run(*, refresh_calibration: bool, quick_calibration: bool) -> dict:
     meta = {
         "diagnostic": "pd22_panel_policy_compare",
         "date": date.today().isoformat(),
-        "season_min": SEASON_MIN,
-        "season_max": SEASON_MAX,
-        "seasons": seasons_label(SEASON_MIN, SEASON_MAX),
+        "season_min": _w().season_min,
+        "season_max": _w().season_max,
+        "seasons": seasons_label(_w().season_min, _w().season_max),
         "sources": {
-            "drop": str(DROP_JSON.relative_to(REPO)),
-            "ppm_zero": str(PPM0_JSON.relative_to(REPO)),
+            "drop": str(_drop_json().relative_to(REPO)),
+            "ppm_zero": str(_ppm0_json().relative_to(REPO)),
         },
         "summary": summary,
         "policy_table": policy_df.to_dict(orient="records"),
@@ -315,8 +337,8 @@ def plot_only() -> None:
     meta = json.loads(paths["json"].read_text(encoding="utf-8")) if paths["json"].is_file() else {}
     summary = meta.get("summary") or {}
     if not summary:
-        drop = _load_fit(DROP_JSON, policy="drop")
-        ppm0 = _load_fit(PPM0_JSON, policy="ppm_zero")
+        drop = _load_fit(_drop_json(), policy="drop")
+        ppm0 = _load_fit(_ppm0_json(), policy="ppm_zero")
         hsort_current = _load_hsort_current_panel()
         season_df = pd.read_csv(paths["csv"])
         ppm0_stale, ppm0_drift = _ppm_zero_stale(ppm0, season_df)
@@ -338,7 +360,9 @@ def main() -> None:
         action="store_true",
         help="If calibration needed, use pd21 --quick (2015 only)",
     )
+    add_window_args(parser)
     args = parser.parse_args()
+    activate_from_args(args)
     if args.plot_only:
         plot_only()
     else:

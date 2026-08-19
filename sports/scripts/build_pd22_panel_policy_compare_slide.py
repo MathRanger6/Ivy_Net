@@ -20,10 +20,26 @@ from hero_gallery_paths import AUTO_PD22_PANEL_POLICY_COMPARE_DECK, PD22_MINUTES
 from pd17_interval_overlap_slide import build_figure_focus_slide, load_meta
 from pd22_slide_common import BOX_QC_PANEL_NOTE, m
 
+from pd20_22_campaign_window import (
+    activate_from_args,
+    add_window_args,
+    auto_deck_path,
+    current_window,
+    window_cli_flags,
+)
+
+
+def _w():
+    return current_window()
+
+
+STEM_PREFIX = "PD22_panel_policy_compare"
+
+
+def _stem() -> str:
+    return f"{STEM_PREFIX}_{_w().tag}"
+
 SCRIPT = SCRIPTS / "pd22_panel_policy_compare.py"
-SEASON_MIN = 2011
-SEASON_MAX = 2021
-STEM = f"PD22_panel_policy_compare_{SEASON_MIN}_{SEASON_MAX}"
 HERO_LOCK = 20.0
 
 CLAIM = (
@@ -33,21 +49,22 @@ CLAIM = (
 
 
 def _artifact_paths() -> tuple[Path, Path, Path]:
-    fig = PD22_MINUTES / f"{STEM}.png"
-    meta = PD22_MINUTES / f"{STEM}.json"
-    return fig, meta, AUTO_PD22_PANEL_POLICY_COMPARE_DECK
+    fig = PD22_MINUTES / f"{_stem()}.png"
+    meta = PD22_MINUTES / f"{_stem()}.json"
+    return fig, meta, auto_deck_path(AUTO_PD22_PANEL_POLICY_COMPARE_DECK)
 
 
 def _refresh(*, plot_only: bool) -> None:
     cmd = [sys.executable, str(SCRIPT)]
     if plot_only:
         cmd.append("--plot-only")
+    cmd.extend(window_cli_flags())
     subprocess.run(cmd, cwd=str(REPO), check=True)
 
 
 def _readout_bullets(meta: dict) -> list[str]:
     s = meta.get("summary") or {}
-    seasons = meta.get("seasons", f"{SEASON_MIN}–{SEASON_MAX}")
+    seasons = meta.get("seasons", f"{_w().season_min}–{_w().season_max}")
 
     return [
         r"PD22 item 9: panel policy compare at min 20 — drop (PD21 default) vs PPM-zero.",
@@ -65,7 +82,7 @@ def _readout_bullets(meta: dict) -> list[str]:
         rf"{m(float(s.get('h_sort_emp_mean_ppm_zero', 0)), decimals=4)} "
         rf"($\Delta$ = {m(float(s.get('h_sort_emp_mean_delta', 0)), decimals=4)}).",
         rf"Seasons with $\rho^* = 0$: drop {m(int(s.get('n_seasons_rho_zero_drop', 0)))} / "
-        rf"{m(int(SEASON_MAX - SEASON_MIN + 1))} vs PPM-zero "
+        rf"{m(int(_w().season_max - _w().season_min + 1))} vs PPM-zero "
         rf"{m(int(s.get('n_seasons_rho_zero_ppm_zero', 0)))}.",
         rf"Recommendation: **{s.get('recommended_policy', 'drop')}** — "
         r"PPM-zero inflates $\rho^*$ without proportional $H_{\mathrm{sort}}$ gain; "
@@ -78,7 +95,9 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Build PD22 item 9 policy compare AUTO slide.")
     parser.add_argument("--slides-only", action="store_true")
     parser.add_argument("--plot-only", action="store_true")
+    add_window_args(parser)
     args = parser.parse_args()
+    activate_from_args(args)
 
     fig, meta_path, out_pptx = _artifact_paths()
     ensure_hero_dirs()
@@ -91,7 +110,7 @@ def main() -> None:
         raise SystemExit(f"Missing artifacts: {meta_path} / {fig}")
 
     s = meta.get("summary") or {}
-    seasons = meta.get("seasons", f"{SEASON_MIN}–{SEASON_MAX}")
+    seasons = meta.get("seasons", f"{_w().season_min}–{_w().season_max}")
     subtitle = (
         rf"PD22 item 9 · policy compare · {seasons} · "
         rf"$\rho^*$ drop {m(float(s.get('rho_star_longitudinal_drop', 0)), decimals=3)} "

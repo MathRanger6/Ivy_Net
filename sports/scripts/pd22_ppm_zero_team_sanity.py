@@ -37,21 +37,35 @@ sys.path.insert(0, str(SCRIPTS))
 from gallery_mathtext import configure_matplotlib_mathtext
 from hero_gallery_paths import PD22_MINUTES, ensure_hero_dirs
 from interval_overlap_paths import seasons_label
+
+from pd20_22_campaign_window import (
+    activate_from_args,
+    add_window_args,
+    current_window,
+)
+
+
+def _w():
+    return current_window()
+
+
+STEM_PREFIX = "PD22_ppm_zero_team_sanity"
+
+
+def _stem() -> str:
+    return f"{STEM_PREFIX}_{_w().tag}"
 from pd21_rho_hsort_calibrate import PanelPrepConfig, prepare_calibration_panel
 
 OUT = PD22_MINUTES
-SEASON_MIN = 2011
-SEASON_MAX = 2021
 DEFAULT_PPM_ZERO = 20.0
 ZERO_COUNT_LADDER = (1, 2, 5, 8, 10, 12, 15, 18, 20, 25, 30)
-STEM = f"PD22_ppm_zero_team_sanity_{SEASON_MIN}_{SEASON_MAX}"
 
 
 def _artifact_paths() -> dict[str, Path]:
     return {
-        "csv": OUT / f"{STEM}.csv",
-        "json": OUT / f"{STEM}.json",
-        "png": OUT / f"{STEM}.png",
+        "csv": OUT / f"{_stem()}.csv",
+        "json": OUT / f"{_stem()}.json",
+        "png": OUT / f"{_stem()}.png",
     }
 
 
@@ -155,7 +169,7 @@ def _summary(team_df: pd.DataFrame, *, ppm_zero_below_minutes: float) -> dict:
 
 def _plot(team_df: pd.DataFrame, summary: dict, png_path: Path, *, ppm_zero_below_minutes: float) -> None:
     configure_matplotlib_mathtext()
-    seasons = seasons_label(SEASON_MIN, SEASON_MAX)
+    seasons = seasons_label(_w().season_min, _w().season_max)
     thr = float(ppm_zero_below_minutes)
     fig, axes = plt.subplots(1, 2, figsize=(11.2, 4.5))
 
@@ -207,9 +221,9 @@ def run_sanity(*, ppm_zero_below_minutes: float) -> dict:
     meta = {
         "diagnostic": "pd22_ppm_zero_team_sanity",
         "date": date.today().isoformat(),
-        "season_min": SEASON_MIN,
-        "season_max": SEASON_MAX,
-        "seasons": seasons_label(SEASON_MIN, SEASON_MAX),
+        "season_min": _w().season_min,
+        "season_max": _w().season_max,
+        "seasons": seasons_label(_w().season_min, _w().season_max),
         "panel_spec": (
             f"rebuild min_minutes=0 + ppm_zero_below={ppm_zero_below_minutes:g}; "
             "perf z-scored within season (PD21 calibration path)"
@@ -262,7 +276,9 @@ def main() -> None:
         action="store_true",
         help="Regenerate PNG from existing CSV (no panel rebuild)",
     )
+    add_window_args(parser)
     args = parser.parse_args()
+    activate_from_args(args)
     if args.plot_only:
         plot_only()
     else:

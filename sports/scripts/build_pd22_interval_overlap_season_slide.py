@@ -16,10 +16,22 @@ REPO = Path(__file__).resolve().parents[2]
 SCRIPTS = Path(__file__).resolve().parent
 sys.path.insert(0, str(SCRIPTS))
 
-from hero_gallery_paths import PD22_MINUTES, ensure_hero_dirs
+from hero_gallery_paths import PD22_MINUTES, SLIDES_AUTO, ensure_hero_dirs
 from interval_overlap_readouts import empirical_overlap_bullets
 from pd17_interval_overlap_slide import build_interval_overlap_slide, load_meta
 from pd22_slide_common import BOX_QC_PANEL_NOTE, m
+
+from pd20_22_campaign_window import (
+    activate_from_args,
+    add_window_args,
+    auto_deck_path,
+    current_window,
+    window_cli_flags,
+)
+
+
+def _w():
+    return current_window()
 
 SCRIPT = SCRIPTS / "pd22_interval_overlap_season.py"
 DEFAULT_SEASON = 2012
@@ -29,7 +41,7 @@ def _artifact_paths(season: int) -> tuple[Path, Path, Path]:
     stem = f"PD22_interval_overlap_season_{season}"
     fig = PD22_MINUTES / f"{stem}.png"
     meta = PD22_MINUTES / f"{stem}.json"
-    deck = PD22_MINUTES.parent / "slides" / "auto" / f"CHAR_PD22_interval_overlap_season_{season}_AUTO.pptx"
+    deck = auto_deck_path(SLIDES_AUTO / f"CHAR_PD22_interval_overlap_season_{season}_AUTO.pptx")
     return fig, meta, deck
 
 
@@ -37,6 +49,7 @@ def _refresh(*, season: int, plot_only: bool) -> None:
     cmd = [sys.executable, str(SCRIPT), "--season", str(season)]
     if plot_only:
         cmd.append("--plot-only")
+    cmd.extend(window_cli_flags())
     subprocess.run(cmd, cwd=str(REPO), check=True)
 
 
@@ -67,7 +80,9 @@ def main() -> None:
     parser.add_argument("--season", type=int, default=DEFAULT_SEASON)
     parser.add_argument("--slides-only", action="store_true")
     parser.add_argument("--plot-only", action="store_true")
+    add_window_args(parser)
     args = parser.parse_args()
+    activate_from_args(args)
 
     season = int(args.season)
     fig, meta_path, out_pptx = _artifact_paths(season)

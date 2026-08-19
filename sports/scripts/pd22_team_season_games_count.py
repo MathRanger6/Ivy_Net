@@ -35,9 +35,17 @@ from hero_gallery_paths import PD22_MINUTES, ensure_hero_dirs
 from interval_overlap_paths import seasons_label
 
 OUT = PD22_MINUTES
-SEASON_MIN = 2011
-SEASON_MAX = 2021
 from pd22_slide_common import MIN_TEAM_SEASON_GAMES
+
+from pd20_22_campaign_window import (
+    activate_from_args,
+    add_window_args,
+    current_window,
+)
+
+
+def _w():
+    return current_window()
 
 DEFAULT_MIN_GAMES = MIN_TEAM_SEASON_GAMES
 BOX_USECOLS = [
@@ -63,7 +71,7 @@ def _load_box_game_rows() -> pd.DataFrame:
         df_g[c] = pd.to_numeric(df_g[c], errors="coerce")
     df_g = df_g.dropna(subset=["athlete_id", "season", "team_id"])
     df_g["season"] = df_g["season"].astype(int)
-    df_g = df_g.loc[(df_g["season"] >= SEASON_MIN) & (df_g["season"] <= SEASON_MAX)].copy()
+    df_g = df_g.loc[(df_g["season"] >= _w().season_min) & (df_g["season"] <= _w().season_max)].copy()
     return df_g, _apply_box_qc
 
 
@@ -113,7 +121,7 @@ def _plot(
     threshold_label: str | None,
 ) -> None:
     configure_matplotlib_mathtext()
-    seasons = seasons_label(SEASON_MIN, SEASON_MAX)
+    seasons = seasons_label(_w().season_min, _w().season_max)
     bins = np.arange(games_n.min() - 0.5, games_n.max() + 1.5, 1.0)
 
     fig, axes = plt.subplots(1, 2, figsize=(12, 4.8), constrained_layout=True)
@@ -162,8 +170,8 @@ def _plot(
 
 
 def _stem(*, after_qc: bool) -> str:
-    base = f"PD22_team_season_games_count_{SEASON_MIN}_{SEASON_MAX}"
-    return f"PD22_team_season_games_count_after_qc_{SEASON_MIN}_{SEASON_MAX}" if after_qc else base
+    base = f"PD22_team_season_games_count_{_w().tag}"
+    return f"PD22_team_season_games_count_after_qc_{_w().tag}" if after_qc else base
 
 
 def _artifact_paths(*, after_qc: bool) -> dict[str, Path]:
@@ -183,8 +191,8 @@ def _run_one(*, after_qc: bool, write_csv: bool = True) -> dict:
 
     if after_qc:
         cfg = PipelineConfig(
-            panel_season_min=SEASON_MIN,
-            panel_season_max=SEASON_MAX,
+            panel_season_min=_w().season_min,
+            panel_season_max=_w().season_max,
             drop_dash_placeholder_names=True,
             min_team_season_games=DEFAULT_MIN_GAMES,
         )
@@ -221,9 +229,9 @@ def _run_one(*, after_qc: bool, write_csv: bool = True) -> dict:
         if after_qc
         else "pd22_team_season_games_count_raw",
         "date": date.today().isoformat(),
-        "season_min": SEASON_MIN,
-        "season_max": SEASON_MAX,
-        "seasons": seasons_label(SEASON_MIN, SEASON_MAX),
+        "season_min": _w().season_min,
+        "season_max": _w().season_max,
+        "seasons": seasons_label(_w().season_min, _w().season_max),
         "after_box_qc": after_qc,
         **stats,
     }
@@ -290,7 +298,9 @@ def main() -> None:
     parser.add_argument("--raw-only", action="store_true", help="Raw box only")
     parser.add_argument("--after-qc-only", action="store_true", help="After box QC only")
     parser.add_argument("--plot-only", action="store_true", help="Regenerate PNG from CSV/JSON")
+    add_window_args(parser)
     args = parser.parse_args()
+    activate_from_args(args)
 
     ensure_hero_dirs()
     do_raw = not args.after_qc_only

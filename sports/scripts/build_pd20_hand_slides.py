@@ -47,15 +47,40 @@ from hero_gallery_paths import (
     PD20_TEMPERATURE,
     ensure_hero_dirs,
 )
+from pd20_22_campaign_window import (
+    activate_from_args,
+    add_window_args,
+    auto_deck_path,
+    current_window,
+    window_cli_flags,
+)
 from pd17_interval_overlap_slide import add_picture_fitted, load_meta
 
 COLD_DIAG = SCRIPTS / "grandchild_temperature_cold_limit_diagnostic.py"
 
-SWEEP_FIG = PD20_TEMPERATURE / "GRANDCHILD_temperature_select_sweep_2011_2021.png"
-SWEEP_META = PD20_TEMPERATURE / "GRANDCHILD_temperature_select_sweep_2011_2021_meta.json"
-COLD_FIG = PD20_TEMPERATURE / "GRANDCHILD_temperature_cold_limit_2011_2021.png"
-COLD_META = PD20_TEMPERATURE / "GRANDCHILD_temperature_cold_limit_2011_2021_meta.json"
-OUT_PPTX = AUTO_PD20_DECK
+
+def _w():
+    return current_window()
+
+
+def _sweep_fig() -> Path:
+    return PD20_TEMPERATURE / f"GRANDCHILD_temperature_select_sweep_{_w().tag}.png"
+
+
+def _sweep_meta() -> Path:
+    return PD20_TEMPERATURE / f"GRANDCHILD_temperature_select_sweep_{_w().tag}_meta.json"
+
+
+def _cold_fig() -> Path:
+    return PD20_TEMPERATURE / f"GRANDCHILD_temperature_cold_limit_{_w().tag}.png"
+
+
+def _cold_meta() -> Path:
+    return PD20_TEMPERATURE / f"GRANDCHILD_temperature_cold_limit_{_w().tag}_meta.json"
+
+
+def _out_pptx() -> Path:
+    return auto_deck_path(AUTO_PD20_DECK)
 
 SLIDE_W = Inches(13.333)
 SLIDE_H = Inches(7.5)
@@ -289,7 +314,7 @@ def build_deck(*, sweep_meta: dict, cold_meta: dict) -> None:
     lam_str = ", ".join(f"{x:g}" for x in sweep_meta.get("lambda_panels", [1.5, 2.0]))
     _append_figure_slide(
         prs,
-        fig_path=SWEEP_FIG,
+        fig_path=_sweep_fig(),
         title=r"Temperature sweep — rule D (Gibbs + $K$ draws)",
         subtitle=rf"MBB {seasons} · $\lambda \in \{{{lam_str}\}}$ · $\log_{{10}} t \in [-3,3]$",
         bullets=_sweep_bullets(sweep_meta),
@@ -298,7 +323,7 @@ def build_deck(*, sweep_meta: dict, cold_meta: dict) -> None:
 
     _append_figure_slide(
         prs,
-        fig_path=COLD_FIG,
+        fig_path=_cold_fig(),
         title=r"Cold limit — rule C vs rule D",
         subtitle=rf"$\lambda={cold_meta.get('lambda', 2):g}$ · $t={cold_meta.get('temperature', 0.001):g}$ · same seeds",
         bullets=_cold_bullets(cold_meta),
@@ -313,9 +338,10 @@ def build_deck(*, sweep_meta: dict, cold_meta: dict) -> None:
         claim=_takeaway_claim(),
     )
 
-    OUT_PPTX.parent.mkdir(parents=True, exist_ok=True)
-    prs.save(str(OUT_PPTX))
-    print(f"Wrote {OUT_PPTX}")
+    out_pptx = _out_pptx()
+    out_pptx.parent.mkdir(parents=True, exist_ok=True)
+    prs.save(str(out_pptx))
+    print(f"Wrote {out_pptx}")
 
 
 def main() -> None:
@@ -330,36 +356,41 @@ def main() -> None:
         action="store_true",
         help="Pass --quick to cold-limit diagnostic when not --slides-only",
     )
+    add_window_args(parser)
     args = parser.parse_args()
+    activate_from_args(args)
 
     if not args.slides_only:
-        cmd = [sys.executable, str(COLD_DIAG)]
+        cmd = [sys.executable, str(COLD_DIAG), *window_cli_flags()]
         if args.quick:
             cmd.append("--quick")
         print("=== Running cold-limit diagnostic ===")
         subprocess.run(cmd, cwd=str(REPO), check=True)
 
-    if not SWEEP_META.is_file():
+    sweep_meta_path = _sweep_meta()
+    cold_meta_path = _cold_meta()
+    if not sweep_meta_path.is_file():
         raise FileNotFoundError(
-            f"Missing {SWEEP_META.name} — run grandchild_temperature_select_sweep.py first."
+            f"Missing {sweep_meta_path.name} — run grandchild_temperature_select_sweep.py first."
         )
-    if not COLD_META.is_file():
+    if not cold_meta_path.is_file():
         raise FileNotFoundError(
-            f"Missing {COLD_META.name} — run grandchild_temperature_cold_limit_diagnostic.py "
+            f"Missing {cold_meta_path.name} — run grandchild_temperature_cold_limit_diagnostic.py "
             "or omit --slides-only."
         )
 
-    sweep_meta = load_meta(SWEEP_META)
-    cold_meta = load_meta(COLD_META)
+    sweep_meta = load_meta(sweep_meta_path)
+    cold_meta = load_meta(cold_meta_path)
 
     print("=== Building PD20 AUTO deck ===")
     build_deck(sweep_meta=sweep_meta, cold_meta=cold_meta)
 
+    out_pptx = _out_pptx()
     print()
     print(f"Copy into HAND: {HAND_PD20_DECK}")
-    print(f"  Reference: {OUT_PPTX}")
-    print(f"  Figures:   {SWEEP_FIG.name}")
-    print(f"             {COLD_FIG.name}")
+    print(f"  Reference: {out_pptx}")
+    print(f"  Figures:   {_sweep_fig().name}")
+    print(f"             {_cold_fig().name}")
 
 
 if __name__ == "__main__":

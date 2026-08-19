@@ -39,12 +39,26 @@ from gallery_mathtext import configure_matplotlib_mathtext
 from hero_gallery_paths import PD22_MINUTES, ensure_hero_dirs
 from interval_overlap_paths import seasons_label
 
+from pd20_22_campaign_window import (
+    activate_from_args,
+    add_window_args,
+    current_window,
+)
+
+
+def _w():
+    return current_window()
+
+
+STEM_PREFIX = "PD22_ppm_distribution"
+
+
+def _stem() -> str:
+    return f"{STEM_PREFIX}_{_w().tag}"
+
 OUT = PD22_MINUTES
-SEASON_MIN = 2011
-SEASON_MAX = 2021
 HERO_LOCK = 20.0
-STEM = f"PD22_ppm_distribution_{SEASON_MIN}_{SEASON_MAX}"
-OVERLAY_STEM = f"PD22_ppm_full_vs_filtered_{SEASON_MIN}_{SEASON_MAX}"
+OVERLAY_STEM = f"PD22_ppm_full_vs_filtered_{_w().tag}"
 
 
 def _pipeline_config(*, min_minutes: float) -> object:
@@ -59,10 +73,10 @@ def _pipeline_config(*, min_minutes: float) -> object:
         min_minutes=float(min_minutes),
         restrict_teams_by_draftees=False,
         use_prebuilt_panel_csv=False,
-        panel_season_min=SEASON_MIN,
-        panel_season_max=SEASON_MAX,
-        analysis_season_min=SEASON_MIN,
-        analysis_season_max=SEASON_MAX,
+        panel_season_min=_w().season_min,
+        panel_season_max=_w().season_max,
+        analysis_season_min=_w().season_min,
+        analysis_season_max=_w().season_max,
     )
 
 
@@ -159,7 +173,7 @@ def _plot_ppm(
     logy_left: bool = True,
 ) -> None:
     configure_matplotlib_mathtext()
-    seasons = seasons_label(SEASON_MIN, SEASON_MAX)
+    seasons = seasons_label(_w().season_min, _w().season_max)
 
     fo = filtered_out.copy()
     fo["minutes"] = pd.to_numeric(fo["minutes"], errors="coerce")
@@ -274,7 +288,7 @@ def _plot_ppm_overlay(
 ) -> None:
     """Single large figure: full-panel raw PPM vs sub-floor (filtered-out) overlay."""
     configure_matplotlib_mathtext()
-    seasons = seasons_label(SEASON_MIN, SEASON_MAX)
+    seasons = seasons_label(_w().season_min, _w().season_max)
     bins = _shared_ppm_bins(full_ppm, filtered_ppm)
 
     fig, ax = plt.subplots(figsize=(10.5, 6.2))
@@ -333,9 +347,9 @@ def _plot_ppm_overlay(
 
 def _artifact_paths() -> dict[str, Path]:
     return {
-        "csv": OUT / f"{STEM}.csv",
-        "json": OUT / f"{STEM}.json",
-        "png": OUT / f"{STEM}.png",
+        "csv": OUT / f"{_stem()}.csv",
+        "json": OUT / f"{_stem()}.json",
+        "png": OUT / f"{_stem()}.png",
         "overlay_png": OUT / f"{OVERLAY_STEM}.png",
     }
 
@@ -379,9 +393,9 @@ def run_ppm(*, write_csv: bool = True, logy_left: bool = True) -> dict:
     meta = {
         "diagnostic": "pd22_ppm_distribution",
         "date": date.today().isoformat(),
-        "season_min": SEASON_MIN,
-        "season_max": SEASON_MAX,
-        "seasons": seasons_label(SEASON_MIN, SEASON_MAX),
+        "season_min": _w().season_min,
+        "season_max": _w().season_max,
+        "seasons": seasons_label(_w().season_min, _w().season_max),
         "panel_spec": {
             "filtered_out": "min_minutes=0 rebuild; minutes < hero_lock",
             "hero_panel": f"min_minutes={HERO_LOCK:g} rebuild; raw PPM column",
@@ -449,7 +463,9 @@ def main() -> None:
         action="store_true",
         help="Linear y-axis on PPM histograms (default: log scale)",
     )
+    add_window_args(parser)
     args = parser.parse_args()
+    activate_from_args(args)
     logy_left = not args.linear_y_left
 
     if args.plot_only:

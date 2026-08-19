@@ -37,9 +37,22 @@ from empirical_team_interval_overlap import (
 )
 from hero_gallery_paths import PD21_RHO, PD22_MINUTES, ensure_hero_dirs
 
+from pd20_22_campaign_window import (
+    activate_from_args,
+    add_window_args,
+    current_window,
+)
+
 OUT = PD22_MINUTES
 DEFAULT_SEASON = 2012
-DROP_JSON = PD21_RHO / "PD21_rho_hsort_calibrate_2011_2021_fit_bracket.json"
+
+
+def _w():
+    return current_window()
+
+
+def _drop_json() -> Path:
+    return PD21_RHO / f"PD21_rho_hsort_calibrate_{_w().tag}_fit_bracket.json"
 
 
 def _stem(season: int) -> str:
@@ -56,9 +69,10 @@ def _artifact_paths(season: int) -> dict[str, Path]:
 
 
 def _rho_star_drop(season: int) -> float | None:
-    if not DROP_JSON.is_file():
+    drop_json = _drop_json()
+    if not drop_json.is_file():
         return None
-    meta = json.loads(DROP_JSON.read_text(encoding="utf-8"))
+    meta = json.loads(drop_json.read_text(encoding="utf-8"))
     for row in meta.get("per_season", []):
         if int(row["season"]) == int(season):
             return float(row["rho_star"])
@@ -139,7 +153,9 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--season", type=int, default=DEFAULT_SEASON, help=f"Season (default: {DEFAULT_SEASON})")
     parser.add_argument("--plot-only", action="store_true")
+    add_window_args(parser)
     args = parser.parse_args()
+    activate_from_args(args)
     if args.plot_only:
         plot_only(season=int(args.season))
     else:

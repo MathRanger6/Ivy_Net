@@ -38,13 +38,27 @@ sys.path.insert(0, str(SCRIPTS))
 from gallery_mathtext import configure_matplotlib_mathtext
 from hero_gallery_paths import PD22_MINUTES, ensure_hero_dirs
 from interval_overlap_paths import seasons_label
+
+from pd20_22_campaign_window import (
+    activate_from_args,
+    add_window_args,
+    current_window,
+)
+
+
+def _w():
+    return current_window()
+
+
+STEM_PREFIX = "PD22_ppm_zero_ability_distribution"
+
+
+def _stem() -> str:
+    return f"{STEM_PREFIX}_{_w().tag}"
 from pd21_rho_hsort_calibrate import PanelPrepConfig, prepare_calibration_panel
 
 OUT = PD22_MINUTES
-SEASON_MIN = 2011
-SEASON_MAX = 2021
 HERO_LOCK = 20.0
-STEM = f"PD22_ppm_zero_ability_distribution_{SEASON_MIN}_{SEASON_MAX}"
 
 
 def _pipeline_config(*, min_minutes: float) -> object:
@@ -59,10 +73,10 @@ def _pipeline_config(*, min_minutes: float) -> object:
         min_minutes=float(min_minutes),
         restrict_teams_by_draftees=False,
         use_prebuilt_panel_csv=False,
-        panel_season_min=SEASON_MIN,
-        panel_season_max=SEASON_MAX,
-        analysis_season_min=SEASON_MIN,
-        analysis_season_max=SEASON_MAX,
+        panel_season_min=_w().season_min,
+        panel_season_max=_w().season_max,
+        analysis_season_min=_w().season_min,
+        analysis_season_max=_w().season_max,
     )
 
 
@@ -159,7 +173,7 @@ def _add_stats_inset(ax, fig, text: str, *, fontsize: int = 8) -> None:
 
 def _plot(drop: pd.DataFrame, ppm_zero: pd.DataFrame, summary: dict, png_path: Path) -> None:
     configure_matplotlib_mathtext()
-    seasons = seasons_label(SEASON_MIN, SEASON_MAX)
+    seasons = seasons_label(_w().season_min, _w().season_max)
     thr = float(summary["ppm_zero_below_minutes"])
 
     drop = _tag_zeroed(drop, threshold=thr)
@@ -258,9 +272,9 @@ def _plot(drop: pd.DataFrame, ppm_zero: pd.DataFrame, summary: dict, png_path: P
 
 def _artifact_paths() -> dict[str, Path]:
     return {
-        "csv": OUT / f"{STEM}.csv",
-        "json": OUT / f"{STEM}.json",
-        "png": OUT / f"{STEM}.png",
+        "csv": OUT / f"{_stem()}.csv",
+        "json": OUT / f"{_stem()}.json",
+        "png": OUT / f"{_stem()}.png",
     }
 
 
@@ -284,9 +298,9 @@ def run(*, ppm_zero_below_minutes: float) -> dict:
     meta = {
         "diagnostic": "pd22_ppm_zero_ability_distribution",
         "date": date.today().isoformat(),
-        "season_min": SEASON_MIN,
-        "season_max": SEASON_MAX,
-        "seasons": seasons_label(SEASON_MIN, SEASON_MAX),
+        "season_min": _w().season_min,
+        "season_max": _w().season_max,
+        "seasons": seasons_label(_w().season_min, _w().season_max),
         "panel_spec": {
             "drop": f"min_minutes={HERO_LOCK:g}; PPM z within season",
             "ppm_zero": f"min_minutes=0 + ppm_zero_below={ppm_zero_below_minutes:g}; PPM z within season",
@@ -341,7 +355,9 @@ def main() -> None:
         action="store_true",
         help="Regenerate PNG from existing CSV (no panel rebuild)",
     )
+    add_window_args(parser)
     args = parser.parse_args()
+    activate_from_args(args)
     if args.plot_only:
         plot_only(ppm_zero_below_minutes=float(args.ppm_zero_below_minutes))
     else:

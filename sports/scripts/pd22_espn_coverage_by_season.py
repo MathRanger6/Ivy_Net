@@ -38,11 +38,25 @@ from hero_gallery_paths import PD22_MINUTES, ensure_hero_dirs
 from interval_overlap_paths import seasons_label
 from pd22_slide_common import MIN_TEAM_SEASON_GAMES
 
+from pd20_22_campaign_window import (
+    activate_from_args,
+    add_window_args,
+    current_window,
+)
+
+
+def _w():
+    return current_window()
+
+
+STEM_PREFIX = "PD22_espn_coverage_by_season"
+
+
+def _stem() -> str:
+    return f"{STEM_PREFIX}_{_w().tag}"
+
 OUT = PD22_MINUTES
-SEASON_MIN = 2011
-SEASON_MAX = 2021
 HERO_LOCK = 20.0
-STEM = f"PD22_espn_coverage_by_season_{SEASON_MIN}_{SEASON_MAX}"
 BOX_USECOLS = [
     "game_id",
     "athlete_id",
@@ -55,9 +69,9 @@ BOX_USECOLS = [
 
 def _artifact_paths() -> dict[str, Path]:
     return {
-        "png": OUT / f"{STEM}.png",
-        "json": OUT / f"{STEM}.json",
-        "csv": OUT / f"{STEM}.csv",
+        "png": OUT / f"{_stem()}.png",
+        "json": OUT / f"{_stem()}.json",
+        "csv": OUT / f"{_stem()}.csv",
     }
 
 
@@ -72,7 +86,7 @@ def _load_box() -> pd.DataFrame:
         df[c] = pd.to_numeric(df[c], errors="coerce")
     df = df.dropna(subset=["athlete_id", "season", "team_id"])
     df["season"] = df["season"].astype(int)
-    return df.loc[(df["season"] >= SEASON_MIN) & (df["season"] <= SEASON_MAX)].copy()
+    return df.loc[(df["season"] >= _w().season_min) & (df["season"] <= _w().season_max)].copy()
 
 
 def _player_seasons(g: pd.DataFrame) -> int:
@@ -116,8 +130,8 @@ def _build_table(df: pd.DataFrame) -> pd.DataFrame:
     from sports_pipeline.panel_rebuild import _apply_box_qc
 
     cfg_qc = PipelineConfig(
-        panel_season_min=SEASON_MIN,
-        panel_season_max=SEASON_MAX,
+        panel_season_min=_w().season_min,
+        panel_season_max=_w().season_max,
         min_team_season_games=MIN_TEAM_SEASON_GAMES,
     )
 
@@ -141,8 +155,8 @@ def _build_table(df: pd.DataFrame) -> pd.DataFrame:
 
     pipe = PipelineConfig(
         min_minutes=HERO_LOCK,
-        panel_season_min=SEASON_MIN,
-        panel_season_max=SEASON_MAX,
+        panel_season_min=_w().season_min,
+        panel_season_max=_w().season_max,
         use_prebuilt_panel_csv=False,
     )
     print("Rebuilding min-20 hero panel (box QC on) for per-season counts ...", flush=True)
@@ -239,7 +253,7 @@ def _plot(tab: pd.DataFrame, png_path: Path) -> None:
     ax.legend(lines1 + lines2, labels1 + labels2, loc="upper left", fontsize=7.5)
     ax.grid(axis="y", alpha=0.25, linewidth=0.5)
 
-    seasons_label_str = seasons_label(SEASON_MIN, SEASON_MAX)
+    seasons_label_str = seasons_label(_w().season_min, _w().season_max)
     fig.suptitle(
         f"PD22 — ESPN box coverage by season · {seasons_label_str} · "
         f"2013→2014 raw player-seasons +{tab.loc[tab.season == 2014, 'player_seasons_raw'].iloc[0] - tab.loc[tab.season == 2013, 'player_seasons_raw'].iloc[0]:,} "
@@ -267,9 +281,9 @@ def run(*, write_csv: bool = True) -> dict:
     meta = {
         "diagnostic": "pd22_espn_coverage_by_season",
         "date": date.today().isoformat(),
-        "season_min": SEASON_MIN,
-        "season_max": SEASON_MAX,
-        "seasons": seasons_label(SEASON_MIN, SEASON_MAX),
+        "season_min": _w().season_min,
+        "season_max": _w().season_max,
+        "seasons": seasons_label(_w().season_min, _w().season_max),
         "source": "datasets/mbb/mbb_df_player_box.csv (frozen; not rewritten)",
         "hero_lock_min_minutes": HERO_LOCK,
         "min_team_season_games": MIN_TEAM_SEASON_GAMES,
@@ -307,7 +321,9 @@ def plot_only() -> None:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--plot-only", action="store_true", help="Regenerate PNG from CSV")
+    add_window_args(parser)
     args = parser.parse_args()
+    activate_from_args(args)
     if args.plot_only:
         plot_only()
         return

@@ -30,12 +30,25 @@ from hero_gallery_paths import (
 from pd17_interval_overlap_slide import build_figure_focus_slide, load_meta
 from pd22_slide_common import m, mgeq, mgt, mpct
 
+from pd20_22_campaign_window import (
+    activate_from_args,
+    add_window_args,
+    auto_deck_path,
+    current_window,
+    window_cli_flags,
+)
+
+
+def _w():
+    return current_window()
+
 DIST_SCRIPT = SCRIPTS / "pd22_raw_roster_size_distribution.py"
-SEASON_MIN = 2011
-SEASON_MAX = 2021
-STEM = f"PD22_raw_roster_size_distribution_{SEASON_MIN}_{SEASON_MAX}_before_qc"
 HERO_LOCK = 20.0
 NCAA_DRESS = 15
+
+
+def _stem() -> str:
+    return f"PD22_raw_roster_size_distribution_{_w().tag}_before_qc"
 
 CLAIM = (
     r"Claim (PD22 backup): Raw ESPN box rows inflate team-season roster counts — "
@@ -44,15 +57,16 @@ CLAIM = (
 
 
 def _artifact_paths() -> tuple[Path, Path, Path]:
-    fig = PD22_MINUTES / f"{STEM}.png"
-    meta = PD22_MINUTES / f"{STEM}.json"
-    return fig, meta, AUTO_PD22_RAW_ROSTER_SIZE_BEFORE_QC_DECK
+    fig = PD22_MINUTES / f"{_stem()}.png"
+    meta = PD22_MINUTES / f"{_stem()}.json"
+    return fig, meta, auto_deck_path(AUTO_PD22_RAW_ROSTER_SIZE_BEFORE_QC_DECK)
 
 
 def _refresh_distribution(*, plot_only: bool) -> None:
     cmd = [sys.executable, str(DIST_SCRIPT), "--before-qc-only"]
     if plot_only:
         cmd.append("--plot-only")
+    cmd.extend(window_cli_flags())
     print(
         "Running before-QC roster size distribution ..."
         if not plot_only
@@ -63,7 +77,7 @@ def _refresh_distribution(*, plot_only: bool) -> None:
 
 def _max_outlier_bullet(meta: dict) -> str:
     csv_raw = PD22_MINUTES / (
-        f"PD22_raw_roster_size_by_team_season_{SEASON_MIN}_{SEASON_MAX}_before_qc_raw.csv"
+        f"PD22_raw_roster_size_by_team_season_{_w().tag}_before_qc_raw.csv"
     )
     if not csv_raw.is_file():
         raw = meta.get("raw_team_season_summary") or {}
@@ -85,7 +99,7 @@ def _max_outlier_bullet(meta: dict) -> str:
 def _readout_bullets(meta: dict) -> list[str]:
     raw = meta.get("raw_team_season_summary") or {}
     filt = meta.get("filtered_team_season_summary") or {}
-    seasons = meta.get("seasons", f"{SEASON_MIN}–{SEASON_MAX}")
+    seasons = meta.get("seasons", f"{_w().season_min}–{_w().season_max}")
     n_ts = int(raw.get("n", 0))
     share15 = 100.0 * float(raw.get("share_eq_15", 0))
     share_ge15 = 100.0 * float(raw.get("share_ge_15", 0))
@@ -111,7 +125,9 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Build PD22 before-QC roster size AUTO slide.")
     parser.add_argument("--slides-only", action="store_true", help="Use existing PNG + JSON")
     parser.add_argument("--plot-only", action="store_true", help="Regenerate PNG from CSV/JSON")
+    add_window_args(parser)
     args = parser.parse_args()
+    activate_from_args(args)
 
     fig, meta_path, out_pptx = _artifact_paths()
     ensure_hero_dirs()
@@ -126,7 +142,7 @@ def main() -> None:
         raise SystemExit(f"Missing figure: {fig}")
 
     raw = meta.get("raw_team_season_summary") or {}
-    seasons = meta.get("seasons", f"{SEASON_MIN}–{SEASON_MAX}")
+    seasons = meta.get("seasons", f"{_w().season_min}–{_w().season_max}")
     subtitle = (
         rf"PD22 · roster size (before QC) · {seasons} · raw median = {m(float(raw.get('median', 0)), decimals=0)} · "
         rf"max = {m(int(raw.get('max', 0)))}"
