@@ -1,8 +1,8 @@
 # CCT Campaign Plan — Fix Â_i, Find the Squid vs Jackal
 
 **Prepared by COMPASS** (for Charles, SCOUT, Alex)  
-**Date:** 2026-08-21  
-**Status:** Act II **sensitivity sweep complete** (2026-08-21) — P1 full **NO**, P1 **+DFT PPM YES** (~2 pp); P3 shipped; **next: Priority 2 heatmap**, then **Priority 2b Alex board plot (K/N bins)** per PD25  
+**Date:** 2026-08-21 (evening refresh)  
+**Status:** Act II **empirical core complete** — P1 grid (min10/min20) · P3 · **PPM triptych** · **P2b Alex board (K/N tail bins)** shipped. **+DFT PPM** CCT whisper on poolq_loo; **flat-then-down on T̂_j** at +DFT (P2b). **Next:** Act III — HAND framing + paper outline (**Alex, post–next week:** 50% writing / 50% code-data). P2 heatmap **parked**.
 **SCOUT review:** Complete (2026-08-21) — [`20260821_SCOUT_CCT_campaign_review.md`](20260821_SCOUT_CCT_campaign_review.md)
 
 **Canonical companions (do not re-derive from memory):**
@@ -38,12 +38,18 @@ flowchart LR
 | Act | Question | Status | Owner |
 |-----|----------|--------|-------|
 | **I — BDP** | What do the pools look like? (Â, T̂_j, roster size, +DFT) | **Closed** (2026-08-20) | Charles + scripts |
-| **II — Conditional** | At **fixed Â**, does draft rate fall as pond thickens? | **Sweep done** — see §3 scorecard; whisper in **+DFT PPM only** | **SCOUT** · Charles (HAND) |
-| **III — HAND + Alex** | Can you **show and defend** CCT in one deck? | After Act II figures | Charles (slides) · COMPASS (wording) |
+| **II — Conditional** | At **fixed Â**, does draft rate fall as pond thickens? | **Empirics shipped** — poolq_loo + T̂_j + rank; see §3 | Charles (HAND) · COMPASS (wording) |
+| **III — HAND + Alex** | Can you **show and defend** CCT in one deck? | **Starting** — Alex on track; story framing after next week | Charles (slides) · COMPASS (wording) |
 
-**Win condition (revised 2026-08-21):** A **defensible HAND story** — not a single pooled bar — that Charles can read to Alex without BINDING violations. **Partial win:** PPM **+DFT** shows Squid > Jackal at matched Â (~23% vs ~21%, overlapping CIs). **Full-panel P1 and OBPM do not.** Priority 3 adds within-team rank on contenders. **Priority 2 heatmap** may localize where the +DFT whisper lives.
+**Win condition (revised 2026-08-21 evening):** A **defensible HAND story** — three magnifiers, not one bar:
 
-**Not the win condition:** Bin 16 dips on a single ventile curve; claiming CCT confirmed from +DFT alone without caveats; promoting OBPM to canonical.
+1. **poolq_loo P1:** full panel **NO**; **+DFT PPM** whisper (~2 pp at [1.5,2]; stronger at **[2,3]** triptych — bin 16 cliff).
+2. **P3:** within-team rank on contenders (Q4 top 9.5% vs mid 3.0%).
+3. **P2b T̂_j (Alex board):** +DFT **flat-then-down** at fixed Â with tail binning (primary z [2,3]: plateau ~34% → tail ~8%).
+
+**Alex (2026-08-21):** on track; more done since summer start than prior two years; **after next week** → frame story, outline/write paper (placeholders OK), then **50% writing / 50% code-data cleanup**.
+
+**Not the win condition:** Claiming CCT confirmed from any single plot; OBPM canonical; ignoring thin tail cells on P2b.
 
 ---
 
@@ -106,58 +112,40 @@ Band (PPM full): 2,035 PS / 178 drafted (~8.8% in band; **166/178 drafts** on +D
 
 **Honest Alex line (post-sweep):** *“Full panel at fixed talent: crowded ponds draft more. Restrict to programs that actually produce picks, PPM sign flips — mid-pond edges top-pond by ~2 points but uncertainty overlaps. OBPM goes the other way. On contenders, you must be near the top of your roster.”*
 
-**HAND lead pair:** side-by-side **PPM full vs PPM +DFT** + **Priority 3 Q4 panel**.
+**HAND lead deck (2026-08-21):**
 
-### Priority 2 — Â × poolq_loo heatmap — **NEXT**
+| Slide | File | Role |
+|-------|------|------|
+| **Triptych** (poolq_loo) | `CCT_draft_rate_ai_band_poolq_loo_min10_ppm_triptych.png` (+ `_b8`) | Band sign flip [1,2]→[2,3]; +DFT bin-16 cliff |
+| **Alex board** (T̂_j) | `CCT_draft_rate_fixedAi_Tj_knbins_dft.png` | Flat-then-down at fixed Â (+DFT) |
+| **P3 Q4** | `CCT_draft_rate_roster_pct_by_tj_quartile.png` | Stand out on **your** team |
 
-Draft rate in every cell (Â ventile × poolq_loo ventile). Hero curve = column average — shows **smearing**. Look for upper-right (high A, high pond) **cooler** than upper-middle. Run on **full panel and +DFT** if feasible.
+Side-by-side **PPM full vs +DFT** (locked [1.5,2] min20) still valid for “league confound” beat.
 
-**Wider bins at top** if sparse (~1,100 total drafts). Flag cells with n < 30 in JSON.
+### Priority 2 — Â × poolq_loo heatmap — **PARKED**
 
-### Priority 2b — Alex board plot: fixed Â × T̂_j (K/N bins) — **QUEUED after P2**
+Draft rate in every cell (Â ventile × poolq_loo ventile). Useful for smearing diagnosis; **not** Alex’s re-raised ask (PD25 = P2b). Build if time after Act III framing.
 
-**Source:** PD25 (2026-08-21) — [`../../../transcripts/PD25_notes.md`](../../../transcripts/PD25_notes.md) · board [`../../../transcripts/PD25_board.jpeg`](../../../transcripts/PD25_board.jpeg)
+### Priority 2b — Alex board plot: fixed Â × T̂_j (K/N bins) — **SHIPPED** ★
 
-**Question (Alex):** At fixed individual talent, does draft rate stay **flat** in team talent, then **turn down** once congestion kicks in near **K/N**? (Plateau → downturn on X = team mean talent.)
+**Source:** PD25 (2026-08-21) — [`../../../transcripts/PD25_notes.md`](../../../transcripts/PD25_notes.md) · board [`../../../transcripts/PD25_board.jpeg`](../../../transcripts/PD25_board.jpeg) · plain-English: [`../_DISPOSABLE_PD25_Alex_board_for_dummies.md`](../_DISPOSABLE_PD25_Alex_board_for_dummies.md)
 
-**Why now (not instead of P2):** P2 heatmap finishes Act II smearing diagnosis; P2b is the **direct empirical test** of Alex’s whiteboard. Does **not** replace poolq_loo P1 — **complements** it on the **T̂_j** axis.
+**Question (Alex):** At fixed individual talent, does draft rate stay **flat** in team talent, then **turn down** once congestion kicks in near **K/N**?
 
-**Spec (default — Charles can tweak one message)**
+**Implementation (2026-08-21):** `pass_a_congestion_conditional.py --plot fixed_ai_tj_knbins` · **piecewise tail** (4 coarse + 20 fine bins on T̂_j within band) · T̂_j includes self (not poolq_loo).
 
-| Knob | Value |
-|------|--------|
-| Panel | mg10 **min20** 2011–2021 · POST-QC · **+DFT primary** (draftee-team ecosystem) |
-| Â band | PPM z ∈ **[1.5, 2.0]** (match locked P1); sensitivity: [2.0, 3.0] if n allows |
-| **X-axis** | **T̂_j** (team mean Â), **not** poolq_loo |
-| **Y-axis** | Mean Y_draft |
-| **X binning** | **K/N-informed** — not blind 16-quantile on full T̂_j range |
-| Winsor | poolq 0.01–0.99 on perf path (same as P1) |
+#### P2b scorecard
 
-**Binning rule (Alex / PD25)**
+| Variant | Plateau (low/mid bins) | Tail (last 3 bins) | Downturn? | Files |
+|---------|------------------------|---------------------|-----------|-------|
+| **PPM z [2,3] · +DFT · min10** (primary) | **~34%** | **~8%** | **YES** | `CCT_draft_rate_fixedAi_Tj_knbins_dft.{png,json}` |
+| **PPM z [1.5,2] · +DFT · min20** (sensitivity) | **~24%** | **~11%** | **YES** | `…_knbins_min20_ppm_z1p5_2_dft.*` |
 
-1. **Back-of-envelope** minimum bin count on X so ≥ **2 bins lie past** the model congestion threshold on the **team-talent** scale (function of **K**, roster **N**, **θ**, **γ** — document assumptions in JSON).
-2. Prefer **equal-width on high-T̂_j tail** or **custom cutpoints** anchored at empirical K/N quantile of **within-team** ability — **not** equal-count ventiles that smear sparse top tail.
-3. **Prune sweeps:** Alex: unlikely to see downturn with **&lt; ~20** X bins — don’t waste grid below calculated floor.
-4. **Power floor:** flag bins with **n &lt; 30** (same as P2); no claims from empty cells.
+Band (primary): 392 PS / 119 drafts. Many **thin tail cells** (n < 30) — expected; read **direction**, not last bin alone.
 
-**Expected shapes**
+**Caveat:** Old 16-quantile T̂_j panel showed **monotone rise** — wrong binning, not falsification of Alex’s story.
 
-| Population | Alex prediction | P1 already saw |
-|------------|-----------------|----------------|
-| +DFT, high Â | Flat → **down** at high T̂_j | T̂_j panel: **up** (16 quantile) — **retest with P2b bins** |
-| Full panel | Confounded (elite programs) | Rate rises with T̂_j |
-
-**CCT signature (P2b):** Jackal-side bins **below** Squid-side bins **after** knee — same language as P1 but on **T̂_j** with explicit knee search.
-
-**Outputs (SCOUT naming)**
-
-- `basic_data_plots/CCT_draft_rate_fixedAi_Tj_knbins_dft.png`  
-- `basic_data_plots/CCT_draft_rate_fixedAi_Tj_knbins_dft.json`  
-- `basic_data_plots/CCT_draft_rate_fixedAi_Tj_knbins_dft_Tj_bins.csv` — `edge_lo`, `edge_hi`, `n`, `drafts`, `draft_rate`
-
-**Script:** extend `pass_a_congestion_conditional.py` with `--plot fixed_ai_tj_knbins` (or dedicated helper). Reuse panel path from P1. **COMPASS** drafts K/N bin-count memo; **SCOUT** implements.
-
-**Do not:** Claim model validation in caption — empirical knee **first**; MLE inflection fit is Priority 5 / MLE phase.
+**Open:** Formal K/N → minimum bin-count memo (COMPASS); MLE knee fit (Act III / later).
 
 ### Priority 3 — Within-team rank × T̂_j quartile — **SHIPPED**
 
@@ -181,8 +169,10 @@ Color drafted vs not on interval slide logic; top T̂_j quartile; drafted player
 | +DFT subsample (PPM P1) | ✓ | CCT **YES**, fragile (~2 pp) |
 | OBPM full + +DFT | ✓ | CCT **NO** both; appendix only |
 | T̂_j secondary panel | ✓ | Rate rises with team mean |
-| mg10 min10 | — | Not run |
-| Alternate Â bands | — | Charles call after P2 heatmap |
+| mg10 min10 P1 grid (18 cells) | ✓ | `CCT_p1_grid_manifest_min10.json` |
+| PPM triptych (poolq_loo deck) | ✓ | `CCT_draft_rate_ai_band_poolq_loo_min10_ppm_triptych.png` (+ `_b8`) |
+| P2b Alex board (T̂_j tail bins) | ✓ | `CCT_draft_rate_fixedAi_Tj_knbins_dft.*` |
+| Alternate Â bands | ✓ | [2,3] full/+DFT CCT YES on poolq_loo; see min10 grid |
 
 ---
 
@@ -246,8 +236,9 @@ New deck or new section in next HAND — working title **`CHAR_CCT_HAND`** or se
 
 | Done | Item | Proof |
 |------|------|-------|
-| [ ] | Priority 2 heatmap (full + +DFT if feasible) | **NEXT — green-light SCOUT** |
-| [ ] | **Priority 2b** Alex board plot (fixed Â × T̂_j, K/N bins, +DFT) | After P2 — [`PD25_notes.md`](../../../transcripts/PD25_notes.md) |
+| [ ] | Priority 2 heatmap (full + +DFT if feasible) | **Parked** — optional |
+| [x] | **Priority 2b** Alex board plot (fixed Â × T̂_j, K/N tail bins, +DFT) | `CCT_draft_rate_fixedAi_Tj_knbins_dft.{png,json}` · downturn **YES** |
+| [x] | PPM triptych (poolq_loo deck) | `…_triptych.png`, `…_triptych_b8.png` |
 | [x] | Priority 3 roster percentile faceted | `CCT_draft_rate_roster_pct_by_tj_quartile.{png,json}` |
 | [x] | +DFT subsample rerun of Priority 1 | `CCT_draft_rate_ai_band_poolq_loo_dft.*` |
 | [x] | OBPM robustness (full + +DFT) | `…_obpm.*`, `…_obpm_dft.*` — appendix only |
@@ -300,9 +291,9 @@ New deck or new section in next HAND — working title **`CHAR_CCT_HAND`** or se
 
 ---
 
-## 8 — One paragraph for Alex (read aloud — post-sweep)
+## 8 — One paragraph for Alex (read aloud — post P2b)
 
-> We closed Act I and built the fix-A_i microscope you asked for. On the **full** NCAA panel at matched talent, players in **thicker** teammate ponds get drafted **more**, not less — elite-program confound. When we restrict to **programs that actually produce draft picks**, the sign **flips** on PPM: mid-pond slightly beats top-pond, but only by about two points with overlapping uncertainty. OBPM goes strongly the other way — appendix only. Separately, on **contender rosters**, draft mass concentrates at the **top of the team** — you have to stand out locally even when the team is elite. That’s our honest NCAA picture so far: not the marginal hero dip, but a draft-ecosystem whisper plus within-team rank on contenders.
+> We closed Act I and built the fix-A_i microscope you asked for. On the **full** NCAA panel at matched talent, players in **thicker** teammate ponds get drafted **more**, not less — elite-program confound. When we restrict to **programs that actually produce draft picks**, the sign **flips** on PPM: mid-pond slightly beats top-pond at [1.5,2], and at **[2,3]** the top-pond ventile **cliffs** — that’s the triptych. On **team talent** with your tail binning — not blind ventiles — we see the **flat-then-down** shape you drew on the board: ~34% draft rate in the mid team-talent bins, ~8% in the elite tail, same fixed player slice. OBPM goes the other way — appendix only. On **contender rosters**, draft mass concentrates at the **top of the team**. That’s our honest NCAA picture: three magnifiers — peer pond, team pond, within-team rank — not the old marginal hero dip.
 
 ---
 
@@ -359,7 +350,7 @@ New deck or new section in next HAND — working title **`CHAR_CCT_HAND`** or se
 |----------|---------------------|----------------------|
 | Â band for Priority 1 | **z ∈ [1.5, 2.0]** ✓ | Top decile; [1.0, 1.5] if bins thin |
 | Primary pond axis | **poolq_loo** ventiles ✓ | T̂_j ventiles (secondary panel) |
-| **Alex board X-axis (P2b)** | **T̂_j with K/N bins** (queued) | Blind 16-ventile T̂_j (already run — wrong shape) |
+| **Alex board X-axis (P2b)** | **T̂_j with tail bins** ✓ shipped | Blind 16-ventile T̂_j (wrong shape — superseded) |
 | Ventile count | 16 (match hero) | 10 wider bins at top |
 | First HAND target | New CCT section | Append to next PD HAND |
 
@@ -377,7 +368,9 @@ New deck or new section in next HAND — working title **`CHAR_CCT_HAND`** or se
 | 2026-08-21 | **Charles green-lit Priority 1** — poolq_loo, default Â band; SCOUT building `pass_a_congestion_conditional.py` |
 | 2026-08-21 | **Act IIb sweep** — +DFT PPM CCT **YES** (~2 pp); OBPM **NO**; T̂_j rises; P3 Q4 top 9.5% vs mid 3.0%; see §3 scorecard |
 | 2026-08-21 | **COMPASS updated** campaign plan + §13: **Priority 2 heatmap next** |
-| 2026-08-21 | **PD25** Alex board — flat-then-down at fixed Â × T̂_j; **Priority 2b** queued · [`PD25_notes.md`](../../../transcripts/PD25_notes.md) |
+| 2026-08-21 | **P1 min10 grid** (18 cells) + **PPM triptych** (16- and 8-bin) |
+| 2026-08-21 | **P2b shipped** — Alex board T̂_j tail bins; downturn **YES** (+DFT z [2,3] primary) |
+| 2026-08-21 | **Alex:** on track; story framing + paper outline **after next week** |
 
 ---
 
@@ -385,13 +378,14 @@ New deck or new section in next HAND — working title **`CHAR_CCT_HAND`** or se
 
 | Order | Plot | Status |
 |-------|------|--------|
-| **1** | P1 matched Â × poolq_loo (full + +DFT + OBPM + T̂_j) | ✓ Done — see §3 scorecard |
+| **1** | P1 matched Â × poolq_loo (full + +DFT grids min10/min20) | ✓ Done |
 | **2** | P3 roster percentile × T̂_j quartile | ✓ Done |
-| **3 (NEXT)** | **P2 heatmap** — Â × poolq_loo (full + +DFT) | **Green-light SCOUT** |
-| **4** | **P2b Alex board** — fixed Â × **T̂_j** (+DFT, **K/N bins**) | **Queued after P2** — PD25 |
-| **5** | Wider Â band / mg10 min10 | After P2b |
-| **6** | P4 interval overlap + draft | Optional HAND enrich |
-| **—** | PD24 BPM hero rerun | Extra — after P2b, appendix |
+| **3** | PPM triptych (poolq_loo deck) | ✓ Done |
+| **4** | **P2b Alex board** — fixed Â × **T̂_j** (+DFT, tail bins) | ✓ Done — PD25 |
+| **5 (NOW)** | **Act III** — HAND deck + paper outline/framing | **Alex: after next week** |
+| **—** | P2 heatmap | Parked (optional) |
+| **—** | P4 interval overlap + draft | Optional HAND enrich |
+| **—** | PD24 BPM hero rerun | Appendix — when bandwidth |
 
 **Do not:** Claim CCT confirmed from +DFT alone; promote OBPM to canonical; revert to marginal hero bin-16 dip hunting.
 
@@ -399,6 +393,6 @@ New deck or new section in next HAND — working title **`CHAR_CCT_HAND`** or se
 
 ---
 
-*Act II sweep done. HAND lead: PPM full vs +DFT + P3 Q4. Next: **P2 heatmap** → **P2b Alex board (K/N bins)**. Notes: [`PD25_notes.md`](../../../transcripts/PD25_notes.md).*
+*Act II empirical core **closed** (2026-08-21 evening). HAND lead: **triptych** + **P2b** + P3 Q4. **Act III:** story + paper outline (Alex). Plain English: [`_DISPOSABLE_PD25_Alex_board_for_dummies.md`](../_DISPOSABLE_PD25_Alex_board_for_dummies.md).*
 
-— **COMPASS** · **SCOUT sweep 2026-08-21** · **P2 → P2b queued**
+— **COMPASS** · **2026-08-21 evening** · **Act III next**

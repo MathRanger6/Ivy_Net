@@ -2,7 +2,6 @@
   "diagnostic": "bdp_argms_distributions",
   "date": "2026-08-21",
   "metric": "argms",
-  "drop_zero_minutes": false,
   "definitions": {
     "apgms": "season minutes / games with minutes > 0",
     "argms": "season minutes / games rostered (incl. DNP)",

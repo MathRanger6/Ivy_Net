@@ -1,6 +1,6 @@
 # CCT Act II outputs
 
-**Updated:** 2026-08-21
+**Updated:** 2026-08-21 (evening)
 
 ## Priority 1 grid — mg10 min10 2011-2021
 
@@ -60,16 +60,33 @@ Manifest: `CCT_p1_grid_manifest_min20.json`
 
 - Q4 top rank 9.5% vs mid 3.0% — `CCT_draft_rate_roster_pct_by_tj_quartile.png`
 
-Filename pattern: `CCT_draft_rate_ai_band_poolq_loo_min{10|20}_{ppm|bpm|obpm}_z{lo}_{hi}_{allt|dft}.png`
+## PPM triptych (deck — poolq_loo)
 
-Legend: green = Squid (mid pond), orange = Jackal (top pond).
+Three panels: [1,2] all teams (CCT NO) · [2,3] all teams (CCT YES) · [2,3] +DFT (bin 16 cliff).
 
-## Queue (2026-08-21)
+- `CCT_draft_rate_ai_band_poolq_loo_min10_ppm_triptych.png` (16 ventiles)
+- `CCT_draft_rate_ai_band_poolq_loo_min10_ppm_triptych_b8.png` (8 bins, proportional Squid/Jackal)
+
+## Priority 2b — Alex board (T̂_j tail bins)
+
+**Primary:** PPM z ∈ [2,3] · +DFT · mg10 min10 · piecewise 4+20 bins on T̂_j.
+
+| Metric | Plateau | Tail (last 3 bins) | Downturn? | File |
+|--------|---------|---------------------|-----------|------|
+| Primary | ~34% | ~8% | **YES** | `CCT_draft_rate_fixedAi_Tj_knbins_dft.png` |
+| Sensitivity [1.5,2] min20 | ~24% | ~11% | **YES** | `CCT_draft_rate_fixedAi_Tj_knbins_min20_ppm_z1p5_2_dft.png` |
+
+Sidecars: matching `.json`, `_Tj_bins.csv`. **Caption:** T̂_j includes self; not poolq_loo; thin tail cells expected.
+
+Plain English: [`../../_DISPOSABLE_PD25_Alex_board_for_dummies.md`](../../_DISPOSABLE_PD25_Alex_board_for_dummies.md)
+
+## Queue (2026-08-21 evening)
 
 | Priority | Plot | Status |
 |----------|------|--------|
-| **P2** | Â × poolq_loo heatmap (full + +DFT) | **NEXT** |
-| **P2b** | Fixed Â × **T̂_j** (+DFT, **K/N bins**) — Alex board PD25 | After P2 |
+| **Act III** | HAND deck + paper outline | **Next** (Alex: after next week) |
+| **P2** | Â × poolq_loo heatmap | Parked (optional) |
+| **P4** | Interval overlap + draft | Optional |
 
 Spec: [`CCT_Campaign_Plan.md`](../../SCOUT_and_COMPASS/CCT_Campaign_Plan.md) §3 · Notes: [`../../../transcripts/PD25_notes.md`](../../../transcripts/PD25_notes.md)
 

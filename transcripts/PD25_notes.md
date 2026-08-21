@@ -45,29 +45,30 @@ This is **not** the marginal hero curve. It is **conditional on Â** with **team
 | Alex ask | Already built | Gap |
 |----------|---------------|-----|
 | Fix Â, conditional draft rate | P1 matched band × **poolq_loo** (+DFT whisper ~2 pp) | ✓ partial win on **peer** axis |
-| Same, **T̂_j on X** | `CCT_draft_rate_fixedAi_Tj_*` — rate **rises** with T̂_j | ✗ **wrong shape** vs board (confound + binning?) |
-| Empirical first | Act II sweep, BDP, minutes plots | ✓ on track |
-| K/N-aware X bins | 16 quantile ventiles only | **P2b** — new build |
+| Same, **T̂_j on X** | **P2b** tail bins — flat-then-down (+DFT) | ✓ **YES** — plateau ~34% → tail ~8% (z [2,3]) |
+| Empirical first | Act II sweep, BDP, minutes plots, triptych | ✓ on track |
+| K/N-aware X bins | P2b piecewise 4+20 tail bins | ✓ shipped |
 | Inflection = f(θ, γ, K/N) | Not yet | **Act III / MLE bridge** after P2b |
 
 **Reconciliation:** P1 on **poolq_loo** is the right *peer-congestion* microscope. Alex’s board is the *team-talent* version of the same fix-Â logic. Both can be true: full panel **T̂_j** rises (program quality); **+DFT high tail** may still show flat-then-down if binned correctly.
 
 ---
 
-## Engineering ticket — **Priority 2b** (SCOUT)
+## Engineering ticket — **Priority 2b** — **SHIPPED 2026-08-21**
 
-See [`CCT_Campaign_Plan.md` §3 Priority 2b](../3-Master_Plan/re_entry/SCOUT_and_COMPASS/CCT_Campaign_Plan.md).
+See [`CCT_Campaign_Plan.md` §3 Priority 2b](../3-Master_Plan/re_entry/SCOUT_and_COMPASS/CCT_Campaign_Plan.md) · outputs in `basic_data_plots/CCT_draft_rate_fixedAi_Tj_knbins_*`.
 
-**One-liner for Alex:** “We’re holding Â fixed and binning the **high team-talent tail** on purpose to test your flat-then-down picture — not smearing it with league-wide ventiles.”
+**One-liner for Alex:** “We’re holding Â fixed and binning the **high team-talent tail** on purpose — and we see your flat-then-down picture on +DFT.”
 
 ---
 
 ## Open / homework
 
 - [ ] COMPASS: K/N → minimum X-bin count memo (θ, γ, roster N, draft K)
-- [ ] SCOUT: P2b figure + JSON with `edge_lo` / `edge_hi` / `n` per bin
-- [ ] Charles: eyeball P2 heatmap then P2b — does downturn appear on +DFT?
+- [x] SCOUT: P2b figure + JSON with `edge_lo` / `edge_hi` / `n` per bin (2026-08-21)
+- [ ] Charles: eyeball P2b + triptych — rehearse §8 Alex paragraph for HAND
 - [ ] Later: map empirical knee to model inflection (MLE phase)
+- [ ] **After next week (Alex):** paper framing + outline (placeholders OK); then 50% writing / 50% code-data
 
 ---
 

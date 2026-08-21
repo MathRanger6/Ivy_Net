@@ -1,0 +1,142 @@
+{
+  "diagnostic": "cct_matched_pond_triptych",
+  "date": "2026-08-21",
+  "plot": "matched_pond_triptych",
+  "bdp_spec": "mg10 min10 2011-2021",
+  "perf_metric": "ppm",
+  "n_bins": 8,
+  "squid_ventiles_0idx": [
+    2,
+    3
+  ],
+  "jackal_ventiles_0idx": [
+    6,
+    7
+  ],
+  "panels": [
+    {
+      "panel": "A \u00b7 PPM z [1, 2] \u00b7 full panel",
+      "ai_lo": 1.0,
+      "ai_hi": 2.0,
+      "dft": false,
+      "band_n": 6161,
+      "total_drafts": 424,
+      "squid_proxy": {
+        "label": "Squid proxy (mid pond)",
+        "ventiles_0idx": [
+          2,
+          3
+        ],
+        "bins_1idx": [
+          3,
+          4
+        ],
+        "n": 1540,
+        "drafts": 109,
+        "draft_rate": 0.07077922077922078,
+        "ci_lo": 0.05900991790629074,
+        "ci_hi": 0.08468461655890307
+      },
+      "jackal_proxy": {
+        "label": "Jackal proxy (top pond)",
+        "ventiles_0idx": [
+          6,
+          7
+        ],
+        "bins_1idx": [
+          7,
+          8
+        ],
+        "n": 1540,
+        "drafts": 111,
+        "draft_rate": 0.07207792207792207,
+        "ci_lo": 0.06019821704447481,
+        "ci_hi": 0.08608725680206486
+      },
+      "cct_signature_squid_gt_jackal": false
+    },
+    {
+      "panel": "B \u00b7 PPM z [2, 3] \u00b7 full panel",
+      "ai_lo": 2.0,
+      "ai_hi": 3.0,
+      "dft": false,
+      "band_n": 1079,
+      "total_drafts": 136,
+      "squid_proxy": {
+        "label": "Squid proxy (mid pond)",
+        "ventiles_0idx": [
+          2,
+          3
+        ],
+        "bins_1idx": [
+          3,
+          4
+        ],
+        "n": 270,
+        "drafts": 37,
+        "draft_rate": 0.13703703703703704,
+        "ci_lo": 0.1010811848347639,
+        "ci_hi": 0.18317657585608804
+      },
+      "jackal_proxy": {
+        "label": "Jackal proxy (top pond)",
+        "ventiles_0idx": [
+          6,
+          7
+        ],
+        "bins_1idx": [
+          7,
+          8
+        ],
+        "n": 269,
+        "drafts": 27,
+        "draft_rate": 0.10037174721189591,
+        "ci_lo": 0.06990081838958982,
+        "ci_hi": 0.1420961791357142
+      },
+      "cct_signature_squid_gt_jackal": true
+    },
+    {
+      "panel": "C \u00b7 PPM z [2, 3] \u00b7 +DFT",
+      "ai_lo": 2.0,
+      "ai_hi": 3.0,
+      "dft": true,
+      "band_n": 392,
+      "total_drafts": 119,
+      "squid_proxy": {
+        "label": "Squid proxy (mid pond)",
+        "ventiles_0idx": [
+          2,
+          3
+        ],
+        "bins_1idx": [
+          3,
+          4
+        ],
+        "n": 98,
+        "drafts": 30,
+        "draft_rate": 0.30612244897959184,
+        "ci_lo": 0.22362525822357754,
+        "ci_hi": 0.4032462756093553
+      },
+      "jackal_proxy": {
+        "label": "Jackal proxy (top pond)",
+        "ventiles_0idx": [
+          6,
+          7
+        ],
+        "bins_1idx": [
+          7,
+          8
+        ],
+        "n": 98,
+        "drafts": 21,
+        "draft_rate": 0.21428571428571427,
+        "ci_lo": 0.14464436812023418,
+        "ci_hi": 0.30548210279145616
+      },
+      "cct_signature_squid_gt_jackal": true
+    }
+  ],
+  "png": "CCT_draft_rate_ai_band_poolq_loo_min10_ppm_triptych_b8.png"
+}

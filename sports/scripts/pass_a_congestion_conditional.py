@@ -2,10 +2,12 @@
 """CCT Act II — conditional draft-rate plots (fixed Â_i, vary pond / rank).
 
 Priority 1: matched Â band × poolq_loo ventiles (Squid vs Jackal test).
+Priority 2b: Alex board — fixed Â × T̂_j (K/N tail bins).
 Priority 3: roster percentile × T̂_j quartile (within-team big-fish axis).
 
 Run (repo root):
   python sports/scripts/pass_a_congestion_conditional.py --plot matched_pond
+  python sports/scripts/pass_a_congestion_conditional.py --plot fixed_ai_tj_knbins --dft
   python sports/scripts/pass_a_congestion_conditional.py --plot roster_rank_tj
 """
 
@@ -14,6 +16,7 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import shutil
 import sys
 from dataclasses import dataclass, replace
 from datetime import date
@@ -57,10 +60,18 @@ _panel_cache: dict[tuple, pd.DataFrame] = {}
 MIN_CELL_N_WARN = 30
 MIN_CELL_N_CLAIM = 10
 TJ_QUARTILE_LABELS = ("Q1 (lowest T̂_j)", "Q2", "Q3", "Q4 (highest T̂_j)")
+T_JHAT_COL = "T_j_hat"
+DEFAULT_P2B_TJ_BINNING = "piecewise_tail"
+DEFAULT_P2B_TJ_N_LOW = 4
+DEFAULT_P2B_TJ_N_HIGH = 20
+DEFAULT_P2B_TAIL_SPLIT_Q = 0.50
+TAIL_HIGHLIGHT_FRAC = 0.25  # highlight top quartile of T̂_j range (high-congestion tail)
 
-# Priority 1 — 0-indexed poolq_loo ventiles within matched Â band
-SQUID_VENT = (5, 6, 7)
-JACKAL_VENT = (13, 14, 15)
+# Priority 1 — 0-indexed poolq_loo ventiles within matched Â band (16-bin canonical)
+SQUID_VENT_16 = (5, 6, 7)
+JACKAL_VENT_16 = (13, 14, 15)
+SQUID_VENT = SQUID_VENT_16
+JACKAL_VENT = JACKAL_VENT_16
 
 SQUID_COLOR = "#2ecc71"
 JACKAL_COLOR = "#e67e22"
@@ -128,6 +139,40 @@ def _matched_pond_basename(spec: CctSpec) -> str:
     if spec.ai_lo is not None and spec.ai_hi is not None:
         parts.append(f"z{_z_slug(spec.ai_lo)}_{_z_slug(spec.ai_hi)}")
     parts.append("dft" if spec.dft else "allt")
+    return "_".join(parts)
+
+
+def _proxy_ventiles(n_bins: int) -> tuple[tuple[int, ...], tuple[int, ...]]:
+    """Map canonical 16-bin Squid/Jackal regions onto *n_bins* quantile bins."""
+    n = int(n_bins)
+
+    def map_region(lo16: int, hi16: int) -> tuple[int, ...]:
+        lo = int(math.floor(lo16 * n / 16))
+        hi = int(math.ceil((hi16 + 1) * n / 16)) - 1
+        hi = min(hi, n - 1)
+        if lo > hi:
+            lo = hi
+        return tuple(range(lo, hi + 1))
+
+    return map_region(SQUID_VENT_16[0], SQUID_VENT_16[-1]), map_region(
+        JACKAL_VENT_16[0], JACKAL_VENT_16[-1]
+    )
+
+
+def _poolq_axis_label(n_bins: int) -> str:
+    unit = "ventile" if int(n_bins) == 16 else "bin"
+    return rf"$\mathrm{{poolq\_loo}}$ {unit} (1 = lowest pond)"
+
+
+def _triptych_stem(base: CctSpec) -> str:
+    parts = [
+        "CCT_draft_rate_ai_band_poolq_loo",
+        f"min{int(base.min_minutes)}",
+        "ppm",
+        "triptych",
+    ]
+    if int(base.n_bins) != 16:
+        parts.append(f"b{int(base.n_bins)}")
     return "_".join(parts)
 
 
@@ -250,6 +295,385 @@ def _matched_pond_table(use: pd.DataFrame, spec: CctSpec) -> tuple[pd.DataFrame,
     return band, tbl
 
 
+def _attach_t_j_hat(df: pd.DataFrame) -> pd.DataFrame:
+    """Team-season mean perf (includes self) — same path as P3 roster plot."""
+    work = df.dropna(subset=["perf", "team_id", "season", "Y_draft"]).copy()
+    work[T_JHAT_COL] = work.groupby(["team_id", "season"], observed=True)["perf"].transform("mean")
+    return work
+
+
+def _tj_equal_width_edges(values: pd.Series, n_bins: int) -> np.ndarray:
+    s = pd.to_numeric(values, errors="coerce").dropna()
+    if s.empty:
+        return np.linspace(0.0, 1.0, int(n_bins) + 1)
+    lo, hi = float(s.min()), float(s.max())
+    if hi <= lo:
+        hi = lo + 1e-6
+    return np.linspace(lo, hi, int(n_bins) + 1)
+
+
+def _tj_piecewise_tail_edges(
+    values: pd.Series,
+    *,
+    n_low: int,
+    n_high: int,
+    split_q: float,
+) -> tuple[np.ndarray, float]:
+    """Coarse bins below split_q, fine equal-width bins on upper T̂_j tail."""
+    s = pd.to_numeric(values, errors="coerce").dropna()
+    if s.empty:
+        edges = np.linspace(0.0, 1.0, int(n_low) + int(n_high) + 1)
+        return edges, 0.5
+    split = float(s.quantile(float(split_q)))
+    lo, hi = float(s.min()), float(s.max())
+    if hi <= lo:
+        hi = lo + 1e-6
+    if split <= lo:
+        split = lo + (hi - lo) * 0.5
+    if split >= hi:
+        split = lo + (hi - lo) * 0.5
+    low_edges = np.linspace(lo, split, int(n_low) + 1)
+    high_edges = np.linspace(split, hi, int(n_high) + 1)[1:]
+    return np.concatenate([low_edges, high_edges]), split
+
+
+def _assign_tj_bin_labels(tj: pd.Series, edges: np.ndarray) -> pd.Series:
+    cut = pd.cut(
+        pd.to_numeric(tj, errors="coerce"),
+        bins=edges,
+        labels=False,
+        include_lowest=True,
+    )
+    return pd.Series(cut, index=tj.index, dtype="Int64")
+
+
+def _fixed_ai_tj_knbins_basename(spec: CctSpec) -> str:
+    pop = "dft" if spec.dft else "allt"
+    return (
+        f"CCT_draft_rate_fixedAi_Tj_knbins_"
+        f"min{int(spec.min_minutes)}_{str(spec.perf_metric).strip().lower()}_"
+        f"z{_z_slug(float(spec.ai_lo))}_{_z_slug(float(spec.ai_hi))}_{pop}"
+    )
+
+
+def _fixed_ai_tj_knbins_table(
+    use: pd.DataFrame,
+    spec: CctSpec,
+    *,
+    tj_binning: str,
+    tj_n_bins: int,
+    tj_n_low: int,
+    tj_n_high: int,
+    tail_split_q: float,
+) -> tuple[pd.DataFrame, pd.DataFrame, np.ndarray, dict]:
+    band = _attach_t_j_hat(use)
+    band = band.dropna(subset=["perf", T_JHAT_COL, "Y_draft"]).copy()
+    band = spec.apply_ai_band(band)
+
+    mode = str(tj_binning).strip().lower()
+    if mode == "piecewise_tail":
+        edges, split_tj = _tj_piecewise_tail_edges(
+            band[T_JHAT_COL],
+            n_low=int(tj_n_low),
+            n_high=int(tj_n_high),
+            split_q=float(tail_split_q),
+        )
+        binning_meta = {
+            "mode": "piecewise_tail",
+            "n_low_bins": int(tj_n_low),
+            "n_high_bins": int(tj_n_high),
+            "tail_split_quantile": float(tail_split_q),
+            "tail_split_tj": split_tj,
+            "note": (
+                f"Coarse {tj_n_low} bins below q={tail_split_q:g}, "
+                f"fine {tj_n_high} equal-width bins on upper T̂_j tail."
+            ),
+        }
+    else:
+        edges = _tj_equal_width_edges(band[T_JHAT_COL], int(tj_n_bins))
+        split_tj = float("nan")
+        binning_meta = {
+            "mode": "equal_width",
+            "n_bins": int(tj_n_bins),
+            "note": f"{tj_n_bins} equal-width bins on observed T̂_j within matched Â band.",
+        }
+
+    band["vent"] = _assign_tj_bin_labels(band[T_JHAT_COL], edges)
+    tj_lo, tj_hi = float(edges[0]), float(edges[-1])
+    tail_lo = tj_lo + TAIL_HIGHLIGHT_FRAC * (tj_hi - tj_lo)
+
+    rows = []
+    for vent, grp in band.dropna(subset=["vent"]).groupby("vent", observed=True):
+        v = int(vent)
+        n = int(len(grp))
+        drafts = int(pd.to_numeric(grp["Y_draft"], errors="coerce").fillna(0).sum())
+        rate = drafts / n if n else float("nan")
+        lo, hi = _wilson_ci(drafts, n)
+        elo, ehi = float(edges[v]), float(edges[v + 1])
+        rows.append(
+            {
+                "vent": v,
+                "bin_display": v + 1,
+                "n": n,
+                "drafts": drafts,
+                "draft_rate": rate,
+                "ci_lo": lo,
+                "ci_hi": hi,
+                "edge_lo": elo,
+                "edge_hi": ehi,
+                "edge_interval": f"[{elo:.4g}, {ehi:.4g})",
+                "T_j_mean": float(grp[T_JHAT_COL].mean()),
+                "T_j_median": float(grp[T_JHAT_COL].median()),
+                "high_tj_tail": bool(elo >= tail_lo),
+                "thin_cell": n < MIN_CELL_N_WARN,
+                "no_claim": n < MIN_CELL_N_CLAIM,
+            }
+        )
+    tbl = pd.DataFrame(rows).sort_values("vent").reset_index(drop=True)
+    binning_meta["tj_range"] = {"lo": tj_lo, "hi": tj_hi}
+    binning_meta["tail_highlight_tj_lo"] = tail_lo
+    binning_meta["n_edges"] = len(edges)
+    return band, tbl, edges, binning_meta
+
+
+def _p2b_knee_summary(tbl: pd.DataFrame) -> dict:
+    """Plateau vs high-T̂_j tail — Alex flat-then-down read (descriptive)."""
+    if tbl.empty:
+        return {"label": "knee_summary", "alex_downturn_visible": False}
+    n = len(tbl)
+    n_plateau = max(1, n // 2)
+    plateau = tbl.iloc[:n_plateau]
+    tail = tbl.iloc[max(0, n - 3) :]
+    plateau_rate = float(plateau["draft_rate"].mean())
+    tail_rate = float(tail["draft_rate"].mean())
+    last_rate = float(tbl.iloc[-1]["draft_rate"])
+    last_n = int(tbl.iloc[-1]["n"])
+    return {
+        "label": "knee_summary",
+        "plateau_bins_1idx": [int(x) for x in plateau["bin_display"].tolist()],
+        "tail_bins_1idx": [int(x) for x in tail["bin_display"].tolist()],
+        "plateau_mean_draft_rate": plateau_rate,
+        "tail_mean_draft_rate": tail_rate,
+        "last_bin_draft_rate": last_rate,
+        "last_bin_n": last_n,
+        "tail_below_plateau": bool(tail_rate < plateau_rate),
+        "last_bin_below_plateau": bool(last_rate < plateau_rate),
+        "alex_downturn_visible": bool(tail_rate < plateau_rate or last_rate < plateau_rate),
+    }
+
+
+def _write_tj_bins_csv(tbl: pd.DataFrame, path: Path) -> None:
+    cols = [
+        "vent",
+        "bin_display",
+        "n",
+        "drafts",
+        "draft_rate",
+        "ci_lo",
+        "ci_hi",
+        "edge_lo",
+        "edge_hi",
+        "edge_interval",
+        "T_j_mean",
+        "T_j_median",
+        "high_tj_tail",
+        "thin_cell",
+    ]
+    tbl[cols].to_csv(path, index=False, float_format="%.6g")
+    print(f"Wrote {path.relative_to(REPO)}")
+
+
+def plot_fixed_ai_tj_knbins(
+    spec: CctSpec,
+    tbl: pd.DataFrame,
+    band: pd.DataFrame,
+    out_png: Path,
+    *,
+    binning_meta: dict,
+    knee: dict,
+) -> None:
+    from gallery_mathtext import configure_matplotlib_mathtext
+
+    configure_matplotlib_mathtext()
+    seasons = seasons_label(spec.season_min, spec.season_max)
+    perf_label = str(spec.perf_metric).strip().upper()
+    pop_suffix = " · +DFT subsample" if spec.dft else ""
+
+    fig, ax = plt.subplots(figsize=(11.5, 5.5))
+    x = tbl["bin_display"].to_numpy(dtype=float)
+    y = tbl["draft_rate"].to_numpy(dtype=float)
+    yerr_lo = y - tbl["ci_lo"].to_numpy(dtype=float)
+    yerr_hi = tbl["ci_hi"].to_numpy(dtype=float) - y
+    colors = []
+    for _, row in tbl.iterrows():
+        if bool(row["thin_cell"]):
+            colors.append(THIN_COLOR)
+        elif bool(row["high_tj_tail"]):
+            colors.append(JACKAL_COLOR)
+        else:
+            colors.append(OTHER_COLOR)
+
+    ax.bar(x, y, color=colors, edgecolor="white", alpha=0.92, width=0.85)
+    ax.errorbar(
+        x,
+        y,
+        yerr=[yerr_lo, yerr_hi],
+        fmt="none",
+        ecolor="0.25",
+        capsize=2,
+        linewidth=0.8,
+    )
+
+    ax.set_xlabel(
+        r"$\hat{T}_j$ bin (team mean PPM $z$; includes self — not $\mathrm{poolq\_loo}$)",
+        fontsize=10,
+    )
+    ax.set_ylabel(r"Mean $Y_{\mathrm{draft}}$", fontsize=10)
+    mode = binning_meta.get("mode", "equal_width")
+    mode_note = (
+        f"piecewise tail ({binning_meta.get('n_low_bins')} + {binning_meta.get('n_high_bins')} bins)"
+        if mode == "piecewise_tail"
+        else f"{binning_meta.get('n_bins')} equal-width bins"
+    )
+    ax.set_title(
+        rf"CCT Priority 2b — draft rate at fixed $\hat{{A}}_i$ · MBB {seasons}\n"
+        rf"mg{spec.min_team_season_games} min{spec.min_minutes:g} · {perf_label} $z$ band "
+        rf"{spec.ai_band_label} · {mode_note}{pop_suffix}",
+        fontsize=10,
+    )
+    ax.set_xticks(x)
+    ax.grid(axis="y", alpha=0.25, linewidth=0.5)
+
+    compare = (
+        f"Plateau (low/mid bins): {100*knee['plateau_mean_draft_rate']:.1f}%\n"
+        f"Tail (last 3 bins): {100*knee['tail_mean_draft_rate']:.1f}%\n"
+        f"Last bin: {100*knee['last_bin_draft_rate']:.1f}% (n={knee['last_bin_n']:,})\n"
+        f"Downturn visible: {'YES' if knee['alex_downturn_visible'] else 'NO'}"
+    )
+    ax.text(0.02, 0.98, compare, transform=ax.transAxes, fontsize=8, va="top", family="monospace")
+
+    legend_handles = [
+        mpatches.Patch(facecolor=OTHER_COLOR, edgecolor="white", label="Lower/mid T̂_j bins"),
+        mpatches.Patch(facecolor=JACKAL_COLOR, edgecolor="white", label="High T̂_j tail"),
+        mpatches.Patch(facecolor=THIN_COLOR, edgecolor="white", label=f"Thin cell (n < {MIN_CELL_N_WARN})"),
+    ]
+    ax.legend(handles=legend_handles, loc="upper right", fontsize=8, framealpha=0.92)
+
+    note = (
+        rf"Band n={len(band):,} PS · drafts={int(band['Y_draft'].sum()):,} · "
+        rf"T̂_j range [{binning_meta['tj_range']['lo']:.3g}, {binning_meta['tj_range']['hi']:.3g}]"
+    )
+    fig.text(0.5, 0.01, note, ha="center", fontsize=8, color="0.35")
+    fig.tight_layout(rect=(0, 0.03, 1, 1))
+    fig.savefig(out_png, dpi=150, bbox_inches="tight")
+    plt.close(fig)
+    print(f"Wrote {out_png.relative_to(REPO)}")
+
+
+def run_fixed_ai_tj_knbins(
+    spec: CctSpec,
+    out_dir: Path,
+    *,
+    tj_binning: str = DEFAULT_P2B_TJ_BINNING,
+    tj_n_bins: int = 24,
+    tj_n_low: int = DEFAULT_P2B_TJ_N_LOW,
+    tj_n_high: int = DEFAULT_P2B_TJ_N_HIGH,
+    tail_split_q: float = DEFAULT_P2B_TAIL_SPLIT_Q,
+) -> Path:
+    if spec.ai_lo is None or spec.ai_hi is None:
+        raise SystemExit("P2b requires --ai-lo and --ai-hi (matched Â band).")
+
+    ensure_hero_dirs()
+    out_dir.mkdir(parents=True, exist_ok=True)
+    stem = _fixed_ai_tj_knbins_basename(spec)
+    out_png = out_dir / f"{stem}.png"
+    out_json = out_dir / f"{stem}.json"
+    out_csv = out_dir / f"{stem}_Tj_bins.csv"
+
+    use = _get_panel(spec)
+    band, tbl, edges, binning_meta = _fixed_ai_tj_knbins_table(
+        use,
+        spec,
+        tj_binning=tj_binning,
+        tj_n_bins=tj_n_bins,
+        tj_n_low=tj_n_low,
+        tj_n_high=tj_n_high,
+        tail_split_q=tail_split_q,
+    )
+    if tbl.empty:
+        raise SystemExit("No rows in matched Â band for P2b — check --ai-lo / --ai-hi")
+
+    knee = _p2b_knee_summary(tbl)
+    plot_fixed_ai_tj_knbins(spec, tbl, band, out_png, binning_meta=binning_meta, knee=knee)
+    _write_tj_bins_csv(tbl, out_csv)
+
+    meta = {
+        "diagnostic": "cct_fixed_ai_tj_knbins",
+        "date": date.today().isoformat(),
+        "plot": "fixed_ai_tj_knbins",
+        "axis": "T_j_hat",
+        "axis_note": "T̂_j = team-season mean perf z (includes self); not poolq_loo.",
+        "bdp_spec": f"mg{spec.min_team_season_games} min{spec.min_minutes:g} "
+        f"{seasons_label(spec.season_min, spec.season_max)}",
+        "population": spec.population_label,
+        "dft": bool(spec.dft),
+        "seasons": seasons_label(spec.season_min, spec.season_max),
+        "perf_metric": str(spec.perf_metric).strip().lower(),
+        "ai_lo": float(spec.ai_lo),
+        "ai_hi": float(spec.ai_hi),
+        "winsor": [spec.winsor_lo, spec.winsor_hi],
+        "min_minutes": float(spec.min_minutes),
+        "binning": binning_meta,
+        "bin_edges": [float(e) for e in edges],
+        "band_n": int(len(band)),
+        "total_drafts": int(band["Y_draft"].sum()),
+        "bins": tbl.to_dict(orient="records"),
+        "knee_summary": knee,
+        "png": out_png.name,
+        "bin_csv": out_csv.name,
+    }
+    out_json.write_text(json.dumps(meta, indent=2) + "\n", encoding="utf-8")
+    print(f"Wrote {out_json.relative_to(REPO)}")
+    if (
+        spec.dft
+        and float(spec.ai_lo) == ELITE_AI_LO
+        and float(spec.ai_hi) == ELITE_AI_HI
+        and float(spec.min_minutes) == 10.0
+        and str(spec.perf_metric).strip().lower() == "ppm"
+    ):
+        for src, name in (
+            (out_png, "CCT_draft_rate_fixedAi_Tj_knbins_dft.png"),
+            (out_json, "CCT_draft_rate_fixedAi_Tj_knbins_dft.json"),
+            (out_csv, "CCT_draft_rate_fixedAi_Tj_knbins_dft_Tj_bins.csv"),
+        ):
+            alias = out_dir / name
+            shutil.copy2(src, alias)
+            print(f"Wrote {alias.relative_to(REPO)} (canonical alias)")
+    print(
+        f"  P2b · plateau {100*knee['plateau_mean_draft_rate']:.1f}% · "
+        f"tail {100*knee['tail_mean_draft_rate']:.1f}% · "
+        f"downturn={'YES' if knee['alex_downturn_visible'] else 'NO'}"
+    )
+    return out_png
+
+
+def run_fixed_ai_tj_knbins_bundle(out_dir: Path, base: CctSpec, **kwargs) -> list[Path]:
+    """Primary (Alex deck) + locked-plan sensitivity cell."""
+    cells = [
+        replace(base, ai_lo=ELITE_AI_LO, ai_hi=ELITE_AI_HI, dft=True, min_minutes=10.0, perf_metric="ppm"),
+        replace(base, ai_lo=DEFAULT_AI_LO, ai_hi=DEFAULT_AI_HI, dft=True, min_minutes=20.0, perf_metric="ppm"),
+    ]
+    paths = []
+    for spec in cells:
+        print(
+            f"\n=== P2b · PPM z {spec.ai_band_label} · {spec.population_label} · "
+            f"min{spec.min_minutes:g} ===",
+            flush=True,
+        )
+        paths.append(run_fixed_ai_tj_knbins(spec, out_dir, **kwargs))
+    return paths
+
+
 def _pool_summary(tbl: pd.DataFrame, vents: tuple[int, ...], label: str) -> dict:
     sub = tbl.loc[tbl["vent"].isin(vents)]
     n = int(sub["n"].sum())
@@ -268,14 +692,101 @@ def _pool_summary(tbl: pd.DataFrame, vents: tuple[int, ...], label: str) -> dict
     }
 
 
-def _bar_color_for_vent(vent: int, thin: bool) -> str:
+def _bar_color_for_vent(
+    vent: int,
+    thin: bool,
+    *,
+    squid_vents: tuple[int, ...],
+    jackal_vents: tuple[int, ...],
+) -> str:
     if thin:
         return THIN_COLOR
-    if vent in SQUID_VENT:
+    if vent in squid_vents:
         return SQUID_COLOR
-    if vent in JACKAL_VENT:
+    if vent in jackal_vents:
         return JACKAL_COLOR
     return OTHER_COLOR
+
+
+def _draw_matched_pond_on_ax(
+    ax,
+    spec: CctSpec,
+    tbl: pd.DataFrame,
+    band: pd.DataFrame,
+    *,
+    panel_title: str | None = None,
+    show_legend: bool = False,
+    show_band_note: bool = True,
+) -> dict:
+    """Draw one matched-pond panel; return squid/jackal summary dicts."""
+    squid_vents, jackal_vents = _proxy_ventiles(spec.n_bins)
+    squid = _pool_summary(tbl, squid_vents, "Squid proxy (mid pond)")
+    jackal = _pool_summary(tbl, jackal_vents, "Jackal proxy (top pond)")
+
+    x = tbl["bin_display"].to_numpy(dtype=float)
+    y = tbl["draft_rate"].to_numpy(dtype=float)
+    yerr_lo = y - tbl["ci_lo"].to_numpy(dtype=float)
+    yerr_hi = tbl["ci_hi"].to_numpy(dtype=float) - y
+    colors = [
+        _bar_color_for_vent(
+            int(v),
+            bool(thin),
+            squid_vents=squid_vents,
+            jackal_vents=jackal_vents,
+        )
+        for v, thin in zip(tbl["vent"], tbl["thin_cell"], strict=True)
+    ]
+    ax.bar(x, y, color=colors, edgecolor="white", alpha=0.92, width=0.85)
+    ax.errorbar(
+        x,
+        y,
+        yerr=[yerr_lo, yerr_hi],
+        fmt="none",
+        ecolor="0.25",
+        capsize=2,
+        linewidth=0.8,
+    )
+
+    ax.set_xlabel(_poolq_axis_label(spec.n_bins), fontsize=9)
+    ax.set_ylabel(r"Mean $Y_{\mathrm{draft}}$", fontsize=9)
+    if panel_title:
+        ax.set_title(panel_title, fontsize=10, pad=6)
+    ax.set_xticks(x)
+    ax.grid(axis="y", alpha=0.25, linewidth=0.5)
+
+    cct_holds = squid["draft_rate"] > jackal["draft_rate"]
+    compare = (
+        f"Squid: {100*squid['draft_rate']:.1f}% (n={squid['n']:,})\n"
+        f"Jackal: {100*jackal['draft_rate']:.1f}% (n={jackal['n']:,})\n"
+        f"CCT: {'YES' if cct_holds else 'NO'}"
+    )
+    ax.text(0.02, 0.98, compare, transform=ax.transAxes, fontsize=7, va="top", family="monospace")
+
+    if show_legend:
+        legend_handles = [
+            mpatches.Patch(facecolor=SQUID_COLOR, edgecolor="white", label="Squid (mid pond)"),
+            mpatches.Patch(facecolor=JACKAL_COLOR, edgecolor="white", label="Jackal (top pond)"),
+            mpatches.Patch(facecolor=OTHER_COLOR, edgecolor="white", label="Other ventiles"),
+            mpatches.Patch(
+                facecolor=THIN_COLOR,
+                edgecolor="white",
+                label=f"Thin cell (n < {MIN_CELL_N_WARN})",
+            ),
+        ]
+        ax.legend(handles=legend_handles, loc="upper right", fontsize=7, framealpha=0.92)
+
+    if show_band_note:
+        ax.text(
+            0.98,
+            0.02,
+            rf"Band n={len(band):,} · drafts={int(band['Y_draft'].sum()):,}",
+            transform=ax.transAxes,
+            fontsize=7,
+            ha="right",
+            va="bottom",
+            color="0.35",
+        )
+    return {"squid": squid, "jackal": jackal, "cct": cct_holds}
 
 
 def plot_matched_pond(
@@ -290,65 +801,113 @@ def plot_matched_pond(
     seasons = seasons_label(spec.season_min, spec.season_max)
     perf_label = str(spec.perf_metric).strip().upper()
     pop_suffix = " · +DFT subsample" if spec.dft else ""
-    squid = _pool_summary(tbl, SQUID_VENT, "Squid proxy (mid pond)")
-    jackal = _pool_summary(tbl, JACKAL_VENT, "Jackal proxy (top pond)")
 
     fig, ax = plt.subplots(figsize=(10.5, 5.0))
-    x = tbl["bin_display"].to_numpy(dtype=float)
-    y = tbl["draft_rate"].to_numpy(dtype=float)
-    yerr_lo = y - tbl["ci_lo"].to_numpy(dtype=float)
-    yerr_hi = tbl["ci_hi"].to_numpy(dtype=float) - y
-    colors = [
-        _bar_color_for_vent(int(v), bool(thin))
-        for v, thin in zip(tbl["vent"], tbl["thin_cell"], strict=True)
-    ]
-    ax.bar(x, y, color=colors, edgecolor="white", alpha=0.92, width=0.85)
-    ax.errorbar(
-        x,
-        y,
-        yerr=[yerr_lo, yerr_hi],
-        fmt="none",
-        ecolor="0.25",
-        capsize=2,
-        linewidth=0.8,
+    _draw_matched_pond_on_ax(
+        ax,
+        spec,
+        tbl,
+        band,
+        panel_title=(
+            rf"CCT Priority 1 — draft rate at fixed $\hat{{A}}_i$ · MBB {seasons}\n"
+            rf"mg{spec.min_team_season_games} min{spec.min_minutes:g} · {perf_label} $z$ band "
+            rf"{spec.ai_band_label} · winsor {spec.winsor_lo:g}–{spec.winsor_hi:g}{pop_suffix}"
+        ),
+        show_legend=True,
+        show_band_note=False,
     )
-
-    ax.set_xlabel(r"$\mathrm{poolq\_loo}$ ventile within matched $\hat{A}_i$ band (1 = lowest pond)")
-    ax.set_ylabel(r"Mean $Y_{\mathrm{draft}}$")
-    ax.set_title(
-        rf"CCT Priority 1 — draft rate at fixed $\hat{{A}}_i$ · MBB {seasons}\n"
-        rf"mg{spec.min_team_season_games} min{spec.min_minutes:g} · {perf_label} $z$ band "
-        rf"{spec.ai_band_label} · winsor {spec.winsor_lo:g}–{spec.winsor_hi:g}{pop_suffix}",
-        fontsize=10,
+    ax.set_xlabel(
+        r"$\mathrm{poolq\_loo}$ ventile within matched $\hat{A}_i$ band (1 = lowest pond)"
     )
-    ax.set_xticks(x)
-    ax.grid(axis="y", alpha=0.25, linewidth=0.5)
-
-    cct_holds = squid["draft_rate"] > jackal["draft_rate"]
-    compare = (
-        f"Squid: {100*squid['draft_rate']:.2f}% (n={squid['n']:,})\n"
-        f"Jackal: {100*jackal['draft_rate']:.2f}% (n={jackal['n']:,})\n"
-        f"CCT signature (Squid > Jackal): {'YES' if cct_holds else 'NO'}"
-    )
-    ax.text(0.02, 0.98, compare, transform=ax.transAxes, fontsize=8, va="top", family="monospace")
-
-    legend_handles = [
-        mpatches.Patch(facecolor=SQUID_COLOR, edgecolor="white", label="Squid proxy (mid pond)"),
-        mpatches.Patch(facecolor=JACKAL_COLOR, edgecolor="white", label="Jackal proxy (top pond)"),
-        mpatches.Patch(facecolor=OTHER_COLOR, edgecolor="white", label="Other ventiles"),
-        mpatches.Patch(facecolor=THIN_COLOR, edgecolor="white", label=f"Thin cell (n < {MIN_CELL_N_WARN})"),
-    ]
-    ax.legend(handles=legend_handles, loc="upper right", fontsize=8, framealpha=0.92)
-
-    note = (
-        rf"Band n={len(band):,} PS · total drafts={int(band['Y_draft'].sum()):,}"
-    )
+    note = rf"Band n={len(band):,} PS · total drafts={int(band['Y_draft'].sum()):,}"
     fig.text(0.5, 0.01, note, ha="center", fontsize=8, color="0.35")
 
     fig.tight_layout(rect=(0, 0.03, 1, 1))
     fig.savefig(out_png, dpi=150, bbox_inches="tight")
     plt.close(fig)
     print(f"Wrote {out_png.relative_to(REPO)}")
+
+
+def run_matched_pond_triptych(
+    base: CctSpec,
+    out_dir: Path,
+    *,
+    panels: tuple[tuple[float, float, bool, str], ...] = (
+        (1.0, 2.0, False, "A · PPM z [1, 2] · full panel"),
+        (2.0, 3.0, False, "B · PPM z [2, 3] · full panel"),
+        (2.0, 3.0, True, "C · PPM z [2, 3] · +DFT"),
+    ),
+) -> Path:
+    """Three-panel deck slide: band sign flip + draft-ecosystem zoom."""
+    from gallery_mathtext import configure_matplotlib_mathtext
+
+    ensure_hero_dirs()
+    out_dir.mkdir(parents=True, exist_ok=True)
+    stem = _triptych_stem(base)
+    out_png = out_dir / f"{stem}.png"
+    out_json = out_dir / f"{stem}.json"
+    squid_vents, jackal_vents = _proxy_ventiles(base.n_bins)
+
+    configure_matplotlib_mathtext()
+    seasons = seasons_label(base.season_min, base.season_max)
+    fig, axes = plt.subplots(1, 3, figsize=(16.5, 5.2), sharey=False)
+
+    panel_meta = []
+    for ax, (ai_lo, ai_hi, dft, title) in zip(axes, panels, strict=True):
+        spec = replace(base, ai_lo=ai_lo, ai_hi=ai_hi, dft=dft, perf_metric="ppm")
+        use = _get_panel(spec)
+        band, tbl = _matched_pond_table(use, spec)
+        if tbl.empty:
+            raise SystemExit(f"No rows for panel {title!r}")
+        summary = _draw_matched_pond_on_ax(
+            ax,
+            spec,
+            tbl,
+            band,
+            panel_title=title,
+            show_legend=(ax is axes[-1]),
+        )
+        panel_meta.append(
+            {
+                "panel": title,
+                "ai_lo": ai_lo,
+                "ai_hi": ai_hi,
+                "dft": dft,
+                "band_n": int(len(band)),
+                "total_drafts": int(band["Y_draft"].sum()),
+                "squid_proxy": summary["squid"],
+                "jackal_proxy": summary["jackal"],
+                "cct_signature_squid_gt_jackal": bool(summary["cct"]),
+            }
+        )
+
+    fig.suptitle(
+        rf"CCT — matched pond at fixed $\hat{{A}}_i$ (PPM · mg{base.min_team_season_games} "
+        rf"min{base.min_minutes:g} · MBB {seasons} · {base.n_bins} quantile bins · "
+        rf"winsor {base.winsor_lo:g}–{base.winsor_hi:g})",
+        fontsize=12,
+        y=1.02,
+    )
+    fig.tight_layout(rect=(0, 0, 1, 0.96))
+    fig.savefig(out_png, dpi=150, bbox_inches="tight")
+    plt.close(fig)
+    print(f"Wrote {out_png.relative_to(REPO)}")
+
+    payload = {
+        "diagnostic": "cct_matched_pond_triptych",
+        "date": date.today().isoformat(),
+        "plot": "matched_pond_triptych",
+        "bdp_spec": f"mg{base.min_team_season_games} min{base.min_minutes:g} {seasons}",
+        "perf_metric": "ppm",
+        "n_bins": base.n_bins,
+        "squid_ventiles_0idx": list(squid_vents),
+        "jackal_ventiles_0idx": list(jackal_vents),
+        "panels": panel_meta,
+        "png": out_png.name,
+    }
+    out_json.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+    print(f"Wrote {out_json.relative_to(REPO)}")
+    return out_png
 
 
 def run_matched_pond(spec: CctSpec, out_dir: Path, *, write_readme: bool = True) -> Path:
@@ -365,8 +924,9 @@ def run_matched_pond(spec: CctSpec, out_dir: Path, *, write_readme: bool = True)
 
     plot_matched_pond(spec, tbl, band, out_png)
 
-    squid = _pool_summary(tbl, SQUID_VENT, "Squid proxy (mid pond)")
-    jackal = _pool_summary(tbl, JACKAL_VENT, "Jackal proxy (top pond)")
+    squid_vents, jackal_vents = _proxy_ventiles(spec.n_bins)
+    squid = _pool_summary(tbl, squid_vents, "Squid proxy (mid pond)")
+    jackal = _pool_summary(tbl, jackal_vents, "Jackal proxy (top pond)")
     meta = {
         "diagnostic": "cct_matched_pond",
         "date": date.today().isoformat(),
@@ -792,6 +1352,8 @@ def _resolve_ai_band(args: argparse.Namespace, plot: str) -> tuple[float | None,
         raise SystemExit("Pass both --ai-lo and --ai-hi, or neither.")
     if has_lo and has_hi:
         return float(args.ai_lo), float(args.ai_hi)
+    if plot == "fixed_ai_tj_knbins":
+        return ELITE_AI_LO, ELITE_AI_HI
     if plot in ("matched_pond", "p1_grid") and plot == "matched_pond":
         return DEFAULT_AI_LO, DEFAULT_AI_HI
     return None, None
@@ -820,7 +1382,7 @@ def main() -> None:
     add_window_args(parser)
     parser.add_argument(
         "--plot",
-        choices=("matched_pond", "roster_rank_tj", "p1_grid"),
+        choices=("matched_pond", "matched_pond_triptych", "fixed_ai_tj_knbins", "roster_rank_tj", "p1_grid"),
         default="matched_pond",
         help="Figure family (P1, P3, or full P1 grid).",
     )
@@ -836,6 +1398,41 @@ def main() -> None:
         "--dft",
         action="store_true",
         help="+DFT subsample: teams with ≥1 draftee in window (all roster PS, not drafted-only).",
+    )
+    parser.add_argument(
+        "--tj-binning",
+        choices=("piecewise_tail", "equal_width"),
+        default=DEFAULT_P2B_TJ_BINNING,
+        help="P2b: T̂_j binning within matched Â band (default piecewise_tail).",
+    )
+    parser.add_argument(
+        "--tj-n-bins",
+        type=int,
+        default=24,
+        help="P2b equal_width mode: number of T̂_j bins.",
+    )
+    parser.add_argument(
+        "--tj-n-low",
+        type=int,
+        default=DEFAULT_P2B_TJ_N_LOW,
+        help="P2b piecewise_tail: coarse bins below split.",
+    )
+    parser.add_argument(
+        "--tj-n-high",
+        type=int,
+        default=DEFAULT_P2B_TJ_N_HIGH,
+        help="P2b piecewise_tail: fine bins on upper T̂_j tail.",
+    )
+    parser.add_argument(
+        "--tj-tail-split-q",
+        type=float,
+        default=DEFAULT_P2B_TAIL_SPLIT_Q,
+        help="P2b piecewise_tail: quantile cut between coarse and fine regions.",
+    )
+    parser.add_argument(
+        "--p2b-single",
+        action="store_true",
+        help="P2b: run current spec only (default: primary + sensitivity bundle).",
     )
     parser.add_argument(
         "--out-dir",
@@ -856,8 +1453,40 @@ def main() -> None:
     )
     if args.plot == "matched_pond":
         run_matched_pond(spec, out_dir)
+    elif args.plot == "matched_pond_triptych":
+        _panel_cache.clear()
+        base = replace(
+            spec,
+            ai_lo=None,
+            ai_hi=None,
+            dft=False,
+            min_minutes=float(args.min_minutes),
+            perf_metric="ppm",
+        )
+        run_matched_pond_triptych(base, out_dir)
+        if int(args.n_bins) != 16:
+            print(f"  (Squid vents {_proxy_ventiles(args.n_bins)[0]}, "
+                  f"Jackal vents {_proxy_ventiles(args.n_bins)[1]})")
     elif args.plot == "roster_rank_tj":
         run_roster_rank_tj(spec, out_dir)
+    elif args.plot == "fixed_ai_tj_knbins":
+        _panel_cache.clear()
+        tj_kw = dict(
+            tj_binning=str(args.tj_binning),
+            tj_n_bins=int(args.tj_n_bins),
+            tj_n_low=int(args.tj_n_low),
+            tj_n_high=int(args.tj_n_high),
+            tail_split_q=float(args.tj_tail_split_q),
+        )
+        if args.p2b_single:
+            if not spec.dft:
+                spec = replace(spec, dft=True)
+            if args.min_minutes == DEFAULT_MIN_MINUTES and spec.ai_lo == ELITE_AI_LO:
+                spec = replace(spec, min_minutes=10.0)
+            run_fixed_ai_tj_knbins(spec, out_dir, **tj_kw)
+        else:
+            base = replace(spec, dft=True, perf_metric="ppm")
+            run_fixed_ai_tj_knbins_bundle(out_dir, base, **tj_kw)
     elif args.plot == "p1_grid":
         _panel_cache.clear()
         base = replace(spec, ai_lo=None, ai_hi=None)

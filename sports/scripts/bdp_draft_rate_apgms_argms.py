@@ -232,6 +232,46 @@ def _count_weighted_bar_colors(counts: np.ndarray, *, cmap_name: str) -> list:
     return [cmap(float(v)) for v in levels]
 
 
+def _label_color_for_bar(facecolor) -> str:
+    rgba = facecolor if len(facecolor) >= 3 else (0.5, 0.5, 0.5, 1.0)
+    r, g, b = float(rgba[0]), float(rgba[1]), float(rgba[2])
+    lum = 0.299 * r + 0.587 * g + 0.114 * b
+    return "0.15" if lum > 0.62 else "white"
+
+
+def _annotate_bin_n(
+    ax,
+    x: np.ndarray,
+    y: np.ndarray,
+    counts: np.ndarray,
+    bar_colors: list | None = None,
+    *,
+    rotation: float = 90.0,
+    y_frac: float = 0.10,
+) -> None:
+    """Label each bar with bin population on the bar face (lower third)."""
+    for i, (xi, yi, n) in enumerate(zip(x, y, counts, strict=True)):
+        ni = int(n)
+        if ni <= 0 or float(yi) <= 0:
+            continue
+        y_pos = max(float(yi) * y_frac, 0.0015)
+        txt_color = "white"
+        if bar_colors is not None and i < len(bar_colors):
+            txt_color = _label_color_for_bar(bar_colors[i])
+        ax.text(
+            xi,
+            y_pos,
+            f"{ni:,}",
+            ha="center",
+            va="bottom",
+            fontsize=7,
+            rotation=rotation,
+            color=txt_color,
+            fontweight="bold",
+            clip_on=True,
+        )
+
+
 def build_figure(
     spec,
     metric_key: str,
@@ -248,7 +288,7 @@ def build_figure(
     player_xlabel, team_xlabel = _xlabels(metric_key, binning)
     configure_matplotlib_mathtext()
     fig, axes = plt.subplots(1, 2, figsize=figsize)
-    count_weighted = str(binning).strip().lower() == "equal_width"
+    equal_width = str(binning).strip().lower() == "equal_width"
 
     for ax, tbl, color, xlabel, title_tmpl, cmap_name in (
         (
@@ -270,11 +310,13 @@ def build_figure(
     ):
         x = tbl["vent"].to_numpy(dtype=float) + 1
         y = tbl["draft_rate"].to_numpy(dtype=float)
-        if count_weighted:
-            bar_colors = _count_weighted_bar_colors(tbl["n"].to_numpy(), cmap_name=cmap_name)
+        counts = tbl["n"].to_numpy(dtype=int)
+        if equal_width:
+            bar_colors = _count_weighted_bar_colors(counts, cmap_name=cmap_name)
             ax.bar(x, y, color=bar_colors, edgecolor="white", linewidth=0.6, alpha=0.95)
         else:
-            ax.bar(x, y, color=color, edgecolor="white", alpha=0.9)
+            bar_colors = None
+            ax.bar(x, y, color=color, edgecolor="white", linewidth=0.6, alpha=0.9)
         ax.set_xlabel(xlabel, fontsize=10)
         ax.set_ylabel(r"Mean $Y_{\mathrm{draft}}$", fontsize=10)
         ax.set_title(title_tmpl.format(n=panel_n), fontsize=11, pad=6)
@@ -282,6 +324,8 @@ def build_figure(
         ax.grid(axis="y", alpha=0.25, linewidth=0.5)
         ymax = float(y.max()) if len(y) else 0.05
         ax.set_ylim(0, max(0.05, ymax * 1.15))
+        if equal_width:
+            _annotate_bin_n(ax, x, y, counts, bar_colors, rotation=90)
 
     fig.suptitle(
         rf"BDP — draft rate vs {meta['title_short']} (player + team mean bins)",
@@ -292,8 +336,8 @@ def build_figure(
     sub2 = (
         f"{sub2} · {_binning_label(binning)} · n={panel_n:,} PS · drafts={total_drafts:,}"
     )
-    if count_weighted:
-        sub2 += " · bar shade ∝ bin n (dark = more PS)"
+    if equal_width:
+        sub2 += " · bar shade ∝ bin n (dark = more PS) · n on bar face"
     fig.text(0.5, 0.98, sub1, ha="center", va="top", fontsize=9, color="0.25")
     fig.text(0.5, 0.955, sub2, ha="center", va="top", fontsize=9, color="0.25")
     fig.tight_layout(rect=(0, 0, 1, 0.92))

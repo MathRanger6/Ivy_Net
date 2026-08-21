@@ -54,6 +54,8 @@ from bdp_ai_tj_distributions import (
 from hero_gallery_paths import BASIC_DATA_PLOTS, ensure_hero_dirs
 
 BAR_COLOR = "steelblue"
+PLAYER_BAR_COLOR = "seagreen"
+TEAM_BAR_COLOR = "steelblue"
 DEFAULT_SPEC = "mg10 min1 11_21"
 
 METRICS = {
@@ -157,22 +159,27 @@ def build_figure(
     bin_width = edges[1] - edges[0]
 
     fig, axes = plt.subplots(1, 2, figsize=figsize, sharex=True)
+    bar_colors = (
+        (PLAYER_BAR_COLOR, TEAM_BAR_COLOR)
+        if metric_key in ("apgms", "argms")
+        else (BAR_COLOR, BAR_COLOR)
+    )
     panels = [
-        (axes[0], player, player_dft, meta["player_title"].format(n=player.size)),
-        (axes[1], team, team_dft, meta["team_title"].format(n=team.size)),
+        (axes[0], player, player_dft, meta["player_title"].format(n=player.size), bar_colors[0]),
+        (axes[1], team, team_dft, meta["team_title"].format(n=team.size), bar_colors[1]),
     ]
 
     legend_handles = legend_labels = None
-    for ax, values, values_dft, title in panels:
+    for ax, values, values_dft, title, bar_color in panels:
         counts, _ = np.histogram(values, bins=edges)
         ax.bar(
             centers,
             counts,
             width=bin_width * 0.98,
             align="center",
-            color=BAR_COLOR,
+            color=bar_color,
             alpha=BAR_ALPHA,
-            edgecolor=BAR_COLOR,
+            edgecolor=bar_color,
             linewidth=0.3,
             label="without DFT",
         )
