@@ -1,0 +1,46 @@
+{
+  "diagnostic": "bdp_season_minutes_distributions",
+  "date": "2026-08-21",
+  "metric": "season_minutes",
+  "definitions": {
+    "apgms": "season minutes / games with minutes > 0",
+    "argms": "season minutes / games rostered (incl. DNP)",
+    "season_minutes": "player-season cumulative ESPN box minutes",
+    "team_mean": "mean of player-season values within (team_id, season)"
+  },
+  "bdp_spec": "mg10 min0 11_21",
+  "seasons": "2011-2021",
+  "player": {
+    "n": 59283,
+    "mean": 412.49903007607577,
+    "std": 371.5927603898497,
+    "min": 0.0,
+    "max": 1543.0
+  },
+  "team_mean": {
+    "n": 3842,
+    "mean": 423.8203711511435,
+    "std": 80.626293480713,
+    "min": 104.34782608695652,
+    "max": 763.8888888888889
+  },
+  "overlay_dft": true,
+  "png": "BDP_season_minutes_mg10_min0_11_21.png",
+  "dft_overlay": {
+    "player": {
+      "n": 22944,
+      "mean": 427.6822262900976,
+      "std": 390.0364413266488,
+      "min": 0.0,
+      "max": 1543.0
+    },
+    "team_mean": {
+      "n": 1494,
+      "mean": 438.62315330305825,
+      "std": 80.24165346183628,
+      "min": 144.1860465116279,
+      "max": 762.5
+    },
+    "n_player_season_rows": 22944
+  }
+}

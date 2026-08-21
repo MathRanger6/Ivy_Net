@@ -158,6 +158,9 @@ def build_from_box(cfg: Any) -> pd.DataFrame:
     df_g, qc_report = _apply_box_qc(df_g, cfg)
     last_box_qc_report = qc_report
 
+    df_g = df_g.copy()
+    df_g["_played"] = pd.to_numeric(df_g["minutes"], errors="coerce").fillna(0.0) > 0.0
+
     agg = (
         df_g.groupby(["athlete_id", "season", "team_id"], as_index=False)
         .agg(
@@ -165,8 +168,20 @@ def build_from_box(cfg: Any) -> pd.DataFrame:
             points=("points", "sum"),
             team_short_display_name=("team_short_display_name", "last"),
             athlete_display_name=("athlete_display_name", "last"),
-            games=("minutes", "count"),
+            games_rostered=("game_id", "count"),
+            games_played=("_played", "sum"),
         )
+    )
+    agg["games"] = agg["games_rostered"]  # legacy alias
+    agg["apgms"] = np.where(
+        agg["games_played"] > 0,
+        agg["minutes"] / agg["games_played"],
+        np.nan,
+    )
+    agg["argms"] = np.where(
+        agg["games_rostered"] > 0,
+        agg["minutes"] / agg["games_rostered"],
+        np.nan,
     )
     agg["ppm"] = np.where(agg["minutes"] > 0, agg["points"] / agg["minutes"], np.nan)
 
