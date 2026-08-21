@@ -1,0 +1,52 @@
+{
+  "diagnostic": "bdp_ai_tj_distributions",
+  "date": "2026-08-20",
+  "bdp_spec": "FP 11_21",
+  "perf_metric": "bpm",
+  "seasons": "2011-2021",
+  "qc": "drop_dash_placeholder_names=True",
+  "min_team_season_games": 0,
+  "min_minutes": 0.0,
+  "dft": false,
+  "overlay_dft": true,
+  "perf": "BPM \u2014 Box Plus/Minus (Sports-Reference merge); LOO teammate mean on perf z within season (no poolq winsor)",
+  "png": "BDP_Ai_Tj_FP_11_21_bpm.png",
+  "A_i_hat": {
+    "n": 50973,
+    "mean": 1.1151672230555003e-17,
+    "std": 0.9998920939172161,
+    "min": -19.190996610886238,
+    "max": 28.9740754283218
+  },
+  "T_j_hat": {
+    "n": 3842,
+    "mean": 0.0038695802447246135,
+    "std": 0.3903782541403767,
+    "min": -2.072362074232542,
+    "max": 1.674440184001402
+  },
+  "n_team_seasons": 3842,
+  "theta_K_over_N": {
+    "n_accepted": 1102,
+    "n_total": 50973,
+    "K_over_N": 0.021619288643007082
+  },
+  "dft_overlay": {
+    "A_i_hat": {
+      "n": 19955,
+      "mean": 0.0,
+      "std": 0.9997243418609683,
+      "min": -14.483459532628451,
+      "max": 14.039420155313586
+    },
+    "T_j_hat": {
+      "n": 1494,
+      "mean": 0.0025232926963217515,
+      "std": 0.3412134307521794,
+      "min": -1.1521433030820591,
+      "max": 1.2438430200626727
+    },
+    "n_player_seasons": 19955,
+    "n_team_seasons": 1494
+  }
+}

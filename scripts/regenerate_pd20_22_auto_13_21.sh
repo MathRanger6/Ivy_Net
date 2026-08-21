@@ -36,12 +36,12 @@ RHO_SEEDS="${RHO_SEEDS:-50}"
 RHO_JOBS="${RHO_JOBS:-8}"
 
 slide_flags=("${SLIDE_WIN[@]}")
-work_flags=("${SEASON_WIN[@]}")
+plot_flags=()
 if [[ "$SLIDES_ONLY" == "1" ]]; then
   slide_flags+=(--slides-only)
 fi
 if [[ "$PLOT_ONLY" == "1" ]]; then
-  work_flags+=(--plot-only)
+  plot_flags=(--plot-only)
 fi
 
 run_py() {
@@ -54,21 +54,26 @@ echo "PD20–22 AUTO regeneration · window 2013–2021 · suffix _13_21"
 echo "  SLIDES_ONLY=$SLIDES_ONLY  PLOT_ONLY=$PLOT_ONLY  RHO_SEEDS=$RHO_SEEDS"
 
 if [[ "$SLIDES_ONLY" != "1" ]]; then
-  echo ""
-  echo "--- Phase 1: PD20 temperature (figures) ---"
-  run_py sports/scripts/grandchild_temperature_select_sweep.py "${work_flags[@]}"
-  run_py sports/scripts/grandchild_temperature_cold_limit_diagnostic.py "${work_flags[@]}"
+  if [[ "$PLOT_ONLY" == "1" ]]; then
+    echo ""
+    echo "--- Phase 1: skipped (PLOT_ONLY — temperature scripts have no --plot-only) ---"
+  else
+    echo ""
+    echo "--- Phase 1: PD20 temperature (figures) ---"
+    run_py sports/scripts/grandchild_temperature_select_sweep.py "${SEASON_WIN[@]}"
+    run_py sports/scripts/grandchild_temperature_cold_limit_diagnostic.py "${SEASON_WIN[@]}"
+  fi
 
   echo ""
   echo "--- Phase 2: PD22 panel backup (figures) ---"
-  run_py sports/scripts/pd22_raw_roster_size_distribution.py --before-qc-only "${work_flags[@]}"
-  run_py sports/scripts/pd22_team_season_games_count.py "${work_flags[@]}"
-  run_py sports/scripts/pd22_team_season_games_count.py --after-qc-only "${work_flags[@]}"
-  run_py sports/scripts/pd22_raw_roster_size_distribution.py --after-qc-only "${work_flags[@]}"
-  run_py sports/scripts/pd22_espn_coverage_by_season.py "${work_flags[@]}"
-  run_py sports/scripts/pd22_drafted_minutes_audit.py "${work_flags[@]}"
-  run_py sports/scripts/pd22_raw_minutes_distribution.py "${work_flags[@]}"
-  run_py sports/scripts/pd22_ppm_distribution.py "${work_flags[@]}"
+  run_py sports/scripts/pd22_raw_roster_size_distribution.py --before-qc-only "${SEASON_WIN[@]}" "${plot_flags[@]}"
+  run_py sports/scripts/pd22_team_season_games_count.py "${SEASON_WIN[@]}" "${plot_flags[@]}"
+  run_py sports/scripts/pd22_team_season_games_count.py --after-qc-only "${SEASON_WIN[@]}" "${plot_flags[@]}"
+  run_py sports/scripts/pd22_raw_roster_size_distribution.py --after-qc-only "${SEASON_WIN[@]}" "${plot_flags[@]}"
+  run_py sports/scripts/pd22_espn_coverage_by_season.py "${SEASON_WIN[@]}" "${plot_flags[@]}"
+  run_py sports/scripts/pd22_drafted_minutes_audit.py "${SEASON_WIN[@]}" "${plot_flags[@]}"
+  run_py sports/scripts/pd22_raw_minutes_distribution.py "${SEASON_WIN[@]}" "${plot_flags[@]}"
+  run_py sports/scripts/pd22_ppm_distribution.py "${SEASON_WIN[@]}" "${plot_flags[@]}"
 
   echo ""
   echo "--- Phase 3: PD21 ρ calibration (slow — bracket search) ---"
@@ -82,12 +87,17 @@ if [[ "$SLIDES_ONLY" != "1" ]]; then
 
   echo ""
   echo "--- Phase 4: PD22 policy + overlap (figures) ---"
-  run_py sports/scripts/pd22_ppm_zero_ability_distribution.py "${work_flags[@]}"
-  run_py sports/scripts/pd22_ppm_zero_hsort_mechanism.py "${work_flags[@]}"
-  run_py sports/scripts/pd22_panel_policy_compare.py "${work_flags[@]}"
-  run_py sports/scripts/pd22_interval_overlap_season.py --season 2012 "${work_flags[@]}"
-  run_py sports/scripts/pd22_interval_overlap_season.py --season 2013 "${work_flags[@]}"
+  run_py sports/scripts/pd22_ppm_zero_ability_distribution.py "${SEASON_WIN[@]}" "${plot_flags[@]}"
+  run_py sports/scripts/pd22_ppm_zero_hsort_mechanism.py "${SEASON_WIN[@]}" "${plot_flags[@]}"
+  run_py sports/scripts/pd22_panel_policy_compare.py "${SEASON_WIN[@]}" "${plot_flags[@]}"
+  run_py sports/scripts/pd22_interval_overlap_season.py --season 2012 "${SEASON_WIN[@]}" "${plot_flags[@]}"
+  run_py sports/scripts/pd22_interval_overlap_season.py --season 2013 "${SEASON_WIN[@]}" "${plot_flags[@]}"
 fi
+
+echo ""
+echo "--- Phase 4b: Pass A hero (empirical inverted-U, 2013–2021) ---"
+run_py sports/scripts/pass_a_empirical_bundle.py "${SEASON_WIN[@]}"
+run_py sports/scripts/build_pass_abc_slides.py "${SLIDE_WIN[@]}"
 
 echo ""
 echo "--- Phase 5: AUTO slide decks ---"

@@ -4,7 +4,7 @@
 
 | Setting | Rung | Model / empirical quantity | Column / object | Axis or outcome | v1 claim |
 |---------|------|--------------------------|-----------------|-----------------|----------|
-| Basketball | 1 | Empirical LOO pool quality | `poolq_loo` | Binned draft rate vs LOO mean teammate perf | Inverted-U stylized fact |
+| Basketball | 1 | Empirical LOO pool quality | `poolq_loo` | Binned draft rate vs LOO mean teammate perf | **POST-QC:** middle rise + flat elite tail (Jul pre-QC dip = sensitivity only) |
 | Basketball | 2.5 | Team quality vs congestion | `poolq_loo` vs `crowding_smooth` | Separate measurement columns | PD12 P3 model-guided features |
 | Basketball | 2 | Generative selection score | S = A - lambda L_C_LOO | Pool **mean** axis (539 preset) | Qualitative peak-and-decline POC |
 | Basketball | 2 | Ability-only null | score_mode=ability, w=0 | Pool mean axis | Monotone — fails without congestion |

@@ -58,7 +58,10 @@ def _stem() -> str:
 
 OUT = PD22_MINUTES
 HERO_LOCK = 20.0
-OVERLAY_STEM = f"PD22_ppm_full_vs_filtered_{_w().tag}"
+
+
+def _overlay_stem() -> str:
+    return f"PD22_ppm_full_vs_filtered_{_w().tag}"
 
 
 def _pipeline_config(*, min_minutes: float) -> object:
@@ -350,7 +353,7 @@ def _artifact_paths() -> dict[str, Path]:
         "csv": OUT / f"{_stem()}.csv",
         "json": OUT / f"{_stem()}.json",
         "png": OUT / f"{_stem()}.png",
-        "overlay_png": OUT / f"{OVERLAY_STEM}.png",
+        "overlay_png": OUT / f"{_overlay_stem()}.png",
     }
 
 

@@ -134,13 +134,19 @@ def add_window_args(parser: argparse.ArgumentParser) -> None:
     )
 
 
-def window_cli_flags(window: CampaignWindow | None = None) -> list[str]:
-    """Subprocess argv fragment for child scripts."""
+def season_cli_flags(window: CampaignWindow | None = None) -> list[str]:
+    """Subprocess argv fragment for figure/analysis scripts (season window only).
+
+    Does not pass ``--auto-suffix`` — child scripts do not define that flag; suffix
+    applies only to AUTO ``.pptx`` paths via ``activate_from_args`` / ``auto_deck_path``.
+    """
     w = window or current_window()
-    out = ["--season-min", str(w.season_min), "--season-max", str(w.season_max)]
-    if w.auto_suffix:
-        out.extend(["--auto-suffix", w.auto_suffix])
-    return out
+    return ["--season-min", str(w.season_min), "--season-max", str(w.season_max)]
+
+
+def window_cli_flags(window: CampaignWindow | None = None) -> list[str]:
+    """Alias for :func:`season_cli_flags` (historical name in build scripts)."""
+    return season_cli_flags(window)
 
 
 def auto_deck_path(base: Path, window: CampaignWindow | None = None) -> Path:

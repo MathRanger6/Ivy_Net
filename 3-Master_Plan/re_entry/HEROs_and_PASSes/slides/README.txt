@@ -11,6 +11,7 @@ HAND MASTER files (scripts NEVER overwrite):
   HAND16:  CHAR_PD16_HAND.pptx
   HAND17:  CHAR_PD17_HAND.pptx
   HAND20:  CHAR_PD20_HAND.pptx
+  BDP:     Basics_data_plots_HAND.pptx  (back-to-basics data plots, Aug 2026)
 
   Save As backup before substantive edits, e.g.:
     slides/archive/CHAR_PD16_HAND_backup_YYYYMMDD.pptx
@@ -28,6 +29,10 @@ JPEG exports (for agents / visual audit)
   HAND16:  CHAR_PD16_HAND/Slide1.jpeg … Slide13.jpeg  (re-export after edits)
   HAND17:  CHAR_PD17_HAND/Slide1.png … SlideN.png  (re-export after edits)
   HAND20:  CHAR_PD20_HAND/Slide1.png … Slide21.png  (re-export after edits)
+  BDP:     Basics_data_plots_HAND/SlideN.png  (re-export after edits)
+
+  BDP script PNGs (source figures Charles inserts into deck):
+    ../basic_data_plots/*.png
 
   Legacy (pre-trim): HAND_slides_images/ (16 slides), old CHAR_PD16_HAND/Slide17.jpeg
 

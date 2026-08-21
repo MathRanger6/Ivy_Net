@@ -1,7 +1,7 @@
 # PD20–22 campaign — big picture in plain English
 
 **Audience:** Charles — read-aloud companion to the HAND deck and narrative memo slides  
-**Last synced:** 2026-08-18  
+**Last synced:** 2026-08-19  
 **Companion:** HAND deck map in [`slides/README.txt`](slides/README.txt); detail in [`pd22_minutes/PD22_minutes_panel_investigation_todo.md`](pd22_minutes/PD22_minutes_panel_investigation_todo.md)
 
 This page is the **wavetops-to-now** story: where the dissertation came from, the **Wang-style** ladder (phenomenon → simplest mechanism → predictions), what the current basketball push is doing, where we hit a snag, what we did about it, and where we stand today.
@@ -33,16 +33,18 @@ So we picked two other domains to test the same *kind* of question:
 
 **What you can say:** *“Army showed the shape; basketball is where we can build the full mechanism story — data, a scarce slot, and one slide that captures the phenomenon.”*
 
-### The hero (MBB stylized fact)
+### The hero (MBB stylized fact — POST-QC, Aug 2026)
 
 **Hero** = our name for the empirical chart: split college player-seasons into bins by **teammate pool quality** (with the player removed from his own average so he does not grade himself). Plot **draft rate** in each bin.
 
-What we see in real NCAA data (2011–2021, under our locked rules):
+What we see on the **POST-QC** NCAA panel (2011–2021, team-seasons with **≥10 ESPN games**, min 20 minutes, locked hero spec):
 
-- Draft rate **rises** as teammate quality improves through the middle bins.
-- Rate **levels off**, then **dips in the top bin** — the inverted-U tail.
+- Draft rate **rises** as teammate quality improves through the middle bins — roster context matters beyond talent alone.
+- Rate **levels off** at the elite ventiles — **no robust dip** in the top bin on the panel we defend (peak bin 15 ~3.25%, bin 16 ~3.21%; tail Δ ≈ −0.03 pp).
 
-That is **Layer A**: a fact about outcomes. It is **not** yet a proof of *why* (development vs crowding in the ranking process). A curve by itself also does **not** tell you what to predict next, or whether a simple selection story could **generate** a similar shape. That gap is what pushes the story forward.
+The **July 2026 inverted-U tail** (elite bin dip to ~1.2%) **replays exactly** only on **pre-QC** data (`mg=0`, exhibition cameos inflating bin 16). Audit trail: `pass_a/sensitivity/` (39 labeled specs + July replay PNG).
+
+That is **Layer A**: honest outcome facts on a defensible panel. It is **not** yet proof of *why* (development vs crowding in the ranking process). **Generative Pass B/C** still show inverted-U in the wind tunnel; we do **not** claim bin-for-bin match to empirical ventiles.
 
 ---
 
@@ -64,13 +66,20 @@ That is the **Wang-style arc** — not one giant regression that tries to fit th
 
 The dissertation reads as a **ladder**, not one giant regression. The reference is **Wang**-style science-of-science work: **show the pattern**, **propose the simplest mechanism that could produce it**, **test something the mechanism predicts** — then write. You climb rungs; you do not jump from the weather report to a wind tunnel without the middle steps.
 
-### Rung 1 — Phenomenon (Layer A) — mostly done
+### Rung 1 — Phenomenon (Layer A) — closed with honest limits (Aug 2026)
 
 **Job:** *What does the data look like?*
 
-You already have this: the **hero** on real NCAA data, plus the **talent baseline** (draft rate rises monotonically with own ability — sanity check). The surprising object is the **second** curve — draft rate vs **teammate pool quality** with the inverted-U tail.
+On the **POST-QC** panel you have:
 
-**What this does not prove:** Why the curve bends, or that any one formula “is” the NBA draft.
+- **Talent baseline:** draft rate rises monotonically with own ability (left panel — sanity check).
+- **Roster context:** draft rate rises through middle teammate-quality bins, then a **flat elite tail** (not the sharp inverted-U dip from July pre-QC).
+
+The surprising object is still the **second curve** — draft rate vs **teammate pool quality** — but the elite-bin story on MBB is **weaker** than the Army cross-domain read. The **July tail is a sensitivity artifact** (cameo contamination at `mg=0`), documented in `pass_a/sensitivity/`.
+
+**What you can say:** *“On cleaned ESPN data, roster quality predicts draft rate non-monotonically in the middle; we do not claim a sharp elite dip. The generative model asks whether congestion in the score can bend selection — that is Rung 2/C, not a bin-for-bin copy of Layer A.”*
+
+**What this does not prove:** Why the middle bends, or that any one formula “is” the NBA draft.
 
 **Why the next rung is a story in words:** You have the curve; you do not yet have a **mechanism**. Rung 2 starts with prose — B vs D, score vs select — so you do not accidentally treat the hero regression or the sim as one merged object.
 
@@ -117,7 +126,7 @@ Wang papers do not stop at “here is a shape.” They ask: **if this mechanism 
 
 | Prediction type | Plain question | Status |
 |-----------------|----------------|--------|
-| **Cross-domain** | Same inverted-U in Army + MBB (+ tenure preliminary)? | Army + MBB **yes**; tenure parked |
+| **Cross-domain** | Same inverted-U in Army + MBB (+ tenure preliminary)? | Army **yes**; MBB **middle rise + flat elite tail** on POST-QC (Army tail stronger); tenure parked |
 | **Knockout in sim** | Remove congestion from the **score** → different draft curve? | **Yes** — Layer C headline |
 | **Predictive gain (PD14)** | Does adding roster congestion to a **draft prediction model** beat ability-only? | **Parked** after Phase B — Model A vs B |
 | **Near-threshold / composition** | Under **few slots**, does congestion matter most for **top-ability** players? | Candidate; ties to **K** and λ sweeps |
@@ -346,27 +355,44 @@ When we opened **B**, we broke it into three threads:
 
 **What you can say:** *“ρ*=0 is a modest calibration fit on H_sort ≈ 0.06 — not ‘rosters look disjoint in the overlap figures.’ Bracket fit and geometry answer different questions.”*
 
+---
+
+### B4 — Hero tail on POST-QC panel (Aug 2026)
+
+**Question:** Does the July inverted-U tail survive on the panel we defend (`mg≥10`, drop sub-20)?
+
+**What we ran:** Rebuilt hero on POST-QC panel; 39-spec sensitivity grid (`pass_a/sensitivity/`); exact July replay at `mg=0`.
+
+**What showed up:**
+
+- **POST-QC canonical:** n=46,306; peak bin 15 @ 3.25%; bin 16 @ 3.21% — **flat elite tail** (β₂ > 0).
+- **July replay (`mg=0`):** n=62,180; peak bin 12 @ 2.62%; bin 16 @ 1.16% — **bit-for-bit match** to July artifact; 66% of old bin 16 was ≤10-game cameo team-seasons at 0% draft rate.
+- **Only 1 of 32** POST-QC grid specs shows ≥2 declining bins after peak (ew20 / 2013–2021); tail still weaker than July and not concave.
+
+**What you can say:** *“The hero middle rise is real on cleaned data; the elite dip was pre-QC contamination. We document both — canonical POST-QC for Alex, July replay in sensitivity folder only.”*
+
 **Why Part 7 follows:** Parts 0–6 got us through the defensive campaign. Part 7 is the checkpoint — what is locked, what is parked, and what the main line is next.
 
 ---
 
-## Part 7 — Where we stand right now (August 18, 2026)
+## Part 7 — Where we stand right now (August 19, 2026)
 
 ### Wavetops
 
 | Level | Status |
 |-------|--------|
 | **Dissertation mission** | Army inverted-U → test in MBB (hero) and later tenure |
-| **Rung 1 — Hero (Layer A)** | Documented on real NCAA panel |
+| **Rung 1 — Hero (Layer A)** | **Closed with honest limits** — POST-QC middle rise + flat elite tail; July tail = pre-QC sensitivity |
 | **Rung 2 — Mechanism story (Layer B)** | B−D vs score/select locked in prose; knockout concept defined |
 | **Rung 2 — Generative POC (Layer C)** | Phase B characterization deck; briefed at PD16 |
-| **Rung 3 — Predictions** | Cross-domain + sim knockout partly done; PD14 predictive gain **parked** |
+| **Rung 3 — Predictions** | Sim knockout done; **PD14 predictive gain** = best MBB Rung 3 while Army locked out |
 | **LG pipeline detail** | ASSIGN → SCORE → SELECT; PD17 empirical (H_sort, intervals, λ sweeps) |
-| **Act I PD20** | Gibbs SELECT gate cleared |
+| **Act I PD20** | Gibbs SELECT gate cleared (generative inverted-U survives soft SELECT) |
 | **Act II panel** | Box QC + minutes/PPM backup slides in HAND |
 | **Snag fix A** | Box QC done |
 | **Snag fix B** | PD22 investigation done — **drop sub-20** locked |
 | **Snag fix C** | ρ* ≈ 0 on locked panel; overlap story reconciled |
+| **Snag fix D** | Hero POST-QC audit done — Rung 1 language + plots updated |
 
 ### Exact next beat (main line)
 
@@ -385,15 +411,15 @@ You are **not** blocked on panel policy or ρ re-calibration for drop-vs-zero.
 | Track | What |
 |-------|------|
 | **Main line** | SELECT / MLE → λ*, t*, γ → side-by-side deliverable (hero + sim, honest limits) |
-| **Rung 3** | PD14 predictive gain, near-threshold tests — parked until MBB v1 fit is tight |
+| **Rung 3** | PD14 predictive gain, near-threshold tests — **unpark as MBB Rung 3** while Army access locked |
 | **Parked** | PD22 items 12–14, tenure third leg — appendix, not blockers |
 | **Horizon** | Three-setting paper (Army + MBB + tenure preliminary) as one Wang-style ladder |
 
 ### One breath — closing line
 
-> We cleared soft SELECT (PD20). We cleaned the ESPN panel (box QC) and defended **drop sub-20** over **PPM-zero** (PD22). On that locked panel, **ρ* ≈ 0** matches modest sorting — not random NCAA rosters — and overlap pictures still look stacked because they measure **geometry**, not the homophily knob. We can go back to **fitting SELECT** without redoing ρ for the drop decision.
+> We cleared soft SELECT (PD20). We cleaned the ESPN panel (box QC) and defended **drop sub-20** over **PPM-zero** (PD22). On that locked panel, **ρ* ≈ 0** matches modest sorting — not random NCAA rosters — and overlap pictures still look stacked because they measure **geometry**, not the homophily knob. **Hero Rung 1 is closed:** middle rise on POST-QC, flat elite tail, July dip documented as pre-QC sensitivity only. We can go back to **fitting SELECT** and **PD14 predictive gain** without reopening panel policy.
 
-**Open next:** Lock K-draw semantics for Gibbs SELECT, then scope MLE for λ*, t*, and the next fit checkpoint.
+**Open next:** Lock K-draw semantics for Gibbs SELECT, then scope MLE for λ*, t*, and PD14 draft-prediction contrast.
 
 ---
 
@@ -401,11 +427,11 @@ You are **not** blocked on panel policy or ρ re-calibration for drop-vs-zero.
 
 | Term | Plain English |
 |------|----------------|
-| **Hero** | Empirical plot: draft rate vs teammate pool quality (inverted-U tail) |
+| **Hero** | Empirical plot: draft rate vs teammate pool quality (POST-QC: middle rise + flat elite tail) |
 | **Wang-style arc** | Phenomenon → simplest mechanism → testable predictions → write (not one mega-model) |
 | **Layer A / B / C** | A = describe curve; B = mechanism story in words; C = fake-league code test |
 | **Knockout** | Same sim + winner rule; remove congestion from the **score** (λ = 0) and compare curves |
-| **Inverted-U** | Rise then dip — advancement rate peaks below the very best peer bin |
+| **Inverted-U** | Rise then (often) dip — advancement rate peaks below the very best peer bin; **Army yes; MBB elite tail flat on POST-QC** |
 | **Panel** | Table of real player-seasons we analyze |
 | **PPM** | Points per minute — scoring rate from box stats |
 | **Drop sub-20** | Remove player-seasons with &lt; 20 total minutes |

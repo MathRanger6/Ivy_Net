@@ -1,0 +1,5556 @@
+team_id,season,games_n,team_short_display_name
+1,2013,2,AK-Anchorage
+2,2013,32,Auburn
+5,2013,32,UAB
+6,2013,30,South Alabama
+8,2013,32,Arkansas
+9,2013,35,Arizona St
+12,2013,35,Arizona
+13,2013,32,Cal Poly
+16,2013,28,Sacramento St
+21,2013,34,San Diego St
+23,2013,29,San José St
+24,2013,34,Stanford
+25,2013,33,California
+26,2013,35,UCLA
+27,2013,31,UC Riverside
+30,2013,32,USC
+36,2013,35,Colorado St
+38,2013,33,Colorado
+41,2013,30,UConn
+42,2013,31,Hartford
+43,2013,31,Yale
+44,2013,30,American
+45,2013,30,G Washington
+46,2013,32,Georgetown
+47,2013,29,Howard
+48,2013,33,Delaware
+50,2013,31,FAMU
+52,2013,34,Florida St
+53,2013,1,Florida Tech
+55,2013,28,J'Ville St
+56,2013,31,Stetson
+57,2013,37,Florida
+58,2013,31,South Florida
+59,2013,31,Georgia Tech
+61,2013,32,Georgia
+62,2013,31,Hawai'i
+66,2013,35,Iowa State
+68,2013,32,Boise St
+70,2013,30,Idaho
+71,2013,35,Bradley
+77,2013,32,Northwestern
+79,2013,30,S Illinois
+82,2013,34,UIC
+84,2013,36,Indiana
+85,2013,32,IUPUI
+87,2013,35,Notre Dame
+93,2013,31,Murray St
+94,2013,27,N Kentucky
+96,2013,33,Kentucky
+97,2013,40,Louisville
+98,2013,36,Western KY
+99,2013,31,LSU
+100,2013,1,Loyola (LA)
+101,2013,2,Eureka Coll
+103,2013,33,Boston College
+104,2013,30,Boston Univ
+107,2013,30,Holy Cross
+108,2013,30,Harvard
+109,2013,1,MIT
+111,2013,33,Northeastern
+113,2013,33,UMass
+116,2013,32,Mount St Mary
+119,2013,31,Towson
+120,2013,38,Maryland
+127,2013,36,Michigan St
+128,2013,1,N Michigan
+130,2013,39,Michigan
+135,2013,34,Minnesota
+139,2013,35,Saint Louis
+140,2013,32,Kansas City
+142,2013,34,Missouri
+145,2013,36,Ole Miss
+147,2013,30,Montana St
+148,2013,1,MT Tech
+149,2013,31,Montana
+150,2013,36,Duke
+151,2013,31,East Carolina
+152,2013,35,NC State
+153,2013,36,North Carolina
+154,2013,31,Wake Forest
+155,2013,33,North Dakota
+156,2013,36,Creighton
+158,2013,33,Nebraska
+159,2013,27,Dartmouth
+160,2013,29,New Hampshire
+161,2013,31,Fair Dickinson
+163,2013,27,Princeton
+164,2013,31,Rutgers
+166,2013,35,New Mexico St
+167,2013,35,New Mexico
+170,2013,1,CCNY
+171,2013,27,Columbia
+172,2013,31,Cornell
+179,2013,29,St Bonaventure
+183,2013,40,Syracuse
+189,2013,32,Bowling Green
+193,2013,31,Miami OH
+194,2013,37,Ohio State
+195,2013,34,Ohio
+197,2013,33,Oklahoma St
+198,2013,35,Oral Roberts
+201,2013,32,Oklahoma
+202,2013,33,Tulsa
+204,2013,32,Oregon St
+205,2013,1,Pacific (OR)
+213,2013,31,Penn State
+215,2013,1,Slippery Rock
+218,2013,34,Temple
+219,2013,31,Penn
+221,2013,33,Pitt
+222,2013,33,Villanova
+225,2013,28,Brown
+227,2013,29,Rhode Island
+228,2013,31,Clemson
+229,2013,1,Coker College
+231,2013,31,Furman
+232,2013,35,Charleston
+233,2013,28,South Dakota
+235,2013,36,Memphis
+236,2013,32,Chattanooga
+238,2013,33,Vanderbilt
+239,2013,37,Baylor
+242,2013,30,Rice
+244,2013,1,St. Edward's
+245,2013,33,Texas A&M
+248,2013,33,Houston
+249,2013,31,North Texas
+250,2013,33,UT Arlington
+251,2013,34,Texas
+252,2013,36,BYU
+253,2013,31,Southern Utah
+254,2013,32,Utah
+256,2013,36,James Madison
+257,2013,34,Richmond
+258,2013,35,Virginia
+259,2013,32,Virginia Tech
+261,2013,33,Vermont
+264,2013,34,Washington
+265,2013,32,Washington St
+269,2013,35,Marquette
+270,2013,31,Milwaukee
+275,2013,35,Wisconsin
+276,2013,32,Marshall
+277,2013,32,West Virginia
+278,2013,28,Fresno St
+279,2013,35,Pacific
+282,2013,33,Indiana St
+286,2013,1,NC Wesleyan
+288,2013,30,Lipscomb
+290,2013,33,Georgia So
+292,2013,32,UT Rio Grande
+294,2013,31,Jacksonville
+295,2013,30,Old Dominion
+299,2013,31,Long Beach St
+300,2013,37,UC Irvine
+301,2013,34,San Diego
+302,2013,31,UC Davis
+304,2013,30,Idaho St
+305,2013,32,DePaul
+309,2013,33,Louisiana
+310,2013,2,Maryville MO
+311,2013,30,Maine
+314,2013,34,Iona
+315,2013,33,Niagara
+322,2013,34,Lafayette
+324,2013,29,Coast Car
+325,2013,29,Cleveland St
+326,2013,34,Texas St
+328,2013,31,Utah State
+331,2013,31,E Washington
+333,2013,36,Alabama
+338,2013,30,Kennesaw St
+339,2013,36,Evansville
+344,2013,32,Mississippi St
+349,2013,31,Army
+350,2013,30,UNC Wilmington
+354,2013,1,Olivet College
+356,2013,36,Illinois
+357,2013,29,Texas A&M-CC
+368,2013,1,Purdue NW
+380,2013,1,Anderson (SC)
+383,2013,1,Suffolk University
+391,2013,1,Oberlin 
+399,2013,35,Albany
+407,2013,1,Arcadia University
+415,2013,1,George Fox
+418,2013,1,Hendrix
+437,2013,1,Lake Erie
+440,2013,1,Albertus Magnus
+459,2013,1,Fontbonne
+465,2013,1,Rosemont
+481,2013,1,Mount Ida 
+484,2013,1,Alice Lloyd
+489,2013,1,Barber Scotia
+491,2013,1,Benedictine
+494,2013,1,Blue Mountain
+495,2013,1,Bluefield U
+500,2013,1,California Maritime
+509,2013,1,Crown College
+512,2013,1,Dakota St
+524,2013,3,Fisher College
+526,2013,36,FGCU
+533,2013,1,Hannibal-LaGrange Co
+546,2013,2,Judson College
+551,2013,1,NVU-Lyndon
+552,2013,1,Madonna University
+556,2013,2,Malone
+561,2013,1,Mayville St
+587,2013,1,ND Coll
+594,2013,2,Pacific Union
+596,2013,1,Peru St
+597,2013,1,Presentation
+603,2013,1,Saint Mary College
+612,2013,1,Simpson
+614,2013,1,Southern Poly
+619,2013,1,Tabor College
+628,2013,1,Valley City St
+2001,2013,1,Adams State
+2005,2013,32,Air Force
+2006,2013,33,Akron
+2008,2013,2,AL-Huntsville
+2010,2013,30,Alabama A&M
+2011,2013,31,Alabama St
+2016,2013,32,Alcorn St
+2019,2013,2,Allen Univ
+2026,2013,31,Appalachian St
+2028,2013,1,Ark Monticello
+2029,2013,30,AR-Pine Bluff
+2031,2013,32,Little Rock
+2032,2013,31,Arkansas St
+2046,2013,31,Austin Peay
+2047,2013,1,Averett
+2050,2013,29,Ball State
+2057,2013,32,Belmont
+2061,2013,2,Berea College
+2064,2013,1,Bethel (TN)
+2065,2013,32,Bethune
+2066,2013,29,Binghamton
+2077,2013,1,Brewton-Parker
+2079,2013,1,Bridgewater VA
+2083,2013,34,Bucknell
+2084,2013,34,Buffalo
+2086,2013,36,Butler
+2093,2013,1,CS East Bay
+2096,2013,1,Cameron
+2097,2013,33,Campbell
+2099,2013,34,Canisius
+2104,2013,2,Carroll (MT)
+2110,2013,30,C Arkansas
+2113,2013,2,Centenary LA
+2115,2013,30,C Connecticut
+2116,2013,29,UCF
+2117,2013,31,C Michigan
+2123,2013,1,Chadron State
+2124,2013,3,Chaminade
+2127,2013,32,Charleston So
+2130,2013,32,Chicago St
+2132,2013,34,Cincinnati
+2142,2013,32,Colgate
+2151,2013,1,Concordia IL
+2154,2013,31,Coppin St
+2157,2013,1,Covenant
+2166,2013,34,Davidson
+2168,2013,31,Dayton
+2169,2013,32,Delaware St
+2172,2013,32,Denver
+2174,2013,33,Detroit Mercy
+2176,2013,1,Dillard
+2177,2013,3,Dist of Col
+2181,2013,32,Drake
+2182,2013,31,Drexel
+2184,2013,30,Duquesne
+2193,2013,32,ETSU
+2194,2013,1,E TX Bapt
+2196,2013,1,Eastern Univ.
+2197,2013,32,E Illinois
+2198,2013,34,E Kentucky
+2199,2013,34,E Michigan
+2201,2013,2,E New Mexico
+2206,2013,2,Edward Waters
+2210,2013,33,Elon
+2212,2013,1,Emory
+2217,2013,35,Fairfield
+2226,2013,31,FAU
+2229,2013,32,FIU
+2230,2013,30,Fordham
+2235,2013,1,Fresno Pacific
+2239,2013,32,Fullerton
+2241,2013,34,Gardner-Webb
+2242,2013,1,Geneva
+2244,2013,38,George Mason
+2247,2013,31,Georgia St
+2250,2013,35,Gonzaga
+2256,2013,2,Greensboro
+2257,2013,1,Greenville
+2261,2013,31,Hampton
+2262,2013,1,Hanover
+2265,2013,1,Haverford
+2272,2013,31,High Point
+2274,2013,1,Hiram
+2275,2013,32,Hofstra
+2277,2013,29,Hou Christian
+2281,2013,1,Hus-Till
+2287,2013,33,Illinois St
+2294,2013,37,Iowa
+2296,2013,29,Jackson St
+2302,2013,1,John Carroll
+2305,2013,37,Kansas
+2306,2013,35,Kansas St
+2309,2013,35,Kent State
+2318,2013,2,La Verne
+2320,2013,31,Lamar
+2325,2013,34,La Salle
+2326,2013,1,LeTourneau
+2327,2013,1,Lees McRae
+2329,2013,30,Lehigh
+2331,2013,1,Lenoir Rhyne
+2333,2013,1,Lewis & Clark
+2334,2013,1,Lewis Clark St
+2335,2013,36,Liberty
+2344,2013,33,Longwood
+2347,2013,3,LA Christian
+2348,2013,34,Louisiana Tech
+2350,2013,31,Loyola Chicago
+2351,2013,34,LMU
+2352,2013,35,Loyola MD
+2353,2013,1,LSU Shreveport
+2362,2013,1,Manchester
+2363,2013,32,Manhattan
+2365,2013,1,Mansfield
+2368,2013,31,Marist
+2370,2013,2,TN Southern
+2372,2013,1,Marymoun
+2375,2013,1,Masters 
+2377,2013,31,McNeese
+2378,2013,31,UMBC
+2379,2013,28,MD-Eastern
+2381,2013,1,Menlo
+2382,2013,36,Mercer
+2390,2013,36,Miami
+2393,2013,34,MTSU
+2397,2013,3,Milligan
+2400,2013,28,Miss Valley St
+2405,2013,31,Monmouth
+2410,2013,4,Montreat 
+2413,2013,33,Morehead St
+2415,2013,32,Morgan St
+2419,2013,1,Mount St. Joseph
+2426,2013,31,Navy
+2427,2013,32,UNC Asheville
+2428,2013,29,NC Central
+2429,2013,33,Charlotte
+2430,2013,31,UNC Greensboro
+2433,2013,27,UL Monroe
+2437,2013,31,Omaha
+2439,2013,35,UNLV
+2440,2013,31,Nevada
+2442,2013,1,Coll NJ
+2443,2013,26,New Orleans
+2444,2013,1,Newberry
+2447,2013,30,Nicholls
+2448,2013,37,NC A&T
+2449,2013,34,N Dakota St
+2450,2013,33,Norfolk St
+2454,2013,32,North Florida
+2458,2013,31,N Colorado
+2459,2013,30,N Illinois
+2460,2013,35,Northern Iowa
+2463,2013,31,CSU Northridge
+2464,2013,32,N Arizona
+2466,2013,31,N'Western St
+2473,2013,31,Oakland
+2474,2013,2,Oakland City
+2476,2013,1,Oglethorpe
+2477,2013,1,Ohio Dominican
+2483,2013,37,Oregon
+2486,2013,1,Pacific Lutheran
+2492,2013,30,Pepperdine
+2494,2013,1,Philander Smith
+2500,2013,1,Point Loma
+2501,2013,31,Portland
+2502,2013,28,Portland St
+2504,2013,31,Prairie View
+2506,2013,32,Presbyterian
+2507,2013,34,Providence
+2509,2013,34,Purdue
+2514,2013,31,Quinnipiac
+2515,2013,32,Radford
+2518,2013,1,Regis Univ
+2520,2013,34,Rider
+2521,2013,1,Rio Grande
+2523,2013,35,Robert Morris
+2525,2013,1,Rockhurst
+2529,2013,29,Sacred Heart
+2532,2013,1,Salisbury
+2534,2013,34,Sam Houston
+2535,2013,32,Samford
+2539,2013,31,San Francisco
+2540,2013,31,UCSB
+2541,2013,38,Santa Clara
+2542,2013,33,Savannah State
+2545,2013,31,SE Louisiana
+2546,2013,31,SE Missouri St
+2547,2013,30,Seattle U
+2550,2013,33,Seton Hall
+2553,2013,1,Sewanee
+2561,2013,32,Siena
+2562,2013,1,Siena Heights
+2565,2013,27,SIUE
+2567,2013,32,SMU
+2569,2013,28,SC State
+2571,2013,35,S Dakota St
+2572,2013,37,Southern Miss
+2573,2013,1,So New Orleans
+2574,2013,1,Sonoma St
+2576,2013,1,S Wesleyan
+2579,2013,32,South Carolina
+2582,2013,33,Southern
+2585,2013,1,Vanguard
+2587,2013,1,SW MN St
+2589,2013,1,Spalding
+2590,2013,2,Spring Hill
+2592,2013,1,St. Andrews
+2597,2013,30,St Francis BK
+2598,2013,29,St Francis PA
+2599,2013,33,St John's
+2603,2013,32,Saint Joseph's
+2608,2013,35,Saint Mary's
+2612,2013,30,Saint Peter's
+2617,2013,28,SF Austin
+2619,2013,33,Stony Brook
+2623,2013,33,Missouri St
+2628,2013,32,TCU
+2630,2013,29,UT Martin
+2631,2013,1,Tenn Temple
+2633,2013,33,Tennessee
+2634,2013,31,Tennessee St
+2635,2013,28,Tennessee Tech
+2636,2013,32,UTSA
+2638,2013,32,UTEP
+2639,2013,1,TX Lutheran
+2640,2013,31,Texas Southern
+2641,2013,31,Texas Tech
+2643,2013,30,The Citadel
+2648,2013,2,Toccoa Falls
+2649,2013,28,Toledo
+2652,2013,1,Trinity (IL)
+2653,2013,33,Troy
+2654,2013,1,Truman St
+2655,2013,35,Tulane
+2657,2013,1,Tuskegee
+2662,2013,1,UC Santa Cruz
+2666,2013,1,Urbana
+2670,2013,36,VCU
+2671,2013,1,VA Intermont
+2674,2013,34,Valparaiso
+2678,2013,31,VMI
+2681,2013,31,Wagner
+2684,2013,1,Warren Wilson
+2685,2013,1,Wartburg
+2691,2013,2,Webber Int
+2692,2013,37,Weber St
+2695,2013,2,West Alabama
+2701,2013,1,Montana-Western
+2710,2013,30,W Illinois
+2711,2013,35,W Michigan
+2714,2013,2,Western St.
+2716,2013,1,Westmont
+2717,2013,32,W Carolina
+2720,2013,1,Whitman
+2724,2013,39,Wichita St
+2729,2013,30,William & Mary
+2730,2013,3,William Carey
+2733,2013,1,Wilmington OH
+2736,2013,1,Win Salem
+2737,2013,28,Winthrop
+2739,2013,33,Green Bay
+2747,2013,32,Wofford
+2750,2013,36,Wright St
+2751,2013,34,Wyoming
+2752,2013,31,Xavier
+2754,2013,34,Youngstown St
+2755,2013,28,Grambling
+2758,2013,1,Howard Payne
+2803,2013,31,Bryant
+2810,2013,2,Hardin-Simmons
+2822,2013,1,N Greenville
+2824,2013,2,Panhandle St
+2828,2013,1,Shenandoah
+2841,2013,3,Union Ky 
+2842,2013,1,Virginia-Wise
+2848,2013,1,Western Oregon
+2850,2013,1,Whittier
+2855,2013,2,Brescia
+2868,2013,1,Holy Names
+2870,2013,32,Purdue FW
+2876,2013,1,Lincoln MO
+2885,2013,28,NJIT
+2890,2013,2,Reinhardt
+2896,2013,2,Southern VA
+2908,2013,33,SC Upstate
+2911,2013,1,William Jewell
+2913,2013,2,Brevard 
+2934,2013,29,Bakersfield
+2947,2013,4,Rochester Univ.
+2949,2013,2,St Gregory's
+2957,2013,2,Dominican (CA)
+2986,2013,1,Fairmont
+3079,2013,3,Cent Bapt Coll
+3083,2013,1,Oakwood
+3084,2013,32,Utah Valley
+3086,2013,2,TX-Tyler
+3087,2013,1,SUNY-Old Westbury
+3088,2013,1,IU-Northwest
+3091,2013,1,Hope Inter.
+3093,2013,3,Cin Christian
+3096,2013,7,SD Christian
+3097,2013,1,Johnson FL
+3098,2013,2,Marygrove 
+3105,2013,2,Southeastern
+3106,2013,1,Corban U
+3119,2013,1,Daniel Webster
+3120,2013,1,Ecclesia
+3134,2013,3,Champ. Christ.
+3138,2013,1,Indiana-East Univ
+3141,2013,2,No New Mexico
+3152,2013,2,Walla Walla
+3154,2013,2,Southwest
+3159,2013,1,Coll Idaho
+3160,2013,1,R. Morris-Spfld
+3163,2013,1,Roosevelt
+3164,2013,3,Central Penn
+3169,2013,2,Joh. & Wales NC
+3171,2013,2,Hiwassee
+3182,2013,2,CS San Marcos
+3184,2013,2,Pacifica College
+3188,2013,3,AZ Christian
+3189,2013,1,Coastal Georgia
+3216,2013,1,Cairn
+3218,2013,1,Northwest Indian
+3229,2013,2,VU of Lynchburg
+112358,2013,34,Long Island
+1,2014,3,AK-Anchorage
+2,2014,30,Auburn
+5,2014,31,UAB
+6,2014,31,South Alabama
+8,2014,33,Arkansas
+9,2014,33,Arizona St
+11,2014,1,Colorado Mesa
+12,2014,38,Arizona
+13,2014,34,Cal Poly
+16,2014,30,Sacramento St
+21,2014,36,San Diego St
+22,2014,1,San Fran St
+23,2014,31,San José St
+24,2014,36,Stanford
+25,2014,35,California
+26,2014,37,UCLA
+27,2014,31,UC Riverside
+30,2014,32,USC
+36,2014,32,Colorado St
+38,2014,35,Colorado
+41,2014,40,UConn
+42,2014,33,Hartford
+43,2014,33,Yale
+44,2014,33,American
+45,2014,33,G Washington
+46,2014,33,Georgetown
+47,2014,33,Howard
+48,2014,35,Delaware
+50,2014,32,FAMU
+52,2014,36,Florida St
+55,2014,31,J'Ville St
+56,2014,31,Stetson
+57,2014,39,Florida
+58,2014,32,South Florida
+59,2014,33,Georgia Tech
+60,2014,1,Morehouse
+61,2014,34,Georgia
+62,2014,31,Hawai'i
+65,2014,1,Grinnell
+66,2014,36,Iowa State
+68,2014,34,Boise St
+70,2014,34,Idaho
+71,2014,32,Bradley
+72,2014,1,Elmhurst
+75,2014,1,North Park
+77,2014,33,Northwestern
+79,2014,33,S Illinois
+82,2014,31,UIC
+84,2014,32,Indiana
+85,2014,32,IUPUI
+87,2014,32,Notre Dame
+93,2014,34,Murray St
+94,2014,30,N Kentucky
+96,2014,40,Kentucky
+97,2014,37,Louisville
+98,2014,32,Western KY
+99,2014,33,LSU
+100,2014,2,Loyola (LA)
+101,2014,1,Eureka Coll
+103,2014,32,Boston College
+104,2014,35,Boston Univ
+107,2014,34,Holy Cross
+108,2014,32,Harvard
+109,2014,1,MIT
+111,2014,32,Northeastern
+113,2014,33,UMass
+116,2014,33,Mount St Mary
+119,2014,36,Towson
+120,2014,32,Maryland
+126,2014,1,Kalamazoo
+127,2014,38,Michigan St
+128,2014,1,N Michigan
+130,2014,37,Michigan
+134,2014,1,Minn Duluth
+135,2014,38,Minnesota
+139,2014,34,Saint Louis
+140,2014,30,Kansas City
+142,2014,35,Missouri
+145,2014,33,Ole Miss
+147,2014,31,Montana St
+149,2014,30,Montana
+150,2014,35,Duke
+151,2014,34,East Carolina
+152,2014,36,NC State
+153,2014,34,North Carolina
+154,2014,33,Wake Forest
+155,2014,34,North Dakota
+156,2014,35,Creighton
+158,2014,32,Nebraska
+159,2014,28,Dartmouth
+160,2014,30,New Hampshire
+161,2014,30,Fair Dickinson
+163,2014,30,Princeton
+164,2014,33,Rutgers
+166,2014,36,New Mexico St
+167,2014,34,New Mexico
+170,2014,1,CCNY
+171,2014,34,Columbia
+172,2014,28,Cornell
+179,2014,33,St Bonaventure
+183,2014,34,Syracuse
+189,2014,32,Bowling Green
+190,2014,1,Defiance
+191,2014,1,Heidelberg
+193,2014,31,Miami OH
+194,2014,35,Ohio State
+195,2014,37,Ohio
+197,2014,34,Oklahoma St
+198,2014,33,Oral Roberts
+201,2014,33,Oklahoma
+202,2014,34,Tulsa
+204,2014,32,Oregon St
+205,2014,1,Pacific (OR)
+213,2014,34,Penn State
+218,2014,31,Temple
+219,2014,28,Penn
+221,2014,36,Pitt
+222,2014,34,Villanova
+224,2014,1,Westminster UT
+225,2014,29,Brown
+227,2014,32,Rhode Island
+228,2014,36,Clemson
+229,2014,1,Coker College
+231,2014,30,Furman
+232,2014,32,Charleston
+233,2014,30,South Dakota
+235,2014,34,Memphis
+236,2014,32,Chattanooga
+238,2014,31,Vanderbilt
+239,2014,38,Baylor
+241,2014,2,McMurry
+242,2014,30,Rice
+244,2014,1,St. Edward's
+245,2014,34,Texas A&M
+248,2014,33,Houston
+249,2014,32,North Texas
+250,2014,32,UT Arlington
+251,2014,35,Texas
+252,2014,35,BYU
+253,2014,29,Southern Utah
+254,2014,33,Utah
+256,2014,31,James Madison
+257,2014,33,Richmond
+258,2014,37,Virginia
+259,2014,31,Virginia Tech
+261,2014,32,Vermont
+264,2014,32,Washington
+265,2014,31,Washington St
+269,2014,32,Marquette
+270,2014,35,Milwaukee
+275,2014,38,Wisconsin
+276,2014,33,Marshall
+277,2014,33,West Virginia
+278,2014,39,Fresno St
+279,2014,34,Pacific
+282,2014,34,Indiana St
+286,2014,2,NC Wesleyan
+288,2014,30,Lipscomb
+290,2014,34,Georgia So
+292,2014,32,UT Rio Grande
+294,2014,30,Jacksonville
+295,2014,36,Old Dominion
+299,2014,32,Long Beach St
+300,2014,35,UC Irvine
+301,2014,35,San Diego
+302,2014,31,UC Davis
+304,2014,29,Idaho St
+305,2014,33,DePaul
+309,2014,35,Louisiana
+311,2014,29,Maine
+314,2014,33,Iona
+315,2014,33,Niagara
+322,2014,31,Lafayette
+324,2014,34,Coast Car
+325,2014,33,Cleveland St
+326,2014,31,Texas St
+328,2014,32,Utah State
+329,2014,1,Mt. St. Vincent
+331,2014,31,E Washington
+333,2014,32,Alabama
+338,2014,31,Kennesaw St
+339,2014,33,Evansville
+344,2014,33,Mississippi St
+349,2014,31,Army
+350,2014,32,UNC Wilmington
+351,2014,1,Wingate
+356,2014,35,Illinois
+357,2014,34,Texas A&M-CC
+361,2014,1,Philadelphia
+366,2014,1,Ferrum
+368,2014,2,Purdue NW
+383,2014,1,Suffolk University
+386,2014,1,Trinity (TX)
+391,2014,1,Oberlin 
+399,2014,34,Albany
+405,2014,1,Baptist Bible
+413,2014,1,Columbus State
+418,2014,1,Hendrix
+427,2014,1,Ohio Northern
+440,2014,1,Albertus Magnus
+450,2014,1,Wheelock College
+455,2014,1,West VA Wesleyan
+461,2014,1,Gwynedd-Mercy
+469,2014,1,Chestnut Hill
+477,2014,1,Lesley University
+481,2014,1,Mount Ida 
+484,2014,1,Alice Lloyd
+487,2014,1,Bacone College
+489,2014,2,Barber Scotia
+494,2014,1,Blue Mountain
+495,2014,2,Bluefield U
+512,2014,1,Dakota St
+524,2014,2,Fisher College
+526,2014,35,FGCU
+530,2014,1,Graceland
+535,2014,1,Haskell
+538,2014,1,Houghton 
+546,2014,2,Judson College
+548,2014,1,LaGrange
+551,2014,2,NVU-Lyndon
+554,2014,1,Maine-Ft Kent
+561,2014,1,Mayville St
+564,2014,2,Mid-Continent
+585,2014,3,Northwood
+587,2014,1,ND Coll
+596,2014,2,Peru St
+597,2014,1,Presentation
+612,2014,2,Simpson
+614,2014,1,Southern Poly
+620,2014,1,Taylor
+628,2014,1,Valley City St
+630,2014,1,Wayland Baptist
+2000,2014,30,Abilene Chrstn
+2005,2014,30,Air Force
+2006,2014,34,Akron
+2008,2014,1,AL-Huntsville
+2010,2014,29,Alabama A&M
+2011,2014,31,Alabama St
+2016,2014,31,Alcorn St
+2019,2014,1,Allen Univ
+2023,2014,1,Anderson (IN)
+2026,2014,30,Appalachian St
+2029,2014,31,AR-Pine Bluff
+2031,2014,32,Little Rock
+2032,2014,31,Arkansas St
+2036,2014,1,Asbury
+2040,2014,1,Aub.-Montgomery
+2046,2014,30,Austin Peay
+2050,2014,30,Ball State
+2056,2014,1,Belhaven
+2057,2014,36,Belmont
+2064,2014,2,Bethel (TN)
+2065,2014,32,Bethune
+2066,2014,30,Binghamton
+2069,2014,1,Black Hills St
+2073,2014,2,Bluefield St
+2077,2014,1,Brewton-Parker
+2079,2014,1,Bridgewater VA
+2083,2014,30,Bucknell
+2084,2014,29,Buffalo
+2086,2014,31,Butler
+2092,2014,1,CSU Dom Hills
+2096,2014,3,Cameron
+2097,2014,32,Campbell
+2098,2014,2,Campbellsville
+2099,2014,34,Canisius
+2104,2014,2,Carroll (MT)
+2108,2014,1,Catholic DC
+2109,2014,2,Cedarville
+2110,2014,29,C Arkansas
+2113,2014,2,Centenary LA
+2115,2014,30,C Connecticut
+2116,2014,31,UCF
+2117,2014,31,C Michigan
+2124,2014,4,Chaminade
+2127,2014,31,Charleston So
+2130,2014,32,Chicago St
+2132,2014,34,Cincinnati
+2133,2014,1,Claflin
+2141,2014,1,Coe College
+2142,2014,31,Colgate
+2144,2014,1,Colorado Coll
+2145,2014,1,CO Springs
+2154,2014,32,Coppin St
+2157,2014,1,Covenant
+2164,2014,2,Dallas Baptist
+2166,2014,33,Davidson
+2168,2014,37,Dayton
+2169,2014,30,Delaware St
+2172,2014,31,Denver
+2174,2014,32,Detroit Mercy
+2176,2014,3,Dillard
+2181,2014,31,Drake
+2182,2014,30,Drexel
+2184,2014,30,Duquesne
+2189,2014,1,Earlham
+2193,2014,35,ETSU
+2196,2014,1,Eastern Univ.
+2197,2014,30,E Illinois
+2198,2014,34,E Kentucky
+2199,2014,36,E Michigan
+2204,2014,1,Eckerd
+2206,2014,2,Edward Waters
+2210,2014,32,Elon
+2213,2014,1,Emory & Henry
+2214,2014,2,Emporia St
+2217,2014,32,Fairfield
+2220,2014,1,Fayetteville St
+2225,2014,2,Fisk
+2226,2014,31,FAU
+2227,2014,1,FL Memorial
+2229,2014,31,FIU
+2230,2014,31,Fordham
+2232,2014,1,Fort Valley St
+2239,2014,31,Fullerton
+2241,2014,33,Gardner-Webb
+2244,2014,31,George Mason
+2247,2014,34,Georgia St
+2250,2014,36,Gonzaga
+2251,2014,2,Goucher
+2253,2014,30,Grand Canyon
+2256,2014,3,Greensboro
+2257,2014,1,Greenville
+2258,2014,1,Guilford
+2261,2014,30,Hampton
+2265,2014,1,Haverford
+2267,2014,1,Hawaii-Hilo
+2269,2014,2,HI Pacific
+2272,2014,31,High Point
+2273,2014,1,Hillsdale
+2275,2014,33,Hofstra
+2277,2014,31,Hou Christian
+2281,2014,5,Hus-Till
+2287,2014,34,Illinois St
+2294,2014,33,Iowa
+2295,2014,3,Iowa Wesleyan
+2296,2014,31,Jackson St
+2299,2014,1,Jarvis Chr
+2305,2014,35,Kansas
+2306,2014,33,Kansas St
+2309,2014,32,Kent State
+2310,2014,1,Kentucky St
+2318,2014,1,La Verne
+2320,2014,30,Lamar
+2325,2014,31,La Salle
+2326,2014,1,LeTourneau
+2327,2014,2,Lees McRae
+2329,2014,32,Lehigh
+2335,2014,32,Liberty
+2336,2014,1,Limestone
+2344,2014,32,Longwood
+2347,2014,3,LA Christian
+2348,2014,37,Louisiana Tech
+2349,2014,28,UMass Lowell
+2350,2014,32,Loyola Chicago
+2351,2014,32,LMU
+2352,2014,30,Loyola MD
+2358,2014,1,Lyon College
+2362,2014,3,Manchester
+2363,2014,33,Manhattan
+2368,2014,31,Marist
+2369,2014,2,Mars Hill
+2370,2014,2,TN Southern
+2375,2014,1,Masters 
+2377,2014,30,McNeese
+2378,2014,29,UMBC
+2379,2014,29,MD-Eastern
+2381,2014,1,Menlo
+2382,2014,36,Mercer
+2389,2014,4,Metro State
+2390,2014,33,Miami
+2391,2014,1,Mich-Dearborn
+2393,2014,33,MTSU
+2397,2014,2,Milligan
+2398,2014,1,Millsaps
+2399,2014,1,Minn-Morris
+2400,2014,32,Miss Valley St
+2401,2014,1,MS College
+2402,2014,1,Missouri S&T
+2405,2014,32,Monmouth
+2407,2014,1,MT St.-Billings
+2410,2014,4,Montreat 
+2413,2014,34,Morehead St
+2415,2014,31,Morgan St
+2418,2014,1,Mount Olive
+2419,2014,1,Mount St. Joseph
+2426,2014,30,Navy
+2427,2014,32,UNC Asheville
+2428,2014,33,NC Central
+2429,2014,31,Charlotte
+2430,2014,32,UNC Greensboro
+2433,2014,26,UL Monroe
+2437,2014,32,Omaha
+2439,2014,33,UNLV
+2440,2014,32,Nevada
+2443,2014,26,New Orleans
+2444,2014,2,Newberry
+2447,2014,29,Nicholls
+2448,2014,32,NC A&T
+2449,2014,33,N Dakota St
+2450,2014,34,Norfolk St
+2454,2014,32,North Florida
+2458,2014,32,N Colorado
+2459,2014,32,N Illinois
+2460,2014,31,Northern Iowa
+2463,2014,35,CSU Northridge
+2464,2014,32,N Arizona
+2466,2014,31,N'Western St
+2468,2014,1,ND de Namur
+2470,2014,1,Nova SE
+2473,2014,33,Oakland
+2474,2014,3,Oakland City
+2479,2014,1,Ohio Valley
+2483,2014,34,Oregon
+2486,2014,2,Pacific Lutheran
+2492,2014,31,Pepperdine
+2501,2014,31,Portland
+2502,2014,32,Portland St
+2504,2014,34,Prairie View
+2506,2014,32,Presbyterian
+2507,2014,35,Providence
+2509,2014,32,Purdue
+2514,2014,32,Quinnipiac
+2515,2014,35,Radford
+2520,2014,31,Rider
+2521,2014,2,Rio Grande
+2522,2014,1,Roanoke
+2523,2014,36,Robert Morris
+2525,2014,2,Rockhurst
+2529,2014,31,Sacred Heart
+2532,2014,1,Salisbury
+2534,2014,35,Sam Houston
+2535,2014,33,Samford
+2539,2014,33,San Francisco
+2540,2014,30,UCSB
+2541,2014,33,Santa Clara
+2542,2014,32,Savannah State
+2544,2014,1,Schreiner
+2545,2014,30,SE Louisiana
+2546,2014,32,SE Missouri St
+2547,2014,30,Seattle U
+2550,2014,34,Seton Hall
+2553,2014,1,Sewanee
+2557,2014,1,Coast Guard
+2561,2014,38,Siena
+2562,2014,1,Siena Heights
+2565,2014,31,SIUE
+2567,2014,37,SMU
+2568,2014,2,Southern Ark.
+2569,2014,30,SC State
+2571,2014,32,S Dakota St
+2572,2014,35,Southern Miss
+2574,2014,3,Sonoma St
+2579,2014,34,South Carolina
+2582,2014,31,Southern
+2585,2014,1,Vanguard
+2587,2014,1,SW MN St
+2588,2014,1,Southwestern TX
+2590,2014,2,Spring Hill
+2592,2014,4,St. Andrews
+2595,2014,1,St Francis (IL)
+2597,2014,32,St Francis BK
+2598,2014,30,St Francis PA
+2599,2014,33,St John's
+2601,2014,1,St. Joseph's (IN)
+2603,2014,34,Saint Joseph's
+2606,2014,1,St. Martin's
+2608,2014,35,Saint Mary's
+2612,2014,31,Saint Peter's
+2617,2014,35,SF Austin
+2619,2014,34,Stony Brook
+2623,2014,33,Missouri St
+2626,2014,1,Tampa
+2628,2014,31,TCU
+2630,2014,31,UT Martin
+2631,2014,2,Tenn Temple
+2633,2014,37,Tennessee
+2634,2014,30,Tennessee St
+2635,2014,33,Tennessee Tech
+2636,2014,30,UTSA
+2638,2014,34,UTEP
+2640,2014,34,Texas Southern
+2641,2014,32,Texas Tech
+2643,2014,32,The Citadel
+2644,2014,1,Thiel
+2648,2014,2,Toccoa Falls
+2649,2014,34,Toledo
+2650,2014,2,Tougaloo
+2653,2014,31,Troy
+2654,2014,1,Truman St
+2655,2014,34,Tulane
+2657,2014,1,Tuskegee
+2662,2014,1,UC Santa Cruz
+2666,2014,1,Urbana
+2667,2014,1,Ursinus
+2670,2014,35,VCU
+2671,2014,3,VA Intermont
+2674,2014,34,Valparaiso
+2676,2014,1,Virginia Union
+2677,2014,1,Viterbo Univ.
+2678,2014,35,VMI
+2679,2014,1,Voorhees
+2681,2014,31,Wagner
+2684,2014,4,Warren Wilson
+2688,2014,1,Wash. & Lee
+2689,2014,2,Washington Coll
+2691,2014,1,Webber Int
+2692,2014,31,Weber St
+2695,2014,4,West Alabama
+2701,2014,1,Montana-Western
+2703,2014,2,W New Mexico
+2706,2014,1,W. Virginia Tech
+2710,2014,30,W Illinois
+2711,2014,33,W Michigan
+2714,2014,2,Western St.
+2717,2014,34,W Carolina
+2724,2014,36,Wichita St
+2728,2014,1,Wiley
+2729,2014,32,William & Mary
+2730,2014,2,William Carey
+2733,2014,1,Wilmington OH
+2737,2014,33,Winthrop
+2739,2014,31,Green Bay
+2742,2014,1,WI Parkside
+2746,2014,1,Wittenberg
+2747,2014,33,Wofford
+2750,2014,36,Wright St
+2751,2014,33,Wyoming
+2752,2014,34,Xavier
+2754,2014,32,Youngstown St
+2755,2014,28,Grambling
+2758,2014,1,Howard Payne
+2776,2014,1,Salve Regina
+2790,2014,1,Albion
+2803,2014,32,Bryant
+2804,2014,3,Chowan
+2810,2014,1,Hardin-Simmons
+2822,2014,3,N Greenville
+2828,2014,1,Shenandoah
+2839,2014,2,Tusculum
+2844,2014,1,Wayne St (NE)
+2849,2014,1,Westminster PA
+2855,2014,4,Brescia
+2857,2014,1,Caldwell 
+2860,2014,1,Cent Methodist
+2862,2014,2,CO Christian
+2866,2014,4,Evergreen State
+2868,2014,1,Holy Names
+2870,2014,36,Purdue FW
+2871,2014,1,Kean
+2874,2014,1,Laroche
+2885,2014,29,NJIT
+2887,2014,1,NW Nazarene
+2890,2014,2,Reinhardt
+2903,2014,1,SW Adventist
+2908,2014,34,SC Upstate
+2913,2014,3,Brevard 
+2916,2014,26,Incarnate Word
+2917,2014,1,LeMoyne-Owen
+2920,2014,1,Mobile
+2922,2014,1,Olivet Nazarene
+2927,2014,1,SW Oklahoma St
+2934,2014,32,Bakersfield
+2937,2014,1,Dallas Christ.
+2947,2014,2,Rochester Univ.
+2948,2014,4,Stillman
+2959,2014,1,Baruch College
+2985,2014,1,Concordia (MI)
+3069,2014,1,Indiana Tech
+3075,2014,1,Selma
+3078,2014,2,William Jessup
+3079,2014,2,Cent Bapt Coll
+3080,2014,2,Waldorf 
+3082,2014,1,TX A&M-Intl
+3084,2014,32,Utah Valley
+3086,2014,2,TX-Tyler
+3088,2014,1,IU-Northwest
+3090,2014,2,Randall
+3091,2014,1,Hope Inter.
+3093,2014,2,Cin Christian
+3096,2014,8,SD Christian
+3098,2014,1,Marygrove 
+3105,2014,2,Southeastern
+3119,2014,1,Daniel Webster
+3120,2014,1,Ecclesia
+3131,2014,1,Grace Bible
+3134,2014,4,Champ. Christ.
+3141,2014,3,No New Mexico
+3152,2014,2,Walla Walla
+3153,2014,1,Randolph
+3155,2014,1,Trinity Baptist
+3157,2014,1,Ark Fort Smith
+3158,2014,1,Our Lady
+3160,2014,1,R. Morris-Spfld
+3163,2014,2,Roosevelt
+3164,2014,4,Central Penn
+3166,2014,2,Arl Baptist
+3167,2014,3,La Sierra
+3168,2014,2,Crowley's Ridge
+3169,2014,5,Joh. & Wales NC
+3170,2014,1,St. Thomas (TX)
+3171,2014,3,Hiwassee
+3174,2014,3,Trinity Baptist
+3178,2014,2,Ave Maria
+3184,2014,3,Pacifica College
+3185,2014,2,UC Merced
+3188,2014,1,AZ Christian
+3192,2014,2,IU-Kokomo
+3216,2014,1,Cairn
+3219,2014,1,Young Harris
+3229,2014,1,VU of Lynchburg
+3238,2014,1,SW Christian Univ
+3239,2014,1,Johnson (TN)
+3240,2014,1,Clearwater Christian
+3242,2014,2,Columbia Int
+3243,2014,1,Bob Jones
+3244,2014,2,Florida Coll
+3245,2014,1,Tru-Mc
+3246,2014,2,Bethesda
+3247,2014,2,Dalton State
+3248,2014,4,Open Bible
+3249,2014,4,St. Katherine
+3250,2014,1,Northwest Ohio
+94822,2014,1,TX Perm Basin
+107554,2014,1,Immaculata
+107730,2014,1,Florida Natl
+107738,2014,1,Crossroads
+112358,2014,29,Long Island
+1,2015,3,AK-Anchorage
+2,2015,35,Auburn
+5,2015,36,UAB
+6,2015,33,South Alabama
+8,2015,36,Arkansas
+9,2015,34,Arizona St
+12,2015,38,Arizona
+13,2015,29,Cal Poly
+16,2015,33,Sacramento St
+21,2015,36,San Diego St
+22,2015,2,San Fran St
+23,2015,30,San José St
+24,2015,37,Stanford
+25,2015,33,California
+26,2015,36,UCLA
+27,2015,31,UC Riverside
+28,2015,1,UC San Diego
+30,2015,32,USC
+36,2015,34,Colorado St
+38,2015,34,Colorado
+41,2015,35,UConn
+42,2015,30,Hartford
+43,2015,32,Yale
+44,2015,33,American
+45,2015,35,G Washington
+46,2015,33,Georgetown
+47,2015,32,Howard
+48,2015,30,Delaware
+50,2015,29,FAMU
+52,2015,33,Florida St
+53,2015,2,Florida Tech
+55,2015,31,J'Ville St
+56,2015,31,Stetson
+57,2015,33,Florida
+58,2015,32,South Florida
+59,2015,31,Georgia Tech
+61,2015,33,Georgia
+62,2015,35,Hawai'i
+66,2015,34,Iowa State
+68,2015,34,Boise St
+70,2015,30,Idaho
+71,2015,33,Bradley
+77,2015,32,Northwestern
+79,2015,33,S Illinois
+82,2015,34,UIC
+84,2015,34,Indiana
+85,2015,31,IUPUI
+87,2015,38,Notre Dame
+93,2015,35,Murray St
+94,2015,30,N Kentucky
+96,2015,39,Kentucky
+97,2015,36,Louisville
+98,2015,32,Western KY
+99,2015,33,LSU
+100,2015,1,Loyola (LA)
+101,2015,2,Eureka Coll
+103,2015,32,Boston College
+104,2015,30,Boston Univ
+107,2015,30,Holy Cross
+108,2015,30,Harvard
+109,2015,1,MIT
+111,2015,35,Northeastern
+113,2015,32,UMass
+116,2015,30,Mount St Mary
+119,2015,32,Towson
+120,2015,35,Maryland
+123,2015,2,St. Thomas Aquinas
+127,2015,39,Michigan St
+130,2015,32,Michigan
+134,2015,1,Minn Duluth
+135,2015,33,Minnesota
+136,2015,1,Missouri Valley
+139,2015,32,Saint Louis
+140,2015,33,Kansas City
+142,2015,32,Missouri
+144,2015,2,Franklin Pierce
+145,2015,34,Ole Miss
+147,2015,30,Montana St
+148,2015,1,MT Tech
+149,2015,33,Montana
+150,2015,39,Duke
+151,2015,33,East Carolina
+152,2015,36,NC State
+153,2015,38,North Carolina
+154,2015,32,Wake Forest
+155,2015,30,North Dakota
+156,2015,33,Creighton
+158,2015,31,Nebraska
+159,2015,29,Dartmouth
+160,2015,32,New Hampshire
+161,2015,29,Fair Dickinson
+163,2015,30,Princeton
+164,2015,32,Rutgers
+166,2015,34,New Mexico St
+167,2015,31,New Mexico
+171,2015,28,Columbia
+172,2015,30,Cornell
+173,2015,1,Hartwick
+179,2015,31,St Bonaventure
+183,2015,31,Syracuse
+189,2015,33,Bowling Green
+193,2015,32,Miami OH
+194,2015,35,Ohio State
+195,2015,30,Ohio
+197,2015,32,Oklahoma St
+198,2015,34,Oral Roberts
+199,2015,1,SE Okla St
+201,2015,35,Oklahoma
+202,2015,34,Tulsa
+204,2015,31,Oregon St
+213,2015,34,Penn State
+216,2015,1,Susqueha
+218,2015,37,Temple
+219,2015,28,Penn
+221,2015,34,Pitt
+222,2015,36,Villanova
+225,2015,31,Brown
+227,2015,33,Rhode Island
+228,2015,31,Clemson
+229,2015,1,Coker College
+231,2015,33,Furman
+232,2015,33,Charleston
+233,2015,33,South Dakota
+235,2015,32,Memphis
+236,2015,32,Chattanooga
+238,2015,35,Vanderbilt
+239,2015,34,Baylor
+242,2015,32,Rice
+244,2015,3,St. Edward's
+245,2015,33,Texas A&M
+248,2015,32,Houston
+249,2015,31,North Texas
+250,2015,31,UT Arlington
+251,2015,34,Texas
+252,2015,35,BYU
+253,2015,29,Southern Utah
+254,2015,35,Utah
+256,2015,33,James Madison
+257,2015,35,Richmond
+258,2015,34,Virginia
+259,2015,33,Virginia Tech
+261,2015,34,Vermont
+264,2015,31,Washington
+265,2015,31,Washington St
+269,2015,32,Marquette
+270,2015,30,Milwaukee
+275,2015,40,Wisconsin
+276,2015,32,Marshall
+277,2015,35,West Virginia
+278,2015,32,Fresno St
+279,2015,31,Pacific
+282,2015,31,Indiana St
+286,2015,2,NC Wesleyan
+288,2015,31,Lipscomb
+290,2015,31,Georgia So
+292,2015,31,UT Rio Grande
+294,2015,32,Jacksonville
+295,2015,35,Old Dominion
+297,2015,1,Hampden
+299,2015,33,Long Beach St
+300,2015,34,UC Irvine
+301,2015,31,San Diego
+302,2015,32,UC Davis
+304,2015,30,Idaho St
+305,2015,32,DePaul
+309,2015,36,Louisiana
+311,2015,30,Maine
+314,2015,35,Iona
+315,2015,30,Niagara
+316,2015,1,Dickinson St
+322,2015,33,Lafayette
+324,2015,34,Coast Car
+325,2015,34,Cleveland St
+326,2015,31,Texas St
+328,2015,31,Utah State
+329,2015,1,Mt. St. Vincent
+331,2015,34,E Washington
+333,2015,34,Alabama
+338,2015,32,Kennesaw St
+339,2015,36,Evansville
+344,2015,32,Mississippi St
+349,2015,30,Army
+350,2015,32,UNC Wilmington
+353,2015,1,Joh. & Wales RI
+356,2015,33,Illinois
+357,2015,34,Texas A&M-CC
+366,2015,1,Ferrum
+391,2015,1,Oberlin 
+399,2015,33,Albany
+405,2015,1,Baptist Bible
+411,2015,1,Chapman
+424,2015,1,Capital (OH)
+450,2015,1,Wheelock College
+461,2015,1,Gwynedd-Mercy
+481,2015,1,Mount Ida 
+482,2015,1,University of the Sc
+484,2015,1,Alice Lloyd
+486,2015,2,Aquinas
+488,2015,1,Baker
+489,2015,3,Barber Scotia
+495,2015,2,Bluefield U
+500,2015,1,California Maritime
+524,2015,1,Fisher College
+526,2015,33,FGCU
+531,2015,1,Providence (MT)
+533,2015,1,Hannibal-LaGrange Co
+534,2015,2,Harris Stowe
+535,2015,1,Haskell
+542,2015,1,IL-Springfield
+546,2015,2,Judson College
+551,2015,1,NVU-Lyndon
+554,2015,1,Maine-Ft Kent
+556,2015,1,Malone
+561,2015,1,Mayville St
+576,2015,1,Mount Vernon Nazaren
+580,2015,1,Newman
+594,2015,1,Pacific Union
+597,2015,1,Presentation
+612,2015,1,Simpson
+613,2015,1,SD School of Mines
+619,2015,1,Tabor College
+630,2015,2,Wayland Baptist
+2000,2015,31,Abilene Chrstn
+2001,2015,2,Adams State
+2005,2015,31,Air Force
+2006,2015,35,Akron
+2010,2015,29,Alabama A&M
+2011,2015,29,Alabama St
+2016,2015,32,Alcorn St
+2019,2015,2,Allen Univ
+2023,2015,1,Anderson (IN)
+2026,2015,29,Appalachian St
+2028,2015,3,Ark Monticello
+2029,2015,32,AR-Pine Bluff
+2031,2015,31,Little Rock
+2032,2015,29,Arkansas St
+2033,2015,1,Arkansas Tech
+2040,2015,2,Aub.-Montgomery
+2044,2015,1,Aurora
+2045,2015,1,Austin
+2046,2015,30,Austin Peay
+2047,2015,1,Averett
+2048,2015,2,Avila
+2050,2015,30,Ball State
+2056,2015,1,Belhaven
+2057,2015,33,Belmont
+2061,2015,1,Berea College
+2064,2015,1,Bethel (TN)
+2065,2015,32,Bethune
+2066,2015,32,Binghamton
+2069,2015,1,Black Hills St
+2073,2015,1,Bluefield St
+2074,2015,1,Bluffton
+2077,2015,1,Brewton-Parker
+2083,2015,34,Bucknell
+2084,2015,33,Buffalo
+2086,2015,34,Butler
+2092,2015,1,CSU Dom Hills
+2093,2015,2,CS East Bay
+2094,2015,1,Cal Lutheran
+2096,2015,1,Cameron
+2097,2015,32,Campbell
+2099,2015,33,Canisius
+2104,2015,3,Carroll (MT)
+2107,2015,2,Catawba
+2108,2015,1,Catholic DC
+2110,2015,29,C Arkansas
+2113,2015,1,Centenary LA
+2115,2015,31,C Connecticut
+2116,2015,30,UCF
+2117,2015,32,C Michigan
+2123,2015,1,Chadron State
+2124,2015,4,Chaminade
+2127,2015,31,Charleston So
+2129,2015,1,Cheyney
+2130,2015,32,Chicago St
+2132,2015,34,Cincinnati
+2142,2015,33,Colgate
+2150,2015,2,Concordia OR
+2154,2015,31,Coppin St
+2166,2015,32,Davidson
+2168,2015,36,Dayton
+2169,2015,36,Delaware St
+2172,2015,30,Denver
+2174,2015,33,Detroit Mercy
+2176,2015,2,Dillard
+2181,2015,31,Drake
+2182,2015,30,Drexel
+2184,2015,31,Duquesne
+2189,2015,1,Earlham
+2193,2015,30,ETSU
+2197,2015,33,E Illinois
+2198,2015,33,E Kentucky
+2199,2015,35,E Michigan
+2202,2015,2,E Oregon
+2204,2015,1,Eckerd
+2206,2015,2,Edward Waters
+2210,2015,33,Elon
+2215,2015,1,Erskine
+2217,2015,31,Fairfield
+2221,2015,1,FDU-Florham
+2222,2015,1,Ferris St
+2225,2015,1,Fisk
+2226,2015,28,FAU
+2227,2015,1,FL Memorial
+2228,2015,1,Flagler
+2229,2015,33,FIU
+2230,2015,31,Fordham
+2232,2015,3,Fort Valley St
+2235,2015,1,Fresno Pacific
+2239,2015,31,Fullerton
+2241,2015,35,Gardner-Webb
+2244,2015,31,George Mason
+2247,2015,35,Georgia St
+2250,2015,38,Gonzaga
+2251,2015,2,Goucher
+2253,2015,32,Grand Canyon
+2256,2015,2,Greensboro
+2257,2015,1,Greenville
+2261,2015,35,Hampton
+2267,2015,1,Hawaii-Hilo
+2272,2015,33,High Point
+2273,2015,1,Hillsdale
+2275,2015,34,Hofstra
+2277,2015,28,Hou Christian
+2281,2015,5,Hus-Till
+2287,2015,35,Illinois St
+2288,2015,1,IN South Bend
+2294,2015,34,Iowa
+2295,2015,1,Iowa Wesleyan
+2296,2015,32,Jackson St
+2299,2015,3,Jarvis Chr
+2305,2015,36,Kansas
+2306,2015,32,Kansas St
+2309,2015,35,Kent State
+2312,2015,1,King  TN
+2318,2015,1,La Verne
+2320,2015,30,Lamar
+2324,2015,2,Langston
+2325,2015,33,La Salle
+2329,2015,30,Lehigh
+2333,2015,1,Lewis & Clark
+2335,2015,32,Liberty
+2336,2015,1,Limestone
+2344,2015,34,Longwood
+2345,2015,1,CS Los Angeles
+2347,2015,4,LA Christian
+2348,2015,36,Louisiana Tech
+2349,2015,29,UMass Lowell
+2350,2015,37,Loyola Chicago
+2351,2015,31,LMU
+2352,2015,30,Loyola MD
+2358,2015,2,Lyon College
+2362,2015,1,Manchester
+2363,2015,33,Manhattan
+2368,2015,32,Marist
+2369,2015,2,Mars Hill
+2375,2015,1,Masters 
+2377,2015,31,McNeese
+2378,2015,30,UMBC
+2379,2015,33,MD-Eastern
+2381,2015,1,Menlo
+2382,2015,35,Mercer
+2383,2015,1,Merchant Marine
+2390,2015,38,Miami
+2391,2015,1,Mich-Dearborn
+2393,2015,36,MTSU
+2395,2015,1,Midwest
+2396,2015,1,Miles
+2397,2015,2,Milligan
+2400,2015,32,Miss Valley St
+2401,2015,1,MS College
+2402,2015,1,Missouri S&T
+2405,2015,33,Monmouth
+2410,2015,4,Montreat 
+2413,2015,34,Morehead St
+2415,2015,31,Morgan St
+2424,2015,1,NM Highlands
+2426,2015,32,Navy
+2427,2015,31,UNC Asheville
+2428,2015,33,NC Central
+2429,2015,32,Charlotte
+2430,2015,33,UNC Greensboro
+2433,2015,38,UL Monroe
+2437,2015,29,Omaha
+2439,2015,33,UNLV
+2440,2015,31,Nevada
+2443,2015,29,New Orleans
+2447,2015,29,Nicholls
+2448,2015,32,NC A&T
+2449,2015,33,N Dakota St
+2450,2015,34,Norfolk St
+2453,2015,1,North Alabama
+2454,2015,35,North Florida
+2458,2015,30,N Colorado
+2459,2015,30,N Illinois
+2460,2015,35,Northern Iowa
+2462,2015,1,Northland
+2463,2015,33,CSU Northridge
+2464,2015,38,N Arizona
+2465,2015,1,Northwest (WA)
+2466,2015,32,N'Western St
+2468,2015,1,ND de Namur
+2470,2015,1,Nova SE
+2473,2015,33,Oakland
+2474,2015,1,Oakland City
+2477,2015,1,Ohio Dominican
+2479,2015,2,Ohio Valley
+2483,2015,36,Oregon
+2486,2015,1,Pacific Lutheran
+2487,2015,1,Pace
+2488,2015,1,Paine
+2489,2015,1,Palm Beach Atl
+2492,2015,32,Pepperdine
+2496,2015,2,Piedmont
+2501,2015,33,Portland
+2502,2015,29,Portland St
+2504,2015,33,Prairie View
+2506,2015,32,Presbyterian
+2507,2015,34,Providence
+2509,2015,34,Purdue
+2514,2015,30,Quinnipiac
+2515,2015,34,Radford
+2518,2015,1,Regis Univ
+2519,2015,1,Rhodes
+2520,2015,33,Rider
+2523,2015,35,Robert Morris
+2525,2015,2,Rockhurst
+2529,2015,32,Sacred Heart
+2534,2015,35,Sam Houston
+2535,2015,32,Samford
+2539,2015,32,San Francisco
+2540,2015,33,UCSB
+2541,2015,32,Santa Clara
+2542,2015,31,Savannah State
+2544,2015,1,Schreiner
+2545,2015,32,SE Louisiana
+2546,2015,30,SE Missouri St
+2547,2015,34,Seattle U
+2550,2015,31,Seton Hall
+2557,2015,1,Coast Guard
+2561,2015,31,Siena
+2564,2015,1,Simpson
+2565,2015,28,SIUE
+2567,2015,34,SMU
+2568,2015,1,Southern Ark.
+2569,2015,33,SC State
+2571,2015,35,S Dakota St
+2572,2015,29,Southern Miss
+2573,2015,2,So New Orleans
+2579,2015,33,South Carolina
+2582,2015,35,Southern
+2585,2015,1,Vanguard
+2590,2015,3,Spring Hill
+2592,2015,5,St. Andrews
+2595,2015,1,St Francis (IL)
+2597,2015,35,St Francis BK
+2598,2015,32,St Francis PA
+2599,2015,33,St John's
+2601,2015,1,St. Joseph's (IN)
+2603,2015,31,Saint Joseph's
+2608,2015,31,Saint Mary's
+2612,2015,34,Saint Peter's
+2615,2015,1,St Xavier
+2617,2015,34,SF Austin
+2619,2015,35,Stony Brook
+2623,2015,31,Missouri St
+2628,2015,33,TCU
+2630,2015,34,UT Martin
+2631,2015,1,Tenn Temple
+2633,2015,32,Tennessee
+2634,2015,31,Tennessee St
+2635,2015,30,Tennessee Tech
+2636,2015,30,UTSA
+2637,2015,1,Texas College
+2638,2015,33,UTEP
+2639,2015,1,TX Lutheran
+2640,2015,35,Texas Southern
+2641,2015,32,Texas Tech
+2643,2015,30,The Citadel
+2644,2015,1,Thiel
+2645,2015,1,Thomas College
+2648,2015,3,Toccoa Falls
+2649,2015,33,Toledo
+2652,2015,1,Trinity (IL)
+2653,2015,29,Troy
+2654,2015,1,Truman St
+2655,2015,31,Tulane
+2658,2015,1,TX A&M Kings
+2666,2015,1,Urbana
+2670,2015,36,VCU
+2674,2015,34,Valparaiso
+2678,2015,30,VMI
+2681,2015,30,Wagner
+2684,2015,2,Warren Wilson
+2689,2015,1,Washington Coll
+2691,2015,1,Webber Int
+2692,2015,30,Weber St
+2701,2015,1,Montana-Western
+2706,2015,1,W. Virginia Tech
+2710,2015,28,W Illinois
+2711,2015,34,W Michigan
+2714,2015,2,Western St.
+2717,2015,32,W Carolina
+2724,2015,35,Wichita St
+2726,2015,1,Wilberforce
+2729,2015,33,William & Mary
+2730,2015,1,William Carey
+2737,2015,32,Winthrop
+2739,2015,33,Green Bay
+2747,2015,35,Wofford
+2750,2015,31,Wright St
+2751,2015,35,Wyoming
+2752,2015,37,Xavier
+2754,2015,32,Youngstown St
+2755,2015,29,Grambling
+2757,2015,1,Berry
+2758,2015,3,Howard Payne
+2772,2015,2,Minn Crookston
+2790,2015,1,Albion
+2800,2015,1,Alma College
+2803,2015,31,Bryant
+2804,2015,1,Chowan
+2816,2015,1,McKendree
+2823,2015,1,NW Oklahoma St
+2825,2015,1,Quincy
+2827,2015,1,Rowan
+2838,2015,1,Tiffin
+2839,2015,2,Tusculum
+2842,2015,2,Virginia-Wise
+2844,2015,2,Wayne St (NE)
+2855,2015,2,Brescia
+2857,2015,1,Caldwell 
+2861,2015,1,Clayton
+2862,2015,2,CO Christian
+2868,2015,1,Holy Names
+2870,2015,31,Purdue FW
+2884,2015,1,Nichols
+2885,2015,33,NJIT
+2887,2015,2,NW Nazarene
+2888,2015,1,Ouachita Baptist
+2890,2015,2,Reinhardt
+2895,2015,1,Southern VT
+2896,2015,1,Southern VA
+2906,2015,2,Trevecca
+2907,2015,1,Trinity Intl
+2908,2015,36,SC Upstate
+2911,2015,1,William Jewell
+2913,2015,1,Brevard 
+2916,2015,29,Incarnate Word
+2922,2015,1,Olivet Nazarene
+2930,2015,1,Willamette
+2934,2015,33,Bakersfield
+2937,2015,1,Dallas Christ.
+2945,2015,2,Pfeiffer
+2947,2015,4,Rochester Univ.
+2948,2015,1,Stillman
+2963,2015,1,Case Western Reserve
+2975,2015,1,Transylvania
+2976,2015,1,Wentworth
+2979,2015,1,St Rose
+2985,2015,2,Concordia (MI)
+2990,2015,1,St Joseph's BKN
+3066,2015,1,Concordia-St. P
+3067,2015,1,Goshen
+3075,2015,1,Selma
+3077,2015,2,Kentucky Chr
+3079,2015,2,Cent Bapt Coll
+3082,2015,1,TX A&M-Intl
+3083,2015,1,Oakwood
+3084,2015,30,Utah Valley
+3086,2015,1,TX-Tyler
+3087,2015,1,SUNY-Old Westbury
+3088,2015,1,IU-Northwest
+3090,2015,2,Randall
+3093,2015,2,Cin Christian
+3096,2015,7,SD Christian
+3097,2015,1,Johnson FL
+3098,2015,1,Marygrove 
+3099,2015,1,Concordia (AL)
+3106,2015,1,Corban U
+3119,2015,1,Daniel Webster
+3120,2015,1,Ecclesia
+3134,2015,4,Champ. Christ.
+3140,2015,1,St. Catharine
+3141,2015,2,No New Mexico
+3142,2015,1,Bushnell
+3152,2015,3,Walla Walla
+3153,2015,1,Randolph
+3154,2015,1,Southwest
+3155,2015,2,Trinity Baptist
+3157,2015,1,Ark Fort Smith
+3158,2015,2,Our Lady
+3160,2015,1,R. Morris-Spfld
+3164,2015,5,Central Penn
+3166,2015,1,Arl Baptist
+3168,2015,2,Crowley's Ridge
+3169,2015,4,Joh. & Wales NC
+3170,2015,1,St. Thomas (TX)
+3171,2015,4,Hiwassee
+3173,2015,1,Pensacola
+3174,2015,4,Trinity Baptist
+3178,2015,2,Ave Maria
+3192,2015,1,IU-Kokomo
+3219,2015,1,Young Harris
+3229,2015,2,VU of Lynchburg
+3239,2015,2,Johnson (TN)
+3242,2015,3,Columbia Int
+3243,2015,3,Bob Jones
+3244,2015,1,Florida Coll
+3245,2015,2,Tru-Mc
+3246,2015,2,Bethesda
+3249,2015,7,St. Katherine
+7639,2015,3,Thomas (GA)
+107730,2015,2,Florida Natl
+108782,2015,5,Bristol Univ.
+108789,2015,1,Morrisville
+108798,2015,1,Ohio Midwestern
+108799,2015,2,Cincy Clermont
+108806,2015,1,Mid-Atl Chr
+108807,2015,1,William Peace
+108808,2015,1,Penn St Beaver
+108817,2015,5,LSU Alexandria
+108818,2015,1,NYIT
+108820,2015,1,Alfred State
+108822,2015,1,Newbury
+108838,2015,1,Mitchell
+108842,2015,1,Emerson
+108854,2015,1,Hood
+108858,2015,1,Coll of Faith
+108859,2015,1,Goldey-Beacom
+108860,2015,1,Keystone
+108862,2015,1,Sarah Lawrence
+108874,2015,1,Harrisburg
+108942,2015,2,Carolina Univ.
+108994,2015,1,PSU Mont Alto
+109014,2015,1,Mid Georgia St
+112358,2015,30,Long Island
+1,2016,3,AK-Anchorage
+2,2016,30,Auburn
+5,2016,33,UAB
+6,2016,33,South Alabama
+8,2016,31,Arkansas
+9,2016,32,Arizona St
+12,2016,34,Arizona
+13,2016,30,Cal Poly
+16,2016,30,Sacramento St
+21,2016,37,San Diego St
+22,2016,1,San Fran St
+23,2016,30,San José St
+24,2016,30,Stanford
+25,2016,33,California
+26,2016,32,UCLA
+27,2016,33,UC Riverside
+28,2016,1,UC San Diego
+30,2016,34,USC
+36,2016,34,Colorado St
+38,2016,33,Colorado
+41,2016,36,UConn
+42,2016,33,Hartford
+43,2016,30,Yale
+44,2016,31,American
+45,2016,38,G Washington
+46,2016,32,Georgetown
+47,2016,31,Howard
+48,2016,29,Delaware
+49,2016,1,Dubuque
+50,2016,28,FAMU
+52,2016,33,Florida St
+53,2016,1,Florida Tech
+55,2016,29,J'Ville St
+56,2016,33,Stetson
+57,2016,36,Florida
+58,2016,33,South Florida
+59,2016,36,Georgia Tech
+61,2016,33,Georgia
+62,2016,34,Hawai'i
+66,2016,35,Iowa State
+68,2016,32,Boise St
+70,2016,34,Idaho
+71,2016,31,Bradley
+73,2016,1,IL Tech
+77,2016,31,Northwestern
+79,2016,32,S Illinois
+82,2016,30,UIC
+84,2016,35,Indiana
+85,2016,32,IUPUI
+87,2016,36,Notre Dame
+93,2016,30,Murray St
+94,2016,30,N Kentucky
+96,2016,35,Kentucky
+97,2016,31,Louisville
+98,2016,34,Western KY
+99,2016,33,LSU
+100,2016,4,Loyola (LA)
+101,2016,2,Eureka Coll
+103,2016,32,Boston College
+104,2016,34,Boston Univ
+107,2016,35,Holy Cross
+108,2016,30,Harvard
+109,2016,1,MIT
+111,2016,32,Northeastern
+113,2016,32,UMass
+116,2016,33,Mount St Mary
+119,2016,32,Towson
+120,2016,35,Maryland
+127,2016,34,Michigan St
+128,2016,1,N Michigan
+130,2016,35,Michigan
+134,2016,1,Minn Duluth
+135,2016,30,Minnesota
+136,2016,1,Missouri Valley
+139,2016,32,Saint Louis
+140,2016,31,Kansas City
+142,2016,31,Missouri
+145,2016,31,Ole Miss
+147,2016,30,Montana St
+149,2016,33,Montana
+150,2016,35,Duke
+151,2016,31,East Carolina
+152,2016,33,NC State
+153,2016,40,North Carolina
+154,2016,31,Wake Forest
+155,2016,33,North Dakota
+156,2016,35,Creighton
+158,2016,34,Nebraska
+159,2016,28,Dartmouth
+160,2016,33,New Hampshire
+161,2016,33,Fair Dickinson
+163,2016,29,Princeton
+164,2016,32,Rutgers
+166,2016,34,New Mexico St
+167,2016,32,New Mexico
+171,2016,34,Columbia
+172,2016,28,Cornell
+179,2016,31,St Bonaventure
+183,2016,37,Syracuse
+189,2016,34,Bowling Green
+193,2016,32,Miami OH
+194,2016,34,Ohio State
+195,2016,34,Ohio
+197,2016,31,Oklahoma St
+198,2016,30,Oral Roberts
+199,2016,1,SE Okla St
+201,2016,36,Oklahoma
+202,2016,31,Tulsa
+203,2016,1,Linfield
+204,2016,32,Oregon St
+213,2016,31,Penn State
+218,2016,32,Temple
+219,2016,28,Penn
+220,2016,1,Pitt-Bradford
+221,2016,32,Pitt
+222,2016,39,Villanova
+225,2016,28,Brown
+227,2016,32,Rhode Island
+228,2016,31,Clemson
+229,2016,1,Coker College
+230,2016,1,Francis
+231,2016,35,Furman
+232,2016,31,Charleston
+233,2016,31,South Dakota
+235,2016,34,Memphis
+236,2016,34,Chattanooga
+238,2016,33,Vanderbilt
+239,2016,33,Baylor
+241,2016,1,McMurry
+242,2016,32,Rice
+244,2016,2,St. Edward's
+245,2016,37,Texas A&M
+248,2016,32,Houston
+249,2016,32,North Texas
+250,2016,34,UT Arlington
+251,2016,33,Texas
+252,2016,36,BYU
+253,2016,29,Southern Utah
+254,2016,35,Utah
+256,2016,31,James Madison
+257,2016,32,Richmond
+258,2016,36,Virginia
+259,2016,35,Virginia Tech
+261,2016,37,Vermont
+264,2016,34,Washington
+265,2016,30,Washington St
+269,2016,33,Marquette
+270,2016,32,Milwaukee
+275,2016,34,Wisconsin
+276,2016,33,Marshall
+277,2016,34,West Virginia
+278,2016,35,Fresno St
+279,2016,28,Pacific
+282,2016,31,Indiana St
+286,2016,2,NC Wesleyan
+288,2016,32,Lipscomb
+290,2016,30,Georgia So
+291,2016,1,Methodist
+292,2016,29,UT Rio Grande
+294,2016,31,Jacksonville
+295,2016,38,Old Dominion
+299,2016,34,Long Beach St
+300,2016,38,UC Irvine
+301,2016,30,San Diego
+302,2016,30,UC Davis
+304,2016,30,Idaho St
+305,2016,30,DePaul
+309,2016,33,Louisiana
+310,2016,1,Maryville MO
+311,2016,30,Maine
+314,2016,32,Iona
+315,2016,32,Niagara
+316,2016,1,Dickinson St
+322,2016,30,Lafayette
+324,2016,33,Coast Car
+325,2016,32,Cleveland St
+326,2016,31,Texas St
+328,2016,30,Utah State
+329,2016,1,Mt. St. Vincent
+331,2016,34,E Washington
+333,2016,32,Alabama
+338,2016,31,Kennesaw St
+339,2016,34,Evansville
+344,2016,30,Mississippi St
+349,2016,33,Army
+350,2016,33,UNC Wilmington
+352,2016,1,Kenyon
+355,2016,1,SUNY Oneonta
+356,2016,34,Illinois
+357,2016,33,Texas A&M-CC
+366,2016,2,Ferrum
+368,2016,1,Purdue NW
+390,2016,1,UTICA
+391,2016,1,Oberlin 
+399,2016,33,Albany
+401,2016,1,University of Wiscon
+402,2016,1,Worcester St
+408,2016,3,WA Adventist
+411,2016,1,Chapman
+415,2016,1,George Fox
+417,2016,1,Gallaudet
+433,2016,1,Westminster College 
+450,2016,1,Wheelock College
+469,2016,1,Chestnut Hill
+486,2016,1,Aquinas
+494,2016,3,Blue Mountain
+495,2016,1,Bluefield U
+524,2016,1,Fisher College
+526,2016,35,FGCU
+531,2016,5,Providence (MT)
+533,2016,3,Hannibal-LaGrange Co
+534,2016,3,Harris Stowe
+542,2016,1,IL-Springfield
+546,2016,2,Judson College
+551,2016,1,NVU-Lyndon
+552,2016,1,Madonna University
+554,2016,1,Maine-Ft Kent
+556,2016,1,Malone
+594,2016,4,Pacific Union
+598,2016,1,Purdue University-No
+613,2016,1,SD School of Mines
+619,2016,1,Tabor College
+628,2016,2,Valley City St
+2000,2016,31,Abilene Chrstn
+2001,2016,1,Adams State
+2005,2016,32,Air Force
+2006,2016,35,Akron
+2010,2016,28,Alabama A&M
+2011,2016,31,Alabama St
+2013,2016,1,Albany St GA
+2016,2016,30,Alcorn St
+2019,2016,5,Allen Univ
+2025,2016,1,Angelo State
+2026,2016,30,Appalachian St
+2028,2016,1,Ark Monticello
+2029,2016,32,AR-Pine Bluff
+2031,2016,35,Little Rock
+2032,2016,31,Arkansas St
+2033,2016,1,Arkansas Tech
+2040,2016,3,Aub.-Montgomery
+2045,2016,1,Austin
+2046,2016,36,Austin Peay
+2047,2016,1,Averett
+2050,2016,34,Ball State
+2057,2016,32,Belmont
+2058,2016,2,Bel Abbey
+2065,2016,32,Bethune
+2066,2016,30,Binghamton
+2067,2016,1,BIOLA
+2069,2016,1,Black Hills St
+2075,2016,1,BowieSt
+2079,2016,1,Bridgewater VA
+2083,2016,31,Bucknell
+2084,2016,35,Buffalo
+2086,2016,32,Butler
+2088,2016,1,BYU Hawaii
+2092,2016,1,CSU Dom Hills
+2093,2016,1,CS East Bay
+2097,2016,30,Campbell
+2098,2016,1,Campbellsville
+2099,2016,33,Canisius
+2104,2016,2,Carroll (MT)
+2107,2016,1,Catawba
+2109,2016,1,Cedarville
+2110,2016,28,C Arkansas
+2113,2016,2,Centenary LA
+2115,2016,29,C Connecticut
+2116,2016,30,UCF
+2117,2016,33,C Michigan
+2119,2016,1,Cent St OH
+2123,2016,1,Chadron State
+2124,2016,3,Chaminade
+2127,2016,29,Charleston So
+2129,2016,1,Cheyney
+2130,2016,32,Chicago St
+2132,2016,33,Cincinnati
+2142,2016,30,Colgate
+2150,2016,1,Concordia OR
+2154,2016,31,Coppin St
+2157,2016,1,Covenant
+2161,2016,1,Cumberland TN
+2166,2016,33,Davidson
+2168,2016,33,Dayton
+2169,2016,31,Delaware St
+2171,2016,1,Denison
+2172,2016,31,Denver
+2174,2016,30,Detroit Mercy
+2176,2016,2,Dillard
+2181,2016,31,Drake
+2182,2016,31,Drexel
+2184,2016,33,Duquesne
+2191,2016,1,East Central
+2192,2016,1,East Menn
+2193,2016,35,ETSU
+2197,2016,30,E Illinois
+2198,2016,30,E Kentucky
+2199,2016,32,E Michigan
+2204,2016,1,Eckerd
+2206,2016,1,Edward Waters
+2210,2016,32,Elon
+2211,2016,1,Emmanuel
+2214,2016,1,Emporia St
+2217,2016,33,Fairfield
+2221,2016,1,FDU-Florham
+2225,2016,2,Fisk
+2226,2016,32,FAU
+2227,2016,2,FL Memorial
+2229,2016,31,FIU
+2230,2016,31,Fordham
+2232,2016,3,Fort Valley St
+2235,2016,2,Fresno Pacific
+2237,2016,1,Ft Lewis
+2239,2016,30,Fullerton
+2241,2016,33,Gardner-Webb
+2242,2016,1,Geneva
+2244,2016,31,George Mason
+2247,2016,30,Georgia St
+2250,2016,36,Gonzaga
+2251,2016,1,Goucher
+2253,2016,34,Grand Canyon
+2256,2016,1,Greensboro
+2261,2016,31,Hampton
+2267,2016,2,Hawaii-Hilo
+2269,2016,1,HI Pacific
+2271,2016,1,Henderson St
+2272,2016,32,High Point
+2274,2016,1,Hiram
+2275,2016,33,Hofstra
+2277,2016,34,Hou Christian
+2287,2016,31,Illinois St
+2294,2016,33,Iowa
+2296,2016,35,Jackson St
+2299,2016,3,Jarvis Chr
+2301,2016,1,JohnBrow
+2305,2016,38,Kansas
+2306,2016,32,Kansas St
+2309,2016,32,Kent State
+2310,2016,1,Kentucky St
+2318,2016,1,La Verne
+2320,2016,30,Lamar
+2325,2016,31,La Salle
+2326,2016,1,LeTourneau
+2327,2016,1,Lees McRae
+2329,2016,32,Lehigh
+2335,2016,31,Liberty
+2344,2016,32,Longwood
+2345,2016,1,CS Los Angeles
+2347,2016,5,LA Christian
+2348,2016,33,Louisiana Tech
+2349,2016,29,UMass Lowell
+2350,2016,32,Loyola Chicago
+2351,2016,31,LMU
+2352,2016,30,Loyola MD
+2353,2016,2,LSU Shreveport
+2358,2016,1,Lyon College
+2362,2016,1,Manchester
+2363,2016,31,Manhattan
+2366,2016,1,Marian
+2368,2016,30,Marist
+2369,2016,2,Mars Hill
+2375,2016,1,Masters 
+2377,2016,28,McNeese
+2378,2016,32,UMBC
+2379,2016,32,MD-Eastern
+2381,2016,2,Menlo
+2382,2016,34,Mercer
+2383,2016,1,Merchant Marine
+2384,2016,1,Mercy
+2390,2016,34,Miami
+2391,2016,1,Mich-Dearborn
+2393,2016,35,MTSU
+2396,2016,1,Miles
+2397,2016,2,Milligan
+2398,2016,1,Millsaps
+2399,2016,1,Minn-Morris
+2400,2016,35,Miss Valley St
+2401,2016,1,MS College
+2404,2016,1,Molloy
+2405,2016,36,Monmouth
+2410,2016,3,Montreat 
+2413,2016,37,Morehead St
+2415,2016,30,Morgan St
+2419,2016,1,Mount St. Joseph
+2424,2016,2,NM Highlands
+2426,2016,33,Navy
+2427,2016,34,UNC Asheville
+2428,2016,31,NC Central
+2429,2016,33,Charlotte
+2430,2016,34,UNC Greensboro
+2433,2016,34,UL Monroe
+2437,2016,32,Omaha
+2439,2016,33,UNLV
+2440,2016,38,Nevada
+2443,2016,30,New Orleans
+2447,2016,34,Nicholls
+2448,2016,32,NC A&T
+2449,2016,33,N Dakota St
+2450,2016,33,Norfolk St
+2454,2016,34,North Florida
+2458,2016,31,N Colorado
+2459,2016,34,N Illinois
+2460,2016,36,Northern Iowa
+2462,2016,1,Northland
+2463,2016,30,CSU Northridge
+2464,2016,29,N Arizona
+2466,2016,28,N'Western St
+2468,2016,1,ND de Namur
+2473,2016,35,Oakland
+2474,2016,3,Oakland City
+2477,2016,1,Ohio Dominican
+2483,2016,37,Oregon
+2484,2016,1,Oregon Tech
+2486,2016,1,Pacific Lutheran
+2488,2016,1,Paine
+2491,2016,1,Paul Quinn
+2492,2016,32,Pepperdine
+2496,2016,2,Piedmont
+2500,2016,1,Point Loma
+2501,2016,31,Portland
+2502,2016,31,Portland St
+2504,2016,30,Prairie View
+2506,2016,31,Presbyterian
+2507,2016,35,Providence
+2509,2016,35,Purdue
+2512,2016,1,Queens NY
+2514,2016,29,Quinnipiac
+2515,2016,30,Radford
+2518,2016,1,Regis Univ
+2520,2016,32,Rider
+2521,2016,2,Rio Grande
+2522,2016,1,Roanoke
+2523,2016,32,Robert Morris
+2525,2016,1,Rockhurst
+2529,2016,30,Sacred Heart
+2534,2016,34,Sam Houston
+2535,2016,33,Samford
+2539,2016,30,San Francisco
+2540,2016,33,UCSB
+2541,2016,31,Santa Clara
+2542,2016,31,Savannah State
+2544,2016,2,Schreiner
+2545,2016,33,SE Louisiana
+2546,2016,29,SE Missouri St
+2547,2016,32,Seattle U
+2550,2016,33,Seton Hall
+2561,2016,33,Siena
+2564,2016,2,Simpson
+2565,2016,28,SIUE
+2567,2016,30,SMU
+2569,2016,32,SC State
+2571,2016,34,S Dakota St
+2572,2016,29,Southern Miss
+2579,2016,33,South Carolina
+2582,2016,35,Southern
+2585,2016,1,Vanguard
+2590,2016,1,Spring Hill
+2591,2016,1,St Ambro
+2592,2016,1,St. Andrews
+2597,2016,32,St Francis BK
+2598,2016,30,St Francis PA
+2599,2016,32,St John's
+2601,2016,1,St. Joseph's (IN)
+2603,2016,36,Saint Joseph's
+2606,2016,1,St. Martin's
+2608,2016,35,Saint Mary's
+2612,2016,29,Saint Peter's
+2617,2016,34,SF Austin
+2619,2016,33,Stony Brook
+2623,2016,31,Missouri St
+2626,2016,1,Tampa
+2628,2016,33,TCU
+2630,2016,34,UT Martin
+2632,2016,2,Tenn Wesleyan
+2633,2016,34,Tennessee
+2634,2016,31,Tennessee St
+2635,2016,31,Tennessee Tech
+2636,2016,32,UTSA
+2637,2016,1,Texas College
+2638,2016,33,UTEP
+2639,2016,2,TX Lutheran
+2640,2016,32,Texas Southern
+2641,2016,31,Texas Tech
+2642,2016,1,TX Wesleyan
+2643,2016,32,The Citadel
+2644,2016,1,Thiel
+2646,2016,1,Thomas M
+2648,2016,3,Toccoa Falls
+2649,2016,32,Toledo
+2652,2016,2,Trinity (IL)
+2653,2016,31,Troy
+2655,2016,34,Tulane
+2666,2016,1,Urbana
+2667,2016,1,Ursinus
+2670,2016,35,VCU
+2674,2016,37,Valparaiso
+2678,2016,30,VMI
+2679,2016,2,Voorhees
+2681,2016,34,Wagner
+2683,2016,1,Warner
+2684,2016,1,Warren Wilson
+2691,2016,3,Webber Int
+2692,2016,35,Weber St
+2701,2016,1,Montana-Western
+2706,2016,1,W. Virginia Tech
+2710,2016,27,W Illinois
+2711,2016,32,W Michigan
+2714,2016,1,Western St.
+2717,2016,33,W Carolina
+2724,2016,35,Wichita St
+2725,2016,1,Widener
+2728,2016,1,Wiley
+2729,2016,31,William & Mary
+2730,2016,1,William Carey
+2737,2016,31,Winthrop
+2739,2016,36,Green Bay
+2747,2016,32,Wofford
+2750,2016,34,Wright St
+2751,2016,32,Wyoming
+2752,2016,33,Xavier
+2754,2016,32,Youngstown St
+2755,2016,31,Grambling
+2758,2016,3,Howard Payne
+2790,2016,1,Albion
+2800,2016,1,Alma College
+2803,2016,30,Bryant
+2804,2016,1,Chowan
+2810,2016,1,Hardin-Simmons
+2822,2016,2,N Greenville
+2825,2016,1,Quincy
+2827,2016,1,Rowan
+2828,2016,1,Shenandoah
+2834,2016,2,Sul Ross
+2838,2016,1,Tiffin
+2839,2016,1,Tusculum
+2842,2016,1,Virginia-Wise
+2844,2016,1,Wayne St (NE)
+2846,2016,1,Wesley
+2848,2016,1,Western Oregon
+2849,2016,1,Westminster PA
+2855,2016,2,Brescia
+2862,2016,1,CO Christian
+2863,2016,1,CS Monterey Bay
+2868,2016,2,Holy Names
+2870,2016,34,Purdue FW
+2871,2016,2,Kean
+2874,2016,1,Laroche
+2876,2016,1,Lincoln MO
+2885,2016,35,NJIT
+2888,2016,1,Ouachita Baptist
+2890,2016,3,Reinhardt
+2899,2016,1,St. Mary's (MN)
+2901,2016,1,Staten Island
+2906,2016,1,Trevecca
+2907,2016,1,Trinity Intl
+2908,2016,32,SC Upstate
+2911,2016,1,William Jewell
+2916,2016,29,Incarnate Word
+2920,2016,1,Mobile
+2930,2016,1,Willamette
+2931,2016,1,William Woods
+2934,2016,32,Bakersfield
+2937,2016,1,Dallas Christ.
+2942,2016,1,MaryWash
+2947,2016,3,Rochester Univ.
+2976,2016,1,Wentworth
+2981,2016,1,Will Bapt
+3075,2016,1,Selma
+3077,2016,1,Kentucky Chr
+3078,2016,1,William Jessup
+3079,2016,2,Cent Bapt Coll
+3080,2016,1,Waldorf 
+3083,2016,2,Oakwood
+3084,2016,29,Utah Valley
+3086,2016,1,TX-Tyler
+3088,2016,2,IU-Northwest
+3090,2016,2,Randall
+3093,2016,1,Cin Christian
+3094,2016,1,Joh. & Wales CO
+3096,2016,5,SD Christian
+3097,2016,1,Johnson FL
+3098,2016,2,Marygrove 
+3119,2016,2,Daniel Webster
+3120,2016,2,Ecclesia
+3131,2016,1,Grace Bible
+3140,2016,1,St. Catharine
+3141,2016,1,No New Mexico
+3142,2016,1,Bushnell
+3149,2016,1,Farmingdale
+3153,2016,1,Randolph
+3154,2016,1,Southwest
+3155,2016,1,Trinity Baptist
+3157,2016,1,Ark Fort Smith
+3158,2016,4,Our Lady
+3159,2016,1,Coll Idaho
+3163,2016,2,Roosevelt
+3164,2016,6,Central Penn
+3165,2016,1,New Hope
+3166,2016,1,Arl Baptist
+3168,2016,1,Crowley's Ridge
+3169,2016,4,Joh. & Wales NC
+3170,2016,2,St. Thomas (TX)
+3171,2016,4,Hiwassee
+3173,2016,1,Pensacola
+3174,2016,4,Trinity Baptist
+3178,2016,2,Ave Maria
+3188,2016,1,AZ Christian
+3189,2016,1,Coastal Georgia
+3192,2016,3,IU-Kokomo
+3216,2016,1,Cairn
+3218,2016,1,Northwest Indian
+3242,2016,1,Columbia Int
+3243,2016,3,Bob Jones
+3245,2016,1,Tru-Mc
+3246,2016,3,Bethesda
+7639,2016,3,Thomas (GA)
+94822,2016,1,TX Perm Basin
+107730,2016,1,Florida Natl
+108782,2016,1,Bristol Univ.
+108799,2016,1,Cincy Clermont
+108806,2016,2,Mid-Atl Chr
+108817,2016,2,LSU Alexandria
+108842,2016,1,Emerson
+108859,2016,2,Goldey-Beacom
+108874,2016,1,Harrisburg
+108942,2016,2,Carolina Univ.
+109014,2016,2,Mid Georgia St
+109567,2016,1,Seton Hill
+109597,2016,4,Antelope Valley
+109656,2016,1,Pine Manor
+109658,2016,1,Rutgers-Newark
+109661,2016,2,Multnomah
+109670,2016,2,Life Pacific
+109671,2016,1,Lourdes
+109683,2016,1,Ryerson
+109684,2016,1,Bryn Athyn
+109700,2016,1,Boyce
+109708,2016,1,Silver Lake
+109998,2016,2,York
+110031,2016,1,Benedictine AZ
+112358,2016,31,Long Island
+1,2017,3,AK-Anchorage
+2,2017,31,Auburn
+5,2017,33,UAB
+6,2017,32,South Alabama
+8,2017,35,Arkansas
+9,2017,33,Arizona St
+12,2017,37,Arizona
+13,2017,31,Cal Poly
+16,2017,29,Sacramento St
+21,2017,33,San Diego St
+22,2017,1,San Fran St
+23,2017,30,San José St
+24,2017,31,Stanford
+25,2017,33,California
+26,2017,36,UCLA
+27,2017,28,UC Riverside
+30,2017,36,USC
+36,2017,35,Colorado St
+38,2017,33,Colorado
+41,2017,33,UConn
+42,2017,32,Hartford
+43,2017,29,Yale
+44,2017,30,American
+45,2017,35,G Washington
+46,2017,32,Georgetown
+47,2017,34,Howard
+48,2017,33,Delaware
+50,2017,30,FAMU
+52,2017,35,Florida St
+53,2017,1,Florida Tech
+55,2017,35,J'Ville St
+56,2017,32,Stetson
+57,2017,36,Florida
+58,2017,30,South Florida
+59,2017,36,Georgia Tech
+60,2017,1,Morehouse
+61,2017,34,Georgia
+62,2017,30,Hawai'i
+63,2017,1,Buena Vista
+66,2017,35,Iowa State
+68,2017,31,Boise St
+70,2017,31,Idaho
+71,2017,33,Bradley
+73,2017,1,IL Tech
+77,2017,35,Northwestern
+79,2017,33,S Illinois
+82,2017,36,UIC
+84,2017,33,Indiana
+85,2017,31,IUPUI
+87,2017,36,Notre Dame
+89,2017,1,Wabash
+92,2017,1,Cabrini
+93,2017,33,Murray St
+94,2017,34,N Kentucky
+96,2017,38,Kentucky
+97,2017,34,Louisville
+98,2017,32,Western KY
+99,2017,31,LSU
+100,2017,2,Loyola (LA)
+101,2017,1,Eureka Coll
+103,2017,32,Boston College
+104,2017,32,Boston Univ
+107,2017,32,Holy Cross
+108,2017,28,Harvard
+111,2017,31,Northeastern
+113,2017,33,UMass
+116,2017,35,Mount St Mary
+117,2017,1,St. Mary's MD
+119,2017,33,Towson
+120,2017,33,Maryland
+127,2017,35,Michigan St
+130,2017,38,Michigan
+135,2017,34,Minnesota
+137,2017,1,Mo Western
+139,2017,33,Saint Louis
+140,2017,35,Kansas City
+141,2017,1,MO-St. Louis
+142,2017,32,Missouri
+145,2017,35,Ole Miss
+147,2017,30,Montana St
+148,2017,2,MT Tech
+149,2017,30,Montana
+150,2017,37,Duke
+151,2017,33,East Carolina
+152,2017,32,NC State
+153,2017,40,North Carolina
+154,2017,32,Wake Forest
+155,2017,31,North Dakota
+156,2017,35,Creighton
+158,2017,31,Nebraska
+159,2017,27,Dartmouth
+160,2017,32,New Hampshire
+161,2017,30,Fair Dickinson
+163,2017,30,Princeton
+164,2017,33,Rutgers
+166,2017,34,New Mexico St
+167,2017,31,New Mexico
+171,2017,27,Columbia
+172,2017,29,Cornell
+179,2017,32,St Bonaventure
+183,2017,34,Syracuse
+189,2017,32,Bowling Green
+193,2017,32,Miami OH
+194,2017,32,Ohio State
+195,2017,31,Ohio
+196,2017,1,Northeastern St
+197,2017,33,Oklahoma St
+198,2017,30,Oral Roberts
+199,2017,1,SE Okla St
+200,2017,1,Southern Nazarene
+201,2017,31,Oklahoma
+202,2017,32,Tulsa
+204,2017,32,Oregon St
+210,2017,1,Millersv
+212,2017,1,John Jay
+213,2017,33,Penn State
+218,2017,32,Temple
+219,2017,28,Penn
+221,2017,33,Pitt
+222,2017,36,Villanova
+225,2017,30,Brown
+227,2017,35,Rhode Island
+228,2017,32,Clemson
+229,2017,2,Coker College
+231,2017,35,Furman
+232,2017,34,Charleston
+233,2017,33,South Dakota
+235,2017,32,Memphis
+236,2017,31,Chattanooga
+237,2017,1,Union TN
+238,2017,35,Vanderbilt
+239,2017,35,Baylor
+242,2017,35,Rice
+244,2017,2,St. Edward's
+245,2017,31,Texas A&M
+248,2017,32,Houston
+249,2017,30,North Texas
+250,2017,36,UT Arlington
+251,2017,32,Texas
+252,2017,34,BYU
+253,2017,31,Southern Utah
+254,2017,31,Utah
+256,2017,33,James Madison
+257,2017,34,Richmond
+258,2017,34,Virginia
+259,2017,33,Virginia Tech
+261,2017,35,Vermont
+264,2017,31,Washington
+265,2017,31,Washington St
+269,2017,32,Marquette
+270,2017,35,Milwaukee
+275,2017,37,Wisconsin
+276,2017,35,Marshall
+277,2017,37,West Virginia
+278,2017,33,Fresno St
+279,2017,33,Pacific
+282,2017,31,Indiana St
+286,2017,1,NC Wesleyan
+288,2017,33,Lipscomb
+289,2017,1,Mt St Mary NY
+290,2017,33,Georgia So
+291,2017,1,Methodist
+292,2017,32,UT Rio Grande
+294,2017,32,Jacksonville
+295,2017,31,Old Dominion
+299,2017,34,Long Beach St
+300,2017,36,UC Irvine
+301,2017,31,San Diego
+302,2017,36,UC Davis
+304,2017,29,Idaho St
+305,2017,32,DePaul
+309,2017,33,Louisiana
+311,2017,32,Maine
+314,2017,35,Iona
+315,2017,33,Niagara
+319,2017,1,Oklahoma Bapt
+322,2017,30,Lafayette
+323,2017,1,Moravian
+324,2017,39,Coast Car
+325,2017,31,Cleveland St
+326,2017,36,Texas St
+328,2017,31,Utah State
+329,2017,1,Mt. St. Vincent
+332,2017,1,Muskingum
+333,2017,33,Alabama
+338,2017,32,Kennesaw St
+339,2017,33,Evansville
+341,2017,1,Frostburg St
+344,2017,32,Mississippi St
+349,2017,32,Army
+350,2017,35,UNC Wilmington
+352,2017,1,Kenyon
+353,2017,1,Joh. & Wales RI
+354,2017,2,Olivet College
+355,2017,1,SUNY Oneonta
+356,2017,34,Illinois
+357,2017,36,Texas A&M-CC
+366,2017,2,Ferrum
+380,2017,1,Anderson (SC)
+388,2017,1,Lebanon Valley
+391,2017,1,Oberlin 
+399,2017,35,Albany
+415,2017,1,George Fox
+437,2017,1,Lake Erie
+450,2017,1,Wheelock College
+455,2017,1,West VA Wesleyan
+459,2017,2,Fontbonne
+467,2017,1,Salem
+469,2017,1,Chestnut Hill
+476,2017,1,Medaille College
+477,2017,1,Lesley University
+494,2017,5,Blue Mountain
+509,2017,2,Crown College
+524,2017,3,Fisher College
+526,2017,34,FGCU
+531,2017,2,Providence (MT)
+533,2017,1,Hannibal-LaGrange Co
+542,2017,2,IL-Springfield
+548,2017,1,LaGrange
+551,2017,1,NVU-Lyndon
+552,2017,1,Madonna University
+559,2017,1,U of Mary
+561,2017,1,Mayville St
+562,2017,1,McPherson College
+587,2017,1,ND Coll
+594,2017,2,Pacific Union
+597,2017,2,Presentation
+630,2017,1,Wayland Baptist
+2000,2017,29,Abilene Chrstn
+2003,2017,2,Adrian
+2005,2017,33,Air Force
+2006,2017,36,Akron
+2010,2017,29,Alabama A&M
+2011,2017,31,Alabama St
+2016,2017,32,Alcorn St
+2019,2017,4,Allen Univ
+2026,2017,30,Appalachian St
+2028,2017,1,Ark Monticello
+2029,2017,32,AR-Pine Bluff
+2031,2017,32,Little Rock
+2032,2017,32,Arkansas St
+2036,2017,1,Asbury
+2045,2017,1,Austin
+2046,2017,30,Austin Peay
+2047,2017,2,Averett
+2050,2017,34,Ball State
+2057,2017,30,Belmont
+2058,2017,1,Bel Abbey
+2061,2017,1,Berea College
+2064,2017,1,Bethel (TN)
+2065,2017,32,Bethune
+2066,2017,32,Binghamton
+2077,2017,2,Brewton-Parker
+2079,2017,2,Bridgewater VA
+2083,2017,35,Bucknell
+2084,2017,32,Buffalo
+2086,2017,34,Butler
+2092,2017,1,CSU Dom Hills
+2093,2017,2,CS East Bay
+2097,2017,36,Campbell
+2099,2017,33,Canisius
+2110,2017,32,C Arkansas
+2113,2017,2,Centenary LA
+2115,2017,29,C Connecticut
+2116,2017,36,UCF
+2117,2017,32,C Michigan
+2120,2017,1,Cent Wash
+2124,2017,3,Chaminade
+2127,2017,31,Charleston So
+2130,2017,32,Chicago St
+2132,2017,36,Cincinnati
+2133,2017,1,Claflin
+2141,2017,1,Coe College
+2142,2017,32,Colgate
+2150,2017,1,Concordia OR
+2154,2017,32,Coppin St
+2157,2017,1,Covenant
+2161,2017,1,Cumberland TN
+2166,2017,32,Davidson
+2168,2017,32,Dayton
+2169,2017,32,Delaware St
+2172,2017,29,Denver
+2174,2017,31,Detroit Mercy
+2178,2017,1,Doane
+2181,2017,31,Drake
+2182,2017,32,Drexel
+2184,2017,32,Duquesne
+2189,2017,1,Earlham
+2191,2017,1,East Central
+2192,2017,1,East Menn
+2193,2017,35,ETSU
+2197,2017,29,E Illinois
+2198,2017,31,E Kentucky
+2199,2017,33,E Michigan
+2201,2017,1,E New Mexico
+2206,2017,2,Edward Waters
+2207,2017,1,ElizCity
+2210,2017,32,Elon
+2217,2017,31,Fairfield
+2221,2017,1,FDU-Florham
+2222,2017,1,Ferris St
+2225,2017,3,Fisk
+2226,2017,30,FAU
+2227,2017,2,FL Memorial
+2229,2017,31,FIU
+2230,2017,32,Fordham
+2231,2017,1,Fort Hays St
+2232,2017,4,Fort Valley St
+2235,2017,1,Fresno Pacific
+2237,2017,1,Ft Lewis
+2239,2017,32,Fullerton
+2241,2017,33,Gardner-Webb
+2244,2017,34,George Mason
+2247,2017,33,Georgia St
+2250,2017,39,Gonzaga
+2251,2017,1,Goucher
+2252,2017,1,Grace
+2253,2017,31,Grand Canyon
+2256,2017,2,Greensboro
+2261,2017,31,Hampton
+2267,2017,1,Hawaii-Hilo
+2271,2017,1,Henderson St
+2272,2017,31,High Point
+2274,2017,1,Hiram
+2275,2017,32,Hofstra
+2277,2017,29,Hou Christian
+2281,2017,2,Hus-Till
+2287,2017,35,Illinois St
+2294,2017,34,Iowa
+2296,2017,32,Jackson St
+2299,2017,3,Jarvis Chr
+2301,2017,2,JohnBrow
+2305,2017,36,Kansas
+2306,2017,34,Kansas St
+2309,2017,36,Kent State
+2320,2017,34,Lamar
+2322,2017,1,Lander
+2325,2017,30,La Salle
+2326,2017,2,LeTourneau
+2327,2017,1,Lees McRae
+2329,2017,32,Lehigh
+2333,2017,1,Lewis & Clark
+2335,2017,34,Liberty
+2336,2017,1,Limestone
+2344,2017,30,Longwood
+2345,2017,1,CS Los Angeles
+2347,2017,3,LA Christian
+2348,2017,33,Louisiana Tech
+2349,2017,31,UMass Lowell
+2350,2017,32,Loyola Chicago
+2351,2017,30,LMU
+2352,2017,33,Loyola MD
+2353,2017,4,LSU Shreveport
+2361,2017,1,ME-Presque Isle
+2363,2017,32,Manhattan
+2365,2017,1,Mansfield
+2366,2017,1,Marian
+2368,2017,32,Marist
+2369,2017,3,Mars Hill
+2374,2017,1,Marywood
+2375,2017,1,Masters 
+2377,2017,29,McNeese
+2378,2017,34,UMBC
+2379,2017,34,MD-Eastern
+2381,2017,1,Menlo
+2382,2017,32,Mercer
+2387,2017,1,Messiah
+2390,2017,33,Miami
+2393,2017,36,MTSU
+2396,2017,2,Miles
+2397,2017,2,Milligan
+2398,2017,1,Millsaps
+2399,2017,1,Minn-Morris
+2400,2017,32,Miss Valley St
+2401,2017,1,MS College
+2402,2017,1,Missouri S&T
+2403,2017,1,Missouri South St
+2404,2017,1,Molloy
+2405,2017,33,Monmouth
+2410,2017,2,Montreat 
+2413,2017,29,Morehead St
+2415,2017,30,Morgan St
+2419,2017,1,Mount St. Joseph
+2426,2017,32,Navy
+2427,2017,33,UNC Asheville
+2428,2017,34,NC Central
+2429,2017,30,Charlotte
+2430,2017,35,UNC Greensboro
+2433,2017,33,UL Monroe
+2437,2017,32,Omaha
+2439,2017,32,UNLV
+2440,2017,35,Nevada
+2443,2017,31,New Orleans
+2444,2017,1,Newberry
+2447,2017,31,Nicholls
+2448,2017,32,NC A&T
+2449,2017,30,N Dakota St
+2450,2017,33,Norfolk St
+2454,2017,34,North Florida
+2455,2017,1,N Georgia
+2458,2017,28,N Colorado
+2459,2017,31,N Illinois
+2460,2017,30,Northern Iowa
+2462,2017,1,Northland
+2463,2017,30,CSU Northridge
+2464,2017,30,N Arizona
+2465,2017,2,Northwest (WA)
+2466,2017,29,N'Western St
+2473,2017,33,Oakland
+2474,2017,1,Oakland City
+2476,2017,1,Oglethorpe
+2477,2017,1,Ohio Dominican
+2483,2017,39,Oregon
+2486,2017,1,Pacific Lutheran
+2489,2017,1,Palm Beach Atl
+2491,2017,1,Paul Quinn
+2492,2017,31,Pepperdine
+2496,2017,1,Piedmont
+2501,2017,33,Portland
+2502,2017,30,Portland St
+2504,2017,33,Prairie View
+2506,2017,30,Presbyterian
+2507,2017,33,Providence
+2509,2017,35,Purdue
+2514,2017,31,Quinnipiac
+2515,2017,32,Radford
+2520,2017,33,Rider
+2523,2017,33,Robert Morris
+2529,2017,32,Sacred Heart
+2534,2017,34,Sam Houston
+2535,2017,35,Samford
+2539,2017,32,San Francisco
+2540,2017,28,UCSB
+2541,2017,33,Santa Clara
+2542,2017,29,Savannah State
+2544,2017,1,Schreiner
+2545,2017,32,SE Louisiana
+2546,2017,33,SE Missouri St
+2547,2017,28,Seattle U
+2550,2017,33,Seton Hall
+2553,2017,1,Sewanee
+2561,2017,34,Siena
+2562,2017,2,Siena Heights
+2564,2017,1,Simpson
+2565,2017,30,SIUE
+2567,2017,35,SMU
+2569,2017,31,SC State
+2571,2017,35,S Dakota St
+2572,2017,31,Southern Miss
+2573,2017,1,So New Orleans
+2574,2017,1,Sonoma St
+2576,2017,2,S Wesleyan
+2579,2017,37,South Carolina
+2582,2017,33,Southern
+2584,2017,1,S Oregon
+2585,2017,1,Vanguard
+2589,2017,1,Spalding
+2590,2017,2,Spring Hill
+2592,2017,1,St. Andrews
+2595,2017,2,St Francis (IL)
+2597,2017,31,St Francis BK
+2598,2017,33,St Francis PA
+2599,2017,33,St John's
+2601,2017,1,St. Joseph's (IN)
+2603,2017,31,Saint Joseph's
+2608,2017,34,Saint Mary's
+2610,2017,1,St Marys
+2612,2017,36,Saint Peter's
+2617,2017,33,SF Austin
+2619,2017,32,Stony Brook
+2623,2017,33,Missouri St
+2628,2017,39,TCU
+2630,2017,35,UT Martin
+2632,2017,1,Tenn Wesleyan
+2633,2017,32,Tennessee
+2634,2017,30,Tennessee St
+2635,2017,32,Tennessee Tech
+2636,2017,33,UTSA
+2637,2017,1,Texas College
+2638,2017,32,UTEP
+2639,2017,1,TX Lutheran
+2640,2017,35,Texas Southern
+2641,2017,32,Texas Tech
+2643,2017,33,The Citadel
+2648,2017,4,Toccoa Falls
+2649,2017,34,Toledo
+2650,2017,2,Tougaloo
+2652,2017,2,Trinity (IL)
+2653,2017,37,Troy
+2654,2017,1,Truman St
+2655,2017,31,Tulane
+2658,2017,1,TX A&M Kings
+2666,2017,3,Urbana
+2670,2017,35,VCU
+2674,2017,32,Valparaiso
+2678,2017,30,VMI
+2679,2017,1,Voorhees
+2681,2017,30,Wagner
+2684,2017,3,Warren Wilson
+2689,2017,1,Washington Coll
+2691,2017,2,Webber Int
+2692,2017,31,Weber St
+2710,2017,28,W Illinois
+2711,2017,31,W Michigan
+2714,2017,1,Western St.
+2717,2017,32,W Carolina
+2724,2017,36,Wichita St
+2729,2017,31,William & Mary
+2732,2017,1,Wilmington DE
+2737,2017,33,Winthrop
+2739,2017,32,Green Bay
+2747,2017,33,Wofford
+2750,2017,32,Wright St
+2751,2017,37,Wyoming
+2752,2017,37,Xavier
+2753,2017,2,Xavier LA
+2754,2017,34,Youngstown St
+2755,2017,33,Grambling
+2758,2017,4,Howard Payne
+2772,2017,1,Minn Crookston
+2775,2017,1,Ottawa
+2776,2017,1,Salve Regina
+2785,2017,1,Union
+2803,2017,31,Bryant
+2804,2017,1,Chowan
+2816,2017,1,McKendree
+2824,2017,2,Panhandle St
+2826,2017,1,Rocky Mo
+2827,2017,1,Rowan
+2828,2017,2,Shenandoah
+2834,2017,2,Sul Ross
+2839,2017,1,Tusculum
+2842,2017,3,Virginia-Wise
+2844,2017,1,Wayne St (NE)
+2848,2017,1,Western Oregon
+2849,2017,1,Westminster PA
+2855,2017,2,Brescia
+2862,2017,2,CO Christian
+2868,2017,2,Holy Names
+2870,2017,33,Purdue FW
+2871,2017,1,Kean
+2879,2017,1,Manhattanville
+2885,2017,31,NJIT
+2887,2017,2,NW Nazarene
+2890,2017,1,Reinhardt
+2892,2017,1,Rust
+2896,2017,1,Southern VA
+2899,2017,1,St. Mary's (MN)
+2901,2017,1,Staten Island
+2905,2017,1,Texas Dallas
+2906,2017,1,Trevecca
+2908,2017,32,SC Upstate
+2911,2017,1,William Jewell
+2913,2017,1,Brevard 
+2916,2017,29,Incarnate Word
+2920,2017,1,Mobile
+2922,2017,1,Olivet Nazarene
+2923,2017,2,Pomona P
+2934,2017,34,Bakersfield
+2937,2017,1,Dallas Christ.
+2945,2017,1,Pfeiffer
+2947,2017,1,Rochester Univ.
+2981,2017,1,Will Bapt
+3067,2017,1,Goshen
+3068,2017,1,Georgia Southwestern
+3075,2017,2,Selma
+3077,2017,1,Kentucky Chr
+3078,2017,1,William Jessup
+3079,2017,2,Cent Bapt Coll
+3080,2017,1,Waldorf 
+3082,2017,1,TX A&M-Intl
+3084,2017,34,Utah Valley
+3088,2017,1,IU-Northwest
+3090,2017,2,Randall
+3094,2017,1,Joh. & Wales CO
+3096,2017,3,SD Christian
+3097,2017,2,Johnson FL
+3098,2017,3,Marygrove 
+3106,2017,1,Corban U
+3107,2017,1,East-West
+3109,2017,1,Ozarks AR
+3119,2017,1,Daniel Webster
+3120,2017,3,Ecclesia
+3121,2017,1,Ohio Christian
+3122,2017,2,Rogers State
+3141,2017,3,No New Mexico
+3152,2017,2,Walla Walla
+3155,2017,1,Trinity Baptist
+3157,2017,1,Ark Fort Smith
+3158,2017,2,Our Lady
+3163,2017,3,Roosevelt
+3164,2017,5,Central Penn
+3165,2017,1,New Hope
+3166,2017,2,Arl Baptist
+3168,2017,1,Crowley's Ridge
+3169,2017,3,Joh. & Wales NC
+3170,2017,2,St. Thomas (TX)
+3171,2017,4,Hiwassee
+3174,2017,3,Trinity Baptist
+3178,2017,4,Ave Maria
+3179,2017,1,Point
+3185,2017,1,UC Merced
+3188,2017,2,AZ Christian
+3189,2017,2,Coastal Georgia
+3192,2017,2,IU-Kokomo
+3216,2017,1,Cairn
+3242,2017,1,Columbia Int
+3244,2017,4,Florida Coll
+3245,2017,2,Tru-Mc
+3246,2017,7,Bethesda
+3247,2017,1,Dalton State
+7639,2017,4,Thomas (GA)
+7933,2017,1,Western NE
+107730,2017,2,Florida Natl
+108807,2017,1,William Peace
+108817,2017,2,LSU Alexandria
+108818,2017,1,NYIT
+108838,2017,1,Mitchell
+108842,2017,1,Emerson
+108854,2017,1,Hood
+108859,2017,2,Goldey-Beacom
+108860,2017,1,Keystone
+108862,2017,1,Sarah Lawrence
+108942,2017,1,Carolina Univ.
+109014,2017,2,Mid Georgia St
+109597,2017,3,Antelope Valley
+109636,2017,2,Summit
+109670,2017,4,Life Pacific
+109684,2017,1,Bryn Athyn
+109700,2017,1,Boyce
+110031,2017,2,Benedictine AZ
+110411,2017,1,Dean
+110412,2017,1,Chatham
+110413,2017,1,McGill
+110414,2017,1,UVF
+110418,2017,2,West Coast Bapt
+110426,2017,1,Nazareth
+110436,2017,1,Oak Hills Chr.
+110437,2017,1,MSOE
+110450,2017,1,Cal Tech
+112358,2017,32,Long Island
+1,2018,3,AK-Anchorage
+2,2018,34,Auburn
+5,2018,33,UAB
+6,2018,32,South Alabama
+8,2018,35,Arkansas
+9,2018,32,Arizona St
+11,2018,1,Colorado Mesa
+12,2018,35,Arizona
+13,2018,31,Cal Poly
+16,2018,32,Sacramento St
+21,2018,33,San Diego St
+22,2018,1,San Fran St
+23,2018,30,San José St
+24,2018,35,Stanford
+25,2018,32,California
+26,2018,33,UCLA
+27,2018,31,UC Riverside
+30,2018,36,USC
+36,2018,32,Colorado St
+38,2018,32,Colorado
+40,2018,1,Curry Co
+41,2018,32,UConn
+42,2018,33,Hartford
+43,2018,31,Yale
+44,2018,30,American
+45,2018,33,G Washington
+46,2018,30,Georgetown
+47,2018,33,Howard
+48,2018,33,Delaware
+49,2018,1,Dubuque
+50,2018,34,FAMU
+52,2018,35,Florida St
+53,2018,1,Florida Tech
+55,2018,36,J'Ville St
+56,2018,32,Stetson
+57,2018,34,Florida
+58,2018,32,South Florida
+59,2018,32,Georgia Tech
+61,2018,33,Georgia
+62,2018,30,Hawai'i
+66,2018,31,Iowa State
+68,2018,32,Boise St
+70,2018,31,Idaho
+71,2018,33,Bradley
+75,2018,1,North Park
+77,2018,32,Northwestern
+79,2018,33,S Illinois
+82,2018,36,UIC
+84,2018,31,Indiana
+85,2018,30,IUPUI
+87,2018,36,Notre Dame
+93,2018,32,Murray St
+94,2018,32,N Kentucky
+96,2018,37,Kentucky
+97,2018,36,Louisville
+98,2018,38,Western KY
+99,2018,33,LSU
+100,2018,2,Loyola (LA)
+101,2018,3,Eureka Coll
+103,2018,35,Boston College
+104,2018,31,Boston Univ
+107,2018,31,Holy Cross
+108,2018,32,Harvard
+109,2018,1,MIT
+111,2018,33,Northeastern
+113,2018,33,UMass
+116,2018,32,Mount St Mary
+117,2018,1,St. Mary's MD
+119,2018,32,Towson
+120,2018,32,Maryland
+127,2018,35,Michigan St
+130,2018,41,Michigan
+132,2018,1,Bemidji St
+135,2018,32,Minnesota
+139,2018,33,Saint Louis
+140,2018,32,Kansas City
+141,2018,1,MO-St. Louis
+142,2018,33,Missouri
+145,2018,32,Ole Miss
+147,2018,32,Montana St
+148,2018,1,MT Tech
+149,2018,34,Montana
+150,2018,37,Duke
+151,2018,30,East Carolina
+152,2018,33,NC State
+153,2018,37,North Carolina
+154,2018,31,Wake Forest
+155,2018,32,North Dakota
+156,2018,33,Creighton
+158,2018,33,Nebraska
+159,2018,27,Dartmouth
+160,2018,31,New Hampshire
+161,2018,31,Fair Dickinson
+163,2018,29,Princeton
+164,2018,34,Rutgers
+166,2018,34,New Mexico St
+167,2018,34,New Mexico
+170,2018,1,CCNY
+171,2018,27,Columbia
+172,2018,28,Cornell
+173,2018,1,Hartwick
+179,2018,34,St Bonaventure
+183,2018,37,Syracuse
+189,2018,32,Bowling Green
+190,2018,1,Defiance
+193,2018,34,Miami OH
+194,2018,34,Ohio State
+195,2018,31,Ohio
+197,2018,36,Oklahoma St
+198,2018,32,Oral Roberts
+200,2018,1,Southern Nazarene
+201,2018,32,Oklahoma
+202,2018,31,Tulsa
+203,2018,1,Linfield
+204,2018,32,Oregon St
+212,2018,1,John Jay
+213,2018,39,Penn State
+216,2018,1,Susqueha
+218,2018,33,Temple
+219,2018,33,Penn
+220,2018,1,Pitt-Bradford
+221,2018,32,Pitt
+222,2018,40,Villanova
+225,2018,27,Brown
+227,2018,34,Rhode Island
+228,2018,35,Clemson
+231,2018,33,Furman
+232,2018,34,Charleston
+233,2018,35,South Dakota
+235,2018,34,Memphis
+236,2018,33,Chattanooga
+238,2018,32,Vanderbilt
+239,2018,34,Baylor
+241,2018,2,McMurry
+242,2018,31,Rice
+244,2018,2,St. Edward's
+245,2018,35,Texas A&M
+248,2018,35,Houston
+249,2018,38,North Texas
+250,2018,34,UT Arlington
+251,2018,34,Texas
+252,2018,35,BYU
+253,2018,32,Southern Utah
+254,2018,35,Utah
+256,2018,32,James Madison
+257,2018,32,Richmond
+258,2018,34,Virginia
+259,2018,33,Virginia Tech
+261,2018,35,Vermont
+264,2018,34,Washington
+265,2018,31,Washington St
+267,2018,1,Lakeland
+269,2018,35,Marquette
+270,2018,33,Milwaukee
+275,2018,33,Wisconsin
+276,2018,36,Marshall
+277,2018,37,West Virginia
+278,2018,32,Fresno St
+279,2018,32,Pacific
+282,2018,31,Indiana St
+286,2018,4,NC Wesleyan
+288,2018,33,Lipscomb
+290,2018,33,Georgia So
+291,2018,2,Methodist
+292,2018,33,UT Rio Grande
+294,2018,33,Jacksonville
+295,2018,32,Old Dominion
+299,2018,33,Long Beach St
+300,2018,35,UC Irvine
+301,2018,34,San Diego
+302,2018,33,UC Davis
+304,2018,30,Idaho St
+305,2018,31,DePaul
+309,2018,34,Louisiana
+311,2018,32,Maine
+314,2018,34,Iona
+315,2018,33,Niagara
+322,2018,31,Lafayette
+324,2018,32,Coast Car
+325,2018,35,Cleveland St
+326,2018,33,Texas St
+328,2018,34,Utah State
+331,2018,35,E Washington
+333,2018,36,Alabama
+338,2018,30,Kennesaw St
+339,2018,32,Evansville
+341,2018,1,Frostburg St
+344,2018,37,Mississippi St
+347,2018,1,Elmira
+349,2018,30,Army
+350,2018,32,UNC Wilmington
+353,2018,1,Joh. & Wales RI
+354,2018,1,Olivet College
+355,2018,1,SUNY Oneonta
+356,2018,32,Illinois
+357,2018,29,Texas A&M-CC
+366,2018,1,Ferrum
+386,2018,1,Trinity (TX)
+399,2018,32,Albany
+407,2018,1,Arcadia University
+408,2018,1,WA Adventist
+411,2018,1,Chapman
+415,2018,1,George Fox
+427,2018,1,Ohio Northern
+437,2018,1,Lake Erie
+450,2018,1,Wheelock College
+459,2018,1,Fontbonne
+484,2018,1,Alice Lloyd
+492,2018,1,Bethany (KS)
+494,2018,4,Blue Mountain
+495,2018,1,Bluefield U
+507,2018,1,Concordia (NE)
+510,2018,2,Culver-Stockton
+512,2018,1,Dakota St
+526,2018,35,FGCU
+531,2018,1,Providence (MT)
+533,2018,1,Hannibal-LaGrange Co
+534,2018,1,Harris Stowe
+535,2018,1,Haskell
+542,2018,1,IL-Springfield
+551,2018,1,NVU-Lyndon
+554,2018,1,Maine-Ft Kent
+555,2018,1,ME-Machias
+559,2018,1,U of Mary
+561,2018,2,Mayville St
+571,2018,1,Morris College
+573,2018,1,Mount Marty College
+587,2018,1,ND Coll
+594,2018,1,Pacific Union
+596,2018,1,Peru St
+597,2018,3,Presentation
+628,2018,1,Valley City St
+630,2018,1,Wayland Baptist
+2000,2018,32,Abilene Chrstn
+2001,2018,1,Adams State
+2005,2018,31,Air Force
+2006,2018,32,Akron
+2010,2018,31,Alabama A&M
+2011,2018,31,Alabama St
+2013,2018,1,Albany St GA
+2016,2018,32,Alcorn St
+2019,2018,2,Allen Univ
+2023,2018,1,Anderson (IN)
+2026,2018,33,Appalachian St
+2029,2018,35,AR-Pine Bluff
+2031,2018,32,Little Rock
+2032,2018,32,Arkansas St
+2036,2018,2,Asbury
+2042,2018,1,Augustana (IL)
+2046,2018,34,Austin Peay
+2048,2018,2,Avila
+2050,2018,32,Ball State
+2057,2018,33,Belmont
+2061,2018,1,Berea College
+2062,2018,1,Bethany (WV)
+2064,2018,1,Bethel (TN)
+2065,2018,32,Bethune
+2066,2018,31,Binghamton
+2069,2018,1,Black Hills St
+2073,2018,2,Bluefield St
+2077,2018,1,Brewton-Parker
+2079,2018,2,Bridgewater VA
+2083,2018,35,Bucknell
+2084,2018,36,Buffalo
+2086,2018,35,Butler
+2094,2018,2,Cal Lutheran
+2097,2018,34,Campbell
+2099,2018,33,Canisius
+2104,2018,1,Carroll (MT)
+2108,2018,1,Catholic DC
+2110,2018,35,C Arkansas
+2113,2018,2,Centenary LA
+2114,2018,1,Centenary (NJ)
+2115,2018,32,C Connecticut
+2116,2018,32,UCF
+2117,2018,36,C Michigan
+2119,2018,1,Cent St OH
+2124,2018,3,Chaminade
+2127,2018,31,Charleston So
+2130,2018,32,Chicago St
+2132,2018,36,Cincinnati
+2141,2018,1,Coe College
+2142,2018,33,Colgate
+2148,2018,2,Concord
+2154,2018,32,Coppin St
+2155,2018,1,Cornell Co (IA)
+2166,2018,33,Davidson
+2168,2018,31,Dayton
+2169,2018,32,Delaware St
+2172,2018,30,Denver
+2174,2018,32,Detroit Mercy
+2178,2018,1,Doane
+2181,2018,34,Drake
+2182,2018,33,Drexel
+2184,2018,32,Duquesne
+2191,2018,2,East Central
+2193,2018,34,ETSU
+2194,2018,1,E TX Bapt
+2196,2018,1,Eastern Univ.
+2197,2018,31,E Illinois
+2198,2018,31,E Kentucky
+2199,2018,35,E Michigan
+2201,2018,1,E New Mexico
+2202,2018,2,E Oregon
+2206,2018,3,Edward Waters
+2207,2018,1,ElizCity
+2210,2018,32,Elon
+2212,2018,1,Emory
+2214,2018,1,Emporia St
+2215,2018,1,Erskine
+2217,2018,33,Fairfield
+2220,2018,1,Fayetteville St
+2221,2018,1,FDU-Florham
+2225,2018,4,Fisk
+2226,2018,31,FAU
+2227,2018,2,FL Memorial
+2229,2018,32,FIU
+2230,2018,31,Fordham
+2239,2018,32,Fullerton
+2241,2018,32,Gardner-Webb
+2244,2018,33,George Mason
+2247,2018,35,Georgia St
+2250,2018,37,Gonzaga
+2251,2018,1,Goucher
+2253,2018,34,Grand Canyon
+2256,2018,2,Greensboro
+2261,2018,34,Hampton
+2267,2018,1,Hawaii-Hilo
+2271,2018,1,Henderson St
+2272,2018,30,High Point
+2275,2018,31,Hofstra
+2277,2018,31,Hou Christian
+2287,2018,33,Illinois St
+2292,2018,1,Indianapolis
+2294,2018,33,Iowa
+2296,2018,32,Jackson St
+2299,2018,2,Jarvis Chr
+2305,2018,39,Kansas
+2306,2018,37,Kansas St
+2309,2018,34,Kent State
+2310,2018,1,Kentucky St
+2316,2018,1,KY Wesleyan
+2318,2018,1,La Verne
+2320,2018,33,Lamar
+2325,2018,32,La Salle
+2326,2018,2,LeTourneau
+2327,2018,1,Lees McRae
+2329,2018,30,Lehigh
+2332,2018,1,Lewis
+2335,2018,37,Liberty
+2336,2018,1,Limestone
+2339,2018,1,Lincoln PA
+2344,2018,33,Longwood
+2345,2018,1,CS Los Angeles
+2347,2018,3,LA Christian
+2348,2018,33,Louisiana Tech
+2349,2018,30,UMass Lowell
+2350,2018,38,Loyola Chicago
+2351,2018,31,LMU
+2352,2018,31,Loyola MD
+2353,2018,1,LSU Shreveport
+2355,2018,1,Lynchburg
+2358,2018,1,Lyon College
+2361,2018,1,ME-Presque Isle
+2363,2018,31,Manhattan
+2368,2018,31,Marist
+2369,2018,1,Mars Hill
+2377,2018,28,McNeese
+2378,2018,36,UMBC
+2379,2018,32,MD-Eastern
+2382,2018,34,Mercer
+2384,2018,1,Mercy
+2390,2018,32,Miami
+2391,2018,2,Mich-Dearborn
+2393,2018,33,MTSU
+2396,2018,1,Miles
+2397,2018,3,Milligan
+2398,2018,2,Millsaps
+2400,2018,32,Miss Valley St
+2401,2018,1,MS College
+2402,2018,1,Missouri S&T
+2404,2018,2,Molloy
+2405,2018,31,Monmouth
+2410,2018,2,Montreat 
+2413,2018,29,Morehead St
+2415,2018,31,Morgan St
+2424,2018,1,NM Highlands
+2426,2018,32,Navy
+2427,2018,34,UNC Asheville
+2428,2018,35,NC Central
+2429,2018,29,Charlotte
+2430,2018,35,UNC Greensboro
+2433,2018,32,UL Monroe
+2437,2018,31,Omaha
+2439,2018,33,UNLV
+2440,2018,37,Nevada
+2443,2018,33,New Orleans
+2447,2018,32,Nicholls
+2448,2018,35,NC A&T
+2449,2018,32,N Dakota St
+2450,2018,33,Norfolk St
+2454,2018,33,North Florida
+2455,2018,1,N Georgia
+2458,2018,38,N Colorado
+2459,2018,32,N Illinois
+2460,2018,32,Northern Iowa
+2462,2018,2,Northland
+2463,2018,30,CSU Northridge
+2464,2018,32,N Arizona
+2466,2018,29,N'Western St
+2468,2018,2,ND de Namur
+2473,2018,33,Oakland
+2474,2018,3,Oakland City
+2476,2018,1,Oglethorpe
+2479,2018,2,Ohio Valley
+2483,2018,36,Oregon
+2484,2018,1,Oregon Tech
+2486,2018,1,Pacific Lutheran
+2488,2018,1,Paine
+2492,2018,32,Pepperdine
+2496,2018,2,Piedmont
+2501,2018,32,Portland
+2502,2018,34,Portland St
+2504,2018,34,Prairie View
+2506,2018,32,Presbyterian
+2507,2018,35,Providence
+2508,2018,1,Puget Sound
+2509,2018,37,Purdue
+2514,2018,33,Quinnipiac
+2515,2018,36,Radford
+2520,2018,32,Rider
+2521,2018,1,Rio Grande
+2523,2018,33,Robert Morris
+2524,2018,2,Rockford
+2525,2018,1,Rockhurst
+2529,2018,31,Sacred Heart
+2534,2018,36,Sam Houston
+2535,2018,32,Samford
+2539,2018,39,San Francisco
+2540,2018,32,UCSB
+2541,2018,31,Santa Clara
+2542,2018,32,Savannah State
+2544,2018,2,Schreiner
+2545,2018,34,SE Louisiana
+2546,2018,31,SE Missouri St
+2547,2018,34,Seattle U
+2550,2018,34,Seton Hall
+2561,2018,32,Siena
+2562,2018,3,Siena Heights
+2565,2018,30,SIUE
+2567,2018,33,SMU
+2569,2018,32,SC State
+2571,2018,35,S Dakota St
+2572,2018,34,Southern Miss
+2573,2018,4,So New Orleans
+2574,2018,1,Sonoma St
+2576,2018,2,S Wesleyan
+2579,2018,33,South Carolina
+2582,2018,33,Southern
+2588,2018,1,Southwestern TX
+2590,2018,2,Spring Hill
+2592,2018,2,St. Andrews
+2595,2018,2,St Francis (IL)
+2597,2018,31,St Francis BK
+2598,2018,31,St Francis PA
+2599,2018,33,St John's
+2603,2018,32,Saint Joseph's
+2605,2018,1,St. Leo
+2606,2018,1,St. Martin's
+2608,2018,36,Saint Mary's
+2610,2018,1,St Marys
+2612,2018,32,Saint Peter's
+2617,2018,35,SF Austin
+2619,2018,32,Stony Brook
+2623,2018,33,Missouri St
+2628,2018,33,TCU
+2630,2018,31,UT Martin
+2632,2018,3,Tenn Wesleyan
+2633,2018,35,Tennessee
+2634,2018,30,Tennessee St
+2635,2018,33,Tennessee Tech
+2636,2018,35,UTSA
+2637,2018,1,Texas College
+2638,2018,31,UTEP
+2639,2018,2,TX Lutheran
+2640,2018,36,Texas Southern
+2641,2018,37,Texas Tech
+2643,2018,32,The Citadel
+2648,2018,7,Toccoa Falls
+2649,2018,34,Toledo
+2650,2018,1,Tougaloo
+2652,2018,2,Trinity (IL)
+2653,2018,33,Troy
+2655,2018,31,Tulane
+2660,2018,1,UMass Boston
+2662,2018,1,UC Santa Cruz
+2670,2018,33,VCU
+2674,2018,32,Valparaiso
+2678,2018,30,VMI
+2681,2018,33,Wagner
+2684,2018,2,Warren Wilson
+2685,2018,1,Wartburg
+2688,2018,1,Wash. & Lee
+2689,2018,2,Washington Coll
+2691,2018,4,Webber Int
+2692,2018,31,Weber St
+2701,2018,1,Montana-Western
+2703,2018,1,W New Mexico
+2710,2018,28,W Illinois
+2711,2018,32,W Michigan
+2714,2018,2,Western St.
+2717,2018,32,W Carolina
+2721,2018,1,Whitwort
+2724,2018,33,Wichita St
+2728,2018,1,Wiley
+2729,2018,31,William & Mary
+2730,2018,1,William Carey
+2733,2018,1,Wilmington OH
+2737,2018,31,Winthrop
+2739,2018,33,Green Bay
+2740,2018,1,UW-Lacrosse
+2742,2018,2,WI Parkside
+2747,2018,34,Wofford
+2750,2018,35,Wright St
+2751,2018,33,Wyoming
+2752,2018,35,Xavier
+2754,2018,32,Youngstown St
+2755,2018,31,Grambling
+2758,2018,3,Howard Payne
+2803,2018,31,Bryant
+2810,2018,1,Hardin-Simmons
+2822,2018,2,N Greenville
+2824,2018,2,Panhandle St
+2825,2018,1,Quincy
+2827,2018,1,Rowan
+2828,2018,2,Shenandoah
+2829,2018,1,Simon Fraser
+2838,2018,1,Tiffin
+2839,2018,1,Tusculum
+2846,2018,1,Wesley
+2849,2018,1,Westminster PA
+2850,2018,2,Whittier
+2855,2018,1,Brescia
+2863,2018,1,CS Monterey Bay
+2865,2018,1,Evangel
+2868,2018,2,Holy Names
+2870,2018,33,Purdue FW
+2871,2018,2,Kean
+2880,2018,1,MO Baptist
+2885,2018,30,NJIT
+2886,2018,1,Northwood
+2887,2018,1,NW Nazarene
+2888,2018,1,Ouachita Baptist
+2890,2018,2,Reinhardt
+2892,2018,3,Rust
+2893,2018,1,Shawnee
+2899,2018,1,St. Mary's (MN)
+2901,2018,1,Staten Island
+2905,2018,1,Texas Dallas
+2906,2018,1,Trevecca
+2908,2018,32,SC Upstate
+2911,2018,1,William Jewell
+2913,2018,2,Brevard 
+2916,2018,28,Incarnate Word
+2917,2018,1,LeMoyne-Owen
+2920,2018,2,Mobile
+2930,2018,1,Willamette
+2934,2018,30,Bakersfield
+2937,2018,1,Dallas Christ.
+2939,2018,1,Jamestow
+2947,2018,1,Rochester Univ.
+2950,2018,1,Spring Arbor
+2951,2018,1,SUNY Maritime
+2976,2018,1,Wentworth
+2981,2018,1,Will Bapt
+2985,2018,1,Concordia (MI)
+3066,2018,3,Concordia-St. P
+3068,2018,1,Georgia Southwestern
+3077,2018,2,Kentucky Chr
+3078,2018,2,William Jessup
+3082,2018,1,TX A&M-Intl
+3084,2018,34,Utah Valley
+3086,2018,2,TX-Tyler
+3090,2018,2,Randall
+3094,2018,2,Joh. & Wales CO
+3096,2018,5,SD Christian
+3097,2018,1,Johnson FL
+3099,2018,1,Concordia (AL)
+3105,2018,1,Southeastern
+3107,2018,1,East-West
+3109,2018,2,Ozarks AR
+3117,2018,3,Carver College
+3120,2018,3,Ecclesia
+3121,2018,1,Ohio Christian
+3122,2018,1,Rogers State
+3141,2018,3,No New Mexico
+3152,2018,2,Walla Walla
+3157,2018,2,Ark Fort Smith
+3158,2018,2,Our Lady
+3164,2018,6,Central Penn
+3166,2018,3,Arl Baptist
+3169,2018,4,Joh. & Wales NC
+3170,2018,3,St. Thomas (TX)
+3171,2018,4,Hiwassee
+3174,2018,4,Trinity Baptist
+3178,2018,2,Ave Maria
+3179,2018,2,Point
+3185,2018,1,UC Merced
+3189,2018,1,Coastal Georgia
+3192,2018,2,IU-Kokomo
+3216,2018,1,Cairn
+3217,2018,1,Portland Bible
+3239,2018,1,Johnson (TN)
+3242,2018,2,Columbia Int
+3243,2018,2,Bob Jones
+3244,2018,2,Florida Coll
+3246,2018,4,Bethesda
+3250,2018,1,Northwest Ohio
+7639,2018,1,Thomas (GA)
+86853,2018,1,York (PA)
+107730,2018,4,Florida Natl
+108799,2018,1,Cincy Clermont
+108806,2018,3,Mid-Atl Chr
+108807,2018,1,William Peace
+108838,2018,1,Mitchell
+108842,2018,1,Emerson
+108859,2018,1,Goldey-Beacom
+108862,2018,1,Sarah Lawrence
+108942,2018,1,Carolina Univ.
+109014,2018,2,Mid Georgia St
+109597,2018,2,Antelope Valley
+109636,2018,1,Summit
+109661,2018,1,Multnomah
+109670,2018,4,Life Pacific
+109671,2018,1,Lourdes
+109684,2018,1,Bryn Athyn
+109700,2018,1,Boyce
+109708,2018,1,Silver Lake
+110031,2018,1,Benedictine AZ
+110414,2018,1,UVF
+110418,2018,1,West Coast Bapt
+110436,2018,1,Oak Hills Chr.
+111162,2018,1,BARC
+111166,2018,3,Midway
+111168,2018,1,Lawrence Tech
+111170,2018,2,Franciscan
+111171,2018,2,New Rochelle
+111172,2018,1,Gordon
+111174,2018,1,Lincoln 
+111175,2018,1,Nebraska Christ
+111176,2018,1,Calvary
+111179,2018,1,Georgian Court
+111180,2018,1,Christendom
+111199,2018,1,Penn St (Brand)
+111229,2018,1,Emb-Rid (AZ)
+111242,2018,1,Wheaton (MA)
+111254,2018,1,Ottawa (AZ)
+112358,2018,35,Long Island
+1,2019,1,AK-Anchorage
+2,2019,40,Auburn
+3,2019,1,Birm-Southern
+5,2019,35,UAB
+6,2019,34,South Alabama
+8,2019,34,Arkansas
+9,2019,34,Arizona St
+12,2019,32,Arizona
+13,2019,29,Cal Poly
+16,2019,31,Sacramento St
+21,2019,34,San Diego St
+23,2019,31,San José St
+24,2019,31,Stanford
+25,2019,31,California
+26,2019,33,UCLA
+27,2019,33,UC Riverside
+30,2019,33,USC
+36,2019,32,Colorado St
+38,2019,36,Colorado
+41,2019,33,UConn
+42,2019,33,Hartford
+43,2019,30,Yale
+44,2019,30,American
+45,2019,33,G Washington
+46,2019,33,Georgetown
+47,2019,34,Howard
+48,2019,33,Delaware
+49,2019,1,Dubuque
+50,2019,31,FAMU
+52,2019,37,Florida St
+53,2019,1,Florida Tech
+55,2019,33,J'Ville St
+56,2019,31,Stetson
+57,2019,36,Florida
+58,2019,38,South Florida
+59,2019,32,Georgia Tech
+61,2019,32,Georgia
+62,2019,31,Hawai'i
+63,2019,2,Buena Vista
+66,2019,35,Iowa State
+68,2019,33,Boise St
+70,2019,32,Idaho
+71,2019,35,Bradley
+73,2019,1,IL Tech
+75,2019,1,North Park
+77,2019,32,Northwestern
+79,2019,32,S Illinois
+82,2019,32,UIC
+84,2019,35,Indiana
+85,2019,33,IUPUI
+87,2019,33,Notre Dame
+89,2019,1,Wabash
+93,2019,33,Murray St
+94,2019,35,N Kentucky
+96,2019,37,Kentucky
+97,2019,34,Louisville
+98,2019,34,Western KY
+99,2019,35,LSU
+100,2019,2,Loyola (LA)
+103,2019,31,Boston College
+104,2019,33,Boston Univ
+107,2019,33,Holy Cross
+108,2019,31,Harvard
+109,2019,1,MIT
+111,2019,34,Northeastern
+113,2019,32,UMass
+116,2019,31,Mount St Mary
+117,2019,1,St. Mary's MD
+119,2019,32,Towson
+120,2019,34,Maryland
+127,2019,39,Michigan St
+130,2019,37,Michigan
+132,2019,2,Bemidji St
+135,2019,36,Minnesota
+139,2019,36,Saint Louis
+140,2019,32,Kansas City
+142,2019,32,Missouri
+145,2019,33,Ole Miss
+147,2019,32,Montana St
+148,2019,1,MT Tech
+149,2019,35,Montana
+150,2019,38,Duke
+151,2019,31,East Carolina
+152,2019,36,NC State
+153,2019,36,North Carolina
+154,2019,31,Wake Forest
+155,2019,30,North Dakota
+156,2019,35,Creighton
+158,2019,36,Nebraska
+159,2019,30,Dartmouth
+160,2019,29,New Hampshire
+161,2019,35,Fair Dickinson
+163,2019,28,Princeton
+164,2019,31,Rutgers
+166,2019,35,New Mexico St
+167,2019,32,New Mexico
+170,2019,1,CCNY
+171,2019,28,Columbia
+172,2019,31,Cornell
+173,2019,1,Hartwick
+179,2019,34,St Bonaventure
+183,2019,34,Syracuse
+189,2019,34,Bowling Green
+190,2019,1,Defiance
+191,2019,1,Heidelberg
+193,2019,32,Miami OH
+194,2019,35,Ohio State
+195,2019,31,Ohio
+197,2019,32,Oklahoma St
+198,2019,32,Oral Roberts
+199,2019,2,SE Okla St
+201,2019,34,Oklahoma
+202,2019,32,Tulsa
+204,2019,31,Oregon St
+213,2019,32,Penn State
+218,2019,33,Temple
+219,2019,31,Penn
+221,2019,33,Pitt
+222,2019,36,Villanova
+224,2019,1,Westminster UT
+225,2019,32,Brown
+227,2019,33,Rhode Island
+228,2019,34,Clemson
+229,2019,1,Coker College
+231,2019,33,Furman
+232,2019,33,Charleston
+233,2019,30,South Dakota
+235,2019,36,Memphis
+236,2019,31,Chattanooga
+238,2019,32,Vanderbilt
+239,2019,34,Baylor
+241,2019,1,McMurry
+242,2019,32,Rice
+244,2019,3,St. Edward's
+245,2019,32,Texas A&M
+248,2019,37,Houston
+249,2019,33,North Texas
+250,2019,33,UT Arlington
+251,2019,37,Texas
+252,2019,32,BYU
+253,2019,34,Southern Utah
+254,2019,31,Utah
+256,2019,33,James Madison
+257,2019,33,Richmond
+258,2019,38,Virginia
+259,2019,35,Virginia Tech
+261,2019,34,Vermont
+264,2019,36,Washington
+265,2019,32,Washington St
+269,2019,34,Marquette
+270,2019,31,Milwaukee
+275,2019,34,Wisconsin
+276,2019,37,Marshall
+277,2019,36,West Virginia
+278,2019,32,Fresno St
+279,2019,32,Pacific
+282,2019,31,Indiana St
+286,2019,1,NC Wesleyan
+288,2019,37,Lipscomb
+290,2019,33,Georgia So
+291,2019,1,Methodist
+292,2019,37,UT Rio Grande
+294,2019,32,Jacksonville
+295,2019,35,Old Dominion
+299,2019,34,Long Beach St
+300,2019,37,UC Irvine
+301,2019,36,San Diego
+302,2019,31,UC Davis
+304,2019,30,Idaho St
+305,2019,36,DePaul
+309,2019,32,Louisiana
+311,2019,32,Maine
+314,2019,33,Iona
+315,2019,32,Niagara
+316,2019,1,Dickinson St
+322,2019,30,Lafayette
+324,2019,34,Coast Car
+325,2019,31,Cleveland St
+326,2019,34,Texas St
+328,2019,35,Utah State
+329,2019,1,Mt. St. Vincent
+331,2019,34,E Washington
+333,2019,34,Alabama
+338,2019,32,Kennesaw St
+339,2019,32,Evansville
+341,2019,1,Frostburg St
+344,2019,34,Mississippi St
+347,2019,1,Elmira
+349,2019,32,Army
+350,2019,33,UNC Wilmington
+353,2019,2,Joh. & Wales RI
+355,2019,1,SUNY Oneonta
+356,2019,33,Illinois
+357,2019,32,Texas A&M-CC
+366,2019,1,Ferrum
+386,2019,1,Trinity (TX)
+391,2019,1,Oberlin 
+399,2019,32,Albany
+408,2019,1,WA Adventist
+418,2019,1,Hendrix
+459,2019,1,Fontbonne
+465,2019,2,Rosemont
+469,2019,2,Chestnut Hill
+486,2019,1,Aquinas
+492,2019,1,Bethany (KS)
+494,2019,2,Blue Mountain
+507,2019,1,Concordia (NE)
+526,2019,32,FGCU
+534,2019,1,Harris Stowe
+543,2019,1,Joh. & Wales FL
+548,2019,1,LaGrange
+551,2019,1,NVU-Lyndon
+554,2019,2,Maine-Ft Kent
+555,2019,1,ME-Machias
+561,2019,1,Mayville St
+587,2019,1,ND Coll
+597,2019,1,Presentation
+612,2019,1,Simpson
+630,2019,1,Wayland Baptist
+2000,2019,34,Abilene Chrstn
+2005,2019,32,Air Force
+2006,2019,33,Akron
+2010,2019,32,Alabama A&M
+2011,2019,30,Alabama St
+2016,2019,31,Alcorn St
+2019,2019,2,Allen Univ
+2025,2019,1,Angelo State
+2026,2019,32,Appalachian St
+2028,2019,1,Ark Monticello
+2029,2019,32,AR-Pine Bluff
+2031,2019,31,Little Rock
+2032,2019,32,Arkansas St
+2046,2019,33,Austin Peay
+2047,2019,1,Averett
+2048,2019,1,Avila
+2050,2019,33,Ball State
+2057,2019,33,Belmont
+2064,2019,1,Bethel (TN)
+2065,2019,31,Bethune
+2066,2019,33,Binghamton
+2071,2019,1,Blmsburg
+2077,2019,2,Brewton-Parker
+2079,2019,1,Bridgewater VA
+2081,2019,1,Bryan
+2083,2019,33,Bucknell
+2084,2019,36,Buffalo
+2086,2019,33,Butler
+2092,2019,2,CSU Dom Hills
+2094,2019,2,Cal Lutheran
+2097,2019,33,Campbell
+2099,2019,32,Canisius
+2102,2019,1,Carnegie Mellon
+2109,2019,2,Cedarville
+2110,2019,33,C Arkansas
+2113,2019,2,Centenary LA
+2114,2019,1,Centenary (NJ)
+2115,2019,31,C Connecticut
+2116,2019,33,UCF
+2117,2019,35,C Michigan
+2119,2019,1,Cent St OH
+2120,2019,1,Cent Wash
+2127,2019,34,Charleston So
+2130,2019,32,Chicago St
+2132,2019,35,Cincinnati
+2134,2019,1,Clarion
+2141,2019,1,Coe College
+2142,2019,35,Colgate
+2144,2019,1,Colorado Coll
+2151,2019,1,Concordia IL
+2153,2019,1,Concordia TX
+2154,2019,33,Coppin St
+2157,2019,1,Covenant
+2161,2019,2,Cumberland TN
+2166,2019,34,Davidson
+2167,2019,1,Davis & Elkins
+2168,2019,33,Dayton
+2169,2019,31,Delaware St
+2172,2019,30,Denver
+2174,2019,31,Detroit Mercy
+2181,2019,34,Drake
+2182,2019,32,Drexel
+2184,2019,32,Duquesne
+2189,2019,1,Earlham
+2192,2019,1,East Menn
+2193,2019,34,ETSU
+2194,2019,1,E TX Bapt
+2197,2019,32,E Illinois
+2198,2019,31,E Kentucky
+2199,2019,32,E Michigan
+2201,2019,3,E New Mexico
+2202,2019,1,E Oregon
+2206,2019,2,Edward Waters
+2210,2019,32,Elon
+2217,2019,31,Fairfield
+2220,2019,1,Fayetteville St
+2224,2019,1,Findlay
+2225,2019,3,Fisk
+2226,2019,33,FAU
+2227,2019,2,FL Memorial
+2229,2019,34,FIU
+2230,2019,32,Fordham
+2232,2019,2,Fort Valley St
+2239,2019,34,Fullerton
+2241,2019,35,Gardner-Webb
+2244,2019,33,George Mason
+2246,2019,1,GA Coll
+2247,2019,34,Georgia St
+2249,2019,1,Glenville St
+2250,2019,37,Gonzaga
+2251,2019,1,Goucher
+2253,2019,34,Grand Canyon
+2256,2019,2,Greensboro
+2261,2019,35,Hampton
+2264,2019,2,Harding
+2267,2019,1,Hawaii-Hilo
+2272,2019,31,High Point
+2275,2019,35,Hofstra
+2277,2019,30,Hou Christian
+2281,2019,4,Hus-Till
+2287,2019,33,Illinois St
+2288,2019,1,IN South Bend
+2294,2019,35,Iowa
+2296,2019,32,Jackson St
+2299,2019,1,Jarvis Chr
+2305,2019,36,Kansas
+2306,2019,34,Kansas St
+2309,2019,33,Kent State
+2316,2019,1,KY Wesleyan
+2318,2019,1,La Verne
+2320,2019,33,Lamar
+2325,2019,31,La Salle
+2327,2019,1,Lees McRae
+2329,2019,31,Lehigh
+2330,2019,1,Lemoyne
+2331,2019,1,Lenoir Rhyne
+2333,2019,1,Lewis & Clark
+2335,2019,36,Liberty
+2339,2019,1,Lincoln PA
+2344,2019,34,Longwood
+2347,2019,2,LA Christian
+2348,2019,33,Louisiana Tech
+2349,2019,32,UMass Lowell
+2350,2019,34,Loyola Chicago
+2351,2019,34,LMU
+2352,2019,32,Loyola MD
+2358,2019,1,Lyon College
+2362,2019,1,Manchester
+2363,2019,32,Manhattan
+2368,2019,31,Marist
+2369,2019,3,Mars Hill
+2370,2019,1,TN Southern
+2377,2019,31,McNeese
+2378,2019,34,UMBC
+2379,2019,32,MD-Eastern
+2380,2019,1,Medgar Evers
+2381,2019,2,Menlo
+2382,2019,31,Mercer
+2390,2019,32,Miami
+2393,2019,32,MTSU
+2396,2019,3,Miles
+2397,2019,4,Milligan
+2398,2019,2,Millsaps
+2399,2019,1,Minn-Morris
+2400,2019,32,Miss Valley St
+2401,2019,3,MS College
+2402,2019,2,Missouri S&T
+2404,2019,1,Molloy
+2405,2019,35,Monmouth
+2413,2019,33,Morehead St
+2415,2019,30,Morgan St
+2426,2019,31,Navy
+2427,2019,31,UNC Asheville
+2428,2019,34,NC Central
+2429,2019,29,Charlotte
+2430,2019,35,UNC Greensboro
+2433,2019,35,UL Monroe
+2437,2019,32,Omaha
+2439,2019,31,UNLV
+2440,2019,34,Nevada
+2443,2019,33,New Orleans
+2447,2019,31,Nicholls
+2448,2019,32,NC A&T
+2449,2019,35,N Dakota St
+2450,2019,36,Norfolk St
+2453,2019,32,North Alabama
+2454,2019,33,North Florida
+2458,2019,32,N Colorado
+2459,2019,34,N Illinois
+2460,2019,34,Northern Iowa
+2462,2019,2,Northland
+2463,2019,34,CSU Northridge
+2464,2019,31,N Arizona
+2465,2019,1,Northwest (WA)
+2466,2019,31,N'Western St
+2473,2019,33,Oakland
+2474,2019,1,Oakland City
+2476,2019,1,Oglethorpe
+2483,2019,38,Oregon
+2489,2019,1,Palm Beach Atl
+2492,2019,34,Pepperdine
+2496,2019,1,Piedmont
+2501,2019,32,Portland
+2502,2019,32,Portland St
+2504,2019,35,Prairie View
+2506,2019,36,Presbyterian
+2507,2019,34,Providence
+2508,2019,1,Puget Sound
+2509,2019,36,Purdue
+2512,2019,1,Queens NY
+2514,2019,31,Quinnipiac
+2515,2019,33,Radford
+2520,2019,31,Rider
+2523,2019,35,Robert Morris
+2524,2019,1,Rockford
+2529,2019,32,Sacred Heart
+2534,2019,33,Sam Houston
+2535,2019,33,Samford
+2539,2019,31,San Francisco
+2540,2019,32,UCSB
+2541,2019,31,Santa Clara
+2542,2019,31,Savannah State
+2544,2019,1,Schreiner
+2545,2019,33,SE Louisiana
+2546,2019,31,SE Missouri St
+2547,2019,33,Seattle U
+2550,2019,34,Seton Hall
+2553,2019,1,Sewanee
+2561,2019,33,Siena
+2562,2019,3,Siena Heights
+2565,2019,31,SIUE
+2566,2019,1,Skidmore
+2567,2019,32,SMU
+2569,2019,34,SC State
+2571,2019,33,S Dakota St
+2572,2019,33,Southern Miss
+2574,2019,2,Sonoma St
+2576,2019,1,S Wesleyan
+2579,2019,32,South Carolina
+2582,2019,32,Southern
+2587,2019,1,SW MN St
+2588,2019,1,Southwestern TX
+2589,2019,1,Spalding
+2590,2019,2,Spring Hill
+2592,2019,1,St. Andrews
+2595,2019,2,St Francis (IL)
+2597,2019,33,St Francis BK
+2598,2019,33,St Francis PA
+2599,2019,34,St John's
+2603,2019,33,Saint Joseph's
+2605,2019,2,St. Leo
+2608,2019,34,Saint Mary's
+2610,2019,1,St Marys
+2612,2019,32,Saint Peter's
+2616,2019,1,Stanislaus St
+2617,2019,30,SF Austin
+2619,2019,33,Stony Brook
+2623,2019,32,Missouri St
+2628,2019,37,TCU
+2630,2019,31,UT Martin
+2633,2019,37,Tennessee
+2634,2019,30,Tennessee St
+2635,2019,31,Tennessee Tech
+2636,2019,32,UTSA
+2638,2019,29,UTEP
+2639,2019,2,TX Lutheran
+2640,2019,38,Texas Southern
+2641,2019,38,Texas Tech
+2642,2019,1,TX Wesleyan
+2643,2019,30,The Citadel
+2649,2019,33,Toledo
+2650,2019,1,Tougaloo
+2652,2019,1,Trinity (IL)
+2653,2019,30,Troy
+2654,2019,1,Truman St
+2655,2019,31,Tulane
+2657,2019,1,Tuskegee
+2660,2019,1,UMass Boston
+2662,2019,1,UC Santa Cruz
+2666,2019,1,Urbana
+2670,2019,33,VCU
+2674,2019,33,Valparaiso
+2678,2019,32,VMI
+2679,2019,1,Voorhees
+2681,2019,30,Wagner
+2684,2019,3,Warren Wilson
+2689,2019,2,Washington Coll
+2691,2019,1,Webber Int
+2692,2019,33,Weber St
+2695,2019,1,West Alabama
+2701,2019,1,Montana-Western
+2710,2019,31,W Illinois
+2711,2019,32,W Michigan
+2714,2019,2,Western St.
+2717,2019,32,W Carolina
+2724,2019,37,Wichita St
+2726,2019,4,Wilberforce
+2728,2019,1,Wiley
+2729,2019,31,William & Mary
+2730,2019,2,William Carey
+2732,2019,2,Wilmington DE
+2733,2019,1,Wilmington OH
+2736,2019,1,Win Salem
+2737,2019,30,Winthrop
+2739,2019,38,Green Bay
+2741,2019,2,WI Lutheran
+2742,2019,2,WI Parkside
+2744,2019,1,UW-Stout
+2747,2019,35,Wofford
+2750,2019,35,Wright St
+2751,2019,32,Wyoming
+2752,2019,35,Xavier
+2754,2019,32,Youngstown St
+2755,2019,33,Grambling
+2758,2019,4,Howard Payne
+2776,2019,1,Salve Regina
+2782,2019,1,SUNY Cortland
+2790,2019,1,Albion
+2803,2019,30,Bryant
+2810,2019,1,Hardin-Simmons
+2815,2019,1,Lindenwood
+2816,2019,2,McKendree
+2822,2019,2,N Greenville
+2825,2019,1,Quincy
+2828,2019,1,Shenandoah
+2837,2019,2,Texas A&M-Comm
+2838,2019,2,Tiffin
+2846,2019,2,Wesley
+2849,2019,1,Westminster PA
+2853,2019,1,Bellevue
+2855,2019,2,Brescia
+2856,2019,31,CA Baptist
+2862,2019,1,CO Christian
+2868,2019,3,Holy Names
+2870,2019,33,Purdue FW
+2871,2019,1,Kean
+2880,2019,1,MO Baptist
+2885,2019,35,NJIT
+2887,2019,2,NW Nazarene
+2890,2019,2,Reinhardt
+2892,2019,3,Rust
+2893,2019,1,Shawnee
+2904,2019,1,SW Assem Of God
+2906,2019,2,Trevecca
+2908,2019,32,SC Upstate
+2913,2019,3,Brevard 
+2916,2019,31,Incarnate Word
+2920,2019,3,Mobile
+2930,2019,1,Willamette
+2931,2019,1,William Woods
+2934,2019,34,Bakersfield
+2936,2019,1,Dominican (IL)
+2937,2019,1,Dallas Christ.
+2938,2019,2,Huntingdon
+2945,2019,1,Pfeiffer
+2947,2019,1,Rochester Univ.
+2951,2019,1,SUNY Maritime
+2981,2019,1,Will Bapt
+2985,2019,1,Concordia (MI)
+2990,2019,2,St Joseph's BKN
+3067,2019,1,Goshen
+3077,2019,4,Kentucky Chr
+3078,2019,1,William Jessup
+3082,2019,1,TX A&M-Intl
+3084,2019,35,Utah Valley
+3086,2019,2,TX-Tyler
+3088,2019,1,IU-Northwest
+3094,2019,2,Joh. & Wales CO
+3096,2019,3,SD Christian
+3097,2019,3,Johnson FL
+3101,2019,1,Utah Tech
+3105,2019,2,Southeastern
+3106,2019,1,Corban U
+3107,2019,1,East-West
+3109,2019,1,Ozarks AR
+3117,2019,3,Carver College
+3120,2019,1,Ecclesia
+3126,2019,1,Mid-America CU
+3134,2019,5,Champ. Christ.
+3153,2019,1,Randolph
+3154,2019,1,Southwest
+3158,2019,1,Our Lady
+3159,2019,1,Coll Idaho
+3164,2019,5,Central Penn
+3166,2019,4,Arl Baptist
+3169,2019,4,Joh. & Wales NC
+3171,2019,5,Hiwassee
+3173,2019,1,Pensacola
+3174,2019,4,Trinity Baptist
+3178,2019,1,Ave Maria
+3182,2019,1,CS San Marcos
+3185,2019,2,UC Merced
+3192,2019,1,IU-Kokomo
+3216,2019,1,Cairn
+3217,2019,1,Portland Bible
+3242,2019,1,Columbia Int
+3243,2019,2,Bob Jones
+3244,2019,2,Florida Coll
+3245,2019,1,Tru-Mc
+3246,2019,8,Bethesda
+3250,2019,1,Northwest Ohio
+5345,2019,1,Benedictine
+6183,2019,2,Humboldt St
+7560,2019,1,SW KS
+7933,2019,2,Western NE
+66786,2019,1,St Elizabeth
+94822,2019,2,TX Perm Basin
+107730,2019,1,Florida Natl
+108806,2019,4,Mid-Atl Chr
+108807,2019,1,William Peace
+108818,2019,1,NYIT
+108822,2019,1,Newbury
+108842,2019,1,Emerson
+108854,2019,2,Hood
+108942,2019,1,Carolina Univ.
+109014,2019,3,Mid Georgia St
+109597,2019,1,Antelope Valley
+109656,2019,1,Pine Manor
+109661,2019,1,Multnomah
+109670,2019,3,Life Pacific
+109684,2019,1,Bryn Athyn
+109700,2019,1,Boyce
+109998,2019,1,York
+110031,2019,1,Benedictine AZ
+110418,2019,3,West Coast Bapt
+110426,2019,1,Nazareth
+110450,2019,1,Cal Tech
+111166,2019,2,Midway
+111170,2019,1,Franciscan
+111171,2019,2,New Rochelle
+111176,2019,1,Calvary
+111180,2019,1,Christendom
+111902,2019,1,Misericordia
+111910,2019,2,Westcliff
+111912,2019,1,Keiser
+111913,2019,1,Rivier
+111914,2019,1,Wilson
+111921,2019,2,CU-Harrodsburg
+111922,2019,1,Welch
+111926,2019,3,Regent
+111942,2019,1,PSU-Wilkes-Barr
+111943,2019,1,Mt. Aloysius
+111946,2019,2,Carver
+111947,2019,1,SUNY Canton
+111948,2019,1,Elms 
+111949,2019,1,DeSales
+111950,2019,1,Stockton
+111951,2019,1,SE Baptist
+111966,2019,1,OH-Chillicothe
+111982,2019,1,Virgin Islands
+111995,2019,1,Purdue NW
+112006,2019,1,Governors State
+112358,2019,32,Long Island
+2,2020,31,Auburn
+3,2020,1,Birm-Southern
+5,2020,32,UAB
+6,2020,31,South Alabama
+8,2020,32,Arkansas
+9,2020,31,Arizona St
+12,2020,32,Arizona
+13,2020,30,Cal Poly
+16,2020,30,Sacramento St
+21,2020,32,San Diego St
+22,2020,1,San Fran St
+23,2020,31,San José St
+24,2020,32,Stanford
+25,2020,32,California
+26,2020,31,UCLA
+27,2020,32,UC Riverside
+29,2020,1,Redlands
+30,2020,31,USC
+36,2020,32,Colorado St
+38,2020,32,Colorado
+39,2020,1,Conn Coll
+40,2020,1,Curry Co
+41,2020,31,UConn
+42,2020,33,Hartford
+43,2020,30,Yale
+44,2020,30,American
+45,2020,32,G Washington
+46,2020,32,Georgetown
+47,2020,33,Howard
+48,2020,33,Delaware
+50,2020,27,FAMU
+52,2020,31,Florida St
+53,2020,1,Florida Tech
+55,2020,32,J'Ville St
+56,2020,33,Stetson
+57,2020,31,Florida
+58,2020,31,South Florida
+59,2020,31,Georgia Tech
+60,2020,1,Morehouse
+61,2020,32,Georgia
+62,2020,30,Hawai'i
+66,2020,32,Iowa State
+67,2020,1,Luther
+68,2020,32,Boise St
+70,2020,32,Idaho
+71,2020,34,Bradley
+75,2020,1,North Park
+77,2020,31,Northwestern
+79,2020,32,S Illinois
+80,2020,1,Chicago
+82,2020,35,UIC
+84,2020,32,Indiana
+85,2020,32,IUPUI
+87,2020,32,Notre Dame
+93,2020,32,Murray St
+94,2020,32,N Kentucky
+95,2020,1,Pikeville
+96,2020,31,Kentucky
+97,2020,31,Louisville
+98,2020,30,Western KY
+99,2020,31,LSU
+100,2020,2,Loyola (LA)
+101,2020,1,Eureka Coll
+103,2020,32,Boston College
+104,2020,33,Boston Univ
+107,2020,32,Holy Cross
+108,2020,29,Harvard
+109,2020,1,MIT
+111,2020,33,Northeastern
+113,2020,31,UMass
+116,2020,32,Mount St Mary
+117,2020,1,St. Mary's MD
+119,2020,32,Towson
+120,2020,31,Maryland
+127,2020,31,Michigan St
+130,2020,31,Michigan
+135,2020,31,Minnesota
+139,2020,31,Saint Louis
+140,2020,30,Kansas City
+141,2020,1,MO-St. Louis
+142,2020,31,Missouri
+145,2020,32,Ole Miss
+147,2020,31,Montana St
+148,2020,2,MT Tech
+149,2020,31,Montana
+150,2020,31,Duke
+151,2020,31,East Carolina
+152,2020,32,NC State
+153,2020,33,North Carolina
+154,2020,31,Wake Forest
+155,2020,33,North Dakota
+156,2020,31,Creighton
+157,2020,1,Nebraska Wesleyan
+158,2020,32,Nebraska
+159,2020,29,Dartmouth
+160,2020,30,New Hampshire
+161,2020,30,Fair Dickinson
+163,2020,27,Princeton
+164,2020,31,Rutgers
+166,2020,31,New Mexico St
+167,2020,33,New Mexico
+171,2020,30,Columbia
+172,2020,27,Cornell
+173,2020,1,Hartwick
+179,2020,31,St Bonaventure
+182,2020,1,SUNY Potsdam
+183,2020,32,Syracuse
+189,2020,31,Bowling Green
+190,2020,1,Defiance
+191,2020,1,Heidelberg
+193,2020,32,Miami OH
+194,2020,31,Ohio State
+195,2020,32,Ohio
+197,2020,32,Oklahoma St
+198,2020,31,Oral Roberts
+201,2020,31,Oklahoma
+202,2020,31,Tulsa
+204,2020,31,Oregon St
+205,2020,1,Pacific (OR)
+213,2020,31,Penn State
+218,2020,31,Temple
+219,2020,27,Penn
+221,2020,33,Pitt
+222,2020,31,Villanova
+224,2020,1,Westminster UT
+225,2020,27,Brown
+227,2020,30,Rhode Island
+228,2020,31,Clemson
+229,2020,2,Coker College
+231,2020,32,Furman
+232,2020,31,Charleston
+233,2020,32,South Dakota
+235,2020,31,Memphis
+236,2020,33,Chattanooga
+238,2020,32,Vanderbilt
+239,2020,30,Baylor
+242,2020,32,Rice
+245,2020,30,Texas A&M
+248,2020,31,Houston
+249,2020,31,North Texas
+250,2020,32,UT Arlington
+251,2020,31,Texas
+252,2020,32,BYU
+253,2020,32,Southern Utah
+254,2020,31,Utah
+256,2020,30,James Madison
+257,2020,31,Richmond
+258,2020,30,Virginia
+259,2020,32,Virginia Tech
+261,2020,33,Vermont
+264,2020,32,Washington
+265,2020,32,Washington St
+269,2020,30,Marquette
+270,2020,31,Milwaukee
+274,2020,2,Maine Maritime
+275,2020,31,Wisconsin
+276,2020,32,Marshall
+277,2020,31,West Virginia
+278,2020,30,Fresno St
+279,2020,33,Pacific
+282,2020,30,Indiana St
+286,2020,2,NC Wesleyan
+288,2020,32,Lipscomb
+290,2020,33,Georgia So
+292,2020,30,UT Rio Grande
+294,2020,32,Jacksonville
+295,2020,32,Old Dominion
+297,2020,1,Hampden
+299,2020,32,Long Beach St
+300,2020,32,UC Irvine
+301,2020,32,San Diego
+302,2020,32,UC Davis
+304,2020,30,Idaho St
+305,2020,32,DePaul
+306,2020,1,IL Wesylan
+309,2020,33,Louisiana
+310,2020,2,Maryville MO
+311,2020,31,Maine
+314,2020,29,Iona
+315,2020,32,Niagara
+322,2020,31,Lafayette
+324,2020,33,Coast Car
+325,2020,32,Cleveland St
+326,2020,32,Texas St
+328,2020,34,Utah State
+329,2020,1,Mt. St. Vincent
+331,2020,31,E Washington
+333,2020,31,Alabama
+338,2020,29,Kennesaw St
+339,2020,32,Evansville
+344,2020,31,Mississippi St
+347,2020,1,Elmira
+349,2020,30,Army
+350,2020,32,UNC Wilmington
+353,2020,2,Joh. & Wales RI
+355,2020,1,SUNY Oneonta
+356,2020,31,Illinois
+357,2020,32,Texas A&M-CC
+366,2020,2,Ferrum
+367,2020,1,Gannon
+370,2020,1,Rutgers-Camden
+386,2020,1,Trinity (TX)
+391,2020,1,Oberlin 
+399,2020,32,Albany
+408,2020,2,WA Adventist
+409,2020,1,CncrdiWI
+417,2020,1,Gallaudet
+418,2020,1,Hendrix
+420,2020,1,Holy Family College
+427,2020,1,Ohio Northern
+465,2020,1,Rosemont
+469,2020,1,Chestnut Hill
+477,2020,1,Lesley University
+484,2020,2,Alice Lloyd
+486,2020,1,Aquinas
+487,2020,1,Bacone College
+492,2020,1,Bethany (KS)
+494,2020,2,Blue Mountain
+509,2020,1,Crown College
+511,2020,1,Cumberland KY
+526,2020,32,FGCU
+535,2020,1,Haskell
+542,2020,1,IL-Springfield
+546,2020,2,Judson College
+551,2020,1,NVU-Lyndon
+556,2020,1,Malone
+561,2020,2,Mayville St
+565,2020,2,Midland U
+569,2020,1,Montana St-Northern
+573,2020,2,Mount Marty College
+589,2020,1,Okla Christian
+594,2020,2,Pacific Union
+596,2020,2,Peru St
+606,2020,1,St. Thomas (FL)
+612,2020,3,Simpson
+630,2020,1,Wayland Baptist
+2000,2020,31,Abilene Chrstn
+2005,2020,32,Air Force
+2006,2020,31,Akron
+2010,2020,30,Alabama A&M
+2011,2020,32,Alabama St
+2016,2020,30,Alcorn St
+2023,2020,1,Anderson (IN)
+2026,2020,33,Appalachian St
+2028,2020,1,Ark Monticello
+2029,2020,30,AR-Pine Bluff
+2031,2020,31,Little Rock
+2032,2020,32,Arkansas St
+2033,2020,1,Arkansas Tech
+2040,2020,1,Aub.-Montgomery
+2046,2020,33,Austin Peay
+2047,2020,1,Averett
+2048,2020,1,Avila
+2050,2020,31,Ball State
+2057,2020,33,Belmont
+2058,2020,1,Bel Abbey
+2065,2020,30,Bethune
+2066,2020,29,Binghamton
+2073,2020,2,Bluefield St
+2077,2020,1,Brewton-Parker
+2079,2020,2,Bridgewater VA
+2081,2020,1,Bryan
+2083,2020,34,Bucknell
+2084,2020,32,Buffalo
+2086,2020,31,Butler
+2094,2020,2,Cal Lutheran
+2097,2020,31,Campbell
+2098,2020,1,Campbellsville
+2099,2020,32,Canisius
+2105,2020,1,CarsnNew
+2110,2020,31,C Arkansas
+2113,2020,1,Centenary LA
+2114,2020,1,Centenary (NJ)
+2115,2020,31,C Connecticut
+2116,2020,30,UCF
+2117,2020,32,C Michigan
+2119,2020,2,Cent St OH
+2122,2020,1,CentStOk
+2124,2020,3,Chaminade
+2127,2020,32,Charleston So
+2130,2020,29,Chicago St
+2132,2020,30,Cincinnati
+2142,2020,34,Colgate
+2144,2020,1,Colorado Coll
+2148,2020,2,Concord
+2151,2020,1,Concordia IL
+2153,2020,1,Concordia TX
+2154,2020,31,Coppin St
+2155,2020,1,Cornell Co (IA)
+2161,2020,1,Cumberland TN
+2166,2020,30,Davidson
+2168,2020,31,Dayton
+2169,2020,32,Delaware St
+2170,2020,1,Delta State
+2172,2020,31,Denver
+2174,2020,31,Detroit Mercy
+2178,2020,1,Doane
+2181,2020,34,Drake
+2182,2020,33,Drexel
+2184,2020,30,Duquesne
+2191,2020,1,East Central
+2193,2020,34,ETSU
+2194,2020,1,E TX Bapt
+2197,2020,32,E Illinois
+2198,2020,33,E Kentucky
+2199,2020,32,E Michigan
+2201,2020,2,E New Mexico
+2202,2020,1,E Oregon
+2205,2020,1,Edinboro
+2210,2020,34,Elon
+2213,2020,1,Emory & Henry
+2215,2020,1,Erskine
+2217,2020,32,Fairfield
+2221,2020,1,FDU-Florham
+2225,2020,1,Fisk
+2226,2020,32,FAU
+2227,2020,1,FL Memorial
+2228,2020,1,Flagler
+2229,2020,32,FIU
+2230,2020,31,Fordham
+2235,2020,1,Fresno Pacific
+2239,2020,31,Fullerton
+2241,2020,32,Gardner-Webb
+2242,2020,1,Geneva
+2244,2020,32,George Mason
+2247,2020,32,Georgia St
+2248,2020,1,Gettysbu
+2250,2020,33,Gonzaga
+2251,2020,2,Goucher
+2253,2020,30,Grand Canyon
+2256,2020,3,Greensboro
+2261,2020,34,Hampton
+2269,2020,1,HI Pacific
+2272,2020,32,High Point
+2274,2020,1,Hiram
+2275,2020,34,Hofstra
+2277,2020,29,Hou Christian
+2281,2020,1,Hus-Till
+2287,2020,31,Illinois St
+2288,2020,1,IN South Bend
+2294,2020,31,Iowa
+2296,2020,32,Jackson St
+2299,2020,1,Jarvis Chr
+2305,2020,31,Kansas
+2306,2020,32,Kansas St
+2309,2020,32,Kent State
+2316,2020,1,KY Wesleyan
+2320,2020,32,Lamar
+2325,2020,30,La Salle
+2326,2020,2,LeTourneau
+2329,2020,32,Lehigh
+2335,2020,34,Liberty
+2344,2020,32,Longwood
+2345,2020,1,CS Los Angeles
+2347,2020,2,LA Christian
+2348,2020,30,Louisiana Tech
+2349,2020,32,UMass Lowell
+2350,2020,32,Loyola Chicago
+2351,2020,32,LMU
+2352,2020,32,Loyola MD
+2362,2020,1,Manchester
+2363,2020,31,Manhattan
+2368,2020,30,Marist
+2369,2020,3,Mars Hill
+2370,2020,1,TN Southern
+2372,2020,1,Marymoun
+2373,2020,1,Maryville TN
+2377,2020,32,McNeese
+2378,2020,33,UMBC
+2379,2020,32,MD-Eastern
+2380,2020,1,Medgar Evers
+2381,2020,1,Menlo
+2382,2020,32,Mercer
+2383,2020,1,Merchant Marine
+2390,2020,31,Miami
+2391,2020,2,Mich-Dearborn
+2393,2020,31,MTSU
+2397,2020,3,Milligan
+2398,2020,1,Millsaps
+2400,2020,30,Miss Valley St
+2402,2020,1,Missouri S&T
+2405,2020,31,Monmouth
+2409,2020,1,Monteval
+2413,2020,32,Morehead St
+2415,2020,31,Morgan St
+2419,2020,1,Mount St. Joseph
+2424,2020,1,NM Highlands
+2426,2020,30,Navy
+2427,2020,31,UNC Asheville
+2428,2020,31,NC Central
+2429,2020,29,Charlotte
+2430,2020,32,UNC Greensboro
+2433,2020,29,UL Monroe
+2437,2020,32,Omaha
+2438,2020,1,Nebraska-Kearney
+2439,2020,32,UNLV
+2440,2020,31,Nevada
+2443,2020,30,New Orleans
+2444,2020,1,Newberry
+2447,2020,31,Nicholls
+2448,2020,32,NC A&T
+2449,2020,33,N Dakota St
+2450,2020,31,Norfolk St
+2453,2020,30,North Alabama
+2454,2020,33,North Florida
+2458,2020,31,N Colorado
+2459,2020,31,N Illinois
+2460,2020,31,Northern Iowa
+2462,2020,2,Northland
+2463,2020,32,CSU Northridge
+2464,2020,30,N Arizona
+2466,2020,30,N'Western St
+2468,2020,2,ND de Namur
+2473,2020,33,Oakland
+2474,2020,1,Oakland City
+2483,2020,31,Oregon
+2486,2020,1,Pacific Lutheran
+2489,2020,1,Palm Beach Atl
+2491,2020,6,Paul Quinn
+2492,2020,32,Pepperdine
+2496,2020,2,Piedmont
+2501,2020,32,Portland
+2502,2020,32,Portland St
+2504,2020,32,Prairie View
+2506,2020,32,Presbyterian
+2507,2020,31,Providence
+2508,2020,1,Puget Sound
+2509,2020,31,Purdue
+2514,2020,30,Quinnipiac
+2515,2020,32,Radford
+2519,2020,1,Rhodes
+2520,2020,30,Rider
+2521,2020,1,Rio Grande
+2523,2020,34,Robert Morris
+2524,2020,1,Rockford
+2529,2020,33,Sacred Heart
+2534,2020,31,Sam Houston
+2535,2020,33,Samford
+2536,2020,1,CSU San Bern
+2539,2020,34,San Francisco
+2540,2020,31,UCSB
+2541,2020,33,Santa Clara
+2545,2020,31,SE Louisiana
+2546,2020,31,SE Missouri St
+2547,2020,29,Seattle U
+2550,2020,30,Seton Hall
+2560,2020,1,Shorter
+2561,2020,30,Siena
+2562,2020,2,Siena Heights
+2564,2020,1,Simpson
+2565,2020,31,SIUE
+2567,2020,30,SMU
+2569,2020,29,SC State
+2571,2020,32,S Dakota St
+2572,2020,31,Southern Miss
+2573,2020,5,So New Orleans
+2574,2020,2,Sonoma St
+2576,2020,1,S Wesleyan
+2579,2020,31,South Carolina
+2582,2020,32,Southern
+2585,2020,1,Vanguard
+2586,2020,1,SWBapt
+2588,2020,1,Southwestern TX
+2589,2020,1,Spalding
+2590,2020,2,Spring Hill
+2592,2020,2,St. Andrews
+2595,2020,3,St Francis (IL)
+2597,2020,31,St Francis BK
+2598,2020,32,St Francis PA
+2599,2020,32,St John's
+2603,2020,32,Saint Joseph's
+2608,2020,34,Saint Mary's
+2610,2020,1,St Marys
+2612,2020,30,Saint Peter's
+2616,2020,2,Stanislaus St
+2617,2020,31,SF Austin
+2619,2020,33,Stony Brook
+2623,2020,33,Missouri St
+2626,2020,1,Tampa
+2628,2020,32,TCU
+2630,2020,29,UT Martin
+2632,2020,1,Tenn Wesleyan
+2633,2020,31,Tennessee
+2634,2020,33,Tennessee St
+2635,2020,31,Tennessee Tech
+2636,2020,32,UTSA
+2638,2020,32,UTEP
+2639,2020,2,TX Lutheran
+2640,2020,32,Texas Southern
+2641,2020,31,Texas Tech
+2642,2020,1,TX Wesleyan
+2643,2020,30,The Citadel
+2644,2020,1,Thiel
+2645,2020,1,Thomas College
+2648,2020,1,Toccoa Falls
+2649,2020,32,Toledo
+2650,2020,1,Tougaloo
+2652,2020,2,Trinity (IL)
+2653,2020,31,Troy
+2655,2020,30,Tulane
+2660,2020,2,UMass Boston
+2662,2020,1,UC Santa Cruz
+2666,2020,1,Urbana
+2670,2020,31,VCU
+2674,2020,35,Valparaiso
+2678,2020,33,VMI
+2681,2020,29,Wagner
+2689,2020,1,Washington Coll
+2692,2020,32,Weber St
+2701,2020,1,Montana-Western
+2703,2020,1,W New Mexico
+2710,2020,26,W Illinois
+2711,2020,32,W Michigan
+2716,2020,1,Westmont
+2717,2020,31,W Carolina
+2724,2020,31,Wichita St
+2725,2020,2,Widener
+2726,2020,2,Wilberforce
+2728,2020,3,Wiley
+2729,2020,32,William & Mary
+2730,2020,1,William Carey
+2737,2020,34,Winthrop
+2739,2020,33,Green Bay
+2741,2020,1,WI Lutheran
+2744,2020,1,UW-Stout
+2747,2020,35,Wofford
+2750,2020,32,Wright St
+2751,2020,33,Wyoming
+2752,2020,32,Xavier
+2753,2020,2,Xavier LA
+2754,2020,33,Youngstown St
+2755,2020,32,Grambling
+2758,2020,2,Howard Payne
+2771,2020,31,Merrimack
+2782,2020,1,SUNY Cortland
+2800,2020,1,Alma College
+2803,2020,32,Bryant
+2815,2020,2,Lindenwood
+2816,2020,1,McKendree
+2822,2020,2,N Greenville
+2825,2020,2,Quincy
+2826,2020,1,Rocky Mo
+2828,2020,1,Shenandoah
+2838,2020,1,Tiffin
+2842,2020,1,Virginia-Wise
+2846,2020,1,Wesley
+2849,2020,1,Westminster PA
+2850,2020,1,Whittier
+2855,2020,2,Brescia
+2856,2020,31,CA Baptist
+2857,2020,2,Caldwell 
+2862,2020,1,CO Christian
+2866,2020,2,Evergreen State
+2868,2020,1,Holy Names
+2870,2020,33,Purdue FW
+2871,2020,1,Kean
+2880,2020,1,MO Baptist
+2885,2020,30,NJIT
+2890,2020,2,Reinhardt
+2892,2020,2,Rust
+2905,2020,1,Texas Dallas
+2906,2020,1,Trevecca
+2908,2020,33,SC Upstate
+2913,2020,2,Brevard 
+2915,2020,1,Freed-Hardeman
+2916,2020,31,Incarnate Word
+2920,2020,2,Mobile
+2922,2020,1,Olivet Nazarene
+2930,2020,1,Willamette
+2934,2020,31,Bakersfield
+2937,2020,1,Dallas Christ.
+2945,2020,1,Pfeiffer
+2981,2020,1,Will Bapt
+2985,2020,1,Concordia (MI)
+2986,2020,1,Fairmont
+3067,2020,2,Goshen
+3077,2020,2,Kentucky Chr
+3078,2020,1,William Jessup
+3081,2020,1,TX-Permian Basin
+3082,2020,1,TX A&M-Intl
+3084,2020,30,Utah Valley
+3088,2020,1,IU-Northwest
+3090,2020,1,Randall
+3092,2020,1,Davenport Univ
+3094,2020,1,Joh. & Wales CO
+3096,2020,3,SD Christian
+3097,2020,2,Johnson FL
+3103,2020,1,SUNY-Purchase
+3111,2020,2,Apprentice
+3117,2020,1,Carver College
+3120,2020,3,Ecclesia
+3122,2020,1,Rogers State
+3126,2020,1,Mid-America CU
+3134,2020,4,Champ. Christ.
+3141,2020,2,No New Mexico
+3149,2020,1,Farmingdale
+3152,2020,1,Walla Walla
+3153,2020,1,Randolph
+3158,2020,2,Our Lady
+3164,2020,3,Central Penn
+3166,2020,4,Arl Baptist
+3168,2020,1,Crowley's Ridge
+3169,2020,2,Joh. & Wales NC
+3170,2020,2,St. Thomas (TX)
+3174,2020,4,Trinity Baptist
+3178,2020,1,Ave Maria
+3185,2020,1,UC Merced
+3192,2020,1,IU-Kokomo
+3216,2020,1,Cairn
+3217,2020,2,Portland Bible
+3238,2020,1,SW Christian Univ
+3242,2020,4,Columbia Int
+3243,2020,3,Bob Jones
+3244,2020,1,Florida Coll
+3245,2020,1,Tru-Mc
+3246,2020,3,Bethesda
+3249,2020,3,St. Katherine
+3250,2020,1,Northwest Ohio
+5901,2020,1,Elizabethtown
+7639,2020,1,Thomas (GA)
+66786,2020,1,St Elizabeth
+94822,2020,1,TX Perm Basin
+107730,2020,1,Florida Natl
+108799,2020,1,Cincy Clermont
+108806,2020,4,Mid-Atl Chr
+108807,2020,1,William Peace
+108818,2020,1,NYIT
+108842,2020,1,Emerson
+108942,2020,1,Carolina Univ.
+109014,2020,2,Mid Georgia St
+109597,2020,1,Antelope Valley
+109636,2020,1,Summit
+109656,2020,1,Pine Manor
+109661,2020,1,Multnomah
+109670,2020,3,Life Pacific
+109684,2020,1,Bryn Athyn
+110031,2020,1,Benedictine AZ
+110414,2020,1,UVF
+110418,2020,3,West Coast Bapt
+110426,2020,1,Nazareth
+111166,2020,1,Midway
+111170,2020,1,Franciscan
+111172,2020,1,Gordon
+111179,2020,1,Georgian Court
+111180,2020,2,Christendom
+111254,2020,2,Ottawa (AZ)
+111902,2020,1,Misericordia
+111910,2020,3,Westcliff
+111912,2020,1,Keiser
+111921,2020,2,CU-Harrodsburg
+111926,2020,4,Regent
+111942,2020,1,PSU-Wilkes-Barr
+111946,2020,5,Carver
+111951,2020,1,SE Baptist
+111966,2020,1,OH-Chillicothe
+111995,2020,1,Purdue NW
+112358,2020,33,Long Island
+112679,2020,1,SAGU AIC
+112686,2020,1,UHSP St. Louis
+112694,2020,1,West Colorado
+112698,2020,1,Cent Chris Coll
+112706,2020,1,Penn St - York
+121894,2020,1,North Central U
+2,2021,27,Auburn
+5,2021,29,UAB
+6,2021,28,South Alabama
+8,2021,32,Arkansas
+9,2021,25,Arizona St
+12,2021,26,Arizona
+13,2021,24,Cal Poly
+16,2021,20,Sacramento St
+21,2021,28,San Diego St
+23,2021,21,San José St
+24,2021,27,Stanford
+25,2021,29,California
+26,2021,32,UCLA
+27,2021,22,UC Riverside
+28,2021,17,UC San Diego
+30,2021,33,USC
+36,2021,28,Colorado St
+38,2021,32,Colorado
+41,2021,23,UConn
+42,2021,24,Hartford
+44,2021,10,American
+45,2021,17,G Washington
+46,2021,26,Georgetown
+47,2021,5,Howard
+48,2021,15,Delaware
+50,2021,20,FAMU
+52,2021,25,Florida St
+55,2021,27,J'Ville St
+56,2021,27,Stetson
+57,2021,25,Florida
+58,2021,22,South Florida
+59,2021,26,Georgia Tech
+61,2021,26,Georgia
+62,2021,21,Hawai'i
+66,2021,24,Iowa State
+68,2021,28,Boise St
+70,2021,22,Idaho
+71,2021,28,Bradley
+77,2021,24,Northwestern
+79,2021,26,S Illinois
+82,2021,22,UIC
+84,2021,27,Indiana
+85,2021,18,IUPUI
+87,2021,26,Notre Dame
+91,2021,22,Bellarmine
+93,2021,26,Murray St
+94,2021,25,N Kentucky
+96,2021,25,Kentucky
+97,2021,20,Louisville
+98,2021,29,Western KY
+99,2021,29,LSU
+100,2021,1,Loyola (LA)
+103,2021,20,Boston College
+104,2021,18,Boston Univ
+107,2021,16,Holy Cross
+111,2021,19,Northeastern
+113,2021,15,UMass
+116,2021,23,Mount St Mary
+117,2021,4,St. Mary's MD
+119,2021,18,Towson
+120,2021,31,Maryland
+127,2021,28,Michigan St
+130,2021,28,Michigan
+135,2021,29,Minnesota
+139,2021,21,Saint Louis
+140,2021,24,Kansas City
+142,2021,26,Missouri
+145,2021,28,Ole Miss
+147,2021,23,Montana St
+149,2021,28,Montana
+150,2021,24,Duke
+151,2021,19,East Carolina
+152,2021,25,NC State
+153,2021,29,North Carolina
+154,2021,22,Wake Forest
+155,2021,26,North Dakota
+156,2021,31,Creighton
+158,2021,27,Nebraska
+160,2021,19,New Hampshire
+161,2021,24,Fair Dickinson
+164,2021,28,Rutgers
+166,2021,20,New Mexico St
+167,2021,22,New Mexico
+179,2021,21,St Bonaventure
+183,2021,28,Syracuse
+189,2021,26,Bowling Green
+193,2021,23,Miami OH
+194,2021,31,Ohio State
+195,2021,25,Ohio
+196,2021,1,Northeastern St
+197,2021,30,Oklahoma St
+198,2021,29,Oral Roberts
+201,2021,27,Oklahoma
+202,2021,23,Tulsa
+204,2021,33,Oregon St
+213,2021,25,Penn State
+214,2021,4,Point Park
+218,2021,16,Temple
+221,2021,22,Pitt
+222,2021,25,Villanova
+224,2021,3,Westminster UT
+226,2021,1,Rhode Island Coll
+227,2021,25,Rhode Island
+228,2021,24,Clemson
+231,2021,25,Furman
+232,2021,19,Charleston
+233,2021,25,South Dakota
+235,2021,28,Memphis
+236,2021,26,Chattanooga
+238,2021,25,Vanderbilt
+239,2021,30,Baylor
+241,2021,4,McMurry
+242,2021,28,Rice
+245,2021,18,Texas A&M
+248,2021,32,Houston
+249,2021,28,North Texas
+250,2021,26,UT Arlington
+251,2021,27,Texas
+252,2021,27,BYU
+253,2021,24,Southern Utah
+254,2021,25,Utah
+256,2021,20,James Madison
+257,2021,23,Richmond
+258,2021,25,Virginia
+259,2021,22,Virginia Tech
+261,2021,15,Vermont
+264,2021,26,Washington
+265,2021,27,Washington St
+269,2021,27,Marquette
+270,2021,22,Milwaukee
+275,2021,31,Wisconsin
+276,2021,22,Marshall
+277,2021,29,West Virginia
+278,2021,24,Fresno St
+279,2021,18,Pacific
+282,2021,25,Indiana St
+286,2021,5,NC Wesleyan
+288,2021,27,Lipscomb
+290,2021,26,Georgia So
+292,2021,19,UT Rio Grande
+294,2021,24,Jacksonville
+295,2021,23,Old Dominion
+299,2021,18,Long Beach St
+300,2021,27,UC Irvine
+301,2021,14,San Diego
+302,2021,18,UC Davis
+304,2021,24,Idaho St
+305,2021,19,DePaul
+309,2021,26,Louisiana
+311,2021,9,Maine
+314,2021,18,Iona
+315,2021,20,Niagara
+316,2021,1,Dickinson St
+322,2021,15,Lafayette
+324,2021,26,Coast Car
+325,2021,27,Cleveland St
+326,2021,25,Texas St
+328,2021,29,Utah State
+331,2021,24,E Washington
+333,2021,33,Alabama
+338,2021,24,Kennesaw St
+339,2021,25,Evansville
+344,2021,33,Mississippi St
+349,2021,22,Army
+350,2021,17,UNC Wilmington
+351,2021,1,Wingate
+354,2021,2,Olivet College
+356,2021,31,Illinois
+357,2021,24,Texas A&M-CC
+399,2021,16,Albany
+413,2021,1,Columbus State
+415,2021,1,George Fox
+467,2021,1,Salem
+484,2021,2,Alice Lloyd
+487,2021,1,Bacone College
+495,2021,1,Bluefield U
+506,2021,1,Concordia (CA)
+510,2021,1,Culver-Stockton
+526,2021,18,FGCU
+546,2021,2,Judson College
+556,2021,1,Malone
+573,2021,2,Mount Marty College
+580,2021,1,Newman
+612,2021,1,Simpson
+2000,2021,29,Abilene Chrstn
+2001,2021,2,Adams State
+2003,2021,2,Adrian
+2005,2021,25,Air Force
+2006,2021,23,Akron
+2010,2021,15,Alabama A&M
+2011,2021,18,Alabama St
+2016,2021,19,Alcorn St
+2026,2021,29,Appalachian St
+2029,2021,25,AR-Pine Bluff
+2031,2021,26,Little Rock
+2032,2021,24,Arkansas St
+2046,2021,27,Austin Peay
+2050,2021,23,Ball State
+2056,2021,1,Belhaven
+2057,2021,30,Belmont
+2058,2021,1,Bel Abbey
+2059,2021,1,Benedict
+2064,2021,1,Bethel (TN)
+2066,2021,18,Binghamton
+2073,2021,1,Bluefield St
+2083,2021,12,Bucknell
+2084,2021,25,Buffalo
+2086,2021,25,Butler
+2097,2021,27,Campbell
+2099,2021,13,Canisius
+2107,2021,1,Catawba
+2109,2021,1,Cedarville
+2110,2021,24,C Arkansas
+2115,2021,21,C Connecticut
+2116,2021,23,UCF
+2117,2021,23,C Michigan
+2127,2021,21,Charleston So
+2130,2021,9,Chicago St
+2132,2021,23,Cincinnati
+2141,2021,1,Coe College
+2142,2021,16,Colgate
+2154,2021,22,Coppin St
+2157,2021,2,Covenant
+2166,2021,22,Davidson
+2168,2021,24,Dayton
+2169,2021,19,Delaware St
+2172,2021,21,Denver
+2174,2021,22,Detroit Mercy
+2178,2021,1,Doane
+2181,2021,31,Drake
+2182,2021,20,Drexel
+2184,2021,18,Duquesne
+2193,2021,25,ETSU
+2194,2021,1,E TX Bapt
+2197,2021,27,E Illinois
+2198,2021,29,E Kentucky
+2199,2021,18,E Michigan
+2206,2021,1,Edward Waters
+2210,2021,19,Elon
+2211,2021,2,Emmanuel
+2214,2021,1,Emporia St
+2217,2021,27,Fairfield
+2226,2021,23,FAU
+2227,2021,2,FL Memorial
+2228,2021,6,Flagler
+2229,2021,26,FIU
+2230,2021,14,Fordham
+2231,2021,1,Fort Hays St
+2235,2021,5,Fresno Pacific
+2239,2021,16,Fullerton
+2241,2021,26,Gardner-Webb
+2244,2021,22,George Mason
+2247,2021,22,Georgia St
+2250,2021,32,Gonzaga
+2253,2021,24,Grand Canyon
+2256,2021,5,Greensboro
+2257,2021,3,Greenville
+2261,2021,25,Hampton
+2267,2021,1,Hawaii-Hilo
+2269,2021,1,HI Pacific
+2272,2021,24,High Point
+2275,2021,23,Hofstra
+2277,2021,25,Hou Christian
+2287,2021,25,Illinois St
+2294,2021,31,Iowa
+2296,2021,18,Jackson St
+2305,2021,30,Kansas
+2306,2021,29,Kansas St
+2309,2021,23,Kent State
+2320,2021,28,Lamar
+2322,2021,1,Lander
+2325,2021,25,La Salle
+2326,2021,5,LeTourneau
+2329,2021,15,Lehigh
+2332,2021,2,Lewis
+2335,2021,29,Liberty
+2336,2021,2,Limestone
+2339,2021,2,Lincoln PA
+2344,2021,29,Longwood
+2348,2021,32,Louisiana Tech
+2349,2021,23,UMass Lowell
+2350,2021,31,Loyola Chicago
+2351,2021,22,LMU
+2352,2021,17,Loyola MD
+2353,2021,1,LSU Shreveport
+2363,2021,20,Manhattan
+2368,2021,21,Marist
+2369,2021,1,Mars Hill
+2371,2021,2,Mary Hardin-Bay
+2377,2021,24,McNeese
+2378,2021,20,UMBC
+2382,2021,29,Mercer
+2383,2021,1,Merchant Marine
+2385,2021,1,Mercyhurst
+2390,2021,27,Miami
+2393,2021,23,MTSU
+2395,2021,1,Midwest
+2400,2021,24,Miss Valley St
+2402,2021,1,Missouri S&T
+2405,2021,20,Monmouth
+2413,2021,31,Morehead St
+2415,2021,22,Morgan St
+2419,2021,3,Mount St. Joseph
+2426,2021,18,Navy
+2427,2021,20,UNC Asheville
+2428,2021,14,NC Central
+2429,2021,25,Charlotte
+2430,2021,30,UNC Greensboro
+2433,2021,26,UL Monroe
+2437,2021,25,Omaha
+2439,2021,27,UNLV
+2440,2021,26,Nevada
+2443,2021,25,New Orleans
+2444,2021,1,Newberry
+2447,2021,25,Nicholls
+2448,2021,21,NC A&T
+2449,2021,27,N Dakota St
+2450,2021,25,Norfolk St
+2453,2021,24,North Alabama
+2454,2021,23,North Florida
+2455,2021,3,N Georgia
+2458,2021,22,N Colorado
+2459,2021,19,N Illinois
+2460,2021,25,Northern Iowa
+2463,2021,22,CSU Northridge
+2464,2021,22,N Arizona
+2465,2021,6,Northwest (WA)
+2466,2021,29,N'Western St
+2473,2021,30,Oakland
+2483,2021,28,Oregon
+2491,2021,1,Paul Quinn
+2492,2021,27,Pepperdine
+2496,2021,2,Piedmont
+2501,2021,21,Portland
+2502,2021,22,Portland St
+2504,2021,21,Prairie View
+2506,2021,22,Presbyterian
+2507,2021,26,Providence
+2509,2021,28,Purdue
+2511,2021,3,Queens
+2514,2021,22,Quinnipiac
+2515,2021,27,Radford
+2518,2021,2,Regis Univ
+2520,2021,23,Rider
+2523,2021,19,Robert Morris
+2529,2021,18,Sacred Heart
+2534,2021,28,Sam Houston
+2535,2021,19,Samford
+2539,2021,25,San Francisco
+2540,2021,27,UCSB
+2541,2021,20,Santa Clara
+2545,2021,26,SE Louisiana
+2546,2021,27,SE Missouri St
+2547,2021,23,Seattle U
+2550,2021,27,Seton Hall
+2561,2021,17,Siena
+2565,2021,26,SIUE
+2567,2021,17,SMU
+2569,2021,18,SC State
+2571,2021,23,S Dakota St
+2572,2021,25,Southern Miss
+2576,2021,3,S Wesleyan
+2579,2021,21,South Carolina
+2582,2021,19,Southern
+2585,2021,1,Vanguard
+2590,2021,1,Spring Hill
+2591,2021,2,St Ambro
+2592,2021,3,St. Andrews
+2595,2021,2,St Francis (IL)
+2597,2021,19,St Francis BK
+2598,2021,22,St Francis PA
+2599,2021,27,St John's
+2603,2021,20,Saint Joseph's
+2606,2021,2,St. Martin's
+2608,2021,24,Saint Mary's
+2610,2021,1,St Marys
+2612,2021,25,Saint Peter's
+2617,2021,21,SF Austin
+2619,2021,23,Stony Brook
+2623,2021,24,Missouri St
+2627,2021,20,Tarleton
+2628,2021,26,TCU
+2630,2021,24,UT Martin
+2633,2021,27,Tennessee
+2634,2021,23,Tennessee St
+2635,2021,27,Tennessee Tech
+2636,2021,26,UTSA
+2638,2021,24,UTEP
+2640,2021,26,Texas Southern
+2641,2021,29,Texas Tech
+2643,2021,25,The Citadel
+2648,2021,4,Toccoa Falls
+2649,2021,30,Toledo
+2653,2021,28,Troy
+2654,2021,1,Truman St
+2655,2021,23,Tulane
+2657,2021,1,Tuskegee
+2670,2021,26,VCU
+2672,2021,1,VA Wesleyan
+2674,2021,28,Valparaiso
+2678,2021,25,VMI
+2681,2021,20,Wagner
+2687,2021,1,Washburn
+2691,2021,1,Webber Int
+2692,2021,23,Weber St
+2701,2021,1,Montana-Western
+2703,2021,1,W New Mexico
+2706,2021,2,W. Virginia Tech
+2710,2021,22,W Illinois
+2711,2021,21,W Michigan
+2716,2021,2,Westmont
+2717,2021,27,W Carolina
+2721,2021,1,Whitwort
+2724,2021,22,Wichita St
+2729,2021,17,William & Mary
+2730,2021,2,William Carey
+2737,2021,25,Winthrop
+2739,2021,25,Green Bay
+2747,2021,24,Wofford
+2750,2021,24,Wright St
+2751,2021,25,Wyoming
+2752,2021,21,Xavier
+2754,2021,27,Youngstown St
+2755,2021,24,Grambling
+2758,2021,4,Howard Payne
+2771,2021,18,Merrimack
+2803,2021,22,Bryant
+2804,2021,1,Chowan
+2810,2021,2,Hardin-Simmons
+2816,2021,2,McKendree
+2825,2021,2,Quincy
+2834,2021,2,Sul Ross
+2839,2021,1,Tusculum
+2856,2021,23,CA Baptist
+2862,2021,1,CO Christian
+2870,2021,23,Purdue FW
+2875,2021,1,Lee
+2885,2021,19,NJIT
+2887,2021,1,NW Nazarene
+2892,2021,1,Rust
+2896,2021,1,Southern VA
+2903,2021,2,SW Adventist
+2906,2021,1,Trevecca
+2908,2021,23,SC Upstate
+2911,2021,1,William Jewell
+2915,2021,2,Freed-Hardeman
+2916,2021,22,Incarnate Word
+2920,2021,3,Mobile
+2934,2021,26,Bakersfield
+2937,2021,6,Dallas Christ.
+2947,2021,1,Rochester Univ.
+2952,2021,3,Warner Pacific
+2975,2021,5,Transylvania
+3078,2021,5,William Jessup
+3079,2021,2,Cent Bapt Coll
+3082,2021,2,TX A&M-Intl
+3083,2021,1,Oakwood
+3084,2021,22,Utah Valley
+3096,2021,3,SD Christian
+3101,2021,21,Utah Tech
+3122,2021,1,Rogers State
+3134,2021,7,Champ. Christ.
+3158,2021,10,Our Lady
+3159,2021,5,Coll Idaho
+3166,2021,3,Arl Baptist
+3167,2021,1,La Sierra
+3168,2021,4,Crowley's Ridge
+3188,2021,1,AZ Christian
+3189,2021,2,Coastal Georgia
+3238,2021,2,SW Christian Univ
+3242,2021,6,Columbia Int
+3244,2021,2,Florida Coll
+3246,2021,12,Bethesda
+3247,2021,1,Dalton State
+3249,2021,10,St. Katherine
+6304,2021,1,Keene State
+49865,2021,1,CSU-Pueblo
+94822,2021,2,TX Perm Basin
+107730,2021,6,Florida Natl
+108817,2021,3,LSU Alexandria
+110031,2021,5,Benedictine AZ
+111921,2021,2,CU-Harrodsburg
+111943,2021,1,Mt. Aloysius
+111946,2021,21,Carver
+111995,2021,3,Purdue NW
+112358,2021,18,Long Island
+112679,2021,2,SAGU AIC
+112686,2021,1,UHSP St. Louis
+123306,2021,2,Lancaster Bible
+123313,2021,1,Carlow
+123366,2021,1,Calvin
+123391,2021,3,Yellowstone 
+123410,2021,2,KS Christian

@@ -78,15 +78,15 @@ def _readout_bullets(meta: dict) -> list[str]:
     n_all = int(s.get("n_player_seasons", 0))
     n_draft = int(s.get("n_drafted_player_seasons", 0))
     med = s.get("minutes_median")
-    med_s = f"{float(med):.0f}" if med is not None else "?"
     p90 = s.get("minutes_p90")
-    p90_s = f"{float(p90):.0f}" if p90 is not None else "?"
+    med_fmt = m(float(med), decimals=0) if med is not None else "?"
+    p90_fmt = m(float(p90), decimals=0) if p90 is not None else "?"
 
     return [
         r"PD22 item 2: season-minutes on box-QC panel (min\_minutes=0 rebuild).",
         BOX_QC_PANEL_NOTE,
         rf"Panel: {seasons} MBB · {m(n_all)} player-seasons · {m(n_draft)} ever-draft rows.",
-        rf"Median minutes = {m(med_s)}; 90th percentile = {m(p90_s)}.",
+        rf"Median minutes = {med_fmt}; 90th percentile = {p90_fmt}.",
         rf"Zero-minute rows: {m(int(s.get('n_zero_minutes', 0)))} "
         rf"({mpct(float(s.get('pct_zero_minutes', 0)))} of panel).",
         rf"Below {m(10)} min: {mpct(float(s.get('pct_below_10', 0)))}; "

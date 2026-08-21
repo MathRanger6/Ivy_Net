@@ -1,0 +1,12 @@
+Pass A caption — empirical pair
+
+Spec: n_bins=12 poolq_binning=quantile min_minutes=20.0 winsor=0.01–0.99
+output_tag=q12
+
+Left: Mean NBA draft rate by ventile of player ability (ppm z-scored
+within season). Monotone-up is the talent-only stylized read.
+
+Right: Mean NBA draft rate by ventile of leave-one-out teammate quality
+(poolq_loo), MBB 2013-2021, hero spec locked in Hero_Model_Three_Layers_Memo.md.
+
+We do not use λ language on the empirical side; λ is a generative score knob (Pass B).

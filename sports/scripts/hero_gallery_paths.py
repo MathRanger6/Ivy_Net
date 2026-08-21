@@ -12,6 +12,7 @@ PASS_B = HERO_ROOT / "pass_b"
 PASS_C_RHO = HERO_ROOT / "pass_c_rho"
 SIM_INPUTS = HERO_ROOT / "sim_inputs"
 EMPIRICAL_PD17 = HERO_ROOT / "empirical_pd17"
+BASIC_DATA_PLOTS = HERO_ROOT / "basic_data_plots"
 GRANDCHILD_ASSIGN = HERO_ROOT / "grandchild_assign"
 PD20_TEMPERATURE = HERO_ROOT / "pd20_temperature"
 PD21_MLE = HERO_ROOT / "pd21_mle"
@@ -49,6 +50,7 @@ AUTO_THETA_DECK = SLIDES_AUTO / "CHAR_theta_characterization_AUTO.pptx"
 AUTO_GAMMA_DECK = SLIDES_AUTO / "CHAR_gamma_characterization_AUTO.pptx"
 AUTO_SOFT_ASSIGN_GAMMA_DECK = SLIDES_AUTO / "CHAR_soft_assign_gamma_sweep_AUTO.pptx"
 AUTO_PD20_DECK = SLIDES_AUTO / "CHAR_PD20_HAND_AUTO.pptx"
+AUTO_PD21_MLE_DECK = SLIDES_AUTO / "CHAR_PD21_MLE_fit_AUTO.pptx"
 AUTO_PD21_RHO_DECK = SLIDES_AUTO / "CHAR_PD21_rho_hsort_calibrate_AUTO.pptx"
 AUTO_PD21_RHO_TIMESERIES_DECK = SLIDES_AUTO / "CHAR_PD21_rho_hsort_timeseries_AUTO.pptx"
 AUTO_PD22_DRAFTED_MINUTES_DECK = SLIDES_AUTO / "CHAR_PD22_drafted_minutes_audit_AUTO.pptx"
@@ -79,6 +81,7 @@ _ALL_DIRS = (
     PASS_C_RHO,
     SIM_INPUTS,
     EMPIRICAL_PD17,
+    BASIC_DATA_PLOTS,
     GRANDCHILD_ASSIGN,
     PD20_TEMPERATURE,
     PD21_MLE,

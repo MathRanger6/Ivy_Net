@@ -1,0 +1,398 @@
+x,mg,seasons,n_bins,binning,winsor,min_minutes,draft_relevant_only,ts_min_games,subsample,n,drafts,beta_sq,peak_bin,peak_rate,bin_last_rate,tail_drop,decline_bins_after_peak,consec_declines_from_peak,rates,slug,description,png
+poolq_loo,10,2011-2021,16,quantile,"[0.01, 0.99]",20.0,False,,,46306,1133,0.006413653692180652,15,0.03248099516240498,0.032135452660677265,-0.0003455425017277122,0,1,"[0.01934, 0.02073, 0.02177, 0.01831, 0.0273, 0.019, 0.0235, 0.02108, 0.02418, 0.02281, 0.02626, 0.02626, 0.0273, 0.02903, 0.03248, 0.03214]",loo_mg10_2011_2021_b16q_w0199,"What we tried:
+  X-axis: poolq_loo (LOO teammate perf)
+  Panel: POST-QC: drop team-seasons with ≤10 ESPN games
+  Seasons: 2011-2021 · min_minutes=20
+  Bins: 16 quantile · winsor 0.01–0.99
+  n=46,306 · drafts=1,133
+  Peak bin 15 @ 3.25%
+  Last bin @ 3.21% · tail Δ=-0.03pp
+  Declining bins after peak: 0 (consecutive from peak: 1)
+  LPM β₂=+0.0064 (not concave)",PASS_A_sensitivity_loo_mg10_2011_2021_b16q_w0199.png
+poolq_loo,10,2011-2021,16,quantile,"[0.02, 0.98]",20.0,False,,,46306,1133,0.008871169909743178,15,0.03248099516240498,0.032135452660677265,-0.0003455425017277122,0,1,"[0.01934, 0.02073, 0.02177, 0.01831, 0.0273, 0.019, 0.0235, 0.02108, 0.02418, 0.02281, 0.02626, 0.02626, 0.0273, 0.02903, 0.03248, 0.03214]",loo_mg10_2011_2021_b16q_w0298,"What we tried:
+  X-axis: poolq_loo (LOO teammate perf)
+  Panel: POST-QC: drop team-seasons with ≤10 ESPN games
+  Seasons: 2011-2021 · min_minutes=20
+  Bins: 16 quantile · winsor 0.02–0.98
+  n=46,306 · drafts=1,133
+  Peak bin 15 @ 3.25%
+  Last bin @ 3.21% · tail Δ=-0.03pp
+  Declining bins after peak: 0 (consecutive from peak: 1)
+  LPM β₂=+0.0089 (not concave)",PASS_A_sensitivity_loo_mg10_2011_2021_b16q_w0298.png
+poolq_loo,10,2011-2021,16,equal_width,"[0.01, 0.99]",20.0,False,,,46306,1133,0.006413653692180652,13,0.03595724003887269,0.03202479338842975,-0.003932446650442942,1,1,"[0.00999, 0.02436, 0.02268, 0.02126, 0.02038, 0.02303, 0.01971, 0.02438, 0.02366, 0.02539, 0.02785, 0.02813, 0.03596, 0.02882, 0.03555, 0.03202]",loo_mg10_2011_2021_b16ew_w0199,"What we tried:
+  X-axis: poolq_loo (LOO teammate perf)
+  Panel: POST-QC: drop team-seasons with ≤10 ESPN games
+  Seasons: 2011-2021 · min_minutes=20
+  Bins: 16 equal_width · winsor 0.01–0.99
+  n=46,306 · drafts=1,133
+  Peak bin 13 @ 3.60%
+  Last bin @ 3.20% · tail Δ=-0.39pp
+  Declining bins after peak: 1 (consecutive from peak: 1)
+  LPM β₂=+0.0064 (not concave)",PASS_A_sensitivity_loo_mg10_2011_2021_b16ew_w0199.png
+poolq_loo,10,2011-2021,16,equal_width,"[0.02, 0.98]",20.0,False,,,46306,1133,0.008871169909743178,16,0.03529411764705882,0.03529411764705882,0.0,0,0,"[0.01648, 0.02414, 0.01803, 0.02119, 0.02116, 0.02364, 0.02158, 0.02243, 0.02315, 0.0267, 0.02699, 0.02775, 0.03212, 0.03529, 0.02539, 0.03529]",loo_mg10_2011_2021_b16ew_w0298,"What we tried:
+  X-axis: poolq_loo (LOO teammate perf)
+  Panel: POST-QC: drop team-seasons with ≤10 ESPN games
+  Seasons: 2011-2021 · min_minutes=20
+  Bins: 16 equal_width · winsor 0.02–0.98
+  n=46,306 · drafts=1,133
+  Peak bin 16 @ 3.53%
+  Last bin @ 3.53% · tail Δ=+0.00pp
+  Declining bins after peak: 0 (consecutive from peak: 0)
+  LPM β₂=+0.0089 (not concave)",PASS_A_sensitivity_loo_mg10_2011_2021_b16ew_w0298.png
+poolq_loo,10,2011-2021,20,quantile,"[0.01, 0.99]",20.0,False,,,46306,1133,0.006413653692180652,20,0.032397408207343416,0.032397408207343416,0.0,0,0,"[0.01857, 0.01944, 0.02289, 0.02029, 0.01901, 0.02894, 0.01857, 0.01901, 0.02635, 0.02073, 0.02504, 0.02376, 0.02289, 0.02504, 0.02765, 0.02721, 0.02807, 0.03153, 0.03197, 0.0324]",loo_mg10_2011_2021_b20q_w0199,"What we tried:
+  X-axis: poolq_loo (LOO teammate perf)
+  Panel: POST-QC: drop team-seasons with ≤10 ESPN games
+  Seasons: 2011-2021 · min_minutes=20
+  Bins: 20 quantile · winsor 0.01–0.99
+  n=46,306 · drafts=1,133
+  Peak bin 20 @ 3.24%
+  Last bin @ 3.24% · tail Δ=+0.00pp
+  Declining bins after peak: 0 (consecutive from peak: 0)
+  LPM β₂=+0.0064 (not concave)",PASS_A_sensitivity_loo_mg10_2011_2021_b20q_w0199.png
+poolq_loo,10,2011-2021,20,quantile,"[0.02, 0.98]",20.0,False,,,46306,1133,0.008871169909743178,20,0.032397408207343416,0.032397408207343416,0.0,0,0,"[0.01857, 0.01944, 0.02289, 0.02029, 0.01901, 0.02894, 0.01857, 0.01901, 0.02635, 0.02073, 0.02504, 0.02376, 0.02289, 0.02504, 0.02765, 0.02721, 0.02807, 0.03153, 0.03197, 0.0324]",loo_mg10_2011_2021_b20q_w0298,"What we tried:
+  X-axis: poolq_loo (LOO teammate perf)
+  Panel: POST-QC: drop team-seasons with ≤10 ESPN games
+  Seasons: 2011-2021 · min_minutes=20
+  Bins: 20 quantile · winsor 0.02–0.98
+  n=46,306 · drafts=1,133
+  Peak bin 20 @ 3.24%
+  Last bin @ 3.24% · tail Δ=+0.00pp
+  Declining bins after peak: 0 (consecutive from peak: 0)
+  LPM β₂=+0.0089 (not concave)",PASS_A_sensitivity_loo_mg10_2011_2021_b20q_w0298.png
+poolq_loo,10,2011-2021,20,equal_width,"[0.01, 0.99]",20.0,False,,,46306,1133,0.006413653692180652,16,0.035942028985507246,0.032520325203252036,-0.00342170378225521,1,1,"[0.01121, 0.01613, 0.02637, 0.02147, 0.02156, 0.021, 0.01918, 0.0242, 0.02246, 0.02231, 0.02295, 0.02468, 0.02824, 0.02707, 0.02847, 0.03594, 0.03084, 0.0323, 0.03339, 0.03252]",loo_mg10_2011_2021_b20ew_w0199,"What we tried:
+  X-axis: poolq_loo (LOO teammate perf)
+  Panel: POST-QC: drop team-seasons with ≤10 ESPN games
+  Seasons: 2011-2021 · min_minutes=20
+  Bins: 20 equal_width · winsor 0.01–0.99
+  n=46,306 · drafts=1,133
+  Peak bin 16 @ 3.59%
+  Last bin @ 3.25% · tail Δ=-0.34pp
+  Declining bins after peak: 1 (consecutive from peak: 1)
+  LPM β₂=+0.0064 (not concave)",PASS_A_sensitivity_loo_mg10_2011_2021_b20ew_w0199.png
+poolq_loo,10,2011-2021,20,equal_width,"[0.02, 0.98]",20.0,False,,,46306,1133,0.008871169909743178,16,0.03337041156840934,0.03287671232876712,-0.000493699239642223,1,2,"[0.01325, 0.02784, 0.02282, 0.01926, 0.01976, 0.02128, 0.02358, 0.02236, 0.02227, 0.0217, 0.02337, 0.02571, 0.02691, 0.02751, 0.02694, 0.03337, 0.03266, 0.03101, 0.03256, 0.03288]",loo_mg10_2011_2021_b20ew_w0298,"What we tried:
+  X-axis: poolq_loo (LOO teammate perf)
+  Panel: POST-QC: drop team-seasons with ≤10 ESPN games
+  Seasons: 2011-2021 · min_minutes=20
+  Bins: 20 equal_width · winsor 0.02–0.98
+  n=46,306 · drafts=1,133
+  Peak bin 16 @ 3.34%
+  Last bin @ 3.29% · tail Δ=-0.05pp
+  Declining bins after peak: 1 (consecutive from peak: 2)
+  LPM β₂=+0.0089 (not concave)",PASS_A_sensitivity_loo_mg10_2011_2021_b20ew_w0298.png
+poolq_loo,10,2013-2021,16,quantile,"[0.01, 0.99]",20.0,False,,,38123,882,0.0004622511194645105,15,0.030214015946286196,0.02644836272040302,-0.003765653225883174,0,1,"[0.02098, 0.0193, 0.0214, 0.01889, 0.0256, 0.01888, 0.02351, 0.0193, 0.02308, 0.01889, 0.02476, 0.02602, 0.02603, 0.02686, 0.03021, 0.02645]",loo_mg10_2013_2021_b16q_w0199,"What we tried:
+  X-axis: poolq_loo (LOO teammate perf)
+  Panel: POST-QC: drop team-seasons with ≤10 ESPN games
+  Seasons: 2013-2021 · min_minutes=20
+  Bins: 16 quantile · winsor 0.01–0.99
+  n=38,123 · drafts=882
+  Peak bin 15 @ 3.02%
+  Last bin @ 2.64% · tail Δ=-0.38pp
+  Declining bins after peak: 0 (consecutive from peak: 1)
+  LPM β₂=+0.0005 (not concave)",PASS_A_sensitivity_loo_mg10_2013_2021_b16q_w0199.png
+poolq_loo,10,2013-2021,16,quantile,"[0.02, 0.98]",20.0,False,,,38123,882,0.0031106663555565115,15,0.030214015946286196,0.02644836272040302,-0.003765653225883174,0,1,"[0.02098, 0.0193, 0.0214, 0.01889, 0.0256, 0.01888, 0.02351, 0.0193, 0.02308, 0.01889, 0.02476, 0.02602, 0.02603, 0.02686, 0.03021, 0.02645]",loo_mg10_2013_2021_b16q_w0298,"What we tried:
+  X-axis: poolq_loo (LOO teammate perf)
+  Panel: POST-QC: drop team-seasons with ≤10 ESPN games
+  Seasons: 2013-2021 · min_minutes=20
+  Bins: 16 quantile · winsor 0.02–0.98
+  n=38,123 · drafts=882
+  Peak bin 15 @ 3.02%
+  Last bin @ 2.64% · tail Δ=-0.38pp
+  Declining bins after peak: 0 (consecutive from peak: 1)
+  LPM β₂=+0.0031 (not concave)",PASS_A_sensitivity_loo_mg10_2013_2021_b16q_w0298.png
+poolq_loo,10,2013-2021,16,equal_width,"[0.01, 0.99]",20.0,False,,,38123,882,0.0004622511194645105,13,0.03135689851767389,0.02600780234070221,-0.0053490961769716815,1,1,"[0.00828, 0.02732, 0.02244, 0.01957, 0.02117, 0.0224, 0.01916, 0.02273, 0.02192, 0.02421, 0.02674, 0.02727, 0.03136, 0.02602, 0.02684, 0.02601]",loo_mg10_2013_2021_b16ew_w0199,"What we tried:
+  X-axis: poolq_loo (LOO teammate perf)
+  Panel: POST-QC: drop team-seasons with ≤10 ESPN games
+  Seasons: 2013-2021 · min_minutes=20
+  Bins: 16 equal_width · winsor 0.01–0.99
+  n=38,123 · drafts=882
+  Peak bin 13 @ 3.14%
+  Last bin @ 2.60% · tail Δ=-0.53pp
+  Declining bins after peak: 1 (consecutive from peak: 1)
+  LPM β₂=+0.0005 (not concave)",PASS_A_sensitivity_loo_mg10_2013_2021_b16ew_w0199.png
+poolq_loo,10,2013-2021,16,equal_width,"[0.02, 0.98]",20.0,False,,,38123,882,0.0031106663555565115,13,0.030612244897959183,0.027550260610573342,-0.003061984287385841,1,2,"[0.01649, 0.02789, 0.01645, 0.02036, 0.02107, 0.02382, 0.01954, 0.02183, 0.02142, 0.02416, 0.02705, 0.02632, 0.03061, 0.02769, 0.02492, 0.02755]",loo_mg10_2013_2021_b16ew_w0298,"What we tried:
+  X-axis: poolq_loo (LOO teammate perf)
+  Panel: POST-QC: drop team-seasons with ≤10 ESPN games
+  Seasons: 2013-2021 · min_minutes=20
+  Bins: 16 equal_width · winsor 0.02–0.98
+  n=38,123 · drafts=882
+  Peak bin 13 @ 3.06%
+  Last bin @ 2.76% · tail Δ=-0.31pp
+  Declining bins after peak: 1 (consecutive from peak: 2)
+  LPM β₂=+0.0031 (not concave)",PASS_A_sensitivity_loo_mg10_2013_2021_b16ew_w0298.png
+poolq_loo,10,2013-2021,20,quantile,"[0.01, 0.99]",20.0,False,,,38123,882,0.0004622511194645105,18,0.030954879328436515,0.026757607555089193,-0.004197271773347323,0,1,"[0.0194, 0.01889, 0.02256, 0.01994, 0.01994, 0.02728, 0.0173, 0.01889, 0.02833, 0.01731, 0.02256, 0.01941, 0.02413, 0.02202, 0.02781, 0.02623, 0.02728, 0.03095, 0.02571, 0.02676]",loo_mg10_2013_2021_b20q_w0199,"What we tried:
+  X-axis: poolq_loo (LOO teammate perf)
+  Panel: POST-QC: drop team-seasons with ≤10 ESPN games
+  Seasons: 2013-2021 · min_minutes=20
+  Bins: 20 quantile · winsor 0.01–0.99
+  n=38,123 · drafts=882
+  Peak bin 18 @ 3.10%
+  Last bin @ 2.68% · tail Δ=-0.42pp
+  Declining bins after peak: 0 (consecutive from peak: 1)
+  LPM β₂=+0.0005 (not concave)",PASS_A_sensitivity_loo_mg10_2013_2021_b20q_w0199.png
+poolq_loo,10,2013-2021,20,quantile,"[0.02, 0.98]",20.0,False,,,38123,882,0.0031106663555565115,18,0.030954879328436515,0.026757607555089193,-0.004197271773347323,0,1,"[0.0194, 0.01889, 0.02256, 0.01994, 0.01994, 0.02728, 0.0173, 0.01889, 0.02833, 0.01731, 0.02256, 0.01941, 0.02413, 0.02202, 0.02781, 0.02623, 0.02728, 0.03095, 0.02571, 0.02676]",loo_mg10_2013_2021_b20q_w0298,"What we tried:
+  X-axis: poolq_loo (LOO teammate perf)
+  Panel: POST-QC: drop team-seasons with ≤10 ESPN games
+  Seasons: 2013-2021 · min_minutes=20
+  Bins: 20 quantile · winsor 0.02–0.98
+  n=38,123 · drafts=882
+  Peak bin 18 @ 3.10%
+  Last bin @ 2.68% · tail Δ=-0.42pp
+  Declining bins after peak: 0 (consecutive from peak: 1)
+  LPM β₂=+0.0031 (not concave)",PASS_A_sensitivity_loo_mg10_2013_2021_b20q_w0298.png
+poolq_loo,10,2013-2021,20,equal_width,"[0.01, 0.99]",20.0,False,,,38123,882,0.0004622511194645105,16,0.032564450474898234,0.025373134328358207,-0.007191316146540026,1,1,"[0.00927, 0.01577, 0.02987, 0.02207, 0.01871, 0.02162, 0.01915, 0.02418, 0.02094, 0.02076, 0.02111, 0.02329, 0.02723, 0.02584, 0.02788, 0.03256, 0.02539, 0.02557, 0.0296, 0.02537]",loo_mg10_2013_2021_b20ew_w0199,"What we tried:
+  X-axis: poolq_loo (LOO teammate perf)
+  Panel: POST-QC: drop team-seasons with ≤10 ESPN games
+  Seasons: 2013-2021 · min_minutes=20
+  Bins: 20 equal_width · winsor 0.01–0.99
+  n=38,123 · drafts=882
+  Peak bin 16 @ 3.26%
+  Last bin @ 2.54% · tail Δ=-0.72pp
+  Declining bins after peak: 1 (consecutive from peak: 1)
+  LPM β₂=+0.0005 (not concave)",PASS_A_sensitivity_loo_mg10_2013_2021_b20ew_w0199.png
+poolq_loo,10,2013-2021,20,equal_width,"[0.02, 0.98]",20.0,False,,,38123,882,0.0031106663555565115,16,0.03315994798439532,0.029069767441860465,-0.004090180542534853,2,3,"[0.0146, 0.02861, 0.02233, 0.01918, 0.0185, 0.02072, 0.02463, 0.02047, 0.02288, 0.01928, 0.02081, 0.0248, 0.02481, 0.02686, 0.0262, 0.03316, 0.02676, 0.02546, 0.02115, 0.02907]",loo_mg10_2013_2021_b20ew_w0298,"What we tried:
+  X-axis: poolq_loo (LOO teammate perf)
+  Panel: POST-QC: drop team-seasons with ≤10 ESPN games
+  Seasons: 2013-2021 · min_minutes=20
+  Bins: 20 equal_width · winsor 0.02–0.98
+  n=38,123 · drafts=882
+  Peak bin 16 @ 3.32%
+  Last bin @ 2.91% · tail Δ=-0.41pp
+  Declining bins after peak: 2 (consecutive from peak: 3)
+  LPM β₂=+0.0031 (not concave)",PASS_A_sensitivity_loo_mg10_2013_2021_b20ew_w0298.png
+pool_mean,10,2011-2021,16,quantile,"[0.01, 0.99]",20.0,False,,,46306,1133,0.01533438978371987,16,0.05217691776088459,0.05217691776088459,0.0,0,0,"[0.00311, 0.01313, 0.01279, 0.01589, 0.01624, 0.01659, 0.01693, 0.0197, 0.02522, 0.02108, 0.02281, 0.03421, 0.03766, 0.03663, 0.04734, 0.05218]",poolmean_mg10_2011_2021_b16q_w0199,"What we tried:
+  X-axis: pool_mean (team-season avg perf)
+  Panel: POST-QC: drop team-seasons with ≤10 ESPN games
+  Seasons: 2011-2021 · min_minutes=20
+  Bins: 16 quantile · winsor 0.01–0.99
+  n=46,306 · drafts=1,133
+  Peak bin 16 @ 5.22%
+  Last bin @ 5.22% · tail Δ=+0.00pp
+  Declining bins after peak: 0 (consecutive from peak: 0)
+  LPM β₂=+0.0153 (not concave)",PASS_A_sensitivity_poolmean_mg10_2011_2021_b16q_w0199.png
+pool_mean,10,2011-2021,16,quantile,"[0.02, 0.98]",20.0,False,,,46306,1133,0.01533438978371987,16,0.05217691776088459,0.05217691776088459,0.0,0,0,"[0.00311, 0.01313, 0.01279, 0.01589, 0.01624, 0.01659, 0.01693, 0.0197, 0.02522, 0.02108, 0.02281, 0.03421, 0.03766, 0.03663, 0.04734, 0.05218]",poolmean_mg10_2011_2021_b16q_w0298,"What we tried:
+  X-axis: pool_mean (team-season avg perf)
+  Panel: POST-QC: drop team-seasons with ≤10 ESPN games
+  Seasons: 2011-2021 · min_minutes=20
+  Bins: 16 quantile · winsor 0.02–0.98
+  n=46,306 · drafts=1,133
+  Peak bin 16 @ 5.22%
+  Last bin @ 5.22% · tail Δ=+0.00pp
+  Declining bins after peak: 0 (consecutive from peak: 0)
+  LPM β₂=+0.0153 (not concave)",PASS_A_sensitivity_poolmean_mg10_2011_2021_b16q_w0298.png
+pool_mean,10,2011-2021,16,equal_width,"[0.01, 0.99]",20.0,False,,,46306,1133,0.01533438978371987,13,0.07816711590296496,0.0,-0.07816711590296496,0,1,"[0.0, 0.0, 0.00235, 0.0, 0.00934, 0.01524, 0.01676, 0.02318, 0.03151, 0.04219, 0.045, 0.06019, 0.07817, 0.0, 0.0, 0.0]",poolmean_mg10_2011_2021_b16ew_w0199,"What we tried:
+  X-axis: pool_mean (team-season avg perf)
+  Panel: POST-QC: drop team-seasons with ≤10 ESPN games
+  Seasons: 2011-2021 · min_minutes=20
+  Bins: 16 equal_width · winsor 0.01–0.99
+  n=46,306 · drafts=1,133
+  Peak bin 13 @ 7.82%
+  Last bin @ 0.00% · tail Δ=-7.82pp
+  Declining bins after peak: 0 (consecutive from peak: 1)
+  LPM β₂=+0.0153 (not concave)",PASS_A_sensitivity_poolmean_mg10_2011_2021_b16ew_w0199.png
+pool_mean,10,2011-2021,16,equal_width,"[0.02, 0.98]",20.0,False,,,46306,1133,0.01533438978371987,13,0.07816711590296496,0.0,-0.07816711590296496,0,1,"[0.0, 0.0, 0.00235, 0.0, 0.00934, 0.01524, 0.01676, 0.02318, 0.03151, 0.04219, 0.045, 0.06019, 0.07817, 0.0, 0.0, 0.0]",poolmean_mg10_2011_2021_b16ew_w0298,"What we tried:
+  X-axis: pool_mean (team-season avg perf)
+  Panel: POST-QC: drop team-seasons with ≤10 ESPN games
+  Seasons: 2011-2021 · min_minutes=20
+  Bins: 16 equal_width · winsor 0.02–0.98
+  n=46,306 · drafts=1,133
+  Peak bin 13 @ 7.82%
+  Last bin @ 0.00% · tail Δ=-7.82pp
+  Declining bins after peak: 0 (consecutive from peak: 1)
+  LPM β₂=+0.0153 (not concave)",PASS_A_sensitivity_poolmean_mg10_2011_2021_b16ew_w0298.png
+pool_mean,10,2011-2021,20,quantile,"[0.01, 0.99]",20.0,False,,,46306,1133,0.01533438978371987,19,0.05183585313174946,0.04881209503239741,-0.003023758099352049,0,1,"[0.0013, 0.00994, 0.01512, 0.01511, 0.01469, 0.01857, 0.01598, 0.01469, 0.01728, 0.0203, 0.02461, 0.01901, 0.02851, 0.02375, 0.03326, 0.03283, 0.038, 0.04579, 0.05184, 0.04881]",poolmean_mg10_2011_2021_b20q_w0199,"What we tried:
+  X-axis: pool_mean (team-season avg perf)
+  Panel: POST-QC: drop team-seasons with ≤10 ESPN games
+  Seasons: 2011-2021 · min_minutes=20
+  Bins: 20 quantile · winsor 0.01–0.99
+  n=46,306 · drafts=1,133
+  Peak bin 19 @ 5.18%
+  Last bin @ 4.88% · tail Δ=-0.30pp
+  Declining bins after peak: 0 (consecutive from peak: 1)
+  LPM β₂=+0.0153 (not concave)",PASS_A_sensitivity_poolmean_mg10_2011_2021_b20q_w0199.png
+pool_mean,10,2011-2021,20,quantile,"[0.02, 0.98]",20.0,False,,,46306,1133,0.01533438978371987,19,0.05183585313174946,0.04881209503239741,-0.003023758099352049,0,1,"[0.0013, 0.00994, 0.01512, 0.01511, 0.01469, 0.01857, 0.01598, 0.01469, 0.01728, 0.0203, 0.02461, 0.01901, 0.02851, 0.02375, 0.03326, 0.03283, 0.038, 0.04579, 0.05184, 0.04881]",poolmean_mg10_2011_2021_b20q_w0298,"What we tried:
+  X-axis: pool_mean (team-season avg perf)
+  Panel: POST-QC: drop team-seasons with ≤10 ESPN games
+  Seasons: 2011-2021 · min_minutes=20
+  Bins: 20 quantile · winsor 0.02–0.98
+  n=46,306 · drafts=1,133
+  Peak bin 19 @ 5.18%
+  Last bin @ 4.88% · tail Δ=-0.30pp
+  Declining bins after peak: 0 (consecutive from peak: 1)
+  LPM β₂=+0.0153 (not concave)",PASS_A_sensitivity_poolmean_mg10_2011_2021_b20q_w0298.png
+pool_mean,10,2011-2021,20,equal_width,"[0.01, 0.99]",20.0,False,,,46306,1133,0.01533438978371987,16,0.08080808080808081,0.0,-0.08080808080808081,1,2,"[0.0, 0.0, 0.0, 0.00253, 0.0, 0.00787, 0.01476, 0.01672, 0.017, 0.02385, 0.02859, 0.04432, 0.04469, 0.04161, 0.06548, 0.08081, 0.04167, 0.0, 0.0, 0.0]",poolmean_mg10_2011_2021_b20ew_w0199,"What we tried:
+  X-axis: pool_mean (team-season avg perf)
+  Panel: POST-QC: drop team-seasons with ≤10 ESPN games
+  Seasons: 2011-2021 · min_minutes=20
+  Bins: 20 equal_width · winsor 0.01–0.99
+  n=46,306 · drafts=1,133
+  Peak bin 16 @ 8.08%
+  Last bin @ 0.00% · tail Δ=-8.08pp
+  Declining bins after peak: 1 (consecutive from peak: 2)
+  LPM β₂=+0.0153 (not concave)",PASS_A_sensitivity_poolmean_mg10_2011_2021_b20ew_w0199.png
+pool_mean,10,2011-2021,20,equal_width,"[0.02, 0.98]",20.0,False,,,46306,1133,0.01533438978371987,16,0.08080808080808081,0.0,-0.08080808080808081,1,2,"[0.0, 0.0, 0.0, 0.00253, 0.0, 0.00787, 0.01476, 0.01672, 0.017, 0.02385, 0.02859, 0.04432, 0.04469, 0.04161, 0.06548, 0.08081, 0.04167, 0.0, 0.0, 0.0]",poolmean_mg10_2011_2021_b20ew_w0298,"What we tried:
+  X-axis: pool_mean (team-season avg perf)
+  Panel: POST-QC: drop team-seasons with ≤10 ESPN games
+  Seasons: 2011-2021 · min_minutes=20
+  Bins: 20 equal_width · winsor 0.02–0.98
+  n=46,306 · drafts=1,133
+  Peak bin 16 @ 8.08%
+  Last bin @ 0.00% · tail Δ=-8.08pp
+  Declining bins after peak: 1 (consecutive from peak: 2)
+  LPM β₂=+0.0153 (not concave)",PASS_A_sensitivity_poolmean_mg10_2011_2021_b20ew_w0298.png
+pool_mean,10,2013-2021,16,quantile,"[0.01, 0.99]",20.0,False,,,38123,882,0.007581302203554756,15,0.047838858581619806,0.0436607892527288,-0.004178069328891004,0,1,"[0.00378, 0.01301, 0.01301, 0.01679, 0.01762, 0.01595, 0.01595, 0.01637, 0.02392, 0.01889, 0.02434, 0.02896, 0.03694, 0.03315, 0.04784, 0.04366]",poolmean_mg10_2013_2021_b16q_w0199,"What we tried:
+  X-axis: pool_mean (team-season avg perf)
+  Panel: POST-QC: drop team-seasons with ≤10 ESPN games
+  Seasons: 2013-2021 · min_minutes=20
+  Bins: 16 quantile · winsor 0.01–0.99
+  n=38,123 · drafts=882
+  Peak bin 15 @ 4.78%
+  Last bin @ 4.37% · tail Δ=-0.42pp
+  Declining bins after peak: 0 (consecutive from peak: 1)
+  LPM β₂=+0.0076 (not concave)",PASS_A_sensitivity_poolmean_mg10_2013_2021_b16q_w0199.png
+pool_mean,10,2013-2021,16,quantile,"[0.02, 0.98]",20.0,False,,,38123,882,0.007581302203554756,15,0.047838858581619806,0.0436607892527288,-0.004178069328891004,0,1,"[0.00378, 0.01301, 0.01301, 0.01679, 0.01762, 0.01595, 0.01595, 0.01637, 0.02392, 0.01889, 0.02434, 0.02896, 0.03694, 0.03315, 0.04784, 0.04366]",poolmean_mg10_2013_2021_b16q_w0298,"What we tried:
+  X-axis: pool_mean (team-season avg perf)
+  Panel: POST-QC: drop team-seasons with ≤10 ESPN games
+  Seasons: 2013-2021 · min_minutes=20
+  Bins: 16 quantile · winsor 0.02–0.98
+  n=38,123 · drafts=882
+  Peak bin 15 @ 4.78%
+  Last bin @ 4.37% · tail Δ=-0.42pp
+  Declining bins after peak: 0 (consecutive from peak: 1)
+  LPM β₂=+0.0076 (not concave)",PASS_A_sensitivity_poolmean_mg10_2013_2021_b16q_w0298.png
+pool_mean,10,2013-2021,16,equal_width,"[0.01, 0.99]",20.0,False,,,38123,882,0.007581302203554756,13,0.07246376811594203,0.0,-0.07246376811594203,0,1,"[0.0, 0.0, 0.00299, 0.0, 0.00941, 0.01598, 0.01629, 0.02164, 0.03031, 0.03887, 0.04348, 0.04348, 0.07246, 0.0, 0.0, 0.0]",poolmean_mg10_2013_2021_b16ew_w0199,"What we tried:
+  X-axis: pool_mean (team-season avg perf)
+  Panel: POST-QC: drop team-seasons with ≤10 ESPN games
+  Seasons: 2013-2021 · min_minutes=20
+  Bins: 16 equal_width · winsor 0.01–0.99
+  n=38,123 · drafts=882
+  Peak bin 13 @ 7.25%
+  Last bin @ 0.00% · tail Δ=-7.25pp
+  Declining bins after peak: 0 (consecutive from peak: 1)
+  LPM β₂=+0.0076 (not concave)",PASS_A_sensitivity_poolmean_mg10_2013_2021_b16ew_w0199.png
+pool_mean,10,2013-2021,16,equal_width,"[0.02, 0.98]",20.0,False,,,38123,882,0.007581302203554756,13,0.07246376811594203,0.0,-0.07246376811594203,0,1,"[0.0, 0.0, 0.00299, 0.0, 0.00941, 0.01598, 0.01629, 0.02164, 0.03031, 0.03887, 0.04348, 0.04348, 0.07246, 0.0, 0.0, 0.0]",poolmean_mg10_2013_2021_b16ew_w0298,"What we tried:
+  X-axis: pool_mean (team-season avg perf)
+  Panel: POST-QC: drop team-seasons with ≤10 ESPN games
+  Seasons: 2013-2021 · min_minutes=20
+  Bins: 16 equal_width · winsor 0.02–0.98
+  n=38,123 · drafts=882
+  Peak bin 13 @ 7.25%
+  Last bin @ 0.00% · tail Δ=-7.25pp
+  Declining bins after peak: 0 (consecutive from peak: 1)
+  LPM β₂=+0.0076 (not concave)",PASS_A_sensitivity_poolmean_mg10_2013_2021_b16ew_w0298.png
+pool_mean,10,2013-2021,20,quantile,"[0.01, 0.99]",20.0,False,,,38123,882,0.007581302203554756,19,0.05089192025183631,0.03987408184679958,-0.011017838405036728,0,1,"[0.0021, 0.00944, 0.01626, 0.01417, 0.01626, 0.02046, 0.01416, 0.01626, 0.01364, 0.01784, 0.02413, 0.01626, 0.02833, 0.02098, 0.03043, 0.03043, 0.03935, 0.04145, 0.05089, 0.03987]",poolmean_mg10_2013_2021_b20q_w0199,"What we tried:
+  X-axis: pool_mean (team-season avg perf)
+  Panel: POST-QC: drop team-seasons with ≤10 ESPN games
+  Seasons: 2013-2021 · min_minutes=20
+  Bins: 20 quantile · winsor 0.01–0.99
+  n=38,123 · drafts=882
+  Peak bin 19 @ 5.09%
+  Last bin @ 3.99% · tail Δ=-1.10pp
+  Declining bins after peak: 0 (consecutive from peak: 1)
+  LPM β₂=+0.0076 (not concave)",PASS_A_sensitivity_poolmean_mg10_2013_2021_b20q_w0199.png
+pool_mean,10,2013-2021,20,quantile,"[0.02, 0.98]",20.0,False,,,38123,882,0.007581302203554756,19,0.05089192025183631,0.03987408184679958,-0.011017838405036728,0,1,"[0.0021, 0.00944, 0.01626, 0.01417, 0.01626, 0.02046, 0.01416, 0.01626, 0.01364, 0.01784, 0.02413, 0.01626, 0.02833, 0.02098, 0.03043, 0.03043, 0.03935, 0.04145, 0.05089, 0.03987]",poolmean_mg10_2013_2021_b20q_w0298,"What we tried:
+  X-axis: pool_mean (team-season avg perf)
+  Panel: POST-QC: drop team-seasons with ≤10 ESPN games
+  Seasons: 2013-2021 · min_minutes=20
+  Bins: 20 quantile · winsor 0.02–0.98
+  n=38,123 · drafts=882
+  Peak bin 19 @ 5.09%
+  Last bin @ 3.99% · tail Δ=-1.10pp
+  Declining bins after peak: 0 (consecutive from peak: 1)
+  LPM β₂=+0.0076 (not concave)",PASS_A_sensitivity_poolmean_mg10_2013_2021_b20q_w0298.png
+pool_mean,10,2013-2021,20,equal_width,"[0.01, 0.99]",20.0,False,,,38123,882,0.007581302203554756,16,0.07964601769911504,0.0,-0.07964601769911504,1,2,"[0.0, 0.0, 0.0, 0.00282, 0.0, 0.00758, 0.01497, 0.01769, 0.01608, 0.02211, 0.02605, 0.04258, 0.04501, 0.03741, 0.04503, 0.07965, 0.02667, 0.0, 0.0, 0.0]",poolmean_mg10_2013_2021_b20ew_w0199,"What we tried:
+  X-axis: pool_mean (team-season avg perf)
+  Panel: POST-QC: drop team-seasons with ≤10 ESPN games
+  Seasons: 2013-2021 · min_minutes=20
+  Bins: 20 equal_width · winsor 0.01–0.99
+  n=38,123 · drafts=882
+  Peak bin 16 @ 7.96%
+  Last bin @ 0.00% · tail Δ=-7.96pp
+  Declining bins after peak: 1 (consecutive from peak: 2)
+  LPM β₂=+0.0076 (not concave)",PASS_A_sensitivity_poolmean_mg10_2013_2021_b20ew_w0199.png
+pool_mean,10,2013-2021,20,equal_width,"[0.02, 0.98]",20.0,False,,,38123,882,0.007581302203554756,16,0.07964601769911504,0.0,-0.07964601769911504,1,2,"[0.0, 0.0, 0.0, 0.00282, 0.0, 0.00758, 0.01497, 0.01769, 0.01608, 0.02211, 0.02605, 0.04258, 0.04501, 0.03741, 0.04503, 0.07965, 0.02667, 0.0, 0.0, 0.0]",poolmean_mg10_2013_2021_b20ew_w0298,"What we tried:
+  X-axis: pool_mean (team-season avg perf)
+  Panel: POST-QC: drop team-seasons with ≤10 ESPN games
+  Seasons: 2013-2021 · min_minutes=20
+  Bins: 20 equal_width · winsor 0.02–0.98
+  n=38,123 · drafts=882
+  Peak bin 16 @ 7.96%
+  Last bin @ 0.00% · tail Δ=-7.96pp
+  Declining bins after peak: 1 (consecutive from peak: 2)
+  LPM β₂=+0.0076 (not concave)",PASS_A_sensitivity_poolmean_mg10_2013_2021_b20ew_w0298.png
+poolq_loo,10,2011-2021,16,quantile,"[0.01, 0.99]",20.0,True,,draft_teams,17397,1133,0.014147681986838334,4,0.0744485294117647,0.061637534498620056,-0.01281099491314465,7,1,"[0.07353, 0.07084, 0.069, 0.07445, 0.05888, 0.06348, 0.05974, 0.0644, 0.05428, 0.06985, 0.0644, 0.06348, 0.06066, 0.06716, 0.06624, 0.06164]",loo_mg10_2011_2021_b16q_w0199_draft_teams,"What we tried:
+  X-axis: poolq_loo (LOO teammate perf)
+  Panel: POST-QC: drop team-seasons with ≤10 ESPN games
+  Seasons: 2011-2021 · min_minutes=20
+  Bins: 16 quantile · winsor 0.01–0.99
+  Extra filter: teams with ≥1 ever-draftee only
+  n=17,397 · drafts=1,133
+  Peak bin 4 @ 7.44%
+  Last bin @ 6.16% · tail Δ=-1.28pp
+  Declining bins after peak: 7 (consecutive from peak: 1)
+  LPM β₂=+0.0141 (not concave)",PASS_A_sensitivity_loo_mg10_2011_2021_b16q_w0199_draft_teams.png
+poolq_loo,10,2011-2021,16,quantile,"[0.01, 0.99]",20.0,False,25.0,ts25+,44072,1129,0.008452981900386625,15,0.03411978221415608,0.03376906318082789,-0.0003507190333281937,0,1,"[0.02142, 0.02179, 0.02142, 0.02033, 0.02759, 0.02106, 0.02359, 0.02324, 0.02577, 0.02215, 0.02795, 0.02723, 0.02868, 0.02977, 0.03412, 0.03377]",loo_mg10_2011_2021_b16q_w0199_ts25_,"What we tried:
+  X-axis: poolq_loo (LOO teammate perf)
+  Panel: POST-QC: drop team-seasons with ≤10 ESPN games
+  Seasons: 2011-2021 · min_minutes=20
+  Bins: 16 quantile · winsor 0.01–0.99
+  Extra filter: team-seasons with ≥25 distinct games
+  n=44,072 · drafts=1,129
+  Peak bin 15 @ 3.41%
+  Last bin @ 3.38% · tail Δ=-0.04pp
+  Declining bins after peak: 0 (consecutive from peak: 1)
+  LPM β₂=+0.0085 (not concave)",PASS_A_sensitivity_loo_mg10_2011_2021_b16q_w0199_ts25_.png
+poolq_loo,10,2011-2021,16,quantile,"[0.01, 0.99]",20.0,True,25.0,draft_teams+ts25,16897,1129,0.021418667490629772,1,0.0804162724692526,0.0634469696969697,-0.01696930277228291,8,2,"[0.08042, 0.07102, 0.06723, 0.0786, 0.05966, 0.06818, 0.06155, 0.06534, 0.05871, 0.06439, 0.06913, 0.06439, 0.06061, 0.07102, 0.06534, 0.06345]",loo_mg10_2011_2021_b16q_w0199_draft_teams_ts25,"What we tried:
+  X-axis: poolq_loo (LOO teammate perf)
+  Panel: POST-QC: drop team-seasons with ≤10 ESPN games
+  Seasons: 2011-2021 · min_minutes=20
+  Bins: 16 quantile · winsor 0.01–0.99
+  Extra filter: draft-team + ≥25 games
+  n=16,897 · drafts=1,129
+  Peak bin 1 @ 8.04%
+  Last bin @ 6.34% · tail Δ=-1.70pp
+  Declining bins after peak: 8 (consecutive from peak: 2)
+  LPM β₂=+0.0214 (not concave)",PASS_A_sensitivity_loo_mg10_2011_2021_b16q_w0199_draft_teams_ts25.png
+pool_mean,10,2011-2021,16,quantile,"[0.01, 0.99]",20.0,True,,draft_teams,17397,1133,0.0003817388405856825,16,0.10119595216191353,0.10119595216191353,0.0,0,0,"[0.0193, 0.04968, 0.0506, 0.05974, 0.03404, 0.04876, 0.05515, 0.06532, 0.06624, 0.05974, 0.07636, 0.09384, 0.06985, 0.09384, 0.09844, 0.1012]",poolmean_mg10_2011_2021_b16q_w0199_draft_teams,"What we tried:
+  X-axis: pool_mean (team-season avg perf)
+  Panel: POST-QC: drop team-seasons with ≤10 ESPN games
+  Seasons: 2011-2021 · min_minutes=20
+  Bins: 16 quantile · winsor 0.01–0.99
+  Extra filter: teams with ≥1 ever-draftee only
+  n=17,397 · drafts=1,133
+  Peak bin 16 @ 10.12%
+  Last bin @ 10.12% · tail Δ=+0.00pp
+  Declining bins after peak: 0 (consecutive from peak: 0)
+  LPM β₂=+0.0004 (not concave)",PASS_A_sensitivity_poolmean_mg10_2011_2021_b16q_w0199_draft_teams.png
+pool_mean,10,2011-2021,16,quantile,"[0.01, 0.99]",20.0,False,25.0,ts25+,44072,1129,0.01615386215849779,16,0.05519244734931009,0.05519244734931009,0.0,0,0,"[0.00363, 0.0138, 0.01343, 0.0167, 0.01851, 0.01525, 0.01779, 0.0207, 0.0265, 0.02215, 0.02396, 0.03522, 0.03956, 0.03813, 0.04936, 0.05519]",poolmean_mg10_2011_2021_b16q_w0199_ts25_,"What we tried:
+  X-axis: pool_mean (team-season avg perf)
+  Panel: POST-QC: drop team-seasons with ≤10 ESPN games
+  Seasons: 2011-2021 · min_minutes=20
+  Bins: 16 quantile · winsor 0.01–0.99
+  Extra filter: team-seasons with ≥25 distinct games
+  n=44,072 · drafts=1,129
+  Peak bin 16 @ 5.52%
+  Last bin @ 5.52% · tail Δ=+0.00pp
+  Declining bins after peak: 0 (consecutive from peak: 0)
+  LPM β₂=+0.0162 (not concave)",PASS_A_sensitivity_poolmean_mg10_2011_2021_b16q_w0199_ts25_.png
+pool_mean,10,2011-2021,16,quantile,"[0.01, 0.99]",20.0,True,25.0,draft_teams+ts25,16897,1129,0.0008721224351470637,16,0.10321969696969698,0.10321969696969698,0.0,0,0,"[0.02365, 0.0483, 0.05303, 0.05966, 0.03788, 0.04924, 0.05398, 0.06913, 0.07008, 0.05777, 0.0786, 0.09564, 0.07576, 0.09848, 0.0947, 0.10322]",poolmean_mg10_2011_2021_b16q_w0199_draft_teams_ts25,"What we tried:
+  X-axis: pool_mean (team-season avg perf)
+  Panel: POST-QC: drop team-seasons with ≤10 ESPN games
+  Seasons: 2011-2021 · min_minutes=20
+  Bins: 16 quantile · winsor 0.01–0.99
+  Extra filter: draft-team + ≥25 games
+  n=16,897 · drafts=1,129
+  Peak bin 16 @ 10.32%
+  Last bin @ 10.32% · tail Δ=+0.00pp
+  Declining bins after peak: 0 (consecutive from peak: 0)
+  LPM β₂=+0.0009 (not concave)",PASS_A_sensitivity_poolmean_mg10_2011_2021_b16q_w0199_draft_teams_ts25.png
+poolq_loo,0,2011-2021,16,quantile,"[0.01, 0.99]",20.0,False,,july_replay_mg0,62180,1134,-0.024725642155669445,12,0.02624806999485332,0.011580030880082347,-0.014668039114770973,2,1,"[0.00129, 0.01235, 0.0157, 0.01621, 0.01904, 0.01827, 0.01981, 0.01853, 0.02213, 0.0193, 0.02007, 0.02625, 0.02315, 0.02522, 0.0229, 0.01158]",loo_mg0_2011_2021_b16q_w0199_july_replay_mg0,"What we tried:
+  X-axis: poolq_loo (LOO teammate perf)
+  Panel: PRE-QC (July replay): no min-team-games filter — includes exhibition cameos
+  Seasons: 2011-2021 · min_minutes=20
+  Bins: 16 quantile · winsor 0.01–0.99
+  Reference: exact July 2026 hero panel (mg=0)
+  n=62,180 · drafts=1,134
+  Peak bin 12 @ 2.62%
+  Last bin @ 1.16% · tail Δ=-1.47pp
+  Declining bins after peak: 2 (consecutive from peak: 1)
+  LPM β₂=-0.0247 (concave)",PASS_A_sensitivity_loo_mg0_2011_2021_b16q_w0199_july_replay_mg0.png

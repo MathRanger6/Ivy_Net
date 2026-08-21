@@ -4,7 +4,7 @@
 **Last synced:** 2026-08-17  
 **Context:** Paper Directions 21 — fit homophily knob $\rho$ (rho) on **empirical NCAA rosters**, separate from draft maximum likelihood estimation (MLE)  
 **Companions:**
-- [`../Alex_stuff/MLE_basics.md`](../Alex_stuff/MLE_basics.md) — Bernoulli draft MLE ($\lambda$, $t$); **no $\rho$** on fixed rosters
+- [`../MLE/MLE_basics.md`](../MLE/MLE_basics.md) — Bernoulli draft MLE ($\lambda$, $t$); **no $\rho$** on fixed rosters
 - [`../Alex_stuff/PD20_K_draws_and_rho_explainer.md`](../Alex_stuff/PD20_K_draws_and_rho_explainer.md) — why $\rho$ and draft likelihood are different layers
 - [`../../transcripts/PD21_notes.md`](../../transcripts/PD21_notes.md) — Alex lock (Aug 14)
 - [`../re_entry/HEROs_and_PASSes/Alex_LG_three_step_briefing.md`](../re_entry/HEROs_and_PASSes/Alex_LG_three_step_briefing.md) — Grandchild assignment (LG) formulas

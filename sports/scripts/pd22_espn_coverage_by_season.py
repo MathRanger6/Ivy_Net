@@ -194,10 +194,21 @@ def _2013_2014_summary(tab: pd.DataFrame) -> dict:
     return out
 
 
+def _break_x_between(seasons: np.ndarray, y_before: int, y_after: int) -> float | None:
+    """Mid-x index between two consecutive seasons (for vertical break markers)."""
+    seasons = np.asarray(seasons, dtype=int)
+    i_before = np.flatnonzero(seasons == y_before)
+    i_after = np.flatnonzero(seasons == y_after)
+    if i_before.size and i_after.size:
+        return (float(i_before[0]) + float(i_after[0])) / 2.0
+    return None
+
+
 def _plot(tab: pd.DataFrame, png_path: Path) -> None:
     configure_matplotlib_mathtext()
     seasons = tab["season"].to_numpy(dtype=int)
     x = np.arange(len(seasons))
+    break_x = _break_x_between(seasons, 2013, 2014)
 
     fig, axes = plt.subplots(1, 2, figsize=(12, 4.8), constrained_layout=True)
 
@@ -219,8 +230,9 @@ def _plot(tab: pd.DataFrame, png_path: Path) -> None:
         label=f"Hero panel (min $\\geq$ {HERO_LOCK:g} min)",
         lw=2.2,
     )
-    ax.axvline(2.5, color="crimson", ls="--", lw=1.5, alpha=0.85)
-    ax.text(2.55, ax.get_ylim()[1] * 0.97, "2013→2014", color="crimson", fontsize=8, va="top")
+    if break_x is not None:
+        ax.axvline(break_x, color="crimson", ls="--", lw=1.5, alpha=0.85)
+        ax.text(break_x + 0.05, ax.get_ylim()[1] * 0.97, "2013→2014", color="crimson", fontsize=8, va="top")
     ax.set_xticks(x)
     ax.set_xticklabels(seasons, rotation=45, ha="right")
     ax.set_xlabel("Season")
@@ -241,7 +253,8 @@ def _plot(tab: pd.DataFrame, png_path: Path) -> None:
         label="Mean box rows / game / team",
         lw=2,
     )
-    ax.axvline(2.5, color="crimson", ls="--", lw=1.5, alpha=0.85)
+    if break_x is not None:
+        ax.axvline(break_x, color="crimson", ls="--", lw=1.5, alpha=0.85)
     ax.set_xticks(x)
     ax.set_xticklabels(seasons, rotation=45, ha="right")
     ax.set_xlabel("Season")

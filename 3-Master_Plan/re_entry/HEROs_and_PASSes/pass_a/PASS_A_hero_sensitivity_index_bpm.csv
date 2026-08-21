@@ -1,0 +1,34 @@
+perf_metric,x,mg,seasons,n_bins,binning,winsor,min_minutes,draft_relevant_only,ts_min_games,subsample,n,drafts,beta_sq,peak_bin,peak_rate,bin_last_rate,tail_drop,decline_bins_after_peak,consec_declines_from_peak,rates,slug,description,png
+bpm,poolq_loo,10,2011-2021,16,quantile,"[0.01, 0.99]",20.0,False,,,45154,1102,0.04852717373265305,16,0.1293408929836995,0.1293408929836995,0.0,0,0,"[0.0, 0.00142, 0.00071, 0.00354, 0.00213, 0.00496, 0.00425, 0.00673, 0.00956, 0.01134, 0.01807, 0.02303, 0.03473, 0.0567, 0.08398, 0.12934]",bpm_loo_mg10_2011_2021_b16q_w0199,"What we tried:
+  perf_metric: BPM (own ability + LOO teammate quality)
+  X-axis: poolq_loo (LOO teammate perf)
+  Panel: POST-QC: drop team-seasons with ≤10 ESPN games
+  Seasons: 2011-2021 · min_minutes=20
+  Bins: 16 quantile · winsor 0.01–0.99
+  n=45,154 · drafts=1,102
+  Peak bin 16 @ 12.93%
+  Last bin @ 12.93% · tail Δ=+0.00pp
+  Declining bins after peak: 0 (consecutive from peak: 0)
+  LPM β₂=+0.0485 (not concave)",PASS_A_sensitivity_bpm_loo_mg10_2011_2021_b16q_w0199.png
+bpm,poolq_loo,10,2013-2021,16,quantile,"[0.01, 0.99]",20.0,False,,,37220,853,0.045256482355304446,16,0.12381771281169389,0.12381771281169389,0.0,0,0,"[0.0, 0.00086, 0.00043, 0.00215, 0.00172, 0.00473, 0.00387, 0.00688, 0.00945, 0.01118, 0.01677, 0.01978, 0.03352, 0.05546, 0.0761, 0.12382]",bpm_loo_mg10_2013_2021_b16q_w0199,"What we tried:
+  perf_metric: BPM (own ability + LOO teammate quality)
+  X-axis: poolq_loo (LOO teammate perf)
+  Panel: POST-QC: drop team-seasons with ≤10 ESPN games
+  Seasons: 2013-2021 · min_minutes=20
+  Bins: 16 quantile · winsor 0.01–0.99
+  n=37,220 · drafts=853
+  Peak bin 16 @ 12.38%
+  Last bin @ 12.38% · tail Δ=+0.00pp
+  Declining bins after peak: 0 (consecutive from peak: 0)
+  LPM β₂=+0.0453 (not concave)",PASS_A_sensitivity_bpm_loo_mg10_2013_2021_b16q_w0199.png
+bpm,pool_mean,10,2011-2021,16,quantile,"[0.01, 0.99]",20.0,False,,,45154,1102,0.05678538444130261,16,0.15698086463501063,0.15698086463501063,0.0,0,0,"[0.0, 0.00035, 0.00177, 0.00071, 0.00213, 0.00319, 0.00283, 0.00496, 0.00886, 0.00744, 0.01453, 0.0202, 0.03296, 0.05209, 0.0815, 0.15698]",bpm_poolmean_mg10_2011_2021_b16q_w0199,"What we tried:
+  perf_metric: BPM (own ability + LOO teammate quality)
+  X-axis: pool_mean (team-season avg perf)
+  Panel: POST-QC: drop team-seasons with ≤10 ESPN games
+  Seasons: 2011-2021 · min_minutes=20
+  Bins: 16 quantile · winsor 0.01–0.99
+  n=45,154 · drafts=1,102
+  Peak bin 16 @ 15.70%
+  Last bin @ 15.70% · tail Δ=+0.00pp
+  Declining bins after peak: 0 (consecutive from peak: 0)
+  LPM β₂=+0.0568 (not concave)",PASS_A_sensitivity_bpm_poolmean_mg10_2011_2021_b16q_w0199.png

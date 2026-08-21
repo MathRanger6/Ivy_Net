@@ -573,6 +573,15 @@ def plot_gamma_profile(
     ax1b.plot(gamma, t_hat, "^--", color="#9467bd", lw=1.5, ms=4, alpha=0.9, label=r"$\hat t$")
     ax1b.set_ylabel(r"$\hat\lambda$, $\hat t$")
 
+    # Explicit tick at every profiled γ (fixed grid — see CSV / DEFAULT_GAMMA_PROFILE_GRID).
+    tick_labels = [f"{g:g}" for g in gamma]
+    for ax in axes:
+        ax.set_xlim(float(gamma.min()) * 0.92, float(gamma.max()) * 1.04)
+        ax.set_xticks(gamma)
+    # sharex=True: do NOT ax0.set_xticklabels([]) — that wipes bottom labels too.
+    ax0.tick_params(axis="x", labelbottom=False)
+    ax1.set_xticklabels(tick_labels, rotation=45, ha="right", fontsize=8)
+
     if gamma_ref is not None:
         for ax in axes:
             ax.axvline(float(gamma_ref), color="#ff7f0e", lw=1.2, ls=":", alpha=0.9)
@@ -587,10 +596,19 @@ def plot_gamma_profile(
 
     lines_l, labels_l = ax1.get_legend_handles_labels()
     lines_r, labels_r = ax1b.get_legend_handles_labels()
-    ax1.legend(lines_l + lines_r, labels_l + labels_r, loc="lower right", fontsize=8, framealpha=0.92)
+    ax1.legend(
+        lines_l + lines_r,
+        labels_l + labels_r,
+        loc="upper center",
+        bbox_to_anchor=(0.5, 1.28),
+        ncol=2,
+        fontsize=8,
+        framealpha=0.92,
+        borderaxespad=0.0,
+    )
 
-    fig.tight_layout()
-    fig.savefig(out_path, dpi=150, bbox_inches="tight")
+    fig.tight_layout(rect=(0, 0.14, 1, 1))
+    fig.savefig(out_path, dpi=150, bbox_inches="tight", pad_inches=0.12)
     plt.close(fig)
 
 

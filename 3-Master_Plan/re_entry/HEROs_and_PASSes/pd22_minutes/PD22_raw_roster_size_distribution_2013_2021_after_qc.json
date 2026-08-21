@@ -1,0 +1,48 @@
+{
+  "diagnostic": "pd22_raw_roster_size_distribution_after_qc",
+  "date": "2026-08-19",
+  "season_min": 2013,
+  "season_max": 2021,
+  "seasons": "2013-2021",
+  "before_box_qc": false,
+  "ncaa_dress_cap_reference": 15,
+  "raw_panel_spec": "panel_rebuild min_minutes=0; box QC on (keep >=11 games)",
+  "filtered_panel_spec": "panel_rebuild min_minutes=20; same QC policy",
+  "raw_team_season_summary": {
+    "n": 3152,
+    "mean": 15.848667512690355,
+    "std": 2.8874187972602767,
+    "min": 10,
+    "max": 43,
+    "median": 15.0,
+    "p10": 13.0,
+    "p25": 14.0,
+    "p75": 17.0,
+    "p90": 18.0,
+    "share_eq_15": 0.22715736040609136,
+    "share_ge_15": 0.7043147208121827,
+    "share_gt_15": 0.47715736040609136
+  },
+  "filtered_team_season_summary": {
+    "n": 3152,
+    "mean": 12.094860406091371,
+    "std": 1.4896679631421283,
+    "min": 8,
+    "max": 19,
+    "median": 12.0,
+    "p10": 10.0,
+    "p25": 11.0,
+    "p75": 13.0,
+    "p90": 14.0,
+    "share_eq_15": 0.03807106598984772,
+    "share_ge_15": 0.05964467005076142,
+    "share_gt_15": 0.021573604060913704
+  },
+  "player_seasons_raw": 49955,
+  "player_seasons_filtered": 38123,
+  "outputs": {
+    "png": "3-Master_Plan/re_entry/HEROs_and_PASSes/pd22_minutes/PD22_raw_roster_size_distribution_2013_2021_after_qc.png",
+    "json": "3-Master_Plan/re_entry/HEROs_and_PASSes/pd22_minutes/PD22_raw_roster_size_distribution_2013_2021_after_qc.json",
+    "csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/pd22_minutes/PD22_raw_roster_size_by_team_season_2013_2021_after_qc.csv"
+  }
+}

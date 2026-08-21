@@ -57,7 +57,10 @@ from pd21_rho_hsort_calibrate import PanelPrepConfig, empirical_h_sort, prepare_
 
 OUT = PD22_MINUTES
 DEFAULT_PPM_ZERO = 20.0
-SEASON_STEM = f"{_stem().replace('_mechanism_', '_mechanism_season_')}"
+
+
+def _season_stem() -> str:
+    return _stem().replace("_mechanism_", "_mechanism_season_")
 
 
 def _pipeline_config(*, min_minutes: float) -> object:
@@ -234,7 +237,7 @@ def _plot(team_df: pd.DataFrame, season_df: pd.DataFrame, summary: dict, png_pat
 def _artifact_paths() -> dict[str, Path]:
     return {
         "csv": OUT / f"{_stem()}.csv",
-        "season_csv": OUT / f"{SEASON_STEM}.csv",
+        "season_csv": OUT / f"{_season_stem()}.csv",
         "json": OUT / f"{_stem()}.json",
         "png": OUT / f"{_stem()}.png",
     }

@@ -1,7 +1,7 @@
 {
   "diagnostic": "pd22_interval_overlap_season",
   "pd22_item": 11,
-  "date": "2026-08-18",
+  "date": "2026-08-19",
   "season": 2013,
   "panel_spec": "drop-at-20 hero panel; PPM z within season; single season only",
   "rho_star_drop_bracket": 0.0,

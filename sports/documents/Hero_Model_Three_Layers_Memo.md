@@ -1,6 +1,6 @@
 # Hero inverted-U — three model layers (v1)
 
-**Last synced:** 2026-07-30
+**Last synced:** 2026-08-19
 
 **Audience:** Charles + Alex read-through  
 **Canonical hero / Pass gallery:** `3-Master_Plan/re_entry/HEROs_and_PASSes/`  
@@ -39,14 +39,17 @@ All Layer A/C comparisons use **this** empirical spec unless explicitly noted as
 | **Bins** | **16 quantile** (`poolq_binning='quantile'`) |
 | **Winsor** | `poolq_loo` at **(0.01, 0.99)** before binning |
 | **min_minutes** | **20** (applied before LOO when rebuilding from box) |
+| **min_team_season_games** | **10** (POST-QC — drop team-seasons with ≤10 ESPN games) |
 | **Panel source** | `use_prebuilt_panel_csv=False` for canonical rebuild path |
 | **Draftee filter** | **Off** (`restrict_teams_by_draftees=False`) |
 | **Seasons** | **2011–2021** |
-| **Sample (Jul 2026 lock)** | **62,180** player-seasons; **1,134** drafted |
+| **Sample (POST-QC canonical, Aug 2026)** | **46,306** player-seasons; **1,133** drafted |
 
 **File naming slug:** `empirical_ppm_poolq_loo_16quantile_winsor0199_min20_2011`
 
-**Shape (qualitative):** rise through middle ventiles → plateau bins 12–15 (~2.3–2.6%) → **dip at bin 16 only** (~1.2%).
+**Shape (qualitative, POST-QC):** rise through middle ventiles → **flat elite tail** (peak bin 15 ~3.25%, bin 16 ~3.21%; LPM β₂ > 0).
+
+**Pre-QC sensitivity (Jul 2026 artifact, `mg=0` only):** n=62,180; rise → plateau → **dip at bin 16** (~1.2%). Replays in `pass_a/sensitivity/PASS_A_sensitivity_loo_mg0_*_july_replay_mg0.png`. **Not canonical** — cameo contamination in elite bin.
 
 ---
 
@@ -54,7 +57,7 @@ All Layer A/C comparisons use **this** empirical spec unless explicitly noted as
 
 | Layer | Object | Repo anchor | What a “pass” proves | What it does **not** prove |
 |-------|--------|-------------|----------------------|----------------------------|
-| **A. Phenomenological** | `Y ~ β₀ + β₁·poolq_loo + β₂·poolq_loo²` | `530` / `panel_build.draft_poolq_quadratic_coeffs` | Inverted curvature in the **real panel** on the hero estimand | Mechanism; that NBA uses this score |
+| **A. Phenomenological** | `Y ~ β₀ + β₁·poolq_loo + β₂·poolq_loo²` | `530` / `panel_build.draft_poolq_quadratic_coeffs` | Non-monotone middle + honest tail read on **POST-QC** panel | Mechanism; that NBA uses this score; **sharp elite dip** (requires pre-QC sensitivity) |
 | **B. Structural (theory)** | **Three parts:** (1) `L_net = B − D` environment; (2) Alex `S_i` **scoring**; (3) winner rule **select** | Nesting note §2–3; BINDING | Environment help/hurt **and** **D may enter the score**; select is separate | Separate estimation of B(Q) and D(Q) in v1; hero ≠ scoring equation |
 | **C. Generative (sim)** | **Assign (`ρ`) → score (`λ`) → select (top K)** | `540_READ_ME_SIM.md`, `540_three_step_sim.ipynb`, `tier1_*.py` | **Congestion in the score** changes who gets selected; **talent-only score fails** | Bin-for-bin reproduction of empirical `poolq_loo` ventiles |
 
@@ -67,7 +70,8 @@ All Layer A/C comparisons use **this** empirical spec unless explicitly noted as
 ### Layer A — regression on real rows
 
 - Filter panel to hero estimand → OLS `Y_draft ~ 1 + poolq_loo + poolq_sq` (**LPM** = linear probability model, not linear programming).
-- **Pass:** `β₂ < 0` (fitted curve **concave down** / inverted-U tendency); optional overlay tracks ventile bin means.
+- **Pass (POST-QC, Aug 2026):** ventile bin means show **middle rise**; elite tail **flat** on defensible panel; report β₂ honestly (currently **not concave**). Optional overlay tracks ventile bin means.
+- **Sensitivity pass (pre-QC `mg=0`):** β₂ < 0 reproduces July artifact — document in `pass_a/sensitivity/`, do **not** treat as canonical estimand.
 - **What the quadratic buys you:** a signed curvature claim (`β₂`) plus one turning point `Q* = −β₁/(2β₂)` (local max if `β₂ < 0`). **Not** inflection points (need richer than quadratic). Claims are about the **fitted** curve; hero **bins** stay the stylized fact. Not mechanism.
 - **Not required:** R², causal interpretation, or match to sim.
 

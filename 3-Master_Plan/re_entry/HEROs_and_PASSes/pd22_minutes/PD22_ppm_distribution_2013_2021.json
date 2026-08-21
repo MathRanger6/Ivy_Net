@@ -1,0 +1,36 @@
+{
+  "diagnostic": "pd22_ppm_distribution",
+  "date": "2026-08-19",
+  "season_min": 2013,
+  "season_max": 2021,
+  "seasons": "2013-2021",
+  "panel_spec": {
+    "filtered_out": "min_minutes=0 rebuild; minutes < hero_lock",
+    "hero_panel": "min_minutes=20 rebuild; raw PPM column",
+    "assign_ability": "hero panel + PPM z within season (PD21 ASSIGN input)"
+  },
+  "summary": {
+    "hero_lock_min_minutes": 20.0,
+    "n_filtered_out_total": 11832,
+    "n_filtered_out_zero_minutes": 6909,
+    "n_filtered_out_positive_minutes": 4923,
+    "n_filtered_out_with_ppm": 4923,
+    "filtered_out_ppm_max": 3.0,
+    "filtered_out_ppm_p99": 1.5,
+    "filtered_out_ppm_median_positive_min": 0.125,
+    "n_filtered_out_ppm_gt_1": 89,
+    "n_filtered_out_ppm_gt_2": 4,
+    "n_hero_panel": 38123,
+    "hero_raw_ppm_median": 0.31086142322097376,
+    "hero_raw_ppm_p99": 0.6190841769778778,
+    "hero_perf_median": -0.0410470520847366,
+    "hero_perf_p01": -2.135616737000381,
+    "hero_perf_p99": 2.483313449938931
+  },
+  "outputs": {
+    "csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/pd22_minutes/PD22_ppm_distribution_2013_2021.csv",
+    "json": "3-Master_Plan/re_entry/HEROs_and_PASSes/pd22_minutes/PD22_ppm_distribution_2013_2021.json",
+    "png": "3-Master_Plan/re_entry/HEROs_and_PASSes/pd22_minutes/PD22_ppm_distribution_2013_2021.png",
+    "overlay_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/pd22_minutes/PD22_ppm_full_vs_filtered_2013_2021.png"
+  }
+}

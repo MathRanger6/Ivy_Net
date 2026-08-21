@@ -1,0 +1,62 @@
+{
+  "diagnostic": "pd22_panel_policy_compare",
+  "date": "2026-08-19",
+  "season_min": 2013,
+  "season_max": 2021,
+  "seasons": "2013-2021",
+  "sources": {
+    "drop": "3-Master_Plan/re_entry/HEROs_and_PASSes/pd21_rho/PD21_rho_hsort_calibrate_2013_2021_fit_bracket.json",
+    "ppm_zero": "3-Master_Plan/re_entry/HEROs_and_PASSes/pd21_rho/PD21_rho_hsort_calibrate_2013_2021_ppm0lt20_fit_bracket.json"
+  },
+  "summary": {
+    "hero_lock_min_minutes": 20.0,
+    "rho_star_longitudinal_drop": 0.0,
+    "rho_star_longitudinal_ppm_zero": 0.0484375,
+    "rho_star_longitudinal_ppm_zero_stale": false,
+    "rho_star_longitudinal_delta": 0.0484375,
+    "h_sort_emp_mean_drop": 0.06329159480538889,
+    "h_sort_emp_mean_ppm_zero": 0.06506517230564444,
+    "h_sort_emp_mean_delta": 0.001773577500228889,
+    "ppm_zero_bracket_hsort_drift": 1.7887697496061288e-14,
+    "n_seasons_rho_zero_drop": 9,
+    "n_seasons_rho_zero_ppm_zero": 3,
+    "recommended_policy": "drop",
+    "recommendation_note": "Drop-at-20 recommended; PPM-zero inflates rho* without proportional H_sort gain."
+  },
+  "policy_table": [
+    {
+      "policy": "drop",
+      "panel_mode": "min_minutes_filter",
+      "description": "min_minutes>=20 filter; PPM z within season",
+      "rho_star_longitudinal": 0.0,
+      "h_sort_emp_mean": 0.06329159480538889,
+      "h_sort_emp_mean_bracket_json": 0.06329159480541038,
+      "h_sort_sim_mean_at_star": 0.08206551854677649,
+      "mean_abs_err_at_star": 0.018773923741366105,
+      "n_seasons": 9,
+      "n_seasons_rho_star_zero": 9,
+      "n_players_mean": 4235.888888888889,
+      "source_json": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/HEROs_and_PASSes/pd21_rho/PD21_rho_hsort_calibrate_2013_2021_fit_bracket.json"
+    },
+    {
+      "policy": "ppm_zero",
+      "panel_mode": "ppm_zero_below",
+      "description": "all roster rows; raw PPM=0 if minutes<20",
+      "rho_star_longitudinal": 0.0484375,
+      "h_sort_emp_mean": 0.06506517230564444,
+      "h_sort_emp_mean_bracket_json": 0.06506517230564184,
+      "h_sort_sim_mean_at_star": 0.0665143933199558,
+      "mean_abs_err_at_star": 4.9150768307720805e-06,
+      "n_seasons": 9,
+      "n_seasons_rho_star_zero": 3,
+      "n_players_mean": 5550.555555555556,
+      "source_json": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/HEROs_and_PASSes/pd21_rho/PD21_rho_hsort_calibrate_2013_2021_ppm0lt20_fit_bracket.json"
+    }
+  ],
+  "outputs": {
+    "csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/pd22_minutes/PD22_panel_policy_compare_2013_2021.csv",
+    "summary_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/pd22_minutes/PD22_panel_policy_compare_summary_2013_2021.csv",
+    "json": "3-Master_Plan/re_entry/HEROs_and_PASSes/pd22_minutes/PD22_panel_policy_compare_2013_2021.json",
+    "png": "3-Master_Plan/re_entry/HEROs_and_PASSes/pd22_minutes/PD22_panel_policy_compare_2013_2021.png"
+  }
+}

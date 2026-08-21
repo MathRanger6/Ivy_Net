@@ -6,28 +6,38 @@ Math in bullets/footers uses $...$ (rendered via gallery_mathtext).
 
 Run (repo root):
   python sports/scripts/build_pass_abc_slides.py
+  python sports/scripts/build_pass_abc_slides.py --season-min 2013 --season-max 2021 --auto-suffix _13_21
 
 Output:
-  3-Master_Plan/re_entry/HEROs_and_PASSes/slides/PASS_ABC_Gallery_Slides.pptx
+  slides/PASS_ABC_Gallery_Slides.pptx  (full panel)
+  slides/PASS_ABC_Gallery_Slides_13_21.pptx  (2013–2021 contrast)
 """
 
 from __future__ import annotations
 
+import argparse
 import sys
 from pathlib import Path
 
 from pptx import Presentation
 from pptx.enum.text import PP_ALIGN
-from pptx.util import Inches, Pt
+from pptx.util import Inches
 
 REPO = Path(__file__).resolve().parents[2]
 SCRIPTS = Path(__file__).resolve().parent
 sys.path.insert(0, str(SCRIPTS))
-from hero_gallery_paths import PASS_A, PASS_B, PASS_C_RHO, SLIDES, ensure_hero_dirs
-
-OUT_PPTX = SLIDES / "PASS_ABC_Gallery_Slides.pptx"
 
 from gallery_mathtext import fill_bullets_latex, populate_paragraph_with_latex
+from hero_gallery_paths import PASS_A, PASS_B, PASS_C_RHO, SLIDES as SLIDES_DIR, ensure_hero_dirs
+from interval_overlap_paths import seasons_label
+from pd20_22_campaign_window import (
+    FULL_PANEL_SEASON_MAX,
+    FULL_PANEL_SEASON_MIN,
+    activate_from_args,
+    add_window_args,
+    auto_deck_path,
+    current_window,
+)
 
 # Standard 16:9 (PowerPoint default widescreen)
 SLIDE_W = Inches(13.333)
@@ -35,44 +45,58 @@ SLIDE_H = Inches(7.5)
 MARGIN = Inches(0.45)
 CONTENT_W = SLIDE_W - 2 * MARGIN
 
-SLIDES = [
-    {
-        "title": "Pass A — Empirical MBB: Roster Pressure in the Data",
-        "image": PASS_A / "PASS_A_empirical_talent_vs_roster_side_by_side.png",
-        "bullets": [
-            "Real NCAA panel (2011–2021): mean NBA draft rate by ventile.",
-            r"Left — talent alone: ability (ppm $z$ within season). Monotone up.",
-            r"Right — roster context: teammate-quality ventiles. Inverted-U.",
-            r"No $\lambda$ in the empirical story — stylized fact Pass B/C echo.",
-            r"Pipeline: VISUALIZE only (bin real $Y_{\mathrm{draft}}$ on ability | $\mathrm{poolq\_loo}$).",
-        ],
-        "footer": r"Assign $\rightarrow$ Score $\rightarrow$ Select in the real world; we read outcomes only.",
-    },
-    {
-        "title": "Pass B — Generative: Congestion in Score Bends the Curve",
-        "image": PASS_B / "PASS_B_generative_lambda_knockout_side_by_side.png",
-        "bullets": [
-            r"Synthetic league: ASSIGN $\rightarrow$ SCORE $\rightarrow$ SELECT $\rightarrow$ VISUALIZE ($539$ preset).",
-            r"Left — $\lambda = 0$: score $S_i = A_i$ only (talent-only ranking). Roughly monotone.",
-            r"Right — $\lambda > 0$: score $S_i = A_i - w \cdot L_C$ (viable-peer congestion in SCORE).",
-            r"VISUALIZE on pool mean (team ability, includes self) — not $\mathrm{poolq\_loo}$.",
-            r"Claim: roster pressure in the advancement rule bends the curve (qualitative POC).",
-        ],
-        "footer": r"Pass B knob: $\lambda$ / $w$ in SCORE. Does not vary assignment $\rho$.",
-    },
-    {
-        "title": "Pass C — Generative: Assortativity Shapes the Sorted World",
-        "image": PASS_C_RHO / "PASS_C_rho_ablation_selection_by_pool_mean.png",
-        "bullets": [
-            r"Same $539$ score as Pass B right arm — $S_i = A_i - w \cdot L_C$ held fixed.",
-            r"One draw of talent; only ASSIGN changes (soft $\rho$ ladder + sort-and-chop).",
-            r"$\rho$ controls how sharply players match team targets — roster sorting.",
-            r"VISUALIZE on pool mean: assortativity moves the inverted-U readout.",
-            r"Story: $\lambda$ puts roster pressure in score; $\rho$ delivers pressured environments.",
-        ],
-        "footer": r"Pass C knob: $\rho$ in ASSIGN. Score + top-$K$ fixed across arms.",
-    },
-]
+
+def _w():
+    return current_window()
+
+
+def _pass_a_image() -> Path:
+    w = _w()
+    if w.season_min == FULL_PANEL_SEASON_MIN and w.season_max == FULL_PANEL_SEASON_MAX:
+        return PASS_A / "PASS_A_empirical_talent_vs_roster_side_by_side.png"
+    return PASS_A / f"PASS_A_empirical_talent_vs_roster_side_by_side_{w.tag}.png"
+
+
+def _slide_specs() -> list[dict]:
+    seasons = seasons_label(_w().season_min, _w().season_max)
+    return [
+        {
+            "title": "Pass A — Empirical MBB: Roster Pressure in the Data",
+            "image": _pass_a_image(),
+            "bullets": [
+                rf"Real NCAA panel ({seasons}): mean NBA draft rate by ventile.",
+                r"Left — talent alone: ability (ppm $z$ within season). Monotone up.",
+                r"Right — roster context: middle rise; flat elite tail on POST-QC panel.",
+                r"No $\lambda$ in the empirical story — generative Pass B/C show inverted-U in sim.",
+                r"Pipeline: VISUALIZE only (bin real $Y_{\mathrm{draft}}$ on ability | $\mathrm{poolq\_loo}$).",
+            ],
+            "footer": r"Assign $\rightarrow$ Score $\rightarrow$ Select in the real world; we read outcomes only.",
+        },
+        {
+            "title": "Pass B — Generative: Congestion in Score Bends the Curve",
+            "image": PASS_B / "PASS_B_generative_lambda_knockout_side_by_side.png",
+            "bullets": [
+                r"Synthetic league: ASSIGN $\rightarrow$ SCORE $\rightarrow$ SELECT $\rightarrow$ VISUALIZE ($539$ preset).",
+                r"Left — $\lambda = 0$: score $S_i = A_i$ only (talent-only ranking). Roughly monotone.",
+                r"Right — $\lambda > 0$: score $S_i = A_i - w \cdot L_C$ (viable-peer congestion in SCORE).",
+                r"VISUALIZE on pool mean (team ability, includes self) — not $\mathrm{poolq\_loo}$.",
+                r"Claim: roster pressure in the advancement rule bends the curve (qualitative POC).",
+            ],
+            "footer": r"Pass B knob: $\lambda$ / $w$ in SCORE. Does not vary assignment $\rho$.",
+        },
+        {
+            "title": "Pass C — Generative: Assortativity Shapes the Sorted World",
+            "image": PASS_C_RHO / "PASS_C_rho_ablation_selection_by_pool_mean.png",
+            "bullets": [
+                r"Same $539$ score as Pass B right arm — $S_i = A_i - w \cdot L_C$ held fixed.",
+                r"One draw of talent; only ASSIGN changes (soft $\rho$ ladder + sort-and-chop).",
+                r"$\rho$ controls how sharply players match team targets — roster sorting.",
+                r"VISUALIZE on pool mean: assortativity moves the inverted-U readout.",
+                r"Story: $\lambda$ puts roster pressure in score; $\rho$ delivers pressured environments.",
+            ],
+            "footer": r"Pass C knob: $\rho$ in ASSIGN. Score + top-$K$ fixed across arms.",
+        },
+    ]
 
 
 def _add_picture_fitted(slide, img_path: Path, left, top, max_width, max_height):
@@ -137,14 +161,21 @@ def _add_slide(prs: Presentation, spec: dict) -> None:
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description="Build Pass A/B/C gallery slide deck.")
+    add_window_args(parser)
+    args = parser.parse_args()
+    activate_from_args(args)
+
     ensure_hero_dirs()
+    out_pptx = auto_deck_path(SLIDES_DIR / "PASS_ABC_Gallery_Slides.pptx")
+
     prs = Presentation()
     prs.slide_width = SLIDE_W
     prs.slide_height = SLIDE_H
-    for spec in SLIDES:
+    for spec in _slide_specs():
         _add_slide(prs, spec)
-    prs.save(str(OUT_PPTX))
-    print(f"Wrote {OUT_PPTX} (16:9 — figure top, wording below)")
+    prs.save(str(out_pptx))
+    print(f"Wrote {out_pptx} (16:9 — figure top, wording below)")
 
 
 if __name__ == "__main__":

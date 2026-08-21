@@ -57,18 +57,54 @@ RHO_MATCH_DECIMALS = 12
 DEFAULT_MIN_MINUTES = 20.0
 
 
+def _panel_season_bounds(
+    season_min: int | None,
+    season_max: int | None,
+) -> tuple[int, int]:
+    if season_min is not None and season_max is not None:
+        return int(season_min), int(season_max)
+    try:
+        from pd20_22_campaign_window import current_window
+
+        w = current_window()
+        return w.season_min, w.season_max
+    except ImportError:
+        pass
+    return FULL_PANEL_SEASON_MIN, FULL_PANEL_SEASON_MAX
+
+
 @dataclass(frozen=True)
 class PanelPrepConfig:
     """Hero panel for empirical H_sort and sim ability vectors."""
 
     min_minutes: float = DEFAULT_MIN_MINUTES
     ppm_zero_below_minutes: float | None = None
+    season_min: int = FULL_PANEL_SEASON_MIN
+    season_max: int = FULL_PANEL_SEASON_MAX
 
     @classmethod
-    def from_args(cls, *, min_minutes: float, ppm_zero_below_minutes: float | None) -> PanelPrepConfig:
+    def from_args(
+        cls,
+        *,
+        min_minutes: float,
+        ppm_zero_below_minutes: float | None,
+        season_min: int | None = None,
+        season_max: int | None = None,
+    ) -> PanelPrepConfig:
+        smin, smax = _panel_season_bounds(season_min, season_max)
         if ppm_zero_below_minutes is not None:
-            return cls(min_minutes=float(min_minutes), ppm_zero_below_minutes=float(ppm_zero_below_minutes))
-        return cls(min_minutes=float(min_minutes), ppm_zero_below_minutes=None)
+            return cls(
+                min_minutes=float(min_minutes),
+                ppm_zero_below_minutes=float(ppm_zero_below_minutes),
+                season_min=smin,
+                season_max=smax,
+            )
+        return cls(
+            min_minutes=float(min_minutes),
+            ppm_zero_below_minutes=None,
+            season_min=smin,
+            season_max=smax,
+        )
 
     @property
     def output_tag(self) -> str | None:
@@ -91,6 +127,8 @@ class PanelPrepConfig:
         return {
             "min_minutes_filter": float(self.min_minutes),
             "ppm_zero_below_minutes": self.ppm_zero_below_minutes,
+            "season_min": int(self.season_min),
+            "season_max": int(self.season_max),
             "panel_mode": "ppm_zero_below" if self.ppm_zero_below_minutes is not None else "min_minutes_filter",
             "description": self.describe(),
         }
@@ -112,10 +150,10 @@ def prepare_calibration_panel(cfg: PanelPrepConfig) -> pd.DataFrame:
         min_minutes=filter_mm,
         restrict_teams_by_draftees=False,
         use_prebuilt_panel_csv=False,
-        panel_season_min=FULL_PANEL_SEASON_MIN,
-        panel_season_max=FULL_PANEL_SEASON_MAX,
-        analysis_season_min=FULL_PANEL_SEASON_MIN,
-        analysis_season_max=FULL_PANEL_SEASON_MAX,
+        panel_season_min=int(cfg.season_min),
+        panel_season_max=int(cfg.season_max),
+        analysis_season_min=int(cfg.season_min),
+        analysis_season_max=int(cfg.season_max),
     )
     panel = conductor.prepare_panel(pipe_cfg)
     if cfg.ppm_zero_below_minutes is not None:
@@ -1356,11 +1394,6 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    panel_cfg = PanelPrepConfig.from_args(
-        min_minutes=float(args.min_minutes),
-        ppm_zero_below_minutes=args.ppm_zero_below_minutes,
-    )
-
     ensure_hero_dirs()
     method = str(args.method)
     if args.quick:
@@ -1373,6 +1406,13 @@ def main() -> None:
         n_seeds = int(args.n_seeds)
         rho_grid = np.linspace(float(args.rho_min), float(args.rho_max), int(args.rho_steps))
         rho_max = float(args.rho_max)
+
+    panel_cfg = PanelPrepConfig.from_args(
+        min_minutes=float(args.min_minutes),
+        ppm_zero_below_minutes=args.ppm_zero_below_minutes,
+        season_min=season_min,
+        season_max=season_max,
+    )
 
     paths = _output_paths(season_min, season_max, panel_tag=panel_cfg.output_tag)
     if method == "bracket":

@@ -3,7 +3,7 @@
 **Source:** `transcripts/20260814_Paper_Directions_21_otter_ai_transcript.docx` (~14 min)  
 **Whiteboard:** `transcripts/PD21_board.jpeg`  
 **Context:** PD20 $t$ sweep done; Charles raised K-draw vs Bernoulli / sum-to-1 vs K  
-**Prior:** [`PD20_notes.md`](PD20_notes.md) · [`../3-Master_Plan/Alex_stuff/MLE_basics.md`](../3-Master_Plan/Alex_stuff/MLE_basics.md)
+**Prior:** [`PD20_notes.md`](PD20_notes.md) · [`../3-Master_Plan/MLE/MLE_basics.md`](../3-Master_Plan/MLE/MLE_basics.md)
 
 ---
 
@@ -90,7 +90,7 @@ Charles: still mimicking empirical post-filter team sizes in sim — Alex: “Ce
 
 ## Open / Charles homework
 
-- [ ] Re-read Alex’s “sample K from distribution” line against [`MLE_basics.md`](../3-Master_Plan/Alex_stuff/MLE_basics.md) — update doc with PD21 lock
+- [x] Re-read Alex’s “sample K from distribution” line against [`MLE_basics.md`](../3-Master_Plan/MLE/MLE_basics.md) — PD21 lock documented Aug 2026
 - [ ] Decide if sim Rule D stays K-draw for Hero or shifts toward Bernoulli for paper alignment
 - [ ] Implement configuration-model MLE for $\rho^*$ (separate from draft likelihood)
 - [ ] Implement Bernoulli-softmax MLE for $\lambda, t$ (board factorization)
