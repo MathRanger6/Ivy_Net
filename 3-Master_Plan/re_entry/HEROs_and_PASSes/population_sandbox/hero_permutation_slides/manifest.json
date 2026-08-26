@@ -1,5 +1,5 @@
 {
-  "created": "2026-08-25T19:57:56",
+  "created": "2026-08-25T22:41:05",
   "date": "2026-08-25",
   "tier": "real_full",
   "grid_tier": "full",
@@ -22,9 +22,10 @@
   "n_specs": 64,
   "runs": [
     {
-      "slide_index": 1,
       "output_tag": "FIXED_HERO",
       "season_window": "11_21",
+      "season_min": 2011,
+      "season_max": 2021,
       "label": "FIXED HERO \u2014 canonical deck (11\u201321)",
       "spec": {
         "y_draft_mode": "ever",
@@ -40,12 +41,26 @@
         "label": "FIXED HERO \u2014 canonical deck (11\u201321)"
       },
       "diff_from_baseline": [],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode ever \\\n  --panel-rows all-ps \\\n  --roster-x poolq_loo \\\n  --n-bins 16 \\\n  --poolq-binning quantile \\\n  --output-tag FIXED_HERO \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero"
+      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode ever \\\n  --panel-rows all-ps \\\n  --roster-x poolq_loo \\\n  --n-bins 16 \\\n  --poolq-binning quantile \\\n  --output-tag FIXED_HERO \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero",
+      "command_one_line": "python sports/scripts/pass_a_empirical_bundle.py --season-min 2011 --season-max 2021 --y-draft-mode ever --panel-rows all-ps --roster-x poolq_loo --n-bins 16 --poolq-binning quantile --output-tag FIXED_HERO --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero",
+      "hero_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_q16_allt_min20_mg10_11_21_FIXED_HERO.png",
+      "roster_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/PASS_A_binned_draft_rate_ability_q16_allt_min20_mg10_11_21_FIXED_HERO.csv",
+      "provenance_json": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_q16_allt_min20_mg10_11_21_FIXED_HERO_provenance.json",
+      "shape": {
+        "peak_vent": 15,
+        "peak_rate_pct": 11.126,
+        "bin0_rate_pct": 0.035,
+        "last_bin_rate_pct": 11.126,
+        "bin0_is_peak": false,
+        "beta_sq": null
+      },
+      "slide_index": 1
     },
     {
-      "slide_index": 2,
       "output_tag": "perm_loo_ever_allps_ew20",
       "season_window": "11_21",
+      "season_min": 2011,
+      "season_max": 2021,
       "label": "11\u201321 \u00b7 LOO poolq_loo \u00b7 ever-draft \u00b7 all PS rows \u00b7 EW20 ALLT",
       "spec": {
         "y_draft_mode": "ever",
@@ -64,12 +79,26 @@
         "poolq_binning: quantile \u2192 equal_width",
         "n_bins: 16 \u2192 20"
       ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode ever \\\n  --panel-rows all-ps \\\n  --roster-x poolq_loo \\\n  --n-bins 20 \\\n  --poolq-binning equal_width \\\n  --output-tag perm_loo_ever_allps_ew20 \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero"
+      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode ever \\\n  --panel-rows all-ps \\\n  --roster-x poolq_loo \\\n  --n-bins 20 \\\n  --poolq-binning equal_width \\\n  --output-tag perm_loo_ever_allps_ew20 \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero",
+      "command_one_line": "python sports/scripts/pass_a_empirical_bundle.py --season-min 2011 --season-max 2021 --y-draft-mode ever --panel-rows all-ps --roster-x poolq_loo --n-bins 20 --poolq-binning equal_width --output-tag perm_loo_ever_allps_ew20 --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero",
+      "hero_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_ew20_allt_min20_mg10_11_21_perm_loo_ever_allps_ew20.png",
+      "roster_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/PASS_A_binned_draft_rate_ability_ew20_allt_min20_mg10_11_21_perm_loo_ever_allps_ew20.csv",
+      "provenance_json": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_ew20_allt_min20_mg10_11_21_perm_loo_ever_allps_ew20_provenance.json",
+      "shape": {
+        "peak_vent": 19,
+        "peak_rate_pct": 12.138,
+        "bin0_rate_pct": 0.043,
+        "last_bin_rate_pct": 12.138,
+        "bin0_is_peak": false,
+        "beta_sq": null
+      },
+      "slide_index": 2
     },
     {
-      "slide_index": 3,
       "output_tag": "perm_loo_ever_allps_q16_dft",
       "season_window": "11_21",
+      "season_min": 2011,
+      "season_max": 2021,
       "label": "11\u201321 \u00b7 LOO poolq_loo \u00b7 ever-draft \u00b7 all PS rows \u00b7 QTL16 +DFT",
       "spec": {
         "y_draft_mode": "ever",
@@ -87,12 +116,26 @@
       "diff_from_baseline": [
         "dft: False \u2192 True"
       ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode ever \\\n  --panel-rows all-ps \\\n  --roster-x poolq_loo \\\n  --n-bins 16 \\\n  --poolq-binning quantile \\\n  --output-tag perm_loo_ever_allps_q16_dft \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero \\\n  --dft"
+      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode ever \\\n  --panel-rows all-ps \\\n  --roster-x poolq_loo \\\n  --n-bins 16 \\\n  --poolq-binning quantile \\\n  --output-tag perm_loo_ever_allps_q16_dft \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero \\\n  --dft",
+      "command_one_line": "python sports/scripts/pass_a_empirical_bundle.py --season-min 2011 --season-max 2021 --y-draft-mode ever --panel-rows all-ps --roster-x poolq_loo --n-bins 16 --poolq-binning quantile --output-tag perm_loo_ever_allps_q16_dft --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero --dft",
+      "hero_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_q16_dft_min20_mg10_11_21_perm_loo_ever_allps_q16_dft.png",
+      "roster_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/PASS_A_binned_draft_rate_ability_q16_dft_min20_mg10_11_21_perm_loo_ever_allps_q16_dft.csv",
+      "provenance_json": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_q16_dft_min20_mg10_11_21_perm_loo_ever_allps_q16_dft_provenance.json",
+      "shape": {
+        "peak_vent": 15,
+        "peak_rate_pct": 27.652,
+        "bin0_rate_pct": 0.091,
+        "last_bin_rate_pct": 27.652,
+        "bin0_is_peak": false,
+        "beta_sq": null
+      },
+      "slide_index": 3
     },
     {
-      "slide_index": 4,
       "output_tag": "perm_loo_ever_allps_ew20_dft",
       "season_window": "11_21",
+      "season_min": 2011,
+      "season_max": 2021,
       "label": "11\u201321 \u00b7 LOO poolq_loo \u00b7 ever-draft \u00b7 all PS rows \u00b7 EW20 +DFT",
       "spec": {
         "y_draft_mode": "ever",
@@ -112,12 +155,26 @@
         "n_bins: 16 \u2192 20",
         "dft: False \u2192 True"
       ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode ever \\\n  --panel-rows all-ps \\\n  --roster-x poolq_loo \\\n  --n-bins 20 \\\n  --poolq-binning equal_width \\\n  --output-tag perm_loo_ever_allps_ew20_dft \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero \\\n  --dft"
+      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode ever \\\n  --panel-rows all-ps \\\n  --roster-x poolq_loo \\\n  --n-bins 20 \\\n  --poolq-binning equal_width \\\n  --output-tag perm_loo_ever_allps_ew20_dft \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero \\\n  --dft",
+      "command_one_line": "python sports/scripts/pass_a_empirical_bundle.py --season-min 2011 --season-max 2021 --y-draft-mode ever --panel-rows all-ps --roster-x poolq_loo --n-bins 20 --poolq-binning equal_width --output-tag perm_loo_ever_allps_ew20_dft --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero --dft",
+      "hero_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_ew20_dft_min20_mg10_11_21_perm_loo_ever_allps_ew20_dft.png",
+      "roster_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/PASS_A_binned_draft_rate_ability_ew20_dft_min20_mg10_11_21_perm_loo_ever_allps_ew20_dft.csv",
+      "provenance_json": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_ew20_dft_min20_mg10_11_21_perm_loo_ever_allps_ew20_dft_provenance.json",
+      "shape": {
+        "peak_vent": 19,
+        "peak_rate_pct": 30.272,
+        "bin0_rate_pct": 0.113,
+        "last_bin_rate_pct": 30.272,
+        "bin0_is_peak": false,
+        "beta_sq": null
+      },
+      "slide_index": 4
     },
     {
-      "slide_index": 5,
       "output_tag": "perm_loo_ever_lastps_q16",
       "season_window": "11_21",
+      "season_min": 2011,
+      "season_max": 2021,
       "label": "11\u201321 \u00b7 LOO poolq_loo \u00b7 ever-draft \u00b7 last PS only (cross-section) \u00b7 QTL16 ALLT",
       "spec": {
         "y_draft_mode": "ever",
@@ -135,12 +192,26 @@
       "diff_from_baseline": [
         "panel_rows: all-ps \u2192 last-ps"
       ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode ever \\\n  --panel-rows last-ps \\\n  --roster-x poolq_loo \\\n  --n-bins 16 \\\n  --poolq-binning quantile \\\n  --output-tag perm_loo_ever_lastps_q16 \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero"
+      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode ever \\\n  --panel-rows last-ps \\\n  --roster-x poolq_loo \\\n  --n-bins 16 \\\n  --poolq-binning quantile \\\n  --output-tag perm_loo_ever_lastps_q16 \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero",
+      "command_one_line": "python sports/scripts/pass_a_empirical_bundle.py --season-min 2011 --season-max 2021 --y-draft-mode ever --panel-rows last-ps --roster-x poolq_loo --n-bins 16 --poolq-binning quantile --output-tag perm_loo_ever_lastps_q16 --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero",
+      "hero_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_q16_allt_min20_mg10_11_21_last_ps_perm_loo_ever_lastps_q16.png",
+      "roster_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/PASS_A_binned_draft_rate_ability_q16_allt_min20_mg10_11_21_last_ps_perm_loo_ever_lastps_q16.csv",
+      "provenance_json": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_q16_allt_min20_mg10_11_21_last_ps_perm_loo_ever_lastps_q16_provenance.json",
+      "shape": {
+        "peak_vent": 15,
+        "peak_rate_pct": 15.602,
+        "bin0_rate_pct": 0.0,
+        "last_bin_rate_pct": 15.602,
+        "bin0_is_peak": false,
+        "beta_sq": null
+      },
+      "slide_index": 5
     },
     {
-      "slide_index": 6,
       "output_tag": "perm_loo_ever_lastps_ew20",
       "season_window": "11_21",
+      "season_min": 2011,
+      "season_max": 2021,
       "label": "11\u201321 \u00b7 LOO poolq_loo \u00b7 ever-draft \u00b7 last PS only (cross-section) \u00b7 EW20 ALLT",
       "spec": {
         "y_draft_mode": "ever",
@@ -160,12 +231,26 @@
         "poolq_binning: quantile \u2192 equal_width",
         "n_bins: 16 \u2192 20"
       ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode ever \\\n  --panel-rows last-ps \\\n  --roster-x poolq_loo \\\n  --n-bins 20 \\\n  --poolq-binning equal_width \\\n  --output-tag perm_loo_ever_lastps_ew20 \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero"
+      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode ever \\\n  --panel-rows last-ps \\\n  --roster-x poolq_loo \\\n  --n-bins 20 \\\n  --poolq-binning equal_width \\\n  --output-tag perm_loo_ever_lastps_ew20 \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero",
+      "command_one_line": "python sports/scripts/pass_a_empirical_bundle.py --season-min 2011 --season-max 2021 --y-draft-mode ever --panel-rows last-ps --roster-x poolq_loo --n-bins 20 --poolq-binning equal_width --output-tag perm_loo_ever_lastps_ew20 --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero",
+      "hero_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_ew20_allt_min20_mg10_11_21_last_ps_perm_loo_ever_lastps_ew20.png",
+      "roster_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/PASS_A_binned_draft_rate_ability_ew20_allt_min20_mg10_11_21_last_ps_perm_loo_ever_lastps_ew20.csv",
+      "provenance_json": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_ew20_allt_min20_mg10_11_21_last_ps_perm_loo_ever_lastps_ew20_provenance.json",
+      "shape": {
+        "peak_vent": 19,
+        "peak_rate_pct": 16.667,
+        "bin0_rate_pct": 0.0,
+        "last_bin_rate_pct": 16.667,
+        "bin0_is_peak": false,
+        "beta_sq": null
+      },
+      "slide_index": 6
     },
     {
-      "slide_index": 7,
       "output_tag": "perm_loo_ever_lastps_q16_dft",
       "season_window": "11_21",
+      "season_min": 2011,
+      "season_max": 2021,
       "label": "11\u201321 \u00b7 LOO poolq_loo \u00b7 ever-draft \u00b7 last PS only (cross-section) \u00b7 QTL16 +DFT",
       "spec": {
         "y_draft_mode": "ever",
@@ -184,12 +269,26 @@
         "panel_rows: all-ps \u2192 last-ps",
         "dft: False \u2192 True"
       ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode ever \\\n  --panel-rows last-ps \\\n  --roster-x poolq_loo \\\n  --n-bins 16 \\\n  --poolq-binning quantile \\\n  --output-tag perm_loo_ever_lastps_q16_dft \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero \\\n  --dft"
+      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode ever \\\n  --panel-rows last-ps \\\n  --roster-x poolq_loo \\\n  --n-bins 16 \\\n  --poolq-binning quantile \\\n  --output-tag perm_loo_ever_lastps_q16_dft \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero \\\n  --dft",
+      "command_one_line": "python sports/scripts/pass_a_empirical_bundle.py --season-min 2011 --season-max 2021 --y-draft-mode ever --panel-rows last-ps --roster-x poolq_loo --n-bins 16 --poolq-binning quantile --output-tag perm_loo_ever_lastps_q16_dft --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero --dft",
+      "hero_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_q16_dft_min20_mg10_11_21_last_ps_perm_loo_ever_lastps_q16_dft.png",
+      "roster_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/PASS_A_binned_draft_rate_ability_q16_dft_min20_mg10_11_21_last_ps_perm_loo_ever_lastps_q16_dft.csv",
+      "provenance_json": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_q16_dft_min20_mg10_11_21_last_ps_perm_loo_ever_lastps_q16_dft_provenance.json",
+      "shape": {
+        "peak_vent": 15,
+        "peak_rate_pct": 37.067,
+        "bin0_rate_pct": 0.0,
+        "last_bin_rate_pct": 37.067,
+        "bin0_is_peak": false,
+        "beta_sq": null
+      },
+      "slide_index": 7
     },
     {
-      "slide_index": 8,
       "output_tag": "perm_loo_ever_lastps_ew20_dft",
       "season_window": "11_21",
+      "season_min": 2011,
+      "season_max": 2021,
       "label": "11\u201321 \u00b7 LOO poolq_loo \u00b7 ever-draft \u00b7 last PS only (cross-section) \u00b7 EW20 +DFT",
       "spec": {
         "y_draft_mode": "ever",
@@ -210,12 +309,26 @@
         "n_bins: 16 \u2192 20",
         "dft: False \u2192 True"
       ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode ever \\\n  --panel-rows last-ps \\\n  --roster-x poolq_loo \\\n  --n-bins 20 \\\n  --poolq-binning equal_width \\\n  --output-tag perm_loo_ever_lastps_ew20_dft \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero \\\n  --dft"
+      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode ever \\\n  --panel-rows last-ps \\\n  --roster-x poolq_loo \\\n  --n-bins 20 \\\n  --poolq-binning equal_width \\\n  --output-tag perm_loo_ever_lastps_ew20_dft \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero \\\n  --dft",
+      "command_one_line": "python sports/scripts/pass_a_empirical_bundle.py --season-min 2011 --season-max 2021 --y-draft-mode ever --panel-rows last-ps --roster-x poolq_loo --n-bins 20 --poolq-binning equal_width --output-tag perm_loo_ever_lastps_ew20_dft --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero --dft",
+      "hero_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_ew20_dft_min20_mg10_11_21_last_ps_perm_loo_ever_lastps_ew20_dft.png",
+      "roster_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/PASS_A_binned_draft_rate_ability_ew20_dft_min20_mg10_11_21_last_ps_perm_loo_ever_lastps_ew20_dft.csv",
+      "provenance_json": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_ew20_dft_min20_mg10_11_21_last_ps_perm_loo_ever_lastps_ew20_dft_provenance.json",
+      "shape": {
+        "peak_vent": 19,
+        "peak_rate_pct": 38.168,
+        "bin0_rate_pct": 0.0,
+        "last_bin_rate_pct": 38.168,
+        "bin0_is_peak": false,
+        "beta_sq": null
+      },
+      "slide_index": 8
     },
     {
-      "slide_index": 9,
       "output_tag": "perm_loo_seasony_allps_q16",
       "season_window": "11_21",
+      "season_min": 2011,
+      "season_max": 2021,
       "label": "11\u201321 \u00b7 LOO poolq_loo \u00b7 season-Y label \u00b7 all PS rows \u00b7 QTL16 ALLT",
       "spec": {
         "y_draft_mode": "season",
@@ -233,12 +346,26 @@
       "diff_from_baseline": [
         "y_draft_mode: ever \u2192 season"
       ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode season \\\n  --panel-rows all-ps \\\n  --roster-x poolq_loo \\\n  --n-bins 16 \\\n  --poolq-binning quantile \\\n  --output-tag perm_loo_seasony_allps_q16 \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero"
+      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode season \\\n  --panel-rows all-ps \\\n  --roster-x poolq_loo \\\n  --n-bins 16 \\\n  --poolq-binning quantile \\\n  --output-tag perm_loo_seasony_allps_q16 \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero",
+      "command_one_line": "python sports/scripts/pass_a_empirical_bundle.py --season-min 2011 --season-max 2021 --y-draft-mode season --panel-rows all-ps --roster-x poolq_loo --n-bins 16 --poolq-binning quantile --output-tag perm_loo_seasony_allps_q16 --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero",
+      "hero_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_q16_allt_min20_mg10_11_21_season_y_perm_loo_seasony_allps_q16.png",
+      "roster_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/PASS_A_binned_draft_rate_ability_q16_allt_min20_mg10_11_21_season_y_perm_loo_seasony_allps_q16.csv",
+      "provenance_json": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_q16_allt_min20_mg10_11_21_season_y_perm_loo_seasony_allps_q16_provenance.json",
+      "shape": {
+        "peak_vent": 15,
+        "peak_rate_pct": 7.498,
+        "bin0_rate_pct": 0.0,
+        "last_bin_rate_pct": 7.498,
+        "bin0_is_peak": false,
+        "beta_sq": null
+      },
+      "slide_index": 9
     },
     {
-      "slide_index": 10,
       "output_tag": "perm_loo_seasony_allps_ew20",
       "season_window": "11_21",
+      "season_min": 2011,
+      "season_max": 2021,
       "label": "11\u201321 \u00b7 LOO poolq_loo \u00b7 season-Y label \u00b7 all PS rows \u00b7 EW20 ALLT",
       "spec": {
         "y_draft_mode": "season",
@@ -258,12 +385,26 @@
         "poolq_binning: quantile \u2192 equal_width",
         "n_bins: 16 \u2192 20"
       ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode season \\\n  --panel-rows all-ps \\\n  --roster-x poolq_loo \\\n  --n-bins 20 \\\n  --poolq-binning equal_width \\\n  --output-tag perm_loo_seasony_allps_ew20 \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero"
+      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode season \\\n  --panel-rows all-ps \\\n  --roster-x poolq_loo \\\n  --n-bins 20 \\\n  --poolq-binning equal_width \\\n  --output-tag perm_loo_seasony_allps_ew20 \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero",
+      "command_one_line": "python sports/scripts/pass_a_empirical_bundle.py --season-min 2011 --season-max 2021 --y-draft-mode season --panel-rows all-ps --roster-x poolq_loo --n-bins 20 --poolq-binning equal_width --output-tag perm_loo_seasony_allps_ew20 --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero",
+      "hero_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_ew20_allt_min20_mg10_11_21_season_y_perm_loo_seasony_allps_ew20.png",
+      "roster_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/PASS_A_binned_draft_rate_ability_ew20_allt_min20_mg10_11_21_season_y_perm_loo_seasony_allps_ew20.csv",
+      "provenance_json": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_ew20_allt_min20_mg10_11_21_season_y_perm_loo_seasony_allps_ew20_provenance.json",
+      "shape": {
+        "peak_vent": 19,
+        "peak_rate_pct": 8.251,
+        "bin0_rate_pct": 0.0,
+        "last_bin_rate_pct": 8.251,
+        "bin0_is_peak": false,
+        "beta_sq": null
+      },
+      "slide_index": 10
     },
     {
-      "slide_index": 11,
       "output_tag": "perm_loo_seasony_allps_q16_dft",
       "season_window": "11_21",
+      "season_min": 2011,
+      "season_max": 2021,
       "label": "11\u201321 \u00b7 LOO poolq_loo \u00b7 season-Y label \u00b7 all PS rows \u00b7 QTL16 +DFT",
       "spec": {
         "y_draft_mode": "season",
@@ -282,12 +423,26 @@
         "y_draft_mode: ever \u2192 season",
         "dft: False \u2192 True"
       ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode season \\\n  --panel-rows all-ps \\\n  --roster-x poolq_loo \\\n  --n-bins 16 \\\n  --poolq-binning quantile \\\n  --output-tag perm_loo_seasony_allps_q16_dft \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero \\\n  --dft"
+      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode season \\\n  --panel-rows all-ps \\\n  --roster-x poolq_loo \\\n  --n-bins 16 \\\n  --poolq-binning quantile \\\n  --output-tag perm_loo_seasony_allps_q16_dft \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero \\\n  --dft",
+      "command_one_line": "python sports/scripts/pass_a_empirical_bundle.py --season-min 2011 --season-max 2021 --y-draft-mode season --panel-rows all-ps --roster-x poolq_loo --n-bins 16 --poolq-binning quantile --output-tag perm_loo_seasony_allps_q16_dft --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero --dft",
+      "hero_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_q16_dft_min20_mg10_11_21_season_y_perm_loo_seasony_allps_q16_dft.png",
+      "roster_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/PASS_A_binned_draft_rate_ability_q16_dft_min20_mg10_11_21_season_y_perm_loo_seasony_allps_q16_dft.csv",
+      "provenance_json": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_q16_dft_min20_mg10_11_21_season_y_perm_loo_seasony_allps_q16_dft_provenance.json",
+      "shape": {
+        "peak_vent": 15,
+        "peak_rate_pct": 19.242,
+        "bin0_rate_pct": 0.0,
+        "last_bin_rate_pct": 19.242,
+        "bin0_is_peak": false,
+        "beta_sq": null
+      },
+      "slide_index": 11
     },
     {
-      "slide_index": 12,
       "output_tag": "perm_loo_seasony_allps_ew20_dft",
       "season_window": "11_21",
+      "season_min": 2011,
+      "season_max": 2021,
       "label": "11\u201321 \u00b7 LOO poolq_loo \u00b7 season-Y label \u00b7 all PS rows \u00b7 EW20 +DFT",
       "spec": {
         "y_draft_mode": "season",
@@ -308,12 +463,26 @@
         "n_bins: 16 \u2192 20",
         "dft: False \u2192 True"
       ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode season \\\n  --panel-rows all-ps \\\n  --roster-x poolq_loo \\\n  --n-bins 20 \\\n  --poolq-binning equal_width \\\n  --output-tag perm_loo_seasony_allps_ew20_dft \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero \\\n  --dft"
+      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode season \\\n  --panel-rows all-ps \\\n  --roster-x poolq_loo \\\n  --n-bins 20 \\\n  --poolq-binning equal_width \\\n  --output-tag perm_loo_seasony_allps_ew20_dft \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero \\\n  --dft",
+      "command_one_line": "python sports/scripts/pass_a_empirical_bundle.py --season-min 2011 --season-max 2021 --y-draft-mode season --panel-rows all-ps --roster-x poolq_loo --n-bins 20 --poolq-binning equal_width --output-tag perm_loo_seasony_allps_ew20_dft --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero --dft",
+      "hero_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_ew20_dft_min20_mg10_11_21_season_y_perm_loo_seasony_allps_ew20_dft.png",
+      "roster_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/PASS_A_binned_draft_rate_ability_ew20_dft_min20_mg10_11_21_season_y_perm_loo_seasony_allps_ew20_dft.csv",
+      "provenance_json": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_ew20_dft_min20_mg10_11_21_season_y_perm_loo_seasony_allps_ew20_dft_provenance.json",
+      "shape": {
+        "peak_vent": 19,
+        "peak_rate_pct": 21.871,
+        "bin0_rate_pct": 0.0,
+        "last_bin_rate_pct": 21.871,
+        "bin0_is_peak": false,
+        "beta_sq": null
+      },
+      "slide_index": 12
     },
     {
-      "slide_index": 13,
       "output_tag": "perm_loo_seasony_lastps_q16",
       "season_window": "11_21",
+      "season_min": 2011,
+      "season_max": 2021,
       "label": "11\u201321 \u00b7 LOO poolq_loo \u00b7 season-Y label \u00b7 last PS only (cross-section) \u00b7 QTL16 ALLT",
       "spec": {
         "y_draft_mode": "season",
@@ -332,12 +501,26 @@
         "y_draft_mode: ever \u2192 season",
         "panel_rows: all-ps \u2192 last-ps"
       ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode season \\\n  --panel-rows last-ps \\\n  --roster-x poolq_loo \\\n  --n-bins 16 \\\n  --poolq-binning quantile \\\n  --output-tag perm_loo_seasony_lastps_q16 \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero"
+      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode season \\\n  --panel-rows last-ps \\\n  --roster-x poolq_loo \\\n  --n-bins 16 \\\n  --poolq-binning quantile \\\n  --output-tag perm_loo_seasony_lastps_q16 \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero",
+      "command_one_line": "python sports/scripts/pass_a_empirical_bundle.py --season-min 2011 --season-max 2021 --y-draft-mode season --panel-rows last-ps --roster-x poolq_loo --n-bins 16 --poolq-binning quantile --output-tag perm_loo_seasony_lastps_q16 --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero",
+      "hero_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_q16_allt_min20_mg10_11_21_season_y_last_ps_perm_loo_seasony_lastps_q16.png",
+      "roster_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/PASS_A_binned_draft_rate_ability_q16_allt_min20_mg10_11_21_season_y_last_ps_perm_loo_seasony_lastps_q16.csv",
+      "provenance_json": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_q16_allt_min20_mg10_11_21_season_y_last_ps_perm_loo_seasony_lastps_q16_provenance.json",
+      "shape": {
+        "peak_vent": 15,
+        "peak_rate_pct": 15.198,
+        "bin0_rate_pct": 0.0,
+        "last_bin_rate_pct": 15.198,
+        "bin0_is_peak": false,
+        "beta_sq": null
+      },
+      "slide_index": 13
     },
     {
-      "slide_index": 14,
       "output_tag": "perm_loo_seasony_lastps_ew20",
       "season_window": "11_21",
+      "season_min": 2011,
+      "season_max": 2021,
       "label": "11\u201321 \u00b7 LOO poolq_loo \u00b7 season-Y label \u00b7 last PS only (cross-section) \u00b7 EW20 ALLT",
       "spec": {
         "y_draft_mode": "season",
@@ -358,12 +541,26 @@
         "poolq_binning: quantile \u2192 equal_width",
         "n_bins: 16 \u2192 20"
       ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode season \\\n  --panel-rows last-ps \\\n  --roster-x poolq_loo \\\n  --n-bins 20 \\\n  --poolq-binning equal_width \\\n  --output-tag perm_loo_seasony_lastps_ew20 \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero"
+      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode season \\\n  --panel-rows last-ps \\\n  --roster-x poolq_loo \\\n  --n-bins 20 \\\n  --poolq-binning equal_width \\\n  --output-tag perm_loo_seasony_lastps_ew20 \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero",
+      "command_one_line": "python sports/scripts/pass_a_empirical_bundle.py --season-min 2011 --season-max 2021 --y-draft-mode season --panel-rows last-ps --roster-x poolq_loo --n-bins 20 --poolq-binning equal_width --output-tag perm_loo_seasony_lastps_ew20 --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero",
+      "hero_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_ew20_allt_min20_mg10_11_21_season_y_last_ps_perm_loo_seasony_lastps_ew20.png",
+      "roster_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/PASS_A_binned_draft_rate_ability_ew20_allt_min20_mg10_11_21_season_y_last_ps_perm_loo_seasony_lastps_ew20.csv",
+      "provenance_json": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_ew20_allt_min20_mg10_11_21_season_y_last_ps_perm_loo_seasony_lastps_ew20_provenance.json",
+      "shape": {
+        "peak_vent": 19,
+        "peak_rate_pct": 16.768,
+        "bin0_rate_pct": 0.0,
+        "last_bin_rate_pct": 16.768,
+        "bin0_is_peak": false,
+        "beta_sq": null
+      },
+      "slide_index": 14
     },
     {
-      "slide_index": 15,
       "output_tag": "perm_loo_seasony_lastps_q16_dft",
       "season_window": "11_21",
+      "season_min": 2011,
+      "season_max": 2021,
       "label": "11\u201321 \u00b7 LOO poolq_loo \u00b7 season-Y label \u00b7 last PS only (cross-section) \u00b7 QTL16 +DFT",
       "spec": {
         "y_draft_mode": "season",
@@ -383,12 +580,26 @@
         "panel_rows: all-ps \u2192 last-ps",
         "dft: False \u2192 True"
       ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode season \\\n  --panel-rows last-ps \\\n  --roster-x poolq_loo \\\n  --n-bins 16 \\\n  --poolq-binning quantile \\\n  --output-tag perm_loo_seasony_lastps_q16_dft \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero \\\n  --dft"
+      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode season \\\n  --panel-rows last-ps \\\n  --roster-x poolq_loo \\\n  --n-bins 16 \\\n  --poolq-binning quantile \\\n  --output-tag perm_loo_seasony_lastps_q16_dft \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero \\\n  --dft",
+      "command_one_line": "python sports/scripts/pass_a_empirical_bundle.py --season-min 2011 --season-max 2021 --y-draft-mode season --panel-rows last-ps --roster-x poolq_loo --n-bins 16 --poolq-binning quantile --output-tag perm_loo_seasony_lastps_q16_dft --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero --dft",
+      "hero_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_q16_dft_min20_mg10_11_21_season_y_last_ps_perm_loo_seasony_lastps_q16_dft.png",
+      "roster_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/PASS_A_binned_draft_rate_ability_q16_dft_min20_mg10_11_21_season_y_last_ps_perm_loo_seasony_lastps_q16_dft.csv",
+      "provenance_json": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_q16_dft_min20_mg10_11_21_season_y_last_ps_perm_loo_seasony_lastps_q16_dft_provenance.json",
+      "shape": {
+        "peak_vent": 15,
+        "peak_rate_pct": 37.473,
+        "bin0_rate_pct": 0.0,
+        "last_bin_rate_pct": 37.473,
+        "bin0_is_peak": false,
+        "beta_sq": null
+      },
+      "slide_index": 15
     },
     {
-      "slide_index": 16,
       "output_tag": "perm_loo_seasony_lastps_ew20_dft",
       "season_window": "11_21",
+      "season_min": 2011,
+      "season_max": 2021,
       "label": "11\u201321 \u00b7 LOO poolq_loo \u00b7 season-Y label \u00b7 last PS only (cross-section) \u00b7 EW20 +DFT",
       "spec": {
         "y_draft_mode": "season",
@@ -410,12 +621,26 @@
         "n_bins: 16 \u2192 20",
         "dft: False \u2192 True"
       ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode season \\\n  --panel-rows last-ps \\\n  --roster-x poolq_loo \\\n  --n-bins 20 \\\n  --poolq-binning equal_width \\\n  --output-tag perm_loo_seasony_lastps_ew20_dft \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero \\\n  --dft"
+      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode season \\\n  --panel-rows last-ps \\\n  --roster-x poolq_loo \\\n  --n-bins 20 \\\n  --poolq-binning equal_width \\\n  --output-tag perm_loo_seasony_lastps_ew20_dft \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero \\\n  --dft",
+      "command_one_line": "python sports/scripts/pass_a_empirical_bundle.py --season-min 2011 --season-max 2021 --y-draft-mode season --panel-rows last-ps --roster-x poolq_loo --n-bins 20 --poolq-binning equal_width --output-tag perm_loo_seasony_lastps_ew20_dft --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero --dft",
+      "hero_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_ew20_dft_min20_mg10_11_21_season_y_last_ps_perm_loo_seasony_lastps_ew20_dft.png",
+      "roster_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/PASS_A_binned_draft_rate_ability_ew20_dft_min20_mg10_11_21_season_y_last_ps_perm_loo_seasony_lastps_ew20_dft.csv",
+      "provenance_json": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_ew20_dft_min20_mg10_11_21_season_y_last_ps_perm_loo_seasony_lastps_ew20_dft_provenance.json",
+      "shape": {
+        "peak_vent": 19,
+        "peak_rate_pct": 39.51,
+        "bin0_rate_pct": 0.0,
+        "last_bin_rate_pct": 39.51,
+        "bin0_is_peak": false,
+        "beta_sq": null
+      },
+      "slide_index": 16
     },
     {
-      "slide_index": 17,
       "output_tag": "perm_poolq_ever_allps_q16",
       "season_window": "11_21",
+      "season_min": 2011,
+      "season_max": 2021,
       "label": "11\u201321 \u00b7 team poolq (incl. self) \u00b7 ever-draft \u00b7 all PS rows \u00b7 QTL16 ALLT",
       "spec": {
         "y_draft_mode": "ever",
@@ -433,12 +658,26 @@
       "diff_from_baseline": [
         "roster_x: poolq_loo \u2192 poolq"
       ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode ever \\\n  --panel-rows all-ps \\\n  --roster-x poolq \\\n  --n-bins 16 \\\n  --poolq-binning quantile \\\n  --output-tag perm_poolq_ever_allps_q16 \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero"
+      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode ever \\\n  --panel-rows all-ps \\\n  --roster-x poolq \\\n  --n-bins 16 \\\n  --poolq-binning quantile \\\n  --output-tag perm_poolq_ever_allps_q16 \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero",
+      "command_one_line": "python sports/scripts/pass_a_empirical_bundle.py --season-min 2011 --season-max 2021 --y-draft-mode ever --panel-rows all-ps --roster-x poolq --n-bins 16 --poolq-binning quantile --output-tag perm_poolq_ever_allps_q16 --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero",
+      "hero_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_poolq_q16_allt_min20_mg10_11_21_perm_poolq_ever_allps_q16.png",
+      "roster_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/PASS_A_binned_draft_rate_ability_poolq_q16_allt_min20_mg10_11_21_perm_poolq_ever_allps_q16.csv",
+      "provenance_json": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_poolq_q16_allt_min20_mg10_11_21_perm_poolq_ever_allps_q16_provenance.json",
+      "shape": {
+        "peak_vent": 15,
+        "peak_rate_pct": 11.126,
+        "bin0_rate_pct": 0.035,
+        "last_bin_rate_pct": 11.126,
+        "bin0_is_peak": false,
+        "beta_sq": null
+      },
+      "slide_index": 17
     },
     {
-      "slide_index": 18,
       "output_tag": "perm_poolq_ever_allps_ew20",
       "season_window": "11_21",
+      "season_min": 2011,
+      "season_max": 2021,
       "label": "11\u201321 \u00b7 team poolq (incl. self) \u00b7 ever-draft \u00b7 all PS rows \u00b7 EW20 ALLT",
       "spec": {
         "y_draft_mode": "ever",
@@ -458,12 +697,26 @@
         "poolq_binning: quantile \u2192 equal_width",
         "n_bins: 16 \u2192 20"
       ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode ever \\\n  --panel-rows all-ps \\\n  --roster-x poolq \\\n  --n-bins 20 \\\n  --poolq-binning equal_width \\\n  --output-tag perm_poolq_ever_allps_ew20 \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero"
+      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode ever \\\n  --panel-rows all-ps \\\n  --roster-x poolq \\\n  --n-bins 20 \\\n  --poolq-binning equal_width \\\n  --output-tag perm_poolq_ever_allps_ew20 \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero",
+      "command_one_line": "python sports/scripts/pass_a_empirical_bundle.py --season-min 2011 --season-max 2021 --y-draft-mode ever --panel-rows all-ps --roster-x poolq --n-bins 20 --poolq-binning equal_width --output-tag perm_poolq_ever_allps_ew20 --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero",
+      "hero_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_poolq_ew20_allt_min20_mg10_11_21_perm_poolq_ever_allps_ew20.png",
+      "roster_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/PASS_A_binned_draft_rate_ability_poolq_ew20_allt_min20_mg10_11_21_perm_poolq_ever_allps_ew20.csv",
+      "provenance_json": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_poolq_ew20_allt_min20_mg10_11_21_perm_poolq_ever_allps_ew20_provenance.json",
+      "shape": {
+        "peak_vent": 19,
+        "peak_rate_pct": 12.138,
+        "bin0_rate_pct": 0.043,
+        "last_bin_rate_pct": 12.138,
+        "bin0_is_peak": false,
+        "beta_sq": null
+      },
+      "slide_index": 18
     },
     {
-      "slide_index": 19,
       "output_tag": "perm_poolq_ever_allps_q16_dft",
       "season_window": "11_21",
+      "season_min": 2011,
+      "season_max": 2021,
       "label": "11\u201321 \u00b7 team poolq (incl. self) \u00b7 ever-draft \u00b7 all PS rows \u00b7 QTL16 +DFT",
       "spec": {
         "y_draft_mode": "ever",
@@ -482,12 +735,26 @@
         "roster_x: poolq_loo \u2192 poolq",
         "dft: False \u2192 True"
       ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode ever \\\n  --panel-rows all-ps \\\n  --roster-x poolq \\\n  --n-bins 16 \\\n  --poolq-binning quantile \\\n  --output-tag perm_poolq_ever_allps_q16_dft \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero \\\n  --dft"
+      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode ever \\\n  --panel-rows all-ps \\\n  --roster-x poolq \\\n  --n-bins 16 \\\n  --poolq-binning quantile \\\n  --output-tag perm_poolq_ever_allps_q16_dft \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero \\\n  --dft",
+      "command_one_line": "python sports/scripts/pass_a_empirical_bundle.py --season-min 2011 --season-max 2021 --y-draft-mode ever --panel-rows all-ps --roster-x poolq --n-bins 16 --poolq-binning quantile --output-tag perm_poolq_ever_allps_q16_dft --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero --dft",
+      "hero_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_poolq_q16_dft_min20_mg10_11_21_perm_poolq_ever_allps_q16_dft.png",
+      "roster_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/PASS_A_binned_draft_rate_ability_poolq_q16_dft_min20_mg10_11_21_perm_poolq_ever_allps_q16_dft.csv",
+      "provenance_json": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_poolq_q16_dft_min20_mg10_11_21_perm_poolq_ever_allps_q16_dft_provenance.json",
+      "shape": {
+        "peak_vent": 15,
+        "peak_rate_pct": 27.652,
+        "bin0_rate_pct": 0.091,
+        "last_bin_rate_pct": 27.652,
+        "bin0_is_peak": false,
+        "beta_sq": null
+      },
+      "slide_index": 19
     },
     {
-      "slide_index": 20,
       "output_tag": "perm_poolq_ever_allps_ew20_dft",
       "season_window": "11_21",
+      "season_min": 2011,
+      "season_max": 2021,
       "label": "11\u201321 \u00b7 team poolq (incl. self) \u00b7 ever-draft \u00b7 all PS rows \u00b7 EW20 +DFT",
       "spec": {
         "y_draft_mode": "ever",
@@ -508,12 +775,26 @@
         "n_bins: 16 \u2192 20",
         "dft: False \u2192 True"
       ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode ever \\\n  --panel-rows all-ps \\\n  --roster-x poolq \\\n  --n-bins 20 \\\n  --poolq-binning equal_width \\\n  --output-tag perm_poolq_ever_allps_ew20_dft \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero \\\n  --dft"
+      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode ever \\\n  --panel-rows all-ps \\\n  --roster-x poolq \\\n  --n-bins 20 \\\n  --poolq-binning equal_width \\\n  --output-tag perm_poolq_ever_allps_ew20_dft \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero \\\n  --dft",
+      "command_one_line": "python sports/scripts/pass_a_empirical_bundle.py --season-min 2011 --season-max 2021 --y-draft-mode ever --panel-rows all-ps --roster-x poolq --n-bins 20 --poolq-binning equal_width --output-tag perm_poolq_ever_allps_ew20_dft --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero --dft",
+      "hero_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_poolq_ew20_dft_min20_mg10_11_21_perm_poolq_ever_allps_ew20_dft.png",
+      "roster_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/PASS_A_binned_draft_rate_ability_poolq_ew20_dft_min20_mg10_11_21_perm_poolq_ever_allps_ew20_dft.csv",
+      "provenance_json": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_poolq_ew20_dft_min20_mg10_11_21_perm_poolq_ever_allps_ew20_dft_provenance.json",
+      "shape": {
+        "peak_vent": 19,
+        "peak_rate_pct": 30.272,
+        "bin0_rate_pct": 0.113,
+        "last_bin_rate_pct": 30.272,
+        "bin0_is_peak": false,
+        "beta_sq": null
+      },
+      "slide_index": 20
     },
     {
-      "slide_index": 21,
       "output_tag": "perm_poolq_ever_lastps_q16",
       "season_window": "11_21",
+      "season_min": 2011,
+      "season_max": 2021,
       "label": "11\u201321 \u00b7 team poolq (incl. self) \u00b7 ever-draft \u00b7 last PS only (cross-section) \u00b7 QTL16 ALLT",
       "spec": {
         "y_draft_mode": "ever",
@@ -532,12 +813,26 @@
         "roster_x: poolq_loo \u2192 poolq",
         "panel_rows: all-ps \u2192 last-ps"
       ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode ever \\\n  --panel-rows last-ps \\\n  --roster-x poolq \\\n  --n-bins 16 \\\n  --poolq-binning quantile \\\n  --output-tag perm_poolq_ever_lastps_q16 \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero"
+      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode ever \\\n  --panel-rows last-ps \\\n  --roster-x poolq \\\n  --n-bins 16 \\\n  --poolq-binning quantile \\\n  --output-tag perm_poolq_ever_lastps_q16 \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero",
+      "command_one_line": "python sports/scripts/pass_a_empirical_bundle.py --season-min 2011 --season-max 2021 --y-draft-mode ever --panel-rows last-ps --roster-x poolq --n-bins 16 --poolq-binning quantile --output-tag perm_poolq_ever_lastps_q16 --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero",
+      "hero_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_poolq_q16_allt_min20_mg10_11_21_last_ps_perm_poolq_ever_lastps_q16.png",
+      "roster_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/PASS_A_binned_draft_rate_ability_poolq_q16_allt_min20_mg10_11_21_last_ps_perm_poolq_ever_lastps_q16.csv",
+      "provenance_json": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_poolq_q16_allt_min20_mg10_11_21_last_ps_perm_poolq_ever_lastps_q16_provenance.json",
+      "shape": {
+        "peak_vent": 15,
+        "peak_rate_pct": 15.602,
+        "bin0_rate_pct": 0.0,
+        "last_bin_rate_pct": 15.602,
+        "bin0_is_peak": false,
+        "beta_sq": null
+      },
+      "slide_index": 21
     },
     {
-      "slide_index": 22,
       "output_tag": "perm_poolq_ever_lastps_ew20",
       "season_window": "11_21",
+      "season_min": 2011,
+      "season_max": 2021,
       "label": "11\u201321 \u00b7 team poolq (incl. self) \u00b7 ever-draft \u00b7 last PS only (cross-section) \u00b7 EW20 ALLT",
       "spec": {
         "y_draft_mode": "ever",
@@ -558,12 +853,26 @@
         "poolq_binning: quantile \u2192 equal_width",
         "n_bins: 16 \u2192 20"
       ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode ever \\\n  --panel-rows last-ps \\\n  --roster-x poolq \\\n  --n-bins 20 \\\n  --poolq-binning equal_width \\\n  --output-tag perm_poolq_ever_lastps_ew20 \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero"
+      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode ever \\\n  --panel-rows last-ps \\\n  --roster-x poolq \\\n  --n-bins 20 \\\n  --poolq-binning equal_width \\\n  --output-tag perm_poolq_ever_lastps_ew20 \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero",
+      "command_one_line": "python sports/scripts/pass_a_empirical_bundle.py --season-min 2011 --season-max 2021 --y-draft-mode ever --panel-rows last-ps --roster-x poolq --n-bins 20 --poolq-binning equal_width --output-tag perm_poolq_ever_lastps_ew20 --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero",
+      "hero_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_poolq_ew20_allt_min20_mg10_11_21_last_ps_perm_poolq_ever_lastps_ew20.png",
+      "roster_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/PASS_A_binned_draft_rate_ability_poolq_ew20_allt_min20_mg10_11_21_last_ps_perm_poolq_ever_lastps_ew20.csv",
+      "provenance_json": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_poolq_ew20_allt_min20_mg10_11_21_last_ps_perm_poolq_ever_lastps_ew20_provenance.json",
+      "shape": {
+        "peak_vent": 19,
+        "peak_rate_pct": 16.667,
+        "bin0_rate_pct": 0.0,
+        "last_bin_rate_pct": 16.667,
+        "bin0_is_peak": false,
+        "beta_sq": null
+      },
+      "slide_index": 22
     },
     {
-      "slide_index": 23,
       "output_tag": "perm_poolq_ever_lastps_q16_dft",
       "season_window": "11_21",
+      "season_min": 2011,
+      "season_max": 2021,
       "label": "11\u201321 \u00b7 team poolq (incl. self) \u00b7 ever-draft \u00b7 last PS only (cross-section) \u00b7 QTL16 +DFT",
       "spec": {
         "y_draft_mode": "ever",
@@ -583,12 +892,26 @@
         "panel_rows: all-ps \u2192 last-ps",
         "dft: False \u2192 True"
       ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode ever \\\n  --panel-rows last-ps \\\n  --roster-x poolq \\\n  --n-bins 16 \\\n  --poolq-binning quantile \\\n  --output-tag perm_poolq_ever_lastps_q16_dft \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero \\\n  --dft"
+      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode ever \\\n  --panel-rows last-ps \\\n  --roster-x poolq \\\n  --n-bins 16 \\\n  --poolq-binning quantile \\\n  --output-tag perm_poolq_ever_lastps_q16_dft \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero \\\n  --dft",
+      "command_one_line": "python sports/scripts/pass_a_empirical_bundle.py --season-min 2011 --season-max 2021 --y-draft-mode ever --panel-rows last-ps --roster-x poolq --n-bins 16 --poolq-binning quantile --output-tag perm_poolq_ever_lastps_q16_dft --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero --dft",
+      "hero_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_poolq_q16_dft_min20_mg10_11_21_last_ps_perm_poolq_ever_lastps_q16_dft.png",
+      "roster_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/PASS_A_binned_draft_rate_ability_poolq_q16_dft_min20_mg10_11_21_last_ps_perm_poolq_ever_lastps_q16_dft.csv",
+      "provenance_json": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_poolq_q16_dft_min20_mg10_11_21_last_ps_perm_poolq_ever_lastps_q16_dft_provenance.json",
+      "shape": {
+        "peak_vent": 15,
+        "peak_rate_pct": 37.067,
+        "bin0_rate_pct": 0.0,
+        "last_bin_rate_pct": 37.067,
+        "bin0_is_peak": false,
+        "beta_sq": null
+      },
+      "slide_index": 23
     },
     {
-      "slide_index": 24,
       "output_tag": "perm_poolq_ever_lastps_ew20_dft",
       "season_window": "11_21",
+      "season_min": 2011,
+      "season_max": 2021,
       "label": "11\u201321 \u00b7 team poolq (incl. self) \u00b7 ever-draft \u00b7 last PS only (cross-section) \u00b7 EW20 +DFT",
       "spec": {
         "y_draft_mode": "ever",
@@ -610,12 +933,26 @@
         "n_bins: 16 \u2192 20",
         "dft: False \u2192 True"
       ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode ever \\\n  --panel-rows last-ps \\\n  --roster-x poolq \\\n  --n-bins 20 \\\n  --poolq-binning equal_width \\\n  --output-tag perm_poolq_ever_lastps_ew20_dft \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero \\\n  --dft"
+      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode ever \\\n  --panel-rows last-ps \\\n  --roster-x poolq \\\n  --n-bins 20 \\\n  --poolq-binning equal_width \\\n  --output-tag perm_poolq_ever_lastps_ew20_dft \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero \\\n  --dft",
+      "command_one_line": "python sports/scripts/pass_a_empirical_bundle.py --season-min 2011 --season-max 2021 --y-draft-mode ever --panel-rows last-ps --roster-x poolq --n-bins 20 --poolq-binning equal_width --output-tag perm_poolq_ever_lastps_ew20_dft --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero --dft",
+      "hero_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_poolq_ew20_dft_min20_mg10_11_21_last_ps_perm_poolq_ever_lastps_ew20_dft.png",
+      "roster_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/PASS_A_binned_draft_rate_ability_poolq_ew20_dft_min20_mg10_11_21_last_ps_perm_poolq_ever_lastps_ew20_dft.csv",
+      "provenance_json": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_poolq_ew20_dft_min20_mg10_11_21_last_ps_perm_poolq_ever_lastps_ew20_dft_provenance.json",
+      "shape": {
+        "peak_vent": 19,
+        "peak_rate_pct": 38.168,
+        "bin0_rate_pct": 0.0,
+        "last_bin_rate_pct": 38.168,
+        "bin0_is_peak": false,
+        "beta_sq": null
+      },
+      "slide_index": 24
     },
     {
-      "slide_index": 25,
       "output_tag": "perm_poolq_seasony_allps_q16",
       "season_window": "11_21",
+      "season_min": 2011,
+      "season_max": 2021,
       "label": "11\u201321 \u00b7 team poolq (incl. self) \u00b7 season-Y label \u00b7 all PS rows \u00b7 QTL16 ALLT",
       "spec": {
         "y_draft_mode": "season",
@@ -634,12 +971,26 @@
         "roster_x: poolq_loo \u2192 poolq",
         "y_draft_mode: ever \u2192 season"
       ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode season \\\n  --panel-rows all-ps \\\n  --roster-x poolq \\\n  --n-bins 16 \\\n  --poolq-binning quantile \\\n  --output-tag perm_poolq_seasony_allps_q16 \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero"
+      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode season \\\n  --panel-rows all-ps \\\n  --roster-x poolq \\\n  --n-bins 16 \\\n  --poolq-binning quantile \\\n  --output-tag perm_poolq_seasony_allps_q16 \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero",
+      "command_one_line": "python sports/scripts/pass_a_empirical_bundle.py --season-min 2011 --season-max 2021 --y-draft-mode season --panel-rows all-ps --roster-x poolq --n-bins 16 --poolq-binning quantile --output-tag perm_poolq_seasony_allps_q16 --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero",
+      "hero_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_poolq_q16_allt_min20_mg10_11_21_season_y_perm_poolq_seasony_allps_q16.png",
+      "roster_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/PASS_A_binned_draft_rate_ability_poolq_q16_allt_min20_mg10_11_21_season_y_perm_poolq_seasony_allps_q16.csv",
+      "provenance_json": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_poolq_q16_allt_min20_mg10_11_21_season_y_perm_poolq_seasony_allps_q16_provenance.json",
+      "shape": {
+        "peak_vent": 15,
+        "peak_rate_pct": 7.498,
+        "bin0_rate_pct": 0.0,
+        "last_bin_rate_pct": 7.498,
+        "bin0_is_peak": false,
+        "beta_sq": null
+      },
+      "slide_index": 25
     },
     {
-      "slide_index": 26,
       "output_tag": "perm_poolq_seasony_allps_ew20",
       "season_window": "11_21",
+      "season_min": 2011,
+      "season_max": 2021,
       "label": "11\u201321 \u00b7 team poolq (incl. self) \u00b7 season-Y label \u00b7 all PS rows \u00b7 EW20 ALLT",
       "spec": {
         "y_draft_mode": "season",
@@ -660,12 +1011,26 @@
         "poolq_binning: quantile \u2192 equal_width",
         "n_bins: 16 \u2192 20"
       ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode season \\\n  --panel-rows all-ps \\\n  --roster-x poolq \\\n  --n-bins 20 \\\n  --poolq-binning equal_width \\\n  --output-tag perm_poolq_seasony_allps_ew20 \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero"
+      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode season \\\n  --panel-rows all-ps \\\n  --roster-x poolq \\\n  --n-bins 20 \\\n  --poolq-binning equal_width \\\n  --output-tag perm_poolq_seasony_allps_ew20 \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero",
+      "command_one_line": "python sports/scripts/pass_a_empirical_bundle.py --season-min 2011 --season-max 2021 --y-draft-mode season --panel-rows all-ps --roster-x poolq --n-bins 20 --poolq-binning equal_width --output-tag perm_poolq_seasony_allps_ew20 --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero",
+      "hero_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_poolq_ew20_allt_min20_mg10_11_21_season_y_perm_poolq_seasony_allps_ew20.png",
+      "roster_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/PASS_A_binned_draft_rate_ability_poolq_ew20_allt_min20_mg10_11_21_season_y_perm_poolq_seasony_allps_ew20.csv",
+      "provenance_json": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_poolq_ew20_allt_min20_mg10_11_21_season_y_perm_poolq_seasony_allps_ew20_provenance.json",
+      "shape": {
+        "peak_vent": 19,
+        "peak_rate_pct": 8.251,
+        "bin0_rate_pct": 0.0,
+        "last_bin_rate_pct": 8.251,
+        "bin0_is_peak": false,
+        "beta_sq": null
+      },
+      "slide_index": 26
     },
     {
-      "slide_index": 27,
       "output_tag": "perm_poolq_seasony_allps_q16_dft",
       "season_window": "11_21",
+      "season_min": 2011,
+      "season_max": 2021,
       "label": "11\u201321 \u00b7 team poolq (incl. self) \u00b7 season-Y label \u00b7 all PS rows \u00b7 QTL16 +DFT",
       "spec": {
         "y_draft_mode": "season",
@@ -685,12 +1050,26 @@
         "y_draft_mode: ever \u2192 season",
         "dft: False \u2192 True"
       ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode season \\\n  --panel-rows all-ps \\\n  --roster-x poolq \\\n  --n-bins 16 \\\n  --poolq-binning quantile \\\n  --output-tag perm_poolq_seasony_allps_q16_dft \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero \\\n  --dft"
+      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode season \\\n  --panel-rows all-ps \\\n  --roster-x poolq \\\n  --n-bins 16 \\\n  --poolq-binning quantile \\\n  --output-tag perm_poolq_seasony_allps_q16_dft \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero \\\n  --dft",
+      "command_one_line": "python sports/scripts/pass_a_empirical_bundle.py --season-min 2011 --season-max 2021 --y-draft-mode season --panel-rows all-ps --roster-x poolq --n-bins 16 --poolq-binning quantile --output-tag perm_poolq_seasony_allps_q16_dft --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero --dft",
+      "hero_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_poolq_q16_dft_min20_mg10_11_21_season_y_perm_poolq_seasony_allps_q16_dft.png",
+      "roster_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/PASS_A_binned_draft_rate_ability_poolq_q16_dft_min20_mg10_11_21_season_y_perm_poolq_seasony_allps_q16_dft.csv",
+      "provenance_json": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_poolq_q16_dft_min20_mg10_11_21_season_y_perm_poolq_seasony_allps_q16_dft_provenance.json",
+      "shape": {
+        "peak_vent": 15,
+        "peak_rate_pct": 19.242,
+        "bin0_rate_pct": 0.0,
+        "last_bin_rate_pct": 19.242,
+        "bin0_is_peak": false,
+        "beta_sq": null
+      },
+      "slide_index": 27
     },
     {
-      "slide_index": 28,
       "output_tag": "perm_poolq_seasony_allps_ew20_dft",
       "season_window": "11_21",
+      "season_min": 2011,
+      "season_max": 2021,
       "label": "11\u201321 \u00b7 team poolq (incl. self) \u00b7 season-Y label \u00b7 all PS rows \u00b7 EW20 +DFT",
       "spec": {
         "y_draft_mode": "season",
@@ -712,12 +1091,26 @@
         "n_bins: 16 \u2192 20",
         "dft: False \u2192 True"
       ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode season \\\n  --panel-rows all-ps \\\n  --roster-x poolq \\\n  --n-bins 20 \\\n  --poolq-binning equal_width \\\n  --output-tag perm_poolq_seasony_allps_ew20_dft \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero \\\n  --dft"
+      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode season \\\n  --panel-rows all-ps \\\n  --roster-x poolq \\\n  --n-bins 20 \\\n  --poolq-binning equal_width \\\n  --output-tag perm_poolq_seasony_allps_ew20_dft \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero \\\n  --dft",
+      "command_one_line": "python sports/scripts/pass_a_empirical_bundle.py --season-min 2011 --season-max 2021 --y-draft-mode season --panel-rows all-ps --roster-x poolq --n-bins 20 --poolq-binning equal_width --output-tag perm_poolq_seasony_allps_ew20_dft --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero --dft",
+      "hero_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_poolq_ew20_dft_min20_mg10_11_21_season_y_perm_poolq_seasony_allps_ew20_dft.png",
+      "roster_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/PASS_A_binned_draft_rate_ability_poolq_ew20_dft_min20_mg10_11_21_season_y_perm_poolq_seasony_allps_ew20_dft.csv",
+      "provenance_json": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_poolq_ew20_dft_min20_mg10_11_21_season_y_perm_poolq_seasony_allps_ew20_dft_provenance.json",
+      "shape": {
+        "peak_vent": 19,
+        "peak_rate_pct": 21.871,
+        "bin0_rate_pct": 0.0,
+        "last_bin_rate_pct": 21.871,
+        "bin0_is_peak": false,
+        "beta_sq": null
+      },
+      "slide_index": 28
     },
     {
-      "slide_index": 29,
       "output_tag": "perm_poolq_seasony_lastps_q16",
       "season_window": "11_21",
+      "season_min": 2011,
+      "season_max": 2021,
       "label": "11\u201321 \u00b7 team poolq (incl. self) \u00b7 season-Y label \u00b7 last PS only (cross-section) \u00b7 QTL16 ALLT",
       "spec": {
         "y_draft_mode": "season",
@@ -737,12 +1130,26 @@
         "y_draft_mode: ever \u2192 season",
         "panel_rows: all-ps \u2192 last-ps"
       ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode season \\\n  --panel-rows last-ps \\\n  --roster-x poolq \\\n  --n-bins 16 \\\n  --poolq-binning quantile \\\n  --output-tag perm_poolq_seasony_lastps_q16 \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero"
+      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode season \\\n  --panel-rows last-ps \\\n  --roster-x poolq \\\n  --n-bins 16 \\\n  --poolq-binning quantile \\\n  --output-tag perm_poolq_seasony_lastps_q16 \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero",
+      "command_one_line": "python sports/scripts/pass_a_empirical_bundle.py --season-min 2011 --season-max 2021 --y-draft-mode season --panel-rows last-ps --roster-x poolq --n-bins 16 --poolq-binning quantile --output-tag perm_poolq_seasony_lastps_q16 --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero",
+      "hero_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_poolq_q16_allt_min20_mg10_11_21_season_y_last_ps_perm_poolq_seasony_lastps_q16.png",
+      "roster_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/PASS_A_binned_draft_rate_ability_poolq_q16_allt_min20_mg10_11_21_season_y_last_ps_perm_poolq_seasony_lastps_q16.csv",
+      "provenance_json": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_poolq_q16_allt_min20_mg10_11_21_season_y_last_ps_perm_poolq_seasony_lastps_q16_provenance.json",
+      "shape": {
+        "peak_vent": 15,
+        "peak_rate_pct": 15.198,
+        "bin0_rate_pct": 0.0,
+        "last_bin_rate_pct": 15.198,
+        "bin0_is_peak": false,
+        "beta_sq": null
+      },
+      "slide_index": 29
     },
     {
-      "slide_index": 30,
       "output_tag": "perm_poolq_seasony_lastps_ew20",
       "season_window": "11_21",
+      "season_min": 2011,
+      "season_max": 2021,
       "label": "11\u201321 \u00b7 team poolq (incl. self) \u00b7 season-Y label \u00b7 last PS only (cross-section) \u00b7 EW20 ALLT",
       "spec": {
         "y_draft_mode": "season",
@@ -764,12 +1171,26 @@
         "poolq_binning: quantile \u2192 equal_width",
         "n_bins: 16 \u2192 20"
       ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode season \\\n  --panel-rows last-ps \\\n  --roster-x poolq \\\n  --n-bins 20 \\\n  --poolq-binning equal_width \\\n  --output-tag perm_poolq_seasony_lastps_ew20 \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero"
+      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode season \\\n  --panel-rows last-ps \\\n  --roster-x poolq \\\n  --n-bins 20 \\\n  --poolq-binning equal_width \\\n  --output-tag perm_poolq_seasony_lastps_ew20 \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero",
+      "command_one_line": "python sports/scripts/pass_a_empirical_bundle.py --season-min 2011 --season-max 2021 --y-draft-mode season --panel-rows last-ps --roster-x poolq --n-bins 20 --poolq-binning equal_width --output-tag perm_poolq_seasony_lastps_ew20 --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero",
+      "hero_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_poolq_ew20_allt_min20_mg10_11_21_season_y_last_ps_perm_poolq_seasony_lastps_ew20.png",
+      "roster_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/PASS_A_binned_draft_rate_ability_poolq_ew20_allt_min20_mg10_11_21_season_y_last_ps_perm_poolq_seasony_lastps_ew20.csv",
+      "provenance_json": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_poolq_ew20_allt_min20_mg10_11_21_season_y_last_ps_perm_poolq_seasony_lastps_ew20_provenance.json",
+      "shape": {
+        "peak_vent": 19,
+        "peak_rate_pct": 16.768,
+        "bin0_rate_pct": 0.0,
+        "last_bin_rate_pct": 16.768,
+        "bin0_is_peak": false,
+        "beta_sq": null
+      },
+      "slide_index": 30
     },
     {
-      "slide_index": 31,
       "output_tag": "perm_poolq_seasony_lastps_q16_dft",
       "season_window": "11_21",
+      "season_min": 2011,
+      "season_max": 2021,
       "label": "11\u201321 \u00b7 team poolq (incl. self) \u00b7 season-Y label \u00b7 last PS only (cross-section) \u00b7 QTL16 +DFT",
       "spec": {
         "y_draft_mode": "season",
@@ -790,12 +1211,26 @@
         "panel_rows: all-ps \u2192 last-ps",
         "dft: False \u2192 True"
       ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode season \\\n  --panel-rows last-ps \\\n  --roster-x poolq \\\n  --n-bins 16 \\\n  --poolq-binning quantile \\\n  --output-tag perm_poolq_seasony_lastps_q16_dft \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero \\\n  --dft"
+      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode season \\\n  --panel-rows last-ps \\\n  --roster-x poolq \\\n  --n-bins 16 \\\n  --poolq-binning quantile \\\n  --output-tag perm_poolq_seasony_lastps_q16_dft \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero \\\n  --dft",
+      "command_one_line": "python sports/scripts/pass_a_empirical_bundle.py --season-min 2011 --season-max 2021 --y-draft-mode season --panel-rows last-ps --roster-x poolq --n-bins 16 --poolq-binning quantile --output-tag perm_poolq_seasony_lastps_q16_dft --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero --dft",
+      "hero_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_poolq_q16_dft_min20_mg10_11_21_season_y_last_ps_perm_poolq_seasony_lastps_q16_dft.png",
+      "roster_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/PASS_A_binned_draft_rate_ability_poolq_q16_dft_min20_mg10_11_21_season_y_last_ps_perm_poolq_seasony_lastps_q16_dft.csv",
+      "provenance_json": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_poolq_q16_dft_min20_mg10_11_21_season_y_last_ps_perm_poolq_seasony_lastps_q16_dft_provenance.json",
+      "shape": {
+        "peak_vent": 15,
+        "peak_rate_pct": 37.473,
+        "bin0_rate_pct": 0.0,
+        "last_bin_rate_pct": 37.473,
+        "bin0_is_peak": false,
+        "beta_sq": null
+      },
+      "slide_index": 31
     },
     {
-      "slide_index": 32,
       "output_tag": "perm_poolq_seasony_lastps_ew20_dft",
       "season_window": "11_21",
+      "season_min": 2011,
+      "season_max": 2021,
       "label": "11\u201321 \u00b7 team poolq (incl. self) \u00b7 season-Y label \u00b7 last PS only (cross-section) \u00b7 EW20 +DFT",
       "spec": {
         "y_draft_mode": "season",
@@ -818,12 +1253,26 @@
         "n_bins: 16 \u2192 20",
         "dft: False \u2192 True"
       ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode season \\\n  --panel-rows last-ps \\\n  --roster-x poolq \\\n  --n-bins 20 \\\n  --poolq-binning equal_width \\\n  --output-tag perm_poolq_seasony_lastps_ew20_dft \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero \\\n  --dft"
+      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2011 \\\n  --season-max 2021 \\\n  --y-draft-mode season \\\n  --panel-rows last-ps \\\n  --roster-x poolq \\\n  --n-bins 20 \\\n  --poolq-binning equal_width \\\n  --output-tag perm_poolq_seasony_lastps_ew20_dft \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero \\\n  --dft",
+      "command_one_line": "python sports/scripts/pass_a_empirical_bundle.py --season-min 2011 --season-max 2021 --y-draft-mode season --panel-rows last-ps --roster-x poolq --n-bins 20 --poolq-binning equal_width --output-tag perm_poolq_seasony_lastps_ew20_dft --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero --dft",
+      "hero_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_poolq_ew20_dft_min20_mg10_11_21_season_y_last_ps_perm_poolq_seasony_lastps_ew20_dft.png",
+      "roster_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/PASS_A_binned_draft_rate_ability_poolq_ew20_dft_min20_mg10_11_21_season_y_last_ps_perm_poolq_seasony_lastps_ew20_dft.csv",
+      "provenance_json": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_poolq_ew20_dft_min20_mg10_11_21_season_y_last_ps_perm_poolq_seasony_lastps_ew20_dft_provenance.json",
+      "shape": {
+        "peak_vent": 19,
+        "peak_rate_pct": 39.51,
+        "bin0_rate_pct": 0.0,
+        "last_bin_rate_pct": 39.51,
+        "bin0_is_peak": false,
+        "beta_sq": null
+      },
+      "slide_index": 32
     },
     {
-      "slide_index": 33,
       "output_tag": "FIXED_HERO",
       "season_window": "13_21",
+      "season_min": 2013,
+      "season_max": 2021,
       "label": "FIXED HERO \u2014 canonical deck (13\u201321)",
       "spec": {
         "y_draft_mode": "ever",
@@ -841,12 +1290,26 @@
       "diff_from_baseline": [
         "season_window: 11_21 \u2192 13_21"
       ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2013 \\\n  --season-max 2021 \\\n  --y-draft-mode ever \\\n  --panel-rows all-ps \\\n  --roster-x poolq_loo \\\n  --n-bins 16 \\\n  --poolq-binning quantile \\\n  --output-tag FIXED_HERO \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero"
+      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2013 \\\n  --season-max 2021 \\\n  --y-draft-mode ever \\\n  --panel-rows all-ps \\\n  --roster-x poolq_loo \\\n  --n-bins 16 \\\n  --poolq-binning quantile \\\n  --output-tag FIXED_HERO \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero",
+      "command_one_line": "python sports/scripts/pass_a_empirical_bundle.py --season-min 2013 --season-max 2021 --y-draft-mode ever --panel-rows all-ps --roster-x poolq_loo --n-bins 16 --poolq-binning quantile --output-tag FIXED_HERO --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero",
+      "hero_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_q16_allt_min20_mg10_13_21_FIXED_HERO.png",
+      "roster_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/PASS_A_binned_draft_rate_ability_q16_allt_min20_mg10_13_21_FIXED_HERO.csv",
+      "provenance_json": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_q16_allt_min20_mg10_13_21_FIXED_HERO_provenance.json",
+      "shape": {
+        "peak_vent": 15,
+        "peak_rate_pct": 10.076,
+        "bin0_rate_pct": 0.042,
+        "last_bin_rate_pct": 10.076,
+        "bin0_is_peak": false,
+        "beta_sq": null
+      },
+      "slide_index": 33
     },
     {
-      "slide_index": 34,
       "output_tag": "perm_loo_ever_allps_ew20",
       "season_window": "13_21",
+      "season_min": 2013,
+      "season_max": 2021,
       "label": "13\u201321 \u00b7 LOO poolq_loo \u00b7 ever-draft \u00b7 all PS rows \u00b7 EW20 ALLT",
       "spec": {
         "y_draft_mode": "ever",
@@ -866,791 +1329,20 @@
         "poolq_binning: quantile \u2192 equal_width",
         "n_bins: 16 \u2192 20"
       ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2013 \\\n  --season-max 2021 \\\n  --y-draft-mode ever \\\n  --panel-rows all-ps \\\n  --roster-x poolq_loo \\\n  --n-bins 20 \\\n  --poolq-binning equal_width \\\n  --output-tag perm_loo_ever_allps_ew20 \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero"
-    },
-    {
-      "slide_index": 35,
-      "output_tag": "perm_loo_ever_allps_q16_dft",
-      "season_window": "13_21",
-      "label": "13\u201321 \u00b7 LOO poolq_loo \u00b7 ever-draft \u00b7 all PS rows \u00b7 QTL16 +DFT",
-      "spec": {
-        "y_draft_mode": "ever",
-        "panel_rows": "all-ps",
-        "roster_x": "poolq_loo",
-        "n_bins": 16,
-        "poolq_binning": "quantile",
-        "dft": true,
-        "season_min": 2013,
-        "season_max": 2021,
-        "season_window": "13_21",
-        "output_tag": "perm_loo_ever_allps_q16_dft",
-        "label": "13\u201321 \u00b7 LOO poolq_loo \u00b7 ever-draft \u00b7 all PS rows \u00b7 QTL16 +DFT"
+      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2013 \\\n  --season-max 2021 \\\n  --y-draft-mode ever \\\n  --panel-rows all-ps \\\n  --roster-x poolq_loo \\\n  --n-bins 20 \\\n  --poolq-binning equal_width \\\n  --output-tag perm_loo_ever_allps_ew20 \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero",
+      "command_one_line": "python sports/scripts/pass_a_empirical_bundle.py --season-min 2013 --season-max 2021 --y-draft-mode ever --panel-rows all-ps --roster-x poolq_loo --n-bins 20 --poolq-binning equal_width --output-tag perm_loo_ever_allps_ew20 --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero",
+      "hero_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_ew20_allt_min20_mg10_13_21_perm_loo_ever_allps_ew20.png",
+      "roster_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/PASS_A_binned_draft_rate_ability_ew20_allt_min20_mg10_13_21_perm_loo_ever_allps_ew20.csv",
+      "provenance_json": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_ew20_allt_min20_mg10_13_21_perm_loo_ever_allps_ew20_provenance.json",
+      "shape": {
+        "peak_vent": 19,
+        "peak_rate_pct": 10.808,
+        "bin0_rate_pct": 0.052,
+        "last_bin_rate_pct": 10.808,
+        "bin0_is_peak": false,
+        "beta_sq": null
       },
-      "diff_from_baseline": [
-        "season_window: 11_21 \u2192 13_21",
-        "dft: False \u2192 True"
-      ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2013 \\\n  --season-max 2021 \\\n  --y-draft-mode ever \\\n  --panel-rows all-ps \\\n  --roster-x poolq_loo \\\n  --n-bins 16 \\\n  --poolq-binning quantile \\\n  --output-tag perm_loo_ever_allps_q16_dft \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero \\\n  --dft"
-    },
-    {
-      "slide_index": 36,
-      "output_tag": "perm_loo_ever_allps_ew20_dft",
-      "season_window": "13_21",
-      "label": "13\u201321 \u00b7 LOO poolq_loo \u00b7 ever-draft \u00b7 all PS rows \u00b7 EW20 +DFT",
-      "spec": {
-        "y_draft_mode": "ever",
-        "panel_rows": "all-ps",
-        "roster_x": "poolq_loo",
-        "n_bins": 20,
-        "poolq_binning": "equal_width",
-        "dft": true,
-        "season_min": 2013,
-        "season_max": 2021,
-        "season_window": "13_21",
-        "output_tag": "perm_loo_ever_allps_ew20_dft",
-        "label": "13\u201321 \u00b7 LOO poolq_loo \u00b7 ever-draft \u00b7 all PS rows \u00b7 EW20 +DFT"
-      },
-      "diff_from_baseline": [
-        "season_window: 11_21 \u2192 13_21",
-        "poolq_binning: quantile \u2192 equal_width",
-        "n_bins: 16 \u2192 20",
-        "dft: False \u2192 True"
-      ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2013 \\\n  --season-max 2021 \\\n  --y-draft-mode ever \\\n  --panel-rows all-ps \\\n  --roster-x poolq_loo \\\n  --n-bins 20 \\\n  --poolq-binning equal_width \\\n  --output-tag perm_loo_ever_allps_ew20_dft \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero \\\n  --dft"
-    },
-    {
-      "slide_index": 37,
-      "output_tag": "perm_loo_ever_lastps_q16",
-      "season_window": "13_21",
-      "label": "13\u201321 \u00b7 LOO poolq_loo \u00b7 ever-draft \u00b7 last PS only (cross-section) \u00b7 QTL16 ALLT",
-      "spec": {
-        "y_draft_mode": "ever",
-        "panel_rows": "last-ps",
-        "roster_x": "poolq_loo",
-        "n_bins": 16,
-        "poolq_binning": "quantile",
-        "dft": false,
-        "season_min": 2013,
-        "season_max": 2021,
-        "season_window": "13_21",
-        "output_tag": "perm_loo_ever_lastps_q16",
-        "label": "13\u201321 \u00b7 LOO poolq_loo \u00b7 ever-draft \u00b7 last PS only (cross-section) \u00b7 QTL16 ALLT"
-      },
-      "diff_from_baseline": [
-        "season_window: 11_21 \u2192 13_21",
-        "panel_rows: all-ps \u2192 last-ps"
-      ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2013 \\\n  --season-max 2021 \\\n  --y-draft-mode ever \\\n  --panel-rows last-ps \\\n  --roster-x poolq_loo \\\n  --n-bins 16 \\\n  --poolq-binning quantile \\\n  --output-tag perm_loo_ever_lastps_q16 \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero"
-    },
-    {
-      "slide_index": 38,
-      "output_tag": "perm_loo_ever_lastps_ew20",
-      "season_window": "13_21",
-      "label": "13\u201321 \u00b7 LOO poolq_loo \u00b7 ever-draft \u00b7 last PS only (cross-section) \u00b7 EW20 ALLT",
-      "spec": {
-        "y_draft_mode": "ever",
-        "panel_rows": "last-ps",
-        "roster_x": "poolq_loo",
-        "n_bins": 20,
-        "poolq_binning": "equal_width",
-        "dft": false,
-        "season_min": 2013,
-        "season_max": 2021,
-        "season_window": "13_21",
-        "output_tag": "perm_loo_ever_lastps_ew20",
-        "label": "13\u201321 \u00b7 LOO poolq_loo \u00b7 ever-draft \u00b7 last PS only (cross-section) \u00b7 EW20 ALLT"
-      },
-      "diff_from_baseline": [
-        "season_window: 11_21 \u2192 13_21",
-        "panel_rows: all-ps \u2192 last-ps",
-        "poolq_binning: quantile \u2192 equal_width",
-        "n_bins: 16 \u2192 20"
-      ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2013 \\\n  --season-max 2021 \\\n  --y-draft-mode ever \\\n  --panel-rows last-ps \\\n  --roster-x poolq_loo \\\n  --n-bins 20 \\\n  --poolq-binning equal_width \\\n  --output-tag perm_loo_ever_lastps_ew20 \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero"
-    },
-    {
-      "slide_index": 39,
-      "output_tag": "perm_loo_ever_lastps_q16_dft",
-      "season_window": "13_21",
-      "label": "13\u201321 \u00b7 LOO poolq_loo \u00b7 ever-draft \u00b7 last PS only (cross-section) \u00b7 QTL16 +DFT",
-      "spec": {
-        "y_draft_mode": "ever",
-        "panel_rows": "last-ps",
-        "roster_x": "poolq_loo",
-        "n_bins": 16,
-        "poolq_binning": "quantile",
-        "dft": true,
-        "season_min": 2013,
-        "season_max": 2021,
-        "season_window": "13_21",
-        "output_tag": "perm_loo_ever_lastps_q16_dft",
-        "label": "13\u201321 \u00b7 LOO poolq_loo \u00b7 ever-draft \u00b7 last PS only (cross-section) \u00b7 QTL16 +DFT"
-      },
-      "diff_from_baseline": [
-        "season_window: 11_21 \u2192 13_21",
-        "panel_rows: all-ps \u2192 last-ps",
-        "dft: False \u2192 True"
-      ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2013 \\\n  --season-max 2021 \\\n  --y-draft-mode ever \\\n  --panel-rows last-ps \\\n  --roster-x poolq_loo \\\n  --n-bins 16 \\\n  --poolq-binning quantile \\\n  --output-tag perm_loo_ever_lastps_q16_dft \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero \\\n  --dft"
-    },
-    {
-      "slide_index": 40,
-      "output_tag": "perm_loo_ever_lastps_ew20_dft",
-      "season_window": "13_21",
-      "label": "13\u201321 \u00b7 LOO poolq_loo \u00b7 ever-draft \u00b7 last PS only (cross-section) \u00b7 EW20 +DFT",
-      "spec": {
-        "y_draft_mode": "ever",
-        "panel_rows": "last-ps",
-        "roster_x": "poolq_loo",
-        "n_bins": 20,
-        "poolq_binning": "equal_width",
-        "dft": true,
-        "season_min": 2013,
-        "season_max": 2021,
-        "season_window": "13_21",
-        "output_tag": "perm_loo_ever_lastps_ew20_dft",
-        "label": "13\u201321 \u00b7 LOO poolq_loo \u00b7 ever-draft \u00b7 last PS only (cross-section) \u00b7 EW20 +DFT"
-      },
-      "diff_from_baseline": [
-        "season_window: 11_21 \u2192 13_21",
-        "panel_rows: all-ps \u2192 last-ps",
-        "poolq_binning: quantile \u2192 equal_width",
-        "n_bins: 16 \u2192 20",
-        "dft: False \u2192 True"
-      ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2013 \\\n  --season-max 2021 \\\n  --y-draft-mode ever \\\n  --panel-rows last-ps \\\n  --roster-x poolq_loo \\\n  --n-bins 20 \\\n  --poolq-binning equal_width \\\n  --output-tag perm_loo_ever_lastps_ew20_dft \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero \\\n  --dft"
-    },
-    {
-      "slide_index": 41,
-      "output_tag": "perm_loo_seasony_allps_q16",
-      "season_window": "13_21",
-      "label": "13\u201321 \u00b7 LOO poolq_loo \u00b7 season-Y label \u00b7 all PS rows \u00b7 QTL16 ALLT",
-      "spec": {
-        "y_draft_mode": "season",
-        "panel_rows": "all-ps",
-        "roster_x": "poolq_loo",
-        "n_bins": 16,
-        "poolq_binning": "quantile",
-        "dft": false,
-        "season_min": 2013,
-        "season_max": 2021,
-        "season_window": "13_21",
-        "output_tag": "perm_loo_seasony_allps_q16",
-        "label": "13\u201321 \u00b7 LOO poolq_loo \u00b7 season-Y label \u00b7 all PS rows \u00b7 QTL16 ALLT"
-      },
-      "diff_from_baseline": [
-        "season_window: 11_21 \u2192 13_21",
-        "y_draft_mode: ever \u2192 season"
-      ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2013 \\\n  --season-max 2021 \\\n  --y-draft-mode season \\\n  --panel-rows all-ps \\\n  --roster-x poolq_loo \\\n  --n-bins 16 \\\n  --poolq-binning quantile \\\n  --output-tag perm_loo_seasony_allps_q16 \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero"
-    },
-    {
-      "slide_index": 42,
-      "output_tag": "perm_loo_seasony_allps_ew20",
-      "season_window": "13_21",
-      "label": "13\u201321 \u00b7 LOO poolq_loo \u00b7 season-Y label \u00b7 all PS rows \u00b7 EW20 ALLT",
-      "spec": {
-        "y_draft_mode": "season",
-        "panel_rows": "all-ps",
-        "roster_x": "poolq_loo",
-        "n_bins": 20,
-        "poolq_binning": "equal_width",
-        "dft": false,
-        "season_min": 2013,
-        "season_max": 2021,
-        "season_window": "13_21",
-        "output_tag": "perm_loo_seasony_allps_ew20",
-        "label": "13\u201321 \u00b7 LOO poolq_loo \u00b7 season-Y label \u00b7 all PS rows \u00b7 EW20 ALLT"
-      },
-      "diff_from_baseline": [
-        "season_window: 11_21 \u2192 13_21",
-        "y_draft_mode: ever \u2192 season",
-        "poolq_binning: quantile \u2192 equal_width",
-        "n_bins: 16 \u2192 20"
-      ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2013 \\\n  --season-max 2021 \\\n  --y-draft-mode season \\\n  --panel-rows all-ps \\\n  --roster-x poolq_loo \\\n  --n-bins 20 \\\n  --poolq-binning equal_width \\\n  --output-tag perm_loo_seasony_allps_ew20 \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero"
-    },
-    {
-      "slide_index": 43,
-      "output_tag": "perm_loo_seasony_allps_q16_dft",
-      "season_window": "13_21",
-      "label": "13\u201321 \u00b7 LOO poolq_loo \u00b7 season-Y label \u00b7 all PS rows \u00b7 QTL16 +DFT",
-      "spec": {
-        "y_draft_mode": "season",
-        "panel_rows": "all-ps",
-        "roster_x": "poolq_loo",
-        "n_bins": 16,
-        "poolq_binning": "quantile",
-        "dft": true,
-        "season_min": 2013,
-        "season_max": 2021,
-        "season_window": "13_21",
-        "output_tag": "perm_loo_seasony_allps_q16_dft",
-        "label": "13\u201321 \u00b7 LOO poolq_loo \u00b7 season-Y label \u00b7 all PS rows \u00b7 QTL16 +DFT"
-      },
-      "diff_from_baseline": [
-        "season_window: 11_21 \u2192 13_21",
-        "y_draft_mode: ever \u2192 season",
-        "dft: False \u2192 True"
-      ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2013 \\\n  --season-max 2021 \\\n  --y-draft-mode season \\\n  --panel-rows all-ps \\\n  --roster-x poolq_loo \\\n  --n-bins 16 \\\n  --poolq-binning quantile \\\n  --output-tag perm_loo_seasony_allps_q16_dft \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero \\\n  --dft"
-    },
-    {
-      "slide_index": 44,
-      "output_tag": "perm_loo_seasony_allps_ew20_dft",
-      "season_window": "13_21",
-      "label": "13\u201321 \u00b7 LOO poolq_loo \u00b7 season-Y label \u00b7 all PS rows \u00b7 EW20 +DFT",
-      "spec": {
-        "y_draft_mode": "season",
-        "panel_rows": "all-ps",
-        "roster_x": "poolq_loo",
-        "n_bins": 20,
-        "poolq_binning": "equal_width",
-        "dft": true,
-        "season_min": 2013,
-        "season_max": 2021,
-        "season_window": "13_21",
-        "output_tag": "perm_loo_seasony_allps_ew20_dft",
-        "label": "13\u201321 \u00b7 LOO poolq_loo \u00b7 season-Y label \u00b7 all PS rows \u00b7 EW20 +DFT"
-      },
-      "diff_from_baseline": [
-        "season_window: 11_21 \u2192 13_21",
-        "y_draft_mode: ever \u2192 season",
-        "poolq_binning: quantile \u2192 equal_width",
-        "n_bins: 16 \u2192 20",
-        "dft: False \u2192 True"
-      ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2013 \\\n  --season-max 2021 \\\n  --y-draft-mode season \\\n  --panel-rows all-ps \\\n  --roster-x poolq_loo \\\n  --n-bins 20 \\\n  --poolq-binning equal_width \\\n  --output-tag perm_loo_seasony_allps_ew20_dft \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero \\\n  --dft"
-    },
-    {
-      "slide_index": 45,
-      "output_tag": "perm_loo_seasony_lastps_q16",
-      "season_window": "13_21",
-      "label": "13\u201321 \u00b7 LOO poolq_loo \u00b7 season-Y label \u00b7 last PS only (cross-section) \u00b7 QTL16 ALLT",
-      "spec": {
-        "y_draft_mode": "season",
-        "panel_rows": "last-ps",
-        "roster_x": "poolq_loo",
-        "n_bins": 16,
-        "poolq_binning": "quantile",
-        "dft": false,
-        "season_min": 2013,
-        "season_max": 2021,
-        "season_window": "13_21",
-        "output_tag": "perm_loo_seasony_lastps_q16",
-        "label": "13\u201321 \u00b7 LOO poolq_loo \u00b7 season-Y label \u00b7 last PS only (cross-section) \u00b7 QTL16 ALLT"
-      },
-      "diff_from_baseline": [
-        "season_window: 11_21 \u2192 13_21",
-        "y_draft_mode: ever \u2192 season",
-        "panel_rows: all-ps \u2192 last-ps"
-      ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2013 \\\n  --season-max 2021 \\\n  --y-draft-mode season \\\n  --panel-rows last-ps \\\n  --roster-x poolq_loo \\\n  --n-bins 16 \\\n  --poolq-binning quantile \\\n  --output-tag perm_loo_seasony_lastps_q16 \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero"
-    },
-    {
-      "slide_index": 46,
-      "output_tag": "perm_loo_seasony_lastps_ew20",
-      "season_window": "13_21",
-      "label": "13\u201321 \u00b7 LOO poolq_loo \u00b7 season-Y label \u00b7 last PS only (cross-section) \u00b7 EW20 ALLT",
-      "spec": {
-        "y_draft_mode": "season",
-        "panel_rows": "last-ps",
-        "roster_x": "poolq_loo",
-        "n_bins": 20,
-        "poolq_binning": "equal_width",
-        "dft": false,
-        "season_min": 2013,
-        "season_max": 2021,
-        "season_window": "13_21",
-        "output_tag": "perm_loo_seasony_lastps_ew20",
-        "label": "13\u201321 \u00b7 LOO poolq_loo \u00b7 season-Y label \u00b7 last PS only (cross-section) \u00b7 EW20 ALLT"
-      },
-      "diff_from_baseline": [
-        "season_window: 11_21 \u2192 13_21",
-        "y_draft_mode: ever \u2192 season",
-        "panel_rows: all-ps \u2192 last-ps",
-        "poolq_binning: quantile \u2192 equal_width",
-        "n_bins: 16 \u2192 20"
-      ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2013 \\\n  --season-max 2021 \\\n  --y-draft-mode season \\\n  --panel-rows last-ps \\\n  --roster-x poolq_loo \\\n  --n-bins 20 \\\n  --poolq-binning equal_width \\\n  --output-tag perm_loo_seasony_lastps_ew20 \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero"
-    },
-    {
-      "slide_index": 47,
-      "output_tag": "perm_loo_seasony_lastps_q16_dft",
-      "season_window": "13_21",
-      "label": "13\u201321 \u00b7 LOO poolq_loo \u00b7 season-Y label \u00b7 last PS only (cross-section) \u00b7 QTL16 +DFT",
-      "spec": {
-        "y_draft_mode": "season",
-        "panel_rows": "last-ps",
-        "roster_x": "poolq_loo",
-        "n_bins": 16,
-        "poolq_binning": "quantile",
-        "dft": true,
-        "season_min": 2013,
-        "season_max": 2021,
-        "season_window": "13_21",
-        "output_tag": "perm_loo_seasony_lastps_q16_dft",
-        "label": "13\u201321 \u00b7 LOO poolq_loo \u00b7 season-Y label \u00b7 last PS only (cross-section) \u00b7 QTL16 +DFT"
-      },
-      "diff_from_baseline": [
-        "season_window: 11_21 \u2192 13_21",
-        "y_draft_mode: ever \u2192 season",
-        "panel_rows: all-ps \u2192 last-ps",
-        "dft: False \u2192 True"
-      ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2013 \\\n  --season-max 2021 \\\n  --y-draft-mode season \\\n  --panel-rows last-ps \\\n  --roster-x poolq_loo \\\n  --n-bins 16 \\\n  --poolq-binning quantile \\\n  --output-tag perm_loo_seasony_lastps_q16_dft \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero \\\n  --dft"
-    },
-    {
-      "slide_index": 48,
-      "output_tag": "perm_loo_seasony_lastps_ew20_dft",
-      "season_window": "13_21",
-      "label": "13\u201321 \u00b7 LOO poolq_loo \u00b7 season-Y label \u00b7 last PS only (cross-section) \u00b7 EW20 +DFT",
-      "spec": {
-        "y_draft_mode": "season",
-        "panel_rows": "last-ps",
-        "roster_x": "poolq_loo",
-        "n_bins": 20,
-        "poolq_binning": "equal_width",
-        "dft": true,
-        "season_min": 2013,
-        "season_max": 2021,
-        "season_window": "13_21",
-        "output_tag": "perm_loo_seasony_lastps_ew20_dft",
-        "label": "13\u201321 \u00b7 LOO poolq_loo \u00b7 season-Y label \u00b7 last PS only (cross-section) \u00b7 EW20 +DFT"
-      },
-      "diff_from_baseline": [
-        "season_window: 11_21 \u2192 13_21",
-        "y_draft_mode: ever \u2192 season",
-        "panel_rows: all-ps \u2192 last-ps",
-        "poolq_binning: quantile \u2192 equal_width",
-        "n_bins: 16 \u2192 20",
-        "dft: False \u2192 True"
-      ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2013 \\\n  --season-max 2021 \\\n  --y-draft-mode season \\\n  --panel-rows last-ps \\\n  --roster-x poolq_loo \\\n  --n-bins 20 \\\n  --poolq-binning equal_width \\\n  --output-tag perm_loo_seasony_lastps_ew20_dft \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero \\\n  --dft"
-    },
-    {
-      "slide_index": 49,
-      "output_tag": "perm_poolq_ever_allps_q16",
-      "season_window": "13_21",
-      "label": "13\u201321 \u00b7 team poolq (incl. self) \u00b7 ever-draft \u00b7 all PS rows \u00b7 QTL16 ALLT",
-      "spec": {
-        "y_draft_mode": "ever",
-        "panel_rows": "all-ps",
-        "roster_x": "poolq",
-        "n_bins": 16,
-        "poolq_binning": "quantile",
-        "dft": false,
-        "season_min": 2013,
-        "season_max": 2021,
-        "season_window": "13_21",
-        "output_tag": "perm_poolq_ever_allps_q16",
-        "label": "13\u201321 \u00b7 team poolq (incl. self) \u00b7 ever-draft \u00b7 all PS rows \u00b7 QTL16 ALLT"
-      },
-      "diff_from_baseline": [
-        "season_window: 11_21 \u2192 13_21",
-        "roster_x: poolq_loo \u2192 poolq"
-      ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2013 \\\n  --season-max 2021 \\\n  --y-draft-mode ever \\\n  --panel-rows all-ps \\\n  --roster-x poolq \\\n  --n-bins 16 \\\n  --poolq-binning quantile \\\n  --output-tag perm_poolq_ever_allps_q16 \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero"
-    },
-    {
-      "slide_index": 50,
-      "output_tag": "perm_poolq_ever_allps_ew20",
-      "season_window": "13_21",
-      "label": "13\u201321 \u00b7 team poolq (incl. self) \u00b7 ever-draft \u00b7 all PS rows \u00b7 EW20 ALLT",
-      "spec": {
-        "y_draft_mode": "ever",
-        "panel_rows": "all-ps",
-        "roster_x": "poolq",
-        "n_bins": 20,
-        "poolq_binning": "equal_width",
-        "dft": false,
-        "season_min": 2013,
-        "season_max": 2021,
-        "season_window": "13_21",
-        "output_tag": "perm_poolq_ever_allps_ew20",
-        "label": "13\u201321 \u00b7 team poolq (incl. self) \u00b7 ever-draft \u00b7 all PS rows \u00b7 EW20 ALLT"
-      },
-      "diff_from_baseline": [
-        "season_window: 11_21 \u2192 13_21",
-        "roster_x: poolq_loo \u2192 poolq",
-        "poolq_binning: quantile \u2192 equal_width",
-        "n_bins: 16 \u2192 20"
-      ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2013 \\\n  --season-max 2021 \\\n  --y-draft-mode ever \\\n  --panel-rows all-ps \\\n  --roster-x poolq \\\n  --n-bins 20 \\\n  --poolq-binning equal_width \\\n  --output-tag perm_poolq_ever_allps_ew20 \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero"
-    },
-    {
-      "slide_index": 51,
-      "output_tag": "perm_poolq_ever_allps_q16_dft",
-      "season_window": "13_21",
-      "label": "13\u201321 \u00b7 team poolq (incl. self) \u00b7 ever-draft \u00b7 all PS rows \u00b7 QTL16 +DFT",
-      "spec": {
-        "y_draft_mode": "ever",
-        "panel_rows": "all-ps",
-        "roster_x": "poolq",
-        "n_bins": 16,
-        "poolq_binning": "quantile",
-        "dft": true,
-        "season_min": 2013,
-        "season_max": 2021,
-        "season_window": "13_21",
-        "output_tag": "perm_poolq_ever_allps_q16_dft",
-        "label": "13\u201321 \u00b7 team poolq (incl. self) \u00b7 ever-draft \u00b7 all PS rows \u00b7 QTL16 +DFT"
-      },
-      "diff_from_baseline": [
-        "season_window: 11_21 \u2192 13_21",
-        "roster_x: poolq_loo \u2192 poolq",
-        "dft: False \u2192 True"
-      ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2013 \\\n  --season-max 2021 \\\n  --y-draft-mode ever \\\n  --panel-rows all-ps \\\n  --roster-x poolq \\\n  --n-bins 16 \\\n  --poolq-binning quantile \\\n  --output-tag perm_poolq_ever_allps_q16_dft \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero \\\n  --dft"
-    },
-    {
-      "slide_index": 52,
-      "output_tag": "perm_poolq_ever_allps_ew20_dft",
-      "season_window": "13_21",
-      "label": "13\u201321 \u00b7 team poolq (incl. self) \u00b7 ever-draft \u00b7 all PS rows \u00b7 EW20 +DFT",
-      "spec": {
-        "y_draft_mode": "ever",
-        "panel_rows": "all-ps",
-        "roster_x": "poolq",
-        "n_bins": 20,
-        "poolq_binning": "equal_width",
-        "dft": true,
-        "season_min": 2013,
-        "season_max": 2021,
-        "season_window": "13_21",
-        "output_tag": "perm_poolq_ever_allps_ew20_dft",
-        "label": "13\u201321 \u00b7 team poolq (incl. self) \u00b7 ever-draft \u00b7 all PS rows \u00b7 EW20 +DFT"
-      },
-      "diff_from_baseline": [
-        "season_window: 11_21 \u2192 13_21",
-        "roster_x: poolq_loo \u2192 poolq",
-        "poolq_binning: quantile \u2192 equal_width",
-        "n_bins: 16 \u2192 20",
-        "dft: False \u2192 True"
-      ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2013 \\\n  --season-max 2021 \\\n  --y-draft-mode ever \\\n  --panel-rows all-ps \\\n  --roster-x poolq \\\n  --n-bins 20 \\\n  --poolq-binning equal_width \\\n  --output-tag perm_poolq_ever_allps_ew20_dft \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero \\\n  --dft"
-    },
-    {
-      "slide_index": 53,
-      "output_tag": "perm_poolq_ever_lastps_q16",
-      "season_window": "13_21",
-      "label": "13\u201321 \u00b7 team poolq (incl. self) \u00b7 ever-draft \u00b7 last PS only (cross-section) \u00b7 QTL16 ALLT",
-      "spec": {
-        "y_draft_mode": "ever",
-        "panel_rows": "last-ps",
-        "roster_x": "poolq",
-        "n_bins": 16,
-        "poolq_binning": "quantile",
-        "dft": false,
-        "season_min": 2013,
-        "season_max": 2021,
-        "season_window": "13_21",
-        "output_tag": "perm_poolq_ever_lastps_q16",
-        "label": "13\u201321 \u00b7 team poolq (incl. self) \u00b7 ever-draft \u00b7 last PS only (cross-section) \u00b7 QTL16 ALLT"
-      },
-      "diff_from_baseline": [
-        "season_window: 11_21 \u2192 13_21",
-        "roster_x: poolq_loo \u2192 poolq",
-        "panel_rows: all-ps \u2192 last-ps"
-      ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2013 \\\n  --season-max 2021 \\\n  --y-draft-mode ever \\\n  --panel-rows last-ps \\\n  --roster-x poolq \\\n  --n-bins 16 \\\n  --poolq-binning quantile \\\n  --output-tag perm_poolq_ever_lastps_q16 \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero"
-    },
-    {
-      "slide_index": 54,
-      "output_tag": "perm_poolq_ever_lastps_ew20",
-      "season_window": "13_21",
-      "label": "13\u201321 \u00b7 team poolq (incl. self) \u00b7 ever-draft \u00b7 last PS only (cross-section) \u00b7 EW20 ALLT",
-      "spec": {
-        "y_draft_mode": "ever",
-        "panel_rows": "last-ps",
-        "roster_x": "poolq",
-        "n_bins": 20,
-        "poolq_binning": "equal_width",
-        "dft": false,
-        "season_min": 2013,
-        "season_max": 2021,
-        "season_window": "13_21",
-        "output_tag": "perm_poolq_ever_lastps_ew20",
-        "label": "13\u201321 \u00b7 team poolq (incl. self) \u00b7 ever-draft \u00b7 last PS only (cross-section) \u00b7 EW20 ALLT"
-      },
-      "diff_from_baseline": [
-        "season_window: 11_21 \u2192 13_21",
-        "roster_x: poolq_loo \u2192 poolq",
-        "panel_rows: all-ps \u2192 last-ps",
-        "poolq_binning: quantile \u2192 equal_width",
-        "n_bins: 16 \u2192 20"
-      ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2013 \\\n  --season-max 2021 \\\n  --y-draft-mode ever \\\n  --panel-rows last-ps \\\n  --roster-x poolq \\\n  --n-bins 20 \\\n  --poolq-binning equal_width \\\n  --output-tag perm_poolq_ever_lastps_ew20 \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero"
-    },
-    {
-      "slide_index": 55,
-      "output_tag": "perm_poolq_ever_lastps_q16_dft",
-      "season_window": "13_21",
-      "label": "13\u201321 \u00b7 team poolq (incl. self) \u00b7 ever-draft \u00b7 last PS only (cross-section) \u00b7 QTL16 +DFT",
-      "spec": {
-        "y_draft_mode": "ever",
-        "panel_rows": "last-ps",
-        "roster_x": "poolq",
-        "n_bins": 16,
-        "poolq_binning": "quantile",
-        "dft": true,
-        "season_min": 2013,
-        "season_max": 2021,
-        "season_window": "13_21",
-        "output_tag": "perm_poolq_ever_lastps_q16_dft",
-        "label": "13\u201321 \u00b7 team poolq (incl. self) \u00b7 ever-draft \u00b7 last PS only (cross-section) \u00b7 QTL16 +DFT"
-      },
-      "diff_from_baseline": [
-        "season_window: 11_21 \u2192 13_21",
-        "roster_x: poolq_loo \u2192 poolq",
-        "panel_rows: all-ps \u2192 last-ps",
-        "dft: False \u2192 True"
-      ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2013 \\\n  --season-max 2021 \\\n  --y-draft-mode ever \\\n  --panel-rows last-ps \\\n  --roster-x poolq \\\n  --n-bins 16 \\\n  --poolq-binning quantile \\\n  --output-tag perm_poolq_ever_lastps_q16_dft \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero \\\n  --dft"
-    },
-    {
-      "slide_index": 56,
-      "output_tag": "perm_poolq_ever_lastps_ew20_dft",
-      "season_window": "13_21",
-      "label": "13\u201321 \u00b7 team poolq (incl. self) \u00b7 ever-draft \u00b7 last PS only (cross-section) \u00b7 EW20 +DFT",
-      "spec": {
-        "y_draft_mode": "ever",
-        "panel_rows": "last-ps",
-        "roster_x": "poolq",
-        "n_bins": 20,
-        "poolq_binning": "equal_width",
-        "dft": true,
-        "season_min": 2013,
-        "season_max": 2021,
-        "season_window": "13_21",
-        "output_tag": "perm_poolq_ever_lastps_ew20_dft",
-        "label": "13\u201321 \u00b7 team poolq (incl. self) \u00b7 ever-draft \u00b7 last PS only (cross-section) \u00b7 EW20 +DFT"
-      },
-      "diff_from_baseline": [
-        "season_window: 11_21 \u2192 13_21",
-        "roster_x: poolq_loo \u2192 poolq",
-        "panel_rows: all-ps \u2192 last-ps",
-        "poolq_binning: quantile \u2192 equal_width",
-        "n_bins: 16 \u2192 20",
-        "dft: False \u2192 True"
-      ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2013 \\\n  --season-max 2021 \\\n  --y-draft-mode ever \\\n  --panel-rows last-ps \\\n  --roster-x poolq \\\n  --n-bins 20 \\\n  --poolq-binning equal_width \\\n  --output-tag perm_poolq_ever_lastps_ew20_dft \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero \\\n  --dft"
-    },
-    {
-      "slide_index": 57,
-      "output_tag": "perm_poolq_seasony_allps_q16",
-      "season_window": "13_21",
-      "label": "13\u201321 \u00b7 team poolq (incl. self) \u00b7 season-Y label \u00b7 all PS rows \u00b7 QTL16 ALLT",
-      "spec": {
-        "y_draft_mode": "season",
-        "panel_rows": "all-ps",
-        "roster_x": "poolq",
-        "n_bins": 16,
-        "poolq_binning": "quantile",
-        "dft": false,
-        "season_min": 2013,
-        "season_max": 2021,
-        "season_window": "13_21",
-        "output_tag": "perm_poolq_seasony_allps_q16",
-        "label": "13\u201321 \u00b7 team poolq (incl. self) \u00b7 season-Y label \u00b7 all PS rows \u00b7 QTL16 ALLT"
-      },
-      "diff_from_baseline": [
-        "season_window: 11_21 \u2192 13_21",
-        "roster_x: poolq_loo \u2192 poolq",
-        "y_draft_mode: ever \u2192 season"
-      ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2013 \\\n  --season-max 2021 \\\n  --y-draft-mode season \\\n  --panel-rows all-ps \\\n  --roster-x poolq \\\n  --n-bins 16 \\\n  --poolq-binning quantile \\\n  --output-tag perm_poolq_seasony_allps_q16 \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero"
-    },
-    {
-      "slide_index": 58,
-      "output_tag": "perm_poolq_seasony_allps_ew20",
-      "season_window": "13_21",
-      "label": "13\u201321 \u00b7 team poolq (incl. self) \u00b7 season-Y label \u00b7 all PS rows \u00b7 EW20 ALLT",
-      "spec": {
-        "y_draft_mode": "season",
-        "panel_rows": "all-ps",
-        "roster_x": "poolq",
-        "n_bins": 20,
-        "poolq_binning": "equal_width",
-        "dft": false,
-        "season_min": 2013,
-        "season_max": 2021,
-        "season_window": "13_21",
-        "output_tag": "perm_poolq_seasony_allps_ew20",
-        "label": "13\u201321 \u00b7 team poolq (incl. self) \u00b7 season-Y label \u00b7 all PS rows \u00b7 EW20 ALLT"
-      },
-      "diff_from_baseline": [
-        "season_window: 11_21 \u2192 13_21",
-        "roster_x: poolq_loo \u2192 poolq",
-        "y_draft_mode: ever \u2192 season",
-        "poolq_binning: quantile \u2192 equal_width",
-        "n_bins: 16 \u2192 20"
-      ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2013 \\\n  --season-max 2021 \\\n  --y-draft-mode season \\\n  --panel-rows all-ps \\\n  --roster-x poolq \\\n  --n-bins 20 \\\n  --poolq-binning equal_width \\\n  --output-tag perm_poolq_seasony_allps_ew20 \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero"
-    },
-    {
-      "slide_index": 59,
-      "output_tag": "perm_poolq_seasony_allps_q16_dft",
-      "season_window": "13_21",
-      "label": "13\u201321 \u00b7 team poolq (incl. self) \u00b7 season-Y label \u00b7 all PS rows \u00b7 QTL16 +DFT",
-      "spec": {
-        "y_draft_mode": "season",
-        "panel_rows": "all-ps",
-        "roster_x": "poolq",
-        "n_bins": 16,
-        "poolq_binning": "quantile",
-        "dft": true,
-        "season_min": 2013,
-        "season_max": 2021,
-        "season_window": "13_21",
-        "output_tag": "perm_poolq_seasony_allps_q16_dft",
-        "label": "13\u201321 \u00b7 team poolq (incl. self) \u00b7 season-Y label \u00b7 all PS rows \u00b7 QTL16 +DFT"
-      },
-      "diff_from_baseline": [
-        "season_window: 11_21 \u2192 13_21",
-        "roster_x: poolq_loo \u2192 poolq",
-        "y_draft_mode: ever \u2192 season",
-        "dft: False \u2192 True"
-      ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2013 \\\n  --season-max 2021 \\\n  --y-draft-mode season \\\n  --panel-rows all-ps \\\n  --roster-x poolq \\\n  --n-bins 16 \\\n  --poolq-binning quantile \\\n  --output-tag perm_poolq_seasony_allps_q16_dft \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero \\\n  --dft"
-    },
-    {
-      "slide_index": 60,
-      "output_tag": "perm_poolq_seasony_allps_ew20_dft",
-      "season_window": "13_21",
-      "label": "13\u201321 \u00b7 team poolq (incl. self) \u00b7 season-Y label \u00b7 all PS rows \u00b7 EW20 +DFT",
-      "spec": {
-        "y_draft_mode": "season",
-        "panel_rows": "all-ps",
-        "roster_x": "poolq",
-        "n_bins": 20,
-        "poolq_binning": "equal_width",
-        "dft": true,
-        "season_min": 2013,
-        "season_max": 2021,
-        "season_window": "13_21",
-        "output_tag": "perm_poolq_seasony_allps_ew20_dft",
-        "label": "13\u201321 \u00b7 team poolq (incl. self) \u00b7 season-Y label \u00b7 all PS rows \u00b7 EW20 +DFT"
-      },
-      "diff_from_baseline": [
-        "season_window: 11_21 \u2192 13_21",
-        "roster_x: poolq_loo \u2192 poolq",
-        "y_draft_mode: ever \u2192 season",
-        "poolq_binning: quantile \u2192 equal_width",
-        "n_bins: 16 \u2192 20",
-        "dft: False \u2192 True"
-      ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2013 \\\n  --season-max 2021 \\\n  --y-draft-mode season \\\n  --panel-rows all-ps \\\n  --roster-x poolq \\\n  --n-bins 20 \\\n  --poolq-binning equal_width \\\n  --output-tag perm_poolq_seasony_allps_ew20_dft \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero \\\n  --dft"
-    },
-    {
-      "slide_index": 61,
-      "output_tag": "perm_poolq_seasony_lastps_q16",
-      "season_window": "13_21",
-      "label": "13\u201321 \u00b7 team poolq (incl. self) \u00b7 season-Y label \u00b7 last PS only (cross-section) \u00b7 QTL16 ALLT",
-      "spec": {
-        "y_draft_mode": "season",
-        "panel_rows": "last-ps",
-        "roster_x": "poolq",
-        "n_bins": 16,
-        "poolq_binning": "quantile",
-        "dft": false,
-        "season_min": 2013,
-        "season_max": 2021,
-        "season_window": "13_21",
-        "output_tag": "perm_poolq_seasony_lastps_q16",
-        "label": "13\u201321 \u00b7 team poolq (incl. self) \u00b7 season-Y label \u00b7 last PS only (cross-section) \u00b7 QTL16 ALLT"
-      },
-      "diff_from_baseline": [
-        "season_window: 11_21 \u2192 13_21",
-        "roster_x: poolq_loo \u2192 poolq",
-        "y_draft_mode: ever \u2192 season",
-        "panel_rows: all-ps \u2192 last-ps"
-      ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2013 \\\n  --season-max 2021 \\\n  --y-draft-mode season \\\n  --panel-rows last-ps \\\n  --roster-x poolq \\\n  --n-bins 16 \\\n  --poolq-binning quantile \\\n  --output-tag perm_poolq_seasony_lastps_q16 \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero"
-    },
-    {
-      "slide_index": 62,
-      "output_tag": "perm_poolq_seasony_lastps_ew20",
-      "season_window": "13_21",
-      "label": "13\u201321 \u00b7 team poolq (incl. self) \u00b7 season-Y label \u00b7 last PS only (cross-section) \u00b7 EW20 ALLT",
-      "spec": {
-        "y_draft_mode": "season",
-        "panel_rows": "last-ps",
-        "roster_x": "poolq",
-        "n_bins": 20,
-        "poolq_binning": "equal_width",
-        "dft": false,
-        "season_min": 2013,
-        "season_max": 2021,
-        "season_window": "13_21",
-        "output_tag": "perm_poolq_seasony_lastps_ew20",
-        "label": "13\u201321 \u00b7 team poolq (incl. self) \u00b7 season-Y label \u00b7 last PS only (cross-section) \u00b7 EW20 ALLT"
-      },
-      "diff_from_baseline": [
-        "season_window: 11_21 \u2192 13_21",
-        "roster_x: poolq_loo \u2192 poolq",
-        "y_draft_mode: ever \u2192 season",
-        "panel_rows: all-ps \u2192 last-ps",
-        "poolq_binning: quantile \u2192 equal_width",
-        "n_bins: 16 \u2192 20"
-      ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2013 \\\n  --season-max 2021 \\\n  --y-draft-mode season \\\n  --panel-rows last-ps \\\n  --roster-x poolq \\\n  --n-bins 20 \\\n  --poolq-binning equal_width \\\n  --output-tag perm_poolq_seasony_lastps_ew20 \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero"
-    },
-    {
-      "slide_index": 63,
-      "output_tag": "perm_poolq_seasony_lastps_q16_dft",
-      "season_window": "13_21",
-      "label": "13\u201321 \u00b7 team poolq (incl. self) \u00b7 season-Y label \u00b7 last PS only (cross-section) \u00b7 QTL16 +DFT",
-      "spec": {
-        "y_draft_mode": "season",
-        "panel_rows": "last-ps",
-        "roster_x": "poolq",
-        "n_bins": 16,
-        "poolq_binning": "quantile",
-        "dft": true,
-        "season_min": 2013,
-        "season_max": 2021,
-        "season_window": "13_21",
-        "output_tag": "perm_poolq_seasony_lastps_q16_dft",
-        "label": "13\u201321 \u00b7 team poolq (incl. self) \u00b7 season-Y label \u00b7 last PS only (cross-section) \u00b7 QTL16 +DFT"
-      },
-      "diff_from_baseline": [
-        "season_window: 11_21 \u2192 13_21",
-        "roster_x: poolq_loo \u2192 poolq",
-        "y_draft_mode: ever \u2192 season",
-        "panel_rows: all-ps \u2192 last-ps",
-        "dft: False \u2192 True"
-      ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2013 \\\n  --season-max 2021 \\\n  --y-draft-mode season \\\n  --panel-rows last-ps \\\n  --roster-x poolq \\\n  --n-bins 16 \\\n  --poolq-binning quantile \\\n  --output-tag perm_poolq_seasony_lastps_q16_dft \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero \\\n  --dft"
-    },
-    {
-      "slide_index": 64,
-      "output_tag": "perm_poolq_seasony_lastps_ew20_dft",
-      "season_window": "13_21",
-      "label": "13\u201321 \u00b7 team poolq (incl. self) \u00b7 season-Y label \u00b7 last PS only (cross-section) \u00b7 EW20 +DFT",
-      "spec": {
-        "y_draft_mode": "season",
-        "panel_rows": "last-ps",
-        "roster_x": "poolq",
-        "n_bins": 20,
-        "poolq_binning": "equal_width",
-        "dft": true,
-        "season_min": 2013,
-        "season_max": 2021,
-        "season_window": "13_21",
-        "output_tag": "perm_poolq_seasony_lastps_ew20_dft",
-        "label": "13\u201321 \u00b7 team poolq (incl. self) \u00b7 season-Y label \u00b7 last PS only (cross-section) \u00b7 EW20 +DFT"
-      },
-      "diff_from_baseline": [
-        "season_window: 11_21 \u2192 13_21",
-        "roster_x: poolq_loo \u2192 poolq",
-        "y_draft_mode: ever \u2192 season",
-        "panel_rows: all-ps \u2192 last-ps",
-        "poolq_binning: quantile \u2192 equal_width",
-        "n_bins: 16 \u2192 20",
-        "dft: False \u2192 True"
-      ],
-      "command": "python sports/scripts/pass_a_empirical_bundle.py \\\n  --season-min 2013 \\\n  --season-max 2021 \\\n  --y-draft-mode season \\\n  --panel-rows last-ps \\\n  --roster-x poolq \\\n  --n-bins 20 \\\n  --poolq-binning equal_width \\\n  --output-tag perm_poolq_seasony_lastps_ew20_dft \\\n  --output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero \\\n  --dft"
+      "slide_index": 34
     }
   ]
 }
