@@ -195,11 +195,20 @@ python sports/scripts/build_hero_permutation_slides.py
 
 | File | Purpose |
 |------|---------|
-| `hero_permutation_slides/manifest.json` | All specs, CLI commands, shape summaries |
+| `hero_permutation_slides/manifest.json` | All specs, CLI commands, shape summaries (`n_planned` / `n_runs` / `complete`) |
 | `hero_permutation_slides/HERO_permutation_slides_AUTO.pptx` | Intro + one slide per run (PNG + command box) |
 | `hero/HERO_*_{tag}.png` | Tagged PNGs (`FIXED_HERO`, `perm_loo_seasony_allps_q16`, …) |
 
 `--dry-run` writes manifest without running. Existing PNGs are skipped unless `--force`.
+
+**Repair manifest** (fix wrong `roster_csv` / shape summaries without re-running pass_a):
+
+```bash
+python sports/scripts/hero_permutation_sweep.py --tier real_full --repair-manifest
+python sports/scripts/build_hero_permutation_slides.py
+```
+
+Manifest fields: `n_planned` (grid size), `n_runs` (= `n_specs`, completed entries), `complete`.
 
 Legacy one-at-a-time script: `Slide_scripts.zsh` (use straight quotes `"`, not curly `"`).
 

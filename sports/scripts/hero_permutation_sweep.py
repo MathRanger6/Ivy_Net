@@ -45,6 +45,7 @@ from pd20_22_campaign_window import (  # noqa: E402
     PRIMARY_SEASON_MAX,
     PRIMARY_SEASON_MIN,
 )
+from plot_provenance import roster_x_slug  # noqa: E402
 
 BUNDLE = SCRIPTS / "pass_a_empirical_bundle.py"
 SANDBOX = REPO / "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox"
@@ -279,15 +280,48 @@ def _find_hero_png(tag: str, season_slug: str) -> Path | None:
     return matches[0] if matches else None
 
 
-def _find_roster_csv(tag: str, season_slug: str) -> Path | None:
-    matches = sorted(HERO_OUT.glob(f"PASS_A_binned_draft_rate_*_{season_slug}_{tag}.csv"))
+def _find_roster_csv(spec: HeroPermSpec, tag: str, season_slug: str) -> Path | None:
+    """Hero-panel binned draft rate CSV for ``spec.roster_x`` (never ability ventiles)."""
+    xslug = roster_x_slug(spec.roster_x)
+    if xslug == "poolq":
+        # Filename: PASS_A_binned_draft_rate_poolq_poolq_{core} (poolq inserted twice).
+        patterns = [
+            f"PASS_A_binned_draft_rate_poolq_poolq_*_{season_slug}_{tag}.csv",
+            f"PASS_A_binned_draft_rate_poolq_poolq_*{season_slug}*{tag}.csv",
+        ]
+    else:
+        patterns = [
+            f"PASS_A_binned_draft_rate_{xslug}_*_{season_slug}_{tag}.csv",
+            f"PASS_A_binned_draft_rate_{xslug}_*{season_slug}*{tag}.csv",
+        ]
+    for pat in patterns:
+        matches = [p for p in sorted(HERO_OUT.glob(pat)) if "ability" not in p.name]
+        if matches:
+            return matches[0]
+    fallback = [
+        p
+        for p in sorted(HERO_OUT.glob(f"PASS_A_binned_draft_rate_*_{season_slug}_{tag}.csv"))
+        if "ability" not in p.name and (xslug != "poolq" or "poolq_poolq" in p.name)
+        and (xslug != "poolq_loo" or "poolq_loo" in p.name)
+    ]
+    return fallback[0] if fallback else None
+
+
+def _find_lpm_txt(tag: str, season_slug: str) -> Path | None:
+    matches = sorted(HERO_OUT.glob(f"PASS_A_lpm_hero_coefficients_*_{season_slug}_{tag}.txt"))
     if not matches:
-        matches = sorted(HERO_OUT.glob(f"PASS_A_binned_draft_rate_*{season_slug}*{tag}.csv"))
+        matches = sorted(HERO_OUT.glob(f"PASS_A_lpm_hero_coefficients_*{season_slug}*{tag}.txt"))
     return matches[0] if matches else None
 
 
-def _shape_summary(csv_path: Path | None) -> dict:
+def _shape_summary(csv_path: Path | None, *, lpm_path: Path | None = None) -> dict:
     if csv_path is None or not csv_path.is_file():
+        return {}
+    if "ability" in csv_path.name:
+        print(
+            f"WARNING: shape summary skipped — CSV is ability ventiles, not roster-x: {csv_path.name}",
+            flush=True,
+        )
         return {}
     df = pd.read_csv(csv_path)
     if df.empty or "draft_rate" not in df.columns:
@@ -296,11 +330,16 @@ def _shape_summary(csv_path: Path | None) -> dict:
     peak = df.loc[peak_idx]
     bin0 = df.loc[df["vent"].idxmin()] if "vent" in df.columns else df.iloc[0]
     last = df.iloc[-1]
-    b2_path = csv_path.parent / csv_path.name.replace(
-        "PASS_A_binned_draft_rate", "PASS_A_lpm_hero_coefficients"
-    ).replace(".csv", ".txt")
+    b2_path = lpm_path
+    if b2_path is None and csv_path is not None:
+        core = csv_path.name.removeprefix("PASS_A_binned_draft_rate_")
+        for prefix in ("poolq_loo_", "poolq_", "poolq_loo", "poolq"):
+            if core.startswith(prefix):
+                core = core[len(prefix) :]
+                break
+        b2_path = csv_path.parent / f"PASS_A_lpm_hero_coefficients_{core.replace('.csv', '.txt')}"
     beta_sq = None
-    if b2_path.is_file():
+    if b2_path is not None and b2_path.is_file():
         for line in b2_path.read_text(encoding="utf-8").splitlines():
             if "_sq" in line and not line.startswith("#"):
                 try:
@@ -315,6 +354,42 @@ def _shape_summary(csv_path: Path | None) -> dict:
         "bin0_is_peak": bool(int(peak.get("vent", peak_idx)) == int(bin0.get("vent", 0))),
         "beta_sq": beta_sq,
     }
+
+
+def _manifest_entry(spec: HeroPermSpec, *, png: Path | None, csv_path: Path | None, prov: Path | None) -> dict:
+    slug = _season_slug(spec.season_min, spec.season_max)
+    lpm_path = _find_lpm_txt(spec.output_tag, slug)
+    return {
+        "output_tag": spec.output_tag,
+        "season_window": spec.season_window,
+        "season_min": spec.season_min,
+        "season_max": spec.season_max,
+        "label": spec.label,
+        "spec": asdict(spec),
+        "diff_from_baseline": spec.diff_from_baseline(),
+        "command": spec.command(),
+        "command_one_line": spec.command_one_line(),
+        "hero_png": str(png.relative_to(REPO)) if png else None,
+        "roster_csv": str(csv_path.relative_to(REPO)) if csv_path else None,
+        "roster_csv_xslug": roster_x_slug(spec.roster_x),
+        "provenance_json": str(prov.relative_to(REPO)) if prov else None,
+        "shape": _shape_summary(csv_path, lpm_path=lpm_path),
+    }
+
+
+def _entry_from_disk(spec: HeroPermSpec) -> dict:
+    slug = _season_slug(spec.season_min, spec.season_max)
+    png = _find_hero_png(spec.output_tag, slug)
+    csv_path = _find_roster_csv(spec, spec.output_tag, slug)
+    prov_glob = list(HERO_OUT.glob(f"HERO_*_{slug}_{spec.output_tag}_provenance.json"))
+    if not prov_glob:
+        prov_glob = list(HERO_OUT.glob(f"HERO_*{slug}*{spec.output_tag}_provenance.json"))
+    prov = prov_glob[0] if prov_glob else None
+    if png:
+        print(f"INDEX · {spec.season_window} · {spec.output_tag} · {png.name}", flush=True)
+    else:
+        print(f"MISSING PNG · {spec.season_window} · {spec.output_tag}", flush=True)
+    return _manifest_entry(spec, png=png, csv_path=csv_path, prov=prov)
 
 
 def _run_one(spec: HeroPermSpec, *, force: bool) -> dict:
@@ -351,26 +426,12 @@ def _run_one(spec: HeroPermSpec, *, force: bool) -> dict:
         subprocess.run(cmd, cwd=REPO, check=True)
         png = _find_hero_png(spec.output_tag, slug)
 
-    csv_path = _find_roster_csv(spec.output_tag, slug)
+    csv_path = _find_roster_csv(spec, spec.output_tag, slug)
     prov_glob = list(HERO_OUT.glob(f"HERO_*_{slug}_{spec.output_tag}_provenance.json"))
     if not prov_glob:
         prov_glob = list(HERO_OUT.glob(f"HERO_*{slug}*{spec.output_tag}_provenance.json"))
     prov = prov_glob[0] if prov_glob else None
-    return {
-        "output_tag": spec.output_tag,
-        "season_window": spec.season_window,
-        "season_min": spec.season_min,
-        "season_max": spec.season_max,
-        "label": spec.label,
-        "spec": asdict(spec),
-        "diff_from_baseline": spec.diff_from_baseline(),
-        "command": spec.command(),
-        "command_one_line": spec.command_one_line(),
-        "hero_png": str(png.relative_to(REPO)) if png else None,
-        "roster_csv": str(csv_path.relative_to(REPO)) if csv_path else None,
-        "provenance_json": str(prov.relative_to(REPO)) if prov else None,
-        "shape": _shape_summary(csv_path),
-    }
+    return _manifest_entry(spec, png=png, csv_path=csv_path, prov=prov)
 
 
 def _resolve_season_windows(raw: str) -> list[str]:
@@ -382,6 +443,25 @@ def _resolve_season_windows(raw: str) -> list[str]:
             f"season-window must be one of {sorted(SEASON_WINDOWS)} or both, got {raw!r}"
         )
     return [key]
+
+
+def _sync_manifest_counts(manifest: dict) -> None:
+    """Keep n_runs / n_specs / complete aligned with runs[] (safe after interrupt)."""
+    runs = manifest.get("runs") or []
+    n_runs = len(runs)
+    n_planned = manifest.get("n_planned")
+    if n_planned is None:
+        legacy = manifest.get("n_specs")
+        n_planned = int(legacy) if legacy is not None else n_runs
+    manifest["n_planned"] = int(n_planned)
+    manifest["n_runs"] = n_runs
+    manifest["n_specs"] = n_runs
+    manifest["complete"] = n_runs >= manifest["n_planned"]
+
+
+def _write_manifest(manifest: dict) -> None:
+    _sync_manifest_counts(manifest)
+    MANIFEST.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
 
 
 def _resolve_run_config(tier: str, season_window_arg: str) -> tuple[str, list[str], str, str]:
@@ -415,6 +495,11 @@ def main() -> None:
     )
     parser.add_argument("--dry-run", action="store_true", help="Print specs only; do not run.")
     parser.add_argument("--force", action="store_true", help="Re-run even if PNG exists.")
+    parser.add_argument(
+        "--repair-manifest",
+        action="store_true",
+        help="Rebuild manifest from on-disk PNGs/CSVs only (fixes shape/roster_csv; no pass_a).",
+    )
     args = parser.parse_args()
 
     grid_tier, season_windows, manifest_tier, season_window_effective = _resolve_run_config(
@@ -432,12 +517,16 @@ def main() -> None:
         "season_window": season_window_effective,
         "season_windows": season_windows,
         "baseline": BASELINE,
-        "n_specs": len(specs),
+        "n_planned": len(specs),
+        "n_runs": 0,
+        "n_specs": 0,
+        "complete": False,
         "runs": [],
     }
 
     print(
-        f"HERO permutation sweep · tier={manifest_tier} · season={season_window_effective} · n={len(specs)}",
+        f"HERO permutation sweep · tier={manifest_tier} · season={season_window_effective} · "
+        f"planned={len(specs)}",
         flush=True,
     )
     for i, spec in enumerate(specs, start=1):
@@ -445,10 +534,13 @@ def main() -> None:
         print(spec.command(), flush=True)
         if args.dry_run:
             continue
-        entry = _run_one(spec, force=bool(args.force))
+        if args.repair_manifest:
+            entry = _entry_from_disk(spec)
+        else:
+            entry = _run_one(spec, force=bool(args.force))
         entry["slide_index"] = i
         manifest["runs"].append(entry)
-        MANIFEST.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
+        _write_manifest(manifest)
 
     if args.dry_run:
         manifest["runs"] = [
@@ -463,10 +555,21 @@ def main() -> None:
             }
             for i, s in enumerate(specs)
         ]
-        MANIFEST.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
+        _write_manifest(manifest)
         print(f"\nDry-run manifest → {MANIFEST.relative_to(REPO)}", flush=True)
     else:
-        print(f"\nDone · {len(manifest['runs'])} runs · manifest → {MANIFEST.relative_to(REPO)}", flush=True)
+        _sync_manifest_counts(manifest)
+        print(
+            f"\nDone · {manifest['n_runs']}/{manifest['n_planned']} runs · "
+            f"complete={manifest['complete']} · manifest → {MANIFEST.relative_to(REPO)}",
+            flush=True,
+        )
+        if not manifest["complete"]:
+            print(
+                "WARNING: sweep interrupted or incomplete — re-run the same tier/season to resume "
+                "(existing PNGs are skipped).",
+                flush=True,
+            )
         print("Build deck: python sports/scripts/build_hero_permutation_slides.py", flush=True)
 
 

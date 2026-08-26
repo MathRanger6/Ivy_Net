@@ -131,6 +131,29 @@ def _add_slide(prs: Presentation, run: dict, *, baseline_tag: str) -> None:
     sf.paragraphs[0].font.size = Pt(11)
 
 
+def _run_counts(manifest: dict) -> tuple[int, int, bool]:
+    """Return (n_runs, n_planned, complete) with legacy manifest repair."""
+    runs = manifest.get("runs") or []
+    n_runs = len(runs)
+    n_planned = manifest.get("n_planned")
+    if n_planned is None:
+        legacy = manifest.get("n_specs")
+        if legacy is not None and int(legacy) > n_runs:
+            n_planned = int(legacy)
+        else:
+            n_planned = n_runs
+    n_planned = int(n_planned)
+    complete = bool(manifest.get("complete", n_runs >= n_planned))
+    return n_runs, n_planned, complete
+
+
+def _slide_count_label(manifest: dict) -> str:
+    n_runs, n_planned, complete = _run_counts(manifest)
+    if complete or n_planned == n_runs:
+        return f"{n_runs} run slides"
+    return f"{n_runs}/{n_planned} run slides (incomplete sweep)"
+
+
 def _add_intro_slide(prs: Presentation, manifest: dict) -> None:
     slide = prs.slides.add_slide(prs.slide_layouts[6])
     season_win = manifest.get("season_window") or manifest.get("season_windows") or "11_21"
@@ -141,7 +164,7 @@ def _add_intro_slide(prs: Presentation, manifest: dict) -> None:
         "HERO permutation sweep",
         subtitle=(
             f"Tier {manifest.get('tier', '?')} · season {season_win} · "
-            f"{manifest.get('n_specs', '?')} slides · {manifest.get('date', '')}"
+            f"{_slide_count_label(manifest)} · {manifest.get('date', '')}"
         ),
     )
     body_top = Inches(1.1)
@@ -184,6 +207,13 @@ def main() -> None:
     runs = manifest.get("runs") or []
     if not runs:
         raise SystemExit("Manifest has no runs — run sweep first (not --dry-run only).")
+
+    n_runs, n_planned, complete = _run_counts(manifest)
+    if not complete:
+        print(
+            f"WARNING: manifest incomplete ({n_runs}/{n_planned} runs) — intro slide will note this.",
+            flush=True,
+        )
 
     baseline_tag = (manifest.get("baseline") or {}).get("output_tag", "FIXED_HERO")
     out_path = args.out if args.out.is_absolute() else REPO / args.out
