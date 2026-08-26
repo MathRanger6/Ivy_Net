@@ -2,7 +2,7 @@
 
 **Purpose:** Sanity check before you interpret the P2b plots.  
 **Sources:** PD25 transcript + whiteboard (`transcripts/PD25_notes.md`, `PD25_board.jpeg`).  
-**Status (2026-08-21 evening):** **P2b shipped** — primary plot shows Alex’s flat-then-down on +DFT (z [2,3]). Pair with **triptych** for poolq_loo deck.  
+**Status (2026-08-24):** **F-HERO** locked for Alex deck — see [`_DISPOSABLE_CCT_P2b_workflow_thread.md`](_DISPOSABLE_CCT_P2b_workflow_thread.md) §D (talking points), §F–G (line overlay + knee). Slide PNGs: `HEROs_and_PASSes/slides/Fixed_Ai_Comparisons/`. Primary plot: `…_min20_ppm_top7_dft_low4_high7.png`.  
 **Delete or ignore when done** — not canonical; re_entry scratch only.
 
 ---

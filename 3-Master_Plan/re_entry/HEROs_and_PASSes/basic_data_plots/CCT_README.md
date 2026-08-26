@@ -69,12 +69,15 @@ Three panels: [1,2] all teams (CCT NO) · [2,3] all teams (CCT YES) · [2,3] +DF
 
 ## Priority 2b — Alex board (T̂_j tail bins)
 
-**Primary:** PPM z ∈ [2,3] · +DFT · mg10 min10 · piecewise 4+20 bins on T̂_j.
+**Primary:** PPM z ∈ [2,3] · +DFT · piecewise T̂_j bins.
 
-| Metric | Plateau | Tail (last 3 bins) | Downturn? | File |
-|--------|---------|---------------------|-----------|------|
-| Primary | ~34% | ~8% | **YES** | `CCT_draft_rate_fixedAi_Tj_knbins_dft.png` |
-| Sensitivity [1.5,2] min20 | ~24% | ~11% | **YES** | `CCT_draft_rate_fixedAi_Tj_knbins_min20_ppm_z1p5_2_dft.png` |
+Filename pattern: `CCT_draft_rate_fixedAi_Tj_knbins_min{MM}_{ppm|bpm|obpm}_z{lo}_{hi}_{allt|dft}_low{B_left}_high{B_tail}.png`  
+Equal-width mode: `…_ew{N}.png` instead of `_low…_high…`.
+
+| Variant | Plateau | Tail | Downturn? | File (example) |
+|--------|---------|------|-----------|----------------|
+| min10 · 4+10 | ~34% | ~6% | **YES** | `…_min10_ppm_z2_3_dft_low4_high10.png` |
+| min20 · 5+10 | — | — | — | `…_min20_ppm_z2_3_dft_low5_high10.png` |
 
 Sidecars: matching `.json`, `_Tj_bins.csv`. **Caption:** T̂_j includes self; not poolq_loo; thin tail cells expected.
 

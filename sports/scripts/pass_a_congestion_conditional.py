@@ -36,6 +36,14 @@ sys.path.insert(0, str(SPORTS))
 from gallery_knobs import HERO_BINS
 from hero_gallery_paths import BASIC_DATA_PLOTS, ensure_hero_dirs
 from interval_overlap_paths import seasons_label
+from plot_provenance import (
+    FHeroProvenance,
+    fhero_bin_label,
+    fhero_bin_slug,
+    population_slug,
+    season_slug,
+    stamp_figure_footer,
+)
 from pd20_22_campaign_window import (
     activate_from_args,
     add_window_args,
@@ -90,9 +98,18 @@ class CctSpec:
     n_bins: int
     ai_lo: float | None
     ai_hi: float | None
+    ai_top_pct: float | None = None  # e.g. 10 → top decile of perf z in panel
     perf_metric: str = "ppm"
     poolq_binning: str = "quantile"
     dft: bool = False
+    y_draft_mode: str = "ever"
+    panel_rows: str = "all-ps"
+
+    @property
+    def last_season_only(self) -> bool:
+        from sports_pipeline.y_draft_mode import panel_rows_is_last_only
+
+        return panel_rows_is_last_only(self.panel_rows)
 
     @property
     def winsor_quantiles(self) -> tuple[float, float]:
@@ -100,6 +117,11 @@ class CctSpec:
 
     @property
     def ai_band_label(self) -> str:
+        if self.ai_top_pct is not None:
+            pct = float(self.ai_top_pct)
+            if abs(pct - round(pct)) < 1e-9:
+                return f"top {int(round(pct))}%"
+            return f"top {pct:g}%"
         if self.ai_lo is None or self.ai_hi is None:
             return "full panel"
         return f"[{self.ai_lo:g}, {self.ai_hi:g}]"
@@ -108,7 +130,24 @@ class CctSpec:
     def population_label(self) -> str:
         return "+DFT" if self.dft else "full panel"
 
+    def ai_perf_cut(self, df: pd.DataFrame) -> float | None:
+        """Pooled perf z cutoff for top-X% band (before apply_ai_band)."""
+        if self.ai_top_pct is None:
+            return None
+        pct = float(self.ai_top_pct)
+        if not 0.0 < pct < 100.0:
+            raise ValueError(f"ai_top_pct must be in (0, 100), got {pct}")
+        perf = pd.to_numeric(df["perf"], errors="coerce").dropna()
+        if perf.empty:
+            return float("nan")
+        return float(perf.quantile(1.0 - pct / 100.0))
+
     def apply_ai_band(self, df: pd.DataFrame) -> pd.DataFrame:
+        if self.ai_top_pct is not None:
+            cut = self.ai_perf_cut(df)
+            if cut is None or math.isnan(cut):
+                return df.iloc[0:0]
+            return df.loc[pd.to_numeric(df["perf"], errors="coerce") >= cut]
         if self.ai_lo is None or self.ai_hi is None:
             return df
         return df.loc[(df["perf"] >= self.ai_lo) & (df["perf"] <= self.ai_hi)]
@@ -129,6 +168,29 @@ def _z_slug(z: float) -> str:
     return s
 
 
+def _ai_band_filename_part(spec: CctSpec) -> str | None:
+    if spec.ai_top_pct is not None:
+        pct = float(spec.ai_top_pct)
+        if abs(pct - round(pct)) < 1e-9:
+            return f"top{int(round(pct))}"
+        return f"top{_z_slug(pct)}"
+    if spec.ai_lo is not None and spec.ai_hi is not None:
+        return f"z{_z_slug(spec.ai_lo)}_{_z_slug(spec.ai_hi)}"
+    return None
+
+
+def _ai_band_meta(spec: CctSpec, df: pd.DataFrame) -> dict:
+    out: dict = {
+        "ai_lo": float(spec.ai_lo) if spec.ai_lo is not None else None,
+        "ai_hi": float(spec.ai_hi) if spec.ai_hi is not None else None,
+        "ai_top_pct": float(spec.ai_top_pct) if spec.ai_top_pct is not None else None,
+        "ai_perf_cut": None,
+    }
+    if spec.ai_top_pct is not None:
+        out["ai_perf_cut"] = spec.ai_perf_cut(df)
+    return out
+
+
 def _matched_pond_basename(spec: CctSpec) -> str:
     """Uniform: CCT_draft_rate_ai_band_poolq_loo_min{10|20}_{ppm|bpm|obpm}_z{lo}_{hi}_{allt|dft}."""
     parts = [
@@ -138,6 +200,8 @@ def _matched_pond_basename(spec: CctSpec) -> str:
     ]
     if spec.ai_lo is not None and spec.ai_hi is not None:
         parts.append(f"z{_z_slug(spec.ai_lo)}_{_z_slug(spec.ai_hi)}")
+    elif spec.ai_top_pct is not None:
+        parts.append(_ai_band_filename_part(spec))
     parts.append("dft" if spec.dft else "allt")
     return "_".join(parts)
 
@@ -187,21 +251,58 @@ def _wilson_ci(successes: int, n: int, z: float = 1.96) -> tuple[float, float]:
     return max(0.0, center - margin), min(1.0, center + margin)
 
 
+def _asymmetric_yerr(
+    rate: np.ndarray | pd.Series,
+    ci_lo: np.ndarray | pd.Series,
+    ci_hi: np.ndarray | pd.Series,
+) -> tuple[np.ndarray, np.ndarray]:
+    """Matplotlib errorbar lengths from Wilson bounds (clip fp noise ≥ 0)."""
+    y = np.asarray(rate, dtype=float)
+    lo = np.asarray(ci_lo, dtype=float)
+    hi = np.asarray(ci_hi, dtype=float)
+    return np.maximum(0.0, y - lo), np.maximum(0.0, hi - y)
+
+
 def _prepare_panel(spec: CctSpec) -> pd.DataFrame:
     from sports_pipeline import conductor, panel_build
     from sports_pipeline.config import PipelineConfig
     from sports_pipeline.perf_metric import perf_metric_active
+    from sports_pipeline.y_draft_mode import (
+        apply_y_draft_last_season,
+        audit_y1_survival,
+        emit_survival_summary,
+        filter_team_seasons_min_games,
+        normalize_y_draft_mode,
+        restrict_to_last_season_rows,
+        set_last_survival_audit,
+    )
 
-    drafted_teams: set | None = None
-    if spec.dft:
-        cfg0 = PipelineConfig(
+    y_mode = normalize_y_draft_mode(spec.y_draft_mode)
+
+    def _maybe_last_season(panel: pd.DataFrame, audits: list[dict] | None) -> pd.DataFrame:
+        if not spec.last_season_only:
+            return panel
+        before = panel
+        panel, ls_audit = restrict_to_last_season_rows(panel)
+        if audits is not None:
+            audits.append(ls_audit)
+            audits.append(audit_y1_survival(before, panel, "last_season_only"))
+        print(
+            f"Last-season cross-section · {ls_audit['n_rows_before']:,} → "
+            f"{ls_audit['n_rows_after']:,} rows · {ls_audit['n_athletes']:,} athletes",
+            flush=True,
+        )
+        return panel
+
+    def _build_cfg(*, min_minutes: float, min_team_season_games: int) -> PipelineConfig:
+        return PipelineConfig(
             perf_metric=[spec.perf_metric],
             perf_zscore_within_season=True,
             ventiles=int(spec.n_bins),
             poolq_binning=str(spec.poolq_binning),
             poolq_winsor_quantiles=spec.winsor_quantiles,
-            min_minutes=0.0,
-            min_team_season_games=int(spec.min_team_season_games),
+            min_minutes=float(min_minutes),
+            min_team_season_games=int(min_team_season_games),
             drop_dash_placeholder_names=True,
             restrict_teams_by_draftees=False,
             use_prebuilt_panel_csv=False,
@@ -210,24 +311,58 @@ def _prepare_panel(spec: CctSpec) -> pd.DataFrame:
             analysis_season_min=int(spec.season_min),
             analysis_season_max=int(spec.season_max),
         )
+
+    if y_mode == "season":
+        cfg_pre = _build_cfg(min_minutes=0.0, min_team_season_games=0)
+        panel = conductor.prepare_panel(cfg_pre)
+        panel = panel_build.apply_perf_metric_for_analysis(
+            panel,
+            perf_metric_active(cfg_pre),
+            poolq_winsor_quantiles=cfg_pre.poolq_winsor_quantiles,
+            zscore_perf_within_season=True,
+        )
+        panel, label_audit = apply_y_draft_last_season(panel)
+        audits: list[dict] = [label_audit]
+
+        drafted_teams: set | None = None
+        if spec.dft:
+            drafted_teams = _drafted_team_ids(panel.dropna(subset=["team_id", "season"]))
+
+        if int(spec.min_team_season_games) > 0:
+            before = panel
+            panel = filter_team_seasons_min_games(panel, int(spec.min_team_season_games))
+            audits.append(
+                audit_y1_survival(before, panel, f"min_team_season_games<={spec.min_team_season_games}")
+            )
+
+        cfg_filt = _build_cfg(
+            min_minutes=float(spec.min_minutes),
+            min_team_season_games=0,
+        )
+        before = panel
+        panel = panel_build.filter_panel(panel, cfg_filt)
+        if float(spec.min_minutes) > 0:
+            audits.append(audit_y1_survival(before, panel, f"min_minutes>={spec.min_minutes:g}"))
+
+        if spec.dft and drafted_teams is not None:
+            before = panel
+            panel = _apply_dft(panel, drafted_teams)
+            audits.append(audit_y1_survival(before, panel, "+DFT team filter"))
+
+        set_last_survival_audit(audits)
+        emit_survival_summary(audits)
+        panel = _maybe_last_season(panel, audits)
+        return panel
+
+    drafted_teams: set | None = None
+    if spec.dft:
+        cfg0 = _build_cfg(min_minutes=0.0, min_team_season_games=int(spec.min_team_season_games))
         raw = conductor.prepare_panel(cfg0)
         drafted_teams = _drafted_team_ids(raw.dropna(subset=["team_id", "season"]))
 
-    cfg = PipelineConfig(
-        perf_metric=[spec.perf_metric],
-        perf_zscore_within_season=True,
-        ventiles=int(spec.n_bins),
-        poolq_binning=str(spec.poolq_binning),
-        poolq_winsor_quantiles=spec.winsor_quantiles,
+    cfg = _build_cfg(
         min_minutes=float(spec.min_minutes),
         min_team_season_games=int(spec.min_team_season_games),
-        drop_dash_placeholder_names=True,
-        restrict_teams_by_draftees=False,
-        use_prebuilt_panel_csv=False,
-        panel_season_min=int(spec.season_min),
-        panel_season_max=int(spec.season_max),
-        analysis_season_min=int(spec.season_min),
-        analysis_season_max=int(spec.season_max),
     )
     panel = conductor.prepare_panel(cfg)
     if spec.dft and drafted_teams is not None:
@@ -238,6 +373,8 @@ def _prepare_panel(spec: CctSpec) -> pd.DataFrame:
         poolq_winsor_quantiles=cfg.poolq_winsor_quantiles,
         zscore_perf_within_season=True,
     )
+    set_last_survival_audit(None)
+    panel = _maybe_last_season(panel, None)
     return panel_build.filter_panel(panel, cfg)
 
 
@@ -251,6 +388,8 @@ def _panel_cache_key(spec: CctSpec) -> tuple:
         float(spec.winsor_hi),
         str(spec.perf_metric),
         bool(spec.dft),
+        str(spec.y_draft_mode),
+        str(spec.panel_rows),
     )
 
 
@@ -347,13 +486,33 @@ def _assign_tj_bin_labels(tj: pd.Series, edges: np.ndarray) -> pd.Series:
     return pd.Series(cut, index=tj.index, dtype="Int64")
 
 
-def _fixed_ai_tj_knbins_basename(spec: CctSpec) -> str:
-    pop = "dft" if spec.dft else "allt"
-    return (
-        f"CCT_draft_rate_fixedAi_Tj_knbins_"
-        f"min{int(spec.min_minutes)}_{str(spec.perf_metric).strip().lower()}_"
-        f"z{_z_slug(float(spec.ai_lo))}_{_z_slug(float(spec.ai_hi))}_{pop}"
+def _fixed_ai_tj_knbins_basename(
+    spec: CctSpec,
+    *,
+    tj_binning: str = DEFAULT_P2B_TJ_BINNING,
+    tj_n_bins: int = 24,
+    tj_n_low: int = DEFAULT_P2B_TJ_N_LOW,
+    tj_n_high: int = DEFAULT_P2B_TJ_N_HIGH,
+) -> str:
+    bin_slug = fhero_bin_slug(
+        tj_binning=tj_binning,
+        tj_n_low=tj_n_low,
+        tj_n_high=tj_n_high,
+        tj_n_bins=tj_n_bins,
     )
+    pop = population_slug(dft=spec.dft)
+    ai = _ai_band_filename_part(spec) or "all"
+    perf = str(spec.perf_metric).strip().lower()
+    seasons = season_slug(spec.season_min, spec.season_max)
+    stem = (
+        f"FHERO_{bin_slug}_{pop}_min{int(spec.min_minutes)}_"
+        f"mg{int(spec.min_team_season_games)}_{ai}_{perf}_{seasons}"
+    )
+    if str(spec.y_draft_mode).strip().lower() == "season":
+        stem = f"{stem}_season_y"
+    if spec.last_season_only:
+        stem = f"{stem}_last_ps"
+    return stem
 
 
 def _fixed_ai_tj_knbins_table(
@@ -401,6 +560,7 @@ def _fixed_ai_tj_knbins_table(
     band["vent"] = _assign_tj_bin_labels(band[T_JHAT_COL], edges)
     tj_lo, tj_hi = float(edges[0]), float(edges[-1])
     tail_lo = tj_lo + TAIL_HIGHLIGHT_FRAC * (tj_hi - tj_lo)
+    n_low_bins = int(tj_n_low) if mode == "piecewise_tail" else None
 
     rows = []
     for vent, grp in band.dropna(subset=["vent"]).groupby("vent", observed=True):
@@ -410,6 +570,12 @@ def _fixed_ai_tj_knbins_table(
         rate = drafts / n if n else float("nan")
         lo, hi = _wilson_ci(drafts, n)
         elo, ehi = float(edges[v]), float(edges[v + 1])
+        if n_low_bins is not None:
+            is_tail = v >= n_low_bins
+            bin_region = "fine_tail" if is_tail else "coarse"
+        else:
+            is_tail = bool(elo >= tail_lo)
+            bin_region = "high_tj_tail" if is_tail else "coarse"
         rows.append(
             {
                 "vent": v,
@@ -424,7 +590,8 @@ def _fixed_ai_tj_knbins_table(
                 "edge_interval": f"[{elo:.4g}, {ehi:.4g})",
                 "T_j_mean": float(grp[T_JHAT_COL].mean()),
                 "T_j_median": float(grp[T_JHAT_COL].median()),
-                "high_tj_tail": bool(elo >= tail_lo),
+                "bin_region": bin_region,
+                "high_tj_tail": is_tail,
                 "thin_cell": n < MIN_CELL_N_WARN,
                 "no_claim": n < MIN_CELL_N_CLAIM,
             }
@@ -436,14 +603,20 @@ def _fixed_ai_tj_knbins_table(
     return band, tbl, edges, binning_meta
 
 
-def _p2b_knee_summary(tbl: pd.DataFrame) -> dict:
+def _p2b_knee_summary(tbl: pd.DataFrame, *, binning_meta: dict | None = None) -> dict:
     """Plateau vs high-T̂_j tail — Alex flat-then-down read (descriptive)."""
     if tbl.empty:
         return {"label": "knee_summary", "alex_downturn_visible": False}
+    meta = binning_meta or {}
     n = len(tbl)
-    n_plateau = max(1, n // 2)
-    plateau = tbl.iloc[:n_plateau]
-    tail = tbl.iloc[max(0, n - 3) :]
+    if meta.get("mode") == "piecewise_tail":
+        n_low = max(1, int(meta.get("n_low_bins", n // 2)))
+        plateau = tbl.iloc[:n_low]
+        tail = tbl.iloc[-3:]
+    else:
+        n_plateau = max(1, n // 2)
+        plateau = tbl.iloc[:n_plateau]
+        tail = tbl.iloc[max(0, n - 3) :]
     plateau_rate = float(plateau["draft_rate"].mean())
     tail_rate = float(tail["draft_rate"].mean())
     last_rate = float(tbl.iloc[-1]["draft_rate"])
@@ -476,6 +649,7 @@ def _write_tj_bins_csv(tbl: pd.DataFrame, path: Path) -> None:
         "edge_interval",
         "T_j_mean",
         "T_j_median",
+        "bin_region",
         "high_tj_tail",
         "thin_cell",
     ]
@@ -491,6 +665,7 @@ def plot_fixed_ai_tj_knbins(
     *,
     binning_meta: dict,
     knee: dict,
+    prov: FHeroProvenance,
 ) -> None:
     from gallery_mathtext import configure_matplotlib_mathtext
 
@@ -502,8 +677,7 @@ def plot_fixed_ai_tj_knbins(
     fig, ax = plt.subplots(figsize=(11.5, 5.5))
     x = tbl["bin_display"].to_numpy(dtype=float)
     y = tbl["draft_rate"].to_numpy(dtype=float)
-    yerr_lo = y - tbl["ci_lo"].to_numpy(dtype=float)
-    yerr_hi = tbl["ci_hi"].to_numpy(dtype=float) - y
+    yerr_lo, yerr_hi = _asymmetric_yerr(y, tbl["ci_lo"], tbl["ci_hi"])
     colors = []
     for _, row in tbl.iterrows():
         if bool(row["thin_cell"]):
@@ -553,18 +727,20 @@ def plot_fixed_ai_tj_knbins(
     ax.text(0.02, 0.98, compare, transform=ax.transAxes, fontsize=8, va="top", family="monospace")
 
     legend_handles = [
-        mpatches.Patch(facecolor=OTHER_COLOR, edgecolor="white", label="Lower/mid T̂_j bins"),
-        mpatches.Patch(facecolor=JACKAL_COLOR, edgecolor="white", label="High T̂_j tail"),
+        mpatches.Patch(facecolor=OTHER_COLOR, edgecolor="white", label="Coarse T̂_j bins (below split)"),
+        mpatches.Patch(facecolor=JACKAL_COLOR, edgecolor="white", label="Fine tail T̂_j bins"),
         mpatches.Patch(facecolor=THIN_COLOR, edgecolor="white", label=f"Thin cell (n < {MIN_CELL_N_WARN})"),
     ]
     ax.legend(handles=legend_handles, loc="upper right", fontsize=8, framealpha=0.92)
 
     note = (
         rf"Band n={len(band):,} PS · drafts={int(band['Y_draft'].sum()):,} · "
-        rf"T̂_j range [{binning_meta['tj_range']['lo']:.3g}, {binning_meta['tj_range']['hi']:.3g}]"
+        rf"T̂_j range [{binning_meta['tj_range']['lo']:.3g}, {binning_meta['tj_range']['hi']:.3g}] · "
+        rf"Wilson CIs — wide bands = thin cells"
     )
-    fig.text(0.5, 0.01, note, ha="center", fontsize=8, color="0.35")
-    fig.tight_layout(rect=(0, 0.03, 1, 1))
+    stamp_figure_footer(fig, prov.footer_text(), y=0.018)
+    fig.text(0.5, 0.005, note, ha="center", fontsize=7, color="0.35")
+    fig.tight_layout(rect=(0, 0.07, 1, 1))
     fig.savefig(out_png, dpi=150, bbox_inches="tight")
     plt.close(fig)
     print(f"Wrote {out_png.relative_to(REPO)}")
@@ -580,17 +756,31 @@ def run_fixed_ai_tj_knbins(
     tj_n_high: int = DEFAULT_P2B_TJ_N_HIGH,
     tail_split_q: float = DEFAULT_P2B_TAIL_SPLIT_Q,
 ) -> Path:
-    if spec.ai_lo is None or spec.ai_hi is None:
-        raise SystemExit("P2b requires --ai-lo and --ai-hi (matched Â band).")
+    if spec.ai_lo is None and spec.ai_hi is None and spec.ai_top_pct is None:
+        raise SystemExit("P2b requires --ai-lo/--ai-hi or --ai-top-pct (matched Â band).")
 
     ensure_hero_dirs()
     out_dir.mkdir(parents=True, exist_ok=True)
-    stem = _fixed_ai_tj_knbins_basename(spec)
+    stem = _fixed_ai_tj_knbins_basename(
+        spec,
+        tj_binning=tj_binning,
+        tj_n_bins=tj_n_bins,
+        tj_n_low=tj_n_low,
+        tj_n_high=tj_n_high,
+    )
     out_png = out_dir / f"{stem}.png"
     out_json = out_dir / f"{stem}.json"
     out_csv = out_dir / f"{stem}_Tj_bins.csv"
 
+    from sports_pipeline.y_draft_mode import assert_season_y_output_path, get_last_survival_audit
+
+    for p in (out_png, out_json, out_csv):
+        assert_season_y_output_path(p, spec.y_draft_mode)
+
     use = _get_panel(spec)
+    band_pre = _attach_t_j_hat(use)
+    band_pre = band_pre.dropna(subset=["perf", T_JHAT_COL, "Y_draft"]).copy()
+    ai_meta = _ai_band_meta(spec, band_pre)
     band, tbl, edges, binning_meta = _fixed_ai_tj_knbins_table(
         use,
         spec,
@@ -603,27 +793,65 @@ def run_fixed_ai_tj_knbins(
     if tbl.empty:
         raise SystemExit("No rows in matched Â band for P2b — check --ai-lo / --ai-hi")
 
-    knee = _p2b_knee_summary(tbl)
-    plot_fixed_ai_tj_knbins(spec, tbl, band, out_png, binning_meta=binning_meta, knee=knee)
+    knee = _p2b_knee_summary(tbl, binning_meta=binning_meta)
+    bin_slug = fhero_bin_slug(
+        tj_binning=tj_binning,
+        tj_n_low=tj_n_low,
+        tj_n_high=tj_n_high,
+        tj_n_bins=tj_n_bins,
+    )
+    bin_label = fhero_bin_label(
+        tj_binning=tj_binning,
+        tj_n_low=tj_n_low,
+        tj_n_high=tj_n_high,
+        tj_n_bins=tj_n_bins,
+    )
+    prov = FHeroProvenance(
+        bin_slug=bin_slug,
+        bin_label=bin_label,
+        perf_metric=str(spec.perf_metric).strip().lower(),
+        season_min=int(spec.season_min),
+        season_max=int(spec.season_max),
+        min_minutes=float(spec.min_minutes),
+        min_team_season_games=int(spec.min_team_season_games),
+        population=population_slug(dft=spec.dft),
+        y_draft_mode=str(spec.y_draft_mode).strip().lower(),
+        winsor_lo=float(spec.winsor_lo),
+        winsor_hi=float(spec.winsor_hi),
+        ai_band_label=spec.ai_band_label,
+        panel_rows=str(spec.panel_rows),
+        n_rows=int(len(band)),
+        n_drafts=int(band["Y_draft"].sum()),
+    )
+    plot_fixed_ai_tj_knbins(spec, tbl, band, out_png, binning_meta=binning_meta, knee=knee, prov=prov)
     _write_tj_bins_csv(tbl, out_csv)
 
+    survival = get_last_survival_audit()
     meta = {
         "diagnostic": "cct_fixed_ai_tj_knbins",
         "date": date.today().isoformat(),
         "plot": "fixed_ai_tj_knbins",
+        "plot_family": "F-HERO",
+        "provenance": prov.to_dict(),
+        "footer": prov.footer_text(),
+        "y_draft_mode": str(spec.y_draft_mode),
+        "y_draft_survival_audit": survival,
         "axis": "T_j_hat",
         "axis_note": "T̂_j = team-season mean perf z (includes self); not poolq_loo.",
         "bdp_spec": f"mg{spec.min_team_season_games} min{spec.min_minutes:g} "
         f"{seasons_label(spec.season_min, spec.season_max)}",
         "population": spec.population_label,
+        "population_slug": population_slug(dft=spec.dft),
         "dft": bool(spec.dft),
         "seasons": seasons_label(spec.season_min, spec.season_max),
+        "season_slug": season_slug(spec.season_min, spec.season_max),
         "perf_metric": str(spec.perf_metric).strip().lower(),
-        "ai_lo": float(spec.ai_lo),
-        "ai_hi": float(spec.ai_hi),
+        **ai_meta,
         "winsor": [spec.winsor_lo, spec.winsor_hi],
         "min_minutes": float(spec.min_minutes),
+        "min_team_season_games": int(spec.min_team_season_games),
         "binning": binning_meta,
+        "bin_slug": bin_slug,
         "bin_edges": [float(e) for e in edges],
         "band_n": int(len(band)),
         "total_drafts": int(band["Y_draft"].sum()),
@@ -636,6 +864,27 @@ def run_fixed_ai_tj_knbins(
     print(f"Wrote {out_json.relative_to(REPO)}")
     if (
         spec.dft
+        and spec.ai_top_pct is not None
+        and abs(float(spec.ai_top_pct) - 7.0) < 1e-9
+        and float(spec.min_minutes) == 20.0
+        and str(spec.perf_metric).strip().lower() == "ppm"
+        and str(tj_binning).strip().lower() == "piecewise_tail"
+        and int(tj_n_low) == 4
+        and int(tj_n_high) == 7
+    ):
+        for src, name in (
+            (out_png, "CCT_draft_rate_fixedAi_Tj_knbins_min20_ppm_top7_dft_low4_high7.png"),
+            (out_json, "CCT_draft_rate_fixedAi_Tj_knbins_min20_ppm_top7_dft_low4_high7.json"),
+            (out_csv, "CCT_draft_rate_fixedAi_Tj_knbins_min20_ppm_top7_dft_low4_high7_Tj_bins.csv"),
+        ):
+            alias = out_dir / name
+            shutil.copy2(src, alias)
+            print(f"Wrote {alias.relative_to(REPO)} (legacy alias)")
+    elif (
+        spec.dft
+        and spec.ai_top_pct is None
+        and spec.ai_lo is not None
+        and spec.ai_hi is not None
         and float(spec.ai_lo) == ELITE_AI_LO
         and float(spec.ai_hi) == ELITE_AI_HI
         and float(spec.min_minutes) == 10.0
@@ -648,7 +897,7 @@ def run_fixed_ai_tj_knbins(
         ):
             alias = out_dir / name
             shutil.copy2(src, alias)
-            print(f"Wrote {alias.relative_to(REPO)} (canonical alias)")
+            print(f"Wrote {alias.relative_to(REPO)} (legacy alias)")
     print(
         f"  P2b · plateau {100*knee['plateau_mean_draft_rate']:.1f}% · "
         f"tail {100*knee['tail_mean_draft_rate']:.1f}% · "
@@ -660,14 +909,21 @@ def run_fixed_ai_tj_knbins(
 def run_fixed_ai_tj_knbins_bundle(out_dir: Path, base: CctSpec, **kwargs) -> list[Path]:
     """Primary (Alex deck) + locked-plan sensitivity cell."""
     cells = [
-        replace(base, ai_lo=ELITE_AI_LO, ai_hi=ELITE_AI_HI, dft=True, min_minutes=10.0, perf_metric="ppm"),
+        replace(
+            base,
+            ai_lo=ELITE_AI_LO,
+            ai_hi=ELITE_AI_HI,
+            dft=True,
+            min_minutes=float(base.min_minutes),
+            perf_metric="ppm",
+        ),
         replace(base, ai_lo=DEFAULT_AI_LO, ai_hi=DEFAULT_AI_HI, dft=True, min_minutes=20.0, perf_metric="ppm"),
     ]
     paths = []
     for spec in cells:
         print(
-            f"\n=== P2b · PPM z {spec.ai_band_label} · {spec.population_label} · "
-            f"min{spec.min_minutes:g} ===",
+            f"\n=== P2b · {spec.perf_metric.upper()} · Â {spec.ai_band_label} · "
+            f"{spec.population_label} · min{spec.min_minutes:g} ===",
             flush=True,
         )
         paths.append(run_fixed_ai_tj_knbins(spec, out_dir, **kwargs))
@@ -725,8 +981,7 @@ def _draw_matched_pond_on_ax(
 
     x = tbl["bin_display"].to_numpy(dtype=float)
     y = tbl["draft_rate"].to_numpy(dtype=float)
-    yerr_lo = y - tbl["ci_lo"].to_numpy(dtype=float)
-    yerr_hi = tbl["ci_hi"].to_numpy(dtype=float) - y
+    yerr_lo, yerr_hi = _asymmetric_yerr(y, tbl["ci_lo"], tbl["ci_hi"])
     colors = [
         _bar_color_for_vent(
             int(v),
@@ -1140,8 +1395,7 @@ def plot_roster_rank_tj(
             continue
         x = sub["bin_display"].to_numpy(dtype=float)
         y = sub["draft_rate"].to_numpy(dtype=float)
-        yerr_lo = y - sub["ci_lo"].to_numpy(dtype=float)
-        yerr_hi = sub["ci_hi"].to_numpy(dtype=float) - y
+        yerr_lo, yerr_hi = _asymmetric_yerr(y, sub["ci_lo"], sub["ci_hi"])
         colors = [THIN_COLOR if thin else OTHER_COLOR for thin in sub["thin_cell"]]
         ax.bar(x, y, color=colors, edgecolor="white", alpha=0.92, width=0.85)
         ax.errorbar(
@@ -1345,23 +1599,32 @@ def _write_readme_all_grids(out_dir: Path) -> None:
     print(f"Wrote {readme.relative_to(REPO)}")
 
 
-def _resolve_ai_band(args: argparse.Namespace, plot: str) -> tuple[float | None, float | None]:
+def _resolve_ai_band(args: argparse.Namespace, plot: str) -> tuple[float | None, float | None, float | None]:
+    if args.ai_top_pct is not None:
+        if args.ai_lo is not None or args.ai_hi is not None:
+            raise SystemExit("Use --ai-top-pct OR --ai-lo/--ai-hi, not both.")
+        pct = float(args.ai_top_pct)
+        if not 0.0 < pct < 100.0:
+            raise SystemExit("--ai-top-pct must be between 0 and 100 (e.g. 10 or 20).")
+        return None, None, pct
     has_lo = args.ai_lo is not None
     has_hi = args.ai_hi is not None
     if has_lo != has_hi:
-        raise SystemExit("Pass both --ai-lo and --ai-hi, or neither.")
+        raise SystemExit("Pass both --ai-lo and --ai-hi, or use --ai-top-pct.")
     if has_lo and has_hi:
-        return float(args.ai_lo), float(args.ai_hi)
+        return float(args.ai_lo), float(args.ai_hi), None
     if plot == "fixed_ai_tj_knbins":
-        return ELITE_AI_LO, ELITE_AI_HI
+        return ELITE_AI_LO, ELITE_AI_HI, None
     if plot in ("matched_pond", "p1_grid") and plot == "matched_pond":
-        return DEFAULT_AI_LO, DEFAULT_AI_HI
-    return None, None
+        return DEFAULT_AI_LO, DEFAULT_AI_HI, None
+    return None, None, None
 
 
 def _spec_from_args(args: argparse.Namespace) -> CctSpec:
+    from sports_pipeline.y_draft_mode import resolve_panel_rows_from_args
+
     w = current_window()
-    ai_lo, ai_hi = _resolve_ai_band(args, args.plot)
+    ai_lo, ai_hi, ai_top_pct = _resolve_ai_band(args, args.plot)
     return CctSpec(
         season_min=int(w.season_min),
         season_max=int(w.season_max),
@@ -1372,8 +1635,11 @@ def _spec_from_args(args: argparse.Namespace) -> CctSpec:
         n_bins=int(args.n_bins),
         ai_lo=ai_lo,
         ai_hi=ai_hi,
+        ai_top_pct=ai_top_pct,
         perf_metric=str(args.perf_metric).strip().lower(),
         dft=bool(args.dft),
+        y_draft_mode=str(getattr(args, "y_draft_mode", "ever")).strip().lower(),
+        panel_rows=resolve_panel_rows_from_args(args),
     )
 
 
@@ -1393,11 +1659,45 @@ def main() -> None:
     parser.add_argument("--n-bins", type=int, default=DEFAULT_N_BINS)
     parser.add_argument("--ai-lo", type=float, default=None, help="Lower perf z band (P1 default 1.5).")
     parser.add_argument("--ai-hi", type=float, default=None, help="Upper perf z band (P1 default 2.0).")
+    parser.add_argument(
+        "--ai-top-pct",
+        type=float,
+        default=None,
+        help="Top X%% of perf z in panel (e.g. 10 or 20). Mutually exclusive with --ai-lo/--ai-hi.",
+    )
     parser.add_argument("--perf-metric", type=str, default="ppm", choices=("ppm", "obpm", "bpm"))
     parser.add_argument(
         "--dft",
         action="store_true",
         help="+DFT subsample: teams with ≥1 draftee in window (all roster PS, not drafted-only).",
+    )
+    parser.add_argument(
+        "--y-draft-mode",
+        choices=("ever", "season"),
+        default="ever",
+        help=(
+            "Y_draft labeling: ever-draft (default) or season-Y "
+            "(Y=1 on draftee's last college PS only; earlier PS rows kept with Y=0)."
+        ),
+    )
+    parser.add_argument(
+        "--panel-rows",
+        choices=("all-ps", "last-ps"),
+        default="all-ps",
+        help=(
+            "Panel rows for plots. all-ps (default): every PS passing filters. "
+            "last-ps: one row per athlete at max(season) — cross-section."
+        ),
+    )
+    parser.add_argument(
+        "--last-season-only",
+        action="store_true",
+        help=argparse.SUPPRESS,
+    )
+    parser.add_argument(
+        "--all-seasons",
+        action="store_true",
+        help=argparse.SUPPRESS,
     )
     parser.add_argument(
         "--tj-binning",
@@ -1438,17 +1738,25 @@ def main() -> None:
         "--out-dir",
         type=Path,
         default=BASIC_DATA_PLOTS,
-        help="Output directory (default basic_data_plots/).",
+        help=(
+            "Output directory (default basic_data_plots/). "
+            "Sandbox: 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/fhero"
+        ),
     )
     args = parser.parse_args()
     activate_from_args(args)
     spec = _spec_from_args(args)
     out_dir = args.out_dir if args.out_dir.is_absolute() else REPO / args.out_dir
+    if str(spec.y_draft_mode).strip().lower() == "season":
+        from sports_pipeline.y_draft_mode import season_y_output_dir
+
+        out_dir = season_y_output_dir(out_dir if out_dir.name != "basic_data_plots" else BASIC_DATA_PLOTS)
 
     print(
         f"CCT {args.plot} · {seasons_label(spec.season_min, spec.season_max)} · "
         f"{spec.perf_metric.upper()} · {spec.population_label} · "
-        f"Â z {spec.ai_band_label} · mg{spec.min_team_season_games} min{spec.min_minutes:g}",
+        f"Â {spec.ai_band_label} · mg{spec.min_team_season_games} min{spec.min_minutes:g} · "
+        f"panel={spec.panel_rows} · Y={spec.y_draft_mode}",
         flush=True,
     )
     if args.plot == "matched_pond":
@@ -1481,8 +1789,6 @@ def main() -> None:
         if args.p2b_single:
             if not spec.dft:
                 spec = replace(spec, dft=True)
-            if args.min_minutes == DEFAULT_MIN_MINUTES and spec.ai_lo == ELITE_AI_LO:
-                spec = replace(spec, min_minutes=10.0)
             run_fixed_ai_tj_knbins(spec, out_dir, **tj_kw)
         else:
             base = replace(spec, dft=True, perf_metric="ppm")

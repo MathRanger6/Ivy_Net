@@ -1,0 +1,35 @@
+---
+description: Document-first thread tracking for Charles — living disposable logs, YOU ARE HERE, drive-by protocol
+alwaysApply: true
+---
+
+# Document-first thread (Charles workflow)
+
+Charles chose **Option A**: living **disposable markdown** is the source of truth for multi-step threads; in-chat **anchor** is backup only.
+
+## When a thread goes deep (binning, campaign triage, paper framing, etc.)
+
+1. Create or update a `_DISPOSABLE_*_thread.md` under `3-Master_Plan/re_entry/` with:
+   - **YOU ARE HERE** (table: step / task / status)
+   - **One-sentence Alex line** when relevant
+   - Compressed math or procedure (not chat walls)
+   - **Campaign triage** if plan items may be OBE
+   - **Thread log** (dated append-only entries)
+
+2. After substantive replies on that thread, update **YOU ARE HERE** or say explicitly: *No doc change.*
+
+3. If Charles says **anchor**, paste the current **YOU ARE HERE** block from the active disposable.
+
+4. If Charles says **one level**, answer the sub-question only — no new framework; offer **resume** to restore context from the doc.
+
+## Alex drive-bys
+
+- Answer honestly and quickly first (Charles’s call).
+- A drive-by **does not supersede** the campaign plan unless Alex explicitly reprioritizes.
+- At most **one** reactive replot/refactor per drive-by unless Charles says continue.
+- After the drive-by, point Charles back to the disposable **YOU ARE HERE**.
+
+## Verbosity
+
+- Prefer updating the disposable over long in-chat treatises when Charles is at risk of thread drift.
+- In chat: short answer + link/path to disposable section.

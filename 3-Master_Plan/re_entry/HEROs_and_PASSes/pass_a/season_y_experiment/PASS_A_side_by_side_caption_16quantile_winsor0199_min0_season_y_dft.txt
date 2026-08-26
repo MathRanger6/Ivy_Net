@@ -1,0 +1,13 @@
+Pass A caption — empirical pair
+
+Spec: n_bins=16 poolq_binning=quantile min_minutes=0.0 winsor=0.01–0.99 perf_metric=ppm
+
+Left: Mean NBA draft rate by ventile of player ability (perf z-scored
+within season). Monotone-up is the talent-only stylized read.
+
+Right: Mean NBA draft rate by ventile of leave-one-out teammate quality
+(poolq_loo), MBB 2011-2021, POST-QC panel (mg>=10, drop sub-20).
+Middle rise is the stylized fact; elite tail is flat on this panel.
+July pre-QC inverted-U tail: pass_a/sensitivity/ (not canonical).
+
+We do not use λ language on the empirical side; λ is a generative score knob (Pass B).

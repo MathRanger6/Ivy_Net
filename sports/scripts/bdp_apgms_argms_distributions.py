@@ -9,14 +9,19 @@ Run (repo root):
   python sports/scripts/bdp_apgms_argms_distributions.py
   python sports/scripts/bdp_apgms_argms_distributions.py --spec "mg10 min1 11_21"
   python sports/scripts/bdp_apgms_argms_distributions.py --metric season_minutes
+  python sports/scripts/bdp_apgms_argms_distributions.py --drafted-only --metric all --spec "mg10 min20 11_21"
 
 Use **min1** (not min0 + clip) to drop zero-minute player-seasons — filenames and subtitles stay aligned.
 Integer ESPN minutes ⇒ min1 ≡ drop zero-min only.
+
+**``--drafted-only``** — keep player-seasons with ``Y_draft = 1`` only; team panel = mean among
+drafted players within each (team, season). No +DFT overlay. Filename suffix ``_drafted_only``.
 
 Outputs:
   ``basic_data_plots/BDP_APGMS_mg10_min1_11_21.png`` (+ JSON)
   ``basic_data_plots/BDP_ARGMS_mg10_min1_11_21.png`` (+ JSON)
   ``basic_data_plots/BDP_season_minutes_mg10_min1_11_21.png`` (+ JSON)
+  ``basic_data_plots/BDP_*_mg10_min20_11_21_drafted_only.png`` (+ JSON) with ``--drafted-only``
 """
 
 from __future__ import annotations
@@ -115,6 +120,14 @@ def _prepare_panel(spec: BdpSpec, *, need_cols: tuple[str, ...] = ("apgms", "arg
     return use
 
 
+def _filter_drafted(panel: pd.DataFrame) -> pd.DataFrame:
+    """Keep ever-draft player-seasons only (Y_draft = 1)."""
+    if "Y_draft" not in panel.columns:
+        raise RuntimeError("Panel missing Y_draft — check draft lookup merge in panel_rebuild.")
+    y = pd.to_numeric(panel["Y_draft"], errors="coerce").fillna(0).astype(int)
+    return panel.loc[y == 1].copy()
+
+
 def _attach_team_means(panel: pd.DataFrame) -> pd.DataFrame:
     """Add T_apgms / T_argms (mean player metric within team-season)."""
     out = panel.copy()
@@ -149,6 +162,7 @@ def build_figure(
     player_dft: np.ndarray | None = None,
     team_dft: np.ndarray | None = None,
     figsize: tuple[float, float] = (10.5, 6.5),
+    drafted_only: bool = False,
 ) -> None:
     meta = METRICS[metric_key]
     pool = [player, team]
@@ -159,17 +173,31 @@ def build_figure(
     bin_width = edges[1] - edges[0]
 
     fig, axes = plt.subplots(1, 2, figsize=figsize, sharex=True)
-    bar_colors = (
-        (PLAYER_BAR_COLOR, TEAM_BAR_COLOR)
-        if metric_key in ("apgms", "argms")
-        else (BAR_COLOR, BAR_COLOR)
-    )
+    if drafted_only:
+        bar_colors = (BAR_COLOR, DFT_OVERLAY_COLOR)
+    elif metric_key in ("apgms", "argms"):
+        bar_colors = (PLAYER_BAR_COLOR, TEAM_BAR_COLOR)
+    else:
+        bar_colors = (BAR_COLOR, BAR_COLOR)
     panels = [
-        (axes[0], player, player_dft, meta["player_title"].format(n=player.size), bar_colors[0]),
-        (axes[1], team, team_dft, meta["team_title"].format(n=team.size), bar_colors[1]),
+        (
+            axes[0],
+            player,
+            player_dft,
+            meta["player_title"].format(n=player.size),
+            bar_colors[0],
+        ),
+        (
+            axes[1],
+            team,
+            team_dft,
+            meta["team_title"].format(n=team.size),
+            bar_colors[1],
+        ),
     ]
 
     legend_handles = legend_labels = None
+    series_label = r"$Y_{\mathrm{draft}}=1$" if drafted_only else "without DFT"
     for ax, values, values_dft, title, bar_color in panels:
         counts, _ = np.histogram(values, bins=edges)
         ax.bar(
@@ -181,7 +209,7 @@ def build_figure(
             alpha=BAR_ALPHA,
             edgecolor=bar_color,
             linewidth=0.3,
-            label="without DFT",
+            label=series_label,
         )
         counts_dft = None
         if values_dft is not None:
@@ -205,9 +233,31 @@ def build_figure(
         ax.grid(axis="y", alpha=0.25, linewidth=0.5)
         if legend_handles is None:
             legend_handles, legend_labels = ax.get_legend_handles_labels()
-        draw_stats_box(ax, _summary(values), _summary(values_dft) if values_dft is not None else None)
+        if drafted_only:
+            stats = _summary(values)
+            ax.text(
+                0.97,
+                0.98,
+                (
+                    rf"$Y_{{\mathrm{{draft}}}}=1$:"
+                    f"  mean={stats['mean']:7.3f}  sd={stats['std']:6.3f}"
+                ),
+                transform=ax.transAxes,
+                va="top",
+                ha="right",
+                fontsize=7.5,
+                family="monospace",
+                bbox=dict(
+                    boxstyle="round,pad=0.35",
+                    facecolor="white",
+                    alpha=0.92,
+                    edgecolor="0.8",
+                ),
+            )
+        else:
+            draw_stats_box(ax, _summary(values), _summary(values_dft) if values_dft is not None else None)
 
-    has_overlay = player_dft is not None
+    has_overlay = player_dft is not None and not drafted_only
     if legend_handles and has_overlay:
         fig.legend(
             legend_handles,
@@ -219,19 +269,44 @@ def build_figure(
             framealpha=0.95,
         )
         bottom = 0.10
+    elif drafted_only:
+        bottom = 0.06
     else:
         axes[0].legend(loc="lower right", fontsize=8, framealpha=0.92)
         bottom = 0.06
 
-    fig.suptitle(
-        rf"BDP — {meta['title_short'].replace('_', ' ')} (player + team mean)",
-        fontsize=12,
-        y=0.995,
-    )
+    title_short = meta["title_short"].replace("_", " ")
     sub1, sub2 = subtitle_lines(spec, has_overlay=has_overlay)
-    fig.text(0.5, 0.962, sub1, ha="center", va="top", fontsize=9, color="0.25")
-    fig.text(0.5, 0.947, sub2, ha="center", va="top", fontsize=9, color="0.25")
-    fig.tight_layout(rect=(0, bottom, 1, 0.925))
+    if drafted_only:
+        fig.text(
+            0.5,
+            0.985,
+            rf"BDP — {title_short} (player + team mean)",
+            ha="center",
+            va="top",
+            fontsize=12,
+            fontweight="medium",
+        )
+        fig.text(
+            0.5,
+            0.962,
+            r"Drafted only · $Y_{\mathrm{draft}}=1$",
+            ha="center",
+            va="top",
+            fontsize=10,
+            color="0.35",
+        )
+        top = 0.90
+    else:
+        fig.suptitle(
+            rf"BDP — {title_short} (player + team mean)",
+            fontsize=12,
+            y=0.995,
+        )
+        top = 0.925
+    fig.text(0.5, 0.938 if drafted_only else 0.962, sub1, ha="center", va="top", fontsize=9, color="0.25")
+    fig.text(0.5, 0.923 if drafted_only else 0.947, sub2, ha="center", va="top", fontsize=9, color="0.25")
+    fig.tight_layout(rect=(0, bottom, 1, top))
     fig.savefig(png, dpi=150)
     plt.close(fig)
     print(f"Wrote {png.relative_to(REPO)}")
@@ -242,16 +317,21 @@ def run_spec(
     metric_key: str,
     *,
     overlay_dft: bool = True,
+    drafted_only: bool = False,
     figsize: tuple[float, float] = (10.5, 6.5),
 ) -> Path:
     ensure_hero_dirs()
     meta = METRICS[metric_key]
-    stem = f"BDP_{meta['title_short']}_{spec.slug}"
+    suffix = "_drafted_only" if drafted_only else ""
+    stem = f"BDP_{meta['title_short']}_{spec.slug}{suffix}"
     out_png = BASIC_DATA_PLOTS / f"{stem}.png"
     out_json = BASIC_DATA_PLOTS / f"{stem}.json"
 
     need = ("minutes", "apgms", "argms")
-    panel = _attach_team_means(_prepare_panel(spec, need_cols=need))
+    panel = _prepare_panel(spec, need_cols=need)
+    if drafted_only:
+        panel = _filter_drafted(panel)
+    panel = _attach_team_means(panel)
     col = meta["col"]
     team_col = meta["team_col"]
 
@@ -262,7 +342,8 @@ def run_spec(
 
     player_dft = team_dft = None
     dft_panel_n: int | None = None
-    if overlay_dft and not spec.dft:
+    use_overlay = overlay_dft and not spec.dft and not drafted_only
+    if use_overlay:
         panel_dft = _attach_team_means(
             _prepare_panel(replace(spec, dft=True), need_cols=need)
         )
@@ -281,6 +362,7 @@ def run_spec(
         player_dft=player_dft,
         team_dft=team_dft,
         figsize=figsize,
+        drafted_only=drafted_only,
     )
 
     payload = {
@@ -295,9 +377,10 @@ def run_spec(
         },
         "bdp_spec": spec.label,
         "seasons": f"{spec.season_min}-{spec.season_max}",
+        "drafted_only": drafted_only,
         "player": _summary(player),
         "team_mean": _summary(team),
-        "overlay_dft": overlay_dft and not spec.dft,
+        "overlay_dft": use_overlay,
         "png": out_png.name,
     }
     if player_dft is not None:
@@ -331,6 +414,11 @@ def main() -> None:
         action="store_false",
         dest="overlay_dft",
     )
+    parser.add_argument(
+        "--drafted-only",
+        action="store_true",
+        help="Keep Y_draft=1 player-seasons only; disable +DFT overlay.",
+    )
     parser.add_argument("--fig-height", type=float, default=6.5)
     args = parser.parse_args()
     spec = parse_bdp_spec(args.spec)
@@ -342,11 +430,13 @@ def main() -> None:
     else:
         keys = [args.metric]
     for key in keys:
-        print(f"\n=== {key.upper()} · {spec.label} ===")
+        tag = "drafted only" if args.drafted_only else "full panel"
+        print(f"\n=== {key.upper()} · {spec.label} · {tag} ===")
         run_spec(
             spec,
             key,
             overlay_dft=args.overlay_dft,
+            drafted_only=args.drafted_only,
             figsize=figsize,
         )
     print("\nDone.")

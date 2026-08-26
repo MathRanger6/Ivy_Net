@@ -10,9 +10,23 @@ Run (repo root):
   python sports/scripts/bdp_ai_tj_distributions.py
   python sports/scripts/bdp_ai_tj_distributions.py --perf-metric bpm
   python sports/scripts/bdp_ai_tj_distributions.py --spec "mg10 min20 11_21"
+  python sports/scripts/bdp_ai_tj_distributions.py --spec "mg10 min20 11_21" --drafted-only
+  python sports/scripts/bdp_ai_tj_distributions.py --spec "mg10 min20 11_21" --dft-only
 
-Outputs: ``HEROs_and_PASSes/basic_data_plots/BDP_Ai_Tj_<spec>.png`` (+ meta JSON).
-With ``--perf-metric bpm`` / ``obpm``: ``BDP_Ai_Tj_<spec>_bpm.png`` / ``_obpm.png``.
+**``--drafted-only``** — keep player-seasons with ``Y_draft = 1`` only; team panel = mean among
+drafted players within each (team, season). Filename suffix ``_drafted_only``.
+
+**``--drafted-only --panel-tj-dft``** — drafted ``\\hat{A}_i`` only; ``\\hat{T}_j`` = **+DFT roster
+mean** (same as draft-team panel). Suffix ``_drafted_only_panel_tj``.
+
+**``--slide14-compare``** — one figure: [+DFT ``\\hat{A}_i`` | +DFT ``\\hat{T}_j`` | drafted ``\\hat{A}_i`` | +DFT ``\\hat{T}_j``].
+Suffix ``_slide14_compare``.
+
+**``--dft-only``** — keep all player-seasons on **draft-ever teams** (≥1 draftee in window);
+same side-by-side layout for comparison. Filename suffix ``_dft_only``. Mutually exclusive with
+``--drafted-only``.
+
+Outputs: ``HEROs_and_PASSes/basic_data_plots/BDP_Ai_Tj_<spec>_<ppm|bpm|obpm>.png`` (+ meta JSON).
 """
 
 from __future__ import annotations
@@ -286,6 +300,14 @@ def _prepare(spec: BdpSpec, perf_metric: str) -> pd.DataFrame:
     return use
 
 
+def _filter_drafted(panel: pd.DataFrame) -> pd.DataFrame:
+    """Keep ever-draft player-seasons only (Y_draft = 1)."""
+    if "Y_draft" not in panel.columns:
+        raise RuntimeError("Panel missing Y_draft — check draft lookup merge in panel_rebuild.")
+    y = pd.to_numeric(panel["Y_draft"], errors="coerce").fillna(0).astype(int)
+    return panel.loc[y == 1].copy()
+
+
 def _summary(values: np.ndarray) -> dict:
     v = np.asarray(values, dtype=float)
     v = v[np.isfinite(v)]
@@ -329,10 +351,14 @@ def build_figure(
     ability_dft: np.ndarray | None = None,
     team_talent_dft: np.ndarray | None = None,
     figsize: tuple[float, float] = (10.5, 4.2),
+    drafted_only: bool = False,
+    dft_only: bool = False,
+    panel_tj_dft: bool = False,
 ) -> None:
     from gallery_mathtext import configure_matplotlib_mathtext
 
     configure_matplotlib_mathtext()
+    standalone = drafted_only or dft_only
     bar_color = _bar_color(perf_metric)
     pool = [ability, team_talent]
     if ability_dft is not None and team_talent_dft is not None:
@@ -341,37 +367,59 @@ def build_figure(
     centers = 0.5 * (edges[:-1] + edges[1:])
     bin_width = edges[1] - edges[0]
 
+    tj_title = (
+        rf"$\hat{{T}}_j$ — +DFT roster mean ($n={team_talent.size:,}$ team-seasons)"
+        if (drafted_only and panel_tj_dft)
+        else rf"$\hat{{T}}_j$ — realized team talent ($n={team_talent.size:,}$ team-seasons)"
+    )
+
     fig, axes = plt.subplots(1, 2, figsize=figsize, sharex=True)
+    player_color = bar_color
+    team_color = DFT_OVERLAY_COLOR if standalone else bar_color
     panels: list[tuple] = [
         (
             axes[0],
             ability,
             ability_dft,
             rf"$\hat{{A}}_i$ — player ability ($n={ability.size:,}$)",
+            player_color,
         ),
         (
             axes[1],
             team_talent,
             team_talent_dft,
-            rf"$\hat{{T}}_j$ — realized team talent ($n={team_talent.size:,}$ team-seasons)",
+            tj_title,
+            team_color,
         ),
     ]
 
     legend_handles: list | None = None
     legend_labels: list | None = None
+    if drafted_only:
+        series_label = r"$Y_{\mathrm{draft}}=1$"
+        stats_label = r"$Y_{\mathrm{draft}}=1$"
+    elif dft_only:
+        series_label = "+DFT"
+        stats_label = "+DFT"
+    else:
+        series_label = "without DFT"
+        stats_label = ""
 
-    for ax, values, values_dft, title in panels:
+    tj_stats_label = "+DFT roster" if (drafted_only and panel_tj_dft) else stats_label
+
+    for ax, values, values_dft, title, panel_color in panels:
+        is_tj_panel = r"\hat{T}" in title
         counts, _ = np.histogram(values, bins=edges)
         ax.bar(
             centers,
             counts,
             width=bin_width * 0.98,
             align="center",
-            color=bar_color,
+            color=panel_color,
             alpha=BAR_ALPHA,
-            edgecolor=bar_color,
+            edgecolor=panel_color,
             linewidth=0.3,
-            label="without DFT",
+            label=series_label,
         )
         if values_dft is not None:
             counts_dft, _ = np.histogram(values_dft, bins=edges)
@@ -399,10 +447,29 @@ def build_figure(
         if legend_handles is None:
             legend_handles, legend_labels = ax.get_legend_handles_labels()
         stats = _summary(values)
-        sd = _summary(values_dft) if values_dft is not None else None
-        draw_stats_box(ax, stats, sd, decimals=3)
+        if standalone:
+            label = tj_stats_label if is_tj_panel else stats_label
+            ax.text(
+                0.97,
+                0.98,
+                f"{label}:  mean={stats['mean']:7.3f}  sd={stats['std']:6.3f}",
+                transform=ax.transAxes,
+                va="top",
+                ha="right",
+                fontsize=7.5,
+                family="monospace",
+                bbox=dict(
+                    boxstyle="round,pad=0.35",
+                    facecolor="white",
+                    alpha=0.92,
+                    edgecolor="0.8",
+                ),
+            )
+        else:
+            sd = _summary(values_dft) if values_dft is not None else None
+            draw_stats_box(ax, stats, sd, decimals=3)
 
-    has_overlay = ability_dft is not None
+    has_overlay = ability_dft is not None and not standalone
     if legend_handles and has_overlay:
         fig.legend(
             legend_handles,
@@ -414,30 +481,241 @@ def build_figure(
             framealpha=0.95,
         )
         bottom = 0.10
+    elif standalone:
+        bottom = 0.06
     else:
         axes[0].legend(loc="lower right", fontsize=8, framealpha=0.92)
         bottom = 0.06
 
-    fig.suptitle(
-        rf"BDP — Empirical $\hat{{A}}_i$ and $\hat{{T}}_j$",
-        fontsize=12,
-        y=0.995,
-    )
     sub1, sub2 = subtitle_lines(spec, has_overlay=has_overlay, perf_metric=perf_metric)
-    fig.text(0.5, 0.962, sub1, ha="center", va="top", fontsize=9, color="0.25")
-    fig.text(0.5, 0.947, sub2, ha="center", va="top", fontsize=9, color="0.25")
+    if standalone:
+        fig.text(
+            0.5,
+            0.985,
+            rf"BDP — Empirical $\hat{{A}}_i$ and $\hat{{T}}_j$",
+            ha="center",
+            va="top",
+            fontsize=12,
+            fontweight="medium",
+        )
+        line2 = (
+            r"Drafted only · $Y_{\mathrm{draft}}=1$"
+            if drafted_only
+            else r"+DFT · draft-ever teams (all roster PS)"
+        )
+        if drafted_only and panel_tj_dft:
+            line2 += r" · $\hat{T}_j$ = +DFT roster mean"
+        fig.text(
+            0.5,
+            0.962,
+            line2,
+            ha="center",
+            va="top",
+            fontsize=10,
+            color="0.35",
+        )
+        top = 0.90
+    else:
+        fig.suptitle(
+            rf"BDP — Empirical $\hat{{A}}_i$ and $\hat{{T}}_j$",
+            fontsize=12,
+            y=0.995,
+        )
+        top = 0.925
+    fig.text(0.5, 0.938 if standalone else 0.962, sub1, ha="center", va="top", fontsize=9, color="0.25")
+    fig.text(0.5, 0.923 if standalone else 0.947, sub2, ha="center", va="top", fontsize=9, color="0.25")
 
-    fig.tight_layout(rect=(0, bottom, 1, 0.925))
+    fig.tight_layout(rect=(0, bottom, 1, top))
     fig.savefig(png, dpi=150)
     plt.close(fig)
     print(f"Wrote {png.relative_to(REPO)}")
 
 
-def _output_stem(spec: BdpSpec, perf_metric: str) -> str:
-    base = f"BDP_Ai_Tj_{spec.slug}"
-    if perf_metric.strip().lower() != "ppm":
-        return f"{base}_{perf_metric.strip().lower()}"
-    return base
+def build_slide14_compare_figure(
+    spec: BdpSpec,
+    *,
+    ability_dft: np.ndarray,
+    team_talent_dft: np.ndarray,
+    ability_drafted: np.ndarray,
+    png: Path,
+    perf_metric: str,
+    perf_axis_label: str,
+) -> None:
+    """Slide 14: +DFT pair vs drafted-Â pair with +DFT roster T̂_j repeated (not drafted-only mean)."""
+    from gallery_mathtext import configure_matplotlib_mathtext
+
+    configure_matplotlib_mathtext()
+    bar_color = _bar_color(perf_metric)
+    pool = [ability_dft, team_talent_dft, ability_drafted]
+    edges = _histogram_edges(*pool)
+    centers = 0.5 * (edges[:-1] + edges[1:])
+    bin_width = edges[1] - edges[0]
+
+    fig, axes = plt.subplots(1, 4, figsize=(14.0, 4.5), sharex=True)
+    panels: list[tuple] = [
+        (
+            axes[0],
+            ability_dft,
+            rf"$\hat{{A}}_i$ — +DFT panel ($n={ability_dft.size:,}$)",
+            bar_color,
+            "+DFT",
+        ),
+        (
+            axes[1],
+            team_talent_dft,
+            rf"$\hat{{T}}_j$ — +DFT roster mean ($n={team_talent_dft.size:,}$ team-seasons)",
+            DFT_OVERLAY_COLOR,
+            "+DFT",
+        ),
+        (
+            axes[2],
+            ability_drafted,
+            rf"$\hat{{A}}_i$ — drafted only ($n={ability_drafted.size:,}$)",
+            bar_color,
+            r"$Y_{\mathrm{draft}}=1$",
+        ),
+        (
+            axes[3],
+            team_talent_dft,
+            rf"$\hat{{T}}_j$ — +DFT roster mean (same as left)",
+            DFT_OVERLAY_COLOR,
+            "+DFT roster",
+        ),
+    ]
+
+    for ax, values, title, panel_color, stats_label in panels:
+        counts, _ = np.histogram(values, bins=edges)
+        ax.bar(
+            centers,
+            counts,
+            width=bin_width * 0.98,
+            align="center",
+            color=panel_color,
+            alpha=BAR_ALPHA,
+            edgecolor=panel_color,
+            linewidth=0.3,
+        )
+        peak = int(counts.max())
+        ax.set_ylim(0, peak * Y_HEADROOM)
+        ax.set_xlabel(perf_axis_label, fontsize=9)
+        ax.set_ylabel("Count", fontsize=9)
+        ax.set_title(title, fontsize=10, pad=6)
+        ax.grid(axis="y", alpha=0.25, linewidth=0.5)
+        stats = _summary(values)
+        ax.text(
+            0.97,
+            0.98,
+            f"{stats_label}:  mean={stats['mean']:7.3f}  sd={stats['std']:6.3f}",
+            transform=ax.transAxes,
+            va="top",
+            ha="right",
+            fontsize=7,
+            family="monospace",
+            bbox=dict(
+                boxstyle="round,pad=0.35",
+                facecolor="white",
+                alpha=0.92,
+                edgecolor="0.8",
+            ),
+        )
+
+    sub1, sub2 = subtitle_lines(replace(spec, dft=True), has_overlay=False, perf_metric=perf_metric)
+    fig.text(
+        0.5,
+        0.985,
+        r"Slide 14 — +DFT panel vs drafted $\hat{A}_i$ (shared +DFT $\hat{T}_j$)",
+        ha="center",
+        va="top",
+        fontsize=12,
+        fontweight="medium",
+    )
+    fig.text(
+        0.5,
+        0.962,
+        r"Right $\hat{T}_j$ repeats draft-team roster mean — not mean among drafted players only",
+        ha="center",
+        va="top",
+        fontsize=9,
+        color="0.35",
+    )
+    fig.text(0.5, 0.942, sub1, ha="center", va="top", fontsize=9, color="0.25")
+    fig.text(0.5, 0.927, sub2, ha="center", va="top", fontsize=9, color="0.25")
+    fig.text(0.25, 0.905, "Players on a draft team", ha="center", fontsize=10, color="0.2", fontweight="medium")
+    fig.text(0.75, 0.905, "Drafted players only ($Y_{\\mathrm{draft}}=1$)", ha="center", fontsize=10, color="0.2", fontweight="medium")
+
+    fig.tight_layout(rect=(0, 0, 1, 0.88))
+    fig.savefig(png, dpi=150)
+    plt.close(fig)
+    print(f"Wrote {png.relative_to(REPO)}")
+
+
+def run_slide14_compare(spec: BdpSpec, perf_metric: str, *, out_png: Path | None = None) -> Path:
+    sys.path.insert(0, str(SPORTS))
+    from sports_pipeline.perf_metric import plot_label_for_metric
+
+    ensure_hero_dirs()
+    stem = _output_stem(spec, perf_metric, slide14_compare=True)
+    out_png = out_png or (BASIC_DATA_PLOTS / f"{stem}.png")
+    out_meta = BASIC_DATA_PLOTS / f"{stem}.json"
+    perf_axis = rf"{perf_metric.upper()} $z$ within season"
+
+    spec_dft = replace(spec, dft=True)
+    use_dft = _prepare(spec_dft, perf_metric)
+    use_full = _prepare(spec, perf_metric)
+    ability_dft = use_dft["perf"].to_numpy(dtype=float)
+    team_talent_dft = _team_talent(use_dft)
+    use_drafted = _filter_drafted(use_full)
+    ability_drafted = use_drafted["perf"].to_numpy(dtype=float)
+
+    build_slide14_compare_figure(
+        spec,
+        ability_dft=ability_dft,
+        team_talent_dft=team_talent_dft,
+        ability_drafted=ability_drafted,
+        png=out_png,
+        perf_metric=perf_metric,
+        perf_axis_label=perf_axis,
+    )
+
+    meta = {
+        "diagnostic": "bdp_ai_tj_slide14_compare",
+        "date": date.today().isoformat(),
+        "bdp_spec": spec_dft.label,
+        "perf_metric": perf_metric,
+        "note": "A_i drafted = full-panel within-season z, Y=1; T_j right pair = +DFT roster mean",
+        "A_i_dft": _summary(ability_dft),
+        "T_j_dft": _summary(team_talent_dft),
+        "A_i_drafted": _summary(ability_drafted),
+        "n_team_seasons_dft": int(use_dft.groupby(["team_id", "season"], observed=True).ngroups),
+        "png": out_png.name,
+    }
+    out_meta.write_text(json.dumps(meta, indent=2) + "\n", encoding="utf-8")
+    print(f"Wrote {out_meta.relative_to(REPO)}")
+    return out_png
+
+
+def _output_stem(
+    spec: BdpSpec,
+    perf_metric: str,
+    *,
+    drafted_only: bool = False,
+    dft_only: bool = False,
+    panel_tj_dft: bool = False,
+    slide14_compare: bool = False,
+) -> str:
+    metric = str(perf_metric).strip().lower()
+    slug_spec = replace(spec, dft=False) if dft_only else spec
+    if slide14_compare:
+        suffix = "_slide14_compare"
+    elif drafted_only and panel_tj_dft:
+        suffix = "_drafted_only_panel_tj"
+    elif drafted_only:
+        suffix = "_drafted_only"
+    elif dft_only:
+        suffix = "_dft_only"
+    else:
+        suffix = ""
+    return f"BDP_Ai_Tj_{slug_spec.slug}_{metric}{suffix}"
 
 
 def run_spec(
@@ -445,27 +723,50 @@ def run_spec(
     perf_metric: str,
     *,
     overlay_dft: bool = False,
+    drafted_only: bool = False,
+    dft_only: bool = False,
+    panel_tj_dft: bool = False,
     out_png: Path | None = None,
     figsize: tuple[float, float] = (10.5, 4.2),
 ) -> Path:
+    if drafted_only and dft_only:
+        raise ValueError("Use only one of --drafted-only or --dft-only.")
+    if panel_tj_dft and not drafted_only:
+        raise ValueError("--panel-tj-dft requires --drafted-only.")
+    if dft_only:
+        spec = replace(spec, dft=True)
+
     sys.path.insert(0, str(SPORTS))
     from sports_pipeline.perf_metric import plot_label_for_metric
 
     ensure_hero_dirs()
-    stem = _output_stem(spec, perf_metric)
+    stem = _output_stem(
+        spec,
+        perf_metric,
+        drafted_only=drafted_only,
+        dft_only=dft_only,
+        panel_tj_dft=panel_tj_dft,
+    )
     out_png = out_png or (BASIC_DATA_PLOTS / f"{stem}.png")
     out_meta = BASIC_DATA_PLOTS / f"{stem}.json"
     perf_label = plot_label_for_metric(perf_metric)
     perf_axis = rf"{perf_metric.upper()} $z$ within season"
 
+    spec_dft = replace(spec, dft=True)
+    use_dft_full = _prepare(spec_dft, perf_metric)
     use = _prepare(spec, perf_metric)
+    if drafted_only:
+        # Â: always ever-draft rows from the **full-panel** z reference (preserves ~1.08 mean).
+        # T̂_j with --panel-tj-dft: +DFT roster mean only — do not re-score draftees on +DFT pool.
+        use = _filter_drafted(use)
     ability = use["perf"].to_numpy(dtype=float)
-    team_talent = _team_talent(use)
+    team_talent = _team_talent(use_dft_full if (drafted_only and panel_tj_dft) else use)
 
     ability_dft: np.ndarray | None = None
     team_talent_dft: np.ndarray | None = None
     dft_meta: dict | None = None
-    if overlay_dft and not spec.dft:
+    use_overlay = overlay_dft and not spec.dft and not drafted_only and not dft_only
+    if use_overlay:
         spec_dft = replace(spec, dft=True)
         use_dft = _prepare(spec_dft, perf_metric)
         ability_dft = use_dft["perf"].to_numpy(dtype=float)
@@ -489,6 +790,9 @@ def run_spec(
         ability_dft=ability_dft,
         team_talent_dft=team_talent_dft,
         figsize=figsize,
+        drafted_only=drafted_only,
+        dft_only=dft_only,
+        panel_tj_dft=panel_tj_dft,
     )
 
     n_drafted = int(pd.to_numeric(use["Y_draft"], errors="coerce").fillna(0).sum())
@@ -502,7 +806,10 @@ def run_spec(
         "min_team_season_games": spec.min_team_season_games,
         "min_minutes": spec.min_minutes,
         "dft": spec.dft,
-        "overlay_dft": overlay_dft and not spec.dft,
+        "drafted_only": drafted_only,
+        "dft_only": dft_only,
+        "panel_tj_dft": panel_tj_dft,
+        "overlay_dft": use_overlay,
         "perf": f"{perf_label} z within season (no poolq winsor)",
         "png": out_png.name,
         "A_i_hat": _summary(ability),
@@ -566,16 +873,58 @@ def main() -> None:
         default=6.5,
         help="Figure height in inches (default: 6.5).",
     )
+    parser.add_argument(
+        "--drafted-only",
+        action="store_true",
+        help="Keep Y_draft=1 player-seasons only; disable +DFT overlay.",
+    )
+    parser.add_argument(
+        "--dft-only",
+        action="store_true",
+        help="Keep all PS on draft-ever teams (+DFT); disable overlay.",
+    )
+    parser.add_argument(
+        "--panel-tj-dft",
+        action="store_true",
+        help="With --drafted-only: use +DFT roster mean for T̂_j (not drafted-only mean).",
+    )
+    parser.add_argument(
+        "--slide14-compare",
+        action="store_true",
+        help="Four-panel Slide 14 figure (+DFT vs drafted A_i; shared +DFT T_j).",
+    )
     args = parser.parse_args()
+    if args.drafted_only and args.dft_only:
+        parser.error("Use only one of --drafted-only or --dft-only.")
+    if args.slide14_compare and (args.drafted_only or args.dft_only or args.panel_tj_dft):
+        parser.error("--slide14-compare cannot combine with --drafted-only / --dft-only / --panel-tj-dft.")
+    if args.panel_tj_dft and not args.drafted_only:
+        parser.error("--panel-tj-dft requires --drafted-only.")
     specs = [parse_bdp_spec(s) for s in (args.specs or DEFAULT_SPECS)]
     figsize = (10.5, args.fig_height)
     out_png = (BASIC_DATA_PLOTS / args.out) if args.out else None
+    if args.slide14_compare:
+        if len(specs) != 1:
+            parser.error("--slide14-compare requires exactly one --spec.")
+        print(f"\n=== {args.perf_metric} · {specs[0].label} · slide14 compare ===")
+        run_slide14_compare(specs[0], args.perf_metric, out_png=out_png)
+        print("\nDone.")
+        return
     for i, spec in enumerate(specs):
-        print(f"\n=== {args.perf_metric} · {spec.label} ===")
+        if args.drafted_only:
+            tag = "drafted only"
+        elif args.dft_only:
+            tag = "+DFT teams"
+        else:
+            tag = "full panel"
+        print(f"\n=== {args.perf_metric} · {spec.label} · {tag} ===")
         run_spec(
             spec,
             args.perf_metric,
             overlay_dft=args.overlay_dft,
+            drafted_only=args.drafted_only,
+            dft_only=args.dft_only,
+            panel_tj_dft=args.panel_tj_dft,
             out_png=out_png if (out_png and len(specs) == 1) else None,
             figsize=figsize,
         )

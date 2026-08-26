@@ -1,0 +1,30 @@
+{
+  "diagnostic": "bdp_ai_tj_slide14_compare",
+  "date": "2026-08-25",
+  "bdp_spec": "mg10 min20 11_21",
+  "perf_metric": "ppm",
+  "note": "A_i drafted = full-panel within-season z, Y=1; T_j right pair = +DFT roster mean",
+  "A_i_dft": {
+    "n": 17659,
+    "mean": 0.08650315415641056,
+    "std": 0.7569431031269889,
+    "min": -2.044462136508937,
+    "max": 4.475513484356943
+  },
+  "T_j_dft": {
+    "n": 1494,
+    "mean": 0.08840756671287549,
+    "std": 0.1863683288400404,
+    "min": -0.541587968890325,
+    "max": 0.6733067109574905
+  },
+  "A_i_drafted": {
+    "n": 1133,
+    "mean": 1.0817180659165846,
+    "std": 0.9218632532908108,
+    "min": -1.8118312845973201,
+    "max": 5.9505448270393
+  },
+  "n_team_seasons_dft": 1494,
+  "png": "BDP_Ai_Tj_mg10_min20_11_21_ppm_slide14_compare.png"
+}
