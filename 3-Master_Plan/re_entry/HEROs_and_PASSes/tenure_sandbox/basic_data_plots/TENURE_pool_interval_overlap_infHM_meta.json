@@ -1,0 +1,40 @@
+{
+  "diagnostic": "tenure_pool_interval_overlap",
+  "date": "2026-09-01",
+  "filter": "HIGH/MEDIUM inference \u00b7 OA-matched assistant-years \u00b7 LOO computable",
+  "pool_unit": "uni_slug \u00d7 year (OpenAlex assistant peer pool)",
+  "perf": "pubs_year z-scored within calendar year",
+  "pool_min_assistants": 2,
+  "seasons": "2000-2024",
+  "coverage_max": 245,
+  "coverage_max_normalized": 0.8657243816254417,
+  "coverage_mean": 35.75,
+  "coverage_frac_gt_1": 0.845,
+  "coverage_disjoint_max": 2,
+  "coverage_disjoint_mean": 0.9475,
+  "n_team_seasons": 283,
+  "n_player_seasons": 2396,
+  "H_sort": 0.1729087425671313,
+  "perf_span": {
+    "label": "perf_span",
+    "n": 283,
+    "mean": 1.9678324393002464,
+    "std": 1.8732794551958525,
+    "min": 0.0,
+    "max": 14.788979714932386,
+    "median": 1.4356021864286028
+  },
+  "T_j_hat": {
+    "label": "\\hat{T}_j",
+    "n": 283,
+    "mean": 0.00882682881704891,
+    "std": 0.5069422591503944,
+    "min": -0.9472688330521539,
+    "max": 3.533574374450257,
+    "median": -0.09470986646577582
+  },
+  "outputs": {
+    "png": "TENURE_pool_interval_overlap_infHM.png",
+    "uni_year_csv": "TENURE_pool_interval_overlap_infHM_uni_year.csv"
+  }
+}

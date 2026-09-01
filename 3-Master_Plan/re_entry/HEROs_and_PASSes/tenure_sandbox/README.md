@@ -6,6 +6,8 @@
 **Pipeline map (MBB mirror):** [`TENURE_hero_pipeline.md`](TENURE_hero_pipeline.md)  
 **Living thread:** [`_DISPOSABLE_tenure_hero_thread.md`](_DISPOSABLE_tenure_hero_thread.md) — say **`anchor`** in chat for YOU ARE HERE.
 
+**Perf / pool spec fork:** [`tenure_perf_metrics_discussion.md`](tenure_perf_metrics_discussion.md)
+
 **Data handoff:** [`../../20260901_PEER_to_COMPASS_tenure_hero_mac_handoff.md`](../../20260901_PEER_to_COMPASS_tenure_hero_mac_handoff.md)
 
 ---
@@ -20,6 +22,7 @@ tenure_sandbox/
   _DISPOSABLE_tenure_hero_thread.md
   hero/                        ← Pass A HERO outputs
   fhero/                       ← F-HERO (later)
+  basic_data_plots/            ← porch BDPs + TENURE_BDP_slides_AUTO.pptx
 ```
 
 **Input (not in this folder):** `tenure/tenure_pipeline/faculty_panel_with_pools.jsonl`  
@@ -57,9 +60,13 @@ Each PNG should have matching `*_binned.csv` and `*_provenance.json`.
 ## Run (after script lands)
 
 ```bash
-# repo root
+# repo root — HERO
 python tenure/scripts/tenure_pass_a_hero.py
-python tenure/scripts/tenure_pass_a_hero.py --n-bins 12   # sensitivity
+python tenure/scripts/tenure_pass_a_hero.py --n-bins 20 --output-tag q20_loo_infHM  # dip robustness
+
+# porch basic data plots + slides
+python tenure/scripts/tenure_basic_plots.py
+python tenure/scripts/build_tenure_basic_plots_slides.py
 ```
 
-Outputs → `3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/hero/`
+Outputs → `hero/` and `basic_data_plots/` under this folder.

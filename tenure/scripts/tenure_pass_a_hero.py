@@ -8,7 +8,8 @@ Outputs → 3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/hero/
 
 Run (repo root):
   python tenure/scripts/tenure_pass_a_hero.py
-  python tenure/scripts/tenure_pass_a_hero.py --n-bins 12 --output-tag q12_sensitivity
+  python tenure/scripts/tenure_pass_a_hero.py --bin-method equal_width --x-metric poolq --output-tag ew16_poolq_infHM
+  python tenure/scripts/tenure_pass_a_hero.py --bin-method quantile --x-metric loo --output-tag q16_loo_infHM
 """
 
 from __future__ import annotations
@@ -80,9 +81,14 @@ def write_provenance(
             "rows_out": filter_stats["rows_out"],
         },
         "spec": {
-            "grain": "person-level mean poolq_loo_mean (assistant years)",
+            "grain": (
+                "person-level mean poolq_loo_mean (assistant years)"
+                if args.x_metric == "loo"
+                else "person-level mean full OA pool pubs/yr (assistant years)"
+            ),
+            "x_metric": args.x_metric,
             "n_bins": args.n_bins,
-            "bin_method": "quantile",
+            "bin_method": args.bin_method,
             "exclude_censored": args.exclude_censored,
             "y_primary": "tenure_event / n_resolved",
             "y_companion": "attrition / n_resolved",
@@ -97,7 +103,19 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Tenure empirical HERO (v0 inference panel)")
     parser.add_argument("--input", type=Path, default=DEFAULT_IN, help="faculty_panel_with_pools.jsonl")
     parser.add_argument("--out-dir", type=Path, default=DEFAULT_OUT_DIR, help="hero output directory")
-    parser.add_argument("--n-bins", type=int, default=16, help="quantile bins (default 16)")
+    parser.add_argument("--n-bins", type=int, default=16, help="number of bins (default 16)")
+    parser.add_argument(
+        "--bin-method",
+        choices=("quantile", "equal_width"),
+        default="quantile",
+        help="quantile (equal N) or equal_width (equal x range)",
+    )
+    parser.add_argument(
+        "--x-metric",
+        choices=("loo", "poolq"),
+        default="loo",
+        help="loo = leave-one-out pool mean; poolq = full OA pool mean",
+    )
     parser.add_argument(
         "--exclude-censored",
         action=argparse.BooleanOptionalAction,
@@ -142,7 +160,8 @@ def main() -> None:
             work_dir,
             n_bins=args.n_bins,
             exclude_censored=args.exclude_censored,
-            bin_method="quantile",
+            bin_method=args.bin_method,
+            x_metric=args.x_metric,
         )
 
         base = f"HERO_tenure_{args.output_tag}"

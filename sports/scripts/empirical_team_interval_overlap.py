@@ -142,6 +142,8 @@ def build_figure(
     png_path: Path,
     seasons: str,
     h_sort: float | None = None,
+    suptitle: str | None = None,
+    xlab: str | None = None,
 ) -> dict:
     from gallery_mathtext import configure_matplotlib_mathtext
 
@@ -158,7 +160,7 @@ def build_figure(
     step = max(1, len(iv_plot) // N_INTERVAL_SAMPLE)
     sample = iv_plot.iloc[::step].head(N_INTERVAL_SAMPLE).copy()
 
-    xlab = r"Player $\hat{A}_i$ (PPM $z$ within season)"
+    xlab = xlab or r"Player $\hat{A}_i$ (PPM $z$ within season)"
     fig, axes = plt.subplots(2, 2, figsize=(12, 9))
 
     ax = axes[0, 0]
@@ -233,16 +235,15 @@ def build_figure(
         pad=8,
     )
 
-    fig.suptitle(
+    default_title = (
         rf"Empirical NCAA — team talent window overlap (MBB {seasons})"
         + (
             rf"\nRealized sorting $H_{{sort}}={h_sort:.3f}$ on this partition"
             if h_sort is not None and np.isfinite(h_sort)
             else ""
-        ),
-        fontsize=12,
-        y=0.98,
+        )
     )
+    fig.suptitle(suptitle or default_title, fontsize=12, y=0.98)
     fig.subplots_adjust(left=0.08, right=0.96, top=0.90, bottom=0.08, hspace=0.38, wspace=0.28)
     png_path.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(png_path, dpi=150, bbox_inches="tight")

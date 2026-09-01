@@ -1,0 +1,10 @@
+{
+  "date": "2026-09-01",
+  "filter": "infHM",
+  "plots": [
+    {
+      "key": "overlap",
+      "png": "TENURE_pool_interval_overlap_infHM.png"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "diagnostic": "tenure_pool_size_loo_distribution",
+  "date": "2026-09-01",
+  "filter": "HIGH/MEDIUM inference \u00b7 assistant rows \u00b7 LOO computable",
+  "pool_size_oa_loo": {
+    "label": "pool_size_oa_loo",
+    "n": 2396,
+    "mean": 17.219532554257096,
+    "std": 10.31868100799548,
+    "min": 1.0,
+    "max": 44.0,
+    "median": 15.0
+  },
+  "outputs": {
+    "png": "TENURE_pool_size_loo_distribution_infHM.png"
+  }
+}

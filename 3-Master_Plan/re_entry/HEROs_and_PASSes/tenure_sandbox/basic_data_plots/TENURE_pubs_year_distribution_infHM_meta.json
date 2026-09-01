@@ -1,0 +1,18 @@
+{
+  "diagnostic": "tenure_pubs_year_distribution",
+  "date": "2026-09-01",
+  "filter": "HIGH/MEDIUM inference \u00b7 assistant rows \u00b7 LOO computable",
+  "grain": "assistant person-year",
+  "pubs_year": {
+    "label": "pubs_year",
+    "n": 2396,
+    "mean": 6.271285475792988,
+    "std": 11.65753076582829,
+    "min": 0.0,
+    "max": 237.0,
+    "median": 3.0
+  },
+  "outputs": {
+    "png": "TENURE_pubs_year_distribution_infHM.png"
+  }
+}
