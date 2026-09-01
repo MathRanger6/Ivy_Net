@@ -8,14 +8,14 @@
       "MEDIUM"
     ],
     "require_poolq_loo_mean": true,
-    "rows_in": 106559,
-    "rows_out": 2396
+    "rows_in": 2416,
+    "rows_out": 805
   },
   "spec": {
-    "grain": "spell_mean",
+    "grain": "last_asst",
     "pool_perf": "annual",
-    "grain_label": "spell mean \u00b7 annual LOO (v0 default)",
-    "x_metric": "loo",
+    "grain_label": "last assistant year \u00b7 own cumulative pubs (ability slice)",
+    "x_metric": "own_cum",
     "n_bins": 16,
     "bin_method": "quantile",
     "exclude_censored": true,
@@ -23,34 +23,34 @@
     "y_companion": "attrition / n_resolved"
   },
   "outputs": {
-    "png": "HERO_tenure_q16_infHM_resolved_v0.png",
-    "csv": "HERO_tenure_q16_infHM_resolved_v0_binned.csv",
-    "slide_png": "HERO_tenure_q16_infHM_resolved_v0_slide.png",
-    "lpm_txt": "HERO_tenure_q16_infHM_resolved_v0_lpm.txt"
+    "png": "HERO_tenure_q16_lastps_own_cum_infHM.png",
+    "csv": "HERO_tenure_q16_lastps_own_cum_infHM_binned.csv",
+    "slide_png": "HERO_tenure_q16_lastps_own_cum_infHM_slide.png",
+    "lpm_txt": "HERO_tenure_q16_lastps_own_cum_infHM_lpm.txt"
   },
   "stage9_summary": {
-    "n_persons_with_loo": 796,
+    "n_persons_with_loo": 805,
     "n_tenure": 174,
-    "n_attrition": 202,
-    "n_censored": 420,
-    "n_resolved": 376,
+    "n_attrition": 209,
+    "n_censored": 422,
+    "n_resolved": 383,
     "n_bins": 16,
     "bin_method": "quantile",
     "log_bin": false,
     "z_score": false,
     "exclude_censored": true,
-    "x_metric": "loo",
-    "grain": "spell_mean",
+    "x_metric": "own_cum",
+    "grain": "last_asst",
     "pool_perf": "annual",
     "csv_path": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/hero/_stage9_scratch/stage9_binned_table.csv",
     "png_path": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/hero/_stage9_scratch/stage9_inverted_u.png"
   },
   "shape": {
-    "peak_vent": 14,
+    "peak_vent": 15,
     "peak_rate_pct": 83.333,
-    "bin0_rate_pct": 41.667,
-    "last_bin_rate_pct": 72.727,
+    "bin0_rate_pct": 54.546,
+    "last_bin_rate_pct": 83.333,
     "bin0_is_peak": false,
-    "beta_sq": -0.0010974026789615672
+    "beta_sq": -2.6322068627216495e-05
   }
 }

@@ -1,0 +1,28 @@
+{
+  "diagnostic": "tenure_pubs_mean_tenured",
+  "date": "2026-09-01",
+  "grain": "person-level mean pubs_year \u00b7 tenure_event only",
+  "tenured_pubs_mean": {
+    "label": "tenured_pubs_mean",
+    "n": 174,
+    "mean": 7.728434592227696,
+    "std": 8.44743061964554,
+    "min": 0.0,
+    "max": 47.0,
+    "median": 6.1625
+  },
+  "tenured_pubs_mean_gt0": {
+    "label": "tenured_pubs_mean_gt0",
+    "n": 133,
+    "mean": 10.110884353741497,
+    "std": 8.322759349636948,
+    "min": 0.125,
+    "max": 47.0,
+    "median": 8.0
+  },
+  "n_zero_mean": 41,
+  "display_x_cap": 41.53012500000006,
+  "outputs": {
+    "png": "TENURE_pubs_mean_tenured_infHM.png"
+  }
+}

@@ -1,0 +1,13 @@
+# Tenure hero Layer A — quadratic LPM (2026-09-01)
+n=324 resolved persons
+tenure events: 136
+x_metric=loo
+n_bins=20 bin_method=equal_width
+
+Model: tenure ~ const + loo_mean + loo_mean_sq (resolved only)
+
+const          0.239001
+loo_mean       0.010250
+loo_mean_sq   -0.000031
+
+Interpretation: beta_loo_mean_sq = -3.07181e-05 (concave / inverted-U consistent)

@@ -1,0 +1,37 @@
+{
+  "diagnostic": "tenure_pubs_mean_by_outcome",
+  "date": "2026-09-01",
+  "grain": "person-level mean pubs_year over assistant years",
+  "filter": "HIGH/MEDIUM inference \u00b7 LOO computable",
+  "tenured": {
+    "label": "tenured",
+    "n": 174,
+    "mean": 7.728434592227696,
+    "std": 8.44743061964554,
+    "min": 0.0,
+    "max": 47.0,
+    "median": 6.1625
+  },
+  "attrition": {
+    "label": "attrition",
+    "n": 202,
+    "mean": 4.442079207920792,
+    "std": 5.745119464127134,
+    "min": 0.0,
+    "max": 42.0,
+    "median": 3.0
+  },
+  "censored": {
+    "label": "censored",
+    "n": 420,
+    "mean": 6.456269841269841,
+    "std": 16.60920118484535,
+    "min": 0.0,
+    "max": 237.0,
+    "median": 2.0
+  },
+  "display_x_cap": 35.41124999999979,
+  "outputs": {
+    "png": "TENURE_pubs_mean_by_outcome_infHM.png"
+  }
+}

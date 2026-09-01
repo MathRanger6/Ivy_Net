@@ -12,7 +12,9 @@
     "rows_out": 2396
   },
   "spec": {
-    "grain": "person-level mean poolq_loo_mean (assistant years)",
+    "grain": "spell_mean",
+    "pool_perf": "annual",
+    "grain_label": "spell mean \u00b7 annual LOO (v0 default)",
     "x_metric": "loo",
     "n_bins": 20,
     "bin_method": "quantile",
@@ -22,7 +24,9 @@
   },
   "outputs": {
     "png": "HERO_tenure_q20_loo_infHM.png",
-    "csv": "HERO_tenure_q20_loo_infHM_binned.csv"
+    "csv": "HERO_tenure_q20_loo_infHM_binned.csv",
+    "slide_png": "HERO_tenure_q20_loo_infHM_slide.png",
+    "lpm_txt": "HERO_tenure_q20_loo_infHM_lpm.txt"
   },
   "stage9_summary": {
     "n_persons_with_loo": 796,
@@ -36,7 +40,17 @@
     "z_score": false,
     "exclude_censored": true,
     "x_metric": "loo",
+    "grain": "spell_mean",
+    "pool_perf": "annual",
     "csv_path": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/hero/_stage9_scratch/stage9_binned_table.csv",
     "png_path": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/hero/_stage9_scratch/stage9_inverted_u.png"
+  },
+  "shape": {
+    "peak_vent": 17,
+    "peak_rate_pct": 78.571,
+    "bin0_rate_pct": 41.667,
+    "last_bin_rate_pct": 70.588,
+    "bin0_is_peak": false,
+    "beta_sq": -0.0010974026789615672
   }
 }

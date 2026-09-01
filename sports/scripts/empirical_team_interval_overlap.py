@@ -39,6 +39,27 @@ COVERAGE_GRID_POINTS = 400
 SPAN_BINS = 40
 BAR_COLOR = "steelblue"
 
+# MBB defaults; tenure passes overrides via build_figure(labels=...).
+MBB_OVERLAP_LABELS: dict[str, str] = {
+    "coverage_ylabel": "Team-seasons covering this level",
+    "span_ylabel": "Team-seasons",
+    "sample_ylabel": "Sample of {n} team-seasons (sorted by $\\hat{{T}}_j$)",
+    "all_ylabel": "All team-seasons (sorted by $\\hat{{T}}_j$)",
+    "coverage_grid_note": "{frac:.1%} of grid with $>$1 team",
+    "legend_actual": "Actual rosters",
+    "overlap_title": "Interval overlap along talent spectrum",
+    "span_xlabel": r"Roster span ($\max \hat{A}_i - \min \hat{A}_i$)",
+    "span_title": "Width of each team's talent window",
+    "sample_title": r"Roster $[\min, \max]$ intervals (sample)",
+}
+
+
+def _merge_overlap_labels(overrides: dict[str, str] | None) -> dict[str, str]:
+    out = dict(MBB_OVERLAP_LABELS)
+    if overrides:
+        out.update(overrides)
+    return out
+
 
 def _hero_pipeline_config():
     sys.path.insert(0, str(SPORTS))
@@ -144,10 +165,12 @@ def build_figure(
     h_sort: float | None = None,
     suptitle: str | None = None,
     xlab: str | None = None,
+    labels: dict[str, str] | None = None,
 ) -> dict:
     from gallery_mathtext import configure_matplotlib_mathtext
 
     configure_matplotlib_mathtext()
+    lab = _merge_overlap_labels(labels)
 
     grid = np.linspace(iv["A_hat_min"].min(), iv["A_hat_max"].max(), COVERAGE_GRID_POINTS)
     lo = iv["A_hat_min"].to_numpy(dtype=float)
@@ -164,7 +187,7 @@ def build_figure(
     fig, axes = plt.subplots(2, 2, figsize=(12, 9))
 
     ax = axes[0, 0]
-    ax.fill_between(grid, cover, step="mid", alpha=0.35, color=BAR_COLOR, label="Actual rosters")
+    ax.fill_between(grid, cover, step="mid", alpha=0.35, color=BAR_COLOR, label=lab["legend_actual"])
     ax.plot(
         grid,
         cover_disjoint,
@@ -175,13 +198,13 @@ def build_figure(
     )
     ax.axhline(1, color="gray", ls=":", lw=1, label="No overlap (coverage = 1)")
     ax.set_xlabel(xlab, fontsize=10)
-    ax.set_ylabel("Team-seasons covering this level", fontsize=10)
-    ax.set_title("Interval overlap along talent spectrum", fontsize=11, pad=8)
+    ax.set_ylabel(lab["coverage_ylabel"], fontsize=10)
+    ax.set_title(lab["overlap_title"], fontsize=11, pad=8)
     ax.text(
         0.02,
         0.98,
         rf"max coverage = {cov_stats['coverage_max']:,}  |  "
-        rf"{cov_stats['coverage_frac_gt_1']:.1%} of grid with $>$1 team",
+        + lab["coverage_grid_note"].format(frac=cov_stats["coverage_frac_gt_1"]),
         transform=ax.transAxes,
         va="top",
         ha="left",
@@ -192,9 +215,9 @@ def build_figure(
 
     ax = axes[0, 1]
     ax.hist(iv["perf_span"], bins=SPAN_BINS, color=BAR_COLOR, edgecolor="white", alpha=0.85)
-    ax.set_xlabel(r"Roster span ($\max \hat{A}_i - \min \hat{A}_i$)", fontsize=10)
-    ax.set_ylabel("Team-seasons", fontsize=10)
-    ax.set_title("Width of each team's talent window", fontsize=11, pad=8)
+    ax.set_xlabel(lab["span_xlabel"], fontsize=10)
+    ax.set_ylabel(lab["span_ylabel"], fontsize=10)
+    ax.set_title(lab["span_title"], fontsize=11, pad=8)
     span_stats = _summary("perf_span", iv["perf_span"].to_numpy(dtype=float))
     ax.text(
         0.98,
@@ -213,8 +236,8 @@ def build_figure(
     ax.scatter(sample["T_j_hat"], y0, color="crimson", s=28, zorder=3, label=r"$\hat{T}_j$")
     ax.set_yticks(y0[:: max(1, len(y0) // 8)])
     ax.set_xlabel(xlab, fontsize=10)
-    ax.set_ylabel(f"Sample of {len(sample)} team-seasons (sorted by $\\hat{{T}}_j$)", fontsize=9)
-    ax.set_title(r"Roster $[\min, \max]$ intervals (sample)", fontsize=11, pad=8)
+    ax.set_ylabel(lab["sample_ylabel"].format(n=len(sample)), fontsize=9)
+    ax.set_title(lab["sample_title"], fontsize=11, pad=8)
     ax.legend(fontsize=8, loc="lower right")
 
     ax = axes[1, 1]
@@ -228,7 +251,7 @@ def build_figure(
         linewidth=0.6,
     )
     ax.set_xlabel(xlab, fontsize=10)
-    ax.set_ylabel("All team-seasons (sorted by $\\hat{T}_j$)", fontsize=9)
+    ax.set_ylabel(lab["all_ylabel"], fontsize=9)
     ax.set_title(
         f"All {len(iv_plot):,} intervals (faint) — overlap = vertical stacking",
         fontsize=11,

@@ -1,0 +1,36 @@
+{
+  "diagnostic": "tenure_poolq_loo_by_outcome",
+  "date": "2026-09-01",
+  "grain": "person-level mean poolq_loo_mean",
+  "tenured": {
+    "label": "tenured",
+    "n": 174,
+    "mean": 4.812170920452472,
+    "std": 3.340547933835638,
+    "min": 0.0,
+    "max": 27.0,
+    "median": 3.8406325
+  },
+  "attrition": {
+    "label": "attrition",
+    "n": 202,
+    "mean": 3.9457906188118805,
+    "std": 2.799316017786373,
+    "min": 0.0,
+    "max": 21.0,
+    "median": 3.5013950000000005
+  },
+  "censored": {
+    "label": "censored",
+    "n": 420,
+    "mean": 4.137618120559335,
+    "std": 3.2251773904739407,
+    "min": 0.0,
+    "max": 15.8947,
+    "median": 3.15434
+  },
+  "display_x_cap": 16.6369665,
+  "outputs": {
+    "png": "TENURE_poolq_loo_by_outcome_infHM.png"
+  }
+}

@@ -68,6 +68,59 @@ Same logic as `tenure/tenure_pipeline/stage9_analysis.py`:
 
 **Censored:** report `n_censored` per bin; **exclude** from rate denominator. Survival / Cox later.
 
+### Two separate decisions (do not conflate)
+
+| Decision | v0 lock | What it controls |
+|----------|---------|------------------|
+| **A — Rate denominator (Option A)** | Censored **out** of tenure/attrition rate | Bar height = tenured ÷ (tenured + attrition) in bin |
+| **B — Quantile assignment** | Censored **in** when ranking on LOO | Who lands in ventile 1…K (`n_all` ≈ equal); slide label `resolved/all` |
+
+Option A is about **Y** (outcome unknown → no rate). Decision B is about **X** (peer context known → still get a bin).
+
+See **[§ Censored in quantile bins — pros/cons for Alex](#censored-in-quantile-bins--proscons-for-alex)** below.
+
+---
+
+## Censored in quantile bins — pros/cons for Alex
+
+**Question for Alex:** Should **right-censored** faculty (still assistant near end of scrape window, ~2022–2024 last-asst years; no observed tenure or attrition yet) **stay in the pool used to define quantile cutpoints**, while remaining **excluded from the rate denominator** (current v0)?
+
+**What censored means here (not survival analysis yet):**
+
+- **Tenured** — promoted associate/full within `gap_tolerance` (2 yr) of last assistant year  
+- **Attrition** — last assistant year **before** window tail, never promoted  
+- **Censored** — never promoted **and** still assistant near **max_year** (2024) → outcome not yet observed  
+
+On the last-ps cum LOO panel (N=732): **408 censored (56%)**, **324 resolved**. Censorship is **not** uniform across LOO (middle ventiles can be `4/37` resolved vs `26/37` elsewhere).
+
+### Pros — keep censored **in** quantile assignment (current)
+
+1. **X reflects the full inference panel.** LOO is defined for censored people; their peer context is real. Dropping them before binning changes who defines “ventile 10.”
+2. **Avoids selection bias in cutpoints.** Censored correlate with LOO and career stage (recent hires still in the pipeline). Excluding them before ranking shifts ventile boundaries — especially if high-LOO or mid-LOO assistants are disproportionately still active.
+3. **Parallel to MBB HERO.** Everyone with computable roster X gets a ventile; draft **Y** is only measured where the outcome exists. Same split: known X, partial Y.
+4. **Equal `n_all` is interpretable.** “This ventile is the bottom 5% of the **sample by LOO**” includes people still on the job market clock — which matches “who faces this peer environment in our data?”
+5. **Transparent accounting.** CSV + slides report `n_censored`, `n_resolved`, and `resolved/all` per bin; compositional skew is visible rather than hidden by pre-filtering.
+
+### Cons — keep censored **in** quantile assignment
+
+1. **Unequal resolved N despite equal `n_all`.** Quantile guarantees ~equal people per bin, **not** equal resolved counts → noisy Wilson CIs where censorship piles up (e.g. bin 11: `4/37`).
+2. **Harder slide read without training.** Looks like “broken quantile” if you only see resolved counts (fixed in slides with `resolved/all` + footnote).
+3. **Compositional confound in rates.** A low tenure rate might mix “true lower promotion among leavers” with “this ventile is mostly young / still assistant” — not separable in binned Wilson plots alone.
+4. **Not the only defensible choice.** Alternatives are easy to run as sensitivity (see below).
+
+### Main alternatives (sensitivity, not v0)
+
+| Variant | Bin assignment | Rate denominator | Tradeoff |
+|---------|----------------|------------------|----------|
+| **v0 (current)** | All with LOO | Resolved only | Full X panel; variable resolved n |
+| **Resolved-only quantile** | Re-rank LOO on resolved only | Resolved | ~Equal resolved per bin; cutpoints ignore censored LOO → shifted ventiles |
+| **Resolved-only panel** | Quantile on LOO | Resolved | Drops ~56% (last-ps); different population (“careers already ended”) |
+| **Option B rates** | All with LOO (or any) | All incl. censored | Treat censored as non-tenure → **not** recommended without survival frame |
+
+**COMPASS view:** v0 is coherent for **exploratory HERO** (shape of tenure vs peer context among cases with known endings, indexed to the full LOO spectrum). For **paper claims**, Alex should sign off on (i) whether resolved-only quantile sensitivity is required, and (ii) whether last-ps HERO needs a **cohort aperture** that reduces censorship (e.g. last-asst year cap) before debating bin mechanics.
+
+**Code:** `stage9_analysis._bin_rows` ranks **all** persons with LOO; `_aggregate_bins` applies Option A rates. Flags from `panel_builder.py` (`censored` if `last_asst >= max_year - gap_tolerance` and no tenure event).
+
 ---
 
 ## Step 4 — Bin and plot
@@ -75,7 +128,7 @@ Same logic as `tenure/tenure_pipeline/stage9_analysis.py`:
 | Knob | v0 |
 |------|-----|
 | X | Person-level `loo_mean` |
-| Method | Quantile (equal **people** per bin) |
+| Method | Quantile — equal **`n_all`** per bin (censored **included** in rank; see § censored pros/cons) |
 | Count | **16** |
 | CI | Wilson on resolved counts |
 | Outputs | PNG + CSV + provenance JSON → `tenure_sandbox/hero/` |
@@ -112,3 +165,4 @@ Same logic as `tenure/tenure_pipeline/stage9_analysis.py`:
 | Date | Entry |
 |------|--------|
 | 2026-09-01 | Initial pipeline map; v0 locks from Charles + Alex direction. |
+| 2026-09-01 | § censored in quantile bins — pros/cons for Alex (Option A rates + include censored in rank). |

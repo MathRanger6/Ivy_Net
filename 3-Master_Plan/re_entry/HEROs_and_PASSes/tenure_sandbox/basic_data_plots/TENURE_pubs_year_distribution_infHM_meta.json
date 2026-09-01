@@ -12,6 +12,19 @@
     "max": 237.0,
     "median": 3.0
   },
+  "pubs_year_gt0": {
+    "label": "pubs_year_gt0",
+    "n": 1544,
+    "mean": 9.731865284974093,
+    "std": 13.312042938418095,
+    "min": 1.0,
+    "max": 237.0,
+    "median": 7.0
+  },
+  "n_zero": 852,
+  "pct_zero": 35.56,
+  "display_x_cap": 39.9,
+  "inset_x_cap": 43.648499999999935,
   "outputs": {
     "png": "TENURE_pubs_year_distribution_infHM.png"
   }

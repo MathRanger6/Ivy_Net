@@ -63,9 +63,11 @@ def _load_json(path: Path) -> dict[str, Any]:
 def _summary_overlap(meta: dict) -> str:
     h = meta.get("H_sort")
     h_txt = f"{h:.3f}" if h is not None else "n/a"
+    n_pools = meta.get("n_uni_year_pools", meta.get("n_team_seasons", "?"))
+    n_asst = meta.get("n_assistant_years", meta.get("n_player_seasons", "?"))
     return (
-        f"uni-years={meta.get('n_team_seasons', '?'):,} · "
-        f"asst-years={meta.get('n_player_seasons', '?'):,} · "
+        f"uni-year pools={n_pools:,} · "
+        f"asst-years={n_asst:,} · "
         f"max coverage={meta.get('coverage_max', '?')} · "
         f"H_sort={h_txt}"
     )
@@ -76,6 +78,35 @@ def _summary_dist(meta: dict, key: str) -> str:
     return (
         f"n={block.get('n', '?'):,} · median={block.get('median', 0):.2f} · "
         f"mean={block.get('mean', 0):.2f} · sd={block.get('std', 0):.2f}"
+    )
+
+
+def _summary_pubs_year(meta: dict) -> str:
+    all_ = meta.get("pubs_year") or {}
+    pos = meta.get("pubs_year_gt0") or {}
+    z = meta.get("pct_zero")
+    z_txt = f"{z:.0f}% zero" if z is not None else "zero n/a"
+    return (
+        f"all n={all_.get('n', '?'):,} ({z_txt}) · "
+        f"inset n={pos.get('n', '?'):,} · med={pos.get('median', 0):.1f} · mean={pos.get('mean', 0):.1f}"
+    )
+
+
+def _summary_outcome_groups(meta: dict, keys: tuple[str, ...]) -> str:
+    parts = []
+    for k in keys:
+        block = meta.get(k) or {}
+        if block.get("n", 0):
+            parts.append(f"{k} n={block['n']:,} med={block.get('median', 0):.1f}")
+    return " · ".join(parts) if parts else "(no meta)"
+
+
+def _summary_tenured_pubs(meta: dict) -> str:
+    all_ = meta.get("tenured_pubs_mean") or {}
+    pos = meta.get("tenured_pubs_mean_gt0") or {}
+    return (
+        f"tenured n={all_.get('n', '?'):,} · med={all_.get('median', 0):.1f} · "
+        f"mean={all_.get('mean', 0):.1f} · inset n={pos.get('n', '?'):,}"
     )
 
 
@@ -96,6 +127,20 @@ def _plot_catalog() -> list[dict[str, Any]]:
             "summary_fn": _summary_overlap,
         },
         {
+            "key": "overlap_gt0",
+            "title": "Uni-year peer pool interval overlap (pubs > 0)",
+            "subtitle": "Sensitivity — intensive margin only · compare to prior slide",
+            "prose": [
+                "Same pool unit; assistant-years with pubs_year = 0 dropped before z and intervals.",
+                "z within year recomputed on pubs > 0 rows only (not identical to full-panel z).",
+                "Compare H_sort and coverage to full-panel slide — zeros inflate overlap mass at bottom.",
+            ],
+            "png": BDP / f"TENURE_pool_interval_overlap_{TAG}_pubs_gt0.png",
+            "meta": BDP / f"TENURE_pool_interval_overlap_{TAG}_pubs_gt0_meta.json",
+            "command": "python tenure/scripts/tenure_basic_plots.py --only overlap_gt0",
+            "summary_fn": _summary_overlap,
+        },
+        {
             "key": "poolq_loo",
             "title": "poolq_LOO distribution (HERO grain)",
             "subtitle": "Person-level mean · N≈796 matches Q16/Q20 HERO",
@@ -111,15 +156,16 @@ def _plot_catalog() -> list[dict[str, Any]]:
         {
             "key": "pubs_year",
             "title": "Own pubs_year distribution",
-            "subtitle": "Assistant person-years · inference panel",
+            "subtitle": "Unconditional + inset (pubs > 0) · inference panel",
             "prose": [
-                "Own annual publications (OpenAlex) on assistant rows in inference slice.",
-                "Companion to poolq_LOO — separates individual output from peer context.",
+                "Main: all assistant-years (36% zero pub years in OpenAlex count).",
+                "Inset: intensive margin — shape among those with ≥1 pub (N≈1,544).",
+                "Main x-axis capped near p99; tail max=237 noted in legend box.",
             ],
             "png": BDP / f"TENURE_pubs_year_distribution_{TAG}.png",
             "meta": BDP / f"TENURE_pubs_year_distribution_{TAG}_meta.json",
             "command": "python tenure/scripts/tenure_basic_plots.py --only pubs_year",
-            "summary_fn": lambda m: _summary_dist(m, "pubs_year"),
+            "summary_fn": _summary_pubs_year,
         },
         {
             "key": "pool_size",
@@ -133,6 +179,48 @@ def _plot_catalog() -> list[dict[str, Any]]:
             "meta": BDP / f"TENURE_pool_size_loo_distribution_{TAG}_meta.json",
             "command": "python tenure/scripts/tenure_basic_plots.py --only pool_size",
             "summary_fn": lambda m: _summary_dist(m, "pool_size_oa_loo"),
+        },
+        {
+            "key": "pubs_by_outcome",
+            "title": "Own pubs by outcome (person-level)",
+            "subtitle": "Tenured vs attrition vs censored · same HERO N",
+            "prose": [
+                "Person-level mean pubs_year over assistant spell — descriptive, not HERO.",
+                "Blue = promoted (tenure_event); orange = left as assistant; gray = still asst ≈ 2024.",
+                "Compares own output to the LOO environment HERO bins on.",
+            ],
+            "png": BDP / f"TENURE_pubs_mean_by_outcome_{TAG}.png",
+            "meta": BDP / f"TENURE_pubs_mean_by_outcome_{TAG}_meta.json",
+            "command": "python tenure/scripts/tenure_basic_plots.py --only pubs_by_outcome",
+            "summary_fn": lambda m: _summary_outcome_groups(m, ("tenured", "attrition", "censored")),
+        },
+        {
+            "key": "pubs_tenured",
+            "title": "Promoted instructors — own pubs",
+            "subtitle": "Tenured only · person-level mean + inset (mean > 0)",
+            "prose": [
+                "Subset to tenure_event = True (N≈174 on inference panel).",
+                "Mean annual pubs over assistant years — not cumulative career total.",
+                "Pairs with HERO high-bin tenure rates; inset drops zero-mean spells.",
+            ],
+            "png": BDP / f"TENURE_pubs_mean_tenured_{TAG}.png",
+            "meta": BDP / f"TENURE_pubs_mean_tenured_{TAG}_meta.json",
+            "command": "python tenure/scripts/tenure_basic_plots.py --only pubs_tenured",
+            "summary_fn": _summary_tenured_pubs,
+        },
+        {
+            "key": "loo_by_outcome",
+            "title": "poolq_LOO by outcome (person-level)",
+            "subtitle": "Peer environment split · complements HERO x-axis",
+            "prose": [
+                "Same outcome colors as pubs-by-outcome slide.",
+                "Shows whether promoted faculty carried higher LOO peer pressure on average.",
+                "HERO asks rate(T|LOO bin); this is marginal LOO by outcome.",
+            ],
+            "png": BDP / f"TENURE_poolq_loo_by_outcome_{TAG}.png",
+            "meta": BDP / f"TENURE_poolq_loo_by_outcome_{TAG}_meta.json",
+            "command": "python tenure/scripts/tenure_basic_plots.py --only loo_by_outcome",
+            "summary_fn": lambda m: _summary_outcome_groups(m, ("tenured", "attrition", "censored")),
         },
     ]
 

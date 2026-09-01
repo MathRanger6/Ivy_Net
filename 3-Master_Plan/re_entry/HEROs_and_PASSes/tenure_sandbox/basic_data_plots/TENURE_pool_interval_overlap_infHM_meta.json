@@ -33,6 +33,8 @@
     "max": 3.533574374450257,
     "median": -0.09470986646577582
   },
+  "n_uni_year_pools": 283,
+  "n_assistant_years": 2396,
   "outputs": {
     "png": "TENURE_pool_interval_overlap_infHM.png",
     "uni_year_csv": "TENURE_pool_interval_overlap_infHM_uni_year.csv"

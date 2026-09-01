@@ -73,7 +73,7 @@ Act IV  Generative replay (optional — after Alex lock)
 | **X-axis** | `poolq_loo_mean` → **16 quantile bins** |
 | **Y (primary)** | **`tenure_event`** rate among **resolved** (Option A) |
 | **Y (companion)** | **`attrition`** rate among resolved (optional second panel) |
-| **Censored** | **Excluded** from rate denominator; counted in table — survival layer later |
+| **Censored** | **Excluded** from rate denominator; **included** in quantile rank (`n_all`); counted in table — survival layer later |
 | **ρ / homophily** | **Not parked by default** — run diagnostic in Act III; park only if tenure looks like MBB (ρ* ≈ 0) |
 | **Outputs** | `tenure_sandbox/hero/` |
 | **Script** | `tenure/scripts/tenure_pass_a_hero.py` |
@@ -116,10 +116,11 @@ Each shipped plot: **PNG + CSV + provenance JSON** (MBB sandbox convention).
 ## 5 — Alex lock still open (after Act I plots)
 
 1. Outcome **Y** for paper prose (tenure vs attrition emphasis)  
-2. Panel **aperture** (years, departments)  
+2. Panel **aperture** (years, departments) — especially vs **~56% censored** on last-ps  
 3. **Â** for F-HERO slices (`pubs_year` vs cumulative)  
 4. LOO pool definition confirmation  
 5. Empirical-first vs generative replay scope  
+6. **Censored in quantile bins?** — keep in rank + Option A rates (v0) vs resolved-only quantile / resolved-only panel — see [`TENURE_hero_pipeline.md` § censored pros/cons](TENURE_hero_pipeline.md#censored-in-quantile-bins--proscons-for-alex)
 
 ---
 

@@ -3,8 +3,16 @@
   "filter": "infHM",
   "plots": [
     {
-      "key": "overlap",
-      "png": "TENURE_pool_interval_overlap_infHM.png"
+      "key": "pubs_by_outcome",
+      "png": "TENURE_pubs_mean_by_outcome_infHM.png"
+    },
+    {
+      "key": "pubs_tenured",
+      "png": "TENURE_pubs_mean_tenured_infHM.png"
+    },
+    {
+      "key": "loo_by_outcome",
+      "png": "TENURE_poolq_loo_by_outcome_infHM.png"
     }
   ]
 }

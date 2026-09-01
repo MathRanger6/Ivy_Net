@@ -45,12 +45,18 @@ def _poolq_full_from_row(r):
     return None
 
 
-def _load_person_level(in_path, x_metric='loo'):
+def _load_person_level(
+    in_path,
+    x_metric='loo',
+    *,
+    grain='spell_mean',
+    pool_perf='annual',
+):
     """
     Read faculty_panel_with_pools.jsonl.  Collapse to one record per person:
-      loo_mean  — person-level mean x across assistant years (internal sort key)
-                  x_metric='loo'   → mean poolq_loo_mean
-                  x_metric='poolq' → mean full OA pool pubs/yr (incl. self)
+      loo_mean  — person-level x for binning
+                  spell_mean + annual: mean poolq_loo_mean over assistant years
+                  last_asst + cumulative: poolq_loo_cum_mean at final assistant year
       tenure    — bool
       attrition — bool
       censored  — bool
@@ -58,8 +64,8 @@ def _load_person_level(in_path, x_metric='loo'):
 
     Returns a list of dicts.
     """
-    if x_metric not in ('loo', 'poolq'):
-        raise ValueError("x_metric must be 'loo' or 'poolq'")
+    if x_metric not in ('loo', 'poolq', 'own_cum'):
+        raise ValueError("x_metric must be 'loo', 'poolq', or 'own_cum'")
     person = defaultdict(lambda: {
         'loo_vals':  [],
         'tenure':    False,
@@ -79,13 +85,26 @@ def _load_person_level(in_path, x_metric='loo'):
             p['attrition'] = bool(r.get('attrition', False))
             p['censored']  = bool(r.get('censored', False))
             p['uni_slug']  = r.get('uni_slug', '')
-            if r.get('rank') == 'assistant':
-                if x_metric == 'loo':
-                    v = r.get('poolq_loo_mean')
-                else:
-                    v = _poolq_full_from_row(r)
+            if r.get('rank') != 'assistant':
+                continue
+            if grain == 'last_asst':
+                la = r.get('last_asst_year')
+                yr = r.get('year')
+                if la is None or yr is None or int(yr) != int(la):
+                    continue
+            if x_metric == 'own_cum':
+                v = r.get('pubs_cumulative')
                 if v is not None:
-                    p['loo_vals'].append(v)
+                    v = float(v)
+            elif x_metric == 'loo':
+                if pool_perf == 'cumulative':
+                    v = r.get('poolq_loo_cum_mean')
+                else:
+                    v = r.get('poolq_loo_mean')
+            else:
+                v = _poolq_full_from_row(r)
+            if v is not None:
+                p['loo_vals'].append(v)
 
     rows = []
     for fid, p in person.items():
@@ -231,7 +250,8 @@ def _aggregate_bins(rows_sorted, n_bins, exclude_censored):
 
 def _plot_inverted_u(bins, out_path, n_bins, exclude_censored,
                      bin_method='quantile', z_score=False, log_bin=False,
-                     n_persons=None, x_metric='loo'):
+                     n_persons=None, x_metric='loo', grain='spell_mean',
+                     pool_perf='annual'):
     try:
         import matplotlib
     except ImportError:
@@ -275,9 +295,23 @@ def _plot_inverted_u(bins, out_path, n_bins, exclude_censored,
             'Q{}\n({:.1f})'.format(b['bin'], b['loo_median']) for b in plot_bins
         ]
         loo_unit = 'raw LOO (pubs/yr)' if x_metric == 'loo' else 'raw PoolQ (pubs/yr)'
+        if x_metric == 'own_cum':
+            loo_unit = 'cum pubs (final asst year)'
+        elif pool_perf == 'cumulative' and x_metric == 'loo':
+            loo_unit = 'LOO cum pubs (final asst year)' if grain == 'last_asst' else 'LOO cum pubs'
 
     method_label = 'quantile bins (≈equal N)' if bin_method == 'quantile' else 'equal-width bins'
-    x_title = 'LOO Peer Pool Quality' if x_metric == 'loo' else 'Peer Pool Quality (PoolQ)'
+    if grain == 'last_asst':
+        if x_metric == 'own_cum':
+            x_title = 'Own cumulative pubs (final assistant year)'
+        elif x_metric == 'loo' and pool_perf == 'cumulative':
+            x_title = 'LOO peer cumulative pubs (final assistant year)'
+        else:
+            x_title = 'LOO Peer Pool Quality (final assistant year)'
+    else:
+        x_title = 'LOO Peer Pool Quality' if x_metric == 'loo' else 'Peer Pool Quality (PoolQ)'
+        if x_metric == 'own_cum':
+            x_title = 'Own cumulative pubs (spell mean — unusual)'
     pop_note = 'resolved' if exclude_censored else 'all (incl. censored)'
 
     # Build the population line for the title
@@ -347,13 +381,27 @@ def _plot_inverted_u(bins, out_path, n_bins, exclude_censored,
     _one_panel(axes[1], att_rates, att_lo, att_hi,
                colors['attrition'], 'Attrition rate', 'Attrition rate')
 
-    if x_metric == 'loo':
+    if x_metric == 'own_cum':
         x_desc = (
-            "LOO peer pool quality bin  (1 = lowest, {} = highest)\n"
+            "Own cumulative pubs bin (1 = lowest, {} = highest)\n"
             "Median {} shown below each bin label\n"
-            "LOO = mean pubs/yr of all other OA-matched co-hired assistants "
-            "in same dept-year"
+            "Last assistant year · OpenAlex cumulative through exit year"
         ).format(n_bins, loo_unit)
+    elif x_metric == 'loo':
+        if pool_perf == 'cumulative':
+            x_desc = (
+                "LOO peer pool bin (1 = lowest, {} = highest)\n"
+                "Median {} shown below each bin label\n"
+                "Last assistant year · LOO = mean peer cumulative pubs "
+                "(OpenAlex), self excluded"
+            ).format(n_bins, loo_unit)
+        else:
+            x_desc = (
+                "LOO peer pool quality bin  (1 = lowest, {} = highest)\n"
+                "Median {} shown below each bin label\n"
+                "LOO = mean pubs/yr of all other OA-matched co-hired assistants "
+                "in same dept-year"
+            ).format(n_bins, loo_unit)
     else:
         x_desc = (
             "Peer pool quality bin (PoolQ)  (1 = lowest, {} = highest)\n"
@@ -423,7 +471,7 @@ def _save_csv(bins, csv_path):
 
 def build_inverted_u(in_path, out_dir, n_bins=12, exclude_censored=True,
                      bin_method='quantile', z_score=False, log_bin=False,
-                     x_metric='loo'):
+                     x_metric='loo', grain='spell_mean', pool_perf='annual'):
     """
     Build the inverted-U analysis from faculty_panel_with_pools.jsonl.
 
@@ -442,6 +490,8 @@ def build_inverted_u(in_path, out_dir, n_bins=12, exclude_censored=True,
     z_score           : if True, standardise the (possibly log-transformed) LOO to
                         (x - mean) / std before binning; transform order: log → z → bin
     x_metric          : 'loo' (leave-one-out pool mean) or 'poolq' (full OA pool mean)
+    grain             : 'spell_mean' (default) or 'last_asst' (final assistant row only)
+    pool_perf         : 'annual' (pubs_year LOO) or 'cumulative' (pubs_cumulative LOO)
 
     Returns
     -------
@@ -452,23 +502,30 @@ def build_inverted_u(in_path, out_dir, n_bins=12, exclude_censored=True,
 
     # ── Sample-loss accounting ────────────────────────────────────────────────
     print("  Loading person-level data …")
-    rows = _load_person_level(in_path, x_metric=x_metric)
+    rows = _load_person_level(
+        in_path, x_metric=x_metric, grain=grain, pool_perf=pool_perf,
+    )
 
     n_with_loo  = len(rows)
     pop_label = 'LOO' if x_metric == 'loo' else 'PoolQ'
+    if x_metric == 'own_cum':
+        pop_label = 'own cumulative pubs'
+    elif pool_perf == 'cumulative' and x_metric == 'loo':
+        pop_label = 'LOO (cum pubs)'
+    grain_note = 'last assistant year' if grain == 'last_asst' else 'spell mean'
     n_tenure    = sum(1 for r in rows if r['tenure'])
     n_attrition = sum(1 for r in rows if r['attrition'])
     n_censored  = sum(1 for r in rows if r['censored'])
     n_resolved  = n_tenure + n_attrition
 
     print("\n  ── Sample-loss accounting ──────────────────────────────────")
-    print("  Persons with computable {} (analysis population) : {:,}".format(pop_label, n_with_loo))
+    print("  Persons with computable {} ({}) : {:,}".format(pop_label, grain_note, n_with_loo))
     print("    → tenure events      : {:,}  ({:.1f}%)".format(n_tenure,    n_tenure    / n_with_loo * 100))
     print("    → attrition          : {:,}  ({:.1f}%)".format(n_attrition, n_attrition / n_with_loo * 100))
     print("    → censored (still asst ≈ 2024) : {:,}  ({:.1f}%)".format(n_censored, n_censored / n_with_loo * 100))
     print("  Resolved (tenure + attrition)    : {:,}  ← N for rate calcs".format(n_resolved))
-    print("  x_metric={!r}  bin_method={!r}  log_bin={}  z_score={}  exclude_censored={}".format(
-        x_metric, bin_method, log_bin, z_score, exclude_censored))
+    print("  x_metric={!r}  grain={!r}  pool_perf={!r}  bin_method={!r}  log_bin={}  z_score={}  exclude_censored={}".format(
+        x_metric, grain, pool_perf, bin_method, log_bin, z_score, exclude_censored))
     if bin_method == 'quantile' and (log_bin or z_score):
         print("  Note: log_bin/z_score have no effect on quantile bin assignment"
               " (rank-preserving); transformed values shown in table/plot for reference.")
@@ -499,7 +556,7 @@ def build_inverted_u(in_path, out_dir, n_bins=12, exclude_censored=True,
                          'n_censored':  n_censored,
                          'n_resolved':  n_resolved,
                      },
-                     x_metric=x_metric)
+                     x_metric=x_metric, grain=grain, pool_perf=pool_perf)
     print("  PNG  → {}".format(png_path))
 
     return {
@@ -514,6 +571,8 @@ def build_inverted_u(in_path, out_dir, n_bins=12, exclude_censored=True,
         'z_score':            z_score,
         'exclude_censored':   exclude_censored,
         'x_metric':           x_metric,
+        'grain':              grain,
+        'pool_perf':          pool_perf,
         'csv_path':           str(csv_path),
         'png_path':           str(png_path),
     }
