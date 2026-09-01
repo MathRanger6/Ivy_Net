@@ -1,4 +1,7 @@
 # VA Weekend Checklist — Tenure Pipeline
+
+> **Re-entry:** For a current, ordered scrape + adjudicate guide, use **[`TENURE_SCRAPE_AND_ADJUDICATE_FOR_DUMMIES.md`](TENURE_SCRAPE_AND_ADJUDICATE_FOR_DUMMIES.md)**. This checklist is a **historical** Apr 2026 overnight-run example; patterns still apply.
+
 **Goal:** Get pipeline fully up to speed before introducing new URLs from `faculty_url_suggestions.csv`
 
 ---

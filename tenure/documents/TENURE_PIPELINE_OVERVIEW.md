@@ -7,6 +7,7 @@
 
 | Document | Role |
 |----------|------|
+| **`TENURE_SCRAPE_AND_ADJUDICATE_FOR_DUMMIES.md`** | **Re-entry how-to (read this first after a break)**: ordered scrape + URL/OpenAlex adjudication workflows, Cell 0 cheat sheet, Mac vs Rivanna — *not* the 900-line implementation map. |
 | **`TENURE_DATA_GAMEPLAN.md`** | **Strategic contract** (same role as `../sports_documents/SPORTS_DATA_GAMEPLAN.md`): research outcomes, stage boundaries, durable artifacts, advisor alignment, fast-path checklist, open questions. |
 | **`TENURE_PIPELINE_OVERVIEW.md` (this file)** | **Implementation map**: how **`540_tenure_pipeline.ipynb`** cells interact with **`tenure_pipeline/*.py`**, **`.csv`**, **`.jsonl`**, and on-disk HTML—flags, checkpoints, sentinel semantics, Option B paths, scraper playbooks. |
 | **`HPC_SETUP_CHECKLIST.md`** | **Operations (local ↔ HPC)**: what Git does *not* ship; **`git clone`** vs **`rsync`** for gitignored data; **`.env`** per machine; conda **`tenure_net`** export; canonical **top-level `tenure_pipeline/`** paths for Cell 0; VPN / SSH / Rivanna workflow. |

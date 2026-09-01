@@ -1,0 +1,108 @@
+{
+  "diagnostic": "cct_fixed_ai_tj_knbins_triptych",
+  "date": "2026-08-27",
+  "plot": "fixed_ai_tj_triptych",
+  "plot_family": "F-HERO",
+  "bin_slug": "pw4p7",
+  "bin_label": "piecewise 4+7 T\u0302_j bins",
+  "bdp_spec": "mg10 min20 2013-2021",
+  "seasons": "2013-2021",
+  "season_slug": "13_21",
+  "panel_rows": "last-ps",
+  "y_draft_mode": "ever",
+  "tj_n_low": 4,
+  "tj_n_high": 7,
+  "panels": [
+    {
+      "panel": "A \u00b7 PPM z [1, 2] \u00b7 full panel",
+      "ai_lo": 1.0,
+      "ai_hi": 2.0,
+      "dft": false,
+      "band_n": 2446,
+      "total_drafts": 194,
+      "knee_summary": {
+        "label": "knee_summary",
+        "plateau_bins_1idx": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "tail_bins_1idx": [
+          9,
+          10,
+          11
+        ],
+        "plateau_mean_draft_rate": 0.029511952840491133,
+        "tail_mean_draft_rate": 0.4841750841750842,
+        "last_bin_draft_rate": 1.0,
+        "last_bin_n": 1,
+        "tail_below_plateau": false,
+        "last_bin_below_plateau": false,
+        "alex_downturn_visible": false
+      },
+      "downturn": false
+    },
+    {
+      "panel": "B \u00b7 PPM z [2, 3] \u00b7 full panel",
+      "ai_lo": 2.0,
+      "ai_hi": 3.0,
+      "dft": false,
+      "band_n": 528,
+      "total_drafts": 84,
+      "knee_summary": {
+        "label": "knee_summary",
+        "plateau_bins_1idx": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "tail_bins_1idx": [
+          9,
+          10,
+          11
+        ],
+        "plateau_mean_draft_rate": 0.07311373873873875,
+        "tail_mean_draft_rate": 0.12222222222222223,
+        "last_bin_draft_rate": 0.0,
+        "last_bin_n": 3,
+        "tail_below_plateau": false,
+        "last_bin_below_plateau": true,
+        "alex_downturn_visible": true
+      },
+      "downturn": true
+    },
+    {
+      "panel": "C \u00b7 PPM z [2, 3] \u00b7 +DFT",
+      "ai_lo": 2.0,
+      "ai_hi": 3.0,
+      "dft": true,
+      "band_n": 200,
+      "total_drafts": 78,
+      "knee_summary": {
+        "label": "knee_summary",
+        "plateau_bins_1idx": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "tail_bins_1idx": [
+          8,
+          9,
+          11
+        ],
+        "plateau_mean_draft_rate": 0.30366505297771285,
+        "tail_mean_draft_rate": 0.19444444444444442,
+        "last_bin_draft_rate": 0.0,
+        "last_bin_n": 3,
+        "tail_below_plateau": true,
+        "last_bin_below_plateau": true,
+        "alex_downturn_visible": true
+      },
+      "downturn": true
+    }
+  ],
+  "png": "FHERO_pw4p7_triptych_allt_min20_mg10_ppm_13_21_last_ps.png"
+}

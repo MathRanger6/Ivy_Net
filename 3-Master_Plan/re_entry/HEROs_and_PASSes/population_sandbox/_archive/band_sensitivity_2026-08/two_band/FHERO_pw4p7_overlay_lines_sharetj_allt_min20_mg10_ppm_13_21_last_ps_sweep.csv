@@ -1,0 +1,3 @@
+band,slide_label,top_lo,top_hi,pct_floor,pct_ceil,perf_z_cut_outer,perf_z_cut_inner,band_n,total_drafts,draft_rate_band,min_bin_n,plateau_rate,tail_rate,downturn_visible,knee_tj_peak,knee_rate_peak,knee_bin_peak,knee_tj_tail_rule,ok_for_overlay
+top 7%,"$\hat{A}_i \in (93\%, \infty)$",0,7,93,100,1.63421,,1179,159,0.13486,0,0.0541363,0.195175,True,1.3548,0.214286,8,2.49633,True
+top 7–20%,"$\hat{A}_i \in (80\%, 93\%]$",7,20,80,93,0.916466,1.63421,2189,152,0.0694381,0,0.0378732,0.2,False,1.3548,0.142857,8,,True

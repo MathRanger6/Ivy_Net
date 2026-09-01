@@ -1,0 +1,92 @@
+{
+  "diagnostic": "bdp_ai_draft_mass_ecdf",
+  "date": "2026-08-27",
+  "panel": "mg10 min20 13_21 \u00b7 ALLT \u00b7 panel=last-ps \u00b7 Y=ever",
+  "perf_metric": "ppm",
+  "min_minutes": 20.0,
+  "panel_rows": "last-ps",
+  "y_draft_mode": "ever",
+  "dft": false,
+  "winsor": [
+    0.01,
+    0.99
+  ],
+  "draft_mass_step_pct": 5.0,
+  "panel_top_cuts": [],
+  "bands": "0:4.95961,4.95961:13.5008,13.5008:32.0563",
+  "n_panel": 16836,
+  "n_drafted": 424,
+  "K_over_N": 0.025184129246851983,
+  "png": "BDP_Ai_draft_mass_ecdf_mg10_min20_13_21_allt_ppm_last_ps.png",
+  "cuts_csv": "BDP_Ai_draft_mass_ecdf_mg10_min20_13_21_allt_ppm_last_ps_cuts.csv",
+  "panel_cuts": [],
+  "draft_mass_tiers_pct": 30.0,
+  "draft_mass_tier_cuts": [
+    {
+      "row_type": "draft_mass_tier",
+      "tier_pct": 30.0,
+      "draft_mass_pct": 70.0,
+      "z_cut": 1.828798841810222,
+      "panel_top_pct": 4.959610358755049,
+      "n_drafted_at_or_below": 297,
+      "n_drafted_total": 424
+    },
+    {
+      "row_type": "draft_mass_tier",
+      "tier_pct": 30.0,
+      "draft_mass_pct": 40.0,
+      "z_cut": 1.2159356169688817,
+      "panel_top_pct": 13.500831551437395,
+      "n_drafted_at_or_below": 170,
+      "n_drafted_total": 424
+    },
+    {
+      "row_type": "draft_mass_tier",
+      "tier_pct": 30.0,
+      "draft_mass_pct": 10.0,
+      "z_cut": 0.4862039745477469,
+      "panel_top_pct": 32.05630791161796,
+      "n_drafted_at_or_below": 43,
+      "n_drafted_total": 424
+    }
+  ],
+  "tier_bands_suggested": "0:4.95961,4.95961:13.5008,13.5008:32.0563",
+  "overlay_bands": [
+    {
+      "row_type": "overlay_band",
+      "band": "top 4.95961%",
+      "top_lo": 0.0,
+      "top_hi": 4.95961,
+      "z_cut_outer": 1.8284990506384646,
+      "z_cut_inner": NaN,
+      "band_n": 835,
+      "band_drafts": 127,
+      "draft_share_of_total_pct": 29.952830188679247,
+      "band_draft_rate": 0.15209580838323353
+    },
+    {
+      "row_type": "overlay_band",
+      "band": "top 4.95961\u201313.5008%",
+      "top_lo": 4.95961,
+      "top_hi": 13.5008,
+      "z_cut_outer": 1.2159356116725848,
+      "z_cut_inner": 1.8284990506384646,
+      "band_n": 1438,
+      "band_drafts": 127,
+      "draft_share_of_total_pct": 29.952830188679247,
+      "band_draft_rate": 0.08831710709318498
+    },
+    {
+      "row_type": "overlay_band",
+      "band": "top 13.5008\u201332.0563%",
+      "top_lo": 13.5008,
+      "top_hi": 32.0563,
+      "z_cut_outer": 0.486108713542089,
+      "z_cut_inner": 1.2159356116725848,
+      "band_n": 3124,
+      "band_drafts": 127,
+      "draft_share_of_total_pct": 29.952830188679247,
+      "band_draft_rate": 0.040653008962868116
+    }
+  ]
+}

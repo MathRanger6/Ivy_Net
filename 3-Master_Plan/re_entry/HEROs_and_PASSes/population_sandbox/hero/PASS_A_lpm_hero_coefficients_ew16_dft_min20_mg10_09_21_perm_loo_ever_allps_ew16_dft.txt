@@ -1,0 +1,17 @@
+# Hero Layer A — quadratic LPM (2026-08-27)
+seasons=2009-2021 (2009–2021)
+n=22,083 player-seasons after hero filters
+Y_draft=1 count: 1,400
+roster_x=poolq_loo
+n_bins=16 poolq_binning=equal_width perf_metric=ppm
+min_minutes=20.0 winsor=0.01–0.99
+mg=10 y_draft_mode=ever panel_rows=all-ps dft=True
+output_tag=perm_loo_ever_allps_ew16_dft
+
+Model: Y_draft ~ const + poolq_loo + poolq_loo_sq
+
+const           0.061641
+poolq_loo      -0.010004
+poolq_loo_sq    0.032596
+
+Interpretation: beta_poolq_loo_sq = 0.0325959 (not concave — flat elite tail on POST-QC panel)

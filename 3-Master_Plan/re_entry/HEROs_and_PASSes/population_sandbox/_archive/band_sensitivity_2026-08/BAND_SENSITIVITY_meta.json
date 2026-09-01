@@ -1,0 +1,10 @@
+{
+  "schemes": [
+    "dm30",
+    "slide10",
+    "two_band",
+    "suggest10"
+  ],
+  "summary_png": "BAND_SENSITIVITY_summary.png",
+  "readout_md": "BAND_SENSITIVITY_readout.md"
+}
