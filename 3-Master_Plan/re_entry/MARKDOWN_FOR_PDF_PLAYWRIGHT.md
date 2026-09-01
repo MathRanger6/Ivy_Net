@@ -8,6 +8,8 @@
 
 **Pipeline (Charles only):** Pandoc (markdown → HTML + KaTeX) → Playwright (HTML → PDF). Default style: narrow margins (`pdf_styles_narrow.css`).
 
+**New Mac / post-migration (once):** Playwright’s browser bundle lives in `~/Library/Caches/ms-playwright/` — it does **not** sync via git or Dropbox. Either run `./scripts/setup_playwright_pdf_mac.sh` (with `conda activate sports_net`) or just run any PDF convert; the script auto-installs Chromium if missing.
+
 ---
 
 ## 1. Document skeleton — copy this

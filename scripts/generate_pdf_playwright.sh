@@ -263,6 +263,58 @@ with open(html_file, 'w', encoding='utf-8') as f:
 print("✅ HTML post-processed for page breaks")
 PYTHON_EOF
 
+# Step 2b: Ensure Playwright Chromium exists (Mac migration / fresh conda env).
+# Old Mac had ~/Library/Caches/ms-playwright/chromium-*; that cache does not move with git/Dropbox.
+_ensure_playwright_chromium() {
+    if "$CONDA_PYTHON" << 'PY'
+import sys
+from pathlib import Path
+
+def _has_full_chromium() -> bool:
+    roots = []
+    bp = __import__("os").environ.get("PLAYWRIGHT_BROWSERS_PATH")
+    if bp:
+        roots.append(Path(bp))
+    roots.extend(
+        [
+            Path.home() / "Library" / "Caches" / "ms-playwright",
+            Path.home() / ".cache" / "ms-playwright",
+        ]
+    )
+    names = (
+        "chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing",
+        "chrome-mac/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing",
+        "chrome-linux64/chrome",
+        "chrome-linux/chrome",
+    )
+    for root in roots:
+        if not root.is_dir():
+            continue
+        for sub in root.glob("chromium-[0-9]*"):
+            if not sub.is_dir():
+                continue
+            for rel in names:
+                exe = sub / rel
+                if exe.is_file():
+                    return True
+    return False
+
+sys.exit(0 if _has_full_chromium() else 1)
+PY
+    then
+        return 0
+    fi
+    echo "▶ Playwright Chromium not found — one-time install (post-migration or new Mac)..."
+    echo "   Python: $CONDA_PYTHON"
+    if ! "$CONDA_PYTHON" -m playwright install chromium; then
+        echo "❌ playwright install chromium failed. Try: conda activate sports_net"
+        exit 1
+    fi
+    echo "✅ Playwright Chromium installed under ~/Library/Caches/ms-playwright/"
+}
+
+_ensure_playwright_chromium
+
 # Step 3: Convert HTML to PDF using Playwright (much better page break support)
 echo "Converting HTML to PDF using Playwright..."
 _PW_LOG_DIR="$(mktemp -d "${TMPDIR:-/tmp}/ivy_net_playwright.XXXXXX")"
@@ -474,6 +526,17 @@ def _launch_chromium(p):
 
     if user_exe:
         attempts.extend(opts_variants({"executable_path": user_exe}))
+
+    # macOS: Google Chrome is not on PATH; use standard .app locations (no env var needed).
+    if sys.platform == "darwin":
+        for mac_exe in (
+            Path("/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"),
+            Path(
+                "/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary"
+            ),
+        ):
+            if mac_exe.is_file() and os.access(mac_exe, os.X_OK):
+                attempts.extend(opts_variants({"executable_path": str(mac_exe)}))
 
     for bin_name in (
         "google-chrome-stable",
