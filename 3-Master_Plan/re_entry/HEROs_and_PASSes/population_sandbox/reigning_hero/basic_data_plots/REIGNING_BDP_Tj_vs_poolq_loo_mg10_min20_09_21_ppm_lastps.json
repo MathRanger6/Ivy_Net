@@ -1,0 +1,30 @@
+{
+  "diagnostic": "bdp_tj_loo_compare",
+  "date": "2026-08-27",
+  "bdp_spec": "mg10 min20 09_21",
+  "perf_metric": "ppm",
+  "panel_rows": "last-ps",
+  "poolq_winsor_quantiles": [
+    0.01,
+    0.99
+  ],
+  "seasons": "2009-2021",
+  "png": "REIGNING_BDP_Tj_vs_poolq_loo_mg10_min20_09_21_ppm_lastps.png",
+  "T_j_hat": {
+    "n": 4508,
+    "mean": 0.035212312026924444,
+    "std": 0.5632246913523272,
+    "min": -2.5450346827103725,
+    "max": 2.703001329530893
+  },
+  "poolq_loo": {
+    "n": 22795,
+    "mean": -0.008098522486501657,
+    "std": 0.2657714522748093,
+    "min": -0.6140188028352481,
+    "max": 0.6446750109667025
+  },
+  "n_team_seasons": 4508,
+  "n_player_seasons": 22795,
+  "y_axis": "histogram density (shared bin edges)"
+}

@@ -1,0 +1,27 @@
+{
+  "bin_slug": "ew20",
+  "bin_label": "EW20",
+  "perf_metric": "ppm",
+  "season_min": 2009,
+  "season_max": 2021,
+  "min_minutes": 20.0,
+  "min_team_season_games": 10,
+  "population": "allt",
+  "y_draft_mode": "ever",
+  "winsor_lo": 0.01,
+  "winsor_hi": 0.99,
+  "panel_rows": "last-ps",
+  "n_rows": 22795,
+  "n_drafts": 615,
+  "plot_family": "HERO",
+  "axis": "poolq_loo (LOO teammate mean perf z; self excluded)",
+  "footer": "HERO \u00b7 poolq_loo (LOO teammate mean perf z; self excluded) \u00b7 EW20 \u00b7 PPM z \u00b7 2009\u20132021 \u00b7 min20 mg10 \u00b7 ALLT \u00b7 Y=ever-draft \u00b7 panel: final-season PS only \u00b7 winsor 0.01\u20130.99 \u00b7 n=22,795 PS \u00b7 drafts=615",
+  "roster_x": "poolq_loo",
+  "poolq_binning": "equal_width",
+  "output_files": {
+    "hero_png": "HERO_ew20_allt_min20_mg10_09_21_last_ps_star_ew20_09_21.png",
+    "side_by_side_png": "PASS_A_side_by_side_ew20_allt_min20_mg10_09_21_last_ps_star_ew20_09_21.png",
+    "roster_csv": "PASS_A_binned_draft_rate_poolq_loo_ew20_allt_min20_mg10_09_21_last_ps_star_ew20_09_21.csv",
+    "ability_csv": "PASS_A_binned_draft_rate_ability_ew20_allt_min20_mg10_09_21_last_ps_star_ew20_09_21.csv"
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "created": "2026-08-27T23:00:43",
+  "date": "2026-08-27",
+  "deck": "reigning_hero_fhero",
+  "reigning_lock": {
+    "output_tag": "perm_loo_ever_lastps_ew16",
+    "season_window": "09_21",
+    "panel_rows": "last-ps",
+    "y_draft_mode": "ever",
+    "population": "ALLT",
+    "filters": "min20 \u00b7 mg10 \u00b7 winsor 0.01\u20130.99 \u00b7 PPM z",
+    "hero_axis": "poolq_loo (EW16)",
+    "hero_lpm_beta_sq_09_21": 0.00172,
+    "fhero_axis": "T_j_hat (pw4p7 piecewise)",
+    "fhero_ai_band": "top 7%"
+  },
+  "population": {
+    "seasons": "2009\u20132021",
+    "panel_rows": "last-ps",
+    "y_draft_mode": "ever",
+    "population_default": "ALLT",
+    "min_minutes": 20,
+    "min_team_games": 10,
+    "winsor": [
+      0.01,
+      0.99
+    ],
+    "perf_metric": "ppm"
+  },
+  "pairing_note": {
+    "hero": "Flat LOO elite on poolq_LOO (\u03b2\u2082 \u2248 +0.00172) \u2014 reigning HERO EW16.",
+    "fhero": "Concave/downturn on T\u0302_j within top-7% \u00c2 band \u2014 separate congestion axis; same last-ps \u00b7 09\u201321 \u00b7 min20 \u00b7 mg10 aperture.",
+    "alex_downturn_visible": true
+  },
+  "artifacts": [
+    {
+      "key": "ecdf",
+      "role": "\u00c2 draft-mass ECDF (overlay band reference)",
+      "json": "BDP_Ai_draft_mass_ecdf_mg10_min20_09_21_allt_ppm_last_ps.json",
+      "png": "BDP_Ai_draft_mass_ecdf_mg10_min20_09_21_allt_ppm_last_ps.png",
+      "png_exists": true
+    },
+    {
+      "key": "single",
+      "role": "F-HERO knee (top 7% \u00c2 \u00b7 pw4p7 T\u0302_j)",
+      "json": "FHERO_pw4p7_allt_min20_mg10_top7_ppm_09_21_last_ps.json",
+      "png": "FHERO_pw4p7_allt_min20_mg10_top7_ppm_09_21_last_ps.png",
+      "readout": {
+        "band_n": 1596,
+        "total_drafts": 246,
+        "ai_top_pct": 7.0,
+        "alex_downturn_visible": true,
+        "plateau_mean_draft_rate": 0.055636146024548014,
+        "tail_mean_draft_rate": 0.29603729603729606,
+        "panel_rows": "last-ps",
+        "footer": "F-HERO \u00b7 T\u0302_j (team mean perf z; includes self \u2014 not poolq_loo) \u00b7 piecewise 4+7 T\u0302_j bins \u00b7 \u00c2 band top 7% \u00b7 PPM z \u00b7 2009\u20132021 \u00b7 min20 mg10 \u00b7 ALLT \u00b7 Y=ever-draft \u00b7 panel: final-season PS only \u00b7 winsor 0.01\u20130.99 \u00b7 band n=1,596 \u00b7 drafts=246"
+      },
+      "png_exists": true
+    },
+    {
+      "key": "overlay",
+      "role": "P2b multi-band overlay (Slide 10 bands \u00b7 ALLT)",
+      "json": "FHERO_pw4p7_overlay_lines_sharetj_allt_min20_mg10_ppm_09_21_last_ps.json",
+      "png": "FHERO_pw4p7_overlay_lines_sharetj_allt_min20_mg10_ppm_09_21_last_ps.png",
+      "readout": {
+        "dft": false,
+        "hero_band_n": 1596,
+        "hero_band_drafts": 246,
+        "alex_downturn_visible": true,
+        "knee_tj": 1.3517807485062232,
+        "knee_rate": 0.29411764705882354
+      },
+      "png_exists": true
+    }
+  ],
+  "commands": {
+    "full": "python sports/scripts/reigning_hero_fhero.py",
+    "ecdf": "python sports/scripts/reigning_hero_fhero.py --only ecdf",
+    "single": "python sports/scripts/reigning_hero_fhero.py --only single",
+    "overlay": "python sports/scripts/reigning_hero_fhero.py --only overlay"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "date": "2026-08-28",
+  "population": {
+    "season_min": 2009,
+    "season_max": 2021,
+    "slug": "mg10_min20_09_21",
+    "panel_rows": "all-ps",
+    "filters": "min20 \u00b7 mg10 \u00b7 winsor 0.01\u20130.99 \u00b7 PPM z"
+  },
+  "pd28_source": "transcripts/20260828_Paper_Directions_28_otter_ai_transcript.docx",
+  "steps": {
+    "rho": {
+      "stem": "REIGNING_PD21_rho_hsort_calibrate_2009_2021_mg10_min20_09_21",
+      "fit_json": "REIGNING_PD21_rho_hsort_calibrate_2009_2021_mg10_min20_09_21_fit_bracket.json",
+      "complete": true
+    },
+    "mle": {
+      "stem": "REIGNING_PD21_draft_bernoulli_mle_2009_2021_mg10_min20_09_21",
+      "json": "REIGNING_PD21_draft_bernoulli_mle_2009_2021_mg10_min20_09_21.json",
+      "complete": true
+    },
+    "temperature": {
+      "stem": "REIGNING_GRANDCHILD_temperature_select_sweep_2009_2021_mg10_min20_09_21",
+      "meta_json": "REIGNING_GRANDCHILD_temperature_select_sweep_2009_2021_mg10_min20_09_21_meta.json",
+      "complete": true
+    }
+  },
+  "compare_memo": "CAMPAIGN_COMPARE.md"
+}

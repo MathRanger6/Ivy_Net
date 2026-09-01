@@ -1,0 +1,487 @@
+{
+  "generated": "2026-08-28",
+  "script": "sports/scripts/pd21_rho_hsort_calibrate.py",
+  "method": "bracket",
+  "panel": {
+    "min_minutes_filter": 20.0,
+    "ppm_zero_below_minutes": null,
+    "season_min": 2009,
+    "season_max": 2021,
+    "panel_mode": "min_minutes_filter",
+    "description": "min_minutes>=20 filter; PPM z within season"
+  },
+  "season_min": 2009,
+  "season_max": 2021,
+  "seasons": "2009-2021",
+  "n_seeds": 50,
+  "rho_grid": [
+    0.0,
+    0.5
+  ],
+  "bracket": {
+    "rho_max": 4.0,
+    "tol": 0.001,
+    "trace": [
+      {
+        "season": 2009,
+        "rho": 0.0,
+        "h_sort_sim_mean": 0.08430074420250458,
+        "h_sort_sim_std": 0.005737836191749862,
+        "h_sort_empirical": 0.06634608774779116,
+        "h_sort_abs_err": 0.01795465645471342,
+        "phase": "bracket"
+      },
+      {
+        "season": 2010,
+        "rho": 0.0,
+        "h_sort_sim_mean": 0.0820659825241202,
+        "h_sort_sim_std": 0.005306139261664208,
+        "h_sort_empirical": 0.06472137111433673,
+        "h_sort_abs_err": 0.017344611409783467,
+        "phase": "bracket"
+      },
+      {
+        "season": 2011,
+        "rho": 0.0,
+        "h_sort_sim_mean": 0.08238332436164258,
+        "h_sort_sim_std": 0.006043496062219299,
+        "h_sort_empirical": 0.06577921612267346,
+        "h_sort_abs_err": 0.01660410823896913,
+        "phase": "bracket"
+      },
+      {
+        "season": 2012,
+        "rho": 0.0,
+        "h_sort_sim_mean": 0.08270914739070222,
+        "h_sort_sim_std": 0.006447915060910792,
+        "h_sort_empirical": 0.07086169191529623,
+        "h_sort_abs_err": 0.011847455475405985,
+        "phase": "bracket"
+      },
+      {
+        "season": 2013,
+        "rho": 0.0,
+        "h_sort_sim_mean": 0.08366541091841764,
+        "h_sort_sim_std": 0.006263099860403316,
+        "h_sort_empirical": 0.061979619345465475,
+        "h_sort_abs_err": 0.021685791572952168,
+        "phase": "bracket"
+      },
+      {
+        "season": 2014,
+        "rho": 0.0,
+        "h_sort_sim_mean": 0.08225794976378417,
+        "h_sort_sim_std": 0.0068478310257547486,
+        "h_sort_empirical": 0.05656051514004312,
+        "h_sort_abs_err": 0.02569743462374105,
+        "phase": "bracket"
+      },
+      {
+        "season": 2015,
+        "rho": 0.0,
+        "h_sort_sim_mean": 0.08126498624746283,
+        "h_sort_sim_std": 0.005998241744190246,
+        "h_sort_empirical": 0.0611334345493344,
+        "h_sort_abs_err": 0.020131551698128428,
+        "phase": "bracket"
+      },
+      {
+        "season": 2016,
+        "rho": 0.0,
+        "h_sort_sim_mean": 0.08187081997384137,
+        "h_sort_sim_std": 0.005643878027805985,
+        "h_sort_empirical": 0.05902178795819357,
+        "h_sort_abs_err": 0.022849032015647794,
+        "phase": "bracket"
+      },
+      {
+        "season": 2017,
+        "rho": 0.0,
+        "h_sort_sim_mean": 0.08084626839189939,
+        "h_sort_sim_std": 0.004631967089839666,
+        "h_sort_empirical": 0.06502926442473633,
+        "h_sort_abs_err": 0.015817003967163054,
+        "phase": "bracket"
+      },
+      {
+        "season": 2018,
+        "rho": 0.0,
+        "h_sort_sim_mean": 0.08012869221544625,
+        "h_sort_sim_std": 0.0045429594688864575,
+        "h_sort_empirical": 0.0627630266884458,
+        "h_sort_abs_err": 0.017365665527000446,
+        "phase": "bracket"
+      },
+      {
+        "season": 2019,
+        "rho": 0.0,
+        "h_sort_sim_mean": 0.08317433595114503,
+        "h_sort_sim_std": 0.005666373961655092,
+        "h_sort_empirical": 0.06709506867992587,
+        "h_sort_abs_err": 0.016079267271219153,
+        "phase": "bracket"
+      },
+      {
+        "season": 2020,
+        "rho": 0.0,
+        "h_sort_sim_mean": 0.08340611746783919,
+        "h_sort_sim_std": 0.006980041495357563,
+        "h_sort_empirical": 0.06329600214701192,
+        "h_sort_abs_err": 0.020110115320827265,
+        "phase": "bracket"
+      },
+      {
+        "season": 2021,
+        "rho": 0.0,
+        "h_sort_sim_mean": 0.08197508599115254,
+        "h_sort_sim_std": 0.006565672192951607,
+        "h_sort_empirical": 0.07274563431553693,
+        "h_sort_abs_err": 0.009229451675615605,
+        "phase": "bracket"
+      }
+    ]
+  },
+  "parallel": "process",
+  "n_jobs": 8,
+  "empirical_targets": [
+    {
+      "season": 2009,
+      "h_sort_empirical": 0.06634608774779116,
+      "n_players": 4093
+    },
+    {
+      "season": 2010,
+      "h_sort_empirical": 0.06472137111433673,
+      "n_players": 4183
+    },
+    {
+      "season": 2011,
+      "h_sort_empirical": 0.06577921612267346,
+      "n_players": 4086
+    },
+    {
+      "season": 2012,
+      "h_sort_empirical": 0.07086169191529623,
+      "n_players": 4097
+    },
+    {
+      "season": 2013,
+      "h_sort_empirical": 0.061979619345465475,
+      "n_players": 4135
+    },
+    {
+      "season": 2014,
+      "h_sort_empirical": 0.05656051514004312,
+      "n_players": 4248
+    },
+    {
+      "season": 2015,
+      "h_sort_empirical": 0.0611334345493344,
+      "n_players": 4270
+    },
+    {
+      "season": 2016,
+      "h_sort_empirical": 0.05902178795819357,
+      "n_players": 4234
+    },
+    {
+      "season": 2017,
+      "h_sort_empirical": 0.06502926442473633,
+      "n_players": 4292
+    },
+    {
+      "season": 2018,
+      "h_sort_empirical": 0.0627630266884458,
+      "n_players": 4246
+    },
+    {
+      "season": 2019,
+      "h_sort_empirical": 0.06709506867992587,
+      "n_players": 4204
+    },
+    {
+      "season": 2020,
+      "h_sort_empirical": 0.06329600214701192,
+      "n_players": 4219
+    },
+    {
+      "season": 2021,
+      "h_sort_empirical": 0.07274563431553693,
+      "n_players": 4275
+    }
+  ],
+  "per_season": [
+    {
+      "season": 2009,
+      "rho_star": 0.0,
+      "rho_star_capped_at_max": false,
+      "h_sort_empirical": 0.06634608774779116,
+      "h_sort_sim_at_star": 0.08430074420250458,
+      "h_sort_abs_err": 0.01795465645471342,
+      "n_seeds": 50
+    },
+    {
+      "season": 2010,
+      "rho_star": 0.0,
+      "rho_star_capped_at_max": false,
+      "h_sort_empirical": 0.06472137111433673,
+      "h_sort_sim_at_star": 0.0820659825241202,
+      "h_sort_abs_err": 0.017344611409783467,
+      "n_seeds": 50
+    },
+    {
+      "season": 2011,
+      "rho_star": 0.0,
+      "rho_star_capped_at_max": false,
+      "h_sort_empirical": 0.06577921612267346,
+      "h_sort_sim_at_star": 0.08238332436164258,
+      "h_sort_abs_err": 0.01660410823896913,
+      "n_seeds": 50
+    },
+    {
+      "season": 2012,
+      "rho_star": 0.0,
+      "rho_star_capped_at_max": false,
+      "h_sort_empirical": 0.07086169191529623,
+      "h_sort_sim_at_star": 0.08270914739070222,
+      "h_sort_abs_err": 0.011847455475405985,
+      "n_seeds": 50
+    },
+    {
+      "season": 2013,
+      "rho_star": 0.0,
+      "rho_star_capped_at_max": false,
+      "h_sort_empirical": 0.061979619345465475,
+      "h_sort_sim_at_star": 0.08366541091841764,
+      "h_sort_abs_err": 0.021685791572952168,
+      "n_seeds": 50
+    },
+    {
+      "season": 2014,
+      "rho_star": 0.0,
+      "rho_star_capped_at_max": false,
+      "h_sort_empirical": 0.05656051514004312,
+      "h_sort_sim_at_star": 0.08225794976378417,
+      "h_sort_abs_err": 0.02569743462374105,
+      "n_seeds": 50
+    },
+    {
+      "season": 2015,
+      "rho_star": 0.0,
+      "rho_star_capped_at_max": false,
+      "h_sort_empirical": 0.0611334345493344,
+      "h_sort_sim_at_star": 0.08126498624746283,
+      "h_sort_abs_err": 0.020131551698128428,
+      "n_seeds": 50
+    },
+    {
+      "season": 2016,
+      "rho_star": 0.0,
+      "rho_star_capped_at_max": false,
+      "h_sort_empirical": 0.05902178795819357,
+      "h_sort_sim_at_star": 0.08187081997384137,
+      "h_sort_abs_err": 0.022849032015647794,
+      "n_seeds": 50
+    },
+    {
+      "season": 2017,
+      "rho_star": 0.0,
+      "rho_star_capped_at_max": false,
+      "h_sort_empirical": 0.06502926442473633,
+      "h_sort_sim_at_star": 0.08084626839189939,
+      "h_sort_abs_err": 0.015817003967163054,
+      "n_seeds": 50
+    },
+    {
+      "season": 2018,
+      "rho_star": 0.0,
+      "rho_star_capped_at_max": false,
+      "h_sort_empirical": 0.0627630266884458,
+      "h_sort_sim_at_star": 0.08012869221544625,
+      "h_sort_abs_err": 0.017365665527000446,
+      "n_seeds": 50
+    },
+    {
+      "season": 2019,
+      "rho_star": 0.0,
+      "rho_star_capped_at_max": false,
+      "h_sort_empirical": 0.06709506867992587,
+      "h_sort_sim_at_star": 0.08317433595114503,
+      "h_sort_abs_err": 0.016079267271219153,
+      "n_seeds": 50
+    },
+    {
+      "season": 2020,
+      "rho_star": 0.0,
+      "rho_star_capped_at_max": false,
+      "h_sort_empirical": 0.06329600214701192,
+      "h_sort_sim_at_star": 0.08340611746783919,
+      "h_sort_abs_err": 0.020110115320827265,
+      "n_seeds": 50
+    },
+    {
+      "season": 2021,
+      "rho_star": 0.0,
+      "rho_star_capped_at_max": false,
+      "h_sort_empirical": 0.07274563431553693,
+      "h_sort_sim_at_star": 0.08197508599115254,
+      "h_sort_abs_err": 0.009229451675615605,
+      "n_seeds": 50
+    }
+  ],
+  "longitudinal": {
+    "rho_star_longitudinal": 0.0,
+    "h_sort_sim_mean_at_star": 0.08231145118461214,
+    "h_sort_empirical_mean_over_seasons": 0.06441020924221469,
+    "mean_abs_err_at_star": 0.017901241942397454,
+    "max_abs_err_at_star": 0.02569743462374105,
+    "reference_rho": 0.5,
+    "mean_abs_err_at_reference_rho": 0.11221692931819488,
+    "curve": [
+      {
+        "rho": 0.0,
+        "mean_abs_err": 0.017901241942397454,
+        "max_abs_err": 0.02569743462374105,
+        "h_sort_sim_mean_over_seasons": 0.08231145118461214
+      },
+      {
+        "rho": 0.5,
+        "mean_abs_err": 0.11221692931819488,
+        "max_abs_err": 0.11974393950195741,
+        "h_sort_sim_mean_over_seasons": 0.17662713856040957
+      }
+    ]
+  },
+  "reference_rho_0p5": [
+    {
+      "season": 2009,
+      "rho": 0.5,
+      "n_seeds": 50,
+      "h_sort_sim_mean": 0.17863692272641982,
+      "h_sort_sim_std": 0.01087373603603516,
+      "global_wss_sim_mean": 3361.0177122034893,
+      "h_sort_empirical": 0.06634608774779116,
+      "h_sort_abs_err": 0.11229083497862866
+    },
+    {
+      "season": 2010,
+      "rho": 0.5,
+      "n_seeds": 50,
+      "h_sort_sim_mean": 0.17814957502153952,
+      "h_sort_sim_std": 0.012475495946485452,
+      "global_wss_sim_mean": 3436.9784772599123,
+      "h_sort_empirical": 0.06472137111433673,
+      "h_sort_abs_err": 0.11342820390720279
+    },
+    {
+      "season": 2011,
+      "rho": 0.5,
+      "n_seeds": 50,
+      "h_sort_sim_mean": 0.17898265152848786,
+      "h_sort_sim_std": 0.011943176209718777,
+      "global_wss_sim_mean": 3353.8558685061203,
+      "h_sort_empirical": 0.06577921612267346,
+      "h_sort_abs_err": 0.1132034354058144
+    },
+    {
+      "season": 2012,
+      "rho": 0.5,
+      "n_seeds": 50,
+      "h_sort_sim_mean": 0.17832723394518335,
+      "h_sort_sim_std": 0.010526638247838649,
+      "global_wss_sim_mean": 3365.571649760519,
+      "h_sort_empirical": 0.07086169191529623,
+      "h_sort_abs_err": 0.10746554202988712
+    },
+    {
+      "season": 2013,
+      "rho": 0.5,
+      "n_seeds": 50,
+      "h_sort_sim_mean": 0.17763684772190874,
+      "h_sort_sim_std": 0.011247745281585139,
+      "global_wss_sim_mean": 3399.649271517619,
+      "h_sort_empirical": 0.061979619345465475,
+      "h_sort_abs_err": 0.11565722837644327
+    },
+    {
+      "season": 2014,
+      "rho": 0.5,
+      "n_seeds": 50,
+      "h_sort_sim_mean": 0.17630445464200054,
+      "h_sort_sim_std": 0.012185379897120607,
+      "global_wss_sim_mean": 3498.234981135428,
+      "h_sort_empirical": 0.05656051514004312,
+      "h_sort_abs_err": 0.11974393950195741
+    },
+    {
+      "season": 2015,
+      "rho": 0.5,
+      "n_seeds": 50,
+      "h_sort_sim_mean": 0.17682083625000605,
+      "h_sort_sim_std": 0.010259497255299576,
+      "global_wss_sim_mean": 3514.1518500487173,
+      "h_sort_empirical": 0.0611334345493344,
+      "h_sort_abs_err": 0.11568740170067165
+    },
+    {
+      "season": 2016,
+      "rho": 0.5,
+      "n_seeds": 50,
+      "h_sort_sim_mean": 0.17714570243149733,
+      "h_sort_sim_std": 0.010158678220976653,
+      "global_wss_sim_mean": 3483.14224160747,
+      "h_sort_empirical": 0.05902178795819357,
+      "h_sort_abs_err": 0.11812391447330375
+    },
+    {
+      "season": 2017,
+      "rho": 0.5,
+      "n_seeds": 50,
+      "h_sort_sim_mean": 0.1721489499754845,
+      "h_sort_sim_std": 0.010781731309232797,
+      "global_wss_sim_mean": 3552.3088556551893,
+      "h_sort_empirical": 0.06502926442473633,
+      "h_sort_abs_err": 0.10711968555074816
+    },
+    {
+      "season": 2018,
+      "rho": 0.5,
+      "n_seeds": 50,
+      "h_sort_sim_mean": 0.17477000993085925,
+      "h_sort_sim_std": 0.011352965919923855,
+      "global_wss_sim_mean": 3503.101307843493,
+      "h_sort_empirical": 0.0627630266884458,
+      "h_sort_abs_err": 0.11200698324241345
+    },
+    {
+      "season": 2019,
+      "rho": 0.5,
+      "n_seeds": 50,
+      "h_sort_sim_mean": 0.17939099365848893,
+      "h_sort_sim_std": 0.009124547921952116,
+      "global_wss_sim_mean": 3449.019653653373,
+      "h_sort_empirical": 0.06709506867992587,
+      "h_sort_abs_err": 0.11229592497856306
+    },
+    {
+      "season": 2020,
+      "rho": 0.5,
+      "n_seeds": 50,
+      "h_sort_sim_mean": 0.17464226005936623,
+      "h_sort_sim_std": 0.011434422178238094,
+      "global_wss_sim_mean": 3481.358947069588,
+      "h_sort_empirical": 0.06329600214701192,
+      "h_sort_abs_err": 0.11134625791235431
+    },
+    {
+      "season": 2021,
+      "rho": 0.5,
+      "n_seeds": 50,
+      "h_sort_sim_mean": 0.17319636339408223,
+      "h_sort_sim_std": 0.01255111220867641,
+      "global_wss_sim_mean": 3533.758742853689,
+      "h_sort_empirical": 0.07274563431553693,
+      "h_sort_abs_err": 0.1004507290785453
+    }
+  ]
+}

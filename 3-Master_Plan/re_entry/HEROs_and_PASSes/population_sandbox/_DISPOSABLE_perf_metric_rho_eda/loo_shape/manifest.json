@@ -1,0 +1,26 @@
+{
+  "date": "2026-08-28",
+  "bdp_spec": "mg10 min20 09_21",
+  "reigning_spec": "mg10 min20 09_21",
+  "panel_rows": "last-ps",
+  "poolq_binning": "equal_width",
+  "n_bins": 16,
+  "poolq_winsor": [
+    0.01,
+    0.99
+  ],
+  "metrics": [
+    "ppm",
+    "fg_pct",
+    "efg_pct",
+    "ts_pct_box",
+    "per",
+    "bpm",
+    "tspct",
+    "ws",
+    "minutes"
+  ],
+  "write_plots": false,
+  "summary_csv": "loo_shape_summary_2009_2021.csv",
+  "report_md": "LOO_SHAPE_REPORT.md"
+}

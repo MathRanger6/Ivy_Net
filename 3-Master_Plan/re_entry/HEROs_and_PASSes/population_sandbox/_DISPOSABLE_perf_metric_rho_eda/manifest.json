@@ -1,0 +1,85 @@
+{
+  "date": "2026-08-28",
+  "spec": {
+    "season_min": 2009,
+    "season_max": 2021,
+    "min_minutes": 20.0
+  },
+  "metrics": [
+    "ppm",
+    "fg_pct",
+    "efg_pct",
+    "ts_pct_box",
+    "per",
+    "bpm",
+    "tspct",
+    "ws",
+    "minutes"
+  ],
+  "H_sort_ladder": [
+    {
+      "perf_metric": "bpm",
+      "n_panel_rows": 45156,
+      "n_valid_perf": 45156,
+      "H_sort_pooled": 0.3366347448754935,
+      "H_sort_mean_by_season": 0.3367326976020753
+    },
+    {
+      "perf_metric": "ws",
+      "n_panel_rows": 52906,
+      "n_valid_perf": 52906,
+      "H_sort_pooled": 0.16265537549576892,
+      "H_sort_mean_by_season": 0.16265961484233005
+    },
+    {
+      "perf_metric": "tspct",
+      "n_panel_rows": 53197,
+      "n_valid_perf": 53197,
+      "H_sort_pooled": 0.124714296733897,
+      "H_sort_mean_by_season": 0.12483615541794552
+    },
+    {
+      "perf_metric": "ts_pct_box",
+      "n_panel_rows": 54568,
+      "n_valid_perf": 54568,
+      "H_sort_pooled": 0.12427806582206224,
+      "H_sort_mean_by_season": 0.12434512102456893
+    },
+    {
+      "perf_metric": "efg_pct",
+      "n_panel_rows": 54552,
+      "n_valid_perf": 54552,
+      "H_sort_pooled": 0.12154128762858951,
+      "H_sort_mean_by_season": 0.12157700221660908
+    },
+    {
+      "perf_metric": "per",
+      "n_panel_rows": 49086,
+      "n_valid_perf": 49086,
+      "H_sort_pooled": 0.11125178240937839,
+      "H_sort_mean_by_season": 0.11134182017687129
+    },
+    {
+      "perf_metric": "fg_pct",
+      "n_panel_rows": 54552,
+      "n_valid_perf": 54552,
+      "H_sort_pooled": 0.09477322693246903,
+      "H_sort_mean_by_season": 0.09484104432771903
+    },
+    {
+      "perf_metric": "ppm",
+      "n_panel_rows": 54582,
+      "n_valid_perf": 54582,
+      "H_sort_pooled": 0.06439062913785809,
+      "H_sort_mean_by_season": 0.06441020924221469
+    },
+    {
+      "perf_metric": "minutes",
+      "n_panel_rows": 54582,
+      "n_valid_perf": 54582,
+      "H_sort_pooled": 0.05344460861392686,
+      "H_sort_mean_by_season": 0.05342782918551965
+    }
+  ],
+  "outputs_root": "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/_DISPOSABLE_perf_metric_rho_eda"
+}

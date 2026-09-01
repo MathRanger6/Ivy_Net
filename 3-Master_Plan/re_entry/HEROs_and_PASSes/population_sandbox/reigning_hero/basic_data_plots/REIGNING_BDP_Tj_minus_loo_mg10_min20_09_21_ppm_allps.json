@@ -1,0 +1,25 @@
+{
+  "diagnostic": "bdp_tj_minus_loo_distribution",
+  "date": "2026-08-28",
+  "bdp_spec": "mg10 min20 09_21",
+  "panel_rows": "all-ps",
+  "overlay_dft": true,
+  "n": 54582,
+  "mean_tj_minus_loo": 0.0001779424048281691,
+  "std_tj_minus_loo": 0.08857295712971426,
+  "H_sort_team": 0.06439062913785809,
+  "H_sort_loo": -0.10847419460760666,
+  "corr_tj_minus_loo_vs_ai_minus_tj": 0.9629428798581872,
+  "dft": {
+    "n": 21774,
+    "mean_tj_minus_loo": 0.0006368986362686536,
+    "std_tj_minus_loo": 0.0905385139847857,
+    "H_sort_team": 0.06046310221286333,
+    "H_sort_loo": -0.1170773770546667,
+    "corr_tj_minus_loo_vs_ai_minus_tj": 0.976493736519046
+  },
+  "note": "T\u0302_j - poolq_LOO,i = self-inclusion gap (team mean minus LOO teammate mean). H_sort^team = 1 - sum(A_i - T\u0302_j)\u00b2 / sum(A_i - \u0100)\u00b2 (standard). H_sort^LOO replaces team mean with poolq_LOO in the numerator; can be negative because LOO is not a partition of variance across teams.",
+  "outputs": {
+    "png": "REIGNING_BDP_Tj_minus_loo_mg10_min20_09_21_ppm_allps.png"
+  }
+}

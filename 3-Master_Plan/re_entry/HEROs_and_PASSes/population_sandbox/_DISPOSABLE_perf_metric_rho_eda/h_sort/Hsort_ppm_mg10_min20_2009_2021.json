@@ -1,0 +1,8 @@
+{
+  "perf_metric": "ppm",
+  "date": "2026-08-28",
+  "panel_mode": "min_minutes>=20 filter; PPM z within season",
+  "n_panel_rows": 54582,
+  "n_valid_perf": 54582,
+  "H_sort_pooled": 0.06439062913785809
+}

@@ -1,0 +1,39 @@
+{
+  "diagnostic": "reigning_hero_team_interval_overlap",
+  "date": "2026-08-27",
+  "reigning_spec": "mg10 min20 09_21",
+  "panel_rows": "all-ps",
+  "seasons": "2009-2021",
+  "perf": "PPM z within season",
+  "coverage_max": 4534,
+  "coverage_max_normalized": 1.0,
+  "coverage_mean": 1676.4575,
+  "coverage_frac_gt_1": 0.98,
+  "coverage_disjoint_max": 1,
+  "coverage_disjoint_mean": 0.9125,
+  "n_team_seasons": 4534,
+  "n_player_seasons": 54582,
+  "H_sort": 0.06439062913785809,
+  "perf_span": {
+    "label": "perf_span",
+    "n": 4534,
+    "mean": 3.2743085964916996,
+    "std": 0.7809624871479268,
+    "min": 0.9755327574308806,
+    "max": 8.207542592416171,
+    "median": 3.214758059006504
+  },
+  "T_j_hat": {
+    "label": "\\hat{T}_j",
+    "n": 4534,
+    "mean": 0.0041439460361154465,
+    "std": 0.2516340172633654,
+    "min": -0.9546807222691278,
+    "max": 1.1402654122045637,
+    "median": -0.0008008029089648322
+  },
+  "outputs": {
+    "png": "REIGNING_team_interval_overlap_mg10_min20_09_21.png",
+    "team_csv": "REIGNING_team_interval_overlap_mg10_min20_09_21_team_season.csv"
+  }
+}

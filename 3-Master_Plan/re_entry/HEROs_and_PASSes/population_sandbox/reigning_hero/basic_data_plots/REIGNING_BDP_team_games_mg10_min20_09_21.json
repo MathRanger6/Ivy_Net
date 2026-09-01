@@ -1,0 +1,28 @@
+{
+  "diagnostic": "bdp_team_season_games",
+  "date": "2026-08-28",
+  "bdp_spec": "mg10 min20 09_21",
+  "seasons": "2009-2021",
+  "after_box_qc": true,
+  "panel_rows": "team-season (box)",
+  "hand_analog": "PD22 memo slide 27",
+  "n_team_seasons": 4534,
+  "games_n_min": 12,
+  "games_n_max": 41,
+  "games_n_median": 32.0,
+  "games_n_mean": 31.54786060873401,
+  "n_with_1_game": 0,
+  "pct_with_1_game": 0.0,
+  "n_with_10_or_fewer": 0,
+  "n_with_ge_20_games": 4473,
+  "outputs": {
+    "png": "REIGNING_BDP_team_games_mg10_min20_09_21.png",
+    "team_csv": "REIGNING_BDP_team_games_mg10_min20_09_21_team_season.csv"
+  },
+  "box_qc_report": {
+    "dash_rows_dropped": 175,
+    "team_seasons_dropped_low_games": 2990,
+    "box_rows_dropped_low_games": 69176,
+    "box_rows_after_qc": 2092043
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "diagnostic": "bdp_team_size_distributions",
+  "date": "2026-08-27",
+  "bdp_spec": "mg10 min20 09_21",
+  "seasons": "2009-2021",
+  "qc": "drop_dash_placeholder_names=True",
+  "min_team_season_games": 10,
+  "min_minutes": 20.0,
+  "dft": false,
+  "overlay_dft": true,
+  "team_season_summary": {
+    "n": 4534,
+    "mean": 12.038376709307455,
+    "std": 1.465778009318829,
+    "min": 8,
+    "max": 19,
+    "median": 12.0,
+    "n_ge_60": 0
+  },
+  "player_seasons": 54582,
+  "png": "REIGNING_BDP_team_size_mg10_min20_09_21.png",
+  "dft_overlay": {
+    "team_season_summary": {
+      "n": 1870,
+      "mean": 11.809090909090909,
+      "std": 1.4014594101744628,
+      "min": 8,
+      "max": 19,
+      "median": 12.0,
+      "n_ge_60": 0
+    },
+    "player_seasons": 22083,
+    "n_player_season_rows": 22083
+  }
+}

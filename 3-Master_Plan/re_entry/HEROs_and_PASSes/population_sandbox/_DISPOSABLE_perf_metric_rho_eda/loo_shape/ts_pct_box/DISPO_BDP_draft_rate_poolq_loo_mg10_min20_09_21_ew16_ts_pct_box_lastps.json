@@ -1,0 +1,25 @@
+{
+  "diagnostic": "bdp_draft_rate_vs_poolq_loo",
+  "date": "2026-08-28",
+  "bdp_spec": "mg10 min20 09_21",
+  "perf_metric": "ts_pct_box",
+  "panel_rows": "last-ps",
+  "y_draft_mode": "ever",
+  "poolq_binning": "equal_width",
+  "n_bins": 16,
+  "poolq_winsor": [
+    0.01,
+    0.99
+  ],
+  "lpm_quadratic": {
+    "const": 0.024711427800027035,
+    "beta_poolq_loo": 0.0371225981508302,
+    "beta_poolq_loo_sq": 0.021029371189480155
+  },
+  "n_panel_rows": 22789,
+  "n_binned_rows": 22789,
+  "outputs": {
+    "png": "DISPO_BDP_draft_rate_poolq_loo_mg10_min20_09_21_ew16_ts_pct_box_lastps.png",
+    "bins_csv": "DISPO_BDP_draft_rate_poolq_loo_mg10_min20_09_21_ew16_ts_pct_box_lastps.csv"
+  }
+}

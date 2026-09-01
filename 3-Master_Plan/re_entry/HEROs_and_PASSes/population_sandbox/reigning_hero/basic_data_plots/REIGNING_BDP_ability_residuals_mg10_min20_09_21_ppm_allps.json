@@ -1,0 +1,27 @@
+{
+  "diagnostic": "bdp_ability_residual_distributions",
+  "date": "2026-08-28",
+  "bdp_spec": "mg10 min20 09_21",
+  "panel_rows": "all-ps",
+  "overlay_dft": true,
+  "n": 54582,
+  "A_bar": -4.1657263464737834e-17,
+  "ss_team": 51055.26775857615,
+  "ss_grand": 54568.99999999992,
+  "H_sort_pooled": 0.06439062913785809,
+  "std_team_residual": 0.9671538312302115,
+  "std_grand_residual": 0.9998809060298542,
+  "dft": {
+    "n": 21774,
+    "A_bar": 0.05592840694728705,
+    "ss_team": 20911.508158244855,
+    "ss_grand": 22257.250574721555,
+    "H_sort_pooled": 0.06046310221286333,
+    "std_team_residual": 0.9799943425679931,
+    "std_grand_residual": 1.0110360663090499
+  },
+  "note": "Left: within-team demeaned perf (numerator of H_sort ratio). Right: grand-mean demeaned perf (denominator). Pooled over 09\u201321 all-ps panel. + DFT = draft-ever teams (all-time in window).",
+  "outputs": {
+    "png": "REIGNING_BDP_ability_residuals_mg10_min20_09_21_ppm_allps.png"
+  }
+}

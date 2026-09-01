@@ -1,0 +1,23 @@
+{
+  "diagnostic": "bdp_ability_loo_residual_distribution",
+  "date": "2026-08-28",
+  "bdp_spec": "mg10 min20 09_21",
+  "panel_rows": "all-ps",
+  "overlay_dft": true,
+  "n": 54582,
+  "ss_loo": 60488.328325542396,
+  "ss_grand": 54568.99999999992,
+  "frac_var_loo_residual": 1.1084741946076067,
+  "std_loo_residual": 1.0527156090230312,
+  "dft": {
+    "n": 21774,
+    "ss_loo": 24863.071092458427,
+    "ss_grand": 22257.250574721555,
+    "frac_var_loo_residual": 1.1170773770546667,
+    "std_loo_residual": 1.0685828491962577
+  },
+  "note": "LOO residual = perf minus leave-one-out teammate mean pool quality (poolq_LOO). Analogous to left panel of ability_residuals but \u03bc_team(i) replaced by poolq_LOO,i. + DFT = draft-ever teams (all-time in window).",
+  "outputs": {
+    "png": "REIGNING_BDP_ability_loo_residuals_mg10_min20_09_21_ppm_allps.png"
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "diagnostic": "bdp_ai_draft_mass_ecdf",
+  "date": "2026-08-27",
+  "panel": "mg10 min20 09_21 \u00b7 ALLT \u00b7 panel=last-ps \u00b7 Y=ever",
+  "perf_metric": "ppm",
+  "min_minutes": 20.0,
+  "panel_rows": "last-ps",
+  "y_draft_mode": "ever",
+  "dft": false,
+  "winsor": [
+    0.01,
+    0.99
+  ],
+  "draft_mass_step_pct": 5.0,
+  "panel_top_cuts": [],
+  "bands": "0:4.55802,4.55802:12.9897,12.9897:31.0375",
+  "n_panel": 22795,
+  "n_drafted": 615,
+  "K_over_N": 0.02697960078964685,
+  "png": "BDP_Ai_draft_mass_ecdf_mg10_min20_09_21_allt_ppm_last_ps.png",
+  "cuts_csv": "BDP_Ai_draft_mass_ecdf_mg10_min20_09_21_allt_ppm_last_ps_cuts.csv",
+  "panel_cuts": [],
+  "draft_mass_tiers_pct": 30.0,
+  "draft_mass_tier_cuts": [
+    {
+      "row_type": "draft_mass_tier",
+      "tier_pct": 30.0,
+      "draft_mass_pct": 70.0,
+      "z_cut": 1.8930169202665557,
+      "panel_top_pct": 4.558017109015135,
+      "n_drafted_at_or_below": 430,
+      "n_drafted_total": 615
+    },
+    {
+      "row_type": "draft_mass_tier",
+      "tier_pct": 30.0,
+      "draft_mass_pct": 40.0,
+      "z_cut": 1.26257822398509,
+      "panel_top_pct": 12.989690721649486,
+      "n_drafted_at_or_below": 246,
+      "n_drafted_total": 615
+    },
+    {
+      "row_type": "draft_mass_tier",
+      "tier_pct": 30.0,
+      "draft_mass_pct": 10.0,
+      "z_cut": 0.5289572427515145,
+      "panel_top_pct": 31.037508225488047,
+      "n_drafted_at_or_below": 62,
+      "n_drafted_total": 615
+    }
+  ],
+  "tier_bands_suggested": "0:4.55802,4.55802:12.9897,12.9897:31.0375",
+  "overlay_bands": [
+    {
+      "row_type": "overlay_band",
+      "band": "top 4.55802%",
+      "top_lo": 0.0,
+      "top_hi": 4.55802,
+      "z_cut_outer": 1.8922420792120684,
+      "z_cut_inner": NaN,
+      "band_n": 1039,
+      "band_drafts": 185,
+      "draft_share_of_total_pct": 30.08130081300813,
+      "band_draft_rate": 0.17805582290664101
+    },
+    {
+      "row_type": "overlay_band",
+      "band": "top 4.55802\u201312.9897%",
+      "top_lo": 4.55802,
+      "top_hi": 12.9897,
+      "z_cut_outer": 1.2623472746501092,
+      "z_cut_inner": 1.8922420792120684,
+      "band_n": 1922,
+      "band_drafts": 184,
+      "draft_share_of_total_pct": 29.91869918699187,
+      "band_draft_rate": 0.09573361082206035
+    },
+    {
+      "row_type": "overlay_band",
+      "band": "top 12.9897\u201331.0375%",
+      "top_lo": 12.9897,
+      "top_hi": 31.0375,
+      "z_cut_outer": 0.5288070089329947,
+      "z_cut_inner": 1.2623472746501092,
+      "band_n": 4114,
+      "band_drafts": 184,
+      "draft_share_of_total_pct": 29.91869918699187,
+      "band_draft_rate": 0.04472532814778804
+    }
+  ]
+}

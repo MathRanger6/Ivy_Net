@@ -1,0 +1,14 @@
+{
+  "diagnostic": "bdp_ability_team_vs_loo_residual_compare",
+  "date": "2026-08-28",
+  "bdp_spec": "mg10 min20 09_21",
+  "panel_rows": "all-ps",
+  "n": 54582,
+  "std_team_residual": 0.9671538312302115,
+  "std_loo_residual": 1.0527156090230312,
+  "corr_team_loo_residual": 0.999742495148306,
+  "note": "Superposed KDEs on identical player-rows. Orange = A_i - T\u0302_j (team mean incl. i); blue = A_i - poolq_LOO,i (teammate mean excl. i).",
+  "outputs": {
+    "png": "REIGNING_BDP_ability_Tj_vs_loo_residuals_mg10_min20_09_21_ppm_allps.png"
+  }
+}

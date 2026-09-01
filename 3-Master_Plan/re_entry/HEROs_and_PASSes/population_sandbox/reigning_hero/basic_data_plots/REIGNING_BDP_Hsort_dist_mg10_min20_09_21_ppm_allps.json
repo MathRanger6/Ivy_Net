@@ -1,0 +1,81 @@
+{
+  "diagnostic": "bdp_hsort_distribution",
+  "date": "2026-08-28",
+  "bdp_spec": "mg10 min20 09_21",
+  "panel_rows": "all-ps",
+  "H_sort_pooled_empirical": 0.06439062913785809,
+  "H_sort_empirical_by_season": [
+    {
+      "season": 2009,
+      "h_sort_empirical": 0.06634608774779116,
+      "n_players": 4093
+    },
+    {
+      "season": 2010,
+      "h_sort_empirical": 0.06472137111433673,
+      "n_players": 4183
+    },
+    {
+      "season": 2011,
+      "h_sort_empirical": 0.06577921612267346,
+      "n_players": 4086
+    },
+    {
+      "season": 2012,
+      "h_sort_empirical": 0.07086169191529623,
+      "n_players": 4097
+    },
+    {
+      "season": 2013,
+      "h_sort_empirical": 0.061979619345465475,
+      "n_players": 4135
+    },
+    {
+      "season": 2014,
+      "h_sort_empirical": 0.05656051514004312,
+      "n_players": 4248
+    },
+    {
+      "season": 2015,
+      "h_sort_empirical": 0.0611334345493344,
+      "n_players": 4270
+    },
+    {
+      "season": 2016,
+      "h_sort_empirical": 0.05902178795819357,
+      "n_players": 4234
+    },
+    {
+      "season": 2017,
+      "h_sort_empirical": 0.06502926442473633,
+      "n_players": 4292
+    },
+    {
+      "season": 2018,
+      "h_sort_empirical": 0.0627630266884458,
+      "n_players": 4246
+    },
+    {
+      "season": 2019,
+      "h_sort_empirical": 0.06709506867992587,
+      "n_players": 4204
+    },
+    {
+      "season": 2020,
+      "h_sort_empirical": 0.06329600214701192,
+      "n_players": 4219
+    },
+    {
+      "season": 2021,
+      "h_sort_empirical": 0.07274563431553693,
+      "n_players": 4275
+    }
+  ],
+  "H_sort_sim_rho0_n": 650,
+  "H_sort_sim_rho0_mean": 0.08231145118461215,
+  "note": "H_sort measures variance explained by team assignment (low \u2248 weak homophily). Interval overlap tracks team windows on the perf axis \u2014 a different geometry.",
+  "outputs": {
+    "png": "REIGNING_BDP_Hsort_dist_mg10_min20_09_21_ppm_allps.png",
+    "csv": "REIGNING_BDP_Hsort_dist_mg10_min20_09_21_ppm_allps_by_season.csv"
+  }
+}

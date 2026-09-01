@@ -1,0 +1,59 @@
+{
+  "diagnostic": "bdp_minutes_player_team_dual",
+  "date": "2026-08-28",
+  "bdp_spec": "mg10 min20 09_21",
+  "seasons": "2009-2021",
+  "panel_rows": "all-ps",
+  "overlay_dft": true,
+  "player_season_minutes": {
+    "n": 54582,
+    "mean": 527.349236011872,
+    "std": 341.4744499761292,
+    "min": 20.0,
+    "max": 1543.0,
+    "median": 515.0,
+    "p25": 218.0,
+    "p75": 811.0,
+    "p90": 999.0
+  },
+  "team_mean_minutes": {
+    "n": 4534,
+    "mean": 535.3755662582174,
+    "std": 88.59684488269929,
+    "min": 131.88888888888889,
+    "max": 848.875,
+    "median": 536.0,
+    "p25": 481.55492424242425,
+    "p75": 588.4450757575758,
+    "p90": 643.8127272727273
+  },
+  "n_player_seasons": 54582,
+  "n_team_seasons": 4534,
+  "outputs": {
+    "png": "REIGNING_BDP_minutes_player_team_mg10_min20_09_21.png"
+  },
+  "player_season_minutes_dft": {
+    "n": 22083,
+    "mean": 555.5516460625821,
+    "std": 358.39777897961943,
+    "min": 20.0,
+    "max": 1543.0,
+    "median": 552.0,
+    "p25": 226.0,
+    "p75": 857.0,
+    "p90": 1041.7999999999993
+  },
+  "team_mean_minutes_dft": {
+    "n": 1870,
+    "mean": 563.1491935365483,
+    "std": 86.03873173665536,
+    "min": 198.75,
+    "max": 848.875,
+    "median": 566.4545454545455,
+    "p25": 510.9038461538462,
+    "p75": 620.125,
+    "p90": 666.2
+  },
+  "n_player_seasons_dft": 22083,
+  "n_team_seasons_dft": 1870
+}
