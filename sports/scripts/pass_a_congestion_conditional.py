@@ -1740,7 +1740,7 @@ def main() -> None:
         default=BASIC_DATA_PLOTS,
         help=(
             "Output directory (default basic_data_plots/). "
-            "Sandbox: 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/fhero"
+            "Sandbox: 3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/fhero"
         ),
     )
     args = parser.parse_args()

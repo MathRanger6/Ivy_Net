@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# Dump --help for HERO / F-HERO CLI scripts → population_sandbox/cli_help_dump.txt
+# Dump --help for HERO / F-HERO CLI scripts → sports_sandbox/cli_help_dump.txt
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-OUT="$ROOT/3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/cli_help_dump.txt"
+OUT="$ROOT/3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/cli_help_dump.txt"
 export MPLCONFIGDIR="${MPLCONFIGDIR:-/tmp/mpl}"
 cd "$ROOT"
 {

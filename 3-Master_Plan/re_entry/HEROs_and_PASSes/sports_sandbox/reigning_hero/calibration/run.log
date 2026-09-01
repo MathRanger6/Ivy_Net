@@ -1,0 +1,1039 @@
+
+>>> /opt/anaconda3/bin/python /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports/scripts/pd21_rho_hsort_calibrate.py --season-min 2009 --season-max 2021 --method bracket --out-dir /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/reigning_hero/calibration/rho --output-stem REIGNING_PD21_rho_hsort_calibrate_2009_2021_mg10_min20_09_21 --n-seeds 50 --n-jobs 8
+
+Matplotlib created a temporary cache directory at /var/folders/23/fxsw8zjj4z1d98c8fslyzwf80000gn/T/matplotlib-kvihn1tx because the default path (/Users/charleslevine/.matplotlib) is not a writable directory; it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+Loading empirical targets 2009-2021 ...
+Panel: min_minutes>=20 filter; PPM z within season
+  2009: N=4093 J=345 H_sort_emp=0.0663
+  2010: N=4183 J=347 H_sort_emp=0.0647
+  2011: N=4086 J=345 H_sort_emp=0.0658
+  2012: N=4097 J=345 H_sort_emp=0.0709
+  2013: N=4135 J=347 H_sort_emp=0.0620
+  2014: N=4248 J=351 H_sort_emp=0.0566
+  2015: N=4270 J=351 H_sort_emp=0.0611
+  2016: N=4234 J=351 H_sort_emp=0.0590
+  2017: N=4292 J=350 H_sort_emp=0.0650
+  2018: N=4246 J=351 H_sort_emp=0.0628
+  2019: N=4204 J=353 H_sort_emp=0.0671
+  2020: N=4219 J=353 H_sort_emp=0.0633
+  2021: N=4275 J=345 H_sort_emp=0.0727
+Method: bracket  rho_max=4  tol=0.001  seeds=50
+Parallel: process  n_jobs=8
+Estimated workload: ~3250 sim jobs (adaptive bracket; refines after each season)
+
+Bracket season 2009 (H_sort_emp=0.0663) ...
+season=2009 rho=0 Running 50 sim jobs ...
+Traceback (most recent call last):
+  File "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports/scripts/pd21_rho_hsort_calibrate.py", line 1631, in <module>
+    main()
+  File "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports/scripts/pd21_rho_hsort_calibrate.py", line 1526, in main
+    per_season_records, bracket_trace = run_bracket_search(
+                                        ^^^^^^^^^^^^^^^^^^^
+  File "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports/scripts/pd21_rho_hsort_calibrate.py", line 603, in run_bracket_search
+    rho_star, h_sim, trace, capped = bracket_rho_for_season(
+                                     ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports/scripts/pd21_rho_hsort_calibrate.py", line 491, in bracket_rho_for_season
+    ev_lo = ensure_rho_evaluated(
+            ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports/scripts/pd21_rho_hsort_calibrate.py", line 438, in ensure_rho_evaluated
+    run_job_batch(
+  File "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports/scripts/pd21_rho_hsort_calibrate.py", line 405, in run_job_batch
+    run_parallel_process(jobs, n_jobs=n_jobs, detail_path=detail_path, progress=progress)
+  File "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports/scripts/pd21_rho_hsort_calibrate.py", line 822, in run_parallel_process
+    with ProcessPoolExecutor(max_workers=n_workers) as pool:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.11/concurrent/futures/process.py", line 654, in __init__
+    _check_system_limits()
+  File "/opt/anaconda3/lib/python3.11/concurrent/futures/process.py", line 597, in _check_system_limits
+    nsems_max = os.sysconf("SC_SEM_NSEMS_MAX")
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 1] Operation not permitted
+Traceback (most recent call last):
+  File "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports/scripts/reigning_hero_calibration.py", line 333, in <module>
+    main()
+  File "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports/scripts/reigning_hero_calibration.py", line 306, in main
+    rho_fit = run_rho(
+              ^^^^^^^^
+  File "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports/scripts/reigning_hero_calibration.py", line 78, in run_rho
+    _py("pd21_rho_hsort_calibrate.py", *args)
+  File "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports/scripts/reigning_hero_calibration.py", line 54, in _py
+    subprocess.run(cmd, cwd=REPO, check=True)
+  File "/opt/anaconda3/lib/python3.11/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/opt/anaconda3/bin/python', '/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports/scripts/pd21_rho_hsort_calibrate.py', '--season-min', '2009', '--season-max', '2021', '--method', 'bracket', '--out-dir', '/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/reigning_hero/calibration/rho', '--output-stem', 'REIGNING_PD21_rho_hsort_calibrate_2009_2021_mg10_min20_09_21', '--n-seeds', '50', '--n-jobs', '8']' returned non-zero exit status 1.
+
+>>> /opt/anaconda3/bin/python /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports/scripts/pd21_rho_hsort_calibrate.py --season-min 2009 --season-max 2021 --method bracket --out-dir /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/reigning_hero/calibration/rho --output-stem REIGNING_PD21_rho_hsort_calibrate_2009_2021_mg10_min20_09_21 --n-seeds 50 --n-jobs 8 --fresh
+
+Loading empirical targets 2009-2021 ...
+Panel: min_minutes>=20 filter; PPM z within season
+  2009: N=4093 J=345 H_sort_emp=0.0663
+  2010: N=4183 J=347 H_sort_emp=0.0647
+  2011: N=4086 J=345 H_sort_emp=0.0658
+  2012: N=4097 J=345 H_sort_emp=0.0709
+  2013: N=4135 J=347 H_sort_emp=0.0620
+  2014: N=4248 J=351 H_sort_emp=0.0566
+  2015: N=4270 J=351 H_sort_emp=0.0611
+  2016: N=4234 J=351 H_sort_emp=0.0590
+  2017: N=4292 J=350 H_sort_emp=0.0650
+  2018: N=4246 J=351 H_sort_emp=0.0628
+  2019: N=4204 J=353 H_sort_emp=0.0671
+  2020: N=4219 J=353 H_sort_emp=0.0633
+  2021: N=4275 J=345 H_sort_emp=0.0727
+Method: bracket  rho_max=4  tol=0.001  seeds=50
+Parallel: process  n_jobs=8
+Estimated workload: ~3250 sim jobs (adaptive bracket; refines after each season)
+
+Bracket season 2009 (H_sort_emp=0.0663) ...
+season=2009 rho=0 Running 50 sim jobs ...
+  completed 5/50 (10%) | 2.1 jobs/s | batch ETA ~21s
+  completed 10/50 (20%) | 4.1 jobs/s | batch ETA ~10s
+  completed 15/50 (30%) | 6.1 jobs/s | batch ETA ~6s
+  completed 20/50 (40%) | 7.9 jobs/s | batch ETA ~4s
+  completed 25/50 (50%) | 9.6 jobs/s | batch ETA ~3s
+  completed 30/50 (60%) | 11.2 jobs/s | batch ETA ~2s
+  completed 35/50 (70%) | 12.9 jobs/s | batch ETA ~1s
+  completed 40/50 (80%) | 14.6 jobs/s | batch ETA ~1s
+  completed 45/50 (90%) | 16.0 jobs/s | batch ETA ~0s
+  completed 50/50 (100%) | 17.4 jobs/s | batch ETA ~0s
+season=2009 rho=0 Batch done in 3.1s
+[progress] 50/1300 jobs (4%) | 16.3 jobs/s | elapsed 3s | ETA ~1m 17s | season 1/13
+  => rho*=0.0000 H_sim=0.0843 |err|=0.0180
+
+Bracket season 2010 (H_sort_emp=0.0647) ...
+season=2010 rho=0 Running 50 sim jobs ...
+  completed 5/50 (10%) | 2.5 jobs/s | batch ETA ~18s
+  completed 10/50 (20%) | 4.5 jobs/s | batch ETA ~9s
+  completed 15/50 (30%) | 6.7 jobs/s | batch ETA ~5s
+  completed 20/50 (40%) | 8.8 jobs/s | batch ETA ~3s
+  completed 25/50 (50%) | 10.7 jobs/s | batch ETA ~2s
+  completed 30/50 (60%) | 12.7 jobs/s | batch ETA ~2s
+  completed 35/50 (70%) | 14.5 jobs/s | batch ETA ~1s
+  completed 40/50 (80%) | 16.1 jobs/s | batch ETA ~1s
+  completed 45/50 (90%) | 17.7 jobs/s | batch ETA ~0s
+  completed 50/50 (100%) | 19.4 jobs/s | batch ETA ~0s
+season=2010 rho=0 Batch done in 2.8s
+[progress] 100/1300 jobs (8%) | 17.2 jobs/s | elapsed 6s | ETA ~1m 10s | season 2/13
+  => rho*=0.0000 H_sim=0.0821 |err|=0.0173
+
+Bracket season 2011 (H_sort_emp=0.0658) ...
+season=2011 rho=0 Running 50 sim jobs ...
+  completed 5/50 (10%) | 2.6 jobs/s | batch ETA ~18s
+  completed 10/50 (20%) | 4.9 jobs/s | batch ETA ~8s
+  completed 15/50 (30%) | 7.3 jobs/s | batch ETA ~5s
+  completed 20/50 (40%) | 9.4 jobs/s | batch ETA ~3s
+  completed 25/50 (50%) | 11.3 jobs/s | batch ETA ~2s
+  completed 30/50 (60%) | 13.4 jobs/s | batch ETA ~1s
+  completed 35/50 (70%) | 15.2 jobs/s | batch ETA ~1s
+  completed 40/50 (80%) | 17.1 jobs/s | batch ETA ~1s
+  completed 45/50 (90%) | 18.7 jobs/s | batch ETA ~0s
+  completed 50/50 (100%) | 20.2 jobs/s | batch ETA ~0s
+season=2011 rho=0 Batch done in 2.7s
+[progress] 150/1300 jobs (12%) | 17.6 jobs/s | elapsed 9s | ETA ~1m 05s | season 3/13
+  => rho*=0.0000 H_sim=0.0824 |err|=0.0166
+
+Bracket season 2012 (H_sort_emp=0.0709) ...
+season=2012 rho=0 Running 50 sim jobs ...
+  completed 5/50 (10%) | 2.6 jobs/s | batch ETA ~18s
+  completed 10/50 (20%) | 4.9 jobs/s | batch ETA ~8s
+  completed 15/50 (30%) | 7.2 jobs/s | batch ETA ~5s
+  completed 20/50 (40%) | 9.3 jobs/s | batch ETA ~3s
+  completed 25/50 (50%) | 11.3 jobs/s | batch ETA ~2s
+  completed 30/50 (60%) | 13.3 jobs/s | batch ETA ~1s
+  completed 35/50 (70%) | 15.1 jobs/s | batch ETA ~1s
+  completed 40/50 (80%) | 16.9 jobs/s | batch ETA ~1s
+  completed 45/50 (90%) | 18.0 jobs/s | batch ETA ~0s
+  completed 50/50 (100%) | 19.5 jobs/s | batch ETA ~0s
+season=2012 rho=0 Batch done in 2.8s
+[progress] 200/1300 jobs (15%) | 17.7 jobs/s | elapsed 11s | ETA ~1m 02s | season 4/13
+  => rho*=0.0000 H_sim=0.0827 |err|=0.0118
+
+Bracket season 2013 (H_sort_emp=0.0620) ...
+season=2013 rho=0 Running 50 sim jobs ...
+  completed 5/50 (10%) | 2.6 jobs/s | batch ETA ~18s
+  completed 10/50 (20%) | 4.9 jobs/s | batch ETA ~8s
+  completed 15/50 (30%) | 7.3 jobs/s | batch ETA ~5s
+  completed 20/50 (40%) | 9.4 jobs/s | batch ETA ~3s
+  completed 25/50 (50%) | 11.3 jobs/s | batch ETA ~2s
+  completed 30/50 (60%) | 13.4 jobs/s | batch ETA ~1s
+  completed 35/50 (70%) | 15.2 jobs/s | batch ETA ~1s
+  completed 40/50 (80%) | 17.2 jobs/s | batch ETA ~1s
+  completed 45/50 (90%) | 18.5 jobs/s | batch ETA ~0s
+  completed 50/50 (100%) | 20.3 jobs/s | batch ETA ~0s
+season=2013 rho=0 Batch done in 2.7s
+[progress] 250/1300 jobs (19%) | 17.9 jobs/s | elapsed 14s | ETA ~59s | season 5/13
+  => rho*=0.0000 H_sim=0.0837 |err|=0.0217
+
+Bracket season 2014 (H_sort_emp=0.0566) ...
+season=2014 rho=0 Running 50 sim jobs ...
+  completed 5/50 (10%) | 2.6 jobs/s | batch ETA ~17s
+  completed 10/50 (20%) | 5.0 jobs/s | batch ETA ~8s
+  completed 15/50 (30%) | 7.4 jobs/s | batch ETA ~5s
+  completed 20/50 (40%) | 9.5 jobs/s | batch ETA ~3s
+  completed 25/50 (50%) | 11.4 jobs/s | batch ETA ~2s
+  completed 30/50 (60%) | 13.5 jobs/s | batch ETA ~1s
+  completed 35/50 (70%) | 15.2 jobs/s | batch ETA ~1s
+  completed 40/50 (80%) | 17.1 jobs/s | batch ETA ~1s
+  completed 45/50 (90%) | 18.8 jobs/s | batch ETA ~0s
+  completed 50/50 (100%) | 20.3 jobs/s | batch ETA ~0s
+season=2014 rho=0 Batch done in 2.6s
+[progress] 300/1300 jobs (23%) | 18.1 jobs/s | elapsed 17s | ETA ~55s | season 6/13
+  => rho*=0.0000 H_sim=0.0823 |err|=0.0257
+
+Bracket season 2015 (H_sort_emp=0.0611) ...
+season=2015 rho=0 Running 50 sim jobs ...
+  completed 5/50 (10%) | 2.6 jobs/s | batch ETA ~17s
+  completed 10/50 (20%) | 5.1 jobs/s | batch ETA ~8s
+  completed 15/50 (30%) | 7.5 jobs/s | batch ETA ~5s
+  completed 20/50 (40%) | 9.7 jobs/s | batch ETA ~3s
+  completed 25/50 (50%) | 11.7 jobs/s | batch ETA ~2s
+  completed 30/50 (60%) | 13.8 jobs/s | batch ETA ~1s
+  completed 35/50 (70%) | 15.6 jobs/s | batch ETA ~1s
+  completed 40/50 (80%) | 17.6 jobs/s | batch ETA ~1s
+  completed 45/50 (90%) | 19.2 jobs/s | batch ETA ~0s
+  completed 50/50 (100%) | 20.8 jobs/s | batch ETA ~0s
+season=2015 rho=0 Batch done in 2.6s
+[progress] 350/1300 jobs (27%) | 18.3 jobs/s | elapsed 19s | ETA ~52s | season 7/13
+  => rho*=0.0000 H_sim=0.0813 |err|=0.0201
+
+Bracket season 2016 (H_sort_emp=0.0590) ...
+season=2016 rho=0 Running 50 sim jobs ...
+  completed 5/50 (10%) | 2.6 jobs/s | batch ETA ~18s
+  completed 10/50 (20%) | 4.9 jobs/s | batch ETA ~8s
+  completed 15/50 (30%) | 7.3 jobs/s | batch ETA ~5s
+  completed 20/50 (40%) | 9.4 jobs/s | batch ETA ~3s
+  completed 25/50 (50%) | 11.4 jobs/s | batch ETA ~2s
+  completed 30/50 (60%) | 13.5 jobs/s | batch ETA ~1s
+  completed 35/50 (70%) | 15.3 jobs/s | batch ETA ~1s
+  completed 40/50 (80%) | 17.3 jobs/s | batch ETA ~1s
+  completed 45/50 (90%) | 18.9 jobs/s | batch ETA ~0s
+  completed 50/50 (100%) | 20.4 jobs/s | batch ETA ~0s
+season=2016 rho=0 Batch done in 2.6s
+[progress] 400/1300 jobs (31%) | 18.3 jobs/s | elapsed 22s | ETA ~49s | season 8/13
+  => rho*=0.0000 H_sim=0.0819 |err|=0.0228
+
+Bracket season 2017 (H_sort_emp=0.0650) ...
+season=2017 rho=0 Running 50 sim jobs ...
+  completed 5/50 (10%) | 2.5 jobs/s | batch ETA ~18s
+  completed 10/50 (20%) | 4.9 jobs/s | batch ETA ~8s
+  completed 15/50 (30%) | 7.3 jobs/s | batch ETA ~5s
+  completed 20/50 (40%) | 9.3 jobs/s | batch ETA ~3s
+  completed 25/50 (50%) | 11.0 jobs/s | batch ETA ~2s
+  completed 30/50 (60%) | 12.9 jobs/s | batch ETA ~2s
+  completed 35/50 (70%) | 14.6 jobs/s | batch ETA ~1s
+  completed 40/50 (80%) | 16.5 jobs/s | batch ETA ~1s
+  completed 45/50 (90%) | 18.0 jobs/s | batch ETA ~0s
+  completed 50/50 (100%) | 19.5 jobs/s | batch ETA ~0s
+season=2017 rho=0 Batch done in 2.7s
+[progress] 450/1300 jobs (35%) | 18.3 jobs/s | elapsed 25s | ETA ~46s | season 9/13
+  => rho*=0.0000 H_sim=0.0808 |err|=0.0158
+
+Bracket season 2018 (H_sort_emp=0.0628) ...
+season=2018 rho=0 Running 50 sim jobs ...
+  completed 5/50 (10%) | 2.5 jobs/s | batch ETA ~18s
+  completed 10/50 (20%) | 4.8 jobs/s | batch ETA ~8s
+  completed 15/50 (30%) | 7.1 jobs/s | batch ETA ~5s
+  completed 20/50 (40%) | 9.1 jobs/s | batch ETA ~3s
+  completed 25/50 (50%) | 11.0 jobs/s | batch ETA ~2s
+  completed 30/50 (60%) | 13.1 jobs/s | batch ETA ~2s
+  completed 35/50 (70%) | 14.8 jobs/s | batch ETA ~1s
+  completed 40/50 (80%) | 16.7 jobs/s | batch ETA ~1s
+  completed 45/50 (90%) | 18.3 jobs/s | batch ETA ~0s
+  completed 50/50 (100%) | 19.7 jobs/s | batch ETA ~0s
+season=2018 rho=0 Batch done in 2.7s
+[progress] 500/1300 jobs (38%) | 18.3 jobs/s | elapsed 27s | ETA ~44s | season 10/13
+  => rho*=0.0000 H_sim=0.0801 |err|=0.0174
+
+Bracket season 2019 (H_sort_emp=0.0671) ...
+season=2019 rho=0 Running 50 sim jobs ...
+  completed 5/50 (10%) | 2.6 jobs/s | batch ETA ~17s
+  completed 10/50 (20%) | 5.0 jobs/s | batch ETA ~8s
+  completed 15/50 (30%) | 7.5 jobs/s | batch ETA ~5s
+  completed 20/50 (40%) | 9.6 jobs/s | batch ETA ~3s
+  completed 25/50 (50%) | 11.5 jobs/s | batch ETA ~2s
+  completed 30/50 (60%) | 13.7 jobs/s | batch ETA ~1s
+  completed 35/50 (70%) | 15.0 jobs/s | batch ETA ~1s
+  completed 40/50 (80%) | 16.8 jobs/s | batch ETA ~1s
+  completed 45/50 (90%) | 18.5 jobs/s | batch ETA ~0s
+  completed 50/50 (100%) | 20.0 jobs/s | batch ETA ~0s
+season=2019 rho=0 Batch done in 2.7s
+[progress] 550/1300 jobs (42%) | 18.4 jobs/s | elapsed 30s | ETA ~41s | season 11/13
+  => rho*=0.0000 H_sim=0.0832 |err|=0.0161
+
+Bracket season 2020 (H_sort_emp=0.0633) ...
+season=2020 rho=0 Running 50 sim jobs ...
+  completed 5/50 (10%) | 2.6 jobs/s | batch ETA ~17s
+  completed 10/50 (20%) | 5.0 jobs/s | batch ETA ~8s
+  completed 15/50 (30%) | 7.4 jobs/s | batch ETA ~5s
+  completed 20/50 (40%) | 9.5 jobs/s | batch ETA ~3s
+  completed 25/50 (50%) | 11.5 jobs/s | batch ETA ~2s
+  completed 30/50 (60%) | 13.6 jobs/s | batch ETA ~1s
+  completed 35/50 (70%) | 15.4 jobs/s | batch ETA ~1s
+  completed 40/50 (80%) | 17.4 jobs/s | batch ETA ~1s
+  completed 45/50 (90%) | 19.0 jobs/s | batch ETA ~0s
+  completed 50/50 (100%) | 20.2 jobs/s | batch ETA ~0s
+season=2020 rho=0 Batch done in 2.7s
+[progress] 600/1300 jobs (46%) | 18.4 jobs/s | elapsed 33s | ETA ~38s | season 12/13
+  => rho*=0.0000 H_sim=0.0834 |err|=0.0201
+
+Bracket season 2021 (H_sort_emp=0.0727) ...
+season=2021 rho=0 Running 50 sim jobs ...
+  completed 5/50 (10%) | 2.7 jobs/s | batch ETA ~17s
+  completed 10/50 (20%) | 5.2 jobs/s | batch ETA ~8s
+  completed 15/50 (30%) | 7.7 jobs/s | batch ETA ~5s
+  completed 20/50 (40%) | 9.9 jobs/s | batch ETA ~3s
+  completed 25/50 (50%) | 11.8 jobs/s | batch ETA ~2s
+  completed 30/50 (60%) | 14.0 jobs/s | batch ETA ~1s
+  completed 35/50 (70%) | 15.9 jobs/s | batch ETA ~1s
+  completed 40/50 (80%) | 18.0 jobs/s | batch ETA ~1s
+  completed 45/50 (90%) | 19.6 jobs/s | batch ETA ~0s
+  completed 50/50 (100%) | 20.6 jobs/s | batch ETA ~0s
+season=2021 rho=0 Batch done in 2.6s
+[progress] 650/1300 jobs (50%) | 18.4 jobs/s | elapsed 35s | ETA ~35s | season 13/13
+  => rho*=0.0000 H_sim=0.0820 |err|=0.0092
+
+[progress] Reference rho=0.5 — 650 jobs remaining (est.)
+
+Reference eval rho=0.5 ...
+season=2009 rho=0.5 Running 50 sim jobs ...
+  completed 5/50 (10%) | 2.6 jobs/s | batch ETA ~17s
+  completed 10/50 (20%) | 5.1 jobs/s | batch ETA ~8s
+  completed 15/50 (30%) | 7.5 jobs/s | batch ETA ~5s
+  completed 20/50 (40%) | 9.7 jobs/s | batch ETA ~3s
+  completed 25/50 (50%) | 11.3 jobs/s | batch ETA ~2s
+  completed 30/50 (60%) | 13.2 jobs/s | batch ETA ~2s
+  completed 35/50 (70%) | 15.3 jobs/s | batch ETA ~1s
+  completed 40/50 (80%) | 17.3 jobs/s | batch ETA ~1s
+  completed 45/50 (90%) | 19.3 jobs/s | batch ETA ~0s
+  completed 50/50 (100%) | 20.9 jobs/s | batch ETA ~0s
+season=2009 rho=0.5 Batch done in 2.6s
+[progress] 700/1300 jobs (54%) | 18.5 jobs/s | elapsed 38s | ETA ~32s | ref 1/13
+season=2010 rho=0.5 Running 50 sim jobs ...
+  completed 5/50 (10%) | 2.6 jobs/s | batch ETA ~17s
+  completed 10/50 (20%) | 5.1 jobs/s | batch ETA ~8s
+  completed 15/50 (30%) | 7.4 jobs/s | batch ETA ~5s
+  completed 20/50 (40%) | 9.4 jobs/s | batch ETA ~3s
+  completed 25/50 (50%) | 11.7 jobs/s | batch ETA ~2s
+  completed 30/50 (60%) | 13.7 jobs/s | batch ETA ~1s
+  completed 35/50 (70%) | 15.7 jobs/s | batch ETA ~1s
+  completed 40/50 (80%) | 17.7 jobs/s | batch ETA ~1s
+  completed 45/50 (90%) | 19.2 jobs/s | batch ETA ~0s
+  completed 50/50 (100%) | 20.9 jobs/s | batch ETA ~0s
+season=2010 rho=0.5 Batch done in 2.6s
+[progress] 750/1300 jobs (58%) | 18.6 jobs/s | elapsed 40s | ETA ~30s | ref 2/13
+season=2011 rho=0.5 Running 50 sim jobs ...
+  completed 5/50 (10%) | 2.6 jobs/s | batch ETA ~17s
+  completed 10/50 (20%) | 5.1 jobs/s | batch ETA ~8s
+  completed 15/50 (30%) | 7.5 jobs/s | batch ETA ~5s
+  completed 20/50 (40%) | 9.6 jobs/s | batch ETA ~3s
+  completed 25/50 (50%) | 11.6 jobs/s | batch ETA ~2s
+  completed 30/50 (60%) | 13.8 jobs/s | batch ETA ~1s
+  completed 35/50 (70%) | 15.5 jobs/s | batch ETA ~1s
+  completed 40/50 (80%) | 17.5 jobs/s | batch ETA ~1s
+  completed 45/50 (90%) | 19.2 jobs/s | batch ETA ~0s
+  completed 50/50 (100%) | 20.7 jobs/s | batch ETA ~0s
+season=2011 rho=0.5 Batch done in 2.6s
+[progress] 800/1300 jobs (62%) | 18.6 jobs/s | elapsed 43s | ETA ~27s | ref 3/13
+season=2012 rho=0.5 Running 50 sim jobs ...
+  completed 5/50 (10%) | 2.6 jobs/s | batch ETA ~17s
+  completed 10/50 (20%) | 5.1 jobs/s | batch ETA ~8s
+  completed 15/50 (30%) | 7.5 jobs/s | batch ETA ~5s
+  completed 20/50 (40%) | 9.7 jobs/s | batch ETA ~3s
+  completed 25/50 (50%) | 11.8 jobs/s | batch ETA ~2s
+  completed 30/50 (60%) | 13.8 jobs/s | batch ETA ~1s
+  completed 35/50 (70%) | 15.6 jobs/s | batch ETA ~1s
+  completed 40/50 (80%) | 17.7 jobs/s | batch ETA ~1s
+  completed 45/50 (90%) | 19.3 jobs/s | batch ETA ~0s
+  completed 50/50 (100%) | 20.8 jobs/s | batch ETA ~0s
+season=2012 rho=0.5 Batch done in 2.6s
+[progress] 850/1300 jobs (65%) | 18.6 jobs/s | elapsed 46s | ETA ~24s | ref 4/13
+season=2013 rho=0.5 Running 50 sim jobs ...
+  completed 5/50 (10%) | 2.5 jobs/s | batch ETA ~18s
+  completed 10/50 (20%) | 4.7 jobs/s | batch ETA ~8s
+  completed 15/50 (30%) | 7.0 jobs/s | batch ETA ~5s
+  completed 20/50 (40%) | 9.0 jobs/s | batch ETA ~3s
+  completed 25/50 (50%) | 11.1 jobs/s | batch ETA ~2s
+  completed 30/50 (60%) | 13.0 jobs/s | batch ETA ~2s
+  completed 35/50 (70%) | 14.6 jobs/s | batch ETA ~1s
+  completed 40/50 (80%) | 16.3 jobs/s | batch ETA ~1s
+  completed 45/50 (90%) | 18.2 jobs/s | batch ETA ~0s
+  completed 50/50 (100%) | 19.7 jobs/s | batch ETA ~0s
+season=2013 rho=0.5 Batch done in 2.7s
+[progress] 900/1300 jobs (69%) | 18.6 jobs/s | elapsed 48s | ETA ~21s | ref 5/13
+season=2014 rho=0.5 Running 50 sim jobs ...
+  completed 5/50 (10%) | 2.6 jobs/s | batch ETA ~17s
+  completed 10/50 (20%) | 5.0 jobs/s | batch ETA ~8s
+  completed 15/50 (30%) | 7.3 jobs/s | batch ETA ~5s
+  completed 20/50 (40%) | 9.4 jobs/s | batch ETA ~3s
+  completed 25/50 (50%) | 11.4 jobs/s | batch ETA ~2s
+  completed 30/50 (60%) | 13.4 jobs/s | batch ETA ~1s
+  completed 35/50 (70%) | 15.2 jobs/s | batch ETA ~1s
+  completed 40/50 (80%) | 17.1 jobs/s | batch ETA ~1s
+  completed 45/50 (90%) | 18.6 jobs/s | batch ETA ~0s
+  completed 50/50 (100%) | 20.1 jobs/s | batch ETA ~0s
+season=2014 rho=0.5 Batch done in 2.7s
+[progress] 950/1300 jobs (73%) | 18.6 jobs/s | elapsed 51s | ETA ~19s | ref 6/13
+season=2015 rho=0.5 Running 50 sim jobs ...
+  completed 5/50 (10%) | 2.5 jobs/s | batch ETA ~18s
+  completed 10/50 (20%) | 5.0 jobs/s | batch ETA ~8s
+  completed 15/50 (30%) | 7.3 jobs/s | batch ETA ~5s
+  completed 20/50 (40%) | 9.4 jobs/s | batch ETA ~3s
+  completed 25/50 (50%) | 11.0 jobs/s | batch ETA ~2s
+  completed 30/50 (60%) | 12.8 jobs/s | batch ETA ~2s
+  completed 35/50 (70%) | 14.6 jobs/s | batch ETA ~1s
+  completed 40/50 (80%) | 16.4 jobs/s | batch ETA ~1s
+  completed 45/50 (90%) | 17.9 jobs/s | batch ETA ~0s
+  completed 50/50 (100%) | 19.3 jobs/s | batch ETA ~0s
+season=2015 rho=0.5 Batch done in 2.8s
+[progress] 1000/1300 jobs (77%) | 18.6 jobs/s | elapsed 54s | ETA ~16s | ref 7/13
+season=2016 rho=0.5 Running 50 sim jobs ...
+  completed 5/50 (10%) | 2.6 jobs/s | batch ETA ~18s
+  completed 10/50 (20%) | 4.9 jobs/s | batch ETA ~8s
+  completed 15/50 (30%) | 7.3 jobs/s | batch ETA ~5s
+  completed 20/50 (40%) | 9.4 jobs/s | batch ETA ~3s
+  completed 25/50 (50%) | 11.3 jobs/s | batch ETA ~2s
+  completed 30/50 (60%) | 13.4 jobs/s | batch ETA ~1s
+  completed 35/50 (70%) | 15.2 jobs/s | batch ETA ~1s
+  completed 40/50 (80%) | 17.0 jobs/s | batch ETA ~1s
+  completed 45/50 (90%) | 18.6 jobs/s | batch ETA ~0s
+  completed 50/50 (100%) | 20.3 jobs/s | batch ETA ~0s
+season=2016 rho=0.5 Batch done in 2.7s
+[progress] 1050/1300 jobs (81%) | 18.6 jobs/s | elapsed 57s | ETA ~13s | ref 8/13
+season=2017 rho=0.5 Running 50 sim jobs ...
+  completed 5/50 (10%) | 2.6 jobs/s | batch ETA ~17s
+  completed 10/50 (20%) | 5.0 jobs/s | batch ETA ~8s
+  completed 15/50 (30%) | 7.4 jobs/s | batch ETA ~5s
+  completed 20/50 (40%) | 9.5 jobs/s | batch ETA ~3s
+  completed 25/50 (50%) | 11.5 jobs/s | batch ETA ~2s
+  completed 30/50 (60%) | 13.6 jobs/s | batch ETA ~1s
+  completed 35/50 (70%) | 15.3 jobs/s | batch ETA ~1s
+  completed 40/50 (80%) | 17.3 jobs/s | batch ETA ~1s
+  completed 45/50 (90%) | 18.2 jobs/s | batch ETA ~0s
+  completed 50/50 (100%) | 19.7 jobs/s | batch ETA ~0s
+season=2017 rho=0.5 Batch done in 2.7s
+[progress] 1100/1300 jobs (85%) | 18.6 jobs/s | elapsed 59s | ETA ~11s | ref 9/13
+season=2018 rho=0.5 Running 50 sim jobs ...
+  completed 5/50 (10%) | 2.7 jobs/s | batch ETA ~17s
+  completed 10/50 (20%) | 5.1 jobs/s | batch ETA ~8s
+  completed 15/50 (30%) | 7.6 jobs/s | batch ETA ~5s
+  completed 20/50 (40%) | 9.5 jobs/s | batch ETA ~3s
+  completed 25/50 (50%) | 11.7 jobs/s | batch ETA ~2s
+  completed 30/50 (60%) | 13.7 jobs/s | batch ETA ~1s
+  completed 35/50 (70%) | 15.6 jobs/s | batch ETA ~1s
+  completed 40/50 (80%) | 17.6 jobs/s | batch ETA ~1s
+  completed 45/50 (90%) | 19.2 jobs/s | batch ETA ~0s
+  completed 50/50 (100%) | 20.7 jobs/s | batch ETA ~0s
+season=2018 rho=0.5 Batch done in 2.6s
+[progress] 1150/1300 jobs (88%) | 18.6 jobs/s | elapsed 1m 02s | ETA ~8s | ref 10/13
+season=2019 rho=0.5 Running 50 sim jobs ...
+  completed 5/50 (10%) | 2.6 jobs/s | batch ETA ~17s
+  completed 10/50 (20%) | 5.0 jobs/s | batch ETA ~8s
+  completed 15/50 (30%) | 7.4 jobs/s | batch ETA ~5s
+  completed 20/50 (40%) | 9.5 jobs/s | batch ETA ~3s
+  completed 25/50 (50%) | 11.4 jobs/s | batch ETA ~2s
+  completed 30/50 (60%) | 13.5 jobs/s | batch ETA ~1s
+  completed 35/50 (70%) | 15.3 jobs/s | batch ETA ~1s
+  completed 40/50 (80%) | 17.2 jobs/s | batch ETA ~1s
+  completed 45/50 (90%) | 18.8 jobs/s | batch ETA ~0s
+  completed 50/50 (100%) | 20.3 jobs/s | batch ETA ~0s
+season=2019 rho=0.5 Batch done in 2.7s
+[progress] 1200/1300 jobs (92%) | 18.6 jobs/s | elapsed 1m 05s | ETA ~5s | ref 11/13
+season=2020 rho=0.5 Running 50 sim jobs ...
+  completed 5/50 (10%) | 2.6 jobs/s | batch ETA ~17s
+  completed 10/50 (20%) | 5.1 jobs/s | batch ETA ~8s
+  completed 15/50 (30%) | 7.5 jobs/s | batch ETA ~5s
+  completed 20/50 (40%) | 9.6 jobs/s | batch ETA ~3s
+  completed 25/50 (50%) | 11.5 jobs/s | batch ETA ~2s
+  completed 30/50 (60%) | 13.7 jobs/s | batch ETA ~1s
+  completed 35/50 (70%) | 15.4 jobs/s | batch ETA ~1s
+  completed 40/50 (80%) | 17.5 jobs/s | batch ETA ~1s
+  completed 45/50 (90%) | 19.1 jobs/s | batch ETA ~0s
+  completed 50/50 (100%) | 20.6 jobs/s | batch ETA ~0s
+season=2020 rho=0.5 Batch done in 2.6s
+[progress] 1250/1300 jobs (96%) | 18.6 jobs/s | elapsed 1m 07s | ETA ~3s | ref 12/13
+season=2021 rho=0.5 Running 50 sim jobs ...
+  completed 5/50 (10%) | 2.5 jobs/s | batch ETA ~18s
+  completed 10/50 (20%) | 4.7 jobs/s | batch ETA ~8s
+  completed 15/50 (30%) | 7.0 jobs/s | batch ETA ~5s
+  completed 20/50 (40%) | 9.0 jobs/s | batch ETA ~3s
+  completed 25/50 (50%) | 11.0 jobs/s | batch ETA ~2s
+  completed 30/50 (60%) | 13.0 jobs/s | batch ETA ~2s
+  completed 35/50 (70%) | 14.6 jobs/s | batch ETA ~1s
+  completed 40/50 (80%) | 16.3 jobs/s | batch ETA ~1s
+  completed 45/50 (90%) | 18.1 jobs/s | batch ETA ~0s
+  completed 50/50 (100%) | 19.5 jobs/s | batch ETA ~0s
+season=2021 rho=0.5 Batch done in 2.8s
+[progress] 1300/1300 jobs (100%) | 18.6 jobs/s | elapsed 1m 10s | ETA ~0s | ref 13/13
+[progress] 1300/1300 jobs (100%) | 18.6 jobs/s | elapsed 1m 10s | ETA ~0s | ref 13/13
+Bracket search finished in 70.0s
+
+Longitudinal rho* = 0 (mean |error| = 0.0179)
+  at rho*: mean H_sort^sim = 0.0823, mean H_sort^emp = 0.0644
+Reference rho=0.5 mean |error| = 0.1122
+
+Per-season rho*:
+ season  rho_star  rho_star_capped_at_max  h_sort_empirical  h_sort_sim_at_star  h_sort_abs_err  n_seeds
+   2009       0.0                   False          0.066346            0.084301        0.017955       50
+   2010       0.0                   False          0.064721            0.082066        0.017345       50
+   2011       0.0                   False          0.065779            0.082383        0.016604       50
+   2012       0.0                   False          0.070862            0.082709        0.011847       50
+   2013       0.0                   False          0.061980            0.083665        0.021686       50
+   2014       0.0                   False          0.056561            0.082258        0.025697       50
+   2015       0.0                   False          0.061133            0.081265        0.020132       50
+   2016       0.0                   False          0.059022            0.081871        0.022849       50
+   2017       0.0                   False          0.065029            0.080846        0.015817       50
+   2018       0.0                   False          0.062763            0.080129        0.017366       50
+   2019       0.0                   False          0.067095            0.083174        0.016079       50
+   2020       0.0                   False          0.063296            0.083406        0.020110       50
+   2021       0.0                   False          0.072746            0.081975        0.009229       50
+
+Wrote /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/reigning_hero/calibration/rho/REIGNING_PD21_rho_hsort_calibrate_2009_2021_mg10_min20_09_21_detail_bracket.jsonl
+Wrote /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/reigning_hero/calibration/rho/REIGNING_PD21_rho_hsort_calibrate_2009_2021_mg10_min20_09_21_summary_bracket.csv
+Wrote /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/reigning_hero/calibration/rho/REIGNING_PD21_rho_hsort_calibrate_2009_2021_mg10_min20_09_21_fit_bracket.json
+Wrote /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/reigning_hero/calibration/rho/REIGNING_PD21_rho_hsort_calibrate_2009_2021_mg10_min20_09_21_bracket.png
+Wrote /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/reigning_hero/calibration/rho/REIGNING_PD21_rho_hsort_calibrate_2009_2021_mg10_min20_09_21_bracket_rho_hsort_timeseries.png
+
+>>> /opt/anaconda3/bin/python /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports/scripts/pd21_draft_bernoulli_mle.py --season-min 2009 --season-max 2021 --out-dir /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/reigning_hero/calibration/mle --output-stem REIGNING_PD21_draft_bernoulli_mle_2009_2021_mg10_min20_09_21
+
+Loading empirical panel 2009-2021 ...
+  Init γ grid: 5, 10, 20
+  γ=5: init λ=2 t=1 loglik=-8869.9
+  γ=10: init λ=2 t=1 loglik=-8868.7
+  γ=20: init λ=2 t=1 loglik=-8868.6
+Joint BFGS from init γ=20 λ=2 t=1 ...
+Joint MLE: γ*=19.57  λ*=1.302  t*=1.07  loglik=-8865.7  (52 evals, success=True)
+Wrote /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/reigning_hero/calibration/mle/REIGNING_PD21_draft_bernoulli_mle_2009_2021_mg10_min20_09_21.json
+Wrote /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/reigning_hero/calibration/mle/REIGNING_PD21_draft_bernoulli_mle_2009_2021_mg10_min20_09_21_grid.csv
+Wrote /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/reigning_hero/calibration/mle/REIGNING_PD21_draft_bernoulli_mle_2009_2021_mg10_min20_09_21_gamma_grid.csv
+Using reigning ρ* = 0 for temperature sweep
+
+>>> /opt/anaconda3/bin/python /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports/scripts/grandchild_temperature_select_sweep.py --season-min 2009 --season-max 2021 --rho 0.0 --out-dir /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/reigning_hero/calibration/temperature --output-stem REIGNING_GRANDCHILD_temperature_select_sweep_2009_2021_mg10_min20_09_21
+
+Loading empirical panel 2009-2021 ...
+λ=1.5 t sweep: 13 steps
+
+=== λ=1.5 t sweep step 1/13: log10 t=-3  (t=0.001) (0s elapsed) ===
+SELECT empirical caps: 13 seasons
+/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports/541_grandchild_homophily_assign.py:446: RuntimeWarning: Mean of empty slice.
+  "roster_caps_mean": float(caps.mean()),
+/opt/anaconda3/lib/python3.11/site-packages/numpy/core/_methods.py:129: RuntimeWarning: invalid value encountered in scalar divide
+  ret = ret.dtype.type(ret / rcount)
+/opt/anaconda3/lib/python3.11/site-packages/numpy/core/fromnumeric.py:3504: RuntimeWarning: Mean of empty slice.
+  return _methods._mean(a, axis=axis, dtype=dtype,
+Traceback (most recent call last):
+  File "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports/scripts/grandchild_temperature_select_sweep.py", line 339, in <module>
+    main()
+  File "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports/scripts/grandchild_temperature_select_sweep.py", line 262, in main
+    pooled, summ_loo, summ_mean, season_runs = gcaps._run_panel_select(
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports/scripts/grandchild_empirical_roster_caps_diagnostic.py", line 194, in _run_panel_select
+    players, info = _run_one_season_select(
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports/scripts/grandchild_empirical_roster_caps_diagnostic.py", line 141, in _run_one_season_select
+    ability, caps, emp_meta = gc.load_empirical_roster_caps_season(int(season))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports/541_grandchild_homophily_assign.py", line 448, in load_empirical_roster_caps_season
+    "roster_caps_min": int(caps.min()),
+                           ^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.11/site-packages/numpy/core/_methods.py", line 45, in _amin
+    return umr_minimum(a, axis, None, out, keepdims, initial, where)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: zero-size array to reduction operation minimum which has no identity
+Traceback (most recent call last):
+  File "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports/scripts/reigning_hero_calibration.py", line 333, in <module>
+    main()
+  File "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports/scripts/reigning_hero_calibration.py", line 325, in main
+    temp_meta = run_temperature(rho=float(rho_val), quick=args.quick)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports/scripts/reigning_hero_calibration.py", line 127, in run_temperature
+    _py("grandchild_temperature_select_sweep.py", *args)
+  File "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports/scripts/reigning_hero_calibration.py", line 54, in _py
+    subprocess.run(cmd, cwd=REPO, check=True)
+  File "/opt/anaconda3/lib/python3.11/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/opt/anaconda3/bin/python', '/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports/scripts/grandchild_temperature_select_sweep.py', '--season-min', '2009', '--season-max', '2021', '--rho', '0.0', '--out-dir', '/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/reigning_hero/calibration/temperature', '--output-stem', 'REIGNING_GRANDCHILD_temperature_select_sweep_2009_2021_mg10_min20_09_21']' returned non-zero exit status 1.
+Using reigning ρ* = 0 for temperature sweep
+
+>>> /opt/anaconda3/bin/python /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports/scripts/grandchild_temperature_select_sweep.py --season-min 2009 --season-max 2021 --rho 0.0 --out-dir /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/reigning_hero/calibration/temperature --output-stem REIGNING_GRANDCHILD_temperature_select_sweep_2009_2021_mg10_min20_09_21
+
+Loading empirical panel 2009-2021 ...
+λ=1.5 t sweep: 13 steps
+
+=== λ=1.5 t sweep step 1/13: log10 t=-3  (t=0.001) (0s elapsed) ===
+SELECT empirical caps: 13 seasons
+  [1/13] season 2009 (8%) | N=4,093 K=132 selected=132 | 0s elapsed, ~1s left
+  [2/13] season 2010 (15%) | N=4,183 K=135 selected=135 | 0s elapsed, ~1s left
+  [3/13] season 2011 (23%) | N=4,086 K=125 selected=125 | 0s elapsed, ~1s left
+  [4/13] season 2012 (31%) | N=4,097 K=126 selected=126 | 0s elapsed, ~1s left
+  [5/13] season 2013 (38%) | N=4,135 K=112 selected=112 | 0s elapsed, ~1s left
+  [6/13] season 2014 (46%) | N=4,248 K=106 selected=106 | 1s elapsed, ~1s left
+  [7/13] season 2015 (54%) | N=4,270 K=105 selected=105 | 1s elapsed, ~1s left
+  [8/13] season 2016 (62%) | N=4,234 K=105 selected=105 | 1s elapsed, ~0s left
+  [9/13] season 2017 (69%) | N=4,292 K=115 selected=115 | 1s elapsed, ~0s left
+  [10/13] season 2018 (77%) | N=4,246 K=108 selected=108 | 1s elapsed, ~0s left
+  [11/13] season 2019 (85%) | N=4,204 K=100 selected=100 | 1s elapsed, ~0s left
+  [12/13] season 2020 (92%) | N=4,219 K=80 selected=80 | 1s elapsed, ~0s left
+  [13/13] season 2021 (100%) | N=4,275 K=51 selected=51 | 1s elapsed
+SELECT empirical caps finished in 1.1s.
+  SELECT LOO: inverted_u_like  pool mean: monotone_increasing  (n=54,582)
+
+=== λ=1.5 t sweep step 2/13: log10 t=-2.5  (t=0.00316228) (1s elapsed) ===
+SELECT empirical caps: 13 seasons
+  [1/13] season 2009 (8%) | N=4,093 K=132 selected=132 | 0s elapsed, ~1s left
+  [2/13] season 2010 (15%) | N=4,183 K=135 selected=135 | 0s elapsed, ~1s left
+  [3/13] season 2011 (23%) | N=4,086 K=125 selected=125 | 0s elapsed, ~1s left
+  [4/13] season 2012 (31%) | N=4,097 K=126 selected=126 | 0s elapsed, ~1s left
+  [5/13] season 2013 (38%) | N=4,135 K=112 selected=112 | 0s elapsed, ~1s left
+  [6/13] season 2014 (46%) | N=4,248 K=106 selected=106 | 0s elapsed, ~1s left
+  [7/13] season 2015 (54%) | N=4,270 K=105 selected=105 | 1s elapsed, ~0s left
+  [8/13] season 2016 (62%) | N=4,234 K=105 selected=105 | 1s elapsed, ~0s left
+  [9/13] season 2017 (69%) | N=4,292 K=115 selected=115 | 1s elapsed, ~0s left
+  [10/13] season 2018 (77%) | N=4,246 K=108 selected=108 | 1s elapsed, ~0s left
+  [11/13] season 2019 (85%) | N=4,204 K=100 selected=100 | 1s elapsed, ~0s left
+  [12/13] season 2020 (92%) | N=4,219 K=80 selected=80 | 1s elapsed, ~0s left
+  [13/13] season 2021 (100%) | N=4,275 K=51 selected=51 | 1s elapsed
+SELECT empirical caps finished in 1.1s.
+  SELECT LOO: inverted_u_like  pool mean: monotone_increasing  (n=54,582)
+
+=== λ=1.5 t sweep step 3/13: log10 t=-2  (t=0.01) (2s elapsed) ===
+SELECT empirical caps: 13 seasons
+  [1/13] season 2009 (8%) | N=4,093 K=132 selected=132 | 0s elapsed, ~1s left
+  [2/13] season 2010 (15%) | N=4,183 K=135 selected=135 | 0s elapsed, ~1s left
+  [3/13] season 2011 (23%) | N=4,086 K=125 selected=125 | 0s elapsed, ~1s left
+  [4/13] season 2012 (31%) | N=4,097 K=126 selected=126 | 0s elapsed, ~1s left
+  [5/13] season 2013 (38%) | N=4,135 K=112 selected=112 | 0s elapsed, ~1s left
+  [6/13] season 2014 (46%) | N=4,248 K=106 selected=106 | 0s elapsed, ~1s left
+  [7/13] season 2015 (54%) | N=4,270 K=105 selected=105 | 1s elapsed, ~0s left
+  [8/13] season 2016 (62%) | N=4,234 K=105 selected=105 | 1s elapsed, ~0s left
+  [9/13] season 2017 (69%) | N=4,292 K=115 selected=115 | 1s elapsed, ~0s left
+  [10/13] season 2018 (77%) | N=4,246 K=108 selected=108 | 1s elapsed, ~0s left
+  [11/13] season 2019 (85%) | N=4,204 K=100 selected=100 | 1s elapsed, ~0s left
+  [12/13] season 2020 (92%) | N=4,219 K=80 selected=80 | 1s elapsed, ~0s left
+  [13/13] season 2021 (100%) | N=4,275 K=51 selected=51 | 1s elapsed
+SELECT empirical caps finished in 1.1s.
+  SELECT LOO: inverted_u_like  pool mean: monotone_increasing  (n=54,582)
+
+=== λ=1.5 t sweep step 4/13: log10 t=-1.5  (t=0.0316228) (3s elapsed) ===
+SELECT empirical caps: 13 seasons
+  [1/13] season 2009 (8%) | N=4,093 K=132 selected=132 | 0s elapsed, ~1s left
+  [2/13] season 2010 (15%) | N=4,183 K=135 selected=135 | 0s elapsed, ~1s left
+  [3/13] season 2011 (23%) | N=4,086 K=125 selected=125 | 0s elapsed, ~1s left
+  [4/13] season 2012 (31%) | N=4,097 K=126 selected=126 | 0s elapsed, ~1s left
+  [5/13] season 2013 (38%) | N=4,135 K=112 selected=112 | 0s elapsed, ~1s left
+  [6/13] season 2014 (46%) | N=4,248 K=106 selected=106 | 0s elapsed, ~1s left
+  [7/13] season 2015 (54%) | N=4,270 K=105 selected=105 | 1s elapsed, ~0s left
+  [8/13] season 2016 (62%) | N=4,234 K=105 selected=105 | 1s elapsed, ~0s left
+  [9/13] season 2017 (69%) | N=4,292 K=115 selected=115 | 1s elapsed, ~0s left
+  [10/13] season 2018 (77%) | N=4,246 K=108 selected=108 | 1s elapsed, ~0s left
+  [11/13] season 2019 (85%) | N=4,204 K=100 selected=100 | 1s elapsed, ~0s left
+  [12/13] season 2020 (92%) | N=4,219 K=80 selected=80 | 1s elapsed, ~0s left
+  [13/13] season 2021 (100%) | N=4,275 K=51 selected=51 | 1s elapsed
+SELECT empirical caps finished in 1.1s.
+  SELECT LOO: monotone_decreasing  pool mean: monotone_increasing  (n=54,582)
+
+=== λ=1.5 t sweep step 5/13: log10 t=-1  (t=0.1) (4s elapsed) ===
+SELECT empirical caps: 13 seasons
+  [1/13] season 2009 (8%) | N=4,093 K=132 selected=132 | 0s elapsed, ~1s left
+  [2/13] season 2010 (15%) | N=4,183 K=135 selected=135 | 0s elapsed, ~1s left
+  [3/13] season 2011 (23%) | N=4,086 K=125 selected=125 | 0s elapsed, ~1s left
+  [4/13] season 2012 (31%) | N=4,097 K=126 selected=126 | 0s elapsed, ~1s left
+  [5/13] season 2013 (38%) | N=4,135 K=112 selected=112 | 0s elapsed, ~1s left
+  [6/13] season 2014 (46%) | N=4,248 K=106 selected=106 | 1s elapsed, ~1s left
+  [7/13] season 2015 (54%) | N=4,270 K=105 selected=105 | 1s elapsed, ~1s left
+  [8/13] season 2016 (62%) | N=4,234 K=105 selected=105 | 1s elapsed, ~0s left
+  [9/13] season 2017 (69%) | N=4,292 K=115 selected=115 | 1s elapsed, ~0s left
+  [10/13] season 2018 (77%) | N=4,246 K=108 selected=108 | 1s elapsed, ~0s left
+  [11/13] season 2019 (85%) | N=4,204 K=100 selected=100 | 1s elapsed, ~0s left
+  [12/13] season 2020 (92%) | N=4,219 K=80 selected=80 | 1s elapsed, ~0s left
+  [13/13] season 2021 (100%) | N=4,275 K=51 selected=51 | 1s elapsed
+SELECT empirical caps finished in 1.1s.
+  SELECT LOO: inverted_u_like  pool mean: monotone_increasing  (n=54,582)
+
+=== λ=1.5 t sweep step 6/13: log10 t=-0.5  (t=0.316228) (6s elapsed) ===
+SELECT empirical caps: 13 seasons
+  [1/13] season 2009 (8%) | N=4,093 K=132 selected=132 | 0s elapsed, ~1s left
+  [2/13] season 2010 (15%) | N=4,183 K=135 selected=135 | 0s elapsed, ~1s left
+  [3/13] season 2011 (23%) | N=4,086 K=125 selected=125 | 0s elapsed, ~1s left
+  [4/13] season 2012 (31%) | N=4,097 K=126 selected=126 | 0s elapsed, ~1s left
+  [5/13] season 2013 (38%) | N=4,135 K=112 selected=112 | 0s elapsed, ~1s left
+  [6/13] season 2014 (46%) | N=4,248 K=106 selected=106 | 1s elapsed, ~1s left
+  [7/13] season 2015 (54%) | N=4,270 K=105 selected=105 | 1s elapsed, ~1s left
+  [8/13] season 2016 (62%) | N=4,234 K=105 selected=105 | 1s elapsed, ~0s left
+  [9/13] season 2017 (69%) | N=4,292 K=115 selected=115 | 1s elapsed, ~0s left
+  [10/13] season 2018 (77%) | N=4,246 K=108 selected=108 | 1s elapsed, ~0s left
+  [11/13] season 2019 (85%) | N=4,204 K=100 selected=100 | 1s elapsed, ~0s left
+  [12/13] season 2020 (92%) | N=4,219 K=80 selected=80 | 1s elapsed, ~0s left
+  [13/13] season 2021 (100%) | N=4,275 K=51 selected=51 | 1s elapsed
+SELECT empirical caps finished in 1.1s.
+  SELECT LOO: monotone_decreasing  pool mean: monotone_increasing  (n=54,582)
+
+=== λ=1.5 t sweep step 7/13: log10 t=0  (t=1) (7s elapsed) ===
+SELECT empirical caps: 13 seasons
+  [1/13] season 2009 (8%) | N=4,093 K=132 selected=132 | 0s elapsed, ~1s left
+  [2/13] season 2010 (15%) | N=4,183 K=135 selected=135 | 0s elapsed, ~1s left
+  [3/13] season 2011 (23%) | N=4,086 K=125 selected=125 | 0s elapsed, ~1s left
+  [4/13] season 2012 (31%) | N=4,097 K=126 selected=126 | 0s elapsed, ~1s left
+  [5/13] season 2013 (38%) | N=4,135 K=112 selected=112 | 0s elapsed, ~1s left
+  [6/13] season 2014 (46%) | N=4,248 K=106 selected=106 | 1s elapsed, ~1s left
+  [7/13] season 2015 (54%) | N=4,270 K=105 selected=105 | 1s elapsed, ~1s left
+  [8/13] season 2016 (62%) | N=4,234 K=105 selected=105 | 1s elapsed, ~0s left
+  [9/13] season 2017 (69%) | N=4,292 K=115 selected=115 | 1s elapsed, ~0s left
+  [10/13] season 2018 (77%) | N=4,246 K=108 selected=108 | 1s elapsed, ~0s left
+  [11/13] season 2019 (85%) | N=4,204 K=100 selected=100 | 1s elapsed, ~0s left
+  [12/13] season 2020 (92%) | N=4,219 K=80 selected=80 | 1s elapsed, ~0s left
+  [13/13] season 2021 (100%) | N=4,275 K=51 selected=51 | 1s elapsed
+SELECT empirical caps finished in 1.2s.
+  SELECT LOO: inverted_u_like  pool mean: monotone_increasing  (n=54,582)
+
+=== λ=1.5 t sweep step 8/13: log10 t=0.5  (t=3.16228) (8s elapsed) ===
+SELECT empirical caps: 13 seasons
+  [1/13] season 2009 (8%) | N=4,093 K=132 selected=132 | 0s elapsed, ~1s left
+  [2/13] season 2010 (15%) | N=4,183 K=135 selected=135 | 0s elapsed, ~1s left
+  [3/13] season 2011 (23%) | N=4,086 K=125 selected=125 | 0s elapsed, ~1s left
+  [4/13] season 2012 (31%) | N=4,097 K=126 selected=126 | 0s elapsed, ~1s left
+  [5/13] season 2013 (38%) | N=4,135 K=112 selected=112 | 0s elapsed, ~1s left
+  [6/13] season 2014 (46%) | N=4,248 K=106 selected=106 | 0s elapsed, ~1s left
+  [7/13] season 2015 (54%) | N=4,270 K=105 selected=105 | 1s elapsed, ~0s left
+  [8/13] season 2016 (62%) | N=4,234 K=105 selected=105 | 1s elapsed, ~0s left
+  [9/13] season 2017 (69%) | N=4,292 K=115 selected=115 | 1s elapsed, ~0s left
+  [10/13] season 2018 (77%) | N=4,246 K=108 selected=108 | 1s elapsed, ~0s left
+  [11/13] season 2019 (85%) | N=4,204 K=100 selected=100 | 1s elapsed, ~0s left
+  [12/13] season 2020 (92%) | N=4,219 K=80 selected=80 | 1s elapsed, ~0s left
+  [13/13] season 2021 (100%) | N=4,275 K=51 selected=51 | 1s elapsed
+SELECT empirical caps finished in 1.1s.
+  SELECT LOO: inverted_u_like  pool mean: inverted_u_like  (n=54,582)
+
+=== λ=1.5 t sweep step 9/13: log10 t=1  (t=10) (9s elapsed) ===
+SELECT empirical caps: 13 seasons
+  [1/13] season 2009 (8%) | N=4,093 K=132 selected=132 | 0s elapsed, ~1s left
+  [2/13] season 2010 (15%) | N=4,183 K=135 selected=135 | 0s elapsed, ~1s left
+  [3/13] season 2011 (23%) | N=4,086 K=125 selected=125 | 0s elapsed, ~1s left
+  [4/13] season 2012 (31%) | N=4,097 K=126 selected=126 | 0s elapsed, ~1s left
+  [5/13] season 2013 (38%) | N=4,135 K=112 selected=112 | 0s elapsed, ~1s left
+  [6/13] season 2014 (46%) | N=4,248 K=106 selected=106 | 1s elapsed, ~1s left
+  [7/13] season 2015 (54%) | N=4,270 K=105 selected=105 | 1s elapsed, ~1s left
+  [8/13] season 2016 (62%) | N=4,234 K=105 selected=105 | 1s elapsed, ~0s left
+  [9/13] season 2017 (69%) | N=4,292 K=115 selected=115 | 1s elapsed, ~0s left
+  [10/13] season 2018 (77%) | N=4,246 K=108 selected=108 | 1s elapsed, ~0s left
+  [11/13] season 2019 (85%) | N=4,204 K=100 selected=100 | 1s elapsed, ~0s left
+  [12/13] season 2020 (92%) | N=4,219 K=80 selected=80 | 1s elapsed, ~0s left
+  [13/13] season 2021 (100%) | N=4,275 K=51 selected=51 | 1s elapsed
+SELECT empirical caps finished in 1.1s.
+  SELECT LOO: inverted_u_like  pool mean: monotone_increasing  (n=54,582)
+
+=== λ=1.5 t sweep step 10/13: log10 t=1.5  (t=31.6228) (10s elapsed) ===
+SELECT empirical caps: 13 seasons
+  [1/13] season 2009 (8%) | N=4,093 K=132 selected=132 | 0s elapsed, ~1s left
+  [2/13] season 2010 (15%) | N=4,183 K=135 selected=135 | 0s elapsed, ~1s left
+  [3/13] season 2011 (23%) | N=4,086 K=125 selected=125 | 0s elapsed, ~1s left
+  [4/13] season 2012 (31%) | N=4,097 K=126 selected=126 | 0s elapsed, ~1s left
+  [5/13] season 2013 (38%) | N=4,135 K=112 selected=112 | 0s elapsed, ~1s left
+  [6/13] season 2014 (46%) | N=4,248 K=106 selected=106 | 0s elapsed, ~1s left
+  [7/13] season 2015 (54%) | N=4,270 K=105 selected=105 | 1s elapsed, ~0s left
+  [8/13] season 2016 (62%) | N=4,234 K=105 selected=105 | 1s elapsed, ~0s left
+  [9/13] season 2017 (69%) | N=4,292 K=115 selected=115 | 1s elapsed, ~0s left
+  [10/13] season 2018 (77%) | N=4,246 K=108 selected=108 | 1s elapsed, ~0s left
+  [11/13] season 2019 (85%) | N=4,204 K=100 selected=100 | 1s elapsed, ~0s left
+  [12/13] season 2020 (92%) | N=4,219 K=80 selected=80 | 1s elapsed, ~0s left
+  [13/13] season 2021 (100%) | N=4,275 K=51 selected=51 | 1s elapsed
+SELECT empirical caps finished in 1.1s.
+  SELECT LOO: inverted_u_like  pool mean: inverted_u_like  (n=54,582)
+
+=== λ=1.5 t sweep step 11/13: log10 t=2  (t=100) (11s elapsed) ===
+SELECT empirical caps: 13 seasons
+  [1/13] season 2009 (8%) | N=4,093 K=132 selected=132 | 0s elapsed, ~1s left
+  [2/13] season 2010 (15%) | N=4,183 K=135 selected=135 | 0s elapsed, ~1s left
+  [3/13] season 2011 (23%) | N=4,086 K=125 selected=125 | 0s elapsed, ~1s left
+  [4/13] season 2012 (31%) | N=4,097 K=126 selected=126 | 0s elapsed, ~1s left
+  [5/13] season 2013 (38%) | N=4,135 K=112 selected=112 | 0s elapsed, ~1s left
+  [6/13] season 2014 (46%) | N=4,248 K=106 selected=106 | 0s elapsed, ~1s left
+  [7/13] season 2015 (54%) | N=4,270 K=105 selected=105 | 1s elapsed, ~0s left
+  [8/13] season 2016 (62%) | N=4,234 K=105 selected=105 | 1s elapsed, ~0s left
+  [9/13] season 2017 (69%) | N=4,292 K=115 selected=115 | 1s elapsed, ~0s left
+  [10/13] season 2018 (77%) | N=4,246 K=108 selected=108 | 1s elapsed, ~0s left
+  [11/13] season 2019 (85%) | N=4,204 K=100 selected=100 | 1s elapsed, ~0s left
+  [12/13] season 2020 (92%) | N=4,219 K=80 selected=80 | 1s elapsed, ~0s left
+  [13/13] season 2021 (100%) | N=4,275 K=51 selected=51 | 1s elapsed
+SELECT empirical caps finished in 1.1s.
+  SELECT LOO: monotone_decreasing  pool mean: monotone_decreasing  (n=54,582)
+
+=== λ=1.5 t sweep step 12/13: log10 t=2.5  (t=316.228) (12s elapsed) ===
+SELECT empirical caps: 13 seasons
+  [1/13] season 2009 (8%) | N=4,093 K=132 selected=132 | 0s elapsed, ~1s left
+  [2/13] season 2010 (15%) | N=4,183 K=135 selected=135 | 0s elapsed, ~1s left
+  [3/13] season 2011 (23%) | N=4,086 K=125 selected=125 | 0s elapsed, ~1s left
+  [4/13] season 2012 (31%) | N=4,097 K=126 selected=126 | 0s elapsed, ~1s left
+  [5/13] season 2013 (38%) | N=4,135 K=112 selected=112 | 0s elapsed, ~1s left
+  [6/13] season 2014 (46%) | N=4,248 K=106 selected=106 | 0s elapsed, ~1s left
+  [7/13] season 2015 (54%) | N=4,270 K=105 selected=105 | 1s elapsed, ~0s left
+  [8/13] season 2016 (62%) | N=4,234 K=105 selected=105 | 1s elapsed, ~0s left
+  [9/13] season 2017 (69%) | N=4,292 K=115 selected=115 | 1s elapsed, ~0s left
+  [10/13] season 2018 (77%) | N=4,246 K=108 selected=108 | 1s elapsed, ~0s left
+  [11/13] season 2019 (85%) | N=4,204 K=100 selected=100 | 1s elapsed, ~0s left
+  [12/13] season 2020 (92%) | N=4,219 K=80 selected=80 | 1s elapsed, ~0s left
+  [13/13] season 2021 (100%) | N=4,275 K=51 selected=51 | 1s elapsed
+SELECT empirical caps finished in 1.1s.
+  SELECT LOO: inverted_u_like  pool mean: inverted_u_like  (n=54,582)
+
+=== λ=1.5 t sweep step 13/13: log10 t=3  (t=1000) (13s elapsed) ===
+SELECT empirical caps: 13 seasons
+  [1/13] season 2009 (8%) | N=4,093 K=132 selected=132 | 0s elapsed, ~1s left
+  [2/13] season 2010 (15%) | N=4,183 K=135 selected=135 | 0s elapsed, ~1s left
+  [3/13] season 2011 (23%) | N=4,086 K=125 selected=125 | 0s elapsed, ~1s left
+  [4/13] season 2012 (31%) | N=4,097 K=126 selected=126 | 0s elapsed, ~1s left
+  [5/13] season 2013 (38%) | N=4,135 K=112 selected=112 | 0s elapsed, ~1s left
+  [6/13] season 2014 (46%) | N=4,248 K=106 selected=106 | 1s elapsed, ~1s left
+  [7/13] season 2015 (54%) | N=4,270 K=105 selected=105 | 1s elapsed, ~1s left
+  [8/13] season 2016 (62%) | N=4,234 K=105 selected=105 | 1s elapsed, ~0s left
+  [9/13] season 2017 (69%) | N=4,292 K=115 selected=115 | 1s elapsed, ~0s left
+  [10/13] season 2018 (77%) | N=4,246 K=108 selected=108 | 1s elapsed, ~0s left
+  [11/13] season 2019 (85%) | N=4,204 K=100 selected=100 | 1s elapsed, ~0s left
+  [12/13] season 2020 (92%) | N=4,219 K=80 selected=80 | 1s elapsed, ~0s left
+  [13/13] season 2021 (100%) | N=4,275 K=51 selected=51 | 1s elapsed
+SELECT empirical caps finished in 1.1s.
+  SELECT LOO: inverted_u_like  pool mean: inverted_u_like  (n=54,582)
+λ=1.5 t sweep finished in 14.6s.
+λ=2 t sweep: 13 steps
+
+=== λ=2 t sweep step 1/13: log10 t=-3  (t=0.001) (0s elapsed) ===
+SELECT empirical caps: 13 seasons
+  [1/13] season 2009 (8%) | N=4,093 K=132 selected=132 | 0s elapsed, ~1s left
+  [2/13] season 2010 (15%) | N=4,183 K=135 selected=135 | 0s elapsed, ~1s left
+  [3/13] season 2011 (23%) | N=4,086 K=125 selected=125 | 0s elapsed, ~1s left
+  [4/13] season 2012 (31%) | N=4,097 K=126 selected=126 | 0s elapsed, ~1s left
+  [5/13] season 2013 (38%) | N=4,135 K=112 selected=112 | 0s elapsed, ~1s left
+  [6/13] season 2014 (46%) | N=4,248 K=106 selected=106 | 0s elapsed, ~1s left
+  [7/13] season 2015 (54%) | N=4,270 K=105 selected=105 | 1s elapsed, ~0s left
+  [8/13] season 2016 (62%) | N=4,234 K=105 selected=105 | 1s elapsed, ~0s left
+  [9/13] season 2017 (69%) | N=4,292 K=115 selected=115 | 1s elapsed, ~0s left
+  [10/13] season 2018 (77%) | N=4,246 K=108 selected=108 | 1s elapsed, ~0s left
+  [11/13] season 2019 (85%) | N=4,204 K=100 selected=100 | 1s elapsed, ~0s left
+  [12/13] season 2020 (92%) | N=4,219 K=80 selected=80 | 1s elapsed, ~0s left
+  [13/13] season 2021 (100%) | N=4,275 K=51 selected=51 | 1s elapsed
+SELECT empirical caps finished in 1.1s.
+  SELECT LOO: monotone_decreasing  pool mean: monotone_increasing  (n=54,582)
+
+=== λ=2 t sweep step 2/13: log10 t=-2.5  (t=0.00316228) (1s elapsed) ===
+SELECT empirical caps: 13 seasons
+  [1/13] season 2009 (8%) | N=4,093 K=132 selected=132 | 0s elapsed, ~1s left
+  [2/13] season 2010 (15%) | N=4,183 K=135 selected=135 | 0s elapsed, ~1s left
+  [3/13] season 2011 (23%) | N=4,086 K=125 selected=125 | 0s elapsed, ~1s left
+  [4/13] season 2012 (31%) | N=4,097 K=126 selected=126 | 0s elapsed, ~1s left
+  [5/13] season 2013 (38%) | N=4,135 K=112 selected=112 | 0s elapsed, ~1s left
+  [6/13] season 2014 (46%) | N=4,248 K=106 selected=106 | 1s elapsed, ~1s left
+  [7/13] season 2015 (54%) | N=4,270 K=105 selected=105 | 1s elapsed, ~1s left
+  [8/13] season 2016 (62%) | N=4,234 K=105 selected=105 | 1s elapsed, ~0s left
+  [9/13] season 2017 (69%) | N=4,292 K=115 selected=115 | 1s elapsed, ~0s left
+  [10/13] season 2018 (77%) | N=4,246 K=108 selected=108 | 1s elapsed, ~0s left
+  [11/13] season 2019 (85%) | N=4,204 K=100 selected=100 | 1s elapsed, ~0s left
+  [12/13] season 2020 (92%) | N=4,219 K=80 selected=80 | 1s elapsed, ~0s left
+  [13/13] season 2021 (100%) | N=4,275 K=51 selected=51 | 1s elapsed
+SELECT empirical caps finished in 1.1s.
+  SELECT LOO: monotone_decreasing  pool mean: monotone_increasing  (n=54,582)
+
+=== λ=2 t sweep step 3/13: log10 t=-2  (t=0.01) (2s elapsed) ===
+SELECT empirical caps: 13 seasons
+  [1/13] season 2009 (8%) | N=4,093 K=132 selected=132 | 0s elapsed, ~1s left
+  [2/13] season 2010 (15%) | N=4,183 K=135 selected=135 | 0s elapsed, ~1s left
+  [3/13] season 2011 (23%) | N=4,086 K=125 selected=125 | 0s elapsed, ~1s left
+  [4/13] season 2012 (31%) | N=4,097 K=126 selected=126 | 0s elapsed, ~1s left
+  [5/13] season 2013 (38%) | N=4,135 K=112 selected=112 | 0s elapsed, ~1s left
+  [6/13] season 2014 (46%) | N=4,248 K=106 selected=106 | 0s elapsed, ~1s left
+  [7/13] season 2015 (54%) | N=4,270 K=105 selected=105 | 1s elapsed, ~0s left
+  [8/13] season 2016 (62%) | N=4,234 K=105 selected=105 | 1s elapsed, ~0s left
+  [9/13] season 2017 (69%) | N=4,292 K=115 selected=115 | 1s elapsed, ~0s left
+  [10/13] season 2018 (77%) | N=4,246 K=108 selected=108 | 1s elapsed, ~0s left
+  [11/13] season 2019 (85%) | N=4,204 K=100 selected=100 | 1s elapsed, ~0s left
+  [12/13] season 2020 (92%) | N=4,219 K=80 selected=80 | 1s elapsed, ~0s left
+  [13/13] season 2021 (100%) | N=4,275 K=51 selected=51 | 1s elapsed
+SELECT empirical caps finished in 1.1s.
+  SELECT LOO: monotone_decreasing  pool mean: monotone_increasing  (n=54,582)
+
+=== λ=2 t sweep step 4/13: log10 t=-1.5  (t=0.0316228) (3s elapsed) ===
+SELECT empirical caps: 13 seasons
+  [1/13] season 2009 (8%) | N=4,093 K=132 selected=132 | 0s elapsed, ~1s left
+  [2/13] season 2010 (15%) | N=4,183 K=135 selected=135 | 0s elapsed, ~1s left
+  [3/13] season 2011 (23%) | N=4,086 K=125 selected=125 | 0s elapsed, ~1s left
+  [4/13] season 2012 (31%) | N=4,097 K=126 selected=126 | 0s elapsed, ~1s left
+  [5/13] season 2013 (38%) | N=4,135 K=112 selected=112 | 0s elapsed, ~1s left
+  [6/13] season 2014 (46%) | N=4,248 K=106 selected=106 | 1s elapsed, ~1s left
+  [7/13] season 2015 (54%) | N=4,270 K=105 selected=105 | 1s elapsed, ~1s left
+  [8/13] season 2016 (62%) | N=4,234 K=105 selected=105 | 1s elapsed, ~0s left
+  [9/13] season 2017 (69%) | N=4,292 K=115 selected=115 | 1s elapsed, ~0s left
+  [10/13] season 2018 (77%) | N=4,246 K=108 selected=108 | 1s elapsed, ~0s left
+  [11/13] season 2019 (85%) | N=4,204 K=100 selected=100 | 1s elapsed, ~0s left
+  [12/13] season 2020 (92%) | N=4,219 K=80 selected=80 | 1s elapsed, ~0s left
+  [13/13] season 2021 (100%) | N=4,275 K=51 selected=51 | 1s elapsed
+SELECT empirical caps finished in 1.1s.
+  SELECT LOO: inverted_u_like  pool mean: inverted_u_like  (n=54,582)
+
+=== λ=2 t sweep step 5/13: log10 t=-1  (t=0.1) (4s elapsed) ===
+SELECT empirical caps: 13 seasons
+  [1/13] season 2009 (8%) | N=4,093 K=132 selected=132 | 0s elapsed, ~1s left
+  [2/13] season 2010 (15%) | N=4,183 K=135 selected=135 | 0s elapsed, ~1s left
+  [3/13] season 2011 (23%) | N=4,086 K=125 selected=125 | 0s elapsed, ~1s left
+  [4/13] season 2012 (31%) | N=4,097 K=126 selected=126 | 0s elapsed, ~1s left
+  [5/13] season 2013 (38%) | N=4,135 K=112 selected=112 | 0s elapsed, ~1s left
+  [6/13] season 2014 (46%) | N=4,248 K=106 selected=106 | 0s elapsed, ~1s left
+  [7/13] season 2015 (54%) | N=4,270 K=105 selected=105 | 1s elapsed, ~0s left
+  [8/13] season 2016 (62%) | N=4,234 K=105 selected=105 | 1s elapsed, ~0s left
+  [9/13] season 2017 (69%) | N=4,292 K=115 selected=115 | 1s elapsed, ~0s left
+  [10/13] season 2018 (77%) | N=4,246 K=108 selected=108 | 1s elapsed, ~0s left
+  [11/13] season 2019 (85%) | N=4,204 K=100 selected=100 | 1s elapsed, ~0s left
+  [12/13] season 2020 (92%) | N=4,219 K=80 selected=80 | 1s elapsed, ~0s left
+  [13/13] season 2021 (100%) | N=4,275 K=51 selected=51 | 1s elapsed
+SELECT empirical caps finished in 1.1s.
+  SELECT LOO: monotone_decreasing  pool mean: monotone_increasing  (n=54,582)
+
+=== λ=2 t sweep step 6/13: log10 t=-0.5  (t=0.316228) (6s elapsed) ===
+SELECT empirical caps: 13 seasons
+  [1/13] season 2009 (8%) | N=4,093 K=132 selected=132 | 0s elapsed, ~1s left
+  [2/13] season 2010 (15%) | N=4,183 K=135 selected=135 | 0s elapsed, ~1s left
+  [3/13] season 2011 (23%) | N=4,086 K=125 selected=125 | 0s elapsed, ~1s left
+  [4/13] season 2012 (31%) | N=4,097 K=126 selected=126 | 0s elapsed, ~1s left
+  [5/13] season 2013 (38%) | N=4,135 K=112 selected=112 | 0s elapsed, ~1s left
+  [6/13] season 2014 (46%) | N=4,248 K=106 selected=106 | 0s elapsed, ~1s left
+  [7/13] season 2015 (54%) | N=4,270 K=105 selected=105 | 1s elapsed, ~1s left
+  [8/13] season 2016 (62%) | N=4,234 K=105 selected=105 | 1s elapsed, ~0s left
+  [9/13] season 2017 (69%) | N=4,292 K=115 selected=115 | 1s elapsed, ~0s left
+  [10/13] season 2018 (77%) | N=4,246 K=108 selected=108 | 1s elapsed, ~0s left
+  [11/13] season 2019 (85%) | N=4,204 K=100 selected=100 | 1s elapsed, ~0s left
+  [12/13] season 2020 (92%) | N=4,219 K=80 selected=80 | 1s elapsed, ~0s left
+  [13/13] season 2021 (100%) | N=4,275 K=51 selected=51 | 1s elapsed
+SELECT empirical caps finished in 1.1s.
+  SELECT LOO: inverted_u_like  pool mean: monotone_increasing  (n=54,582)
+
+=== λ=2 t sweep step 7/13: log10 t=0  (t=1) (7s elapsed) ===
+SELECT empirical caps: 13 seasons
+  [1/13] season 2009 (8%) | N=4,093 K=132 selected=132 | 0s elapsed, ~1s left
+  [2/13] season 2010 (15%) | N=4,183 K=135 selected=135 | 0s elapsed, ~1s left
+  [3/13] season 2011 (23%) | N=4,086 K=125 selected=125 | 0s elapsed, ~1s left
+  [4/13] season 2012 (31%) | N=4,097 K=126 selected=126 | 0s elapsed, ~1s left
+  [5/13] season 2013 (38%) | N=4,135 K=112 selected=112 | 0s elapsed, ~1s left
+  [6/13] season 2014 (46%) | N=4,248 K=106 selected=106 | 0s elapsed, ~1s left
+  [7/13] season 2015 (54%) | N=4,270 K=105 selected=105 | 1s elapsed, ~1s left
+  [8/13] season 2016 (62%) | N=4,234 K=105 selected=105 | 1s elapsed, ~0s left
+  [9/13] season 2017 (69%) | N=4,292 K=115 selected=115 | 1s elapsed, ~0s left
+  [10/13] season 2018 (77%) | N=4,246 K=108 selected=108 | 1s elapsed, ~0s left
+  [11/13] season 2019 (85%) | N=4,204 K=100 selected=100 | 1s elapsed, ~0s left
+  [12/13] season 2020 (92%) | N=4,219 K=80 selected=80 | 1s elapsed, ~0s left
+  [13/13] season 2021 (100%) | N=4,275 K=51 selected=51 | 1s elapsed
+SELECT empirical caps finished in 1.1s.
+  SELECT LOO: inverted_u_like  pool mean: inverted_u_like  (n=54,582)
+
+=== λ=2 t sweep step 8/13: log10 t=0.5  (t=3.16228) (8s elapsed) ===
+SELECT empirical caps: 13 seasons
+  [1/13] season 2009 (8%) | N=4,093 K=132 selected=132 | 0s elapsed, ~1s left
+  [2/13] season 2010 (15%) | N=4,183 K=135 selected=135 | 0s elapsed, ~1s left
+  [3/13] season 2011 (23%) | N=4,086 K=125 selected=125 | 0s elapsed, ~1s left
+  [4/13] season 2012 (31%) | N=4,097 K=126 selected=126 | 0s elapsed, ~1s left
+  [5/13] season 2013 (38%) | N=4,135 K=112 selected=112 | 0s elapsed, ~1s left
+  [6/13] season 2014 (46%) | N=4,248 K=106 selected=106 | 1s elapsed, ~1s left
+  [7/13] season 2015 (54%) | N=4,270 K=105 selected=105 | 1s elapsed, ~1s left
+  [8/13] season 2016 (62%) | N=4,234 K=105 selected=105 | 1s elapsed, ~0s left
+  [9/13] season 2017 (69%) | N=4,292 K=115 selected=115 | 1s elapsed, ~0s left
+  [10/13] season 2018 (77%) | N=4,246 K=108 selected=108 | 1s elapsed, ~0s left
+  [11/13] season 2019 (85%) | N=4,204 K=100 selected=100 | 1s elapsed, ~0s left
+  [12/13] season 2020 (92%) | N=4,219 K=80 selected=80 | 1s elapsed, ~0s left
+  [13/13] season 2021 (100%) | N=4,275 K=51 selected=51 | 1s elapsed
+SELECT empirical caps finished in 1.2s.
+  SELECT LOO: monotone_increasing  pool mean: monotone_increasing  (n=54,582)
+
+=== λ=2 t sweep step 9/13: log10 t=1  (t=10) (9s elapsed) ===
+SELECT empirical caps: 13 seasons
+  [1/13] season 2009 (8%) | N=4,093 K=132 selected=132 | 0s elapsed, ~1s left
+  [2/13] season 2010 (15%) | N=4,183 K=135 selected=135 | 0s elapsed, ~1s left
+  [3/13] season 2011 (23%) | N=4,086 K=125 selected=125 | 0s elapsed, ~1s left
+  [4/13] season 2012 (31%) | N=4,097 K=126 selected=126 | 0s elapsed, ~1s left
+  [5/13] season 2013 (38%) | N=4,135 K=112 selected=112 | 0s elapsed, ~1s left
+  [6/13] season 2014 (46%) | N=4,248 K=106 selected=106 | 1s elapsed, ~1s left
+  [7/13] season 2015 (54%) | N=4,270 K=105 selected=105 | 1s elapsed, ~1s left
+  [8/13] season 2016 (62%) | N=4,234 K=105 selected=105 | 1s elapsed, ~0s left
+  [9/13] season 2017 (69%) | N=4,292 K=115 selected=115 | 1s elapsed, ~0s left
+  [10/13] season 2018 (77%) | N=4,246 K=108 selected=108 | 1s elapsed, ~0s left
+  [11/13] season 2019 (85%) | N=4,204 K=100 selected=100 | 1s elapsed, ~0s left
+  [12/13] season 2020 (92%) | N=4,219 K=80 selected=80 | 1s elapsed, ~0s left
+  [13/13] season 2021 (100%) | N=4,275 K=51 selected=51 | 1s elapsed
+SELECT empirical caps finished in 1.2s.
+  SELECT LOO: inverted_u_like  pool mean: inverted_u_like  (n=54,582)
+
+=== λ=2 t sweep step 10/13: log10 t=1.5  (t=31.6228) (10s elapsed) ===
+SELECT empirical caps: 13 seasons
+  [1/13] season 2009 (8%) | N=4,093 K=132 selected=132 | 0s elapsed, ~1s left
+  [2/13] season 2010 (15%) | N=4,183 K=135 selected=135 | 0s elapsed, ~1s left
+  [3/13] season 2011 (23%) | N=4,086 K=125 selected=125 | 0s elapsed, ~1s left
+  [4/13] season 2012 (31%) | N=4,097 K=126 selected=126 | 0s elapsed, ~1s left
+  [5/13] season 2013 (38%) | N=4,135 K=112 selected=112 | 0s elapsed, ~1s left
+  [6/13] season 2014 (46%) | N=4,248 K=106 selected=106 | 0s elapsed, ~1s left
+  [7/13] season 2015 (54%) | N=4,270 K=105 selected=105 | 1s elapsed, ~0s left
+  [8/13] season 2016 (62%) | N=4,234 K=105 selected=105 | 1s elapsed, ~0s left
+  [9/13] season 2017 (69%) | N=4,292 K=115 selected=115 | 1s elapsed, ~0s left
+  [10/13] season 2018 (77%) | N=4,246 K=108 selected=108 | 1s elapsed, ~0s left
+  [11/13] season 2019 (85%) | N=4,204 K=100 selected=100 | 1s elapsed, ~0s left
+  [12/13] season 2020 (92%) | N=4,219 K=80 selected=80 | 1s elapsed, ~0s left
+  [13/13] season 2021 (100%) | N=4,275 K=51 selected=51 | 1s elapsed
+SELECT empirical caps finished in 1.1s.
+  SELECT LOO: inverted_u_like  pool mean: inverted_u_like  (n=54,582)
+
+=== λ=2 t sweep step 11/13: log10 t=2  (t=100) (11s elapsed) ===
+SELECT empirical caps: 13 seasons
+  [1/13] season 2009 (8%) | N=4,093 K=132 selected=132 | 0s elapsed, ~1s left
+  [2/13] season 2010 (15%) | N=4,183 K=135 selected=135 | 0s elapsed, ~1s left
+  [3/13] season 2011 (23%) | N=4,086 K=125 selected=125 | 0s elapsed, ~1s left
+  [4/13] season 2012 (31%) | N=4,097 K=126 selected=126 | 0s elapsed, ~1s left
+  [5/13] season 2013 (38%) | N=4,135 K=112 selected=112 | 0s elapsed, ~1s left
+  [6/13] season 2014 (46%) | N=4,248 K=106 selected=106 | 0s elapsed, ~1s left
+  [7/13] season 2015 (54%) | N=4,270 K=105 selected=105 | 1s elapsed, ~0s left
+  [8/13] season 2016 (62%) | N=4,234 K=105 selected=105 | 1s elapsed, ~0s left
+  [9/13] season 2017 (69%) | N=4,292 K=115 selected=115 | 1s elapsed, ~0s left
+  [10/13] season 2018 (77%) | N=4,246 K=108 selected=108 | 1s elapsed, ~0s left
+  [11/13] season 2019 (85%) | N=4,204 K=100 selected=100 | 1s elapsed, ~0s left
+  [12/13] season 2020 (92%) | N=4,219 K=80 selected=80 | 1s elapsed, ~0s left
+  [13/13] season 2021 (100%) | N=4,275 K=51 selected=51 | 1s elapsed
+SELECT empirical caps finished in 1.1s.
+  SELECT LOO: inverted_u_like  pool mean: inverted_u_like  (n=54,582)
+
+=== λ=2 t sweep step 12/13: log10 t=2.5  (t=316.228) (12s elapsed) ===
+SELECT empirical caps: 13 seasons
+  [1/13] season 2009 (8%) | N=4,093 K=132 selected=132 | 0s elapsed, ~1s left
+  [2/13] season 2010 (15%) | N=4,183 K=135 selected=135 | 0s elapsed, ~1s left
+  [3/13] season 2011 (23%) | N=4,086 K=125 selected=125 | 0s elapsed, ~1s left
+  [4/13] season 2012 (31%) | N=4,097 K=126 selected=126 | 0s elapsed, ~1s left
+  [5/13] season 2013 (38%) | N=4,135 K=112 selected=112 | 0s elapsed, ~1s left
+  [6/13] season 2014 (46%) | N=4,248 K=106 selected=106 | 0s elapsed, ~1s left
+  [7/13] season 2015 (54%) | N=4,270 K=105 selected=105 | 1s elapsed, ~0s left
+  [8/13] season 2016 (62%) | N=4,234 K=105 selected=105 | 1s elapsed, ~0s left
+  [9/13] season 2017 (69%) | N=4,292 K=115 selected=115 | 1s elapsed, ~0s left
+  [10/13] season 2018 (77%) | N=4,246 K=108 selected=108 | 1s elapsed, ~0s left
+  [11/13] season 2019 (85%) | N=4,204 K=100 selected=100 | 1s elapsed, ~0s left
+  [12/13] season 2020 (92%) | N=4,219 K=80 selected=80 | 1s elapsed, ~0s left
+  [13/13] season 2021 (100%) | N=4,275 K=51 selected=51 | 1s elapsed
+SELECT empirical caps finished in 1.1s.
+  SELECT LOO: inverted_u_like  pool mean: monotone_increasing  (n=54,582)
+
+=== λ=2 t sweep step 13/13: log10 t=3  (t=1000) (13s elapsed) ===
+SELECT empirical caps: 13 seasons
+  [1/13] season 2009 (8%) | N=4,093 K=132 selected=132 | 0s elapsed, ~1s left
+  [2/13] season 2010 (15%) | N=4,183 K=135 selected=135 | 0s elapsed, ~1s left
+  [3/13] season 2011 (23%) | N=4,086 K=125 selected=125 | 0s elapsed, ~1s left
+  [4/13] season 2012 (31%) | N=4,097 K=126 selected=126 | 0s elapsed, ~1s left
+  [5/13] season 2013 (38%) | N=4,135 K=112 selected=112 | 0s elapsed, ~1s left
+  [6/13] season 2014 (46%) | N=4,248 K=106 selected=106 | 1s elapsed, ~1s left
+  [7/13] season 2015 (54%) | N=4,270 K=105 selected=105 | 1s elapsed, ~1s left
+  [8/13] season 2016 (62%) | N=4,234 K=105 selected=105 | 1s elapsed, ~0s left
+  [9/13] season 2017 (69%) | N=4,292 K=115 selected=115 | 1s elapsed, ~0s left
+  [10/13] season 2018 (77%) | N=4,246 K=108 selected=108 | 1s elapsed, ~0s left
+  [11/13] season 2019 (85%) | N=4,204 K=100 selected=100 | 1s elapsed, ~0s left
+  [12/13] season 2020 (92%) | N=4,219 K=80 selected=80 | 1s elapsed, ~0s left
+  [13/13] season 2021 (100%) | N=4,275 K=51 selected=51 | 1s elapsed
+SELECT empirical caps finished in 1.1s.
+  SELECT LOO: monotone_decreasing  pool mean: inverted_u_like  (n=54,582)
+λ=2 t sweep finished in 14.6s.
+
+Writing figure ...
+Wrote /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/reigning_hero/calibration/temperature/REIGNING_GRANDCHILD_temperature_select_sweep_2009_2021_mg10_min20_09_21.png
+Wrote /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/reigning_hero/calibration/temperature/REIGNING_GRANDCHILD_temperature_select_sweep_2009_2021_mg10_min20_09_21_meta.json
+Done.
+Wrote 3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/reigning_hero/calibration/CAMPAIGN_COMPARE.md
+Wrote 3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/reigning_hero/calibration/manifest.json
+
+Done.

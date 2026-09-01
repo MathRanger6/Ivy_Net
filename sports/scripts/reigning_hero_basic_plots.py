@@ -8,7 +8,7 @@ Run (repo root):
   python sports/scripts/reigning_hero_basic_plots.py --only overlap ai_tj
 
 Outputs:
-  ``3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/reigning_hero/basic_data_plots/``
+  ``3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/reigning_hero/basic_data_plots/``
 """
 
 from __future__ import annotations

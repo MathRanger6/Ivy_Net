@@ -45,7 +45,7 @@ DEFAULT_MANIFEST = REIGNING_HERO_STAR_SWEEPS / "manifest.json"
 DEFAULT_OUT = REIGNING_HERO_STAR_SWEEPS / "HERO_star_sweep_slides_AUTO.pptx"
 LOCK_PNG = (
     REPO
-    / "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero"
+    / "3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/hero"
     / "HERO_ew16_allt_min20_mg10_09_21_last_ps_perm_loo_ever_lastps_ew16.png"
 )
 

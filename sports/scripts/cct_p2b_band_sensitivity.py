@@ -22,7 +22,7 @@ REPO = Path(__file__).resolve().parents[2]
 SCRIPT = REPO / "sports/scripts/cct_p2b_ai_band_overlay.py"
 DEFAULT_OUT = (
     REPO
-    / "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/_archive/band_sensitivity_2026-08"
+    / "3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/_archive/band_sensitivity_2026-08"
 )
 
 

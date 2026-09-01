@@ -20,7 +20,7 @@
 | **7** | Sweep **ALLT vs DFT** (Alex: DFT ok for distributions, suspect for hero) | Pending |
 
 **Canonical deck pair (locked for now):** HERO `q16 · mg10 · min20 · 11_21 · ALLT · poolq_loo` + F-HERO `pw4p7 · mg10 · min20 · 11_21 · +DFT · top7% Â · T̂_j`.  
-**Sandbox artifacts:** [`population_sandbox/hero/`](HEROs_and_PASSes/population_sandbox/hero/) · [`population_sandbox/fhero/`](HEROs_and_PASSes/population_sandbox/fhero/).
+**Sandbox artifacts:** [`sports_sandbox/hero/`](HEROs_and_PASSes/sports_sandbox/hero/) · [`sports_sandbox/fhero/`](HEROs_and_PASSes/sports_sandbox/fhero/).
 
 **Side notes (not locked population):** mg=0 audit only; ew20 modest elite dip on LOO (display); full-panel **T̂_j** (`pool_mean`) = monotone rise, no downturn — see `pass_a/sensitivity/PASS_A_sensitivity_poolmean_mg10_2011_2021_b16q_w0199.png` (≠ F-HERO).
 
@@ -49,7 +49,7 @@
 
 **Memory correction:** After PD22 box QC, **mg=10 removed** quantile HERO inverted-U; it did **not** produce it. F-HERO downturn is a **separate plot** (T̂_j, +DFT, top 7% Â).
 
-Evidence: mg0 `n=62,180` β₂=−0.025 vs mg10 `n=46,306` β₂=+0.0064. See [`population_sandbox/README.md`](HEROs_and_PASSes/population_sandbox/README.md).
+Evidence: mg0 `n=62,180` β₂=−0.025 vs mg10 `n=46,306` β₂=+0.0064. See [`sports_sandbox/README.md`](HEROs_and_PASSes/sports_sandbox/README.md).
 
 **Alex one-liner:** *“LOO hero: middle rise, flat elite on cleaned panel. Team-mean F-HERO at fixed Â: downturn on T̂_j — different object.”*
 
@@ -151,12 +151,12 @@ F-HERO · T̂_j (team mean, incl. self) · piecewise 4+7 · top7% Â · +DFT · 
 
 ---
 
-## H — Population sandbox (live)
+## H — Sports sandbox (live)
 
-**Root:** `3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/` — see [`README.md`](HEROs_and_PASSes/population_sandbox/README.md).
+**Root:** `3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/` — see [`README.md`](HEROs_and_PASSes/sports_sandbox/README.md).
 
 ```text
-population_sandbox/
+sports_sandbox/
   README.md              ← sweep matrix + rerun commands
   hero/                  ← pass_a_empirical_bundle.py (--output-root)
   fhero/                 ← pass_a_congestion_conditional.py (--out-dir)
@@ -199,7 +199,7 @@ population_sandbox/
 
 ### 2026-08-25 — Sandbox baseline complete (Charles)
 
-- Cleared/reran `population_sandbox/hero/`: q16 mg10 canonical, ew20 display, mg0 audit.
+- Cleared/reran `sports_sandbox/hero/`: q16 mg10 canonical, ew20 display, mg0 audit.
 - F-HERO baseline already in `fhero/` (11–21).
 - **Next:** paired **13–21** HERO + F-HERO (§E sweep #3).
 

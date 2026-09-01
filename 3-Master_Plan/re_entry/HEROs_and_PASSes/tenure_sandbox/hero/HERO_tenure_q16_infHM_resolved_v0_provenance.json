@@ -1,0 +1,40 @@
+{
+  "artifact": "tenure_pass_a_hero_v0",
+  "date": "2026-09-01",
+  "input": "tenure/tenure_pipeline/faculty_panel_with_pools.jsonl",
+  "filter": {
+    "match_confidence": [
+      "HIGH",
+      "MEDIUM"
+    ],
+    "require_poolq_loo_mean": true,
+    "rows_in": 106559,
+    "rows_out": 2396
+  },
+  "spec": {
+    "grain": "person-level mean poolq_loo_mean (assistant years)",
+    "n_bins": 16,
+    "bin_method": "quantile",
+    "exclude_censored": true,
+    "y_primary": "tenure_event / n_resolved",
+    "y_companion": "attrition / n_resolved"
+  },
+  "outputs": {
+    "png": "HERO_tenure_q16_infHM_resolved_v0.png",
+    "csv": "HERO_tenure_q16_infHM_resolved_v0_binned.csv"
+  },
+  "stage9_summary": {
+    "n_persons_with_loo": 796,
+    "n_tenure": 174,
+    "n_attrition": 202,
+    "n_censored": 420,
+    "n_resolved": 376,
+    "n_bins": 16,
+    "bin_method": "quantile",
+    "log_bin": false,
+    "z_score": false,
+    "exclude_censored": true,
+    "csv_path": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/hero/_stage9_scratch/stage9_binned_table.csv",
+    "png_path": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/hero/_stage9_scratch/stage9_inverted_u.png"
+  }
+}

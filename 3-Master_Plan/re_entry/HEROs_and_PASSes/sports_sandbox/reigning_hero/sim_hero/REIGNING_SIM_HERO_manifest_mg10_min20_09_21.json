@@ -1,0 +1,146 @@
+{
+  "diagnostic": "reigning_hero_sim_hero",
+  "date": "2026-08-28",
+  "runs": [
+    {
+      "diagnostic": "reigning_hero_sim_hero_gibbs_t_sweep",
+      "date": "2026-08-28",
+      "season_min": 2009,
+      "season_max": 2021,
+      "hero_spec": "mg10_min20_09_21",
+      "gibbs_t_values": [
+        0.75,
+        1.0,
+        1.5,
+        2.0,
+        5.0,
+        12.0
+      ],
+      "seed": 5412015,
+      "mle_json": "3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/reigning_hero/calibration/mle/REIGNING_PD21_draft_bernoulli_mle_2009_2021_mg10_min20_09_21.json",
+      "mle_params": {
+        "gamma_hat": 19.572332081866243,
+        "lambda_hat": 1.3024305834948529,
+        "t_mle_hat": 1.0698967300656186
+      },
+      "score_lc_col": "pool_c_smooth_team",
+      "hero_axis": "poolq_loo",
+      "axis_mismatch_note": "SCORE uses team L_C; HERO bins LOO \u2014 cold t nests top-K on S, which can over-draft low-LOO big fish.",
+      "lpm_empirical": {
+        "const": 0.02697559750459936,
+        "beta_poolq_loo": 0.014521246811121312,
+        "beta_poolq_loo_sq": 0.0017199977554869252
+      },
+      "curvature_empirical": {
+        "shape": "inverted_u_like",
+        "peak_bin": 13,
+        "peak_rate": 0.04043545878693624,
+        "left_rate": 0.013725490196078431,
+        "right_rate": 0.02832244008714597
+      },
+      "runs": [
+        {
+          "gibbs_t": 0.75,
+          "log10_t": -0.12493873660829995,
+          "lpm_sim": {
+            "const": 0.027937592891800624,
+            "beta_poolq_loo": -0.009090209376488016,
+            "beta_poolq_loo_sq": -0.013350355705329421
+          },
+          "curvature_sim": {
+            "shape": "inverted_u_like",
+            "peak_bin": 5,
+            "peak_rate": 0.03244191144234985,
+            "left_rate": 0.027450980392156862,
+            "right_rate": 0.023965141612200435
+          }
+        },
+        {
+          "gibbs_t": 1.0,
+          "log10_t": 0.0,
+          "lpm_sim": {
+            "const": 0.026967588800878222,
+            "beta_poolq_loo": -0.0006630083904890151,
+            "beta_poolq_loo_sq": 0.0013349515077700274
+          },
+          "curvature_sim": {
+            "shape": "inverted_u_like",
+            "peak_bin": 12,
+            "peak_rate": 0.03619441571871768,
+            "left_rate": 0.029411764705882353,
+            "right_rate": 0.015250544662309368
+          }
+        },
+        {
+          "gibbs_t": 1.5,
+          "log10_t": 0.17609125905568124,
+          "lpm_sim": {
+            "const": 0.02833842194929067,
+            "beta_poolq_loo": -0.0027162332636599274,
+            "beta_poolq_loo_sq": -0.018289662878570912
+          },
+          "curvature_sim": {
+            "shape": "inverted_u_like",
+            "peak_bin": 4,
+            "peak_rate": 0.03054755043227666,
+            "left_rate": 0.021568627450980392,
+            "right_rate": 0.023965141612200435
+          }
+        },
+        {
+          "gibbs_t": 2.0,
+          "log10_t": 0.3010299956639812,
+          "lpm_sim": {
+            "const": 0.026674613458309234,
+            "beta_poolq_loo": 0.0020954358472053403,
+            "beta_poolq_loo_sq": 0.005794844551607772
+          },
+          "curvature_sim": {
+            "shape": "inverted_u_like",
+            "peak_bin": 13,
+            "peak_rate": 0.03265940902021773,
+            "left_rate": 0.029411764705882353,
+            "right_rate": 0.02832244008714597
+          }
+        },
+        {
+          "gibbs_t": 5.0,
+          "log10_t": 0.6989700043360189,
+          "lpm_sim": {
+            "const": 0.02798569912278337,
+            "beta_poolq_loo": -0.003745100576746577,
+            "beta_poolq_loo_sq": -0.013418513324923343
+          },
+          "curvature_sim": {
+            "shape": "inverted_u_like",
+            "peak_bin": 10,
+            "peak_rate": 0.03329506314580941,
+            "left_rate": 0.025490196078431372,
+            "right_rate": 0.023965141612200435
+          }
+        },
+        {
+          "gibbs_t": 12.0,
+          "log10_t": 1.0791812460476249,
+          "lpm_sim": {
+            "const": 0.026870688230220846,
+            "beta_poolq_loo": 0.006593719819851976,
+            "beta_poolq_loo_sq": 0.0035367794448363343
+          },
+          "curvature_sim": {
+            "shape": "monotone_increasing",
+            "peak_bin": 15,
+            "peak_rate": 0.04793028322440087,
+            "left_rate": 0.023529411764705882,
+            "right_rate": 0.04793028322440087
+          }
+        }
+      ],
+      "artifacts": {
+        "png": "REIGNING_SIM_HERO_gibbs_t_sweep_mg10_min20_09_21_last_ps.png",
+        "json": "REIGNING_SIM_HERO_gibbs_t_sweep_mg10_min20_09_21_last_ps.json",
+        "beta2_csv": "REIGNING_SIM_HERO_gibbs_t_sweep_mg10_min20_09_21_last_ps_beta2.csv"
+      }
+    }
+  ]
+}

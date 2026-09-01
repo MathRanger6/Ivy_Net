@@ -2,7 +2,7 @@
 
 **Source:** `transcripts/20260828_Paper_Directions_28_otter_ai_transcript.docx` (~3:21)  
 **Context:** Short check-in after porch work — Charles showed **no-winsor poolq_LOO** distribution and confirmed **Â** talent distribution on reigning deck.  
-**Prior:** [`PD27_notes.md`](PD27_notes.md) · [`../3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/reigning_hero/README.md`](../3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/reigning_hero/README.md)
+**Prior:** [`PD27_notes.md`](PD27_notes.md) · [`../3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/reigning_hero/README.md`](../3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/reigning_hero/README.md)
 
 ---
 
@@ -51,7 +51,7 @@ Alex approved the cleaned distributions (“this cleaned up a good bit of stuff 
 | PD21 MLE (primary) | 2013–2021 | — | **18.0** | **2.57** | **1.07** |
 | **Reigning (PD28)** | **2009–2021** | **0.0** | **19.57** | **1.30** | **1.07** |
 
-See [`../3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/reigning_hero/calibration/CAMPAIGN_COMPARE.md`](../3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/reigning_hero/calibration/CAMPAIGN_COMPARE.md) after runs complete.
+See [`../3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/reigning_hero/calibration/CAMPAIGN_COMPARE.md`](../3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/reigning_hero/calibration/CAMPAIGN_COMPARE.md) after runs complete.
 
 ---
 

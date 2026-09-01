@@ -87,7 +87,7 @@ Reigning hero sandbox, 2009–2021, min20, mg10, PPM z:
 
 | Piece | Status | Where |
 |-------|--------|-------|
-| $\rho^* \approx 0$ (H_sort bracket) | Done | `population_sandbox/reigning_hero/calibration/rho/` |
+| $\rho^* \approx 0$ (H_sort bracket) | Done | `sports_sandbox/reigning_hero/calibration/rho/` |
 | $\gamma^* \approx 19.57$, $\lambda^* \approx 1.30$, $t^* \approx 1.07$ | Done | `.../calibration/mle/REIGNING_PD21_draft_bernoulli_mle_2009_2021_mg10_min20_09_21.json` |
 | Gibbs SELECT temperature sweep | Done | `.../calibration/temperature/` |
 | Empirical HERO (last-ps, LOO, EW16) | Done | porch + reigning hero lock in `reigning_hero/README.md` |
@@ -95,7 +95,7 @@ Reigning hero sandbox, 2009–2021, min20, mg10, PPM z:
 | **Gap** | **Sensitivity + axis alignment** | LOO in SCORE? multi-seed $\beta_2$ bands? F-HERO dual readout |
 
 PD28 notes: `transcripts/PD28_notes.md`  
-Campaign compare: `population_sandbox/reigning_hero/calibration/CAMPAIGN_COMPARE.md`
+Campaign compare: `sports_sandbox/reigning_hero/calibration/CAMPAIGN_COMPARE.md`
 
 ---
 
@@ -604,7 +604,7 @@ BDP porch (Aug 28): $\hat{T}_j$ wide vs LOO tight; $H_{\mathrm{sort}}^{\mathrm{t
 
 ## SCOUT / perf-metric work (parallel, optional)
 
-Disposable folder: `population_sandbox/_DISPOSABLE_perf_metric_rho_eda/`
+Disposable folder: `sports_sandbox/_DISPOSABLE_perf_metric_rho_eda/`
 
 - **H_sort ladder** asks: does another metric show more team sorting?
 - **Charles gate:** only promote a metric if **draft vs LOO** is not naive monotone.

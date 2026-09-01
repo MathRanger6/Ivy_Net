@@ -60,7 +60,7 @@ python sports/scripts/bdp_ai_draft_mass_ecdf.py \
   --season-min 2009 --season-max 2021 --panel-rows last-ps
 ```
 
-Outputs auto-tag `_09_21` via `plot_provenance.season_slug`. Target dir: `population_sandbox/hero/` and `population_sandbox/fhero/`.
+Outputs auto-tag `_09_21` via `plot_provenance.season_slug`. Target dir: `sports_sandbox/hero/` and `sports_sandbox/fhero/`.
 
 **Footnote for slides:** 13 college seasons; perf z-scored within season; era mix (2009–12 adds +191 draftees vs 13–21 lock).
 

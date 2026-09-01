@@ -7,7 +7,7 @@ Lock aperture (matches basic_data_plots + HERO):
 F-HERO x-axis is T̂_j (team mean, incl. self) — not poolq_LOO. Pair with reigning HERO.
 
 Outputs:
-  ``3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/reigning_hero/fhero/``
+  ``3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/reigning_hero/fhero/``
 
 Run (repo root):
   python sports/scripts/reigning_hero_fhero.py

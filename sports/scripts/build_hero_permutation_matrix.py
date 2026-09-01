@@ -20,7 +20,7 @@ import sys
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
-SANDBOX = REPO / "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox"
+SANDBOX = REPO / "3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox"
 DEFAULT_MANIFEST = SANDBOX / "hero_permutation_slides/manifest.json"
 DEFAULT_CSV = SANDBOX / "hero_permutation_slides/HERO_permutation_matrix.csv"
 DEFAULT_MD = SANDBOX / "hero_permutation_slides/HERO_permutation_matrix.md"

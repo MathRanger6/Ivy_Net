@@ -1,0 +1,68 @@
+{
+  "diagnostic": "reigning_hero_sim_hero",
+  "date": "2026-08-28",
+  "season_min": 2009,
+  "season_max": 2021,
+  "hero_spec": "mg10_min20_09_21",
+  "select_rule": "bernoulli",
+  "gibbs_t": null,
+  "seed": 5414015,
+  "mle_json": "3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/reigning_hero/calibration/mle/REIGNING_PD21_draft_bernoulli_mle_2009_2021_mg10_min20_09_21.json",
+  "mle_params": {
+    "gamma_hat": 19.572332081866243,
+    "lambda_hat": 1.3024305834948529,
+    "t_mle_hat": 1.0698967300656186
+  },
+  "score_form_select": "S_i = A_i - lambda^* L^C (pool_c_smooth_team)",
+  "select_pool": "all-ps \u00b7 min20 \u00b7 matches PD21 L_C attachment",
+  "k_source": "NBA draft lookup: K_s = count(draft_year == season)",
+  "k_by_season": {
+    "2009": 45,
+    "2010": 51,
+    "2011": 46,
+    "2012": 49,
+    "2013": 45,
+    "2014": 44,
+    "2015": 45,
+    "2016": 43,
+    "2017": 48,
+    "2018": 50,
+    "2019": 52,
+    "2020": 48,
+    "2021": 51
+  },
+  "n_sim_picks_total": 13,
+  "hero_readout": "last-ps \u00b7 ever-Y empirical \u00b7 Y_sim_ever = max_t Y_sim \u00b7 at-most-once career sim draft \u00b7 EW16 LOO \u00b7 mg10",
+  "n_hero_rows": 22795,
+  "n_emp_drafted_last_ps": 615,
+  "n_sim_drafted_last_ps_ever": 13,
+  "lpm_empirical": {
+    "const": 0.02697559750459936,
+    "beta_poolq_loo": 0.014521246811121312,
+    "beta_poolq_loo_sq": 0.0017199977554869252
+  },
+  "lpm_sim": {
+    "const": 0.0006870216853618263,
+    "beta_poolq_loo": -0.00015420155755160045,
+    "beta_poolq_loo_sq": -0.0016685983125454102
+  },
+  "curvature_empirical": {
+    "shape": "inverted_u_like",
+    "peak_bin": 13,
+    "peak_rate": 0.04043545878693624,
+    "left_rate": 0.013725490196078431,
+    "right_rate": 0.02832244008714597
+  },
+  "curvature_sim": {
+    "shape": "inverted_u_like",
+    "peak_bin": 6,
+    "peak_rate": 0.0015600624024961,
+    "left_rate": 0.0,
+    "right_rate": 0.0
+  },
+  "artifacts": {
+    "png": "REIGNING_SIM_HERO_bernoulli_mg10_min20_09_21_last_ps.png",
+    "json": "REIGNING_SIM_HERO_bernoulli_mg10_min20_09_21_last_ps.json",
+    "panel_csv": "REIGNING_SIM_HERO_bernoulli_mg10_min20_09_21_last_ps_last_ps_panel.csv"
+  }
+}

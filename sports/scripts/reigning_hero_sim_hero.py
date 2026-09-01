@@ -18,7 +18,7 @@ Run (repo root):
   python sports/scripts/reigning_hero_sim_hero.py --gibbs-t-sweep 0.75 1 1.5 2 5 12
 
 Outputs:
-  ``population_sandbox/reigning_hero/sim_hero/``
+  ``sports_sandbox/reigning_hero/sim_hero/``
 """
 
 from __future__ import annotations

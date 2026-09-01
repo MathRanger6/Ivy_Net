@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run HERO mg=0 vs existing mg10 in population_sandbox/hero and print ventile diff.
+"""Run HERO mg=0 vs existing mg10 in sports_sandbox/hero and print ventile diff.
 
 Run (repo root):
   python sports/scripts/compare_hero_mg_sandbox.py
@@ -14,7 +14,7 @@ from pathlib import Path
 import pandas as pd
 
 REPO = Path(__file__).resolve().parents[2]
-SANDBOX = REPO / "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero"
+SANDBOX = REPO / "3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/hero"
 MG0_CSV = SANDBOX / "PASS_A_binned_draft_rate_poolq_loo_q16_allt_min20_mg0_11_21.csv"
 MG10_CSV = SANDBOX / "PASS_A_binned_draft_rate_poolq_loo_q16_allt_min20_mg10_11_21.csv"
 MG0_PROV = SANDBOX / "HERO_q16_allt_min20_mg0_11_21_provenance.json"
@@ -26,7 +26,7 @@ def main() -> None:
         raise SystemExit(
             "Missing mg10 CSV — run canonical first:\n"
             "  python sports/scripts/pass_a_empirical_bundle.py "
-            "--output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero"
+            "--output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/hero"
         )
     if not MG0_CSV.exists():
         cmd = [

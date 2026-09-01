@@ -1,7 +1,7 @@
 # Paper Directions 27 — my read (Aug 27, 2026)
 
 **Source:** `transcripts/20260827_Paper_Directions_27_otter_ai_transcript.docx` (~3:46)  
-**Figure shown:** [`HERO_ew16_allt_min20_mg10_09_21_last_ps_perm_loo_ever_lastps_ew16.png`](../3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero/HERO_ew16_allt_min20_mg10_09_21_last_ps_perm_loo_ever_lastps_ew16.png)  
+**Figure shown:** [`HERO_ew16_allt_min20_mg10_09_21_last_ps_perm_loo_ever_lastps_ew16.png`](../3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/hero/HERO_ew16_allt_min20_mg10_09_21_last_ps_perm_loo_ever_lastps_ew16.png)  
 **Context:** Short porch check-in — Charles showed Alex the **09–21 · last-ps · EW16 HERO** after equal-width bar styling (hue by **n**, counts on bar face) was ported from APGMS/ARGMS minutes plots.  
 **Prior:** [`PD25_notes.md`](PD25_notes.md) · [`PD23_notes.md`](PD23_notes.md) · [`../3-Master_Plan/re_entry/_DISPOSABLE_Alex_hero_population_thread.md`](../3-Master_Plan/re_entry/_DISPOSABLE_Alex_hero_population_thread.md) · [`../3-Master_Plan/re_entry/SCOUT_and_COMPASS/20260827_SCOUT_to_COMPASS_2009_21_aperture.md`](../3-Master_Plan/re_entry/SCOUT_and_COMPASS/20260827_SCOUT_to_COMPASS_2009_21_aperture.md)
 
@@ -145,9 +145,9 @@ Alex **loved the figure design** — bar styling, readability, sideways **n** on
 | Item | Path |
 |------|------|
 | Transcript | `transcripts/20260827_Paper_Directions_27_otter_ai_transcript.docx` |
-| **Figure shown** | `population_sandbox/hero/HERO_ew16_allt_min20_mg10_09_21_last_ps_perm_loo_ever_lastps_ew16.png` |
-| EW20 sibling | `population_sandbox/hero/HERO_ew20_allt_min20_mg10_09_21_last_ps_perm_loo_ever_lastps_ew20.png` |
-| Permutation deck | `population_sandbox/hero_permutation_slides/HERO_permutation_slides_AUTO.pptx` |
+| **Figure shown** | `sports_sandbox/hero/HERO_ew16_allt_min20_mg10_09_21_last_ps_perm_loo_ever_lastps_ew16.png` |
+| EW20 sibling | `sports_sandbox/hero/HERO_ew20_allt_min20_mg10_09_21_last_ps_perm_loo_ever_lastps_ew20.png` |
+| Permutation deck | `sports_sandbox/hero_permutation_slides/HERO_permutation_slides_AUTO.pptx` |
 | Living population thread | `3-Master_Plan/re_entry/_DISPOSABLE_Alex_hero_population_thread.md` |
 
 ---

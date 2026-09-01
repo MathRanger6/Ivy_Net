@@ -10,7 +10,7 @@ Run (repo root):
   python sports/scripts/reigning_hero_calibration.py --quick   # smoke (2015 only, few seeds)
 
 Outputs:
-  ``3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/reigning_hero/calibration/``
+  ``3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/reigning_hero/calibration/``
 """
 
 from __future__ import annotations

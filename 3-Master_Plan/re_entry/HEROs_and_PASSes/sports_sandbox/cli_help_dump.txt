@@ -1,0 +1,180 @@
+HERO / F-HERO CLI help dump — 2026-08-25 16:34
+Repo: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE
+
+================================================================================
+sports/scripts/pass_a_empirical_bundle.py
+================================================================================
+usage: pass_a_empirical_bundle.py [-h] [--season-min SEASON_MIN]
+                                  [--season-max SEASON_MAX]
+                                  [--auto-suffix AUTO_SUFFIX]
+                                  [--n-bins N_BINS]
+                                  [--poolq-binning {quantile,equal_width}]
+                                  [--roster-x {poolq_loo,poolq}]
+                                  [--min-minutes MIN_MINUTES]
+                                  [--winsor-lo WINSOR_LO]
+                                  [--winsor-hi WINSOR_HI]
+                                  [--min-team-season-games MIN_TEAM_SEASON_GAMES]
+                                  [--y-draft-mode {ever,season}]
+                                  [--panel-rows {all-ps,last-ps}] [--dft]
+                                  [--output-root OUTPUT_ROOT]
+                                  [--output-tag OUTPUT_TAG]
+                                  [--perf-metric {ppm,obpm,opm,bpm,dbpm,dpm}]
+
+Pass A empirical hero + side-by-side PNGs.
+
+options:
+  -h, --help            show this help message and exit
+  --season-min SEASON_MIN
+                        Panel season min (default: env PD20_22_SEASON_MIN or
+                        2011).
+  --season-max SEASON_MAX
+                        Panel season max (default: env PD20_22_SEASON_MAX or
+                        2021).
+  --auto-suffix AUTO_SUFFIX
+                        Suffix on AUTO .pptx names before _AUTO (default:
+                        _13_21 for 2013–2021, empty for 2011–2021).
+  --n-bins N_BINS       Poolq_loo + ability bin count (default:
+                        GALLERY_HERO_BINS or 16).
+  --poolq-binning {quantile,equal_width}
+                        Right-panel roster-pressure binning (left ability
+                        panel always quantile).
+  --roster-x {poolq_loo,poolq}
+                        Right-panel x-axis: poolq_loo (LOO teammate mean;
+                        default) or poolq (team-season mean perf z, includes
+                        self). Not F-HERO T̂_j band plot.
+  --min-minutes MIN_MINUTES
+                        Playing-time floor (default: 20).
+  --winsor-lo WINSOR_LO
+                        Lower poolq winsor quantile (default: 0.01).
+  --winsor-hi WINSOR_HI
+                        Upper poolq winsor quantile (default: 0.99).
+  --min-team-season-games MIN_TEAM_SEASON_GAMES
+                        Drop team-seasons with <= this many games after
+                        season-Y labeling (default 10).
+  --y-draft-mode {ever,season}
+                        Y_draft labeling: ever-draft (default) or season-Y
+                        (Y=1 on draftee's last college PS only; earlier PS
+                        rows kept with Y=0).
+  --panel-rows {all-ps,last-ps}
+                        Panel rows for plots. all-ps (default): every PS
+                        passing filters. last-ps: one row per athlete at
+                        max(season) — cross-section.
+  --dft                 +DFT: keep player-seasons on teams with ≥1 draftee
+                        (all roster PS).
+  --output-root OUTPUT_ROOT
+                        Override output directory (e.g.
+                        sports_sandbox/hero). Default: pass_a/ or
+                        pass_a/season_y_experiment/ or pass_a/sensitivity/.
+  --output-tag OUTPUT_TAG
+                        Extra filename tag for exploration runs (e.g. ew20).
+                        Non-default spec also embeds bin mode in filenames.
+  --perf-metric {ppm,obpm,opm,bpm,dbpm,dpm}
+                        Own-ability + LOO teammate perf source (default ppm).
+                        SR merge required for obpm/bpm.
+
+================================================================================
+sports/scripts/pass_a_congestion_conditional.py
+================================================================================
+usage: pass_a_congestion_conditional.py [-h] [--season-min SEASON_MIN]
+                                        [--season-max SEASON_MAX]
+                                        [--auto-suffix AUTO_SUFFIX]
+                                        [--plot {matched_pond,matched_pond_triptych,fixed_ai_tj_knbins,roster_rank_tj,p1_grid}]
+                                        [--min-minutes MIN_MINUTES]
+                                        [--min-team-season-games MIN_TEAM_SEASON_GAMES]
+                                        [--winsor-lo WINSOR_LO]
+                                        [--winsor-hi WINSOR_HI]
+                                        [--n-bins N_BINS] [--ai-lo AI_LO]
+                                        [--ai-hi AI_HI]
+                                        [--ai-top-pct AI_TOP_PCT]
+                                        [--perf-metric {ppm,obpm,bpm}] [--dft]
+                                        [--y-draft-mode {ever,season}]
+                                        [--panel-rows {all-ps,last-ps}]
+                                        [--tj-binning {piecewise_tail,equal_width}]
+                                        [--tj-n-bins TJ_N_BINS]
+                                        [--tj-n-low TJ_N_LOW]
+                                        [--tj-n-high TJ_N_HIGH]
+                                        [--tj-tail-split-q TJ_TAIL_SPLIT_Q]
+                                        [--p2b-single] [--out-dir OUT_DIR]
+
+CCT conditional draft-rate plots (Act II).
+
+options:
+  -h, --help            show this help message and exit
+  --season-min SEASON_MIN
+                        Panel season min (default: env PD20_22_SEASON_MIN or
+                        2011).
+  --season-max SEASON_MAX
+                        Panel season max (default: env PD20_22_SEASON_MAX or
+                        2021).
+  --auto-suffix AUTO_SUFFIX
+                        Suffix on AUTO .pptx names before _AUTO (default:
+                        _13_21 for 2013–2021, empty for 2011–2021).
+  --plot {matched_pond,matched_pond_triptych,fixed_ai_tj_knbins,roster_rank_tj,p1_grid}
+                        Figure family (P1, P3, or full P1 grid).
+  --min-minutes MIN_MINUTES
+  --min-team-season-games MIN_TEAM_SEASON_GAMES
+  --winsor-lo WINSOR_LO
+  --winsor-hi WINSOR_HI
+  --n-bins N_BINS
+  --ai-lo AI_LO         Lower perf z band (P1 default 1.5).
+  --ai-hi AI_HI         Upper perf z band (P1 default 2.0).
+  --ai-top-pct AI_TOP_PCT
+                        Top X% of perf z in panel (e.g. 10 or 20). Mutually
+                        exclusive with --ai-lo/--ai-hi.
+  --perf-metric {ppm,obpm,bpm}
+  --dft                 +DFT subsample: teams with ≥1 draftee in window (all
+                        roster PS, not drafted-only).
+  --y-draft-mode {ever,season}
+                        Y_draft labeling: ever-draft (default) or season-Y
+                        (Y=1 on draftee's last college PS only; earlier PS
+                        rows kept with Y=0).
+  --panel-rows {all-ps,last-ps}
+                        Panel rows for plots. all-ps (default): every PS
+                        passing filters. last-ps: one row per athlete at
+                        max(season) — cross-section.
+  --tj-binning {piecewise_tail,equal_width}
+                        P2b: T̂_j binning within matched Â band (default
+                        piecewise_tail).
+  --tj-n-bins TJ_N_BINS
+                        P2b equal_width mode: number of T̂_j bins.
+  --tj-n-low TJ_N_LOW   P2b piecewise_tail: coarse bins below split.
+  --tj-n-high TJ_N_HIGH
+                        P2b piecewise_tail: fine bins on upper T̂_j tail.
+  --tj-tail-split-q TJ_TAIL_SPLIT_Q
+                        P2b piecewise_tail: quantile cut between coarse and
+                        fine regions.
+  --p2b-single          P2b: run current spec only (default: primary +
+                        sensitivity bundle).
+  --out-dir OUT_DIR     Output directory (default basic_data_plots/). Sandbox:
+                        3-
+                        Master_Plan/re_entry/HEROs_and_PASSes/population_sandb
+                        ox/fhero
+
+================================================================================
+sports/scripts/pass_a_hero_sensitivity_plots.py
+================================================================================
+usage: pass_a_hero_sensitivity_plots.py [-h] [--quick]
+                                        [--perf-metric {ppm,obpm,opm,bpm,dbpm,dpm}]
+
+Pass A hero sensitivity labeled PNG gallery.
+
+options:
+  -h, --help            show this help message and exit
+  --quick               Plot key POST-QC specs only (3 per perf; faster smoke
+                        test).
+  --perf-metric {ppm,obpm,opm,bpm,dbpm,dpm}
+                        Own-ability + LOO perf (default ppm). Use obpm/bpm for
+                        Track C robustness.
+
+================================================================================
+sports/scripts/compare_hero_mg_sandbox.py (no argparse — see docstring)
+================================================================================
+#!/usr/bin/env python3
+"""Run HERO mg=0 vs existing mg10 in sports_sandbox/hero and print ventile diff.
+
+Run (repo root):
+  python sports/scripts/compare_hero_mg_sandbox.py
+"""
+
+from __future__ import annotations
+

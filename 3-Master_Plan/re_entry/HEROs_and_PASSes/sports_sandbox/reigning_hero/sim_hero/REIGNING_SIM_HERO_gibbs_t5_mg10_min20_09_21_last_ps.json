@@ -1,0 +1,68 @@
+{
+  "diagnostic": "reigning_hero_sim_hero",
+  "date": "2026-08-28",
+  "season_min": 2009,
+  "season_max": 2021,
+  "hero_spec": "mg10_min20_09_21",
+  "select_rule": "gibbs",
+  "gibbs_t": 5.0,
+  "seed": 5412015,
+  "mle_json": "3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/reigning_hero/calibration/mle/REIGNING_PD21_draft_bernoulli_mle_2009_2021_mg10_min20_09_21.json",
+  "mle_params": {
+    "gamma_hat": 19.572332081866243,
+    "lambda_hat": 1.3024305834948529,
+    "t_mle_hat": 1.0698967300656186
+  },
+  "score_form_select": "S_i = A_i - lambda^* L^C (pool_c_smooth_team)",
+  "select_pool": "all-ps \u00b7 min20 \u00b7 matches PD21 L_C attachment",
+  "k_source": "NBA draft lookup: K_s = count(draft_year == season)",
+  "k_by_season": {
+    "2009": 45,
+    "2010": 51,
+    "2011": 46,
+    "2012": 49,
+    "2013": 45,
+    "2014": 44,
+    "2015": 45,
+    "2016": 43,
+    "2017": 48,
+    "2018": 50,
+    "2019": 52,
+    "2020": 48,
+    "2021": 51
+  },
+  "n_sim_picks_total": 617,
+  "hero_readout": "last-ps \u00b7 ever-Y empirical \u00b7 Y_sim_ever = max_t Y_sim \u00b7 at-most-once career sim draft \u00b7 EW16 LOO \u00b7 mg10",
+  "n_hero_rows": 22795,
+  "n_emp_drafted_last_ps": 615,
+  "n_sim_drafted_last_ps_ever": 617,
+  "lpm_empirical": {
+    "const": 0.02697559750459936,
+    "beta_poolq_loo": 0.014521246811121312,
+    "beta_poolq_loo_sq": 0.0017199977554869252
+  },
+  "lpm_sim": {
+    "const": 0.027502386973100982,
+    "beta_poolq_loo": -0.004402527950185919,
+    "beta_poolq_loo_sq": -0.006657726689579759
+  },
+  "curvature_empirical": {
+    "shape": "inverted_u_like",
+    "peak_bin": 13,
+    "peak_rate": 0.04043545878693624,
+    "left_rate": 0.013725490196078431,
+    "right_rate": 0.02832244008714597
+  },
+  "curvature_sim": {
+    "shape": "inverted_u_like",
+    "peak_bin": 3,
+    "peak_rate": 0.03590527119938885,
+    "left_rate": 0.025490196078431372,
+    "right_rate": 0.032679738562091505
+  },
+  "artifacts": {
+    "png": "REIGNING_SIM_HERO_gibbs_t5_mg10_min20_09_21_last_ps.png",
+    "json": "REIGNING_SIM_HERO_gibbs_t5_mg10_min20_09_21_last_ps.json",
+    "panel_csv": "REIGNING_SIM_HERO_gibbs_t5_mg10_min20_09_21_last_ps_last_ps_panel.csv"
+  }
+}

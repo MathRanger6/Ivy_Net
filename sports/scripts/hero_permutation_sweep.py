@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run HERO setting permutations for population_sandbox and write a manifest.
+"""Run HERO setting permutations for sports_sandbox and write a manifest.
 
 Orthogonal axes (default tier = core 2×2×2 = 8 runs per season window):
   --roster-x poolq_loo | poolq
@@ -48,7 +48,7 @@ from pd20_22_campaign_window import (  # noqa: E402
 from plot_provenance import roster_x_slug  # noqa: E402
 
 BUNDLE = SCRIPTS / "pass_a_empirical_bundle.py"
-SANDBOX = REPO / "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox"
+SANDBOX = REPO / "3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox"
 HERO_OUT = SANDBOX / "hero"
 SLIDES_DIR = SANDBOX / "hero_permutation_slides"
 MANIFEST = SLIDES_DIR / "manifest.json"
@@ -107,7 +107,7 @@ class HeroPermSpec:
             f"--n-bins {self.n_bins}",
             f"--poolq-binning {self.poolq_binning}",
             f"--output-tag {self.output_tag}",
-            f"--output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox/hero",
+            f"--output-root 3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/hero",
         ]
         if self.dft:
             parts.append("--dft")

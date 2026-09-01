@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Disposable EDA — empirical H_sort (and optional ρ calibration) across perf metrics.
 
-All outputs go under ``population_sandbox/_DISPOSABLE_perf_metric_rho_eda/``.
+All outputs go under ``sports_sandbox/_DISPOSABLE_perf_metric_rho_eda/``.
 Delete that folder to discard this exploration without touching reigning-hero artifacts.
 
 Run (repo root):

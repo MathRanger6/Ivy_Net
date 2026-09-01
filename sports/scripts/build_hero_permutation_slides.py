@@ -27,7 +27,7 @@ REPO = Path(__file__).resolve().parents[2]
 SCRIPTS = Path(__file__).resolve().parent
 sys.path.insert(0, str(SCRIPTS))
 
-SANDBOX = REPO / "3-Master_Plan/re_entry/HEROs_and_PASSes/population_sandbox"
+SANDBOX = REPO / "3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox"
 DEFAULT_MANIFEST = SANDBOX / "hero_permutation_slides/manifest.json"
 DEFAULT_OUT = SANDBOX / "hero_permutation_slides/HERO_permutation_slides_AUTO.pptx"
 

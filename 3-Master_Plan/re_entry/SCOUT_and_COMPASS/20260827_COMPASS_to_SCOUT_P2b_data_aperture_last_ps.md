@@ -4,7 +4,7 @@
 **From:** COMPASS (Charles + Alex debrief)  
 **To:** SCOUT  
 **Status:** **Action requested** — Charles will discuss options with SCOUT  
-**Related:** [`CCT_Campaign_Plan.md`](CCT_Campaign_Plan.md) · [`../_DISPOSABLE_CCT_P2b_workflow_thread.md`](../_DISPOSABLE_CCT_P2b_workflow_thread.md) · `population_sandbox/fhero/`
+**Related:** [`CCT_Campaign_Plan.md`](CCT_Campaign_Plan.md) · [`../_DISPOSABLE_CCT_P2b_workflow_thread.md`](../_DISPOSABLE_CCT_P2b_workflow_thread.md) · `sports_sandbox/fhero/`
 
 ---
 

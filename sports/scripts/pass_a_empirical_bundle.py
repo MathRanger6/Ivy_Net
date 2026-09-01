@@ -818,7 +818,7 @@ def add_hero_spec_args(parser: argparse.ArgumentParser) -> None:
         type=Path,
         default=None,
         help=(
-            "Override output directory (e.g. population_sandbox/hero). "
+            "Override output directory (e.g. sports_sandbox/hero). "
             "Default: pass_a/ or pass_a/season_y_experiment/ or pass_a/sensitivity/."
         ),
     )

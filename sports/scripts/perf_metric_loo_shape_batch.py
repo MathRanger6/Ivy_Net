@@ -4,7 +4,7 @@
 For each perf key: P(Y=1) vs poolq_LOO (EW16, last-ps) + quadratic LPM β₂ on the same
 porch as ``reigning_hero/``. Flags monotone vs non-monotone; **ignore H_sort for promotion**.
 
-Outputs under ``population_sandbox/_DISPOSABLE_perf_metric_rho_eda/loo_shape/``.
+Outputs under ``sports_sandbox/_DISPOSABLE_perf_metric_rho_eda/loo_shape/``.
 
 Run (repo root):
   export PYTHONPATH="sports"
