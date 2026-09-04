@@ -1,0 +1,11 @@
+{
+  "diagnostic": "tenure_annual_zero_positive_career_pd29",
+  "date": "2026-09-03",
+  "grain": "Decision cohort \u00b7 all resolved \u00b7 Alex \u00c2 (pubs_per_career_year)",
+  "n_tenured": 191,
+  "n_zero_annual_positive_career": 6,
+  "pct": 3.14,
+  "outputs": {
+    "png": "TENURE_annual_zero_tenured_pd29.png"
+  }
+}

@@ -1,6 +1,6 @@
 {
   "diagnostic": "reigning_hero_team_interval_overlap",
-  "date": "2026-08-27",
+  "date": "2026-09-03",
   "reigning_spec": "mg10 min20 09_21",
   "panel_rows": "all-ps",
   "seasons": "2009-2021",
@@ -9,8 +9,8 @@
   "coverage_max_normalized": 1.0,
   "coverage_mean": 1676.4575,
   "coverage_frac_gt_1": 0.98,
-  "coverage_disjoint_max": 1,
-  "coverage_disjoint_mean": 0.9125,
+  "coverage_disjoint_max": null,
+  "coverage_disjoint_mean": null,
   "n_team_seasons": 4534,
   "n_player_seasons": 54582,
   "H_sort": 0.06439062913785809,

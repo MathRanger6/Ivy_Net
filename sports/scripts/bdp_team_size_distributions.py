@@ -40,6 +40,7 @@ from bdp_ai_tj_distributions import (
     subtitle_lines,
 )
 from hero_gallery_paths import BASIC_DATA_PLOTS, ensure_hero_dirs
+from hero_plot_style import PLOT_DPI
 
 BAR_COLOR = "steelblue"
 BAR_ALPHA = 0.85
@@ -182,7 +183,7 @@ def build_figure(
     fig.text(0.5, 0.947, sub2, ha="center", va="top", fontsize=9, color="0.25")
 
     fig.tight_layout(rect=(0, bottom, 1, 0.925))
-    fig.savefig(png, dpi=150)
+    fig.savefig(png, dpi=PLOT_DPI)
     plt.close(fig)
     print(f"Wrote {png.relative_to(REPO)}")
     out = {"without_dft": stats}
@@ -197,11 +198,13 @@ def run_spec(
     overlay_dft: bool = True,
     figsize: tuple[float, float] = (6.8, 6.5),
     out_png: Path | None = None,
+    out_meta_dir: Path | None = None,
 ) -> Path:
     ensure_hero_dirs()
     stem = f"BDP_team_size_{spec.slug}"
     out_png = out_png or (BASIC_DATA_PLOTS / f"{stem}.png")
-    out_meta = BASIC_DATA_PLOTS / f"{stem}.json"
+    meta_dir = out_meta_dir or out_png.parent
+    out_meta = meta_dir / f"{out_png.stem}.json"
 
     panel = _prepare_roster_panel(spec)
     sizes = _roster_sizes(panel)

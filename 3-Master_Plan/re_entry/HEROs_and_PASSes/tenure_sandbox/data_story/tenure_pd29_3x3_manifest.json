@@ -1,0 +1,85 @@
+{
+  "domain": "tenure",
+  "deck": "pd29_data_story",
+  "title": "Tenure data story — decision cohort (PD29)",
+  "subtitle": "infHM · all resolved · Alex Â (pubs_per_career_year) · dept pond LOO · Q16  |  Read top-left → bottom-right",
+  "output_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/data_story/TENURE_DATA_STORY_pd29_3x3.png",
+  "fig_width_in": 24,
+  "fig_height_in": 18,
+  "mosaic_dpi": 400,
+  "panel_dpi": 300,
+  "footer": "Tenure PD29 lock · q16_decision_dept_loo · compositor build_data_story_mosaic.py",
+  "grid": [
+    {
+      "type": "text",
+      "title": "1 · Cohort",
+      "lines": [
+        "Domain: tenure (OpenAlex faculty panel)",
+        "Grain: decision year (PD29)",
+        "Filters: HIGH/MEDIUM · all resolved",
+        "Outcome: tenure vs attrition",
+        "Peer X: dept pond LOO · whole dept",
+        "Metric: pubs_per_career_year (Alex Â)",
+        "",
+        "N = 391 resolved",
+        "Career rate = 280",
+        "Dept LOO computable = 389",
+        "Tenured / attrition = 191 / 200",
+        "",
+        "Panels 7–8: scaled Act II probes",
+        "(not MBB top-7% / z∈[2,3])",
+        "",
+        "Reigning tag:",
+        "q16_decision_dept_loo_infHM"
+      ]
+    },
+    {
+      "type": "image",
+      "title": "2 · Â_i and T̂_j",
+      "path": "3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/basic_data_plots/TENURE_BDP_Ai_Tj_pd29.png"
+    },
+    {
+      "type": "image",
+      "title": "3 · dept pond LOO distribution",
+      "path": "3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/basic_data_plots/TENURE_dept_loo_career_rate_pd29.png"
+    },
+    {
+      "type": "image",
+      "title": "4 · Tenure mass vs Â (ECDF)",
+      "path": "3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/basic_data_plots/TENURE_tenure_mass_ecdf_pd29.png"
+    },
+    {
+      "type": "image",
+      "title": "5 · Dept interval overlap",
+      "path": "3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/basic_data_plots/TENURE_dept_interval_overlap_pd29.png"
+    },
+    {
+      "type": "image",
+      "title": "6 · Dept roster size |T_j|",
+      "path": "3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/basic_data_plots/TENURE_pool_size_decision_pd29.png"
+    },
+    {
+      "type": "image",
+      "title": "7 · CCT — fixed Â z∈[1,2] · Q8 LOO",
+      "path": "3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/act2/CCT_tenure_rate_ai_band_dept_loo_pd29_z1_2_q8.png",
+      "note": "Scaled from MBB z∈[2,3] · n≈33 band · CCT probe"
+    },
+    {
+      "type": "image",
+      "title": "8 · Elite pond — top 20% Â · PW 3+5 LOO",
+      "path": "3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/act2/ELITE_pond_loo_pw3p5_pd29_top20.png",
+      "note": "Scaled from MBB top 7% · n≈56 band · elite tail probe"
+    },
+    {
+      "type": "image",
+      "title": "9 · HERO (Pass A · dept LOO)",
+      "path": "3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/hero/HERO_tenure_q16_decision_dept_loo_infHM_slide.png"
+    }
+  ],
+  "verdict": {
+    "hero_reigning": "q16_decision_dept_loo_infHM",
+    "n_dept_loo": 389,
+    "peer_pool": "whole department at decision year · pubs_per_career_year LOO",
+    "panels_7_8": "CCT z[1,2] Q8 · elite top20% PW3+5 — see act2 JSON (Sep 2026 probes)"
+  }
+}

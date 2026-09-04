@@ -49,6 +49,7 @@ SPORTS = REPO / "sports"
 sys.path.insert(0, str(SCRIPTS))
 
 from hero_gallery_paths import BASIC_DATA_PLOTS, ensure_hero_dirs
+from hero_plot_style import PLOT_DPI
 
 DEFAULT_SPECS = [
     "FP 11_21",
@@ -526,7 +527,7 @@ def build_figure(
     fig.text(0.5, 0.923 if standalone else 0.947, sub2, ha="center", va="top", fontsize=9, color="0.25")
 
     fig.tight_layout(rect=(0, bottom, 1, top))
-    fig.savefig(png, dpi=150)
+    fig.savefig(png, dpi=PLOT_DPI)
     plt.close(fig)
     print(f"Wrote {png.relative_to(REPO)}")
 
@@ -644,7 +645,7 @@ def build_slide14_compare_figure(
     fig.text(0.75, 0.905, "Drafted players only ($Y_{\\mathrm{draft}}=1$)", ha="center", fontsize=10, color="0.2", fontweight="medium")
 
     fig.tight_layout(rect=(0, 0, 1, 0.88))
-    fig.savefig(png, dpi=150)
+    fig.savefig(png, dpi=PLOT_DPI)
     plt.close(fig)
     print(f"Wrote {png.relative_to(REPO)}")
 
@@ -726,7 +727,9 @@ def run_spec(
     drafted_only: bool = False,
     dft_only: bool = False,
     panel_tj_dft: bool = False,
+    panel_rows: str | None = None,
     out_png: Path | None = None,
+    out_meta_dir: Path | None = None,
     figsize: tuple[float, float] = (10.5, 4.2),
 ) -> Path:
     if drafted_only and dft_only:
@@ -748,13 +751,19 @@ def run_spec(
         panel_tj_dft=panel_tj_dft,
     )
     out_png = out_png or (BASIC_DATA_PLOTS / f"{stem}.png")
-    out_meta = BASIC_DATA_PLOTS / f"{stem}.json"
+    meta_dir = out_meta_dir or out_png.parent
+    out_meta = meta_dir / f"{out_png.stem}.json"
     perf_label = plot_label_for_metric(perf_metric)
     perf_axis = rf"{perf_metric.upper()} $z$ within season"
 
     spec_dft = replace(spec, dft=True)
     use_dft_full = _prepare(spec_dft, perf_metric)
     use = _prepare(spec, perf_metric)
+    if str(panel_rows or "").strip().lower() == "last-ps":
+        from sports_pipeline.y_draft_mode import restrict_to_last_season_rows
+
+        use, _ = restrict_to_last_season_rows(use)
+        use_dft_full, _ = restrict_to_last_season_rows(use_dft_full)
     if drafted_only:
         # Â: always ever-draft rows from the **full-panel** z reference (preserves ~1.08 mean).
         # T̂_j with --panel-tj-dft: +DFT roster mean only — do not re-score draftees on +DFT pool.
@@ -769,6 +778,10 @@ def run_spec(
     if use_overlay:
         spec_dft = replace(spec, dft=True)
         use_dft = _prepare(spec_dft, perf_metric)
+        if str(panel_rows or "").strip().lower() == "last-ps":
+            from sports_pipeline.y_draft_mode import restrict_to_last_season_rows
+
+            use_dft, _ = restrict_to_last_season_rows(use_dft)
         ability_dft = use_dft["perf"].to_numpy(dtype=float)
         team_talent_dft = _team_talent(use_dft)
         dft_meta = {
@@ -809,6 +822,7 @@ def run_spec(
         "drafted_only": drafted_only,
         "dft_only": dft_only,
         "panel_tj_dft": panel_tj_dft,
+        "panel_rows": panel_rows,
         "overlay_dft": use_overlay,
         "perf": f"{perf_label} z within season (no poolq winsor)",
         "png": out_png.name,

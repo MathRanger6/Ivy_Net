@@ -1,0 +1,33 @@
+{
+  "diagnostic": "ai_x_loo_hero_probe",
+  "date": "2026-09-03",
+  "seasons": "2009-2021",
+  "panel_rows": "last-ps",
+  "min_minutes": 20.0,
+  "mg": 10,
+  "n_rows": 22795,
+  "n_drafts": 615,
+  "negative_product_rows": 11873,
+  "beta2_poolq_loo_only": 0.001719997755486927,
+  "beta2_perf_only": 0.013527088271266412,
+  "runs": [
+    {
+      "n_bins": 8,
+      "beta2_product": 0.05742411947597783,
+      "png": "HERO_q8_ai_x_loo_lastps_2009_2021.png",
+      "csv": "HERO_q8_ai_x_loo_lastps_2009_2021.csv"
+    },
+    {
+      "n_bins": 10,
+      "beta2_product": 0.05742411947597783,
+      "png": "HERO_q10_ai_x_loo_lastps_2009_2021.png",
+      "csv": "HERO_q10_ai_x_loo_lastps_2009_2021.csv"
+    },
+    {
+      "n_bins": 16,
+      "beta2_product": 0.05742411947597783,
+      "png": "HERO_q16_ai_x_loo_lastps_2009_2021.png",
+      "csv": "HERO_q16_ai_x_loo_lastps_2009_2021.csv"
+    }
+  ]
+}

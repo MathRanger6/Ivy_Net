@@ -3,7 +3,19 @@ Stage 7 — Enriched annual faculty panel
 ========================================
 Collapses the multi-capture Cell 5 panel to one row per (faculty_id × year),
 joins OpenAlex publication counts (Cell 6B), derives career events
-(tenure / attrition / censoring), and writes the analysis-ready JSONL.
+(tenure / attrition / censoring / transfer), and writes the analysis-ready JSONL.
+
+Outcome policy (Charles lock — Sep 2026):
+  • Department-scoped only — no global dataset-end attrition/censoring.
+  • Default gap_tolerance=0: dept has scrape for calendar year Y+1 and person
+    absent from that dept → attrition (failed promotion / left).
+  • No dept scrape for Y+1 → censored (outcome not observable).
+  • Same-dept reappearance after a gap → data gap (extend spell / tenure), not attrition.
+  • Same name_key at a different department later → transferred (flagged; excluded
+    from metric computation until policy is set).
+  • Year Y+1 at same dept with a non-tenured title (not assistant, not associate/full)
+    → attrition + off_tenure_track (OTT).
+  • asst_time replaces years_as_asst_so_far.
 
 Usage (from Cell 7 in 540_tenure_pipeline.ipynb):
 
@@ -14,32 +26,20 @@ Usage (from Cell 7 in 540_tenure_pipeline.ipynb):
         author_path = STAGE6_AUTHORS,
         out_path    = STAGE7_OUT,
     )
-
-Output schema (one JSON record per faculty_id × year):
-    faculty_id, uni_slug, university, name_key, name_display,
-    openalex_id, match_confidence,
-    year, rank, n_snapshots,
-    pubs_year, pubs_cumulative,
-    years_as_asst_so_far,          # non-null only when rank == assistant
-    ever_assistant,                # person ever observed as assistant
-    first_asst_year, last_asst_year,
-    tenure_event,                  # True = became assoc/full within gap_tolerance yrs
-    year_of_tenure,
-    attrition,                     # True = last asst year without promotion, before data ends
-    censored,                      # True = still assistant near end of data window
 """
+
+from __future__ import annotations
 
 import json
 import time
 from collections import defaultdict
 from pathlib import Path
+from typing import Any
 
 # ---------------------------------------------------------------------------
 # Rank taxonomy
 # ---------------------------------------------------------------------------
 
-# Lower number = more informative / tenure-track relevant; used to pick the
-# "best" rank when multiple snapshots in a year disagree.
 _RANK_PRIORITY = {
     "assistant":        0,
     "associate":        1,
@@ -67,13 +67,216 @@ _RANK_PRIORITY = {
     "unknown":         99,
 }
 
-_ASSISTANT_RANKS  = frozenset({"assistant"})
-_PROMOTED_RANKS   = frozenset({"associate", "full", "endowed", "distinguished"})
+_ASSISTANT_RANKS = frozenset({"assistant"})
+_PROMOTED_RANKS = frozenset({"associate", "full", "endowed", "distinguished"})
 
 
-def _best_rank(ranks):
-    """Return the most specific rank from a list, using _RANK_PRIORITY."""
+def _best_rank(ranks: list[str]) -> str:
     return min(ranks, key=lambda r: _RANK_PRIORITY.get(r, 98))
+
+
+def _build_dept_coverage(panel_path: Path, min_year: int, max_year: int) -> tuple[set[tuple[str, int]], dict[str, int]]:
+    """(uni_slug, year) pairs with any scrape row; max calendar year per dept."""
+    dept_years: set[tuple[str, int]] = set()
+    dept_max: dict[str, int] = {}
+    with panel_path.open(encoding="utf-8") as f:
+        for line in f:
+            try:
+                r = json.loads(line)
+            except Exception:
+                continue
+            slug = r.get("uni_slug")
+            yr = r.get("year")
+            if not slug or yr is None:
+                continue
+            yr = int(yr)
+            if yr < min_year or yr > max_year:
+                continue
+            dept_years.add((slug, yr))
+            dept_max[slug] = max(dept_max.get(slug, yr), yr)
+    return dept_years, dept_max
+
+
+def _build_name_key_index(
+    meta: dict[str, dict[str, Any]],
+    annual: dict[str, dict[int, dict[str, Any]]],
+) -> dict[str, list[dict[str, Any]]]:
+    """name_key -> episodes at other faculty_ids / departments."""
+    index: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    for fid, yr_obs in annual.items():
+        m = meta.get(fid, {})
+        nk = (m.get("name_key") or "").strip()
+        if not nk:
+            continue
+        asst_years = sorted(y for y, o in yr_obs.items() if o["rank"] in _ASSISTANT_RANKS)
+        if not asst_years:
+            continue
+        index[nk].append({
+            "faculty_id": fid,
+            "uni_slug": m.get("uni_slug", ""),
+            "asst_years": asst_years,
+            "first_asst_year": min(asst_years),
+        })
+    return dict(index)
+
+
+def _find_transfer(
+    *,
+    faculty_id: str,
+    uni_slug: str,
+    name_key: str,
+    exit_year: int,
+    name_index: dict[str, list[dict[str, Any]]],
+) -> tuple[bool, str | None, int | None, str | None]:
+    """
+    Detect cross-department move via name_key.
+    Returns (transferred, transfer_to_uni, transfer_year, transfer_faculty_id).
+    """
+    episodes = name_index.get(name_key, [])
+    for ep in episodes:
+        if ep["faculty_id"] == faculty_id:
+            continue
+        if ep["uni_slug"] == uni_slug:
+            continue
+        later = [y for y in ep["asst_years"] if y > exit_year]
+        if later:
+            return True, ep["uni_slug"], min(later), ep["faculty_id"]
+    return False, None, None, None
+
+
+def _effective_last_asst_year(ranks_by_year: dict[int, str]) -> int | None:
+    """Last assistant year, extending through same-dept observation gaps."""
+    asst_years = sorted(y for y, rk in ranks_by_year.items() if rk in _ASSISTANT_RANKS)
+    if not asst_years:
+        return None
+    last = asst_years[-1]
+    observed = sorted(ranks_by_year.keys())
+    for y in observed:
+        if y > last and ranks_by_year[y] in _ASSISTANT_RANKS:
+            last = y
+    return last
+
+
+def _tenure_year_at_dept(ranks_by_year: dict[int, str]) -> int | None:
+    """First promoted year on or after first assistant year at this department."""
+    asst_years = [y for y, rk in ranks_by_year.items() if rk in _ASSISTANT_RANKS]
+    if not asst_years:
+        return None
+    first_asst = min(asst_years)
+    promoted = sorted(y for y, rk in ranks_by_year.items() if rk in _PROMOTED_RANKS and y >= first_asst)
+    return promoted[0] if promoted else None
+
+
+def derive_dept_episode_outcome(
+    *,
+    ranks_by_year: dict[int, str],
+    uni_slug: str,
+    faculty_id: str,
+    name_key: str,
+    dept_years: set[tuple[str, int]],
+    dept_max: dict[str, int],
+    name_index: dict[str, list[dict[str, Any]]],
+    gap_tolerance: int = 0,
+) -> dict[str, Any]:
+    """
+    Derive tenure / attrition / censored / transferred for one person at one department.
+    """
+    base: dict[str, Any] = {
+        "ever_assistant": False,
+        "first_asst_year": None,
+        "last_asst_year": None,
+        "asst_time_at_exit": None,
+        "tenure_event": False,
+        "year_of_tenure": None,
+        "attrition": False,
+        "censored": False,
+        "off_tenure_track": False,
+        "ott_year": None,
+        "ott_rank": None,
+        "transferred": False,
+        "transfer_to_uni_slug": None,
+        "transfer_year": None,
+        "transfer_faculty_id": None,
+        "exclude_from_metrics": False,
+    }
+
+    asst_years = sorted(y for y, rk in ranks_by_year.items() if rk in _ASSISTANT_RANKS)
+    if not asst_years:
+        return base
+
+    first_asst = min(asst_years)
+    tenure_year = _tenure_year_at_dept(ranks_by_year)
+    last_asst = _effective_last_asst_year(ranks_by_year)
+    assert last_asst is not None
+
+    asst_time_at_exit = sum(1 for y in range(first_asst, last_asst + 1) if ranks_by_year.get(y) in _ASSISTANT_RANKS)
+
+    base.update({
+        "ever_assistant": True,
+        "first_asst_year": first_asst,
+        "last_asst_year": last_asst,
+        "asst_time_at_exit": asst_time_at_exit,
+    })
+
+    if tenure_year is not None:
+        base.update({
+            "tenure_event": True,
+            "year_of_tenure": tenure_year,
+        })
+        return base
+
+    Y = last_asst
+    observed_years = set(ranks_by_year.keys())
+
+    transferred, to_uni, t_year, t_fid = _find_transfer(
+        faculty_id=faculty_id,
+        uni_slug=uni_slug,
+        name_key=name_key,
+        exit_year=Y,
+        name_index=name_index,
+    )
+    if transferred:
+        base.update({
+            "transferred": True,
+            "transfer_to_uni_slug": to_uni,
+            "transfer_year": t_year,
+            "transfer_faculty_id": t_fid,
+            "exclude_from_metrics": True,
+        })
+        return base
+
+    next_year = Y + 1
+    dept_has_next = (uni_slug, next_year) in dept_years
+
+    if dept_has_next:
+        if next_year not in observed_years:
+            dept_last = dept_max.get(uni_slug, next_year)
+            if gap_tolerance > 0 and next_year >= dept_last - gap_tolerance + 1:
+                base["censored"] = True
+            else:
+                base["attrition"] = True
+        else:
+            rank_next = ranks_by_year[next_year]
+            if rank_next in _ASSISTANT_RANKS:
+                # Still assistant in Y+1 — effective_last_asst should have extended; censor.
+                base["censored"] = True
+            elif rank_next in _PROMOTED_RANKS:
+                base.update({
+                    "tenure_event": True,
+                    "year_of_tenure": next_year,
+                })
+            else:
+                # Listed at dept in Y+1 under a non-tenured title → OTT attrition.
+                base.update({
+                    "attrition": True,
+                    "off_tenure_track": True,
+                    "ott_year": next_year,
+                    "ott_rank": rank_next,
+                })
+    else:
+        base["censored"] = True
+
+    return base
 
 
 # ---------------------------------------------------------------------------
@@ -87,7 +290,8 @@ def build_annual_panel(
     out_path,
     min_year=2000,
     max_year=2024,
-    gap_tolerance=2,
+    gap_tolerance=0,
+    transfers_audit_path=None,
 ):
     """
     Build the Stage 7 enriched year-level panel.
@@ -96,24 +300,28 @@ def build_annual_panel(
     ----------
     panel_path    : faculty_panel.jsonl          (Cell 5 output)
     works_path    : openalex_works_by_year.jsonl (Cell 6B output)
-    author_path   : openalex_author_ids.jsonl    (Cell 6A output; adds openalex_id + confidence)
-    out_path      : enriched panel output path   (faculty_panel_enriched.jsonl)
-    min_year      : earliest year to include in output
-    max_year      : latest year to include in output
-    gap_tolerance : max gap (years) to link a promotion event to the last assistant year
+    author_path   : openalex_author_ids.jsonl    (Cell 6A output)
+    out_path      : faculty_panel_enriched.jsonl
+    min_year, max_year : calendar years retained in output rows
+    gap_tolerance : benefit-of-doubt years at dept scrape boundary (default 0)
+    transfers_audit_path : optional JSONL of transferred episodes
 
     Returns
     -------
-    dict  — sample-loss accounting table (also printed to stdout)
+    dict  — sample-loss accounting table
     """
     t0 = time.time()
+    panel_path = Path(panel_path)
 
-    # ── 1. Load OpenAlex author IDs → {faculty_id: (openalex_id, confidence)} ─
+    print("  Building department-year coverage index …")
+    dept_years, dept_max = _build_dept_coverage(panel_path, min_year, max_year)
+    print(f"    {len(dept_years):,} dept-year scrape pairs · {len(dept_max):,} departments")
+
     print("  Loading OpenAlex author IDs …")
     author_path = Path(author_path)
     oa_ids: dict[str, tuple[str, str]] = {}
     if author_path.exists():
-        with open(author_path, encoding="utf-8") as f:
+        with author_path.open(encoding="utf-8") as f:
             for line in f:
                 try:
                     r = json.loads(line)
@@ -126,39 +334,35 @@ def build_annual_panel(
                     pass
     print(f"    {len(oa_ids):,} author-ID records loaded")
 
-    # ── 2. Load OpenAlex works → {faculty_id: {year: n_works}} ─────────────────
     print("  Loading OpenAlex works …")
     works_path = Path(works_path)
     works: dict[str, dict[int, int]] = defaultdict(dict)
     n_works_rows = 0
     if works_path.exists():
-        with open(works_path, encoding="utf-8") as f:
+        with works_path.open(encoding="utf-8") as f:
             for line in f:
                 try:
                     r = json.loads(line)
                     fid = r["faculty_id"]
-                    yr  = int(r["year"])
+                    yr = int(r["year"])
                     works[fid][yr] = int(r.get("n_works", 0))
                     n_works_rows += 1
                 except Exception:
                     pass
     print(f"    {n_works_rows:,} works rows for {len(works):,} faculty_ids")
 
-    # ── 3. Load panel → {faculty_id: {year: [rank, …]}} ────────────────────────
     print("  Loading faculty panel …")
-    panel_path = Path(panel_path)
-    # by_person[fid][year] = list of rank strings seen that year
     by_person: dict[str, dict[int, list[str]]] = defaultdict(lambda: defaultdict(list))
-    meta: dict[str, dict] = {}   # one metadata dict per faculty_id
+    meta: dict[str, dict[str, Any]] = {}
     n_panel_rows = 0
-    with open(panel_path, encoding="utf-8") as f:
+    with panel_path.open(encoding="utf-8") as f:
         for line in f:
             try:
                 r = json.loads(line)
             except Exception:
                 continue
             fid = r.get("faculty_id")
-            yr  = r.get("year")
+            yr = r.get("year")
             if not fid or yr is None:
                 continue
             yr = int(yr)
@@ -168,155 +372,128 @@ def build_annual_panel(
             by_person[fid][yr].append(rank)
             if fid not in meta:
                 meta[fid] = {
-                    "faculty_id":   fid,
-                    "uni_slug":     r.get("uni_slug", ""),
-                    "university":   r.get("university", ""),
-                    "name_key":     r.get("name_key", ""),
+                    "faculty_id": fid,
+                    "uni_slug": r.get("uni_slug", ""),
+                    "university": r.get("university", ""),
+                    "name_key": r.get("name_key", ""),
                     "name_display": r.get("name_display", ""),
                 }
             n_panel_rows += 1
     print(f"    {n_panel_rows:,} panel rows  →  {len(by_person):,} unique faculty_ids")
 
-    # ── 4. Collapse to (faculty_id × year) with best rank ───────────────────────
     print("  Collapsing to annual observations …")
-    # annual[fid][year] = {"rank": str, "n_snapshots": int}
-    annual: dict[str, dict[int, dict]] = {}
+    annual: dict[str, dict[int, dict[str, Any]]] = {}
     for fid, yr_ranks in by_person.items():
         annual[fid] = {}
         for yr, ranks in yr_ranks.items():
             annual[fid][yr] = {
-                "rank":        _best_rank(ranks),
+                "rank": _best_rank(ranks),
                 "n_snapshots": len(ranks),
             }
-    del by_person  # free ~500 MB
+    del by_person
 
-    # ── 5. Derive career events per faculty_id ────────────────────────────────
-    print("  Deriving career events …")
-    person_events: dict[str, dict] = {}
+    print("  Deriving department-scoped career events …")
+    name_index = _build_name_key_index(meta, annual)
+    person_events: dict[str, dict[str, Any]] = {}
+    transfer_records: list[dict[str, Any]] = []
 
     for fid, yr_obs in annual.items():
-        sorted_years      = sorted(yr_obs.keys())
-        ranks_by_year     = {yr: yr_obs[yr]["rank"] for yr in sorted_years}
+        m = meta[fid]
+        ranks_by_year = {yr: obs["rank"] for yr, obs in yr_obs.items()}
+        ev = derive_dept_episode_outcome(
+            ranks_by_year=ranks_by_year,
+            uni_slug=m.get("uni_slug", ""),
+            faculty_id=fid,
+            name_key=(m.get("name_key") or "").strip(),
+            dept_years=dept_years,
+            dept_max=dept_max,
+            name_index=name_index,
+            gap_tolerance=gap_tolerance,
+        )
+        person_events[fid] = ev
+        if ev.get("transferred"):
+            transfer_records.append({
+                "faculty_id": fid,
+                "name_display": m.get("name_display"),
+                "name_key": m.get("name_key"),
+                "from_uni_slug": m.get("uni_slug"),
+                "last_asst_year": ev.get("last_asst_year"),
+                "asst_time_at_exit": ev.get("asst_time_at_exit"),
+                "transfer_to_uni_slug": ev.get("transfer_to_uni_slug"),
+                "transfer_year": ev.get("transfer_year"),
+                "transfer_faculty_id": ev.get("transfer_faculty_id"),
+            })
 
-        asst_years     = [y for y in sorted_years if ranks_by_year[y] in _ASSISTANT_RANKS]
-        promoted_years = [y for y in sorted_years if ranks_by_year[y] in _PROMOTED_RANKS]
+    if transfers_audit_path:
+        audit_path = Path(transfers_audit_path)
+        audit_path.parent.mkdir(parents=True, exist_ok=True)
+        with audit_path.open("w", encoding="utf-8") as af:
+            for rec in transfer_records:
+                af.write(json.dumps(rec) + "\n")
+        print(f"    Wrote {len(transfer_records):,} transfer audit rows → {audit_path.name}")
 
-        if not asst_years:
-            person_events[fid] = {
-                "ever_assistant": False,
-                "first_asst_year": None,
-                "last_asst_year":  None,
-                "tenure_event":    False,
-                "year_of_tenure":  None,
-                "attrition":       False,
-                "censored":        False,
-            }
-            continue
-
-        first_asst = min(asst_years)
-        last_asst  = max(asst_years)
-
-        # Tenure event: appeared as promoted within gap_tolerance years after last assistant year.
-        # We also accept promotions that appeared in the same year (could be same-year transition).
-        tenure_year = None
-        for py in sorted(promoted_years):
-            if py >= first_asst and py <= last_asst + gap_tolerance:
-                # Promoted while or shortly after being an assistant — count it.
-                # (If they're simultaneously listed as "associate" in one snapshot
-                # and "assistant" in another in the same year, that year is the transition.)
-                if py > last_asst or (py == last_asst and ranks_by_year.get(py) in _PROMOTED_RANKS):
-                    tenure_year = py
-                    break
-                # Promoted in same year as last assistant — transition year
-                if py == last_asst:
-                    tenure_year = py
-                    break
-
-        # If no close promoted year, check further out (different path — longer gap)
-        if tenure_year is None:
-            future = [py for py in promoted_years if py > last_asst]
-            if future:
-                candidate = min(future)
-                if candidate <= last_asst + gap_tolerance:
-                    tenure_year = candidate
-
-        attrition = False
-        censored  = False
-        if tenure_year is None:
-            # Not promoted within tolerance: attrition if disappeared before end of window,
-            # censored if still active near the end.
-            if last_asst >= max_year - gap_tolerance:
-                censored = True   # right-censored (still in data at the end)
-            else:
-                attrition = True  # disappeared before data ends
-
-        person_events[fid] = {
-            "ever_assistant":  True,
-            "first_asst_year": first_asst,
-            "last_asst_year":  last_asst,
-            "tenure_event":    tenure_year is not None,
-            "year_of_tenure":  tenure_year,
-            "attrition":       attrition,
-            "censored":        censored,
-        }
-
-    # ── 6. Write enriched panel ─────────────────────────────────────────────────
     print("  Writing enriched panel …")
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     n_out = 0
 
-    with open(out_path, "w", encoding="utf-8") as fout:
+    with out_path.open("w", encoding="utf-8") as fout:
         for fid in sorted(annual.keys()):
-            m         = meta[fid]
-            ev        = person_events[fid]
+            m = meta[fid]
+            ev = person_events[fid]
             fid_works = works.get(fid, {})
             oa_id, oa_conf = oa_ids.get(fid, ("", "NONE"))
             sorted_years = sorted(annual[fid].keys())
 
+            asst_time = 0
             cum = 0
-            years_as_asst_so_far = 0
             for yr in sorted_years:
-                obs    = annual[fid][yr]
-                rank   = obs["rank"]
+                obs = annual[fid][yr]
+                rank = obs["rank"]
                 n_pubs = fid_works.get(yr, 0)
-                cum   += n_pubs
+                cum += n_pubs
                 if rank in _ASSISTANT_RANKS:
-                    years_as_asst_so_far += 1
+                    asst_time += 1
 
                 rec = {
                     **m,
-                    "openalex_id":         oa_id,
-                    "match_confidence":    oa_conf,
-                    "year":                yr,
-                    "rank":                rank,
-                    "n_snapshots":         obs["n_snapshots"],
-                    "pubs_year":           n_pubs,
-                    "pubs_cumulative":     cum,
-                    # years_as_asst_so_far: count of prior + current assistant-rank years
-                    # non-null only when rank == assistant so analysis can filter cleanly
-                    "years_as_asst_so_far": (years_as_asst_so_far
-                                             if rank in _ASSISTANT_RANKS else None),
-                    # Career-level event flags (same value for all rows of this person)
-                    "ever_assistant":  ev["ever_assistant"],
+                    "openalex_id": oa_id,
+                    "match_confidence": oa_conf,
+                    "year": yr,
+                    "rank": rank,
+                    "n_snapshots": obs["n_snapshots"],
+                    "pubs_year": n_pubs,
+                    "pubs_cumulative": cum,
+                    "asst_time": asst_time if rank in _ASSISTANT_RANKS else None,
+                    "ever_assistant": ev["ever_assistant"],
                     "first_asst_year": ev["first_asst_year"],
-                    "last_asst_year":  ev["last_asst_year"],
-                    "tenure_event":    ev["tenure_event"],
-                    "year_of_tenure":  ev["year_of_tenure"],
-                    "attrition":       ev["attrition"],
-                    "censored":        ev["censored"],
+                    "last_asst_year": ev["last_asst_year"],
+                    "tenure_event": ev["tenure_event"],
+                    "year_of_tenure": ev["year_of_tenure"],
+                    "attrition": ev["attrition"],
+                    "censored": ev["censored"],
+                    "off_tenure_track": ev.get("off_tenure_track", False),
+                    "ott_year": ev.get("ott_year"),
+                    "ott_rank": ev.get("ott_rank"),
+                    "transferred": ev["transferred"],
+                    "transfer_to_uni_slug": ev.get("transfer_to_uni_slug"),
+                    "transfer_year": ev.get("transfer_year"),
+                    "transfer_faculty_id": ev.get("transfer_faculty_id"),
+                    "exclude_from_metrics": ev.get("exclude_from_metrics", False),
                 }
                 fout.write(json.dumps(rec) + "\n")
                 n_out += 1
 
-    # ── 7. Sample-loss accounting ────────────────────────────────────────────────
-    n_fids          = len(annual)
-    n_asst          = sum(1 for e in person_events.values() if e["ever_assistant"])
-    n_tenure        = sum(1 for e in person_events.values() if e["tenure_event"])
-    n_attrition     = sum(1 for e in person_events.values() if e["attrition"])
-    n_censored      = sum(1 for e in person_events.values() if e["censored"])
-    n_with_works    = sum(1 for fid in annual if works.get(fid))
-    n_asst_w_works  = sum(
+    n_fids = len(annual)
+    n_asst = sum(1 for e in person_events.values() if e["ever_assistant"])
+    n_tenure = sum(1 for e in person_events.values() if e["tenure_event"])
+    n_attrition = sum(1 for e in person_events.values() if e["attrition"])
+    n_ott = sum(1 for e in person_events.values() if e.get("off_tenure_track"))
+    n_censored = sum(1 for e in person_events.values() if e["censored"])
+    n_transferred = sum(1 for e in person_events.values() if e["transferred"])
+    n_resolved = n_tenure + n_attrition
+    n_with_works = sum(1 for fid in annual if works.get(fid))
+    n_asst_w_works = sum(
         1 for fid, e in person_events.items()
         if e["ever_assistant"] and works.get(fid)
     )
@@ -327,27 +504,31 @@ def build_annual_panel(
     print(f"  Output rows          : {n_out:,}")
     print(f"  Unique faculty_ids   : {n_fids:,}")
     print(f"  ├─ ever assistant    : {n_asst:,}  ({n_asst/n_fids*100:.1f}%)")
-    print(f"  │   ├─ tenure event  : {n_tenure:,}  ({n_tenure/max(n_asst,1)*100:.1f}% of asst)")
-    print(f"  │   ├─ attrition     : {n_attrition:,}  ({n_attrition/max(n_asst,1)*100:.1f}% of asst)")
-    print(f"  │   └─ censored      : {n_censored:,}  ({n_censored/max(n_asst,1)*100:.1f}% of asst)")
+    print(f"  │   ├─ tenure        : {n_tenure:,}  ({n_tenure/max(n_asst,1)*100:.1f}% of asst)")
+    print(f"  │   ├─ attrition     : {n_attrition:,}  ({n_attrition/max(n_asst,1)*100:.1f}% of asst · incl. OTT {n_ott:,})")
+    print(f"  │   ├─ censored      : {n_censored:,}  ({n_censored/max(n_asst,1)*100:.1f}% of asst)")
+    print(f"  │   ├─ transferred   : {n_transferred:,}  ({n_transferred/max(n_asst,1)*100:.1f}% of asst · excluded from metrics)")
+    print(f"  │   └─ resolved      : {n_resolved:,}  (tenure + attrition)")
     print(f"  Faculty w/ OA works  : {n_with_works:,}  ({n_with_works/n_fids*100:.1f}% of all)")
     print(f"  Asst. faculty w/ OA  : {n_asst_w_works:,}  ({n_asst_w_works/max(n_asst,1)*100:.1f}% of asst)")
-    print(f"  {'─'*60}")
-    print(f"  ⚠  NOTE: {n_asst - n_asst_w_works:,} assistant faculty have no OA publication data.")
-    print(f"     Peer-pool models using pubs will be restricted to the {n_asst_w_works:,}-person subset.")
+    print(f"  gap_tolerance        : {gap_tolerance}")
     print(f"  {'─'*60}")
 
-    loss = {
-        "panel_rows_loaded":        n_panel_rows,
-        "unique_faculty_ids":       n_fids,
-        "ever_assistant":           n_asst,
-        "tenure_event":             n_tenure,
-        "attrition":                n_attrition,
-        "censored":                 n_censored,
-        "faculty_with_oa_works":    n_with_works,
-        "asst_faculty_with_oa":     n_asst_w_works,
-        "output_rows":              n_out,
-        "gap_tolerance_yrs":        gap_tolerance,
-        "year_range":               f"{min_year}–{max_year}",
+    return {
+        "panel_rows_loaded": n_panel_rows,
+        "unique_faculty_ids": n_fids,
+        "ever_assistant": n_asst,
+        "tenure_event": n_tenure,
+        "attrition": n_attrition,
+        "off_tenure_track": n_ott,
+        "censored": n_censored,
+        "transferred": n_transferred,
+        "resolved": n_resolved,
+        "faculty_with_oa_works": n_with_works,
+        "asst_faculty_with_oa": n_asst_w_works,
+        "output_rows": n_out,
+        "gap_tolerance_yrs": gap_tolerance,
+        "year_range": f"{min_year}–{max_year}",
+        "dept_year_pairs": len(dept_years),
+        "transfer_audit_rows": len(transfer_records),
     }
-    return loss

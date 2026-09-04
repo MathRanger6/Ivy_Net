@@ -290,11 +290,14 @@ def _attach_roster_pressure_x(df: pd.DataFrame, spec: PassAHeroSpec) -> pd.DataF
 
 def roster_ventile_table(df: pd.DataFrame, spec: PassAHeroSpec) -> pd.DataFrame:
     """Bin ``roster_x``; within each bin, mean ``Y_draft``."""
+    import numpy as np
+
     from sports_pipeline.panel_build import assign_poolq_bin_labels
 
     work = df.dropna(subset=["roster_x", "Y_draft"]).copy()
-    work["vent"] = assign_poolq_bin_labels(work["roster_x"], spec.n_bins, spec.poolq_binning)
-    return (
+    x = pd.to_numeric(work["roster_x"], errors="coerce")
+    work["vent"] = assign_poolq_bin_labels(x, spec.n_bins, spec.poolq_binning)
+    tbl = (
         work.dropna(subset=["vent"])
         .groupby("vent", observed=True)
         .agg(
@@ -302,10 +305,24 @@ def roster_ventile_table(df: pd.DataFrame, spec: PassAHeroSpec) -> pd.DataFrame:
             draft_rate=("Y_draft", "mean"),
             poolq_mean=("roster_x", "mean"),
             poolq_median=("roster_x", "median"),
+            x_min=("roster_x", "min"),
+            x_max=("roster_x", "max"),
         )
         .reset_index()
         .sort_values("vent")
     )
+    if str(spec.poolq_binning).strip().lower() == "equal_width":
+        from bdp_reigning_loo_plots import _equal_width_edges
+
+        edges = _equal_width_edges(x.dropna().to_numpy(dtype=float), spec.n_bins)
+        tbl["edge_lo"] = tbl["vent"].astype(int).map(lambda v: float(edges[int(v)]))
+        tbl["edge_hi"] = tbl["vent"].astype(int).map(lambda v: float(edges[int(v) + 1]))
+        tbl["x_center"] = (tbl["edge_lo"] + tbl["edge_hi"]) / 2.0
+    else:
+        tbl["edge_lo"] = tbl["x_min"]
+        tbl["edge_hi"] = tbl["x_max"]
+        tbl["x_center"] = tbl["poolq_mean"]
+    return tbl
 
 
 def _roster_quadratic_lpm(use: pd.DataFrame) -> pd.Series:
@@ -613,31 +630,71 @@ def build_hero_single_panel(
 ) -> None:
     """Standalone hero PNG (poolq_loo ventiles only)."""
     from gallery_mathtext import configure_matplotlib_mathtext
+    from hero_plot_style import (
+        PLOT_DPI,
+        annotate_bar_n,
+        count_weighted_bar_colors,
+        format_poolq_tick,
+        finalize_bar_figure,
+        layout_bar_figure,
+        set_wrapped_ax_title,
+        stamp_wrapped_footer,
+    )
 
     configure_matplotlib_mathtext()
     spec = _hero_spec()
     seasons = seasons_label(_w().season_min, _w().season_max)
     xtex = roster_x_mathtext(spec.roster_x)
-    fig, ax = plt.subplots(figsize=(7.5, 4.5))
+    bin_badge = spec.bin_mode_label
+    fig, ax = plt.subplots(figsize=(10.5, 5.8))
     x = roster["vent"].to_numpy(dtype=float) + 1
     y = roster["draft_rate"].to_numpy(dtype=float)
-    ax.bar(x, y, color="steelblue", edgecolor="white", alpha=0.9)
-    ax.set_xlabel(rf"Ventile bin ($1$ = lowest {xtex})")
+    counts = roster["n"].to_numpy(dtype=int)
+    is_ew = str(spec.poolq_binning).strip().lower() == "equal_width"
+    if is_ew:
+        bar_colors = count_weighted_bar_colors(counts, cmap_name="Blues")
+    else:
+        bar_colors = ["steelblue"] * len(x)
+    ax.bar(x, y, color=bar_colors, edgecolor="white", alpha=0.92, width=0.85)
+    annotate_bar_n(ax, x, y, counts, bar_colors)
+    ax.set_xticks(x)
+    if is_ew:
+        ax.set_xticklabels([format_poolq_tick(v) for v in roster["x_center"]], fontsize=7, rotation=45, ha="right")
+        ax.set_xlabel(rf"poolq$_{{\mathrm{{LOO}}}}$ bin midpoint · {bin_badge}", labelpad=2)
+    else:
+        ax.set_xlabel(rf"Bin ($1$ = lowest {xtex}) · {bin_badge}")
     ax.set_ylabel(r"Mean $Y_{\mathrm{draft}}$")
-    ax.set_title(
-        rf"Empirical hero — roster context · MBB {seasons}\n"
-        rf"{spec.plot_spec_line} · POST-QC panel{_y_label_note()}",
+    set_wrapped_ax_title(
+        ax,
+        [
+            rf"Empirical hero — roster context · MBB {seasons}",
+            rf"{bin_badge} · {spec.plot_spec_line} · POST-QC panel{_y_label_note()}",
+        ],
         fontsize=10,
     )
-    ax.set_xticks(x)
     ax.grid(axis="y", alpha=0.25, linewidth=0.5)
     note = _lpm_annotation(coef)
     if note:
         ax.text(0.02, 0.96, note, transform=ax.transAxes, fontsize=8, va="top")
-    stamp_figure_footer(fig, prov.footer_text())
-    fig.tight_layout(rect=(0, 0.05, 1, 1))
+    seasons_short = seasons_label(_w().season_min, _w().season_max)
+    pop = spec.population_label
+    y_mode = str(spec.y_draft_mode).strip().lower()
+    finalize_bar_figure(
+        fig,
+        [
+            (
+                f"HERO · poolq_LOO · {seasons_short} · {bin_badge} · "
+                f"n={prov.n_rows:,} · drafts={prov.n_drafts:,}"
+            ),
+            (
+                f"min{spec.min_minutes:g} mg{spec.min_team_season_games} · {pop} · "
+                f"Y={y_mode} · winsor {spec.winsor_lo:g}–{spec.winsor_hi:g}"
+            ),
+        ],
+        rotated_x=is_ew,
+    )
     png = out_dir / _hero_png_name()
-    fig.savefig(png, dpi=150, bbox_inches="tight")
+    fig.savefig(png, dpi=PLOT_DPI, facecolor="white")
     plt.close(fig)
     print(f"Wrote {png}")
 
@@ -652,6 +709,7 @@ def build_side_by_side(
 ) -> None:
     """Left = talent (ability ventiles); right = roster pressure (poolq_loo hero)."""
     from gallery_mathtext import configure_matplotlib_mathtext
+    from hero_plot_style import PLOT_DPI
 
     configure_matplotlib_mathtext()
     spec = _hero_spec()
@@ -697,7 +755,7 @@ def build_side_by_side(
     stamp_figure_footer(fig, prov.footer_text())
     fig.tight_layout(rect=(0, 0.05, 1, 0.98))
     png = out_dir / _pass_a_png_name()
-    fig.savefig(png, dpi=150, bbox_inches="tight")
+    fig.savefig(png, dpi=PLOT_DPI, bbox_inches="tight")
     plt.close(fig)
     print(f"Wrote {png}")
 

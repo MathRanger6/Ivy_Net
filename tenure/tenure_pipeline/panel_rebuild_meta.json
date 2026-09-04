@@ -1,0 +1,30 @@
+{
+  "stage7": {
+    "panel_rows_loaded": 2560018,
+    "unique_faculty_ids": 29274,
+    "ever_assistant": 2331,
+    "tenure_event": 471,
+    "attrition": 618,
+    "off_tenure_track": 140,
+    "censored": 1225,
+    "transferred": 17,
+    "resolved": 1089,
+    "faculty_with_oa_works": 3527,
+    "asst_faculty_with_oa": 554,
+    "output_rows": 106559,
+    "gap_tolerance_yrs": 0,
+    "year_range": "2000\u20132024",
+    "dept_year_pairs": 1957,
+    "transfer_audit_rows": 17
+  },
+  "stage8": {
+    "input_rows": 106559,
+    "output_rows": 106559,
+    "dept_years_in_pool": 621,
+    "dept_years_oa_ge2": 307,
+    "dept_years_oa_zero": 281,
+    "asst_rows_loo_computable": 4256,
+    "asst_rows_loo_none": 2335,
+    "asst_rows_rank_computable": 3617
+  }
+}

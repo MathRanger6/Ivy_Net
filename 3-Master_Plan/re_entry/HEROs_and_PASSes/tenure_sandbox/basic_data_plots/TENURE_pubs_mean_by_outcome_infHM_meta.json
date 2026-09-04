@@ -1,36 +1,36 @@
 {
   "diagnostic": "tenure_pubs_mean_by_outcome",
-  "date": "2026-09-01",
-  "grain": "person-level mean pubs_year over assistant years",
+  "date": "2026-09-02",
+  "grain": "ASST-PS (assistant person-years) \u00b7 mean",
   "filter": "HIGH/MEDIUM inference \u00b7 LOO computable",
   "tenured": {
     "label": "tenured",
-    "n": 174,
-    "mean": 7.728434592227696,
-    "std": 8.44743061964554,
+    "n": 191,
+    "mean": 7.668748441785093,
+    "std": 8.236752560776196,
     "min": 0.0,
     "max": 47.0,
-    "median": 6.1625
+    "median": 6.0
   },
   "attrition": {
     "label": "attrition",
-    "n": 202,
-    "mean": 4.442079207920792,
-    "std": 5.745119464127134,
+    "n": 194,
+    "mean": 5.963438880706922,
+    "std": 15.151739538736477,
     "min": 0.0,
-    "max": 42.0,
-    "median": 3.0
+    "max": 178.0,
+    "median": 2.833333333333333
   },
   "censored": {
     "label": "censored",
-    "n": 420,
-    "mean": 6.456269841269841,
-    "std": 16.60920118484535,
+    "n": 402,
+    "mean": 5.690612414119877,
+    "std": 13.899327642986108,
     "min": 0.0,
     "max": 237.0,
-    "median": 2.0
+    "median": 1.6666666666666667
   },
-  "display_x_cap": 35.41124999999979,
+  "display_x_cap": 35.83649999999994,
   "outputs": {
     "png": "TENURE_pubs_mean_by_outcome_infHM.png"
   }

@@ -40,10 +40,16 @@ def fhero_bin_label(
     tj_n_low: int = 4,
     tj_n_high: int = 7,
     tj_n_bins: int = 24,
+    axis: str = "T̂_j",
 ) -> str:
     if str(tj_binning).strip().lower() == "piecewise_tail":
-        return f"piecewise {int(tj_n_low)}+{int(tj_n_high)} T̂_j bins"
-    return f"EW{int(tj_n_bins)} T̂_j bins"
+        return f"PW {int(tj_n_low)}+{int(tj_n_high)} {axis} bins"
+    return f"EW{int(tj_n_bins)} {axis} bins"
+
+
+def poolq_binning_short(*, poolq_binning: str, n_bins: int) -> str:
+    """On-figure binning badge (QTL16 / EW16)."""
+    return hero_bin_label(poolq_binning=poolq_binning, n_bins=n_bins)
 
 
 def population_slug(*, dft: bool) -> str:

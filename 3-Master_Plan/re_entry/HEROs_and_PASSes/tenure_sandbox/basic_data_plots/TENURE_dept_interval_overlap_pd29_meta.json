@@ -1,0 +1,42 @@
+{
+  "diagnostic": "tenure_dept_interval_overlap_pd29",
+  "date": "2026-09-03",
+  "grain": "Decision cohort \u00b7 dept pond LOO \u00b7 whole dept \u00b7 pubs_per_career_year",
+  "perf": "pubs_per_career_year z-scored within calendar year",
+  "pool_unit": "uni_slug \u00d7 decision calendar year (whole dept roster)",
+  "pool_min_faculty": 2,
+  "seasons": "2000-2024",
+  "coverage_max": 748,
+  "coverage_max_normalized": 0.9676584734799483,
+  "coverage_mean": 85.4525,
+  "coverage_frac_gt_1": 0.9725,
+  "coverage_disjoint_max": null,
+  "coverage_disjoint_mean": null,
+  "n_team_seasons": 773,
+  "n_player_seasons": 16605,
+  "H_sort": 0.1206652305925493,
+  "perf_span": {
+    "label": "perf_span",
+    "n": 773,
+    "mean": 2.850408416561994,
+    "std": 2.2837816684320402,
+    "min": 0.024326638964437264,
+    "max": 25.029718360057476,
+    "median": 2.366056234907452
+  },
+  "T_j_hat": {
+    "label": "\\hat{T}_j",
+    "n": 773,
+    "mean": -0.09267678434833393,
+    "std": 0.42584267687732513,
+    "min": -0.9920794339611616,
+    "max": 6.569634879346432,
+    "median": -0.1624790050132128
+  },
+  "n_dept_year_pools": 773,
+  "n_faculty_year_rows": 16605,
+  "outputs": {
+    "png": "TENURE_dept_interval_overlap_pd29.png",
+    "dept_year_csv": "TENURE_dept_interval_overlap_pd29_dept_year.csv"
+  }
+}

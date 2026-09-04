@@ -1,6 +1,6 @@
 {
   "diagnostic": "bdp_team_size_distributions",
-  "date": "2026-08-27",
+  "date": "2026-09-03",
   "bdp_spec": "mg10 min20 09_21",
   "seasons": "2009-2021",
   "qc": "drop_dash_placeholder_names=True",

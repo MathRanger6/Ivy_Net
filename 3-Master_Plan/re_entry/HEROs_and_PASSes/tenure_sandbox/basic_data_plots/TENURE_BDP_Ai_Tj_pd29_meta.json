@@ -1,0 +1,27 @@
+{
+  "diagnostic": "tenure_ai_tj_pd29",
+  "date": "2026-09-03",
+  "grain": "Decision cohort \u00b7 all resolved \u00b7 Alex \u00c2 (pubs_per_career_year)",
+  "own_career_rate": {
+    "label": "own_career_rate",
+    "n": 279,
+    "mean": 4.849719555274058,
+    "std": 5.5107613010793095,
+    "min": 0.05357142857142857,
+    "max": 67.0909090909091,
+    "median": 3.6666666666666665
+  },
+  "dept_mean_career_rate": {
+    "label": "dept_mean_career_rate",
+    "n": 389,
+    "mean": 4.762964824350469,
+    "std": 1.4670156671739394,
+    "min": 0.8503344481605352,
+    "max": 8.514151463730252,
+    "median": 4.666068077838415
+  },
+  "n_cohort": 391,
+  "outputs": {
+    "png": "TENURE_BDP_Ai_Tj_pd29.png"
+  }
+}

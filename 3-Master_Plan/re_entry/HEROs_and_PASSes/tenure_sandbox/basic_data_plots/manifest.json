@@ -1,18 +1,18 @@
 {
-  "date": "2026-09-01",
-  "filter": "infHM",
+  "date": "2026-09-03",
+  "mode": "pd29",
+  "filter_v0": "infHM",
+  "filter_pd29": "all_resolved",
   "plots": [
     {
-      "key": "pubs_by_outcome",
-      "png": "TENURE_pubs_mean_by_outcome_infHM.png"
+      "mode": "pd29",
+      "key": "dept_loo",
+      "png": "TENURE_dept_loo_career_rate_pd29.png"
     },
     {
-      "key": "pubs_tenured",
-      "png": "TENURE_pubs_mean_tenured_infHM.png"
-    },
-    {
-      "key": "loo_by_outcome",
-      "png": "TENURE_poolq_loo_by_outcome_infHM.png"
+      "mode": "pd29",
+      "key": "dept_loo_by_outcome",
+      "png": "TENURE_dept_loo_career_rate_by_outcome_pd29.png"
     }
   ]
 }

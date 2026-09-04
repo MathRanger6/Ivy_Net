@@ -1,35 +1,35 @@
 {
   "diagnostic": "tenure_poolq_loo_by_outcome",
-  "date": "2026-09-01",
-  "grain": "person-level mean poolq_loo_mean",
+  "date": "2026-09-02",
+  "grain": "ASST-PS (assistant person-years) \u00b7 mean",
   "tenured": {
     "label": "tenured",
-    "n": 174,
-    "mean": 4.812170920452472,
-    "std": 3.340547933835638,
+    "n": 191,
+    "mean": 4.753148247112108,
+    "std": 3.314032792349473,
     "min": 0.0,
     "max": 27.0,
-    "median": 3.8406325
+    "median": 3.81815
   },
   "attrition": {
     "label": "attrition",
-    "n": 202,
-    "mean": 3.9457906188118805,
-    "std": 2.799316017786373,
+    "n": 194,
+    "mean": 3.8606456422844055,
+    "std": 2.3108019476531787,
     "min": 0.0,
-    "max": 21.0,
-    "median": 3.5013950000000005
+    "max": 11.809516666666667,
+    "median": 3.72485
   },
   "censored": {
     "label": "censored",
-    "n": 420,
-    "mean": 4.137618120559335,
-    "std": 3.2251773904739407,
+    "n": 402,
+    "mean": 4.133178856905946,
+    "std": 3.3897348162447023,
     "min": 0.0,
-    "max": 15.8947,
-    "median": 3.15434
+    "max": 21.0,
+    "median": 3.100825
   },
-  "display_x_cap": 16.6369665,
+  "display_x_cap": 16.6419372,
   "outputs": {
     "png": "TENURE_poolq_loo_by_outcome_infHM.png"
   }

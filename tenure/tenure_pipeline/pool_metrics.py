@@ -105,7 +105,7 @@ def build_pool_metrics(
             except Exception:
                 continue
             n_rows += 1
-            if r.get("rank") in pool_rank_filter:
+            if r.get("rank") in pool_rank_filter and not r.get("exclude_from_metrics"):
                 key = (r["uni_slug"], r["year"])
                 pool_members[key].append({
                     "fid":      r["faculty_id"],
@@ -160,9 +160,9 @@ def build_pool_metrics(
             key     = (r["uni_slug"], r["year"])
             ps      = pool_stats.get(key)
 
-            if ps is None or r.get("rank") not in pool_rank_filter:
-                # Not an assistant row (or dept-year not in pools) — pass through
-                # with null pool columns so the file is uniform
+            excluded = bool(r.get("exclude_from_metrics"))
+            if ps is None or r.get("rank") not in pool_rank_filter or excluded:
+                # Not an assistant row, dept-year not in pools, or transferred — null pools
                 r.update({
                     "pool_size_all":    ps["size_all"] if ps else None,
                     "pool_size_oa":     ps["size_oa"]  if ps else None,

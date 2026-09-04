@@ -1,0 +1,15 @@
+{
+  "diagnostic": "tenure_decision_yas_at_exit",
+  "date": "2026-09-02",
+  "filter": "HIGH/MEDIUM \u00b7 resolved (tenure or attrition)",
+  "grain": "exit cross-section",
+  "pd29_window_yas": [
+    5,
+    6
+  ],
+  "n_resolved": 383,
+  "n_in_pd29_window": 60,
+  "outputs": {
+    "png": "TENURE_decision_yas_exit_pd29.png"
+  }
+}

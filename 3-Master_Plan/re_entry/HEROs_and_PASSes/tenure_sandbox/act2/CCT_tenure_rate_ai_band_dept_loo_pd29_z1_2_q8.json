@@ -1,0 +1,151 @@
+{
+  "diagnostic": "tenure_cct_matched_pond_pd29",
+  "date": "2026-09-03",
+  "plot": "cct",
+  "ai_lo": 1.0,
+  "ai_hi": 2.0,
+  "ai_band_label": "[1, 2]",
+  "n_bins": 8,
+  "band_n": 33,
+  "band_tenured": 24,
+  "squid_proxy": {
+    "label": "Squid proxy (mid pond)",
+    "ventiles_0idx": [
+      2,
+      3
+    ],
+    "bins_1idx": [
+      3,
+      4
+    ],
+    "n": 8,
+    "tenured": 4,
+    "tenure_rate": 0.5,
+    "ci_lo": 0.21521252682444186,
+    "ci_hi": 0.7847874731755582
+  },
+  "jackal_proxy": {
+    "label": "Jackal proxy (top pond)",
+    "ventiles_0idx": [
+      6,
+      7
+    ],
+    "bins_1idx": [
+      7,
+      8
+    ],
+    "n": 8,
+    "tenured": 4,
+    "tenure_rate": 0.5,
+    "ci_lo": 0.21521252682444186,
+    "ci_hi": 0.7847874731755582
+  },
+  "cct_signature_squid_gt_jackal": false,
+  "bins": [
+    {
+      "vent": 0,
+      "bin_display": 1,
+      "n": 5,
+      "tenured": 4,
+      "tenure_rate": 0.8,
+      "ci_lo": 0.3755282641185388,
+      "ci_hi": 0.9637768390302125,
+      "dept_loo_mean": 2.9294184797693132,
+      "dept_loo_median": 3.018627297410192,
+      "perf_mean": 1.4549913104917653,
+      "thin_cell": false
+    },
+    {
+      "vent": 1,
+      "bin_display": 2,
+      "n": 4,
+      "tenured": 4,
+      "tenure_rate": 1.0,
+      "ci_lo": 0.5100999795960008,
+      "ci_hi": 1.0,
+      "dept_loo_mean": 3.98445245978188,
+      "dept_loo_median": 3.985671673590554,
+      "perf_mean": 1.3444775719459185,
+      "thin_cell": true
+    },
+    {
+      "vent": 2,
+      "bin_display": 3,
+      "n": 4,
+      "tenured": 2,
+      "tenure_rate": 0.5,
+      "ci_lo": 0.15003570882017148,
+      "ci_hi": 0.8499642911798285,
+      "dept_loo_mean": 4.281524690283053,
+      "dept_loo_median": 4.215358840141972,
+      "perf_mean": 1.4142916553967972,
+      "thin_cell": true
+    },
+    {
+      "vent": 3,
+      "bin_display": 4,
+      "n": 4,
+      "tenured": 2,
+      "tenure_rate": 0.5,
+      "ci_lo": 0.15003570882017148,
+      "ci_hi": 0.8499642911798285,
+      "dept_loo_mean": 4.765399980446043,
+      "dept_loo_median": 4.746877603262369,
+      "perf_mean": 1.400775305597077,
+      "thin_cell": true
+    },
+    {
+      "vent": 4,
+      "bin_display": 5,
+      "n": 4,
+      "tenured": 4,
+      "tenure_rate": 1.0,
+      "ci_lo": 0.5100999795960008,
+      "ci_hi": 1.0,
+      "dept_loo_mean": 5.204808208386564,
+      "dept_loo_median": 5.155898790102032,
+      "perf_mean": 1.5694887177655124,
+      "thin_cell": true
+    },
+    {
+      "vent": 5,
+      "bin_display": 6,
+      "n": 4,
+      "tenured": 4,
+      "tenure_rate": 1.0,
+      "ci_lo": 0.5100999795960008,
+      "ci_hi": 1.0,
+      "dept_loo_mean": 5.570971972877422,
+      "dept_loo_median": 5.573418314850777,
+      "perf_mean": 1.591370817922336,
+      "thin_cell": true
+    },
+    {
+      "vent": 6,
+      "bin_display": 7,
+      "n": 4,
+      "tenured": 2,
+      "tenure_rate": 0.5,
+      "ci_lo": 0.15003570882017148,
+      "ci_hi": 0.8499642911798285,
+      "dept_loo_mean": 5.8463230923255916,
+      "dept_loo_median": 5.879749550277548,
+      "perf_mean": 1.4933468979884708,
+      "thin_cell": true
+    },
+    {
+      "vent": 7,
+      "bin_display": 8,
+      "n": 4,
+      "tenured": 2,
+      "tenure_rate": 0.5,
+      "ci_lo": 0.15003570882017148,
+      "ci_hi": 0.8499642911798285,
+      "dept_loo_mean": 7.216788555373975,
+      "dept_loo_median": 7.22364985442705,
+      "perf_mean": 1.431804476585945,
+      "thin_cell": true
+    }
+  ],
+  "png": "CCT_tenure_rate_ai_band_dept_loo_pd29_z1_2_q8.png"
+}

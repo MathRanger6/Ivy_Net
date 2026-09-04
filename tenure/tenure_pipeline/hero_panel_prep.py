@@ -88,35 +88,37 @@ def prepare_hero_panel(
     in_path: Path,
     *,
     tiers: frozenset[str],
-    grain: str = "spell_mean",
-    pool_perf: str = "annual",
+    window: str = "asst_ps",
+    stat: str = "annum",
     x_metric: str = "loo",
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     """
     Return rows ready for stage9 + prep stats.
 
-    grain: ``spell_mean`` | ``last_asst``
-    pool_perf: ``annual`` (existing poolq_loo_mean collapse) | ``cumulative``
-    x_metric: ``loo`` | ``poolq`` | ``own_cum`` (own pubs_cumulative at last_asst only)
+    window: ``asst_ps`` | ``last_ps`` | ``all_ps`` (``all_ps`` reserved)
+    stat: ``annum`` | ``cum`` | ``mean``
+    x_metric: ``loo`` | ``poolq`` | ``own_cum`` (own pubs_cumulative at last_ps only)
     """
-    if grain not in ("spell_mean", "last_asst"):
-        raise ValueError(f"grain must be spell_mean or last_asst, got {grain!r}")
-    if pool_perf not in ("annual", "cumulative"):
-        raise ValueError(f"pool_perf must be annual or cumulative, got {pool_perf!r}")
-    if x_metric == "own_cum" and grain != "last_asst":
-        raise ValueError("x_metric=own_cum requires grain=last_asst")
+    _WINDOWS = ("asst_ps", "last_ps", "all_ps")
+    _STATS = ("annum", "cum", "mean")
+    if window not in _WINDOWS:
+        raise ValueError(f"window must be one of {_WINDOWS}, got {window!r}")
+    if stat not in _STATS:
+        raise ValueError(f"stat must be one of {_STATS}, got {stat!r}")
+    if x_metric == "own_cum" and window != "last_ps":
+        raise ValueError("x_metric=own_cum requires window=last_ps")
 
     raw = load_inference_rows(in_path, tiers=tiers)
     stats: dict[str, Any] = {
         "n_inference_asst_rows": len(raw),
-        "grain": grain,
-        "pool_perf": pool_perf,
+        "window": window,
+        "stat": stat,
         "x_metric": x_metric,
     }
 
-    if grain == "last_asst":
+    if window == "last_ps":
         work = filter_last_asst_rows(raw)
-        stats["n_last_asst_rows"] = len(work)
+        stats["n_last_ps_rows"] = len(work)
     else:
         work = raw
 
@@ -128,7 +130,7 @@ def prepare_hero_panel(
         stats["x_field"] = "pubs_cumulative"
         return work, stats
 
-    if pool_perf == "cumulative":
+    if stat == "cum":
         work = attach_loo_cumulative(work)
         loo_key = "poolq_loo_cum_mean"
     else:

@@ -32,7 +32,8 @@ from bdp_ai_tj_distributions import (  # noqa: E402
     parse_bdp_spec,
     subtitle_lines,
 )
-from gallery_mathtext import configure_matplotlib_mathtext  # noqa: E402
+from gallery_mathtext import configure_matplotlib_mathtext
+from hero_plot_style import PLOT_DPI  # noqa: E402
 from hero_gallery_paths import BASIC_DATA_PLOTS, ensure_hero_dirs  # noqa: E402
 
 WINSOR = (0.01, 0.99)
@@ -46,13 +47,20 @@ def _prepare_last_ps(
     poolq_winsor_quantiles: tuple[float, float] | None = WINSOR,
 ) -> pd.DataFrame:
     from bdp_ai_tj_distributions import _prepare
+    from sports_pipeline.y_draft_mode import restrict_to_last_season_rows
 
-    return _prepare(
-        spec,
-        perf_metric,
-        panel_rows="last-ps",
-        poolq_winsor_quantiles=poolq_winsor_quantiles,
-    )
+    panel, _ = restrict_to_last_season_rows(_prepare(spec, perf_metric))
+    if poolq_winsor_quantiles is not None and "poolq_loo" in panel.columns:
+        lo_q, hi_q = poolq_winsor_quantiles
+        s = pd.to_numeric(panel["poolq_loo"], errors="coerce").dropna()
+        if len(s):
+            lo = float(s.quantile(lo_q))
+            hi = float(s.quantile(hi_q))
+            panel = panel.copy()
+            panel["poolq_loo"] = pd.to_numeric(panel["poolq_loo"], errors="coerce").clip(
+                lower=lo, upper=hi
+            )
+    return panel
 
 
 def _poolq_values(panel: pd.DataFrame) -> np.ndarray:
@@ -372,7 +380,7 @@ def _plot_poolq_loo_distribution(
     ax.axvline(stats["median"], color="0.35", linestyle=":", linewidth=1.4, label=rf"Median = {stats['median']:.2f}")
     ax.set_xlabel(r"Player poolq$_{\mathrm{LOO}}$ (PPM $z$, teammate mean excl. self)")
     ax.set_ylabel("Player count")
-    ax.set_title("Histogram", fontsize=10)
+    ax.set_title(r"Peer talent environment (poolq$_{\mathrm{LOO}}$)", fontsize=10)
     ax.legend(fontsize=6, loc="upper right", framealpha=0.95)
     ax.grid(axis="y", alpha=0.25, linewidth=0.5)
 
@@ -396,7 +404,7 @@ def _plot_poolq_loo_distribution(
         fontsize=11,
     )
     fig.text(0.5, 0.02, f"{line1} · {line2}", ha="center", va="bottom", fontsize=8, color="0.35")
-    fig.savefig(png_path, dpi=160, bbox_inches="tight")
+    fig.savefig(png_path, dpi=PLOT_DPI, bbox_inches="tight")
     plt.close(fig)
 
 
@@ -473,7 +481,7 @@ def _plot_draft_rate_vs_loo(
 
     fig.text(0.5, 0.01, f"{line1} · {line2}", ha="center", va="bottom", fontsize=8, color="0.35")
     fig.tight_layout(rect=(0, 0.05, 1, 1))
-    fig.savefig(png_path, dpi=160, bbox_inches="tight")
+    fig.savefig(png_path, dpi=PLOT_DPI, bbox_inches="tight")
     plt.close(fig)
 
 
@@ -549,7 +557,7 @@ def _plot_draft_rate_loo_vs_tj(
         color="0.35",
         linespacing=1.2,
     )
-    fig.savefig(png_path, dpi=160)
+    fig.savefig(png_path, dpi=PLOT_DPI)
     plt.close(fig)
 
 

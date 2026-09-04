@@ -1,0 +1,84 @@
+{
+  "domain": "mbb",
+  "deck": "reigning_hero_data_story",
+  "title": "MBB data story — reigning hero (2009–2021 · last-ps)",
+  "subtitle": "mg10 · min20 · PPM z · poolq_LOO · EW16 · ALLT · ever-Y  |  Read top-left → bottom-right",
+  "output_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/data_story/MBB_DATA_STORY_reigning_3x3.png",
+  "fig_width_in": 24,
+  "fig_height_in": 18,
+  "mosaic_dpi": 400,
+  "panel_dpi": 300,
+  "footer": "MBB reigning lock · perm_loo_ever_lastps_ew16 · compositor build_data_story_mosaic.py",
+  "grid": [
+    {
+      "type": "text",
+      "title": "1 · Cohort",
+      "lines": [
+        "Domain: NCAA MBB (ESPN box)",
+        "Seasons: 2009–2021",
+        "Row grain: last-ps (final college season)",
+        "Filters: mg10 · min20 · ALLT",
+        "Outcome: Y_draft ever",
+        "",
+        "N = 22,795 last-ps rows",
+        "Drafts = 615 athletes",
+        "Spec: EW16 poolq_LOO · winsor 1–99",
+        "",
+        "Panels 7–8: 2011–21 +DFT",
+        "(CCT / elite pond screening)",
+        "",
+        "Reigning tag:",
+        "perm_loo_ever_lastps_ew16"
+      ]
+    },
+    {
+      "type": "image",
+      "title": "2 · Â_i and T̂_j",
+      "path": "3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/reigning_hero/basic_data_plots/REIGNING_BDP_Ai_Tj_mg10_min20_09_21_ppm_lastps.png"
+    },
+    {
+      "type": "image",
+      "title": "3 · poolq_LOO distribution",
+      "path": "3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/reigning_hero/basic_data_plots/REIGNING_BDP_poolq_loo_dist_mg10_min20_09_21_ppm_lastps_nowinsor.png"
+    },
+    {
+      "type": "image",
+      "title": "4 · Draft mass vs Â (ECDF)",
+      "path": "3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/reigning_hero/fhero/BDP_Ai_draft_mass_ecdf_mg10_min20_09_21_allt_ppm_last_ps.png"
+    },
+    {
+      "type": "image",
+      "title": "5 · Team interval overlap",
+      "path": "3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/reigning_hero/basic_data_plots/REIGNING_team_interval_overlap_mg10_min20_09_21.png"
+    },
+    {
+      "type": "image",
+      "title": "6 · Team roster size |T_j|",
+      "path": "3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/reigning_hero/basic_data_plots/REIGNING_BDP_team_size_mg10_min20_09_21.png"
+    },
+    {
+      "type": "image",
+      "title": "7 · CCT (Â z∈[2,3] · +DFT · LOO)",
+      "path": "3-Master_Plan/re_entry/HEROs_and_PASSes/basic_data_plots/CCT_draft_rate_ai_band_poolq_loo_min20_ppm_z2_3_dft.png",
+      "note": "CCT window 2011–21 (not 09–21) — screening panel"
+    },
+    {
+      "type": "image",
+      "title": "8 · Elite pond (top 7% Â · LOO pw4p7)",
+      "path": "3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/_DISPOSABLE_elite_pond_loo_twin/ELITE_pond_loo_pw4p7_dft_min20_mg10_top7_ppm_11_21.png",
+      "note": "Critical Keeper · LOO twin · top 7% Â · +DFT 11–21 (R3 all LOO-axis)"
+    },
+    {
+      "type": "image",
+      "title": "9 · HERO (Pass A · ability | LOO)",
+      "path": "3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/hero/HERO_ew16_allt_min20_mg10_09_21_last_ps_perm_loo_ever_lastps_ew16.png"
+    }
+  ],
+  "verdict": {
+    "hero_lpm_beta2_poolq_loo": 0.00172,
+    "hero_shape": "middle rise · flat elite tail (POST-QC)",
+    "elite_pond_note": "Critical Keeper: top-7% Â · poolq_LOO pw4p7 (+DFT 11–21). Plateau 25.4% → tail 14.1%",
+    "cct_note": "Squid vs Jackal on PPM z [2,3] +DFT LOO ventiles — panel 7",
+    "fhero_tj_note": "T̂_j keeper parked: sports_sandbox/fhero/CCT_draft_rate_fixedAi_Tj_knbins_min20_ppm_top7_dft_low4_high7.png"
+  }
+}

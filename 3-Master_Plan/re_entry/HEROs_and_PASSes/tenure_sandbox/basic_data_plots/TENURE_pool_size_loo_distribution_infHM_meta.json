@@ -1,12 +1,13 @@
 {
   "diagnostic": "tenure_pool_size_loo_distribution",
-  "date": "2026-09-01",
+  "date": "2026-09-02",
   "filter": "HIGH/MEDIUM inference \u00b7 assistant rows \u00b7 LOO computable",
+  "grain": "ASST-PS \u00b7 asst person-years",
   "pool_size_oa_loo": {
     "label": "pool_size_oa_loo",
-    "n": 2396,
-    "mean": 17.219532554257096,
-    "std": 10.31868100799548,
+    "n": 2373,
+    "mean": 17.12347239780868,
+    "std": 10.356454074520768,
     "min": 1.0,
     "max": 44.0,
     "median": 15.0

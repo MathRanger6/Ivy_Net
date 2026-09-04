@@ -1,30 +1,30 @@
 {
   "diagnostic": "tenure_pubs_year_distribution",
-  "date": "2026-09-01",
+  "date": "2026-09-02",
   "filter": "HIGH/MEDIUM inference \u00b7 assistant rows \u00b7 LOO computable",
-  "grain": "assistant person-year",
+  "grain": "ASST-PS \u00b7 asst person-years",
   "pubs_year": {
     "label": "pubs_year",
-    "n": 2396,
-    "mean": 6.271285475792988,
-    "std": 11.65753076582829,
+    "n": 2373,
+    "mean": 6.268436578171092,
+    "std": 11.68645013199529,
     "min": 0.0,
     "max": 237.0,
     "median": 3.0
   },
   "pubs_year_gt0": {
     "label": "pubs_year_gt0",
-    "n": 1544,
-    "mean": 9.731865284974093,
-    "std": 13.312042938418095,
+    "n": 1526,
+    "mean": 9.747706422018348,
+    "std": 13.35898799573903,
     "min": 1.0,
     "max": 237.0,
     "median": 7.0
   },
-  "n_zero": 852,
-  "pct_zero": 35.56,
+  "n_zero": 847,
+  "pct_zero": 35.69,
   "display_x_cap": 39.9,
-  "inset_x_cap": 43.648499999999935,
+  "inset_x_cap": 43.8375,
   "outputs": {
     "png": "TENURE_pubs_year_distribution_infHM.png"
   }

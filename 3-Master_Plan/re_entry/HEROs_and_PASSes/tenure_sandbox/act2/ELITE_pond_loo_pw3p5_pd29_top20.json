@@ -1,0 +1,153 @@
+{
+  "diagnostic": "tenure_elite_pond_loo_pd29",
+  "date": "2026-09-03",
+  "plot": "elite_pond",
+  "ai_top_pct": 20.0,
+  "ai_band_label": "top 20%",
+  "binning": {
+    "mode": "piecewise_tail",
+    "n_low_bins": 3,
+    "n_high_bins": 5,
+    "tail_split_quantile": 0.75,
+    "tail_split_dept_loo": 5.849824321101787,
+    "dept_loo_range": {
+      "lo": 1.78222468530333,
+      "hi": 8.413297927152403
+    }
+  },
+  "bin_edges": [
+    1.78222468530333,
+    3.138091230569482,
+    4.493957775835634,
+    5.849824321101787,
+    6.36251904231191,
+    6.875213763522034,
+    7.387908484732156,
+    7.9006032059422795,
+    8.413297927152403
+  ],
+  "band_n": 56,
+  "band_tenured": 39,
+  "knee": {
+    "plateau_mean_tenure_rate": 0.6984126984126983,
+    "tail_mean_tenure_rate": 0.8333333333333334,
+    "last_bin_tenure_rate": 1.0,
+    "last_bin_n": 2,
+    "alex_downturn_visible": false
+  },
+  "bins": [
+    {
+      "vent": 0,
+      "bin_display": 1,
+      "n": 7,
+      "tenured": 5,
+      "tenure_rate": 0.7142857142857143,
+      "ci_lo": 0.35892909014821267,
+      "ci_hi": 0.9177828342909844,
+      "edge_lo": 1.78222468530333,
+      "edge_hi": 3.138091230569482,
+      "dept_loo_mean": 2.4544840845435862,
+      "high_loo_tail": false,
+      "thin_cell": false
+    },
+    {
+      "vent": 1,
+      "bin_display": 2,
+      "n": 14,
+      "tenured": 8,
+      "tenure_rate": 0.5714285714285714,
+      "ci_lo": 0.3259026690286936,
+      "ci_hi": 0.7861949006959948,
+      "edge_lo": 3.138091230569482,
+      "edge_hi": 4.493957775835634,
+      "dept_loo_mean": 3.913336454271456,
+      "high_loo_tail": false,
+      "thin_cell": false
+    },
+    {
+      "vent": 2,
+      "bin_display": 3,
+      "n": 21,
+      "tenured": 17,
+      "tenure_rate": 0.8095238095238095,
+      "ci_lo": 0.599990134607267,
+      "ci_hi": 0.9233255938482269,
+      "edge_lo": 4.493957775835634,
+      "edge_hi": 5.849824321101787,
+      "dept_loo_mean": 5.203427351819075,
+      "high_loo_tail": false,
+      "thin_cell": false
+    },
+    {
+      "vent": 3,
+      "bin_display": 4,
+      "n": 5,
+      "tenured": 2,
+      "tenure_rate": 0.4,
+      "ci_lo": 0.1176182311592533,
+      "ci_hi": 0.769280067791163,
+      "edge_lo": 5.849824321101787,
+      "edge_hi": 6.36251904231191,
+      "dept_loo_mean": 6.0197283230199305,
+      "high_loo_tail": true,
+      "thin_cell": false
+    },
+    {
+      "vent": 4,
+      "bin_display": 5,
+      "n": 3,
+      "tenured": 2,
+      "tenure_rate": 0.6666666666666666,
+      "ci_lo": 0.2076549551264879,
+      "ci_hi": 0.9385096847238394,
+      "edge_lo": 6.36251904231191,
+      "edge_hi": 6.875213763522034,
+      "dept_loo_mean": 6.49749269619099,
+      "high_loo_tail": true,
+      "thin_cell": true
+    },
+    {
+      "vent": 5,
+      "bin_display": 6,
+      "n": 2,
+      "tenured": 2,
+      "tenure_rate": 1.0,
+      "ci_lo": 0.34237195288961925,
+      "ci_hi": 1.0,
+      "edge_lo": 6.875213763522034,
+      "edge_hi": 7.387908484732156,
+      "dept_loo_mean": 7.071776004976954,
+      "high_loo_tail": true,
+      "thin_cell": true
+    },
+    {
+      "vent": 6,
+      "bin_display": 7,
+      "n": 2,
+      "tenured": 1,
+      "tenure_rate": 0.5,
+      "ci_lo": 0.09452865480086614,
+      "ci_hi": 0.9054713451991339,
+      "edge_lo": 7.387908484732156,
+      "edge_hi": 7.9006032059422795,
+      "dept_loo_mean": 7.623414469071928,
+      "high_loo_tail": true,
+      "thin_cell": true
+    },
+    {
+      "vent": 7,
+      "bin_display": 8,
+      "n": 2,
+      "tenured": 2,
+      "tenure_rate": 1.0,
+      "ci_lo": 0.34237195288961925,
+      "ci_hi": 1.0,
+      "edge_lo": 7.9006032059422795,
+      "edge_hi": 8.413297927152403,
+      "dept_loo_mean": 8.209784539888735,
+      "high_loo_tail": true,
+      "thin_cell": true
+    }
+  ],
+  "png": "ELITE_pond_loo_pw3p5_pd29_top20.png"
+}

@@ -1,4 +1,4 @@
-# Tenure hero Layer A — quadratic LPM (2026-09-01)
+# Tenure hero Layer A — quadratic LPM (2026-09-02)
 n=383 resolved persons
 tenure events: 174
 x_metric=own_cum

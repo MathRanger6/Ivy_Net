@@ -23,6 +23,10 @@ BDP = REPO / "3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/basic_data_
 DEFAULT_OUT = BDP / "TENURE_BDP_slides_AUTO.pptx"
 TAG = "infHM"
 
+SCRIPTS_DIR = REPO / "tenure" / "scripts"
+sys.path.insert(0, str(SCRIPTS_DIR))
+from tenure_grain_labels import ASST_PS, DECISION, LAST_PS, window_badge  # noqa: E402
+
 sys.path.insert(0, str(SPORTS_SCRIPTS))
 from build_hero_permutation_slides import (  # noqa: E402
     CONTENT_W,
@@ -35,9 +39,10 @@ from build_hero_permutation_slides import (  # noqa: E402
 )
 
 LOCK_LINES = [
-    "Tenure HERO population: HIGH + MEDIUM OpenAlex inference · LOO computable on assistant rows.",
-    "HERO lock: person-level mean poolq_LOO · Q16 quantile (Q20 for dip robustness).",
-    "Rates: tenure among resolved (Option A); censored excluded from denominator.",
+    "Tenure porch BDP: HIGH + MEDIUM OpenAlex inference · LOO computable.",
+    "v0 section: ASST-PS uni×year assistant pools (exploratory lock).",
+    "PD29 section: decision cohort · asst_time · pubs_per_career_year · dept pond LOO.",
+    "HERO rate plots: TENURE_HERO_slides_AUTO.pptx (decision dept LOO = primary).",
 ]
 
 
@@ -107,6 +112,14 @@ def _summary_tenured_pubs(meta: dict) -> str:
     return (
         f"tenured n={all_.get('n', '?'):,} · med={all_.get('median', 0):.1f} · "
         f"mean={all_.get('mean', 0):.1f} · inset n={pos.get('n', '?'):,}"
+    )
+
+
+def _summary_dept_loo(meta: dict) -> str:
+    block = meta.get("dept_loo_career_rate") or {}
+    return (
+        f"n={meta.get('n_with_dept_loo', block.get('n', '?')):,} · "
+        f"med={block.get('median', 0):.2f} · mean={block.get('mean', 0):.2f}"
     )
 
 
@@ -225,9 +238,122 @@ def _plot_catalog() -> list[dict[str, Any]]:
     ]
 
 
+def _pd29_plot_catalog() -> list[dict[str, Any]]:
+    tag = "pd29"
+    return [
+        {
+            "key": "decision_asst_time",
+            "title": "Assistant time at exit (all resolved)",
+            "subtitle": "Reference band asst_time 5–6 shaded · not a filter",
+            "prose": [
+                "391 resolved infHM at last assistant year (excl. transferred).",
+                "Dept-year censoring + off-tenure-track attrition on rebuilt panel.",
+                "Most exits early (asst_time 1–4); band 5–6 = Alex expected clock (63 people, 16%).",
+            ],
+            "png": BDP / f"TENURE_decision_asst_time_exit_{tag}.png",
+            "meta": BDP / f"TENURE_decision_asst_time_exit_{tag}_meta.json",
+            "command": "python tenure/scripts/tenure_basic_plots.py --mode pd29 --only decision_asst_time",
+            "summary_fn": lambda m: (
+                f"resolved={m.get('n_resolved', '?')} · "
+                f"in reference band={m.get('n_in_reference_band', '?')}"
+            ),
+        },
+        {
+            "key": "career_rate",
+            "title": "Own career pubs rate at decision (Alex Â)",
+            "subtitle": "cum ÷ career age · ability slice",
+            "prose": [
+                "pubs_per_career_year from career master at decision calendar year.",
+                "280/391 with computable rate (OpenAlex coverage gap).",
+                "Pairs with own-career HERO slide — not the peer-context X.",
+            ],
+            "png": BDP / f"TENURE_pubs_career_rate_{tag}.png",
+            "meta": BDP / f"TENURE_pubs_career_rate_{tag}_meta.json",
+            "command": "python tenure/scripts/tenure_basic_plots.py --mode pd29 --only career_rate",
+            "summary_fn": lambda m: _summary_dist(m, "pubs_per_career_year"),
+        },
+        {
+            "key": "career_rate_by_outcome",
+            "title": "Own career pubs rate by outcome",
+            "subtitle": "Tenured vs attrition · ability slice",
+            "prose": [
+                "Same career-rate metric split by tenure vs attrition (incl. OTT).",
+                "Descriptive marginals — HERO bins on dept pond LOO, not own Â.",
+            ],
+            "png": BDP / f"TENURE_pubs_career_rate_by_outcome_{tag}.png",
+            "meta": BDP / f"TENURE_pubs_career_rate_by_outcome_{tag}_meta.json",
+            "command": "python tenure/scripts/tenure_basic_plots.py --mode pd29 --only career_rate_by_outcome",
+            "summary_fn": lambda m: _summary_outcome_groups(m, ("tenured", "attrition")),
+        },
+        {
+            "key": "dept_loo",
+            "title": "Dept pond LOO career rate",
+            "subtitle": "Whole dept at decision year · HERO peer-context X",
+            "prose": [
+                "LOO mean of all other faculty's pubs_per_career_year in department.",
+                "389/391 with computable dept LOO — primary HERO x-axis.",
+                "Includes senior faculty, not assistant-only uni×year pool.",
+            ],
+            "png": BDP / f"TENURE_dept_loo_career_rate_{tag}.png",
+            "meta": BDP / f"TENURE_dept_loo_career_rate_{tag}_meta.json",
+            "command": "python tenure/scripts/tenure_basic_plots.py --mode pd29 --only dept_loo",
+            "summary_fn": _summary_dept_loo,
+        },
+        {
+            "key": "dept_loo_by_outcome",
+            "title": "Dept pond LOO by outcome",
+            "subtitle": "Peer environment split · complements decision HERO",
+            "prose": [
+                "Marginal dept LOO by tenure vs attrition — not binned rates.",
+                "Ask: did promoted faculty sit in stronger department ponds on average?",
+            ],
+            "png": BDP / f"TENURE_dept_loo_career_rate_by_outcome_{tag}.png",
+            "meta": BDP / f"TENURE_dept_loo_career_rate_by_outcome_{tag}_meta.json",
+            "command": "python tenure/scripts/tenure_basic_plots.py --mode pd29 --only dept_loo_by_outcome",
+            "summary_fn": lambda m: _summary_outcome_groups(m, ("tenured", "attrition")),
+        },
+        {
+            "key": "annual_zero_tenured",
+            "title": "Zero annual pubs but positive career rate (tenured)",
+            "subtitle": "Wrong lens if you use pubs_year only",
+            "prose": [
+                "Tenured with pubs_year=0 at decision but pubs_per_career_year > 0.",
+                "Motivates cumulative / career-rate lock vs single-year annual count.",
+            ],
+            "png": BDP / f"TENURE_annual_zero_tenured_{tag}.png",
+            "meta": BDP / f"TENURE_annual_zero_tenured_{tag}_meta.json",
+            "command": "python tenure/scripts/tenure_basic_plots.py --mode pd29 --only annual_zero_tenured",
+            "summary_fn": lambda m: (
+                f"tenured={m.get('n_tenured', '?')} · "
+                f"zero annual / +career={m.get('n_zero_annual_positive_career', '?')} "
+                f"({m.get('pct', '?')}%)"
+            ),
+        },
+    ]
+
+
+def _grain_from_meta(meta: dict) -> str:
+    g = str(meta.get("grain") or "")
+    if "dept pond" in g.lower() or "dept_loo" in str(meta.get("diagnostic", "")):
+        return window_badge(DECISION)
+    if g.startswith("Decision cohort"):
+        return window_badge(DECISION)
+    if g.startswith("ASST-PS"):
+        return window_badge(ASST_PS)
+    if g.startswith("ALL-PS"):
+        return window_badge(ASST_PS)  # legacy meta mislabel
+    if g.startswith("LAST-PS"):
+        return window_badge(LAST_PS)
+    return g.split("·")[0].strip() if g else ""
+
+
 def _add_plot_slide(prs: Presentation, entry: dict, meta: dict, *, slide_num: int) -> None:
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    y = _add_title(slide, f"Slide {slide_num} — {entry['title']}", subtitle=entry["subtitle"])
+    subtitle = entry["subtitle"]
+    grain = _grain_from_meta(meta)
+    if grain:
+        subtitle = f"{grain} · {subtitle}"
+    y = _add_title(slide, f"Slide {slide_num} — {entry['title']}", subtitle=subtitle)
     y = _add_prose_box(slide, y, entry["prose"])
 
     cmd_h = Inches(0.55)
@@ -278,6 +404,32 @@ def build_deck(out_path: Path) -> None:
         meta = _load_json(spec["meta"])
         _add_plot_slide(prs, spec, meta, slide_num=slide_num)
         slide_num += 1
+
+    pd29_specs = _pd29_plot_catalog()
+    if any(s["png"].is_file() for s in pd29_specs):
+        slide = prs.slides.add_slide(prs.slide_layouts[6])
+        _add_title(
+            slide,
+            "Decision cohort — basic data plots (PD29)",
+            subtitle=f"{date.today().isoformat()} · rebuilt panel · new metrics",
+        )
+        _add_prose_box(
+            slide,
+            Inches(1.1),
+            [
+                "Resolved = tenure or attrition (incl. off_tenure_track). Excl. censored + transferred.",
+                "Metrics: asst_time · own pubs_per_career_year · dept pond LOO (whole dept, you excluded).",
+                "Reference band asst_time 5–6 shaded on timing plot only — not an inclusion filter.",
+            ],
+            height=1.35,
+        )
+        for spec in pd29_specs:
+            if not spec["png"].is_file():
+                print(f"Skip (missing PNG): {spec['png'].name}")
+                continue
+            meta = _load_json(spec["meta"])
+            _add_plot_slide(prs, spec, meta, slide_num=slide_num)
+            slide_num += 1
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
     prs.save(out_path)

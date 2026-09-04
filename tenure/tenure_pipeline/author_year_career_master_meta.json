@@ -1,0 +1,28 @@
+{
+  "built_at": "2026-09-02T17:04:52.670341+00:00",
+  "script": "build_author_year_career_master.py",
+  "pd29": true,
+  "inputs": {
+    "works_path": "openalex_works_by_year.jsonl",
+    "works_mtime": "2026-04-19T03:04:42",
+    "author_ids_path": "openalex_author_ids.jsonl",
+    "author_ids_mtime": "2026-04-19T01:02:49"
+  },
+  "filters": {
+    "confidence_min": "ALL",
+    "min_pub_year": 1950,
+    "max_pub_year": 2030
+  },
+  "n_authors_this_run": 3630,
+  "n_rows_this_run": 99733,
+  "n_authors_total": 3630,
+  "n_rows_total": 99733,
+  "year_range": [
+    1950,
+    2026
+  ],
+  "authors_by_tier_this_run": {
+    "HIGH": 3630
+  },
+  "note": "Derived from openalex_works_by_year only; MEDIUM has no works rows until build_openalex_cache is extended on Rivanna."
+}

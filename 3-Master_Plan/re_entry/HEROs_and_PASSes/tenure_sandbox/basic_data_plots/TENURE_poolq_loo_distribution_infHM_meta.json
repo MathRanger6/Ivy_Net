@@ -1,16 +1,16 @@
 {
   "diagnostic": "tenure_poolq_loo_distribution",
-  "date": "2026-09-01",
+  "date": "2026-09-02",
   "filter": "HIGH/MEDIUM inference \u00b7 assistant rows \u00b7 LOO computable",
-  "grain": "person-level mean poolq_loo_mean (matches Q16 HERO)",
+  "grain": "ASST-PS (assistant person-years) \u00b7 mean",
   "loo_mean": {
     "label": "loo_mean",
-    "n": 796,
-    "mean": 4.236390773610114,
-    "std": 3.1647004530589125,
+    "n": 787,
+    "mean": 4.216460572144571,
+    "std": 3.15525921137807,
     "min": 0.0,
     "max": 27.0,
-    "median": 3.35385
+    "median": 3.3435
   },
   "outputs": {
     "png": "TENURE_poolq_loo_distribution_infHM.png"

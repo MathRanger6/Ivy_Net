@@ -1,0 +1,18 @@
+{
+  "diagnostic": "tenure_pool_size_decision_pd29",
+  "date": "2026-09-03",
+  "grain": "Decision cohort \u00b7 dept pond LOO \u00b7 whole dept \u00b7 pubs_per_career_year",
+  "pool_size_dept": {
+    "label": "pool_size_dept",
+    "n": 389,
+    "mean": 111.73007712082263,
+    "std": 63.86048132296882,
+    "min": 12.0,
+    "max": 309.0,
+    "median": 97.0
+  },
+  "n_cohort": 391,
+  "outputs": {
+    "png": "TENURE_pool_size_decision_pd29.png"
+  }
+}

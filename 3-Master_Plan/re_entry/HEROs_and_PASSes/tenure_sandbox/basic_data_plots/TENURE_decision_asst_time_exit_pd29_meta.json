@@ -1,0 +1,15 @@
+{
+  "diagnostic": "tenure_decision_asst_time_at_exit",
+  "date": "2026-09-03",
+  "filter": "HIGH/MEDIUM \u00b7 resolved (tenure or attrition) \u00b7 excl. transferred",
+  "grain": "exit cross-section",
+  "reference_asst_time_band": [
+    5,
+    6
+  ],
+  "n_resolved": 391,
+  "n_in_reference_band": 63,
+  "outputs": {
+    "png": "TENURE_decision_asst_time_exit_pd29.png"
+  }
+}

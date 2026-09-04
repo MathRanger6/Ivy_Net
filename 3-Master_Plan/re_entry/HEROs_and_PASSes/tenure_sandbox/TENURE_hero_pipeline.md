@@ -1,6 +1,6 @@
 # Tenure hero pipeline — MBB mirror (use existing panel first)
 
-**Last synced:** 2026-09-01
+**Last synced:** 2026-09-02
 
 **Audience:** Charles + COMPASS (Mac analysis).
 
@@ -20,6 +20,62 @@
 | **ρ / H_sort** | Reigning hero calibration; ρ* ≈ 0 → park for MBB | **Act III** — run diagnostic; park only if flat |
 | **Generative replay** | `reigning_hero_sim_hero.py` | **Act IV** — after Alex lock |
 | **Scrape / expand** | Box QC, min20, mg10 | **Parallel** — PEER on Rivanna when scheduled |
+
+---
+
+## PD29 delta (Sep 2, 2026) — Alex locks vs v0
+
+**Source:** [`transcripts/PD29_notes.md`](../../../../transcripts/PD29_notes.md) — Charles showed **dirty porch** same call; Alex approved assortment direction, then tightened tenure mechanics.
+
+| Dimension | **v0 (this doc, Sep 1)** | **PD29 lock (exploratory → next build)** |
+|-----------|----------------------------|------------------------------------------|
+| **Unit of analysis (HERO row)** | One row per **person** (ASST-PS mean peer LOO) or **last assistant year** on some runs | One row per **decision event** (~assistant **year 5–6** with tenure or out signal) |
+| **Own Â** | ASST-PS mean **pubs/year** over assistant years; LAST-PS **cum** on some exploratory HERO runs | **ALL-PS · mean · own pubs at decision year** = `pubs_per_career_year` (cum ÷ publishing-years since first pub) |
+| **Pond / peer pool** | Uni×year **assistant** peer pools; LOO over assistant person-years | **Whole department** in **decision year** (all faculty ranks for peer norm); not every historical dept×year |
+| **Outcome frame** | Option A: censored out of **rates**, in **quantile rank**; scrape-window censor | **Up-or-out** in decision year (army-like); cumulative productivity “until that point” |
+| **Data spine** | `faculty_panel_with_pools.jsonl` person–year | **Master author×year pubs table** → precompute running cum / rates; slice for decision years |
+| **Porch (Sep 2)** | BDP + HERO deck on **existing** panel | Alex: overlap **H_sort high** ✓; censored = missing scrape; **promoted-with-zero annual rate** = wrong metric → supports T3 |
+
+**COMPASS sequencing:** Keep v0 porch/HERO as **Act I exploratory** (Alex saw it Sep 2). **Do not** treat v0 LAST-PS / ASST-PS bars as paper-final without PD29 spine or explicit sensitivity. Next engineering tranche = **T5 master table** + **T1–T4 decision-year slice**.
+
+**Open (PD29, not locked):** Homophily on all faculty vs assistant-only pond; exact early/late window around year 6; survival analysis deferred.
+
+---
+
+## Grain naming (Charles lock — Sep 2)
+
+Aligned with MBB **ALL-PS / LAST-PS** vocabulary; tenure adds **ASST-PS** because assistant-only person-years are the main v0 panel.
+
+### Windows (person-years)
+
+| Token | Label | Meaning |
+|-------|-------|---------|
+| `all_ps` | **ALL-PS** | All person-years in panel (any rank) |
+| `asst_ps` | **ASST-PS** | Assistant-rank person-years only |
+| `last_ps` | **LAST-PS** | Final assistant person-year (exit cross-section) |
+
+### Stats
+
+| Token | Label | Meaning |
+|-------|-------|---------|
+| `mean` | **mean** | Average over the window (person collapse for ASST-PS) |
+| `cum` | **cum** | Stock through end of window |
+| `annum` | **annum** | Single person-year value (replaces legacy “annual”) |
+
+Retired everywhere: **spell-mean**, `spell_mean`, `grain=…` in favor of **`--window` / `--stat`**.
+
+### Canonical combinations (v0 + PD29)
+
+| Use | Window · stat · metric | Code / field |
+|-----|------------------------|--------------|
+| v0 HERO peer X | **ASST-PS · mean · peer LOO (annum)** | `--window asst_ps --stat annum` (default) |
+| LAST-PS HERO peer X | **LAST-PS · cum · peer LOO** | `--window last_ps --stat cum` |
+| LAST-PS ability slice | **LAST-PS · cum · own pubs** | `--window last_ps --x-metric own_cum` |
+| Alex Â (PD29) | **ALL-PS · mean · own pubs at decision year** | `pubs_per_career_year` in `author_year_career_master.jsonl` |
+
+**Decision year** = cohort filter / which calendar year we **read** the metric — not a separate window token.
+
+**Code:** `tenure/scripts/tenure_grain_labels.py` · CLI `tenure/scripts/tenure_pass_a_hero.py --window` / `--stat`
 
 ---
 
@@ -46,12 +102,12 @@ From person–year rows, keep rows where:
 
 ---
 
-## Step 2 — Collapse to person-level (HERO grain)
+## Step 2 — Collapse to person-level (HERO window)
 
 Same logic as `tenure/tenure_pipeline/stage9_analysis.py`:
 
 1. One record per `faculty_id`
-2. **`loo_mean`** = mean of `poolq_loo_mean` over **assistant** years with non-null LOO
+2. **`loo_mean`** = mean of `poolq_loo_mean` over **assistant** years with non-null LOO (**ASST-PS · mean · peer annum**)
 3. Drop persons with no computable LOO assistant years
 4. Person flags: `tenure_event`, `attrition`, `censored`
 
@@ -155,6 +211,7 @@ On the last-ps cum LOO panel (N=732): **408 censored (56%)**, **324 resolved**. 
 |------|------|
 | `tenure/tenure_pipeline/stage9_analysis.py` | Reference implementation (collapse + bin + plot) |
 | `tenure/tenure_pipeline/build_faculty_panel_inference_v1.py` | Inference tier filter reference |
+| `tenure/scripts/tenure_grain_labels.py` | Window + stat labels (ALL-PS / ASST-PS / LAST-PS · mean / cum / annum) |
 | `tenure/scripts/tenure_pass_a_hero.py` | v0 CLI → `tenure_sandbox/hero/` |
 | `sports/scripts/pass_a_empirical_bundle.py` | MBB template for provenance + filenames |
 
@@ -166,3 +223,4 @@ On the last-ps cum LOO panel (N=732): **408 censored (56%)**, **324 resolved**. 
 |------|--------|
 | 2026-09-01 | Initial pipeline map; v0 locks from Charles + Alex direction. |
 | 2026-09-01 | § censored in quantile bins — pros/cons for Alex (Option A rates + include censored in rank). |
+| 2026-09-02 | § Grain naming lock — ASST-PS / LAST-PS / ALL-PS + mean / cum / annum; retire spell-mean; fix Alex Â = ALL-PS mean at decision year. |

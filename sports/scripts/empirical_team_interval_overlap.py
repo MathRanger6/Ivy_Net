@@ -31,6 +31,7 @@ SPORTS = REPO / "sports"
 sys.path.insert(0, str(SCRIPTS))
 
 from hero_gallery_paths import ensure_hero_dirs
+from hero_plot_style import PLOT_DPI
 from interval_overlap_paths import empirical_overlap_paths
 
 TEAM_MIN_PLAYERS = 2
@@ -156,6 +157,23 @@ def _coverage_stats(cover: np.ndarray, n_units: int) -> dict:
     }
 
 
+def _stamp_corner_badge(ax, text: str, *, corner: str = "upper_right") -> None:
+    x, ha = (0.98, "right") if corner == "upper_right" else (0.02, "left")
+    ax.text(
+        x,
+        0.98,
+        text,
+        transform=ax.transAxes,
+        ha=ha,
+        va="top",
+        fontsize=8,
+        fontweight="bold",
+        color="0.15",
+        bbox={"boxstyle": "round,pad=0.2", "facecolor": "#FFF3CD", "edgecolor": "0.65", "alpha": 0.92},
+        zorder=10,
+    )
+
+
 def build_figure(
     iv: pd.DataFrame,
     work: pd.DataFrame,
@@ -166,6 +184,7 @@ def build_figure(
     suptitle: str | None = None,
     xlab: str | None = None,
     labels: dict[str, str] | None = None,
+    grain_badge: str | None = None,
 ) -> dict:
     from gallery_mathtext import configure_matplotlib_mathtext
 
@@ -176,7 +195,6 @@ def build_figure(
     lo = iv["A_hat_min"].to_numpy(dtype=float)
     hi = iv["A_hat_max"].to_numpy(dtype=float)
     cover = _coverage_curve(lo, hi, grid)
-    cover_disjoint = _disjoint_benchmark(work, len(iv), grid)
     cov_stats = _coverage_stats(cover, len(iv))
 
     iv_plot = iv.sort_values("T_j_hat").reset_index(drop=True)
@@ -188,30 +206,19 @@ def build_figure(
 
     ax = axes[0, 0]
     ax.fill_between(grid, cover, step="mid", alpha=0.35, color=BAR_COLOR, label=lab["legend_actual"])
-    ax.plot(
-        grid,
-        cover_disjoint,
-        color="crimson",
-        lw=1.5,
-        ls="--",
-        label="Disjoint sort-and-chop (equal-$n$ slices)",
-    )
     ax.axhline(1, color="gray", ls=":", lw=1, label="No overlap (coverage = 1)")
     ax.set_xlabel(xlab, fontsize=10)
     ax.set_ylabel(lab["coverage_ylabel"], fontsize=10)
-    ax.set_title(lab["overlap_title"], fontsize=11, pad=8)
-    ax.text(
-        0.02,
-        0.98,
-        rf"max coverage = {cov_stats['coverage_max']:,}  |  "
-        + lab["coverage_grid_note"].format(frac=cov_stats["coverage_frac_gt_1"]),
-        transform=ax.transAxes,
-        va="top",
-        ha="left",
-        fontsize=8,
-        bbox=dict(boxstyle="round", facecolor="white", alpha=0.85),
+    ax.set_title(
+        lab["overlap_title"]
+        + "\n"
+        + rf"max coverage = {cov_stats['coverage_max']:,} · "
+        + lab["coverage_grid_note"].format(frac=cov_stats["coverage_frac_gt_1"])
+        + "\n"
+        + r"Blue fill = actual rosters · gray dashed = no overlap (coverage $= 1$)",
+        fontsize=10,
+        pad=8,
     )
-    ax.legend(fontsize=7, loc="lower right")
 
     ax = axes[0, 1]
     ax.hist(iv["perf_span"], bins=SPAN_BINS, color=BAR_COLOR, edgecolor="white", alpha=0.85)
@@ -267,16 +274,18 @@ def build_figure(
         )
     )
     fig.suptitle(suptitle or default_title, fontsize=12, y=0.98)
+    if grain_badge:
+        _stamp_corner_badge(axes[0, 0], grain_badge, corner="upper_right")
     fig.subplots_adjust(left=0.08, right=0.96, top=0.90, bottom=0.08, hspace=0.38, wspace=0.28)
     png_path.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(png_path, dpi=150, bbox_inches="tight")
+    fig.savefig(png_path, dpi=PLOT_DPI, bbox_inches="tight")
     plt.close(fig)
     print(f"Wrote {png_path}")
 
     return {
         **cov_stats,
-        "coverage_disjoint_max": int(cover_disjoint.max()),
-        "coverage_disjoint_mean": float(cover_disjoint.mean()),
+        "coverage_disjoint_max": None,
+        "coverage_disjoint_mean": None,
         "n_team_seasons": int(len(iv)),
         "n_player_seasons": int(len(work)),
         "H_sort": float(h_sort) if h_sort is not None else None,

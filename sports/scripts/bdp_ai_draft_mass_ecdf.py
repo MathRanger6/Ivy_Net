@@ -44,6 +44,7 @@ from cct_p2b_ai_band_overlay import (
     _perf_cutoffs,
 )
 from hero_gallery_paths import BASIC_DATA_PLOTS, ensure_hero_dirs
+from hero_plot_style import PLOT_DPI
 from pass_a_congestion_conditional import CctSpec, _get_panel
 from pd20_22_campaign_window import activate_from_args, add_window_args, current_window
 
@@ -167,18 +168,20 @@ def build_figure(
     spec_label: str,
     perf_metric: str,
     draft_mass_step: float,
+    panel_pool_label: str | None = None,
 ) -> None:
     from gallery_mathtext import configure_matplotlib_mathtext
 
     configure_matplotlib_mathtext()
     fig, ax = plt.subplots(figsize=(10.5, 6.2))
 
+    pool_label = panel_pool_label or rf"+DFT panel ($n={panel_perf.size:,}$)"
     _plot_ecdf(
         ax,
         panel_perf,
         color=PANEL_COLOR,
         lw=2.2,
-        label=rf"+DFT panel ($n={panel_perf.size:,}$)",
+        label=pool_label,
     )
     _plot_ecdf(
         ax,
@@ -241,9 +244,80 @@ def build_figure(
     )
     fig.text(0.5, 0.01, note, ha="center", va="bottom", fontsize=8, color="0.35")
     fig.tight_layout(rect=(0, 0.04, 1, 1))
-    fig.savefig(png, dpi=150, bbox_inches="tight")
+    fig.savefig(png, dpi=PLOT_DPI, bbox_inches="tight")
     plt.close(fig)
     print(f"Wrote {png.relative_to(REPO)}")
+
+
+# Reigning data-story panel 4 uses the standard F-HERO draft-mass grid (not band-lock edges).
+REIGNING_ECDF_PANEL_TOP_CUTS = DEFAULT_PANEL_TOP_CUTS
+
+
+def run_reigning_last_ps_ecdf(out_dir: Path) -> Path:
+    """Reigning data-story panel 4 — last-ps ALLT with purple overlay band cuts."""
+    from pass_a_congestion_conditional import CctSpec, _get_panel
+
+    out_dir.mkdir(parents=True, exist_ok=True)
+    stem = "BDP_Ai_draft_mass_ecdf_mg10_min20_09_21_allt_ppm_last_ps"
+    out_png = out_dir / f"{stem}.png"
+    out_csv = out_dir / f"{stem}_cuts.csv"
+    out_json = out_dir / f"{stem}.json"
+
+    base = CctSpec(
+        season_min=2009,
+        season_max=2021,
+        min_minutes=20.0,
+        min_team_season_games=10,
+        winsor_lo=0.01,
+        winsor_hi=0.99,
+        n_bins=16,
+        ai_lo=None,
+        ai_hi=None,
+        perf_metric="ppm",
+        dft=False,
+        y_draft_mode="ever",
+        panel_rows="last-ps",
+    )
+    use = _get_panel(base)
+    panel = use.dropna(subset=["perf", "Y_draft"]).copy()
+    y = pd.to_numeric(panel["Y_draft"], errors="coerce").fillna(0).astype(int)
+    drafted = panel.loc[y == 1].copy()
+    panel_perf = panel["perf"].to_numpy(dtype=float)
+    drafted_perf = drafted["perf"].to_numpy(dtype=float)
+
+    panel_top_cuts = list(REIGNING_ECDF_PANEL_TOP_CUTS)
+    tops = {0.0, *panel_top_cuts}
+    cuts = _perf_cutoffs(panel, tops)
+    draft_mass_df = _draft_mass_grid(drafted_perf, 5.0)
+    panel_top_df = _panel_top_grid(panel_perf, drafted_perf, panel_top_cuts)
+    band_df = _band_table(panel, int(drafted_perf.size), parse_bands(DEFAULT_BANDS), cuts)
+    cuts_df = pd.concat([draft_mass_df, panel_top_df, band_df], ignore_index=True, sort=False)
+
+    build_figure(
+        panel_perf=panel_perf,
+        drafted_perf=drafted_perf,
+        draft_mass_df=draft_mass_df,
+        panel_top_df=panel_top_df,
+        png=out_png,
+        spec_label="mg10 min20 09_21 · ALLT · panel=last-ps · Y=ever",
+        perf_metric="ppm",
+        draft_mass_step=5.0,
+        panel_pool_label=rf"Full panel ($n={panel_perf.size:,}$)",
+    )
+    cuts_df.to_csv(out_csv, index=False, float_format="%.6g")
+
+    meta = {
+        "diagnostic": "bdp_ai_draft_mass_ecdf",
+        "date": date.today().isoformat(),
+        "panel": "mg10 min20 09_21 · ALLT · panel=last-ps · Y=ever",
+        "panel_top_cuts": panel_top_cuts,
+        "n_panel": int(panel_perf.size),
+        "n_drafted": int(drafted_perf.size),
+        "png": out_png.name,
+    }
+    out_json.write_text(json.dumps(meta, indent=2) + "\n", encoding="utf-8")
+    print(f"Wrote {out_json.relative_to(REPO)}")
+    return out_png
 
 
 def main() -> None:

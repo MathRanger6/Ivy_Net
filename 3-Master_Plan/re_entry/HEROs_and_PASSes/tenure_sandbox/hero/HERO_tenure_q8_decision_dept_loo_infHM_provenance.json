@@ -1,0 +1,75 @@
+{
+  "artifact": "tenure_pass_a_decision_hero",
+  "date": "2026-09-02",
+  "input": "tenure/tenure_pipeline/faculty_panel_with_pools.jsonl",
+  "career_master": "tenure/tenure_pipeline/author_year_career_master.jsonl",
+  "prep": {
+    "n_resolved_all_asst_time": 391,
+    "asst_time_histogram": {
+      "1": 70,
+      "2": 91,
+      "3": 76,
+      "4": 72,
+      "5": 51,
+      "6": 12,
+      "7": 13,
+      "8": 4,
+      "9": 2
+    },
+    "n_cohort": 391,
+    "n_with_career_rate": 280,
+    "n_tenure": 191,
+    "n_attrition": 200,
+    "n_off_tenure_track": 47,
+    "reference_asst_time_band": [
+      5,
+      6
+    ],
+    "n_in_reference_band": 63,
+    "pct_in_reference_band": 16.11,
+    "x_metric": "decision_loo",
+    "n_persons_with_x": 389,
+    "n_dropped_null_x": 2,
+    "n_empty_dept_pool": 0
+  },
+  "spec": {
+    "window": "decision",
+    "stat": "mean",
+    "x_metric": "decision_loo",
+    "n_bins": 8,
+    "bin_method": "quantile",
+    "peer_pool": "whole department at decision year \u00b7 pubs_per_career_year LOO",
+    "cohort": "all resolved infHM \u00b7 excl transferred"
+  },
+  "outputs": {
+    "png": "HERO_tenure_q8_decision_dept_loo_infHM.png",
+    "csv": "HERO_tenure_q8_decision_dept_loo_infHM_binned.csv",
+    "slide_png": "HERO_tenure_q8_decision_dept_loo_infHM_slide.png",
+    "lpm_txt": "HERO_tenure_q8_decision_dept_loo_infHM_lpm.txt"
+  },
+  "stage9_summary": {
+    "n_persons_with_loo": 389,
+    "n_tenure": 191,
+    "n_attrition": 198,
+    "n_censored": 0,
+    "n_resolved": 389,
+    "n_bins": 8,
+    "bin_method": "quantile",
+    "log_bin": false,
+    "z_score": false,
+    "exclude_censored": true,
+    "x_metric": "decision_loo",
+    "window": "decision",
+    "stat": "mean",
+    "csv_path": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/hero/_stage9_scratch_decision/stage9_binned_table.csv",
+    "png_path": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/hero/_stage9_scratch_decision/stage9_inverted_u.png"
+  },
+  "shape": {
+    "peak_vent": 5,
+    "peak_rate_pct": 77.083,
+    "bin0_rate_pct": 44.898,
+    "last_bin_rate_pct": 41.667,
+    "bin0_is_peak": false,
+    "beta_sq": -0.017339130219654816
+  }
+}

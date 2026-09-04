@@ -1,0 +1,29 @@
+{
+  "diagnostic": "tenure_dept_loo_by_outcome_pd29",
+  "date": "2026-09-03",
+  "grain": "Decision cohort \u00b7 dept pond LOO \u00b7 whole dept \u00b7 pubs_per_career_year",
+  "format": "ecdf_only",
+  "note": "Overlapping histogram retired; see dept_loo hist|ECDF panel",
+  "tenured": {
+    "label": "tenured",
+    "n": 191,
+    "mean": 4.681453739197534,
+    "std": 1.376620549930302,
+    "min": 0.8503344481605352,
+    "max": 8.413297927152401,
+    "median": 4.663165473819356
+  },
+  "attrition": {
+    "label": "attrition",
+    "n": 198,
+    "mean": 4.833193899748535,
+    "std": 1.597543762078224,
+    "min": 1.033152556913932,
+    "max": 8.791544199264788,
+    "median": 4.7611056549715745
+  },
+  "n_with_dept_loo": 389,
+  "outputs": {
+    "png": "TENURE_dept_loo_career_rate_by_outcome_pd29.png"
+  }
+}

@@ -78,6 +78,130 @@ def standardize_perf_zscore_by_season(df: pd.DataFrame) -> pd.DataFrame:
     return out
 
 
+def assign_career_cum_box_ppm(df: pd.DataFrame) -> pd.DataFrame:
+    """Career-to-date PPM through each player-season (cum points / cum minutes)."""
+    required = {"athlete_id", "season", "points", "minutes"}
+    miss = required - set(df.columns)
+    if miss:
+        raise KeyError(f"assign_career_cum_box_ppm missing columns: {sorted(miss)}")
+    out = df.copy()
+    out["_points"] = pd.to_numeric(out["points"], errors="coerce").fillna(0.0)
+    out["_minutes"] = pd.to_numeric(out["minutes"], errors="coerce").fillna(0.0)
+    out = out.sort_values(["athlete_id", "season"])
+    g = out.groupby("athlete_id", observed=True)
+    out["cum_points"] = g["_points"].cumsum()
+    out["cum_minutes"] = g["_minutes"].cumsum()
+    out["perf_cum"] = np.where(out["cum_minutes"] > 0, out["cum_points"] / out["cum_minutes"], np.nan)
+    return out.drop(columns=["_points", "_minutes"])
+
+
+def standardize_perf_zscore_cross_section(
+    df: pd.DataFrame,
+    ref: pd.Series | None = None,
+) -> pd.DataFrame:
+    """Z-score ``perf`` using mean/std from reference series (default: all rows in ``df``)."""
+    out = df.copy()
+    if ref is None:
+        ref = out["perf"]
+    v = pd.to_numeric(ref, errors="coerce").dropna()
+    if v.empty:
+        out["perf"] = np.nan
+        return out
+    mu = float(v.mean())
+    sigma = float(v.std())
+    if not np.isfinite(sigma) or sigma == 0:
+        out["perf"] = np.nan
+        return out
+    out["perf"] = (pd.to_numeric(out["perf"], errors="coerce") - mu) / sigma
+    return out
+
+
+def apply_career_cum_ppm_loo_option_a(
+    df: pd.DataFrame,
+    poolq_winsor_quantiles: tuple[float, float] | None = None,
+) -> pd.DataFrame:
+    """
+    Career cumulative PPM → z (reference = last-PS cross-section) → teammate LOO.
+
+    LOO is computed on the full panel before any last-PS row restriction.
+    """
+    from sports_pipeline.y_draft_mode import restrict_to_last_season_rows
+
+    work = assign_career_cum_box_ppm(df)
+    last_ps, _ = restrict_to_last_season_rows(work)
+    ref = pd.to_numeric(last_ps["perf_cum"], errors="coerce")
+    work["perf"] = work["perf_cum"]
+    work = standardize_perf_zscore_cross_section(work, ref=ref)
+    return recompute_teammate_loo_pool_quality(
+        work,
+        poolq_winsor_quantiles=poolq_winsor_quantiles,
+    )
+
+
+def assign_career_weighted_per_cum(
+    df: pd.DataFrame,
+    *,
+    normalized: bool = False,
+) -> pd.DataFrame:
+    """
+    Weighted cumulative PER by college year index.
+
+    Raw (``normalized=False``):
+      perf_cum_k = sum_{i=1}^{k} i * PER_i
+
+    Normalized (``normalized=True``):
+      perf_cum_k = sum_{i=1}^{k} i * PER_i  /  sum_{i=1}^{k} i
+                 = weighted average PER with weights 1, 2, …, k
+      (only seasons with non-null PER enter numerator and denominator.)
+
+    Requires Sports-Reference ``PER`` on the panel.
+    """
+    _label, col = resolve_perf_metric("per")
+    if col not in df.columns:
+        raise KeyError(
+            f"Panel has no column {col!r} — merge Sports-Reference advanced stats first."
+        )
+    out = df.copy()
+    out["_per"] = pd.to_numeric(out[col], errors="coerce")
+    out = out.sort_values(["athlete_id", "season"])
+    g = out.groupby("athlete_id", observed=True)
+    out["_yr_idx"] = g.cumcount() + 1
+    has_per = out["_per"].notna()
+    out["_weight"] = out["_yr_idx"].where(has_per)
+    out["_wx"] = (out["_yr_idx"] * out["_per"]).where(has_per)
+    out["_sum_w"] = g["_weight"].cumsum()
+    out["_sum_wx"] = g["_wx"].cumsum()
+    if normalized:
+        out["perf_cum"] = out["_sum_wx"] / out["_sum_w"].where(out["_sum_w"] > 0)
+    else:
+        out["perf_cum"] = out["_sum_wx"]
+    return out.drop(columns=["_per", "_yr_idx", "_weight", "_wx", "_sum_w", "_sum_wx"])
+
+
+def apply_career_weighted_per_loo_option_a(
+    df: pd.DataFrame,
+    poolq_winsor_quantiles: tuple[float, float] | None = None,
+    *,
+    normalized: bool = False,
+) -> pd.DataFrame:
+    """
+    Weighted cumulative PER → z (reference = last-PS cross-section) → teammate LOO.
+
+    Set ``normalized=True`` for weighted-average PER (weights 1…k) instead of raw sum.
+    """
+    from sports_pipeline.y_draft_mode import restrict_to_last_season_rows
+
+    work = assign_career_weighted_per_cum(df, normalized=normalized)
+    last_ps, _ = restrict_to_last_season_rows(work)
+    ref = pd.to_numeric(last_ps["perf_cum"], errors="coerce")
+    work["perf"] = work["perf_cum"]
+    work = standardize_perf_zscore_cross_section(work, ref=ref)
+    return recompute_teammate_loo_pool_quality(
+        work,
+        poolq_winsor_quantiles=poolq_winsor_quantiles,
+    )
+
+
 def recompute_teammate_loo_pool_quality(
     df: pd.DataFrame,
     poolq_winsor_quantiles: tuple[float, float] | None = None,

@@ -1,0 +1,18 @@
+{
+  "diagnostic": "tenure_pubs_per_career_year_pd29",
+  "date": "2026-09-03",
+  "grain": "Decision cohort \u00b7 all resolved \u00b7 Alex \u00c2 (pubs_per_career_year)",
+  "pubs_per_career_year": {
+    "label": "pubs_per_career_year",
+    "n": 280,
+    "mean": 4.834099808563045,
+    "std": 5.507095483479277,
+    "min": 0.05357142857142857,
+    "max": 67.0909090909091,
+    "median": 3.6515151515151514
+  },
+  "n_cohort": 391,
+  "outputs": {
+    "png": "TENURE_pubs_career_rate_pd29.png"
+  }
+}

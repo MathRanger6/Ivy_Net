@@ -14,18 +14,26 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
+from tenure_grain_labels import (  # noqa: F401 — re-export for callers
+    ANNUM,
+    ASST_PS,
+    CUM,
+    LAST_PS,
+    grain_badge_short,
+    grain_display_label,
+    hero_title_line,
+    perf_display_label,
+    provenance_spec_label,
+    stamp_grain_badge,
+    stamp_window_badge,
+    window_badge,
+    window_display_label,
+)
+
 
 def _bin_label(bin_method: str, n_bins: int) -> str:
     kind = "QTL" if bin_method == "quantile" else "EW"
     return f"{kind}{n_bins}"
-
-
-def _x_mathtext(x_metric: str, *, pool_perf: str = "annual") -> str:
-    if x_metric == "own_cum":
-        return r"$\mathrm{cum\ pubs}$"
-    if pool_perf == "cumulative" and x_metric == "loo":
-        return r"$\mathrm{LOO}_{\mathrm{cum}}$"
-    return r"$\mathrm{poolq\_LOO}$" if x_metric == "loo" else r"$\mathrm{poolq}$"
 
 
 def _spec_subtitle(
@@ -33,18 +41,12 @@ def _spec_subtitle(
     bin_method: str,
     x_metric: str,
     *,
-    grain: str = "spell_mean",
-    pool_perf: str = "annual",
+    window: str = ASST_PS,
+    stat: str = ANNUM,
 ) -> str:
     bin_lbl = _bin_label(bin_method, n_bins)
-    xtex = _x_mathtext(x_metric, pool_perf=pool_perf)
-    if grain == "last_asst" and pool_perf == "cumulative":
-        return rf"{bin_lbl} · last-ps · {xtex} cum pubs · Option A"
-    if grain == "last_asst" and x_metric == "own_cum":
-        return rf"{bin_lbl} · last-ps · own {xtex} · Option A"
-    if grain == "last_asst":
-        return rf"{bin_lbl} · last-ps · {xtex} · Option A"
-    return rf"{bin_lbl} · {xtex} · person-level mean · Option A"
+    perf_lbl = perf_display_label(x_metric=x_metric, stat=stat)
+    return rf"{bin_lbl} · {perf_lbl} · Option A"
 
 
 def quadratic_lpm_tenure(
@@ -124,7 +126,7 @@ def _annotate_bin_n_on_bar(
     y_frac: float = 0.10,
 ) -> None:
     """Label each bar with bin population on the bar face (MBB BDP equal-width style)."""
-    for i, (xi, yi, n) in enumerate(zip(x, y, counts, strict=True)):
+    for i, (xi, yi, n) in enumerate(zip(x, y, counts)):
         ni = int(n)
         if ni <= 0 or float(yi) <= 0:
             continue
@@ -146,18 +148,32 @@ def _annotate_bin_n_on_bar(
         )
 
 
+def _x_mathtext(x_metric: str, *, stat: str = ANNUM) -> str:
+    if x_metric == "own_cum":
+        return r"$\mathrm{cum\ pubs}$"
+    if x_metric == "own_career":
+        return r"$\mathrm{career\ rate}$"
+    if x_metric == "decision_loo":
+        return r"$\mathrm{LOO}_{\mathrm{career}}$"
+    if stat == CUM and x_metric == "loo":
+        return r"$\mathrm{LOO}_{\mathrm{cum}}$"
+    return r"$\mathrm{poolq\_LOO}$" if x_metric == "loo" else r"$\mathrm{poolq}$"
+
+
 def _x_axis_label(
     bin_method: str,
     x_metric: str,
     *,
-    pool_perf: str = "annual",
+    stat: str = ANNUM,
 ) -> str:
-    xtex = _x_mathtext(x_metric, pool_perf=pool_perf)
+    xtex = _x_mathtext(x_metric, stat=stat)
     kind = "Quantile" if bin_method == "quantile" else "Equal-width"
-    if pool_perf == "cumulative" and x_metric == "loo":
+    if stat == CUM and x_metric == "loo":
         return rf"{kind} bin ($1$ = lowest peer cum pubs LOO)"
     if x_metric == "own_cum":
         return rf"{kind} bin ($1$ = lowest own cumulative pubs)"
+    if x_metric in ("own_career", "decision_loo"):
+        return rf"{kind} bin ($1$ = lowest {xtex})"
     return rf"{kind} bin ($1$ = lowest {xtex})"
 
 
@@ -178,19 +194,14 @@ def _tenure_footer(
     n_persons: int,
     n_tenure: int,
     n_resolved: int,
-    grain: str = "spell_mean",
-    pool_perf: str = "annual",
+    window: str = ASST_PS,
+    stat: str = ANNUM,
 ) -> str:
-    grain_bit = "last-ps" if grain == "last_asst" else "spell-mean"
-    if x_metric == "own_cum":
-        perf_bit = "own cum pubs"
-    else:
-        perf_bit = "cum-pubs LOO" if pool_perf == "cumulative" else "annual LOO"
+    grain_bit = window_badge(window)
+    perf_bit = perf_display_label(x_metric=x_metric, stat=stat)
     return (
-        f"HERO · {_x_mathtext(x_metric, pool_perf=pool_perf).strip('$')} · {_bin_label(bin_method, n_bins)} · "
-        f"{grain_bit} · {perf_bit} · infHM · resolved-only · "
-        f"n={n_persons:,} · tenure={n_tenure:,} · resolved={n_resolved:,} · "
-        f"{date.today().isoformat()}"
+        f"HERO · {_bin_label(bin_method, n_bins)} · {grain_bit} · {perf_bit} · infHM · "
+        f"n={n_persons:,} · res={n_resolved:,} · {date.today().isoformat()}"
     )
 
 
@@ -202,12 +213,23 @@ def build_hero_slide_panel(
     n_bins: int,
     bin_method: str = "quantile",
     x_metric: str = "loo",
-    grain: str = "spell_mean",
-    pool_perf: str = "annual",
+    window: str = ASST_PS,
+    stat: str = ANNUM,
     exclude_censored: bool = True,
     stage9_summary: dict[str, Any] | None = None,
+    # Legacy kwargs (old callers / provenance replay)
+    grain: str | None = None,
+    pool_perf: str | None = None,
 ) -> tuple[pd.Series, dict]:
     """Write MBB-format single-panel tenure HERO PNG."""
+    if grain is not None or pool_perf is not None:
+        from tenure_grain_labels import normalize_stat, normalize_window
+
+        if grain is not None:
+            window = normalize_window(grain)
+        if pool_perf is not None:
+            stat = normalize_stat(pool_perf)
+
     sys_path = Path(__file__).resolve().parents[2] / "sports" / "scripts"
     import sys
 
@@ -235,7 +257,7 @@ def build_hero_slide_panel(
     n_tenure = int(summ.get("n_tenure", sum(p["tenure"] for p in persons)))
     n_resolved = int(summ.get("n_resolved", sum(1 for p in persons if not p["censored"])))
 
-    xlab = _x_axis_label(bin_method, x_metric, pool_perf=pool_perf)
+    xlab = _x_axis_label(bin_method, x_metric, stat=stat)
     equal_width = bin_method == "equal_width"
 
     fig, ax = plt.subplots(figsize=(7.5, 4.5))
@@ -247,43 +269,39 @@ def build_hero_slide_panel(
         ax.bar(x, y, color="steelblue", edgecolor="white", alpha=0.9, width=0.82)
     ax.set_xlabel(xlab)
     ax.set_ylabel(r"Mean $Y_{\mathrm{tenure}}$ (resolved only)")
-    if x_metric == "own_cum":
-        title_line = "Empirical hero — own cumulative pubs (last-ps · ability)"
-    elif grain == "last_asst" and pool_perf == "cumulative":
-        title_line = "Empirical hero — last-ps peer cumulative stock"
-    else:
-        title_line = "Empirical hero — peer pool context · tenure inference panel"
+    title_line = hero_title_line(window=window, stat=stat, x_metric=x_metric)
     ax.set_title(
-        rf"{title_line}\n" + _spec_subtitle(
-            n_bins, bin_method, x_metric, grain=grain, pool_perf=pool_perf
-        ),
+        f"{title_line}\n"
+        + _spec_subtitle(n_bins, bin_method, x_metric, window=window, stat=stat),
         fontsize=10,
+        pad=4,
     )
+    stamp_window_badge(ax, window, corner="upper_right")
     ax.set_xticks(x)
-    ax.set_ylim(0, min(1.0, max(y) * 1.18 + 0.02))
+    y_top = min(1.0, max(y) * 1.12 + 0.02)
+    ax.set_ylim(0, y_top)
     ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda v, _: f"{v:.0%}"))
     ax.grid(axis="y", alpha=0.25, linewidth=0.5)
 
     if equal_width:
         _annotate_bin_n_on_bar(ax, x, y, n_res, bar_colors)
     else:
-        # Quantile: equal n_all per bin; n_resolved varies (censored uneven by LOO).
-        for xi, yi, ni_res, ni_all in zip(x, y, n_res, n_all, strict=True):
+        for xi, yi, ni_res, ni_all in zip(x, y, n_res, n_all):
             ax.text(
                 xi,
-                yi + 0.015,
+                min(float(yi) + 0.012, y_top - 0.02),
                 f"{ni_res}/{ni_all}",
                 ha="center",
                 va="bottom",
-                fontsize=7,
+                fontsize=6.5,
                 color="0.35",
             )
         ax.text(
-            0.98,
-            0.02,
-            "bar label = resolved / all (quantile ≈ equal all)",
+            0.99,
+            0.01,
+            "resolved/all",
             transform=ax.transAxes,
-            fontsize=7,
+            fontsize=6.5,
             ha="right",
             va="bottom",
             color="0.45",
@@ -291,14 +309,14 @@ def build_hero_slide_panel(
 
     note = _lpm_annotation(coef)
     if note:
-        ax.text(0.02, 0.96, note, transform=ax.transAxes, fontsize=8, va="top")
+        fig.text(0.08, 0.055, note, ha="left", va="bottom", fontsize=7.5, color="0.25")
     if equal_width:
         ax.text(
-            0.98,
-            0.02,
-            "bar shade ∝ bin n (dark = more resolved) · n on bar face",
+            0.99,
+            0.01,
+            "shade ∝ n · n on bar",
             transform=ax.transAxes,
-            fontsize=7,
+            fontsize=6.5,
             ha="right",
             va="bottom",
             color="0.45",
@@ -311,11 +329,11 @@ def build_hero_slide_panel(
         n_persons=n_persons,
         n_tenure=n_tenure,
         n_resolved=n_resolved,
-        grain=grain,
-        pool_perf=pool_perf,
+        window=window,
+        stat=stat,
     )
     stamp_figure_footer(fig, footer)
-    fig.tight_layout(rect=(0, 0.05, 1, 1))
+    fig.subplots_adjust(top=0.88, bottom=0.14)
     out_png.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(out_png, dpi=150, bbox_inches="tight")
     plt.close(fig)

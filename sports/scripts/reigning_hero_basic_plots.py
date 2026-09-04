@@ -23,7 +23,7 @@ REPO = Path(__file__).resolve().parents[2]
 SCRIPTS = Path(__file__).resolve().parent
 sys.path.insert(0, str(SCRIPTS))
 
-from bdp_ai_tj_distributions import BdpSpec, parse_bdp_spec, run_spec, run_tj_loo_compare
+from bdp_ai_tj_distributions import BdpSpec, parse_bdp_spec, run_spec
 from bdp_draft_rate_apgms_argms import run_metric as run_draft_rate_metric
 from bdp_team_size_distributions import run_spec as run_team_size
 from bdp_reigning_exposure_plots import run_minutes_dual, run_team_games

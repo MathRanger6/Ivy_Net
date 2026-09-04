@@ -1,6 +1,6 @@
 {
   "diagnostic": "bdp_poolq_loo_distribution",
-  "date": "2026-08-28",
+  "date": "2026-09-03",
   "bdp_spec": "mg10 min20 09_21",
   "panel_rows": "last-ps",
   "poolq_winsor": null,

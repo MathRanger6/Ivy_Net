@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Tenure Pass A — empirical HERO (tenure rate vs LOO peer quality).
 
-v0 lock: inference panel (HIGH/MEDIUM), person-level LOO mean, Q16 bins,
+v0 lock: inference panel (HIGH/MEDIUM), ASST-PS mean peer LOO (annum), Q16 bins,
 tenure rate among resolved (censored excluded from denominator).
 
 Outputs → 3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/hero/
@@ -9,7 +9,7 @@ Outputs → 3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/hero/
 Run (repo root):
   python tenure/scripts/tenure_pass_a_hero.py
   python tenure/scripts/tenure_pass_a_hero.py --bin-method equal_width --x-metric poolq --output-tag ew16_poolq_infHM
-  python tenure/scripts/tenure_pass_a_hero.py --bin-method quantile --x-metric loo --output-tag q16_loo_infHM
+  python tenure/scripts/tenure_pass_a_hero.py --window last_ps --stat cum --output-tag q16_lastps_loo_cum_infHM
 """
 
 from __future__ import annotations
@@ -19,6 +19,7 @@ import json
 import shutil
 import sys
 import tempfile
+import warnings
 from datetime import date
 from pathlib import Path
 
@@ -36,13 +37,21 @@ DEFAULT_OUT_DIR = (
 
 PRIMARY_TIERS = frozenset({"HIGH", "MEDIUM"})
 
-# Import stage9 from tenure_pipeline (notebook-adjacent module path)
 sys.path.insert(0, str(TENURE_PIPELINE))
 from hero_panel_prep import prepare_hero_panel, write_jsonl  # noqa: E402
 from stage9_analysis import build_inverted_u, _load_person_level  # noqa: E402
 
 SCRIPTS_DIR = Path(__file__).resolve().parent
 sys.path.insert(0, str(SCRIPTS_DIR))
+from tenure_grain_labels import (  # noqa: E402
+    ASST_PS,
+    ANNUM,
+    LAST_PS,
+    normalize_stat,
+    normalize_window,
+    provenance_spec_label,
+    warn_if_legacy_cli,
+)
 from tenure_hero_slide_plot import (  # noqa: E402
     build_hero_slide_panel,
     write_lpm_txt,
@@ -69,10 +78,25 @@ def filter_inference_jsonl(in_path: Path, out_path: Path) -> dict:
     return {"rows_in": n_in, "rows_out": n_out, "tier_counts_in": tier_in}
 
 
+def _resolve_window_stat(args: argparse.Namespace) -> tuple[str, str]:
+    """CLI window/stat with legacy --grain / --pool-perf fallback."""
+    if getattr(args, "grain", None) is not None or getattr(args, "pool_perf", None) is not None:
+        with warnings.catch_warnings(record=True):
+            warnings.simplefilter("always")
+            window, stat = warn_if_legacy_cli(
+                grain=getattr(args, "grain", None) or args.window,
+                pool_perf=getattr(args, "pool_perf", None) or args.stat,
+            )
+        return window, stat
+    return normalize_window(args.window), normalize_stat(args.stat)
+
+
 def write_provenance(
     path: Path,
     *,
     args: argparse.Namespace,
+    window: str,
+    stat: str,
     filter_stats: dict,
     result: dict,
     png_name: str,
@@ -97,9 +121,11 @@ def write_provenance(
             "rows_out": filter_stats["rows_out"],
         },
         "spec": {
-            "grain": args.grain,
-            "pool_perf": args.pool_perf,
-            "grain_label": _grain_label(args),
+            "window": window,
+            "stat": stat,
+            "spec_label": provenance_spec_label(
+                window=window, stat=stat, x_metric=args.x_metric
+            ),
             "x_metric": args.x_metric,
             "n_bins": args.n_bins,
             "bin_method": args.bin_method,
@@ -115,24 +141,8 @@ def write_provenance(
     path.write_text(json.dumps(prov, indent=2) + "\n", encoding="utf-8")
 
 
-def _grain_label(args: argparse.Namespace) -> str:
-    if args.x_metric == "own_cum":
-        return "last assistant year · own cumulative pubs (ability slice)"
-    if args.grain == "last_asst" and args.pool_perf == "cumulative":
-        return "last assistant year · LOO on peer cumulative pubs"
-    if args.grain == "last_asst":
-        return "last assistant year · annual LOO"
-    if args.pool_perf == "cumulative":
-        return "spell mean · cumulative LOO"
-    return "spell mean · annual LOO (v0 default)"
-
-
-def _uses_custom_prep(args: argparse.Namespace) -> bool:
-    return (
-        args.grain != "spell_mean"
-        or args.pool_perf != "annual"
-        or args.x_metric == "own_cum"
-    )
+def _uses_custom_prep(window: str, stat: str, x_metric: str) -> bool:
+    return window != ASST_PS or stat != ANNUM or x_metric == "own_cum"
 
 
 def main() -> None:
@@ -150,19 +160,31 @@ def main() -> None:
         "--x-metric",
         choices=("loo", "poolq", "own_cum"),
         default="loo",
-        help="loo = LOO pool mean; poolq = full OA pool mean; own_cum = own pubs_cumulative (last_asst)",
+        help="loo = LOO pool mean; poolq = full OA pool mean; own_cum = own pubs_cumulative (last_ps)",
+    )
+    parser.add_argument(
+        "--window",
+        choices=("asst_ps", "last_ps", "all_ps"),
+        default="asst_ps",
+        help="asst_ps = mean over assistant years (v0); last_ps = final assistant row (MBB last-ps)",
+    )
+    parser.add_argument(
+        "--stat",
+        choices=("annum", "cum", "mean"),
+        default="annum",
+        help="annum = pubs_year LOO; cum = pubs_cumulative LOO at that row",
     )
     parser.add_argument(
         "--grain",
         choices=("spell_mean", "last_asst"),
-        default="spell_mean",
-        help="spell_mean = v0 mean over assistant years; last_asst = final assistant row (MBB last-ps)",
+        default=None,
+        help=argparse.SUPPRESS,
     )
     parser.add_argument(
         "--pool-perf",
         choices=("annual", "cumulative"),
-        default="annual",
-        help="annual = pubs_year LOO (Stage 8 default); cumulative = pubs_cumulative LOO at that row",
+        default=None,
+        help=argparse.SUPPRESS,
     )
     parser.add_argument(
         "--exclude-censored",
@@ -185,18 +207,94 @@ def main() -> None:
         action="store_true",
         help="future: Option B (censored in denominator); default is Option A",
     )
+    parser.add_argument(
+        "--slides-only",
+        action="store_true",
+        help="skip Stage 9; re-render *_slide.png from existing binned CSV + provenance summary",
+    )
     args = parser.parse_args()
 
     if args.include_all_in_denominator:
         args.exclude_censored = False
 
-    if args.x_metric == "own_cum" and args.grain != "last_asst":
-        raise SystemExit("--x-metric own_cum requires --grain last_asst")
+    window, stat = _resolve_window_stat(args)
+
+    if args.x_metric == "own_cum" and window != LAST_PS:
+        raise SystemExit("--x-metric own_cum requires --window last_ps")
 
     if not args.input.is_file():
         raise SystemExit(f"Input not found: {args.input}\nRun: ./scripts/rsync_pull_recent_hpc.sh tenure")
 
     args.out_dir.mkdir(parents=True, exist_ok=True)
+
+    base = f"HERO_tenure_{args.output_tag}"
+    csv_dest = args.out_dir / f"{base}_binned.csv"
+    slide_dest = args.out_dir / f"{base}_slide.png"
+    lpm_dest = args.out_dir / f"{base}_lpm.txt"
+    prov_dest = args.out_dir / f"{base}_provenance.json"
+
+    if args.slides_only:
+        if not csv_dest.is_file():
+            raise SystemExit(f"--slides-only requires {csv_dest.relative_to(REPO)}")
+        prov = json.loads(prov_dest.read_text(encoding="utf-8")) if prov_dest.is_file() else {}
+        result = prov.get("stage9_summary") or {}
+        spec = prov.get("spec") or {}
+        if "window" in spec:
+            window = normalize_window(spec["window"])
+            stat = normalize_stat(spec["stat"])
+        elif "grain" in spec:
+            window = normalize_window(spec["grain"])
+            stat = normalize_stat(spec.get("pool_perf", "annual"))
+
+        with tempfile.NamedTemporaryFile(
+            mode="w", suffix=".jsonl", delete=False, prefix="tenure_inf_", encoding="utf-8"
+        ) as tmp:
+            filtered_path = Path(tmp.name)
+        try:
+            if _uses_custom_prep(window, stat, args.x_metric):
+                rows, prep_stats = prepare_hero_panel(
+                    args.input,
+                    tiers=PRIMARY_TIERS,
+                    window=window,
+                    stat=stat,
+                    x_metric=args.x_metric,
+                )
+                write_jsonl(rows, filtered_path)
+            else:
+                filter_inference_jsonl(args.input, filtered_path)
+            persons = _load_person_level(
+                filtered_path,
+                x_metric=args.x_metric,
+                window=window,
+                stat=stat,
+            )
+            coef, shape = build_hero_slide_panel(
+                csv_dest,
+                slide_dest,
+                persons=persons,
+                n_bins=args.n_bins,
+                bin_method=args.bin_method,
+                x_metric=args.x_metric,
+                window=window,
+                stat=stat,
+                exclude_censored=args.exclude_censored,
+                stage9_summary=result,
+            )
+            write_lpm_txt(
+                lpm_dest,
+                coef,
+                meta={
+                    "n_resolved": result.get("n_resolved"),
+                    "n_tenure": result.get("n_tenure"),
+                    "x_metric": args.x_metric,
+                    "n_bins": args.n_bins,
+                    "bin_method": args.bin_method,
+                },
+            )
+            print(f"✅ HERO slide PNG → {slide_dest.relative_to(REPO)}")
+        finally:
+            filtered_path.unlink(missing_ok=True)
+        return
 
     with tempfile.NamedTemporaryFile(
         mode="w", suffix=".jsonl", delete=False, prefix="tenure_inf_", encoding="utf-8"
@@ -205,12 +303,12 @@ def main() -> None:
 
     try:
         print(f"Preparing HERO panel → {filtered_path.name}")
-        if _uses_custom_prep(args):
+        if _uses_custom_prep(window, stat, args.x_metric):
             rows, prep_stats = prepare_hero_panel(
                 args.input,
                 tiers=PRIMARY_TIERS,
-                grain=args.grain,
-                pool_perf=args.pool_perf,
+                window=window,
+                stat=stat,
                 x_metric=args.x_metric,
             )
             write_jsonl(rows, filtered_path)
@@ -233,16 +331,11 @@ def main() -> None:
             exclude_censored=args.exclude_censored,
             bin_method=args.bin_method,
             x_metric=args.x_metric,
-            grain=args.grain,
-            pool_perf=args.pool_perf,
+            window=window,
+            stat=stat,
         )
 
-        base = f"HERO_tenure_{args.output_tag}"
         png_dest = args.out_dir / f"{base}.png"
-        csv_dest = args.out_dir / f"{base}_binned.csv"
-        slide_dest = args.out_dir / f"{base}_slide.png"
-        lpm_dest = args.out_dir / f"{base}_lpm.txt"
-        prov_dest = args.out_dir / f"{base}_provenance.json"
 
         shutil.copy2(work_dir / "stage9_inverted_u.png", png_dest)
         shutil.copy2(work_dir / "stage9_binned_table.csv", csv_dest)
@@ -252,8 +345,8 @@ def main() -> None:
             persons = _load_person_level(
                 filtered_path,
                 x_metric=args.x_metric,
-                grain=args.grain,
-                pool_perf=args.pool_perf,
+                window=window,
+                stat=stat,
             )
             coef, shape = build_hero_slide_panel(
                 csv_dest,
@@ -262,8 +355,8 @@ def main() -> None:
                 n_bins=args.n_bins,
                 bin_method=args.bin_method,
                 x_metric=args.x_metric,
-                grain=args.grain,
-                pool_perf=args.pool_perf,
+                window=window,
+                stat=stat,
                 exclude_censored=args.exclude_censored,
                 stage9_summary=result,
             )
@@ -284,6 +377,8 @@ def main() -> None:
         write_provenance(
             prov_dest,
             args=args,
+            window=window,
+            stat=stat,
             filter_stats=filter_stats,
             result=result,
             png_name=png_dest.name,

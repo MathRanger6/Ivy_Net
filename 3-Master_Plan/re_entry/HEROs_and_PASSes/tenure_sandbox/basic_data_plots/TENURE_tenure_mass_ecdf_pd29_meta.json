@@ -1,0 +1,17 @@
+{
+  "diagnostic": "tenure_mass_ecdf_pd29",
+  "date": "2026-09-03",
+  "grain": "Decision cohort \u00b7 all resolved \u00b7 Alex \u00c2 (pubs_per_career_year)",
+  "n_cohort_with_rate": 280,
+  "n_tenured_with_rate": 146,
+  "tenure_mass_step_pct": 10.0,
+  "panel_top_cuts_pct": [
+    7.0,
+    15.0,
+    25.0,
+    40.0
+  ],
+  "outputs": {
+    "png": "TENURE_tenure_mass_ecdf_pd29.png"
+  }
+}

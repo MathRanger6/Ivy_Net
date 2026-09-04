@@ -62,6 +62,11 @@ datasets/tenure/dblp.xml
 datasets/tenure/*.xml
 # Men's basketball bulk data (multi-GB CSV/SQLite under datasets/mbb/)
 datasets/mbb/**
+
+# Big Fish panels — unzipped CSVs exceed GitHub 100MB cap; track .zip only (unzip locally)
+datasets/football/football_big_fish_player_season_panel/football_big_fish_player_season_panel.csv
+datasets/legends/lol_big_fish_player_split_panel.csv
+
 # Small computed artifacts — track in Git (git pull on Rivanna; see README_TRACKED_ARTIFACTS.md)
 !datasets/mbb/empirical_perf_fit.json
 !datasets/mbb/README_TRACKED_ARTIFACTS.md

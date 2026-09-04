@@ -1,0 +1,38 @@
+{
+  "built_at": "2026-09-02T21:01:35.958904+00:00",
+  "script": "build_decision_year_cohort.py",
+  "policy": {
+    "resolved": "tenure or attrition (incl. OTT)",
+    "excluded": "censored, transferred, exclude_from_metrics",
+    "inclusion": "all asst_time unless --asst-time-min/max set",
+    "reference_band": "asst_time 5\u20136 (stats only)"
+  },
+  "inputs": {
+    "panel": "faculty_panel_with_pools.jsonl",
+    "career_master": "author_year_career_master.jsonl"
+  },
+  "n_resolved_all_asst_time": 391,
+  "asst_time_histogram": {
+    "1": 70,
+    "2": 91,
+    "3": 76,
+    "4": 72,
+    "5": 51,
+    "6": 12,
+    "7": 13,
+    "8": 4,
+    "9": 2
+  },
+  "n_cohort": 391,
+  "n_with_career_rate": 280,
+  "n_tenure": 191,
+  "n_attrition": 200,
+  "n_off_tenure_track": 47,
+  "reference_asst_time_band": [
+    5,
+    6
+  ],
+  "n_in_reference_band": 63,
+  "pct_in_reference_band": 16.11,
+  "output": "decision_year_cohort.jsonl"
+}

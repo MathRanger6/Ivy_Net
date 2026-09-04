@@ -1,34 +1,49 @@
 # Tenure HERO Campaign Plan — use what we have first
 
 **Prepared by COMPASS** (for Charles; PEER parallel on scrape bolster)  
-**Last synced:** 2026-09-01  
-**Status:** **Act I starting** — exploratory HERO on rsync’d May 2026 panel; scrape bolster **parallel / later**.
+**Last synced:** 2026-09-02  
+**Status:** **Act I exploratory done** (Sep 2 Alex porch); **Act I-b** = PD29 tenure spine; paper talk outline **parallel**.
 
-**Alex direction (Sep 2026):** See what tenure HERO / F-HERO can do on **existing** data before treating corpus expansion as the main task.
+**Alex direction:** Sep 2026 — see existing panel first ([`PD29_notes.md`](../../../../transcripts/PD29_notes.md): decision-year cohort, cum pubs rate, dept pond; **50/50** data + paper outline).
 
 **Binding:** [`../../../BINDING_Selection_is_its_own_step.md`](../../../BINDING_Selection_is_its_own_step.md) — environment ≠ advancement; score ≠ select.
 
 ---
 
-## Print stack (recommended hardcopies)
+## Print stack
+
+### Focus — PD29 follow-along **now** (3 docs)
+
+**Regenerate:** `sports` then **`print_tenure`** (same as `print_tenure focus`).
 
 | # | Document | Path (repo root relative) |
 |---|----------|---------------------------|
-| **1** | **This campaign plan** | `3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/TENURE_HERO_Campaign_Plan.md` |
-| **2** | PEER → COMPASS data handoff | `3-Master_Plan/re_entry/20260901_PEER_to_COMPASS_tenure_hero_mac_handoff.md` |
-| **3** | PEER data gameplan (strategic contract) | `tenure/documents/TENURE_DATA_GAMEPLAN.md` |
-| **4** | Pipeline map (MBB mirror + v0 locks) | `3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/TENURE_hero_pipeline.md` |
+| **1** | **YOU ARE HERE** (disposable thread) | `3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/_DISPOSABLE_tenure_hero_thread.md` |
+| **2** | **PD29 Alex locks** (Sep 2 call) | `transcripts/PD29_notes.md` |
+| **3** | Pipeline map + grain naming + PD29 delta | `3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/TENURE_hero_pipeline.md` |
 
-**Optional fifth:** `tenure/documents/TENURE_SCRAPE_AND_ADJUDICATE_FOR_DUMMIES.md` — when PEER scrape round is active.
+Bind **1 → tab**, **2 → PD29**, **3 → mechanics**. That is enough to follow the thread.
 
-**PDF (Mac, repo root):**
+### Core — full campaign binder (`print_tenure core`, 7 docs)
 
-```bash
-./scripts/convert_single_md_to_pdf.sh 3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/TENURE_HERO_Campaign_Plan.md
-./scripts/convert_single_md_to_pdf.sh 3-Master_Plan/re_entry/20260901_PEER_to_COMPASS_tenure_hero_mac_handoff.md
-./scripts/convert_single_md_to_pdf.sh tenure/documents/TENURE_DATA_GAMEPLAN.md
-./scripts/convert_single_md_to_pdf.sh 3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/TENURE_hero_pipeline.md
-```
+| # | Document | Path |
+|---|----------|------|
+| 1–3 | *(same as focus)* | *(above)* |
+| **4** | This campaign plan | `…/TENURE_HERO_Campaign_Plan.md` |
+| **5** | Career master handoff (T5) | `3-Master_Plan/re_entry/20260902_COMPASS_to_PEER_author_year_career_master.md` |
+| **6** | Mac/rsync handoff | `3-Master_Plan/re_entry/20260901_PEER_to_COMPASS_tenure_hero_mac_handoff.md` |
+| **7** | Perf / pool spec fork | `…/tenure_perf_metrics_discussion.md` |
+
+### Full (`print_tenure full`, +2)
+
+| # | Document | Path |
+|---|----------|------|
+| **8** | PEER data gameplan | `tenure/documents/TENURE_DATA_GAMEPLAN.md` |
+| **9** | Sandbox layout | `…/tenure_sandbox/README.md` |
+
+**Not in print stack (on screen):** HERO/BDP `.pptx` decks — print from PowerPoint/Keynote.
+
+**Optional when PEER scrape active:** `tenure/documents/TENURE_SCRAPE_AND_ADJUDICATE_FOR_DUMMIES.md`
 
 ---
 
