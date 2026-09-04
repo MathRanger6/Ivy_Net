@@ -67,6 +67,11 @@ datasets/mbb/**
 datasets/football/football_big_fish_player_season_panel/football_big_fish_player_season_panel.csv
 datasets/legends/lol_big_fish_player_split_panel.csv
 
+# Tenure pipeline outputs that exceeded GitHub comfort (rsync via pull_big_data.sh tenure)
+tenure/tenure_pipeline/author_year_career_master.jsonl
+tenure/tenure_pipeline/author_year_career_master_meta.json
+tenure/tenure_pipeline/R1_tenure_data.csv
+
 # Small computed artifacts — track in Git (git pull on Rivanna; see README_TRACKED_ARTIFACTS.md)
 !datasets/mbb/empirical_perf_fit.json
 !datasets/mbb/README_TRACKED_ARTIFACTS.md

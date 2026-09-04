@@ -76,10 +76,109 @@ _IVY_RSYNC_INC_EDUCATION=(
   "--include=hsb80/"
   "--include=hsb80/***"
 )
+_IVY_RSYNC_INC_APACHE=(
+  "--include=Apache/"
+  "--include=Apache/***"
+)
 _IVY_RSYNC_INC_MBB=(
   "--include=mbb/"
   "--include=mbb/***"
 )
+
+IVY_RSYNC_TENURE_TARGET="tenure/tenure_pipeline"
+
+_ivy_rsync_datasets_scoped() {
+  local direction="${1:?push|pull}" scope="${2:?}"
+  if [[ "${scope}" == "mbb" ]]; then
+    if [[ "${direction}" == "push" ]]; then ivy_rsync_push_mbb; else ivy_rsync_pull_mbb; fi
+    return
+  fi
+  if [[ "${direction}" == "push" && ( "${scope}" == "datasets" || "${scope}" == "big-fish" || "${scope}" == "big_fish" ) ]]; then
+    ivy_unzip_big_fish
+  fi
+  _ivy_rsync_build_opts
+  local includes=()
+  case "${scope}" in
+    datasets)
+      includes+=("${_IVY_RSYNC_INC_BIG_FISH[@]}" "${_IVY_RSYNC_INC_EDUCATION[@]}" "${_IVY_RSYNC_INC_APACHE[@]}" "${_IVY_RSYNC_INC_MBB[@]}")
+      ;;
+    big-fish|big_fish)
+      includes+=("${_IVY_RSYNC_INC_BIG_FISH[@]}")
+      ;;
+    education)
+      includes+=("${_IVY_RSYNC_INC_EDUCATION[@]}")
+      ;;
+    apache)
+      includes+=("${_IVY_RSYNC_INC_APACHE[@]}")
+      ;;
+    *)
+      echo "Unknown datasets scope: ${scope}" >&2
+      exit 1
+      ;;
+  esac
+  includes+=("--exclude=*")
+  local src dst
+  if [[ "${direction}" == "push" ]]; then
+    src="${REPO_ROOT}/datasets/"
+    dst="${REMOTE}:${HPC_REPO}/datasets/"
+    echo "==> Push datasets/ (${scope}: Mac → HPC)"
+  else
+    src="${REMOTE}:${HPC_REPO}/datasets/"
+    dst="${REPO_ROOT}/datasets/"
+    mkdir -p "${dst}"
+    echo "==> Pull datasets/ (${scope}: HPC → Mac)"
+  fi
+  echo "    from: ${src}"
+  echo "    to:   ${dst}"
+  rsync "${RSYNC_OPTS[@]}" \
+    "${_IVY_RSYNC_COMMON_EXCLUDES[@]}" \
+    "${includes[@]}" \
+    "${src}" "${dst}"
+  echo "==> Done."
+}
+
+# Top-level sync: direction push|pull, scope all|datasets|big-fish|education|apache|mbb|tenure|sweep
+ivy_rsync_sync_big_data() {
+  local direction="${1:?push|pull}"
+  local scope="${2:-all}"
+  case "${scope}" in
+    all)
+      echo "==> BIG DATA (${scope}): datasets + tenure + sweep"
+      _ivy_rsync_datasets_scoped "${direction}" datasets
+      if [[ "${direction}" == "push" ]]; then
+        ivy_rsync_push "${IVY_RSYNC_TENURE_TARGET}"
+        echo "==> Note: sweep results are usually HPC → Mac only; skipping sweep on to-hpc all."
+      else
+        ivy_rsync_pull "${IVY_RSYNC_TENURE_TARGET}"
+        ivy_rsync_pull_sweep
+      fi
+      ;;
+    datasets|big-fish|big_fish|education|apache|mbb)
+      _ivy_rsync_datasets_scoped "${direction}" "${scope}"
+      ;;
+    tenure)
+      if [[ "${direction}" == "push" ]]; then
+        ivy_rsync_push "${IVY_RSYNC_TENURE_TARGET}"
+      else
+        ivy_rsync_pull "${IVY_RSYNC_TENURE_TARGET}"
+      fi
+      ;;
+    sweep)
+      if [[ "${direction}" == "push" ]]; then
+        echo "WARN: sweep results are normally pulled from HPC, not pushed. Use rsync_push_to_hpc.sh sweep for code." >&2
+        ivy_rsync_push "${IVY_RSYNC_SWEEP_TARGET}"
+      else
+        ivy_rsync_pull_sweep
+      fi
+      ;;
+    *)
+      echo "Unknown scope: ${scope}" >&2
+      echo "Scopes: all datasets big-fish education apache mbb tenure sweep" >&2
+      echo "Catalog: scripts/BIG_DATA_MANIFEST.md" >&2
+      exit 1
+      ;;
+  esac
+}
 
 # Excludes applied to EVERY rsync (push + pull).
 _IVY_RSYNC_COMMON_EXCLUDES=(
@@ -259,98 +358,28 @@ ivy_unzip_big_fish() {
 }
 
 # Pull selected datasets/ subtrees: HPC → Mac (include-only; one rsync).
-# scope: all | big-fish | education | mbb
 ivy_rsync_pull_big_data() {
-  local scope="${1:-all}"
-  _ivy_rsync_build_opts
-  local src="${REMOTE}:${HPC_REPO}/datasets/"
-  local dst="${REPO_ROOT}/datasets/"
-  local includes=()
-  case "${scope}" in
-    all)
-      includes+=("${_IVY_RSYNC_INC_BIG_FISH[@]}" "${_IVY_RSYNC_INC_EDUCATION[@]}" "${_IVY_RSYNC_INC_MBB[@]}")
-      ;;
-    big-fish|big_fish)
-      includes+=("${_IVY_RSYNC_INC_BIG_FISH[@]}")
-      ;;
-    education)
-      includes+=("${_IVY_RSYNC_INC_EDUCATION[@]}")
-      ;;
-    mbb)
-      ivy_rsync_pull_mbb
-      return
-      ;;
-    *)
-      echo "Unknown pull scope: ${scope}" >&2
-      exit 1
-      ;;
-  esac
-  includes+=("--exclude=*")
-  echo "==> Pull datasets/ (${scope}: HPC → Mac)"
-  echo "    from: ${src}"
-  echo "    to:   ${dst}"
-  mkdir -p "${dst}"
-  rsync "${RSYNC_OPTS[@]}" \
-    "${_IVY_RSYNC_COMMON_EXCLUDES[@]}" \
-    "${includes[@]}" \
-    "${src}" "${dst}"
-  echo "==> Done."
+  ivy_rsync_sync_big_data pull "${1:-datasets}"
 }
 
 # Back-compat alias
 ivy_rsync_pull_big_fish() {
-  ivy_rsync_pull_big_data big-fish
+  ivy_rsync_sync_big_data pull big-fish
 }
 
 # Push selected datasets/ subtrees: Mac → HPC (include-only; one rsync).
-# scope: all | big-fish | education | mbb
 ivy_rsync_push_big_data_scoped() {
-  local scope="${1:-all}"
-  if [[ "${scope}" == "all" || "${scope}" == "big-fish" || "${scope}" == "big_fish" ]]; then
-    ivy_unzip_big_fish
-  fi
-  _ivy_rsync_build_opts
-  local src="${REPO_ROOT}/datasets/"
-  local dst="${REMOTE}:${HPC_REPO}/datasets/"
-  local includes=()
-  case "${scope}" in
-    all)
-      includes+=("${_IVY_RSYNC_INC_BIG_FISH[@]}" "${_IVY_RSYNC_INC_EDUCATION[@]}" "${_IVY_RSYNC_INC_MBB[@]}")
-      ;;
-    big-fish|big_fish)
-      includes+=("${_IVY_RSYNC_INC_BIG_FISH[@]}")
-      ;;
-    education)
-      includes+=("${_IVY_RSYNC_INC_EDUCATION[@]}")
-      ;;
-    mbb)
-      ivy_rsync_push_mbb
-      return
-      ;;
-    *)
-      echo "Unknown push scope: ${scope}" >&2
-      exit 1
-      ;;
-  esac
-  includes+=("--exclude=*")
-  echo "==> Push datasets/ (${scope}: Mac → HPC)"
-  echo "    from: ${src}"
-  echo "    to:   ${dst}"
-  rsync "${RSYNC_OPTS[@]}" \
-    "${_IVY_RSYNC_COMMON_EXCLUDES[@]}" \
-    "${includes[@]}" \
-    "${src}" "${dst}"
-  echo "==> Done."
+  ivy_rsync_sync_big_data push "${1:-datasets}"
 }
 
 # Push gitignored Big Fish unzipped CSVs: Mac → HPC (single rsync / single SSH session).
 ivy_rsync_push_big_fish() {
-  ivy_rsync_push_big_data_scoped big-fish
+  ivy_rsync_sync_big_data push big-fish
 }
 
-# Push Big Fish + education + bulk MBB in one rsync.
+# Push all datasets/ big trees in one rsync.
 ivy_rsync_push_big_data() {
-  ivy_rsync_push_big_data_scoped all
+  ivy_rsync_sync_big_data push datasets
 }
 
 # Pull bulk men's basketball data tree (gitignored under datasets/mbb/).

@@ -8,7 +8,7 @@ This document is the **single place** to answer: *What lives in Git? What is git
 
 | Script | Purpose |
 |--------|---------|
-| [`pull_big_data.sh`](./pull_big_data.sh) | **Big Fish unzipped CSVs** + **`datasets/mbb/`** — unzip from git zips (Mac) or rsync HPC ↔ Mac. |
+| [`pull_big_data.sh`](./pull_big_data.sh) | **All big data** Mac ↔ Rivanna — scopes: `all`, `datasets`, `big-fish`, `education`, `apache`, `mbb`, `tenure`, `sweep`. Catalog: [`BIG_DATA_MANIFEST.md`](./BIG_DATA_MANIFEST.md). |
 | [`rsync_pull_from_hpc.sh`](./rsync_pull_from_hpc.sh) | Pull one subtree (or `all` default targets, or `sweep`). |
 | [`rsync_push_to_hpc.sh`](./rsync_push_to_hpc.sh) | Push code/small files to Rivanna; avoids clobbering HPC-generated blobs. |
 | [`rsync_pull_recent_hpc.sh`](./rsync_pull_recent_hpc.sh) | **One command** to refresh logs + sweep + (optionally) tenure outputs — see below. |
@@ -83,11 +83,10 @@ Git tracks **`.zip` archives only** for Big Fish panels (GitHub 100MB cap). Unzi
 | `./scripts/pull_big_data.sh` | **Mac, after `git pull`** | Unzip football + LoL CSVs from zips in repo (no SSH) |
 | `./scripts/pull_big_data.sh from-hpc` | Mac needs HPC copy | Pull Big Fish CSVs + `datasets/mbb/` |
 | `./scripts/pull_big_data.sh from-hpc big-fish` | Legends/football only | Big Fish CSVs only |
-| `./scripts/pull_big_data.sh to-hpc` | Mac → Rivanna | Big Fish + **education** + `datasets/mbb/` |
-| `./scripts/pull_big_data.sh to-hpc big-fish` | Mac → Rivanna | LoL + football unzipped CSVs only |
-| `./scripts/pull_big_data.sh to-hpc education` | Mac → Rivanna | `datasets/nels88/` + `datasets/hsb80/` |
-| `./scripts/pull_big_data.sh from-hpc education` | Rivanna → Mac | NELS88 + HS&B80 |
-| `DRY_RUN=1 ./scripts/pull_big_data.sh to-hpc big-fish` | Preview | No writes |
+| `./scripts/pull_big_data.sh to-hpc datasets` | Mac → Rivanna | All big `datasets/` trees (big-fish + education + apache + mbb) |
+| `./scripts/pull_big_data.sh to-hpc all` | Mac → Rivanna | **datasets + tenure** (~10 GB+; no sweep push) |
+| `./scripts/pull_big_data.sh from-hpc all` | Rivanna → Mac | datasets + tenure + sweep |
+| `./scripts/pull_big_data.sh list-scopes` | — | Print scope table from manifest |
 
 **Run on Mac, not Rivanna.** `to-hpc` pushes **from this Mac** to `~/Ivy_Net` on Rivanna over SSH. Running it on Rivanna tries to SSH back into Rivanna from Rivanna — wrong direction and repeated password prompts.
 
