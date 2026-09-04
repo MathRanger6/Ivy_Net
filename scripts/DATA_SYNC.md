@@ -8,6 +8,7 @@ This document is the **single place** to answer: *What lives in Git? What is git
 
 | Script | Purpose |
 |--------|---------|
+| [`pull_big_data.sh`](./pull_big_data.sh) | **Big Fish unzipped CSVs** + **`datasets/mbb/`** — unzip from git zips (Mac) or rsync HPC ↔ Mac. |
 | [`rsync_pull_from_hpc.sh`](./rsync_pull_from_hpc.sh) | Pull one subtree (or `all` default targets, or `sweep`). |
 | [`rsync_push_to_hpc.sh`](./rsync_push_to_hpc.sh) | Push code/small files to Rivanna; avoids clobbering HPC-generated blobs. |
 | [`rsync_pull_recent_hpc.sh`](./rsync_pull_recent_hpc.sh) | **One command** to refresh logs + sweep + (optionally) tenure outputs — see below. |
@@ -41,6 +42,8 @@ There is intentional overlap in *rules*: `.gitignore` tells Git “don’t commi
 | Faithful 537 sweep tree | `sports/outputs/simulation_sweeps/rivanna_faithful_537/`, CSVs, plots | **No** | Yes — `sweep` or `quick` | Sweep **code** yes; **results** pull-only via excludes |
 | Faithful 538 sweep tree | `rivanna_faithful_538/`, `faithful_538_*` CSVs/plots | **No** | Yes — `sweep` or `quick` | Sweep **code** via `sweep` or Git; `empirical_perf_fit.json` is **Git-tracked** at `datasets/mbb/` (see `README_TRACKED_ARTIFACTS.md`) |
 | DBLP XML | `python_packages/dblp-parser/dblp.xml`, `datasets/` | **No** | Manual / intentional only | Manual |
+| Big Fish unzipped CSVs (football ~178MB, LoL ~72MB) | `datasets/football/.../football_big_fish_player_season_panel.csv`, `datasets/legends/lol_big_fish_player_split_panel.csv` | **No** (`.gitignore`; **`.zip` in Git**) | **`./scripts/pull_big_data.sh unzip`** (Mac) or **`from-hpc`** | **`to-hpc`** after unzip on Mac |
+| Bulk MBB CSV/SQLite | `datasets/mbb/**` | **No** (except small JSON) | **`./scripts/pull_big_data.sh from-hpc mbb`** | **`to-hpc mbb`** |
 
 ---
 
@@ -71,7 +74,27 @@ There is intentional overlap in *rules*: `.gitignore` tells Git “don’t commi
 
 ---
 
-## 4. `rsync_pull_recent_hpc.sh` (one-shot refresh)
+## 4b. Big data: `pull_big_data.sh`
+
+Git tracks **`.zip` archives only** for Big Fish panels (GitHub 100MB cap). Unzipped CSVs and bulk MBB live on disk and sync via this script.
+
+| Command | When | What |
+|---------|------|------|
+| `./scripts/pull_big_data.sh` | **Mac, after `git pull`** | Unzip football + LoL CSVs from zips in repo (no SSH) |
+| `./scripts/pull_big_data.sh from-hpc` | Mac needs HPC copy | Pull Big Fish CSVs + `datasets/mbb/` |
+| `./scripts/pull_big_data.sh from-hpc big-fish` | Legends/football only | Big Fish CSVs only |
+| `./scripts/pull_big_data.sh to-hpc` | Before Rivanna analysis | Push unzipped panels + MBB **Mac → HPC** |
+| `DRY_RUN=1 ./scripts/pull_big_data.sh from-hpc` | Preview | No writes |
+
+**Typical Mac workflow:** `git pull` → `./scripts/pull_big_data.sh` → work in Cursor.
+
+**Typical Rivanna workflow:** `git pull` on HPC → on Mac run `./scripts/pull_big_data.sh to-hpc` once (or `from-hpc` if HPC already has the files).
+
+Football zip note: archive is a **flat** `.csv`; the script moves it into `football_big_fish_player_season_panel/` after unzip.
+
+---
+
+## 5. `rsync_pull_recent_hpc.sh` (one-shot refresh)
 
 Run from **Mac**, repo root or any directory (script resolves paths).
 
@@ -90,7 +113,7 @@ Help: `./scripts/rsync_pull_recent_hpc.sh --help`
 
 ---
 
-## 5. Lower-level: `rsync_pull_from_hpc.sh` / `rsync_push_to_hpc.sh`
+## 6. Lower-level: `rsync_pull_from_hpc.sh` / `rsync_push_to_hpc.sh`
 
 **Pull** any subtree the helper supports:
 
@@ -114,7 +137,7 @@ Always read the **excludes** in [`rsync_hpc_include.sh`](./rsync_hpc_include.sh)
 
 ---
 
-## 6. `clear_slurm.sh` (local cleanup only)
+## 7. `clear_slurm.sh` (local cleanup only)
 
 Runs in your **local** clone (or anywhere you point the script); **does not** touch Rivanna.
 
@@ -125,7 +148,7 @@ It does **not** remove **`slurm-*-output.ipynb`** papermill outputs (different f
 
 ---
 
-## 7. Git: `.gitignore` philosophy
+## 8. Git: `.gitignore` philosophy
 
 - **Secrets and env:** `.env`, keys — never commit.
 - **Slurm:** `slurm-*.out`, `slurm-*.err`, `slurm-*-output.ipynb` anywhere under the repo (unqualified patterns match in subdirectories, so **`slurm_out/`** is covered).
@@ -137,7 +160,7 @@ Your **VA weekend checklist** habit — *check `git status` before commit* — i
 
 ---
 
-## 8. What rsync intentionally does **not** do
+## 9. What rsync intentionally does **not** do
 
 - **`faculty_snapshots/`** — huge HTML archive; stays HPC-centric; excluded from pull/push in the shared config.
 - **`dblp_parsed/`** — hundreds of MB JSONL; pull excluded; regenerate or copy intentionally if you really need it on Mac.
@@ -147,7 +170,7 @@ If you need a *small* subset of snapshots on Mac, use a **manual** `rsync` with 
 
 ---
 
-## 9. Keeping Git and rsync aligned (checklist)
+## 10. Keeping Git and rsync aligned (checklist)
 
 When you introduce a **new** generated artifact:
 
@@ -158,7 +181,7 @@ When you introduce a **new** generated artifact:
 
 ---
 
-## 10. Troubleshooting
+## 11. Troubleshooting
 
 | Problem | Things to check |
 |---------|------------------|
@@ -170,7 +193,7 @@ When you introduce a **new** generated artifact:
 
 ---
 
-## 11. See also
+## 12. See also
 
 - [`../tenure/HPC_SLURM_PIPELINE_GUIDE.md`](../tenure/HPC_SLURM_PIPELINE_GUIDE.md) — Slurm, `slurm_out/`, `track_slurm.sh`
 - [`../tenure/documents/VA_WEEKEND_CHECKLIST.md`](../tenure/documents/VA_WEEKEND_CHECKLIST.md) — commit discipline, typical `sbatch` commands

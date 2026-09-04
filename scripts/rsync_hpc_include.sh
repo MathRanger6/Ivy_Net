@@ -51,6 +51,17 @@ IVY_RSYNC_DEFAULT_TARGETS=(
 # Narrow shortcut for faithful 537 / 538 sweeps (code push; results pull).
 IVY_RSYNC_SWEEP_TARGET="sports/outputs/simulation_sweeps"
 
+# Gitignored Big Fish unzipped panels + bulk MBB (rsync only — see pull_big_data.sh).
+IVY_BIG_FISH_CSV_REL=(
+  "datasets/football/football_big_fish_player_season_panel/football_big_fish_player_season_panel.csv"
+  "datasets/legends/lol_big_fish_player_split_panel.csv"
+)
+IVY_BIG_FISH_ZIP_REL=(
+  "datasets/football/football_big_fish_player_season_panel.csv.zip"
+  "datasets/legends/lol_big_fish_player_split_panel.csv.zip"
+)
+IVY_RSYNC_MBB_TARGET="datasets/mbb"
+
 # Excludes applied to EVERY rsync (push + pull).
 _IVY_RSYNC_COMMON_EXCLUDES=(
   "--exclude=faculty_snapshots/"       # HTML archive — HPC-only; grows to 10s of GB
@@ -173,6 +184,109 @@ ivy_rsync_pull_sweep() {
     "--exclude=*" \
     "${src}" "${dst}"
   echo "==> Done."
+}
+
+# Unzip git-tracked Big Fish archives when unzipped CSVs are missing (Mac/local; no network).
+ivy_unzip_big_fish() {
+  local football_dir="${REPO_ROOT}/datasets/football"
+  local football_csv="${football_dir}/football_big_fish_player_season_panel/football_big_fish_player_season_panel.csv"
+  local football_zip="${football_dir}/football_big_fish_player_season_panel.csv.zip"
+  local legends_dir="${REPO_ROOT}/datasets/legends"
+  local legends_csv="${legends_dir}/lol_big_fish_player_split_panel.csv"
+  local legends_zip="${legends_dir}/lol_big_fish_player_split_panel.csv.zip"
+
+  if [[ -f "${football_csv}" ]]; then
+    echo "==> OK (exists): datasets/football/.../football_big_fish_player_season_panel.csv"
+  else
+    if [[ ! -f "${football_zip}" ]]; then
+      echo "ERROR: missing datasets/football/football_big_fish_player_season_panel.csv.zip — run git pull first." >&2
+      exit 1
+    fi
+    mkdir -p "${football_dir}/football_big_fish_player_season_panel"
+    echo "==> Unzip football panel (zip is flat csv → move into panel subdir)"
+    unzip -o -q "${football_zip}" -d "${football_dir}"
+    if [[ -f "${football_dir}/football_big_fish_player_season_panel.csv" ]]; then
+      mv -f "${football_dir}/football_big_fish_player_season_panel.csv" "${football_csv}"
+    fi
+    rm -f "${football_dir}/__MACOSX" "${football_dir}/._football_big_fish_player_season_panel.csv" 2>/dev/null || true
+    if [[ ! -f "${football_csv}" ]]; then
+      echo "ERROR: football unzip did not produce ${football_csv}" >&2
+      exit 1
+    fi
+  fi
+
+  if [[ -f "${legends_csv}" ]]; then
+    echo "==> OK (exists): datasets/legends/lol_big_fish_player_split_panel.csv"
+  else
+    if [[ ! -f "${legends_zip}" ]]; then
+      echo "ERROR: missing datasets/legends/lol_big_fish_player_split_panel.csv.zip — run git pull first." >&2
+      exit 1
+    fi
+    mkdir -p "${legends_dir}"
+    echo "==> Unzip legends panel"
+    unzip -o -q "${legends_zip}" -d "${legends_dir}"
+    rm -rf "${legends_dir}/__MACOSX" 2>/dev/null || true
+    if [[ ! -f "${legends_csv}" ]]; then
+      echo "ERROR: legends unzip did not produce ${legends_csv}" >&2
+      exit 1
+    fi
+  fi
+
+  echo "==> Big Fish CSVs ready."
+}
+
+# Pull gitignored Big Fish unzipped CSVs: HPC → Mac (include-only under datasets/).
+ivy_rsync_pull_big_fish() {
+  _ivy_rsync_build_opts
+  local src="${REMOTE}:${HPC_REPO}/datasets/"
+  local dst="${REPO_ROOT}/datasets/"
+  echo "==> Pull Big Fish unzipped panels (HPC → Mac)"
+  echo "    from: ${src}"
+  echo "    to:   ${dst}"
+  mkdir -p "${dst}"
+  local includes=(
+    "--include=football/"
+    "--include=football/football_big_fish_player_season_panel/"
+    "--include=football/football_big_fish_player_season_panel/football_big_fish_player_season_panel.csv"
+    "--include=legends/"
+    "--include=legends/lol_big_fish_player_split_panel.csv"
+    "--exclude=*"
+  )
+  rsync "${RSYNC_OPTS[@]}" \
+    "${_IVY_RSYNC_COMMON_EXCLUDES[@]}" \
+    "${includes[@]}" \
+    "${src}" "${dst}"
+  echo "==> Done."
+}
+
+# Push gitignored Big Fish unzipped CSVs: Mac → HPC (Dropbox Mac is usually source of truth).
+ivy_rsync_push_big_fish() {
+  _ivy_rsync_build_opts
+  local rel csv_path
+  echo "==> Push Big Fish unzipped panels (Mac → HPC)"
+  for rel in "${IVY_BIG_FISH_CSV_REL[@]}"; do
+    csv_path="${REPO_ROOT}/${rel}"
+    if [[ ! -f "${csv_path}" ]]; then
+      echo "ERROR: missing ${rel} — run: ./scripts/pull_big_data.sh unzip" >&2
+      exit 1
+    fi
+    local dst="${REMOTE}:${HPC_REPO}/${rel}"
+    echo "    ${rel}"
+    rsync "${RSYNC_OPTS[@]}" \
+      "${_IVY_RSYNC_COMMON_EXCLUDES[@]}" \
+      "${csv_path}" "${dst}"
+  done
+  echo "==> Done."
+}
+
+# Pull bulk men's basketball data tree (gitignored under datasets/mbb/).
+ivy_rsync_pull_mbb() {
+  ivy_rsync_pull "${IVY_RSYNC_MBB_TARGET}"
+}
+
+# Push bulk men's basketball data tree (Mac → HPC).
+ivy_rsync_push_mbb() {
+  ivy_rsync_push "${IVY_RSYNC_MBB_TARGET}"
 }
 
 # Usage: ivy_rsync_push_faithful_538_deps

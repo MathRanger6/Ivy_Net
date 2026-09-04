@@ -138,3 +138,5 @@ path = Path("datasets/legends/lol_big_fish_player_split_panel.csv")
 df = pd.read_csv(path, low_memory=False)  # NUL-safe in pandas
 dev = df[df["league_tier"] == "developmental"]
 ```
+
+After `git pull`, if the CSV is missing: `./scripts/pull_big_data.sh` (unzip from tracked `.zip`).
