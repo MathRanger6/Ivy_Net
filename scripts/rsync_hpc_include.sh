@@ -62,6 +62,25 @@ IVY_BIG_FISH_ZIP_REL=(
 )
 IVY_RSYNC_MBB_TARGET="datasets/mbb"
 
+# Shared rsync --include rules for datasets/ (used by pull_big_data push/pull).
+_IVY_RSYNC_INC_BIG_FISH=(
+  "--include=football/"
+  "--include=football/football_big_fish_player_season_panel/"
+  "--include=football/football_big_fish_player_season_panel/football_big_fish_player_season_panel.csv"
+  "--include=legends/"
+  "--include=legends/lol_big_fish_player_split_panel.csv"
+)
+_IVY_RSYNC_INC_EDUCATION=(
+  "--include=nels88/"
+  "--include=nels88/***"
+  "--include=hsb80/"
+  "--include=hsb80/***"
+)
+_IVY_RSYNC_INC_MBB=(
+  "--include=mbb/"
+  "--include=mbb/***"
+)
+
 # Excludes applied to EVERY rsync (push + pull).
 _IVY_RSYNC_COMMON_EXCLUDES=(
   "--exclude=faculty_snapshots/"       # HTML archive — HPC-only; grows to 10s of GB
@@ -113,7 +132,11 @@ _IVY_RSYNC_PUSH_EXCLUDES=(
 )
 
 _ivy_rsync_build_opts() {
-  RSYNC_OPTS=(-avz --progress)
+  local ctrl_dir="${HOME}/.ssh/ivy-net-rsync"
+  mkdir -p "${ctrl_dir}" "${HOME}/.ssh"
+  # One SSH login per script run (subsequent rsync invocations reuse the socket).
+  RSYNC_RSH="ssh -o ControlMaster=auto -o ControlPath=${ctrl_dir}/cm-%r@%h:%p -o ControlPersist=600"
+  RSYNC_OPTS=(-avz --progress -e "${RSYNC_RSH}")
   if [[ "${DRY_RUN:-0}" == "1" ]]; then
     RSYNC_OPTS+=(-n)
     echo "==> DRY RUN (no files changed)"
@@ -235,23 +258,38 @@ ivy_unzip_big_fish() {
   echo "==> Big Fish CSVs ready."
 }
 
-# Pull gitignored Big Fish unzipped CSVs: HPC → Mac (include-only under datasets/).
-ivy_rsync_pull_big_fish() {
+# Pull selected datasets/ subtrees: HPC → Mac (include-only; one rsync).
+# scope: all | big-fish | education | mbb
+ivy_rsync_pull_big_data() {
+  local scope="${1:-all}"
   _ivy_rsync_build_opts
   local src="${REMOTE}:${HPC_REPO}/datasets/"
   local dst="${REPO_ROOT}/datasets/"
-  echo "==> Pull Big Fish unzipped panels (HPC → Mac)"
+  local includes=()
+  case "${scope}" in
+    all)
+      includes+=("${_IVY_RSYNC_INC_BIG_FISH[@]}" "${_IVY_RSYNC_INC_EDUCATION[@]}" "${_IVY_RSYNC_INC_MBB[@]}")
+      ;;
+    big-fish|big_fish)
+      includes+=("${_IVY_RSYNC_INC_BIG_FISH[@]}")
+      ;;
+    education)
+      includes+=("${_IVY_RSYNC_INC_EDUCATION[@]}")
+      ;;
+    mbb)
+      ivy_rsync_pull_mbb
+      return
+      ;;
+    *)
+      echo "Unknown pull scope: ${scope}" >&2
+      exit 1
+      ;;
+  esac
+  includes+=("--exclude=*")
+  echo "==> Pull datasets/ (${scope}: HPC → Mac)"
   echo "    from: ${src}"
   echo "    to:   ${dst}"
   mkdir -p "${dst}"
-  local includes=(
-    "--include=football/"
-    "--include=football/football_big_fish_player_season_panel/"
-    "--include=football/football_big_fish_player_season_panel/football_big_fish_player_season_panel.csv"
-    "--include=legends/"
-    "--include=legends/lol_big_fish_player_split_panel.csv"
-    "--exclude=*"
-  )
   rsync "${RSYNC_OPTS[@]}" \
     "${_IVY_RSYNC_COMMON_EXCLUDES[@]}" \
     "${includes[@]}" \
@@ -259,24 +297,60 @@ ivy_rsync_pull_big_fish() {
   echo "==> Done."
 }
 
-# Push gitignored Big Fish unzipped CSVs: Mac → HPC (Dropbox Mac is usually source of truth).
-ivy_rsync_push_big_fish() {
+# Back-compat alias
+ivy_rsync_pull_big_fish() {
+  ivy_rsync_pull_big_data big-fish
+}
+
+# Push selected datasets/ subtrees: Mac → HPC (include-only; one rsync).
+# scope: all | big-fish | education | mbb
+ivy_rsync_push_big_data_scoped() {
+  local scope="${1:-all}"
+  if [[ "${scope}" == "all" || "${scope}" == "big-fish" || "${scope}" == "big_fish" ]]; then
+    ivy_unzip_big_fish
+  fi
   _ivy_rsync_build_opts
-  local rel csv_path
-  echo "==> Push Big Fish unzipped panels (Mac → HPC)"
-  for rel in "${IVY_BIG_FISH_CSV_REL[@]}"; do
-    csv_path="${REPO_ROOT}/${rel}"
-    if [[ ! -f "${csv_path}" ]]; then
-      echo "ERROR: missing ${rel} — run: ./scripts/pull_big_data.sh unzip" >&2
+  local src="${REPO_ROOT}/datasets/"
+  local dst="${REMOTE}:${HPC_REPO}/datasets/"
+  local includes=()
+  case "${scope}" in
+    all)
+      includes+=("${_IVY_RSYNC_INC_BIG_FISH[@]}" "${_IVY_RSYNC_INC_EDUCATION[@]}" "${_IVY_RSYNC_INC_MBB[@]}")
+      ;;
+    big-fish|big_fish)
+      includes+=("${_IVY_RSYNC_INC_BIG_FISH[@]}")
+      ;;
+    education)
+      includes+=("${_IVY_RSYNC_INC_EDUCATION[@]}")
+      ;;
+    mbb)
+      ivy_rsync_push_mbb
+      return
+      ;;
+    *)
+      echo "Unknown push scope: ${scope}" >&2
       exit 1
-    fi
-    local dst="${REMOTE}:${HPC_REPO}/${rel}"
-    echo "    ${rel}"
-    rsync "${RSYNC_OPTS[@]}" \
-      "${_IVY_RSYNC_COMMON_EXCLUDES[@]}" \
-      "${csv_path}" "${dst}"
-  done
+      ;;
+  esac
+  includes+=("--exclude=*")
+  echo "==> Push datasets/ (${scope}: Mac → HPC)"
+  echo "    from: ${src}"
+  echo "    to:   ${dst}"
+  rsync "${RSYNC_OPTS[@]}" \
+    "${_IVY_RSYNC_COMMON_EXCLUDES[@]}" \
+    "${includes[@]}" \
+    "${src}" "${dst}"
   echo "==> Done."
+}
+
+# Push gitignored Big Fish unzipped CSVs: Mac → HPC (single rsync / single SSH session).
+ivy_rsync_push_big_fish() {
+  ivy_rsync_push_big_data_scoped big-fish
+}
+
+# Push Big Fish + education + bulk MBB in one rsync.
+ivy_rsync_push_big_data() {
+  ivy_rsync_push_big_data_scoped all
 }
 
 # Pull bulk men's basketball data tree (gitignored under datasets/mbb/).

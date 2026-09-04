@@ -83,14 +83,47 @@ Git tracks **`.zip` archives only** for Big Fish panels (GitHub 100MB cap). Unzi
 | `./scripts/pull_big_data.sh` | **Mac, after `git pull`** | Unzip football + LoL CSVs from zips in repo (no SSH) |
 | `./scripts/pull_big_data.sh from-hpc` | Mac needs HPC copy | Pull Big Fish CSVs + `datasets/mbb/` |
 | `./scripts/pull_big_data.sh from-hpc big-fish` | Legends/football only | Big Fish CSVs only |
-| `./scripts/pull_big_data.sh to-hpc` | Before Rivanna analysis | Push unzipped panels + MBB **Mac → HPC** |
-| `DRY_RUN=1 ./scripts/pull_big_data.sh from-hpc` | Preview | No writes |
+| `./scripts/pull_big_data.sh to-hpc` | Mac → Rivanna | Big Fish + **education** + `datasets/mbb/` |
+| `./scripts/pull_big_data.sh to-hpc big-fish` | Mac → Rivanna | LoL + football unzipped CSVs only |
+| `./scripts/pull_big_data.sh to-hpc education` | Mac → Rivanna | `datasets/nels88/` + `datasets/hsb80/` |
+| `./scripts/pull_big_data.sh from-hpc education` | Rivanna → Mac | NELS88 + HS&B80 |
+| `DRY_RUN=1 ./scripts/pull_big_data.sh to-hpc big-fish` | Preview | No writes |
 
-**Typical Mac workflow:** `git pull` → `./scripts/pull_big_data.sh` → work in Cursor.
+**Run on Mac, not Rivanna.** `to-hpc` pushes **from this Mac** to `~/Ivy_Net` on Rivanna over SSH. Running it on Rivanna tries to SSH back into Rivanna from Rivanna — wrong direction and repeated password prompts.
 
-**Typical Rivanna workflow:** `git pull` on HPC → on Mac run `./scripts/pull_big_data.sh to-hpc` once (or `from-hpc` if HPC already has the files).
+**Typical Mac workflow:** `git pull` → `./scripts/pull_big_data.sh unzip` → work in Cursor.
 
-Football zip note: archive is a **flat** `.csv`; the script moves it into `football_big_fish_player_season_panel/` after unzip.
+**Typical Rivanna workflow (two steps, two machines):**
+
+1. **Mac:** `git push` (scripts + small tracked files) and `./scripts/pull_big_data.sh to-hpc big-fish` (large gitignored CSVs).
+2. **Rivanna:** `git pull` only — **do not** run `pull_big_data.sh to-hpc` on Rivanna.
+
+NELS88 / HS&B80 CSVs are **already in Git** (~4–10 MB); `git pull` on Rivanna gets them. `to-hpc education` is optional belt-and-suspenders if you want rsync to mirror those folders too.
+
+Football zip note: archive is a **flat** `.csv`; `unzip` moves it into `football_big_fish_player_season_panel/`.
+
+### SSH: password once vs key (no password)
+
+Rsync talks to Rivanna over **SSH**. UVA can ask for your **password** (and sometimes **2FA/Duo**) on each new SSH connection.
+
+**What we fixed in the script:** one rsync transfer + **connection reuse** → at most **one** password prompt per script run (not one per file).
+
+**Optional — use an SSH key so rsync never asks:**
+
+1. You have a **key pair**: private key (secret, stays on Mac) + public key (registered on Rivanna). The repo’s `ivy_net_keys` / `ivy_net_keys.pub` may be yours if you set that up — private key is gitignored.
+2. **`ssh-add`** tells macOS: “remember this private key for this session.” After that, SSH (and rsync) present the key automatically instead of prompting for a password.
+
+```bash
+# Once per Mac login session (adjust path to your private key):
+ssh-add --apple-use-keychain ~/.ssh/id_ed25519
+# or, if you use the repo key:
+# ssh-add --apple-use-keychain "/path/to/Ivy_Net/ivy_net_keys"
+
+# Test — should print nothing and exit 0 (no password prompt):
+ssh -o BatchMode=yes dzk3ja@login.hpc.virginia.edu true
+```
+
+If the test **fails**, rsync will keep asking for passwords — fix key setup on Rivanna first (public key in `~/.ssh/authorized_keys`), or just type your password once per `pull_big_data.sh` run.
 
 ---
 
@@ -190,6 +223,7 @@ When you introduce a **new** generated artifact:
 | Mac overwrote HPC data after push | Push excludes should prevent large JSONL push; verify `rsync_hpc_include.sh` lists your file. |
 | `git status` shows huge unwanted files | Add `.gitignore` rules; `git rm --cached` if already staged once. |
 | rsync slow | Normal for first full `tenure/tenure_pipeline` pull; use **`quick`** when you only need logs + sweep. |
+| rsync asks password **every file** | Old script pushed one file per SSH session — fixed in `rsync_hpc_include.sh` (single rsync + `ControlMaster`). Update scripts; run **`to-hpc big-fish`** if you only need LoL/football (~250 MB), not full `datasets/mbb/`. Load SSH key with **`ssh-add`**. |
 
 ---
 

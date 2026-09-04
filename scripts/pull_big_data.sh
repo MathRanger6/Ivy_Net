@@ -1,20 +1,22 @@
 #!/usr/bin/env bash
-# Pull gitignored large datasets: Big Fish panels + bulk MBB.
+# Sync large datasets/ trees between Mac (Dropbox) and Rivanna.
 #
-# Policy: scripts/DATA_SYNC.md § Big data
+# *** RUN ON YOUR MAC, NOT ON RIVANNA ***
+#   to-hpc    = Mac → Rivanna  (push big files up)
+#   from-hpc  = Rivanna → Mac  (pull big files down)
+#   unzip     = Mac only, no SSH (unzip git-tracked .zip archives)
 #
-# Usage (run on Mac unless noted):
-#   ./scripts/pull_big_data.sh                  # default: unzip Big Fish from git zips (no network)
-#   ./scripts/pull_big_data.sh unzip            # same — football + legends CSVs from .zip in repo
-#   ./scripts/pull_big_data.sh from-hpc         # HPC → Mac: Big Fish CSVs + datasets/mbb/
-#   ./scripts/pull_big_data.sh from-hpc big-fish  # HPC → Mac: Big Fish CSVs only
-#   ./scripts/pull_big_data.sh from-hpc mbb       # HPC → Mac: datasets/mbb/ only
-#   ./scripts/pull_big_data.sh to-hpc             # Mac → HPC: Big Fish + MBB (Dropbox Mac = source)
-#   ./scripts/pull_big_data.sh to-hpc big-fish
-#   ./scripts/pull_big_data.sh to-hpc mbb
+# Policy: scripts/DATA_SYNC.md §4b
+#
+# Usage (Mac terminal):
+#   ./scripts/pull_big_data.sh unzip
+#   ./scripts/pull_big_data.sh to-hpc big-fish     # LoL + football panels (~250 MB)
+#   ./scripts/pull_big_data.sh to-hpc education    # NELS88 + HS&B80
+#   ./scripts/pull_big_data.sh to-hpc              # big-fish + education + datasets/mbb/
+#   ./scripts/pull_big_data.sh from-hpc education
 #   ./scripts/pull_big_data.sh --help
 #
-# Dry run (rsync modes only):  DRY_RUN=1 ./scripts/pull_big_data.sh from-hpc
+# Dry run:  DRY_RUN=1 ./scripts/pull_big_data.sh to-hpc big-fish
 #
 # Overrides: HPC_USER, HPC_HOST, HPC_REPO, DRY_RUN=1
 
@@ -25,49 +27,15 @@ IVY_NET_SCRIPTS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "${IVY_NET_SCRIPTS_DIR}/rsync_hpc_include.sh"
 
 _usage() {
-  sed -n '2,20p' "$0" | sed 's/^# \?//'
+  sed -n '2,22p' "$0" | sed 's/^# \?//'
 }
 
 _pull_from_hpc() {
-  local scope="${1:-all}"
-  case "${scope}" in
-    all)
-      ivy_rsync_pull_big_fish
-      ivy_rsync_pull_mbb
-      ;;
-    big-fish|big_fish)
-      ivy_rsync_pull_big_fish
-      ;;
-    mbb)
-      ivy_rsync_pull_mbb
-      ;;
-    *)
-      echo "Unknown from-hpc scope: ${scope}" >&2
-      exit 1
-      ;;
-  esac
+  ivy_rsync_pull_big_data "${1:-all}"
 }
 
 _push_to_hpc() {
-  local scope="${1:-all}"
-  case "${scope}" in
-    all)
-      ivy_unzip_big_fish
-      ivy_rsync_push_big_fish
-      ivy_rsync_push_mbb
-      ;;
-    big-fish|big_fish)
-      ivy_unzip_big_fish
-      ivy_rsync_push_big_fish
-      ;;
-    mbb)
-      ivy_rsync_push_mbb
-      ;;
-    *)
-      echo "Unknown to-hpc scope: ${scope}" >&2
-      exit 1
-      ;;
-  esac
+  ivy_rsync_push_big_data_scoped "${1:-all}"
 }
 
 main() {
