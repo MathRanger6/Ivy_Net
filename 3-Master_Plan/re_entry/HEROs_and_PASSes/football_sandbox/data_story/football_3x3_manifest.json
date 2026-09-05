@@ -1,0 +1,79 @@
+{
+  "domain": "football",
+  "deck": "big_fish_data_story",
+  "title": "Football data story \u2014 FBS eligible \u00b7 final season",
+  "subtitle": "final-season PS \u00b7 eligible analysis \u00b7 team LOO  |  Read top-left \u2192 bottom-right",
+  "output_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/football_sandbox/data_story/FOOTBALL_DATA_STORY_3x3.png",
+  "page_size": "letter-landscape",
+  "footer": "FOOTBALL Big Fish \u00b7 big_fish_data_story.py",
+  "grid": [
+    {
+      "type": "text",
+      "title": "1 \u00b7 Cohort",
+      "lines": [
+        "Domain: FBS college football",
+        "Grain: final-season cross-section (last-ps)",
+        "Y: drafted next NFL draft (season-Y on exit row)",
+        "Peer X: teammate LOO index (full-roster pond)",
+        "Panel: max(season) per player \u00b7 transfer tie \u2192 role opportunities",
+        "N = 29,403",
+        "Drafted rate = 6.5%",
+        "With LOO = 29,403",
+        "",
+        "",
+        "Reigning tag:",
+        "q16_eligible_team_loo_draft_last_ps",
+        "Panels 7\u20138: scaled Act II",
+        "(sparse Y \u00b7 exploratory)"
+      ]
+    },
+    {
+      "type": "image",
+      "title": "2 \u00b7 \u00c2_i and T\u0302_j",
+      "path": "3-Master_Plan/re_entry/HEROs_and_PASSes/football_sandbox/basic_data_plots/FOOTBALL_BDP_Ai_Tj.png"
+    },
+    {
+      "type": "image",
+      "title": "3 \u00b7 Team LOO distribution",
+      "path": "3-Master_Plan/re_entry/HEROs_and_PASSes/football_sandbox/basic_data_plots/FOOTBALL_team_loo_distribution.png"
+    },
+    {
+      "type": "image",
+      "title": "4 \u00b7 Outcome mass vs \u00c2 (ECDF)",
+      "path": "3-Master_Plan/re_entry/HEROs_and_PASSes/football_sandbox/basic_data_plots/FOOTBALL_outcome_mass_ecdf.png"
+    },
+    {
+      "type": "image",
+      "title": "5 \u00b7 Team interval overlap",
+      "path": "3-Master_Plan/re_entry/HEROs_and_PASSes/football_sandbox/basic_data_plots/FOOTBALL_team_interval_overlap.png"
+    },
+    {
+      "type": "image",
+      "title": "6 \u00b7 Team roster size |T_j|",
+      "path": "3-Master_Plan/re_entry/HEROs_and_PASSes/football_sandbox/basic_data_plots/FOOTBALL_pool_size.png"
+    },
+    {
+      "type": "image",
+      "title": "7 \u00b7 CCT \u2014 fixed \u00c2 z\u2208[1,2]",
+      "path": "3-Master_Plan/re_entry/HEROs_and_PASSes/football_sandbox/act2/CCT_football_ai_z1_2_q8.png",
+      "note": "Scaled Act II probe"
+    },
+    {
+      "type": "image",
+      "title": "8 \u00b7 Elite pond \u2014 top 20% \u00c2",
+      "path": "3-Master_Plan/re_entry/HEROs_and_PASSes/football_sandbox/act2/ELITE_football_top20_loo_pw5.png",
+      "note": "LOO bins within elite \u00c2"
+    },
+    {
+      "type": "image",
+      "title": "9 \u00b7 HERO (Pass A \u00b7 LOO bins)",
+      "path": "3-Master_Plan/re_entry/HEROs_and_PASSes/football_sandbox/hero/HERO_football_q16_team_loo_slide.png"
+    }
+  ],
+  "verdict": {
+    "reigning_tag": "q16_eligible_team_loo_draft_last_ps",
+    "panel_rows": "last-ps",
+    "n": 29403,
+    "y_rate": 0.06472128694350916
+  }
+}

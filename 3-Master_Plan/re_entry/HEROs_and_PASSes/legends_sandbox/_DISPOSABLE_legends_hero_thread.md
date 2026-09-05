@@ -15,17 +15,17 @@
 |------|------|--------|
 | **0** | Big Fish assessment incl. Apache | ✓ — see parent disposable |
 | **1** | **Sandbox scaffold** (this folder + README) | ✓ (2026-09-03) |
-| **2** | **Cohort lock** — dev rows, censor flags, Y window | **Next** |
-| **3** | Basic data plots (Â vs T̂_j analog, pond LOO hist\|ECDF) | Pending |
-| **4** | Reigning HERO porch — LOO bins × promotion rate | Pending |
-| **5** | Act II probes (CCT band, elite pond) — scaled gates | Pending |
-| **6** | 3×3 data story mosaic (optional, Alex screening) | Pending |
+| **2** | **Cohort lock** — dev rows, censor flags, Y window | ✓ v0 locked (N=1,879 · Y2 37%) |
+| **3** | Basic data plots (Â vs T̂_j analog, pond LOO hist\|ECDF) | ✓ (2026-09-04) |
+| **4** | Reigning HERO porch — LOO bins × promotion rate | ✓ Q16 porch (2026-09-04) |
+| **5** | Act II probes (CCT band, elite pond) — scaled gates | ✓ z∈[1,2] · top 20% (2026-09-04) |
+| **6** | 3×3 data story mosaic (optional, Alex screening) | ✓ `LEGENDS_DATA_STORY_3x3.png` |
 
 **Alex one-liner (Sep 2):** LoL panel from Oracle’s Elixir; **developmental → top-tier** promotion as Y; `teammate_mean_performance_excl_self` as pond LOO; more roster swapping than MBB.
 
 ---
 
-## Cohort lock (draft — confirm in step 2)
+## Cohort lock (v0 — used in data story 2026-09-04)
 
 | Choice | Proposed v0 | Rationale |
 |--------|-------------|-----------|
@@ -64,7 +64,7 @@ legends_sandbox/
   basic_data_plots/                    ← LEGENDS_BDP_*.png
   pass_a/                              ← HERO porch outputs
   act2/                                ← CCT / elite pond probes
-  data_story/                          ← 3×3 manifest + mosaic (later)
+  data_story/                          ← 3×3 manifest + mosaic ✓
 ```
 
 **Scripts (future):** `legends/scripts/legends_basic_plots.py`, `legends_pass_a_hero.py` — parallel to `tenure/scripts/`, `sports/scripts/`.
@@ -88,3 +88,4 @@ Run counts in step 2 before locking Act II gates.
 | Date | Entry |
 |------|-------|
 | 2026-09-03 | Thread opened; legends chosen as sole Big Fish focus; cohort lock drafted. |
+| 2026-09-04 | Full 3×3 data story built (`LEGENDS_DATA_STORY_3x3.png`); cohort v0 locked N=1,879. |

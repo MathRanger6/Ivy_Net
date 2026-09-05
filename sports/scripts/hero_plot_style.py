@@ -140,19 +140,21 @@ def annotate_bar_n(
 ) -> None:
     ymin, ymax = ax.get_ylim()
     span = ymax - ymin if ymax > ymin else 1.0
-    for i, (xi, yi, n) in enumerate(zip(x, y, counts, strict=True)):
+    for i, (xi, yi, n) in enumerate(zip(x, y, counts)):
         ni = int(n)
         if ni <= 0:
             continue
         yi_f = float(yi)
-        if yi_f < span * 0.12:
+        inside_y = ymin + span * 0.22
+        # In-bar anchor only when the bar is tall enough; else label floats in margin (often invisible).
+        if yi_f < span * 0.12 or inside_y > yi_f * 0.85:
             y_pos = yi_f + span * 0.015
             rotation = 0
             fontsize = 7
             va = "bottom"
             color = "0.25"
         else:
-            y_pos = ymin + span * 0.22
+            y_pos = inside_y
             rotation = 90
             fontsize = 7.5
             va = "bottom"

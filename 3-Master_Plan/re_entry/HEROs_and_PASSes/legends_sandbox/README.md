@@ -10,6 +10,12 @@ Working outputs for **League of Legends** Big Fish / HERO analysis.
 | LoL primer (no MOBA background) | [`LEGENDS_LoL_primer_for_researchers.md`](LEGENDS_LoL_primer_for_researchers.md) |
 | All Big Fish datasets | [`../_DISPOSABLE_big_fish_datasets_assessment.md`](../_DISPOSABLE_big_fish_datasets_assessment.md) |
 
-**Status (2026-09-03):** Scaffold only — cohort lock + first BDP plots next.
+**Status (2026-09-04):** 3×3 data story deck built — see `data_story/LEGENDS_DATA_STORY_3x3.png`.
+
+**Regenerate:**
+
+```bash
+python scripts/big_fish_data_story.py --domain legends --mode all
+```
 
 **Prefix:** `LEGENDS_*` / `legends_*` (parallel to `TENURE_*`, `MBB_*`).

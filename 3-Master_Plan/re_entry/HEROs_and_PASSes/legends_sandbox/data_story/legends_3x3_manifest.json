@@ -1,0 +1,79 @@
+{
+  "domain": "legends",
+  "deck": "big_fish_data_story",
+  "title": "Legends (LoL) data story \u2014 dev cohort",
+  "subtitle": "developmental \u00b7 full 2y follow-up \u00b7 own index \u00b7 team LOO  |  Read top-left \u2192 bottom-right",
+  "output_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/legends_sandbox/data_story/LEGENDS_DATA_STORY_3x3.png",
+  "page_size": "letter-landscape",
+  "footer": "LEGENDS Big Fish \u00b7 big_fish_data_story.py",
+  "grid": [
+    {
+      "type": "text",
+      "title": "1 \u00b7 Cohort",
+      "lines": [
+        "Domain: LoL esports (Oracle's Elixir)",
+        "Grain: dev-league player stint",
+        "Y: top-tier debut within 2y",
+        "Peer X: teammate LOO index",
+        "Filter: eligible dev \u00b7 no prior top tier",
+        "N = 1,879",
+        "Promoted rate = 36.8%",
+        "With LOO = 1,879",
+        "",
+        "",
+        "Reigning tag:",
+        "q16_dev_team_loo_promo2y",
+        "Panels 7\u20138: scaled Act II",
+        "(z\u2208[1,2] CCT \u00b7 top 20% elite)"
+      ]
+    },
+    {
+      "type": "image",
+      "title": "2 \u00b7 \u00c2_i and T\u0302_j",
+      "path": "3-Master_Plan/re_entry/HEROs_and_PASSes/legends_sandbox/basic_data_plots/LEGENDS_BDP_Ai_Tj.png"
+    },
+    {
+      "type": "image",
+      "title": "3 \u00b7 Team LOO distribution",
+      "path": "3-Master_Plan/re_entry/HEROs_and_PASSes/legends_sandbox/basic_data_plots/LEGENDS_team_loo_distribution.png"
+    },
+    {
+      "type": "image",
+      "title": "4 \u00b7 Outcome mass vs \u00c2 (ECDF)",
+      "path": "3-Master_Plan/re_entry/HEROs_and_PASSes/legends_sandbox/basic_data_plots/LEGENDS_outcome_mass_ecdf.png"
+    },
+    {
+      "type": "image",
+      "title": "5 \u00b7 Team interval overlap",
+      "path": "3-Master_Plan/re_entry/HEROs_and_PASSes/legends_sandbox/basic_data_plots/LEGENDS_team_interval_overlap.png"
+    },
+    {
+      "type": "image",
+      "title": "6 \u00b7 Team roster size |T_j|",
+      "path": "3-Master_Plan/re_entry/HEROs_and_PASSes/legends_sandbox/basic_data_plots/LEGENDS_pool_size.png"
+    },
+    {
+      "type": "image",
+      "title": "7 \u00b7 CCT \u2014 fixed \u00c2 z\u2208[1,2]",
+      "path": "3-Master_Plan/re_entry/HEROs_and_PASSes/legends_sandbox/act2/CCT_legends_ai_z1_2_q8.png",
+      "note": "Scaled Act II probe"
+    },
+    {
+      "type": "image",
+      "title": "8 \u00b7 Elite pond \u2014 top 20% \u00c2",
+      "path": "3-Master_Plan/re_entry/HEROs_and_PASSes/legends_sandbox/act2/ELITE_legends_top20_loo_pw5.png",
+      "note": "LOO bins within elite \u00c2"
+    },
+    {
+      "type": "image",
+      "title": "9 \u00b7 HERO (Pass A \u00b7 LOO bins)",
+      "path": "3-Master_Plan/re_entry/HEROs_and_PASSes/legends_sandbox/hero/HERO_legends_q16_team_loo_slide.png"
+    }
+  ],
+  "verdict": {
+    "reigning_tag": "q16_dev_team_loo_promo2y",
+    "panel_rows": "all-ps",
+    "n": 1879,
+    "y_rate": 0.3677488025545503
+  }
+}

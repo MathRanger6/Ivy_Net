@@ -43,9 +43,16 @@ def _spec_subtitle(
     *,
     window: str = ASST_PS,
     stat: str = ANNUM,
+    metric_key: str | None = None,
+    metric_short: str | None = None,
 ) -> str:
     bin_lbl = _bin_label(bin_method, n_bins)
-    perf_lbl = perf_display_label(x_metric=x_metric, stat=stat)
+    perf_lbl = perf_display_label(
+        x_metric=x_metric,
+        stat=stat,
+        metric_key=metric_key,
+        metric_short=metric_short,
+    )
     return rf"{bin_lbl} · {perf_lbl} · Option A"
 
 
@@ -196,9 +203,16 @@ def _tenure_footer(
     n_resolved: int,
     window: str = ASST_PS,
     stat: str = ANNUM,
+    metric_key: str | None = None,
+    metric_short: str | None = None,
 ) -> str:
     grain_bit = window_badge(window)
-    perf_bit = perf_display_label(x_metric=x_metric, stat=stat)
+    perf_bit = perf_display_label(
+        x_metric=x_metric,
+        stat=stat,
+        metric_key=metric_key,
+        metric_short=metric_short,
+    )
     return (
         f"HERO · {_bin_label(bin_method, n_bins)} · {grain_bit} · {perf_bit} · infHM · "
         f"n={n_persons:,} · res={n_resolved:,} · {date.today().isoformat()}"
@@ -217,6 +231,9 @@ def build_hero_slide_panel(
     stat: str = ANNUM,
     exclude_censored: bool = True,
     stage9_summary: dict[str, Any] | None = None,
+    x_axis_label: str | None = None,
+    metric_key: str | None = None,
+    metric_short: str | None = None,
     # Legacy kwargs (old callers / provenance replay)
     grain: str | None = None,
     pool_perf: str | None = None,
@@ -257,7 +274,7 @@ def build_hero_slide_panel(
     n_tenure = int(summ.get("n_tenure", sum(p["tenure"] for p in persons)))
     n_resolved = int(summ.get("n_resolved", sum(1 for p in persons if not p["censored"])))
 
-    xlab = _x_axis_label(bin_method, x_metric, stat=stat)
+    xlab = x_axis_label or _x_axis_label(bin_method, x_metric, stat=stat)
     equal_width = bin_method == "equal_width"
 
     fig, ax = plt.subplots(figsize=(7.5, 4.5))
@@ -269,10 +286,24 @@ def build_hero_slide_panel(
         ax.bar(x, y, color="steelblue", edgecolor="white", alpha=0.9, width=0.82)
     ax.set_xlabel(xlab)
     ax.set_ylabel(r"Mean $Y_{\mathrm{tenure}}$ (resolved only)")
-    title_line = hero_title_line(window=window, stat=stat, x_metric=x_metric)
+    title_line = hero_title_line(
+        window=window,
+        stat=stat,
+        x_metric=x_metric,
+        metric_key=metric_key,
+        metric_short=metric_short,
+    )
     ax.set_title(
         f"{title_line}\n"
-        + _spec_subtitle(n_bins, bin_method, x_metric, window=window, stat=stat),
+        + _spec_subtitle(
+            n_bins,
+            bin_method,
+            x_metric,
+            window=window,
+            stat=stat,
+            metric_key=metric_key,
+            metric_short=metric_short,
+        ),
         fontsize=10,
         pad=4,
     )
@@ -331,6 +362,8 @@ def build_hero_slide_panel(
         n_resolved=n_resolved,
         window=window,
         stat=stat,
+        metric_key=metric_key,
+        metric_short=metric_short,
     )
     stamp_figure_footer(fig, footer)
     fig.subplots_adjust(top=0.88, bottom=0.14)

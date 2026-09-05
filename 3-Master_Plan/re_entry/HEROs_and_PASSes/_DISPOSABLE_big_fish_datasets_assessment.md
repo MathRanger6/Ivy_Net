@@ -10,15 +10,18 @@
 
 ## YOU ARE HERE
 
-| Priority | Dataset | Path | Usefulness | Next action |
-|----------|---------|------|------------|-------------|
-| **1 (now)** | **Legends (LoL)** | `datasets/legends/` | **High** | First BDP + dev-cohort HERO porch |
-| 2 | Football | `datasets/football/` | **High** | Eligible-cohort BDP after legends |
-| 3 | NELS88 | `datasets/nels88/` | **Med–high** | Light porch on `analytic_sample_min10` |
-| 4 | HSB80 | `datasets/hsb80/` | **Medium** | Cohort-split porch (Soph vs Senior) |
-| 5 | Apache | `datasets/Apache/` | **Med–high** | Activity-screened PMC promotion porch |
+**PD30 (Sep 4):** Big Fish = **backup portfolio / back burner** — not primary time sink. **Primary = paper flipbook + story outline.** Army · MBB · Tenure stay main line. See [`transcripts/PD30_notes.md`](../../../transcripts/PD30_notes.md).
 
-**Alex one-liner:** Same **Big Fish** skeleton everywhere — own performance (Â analog), leave-one-out peer context, pond/unit ID, downstream Y — so tooling can reuse MBB/tenure patterns where selection is clear.
+| Priority | Dataset | Path | PD30 verdict | Next action |
+|----------|---------|------|--------------|-------------|
+| — | **Paper talk** | `3-Master_Plan/re_entry/` | **P0 primary** | Flipbook: question → figure → claim |
+| **B1** | **Football** | `datasets/football/` | Composite porch **fail**; **usage LOO interesting** | Usage congestion slide for story; no deep composite chase |
+| **B2** | **Legends (LoL)** | `datasets/legends/` | One metric weak; **no reigning HERO** | Background poke only |
+| **B3** | NELS88 | `datasets/nels88/` | Not shown | Education porch when background time |
+| **B4** | HSB80 | `datasets/hsb80/` | Not shown | Same |
+| **B5** | Apache | `datasets/Apache/` | Not shown | Same |
+
+**Alex one-liner (PD30):** “Backup on our backup plan” — perf metric storyboard validates **screen fast, don't sink weeks**; hit rate says congestion can work again, but **MBB/tenure/army** are still the bet.
 
 ---
 
@@ -206,12 +209,13 @@ None replace **MBB** or **tenure** as anchors. They extend cross-domain coverage
 
 ---
 
-## Suggested sequencing (bandwidth)
+## Suggested sequencing (bandwidth) — **PD30: back burner only**
 
-1. **Legends** — full sandbox (BDP + HERO porch + dev filter) ← **Charles focus now**
-2. **Football** — eligible-cohort BDP / 3×3 where draft N allows
-3. **Apache** — activity-screened PMC porch + censor note in caption
-4. **NELS + HSB** — one porch each when education cross-domain is needed
+1. **Paper flipbook** — P0 (not a dataset; overrides list below)
+2. **Football** — usage congestion slide wired; no composite chase
+3. **Legends** — background poke if train/night energy
+4. **Education bundle (NELS + HSB)** — when story needs a third domain
+5. **Apache** — lowest urgency
 
 ---
 
@@ -220,3 +224,4 @@ None replace **MBB** or **tenure** as anchors. They extend cross-domain coverage
 | Date | Entry |
 |------|-------|
 | 2026-09-03 | Initial COMPASS assessment of football, legends, nels88, hsb80, apache; legends selected as active focus. |
+| 2026-09-04 | PD30: Big Fish demoted to backup; football usage LOO = story nugget; primary = paper outline. |

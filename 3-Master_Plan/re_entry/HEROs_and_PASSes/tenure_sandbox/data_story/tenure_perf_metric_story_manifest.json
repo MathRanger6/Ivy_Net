@@ -1,0 +1,403 @@
+{
+  "domain": "tenure",
+  "deck": "perf_metric_story",
+  "cohort": "decision_pd29",
+  "title": "Tenure \u2014 HERO by metric \u00b7 P(tenure) vs dept LOO",
+  "show_footer": false,
+  "page_size": "letter",
+  "n": 389,
+  "tenure_rate": 0.4910025706940874,
+  "output_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/data_story/TENURE_PERF_METRIC_STORY.png",
+  "output_pages": [
+    "3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/data_story/TENURE_PERF_METRIC_STORY.png",
+    "3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/data_story/TENURE_PERF_METRIC_STORY_p2.png"
+  ],
+  "panels_dir": "3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/perf_story/panels",
+  "metrics_16bin": [
+    {
+      "metric_key": "career_rate",
+      "short": "career rate",
+      "n": 389,
+      "prep_stats": {
+        "n_resolved_all_asst_time": 391,
+        "asst_time_histogram": {
+          "1": 70,
+          "2": 91,
+          "3": 76,
+          "4": 72,
+          "5": 51,
+          "6": 12,
+          "7": 13,
+          "8": 4,
+          "9": 2
+        },
+        "n_cohort": 391,
+        "n_with_career_rate": 280,
+        "n_tenure": 191,
+        "n_attrition": 200,
+        "n_off_tenure_track": 47,
+        "reference_asst_time_band": [
+          5,
+          6
+        ],
+        "n_in_reference_band": 63,
+        "pct_in_reference_band": 16.11,
+        "metric_key": "career_rate",
+        "x_metric": "decision_loo",
+        "n_persons_with_x": 389,
+        "n_dropped_null_x": 2,
+        "n_empty_dept_pool": 0
+      },
+      "q16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/perf_story/panels/HERO_tenure_perf_q16_loo_career_rate_slide.png",
+      "q16_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/perf_story/panels/HERO_tenure_perf_q16_loo_career_rate_binned.csv",
+      "ew16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/perf_story/panels/HERO_tenure_perf_ew16_loo_career_rate_slide.png",
+      "ew16_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/perf_story/panels/HERO_tenure_perf_ew16_loo_career_rate_binned.csv"
+    },
+    {
+      "metric_key": "cum_pubs",
+      "short": "cum pubs",
+      "n": 391,
+      "prep_stats": {
+        "n_resolved_all_asst_time": 391,
+        "asst_time_histogram": {
+          "1": 70,
+          "2": 91,
+          "3": 76,
+          "4": 72,
+          "5": 51,
+          "6": 12,
+          "7": 13,
+          "8": 4,
+          "9": 2
+        },
+        "n_cohort": 391,
+        "n_with_career_rate": 280,
+        "n_tenure": 191,
+        "n_attrition": 200,
+        "n_off_tenure_track": 47,
+        "reference_asst_time_band": [
+          5,
+          6
+        ],
+        "n_in_reference_band": 63,
+        "pct_in_reference_band": 16.11,
+        "metric_key": "cum_pubs",
+        "x_metric": "decision_loo",
+        "n_persons_with_x": 391,
+        "n_dropped_null_x": 0,
+        "n_empty_dept_pool": 0
+      },
+      "q16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/perf_story/panels/HERO_tenure_perf_q16_loo_cum_pubs_slide.png",
+      "q16_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/perf_story/panels/HERO_tenure_perf_q16_loo_cum_pubs_binned.csv",
+      "ew16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/perf_story/panels/HERO_tenure_perf_ew16_loo_cum_pubs_slide.png",
+      "ew16_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/perf_story/panels/HERO_tenure_perf_ew16_loo_cum_pubs_binned.csv"
+    },
+    {
+      "metric_key": "annual_pubs",
+      "short": "annum pubs",
+      "n": 391,
+      "prep_stats": {
+        "n_resolved_all_asst_time": 391,
+        "asst_time_histogram": {
+          "1": 70,
+          "2": 91,
+          "3": 76,
+          "4": 72,
+          "5": 51,
+          "6": 12,
+          "7": 13,
+          "8": 4,
+          "9": 2
+        },
+        "n_cohort": 391,
+        "n_with_career_rate": 280,
+        "n_tenure": 191,
+        "n_attrition": 200,
+        "n_off_tenure_track": 47,
+        "reference_asst_time_band": [
+          5,
+          6
+        ],
+        "n_in_reference_band": 63,
+        "pct_in_reference_band": 16.11,
+        "metric_key": "annual_pubs",
+        "x_metric": "decision_loo",
+        "n_persons_with_x": 391,
+        "n_dropped_null_x": 0,
+        "n_empty_dept_pool": 0
+      },
+      "q16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/perf_story/panels/HERO_tenure_perf_q16_loo_annual_pubs_slide.png",
+      "q16_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/perf_story/panels/HERO_tenure_perf_q16_loo_annual_pubs_binned.csv",
+      "ew16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/perf_story/panels/HERO_tenure_perf_ew16_loo_annual_pubs_slide.png",
+      "ew16_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/perf_story/panels/HERO_tenure_perf_ew16_loo_annual_pubs_binned.csv"
+    }
+  ],
+  "metrics_10bin": [
+    {
+      "metric_key": "career_rate",
+      "short": "career rate",
+      "n": 389,
+      "prep_stats": {
+        "n_resolved_all_asst_time": 391,
+        "asst_time_histogram": {
+          "1": 70,
+          "2": 91,
+          "3": 76,
+          "4": 72,
+          "5": 51,
+          "6": 12,
+          "7": 13,
+          "8": 4,
+          "9": 2
+        },
+        "n_cohort": 391,
+        "n_with_career_rate": 280,
+        "n_tenure": 191,
+        "n_attrition": 200,
+        "n_off_tenure_track": 47,
+        "reference_asst_time_band": [
+          5,
+          6
+        ],
+        "n_in_reference_band": 63,
+        "pct_in_reference_band": 16.11,
+        "metric_key": "career_rate",
+        "x_metric": "decision_loo",
+        "n_persons_with_x": 389,
+        "n_dropped_null_x": 2,
+        "n_empty_dept_pool": 0
+      },
+      "q10_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/perf_story/panels/HERO_tenure_perf_q10_loo_career_rate_slide.png",
+      "q10_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/perf_story/panels/HERO_tenure_perf_q10_loo_career_rate_binned.csv",
+      "ew10_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/perf_story/panels/HERO_tenure_perf_ew10_loo_career_rate_slide.png",
+      "ew10_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/perf_story/panels/HERO_tenure_perf_ew10_loo_career_rate_binned.csv"
+    },
+    {
+      "metric_key": "cum_pubs",
+      "short": "cum pubs",
+      "n": 391,
+      "prep_stats": {
+        "n_resolved_all_asst_time": 391,
+        "asst_time_histogram": {
+          "1": 70,
+          "2": 91,
+          "3": 76,
+          "4": 72,
+          "5": 51,
+          "6": 12,
+          "7": 13,
+          "8": 4,
+          "9": 2
+        },
+        "n_cohort": 391,
+        "n_with_career_rate": 280,
+        "n_tenure": 191,
+        "n_attrition": 200,
+        "n_off_tenure_track": 47,
+        "reference_asst_time_band": [
+          5,
+          6
+        ],
+        "n_in_reference_band": 63,
+        "pct_in_reference_band": 16.11,
+        "metric_key": "cum_pubs",
+        "x_metric": "decision_loo",
+        "n_persons_with_x": 391,
+        "n_dropped_null_x": 0,
+        "n_empty_dept_pool": 0
+      },
+      "q10_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/perf_story/panels/HERO_tenure_perf_q10_loo_cum_pubs_slide.png",
+      "q10_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/perf_story/panels/HERO_tenure_perf_q10_loo_cum_pubs_binned.csv",
+      "ew10_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/perf_story/panels/HERO_tenure_perf_ew10_loo_cum_pubs_slide.png",
+      "ew10_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/perf_story/panels/HERO_tenure_perf_ew10_loo_cum_pubs_binned.csv"
+    },
+    {
+      "metric_key": "annual_pubs",
+      "short": "annum pubs",
+      "n": 391,
+      "prep_stats": {
+        "n_resolved_all_asst_time": 391,
+        "asst_time_histogram": {
+          "1": 70,
+          "2": 91,
+          "3": 76,
+          "4": 72,
+          "5": 51,
+          "6": 12,
+          "7": 13,
+          "8": 4,
+          "9": 2
+        },
+        "n_cohort": 391,
+        "n_with_career_rate": 280,
+        "n_tenure": 191,
+        "n_attrition": 200,
+        "n_off_tenure_track": 47,
+        "reference_asst_time_band": [
+          5,
+          6
+        ],
+        "n_in_reference_band": 63,
+        "pct_in_reference_band": 16.11,
+        "metric_key": "annual_pubs",
+        "x_metric": "decision_loo",
+        "n_persons_with_x": 391,
+        "n_dropped_null_x": 0,
+        "n_empty_dept_pool": 0
+      },
+      "q10_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/perf_story/panels/HERO_tenure_perf_q10_loo_annual_pubs_slide.png",
+      "q10_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/perf_story/panels/HERO_tenure_perf_q10_loo_annual_pubs_binned.csv",
+      "ew10_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/perf_story/panels/HERO_tenure_perf_ew10_loo_annual_pubs_slide.png",
+      "ew10_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/perf_story/panels/HERO_tenure_perf_ew10_loo_annual_pubs_binned.csv"
+    }
+  ],
+  "metrics": [
+    {
+      "metric_key": "career_rate",
+      "short": "career rate",
+      "n": 389,
+      "prep_stats": {
+        "n_resolved_all_asst_time": 391,
+        "asst_time_histogram": {
+          "1": 70,
+          "2": 91,
+          "3": 76,
+          "4": 72,
+          "5": 51,
+          "6": 12,
+          "7": 13,
+          "8": 4,
+          "9": 2
+        },
+        "n_cohort": 391,
+        "n_with_career_rate": 280,
+        "n_tenure": 191,
+        "n_attrition": 200,
+        "n_off_tenure_track": 47,
+        "reference_asst_time_band": [
+          5,
+          6
+        ],
+        "n_in_reference_band": 63,
+        "pct_in_reference_band": 16.11,
+        "metric_key": "career_rate",
+        "x_metric": "decision_loo",
+        "n_persons_with_x": 389,
+        "n_dropped_null_x": 2,
+        "n_empty_dept_pool": 0
+      },
+      "q16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/perf_story/panels/HERO_tenure_perf_q16_loo_career_rate_slide.png",
+      "q16_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/perf_story/panels/HERO_tenure_perf_q16_loo_career_rate_binned.csv",
+      "ew16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/perf_story/panels/HERO_tenure_perf_ew16_loo_career_rate_slide.png",
+      "ew16_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/perf_story/panels/HERO_tenure_perf_ew16_loo_career_rate_binned.csv"
+    },
+    {
+      "metric_key": "cum_pubs",
+      "short": "cum pubs",
+      "n": 391,
+      "prep_stats": {
+        "n_resolved_all_asst_time": 391,
+        "asst_time_histogram": {
+          "1": 70,
+          "2": 91,
+          "3": 76,
+          "4": 72,
+          "5": 51,
+          "6": 12,
+          "7": 13,
+          "8": 4,
+          "9": 2
+        },
+        "n_cohort": 391,
+        "n_with_career_rate": 280,
+        "n_tenure": 191,
+        "n_attrition": 200,
+        "n_off_tenure_track": 47,
+        "reference_asst_time_band": [
+          5,
+          6
+        ],
+        "n_in_reference_band": 63,
+        "pct_in_reference_band": 16.11,
+        "metric_key": "cum_pubs",
+        "x_metric": "decision_loo",
+        "n_persons_with_x": 391,
+        "n_dropped_null_x": 0,
+        "n_empty_dept_pool": 0
+      },
+      "q16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/perf_story/panels/HERO_tenure_perf_q16_loo_cum_pubs_slide.png",
+      "q16_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/perf_story/panels/HERO_tenure_perf_q16_loo_cum_pubs_binned.csv",
+      "ew16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/perf_story/panels/HERO_tenure_perf_ew16_loo_cum_pubs_slide.png",
+      "ew16_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/perf_story/panels/HERO_tenure_perf_ew16_loo_cum_pubs_binned.csv"
+    },
+    {
+      "metric_key": "annual_pubs",
+      "short": "annum pubs",
+      "n": 391,
+      "prep_stats": {
+        "n_resolved_all_asst_time": 391,
+        "asst_time_histogram": {
+          "1": 70,
+          "2": 91,
+          "3": 76,
+          "4": 72,
+          "5": 51,
+          "6": 12,
+          "7": 13,
+          "8": 4,
+          "9": 2
+        },
+        "n_cohort": 391,
+        "n_with_career_rate": 280,
+        "n_tenure": 191,
+        "n_attrition": 200,
+        "n_off_tenure_track": 47,
+        "reference_asst_time_band": [
+          5,
+          6
+        ],
+        "n_in_reference_band": 63,
+        "pct_in_reference_band": 16.11,
+        "metric_key": "annual_pubs",
+        "x_metric": "decision_loo",
+        "n_persons_with_x": 391,
+        "n_dropped_null_x": 0,
+        "n_empty_dept_pool": 0
+      },
+      "q16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/perf_story/panels/HERO_tenure_perf_q16_loo_annual_pubs_slide.png",
+      "q16_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/perf_story/panels/HERO_tenure_perf_q16_loo_annual_pubs_binned.csv",
+      "ew16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/perf_story/panels/HERO_tenure_perf_ew16_loo_annual_pubs_slide.png",
+      "ew16_csv": "3-Master_Plan/re_entry/HEROs_and_PASSes/tenure_sandbox/perf_story/panels/HERO_tenure_perf_ew16_loo_annual_pubs_binned.csv"
+    }
+  ],
+  "prep_stats_career_rate": {
+    "n_resolved_all_asst_time": 391,
+    "asst_time_histogram": {
+      "1": 70,
+      "2": 91,
+      "3": 76,
+      "4": 72,
+      "5": 51,
+      "6": 12,
+      "7": 13,
+      "8": 4,
+      "9": 2
+    },
+    "n_cohort": 391,
+    "n_with_career_rate": 280,
+    "n_tenure": 191,
+    "n_attrition": 200,
+    "n_off_tenure_track": 47,
+    "reference_asst_time_band": [
+      5,
+      6
+    ],
+    "n_in_reference_band": 63,
+    "pct_in_reference_band": 16.11,
+    "metric_key": "career_rate",
+    "x_metric": "decision_loo",
+    "n_persons_with_x": 389,
+    "n_dropped_null_x": 2,
+    "n_empty_dept_pool": 0
+  }
+}

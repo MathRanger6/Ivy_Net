@@ -1,0 +1,91 @@
+{
+  "domain": "mbb",
+  "deck": "perf_metric_story",
+  "bdp_spec": "mg10 min20 09_21",
+  "title": "MBB \u2014 HERO by metric \u00b7 P(drafted) vs teammate LOO",
+  "show_footer": false,
+  "page_size": "letter",
+  "rows_per_page": 5,
+  "n": 22795,
+  "draft_rate": 0.02697960078964685,
+  "output_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/data_story/MBB_PERF_METRIC_STORY_p1.png",
+  "output_pages": [
+    "3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/data_story/MBB_PERF_METRIC_STORY_p1.png",
+    "3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/data_story/MBB_PERF_METRIC_STORY_p2.png"
+  ],
+  "panels_dir": "3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/perf_story/panels",
+  "metrics": [
+    {
+      "metric_key": "ppm",
+      "col": "ppm",
+      "short": "PPM",
+      "n": 22795,
+      "q16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/perf_story/panels/HERO_mbb_perf_q16_loo_ppm_slide.png",
+      "ew16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/perf_story/panels/HERO_mbb_perf_ew16_loo_ppm_slide.png"
+    },
+    {
+      "metric_key": "per",
+      "col": "per",
+      "short": "PER",
+      "n": 20705,
+      "q16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/perf_story/panels/HERO_mbb_perf_q16_loo_per_slide.png",
+      "ew16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/perf_story/panels/HERO_mbb_perf_ew16_loo_per_slide.png"
+    },
+    {
+      "metric_key": "bpm",
+      "col": "bpm",
+      "short": "BPM",
+      "n": 19294,
+      "q16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/perf_story/panels/HERO_mbb_perf_q16_loo_bpm_slide.png",
+      "ew16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/perf_story/panels/HERO_mbb_perf_ew16_loo_bpm_slide.png"
+    },
+    {
+      "metric_key": "tspct",
+      "col": "tspct",
+      "short": "TS%",
+      "n": 22182,
+      "q16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/perf_story/panels/HERO_mbb_perf_q16_loo_tspct_slide.png",
+      "ew16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/perf_story/panels/HERO_mbb_perf_ew16_loo_tspct_slide.png"
+    },
+    {
+      "metric_key": "ws",
+      "col": "ws",
+      "short": "WS",
+      "n": 22052,
+      "q16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/perf_story/panels/HERO_mbb_perf_q16_loo_ws_slide.png",
+      "ew16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/perf_story/panels/HERO_mbb_perf_ew16_loo_ws_slide.png"
+    },
+    {
+      "metric_key": "minutes",
+      "col": "minutes",
+      "short": "minutes",
+      "n": 22795,
+      "q16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/perf_story/panels/HERO_mbb_perf_q16_loo_minutes_slide.png",
+      "ew16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/perf_story/panels/HERO_mbb_perf_ew16_loo_minutes_slide.png"
+    },
+    {
+      "metric_key": "ws40",
+      "col": "ws40",
+      "short": "WS/40",
+      "n": 22052,
+      "q16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/perf_story/panels/HERO_mbb_perf_q16_loo_ws40_slide.png",
+      "ew16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/perf_story/panels/HERO_mbb_perf_ew16_loo_ws40_slide.png"
+    },
+    {
+      "metric_key": "obpm",
+      "col": "obpm",
+      "short": "OBPM",
+      "n": 19294,
+      "q16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/perf_story/panels/HERO_mbb_perf_q16_loo_obpm_slide.png",
+      "ew16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/perf_story/panels/HERO_mbb_perf_ew16_loo_obpm_slide.png"
+    },
+    {
+      "metric_key": "dbpm",
+      "col": "dbpm",
+      "short": "DBPM",
+      "n": 19294,
+      "q16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/perf_story/panels/HERO_mbb_perf_q16_loo_dbpm_slide.png",
+      "ew16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/perf_story/panels/HERO_mbb_perf_ew16_loo_dbpm_slide.png"
+    }
+  ]
+}

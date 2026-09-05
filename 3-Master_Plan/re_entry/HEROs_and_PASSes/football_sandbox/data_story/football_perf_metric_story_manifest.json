@@ -1,0 +1,83 @@
+{
+  "domain": "football",
+  "deck": "perf_metric_story",
+  "title": "Football (FBS) \u2014 HERO by metric \u00b7 P(drafted) vs teammate LOO",
+  "panel_rows": "last-ps",
+  "panel_audit": {
+    "step": "last_season_only",
+    "n_rows_before": 70633,
+    "n_rows_after": 29403,
+    "n_athletes": 29403,
+    "n_transfer_ties": 0,
+    "panel_rows": "last-ps",
+    "athlete_id_col": "player_id",
+    "tie_break_col": "role_opportunities"
+  },
+  "show_footer": false,
+  "page_size": "letter",
+  "rows_per_page": null,
+  "n": 29403,
+  "n_players": 29403,
+  "y_rate": 0.06472128694350916,
+  "output_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/football_sandbox/data_story/FOOTBALL_PERF_METRIC_STORY.png",
+  "output_pages": [
+    "3-Master_Plan/re_entry/HEROs_and_PASSes/football_sandbox/data_story/FOOTBALL_PERF_METRIC_STORY.png"
+  ],
+  "panels_dir": "3-Master_Plan/re_entry/HEROs_and_PASSes/football_sandbox/perf_story/panels",
+  "metrics": [
+    {
+      "col": "z_performance_volume",
+      "loo_col": "_loo_z_performance_volume",
+      "short": "volume z",
+      "label": "Own $z_{\\mathrm{volume}}$ (Alex)",
+      "n": 29403,
+      "q16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/football_sandbox/perf_story/panels/HERO_football_perf_q16_loo_z_performance_volume_slide.png",
+      "ew16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/football_sandbox/perf_story/panels/HERO_football_perf_ew16_loo_z_performance_volume_slide.png"
+    },
+    {
+      "col": "z_performance_efficiency",
+      "loo_col": "_loo_z_performance_efficiency",
+      "short": "efficiency z",
+      "label": "Own $z_{\\mathrm{efficiency}}$ (Alex)",
+      "n": 13135,
+      "q16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/football_sandbox/perf_story/panels/HERO_football_perf_q16_loo_z_performance_efficiency_slide.png",
+      "ew16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/football_sandbox/perf_story/panels/HERO_football_perf_ew16_loo_z_performance_efficiency_slide.png"
+    },
+    {
+      "col": "z_diy_recruit_rating",
+      "loo_col": "_loo_z_diy_recruit_rating",
+      "short": "recruit z \u00b7 prior",
+      "label": "Recruit rating $z$ (prior \u00b7 DIY)",
+      "n": 19789,
+      "q16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/football_sandbox/perf_story/panels/HERO_football_perf_q16_loo_z_diy_recruit_rating_slide.png",
+      "ew16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/football_sandbox/perf_story/panels/HERO_football_perf_ew16_loo_z_diy_recruit_rating_slide.png"
+    },
+    {
+      "col": "z_diy_ppa_total_all",
+      "loo_col": "_loo_z_diy_ppa_total_all",
+      "short": "PPA total z",
+      "label": "PPA total $z$ (DIY \u00b7 skill pos.)",
+      "n": 11206,
+      "q16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/football_sandbox/perf_story/panels/HERO_football_perf_q16_loo_z_diy_ppa_total_all_slide.png",
+      "ew16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/football_sandbox/perf_story/panels/HERO_football_perf_ew16_loo_z_diy_ppa_total_all_slide.png"
+    },
+    {
+      "col": "z_diy_usage_overall",
+      "loo_col": "_loo_z_diy_usage_overall",
+      "short": "usage z",
+      "label": "Usage $z$ (DIY \u00b7 skill pos.)",
+      "n": 11206,
+      "q16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/football_sandbox/perf_story/panels/HERO_football_perf_q16_loo_z_diy_usage_overall_slide.png",
+      "ew16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/football_sandbox/perf_story/panels/HERO_football_perf_ew16_loo_z_diy_usage_overall_slide.png"
+    },
+    {
+      "col": "own_performance_index",
+      "loo_col": "_loo_own_performance_index",
+      "short": "\u00c2 composite",
+      "label": "Own $\\hat{A}$ composite (Alex)",
+      "n": 29403,
+      "q16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/football_sandbox/perf_story/panels/HERO_football_perf_q16_loo_own_performance_index_slide.png",
+      "ew16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/football_sandbox/perf_story/panels/HERO_football_perf_ew16_loo_own_performance_index_slide.png"
+    }
+  ]
+}

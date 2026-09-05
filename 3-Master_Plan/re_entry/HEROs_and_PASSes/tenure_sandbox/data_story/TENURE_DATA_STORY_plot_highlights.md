@@ -178,6 +178,23 @@ python sports/scripts/build_data_story_mosaic.py \
 
 ---
 
+## Perf metric story (`TENURE_PERF_METRIC_STORY.png`)
+
+Six HERO rows per page (3 metrics × Q/EW): **career rate** · **cum pubs** · **annum pubs** (`pubs_year` at decision year), each with **dept LOO** peer X.
+
+| Page | File | Bins |
+|------|------|------|
+| 1 | `TENURE_PERF_METRIC_STORY.png` | Q16 + EW16 |
+| 2 | `TENURE_PERF_METRIC_STORY_p2.png` | Q10 + EW10 |
+
+**Row 3 (plots 5–6 on each page):** **annum pubs** — single-calendar-year work count (not a career rate); LOO mean of colleagues' `pubs_year` at decision year.
+
+```bash
+python tenure/scripts/tenure_perf_metric_story.py --no-footer --page-size letter
+```
+
+---
+
 ## Footnotes for honest slides
 
 - All BDP panels use **PD29 decision cohort** · `pubs_per_career_year` · whole-dept LOO at decision year.  

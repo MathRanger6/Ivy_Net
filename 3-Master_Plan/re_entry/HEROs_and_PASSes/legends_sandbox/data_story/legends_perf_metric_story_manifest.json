@@ -1,0 +1,102 @@
+{
+  "domain": "legends",
+  "deck": "perf_metric_story",
+  "title": "Legends (LoL) \u2014 HERO by metric \u00b7 P(promoted) vs teammate LOO",
+  "panel_rows": "all-ps",
+  "panel_audit": null,
+  "show_footer": false,
+  "page_size": "letter",
+  "rows_per_page": 5,
+  "n": 1879,
+  "n_players": null,
+  "y_rate": 0.3677488025545503,
+  "output_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/legends_sandbox/data_story/LEGENDS_PERF_METRIC_STORY_p1.png",
+  "output_pages": [
+    "3-Master_Plan/re_entry/HEROs_and_PASSes/legends_sandbox/data_story/LEGENDS_PERF_METRIC_STORY_p1.png",
+    "3-Master_Plan/re_entry/HEROs_and_PASSes/legends_sandbox/data_story/LEGENDS_PERF_METRIC_STORY_p2.png"
+  ],
+  "panels_dir": "3-Master_Plan/re_entry/HEROs_and_PASSes/legends_sandbox/perf_story/panels",
+  "metrics": [
+    {
+      "col": "z_damage_per_min",
+      "loo_col": "_loo_z_damage_per_min",
+      "short": "dmg/min",
+      "label": "Own $z_{\\mathrm{dmg/min}}$",
+      "n": 1842,
+      "q16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/legends_sandbox/perf_story/panels/HERO_legends_perf_q16_loo_z_damage_per_min_slide.png",
+      "ew16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/legends_sandbox/perf_story/panels/HERO_legends_perf_ew16_loo_z_damage_per_min_slide.png"
+    },
+    {
+      "col": "z_earned_gold_per_min",
+      "loo_col": "_loo_z_earned_gold_per_min",
+      "short": "gold/min",
+      "label": "Own $z_{\\mathrm{gold/min}}$",
+      "n": 1842,
+      "q16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/legends_sandbox/perf_story/panels/HERO_legends_perf_q16_loo_z_earned_gold_per_min_slide.png",
+      "ew16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/legends_sandbox/perf_story/panels/HERO_legends_perf_ew16_loo_z_earned_gold_per_min_slide.png"
+    },
+    {
+      "col": "z_kda_ratio",
+      "loo_col": "_loo_z_kda_ratio",
+      "short": "KDA",
+      "label": "Own $z_{\\mathrm{KDA}}$",
+      "n": 1842,
+      "q16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/legends_sandbox/perf_story/panels/HERO_legends_perf_q16_loo_z_kda_ratio_slide.png",
+      "ew16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/legends_sandbox/perf_story/panels/HERO_legends_perf_ew16_loo_z_kda_ratio_slide.png"
+    },
+    {
+      "col": "z_kill_participation",
+      "loo_col": "_loo_z_kill_participation",
+      "short": "kill part.",
+      "label": "Own $z_{\\mathrm{kill\\ part.}}$",
+      "n": 1842,
+      "q16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/legends_sandbox/perf_story/panels/HERO_legends_perf_q16_loo_z_kill_participation_slide.png",
+      "ew16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/legends_sandbox/perf_story/panels/HERO_legends_perf_ew16_loo_z_kill_participation_slide.png"
+    },
+    {
+      "col": "z_vision_score_per_min",
+      "loo_col": "_loo_z_vision_score_per_min",
+      "short": "vision/min",
+      "label": "Own $z_{\\mathrm{vision/min}}$",
+      "n": 1120,
+      "q16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/legends_sandbox/perf_story/panels/HERO_legends_perf_q16_loo_z_vision_score_per_min_slide.png",
+      "ew16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/legends_sandbox/perf_story/panels/HERO_legends_perf_ew16_loo_z_vision_score_per_min_slide.png"
+    },
+    {
+      "col": "z_gold_diff_15",
+      "loo_col": "_loo_z_gold_diff_15",
+      "short": "gold @15",
+      "label": "Own $z_{\\mathrm{gold@15}}$",
+      "n": 721,
+      "q16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/legends_sandbox/perf_story/panels/HERO_legends_perf_q16_loo_z_gold_diff_15_slide.png",
+      "ew16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/legends_sandbox/perf_story/panels/HERO_legends_perf_ew16_loo_z_gold_diff_15_slide.png"
+    },
+    {
+      "col": "z_xp_diff_15",
+      "loo_col": "_loo_z_xp_diff_15",
+      "short": "XP @15",
+      "label": "Own $z_{\\mathrm{XP@15}}$",
+      "n": 721,
+      "q16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/legends_sandbox/perf_story/panels/HERO_legends_perf_q16_loo_z_xp_diff_15_slide.png",
+      "ew16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/legends_sandbox/perf_story/panels/HERO_legends_perf_ew16_loo_z_xp_diff_15_slide.png"
+    },
+    {
+      "col": "z_cs_diff_15",
+      "loo_col": "_loo_z_cs_diff_15",
+      "short": "CS @15",
+      "label": "Own $z_{\\mathrm{CS@15}}$",
+      "n": 721,
+      "q16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/legends_sandbox/perf_story/panels/HERO_legends_perf_q16_loo_z_cs_diff_15_slide.png",
+      "ew16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/legends_sandbox/perf_story/panels/HERO_legends_perf_ew16_loo_z_cs_diff_15_slide.png"
+    },
+    {
+      "col": "own_performance_index",
+      "loo_col": "_loo_own_performance_index",
+      "short": "\u00c2 composite",
+      "label": "Own $\\hat{A}$ composite",
+      "n": 1879,
+      "q16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/legends_sandbox/perf_story/panels/HERO_legends_perf_q16_loo_own_performance_index_slide.png",
+      "ew16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/legends_sandbox/perf_story/panels/HERO_legends_perf_ew16_loo_own_performance_index_slide.png"
+    }
+  ]
+}

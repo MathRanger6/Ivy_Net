@@ -136,27 +136,62 @@ def stamp_window_badge(
     )
 
 
-def perf_display_label(*, x_metric: str, stat: str = ANNUM) -> str:
+_DECISION_LOO_METRIC_LABELS: dict[str, str] = {
+    "career_rate": "career rate",
+    "cum_pubs": "cum pubs",
+    "annual_pubs": "annum pubs",
+}
+
+
+def decision_loo_metric_label(
+    metric_key: str | None = None,
+    *,
+    metric_short: str | None = None,
+) -> str:
+    """Display label for PD29 dept-pond LOO perf-metric story rows."""
+    if metric_short:
+        return metric_short
+    if metric_key:
+        return _DECISION_LOO_METRIC_LABELS.get(metric_key, metric_key.replace("_", " "))
+    return "career rate"
+
+
+def perf_display_label(
+    *,
+    x_metric: str,
+    stat: str = ANNUM,
+    metric_key: str | None = None,
+    metric_short: str | None = None,
+) -> str:
     s = normalize_stat(stat)
     if x_metric == "own_cum":
         return "own cumulative pubs"
     if x_metric == "own_career":
         return "own career pubs rate"
     if x_metric == "decision_loo":
-        return "dept LOO career rate"
+        label = decision_loo_metric_label(metric_key=metric_key, metric_short=metric_short)
+        return f"dept LOO {label}"
     if s == CUM:
         return "peer cumulative LOO"
     return "peer LOO (annum)"
 
 
-def provenance_spec_label(*, window: str, stat: str, x_metric: str) -> str:
+def provenance_spec_label(
+    *,
+    window: str,
+    stat: str,
+    x_metric: str,
+    metric_key: str | None = None,
+    metric_short: str | None = None,
+) -> str:
     w = normalize_window(window)
     s = normalize_stat(stat)
     badge = window_badge(w)
     if x_metric == "own_cum":
         return f"{badge} · own cum pubs (ability slice)"
     if w == DECISION and x_metric == "decision_loo":
-        return f"{badge} · dept pond LOO · career rate"
+        label = decision_loo_metric_label(metric_key=metric_key, metric_short=metric_short)
+        return f"{badge} · dept pond LOO · {label}"
     if w == DECISION and x_metric == "own_career":
         return f"{badge} · own career rate (ability slice)"
     if w == LAST_PS and s == CUM and x_metric == "loo":
@@ -170,13 +205,23 @@ def provenance_spec_label(*, window: str, stat: str, x_metric: str) -> str:
     return f"{badge} · {s} · {x_metric}"
 
 
-def hero_title_line(*, window: str, stat: str, x_metric: str) -> str:
+def hero_title_line(
+    *,
+    window: str,
+    stat: str,
+    x_metric: str,
+    metric_key: str | None = None,
+    metric_short: str | None = None,
+) -> str:
     w = normalize_window(window)
     s = normalize_stat(stat)
     if x_metric == "own_cum":
         return "Empirical hero — own cumulative pubs (ability slice)"
     if w == DECISION and x_metric == "own_career":
         return "Empirical hero — own career pubs rate at decision"
+    if w == DECISION and x_metric == "decision_loo":
+        label = decision_loo_metric_label(metric_key=metric_key, metric_short=metric_short)
+        return f"Empirical hero — dept pond LOO ({label} at decision year)"
     if w == DECISION:
         return "Empirical hero — dept pond LOO (career rate at decision year)"
     if w == LAST_PS and s == CUM:
