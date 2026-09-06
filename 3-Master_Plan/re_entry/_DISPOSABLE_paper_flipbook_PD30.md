@@ -13,7 +13,7 @@
 
 | Step | Task | Status |
 |------|------|--------|
-| **P0** | **Flipbook slide table** (this doc § Slide deck) | 🟡 stub — fill claims |
+| **P0** | **Act 0 claims** (§ Slide deck) | 🟢 drafted — Charles red-pen |
 | P1 | Tie each **primary** slide to reigning figure path | 🟡 paths listed § Figure inventory |
 | P2 | **Gap slides** named (theory, causal ID, army CAC) | 🟡 stubs only |
 | P3 | Export to PowerPoint / PDF talk deck | ⬜ |
@@ -112,12 +112,12 @@ Paths relative to repo root. Talk tracks: sibling `*_plot_highlights.md` where n
 
 ### Act 0 — Frame (2–4 slides)
 
-| # | Question | Figure | Claim (draft) | Gap? |
-|---|----------|--------|---------------|------|
-| 0.1 | What is the puzzle? | *(none — text)* | Advancement is scarce; peer context can help or hurt; we test whether **peer pond quality** predicts outcomes on its own axis. | |
-| 0.2 | What is *not* the claim? | `BINDING_Selection_is_its_own_step.md` | Hero = **outcome vs environment**; not proof of developmental peer effects; separate from **score then select**. | |
-| 0.3 | What is the hero? | Army CIF / pool-quality porch (**G1**) | Promotion rate vs unit **LOO** pool quality: **strong inverted-U** — the original phenomenon. | Canonical army PNG |
-| 0.4 | Why basketball in the repo deck? | *(text)* | **CAC gap** — shifted to MBB because we **had the data**; army remains narrative anchor when access returns. | |
+| # | Question | Figure | Claim | Notes |
+|---|----------|--------|-------|-------|
+| 0.1 | What is the puzzle? | *(text)* | **Scarce advancement** meets **strong peers**: the same pond that develops you can also **crowd** you when slots are limited. We ask whether that tension shows up as a **repeatable outcome pattern** when we bin advancement on **peer pond quality** (leave-one-out), not on own talent alone. | Wang arc opener — phenomenon before mechanism |
+| 0.2 | What is *not* the claim? | Binding table (`BINDING_Selection_is_its_own_step.md`) | The hero porch is **Layer A**: who advanced vs **peer environment** on its own axis. It is **not** proof that peers caused development, and it is **not** the generative model — **environment** (`L_net = B − D`) ≠ **advancement** (**score** `S_i` **then select** top K). | Charles lock — keep three separations visible |
+| 0.3 | What is the hero? | Army CIF / pool-quality porch (**G1**) | In **Army officer promotion**, advancement rate vs **unit pool quality (LOO)** shows a **strong inverted-U**: rates rise through mid-quality ponds, then **dip in the best peer contexts** — the clearest instance of the hero shape. This is a **stylized fact** under fixed rules, not yet a causal peer-effects story. | **G1:** slot canonical army PNG |
+| 0.4 | Why basketball in the repo deck? | *(text)* | **Army came first scientifically**; we built out **NCAA basketball** because we **had the data** while **CAC** access was unavailable — not because basketball is the deeper result. MBB **replicates** the hero family; when CAC returns, the talk **leads with Army** again. | Honest access narrative for Alex |
 
 ### Act I — Phenomenon (Army anchor)
 
@@ -214,3 +214,4 @@ Paths relative to repo root. Talk tracks: sibling `*_plot_highlights.md` where n
 |------|--------|
 | 2026-09-04 | Bootstrap created post-PD30; slide table stub; figure inventory wired; agent bootstrap instructions. |
 | 2026-09-04 | **Charles lock:** Army = scientific anchor (strong inverted-U); MBB = CAC-gap stand-in; re-center on army when CAC returns. Acts I–III reordered. |
+| 2026-09-06 | **Act 0 claims drafted** (0.1–0.4) — pending Charles red-pen. |

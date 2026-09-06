@@ -194,3 +194,4 @@ Charles: say **`fill Act 0`** or **`fill Act II`** to start claim drafts in the 
 | Date | Entry |
 |------|--------|
 | 2026-09-05 | Paper Campaign Plan created post-PD30; army anchor lock; flipbook disposable linked as working slide table. |
+| 2026-09-06 | Act 0 claims drafted in disposable (COMPASS) — Charles red-pen next. |
