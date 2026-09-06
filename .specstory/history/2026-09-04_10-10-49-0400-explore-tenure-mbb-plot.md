@@ -176,38 +176,145 @@ Glob pattern "**/*" matches every file and is not allowed. Use a more specific g
 
 _**Agent (composer-2.5)**_
 
-<tool-use data-tool-type="unknown" data-tool-name="ripgrep_raw_search"><details>
-<summary>Tool use: **ripgrep_raw_search**</summary>
-Status: **loading**
+<think><details><summary>Thought Process</summary>
+Found the key files. Now reading the main scripts in parallel.
 
-</details></tool-use>
-
-_**Agent (composer-2.5)**_
-
-<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
-<summary>Tool use: **read_file_v2** • Read file: </summary>
-
-</details></tool-use>
-
-_**Agent (composer-2.5)**_
-
-<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
-<summary>Tool use: **read_file_v2** • Read file: </summary>
-
-</details></tool-use>
-
-_**Agent (composer-2.5)**_
-
-<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
-<summary>Tool use: **read_file_v2** • Read file: </summary>
-
-</details></tool-use>
+Scanning the full set of target scripts and modules. Key files include `tenure_basic_plots.py`, `reigning_hero_basic_plots.py`, `bdp_ai_tj_distributions.py`, `bdp_ai_draft_mass_ecdf.py`, `empirical_team_interval_overlap.py`, `bdp_team_size_distributions.py`, `hero_plot_style.py`, and `hero_gallery_paths.py`. Also searching for "porch" logic and LOO plot helpers.
+</details></think>
 
 _**Agent (composer-2.5)**_
 
 <tool-use data-tool-type="unknown" data-tool-name="ripgrep_raw_search"><details>
 <summary>Tool use: **ripgrep_raw_search**</summary>
-Status: **loading**
+
+Parameters:
+
+```json
+{
+  "caseInsensitive": false,
+  "glob": "**/*.py",
+  "outputMode": "content",
+  "path": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE",
+  "pattern": "porch|def plot_|def main|argparse"
+}
+```
+Additional data:
+
+```json
+{
+  "isPruned": true,
+  "outputMode": "content",
+  "path": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE",
+  "pattern": "porch|def plot_|def main|argparse",
+  "topFiles": [
+    {
+      "matchCount": 5,
+      "uri": "./tenure/scripts/tenure_pass_a_congestion.py"
+    },
+    {
+      "matchCount": 8,
+      "uri": "./tenure/scripts/tenure_basic_plots.py"
+    },
+    {
+      "matchCount": 11,
+      "uri": "./sports/scripts/pass_a_congestion_conditional.py"
+    },
+    {
+      "matchCount": 3,
+      "uri": "./sports/scripts/bdp_ai_draft_mass_ecdf.py"
+    },
+    {
+      "matchCount": 8,
+      "uri": "./sports/scripts/pass_a_empirical_bundle.py"
+    },
+    {
+      "matchCount": 3,
+      "uri": "./sports/scripts/empirical_team_interval_overlap.py"
+    },
+    {
+      "matchCount": 4,
+      "uri": "./sports/scripts/bdp_reigning_loo_plots.py"
+    },
+    {
+      "matchCount": 3,
+      "uri": "./sports/scripts/bdp_team_size_distributions.py"
+    },
+    {
+      "matchCount": 3,
+      "uri": "./sports/scripts/bdp_ai_tj_distributions.py"
+    },
+    {
+      "matchCount": 2,
+      "uri": "./sports/scripts/reigning_hero_basic_plots.py"
+    }
+  ],
+  "totalFiles": 10,
+  "totalMatches": 528
+}
+```
+Status: **completed**
+
+</details></tool-use>
+
+_**Agent (composer-2.5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/tenure/scripts/tenure_basic_plots.py</summary>
+
+</details></tool-use>
+
+_**Agent (composer-2.5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports/scripts/reigning_hero_basic_plots.py</summary>
+
+</details></tool-use>
+
+_**Agent (composer-2.5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports/scripts/hero_plot_style.py</summary>
+
+</details></tool-use>
+
+_**Agent (composer-2.5)**_
+
+<think><details><summary>Thought Process</summary>
+Reading more files to identify specific function names for each panel type.
+</details></think>
+
+_**Agent (composer-2.5)**_
+
+<tool-use data-tool-type="unknown" data-tool-name="ripgrep_raw_search"><details>
+<summary>Tool use: **ripgrep_raw_search**</summary>
+
+Parameters:
+
+```json
+{
+  "caseInsensitive": false,
+  "glob": "tenure/scripts/tenure_basic_plots.py",
+  "pattern": "^def "
+}
+```
+Additional data:
+
+```json
+{
+  "isPruned": true,
+  "outputMode": "content",
+  "pattern": "^def ",
+  "topFiles": [
+    {
+      "matchCount": 32,
+      "uri": "./tenure/scripts/tenure_basic_plots.py"
+    }
+  ],
+  "totalFiles": 1,
+  "totalMatches": 32
+}
+```
+Status: **completed**
 
 </details></tool-use>
 
@@ -215,7 +322,34 @@ _**Agent (composer-2.5)**_
 
 <tool-use data-tool-type="unknown" data-tool-name="ripgrep_raw_search"><details>
 <summary>Tool use: **ripgrep_raw_search**</summary>
-Status: **loading**
+
+Parameters:
+
+```json
+{
+  "caseInsensitive": false,
+  "glob": "sports/scripts/reigning_hero_basic_plots.py",
+  "pattern": "^def "
+}
+```
+Additional data:
+
+```json
+{
+  "isPruned": true,
+  "outputMode": "content",
+  "pattern": "^def ",
+  "topFiles": [
+    {
+      "matchCount": 20,
+      "uri": "./sports/scripts/reigning_hero_basic_plots.py"
+    }
+  ],
+  "totalFiles": 1,
+  "totalMatches": 20
+}
+```
+Status: **completed**
 
 </details></tool-use>
 
@@ -223,7 +357,62 @@ _**Agent (composer-2.5)**_
 
 <tool-use data-tool-type="unknown" data-tool-name="ripgrep_raw_search"><details>
 <summary>Tool use: **ripgrep_raw_search**</summary>
-Status: **loading**
+
+Parameters:
+
+```json
+{
+  "caseInsensitive": false,
+  "glob": "sports/scripts/bdp_*.py",
+  "pattern": "^def "
+}
+```
+Additional data:
+
+```json
+{
+  "isPruned": true,
+  "outputMode": "content",
+  "pattern": "^def ",
+  "topFiles": [
+    {
+      "matchCount": 9,
+      "uri": "./sports/scripts/bdp_ai_draft_mass_ecdf.py"
+    },
+    {
+      "matchCount": 28,
+      "uri": "./sports/scripts/bdp_reigning_loo_plots.py"
+    },
+    {
+      "matchCount": 8,
+      "uri": "./sports/scripts/bdp_team_size_distributions.py"
+    },
+    {
+      "matchCount": 19,
+      "uri": "./sports/scripts/bdp_ai_tj_distributions.py"
+    },
+    {
+      "matchCount": 14,
+      "uri": "./sports/scripts/bdp_draft_rate_apgms_argms.py"
+    },
+    {
+      "matchCount": 19,
+      "uri": "./sports/scripts/bdp_reigning_hsort_distribution.py"
+    },
+    {
+      "matchCount": 16,
+      "uri": "./sports/scripts/bdp_reigning_exposure_plots.py"
+    },
+    {
+      "matchCount": 7,
+      "uri": "./sports/scripts/bdp_apgms_argms_distributions.py"
+    }
+  ],
+  "totalFiles": 8,
+  "totalMatches": 120
+}
+```
+Status: **completed**
 
 </details></tool-use>
 
@@ -231,42 +420,77 @@ _**Agent (composer-2.5)**_
 
 <tool-use data-tool-type="unknown" data-tool-name="ripgrep_raw_search"><details>
 <summary>Tool use: **ripgrep_raw_search**</summary>
-Status: **loading**
+
+Parameters:
+
+```json
+{
+  "caseInsensitive": false,
+  "glob": "sports/scripts/empirical_team_interval_overlap.py",
+  "pattern": "^def "
+}
+```
+Additional data:
+
+```json
+{
+  "isPruned": true,
+  "outputMode": "content",
+  "pattern": "^def ",
+  "topFiles": [
+    {
+      "matchCount": 13,
+      "uri": "./sports/scripts/empirical_team_interval_overlap.py"
+    }
+  ],
+  "totalFiles": 1,
+  "totalMatches": 13
+}
+```
+Status: **completed**
 
 </details></tool-use>
 
 _**Agent (composer-2.5)**_
 
 <tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
-<summary>Tool use: **read_file_v2** • Read file: </summary>
+<summary>Tool use: **read_file_v2** • Read file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports/scripts/reigning_hero_basic_plots.py</summary>
+
+</details></tool-use>
+
+_**Agent (composer-2.5)**_
+
+<think><details><summary>Thought Process</summary>
+I will examine tenure_basic_plots.py main(), hero_gallery_paths.py, and the Big Fish panel context to identify reusable functions and modules.
+
+I will also search for big_fish references.
+</details></think>
+
+_**Agent (composer-2.5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/tenure/scripts/tenure_basic_plots.py</summary>
 
 </details></tool-use>
 
 _**Agent (composer-2.5)**_
 
 <tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
-<summary>Tool use: **read_file_v2** • Read file: </summary>
+<summary>Tool use: **read_file_v2** • Read file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/tenure/scripts/tenure_basic_plots.py</summary>
 
 </details></tool-use>
 
 _**Agent (composer-2.5)**_
 
 <tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
-<summary>Tool use: **read_file_v2** • Read file: </summary>
+<summary>Tool use: **read_file_v2** • Read file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/tenure/scripts/tenure_basic_plots.py</summary>
 
 </details></tool-use>
 
 _**Agent (composer-2.5)**_
 
 <tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
-<summary>Tool use: **read_file_v2** • Read file: </summary>
-
-</details></tool-use>
-
-_**Agent (composer-2.5)**_
-
-<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
-<summary>Tool use: **read_file_v2** • Read file: </summary>
+<summary>Tool use: **read_file_v2** • Read file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports/scripts/hero_gallery_paths.py</summary>
 
 </details></tool-use>
 
@@ -274,100 +498,165 @@ _**Agent (composer-2.5)**_
 
 <tool-use data-tool-type="unknown" data-tool-name="ripgrep_raw_search"><details>
 <summary>Tool use: **ripgrep_raw_search**</summary>
-Status: **loading**
-
+Glob pattern "**/*" matches every file and is not allowed. Use a more specific glob or no glob.
 </details></tool-use>
+
+_**Agent (composer-2.5)**_
+
+<think><details><summary>Thought Process</summary>
+Searching for Big Fish references and reading key sections of the BDP scripts.
+</details></think>
 
 _**Agent (composer-2.5)**_
 
 <tool-use data-tool-type="unknown" data-tool-name="ripgrep_raw_search"><details>
 <summary>Tool use: **ripgrep_raw_search**</summary>
-Status: **loading**
+
+Parameters:
+
+```json
+{
+  "caseInsensitive": true,
+  "path": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE",
+  "pattern": "big.?fish|Big Fish|big_fish"
+}
+```
+Additional data:
+
+```json
+{
+  "isPruned": true,
+  "outputMode": "content",
+  "path": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE",
+  "pattern": "big.?fish|Big Fish|big_fish",
+  "topFiles": [
+    {
+      "matchCount": 9,
+      "uri": "./scripts/pull_big_data.sh"
+    },
+    {
+      "matchCount": 9,
+      "uri": "./scripts/DATA_SYNC.md"
+    },
+    {
+      "matchCount": 12,
+      "uri": "./scripts/rsync_hpc_include.sh"
+    }
+  ],
+  "totalFiles": 3,
+  "totalMatches": 350
+}
+```
+Status: **completed**
 
 </details></tool-use>
 
 _**Agent (composer-2.5)**_
 
 <tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
-<summary>Tool use: **read_file_v2** • Read file: </summary>
+<summary>Tool use: **read_file_v2** • Read file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports/scripts/bdp_ai_tj_distributions.py</summary>
 
 </details></tool-use>
 
 _**Agent (composer-2.5)**_
 
 <tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
-<summary>Tool use: **read_file_v2** • Read file: </summary>
+<summary>Tool use: **read_file_v2** • Read file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports/scripts/bdp_reigning_loo_plots.py</summary>
 
 </details></tool-use>
 
 _**Agent (composer-2.5)**_
 
 <tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
-<summary>Tool use: **read_file_v2** • Read file: </summary>
+<summary>Tool use: **read_file_v2** • Read file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports/scripts/bdp_ai_draft_mass_ecdf.py</summary>
 
 </details></tool-use>
 
 _**Agent (composer-2.5)**_
 
 <tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
-<summary>Tool use: **read_file_v2** • Read file: </summary>
+<summary>Tool use: **read_file_v2** • Read file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports/scripts/bdp_ai_tj_distributions.py</summary>
+
+</details></tool-use>
+
+_**Agent (composer-2.5)**_
+
+<think><details><summary>Thought Process</summary>
+I am examining the LOO hist|ECDF plots in tenure and sports, along with the dept_loo distribution and PD29_PLOT_RUNNERS module.
+
+I will also check the legends_sandbox thread and any existing Big Fish scripts.
+</details></think>
+
+_**Agent (composer-2.5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/tenure/scripts/tenure_basic_plots.py</summary>
 
 </details></tool-use>
 
 _**Agent (composer-2.5)**_
 
 <tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
-<summary>Tool use: **read_file_v2** • Read file: </summary>
+<summary>Tool use: **read_file_v2** • Read file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/tenure/scripts/tenure_basic_plots.py</summary>
 
 </details></tool-use>
 
 _**Agent (composer-2.5)**_
 
 <tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
-<summary>Tool use: **read_file_v2** • Read file: </summary>
+<summary>Tool use: **read_file_v2** • Read file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports/scripts/bdp_reigning_loo_plots.py</summary>
 
 </details></tool-use>
 
 _**Agent (composer-2.5)**_
 
 <tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
-<summary>Tool use: **read_file_v2** • Read file: </summary>
-
-</details></tool-use>
-
-_**Agent (composer-2.5)**_
-
-<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
-<summary>Tool use: **read_file_v2** • Read file: </summary>
+<summary>Tool use: **read_file_v2** • Read file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports/scripts/empirical_team_interval_overlap.py</summary>
 
 </details></tool-use>
 
 _**Agent (composer-2.5)**_
 
 <tool-use data-tool-type="search" data-tool-name="glob_file_search"><details>
-<summary>Tool use: **glob_file_search** • Searched codebase "" • **0** results in **0** directories</summary>
+<summary>Tool use: **glob_file_search** • Searched codebase "" • **7** results in **1** directory</summary>
 
-No results found
+Directory: **`/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE`** (7 files)
+
+| File |
+|------|
+| `3-Master_Plan/re_entry/HEROs_and_PASSes/_DISPOSABLE_big_fish_datasets_assessment.md` |
+| `datasets/hsb80/hsb80_big_fish_panel.csv` |
+| `datasets/nels88/nels88_big_fish_panel.csv` |
+| `datasets/Apache/apache_big_fish_panel.csv` |
+| `datasets/football/football_big_fish_player_season_panel/football_big_fish_player_season_panel.csv` |
+| `datasets/legends/lol_big_fish_player_split_panel.csv` |
+| `3-Master_Plan/re_entry/SCOUT_and_COMPASS/20260820_1726_SCOUT_COMPASS_CCT_big_fish_small_pond_wisdom.md` |
 </details></tool-use>
 
 _**Agent (composer-2.5)**_
 
 <tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
-<summary>Tool use: **read_file_v2** • Read file: </summary>
+<summary>Tool use: **read_file_v2** • Read file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/HEROs_and_PASSes/legends_sandbox/_DISPOSABLE_legends_hero_thread.md</summary>
+
+</details></tool-use>
+
+_**Agent (composer-2.5)**_
+
+<think><details><summary>Thought Process</summary>
+I am now examining additional files to identify reusable modules and specific plotting patterns. I will check the tenure PD29_PLOT_RUNNERS dictionary, grain labels, gallery math text, plot provenance, and BDP team size run specifications.
+</details></think>
+
+_**Agent (composer-2.5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/tenure/scripts/tenure_basic_plots.py</summary>
 
 </details></tool-use>
 
 _**Agent (composer-2.5)**_
 
 <tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
-<summary>Tool use: **read_file_v2** • Read file: </summary>
-
-</details></tool-use>
-
-_**Agent (composer-2.5)**_
-
-<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
-<summary>Tool use: **read_file_v2** • Read file: </summary>
+<summary>Tool use: **read_file_v2** • Read file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports/scripts/bdp_team_size_distributions.py</summary>
 
 </details></tool-use>
 
@@ -375,44 +664,187 @@ _**Agent (composer-2.5)**_
 
 <tool-use data-tool-type="unknown" data-tool-name="ripgrep_raw_search"><details>
 <summary>Tool use: **ripgrep_raw_search**</summary>
-Status: **loading**
+
+Parameters:
+
+```json
+{
+  "caseInsensitive": false,
+  "glob": "**/*.py",
+  "outputMode": "files_with_matches",
+  "pattern": "gallery_mathtext|plot_provenance|tenure_grain_labels"
+}
+```
+Additional data:
+
+```json
+{
+  "isPruned": true,
+  "outputMode": "files_with_matches",
+  "pattern": "gallery_mathtext|plot_provenance|tenure_grain_labels",
+  "topFiles": [
+    {
+      "matchCount": 1,
+      "uri": "./tenure/scripts/tenure_pass_a_congestion.py"
+    },
+    {
+      "matchCount": 1,
+      "uri": "./tenure/scripts/tenure_basic_plots.py"
+    },
+    {
+      "matchCount": 1,
+      "uri": "./sports/scripts/pass_a_congestion_conditional.py"
+    },
+    {
+      "matchCount": 1,
+      "uri": "./sports/scripts/bdp_ai_draft_mass_ecdf.py"
+    },
+    {
+      "matchCount": 1,
+      "uri": "./sports/scripts/pass_a_empirical_bundle.py"
+    },
+    {
+      "matchCount": 1,
+      "uri": "./sports/scripts/empirical_team_interval_overlap.py"
+    },
+    {
+      "matchCount": 1,
+      "uri": "./sports/scripts/bdp_reigning_loo_plots.py"
+    },
+    {
+      "matchCount": 1,
+      "uri": "./sports/scripts/bdp_ai_tj_distributions.py"
+    },
+    {
+      "matchCount": 1,
+      "uri": "./sports/scripts/pass_a_ai_x_loo_hero_probe.py"
+    },
+    {
+      "matchCount": 1,
+      "uri": "./sports/scripts/pass_a_cum_per_hero_probe.py"
+    },
+    {
+      "matchCount": 1,
+      "uri": "./sports/scripts/pass_a_cum_ppm_hero_probe.py"
+    },
+    {
+      "matchCount": 1,
+      "uri": "./tenure/scripts/build_tenure_basic_plots_slides.py"
+    },
+    {
+      "matchCount": 1,
+      "uri": "./tenure/scripts/build_tenure_hero_slides.py"
+    },
+    {
+      "matchCount": 1,
+      "uri": "./tenure/scripts/tenure_hero_slide_plot.py"
+    },
+    {
+      "matchCount": 1,
+      "uri": "./tenure/scripts/tenure_pass_a_decision_hero.py"
+    },
+    {
+      "matchCount": 1,
+      "uri": "./tenure/scripts/tenure_pass_a_hero.py"
+    },
+    {
+      "matchCount": 1,
+      "uri": "./sports/scripts/hero_permutation_sweep.py"
+    },
+    {
+      "matchCount": 1,
+      "uri": "./sports/scripts/reigning_hero_sim_hero.py"
+    },
+    {
+      "matchCount": 1,
+      "uri": "./sports/scripts/cct_p2b_band_sensitivity.py"
+    },
+    {
+      "matchCount": 1,
+      "uri": "./sports/scripts/pd21_rho_hsort_calibrate.py"
+    }
+  ],
+  "totalFiles": 83,
+  "totalMatches": 83
+}
+```
+Status: **completed**
 
 </details></tool-use>
 
 _**Agent (composer-2.5)**_
 
 <tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
-<summary>Tool use: **read_file_v2** • Read file: </summary>
+<summary>Tool use: **read_file_v2** • Read file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports/scripts/bdp_ai_tj_distributions.py</summary>
 
 </details></tool-use>
 
 _**Agent (composer-2.5)**_
 
 <tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
-<summary>Tool use: **read_file_v2** • Read file: </summary>
+<summary>Tool use: **read_file_v2** • Read file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/tenure/scripts/tenure_grain_labels.py</summary>
 
 </details></tool-use>
+
+_**Agent (composer-2.5)**_
+
+<think><details><summary>Thought Process</summary>
+Checking the pass_a_hero porch pattern and plot_provenance. Reading the BdpSpec dataclass in bdp_ai_tj.
+
+Also checking bdp_ai_tj for a run_tj_loo_compare function.
+</details></think>
 
 _**Agent (composer-2.5)**_
 
 <tool-use data-tool-type="unknown" data-tool-name="ripgrep_raw_search"><details>
 <summary>Tool use: **ripgrep_raw_search**</summary>
-Status: **loading**
+
+Parameters:
+
+```json
+{
+  "caseInsensitive": false,
+  "glob": "sports/scripts/bdp_ai_tj_distributions.py",
+  "pattern": "run_tj_loo_compare|@dataclass|class BdpSpec"
+}
+```
+Additional data:
+
+```json
+{
+  "isPruned": true,
+  "outputMode": "content",
+  "pattern": "run_tj_loo_compare|@dataclass|class BdpSpec",
+  "topFiles": [
+    {
+      "matchCount": 2,
+      "uri": "./sports/scripts/bdp_ai_tj_distributions.py"
+    }
+  ],
+  "totalFiles": 1,
+  "totalMatches": 2
+}
+```
+Status: **completed**
 
 </details></tool-use>
 
 _**Agent (composer-2.5)**_
 
 <tool-use data-tool-type="search" data-tool-name="glob_file_search"><details>
-<summary>Tool use: **glob_file_search** • Searched codebase "" • **0** results in **0** directories</summary>
+<summary>Tool use: **glob_file_search** • Searched codebase "" • **1** result in **1** directory</summary>
 
-No results found
+Directory: **`/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE`** (1 file)
+
+| File |
+|------|
+| `sports/scripts/gallery_mathtext.py` |
 </details></tool-use>
 
 _**Agent (composer-2.5)**_
 
 <tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
-<summary>Tool use: **read_file_v2** • Read file: </summary>
+<summary>Tool use: **read_file_v2** • Read file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports/scripts/plot_provenance.py</summary>
 
 </details></tool-use>
 
@@ -420,6 +852,641 @@ _**Agent (composer-2.5)**_
 
 <tool-use data-tool-type="unknown" data-tool-name="ripgrep_raw_search"><details>
 <summary>Tool use: **ripgrep_raw_search**</summary>
-Status: **loading**
+
+Parameters:
+
+```json
+{
+  "caseInsensitive": false,
+  "glob": "sports/scripts/pass_a_empirical_bundle.py",
+  "pattern": "^def |PLOT|porch"
+}
+```
+Additional data:
+
+```json
+{
+  "isPruned": true,
+  "outputMode": "content",
+  "pattern": "^def |PLOT|porch",
+  "topFiles": [
+    {
+      "matchCount": 40,
+      "uri": "./sports/scripts/pass_a_empirical_bundle.py"
+    }
+  ],
+  "totalFiles": 1,
+  "totalMatches": 41
+}
+```
+Status: **completed**
 
 </details></tool-use>
+
+_**Agent (composer-2.5)**_
+
+<think><details><summary>Thought Process</summary>
+Tracing the import source of `run_tj_loo_compare` from `reigning_hero_basic_plots`.
+</details></think>
+
+_**Agent (composer-2.5)**_
+
+<tool-use data-tool-type="unknown" data-tool-name="ripgrep_raw_search"><details>
+<summary>Tool use: **ripgrep_raw_search**</summary>
+
+Parameters:
+
+```json
+{
+  "caseInsensitive": false,
+  "glob": "**/*.py",
+  "pattern": "def run_tj_loo_compare"
+}
+```
+Additional data:
+
+```json
+{
+  "isPruned": true,
+  "outputMode": "content",
+  "pattern": "def run_tj_loo_compare",
+  "topFiles": [
+    {
+      "matchCount": 2,
+      "uri": "./sports/scripts/reigning_hero_basic_plots.py"
+    }
+  ],
+  "totalFiles": 1,
+  "totalMatches": 2
+}
+```
+Status: **completed**
+
+</details></tool-use>
+
+_**Agent (composer-2.5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports/scripts/bdp_ai_tj_distributions.py</summary>
+
+</details></tool-use>
+
+_**Agent (composer-2.5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports/scripts/gallery_mathtext.py</summary>
+
+</details></tool-use>
+
+_**Agent (composer-2.5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/tenure/scripts/tenure_basic_plots.py</summary>
+
+</details></tool-use>
+
+_**Agent (composer-2.5)**_
+
+<think><details><summary>Thought Process</summary>
+Searching for `run_tj_loo_compare` in `reigning_hero_basic_plots.py`. The import was not visible.
+</details></think>
+
+_**Agent (composer-2.5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports/scripts/reigning_hero_basic_plots.py</summary>
+
+</details></tool-use>
+
+_**Agent (composer-2.5)**_
+
+<tool-use data-tool-type="unknown" data-tool-name="ripgrep_raw_search"><details>
+<summary>Tool use: **ripgrep_raw_search**</summary>
+
+Parameters:
+
+```json
+{
+  "caseInsensitive": false,
+  "glob": "**/*.py",
+  "pattern": "run_tj_loo_compare"
+}
+```
+Additional data:
+
+```json
+{
+  "isPruned": true,
+  "outputMode": "content",
+  "pattern": "run_tj_loo_compare",
+  "topFiles": [
+    {
+      "matchCount": 5,
+      "uri": "./sports/scripts/reigning_hero_basic_plots.py"
+    }
+  ],
+  "totalFiles": 1,
+  "totalMatches": 6
+}
+```
+Status: **completed**
+
+</details></tool-use>
+
+_**Agent (composer-2.5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports/scripts/bdp_ai_tj_distributions.py</summary>
+
+</details></tool-use>
+
+_**Agent (composer-2.5)**_
+
+<think><details><summary>Thought Process</summary>
+`run_tj_loo_compare` is referenced in `reigning_hero_basic_plots` but not imported. It may be defined elsewhere or indicate a bug.
+
+Expanding the search to locate the missing import and related modules.
+</details></think>
+
+_**Agent (composer-2.5)**_
+
+<tool-use data-tool-type="unknown" data-tool-name="ripgrep_raw_search"><details>
+<summary>Tool use: **ripgrep_raw_search**</summary>
+
+Parameters:
+
+```json
+{
+  "caseInsensitive": false,
+  "path": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE",
+  "pattern": "run_tj_loo_compare"
+}
+```
+Additional data:
+
+```json
+{
+  "isPruned": true,
+  "outputMode": "content",
+  "path": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE",
+  "pattern": "run_tj_loo_compare",
+  "topFiles": [
+    {
+      "matchCount": 15,
+      "uri": "./.specstory/history/2026-06-11_08-19-11-0400-compass.md"
+    },
+    {
+      "matchCount": 6,
+      "uri": "./sports/scripts/reigning_hero_basic_plots.py"
+    },
+    {
+      "matchCount": 6,
+      "uri": "./.specstory/history/2026-08-28_10-53-57-0400-explore-player-loo-and.md"
+    }
+  ],
+  "totalFiles": 3,
+  "totalMatches": 27
+}
+```
+Status: **completed**
+
+</details></tool-use>
+
+_**Agent (composer-2.5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/tenure/scripts/tenure_basic_plots.py</summary>
+
+</details></tool-use>
+
+_**Agent (composer-2.5)**_
+
+<think><details><summary>Thought Process</summary>
+`run_tj_loo_compare` appears to be missing or broken in `bdp_ai_tj_distributions`.
+
+The Ai/Tj panel is driven by `run_spec` with `right_is_loo=True`. Grepping for that flag now.
+</details></think>
+
+_**Agent (composer-2.5)**_
+
+<tool-use data-tool-type="unknown" data-tool-name="ripgrep_raw_search"><details>
+<summary>Tool use: **ripgrep_raw_search**</summary>
+
+Parameters:
+
+```json
+{
+  "caseInsensitive": false,
+  "glob": "sports/scripts/bdp_ai_tj_distributions.py",
+  "pattern": "right_is_loo|run_tj_loo"
+}
+```
+Additional data:
+
+```json
+{
+  "isPruned": true,
+  "outputMode": "content",
+  "pattern": "right_is_loo|run_tj_loo",
+  "topFiles": [],
+  "totalFiles": 0,
+  "totalMatches": 0
+}
+```
+Status: **completed**
+
+</details></tool-use>
+
+_**Agent (composer-2.5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports/scripts/bdp_reigning_loo_plots.py</summary>
+
+</details></tool-use>
+
+_**Agent (composer-2.5)**_
+
+<think><details><summary>Thought Process</summary>
+`right_is_loo` appears in `run_ai_loo` but not in `bdp_ai_tj_distributions`, suggesting a cross-file dependency.
+</details></think>
+
+_**Agent (composer-2.5)**_
+
+<tool-use data-tool-type="unknown" data-tool-name="ripgrep_raw_search"><details>
+<summary>Tool use: **ripgrep_raw_search**</summary>
+
+Parameters:
+
+```json
+{
+  "caseInsensitive": false,
+  "glob": "**/*.py",
+  "pattern": "right_is_loo"
+}
+```
+Additional data:
+
+```json
+{
+  "isPruned": true,
+  "outputMode": "content",
+  "pattern": "right_is_loo",
+  "topFiles": [
+    {
+      "matchCount": 1,
+      "uri": "./sports/scripts/reigning_hero_basic_plots.py"
+    }
+  ],
+  "totalFiles": 1,
+  "totalMatches": 1
+}
+```
+Status: **completed**
+
+</details></tool-use>
+
+_**Agent (composer-2.5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports/scripts/reigning_hero_basic_plots.py</summary>
+
+</details></tool-use>
+
+_**Agent (composer-2.5)**_
+
+<think><details><summary>Thought Process</summary>
+`reigning_hero_basic_plots` calls `right_is_loo=True` and `run_tj_loo_compare`, but the current `bdp_ai_tj_distributions` module does not define these parameters.
+
+The canonical working patterns are found in the actual implementation files. For Legends, the relevant scripts are `legends/scripts/legends_basic_plots.py` and `legends_pass_a_hero.py`, with output saved to `legends_sandbox/basic_data_plots/LEGENDS_BDP_*.png`. I am now checking `tenure_pass_a_hero` for the HERO porch pattern.
+</details></think>
+
+_**Agent (composer-2.5)**_
+
+<tool-use data-tool-type="unknown" data-tool-name="ripgrep_raw_search"><details>
+<summary>Tool use: **ripgrep_raw_search**</summary>
+
+Parameters:
+
+```json
+{
+  "caseInsensitive": false,
+  "glob": "tenure/scripts/tenure_pass_a_hero.py",
+  "pattern": "^def |PLOT|main"
+}
+```
+Additional data:
+
+```json
+{
+  "isPruned": true,
+  "outputMode": "content",
+  "pattern": "^def |PLOT|main",
+  "topFiles": [
+    {
+      "matchCount": 7,
+      "uri": "./tenure/scripts/tenure_pass_a_hero.py"
+    }
+  ],
+  "totalFiles": 1,
+  "totalMatches": 7
+}
+```
+Status: **completed**
+
+</details></tool-use>
+
+_**Agent (composer-2.5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/tenure/tenure_pipeline/hero_panel_prep.py</summary>
+
+</details></tool-use>
+
+_**Agent (composer-2.5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/tenure/tenure_pipeline/decision_hero_prep.py</summary>
+
+</details></tool-use>
+
+_**Agent (composer-2.5)**_
+
+<think><details><summary>Thought Process</summary>
+Enough information has been gathered to compile the comprehensive report.
+
+Key functions for the Big Fish HERO porch panel include `run_draft_rate_vs_loo` and `run_draft_rate_loo_vs_tj` from the sports BDP script, plus `build_hero_single_panel` and `roster_ventile_table` from `pass_a_empirical_bundle.py`. The tenure version uses `tenure_pass_a_hero.py` main(). `hero_plot_style` exports and `pass_a` utilities are also being checked for reuse.
+</details></think>
+
+_**Agent (composer-2.5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/tenure/scripts/tenure_pass_a_hero.py</summary>
+
+</details></tool-use>
+
+_**Agent (composer-2.5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports/scripts/hero_plot_style.py</summary>
+
+</details></tool-use>
+
+_**Agent (composer-2.5)**_
+
+<think><details><summary>Thought Process</summary>
+I am structuring the final report. It will cover key functions, reusable modules, and the minimal CLI pattern.
+
+The architecture uses an orchestrator pattern. `reigning_hero_basic_plots.py` and `tenure_basic_plots.py` serve as thin wrappers backed by a `PLOT_FNS` dictionary. Worker modules such as `bdp_*` scripts expose entry points like `run_spec`, `build_figure`, and `run_*`. Big Fish panel mappings include `Â` for own performance index, peer LOO for teammate mean performance excluding self, `Y` for top-tier debut within two years, and `Pond` for team in the development split.
+
+Shared visualization modules include `empirical_team_interval_overlap.build_figure`, `hero_plot_style`, and `gallery_mathtext`.
+
+For a new Big Fish domain script, the tenure pattern is preferable because Big Fish resembles Legends without a sports pipeline. This means domain-specific preparation plus importing the sports overlap `build_figure`.
+
+Broken references remain in `reigning_hero_basic_plots.py`: `run_tj_loo_compare` and `right_is_loo` point to missing locations. Working implementations for LOO histogram and ECDF live in `bdp_reigning_loo_plots`.
+
+For the Ai/Tj panel, mirror `bdp_ai_tj_distributions.run_spec` and its `build_figure`, `_team_talent`, `_prepare`, and `_pipeline_config` helpers. For the pool-size panel, reuse `bdp_reigning_loo_plots.run_poolq_loo_distribution` and its `_plot_poolq_loo_distribution`, `_prepare_last_ps`, `_poolq_values`, and `_loo_summary` subroutines. The LOO histogram and ECDF panel can follow the tenure pattern via `run_dept_loo_distribution` or the simpler `run_poolq_loo_distribution`.
+
+The mass ECDF panel mirrors `run_tenure_mass_ecdf_pd29` and `_plot_ecdf`, with
+</details></think>
+
+_**Agent (composer-2.5)**_
+
+<tool-use data-tool-type="unknown" data-tool-name="update_current_step"><details>
+<summary>Tool use: **update_current_step**</summary>
+An unknown error occurred
+</details></tool-use>
+
+_**Agent (composer-2.5)**_
+
+<think><details><summary>Thought Process</summary>
+Preparing the comprehensive report on the requested Python modules and reusable patterns.
+</details></think>
+
+_**Agent (composer-2.5)**_
+
+## Architecture (two layers)
+
+Both domains use the same **orchestrator + worker** split:
+
+| Layer | Sports (MBB) | Tenure |
+|-------|--------------|--------|
+| **Orchestrator** | `sports/scripts/reigning_hero_basic_plots.py` | `tenure/scripts/tenure_basic_plots.py` |
+| **Workers** | `bdp_*.py` modules | inline `run_*` + sports overlap import |
+| **Output** | `3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/reigning_hero/basic_data_plots/` | `…/tenure_sandbox/basic_data_plots/` |
+
+Big Fish (Legends) target (from `_DISPOSABLE_legends_hero_thread.md`): `legends/scripts/legends_basic_plots.py` → `legends_sandbox/basic_data_plots/LEGENDS_BDP_*.png`.
+
+---
+
+## 1. Key functions to mirror (by panel)
+
+### Â_i / T̂_j (dual histogram)
+
+**Primary mirror (sports):**
+- `sports/scripts/bdp_ai_tj_distributions.py`
+  - `parse_bdp_spec()` / `BdpSpec` — filter-chain dataclass
+  - `_prepare()`, `_team_talent()` — panel → ability + team-season mean
+  - `build_figure()` — 1×2 shared-bin histograms (+ optional +DFT overlay)
+  - `run_spec()` — public entry (writes PNG + JSON meta)
+
+**Called from orchestrator:** `reigning_hero_basic_plots.run_ai_tj()` → `run_spec(..., panel_rows="last-ps", overlay_dft=True)`.
+
+**Tenure analog (closer to Big Fish — no sports pipeline):**
+- `tenure/scripts/tenure_basic_plots.py`
+  - `run_ai_tj_pd29()` — dual hist on `own_career_rate` vs `dept_mean_career_rate`
+  - `_hero_persons_with_dept_mean()` — prep helper (uses `decision_hero_prep.build_dept_year_rosters`)
+
+**Big Fish mapping:** `own_performance_index` (Â) vs team-mean performance (T̂_j); copy tenure’s `run_ai_tj_pd29` structure or sports’ `build_figure` if you add a domain prep layer.
+
+---
+
+### LOO hist | ECDF
+
+**Primary mirror (sports):**
+- `sports/scripts/bdp_reigning_loo_plots.py`
+  - `_prepare_last_ps()`, `_poolq_values()`, `_loo_summary()`
+  - `_plot_poolq_loo_distribution()` — **1×2 hist | ECDF** (optional +DFT count overlay)
+  - `run_poolq_loo_distribution()` — writes PNG + JSON
+
+**Tenure analog (with outcome overlay — good Legends template):**
+- `tenure/scripts/tenure_basic_plots.py`
+  - `run_dept_loo_distribution()` — hist | ECDF + tenured/attrition ECDF overlays
+  - `_plot_ecdf()` — shared ECDF helper
+  - v0 simpler: `run_poolq_loo_distribution()` (hist only, person grain)
+
+**Big Fish column:** `teammate_mean_performance_excl_self` → mirror `run_dept_loo_distribution` or `_plot_poolq_loo_distribution`.
+
+**Note:** `reigning_hero_basic_plots.run_ai_loo()` passes `right_is_loo=True` to `run_spec`, but that kwarg is **not** in current `bdp_ai_tj_distributions.run_spec`. Working LOO hist|ECDF is in `bdp_reigning_loo_plots`, not `bdp_ai_tj_distributions`.
+
+---
+
+### Mass ECDF (cohort vs “selected” overlay + top-% cuts)
+
+**Sports:**
+- `sports/scripts/bdp_ai_draft_mass_ecdf.py`
+  - `_draft_mass_grid()`, `_panel_top_grid()`, `build_figure()`
+  - `run_reigning_last_ps_ecdf()` — locked reigning spec wrapper
+
+**Tenure (cleaner for promotion Y):**
+- `tenure/scripts/tenure_basic_plots.py`
+  - `run_tenure_mass_ecdf_pd29()` — cohort ECDF vs tenured ECDF + mass grid + `PANEL_TOP_CUTS_PD29`
+  - `_plot_ecdf()`
+
+**Big Fish:** Y = `top_tier_debut_within_2y` (after censor lock) → mirror **`run_tenure_mass_ecdf_pd29`**, not draft-mass (promotion ≠ draft).
+
+---
+
+### Interval overlap (2×2 coverage / span / intervals)
+
+**Shared core (domain-agnostic figure):**
+- `sports/scripts/empirical_team_interval_overlap.py`
+  - `_team_intervals()` — pool unit → `[A_hat_min, A_hat_max, T_j_hat, perf_span]`
+  - `_coverage_curve()`, `_coverage_stats()`, `build_figure()` — 2×2 panel
+  - `_compute_H_sort()` — sorting index on partition
+
+**Sports wrapper:** `reigning_hero_basic_plots.run_interval_overlap()` — loads MBB panel via `_pipeline_config`, calls `build_figure`.
+
+**Tenure wrappers:**
+- `run_interval_overlap()` + `_prepare_overlap_panel()` — uni×year OA pools (v0 porch)
+- `run_overlap_pd29()` + `_prepare_pd29_dept_overlap()` — dept×year pools (PD29)
+- Both pass custom `labels=` dicts (`TENURE_OVERLAP_LABELS`, `PD29_OVERLAP_LABELS`) and `grain_badge` from `tenure_grain_labels`.
+
+**Big Fish:** team×split/stint pools on `own_performance_index` (z within split/year) → copy tenure’s `_prepare_*_overlap` pattern, call **`empirical_team_interval_overlap.build_figure`** unchanged.
+
+---
+
+### Pool size |T_j|
+
+**Sports:**
+- `sports/scripts/bdp_team_size_distributions.py`
+  - `_prepare_roster_panel()`, `_roster_sizes()`, `build_figure()`, `run_spec()`
+
+**Tenure:**
+- `run_pool_size_distribution()` — v0, `pool_size_oa_loo` at asst-PS grain
+- `run_pool_size_decision_pd29()` — decision cohort, `pool_size_dept`
+
+**Big Fish:** roster count per team stint → mirror `run_pool_size_decision_pd29` (person grain) or `bdp_team_size_distributions.run_spec` (team-season grain).
+
+---
+
+### HERO porch (LOO bins × P(Y=1))
+
+**Sports BDP porch (basic-data companion):**
+- `sports/scripts/bdp_reigning_loo_plots.py`
+  - `run_draft_rate_vs_loo()` — EW bins × draft rate (`_plot_draft_rate_vs_loo`, `_loo_ventile_table`, `_quadratic_lpm_coef`)
+  - `run_draft_rate_loo_vs_tj()` — 2×2 EW + quantile rows, LOO vs T̂_j (`_plot_draft_rate_loo_vs_tj`)
+
+**Sports full HERO (Pass A — slide-ready):**
+- `sports/scripts/pass_a_empirical_bundle.py`
+  - `roster_ventile_table()`, `build_hero_single_panel()`, `build_side_by_side()`
+  - `add_hero_spec_args()`, `hero_spec_from_args()`, `main()`
+
+**Tenure porch:**
+- `tenure/scripts/tenure_pass_a_hero.py` — `main()` with `--n-bins`, `--bin-method`, `--x-metric`, `--window`; uses `tenure/tenure_pipeline/hero_panel_prep.py` / `decision_hero_prep.py`
+
+**Big Fish:** step 4 in legends thread — mirror **`run_draft_rate_vs_loo`** (rename Y → promotion rate) or tenure’s **`tenure_pass_a_hero.main`** pattern if you want provenance + slide PNG.
+
+---
+
+## 2. Reusable modules (paths)
+
+| Module | Path | Use for Big Fish |
+|--------|------|------------------|
+| **Interval overlap figure** | `sports/scripts/empirical_team_interval_overlap.py` | Import `build_figure`, `_team_intervals` — domain supplies `iv`/`work` DataFrames |
+| **Bar/HERO layout** | `sports/scripts/hero_plot_style.py` | `PLOT_DPI`, `finalize_bar_figure`, `count_weighted_bar_colors`, `annotate_bar_n`, `format_poolq_tick` |
+| **Mathtext** | `sports/scripts/gallery_mathtext.py` | `configure_matplotlib_mathtext()` — all BDP titles |
+| **Output paths** | `sports/scripts/hero_gallery_paths.py` | `ensure_hero_dirs()`, `HERO_ROOT`; add `LEGENDS_*` constants here |
+| **Provenance slugs** | `sports/scripts/plot_provenance.py` | `hero_bin_slug`, `population_slug`, filename conventions |
+| **Ai/Tj figure** | `sports/scripts/bdp_ai_tj_distributions.py` | `build_figure`, `format_stats_box`, `draw_stats_box`, `subtitle_lines` |
+| **LOO hist\|ECDF** | `sports/scripts/bdp_reigning_loo_plots.py` | `_plot_poolq_loo_distribution` layout |
+| **Mass ECDF** | `sports/scripts/bdp_ai_draft_mass_ecdf.py` | `build_figure` structure (adapt Y label) |
+| **Pool size** | `sports/scripts/bdp_team_size_distributions.py` | `build_figure`, `run_spec` |
+| **Grain badges** | `tenure/scripts/tenure_grain_labels.py` | `stamp_window_badge`, `window_badge`, `window_display_label` |
+| **Decision HERO prep** | `tenure/tenure_pipeline/decision_hero_prep.py` | Pattern for `prepare_*_hero_persons`, `build_dept_year_rosters` |
+| **HERO panel prep** | `tenure/tenure_pipeline/hero_panel_prep.py` | LOO recompute pattern |
+
+**Not reusable as-is:** `BdpSpec` / `parse_bdp_spec` / `_pipeline_config` (MBB `sports_pipeline` only). For Legends, define a `LegendsSpec` dataclass (cohort filters) instead.
+
+---
+
+## 3. Minimal CLI pattern for a new domain script
+
+Follow **`reigning_hero_basic_plots.py`** (simpler) or **`tenure_basic_plots.py`** (multi-mode + manifest):
+
+```python
+#!/usr/bin/env python3
+"""Legends Big Fish — porch basic data plots."""
+
+from __future__ import annotations
+import argparse, json, sys
+from datetime import date
+from pathlib import Path
+
+REPO = Path(__file__).resolve().parents[2]
+SCRIPTS = Path(__file__).resolve().parent
+sys.path.insert(0, str(SCRIPTS))
+sys.path.insert(0, str(REPO / "sports" / "scripts"))
+
+from hero_gallery_paths import ensure_hero_dirs  # extend with LEGENDS_BASIC_PLOTS
+
+OUT_DIR = REPO / "3-Master_Plan/re_entry/HEROs_and_PASSes/legends_sandbox/basic_data_plots"
+DEFAULT_CSV = REPO / "datasets/legends/lol_big_fish_player_split_panel.csv"
+PREFIX = "LEGENDS"
+
+def run_ai_tj(df) -> Path: ...
+def run_loo_hist_ecdf(df) -> Path: ...
+def run_mass_ecdf(df) -> Path: ...
+def run_interval_overlap(df) -> Path: ...  # import build_figure from empirical_team_interval_overlap
+def run_pool_size(df) -> Path: ...
+def run_hero_porch(df) -> Path: ...        # ventile bins × promotion rate
+
+PLOT_FNS = {
+    "ai_tj": run_ai_tj,
+    "loo_hist_ecdf": run_loo_hist_ecdf,
+    "mass_ecdf": run_mass_ecdf,
+    "overlap": run_interval_overlap,
+    "pool_size": run_pool_size,
+    "hero_porch": run_hero_porch,
+}
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description="Legends Big Fish basic data plots")
+    parser.add_argument("--input", type=Path, default=DEFAULT_CSV)
+    parser.add_argument("--only", nargs="+", choices=tuple(PLOT_FNS.keys()))
+    args = parser.parse_args()
+    ensure_hero_dirs()
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    df = load_cohort(args.input)  # domain prep: dev cohort + censor + Y window
+    manifest = []
+    for key in args.only or PLOT_FNS:
+        png = PLOT_FNS[key](df)
+        manifest.append({"key": key, "png": png.name})
+    (OUT_DIR / "manifest.json").write_text(
+        json.dumps({"date": date.today().isoformat(), "plots": manifest}, indent=2) + "\n"
+    )
+
+if __name__ == "__main__":
+    main()
+```
+
+**Conventions every worker should follow:**
+1. Return `Path` to PNG.
+2. Write sidecar `{stem}_meta.json` with `"diagnostic"`, `"date"`, grain/filter, stats, `"outputs"`.
+3. Use `configure_matplotlib_mathtext()` before plotting.
+4. Filename stem: `{PREFIX}_BDP_{panel}_{spec_slug}.png` (sports) or `{PREFIX}_{panel}_{tag}.png` (tenure).
+5. Orchestrator writes `manifest.json` (tenure pattern in `tenure_basic_plots.main()` lines 1594–1613).
+
+---
+
+## Big Fish → function cheat sheet
+
+| Panel | Best template function | File |
+|-------|------------------------|------|
+| Â / T̂_j | `run_ai_tj_pd29` or `build_figure` | `tenure_basic_plots.py` / `bdp_ai_tj_distributions.py` |
+| LOO hist\|ECDF | `run_dept_loo_distribution` or `run_poolq_loo_distribution` | `tenure_basic_plots.py` / `bdp_reigning_loo_plots.py` |
+| Mass ECDF | `run_tenure_mass_ecdf_pd29` | `tenure_basic_plots.py` |
+| Interval overlap | `build_figure` (+ domain `_prepare_*_overlap`) | `empirical_team_interval_overlap.py` |
+| Pool size | `run_pool_size_decision_pd29` | `tenure_basic_plots.py` |
+| HERO porch | `run_draft_rate_vs_loo` or `tenure_pass_a_hero.main` | `bdp_reigning_loo_plots.py` / `tenure_pass_a_hero.py` |
+
+**Broken in repo (avoid copying):** `reigning_hero_basic_plots.run_tj_loo_compare_plot()` calls missing `run_tj_loo_compare`; `run_ai_loo()` passes unsupported `right_is_loo` to `run_spec`. Use `bdp_reigning_loo_plots` for LOO panels instead.
