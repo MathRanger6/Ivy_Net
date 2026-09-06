@@ -2,6 +2,7 @@
 
 **Purpose:** Single entry point for **paper talk / chapter outline** work. Any new Agent thread: **read this file first**, then `transcripts/PD30_notes.md`.  
 **Owner:** Charles · COMPASS scaffolds · VECTOR rewrites prose later  
+**Campaign plan (strategy):** [`PAPER_Campaign_Plan.md`](PAPER_Campaign_Plan.md)  
 **Alex mandate (PD29 + PD30):** Question → figure → **1–2 sentence claim** per slide; **gap slides** for open holes; **end-of-semester** paper target.
 
 **Say `anchor`** in chat to paste the YOU ARE HERE block below.
@@ -16,6 +17,7 @@
 | P1 | Tie each **primary** slide to reigning figure path | 🟡 paths listed § Figure inventory |
 | P2 | **Gap slides** named (theory, causal ID, army CAC) | 🟡 stubs only |
 | P3 | Export to PowerPoint / PDF talk deck | ⬜ |
+| — | **Campaign plan** sequencing | ✅ [`PAPER_Campaign_Plan.md`](PAPER_Campaign_Plan.md) |
 | — | Big Fish scout pipeline | ⏸ parked (PD30 back burner) |
 | — | Tenure scrape / Big Fish poke | Background only |
 
@@ -192,6 +194,7 @@ Paths relative to repo root. Talk tracks: sibling `*_plot_highlights.md` where n
 | PD30 notes | [`../../transcripts/PD30_notes.md`](../../transcripts/PD30_notes.md) |
 | Charles checklist | [`CHARLES_CHECKLIST.md`](CHARLES_CHECKLIST.md) |
 | Hero reset plan | [`../plans/20260721_hero_model_reset.plan.md`](../plans/20260721_hero_model_reset.plan.md) |
+| **Paper campaign plan** | [`PAPER_Campaign_Plan.md`](PAPER_Campaign_Plan.md) |
 | Tenure campaign | [`HEROs_and_PASSes/tenure_sandbox/TENURE_HERO_Campaign_Plan.md`](HEROs_and_PASSes/tenure_sandbox/TENURE_HERO_Campaign_Plan.md) |
 | Big Fish assessment | [`HEROs_and_PASSes/_DISPOSABLE_big_fish_datasets_assessment.md`](HEROs_and_PASSes/_DISPOSABLE_big_fish_datasets_assessment.md) |
 

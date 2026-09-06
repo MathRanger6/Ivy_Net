@@ -16,7 +16,7 @@
 
 **Primary trio unchanged:** **Army · MBB · Tenure** stay on the table. Big Fish (legends, football, education, …) = **enrichment / contingency**, not the main bet.
 
-**Flipbook bootstrap:** [`_DISPOSABLE_paper_flipbook_PD30.md`](../3-Master_Plan/re_entry/_DISPOSABLE_paper_flipbook_PD30.md)
+**Flipbook bootstrap:** [`_DISPOSABLE_paper_flipbook_PD30.md`](../3-Master_Plan/re_entry/_DISPOSABLE_paper_flipbook_PD30.md) · **Campaign plan:** [`PAPER_Campaign_Plan.md`](../3-Master_Plan/re_entry/PAPER_Campaign_Plan.md)
 
 **Transcript note:** Otter heard **“cat card”** → **CAC** (Common Access Card).
 
