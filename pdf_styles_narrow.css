@@ -177,3 +177,32 @@ math {
     background: #f5f5f5;
     color: #333;
 }
+
+/* Paper flipbook slide tables (# | Question | Claim | Fig | Paths & notes):
+   Claim column ≥ 30% — fixes vertical letter-stacking in PDF. */
+table:has(tr > th:nth-child(5)) {
+    table-layout: fixed;
+}
+
+table:has(tr > th:nth-child(5)) th:nth-child(1),
+table:has(tr > th:nth-child(5)) td:nth-child(1) {
+    width: 4%;
+}
+
+table:has(tr > th:nth-child(5)) th:nth-child(2),
+table:has(tr > th:nth-child(5)) td:nth-child(2) {
+    width: 14%;
+}
+
+table:has(tr > th:nth-child(5)) th:nth-child(3),
+table:has(tr > th:nth-child(5)) td:nth-child(3) {
+    width: 30%;
+    min-width: 30%;
+    word-break: normal;
+    overflow-wrap: break-word;
+}
+
+table:has(tr > th:nth-child(5)) th:nth-child(4),
+table:has(tr > th:nth-child(5)) td:nth-child(4) {
+    width: 8%;
+}
