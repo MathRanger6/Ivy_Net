@@ -243,6 +243,10 @@ def _pass_a_png_name() -> str:
     return f"PASS_A_side_by_side_{_filename_core()}.png"
 
 
+def _naive_ability_png_name() -> str:
+    return f"PASS_A_naive_ability_{_filename_core()}.png"
+
+
 def _hero_png_name() -> str:
     return f"HERO_{_filename_core()}.png"
 
@@ -699,6 +703,40 @@ def build_hero_single_panel(
     print(f"Wrote {png}")
 
 
+def build_naive_ability_panel(
+    out_dir: Path,
+    ability: pd.DataFrame,
+    *,
+    prov: HeroProvenance,
+) -> None:
+    """Single panel: draft rate vs own ability ventiles (naïve / talent-alone read)."""
+    from gallery_mathtext import configure_matplotlib_mathtext
+    from hero_plot_style import PLOT_DPI
+
+    configure_matplotlib_mathtext()
+    spec = _hero_spec()
+    perf = str(spec.perf_metric).strip().upper()
+    seasons = seasons_label(_w().season_min, _w().season_max)
+    left_spec = (
+        rf"${spec.n_bins}$ quantile | min$={spec.min_minutes:g}$ | "
+        rf"mg$={int(spec.min_team_season_games)}$ | perf={perf}"
+    )
+    fig, ax = plt.subplots(figsize=(6, 4.5))
+    x = ability["vent"].to_numpy(dtype=float) + 1
+    y = ability["draft_rate"].to_numpy(dtype=float)
+    ax.bar(x, y, color="seagreen", edgecolor="white", alpha=0.9)
+    ax.set_xlabel(rf"Ability ventile ($1$ = lowest perf, {perf} $z$ within season)")
+    ax.set_ylabel(r"Mean $Y_{\mathrm{draft}}$")
+    ax.set_title(f"Naïve — draft rate vs own ability\n{left_spec} · {seasons}")
+    ax.set_xticks(x)
+    stamp_figure_footer(fig, prov.footer_text())
+    fig.tight_layout(rect=(0, 0.05, 1, 0.98))
+    png = out_dir / _naive_ability_png_name()
+    fig.savefig(png, dpi=PLOT_DPI, bbox_inches="tight")
+    plt.close(fig)
+    print(f"Wrote {png}")
+
+
 def build_side_by_side(
     out_dir: Path,
     ability: pd.DataFrame,
@@ -895,6 +933,11 @@ def add_hero_spec_args(parser: argparse.ArgumentParser) -> None:
         help="Also write talent|roster pair PNG + caption (default: HERO single panel only).",
     )
     parser.add_argument(
+        "--naive-panel",
+        action="store_true",
+        help="Also write single-panel naïve ability ventile PNG (flipbook 2.2).",
+    )
+    parser.add_argument(
         "--perf-metric",
         type=str,
         default="ppm",
@@ -974,9 +1017,17 @@ def main() -> None:
     )
     ability, roster, coef, prov = build_empirical_tables(out_dir)
     build_hero_single_panel(out_dir, roster, coef, prov=prov)
+    if args.naive_panel:
+        build_naive_ability_panel(out_dir, ability, prov=prov)
     if args.side_by_side:
         build_side_by_side(out_dir, ability, roster, coef, prov=prov)
-        print(f"\nDone. HERO: {out_dir / _hero_png_name()} · side-by-side: {out_dir / _pass_a_png_name()}")
+    extras = []
+    if args.naive_panel:
+        extras.append(f"naïve: {out_dir / _naive_ability_png_name()}")
+    if args.side_by_side:
+        extras.append(f"side-by-side: {out_dir / _pass_a_png_name()}")
+    if extras:
+        print(f"\nDone. HERO: {out_dir / _hero_png_name()} · " + " · ".join(extras))
     else:
         print(f"\nDone. HERO: {out_dir / _hero_png_name()}")
 

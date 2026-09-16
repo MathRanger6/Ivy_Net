@@ -1,4 +1,4 @@
-# Pass B — generative λ knockout (2026-08-03)
+# Pass B — generative λ knockout (2026-09-15)
 
 Preset: 539. 16 quantile bins on pool mean (not poolq_loo).
 See PASS_B_generative_knockout_meta.json.

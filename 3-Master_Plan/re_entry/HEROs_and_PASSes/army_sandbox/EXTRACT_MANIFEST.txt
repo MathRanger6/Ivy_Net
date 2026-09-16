@@ -1,0 +1,16 @@
+# Army figure extract manifest (auto-generated)
+# Source notebook: talent/Army_AWS_download/TALENT_NET_export_20260320-1000/520_pipeline_cox_working.ipynb
+# Canonical names consumed by scripts/build_flipbook_figure_deck.py
+
+| Slot | Canonical file | AWS / notebook label |
+|------|----------------|----------------------|
+| hero_cif | `ARMY_G1_pool_minus_mean_fwd_cif_b8.png` | `cr_z_pool_minus_mean_fw_none_b8_ew_noOER_2002-2022_cif_bars.png` |
+| own_tb_cif | `ARMY_own_tb_ratio_fwd_cif_b8.png` | `cr_z_tb_r_fwd_none_b8_ew_noOER_2002-2022_cif_bars.png` |
+| partial_effects | `ARMY_partial_effects_pool_minus_mean.png` | `combined_effect_z_pool_minus_mean_snr_fwd_stdz.png` |
+| extra | `ARMY_G1_pool_minus_mean_fwd_CR_curves.png` | `cr_z_pool_minus_mean_fw_none_b8_ew_noOER_2002-2022.png` |
+| extra | `ARMY_own_tb_ratio_fwd_CR_curves.png` | `cr_z_tb_r_fwd_none_b8_ew_noOER_2002-2022.png` |
+| extra | `ARMY_star_pool_interaction_cif_b8.png` | `cr_star_pool_interactio_none_b8_ew_noOER_2002-2022_cif_bars.png` |
+| extra | `ARMY_tb_by_division_cif_b1.png` | `cr_z_tb_r_fwd_divname_b1_ew_noOER_2002-2022_cif_bars.png` |
+| extra | `ARMY_cox_competing_risks_analysis_stdz.png` | `competing_risks_analysis_stdz` |
+| extra | `ARMY_cox_model_comparison_stdz.png` | `model_comparison_stdz` |
+| extra | `ARMY_combined_effect_pool_minus_mean_stdz.png` | `combined_effect.*pool_minus_mean` |

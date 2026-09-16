@@ -1,0 +1,13 @@
+Pass A caption — empirical pair
+
+Spec: n_bins=16 poolq_binning=quantile min_minutes=20.0 mg=10 winsor=0.01–0.99 perf_metric=ppm
+
+Left: Mean NBA draft rate by ventile of player ability (perf z-scored
+within season). Monotone-up is the talent-only stylized read.
+
+Right: Mean NBA draft rate by ventile of roster pressure
+(poolq_loo (LOO teammate mean perf z; self excluded)), MBB 2011-2021, mg=10, min_minutes=20.
+LPM readout: not concave — flat elite tail on POST-QC panel.
+Canonical POST-QC hero: mg=10. July pre-QC inverted-U: pass_a/sensitivity/.
+
+We do not use λ language on the empirical side; λ is a generative score knob (Pass B).

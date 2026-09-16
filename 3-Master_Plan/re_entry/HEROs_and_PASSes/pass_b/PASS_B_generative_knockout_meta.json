@@ -4,7 +4,7 @@
   "hero_bins": 16,
   "bin_mode": "quantile",
   "x_axis": "pool_mean",
-  "x_axis_note": "team mean ability on realized roster (includes self; not LOO)",
+  "x_axis_note": "realized T_j (team roster mean of A_i)",
   "talent_only": {
     "score_mode": "ability",
     "loo_pool_l_mode": "quality",
@@ -12,7 +12,7 @@
   },
   "congestion": {
     "score_mode": "loo_gap_plus_ability",
-    "loo_pool_l_mode": "crowding_smooth",
+    "loo_pool_l_mode": "crowding_smooth_team",
     "w": 0.55
   },
   "assignment": {

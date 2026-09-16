@@ -179,13 +179,14 @@ talent/                             ← army Cox/CIF (G1)
 
 ## 9 — Next COMPASS moves (this week)
 
-1. **Draft Act 0 claims** (0.1–0.4) in disposable — Charles red-pen pass.  
-2. **Draft Act II claims** (2.1–2.4) from MBB manifest + plot highlights.  
-3. **Draft Act III claims** (3.1–3.2) from tenure plot highlights.  
-4. Leave Act I figure-dependent text ready for **G1** slot.  
-5. **No new data campaigns** unless Charles says a slide is blocked.
+1. ~~**Draft Act 0 claims**~~ ✅ — Charles red-pen pass.  
+2. ~~**Draft Act II claims**~~ ✅ — Charles red-pen pass.  
+3. ~~**Draft Act III claims**~~ ✅ — Charles red-pen pass.  
+4. **Draft Act IV** mechanism claims (Model.pptx + G2 sim PNG).  
+5. Leave Act I figure-dependent text ready for **G1** slot.  
+6. **No new data campaigns** unless Charles says a slide is blocked.
 
-Charles: say **`fill Act 0`** or **`fill Act II`** to start claim drafts in the disposable.
+Charles: say **`fill Act IV`** or red-pen Acts 0–III.
 
 ---
 
@@ -195,3 +196,5 @@ Charles: say **`fill Act 0`** or **`fill Act II`** to start claim drafts in the 
 |------|--------|
 | 2026-09-05 | Paper Campaign Plan created post-PD30; army anchor lock; flipbook disposable linked as working slide table. |
 | 2026-09-06 | Act 0 claims drafted in disposable (COMPASS) — Charles red-pen next. |
+| 2026-09-15 | Act II (MBB) claims drafted — panels 1, 4, 5, 9 wired to reigning manifest. |
+| 2026-09-15 | Act III (tenure) claims drafted — panel 9, perf story, three-leg composite. |
