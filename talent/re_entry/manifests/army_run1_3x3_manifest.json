@@ -1,0 +1,99 @@
+{
+  "domain": "army",
+  "deck": "run1_data_story",
+  "title": "Army data story — Run 1 (forward SNR · pool minus mean LOO)",
+  "subtitle": "CPT→MAJ · last snapshot · EW8 HERO · pipeline_config_17_1  |  Read top-left → bottom-right",
+  "output_png": "talent/re_entry/output/data_story/ARMY_DATA_STORY_run1_3x3.png",
+  "page_size": "letter-landscape",
+  "fig_width_in": 24,
+  "fig_height_in": 18,
+  "mosaic_dpi": 400,
+  "panel_dpi": 300,
+  "footer": "Army Run 1 · ew8 pool_minus_mean LOO · compositor build_data_story_mosaic.py",
+  "grid": [
+    {
+      "type": "text",
+      "title": "1 · Cohort",
+      "lines": [
+        "Domain: U.S. Army officers (HRC talent pipeline)",
+        "Grain: last snapshot per officer (Cell 11)",
+        "Filters: Run 1 · pipeline_config_17_1",
+        "Outcome: ever promoted vs attrition vs censored",
+        "Peer X: pool_minus_mean_snr_fwd (LOO-style)",
+        "Metric: tb_ratio_fwd_snr (own TB · Â)",
+        "",
+        "N = (run army_basic_plots.py to refresh)",
+        "Promoted / attrition / censored = — / — / —",
+        "Median pool size = —",
+        "",
+        "Panels 7–8: Act II probes (TBD)",
+        "",
+        "Reigning tag:",
+        "ew8_pool_minus_mean_run1"
+      ]
+    },
+    {
+      "type": "image",
+      "title": "2 · Â_i and T̂_j",
+      "path": "talent/re_entry/output/basic_data_plots/ARMY_BDP_Ai_Tj_run1.png"
+    },
+    {
+      "type": "image",
+      "title": "3 · pool LOO distribution",
+      "path": "talent/re_entry/output/basic_data_plots/ARMY_BDP_pool_minus_mean_loo_run1.png"
+    },
+    {
+      "type": "image",
+      "title": "4 · Promotion mass vs Â (ECDF)",
+      "path": "talent/re_entry/output/basic_data_plots/ARMY_BDP_promotion_mass_ecdf_run1.png"
+    },
+    {
+      "type": "text",
+      "title": "5 · Pool interval overlap",
+      "lines": [
+        "TBD — senior-rater pool overlap panel",
+        "",
+        "Port target:",
+        "empirical_team_interval_overlap.py",
+        "(adapt pools = snapshot × snr_uic)",
+        "",
+        "Placeholder until v0.2"
+      ]
+    },
+    {
+      "type": "image",
+      "title": "6 · Pool size |T_j|",
+      "path": "talent/re_entry/output/basic_data_plots/ARMY_BDP_pool_size_run1.png"
+    },
+    {
+      "type": "text",
+      "title": "7 · CCT probe",
+      "lines": [
+        "TBD — fixed Â band · LOO bins",
+        "(scaled from MBB CCT panel 7)",
+        "",
+        "output/act2/ when implemented"
+      ]
+    },
+    {
+      "type": "text",
+      "title": "8 · Elite pond probe",
+      "lines": [
+        "TBD — top Â slice · LOO tail",
+        "(scaled from MBB elite pond panel 8)",
+        "",
+        "output/act2/ when implemented"
+      ]
+    },
+    {
+      "type": "image",
+      "title": "9 · HERO (pool LOO · promotion rate)",
+      "path": "talent/re_entry/output/hero/ARMY_HERO_ew8_pool_minus_mean_run1.png"
+    }
+  ],
+  "verdict": {
+    "hero_reigning": "ew8_pool_minus_mean_run1",
+    "peer_pool": "senior-rater pool minus mean (forward SNR)",
+    "panels_5_7_8": "stub text cells — implement in army_basic_plots v0.2"
+  }
+}
