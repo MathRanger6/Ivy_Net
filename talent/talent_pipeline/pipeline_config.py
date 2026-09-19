@@ -398,7 +398,8 @@ COLUMN_CONFIG = {
     # For survival analysis, each snapshot becomes a separate interval with its own covariate values
     'base_time_varying_cols': [
         # 'married',   # Marital status (can change over time)
-        'snpsht_dt', # Snapshot date (needed for time-alignment diagnostics)
+        'snpsht_dt',  # Snapshot date (needed for time-alignment diagnostics)
+        'snr_rater_bwd',  # Cell 6 SNR pool key → Cell 11 feather + BDP panel 5 (not in Cox formula)
         # 'job_code',  # Current job code (changes as officer is assigned to different positions)
         # 'div_name', # Division name (time-varying, uncomment if available)
     ],
@@ -414,6 +415,15 @@ COLUMN_CONFIG = {
     # Optional: extra columns merged onto survival interval rows (Cell 10) without adding to the Cox formula.
     # Normally leave empty and put all model TV covariates (including categoricals) in model_time_varying_cols.
     'extra_survival_tv_cols': [],
+
+    # Rater ID columns on survival intervals (pool keys for plotting — not Cox covariates).
+    # Cell 10 must NOT fillna(0) on these; missing backward OER pool membership is meaningful.
+    'rater_id_tv_cols': [
+        'snr_rater_bwd',
+        'rtr_rater_bwd',
+        'snr_rater_fwd',
+        'rtr_rater_fwd',
+    ],
     
     # OER-related variables (Officer Evaluation Report performance metrics)
     # These variables are used by plotting functions to identify OER variables for filtering purposes

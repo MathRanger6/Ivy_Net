@@ -3,19 +3,17 @@
 
 Mirrors tenure/scripts/tenure_basic_plots.py panel semantics for cross-domain comparison.
 
-Run (repo root or AWS with cwd = talent/talent_pipeline):
-  python talent/re_entry/army_basic_plots.py
-  python talent/re_entry/army_basic_plots.py --input ./running_vars/df_pipeline_11_cox_analysis.feather
-  python talent/re_entry/army_basic_plots.py --only ai_tj pool_loo promotion_mass pool_size
+Run (AWS 520 root, e.g. Network_1P_shell — no PYTHONPATH needed):
+  ./talent/re_entry/army_basic_plots.py --all
+  ./talent/re_entry/army_basic_plots.py --input ./big_dfs/df_pipeline_11_cox_analysis.feather
 
-Prerequisite: 520 through Cell 11 → df_pipeline_11_cox_analysis.feather
+Prerequisite: 520 through Cell 11 → big_dfs/df_pipeline_11_cox_analysis.feather
 """
 
 from __future__ import annotations
 
 import argparse
 import json
-import sys
 from datetime import date
 from pathlib import Path
 from typing import Any
@@ -24,14 +22,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-_RE_ENTRY = Path(__file__).resolve().parent
-REPO = _RE_ENTRY.parents[2]
-sys.path.insert(0, str(_RE_ENTRY))
-sys.path.insert(0, str(REPO / "sports" / "scripts"))
-
-from army_gallery_paths import (  # noqa: E402
+from army_gallery_paths import (  # noqa: E402 — bootstraps sys.path
     BASIC_DATA_PLOTS,
     PREFIX,
+    REPO,
     TAG_RUN1,
     ensure_army_output_dirs,
     resolve_feather,
@@ -46,6 +40,24 @@ COL_AI = "tb_ratio_fwd_snr"
 COL_TJ = "pool_tb_ratio_mean_snr_fwd"
 COL_LOO = "pool_minus_mean_snr_fwd"
 COL_POOL_SIZE = "pool_size_snr_fwd"
+COL_SNAPSHOT = "snpsht_dt"
+COL_SNR = "snr_rater_bwd"  # Cell 6 pool key (matches pipeline_config base_time_varying_cols)
+SNR_COL_CANDIDATES = ("snr_rater_bwd", "snr_rater", "snr_rater_fwd")
+COL_PERF_Z = "z_tb_ratio_fwd_snr"
+POOL_MIN = 3
+
+ARMY_OVERLAP_LABELS = {
+    "coverage_ylabel": "Senior-rater pools covering this level",
+    "span_ylabel": "Snapshot × SNR pools",
+    "sample_ylabel": "Sample of {n} pools (sorted by $\\hat{{T}}_j$)",
+    "all_ylabel": "All snapshot × SNR pools (sorted by $\\hat{{T}}_j$)",
+    "coverage_grid_note": "{frac:.1%} of grid with $>$1 pool",
+    "legend_actual": "Actual senior-rater pools",
+    "overlap_title": "Interval overlap along performance spectrum",
+    "span_xlabel": r"Pool span ($\max \hat{A}_i - \min \hat{A}_i$)",
+    "span_title": "Width of each pool's performance window",
+    "sample_title": r"Pool $[\min, \max]$ intervals (sample)",
+}
 
 ECDF_PROMOTED = "#2166AC"
 ECDF_ATTRITION = "#B2182B"
@@ -53,6 +65,173 @@ ECDF_CENSORED = "#757575"
 ECDF_LOO_HIST = "#4daf4a"
 
 GRAIN_LABEL = "Last snapshot per officer (Cell 11 grain)"
+SNAPSHOT_GRAIN_LABEL = "All snapshot rows · pool = snpsht_dt × snr_rater_bwd"
+
+
+def _z_within_groups(series: pd.Series) -> pd.Series:
+    s = pd.to_numeric(series, errors="coerce")
+    mu = float(s.mean())
+    sd = float(s.std())
+    if not np.isfinite(sd) or sd <= 0:
+        return pd.Series(0.0, index=series.index)
+    return (s - mu) / sd
+
+
+_INVALID_SNR_VALUES = frozenset({"", "0", "0.0", "unknown", "Unknown", "nan", "NaN", "None"})
+
+
+def _is_valid_snr_id(value: object) -> bool:
+    if value is None or (isinstance(value, float) and np.isnan(value)):
+        return False
+    if pd.isna(value):
+        return False
+    if isinstance(value, (int, np.integer)) and value == 0:
+        return False
+    if isinstance(value, (float, np.floating)) and value == 0.0:
+        return False
+    return str(value).strip() not in _INVALID_SNR_VALUES
+
+
+def _resolve_snr_col(panel: pd.DataFrame) -> str:
+    """Cell 6 pools use snr_rater_bwd; Cell 11 export often drops rater IDs."""
+    for cand in SNR_COL_CANDIDATES:
+        if cand in panel.columns:
+            return cand
+    snr_like = [c for c in panel.columns if "snr" in c.lower() and "rater" in c.lower()]
+    raise SystemExit(
+        "Overlap panel needs a senior-rater ID column "
+        f"({', '.join(SNR_COL_CANDIDATES)}). "
+        "Re-run Cell 11 after adding snr_rater_bwd to pipeline_config base_time_varying_cols. "
+        f"SNR-like columns seen: {snr_like or '(none)'}"
+    )
+
+
+def _prepare_army_overlap(panel: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame, str, str]:
+    """Build pool intervals: group = snapshot date × senior rater (Cell 6 pool)."""
+    snr_col = _resolve_snr_col(panel)
+    if COL_SNAPSHOT not in panel.columns:
+        raise SystemExit(f"Overlap panel missing column: {COL_SNAPSHOT}")
+    if COL_POOL_SIZE not in panel.columns:
+        raise SystemExit(f"Overlap panel missing column: {COL_POOL_SIZE}")
+
+    work = panel.copy()
+    if COL_PERF_Z in work.columns:
+        work["perf"] = pd.to_numeric(work[COL_PERF_Z], errors="coerce")
+        xlab = r"Own TB ratio SNR fwd ($z$ from pipeline)"
+    elif COL_AI in work.columns:
+        work["perf"] = work.groupby(COL_SNAPSHOT, observed=True)[COL_AI].transform(_z_within_groups)
+        xlab = r"Own TB ratio SNR fwd ($z$ within snapshot)"
+    else:
+        raise SystemExit(f"Overlap panel needs {COL_PERF_Z} or {COL_AI} in feather.")
+
+    work[COL_SNAPSHOT] = pd.to_datetime(work[COL_SNAPSHOT], errors="coerce")
+    work = work.dropna(subset=[COL_SNAPSHOT, "perf"])
+    valid_snr = work[snr_col].map(_is_valid_snr_id)
+    n_bad_snr = int((~valid_snr).sum())
+    if n_bad_snr:
+        print(f"  Overlap: dropping {n_bad_snr:,} rows with missing/invalid {snr_col}")
+    work = work.loc[valid_snr].copy()
+    pool_size = pd.to_numeric(work[COL_POOL_SIZE], errors="coerce")
+    work = work.loc[pool_size >= POOL_MIN].copy()
+
+    iv = (
+        work.groupby([COL_SNAPSHOT, snr_col], observed=True)["perf"]
+        .agg(
+            A_hat_min="min",
+            A_hat_max="max",
+            T_j_hat="mean",
+            roster_n="count",
+        )
+        .reset_index()
+    )
+    iv = iv.loc[iv["roster_n"] >= POOL_MIN].copy()
+    iv["perf_span"] = iv["A_hat_max"] - iv["A_hat_min"]
+
+    work["team_id"] = work[snr_col].astype(str)
+    work["season"] = work[COL_SNAPSHOT].dt.strftime("%Y-%m-%d")
+    iv["team_id"] = iv[snr_col].astype(str)
+    iv["season"] = pd.to_datetime(iv[COL_SNAPSHOT]).dt.strftime("%Y-%m-%d")
+    grain = SNAPSHOT_GRAIN_LABEL.replace("snr_rater", snr_col)
+    return iv, work, xlab, grain
+
+
+def _compute_h_sort(work: pd.DataFrame) -> float | None:
+    """Realized sorting index on snapshot × SNR pools (optional if 541 module absent)."""
+    try:
+        import importlib
+        import sys
+
+        sports_root = str(REPO / "sports")
+        if sports_root not in sys.path:
+            sys.path.insert(0, sports_root)
+        gc = importlib.import_module("541_grandchild_homophily_assign")
+        use = work.dropna(subset=["perf"]).copy()
+        snr_col = _resolve_snr_col(work)
+        use["pool_id"] = use.groupby([COL_SNAPSHOT, snr_col], observed=True).ngroup()
+        return float(
+            gc.realized_sorting_index_H_sort(
+                use["perf"].to_numpy(dtype=float),
+                use["pool_id"].to_numpy(dtype=np.int64),
+            )
+        )
+    except Exception as exc:
+        print(f"  H_sort skipped: {exc}")
+        return None
+
+
+def run_pool_interval_overlap(feather_path: Path, *, tag: str = TAG_RUN1) -> Path:
+    """Panel 5 — senior-rater pool interval overlap (assortativity diagnostic)."""
+    from empirical_team_interval_overlap import build_figure  # noqa: WPS433
+
+    panel = pd.read_feather(feather_path)
+    iv, work, xlab, grain = _prepare_army_overlap(panel)
+    if iv.empty:
+        raise SystemExit("No pools for overlap panel — check snapshot / SNR columns.")
+
+    dates = pd.to_datetime(work[COL_SNAPSHOT], errors="coerce").dropna()
+    seasons = f"{dates.min():%Y-%m-%d} to {dates.max():%Y-%m-%d}"
+
+    stem = f"{PREFIX}_BDP_pool_interval_overlap_{tag}"
+    out_png = BASIC_DATA_PLOTS / f"{stem}.png"
+    out_csv = BASIC_DATA_PLOTS / f"{stem}_pool_snapshot.csv"
+    out_meta = BASIC_DATA_PLOTS / f"{stem}.json"
+
+    iv.to_csv(out_csv, index=False)
+    print(f"Wrote {out_csv.relative_to(REPO)}")
+
+    h_sort = _compute_h_sort(work)
+    h_line = f"\nRealized sorting $H_{{sort}}={h_sort:.3f}$" if h_sort is not None else ""
+    stats = build_figure(
+        iv,
+        work,
+        png_path=out_png,
+        seasons=seasons,
+        h_sort=h_sort,
+        suptitle=(
+            f"{PREFIX} — senior-rater pool interval overlap ({seasons})"
+            + h_line
+        ),
+        xlab=xlab,
+        labels=ARMY_OVERLAP_LABELS,
+        grain_badge=grain,
+    )
+
+    meta = {
+        "date": date.today().isoformat(),
+        "panel": 5,
+        "diagnostic": "army_pool_interval_overlap",
+        "pool_unit": grain.split("pool = ")[-1] if "pool = " in grain else f"{COL_SNAPSHOT} × snr_rater_bwd",
+        "pool_min": POOL_MIN,
+        "seasons": seasons,
+        "grain": grain,
+        **stats,
+        "n_pools": stats.get("n_team_seasons"),
+        "n_snapshot_rows": stats.get("n_player_seasons"),
+        "outputs": {"png": out_png.name, "pool_csv": out_csv.name},
+    }
+    _write_meta(out_meta, meta)
+    print(f"Wrote {out_png.relative_to(REPO)}")
+    return out_png
 
 
 def _summary(name: str, values: np.ndarray) -> dict[str, float | int]:
@@ -182,8 +361,13 @@ def run_ai_tj(officers: pd.DataFrame, *, tag: str = TAG_RUN1) -> Path:
 def run_pool_loo_distribution(officers: pd.DataFrame, *, tag: str = TAG_RUN1) -> Path:
     """Panel 3 — LOO pool minus mean (peer context support)."""
     loo = pd.to_numeric(officers[COL_LOO], errors="coerce").to_numpy(dtype=float)
+    loo = loo[np.isfinite(loo)]
+    if loo.size == 0:
+        raise SystemExit(f"No finite values in {COL_LOO} — check pool LOO columns in feather.")
     stats = _summary(COL_LOO, loo)
     lo, hi = float(np.min(loo)), float(np.max(loo))
+    if lo == hi:
+        lo, hi = lo - 0.5, hi + 0.5
     bins = np.linspace(lo, hi, 36)
 
     fig, axes = plt.subplots(1, 2, figsize=(11.5, 4.6))
@@ -303,6 +487,7 @@ PLOT_RUNNERS = {
     "promotion_mass": lambda df, _s: run_promotion_mass_ecdf(df),
     "pool_size": lambda df, _s: run_pool_size_distribution(df),
 }
+# overlap uses full snapshot panel — handled in main() via run_pool_interval_overlap(feather)
 
 
 def main() -> None:
@@ -312,7 +497,7 @@ def main() -> None:
         "--only",
         nargs="+",
         default=None,
-        choices=sorted(PLOT_RUNNERS),
+        choices=sorted({*PLOT_RUNNERS, "overlap"}),
         help="Subset of panels to build",
     )
     parser.add_argument(
@@ -332,10 +517,14 @@ def main() -> None:
         f"censored={cohort_stats['n_censored']:,})"
     )
 
-    keys = args.only if args.only else sorted(PLOT_RUNNERS)
+    default_keys = sorted({*PLOT_RUNNERS, "overlap"})
+    keys = args.only if args.only else default_keys
     manifest: list[dict[str, str]] = []
     for key in keys:
-        png = PLOT_RUNNERS[key](officers, cohort_stats)
+        if key == "overlap":
+            png = run_pool_interval_overlap(feather)
+        else:
+            png = PLOT_RUNNERS[key](officers, cohort_stats)
         manifest.append({"key": key, "png": png.name})
 
     manifest_path = BASIC_DATA_PLOTS / "manifest.json"

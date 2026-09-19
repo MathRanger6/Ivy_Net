@@ -1,0 +1,62 @@
+{
+  "domain": "football",
+  "deck": "perf_metric_story",
+  "title": "Football (FBS) \u2014 HERO by metric \u00b7 P(drafted) vs teammate LOO \u00b7 DB",
+  "panel_rows": "last-ps",
+  "position_groups": [
+    "DB"
+  ],
+  "panel_audit": {
+    "step": "last_season_only",
+    "n_rows_before": 15721,
+    "n_rows_after": 6537,
+    "n_athletes": 6537,
+    "n_transfer_ties": 0,
+    "panel_rows": "last-ps",
+    "athlete_id_col": "player_id",
+    "tie_break_col": "role_opportunities",
+    "position_groups": [
+      "DB"
+    ]
+  },
+  "show_footer": true,
+  "page_size": "screen",
+  "rows_per_page": null,
+  "n": 6537,
+  "n_players": 6537,
+  "y_rate": 0.06700321248279027,
+  "output_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/football_sandbox/pos_DB/data_story/FOOTBALL_PERF_METRIC_STORY.png",
+  "output_pages": [
+    "3-Master_Plan/re_entry/HEROs_and_PASSes/football_sandbox/pos_DB/data_story/FOOTBALL_PERF_METRIC_STORY.png"
+  ],
+  "panels_dir": "3-Master_Plan/re_entry/HEROs_and_PASSes/football_sandbox/pos_DB/perf_story/panels",
+  "metrics": [
+    {
+      "col": "z_performance_volume",
+      "loo_col": "_loo_z_performance_volume",
+      "short": "volume z",
+      "label": "Own $z_{\\mathrm{volume}}$ (Alex)",
+      "n": 6537,
+      "q16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/football_sandbox/pos_DB/perf_story/panels/HERO_football_perf_q16_loo_z_performance_volume_slide.png",
+      "ew16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/football_sandbox/pos_DB/perf_story/panels/HERO_football_perf_ew16_loo_z_performance_volume_slide.png"
+    },
+    {
+      "col": "z_diy_recruit_rating",
+      "loo_col": "_loo_z_diy_recruit_rating",
+      "short": "recruit z \u00b7 prior",
+      "label": "Recruit rating $z$ (prior \u00b7 DIY)",
+      "n": 4530,
+      "q16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/football_sandbox/pos_DB/perf_story/panels/HERO_football_perf_q16_loo_z_diy_recruit_rating_slide.png",
+      "ew16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/football_sandbox/pos_DB/perf_story/panels/HERO_football_perf_ew16_loo_z_diy_recruit_rating_slide.png"
+    },
+    {
+      "col": "own_performance_index",
+      "loo_col": "_loo_own_performance_index",
+      "short": "\u00c2 composite",
+      "label": "Own $\\hat{A}$ composite (Alex)",
+      "n": 6537,
+      "q16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/football_sandbox/pos_DB/perf_story/panels/HERO_football_perf_q16_loo_own_performance_index_slide.png",
+      "ew16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/football_sandbox/pos_DB/perf_story/panels/HERO_football_perf_ew16_loo_own_performance_index_slide.png"
+    }
+  ]
+}

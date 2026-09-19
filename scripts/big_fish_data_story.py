@@ -6,6 +6,9 @@ Run (repo root):
   python scripts/big_fish_data_story.py --domain football --mode all
   python scripts/big_fish_data_story.py --domain legends --mode perf-story
   python scripts/big_fish_data_story.py --domain football --mode perf-story
+  python scripts/big_fish_data_story.py --domain football --mode hero QB RB_FB
+  python scripts/big_fish_data_story.py --domain football --positions QB WR_TE --mode perf-story
+  python scripts/big_fish_data_story.py --domain football --mode all DB --team-mean
 """
 
 from __future__ import annotations
@@ -30,7 +33,11 @@ SPORTS_SCRIPTS = REPO / "sports" / "scripts"
 sys.path.insert(0, str(REPO))
 sys.path.insert(0, str(SPORTS_SCRIPTS))
 
-from empirical_team_interval_overlap import _team_intervals, build_figure  # noqa: E402
+from empirical_team_interval_overlap import (  # noqa: E402
+    _compute_H_sort,
+    _team_intervals,
+    build_figure,
+)
 from gallery_mathtext import configure_matplotlib_mathtext  # noqa: E402
 from hero_plot_style import PLOT_DPI, annotate_bar_n, count_weighted_bar_colors, format_poolq_tick  # noqa: E402
 from sports_pipeline.y_draft_mode import PANEL_ROWS_LAST, restrict_to_last_season_rows  # noqa: E402
@@ -154,6 +161,103 @@ class DomainSpec:
     tie_break_col: str | None = None
 
 
+FOOTBALL_POSITION_GROUPS: tuple[str, ...] = (
+    "DB",
+    "WR_TE",
+    "DL_EDGE",
+    "LB",
+    "RB_FB",
+    "QB",
+    "K",
+    "P",
+)
+
+FOOTBALL_POSITION_ALIASES: dict[str, str] = {
+    "WR": "WR_TE",
+    "TE": "WR_TE",
+    "DL": "DL_EDGE",
+    "EDGE": "DL_EDGE",
+    "RB": "RB_FB",
+    "FB": "RB_FB",
+}
+
+
+@dataclass(frozen=True)
+class PositionFilter:
+    """Football-only subset on ``position_group``; LOO recomputed within the filter."""
+
+    groups: tuple[str, ...]
+
+    @classmethod
+    def parse(cls, tokens: list[str] | None) -> PositionFilter | None:
+        if not tokens:
+            return None
+        seen: set[str] = set()
+        groups: list[str] = []
+        for raw in tokens:
+            token = raw.strip().upper()
+            if not token:
+                continue
+            token = FOOTBALL_POSITION_ALIASES.get(token, token)
+            if token not in FOOTBALL_POSITION_GROUPS:
+                valid = ", ".join(FOOTBALL_POSITION_GROUPS)
+                raise SystemExit(f"Unknown position_group {raw!r}. Valid: {valid}")
+            if token not in seen:
+                seen.add(token)
+                groups.append(token)
+        if not groups:
+            return None
+        return cls(groups=tuple(groups))
+
+    @property
+    def label(self) -> str:
+        return " · ".join(self.groups)
+
+    @property
+    def slug(self) -> str:
+        return "pos_" + "_".join(self.groups)
+
+    def apply(self, df: pd.DataFrame) -> pd.DataFrame:
+        if "position_group" not in df.columns:
+            raise ValueError("position filter requires position_group column")
+        out = df.loc[df["position_group"].isin(self.groups)].copy()
+        if out.empty:
+            raise SystemExit(f"No rows after position filter ({self.label})")
+        return out
+
+
+@dataclass(frozen=True)
+class PeerAxis:
+    """Panels 7–9 peer context: teammate LOO (default) or team mean T̂_j (incl. self)."""
+
+    use_team_mean: bool = False
+
+    @classmethod
+    def from_flag(cls, team_mean: bool) -> PeerAxis:
+        return cls(use_team_mean=bool(team_mean))
+
+    @property
+    def key(self) -> str:
+        return "team_mean" if self.use_team_mean else "loo"
+
+    @property
+    def path_suffix(self) -> str:
+        return "peer_tj" if self.use_team_mean else ""
+
+    def x_col(self, spec: DomainSpec) -> str:
+        return "team_mean_ai" if self.use_team_mean else spec.loo_col
+
+    def x_label(self, *, bin_tag: str = "Q16", short: str | None = None) -> str:
+        if self.use_team_mean:
+            return rf"Team $\hat{{T}}_j$ ({bin_tag})"
+        if short:
+            return f"Teammate LOO · {short} ({bin_tag})"
+        return f"Teammate LOO ({bin_tag})"
+
+    def slug_part(self) -> str:
+        return "team_tj" if self.use_team_mean else "team_loo"
+
+
 DOMAINS: dict[str, DomainSpec] = {
     "legends": DomainSpec(
         key="legends",
@@ -220,8 +324,23 @@ DOMAINS: dict[str, DomainSpec] = {
 }
 
 
-def _paths(spec: DomainSpec) -> dict[str, Path]:
+def _with_positions(title: str, position_filter: PositionFilter | None) -> str:
+    if position_filter is None:
+        return title
+    return f"{title} · {position_filter.label}"
+
+
+def _paths(
+    spec: DomainSpec,
+    *,
+    position_filter: PositionFilter | None = None,
+    peer_axis: PeerAxis | None = None,
+) -> dict[str, Path]:
     root = SANDBOX_ROOT / spec.sandbox
+    if position_filter is not None:
+        root = root / position_filter.slug
+    if peer_axis is not None and peer_axis.path_suffix:
+        root = root / peer_axis.path_suffix
     return {
         "root": root,
         "bdp": root / "basic_data_plots",
@@ -325,7 +444,7 @@ def _finalize_cohort(work: pd.DataFrame, spec: DomainSpec) -> pd.DataFrame:
     return work
 
 
-def load_cohort(spec: DomainSpec, *, for_loo_pool: bool = False) -> pd.DataFrame:
+def _load_eligible_frame(spec: DomainSpec) -> pd.DataFrame:
     df = pd.read_csv(spec.csv, low_memory=False)
     if spec.key == "legends":
         m = (
@@ -337,35 +456,65 @@ def load_cohort(spec: DomainSpec, *, for_loo_pool: bool = False) -> pd.DataFrame
         )
     else:
         m = df["eligible_analysis_cohort"] == 1
-    work = df.loc[m].copy()
+    return df.loc[m].copy()
+
+
+def _attach_position_loo(
+    work: pd.DataFrame,
+    spec: DomainSpec,
+    position_filter: PositionFilter,
+) -> pd.DataFrame:
+    pool = position_filter.apply(_load_eligible_frame(spec))
+    work = work.copy()
+    work[spec.loo_col] = compute_team_loo(pool, spec.ai_col, spec.team_keys).reindex(work.index)
+    return work
+
+
+def load_cohort(
+    spec: DomainSpec,
+    *,
+    for_loo_pool: bool = False,
+    position_filter: PositionFilter | None = None,
+) -> pd.DataFrame:
+    work = _load_eligible_frame(spec)
+    if position_filter is not None:
+        work = position_filter.apply(work)
     if for_loo_pool:
         return work
     if spec.panel_rows == PANEL_ROWS_LAST:
         work, _audit = _restrict_to_last_ps(work, spec)
+    if position_filter is not None:
+        work = _attach_position_loo(work, spec, position_filter)
     return _finalize_cohort(work, spec)
 
 
-def load_cohort_with_audit(spec: DomainSpec) -> tuple[pd.DataFrame, dict[str, Any] | None]:
+def load_cohort_with_audit(
+    spec: DomainSpec,
+    *,
+    position_filter: PositionFilter | None = None,
+) -> tuple[pd.DataFrame, dict[str, Any] | None]:
     """Load analysis panel; return last-ps audit metadata when applicable."""
-    df = pd.read_csv(spec.csv, low_memory=False)
-    if spec.key == "legends":
-        m = (
-            (df["league_tier"] == "developmental")
-            & df["eligible_developmental_cohort"]
-            & ~df["prior_top_tier_before_period"]
-            & df["full_2y_followup"]
-            & df["performance_components_available"]
-        )
-    else:
-        m = df["eligible_analysis_cohort"] == 1
-    work = df.loc[m].copy()
+    work = _load_eligible_frame(spec)
+    if position_filter is not None:
+        work = position_filter.apply(work)
     audit: dict[str, Any] | None = None
     if spec.panel_rows == PANEL_ROWS_LAST:
         work, audit = _restrict_to_last_ps(work, spec)
+        if audit is not None and position_filter is not None:
+            audit = dict(audit)
+            audit["position_groups"] = list(position_filter.groups)
+    if position_filter is not None:
+        work = _attach_position_loo(work, spec, position_filter)
     return _finalize_cohort(work, spec), audit
 
 
-def run_ai_tj(work: pd.DataFrame, spec: DomainSpec, paths: dict[str, Path]) -> Path:
+def run_ai_tj(
+    work: pd.DataFrame,
+    spec: DomainSpec,
+    paths: dict[str, Path],
+    *,
+    position_filter: PositionFilter | None = None,
+) -> Path:
     configure_matplotlib_mathtext()
     ai = work[spec.ai_col].to_numpy(dtype=float)
     tj = work["team_mean_ai"].to_numpy(dtype=float)
@@ -383,7 +532,7 @@ def run_ai_tj(work: pd.DataFrame, spec: DomainSpec, paths: dict[str, Path]) -> P
         ax.set_ylabel("Rows", fontsize=9)
         ax.set_title(title, fontsize=10)
         ax.grid(axis="y", alpha=0.25)
-    fig.suptitle(f"{spec.prefix} — own Â vs team T̂_j", fontsize=11, fontweight="bold")
+    fig.suptitle(_with_positions(f"{spec.prefix} — own Â vs team T̂_j", position_filter), fontsize=11, fontweight="bold")
     fig.text(0.5, 0.02, spec.grain, ha="center", fontsize=8, color="0.35")
     out = paths["bdp"] / f"{spec.prefix}_BDP_Ai_Tj.png"
     fig.savefig(out, dpi=PLOT_DPI, bbox_inches="tight")
@@ -393,7 +542,13 @@ def run_ai_tj(work: pd.DataFrame, spec: DomainSpec, paths: dict[str, Path]) -> P
     return out
 
 
-def run_loo_hist_ecdf(work: pd.DataFrame, spec: DomainSpec, paths: dict[str, Path]) -> Path:
+def run_loo_hist_ecdf(
+    work: pd.DataFrame,
+    spec: DomainSpec,
+    paths: dict[str, Path],
+    *,
+    position_filter: PositionFilter | None = None,
+) -> Path:
     configure_matplotlib_mathtext()
     loo = work[spec.loo_col].to_numpy(dtype=float)
     stats = _summary("loo", loo)
@@ -419,7 +574,11 @@ def run_loo_hist_ecdf(work: pd.DataFrame, spec: DomainSpec, paths: dict[str, Pat
     ax.set_ylabel(r"ECDF  $F(x)$")
     ax.set_title("ECDF by outcome", fontsize=10)
     ax.legend(fontsize=6, loc="lower right")
-    fig.suptitle(f"{spec.prefix} — team LOO distribution (N={len(loo):,})", fontsize=11, fontweight="bold")
+    fig.suptitle(
+        _with_positions(f"{spec.prefix} — team LOO distribution (N={len(loo):,})", position_filter),
+        fontsize=11,
+        fontweight="bold",
+    )
     out = paths["bdp"] / f"{spec.prefix}_team_loo_distribution.png"
     fig.savefig(out, dpi=PLOT_DPI, bbox_inches="tight")
     plt.close(fig)
@@ -427,7 +586,13 @@ def run_loo_hist_ecdf(work: pd.DataFrame, spec: DomainSpec, paths: dict[str, Pat
     return out
 
 
-def run_mass_ecdf(work: pd.DataFrame, spec: DomainSpec, paths: dict[str, Path]) -> Path:
+def run_mass_ecdf(
+    work: pd.DataFrame,
+    spec: DomainSpec,
+    paths: dict[str, Path],
+    *,
+    position_filter: PositionFilter | None = None,
+) -> Path:
     configure_matplotlib_mathtext()
     ai = np.sort(work[spec.ai_col].to_numpy(dtype=float))
     pos = work.loc[work["outcome"], spec.ai_col].to_numpy(dtype=float)
@@ -437,7 +602,11 @@ def run_mass_ecdf(work: pd.DataFrame, spec: DomainSpec, paths: dict[str, Path]) 
     ax.axhline(0.5, color="0.82", linestyle=":", linewidth=0.9)
     ax.set_xlabel(r"Own $\hat{A}$ — performance index", fontsize=10)
     ax.set_ylabel(r"ECDF  $F(x)$")
-    ax.set_title(f"{spec.prefix} — outcome mass vs own ability", fontsize=11, fontweight="bold")
+    ax.set_title(
+        _with_positions(f"{spec.prefix} — outcome mass vs own ability", position_filter),
+        fontsize=11,
+        fontweight="bold",
+    )
     ax.legend(fontsize=8, loc="lower right")
     ax.grid(alpha=0.25)
     out = paths["bdp"] / f"{spec.prefix}_outcome_mass_ecdf.png"
@@ -447,23 +616,55 @@ def run_mass_ecdf(work: pd.DataFrame, spec: DomainSpec, paths: dict[str, Path]) 
     return out
 
 
-def run_overlap(work: pd.DataFrame, spec: DomainSpec, paths: dict[str, Path]) -> Path:
+def _try_compute_h_sort(work: pd.DataFrame) -> float | None:
+    try:
+        return _compute_H_sort(work)
+    except Exception as exc:
+        print(f"  H_sort skipped: {exc}")
+        return None
+
+
+def run_overlap(
+    work: pd.DataFrame,
+    spec: DomainSpec,
+    paths: dict[str, Path],
+    *,
+    position_filter: PositionFilter | None = None,
+) -> Path:
     panel = work.copy()
     panel["team_id"] = panel["pool_id"]
     panel["season"] = panel[spec.season_key]
-    z = panel.groupby(spec.season_key, observed=True)[spec.ai_col].transform(
+    z_keys = [spec.season_key]
+    if position_filter is not None and "position_group" in panel.columns:
+        z_keys = ["position_group", spec.season_key]
+    panel["perf"] = panel.groupby(z_keys, observed=True)[spec.ai_col].transform(
         lambda s: (s - s.mean()) / (s.std() if s.std() > 1e-9 else 1.0)
     )
-    panel["perf"] = z
     iv, w = _team_intervals(panel)
     y0, y1 = int(panel[spec.season_key].min()), int(panel[spec.season_key].max())
     out = paths["bdp"] / f"{spec.prefix}_team_interval_overlap.png"
-    build_figure(
+    out_csv = out.with_name(out.stem + "_team_season.csv")
+    iv.to_csv(out_csv, index=False)
+
+    h_sort = _try_compute_h_sort(w)
+    base_title = _with_positions(f"{spec.prefix} — team interval overlap ({y0}-{y1})", position_filter)
+    h_line = (
+        f"\nRealized sorting $H_{{sort}}={h_sort:.3f}$ on this partition"
+        if h_sort is not None and np.isfinite(h_sort)
+        else ""
+    )
+    perf_note = (
+        f"{spec.ai_col} z within position × season"
+        if position_filter is not None
+        else f"{spec.ai_col} z within season"
+    )
+    stats = build_figure(
         iv,
         w,
         png_path=out,
         seasons=f"{y0}-{y1}",
-        suptitle=f"{spec.prefix} — team interval overlap ({y0}-{y1})",
+        h_sort=h_sort,
+        suptitle=base_title + h_line,
         xlab=spec.overlap_xlab,
         labels={
             "coverage_ylabel": "Team stints covering this level",
@@ -472,11 +673,32 @@ def run_overlap(work: pd.DataFrame, spec: DomainSpec, paths: dict[str, Path]) ->
         },
         grain_badge=spec.grain[:48],
     )
+    _write_meta(
+        out.with_name(out.stem + "_meta.json"),
+        {
+            "diagnostic": "team_interval_overlap",
+            "date": date.today().isoformat(),
+            "domain": spec.key,
+            "perf": perf_note,
+            "seasons": f"{y0}-{y1}",
+            "position_groups": list(position_filter.groups) if position_filter else None,
+            **stats,
+            "outputs": {"png": out.name, "team_csv": out_csv.name},
+        },
+    )
     print(f"Wrote {out.relative_to(REPO)}")
+    if h_sort is not None and np.isfinite(h_sort):
+        print(f"  H_sort={h_sort:.3f}")
     return out
 
 
-def run_pool_size(work: pd.DataFrame, spec: DomainSpec, paths: dict[str, Path]) -> Path:
+def run_pool_size(
+    work: pd.DataFrame,
+    spec: DomainSpec,
+    paths: dict[str, Path],
+    *,
+    position_filter: PositionFilter | None = None,
+) -> Path:
     configure_matplotlib_mathtext()
     vals = pd.to_numeric(work[spec.pool_col], errors="coerce").dropna().to_numpy(dtype=float)
     stats = _summary("pool", vals)
@@ -484,7 +706,11 @@ def run_pool_size(work: pd.DataFrame, spec: DomainSpec, paths: dict[str, Path]) 
     ax.hist(vals, bins=30, color="steelblue", edgecolor="white", alpha=0.85)
     ax.set_xlabel("Team roster size on stint", fontsize=10)
     ax.set_ylabel("Rows", fontsize=10)
-    ax.set_title(f"{spec.prefix} — pool size |T_j| (N={len(vals):,})", fontsize=11, fontweight="bold")
+    ax.set_title(
+        _with_positions(f"{spec.prefix} — pool size |T_j| (N={len(vals):,})", position_filter),
+        fontsize=11,
+        fontweight="bold",
+    )
     ax.text(0.98, 0.98, f"median={stats['median']:.0f}", transform=ax.transAxes, ha="right", va="top", fontsize=9,
             bbox=dict(boxstyle="round", facecolor="white", alpha=0.85))
     out = paths["bdp"] / f"{spec.prefix}_pool_size.png"
@@ -544,10 +770,16 @@ def metric_loo_column(
     metric_col: str,
     *,
     loo_pool: pd.DataFrame | None = None,
+    recompute_loo: bool = False,
 ) -> str:
     """Return temp column name with teammate LOO for ``metric_col``."""
     loo_col = f"_loo_{metric_col}"
-    if metric_col == spec.ai_col and spec.loo_col in work.columns:
+    use_precomputed = (
+        not recompute_loo
+        and metric_col == spec.ai_col
+        and spec.loo_col in work.columns
+    )
+    if use_precomputed:
         work[loo_col] = pd.to_numeric(work[spec.loo_col], errors="coerce")
     else:
         pool = loo_pool if loo_pool is not None else work
@@ -556,8 +788,17 @@ def metric_loo_column(
     return loo_col
 
 
-def _bin_table(work: pd.DataFrame, spec: DomainSpec, *, n_bins: int = 16) -> pd.DataFrame:
-    return _bin_table_on(work, spec, spec.loo_col, n_bins=n_bins)
+def _bin_table(
+    work: pd.DataFrame,
+    spec: DomainSpec,
+    *,
+    n_bins: int = 16,
+    peer_axis: PeerAxis | None = None,
+    x_col: str | None = None,
+) -> pd.DataFrame:
+    axis = peer_axis or PeerAxis()
+    col = x_col or axis.x_col(spec)
+    return _bin_table_on(work, spec, col, n_bins=n_bins)
 
 
 def run_hero_porch(
@@ -572,16 +813,21 @@ def run_hero_porch(
     slug: str | None = None,
     out_dir: Path | None = None,
     figsize: tuple[float, float] = (7.5, 4.5),
+    position_filter: PositionFilter | None = None,
+    peer_axis: PeerAxis | None = None,
 ) -> Path:
     configure_matplotlib_mathtext()
-    x_col = x_col or spec.loo_col
+    axis = peer_axis or PeerAxis()
+    x_col = x_col or axis.x_col(spec)
     is_ew = str(binning).strip().lower() == "equal_width"
     bin_tag = f"EW{n_bins}" if is_ew else f"Q{n_bins}"
     is_loo_x = x_col == spec.loo_col or str(x_col).startswith("_loo_")
     x_label = x_label or (
-        f"Teammate LOO ({bin_tag})" if is_loo_x else f"{bin_tag} bins"
+        axis.x_label(bin_tag=bin_tag)
+        if x_col == axis.x_col(spec)
+        else (f"Teammate LOO ({bin_tag})" if is_loo_x else f"{bin_tag} bins")
     )
-    slug = slug or (f"{'ew' if is_ew else 'q'}{n_bins}_team_loo")
+    slug = slug or (f"{'ew' if is_ew else 'q'}{n_bins}_{axis.slug_part()}")
     table = _bin_table_on(work, spec, x_col, n_bins=n_bins, binning=binning)
     fig, ax = plt.subplots(figsize=figsize)
     x = table["bin"].to_numpy(dtype=float)
@@ -596,7 +842,11 @@ def run_hero_porch(
     ax.set_xlabel(x_label, fontsize=10)
     ax.set_ylabel(f"P({spec.y_pos_label})", fontsize=10)
     title_x = slug.replace("_", " ").replace("perf ", "")
-    ax.set_title(f"{spec.prefix} HERO — {title_x} ({bin_tag})", fontsize=10, fontweight="bold")
+    ax.set_title(
+        _with_positions(f"{spec.prefix} HERO — {title_x} ({bin_tag})", position_filter),
+        fontsize=10,
+        fontweight="bold",
+    )
     ymax = float(np.max(y)) if len(y) else 0.05
     ax.set_ylim(0, min(1.0, max(0.05, ymax * 1.22)))
     ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda v, _: f"{v:.0%}"))
@@ -658,6 +908,7 @@ def run_perf_metric_story(
     panel_audit: dict[str, Any] | None = None,
     show_footer: bool = True,
     page_size: str = "screen",
+    position_filter: PositionFilter | None = None,
 ) -> Path:
     """Q16 + EW16 HERO porch per metric: P(Y) vs teammate LOO on that metric."""
     metrics = DOMAIN_PERF_METRICS.get(spec.key)
@@ -675,9 +926,16 @@ def run_perf_metric_story(
     panel_dir.mkdir(parents=True, exist_ok=True)
     rows: list[dict[str, Any]] = []
     compact = (6.4, 3.6)
+    recompute_loo = position_filter is not None
 
     for col, short, label in metrics:
-        loo_col = metric_loo_column(work, spec, col, loo_pool=loo_pool)
+        loo_col = metric_loo_column(
+            work,
+            spec,
+            col,
+            loo_pool=loo_pool,
+            recompute_loo=recompute_loo,
+        )
         sub = work.dropna(subset=[loo_col, spec.y_col]).copy()
         if sub.empty:
             print(f"Skip perf metric {col}: no LOO rows")
@@ -704,18 +962,23 @@ def run_perf_metric_story(
                 binning=mode,
                 out_dir=panel_dir,
                 figsize=compact,
+                position_filter=position_filter,
             )
             metric_rows[f"{tag}_png"] = str(out.relative_to(REPO))
         rows.append(metric_rows)
 
     out_png = paths["story"] / f"{spec.prefix}_PERF_METRIC_STORY.png"
-    manifest_path = paths["story"] / f"{spec.key}_perf_metric_story_manifest.json"
+    manifest_name = f"{spec.key}_perf_metric_story_manifest.json"
+    if position_filter is not None:
+        manifest_name = f"{spec.key}_perf_metric_story_{position_filter.slug}_manifest.json"
+    manifest_path = paths["story"] / manifest_name
     rows_per_page = LEGENDS_PERF_ROWS_PER_PAGE if spec.key == "legends" else None
+    perf_title = _with_positions(PERF_STORY_TITLES[spec.key], position_filter)
     built_pages = build_perf_metric_story_pages(
         rows,
         paths["story"],
         f"{spec.prefix}_PERF_METRIC_STORY",
-        suptitle=PERF_STORY_TITLES[spec.key],
+        suptitle=perf_title,
         repo=REPO,
         show_footer=show_footer,
         page_size=page_size,
@@ -727,8 +990,9 @@ def run_perf_metric_story(
             {
                 "domain": spec.key,
                 "deck": "perf_metric_story",
-                "title": PERF_STORY_TITLES[spec.key],
+                "title": perf_title,
                 "panel_rows": spec.panel_rows,
+                "position_groups": list(position_filter.groups) if position_filter else None,
                 "panel_audit": panel_audit,
                 "show_footer": show_footer,
                 "page_size": page_size,
@@ -764,12 +1028,20 @@ def _wilson(successes: int, n: int) -> tuple[float, float]:
     return max(0, center - margin), min(1, center + margin)
 
 
-def run_cct_probe(work: pd.DataFrame, spec: DomainSpec, paths: dict[str, Path]) -> Path:
+def run_cct_probe(
+    work: pd.DataFrame,
+    spec: DomainSpec,
+    paths: dict[str, Path],
+    *,
+    position_filter: PositionFilter | None = None,
+    peer_axis: PeerAxis | None = None,
+) -> Path:
     configure_matplotlib_mathtext()
+    axis = peer_axis or PeerAxis()
     z = (work[spec.ai_col] - work[spec.ai_col].mean()) / work[spec.ai_col].std()
     band = work.loc[(z >= 1.0) & (z <= 2.0)].copy()
     n_bins = 8
-    table = _bin_table(band, spec, n_bins=n_bins)
+    table = _bin_table(band, spec, n_bins=n_bins, peer_axis=axis)
     fig, ax = plt.subplots(figsize=(8, 4.8))
     x = np.arange(len(table))
     rates = table["y_rate"].to_numpy(dtype=float)
@@ -783,46 +1055,81 @@ def run_cct_probe(work: pd.DataFrame, spec: DomainSpec, paths: dict[str, Path]) 
     ax.errorbar(x, rates, yerr=yerr, fmt="o-", color="#2ecc71", capsize=3)
     ax.set_xticks(x)
     ax.set_ylabel(f"P({spec.y_pos_label})")
-    ax.set_xlabel(f"LOO bins (Â z∈[1,2], n={len(band)}, Q{n_bins})")
-    ax.set_title(f"{spec.prefix} CCT probe — fixed Â band", fontsize=10, fontweight="bold")
+    peer_label = r"$\hat{T}_j$" if axis.use_team_mean else "LOO"
+    ax.set_xlabel(f"{peer_label} bins (Â z∈[1,2], n={len(band)}, Q{n_bins})")
+    ax.set_title(
+        _with_positions(f"{spec.prefix} CCT probe — fixed Â band", position_filter),
+        fontsize=10,
+        fontweight="bold",
+    )
     ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda v, _: f"{v:.0%}"))
-    out = paths["act2"] / f"CCT_{spec.key}_ai_z1_2_q{n_bins}.png"
+    suffix = "_tj" if axis.use_team_mean else ""
+    out = paths["act2"] / f"CCT_{spec.key}_ai_z1_2_q{n_bins}{suffix}.png"
     fig.savefig(out, dpi=PLOT_DPI, bbox_inches="tight")
     plt.close(fig)
     print(f"Wrote {out.relative_to(REPO)}")
     return out
 
 
-def run_elite_probe(work: pd.DataFrame, spec: DomainSpec, paths: dict[str, Path]) -> Path:
+def run_elite_probe(
+    work: pd.DataFrame,
+    spec: DomainSpec,
+    paths: dict[str, Path],
+    *,
+    position_filter: PositionFilter | None = None,
+    peer_axis: PeerAxis | None = None,
+) -> Path:
     configure_matplotlib_mathtext()
+    axis = peer_axis or PeerAxis()
     cut = work[spec.ai_col].quantile(0.8)
     elite = work.loc[work[spec.ai_col] >= cut].copy()
     n_bins = 5
-    table = _bin_table(elite, spec, n_bins=n_bins)
+    table = _bin_table(elite, spec, n_bins=n_bins, peer_axis=axis)
     fig, ax = plt.subplots(figsize=(8, 4.8))
     x = np.arange(len(table))
     rates = table["y_rate"].to_numpy(dtype=float)
     ax.plot(x, rates, "o-", color="#e67e22", linewidth=2)
     ax.set_xticks(x)
     ax.set_ylabel(f"P({spec.y_pos_label})")
-    ax.set_xlabel(f"LOO bins (top 20% Â, n={len(elite)}, {n_bins} bins)")
-    ax.set_title(f"{spec.prefix} elite pond LOO probe", fontsize=10, fontweight="bold")
+    peer_label = r"$\hat{T}_j$" if axis.use_team_mean else "LOO"
+    ax.set_xlabel(f"{peer_label} bins (top 20% Â, n={len(elite)}, {n_bins} bins)")
+    title_peer = "T̂_j" if axis.use_team_mean else "LOO"
+    ax.set_title(
+        _with_positions(f"{spec.prefix} elite pond {title_peer} probe", position_filter),
+        fontsize=10,
+        fontweight="bold",
+    )
     ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda v, _: f"{v:.0%}"))
-    out = paths["act2"] / f"ELITE_{spec.key}_top20_loo_pw{n_bins}.png"
+    suffix = "_tj" if axis.use_team_mean else "_loo"
+    out = paths["act2"] / f"ELITE_{spec.key}_top20{suffix}_pw{n_bins}.png"
     fig.savefig(out, dpi=PLOT_DPI, bbox_inches="tight")
     plt.close(fig)
     print(f"Wrote {out.relative_to(REPO)}")
     return out
 
 
-def cohort_text_lines(work: pd.DataFrame, spec: DomainSpec) -> list[str]:
+def cohort_text_lines(
+    work: pd.DataFrame,
+    spec: DomainSpec,
+    *,
+    position_filter: PositionFilter | None = None,
+    peer_axis: PeerAxis | None = None,
+) -> list[str]:
     n = len(work)
     y_rate = work[spec.y_col].mean()
+    axis = peer_axis or PeerAxis()
     lines = list(spec.cohort_lines)
+    if position_filter is not None:
+        lines = [f"Positions: {', '.join(position_filter.groups)}", *lines]
+    peer_stat = (
+        f"With T̂_j = {work['team_mean_ai'].notna().sum():,}"
+        if axis.use_team_mean
+        else f"With LOO = {work[spec.loo_col].notna().sum():,}"
+    )
     stats = [
         f"N = {n:,}",
         f"{spec.y_pos_label} rate = {y_rate:.1%}",
-        f"With LOO = {work[spec.loo_col].notna().sum():,}",
+        peer_stat,
     ]
     # Insert stats before reigning tag block (blank line before "Reigning tag:")
     try:
@@ -833,7 +1140,8 @@ def cohort_text_lines(work: pd.DataFrame, spec: DomainSpec) -> list[str]:
     if spec.key == "legends":
         lines.extend(["Panels 7–8: scaled Act II", "(z∈[1,2] CCT · top 20% elite)"])
     else:
-        lines.extend(["Panels 7–8: scaled Act II", "(sparse Y · exploratory)"])
+        act2_peer = "T̂_j bins" if axis.use_team_mean else "LOO bins"
+        lines.extend(["Panels 7–9: scaled Act II + HERO", f"({act2_peer} · sparse Y · exploratory)"])
     return lines
 
 
@@ -844,24 +1152,39 @@ def write_manifest(
     outputs: dict[str, str],
     *,
     page_size: str = "screen",
+    position_filter: PositionFilter | None = None,
+    peer_axis: PeerAxis | None = None,
 ) -> Path:
+    axis = peer_axis or PeerAxis()
     rel = lambda p: str(Path(p).relative_to(REPO))
+    peer_note = r"T̂_j bins (team mean incl. self)" if axis.use_team_mean else "LOO bins (excl. self)"
+    hero_title = (
+        "9 · HERO (Pass A · T̂_j bins)"
+        if axis.use_team_mean
+        else "9 · HERO (Pass A · LOO bins)"
+    )
     grid = [
-        {"type": "text", "title": "1 · Cohort", "lines": cohort_text_lines(work, spec)},
+        {
+            "type": "text",
+            "title": "1 · Cohort",
+            "lines": cohort_text_lines(
+                work, spec, position_filter=position_filter, peer_axis=axis
+            ),
+        },
         {"type": "image", "title": "2 · Â_i and T̂_j", "path": rel(outputs["ai_tj"])},
         {"type": "image", "title": "3 · Team LOO distribution", "path": rel(outputs["loo"])},
         {"type": "image", "title": "4 · Outcome mass vs Â (ECDF)", "path": rel(outputs["mass"])},
         {"type": "image", "title": "5 · Team interval overlap", "path": rel(outputs["overlap"])},
         {"type": "image", "title": "6 · Team roster size |T_j|", "path": rel(outputs["pool"])},
-        {"type": "image", "title": "7 · CCT — fixed Â z∈[1,2]", "path": rel(outputs["cct"]), "note": "Scaled Act II probe"},
-        {"type": "image", "title": "8 · Elite pond — top 20% Â", "path": rel(outputs["elite"]), "note": "LOO bins within elite Â"},
-        {"type": "image", "title": "9 · HERO (Pass A · LOO bins)", "path": rel(outputs["hero"])},
+        {"type": "image", "title": "7 · CCT — fixed Â z∈[1,2]", "path": rel(outputs["cct"]), "note": peer_note},
+        {"type": "image", "title": "8 · Elite pond — top 20% Â", "path": rel(outputs["elite"]), "note": peer_note},
+        {"type": "image", "title": hero_title, "path": rel(outputs["hero"])},
     ]
     manifest = {
         "domain": spec.key,
         "deck": "big_fish_data_story",
-        "title": spec.title,
-        "subtitle": spec.subtitle,
+        "title": _with_positions(spec.title, position_filter),
+        "subtitle": _with_positions(spec.subtitle, position_filter),
         "output_png": rel(paths["story"] / f"{spec.prefix}_DATA_STORY_3x3.png"),
         "page_size": page_size,
         "footer": f"{spec.prefix} Big Fish · big_fish_data_story.py",
@@ -869,11 +1192,18 @@ def write_manifest(
         "verdict": {
             "reigning_tag": spec.reigning_tag,
             "panel_rows": spec.panel_rows,
+            "position_groups": list(position_filter.groups) if position_filter else None,
+            "peer_axis": axis.key,
             "n": len(work),
             "y_rate": float(work[spec.y_col].mean()),
         },
     }
-    out = paths["story"] / f"{spec.key}_3x3_manifest.json"
+    manifest_name = f"{spec.key}_3x3_manifest.json"
+    if position_filter is not None:
+        manifest_name = f"{spec.key}_3x3_{position_filter.slug}_manifest.json"
+    if axis.use_team_mean:
+        manifest_name = manifest_name.replace("_manifest.json", "_tj_manifest.json")
+    out = paths["story"] / manifest_name
     out.write_text(json.dumps(manifest, indent=2) + "\n")
     return out
 
@@ -898,18 +1228,40 @@ def run_mosaic(
     return REPO / spec["output_png"]
 
 
+def _manifest_path(
+    spec: DomainSpec,
+    paths: dict[str, Path],
+    position_filter: PositionFilter | None,
+    peer_axis: PeerAxis | None = None,
+) -> Path:
+    axis = peer_axis or PeerAxis()
+    name = f"{spec.key}_3x3_manifest.json"
+    if position_filter is not None:
+        name = f"{spec.key}_3x3_{position_filter.slug}_manifest.json"
+    if axis.use_team_mean:
+        name = name.replace("_manifest.json", "_tj_manifest.json")
+    return paths["story"] / name
+
+
 def run_domain(
     spec: DomainSpec,
     *,
     mode: str,
     show_footer: bool = True,
     page_size: str = "screen",
+    position_filter: PositionFilter | None = None,
+    peer_axis: PeerAxis | None = None,
 ) -> None:
-    paths = _paths(spec)
+    if position_filter is not None and spec.key != "football":
+        raise SystemExit("--positions / trailing POSITION args are football-only")
+    axis = peer_axis or PeerAxis()
+    paths = _paths(spec, position_filter=position_filter, peer_axis=axis)
     for d in paths.values():
         d.mkdir(parents=True, exist_ok=True)
+    plot_kw = {"position_filter": position_filter}
+    act2_kw = {**plot_kw, "peer_axis": axis}
     if mode == "mosaic":
-        man = paths["story"] / f"{spec.key}_3x3_manifest.json"
+        man = _manifest_path(spec, paths, position_filter, axis)
         if not man.is_file():
             raise SystemExit(f"Missing manifest: {man} — run --mode all first")
         run_mosaic(man, show_footer=show_footer, page_size=page_size)
@@ -917,11 +1269,16 @@ def run_domain(
     if mode == "perf-story":
         if spec.key not in DOMAIN_PERF_METRICS:
             raise SystemExit(f"--mode perf-story not configured for {spec.key!r}")
-        work, panel_audit = load_cohort_with_audit(spec)
-        loo_pool = load_cohort(spec, for_loo_pool=True) if spec.panel_rows == PANEL_ROWS_LAST else None
+        work, panel_audit = load_cohort_with_audit(spec, position_filter=position_filter)
+        loo_pool = (
+            load_cohort(spec, for_loo_pool=True, position_filter=position_filter)
+            if spec.panel_rows == PANEL_ROWS_LAST
+            else None
+        )
         summary = {
             "domain": spec.key,
             "panel_rows": spec.panel_rows,
+            "position_groups": list(position_filter.groups) if position_filter else None,
             "n": len(work),
             "y_rate": float(work[spec.y_col].mean()),
         }
@@ -936,12 +1293,15 @@ def run_domain(
             panel_audit=panel_audit,
             show_footer=show_footer,
             page_size=page_size,
+            position_filter=position_filter,
         )
         return
-    work, panel_audit = load_cohort_with_audit(spec)
+    work, panel_audit = load_cohort_with_audit(spec, position_filter=position_filter)
     summary = {
         "domain": spec.key,
         "panel_rows": spec.panel_rows,
+        "position_groups": list(position_filter.groups) if position_filter else None,
+        "peer_axis": axis.key,
         "n": len(work),
         "y_rate": float(work[spec.y_col].mean()),
     }
@@ -950,20 +1310,28 @@ def run_domain(
     print(json.dumps(summary, indent=2))
     outputs: dict[str, str] = {}
     if mode in ("all", "bdp"):
-        outputs["ai_tj"] = str(run_ai_tj(work, spec, paths))
-        outputs["loo"] = str(run_loo_hist_ecdf(work, spec, paths))
-        outputs["mass"] = str(run_mass_ecdf(work, spec, paths))
-        outputs["overlap"] = str(run_overlap(work, spec, paths))
-        outputs["pool"] = str(run_pool_size(work, spec, paths))
+        outputs["ai_tj"] = str(run_ai_tj(work, spec, paths, **plot_kw))
+        outputs["loo"] = str(run_loo_hist_ecdf(work, spec, paths, **plot_kw))
+        outputs["mass"] = str(run_mass_ecdf(work, spec, paths, **plot_kw))
+        outputs["overlap"] = str(run_overlap(work, spec, paths, **plot_kw))
+        outputs["pool"] = str(run_pool_size(work, spec, paths, **plot_kw))
     if mode in ("all", "hero"):
-        outputs["hero"] = str(run_hero_porch(work, spec, paths))
+        outputs["hero"] = str(run_hero_porch(work, spec, paths, **act2_kw))
         if spec.key == "legends":
             run_legends_component_heroes(work, spec, paths)
     if mode in ("all", "act2"):
-        outputs["cct"] = str(run_cct_probe(work, spec, paths))
-        outputs["elite"] = str(run_elite_probe(work, spec, paths))
+        outputs["cct"] = str(run_cct_probe(work, spec, paths, **act2_kw))
+        outputs["elite"] = str(run_elite_probe(work, spec, paths, **act2_kw))
     if mode == "all":
-        man = write_manifest(work, spec, paths, outputs, page_size=page_size)
+        man = write_manifest(
+            work,
+            spec,
+            paths,
+            outputs,
+            page_size=page_size,
+            position_filter=position_filter,
+            peer_axis=axis,
+        )
         run_mosaic(man, show_footer=show_footer, page_size=page_size)
 
 
@@ -982,12 +1350,44 @@ def main() -> None:
         default="screen",
         help="3×3 mosaic: letter-landscape (recommended handout). Perf-story maps landscape→portrait.",
     )
+    parser.add_argument(
+        "--positions",
+        nargs="+",
+        metavar="POSITION",
+        default=None,
+        help=(
+            "Football only: filter to position_group values "
+            f"({', '.join(FOOTBALL_POSITION_GROUPS)}). "
+            "LOO is recomputed among teammates in these groups."
+        ),
+    )
+    parser.add_argument(
+        "positions_tail",
+        nargs="*",
+        metavar="POSITION",
+        help="Same as --positions; may trail the command (e.g. ... --mode hero QB RB_FB).",
+    )
+    parser.add_argument(
+        "--team-mean",
+        action="store_true",
+        help=(
+            "Panels 7–9 only: bin on team T̂_j (mean index incl. self) instead of teammate LOO. "
+            "Outputs under peer_tj/ (does not overwrite LOO decks)."
+        ),
+    )
     args = parser.parse_args()
+    position_tokens = args.positions or args.positions_tail or None
+    position_filter = PositionFilter.parse(position_tokens)
+    if position_filter is not None and args.domain != "football":
+        raise SystemExit("--positions / trailing POSITION args are football-only")
+    peer_axis = PeerAxis.from_flag(args.team_mean)
     run_domain(
         DOMAINS[args.domain],
         mode=args.mode,
         show_footer=not args.no_footer,
         page_size=args.page_size,
+        position_filter=position_filter,
+        peer_axis=peer_axis,
     )
 
 

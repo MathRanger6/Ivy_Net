@@ -1,0 +1,39 @@
+{
+  "diagnostic": "team_interval_overlap",
+  "date": "2026-09-18",
+  "domain": "football",
+  "perf": "own_performance_index z within season",
+  "seasons": "2014-2024",
+  "position_groups": null,
+  "coverage_max": 1410,
+  "coverage_max_normalized": 0.986703988803359,
+  "coverage_mean": 347.87,
+  "coverage_frac_gt_1": 0.975,
+  "coverage_disjoint_max": null,
+  "coverage_disjoint_mean": null,
+  "n_team_seasons": 1429,
+  "n_player_seasons": 29403,
+  "H_sort": 0.06480951367050403,
+  "perf_span": {
+    "label": "perf_span",
+    "n": 1429,
+    "mean": 3.3028062678514525,
+    "std": 1.248518674177064,
+    "min": 0.06418389536767483,
+    "max": 10.918495421966302,
+    "median": 3.3151013384891597
+  },
+  "T_j_hat": {
+    "label": "\\hat{T}_j",
+    "n": 1429,
+    "mean": 0.012955771701568508,
+    "std": 0.31004083644895075,
+    "min": -1.21843699183579,
+    "max": 2.5823328673833568,
+    "median": -0.00911378173868225
+  },
+  "outputs": {
+    "png": "FOOTBALL_team_interval_overlap.png",
+    "team_csv": "FOOTBALL_team_interval_overlap_team_season.csv"
+  }
+}

@@ -29,6 +29,26 @@ python scripts/big_fish_data_story.py --domain football --mode perf-story
 
 → `data_story/FOOTBALL_PERF_METRIC_STORY.png` (Alex vol/eff + DIY recruit/PPA/usage z + composite)
 
+**Position filter (football only):** trailing args or `--positions`. LOO recomputed among teammates in those groups. Outputs land in `football_sandbox/pos_<GROUPS>/` (does not overwrite the full cohort deck).
+
+```bash
+python scripts/big_fish_data_story.py --domain football --mode hero QB RB_FB
+python scripts/big_fish_data_story.py --domain football --positions WR_TE DB --mode perf-story
+```
+
+Valid `position_group` values: `DB`, `WR_TE`, `DL_EDGE`, `LB`, `RB_FB`, `QB`, `K`, `P` (aliases: `WR`→`WR_TE`, `RB`→`RB_FB`, etc.).
+
+**Team mean T̂_j on panels 7–9** (instead of teammate LOO — useful when position-filtered LOO is too sparse):
+
+```bash
+python scripts/big_fish_data_story.py --domain football --mode all DB --team-mean
+python scripts/big_fish_data_story.py --domain football --mode hero DB --team-mean
+```
+
+→ `football_sandbox/pos_DB/peer_tj/` (separate from LOO outputs in `pos_DB/`).
+
+Panel **5** (team interval overlap) prints **H_sort** on the suptitle and in `FOOTBALL_team_interval_overlap_meta.json` (same recipe as MBB/tenure; needs `sports/541_grandchild_homophily_assign.py`).
+
 ## Folder layout
 
 ```

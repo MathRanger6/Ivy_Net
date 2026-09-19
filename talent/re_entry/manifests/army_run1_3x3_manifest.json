@@ -2,14 +2,14 @@
   "domain": "army",
   "deck": "run1_data_story",
   "title": "Army data story — Run 1 (forward SNR · pool minus mean LOO)",
-  "subtitle": "CPT→MAJ · last snapshot · EW8 HERO · pipeline_config_17_1  |  Read top-left → bottom-right",
+  "subtitle": "CPT→MAJ · last snapshot · EW10 z pool LOO HERO · pipeline_config_17_1  |  Read top-left → bottom-right",
   "output_png": "talent/re_entry/output/data_story/ARMY_DATA_STORY_run1_3x3.png",
   "page_size": "letter-landscape",
   "fig_width_in": 24,
   "fig_height_in": 18,
   "mosaic_dpi": 400,
   "panel_dpi": 300,
-  "footer": "Army Run 1 · ew8 pool_minus_mean LOO · compositor build_data_story_mosaic.py",
+  "footer": "Army Run 1 · EW10 z_pool_minus_mean_snr_fwd HERO · build_data_story_mosaic.py",
   "grid": [
     {
       "type": "text",
@@ -19,17 +19,18 @@
         "Grain: last snapshot per officer (Cell 11)",
         "Filters: Run 1 · pipeline_config_17_1",
         "Outcome: ever promoted vs attrition vs censored",
-        "Peer X: pool_minus_mean_snr_fwd (LOO-style)",
+        "Peer X: z_pool_minus_mean_snr_fwd (CR-aligned HERO)",
         "Metric: tb_ratio_fwd_snr (own TB · Â)",
         "",
         "N = (run army_basic_plots.py to refresh)",
         "Promoted / attrition / censored = — / — / —",
         "Median pool size = —",
         "",
-        "Panels 7–8: Act II probes (TBD)",
+        "Panels 7–8: scaled Act II probes",
+        "(CCT z∈[1,2] Q8 · elite top20% PW3+5)",
         "",
         "Reigning tag:",
-        "ew8_pool_minus_mean_run1"
+        "ew10_z_pool_minus_mean_snr_fwd_run1"
       ]
     },
     {
@@ -48,17 +49,9 @@
       "path": "talent/re_entry/output/basic_data_plots/ARMY_BDP_promotion_mass_ecdf_run1.png"
     },
     {
-      "type": "text",
+      "type": "image",
       "title": "5 · Pool interval overlap",
-      "lines": [
-        "TBD — senior-rater pool overlap panel",
-        "",
-        "Port target:",
-        "empirical_team_interval_overlap.py",
-        "(adapt pools = snapshot × snr_uic)",
-        "",
-        "Placeholder until v0.2"
-      ]
+      "path": "talent/re_entry/output/basic_data_plots/ARMY_BDP_pool_interval_overlap_run1.png"
     },
     {
       "type": "image",
@@ -66,34 +59,27 @@
       "path": "talent/re_entry/output/basic_data_plots/ARMY_BDP_pool_size_run1.png"
     },
     {
-      "type": "text",
-      "title": "7 · CCT probe",
-      "lines": [
-        "TBD — fixed Â band · LOO bins",
-        "(scaled from MBB CCT panel 7)",
-        "",
-        "output/act2/ when implemented"
-      ]
+      "type": "image",
+      "title": "7 · CCT — fixed Â z∈[1,2] · Q8 LOO",
+      "path": "talent/re_entry/output/act2/ARMY_CCT_promotion_rate_pool_loo_run1_z1_2_q8.png",
+      "note": "Scaled from MBB z∈[2,3] · Squid vs Jackal CCT probe"
     },
     {
-      "type": "text",
-      "title": "8 · Elite pond probe",
-      "lines": [
-        "TBD — top Â slice · LOO tail",
-        "(scaled from MBB elite pond panel 8)",
-        "",
-        "output/act2/ when implemented"
-      ]
+      "type": "image",
+      "title": "8 · Elite pond — top 20% Â · PW 3+5 LOO",
+      "path": "talent/re_entry/output/act2/ARMY_ELITE_pond_loo_pw3p5_run1_top20.png",
+      "note": "Scaled from MBB top 7% · elite tail probe"
     },
     {
       "type": "image",
       "title": "9 · HERO (pool LOO · promotion rate)",
-      "path": "talent/re_entry/output/hero/ARMY_HERO_ew8_pool_minus_mean_run1.png"
+      "path": "talent/re_entry/output/hero/ARMY_HERO_ew10_z_pool_minus_mean_snr_fwd_run1.png"
     }
   ],
   "verdict": {
-    "hero_reigning": "ew8_pool_minus_mean_run1",
+    "hero_reigning": "ew10_z_pool_minus_mean_snr_fwd_run1",
     "peer_pool": "senior-rater pool minus mean (forward SNR)",
-    "panels_5_7_8": "stub text cells — implement in army_basic_plots v0.2"
+    "panels_7_8": "CCT z[1,2] Q8 · elite top20% PW3+5 — see act2 JSON sidecars",
+    "panel_5": "pool interval overlap — snapshot × snr_rater · H_sort if 541 module present"
   }
 }

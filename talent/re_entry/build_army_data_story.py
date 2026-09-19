@@ -3,9 +3,8 @@
 
 Delegates to sports/scripts/build_data_story_mosaic.py.
 
-Run (repo root):
-  python talent/re_entry/build_army_data_story.py
-  python talent/re_entry/build_army_data_story.py --manifest talent/re_entry/manifests/army_run1_3x3_manifest.json
+Run (AWS 520 root — no PYTHONPATH needed):
+  ./talent/re_entry/build_army_data_story.py
 """
 
 from __future__ import annotations
@@ -16,15 +15,16 @@ import subprocess
 import sys
 from pathlib import Path
 
-_RE_ENTRY = Path(__file__).resolve().parent
-REPO = _RE_ENTRY.parents[2]
-MOSAIC_SCRIPT = REPO / "sports" / "scripts" / "build_data_story_mosaic.py"
-DEFAULT_MANIFEST = _RE_ENTRY / "manifests" / "army_run1_3x3_manifest.json"
+import army_gallery_paths  # noqa: F401 — bootstraps sys.path
+
+from army_gallery_paths import ARMY_RE_ENTRY, MANIFEST_RUN1, resolve_repo  # noqa: E402
+
+DEFAULT_MANIFEST = MANIFEST_RUN1
 
 
 def _refresh_cohort_text(manifest_path: Path) -> None:
     """If BDP manifest.json exists, patch panel-1 N counts in 3×3 manifest."""
-    bdp_manifest = _RE_ENTRY / "output" / "basic_data_plots" / "manifest.json"
+    bdp_manifest = ARMY_RE_ENTRY / "output" / "basic_data_plots" / "manifest.json"
     if not bdp_manifest.is_file():
         return
     cohort = json.loads(bdp_manifest.read_text(encoding="utf-8")).get("cohort", {})
@@ -35,7 +35,6 @@ def _refresh_cohort_text(manifest_path: Path) -> None:
     if not grid or grid[0].get("type") != "text":
         return
     lines = grid[0].get("lines", [])
-    # Replace placeholder lines starting with N =
     new_lines = []
     for line in lines:
         if line.startswith("N = "):
@@ -55,8 +54,9 @@ def _refresh_cohort_text(manifest_path: Path) -> None:
         else:
             new_lines.append(line)
     grid[0]["lines"] = new_lines
+    repo = resolve_repo()
     manifest_path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
-    print(f"Updated cohort text in {manifest_path.relative_to(REPO)}")
+    print(f"Updated cohort text in {manifest_path.relative_to(repo)}")
 
 
 def main() -> None:
@@ -71,18 +71,21 @@ def main() -> None:
     parser.add_argument("--skip-refresh-cohort", action="store_true")
     args = parser.parse_args()
 
+    repo = resolve_repo()
     manifest_path = args.manifest.resolve()
+    mosaic_script = repo / "sports" / "scripts" / "build_data_story_mosaic.py"
+
     if not manifest_path.is_file():
         raise SystemExit(f"Manifest not found: {manifest_path}")
-    if not MOSAIC_SCRIPT.is_file():
-        raise SystemExit(f"Compositor not found: {MOSAIC_SCRIPT}")
+    if not mosaic_script.is_file():
+        raise SystemExit(f"Compositor not found: {mosaic_script}")
 
     if not args.skip_refresh_cohort:
         _refresh_cohort_text(manifest_path)
 
     cmd = [
         sys.executable,
-        str(MOSAIC_SCRIPT),
+        str(mosaic_script),
         "--manifest",
         str(manifest_path),
         "--page-size",
@@ -91,7 +94,7 @@ def main() -> None:
     if args.no_footer:
         cmd.append("--no-footer")
     print("Running:", " ".join(cmd))
-    subprocess.run(cmd, check=True, cwd=str(REPO))
+    subprocess.run(cmd, check=True, cwd=str(repo))
 
 
 if __name__ == "__main__":

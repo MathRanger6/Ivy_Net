@@ -21,7 +21,13 @@ import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 from matplotlib.gridspec import GridSpec
 
-REPO = Path(__file__).resolve().parents[2]
+_REPO_FROM_FILE = Path(__file__).resolve().parents[2]
+_REPO_FROM_CWD = Path.cwd().resolve()
+REPO = (
+    _REPO_FROM_CWD
+    if (_REPO_FROM_CWD / "talent" / "re_entry").is_dir()
+    else _REPO_FROM_FILE
+)
 if str(REPO / "sports" / "scripts") not in sys.path:
     sys.path.insert(0, str(REPO / "sports" / "scripts"))
 

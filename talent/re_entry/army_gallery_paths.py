@@ -2,11 +2,31 @@
 
 from __future__ import annotations
 
+import sys
 from pathlib import Path
 
-# talent/re_entry/ → repo root is parents[2]
 _RE_ENTRY = Path(__file__).resolve().parent
-REPO = _RE_ENTRY.parents[2]
+_MOSAIC_REL = Path("sports/scripts/build_data_story_mosaic.py")
+
+
+def resolve_repo() -> Path:
+    """Project root containing ``talent/`` and ``sports/`` (AWS 520 cwd)."""
+    seen: set[str] = set()
+    candidates: list[Path] = []
+    for cand in (_RE_ENTRY.parents[2], Path.cwd().resolve()):
+        key = str(cand)
+        if key not in seen:
+            seen.add(key)
+            candidates.append(cand)
+    for cand in candidates:
+        if (cand / _MOSAIC_REL).is_file():
+            return cand
+    return candidates[0]
+
+
+REPO = resolve_repo()
+SPORTS_SCRIPTS = REPO / "sports" / "scripts"
+MOSAIC_SCRIPT = SPORTS_SCRIPTS / "build_data_story_mosaic.py"
 
 # Local working outputs (AWS default write target)
 ARMY_RE_ENTRY = _RE_ENTRY
@@ -30,6 +50,15 @@ PREFIX = "ARMY"
 TAG_RUN1 = "run1"
 
 
+def bootstrap_sys_path() -> Path:
+    """Ensure ``talent/re_entry`` and ``sports/scripts`` import without PYTHONPATH."""
+    repo = resolve_repo()
+    for p in (str(_RE_ENTRY), str(repo / "sports" / "scripts")):
+        if p not in sys.path:
+            sys.path.insert(0, p)
+    return repo
+
+
 def ensure_army_output_dirs() -> None:
     for d in (
         BASIC_DATA_PLOTS,
@@ -45,11 +74,11 @@ def ensure_army_output_dirs() -> None:
 
 
 def default_feather_candidates() -> list[Path]:
-    """Search order: AWS cwd (talent_pipeline) then repo-local feather."""
+    """Search order: AWS cwd big_dfs (same as load_feather default)."""
+    repo = resolve_repo()
     return [
-        Path.cwd() / "running_vars" / "df_pipeline_11_cox_analysis.feather",
-        REPO / "talent" / "talent_pipeline" / "running_vars" / "df_pipeline_11_cox_analysis.feather",
-        REPO / "talent_pipeline" / "running_vars" / "df_pipeline_11_cox_analysis.feather",
+        Path.cwd() / "big_dfs" / "df_pipeline_11_cox_analysis.feather",
+        repo / "big_dfs" / "df_pipeline_11_cox_analysis.feather",
     ]
 
 
@@ -67,3 +96,7 @@ def resolve_feather(explicit: Path | None = None) -> Path:
         "No df_pipeline_11_cox_analysis.feather found. Run 520 through Cell 11 first.\n"
         f"Tried:\n  {tried}"
     )
+
+
+# Auto-bootstrap on import so scripts run without PYTHONPATH=
+bootstrap_sys_path()

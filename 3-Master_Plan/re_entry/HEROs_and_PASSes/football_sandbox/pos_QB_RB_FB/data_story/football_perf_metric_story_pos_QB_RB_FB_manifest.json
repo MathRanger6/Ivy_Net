@@ -1,0 +1,91 @@
+{
+  "domain": "football",
+  "deck": "perf_metric_story",
+  "title": "Football (FBS) \u2014 HERO by metric \u00b7 P(drafted) vs teammate LOO \u00b7 QB \u00b7 RB_FB",
+  "panel_rows": "last-ps",
+  "position_groups": [
+    "QB",
+    "RB_FB"
+  ],
+  "panel_audit": {
+    "step": "last_season_only",
+    "n_rows_before": 11544,
+    "n_rows_after": 4825,
+    "n_athletes": 4825,
+    "n_transfer_ties": 0,
+    "panel_rows": "last-ps",
+    "athlete_id_col": "player_id",
+    "tie_break_col": "role_opportunities",
+    "position_groups": [
+      "QB",
+      "RB_FB"
+    ]
+  },
+  "show_footer": true,
+  "page_size": "screen",
+  "rows_per_page": null,
+  "n": 4825,
+  "n_players": 4825,
+  "y_rate": 0.07025906735751296,
+  "output_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/football_sandbox/pos_QB_RB_FB/data_story/FOOTBALL_PERF_METRIC_STORY.png",
+  "output_pages": [
+    "3-Master_Plan/re_entry/HEROs_and_PASSes/football_sandbox/pos_QB_RB_FB/data_story/FOOTBALL_PERF_METRIC_STORY.png"
+  ],
+  "panels_dir": "3-Master_Plan/re_entry/HEROs_and_PASSes/football_sandbox/pos_QB_RB_FB/perf_story/panels",
+  "metrics": [
+    {
+      "col": "z_performance_volume",
+      "loo_col": "_loo_z_performance_volume",
+      "short": "volume z",
+      "label": "Own $z_{\\mathrm{volume}}$ (Alex)",
+      "n": 4825,
+      "q16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/football_sandbox/pos_QB_RB_FB/perf_story/panels/HERO_football_perf_q16_loo_z_performance_volume_slide.png",
+      "ew16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/football_sandbox/pos_QB_RB_FB/perf_story/panels/HERO_football_perf_ew16_loo_z_performance_volume_slide.png"
+    },
+    {
+      "col": "z_performance_efficiency",
+      "loo_col": "_loo_z_performance_efficiency",
+      "short": "efficiency z",
+      "label": "Own $z_{\\mathrm{efficiency}}$ (Alex)",
+      "n": 4812,
+      "q16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/football_sandbox/pos_QB_RB_FB/perf_story/panels/HERO_football_perf_q16_loo_z_performance_efficiency_slide.png",
+      "ew16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/football_sandbox/pos_QB_RB_FB/perf_story/panels/HERO_football_perf_ew16_loo_z_performance_efficiency_slide.png"
+    },
+    {
+      "col": "z_diy_recruit_rating",
+      "loo_col": "_loo_z_diy_recruit_rating",
+      "short": "recruit z \u00b7 prior",
+      "label": "Recruit rating $z$ (prior \u00b7 DIY)",
+      "n": 3367,
+      "q16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/football_sandbox/pos_QB_RB_FB/perf_story/panels/HERO_football_perf_q16_loo_z_diy_recruit_rating_slide.png",
+      "ew16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/football_sandbox/pos_QB_RB_FB/perf_story/panels/HERO_football_perf_ew16_loo_z_diy_recruit_rating_slide.png"
+    },
+    {
+      "col": "z_diy_ppa_total_all",
+      "loo_col": "_loo_z_diy_ppa_total_all",
+      "short": "PPA total z",
+      "label": "PPA total $z$ (DIY \u00b7 skill pos.)",
+      "n": 4729,
+      "q16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/football_sandbox/pos_QB_RB_FB/perf_story/panels/HERO_football_perf_q16_loo_z_diy_ppa_total_all_slide.png",
+      "ew16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/football_sandbox/pos_QB_RB_FB/perf_story/panels/HERO_football_perf_ew16_loo_z_diy_ppa_total_all_slide.png"
+    },
+    {
+      "col": "z_diy_usage_overall",
+      "loo_col": "_loo_z_diy_usage_overall",
+      "short": "usage z",
+      "label": "Usage $z$ (DIY \u00b7 skill pos.)",
+      "n": 4729,
+      "q16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/football_sandbox/pos_QB_RB_FB/perf_story/panels/HERO_football_perf_q16_loo_z_diy_usage_overall_slide.png",
+      "ew16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/football_sandbox/pos_QB_RB_FB/perf_story/panels/HERO_football_perf_ew16_loo_z_diy_usage_overall_slide.png"
+    },
+    {
+      "col": "own_performance_index",
+      "loo_col": "_loo_own_performance_index",
+      "short": "\u00c2 composite",
+      "label": "Own $\\hat{A}$ composite (Alex)",
+      "n": 4825,
+      "q16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/football_sandbox/pos_QB_RB_FB/perf_story/panels/HERO_football_perf_q16_loo_own_performance_index_slide.png",
+      "ew16_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/football_sandbox/pos_QB_RB_FB/perf_story/panels/HERO_football_perf_ew16_loo_own_performance_index_slide.png"
+    }
+  ]
+}
