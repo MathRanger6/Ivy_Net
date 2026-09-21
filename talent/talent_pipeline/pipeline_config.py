@@ -109,6 +109,26 @@ POOL_RANK_METHOD = 'average'
 POOL_RANK_ASCENDING = True
 POOL_Z_EPS = 1e-9
 
+# Pool membership for Cell 5 LOO means/sizes (toggle — no code edits to revert).
+#   legacy              — snpsht_dt × snr_rater_bwd (original pipeline)
+#   rating_window       — + eval_strt_dt_bwd, eval_thru_dt_bwd on same snapshot
+#   active_at_eval_thru — peers SNR-rating at eval_thru_dt_bwd (Alex slide / OER write time)
+#   active_at_snapshot  — peers SNR-rating at snpsht_dt (panel-time variant)
+POOL_GROUPING_MODE = 'legacy'
+POOL_GROUPING_MODES = (
+    'legacy',
+    'rating_window',
+    'active_at_eval_thru',
+    'active_at_snapshot',
+)
+POOL_ANCHOR_COL = 'eval_thru_dt_bwd'       # used when mode == active_at_eval_thru
+POOL_EVAL_STRT_COL = 'eval_strt_dt_bwd'
+POOL_EVAL_THRU_COL = 'eval_thru_dt_bwd'
+
+# Sensitivity: exclude peers with tb_ratio == 0.0 from pool mean/size (not from cohort).
+# Ratee keeps own tb_ratio (including 0); LOO uses only non-zero peers.
+POOL_EXCLUDE_PEER_TB_ZERO = False
+
 # CELL 6 LOGGING CONFIGURATION
 CELL6_ENABLE_LOGGING = True          # Set False to disable file logging
 CELL6_LOG_DIR = './cell6_logs'       # Directory for log files (created automatically)
@@ -400,6 +420,8 @@ COLUMN_CONFIG = {
         # 'married',   # Marital status (can change over time)
         'snpsht_dt',  # Snapshot date (needed for time-alignment diagnostics)
         'snr_rater_bwd',  # Cell 6 SNR pool key → Cell 11 feather + BDP panel 5 (not in Cox formula)
+        'eval_strt_dt_bwd',  # Backward OER window start → active_at_eval_thru overlap grain (not in Cox)
+        'eval_thru_dt_bwd',  # Backward OER window end / SNR write anchor → Cell 5 + panel 5 overlap
         # 'job_code',  # Current job code (changes as officer is assigned to different positions)
         # 'div_name', # Division name (time-varying, uncomment if available)
     ],

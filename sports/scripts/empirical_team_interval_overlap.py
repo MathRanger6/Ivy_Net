@@ -209,22 +209,19 @@ def build_figure(
     ax.axhline(1, color="gray", ls=":", lw=1, label="No overlap (coverage = 1)")
     ax.set_xlabel(xlab, fontsize=10)
     ax.set_ylabel(lab["coverage_ylabel"], fontsize=10)
-    ax.set_title(
-        lab["overlap_title"]
-        + "\n"
-        + rf"max coverage = {cov_stats['coverage_max']:,} · "
+    coverage_caption = (
+        rf"max coverage = {cov_stats['coverage_max']:,} · "
         + lab["coverage_grid_note"].format(frac=cov_stats["coverage_frac_gt_1"])
-        + "\n"
-        + r"Blue fill = actual rosters · gray dashed = no overlap (coverage $= 1$)",
-        fontsize=10,
-        pad=8,
+        + "     "
+        + r"Blue fill = actual rosters · gray dashed = no overlap (coverage $= 1$)"
     )
+    ax.set_title(lab["overlap_title"], fontsize=11, pad=10)
 
     ax = axes[0, 1]
     ax.hist(iv["perf_span"], bins=SPAN_BINS, color=BAR_COLOR, edgecolor="white", alpha=0.85)
     ax.set_xlabel(lab["span_xlabel"], fontsize=10)
     ax.set_ylabel(lab["span_ylabel"], fontsize=10)
-    ax.set_title(lab["span_title"], fontsize=11, pad=8)
+    ax.set_title(lab["span_title"], fontsize=11, pad=12)
     span_stats = _summary("perf_span", iv["perf_span"].to_numpy(dtype=float))
     ax.text(
         0.98,
@@ -273,12 +270,24 @@ def build_figure(
             else ""
         )
     )
-    fig.suptitle(suptitle or default_title, fontsize=12, y=0.98)
+    title_text = suptitle or default_title
+    n_title_lines = title_text.count("\n") + 1
+    fig.suptitle(title_text, fontsize=12, y=0.98)
+    caption_y = 0.935 - 0.025 * max(n_title_lines - 1, 0)
+    fig.text(0.5, caption_y, coverage_caption, ha="center", va="top", fontsize=9, color="0.30")
     if grain_badge:
         _stamp_corner_badge(axes[0, 0], grain_badge, corner="upper_right")
-    fig.subplots_adjust(left=0.08, right=0.96, top=0.90, bottom=0.08, hspace=0.38, wspace=0.28)
+    # Reserve figure-level band for suptitle + caption; do not use bbox_inches='tight' (it erases this).
+    fig.subplots_adjust(
+        left=0.08,
+        right=0.96,
+        top=0.805 - 0.025 * max(n_title_lines - 1, 0),
+        bottom=0.08,
+        hspace=0.38,
+        wspace=0.28,
+    )
     png_path.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(png_path, dpi=PLOT_DPI, bbox_inches="tight")
+    fig.savefig(png_path, dpi=PLOT_DPI)
     plt.close(fig)
     print(f"Wrote {png_path}")
 

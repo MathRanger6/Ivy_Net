@@ -64,7 +64,7 @@ bash talent/re_entry/run_army_bdp_pipeline.sh
 
 - `talent/re_entry/output/basic_data_plots/ARMY_BDP_*.png`
 - `talent/re_entry/output/act2/ARMY_CCT_*.png` · `ARMY_ELITE_*.png`
-- `talent/re_entry/output/hero/ARMY_HERO_ew10_z_pool_minus_mean_snr_fwd_run1.png`
+- `talent/re_entry/output/hero/ARMY_HERO_ew8_z_pool_minus_mean_snr_fwd_run1.png`
 - `talent/re_entry/output/data_story/ARMY_DATA_STORY_run1_3x3.png`
 
 ---
@@ -85,7 +85,7 @@ Edit one line in `army_hero_slide_plot.py`:
 plot_var = "z_pool_minus_mean_snr_fwd"
 ```
 
-Defaults: **EW10**, min pool **3**, zero-OER + NaN filters, **last-event** promotion coding.
+Defaults: **EW8**, min pool **3**, zero-OER + NaN filters, **last-event** promotion coding.
 
 Porch-deck mode: `./talent/re_entry/army_hero_slide_plot.py --outcome ever_promoted --n-bins 12`
 
@@ -103,7 +103,7 @@ Porch-deck mode: `./talent/re_entry/army_hero_slide_plot.py --outcome ever_promo
 | 6 | Pool size \|T_j\| | `ARMY_BDP_pool_size_run1.png` |
 | 7 | CCT (fixed Â z∈[1,2], Q8 LOO) | `ARMY_CCT_promotion_rate_pool_loo_run1_z1_2_q8.png` |
 | 8 | Elite pond (top 20% Â, PW 3+5 LOO) | `ARMY_ELITE_pond_loo_pw3p5_run1_top20.png` |
-| 9 | HERO | `ARMY_HERO_ew10_z_pool_minus_mean_snr_fwd_run1.png` |
+| 9 | HERO | `ARMY_HERO_ew8_z_pool_minus_mean_snr_fwd_run1.png` |
 
 Compositor: `sports/scripts/build_data_story_mosaic.py` (shared with MBB/tenure).
 

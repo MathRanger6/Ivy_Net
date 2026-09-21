@@ -2,7 +2,7 @@
 """Army HERO panel (panel 9) — binned promotion rate vs pool LOO (CR CIF-bar aligned).
 
 Defaults mirror Cell 11 ``run1_cr_z_pool_minus_mean_snr_fwd``:
-  z_pool_minus_mean_snr_fwd · EW10 · min pool 3 · filter NaN/zero-OER · last-event promotion.
+  z_pool_minus_mean_snr_fwd · EW8 · min pool 3 · filter NaN/zero-OER · last-event promotion.
 
 Run (AWS 520 root — no PYTHONPATH needed):
   ./talent/re_entry/army_hero_slide_plot.py
@@ -37,11 +37,12 @@ from hero_plot_style import (  # noqa: E402
     annotate_bar_n,
     count_weighted_bar_colors,
     finalize_bar_figure,
+    set_wrapped_ax_title,
 )
 
 # --- HERO defaults (Cell 11 CR CIF-bar alignment) ---
 plot_var = "z_pool_minus_mean_snr_fwd"
-n_bins_default = 10
+n_bins_default = 8
 min_pool_size = 3
 min_group_size = 3
 filter_zero_oer = True
@@ -188,7 +189,7 @@ def build_hero_panel(
         else r"Promotion rate (ever promoted)"
     )
 
-    fig, ax = plt.subplots(figsize=(7.5, 4.5))
+    fig, ax = plt.subplots(figsize=(8.0, 4.75))
     xs = binned["bin"].to_numpy(dtype=float)
     rates = binned["promotion_rate"].to_numpy(dtype=float)
     counts = binned["n"].to_numpy(dtype=int)
@@ -198,9 +199,14 @@ def build_hero_panel(
 
     ax.set_xlabel(_hero_xlabel(x_column, n_bins=n_bins))
     ax.set_ylabel(y_label)
-    ax.set_title(
-        f"{PREFIX} HERO · EW{n_bins} · {var_label} · {GRAIN_LABEL}",
+    set_wrapped_ax_title(
+        ax,
+        [
+            f"{PREFIX} HERO · EW{n_bins} · {var_label}",
+            GRAIN_LABEL,
+        ],
         fontsize=10,
+        pad=10,
         fontweight="bold",
     )
     ax.set_ylim(0, min(1.05, float(rates.max()) * 1.15 + 0.05))
@@ -209,14 +215,14 @@ def build_hero_panel(
         f"Army Run 1 · {x_column} · n={len(work):,} (filtered) · {date.today().isoformat()}",
         f"CR-aligned · min_pool={min_pool} · min_group={min_group} · outcome={outcome}",
     ]
-    finalize_bar_figure(fig, footer)
+    finalize_bar_figure(fig, footer, top=0.86)
 
     stem = f"{PREFIX}_HERO_ew{n_bins}_{var_slug}_{tag}"
     out_png = HERO_DIR / f"{stem}.png"
     out_csv = HERO_DIR / f"{stem}.csv"
     out_meta = HERO_DIR / f"{stem}.json"
 
-    fig.savefig(out_png, dpi=PLOT_DPI, bbox_inches="tight")
+    fig.savefig(out_png, dpi=PLOT_DPI)
     plt.close(fig)
     binned.to_csv(out_csv, index=False)
     out_meta.write_text(

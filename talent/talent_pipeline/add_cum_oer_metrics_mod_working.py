@@ -300,14 +300,34 @@ def assign_oer_to_snapshots_fast(
 
     return df_tb
 
-def _add_pool_mean_size(df, group_cols, value_col, prefix, suffix, pool_min_size, exclude_self):
-    count = df.groupby(group_cols)[value_col].transform('count')
-    sum_vals = df.groupby(group_cols)[value_col].transform('sum')
-    is_self = df[value_col].notna().astype(int)
+def _peer_value_for_pool(series, exclude_peer_tb_zero):
+    """Pool aggregation values; optionally drop peers with exact tb_ratio == 0."""
+    vals = pd.to_numeric(series, errors='coerce')
+    if exclude_peer_tb_zero:
+        vals = vals.mask(vals == 0)
+    return vals
+
+
+def _add_pool_mean_size(
+    df,
+    group_cols,
+    value_col,
+    prefix,
+    suffix,
+    pool_min_size,
+    exclude_self,
+    exclude_peer_tb_zero=False,
+):
+    pool_val = _peer_value_for_pool(df[value_col], exclude_peer_tb_zero)
+    work = df.copy()
+    work['_pool_val'] = pool_val
+    count = work.groupby(group_cols, observed=True)['_pool_val'].transform('count')
+    sum_vals = work.groupby(group_cols, observed=True)['_pool_val'].transform('sum')
+    is_self = pool_val.notna().astype(int)
 
     if exclude_self:
         denom = count - is_self
-        numer = sum_vals - df[value_col].fillna(0)
+        numer = sum_vals - pool_val.fillna(0)
     else:
         denom = count
         numer = sum_vals
@@ -322,6 +342,161 @@ def _add_pool_mean_size(df, group_cols, value_col, prefix, suffix, pool_min_size
     return df
 
 
+def resolve_pool_group_cols(
+    pool_grouping_mode,
+    snapshot_date_col,
+    rater_col,
+    eval_strt_col='eval_strt_dt_bwd',
+    eval_thru_col='eval_thru_dt_bwd',
+):
+    """Return groupby columns for pool metrics, or None for active-at-anchor modes."""
+    mode = (pool_grouping_mode or 'legacy').strip().lower()
+    if mode == 'legacy':
+        return [snapshot_date_col, rater_col]
+    if mode == 'rating_window':
+        return [snapshot_date_col, rater_col, eval_strt_col, eval_thru_col]
+    if mode in ('active_at_eval_thru', 'active_at_snapshot'):
+        return None
+    raise ValueError(
+        f"Unknown pool_grouping_mode={pool_grouping_mode!r}. "
+        "Expected legacy, rating_window, active_at_eval_thru, or active_at_snapshot."
+    )
+
+
+def _add_pool_mean_size_active_at_anchor(
+    df,
+    pid_col,
+    rater_col,
+    anchor_col,
+    eval_strt_col,
+    eval_thru_col,
+    value_col,
+    prefix,
+    suffix,
+    pool_min_size,
+    exclude_self,
+    exclude_peer_tb_zero=False,
+):
+    """
+    LOO pool stats where peers = officers under the same rater whose OER window
+    covers anchor_col (e.g. eval_thru_dt_bwd = moment SNR writes the OER).
+    """
+    out = df.copy()
+    n = len(out)
+    mean_arr = np.full(n, np.nan, dtype=float)
+    size_arr = np.full(n, np.nan, dtype=float)
+
+    use_cols = []
+    for col in (pid_col, rater_col, anchor_col, eval_strt_col, eval_thru_col, value_col):
+        if col not in use_cols:
+            use_cols.append(col)
+    work = out[use_cols].copy()
+    for col in dict.fromkeys((anchor_col, eval_strt_col, eval_thru_col)):
+        work[col] = pd.to_datetime(work[col], errors='coerce')
+
+    valid_self = (
+        work[rater_col].notna()
+        & work[anchor_col].notna()
+        & work[value_col].notna()
+    )
+    peers = work.dropna(subset=[rater_col, eval_strt_col, eval_thru_col, value_col])
+    if exclude_peer_tb_zero:
+        peer_tb = pd.to_numeric(peers[value_col], errors='coerce')
+        peers = peers.loc[peer_tb != 0].copy()
+    peers = peers.drop_duplicates(
+        subset=[pid_col, rater_col, eval_strt_col, eval_thru_col],
+        keep='last',
+    )
+    work['_ix'] = np.arange(n)
+
+    left = work.loc[valid_self, ['_ix', pid_col, rater_col, anchor_col, value_col]]
+    if not left.empty and not peers.empty:
+        peer_g = peers.rename(
+            columns={
+                pid_col: '_peer_pid',
+                eval_strt_col: '_peer_strt',
+                eval_thru_col: '_peer_thru',
+                value_col: '_peer_val',
+            }
+        )
+        cross = left.merge(peer_g, on=rater_col, how='inner')
+        cross = cross[
+            (cross[anchor_col] >= cross['_peer_strt'])
+            & (cross[anchor_col] <= cross['_peer_thru'])
+        ]
+        if exclude_self:
+            cross = cross[cross[pid_col] != cross['_peer_pid']]
+        if not cross.empty:
+            agg = cross.groupby('_ix', sort=False).agg(
+                pool_sum=('_peer_val', 'sum'),
+                pool_cnt=('_peer_val', 'count'),
+            )
+            ok = agg['pool_cnt'] >= pool_min_size
+            ix_ok = agg.index[ok].to_numpy(dtype=int, copy=False)
+            cnt_ok = agg.loc[ok, 'pool_cnt'].to_numpy(dtype=float)
+            mean_arr[ix_ok] = agg.loc[ok, 'pool_sum'].to_numpy() / cnt_ok
+            size_arr[ix_ok] = cnt_ok
+
+    out[f'pool_size_{prefix}_{suffix}'] = size_arr
+    out[f'pool_tb_ratio_mean_{prefix}_{suffix}'] = mean_arr
+    out[f'pool_minus_mean_{prefix}_{suffix}'] = out[value_col] - mean_arr
+    return out
+
+
+def _add_pool_mean_size_for_rater(
+    df,
+    pool_grouping_mode,
+    snapshot_date_col,
+    pid_col,
+    rater_col,
+    eval_strt_col,
+    eval_thru_col,
+    pool_anchor_col,
+    value_col,
+    prefix,
+    suffix,
+    pool_min_size,
+    exclude_self,
+    exclude_peer_tb_zero=False,
+):
+    group_cols = resolve_pool_group_cols(
+        pool_grouping_mode,
+        snapshot_date_col,
+        rater_col,
+        eval_strt_col=eval_strt_col,
+        eval_thru_col=eval_thru_col,
+    )
+    mode = (pool_grouping_mode or 'legacy').strip().lower()
+    if group_cols is not None:
+        return _add_pool_mean_size(
+            df=df,
+            group_cols=group_cols,
+            value_col=value_col,
+            prefix=prefix,
+            suffix=suffix,
+            pool_min_size=pool_min_size,
+            exclude_self=exclude_self,
+            exclude_peer_tb_zero=exclude_peer_tb_zero,
+        )
+    anchor_col = (
+        snapshot_date_col if mode == 'active_at_snapshot' else pool_anchor_col
+    )
+    return _add_pool_mean_size_active_at_anchor(
+        df=df,
+        pid_col=pid_col,
+        rater_col=rater_col,
+        anchor_col=anchor_col,
+        eval_strt_col=eval_strt_col,
+        eval_thru_col=eval_thru_col,
+        value_col=value_col,
+        prefix=prefix,
+        suffix=suffix,
+        pool_min_size=pool_min_size,
+        exclude_self=exclude_self,
+        exclude_peer_tb_zero=exclude_peer_tb_zero,
+    )
+
+
 def add_pool_means_and_sizes(
     df_in,
     snapshot_date_col,
@@ -333,43 +508,67 @@ def add_pool_means_and_sizes(
     ratio_snr_bwd_col,
     pool_min_size=3,
     exclude_self=True,
+    pool_grouping_mode='legacy',
+    pid_col='pid_pde',
+    eval_strt_col='eval_strt_dt_bwd',
+    eval_thru_col='eval_thru_dt_bwd',
+    pool_anchor_col='eval_thru_dt_bwd',
+    exclude_peer_tb_zero=None,
 ):
+    if exclude_peer_tb_zero is None:
+        try:
+            from pipeline_config import POOL_EXCLUDE_PEER_TB_ZERO  # noqa: WPS433
+
+            exclude_peer_tb_zero = bool(POOL_EXCLUDE_PEER_TB_ZERO)
+        except Exception:
+            exclude_peer_tb_zero = False
+    mode = (pool_grouping_mode or 'legacy').strip().lower()
+    print(f"   • add_pool_means_and_sizes: POOL_GROUPING_MODE={mode}")
+    if exclude_peer_tb_zero:
+        print("   • add_pool_means_and_sizes: POOL_EXCLUDE_PEER_TB_ZERO=True (peers with tb_ratio==0 dropped from pools)")
     df = df_in.copy()
-    df = _add_pool_mean_size(
+    pool_kw = dict(
+        pool_grouping_mode=mode,
+        snapshot_date_col=snapshot_date_col,
+        pid_col=pid_col,
+        eval_strt_col=eval_strt_col,
+        eval_thru_col=eval_thru_col,
+        pool_anchor_col=pool_anchor_col,
+        pool_min_size=pool_min_size,
+        exclude_self=exclude_self,
+        exclude_peer_tb_zero=exclude_peer_tb_zero,
+    )
+    df = _add_pool_mean_size_for_rater(
         df=df,
-        group_cols=[snapshot_date_col, rtr_col],
+        rater_col=rtr_col,
         value_col=ratio_rtr_fwd_col,
         prefix='rtr',
         suffix='fwd',
-        pool_min_size=pool_min_size,
-        exclude_self=exclude_self,
+        **pool_kw,
     )
-    df = _add_pool_mean_size(
+    df = _add_pool_mean_size_for_rater(
         df=df,
-        group_cols=[snapshot_date_col, snr_col],
+        rater_col=snr_col,
         value_col=ratio_snr_fwd_col,
         prefix='snr',
         suffix='fwd',
-        pool_min_size=pool_min_size,
-        exclude_self=exclude_self,
+        **pool_kw,
     )
-    df = _add_pool_mean_size(
-            df=df,
-        group_cols=[snapshot_date_col, rtr_col],
+    df = _add_pool_mean_size_for_rater(
+        df=df,
+        rater_col=rtr_col,
         value_col=ratio_rtr_bwd_col,
         prefix='rtr',
         suffix='bwd',
-        pool_min_size=pool_min_size,
-        exclude_self=exclude_self,
+        **pool_kw,
     )
-    df = _add_pool_mean_size(
-            df=df,
-        group_cols=[snapshot_date_col, snr_col],
+    df = _add_pool_mean_size_for_rater(
+        df=df,
+        rater_col=snr_col,
         value_col=ratio_snr_bwd_col,
         prefix='snr',
         suffix='bwd',
-        pool_min_size=pool_min_size,
-        exclude_self=exclude_self,
+        **pool_kw,
     )
     return df
 
@@ -404,11 +603,26 @@ def add_pool_ranks_pct_zscores(
     rank_method='average',
     rank_ascending=False,
     z_eps=1e-9,
+    pool_grouping_mode='legacy',
+    eval_strt_col='eval_strt_dt_bwd',
+    eval_thru_col='eval_thru_dt_bwd',
 ):
+    mode = (pool_grouping_mode or 'legacy').strip().lower()
+    if mode in ('active_at_eval_thru', 'active_at_snapshot'):
+        raise NotImplementedError(
+            f"add_pool_ranks_pct_zscores does not support POOL_GROUPING_MODE={mode!r}. "
+            "Set CELL6_POOL_RANKS=False or use legacy/rating_window."
+        )
+    rtr_group = resolve_pool_group_cols(
+        mode, snapshot_date_col, rtr_col, eval_strt_col, eval_thru_col
+    )
+    snr_group = resolve_pool_group_cols(
+        mode, snapshot_date_col, snr_col, eval_strt_col, eval_thru_col
+    )
     df = df_in.copy()
     df = _add_pool_ranks(
         df=df,
-        group_cols=[snapshot_date_col, rtr_col],
+        group_cols=rtr_group,
         value_col=ratio_rtr_fwd_col,
         prefix='rtr',
         suffix='fwd',
@@ -419,7 +633,7 @@ def add_pool_ranks_pct_zscores(
     )
     df = _add_pool_ranks(
         df=df,
-        group_cols=[snapshot_date_col, snr_col],
+        group_cols=snr_group,
         value_col=ratio_snr_fwd_col,
         prefix='snr',
         suffix='fwd',
@@ -430,7 +644,7 @@ def add_pool_ranks_pct_zscores(
     )
     df = _add_pool_ranks(
         df=df,
-        group_cols=[snapshot_date_col, rtr_col],
+        group_cols=rtr_group,
         value_col=ratio_rtr_bwd_col,
         prefix='rtr',
         suffix='bwd',
@@ -441,7 +655,7 @@ def add_pool_ranks_pct_zscores(
     )
     df = _add_pool_ranks(
         df=df,
-        group_cols=[snapshot_date_col, snr_col],
+        group_cols=snr_group,
         value_col=ratio_snr_bwd_col,
         prefix='snr',
         suffix='bwd',

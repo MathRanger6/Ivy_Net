@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 from datetime import date
 from pathlib import Path
 from typing import Any
@@ -106,8 +107,226 @@ def _resolve_snr_col(panel: pd.DataFrame) -> str:
     )
 
 
+def _load_pool_grouping_config() -> tuple[str, str, str, str, bool]:
+    """Read Cell 5 pool toggles from pipeline_config (520 root on AWS)."""
+    for root in (str(Path.cwd().resolve()), str(REPO)):
+        if root not in sys.path:
+            sys.path.insert(0, root)
+        try:
+            from pipeline_config import (  # noqa: WPS433
+                POOL_ANCHOR_COL,
+                POOL_EVAL_STRT_COL,
+                POOL_EVAL_THRU_COL,
+                POOL_EXCLUDE_PEER_TB_ZERO,
+                POOL_GROUPING_MODE,
+            )
+
+            return (
+                str(POOL_GROUPING_MODE).strip().lower(),
+                POOL_EVAL_STRT_COL,
+                POOL_EVAL_THRU_COL,
+                POOL_ANCHOR_COL,
+                bool(POOL_EXCLUDE_PEER_TB_ZERO),
+            )
+        except Exception:
+            continue
+    return ("legacy", "eval_strt_dt_bwd", "eval_thru_dt_bwd", "eval_thru_dt_bwd", False)
+
+
+def _pool_members_for_overlap(work: pd.DataFrame, *, exclude_peer_tb_zero: bool) -> pd.DataFrame:
+    """Drop tb_ratio == 0 rows from pool interval membership (matches Cell 5 toggle)."""
+    if not exclude_peer_tb_zero or COL_AI not in work.columns:
+        return work
+    tb = pd.to_numeric(work[COL_AI], errors="coerce")
+    return work.loc[tb != 0].copy()
+
+
+def _resolve_overlap_group_cols(
+    mode: str,
+    snapshot_col: str,
+    snr_col: str,
+    eval_strt_col: str,
+    eval_thru_col: str,
+) -> list[str] | None:
+    """Match Cell 5 resolve_pool_group_cols — None => active-at-anchor merge."""
+    if mode == "legacy":
+        return [snapshot_col, snr_col]
+    if mode == "rating_window":
+        return [snapshot_col, snr_col, eval_strt_col, eval_thru_col]
+    if mode in ("active_at_eval_thru", "active_at_snapshot"):
+        return None
+    raise ValueError(
+        f"Unknown pool_grouping_mode={mode!r}. "
+        "Expected legacy, rating_window, active_at_eval_thru, or active_at_snapshot."
+    )
+
+
+def _overlap_grain_label(
+    mode: str,
+    snr_col: str,
+    *,
+    anchor_col: str,
+    exclude_peer_tb_zero: bool = False,
+) -> str:
+    prefix = "All snapshot rows · pool = "
+    if mode == "legacy":
+        grain = f"{prefix}{COL_SNAPSHOT} × {snr_col}"
+    elif mode == "rating_window":
+        grain = f"{prefix}{COL_SNAPSHOT} × {snr_col} × eval window"
+    elif mode == "active_at_eval_thru":
+        grain = f"{prefix}{snr_col} × peers active at {anchor_col}"
+    elif mode == "active_at_snapshot":
+        grain = f"{prefix}{snr_col} × peers active at {COL_SNAPSHOT}"
+    else:
+        grain = SNAPSHOT_GRAIN_LABEL.replace("snr_rater", snr_col)
+    if exclude_peer_tb_zero:
+        grain += " · exclude tb_ratio=0 peers"
+    return grain
+
+
+def _overlap_span_label(mode: str) -> str:
+    if mode == "legacy":
+        return "Snapshot × SNR pools"
+    if mode == "rating_window":
+        return "Snapshot × SNR × eval-window pools"
+    if mode in ("active_at_eval_thru", "active_at_snapshot"):
+        return "Active senior-rater pools"
+    return "Senior-rater pools"
+
+
+def _intervals_from_row_groupby(
+    work: pd.DataFrame,
+    group_cols: list[str],
+    snr_col: str,
+) -> tuple[pd.DataFrame, pd.DataFrame]:
+    iv = (
+        work.groupby(group_cols, observed=True)["perf"]
+        .agg(
+            A_hat_min="min",
+            A_hat_max="max",
+            T_j_hat="mean",
+            roster_n="count",
+        )
+        .reset_index()
+    )
+    iv = iv.loc[iv["roster_n"] >= POOL_MIN].copy()
+    iv["perf_span"] = iv["A_hat_max"] - iv["A_hat_min"]
+
+    members = work.copy()
+    members["team_id"] = members[snr_col].astype(str)
+    if COL_SNAPSHOT in group_cols:
+        members["season"] = members[COL_SNAPSHOT].dt.strftime("%Y-%m-%d")
+        iv["team_id"] = iv[snr_col].astype(str)
+        iv["season"] = pd.to_datetime(iv[COL_SNAPSHOT]).dt.strftime("%Y-%m-%d")
+    else:
+        season_col = group_cols[-1]
+        members["season"] = pd.to_datetime(members[season_col]).dt.strftime("%Y-%m-%d")
+        iv["team_id"] = iv[snr_col].astype(str)
+        iv["season"] = pd.to_datetime(iv[season_col]).dt.strftime("%Y-%m-%d")
+    return iv, members
+
+
+def _intervals_active_at_anchor(
+    work: pd.DataFrame,
+    *,
+    snr_col: str,
+    anchor_col: str,
+    eval_strt_col: str,
+    eval_thru_col: str,
+    pid_col: str,
+    tb_col: str | None = None,
+    exclude_peer_tb_zero: bool = False,
+) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Pool intervals where peers = officers under same SNR with OER window covering anchor."""
+    for col in (anchor_col, eval_strt_col, eval_thru_col):
+        if col not in work.columns:
+            raise SystemExit(
+                f"Overlap active-at-anchor mode needs column {col!r} in feather — "
+                "re-run Cell 11 with eval dates in base_time_varying_cols."
+            )
+        work[col] = pd.to_datetime(work[col], errors="coerce")
+
+    peers = work.dropna(subset=[snr_col, eval_strt_col, eval_thru_col, "perf", pid_col])
+    if exclude_peer_tb_zero and tb_col and tb_col in peers.columns:
+        peer_tb = pd.to_numeric(peers[tb_col], errors="coerce")
+        peers = peers.loc[peer_tb != 0].copy()
+    peers = peers.drop_duplicates(
+        subset=[pid_col, snr_col, eval_strt_col, eval_thru_col],
+        keep="last",
+    )
+    anchors = work.dropna(subset=[snr_col, anchor_col]).drop_duplicates([snr_col, anchor_col])
+    if anchors.empty or peers.empty:
+        empty = pd.DataFrame(
+            columns=[
+                snr_col,
+                anchor_col,
+                "A_hat_min",
+                "A_hat_max",
+                "T_j_hat",
+                "roster_n",
+                "perf_span",
+                "team_id",
+                "season",
+            ]
+        )
+        return empty, empty
+
+    peer_g = peers.rename(
+        columns={
+            pid_col: "_peer_pid",
+            eval_strt_col: "_peer_strt",
+            eval_thru_col: "_peer_thru",
+            "perf": "_peer_perf",
+        }
+    )
+    cross = anchors.merge(peer_g, on=snr_col, how="inner")
+    cross = cross[
+        (cross[anchor_col] >= cross["_peer_strt"])
+        & (cross[anchor_col] <= cross["_peer_thru"])
+    ]
+    if cross.empty:
+        empty = pd.DataFrame(
+            columns=[
+                snr_col,
+                anchor_col,
+                "A_hat_min",
+                "A_hat_max",
+                "T_j_hat",
+                "roster_n",
+                "perf_span",
+                "team_id",
+                "season",
+            ]
+        )
+        return empty, empty
+
+    iv = (
+        cross.groupby([snr_col, anchor_col], observed=True)
+        .agg(
+            A_hat_min=("_peer_perf", "min"),
+            A_hat_max=("_peer_perf", "max"),
+            T_j_hat=("_peer_perf", "mean"),
+            roster_n=("_peer_perf", "count"),
+        )
+        .reset_index()
+    )
+    iv = iv.loc[iv["roster_n"] >= POOL_MIN].copy()
+    iv["perf_span"] = iv["A_hat_max"] - iv["A_hat_min"]
+    iv["team_id"] = iv[snr_col].astype(str)
+    iv["season"] = pd.to_datetime(iv[anchor_col]).dt.strftime("%Y-%m-%d")
+
+    members = cross.copy()
+    members["perf"] = members["_peer_perf"]
+    members["team_id"] = members[snr_col].astype(str)
+    members["season"] = pd.to_datetime(members[anchor_col]).dt.strftime("%Y-%m-%d")
+    return iv, members
+
+
 def _prepare_army_overlap(panel: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame, str, str]:
-    """Build pool intervals: group = snapshot date × senior rater (Cell 6 pool)."""
+    """Build pool intervals — grain follows pipeline_config POOL_GROUPING_MODE (Cell 5)."""
+    mode, eval_strt_col, eval_thru_col, pool_anchor_col, exclude_peer_tb_zero = (
+        _load_pool_grouping_config()
+    )
     snr_col = _resolve_snr_col(panel)
     if COL_SNAPSHOT not in panel.columns:
         raise SystemExit(f"Overlap panel missing column: {COL_SNAPSHOT}")
@@ -134,40 +353,57 @@ def _prepare_army_overlap(panel: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFra
     pool_size = pd.to_numeric(work[COL_POOL_SIZE], errors="coerce")
     work = work.loc[pool_size >= POOL_MIN].copy()
 
-    iv = (
-        work.groupby([COL_SNAPSHOT, snr_col], observed=True)["perf"]
-        .agg(
-            A_hat_min="min",
-            A_hat_max="max",
-            T_j_hat="mean",
-            roster_n="count",
-        )
-        .reset_index()
+    group_cols = _resolve_overlap_group_cols(
+        mode, COL_SNAPSHOT, snr_col, eval_strt_col, eval_thru_col
     )
-    iv = iv.loc[iv["roster_n"] >= POOL_MIN].copy()
-    iv["perf_span"] = iv["A_hat_max"] - iv["A_hat_min"]
+    anchor_col = COL_SNAPSHOT if mode == "active_at_snapshot" else pool_anchor_col
+    print(
+        f"  Overlap pool grain: POOL_GROUPING_MODE={mode!r} "
+        f"POOL_EXCLUDE_PEER_TB_ZERO={exclude_peer_tb_zero}"
+    )
 
-    work["team_id"] = work[snr_col].astype(str)
-    work["season"] = work[COL_SNAPSHOT].dt.strftime("%Y-%m-%d")
-    iv["team_id"] = iv[snr_col].astype(str)
-    iv["season"] = pd.to_datetime(iv[COL_SNAPSHOT]).dt.strftime("%Y-%m-%d")
-    grain = SNAPSHOT_GRAIN_LABEL.replace("snr_rater", snr_col)
+    pool_work = _pool_members_for_overlap(work, exclude_peer_tb_zero=exclude_peer_tb_zero)
+    if group_cols is not None:
+        for col in group_cols:
+            if col in (eval_strt_col, eval_thru_col):
+                pool_work[col] = pd.to_datetime(pool_work[col], errors="coerce")
+        iv, work = _intervals_from_row_groupby(pool_work, group_cols, snr_col)
+    else:
+        iv, work = _intervals_active_at_anchor(
+            pool_work,
+            snr_col=snr_col,
+            anchor_col=anchor_col,
+            eval_strt_col=eval_strt_col,
+            eval_thru_col=eval_thru_col,
+            pid_col=_resolve_pid_col(pool_work),
+            tb_col=COL_AI if COL_AI in pool_work.columns else None,
+            exclude_peer_tb_zero=exclude_peer_tb_zero,
+        )
+
+    grain = _overlap_grain_label(
+        mode,
+        snr_col,
+        anchor_col=anchor_col,
+        exclude_peer_tb_zero=exclude_peer_tb_zero,
+    )
     return iv, work, xlab, grain
 
 
 def _compute_h_sort(work: pd.DataFrame) -> float | None:
-    """Realized sorting index on snapshot × SNR pools (optional if 541 module absent)."""
+    """Realized sorting index on overlap pools (optional if 541 module absent)."""
     try:
         import importlib
-        import sys
 
         sports_root = str(REPO / "sports")
         if sports_root not in sys.path:
             sys.path.insert(0, sports_root)
         gc = importlib.import_module("541_grandchild_homophily_assign")
         use = work.dropna(subset=["perf"]).copy()
-        snr_col = _resolve_snr_col(work)
-        use["pool_id"] = use.groupby([COL_SNAPSHOT, snr_col], observed=True).ngroup()
+        if "team_id" in use.columns and "season" in use.columns:
+            use["pool_id"] = use.groupby(["team_id", "season"], observed=True).ngroup()
+        else:
+            snr_col = _resolve_snr_col(work)
+            use["pool_id"] = use.groupby([COL_SNAPSHOT, snr_col], observed=True).ngroup()
         return float(
             gc.realized_sorting_index_H_sort(
                 use["perf"].to_numpy(dtype=float),
@@ -179,6 +415,13 @@ def _compute_h_sort(work: pd.DataFrame) -> float | None:
         return None
 
 
+def _resolve_pid_col(panel: pd.DataFrame) -> str:
+    for cand in (COL_PID, "pid", "officer_id"):
+        if cand in panel.columns:
+            return cand
+    raise SystemExit(f"Overlap panel needs an officer ID column ({COL_PID}).")
+
+
 def run_pool_interval_overlap(feather_path: Path, *, tag: str = TAG_RUN1) -> Path:
     """Panel 5 — senior-rater pool interval overlap (assortativity diagnostic)."""
     from empirical_team_interval_overlap import build_figure  # noqa: WPS433
@@ -188,8 +431,15 @@ def run_pool_interval_overlap(feather_path: Path, *, tag: str = TAG_RUN1) -> Pat
     if iv.empty:
         raise SystemExit("No pools for overlap panel — check snapshot / SNR columns.")
 
-    dates = pd.to_datetime(work[COL_SNAPSHOT], errors="coerce").dropna()
-    seasons = f"{dates.min():%Y-%m-%d} to {dates.max():%Y-%m-%d}"
+    mode, _, _, pool_anchor_col, exclude_peer_tb_zero = _load_pool_grouping_config()
+    span_lbl = _overlap_span_label(mode)
+    overlap_labels = dict(ARMY_OVERLAP_LABELS)
+    overlap_labels["span_ylabel"] = span_lbl
+    overlap_labels["all_ylabel"] = f"All {span_lbl.lower()} (sorted by $\\hat{{T}}_j$)"
+
+    date_col = COL_SNAPSHOT if COL_SNAPSHOT in work.columns else pool_anchor_col
+    dates = pd.to_datetime(work[date_col], errors="coerce").dropna()
+    seasons = f"{dates.min():%Y-%m-%d} to {dates.max():%Y-%m-%d}" if not dates.empty else "n/a"
 
     stem = f"{PREFIX}_BDP_pool_interval_overlap_{tag}"
     out_png = BASIC_DATA_PLOTS / f"{stem}.png"
@@ -212,7 +462,7 @@ def run_pool_interval_overlap(feather_path: Path, *, tag: str = TAG_RUN1) -> Pat
             + h_line
         ),
         xlab=xlab,
-        labels=ARMY_OVERLAP_LABELS,
+        labels=overlap_labels,
         grain_badge=grain,
     )
 
@@ -220,6 +470,8 @@ def run_pool_interval_overlap(feather_path: Path, *, tag: str = TAG_RUN1) -> Pat
         "date": date.today().isoformat(),
         "panel": 5,
         "diagnostic": "army_pool_interval_overlap",
+        "pool_grouping_mode": mode,
+        "pool_exclude_peer_tb_zero": exclude_peer_tb_zero,
         "pool_unit": grain.split("pool = ")[-1] if "pool = " in grain else f"{COL_SNAPSHOT} × snr_rater_bwd",
         "pool_min": POOL_MIN,
         "seasons": seasons,

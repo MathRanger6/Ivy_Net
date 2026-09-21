@@ -21,11 +21,21 @@ def wrap_lines(text: str, width: int) -> list[str]:
     return textwrap.wrap(t, width=width)
 
 
-def set_wrapped_ax_title(ax, lines: Iterable[str], *, fontsize: float = 10, pad: float = 8) -> None:
+def set_wrapped_ax_title(
+    ax,
+    lines: Iterable[str],
+    *,
+    fontsize: float = 10,
+    pad: float = 8,
+    fontweight: str | None = None,
+) -> None:
     parts: list[str] = []
     for line in lines:
         parts.extend(wrap_lines(line, TITLE_WRAP_CHARS) or [""])
-    ax.set_title("\n".join(parts), fontsize=fontsize, pad=pad)
+    title_kw: dict = {"fontsize": fontsize, "pad": pad}
+    if fontweight is not None:
+        title_kw["fontweight"] = fontweight
+    ax.set_title("\n".join(parts), **title_kw)
 
 
 def stamp_wrapped_footer(
@@ -34,7 +44,7 @@ def stamp_wrapped_footer(
     *,
     margin_floor: float = 0.003,
     fontsize: float = 7.5,
-    line_spacing: float = 0.013,
+    line_spacing: float = 0.016,
     text_height: float = 0.014,
 ) -> float:
     """Stamp footer lines at figure bottom; return top of footer block (figure coords)."""
@@ -91,11 +101,13 @@ def finalize_bar_figure(
     wrapped = [w for w in wrapped if w.strip()]
     n = len(wrapped)
     if rotated_x:
-        bottom = 0.19 if n >= 2 else 0.17
+        bottom = 0.22 if n >= 3 else (0.20 if n >= 2 else 0.18)
     elif n >= 3:
-        bottom = 0.13
+        bottom = 0.18
+    elif n >= 2:
+        bottom = 0.20
     else:
-        bottom = 0.11
+        bottom = 0.13
     fig.subplots_adjust(top=top, bottom=bottom, left=left, right=right)
     if wrapped:
         stamp_wrapped_footer(fig, wrapped)
