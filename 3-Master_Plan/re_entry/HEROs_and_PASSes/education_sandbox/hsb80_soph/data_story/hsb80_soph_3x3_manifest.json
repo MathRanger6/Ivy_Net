@@ -1,0 +1,82 @@
+{
+  "domain": "hsb80_soph",
+  "deck": "big_fish_data_story",
+  "title": "HS&B:80 data story \u2014 Sophomore school pond",
+  "subtitle": "analytic min-5 peers \u00b7 baseline test z \u00b7 school LOO  |  Read top-left \u2192 bottom-right",
+  "output_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/education_sandbox/hsb80_soph/data_story/HSB80SOPH_DATA_STORY_3x3.png",
+  "page_size": "screen",
+  "footer": "HSB80SOPH Big Fish \u00b7 big_fish_data_story.py",
+  "grid": [
+    {
+      "type": "text",
+      "title": "1 \u00b7 Cohort",
+      "lines": [
+        "Domain: HS&B:80 (NCES longitudinal)",
+        "Grain: 1980 Sophomore high-school snapshot",
+        "Y: bachelor's or higher by 1986 (~age 22; early for BA)",
+        "Peer X: peer_mean_z_loo (Alex precomputed)",
+        "Filter: analytic_sample_min5 \u00b7 cohort=Sophomore",
+        "Note: do not pool with Senior deck \u00b7 attainment \u2260 top-K selection",
+        "N = 12,184",
+        "BA or higher rate = 6.7%",
+        "With LOO = 12,184",
+        "",
+        "",
+        "Reigning tag:",
+        "q16_soph_school_loo_ba1986",
+        "Panels 7\u20139: Act II + HERO (exploratory)",
+        "(LOO bins \u00b7 7% BA rate \u00b7 not draft selection)"
+      ]
+    },
+    {
+      "type": "image",
+      "title": "2 \u00b7 \u00c2_i and T\u0302_j",
+      "path": "3-Master_Plan/re_entry/HEROs_and_PASSes/education_sandbox/hsb80_soph/basic_data_plots/HSB80SOPH_BDP_Ai_Tj.png"
+    },
+    {
+      "type": "image",
+      "title": "3 \u00b7 Team LOO distribution",
+      "path": "3-Master_Plan/re_entry/HEROs_and_PASSes/education_sandbox/hsb80_soph/basic_data_plots/HSB80SOPH_team_loo_distribution.png"
+    },
+    {
+      "type": "image",
+      "title": "4 \u00b7 Outcome mass vs \u00c2 (ECDF)",
+      "path": "3-Master_Plan/re_entry/HEROs_and_PASSes/education_sandbox/hsb80_soph/basic_data_plots/HSB80SOPH_outcome_mass_ecdf.png"
+    },
+    {
+      "type": "image",
+      "title": "5 \u00b7 Team interval overlap",
+      "path": "3-Master_Plan/re_entry/HEROs_and_PASSes/education_sandbox/hsb80_soph/basic_data_plots/HSB80SOPH_team_interval_overlap.png"
+    },
+    {
+      "type": "image",
+      "title": "6 \u00b7 Team roster size |T_j|",
+      "path": "3-Master_Plan/re_entry/HEROs_and_PASSes/education_sandbox/hsb80_soph/basic_data_plots/HSB80SOPH_pool_size.png"
+    },
+    {
+      "type": "image",
+      "title": "7 \u00b7 CCT \u2014 fixed \u00c2 z\u2208[1,2]",
+      "path": "3-Master_Plan/re_entry/HEROs_and_PASSes/education_sandbox/hsb80_soph/act2/CCT_hsb80_soph_ai_z1_2_q8.png",
+      "note": "LOO bins (excl. self)"
+    },
+    {
+      "type": "image",
+      "title": "8 \u00b7 Elite pond \u2014 top 20% \u00c2",
+      "path": "3-Master_Plan/re_entry/HEROs_and_PASSes/education_sandbox/hsb80_soph/act2/ELITE_hsb80_soph_top20_loo_pw5.png",
+      "note": "LOO bins (excl. self)"
+    },
+    {
+      "type": "image",
+      "title": "9 \u00b7 HERO (Pass A \u00b7 LOO bins)",
+      "path": "3-Master_Plan/re_entry/HEROs_and_PASSes/education_sandbox/hsb80_soph/hero/HERO_hsb80_soph_q16_team_loo_slide.png"
+    }
+  ],
+  "verdict": {
+    "reigning_tag": "q16_soph_school_loo_ba1986",
+    "panel_rows": "all-ps",
+    "position_groups": null,
+    "peer_axis": "loo",
+    "n": 12184,
+    "y_rate": 0.06705515430072226
+  }
+}

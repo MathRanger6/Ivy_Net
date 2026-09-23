@@ -1,0 +1,39 @@
+{
+  "diagnostic": "team_interval_overlap",
+  "date": "2026-09-22",
+  "domain": "legends",
+  "perf": "own_performance_index z within season",
+  "seasons": "2015-2024",
+  "position_groups": null,
+  "coverage_max": 287,
+  "coverage_max_normalized": 0.7247474747474747,
+  "coverage_mean": 89.7,
+  "coverage_frac_gt_1": 0.835,
+  "coverage_disjoint_max": null,
+  "coverage_disjoint_mean": null,
+  "n_team_seasons": 396,
+  "n_player_seasons": 1879,
+  "H_sort": 0.4447438904444352,
+  "perf_span": {
+    "label": "perf_span",
+    "n": 396,
+    "mean": 1.7570955579149632,
+    "std": 0.9315257089879452,
+    "min": 0.010961374991038997,
+    "max": 7.162705902913665,
+    "median": 1.6901578173788707
+  },
+  "T_j_hat": {
+    "label": "\\hat{T}_j",
+    "n": 396,
+    "mean": 0.03012444002276054,
+    "std": 0.6762349929471404,
+    "min": -1.9886876056426368,
+    "max": 2.019509643257827,
+    "median": 0.03515212567943171
+  },
+  "outputs": {
+    "png": "LEGENDS_team_interval_overlap.png",
+    "team_csv": "LEGENDS_team_interval_overlap_team_season.csv"
+  }
+}

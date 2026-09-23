@@ -114,7 +114,7 @@ POOL_Z_EPS = 1e-9
 #   rating_window       — + eval_strt_dt_bwd, eval_thru_dt_bwd on same snapshot
 #   active_at_eval_thru — peers SNR-rating at eval_thru_dt_bwd (Alex slide / OER write time)
 #   active_at_snapshot  — peers SNR-rating at snpsht_dt (panel-time variant)
-POOL_GROUPING_MODE = 'legacy'
+POOL_GROUPING_MODE = 'active_at_eval_thru'
 POOL_GROUPING_MODES = (
     'legacy',
     'rating_window',

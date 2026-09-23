@@ -166,7 +166,7 @@ DIVISION_CONFIG['backfill_early_fy'] = True
 # Use earliest FY present in lookup table as floor fopr all prior years.
 DIVISION_CONFIG['backfill_fy'] = 'lookup_min'
 # Temporary diagnostics to trace UIC/FY join coverage and missing div_name causes.
-DIVISION_CONFIG['debug_division'] = True
+DIVISION_CONFIG['debug_division'] = False
 
 # Optional: keep legacy OER column in time_varying_cols for this run
 if 'tb_ratio_bwd_snr_legacy' not in COLUMN_CONFIG['oer_variables']:

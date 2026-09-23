@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
-"""Big Fish domains — 3×3 data story panels (Legends + Football).
+"""Big Fish domains — 3×3 data story panels (Legends + Football + Education).
 
 Run (repo root):
   python scripts/big_fish_data_story.py --domain legends --mode all
   python scripts/big_fish_data_story.py --domain football --mode all
+  python scripts/big_fish_data_story.py --domain nels88 --mode all
+  python scripts/big_fish_data_story.py --domain hsb80_soph --mode all
+  python scripts/big_fish_data_story.py --domain hsb80_senior --mode all
   python scripts/big_fish_data_story.py --domain legends --mode perf-story
   python scripts/big_fish_data_story.py --domain football --mode perf-story
   python scripts/big_fish_data_story.py --domain football --mode hero QB RB_FB
@@ -321,6 +324,96 @@ DOMAINS: dict[str, DomainSpec] = {
         athlete_id_col="player_id",
         tie_break_col="role_opportunities",
     ),
+    "nels88": DomainSpec(
+        key="nels88",
+        prefix="NELS88",
+        csv=REPO / "datasets/nels88/nels88_big_fish_panel.csv",
+        sandbox="education_sandbox/nels88",
+        title="NELS:88 data story — 10th-grade school pond",
+        subtitle="analytic min-10 peers · baseline test z · school LOO  |  Read top-left → bottom-right",
+        reigning_tag="q16_school_loo_ba2000",
+        ai_col="own_performance_z",
+        loo_col="peer_mean_z_loo",
+        y_col="bachelors_or_higher_by_2000",
+        pool_col="unit_n",
+        team_keys=("school_id",),
+        season_key="panel_wave",
+        grain="student · 10th-grade school · sampled classmates (not full roster)",
+        y_pos_label="BA or higher",
+        y_neg_label="No BA",
+        overlap_xlab=r"Baseline test composite ($z$)",
+        cohort_lines=(
+            "Domain: NELS:88 (NCES longitudinal)",
+            "Grain: 10th-grade high-school snapshot",
+            "Y: bachelor's or higher by 2000 (~age 26)",
+            "Peer X: peer_mean_z_loo (Alex precomputed)",
+            "Filter: analytic_sample_min10",
+            "Note: attainment ≠ top-K selection (cf. draft/tenure)",
+            "",
+            "Reigning tag:",
+            "q16_school_loo_ba2000",
+        ),
+    ),
+    "hsb80_soph": DomainSpec(
+        key="hsb80_soph",
+        prefix="HSB80SOPH",
+        csv=REPO / "datasets/hsb80/hsb80_big_fish_panel.csv",
+        sandbox="education_sandbox/hsb80_soph",
+        title="HS&B:80 data story — Sophomore school pond",
+        subtitle="analytic min-5 peers · baseline test z · school LOO  |  Read top-left → bottom-right",
+        reigning_tag="q16_soph_school_loo_ba1986",
+        ai_col="own_performance_z",
+        loo_col="peer_mean_z_loo",
+        y_col="bachelors_or_higher_by_1986",
+        pool_col="unit_n",
+        team_keys=("school_id",),
+        season_key="panel_wave",
+        grain="student · 1980 Sophomore sample · school × cohort (not full roster)",
+        y_pos_label="BA or higher",
+        y_neg_label="No BA",
+        overlap_xlab=r"Baseline test composite ($z$)",
+        cohort_lines=(
+            "Domain: HS&B:80 (NCES longitudinal)",
+            "Grain: 1980 Sophomore high-school snapshot",
+            "Y: bachelor's or higher by 1986 (~age 22; early for BA)",
+            "Peer X: peer_mean_z_loo (Alex precomputed)",
+            "Filter: analytic_sample_min5 · cohort=Sophomore",
+            "Note: do not pool with Senior deck · attainment ≠ top-K selection",
+            "",
+            "Reigning tag:",
+            "q16_soph_school_loo_ba1986",
+        ),
+    ),
+    "hsb80_senior": DomainSpec(
+        key="hsb80_senior",
+        prefix="HSB80SEN",
+        csv=REPO / "datasets/hsb80/hsb80_big_fish_panel.csv",
+        sandbox="education_sandbox/hsb80_senior",
+        title="HS&B:80 data story — Senior school pond",
+        subtitle="analytic min-5 peers · baseline test z · school LOO  |  Read top-left → bottom-right",
+        reigning_tag="q16_senior_school_loo_ba1986",
+        ai_col="own_performance_z",
+        loo_col="peer_mean_z_loo",
+        y_col="bachelors_or_higher_by_1986",
+        pool_col="unit_n",
+        team_keys=("school_id",),
+        season_key="panel_wave",
+        grain="student · 1980 Senior sample · school × cohort (not full roster)",
+        y_pos_label="BA or higher",
+        y_neg_label="No BA",
+        overlap_xlab=r"Baseline test composite ($z$)",
+        cohort_lines=(
+            "Domain: HS&B:80 (NCES longitudinal)",
+            "Grain: 1980 Senior high-school snapshot",
+            "Y: bachelor's or higher by 1986 (~age 22–24)",
+            "Peer X: peer_mean_z_loo (Alex precomputed)",
+            "Filter: analytic_sample_min5 · cohort=Senior",
+            "Note: do not pool with Sophomore deck · attainment ≠ top-K selection",
+            "",
+            "Reigning tag:",
+            "q16_senior_school_loo_ba1986",
+        ),
+    ),
 }
 
 
@@ -454,6 +547,21 @@ def _load_eligible_frame(spec: DomainSpec) -> pd.DataFrame:
             & df["full_2y_followup"]
             & df["performance_components_available"]
         )
+    elif spec.key == "nels88":
+        m = df["analytic_sample_min10"] == 1
+        out = df.loc[m].copy()
+        out["panel_wave"] = 1988
+        return out
+    elif spec.key == "hsb80_soph":
+        m = (df["analytic_sample_min5"] == 1) & (df["cohort"] == "Sophomore")
+        out = df.loc[m].copy()
+        out["panel_wave"] = 1980
+        return out
+    elif spec.key == "hsb80_senior":
+        m = (df["analytic_sample_min5"] == 1) & (df["cohort"] == "Senior")
+        out = df.loc[m].copy()
+        out["panel_wave"] = 1980
+        return out
     else:
         m = df["eligible_analysis_cohort"] == 1
     return df.loc[m].copy()
@@ -1139,6 +1247,14 @@ def cohort_text_lines(
     lines[idx:idx] = stats + [""]
     if spec.key == "legends":
         lines.extend(["Panels 7–8: scaled Act II", "(z∈[1,2] CCT · top 20% elite)"])
+    elif spec.key in ("nels88", "hsb80_soph", "hsb80_senior"):
+        act2_peer = "T̂_j bins" if axis.use_team_mean else "LOO bins"
+        lines.extend(
+            [
+                "Panels 7–9: Act II + HERO (exploratory)",
+                f"({act2_peer} · {y_rate:.0%} BA rate · not draft selection)",
+            ]
+        )
     else:
         act2_peer = "T̂_j bins" if axis.use_team_mean else "LOO bins"
         lines.extend(["Panels 7–9: scaled Act II + HERO", f"({act2_peer} · sparse Y · exploratory)"])
@@ -1336,7 +1452,9 @@ def run_domain(
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Big Fish 3×3 data story (legends / football)")
+    parser = argparse.ArgumentParser(
+        description="Big Fish 3×3 data story (legends / football / nels88 / hsb80_soph / hsb80_senior)"
+    )
     parser.add_argument("--domain", choices=sorted(DOMAINS), required=True)
     parser.add_argument("--mode", choices=("all", "bdp", "hero", "act2", "mosaic", "perf-story"), default="all")
     parser.add_argument(

@@ -1,0 +1,39 @@
+{
+  "diagnostic": "team_interval_overlap",
+  "date": "2026-09-22",
+  "domain": "hsb80_soph",
+  "perf": "own_performance_z z within season",
+  "seasons": "1980-1980",
+  "position_groups": null,
+  "coverage_max": 875,
+  "coverage_max_normalized": 0.9408602150537635,
+  "coverage_mean": 493.955,
+  "coverage_frac_gt_1": 0.9625,
+  "coverage_disjoint_max": null,
+  "coverage_disjoint_mean": null,
+  "n_team_seasons": 930,
+  "n_player_seasons": 12184,
+  "H_sort": 0.28411562887593433,
+  "perf_span": {
+    "label": "perf_span",
+    "n": 930,
+    "mean": 2.7197617622566947,
+    "std": 0.6739471242018272,
+    "min": 0.48130132936779035,
+    "max": 4.40541404154535,
+    "median": 2.7839535246422074
+  },
+  "T_j_hat": {
+    "label": "\\hat{T}_j",
+    "n": 930,
+    "mean": -0.03856348215992948,
+    "std": 0.5488889614771615,
+    "min": -1.6010186679182816,
+    "max": 1.7972356768087867,
+    "median": -0.04470435814545112
+  },
+  "outputs": {
+    "png": "HSB80SOPH_team_interval_overlap.png",
+    "team_csv": "HSB80SOPH_team_interval_overlap_team_season.csv"
+  }
+}

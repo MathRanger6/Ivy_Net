@@ -4,7 +4,7 @@
   "title": "Legends (LoL) data story \u2014 dev cohort",
   "subtitle": "developmental \u00b7 full 2y follow-up \u00b7 own index \u00b7 team LOO  |  Read top-left \u2192 bottom-right",
   "output_png": "3-Master_Plan/re_entry/HEROs_and_PASSes/legends_sandbox/data_story/LEGENDS_DATA_STORY_3x3.png",
-  "page_size": "letter-landscape",
+  "page_size": "screen",
   "footer": "LEGENDS Big Fish \u00b7 big_fish_data_story.py",
   "grid": [
     {
@@ -56,13 +56,13 @@
       "type": "image",
       "title": "7 \u00b7 CCT \u2014 fixed \u00c2 z\u2208[1,2]",
       "path": "3-Master_Plan/re_entry/HEROs_and_PASSes/legends_sandbox/act2/CCT_legends_ai_z1_2_q8.png",
-      "note": "Scaled Act II probe"
+      "note": "LOO bins (excl. self)"
     },
     {
       "type": "image",
       "title": "8 \u00b7 Elite pond \u2014 top 20% \u00c2",
       "path": "3-Master_Plan/re_entry/HEROs_and_PASSes/legends_sandbox/act2/ELITE_legends_top20_loo_pw5.png",
-      "note": "LOO bins within elite \u00c2"
+      "note": "LOO bins (excl. self)"
     },
     {
       "type": "image",
@@ -73,6 +73,8 @@
   "verdict": {
     "reigning_tag": "q16_dev_team_loo_promo2y",
     "panel_rows": "all-ps",
+    "position_groups": null,
+    "peer_axis": "loo",
     "n": 1879,
     "y_rate": 0.3677488025545503
   }

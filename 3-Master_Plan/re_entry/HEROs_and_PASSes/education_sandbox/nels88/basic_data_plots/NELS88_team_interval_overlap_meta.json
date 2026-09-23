@@ -1,0 +1,39 @@
+{
+  "diagnostic": "team_interval_overlap",
+  "date": "2026-09-22",
+  "domain": "nels88",
+  "perf": "own_performance_z z within season",
+  "seasons": "1988-1988",
+  "position_groups": null,
+  "coverage_max": 524,
+  "coverage_max_normalized": 0.9776119402985075,
+  "coverage_mean": 355.1625,
+  "coverage_frac_gt_1": 0.995,
+  "coverage_disjoint_max": null,
+  "coverage_disjoint_mean": null,
+  "n_team_seasons": 536,
+  "n_player_seasons": 7238,
+  "H_sort": 0.2512585417433697,
+  "perf_span": {
+    "label": "perf_span",
+    "n": 536,
+    "mean": 2.82660720774072,
+    "std": 0.6240660877170852,
+    "min": 1.1085618586641743,
+    "max": 4.209365188142655,
+    "median": 2.877902469269574
+  },
+  "T_j_hat": {
+    "label": "\\hat{T}_j",
+    "n": 536,
+    "mean": -0.01350104596073915,
+    "std": 0.5065696394318812,
+    "min": -1.217673398963002,
+    "max": 1.9014245018615554,
+    "median": -0.027661616092288725
+  },
+  "outputs": {
+    "png": "NELS88_team_interval_overlap.png",
+    "team_csv": "NELS88_team_interval_overlap_team_season.csv"
+  }
+}

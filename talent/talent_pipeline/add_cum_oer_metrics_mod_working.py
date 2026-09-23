@@ -609,10 +609,13 @@ def add_pool_ranks_pct_zscores(
 ):
     mode = (pool_grouping_mode or 'legacy').strip().lower()
     if mode in ('active_at_eval_thru', 'active_at_snapshot'):
-        raise NotImplementedError(
-            f"add_pool_ranks_pct_zscores does not support POOL_GROUPING_MODE={mode!r}. "
-            "Set CELL6_POOL_RANKS=False or use legacy/rating_window."
+        # Option B: ranks need anchor-based peer groups (not implemented). Pass through
+        # Cell 5 pool means/sizes unchanged — sufficient for BDP mosaic and Run 1 Cox.
+        print(
+            f"   • add_pool_ranks_pct_zscores: pass-through for POOL_GROUPING_MODE={mode!r} "
+            "(pool ranks not computed; Cell 5 means/sizes preserved)"
         )
+        return df_in.copy()
     rtr_group = resolve_pool_group_cols(
         mode, snapshot_date_col, rtr_col, eval_strt_col, eval_thru_col
     )

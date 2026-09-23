@@ -17,8 +17,8 @@
 | — | **Paper talk** | `3-Master_Plan/re_entry/` | **P0 primary** | Flipbook: question → figure → claim |
 | **B1** | **Football** | `datasets/football/` | Composite porch **fail**; **usage LOO interesting** | Usage congestion slide for story; no deep composite chase |
 | **B2** | **Legends (LoL)** | `datasets/legends/` | One metric weak; **no reigning HERO** | Background poke only |
-| **B3** | NELS88 | `datasets/nels88/` | Not shown | Education porch when background time |
-| **B4** | HSB80 | `datasets/hsb80/` | Not shown | Same |
+| **B3** | NELS88 | `datasets/nels88/` | **3×3 live** — H_sort≈0.25, BA+≈36% | [`education_sandbox/nels88/`](education_sandbox/nels88/README.md); HSB next |
+| **B4** | HSB80 | `datasets/hsb80/` | **3×3 live** (Soph + Senior split) | [`hsb80_soph/`](education_sandbox/hsb80_soph/README.md) · [`hsb80_senior/`](education_sandbox/hsb80_senior/README.md) |
 | **B5** | Apache | `datasets/Apache/` | Not shown | Same |
 
 **Alex one-liner (PD30):** “Backup on our backup plan” — perf metric storyboard validates **screen fast, don't sink weeks**; hit rate says congestion can work again, but **MBB/tenure/army** are still the bet.
@@ -225,3 +225,5 @@ None replace **MBB** or **tenure** as anchors. They extend cross-domain coverage
 |------|-------|
 | 2026-09-03 | Initial COMPASS assessment of football, legends, nels88, hsb80, apache; legends selected as active focus. |
 | 2026-09-04 | PD30: Big Fish demoted to backup; football usage LOO = story nugget; primary = paper outline. |
+| 2026-09-22 | NELS:88 wired in `big_fish_data_story.py`; full deck → `education_sandbox/nels88/` (N=7238, H_sort≈0.25, Y≈36%). |
+| 2026-09-22 | HS&B:80 Soph + Senior (`hsb80_soph`, `hsb80_senior`); H_sort≈0.28 / 0.32; Y≈7% / 17%. |
