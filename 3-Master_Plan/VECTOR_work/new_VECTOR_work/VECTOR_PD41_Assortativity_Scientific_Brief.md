@@ -2,11 +2,13 @@
 
 ## Scientific Questions and Test Design
 
-**Status:** Proposed design, awaiting Charles's approval. No simulations or experiments have been executed for this brief.
+**Last synced:** 2026-09-24
+
+**Status:** Working document for Charles and VECTOR. Revise as our discussions develop, distinguishing evidence, interpretations, proposals, and decisions. Charles has authorized this document update; the eight-cell design remains proposed and awaits approval. No simulations or experiments have been executed for this brief.
 
 **Recommendation:** An eight-cell test that isolates assignment, congestion, and selection scarcity. Its first purpose is to determine whether assortative preference is necessary for congestion to change advancement outcomes under specified conditions. Reproducing the empirical MBB curve is a separate, stronger requirement.
 
-This is a proposed design. Existing sources and outputs were inspected; no repository files were modified and no experiments were executed during the scientific review. This Markdown copy was subsequently prepared at Charles's request.
+The September 24 revision incorporates the Army band-of-excellence framing and evidence limitations in §6b. It preserves the proposed basketball design, parameter settings, and estimands. Pending decisions remain in §8; substantive revisions are recorded below.
 
 ## 1. What Alex asked—and what remains a hypothesis
 
@@ -185,6 +187,40 @@ Thus, existing outputs inform parameter choices and implementation structure; th
 
 Necessity and sufficiency must be attached to a named effect. Positive sorting by itself need not generate a downturn; likewise, a successful $\rho>0$, $\lambda>0$ cell demonstrates that the **full tested configuration** can generate the pattern, not that assortativity alone is sufficient.
 
+## 6b. Army parallel: band of excellence and empirical sorting
+
+This brief remains **MBB simulation-first**. Army supplies the empirical origin and a complementary question: where within senior-rater pools should congestion affect officers competing for scarce distinction? The September 24 materials emphasize the **band of excellence**. This is a mechanism hypothesis and an agreed presentation emphasis in those records, not independent evidence that congestion binds only in that band. Zero top-block history alone does not establish that an officer never competed for distinction. [S12–S13]
+
+### Panel roles and narrative order
+
+The revised Act I sequence is **full-sample phenomenon → conditional comparisons → empirical sorting**:
+
+- **Panels 2 and 9:** distributions and the full-cohort HERO supply descriptive context. Preserve the full-cohort Panel 9; an own-zero-filtered version is a conditional comparison and must be labeled accordingly.
+- **Panels 7 and 8:** the fixed high-ability CCT band and elite-pond comparison carry the proposed mechanism argument. These are conditional outcome comparisons, not identified causal peer effects.
+- **Panel 5:** $H_{\mathrm{sort}}$ describes observed pool sorting. It complements the MBB intervention on assignment preference $\rho$; it cannot substitute for the eight-cell test. [S12–S13]
+
+### Three distinct filters
+
+**Missing SNR history** (NaN), **finite own top-block ratio equal to zero**, and **zero-valued peers excluded from pool construction** must remain distinct. The proposed own-zero gate removes focal officers from plots; the Run 3 peer-zero sensitivity changes pool means and sizes. Apply the existing minimum pool size of three before the focal restriction. That restriction neither rebuilds pools nor requires three remaining ever-top-blocked officers. Ever-top-blocked is a coarse proxy for being in contention, distinct from the fixed high-ability and elite bands. Changes in the plotted lower tail after exclusion may reflect composition. [S12–S13]
+
+### Viability threshold versus empirical gates
+
+In basketball, $\theta$ determines how each peer contributes to
+
+$$
+C_j=\frac{1}{n_j}\sum_{h\in j}\sigma\!\left[\gamma(A_h-\theta)\right].
+$$
+
+Army's focal gates determine **whose outcomes are plotted**. The handoff calls these the “same scientific object”; this brief treats that as a **conceptual analogy**, not a mathematical equivalence. A focal restriction leaves existing pool measures unchanged; smooth viability weighting changes congestion construction. This preserves the source's reasoning while explicitly qualifying its stronger wording. [S12–S13; mathematical distinction]
+
+The PD21 calibration is described as fitting $\lambda$, $\gamma$, and temperature $t$ with $\theta$ preset under the selected rule. This neither estimates an Army threshold nor resolves the calibration/replay mismatch in §7. Senior-rater top-block scarcity and promotion scarcity concern different selection outcomes. Army's promotion/attrition/censoring framework must be tied to each figure's actual outcome and estimator; it is not a port of basketball's Bernoulli calibration. Smooth Army congestion and score-to-selection replay remain extension proposals. [S3, S12–S13]
+
+### Evidence and access status
+
+Tag the **Army figure refresh and conditional band comparisons 🟡 PARTIAL**. The handoff reports Runs 1–3 completed and Runs 4–5 pending; these are progress reports, not independent verification of resulting figures. The own-zero plotting toggle is described as planned, default off. The historical HERO shape remains Charles's recorded assessment; refreshed straight-LOO results require their own provenance. [S12–S13]
+
+The September 24 access record says Mac access covers scrubbed code and documents; old PDE remains runnable but blocks uploads; Vantage is not yet online. Army data and figure refreshes remain on Army systems, with screenshots and error text supplying feedback. The conceptual bridge can guide discussion while the empirical refresh remains pending. [S12–S14]
+
 ## 7. Limits that remain binding
 
 The Bernoulli calibration/$K$-draw mismatch, boundary $\rho$ fit, Army provenance discrepancies, different empirical/simulation axes, and tenure cohort/survival limitations remain unresolved. None should be absorbed into a “validated parameter set.”
@@ -193,15 +229,23 @@ The current MBB curve has a local tail decline alongside positive fitted quadrat
 
 The proposed eight cells cannot identify dependence on all $\lambda$ values, ability distributions, group sizes, or selection rules. A null result everywhere would leave the chosen positive-$\lambda$ setting insufficiently informative; it would not prove that congestion never matters. A scarcity-specific result would justify a subsequent, bounded scarcity grid—not an immediate universal conclusion.
 
-## 8. Recommended next decision
+## 8. Pending decisions for Charles and VECTOR
 
-Approve this as a **mechanism-isolation experiment**, with three explicit choices:
+The recommendation remains a **mechanism-isolation experiment**. These three choices are proposed, not yet approved:
 
 1. Exact, unclipped top-$K$ for the first comparison.
 2. Fixed $\theta$, $\gamma$ and congestion scaling; scenario values $\rho=1$, $\lambda=1$, $q=0.01$ versus $q=0.10$.
 3. The proposed effect tolerances and paired replication plan.
 
 After approval, the smallest executable step is a separate driver around the existing assignment and congestion components, implementing the eight cells and recording the individual-level comparisons. It should first verify the invariants above, then run the paired replicates. **No refitting is needed for this scenario test.** Claims about a calibrated annual MBB mechanism would require the separate outcome-and-likelihood alignment already identified.
+
+## Revision record
+
+- **Initial brief:** Recorded the PD41 questions, proposed eight-cell design, estimands, interpretation rules, and unresolved calibration and provenance limits.
+- **2026-09-24 — Repository addendum:** Added the Army porch parallel in §6b.
+- **2026-09-24 — Working-document revision:** At Charles's request, made this an evolving discussion document; expanded §6b to distinguish focal filters from peer construction, conceptual analogy from mathematical equivalence, and reported progress from verified results. Preserved the proposed basketball design and outstanding decisions.
+
+Record substantive changes to questions, assumptions, evidence, and decisions here. Identify superseded interpretations explicitly rather than silently replacing them. Document revisions do not by themselves authorize experiments.
 
 ## Repository sources
 
@@ -218,3 +262,6 @@ Source labels below are repository-relative. Links point to the corresponding lo
 - **S9 — Existing scarcity settings:** [sports/scripts/gallery_knobs.py](</Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports/scripts/gallery_knobs.py>).
 - **S10 — Existing $K$–$\theta$ coupling and shape label:** [sports/scripts/grandchild_selection_inverted_u_diagnostic.py](</Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports/scripts/grandchild_selection_inverted_u_diagnostic.py>).
 - **S11 — Saved sorting results:** [3-Master_Plan/re_entry/HEROs_and_PASSes/grandchild_assign/GRANDCHILD_rho_sweep_summary.csv](</Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/HEROs_and_PASSes/grandchild_assign/GRANDCHILD_rho_sweep_summary.csv>), read alongside its metadata.
+- **S12 — Army narrative addendum:** [3-Master_Plan/VECTOR_work/handoff_upload_no_repo/10_Army_band_excellence_and_theta_Sep24.md](</Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/handoff_upload_no_repo/10_Army_band_excellence_and_theta_Sep24.md>). September 24 planning and progress record; not independent verification of Army outputs.
+- **S13 — Charles’s Army print memo:** [talent/re_entry/BAND_OF_EXCELLENCE_ARMY_PORCH.md](</Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/talent/re_entry/BAND_OF_EXCELLENCE_ARMY_PORCH.md>). September 24 planning and progress record; not independent verification of Army outputs.
+- **S14 — Current handoff and access checklist:** [3-Master_Plan/re_entry/_DISPOSABLE_CHARLES_VECTOR_handoff_checklist.md](</Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/_DISPOSABLE_CHARLES_VECTOR_handoff_checklist.md>). September 24 planning and progress record; not independent verification of Army outputs.

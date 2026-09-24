@@ -1,22 +1,27 @@
-# Manifest — VECTOR onboarding (handoff folder + repo access)
+# Manifest — VECTOR onboarding (repo-connected)
 
 **Folder:** `3-Master_Plan/VECTOR_work/handoff_upload_no_repo/`  
-**Repo root:** Charles’s PDE dissertation workspace (`Cursor Workspace PDE/`)  
-**Last updated:** 2026-09-22  
-**Audience:** VECTOR — GPT scholar agent, onboarded via **ChatGPT desktop coding environment** (repo-connected) or zip handoff (no repo).
+**Repo root:** Charles’s PDE dissertation workspace (`Cursor Workspace PDE/`) on Mac  
+**Last updated:** 2026-09-24  
+**Audience:** VECTOR — **ChatGPT desktop app**, repo-connected (successor to browser Scholar GPT).
 
-**This file is documentation only.** VECTOR reads paths and prose; VECTOR does **not** modify code, run notebooks, or use Git during onboarding.
+**Primary mode (Sep 2026):** VECTOR has **direct repo read access** on the Mac. **No zip handoff required.** The numbered files in this folder are the **curated narrative layer** — read them first, then follow repo paths below.
+
+**Legacy:** Zip-only handoff (browser-era) is **obsolete** unless repo access fails.
+
+**Scope:** VECTOR reads paths and prose for story work; VECTOR does **not** modify code, run Army notebooks, or use Git unless Charles explicitly asks.
 
 ---
 
-## Onboarding modes
+## Onboarding (repo-connected)
 
-| Mode | When | What VECTOR reads |
-|------|------|-------------------|
-| **A — Zip handoff** | Charles uploads this folder only | Numbered files below + out-of-band PPTX/PDF/PNG |
-| **B — Repo-connected** | ChatGPT desktop has the PDE repo | **Rules §1–8** + **Repository orientation §** + paths below |
-
-Mode B supplements Mode A; numbered handoff copies remain the **curated narrative layer**.
+| Step | What VECTOR reads |
+|------|-------------------|
+| **1** | This manifest + `00_READ_ME_FIRST_FOR_VECTOR.md` |
+| **2** | Numbered handoff files **01–10** in this folder |
+| **3** | Tier 1 re-entry + binding docs (§2 below) |
+| **4** | Living threads + domain memos as needed (§2) |
+| **5** | Figures via **repo paths** (HEROs, `talent/re_entry/output/`, flipbook decks in-repo) |
 
 ---
 
@@ -39,6 +44,7 @@ Read **in this order** before any repo archaeology:
 | **7** | `05_Three_Kinds_of_Model.md` | Layer A / B / C |
 | **8** | `07_PAPER_Campaign_Plan.md` | Campaign sequencing |
 | **9** | `08_Pass_A_and_Pass_B_plain_English.md` | Mechanism sim vocabulary |
+| **10** | `10_Army_band_excellence_and_theta_Sep24.md` | **Sep 24** — Act I band of excellence, θ vs MLE, PDE/Vantage, PD41 link |
 | **—** | `99_BACKGROUND_COMPASS_questionnaire_full.md` | Optional deep dive (~730 lines) |
 
 Full paths: `3-Master_Plan/VECTOR_work/handoff_upload_no_repo/<file>`.

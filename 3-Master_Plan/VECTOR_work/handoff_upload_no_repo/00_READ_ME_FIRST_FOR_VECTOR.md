@@ -1,8 +1,10 @@
-# READ ME FIRST — Charles → VECTOR handoff (no repo access)
+# READ ME FIRST — Charles → VECTOR handoff
 
-**Date:** 2026-09-16  
+**Date:** 2026-09-24 (updated — repo-connected VECTOR)  
 **From:** Charles (via COMPASS packaging)  
 **Audience:** VECTOR — literary / narrative craft on the dissertation **story**, not repo archaeology.
+
+**How you work now:** VECTOR lives in the **ChatGPT desktop app** (not browser Scholar GPT) with **direct read access** to the Mac repo (`Cursor Workspace PDE/`). **No zip upload required.** This folder is the **curated narrative layer** — start here, then follow repo paths in `MANIFEST_upload_to_VECTOR.md`.
 
 ---
 
@@ -53,7 +55,7 @@ COMPASS built detailed scaffolding so nothing gets lost **later**:
 
 ---
 
-## Read order (this folder only — you have no repo)
+## Read order (start in this folder, then repo paths in manifest)
 
 | Order | File | Why |
 |-------|------|-----|
@@ -66,9 +68,12 @@ COMPASS built detailed scaffolding so nothing gets lost **later**:
 | **7** | `05_Three_Kinds_of_Model.md` | Layer A / B / C vocabulary |
 | **8** | `07_PAPER_Campaign_Plan.md` | Sequencing context |
 | **9** | `08_Pass_A_and_Pass_B_plain_English.md` | Mechanism sim vocabulary (Act IV) |
+| **10** | `10_Army_band_excellence_and_theta_Sep24.md` | **Sep 24** — Act I viability band, θ vs MLE, panels 7–8 vs 9, PDE/Vantage |
 | **—** | `99_BACKGROUND_COMPASS_questionnaire_full.md` | **Optional deep dive** — paths, tiers, executive handoff |
 
-Charles will send **separately** (not in this folder): figure deck PPTX/HTML, flipbook PDF, any PNGs you need to *see*.
+**Figures:** Prefer repo paths (e.g. `3-Master_Plan/re_entry/HEROs_and_PASSes/`, `talent/re_entry/output/`). PPTX/HTML flipbook decks and PNGs also live in-repo; Charles may attach out-of-band only if a path is missing.
+
+**Army data:** Charles does **not** run Army analysis on Mac — feathers and plot runs stay on **Army PDE / Vantage**. You can read scrubbed code and docs in-repo; do not assume local Army plot regeneration.
 
 ---
 
@@ -83,7 +88,7 @@ Charles will send **separately** (not in this folder): figure deck PPTX/HTML, fl
 
 ## Return format
 
-One markdown document: **`STORY_OUTLINE_Charles_Alex.md`** (you create; Charles uploads back to COMPASS if useful).
+One markdown document: **`STORY_OUTLINE_Charles_Alex.md`** — write under `3-Master_Plan/VECTOR_work/` or `3-Master_Plan/re_entry/` (Charles + COMPASS can read in-repo).
 
 Sections:
 

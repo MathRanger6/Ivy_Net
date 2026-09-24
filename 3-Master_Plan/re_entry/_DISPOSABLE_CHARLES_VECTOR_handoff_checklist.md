@@ -2,7 +2,7 @@
 
 **Purpose:** Charles-side checklist. **Current phase (Sep 16):** Alex + Charles need a **storyline outline** first — each bullet tagged **have / partial / need** — not slide-level Cox HR detail.
 
-**Upload to VECTOR (no repo access):** [`../VECTOR_work/handoff_upload_no_repo/`](../VECTOR_work/handoff_upload_no_repo/) — zip and send; start at `00_READ_ME_FIRST_FOR_VECTOR.md`.
+**VECTOR handoff (repo-connected):** [`../VECTOR_work/handoff_upload_no_repo/`](../VECTOR_work/handoff_upload_no_repo/) — start at `00_READ_ME_FIRST_FOR_VECTOR.md`. **ChatGPT desktop VECTOR has Mac repo access — no zip required.**
 
 **Repo companions (Charles / COMPASS only):**  
 **Flipbook:** [`_DISPOSABLE_paper_flipbook_PD30.md`](_DISPOSABLE_paper_flipbook_PD30.md) · **Questionnaire (background):** [`../VECTOR_work/COMPASS_Dissertation_Core_Deck_Materials_Questionnaire_COMPASS_draft.md`](../VECTOR_work/COMPASS_Dissertation_Core_Deck_Materials_Questionnaire_COMPASS_draft.md)
@@ -15,7 +15,7 @@
 
 | Step | Task | Status |
 |------|------|--------|
-| **P0** | **VECTOR → story outline** for Charles + Alex (`STORY_OUTLINE_Charles_Alex.md`) | 🟢 **ready to send** — upload folder packaged |
+| **P0** | **VECTOR → story outline** for Charles + Alex (`STORY_OUTLINE_Charles_Alex.md`) | 🟢 **ready** — VECTOR reads repo; include **`10_Army_band_excellence_and_theta_Sep24.md`** (Sep 24) |
 | **P0b** | Charles + Alex **meet on outline** — pick order, cut/park beats | ⬜ after VECTOR returns |
 | 1 | Red-pen flipbook § Slide deck (Acts 0–VI) | 🟡 **background** — mostly OK; **1.4 optional** (Charles unsure partial effects value) |
 | 2 | Red-pen figure decks | ⬜ **later** — after story locked; not blocking P0 |
@@ -23,7 +23,7 @@
 | 4 | Five judgment calls | ✅ **Sep 16** |
 | 5 | Gap register G1–G5 | ✅ **Sep 16** |
 | 6 | Origin story | ✅ **Sep 16** |
-| 7 | Send VECTOR package | 🟢 **upload folder** + PPTX/PDF separately (see manifest) |
+| 7 | VECTOR onboarding | 🟢 **repo-connected** — point VECTOR at handoff folder + manifest (no zip) |
 | — | COMPASS detailed scaffolding | ✅ **background** — critical ~1 month out, not week-one VECTOR homework |
 
 ### Red-pen tally (flipbook Notes column)
@@ -44,7 +44,7 @@
 
 **COMPASS** material (flipbook rows, questionnaire, gap register, 1.4 Cox detail) = **filing cabinet** for later — not blocking the outline meeting.
 
-**Charles uploads:** [`../VECTOR_work/handoff_upload_no_repo/`](../VECTOR_work/handoff_upload_no_repo/) + figure decks out-of-band (manifest in folder).
+**VECTOR reads in-repo:** [`../VECTOR_work/handoff_upload_no_repo/`](../VECTOR_work/handoff_upload_no_repo/) + manifest paths; figure decks mostly in-repo (`_DISPOSABLE_paper_flipbook_PD30_FIGURE_*.pptx`, HERO PNG paths).
 
 ---
 
@@ -158,7 +158,7 @@ Reply to COMPASS (or paste a **Charles locks** block at the bottom of the flipbo
 
 | Gap | Priority / status |
 |-----|-------------------|
-| **G1** | **CAC access restored** — refresh canonical Army porch PNGs from AWS when ready; sandbox OK for now. |
+| **G1** | **Old PDE runnable; uploads blocked.** **Vantage** not online (frozen snapshot at cutover). Refresh porch PNGs when Vantage live + Mac upload; 5-run matrix Runs 1–3 done on old PDE. |
 | **G2** | **Core (must-show)** — keep the model slide; mechanism not fully deployed in all domains yet. |
 | **G3** | **Nice to have** — tenure formal Cox; not defense-blocking. |
 | **G4** | **6.3 approved** (Step 3) — VECTOR may polish wording; Charles also wants a **VECTOR draft variant** to compare with COMPASS stub. |
@@ -180,15 +180,15 @@ Reply to COMPASS (or paste a **Charles locks** block at the bottom of the flipbo
 
 ---
 
-## Step 7 — Send VECTOR the package
+## Step 7 — Onboard repo-connected VECTOR (P0)
 
-**Send now (P0):**
+**Charles → VECTOR (one message in ChatGPT desktop):**
 
-1. Zip [`../VECTOR_work/handoff_upload_no_repo/`](../VECTOR_work/handoff_upload_no_repo/) — VECTOR starts at `00_READ_ME_FIRST_FOR_VECTOR.md`
-2. Attach separately: figure deck PPTX/HTML, flipbook PDF (see `MANIFEST_upload_to_VECTOR.md`)
-3. Ask VECTOR to return **`STORY_OUTLINE_Charles_Alex.md`**
+1. Open repo `Cursor Workspace PDE/` — read `3-Master_Plan/VECTOR_work/handoff_upload_no_repo/00_READ_ME_FIRST_FOR_VECTOR.md`
+2. Then `MANIFEST_upload_to_VECTOR.md` (read order **01–10**, including Sep 24 Army band memo)
+3. Deliverable: **`STORY_OUTLINE_Charles_Alex.md`** in `3-Master_Plan/VECTOR_work/` or `3-Master_Plan/re_entry/`
 
-**Already in upload folder:** Charles locks (4a–4e, G1–G5), flipbook copy, binding docs, PD30 notes. Full questionnaire = `99_BACKGROUND_…` (optional).
+**No zip.** Folder name `handoff_upload_no_repo` is historical — files are **in the repo**.
 
 **Phase 2 add-ons (after outline meeting):** flipbook red-pen notes, figure deck skim, any new locks.
 
@@ -208,12 +208,12 @@ Reply to COMPASS (or paste a **Charles locks** block at the bottom of the flipbo
 
 ---
 
-## Minimum “VECTOR can start” bar (Sep 16)
+## Minimum “VECTOR can start” bar
 
 **Sufficient today:**
 
-1. Upload folder zipped  
-2. Optional: figure decks attached so VECTOR can *see* heroes  
+1. VECTOR has repo access (ChatGPT desktop)  
+2. Charles points VECTOR at `00_READ_ME_FIRST_FOR_VECTOR.md` + file **10** (Army band / θ)  
 3. One-line ask: “Draft `STORY_OUTLINE_Charles_Alex.md` — propose order; tag have/partial/need; don’t get stuck on slide 1.4.”
 
 **Not required for P0:** flipbook red-pen complete, figure deck skim, Cox HR explainer, full questionnaire.
@@ -240,3 +240,5 @@ Reply to COMPASS (or paste a **Charles locks** block at the bottom of the flipbo
 | 2026-09-16 | **Charles locks:** Steps **4–6** ✅ (4a–4e, G1–G5, origin story + CAC restored). Step **7** blocked on figure deck skim + slide **1.4**. |
 | 2026-09-16 | **Slide 1.1 ✅:** HERO robust across branches; deck = all-branches anchor + CS+CSS (stronger); **G1a** PNG regen pending. |
 | 2026-09-16 | **Phase pivot:** P0 = VECTOR **story outline** (have/partial/need); upload folder for no-repo handoff; COMPASS detail → background. |
+| 2026-09-24 | **Army band of excellence + θ memo** → `talent/re_entry/BAND_OF_EXCELLENCE_ARMY_PORCH.md`; VECTOR addendum **`10_Army_band_excellence_and_theta_Sep24.md`**; PD41 brief §6b; G1 → PDE/Vantage. |
+| 2026-09-24 | **VECTOR repo-connected** (ChatGPT desktop, Mac repo) — zip handoff obsolete; updated `00_READ_ME_FIRST`, manifest, Step 7. |
