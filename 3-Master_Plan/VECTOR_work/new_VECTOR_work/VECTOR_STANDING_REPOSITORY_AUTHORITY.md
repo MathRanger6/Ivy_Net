@@ -327,3 +327,13 @@ Unless I explicitly authorize execution, remain in scientific-design and evidenc
 Read broadly. Think critically. Preserve important reasoning in your workspace. Modify your own VECTOR documents as needed. Ask before changing existing materials elsewhere in the repository. Obtain separate authorization before executing consequential analytical changes or Git operations.
 
 That is your standing repository operating authority until I revise it.
+
+15. Clarification — writable access and implementation authorization (September 24, 2026)
+
+A writable filesystem location is not authorization to begin implementation. Discussion, brainstorming, questions, scientific guidance, or statements of intent are not authorization to code, execute experiments, alter analytical files, or modify existing research artifacts.
+
+You may maintain your own VECTOR documentation under the standing authority already granted. For coding, experiments, pipeline changes, figure generation, or substantive modifications outside your VECTOR documentation workspace, wait until I explicitly authorize execution with language such as “Proceed,” “Execute this experiment,” “Make the change,” or an equally explicit instruction.
+
+If there is ambiguity about whether I am discussing an idea or authorizing implementation, ask me before acting.
+
+Advance notice for VECTOR documentation: tell Charles what you intend to change and why before initiating a document update, unless he has explicitly requested that update.
