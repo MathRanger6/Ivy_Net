@@ -127,14 +127,11 @@ insert_suffix() {
   fi
 }
 
-# Subfolder label: strip leading underscores from suffix.
+# Subfolder label: _run1_legacy -> run1_legacy
 subfolder_from_suffix() {
-  local name="$suffix"
-  while [[ "$name" == _* ]]; do
-    name="${name#_}"
-  done
+  local name="${suffix#_}"
   if [[ -z "$name" ]]; then
-    echo "ERROR: SUFFIX must leave a non-empty subfolder name (got: $suffix)" >&2
+    echo "ERROR: SUFFIX must be like _run1_legacy (got: $suffix)" >&2
     exit 1
   fi
   printf '%s' "$name"
@@ -156,22 +153,20 @@ new_name() {
 }
 
 process_directory() {
-  local target_dir="$1"
-  local label="${2:-$(basename "$target_dir")}"
-
-  if [[ ! -d "$target_dir" ]]; then
-    echo "WARN: skipping missing directory: $target_dir" >&2
+  # Do not use global target_dir here (CLI sets target_dir="" at top level).
+  if [[ ! -d "$1" ]]; then
+    echo "WARN: skipping missing directory: $1" >&2
     return 0
   fi
 
-  target_dir="$(cd "$target_dir" && pwd)"
-
-  local insert dest_subdir dest_dir
+  local src_dir label insert dest_subdir dest_dir
+  src_dir="$(cd "$1" && pwd)"
+  label="${2:-$(basename "$src_dir")}"
   insert="$(insert_suffix)"
 
   if [[ "$in_place" -eq 0 ]]; then
     dest_subdir="$(subfolder_from_suffix)"
-    dest_dir="$target_dir/$dest_subdir"
+    dest_dir="$src_dir/$dest_subdir"
     if [[ "$dry_run" -eq 1 ]]; then
       echo "DRY-RUN: would create subfolder: $dest_dir"
     else
@@ -180,15 +175,15 @@ process_directory() {
     fi
   else
     dest_subdir=""
-    dest_dir="$target_dir"
+    dest_dir="$src_dir"
   fi
 
   shopt -s nullglob
   local entries
   if [[ "$include_dot" -eq 1 ]]; then
-    entries=("$target_dir"/* "$target_dir"/.[!.]* "$target_dir"/..?*)
+    entries=("$src_dir"/* "$src_dir"/.[!.]* "$src_dir"/..?*)
   else
-    entries=("$target_dir"/*)
+    entries=("$src_dir"/*)
   fi
 
   local renamed=0 skipped=0 path base dest_name dest_path
@@ -230,9 +225,9 @@ process_directory() {
   done
 
   if [[ "$in_place" -eq 1 ]]; then
-    echo "Done [$label]. Renamed: $renamed  Skipped: $skipped  Dir: $target_dir  Insert: ${insert}"
+    echo "Done [$label]. Renamed: $renamed  Skipped: $skipped  Dir: $src_dir  Insert: ${insert}"
   else
-    echo "Done [$label]. Moved: $renamed  Skipped: $skipped  Source: $target_dir  Dest: $dest_subdir/  Insert: ${insert}"
+    echo "Done [$label]. Moved: $renamed  Skipped: $skipped  Source: $src_dir  Dest: $dest_subdir/  Insert: ${insert}"
   fi
 
   TOTAL_RENAMED=$((TOTAL_RENAMED + renamed))
@@ -246,7 +241,8 @@ DIRS_PROCESSED=0
 
 if [[ "$all_output" -eq 1 ]]; then
   echo "Army output root: $DEFAULT_OUTPUT_ROOT"
-  echo "Suffix: $suffix"
+  echo "Suffix: $suffix  ->  subfolder in each dir: $(subfolder_from_suffix)/"
+  echo "(Do not use --in-place; default moves files into that subfolder with suffix in filename.)"
   echo "---"
   for sub in "${ARMY_OUTPUT_DIRS[@]}"; do
     process_directory "$DEFAULT_OUTPUT_ROOT/$sub" "$sub"

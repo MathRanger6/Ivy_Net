@@ -245,6 +245,14 @@ Compare **H_sort** and **HERO porch** to Run 1 backup in `output/*/run1_legacy/`
 
 ## 2h · Save before Run 3
 
+**Feather first** (Run 5 plot-only needs this archive — same pattern as Run 1 → Run 4):
+
+```bash
+cp big_dfs/df_pipeline_11_cox_analysis.feather big_dfs/df_pipeline_11_run2_thru.feather
+```
+
+**Then** plot backup:
+
 ```bash
 bash scripts/backup_rename_suffix.sh _run2_thru --all-output
 ```
@@ -302,6 +310,14 @@ Compare **H_sort** and **HERO** to Run 2 backup (`_run2_thru`).
 
 ## 3h · Save
 
+**Feather first:**
+
+```bash
+cp big_dfs/df_pipeline_11_cox_analysis.feather big_dfs/df_pipeline_11_run3_thru_nozero.feather
+```
+
+**Then** plot backup:
+
 ```bash
 bash scripts/backup_rename_suffix.sh _run3_thru_nozero --all-output
 ```
@@ -314,13 +330,21 @@ bash scripts/backup_rename_suffix.sh _run3_thru_nozero --all-output
 
 ## 4a · Before you start
 
-Restore Run 1 feather **OR** never overwrite it after Run 1 — you need legacy-grain feather from Run 1.
+Restore Run 1 feather — plot scripts read **`big_dfs/df_pipeline_11_cox_analysis.feather`**, which after Run 3 is **thru + nozero**, not legacy.
 
-If you already re-ran notebook for Run 2+, re-do Run 1 notebook first **or** keep a copy:
+**SAVE after Run 1 notebook** (section 1h — archive legacy grain):
 
 ```bash
 cp big_dfs/df_pipeline_11_cox_analysis.feather big_dfs/df_pipeline_11_run1_legacy.feather
 ```
+
+**RESTORE before Run 4 plots** (copy archived Run 1 **back** into the live slot):
+
+```bash
+cp big_dfs/df_pipeline_11_run1_legacy.feather big_dfs/df_pipeline_11_cox_analysis.feather
+```
+
+If `df_pipeline_11_run1_legacy.feather` does not exist, re-run the Run 1 notebook first, then SAVE, then RESTORE as above.
 
 ## 4b · `pipeline_config.py`
 
@@ -344,13 +368,7 @@ Save.
 
 ## 4d · Notebook
 
-**Skip** — use Run 1 feather.
-
-If feather was overwritten, copy back:
-
-```bash
-cp big_dfs/df_pipeline_11_run1_legacy.feather big_dfs/df_pipeline_11_cox_analysis.feather
-```
+**Skip** — use Run 1 feather (RESTORE in **4a** if you already ran Runs 2–3).
 
 ## 4e · Feather check
 
@@ -400,11 +418,16 @@ bash scripts/backup_rename_suffix.sh _run4_legacy_minusmean --all-output
 
 ## 5a · Restore Run 2 feather
 
+**RESTORE** (archived Run 2 → live slot plots read):
+
 ```bash
 cp big_dfs/df_pipeline_11_run2_thru.feather big_dfs/df_pipeline_11_cox_analysis.feather
 ```
 
-(Save Run 2 feather right after Run 2 notebook if you have not already.)
+That archive must exist from **Run 2h** (`cox_analysis` → `run2_thru`). If you skipped 2h feather save, either:
+
+- Re-run the **Run 2 notebook** (2b config), SAVE again with the **2h** `cp`, then proceed; or  
+- Check `ls -lh big_dfs/df_pipeline_11_run2_thru.feather` — you may have saved it without the checklist telling you.
 
 ## 5b · `pipeline_config.py`
 
@@ -450,18 +473,19 @@ bash scripts/backup_rename_suffix.sh _run5_thru_minusmean --all-output
 | 4 legacy minus | legacy | no | minus-mean | | |
 | 5 thru minus | active_at_eval_thru | no | minus-mean | | |
 
-**Tip:** Save feathers when notebook finishes so plot-only runs work:
+**Feather archive cheat sheet** (each SAVE is in that run’s **·h** section):
 
-```bash
-cp big_dfs/df_pipeline_11_cox_analysis.feather big_dfs/df_pipeline_11_run1_legacy.feather   # after Run 1
-cp big_dfs/df_pipeline_11_cox_analysis.feather big_dfs/df_pipeline_11_run2_thru.feather     # after Run 2
-cp big_dfs/df_pipeline_11_cox_analysis.feather big_dfs/df_pipeline_11_run3_thru_nozero.feather  # after Run 3
-```
+| After run | SAVE command |
+|-----------|----------------|
+| Run 1 | `cp ..._cox_analysis.feather ..._run1_legacy.feather` ( **1h** ) |
+| Run 2 | `cp ..._cox_analysis.feather ..._run2_thru.feather` ( **2h** ) |
+| Run 3 | `cp ..._cox_analysis.feather ..._run3_thru_nozero.feather` ( **3h** ) |
 
 ---
 
 # Common mistakes (read when tired)
 
+- **Run 5 needs `run2_thru.feather`** — SAVE in **2h**, RESTORE in **5a**. Plot backup alone (`backup_rename_suffix.sh`) does **not** save feathers.
 - HERO fails with `Column not in feather: z_pool_tb_ratio_mean_snr_fwd` → use **`pool_tb_ratio_mean_snr_fwd`** for straight LOO (Runs 1–3).
 - Mosaic fails `FileNotFoundError` → manifest panel 9 path must **exactly match** HERO output filename.
 - Changed `pipeline_config.py` but **did not re-run Cell 5→11** → feather still old grain.
