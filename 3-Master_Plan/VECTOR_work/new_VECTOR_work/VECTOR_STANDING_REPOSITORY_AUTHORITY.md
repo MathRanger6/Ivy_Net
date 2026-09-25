@@ -337,3 +337,11 @@ You may maintain your own VECTOR documentation under the standing authority alre
 If there is ambiguity about whether I am discussing an idea or authorizing implementation, ask me before acting.
 
 Advance notice for VECTOR documentation: tell Charles what you intend to change and why before initiating a document update, unless he has explicitly requested that update.
+
+16. Detailed decision records and language (September 25, 2026)
+
+As the assortativity experiment is designed, maintain a detailed record of the choices, their rationale, examples where useful, alternatives, and questions still open in assort_analysis/docs/. Preserve subsequent changes explicitly. Agreement on a design choice does not constitute authorization to code or execute the experiment.
+
+Charles's terminology instruction: “Unless you hear me use a shorthand expression, always use a long version of a term, followed in parentheses by the term you propose to use. Continue that until you hear me use the shorthand, then we can only use the shorthand.”
+
+Apply this throughout explanations and new documentation. An abbreviation introduced by VECTOR is not thereby adopted by Charles. Charles welcomes verbosity in research documents and benefits from plain-language explanations and brief illustrative examples. Ask necessary design questions one at a time.

@@ -24,6 +24,8 @@
 |---------------|------------------------|
 | **Legacy pool grain** | `POOL_GROUPING_MODE = 'legacy'` — peers share the same HRC snapshot date and the same senior-rater identifier (`snr_rater_bwd`). |
 | **Eval-thru pool grain** | `POOL_GROUPING_MODE = 'active_at_eval_thru'` — peers are senior-rater officers whose OER evaluation window **covers this row’s OER completion date** (`eval_thru_dt_bwd`). |
+| **Snapshot pool grain** | `POOL_GROUPING_MODE = 'active_at_snapshot'` — peers are senior-rater officers whose OER window **covers this row’s HRC snapshot date** (`snpsht_dt`). |
+| **Exact rating-window pool grain** | `POOL_GROUPING_MODE = 'rating_window'` — peers share the same snapshot, senior rater, **and identical** backward eval window (`eval_strt/thru_bwd`). Often tiny or empty buckets; use as an empirical probe, not the main story. |
 | **Keep zero–TB peers in pool** | `POOL_EXCLUDE_PEER_TB_ZERO = False` |
 | **Drop zero–TB peers from pool mean and size** | `POOL_EXCLUDE_PEER_TB_ZERO = True` — removes **peers** with `tb_ratio == 0` from pool statistics; **does not** remove the rated officer from the cohort. |
 | **Straight leave-one-out pond level (T̂_j)** | Feather column `pool_tb_ratio_mean_snr_fwd` — mean senior-rater pool talent, leave-one-out. |
@@ -36,7 +38,7 @@
 
 ---
 
-## Five runs — overview
+## Core matrix (Runs 1–5) — overview
 
 | Run label | Pool grain | Zero–TB peers | Peer metric on plots | Re-run notebook? |
 |-----------|------------|---------------|----------------------|------------------|
@@ -46,6 +48,20 @@
 | **Run 4** (optional) | legacy (from archived feather) | keep | minus-mean | **No** — plots only |
 | **Run 5** (optional) | eval-thru (from archived feather) | keep | minus-mean | **No** — plots only |
 
+## Optional exploration (Runs 6–8) — **config only on old PDE / Army Virtual Desktop**
+
+No new Python on AWS: only **`pipeline_config.py`**, then the **520 notebook** + plot scripts (straight leave-one-out). **Each optional run below is a full cold-start checklist** — you can redo Run 6, 7, or 8 alone without opening another run section.
+
+| Run label | Pool grain | Zero–TB peers | What you learn |
+|-----------|------------|---------------|----------------|
+| **Run 6** | snapshot | keep | Panel-date anchor vs Run 2 (eval-thru) — same SNR, different “who counts as peer.” |
+| **Run 7** | rating_window | keep | Empirical check: how often exact shared windows yield usable pools (expect many tiny buckets). |
+| **Run 8** | snapshot | exclude from pool | Mirror Run 3 at snapshot grain — is peer–TB-zero effect **anchor-dependent**? |
+
+**If time is tight:** do **Run 6 + Run 8**; skip Run 7 unless you want a one-line pool-size fact for the memo.
+
+**Not on old PDE without Mac upload:** own-officer TB≠0 plot cohort, weighted window pools, renamed config flags — see `BAND_OF_EXCELLENCE_ARMY_PORCH.md`.
+
 **Feather archives you must save after notebook runs:**
 
 | Archive file | Create after |
@@ -53,6 +69,9 @@
 | `big_dfs/df_pipeline_11_run1_legacy.feather` | Run 1 notebook |
 | `big_dfs/df_pipeline_11_run2_thru.feather` | Run 2 notebook |
 | `big_dfs/df_pipeline_11_run3_thru_nozero.feather` | Run 3 notebook |
+| `big_dfs/df_pipeline_11_run6_activesnap.feather` | Run 6 notebook (optional) |
+| `big_dfs/df_pipeline_11_run7_ratingwindow.feather` | Run 7 notebook (optional) |
+| `big_dfs/df_pipeline_11_run8_activesnap_nozero.feather` | Run 8 notebook (optional) |
 
 Plot backup (`backup_rename_suffix.sh`) **does not** copy feathers. You must run the **`cp`** commands in each run’s save step.
 
@@ -62,7 +81,7 @@ Plot backup (`backup_rename_suffix.sh`) **does not** copy feathers. You must run
 
 These files live under `talent/re_entry/` on AWS.
 
-### Straight leave-one-out pond level (Runs 1, 2, 3)
+### Straight leave-one-out pond level (Runs 1, 2, 3, 6, 7, 8)
 
 | File | Line | Must read |
 |------|------|-----------|
@@ -70,13 +89,13 @@ These files live under `talent/re_entry/` on AWS.
 | `army_hero_slide_plot.py` | 44 | `plot_var = "pool_tb_ratio_mean_snr_fwd"` |
 | `army_act2_probes.py` | 55 | `COL_LOO_Z = "z_pool_tb_ratio_mean_snr_fwd"` *(column usually missing → Act II z-scores `COL_LOO` from basic plots)* |
 
-**HERO command-line flag (Runs 1–3):**
+**HERO command-line flag (Runs 1–3, 6–8):**
 
 ```bash
 python talent/re_entry/army_hero_slide_plot.py --plot-var pool_tb_ratio_mean_snr_fwd
 ```
 
-**Manifest panel 9 path (Runs 1–3):**
+**Manifest panel 9 path (Runs 1–3, 6–8):**
 
 ```text
 talent/re_entry/output/hero/ARMY_HERO_ew8_pool_tb_ratio_mean_snr_fwd_run1.png
@@ -84,7 +103,7 @@ talent/re_entry/output/hero/ARMY_HERO_ew8_pool_tb_ratio_mean_snr_fwd_run1.png
 
 **Do not** use `--plot-var pool_tb_ratio_mean_snr_fwd_run1.png` — that is a filename, not a column name.
 
-**Do not** use `z_pool_tb_ratio_mean_snr_fwd` for Runs 1–3 unless you add that column via a separate Cell 10.5 config path.
+**Do not** use `z_pool_tb_ratio_mean_snr_fwd` for Runs 1–3 or 6–8 unless you add that column via a separate Cell 10.5 config path.
 
 ### Minus-mean peer context (Runs 4, 5)
 
@@ -835,6 +854,468 @@ bash scripts/backup_rename_suffix.sh _run5_thru_minusmean --all-output
 
 ---
 
+# RUN 6 · Snapshot pool grain · straight leave-one-out · keep zero–TB peers
+
+**What this run isolates:** Straight leave-one-out pond level on plots; peers defined by **`active_at_snapshot`** (OER window covers **`snpsht_dt`**) — compare panel 5 **H_sort** to eval-thru grain when you have Run 2 archived.
+
+---
+
+## Run 6 — Step 1 · Open terminal on AWS
+
+```bash
+cd /path/to/Network_1P_shell
+conda activate TALNET39
+date
+```
+
+---
+
+## Run 6 — Step 2 · Edit `pipeline_config.py`
+
+```python
+POOL_GROUPING_MODE = 'active_at_snapshot'
+POOL_EXCLUDE_PEER_TB_ZERO = False
+CELL5_POOL_MEANS = True
+CELL6_POOL_RANKS = True
+```
+
+Save the file.
+
+---
+
+## Run 6 — Step 3 · Edit plot scripts (straight leave-one-out)
+
+**File:** `talent/re_entry/army_basic_plots.py` — **line 42:**
+
+```python
+COL_LOO = "pool_tb_ratio_mean_snr_fwd"
+```
+
+**File:** `talent/re_entry/army_hero_slide_plot.py` — **line 44:**
+
+```python
+plot_var = "pool_tb_ratio_mean_snr_fwd"
+```
+
+**File:** `talent/re_entry/army_act2_probes.py` — **line 55:**
+
+```python
+COL_LOO_Z = "z_pool_tb_ratio_mean_snr_fwd"
+```
+
+Save all edited files.
+
+---
+
+## Run 6 — Step 3b · One-time fix on old PDE (Cell 5 `KeyError: snpsht_dt`)
+
+If Cell 5 crashes with **`KeyError: 'snpsht_dt'`** inside `_add_pool_mean_size_active_at_anchor`, the AWS copy of **`add_cum_oer_metrics_mod_working.py`** predates the snapshot merge fix. Edit that file at **520 root** (same folder as the notebook).
+
+Find the block that builds `peer_g` before `cross = left.merge(peer_g, on=rater_col, ...)`. **Replace** the old `peer_g = peers.rename(columns={...})` with:
+
+```python
+        peer_rename = {
+            pid_col: '_peer_pid',
+            eval_strt_col: '_peer_strt',
+            eval_thru_col: '_peer_thru',
+            value_col: '_peer_val',
+        }
+        if anchor_col not in (eval_strt_col, eval_thru_col):
+            peer_rename[anchor_col] = '_peer_anchor'
+        peer_g = peers.rename(columns=peer_rename)
+        cross = left.merge(peer_g, on=rater_col, how='inner')
+```
+
+Save the file. Run **Cell 0** (reload modules), then continue at Step 4. **Run 8** uses the same mode — this patch covers both.
+
+---
+
+## Run 6 — Step 4 · Run notebook cells
+
+Open `520_pipeline_cox_working.ipynb`.
+
+Run **Cell 0**, **Cell 5**, **Cell 6** (or `cp` fallback), **Cell 7**, **Cell 8**, **Cell 9**, **Cell 10**, **Cell 10.5**, **Cell 11**.
+
+In the Cell 5 log, confirm:
+
+```text
+POOL_GROUPING_MODE='active_at_snapshot'
+```
+
+---
+
+## Run 6 — Step 5 · Check feather columns
+
+```bash
+python3 -c "import pandas as pd; df=pd.read_feather('big_dfs/df_pipeline_11_cox_analysis.feather'); print('pool_tb_ratio_mean_snr_fwd', 'YES' if 'pool_tb_ratio_mean_snr_fwd' in df.columns else 'MISSING')"
+```
+
+Expect: **`YES`**.
+
+---
+
+## Run 6 — Step 6 · Edit manifest panel 9
+
+Open `talent/re_entry/manifests/army_run1_3x3_manifest.json`.
+
+Set panel 9 `"path"` to:
+
+```text
+talent/re_entry/output/hero/ARMY_HERO_ew8_pool_tb_ratio_mean_snr_fwd_run1.png
+```
+
+Save the manifest.
+
+---
+
+## Run 6 — Step 7 · Run plot scripts and mosaic
+
+```bash
+python talent/re_entry/army_basic_plots.py --all
+python talent/re_entry/army_act2_probes.py --plot all_probes
+python talent/re_entry/army_hero_slide_plot.py --plot-var pool_tb_ratio_mean_snr_fwd
+python talent/re_entry/build_army_data_story.py
+```
+
+---
+
+## Run 6 — Step 8 · Verify Run 6
+
+```bash
+grep POOL_GROUPING_MODE pipeline_config.py
+grep POOL_EXCLUDE_PEER_TB_ZERO pipeline_config.py
+ls -l talent/re_entry/output/hero/ARMY_HERO_ew8_pool_tb_ratio_mean_snr_fwd_run1.png
+ls -l talent/re_entry/output/data_story/ARMY_DATA_STORY_run1_3x3.png
+```
+
+In the basic plots log, find:
+
+```text
+Overlap pool grain: POOL_GROUPING_MODE='active_at_snapshot'
+```
+
+Record panel 5 **H_sort** and panel 9 porch notes. If you have Run 2 plots archived under `talent/re_entry/output/*/run2_thru/`, compare **H_sort** (snapshot anchor vs eval-thru anchor).
+
+---
+
+## Run 6 — Step 9 · Archive feather and plots
+
+**Save feather:**
+
+```bash
+cp big_dfs/df_pipeline_11_cox_analysis.feather big_dfs/df_pipeline_11_run6_activesnap.feather
+```
+
+**Save plots:**
+
+```bash
+bash scripts/backup_rename_suffix.sh _run6_activesnap --all-output
+```
+
+---
+
+# RUN 7 · Rating-window pool grain · straight leave-one-out · keep zero–TB peers
+
+**What this run isolates:** Strictest **`rating_window`** pool grain already in config — documents how often exact shared eval windows yield usable pools (often tiny buckets).
+
+---
+
+## Run 7 — Step 1 · Open terminal on AWS
+
+```bash
+cd /path/to/Network_1P_shell
+conda activate TALNET39
+date
+```
+
+---
+
+## Run 7 — Step 2 · Edit `pipeline_config.py`
+
+```python
+POOL_GROUPING_MODE = 'rating_window'
+POOL_EXCLUDE_PEER_TB_ZERO = False
+CELL5_POOL_MEANS = True
+CELL6_POOL_RANKS = True
+```
+
+Save the file.
+
+---
+
+## Run 7 — Step 3 · Edit plot scripts (straight leave-one-out)
+
+**File:** `talent/re_entry/army_basic_plots.py` — **line 42:**
+
+```python
+COL_LOO = "pool_tb_ratio_mean_snr_fwd"
+```
+
+**File:** `talent/re_entry/army_hero_slide_plot.py` — **line 44:**
+
+```python
+plot_var = "pool_tb_ratio_mean_snr_fwd"
+```
+
+**File:** `talent/re_entry/army_act2_probes.py` — **line 55:**
+
+```python
+COL_LOO_Z = "z_pool_tb_ratio_mean_snr_fwd"
+```
+
+Save all edited files.
+
+---
+
+## Run 7 — Step 4 · Run notebook cells
+
+Open `520_pipeline_cox_working.ipynb`.
+
+Run **Cell 0**, **Cell 5**, **Cell 6** (or `cp` fallback), **Cell 7**, **Cell 8**, **Cell 9**, **Cell 10**, **Cell 10.5**, **Cell 11**.
+
+In the Cell 5 log, confirm:
+
+```text
+POOL_GROUPING_MODE='rating_window'
+```
+
+---
+
+## Run 7 — Step 5 · Check feather columns
+
+```bash
+python3 -c "import pandas as pd; df=pd.read_feather('big_dfs/df_pipeline_11_cox_analysis.feather'); print('pool_tb_ratio_mean_snr_fwd', 'YES' if 'pool_tb_ratio_mean_snr_fwd' in df.columns else 'MISSING')"
+```
+
+Expect: **`YES`**.
+
+Pool-size diagnostic (recommended for this grain):
+
+```bash
+python3 -c "import pandas as pd; df=pd.read_feather('big_dfs/df_pipeline_11_cox_analysis.feather'); ps=df['pool_size_snr_fwd'] if 'pool_size_snr_fwd' in df.columns else None; print('pool_size median', ps.median() if ps is not None else 'no column'); print('share pool_size<3', (ps<3).mean() if ps is not None else 'n/a')"
+```
+
+Optional:
+
+```bash
+python -u talent/re_entry/army_pool_size_probe.py
+```
+
+---
+
+## Run 7 — Step 6 · Edit manifest panel 9
+
+Open `talent/re_entry/manifests/army_run1_3x3_manifest.json`.
+
+Set panel 9 `"path"` to:
+
+```text
+talent/re_entry/output/hero/ARMY_HERO_ew8_pool_tb_ratio_mean_snr_fwd_run1.png
+```
+
+Save the manifest.
+
+---
+
+## Run 7 — Step 7 · Run plot scripts and mosaic
+
+```bash
+python talent/re_entry/army_basic_plots.py --all
+python talent/re_entry/army_act2_probes.py --plot all_probes
+python talent/re_entry/army_hero_slide_plot.py --plot-var pool_tb_ratio_mean_snr_fwd
+python talent/re_entry/build_army_data_story.py
+```
+
+---
+
+## Run 7 — Step 8 · Verify Run 7
+
+```bash
+grep POOL_GROUPING_MODE pipeline_config.py
+grep POOL_EXCLUDE_PEER_TB_ZERO pipeline_config.py
+ls -l talent/re_entry/output/hero/ARMY_HERO_ew8_pool_tb_ratio_mean_snr_fwd_run1.png
+ls -l talent/re_entry/output/data_story/ARMY_DATA_STORY_run1_3x3.png
+```
+
+In the basic plots log, find:
+
+```text
+Overlap pool grain: POOL_GROUPING_MODE='rating_window'
+```
+
+Expect **lower median pool size** and/or more rows failing `pool_size ≥ 3` downstream than Run 2 or Run 6. Record panel 5 **H_sort** even if noisy — documents the sparse-bucket regime.
+
+---
+
+## Run 7 — Step 9 · Archive feather and plots
+
+**Save feather:**
+
+```bash
+cp big_dfs/df_pipeline_11_cox_analysis.feather big_dfs/df_pipeline_11_run7_ratingwindow.feather
+```
+
+**Save plots:**
+
+```bash
+bash scripts/backup_rename_suffix.sh _run7_ratingwindow --all-output
+```
+
+---
+
+# RUN 8 · Snapshot pool grain · straight leave-one-out · exclude zero–TB peers
+
+**What this run isolates:** **`active_at_snapshot`** pool grain with **`POOL_EXCLUDE_PEER_TB_ZERO = True`** — peers with `tb_ratio == 0` dropped from pool mean and size; compare panel 5 to Run 6 (snapshot, keep peers) and to Run 3 (eval-thru, exclude peers).
+
+---
+
+## Run 8 — Step 1 · Open terminal on AWS
+
+```bash
+cd /path/to/Network_1P_shell
+conda activate TALNET39
+date
+```
+
+---
+
+## Run 8 — Step 2 · Edit `pipeline_config.py`
+
+```python
+POOL_GROUPING_MODE = 'active_at_snapshot'
+POOL_EXCLUDE_PEER_TB_ZERO = True
+CELL5_POOL_MEANS = True
+CELL6_POOL_RANKS = True
+```
+
+Save the file.
+
+---
+
+## Run 8 — Step 3 · Edit plot scripts (straight leave-one-out)
+
+**File:** `talent/re_entry/army_basic_plots.py` — **line 42:**
+
+```python
+COL_LOO = "pool_tb_ratio_mean_snr_fwd"
+```
+
+**File:** `talent/re_entry/army_hero_slide_plot.py` — **line 44:**
+
+```python
+plot_var = "pool_tb_ratio_mean_snr_fwd"
+```
+
+**File:** `talent/re_entry/army_act2_probes.py` — **line 55:**
+
+```python
+COL_LOO_Z = "z_pool_tb_ratio_mean_snr_fwd"
+```
+
+Save all edited files.
+
+---
+
+## Run 8 — Step 4 · Run notebook cells
+
+Open `520_pipeline_cox_working.ipynb`.
+
+Run **Cell 0**, **Cell 5**, **Cell 6** (or `cp` fallback), **Cell 7**, **Cell 8**, **Cell 9**, **Cell 10**, **Cell 10.5**, **Cell 11**.
+
+In the Cell 5 log, confirm:
+
+```text
+POOL_GROUPING_MODE='active_at_snapshot'
+```
+
+and, if printed:
+
+```text
+POOL_EXCLUDE_PEER_TB_ZERO=True
+```
+
+---
+
+## Run 8 — Step 5 · Check feather columns
+
+```bash
+python3 -c "import pandas as pd; df=pd.read_feather('big_dfs/df_pipeline_11_cox_analysis.feather'); print('pool_tb_ratio_mean_snr_fwd', 'YES' if 'pool_tb_ratio_mean_snr_fwd' in df.columns else 'MISSING')"
+```
+
+Expect: **`YES`**.
+
+Optional pool-size diagnostic:
+
+```bash
+python -u talent/re_entry/army_pool_size_probe.py
+```
+
+---
+
+## Run 8 — Step 6 · Edit manifest panel 9
+
+Open `talent/re_entry/manifests/army_run1_3x3_manifest.json`.
+
+Set panel 9 `"path"` to:
+
+```text
+talent/re_entry/output/hero/ARMY_HERO_ew8_pool_tb_ratio_mean_snr_fwd_run1.png
+```
+
+Save the manifest.
+
+---
+
+## Run 8 — Step 7 · Run plot scripts and mosaic
+
+```bash
+python talent/re_entry/army_basic_plots.py --all
+python talent/re_entry/army_act2_probes.py --plot all_probes
+python talent/re_entry/army_hero_slide_plot.py --plot-var pool_tb_ratio_mean_snr_fwd
+python talent/re_entry/build_army_data_story.py
+```
+
+---
+
+## Run 8 — Step 8 · Verify Run 8
+
+Panel 5 title should include **`exclude tb_ratio=0 peers`**.
+
+```bash
+grep POOL_GROUPING_MODE pipeline_config.py
+grep POOL_EXCLUDE_PEER_TB_ZERO pipeline_config.py
+ls -l talent/re_entry/output/hero/ARMY_HERO_ew8_pool_tb_ratio_mean_snr_fwd_run1.png
+ls -l talent/re_entry/output/data_story/ARMY_DATA_STORY_run1_3x3.png
+```
+
+In the basic plots log, find:
+
+```text
+Overlap pool grain: POOL_GROUPING_MODE='active_at_snapshot'
+```
+
+Compare panel 5 **H_sort** and panel 9 porch to Run 6 backup in `talent/re_entry/output/*/run6_activesnap/` and Run 3 backup in `talent/re_entry/output/*/run3_thru_nozero/`.
+
+Panel 2 left histogram may still show a spike at own talent equal to zero — that is **own performance**, not the pool-exclusion toggle.
+
+---
+
+## Run 8 — Step 9 · Archive feather and plots
+
+**Save feather:**
+
+```bash
+cp big_dfs/df_pipeline_11_cox_analysis.feather big_dfs/df_pipeline_11_run8_activesnap_nozero.feather
+```
+
+**Save plots:**
+
+```bash
+bash scripts/backup_rename_suffix.sh _run8_activesnap_nozero --all-output
+```
+
+---
+
 # Results table — fill in for Alex
 
 | Run | Pool grain | Exclude zero–TB peers? | Peer metric on plots | H_sort (panel 5) | HERO porch note (panel 9) |
@@ -844,6 +1325,9 @@ bash scripts/backup_rename_suffix.sh _run5_thru_minusmean --all-output
 | 3 eval-thru no-zero | `active_at_eval_thru` | yes | straight leave-one-out | | |
 | 4 legacy minus-mean | `legacy` (archived feather) | no | minus-mean | | |
 | 5 eval-thru minus-mean | `active_at_eval_thru` (archived feather) | no | minus-mean | | |
+| 6 snapshot | `active_at_snapshot` | no | straight leave-one-out | | |
+| 7 rating_window | `rating_window` | no | straight leave-one-out | | |
+| 8 snapshot no-zero | `active_at_snapshot` | yes | straight leave-one-out | | |
 
 ---
 
@@ -861,6 +1345,7 @@ bash scripts/backup_rename_suffix.sh _run5_thru_minusmean --all-output
 | Changed `pipeline_config.py` but feather unchanged | Did not re-run Cell 5–11 | Re-run notebook after config change |
 | Panel 1 shows N=39,517 but panel 2 shows n≈15,977 | Different filters (cohort vs analysis sample) | Expected — not a compositor bug |
 | Panel 2 zero spike after Run 3 exclude | Own talent zero, not peer exclusion | Expected — toggle drops **peers** with TB=0 only |
+| Cell 5 `KeyError: 'snpsht_dt'` with `active_at_snapshot` | Merge duplicated `snpsht_dt` → `_x`/`_y` columns | Apply **Run 6 Step 3b** patch in `add_cum_oer_metrics_mod_working.py`; Cell 0 reload |
 
 ---
 
@@ -871,4 +1356,4 @@ bash scripts/backup_rename_suffix.sh _run5_thru_minusmean --all-output
 
 ---
 
-*Updated 2026-09-24 — full cold-start rewrite, no cross-run shorthand.*
+*Updated 2026-09-25 — Runs 6–8 full cold-start steps (no cross-run shorthand).*

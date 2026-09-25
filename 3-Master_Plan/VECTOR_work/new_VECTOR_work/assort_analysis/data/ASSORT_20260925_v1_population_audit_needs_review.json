@@ -1,0 +1,18 @@
+{
+  "blank_identity_rows_removed": 7,
+  "dash_rows_removed": 0,
+  "eligible_with_partial_or_unexpected_missing_stats": 100,
+  "expected_no_play_rows": 58624,
+  "multi_team_athletes_after_coverage": 85,
+  "partial_missing_stat_rows": 105,
+  "player_team_rows_after_minutes": 4263,
+  "player_team_rows_before_minutes": 5662,
+  "removed_athlete_team_records": 85,
+  "rows_removed_coverage": 7636,
+  "rows_removed_wrong_team": 409,
+  "source_rows_2015": 182657,
+  "source_rows_total": 3479880,
+  "teams_after_coverage": 351,
+  "teams_before_coverage": 638,
+  "unexpected_both_missing_rows": 0
+}

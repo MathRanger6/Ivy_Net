@@ -1,0 +1,106 @@
+source_data_row,game_id,athlete_id,athlete_display_name,team_id,team_short_display_name,minutes,points,did_not_play,active
+1538667,400588733,61330,Damien Wilson,338,Kennesaw St,,22.0,False,False
+1538668,400588733,61194,Nigel Pruitt,338,Kennesaw St,,3.0,False,False
+1538669,400588733,56297,Willy Kouassi,338,Kennesaw St,,5.0,False,False
+1538670,400588733,61195,Yonel Brown,338,Kennesaw St,,20.0,False,False
+1538671,400588733,57198,Delbert Love,338,Kennesaw St,,14.0,False,False
+1538672,400588733,3058797,Orlando Coleman,338,Kennesaw St,,8.0,False,False
+1538673,400588733,66513,Jordan Jones,338,Kennesaw St,,0.0,False,False
+1538674,400588733,57143,Tanner Wozniak,338,Kennesaw St,,0.0,False,False
+1538683,400588733,66527,Deontae Cole,94,N Kentucky,,0.0,False,False
+1538684,400588733,57460,Jake Giesler,94,N Kentucky,,4.0,False,False
+1538685,400588733,3130525,Tayler Persons,94,N Kentucky,,9.0,False,False
+1538686,400588733,62650,Tyler White,94,N Kentucky,,5.0,False,False
+1538687,400588733,51143,Chad Jackson,94,N Kentucky,,19.0,False,False
+1538688,400588733,66526,Daniel Camps,94,N Kentucky,,0.0,False,False
+1538689,400588733,62653,Jalen Billups,94,N Kentucky,,16.0,False,False
+1538690,400588733,66529,Jordan Jackson,94,N Kentucky,,10.0,False,False
+1538691,400588733,66528,Dean Danos,94,N Kentucky,,0.0,False,False
+1538692,400588733,62657,Anthony Monaco,94,N Kentucky,,4.0,False,False
+1538693,400588733,62654,Todd Johnson,94,N Kentucky,,9.0,False,False
+1558490,400587124,61167,Justin Alston,104,Boston Univ,,17.0,False,False
+1558491,400587124,61168,Nathan Dieudonne,104,Boston Univ,,11.0,False,False
+1558492,400587124,67094,Cedric Hankerson,104,Boston Univ,,17.0,False,False
+1558493,400587124,3130550,Cheddi Mosely,104,Boston Univ,,9.0,False,False
+1558494,400587124,61169,John Papale,104,Boston Univ,,12.0,False,False
+1558495,400587124,61847,Blaise Mbargorba,104,Boston Univ,,2.0,False,False
+1558496,400587124,3155899,Will Goff,104,Boston Univ,,2.0,False,False
+1558497,400587124,67092,Cameron Curry,104,Boston Univ,,0.0,False,False
+1558498,400587124,61534,Eric Fanning,104,Boston Univ,,5.0,False,False
+1558504,400587124,56478,Taylor Abt,107,Holy Cross,,2.0,False,False
+1558505,400587124,62392,Eric Green,107,Holy Cross,,12.0,False,False
+1558506,400587124,56477,Malcolm Miller,107,Holy Cross,,21.0,False,False
+1558507,400587124,67197,Anthony Thompson,107,Holy Cross,,6.0,False,False
+1558508,400587124,56476,Justin Burrell,107,Holy Cross,,7.0,False,False
+1558509,400587124,3130560,Mitchell Hahn,107,Holy Cross,,0.0,False,False
+1558510,400587124,67198,Malachi Alexander,107,Holy Cross,,12.0,False,False
+1558511,400587124,62391,Christopher Morgan,107,Holy Cross,,0.0,False,False
+1558512,400587124,67199,Robert Champion,107,Holy Cross,,8.0,False,False
+1558513,400587124,62390,Cullen Hamilton,107,Holy Cross,,4.0,False,False
+1559446,400595623,3130712,Colton Weisbrod,2443,New Orleans,,9.0,False,False
+1559447,400595623,62626,Kevin Hill,2443,New Orleans,,10.0,False,False
+1559448,400595623,3130711,Michael Zeno,2443,New Orleans,,1.0,False,False
+1559449,400595623,67334,Christavious Gill,2443,New Orleans,,15.0,False,False
+1559450,400595623,67333,Nate Frye,2443,New Orleans,,22.0,False,False
+1559451,400595623,3130713,Travin Thibodeaux,2443,New Orleans,,7.0,False,False
+1559452,400595623,3130710,Bryce Jackson,2443,New Orleans,,3.0,False,False
+1559453,400595623,67335,Terrance Syon,2443,New Orleans,,14.0,False,False
+1559454,400595623,62630,Travis Avery,2443,New Orleans,,2.0,False,False
+1559455,400595623,3159512,Matthew Jiles,2443,New Orleans,,0.0,False,False
+1559456,400595623,67331,Tevin Broyles,2443,New Orleans,,7.0,False,False
+1587244,400586911,67447,Tate Stensgaard,2710,W Illinois,,4.0,False,False
+1587245,400586911,67445,Mike Miklusak,2710,W Illinois,,2.0,False,False
+1587246,400586911,54909,Mohammed Conde,2710,W Illinois,,8.0,False,False
+1587247,400586911,67446,Garret Covington,2710,W Illinois,,17.0,False,False
+1587248,400586911,67444,Jabari Sandifer,2710,W Illinois,,12.0,False,False
+1587249,400586911,3136468,Jalen Chapman,2710,W Illinois,,6.0,False,False
+1587250,400586911,3136464,Tyson Reynold,2710,W Illinois,,0.0,False,False
+1587251,400586911,3155992,Kam Rowan,2710,W Illinois,,0.0,False,False
+1587252,400586911,3155991,DeVante Mayes,2710,W Illinois,,0.0,False,False
+1587253,400586911,3136466,Dalan Ancrum,2710,W Illinois,,0.0,False,False
+1587254,400586911,3136465,J.C. Fuller,2710,W Illinois,,5.0,False,False
+1587255,400586911,3136463,Jamie Batish,2710,W Illinois,,0.0,False,False
+1587259,400586911,56904,Marlin Mason,325,Cleveland St,,4.0,False,False
+1587260,400586911,56903,Anton Grady,325,Cleveland St,,14.0,False,False
+1587261,400586911,3062804,Charlie Lee,325,Cleveland St,,7.0,False,False
+1587262,400586911,61456,Andre Yates,325,Cleveland St,,11.0,False,False
+1587263,400586911,56231,Trey Lewis,325,Cleveland St,,21.0,False,False
+1587264,400586911,61820,Aaron Scales,325,Cleveland St,,0.0,False,False
+1587265,400586911,66793,Demonte Flannigan,325,Cleveland St,,0.0,False,False
+1587266,400586911,66791,Derek Sloan,325,Cleveland St,,5.0,False,False
+1587267,400586911,56577,Vinny Zollo,325,Cleveland St,,2.0,False,False
+1587268,400586911,3138215,Tim Hasbargen,325,Cleveland St,,0.0,False,False
+1587269,400586911,3138214,Terrell Hales,325,Cleveland St,,3.0,False,False
+1587270,400586911,3138212,Kenny Carpenter,325,Cleveland St,,2.0,False,False
+1587271,400586911,3085357,Khyler Fields,325,Cleveland St,,0.0,False,False
+1587272,400586911,62709,Kaza Keane,325,Cleveland St,,7.0,False,False
+1598670,400595585,57084,Daniel Grieves,2545,SE Louisiana,,16.0,False,False
+1598671,400595585,67386,Devonte Upson,2545,SE Louisiana,,5.0,False,False
+1598672,400595585,67389,Andrew Guillory,2545,SE Louisiana,,16.0,False,False
+1598673,400595585,67387,Joshua Filmore,2545,SE Louisiana,,25.0,False,False
+1598674,400595585,51289,Cedric Jenkins,2545,SE Louisiana,,2.0,False,False
+1598675,400595585,3155930,Bret Barclay,2545,SE Louisiana,,0.0,False,False
+1598676,400595585,52465,Onochie Ochie,2545,SE Louisiana,,13.0,False,False
+1598677,400595585,3155932,Dylon Maggio,2545,SE Louisiana,,3.0,False,False
+1598678,400595585,3155929,Zach Rumph,2545,SE Louisiana,,0.0,False,False
+1598679,400595585,56458,Zay Jackson,2545,SE Louisiana,,12.0,False,False
+1607176,400586692,66332,Bobby Portis,8,Arkansas,,22.0,False,False
+1607177,400586692,51517,Alandise Harris,8,Arkansas,,2.0,False,False
+1607178,400586692,61560,Michael Qualls,8,Arkansas,,13.0,False,False
+1607179,400586692,61558,Anthlon Bell,8,Arkansas,,7.0,False,False
+1607180,400586692,57091,Rashad Madden,8,Arkansas,,10.0,False,False
+1607181,400586692,66334,Moses Kingsley,8,Arkansas,,4.0,False,False
+1607182,400586692,61562,JaCorey Williams,8,Arkansas,,9.0,False,False
+1607183,400586692,56763,Keaton Miles,8,Arkansas,,0.0,False,False
+1607184,400586692,3136174,Anton Beard,8,Arkansas,,6.0,False,False
+1607185,400586692,3136173,Nick Weiler-Babb,8,Arkansas,,0.0,False,False
+1607186,400586692,66333,Manuale Watkins,8,Arkansas,,5.0,False,False
+1607187,400586692,64890,Jabril Durham,8,Arkansas,,0.0,False,False
+1607190,400586692,66118,Ben Moore,2567,SMU,,7.0,False,False
+1607191,400586692,66119,Yanick Moreira,2567,SMU,,20.0,False,False
+1607192,400586692,66293,Ben Emelogu II,2567,SMU,,0.0,False,False
+1607193,400586692,66117,Keith Frazier,2567,SMU,,16.0,False,False
+1607194,400586692,56407,Nic Moore,2567,SMU,,10.0,False,False
+1607195,400586692,56724,Cannen Cunningham,2567,SMU,,5.0,False,False
+1607196,400586692,66116,Sterling Brown,2567,SMU,,1.0,False,False
+1607197,400586692,56727,Ryan Manuel,2567,SMU,,13.0,False,False

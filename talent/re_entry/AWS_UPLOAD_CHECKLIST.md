@@ -39,7 +39,7 @@ Optional (H_sort line in overlap title):
 | File | Why |
 |------|-----|
 | `pipeline_config.py` | `POOL_GROUPING_MODE`, `POOL_EVAL_*`, `POOL_ANCHOR_COL`, `POOL_EXCLUDE_PEER_TB_ZERO`, eval dates in `base_time_varying_cols` |
-| `add_cum_oer_metrics_mod_working.py` | Cell 5 `active_at_eval_thru` merge logic + peer TB-zero exclusion |
+| `add_cum_oer_metrics_mod_working.py` | Cell 5 anchor pools (`active_at_eval_thru`, **`active_at_snapshot`** snpsht_dt merge fix), peer TB-zero exclusion |
 | `520_pipeline_cox_working.ipynb` | Cell 5: `pool_grouping_mode`, eval cols, `exclude_peer_tb_zero` + log lines (Mac canonical) |
 
 ## Do NOT re-submit unless changed

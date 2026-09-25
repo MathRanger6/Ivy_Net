@@ -411,14 +411,17 @@ def _add_pool_mean_size_active_at_anchor(
 
     left = work.loc[valid_self, ['_ix', pid_col, rater_col, anchor_col, value_col]]
     if not left.empty and not peers.empty:
-        peer_g = peers.rename(
-            columns={
-                pid_col: '_peer_pid',
-                eval_strt_col: '_peer_strt',
-                eval_thru_col: '_peer_thru',
-                value_col: '_peer_val',
-            }
-        )
+        peer_rename = {
+            pid_col: '_peer_pid',
+            eval_strt_col: '_peer_strt',
+            eval_thru_col: '_peer_thru',
+            value_col: '_peer_val',
+        }
+        # active_at_snapshot anchors on snpsht_dt; peers also carry that column.
+        # Merge on rater alone would suffix snpsht_dt → KeyError on anchor_col.
+        if anchor_col not in (eval_strt_col, eval_thru_col):
+            peer_rename[anchor_col] = '_peer_anchor'
+        peer_g = peers.rename(columns=peer_rename)
         cross = left.merge(peer_g, on=rater_col, how='inner')
         cross = cross[
             (cross[anchor_col] >= cross['_peer_strt'])
