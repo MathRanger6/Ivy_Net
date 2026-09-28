@@ -18,6 +18,8 @@ An augmentation request must explain why each requested field is necessary and w
 
 ## Recommendation
 
+**September 28 audit checkpoint:** The [executed NELS source audit](education_analysis/docs/source_audit/EDUCATION_20260928_NELS_source_audit_and_next_step.md) reproduces the existing analytic sample and peer construction. It verifies 5,888 recorded entrants and 2,605 bachelor's recipients among 7,238 accepted students. These are unweighted descriptions of supplied columns. Before adjusted transition fitting, recover the original performance-score, degree-code, school-wave, and weight mappings. An archived codebook supports the degree-code legitimate-skip interpretation; the extract's precise source mapping remains unverified. The supplied performance score is not the simple mean of its reading and history fields, so the primer's composite description needs clarification. No source recodes were changed.
+
 Examine education as **successive transitions between peer environments**. Distinguish sorting into a high school, standing within that school, access to a postsecondary destination, and completion after entry. Competition for selective college access could operate before college begins. The current degree-completion outcome combines these stages.
 
 The most immediate comparison is entry versus completion using the existing panels, after validating their outcome coding. The closest match to Alex's specific question is access to a particular type or selectivity of college; that requires fields absent from the supplied extracts. Neither route presupposes a hidden negative effect.
@@ -143,6 +145,8 @@ These are targeted literature leads, not completed paper readings or companion v
 Begin with **the same NELS:88 students**, with HS&B as a second step. Our existing panels already contain achievement, sampled-school peer measures, and degree outcomes. The largest gaps for this question are **where students applied, whether they were admitted, and where they enrolled**. These additions would help examine whether competition matters on the way into college, even when eventual degree attainment shows no downturn.
 
 ### Request to pass to the faculty colleague
+
+**September 28 status:** This broader augmentation request is parked while we examine the existing data. The immediate request is only the construction recipe/source-variable clarification in the [source audit, Section 7](education_analysis/docs/source_audit/EDUCATION_20260928_NELS_source_audit_and_next_step.md). If augmentation later proceeds, distinguish directly reported **admission decisions**, as well as applications, from decisions inferred from enrollment: NCES 98-105's `ACPT4YR` includes the latter. This matters if we want to separate receiving an offer from choosing to attend.
 
 Please help us augment the education panels previously supplied, beginning with **the same NELS:88 students**, using a stable student identifier that links to our existing extract. Please retain students who never entered college, did not graduate, or have missing follow-up information.
 

@@ -17,6 +17,8 @@ Original files under `datasets/nels88/`, `datasets/hsb80/`, and `3-Master_Plan/r
 
 ## Current stage
 
+**Completed September 28:** [NELS source audit and next step](docs/source_audit/EDUCATION_20260928_NELS_source_audit_and_next_step.md). Start here for findings and the short source-clarification request. The audit code ran in `sports_net`; the original CSV is unchanged. Internal checks largely pass; source-variable mapping remains incomplete, so substantive transition fitting has not begun.
+
 Read and execute the bounded plan in [`docs/decisions/EDUCATION_20260928_mission_and_source_audit_plan.md`](docs/decisions/EDUCATION_20260928_mission_and_source_audit_plan.md).
 
 No substantive model is authorized until the source audit establishes how the supplied variables were constructed and whether the declared outcomes are internally consistent.

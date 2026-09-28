@@ -1,5 +1,21 @@
 # VECTOR — Current Research State
 
+## Active checkpoint — education source audit, September 28
+
+**Current question:** Can the existing NELS panel distinguish associations with postsecondary entry from associations with later bachelor's completion?
+
+**Completed:** [Source audit and next step](education_analysis/docs/source_audit/EDUCATION_20260928_NELS_source_audit_and_next_step.md). Executed in `sports_net`. The 7,238-student, 536-school sample and eligibility flags reproduce. Peer counts and rank definitions reproduce; peer averages agree within numerical storage precision. Stored outcomes give 81.35% entry, 35.99% bachelor's completion overall, and 44.24% completion among recorded entrants. These are unweighted column summaries, not adjusted findings. The original input is unchanged.
+
+**Immediate next step:** Recover the source-variable mapping/extraction recipe, especially the supplied baseline performance score, degree-code source and skip universe, school wave, and weight. Codebook evidence supports the legitimate-skip interpretation; no coding error is established. The primer's simple reading/history interpretation is not reproduced by averaging those columns. Substantive transition fitting remains pending this source gate, within the authorized education path.
+
+**Augmentation:** The earlier request has verifiable official documentation behind it; COMPASS's personal research lineage remains unverified. No new data request has been sent. Distinguish directly reported admissions from derived indicators that infer admission from enrollment.
+
+**Authorization:** Charles authorized the bounded education source audit and existing-data path. No new basketball experiment or broad augmentation is part of this checkpoint.
+
+## Preserved earlier checkpoints
+
+The dated basketball entries and older design/task sections below preserve the research trail. Their statements of then-current tasks, next actions, or authorization do not override the active education checkpoint above.
+
 **Standing writing preference:** Research products should address the scientific questions directly. Do not frame them as coaching Charles to brief an advisor, repeatedly name Alex as the audience, or supply staged meeting remarks unless explicitly requested. Preserve names only where scientifically necessary for source attribution.
 
 **Mission change — PD42, September 28:** Education is now the immediate empirical line of effort. The first task is to exhaust what the supplied NELS:88 and HS&B:80 panels can answer before requesting additional data. Begin with a source-and-construction audit, then separate postsecondary entry from later completion using a pre-specified NELS comparison if the audit supports it. Any augmentation request must state the precise unanswered question, why the existing panels cannot answer it, which fields are needed, and what the additions would permit us to distinguish. Basketball experimentation is paused. Its remaining bounded interpretive obligation is to decompose the existing sorting formula into team-level contributions and locate cancellation; that is deferred while education is primary.

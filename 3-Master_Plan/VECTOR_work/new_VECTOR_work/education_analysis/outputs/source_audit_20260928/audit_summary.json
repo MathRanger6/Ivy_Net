@@ -1,0 +1,387 @@
+{
+  "source": "datasets/nels88/nels88_big_fish_panel.csv",
+  "source_sha256": "6425c94357f81c78f3663e0de72df54c74a08f350a9674dd757e38cd7007cf07",
+  "rows": 10545,
+  "columns": 49,
+  "duplicate_student_ids": 0,
+  "missing_student_ids": 0,
+  "schools": 1418,
+  "checks": {
+    "unit_n_from_recorded_school": {
+      "comparable": 10545,
+      "mismatches_1e_7": 0,
+      "mismatches_1e_5": 0,
+      "max_absolute_error": 0.0,
+      "missingness_disagreements": 0
+    },
+    "peer_n_from_recorded_school": {
+      "comparable": 10545,
+      "mismatches_1e_7": 0,
+      "mismatches_1e_5": 0,
+      "max_absolute_error": 0.0,
+      "missingness_disagreements": 0
+    },
+    "raw_peer_mean": {
+      "comparable": 10191,
+      "mismatches_1e_7": 9757,
+      "mismatches_1e_5": 0,
+      "max_absolute_error": 7.3242187426103555e-06,
+      "missingness_disagreements": 0
+    },
+    "z_peer_mean": {
+      "comparable": 10191,
+      "mismatches_1e_7": 62,
+      "mismatches_1e_5": 0,
+      "max_absolute_error": 2.694580079065645e-07,
+      "missingness_disagreements": 0
+    },
+    "raw_relative_performance": {
+      "comparable": 10191,
+      "mismatches_1e_7": 9786,
+      "mismatches_1e_5": 0,
+      "max_absolute_error": 3.6621093855160325e-06,
+      "missingness_disagreements": 0
+    },
+    "outcome_observed_from_ba": {
+      "comparable": 10545,
+      "mismatches_1e_7": 0,
+      "mismatches_1e_5": 0,
+      "max_absolute_error": 0.0,
+      "missingness_disagreements": 0
+    },
+    "cell_at_least_5_unit_n": {
+      "comparable": 10545,
+      "mismatches_1e_7": 0,
+      "mismatches_1e_5": 0,
+      "max_absolute_error": 0.0,
+      "missingness_disagreements": 0
+    },
+    "cell_at_least_10_unit_n": {
+      "comparable": 10545,
+      "mismatches_1e_7": 0,
+      "mismatches_1e_5": 0,
+      "max_absolute_error": 0.0,
+      "missingness_disagreements": 0
+    },
+    "cell_at_least_15_unit_n": {
+      "comparable": 10545,
+      "mismatches_1e_7": 0,
+      "mismatches_1e_5": 0,
+      "max_absolute_error": 0.0,
+      "missingness_disagreements": 0
+    },
+    "analytic_min5_candidate_recipe": {
+      "comparable": 10545,
+      "mismatches_1e_7": 0,
+      "mismatches_1e_5": 0,
+      "max_absolute_error": 0.0,
+      "missingness_disagreements": 0
+    },
+    "analytic_min10_candidate_recipe": {
+      "comparable": 10545,
+      "mismatches_1e_7": 0,
+      "mismatches_1e_5": 0,
+      "max_absolute_error": 0.0,
+      "missingness_disagreements": 0
+    },
+    "any_postsecondary_by_2000_without_high_school_diploma_by_2000": 366,
+    "associate_or_higher_by_2000_without_any_postsecondary_by_2000": 0,
+    "bachelors_or_higher_by_2000_without_associate_or_higher_by_2000": 0,
+    "min10_students_with_exactly_nine_peers": 878,
+    "n_peers_above": {
+      "comparable": 10545,
+      "mismatches_1e_7": 0,
+      "mismatches_1e_5": 0,
+      "max_absolute_error": 0.0,
+      "missingness_disagreements": 0
+    },
+    "n_peers_equal": {
+      "comparable": 10545,
+      "mismatches_1e_7": 0,
+      "mismatches_1e_5": 0,
+      "max_absolute_error": 0.0,
+      "missingness_disagreements": 0
+    },
+    "share_peers_above": {
+      "comparable": 10191,
+      "mismatches_1e_7": 0,
+      "mismatches_1e_5": 0,
+      "max_absolute_error": 1.1102230246251565e-16,
+      "missingness_disagreements": 0
+    },
+    "percentile_midrank_candidate": {
+      "comparable": 10191,
+      "mismatches_1e_7": 0,
+      "mismatches_1e_5": 0,
+      "max_absolute_error": 1.1102230246251565e-16,
+      "missingness_disagreements": 0
+    },
+    "raw_equals_base_reading_std_score": {
+      "comparable": 10530,
+      "mismatches_1e_7": 10524,
+      "mismatches_1e_5": 10524,
+      "max_absolute_error": 30.769999999999996,
+      "missingness_disagreements": 15
+    },
+    "raw_equals_base_history_std_score": {
+      "comparable": 10491,
+      "mismatches_1e_7": 10487,
+      "mismatches_1e_5": 10487,
+      "max_absolute_error": 40.91000000000001,
+      "missingness_disagreements": 54
+    },
+    "raw_equals_reading_history_average": {
+      "comparable": 10477,
+      "mismatches_1e_7": 10475,
+      "mismatches_1e_5": 10475,
+      "max_absolute_error": 33.160000000000004,
+      "missingness_disagreements": 68
+    }
+  },
+  "samples": {
+    "all": {
+      "n": 10545,
+      "schools": 1418,
+      "weight_missing": 0,
+      "weight_nonpositive": 0,
+      "weight_positive_range": [
+        8.7137,
+        20898.713
+      ],
+      "own_z_mean": 1.247879895735526e-07,
+      "own_z_sd_population": 0.9999525912451059,
+      "raw_mean": 51.96449786628734,
+      "raw_sd_population": 10.19185571976184,
+      "ses_range": [
+        -2.875,
+        2.56
+      ],
+      "race_codes": {
+        "4": 7390,
+        "2": 1271,
+        "3": 948,
+        "1": 731,
+        "5": 108,
+        "8": 97
+      },
+      "sex_codes": {
+        "2": 5579,
+        "1": 4966
+      },
+      "missing_by_field": {
+        "dataset": 0,
+        "student_id": 0,
+        "unit_id": 0,
+        "school_id": 0,
+        "unit_definition": 0,
+        "cohort": 0,
+        "own_performance_raw": 0,
+        "own_performance_z": 0,
+        "peer_mean_loo": 354,
+        "peer_sd_loo": 522,
+        "relative_performance_raw": 354,
+        "relative_performance_z": 354,
+        "within_unit_percentile_loo": 354,
+        "n_peers_above": 0,
+        "share_peers_above": 354,
+        "n_top_decile_peers_loo": 0,
+        "share_top_decile_peers_loo": 354,
+        "unit_n": 0,
+        "peer_n": 0,
+        "cell_at_least_5": 0,
+        "cell_at_least_10": 0,
+        "cell_at_least_15": 0,
+        "bachelors_or_higher_by_2000": 102,
+        "associate_or_higher_by_2000": 102,
+        "any_postsecondary_by_2000": 102,
+        "high_school_diploma_by_2000": 3,
+        "outcome_observed": 0,
+        "analytic_sample_min5": 0,
+        "analytic_sample_min10": 0,
+        "followup_weight_2000": 0,
+        "base_reading_std_score": 15,
+        "base_history_std_score": 54,
+        "degree_code_2000": 0,
+        "hs_completion_code_2000": 0,
+        "study_entry_code": 0,
+        "base_year_ses": 0,
+        "race_code": 0,
+        "sex_code": 0,
+        "base_year_eligible": 0,
+        "sex_label": 0,
+        "race_label": 97,
+        "global_top_decile_cutoff": 0,
+        "own_global_top_decile": 0,
+        "unit_mean_including_self": 0,
+        "unit_sd_including_self": 354,
+        "n_peers_equal": 0,
+        "unit_top_score_including_self": 0,
+        "gap_to_unit_top": 0,
+        "peer_mean_z_loo": 354
+      },
+      "degree_codes": {
+        "4": 3363,
+        "1": 3159,
+        "-3": 1869,
+        "2": 806,
+        "3": 798,
+        "5": 376,
+        "-9": 102,
+        "6": 72
+      },
+      "outcomes": {
+        "high_school_diploma_by_2000": {
+          "observed": 10542,
+          "positive": 9646,
+          "unweighted_mean": 0.9150066401062417
+        },
+        "any_postsecondary_by_2000": {
+          "observed": 10443,
+          "positive": 8574,
+          "unweighted_mean": 0.8210284401034186
+        },
+        "associate_or_higher_by_2000": {
+          "observed": 10443,
+          "positive": 4609,
+          "unweighted_mean": 0.4413482715694724
+        },
+        "bachelors_or_higher_by_2000": {
+          "observed": 10443,
+          "positive": 3811,
+          "unweighted_mean": 0.3649334482428421
+        }
+      },
+      "ba_among_recorded_entrants": 0.44448332167016563
+    },
+    "analytic_min10": {
+      "n": 7238,
+      "schools": 536,
+      "weight_missing": 0,
+      "weight_nonpositive": 0,
+      "weight_positive_range": [
+        14.706,
+        3313.975
+      ],
+      "own_z_mean": 0.0015918429271829216,
+      "own_z_sd_population": 0.9902987796120891,
+      "raw_mean": 51.98072119369992,
+      "raw_sd_population": 10.093460800466637,
+      "ses_range": [
+        -2.414,
+        2.56
+      ],
+      "race_codes": {
+        "4": 5376,
+        "2": 832,
+        "1": 452,
+        "3": 440,
+        "5": 77,
+        "8": 61
+      },
+      "sex_codes": {
+        "2": 3827,
+        "1": 3411
+      },
+      "missing_by_field": {
+        "dataset": 0,
+        "student_id": 0,
+        "unit_id": 0,
+        "school_id": 0,
+        "unit_definition": 0,
+        "cohort": 0,
+        "own_performance_raw": 0,
+        "own_performance_z": 0,
+        "peer_mean_loo": 0,
+        "peer_sd_loo": 0,
+        "relative_performance_raw": 0,
+        "relative_performance_z": 0,
+        "within_unit_percentile_loo": 0,
+        "n_peers_above": 0,
+        "share_peers_above": 0,
+        "n_top_decile_peers_loo": 0,
+        "share_top_decile_peers_loo": 0,
+        "unit_n": 0,
+        "peer_n": 0,
+        "cell_at_least_5": 0,
+        "cell_at_least_10": 0,
+        "cell_at_least_15": 0,
+        "bachelors_or_higher_by_2000": 0,
+        "associate_or_higher_by_2000": 0,
+        "any_postsecondary_by_2000": 0,
+        "high_school_diploma_by_2000": 2,
+        "outcome_observed": 0,
+        "analytic_sample_min5": 0,
+        "analytic_sample_min10": 0,
+        "followup_weight_2000": 0,
+        "base_reading_std_score": 4,
+        "base_history_std_score": 28,
+        "degree_code_2000": 0,
+        "hs_completion_code_2000": 0,
+        "study_entry_code": 0,
+        "base_year_ses": 0,
+        "race_code": 0,
+        "sex_code": 0,
+        "base_year_eligible": 0,
+        "sex_label": 0,
+        "race_label": 61,
+        "global_top_decile_cutoff": 0,
+        "own_global_top_decile": 0,
+        "unit_mean_including_self": 0,
+        "unit_sd_including_self": 0,
+        "n_peers_equal": 0,
+        "unit_top_score_including_self": 0,
+        "gap_to_unit_top": 0,
+        "peer_mean_z_loo": 0
+      },
+      "degree_codes": {
+        "4": 2303,
+        "1": 2167,
+        "-3": 1350,
+        "3": 567,
+        "2": 549,
+        "5": 251,
+        "6": 51
+      },
+      "outcomes": {
+        "high_school_diploma_by_2000": {
+          "observed": 7236,
+          "positive": 6661,
+          "unweighted_mean": 0.9205362078496406
+        },
+        "any_postsecondary_by_2000": {
+          "observed": 7238,
+          "positive": 5888,
+          "unweighted_mean": 0.813484387952473
+        },
+        "associate_or_higher_by_2000": {
+          "observed": 7238,
+          "positive": 3172,
+          "unweighted_mean": 0.43824260845537444
+        },
+        "bachelors_or_higher_by_2000": {
+          "observed": 7238,
+          "positive": 2605,
+          "unweighted_mean": 0.3599060513954131
+        }
+      },
+      "ba_among_recorded_entrants": 0.44242527173913043
+    }
+  },
+  "standardization": {
+    "slope": 0.09811290688762403,
+    "intercept": -5.098387815829206,
+    "implied_reference_mean": 51.96449659440594,
+    "implied_reference_sd": 10.192338925859918,
+    "max_residual": 5.479306319777777e-07
+  },
+  "source_unchanged": true,
+  "run": {
+    "utc": "2026-09-28T16:10:05.804490+00:00",
+    "python": "/opt/anaconda3/envs/sports_net/bin/python",
+    "version": "3.11.11",
+    "pandas": "3.0.3",
+    "numpy": "2.4.6",
+    "script_sha256": "e584293f59cb4235b611b2880511b70074b9f2d70f2be17d3a903864e6a27d7e",
+    "kind": "internal audit; no substantive models"
+  }
+}

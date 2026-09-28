@@ -88,6 +88,8 @@ Example: a first-college identifier plus historically appropriate selectivity wo
 
 ## 6. Protected artifacts
 
+**Execution checkpoint, September 28:** The [audit report](../source_audit/EDUCATION_20260928_NELS_source_audit_and_next_step.md) records the completed internal audit and availability review. Sample flags and peer/rank calculations reproduce. Source mapping for baseline performance, degree outcome, school wave, and weight remains to be confirmed. Do not treat the ordinary high-school-diploma indicator as a necessary predecessor of every postsecondary entry: alternative credentials exist. Bachelor's-within-entry nesting passes. No substantive model has been fitted, and no augmentation request has been sent.
+
 Do not modify or overwrite:
 
 - `datasets/nels88/nels88_big_fish_panel.csv`
