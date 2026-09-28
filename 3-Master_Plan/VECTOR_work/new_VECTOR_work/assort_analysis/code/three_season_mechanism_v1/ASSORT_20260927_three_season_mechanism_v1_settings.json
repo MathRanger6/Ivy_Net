@@ -1,0 +1,34 @@
+{
+  "experiment_id": "ASSORT_20260927_three_season_mechanism_v1",
+  "seasons": [
+    2014,
+    2015,
+    2016
+  ],
+  "master_seed": 20260925,
+  "repetitions": 100,
+  "selection_fraction": 0.027,
+  "rho": [
+    0,
+    1
+  ],
+  "lambda": [
+    0,
+    1
+  ],
+  "gamma": 10,
+  "theta_quantile": 0.99,
+  "bins": 16,
+  "minimum_captured_games": 11,
+  "minimum_player_minutes": 20,
+  "score": "A - lambda*C; raw full-team mean logistic viability including focal player",
+  "selection": "exact highest K scores; ties ascending athlete_id; nearest integer with halves up",
+  "standardization": "within each frozen season; population standard deviation; fixed across assignments",
+  "seed_rule": "SeedSequence([master_seed, season, repetition_index_0_based]); PCG64 default_rng; shared permutation and uniforms per pair",
+  "fallback": "2014/2016: omit both points and minutes for partial point/minute pairs or positive points with zero minutes; retain game for coverage; user approved",
+  "canonical_team": "most distinct positive-minute games after fallback, then total minutes; unresolved played-team tie stops",
+  "population_2015": "accepted rotation audit freeze with recorded source recoveries; verify existing hash",
+  "scope": "three separate season populations, simulated selections of all eligible players; not last-ps HERO or annual draft prediction",
+  "curve": "16 equal-count LOO bins fixed per assignment across lambda; no quadratic fit or formal significance test",
+  "no_parameter_sweep": true
+}

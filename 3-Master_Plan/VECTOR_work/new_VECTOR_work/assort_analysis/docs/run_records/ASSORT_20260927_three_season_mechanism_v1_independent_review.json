@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "assignment_conditions_checked": 600,
+  "selection_conditions_checked": 1200,
+  "checkpoint_pairs": 300,
+  "curve_rows_checked": 19200,
+  "unchanged_2015_values": true,
+  "all_recorded_input_and_output_hashes_matched": true,
+  "verification_script_sha256": "aa460fcb9c48eba8fb90a06fd5f2a1090bf3acb9d14e3287090b5b0ed17b72d4",
+  "checks": "Reconstructed congestion, peer means, bins, winners, displacement and variance-ratio sorting from saved rosters using separate pandas calculations. No assignment rerun.",
+  "figure_review": "performed separately by VECTOR; not asserted by this script"
+}

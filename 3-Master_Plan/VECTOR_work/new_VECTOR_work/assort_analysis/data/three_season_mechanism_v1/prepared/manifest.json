@@ -1,0 +1,58 @@
+{
+  "source_sha256": "0f05f4a022054ee9c3b09a3793da49deb907794ede0011ffca29b44b788560a6",
+  "settings_sha256": "e8c084db4271b3f661aa60cbbfd3b78951310bc573fbca1f1037a4d254c117eb",
+  "driver_sha256_at_preparation": "8087c3b3d2169fece6aae01950e5703db55d1eaf1ceda5878df467ac3d51b23e",
+  "preflight_sha256": "c62369157cd30b1491d00b5c26ccc3477c0658bf3dc8fc6566b4a88a6332c215",
+  "population_2015_record_sha256": "3cd65a45873348ba94996fd467085cf843397470f09b52b5db9a09e85da9c76f",
+  "populations": [
+    {
+      "season": 2014,
+      "N": 4248,
+      "teams": 351,
+      "fallback_rows_after_coverage": 111,
+      "fallback_rows_on_final_players": 104,
+      "final_players_affected": 103,
+      "points_omitted_on_final_players": 722.0,
+      "positive_playing_athletes_before_20_minute_floor": 4750,
+      "K": 115,
+      "minimum_roster": 9,
+      "ppm_mean": 0.3103686726384008,
+      "ppm_population_sd": 0.12225132657345375
+    },
+    {
+      "season": 2015,
+      "N": 4267,
+      "teams": 351,
+      "K": 115,
+      "input": "accepted rotation audit freeze, copied without recalculating values",
+      "input_sha256": "f39afaf105210837168e1bdfe5693b85c8e058c0c029cd577befce36271defe2",
+      "minimum_roster": 9
+    },
+    {
+      "season": 2016,
+      "N": 4234,
+      "teams": 351,
+      "fallback_rows_after_coverage": 100,
+      "fallback_rows_on_final_players": 88,
+      "final_players_affected": 87,
+      "points_omitted_on_final_players": 495.0,
+      "positive_playing_athletes_before_20_minute_floor": 4727,
+      "K": 114,
+      "minimum_roster": 8,
+      "ppm_mean": 0.3223312686093069,
+      "ppm_population_sd": 0.12235602665717461
+    }
+  ],
+  "files": {
+    "2014_canonical_team_candidates.csv": "c29ad0a9d6de5159852eef0783fc142e4c4256fc816a9b1ae93cb4b623ff3738",
+    "2014_capacities.csv": "55c213858071a7c2ff8c445446fbd0bf4bb4633b46c3ebf36a2560308af586ef",
+    "2014_omitted_source_rows.csv": "bca76fc309c4e2468195de7fc858c431ddf22ddbceb3eccd07872a67f98db2a5",
+    "2014_players.csv.gz": "506bddfcc6621b92a466533178389186b293d6b43fe2c7b6934539a3865d9caa",
+    "2015_capacities.csv": "7ab5671c242a645c6c9eb6a2c76d91da8ab3d4e4741e0db66d87a4e2534f2694",
+    "2015_players.csv.gz": "94c592ea9d6beaae194c3edbba3e88a7e4aca51872649144760e57057c94be45",
+    "2016_canonical_team_candidates.csv": "8897a44ec1aff2515f70ff81bd8298bfddfc55ef0091e5e181dbeab42c6c8c89",
+    "2016_capacities.csv": "4346275480c0b863191d636e8c2e6987653278239d6a103597658991252b304d",
+    "2016_omitted_source_rows.csv": "28c04dd393d3f5b72be91ccfad3202a2ef359bc75cc845a790d8729494eda148",
+    "2016_players.csv.gz": "c54389ae7934d9a28c05bd416c7464f7ce72cf57056466194c82e9d6f51f02d5"
+  }
+}

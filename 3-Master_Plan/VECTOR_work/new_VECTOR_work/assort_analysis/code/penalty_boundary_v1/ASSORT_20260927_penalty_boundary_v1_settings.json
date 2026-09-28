@@ -1,0 +1,30 @@
+{
+  "seasons": [
+    2014,
+    2015,
+    2016
+  ],
+  "repetitions": 100,
+  "rho": 1,
+  "lambda_candidates": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32
+  ],
+  "search_fraction": 0.1,
+  "fractions": [
+    0.1,
+    0.05,
+    0.027,
+    0.01,
+    0.005
+  ],
+  "absolute_drop": 0.05,
+  "relative_drop": 0.2,
+  "rise": 0.05,
+  "positive_repetition_fraction": 0.8,
+  "scope": "model construction then scarcity; no rho comparison"
+}

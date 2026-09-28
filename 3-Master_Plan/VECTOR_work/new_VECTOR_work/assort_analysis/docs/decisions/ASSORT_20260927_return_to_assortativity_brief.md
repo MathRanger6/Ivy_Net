@@ -1,7 +1,11 @@
 # Return to the assortativity question: a bounded experiment brief
 
+**Completion checkpoint:** The authorized revised experiment and independent checks are complete. Read the [results and narrated reasoning](../results/ASSORT_20260927_three_season_mechanism_v1_report.md). Earlier proposal and source-stop text below preserves history; no further experiment is authorized by completion of this run.
+
+**Execution update:** Charles authorized the revised three-season comparison and then explicitly approved using the previous fallback for the 2014/2016 point/minute issues. The isolated driver now implements that fallback and the documented canonical-team rule. Preparation and simulation are authorized; no parameter search, new filtering policy, or refit is included. The versioned settings are in code/three_season_mechanism_v1/ASSORT_20260927_three_season_mechanism_v1_settings.json. Earlier pause and proposal statements below record the decision history.
+
 **Date:** September 27, 2026  
-**Status:** Recovered decisions and proposed first stage. Documentation only; no experiment executed or newly authorized by this brief.
+**Status:** Charles subsequently authorized execution of the revised three-season proposal. The source preflight has run; simulations are paused at the specified source-quality gate. See the [preflight report](../results/ASSORT_20260927_three_season_mechanism_v1_preflight_report.md) for the newly discovered 2014/2016 point/minute issues and the proposed fallback. Earlier proposal language below is preserved as history.
 
 
 ## Revised proposal after Charles's selection-rate and season questions

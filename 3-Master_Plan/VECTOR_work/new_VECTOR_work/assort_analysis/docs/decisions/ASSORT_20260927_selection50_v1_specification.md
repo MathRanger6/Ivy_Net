@@ -1,0 +1,3 @@
+# Exploratory 50% selection comparison
+
+Charles authorized raising selection to 50% and adjusting lambda to seek a rise-and-fall shape similar to the 2015 10%, lambda-four reference. Start with rho one and the saved 100 assignments per season, keeping source populations, scores' ingredients, EW edges, and quantile memberships unchanged. Try lambda 0, 1, 2, 4, 8, 16 initially. Interpret visually without an automatic threshold; do not call the chosen coefficient an empirical estimate or exact shape match. Rho 0.6 is a conditional fallback, not the initial run. Fifty percent is an illustrative scenario inspired by Charles's Army comparison, not a newly verified Army statistic. No PDF regeneration.

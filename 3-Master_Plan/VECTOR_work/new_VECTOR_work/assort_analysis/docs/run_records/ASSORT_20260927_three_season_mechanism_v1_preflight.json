@@ -1,0 +1,64 @@
+{
+  "experiment": "ASSORT_20260927_three_season_mechanism_v1",
+  "stage": "preflight_only",
+  "time_utc": "2026-09-28T01:35:09.061011+00:00",
+  "source": "datasets/mbb/mbb_df_player_box.csv",
+  "source_sha256_before": "0f05f4a022054ee9c3b09a3793da49deb907794ede0011ffca29b44b788560a6",
+  "source_sha256_after": "0f05f4a022054ee9c3b09a3793da49deb907794ede0011ffca29b44b788560a6",
+  "driver_sha256": "8fa622b2803c8fa27abf7ca71960c97e97f181a51dfb5710ed3ea5073b8b252c",
+  "software": {
+    "numpy": "2.0.2",
+    "pandas": "2.3.3"
+  },
+  "seasons": [
+    {
+      "season": 2014,
+      "source_rows": 182737,
+      "teams_at_least_11_games": 351,
+      "coverage_retained_rows": 175196,
+      "blank_identity_rows": 81,
+      "malformed_identity_rows": 0,
+      "partial_stat_rows": 66,
+      "positive_points_zero_minute_rows": 45,
+      "unexpected_blank_stat_rows": 0,
+      "negative_or_nonfinite_rows": 0,
+      "duplicate_same_team_game_rows": 0,
+      "cross_team_same_game_rows": 2,
+      "multi_team_athletes": 26,
+      "athletes_positive_minutes_on_multiple_teams": 1,
+      "provisional_player_team_pairs_at_least_20_recorded_minutes": 4248,
+      "flagged_rows_on_provisionally_eligible_pairs": 105,
+      "provisionally_eligible_athletes_with_flags": 104,
+      "status": "requires_source_review"
+    },
+    {
+      "season": 2016,
+      "source_rows": 182524,
+      "teams_at_least_11_games": 351,
+      "coverage_retained_rows": 175034,
+      "blank_identity_rows": 0,
+      "malformed_identity_rows": 0,
+      "partial_stat_rows": 56,
+      "positive_points_zero_minute_rows": 44,
+      "unexpected_blank_stat_rows": 0,
+      "negative_or_nonfinite_rows": 0,
+      "duplicate_same_team_game_rows": 0,
+      "cross_team_same_game_rows": 0,
+      "multi_team_athletes": 65,
+      "athletes_positive_minutes_on_multiple_teams": 0,
+      "provisional_player_team_pairs_at_least_20_recorded_minutes": 4234,
+      "flagged_rows_on_provisionally_eligible_pairs": 88,
+      "provisionally_eligible_athletes_with_flags": 87,
+      "status": "requires_source_review"
+    }
+  ],
+  "simulation_executed": false,
+  "outputs": {
+    "data/three_season_mechanism_v1/preflight/2014_flagged_rows.csv": "fa7d2f510a06d615f3b324f39f5ba3f7a14d7ffa1d0c502b968c838bf79600a8",
+    "data/three_season_mechanism_v1/preflight/2014_identity_rows.csv": "6f1fd56e82d89491a97c21479e19a50ab34de437fc86f6098c2bb78f1b9ba140",
+    "data/three_season_mechanism_v1/preflight/2014_multi_team_candidates.csv": "ea22b1260ae31db2531eeae572aa52e26d8c8a29a6c7713456913ba9f5db0d56",
+    "data/three_season_mechanism_v1/preflight/2016_flagged_rows.csv": "b49ded167fdb92c636c45a0fee93e98d6b464173cf69740be5083b32993e28a4",
+    "data/three_season_mechanism_v1/preflight/2016_identity_rows.csv": "16eb238dd1081db7062403532c4290f9a8ef8bb639ee2a6c463848afa642b7a0",
+    "data/three_season_mechanism_v1/preflight/2016_multi_team_candidates.csv": "28f6686f9aa99ceb8cb948c7e8749d7d6e0b316f18600e70ecaa2bad00bdd8c1"
+  }
+}

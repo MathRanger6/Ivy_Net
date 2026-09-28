@@ -1,7 +1,20 @@
 # Education — school standing, college access, and later attainment
 
-**Last synced:** 2026-09-24  
-**Status:** VECTOR working note for discussion with Charles. Read-only evidence and source review; no regressions, experiments, pipeline changes, or figure rebuilds. Proposed tests require separate approval.
+**Last synced:** 2026-09-28  
+**Status:** Active education research brief. Charles authorized the bounded source audit and existing-data path on September 28 after PD42 shifted the immediate mission to education. The original panels and September 22 outputs remain unchanged. New work must be isolated under `new_VECTOR_work/education_analysis/`.
+
+## PD42 mission update
+
+PD42 makes education the immediate empirical line of effort. Basketball's near-zero aggregate sorting remains an interpretive gap, but further basketball exploration is paused. The education sequence is now:
+
+1. Exhaust what the existing panels can answer.
+2. Verify source coding, construction, weights, peer definitions, and outcome nesting before substantive estimation.
+3. Begin with NELS:88 because its 2000 follow-up gives the most mature attainment window.
+4. Separate postsecondary entry from later bachelor’s completion under one pre-specified comparison.
+5. Accept a positive, null, or adverse result without successively changing measures or samples to obtain a downturn.
+6. Request augmentation only when the existing-data result identifies a precise remaining question, or when the selective-destination question is explicitly chosen.
+
+An augmentation request must explain why each requested field is necessary and what distinction it enables. Applications, admission, enrollment, destination selectivity, and completion are different transitions and must remain separate.
 
 ## Recommendation
 

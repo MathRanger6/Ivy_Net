@@ -1,0 +1,48 @@
+{
+  "status": "executed_checked_visually_reviewed",
+  "python": "/opt/anaconda3/envs/sports_net/bin/python",
+  "completed_utc": "2026-09-28T03:27:09.787571+00:00",
+  "input_hashes": {
+    "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/docs/run_records/ASSORT_20260927_rho005_v1_run_record.json": "7610a71e1a474d96540d50866f4a73638bd4500f0c80b2ce9fb440f8912f04ce",
+    "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/rho005_v1/2015_paired_assignments.npz": "4322d8a6a7d9612fbe2194ed8ad519b9746aa624bde6d8b9a6129913d72a70e0",
+    "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/rho005_v1/2016_paired_assignments.npz": "f60b45edcab08b83565bdeb7b3cc9ed469c8b757984035cf913fc680ec35dd3f",
+    "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/rho005_v1/2014_rho_comparison.png": "12c2d4051319d728a522640004c3b5835dde09e87bd1e413d03622d0638499bd",
+    "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/rho005_v1/2014_paired_assignments.npz": "15ef8bcbbb04282e5e4d694eb18866dd92c9faedd176154fd7327539486463e4",
+    "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/rho005_v1/assignment_metrics.csv": "3068529ffe012b033dd0bb3cca5e44ffc43fc07aacf62ad65484485f07e632a6",
+    "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/rho005_v1/2016_rho_comparison.png": "abe50a578d527174f4b3958a2056c806237d8b49595a7cfc420aa41f018b386f",
+    "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/rho005_v1/sorting_summary.csv": "eb049a61cb41d740d1eaf98a1dc72af2e92628c463326f3d20b05a9e4f7c8fdc",
+    "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/rho005_v1/ew_edges.json": "af1209234cf08b2826f546b84be5b172e03404e2eab88fd0e5c7dddd90736f94",
+    "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/rho005_v1/2015_rho_comparison.png": "a6bdba629eb7a4bd03d88a5378540f84afaaf8c193e5c80d8eb37d83b70ac643",
+    "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/rho005_v1/counts_by_repetition.csv": "c80c8f1b830460bc6fcee5100a0caf15418f57c655b2df37b9ce6b0f1a9d2840",
+    "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/rho005_v1/bar_summary.csv": "a40178967f2ff67eb4cc8f03658b3566b4632b3519e1860d2c4364b9fa92c87a",
+    "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/scarcity_bars_v1/bar_summary.csv": "58a1191aa221b38fcdac49075b78e5291f3e325fc21074696000c70f0e4d059a",
+    "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/code/rho_scarcity_v1/ASSORT_20260927_rho_scarcity_v1.py": "b1a5b4a32b013e6eeb5b8fcd3c8826ea70c5d0f2e04ab1269bb9f4b89f3c292a",
+    "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/data/three_season_mechanism_v1/prepared/2014_players.csv.gz": "506bddfcc6621b92a466533178389186b293d6b43fe2c7b6934539a3865d9caa",
+    "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/data/three_season_mechanism_v1/prepared/2015_players.csv.gz": "94c592ea9d6beaae194c3edbba3e88a7e4aca51872649144760e57057c94be45",
+    "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/data/three_season_mechanism_v1/prepared/2016_players.csv.gz": "c54389ae7934d9a28c05bd416c7464f7ce72cf57056466194c82e9d6f51f02d5"
+  },
+  "checks": [
+    "source hashes unchanged",
+    "all 50% masks reproduced",
+    "rho1 1% bars reproduced",
+    "nested winner sets",
+    "independent ranking agrees",
+    "all counts conserved"
+  ],
+  "output_hashes": {
+    "outputs/rho_scarcity_v1/2014_selected.npz": "76cb0c315d6eb0b7fb1af5642a599bcc8056d9d03451bf4008f51678756c1b43",
+    "outputs/rho_scarcity_v1/2016_absolute.png": "d4cca1f7e28a7d76d1e85359b61ec179ec498ebfff7652c18bbac27979689d5d",
+    "outputs/rho_scarcity_v1/2015_selected.npz": "d17ea37fb3abafe709fa0f0d8ce0771fb484bd3138eff84364f2046d6eed19de",
+    "outputs/rho_scarcity_v1/identity_summary.csv": "8818d7e19bf878428d1f5d7de2a35e69c16828693d2509424df66f3108ff5c15",
+    "outputs/rho_scarcity_v1/identity_changes.csv": "899e6e188b5573e0a4987c49cedc142df6029b4dddbf2781762cceb78f5f1cf6",
+    "outputs/rho_scarcity_v1/2016_relative.png": "95542eb0e9247889be6b1f6c1ca934c99a56dbb94479fce2a9e4d791578e02c3",
+    "outputs/rho_scarcity_v1/2015_relative.png": "d242deba65de96c6a8506d00790565b0279bc1aaafb755a965e50b64cf823d7e",
+    "outputs/rho_scarcity_v1/2014_relative.png": "f08f595ad6d41ad984ee2e1fe81b88aa92fc79cca53bbfdabc1cecc3aaca4658",
+    "outputs/rho_scarcity_v1/2014_absolute.png": "13b85153a9bc2ca7cc44c6c3729245515fb1c9670ba0d265046b2d3a97c8b30a",
+    "outputs/rho_scarcity_v1/counts_by_repetition.csv": "487c4dfe974887ae33e8bc2ab7a4e4b3adfb94ee5e21d006b3c4bd9eefcea372",
+    "outputs/rho_scarcity_v1/2016_selected.npz": "d54bd8954ce6d472d35e1d1107842ce8668f8680a591f8f05e7b58e9c38699a2",
+    "outputs/rho_scarcity_v1/2015_absolute.png": "a28935b59436b0fb3b423f13de4a4fb57d7f07b2c373e08f2c97521c3e7b9cf3",
+    "outputs/rho_scarcity_v1/bar_summary.csv": "93524d4bf163ac8f390f918faee956861bb98b38cedd0c6a37a69f06d76df1f2"
+  },
+  "visual_review": "All six figures inspected; maximum relative rate 3.289 fits the 0\u20134 scale."
+}

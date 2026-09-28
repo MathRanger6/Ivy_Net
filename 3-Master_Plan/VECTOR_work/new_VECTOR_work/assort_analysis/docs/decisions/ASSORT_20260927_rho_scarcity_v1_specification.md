@@ -1,0 +1,3 @@
+# Does scarcity attenuate the effect of rho?
+
+Charles authorized the missing comparison: reuse the saved rho one and 0.05 assignments, fix lambda four, and compare 1% with 50% selection. Preserve source populations, paired repetitions, EW edges, quantile memberships, ranking and tie rules. Display actual and relative rates; missing environments remain missing. No new assignment or parameter search. Interpret full curves without a significance or pass/fail threshold. As a supporting description, count how many selected identities differ across rho, once per replaced slot, and divide by K; label this as assignment-induced winner change, not draft prediction accuracy. Save all inputs/outputs and checks under rho_scarcity_v1. No PDF regeneration.
