@@ -1,0 +1,50 @@
+{
+  "season": 2015,
+  "accepted_players": 4267,
+  "position_source": "athlete_position_name in frozen ESPN-derived game box",
+  "label_rule": "exact consistent source position per accepted athlete and team; no hybrid reassignment",
+  "main_plot_categories": [
+    "guard",
+    "forward",
+    "center"
+  ],
+  "all_source_position_counts": {
+    "guard": 2310,
+    "forward": 1602,
+    "center": 347,
+    "not available": 7,
+    "guard/forward": 1
+  },
+  "main_position_ppm": {
+    "guard": {
+      "players": 2310,
+      "mean": 0.30273132105375977,
+      "median": 0.30230988921319396,
+      "p10": 0.15015834722752633,
+      "p90": 0.4554855901799744,
+      "p99": 0.5951587426532323,
+      "maximum": 0.8709677419354839
+    },
+    "forward": {
+      "players": 1602,
+      "mean": 0.2922492787048742,
+      "median": 0.28922130720316896,
+      "p10": 0.14743223103878839,
+      "p90": 0.4450755886288411,
+      "p99": 0.5609686905379693,
+      "maximum": 0.7058823529411765
+    },
+    "center": {
+      "players": 347,
+      "mean": 0.27214310804912956,
+      "median": 0.264367816091954,
+      "p10": 0.1294393207436685,
+      "p90": 0.43263932702418506,
+      "p99": 0.5284248605121707,
+      "maximum": 0.6363636363636364
+    }
+  },
+  "hybrid_and_unavailable_excluded_from_three_panel_plot": 8,
+  "unit": "raw season total points divided by total verified season minutes",
+  "interpretation_limit": "observed scoring rate, not position-adjusted talent"
+}

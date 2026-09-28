@@ -1,0 +1,41 @@
+{
+  "status": "executed_internally_checked",
+  "timestamp": "2026-09-27T16:54:43.136643-04:00",
+  "code": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/code/ASSORT_20260927_games_played_distributions_v1.py",
+  "code_sha256": "52e79b459e7fcfb429b9b40efedb81a593b7ad18160de6961bda2cb010dd9c2a",
+  "audit_input": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/rotation_audit_2015/ASSORT_20260927_rotation_audit_v1_players.csv.gz",
+  "audit_input_sha256": "f39afaf105210837168e1bdfe5693b85c8e058c0c029cd577befce36271defe2",
+  "audit_run_record": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/docs/run_records/ASSORT_20260927_rotation_audit_v1_run_record.json",
+  "audit_run_record_sha256": "3cd65a45873348ba94996fd467085cf843397470f09b52b5db9a09e85da9c76f",
+  "frozen_game_file": "datasets/mbb/mbb_df_player_box.csv",
+  "frozen_game_file_sha256": "0f05f4a022054ee9c3b09a3793da49deb907794ede0011ffca29b44b788560a6",
+  "source_reader": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/code/ASSORT_20260925_v1.py",
+  "source_reader_sha256": "461d56671fb4b8e5b9a9d70461211a9e9f4e6d95c87cadd9f6bb2b21039b25bc",
+  "definition": "positive-minute player appearances / distinct captured team games; 2015 eligible audit players",
+  "python": "3.9.6",
+  "pandas": "2.3.3",
+  "numpy": "2.0.2",
+  "matplotlib": "3.9.4",
+  "outputs": [
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/games_played_2015/ASSORT_20260927_games_played_distributions_v1_player_values.csv",
+      "sha256": "0181d00aa1a013ccca72c5981e4544e30ffb8f81025793f914200ec3714b41a9",
+      "bytes": 135075
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/games_played_2015/ASSORT_20260927_games_played_distributions_v1_summary.json",
+      "sha256": "60fe4781e9c467d091c2226e116b49f587966a1c8667fd5f5db44a4904f22175",
+      "bytes": 1074
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/games_played_2015/ASSORT_20260927_games_played_distributions_v1_games_count.png",
+      "sha256": "3ce46dcd46dacdf0c4a130d94c888df70b42b30c659670b7d828e01fb682f3e3",
+      "bytes": 81208
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/games_played_2015/ASSORT_20260927_games_played_distributions_v1_percentage_captured_team_games.png",
+      "sha256": "6748cfeb7d57eb40ef63d3269d5a91f05ebf36e879ec6e19c19b2dae4c4b3559",
+      "bytes": 83875
+    }
+  ]
+}

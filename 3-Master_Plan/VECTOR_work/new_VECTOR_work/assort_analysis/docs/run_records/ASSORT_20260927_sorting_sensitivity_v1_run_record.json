@@ -1,0 +1,46 @@
+{
+  "status": "executed_internally_checked",
+  "timestamp": "2026-09-27T16:42:44.063756-04:00",
+  "code": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/code/ASSORT_20260927_sorting_sensitivity_v1.py",
+  "code_sha256": "0f830412be57c6a4a5ce63457651a38d0fdd1b8a1de375c84464957eca606cd8",
+  "input": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/rotation_audit_2015/ASSORT_20260927_rotation_audit_v1_players.csv.gz",
+  "input_sha256": "f39afaf105210837168e1bdfe5693b85c8e058c0c029cd577befce36271defe2",
+  "audit_run_record": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/docs/run_records/ASSORT_20260927_rotation_audit_v1_run_record.json",
+  "audit_run_record_sha256": "3cd65a45873348ba94996fd467085cf843397470f09b52b5db9a09e85da9c76f",
+  "repository_sorting_sources": [
+    {
+      "path": "sports/541_grandchild_homophily_assign.py",
+      "sha256": "b6983d0b0a0cedfe3ca439ff830113824dc0f101fe2707f2b042532e745df666"
+    },
+    {
+      "path": "sports/scripts/pd21_rho_hsort_calibrate.py",
+      "sha256": "1b2bb0c249946aa991ae6c3b56840894f2b41184d9e35abbb0c2c5eb9f8c485f"
+    }
+  ],
+  "parameters": {
+    "season": 2015,
+    "metric": "raw season points per minute",
+    "regular_playing_rule": "at least 5 minutes per positive-minute appearance",
+    "random_reference": "fixed values and team sizes; uniform permutation among player slots",
+    "shuffles_per_population": 1000,
+    "master_seed": 20260927,
+    "input": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/rotation_audit_2015/ASSORT_20260927_rotation_audit_v1_players.csv.gz",
+    "input_sha256": "f39afaf105210837168e1bdfe5693b85c8e058c0c029cd577befce36271defe2",
+    "interpretation": "descriptive nested-sample comparison; not a causal or formal sampling test"
+  },
+  "python": "3.9.6",
+  "numpy": "2.0.2",
+  "pandas": "2.3.3",
+  "outputs": [
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/sorting_sensitivity_2015/ASSORT_20260927_sorting_sensitivity_v1_summary.json",
+      "sha256": "5f153617004296c85785676142b198c11a04e162230b474e50965b67eeb5539c",
+      "bytes": 1875
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/sorting_sensitivity_2015/ASSORT_20260927_sorting_sensitivity_v1_random_draws.csv",
+      "sha256": "fbacca096453e18b977965b877456853451683fa2a5418965ab4e48f7447bfd5",
+      "bytes": 68522
+    }
+  ]
+}

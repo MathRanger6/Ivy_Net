@@ -1,0 +1,64 @@
+{
+  "status": "executed_reviewed",
+  "review": "VECTOR reviewed all 24 displayed identity records; a separate read-only verification confirmed output hashes, four sample-minute differences, 106 common-sample exclusions, and the entirely excluded Cleveland State team. Exact historical matching lineage and full-population linkage accuracy remain unresolved. See the narrated report in docs/results/.",
+  "timestamp_utc": "2026-09-27T22:55:17.635033+00:00",
+  "code": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/code/ASSORT_20260927_performance_metric_audit_v1.py",
+  "inputs_and_code_sha256": {
+    "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/rotation_audit_2015/ASSORT_20260927_rotation_audit_v1_players.csv.gz": "f39afaf105210837168e1bdfe5693b85c8e058c0c029cd577befce36271defe2",
+    "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/docs/run_records/ASSORT_20260927_rotation_audit_v1_run_record.json": "3cd65a45873348ba94996fd467085cf843397470f09b52b5db9a09e85da9c76f",
+    "datasets/mbb/DO_NOT_ERASE/bpm_player_season_matched.csv": "b9fb97788b97c9ad8f82088da77b2f72155bea38f6be7b877aca334fdf0beaa7",
+    "datasets/mbb/DO_NOT_ERASE/bpm_player_season_raw.csv": "f50c38ebde976296323ac6af44167124dfdebd46e22ac67150a1fc9041873662",
+    "datasets/mbb/DO_NOT_ERASE/sr_school_slug_crosswalk.csv": "0210f979407e08c8ff423afef6b8de5d0eec68ae21d1215d514176fdb0b37b97",
+    "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/code/ASSORT_20260927_performance_metric_audit_v1.py": "93c1ab99d38a0ba98327f8f0231bdf59570583b4de13fcb64b7606c94dbb1a3e"
+  },
+  "parameters": {
+    "season": 2015,
+    "sample_size": 24,
+    "sample_salt": "metric-identity-2015-20260927",
+    "sample_selection": "ascending SHA256(salt|athlete_id), first player from each distinct team",
+    "population": "accepted 4267-player audit; compare finite-BPM-and-PER intersection",
+    "standardization": "per-metric mean and population SD on common 2015 sample",
+    "weighting": "equal player for H_sort; equal team for mean interval widths",
+    "random_assignment_reference": "not run"
+  },
+  "python": "3.12.14",
+  "pandas": "2.2.3",
+  "numpy": "2.3.5",
+  "outputs": [
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/performance_metric_audit_2015/ASSORT_20260927_performance_metric_audit_v1_common_players.csv",
+      "sha256": "3b3c121d6ecb572961300f5a897bb01d27dd4ea5b5467f9099fe3a5911783369",
+      "bytes": 576601
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/performance_metric_audit_2015/ASSORT_20260927_performance_metric_audit_v1_excluded_players.csv",
+      "sha256": "e67125f4b5955973221e2df0fac3146b82f5365808b572edb636fadd3b648cb9",
+      "bytes": 7726
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/performance_metric_audit_2015/ASSORT_20260927_performance_metric_audit_v1_identity_sample.csv",
+      "sha256": "7249f6d1bba64be63a25d32f60e39358f75840885048fd48dff8bf2384a20be8",
+      "bytes": 6459
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/performance_metric_audit_2015/ASSORT_20260927_performance_metric_audit_v1_metric_summary.csv",
+      "sha256": "7a9ac7ce640368500f5b9786dbc8f0afcc61beea8a1e5231194aee0a91c786b5",
+      "bytes": 781
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/performance_metric_audit_2015/ASSORT_20260927_performance_metric_audit_v1_rank_correlations.csv",
+      "sha256": "c53739cdbb952873fa06df7f87869f13ce0ab08b8e5cd76ee232ff6faff69aaf",
+      "bytes": 185
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/performance_metric_audit_2015/ASSORT_20260927_performance_metric_audit_v1_summary.json",
+      "sha256": "9900e501e6ea46bf0ad2019d99053f0b32b635ba8d2f68c2208eb4f5d7098e18",
+      "bytes": 3504
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/performance_metric_audit_2015/ASSORT_20260927_performance_metric_audit_v1_team_intervals.csv",
+      "sha256": "2a59871f26157af00f1eda32df742809f00d5dd3192333452c6a8b292f2744ee",
+      "bytes": 128776
+    }
+  ]
+}

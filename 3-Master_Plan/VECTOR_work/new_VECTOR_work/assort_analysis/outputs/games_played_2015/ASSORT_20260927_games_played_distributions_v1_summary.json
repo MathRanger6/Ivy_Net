@@ -1,0 +1,39 @@
+{
+  "season": 2015,
+  "eligible_players": 4267,
+  "teams": 351,
+  "games_with_positive_minutes": {
+    "minimum": 1.0,
+    "p10": 12.0,
+    "p25": 22.0,
+    "median": 30.0,
+    "mean": 26.441996719006326,
+    "p75": 32.0,
+    "p90": 34.0,
+    "maximum": 40.0
+  },
+  "percentage_of_captured_team_games": {
+    "minimum": 2.857142857142857,
+    "p10": 36.36363636363637,
+    "p25": 69.6969696969697,
+    "median": 93.93939393939394,
+    "mean": 81.22396467594923,
+    "p75": 100.0,
+    "p90": 100.0,
+    "maximum": 100.0
+  },
+  "captured_team_games": {
+    "minimum": 28.0,
+    "p10": 30.0,
+    "p25": 31.0,
+    "median": 32.0,
+    "mean": 32.56125356125356,
+    "p75": 34.0,
+    "p90": 35.0,
+    "maximum": 40.0
+  },
+  "player_source": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/rotation_audit_2015/ASSORT_20260927_rotation_audit_v1_players.csv.gz",
+  "team_denominator_source": "datasets/mbb/mbb_df_player_box.csv",
+  "source_rows_2015": 182657,
+  "percentage_denominator_limitation": "captured team games, not a verified complete season schedule"
+}

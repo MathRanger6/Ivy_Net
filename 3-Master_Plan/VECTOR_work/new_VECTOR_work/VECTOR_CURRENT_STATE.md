@@ -1,7 +1,19 @@
 # VECTOR — Current Research State
 
-**Last synced:** 2026-09-25
+**Last synced:** 2026-09-27
 **Scope:** Concise research dashboard; detailed evidence and history remain in the linked sources. This dashboard distinguishes source review from reproduced empirical results.
+
+## September 27 checkpoint — current position
+
+Charles paused the original assortativity simulation to investigate the basketball player pool and performance measure. Separately authorized source recovery and construction produced the accepted **4,267-player, 351-team 2015 population**. This supersedes the provisional counts and execution-stop language preserved below. The canonical team now prioritizes positive-minute appearances; source overlays and unresolved-row treatment are recorded in the [rotation-audit decisions](assort_analysis/docs/decisions/ASSORT_20260927_rotation_audit_decisions.md).
+
+Executed points-per-minute pool diagnostics did not reveal stronger measured sorting from the tested playing-time restrictions. SCOUT's top-ten-minute interval comparison narrowed intervals, but its sorting index was 0.06742 versus 0.06194 for the full population and a mean 0.07936 for random within-team tens. These are descriptive measured-performance results, not estimates of latent talent or causal congestion. See the [rotation-core report](assort_analysis/docs/results/ASSORT_20260927_rotation_core_intervals_v2_report.md).
+
+The newly authorized [performance-measure audit](assort_analysis/docs/results/ASSORT_20260927_performance_metric_audit_v1_report.md) compared the same **4,161 players on 350 teams**. Sorting indices were 0.06338 for points per minute (PPM), 0.10892 for Player Efficiency Rating (PER), and 0.32515 for Box Plus/Minus (BPM). PER's standardized team interval widths stayed nearly identical to PPM's; BPM embeds a team-performance adjustment. All 24 predetermined saved-source identity/value checks agreed. This establishes internal sample consistency, not full match accuracy. Source-minute differences, exclusion of all 13 Cleveland State players for missing PER, and the exact historical match lineage remain qualifications.
+
+**Immediate decision:** The executed anchor comparison supports considering PER with fixed minute anchors as one named descriptive sensitivity. Charles has not adopted PER as primary ability, changed the competition pool, or changed the congestion definition. VECTOR's earlier recommendation to retain PPM as baseline remains a proposal to discuss in light of this new evidence. No further execution is authorized. The older September 25 design and stop notes below are retained as historical checkpoints; they are not the current population count or task status.
+
+**Completed measure-by-pool comparison:** Charles emphasized that the earlier negative pool findings apply to PPM and the tested definitions, not automatically to PER or BPM, then authorized the existing top-ten-minute anchor comparison for PPM and PER. On the same 4,163 usable-PER players, 3,413 available original anchors, and 350 teams, PPM anchor sorting is 0.06995 versus a matched-size random mean of 0.08102; PER anchor sorting is 0.13768 versus 0.12602, above all 100 random-subset results. Anchor interval widths narrow by 13.1% for PPM and 20.7% for PER versus their full matched pools; broad central overlap remains. Missing PER prevented use of 88 original anchors, with no replacement, including Cleveland State's ten anchors. The [narrated report](assort_analysis/docs/results/ASSORT_20260927_ppm_per_top_ten_anchor_v1_report.md) preserves the source and interpretation limits. This establishes a measure-dependent descriptive pool result, not latent talent or a revised competition-pool definition. No additional filters, simulations, or model changes are authorized. The next decision is PER's scientific role and how to preserve bench players if anchors describe team context.
 
 ## Current scientific question
 

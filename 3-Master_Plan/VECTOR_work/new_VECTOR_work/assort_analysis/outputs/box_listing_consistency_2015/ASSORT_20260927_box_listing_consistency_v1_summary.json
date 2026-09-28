@@ -1,0 +1,124 @@
+{
+  "season": 2015,
+  "team_count": 351,
+  "team_game_count": 11429,
+  "source_rows_after_dash_and_team_coverage": 175014,
+  "source_rows_2015": 182657,
+  "verified_minutes_overlay": {
+    "overlay_rows_matched": 105,
+    "overlay_positive_minute_rows": 101,
+    "overlay_zero_minute_rows": 4,
+    "overlay_recorded_points": 757.0,
+    "zero_minute_positive_point_rows_matched": 37,
+    "zero_minute_positive_point_rows_recovered": 15,
+    "zero_minute_positive_point_rows_fallback": 22,
+    "zero_minute_positive_point_fallback_points": 42.0
+  },
+  "source_flag_counts": {
+    "did_not_play_true_rows": 59003,
+    "active_true_rows": 0,
+    "both_stats_missing_rows": 59003,
+    "dnp_true_with_positive_minutes": 0,
+    "dnp_true_with_nonmissing_minutes": 0,
+    "both_stats_missing_without_dnp_flag": 0
+  },
+  "game_listing": {
+    "listed_players": {
+      "count": 11429,
+      "minimum": 9.0,
+      "p10": 13.0,
+      "p25": 14.0,
+      "median": 15.0,
+      "p75": 16.0,
+      "p90": 17.0,
+      "maximum": 34.0
+    },
+    "positive_minute_players": {
+      "count": 11429,
+      "minimum": 6.0,
+      "p10": 8.0,
+      "p25": 9.0,
+      "median": 10.0,
+      "p75": 11.0,
+      "p90": 12.0,
+      "maximum": 18.0
+    },
+    "unplayed_listings": {
+      "count": 11429,
+      "minimum": 0.0,
+      "p10": 2.0,
+      "p25": 4.0,
+      "median": 5.0,
+      "p75": 7.0,
+      "p90": 8.0,
+      "maximum": 24.0
+    },
+    "games_with_any_dnp": 11292,
+    "participant_only_games": 129,
+    "no_dnp_but_unplayed_games": 8
+  },
+  "team_listing": {
+    "share_games_with_dnp": {
+      "count": 351,
+      "minimum": 0.7142857142857143,
+      "p10": 0.967741935483871,
+      "p25": 1.0,
+      "median": 1.0,
+      "p75": 1.0,
+      "p90": 1.0,
+      "maximum": 1.0
+    },
+    "listing_range": {
+      "count": 351,
+      "minimum": 0.0,
+      "p10": 0.0,
+      "p25": 0.0,
+      "median": 0.0,
+      "p75": 1.0,
+      "p90": 4.0,
+      "maximum": 21.0
+    },
+    "teams_dnp_every_game": 296,
+    "teams_dnp_no_games": 0,
+    "teams_mixed_dnp_presence": 55,
+    "mixed_teams_dnp_game_median_listing_at_least_three_higher": 14,
+    "mixed_game_listing_gap": {
+      "count": 55,
+      "minimum": 0.0,
+      "p10": 0.0,
+      "p25": 0.0,
+      "median": 0.0,
+      "p75": 2.5,
+      "p90": 4.600000000000001,
+      "maximum": 8.0
+    }
+  },
+  "accepted_players": {
+    "count": 4267,
+    "listed_game_share": {
+      "count": 4267,
+      "minimum": 0.030303030303030304,
+      "p10": 1.0,
+      "p25": 1.0,
+      "median": 1.0,
+      "p75": 1.0,
+      "p90": 1.0,
+      "maximum": 1.0
+    },
+    "played_game_share": {
+      "count": 4267,
+      "minimum": 0.02857142857142857,
+      "p10": 0.36363636363636365,
+      "p25": 0.696969696969697,
+      "median": 0.9393939393939394,
+      "p75": 1.0,
+      "p90": 1.0,
+      "maximum": 1.0
+    },
+    "listed_at_least_half_team_games": 4258,
+    "listed_at_least_half_and_played_under_half": 633,
+    "under_five_minutes_per_played_appearance": 339,
+    "under_five_and_listed_at_least_half_team_games": 339
+  },
+  "interpretation_limit": "internal box-listing consistency cannot establish complete true rosters"
+}

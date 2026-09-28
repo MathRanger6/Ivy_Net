@@ -1,0 +1,17 @@
+{
+  "affected_athletes": 37,
+  "affected_athletes_with_at_least_twenty_other_minutes": 30,
+  "affected_games": 23,
+  "canonical_team_incidence_preliminary": {
+    "all_athletes_after_coverage": 5662,
+    "all_zero_minute_athletes_not_assigned": 909,
+    "changed_athletes_eligible_under_new_rule": 3,
+    "changes_from_zero_minute_to_positive_minute_team": 4,
+    "multi_team_assignment_changes": 4,
+    "multi_team_athletes": 85,
+    "multi_team_with_any_played_minutes": 76
+  },
+  "recorded_points_on_these_rows": 157.0,
+  "status": "stopped_before_audit_result",
+  "zero_minute_positive_point_rows": 37
+}

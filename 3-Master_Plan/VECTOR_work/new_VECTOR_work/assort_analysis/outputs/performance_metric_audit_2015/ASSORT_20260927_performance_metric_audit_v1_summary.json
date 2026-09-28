@@ -1,0 +1,112 @@
+{
+  "season": 2015,
+  "accepted_players": 4267,
+  "accepted_teams": 351,
+  "key_matches": 4176,
+  "finite_BPM": 4174,
+  "finite_PER": 4163,
+  "common_players": 4161,
+  "common_teams": 350,
+  "excluded_from_common": 106,
+  "excluded_fraction": 0.02484180923365362,
+  "common_min_team_size": 8,
+  "full_PPM_H_sort": 0.061944291778983224,
+  "common_PPM_H_sort": 0.06337677847539226,
+  "identity_sample_size": 24,
+  "identity_sample_status_counts": {
+    "key_and_values_agree": 24
+  },
+  "identity_raw_duplicate_keys": 0,
+  "raw_file_seasons": [
+    2005,
+    2021
+  ],
+  "matched_file_seasons": [
+    2009,
+    2021
+  ],
+  "sample_scrape_dates": [
+    "2026-08-27"
+  ],
+  "spearman_rank_correlations": {
+    "points_per_minute": {
+      "points_per_minute": 1.0,
+      "PER": 0.8189938455778927,
+      "BPM": 0.5360917751830843
+    },
+    "PER": {
+      "points_per_minute": 0.8189938455778927,
+      "PER": 1.0,
+      "BPM": 0.7572068643559555
+    },
+    "BPM": {
+      "points_per_minute": 0.5360917751830843,
+      "PER": 0.7572068643559555,
+      "BPM": 1.0
+    }
+  },
+  "metrics": [
+    {
+      "metric": "Points per minute",
+      "column": "points_per_minute",
+      "players": 4161,
+      "teams": 350,
+      "mean_raw": 0.2962339959115194,
+      "sd_raw_population": 0.11775911037967576,
+      "min_raw": 0.0,
+      "p05_raw": 0.1091954022988505,
+      "p25_raw": 0.2129032258064516,
+      "median_raw": 0.2953488372093023,
+      "p75_raw": 0.3733719247467438,
+      "p95_raw": 0.4893617021276595,
+      "max_raw": 0.8709677419354839,
+      "H_sort": 0.06337677847539226,
+      "mean_team_interval_width_z_equal_team": 3.258215792661557,
+      "median_team_interval_width_z_equal_team": 3.212348890527685
+    },
+    {
+      "metric": "Player Efficiency Rating",
+      "column": "PER",
+      "players": 4161,
+      "teams": 350,
+      "mean_raw": 12.615933669790916,
+      "sd_raw_population": 6.632620108733463,
+      "min_raw": -21.7,
+      "p05_raw": 1.4,
+      "p25_raw": 8.7,
+      "median_raw": 12.8,
+      "p75_raw": 16.8,
+      "p95_raw": 23.1,
+      "max_raw": 43.6,
+      "H_sort": 0.10892100612872661,
+      "mean_team_interval_width_z_equal_team": 3.246809977025708,
+      "median_team_interval_width_z_equal_team": 3.1661695763863174
+    },
+    {
+      "metric": "Box Plus/Minus",
+      "column": "BPM",
+      "players": 4161,
+      "teams": 350,
+      "mean_raw": -1.7570776255707763,
+      "sd_raw_population": 5.424998747175504,
+      "min_raw": -38.2,
+      "p05_raw": -10.7,
+      "p25_raw": -4.9,
+      "median_raw": -1.5,
+      "p75_raw": 1.6,
+      "p95_raw": 6.6,
+      "max_raw": 23.9,
+      "H_sort": 0.3251480987267071,
+      "mean_team_interval_width_z_equal_team": 2.8258071041917714,
+      "median_team_interval_width_z_equal_team": 2.5437793892920055
+    }
+  ],
+  "limitations": [
+    "Saved-source name/school/year and value consistency only; no independent website validation or measured linkage error rate.",
+    "Predetermined 24-player sample covers 24 teams, not every record or collision.",
+    "Common-sample exclusion avoids differing people across measures but does not establish missingness is ignorable.",
+    "Global 2015 population standardization does not remove role, pace, opponent, or team effects.",
+    "BPM contains a team-performance adjustment; its sorting cannot be treated as independent evidence of latent talent sorting.",
+    "No random-assignment reference, draft outcome, model calibration, causal analysis, or experiment computed."
+  ]
+}

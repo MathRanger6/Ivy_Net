@@ -1,0 +1,106 @@
+{
+  "season": 2015,
+  "original_players": 4267,
+  "original_teams": 351,
+  "original_anchors": 3501,
+  "common_players": 4163,
+  "common_teams": 350,
+  "comparison_excluded_players": 104,
+  "available_anchors": 3413,
+  "unavailable_original_anchors": 88,
+  "minimum_available_anchors_per_comparison_team": 7,
+  "maximum_available_anchors_per_comparison_team": 10,
+  "comparison_teams_below_ten_available_anchors": 72,
+  "teams_unavailable_for_comparison": [
+    {
+      "team_id": 325,
+      "team_name": "Cleveland St",
+      "full_players": 13,
+      "original_anchors": 10,
+      "available_players": 0,
+      "available_anchors": 0,
+      "unavailable_anchors": 10
+    }
+  ],
+  "anchor_minus_full_H_sort_PER_minus_PPM": 0.021947160133903895,
+  "metrics": [
+    {
+      "metric": "Points per minute",
+      "column": "points_per_minute",
+      "full": {
+        "metric": "points_per_minute",
+        "case": "All matched players",
+        "players": 4163,
+        "teams": 350,
+        "H_sort": 0.0631672749617697,
+        "mean_width_z": 3.2587946112101287,
+        "median_width_z": 3.2100675844453233,
+        "maximum_grid_coverage": 350,
+        "mean_grid_coverage": 113.37203495630462
+      },
+      "anchors": {
+        "metric": "points_per_minute",
+        "case": "Fixed minute anchors",
+        "players": 3413,
+        "teams": 350,
+        "H_sort": 0.06995452370621888,
+        "mean_width_z": 2.831759016467291,
+        "median_width_z": 2.825936811573865,
+        "maximum_grid_coverage": 350,
+        "mean_grid_coverage": 98.5043695380774
+      },
+      "random": {
+        "draws": 100,
+        "H_sort_mean": 0.08101795967797988,
+        "H_sort_median": 0.0815922931669445,
+        "H_sort_min": 0.06624268543687867,
+        "H_sort_max": 0.08867555334226085,
+        "draws_H_sort_at_or_above_anchor": 99,
+        "mean_width_z": 3.0720196142004994,
+        "mean_width_min": 3.01849249203501,
+        "mean_width_max": 3.119336795540399,
+        "draws_width_at_or_below_anchor": 0,
+        "maximum_grid_coverage_median": 350.0
+      }
+    },
+    {
+      "metric": "Player Efficiency Rating",
+      "column": "PER",
+      "full": {
+        "metric": "PER",
+        "case": "All matched players",
+        "players": 4163,
+        "teams": 350,
+        "H_sort": 0.1089447701230506,
+        "mean_width_z": 3.2464422464938383,
+        "median_width_z": 3.1648032404543622,
+        "maximum_grid_coverage": 349,
+        "mean_grid_coverage": 112.93882646691635
+      },
+      "anchors": {
+        "metric": "PER",
+        "case": "Fixed minute anchors",
+        "players": 3413,
+        "teams": 350,
+        "H_sort": 0.13767917900140367,
+        "mean_width_z": 2.5735232663330114,
+        "median_width_z": 2.471560625878645,
+        "maximum_grid_coverage": 349,
+        "mean_grid_coverage": 89.52933832709114
+      },
+      "random": {
+        "draws": 100,
+        "H_sort_mean": 0.12601549558408384,
+        "H_sort_median": 0.12562690650646188,
+        "H_sort_min": 0.11708571773272229,
+        "H_sort_max": 0.13618538629869684,
+        "draws_H_sort_at_or_above_anchor": 0,
+        "mean_width_z": 3.034773746990128,
+        "mean_width_min": 2.990502240218182,
+        "mean_width_max": 3.0856185716217697,
+        "draws_width_at_or_below_anchor": 0,
+        "maximum_grid_coverage_median": 348.0
+      }
+    }
+  ]
+}

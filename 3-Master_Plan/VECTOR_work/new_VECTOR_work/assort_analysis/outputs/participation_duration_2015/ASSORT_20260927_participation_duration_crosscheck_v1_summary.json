@@ -1,0 +1,15 @@
+{
+  "season": 2015,
+  "eligible_players": 4267,
+  "short_stint_under_five_minutes_per_played_appearance": 339,
+  "short_stint_and_90_percent_or_more_captured_games": 1,
+  "short_stint_and_under_25_percent_captured_games": 68,
+  "long_stint_20_minutes_or_more_and_under_25_percent_captured_games": 19,
+  "under_25_percent_captured_games_all_durations": 211,
+  "90_percent_or_more_captured_games_all_durations": 2519,
+  "descriptive_only": "display bands and illustrative extremes are not new eligibility rules",
+  "minutes_denominator": "positive-minute player appearances",
+  "games_denominator": "captured team games, not verified complete official schedule",
+  "short_stint_fraction_perennial": 0.0029498525073746312,
+  "short_stint_fraction_occasional": 0.20058997050147492
+}

@@ -1,0 +1,37 @@
+{
+  "full_population": {
+    "n_players": 4267,
+    "n_teams": 351,
+    "h_sort_ability_standardized": 0.061944291778983085,
+    "h_sort_points_per_minute": 0.061944291778983196,
+    "grandchild_crosscheck": 0.061944291778983085,
+    "accepted_reference": 0.06194,
+    "analytic_assignment_expectation_if_reallocated": 0.08204406938584154,
+    "observed_minus_expectation": -0.02009977760685845
+  },
+  "fixed_top_ten_minutes": {
+    "n_players": 3501,
+    "h_sort": 0.0674157800803894,
+    "grandchild_crosscheck": 0.0674157800803894,
+    "analytic_assignment_expectation_if_reallocated": 0.1,
+    "observed_minus_expectation": -0.03258421991961061
+  },
+  "random_ten_within_team": {
+    "n_draws": 100,
+    "h_sort_mean": 0.07936156155047726,
+    "h_sort_median": 0.07898270085346604,
+    "h_sort_min": 0.06983799488022469,
+    "h_sort_max": 0.09358512686864628,
+    "h_sort_p025": 0.07399777559034246,
+    "h_sort_p975": 0.08801780149182116,
+    "note": "within-team subset draws; not random-assignment null"
+  },
+  "cross_checks": {
+    "tolerance": 0.0001,
+    "draws_grandchild_checked": [
+      1,
+      2,
+      3
+    ]
+  }
+}

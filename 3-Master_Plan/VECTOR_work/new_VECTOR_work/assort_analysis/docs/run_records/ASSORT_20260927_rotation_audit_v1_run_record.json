@@ -1,0 +1,56 @@
+{
+  "code": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/code/ASSORT_20260927_rotation_audit_v1.py",
+  "code_sha256": "15d53f9f1510834d86a19b67fcb51befe8cc5e788ba7c8c2e5fc7c1683b53c85",
+  "frozen_game_file": "datasets/mbb/mbb_df_player_box.csv",
+  "frozen_game_file_bytes": 1654918848,
+  "frozen_game_file_sha256": "0f05f4a022054ee9c3b09a3793da49deb907794ede0011ffca29b44b788560a6",
+  "numpy": "2.0.2",
+  "outputs": [
+    {
+      "bytes": 467324,
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/data/rotation_audit_2015/ASSORT_20260927_rotation_audit_v1_canonical_team_candidates.csv",
+      "sha256": "8588ef0ac209ad59563f45b6f605ed1fb1940102343b4d54c471eaa1c48bc429"
+    },
+    {
+      "bytes": 821,
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/data/rotation_audit_2015/ASSORT_20260927_rotation_audit_v1_canonical_team_changes.csv",
+      "sha256": "83da3c6221c91f99d350ae532c48b16ea58c9f3cd585aa92c9325cc8774cd8b7"
+    },
+    {
+      "bytes": 398883,
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/rotation_audit_2015/ASSORT_20260927_rotation_audit_v1_players.csv.gz",
+      "sha256": "f39afaf105210837168e1bdfe5693b85c8e058c0c029cd577befce36271defe2"
+    },
+    {
+      "bytes": 35845,
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/rotation_audit_2015/ASSORT_20260927_rotation_audit_v1_teams.csv",
+      "sha256": "b9c0d00214a6d3b09ce9b90c7a07370b529941c466d07400be19a0c672e540dd"
+    },
+    {
+      "bytes": 3840,
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/rotation_audit_2015/ASSORT_20260927_rotation_audit_v1_summary.json",
+      "sha256": "6f08e5242f5d155bf1c91a76a027be48cfcadadfdc68e63e2fdc565d594e22fc"
+    }
+  ],
+  "pandas": "2.3.3",
+  "parameters": {
+    "ability": "season points divided by season minutes, standardized with population SD",
+    "athlete_minimum_total_minutes": 20,
+    "canonical_team": "most distinct positive-minute games; then total verified minutes",
+    "focal_player_sample": "same for full and restricted peer means",
+    "outcome_curve": "not computed",
+    "restricted_peer_minimum_minutes_per_played_appearance": 5.0,
+    "season": 2015,
+    "team_minimum_captured_games": 11,
+    "unresolved_positive_point_zero_minute_rows": "omit the row's points and minutes from constructed rates; retain game identity for coverage"
+  },
+  "python": "3.9.6 (default, May 22 2026, 11:13:45) \n[Clang 21.0.0 (clang-2100.1.1.101)]",
+  "source_reader": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/code/ASSORT_20260925_v1.py",
+  "source_reader_sha256": "461d56671fb4b8e5b9a9d70461211a9e9f4e6d95c87cadd9f6bb2b21039b25bc",
+  "source_recovery_overlay": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/data/source_recovery_2015/minutes_recovery_overlay.csv",
+  "source_recovery_overlay_sha256": "4c128697f98d5770f7e0752fc078dc54d32101284620dc5296b760b4f18be7fa",
+  "status": "executed_unreviewed",
+  "timestamp": "2026-09-27T16:22:00.926452-04:00",
+  "zero_minute_recovery_overlay": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/data/source_recovery_2015/ASSORT_20260927_zero_minutes_recovery_overlay.csv",
+  "zero_minute_recovery_overlay_sha256": "3d95cd1d0498abbdf908998193dd4431c4ce5f690c23556940899eecb87d8bb2"
+}

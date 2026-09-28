@@ -1,0 +1,67 @@
+{
+  "status": "executed_internally_checked",
+  "timestamp": "2026-09-27T17:31:30.971306-04:00",
+  "code": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/code/ASSORT_20260927_box_listing_consistency_v1.py",
+  "code_sha256": "d654cf40a0af9c6b89a5ec62958363694478a72997852f9c27b0c2ee20442d73",
+  "audit_run_record": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/docs/run_records/ASSORT_20260927_rotation_audit_v1_run_record.json",
+  "audit_run_record_sha256": "3cd65a45873348ba94996fd467085cf843397470f09b52b5db9a09e85da9c76f",
+  "inputs": [
+    {
+      "path": "datasets/mbb/mbb_df_player_box.csv",
+      "sha256": "0f05f4a022054ee9c3b09a3793da49deb907794ede0011ffca29b44b788560a6"
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/rotation_audit_2015/ASSORT_20260927_rotation_audit_v1_players.csv.gz",
+      "sha256": "f39afaf105210837168e1bdfe5693b85c8e058c0c029cd577befce36271defe2"
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/code/ASSORT_20260925_v1.py",
+      "sha256": "461d56671fb4b8e5b9a9d70461211a9e9f4e6d95c87cadd9f6bb2b21039b25bc"
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/data/source_recovery_2015/minutes_recovery_overlay.csv",
+      "sha256": "4c128697f98d5770f7e0752fc078dc54d32101284620dc5296b760b4f18be7fa"
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/data/source_recovery_2015/ASSORT_20260927_zero_minutes_recovery_overlay.csv",
+      "sha256": "3d95cd1d0498abbdf908998193dd4431c4ce5f690c23556940899eecb87d8bb2"
+    }
+  ],
+  "scope": "2015 accepted teams; all named source game-box rows; no eligibility change",
+  "python": "3.9.6",
+  "pandas": "2.3.3",
+  "numpy": "2.0.2",
+  "matplotlib": "3.9.4",
+  "outputs": [
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/box_listing_consistency_2015/ASSORT_20260927_box_listing_consistency_v1_team_game.csv",
+      "sha256": "388aa6d09a9f639631caf60d6f97a151d5f334abbd5851c64c7f36311f35258e",
+      "bytes": 651083
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/box_listing_consistency_2015/ASSORT_20260927_box_listing_consistency_v1_team_summary.csv",
+      "sha256": "e945ba83c7a9b34ebf467dc0b10472192d16d5862017138f355c2d97b54d3371",
+      "bytes": 22020
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/box_listing_consistency_2015/ASSORT_20260927_box_listing_consistency_v1_accepted_players.csv",
+      "sha256": "83c38a580efc7115ad5a92404ce115971d436d225c13fa0d6e95ea2012fca34b",
+      "bytes": 293584
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/box_listing_consistency_2015/ASSORT_20260927_box_listing_consistency_v1_source_flags.csv",
+      "sha256": "38069c5ba704d45d3365b1c89ee8ce48e971601e931fe98dfb41c1433204c429",
+      "bytes": 149
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/box_listing_consistency_2015/ASSORT_20260927_box_listing_consistency_v1_summary.json",
+      "sha256": "be3db039d75b0923266eb676b1947461488b3212ccf622620cf1659518860c8a",
+      "bytes": 3157
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/box_listing_consistency_2015/ASSORT_20260927_box_listing_consistency_v1_team_dnp_share.png",
+      "sha256": "e94625e83fe09e79fe827acbdb6e52ed4c0513274bcf20389f95b8ad0913ca63",
+      "bytes": 68688
+    }
+  ]
+}

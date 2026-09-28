@@ -1,0 +1,9 @@
+athlete_id,team_id,captured_games,played_games,total_minutes,game_rows,athlete_display_name,team_short_display_name,captured_games_team_id,played_games_team_id,changed,multi_team,old_selected,new_selected
+61208,66,13,3,39.0,13,Sherron Dorsey-Walker,Iowa State,2473,66.0,True,True,False,True
+61208,2473,18,0,0.0,18,Sherron Dorsey-Walker,Oakland,2473,66.0,True,True,True,False
+66167,66,21,0,0.0,21,Deonte Burton,Iowa State,66,269.0,True,True,True,False
+66167,269,16,8,129.0,16,Deonte Burton,Marquette,66,269.0,True,True,False,True
+66218,24,14,2,6.0,14,Schuyler Rimmer,Stanford,57,24.0,True,True,False,True
+66218,57,19,0,0.0,19,Schuyler Rimmer,Florida,57,24.0,True,True,True,False
+66915,150,9,6,63.0,9,Semi Ojeleye,Duke,2567,150.0,True,True,False,True
+66915,2567,14,0,0.0,14,Semi Ojeleye,SMU,2567,150.0,True,True,True,False

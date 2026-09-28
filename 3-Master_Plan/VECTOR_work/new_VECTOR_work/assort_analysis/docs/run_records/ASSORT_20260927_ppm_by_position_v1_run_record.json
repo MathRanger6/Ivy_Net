@@ -1,0 +1,40 @@
+{
+  "status": "executed_internally_checked",
+  "timestamp": "2026-09-27T17:22:37.959644-04:00",
+  "code": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/code/ASSORT_20260927_ppm_by_position_v1.py",
+  "code_sha256": "019cf0a7d167504f53633d32a0fbf1b4272411d1521227327253e63c56fe046f",
+  "inputs": [
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/rotation_audit_2015/ASSORT_20260927_rotation_audit_v1_players.csv.gz",
+      "sha256": "f39afaf105210837168e1bdfe5693b85c8e058c0c029cd577befce36271defe2",
+      "run_record": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/docs/run_records/ASSORT_20260927_rotation_audit_v1_run_record.json"
+    },
+    {
+      "path": "datasets/mbb/mbb_df_player_box.csv",
+      "sha256": "0f05f4a022054ee9c3b09a3793da49deb907794ede0011ffca29b44b788560a6"
+    }
+  ],
+  "position_rule": "exact consistent source position per accepted athlete and team; no hybrid reassignment",
+  "ppm_rule": "raw season total points divided by total verified season minutes",
+  "python": "3.9.6",
+  "pandas": "2.3.3",
+  "numpy": "2.0.2",
+  "matplotlib": "3.9.4",
+  "outputs": [
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/ppm_by_position_2015/ASSORT_20260927_ppm_by_position_v1_player_values.csv",
+      "sha256": "737a31ab9f198e0251ef3fee997c27de47e3c7bb266bbe2dc41042e7a714b2cd",
+      "bytes": 191824
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/ppm_by_position_2015/ASSORT_20260927_ppm_by_position_v1_summary.json",
+      "sha256": "e3db8ed4bdf0b0278ad221b6f344b0c49168edd1466445a5194a1064c19b6032",
+      "bytes": 1460
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/ppm_by_position_2015/ASSORT_20260927_ppm_by_position_v1_distribution.png",
+      "sha256": "71afccf74f931d7928a5ded9e982b5dfee8405e94fd4d9982a3246436255a17a",
+      "bytes": 124421
+    }
+  ]
+}

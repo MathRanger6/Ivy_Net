@@ -1,0 +1,81 @@
+{
+  "status": "executed_unreviewed",
+  "timestamp": "2026-09-27T18:07:57.696929-04:00",
+  "version": 2,
+  "supersedes_statistics_only": "ASSORT_20260927_rotation_core_intervals_v1",
+  "mission": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/docs/scientific_questions/ASSORT_20260927_SCOUT_mission_high_minute_rotation_intervals.md",
+  "code": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/code/ASSORT_20260927_rotation_core_intervals_v2.py",
+  "code_sha256": "5a6a445797f758648eceb402de6d00688d775ad782f03c181ee917cf37ceccd0",
+  "input": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/rotation_audit_2015/ASSORT_20260927_rotation_audit_v1_players.csv.gz",
+  "parameters": {
+    "master_seed": 20260927,
+    "random_draws": 100,
+    "rotation_k": 10,
+    "input_sha256": "f39afaf105210837168e1bdfe5693b85c8e058c0c029cd577befce36271defe2"
+  },
+  "checks_passed": [
+    "input_hash",
+    "4267_and_3501_counts",
+    "full_h_sort_matches_accepted",
+    "grandchild_h_sort_crosscheck",
+    "unified_random_membership",
+    "subset_coverage_le_all"
+  ],
+  "outputs": [
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/rotation_core_intervals_2015/ASSORT_20260927_rotation_core_intervals_v2_teams.csv",
+      "sha256": "3a4c5564522c7737b617b20ff4f50addf14a41c107c4219a4e27f85a34678314",
+      "bytes": 63812
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/rotation_core_intervals_2015/ASSORT_20260927_rotation_core_intervals_v2_player_selections_high_minute.csv",
+      "sha256": "17779c89a8c624d41ee8e013890ab1573154fbd014b856df2d4e10fd5dfbad05",
+      "bytes": 104304
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/rotation_core_intervals_2015/ASSORT_20260927_rotation_core_intervals_v2_random_membership.csv",
+      "sha256": "672a0633d46c1a13138aa5368d8273cffbff39f81727282835209323ce168aa9",
+      "bytes": 4874019
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/rotation_core_intervals_2015/ASSORT_20260927_rotation_core_intervals_v2_random_repetitions.csv",
+      "sha256": "fad7b966e33c53c969d520ef23ae06935766fdfa462c14ba331a818879a3e6c1",
+      "bytes": 5927
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/rotation_core_intervals_2015/ASSORT_20260927_rotation_core_intervals_v2_random_team_widths.csv",
+      "sha256": "91f3a6c9563a0ba7ab9ce4b63b1a7fdb60e35ff17e4b678d277db62f9ee2f0a6",
+      "bytes": 652011
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/rotation_core_intervals_2015/ASSORT_20260927_rotation_core_intervals_v2_coverage_grid.csv",
+      "sha256": "746f533e323ba69e79f9736e881fe0ae28c90818cd7b45dbac72d8dd4151a1b7",
+      "bytes": 16823
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/rotation_core_intervals_2015/ASSORT_20260927_rotation_core_intervals_v2_sorting_index_summary.json",
+      "sha256": "0ddf70d605636b4a1b1036708003ccfbfdb4461c84cc3bfedb88685d399cebd9",
+      "bytes": 1133
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/rotation_core_intervals_2015/ASSORT_20260927_rotation_core_intervals_v2_comparison.png",
+      "sha256": "693310876cc2bee6a3d0b0a002cb8371bbc4befb3564f13149d8bcd88fc7cd1f",
+      "bytes": 217761
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/rotation_core_intervals_2015/ASSORT_20260927_rotation_core_intervals_v2_summary.json",
+      "sha256": "19e34012efce1c4ff5aea581b8f8f6d2b5be872b6098d16778a432d8d5190297",
+      "bytes": 1193
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/docs/results/ASSORT_20260927_rotation_core_intervals_v2_report.md",
+      "sha256": "9e85a9baf753d5bf795fb1492cccf5e375ad67827138d78ec0ab0695451295f9",
+      "bytes": 5170
+    }
+  ],
+  "editorial_amendment": {
+    "date": "2026-09-27",
+    "note": "Report wording only (random-ten sorting index vs 0.1000 assignment expectation). No analytical code or numerical outputs rerun.",
+    "report_sha256_after_edit": "9e85a9baf753d5bf795fb1492cccf5e375ad67827138d78ec0ab0695451295f9"
+  }
+}

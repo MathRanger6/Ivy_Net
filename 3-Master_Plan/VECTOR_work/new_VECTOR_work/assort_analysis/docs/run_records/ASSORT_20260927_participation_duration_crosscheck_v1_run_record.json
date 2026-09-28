@@ -1,0 +1,70 @@
+{
+  "status": "executed_internally_checked",
+  "timestamp": "2026-09-27T17:06:42.515385-04:00",
+  "code": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/code/ASSORT_20260927_participation_duration_crosscheck_v1.py",
+  "code_sha256": "aae59037c99b194ac87b17216a829273f944607c46dcba70654f044b579c44c8",
+  "inputs": [
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/rotation_audit_2015/ASSORT_20260927_rotation_audit_v1_players.csv.gz",
+      "sha256": "f39afaf105210837168e1bdfe5693b85c8e058c0c029cd577befce36271defe2",
+      "run_record": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/docs/run_records/ASSORT_20260927_rotation_audit_v1_run_record.json"
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/games_played_2015/ASSORT_20260927_games_played_distributions_v1_player_values.csv",
+      "sha256": "0181d00aa1a013ccca72c5981e4544e30ffb8f81025793f914200ec3714b41a9",
+      "run_record": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/docs/run_records/ASSORT_20260927_games_played_distributions_v1_run_record.json"
+    }
+  ],
+  "parameters": {
+    "frequency_bands_percent": [
+      0,
+      25,
+      50,
+      75,
+      90,
+      101
+    ],
+    "minutes_per_appearance_bands": [
+      "<5",
+      "5\u2013<10",
+      "10\u2013<20",
+      "\u226520"
+    ],
+    "extreme_examples": [
+      "<25% captured games",
+      "\u226590% captured games"
+    ],
+    "new_filter_applied": false
+  },
+  "python": "3.9.6",
+  "pandas": "2.3.3",
+  "numpy": "2.0.2",
+  "matplotlib": "3.9.4",
+  "outputs": [
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/participation_duration_2015/ASSORT_20260927_participation_duration_crosscheck_v1_player_values.csv",
+      "sha256": "1eb692ff701763389ebdda1602801bbf4941c41c5dec8ceb703c92af44425936",
+      "bytes": 322133
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/participation_duration_2015/ASSORT_20260927_participation_duration_crosscheck_v1_cross_tab_counts.csv",
+      "sha256": "b3c0e8345f965eb4cb717840261aeb066774aa5901e7674fa2d539b4956c8788",
+      "bytes": 170
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/participation_duration_2015/ASSORT_20260927_participation_duration_crosscheck_v1_summary.json",
+      "sha256": "a43d48f383b6d4c57e6b548403c5359e8e001da179c1b908c5a325742b8229ef",
+      "bytes": 779
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/participation_duration_2015/ASSORT_20260927_participation_duration_crosscheck_v1_heatmap.png",
+      "sha256": "fd9a29d212c53524ac1e8d9e403f3c699519b0ff9e99c584d0794f8d065136ec",
+      "bytes": 134293
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/participation_duration_2015/ASSORT_20260927_participation_duration_crosscheck_v1_short_vs_other_frequency.png",
+      "sha256": "3a2956afa40c94f7cd5bd60eb955aebd8939b1b51e81dc6883fbc2008562b072",
+      "bytes": 93023
+    }
+  ]
+}

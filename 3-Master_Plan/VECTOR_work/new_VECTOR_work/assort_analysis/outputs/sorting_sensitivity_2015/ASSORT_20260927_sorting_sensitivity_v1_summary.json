@@ -1,0 +1,48 @@
+{
+  "full": {
+    "name": "full",
+    "players": 4267,
+    "teams_count": 351,
+    "min_team_size": 9,
+    "max_team_size": 18,
+    "observed_h_sort": 0.061944291778983196,
+    "grandchild_crosscheck": 0.061944291778983196,
+    "pd21_crosscheck": 0.061944291778983196,
+    "analytic_random_expectation": 0.08204406938584154,
+    "random_mean": 0.08203464425548757,
+    "random_p025": 0.07085020114774959,
+    "random_p975": 0.0930519496656437,
+    "observed_minus_random_mean": -0.02009035247650437
+  },
+  "regular_playing": {
+    "name": "regular_playing",
+    "players": 3928,
+    "teams_count": 351,
+    "min_team_size": 8,
+    "max_team_size": 17,
+    "observed_h_sort": 0.07126609647078297,
+    "grandchild_crosscheck": 0.07126609647078297,
+    "pd21_crosscheck": 0.07126609647078297,
+    "analytic_random_expectation": 0.08912655971479501,
+    "random_mean": 0.08929463840126019,
+    "random_p025": 0.07707557519004632,
+    "random_p975": 0.10206262636441871,
+    "observed_minus_random_mean": -0.018028541930477218
+  },
+  "comparison": {
+    "players_removed": 339,
+    "regular_minus_full_observed_h_sort": 0.009321804691799773,
+    "regular_minus_full_reference_adjusted": 0.0020618105460271513
+  },
+  "design": {
+    "season": 2015,
+    "metric": "raw season points per minute",
+    "regular_playing_rule": "at least 5 minutes per positive-minute appearance",
+    "random_reference": "fixed values and team sizes; uniform permutation among player slots",
+    "shuffles_per_population": 1000,
+    "master_seed": 20260927,
+    "input": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/rotation_audit_2015/ASSORT_20260927_rotation_audit_v1_players.csv.gz",
+    "input_sha256": "f39afaf105210837168e1bdfe5693b85c8e058c0c029cd577befce36271defe2",
+    "interpretation": "descriptive nested-sample comparison; not a causal or formal sampling test"
+  }
+}

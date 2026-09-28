@@ -1,0 +1,104 @@
+{
+  "status": "executed_reviewed",
+  "review": "VECTOR inspected the figure, verified all output hashes and 100 random membership team counts/uniqueness, and independently recomputed anchor sorting indices. Figure redrawn on common vertical scales without numerical changes. See docs/results/ASSORT_20260927_ppm_per_top_ten_anchor_v1_report.md.",
+  "timestamp_utc": "2026-09-27T23:14:02.325109+00:00",
+  "inputs_and_code_sha256": {
+    "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/rotation_audit_2015/ASSORT_20260927_rotation_audit_v1_players.csv.gz": "f39afaf105210837168e1bdfe5693b85c8e058c0c029cd577befce36271defe2",
+    "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/docs/run_records/ASSORT_20260927_rotation_audit_v1_run_record.json": "3cd65a45873348ba94996fd467085cf843397470f09b52b5db9a09e85da9c76f",
+    "datasets/mbb/DO_NOT_ERASE/bpm_player_season_matched.csv": "b9fb97788b97c9ad8f82088da77b2f72155bea38f6be7b877aca334fdf0beaa7",
+    "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/rotation_core_intervals_2015/ASSORT_20260927_rotation_core_intervals_v2_player_selections_high_minute.csv": "17779c89a8c624d41ee8e013890ab1573154fbd014b856df2d4e10fd5dfbad05",
+    "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/docs/run_records/ASSORT_20260927_rotation_core_intervals_v2_run_record.json": "522be337a64ed7ccc3b94d1504fa66505d30358c027f50b33e1a4fc203e5ebb9",
+    "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/code/ASSORT_20260927_ppm_per_top_ten_anchor_v1.py": "e6a4067f0faa0625e9de2eb9033f7c8850673115fc88a76f97722ddff102522f"
+  },
+  "parameters": {
+    "anchor_definition": "original full-audit top ten total minutes per team, ties by athlete_id, no replacement for missing PER",
+    "comparison_population": "finite PER and PPM; BPM not required",
+    "master_seed": 20260927,
+    "draws": 100,
+    "rng": "PCG64",
+    "subset_counts": "per-team available original anchor counts",
+    "standardization": "fixed per metric on common full matched population, population SD",
+    "grid_points": 801,
+    "grid_min": -5.170793192316887,
+    "grid_max": 4.878029288124013
+  },
+  "python": "3.9.6",
+  "numpy": "2.0.2",
+  "pandas": "2.3.3",
+  "matplotlib": "3.9.4",
+  "checks": [
+    "accepted_input_hash",
+    "anchor_input_hash",
+    "original_anchor_identity_agreement",
+    "paired_metric_identity_and_random_membership",
+    "exact_per_team_counts",
+    "subset_interval_and_grid_coverage_containment",
+    "sorting_variance_decomposition",
+    "sorting_scale_invariance",
+    "unchanged_source_hashes"
+  ],
+  "outputs": [
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/ppm_per_top_ten_anchor_2015/ASSORT_20260927_ppm_per_top_ten_anchor_v1_common_players.csv",
+      "sha256": "0bb9d9ea800b6c8542d7efb2b06ec09fb2508029eec72454fcdd0750fa20fdd2",
+      "bytes": 1370585
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/ppm_per_top_ten_anchor_2015/ASSORT_20260927_ppm_per_top_ten_anchor_v1_comparison.png",
+      "sha256": "ae68348470f8d74c259102624a178e61d9e92b065bbcdd9052f2e9131b0dec93",
+      "bytes": 275299
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/ppm_per_top_ten_anchor_2015/ASSORT_20260927_ppm_per_top_ten_anchor_v1_coverage_grid.csv",
+      "sha256": "58c51685f99cd27a42df96dc3fb4c3a59f55228cd56dfb57a60e38eb77bea518",
+      "bytes": 49536
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/ppm_per_top_ten_anchor_2015/ASSORT_20260927_ppm_per_top_ten_anchor_v1_fixed_summary.csv",
+      "sha256": "cde41f9f8b615d2193fe323324f1551bb09e17411e39df521aab51acdbaa6689",
+      "bytes": 580
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/ppm_per_top_ten_anchor_2015/ASSORT_20260927_ppm_per_top_ten_anchor_v1_fixed_team_intervals.csv",
+      "sha256": "dc85f2c3803bb19222b21067dec70fb9e47fe8059770f7a00b3435ec1fe60d23",
+      "bytes": 162171
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/ppm_per_top_ten_anchor_2015/ASSORT_20260927_ppm_per_top_ten_anchor_v1_player_membership.csv",
+      "sha256": "e04e98c0eeca0351c628874767149877eb2dfa1f2177150c1e2041ae4a9f756f",
+      "bytes": 1236877
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/ppm_per_top_ten_anchor_2015/ASSORT_20260927_ppm_per_top_ten_anchor_v1_random_membership.csv",
+      "sha256": "e859c8d80cb439cd3c4a9a6c7b495cd33ea332e5fd243fd7882cb4e69aed81ad",
+      "bytes": 4752227
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/ppm_per_top_ten_anchor_2015/ASSORT_20260927_ppm_per_top_ten_anchor_v1_random_repetitions.csv",
+      "sha256": "7ed808a6a11181f18917073147eb152f68055f8495e1e8d8569946999449f9d1",
+      "bytes": 26000
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/ppm_per_top_ten_anchor_2015/ASSORT_20260927_ppm_per_top_ten_anchor_v1_summary.json",
+      "sha256": "0a98df26ef33890b3df811200332744d0cd778b52bab39190b96c7faa751dbbe",
+      "bytes": 3358
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/ppm_per_top_ten_anchor_2015/ASSORT_20260927_ppm_per_top_ten_anchor_v1_team_counts.csv",
+      "sha256": "6ce6a7172c79115477eaa76ad2213acddd05f6b19ba01bb8ea04da7caf2ebeb9",
+      "bytes": 9931
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/ppm_per_top_ten_anchor_2015/ASSORT_20260927_ppm_per_top_ten_anchor_v1_unavailable_anchors.csv",
+      "sha256": "6d3d1a39878c0dd4106467ec8cb3f376c50327f10eda62b0ec3854a45d5ad965",
+      "bytes": 26184
+    }
+  ],
+  "visual_amendment": {
+    "reason": "Use identical width and sorting vertical scales across PPM and PER; numerical outputs unchanged.",
+    "figure_sha256_before": "e02f20752cf6e70f9114c9b915570c51d8ee5814c6e2c9b3d9d2863068cdc15a",
+    "figure_sha256_after": "ae68348470f8d74c259102624a178e61d9e92b065bbcdd9052f2e9131b0dec93",
+    "current_code_sha256": "a9bf37bc35b8a798f451a824d2416b4bdadce590d4bc8a0462571c06f1ec43f2",
+    "timestamp_utc": "2026-09-27T23:16:21.577997+00:00"
+  }
+}

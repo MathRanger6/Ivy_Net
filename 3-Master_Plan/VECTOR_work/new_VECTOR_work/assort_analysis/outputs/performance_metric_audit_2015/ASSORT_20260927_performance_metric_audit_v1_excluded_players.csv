@@ -1,0 +1,107 @@
+athlete_id,team_id,athlete_display_name,team_short_display_name_x,minutes,points_per_minute,BPM,PER,_merge
+51492,197,Mike Cobbins,Oklahoma St,792.0,0.2487373737373737,,,left_only
+51694,2565,Maurice Wiltz,SIUE,442.0,0.2714932126696832,,,left_only
+51761,2046,Damarius  Smith,Austin Peay,322.0,0.1832298136645962,,,left_only
+51810,2464,Gaellan Bewernick,N Arizona,888.0,0.2128378378378378,,,left_only
+52078,2612,Desi Washington,Saint Peter's,827.0,0.4159613059250302,,,left_only
+52154,55,Avery Latrez Moore,J'Ville St,800.0,0.34,,,left_only
+52462,2582,Michael Harrel,Southern,149.0,0.0268456375838926,,,left_only
+54909,2710,Mohammed Conde,W Illinois,748.0,0.2272727272727272,,,left_only
+55925,314,Kristian Duravcevic,Iona,22.0,0.0,,-0.5,both
+56231,325,Trey Lewis,Cleveland St,1204.0,0.4609634551495016,4.0,,both
+56240,299,Michael Caffey,Long Beach St,1073.0,0.4986020503261882,,,left_only
+56298,116,Andrew Smeathers,Mount St Mary,318.0,0.3836477987421384,,,left_only
+56370,270,JeVon Lyle,Milwaukee,601.0,0.2712146422628951,,,left_only
+56382,2006,Deji Ibitayo,Akron,660.0,0.5121212121212121,,,left_only
+56400,140,Shayok Shayok,Kansas City,207.0,0.3381642512077294,,,left_only
+56413,36,Tiel Daniels,Colorado St,659.0,0.2776934749620637,,,left_only
+56530,357,John Jordan,Texas A&M-CC,1219.0,0.4364232977850697,,,left_only
+56577,325,Vinny Zollo,Cleveland St,440.0,0.2795454545454545,-2.5,,both
+56612,142,Deuce Tosin Bello,Missouri,250.0,0.164,,,left_only
+56894,225,Longji Yiljep,Brown,34.0,0.1764705882352941,,,left_only
+56903,325,Anton Grady,Cleveland St,1011.0,0.4807121661721068,2.7,,both
+56904,325,Marlin Mason,Cleveland St,808.0,0.3180693069306931,0.6,,both
+57129,259,Adam Terrell Smith,Virginia Tech,986.0,0.4492900608519269,,,left_only
+57135,2459,Keith T. Gray,N Illinois,205.0,0.1365853658536585,,,left_only
+57259,2870,Joe Edwards,Purdue FW,987.0,0.375886524822695,,,left_only
+57404,2390,Sheldon Mac,Miami,1278.0,0.4303599374021909,,,left_only
+57406,251,Jonathan Alexander Holmes,Texas,835.0,0.3952095808383233,,,left_only
+57447,2296,Derell Taylor,Jackson St,592.0,0.3327702702702703,,,left_only
+57483,27,Austin Dylan Quick,UC Riverside,552.0,0.2481884057971014,,,left_only
+60196,2504,Tre Hagood,Prairie View,1154.0,0.3622183708838821,,,left_only
+60679,2016,Michael Davis,Alcorn St,632.0,0.2658227848101265,,,left_only
+61192,193,Leonard Livingston,Miami OH,449.0,0.3006681514476614,,,left_only
+61203,2454,Demarcus Daniels,North Florida,764.0,0.3782722513089005,,,left_only
+61211,66,Naz Mitrou-Long,Iowa State,934.0,0.3693790149892934,,,left_only
+61263,356,Mike La Tulip,Illinois,45.0,0.5777777777777777,,,left_only
+61345,526,Marc-Eddy Norelia,FGCU,724.0,0.3770718232044199,,,left_only
+61451,2711,Anthony Avery Jr.,W Michigan,290.0,0.2448275862068965,,,left_only
+61456,325,Andre Yates,Cleveland St,729.0,0.2743484224965706,-0.1,,both
+61570,248,L.J. Bernard Rose,Houston,657.0,0.2831050228310502,,,left_only
+61820,325,Aaron Scales,Cleveland St,132.0,0.1893939393939394,-8.0,,both
+61901,48,Mo Jeffers,Delaware,707.0,0.28995756718529,,,left_only
+62021,2515,YaYa Anderson,Radford,872.0,0.3314220183486238,,,left_only
+62467,2437,Michael Rostampour,Omaha,709.0,0.4188998589562764,,,left_only
+62497,2569,Daryll Palmer,SC State,811.0,0.2774352651048088,,,left_only
+62667,2458,Cameron Michael,N Colorado,822.0,0.4562043795620438,,,left_only
+62709,325,Kaza Keane,Cleveland St,723.0,0.2047026279391424,0.7,,both
+62729,2390,Tonye Frank Jekiri,Miami,1120.0,0.2830357142857143,,,left_only
+62731,2261,Reginald Johnson Jr.,Hampton,722.0,0.4293628808864266,,,left_only
+62805,270,Akeem Maurice Mustafa Springs,Milwaukee,868.0,0.3329493087557603,,,left_only
+62842,27,Steven Jerome Jones,UC Riverside,455.0,0.2197802197802197,,,left_only
+63091,349,Dylan T. Cox,Army,834.0,0.3621103117505995,,,left_only
+63101,349,Kyle Benjamin Wilson,Army,939.0,0.5410010649627263,,,left_only
+66135,152,Cat Barber,NC State,1108.0,0.3835740072202166,,,left_only
+66290,221,Mike Young,Pitt,1077.0,0.4215413184772516,,,left_only
+66299,239,Ish Wainright,Baylor,298.0,0.1409395973154362,,,left_only
+66645,2737,Joshua Davenport,Winthrop,437.0,0.2105263157894736,,,left_only
+66671,62,Michael Thomas,Hawai'i,608.0,0.3947368421052631,,,left_only
+66768,2655,Omer Yurtseven,Tulane,119.0,0.3949579831932773,,,left_only
+66785,2638,Vince Shamar Hunter,UTEP,940.0,0.5234042553191489,,,left_only
+66790,2636,Kaj-Björn Sherman,UTSA,870.0,0.4,,,left_only
+66791,325,Derek Sloan,Cleveland St,124.0,0.1935483870967742,-2.8,,both
+66793,325,Demonte Flannigan,Cleveland St,217.0,0.2764976958525346,-3.3,,both
+66812,82,Hans-Christian Lauer,UIC,54.0,0.1851851851851851,,,left_only
+66833,171,Jeffrey Coby,Columbia,459.0,0.3159041394335512,,,left_only
+66948,116,B.K. Ashe,Mount St Mary,718.0,0.4651810584958217,,,left_only
+67124,304,Andrej Slavik,Idaho St,196.0,0.1122448979591836,,,left_only
+67171,256,Thomas Vodanovich,James Madison,662.0,0.2356495468277945,,,left_only
+67203,322,Mike Hoffman,Lafayette,278.0,0.1834532374100719,,,left_only
+67249,2306,Wes Iwundu,Kansas St,780.0,0.2294871794871794,,,left_only
+67373,2405,Justin DeVaughn Robinson,Monmouth,1062.0,0.4152542372881356,,,left_only
+67582,2569,Karon Wright,SC State,571.0,0.4115586690017513,,,left_only
+67594,2296,Javeres Brent,Jackson St,799.0,0.3141426783479349,,,left_only
+67621,58,Dre'Kalo Clayton,South Florida,215.0,0.1209302325581395,,,left_only
+68117,2016,Corey Young,Alcorn St,61.0,0.1475409836065573,,4.0,both
+68119,2755,Velario Altheimer,Grambling,230.0,0.1956521739130435,,,left_only
+2229314,16,Cody Dempsey,Sacramento St,1104.0,0.2934782608695652,,,left_only
+3062804,325,Charlie Lee,Cleveland St,959.0,0.3628779979144942,3.2,,both
+3077886,120,Jon Graham,Maryland,383.0,0.2036553524804177,,,left_only
+3078927,2377,Lance  Polter,McNeese,264.0,0.2575757575757575,,,left_only
+3129927,2506,Ruben Arroyo,Presbyterian,387.0,0.2635658914728682,,,left_only
+3130716,2466,Reginald Kissoonlal,N'Western St,74.0,0.3378378378378378,,,left_only
+3130740,399,Ray Sanders,Albany,979.0,0.3268641470888662,,,left_only
+3133602,2305,Svi Mykhailiuk,Kansas,291.0,0.2474226804123711,,,left_only
+3133958,2803,Gus Riley,Bryant,177.0,0.2203389830508474,,,left_only
+3134499,147,Bradley Fisher,Montana St,59.0,0.0,,,left_only
+3134895,38,Tory Miller-Stewart,Colorado,258.0,0.3449612403100775,,,left_only
+3134927,265,Nyaires Redding,Washington St,602.0,0.2109634551495016,,,left_only
+3134936,2870,Jure Gunjina,Purdue FW,243.0,0.3251028806584362,,,left_only
+3135044,2449,Evan Wesenberg,N Dakota St,80.0,0.175,,,left_only
+3135054,52,Philip Cofer,Florida St,737.0,0.310719131614654,,,left_only
+3136847,253,Christian Thompson,Southern Utah,197.0,0.3553299492385787,,,left_only
+3136854,2692,Jaylen Johnson-Coston,Weber St,304.0,0.3190789473684211,,,left_only
+3136989,2509,Vincent Edwards,Purdue,889.0,0.3262092238470191,,,left_only
+3138212,325,Kenny Carpenter,Cleveland St,159.0,0.1698113207547169,-6.9,,both
+3138214,325,Terrell Hales,Cleveland St,333.0,0.1171171171171171,2.7,,both
+3138215,325,Tim Hasbargen,Cleveland St,22.0,0.0,0.8,,both
+3138267,282,Tre' Bennett,Indiana St,688.0,0.3473837209302325,,,left_only
+3147670,84,Max Montana,Indiana,240.0,0.3041666666666666,,,left_only
+3149938,239,Terry Maston,Baylor,36.0,0.5277777777777778,,,left_only
+3151455,357,Joseph Kilgore,Texas A&M-CC,193.0,0.2487046632124352,,,left_only
+3153166,183,Kaleb Alejandro Joseph,Syracuse,847.0,0.217237308146399,,,left_only
+3155568,2016,Reginal Johnson,Alcorn St,497.0,0.4748490945674044,,,left_only
+3155579,2569,Ed Stephens,SC State,887.0,0.4464487034949267,,,left_only
+3156099,2514,Dimitri Dimitri Floras,Quinnipiac,297.0,0.1818181818181818,,,left_only
+3158616,2217,Doug Chapell,Fairfield,32.0,0.21875,,,left_only
+3166885,44,Darius Gardner,American,40.0,0.3,,,left_only

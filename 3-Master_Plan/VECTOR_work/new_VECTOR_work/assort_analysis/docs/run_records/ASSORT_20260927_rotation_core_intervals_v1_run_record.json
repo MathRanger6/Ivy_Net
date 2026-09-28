@@ -1,0 +1,97 @@
+{
+  "status": "executed_unreviewed",
+  "timestamp": "2026-09-27T17:56:39.328447-04:00",
+  "mission": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/docs/scientific_questions/ASSORT_20260927_SCOUT_mission_high_minute_rotation_intervals.md",
+  "code": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/code/ASSORT_20260927_rotation_core_intervals_v1.py",
+  "code_sha256": "b27dc48685a1ca1486a65a4b40734931a679ffcb123f154a4999a6817ef6b618",
+  "input": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/rotation_audit_2015/ASSORT_20260927_rotation_audit_v1_players.csv.gz",
+  "input_sha256": "f39afaf105210837168e1bdfe5693b85c8e058c0c029cd577befce36271defe2",
+  "audit_run_record": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/docs/run_records/ASSORT_20260927_rotation_audit_v1_run_record.json",
+  "parameters": {
+    "season": 2015,
+    "rotation_k": 10,
+    "random_draws": 100,
+    "master_seed": 20260927,
+    "rng": "numpy.random.default_rng",
+    "preselect_team_ranks": [
+      0,
+      32,
+      64,
+      96,
+      128,
+      160,
+      192,
+      224,
+      256,
+      288,
+      320,
+      350
+    ],
+    "preselected_team_ids": [
+      103,
+      2032,
+      292,
+      2325,
+      2711,
+      275,
+      155,
+      399,
+      2459,
+      2006,
+      66,
+      2117
+    ],
+    "input": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/rotation_audit_2015/ASSORT_20260927_rotation_audit_v1_players.csv.gz",
+    "input_sha256": "f39afaf105210837168e1bdfe5693b85c8e058c0c029cd577befce36271defe2",
+    "ability_column": "ability_standardized (frozen audit; not recomputed)"
+  },
+  "python": "3.9.6",
+  "numpy": "2.0.2",
+  "pandas": "2.3.3",
+  "matplotlib": "3.9.4",
+  "checks": [
+    "input_sha256_vs_audit_record",
+    "4267_players_351_teams",
+    "all_player_intervals_match_groupby",
+    "high_interval_subset_of_all",
+    "coverage_high_le_all_on_grid",
+    "deterministic_high_minute_ties_athlete_id"
+  ],
+  "outputs": [
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/rotation_core_intervals_2015/ASSORT_20260927_rotation_core_intervals_v1_teams.csv",
+      "sha256": "5008c43d4ff7696100db89e7263af59690d00df4a6619983c7b2563d1be097dd",
+      "bytes": 106171
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/rotation_core_intervals_2015/ASSORT_20260927_rotation_core_intervals_v1_player_selections.csv",
+      "sha256": "499d8bda4868e8c8e564db0761763a617d1f0830f36ff1221b50a6718426591e",
+      "bytes": 215965
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/rotation_core_intervals_2015/ASSORT_20260927_rotation_core_intervals_v1_random_draw_team_widths.csv",
+      "sha256": "d7575a6b9e17a7b09f168b4e4a11fabd7f96b411a338856682fc39a3f40d9467",
+      "bytes": 652097
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/rotation_core_intervals_2015/ASSORT_20260927_rotation_core_intervals_v1_coverage_grid.csv",
+      "sha256": "7fc8762ca86c08599061eb8d41e7770846ca2b09cdf66e41c087ad48fa09eff6",
+      "bytes": 16195
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/rotation_core_intervals_2015/ASSORT_20260927_rotation_core_intervals_v1_comparison.png",
+      "sha256": "704b20ea261bf9976131082c644c6722adad1b55d8c628f4858c4780b3cff7f1",
+      "bytes": 266724
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/rotation_core_intervals_2015/ASSORT_20260927_rotation_core_intervals_v1_summary.json",
+      "sha256": "8d6d17643b604f4988484d84f9e7a076274ccc957fef8f478d6e48f81a33f221",
+      "bytes": 2096
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/docs/results/ASSORT_20260927_rotation_core_intervals_v1_report.md",
+      "sha256": "115a182e48c1cd66cbfdf303986828e03463cece8097fb06230bd4bf74450e52",
+      "bytes": 4543
+    }
+  ]
+}

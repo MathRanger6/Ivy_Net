@@ -1,0 +1,83 @@
+{
+  "design": {
+    "season": 2015,
+    "rotation_k": 10,
+    "random_draws": 100,
+    "master_seed": 20260927,
+    "rng": "numpy.random.default_rng",
+    "preselect_team_ranks": [
+      0,
+      32,
+      64,
+      96,
+      128,
+      160,
+      192,
+      224,
+      256,
+      288,
+      320,
+      350
+    ],
+    "preselected_team_ids": [
+      103,
+      2032,
+      292,
+      2325,
+      2711,
+      275,
+      155,
+      399,
+      2459,
+      2006,
+      66,
+      2117
+    ],
+    "input": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/rotation_audit_2015/ASSORT_20260927_rotation_audit_v1_players.csv.gz",
+    "input_sha256": "f39afaf105210837168e1bdfe5693b85c8e058c0c029cd577befce36271defe2",
+    "ability_column": "ability_standardized (frozen audit; not recomputed)"
+  },
+  "denominators": {
+    "players": 4267,
+    "teams": 351,
+    "teams_with_more_than_10_eligible": 315,
+    "teams_with_exactly_10_eligible": 27,
+    "teams_with_fewer_than_10_eligible": 9,
+    "teams_unchanged_high_vs_all": 36
+  },
+  "omit_extremes": {
+    "teams_omit_original_min_player": 182,
+    "teams_omit_original_max_player": 30
+  },
+  "width_all": {
+    "mean": 3.2802886662837816,
+    "median": 3.2375720262243997,
+    "max": 7.393510822152212
+  },
+  "width_high_minute": {
+    "mean": 2.8554211658738224,
+    "median": 2.8430214179703164,
+    "max": 5.609999658448647
+  },
+  "width_random_median_of_draws_per_team": {
+    "mean": 3.242392065815929,
+    "median": 3.1962880460977647
+  },
+  "width_change_high_minus_all": {
+    "mean": -0.42486750040995935,
+    "median": -0.15073591187336488
+  },
+  "coverage_on_shared_grid": {
+    "max_all": 351,
+    "mean_all": 155.3975,
+    "max_high": 351,
+    "mean_high": 135.2225,
+    "max_random_median": 351,
+    "mean_random_median": 146.845
+  },
+  "high_minute_minute_share": {
+    "mean_share_of_eligible_minutes": 0.9705750613232086,
+    "median_share": 0.9764143426294821
+  },
+  "interpretation_guide": "Compare high-minute narrowing to random-10 narrowing; subset intervals are nested in all-player intervals by construction."
+}
