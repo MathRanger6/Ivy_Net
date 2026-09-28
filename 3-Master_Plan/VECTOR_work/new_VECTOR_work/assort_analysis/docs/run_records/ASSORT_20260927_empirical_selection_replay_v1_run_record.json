@@ -1,0 +1,202 @@
+{
+  "experiment_id": "ASSORT_20260927_empirical_selection_replay_v1",
+  "status": "executed_reviewed",
+  "started_or_completed_utc": "2026-09-28T00:37:21.322671+00:00",
+  "driver": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/code/empirical_selection_replay_2015/ASSORT_20260927_empirical_selection_replay_v1.py",
+  "settings": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/code/empirical_selection_replay_2015/ASSORT_20260927_empirical_selection_replay_v1_settings.json",
+  "input_and_method_sha256": {
+    "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/rotation_audit_2015/ASSORT_20260927_rotation_audit_v1_players.csv.gz": "f39afaf105210837168e1bdfe5693b85c8e058c0c029cd577befce36271defe2",
+    "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/docs/run_records/ASSORT_20260927_rotation_audit_v1_run_record.json": "3cd65a45873348ba94996fd467085cf843397470f09b52b5db9a09e85da9c76f",
+    "datasets/mbb/athlete_id_draft_lookup.csv": "7adb1174189df0cf926680a8987f9d703e0ff3db59d70faa2fc85ebd0819506b",
+    "3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/reigning_hero/calibration/mle/REIGNING_PD21_draft_bernoulli_mle_2009_2021_mg10_min20_09_21.json": "f516911567833747ad2cf32aaf8cdfaaed6f667e7c719e5974691ed23d6a829e",
+    "3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/reigning_hero/calibration/rho/REIGNING_PD21_rho_hsort_calibrate_2009_2021_mg10_min20_09_21_fit_bracket.json": "cb902da9132f64e0b62ba388c77fbb958b5833f55388c9fe24bbe9bed94372d3",
+    "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/code/empirical_selection_replay_2015/ASSORT_20260927_empirical_selection_replay_v1_settings.json": "7c886cbef110305981441c41366804b1b41eb716bd43f6ac8570a2108253fbc2",
+    "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/code/empirical_selection_replay_2015/ASSORT_20260927_empirical_selection_replay_v1.py": "d7cd2f9d80b41b2f4bf44ccbfe2e5003dcdd3d27971c89ccfbaff3bad7d15835",
+    "sports/scripts/pd21_draft_bernoulli_mle.py": "53495a1ccd074299f01379fa9704e3126302bafbd50fa3770bcfc0ea7cbc2f71",
+    "sports/scripts/grandchild_selection_inverted_u_diagnostic.py": "cf01d190f353d7ce84dadd12c2672b1ed19cfbe0eba35d67c7144c6a9b8fe900",
+    "sports/tier1_pool_assignment.py": "8aa1545a1a84d3b6485b9172f70ef8d5a504bc0c28de5eb673db7698ded2b6d0",
+    "sports/sports_pipeline/panel_rebuild.py": "b4817c04bfddc8c65d88c5fb4b7ee9a614fb43332621df2f91f60008853e668b",
+    "sports/sports_pipeline/y_draft_mode.py": "7f559f5c20902ef7978220979e1a7f41e4e885fe6b4d009847e85cb5d06465cd"
+  },
+  "input_and_method_sha256_after": {
+    "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/rotation_audit_2015/ASSORT_20260927_rotation_audit_v1_players.csv.gz": "f39afaf105210837168e1bdfe5693b85c8e058c0c029cd577befce36271defe2",
+    "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/docs/run_records/ASSORT_20260927_rotation_audit_v1_run_record.json": "3cd65a45873348ba94996fd467085cf843397470f09b52b5db9a09e85da9c76f",
+    "datasets/mbb/athlete_id_draft_lookup.csv": "7adb1174189df0cf926680a8987f9d703e0ff3db59d70faa2fc85ebd0819506b",
+    "3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/reigning_hero/calibration/mle/REIGNING_PD21_draft_bernoulli_mle_2009_2021_mg10_min20_09_21.json": "f516911567833747ad2cf32aaf8cdfaaed6f667e7c719e5974691ed23d6a829e",
+    "3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/reigning_hero/calibration/rho/REIGNING_PD21_rho_hsort_calibrate_2009_2021_mg10_min20_09_21_fit_bracket.json": "cb902da9132f64e0b62ba388c77fbb958b5833f55388c9fe24bbe9bed94372d3",
+    "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/code/empirical_selection_replay_2015/ASSORT_20260927_empirical_selection_replay_v1_settings.json": "7c886cbef110305981441c41366804b1b41eb716bd43f6ac8570a2108253fbc2",
+    "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/code/empirical_selection_replay_2015/ASSORT_20260927_empirical_selection_replay_v1.py": "d7cd2f9d80b41b2f4bf44ccbfe2e5003dcdd3d27971c89ccfbaff3bad7d15835",
+    "sports/scripts/pd21_draft_bernoulli_mle.py": "53495a1ccd074299f01379fa9704e3126302bafbd50fa3770bcfc0ea7cbc2f71",
+    "sports/scripts/grandchild_selection_inverted_u_diagnostic.py": "cf01d190f353d7ce84dadd12c2672b1ed19cfbe0eba35d67c7144c6a9b8fe900",
+    "sports/tier1_pool_assignment.py": "8aa1545a1a84d3b6485b9172f70ef8d5a504bc0c28de5eb673db7698ded2b6d0",
+    "sports/sports_pipeline/panel_rebuild.py": "b4817c04bfddc8c65d88c5fb4b7ee9a614fb43332621df2f91f60008853e668b",
+    "sports/sports_pipeline/y_draft_mode.py": "7f559f5c20902ef7978220979e1a7f41e4e885fe6b4d009847e85cb5d06465cd"
+  },
+  "software": {
+    "python": "3.9.6",
+    "numpy": "2.0.2",
+    "pandas": "2.3.3",
+    "matplotlib": "3.9.4"
+  },
+  "parameters_and_choices": {
+    "experiment_id": "ASSORT_20260927_empirical_selection_replay_v1",
+    "status": "executed_reviewed",
+    "season": 2015,
+    "players": 4267,
+    "teams": 351,
+    "annual_draft_count": 45,
+    "ever_drafted_lookup_count": 105,
+    "annual_draft_match_tier_counts": {
+      "high": 45
+    },
+    "annual_draft_match_score_min": 100.0,
+    "annual_draft_match_score_median": 100.0,
+    "gamma_star": 19.572332081866243,
+    "lambda_star": 1.3024305834948529,
+    "temperature_star": 1.0698967300656186,
+    "rho_star_from_separate_assignment_fit_not_used": 0.0,
+    "theta": 2.04687951770725,
+    "theta_quantile": 0.9753925474572299,
+    "mean_team_congestion": 0.024220153935839143,
+    "season_softmax_mass_sum": 0.9999999999999895,
+    "season_softmax_mass_on_actual_2015_draftees": 0.02878467236022737,
+    "annual_fitted_vs_actual": {
+      "selected_count": 45,
+      "actual_count": 45,
+      "correct_selections": 3,
+      "missed_actual_selectees": 42,
+      "selected_nonselectees": 42,
+      "precision": 0.06666666666666667,
+      "recall": 0.06666666666666667,
+      "intersection_over_union": 0.034482758620689655,
+      "expected_overlap_uniform_random_same_k": 0.47457229903913756
+    },
+    "annual_ability_only_vs_actual": {
+      "selected_count": 45,
+      "actual_count": 45,
+      "correct_selections": 3,
+      "missed_actual_selectees": 42,
+      "selected_nonselectees": 42,
+      "precision": 0.06666666666666667,
+      "recall": 0.06666666666666667,
+      "intersection_over_union": 0.034482758620689655,
+      "expected_overlap_uniform_random_same_k": 0.47457229903913756
+    },
+    "annual_congestion_winner_identity_changes": 4,
+    "annual_congestion_displaced_ability_only_ids": [
+      56527,
+      61263
+    ],
+    "annual_congestion_added_ids": [
+      57359,
+      66829
+    ],
+    "ever_fitted_vs_actual": {
+      "selected_count": 105,
+      "actual_count": 105,
+      "correct_selections": 10,
+      "missed_actual_selectees": 95,
+      "selected_nonselectees": 95,
+      "precision": 0.09523809523809523,
+      "recall": 0.09523809523809523,
+      "intersection_over_union": 0.05,
+      "expected_overlap_uniform_random_same_k": 2.58378251699086
+    },
+    "ever_ability_only_vs_actual": {
+      "selected_count": 105,
+      "actual_count": 105,
+      "correct_selections": 10,
+      "missed_actual_selectees": 95,
+      "selected_nonselectees": 95,
+      "precision": 0.09523809523809523,
+      "recall": 0.09523809523809523,
+      "intersection_over_union": 0.05,
+      "expected_overlap_uniform_random_same_k": 2.58378251699086
+    },
+    "ever_congestion_winner_identity_changes": 24,
+    "peer_curve_bins": 16,
+    "peer_bin_denominators": [
+      267,
+      267,
+      267,
+      267,
+      267,
+      267,
+      267,
+      267,
+      267,
+      267,
+      267,
+      266,
+      266,
+      266,
+      266,
+      266
+    ],
+    "settings_file": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/code/empirical_selection_replay_2015/ASSORT_20260927_empirical_selection_replay_v1_settings.json",
+    "parameter_file": "3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/reigning_hero/calibration/mle/REIGNING_PD21_draft_bernoulli_mle_2009_2021_mg10_min20_09_21.json",
+    "interpretation": "Transported-parameter retrospective ranking diagnostic; top-K rankings are not the Bernoulli calibration probabilities or a causal congestion estimate."
+  },
+  "checks": [
+    "frozen_population_hash_matches_source_run_record",
+    "unique_nonmissing_population_ids",
+    "unique_nonmissing_draft_lookup_ids",
+    "expected_2015_and_ever_draft_counts",
+    "saved_fitted_parameter_values_loaded_without_refitting",
+    "temperature_lambda_score_formula_matches_algebraic_equivalent",
+    "season_softmax_mass_sums_to_one_and_not_called_topK_probability",
+    "exact_topK_counts_with_identifier_tie_break",
+    "actual_and_selected_ids_within_frozen_population",
+    "peer_bins_frozen_once_equal_count_and_denominators_conserve_population",
+    "all_input_settings_driver_and_method_hashes_unchanged",
+    "all_output_files_hashed"
+  ],
+  "outputs": [
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/empirical_selection_replay_2015/ASSORT_20260927_empirical_selection_replay_v1_peer_bin_comparison.png",
+      "sha256": "3d2b5beb8083a52be290d026f186d28b7e14771b0fa5700eb900b22800736929",
+      "bytes": 209602
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/empirical_selection_replay_2015/ASSORT_20260927_empirical_selection_replay_v1_peer_bin_summary.csv",
+      "sha256": "a0902dd0e42fe777d515b6f53c64e38f1aa7cf18d8471ad69379929b0476b67c",
+      "bytes": 3538
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/empirical_selection_replay_2015/ASSORT_20260927_empirical_selection_replay_v1_player_scores.csv",
+      "sha256": "840aa48edbb1f86a4c6280811bf9029aec09f1484d35a762913b06ec87b70bed",
+      "bytes": 1903283
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/empirical_selection_replay_2015/ASSORT_20260927_empirical_selection_replay_v1_selected_and_actual_players.csv",
+      "sha256": "92eb997c8744b39b53433ac4b95a1c1758eb158d7ed775dc96934c334a90e812",
+      "bytes": 101283
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/empirical_selection_replay_2015/ASSORT_20260927_empirical_selection_replay_v1_selection_comparison.csv",
+      "sha256": "8a8190f3112978d22caa2310fbb8712fbde63671cb732ec06147955780f46412",
+      "bytes": 4595
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/empirical_selection_replay_2015/ASSORT_20260927_empirical_selection_replay_v1_summary.json",
+      "sha256": "df8a94613f3f8b63bb5a115db1ba8fdca9726f095d049066355081af46109b46",
+      "bytes": 3220
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/outputs/empirical_selection_replay_2015/ASSORT_20260927_empirical_selection_replay_v1_team_summary.csv",
+      "sha256": "158b45bc29fa4ccabc15d8f99e94d26baeea4a5b90dee6327912d2bfc0ab2b2a",
+      "bytes": 25131
+    }
+  ],
+  "scope_note": "No assignment, refit, filter change, stochastic selection, random benchmark draw, or sensitivity sweep was performed.",
+  "independent_review": {
+    "status": "passed_read_only_checks",
+    "checks": [
+      "Re-sorted saved player scores independently using the frozen descending-score and athlete-identifier tie-break rule; exact top-45 and top-105 membership matched the driver outputs.",
+      "Verified all 45 annual draft identities against the source lookup and accepted population; recomputed the annual overlap as 3.",
+      "Confirmed all input and method hashes were unchanged before and after execution, and all seven output hashes matched the run record.",
+      "Inspected the generated comparison figure."
+    ],
+    "review_type": "No research code was rerun; review used saved outputs and read-only checks."
+  }
+}

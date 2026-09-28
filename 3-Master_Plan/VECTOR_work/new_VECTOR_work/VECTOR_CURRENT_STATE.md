@@ -1,5 +1,7 @@
 # VECTOR — Current Research State
 
+**Latest orientation, September 27 evening:** Charles reaffirmed the priority of the assortativity mechanism question and the need to avoid scope drift. The [return-to-assortativity brief](assort_analysis/docs/decisions/ASSORT_20260927_return_to_assortativity_brief.md) recovers the earlier design and proposes, for review, four cases at 1% selection with raw congestion and 100 paired assignment repetitions. The 10% and standardized-congestion comparisons remain parked proposals for a later stage. This reduction is not yet approved, and no new experiment is authorized. The completed annual-draft identity comparison remains a separate diagnostic; it does not answer whether assortativity is necessary for a downturn. Keep plain-language orientation and Charles's understanding central to every consequential next step.
+
 **Last synced:** 2026-09-27
 **Scope:** Concise research dashboard; detailed evidence and history remain in the linked sources. This dashboard distinguishes source review from reproduced empirical results.
 

@@ -1,5 +1,7 @@
 # ASSORT — Assortativity Investigation Workspace
 
+**Latest orientation — September 27, evening:** Read the [return-to-assortativity brief](docs/decisions/ASSORT_20260927_return_to_assortativity_brief.md). It recovers the original choices, distinguishes winner changes from explaining a downturn, and proposes a four-case first stage for Charles's review. The proposed stage has not been authorized or executed. Older checkpoints below are historical; the accepted later population is 4,267 players, not the provisional counts in the September 25 construction records.
+
 **Created:** 2026-09-25
 
 This folder contains newly created documentation, code, notebooks, derived data, outputs, and provenance records for the assortativity investigation.
