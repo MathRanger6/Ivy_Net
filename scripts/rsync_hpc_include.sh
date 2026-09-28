@@ -75,6 +75,10 @@ _IVY_RSYNC_INC_EDUCATION=(
   "--include=nels88/***"
   "--include=hsb80/"
   "--include=hsb80/***"
+  "--include=els2002/"
+  "--include=els2002/***"
+  "--include=hsls09/"
+  "--include=hsls09/***"
 )
 _IVY_RSYNC_INC_APACHE=(
   "--include=Apache/"

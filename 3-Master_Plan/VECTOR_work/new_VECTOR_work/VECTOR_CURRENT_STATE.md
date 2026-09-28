@@ -2,6 +2,8 @@
 
 ## Active checkpoint — education source audit, September 28
 
+**Latest direction:** Exhaust the existing education data before requesting augmentation. Official survey documentation can answer the general questions about NELS and HS&B. The [remaining construction-provenance question](education_analysis/docs/source_audit/EDUCATION_20260928_Questions_for_Source_All_Three_Groups.md) now asks only whether the supplied columns were locally created or transformed and requests the construction code or source-variable mapping. A separate HS&B audit reproduces the existing sample and peer calculations. The public manuals explain that zero follow-up weights can mark nonparticipants in the relevant weighted population, so those rows do not by themselves establish a coding error. No message has been sent and no substantive model has been fitted.
+
 **Current question:** Can the existing NELS panel distinguish associations with postsecondary entry from associations with later bachelor's completion?
 
 **Completed:** [Source audit and next step](education_analysis/docs/source_audit/EDUCATION_20260928_NELS_source_audit_and_next_step.md). Executed in `sports_net`. The 7,238-student, 536-school sample and eligibility flags reproduce. Peer counts and rank definitions reproduce; peer averages agree within numerical storage precision. Stored outcomes give 81.35% entry, 35.99% bachelor's completion overall, and 44.24% completion among recorded entrants. These are unweighted column summaries, not adjusted findings. The original input is unchanged.

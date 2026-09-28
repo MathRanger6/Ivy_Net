@@ -17,6 +17,8 @@ Original files under `datasets/nels88/`, `datasets/hsb80/`, and `3-Master_Plan/r
 
 ## Current stage
 
+**Remaining source request:** Official survey documentation answers the general questions about sample design, waves, tests, attainment categories, and weights. Use [One unresolved construction question for the education panels](docs/source_audit/EDUCATION_20260928_Questions_for_Source_All_Three_Groups.md) only to learn whether the supplied columns were locally created or transformed and, if so, obtain the construction code or variable mapping. No message has been sent; no new model or sample definition has been adopted.
+
 **Completed September 28:** [NELS source audit and next step](docs/source_audit/EDUCATION_20260928_NELS_source_audit_and_next_step.md). Start here for findings and the short source-clarification request. The audit code ran in `sports_net`; the original CSV is unchanged. Internal checks largely pass; source-variable mapping remains incomplete, so substantive transition fitting has not begun.
 
 Read and execute the bounded plan in [`docs/decisions/EDUCATION_20260928_mission_and_source_audit_plan.md`](docs/decisions/EDUCATION_20260928_mission_and_source_audit_plan.md).

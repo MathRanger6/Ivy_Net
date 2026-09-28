@@ -10,7 +10,7 @@
 | **`all`** | `datasets` + `tenure` + `sweep` | **10 GB+** | Full mirror; slow first run |
 | **`datasets`** | All `datasets/` big trees below | ~7–8 GB | Default “all datasets” |
 | **`big-fish`** | LoL + football **unzipped** CSVs | ~250 MB | Run `unzip` first on Mac for `to-hpc` |
-| **`education`** | `nels88/`, `hsb80/` | ~15 MB | Also in Git; rsync is optional |
+| **`education`** | `nels88/`, `hsb80/`, `els2002/`, `hsls09/` | ~1 GB extracted, initially | Public-source microdata are gitignored; use rsync |
 | **`apache`** | `Apache/` OSS panel | ~3 MB | Also in Git |
 | **`mbb`** | `datasets/mbb/**` | **~7 GB** | Gitignored bulk MBB |
 | **`tenure`** | `tenure/tenure_pipeline/` (excl. snapshots, dblp_parsed) | **0–3 GB+** | Panels grow on HPC |
@@ -39,7 +39,9 @@
 | `football/*.zip` | Yes | — (use `git pull`) | ~28 MB |
 | `legends/lol_big_fish_player_split_panel.csv` | **No** | `big-fish` | ~72 MB |
 | `legends/*.zip` | Yes | — | ~22 MB |
-| `nels88/`, `hsb80/` | Yes | `education` | ~4–10 MB each |
+| `nels88/`, `hsb80/` derived panels | Yes | `education` | ~4–10 MB each |
+| `nels88/source_public_*`, `hsb80/source_public_*` | **No** | `education` | ~0.4 GB extracted |
+| `els2002/source_public_*`, `hsls09/source_public_*` | **No** | `education` | ~0.6 GB compressed; larger extracted |
 | `Apache/` | Yes | `apache` | ~3 MB |
 | `mbb/**` | **No** (except `empirical_perf_fit.json`) | `mbb` | **~7 GB** |
 | `tenure/dblp.xml` | **No** | manual only | **~4 GB** — do not sync casually |

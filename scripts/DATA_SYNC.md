@@ -97,7 +97,7 @@ Git tracks **`.zip` archives only** for Big Fish panels (GitHub 100MB cap). Unzi
 1. **Mac:** `git push` (scripts + small tracked files) and `./scripts/pull_big_data.sh to-hpc big-fish` (large gitignored CSVs).
 2. **Rivanna:** `git pull` only — **do not** run `pull_big_data.sh to-hpc` on Rivanna.
 
-NELS88 / HS&B80 CSVs are **already in Git** (~4–10 MB); `git pull` on Rivanna gets them. `to-hpc education` is optional belt-and-suspenders if you want rsync to mirror those folders too.
+The small derived NELS88 / HS&B80 panel CSVs remain in Git. Public-source archives and extracted microdata under the dated `source_public_*` directories for NELS88, HS&B80, ELS:2002, and HSLS:09 are **gitignored**. Use `./scripts/pull_big_data.sh to-hpc education` to mirror those source files to Rivanna and `from-hpc education` for the reverse direction.
 
 Football zip note: archive is a **flat** `.csv`; `unzip` moves it into `football_big_fish_player_season_panel/`.
 

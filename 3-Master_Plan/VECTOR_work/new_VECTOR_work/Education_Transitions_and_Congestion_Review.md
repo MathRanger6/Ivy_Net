@@ -146,6 +146,8 @@ Begin with **the same NELS:88 students**, with HS&B as a second step. Our existi
 
 ### Request to pass to the faculty colleague
 
+**One unresolved construction question:** Official survey documentation answers the general questions about sample design, waves, tests, attainment categories, weights, and field availability. Ask [the short construction-provenance question for all three groups](education_analysis/docs/source_audit/EDUCATION_20260928_Questions_for_Source_All_Three_Groups.md) only to determine whether the supplied columns were locally created or transformed and to obtain the construction code or source-variable mapping. The broader augmentation text below remains parked.
+
 **September 28 status:** This broader augmentation request is parked while we examine the existing data. The immediate request is only the construction recipe/source-variable clarification in the [source audit, Section 7](education_analysis/docs/source_audit/EDUCATION_20260928_NELS_source_audit_and_next_step.md). If augmentation later proceeds, distinguish directly reported **admission decisions**, as well as applications, from decisions inferred from enrollment: NCES 98-105's `ACPT4YR` includes the latter. This matters if we want to separate receiving an offer from choosing to attend.
 
 Please help us augment the education panels previously supplied, beginning with **the same NELS:88 students**, using a stable student identifier that links to our existing extract. Please retain students who never entered college, did not graduate, or have missing follow-up information.

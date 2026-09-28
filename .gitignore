@@ -67,6 +67,13 @@ datasets/mbb/**
 datasets/football/football_big_fish_player_season_panel/football_big_fish_player_season_panel.csv
 datasets/legends/lol_big_fish_player_split_panel.csv
 
+# Education public-source archives and extracted microdata — preserve locally / sync by rsync,
+# but keep large or regenerable source files out of Git.  Track provenance READMEs one level up.
+datasets/nels88/source_public_nces_*/
+datasets/hsb80/source_public_edshare_*/
+datasets/els2002/source_public_nces_*/
+datasets/hsls09/source_public_nces_*/
+
 # Tenure pipeline outputs that exceeded GitHub comfort (rsync via pull_big_data.sh tenure)
 tenure/tenure_pipeline/author_year_career_master.jsonl
 tenure/tenure_pipeline/author_year_career_master_meta.json

@@ -1,0 +1,374 @@
+{
+  "rows": 22889,
+  "columns": 59,
+  "source": "datasets/hsb80/hsb80_big_fish_panel.csv",
+  "source_sha256": "bf6e07d081c0bdd2e6925a6ed0a919152a300806e9b89c41b003b8cad4a89f20",
+  "cohorts": {
+    "Senior": {
+      "rows": 10259,
+      "schools": 960,
+      "duplicate_student_ids": 0,
+      "missing_student_ids": 0,
+      "analytic_rows": 9874,
+      "analytic_schools": 885,
+      "analytic_nonpositive_weights": 935,
+      "analytic_missing_weights": 0,
+      "weighted_flag_rows": 8939,
+      "checks": {
+        "school_size": {
+          "comparable": 10259,
+          "missingness_disagreements": 0,
+          "differences_over_1e_5": 0,
+          "max_absolute_difference": 0.0
+        },
+        "peer_count": {
+          "comparable": 10259,
+          "missingness_disagreements": 0,
+          "differences_over_1e_5": 0,
+          "max_absolute_difference": 0.0
+        },
+        "peer_mean": {
+          "comparable": 10246,
+          "missingness_disagreements": 0,
+          "differences_over_1e_5": 0,
+          "max_absolute_difference": 5.493164067615908e-06
+        },
+        "peer_z_mean": {
+          "comparable": 10246,
+          "missingness_disagreements": 0,
+          "differences_over_1e_5": 0,
+          "max_absolute_difference": 1.6249084477948372e-07
+        },
+        "rank": {
+          "comparable": 10246,
+          "missingness_disagreements": 0,
+          "differences_over_1e_5": 0,
+          "max_absolute_difference": 1.1102230246251565e-16
+        },
+        "outcome_observed": {
+          "comparable": 10259,
+          "missingness_disagreements": 0,
+          "differences_over_1e_5": 0,
+          "max_absolute_difference": 0.0
+        },
+        "weighted_flag": {
+          "comparable": 10259,
+          "missingness_disagreements": 0,
+          "differences_over_1e_5": 0,
+          "max_absolute_difference": 0.0
+        },
+        "min5_candidate_recipe": {
+          "comparable": 10259,
+          "missingness_disagreements": 0,
+          "differences_over_1e_5": 0,
+          "max_absolute_difference": 0.0
+        },
+        "min10_candidate_recipe": {
+          "comparable": 10259,
+          "missingness_disagreements": 0,
+          "differences_over_1e_5": 0,
+          "max_absolute_difference": 0.0
+        }
+      },
+      "standardization": {
+        "implied_mean": 48.60527799758475,
+        "implied_sd": 8.961416255949679,
+        "max_residual": 5.188317331317194e-07
+      },
+      "ba_without_entry": 0,
+      "analytic_outcomes": {
+        "high_school_or_higher_by_1986": {
+          "n_observed": 9874,
+          "n_positive": 9801
+        },
+        "any_postsecondary_by_1986": {
+          "n_observed": 9874,
+          "n_positive": 3544
+        },
+        "two_year_or_higher_by_1986": {
+          "n_observed": 9874,
+          "n_positive": 2392
+        },
+        "bachelors_or_higher_by_1986": {
+          "n_observed": 9874,
+          "n_positive": 1696
+        }
+      },
+      "analytic_missing_by_column": {
+        "dataset": 0,
+        "student_id": 0,
+        "unit_id": 0,
+        "school_id": 0,
+        "unit_definition": 0,
+        "cohort": 0,
+        "own_performance_raw": 0,
+        "own_performance_z": 0,
+        "peer_mean_loo": 0,
+        "peer_sd_loo": 0,
+        "relative_performance_raw": 0,
+        "relative_performance_z": 0,
+        "within_unit_percentile_loo": 0,
+        "n_peers_above": 0,
+        "share_peers_above": 0,
+        "n_top_decile_peers_loo": 0,
+        "share_top_decile_peers_loo": 0,
+        "unit_n": 0,
+        "peer_n": 0,
+        "cell_at_least_5": 0,
+        "cell_at_least_10": 0,
+        "cell_at_least_15": 0,
+        "bachelors_or_higher_by_1986": 0,
+        "two_year_or_higher_by_1986": 0,
+        "any_postsecondary_by_1986": 0,
+        "high_school_or_higher_by_1986": 0,
+        "outcome_observed": 0,
+        "analytic_sample_min5": 0,
+        "analytic_sample_min5_weighted": 0,
+        "analytic_sample_min10": 0,
+        "base_year_weight": 0,
+        "followup_weight_1986": 0,
+        "attainment_code_1986": 0,
+        "SOQFLAG": 9874,
+        "SRQFLAG": 0,
+        "base_year_ses": 287,
+        "sex_code": 0,
+        "race_code": 0,
+        "high_school_grades_code": 84,
+        "school_type_code": 0,
+        "school_sample_type_code": 0,
+        "sex": 0,
+        "race": 0,
+        "school_region": 0,
+        "school_urbanicity": 0,
+        "school_type_label": 0,
+        "high_school_program": 155,
+        "gpa12": 74,
+        "gpa10": 74,
+        "questionnaire_respondent": 0,
+        "followup_weight_positive": 0,
+        "global_top_decile_cutoff": 0,
+        "own_global_top_decile": 0,
+        "unit_mean_including_self": 0,
+        "unit_sd_including_self": 0,
+        "n_peers_equal": 0,
+        "unit_top_score_including_self": 0,
+        "gap_to_unit_top": 0,
+        "peer_mean_z_loo": 0
+      },
+      "analytic_code_counts": {
+        "attainment_code_1986": {
+          "2.0": 6257,
+          "5.0": 1640,
+          "3.0": 1152,
+          "4.0": 696,
+          "1.0": 73,
+          "6.0": 49,
+          "7.0": 7
+        },
+        "sex_code": {
+          "2": 5312,
+          "1": 4562
+        },
+        "race_code": {
+          "5": 4513,
+          "1": 2456,
+          "4": 2380,
+          "3": 316,
+          "2": 188,
+          "6": 21
+        },
+        "questionnaire_respondent": {
+          "1": 9464,
+          "0": 410
+        }
+      }
+    },
+    "Sophomore": {
+      "rows": 12630,
+      "schools": 971,
+      "duplicate_student_ids": 0,
+      "missing_student_ids": 0,
+      "analytic_rows": 12184,
+      "analytic_schools": 930,
+      "analytic_nonpositive_weights": 677,
+      "analytic_missing_weights": 0,
+      "weighted_flag_rows": 11507,
+      "checks": {
+        "school_size": {
+          "comparable": 12630,
+          "missingness_disagreements": 0,
+          "differences_over_1e_5": 0,
+          "max_absolute_difference": 0.0
+        },
+        "peer_count": {
+          "comparable": 12630,
+          "missingness_disagreements": 0,
+          "differences_over_1e_5": 0,
+          "max_absolute_difference": 0.0
+        },
+        "peer_mean": {
+          "comparable": 12622,
+          "missingness_disagreements": 0,
+          "differences_over_1e_5": 0,
+          "max_absolute_difference": 5.289713541856145e-06
+        },
+        "peer_z_mean": {
+          "comparable": 12622,
+          "missingness_disagreements": 0,
+          "differences_over_1e_5": 0,
+          "max_absolute_difference": 1.5980957046579647e-07
+        },
+        "rank": {
+          "comparable": 12622,
+          "missingness_disagreements": 0,
+          "differences_over_1e_5": 0,
+          "max_absolute_difference": 1.1102230246251565e-16
+        },
+        "outcome_observed": {
+          "comparable": 12630,
+          "missingness_disagreements": 0,
+          "differences_over_1e_5": 0,
+          "max_absolute_difference": 0.0
+        },
+        "weighted_flag": {
+          "comparable": 12630,
+          "missingness_disagreements": 0,
+          "differences_over_1e_5": 0,
+          "max_absolute_difference": 0.0
+        },
+        "min5_candidate_recipe": {
+          "comparable": 12630,
+          "missingness_disagreements": 0,
+          "differences_over_1e_5": 0,
+          "max_absolute_difference": 0.0
+        },
+        "min10_candidate_recipe": {
+          "comparable": 12630,
+          "missingness_disagreements": 0,
+          "differences_over_1e_5": 0,
+          "max_absolute_difference": 0.0
+        }
+      },
+      "standardization": {
+        "implied_mean": 50.12503434695805,
+        "implied_sd": 8.965618153865972,
+        "max_residual": 5.201611237293235e-07
+      },
+      "ba_without_entry": 0,
+      "analytic_outcomes": {
+        "high_school_or_higher_by_1986": {
+          "n_observed": 12184,
+          "n_positive": 11138
+        },
+        "any_postsecondary_by_1986": {
+          "n_observed": 12184,
+          "n_positive": 2311
+        },
+        "two_year_or_higher_by_1986": {
+          "n_observed": 12184,
+          "n_positive": 1471
+        },
+        "bachelors_or_higher_by_1986": {
+          "n_observed": 12184,
+          "n_positive": 817
+        }
+      },
+      "analytic_missing_by_column": {
+        "dataset": 0,
+        "student_id": 0,
+        "unit_id": 0,
+        "school_id": 0,
+        "unit_definition": 0,
+        "cohort": 0,
+        "own_performance_raw": 0,
+        "own_performance_z": 0,
+        "peer_mean_loo": 0,
+        "peer_sd_loo": 0,
+        "relative_performance_raw": 0,
+        "relative_performance_z": 0,
+        "within_unit_percentile_loo": 0,
+        "n_peers_above": 0,
+        "share_peers_above": 0,
+        "n_top_decile_peers_loo": 0,
+        "share_top_decile_peers_loo": 0,
+        "unit_n": 0,
+        "peer_n": 0,
+        "cell_at_least_5": 0,
+        "cell_at_least_10": 0,
+        "cell_at_least_15": 0,
+        "bachelors_or_higher_by_1986": 0,
+        "two_year_or_higher_by_1986": 0,
+        "any_postsecondary_by_1986": 0,
+        "high_school_or_higher_by_1986": 0,
+        "outcome_observed": 0,
+        "analytic_sample_min5": 0,
+        "analytic_sample_min5_weighted": 0,
+        "analytic_sample_min10": 0,
+        "base_year_weight": 0,
+        "followup_weight_1986": 0,
+        "attainment_code_1986": 0,
+        "SOQFLAG": 0,
+        "SRQFLAG": 12184,
+        "base_year_ses": 551,
+        "sex_code": 0,
+        "race_code": 0,
+        "high_school_grades_code": 15,
+        "school_type_code": 0,
+        "school_sample_type_code": 0,
+        "sex": 0,
+        "race": 0,
+        "school_region": 0,
+        "school_urbanicity": 0,
+        "school_type_label": 0,
+        "high_school_program": 86,
+        "gpa12": 46,
+        "gpa10": 114,
+        "questionnaire_respondent": 0,
+        "followup_weight_positive": 0,
+        "global_top_decile_cutoff": 0,
+        "own_global_top_decile": 0,
+        "unit_mean_including_self": 0,
+        "unit_sd_including_self": 0,
+        "n_peers_equal": 0,
+        "unit_top_score_including_self": 0,
+        "gap_to_unit_top": 0,
+        "peer_mean_z_loo": 0
+      },
+      "analytic_code_counts": {
+        "attainment_code_1986": {
+          "2.0": 8827,
+          "1.0": 1046,
+          "3.0": 840,
+          "5.0": 814,
+          "4.0": 654,
+          "6.0": 3
+        },
+        "sex_code": {
+          "2": 6309,
+          "1": 5875
+        },
+        "race_code": {
+          "5": 7478,
+          "1": 2550,
+          "4": 1575,
+          "3": 319,
+          "2": 229,
+          "6": 33
+        },
+        "questionnaire_respondent": {
+          "1": 10035,
+          "0": 2149
+        }
+      }
+    }
+  },
+  "source_unchanged": true,
+  "run": {
+    "utc": "2026-09-28T16:22:39.330910+00:00",
+    "python": "/opt/anaconda3/envs/sports_net/bin/python",
+    "pandas": "3.0.3",
+    "numpy": "2.4.6",
+    "script_sha256": "59dd86a28cda82d795cb5a4715c1ea64d0d201f25871a238fdfbddd8d397edbb",
+    "scope": "internal checks only; no model fits"
+  }
+}
