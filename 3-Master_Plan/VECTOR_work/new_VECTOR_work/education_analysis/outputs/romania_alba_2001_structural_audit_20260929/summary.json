@@ -1,0 +1,182 @@
+{
+  "scope": "Alba 2001 report structure, exact correspondence, and observed score support; no substantive analysis",
+  "directory_entries": 168,
+  "report_rows": {
+    "candidate": 2982,
+    "admitted": 2977,
+    "unassigned": 5,
+    "incoming_candidate": 19,
+    "incoming_admitted": 19,
+    "incoming_unassigned": 0
+  },
+  "distinct_origin_labels": 175,
+  "origin_county_counts": {
+    "AB": 2963,
+    "HD": 5,
+    "BT": 3,
+    "VL": 1,
+    "MS": 3,
+    "OT": 1,
+    "SB": 3,
+    "CT": 1,
+    "CJ": 2
+  },
+  "exact_unique_name_origin_status_matches": 19,
+  "ambiguous_candidate_records": 0,
+  "unmatched_candidate_records": 2963,
+  "duplicate_candidate_key_records": 0,
+  "status_keys_absent_from_candidate": 2963,
+  "composite_disagreements_on_exact_matches": 0,
+  "exact_directory_mapped_groups": 156,
+  "exact_directory_mapped_records": 2953,
+  "incoming_candidate_exact_overlap_with_general": 19,
+  "school_size_distribution": {
+    "31": 2,
+    "4": 12,
+    "2": 17,
+    "1": 30,
+    "9": 7,
+    "3": 13,
+    "69": 2,
+    "64": 1,
+    "88": 1,
+    "58": 1,
+    "10": 6,
+    "114": 1,
+    "8": 9,
+    "60": 1,
+    "59": 1,
+    "54": 2,
+    "50": 1,
+    "25": 1,
+    "6": 7,
+    "5": 13,
+    "11": 3,
+    "83": 1,
+    "7": 10,
+    "13": 3,
+    "14": 3,
+    "20": 1,
+    "95": 1,
+    "144": 1,
+    "142": 1,
+    "38": 1,
+    "27": 1,
+    "68": 1,
+    "75": 2,
+    "49": 1,
+    "79": 1,
+    "98": 1,
+    "81": 1,
+    "76": 1,
+    "97": 1,
+    "30": 1,
+    "18": 2,
+    "15": 2,
+    "21": 1,
+    "17": 1,
+    "12": 1,
+    "16": 1,
+    "23": 1,
+    "22": 1,
+    "65": 1
+  },
+  "urban_town_support": [
+    {
+      "town": "ALBA IULIA",
+      "exactly_mapped_origin_groups": 12,
+      "applicant_records": 654,
+      "schools_with_at_least_5_records_and_exam_ranges": 12,
+      "range_pairs": 66,
+      "intersecting_exam_range_pairs": 66
+    },
+    {
+      "town": "BAIA DE ARIES",
+      "exactly_mapped_origin_groups": 0,
+      "applicant_records": 0,
+      "schools_with_at_least_5_records_and_exam_ranges": 0,
+      "range_pairs": 0,
+      "intersecting_exam_range_pairs": 0
+    },
+    {
+      "town": "OCNA MURES",
+      "exactly_mapped_origin_groups": 5,
+      "applicant_records": 134,
+      "schools_with_at_least_5_records_and_exam_ranges": 4,
+      "range_pairs": 6,
+      "intersecting_exam_range_pairs": 6
+    },
+    {
+      "town": "AIUD",
+      "exactly_mapped_origin_groups": 6,
+      "applicant_records": 270,
+      "schools_with_at_least_5_records_and_exam_ranges": 4,
+      "range_pairs": 6,
+      "intersecting_exam_range_pairs": 6
+    },
+    {
+      "town": "BLAJ",
+      "exactly_mapped_origin_groups": 7,
+      "applicant_records": 188,
+      "schools_with_at_least_5_records_and_exam_ranges": 4,
+      "range_pairs": 6,
+      "intersecting_exam_range_pairs": 6
+    },
+    {
+      "town": "CUGIR",
+      "exactly_mapped_origin_groups": 5,
+      "applicant_records": 298,
+      "schools_with_at_least_5_records_and_exam_ranges": 5,
+      "range_pairs": 10,
+      "intersecting_exam_range_pairs": 10
+    },
+    {
+      "town": "SEBES",
+      "exactly_mapped_origin_groups": 8,
+      "applicant_records": 253,
+      "schools_with_at_least_5_records_and_exam_ranges": 8,
+      "range_pairs": 28,
+      "intersecting_exam_range_pairs": 28
+    },
+    {
+      "town": "CIMPENI",
+      "exactly_mapped_origin_groups": 4,
+      "applicant_records": 97,
+      "schools_with_at_least_5_records_and_exam_ranges": 3,
+      "range_pairs": 3,
+      "intersecting_exam_range_pairs": 3
+    },
+    {
+      "town": "ABRUD",
+      "exactly_mapped_origin_groups": 1,
+      "applicant_records": 54,
+      "schools_with_at_least_5_records_and_exam_ranges": 1,
+      "range_pairs": 0,
+      "intersecting_exam_range_pairs": 0
+    },
+    {
+      "town": "ZLATNA",
+      "exactly_mapped_origin_groups": 3,
+      "applicant_records": 74,
+      "schools_with_at_least_5_records_and_exam_ranges": 2,
+      "range_pairs": 1,
+      "intersecting_exam_range_pairs": 1
+    },
+    {
+      "town": "TEIUS",
+      "exactly_mapped_origin_groups": 1,
+      "applicant_records": 59,
+      "schools_with_at_least_5_records_and_exam_ranges": 1,
+      "range_pairs": 0,
+      "intersecting_exam_range_pairs": 0
+    }
+  ],
+  "limitations": [
+    "No full-graduating-cohort denominator.",
+    "No national outgoing-Alba reconciliation.",
+    "Names only compared exactly within identical printed origin labels; no persistent ID demonstrated.",
+    "Address-prefix town mapping covers explicitly urban directory addresses only.",
+    "Ranges for fewer than five records suppressed for reporting; five is not an analytical eligibility rule.",
+    "Min/max overlap is a support check, not evidence of common distributions or identification."
+  ]
+}
