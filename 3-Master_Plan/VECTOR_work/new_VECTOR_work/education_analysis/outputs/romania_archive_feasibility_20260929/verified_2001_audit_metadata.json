@@ -1,0 +1,389 @@
+{
+  "audit_date": "2026-09-29",
+  "scope": "Source feasibility only; no substantive experiment; no student names or identifiers retained.",
+  "alba_2001_page_evidence": [
+    {
+      "run": "2026-09-29T18:39:16.842204+00:00",
+      "type": "page",
+      "kind": "candidate",
+      "requested": "https://web.archive.org/web/20020816151117id_/http://www.edu.ro/adm2001/raport_candidati_total.asp-cj=AB&nj=ALBA&idx=1.htm",
+      "effective_url": "https://web.archive.org/web/20020816151117id_/http://www.edu.ro/adm2001/raport_candidati_total.asp-cj=AB&nj=ALBA&idx=1.htm",
+      "sha256": "0b988fbabdb25ddb4587c174172334001efcc1f5ed6df26e32b8ff3509e46e03",
+      "headers": [
+        "Nr. crt.",
+        "CNP",
+        "Nume",
+        "Şcoală",
+        "Medie Admitere",
+        "Medie Capacitate",
+        "Notă Limba Română",
+        "Notă Matematică",
+        "Medie Absolvire"
+      ],
+      "count": 500,
+      "display_range": [
+        "1",
+        "500"
+      ]
+    },
+    {
+      "run": "2026-09-29T18:39:16.842204+00:00",
+      "type": "page",
+      "kind": "candidate",
+      "requested": "https://web.archive.org/web/20020816151117id_/http://www.edu.ro/adm2001/raport_candidati_total.asp-cj=AB&nj=ALBA&idx=501.htm",
+      "effective_url": "https://web.archive.org/web/20021203155635id_/http://www.edu.ro/adm2001/raport_candidati_total.asp-cj=AB&nj=ALBA&idx=501.htm",
+      "sha256": "da78d44096fefdaeb3cecface2d8233b5004898a033ae30f8ec94068cebdb224",
+      "headers": [
+        "Nr. crt.",
+        "CNP",
+        "Nume",
+        "Şcoală",
+        "Medie Admitere",
+        "Medie Capacitate",
+        "Notă Limba Română",
+        "Notă Matematică",
+        "Medie Absolvire"
+      ],
+      "count": 500,
+      "display_range": [
+        "501",
+        "1000"
+      ]
+    },
+    {
+      "run": "2026-09-29T18:39:16.842204+00:00",
+      "type": "page",
+      "kind": "candidate",
+      "requested": "https://web.archive.org/web/20020816151117id_/http://www.edu.ro/adm2001/raport_candidati_total.asp-cj=AB&nj=ALBA&idx=1001.htm",
+      "effective_url": "https://web.archive.org/web/20021203182516id_/http://www.edu.ro/adm2001/raport_candidati_total.asp-cj=AB&nj=ALBA&idx=1001.htm",
+      "sha256": "946edd78c61683fbeecb244603a8e054bd90e05a704d281f3c7dc8c2d75deb9a",
+      "headers": [
+        "Nr. crt.",
+        "CNP",
+        "Nume",
+        "Şcoală",
+        "Medie Admitere",
+        "Medie Capacitate",
+        "Notă Limba Română",
+        "Notă Matematică",
+        "Medie Absolvire"
+      ],
+      "count": 500,
+      "display_range": [
+        "1001",
+        "1500"
+      ]
+    },
+    {
+      "run": "2026-09-29T18:39:16.842204+00:00",
+      "type": "page",
+      "kind": "candidate",
+      "requested": "https://web.archive.org/web/20020816151117id_/http://www.edu.ro/adm2001/raport_candidati_total.asp-cj=AB&nj=ALBA&idx=1501.htm",
+      "effective_url": "https://web.archive.org/web/20021203233122id_/http://www.edu.ro/adm2001/raport_candidati_total.asp-cj=AB&nj=ALBA&idx=1501.htm",
+      "sha256": "8c6feec56f27cbcefed818227ee36b03c4cfee76e5d134fc9067042636d1ad5b",
+      "headers": [
+        "Nr. crt.",
+        "CNP",
+        "Nume",
+        "Şcoală",
+        "Medie Admitere",
+        "Medie Capacitate",
+        "Notă Limba Română",
+        "Notă Matematică",
+        "Medie Absolvire"
+      ],
+      "count": 500,
+      "display_range": [
+        "1501",
+        "2000"
+      ]
+    },
+    {
+      "run": "2026-09-29T18:39:16.842204+00:00",
+      "type": "page",
+      "kind": "candidate",
+      "requested": "https://web.archive.org/web/20020816151117id_/http://www.edu.ro/adm2001/raport_candidati_total.asp-cj=AB&nj=ALBA&idx=2001.htm",
+      "effective_url": "https://web.archive.org/web/20021218213457id_/http://www.edu.ro/adm2001/raport_candidati_total.asp-cj=AB&nj=ALBA&idx=2001.htm",
+      "sha256": "eb5f9901ada772dce4522354550d350265a418e27660367d7556923f0256e905",
+      "headers": [
+        "Nr. crt.",
+        "CNP",
+        "Nume",
+        "Şcoală",
+        "Medie Admitere",
+        "Medie Capacitate",
+        "Notă Limba Română",
+        "Notă Matematică",
+        "Medie Absolvire"
+      ],
+      "count": 500,
+      "display_range": [
+        "2001",
+        "2500"
+      ]
+    },
+    {
+      "run": "2026-09-29T18:39:16.842204+00:00",
+      "type": "page",
+      "kind": "candidate",
+      "requested": "https://web.archive.org/web/20020816151117id_/http://www.edu.ro/adm2001/raport_candidati_total.asp-cj=AB&nj=ALBA&idx=2501.htm",
+      "effective_url": "https://web.archive.org/web/20030106132350id_/http://www.edu.ro/adm2001/raport_candidati_total.asp-cj=AB&nj=ALBA&idx=2501.htm",
+      "sha256": "86f8fdec705f5480cb5d478c2323a9fc8a45b51803b897784658aef1b4eb8845",
+      "headers": [
+        "Nr. crt.",
+        "CNP",
+        "Nume",
+        "Şcoală",
+        "Medie Admitere",
+        "Medie Capacitate",
+        "Notă Limba Română",
+        "Notă Matematică",
+        "Medie Absolvire"
+      ],
+      "count": 482,
+      "display_range": [
+        "2501",
+        "2982"
+      ]
+    },
+    {
+      "run": "2026-09-29T18:39:16.842204+00:00",
+      "type": "page",
+      "kind": "admitted",
+      "requested": "https://web.archive.org/web/20020816151117id_/http://www.edu.ro/adm2001/raport_admisi_per_judet.asp-cj=AB&nj=ALBA&idx=0.htm",
+      "effective_url": "https://web.archive.org/web/20020816145842id_/http://www.edu.ro/adm2001/raport_admisi_per_judet.asp-cj=AB&nj=ALBA&idx=0.htm",
+      "sha256": "d8fca52a6ee4cc112531fc5f43860aa40b7b3b873588f316f90dab4186a836f2",
+      "headers": [
+        "Nr. crt.",
+        "CNP",
+        "Nume",
+        "Scoală de provenienţă",
+        "Liceu",
+        "Profil",
+        "Specializare",
+        "Medie Admitere"
+      ],
+      "count": 500,
+      "display_range": [
+        "1",
+        "500"
+      ]
+    },
+    {
+      "run": "2026-09-29T18:39:16.842204+00:00",
+      "type": "page",
+      "kind": "admitted",
+      "requested": "https://web.archive.org/web/20020816151117id_/http://www.edu.ro/adm2001/raport_admisi_per_judet.asp-cj=AB&nj=ALBA&idx=500.htm",
+      "effective_url": "https://web.archive.org/web/20020824063702id_/http://www.edu.ro/adm2001/raport_admisi_per_judet.asp-cj=AB&nj=ALBA&idx=500.htm",
+      "sha256": "d3d1f4f06ed52ec3346eb7422f50f9ef62325ec694ec3207b08c53108b10e069",
+      "headers": [
+        "Nr. crt.",
+        "CNP",
+        "Nume",
+        "Scoală de provenienţă",
+        "Liceu",
+        "Profil",
+        "Specializare",
+        "Medie Admitere"
+      ],
+      "count": 500,
+      "display_range": [
+        "501",
+        "1000"
+      ]
+    },
+    {
+      "run": "2026-09-29T18:39:16.842204+00:00",
+      "type": "page",
+      "kind": "admitted",
+      "requested": "https://web.archive.org/web/20020816151117id_/http://www.edu.ro/adm2001/raport_admisi_per_judet.asp-cj=AB&nj=ALBA&idx=1000.htm",
+      "effective_url": "https://web.archive.org/web/20021215075653id_/http://www.edu.ro/adm2001/raport_admisi_per_judet.asp-cj=AB&nj=ALBA&idx=1000.htm",
+      "sha256": "799c13780b4ef4d4262f56c15d80283d012aa34b439dccbca07ad98b801f8f60",
+      "headers": [
+        "Nr. crt.",
+        "CNP",
+        "Nume",
+        "Scoală de provenienţă",
+        "Liceu",
+        "Profil",
+        "Specializare",
+        "Medie Admitere"
+      ],
+      "count": 500,
+      "display_range": [
+        "1001",
+        "1500"
+      ]
+    },
+    {
+      "run": "2026-09-29T18:39:16.842204+00:00",
+      "type": "page",
+      "kind": "admitted",
+      "requested": "https://web.archive.org/web/20020816151117id_/http://www.edu.ro/adm2001/raport_admisi_per_judet.asp-cj=AB&nj=ALBA&idx=1500.htm",
+      "effective_url": "https://web.archive.org/web/20021231132148id_/http://www.edu.ro/adm2001/raport_admisi_per_judet.asp-cj=AB&nj=ALBA&idx=1500.htm",
+      "sha256": "7f43811af94473f35b098b1f335a1f4bd448bc7359a53266bd515d3ba85d1449",
+      "headers": [
+        "Nr. crt.",
+        "CNP",
+        "Nume",
+        "Scoală de provenienţă",
+        "Liceu",
+        "Profil",
+        "Specializare",
+        "Medie Admitere"
+      ],
+      "count": 500,
+      "display_range": [
+        "1501",
+        "2000"
+      ]
+    },
+    {
+      "run": "2026-09-29T18:39:16.842204+00:00",
+      "type": "page",
+      "kind": "admitted",
+      "requested": "https://web.archive.org/web/20020816151117id_/http://www.edu.ro/adm2001/raport_admisi_per_judet.asp-cj=AB&nj=ALBA&idx=2000.htm",
+      "effective_url": "https://web.archive.org/web/20030117000119id_/http://www.edu.ro/adm2001/raport_admisi_per_judet.asp-cj=AB&nj=ALBA&idx=2000.htm",
+      "sha256": "afe80abf03a1df74dd0708c1979b4061d1181b421c7ac9318eac179d79ee47f4",
+      "headers": [
+        "Nr. crt.",
+        "CNP",
+        "Nume",
+        "Scoală de provenienţă",
+        "Liceu",
+        "Profil",
+        "Specializare",
+        "Medie Admitere"
+      ],
+      "count": 500,
+      "display_range": [
+        "2001",
+        "2500"
+      ]
+    },
+    {
+      "run": "2026-09-29T18:39:16.842204+00:00",
+      "type": "page",
+      "kind": "admitted",
+      "requested": "https://web.archive.org/web/20020816151117id_/http://www.edu.ro/adm2001/raport_admisi_per_judet.asp-cj=AB&nj=ALBA&idx=2500.htm",
+      "effective_url": "https://web.archive.org/web/20041122101239id_/http://www.edu.ro/adm2001/raport_admisi_per_judet.asp-cj=AB&nj=ALBA&idx=2500.htm",
+      "sha256": "cfd1f80439cdf84eea5f41bc4edc9081b9c2e2d2d7cf325c72e1a25175c8def9",
+      "headers": [
+        "Nr. crt.",
+        "CNP",
+        "Nume",
+        "Scoală de provenienţă",
+        "Liceu",
+        "Profil",
+        "Specializare",
+        "Medie Admitere"
+      ],
+      "count": 477,
+      "display_range": [
+        "2501",
+        "2977"
+      ]
+    },
+    {
+      "run": "2026-09-29T18:39:16.842204+00:00",
+      "type": "page",
+      "kind": "unassigned",
+      "requested": "https://web.archive.org/web/20020816151117id_/http://www.edu.ro/adm2001/raport_respinsi_per_judet.asp-cj=AB&nj=ALBA&idx=0.htm",
+      "effective_url": "https://web.archive.org/web/20020816151130id_/http://www.edu.ro/adm2001/raport_respinsi_per_judet.asp-cj=AB&nj=ALBA&idx=0.htm",
+      "sha256": "25b289ead553c75a1aba362ee7d07f9257718d09c0565b7c92088d11810b0213",
+      "headers": [
+        "Nr. crt.",
+        "CNP",
+        "Nume",
+        "Scoala",
+        "Media admitere"
+      ],
+      "count": 5,
+      "display_range": [
+        "1",
+        "5"
+      ]
+    }
+  ],
+  "alba_2001_validated_summary": {
+    "candidate_rows": 2982,
+    "admitted_rows": 2977,
+    "unassigned_rows": 5,
+    "formula_exact_truncated_75_25": 2982,
+    "formula_exact_truncated_50_50": 5,
+    "candidate_rows_with_origin_school_hyperlink": 0
+  },
+  "identifier_correction": {
+    "CNP_join_rejected": true,
+    "reason": "CNP entries are a repeated nonnumeric placeholder. Initial key-based linkage statistics are invalid and excluded.",
+    "non_13_digit_key_count": {
+      "candidate": 2982,
+      "admitted": 2977,
+      "unassigned": 5
+    },
+    "distinct_CNP_values": {
+      "candidate": 1,
+      "admitted": 1,
+      "unassigned": 1
+    }
+  },
+  "school_101_exact_text_evidence": [
+    {
+      "type": "page",
+      "source": "https://web.archive.org/web/20020816151117id_/http://www.edu.ro/adm2001/raport_candidati_per_scoala.asp-cj=AB&nj=ALBA&cs=101&ns=SCOALA+GENERALA+CLASELE+I+-+VIII+NR.4+CUGIR.htm",
+      "effective_url": "https://web.archive.org/web/20020803164649id_/http://www.edu.ro/adm2001/raport_candidati_per_scoala.asp-cj=AB&nj=ALBA&cs=101&ns=SCOALA+GENERALA+CLASELE+I+-+VIII+NR.4+CUGIR.htm",
+      "sha256": "3a870d87c7ef09d269affedec5bd2a70434bc32033c4171c9f7a9e817d33bc6b",
+      "headers": [
+        "Nr. crt.",
+        "CNP",
+        "Nume",
+        "Judeţ",
+        "Medie Admitere",
+        "Medie Capacitate",
+        "Notă Limba Română",
+        "Notă Matematică",
+        "Medie Absolvire"
+      ],
+      "rows": 78,
+      "unique_printed_names": 78,
+      "cnp_distinct": 1,
+      "cnp_nondigit": 78
+    },
+    {
+      "type": "page",
+      "source": "https://web.archive.org/web/20020816151117id_/http://www.edu.ro/adm2001/raport_total_per_scoala.asp-cj=AB&nj=ALBA&cs=101&ns=SCOALA+GENERALA+CLASELE+I+-+VIII+NR.4+CUGIR.htm",
+      "effective_url": "https://web.archive.org/web/20020824142036id_/http://www.edu.ro/adm2001/raport_total_per_scoala.asp-cj=AB&nj=ALBA&cs=101&ns=SCOALA+GENERALA+CLASELE+I+-+VIII+NR.4+CUGIR.htm",
+      "sha256": "86d8439a146ea3e38f287883f79cfc4adf3bb015929ef6fa505687b19a06043c",
+      "headers": [
+        "Nr. crt.",
+        "CNP",
+        "Nume",
+        "Liceu",
+        "Profil",
+        "Specializare",
+        "Medie Admitere"
+      ],
+      "rows": 78,
+      "unique_printed_names": 78,
+      "cnp_distinct": 1,
+      "cnp_nondigit": 78
+    },
+    {
+      "type": "completed",
+      "scope": "same explicitly coded origin school AB/101 and 2001 admission cohort",
+      "method": "exact printed name within the same source-native origin school; composite score used only for validation; no fuzzy matching or name output",
+      "rows_candidate": 78,
+      "rows_placement": 78,
+      "unique_exact_text_matches": 78,
+      "candidate_without_match": 0,
+      "placement_without_match": 0,
+      "composite_score_disagreements": 0,
+      "qualification": "exact text agreement is a bounded feasibility demonstration, not a nationally validated persistent student identifier"
+    }
+  ],
+  "limits": [
+    "Report positions are not a nationally deduplicated student count.",
+    "The school-specific exact name correspondence is not a validated persistent national identifier.",
+    "National completeness and broader reuse terms remain unverified."
+  ]
+}

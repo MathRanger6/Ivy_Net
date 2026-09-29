@@ -1,5 +1,8 @@
 # Romania origin-school recovery — findings and stopping point
 
+> **Superseding checkpoint — later September 29:** Read the [standalone archive feasibility report](VECTOR_Romania_Standalone_Ministry_Archive_Feasibility_20260929.md) before using the historical findings below. Linkage to the anonymous replication files is no longer a prerequisite. The new check recovered 2002 student tables, all six Alba 2001 candidate pages (2,982 positions), and an exact 78-student correspondence between candidate and placement reports within one explicitly coded origin school. The CNP headings below do **not** provide usable identifiers: inspected values are repeated placeholders. General admission rules recovered for 2001, 2002, and 2003 all specify 75% examination and 25% school grades; the paper's equal-weight description remains unresolved. National completeness is not established. The older inquiry and next-action recommendations below are historical; request a standalone de-identified source first, with a replication crosswalk optional.
+
+
 **Date:** September 29, 2026  
 **Status:** Bounded source recovery completed. Historical page fragments recovered; no exact link to the anonymous replication records demonstrated. No substantive experiment authorized or run.
 

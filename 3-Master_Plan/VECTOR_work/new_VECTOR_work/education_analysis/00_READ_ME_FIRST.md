@@ -2,7 +2,7 @@
 
 **Created:** 2026-09-28  
 **Last synced:** 2026-09-29  
-**Current mission:** Evaluate education settings that connect prior performance before an identifiable peer environment, meaningful exposure to that environment, and a real scarce downstream opportunity with observed selection. Keep this investigation bounded and preserve candidates' scientific value even when they do not meet the full empirical requirement.
+**Current mission:** Resolve the bounded PD43 Romania origin-school feasibility gate. The proposed sequence is gymnasium experience → measured performance → selective high-school placement. Distinguish performance before selection from performance before the peer environment itself. Preserve earlier education work without resuming it automatically.
 
 This folder isolates all new VECTOR education work from the original NELS:88 and HS&B:80 panels, the September 22 sandboxes, and the basketball assortativity investigation.
 
@@ -19,6 +19,22 @@ This folder isolates all new VECTOR education work from the original NELS:88 and
 Original files under `datasets/nels88/`, `datasets/hsb80/`, and `3-Master_Plan/re_entry/HEROs_and_PASSes/education_sandbox/` are inputs or historical evidence. Do not overwrite them.
 
 ## Current stage
+
+**Standalone Ministry archive feasibility checked, September 29.** Read [VECTOR's standalone feasibility report](docs/collaboration/VECTOR_Romania_Standalone_Ministry_Archive_Feasibility_20260929.md). The revised PD43 design ends at high-school/track assignment, so linkage to the anonymous replication files is secondary.
+
+**Direct evidence:** The 2001 Alba candidate report family was recovered across all six pages (2,982 displayed positions). Within one explicitly coded origin school, all 78 candidate records correspond exactly to placement records, supplying separate exam and school-grade components plus destination. This establishes local feasibility, not national completeness. The CNP column is masked and unusable as a key.
+
+**Other years:** Actual 2002 student tables were recovered, correcting the previous checkpoint, but inspected views lack separate score components. The inspected 2003 view lacks separate school grades and later-page retrieval remains incomplete. No complete national cohort is verified for any year.
+
+**Measurement:** Recovered general admission rules specify 75% examination and 25% school grades in all three years. All 2,982 Alba 2001 rows match that calculation with truncation to two decimals. The paper's equal-weight description remains a discrepancy; a within-2001–2003 rule change is not supported by these sources.
+
+**Recommended next decision:** A bounded 2001 Alba construction-and-completeness audit, before any substantive analysis. It would test complete origin-school applicant coverage, exact record correspondence, geography, and cross-county omissions. No further reconstruction is underway. A de-identified source request to the authors is an alternative; a replication crosswalk is optional.
+
+The [earlier recovery report](docs/collaboration/VECTOR_Romania_Origin_School_Recovery_Findings_20260929.md) has a superseding notice. Its old linkage gate and author-first recommendation do not govern the current checkpoint. Scholar documents remain unchanged.
+
+## Earlier Romania stopping decision — high-school-to-Baccalaureate design
+
+The following decision and search report predate the PD43 upstream reframing. They remain valid historical records of why the earlier outcome pass was paused, not instructions to ignore the newly investigated gymnasium-to-high-school possibility.
 
 **Romania outcome analysis is paused.** Start with [Scholar's stopping decision and reopening conditions](docs/collaboration/Scholar_EDUCATION_20260929_Romania_Stopping_Decision_and_Next_Search_Gate.md). Romania is retained for supporting literature and mechanism discussion. It passed the structural peer-pool audit, but we have not identified an observed scarce selection event after time in those peer environments. The pause is a decision about institutional fit, made before outcome analysis. It is not a failed empirical result.
 
@@ -64,4 +80,4 @@ No substantive Romania sorting calculation, outcome model, or figure has been pr
 
 **Initial mission plan:** [September 28 mission and source-audit plan](docs/decisions/EDUCATION_20260928_mission_and_source_audit_plan.md) preserves the earlier scope. It is not a standing instruction to execute work now.
 
-**Current authorization boundary:** Documentation reconciliation only. Wait for Charles's direction before the proposed paper review, new feasibility checks, data acquisition, or substantive analysis. Do not duplicate Scholar VECTOR's completed broad search.
+**Current authorization boundary:** The authorized standalone archive feasibility check is complete. Wait for Charles's direction before outreach, expanded cohort reconstruction, or substantive analysis. Do not duplicate Scholar VECTOR's completed broad search. Older proposed actions above remain historical.

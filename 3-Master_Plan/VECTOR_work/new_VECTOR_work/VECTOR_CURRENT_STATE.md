@@ -2,7 +2,25 @@
 
 **Last synced:** 2026-09-29
 
-## Active checkpoint — Romania paused; bounded search report received, September 29
+## Active checkpoint — Romania standalone archive feasibility, September 29
+
+**Current PD43 question:** Can the Ministry admissions archive independently connect originating gymnasium, separate examination/school-grade components, and observed high-school/track assignment? Linkage to the anonymous replication files is now secondary, not a prerequisite.
+
+**Direct evidence:** Six Alba 2001 candidate pages supply 2,982 displayed positions. Candidate, admitted, and unassigned report counts agree at 2,982 = 2,977 + 5; this is report-family coverage, not proof of a complete graduating cohort. Within one explicitly coded origin school, all 78 printed names match exactly across candidate and placement reports, with no admission-score disagreement. This demonstrates local standalone feasibility. CNP entries are masked placeholders and cannot identify students.
+
+**Coverage and fields:** No national cohort is established as complete. Newly recovered 2002 tables contain origin and destination but lack separate score components in the inspected views. The inspected 2003 candidate view lacks separate school grades and later-page retrieval remains incomplete. Codes, geographic mapping, cross-county omissions, and larger-scale exact correspondence require verification.
+
+**Measurement:** Recovered general admission rules specify 75% examination and 25% school grades in 2001, 2002, and 2003. All 2,982 inspected Alba 2001 rows match the truncated 75/25 calculation. The paper's equal-weight description remains unresolved; no within-period formula change was found in those rules.
+
+**Read:** [Standalone feasibility report](education_analysis/docs/collaboration/VECTOR_Romania_Standalone_Ministry_Archive_Feasibility_20260929.md) and its linked sanitized audit metadata. The [older recovery report](education_analysis/docs/collaboration/VECTOR_Romania_Origin_School_Recovery_Findings_20260929.md) is explicitly superseded where it made replication linkage essential, reported no 2002 recovery, or suggested CNP might supply a usable key.
+
+**Recommended next decision:** A bounded Alba 2001 construction-and-completeness audit before outcome work. Alternatively, ask the authors for a de-identified original admissions extract; a replication crosswalk is optional. Neither further reconstruction nor outreach has begun.
+
+**Authorization and execution:** The authorized source-feasibility check is complete. Python in sports_net checked archival structures, counts, formula arithmetic, and one exact school-specific correspondence. No sorting calculation, substantive model, experiment, or figure ran. Original data and Scholar documents are unchanged. Further reconstruction or substantive analysis awaits Charles's explicit direction.
+
+## Earlier September 29 checkpoint — prior Romania pause and bounded search report
+
+This checkpoint predates the PD43 origin-school recovery and is retained as history. Its proposed next actions do not override the active checkpoint above.
 
 **Current scientific question:** Can an education dataset connect performance measured before an identifiable peer environment, meaningful exposure to that environment, and subsequent competition for a real scarce opportunity with observed winners and non-winners? The peer environment and competitive pool may differ. Distinguish eligible students, applicants, offers, and accepted places before interpreting $K/N$.
 
