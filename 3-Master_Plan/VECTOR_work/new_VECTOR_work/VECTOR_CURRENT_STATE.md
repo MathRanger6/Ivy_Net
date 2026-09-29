@@ -1,6 +1,32 @@
 # VECTOR — Current Research State
 
-## Active checkpoint — education source audit, September 28
+**Last synced:** 2026-09-29
+
+## Active checkpoint — Romania paused; bounded search report received, September 29
+
+**Current scientific question:** Can an education dataset connect performance measured before an identifiable peer environment, meaningful exposure to that environment, and subsequent competition for a real scarce opportunity with observed winners and non-winners? The peer environment and competitive pool may differ. Distinguish eligible students, applicants, offers, and accepted places before interpreting $K/N$.
+
+**Romania decision:** Retain Romania for supporting literature and mechanism discussion; pause the proposed outcome analysis. The [Scholar stopping decision](education_analysis/docs/collaboration/Scholar_EDUCATION_20260929_Romania_Stopping_Decision_and_Next_Search_Gate.md) is the decision record. The archive passed the structural peer-pool audit, but we have not identified a downstream scarce selection outcome. No substantive Romania outcome model or sorting analysis has run. This is an institutional-fit decision made before outcome analysis, not an adverse empirical result.
+
+**Interpretive boundary:** The coexistence of improved examination performance and adverse behavioral responses motivates an environment benefits-minus-drawbacks account. It does not separately identify the benefit or drawback magnitudes, establish that every adverse response reduces performance, or demonstrate congestion without a specified scarce resource or distinction. Baccalaureate participation/grades are not observed university admissions or fixed-quota downstream awards.
+
+**Reopening conditions:** A documented scarce downstream selection outcome linked to the students becomes available, or a specific dissertation need justifies examining environmental development itself. Reopening requires a new agreed scope and explicit analytical execution authorization. The [quantity map](education_analysis/docs/collaboration/VECTOR_Romania_Scientific_Quantity_Map_Response_and_Proposed_First_Pass_20260929.md) remains a preserved, unexecuted proposal.
+
+**Search status:** The [Scholar downstream-selection report](education_analysis/docs/collaboration/Scholar_EDUCATION_20260929_Bounded_Downstream_Selection_Search.md) states that the bounded search is complete and found no public ready-to-run dataset meeting the full requirement. That is a reported search outcome, not proof that no such dataset exists. Its candidate access, variables, numerical claims, and literature interpretations have not been independently verified in this documentation update.
+
+**Reported leads and recommendations:** Scholar prioritizes Rosenzweig and Xu as a mechanism-literature lead; identifies Gates Millennium Scholars as a possible small codebook check with peer identification unresolved; and describes selective-major admissions as an institutional data-acquisition lead without a verified ready microdataset. These are proposed next steps, not approved execution or outreach. Restricted access is deferred, not ruled out; faculty-colleague access may remain possible. No duplicate broad search is underway here.
+
+**Next decision:** Review whether to prioritize the mechanism paper, authorize the limited Gates Millennium Scholars feasibility check, or consider a targeted data inquiry. A school identifier alone would be insufficient: the scholarship sample must support meaningful peer composition, and baseline performance must precede the chosen environment. Survey sample winners/non-winners cannot automatically supply the national applicant denominator.
+
+**Evidence and filing:** Direct Romania schema evidence remains in the [September 28 gate report](education_analysis/docs/source_audit/EDUCATION_20260928_Romania_public_schema_gate_report.md). Scholar's two September 29 documents remain unchanged in `education_analysis/docs/collaboration/`. The [education overview](education_analysis/00_READ_ME_FIRST.md) distinguishes current decisions from earlier source audits and proposals. Existing code, data, audit results, and handoff ZIP are preserved.
+
+**Authorization and other domains:** Charles authorized this documentation reconciliation. It does not authorize new data checks, downloads, outcome analyses, experiments, requests to data holders, or Git operations. Education remains the current line of effort; earlier basketball execution and Army/tenure status are preserved below and are not new instructions to resume work.
+
+## Preserved earlier checkpoints
+
+All dated tasks, priorities, next steps, and authorization statements below describe their historical checkpoint. They do not override the active September 29 checkpoint above.
+
+### Education source audit — September 28 (historical)
 
 **Latest direction:** Exhaust the existing education data before requesting augmentation. Official survey documentation can answer the general questions about NELS and HS&B. The [remaining construction-provenance question](education_analysis/docs/source_audit/EDUCATION_20260928_Questions_for_Source_All_Three_Groups.md) now asks only whether the supplied columns were locally created or transformed and requests the construction code or source-variable mapping. A separate HS&B audit reproduces the existing sample and peer calculations. The public manuals explain that zero follow-up weights can mark nonparticipants in the relevant weighted population, so those rows do not by themselves establish a coding error. No message has been sent and no substantive model has been fitted.
 
@@ -14,9 +40,9 @@
 
 **Authorization:** Charles authorized the bounded education source audit and existing-data path. No new basketball experiment or broad augmentation is part of this checkpoint.
 
-## Preserved earlier checkpoints
+### Earlier basketball and design history
 
-The dated basketball entries and older design/task sections below preserve the research trail. Their statements of then-current tasks, next actions, or authorization do not override the active education checkpoint above.
+The dated basketball entries and older design/task sections below preserve the research trail. Their statements of then-current tasks, next actions, or authorization do not override the active September 29 checkpoint above.
 
 **Standing writing preference:** Research products should address the scientific questions directly. Do not frame them as coaching Charles to brief an advisor, repeatedly name Alex as the audience, or supply staged meeting remarks unless explicitly requested. Preserve names only where scientifically necessary for source attribution.
 
