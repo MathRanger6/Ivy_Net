@@ -73,6 +73,7 @@ datasets/nels88/source_public_nces_*/
 datasets/hsb80/source_public_edshare_*/
 datasets/els2002/source_public_nces_*/
 datasets/hsls09/source_public_nces_*/
+datasets/romania/source_public_openicpsr_*/
 
 # Tenure pipeline outputs that exceeded GitHub comfort (rsync via pull_big_data.sh tenure)
 tenure/tenure_pipeline/author_year_career_master.jsonl

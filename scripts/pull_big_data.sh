@@ -43,7 +43,7 @@ Scopes:
   all        datasets + tenure (+ sweep when from-hpc)  [10 GB+]
   datasets   big-fish + education + apache + mbb under datasets/
   big-fish   LoL + football unzipped CSVs (~250 MB)
-  education  nels88 + hsb80 + els2002 + hsls09
+  education  nels88 + hsb80 + els2002 + hsls09 + romania
   apache     Apache OSS Big Fish panel
   mbb        datasets/mbb bulk (~7 GB)
   tenure     tenure/tenure_pipeline panels (excl. HTML snapshots)

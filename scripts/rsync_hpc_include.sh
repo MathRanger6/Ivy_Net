@@ -79,6 +79,8 @@ _IVY_RSYNC_INC_EDUCATION=(
   "--include=els2002/***"
   "--include=hsls09/"
   "--include=hsls09/***"
+  "--include=romania/"
+  "--include=romania/***"
 )
 _IVY_RSYNC_INC_APACHE=(
   "--include=Apache/"

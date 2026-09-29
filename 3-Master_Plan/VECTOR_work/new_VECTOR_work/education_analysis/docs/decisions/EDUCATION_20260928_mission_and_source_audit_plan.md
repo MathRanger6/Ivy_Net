@@ -2,7 +2,13 @@
 
 **Date:** 2026-09-28  
 **Status:** Authorized by Charles.  
-**Scope:** Existing-data audit first; no request for additional data yet.
+**Scope:** Existing-data audit plus a bounded candidate-dataset gate. Public ELS:2002 and HSLS:09 were acquired under the later authorization to download and qualify alternatives.
+
+## September 28 candidate-gate update
+
+Official public NELS:88 and HS&B:80 sources were recovered. ELS:2002 and HSLS:09 were then downloaded and subjected to the same indispensable-field gate. Both newer studies contain strong prior-performance and postsecondary-transition variables, but both suppress the common student-to-school identifier in all public student records. They therefore did not proceed to mosaic construction. See [`EDUCATION_20260928_candidate_dataset_gate_and_restricted_request.md`](../source_audit/EDUCATION_20260928_candidate_dataset_gate_and_restricted_request.md).
+
+This result changes the augmentation logic. A restricted-use request is now justified by one named need: the common high-school identifier required to construct the peer environment. ELS/HSLS access would also recover finer application and acceptance measures. It would still not reconstruct complete college peer pools.
 
 ## 1. Current scientific objective
 

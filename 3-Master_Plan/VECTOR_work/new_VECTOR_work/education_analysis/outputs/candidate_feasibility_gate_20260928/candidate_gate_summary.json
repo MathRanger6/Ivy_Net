@@ -1,0 +1,18 @@
+[
+  {
+    "study": "ELS:2002",
+    "rows": 16197,
+    "public_school_id_nonnegative_rows": 0,
+    "public_school_id_unique_nonnegative_values": 0,
+    "public_peer_pool_reconstructable": false,
+    "mosaic_gate": "FAIL \u2014 common student-to-school identifier suppressed in public file"
+  },
+  {
+    "study": "HSLS:09",
+    "rows": 23503,
+    "public_school_id_nonnegative_rows": 0,
+    "public_school_id_unique_nonnegative_values": 0,
+    "public_peer_pool_reconstructable": false,
+    "mosaic_gate": "FAIL \u2014 common student-to-school identifier suppressed in public file"
+  }
+]

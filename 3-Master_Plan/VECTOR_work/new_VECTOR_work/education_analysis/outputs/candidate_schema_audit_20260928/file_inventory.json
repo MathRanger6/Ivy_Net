@@ -1,0 +1,44 @@
+[
+  {
+    "name": "els_student",
+    "path": "datasets/els2002/source_public_nces_20260928/extracted/els_02_12_byf3pststu_v1_0.dta",
+    "exists": true,
+    "rows": 16197,
+    "columns": 4012
+  },
+  {
+    "name": "els_school",
+    "path": "datasets/els2002/source_public_nces_20260928/extracted/els_02_12_byf1sch_v1_0.dta",
+    "exists": true,
+    "rows": 1954,
+    "columns": 925
+  },
+  {
+    "name": "els_f2_institution",
+    "path": "datasets/els2002/source_public_nces_20260928/extracted/els_02_12_f2inst_v1_0.dta",
+    "exists": true,
+    "rows": 33495,
+    "columns": 49
+  },
+  {
+    "name": "els_f3_institution",
+    "path": "datasets/els2002/source_public_nces_20260928/extracted/els_02_12_f3inst_v1_0.dta",
+    "exists": true,
+    "rows": 20951,
+    "columns": 41
+  },
+  {
+    "name": "hsls_student",
+    "path": "datasets/hsls09/source_public_nces_20260928/extracted/hsls09_16_student_pets_pear_v1_0.dta",
+    "exists": true,
+    "rows": 23503,
+    "columns": 10521
+  },
+  {
+    "name": "hsls_school",
+    "path": "datasets/hsls09/source_public_nces_20260928/extracted/HSLS_09_SCHOOL_v1_0.dta",
+    "exists": true,
+    "rows": 944,
+    "columns": 687
+  }
+]

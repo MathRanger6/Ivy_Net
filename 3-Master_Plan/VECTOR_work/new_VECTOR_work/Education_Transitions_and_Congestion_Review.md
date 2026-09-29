@@ -3,6 +3,8 @@
 **Last synced:** 2026-09-28  
 **Status:** Active education research brief. Charles authorized the bounded source audit and existing-data path on September 28 after PD42 shifted the immediate mission to education. The original panels and September 22 outputs remain unchanged. New work must be isolated under `new_VECTOR_work/education_analysis/`.
 
+**Later September 28 update:** Official public sources now resolve the original performance provenance: the supplied NELS performance measure is the official standardized mathematics score `BY2XMSTD`, and the supplied HS&B measure is the official base-year test composite `BYTEST`. Public ELS:2002 and HSLS:09 were downloaded and passed a fast outcome-availability screen, but both failed the indispensable peer-pool gate because every common student-school identifier is suppressed. They remain high-priority restricted-use candidates. The detailed evidence and minimum request are in [`education_analysis/docs/source_audit/EDUCATION_20260928_candidate_dataset_gate_and_restricted_request.md`](education_analysis/docs/source_audit/EDUCATION_20260928_candidate_dataset_gate_and_restricted_request.md).
+
 ## PD42 mission update
 
 PD42 makes education the immediate empirical line of effort. Basketball's near-zero aggregate sorting remains an interpretive gap, but further basketball exploration is paused. The education sequence is now:

@@ -1,0 +1,248 @@
+[
+  {
+    "file": "data-AER-4.dta",
+    "rows": 107812,
+    "years": [
+      2001.0
+    ],
+    "unique_towns_ua": 134,
+    "unique_schools_us": 797,
+    "unique_school_tracks_us2": 1722,
+    "us2_max_number_of_us_values": 1,
+    "us2_max_number_of_ua_values": 1,
+    "us_max_number_of_ua_values": 1,
+    "track_group_size_quantiles": {
+      "0": 1.0,
+      "0.01": 19.42,
+      "0.05": 25.0,
+      "0.25": 25.0,
+      "0.5": 50.0,
+      "0.75": 76.0,
+      "0.95": 175.0,
+      "0.99": 223.94999999999982,
+      "1": 276.0
+    },
+    "school_group_size_quantiles": {
+      "0": 2.0,
+      "0.01": 22.0,
+      "0.05": 25.800000000000004,
+      "0.25": 100.0,
+      "0.5": 126.0,
+      "0.75": 175.0,
+      "0.95": 250.0,
+      "0.99": 277.91999999999916,
+      "1": 352.0
+    },
+    "track_cell_counts": {
+      "total": 1722,
+      "size_1": 2,
+      "size_below_5": 4,
+      "size_below_10": 9
+    },
+    "missing_counts": {
+      "grade": 0,
+      "bcg": 20401,
+      "bct": 0,
+      "year": 0,
+      "ua": 0,
+      "us": 0,
+      "us2": 0,
+      "ct": 0,
+      "survey": 92861
+    },
+    "baccalaureate_structure": {
+      "not_taken_rows": 16479,
+      "taken_rows": 91333,
+      "grade_missing_when_not_taken": 16479,
+      "grade_missing_when_taken": 3922,
+      "grade_present_when_not_taken": 0,
+      "grade_present_when_taken": 87411
+    },
+    "ct_unique_values": [
+      1.0
+    ],
+    "bct_unique_values": [
+      0,
+      1
+    ],
+    "survey_unique_values": [
+      1.0
+    ],
+    "example_us2_values": [
+      "1062421TT",
+      "3100344HF",
+      "1180223TT",
+      "1180223RN",
+      "308270TT",
+      "308270HS",
+      "958099TT",
+      "1062421RM",
+      "1180261TT",
+      "308270HF"
+    ]
+  },
+  {
+    "file": "data-AER-5.dta",
+    "rows": 110912,
+    "years": [
+      2002.0
+    ],
+    "unique_towns_ua": 134,
+    "unique_schools_us": 789,
+    "unique_school_tracks_us2": 1665,
+    "us2_max_number_of_us_values": 1,
+    "us2_max_number_of_ua_values": 1,
+    "us_max_number_of_ua_values": 1,
+    "track_group_size_quantiles": {
+      "0": 1.0,
+      "0.01": 15.0,
+      "0.05": 28.0,
+      "0.25": 28.0,
+      "0.5": 56.0,
+      "0.75": 84.0,
+      "0.95": 168.0,
+      "0.99": 224.0,
+      "1": 280.0
+    },
+    "school_group_size_quantiles": {
+      "0": 9.0,
+      "0.01": 28.0,
+      "0.05": 30.0,
+      "0.25": 90.0,
+      "0.5": 140.0,
+      "0.75": 180.0,
+      "0.95": 252.0,
+      "0.99": 280.0,
+      "1": 420.0
+    },
+    "track_cell_counts": {
+      "total": 1665,
+      "size_1": 1,
+      "size_below_5": 4,
+      "size_below_10": 9
+    },
+    "missing_counts": {
+      "grade": 0,
+      "bcg": 24966,
+      "bct": 0,
+      "year": 0,
+      "ua": 0,
+      "us": 0,
+      "us2": 0,
+      "ct": 0,
+      "survey": 95655
+    },
+    "baccalaureate_structure": {
+      "not_taken_rows": 19789,
+      "taken_rows": 91123,
+      "grade_missing_when_not_taken": 19789,
+      "grade_missing_when_taken": 5177,
+      "grade_present_when_not_taken": 0,
+      "grade_present_when_taken": 85946
+    },
+    "ct_unique_values": [
+      1.0
+    ],
+    "bct_unique_values": [
+      0,
+      1
+    ],
+    "survey_unique_values": [
+      1.0
+    ],
+    "example_us2_values": [
+      "1062421TT",
+      "100324HF",
+      "958099TT",
+      "1180261TT",
+      "308270TT",
+      "308139RN",
+      "308139RM",
+      "1062421RM",
+      "1180223RN",
+      "1180223TT"
+    ]
+  },
+  {
+    "file": "data-AER-6.dta",
+    "rows": 115413,
+    "years": [
+      2003.0
+    ],
+    "unique_towns_ua": 135,
+    "unique_schools_us": 801,
+    "unique_school_tracks_us2": 1615,
+    "us2_max_number_of_us_values": 1,
+    "us2_max_number_of_ua_values": 1,
+    "us_max_number_of_ua_values": 1,
+    "track_group_size_quantiles": {
+      "0": 1.0,
+      "0.01": 12.14,
+      "0.05": 28.0,
+      "0.25": 30.0,
+      "0.5": 60.0,
+      "0.75": 90.0,
+      "0.95": 180.0,
+      "0.99": 240.0,
+      "1": 329.0
+    },
+    "school_group_size_quantiles": {
+      "0": 3.0,
+      "0.01": 20.0,
+      "0.05": 30.0,
+      "0.25": 90.0,
+      "0.5": 148.0,
+      "0.75": 180.0,
+      "0.95": 268.0,
+      "0.99": 328.0,
+      "1": 432.0
+    },
+    "track_cell_counts": {
+      "total": 1615,
+      "size_1": 2,
+      "size_below_5": 5,
+      "size_below_10": 10
+    },
+    "missing_counts": {
+      "grade": 0,
+      "bcg": 31337,
+      "bct": 0,
+      "year": 0,
+      "ua": 0,
+      "us": 0,
+      "us2": 0,
+      "ct": 0,
+      "survey": 99772
+    },
+    "baccalaureate_structure": {
+      "not_taken_rows": 22150,
+      "taken_rows": 93263,
+      "grade_missing_when_not_taken": 22150,
+      "grade_missing_when_taken": 9187,
+      "grade_present_when_not_taken": 0,
+      "grade_present_when_taken": 84076
+    },
+    "ct_unique_values": [
+      1.0
+    ],
+    "bct_unique_values": [
+      0,
+      1
+    ],
+    "survey_unique_values": [
+      1.0
+    ],
+    "example_us2_values": [
+      "1180223TT",
+      "308270TT",
+      "958099TT",
+      "1180261TT",
+      "308139HF",
+      "308139RM",
+      "100324HF",
+      "1062421RM",
+      "308139RN",
+      "308139HS"
+    ]
+  }
+]

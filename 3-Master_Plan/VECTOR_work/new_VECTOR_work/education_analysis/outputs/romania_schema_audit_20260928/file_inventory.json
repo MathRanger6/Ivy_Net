@@ -1,0 +1,74 @@
+[
+  {
+    "file": "data-AER-1.dta",
+    "bytes": 329597348,
+    "sha256": "e01a2a7df99228ab85d21a472fc3e86470d60de34783024a59f0da792658bbbc",
+    "row_count": 3621905,
+    "column_count": 19,
+    "data_label": "",
+    "timestamp": "27 Jun 2012 15:38"
+  },
+  {
+    "file": "data-AER-2.dta",
+    "bytes": 129223563,
+    "sha256": "e5339dee76c5f1c01850ecd1551a2c11e60df14d030b0acbde1b0e493ee4a336",
+    "row_count": 3313386,
+    "column_count": 7,
+    "data_label": "",
+    "timestamp": "27 Jun 2012 15:42"
+  },
+  {
+    "file": "data-AER-3.dta",
+    "bytes": 450638258,
+    "sha256": "b5d6ec059d5f9196cc775807b42184e2bf2e355b5f21e1ffde9bd5964357435d",
+    "row_count": 8836005,
+    "column_count": 9,
+    "data_label": "",
+    "timestamp": "27 Jun 2012 15:41"
+  },
+  {
+    "file": "data-AER-4.dta",
+    "bytes": 5069167,
+    "sha256": "5bf894a2e13b1b8225accdf0cd731fae34242a5e2d2f336df57d0a4b6ff91d3f",
+    "row_count": 107812,
+    "column_count": 9,
+    "data_label": "",
+    "timestamp": "27 Jun 2012 15:42"
+  },
+  {
+    "file": "data-AER-5.dta",
+    "bytes": 5214867,
+    "sha256": "99507269553da78cffbf838e5713e0b7475f2374214778dcb9de93a4237ab235",
+    "row_count": 110912,
+    "column_count": 9,
+    "data_label": "",
+    "timestamp": "27 Jun 2012 15:42"
+  },
+  {
+    "file": "data-AER-6.dta",
+    "bytes": 5426414,
+    "sha256": "1e92d3efe56c3ee26c636c12991a7efcd53dc2a077d7c213c7f5f398f77d8a13",
+    "row_count": 115413,
+    "column_count": 9,
+    "data_label": "",
+    "timestamp": "27 Jun 2012 15:42"
+  },
+  {
+    "file": "data-AER-7.dta",
+    "bytes": 4636652,
+    "sha256": "8ff7ddd8e50bf38ac5319f393e50a9d30a2bf643383e560d44f8ffb874ac1f9b",
+    "row_count": 11931,
+    "column_count": 95,
+    "data_label": "",
+    "timestamp": "27 Jun 2012 23:34"
+  },
+  {
+    "file": "data-AER-8.dta",
+    "bytes": 657634,
+    "sha256": "2d5511a0d3d738bd36b13dcf2df0ecab5657f0875500f6a7f19f785e6f05ada1",
+    "row_count": 5770,
+    "column_count": 26,
+    "data_label": "",
+    "timestamp": "27 Jun 2012 23:30"
+  }
+]
