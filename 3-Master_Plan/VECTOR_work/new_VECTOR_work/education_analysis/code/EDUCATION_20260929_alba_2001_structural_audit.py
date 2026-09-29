@@ -3,14 +3,22 @@ Student names are used in memory for exact correspondence only, never persisted.
 A full rerun refetches pages because identifiable HTML is not cached.
 Successful final output is a resume gate; incremental events preserve progress.
 """
-import argparse, collections, datetime, hashlib, itertools, json, re, subprocess
+import argparse, collections, datetime, hashlib, itertools, json, re
 from pathlib import Path
 from bs4 import BeautifulSoup
+from romania_archive_retrieval import ArchiveClient, RetrievalStopped
 
 BASE=Path(__file__).resolve().parents[1]
 OUT=BASE/"outputs/romania_alba_2001_structural_audit_20260929"
 SOURCE="http://www.edu.ro/adm2001/"
 STAMP="20020816151117"
+CLIENT=None
+
+def configure_retrieval(policy_reviewed=False):
+    global CLIENT
+    OUT.mkdir(parents=True,exist_ok=True)
+    CLIENT=ArchiveClient(OUT,emit,policy_reviewed=policy_reviewed)
+
 def emit(x):
     x={"utc":datetime.datetime.now(datetime.timezone.utc).isoformat(),**x}
     with (OUT/"events.jsonl").open("a") as f:
@@ -19,13 +27,14 @@ def emit(x):
 
 def fetch(path,kind):
     requested=f"https://web.archive.org/web/{STAMP}id_/{SOURCE}{path}"
-    p=subprocess.run(["curl","-L","--fail","--silent","--show-error","--max-time","25",
-                      "-w","\nEFFECTIVE_URL:%{url_effective}\n",requested],capture_output=True)
-    if p.returncode:
-        emit({"kind":"fetch_error","requested":requested,"error":p.stderr.decode(errors="replace")})
+    if CLIENT is None:
+        raise RetrievalStopped("Retrieval must be explicitly configured after policy review.")
+    result=CLIENT.get(requested)
+    if result is None:
+        emit({"kind":"fetch_error","requested":requested,"error":"Page unverified; see HTTP attempt log."})
         return None
-    body,sep,url=p.stdout.decode("cp1250",errors="replace").rpartition("\nEFFECTIVE_URL:")
-    if not sep: raise RuntimeError("Missing fetch provenance")
+    raw,url=result
+    body=raw.decode("cp1250",errors="replace")
     soup=BeautifulSoup(body,"html.parser")
     table=next((t for t in soup.find_all("table") if any(
         c.get_text(" ",strip=True) in ["CNP","Cod şcoală"] for c in t.find_all("th"))),None)
@@ -51,7 +60,9 @@ def origin_parts(label):
     m=re.fullmatch(r"(.*?)\s*/\s*([A-Z]{1,2})",label)
     return (m.group(1),m.group(2)) if m else (label,None)
 def key(row):
-    return (row.get("Nume",""),school_label(row))
+    # General candidate pages append / COUNTY; local placement labels omit it.
+    # Compare the exact remaining school label, not an approximate school name.
+    return (row.get("Nume",""),origin_parts(school_label(row))[0])
 def grouped(rows):
     d=collections.defaultdict(list)
     for r in rows:d[key(r)].append(r)
@@ -60,12 +71,14 @@ def numeric(row,term):
     try:return float(col(row,term).replace(",","."))
     except ValueError:return None
 
-def main():
+def main(policy_reviewed=False):
     OUT.mkdir(parents=True,exist_ok=True)
-    final=OUT/"summary.json"
+    final=OUT/"summary_v2.json"
     if final.exists():
         print("Completed checkpoint exists; no network rerun. "+str(final));return
-    emit({"kind":"start","scope":"Alba 2001 structure only"})
+    configure_retrieval(policy_reviewed)
+    emit({"kind":"start","scope":"Alba 2001 structure only","schema_version":2,
+          "script_sha256":hashlib.sha256(Path(__file__).read_bytes()).hexdigest()})
     directory=fetch("raport_scoli_din_judet.asp-cj=AB&nj=ALBA&idx=0.htm","origin_directory")
     if directory is None:raise RuntimeError("Origin directory unavailable")
     dh,dr,dc,dm=directory
@@ -98,6 +111,10 @@ def main():
         options=ag.get(k,[])+ug.get(k,[])
         if len(rr)==1 and len(options)==1:matches[k]=options[0]
         elif len(rr)>1 or len(options)>1:ambiguities+=len(rr)
+    county_conflicts=[k for k,v in matches.items() if origin_parts(school_label(cg[k][0]))[1]
+                     and origin_parts(school_label(v))[1]
+                     and origin_parts(school_label(cg[k][0]))[1]!=origin_parts(school_label(v))[1]]
+    for k in county_conflicts:del matches[k]
     score_disagree=sum(col(cg[k][0],"admitere")!=col(v,"admitere") for k,v in matches.items())
     name_reg=collections.defaultdict(list)
     for code,d in reg.items():name_reg[d["name"]].append(code)
@@ -140,13 +157,14 @@ def main():
       "duplicate_candidate_key_records":sum(len(v) for v in cg.values() if len(v)>1),
       "status_keys_absent_from_candidate":len((ag.keys()|ug.keys())-cg.keys()),
       "composite_disagreements_on_exact_matches":score_disagree,
+      "explicit_origin_county_conflicts_rejected":len(county_conflicts),
       "exact_directory_mapped_groups":sum(s["source_code"] is not None for s in school_summaries),
       "exact_directory_mapped_records":sum(s["applicant_records"] for s in school_summaries if s["source_code"] is not None),
       "incoming_candidate_exact_overlap_with_general":len(grouped(groups["incoming_candidate"]).keys()&cg.keys()),
       "school_size_distribution":dict(collections.Counter(s["applicant_records"] for s in school_summaries)),
       "urban_town_support":townstats,
       "limitations":["No full-graduating-cohort denominator.","No national outgoing-Alba reconciliation.",
-                     "Names only compared exactly within identical printed origin labels; no persistent ID demonstrated.",
+                     "Exact name and origin-school text after splitting printed county suffix; explicit county conflicts rejected; no persistent ID demonstrated.",
                      "Address-prefix town mapping covers explicitly urban directory addresses only.",
                      "Ranges for fewer than five records suppressed for reporting; five is not an analytical eligibility rule.",
                      "Min/max overlap is a support check, not evidence of common distributions or identification."]}
@@ -154,7 +172,12 @@ def main():
     emit({"kind":"completed",**summary})
 if __name__=="__main__":
     parser=argparse.ArgumentParser();parser.add_argument("--run",action="store_true")
+    parser.add_argument("--policy-reviewed",action="store_true",
+                        help="Use only after reviewing the archive's published crawling guidance.")
     args=parser.parse_args()
-    if args.run:main()
+    if args.run:
+        try:main(args.policy_reviewed)
+        except (RetrievalStopped,KeyboardInterrupt) as error:
+            emit({"kind":"stopped","reason":str(error) or "Interrupted by user"})
+            raise SystemExit(2)
     else:parser.print_help()
-
