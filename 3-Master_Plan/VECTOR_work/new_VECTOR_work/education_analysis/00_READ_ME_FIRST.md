@@ -1,8 +1,8 @@
 # Education analysis workspace
 
 **Created:** 2026-09-28  
-**Last synced:** 2026-09-29  
-**Current mission:** Resolve the bounded PD43 Romania origin-school feasibility gate. The proposed sequence is gymnasium experience → measured performance → selective high-school placement. Distinguish performance before selection from performance before the peer environment itself. Preserve earlier education work without resuming it automatically.
+**Last synced:** 2026-09-30  
+**Current mission:** Run the first descriptive HERO of realized selective program placement against originating-gymnasium peer examination performance. The differentiation gate is complete and the success/denominator choices are agreed. The new placement-and-HERO notebook is implemented and tested offline; the empirical run remains for Charles to start in Cursor.
 
 This folder isolates all new VECTOR education work from the original NELS:88 and HS&B:80 panels, the September 22 sandboxes, and the basketball assortativity investigation.
 
@@ -13,6 +13,7 @@ This folder isolates all new VECTOR education work from the original NELS:88 and
 - `docs/collaboration/` — Scholar/VECTOR exchanges, including the Romania stopping decision and the completed bounded-search report. These are linked from this overview rather than copied into competing records.
 - `docs/results/` — completed analytical results and their limits.
 - `code/` — new education-only audit or analysis programs.
+- `notebooks/` — researcher-run acquisition and offline analysis notebooks with visible progress.
 - `outputs/` — generated tables, figures, and machine-readable summaries.
 - `handoffs/` — dated upload bundles and their explanatory notes; snapshots, not live execution instructions.
 
@@ -28,7 +29,15 @@ Original files under `datasets/nels88/`, `datasets/hsb80/`, and `3-Master_Plan/r
 
 **Measurement:** Recovered general admission rules specify 75% examination and 25% school grades in all three years. All 2,982 Alba 2001 rows match that calculation with truncation to two decimals. The paper's equal-weight description remains a discrepancy; a within-2001–2003 rule change is not supported by these sources.
 
-**Recommended next decision:** A bounded 2001 Alba construction-and-completeness audit, before any substantive analysis. It would test complete origin-school applicant coverage, exact record correspondence, geography, and cross-county omissions. No further reconstruction is underway. A de-identified source request to the authors is an alternative; a replication crosswalk is optional.
+**Completed structural audit:** All 168 source-coded Alba 2001 origin-gymnasium reports were resolved, with no unresolved school codes. Seven report zero participating applicants; 161 are nonempty. This establishes the archived applicant-report structure, not coverage of every eighth-grade classmate or every admission route. The [structural audit summary](outputs/romania_alba_2001_structural_audit_20260929/summary_v2.json) and [origin-group audit](outputs/romania_alba_2001_structural_audit_20260929/origin_group_audit.json) record the checks.
+
+**Completed researcher-run workflow:** Charles ran the [acquisition notebook](notebooks/EDUCATION_20260930_Romania_2001_acquisition.ipynb) and [offline analysis notebook](notebooks/EDUCATION_20260930_Romania_2001_differentiation_analysis.ipynb). The Desktop cache holds all 168 reports. The [saved differentiation summary](outputs/romania_alba_2001_differentiation_v1/EDUCATION_20260929_romania_gymnasium_differentiation_v1_summary.json) covers 3,041 records in 161 nonempty groups, with sorting index 0.14918 versus random mean 0.05268. Broad intervals still overlap extensively. The [decision record](docs/decisions/EDUCATION_20260929_Romania_gymnasium_differentiation_gate_v1.md) defines the scope and interpretation.
+
+**Current program-ranking gate:** The [cutoff source check](docs/source_audit/EDUCATION_20260930_Romania_program_cutoff_source_check.md) verified 85 Alba main-allocation program entries and reported lowest admitted scores. The [HERO decision record](docs/decisions/EDUCATION_20260930_Romania_program_ranking_and_HERO_decisions.md) records the agreed highest-cutoff fully occupied program rule, ties, and outcome-denominator choices. No empirical HERO has run.
+
+**Run next:** Open [Romania 2001 placements and HERO](notebooks/EDUCATION_20260930_Romania_2001_placements_and_HERO.ipynb) in Cursor using `/opt/anaconda3/envs/sports_net/bin/python`. Set `RUN_LIVE_PLACEMENT_ACQUISITION = True` and `RUN_HERO_ANALYSIS = True` for the first run. Leave `INCLUDE_VOCATIONAL_IN_OUTCOME_DENOMINATOR = True` for the agreed baseline. Run cells in order. Only the acquisition cell uses the network; saved schools are skipped on restart. A later offline-only run can leave acquisition False. Both execution switches are shipped False.
+
+The notebook has generous explanations and visible progress. Its [Python companion](code/EDUCATION_20260930_romania_placements_and_hero.py) passed eleven offline synthetic tests. New raw placements stay inside the existing Desktop cache, in `placements_v1/`; every analytical run gets a separate timestamped folder under `outputs/romania_alba_2001_hero_v1/`. The final cell displays the figures and prints the report path. No fallback definitions run automatically, and unknown placements never silently count as failures.
 
 The [earlier recovery report](docs/collaboration/VECTOR_Romania_Origin_School_Recovery_Findings_20260929.md) has a superseding notice. Its old linkage gate and author-first recommendation do not govern the current checkpoint. Scholar documents remain unchanged.
 
@@ -66,7 +75,7 @@ These are recommendations for Charles's next decision, not authorization to run 
 - **Scientific proposals:** [Scholar's quantity-map proposal](docs/collaboration/Scholar_Romania_Scientific_Quantity_Map_Collaboration_20260929.md) and [VECTOR's response and proposed first pass](docs/collaboration/VECTOR_Romania_Scientific_Quantity_Map_Response_and_Proposed_First_Pass_20260929.md). Preserved, unexecuted; the first-pass recommendation is paused.
 - **Upload snapshot:** [September 29 handoff](handoffs/EDUCATION_20260929_Romania_Scholar_VECTOR_handoff.md) and [ZIP bundle](handoffs/EDUCATION_20260929_Romania_Scholar_VECTOR_upload.zip). Created before the stopping decision; preserved without repackaging. They document the schema and earlier assessment, not the current next action.
 
-No substantive Romania sorting calculation, outcome model, or figure has been produced. Existing data, audit code, and audit results remain preserved. The dated public-source directories are Git-ignored and covered by the existing education synchronization scope. No synchronization transfer has been executed in this work.
+The September 30 originating-gymnasium differentiation run produced sorting diagnostics and interval figures. No Romania placement-outcome model or HERO has been produced. Existing data, audit code, and audit results remain preserved. The dated public-source directories are Git-ignored and covered by the existing education synchronization scope. No synchronization transfer has been executed in this work.
 
 ## Earlier education checkpoints — historical, not active instructions
 
@@ -80,4 +89,4 @@ No substantive Romania sorting calculation, outcome model, or figure has been pr
 
 **Initial mission plan:** [September 28 mission and source-audit plan](docs/decisions/EDUCATION_20260928_mission_and_source_audit_plan.md) preserves the earlier scope. It is not a standing instruction to execute work now.
 
-**Current authorization boundary:** The authorized standalone archive feasibility check is complete. Wait for Charles's direction before outreach, expanded cohort reconstruction, or substantive analysis. Do not duplicate Scholar VECTOR's completed broad search. Older proposed actions above remain historical.
+**Current authorization boundary:** Charles completed the bounded Alba 2001 differentiation run and approved admission cutoff as the program-ranking measure. The bounded program source check is complete. Define success with Charles before creating the HERO. Outreach, broader cohort reconstruction, and additional substantive analyses require separate direction. Do not duplicate Scholar VECTOR's completed broad search. Older proposed actions above remain historical.

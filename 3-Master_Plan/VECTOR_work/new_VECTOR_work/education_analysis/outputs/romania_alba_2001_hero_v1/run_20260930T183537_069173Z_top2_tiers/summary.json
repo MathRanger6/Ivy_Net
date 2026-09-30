@@ -1,0 +1,79 @@
+{
+  "status": "completed",
+  "completed_utc": "2026-09-30T18:35:37.405978+00:00",
+  "top_program_tiers": 2,
+  "reference_run": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/education_analysis/outputs/romania_alba_2001_hero_v1/run_20260930T181101_938202Z",
+  "scope": "Alba 2001 main-allocation descriptive HERO",
+  "audit": {
+    "top_program_tiers": 2,
+    "source_population": 3041,
+    "origin_codes": 168,
+    "nonempty_origin_codes": 161,
+    "placement_status_counts": {
+      "confirmed_Alba_program": 2849,
+      "ambiguous_program": 109,
+      "confirmed_outside_Alba": 77,
+      "confirmed_unassigned": 6
+    },
+    "baseline_reconciled_flow": {
+      "included": 2844,
+      "unknown_placement_or_program": 109,
+      "outside_Alba_destination": 76,
+      "no_observed_peer": 12
+    },
+    "construction_checks": {
+      "rows": 3041,
+      "directory_codes": 168,
+      "nonempty_gymnasium_codes": 161,
+      "zero_applicant_source_codes": [
+        "107",
+        "163",
+        "173",
+        "208",
+        "212",
+        "228",
+        "282"
+      ],
+      "duplicate_name_occurrences_within_same_report": 0,
+      "formula_disagreements": 0,
+      "exam_mean": 7.092045379809274,
+      "exam_population_sd": 1.1735659531019274
+    },
+    "longer_placement_report_coverage": {
+      "276": {
+        "frozen_candidate_rows": 103,
+        "placement_report_rows": 104,
+        "unique_name_and_composite_matches": 103,
+        "missing_candidates": 0,
+        "ambiguous_candidates": 0,
+        "composite_disagreements": 0,
+        "extra_report_rows_outside_frozen_population": 1,
+        "candidate_rows_sha256": "a7bd98ee2404671491413cd971f99e2f2c9503ac8decd57bc5ea24cb8f9e0acc"
+      }
+    }
+  },
+  "variants": {
+    "baseline_include_vocational": {
+      "N": 2844,
+      "successes": 474,
+      "observed_success_fraction": 0.16666666666666666,
+      "reconciled_flow": {
+        "included": 2844,
+        "unknown_placement_or_program": 109,
+        "outside_Alba_destination": 76,
+        "no_observed_peer": 12
+      },
+      "actual_bin_counts": {
+        "equal_width": 16,
+        "quantile": 16
+      },
+      "figures": [
+        "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/education_analysis/outputs/romania_alba_2001_hero_v1/run_20260930T183537_069173Z_top2_tiers/baseline_include_vocational/HERO.png",
+        "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/education_analysis/outputs/romania_alba_2001_hero_v1/run_20260930T183537_069173Z_top2_tiers/baseline_include_vocational/HERO.pdf"
+      ]
+    }
+  },
+  "selection_is_observed_placement": true,
+  "requested_bins": 16,
+  "unknown_outcomes_are_not_failures": true
+}

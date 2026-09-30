@@ -1,0 +1,4 @@
+peer_group,adjusted_placement_rate,observed_applicants,observed_successes,score_bands,distinct_gymnasiums
+Weaker peers,0.03170138368099952,860,14,17,107
+Middle peers,0.04675249369857181,858,40,17,59
+Stronger peers,0.0967207326590741,833,115,17,31

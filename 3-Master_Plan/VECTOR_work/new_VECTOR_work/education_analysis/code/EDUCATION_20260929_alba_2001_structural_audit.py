@@ -40,7 +40,7 @@ def emit(x):
         f.write(json.dumps(x,ensure_ascii=False)+"\n"); f.flush()
     if x.get("kind")!="page": print(json.dumps(x,ensure_ascii=False),flush=True)
 
-def fetch(path,kind):
+def fetch(path,kind,*,include_raw=False):
     requested=f"https://web.archive.org/web/{STAMP}id_/{SOURCE}{path}"
     if CLIENT is None:
         raise RetrievalStopped("Retrieval must be explicitly configured after policy review.")
@@ -64,7 +64,10 @@ def fetch(path,kind):
     meta={"kind":"page","report":kind,"requested":requested,"effective_url":url.strip(),
           "sha256_decoded_body":hashlib.sha256(body.encode()).hexdigest(),"headers":h,"rows":len(rows)}
     emit(meta)
-    return h,rows,cells,meta
+    # The default path retains no page body. The separately authorized Desktop
+    # acquisition notebook requests the fifth return value so it can checkpoint
+    # the complete archived response outside the synced research workspace.
+    return (h,rows,cells,meta,raw) if include_raw else (h,rows,cells,meta)
 
 def col(row,term):
     return next((v for k,v in row.items() if term.lower() in k.lower()),"")

@@ -1,0 +1,15 @@
+{
+  "top_program_tiers": 1,
+  "require_full_programs": true,
+  "combine_program_categories": false,
+  "include_vocational_in_outcome_denominator": false,
+  "own_exam_score_band_width": 0.25,
+  "peer_strength_groups": 3,
+  "minimum_applicants_per_cell": 10,
+  "minimum_gymnasiums_per_cell": 3,
+  "eligible_applicants": 2624,
+  "common_score_bands": 17,
+  "weaker_peer_adjusted_rate": 0.03170138368099952,
+  "stronger_peer_adjusted_rate": 0.0967207326590741,
+  "stronger_minus_weaker": 0.06501934897807458
+}

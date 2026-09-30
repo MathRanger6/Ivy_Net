@@ -1,0 +1,903 @@
+{
+  "completed_utc": "2026-09-30T15:34:50.169192+00:00",
+  "status": "complete",
+  "scope": "Alba 2001 pre-placement gymnasium differentiation",
+  "analysis_code": "3-Master_Plan/VECTOR_work/new_VECTOR_work/education_analysis/code/EDUCATION_20260929_romania_gymnasium_differentiation_v1.py",
+  "analysis_code_sha256": "0813cf538f4623a7a25c42ddbd4f0d5b52bbdb58b1f66774ded0fb94fbd36c35",
+  "workflow_code": "3-Master_Plan/VECTOR_work/new_VECTOR_work/education_analysis/code/EDUCATION_20260930_romania_cache_workflow.py",
+  "workflow_code_sha256": "277c237242a8f37332023d0111c0d1d00b08027817f4146ce36b90c4168bf941",
+  "decision_sha256": "933fb45707ec8a3472416b5be1f401ecaf5b827d3cd523f836e58cb4176389bb",
+  "temporary_cache_manifest_sha256": "45d8ade41bbec821e6ad658a10be1b054ef79a531806e6a34b49e36b696206d3",
+  "temporary_cache_school_hashes": [
+    {
+      "source_code": "101",
+      "file": "school_101.json",
+      "sha256": "d29ab6ae9d796df808a5a8f3dbc8dd4aa183cbf4ea7efe64e0ca8f0288ad9ea8"
+    },
+    {
+      "source_code": "102",
+      "file": "school_102.json",
+      "sha256": "10468828d7562ee3d36e9469a934412c446a5d6bf05e9b7330e637e96d1557cb"
+    },
+    {
+      "source_code": "103",
+      "file": "school_103.json",
+      "sha256": "13981f95008d03ed762f3567888ae60f65df7a959f22808c8ae865f2e19c930f"
+    },
+    {
+      "source_code": "105",
+      "file": "school_105.json",
+      "sha256": "bca8382e297da931322c564ce89fad89a61478ebfae5c0550c0aa42544a8e52f"
+    },
+    {
+      "source_code": "107",
+      "file": "school_107.json",
+      "sha256": "0fdedc7a8aaa7e430dc117bbd08f19ca3d5dc43a3370f1b8093908ad4e6e50a8"
+    },
+    {
+      "source_code": "108",
+      "file": "school_108.json",
+      "sha256": "b49c383b591732b37b8b0af15a8e94ce3ea645ba914b06b53c7b7c12b99bce60"
+    },
+    {
+      "source_code": "109",
+      "file": "school_109.json",
+      "sha256": "b4bbd5d6f65a646b1d709fc1ad63f959728ca5bb694d3f536ea8eacf9c769211"
+    },
+    {
+      "source_code": "110",
+      "file": "school_110.json",
+      "sha256": "a04c5fb38a89f6788a1a887a1870055ddc66ea7d1d4c7b68c607d139d4c68598"
+    },
+    {
+      "source_code": "111",
+      "file": "school_111.json",
+      "sha256": "646836effebdc1044c69bbc8756d6da1d6f23e9ff3f2a0e4004e982f60186061"
+    },
+    {
+      "source_code": "113",
+      "file": "school_113.json",
+      "sha256": "2a7de4a448c9f5960fb1c6fa9ef77f87b27ec9b34f4bf62e7c79730d7216f2cc"
+    },
+    {
+      "source_code": "114",
+      "file": "school_114.json",
+      "sha256": "fed8fbea95b7cf649f1071bd1f108f3626085fa5bc060a7f1a80e072a9ee2868"
+    },
+    {
+      "source_code": "115",
+      "file": "school_115.json",
+      "sha256": "ce7b10737621909dde62a6bfeae2e20de41a64f14ea313c5c44d0512c3734565"
+    },
+    {
+      "source_code": "116",
+      "file": "school_116.json",
+      "sha256": "e3e288627c16f33f7bea99cddfbd054c19fe520b67a896b2f415de56b13ea425"
+    },
+    {
+      "source_code": "117",
+      "file": "school_117.json",
+      "sha256": "60c0c9cdc8f456797e5e700608242eb38584def22c349af151b98f72b4f8060b"
+    },
+    {
+      "source_code": "118",
+      "file": "school_118.json",
+      "sha256": "18a85b35eaa9cc00c2a743575d2bb54b0034b975ea8bfa7c31f20ee3bc5b3887"
+    },
+    {
+      "source_code": "119",
+      "file": "school_119.json",
+      "sha256": "b029404a5ca1e5d94a9677c12278ca997dc533d4bbcd8aedd54dc44aaff9e881"
+    },
+    {
+      "source_code": "120",
+      "file": "school_120.json",
+      "sha256": "8c0ba342f447c3935b88ec29e0089f2e54aec6794b83dfbc2cf7492a911c7407"
+    },
+    {
+      "source_code": "121",
+      "file": "school_121.json",
+      "sha256": "688a0e41d8c717390dd3295dc0c46cc547ac69ee19b33a864f626ffc4e1a9395"
+    },
+    {
+      "source_code": "122",
+      "file": "school_122.json",
+      "sha256": "f502d754468ffda78470703d896b8e580a33c5775f2e95857085aa99478d78ca"
+    },
+    {
+      "source_code": "123",
+      "file": "school_123.json",
+      "sha256": "111b4c51120607f1e10758dde1f55b6b72a274b2c179f5db5d23840486773630"
+    },
+    {
+      "source_code": "124",
+      "file": "school_124.json",
+      "sha256": "8d7bcc8ce18075cab6beb0066daa81f037be4027f739268ece350a5d254b5126"
+    },
+    {
+      "source_code": "125",
+      "file": "school_125.json",
+      "sha256": "afdcc2afe0fd8f544d94e974499219be30906b9d829943d2f3a771ba21a10b7c"
+    },
+    {
+      "source_code": "126",
+      "file": "school_126.json",
+      "sha256": "e9befbe6eadf72b90551afb6e40375d2a2d84ded3089a907ffc5201bfc4f3d5c"
+    },
+    {
+      "source_code": "127",
+      "file": "school_127.json",
+      "sha256": "4a8ac6227c0d1a5f71ec735bcc80d4e94e38ab6c710127415733ea1fe6ee1ac0"
+    },
+    {
+      "source_code": "128",
+      "file": "school_128.json",
+      "sha256": "2c341a76cf228f16c9ef52c39fa6c61f6d49ef64c57daa5e64af1d1706d06ec6"
+    },
+    {
+      "source_code": "129",
+      "file": "school_129.json",
+      "sha256": "3383b475d4c522215ea829354456d63ba5fde19e53b185a8f58d3265a05fa8a4"
+    },
+    {
+      "source_code": "130",
+      "file": "school_130.json",
+      "sha256": "3f6623a8e3e8aa13fa20a8e2d0035d8d3b9f91c83194f1869ad4dabafd3eebf5"
+    },
+    {
+      "source_code": "131",
+      "file": "school_131.json",
+      "sha256": "1ded4b684de0f4bddb7d51e59f9ba424dcdf218ff019d9e925b7c02784b8d033"
+    },
+    {
+      "source_code": "132",
+      "file": "school_132.json",
+      "sha256": "6489fd7d36387ab213ff5d4a6ad5ce6d6188b7b6cd22bfdb6e0593c90909249d"
+    },
+    {
+      "source_code": "133",
+      "file": "school_133.json",
+      "sha256": "7f24ef129a411386d9888175dc8a6ceeb65462c6676def5fa9a4394ed3f61081"
+    },
+    {
+      "source_code": "134",
+      "file": "school_134.json",
+      "sha256": "410b1472dac2b287d85e2920747726b8ee527491d5e989bb9a8c0c958f85bc6b"
+    },
+    {
+      "source_code": "135",
+      "file": "school_135.json",
+      "sha256": "c874e9a1abc539d770ca4beb4f0603cc7b0895d0bdc5996d65753dcb4dc77879"
+    },
+    {
+      "source_code": "136",
+      "file": "school_136.json",
+      "sha256": "fcd216a1e13f89367cffb08eb77d252b99559bdf9758d428ffb69748dc63dcf2"
+    },
+    {
+      "source_code": "137",
+      "file": "school_137.json",
+      "sha256": "b35d1bba9384689a9232e6278825a30ae1c40688c3917774e29f37bc4f68ae72"
+    },
+    {
+      "source_code": "138",
+      "file": "school_138.json",
+      "sha256": "faf44c9cdfa6c82de9ea1d7c2015a14fd275582669108cf5a26e0f285609663b"
+    },
+    {
+      "source_code": "139",
+      "file": "school_139.json",
+      "sha256": "8c0dad43a0b38040ce020fd0744370f1c90d3cc5531c5897ebd2f49cef02568f"
+    },
+    {
+      "source_code": "140",
+      "file": "school_140.json",
+      "sha256": "84fa1b6fba84924eb6796e667a467b2068307b7fe8a9f7aa92f75013e069fb3a"
+    },
+    {
+      "source_code": "141",
+      "file": "school_141.json",
+      "sha256": "f73395dd4f84a5009c5424810812c38aa206992f8e7babae65cf6232f844c5ce"
+    },
+    {
+      "source_code": "142",
+      "file": "school_142.json",
+      "sha256": "ac13bfd4925353ae243d880dd31a021cba655c35fca965e186a03abeffbd17cd"
+    },
+    {
+      "source_code": "143",
+      "file": "school_143.json",
+      "sha256": "929c85f05b46a81456414a028ce436ed11fe5a491f77c413e02d432bd1fc6a71"
+    },
+    {
+      "source_code": "144",
+      "file": "school_144.json",
+      "sha256": "7f5b0415203886649d373ad488ae794111e47e103b3b50db992fd5c1bd93a825"
+    },
+    {
+      "source_code": "145",
+      "file": "school_145.json",
+      "sha256": "66b24e1442edd36b27b905c0d7dd0ec88fa143981cdc0709a3a5331b3ab7c894"
+    },
+    {
+      "source_code": "146",
+      "file": "school_146.json",
+      "sha256": "a5eca0db60be5bc9affa2b56cb134481a3e9e33b71b4dd536a2b006d3b34b44e"
+    },
+    {
+      "source_code": "147",
+      "file": "school_147.json",
+      "sha256": "273195e3f2a87e084c480fc4bb211f4a5010d30e98d067f589e0412036a78e30"
+    },
+    {
+      "source_code": "148",
+      "file": "school_148.json",
+      "sha256": "bca77a507d5ee6ca359e8c4ac1eedc3bbd9229c112ed5e582ee1721d074e011c"
+    },
+    {
+      "source_code": "149",
+      "file": "school_149.json",
+      "sha256": "49a792865802fd52c6fe95f37ca8a93b5db120d4d0bffedc308b8654fa1c5ace"
+    },
+    {
+      "source_code": "150",
+      "file": "school_150.json",
+      "sha256": "2d0b577e8d85801d28676462f79f700a4dee1b02c460862056ede1dd23e88012"
+    },
+    {
+      "source_code": "151",
+      "file": "school_151.json",
+      "sha256": "98cf19fec99350bfca2bb23072d6fca642b6f0ddae684bd20b63034590da1d64"
+    },
+    {
+      "source_code": "152",
+      "file": "school_152.json",
+      "sha256": "0eda6296bdeeecf725ceaf74b94f09d8f8a9366a6f0001edc22a60e58c211174"
+    },
+    {
+      "source_code": "153",
+      "file": "school_153.json",
+      "sha256": "71fd73b21854078c17510515a22ad6899bfa014823809dacaf72d2f4e111731c"
+    },
+    {
+      "source_code": "154",
+      "file": "school_154.json",
+      "sha256": "1ade74151c66b8ad4875a0b2d6d8956f3cb36bf6584e0dd60abd06425c8138c1"
+    },
+    {
+      "source_code": "155",
+      "file": "school_155.json",
+      "sha256": "72c397a2e39e18162df1041d915dc09baf021731f84aa3b5e6ce7e34f326f2a0"
+    },
+    {
+      "source_code": "156",
+      "file": "school_156.json",
+      "sha256": "bd04c27a3c85693d6c75d4fea9a710f71da59a55248ccedeff9f7056aed765d2"
+    },
+    {
+      "source_code": "157",
+      "file": "school_157.json",
+      "sha256": "edfdd16bdf3a3a5361ed975cc60ed70b622ccf83666f22a7b30e612f4bf780f3"
+    },
+    {
+      "source_code": "158",
+      "file": "school_158.json",
+      "sha256": "c26304f75183f6e0389072a6fddb684c91b0ab3895f947bf89bf8c2008a52874"
+    },
+    {
+      "source_code": "159",
+      "file": "school_159.json",
+      "sha256": "9975f4bb9ee60091d0f42000b14da0a1f8e09a99844bd24274d6c801eeaef636"
+    },
+    {
+      "source_code": "160",
+      "file": "school_160.json",
+      "sha256": "c2a01800374aeadfec1d9f1ba7c549bad0753f94591854e1036f2589930a457f"
+    },
+    {
+      "source_code": "161",
+      "file": "school_161.json",
+      "sha256": "a1d9e1570ba83248ffa2d102f00a28a314e345ac3ae69e1f1a0dfe4c5558dbba"
+    },
+    {
+      "source_code": "162",
+      "file": "school_162.json",
+      "sha256": "01e676d38ddc5a98b2fb947622fd1185cecfa0b839535363c4f22a6dd63bbf52"
+    },
+    {
+      "source_code": "163",
+      "file": "school_163.json",
+      "sha256": "59394e3f05e15ce06f3ec11baf478ce613d4a9f53bf81c336344315a6aa8f43f"
+    },
+    {
+      "source_code": "164",
+      "file": "school_164.json",
+      "sha256": "ca3a312f7e259bd8252f5f1752aa0f3606ff327b8966783aa353ec040b4a5518"
+    },
+    {
+      "source_code": "165",
+      "file": "school_165.json",
+      "sha256": "806ede714667ac50eb53aaf188053d61f0c59aea5593f663c91bf8424b316b90"
+    },
+    {
+      "source_code": "166",
+      "file": "school_166.json",
+      "sha256": "e9ccabcc3f075f68d7a4695e099c0ec0b2890dc1a55df9e02f6d5fe4bfe41d6f"
+    },
+    {
+      "source_code": "167",
+      "file": "school_167.json",
+      "sha256": "c7d57800a13218ab7405afa81f564c6d78533404eb1cc5009e2f525f247a7480"
+    },
+    {
+      "source_code": "168",
+      "file": "school_168.json",
+      "sha256": "9adaf383eaa70cea9a0376d4003dacd0f1eadcc4a212f996c1c2b514d09f11e4"
+    },
+    {
+      "source_code": "169",
+      "file": "school_169.json",
+      "sha256": "be22f0681429d1e488976b83e1a71124e42aec03487ff7a78ec9fe0215359031"
+    },
+    {
+      "source_code": "170",
+      "file": "school_170.json",
+      "sha256": "3ba07dfbd0712a7d1f6f0b22427d4aa2f9faf8c5b756eeb5c8d9770c460cc31e"
+    },
+    {
+      "source_code": "171",
+      "file": "school_171.json",
+      "sha256": "10256a1350416b322368157751b4fdce8b2a52d96ce0639b9f1ceb464f94adb9"
+    },
+    {
+      "source_code": "172",
+      "file": "school_172.json",
+      "sha256": "e7742cbc2eb9b6385327d5f2154f56f5e7ab6fa09b11badc0848c4999a7f8549"
+    },
+    {
+      "source_code": "173",
+      "file": "school_173.json",
+      "sha256": "835903441267ccf8af475934d334382707b69d01f4f99ebbc432575ce5e8604f"
+    },
+    {
+      "source_code": "174",
+      "file": "school_174.json",
+      "sha256": "b88821c9a93030356a66b1ed55bc5251886978936e4afc46451cb4c1373132c7"
+    },
+    {
+      "source_code": "175",
+      "file": "school_175.json",
+      "sha256": "df168806793cf78ae9fbcd020f76eff8ce3817e07c45954e6579021110890d54"
+    },
+    {
+      "source_code": "176",
+      "file": "school_176.json",
+      "sha256": "49e446e7a54352c456085bb96ca43ff9656081ed4d15235256237572c95e226b"
+    },
+    {
+      "source_code": "177",
+      "file": "school_177.json",
+      "sha256": "d7681cee18fe9f1ed684656c25a43f7de129727383e2767a527cd75325870e0f"
+    },
+    {
+      "source_code": "178",
+      "file": "school_178.json",
+      "sha256": "68c55d476701be49232b1d22de228adeb591265db6385dbb4d91e98fbb0f2a95"
+    },
+    {
+      "source_code": "179",
+      "file": "school_179.json",
+      "sha256": "b3240f101c715f0472542f18876ec062be53a14c024a12559038c23ac3d27cb5"
+    },
+    {
+      "source_code": "181",
+      "file": "school_181.json",
+      "sha256": "3174ec2c0fefdd644ba16039d0dabb4200fde7e6cb61d8ee5f0047cb9c2e9e14"
+    },
+    {
+      "source_code": "182",
+      "file": "school_182.json",
+      "sha256": "4d91c4559c8f4bd7352f5ce383df1f3037174d24f2981e28662892cad03e630d"
+    },
+    {
+      "source_code": "183",
+      "file": "school_183.json",
+      "sha256": "685faec85d483803c85b6f080112fb3602eaa0b1d762fe758bc779eda8fc38f7"
+    },
+    {
+      "source_code": "184",
+      "file": "school_184.json",
+      "sha256": "4ea3951bf84b3bc3179e7c2039494d0a0e4419b8b5cf6c9bf27552bb353678c1"
+    },
+    {
+      "source_code": "185",
+      "file": "school_185.json",
+      "sha256": "090c43bcce9a09ceb872d399e5c8823fff369d87f7989d13ac865e90e11b4cce"
+    },
+    {
+      "source_code": "186",
+      "file": "school_186.json",
+      "sha256": "e6550209c930568d90ba42d2fd6e55cf846ed15e75a9aacfd2a5ad8470d4fe78"
+    },
+    {
+      "source_code": "187",
+      "file": "school_187.json",
+      "sha256": "5376076e8c6c40a8e19866707735ae025f81b201b84f3f960a639309e27b3229"
+    },
+    {
+      "source_code": "188",
+      "file": "school_188.json",
+      "sha256": "2b6728c9c23af4f1f380b9e6ead2eb334df24884ffa898f6f721b613de3bba5f"
+    },
+    {
+      "source_code": "189",
+      "file": "school_189.json",
+      "sha256": "ce515cb09dbd59e714aedf7736c06391b7266bf814281fe8d432523588174e00"
+    },
+    {
+      "source_code": "190",
+      "file": "school_190.json",
+      "sha256": "d991c4e7426c97417a8823580a9743883e966d33fa4985c78a84bb8ab17c89db"
+    },
+    {
+      "source_code": "191",
+      "file": "school_191.json",
+      "sha256": "23ac4b4c3ae81f8bf1a03fd3c80c0b0971e06debcdf14c41e7189f3692a0192d"
+    },
+    {
+      "source_code": "192",
+      "file": "school_192.json",
+      "sha256": "0ad58263b2d20c9dae195e37637c94de1358f43cfa7b6b024ba898b5c1709864"
+    },
+    {
+      "source_code": "193",
+      "file": "school_193.json",
+      "sha256": "0227d312eb86e3a0e7999189d35212ea1426be10d3d0da37336693cf268c7699"
+    },
+    {
+      "source_code": "194",
+      "file": "school_194.json",
+      "sha256": "3c5cac53f7d9522a258ed789051835382e4eb3a657c4d7c99bc1b06813c63bdf"
+    },
+    {
+      "source_code": "195",
+      "file": "school_195.json",
+      "sha256": "05f320c4ef3ec918a890df353e7d438be56c9067510bd5cd0cc3a278e1ed7f00"
+    },
+    {
+      "source_code": "196",
+      "file": "school_196.json",
+      "sha256": "1054ed4644bd6008178fa892b26c89be30bab9a64371e5a493a3d057c6840629"
+    },
+    {
+      "source_code": "197",
+      "file": "school_197.json",
+      "sha256": "0f6d1cb38bd09bcf2c3d75bedb370ca3b4ceed0a9d22e93289d75ee899bd2e53"
+    },
+    {
+      "source_code": "198",
+      "file": "school_198.json",
+      "sha256": "ef7381a7e69fc664cd8c27b40e213f687ba63930eefa80e2ea8ecd9482742124"
+    },
+    {
+      "source_code": "199",
+      "file": "school_199.json",
+      "sha256": "2bf86e5fadb2f02704b0c5f51151a9b68cee6baf9c75c2038cf8d6d234368f2a"
+    },
+    {
+      "source_code": "200",
+      "file": "school_200.json",
+      "sha256": "8b1edb17397e416cdaac28a4c7c7d6bf1e574a99412deba45d6432b87be5b1a8"
+    },
+    {
+      "source_code": "201",
+      "file": "school_201.json",
+      "sha256": "9e5d6b1ef9f1c94dcde6c3dde09114c149bbc4d183cc742a6ed541fcc847ccd4"
+    },
+    {
+      "source_code": "202",
+      "file": "school_202.json",
+      "sha256": "2b307c9044775a1754dd97b8709ac580bb6507f290a7f3261246b36b205bc661"
+    },
+    {
+      "source_code": "203",
+      "file": "school_203.json",
+      "sha256": "3518f72e6163af6474566d310fe86658cef113562c3a858a6694e752e56ee641"
+    },
+    {
+      "source_code": "204",
+      "file": "school_204.json",
+      "sha256": "02a12530961ed147d6cdef8e5133fe99748453196d0da627010ba4fd1f7a062e"
+    },
+    {
+      "source_code": "205",
+      "file": "school_205.json",
+      "sha256": "f2bc1e51321dded5b971f499d93aef57dfc4882dcce11411a55e11dc9f6cbea3"
+    },
+    {
+      "source_code": "206",
+      "file": "school_206.json",
+      "sha256": "1f76ad242184ed12364f1cae27e487e4cc9f2675801b1f91056bdda04fae1cbe"
+    },
+    {
+      "source_code": "207",
+      "file": "school_207.json",
+      "sha256": "9432be4f774103eb8bbc970458468978e7875ffd22b8763bf0093389c1d5f234"
+    },
+    {
+      "source_code": "208",
+      "file": "school_208.json",
+      "sha256": "898cd3ad9070485a337e32638e313a2ccf64c2de8faf15b8c69da135a6449c6c"
+    },
+    {
+      "source_code": "209",
+      "file": "school_209.json",
+      "sha256": "a9d221ace5f1aee7286761364fe15653fc6e4a2b094a95228502555cf2967f53"
+    },
+    {
+      "source_code": "210",
+      "file": "school_210.json",
+      "sha256": "f8bc6b575764d7233d32b84606b8d8370739340fc849ce8aee6ae6fa863495ad"
+    },
+    {
+      "source_code": "211",
+      "file": "school_211.json",
+      "sha256": "99da24f37bc1faa04d72894d99c68606b4d2d799f1043c9eb9c943907c508033"
+    },
+    {
+      "source_code": "212",
+      "file": "school_212.json",
+      "sha256": "5b11b0d686dd092c674050182091477e5cf3fafef3ea73c10ffb221c49b59293"
+    },
+    {
+      "source_code": "213",
+      "file": "school_213.json",
+      "sha256": "3f08edf419cab93b6026a9e2f4641a94369aeb554ab17614805867244c6ef045"
+    },
+    {
+      "source_code": "214",
+      "file": "school_214.json",
+      "sha256": "c49d417084f7dc8ff28bd384efa25deb0aadc44e49344120123bb568c003e466"
+    },
+    {
+      "source_code": "215",
+      "file": "school_215.json",
+      "sha256": "5c889aee71beec97148eda74ccd059123ac6141f80019504cfaab7bc18619409"
+    },
+    {
+      "source_code": "216",
+      "file": "school_216.json",
+      "sha256": "74db71f47e98c7e86065dedc49ff857c94fa3919f375d6c06e7af640097f2f00"
+    },
+    {
+      "source_code": "217",
+      "file": "school_217.json",
+      "sha256": "385d0e7278fc80270777d3db56ed1f531600fa9d56944a54fc6538ce147ef38d"
+    },
+    {
+      "source_code": "218",
+      "file": "school_218.json",
+      "sha256": "2a04bdcf5ca9f3a628d26ee147ede5859e105eeb8e3114dfdbc84bfe266a8775"
+    },
+    {
+      "source_code": "219",
+      "file": "school_219.json",
+      "sha256": "bee46ecf950ccfb963e71f40a2e4b53f233edc568bc6bcd768f49266ccc60e23"
+    },
+    {
+      "source_code": "220",
+      "file": "school_220.json",
+      "sha256": "2b1e3a226bf5820de761c11f97a297f8123b8d4ee2cafe0e67a2e403b8befe0f"
+    },
+    {
+      "source_code": "221",
+      "file": "school_221.json",
+      "sha256": "9a82a72e205847fb4271815d738b32f6394d07798c3aadea3ab4718a7c53c92c"
+    },
+    {
+      "source_code": "222",
+      "file": "school_222.json",
+      "sha256": "4ed8290b37d88c68dd9856a3be18674dbbce2f37a546b5d5efb64748b79c62d7"
+    },
+    {
+      "source_code": "223",
+      "file": "school_223.json",
+      "sha256": "fa3a64ad02dded194e12f024b6848bf531a037dce87a9f5a0993b4564fc6c57a"
+    },
+    {
+      "source_code": "224",
+      "file": "school_224.json",
+      "sha256": "f051afa3fe7194957d81602bf5245d453c6ff83a9299b125aa7527e4f85777a1"
+    },
+    {
+      "source_code": "225",
+      "file": "school_225.json",
+      "sha256": "61aa2b4492df74399606d08315681b69c8447b24f2666e3f0c3300a78b60e1a4"
+    },
+    {
+      "source_code": "226",
+      "file": "school_226.json",
+      "sha256": "3200327a3752eb8e949d300d142076469606183351e4b5c89e656105774bcdcf"
+    },
+    {
+      "source_code": "227",
+      "file": "school_227.json",
+      "sha256": "5892814cfffd08e27043a7f3f7e3e55d347ed8aa83f9a0322d1b3d315de1051b"
+    },
+    {
+      "source_code": "228",
+      "file": "school_228.json",
+      "sha256": "7e25a7352a8359b156c490ec32bff3fb308d79f356883460857131d6e68dff5c"
+    },
+    {
+      "source_code": "229",
+      "file": "school_229.json",
+      "sha256": "f87430b24bc79e64d25841c67b108f043d42590503b0ea0d7921d64c38942b9a"
+    },
+    {
+      "source_code": "230",
+      "file": "school_230.json",
+      "sha256": "dce2747f61f2ce6a0e39b9b76c86c9803a64d81b8e77e6779cae5289c0dbe29c"
+    },
+    {
+      "source_code": "231",
+      "file": "school_231.json",
+      "sha256": "ad1775c2d257ed5056e94e7bc2707aedf45751059dc660cb046bd79d4290aec9"
+    },
+    {
+      "source_code": "232",
+      "file": "school_232.json",
+      "sha256": "020bec50577421c6e1f98a229337a1d22e55d8fdcaf7d4cc37586dd22e5a2c30"
+    },
+    {
+      "source_code": "233",
+      "file": "school_233.json",
+      "sha256": "df096350f51821ecae912ea1776396136ee04bbe4e2721e94d57f36c25f21897"
+    },
+    {
+      "source_code": "234",
+      "file": "school_234.json",
+      "sha256": "f9f46f898eec1adf71c3a0daee5d4d473c89ccde7e145ef97124b879d77ea8f4"
+    },
+    {
+      "source_code": "235",
+      "file": "school_235.json",
+      "sha256": "6c311885419f52f4c6eeabad76d742ee5c9909044ad26dc66f5499e18e3f9606"
+    },
+    {
+      "source_code": "236",
+      "file": "school_236.json",
+      "sha256": "3ccdc69e3fb481fb275d1a46718c9a920e357a11c0c9cbbb4f79e47851828fe1"
+    },
+    {
+      "source_code": "237",
+      "file": "school_237.json",
+      "sha256": "1cb2b4e1cb55dfff215255819644f577f9336ac816d129e66dde3e11e444bf8c"
+    },
+    {
+      "source_code": "238",
+      "file": "school_238.json",
+      "sha256": "77becaeabb826857312f9b2c143b8eb6ca44874238a49d234b0e12fe939ac6d6"
+    },
+    {
+      "source_code": "239",
+      "file": "school_239.json",
+      "sha256": "a2b6cf184ddfb017697a6fc43661e71c0f16b7a16ebe1f95230f384e5c9c4ba0"
+    },
+    {
+      "source_code": "240",
+      "file": "school_240.json",
+      "sha256": "9f6689571279cf436d9d2d112fdf2f55e375ca5fc24bd082ea11db3440c2be53"
+    },
+    {
+      "source_code": "241",
+      "file": "school_241.json",
+      "sha256": "8d9246603cdca8601a3f7765d261b0e3072daec305a44905ae4f13da8e072af4"
+    },
+    {
+      "source_code": "242",
+      "file": "school_242.json",
+      "sha256": "1871158cd2eb9f3cebc8e4e44817b98a1797246a118722bf729fc16b4957ceb4"
+    },
+    {
+      "source_code": "243",
+      "file": "school_243.json",
+      "sha256": "08d4a55f81473dd0d4ebad3927bf7cd4ab6fbada582818b88d4ffbe747291bee"
+    },
+    {
+      "source_code": "244",
+      "file": "school_244.json",
+      "sha256": "2a8a8dace4699d0ee8b0097267748c96cf25fc8c79e7fd7d71322ebe73a8944f"
+    },
+    {
+      "source_code": "245",
+      "file": "school_245.json",
+      "sha256": "1d768c54b1e7bd577f1d6b6e0e50cd482812e7c52205fe4f36b83b1061bb5188"
+    },
+    {
+      "source_code": "247",
+      "file": "school_247.json",
+      "sha256": "d801bed2690fa0fc6ee5d6d3fef59e0bfc2c069132d2e829e23d8d87af52fdd6"
+    },
+    {
+      "source_code": "248",
+      "file": "school_248.json",
+      "sha256": "b29026e850a4378e961f670ef761e9f601c8800bcd8e56a9d25d5a5cd34c8b49"
+    },
+    {
+      "source_code": "249",
+      "file": "school_249.json",
+      "sha256": "6d5ef22174620311852ec30c2764db70e6b569e1f0a1fdcca89f6b7103f3c0a6"
+    },
+    {
+      "source_code": "250",
+      "file": "school_250.json",
+      "sha256": "6af9f0f2a61632890806d07d04aa66f0a784cff2d9b50d9a561f5b929916ec88"
+    },
+    {
+      "source_code": "251",
+      "file": "school_251.json",
+      "sha256": "c5638d291aa892286235bc1153bd3d9d183348b97ce12ae13c550ce24530c694"
+    },
+    {
+      "source_code": "252",
+      "file": "school_252.json",
+      "sha256": "32154ac7b449ec4383c822e21b235bdb1653a9bf0b5e3903976a8d113a35648d"
+    },
+    {
+      "source_code": "253",
+      "file": "school_253.json",
+      "sha256": "091489d24bf609a53a7e428a00ec7a4bd7649a35cf48fa17a7949268bdfc5104"
+    },
+    {
+      "source_code": "254",
+      "file": "school_254.json",
+      "sha256": "3017b2b07569d7cc3a5a0399db5009a58f5ffa8df063d68f17122e15f2c9aa63"
+    },
+    {
+      "source_code": "255",
+      "file": "school_255.json",
+      "sha256": "a49cd70c875bc6cb1e9e08aebd232bea9f6946f842e19d4b64e40ad443160ea2"
+    },
+    {
+      "source_code": "256",
+      "file": "school_256.json",
+      "sha256": "c6fdbf37a4db664294eed41b03688b5da60729536cc34e2c0bfb3fef71fb169a"
+    },
+    {
+      "source_code": "257",
+      "file": "school_257.json",
+      "sha256": "aafb2bed556349005e2a5850c34f2e5da451706e98726f67af7a876ea52f37b7"
+    },
+    {
+      "source_code": "258",
+      "file": "school_258.json",
+      "sha256": "dc5bbcd177049d339df81326f37797d81e27782ac3fd35d9e6d885b0cc3891d0"
+    },
+    {
+      "source_code": "262",
+      "file": "school_262.json",
+      "sha256": "093744f51afdc3590642625e1c9a74231f9474651b491cc3320ebc5636696d69"
+    },
+    {
+      "source_code": "266",
+      "file": "school_266.json",
+      "sha256": "ce94240a880229a19ad14738a9901f662229a6567ddc38aecc5d12b698432f96"
+    },
+    {
+      "source_code": "267",
+      "file": "school_267.json",
+      "sha256": "410548a0a43577d409ee907b8b8dd074598f4f5b4c7803899324e676f672a8f9"
+    },
+    {
+      "source_code": "270",
+      "file": "school_270.json",
+      "sha256": "976b4236b1abd813973fab1f7dffc6c1c20987907441a24d95817f07530ed021"
+    },
+    {
+      "source_code": "271",
+      "file": "school_271.json",
+      "sha256": "3aa42ad3b37ad4fdb5a14e63884a9316485521968b19dcab7e6dda4acfffa630"
+    },
+    {
+      "source_code": "273",
+      "file": "school_273.json",
+      "sha256": "90031660093477d900de1d0c938d8ee81e4d6b79781dae4918f0cfe6c1c61436"
+    },
+    {
+      "source_code": "274",
+      "file": "school_274.json",
+      "sha256": "012b917888f06e7624e846fba97150f94a4e847821f26e3a2971f15374521e2b"
+    },
+    {
+      "source_code": "275",
+      "file": "school_275.json",
+      "sha256": "a9864fb2d6160fddcf3e43b389b73d253820428f3b6a8c08b02ca2fabedc4a25"
+    },
+    {
+      "source_code": "276",
+      "file": "school_276.json",
+      "sha256": "8839bb07589f1e7aa6a16fda978e482815152cdfa3ca2bec1e24cdfe7a755678"
+    },
+    {
+      "source_code": "277",
+      "file": "school_277.json",
+      "sha256": "4d9e6dcbc769d51628415aee134dfb15c22abeacb407571984a77e46b6eac866"
+    },
+    {
+      "source_code": "278",
+      "file": "school_278.json",
+      "sha256": "1423616eaf4a67c51cb83ad0a8cacc554a09c0e722b35c450c463f69cc884840"
+    },
+    {
+      "source_code": "279",
+      "file": "school_279.json",
+      "sha256": "fd685abae9c8a3dd8b3504bb37bc909e05f023300e261caa4036df16e5595557"
+    },
+    {
+      "source_code": "280",
+      "file": "school_280.json",
+      "sha256": "8679844542520a6473856500ed664e45535f95e764f6b4afb3dc382c8e308a25"
+    },
+    {
+      "source_code": "282",
+      "file": "school_282.json",
+      "sha256": "770f9b252c39f5d9ca99d2fa5ca18af81a4e057f9619652371dc38e1f5eebe35"
+    },
+    {
+      "source_code": "285",
+      "file": "school_285.json",
+      "sha256": "464af6ddde40c55da3577c291dd34e7c5ff83d592a654017f25e094c07e0bdce"
+    }
+  ],
+  "randomizations": 1000,
+  "seed": 20260929,
+  "permanent_outputs": [
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/education_analysis/outputs/romania_alba_2001_differentiation_v1/EDUCATION_20260929_romania_gymnasium_differentiation_v1_name_free_applicant_scores.csv.gz",
+      "sha256": "ae3c39d382ab0a16b162d6f1307de36e71420b5ffabe83f94dd3bbc5f0f4cd29",
+      "bytes": 35988
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/education_analysis/outputs/romania_alba_2001_differentiation_v1/EDUCATION_20260929_romania_gymnasium_differentiation_v1_gymnasium_aggregate_statistics.csv",
+      "sha256": "3f86fb140fab77a5ca8439c518c976ac3ae47f6a43648c6e2e79f0b4ffd800f7",
+      "bytes": 48146
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/education_analysis/outputs/romania_alba_2001_differentiation_v1/EDUCATION_20260929_romania_gymnasium_differentiation_v1_coverage_reference.csv",
+      "sha256": "93c6db121084bd65ce78d7e6144afadd093c184b7ec61d59ba5735eec081a44c",
+      "bytes": 16088
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/education_analysis/outputs/romania_alba_2001_differentiation_v1/EDUCATION_20260929_romania_gymnasium_differentiation_v1_H_sort_random_reference.csv",
+      "sha256": "28d1a48312437a43cdd59cae70ea78a20a2776c7cfdd09105222c6a5b7cd0446",
+      "bytes": 24124
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/education_analysis/outputs/romania_alba_2001_differentiation_v1/EDUCATION_20260929_romania_gymnasium_differentiation_v1_summary.json",
+      "sha256": "f1efc3eb559fc2e5ae22286b9757bb652bfb01a536fdb961d2d070fbacc35328",
+      "bytes": 3396
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/education_analysis/outputs/romania_alba_2001_differentiation_v1/EDUCATION_20260929_romania_gymnasium_differentiation_v1_gate_summary.png",
+      "sha256": "8f38352d3f3967e04c73fc0c2b95348343370fd74bf30216d526aded59b41621",
+      "bytes": 478439
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/education_analysis/outputs/romania_alba_2001_differentiation_v1/EDUCATION_20260929_romania_gymnasium_differentiation_v1_gate_summary.pdf",
+      "sha256": "933644037e525b7727fcb2cca5b753053026b6557fd281df836ecd44322f4c8a",
+      "bytes": 51895
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/education_analysis/outputs/romania_alba_2001_differentiation_v1/EDUCATION_20260929_romania_gymnasium_differentiation_v1_all_gymnasium_intervals.png",
+      "sha256": "a0387f364cfe7db17ebd77d5a009b55dff3cf12f34f181df1a6c8269ba3bec2d",
+      "bytes": 865725
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/education_analysis/outputs/romania_alba_2001_differentiation_v1/EDUCATION_20260929_romania_gymnasium_differentiation_v1_all_gymnasium_intervals.pdf",
+      "sha256": "bd02f46f2877bffc4d7d3f30dfc452ea713e10d402d1277caeb5eb6fb600e1a7",
+      "bytes": 68439
+    }
+  ],
+  "student_names_persisted_in_research_workspace": false
+}

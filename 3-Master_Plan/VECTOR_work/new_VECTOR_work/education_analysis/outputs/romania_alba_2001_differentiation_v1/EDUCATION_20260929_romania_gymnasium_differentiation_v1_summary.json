@@ -1,0 +1,111 @@
+{
+  "scope": "Alba 2001 pre-placement gymnasium differentiation using national examination score",
+  "applicants": 3041,
+  "directory_codes": 168,
+  "nonempty_gymnasium_codes": 161,
+  "zero_applicant_gymnasium_codes": 7,
+  "zero_applicant_source_codes": [
+    "107",
+    "163",
+    "173",
+    "208",
+    "212",
+    "228",
+    "282"
+  ],
+  "group_size": {
+    "minimum": 1,
+    "p25": 3.0,
+    "median": 7.0,
+    "p75": 16.0,
+    "maximum": 144,
+    "threshold_accounting": {
+      "1": {
+        "gymnasium_codes": 161,
+        "applicants": 3041,
+        "applicant_fraction": 1.0
+      },
+      "2": {
+        "gymnasium_codes": 149,
+        "applicants": 3029,
+        "applicant_fraction": 0.9960539296284117
+      },
+      "5": {
+        "gymnasium_codes": 106,
+        "applicants": 2908,
+        "applicant_fraction": 0.9562643867148964
+      },
+      "10": {
+        "gymnasium_codes": 60,
+        "applicants": 2591,
+        "applicant_fraction": 0.852022361065439
+      },
+      "20": {
+        "gymnasium_codes": 35,
+        "applicants": 2264,
+        "applicant_fraction": 0.744491943439658
+      }
+    }
+  },
+  "exam_score": {
+    "mean": 7.092045379809274,
+    "population_sd": 1.1735659531019274,
+    "minimum": 5.0,
+    "p25": 6.1,
+    "median": 6.98,
+    "p75": 8.01,
+    "maximum": 9.86
+  },
+  "sorting": {
+    "observed_H_sort": 0.14918042714365187,
+    "repository_crosscheck": 0.14918042714365187,
+    "random_assignment_size_benchmark": 0.05263157894736842,
+    "random_mean": 0.05268138626537459,
+    "random_median": 0.05224630412843567,
+    "random_p025": 0.04209009258025081,
+    "random_p975": 0.06394503112121298,
+    "fraction_random_at_or_above_observed": 0.000999000999000999
+  },
+  "intervals": {
+    "observed_equal_gymnasium_mean_range_width": 2.1056490313908562,
+    "random_equal_gymnasium_mean_range_width_mean": 2.4366065680063347,
+    "gymnasium_means_outside_own_size_matched_random_95_count": 37,
+    "gymnasium_means_outside_own_size_matched_random_95_fraction": 0.22981366459627328,
+    "groups_n_at_least_5": 106,
+    "range_overlap_pairs_n_at_least_5": 5564,
+    "range_pair_total_n_at_least_5": 5565,
+    "range_overlap_fraction_n_at_least_5": 0.9998203054806828,
+    "maximum_observed_coverage": 136,
+    "maximum_observed_coverage_fraction": 0.84472049689441
+  },
+  "randomization": {
+    "draws": 1000,
+    "seed": 20260929,
+    "method": "permute observed A_i across fixed source-code slots; preserve every group size"
+  },
+  "interpretive_limits": [
+    "Population is participating applicants associated with source-coded gymnasiums, not every classmate or graduate.",
+    "National examination performance is observed after gymnasium exposure, not before it.",
+    "Random reassignments are a conditional group-size reference, not national-population uncertainty.",
+    "This diagnostic does not estimate placement success, congestion, peer effects, or causality."
+  ],
+  "construction_checks": {
+    "rows": 3041,
+    "directory_codes": 168,
+    "nonempty_gymnasium_codes": 161,
+    "zero_applicant_source_codes": [
+      "107",
+      "163",
+      "173",
+      "208",
+      "212",
+      "228",
+      "282"
+    ],
+    "duplicate_name_occurrences_within_same_report": 0,
+    "formula_disagreements": 0,
+    "exam_mean": 7.092045379809274,
+    "exam_population_sd": 1.1735659531019274,
+    "cross_code_exact_name_and_score_duplicates": 0
+  }
+}

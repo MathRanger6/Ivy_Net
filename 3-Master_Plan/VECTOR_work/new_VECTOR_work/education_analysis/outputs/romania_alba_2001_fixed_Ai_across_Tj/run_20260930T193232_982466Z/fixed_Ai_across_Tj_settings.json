@@ -1,0 +1,47 @@
+{
+  "tj_quantile_bins": 8,
+  "ai_percentile_cuts": [
+    0.0,
+    0.5,
+    0.75,
+    0.9,
+    1.0
+  ],
+  "minimum_applicants_per_cell": 10,
+  "minimum_gymnasiums_per_cell": 3,
+  "A_i_cutoffs": [
+    {
+      "boundary_percentile": 0.0,
+      "A_z_cutoff": -1.7741187653800685
+    },
+    {
+      "boundary_percentile": 0.5,
+      "A_z_cutoff": 0.03234127582723851
+    },
+    {
+      "boundary_percentile": 0.75,
+      "A_z_cutoff": 0.9014871447099997
+    },
+    {
+      "boundary_percentile": 0.9,
+      "A_z_cutoff": 1.5405649894767357
+    },
+    {
+      "boundary_percentile": 1.0,
+      "A_z_cutoff": 2.358584630778157
+    }
+  ],
+  "T_j_bin_edges": [
+    -1.7400346136591758,
+    -0.3759845644503968,
+    -0.2616712613772283,
+    -0.07195267800622175,
+    0.1122669729515913,
+    0.18036909517228167,
+    0.2578981622154983,
+    0.4746635781723647,
+    1.676901596360306
+  ],
+  "plotted_cells": 32,
+  "all_cells": 32
+}

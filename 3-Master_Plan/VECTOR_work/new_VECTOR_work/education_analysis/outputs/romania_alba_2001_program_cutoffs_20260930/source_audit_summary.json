@@ -1,0 +1,181 @@
+{
+  "cohort": 2001,
+  "county": "Alba",
+  "report_family": "main allocation; not rep2",
+  "programs": 85,
+  "places": 4325,
+  "admitted": 2977,
+  "vacancies": 1348,
+  "filled_programs": 55,
+  "partially_filled_programs": 28,
+  "empty_programs": 2,
+  "specialization_counts": {
+    "Filologie": 11,
+    "Matematica-Informatica": 15,
+    "Profesional": 17,
+    "Spec.Tehnologica": 23,
+    "Stiinte Sociale": 7,
+    "Stiinte ale Naturii": 12
+  },
+  "level_counts": {
+    "Liceal": 68,
+    "Profesional": 17
+  },
+  "language_counts": {
+    "Limba romana": 82,
+    "Limba maghiara": 3
+  },
+  "attendance_counts": {
+    "Invatamant de zi": 83,
+    "Invatamant distanta": 1,
+    "Invatamant seral": 1
+  },
+  "highest_cutoff_by_specialization": {
+    "Filologie": [
+      {
+        "program_code": "x22",
+        "school_name": "COLEGIUL NATIONAL \"DAVID PRODAN\" CUGIR",
+        "profile": "Uman",
+        "specialization": "Filologie",
+        "level": "Liceal",
+        "attendance_form": "Invatamant de zi",
+        "language": "Limba romana",
+        "places": 25,
+        "admitted": 25,
+        "vacancies": 0,
+        "filled": true,
+        "lowest_admitted_score": 8.03,
+        "highest_admitted_score": 9.4,
+        "source_ultima_nota": "8,03",
+        "source_occupancy_description": "x22 COLEGIUL NATIONAL \"DAVID PRODAN\" CUGIR /LIT"
+      }
+    ],
+    "Matematica-Informatica": [
+      {
+        "program_code": "xx8",
+        "school_name": "COLEGIUL NAT.\"HOREA,CLOSCA SI CRISAN\"ALBA-IULIA",
+        "profile": "Real",
+        "specialization": "Matematica-Informatica",
+        "level": "Liceal",
+        "attendance_form": "Invatamant de zi",
+        "language": "Limba romana",
+        "places": 100,
+        "admitted": 100,
+        "vacancies": 0,
+        "filled": true,
+        "lowest_admitted_score": 9.06,
+        "highest_admitted_score": 9.85,
+        "source_ultima_nota": "9,06",
+        "source_occupancy_description": "xx8 COLEGIUL NAT.\"HOREA,CLOSCA SI CRISAN\"ALBA-IULIA /LIT"
+      }
+    ],
+    "Profesional": [
+      {
+        "program_code": "x37",
+        "school_name": "GRUP SCOLAR INDUSTRIALIZAREA LEMNULUI BLAJ",
+        "profile": "Tehnic",
+        "specialization": "Profesional",
+        "level": "Profesional",
+        "attendance_form": "Invatamant de zi",
+        "language": "Limba romana",
+        "places": 100,
+        "admitted": 2,
+        "vacancies": 98,
+        "filled": false,
+        "lowest_admitted_score": 6.12,
+        "highest_admitted_score": 6.49,
+        "source_ultima_nota": "6,12",
+        "source_occupancy_description": "x37 GRUP SCOLAR INDUSTRIALIZAREA LEMNULUI BLAJ /PRO /06"
+      }
+    ],
+    "Spec.Tehnologica": [
+      {
+        "program_code": "x19",
+        "school_name": "COLEGIUL NATIONAL \"DAVID PRODAN\" CUGIR",
+        "profile": "Tehnic",
+        "specialization": "Spec.Tehnologica",
+        "level": "Liceal",
+        "attendance_form": "Invatamant de zi",
+        "language": "Limba romana",
+        "places": 25,
+        "admitted": 25,
+        "vacancies": 0,
+        "filled": true,
+        "lowest_admitted_score": 8.39,
+        "highest_admitted_score": 9.33,
+        "source_ultima_nota": "8,39",
+        "source_occupancy_description": "x19 COLEGIUL NATIONAL \"DAVID PRODAN\" CUGIR /LIT"
+      }
+    ],
+    "Stiinte Sociale": [
+      {
+        "program_code": "x10",
+        "school_name": "COLEGIUL NAT.\"HOREA,CLOSCA SI CRISAN\"ALBA-IULIA",
+        "profile": "Uman",
+        "specialization": "Stiinte Sociale",
+        "level": "Liceal",
+        "attendance_form": "Invatamant de zi",
+        "language": "Limba romana",
+        "places": 25,
+        "admitted": 25,
+        "vacancies": 0,
+        "filled": true,
+        "lowest_admitted_score": 8.53,
+        "highest_admitted_score": 9.39,
+        "source_ultima_nota": "8,53",
+        "source_occupancy_description": "x10 COLEGIUL NAT.\"HOREA,CLOSCA SI CRISAN\"ALBA-IULIA /LIT"
+      }
+    ],
+    "Stiinte ale Naturii": [
+      {
+        "program_code": "xx9",
+        "school_name": "COLEGIUL NAT.\"HOREA,CLOSCA SI CRISAN\"ALBA-IULIA",
+        "profile": "Real",
+        "specialization": "Stiinte ale Naturii",
+        "level": "Liceal",
+        "attendance_form": "Invatamant de zi",
+        "language": "Limba romana",
+        "places": 25,
+        "admitted": 25,
+        "vacancies": 0,
+        "filled": true,
+        "lowest_admitted_score": 8.69,
+        "highest_admitted_score": 9.33,
+        "source_ultima_nota": "8,69",
+        "source_occupancy_description": "xx9 COLEGIUL NAT.\"HOREA,CLOSCA SI CRISAN\"ALBA-IULIA /LIT"
+      }
+    ]
+  },
+  "source_metadata": {
+    "root": {
+      "sha256": "60f89c4c06dbf27fb3ecd0de3ad137735f164125a85c301ca7297b150ec564c2"
+    },
+    "map": {
+      "requested": "https://web.archive.org/web/20020802194942id_/http://www.edu.ro/adm2001/harta.asp.htm",
+      "effective_url": "https://web.archive.org/web/20020803161508id_/http://www.edu.ro/adm2001/harta.asp.htm",
+      "sha256": "55ab1d7206112d88cd39f88a4cdf7a2bbebf380d509dac5b7b0cc95ea3c4f763",
+      "bytes": 7198
+    },
+    "alba_index": {
+      "requested": "https://web.archive.org/web/20020803161508id_/http://www.edu.ro/adm2001/rapoarte.asp-cj=AB&nj=ALBA.htm",
+      "effective_url": "https://web.archive.org/web/20020622154846id_/http://www.edu.ro/adm2001/rapoarte.asp-cj=AB&nj=ALBA.htm",
+      "sha256": "d44ac21183e6071158bcb2a328d882ca2b7f883a80056bc08ba812fd97d6ba4e",
+      "bytes": 7431
+    },
+    "programs": {
+      "requested": "https://web.archive.org/web/20020622154846id_/http://www.edu.ro/adm2001/raport_specializari.asp-cj=AB&nj=ALBA&idx=0.htm",
+      "effective_url": "https://web.archive.org/web/20020624015645id_/http://www.edu.ro/adm2001/raport_specializari.asp-cj=AB&nj=ALBA&idx=0.htm",
+      "sha256": "ec258c1648c0062b12d58a0e5d5ebb0016bd71fe448d66510672fdfac96c76f5",
+      "bytes": 28436
+    },
+    "occupancy": {
+      "requested": "https://web.archive.org/web/20020622154846id_/http://www.edu.ro/adm2001/raport_situatie_licee_per_judet.asp-cj=AB&nj=ALBA&idx=0.htm",
+      "effective_url": "https://web.archive.org/web/20020816152305id_/http://www.edu.ro/adm2001/raport_situatie_licee_per_judet.asp-cj=AB&nj=ALBA&idx=0.htm",
+      "sha256": "c93c6dc7bea68acfb4bc5b173ae3a19a761b2fc443136e87627a294819edfc05",
+      "bytes": 32356
+    }
+  },
+  "checks": "85 unique exact program-code joins; school/profile/specialization/capacity agree; all capacity balances pass; 2977 admitted matches earlier county audit",
+  "limit": "No student placement merge; no outcome threshold; reported last-admitted scores are not preannounced eligibility thresholds or teaching-quality measures.",
+  "parser_sha256": "61aef7004ae2282d15efb8ddfefad58a86a2addbf95bafe3e80edc909d805a44"
+}

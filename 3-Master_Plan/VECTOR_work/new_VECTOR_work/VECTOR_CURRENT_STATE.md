@@ -1,8 +1,34 @@
 # VECTOR — Current Research State
 
-**Last synced:** 2026-09-29
+**Last synced:** 2026-09-30
 
-## Active checkpoint — Romania standalone archive feasibility, September 29
+## Active checkpoint — Romania first HERO inspected, September 30
+
+**Current implementation update:** The first notebook settings cell now exposes `REQUIRE_FULL_PROGRAMS = True` and `COMBINE_PROGRAM_CATEGORIES = False`. Turning the first off admits partially filled programs with a finite observed cutoff and at least one admitted student. Turning the second on reranks within mathematics/sciences, social sciences/philology, and technology/vocational; it does not merely change labels. Charles's current `TOP_PROGRAM_TIERS = 1` and vocational-exclusion setting were preserved. The original saved population and bin boundaries remain the comparison reference, and outputs record each setting separately. Vocational exclusion now explicitly reports both applicants and successes removed, because vocational programs can qualify when full occupancy is not required. Twenty synthetic tests passed; VECTOR did not run the empirical analysis. Details are in the final section of the HERO decision record.
+
+**Latest completed step:** Charles ran the baseline HERO: 200 successes among 2,844 outcome-eligible applicants (7.03%), representing 148 gymnasiums. The authorized read-only right-edge check reconciled both charts to the saved rows. Beyond the equal-width peak are just three applicants: two lower examination scorers in vocational programs and one strong scorer with one observed peer who entered a fully occupied but non-designated technology program. The peak itself is dominated by origin 108 (123/129 applicants and all 38 successes). The highest quantile bin contains those same 38 successes. These findings weaken interpretation of the extreme-right drop as demonstrated congestion. See the final section of the [HERO decision record](education_analysis/docs/decisions/EDUCATION_20260930_Romania_program_ranking_and_HERO_decisions.md). No data, filters, plots, or outcome definitions changed; no HERO rerun occurred. The next discussion is how to distinguish own performance from peer environment, with further calculations awaiting direction.
+
+**Completed differentiation:** Charles ran the acquisition and offline analysis notebooks. The saved results cover 3,041 participating applicant records in 161 nonempty Alba 2001 gymnasium groups (168 directory codes, seven empty). Examination-score sorting is 0.14918, versus a 0.05268 mean and 0.04209–0.06395 middle 95% range across 1,000 size-preserving random assignments. This is descriptive differentiation with extensive score overlap, not a congestion or placement result. The [saved summary](education_analysis/outputs/romania_alba_2001_differentiation_v1/EDUCATION_20260929_romania_gymnasium_differentiation_v1_summary.json) and completed run record are available.
+
+**Current direction and decision:** Charles reported “show me the HERO,” prefers program-level selection to whole-school rankings, and approved admission cutoff as the first entrance-selectivity measure. He subsequently chose the highest-cutoff program within each subject, including all ties, with a cumulative second-ranked tier as a possible later comparison if event counts are too sparse. Preserve the highest-tier result rather than searching for a preferred shape. The [decision record](education_analysis/docs/decisions/EDUCATION_20260930_Romania_program_ranking_and_HERO_decisions.md) preserves the rationale, the distinction between observed success rate and unknown true competitive $K/N$, and the agreed program categories and destination handling.
+
+**Source gate passed:** A bounded archived-source check recovered 85 Alba program entries with directly reported last-admitted scores, capacities, vacancies, and admitted counts. Exact program-code joins and capacity balances pass; 2,977 admitted agrees with the earlier county audit. Fifty-five programs filled, 28 have vacancies, and two are empty. Empty entries are missing cutoffs, not zero cutoffs. Highest listed Mathematics–Informatics cutoff: 9.06 at Horea, Cloșca și Crișan, Alba Iulia; highest Philology cutoff: 8.03 at David Prodan, Cugir. See the [source report](education_analysis/docs/source_audit/EDUCATION_20260930_Romania_program_cutoff_source_check.md).
+
+**Coverage correction:** The earlier 78 additional records comprise 77 confirmed outside-Alba placements and one unassigned case. The [quick check](education_analysis/docs/source_audit/EDUCATION_20260930_Romania_cross_county_quick_check.md) compares examination scores for all 78, explicitly including that unassigned case. Within-Alba town changes remain uncounted. Transfer motives are outside the bounded task.
+
+**Latest outcome decisions:** Charles selected all six source categories, then approved requiring designated scarce-success programs to fill their places after the source check showed no vocational program was full (the vocational cutoff leader admitted two into 100 places). The first successful set therefore comprises the five other category leaders, with all ties included if present. The proposed three-group fallback (mathematics/sciences; social sciences/philology; technology/vocational) remains separate from expanding to cumulative top-two tiers. Neither fallback has run.
+
+**Outcome denominator decision:** Retain vocationally placed applicants initially, with an implemented option to exclude them from the outcome denominator in a separately labelled comparison. Keep them in the gymnasium peer averages; hold success destinations, standardization, and bin boundaries fixed for that comparison. This changes the outcome population, not the historical allocation, and differs from excluding a missing performance measurement. The option passed synthetic tests but has not been run on the empirical data.
+
+**Geographic and missing-outcome rules agreed:** Exclude confirmed outside-Alba placements from the first outcome calculation, retaining them in origin-gymnasium peer averages. Keep confirmed unassigned applicants as unsuccessful; unresolved placements/program identities remain unknown. The one unassigned case carried under another county must not be mistaken for an outside-Alba placement. Reconcile overlapping exclusions, including applicants lacking peers.
+
+**Immediate next action:** Charles authorized implementation; the [placement-and-HERO notebook](education_analysis/notebooks/EDUCATION_20260930_Romania_2001_placements_and_HERO.ipynb) is ready for him to run in Cursor with sports_net. It reuses the completed candidate cache, checkpoints new placement downloads on the Desktop, reports unresolved addresses, and then produces the agreed equal-width/quantile views offline. Eleven synthetic tests passed, including retry/resume and preservation of peer averages, bin edges, and winners under the vocational-denominator comparison. Each execution saves a new timestamped report and outputs. No live retrieval or empirical HERO was executed during implementation; no existing empirical results changed. Do not widen years/counties or choose exclusions to produce a favored shape.
+
+**September 30 retrieval repair (current):** Charles's placement acquisition reached 167/168 reports. School 276's placement report has 104 rows versus 103 frozen candidates; a focused check found all 103 unique matches with identical admission composites, plus one additional person absent from the frozen candidates. The companion code now accepts a verified longer report, preserves its extra row as source evidence, and leaves the analytical population unchanged. Fourteen synthetic tests pass. Section 6 and the empirical HERO remain Charles-run; reload the companion and rerun Section 5 for the single remaining report. See the final section of the [HERO decision record](education_analysis/docs/decisions/EDUCATION_20260930_Romania_program_ranking_and_HERO_decisions.md).
+
+## Earlier checkpoint — Romania standalone archive feasibility, September 29
+
+This checkpoint is preserved as history; its no-sorting and next-action language is superseded by the September 30 checkpoint above.
 
 **Current PD43 question:** Can the Ministry admissions archive independently connect originating gymnasium, separate examination/school-grade components, and observed high-school/track assignment? Linkage to the anonymous replication files is now secondary, not a prerequisite.
 
@@ -42,7 +68,7 @@ This checkpoint predates the PD43 origin-school recovery and is retained as hist
 
 ## Preserved earlier checkpoints
 
-All dated tasks, priorities, next steps, and authorization statements below describe their historical checkpoint. They do not override the active September 29 checkpoint above.
+All dated tasks, priorities, next steps, and authorization statements below describe their historical checkpoint. They do not override the active September 30 checkpoint above.
 
 ### Education source audit — September 28 (historical)
 

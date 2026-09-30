@@ -1,0 +1,50 @@
+{
+  "top_program_tiers": 2,
+  "require_full_programs": false,
+  "combine_program_categories": true,
+  "source_population": 3041,
+  "origin_codes": 168,
+  "nonempty_origin_codes": 161,
+  "placement_status_counts": {
+    "confirmed_Alba_program": 2849,
+    "ambiguous_program": 109,
+    "confirmed_outside_Alba": 77,
+    "confirmed_unassigned": 6
+  },
+  "baseline_reconciled_flow": {
+    "included": 2844,
+    "unknown_placement_or_program": 109,
+    "outside_Alba_destination": 76,
+    "no_observed_peer": 12
+  },
+  "construction_checks": {
+    "rows": 3041,
+    "directory_codes": 168,
+    "nonempty_gymnasium_codes": 161,
+    "zero_applicant_source_codes": [
+      "107",
+      "163",
+      "173",
+      "208",
+      "212",
+      "228",
+      "282"
+    ],
+    "duplicate_name_occurrences_within_same_report": 0,
+    "formula_disagreements": 0,
+    "exam_mean": 7.092045379809274,
+    "exam_population_sd": 1.1735659531019274
+  },
+  "longer_placement_report_coverage": {
+    "276": {
+      "frozen_candidate_rows": 103,
+      "placement_report_rows": 104,
+      "unique_name_and_composite_matches": 103,
+      "missing_candidates": 0,
+      "ambiguous_candidates": 0,
+      "composite_disagreements": 0,
+      "extra_report_rows_outside_frozen_population": 1,
+      "candidate_rows_sha256": "a7bd98ee2404671491413cd971f99e2f2c9503ac8decd57bc5ea24cb8f9e0acc"
+    }
+  }
+}
