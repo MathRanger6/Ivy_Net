@@ -271,14 +271,17 @@ def _intervals_active_at_anchor(
         )
         return empty, empty
 
-    peer_g = peers.rename(
-        columns={
-            pid_col: "_peer_pid",
-            eval_strt_col: "_peer_strt",
-            eval_thru_col: "_peer_thru",
-            "perf": "_peer_perf",
-        }
-    )
+    peer_rename = {
+        pid_col: "_peer_pid",
+        eval_strt_col: "_peer_strt",
+        eval_thru_col: "_peer_thru",
+        "perf": "_peer_perf",
+    }
+    # active_at_snapshot anchors on snpsht_dt; peers also carry that column.
+    # Merge on SNR alone suffixes snpsht_dt → KeyError on anchor_col.
+    if anchor_col not in (eval_strt_col, eval_thru_col):
+        peer_rename[anchor_col] = "_peer_anchor"
+    peer_g = peers.rename(columns=peer_rename)
     cross = anchors.merge(peer_g, on=snr_col, how="inner")
     cross = cross[
         (cross[anchor_col] >= cross["_peer_strt"])

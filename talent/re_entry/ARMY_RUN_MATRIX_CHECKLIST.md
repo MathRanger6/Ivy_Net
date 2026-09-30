@@ -928,6 +928,8 @@ Find the block that builds `peer_g` before `cross = left.merge(peer_g, on=rater_
 
 Save the file. Run **Cell 0** (reload modules), then continue at Step 4. **Run 8** uses the same mode — this patch covers both.
 
+**Plot chain:** If Cell 5 succeeds but `army_basic_plots.py --all` fails with the same **`KeyError: 'snpsht_dt'`** in `_intervals_active_at_anchor`, sync **`talent/re_entry/army_basic_plots.py`** from the repo (same `peer_rename[anchor_col]` logic before `anchors.merge(peer_g, ...)`).
+
 ---
 
 ## Run 6 — Step 4 · Run notebook cells
@@ -1346,6 +1348,7 @@ bash scripts/backup_rename_suffix.sh _run8_activesnap_nozero --all-output
 | Panel 1 shows N=39,517 but panel 2 shows n≈15,977 | Different filters (cohort vs analysis sample) | Expected — not a compositor bug |
 | Panel 2 zero spike after Run 3 exclude | Own talent zero, not peer exclusion | Expected — toggle drops **peers** with TB=0 only |
 | Cell 5 `KeyError: 'snpsht_dt'` with `active_at_snapshot` | Merge duplicated `snpsht_dt` → `_x`/`_y` columns | Apply **Run 6 Step 3b** patch in `add_cum_oer_metrics_mod_working.py`; Cell 0 reload |
+| `army_basic_plots.py` overlap `KeyError: 'snpsht_dt'` after Run 6 | Same merge collision in overlap prep | Sync **`army_basic_plots.py`** (see Run 6 Step 3b plot-chain note); re-run plot chain |
 
 ---
 

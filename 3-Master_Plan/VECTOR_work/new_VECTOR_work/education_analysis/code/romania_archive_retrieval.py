@@ -1,8 +1,12 @@
-"""Polite, sequential Wayback retrieval. Importing this module makes no requests.
+"""Adaptive, sequential Wayback retrieval for the bounded Romania audit.
 
-Before a live run, review the archive's published crawling guidance and supply
---policy-reviewed. robots.txt is then checked automatically at run time.
-Public accessibility and a contact header do not constitute a reuse license.
+Importing this module makes no network requests. The client identifies the
+academic project, adapts its interval to observed success/failure, honors
+Retry-After and robots.txt, and persists pacing across restarts. A missing
+robots.txt (HTTP 404) means no rules were published at that endpoint.
+
+Public accessibility and a contact header do not establish permission to
+publish or redistribute personal records. Page bodies remain in memory.
 """
 import datetime
 import email.utils
@@ -15,32 +19,37 @@ import urllib.request
 import urllib.robotparser
 from pathlib import Path
 
-# These are operational pacing settings, not research parameters.
 USER_AGENT = (
     "RomaniaEducationResearch/1.0 "
     "(academic research; contact: charles.levine@virginia.edu)"
 )
 ROBOT_AGENT = "RomaniaEducationResearch"
-PAUSE_SECONDS = (15, 30)
-RETRY_PAUSE_SECONDS = (60, 90)
-MAX_ATTEMPTS_PER_URL = 2
-MAX_CONSECUTIVE_FAILURES = 3
-CONNECTION_TIMEOUT_SECONDS = 25
-RUN_LIMIT_SECONDS = 12 * 60
 ARCHIVE_ORIGIN = "https://web.archive.org"
+CONNECTION_TIMEOUT_SECONDS = 25
+DEFAULT_INITIAL_INTERVAL_SECONDS = 2.0
+DEFAULT_MINIMUM_INTERVAL_SECONDS = 1.2
+DEFAULT_MAXIMUM_INTERVAL_SECONDS = 60.0
+DEFAULT_MAX_RUNTIME_HOURS = 6.0
+SUCCESS_STREAK_TO_SPEED_UP = 10
+SPEED_UP_FACTOR = 0.90
+FAILURE_SLOWDOWN_FACTOR = 1.75
+JITTER_FRACTION = 0.10
+MAX_REDIRECTS = 5
 
 
 class RetrievalStopped(RuntimeError):
-    """Stop this run without treating inaccessible pages as absent records."""
+    """The run stopped safely; unresolved addresses remain eligible for another pass."""
 
 
 class NoAutomaticRedirect(urllib.request.HTTPRedirectHandler):
+    """Expose redirects so every redirected request receives pacing checks."""
+
     def redirect_request(self, req, fp, code, msg, headers, newurl):
         return None
 
 
 def retry_after_seconds(value, now):
-    """Interpret either seconds or an HTTP date; never shorten the server's wait."""
+    """Interpret Retry-After as seconds or an HTTP date."""
     if not value:
         return None
     try:
@@ -56,20 +65,62 @@ def retry_after_seconds(value, now):
 
 
 class ArchiveClient:
-    def __init__(self, output_directory, emit, *, policy_reviewed=False):
+    """One sequential, adaptive client shared by every retrieval in a run."""
+
+    def __init__(
+        self,
+        output_directory,
+        emit,
+        *,
+        archive_use_acknowledged=False,
+        initial_interval_seconds=DEFAULT_INITIAL_INTERVAL_SECONDS,
+        minimum_interval_seconds=DEFAULT_MINIMUM_INTERVAL_SECONDS,
+        maximum_interval_seconds=DEFAULT_MAXIMUM_INTERVAL_SECONDS,
+        max_runtime_hours=DEFAULT_MAX_RUNTIME_HOURS,
+    ):
+        if minimum_interval_seconds <= 0:
+            raise ValueError("minimum_interval_seconds must be positive")
+        if not minimum_interval_seconds <= initial_interval_seconds <= maximum_interval_seconds:
+            raise ValueError("Require minimum <= initial <= maximum interval")
+        if max_runtime_hours <= 0:
+            raise ValueError("max_runtime_hours must be positive")
+
         self.output_directory = Path(output_directory)
+        self.output_directory.mkdir(parents=True, exist_ok=True)
         self.emit = emit
-        self.policy_reviewed = policy_reviewed
+        self.archive_use_acknowledged = archive_use_acknowledged
         self.opener = urllib.request.build_opener(NoAutomaticRedirect())
+        self.minimum_interval = float(minimum_interval_seconds)
+        self.maximum_interval = float(maximum_interval_seconds)
+        self.interval = float(initial_interval_seconds)
+        self.deadline = time.monotonic() + max_runtime_hours * 3600
+        self.last_request_finished = None
+        self.success_streak = 0
+        self.consecutive_failures = 0
         self.robot_rules = None
         self.robot_interval = 0.0
-        self.last_request_finished = None
-        self.deadline = time.monotonic() + RUN_LIMIT_SECONDS
-        self.failures = 0
-        self.state_path = self.output_directory / "retrieval_pause.json"
+        self.robots_checked = False
+        self.state_path = self.output_directory / "retrieval_adaptive_state.json"
         self.not_before = 0.0
+
         if self.state_path.exists():
-            self.not_before = json.loads(self.state_path.read_text())["not_before_utc"]
+            try:
+                state = json.loads(self.state_path.read_text())
+                self.interval = min(
+                    self.maximum_interval,
+                    max(self.minimum_interval, float(state.get("interval_seconds", self.interval))),
+                )
+                self.not_before = float(state.get("not_before_utc", 0.0))
+            except (OSError, ValueError, TypeError, json.JSONDecodeError):
+                self.emit({"kind": "adaptive_state_ignored", "reason": "Unreadable state file"})
+
+    def _save_state(self, reason):
+        self.state_path.write_text(json.dumps({
+            "saved_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+            "interval_seconds": self.interval,
+            "not_before_utc": self.not_before,
+            "reason": reason,
+        }, indent=2) + "\n")
 
     def _validate_url(self, url):
         parsed = urllib.parse.urlsplit(url)
@@ -79,121 +130,102 @@ class ArchiveClient:
             or parsed.username
             or parsed.password
         ):
-            raise RetrievalStopped("Redirect or URL leaves the approved HTTPS archive host.")
+            raise RetrievalStopped("URL or redirect leaves the approved HTTPS archive host.")
 
     def _wait(self, seconds, reason):
-        seconds = max(0, seconds)
+        seconds = max(0.0, float(seconds))
         if time.monotonic() + seconds + CONNECTION_TIMEOUT_SECONDS > self.deadline:
-            raise RetrievalStopped("Twelve-minute run limit: preserve checkpoints and stop.")
-        self.emit({"kind": "retrieval_wait", "seconds": round(seconds, 1), "reason": reason})
-        # Short sleeps allow interruption and visible countdowns during longer backoff.
+            raise RetrievalStopped("Configured run-time limit reached; checkpoints preserved.")
+        if seconds:
+            self.emit({"kind": "retrieval_wait", "seconds": round(seconds, 1), "reason": reason})
         remaining = seconds
         while remaining > 0:
-            step = min(remaining, 15)
+            step = min(remaining, 15.0)
             time.sleep(step)
             remaining -= step
             if remaining >= 15:
                 self.emit({"kind": "retrieval_wait_remaining", "seconds": round(remaining, 1)})
 
-    def _pause_across_runs(self, seconds, reason):
-        self.not_before = max(self.not_before, time.time() + seconds)
-        self.output_directory.mkdir(parents=True, exist_ok=True)
-        self.state_path.write_text(json.dumps({
-            "not_before_utc": self.not_before,
-            "reason": reason,
-        }, indent=2) + "\n")
-        self.emit({"kind": "retrieval_stopped", "reason": reason,
-                   "not_before_utc": self.not_before})
-        raise RetrievalStopped(reason)
+    def wait_between_passes(self, seconds, pass_number):
+        """Pause before revisiting unresolved addresses."""
+        self._wait(seconds, f"Cooldown before unresolved-address pass {pass_number}")
+
+    def _pace(self):
+        if time.time() < self.not_before:
+            self._wait(self.not_before - time.time(), "Persisted server/backoff pause")
+        if self.last_request_finished is None:
+            return
+        base = max(self.interval, self.robot_interval)
+        jittered = base * random.uniform(1 - JITTER_FRACTION, 1 + JITTER_FRACTION)
+        elapsed = time.monotonic() - self.last_request_finished
+        self._wait(max(0.0, jittered - elapsed), "Adaptive spacing between archive requests")
 
     def _once(self, url):
-        """One HTTP request, with body retained only in memory."""
+        """Perform one identified request; retain its body only in memory."""
         request = urllib.request.Request(url, headers={
             "User-Agent": USER_AGENT,
             "From": "charles.levine@virginia.edu",
+            "Accept": "text/html,application/xhtml+xml,text/plain;q=0.9,*/*;q=0.5",
         })
         try:
             with self.opener.open(request, timeout=CONNECTION_TIMEOUT_SECONDS) as response:
-                return response.status, dict(response.headers.items()), response.read()
+                return response.status, dict(response.headers.items()), response.read(), None
         except urllib.error.HTTPError as error:
             with error:
-                return error.code, dict(error.headers.items()), b""
+                return error.code, dict(error.headers.items()), b"", None
+        except (urllib.error.URLError, TimeoutError, OSError) as error:
+            return None, {}, b"", str(error)
 
-    def _download(self, url, *, checking_robots=False):
-        for redirect_number in range(6):
-            self._validate_url(url)
-            if not checking_robots and not self.robot_rules.can_fetch(ROBOT_AGENT, url):
-                raise RetrievalStopped("robots.txt disallows this archive URL; no request sent.")
-            for attempt in range(MAX_ATTEMPTS_PER_URL):
-                if time.time() < self.not_before:
-                    raise RetrievalStopped("A saved server/backoff waiting period has not expired.")
-                if self.last_request_finished is not None:
-                    interval = max(random.uniform(*PAUSE_SECONDS), self.robot_interval)
-                    elapsed = time.monotonic() - self.last_request_finished
-                    self._wait(max(0, interval - elapsed), "Spacing sequential archive requests")
-                elif time.monotonic() + CONNECTION_TIMEOUT_SECONDS > self.deadline:
-                    raise RetrievalStopped("Twelve-minute run limit reached.")
-                status = None
-                try:
-                    status, headers, body = self._once(url)
-                    headers = {k.lower(): v for k, v in headers.items()}
-                    error_text = None
-                except (urllib.error.URLError, TimeoutError, OSError) as error:
-                    headers, body = {}, b""
-                    error_text = str(error)
-                self.last_request_finished = time.monotonic()
-                self.emit({"kind": "http_attempt", "url": url, "status": status,
-                           "attempt": attempt + 1, "error": error_text})
+    def _success(self):
+        self.consecutive_failures = 0
+        self.success_streak += 1
+        old = self.interval
+        if self.success_streak >= SUCCESS_STREAK_TO_SPEED_UP:
+            self.interval = max(self.minimum_interval, self.interval * SPEED_UP_FACTOR)
+            self.success_streak = 0
+        if self.interval != old:
+            self.emit({"kind": "adaptive_pace", "direction": "faster",
+                       "old_seconds": round(old, 2), "new_seconds": round(self.interval, 2)})
+        self._save_state("successful request")
 
-                # Stop rather than retry a refusal or explicit rate limit.
-                if status in (401, 403, 451):
-                    raise RetrievalStopped(f"HTTP {status}: access restriction; no automatic retry.")
-                if status == 429:
-                    delay = retry_after_seconds(headers.get("retry-after"), time.time())
-                    self._pause_across_runs(max(300, delay or 0),
-                                            "HTTP 429: rate limit; stopped this run.")
-                if status is not None and status >= 400 and headers.get("retry-after"):
-                    delay = retry_after_seconds(headers["retry-after"], time.time())
-                    self._pause_across_runs(max(300, delay or 0),
-                                            f"HTTP {status}: honor Retry-After; stopped this run.")
+    def _failure(self, reason, *, retry_after=None):
+        self.success_streak = 0
+        self.consecutive_failures += 1
+        old = self.interval
+        self.interval = min(self.maximum_interval, self.interval * FAILURE_SLOWDOWN_FACTOR)
+        if retry_after is not None:
+            self.not_before = max(self.not_before, time.time() + retry_after)
+        self.emit({"kind": "adaptive_pace", "direction": "slower", "reason": reason,
+                   "old_seconds": round(old, 2), "new_seconds": round(self.interval, 2),
+                   "consecutive_failures": self.consecutive_failures,
+                   "not_before_utc": self.not_before or None})
+        self._save_state(reason)
 
-                transient = status is None or (status is not None and 500 <= status <= 599)
-                if transient:
-                    self.failures += 1
-                    if self.failures >= MAX_CONSECUTIVE_FAILURES:
-                        self._pause_across_runs(300, "Three consecutive transient failures.")
-                    if attempt + 1 < MAX_ATTEMPTS_PER_URL:
-                        self._wait(random.uniform(*RETRY_PAUSE_SECONDS), "Transient failure backoff")
-                        continue
-                    return None
-                self.failures = 0
-                if status in (301, 302, 303, 307, 308):
-                    location = headers.get("location")
-                    if not location:
-                        raise RetrievalStopped("Redirect without Location.")
-                    url = urllib.parse.urljoin(url, location)
-                    break  # Redirect is checked and paced as a separate request.
-                if status == 200:
-                    return body, url
-                self.emit({"kind": "unverified_page", "url": url, "status": status})
-                return None
-            else:
-                return None
-        raise RetrievalStopped("Too many archive redirects; stopped.")
+    def _check_robots(self):
+        """HTTP 404 means no robots rules were published at this endpoint."""
+        if self.robots_checked:
+            return
+        url = ARCHIVE_ORIGIN + "/robots.txt"
+        self._validate_url(url)
+        self._pace()
+        status, headers, body, error = self._once(url)
+        self.last_request_finished = time.monotonic()
+        headers = {k.lower(): v for k, v in headers.items()}
+        self.emit({"kind": "robots_attempt", "url": url, "status": status, "error": error})
 
-    def get(self, url):
-        if not self.policy_reviewed:
-            raise RetrievalStopped(
-                "Review published archive crawling guidance before using --policy-reviewed."
-            )
-        if self.robot_rules is None:
-            result = self._download(ARCHIVE_ORIGIN + "/robots.txt", checking_robots=True)
-            if result is None:
-                raise RetrievalStopped("robots.txt could not be verified; no source-page retrieval.")
-            body, _ = result
+        if status == 404:
+            rules = urllib.robotparser.RobotFileParser()
+            rules.parse([])
+            self.robot_rules = rules
+            self.robots_checked = True
+            self._success()
+            self.emit({"kind": "robots_absent", "status": 404,
+                       "meaning": "No published robots.txt rules at this endpoint"})
+            return
+        if status == 200:
             text = body.decode("utf-8", errors="replace")
             if "<html" in text.lower() or "<!doctype html" in text.lower():
-                raise RetrievalStopped("robots.txt returned HTML; manual review required.")
+                raise RetrievalStopped("robots.txt returned HTML; source retrieval stopped.")
             rules = urllib.robotparser.RobotFileParser()
             rules.parse(text.splitlines())
             self.robot_rules = rules
@@ -203,6 +235,65 @@ class ArchiveClient:
                 float(delay or 0),
                 rate.seconds / rate.requests if rate and rate.requests else 0,
             )
-            self.emit({"kind": "robots_checked", "minimum_interval_seconds": self.robot_interval})
-        return self._download(url)
+            self.robots_checked = True
+            self._success()
+            self.emit({"kind": "robots_checked",
+                       "minimum_interval_seconds": self.robot_interval})
+            return
+
+        retry_after = retry_after_seconds(headers.get("retry-after"), time.time())
+        self._failure("robots.txt could not be verified", retry_after=retry_after)
+        raise RetrievalStopped(
+            f"robots.txt check returned {status or error}; source retrieval stopped."
+        )
+
+    def get(self, url):
+        """Return (body, effective_url), or None while recording an unresolved request."""
+        if not self.archive_use_acknowledged:
+            raise RetrievalStopped(
+                "Set archive_use_acknowledged=True after reviewing the notebook parameters."
+            )
+        self._check_robots()
+
+        for redirect_number in range(MAX_REDIRECTS + 1):
+            self._validate_url(url)
+            if self.robot_rules is not None and not self.robot_rules.can_fetch(ROBOT_AGENT, url):
+                raise RetrievalStopped("robots.txt disallows this archive URL.")
+            self._pace()
+            status, headers, body, error = self._once(url)
+            self.last_request_finished = time.monotonic()
+            headers = {k.lower(): v for k, v in headers.items()}
+            self.emit({"kind": "http_attempt", "url": url, "status": status,
+                       "error": error, "interval_seconds": round(self.interval, 2)})
+
+            if status == 200:
+                self._success()
+                return body, url
+
+            if status in (301, 302, 303, 307, 308):
+                location = headers.get("location")
+                if not location:
+                    self._failure("redirect without Location")
+                    return None
+                self._success()
+                url = urllib.parse.urljoin(url, location)
+                continue
+
+            retry_after = retry_after_seconds(headers.get("retry-after"), time.time())
+            if status == 429:
+                self._failure("HTTP 429", retry_after=max(300.0, retry_after or 0.0))
+                return None
+            if status in (401, 403, 451):
+                self._failure(f"HTTP {status}", retry_after=retry_after)
+                return None
+            if status is None or 500 <= status <= 599:
+                self._failure(error or f"HTTP {status}", retry_after=retry_after)
+                return None
+
+            # Includes 404: captures can be inconsistent across timestamps.
+            self._failure(f"HTTP {status}", retry_after=retry_after)
+            return None
+
+        self._failure("too many redirects")
+        return None
 

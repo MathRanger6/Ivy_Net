@@ -1,0 +1,18 @@
+{
+  "directory_codes": 168,
+  "completed_codes": 168,
+  "unresolved_codes": 0,
+  "directory_pass_finished": true,
+  "last_pass_number": 2,
+  "stopped_reason": null,
+  "candidate_rows_across_completed_reports_not_deduplicated": 3041,
+  "codes_with_added_names_vs_county_label": 44,
+  "added_name_occurrences_not_unique_students": 78,
+  "codes_with_component_disagreements": 0,
+  "codes_with_county_names_missing_from_school": 2,
+  "cautions": [
+    "Unresolved means retrieval incomplete, not source record absent.",
+    "Counts across school reports are not assumed disjoint.",
+    "A full graduating-cohort denominator remains unavailable."
+  ]
+}

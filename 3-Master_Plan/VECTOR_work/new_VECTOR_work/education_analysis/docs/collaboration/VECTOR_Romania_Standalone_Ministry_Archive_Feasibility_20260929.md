@@ -1,11 +1,21 @@
 # Romania Ministry archive: can it stand alone?
 ## Bounded feasibility findings — September 29, 2026
 
-**Decision in plain English:** Yes, the recovered 2001 records justify treating the Ministry archive as a possible independent dataset. We no longer require a connection to the anonymous American Economic Review (AER) replication files. We have demonstrated local feasibility, not recovered a complete national research dataset.
+**Decision in plain English:** Yes, the recovered 2001 records justify treating the Ministry archive as a possible independent dataset. We no longer require a connection to the anonymous American Economic Review (AER) replication files. The follow-on Alba audit recovered reports for all 168 source-directory origin-school codes. This passes the archive-retrieval and report-correspondence gate; it does not establish a complete population of every eighth-grade classmate.
 
-**Strongest evidence:** All six candidate pages in the inspected Alba county report family survive, containing 2,982 displayed records. For one explicitly identified originating gymnasium, its candidate and placement reports can be connected exactly for all 78 listed students. That supplies the separate examination score, school-grade average, admission composite, origin school, and destination school/track together.
+**Strongest evidence:** All six candidate pages in the inspected Alba county report family survive, containing 2,982 displayed records. All 168 school-specific candidate reports listed in the Ministry's Alba origin-school directory were recovered. Across the name correspondences that can be compared directly, the admission composite, examination score, and school-grade average have zero disagreements. Forty-four school reports add 78 applicant occurrences absent from their Alba county-labelled groups; companion placement reports locate all 78. This demonstrates that school reports recover genuine cross-county placements that a county-only construction would omit.
 
-**What remains uncertain:** Whether enough complete origin-school cohorts can be recovered without selectively losing students or schools. National archive completeness, geographic consistency, and permission for broader reuse are not established. No substantive experiment has run.
+**What remains uncertain:** These reports describe participating applicants associated with an originating gymnasium. They do not prove that every eighth-grade graduate or every student following another admissions route is present. Two source codes also share the same printed Căpâlna school label and must remain code-distinguished. National archive completeness, geographic consistency, and permission for broader reuse are not established. No substantive experiment has run.
+
+### Completion addendum — Alba 2001 structural audit
+
+The resumable audit completed on its second pass with **168 of 168 directory codes recovered and zero unresolved addresses**. The school reports contain 3,041 row occurrences before any cross-report deduplication. That number must not be called 3,041 unique students, because source reports can overlap and same-name schools require code-level treatment.
+
+For 2,963 directly comparable name occurrences, the school-specific and county reports agree on the admission composite, national examination average, and grades 5–8 average in every case. The 78 additional applicant occurrences span 44 origin-school reports. Every additional occurrence was found in the corresponding placement report; none was silently treated as missing. The largest difference occurs for source code 149, whose school report contains 13 applicants while only four appear under its Alba county label, leaving nine placements recovered through the school-specific view.
+
+The only apparent county-to-school omissions occur under the duplicated printed label `SCOALA GENERALA CLASELE I - VIII CAPILNA`, which is represented by source codes 189 and 226. This is a source-identity issue to preserve, not evidence that those printed names disappeared from the archive.
+
+Direct outputs: [final summary](../../outputs/romania_alba_2001_structural_audit_20260929/origin_report_check_summary.json), [empty unresolved queue](../../outputs/romania_alba_2001_structural_audit_20260929/unresolved_addresses.json), and [append-only school checkpoints](../../outputs/romania_alba_2001_structural_audit_20260929/origin_report_checks.jsonl). These outputs contain aggregate diagnostics rather than student names.
 
 This report supersedes the earlier [origin-school recovery checkpoint](VECTOR_Romania_Origin_School_Recovery_Findings_20260929.md), specifically its replication-linkage gate, its failure to recover 2002 tables, and its suggestion that a CNP heading might provide a usable identifier. Scholar's documents remain unchanged.
 
@@ -128,13 +138,13 @@ The methodology associated with Order 4857 of November 1, 2002, Article 4, for 2
 
 These issues are feasibility conditions, not evidence for or against congestion.
 
-## 6. Recommended next decision
+## 6. Completed gate and next decision
 
-**Concentrate on 2001 and keep the replication crosswalk secondary.** It is the only inspected year with both score components and a demonstrated local connection to placement.
+**Concentrate on 2001 and keep the replication crosswalk secondary.** It is the only inspected year with both score components and a demonstrated county-wide origin-to-placement architecture.
 
-The smallest useful next step would be a bounded **Alba 2001 construction-and-completeness audit**, using the original school-specific reports and their explicit codes. Its purpose would be to establish whether candidate and destination information can be connected across the county's participating origin schools, how many students are missing or ambiguous, and whether cross-county reporting truncates those schools. It should stop before calculating sorting or comparing outcomes.
+The bounded Alba 2001 construction-and-completeness audit is now complete. It shows that candidate and destination information can be connected across all 168 source-directory origin-school codes and that school-specific reports repair cross-county truncation in the Alba-labelled county list. The defensible population is still **participating applicants associated with each coded gymnasium**, not every classmate or gymnasium graduate.
 
-That would produce a clear yes/no gate: a defensible local applicant dataset, or a documented reason to stop and seek an extract. It would not justify calling the result nationally representative or using it as a complete population of classmates.
+The next decision is scientific rather than archival: define the precise applicant population, the high-school/track opportunity being treated as scarce, its relevant competitors and capacity, and the interpretation of the two post-gymnasium score components. Only after that specification is agreed should any sorting, congestion, or selection calculation run.
 
 If archival reconstruction becomes disproportionate, the shortest request is to the paper's authors for a **de-identified original admissions extract**, with year, origin-school code, exam component, grades 5–8 component, destination school/track, allocation round, and geography. Ask for documentation of coverage and the 75/25 versus equal-weight description. A link to their anonymous replication files is optional unless we later need a variable that the admissions source lacks.
 
@@ -146,5 +156,4 @@ Python in the existing sports_net environment retrieved and inspected a bounded 
 
 The saved [audit metadata](../../outputs/romania_archive_feasibility_20260929/verified_2001_audit_metadata.json) contain source URLs, hashes, counts, and diagnostics, not student names or raw personal records. The unusable CNP-based join output is explicitly excluded. Original data, replication code, and Scholar documents are unchanged.
 
-**Current stopping point:** Standalone feasibility is demonstrated locally for 2001; national completeness and a research-ready cohort are not established. Further reconstruction and any substantive experiment require a new explicit execution decision.
-
+**Current stopping point:** The complete Alba source-directory report family is recoverable for 2001, and its internal score and placement correspondence passes this structural audit. Full graduating-cohort coverage, national completeness, and the substantive estimand are not established. Any sorting, congestion, or selection analysis requires a new explicit execution decision.

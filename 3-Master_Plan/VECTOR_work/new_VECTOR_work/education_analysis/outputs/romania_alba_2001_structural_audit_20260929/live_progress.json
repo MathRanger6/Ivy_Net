@@ -1,0 +1,14 @@
+{
+  "updated_utc": "2026-09-29T21:17:46.110355+00:00",
+  "pass_number": 2,
+  "passes_planned": 3,
+  "attempted_this_pass": 5,
+  "pending_at_pass_start": 5,
+  "pass_percent": 100.0,
+  "completed_school_codes": 168,
+  "total_school_codes": 168,
+  "currently_unresolved_or_unattempted": 0,
+  "elapsed_seconds_this_pass": 49.82312799999636,
+  "estimated_seconds_remaining_this_pass": 0.0,
+  "current_request_interval_seconds": 2.6003676990254267
+}

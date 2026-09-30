@@ -14,10 +14,25 @@ SOURCE="http://www.edu.ro/adm2001/"
 STAMP="20020816151117"
 CLIENT=None
 
-def configure_retrieval(policy_reviewed=False):
+def configure_retrieval(
+    archive_use_acknowledged=False,
+    *,
+    initial_interval_seconds=2.0,
+    minimum_interval_seconds=1.2,
+    maximum_interval_seconds=60.0,
+    max_runtime_hours=6.0,
+):
     global CLIENT
     OUT.mkdir(parents=True,exist_ok=True)
-    CLIENT=ArchiveClient(OUT,emit,policy_reviewed=policy_reviewed)
+    CLIENT=ArchiveClient(
+        OUT,
+        emit,
+        archive_use_acknowledged=archive_use_acknowledged,
+        initial_interval_seconds=initial_interval_seconds,
+        minimum_interval_seconds=minimum_interval_seconds,
+        maximum_interval_seconds=maximum_interval_seconds,
+        max_runtime_hours=max_runtime_hours,
+    )
 
 def emit(x):
     x={"utc":datetime.datetime.now(datetime.timezone.utc).isoformat(),**x}
@@ -71,12 +86,12 @@ def numeric(row,term):
     try:return float(col(row,term).replace(",","."))
     except ValueError:return None
 
-def main(policy_reviewed=False):
+def main(archive_use_acknowledged=False):
     OUT.mkdir(parents=True,exist_ok=True)
     final=OUT/"summary_v2.json"
     if final.exists():
         print("Completed checkpoint exists; no network rerun. "+str(final));return
-    configure_retrieval(policy_reviewed)
+    configure_retrieval(archive_use_acknowledged)
     emit({"kind":"start","scope":"Alba 2001 structure only","schema_version":2,
           "script_sha256":hashlib.sha256(Path(__file__).read_bytes()).hexdigest()})
     directory=fetch("raport_scoli_din_judet.asp-cj=AB&nj=ALBA&idx=0.htm","origin_directory")
@@ -172,11 +187,11 @@ def main(policy_reviewed=False):
     emit({"kind":"completed",**summary})
 if __name__=="__main__":
     parser=argparse.ArgumentParser();parser.add_argument("--run",action="store_true")
-    parser.add_argument("--policy-reviewed",action="store_true",
-                        help="Use only after reviewing the archive's published crawling guidance.")
+    parser.add_argument("--archive-use-acknowledged",action="store_true",
+                        help="Confirm review of the archive-access settings.")
     args=parser.parse_args()
     if args.run:
-        try:main(args.policy_reviewed)
+        try:main(args.archive_use_acknowledged)
         except (RetrievalStopped,KeyboardInterrupt) as error:
             emit({"kind":"stopped","reason":str(error) or "Interrupted by user"})
             raise SystemExit(2)
