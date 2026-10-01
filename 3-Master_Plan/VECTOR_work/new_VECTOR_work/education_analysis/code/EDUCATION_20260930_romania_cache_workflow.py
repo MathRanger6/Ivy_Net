@@ -118,7 +118,7 @@ def _event_writer(event: dict) -> None:
     if kind == "adaptive_pace" and event.get("direction") == "slower":
         print(f"  Archive slowed after a failed request: {event['new_seconds']:.1f} seconds between requests.", flush=True)
     elif kind == "retrieval_wait" and event.get("seconds", 0) >= 10:
-        print(f"  Archive wait: {event['seconds']:.1f} seconds ({event.get('reason', 'backoff')}).", flush=True)
+        print(f"  Archive wait: {event['seconds']:.1f} seconds ({event.get('reason', 'backoff')}). {event.get('timing', '')}", flush=True)
     elif kind == "http_attempt" and event.get("status") not in (200, 302):
         print(f"  Request unresolved: HTTP {event.get('status')}, {event.get('error') or 'no further detail'}. Retrying later.", flush=True)
 

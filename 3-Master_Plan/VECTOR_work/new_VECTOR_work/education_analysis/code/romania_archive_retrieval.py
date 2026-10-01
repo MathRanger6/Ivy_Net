@@ -18,6 +18,7 @@ import urllib.parse
 import urllib.request
 import urllib.robotparser
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 USER_AGENT = (
     "RomaniaEducationResearch/1.0 "
@@ -36,6 +37,7 @@ SPEED_UP_FACTOR = 0.90
 FAILURE_SLOWDOWN_FACTOR = 1.75
 JITTER_FRACTION = 0.10
 MAX_REDIRECTS = 5
+LOG_TIMEZONE = ZoneInfo("America/New_York")
 
 
 class RetrievalStopped(RuntimeError):
@@ -153,15 +155,30 @@ class ArchiveClient:
         seconds = max(0.0, float(seconds))
         if time.monotonic() + seconds + CONNECTION_TIMEOUT_SECONDS > self.deadline:
             raise RetrievalStopped("Configured run-time limit reached; checkpoints preserved.")
+        # Calculate both timestamps once for this pause, including its remaining
+        # duration when resuming a persisted backoff. UTC arithmetic also handles
+        # a pause spanning a daylight-saving change correctly.
+        started_utc = datetime.datetime.now(datetime.timezone.utc)
+        started = started_utc.astimezone(LOG_TIMEZONE)
+        resume = (started_utc + datetime.timedelta(seconds=seconds)).astimezone(LOG_TIMEZONE)
+        timing = {
+            "pause_started_at": started.isoformat(),
+            "expected_resume_at": resume.isoformat(),
+            "timezone": LOG_TIMEZONE.key,
+            "timing": (
+                f"\nPaused: {started:%Y-%m-%d %H:%M:%S %Z} | "
+                f"Resume expected: {resume:%Y-%m-%d %H:%M:%S %Z}"
+            ),
+        }
         if seconds:
-            self.emit({"kind": "retrieval_wait", "seconds": round(seconds, 1), "reason": reason})
+            self.emit({"kind": "retrieval_wait", "seconds": round(seconds, 1), "reason": reason, **timing})
         remaining = seconds
         while remaining > 0:
             step = min(remaining, 15.0)
             time.sleep(step)
             remaining -= step
             if remaining >= 15:
-                self.emit({"kind": "retrieval_wait_remaining", "seconds": round(remaining, 1)})
+                self.emit({"kind": "retrieval_wait_remaining", "seconds": round(remaining, 1), **timing})
 
     def wait_between_passes(self, seconds, pass_number):
         """Pause before revisiting unresolved addresses."""

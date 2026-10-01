@@ -179,7 +179,7 @@ def _event(event):
     if event.get("kind") == "adaptive_pace":
         print(f"  Request spacing now {event['new_seconds']:.2f} seconds.", flush=True)
     elif event.get("kind") == "retrieval_wait" and event.get("seconds", 0) >= 10:
-        print(f"  Waiting {event['seconds']:.0f} seconds: {event.get('reason', 'archive pacing')}.", flush=True)
+        print(f"  Waiting {event['seconds']:.0f} seconds: {event.get('reason', 'archive pacing')}. {event.get('timing', '')}", flush=True)
 
 
 def acquire_placements(*, live=False, initial_interval_seconds=2.0,

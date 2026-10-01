@@ -141,7 +141,8 @@ def make_event_writer(path: Path):
             print(f"  ARCHIVE EVENT: {kind}: {record.get('error') or record.get('reason')}", flush=True)
         elif kind == "retrieval_wait" and float(record.get("seconds", 0)) >= 10:
             print(
-                f"  ARCHIVE WAIT: {record['seconds']:.1f}s — {record.get('reason', 'backoff')}",
+                f"  ARCHIVE WAIT: {record['seconds']:.1f}s — {record.get('reason', 'backoff')}. "
+                f"{record.get('timing', '')}",
                 flush=True,
             )
     return emit

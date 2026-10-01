@@ -253,7 +253,8 @@ def _write_event(event: dict) -> None:
     elif kind == "retrieval_wait" and event.get("seconds", 0) >= 10:
         print(
             f"  Archive wait: {event['seconds']:.1f}s "
-            f"({event.get('reason', 'backoff')}).",
+            f"({event.get('reason', 'backoff')}). "
+            f"{event.get('timing', '')}",
             flush=True,
         )
     elif kind == "http_attempt" and event.get("status") not in (200, 302):
