@@ -57,6 +57,13 @@ def now_utc() -> str:
     return datetime.now(timezone.utc).isoformat()
 
 
+def announce_new_source(label: str, row_count: int | None = None) -> None:
+    """Distinguish a newly saved download from an already cached checkpoint."""
+    saved_at = datetime.now().astimezone().strftime("%Y-%m-%d %H:%M:%S %Z")
+    rows = f"; {row_count:,} rows" if row_count is not None else ""
+    print(f"  NEW SOURCE SAVED {saved_at}: {label}{rows}", flush=True)
+
+
 def canonical_bytes(value) -> bytes:
     return json.dumps(
         value, ensure_ascii=False, sort_keys=True, separators=(",", ":")
@@ -297,6 +304,7 @@ def _save_special(
         "raw_html_base64": base64.b64encode(raw).decode("ascii"),
     })
     atomic_json(path, value)
+    announce_new_source("national county directory")
     return value
 
 
@@ -411,6 +419,7 @@ def crawl_family(
                 continue
             atomic_json(path, value)
             verified_page(path, relative=relative, kind=family)
+            announce_new_source(f"{code} {family}", value["row_count"])
         pages.append({
             "relative_source": relative,
             "file": str(path.relative_to(CACHE)),
@@ -419,7 +428,8 @@ def crawl_family(
         })
         if len(pages) == 1 or len(pages) % 5 == 0:
             print(
-                f"    {code} {family}: {len(pages)} pages checkpointed, "
+                f"    {code} {family}: {len(pages)} saved pages verified "
+                f"(including earlier checkpoints), "
                 f"{sum(page['rows'] for page in pages):,} rows so far; "
                 f"{len(queue)} discovered pages waiting.",
                 flush=True,
@@ -582,6 +592,7 @@ def acquire(
                     "raw_html_base64": base64.b64encode(raw).decode("ascii"),
                 })
                 atomic_json(menu_path, menu)
+                announce_new_source(f"{code} county menu")
 
             family_results = {}
             prior_manifest_path = CACHE / "county_manifests" / f"{code}.json"
