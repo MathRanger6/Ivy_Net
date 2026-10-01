@@ -30,6 +30,7 @@ DEFAULT_INITIAL_INTERVAL_SECONDS = 2.0
 DEFAULT_MINIMUM_INTERVAL_SECONDS = 1.2
 DEFAULT_MAXIMUM_INTERVAL_SECONDS = 60.0
 DEFAULT_MAX_RUNTIME_HOURS = 6.0
+PACING_STATE_VERSION = 2
 SUCCESS_STREAK_TO_SPEED_UP = 10
 SPEED_UP_FACTOR = 0.90
 FAILURE_SLOWDOWN_FACTOR = 1.75
@@ -102,20 +103,36 @@ class ArchiveClient:
         self.robots_checked = False
         self.state_path = self.output_directory / "retrieval_adaptive_state.json"
         self.not_before = 0.0
+        self.last_status = None
+        self.last_error = None
+        self.last_url = None
 
         if self.state_path.exists():
             try:
                 state = json.loads(self.state_path.read_text())
-                self.interval = min(
-                    self.maximum_interval,
-                    max(self.minimum_interval, float(state.get("interval_seconds", self.interval))),
-                )
-                self.not_before = float(state.get("not_before_utc", 0.0))
+                # Version 1 treated missing archived captures (HTTP 404) as
+                # server pressure and could persist an unnecessarily long
+                # interval. Ignore that old state once after this correction.
+                if state.get("state_version") == PACING_STATE_VERSION:
+                    self.interval = min(
+                        self.maximum_interval,
+                        max(
+                            self.minimum_interval,
+                            float(state.get("interval_seconds", self.interval)),
+                        ),
+                    )
+                    self.not_before = float(state.get("not_before_utc", 0.0))
+                else:
+                    self.emit({
+                        "kind": "adaptive_state_reset",
+                        "reason": "Earlier pacing state predates neutral 404 handling",
+                    })
             except (OSError, ValueError, TypeError, json.JSONDecodeError):
                 self.emit({"kind": "adaptive_state_ignored", "reason": "Unreadable state file"})
 
     def _save_state(self, reason):
         self.state_path.write_text(json.dumps({
+            "state_version": PACING_STATE_VERSION,
             "saved_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),
             "interval_seconds": self.interval,
             "not_before_utc": self.not_before,
@@ -261,6 +278,9 @@ class ArchiveClient:
                 raise RetrievalStopped("robots.txt disallows this archive URL.")
             self._pace()
             status, headers, body, error = self._once(url)
+            self.last_status = status
+            self.last_error = error
+            self.last_url = url
             self.last_request_finished = time.monotonic()
             headers = {k.lower(): v for k, v in headers.items()}
             self.emit({"kind": "http_attempt", "url": url, "status": status,
@@ -290,10 +310,24 @@ class ArchiveClient:
                 self._failure(error or f"HTTP {status}", retry_after=retry_after)
                 return None
 
-            # Includes 404: captures can be inconsistent across timestamps.
+            if status in (404, 410):
+                # A missing historical capture is a property of this archived
+                # URL/timestamp, not evidence that the server wants us to slow
+                # down. Preserve the interval and let the caller search another
+                # capture timestamp.
+                self.success_streak = 0
+                self.consecutive_failures = 0
+                self.emit({
+                    "kind": "capture_missing",
+                    "status": status,
+                    "url": url,
+                    "interval_seconds": round(self.interval, 2),
+                })
+                self._save_state(f"HTTP {status} archived capture missing")
+                return None
+
             self._failure(f"HTTP {status}", retry_after=retry_after)
             return None
 
         self._failure("too many redirects")
         return None
-

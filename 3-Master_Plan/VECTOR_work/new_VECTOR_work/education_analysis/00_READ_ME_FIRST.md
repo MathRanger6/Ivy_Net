@@ -2,7 +2,9 @@
 
 **Created:** 2026-09-28  
 **Last synced:** 2026-09-30  
-**Current mission:** Run the first descriptive HERO of realized selective program placement against originating-gymnasium peer examination performance. The differentiation gate is complete and the success/denominator choices are agreed. The new placement-and-HERO notebook is implemented and tested offline; the empirical run remains for Charles to start in Cursor.
+**Current mission after PD44:** Romania national acquisition is a bounded background task using the frozen Alba definitions and existing source-completeness gates. Dissertation drafting, beginning with the model chapter, is now the foreground priority. National outcome analysis requires satisfactory source gates **and Charles's explicit authorization**. Do not broaden or retune the analysis.
+
+**Priority record:** See the [PD44 dissertation work map and model-chapter outline](../VECTOR_PD44_Dissertation_Work_Map_and_Model_Chapter_Outline.md). The [Alba findings and national-expansion update](docs/collaboration/VECTOR_Romania_Alba_Findings_and_National_Expansion_Update_20260930.md) preserves the earlier exploratory findings and acquisition context. The dated workflow and “run next” entries below are historical checkpoints; their earlier no-HERO statements and execution prompts do not describe the current state or authorize national analysis. This September 30 priority update changed documentation only.
 
 This folder isolates all new VECTOR education work from the original NELS:88 and HS&B:80 panels, the September 22 sandboxes, and the basketball assortativity investigation.
 

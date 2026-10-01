@@ -2,7 +2,19 @@
 
 **Last synced:** 2026-09-30
 
-## Active checkpoint — Romania first HERO inspected, September 30
+## Active checkpoint — PD44: dissertation writing first, September 30
+
+**Controlling priority:** Begin dissertation drafting with the model chapter. The [PD44 work map and proposed model-chapter outline](VECTOR_PD44_Dissertation_Work_Map_and_Model_Chapter_Outline.md) translates the full September 30 transcript and Charles's accompanying priority update into a reviewable writing sequence. Explain ASSIGN → SCORE → SELECT, recover the development history, organize completed parameter experiments, and distinguish assumptions, documented results, verified artifacts, and unresolved claims. The final dissertation chapter arrangement remains provisional.
+
+**Background work:** Romania national acquisition remains authorized within the frozen Alba definitions and existing source-completeness gates. Do not broaden or retune the analysis. National outcome analysis requires both satisfactory source gates and Charles's explicit authorization. This documentation update did not start or restart acquisition.
+
+**Preserve Army methodology:** Promotion timing, censoring, survival, and competing risks remain dissertation-relevant. Their eventual chapter placement is open. Verify estimator identity before describing a result as Fine–Gray; existing documentation distinguishes empirical cumulative incidence from fitted Cox analyses.
+
+**Immediate next decision:** Review the proposed model-chapter outline, then begin its opening architecture section. Use writing to identify specific unsupported statements and bounded evidence gaps. No new model experiments, fitting, national outcome analysis, or repository restructuring is authorized by this update.
+
+**History rule:** All checkpoints and older “current,” “next,” or authorization statements below are dated history. They do not override this PD44 checkpoint. The Alba results remain useful exploratory evidence; education is no longer the main foreground task.
+
+## Earlier checkpoint — Romania first HERO inspected, September 30
 
 **Current implementation update:** The first notebook settings cell now exposes `REQUIRE_FULL_PROGRAMS = True` and `COMBINE_PROGRAM_CATEGORIES = False`. Turning the first off admits partially filled programs with a finite observed cutoff and at least one admitted student. Turning the second on reranks within mathematics/sciences, social sciences/philology, and technology/vocational; it does not merely change labels. Charles's current `TOP_PROGRAM_TIERS = 1` and vocational-exclusion setting were preserved. The original saved population and bin boundaries remain the comparison reference, and outputs record each setting separately. Vocational exclusion now explicitly reports both applicants and successes removed, because vocational programs can qualify when full occupancy is not required. Twenty synthetic tests passed; VECTOR did not run the empirical analysis. Details are in the final section of the HERO decision record.
 
@@ -135,7 +147,7 @@ How do assortative assignment, congestion, and selection scarcity $K/N$ interact
 
 ## Current advisor priorities
 
-PD42 (September 28) is the current direction. It identifies the unresolved basketball cancellation question but ends with an explicit switch to education rather than further open-ended basketball work. PD41 supplies the education rationale: distinguish high-school standing, college access or destination, and later completion, with college selectivity or prestige as a possible missing outcome. PD30's Big Fish “back burner” status remains historical context rather than the current priority. Education work retains the earlier time and overfitting guardrails: use the existing panels first, accept a null or monotonic result, and do not search indefinitely for a downturn. [S1; S2 §1; S5]
+PD44 (September 30) supersedes the earlier education-first sequencing. Draft the dissertation now, beginning with the model chapter and preserving dissertation-level explanations of architecture, parameters, regimes, and model-development history. Keep bounded Romania acquisition in the background; national outcome analysis remains separately gated. Preserve Army survival/competing-risk methodology even if the journal paper later compresses or omits it. The controlling source is `transcripts/20260930_Paper_Directions_44_otter_ai_transcript.docx`, especially 03:56–08:43 and 09:10–14:02, together with Charles's accompanying priority update. See the [PD44 work map](VECTOR_PD44_Dissertation_Work_Map_and_Model_Chapter_Outline.md). PD42, PD41, and PD30 below remain historical context, not competing current instructions.
 
 ## Established evidence and present baseline
 

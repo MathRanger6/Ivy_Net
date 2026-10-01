@@ -94,11 +94,19 @@ def prepare_cache() -> None:
     os.chmod(PAGES, 0o700)
 
 
-def archive_url(relative: str) -> str:
+def original_url(relative: str) -> str:
     cleaned = relative.lstrip("./")
-    original = SOURCE + cleaned
+    return SOURCE + cleaned
+
+
+def replay_url(relative: str, timestamp: str = STAMP, original: str | None = None) -> str:
+    original = original or original_url(relative)
     safe_original = urllib.parse.quote(original, safe=":/?&=%-._~+")
-    return f"https://web.archive.org/web/{STAMP}id_/{safe_original}"
+    return f"https://web.archive.org/web/{timestamp}id_/{safe_original}"
+
+
+def archive_url(relative: str) -> str:
+    return replay_url(relative, STAMP)
 
 
 def normalize_relative(href: str) -> str | None:
@@ -254,9 +262,13 @@ def _write_event(event: dict) -> None:
             f"{event.get('error') or ''}",
             flush=True,
         )
-
-
 def _fetch_raw(client: ArchiveClient, relative: str) -> tuple[bytes, str] | None:
+    """Fetch the nearest replay selected by Wayback for this archived URL.
+
+    Wayback already redirects the nominal timestamp to another surviving
+    capture when one exists. A 404 is retained as a source-coverage gap for
+    later recovery from the Ministry's redundant report views.
+    """
     return client.get(archive_url(relative))
 
 
@@ -354,6 +366,7 @@ def crawl_family(
     seen = set()
     pages = []
     unresolved = []
+    unresolved_details = []
     while queue:
         relative = queue.popleft()
         if relative in seen:
@@ -365,6 +378,11 @@ def crawl_family(
             result = _fetch_raw(client, relative)
             if result is None:
                 unresolved.append(relative)
+                unresolved_details.append({
+                    "relative_source": relative,
+                    "status": client.last_status,
+                    "error": client.last_error,
+                })
                 continue
             raw, effective = result
             try:
@@ -375,6 +393,11 @@ def crawl_family(
                     "relative": relative, "error": str(error),
                 })
                 unresolved.append(relative)
+                unresolved_details.append({
+                    "relative_source": relative,
+                    "status": 200,
+                    "error": f"parse error: {error}",
+                })
                 continue
             atomic_json(path, value)
             verified_page(path, relative=relative, kind=family)
@@ -400,12 +423,33 @@ def crawl_family(
         "page_count": len(pages),
         "row_count": sum(page["rows"] for page in pages),
         "unresolved": unresolved,
+        "unresolved_details": unresolved_details,
         "complete": not unresolved,
     }
 
 
 def _menu_path(county_code: str) -> Path:
     return CACHE / "county_menus" / f"{county_code}.json"
+
+
+def _county_needs_another_network_pass(county_code: str) -> bool:
+    """Retry transient failures, while leaving fixed 404 gaps for recovery work."""
+    manifest_path = CACHE / "county_manifests" / f"{county_code}.json"
+    if not manifest_path.exists():
+        return True
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    if manifest.get("complete"):
+        return False
+    details = [
+        detail
+        for family in manifest.get("families", {}).values()
+        for detail in family.get("unresolved_details", [])
+    ]
+    # Manifests written by the first code version did not record the status;
+    # inspect them once under the corrected logic.
+    if not details:
+        return True
+    return any(detail.get("status") not in (404, 410) for detail in details)
 
 
 def county_status() -> dict:
@@ -475,8 +519,6 @@ def acquire(
 
     started = time.monotonic()
     for pass_number in range(1, retry_passes + 1):
-        if pass_number > 1:
-            client.wait_between_passes(retry_cooldown_seconds, pass_number)
         remaining = [
             county for county in counties
             if not (
@@ -486,8 +528,15 @@ def acquire(
                 ).get("complete")
             )
         ]
+        if pass_number > 1:
+            remaining = [
+                county for county in remaining
+                if _county_needs_another_network_pass(county["county_code"])
+            ]
         if not remaining:
             break
+        if pass_number > 1:
+            client.wait_between_passes(retry_cooldown_seconds, pass_number)
         print(
             f"National acquisition 2/3 — pass {pass_number}/{retry_passes}; "
             f"{len(remaining)} counties remain.",
@@ -599,9 +648,18 @@ def acquire(
         )
         print("All national core county report families are saved and verified.", flush=True)
     else:
+        retryable = [
+            county["county_code"] for county in counties
+            if _county_needs_another_network_pass(county["county_code"])
+        ]
         print(
             f"Acquisition paused with {status['remaining_counties']} counties remaining. "
-            "Run the same cell again to resume.",
+            + (
+                "Transient or parse failures remain; run the same cell again to resume."
+                if retryable
+                else "Their unresolved pages are fixed archive-coverage gaps reserved "
+                     "for redundant-report recovery."
+            ),
             flush=True,
         )
     return status
