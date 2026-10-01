@@ -43,6 +43,11 @@ PAGES = CACHE / "pages"
 SCHEMA_VERSION = 1
 MAX_CONSECUTIVE_NETWORK_FAILURES = 4
 
+# Acquisition pacing. The maximum interval and server-requested backoff remain active.
+PACE_TRIAL_RESUME_CAP_SECONDS = 30.0
+PACE_TRIAL_MIN_INTERVAL_SECONDS = 10.0
+PACE_TRIAL_RANDOM_STEP_FRACTION = 0.10
+
 FAMILIES = {
     "origin_school_directory": "raport_scoli_din_judet",
     "candidate_roster": "raport_candidati_total",
@@ -257,27 +262,29 @@ def _write_event(event: dict) -> None:
             f"  Archive slowed to {event['new_seconds']:.1f}s between requests.",
             flush=True,
         )
-    elif kind == "retrieval_wait" and event.get("seconds", 0) >= 10:
+    elif kind == "retrieval_wait":
         print(
-            f"  Archive wait: {event['seconds']:.1f}s "
-            f"({event.get('reason', 'backoff')}). "
-            f"{event.get('timing', '')}",
+            f"  Archive wait: {event['seconds']:.1f}s"
+            f"{event.get('timing', '')}\n"
+            f"  Reason: {event.get('reason', 'unspecified client pause')}",
             flush=True,
         )
-    elif kind == "http_attempt" and event.get("status") not in (200, 302):
-        print(
-            f"  Unresolved HTTP attempt: {event.get('status')} "
-            f"{event.get('error') or ''}",
-            flush=True,
-        )
-def _fetch_raw(client: ArchiveClient, relative: str) -> tuple[bytes, str] | None:
+    elif kind == "http_attempt":
+        follow_up = " (redirect follow-up)" if event.get("redirect_follow_up") else ""
+        result = f"HTTP {event['status']}" if event.get("status") is not None else "network error"
+        print(f"  Requested: {event.get('request_label', 'archived page')}{follow_up} → {result}", flush=True)
+    elif kind == "robots_absence_reused":
+        print("  Prior robots.txt 404 reused; no new robots.txt request.", flush=True)
+
+
+def _fetch_raw(client: ArchiveClient, relative: str, label: str | None = None) -> tuple[bytes, str] | None:
     """Fetch the nearest replay selected by Wayback for this archived URL.
 
     Wayback already redirects the nominal timestamp to another surviving
     capture when one exists. A 404 is retained as a source-coverage gap for
     later recovery from the Ministry's redundant report views.
     """
-    return client.get(archive_url(relative))
+    return client.get(archive_url(relative), request_label=label or relative)
 
 
 def _save_special(
@@ -289,7 +296,7 @@ def _save_special(
         if value.get("schema_version") != SCHEMA_VERSION:
             raise ValueError(f"Special checkpoint schema mismatch: {path}")
         return value
-    result = _fetch_raw(client, relative)
+    result = _fetch_raw(client, relative, "national county directory")
     if result is None:
         return None
     raw, effective = result
@@ -393,7 +400,7 @@ def crawl_family(
                 unresolved.append(relative)
                 unresolved_details.append(known_missing[relative])
                 continue
-            result = _fetch_raw(client, relative)
+            result = _fetch_raw(client, relative, f"{code} {family} page")
             if result is None:
                 unresolved.append(relative)
                 unresolved_details.append({
@@ -518,14 +525,31 @@ def acquire(
     if retry_passes < 1 or retry_cooldown_seconds < 0:
         raise ValueError("Retry passes must be positive and cooldown nonnegative")
     prepare_cache()
+    trial_minimum = max(minimum_interval_seconds, PACE_TRIAL_MIN_INTERVAL_SECONDS)
     client = ArchiveClient(
         CACHE,
         _write_event,
         archive_use_acknowledged=True,
-        initial_interval_seconds=initial_interval_seconds,
-        minimum_interval_seconds=minimum_interval_seconds,
+        initial_interval_seconds=max(initial_interval_seconds, trial_minimum),
+        minimum_interval_seconds=trial_minimum,
         maximum_interval_seconds=maximum_interval_seconds,
         max_runtime_hours=max_runtime_hours,
+        resume_interval_cap_seconds=PACE_TRIAL_RESUME_CAP_SECONDS,
+        max_http_attempts=None,
+        reuse_recorded_robots_absence=True,
+        random_adaptive_fraction=PACE_TRIAL_RANDOM_STEP_FRACTION,
+        pace_redirects=False,
+        jitter_fraction=0.0,
+    )
+
+    print(
+        f"Acquisition pacing: start at no more than "
+        f"{client.interval:.1f} seconds between HTTP requests; "
+        f"decrease randomly by up to {PACE_TRIAL_RANDOM_STEP_FRACTION:.0%} per completed page "
+        f"to a {trial_minimum:.1f}s floor; no HTTP-attempt cap. "
+        "Negative feedback increases the interval randomly by up to 10%; "
+        "explicit server backoff remains active.",
+        flush=True,
     )
 
     print("National acquisition 1/3 — recovering the official county directory.", flush=True)
@@ -571,7 +595,7 @@ def acquire(
             if menu_path.exists():
                 menu = json.loads(menu_path.read_text())
             else:
-                result = _fetch_raw(client, county["menu_relative"])
+                result = _fetch_raw(client, county["menu_relative"], f"{code} county menu")
                 if result is None:
                     print("  County menu unresolved; queued for the next pass.", flush=True)
                     continue

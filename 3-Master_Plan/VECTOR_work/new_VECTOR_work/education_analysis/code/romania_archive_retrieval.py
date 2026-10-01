@@ -80,6 +80,13 @@ class ArchiveClient:
         minimum_interval_seconds=DEFAULT_MINIMUM_INTERVAL_SECONDS,
         maximum_interval_seconds=DEFAULT_MAXIMUM_INTERVAL_SECONDS,
         max_runtime_hours=DEFAULT_MAX_RUNTIME_HOURS,
+        resume_interval_cap_seconds=None,
+        max_http_attempts=None,
+        reuse_recorded_robots_absence=False,
+        success_step_seconds=None,
+        random_adaptive_fraction=None,
+        pace_redirects=True,
+        jitter_fraction=JITTER_FRACTION,
     ):
         if minimum_interval_seconds <= 0:
             raise ValueError("minimum_interval_seconds must be positive")
@@ -87,6 +94,18 @@ class ArchiveClient:
             raise ValueError("Require minimum <= initial <= maximum interval")
         if max_runtime_hours <= 0:
             raise ValueError("max_runtime_hours must be positive")
+        if resume_interval_cap_seconds is not None and not (
+            minimum_interval_seconds <= resume_interval_cap_seconds <= maximum_interval_seconds
+        ):
+            raise ValueError("Require minimum <= resume interval cap <= maximum interval")
+        if max_http_attempts is not None and max_http_attempts < 1:
+            raise ValueError("max_http_attempts must be positive")
+        if success_step_seconds is not None and success_step_seconds <= 0:
+            raise ValueError("success_step_seconds must be positive")
+        if random_adaptive_fraction is not None and not 0 < random_adaptive_fraction < 1:
+            raise ValueError("random_adaptive_fraction must be between zero and one")
+        if not 0 <= jitter_fraction < 1:
+            raise ValueError("jitter_fraction must be between zero and one")
 
         self.output_directory = Path(output_directory)
         self.output_directory.mkdir(parents=True, exist_ok=True)
@@ -96,6 +115,12 @@ class ArchiveClient:
         self.minimum_interval = float(minimum_interval_seconds)
         self.maximum_interval = float(maximum_interval_seconds)
         self.interval = float(initial_interval_seconds)
+        self.max_http_attempts = max_http_attempts
+        self.http_attempts = 0
+        self.success_step_seconds = success_step_seconds
+        self.random_adaptive_fraction = random_adaptive_fraction
+        self.pace_redirects = pace_redirects
+        self.jitter_fraction = jitter_fraction
         self.deadline = time.monotonic() + max_runtime_hours * 3600
         self.last_request_finished = None
         self.success_streak = 0
@@ -108,6 +133,7 @@ class ArchiveClient:
         self.last_status = None
         self.last_error = None
         self.last_url = None
+        self.last_request_label = None
 
         if self.state_path.exists():
             try:
@@ -131,6 +157,44 @@ class ArchiveClient:
                     })
             except (OSError, ValueError, TypeError, json.JSONDecodeError):
                 self.emit({"kind": "adaptive_state_ignored", "reason": "Unreadable state file"})
+
+        # An explicitly bounded trial may begin faster than the saved interval.
+        # Preserve any server-requested not-before time and the normal ability
+        # to slow back down after failures.
+        if resume_interval_cap_seconds is not None and self.interval > resume_interval_cap_seconds:
+            previous = self.interval
+            self.interval = float(resume_interval_cap_seconds)
+            self.emit({"kind": "pace_trial_start", "old_seconds": previous,
+                       "new_seconds": self.interval})
+
+        # The same private acquisition log already records a completed 404
+        # robots.txt check. Reuse that result on subsequent runs of this
+        # bounded archive job; if the log is absent or inconclusive, check it.
+        if reuse_recorded_robots_absence and self._prior_robots_absence_recorded():
+            rules = urllib.robotparser.RobotFileParser()
+            rules.parse([])
+            self.robot_rules = rules
+            self.robots_checked = True
+            self.emit({"kind": "robots_absence_reused", "status": 404})
+
+    def _prior_robots_absence_recorded(self):
+        log_path = self.output_directory / "retrieval_events.jsonl"
+        if not log_path.exists():
+            return False
+        last_result = None
+        with log_path.open(encoding="utf-8") as stream:
+            for line in stream:
+                try:
+                    event = json.loads(line)
+                except json.JSONDecodeError:
+                    continue
+                if event.get("kind") == "robots_attempt":
+                    last_result = None
+                elif event.get("kind") == "robots_absent" and event.get("status") == 404:
+                    last_result = "absent"
+                elif event.get("kind") == "robots_checked":
+                    last_result = "rules_present"
+        return last_result == "absent"
 
     def _save_state(self, reason):
         self.state_path.write_text(json.dumps({
@@ -178,21 +242,33 @@ class ArchiveClient:
             time.sleep(step)
             remaining -= step
             if remaining >= 15:
-                self.emit({"kind": "retrieval_wait_remaining", "seconds": round(remaining, 1), **timing})
+                self.emit({"kind": "retrieval_wait_remaining", "seconds": round(remaining, 1),
+                           "reason": reason, **timing})
 
     def wait_between_passes(self, seconds, pass_number):
         """Pause before revisiting unresolved addresses."""
         self._wait(seconds, f"Cooldown before unresolved-address pass {pass_number}")
 
-    def _pace(self):
+    def _pace(self, next_request):
         if time.time() < self.not_before:
-            self._wait(self.not_before - time.time(), "Persisted server/backoff pause")
+            self._wait(self.not_before - time.time(),
+                       f"Saved server backoff before {next_request}")
         if self.last_request_finished is None:
             return
         base = max(self.interval, self.robot_interval)
-        jittered = base * random.uniform(1 - JITTER_FRACTION, 1 + JITTER_FRACTION)
+        jittered = base * random.uniform(1 - self.jitter_fraction, 1 + self.jitter_fraction)
         elapsed = time.monotonic() - self.last_request_finished
-        self._wait(max(0.0, jittered - elapsed), "Adaptive spacing between archive requests")
+        prior = (
+            f" after {self.last_request_label} returned HTTP {self.last_status}"
+            if self.last_request_label and self.last_status is not None else ""
+        )
+        variation = (
+            f" with ±{self.jitter_fraction:.0%} variation"
+            if self.jitter_fraction else " without random variation"
+        )
+        self._wait(max(0.0, jittered - elapsed),
+                   f"Client pacing before {next_request}{prior}; "
+                   f"{base:.1f}s target{variation}")
 
     def _once(self, url):
         """Perform one identified request; retain its body only in memory."""
@@ -214,7 +290,16 @@ class ArchiveClient:
         self.consecutive_failures = 0
         self.success_streak += 1
         old = self.interval
-        if self.success_streak >= SUCCESS_STREAK_TO_SPEED_UP:
+        if self.random_adaptive_fraction is not None:
+            self.interval = max(
+                self.minimum_interval,
+                self.interval * (1 - random.uniform(0, self.random_adaptive_fraction)),
+            )
+            self.success_streak = 0
+        elif self.success_step_seconds is not None:
+            self.interval = max(self.minimum_interval, self.interval - self.success_step_seconds)
+            self.success_streak = 0
+        elif self.success_streak >= SUCCESS_STREAK_TO_SPEED_UP:
             self.interval = max(self.minimum_interval, self.interval * SPEED_UP_FACTOR)
             self.success_streak = 0
         if self.interval != old:
@@ -226,7 +311,11 @@ class ArchiveClient:
         self.success_streak = 0
         self.consecutive_failures += 1
         old = self.interval
-        self.interval = min(self.maximum_interval, self.interval * FAILURE_SLOWDOWN_FACTOR)
+        factor = (
+            1 + random.uniform(0, self.random_adaptive_fraction)
+            if self.random_adaptive_fraction is not None else FAILURE_SLOWDOWN_FACTOR
+        )
+        self.interval = min(self.maximum_interval, self.interval * factor)
         if retry_after is not None:
             self.not_before = max(self.not_before, time.time() + retry_after)
         self.emit({"kind": "adaptive_pace", "direction": "slower", "reason": reason,
@@ -241,9 +330,11 @@ class ArchiveClient:
             return
         url = ARCHIVE_ORIGIN + "/robots.txt"
         self._validate_url(url)
-        self._pace()
+        self._pace("robots.txt check")
         status, headers, body, error = self._once(url)
         self.last_request_finished = time.monotonic()
+        self.last_status = status
+        self.last_request_label = "robots.txt"
         headers = {k.lower(): v for k, v in headers.items()}
         self.emit({"kind": "robots_attempt", "url": url, "status": status, "error": error})
 
@@ -281,27 +372,38 @@ class ArchiveClient:
             f"robots.txt check returned {status or error}; source retrieval stopped."
         )
 
-    def get(self, url):
+    def get(self, url, request_label=None):
         """Return (body, effective_url), or None while recording an unresolved request."""
         if not self.archive_use_acknowledged:
             raise RetrievalStopped(
                 "Set archive_use_acknowledged=True after reviewing the notebook parameters."
             )
         self._check_robots()
+        label = request_label or "archived page"
 
         for redirect_number in range(MAX_REDIRECTS + 1):
+            if self.max_http_attempts is not None and self.http_attempts >= self.max_http_attempts:
+                raise RetrievalStopped(
+                    f"Bounded pace trial reached {self.max_http_attempts} HTTP attempts; "
+                    "saved checkpoints are preserved."
+                )
             self._validate_url(url)
             if self.robot_rules is not None and not self.robot_rules.can_fetch(ROBOT_AGENT, url):
                 raise RetrievalStopped("robots.txt disallows this archive URL.")
-            self._pace()
+            if redirect_number == 0 or self.pace_redirects:
+                self._pace(f"{label} redirect follow-up" if redirect_number else label)
             status, headers, body, error = self._once(url)
+            self.http_attempts += 1
             self.last_status = status
             self.last_error = error
             self.last_url = url
+            self.last_request_label = label
             self.last_request_finished = time.monotonic()
             headers = {k.lower(): v for k, v in headers.items()}
             self.emit({"kind": "http_attempt", "url": url, "status": status,
-                       "error": error, "interval_seconds": round(self.interval, 2)})
+                       "error": error, "request_label": label,
+                       "redirect_follow_up": redirect_number > 0,
+                       "interval_seconds": round(self.interval, 2)})
 
             if status == 200:
                 self._success()
@@ -312,7 +414,11 @@ class ArchiveClient:
                 if not location:
                     self._failure("redirect without Location")
                     return None
-                self._success()
+                if self.pace_redirects:
+                    self._success()
+                else:
+                    self.consecutive_failures = 0
+                    self._save_state("archive redirect")
                 url = urllib.parse.urljoin(url, location)
                 continue
 
