@@ -71,7 +71,9 @@ def targets(manifest, cutoff):
             continue
         if Decimal(row["Ultima notă"].replace(",", ".")) > cutoff:
             continue
-        match = re.match(r"x+(\d+)\b", row["Liceu"], re.I)
+        # The same archived column uses both "x55 ..." and "103 ...".
+        # In either form its leading number is the destination-program code.
+        match = re.match(r"(?:x+)?(\d+)\b", row["Liceu"].strip(), re.I)
         if not match:
             raise ValueError("Cannot identify a source program code")
         code = int(match.group(1))
@@ -186,6 +188,12 @@ def write_status(status):
 
 
 def inspect_county(worker, scope, status):
+    # import pandas as pd
+    # from IPython.display import display
+    # # Display the results os all counties so far in a dataframe
+    # county_status = pd.read_csv(STATUS)
+    # display(county_status.sort_values("county").reset_index(drop=True))
+    
     county = scope["county"]
     manifest = json.loads((CACHE / "county_manifests" / f"{county}.json").read_text())
     cutoff = Decimal(scope["last_saved_score"])
@@ -259,6 +267,7 @@ def inspect_county(worker, scope, status):
     write_status(status)
     say(f"COUNTY {county}: {state}; verified {verified}/{len(expected)} reports; "
         f"absent signatures {absent}/{gap} gap; details: {result['detail']}")
+
 
 
 def main(argv=None):
