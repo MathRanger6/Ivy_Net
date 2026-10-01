@@ -1,12 +1,14 @@
 # VECTOR — Current Research State
 
-**Last synced:** 2026-09-30
+**Last synced:** 2026-10-01
 
 ## Active checkpoint — PD44: dissertation writing first, September 30
 
 **Controlling priority:** Begin dissertation drafting with the model chapter. The [PD44 work map and proposed model-chapter outline](VECTOR_PD44_Dissertation_Work_Map_and_Model_Chapter_Outline.md) translates the full September 30 transcript and Charles's accompanying priority update into a reviewable writing sequence. Explain ASSIGN → SCORE → SELECT, recover the development history, organize completed parameter experiments, and distinguish assumptions, documented results, verified artifacts, and unresolved claims. The final dissertation chapter arrangement remains provisional.
 
-**Background work:** Romania national acquisition remains authorized within the frozen Alba definitions and existing source-completeness gates. Do not broaden or retune the analysis. National outcome analysis requires both satisfactory source gates and Charles's explicit authorization. This documentation update did not start or restart acquisition.
+**Background work:** Romania national acquisition remains authorized within the frozen Alba definitions and existing source-completeness gates. Do not broaden or retune the analysis. National outcome analysis requires both satisfactory source gates and Charles's explicit authorization. The September 30 PD44 documentation update did not start or restart acquisition.
+
+**October 1 source audit:** The interrupted national run had manifests for 30 of 41 county units, with 10 complete. A bounded archive check recovered and privately checkpointed five previously throttled report pages (2,194 rows across report views). Fixed 404 gaps and additional linked pages remain; the county manifests have not yet been refreshed. The acquisition companion now skips known 404/410 addresses on resume while retaining them as unresolved. See the [national archive gap and recovery audit](education_analysis/docs/source_audit/EDUCATION_20261001_Romania_national_archive_gap_and_recovery_audit.md). This is source recovery, not a national scientific result; the PD44 writing priority and national outcome gate remain unchanged.
 
 **Preserve Army methodology:** Promotion timing, censoring, survival, and competing risks remain dissertation-relevant. Their eventual chapter placement is open. Verify estimator identity before describing a result as Fine–Gray; existing documentation distinguishes empirical cumulative incidence from fitted Cox analyses.
 

@@ -1,10 +1,12 @@
 # Education analysis workspace
 
 **Created:** 2026-09-28  
-**Last synced:** 2026-09-30  
+**Last synced:** 2026-10-01
 **Current mission after PD44:** Romania national acquisition is a bounded background task using the frozen Alba definitions and existing source-completeness gates. Dissertation drafting, beginning with the model chapter, is now the foreground priority. National outcome analysis requires satisfactory source gates **and Charles's explicit authorization**. Do not broaden or retune the analysis.
 
 **Priority record:** See the [PD44 dissertation work map and model-chapter outline](../VECTOR_PD44_Dissertation_Work_Map_and_Model_Chapter_Outline.md). The [Alba findings and national-expansion update](docs/collaboration/VECTOR_Romania_Alba_Findings_and_National_Expansion_Update_20260930.md) preserves the earlier exploratory findings and acquisition context. The dated workflow and “run next” entries below are historical checkpoints; their earlier no-HERO statements and execution prompts do not describe the current state or authorize national analysis. This September 30 priority update changed documentation only.
+
+**Latest source-only checkpoint, October 1:** The [national archive gap and recovery audit](docs/source_audit/EDUCATION_20261001_Romania_national_archive_gap_and_recovery_audit.md) records the interrupted run's completeness, five recovered previously throttled pages, remaining archive gaps, and the narrow resume procedure. National outcome analysis remains gated; the PD44 model-chapter work remains foreground.
 
 This folder isolates all new VECTOR education work from the original NELS:88 and HS&B:80 panels, the September 22 sandboxes, and the basketball assortativity investigation.
 
