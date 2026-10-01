@@ -1,0 +1,16 @@
+program_code,occupancy_admitted,program_report_rows,rows_in_saved_county,rows_absent_from_saved_county,row_count_matches_occupancy
+34,200,200,194,6,True
+1,75,75,64,11,True
+33,60,60,41,19,True
+45,75,75,73,2,True
+63,21,21,19,2,True
+41,40,40,23,17,True
+29,55,55,31,24,True
+31,12,12,4,8,True
+60,22,22,15,7,True
+53,60,60,29,31,True
+13,30,30,14,16,True
+50,47,47,29,18,True
+35,40,40,16,24,True
+48,59,59,41,18,True
+70,107,107,57,50,True
