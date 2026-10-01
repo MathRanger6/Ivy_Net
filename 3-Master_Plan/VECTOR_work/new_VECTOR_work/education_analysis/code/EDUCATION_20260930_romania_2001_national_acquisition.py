@@ -360,6 +360,7 @@ def crawl_family(
     county: dict,
     family: str,
     seed: str,
+    known_missing: dict[str, dict] | None = None,
 ) -> dict:
     code = county["county_code"]
     stem = FAMILIES[family]
@@ -368,6 +369,7 @@ def crawl_family(
     pages = []
     unresolved = []
     unresolved_details = []
+    known_missing = known_missing or {}
     while queue:
         relative = queue.popleft()
         if relative in seen:
@@ -376,6 +378,13 @@ def crawl_family(
         path = page_file(code, family, relative)
         value = verified_page(path, relative=relative, kind=family)
         if value is None:
+            # A prior HTTP 404/410 is an archived-capture gap, not transient
+            # server pressure. Keep it in the manifest without asking Wayback
+            # for the same unavailable address on every resumed pass.
+            if relative in known_missing:
+                unresolved.append(relative)
+                unresolved_details.append(known_missing[relative])
+                continue
             result = _fetch_raw(client, relative)
             if result is None:
                 unresolved.append(relative)
@@ -522,18 +531,8 @@ def acquire(
     for pass_number in range(1, retry_passes + 1):
         remaining = [
             county for county in counties
-            if not (
-                (CACHE / "county_manifests" / f"{county['county_code']}.json").exists()
-                and json.loads(
-                    (CACHE / "county_manifests" / f"{county['county_code']}.json").read_text()
-                ).get("complete")
-            )
+            if _county_needs_another_network_pass(county["county_code"])
         ]
-        if pass_number > 1:
-            remaining = [
-                county for county in remaining
-                if _county_needs_another_network_pass(county["county_code"])
-            ]
         if not remaining:
             break
         if pass_number > 1:
@@ -585,9 +584,20 @@ def acquire(
                 atomic_json(menu_path, menu)
 
             family_results = {}
+            prior_manifest_path = CACHE / "county_manifests" / f"{code}.json"
+            prior_families = (
+                json.loads(prior_manifest_path.read_text()).get("families", {})
+                if prior_manifest_path.exists() else {}
+            )
             for family in FAMILIES:
+                known_missing = {
+                    detail["relative_source"]: detail
+                    for detail in prior_families.get(family, {}).get("unresolved_details", [])
+                    if detail.get("status") in (404, 410)
+                }
                 result = crawl_family(
-                    client, county, family, menu["family_seeds"][family]
+                    client, county, family, menu["family_seeds"][family],
+                    known_missing=known_missing,
                 )
                 family_results[family] = result
                 print(
