@@ -7,7 +7,7 @@ CS,placement_views_reconciled,19,19,0,2000,2333,333,333,0,placement source views
 CT,placement_views_reconciled,56,56,0,5000,6336,1336,1336,0,placement source views reconcile; applicant completeness still unverified
 DB,placement_views_reconciled,47,47,0,2500,3669,1169,1169,0,placement source views reconcile; applicant completeness still unverified
 GL,placement_views_reconciled,45,45,0,2000,5169,3169,3169,0,placement source views reconcile; applicant completeness still unverified
-HD,unresolved,57,33,24,2500,4136,1636,892,0,program_93:http_429
+HD,unresolved,57,52,5,2500,4136,1636,1359,0,program_115:http_429; program_26:http_429; program_60:http_429; program_72:http_429; program_109:http_429
 IL,placement_views_reconciled,28,28,0,1000,2394,1394,1394,0,placement source views reconcile; applicant completeness still unverified
 MM,placement_views_reconciled,55,55,0,2000,4073,2073,2073,0,placement source views reconcile; applicant completeness still unverified
 NT,placement_views_reconciled,18,18,0,4500,4806,306,306,0,placement source views reconcile; applicant completeness still unverified

@@ -145,8 +145,11 @@ class Worker:
                 raw, effective = response.read(), response.geturl()
         except urllib.error.HTTPError as exc:
             if exc.code == 429:
-                self.stop = True
-                say(f"ARCHIVE THROTTLED (HTTP 429) at {county}/{stem}; stopping; all unresolved items retained")
+                # self.stop = True
+                # say(f"ARCHIVE THROTTLED (HTTP 429) at {county}/{stem}; stopping; all unresolved items retained")
+                say(f"ARCHIVE THROTTLED (HTTP 429) at {county}/{stem}; waiting for delay before requesting; all unresolved items retained")
+                say(f"WAIT {self.args.delay_429:.1f}s before requesting {county}/{stem}; archive request spacing")
+                time.sleep(self.args.delay_429)
             else:
                 say(f"UNRESOLVED HTTP {exc.code} at {county}/{stem}; moving to next item")
                 if exc.code == 404:
@@ -280,6 +283,8 @@ def main(argv=None):
     parser.add_argument("--max-interval", type=float, default=12)
     parser.add_argument("--retry-unresolved", action="store_true",
                         help="explicitly retry previously recorded HTTP 404 source links")
+    parser.add_argument("--delay-429", type=float, default=600,
+                        help="response 429 delay, in seconds")
     args = parser.parse_args(argv)
     if args.max_new_pages < 1 or args.max_hours <= 0 or args.min_interval < 1 or args.max_interval < args.min_interval:
         parser.error("Use positive bounds and max interval at least min interval")
