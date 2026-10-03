@@ -1,0 +1,37 @@
+county,source_school_code,school_name,sample_stratum,applicants_listed_in_county_report,school_report_relative_url
+CS,201,SCOALA GENERALA SFINTA ELENA,zero_in_county_list,0,raport_candidati_per_scoala.asp-cj=CS&nj=CARAS-SEVERIN&cs=201&ns=SCOALA+GENERALA+SFINTA+ELENA.htm
+CS,249,SCOALA GENERALA GRUNI CORNEREVA VALEA OHABA,zero_in_county_list,0,raport_candidati_per_scoala.asp-cj=CS&nj=CARAS-SEVERIN&cs=249&ns=SCOALA+GENERALA+GRUNI+CORNEREVA+VALEA+OHABA.htm
+CS,140,SCOALA GENERALA FIZES,small_listed_group,1,raport_candidati_per_scoala.asp-cj=CS&nj=CARAS-SEVERIN&cs=140&ns=SCOALA+GENERALA+FIZES.htm
+CS,143,SCOALA GENERALA BREBU,small_listed_group,2,raport_candidati_per_scoala.asp-cj=CS&nj=CARAS-SEVERIN&cs=143&ns=SCOALA+GENERALA+BREBU.htm
+CS,176,SCOALA GENERALA PADINA MATEI,small_listed_group,2,raport_candidati_per_scoala.asp-cj=CS&nj=CARAS-SEVERIN&cs=176&ns=SCOALA+GENERALA+PADINA+MATEI.htm
+CS,142,SCOALA GENERALA PRILIPET,middle_listed_group,8,raport_candidati_per_scoala.asp-cj=CS&nj=CARAS-SEVERIN&cs=142&ns=SCOALA+GENERALA+PRILIPET.htm
+CS,212,SCOALA GENERALA SLATINA TIMIS,middle_listed_group,10,raport_candidati_per_scoala.asp-cj=CS&nj=CARAS-SEVERIN&cs=212&ns=SCOALA+GENERALA+SLATINA+TIMIS.htm
+CS,222,SCOALA GENERALA TOPLET,middle_listed_group,6,raport_candidati_per_scoala.asp-cj=CS&nj=CARAS-SEVERIN&cs=222&ns=SCOALA+GENERALA+TOPLET.htm
+CS,262,SCOALA GENERALA NR 7 CARANSEBES,middle_listed_group,8,raport_candidati_per_scoala.asp-cj=CS&nj=CARAS-SEVERIN&cs=262&ns=SCOALA+GENERALA+NR+7+CARANSEBES.htm
+CS,129,SCOALA GENERALA NR 1 ORAVITA,large_listed_group,83,raport_candidati_per_scoala.asp-cj=CS&nj=CARAS-SEVERIN&cs=129&ns=SCOALA+GENERALA+NR+1+ORAVITA.htm
+CS,209,SCOALA GENERALA RUSCA MONTANA,large_listed_group,15,raport_candidati_per_scoala.asp-cj=CS&nj=CARAS-SEVERIN&cs=209&ns=SCOALA+GENERALA+RUSCA+MONTANA.htm
+CS,258,LICEUL TEORETIC MEHADIA,large_listed_group,16,raport_candidati_per_scoala.asp-cj=CS&nj=CARAS-SEVERIN&cs=258&ns=LICEUL+TEORETIC+MEHADIA.htm
+GL,154,SCOALA BALASESTI,zero_in_county_list,0,raport_candidati_per_scoala.asp-cj=GL&nj=GALATI&cs=154&ns=SCOALA+BALASESTI.htm
+GL,249,SCOALA NEGREA,zero_in_county_list,0,raport_candidati_per_scoala.asp-cj=GL&nj=GALATI&cs=249&ns=SCOALA+NEGREA.htm
+GL,151,SCOALA BURSUCANI,small_listed_group,5,raport_candidati_per_scoala.asp-cj=GL&nj=GALATI&cs=151&ns=SCOALA+BURSUCANI.htm
+GL,180,SCOALA BLINZI,small_listed_group,5,raport_candidati_per_scoala.asp-cj=GL&nj=GALATI&cs=180&ns=SCOALA+BLINZI.htm
+GL,237,SCOALA POIANA,small_listed_group,6,raport_candidati_per_scoala.asp-cj=GL&nj=GALATI&cs=237&ns=SCOALA+POIANA.htm
+GL,157,SCOALA BANEASA,middle_listed_group,10,raport_candidati_per_scoala.asp-cj=GL&nj=GALATI&cs=157&ns=SCOALA+BANEASA.htm
+GL,211,"SCOALA NR.1 IVESTI""HORTENSIA PAPADAT BENGESCU""",middle_listed_group,17,raport_candidati_per_scoala.asp-cj=GL&nj=GALATI&cs=211&ns=SCOALA+NR.1+IVESTI-HORTENSIA+PAPADAT+BENGESCU-.htm
+GL,243,"SCOALA NR.2 PISCU ""STEFAN CEL MARE""",middle_listed_group,8,raport_candidati_per_scoala.asp-cj=GL&nj=GALATI&cs=243&ns=SCOALA+NR.2+PISCU+-STEFAN+CEL+MARE-.htm
+GL,246,SCOALA REDIU,middle_listed_group,13,raport_candidati_per_scoala.asp-cj=GL&nj=GALATI&cs=246&ns=SCOALA+REDIU.htm
+GL,102,"SCOALA NR.31 ""GHEORGHE MUNTEANU"" GALATI",large_listed_group,60,raport_candidati_per_scoala.asp-cj=GL&nj=GALATI&cs=102&ns=SCOALA+NR.31+-GHEORGHE+MUNTEANU-+GALATI.htm
+GL,283,"LICEUL TEORETIC ""SPIRU HARET""     TECUCI",large_listed_group,22,raport_candidati_per_scoala.asp-cj=GL&nj=GALATI&cs=283&ns=LICEUL+TEORETIC+-SPIRU+HARET-+++++TECUCI.htm
+GL,290,"SCOALA FRUMUSITA ""PETRU RARES""",large_listed_group,20,raport_candidati_per_scoala.asp-cj=GL&nj=GALATI&cs=290&ns=SCOALA+FRUMUSITA+-PETRU+RARES-.htm
+TL,121,SCOALA CU CLASE I-VIII C.A.ROSETTI,zero_in_county_list,0,raport_candidati_per_scoala.asp-cj=TL&nj=TULCEA&cs=121&ns=SCOALA+CU+CLASE+I-VIII+C.A.ROSETTI.htm
+TL,185,SCOALA CU CLASE I-VIII VASILE ALECSANDRI,zero_in_county_list,0,raport_candidati_per_scoala.asp-cj=TL&nj=TULCEA&cs=185&ns=SCOALA+CU+CLASE+I-VIII+VASILE+ALECSANDRI.htm
+TL,135,SCOALA CU CLASE I-VIII CARAORMAN,small_listed_group,1,raport_candidati_per_scoala.asp-cj=TL&nj=TULCEA&cs=135&ns=SCOALA+CU+CLASE+I-VIII+CARAORMAN.htm
+TL,148,SCOALA CU CLASE I-VIII VALEA TEILOR,small_listed_group,4,raport_candidati_per_scoala.asp-cj=TL&nj=TULCEA&cs=148&ns=SCOALA+CU+CLASE+I-VIII+VALEA+TEILOR.htm
+TL,151,SCOALA CU CLASE I-VIII SALCIOARA,small_listed_group,1,raport_candidati_per_scoala.asp-cj=TL&nj=TULCEA&cs=151&ns=SCOALA+CU+CLASE+I-VIII+SALCIOARA.htm
+TL,130,SCOALA CU CLASE I-VIII TRAIAN,middle_listed_group,8,raport_candidati_per_scoala.asp-cj=TL&nj=TULCEA&cs=130&ns=SCOALA+CU+CLASE+I-VIII+TRAIAN.htm
+TL,140,SCOALA CU CLASE I-VIII CATALOI,middle_listed_group,10,raport_candidati_per_scoala.asp-cj=TL&nj=TULCEA&cs=140&ns=SCOALA+CU+CLASE+I-VIII+CATALOI.htm
+TL,176,SCOALA CU CLASE I-VIII SFINTU GHEORGHE,middle_listed_group,9,raport_candidati_per_scoala.asp-cj=TL&nj=TULCEA&cs=176&ns=SCOALA+CU+CLASE+I-VIII+SFINTU+GHEORGHE.htm
+TL,180,SCOALA CU CLASE I-VIII SOMOVA,middle_listed_group,14,raport_candidati_per_scoala.asp-cj=TL&nj=TULCEA&cs=180&ns=SCOALA+CU+CLASE+I-VIII+SOMOVA.htm
+TL,102,"LICEUL TEORETIC ""GRIGORE MOISIL"" TULCEA",large_listed_group,57,raport_candidati_per_scoala.asp-cj=TL&nj=TULCEA&cs=102&ns=LICEUL+TEORETIC+-GRIGORE+MOISIL-+TULCEA.htm
+TL,110,"SCOALA CU CLASE I-VIII ""GRIGORE ANTIPA"" TULCEA",large_listed_group,65,raport_candidati_per_scoala.asp-cj=TL&nj=TULCEA&cs=110&ns=SCOALA+CU+CLASE+I-VIII+-GRIGORE+ANTIPA-+TULCEA.htm
+TL,167,SCOALA CU CLASE I-VIII NICULITEL,large_listed_group,22,raport_candidati_per_scoala.asp-cj=TL&nj=TULCEA&cs=167&ns=SCOALA+CU+CLASE+I-VIII+NICULITEL.htm

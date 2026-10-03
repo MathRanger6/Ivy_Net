@@ -1,7 +1,35 @@
 # Tenure pipeline — scrape & adjudicate re-entry (for dummies)
 
-**Last synced:** 2026-09-01  
+**Last synced:** 2026-10-02  
 **Audience:** Charles, returning after a break  
+
+**Architecture (Phase 1 modules):** [`TENURE_ARCHITECTURE_AUDIT_20261002.md`](TENURE_ARCHITECTURE_AUDIT_20261002.md)
+
+---
+
+## Daily wave (Mac — ~15 min setup + run time)
+
+1. Paste URLs into `url_update_worksheet.csv` → column **`new_url`** → `./apply_url_updates.sh`
+2. **Notebook:** Cell 0 — set `RUN_CELL2`, `RUN_CELL3_CDX`, `RUN_CELL3_DOWNLOAD`, `RUN_CELL4` = `True`; **all other `RUN_CELL*` = `False`**. Optional: `WAYBACK_SLUGS = ["arizona_state_university"]` to limit 3A/3B/4 to those schools.
+3. Run **Cell 0 → 2 → 3A → 3B → 4** (3B can be `python3 tenure/run_stage3b_cli.py` instead).
+4. **CLI alternative (same code):**  
+   `python3 tenure/run_wayback_wave.py --slugs arizona_state_university --steps apply,cell2,cdx,download,parse`  
+   (runs a **post-wave report** after parse; skip with `--no-post-report`.)
+5. **Optional sanity checks:**  
+   - One URL before you paste into the worksheet:  
+     `python3 tenure/tenure_pipeline/probe_faculty_url.py --url 'https://…'`  
+   - Table after a wave:  
+     `python3 tenure/tenure_pipeline/wayback_wave_report.py --slugs arizona_state_university`
+
+**Do not daily:** Cells 5–9, OpenAlex 6B bulk, full `rebuild_plan.py --force`.  
+**School-only re-CDX:** `python3 tenure/tenure_pipeline/rebuild_plan.py --slug arizona_state_university --force` (backs up, drops that slug from plan/index, then run 3A again).
+
+**Script index:** [`tenure/scripts/README.md`](../scripts/README.md)  
+**Graduate assistants:** [`GA_GUIDE_NEW_WAYBACK_FACULTY_URLS.md`](GA_GUIDE_NEW_WAYBACK_FACULTY_URLS.md) (Wayback find → worksheet → scrape → report).
+
+**Notebook:** Cell 0 `RUN_WAVE_REPORT_AFTER_PARSE = True` prints the same report after Cell 4; call `run_wayback_url_report()` anytime after Cell 0.
+
+---
 
 **Important:** Reading this doc adds **nothing** to the corpus. **New HTML only appears after you (1) introduce new scrape candidates, then (2) run notebook cells on Rivanna.** See [If you are expanding data](#if-you-are-expanding-data--start-here) below.
 
@@ -269,7 +297,9 @@ Then on Rivanna (or Mac if small test):
 1. Cell 0: `RUN_CELL2=True`, `RUN_CELL3_CDX=True`, `RUN_CELL3_DOWNLOAD=True`, `RUN_CELL4=True` (others `False` unless you need panel refresh).
 2. Run notebook or `sbatch pipe_job.slurm`.
 
-**Clean re-CDX for one school:** see `tenure/tenure_pipeline/rebuild_plan.py` (docstring in `apply_url_updates.py`).
+**Clean re-CDX for one school:**  
+`python3 tenure/tenure_pipeline/rebuild_plan.py --slug <uni_slug> --force`  
+(use `--dry-run` first; backs up under `tenure_pipeline/backups/`). Then Cell 3A (or wave `--steps cdx,download,parse`).
 
 ---
 

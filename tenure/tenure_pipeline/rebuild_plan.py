@@ -25,6 +25,11 @@ Options
   --clear-retry-queue  Also backup and empty cdx_retry_queue.jsonl.
   --dry-run            Print actions only.
   --force              Skip the confirmation prompt (for scripts / CI).
+  --slug SLUG          Remove plan/index rows for this uni_slug only (after backup).
+                       Repeatable; can also pass comma-separated via --slugs.
+  --slugs a,b,c        Same as multiple --slug (school-scoped reset, not full truncate).
+
+Without --slug/--slugs: truncates entire plan (+ index) as before.
 
 Backups are written under:
   tenure_pipeline/backups/plan_rebuild_<timestamp>/
@@ -33,6 +38,7 @@ Backups are written under:
 from __future__ import annotations
 
 import argparse
+import json
 import shutil
 import sys
 from datetime import datetime
@@ -59,6 +65,29 @@ def _truncate(path: Path) -> None:
     path.write_text("", encoding="utf-8")
 
 
+def _filter_jsonl_by_slug(path: Path, slugs: set[str]) -> tuple[int, int]:
+    """Drop lines whose uni_slug is in slugs. Returns (kept, removed)."""
+    if not path.exists() or path.stat().st_size == 0:
+        return 0, 0
+    kept_lines: list[str] = []
+    removed = 0
+    with open(path, encoding="utf-8") as f:
+        for line in f:
+            if not line.strip():
+                continue
+            try:
+                r = json.loads(line)
+            except json.JSONDecodeError:
+                kept_lines.append(line if line.endswith("\n") else line + "\n")
+                continue
+            if r.get("uni_slug") in slugs:
+                removed += 1
+            else:
+                kept_lines.append(line if line.endswith("\n") else line + "\n")
+    path.write_text("".join(kept_lines), encoding="utf-8")
+    return len(kept_lines), removed
+
+
 def main() -> int:
     p = argparse.ArgumentParser(
         description="Backup and truncate Wayback plan/index so Cell 3A re-queries all school URLs.",
@@ -75,9 +104,25 @@ def main() -> int:
     )
     p.add_argument("--dry-run", action="store_true")
     p.add_argument("--force", action="store_true", help="Skip confirmation.")
+    p.add_argument(
+        "--slug",
+        action="append",
+        default=[],
+        help="Remove plan/index rows for this uni_slug (repeatable).",
+    )
+    p.add_argument(
+        "--slugs",
+        type=str,
+        default="",
+        help="Comma-separated uni_slug values (same as --slug).",
+    )
 
     args = p.parse_args()
     full = not args.plan_only
+    slug_set: set[str] = set(args.slug or [])
+    if args.slugs.strip():
+        slug_set.update(s.strip() for s in args.slugs.split(",") if s.strip())
+    slug_mode = bool(slug_set)
 
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")
     backup_root = TP / "backups" / f"plan_rebuild_{ts}"
@@ -88,7 +133,10 @@ def main() -> int:
     if args.clear_retry_queue:
         targets.append(("retry queue", RETRY_QUEUE))
 
-    print("Rebuild plan — will backup then truncate:")
+    if slug_mode:
+        print(f"Rebuild plan — filter out slug(s): {', '.join(sorted(slug_set))}")
+    else:
+        print("Rebuild plan — will backup then truncate:")
     for label, path in targets:
         exists = path.exists()
         size = path.stat().st_size if exists else 0
@@ -119,12 +167,20 @@ def main() -> int:
         elif path.exists() and path.stat().st_size == 0:
             print(f"  skip backup (empty): {path.name}")
 
-    for _label, path in targets:
-        _truncate(path)
-        print(f"  truncated: {path.name}")
+    if slug_mode:
+        for _label, path in targets:
+            kept, removed = _filter_jsonl_by_slug(path, slug_set)
+            print(f"  filtered {path.name}: removed {removed} row(s), kept {kept}")
+    else:
+        for _label, path in targets:
+            _truncate(path)
+            print(f"  truncated: {path.name}")
 
     print(f"\n  Done. {backed} file(s) copied to {backup_root}")
-    print("  Next: run Cell 2 → Cell 3A → 3B → 4 in 540_tenure_pipeline.ipynb.")
+    if slug_mode:
+        print("  Next: Cell 3A will re-CDX URLs for that school (untried after bookmark removal).")
+    else:
+        print("  Next: run Cell 2 → Cell 3A → 3B → 4 in 540_tenure_pipeline.ipynb.")
     return 0
 
 

@@ -1,17 +1,21 @@
 """
-test_candidates.py  —  Quick-test candidate R1 CS schools against live faculty pages.
-Run:  python3 tenure_pipeline/test_candidates.py
-Writes results to tenure_pipeline/candidate_test_results.json
+test_candidates.py  —  Batch-test live faculty URLs (not Wayback).
+
+Deprecated for single-URL Wayback checks: use probe_faculty_url.py instead:
+  python3 tenure/tenure_pipeline/probe_faculty_url.py --url 'https://…'
+
+Run (from repo root):
+  python3 tenure/tenure_pipeline/test_candidates.py
+Writes: tenure/tenure_pipeline/candidate_test_results.json
 """
 import sys, time, tempfile, json
 from pathlib import Path
-
-# Work from workspace root regardless of how the script is invoked
-_WORKSPACE = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(_WORKSPACE))
-
-from tenure_pipeline.html_parser import extract_faculty
 import urllib.request
+
+_TP = Path(__file__).resolve().parent
+sys.path.insert(0, str(_TP))
+
+from html_parser import extract_faculty
 
 CANDIDATES = [
     # --- Large flagship R1s ---
@@ -53,9 +57,13 @@ CANDIDATES = [
     ("San Diego State University",           "https://www.cs.sdsu.edu/people/"),
 ]
 
-OUT = _WORKSPACE / "tenure_pipeline" / "candidate_test_results.json"
+OUT = _TP / "candidate_test_results.json"
 
-print(f"Testing {len(CANDIDATES)} candidate schools ...\n")
+print(
+    "Note: for one URL via Wayback CDX + download + parse, use probe_faculty_url.py.\n",
+    flush=True,
+)
+print(f"Testing {len(CANDIDATES)} candidate schools (live HTTP) ...\n")
 print(f"  {'School':<50} {'N':>5}  {'Strategy':<35}  Status")
 print("  " + "-"*100)
 

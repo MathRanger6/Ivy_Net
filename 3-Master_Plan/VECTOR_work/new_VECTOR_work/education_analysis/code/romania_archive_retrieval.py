@@ -134,6 +134,8 @@ class ArchiveClient:
         self.last_error = None
         self.last_url = None
         self.last_request_label = None
+        self.last_response_headers = {}
+        self.last_response_body = b""
 
         if self.state_path.exists():
             try:
@@ -282,7 +284,7 @@ class ArchiveClient:
                 return response.status, dict(response.headers.items()), response.read(), None
         except urllib.error.HTTPError as error:
             with error:
-                return error.code, dict(error.headers.items()), b"", None
+                return error.code, dict(error.headers.items()), error.read(), None
         except (urllib.error.URLError, TimeoutError, OSError) as error:
             return None, {}, b"", str(error)
 
@@ -398,6 +400,8 @@ class ArchiveClient:
             self.last_error = error
             self.last_url = url
             self.last_request_label = label
+            self.last_response_headers = headers.copy()
+            self.last_response_body = body
             self.last_request_finished = time.monotonic()
             headers = {k.lower(): v for k, v in headers.items()}
             self.emit({"kind": "http_attempt", "url": url, "status": status,

@@ -178,7 +178,8 @@ PILOT_SCHOOLS = [
             "https://cs.rice.edu/people",
             "http://www.cs.rice.edu/CS/Faculty/",
             "http://cs.rice.edu/CS/Faculty/",
-            "http://compsci.rice.edu/people.cfm?doc_id=3460"
+            "http://compsci.rice.edu/people.cfm?doc_id=3460",
+            "https://www.cs.rice.edu/faculty"
         ],
         "notes"      : "Small CS dept; expected clean static HTML for early years",
     },
@@ -1663,7 +1664,8 @@ PILOT_SCHOOLS = [
             "https://www.bc.edu/content/bc-web/schools/morrissey/departments/computer-science/people/faculty.html",
             "https://www.bc.edu/content/bc-web/schools/mcas/departments/computer-science/faculty-and-research.html",
             "http://www.cs.bc.edu/people/faculty/",
-            "https://www.bc.edu/bc-web/schools/morrissey/departments/computer-science/people.html"
+            "https://www.bc.edu/bc-web/schools/morrissey/departments/computer-science/people.html",
+            "http://agora.bc.edu/directory/departments/811504.html"
         ],
         "notes"      : "Chestnut Hill MA; Jesuit private R1; CS in Morrissey College of Arts & Sciences (formerly MCAS); relatively small dept",
     },

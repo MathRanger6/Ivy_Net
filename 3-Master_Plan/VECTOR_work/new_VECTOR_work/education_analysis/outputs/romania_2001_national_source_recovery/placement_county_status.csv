@@ -1,5 +1,5 @@
 county,state,target_programs,verified_programs,unresolved_programs,saved_county_placements,occupancy_admitted,placement_gap,recovered_distinct_absent,duplicate_program_signatures,detail
-AG,unresolved,97,8,89,1500,6346,4846,195,0,program_24:http_429; program_21:http_429; program_20:http_500; program_27:http_500; program_57:http_500; program_56:http_500; program_67:http_503; program_60:http_500; program_58:http_503; program_23:http_503; program_53:researcher_stop
+AG,placement_views_reconciled,97,97,0,1500,6346,4846,4846,0,placement source views reconcile; applicant completeness still unverified
 B,placement_views_reconciled,297,297,0,3000,21969,18969,18969,0,placement source views reconcile; applicant completeness still unverified
 BN,placement_views_reconciled,37,37,0,1500,2842,1342,1342,0,placement source views reconcile; applicant completeness still unverified
 BR,placement_views_reconciled,43,43,0,1500,2598,1098,1098,0,placement source views reconcile; applicant completeness still unverified
@@ -18,3 +18,4 @@ SM,placement_views_reconciled,51,51,0,1500,2661,1161,1161,0,placement source vie
 SV,placement_views_reconciled,38,38,0,4500,6124,1624,1624,0,placement source views reconcile; applicant completeness still unverified
 TM,placement_views_reconciled,42,42,0,5000,5774,774,774,0,placement source views reconcile; applicant completeness still unverified
 TR,placement_views_reconciled,20,20,0,2500,3246,746,746,0,placement source views reconcile; applicant completeness still unverified
+VS,placement_views_reconciled,7,7,0,4000,4067,67,67,0,placement source views reconcile; applicant completeness still unverified

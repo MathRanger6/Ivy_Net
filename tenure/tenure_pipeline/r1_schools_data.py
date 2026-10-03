@@ -1664,7 +1664,9 @@ PILOT_SCHOOLS = [
             "https://www.bc.edu/content/bc-web/schools/morrissey/departments/computer-science/people/faculty.html",
             "https://www.bc.edu/content/bc-web/schools/mcas/departments/computer-science/faculty-and-research.html",
             "http://www.cs.bc.edu/people/faculty/",
-            "https://www.bc.edu/bc-web/schools/morrissey/departments/computer-science/people.html"
+            "https://www.bc.edu/bc-web/schools/morrissey/departments/computer-science/people.html",
+            "http://agora.bc.edu/directory/departments/811504.html",
+            "http://cs.bc.edu/allpeople"
         ],
         "notes"      : "Chestnut Hill MA; Jesuit private R1; CS in Morrissey College of Arts & Sciences (formerly MCAS); relatively small dept",
     },

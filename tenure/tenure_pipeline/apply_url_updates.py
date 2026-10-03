@@ -43,11 +43,11 @@ plan_row_type=cdx_bookmark (new) or legacy n_snaps=-1 without reason; both are
 treated as ok, not condemned.
 """
 
-import hashlib
-import json, re, csv, sys, shutil, unicodedata
+import json, csv, sys, shutil
 from pathlib import Path
 from collections import defaultdict
-from urllib.parse import urlparse
+
+from wayback.paths import faculty_source_id, normalize_faculty_url, slugify
 
 # ── Paths ─────────────────────────────────────────────────────────────────
 TP          = Path(__file__).resolve().parent
@@ -57,62 +57,6 @@ WORKSHEET   = TP / 'url_update_worksheet.csv'
 PLAN_JSONL  = TP / 'faculty_snapshots_plan.jsonl'
 PARSED_JSONL= TP / 'faculty_snapshots_parsed.jsonl'
 HTML_DIR    = TP / 'faculty_snapshots'
-
-# ── Utilities ─────────────────────────────────────────────────────────────
-def slugify(name: str) -> str:
-    name = unicodedata.normalize('NFKD', name).encode('ascii', 'ignore').decode()
-    return re.sub(r'[^a-z0-9]+', '_', name.lower()).strip('_')
-
-
-# Hosts where the bare subdomain redirects to www (plan/CDX often use www only).
-_WWW_PAIR = frozenset({
-    'cse.msu.edu',
-})
-
-
-def normalize_faculty_url(u: str) -> str:
-    """
-    Canonical key so plan rows match school-list URLs despite:
-    - http vs https, :80 / :443 in CDX output, trailing slashes,
-    - www vs non-www when the site treats them as the same faculty page,
-    - accidental paste of a full web.archive.org replay URL as a 'live' URL.
-    """
-    u = (u or '').strip()
-    if not u:
-        return ''
-    p = urlparse(u)
-    # User pasted Wayback replay link into urls[] — recover original
-    if (p.hostname or '').lower() == 'web.archive.org' and '/web/' in (p.path or ''):
-        m = re.search(r'(https?://[^\s]+)', p.path or '')
-        if m:
-            u = m.group(1).rstrip('/')
-            p = urlparse(u)
-    host = (p.hostname or '').lower()
-    if not host:
-        return u
-    if host in _WWW_PAIR:
-        host = 'www.' + host
-    path = p.path or '/'
-    if path != '/' and not path.endswith('/'):
-        path = path + '/'
-    q = (p.query or '')
-    return f'{host}{path}{("?" + q) if q else ""}'
-
-
-def faculty_source_id(url: str) -> str:
-    """
-    Stable short id for Option B storage paths:
-    faculty_snapshots/<uni_slug>/<source_id>/<year>_<season>_<timestamp>.html
-    (legacy two-part <year>_<season>.html may exist until rebuilt)
-    Derived from normalize_faculty_url() so worksheet and plan stay aligned.
-
-    On disk, ``legacy/`` (moved flat snapshots) is a normal subfolder alongside
-    each ``<source_id>/`` directory — use iter_school_html_files() to list HTML.
-    """
-    nu = normalize_faculty_url(url)
-    if not nu:
-        return 'unknown'
-    return hashlib.sha256(nu.encode('utf-8')).hexdigest()[:8]
 
 
 def load_disk_html_by_slug():

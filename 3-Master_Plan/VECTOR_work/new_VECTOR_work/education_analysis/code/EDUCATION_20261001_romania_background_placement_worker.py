@@ -47,6 +47,33 @@ def say(message):
     print(f"{datetime.now().astimezone():%Y-%m-%d %H:%M:%S %Z} | {message}", flush=True)
 
 
+def show_http_429(exc):
+    """Show the archive's complete response body and useful response headers."""
+    try:
+        body = exc.read()
+        body_error = None
+    except OSError as error:
+        body = b""
+        body_error = str(error)
+    charset = exc.headers.get_content_charset() or "utf-8"
+    try:
+        message = body.decode(charset, errors="replace")
+    except LookupError:
+        charset = "utf-8"
+        message = body.decode(charset, errors="replace")
+    # Response cookies can contain session credentials; they are not rate-limit guidance.
+    headers = "\n".join(
+        f"{key}: {value}" if key.lower() != "set-cookie" else "Set-Cookie: [redacted]"
+        for key, value in exc.headers.items()
+    )
+    say("ARCHIVE HTTP 429 RESPONSE BEGINS")
+    print(f"Error: {exc}\nURL: {exc.geturl()}\nResponse headers:\n{headers or '(none)'}", flush=True)
+    print(f"Response body ({len(body)} bytes; decoded as {charset}):\n{message or '(empty)'}", flush=True)
+    if body_error:
+        print(f"Body read error: {body_error}", flush=True)
+    say("ARCHIVE HTTP 429 RESPONSE ENDS")
+
+
 def signature(row):
     return (" ".join(str(row.get("Nume", "")).split()),
             str(row.get("Medie Admitere", "")).replace(",", ".").strip())
@@ -112,6 +139,23 @@ class Worker:
         path = folder / f"{stem}.html"
         meta_path = folder / f"{stem}.json"
         if path.exists() or meta_path.exists():
+            # The original VS pilot saved three verified HTML pages in a single
+            # provenance ledger before this worker used per-page JSON metadata.
+            if path.exists() and not meta_path.exists() and county == "VS":
+                ledger_path = folder / "initial_pilot_sources.json"
+                ledger = json.loads(ledger_path.read_text()) if ledger_path.exists() else {}
+                entry = ledger.get(stem)
+                if not entry or entry.get("file") != path.name:
+                    raise ValueError(f"Unverified legacy checkpoint: {county}/{stem}")
+                raw = path.read_bytes()
+                if (entry.get("sha256") != hashlib.sha256(raw).hexdigest()
+                        or relative not in entry.get("effective_url", "")):
+                    raise ValueError(f"Legacy checkpoint identity or hash mismatch: {county}/{stem}")
+                headings, rows = _extract_rows(raw)
+                if not required.issubset(headings):
+                    raise ValueError(f"Legacy checkpoint content mismatch: {county}/{stem}")
+                say(f"VERIFIED LEGACY SAVED SOURCE {county}/{stem}: {len(rows)} rows; no archive request")
+                return raw, "saved"
             if not path.exists() or not meta_path.exists():
                 raise ValueError(f"Incomplete private checkpoint: {county}/{stem}")
             raw = path.read_bytes()
@@ -145,11 +189,16 @@ class Worker:
                 raw, effective = response.read(), response.geturl()
         except urllib.error.HTTPError as exc:
             if exc.code == 429:
+                show_http_429(exc)
                 # self.stop = True
                 # say(f"ARCHIVE THROTTLED (HTTP 429) at {county}/{stem}; stopping; all unresolved items retained")
                 say(f"ARCHIVE THROTTLED (HTTP 429) at {county}/{stem}; waiting for delay before requesting; all unresolved items retained")
                 say(f"WAIT {self.args.delay_429:.1f}s before requesting {county}/{stem}; archive request spacing")
                 time.sleep(self.args.delay_429)
+            elif exc.code in (500, 503):
+                say(f"UNRESOLVED HTTP {exc.code} at {county}/{stem}; moving to next item after server-error pause")
+                say(f"WAIT 10.0s after HTTP {exc.code} at {county}/{stem}; server-error recovery")
+                time.sleep(10.0)
             else:
                 say(f"UNRESOLVED HTTP {exc.code} at {county}/{stem}; moving to next item")
                 if exc.code == 404:

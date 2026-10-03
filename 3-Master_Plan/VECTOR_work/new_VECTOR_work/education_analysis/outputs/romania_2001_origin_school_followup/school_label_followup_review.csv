@@ -1,0 +1,808 @@
+destination_county,printed_school_label,applicants_with_label,original_category,followup_category,origin_county,possible_school_codes,possible_school_names
+AB,*SCOALA GENERALA CLASELE I - VIII SINMICLAUS / AB,1,ambiguous_same_directory_name,alba_school_report_supports_1_of_1,AB,206 | 240,*SCOALA GENERALA CLASELE I - VIII SINMICLAUS | SCOALA GENERALA CLASELE I - VIII SINMICLAUS
+AB,LICEUL TEORETIC LUPENI / HD,1,outside_county_origin,direct_whole_name_match,HD,147,LICEUL TEORETIC LUPENI
+AB,SC.CU CLS I-VIII APOLDU DE JOS / SB,1,outside_county_origin,direct_whole_name_match,SB,145,SC.CU CLS I-VIII APOLDU DE JOS
+AB,SC.CU CLS I-VIII JINA / SB,2,outside_county_origin,direct_whole_name_match,SB,177,SC.CU CLS I-VIII JINA
+AB,SCOALA CIRSTANESTI / VL,1,outside_county_origin,direct_whole_name_match,VL,209,SCOALA CIRSTANESTI
+AB,"SCOALA CU CLASELE I-VIII ""ALEXNDRU VLAHUTA"" (NR.15 / CJ",1,outside_county_origin,direct_whole_name_match,CJ,114,"SCOALA CU CLASELE I-VIII ""ALEXNDRU VLAHUTA"" (NR.15"
+AB,"SCOALA CU CLASELE I-VIII ""AVRAM IANCU"" (NR.2) CIMP / CJ",1,outside_county_origin,direct_whole_name_match,CJ,182,"SCOALA CU CLASELE I-VIII ""AVRAM IANCU"" (NR.2) CIMP"
+AB,SCOALA CU CLASELE I-VIII AUREL VLAICU / BT,1,outside_county_origin,direct_whole_name_match,BT,154,SCOALA CU CLASELE I-VIII AUREL VLAICU
+AB,SCOALA CU CLASELE I-VIII NR 8 DOROHOI / BT,1,outside_county_origin,direct_whole_name_match,BT,313,SCOALA CU CLASELE I-VIII NR 8 DOROHOI
+AB,SCOALA CU CLASELE I-VIII RADAUTI-PRUT / BT,1,outside_county_origin,direct_whole_name_match,BT,250,SCOALA CU CLASELE I-VIII RADAUTI-PRUT
+AB,SCOALA GENERALA CLASELE I - VIII CAPILNA / AB,10,ambiguous_same_directory_name,alba_school_report_supports_10_of_10,AB,189 | 226,SCOALA GENERALA CLASELE I - VIII CAPILNA | SCOALA GENERALA CLASELE I - VIII CAPILNA
+AB,SCOALA GENERALA CLASELE I - VIII CHETANI / MS,1,outside_county_origin,direct_whole_name_match,MS,186,SCOALA GENERALA CLASELE I - VIII CHETANI
+AB,SCOALA GENERALA CLASELE I - VIII SAMBRIAS / MS,1,outside_county_origin,direct_whole_name_match,MS,239,SCOALA GENERALA CLASELE I - VIII SAMBRIAS
+AB,SCOALA GENERALA CLASELE I - VIII SINMICLAUS / AB,3,ambiguous_same_directory_name,alba_school_report_supports_3_of_3,AB,206 | 240,*SCOALA GENERALA CLASELE I - VIII SINMICLAUS | SCOALA GENERALA CLASELE I - VIII SINMICLAUS
+AB,SCOALA GENERALA CLASELE I - VIII VALEA LARGA / MS,1,outside_county_origin,direct_whole_name_match,MS,314,SCOALA GENERALA CLASELE I - VIII VALEA LARGA
+AB,"SCOALA GENERALA CLS I - VIII ""I.D.SARBU"" PETRILA / HD",1,outside_county_origin,direct_whole_name_match,HD,153,"SCOALA GENERALA CLS I - VIII ""I.D.SARBU"" PETRILA"
+AB,SCOALA GENERALA CLS I - VIII NR 1 LUPENI / HD,1,outside_county_origin,direct_whole_name_match,HD,149,SCOALA GENERALA CLS I - VIII NR 1 LUPENI
+AB,SCOALA GENERALA CLS I - VIII NR 4 VULCAN / HD,1,outside_county_origin,direct_whole_name_match,HD,162,SCOALA GENERALA CLS I - VIII NR 4 VULCAN
+AB,SCOALA GENERALA CLS I - VIII NR 6 HUNEDOARA / HD,1,outside_county_origin,direct_whole_name_match,HD,126,SCOALA GENERALA CLS I - VIII NR 6 HUNEDOARA
+AB,SCOALA GENERALA NR 3 CU  CLASELE I-VIII CORABIA / OT,1,outside_county_origin,direct_whole_name_match,OT,276,SCOALA GENERALA NR 3 CU  CLASELE I-VIII CORABIA
+AB,scoala cu clasele I-VIII Dorobantu / CT,1,outside_county_origin,direct_whole_name_match,CT,153,scoala cu clasele I-VIII Dorobantu
+AR,GRUP SCOLAR CU PROFIL SPORTIV DEVA / HD,1,outside_county_origin,direct_whole_name_match,HD,102,GRUP SCOLAR CU PROFIL SPORTIV DEVA
+AR,GRUP SCOLAR FELDRU / BN,1,outside_county_origin,direct_whole_name_match,BN,132,GRUP SCOLAR FELDRU
+AR,GRUP SCOLAR INDUSTRIAL MINIER ANINA / CS,1,outside_county_origin,direct_whole_name_match,CS,266,GRUP SCOLAR INDUSTRIAL MINIER ANINA
+AR,"GRUPUL SCOLAR ""NICOLAE BALCESCU"" FLAMINZI / BT",4,outside_county_origin,direct_whole_name_match,BT,111,"GRUPUL SCOLAR ""NICOLAE BALCESCU"" FLAMINZI"
+AR,LIC.TEORETIC SALONTA / BH,1,outside_county_origin,direct_whole_name_match,BH,149,LIC.TEORETIC SALONTA
+AR,"SC. CU CLASELE I-VIII ""I. CREANGA"" TG FRUMOS / IS",1,outside_county_origin,direct_whole_name_match,IS,193,"SC. CU CLASELE I-VIII ""I. CREANGA"" TG FRUMOS"
+AR,"SC.CU CLS.I-VIII ""M.POMPILIU"" STEI / BH",1,outside_county_origin,direct_whole_name_match,BH,143,"SC.CU CLS.I-VIII ""M.POMPILIU"" STEI"
+AR,SC.CU CLS.I-VIII CALACEA / BH,1,outside_county_origin,direct_whole_name_match,BH,276,SC.CU CLS.I-VIII CALACEA
+AR,SC.CU CLS.I-VIII NR 14 SEVERIN / MH,1,outside_county_origin,direct_whole_name_match,MH,113,SC.CU CLS.I-VIII NR 14 SEVERIN
+AR,SC.CU CLS.I-VIII OLCEA / BH,1,outside_county_origin,direct_whole_name_match,BH,275,SC.CU CLS.I-VIII OLCEA
+AR,SC.CU CLS.I-VIII TALPOS / BH,1,outside_county_origin,direct_whole_name_match,BH,166,SC.CU CLS.I-VIII TALPOS
+AR,SC.CU CLS.I-VIII TOPA DE SUS / BH,1,outside_county_origin,direct_whole_name_match,BH,240,SC.CU CLS.I-VIII TOPA DE SUS
+AR,SCOALA CU CL.I-VIII NR.2 TIMISOARA / TM,1,outside_county_origin,direct_whole_name_match,TM,149,SCOALA CU CL.I-VIII NR.2 TIMISOARA
+AR,"SCOALA CU CLASELE I-VIII ""IOAN OPRIS"" (NR. 8) TURD / CJ",1,outside_county_origin,direct_whole_name_match,CJ,175,"SCOALA CU CLASELE I-VIII ""IOAN OPRIS"" (NR. 8) TURD"
+AR,SCOALA CU CLASELE I-VIII BLAGESTI / VS,1,outside_county_origin,direct_whole_name_match,VS,118,SCOALA CU CLASELE I-VIII BLAGESTI
+AR,SCOALA CU CLASELE I-VIII BOGATA / SV,4,outside_county_origin,direct_whole_name_match,SV,114,SCOALA CU CLASELE I-VIII BOGATA
+AR,SCOALA CU CLASELE I-VIII LIVENI / BT,1,outside_county_origin,direct_whole_name_match,BT,227,SCOALA CU CLASELE I-VIII LIVENI
+AR,SCOALA CU CLASELE I-VIII MARGAU COM. MARGAU / CJ,2,outside_county_origin,direct_whole_name_match,CJ,291,SCOALA CU CLASELE I-VIII MARGAU COM. MARGAU
+AR,SCOALA CU CLASELE I-VIII NR 1 BAIA / SV,4,outside_county_origin,direct_whole_name_match,SV,112,SCOALA CU CLASELE I-VIII NR 1 BAIA
+AR,SCOALA CU CLASELE I-VIII NR 1 CEHU SILVANIEI / SJ,1,outside_county_origin,direct_whole_name_match,SJ,208,SCOALA CU CLASELE I-VIII NR 1 CEHU SILVANIEI
+AR,SCOALA CU CLASELE I-VIII NR 1 FLAMINZI / BT,1,outside_county_origin,direct_whole_name_match,BT,193,SCOALA CU CLASELE I-VIII NR 1 FLAMINZI
+AR,SCOALA CU CLASELE I-VIII NR 1 PLESESTI / SV,1,outside_county_origin,direct_whole_name_match,SV,295,SCOALA CU CLASELE I-VIII NR 1 PLESESTI
+AR,SCOALA CU CLASELE I-VIII NR 2 FLAMINZI / BT,6,outside_county_origin,direct_whole_name_match,BT,195,SCOALA CU CLASELE I-VIII NR 2 FLAMINZI
+AR,SCOALA CU CLASELE I-VIII NR 3 BAIA / SV,3,outside_county_origin,direct_whole_name_match,SV,376,SCOALA CU CLASELE I-VIII NR 3 BAIA
+AR,SCOALA CU CLASELE I-VIII NR 4 VATRA DORNEI / SV,1,outside_county_origin,direct_whole_name_match,SV,368,SCOALA CU CLASELE I-VIII NR 4 VATRA DORNEI
+AR,SCOALA CU CLASELE I-VIII NR 5 RADAUTI / SV,1,outside_county_origin,direct_whole_name_match,SV,366,SCOALA CU CLASELE I-VIII NR 5 RADAUTI
+AR,SCOALA CU CLASELE I-VIII POIANA / BT,1,outside_county_origin,ambiguous_same_name,BT,194 | 302,SCOALA CU CLASELE I-VIII POIANA | SCOALA CU CLASELE I-VIII POIANA
+AR,SCOALA CU CLASELE I-VIII SERBAUTI / SV,1,outside_county_origin,direct_whole_name_match,SV,307,SCOALA CU CLASELE I-VIII SERBAUTI
+AR,SCOALA CU CLASELE I-VIII SUCEVITA / SV,1,outside_county_origin,direct_whole_name_match,SV,260,SCOALA CU CLASELE I-VIII SUCEVITA
+AR,SCOALA CU CLASELE I-VIII VALEA GLODULUI / SV,1,outside_county_origin,direct_whole_name_match,SV,296,SCOALA CU CLASELE I-VIII VALEA GLODULUI
+AR,SCOALA CU CLS. I-VII SIEU / MM,1,outside_county_origin,direct_whole_name_match,MM,201,SCOALA CU CLS. I-VII SIEU
+AR,"SCOALA CU CLS. I-VIII""Octavian Goga""  ROZAVLEA / MM",1,outside_county_origin,direct_whole_name_match,MM,248,"SCOALA CU CLS. I-VIII""Octavian Goga""  ROZAVLEA"
+AR,SCOALA CU CLS.I - VIII BISTRA / MM,1,outside_county_origin,direct_whole_name_match,MM,168,SCOALA CU CLS.I - VIII BISTRA
+AR,"SCOALA CU CLS.I-VIII ""Alexandru Filipescu"" PETROVA / MM",1,outside_county_origin,direct_whole_name_match,MM,235,"SCOALA CU CLS.I-VIII ""Alexandru Filipescu"" PETROVA"
+AR,"SCOALA CU CLS.I-VIII""Mihai Eminescu"" SALISTEA DE S / MM",2,outside_county_origin,direct_whole_name_match,MM,259,"SCOALA CU CLS.I-VIII""Mihai Eminescu"" SALISTEA DE S"
+AR,SCOALA GENERALA CLASELE I - VIII BREAZA / MS,1,outside_county_origin,direct_whole_name_match,MS,183,SCOALA GENERALA CLASELE I - VIII BREAZA
+AR,SCOALA GENERALA CLASELE I - VIII TIRSA / AB,1,outside_county_origin,direct_whole_name_match,AB,151,SCOALA GENERALA CLASELE I - VIII TIRSA
+AR,SCOALA GENERALA CLS I - VIII  ANA COLDA  PETRILA / HD,1,outside_county_origin,direct_whole_name_match,HD,154,SCOALA GENERALA CLS I - VIII  ANA COLDA  PETRILA
+AR,SCOALA GENERALA CLS I - VIII  MIRCEA SANTIMBREANU  / HD,1,outside_county_origin,direct_whole_name_match,HD,165,SCOALA GENERALA CLS I - VIII  MIRCEA SANTIMBREANU
+AR,SCOALA GENERALA CLS I - VIII  OVID DENSUSIANU  HAT / HD,1,outside_county_origin,direct_whole_name_match,HD,183,SCOALA GENERALA CLS I - VIII  OVID DENSUSIANU  HAT
+AR,SCOALA GENERALA CLS I - VIII NR 2 LUPENI / HD,1,outside_county_origin,direct_whole_name_match,HD,150,SCOALA GENERALA CLS I - VIII NR 2 LUPENI
+AR,SCOALA GENERALA CLS I - VIII SALASUL DE SUS / HD,1,outside_county_origin,direct_whole_name_match,HD,195,SCOALA GENERALA CLS I - VIII SALASUL DE SUS
+AR,SCOALA GENERALA CLS I - VIII VATA DE JOS / HD,2,outside_county_origin,direct_whole_name_match,HD,177,SCOALA GENERALA CLS I - VIII VATA DE JOS
+AR,SCOALA GENERALA CORNEA / CS,1,outside_county_origin,direct_whole_name_match,CS,160,SCOALA GENERALA CORNEA
+AR,"SCOALA GENERALA CU CL.I-VIII. ""PETOFI SANDOR""TG.SE / CV",1,outside_county_origin,direct_whole_name_match,CV,140,"SCOALA GENERALA CU CL.I-VIII. ""PETOFI SANDOR""TG.SE"
+AR,"SCOALA GENERALA CU CL.I-VIII.""TUROCZI MOZES"" TG.SE / CV",1,outside_county_origin,direct_whole_name_match,CV,139,"SCOALA GENERALA CU CL.I-VIII.""TUROCZI MOZES"" TG.SE"
+AR,SCOALA GENERALA DE 8 ANI NR 1 ADJUD / VN,1,outside_county_origin,direct_whole_name_match,VN,247,SCOALA GENERALA DE 8 ANI NR 1 ADJUD
+AR,SCOALA GENERALA NR 1 LUNCA ILVEI / BN,1,outside_county_origin,direct_whole_name_match,BN,150,SCOALA GENERALA NR 1 LUNCA ILVEI
+AR,SCOALA GENERALA NR 1 REBRISOARA / BN,1,outside_county_origin,direct_whole_name_match,BN,178,SCOALA GENERALA NR 1 REBRISOARA
+AR,SCOALA GENERALA PLOPSORU / GJ,1,outside_county_origin,direct_whole_name_match,GJ,207,SCOALA GENERALA PLOPSORU
+AR,SCOALA GENERALA PLUGOVA / CS,1,outside_county_origin,direct_whole_name_match,CS,193,SCOALA GENERALA PLUGOVA
+AR,"SCOALA GENERALA SADU, BUMBESTI-JIU / GJ",1,outside_county_origin,direct_whole_name_match,GJ,155,"SCOALA GENERALA SADU, BUMBESTI-JIU"
+BC,GRUPUL SCOLAR BROSTENI / SV,1,outside_county_origin,direct_whole_name_match,SV,360,GRUPUL SCOLAR BROSTENI
+BC,GRUPUL SCOLAR MARASESTI / VN,1,outside_county_origin,direct_whole_name_match,VN,255,GRUPUL SCOLAR MARASESTI
+BC,LICEUL CU PROGRAM SPORTIV BRAILA / BR,1,outside_county_origin,direct_whole_name_match,BR,131,LICEUL CU PROGRAM SPORTIV BRAILA
+BC,"LICEUL TEORETIC ""EMIL BOTTA"" ADJUD / VN",1,outside_county_origin,direct_whole_name_match,VN,250,"LICEUL TEORETIC ""EMIL BOTTA"" ADJUD"
+BC,LICEUL TEORETIC LUPENI / HD,1,outside_county_origin,direct_whole_name_match,HD,147,LICEUL TEORETIC LUPENI
+BC,LICEUL TEORETIC STEFANESTI / BT,1,outside_county_origin,direct_whole_name_match,BT,105,LICEUL TEORETIC STEFANESTI
+BC,SCOALA CL I-VIII SI COMPLEM. PINCESTI/POIENARI / NT,1,outside_county_origin,direct_whole_name_match,NT,293,SCOALA CL I-VIII SI COMPLEM. PINCESTI/POIENARI
+BC,SCOALA CL I-VIII SI COMPLEMENTARA NR.1 CRACAOANI / NT,1,outside_county_origin,direct_whole_name_match,NT,133,SCOALA CL I-VIII SI COMPLEMENTARA NR.1 CRACAOANI
+BC,SCOALA CL I-VIII SI COMPLEMENTARA PILDESTI/CORDUN / NT,1,outside_county_origin,direct_whole_name_match,NT,127,SCOALA CL I-VIII SI COMPLEMENTARA PILDESTI/CORDUN
+BC,SCOALA CL.I-VIII SI COMP.BURUIENESTI/DOLJESTI / NT,1,outside_county_origin,direct_whole_name_match,NT,274,SCOALA CL.I-VIII SI COMP.BURUIENESTI/DOLJESTI
+BC,SCOALA CL.I-VIII SI COMPLEMENTARA ROTUNDA/DOLJESTI / NT,1,outside_county_origin,direct_whole_name_match,NT,273,SCOALA CL.I-VIII SI COMPLEMENTARA ROTUNDA/DOLJESTI
+BC,SCOALA CU CL I-VIII BAHNA / NT,3,outside_county_origin,direct_whole_name_match,NT,257,SCOALA CU CL I-VIII BAHNA
+BC,SCOALA CU CL I-VIII DOLJESTI / NT,2,outside_county_origin,direct_whole_name_match,NT,272,SCOALA CU CL I-VIII DOLJESTI
+BC,SCOALA CU CL I-VIII HOCIUNGI/MOLDOVENI / NT,1,outside_county_origin,direct_whole_name_match,NT,179,SCOALA CU CL I-VIII HOCIUNGI/MOLDOVENI
+BC,SCOALA CU CL I-VIII IZVOARE/BAHNA / NT,2,outside_county_origin,direct_whole_name_match,NT,258,SCOALA CU CL I-VIII IZVOARE/BAHNA
+BC,SCOALA CU CL I-VIII MOLDOVENI / NT,1,outside_county_origin,direct_whole_name_match,NT,182,SCOALA CU CL I-VIII MOLDOVENI
+BC,SCOALA CU CL I-VIII NR 2 SILISTEA/ROMANI / NT,2,outside_county_origin,direct_whole_name_match,NT,305,SCOALA CU CL I-VIII NR 2 SILISTEA/ROMANI
+BC,SCOALA CU CL I-VIII NR 2 TIRGU NEAMT / NT,1,outside_county_origin,direct_whole_name_match,NT,218,SCOALA CU CL I-VIII NR 2 TIRGU NEAMT
+BC,SCOALA CU CL I-VIII NR.1 PIATRA SOIMULUI / NT,1,outside_county_origin,direct_whole_name_match,NT,286,SCOALA CU CL I-VIII NR.1 PIATRA SOIMULUI
+BC,SCOALA CU CL I-VIII NR.1 ROMAN / NT,2,outside_county_origin,direct_whole_name_match,NT,222,SCOALA CU CL I-VIII NR.1 ROMAN
+BC,SCOALA CU CL I-VIII NR.11 ROMAN / NT,1,outside_county_origin,direct_whole_name_match,NT,169,SCOALA CU CL I-VIII NR.11 ROMAN
+BC,SCOALA CU CL I-VIII NR.3 PIATRA NEAMT / NT,1,outside_county_origin,direct_whole_name_match,NT,104,SCOALA CU CL I-VIII NR.3 PIATRA NEAMT
+BC,SCOALA CU CL I-VIII NR.3 TIBUCANI / NT,1,outside_county_origin,direct_whole_name_match,NT,216,SCOALA CU CL I-VIII NR.3 TIBUCANI
+BC,SCOALA CU CL I-VIII POIANA LARGULUI/POIANA TEIULUI / NT,1,outside_county_origin,direct_whole_name_match,NT,294,SCOALA CU CL I-VIII POIANA LARGULUI/POIANA TEIULUI
+BC,SCOALA CU CL I-VIII POIANA/BRUSTURI-DRAGANESTI / NT,1,outside_county_origin,direct_whole_name_match,NT,142,SCOALA CU CL I-VIII POIANA/BRUSTURI-DRAGANESTI
+BC,SCOALA CU CL I-VIII ROMANI / NT,6,outside_county_origin,direct_whole_name_match,NT,302,SCOALA CU CL I-VIII ROMANI
+BC,SCOALA CU CL I-VIII SI COMPLEMENTARA NR.1 PIPIRIG / NT,1,outside_county_origin,direct_whole_name_match,NT,191,SCOALA CU CL I-VIII SI COMPLEMENTARA NR.1 PIPIRIG
+BC,SCOALA CU CL I-VIII SI COMPLEMENTARA NR.1 PODOLENI / NT,1,outside_county_origin,direct_whole_name_match,NT,199,SCOALA CU CL I-VIII SI COMPLEMENTARA NR.1 PODOLENI
+BC,SCOALA CU CL I-VIII SI COMPLEMENTARA TARCAU / NT,1,outside_county_origin,direct_whole_name_match,NT,311,SCOALA CU CL I-VIII SI COMPLEMENTARA TARCAU
+BC,SCOALA CU CL I-VIII SI COMPLEMENTARA VALEA URSULUI / NT,1,outside_county_origin,direct_whole_name_match,NT,320,SCOALA CU CL I-VIII SI COMPLEMENTARA VALEA URSULUI
+BC,SCOALA CU CL I-VIII TAMASENI / NT,1,outside_county_origin,direct_whole_name_match,NT,213,SCOALA CU CL I-VIII TAMASENI
+BC,SCOALA CU CL I-VIII TASCA / NT,1,outside_county_origin,direct_whole_name_match,NT,211,SCOALA CU CL I-VIII TASCA
+BC,SCOALA CU CL. I-VIII SI COMPLEMENTARA GHERAESTI / NT,1,outside_county_origin,direct_whole_name_match,NT,151,SCOALA CU CL. I-VIII SI COMPLEMENTARA GHERAESTI
+BC,SCOALA CU CL.I-VIII  GOSMANI/ROMANI / NT,2,outside_county_origin,direct_whole_name_match,NT,303,SCOALA CU CL.I-VIII  GOSMANI/ROMANI
+BC,SCOALA CU CL.I-VIII VADURI/VIISOARA / NT,2,outside_county_origin,direct_whole_name_match,NT,162,SCOALA CU CL.I-VIII VADURI/VIISOARA
+BC,SCOALA CU CLASELE I-VIII DRAGOMIRESTI / VS,1,outside_county_origin,direct_whole_name_match,VS,143,SCOALA CU CLASELE I-VIII DRAGOMIRESTI
+BC,SCOALA CU CLASELE I-VIII DUMBRAVA ROSIE / NT,1,outside_county_origin,direct_whole_name_match,NT,137,SCOALA CU CLASELE I-VIII DUMBRAVA ROSIE
+BC,SCOALA CU CLASELE I-VIII IUGANI / IS,6,outside_county_origin,direct_whole_name_match,IS,291,SCOALA CU CLASELE I-VIII IUGANI
+BC,SCOALA CU CLASELE I-VIII MIRCESTI / IS,4,outside_county_origin,direct_whole_name_match,IS,290,SCOALA CU CLASELE I-VIII MIRCESTI
+BC,SCOALA CU CLASELE I-VIII MOGOSESTI-SIRET / IS,2,outside_county_origin,direct_whole_name_match,IS,294,SCOALA CU CLASELE I-VIII MOGOSESTI-SIRET
+BC,SCOALA CU CLASELE I-VIII NR 1 MALINI / SV,1,outside_county_origin,direct_whole_name_match,SV,211,SCOALA CU CLASELE I-VIII NR 1 MALINI
+BC,SCOALA CU CLASELE I-VIII NR 1 RAUCESTI / NT,1,outside_county_origin,direct_whole_name_match,NT,298,SCOALA CU CLASELE I-VIII NR 1 RAUCESTI
+BC,SCOALA CU CLASELE I-VIII NR 10 BRAILA / BR,2,outside_county_origin,direct_whole_name_match,BR,115,SCOALA CU CLASELE I-VIII NR 10 BRAILA
+BC,SCOALA CU CLASELE I-VIII NR 8 ROMAN / NT,1,outside_county_origin,direct_whole_name_match,NT,242,SCOALA CU CLASELE I-VIII NR 8 ROMAN
+BC,SCOALA CU CLASELE I-VIII NR.  87 / B,1,outside_county_origin,direct_whole_name_match,B,163,SCOALA CU CLASELE I-VIII NR.  87
+BC,SCOALA CU CLASELE I-VIII NR. 1 BUTEA / IS,1,outside_county_origin,direct_whole_name_match,IS,199,SCOALA CU CLASELE I-VIII NR. 1 BUTEA
+BC,SCOALA CU CLASELE I-VIII NR. 156 / B,1,outside_county_origin,direct_whole_name_match,B,277,SCOALA CU CLASELE I-VIII NR. 156
+BC,SCOALA CU CLASELE I-VIII NR. 2 BUTEA / IS,1,outside_county_origin,direct_whole_name_match,IS,200,SCOALA CU CLASELE I-VIII NR. 2 BUTEA
+BC,SCOALA CU CLASELE I-VIII NR.01 BIRLAD / VS,1,outside_county_origin,direct_whole_name_match,VS,277,SCOALA CU CLASELE I-VIII NR.01 BIRLAD
+BC,SCOALA CU CLASELE I-VIII NR.08 VASLUI / VS,1,outside_county_origin,direct_whole_name_match,VS,312,SCOALA CU CLASELE I-VIII NR.08 VASLUI
+BC,SCOALA CU CLASELE I-VIII NR.1  Rm. SARAT / BZ,1,outside_county_origin,direct_whole_name_match,BZ,126,SCOALA CU CLASELE I-VIII NR.1  Rm. SARAT
+BC,SCOALA CU CLASELE I-VIII NR.1 FOCURI / IS,1,outside_county_origin,direct_whole_name_match,IS,216,SCOALA CU CLASELE I-VIII NR.1 FOCURI
+BC,SCOALA CU CLASELE I-VIII NR.16  BUZAU / BZ,1,outside_county_origin,direct_whole_name_match,BZ,108,SCOALA CU CLASELE I-VIII NR.16  BUZAU
+BC,SCOALA CU CLASELE I-VIII NR.5 ROMAN / NT,1,outside_county_origin,direct_whole_name_match,NT,329,SCOALA CU CLASELE I-VIII NR.5 ROMAN
+BC,SCOALA CU CLASELE I-VIII PIHNESTI / VS,1,outside_county_origin,direct_whole_name_match,VS,108,SCOALA CU CLASELE I-VIII PIHNESTI
+BC,SCOALA CU CLASELE I-VIII RACHITENI / IS,1,outside_county_origin,direct_whole_name_match,IS,293,SCOALA CU CLASELE I-VIII RACHITENI
+BC,SCOALA CU CLASELE I-VIII SI COMPLEMENT.BALTATESTI / NT,1,outside_county_origin,direct_whole_name_match,NT,111,SCOALA CU CLASELE I-VIII SI COMPLEMENT.BALTATESTI
+BC,SCOALA CU CLASELE I-VIII SIRET / SV,2,outside_county_origin,direct_whole_name_match,SV,362,SCOALA CU CLASELE I-VIII SIRET
+BC,SCOALA CU CLASELE I-VIII SLOBOZIA/ROZNOV / NT,1,outside_county_origin,direct_whole_name_match,NT,197,SCOALA CU CLASELE I-VIII SLOBOZIA/ROZNOV
+BC,SCOALA CU CLS.I-VIII NR.9 ROMAN / NT,1,outside_county_origin,direct_whole_name_match,NT,232,SCOALA CU CLS.I-VIII NR.9 ROMAN
+BC,SCOALA GENERALA CLASELE I - VIII NR.1 CUGIR / AB,1,outside_county_origin,direct_whole_name_match,AB,132,SCOALA GENERALA CLASELE I - VIII NR.1 CUGIR
+BC,"SCOALA GENERALA CU CL.I-VIII""GODRI FERENC"" SF.GHE. / CV",1,outside_county_origin,direct_whole_name_match,CV,108,"SCOALA GENERALA CU CL.I-VIII""GODRI FERENC"" SF.GHE."
+BC,"SCOALA GENERALA CU CL.I-VIII. ""PETOFI SANDOR""TG.SE / CV",1,outside_county_origin,direct_whole_name_match,CV,140,"SCOALA GENERALA CU CL.I-VIII. ""PETOFI SANDOR""TG.SE"
+BC,"SCOALA GENERALA CU CL.I-VIII.""TUROCZI MOZES"" TG.SE / CV",1,outside_county_origin,direct_whole_name_match,CV,139,"SCOALA GENERALA CU CL.I-VIII.""TUROCZI MOZES"" TG.SE"
+BC,SCOALA GENERALA CU CLASELE I-VIII  IZBICENI / OT,1,outside_county_origin,direct_whole_name_match,OT,172,SCOALA GENERALA CU CLASELE I-VIII  IZBICENI
+BC,SCOALA GENERALA CU CLASELE I-VIII BOGDANESTI / BC,9,ambiguous_same_directory_name,needs_school_specific_source_review,BC,196 | 361,SCOALA GENERALA CU CLASELE I-VIII BOGDANESTI | SCOALA GENERALA CU CLASELE I-VIII BOGDANESTI
+BC,SCOALA GENERALA CU CLASELE I-VIII CUCUIETI / BC,37,ambiguous_same_directory_name,needs_school_specific_source_review,BC,224 | 352,SCOALA GENERALA CU CLASELE I-VIII CUCUIETI | SCOALA GENERALA CU CLASELE I-VIII CUCUIETI
+BC,SCOALA GENERALA CU CLASELE I-VIII DUMBRAVA / BC,9,ambiguous_same_directory_name,needs_school_specific_source_review,BC,139 | 323,SCOALA GENERALA CU CLASELE I-VIII DUMBRAVA | SCOALA GENERALA CU CLASELE I-VIII DUMBRAVA
+BC,SCOALA GENERALA CU CLASELE I-VIII GURA VAII / BC,11,ambiguous_same_directory_name,needs_school_specific_source_review,BC,141 | 317,SCOALA GENERALA CU CLASELE I-VIII GURA VAII | SCOALA GENERALA CU CLASELE I-VIII GURA VAII
+BC,SCOALA GENERALA CU CLASELE I-VIII NR  1 VALEA SEAC / BC,22,ambiguous_same_directory_name,needs_school_specific_source_review,BC,278 | 370,SCOALA GENERALA CU CLASELE I-VIII NR  1 VALEA SEAC | SCOALA GENERALA CU CLASELE I-VIII NR  1 VALEA SEAC
+BC,SCOALA GENERALA CU CLASELE I-VIII SATU NOU / BC,3,ambiguous_same_directory_name,needs_school_specific_source_review,BC,258 | 300,SCOALA GENERALA CU CLASELE I-VIII SATU NOU | SCOALA GENERALA CU CLASELE I-VIII SATU NOU
+BC,SCOALA GENERALA DE 8 ANI ANGHELESTI / VN,1,outside_county_origin,direct_whole_name_match,VN,160,SCOALA GENERALA DE 8 ANI ANGHELESTI
+BC,SCOALA GENERALA DE 8 ANI BOGHESTI / VN,4,outside_county_origin,direct_whole_name_match,VN,219,SCOALA GENERALA DE 8 ANI BOGHESTI
+BC,SCOALA GENERALA DE 8 ANI COPACESTI / VN,1,outside_county_origin,direct_whole_name_match,VN,161,SCOALA GENERALA DE 8 ANI COPACESTI
+BC,SCOALA GENERALA DE 8 ANI DOMNESTI-TIRG / VN,1,outside_county_origin,direct_whole_name_match,VN,107,SCOALA GENERALA DE 8 ANI DOMNESTI-TIRG
+BC,SCOALA GENERALA DE 8 ANI FELDIOARA / VN,2,outside_county_origin,direct_whole_name_match,VN,176,SCOALA GENERALA DE 8 ANI FELDIOARA
+BC,SCOALA GENERALA DE 8 ANI LESPEZI / VN,1,outside_county_origin,direct_whole_name_match,VN,137,SCOALA GENERALA DE 8 ANI LESPEZI
+BC,SCOALA GENERALA DE 8 ANI NR 2 ADJUD / VN,1,outside_county_origin,direct_whole_name_match,VN,204,SCOALA GENERALA DE 8 ANI NR 2 ADJUD
+BC,SCOALA GENERALA DE 8 ANI NR 4 ADJUD / VN,3,outside_county_origin,direct_whole_name_match,VN,103,SCOALA GENERALA DE 8 ANI NR 4 ADJUD
+BC,SCOALA GENERALA DE 8 ANI NR.1 PAUNESTI / VN,5,outside_county_origin,direct_whole_name_match,VN,264,SCOALA GENERALA DE 8 ANI NR.1 PAUNESTI
+BC,SCOALA GENERALA DE 8 ANI PLOSCUTENI / VN,3,outside_county_origin,direct_whole_name_match,VN,225,SCOALA GENERALA DE 8 ANI PLOSCUTENI
+BC,SCOALA GENERALA DE 8 ANI PUFESTI / VN,1,outside_county_origin,direct_whole_name_match,VN,153,SCOALA GENERALA DE 8 ANI PUFESTI
+BC,SCOALA GENERALA DE 8 ANI PURANII DE SUS / TR,1,outside_county_origin,direct_whole_name_match,TR,232,SCOALA GENERALA DE 8 ANI PURANII DE SUS
+BC,SCOALA GENERALA DE 8 ANI SERBANESTI / VN,1,outside_county_origin,direct_whole_name_match,VN,125,SCOALA GENERALA DE 8 ANI SERBANESTI
+BC,SCOALA GENERALA DE 8 ANI TANASOAIA / VN,1,outside_county_origin,direct_whole_name_match,VN,175,SCOALA GENERALA DE 8 ANI TANASOAIA
+BC,SCOALA GENERALA DE 8 ANI VIZANTEA-MANASTIREASCA / VN,7,outside_county_origin,direct_whole_name_match,VN,194,SCOALA GENERALA DE 8 ANI VIZANTEA-MANASTIREASCA
+BC,SCOALA GENERALA NR 1 BALAN / HR,1,outside_county_origin,direct_whole_name_match,HR,106,SCOALA GENERALA NR 1 BALAN
+BC,SCOALA GENERALA NR 3 BRASOV / BV,1,outside_county_origin,direct_whole_name_match,BV,3B,SCOALA GENERALA NR 3 BRASOV
+BC,"SCOALA NR.11 ""IORGU IORDAN"" TECUCI / GL",2,outside_county_origin,direct_whole_name_match,GL,289,"SCOALA NR.11 ""IORGU IORDAN"" TECUCI"
+BC,SCOALA NR.2 BARCEA / GL,1,outside_county_origin,direct_whole_name_match,GL,149,SCOALA NR.2 BARCEA
+BC,SCOALA PENTRU AMBLIOPI / B,1,outside_county_origin,direct_whole_name_match,B,191,SCOALA PENTRU AMBLIOPI
+BC,SCOALA POIANA / GL,1,outside_county_origin,direct_whole_name_match,GL,237,SCOALA POIANA
+BC,scoala sanatoriala Mangalia / CT,2,outside_county_origin,direct_whole_name_match,CT,145,scoala sanatoriala Mangalia
+BR,SC. CU CLASELE I-VIII C.A.ROSETTI / BZ,1,outside_county_origin,direct_whole_name_match,BZ,157,SC. CU CLASELE I-VIII C.A.ROSETTI
+BR,SC. CU CLASELE I-VIII LUNCA comuna C.A.ROSETTI / BZ,2,outside_county_origin,direct_whole_name_match,BZ,158,SC. CU CLASELE I-VIII LUNCA comuna C.A.ROSETTI
+BR,SC. CU CLASELE I-VIII RUSETU comuna RUSETU / BZ,1,outside_county_origin,direct_whole_name_match,BZ,253,SC. CU CLASELE I-VIII RUSETU comuna RUSETU
+BR,SCOALA BUCIUMENI / GL,2,outside_county_origin,direct_whole_name_match,GL,167,SCOALA BUCIUMENI
+BR,SCOALA CU CLASE I-VIII CARCALIU / TL,6,outside_county_origin,direct_whole_name_match,TL,122,SCOALA CU CLASE I-VIII CARCALIU
+BR,SCOALA CU CLASE I-VIII CERNA / TL,2,outside_county_origin,direct_whole_name_match,TL,128,SCOALA CU CLASE I-VIII CERNA
+BR,SCOALA CU CLASE I-VIII CHILIA VECHE / TL,1,outside_county_origin,direct_whole_name_match,TL,131,SCOALA CU CLASE I-VIII CHILIA VECHE
+BR,SCOALA CU CLASE I-VIII DOROBANTU / TL,1,outside_county_origin,direct_whole_name_match,TL,138,SCOALA CU CLASE I-VIII DOROBANTU
+BR,SCOALA CU CLASE I-VIII GRECI / TL,3,outside_county_origin,direct_whole_name_match,TL,142,SCOALA CU CLASE I-VIII GRECI
+BR,SCOALA CU CLASE I-VIII MIRCEA VODA / TL,1,outside_county_origin,direct_whole_name_match,TL,129,SCOALA CU CLASE I-VIII MIRCEA VODA
+BR,SCOALA CU CLASE I-VIII NR.1 MACIN / TL,2,outside_county_origin,direct_whole_name_match,TL,114,SCOALA CU CLASE I-VIII NR.1 MACIN
+BR,SCOALA CU CLASE I-VIII PECENEAGA / TL,4,outside_county_origin,direct_whole_name_match,TL,172,SCOALA CU CLASE I-VIII PECENEAGA
+BR,SCOALA CU CLASE I-VIII SMIRDAN / TL,8,outside_county_origin,direct_whole_name_match,TL,179,SCOALA CU CLASE I-VIII SMIRDAN
+BR,SCOALA CU CLASE I-VIII TURCOAIA / TL,3,outside_county_origin,direct_whole_name_match,TL,189,SCOALA CU CLASE I-VIII TURCOAIA
+BR,SCOALA CU CLASE I-VIII VACARENI / TL,1,outside_county_origin,direct_whole_name_match,TL,154,SCOALA CU CLASE I-VIII VACARENI
+BR,SCOALA DRAGANESTI / GL,2,outside_county_origin,direct_whole_name_match,GL,139,SCOALA DRAGANESTI
+BR,SCOALA GENERALA CU CLASELE I-VIII NR 10 BACAU / BC,1,outside_county_origin,direct_whole_name_match,BC,106,SCOALA GENERALA CU CLASELE I-VIII NR 10 BACAU
+BR,SCOALA GENERALA DE 8 ANI JITIA / VN,1,outside_county_origin,direct_whole_name_match,VN,226,SCOALA GENERALA DE 8 ANI JITIA
+BR,SCOALA GENERALA DE 8 ANI NR 1 POPESTI / VN,1,outside_county_origin,direct_whole_name_match,VN,239,SCOALA GENERALA DE 8 ANI NR 1 POPESTI
+BR,SCOALA GENERALA I-VIII COLELIA / IL,1,outside_county_origin,direct_whole_name_match,IL,118,SCOALA GENERALA I-VIII COLELIA
+BR,SCOALA GENERALA I-VIII NR.1 FETESTI / IL,1,outside_county_origin,direct_whole_name_match,IL,153,SCOALA GENERALA I-VIII NR.1 FETESTI
+BR,SCOALA GRIVITA / GL,2,outside_county_origin,direct_whole_name_match,GL,208,SCOALA GRIVITA
+BR,SCOALA NORMALA  SLOBOZIA / IL,1,outside_county_origin,direct_whole_name_match,IL,203,SCOALA NORMALA  SLOBOZIA
+BR,"SCOALA NR.1 IVESTI""HORTENSIA PAPADAT BENGESCU"" / GL",1,outside_county_origin,direct_whole_name_match,GL,211,"SCOALA NR.1 IVESTI""HORTENSIA PAPADAT BENGESCU"""
+BR,"SCOALA NR.1 PISCU ""DIMITRIE LUCHIAN"" / GL",1,outside_county_origin,direct_whole_name_match,GL,242,"SCOALA NR.1 PISCU ""DIMITRIE LUCHIAN"""
+BR,SCOALA NR.2 COROD / GL,1,outside_county_origin,direct_whole_name_match,GL,179,SCOALA NR.2 COROD
+BR,"SCOALA NR.22 ""DIMITRIE CANTEMIR""GALATI / GL",1,outside_county_origin,direct_whole_name_match,GL,118,"SCOALA NR.22 ""DIMITRIE CANTEMIR""GALATI"
+BR,SCOALA NR.24                    GALATI / GL,1,outside_county_origin,direct_whole_name_match,GL,119,SCOALA NR.24                    GALATI
+BR,SCOALA POIANA / GL,1,outside_county_origin,direct_whole_name_match,GL,237,SCOALA POIANA
+BR,SCOALA UMBRARESTI ( NR.1) / GL,1,outside_county_origin,direct_whole_name_match,GL,262,SCOALA UMBRARESTI ( NR.1)
+BR,scoala cu clasele I-VIII Topraisar / CT,1,outside_county_origin,direct_whole_name_match,CT,244,scoala cu clasele I-VIII Topraisar
+BR,scoala cu clasele I-VIII nr. 2 Navodari / CT,1,outside_county_origin,direct_whole_name_match,CT,231,scoala cu clasele I-VIII nr. 2 Navodari
+BR,scoala cu clasele I-VIII nr.37 Constanta / CT,1,outside_county_origin,direct_whole_name_match,CT,225,scoala cu clasele I-VIII nr.37 Constanta
+BR,scoala sanatoriala Mangalia / CT,1,outside_county_origin,direct_whole_name_match,CT,145,scoala sanatoriala Mangalia
+BT,"COLEGIUL NATIONAL ""LIVIU REBREANU"" BISTRITA / BN",1,outside_county_origin,direct_whole_name_match,BN,230,"COLEGIUL NATIONAL ""LIVIU REBREANU"" BISTRITA"
+BT,GRUP SCOLAR DOLHASCA / SV,1,outside_county_origin,direct_whole_name_match,SV,370,GRUP SCOLAR DOLHASCA
+BT,GRUP SCOLAR DUMBRAVENI / SV,2,outside_county_origin,direct_whole_name_match,SV,372,GRUP SCOLAR DUMBRAVENI
+BT,GRUP SCOLAR INDUSTRIAL MINIER MOLDOVA NOUA / CS,1,outside_county_origin,direct_whole_name_match,CS,265,GRUP SCOLAR INDUSTRIAL MINIER MOLDOVA NOUA
+BT,LICEUL CU PROGRAM SPORTIV SUCEAVA / SV,1,outside_county_origin,direct_whole_name_match,SV,102,LICEUL CU PROGRAM SPORTIV SUCEAVA
+BT,LICEUL TEORETIC NR 3 RESITA / CS,1,outside_county_origin,direct_whole_name_match,CS,234,LICEUL TEORETIC NR 3 RESITA
+BT,SCOALA CU CLASE I-VIII CASIMCEA / TL,1,outside_county_origin,direct_whole_name_match,TL,123,SCOALA CU CLASE I-VIII CASIMCEA
+BT,"SCOALA CU CLASELE I-VIII ""P. RARES"" HIRLAU / IS",1,outside_county_origin,direct_whole_name_match,IS,206,"SCOALA CU CLASELE I-VIII ""P. RARES"" HIRLAU"
+BT,SCOALA CU CLASELE I-VIII HANTASTI / SV,1,outside_county_origin,direct_whole_name_match,SV,105,SCOALA CU CLASELE I-VIII HANTASTI
+BT,SCOALA CU CLASELE I-VIII HUMORENI / SV,1,outside_county_origin,direct_whole_name_match,SV,130,SCOALA CU CLASELE I-VIII HUMORENI
+BT,SCOALA CU CLASELE I-VIII IONASENI / BT,10,ambiguous_same_directory_name,needs_school_specific_source_review,BT,277 | 294,SCOALA CU CLASELE I-VIII IONASENI | SCOALA CU CLASELE I-VIII IONASENI
+BT,SCOALA CU CLASELE I-VIII NR 1 CASVANA / SV,1,outside_county_origin,direct_whole_name_match,SV,143,SCOALA CU CLASELE I-VIII NR 1 CASVANA
+BT,SCOALA CU CLASELE I-VIII NR 1 DORNESTI / SV,1,outside_county_origin,direct_whole_name_match,SV,164,SCOALA CU CLASELE I-VIII NR 1 DORNESTI
+BT,SCOALA CU CLASELE I-VIII NR 1 GURA HUMORULUI / SV,1,outside_county_origin,direct_whole_name_match,SV,348,SCOALA CU CLASELE I-VIII NR 1 GURA HUMORULUI
+BT,SCOALA CU CLASELE I-VIII PADURENI / BT,4,ambiguous_same_directory_name,needs_school_specific_source_review,BT,188 | 270,SCOALA CU CLASELE I-VIII PADURENI | SCOALA CU CLASELE I-VIII PADURENI
+BT,SCOALA CU CLASELE I-VIII POIANA / BT,16,ambiguous_same_directory_name,needs_school_specific_source_review,BT,194 | 302,SCOALA CU CLASELE I-VIII POIANA | SCOALA CU CLASELE I-VIII POIANA
+BT,SCOALA CU CLASELE I-VIII POIANA / SV,1,outside_county_origin,direct_whole_name_match,SV,302,SCOALA CU CLASELE I-VIII POIANA
+BT,SCOALA CU CLASELE I-VIII SIRET / SV,2,outside_county_origin,direct_whole_name_match,SV,362,SCOALA CU CLASELE I-VIII SIRET
+BT,SCOALA CU CLASELE I-VIII TUDOR VLADIMIRESCU / BT,6,ambiguous_same_directory_name,needs_school_specific_source_review,BT,148 | 152,SCOALA CU CLASELE I-VIII TUDOR VLADIMIRESCU | SCOALA CU CLASELE I-VIII TUDOR VLADIMIRESCU
+BT,SCOALA CU CLASELE I-VIII VLADENI / BT,14,ambiguous_same_directory_name,needs_school_specific_source_review,BT,114 | 168,SCOALA CU CLASELE I-VIII VLADENI | SCOALA CU CLASELE I-VIII VLADENI
+BT,SCOALA CU CLASELE I-VIII ZAMOSTEA / SV,1,outside_county_origin,direct_whole_name_match,SV,298,SCOALA CU CLASELE I-VIII ZAMOSTEA
+BT,"SCOALA GENERALA NR 1 ""TEODOR CHINDEA"" VOSLABENI / HR",1,outside_county_origin,direct_whole_name_match,HR,245,"SCOALA GENERALA NR 1 ""TEODOR CHINDEA"" VOSLABENI"
+BZ,"GRUPUL SCOLAR INDUSTRIAL ""GEORGE VILSAN"" FAUREI / BR",3,outside_county_origin,direct_whole_name_match,BR,138,"GRUPUL SCOLAR INDUSTRIAL ""GEORGE VILSAN"" FAUREI"
+BZ,GRUPUL SCOLAR INDUSTRIAL IANCA / BR,3,outside_county_origin,direct_whole_name_match,BR,139,GRUPUL SCOLAR INDUSTRIAL IANCA
+BZ,LICEUL CU PROGRAM DE EDUCATIE FIZICA SI SPORT BACA / BC,1,outside_county_origin,direct_whole_name_match,BC,393,LICEUL CU PROGRAM DE EDUCATIE FIZICA SI SPORT BACA
+BZ,LICEUL TEORETIC TANDAREI / IL,1,outside_county_origin,direct_whole_name_match,IL,197,LICEUL TEORETIC TANDAREI
+BZ,LICEUL TEORETIC URLATI / PH,1,outside_county_origin,direct_whole_name_match,PH,206,LICEUL TEORETIC URLATI
+BZ,SC. CLS. I-VIII MOROIENI / DB,1,outside_county_origin,direct_whole_name_match,DB,234,SC. CLS. I-VIII MOROIENI
+BZ,SC. CLS. I-VIII N8  TIRGOVISTE / DB,1,outside_county_origin,direct_whole_name_match,DB,106,SC. CLS. I-VIII N8  TIRGOVISTE
+BZ,SCOALA CLASELE I-VIII NR.8 CALARASI / CL,1,outside_county_origin,direct_whole_name_match,CL,156,SCOALA CLASELE I-VIII NR.8 CALARASI
+BZ,SCOALA CU CLASELE I-VIII DROGU / BR,1,outside_county_origin,direct_whole_name_match,BR,159,SCOALA CU CLASELE I-VIII DROGU
+BZ,SCOALA CU CLASELE I-VIII FINTINELE / PH,1,outside_county_origin,direct_whole_name_match,PH,300,SCOALA CU CLASELE I-VIII FINTINELE
+BZ,SCOALA CU CLASELE I-VIII GALBENU / BR,2,outside_county_origin,direct_whole_name_match,BR,164,SCOALA CU CLASELE I-VIII GALBENU
+BZ,SCOALA CU CLASELE I-VIII GURA VADULUI / PH,1,outside_county_origin,direct_whole_name_match,PH,312,SCOALA CU CLASELE I-VIII GURA VADULUI
+BZ,SCOALA CU CLASELE I-VIII JIRLAU / BR,1,outside_county_origin,direct_whole_name_match,BR,169,SCOALA CU CLASELE I-VIII JIRLAU
+BZ,SCOALA CU CLASELE I-VIII NR. 1 MIZIL / PH,1,outside_county_origin,direct_whole_name_match,PH,190,SCOALA CU CLASELE I-VIII NR. 1 MIZIL
+BZ,SCOALA CU CLASELE I-VIII NR. 113 / B,1,outside_county_origin,direct_whole_name_match,B,207,SCOALA CU CLASELE I-VIII NR. 113
+BZ,SCOALA CU CLASELE I-VIII NR. 180 / B,1,outside_county_origin,direct_whole_name_match,B,048,SCOALA CU CLASELE I-VIII NR. 180
+BZ,SCOALA CU CLASELE I-VIII PERISORU / BR,1,outside_county_origin,direct_whole_name_match,BR,192,SCOALA CU CLASELE I-VIII PERISORU
+BZ,SCOALA CU CLASELE I-VIII PLOPENI / PH,1,outside_county_origin,direct_whole_name_match,PH,194,SCOALA CU CLASELE I-VIII PLOPENI
+BZ,SCOALA CU CLASELE I-VIII RACOVITA / BR,1,outside_county_origin,direct_whole_name_match,BR,194,SCOALA CU CLASELE I-VIII RACOVITA
+BZ,SCOALA CU CLASELE I-VIII ROSIORI / BR,1,outside_county_origin,direct_whole_name_match,BR,196,SCOALA CU CLASELE I-VIII ROSIORI
+BZ,SCOALA CU CLASELE I-VIII SURDILA GRECI / BR,1,outside_county_origin,direct_whole_name_match,BR,207,SCOALA CU CLASELE I-VIII SURDILA GRECI
+BZ,SCOALA CU CLASELE I-VIII VISANI / BR,2,outside_county_origin,direct_whole_name_match,BR,221,SCOALA CU CLASELE I-VIII VISANI
+BZ,SCOALA CU CLS.I-VIII NR.9  BORSA / MM,1,outside_county_origin,direct_whole_name_match,MM,328,SCOALA CU CLS.I-VIII NR.9  BORSA
+BZ,SCOALA GENERALA CU CL.I-VIII NR.6      SF.GHEORGHE / CV,1,outside_county_origin,direct_whole_name_match,CV,113,SCOALA GENERALA CU CL.I-VIII NR.6      SF.GHEORGHE
+BZ,SCOALA GENERALA CU CLASELE I-VIII  REDEA / OT,1,outside_county_origin,direct_whole_name_match,OT,212,SCOALA GENERALA CU CLASELE I-VIII  REDEA
+BZ,SCOALA GENERALA CU CLASELE I-VIII BRATESTI / BC,1,outside_county_origin,direct_whole_name_match,BC,191,SCOALA GENERALA CU CLASELE I-VIII BRATESTI
+BZ,SCOALA GENERALA CU CLASELE I-VIII CUCUIETI / BC,1,outside_county_origin,ambiguous_same_name,BC,224 | 352,SCOALA GENERALA CU CLASELE I-VIII CUCUIETI | SCOALA GENERALA CU CLASELE I-VIII CUCUIETI
+BZ,SCOALA GENERALA CU CLASELE I-VIII NR  1 SLANIC MOL / BC,1,outside_county_origin,direct_whole_name_match,BC,163,SCOALA GENERALA CU CLASELE I-VIII NR  1 SLANIC MOL
+BZ,SCOALA GENERALA CU CLASELE I-VIII NR  2 TIRGU OCNA / BC,1,outside_county_origin,direct_whole_name_match,BC,158,SCOALA GENERALA CU CLASELE I-VIII NR  2 TIRGU OCNA
+BZ,SCOALA GENERALA CU CLASELE I-VIII PALANCA / BC,2,outside_county_origin,direct_whole_name_match,BC,287,SCOALA GENERALA CU CLASELE I-VIII PALANCA
+BZ,SCOALA GENERALA CU CLASELE I-VIII PRELUCI / BC,1,outside_county_origin,direct_whole_name_match,BC,171,SCOALA GENERALA CU CLASELE I-VIII PRELUCI
+BZ,SCOALA GENERALA DE 8 ANI BAHNELE / VN,1,outside_county_origin,direct_whole_name_match,VN,242,SCOALA GENERALA DE 8 ANI BAHNELE
+BZ,SCOALA GENERALA DE 8 ANI BALESTI / VN,3,outside_county_origin,direct_whole_name_match,VN,110,SCOALA GENERALA DE 8 ANI BALESTI
+BZ,SCOALA GENERALA DE 8 ANI BOGZA / VN,1,outside_county_origin,direct_whole_name_match,VN,163,SCOALA GENERALA DE 8 ANI BOGZA
+BZ,SCOALA GENERALA DE 8 ANI CIORASTI / VN,2,outside_county_origin,direct_whole_name_match,VN,117,SCOALA GENERALA DE 8 ANI CIORASTI
+BZ,SCOALA GENERALA DE 8 ANI COROTENI / VN,1,outside_county_origin,direct_whole_name_match,VN,167,SCOALA GENERALA DE 8 ANI COROTENI
+BZ,SCOALA GENERALA DE 8 ANI MIHALCENI / VN,2,outside_county_origin,direct_whole_name_match,VN,118,SCOALA GENERALA DE 8 ANI MIHALCENI
+BZ,SCOALA GENERALA DE 8 ANI NR 1 ADJUD / VN,1,outside_county_origin,direct_whole_name_match,VN,247,SCOALA GENERALA DE 8 ANI NR 1 ADJUD
+BZ,SCOALA GENERALA DE 8 ANI NR 1 GUGESTI / VN,1,outside_county_origin,direct_whole_name_match,VN,135,SCOALA GENERALA DE 8 ANI NR 1 GUGESTI
+BZ,SCOALA GENERALA DE 8 ANI NR 1 POPESTI / VN,1,outside_county_origin,direct_whole_name_match,VN,239,SCOALA GENERALA DE 8 ANI NR 1 POPESTI
+BZ,SCOALA GENERALA DE 8 ANI NR 1 SIHLEA / VN,5,outside_county_origin,direct_whole_name_match,VN,162,SCOALA GENERALA DE 8 ANI NR 1 SIHLEA
+BZ,SCOALA GENERALA DE 8 ANI NR 2 GUGESTI / VN,1,outside_county_origin,direct_whole_name_match,VN,136,SCOALA GENERALA DE 8 ANI NR 2 GUGESTI
+BZ,SCOALA GENERALA DE 8 ANI NR 2 STRAOANE / VN,1,outside_county_origin,direct_whole_name_match,VN,172,SCOALA GENERALA DE 8 ANI NR 2 STRAOANE
+BZ,SCOALA GENERALA DE 8 ANI NR 4 ADJUD / VN,1,outside_county_origin,direct_whole_name_match,VN,103,SCOALA GENERALA DE 8 ANI NR 4 ADJUD
+BZ,SCOALA GENERALA DE 8 ANI OBREJITA / VN,1,outside_county_origin,direct_whole_name_match,VN,181,SCOALA GENERALA DE 8 ANI OBREJITA
+BZ,SCOALA GENERALA DE 8 ANI SLIMNIC / VN,1,outside_county_origin,direct_whole_name_match,VN,182,SCOALA GENERALA DE 8 ANI SLIMNIC
+BZ,SCOALA GENERALA DE 8 ANI SLOBOZIA BRADULUI / VN,1,outside_county_origin,direct_whole_name_match,VN,166,SCOALA GENERALA DE 8 ANI SLOBOZIA BRADULUI
+BZ,SCOALA GENERALA DE 8 ANI TIMBOESTI / VN,2,outside_county_origin,direct_whole_name_match,VN,180,SCOALA GENERALA DE 8 ANI TIMBOESTI
+BZ,SCOALA GENERALA I-VIII NR.2 SLOBOZIA / IL,1,outside_county_origin,direct_whole_name_match,IL,160,SCOALA GENERALA I-VIII NR.2 SLOBOZIA
+BZ,SCOALA GENERALA I-VIII NR.7 FETESTI / IL,1,outside_county_origin,direct_whole_name_match,IL,158,SCOALA GENERALA I-VIII NR.7 FETESTI
+BZ,scoala cu clasele I-VIII Viisoara / CT,1,outside_county_origin,direct_whole_name_match,CT,187,scoala cu clasele I-VIII Viisoara
+BZ,scoala sanatoriala Mangalia / CT,2,outside_county_origin,direct_whole_name_match,CT,145,scoala sanatoriala Mangalia
+CL,"LICEUL TEORETIC ""LUCIAN BLAGA"" / B",1,outside_county_origin,direct_whole_name_match,B,081,"LICEUL TEORETIC ""LUCIAN BLAGA"""
+CL,SC.CU CLS. I - VIII GREACA / GR,3,outside_county_origin,direct_whole_name_match,GR,703,SC.CU CLS. I - VIII GREACA
+CL,SC.CU CLS. I - VIII NR 6 GIURGIU / GR,2,outside_county_origin,direct_whole_name_match,GR,501,SC.CU CLS. I - VIII NR 6 GIURGIU
+CL,SCOALA CU CLASELE I-VIII LIVENI / BT,1,outside_county_origin,direct_whole_name_match,BT,227,SCOALA CU CLASELE I-VIII LIVENI
+CL,SCOALA CU CLASELE I-VIII NR.  12 / B,1,outside_county_origin,direct_whole_name_match,B,034,SCOALA CU CLASELE I-VIII NR.  12
+CL,SCOALA CU CLASELE I-VIII NR.  24 / B,2,outside_county_origin,direct_whole_name_match,B,094,SCOALA CU CLASELE I-VIII NR.  24
+CL,SCOALA CU CLASELE I-VIII NR.  97 / B,1,outside_county_origin,direct_whole_name_match,B,198,SCOALA CU CLASELE I-VIII NR.  97
+CL,"SCOALA CU CLASELE I-VIII NR.  98 ""AVRAM IANCU"" / B",1,outside_county_origin,direct_whole_name_match,B,199,"SCOALA CU CLASELE I-VIII NR.  98 ""AVRAM IANCU"""
+CL,SCOALA CU CLASELE I-VIII NR.  99 / B,1,outside_county_origin,direct_whole_name_match,B,200,SCOALA CU CLASELE I-VIII NR.  99
+CL,SCOALA CU CLASELE I-VIII NR. 280 / B,1,outside_county_origin,direct_whole_name_match,B,255,SCOALA CU CLASELE I-VIII NR. 280
+CL,SCOALA GENERALA I-VIII AMARA / IL,1,outside_county_origin,direct_whole_name_match,IL,103,SCOALA GENERALA I-VIII AMARA
+CL,SCOALA GENERALA I-VIII HORIA / IL,1,outside_county_origin,direct_whole_name_match,IL,172,SCOALA GENERALA I-VIII HORIA
+CL,SCOALA GENERALA I-VIII NR.2 SLOBOZIA / IL,1,outside_county_origin,direct_whole_name_match,IL,160,SCOALA GENERALA I-VIII NR.2 SLOBOZIA
+CL,SCOALA GENERALA I-VIII NR.3 SLOBOZIA / IL,1,outside_county_origin,direct_whole_name_match,IL,161,SCOALA GENERALA I-VIII NR.3 SLOBOZIA
+CL,SCOALA GENERALA I-VIII NR.6 SLOBOZIA / IL,1,outside_county_origin,direct_whole_name_match,IL,195,SCOALA GENERALA I-VIII NR.6 SLOBOZIA
+CL,SCOALA GENERALA I-VIII RASI / IL,3,outside_county_origin,direct_whole_name_match,IL,143,SCOALA GENERALA I-VIII RASI
+CL,SCOALA GENERALA I-VIII SALCIOARA / IL,6,outside_county_origin,direct_whole_name_match,IL,142,SCOALA GENERALA I-VIII SALCIOARA
+CL,grup scolar Ostrov / CT,4,outside_county_origin,direct_whole_name_match,CT,164,grup scolar Ostrov
+CL,liceul teoretic  A.Saligny  Cernavoda / CT,1,outside_county_origin,direct_whole_name_match,CT,276,liceul teoretic  A.Saligny  Cernavoda
+CL,scoala cu clasele I-VIII Canlia / CT,2,outside_county_origin,direct_whole_name_match,CT,169,scoala cu clasele I-VIII Canlia
+CL,scoala cu clasele I-VIII Coslugea / CT,1,outside_county_origin,direct_whole_name_match,CT,171,scoala cu clasele I-VIII Coslugea
+CL,scoala cu clasele I-VIII Girlita / CT,3,outside_county_origin,direct_whole_name_match,CT,175,scoala cu clasele I-VIII Girlita
+CL,scoala cu clasele I-VIII Lipnita / CT,2,outside_county_origin,direct_whole_name_match,CT,177,scoala cu clasele I-VIII Lipnita
+CS,SC.CU CLS.I-VIII DANCEU / MH,1,outside_county_origin,direct_whole_name_match,MH,187,SC.CU CLS.I-VIII DANCEU
+CS,SC.CU CLS.I-VIII ISVERNA / MH,1,outside_county_origin,direct_whole_name_match,MH,181,SC.CU CLS.I-VIII ISVERNA
+CS,SC.CU CLS.I-VIII NR 06 SEVERIN / MH,1,outside_county_origin,direct_whole_name_match,MH,106,SC.CU CLS.I-VIII NR 06 SEVERIN
+CS,SC.CU CLS.I-VIII SOVARNA / MH,1,outside_county_origin,direct_whole_name_match,MH,216,SC.CU CLS.I-VIII SOVARNA
+CS,SC.CU CLS.I-VIII TIMNA / MH,1,outside_county_origin,direct_whole_name_match,MH,217,SC.CU CLS.I-VIII TIMNA
+CS,SCOALA CU CLASELE I - VIII ARGETOAIA / DJ,1,outside_county_origin,direct_whole_name_match,DJ,133,SCOALA CU CLASELE I - VIII ARGETOAIA
+CS,SCOALA CU CLASELE I - VIII BRANISTE / DJ,1,outside_county_origin,direct_whole_name_match,DJ,148,SCOALA CU CLASELE I - VIII BRANISTE
+CS,SCOALA CU CLASELE I-VIII CERVICESTI / BT,1,outside_county_origin,direct_whole_name_match,BT,229,SCOALA CU CLASELE I-VIII CERVICESTI
+CS,SCOALA CU CLASELE I-VIII TODIRESTI / SV,1,outside_county_origin,direct_whole_name_match,SV,264,SCOALA CU CLASELE I-VIII TODIRESTI
+CS,"SCOALA CU CLS.I-VIII ""George Cosbuc""  SIGHETU MARM / MM",1,outside_county_origin,direct_whole_name_match,MM,130,"SCOALA CU CLS.I-VIII ""George Cosbuc""  SIGHETU MARM"
+CS,SCOALA CU CLS.I-VIII NR 1 RUSCOVA / MM,1,outside_county_origin,direct_whole_name_match,MM,322,SCOALA CU CLS.I-VIII NR 1 RUSCOVA
+CS,SCOALA GENERALA CLS I - VIII SARMIZEGETUSA / HD,1,outside_county_origin,direct_whole_name_match,HD,194,SCOALA GENERALA CLS I - VIII SARMIZEGETUSA
+CS,SCOALA GENERALA CLS.I-VIII HUMELE / AG,1,outside_county_origin,direct_whole_name_match,AG,330,SCOALA GENERALA CLS.I-VIII HUMELE
+CS,SCOALA GENERALA DE 8 ANI NR.1 BILIESTI / VN,1,outside_county_origin,direct_whole_name_match,VN,174,SCOALA GENERALA DE 8 ANI NR.1 BILIESTI
+CS,"SCOALA GENERALA MOTRU-SEC, PADES / GJ",1,outside_county_origin,direct_whole_name_match,GJ,203,"SCOALA GENERALA MOTRU-SEC, PADES"
+CV,"LICEUL TEORETIC ""APRILY LAJOS"" BRASOV / BV",1,outside_county_origin,direct_whole_name_match,BV,APR,"LICEUL TEORETIC ""APRILY LAJOS"" BRASOV"
+CV,SCOALA CU CL I-VIII NR 1 IVANES/BICAZ-CHEI / NT,1,outside_county_origin,direct_whole_name_match,NT,261,SCOALA CU CL I-VIII NR 1 IVANES/BICAZ-CHEI
+CV,SCOALA CU CLASELE I-VIII NR 1 VORONA / BT,1,outside_county_origin,direct_whole_name_match,BT,299,SCOALA CU CLASELE I-VIII NR 1 VORONA
+CV,"SCOALA GENERALA ""JOKAI MOR"" BAILE TUSNAD / HR",1,outside_county_origin,direct_whole_name_match,HR,105,"SCOALA GENERALA ""JOKAI MOR"" BAILE TUSNAD"
+CV,SCOALA GENERALA BOD COLONIE / BV,1,outside_county_origin,direct_whole_name_match,BV,BOC,SCOALA GENERALA BOD COLONIE
+CV,SCOALA GENERALA CLASELE I - VIII NR 02 SOVATA / MS,1,outside_county_origin,direct_whole_name_match,MS,343,SCOALA GENERALA CLASELE I - VIII NR 02 SOVATA
+CV,SCOALA GENERALA CU CLASELE I-VIII BOLOVANIS / BC,1,outside_county_origin,direct_whole_name_match,BC,237,SCOALA GENERALA CU CLASELE I-VIII BOLOVANIS
+CV,SCOALA GENERALA CU CLASELE I-VIII CORNII DE SUS / BC,1,outside_county_origin,direct_whole_name_match,BC,357,SCOALA GENERALA CU CLASELE I-VIII CORNII DE SUS
+CV,SCOALA GENERALA CU CLASELE I-VIII RACHITIS / BC,2,outside_county_origin,direct_whole_name_match,BC,339,SCOALA GENERALA CU CLASELE I-VIII RACHITIS
+CV,SCOALA GENERALA LUNCA CALNICULUI / BV,2,outside_county_origin,direct_whole_name_match,BV,LUC,SCOALA GENERALA LUNCA CALNICULUI
+CV,"SCOALA GENERALA NR 1 ""TOMPA LASZLO"" ODORHEI / HR",1,outside_county_origin,direct_whole_name_match,HR,190,"SCOALA GENERALA NR 1 ""TOMPA LASZLO"" ODORHEI"
+CV,SCOALA GENERALA NR 1 FAGARAS / BV,2,outside_county_origin,direct_whole_name_match,BV,1FG,SCOALA GENERALA NR 1 FAGARAS
+CV,SCOALA GENERALA NR 1 SACELE / BV,1,outside_county_origin,direct_whole_name_match,BV,1SA,SCOALA GENERALA NR 1 SACELE
+CV,SCOALA GENERALA NR 27 BRASOV / BV,1,outside_county_origin,direct_whole_name_match,BV,27B,SCOALA GENERALA NR 27 BRASOV
+CV,SCOALA GENERALA ORMENIS / BV,1,outside_county_origin,direct_whole_name_match,BV,ORM,SCOALA GENERALA ORMENIS
+CV,SCOALA GENERALA PREJMER / BV,2,outside_county_origin,direct_whole_name_match,BV,PRE,SCOALA GENERALA PREJMER
+CV,SCOALA GENERALA RACOS / BV,2,outside_county_origin,direct_whole_name_match,BV,RAC,SCOALA GENERALA RACOS
+CV,SCOALA GENERALA VAMA BUZAULUI / BV,9,outside_county_origin,direct_whole_name_match,BV,VBZ,SCOALA GENERALA VAMA BUZAULUI
+DB,GRUP SCOLAR IND.RUCAR / AG,1,outside_county_origin,direct_whole_name_match,AG,117,GRUP SCOLAR IND.RUCAR
+DB,GRUP SCOLAR INDUSTRIAL STOINA / GJ,1,outside_county_origin,direct_whole_name_match,GJ,232,GRUP SCOLAR INDUSTRIAL STOINA
+DB,"GRUPUL SC.AGROMONTAN ""ROMEO CONSTANTINESCU"" VALENI / PH",1,outside_county_origin,direct_whole_name_match,PH,212,"GRUPUL SC.AGROMONTAN ""ROMEO CONSTANTINESCU"" VALENI"
+DB,SC.CU CLS. I - VIII VINATORII MARI / GR,3,outside_county_origin,direct_whole_name_match,GR,629,SC.CU CLS. I - VIII VINATORII MARI
+DB,SC.CU CLS.I-VIII OPRISOR / MH,1,outside_county_origin,direct_whole_name_match,MH,194,SC.CU CLS.I-VIII OPRISOR
+DB,SCOALA CU CLASELE I-VIII COTENESTI / AG,1,outside_county_origin,direct_whole_name_match,AG,313,SCOALA CU CLASELE I-VIII COTENESTI
+DB,SCOALA CU CLASELE I-VIII DITESTI FILIPESTII DE P. / PH,6,outside_county_origin,direct_whole_name_match,PH,295,SCOALA CU CLASELE I-VIII DITESTI FILIPESTII DE P.
+DB,SCOALA CU CLASELE I-VIII IARA COM. IARA / CJ,1,outside_county_origin,direct_whole_name_match,CJ,272,SCOALA CU CLASELE I-VIII IARA COM. IARA
+DB,SCOALA CU CLASELE I-VIII NR.  84 / B,1,outside_county_origin,direct_whole_name_match,B,161,SCOALA CU CLASELE I-VIII NR.  84
+DB,SCOALA CU CLASELE I-VIII NR. 1 MIZIL / PH,1,outside_county_origin,direct_whole_name_match,PH,190,SCOALA CU CLASELE I-VIII NR. 1 MIZIL
+DB,SCOALA CU CLASELE I-VIII NR. 184 / B,1,outside_county_origin,direct_whole_name_match,B,052,SCOALA CU CLASELE I-VIII NR. 184
+DB,SCOALA CU CLASELE I-VIII NR. 2 BUSTENI / PH,1,outside_county_origin,direct_whole_name_match,PH,168,SCOALA CU CLASELE I-VIII NR. 2 BUSTENI
+DB,SCOALA CU CLASELE I-VIII STEFAN CEL MARE / AG,1,outside_county_origin,direct_whole_name_match,AG,318,SCOALA CU CLASELE I-VIII STEFAN CEL MARE
+DB,SCOALA GENERALA DE 8 ANI NR.1 PAUNESTI / VN,1,outside_county_origin,direct_whole_name_match,VN,264,SCOALA GENERALA DE 8 ANI NR.1 PAUNESTI
+DB,SCOALA GENERALA GLIMBOCATA / AG,1,outside_county_origin,direct_whole_name_match,AG,254,SCOALA GENERALA GLIMBOCATA
+DB,SCOALA GENERALA LAICAI NR.2 / AG,4,outside_county_origin,direct_whole_name_match,AG,217,SCOALA GENERALA LAICAI NR.2
+DB,SCOALA GENERALA NR 2 CU CLASELE I-VIII  CARACAL / OT,1,outside_county_origin,direct_whole_name_match,OT,266,SCOALA GENERALA NR 2 CU CLASELE I-VIII  CARACAL
+DB,SCOALA ROSIILE / VL,1,outside_county_origin,direct_whole_name_match,VL,249,SCOALA ROSIILE
+DB,scoala cu clasele I-VIII nr. 1 Corbu de Jos / CT,1,outside_county_origin,direct_whole_name_match,CT,105,scoala cu clasele I-VIII nr. 1 Corbu de Jos
+GJ,GRUP SCOLAR INDUSTRIAL MINIER MOLDOVA NOUA / CS,1,outside_county_origin,direct_whole_name_match,CS,265,GRUP SCOLAR INDUSTRIAL MINIER MOLDOVA NOUA
+GJ,LICEUL TEORETIC TRAIAN LALESCU RESITA / CS,1,outside_county_origin,direct_whole_name_match,CS,233,LICEUL TEORETIC TRAIAN LALESCU RESITA
+GJ,SC.CU CLS. I - VIII NR 5 GIURGIU / GR,1,outside_county_origin,direct_whole_name_match,GR,502,SC.CU CLS. I - VIII NR 5 GIURGIU
+GJ,SC.CU CLS.I-VIII BROSTENI / MH,5,outside_county_origin,direct_whole_name_match,MH,142,SC.CU CLS.I-VIII BROSTENI
+GJ,SC.CU CLS.I-VIII CORCOVA / MH,4,outside_county_origin,direct_whole_name_match,MH,151,SC.CU CLS.I-VIII CORCOVA
+GJ,SC.CU CLS.I-VIII DILMA / MH,1,outside_county_origin,direct_whole_name_match,MH,129,SC.CU CLS.I-VIII DILMA
+GJ,SC.CU CLS.I-VIII JIROV / MH,1,outside_county_origin,direct_whole_name_match,MH,152,SC.CU CLS.I-VIII JIROV
+GJ,SC.CU CLS.I-VIII LUPSA DE JOS / MH,1,outside_county_origin,direct_whole_name_match,MH,143,SC.CU CLS.I-VIII LUPSA DE JOS
+GJ,SC.CU CLS.I-VIII NOAPTESA / MH,1,outside_county_origin,direct_whole_name_match,MH,215,SC.CU CLS.I-VIII NOAPTESA
+GJ,SC.CU CLS.I-VIII RUDINA / MH,3,outside_county_origin,direct_whole_name_match,MH,130,SC.CU CLS.I-VIII RUDINA
+GJ,SC.CU CLS.I-VIII SEVERINESTI / MH,1,outside_county_origin,direct_whole_name_match,MH,149,SC.CU CLS.I-VIII SEVERINESTI
+GJ,SC.CU CLS.I-VIII STREHAIA / MH,1,outside_county_origin,direct_whole_name_match,MH,121,SC.CU CLS.I-VIII STREHAIA
+GJ,SC.CU CLS.I-VIII VRATA / MH,1,outside_county_origin,direct_whole_name_match,MH,163,SC.CU CLS.I-VIII VRATA
+GJ,SCOALA AMARASTI / VL,1,outside_county_origin,direct_whole_name_match,VL,103,SCOALA AMARASTI
+GJ,SCOALA CERNISOARA / VL,1,outside_county_origin,direct_whole_name_match,VL,137,SCOALA CERNISOARA
+GJ,SCOALA CU CLASELE I - VIII ARGETOAIA / DJ,1,outside_county_origin,direct_whole_name_match,DJ,133,SCOALA CU CLASELE I - VIII ARGETOAIA
+GJ,SCOALA CU CLASELE I - VIII FILIASI / DJ,1,outside_county_origin,direct_whole_name_match,DJ,189,SCOALA CU CLASELE I - VIII FILIASI
+GJ,SCOALA CU CLASELE I - VIII GRECESTI / DJ,2,outside_county_origin,direct_whole_name_match,DJ,206,SCOALA CU CLASELE I - VIII GRECESTI
+GJ,"SCOALA CU CLASELE I-VIII ""POTAISA"" (NR.3) TURDA / CJ",1,outside_county_origin,direct_whole_name_match,CJ,170,"SCOALA CU CLASELE I-VIII ""POTAISA"" (NR.3) TURDA"
+GJ,SCOALA CU CLASELE I-VIII NR. 4 CLUJ-NAPOCA / CJ,1,outside_county_origin,direct_whole_name_match,CJ,104,SCOALA CU CLASELE I-VIII NR. 4 CLUJ-NAPOCA
+GJ,SCOALA GENERALA CU CLASELE I-VIII  BRASTAVATU / OT,1,outside_county_origin,direct_whole_name_match,OT,121,SCOALA GENERALA CU CLASELE I-VIII  BRASTAVATU
+GJ,SCOALA GENERALA CU CLASELE I-VIII  FLORU ICOANA / OT,1,outside_county_origin,direct_whole_name_match,OT,171,SCOALA GENERALA CU CLASELE I-VIII  FLORU ICOANA
+GJ,SCOALA GENERALA CU CLASELE I-VIII  OBIRSIA / OT,1,outside_county_origin,direct_whole_name_match,OT,190,SCOALA GENERALA CU CLASELE I-VIII  OBIRSIA
+GJ,SCOALA GENERALA CU CLASELE I-VIII  TRAIAN / OT,1,outside_county_origin,direct_whole_name_match,OT,237,SCOALA GENERALA CU CLASELE I-VIII  TRAIAN
+GJ,SCOALA GENERALA CU CLASELE I-VIII  VLADILA / OT,1,outside_county_origin,direct_whole_name_match,OT,249,SCOALA GENERALA CU CLASELE I-VIII  VLADILA
+GJ,SCOALA GENERALA CU CLASELE I-VIII NR 5 BALS / OT,1,outside_county_origin,direct_whole_name_match,OT,306,SCOALA GENERALA CU CLASELE I-VIII NR 5 BALS
+GJ,SCOALA GENERALA NR 8 CARANSEBES / CS,1,outside_county_origin,direct_whole_name_match,CS,263,SCOALA GENERALA NR 8 CARANSEBES
+GJ,"SCOALA HANTESTI ""SMARANDA BRAIESCU"" / GL",1,outside_county_origin,direct_whole_name_match,GL,168,"SCOALA HANTESTI ""SMARANDA BRAIESCU"""
+GJ,SCOALA MILOSTEA / VL,1,outside_county_origin,direct_whole_name_match,VL,258,SCOALA MILOSTEA
+GJ,SCOALA MIOVENI / AG,1,outside_county_origin,direct_whole_name_match,AG,144,SCOALA MIOVENI
+GJ,SCOALA OBISLAVU / VL,1,outside_county_origin,direct_whole_name_match,VL,176,SCOALA OBISLAVU
+GJ,SCOALA PIRIIENI / VL,1,outside_county_origin,direct_whole_name_match,VL,187,SCOALA PIRIIENI
+GJ,SCOALA SASCIOARA / VL,1,outside_county_origin,direct_whole_name_match,VL,293,SCOALA SASCIOARA
+GJ,SCOALA STANESTI / VL,1,outside_county_origin,direct_whole_name_match,VL,260,SCOALA STANESTI
+GJ,scoala cu clasele I-VIII nr. 5 Mangalia / CT,1,outside_county_origin,direct_whole_name_match,CT,280,scoala cu clasele I-VIII nr. 5 Mangalia
+GL,"GRUP SCOLAR ""C.BRATESCU"" ISACCEA / TL",2,outside_county_origin,direct_whole_name_match,TL,103,"GRUP SCOLAR ""C.BRATESCU"" ISACCEA"
+GL,GRUPUL SCOLAR AGRICOL MURGENI / VS,2,outside_county_origin,direct_whole_name_match,VS,201,GRUPUL SCOLAR AGRICOL MURGENI
+GL,GRUPUL SCOLAR INDUSTRIAL IANCA / BR,2,outside_county_origin,direct_whole_name_match,BR,139,GRUPUL SCOLAR INDUSTRIAL IANCA
+GL,SC. CU CLASELE I-VIII GHERGHEASA com. GHERGHEASA / BZ,1,outside_county_origin,direct_whole_name_match,BZ,182,SC. CU CLASELE I-VIII GHERGHEASA com. GHERGHEASA
+GL,"SCOALA ""ION CREANGA"" IASI / IS",1,outside_county_origin,direct_whole_name_match,IS,073,"SCOALA ""ION CREANGA"" IASI"
+GL,SCOALA CU CL.I-VIII BACOVA BUZIAS / TM,1,outside_county_origin,direct_whole_name_match,TM,185,SCOALA CU CL.I-VIII BACOVA BUZIAS
+GL,SCOALA CU CLASE I-VIII CERNA / TL,2,outside_county_origin,direct_whole_name_match,TL,128,SCOALA CU CLASE I-VIII CERNA
+GL,SCOALA CU CLASE I-VIII FRECATEI / TL,1,outside_county_origin,direct_whole_name_match,TL,139,SCOALA CU CLASE I-VIII FRECATEI
+GL,SCOALA CU CLASE I-VIII GARVAN / TL,3,outside_county_origin,direct_whole_name_match,TL,150,SCOALA CU CLASE I-VIII GARVAN
+GL,SCOALA CU CLASE I-VIII GRINDU / TL,6,outside_county_origin,direct_whole_name_match,TL,143,SCOALA CU CLASE I-VIII GRINDU
+GL,SCOALA CU CLASE I-VIII I.C.BRATIANU / TL,4,outside_county_origin,direct_whole_name_match,TL,192,SCOALA CU CLASE I-VIII I.C.BRATIANU
+GL,SCOALA CU CLASE I-VIII JIJILA / TL,1,outside_county_origin,direct_whole_name_match,TL,149,SCOALA CU CLASE I-VIII JIJILA
+GL,SCOALA CU CLASE I-VIII JURILOVCA / TL,1,outside_county_origin,direct_whole_name_match,TL,200,SCOALA CU CLASE I-VIII JURILOVCA
+GL,SCOALA CU CLASE I-VIII LUNCAVITA / TL,8,outside_county_origin,direct_whole_name_match,TL,152,SCOALA CU CLASE I-VIII LUNCAVITA
+GL,SCOALA CU CLASE I-VIII MIRCEA VODA / TL,1,outside_county_origin,direct_whole_name_match,TL,129,SCOALA CU CLASE I-VIII MIRCEA VODA
+GL,SCOALA CU CLASE I-VIII MURIGHIOL / TL,1,outside_county_origin,direct_whole_name_match,TL,163,SCOALA CU CLASE I-VIII MURIGHIOL
+GL,SCOALA CU CLASE I-VIII SFINTU GHEORGHE / TL,1,outside_county_origin,direct_whole_name_match,TL,176,SCOALA CU CLASE I-VIII SFINTU GHEORGHE
+GL,SCOALA CU CLASE I-VIII TRAIAN / TL,1,outside_county_origin,direct_whole_name_match,TL,130,SCOALA CU CLASE I-VIII TRAIAN
+GL,SCOALA CU CLASE I-VIII VACARENI / TL,1,outside_county_origin,direct_whole_name_match,TL,154,SCOALA CU CLASE I-VIII VACARENI
+GL,"SCOALA CU CLASELE I-VIII ""ION CREANGA"" BRAILA / BR",1,outside_county_origin,direct_whole_name_match,BR,106,"SCOALA CU CLASELE I-VIII ""ION CREANGA"" BRAILA"
+GL,"SCOALA CU CLASELE I-VIII ""MIHAI EMINESCU"" BRAILA / BR",1,outside_county_origin,direct_whole_name_match,BR,107,"SCOALA CU CLASELE I-VIII ""MIHAI EMINESCU"" BRAILA"
+GL,SCOALA CU CLASELE I-VIII BACESTI / VS,1,outside_county_origin,direct_whole_name_match,VS,112,SCOALA CU CLASELE I-VIII BACESTI
+GL,SCOALA CU CLASELE I-VIII BLAGESTI / VS,1,outside_county_origin,direct_whole_name_match,VS,118,SCOALA CU CLASELE I-VIII BLAGESTI
+GL,SCOALA CU CLASELE I-VIII BUDA / VS,1,outside_county_origin,direct_whole_name_match,VS,211,SCOALA CU CLASELE I-VIII BUDA
+GL,SCOALA CU CLASELE I-VIII BURSUCI / VS,1,outside_county_origin,direct_whole_name_match,VS,154,SCOALA CU CLASELE I-VIII BURSUCI
+GL,SCOALA CU CLASELE I-VIII CIOCILE / BR,1,outside_county_origin,direct_whole_name_match,BR,151,SCOALA CU CLASELE I-VIII CIOCILE
+GL,SCOALA CU CLASELE I-VIII COROIESTI / VS,1,outside_county_origin,direct_whole_name_match,VS,123,SCOALA CU CLASELE I-VIII COROIESTI
+GL,SCOALA CU CLASELE I-VIII DEDULESTI / BR,1,outside_county_origin,direct_whole_name_match,BR,158,SCOALA CU CLASELE I-VIII DEDULESTI
+GL,SCOALA CU CLASELE I-VIII FALCIU / VS,6,outside_county_origin,direct_whole_name_match,VS,157,SCOALA CU CLASELE I-VIII FALCIU
+GL,SCOALA CU CLASELE I-VIII FLORESTI / VS,2,outside_county_origin,direct_whole_name_match,VS,104,SCOALA CU CLASELE I-VIII FLORESTI
+GL,SCOALA CU CLASELE I-VIII HURDUGI / VS,1,outside_county_origin,direct_whole_name_match,VS,178,SCOALA CU CLASELE I-VIII HURDUGI
+GL,SCOALA CU CLASELE I-VIII MIRCEA VODA / BR,1,outside_county_origin,direct_whole_name_match,BR,181,SCOALA CU CLASELE I-VIII MIRCEA VODA
+GL,SCOALA CU CLASELE I-VIII NR 1 BRAILA / BR,1,outside_county_origin,direct_whole_name_match,BR,113,SCOALA CU CLASELE I-VIII NR 1 BRAILA
+GL,SCOALA CU CLASELE I-VIII NR 1 CRISTINESTI / BT,1,outside_county_origin,direct_whole_name_match,BT,179,SCOALA CU CLASELE I-VIII NR 1 CRISTINESTI
+GL,SCOALA CU CLASELE I-VIII NR 1 INSURATEI / BR,1,outside_county_origin,direct_whole_name_match,BR,114,SCOALA CU CLASELE I-VIII NR 1 INSURATEI
+GL,SCOALA CU CLASELE I-VIII NR.01 BEREZENI / VS,1,outside_county_origin,direct_whole_name_match,VS,114,SCOALA CU CLASELE I-VIII NR.01 BEREZENI
+GL,SCOALA CU CLASELE I-VIII NR.01 BIRLAD / VS,1,outside_county_origin,direct_whole_name_match,VS,277,SCOALA CU CLASELE I-VIII NR.01 BIRLAD
+GL,SCOALA CU CLASELE I-VIII NR.05 BIRLAD / VS,1,outside_county_origin,direct_whole_name_match,VS,281,SCOALA CU CLASELE I-VIII NR.05 BIRLAD
+GL,SCOALA CU CLASELE I-VIII NR.08 BIRLAD / VS,2,outside_county_origin,direct_whole_name_match,VS,284,SCOALA CU CLASELE I-VIII NR.08 BIRLAD
+GL,SCOALA CU CLASELE I-VIII NR.11 BIRLAD / VS,1,outside_county_origin,direct_whole_name_match,VS,287,SCOALA CU CLASELE I-VIII NR.11 BIRLAD
+GL,SCOALA CU CLASELE I-VIII OBIRSENI / VS,1,outside_county_origin,direct_whole_name_match,VS,260,SCOALA CU CLASELE I-VIII OBIRSENI
+GL,SCOALA CU CLASELE I-VIII RADENI / VS,1,outside_county_origin,direct_whole_name_match,VS,144,SCOALA CU CLASELE I-VIII RADENI
+GL,SCOALA CU CLASELE I-VIII RINZESTI / VS,4,outside_county_origin,direct_whole_name_match,VS,158,SCOALA CU CLASELE I-VIII RINZESTI
+GL,SCOALA CU CLASELE I-VIII ROSIORI / BR,1,outside_county_origin,direct_whole_name_match,BR,196,SCOALA CU CLASELE I-VIII ROSIORI
+GL,SCOALA CU CLASELE I-VIII SCARLATESTI / BR,1,outside_county_origin,direct_whole_name_match,BR,199,SCOALA CU CLASELE I-VIII SCARLATESTI
+GL,SCOALA CU CLASELE I-VIII STANCUTA / BR,1,outside_county_origin,direct_whole_name_match,BR,205,SCOALA CU CLASELE I-VIII STANCUTA
+GL,SCOALA CU CLASELE I-VIII SUTESTI / BR,1,outside_county_origin,direct_whole_name_match,BR,208,SCOALA CU CLASELE I-VIII SUTESTI
+GL,SCOALA CU CLASELE I-VIII TICHILESTI / BR,1,outside_county_origin,direct_whole_name_match,BR,212,SCOALA CU CLASELE I-VIII TICHILESTI
+GL,SCOALA CU CLASELE I-VIII VADENI / BR,1,outside_county_origin,direct_whole_name_match,BR,218,SCOALA CU CLASELE I-VIII VADENI
+GL,SCOALA CU CLASELE I-VIII VINDEREI / VS,2,outside_county_origin,direct_whole_name_match,VS,261,SCOALA CU CLASELE I-VIII VINDEREI
+GL,SCOALA GENERALA CU CLASELE I-VIII CAIUTI / BC,1,outside_county_origin,direct_whole_name_match,BC,203,SCOALA GENERALA CU CLASELE I-VIII CAIUTI
+GL,SCOALA GENERALA CU CLASELE I-VIII COCIU / BC,1,outside_county_origin,direct_whole_name_match,BC,267,SCOALA GENERALA CU CLASELE I-VIII COCIU
+GL,SCOALA GENERALA CU CLASELE I-VIII NR  1 SLANIC MOL / BC,1,outside_county_origin,direct_whole_name_match,BC,163,SCOALA GENERALA CU CLASELE I-VIII NR  1 SLANIC MOL
+GL,SCOALA GENERALA CU CLASELE I-VIII NR  1 TURLUIANU / BC,1,outside_county_origin,direct_whole_name_match,BC,184,SCOALA GENERALA CU CLASELE I-VIII NR  1 TURLUIANU
+GL,SCOALA GENERALA CU CLASELE I-VIII NR  7 ONESTI / BC,1,outside_county_origin,direct_whole_name_match,BC,387,SCOALA GENERALA CU CLASELE I-VIII NR  7 ONESTI
+GL,SCOALA GENERALA CU CLASELE I-VIII VULTURENI / BC,1,outside_county_origin,direct_whole_name_match,BC,371,SCOALA GENERALA CU CLASELE I-VIII VULTURENI
+GL,SCOALA GENERALA DE 8 ANI CIORASTI / VN,2,outside_county_origin,direct_whole_name_match,VN,117,SCOALA GENERALA DE 8 ANI CIORASTI
+GL,SCOALA GENERALA DE 8 ANI GOLOGANU / VN,1,outside_county_origin,direct_whole_name_match,VN,143,SCOALA GENERALA DE 8 ANI GOLOGANU
+GL,SCOALA GENERALA DE 8 ANI MAICANESTI / VN,2,outside_county_origin,direct_whole_name_match,VN,140,SCOALA GENERALA DE 8 ANI MAICANESTI
+GL,SCOALA GENERALA DE 8 ANI MIHALCENI / VN,1,outside_county_origin,direct_whole_name_match,VN,118,SCOALA GENERALA DE 8 ANI MIHALCENI
+GL,SCOALA GENERALA DE 8 ANI TATARANU / VN,1,outside_county_origin,direct_whole_name_match,VN,177,SCOALA GENERALA DE 8 ANI TATARANU
+GL,SCOALA GENERALA DE 8 ANI TULNICI / VN,1,outside_county_origin,direct_whole_name_match,VN,236,SCOALA GENERALA DE 8 ANI TULNICI
+GL,SCOALA GENERALA DE 8 ANI VULTURU / VN,1,outside_county_origin,direct_whole_name_match,VN,246,SCOALA GENERALA DE 8 ANI VULTURU
+GL,SCOALA GENERALA I-VIII NR.2 URZICENI / IL,1,outside_county_origin,direct_whole_name_match,IL,192,SCOALA GENERALA I-VIII NR.2 URZICENI
+GL,SCOALA GENERALA NR 8 BRASOV / BV,1,outside_county_origin,direct_whole_name_match,BV,8B,SCOALA GENERALA NR 8 BRASOV
+GL,scoala cu clasele I-VIII nr. 1 Hirsova / CT,1,outside_county_origin,direct_whole_name_match,CT,209,scoala cu clasele I-VIII nr. 1 Hirsova
+GR,"GRUP SCOLAR INDUSTRIAL ""NICOLAE TECLU"" / B",1,outside_county_origin,direct_whole_name_match,B,133,"GRUP SCOLAR INDUSTRIAL ""NICOLAE TECLU"""
+GR,SC.CU CLS. I - VIII IZVOARELE / GR,10,ambiguous_same_directory_name,needs_school_specific_source_review,GR,205 | 711,SC.CU CLS. I - VIII IZVOARELE | SC.CU CLS. I - VIII IZVOARELE
+GR,SC.CU CLS. I - VIII IZVORU / GR,10,ambiguous_same_directory_name,needs_school_specific_source_review,GR,204 | 630,SC.CU CLS. I - VIII IZVORU | SC.CU CLS. I - VIII IZVORU
+GR,SC.CU CLS. I - VIII STOENESTI / GR,20,ambiguous_same_directory_name,needs_school_specific_source_review,GR,319 | 623,SC.CU CLS. I - VIII STOENESTI | SC.CU CLS. I - VIII STOENESTI
+GR,SCOALA CU CLASELE I-VIII BALCAUTI / SV,1,outside_county_origin,direct_whole_name_match,SV,119,SCOALA CU CLASELE I-VIII BALCAUTI
+GR,SCOALA CU CLASELE I-VIII NR. 2 COPACENI 1 DECEMBRI / B,2,outside_county_origin,direct_whole_name_match,B,435,SCOALA CU CLASELE I-VIII NR. 2 COPACENI 1 DECEMBRI
+GR,SCOALA CU CLASELE I-VIII OSTRA / SV,1,outside_county_origin,direct_whole_name_match,SV,225,SCOALA CU CLASELE I-VIII OSTRA
+GR,SCOALA CU CLASELE I-VIII TANACU / VS,1,outside_county_origin,direct_whole_name_match,VS,243,SCOALA CU CLASELE I-VIII TANACU
+GR,SCOALA GENERALA DE 8 ANI BOTOROAGA / TR,2,outside_county_origin,direct_whole_name_match,TR,144,SCOALA GENERALA DE 8 ANI BOTOROAGA
+GR,SCOALA GENERALA DE 8 ANI BUJORU / TR,2,outside_county_origin,direct_whole_name_match,TR,151,SCOALA GENERALA DE 8 ANI BUJORU
+GR,SCOALA GENERALA DE 8 ANI NR 2 ZIMNICEA / TR,1,outside_county_origin,direct_whole_name_match,TR,121,SCOALA GENERALA DE 8 ANI NR 2 ZIMNICEA
+GR,SCOALA GENERALA DE 8 ANI NR.3 VIDELE / TR,1,outside_county_origin,direct_whole_name_match,TR,102,SCOALA GENERALA DE 8 ANI NR.3 VIDELE
+GR,SCOALA GENERALA DE 8 ANI PIETROSANI / TR,7,outside_county_origin,direct_whole_name_match,TR,210,SCOALA GENERALA DE 8 ANI PIETROSANI
+GR,SCOALA GENERALA DE 8 ANI TIRNAVA / TR,1,outside_county_origin,direct_whole_name_match,TR,146,SCOALA GENERALA DE 8 ANI TIRNAVA
+GR,SCOALA GENERALA DE 8 ANI VALEA CIRESULUI / TR,1,outside_county_origin,direct_whole_name_match,TR,147,SCOALA GENERALA DE 8 ANI VALEA CIRESULUI
+GR,SCOALA GENERALA I-VIII ROVINE / IL,1,outside_county_origin,direct_whole_name_match,IL,141,SCOALA GENERALA I-VIII ROVINE
+GR,SCOALA GENERALA NR 19 BRASOV / BV,1,outside_county_origin,direct_whole_name_match,BV,19B,SCOALA GENERALA NR 19 BRASOV
+HR,"GIMNAZIUL DE STAT ""A. MOSORA"" SIGHISOARA / MS",1,outside_county_origin,direct_whole_name_match,MS,119,"GIMNAZIUL DE STAT ""A. MOSORA"" SIGHISOARA"
+HR,LIC.TEOR.DUMBRAVENI / SB,1,outside_county_origin,direct_whole_name_match,SB,142,LIC.TEOR.DUMBRAVENI
+HR,"SC.CU CLS I-VIII ""I.BATHORY"" MEDIAS / SB",1,outside_county_origin,direct_whole_name_match,SB,244,"SC.CU CLS I-VIII ""I.BATHORY"" MEDIAS"
+HR,SCOALA CU CL I-VIII HUISUREZ/DAMUC / NT,1,outside_county_origin,direct_whole_name_match,NT,154,SCOALA CU CL I-VIII HUISUREZ/DAMUC
+HR,SCOALA CU CL I-VIII NR 1 CEAHLAU / NT,1,outside_county_origin,direct_whole_name_match,NT,117,SCOALA CU CL I-VIII NR 1 CEAHLAU
+HR,SCOALA CU CL I-VIII NR 2 BICAZ-CHEI / NT,2,outside_county_origin,direct_whole_name_match,NT,260,SCOALA CU CL I-VIII NR 2 BICAZ-CHEI
+HR,SCOALA CU CL I-VIII NR.1 BICAZ-CHEI / NT,3,outside_county_origin,direct_whole_name_match,NT,259,SCOALA CU CL I-VIII NR.1 BICAZ-CHEI
+HR,SCOALA CU CL I-VIII SAVESTI/RAUCESTI / NT,1,outside_county_origin,direct_whole_name_match,NT,301,SCOALA CU CL I-VIII SAVESTI/RAUCESTI
+HR,SCOALA CU CL I-VIII SI COMPLEMENTARA DAMUC / NT,1,outside_county_origin,direct_whole_name_match,NT,156,SCOALA CU CL I-VIII SI COMPLEMENTARA DAMUC
+HR,SCOALA CU CL I-VIII SI COMPLEMENTARA NR.1 GRINTIES / NT,3,outside_county_origin,direct_whole_name_match,NT,278,SCOALA CU CL I-VIII SI COMPLEMENTARA NR.1 GRINTIES
+HR,SCOALA CU CL I-VIII SI COMPLEMENTARA TARCAU / NT,1,outside_county_origin,direct_whole_name_match,NT,311,SCOALA CU CL I-VIII SI COMPLEMENTARA TARCAU
+HR,SCOALA CU CL I-VIII TASCA / NT,1,outside_county_origin,direct_whole_name_match,NT,211,SCOALA CU CL I-VIII TASCA
+HR,SCOALA CU CL I-VIII TELEC/BICAZU ARDELEAN / NT,1,outside_county_origin,direct_whole_name_match,NT,263,SCOALA CU CL I-VIII TELEC/BICAZU ARDELEAN
+HR,SCOALA CU CLASELE I - VIII DAMIAN / DJ,1,outside_county_origin,direct_whole_name_match,DJ,179,SCOALA CU CLASELE I - VIII DAMIAN
+HR,SCOALA GENERALA CLASELE I - VIII BEZID / MS,1,outside_county_origin,direct_whole_name_match,MS,290,SCOALA GENERALA CLASELE I - VIII BEZID
+HR,SCOALA GENERALA CLASELE I - VIII CHIBED / MS,1,outside_county_origin,direct_whole_name_match,MS,222,SCOALA GENERALA CLASELE I - VIII CHIBED
+HR,SCOALA GENERALA CLASELE I - VIII FANTINELE / MS,3,outside_county_origin,direct_whole_name_match,MS,213,SCOALA GENERALA CLASELE I - VIII FANTINELE
+HR,SCOALA GENERALA CLASELE I - VIII GHINDARI / MS,1,outside_county_origin,direct_whole_name_match,MS,221,SCOALA GENERALA CLASELE I - VIII GHINDARI
+HR,SCOALA GENERALA CLASELE I - VIII LUNCA BRADULUI / MS,1,outside_county_origin,direct_whole_name_match,MS,258,SCOALA GENERALA CLASELE I - VIII LUNCA BRADULUI
+HR,SCOALA GENERALA CLASELE I - VIII MESTERA / MS,1,outside_county_origin,direct_whole_name_match,MS,302,SCOALA GENERALA CLASELE I - VIII MESTERA
+HR,SCOALA GENERALA CLASELE I - VIII NR 01 LUDUS / MS,1,outside_county_origin,direct_whole_name_match,MS,338,SCOALA GENERALA CLASELE I - VIII NR 01 LUDUS
+HR,SCOALA GENERALA CLASELE I - VIII NR 01 SOVATA / MS,6,outside_county_origin,direct_whole_name_match,MS,129,SCOALA GENERALA CLASELE I - VIII NR 01 SOVATA
+HR,SCOALA GENERALA CLASELE I - VIII NR 02 SOVATA / MS,1,outside_county_origin,direct_whole_name_match,MS,343,SCOALA GENERALA CLASELE I - VIII NR 02 SOVATA
+HR,SCOALA GENERALA CLASELE I - VIII SAMBRIAS / MS,1,outside_county_origin,direct_whole_name_match,MS,239,SCOALA GENERALA CLASELE I - VIII SAMBRIAS
+HR,SCOALA GENERALA CLASELE I - VIII SANGEORGIU DE PAD / MS,3,outside_county_origin,direct_whole_name_match,MS,340,SCOALA GENERALA CLASELE I - VIII SANGEORGIU DE PAD
+HR,SCOALA GENERALA CLASELE I - VIII SARATENI / MS,2,outside_county_origin,direct_whole_name_match,MS,131,SCOALA GENERALA CLASELE I - VIII SARATENI
+HR,SCOALA GENERALA CLASELE I - VIII STINCENI / MS,4,outside_county_origin,direct_whole_name_match,MS,301,SCOALA GENERALA CLASELE I - VIII STINCENI
+HR,SCOALA GENERALA CLASELE I - VIII SUPLAC / MS,1,outside_county_origin,direct_whole_name_match,MS,303,SCOALA GENERALA CLASELE I - VIII SUPLAC
+HR,SCOALA GENERALA CLASELE I - VIII TREI SATE / MS,1,outside_county_origin,direct_whole_name_match,MS,223,SCOALA GENERALA CLASELE I - VIII TREI SATE
+HR,SCOALA GENERALA CLS I - VIII  EMINESCU PETOFI  DEV / HD,1,outside_county_origin,direct_whole_name_match,HD,109,SCOALA GENERALA CLS I - VIII  EMINESCU PETOFI  DEV
+HR,SCOALA GENERALA CU CL.I-VIII.         BATANII MICI / CV,1,outside_county_origin,direct_whole_name_match,CV,186,SCOALA GENERALA CU CL.I-VIII.         BATANII MICI
+HR,SCOALA GENERALA CU CLASELE I-VIII BOLOVANIS / BC,2,outside_county_origin,direct_whole_name_match,BC,237,SCOALA GENERALA CU CLASELE I-VIII BOLOVANIS
+HR,SCOALA GENERALA CU CLASELE I-VIII CIUGHES / BC,6,outside_county_origin,direct_whole_name_match,BC,286,SCOALA GENERALA CU CLASELE I-VIII CIUGHES
+HR,SCOALA GENERALA CU CLASELE I-VIII GHIMES / BC,1,outside_county_origin,direct_whole_name_match,BC,239,SCOALA GENERALA CU CLASELE I-VIII GHIMES
+HR,SCOALA GENERALA CU CLASELE I-VIII NR  1 COSNEA / BC,2,outside_county_origin,direct_whole_name_match,BC,166,SCOALA GENERALA CU CLASELE I-VIII NR  1 COSNEA
+HR,SCOALA GENERALA CU CLASELE I-VIII NR  1 FRUMOASA / BC,1,outside_county_origin,direct_whole_name_match,BC,179,SCOALA GENERALA CU CLASELE I-VIII NR  1 FRUMOASA
+HR,SCOALA GENERALA CU CLASELE I-VIII NR  1 TARHAUS / BC,1,outside_county_origin,direct_whole_name_match,BC,240,SCOALA GENERALA CU CLASELE I-VIII NR  1 TARHAUS
+HR,SCOALA GENERALA CU CLASELE I-VIII PIRJOL / BC,1,outside_county_origin,direct_whole_name_match,BC,304,SCOALA GENERALA CU CLASELE I-VIII PIRJOL
+HR,SCOALA GENERALA CU CLASELE I-VIII RACHITIS / BC,1,outside_county_origin,direct_whole_name_match,BC,339,SCOALA GENERALA CU CLASELE I-VIII RACHITIS
+HR,SCOALA GENERALA DRAUSENI / BV,1,outside_county_origin,direct_whole_name_match,BV,DRS,SCOALA GENERALA DRAUSENI
+HR,SCOALA GENERALA HOGHIZ / BV,2,outside_county_origin,direct_whole_name_match,BV,HOG,SCOALA GENERALA HOGHIZ
+HR,SCOALA GENERALA HOMOROD / BV,1,outside_county_origin,direct_whole_name_match,BV,HOM,SCOALA GENERALA HOMOROD
+HR,SCOALA GENERALA NIMIGEA DE JOS / BN,1,outside_county_origin,direct_whole_name_match,BN,166,SCOALA GENERALA NIMIGEA DE JOS
+HR,SCOALA GENERALA NR 1 NASAUD / BN,1,outside_county_origin,direct_whole_name_match,BN,227,SCOALA GENERALA NR 1 NASAUD
+HR,SCOALA GENERALA RACOS / BV,2,outside_county_origin,direct_whole_name_match,BV,RAC,SCOALA GENERALA RACOS
+HR,SCOALA GENERALA RODNA / BN,9,outside_county_origin,direct_whole_name_match,BN,173,SCOALA GENERALA RODNA
+HR,SCOALA GENERALA RUPEA / BV,2,outside_county_origin,direct_whole_name_match,BV,RUP,SCOALA GENERALA RUPEA
+HR,SCOALA GENERALA SANT / BN,1,outside_county_origin,direct_whole_name_match,BN,184,SCOALA GENERALA SANT
+HR,SCOALA GENERALA SEBIS / BN,1,outside_county_origin,direct_whole_name_match,BN,189,SCOALA GENERALA SEBIS
+HR,SCOALA PROFESIONALA FAGET / BC,5,outside_county_origin,direct_whole_name_match,BC,238,SCOALA PROFESIONALA FAGET
+IL,"GRUPUL SCOLAR ""KOROSI CSOMA SANDOR""    COVASNA / CV",1,outside_county_origin,direct_whole_name_match,CV,162,"GRUPUL SCOLAR ""KOROSI CSOMA SANDOR""    COVASNA"
+IL,"LICEUL TEORETIC ""DECEBAL"" / B",2,outside_county_origin,direct_whole_name_match,B,141,"LICEUL TEORETIC ""DECEBAL"""
+IL,SCOALA CLASELE I-VIII C. BRINCOVEANU / CL,1,outside_county_origin,direct_whole_name_match,CL,126,SCOALA CLASELE I-VIII C. BRINCOVEANU
+IL,SCOALA CLASELE I-VIII DRAGOS VODA / CL,1,outside_county_origin,direct_whole_name_match,CL,127,SCOALA CLASELE I-VIII DRAGOS VODA
+IL,SCOALA CLASELE I-VIII DRAJNA / CL,2,outside_county_origin,direct_whole_name_match,CL,125,SCOALA CLASELE I-VIII DRAJNA
+IL,SCOALA CLASELE I-VIII GILDAU / CL,2,outside_county_origin,direct_whole_name_match,CL,133,SCOALA CLASELE I-VIII GILDAU
+IL,SCOALA CLASELE I-VIII IEZERU / CL,1,outside_county_origin,direct_whole_name_match,CL,134,SCOALA CLASELE I-VIII IEZERU
+IL,SCOALA CLASELE I-VIII JEGALIA / CL,1,outside_county_origin,direct_whole_name_match,CL,132,SCOALA CLASELE I-VIII JEGALIA
+IL,SCOALA CLASELE I-VIII LEHLIU-GARA / CL,1,outside_county_origin,direct_whole_name_match,CL,212,SCOALA CLASELE I-VIII LEHLIU-GARA
+IL,SCOALA CLASELE I-VIII NR. 1 PERISORU / CL,19,outside_county_origin,direct_whole_name_match,CL,141,SCOALA CLASELE I-VIII NR. 1 PERISORU
+IL,SCOALA CLASELE I-VIII NR. 3 BORCEA / CL,8,outside_county_origin,direct_whole_name_match,CL,113,SCOALA CLASELE I-VIII NR. 3 BORCEA
+IL,SCOALA CLASELE I-VIII NR.1 BORCEA / CL,26,outside_county_origin,direct_whole_name_match,CL,111,SCOALA CLASELE I-VIII NR.1 BORCEA
+IL,SCOALA CLASELE I-VIII NR.2 BORCEA / CL,25,outside_county_origin,direct_whole_name_match,CL,112,SCOALA CLASELE I-VIII NR.2 BORCEA
+IL,SCOALA CLASELE I-VIII STEFAN CEL MARE / CL,13,outside_county_origin,direct_whole_name_match,CL,144,SCOALA CLASELE I-VIII STEFAN CEL MARE
+IL,SCOALA CLASELE I-VIII TUDOR VLADIMIRESCU / CL,1,outside_county_origin,direct_whole_name_match,CL,142,SCOALA CLASELE I-VIII TUDOR VLADIMIRESCU
+IL,SCOALA CU CL I-VIII NR 1 CEAHLAU / NT,1,outside_county_origin,direct_whole_name_match,NT,117,SCOALA CU CL I-VIII NR 1 CEAHLAU
+IL,SCOALA CU CLASELE I-VIII BANCA / VS,1,outside_county_origin,direct_whole_name_match,VS,161,SCOALA CU CLASELE I-VIII BANCA
+IL,SCOALA CU CLASELE I-VIII CIOCILE / BR,3,outside_county_origin,direct_whole_name_match,BR,151,SCOALA CU CLASELE I-VIII CIOCILE
+IL,SCOALA CU CLASELE I-VIII MIHAI BRAVU / BR,2,outside_county_origin,direct_whole_name_match,BR,176,SCOALA CU CLASELE I-VIII MIHAI BRAVU
+IL,"SCOALA CU CLASELE I-VIII NR.  85 ""VASILE BUNESCU"" / B",1,outside_county_origin,direct_whole_name_match,B,117,"SCOALA CU CLASELE I-VIII NR.  85 ""VASILE BUNESCU"""
+IL,SCOALA CU CLASELE I-VIII NR. 1 GRADISTEA / B,1,outside_county_origin,direct_whole_name_match,B,440,SCOALA CU CLASELE I-VIII NR. 1 GRADISTEA
+IL,SCOALA CU CLASELE I-VIII NR. 1 MICSUNESTI MOARA NU / B,2,outside_county_origin,direct_whole_name_match,B,426,SCOALA CU CLASELE I-VIII NR. 1 MICSUNESTI MOARA NU
+IL,SCOALA CU CLASELE I-VIII NR. 157 / B,1,outside_county_origin,direct_whole_name_match,B,278,SCOALA CU CLASELE I-VIII NR. 157
+IL,SCOALA CU CLASELE I-VIII ROSIORI / BR,3,outside_county_origin,direct_whole_name_match,BR,196,SCOALA CU CLASELE I-VIII ROSIORI
+IL,SCOALA RADESTI / GL,1,outside_county_origin,direct_whole_name_match,GL,153,SCOALA RADESTI
+IL,scoala cu clasele I-VIII Rasova / CT,1,outside_county_origin,direct_whole_name_match,CT,275,scoala cu clasele I-VIII Rasova
+IL,scoala cu clasele I-VIII nr. 2 Navodari / CT,1,outside_county_origin,direct_whole_name_match,CT,231,scoala cu clasele I-VIII nr. 2 Navodari
+IL,scoala cu clasele I-VIII nr. 4 Cernavoda / CT,1,outside_county_origin,direct_whole_name_match,CT,279,scoala cu clasele I-VIII nr. 4 Cernavoda
+IL,scoala sanatoriala Mangalia / CT,1,outside_county_origin,direct_whole_name_match,CT,145,scoala sanatoriala Mangalia
+MH,"COLEGIUL NATIONAL ""GEORGE COSBUC"",MOTRU / GJ",3,outside_county_origin,direct_whole_name_match,GJ,269,"COLEGIUL NATIONAL ""GEORGE COSBUC"",MOTRU"
+MH,GRUP SCOLAR INDUSTRIAL ENERGETIC TURCENI / GJ,1,outside_county_origin,direct_whole_name_match,GJ,263,GRUP SCOLAR INDUSTRIAL ENERGETIC TURCENI
+MH,LICEUL TEORETIC BAILE HERCULANE / CS,6,outside_county_origin,direct_whole_name_match,CS,120,LICEUL TEORETIC BAILE HERCULANE
+MH,"SCOALA CU CL.I-VIII NR.19 ""AVRAM IANCU"" TIMISOARA / TM",1,outside_county_origin,direct_whole_name_match,TM,162,"SCOALA CU CL.I-VIII NR.19 ""AVRAM IANCU"" TIMISOARA"
+MH,SCOALA CU CLASELE I - VIII BUSU / DJ,1,outside_county_origin,direct_whole_name_match,DJ,153,SCOALA CU CLASELE I - VIII BUSU
+MH,SCOALA CU CLASELE I - VIII CLEANOV / DJ,1,outside_county_origin,direct_whole_name_match,DJ,173,SCOALA CU CLASELE I - VIII CLEANOV
+MH,SCOALA CU CLASELE I - VIII IZVOARE / DJ,1,outside_county_origin,direct_whole_name_match,DJ,212,SCOALA CU CLASELE I - VIII IZVOARE
+MH,SCOALA CU CLASELE I - VIII MAGLAVIT / DJ,1,outside_county_origin,direct_whole_name_match,DJ,218,SCOALA CU CLASELE I - VIII MAGLAVIT
+MH,SCOALA CU CLASELE I - VIII NR  1 GHE. BRAESCU CALA / DJ,1,outside_county_origin,direct_whole_name_match,DJ,233,SCOALA CU CLASELE I - VIII NR  1 GHE. BRAESCU CALA
+MH,SCOALA CU CLASELE I-VIII CIORTESTI / IS,1,outside_county_origin,direct_whole_name_match,IS,033,SCOALA CU CLASELE I-VIII CIORTESTI
+MH,SCOALA GENERALA BOLBOSI / GJ,1,outside_county_origin,direct_whole_name_match,GJ,149,SCOALA GENERALA BOLBOSI
+MH,"SCOALA GENERALA CALUGARENI, PADES / GJ",6,outside_county_origin,direct_whole_name_match,GJ,202,"SCOALA GENERALA CALUGARENI, PADES"
+MH,"SCOALA GENERALA CELEI, TISMANA / GJ",1,outside_county_origin,direct_whole_name_match,GJ,236,"SCOALA GENERALA CELEI, TISMANA"
+MH,SCOALA GENERALA CLASELE I - VIII NR 06 SIGHISOARA / MS,1,outside_county_origin,direct_whole_name_match,MS,123,SCOALA GENERALA CLASELE I - VIII NR 06 SIGHISOARA
+MH,SCOALA GENERALA CLS I - VIII NR 9 HUNEDOARA / HD,1,outside_county_origin,direct_whole_name_match,HD,129,SCOALA GENERALA CLS I - VIII NR 9 HUNEDOARA
+MH,SCOALA GENERALA CUPTOARE / CS,1,outside_county_origin,direct_whole_name_match,CS,161,SCOALA GENERALA CUPTOARE
+MH,SCOALA GENERALA DE 8 ANI VIISOARA / TR,1,outside_county_origin,direct_whole_name_match,TR,260,SCOALA GENERALA DE 8 ANI VIISOARA
+MH,SCOALA GENERALA GLOGOVA / GJ,2,outside_county_origin,direct_whole_name_match,GJ,184,SCOALA GENERALA GLOGOVA
+MH,SCOALA GENERALA IABLANITA / CS,1,outside_county_origin,direct_whole_name_match,CS,179,SCOALA GENERALA IABLANITA
+MH,"SCOALA GENERALA MOTRU-SEC, PADES / GJ",5,outside_county_origin,direct_whole_name_match,GJ,203,"SCOALA GENERALA MOTRU-SEC, PADES"
+MH,SCOALA GENERALA NR.1 MOTRU / GJ,6,outside_county_origin,direct_whole_name_match,GJ,119,SCOALA GENERALA NR.1 MOTRU
+MH,SCOALA GENERALA NR.2 MOTRU / GJ,1,outside_county_origin,direct_whole_name_match,GJ,259,SCOALA GENERALA NR.2 MOTRU
+MH,SCOALA GENERALA PADES / GJ,8,outside_county_origin,direct_whole_name_match,GJ,204,SCOALA GENERALA PADES
+MH,"SCOALA GENERALA PLOSTINA, MOTRU / GJ",1,outside_county_origin,direct_whole_name_match,GJ,120,"SCOALA GENERALA PLOSTINA, MOTRU"
+MH,SCOALA GENERALA SAT RADESTI / AG,1,outside_county_origin,direct_whole_name_match,AG,312,SCOALA GENERALA SAT RADESTI
+MH,SCOALA GENERALA SLIVILESTI / GJ,2,outside_county_origin,direct_whole_name_match,GJ,227,SCOALA GENERALA SLIVILESTI
+MH,"SCOALA GENERALA SOHODOL, TISMANA / GJ",2,outside_county_origin,direct_whole_name_match,GJ,238,"SCOALA GENERALA SOHODOL, TISMANA"
+MH,SCOALA GENERALA TOPLET / CS,12,outside_county_origin,direct_whole_name_match,CS,222,SCOALA GENERALA TOPLET
+MH,"SCOALA GENERALA VALEA MINASTIRII, CATUNE / GJ",1,outside_county_origin,direct_whole_name_match,GJ,164,"SCOALA GENERALA VALEA MINASTIRII, CATUNE"
+MH,"SCOALA NR.11 ""IORGU IORDAN"" TECUCI / GL",1,outside_county_origin,direct_whole_name_match,GL,289,"SCOALA NR.11 ""IORGU IORDAN"" TECUCI"
+OT,GRUP SCOLAR AGRICOL LOVRIN / TM,1,outside_county_origin,direct_whole_name_match,TM,130,GRUP SCOLAR AGRICOL LOVRIN
+OT,S08 VULPESTI / AG,1,outside_county_origin,direct_whole_name_match,AG,201,S08 VULPESTI
+OT,SC. GEN. CLS. 1-8 LAUNELE / AG,1,outside_county_origin,direct_whole_name_match,AG,236,SC. GEN. CLS. 1-8 LAUNELE
+OT,SCOALA  DRAGOESTI / VL,1,outside_county_origin,direct_whole_name_match,VL,155,SCOALA  DRAGOESTI
+OT,SCOALA 1 DRAGASANI / VL,1,outside_county_origin,direct_whole_name_match,VL,151,SCOALA 1 DRAGASANI
+OT,SCOALA 2 DRAGASANI / VL,3,outside_county_origin,direct_whole_name_match,VL,150,SCOALA 2 DRAGASANI
+OT,SCOALA BARBATESTI / VL,1,outside_county_origin,direct_whole_name_match,VL,116,SCOALA BARBATESTI
+OT,SCOALA CU CLASELE I - VIII AMARASTII DE SUS / DJ,2,outside_county_origin,direct_whole_name_match,DJ,131,SCOALA CU CLASELE I - VIII AMARASTII DE SUS
+OT,SCOALA CU CLASELE I - VIII CATANE / DJ,1,outside_county_origin,direct_whole_name_match,DJ,161,SCOALA CU CLASELE I - VIII CATANE
+OT,SCOALA CU CLASELE I - VIII CIOCANESTI / DJ,2,outside_county_origin,direct_whole_name_match,DJ,167,SCOALA CU CLASELE I - VIII CIOCANESTI
+OT,SCOALA CU CLASELE I - VIII COSOVENI / DJ,1,outside_county_origin,direct_whole_name_match,DJ,176,SCOALA CU CLASELE I - VIII COSOVENI
+OT,SCOALA CU CLASELE I - VIII DIOSTI / DJ,1,outside_county_origin,direct_whole_name_match,DJ,181,SCOALA CU CLASELE I - VIII DIOSTI
+OT,SCOALA CU CLASELE I - VIII DOBROTESTI / DJ,1,outside_county_origin,direct_whole_name_match,DJ,184,SCOALA CU CLASELE I - VIII DOBROTESTI
+OT,SCOALA CU CLASELE I - VIII FARCAS / DJ,1,outside_county_origin,direct_whole_name_match,DJ,188,SCOALA CU CLASELE I - VIII FARCAS
+OT,SCOALA CU CLASELE I - VIII NR  1 DABULENI / DJ,1,outside_county_origin,direct_whole_name_match,DJ,231,SCOALA CU CLASELE I - VIII NR  1 DABULENI
+OT,"SCOALA CU CLASELE I - VIII NR 30 ""MIHAI VITEAZUL"" / DJ",1,outside_county_origin,direct_whole_name_match,DJ,269,"SCOALA CU CLASELE I - VIII NR 30 ""MIHAI VITEAZUL"""
+OT,SCOALA CU CLASELE I - VIII PRAPOR / DJ,2,outside_county_origin,direct_whole_name_match,DJ,294,SCOALA CU CLASELE I - VIII PRAPOR
+OT,SCOALA CU CLASELE I - VIII PREAJBA DE PADURE / DJ,1,outside_county_origin,direct_whole_name_match,DJ,295,SCOALA CU CLASELE I - VIII PREAJBA DE PADURE
+OT,SCOALA CU CLASELE I - VIII ROBANESTII DE JOS / DJ,1,outside_county_origin,direct_whole_name_match,DJ,302,SCOALA CU CLASELE I - VIII ROBANESTII DE JOS
+OT,SCOALA CU CLASELE I-VIII NR. 139 / B,1,outside_county_origin,direct_whole_name_match,B,246,SCOALA CU CLASELE I-VIII NR. 139
+OT,SCOALA CU CLASELE I-VIII NR.03 HUSI / VS,1,outside_county_origin,direct_whole_name_match,VS,292,SCOALA CU CLASELE I-VIII NR.03 HUSI
+OT,SCOALA DOBRUSA / VL,1,outside_county_origin,direct_whole_name_match,VL,262,SCOALA DOBRUSA
+OT,SCOALA FAURESTI / VL,1,outside_county_origin,direct_whole_name_match,VL,157,SCOALA FAURESTI
+OT,SCOALA GENERALA CU CLASELE I-VIII  GRECI / OT,8,ambiguous_same_directory_name,needs_school_specific_source_review,OT,197 | 219,SCOALA GENERALA CU CLASELE I-VIII  GRECI | SCOALA GENERALA CU CLASELE I-VIII  GRECI
+OT,SCOALA GENERALA CU CLASELE I-VIII PUSTIANA / BC,2,outside_county_origin,direct_whole_name_match,BC,302,SCOALA GENERALA CU CLASELE I-VIII PUSTIANA
+OT,SCOALA GENERALA DE 8 ANI BECIU / TR,1,outside_county_origin,direct_whole_name_match,TR,212,SCOALA GENERALA DE 8 ANI BECIU
+OT,SCOALA GENERALA DE 8 ANI PLOPII SLAVITESTI / TR,2,outside_county_origin,direct_whole_name_match,TR,211,SCOALA GENERALA DE 8 ANI PLOPII SLAVITESTI
+OT,SCOALA GENERALA NR.1 MOTRU / GJ,1,outside_county_origin,direct_whole_name_match,GJ,119,SCOALA GENERALA NR.1 MOTRU
+OT,SCOALA GIMNAZIALA NR.1 TICLENI / GJ,1,outside_county_origin,direct_whole_name_match,GJ,127,SCOALA GIMNAZIALA NR.1 TICLENI
+OT,SCOALA GIMNAZIALA STOLNICI / AG,1,outside_county_origin,direct_whole_name_match,AG,105,SCOALA GIMNAZIALA STOLNICI
+OT,SCOALA LACUSTENI / VL,1,outside_county_origin,direct_whole_name_match,VL,292,SCOALA LACUSTENI
+OT,SCOALA LAUNELE / VL,4,outside_county_origin,direct_whole_name_match,VL,148,SCOALA LAUNELE
+OT,SCOALA OLANU / VL,2,outside_county_origin,direct_whole_name_match,VL,207,SCOALA OLANU
+OT,SCOALA SUSANI / VL,1,outside_county_origin,direct_whole_name_match,VL,274,SCOALA SUSANI
+OT,SCOALA UDRESTI / VL,1,outside_county_origin,direct_whole_name_match,VL,149,SCOALA UDRESTI
+OT,SCOALA USUREI / VL,1,outside_county_origin,direct_whole_name_match,VL,275,SCOALA USUREI
+SB,"COLEGIUL NATIONAL ""D-NA STANCA"" FAGARAS / BV",7,outside_county_origin,direct_whole_name_match,BV,STA,"COLEGIUL NATIONAL ""D-NA STANCA"" FAGARAS"
+SB,"GIMNAZIUL ""TRAIAN"" TIRNAVENI / MS",2,outside_county_origin,direct_whole_name_match,MS,337,"GIMNAZIUL ""TRAIAN"" TIRNAVENI"
+SB,"GIMNAZIUL DE STAT  ""AUGUSTIN MAIOR"" REGHIN / MS",2,outside_county_origin,direct_whole_name_match,MS,127,"GIMNAZIUL DE STAT  ""AUGUSTIN MAIOR"" REGHIN"
+SB,"GIMNAZIUL DE STAT ""A. MOSORA"" SIGHISOARA / MS",1,outside_county_origin,direct_whole_name_match,MS,119,"GIMNAZIUL DE STAT ""A. MOSORA"" SIGHISOARA"
+SB,GRUP SCOLAR BERBESTI / VL,1,outside_county_origin,direct_whole_name_match,VL,119,GRUP SCOLAR BERBESTI
+SB,GRUP SCOLAR INDUSTRIAL JIDVEI / AB,1,outside_county_origin,direct_whole_name_match,AB,255,GRUP SCOLAR INDUSTRIAL JIDVEI
+SB,"GRUPUL SCOLAR ""ION NISTOR"" VICOVU DE SUS / SV",1,outside_county_origin,direct_whole_name_match,SV,319,"GRUPUL SCOLAR ""ION NISTOR"" VICOVU DE SUS"
+SB,GRUPUL SCOLAR INDUSTRIAL IANCA / BR,1,outside_county_origin,direct_whole_name_match,BR,139,GRUPUL SCOLAR INDUSTRIAL IANCA
+SB,LICEUL BREZOI / VL,1,outside_county_origin,direct_whole_name_match,VL,128,LICEUL BREZOI
+SB,"LICEUL TEORETIC ""JOSEPH HALTRICH"" SIGHISOARA / MS",1,outside_county_origin,direct_whole_name_match,MS,330,"LICEUL TEORETIC ""JOSEPH HALTRICH"" SIGHISOARA"
+SB,"LICEUL TEORETIC ""MIHAI VITEAZUL""       SF.GHEORGHE / CV",1,outside_county_origin,direct_whole_name_match,CV,102,"LICEUL TEORETIC ""MIHAI VITEAZUL""       SF.GHEORGHE"
+SB,SCOALA 1 DRAGASANI / VL,1,outside_county_origin,direct_whole_name_match,VL,151,SCOALA 1 DRAGASANI
+SB,SCOALA 2 DRAGASANI / VL,1,outside_county_origin,direct_whole_name_match,VL,150,SCOALA 2 DRAGASANI
+SB,SCOALA BOISOARA / VL,4,outside_county_origin,direct_whole_name_match,VL,124,SCOALA BOISOARA
+SB,SCOALA BUMBUESTI / VL,2,outside_county_origin,direct_whole_name_match,VL,125,SCOALA BUMBUESTI
+SB,SCOALA COPACENI / VL,1,outside_county_origin,direct_whole_name_match,VL,226,SCOALA COPACENI
+SB,SCOALA CU CALSELE I-VIII NR. 7 PLOIESTI / PH,1,outside_county_origin,direct_whole_name_match,PH,121,SCOALA CU CALSELE I-VIII NR. 7 PLOIESTI
+SB,SCOALA CU CL I-VIII SI COMPLEMENTARA REDIU / NT,1,outside_county_origin,direct_whole_name_match,NT,101,SCOALA CU CL I-VIII SI COMPLEMENTARA REDIU
+SB,SCOALA CU CL.I-VIII GELU COM.VARIAS / TM,1,outside_county_origin,direct_whole_name_match,TM,315,SCOALA CU CL.I-VIII GELU COM.VARIAS
+SB,SCOALA CU CL.I-VIII NR.25 TIMISOARA / TM,1,outside_county_origin,direct_whole_name_match,TM,167,SCOALA CU CL.I-VIII NR.25 TIMISOARA
+SB,"SCOALA CU CLASELE I-VIII ""IOAN OPRIS"" (NR. 8) TURD / CJ",1,outside_county_origin,direct_whole_name_match,CJ,175,"SCOALA CU CLASELE I-VIII ""IOAN OPRIS"" (NR. 8) TURD"
+SB,"SCOALA CU CLASELE I-VIII ""SFANTA ANA"" SINTANA / AR",1,outside_county_origin,direct_whole_name_match,AR,188,"SCOALA CU CLASELE I-VIII ""SFANTA ANA"" SINTANA"
+SB,"SCOALA CU CLASELE I-VIII ""TEODOR MURASANU"" (NR. 1) / CJ",1,outside_county_origin,direct_whole_name_match,CJ,177,"SCOALA CU CLASELE I-VIII ""TEODOR MURASANU"" (NR. 1)"
+SB,SCOALA CU CLASELE I-VIII GEACA COM. GEACA / CJ,2,outside_county_origin,direct_whole_name_match,CJ,266,SCOALA CU CLASELE I-VIII GEACA COM. GEACA
+SB,SCOALA CU CLASELE I-VIII NR 1 DOROHOI / BT,1,outside_county_origin,direct_whole_name_match,BT,140,SCOALA CU CLASELE I-VIII NR 1 DOROHOI
+SB,SCOALA CU CLASELE I-VIII NR 1 MANOLEA / SV,1,outside_county_origin,direct_whole_name_match,SV,176,SCOALA CU CLASELE I-VIII NR 1 MANOLEA
+SB,SCOALA CU CLASELE I-VIII NR.  24 / B,1,outside_county_origin,direct_whole_name_match,B,094,SCOALA CU CLASELE I-VIII NR.  24
+SB,SCOALA CU CLASELE I-VIII NR.03 BIRLAD / VS,1,outside_county_origin,direct_whole_name_match,VS,279,SCOALA CU CLASELE I-VIII NR.03 BIRLAD
+SB,SCOALA CU CLASELE I-VIII NR.5 PASCANI / IS,1,outside_county_origin,direct_whole_name_match,IS,272,SCOALA CU CLASELE I-VIII NR.5 PASCANI
+SB,SCOALA CU CLS. I-VIII MIRESU MARE / MM,1,outside_county_origin,direct_whole_name_match,MM,223,SCOALA CU CLS. I-VIII MIRESU MARE
+SB,SCOALA CU CLS.I-VIII NR 1 VISEU DE SUS / MM,1,outside_county_origin,direct_whole_name_match,MM,153,SCOALA CU CLS.I-VIII NR 1 VISEU DE SUS
+SB,SCOALA GAUJANI / VL,3,outside_county_origin,direct_whole_name_match,VL,126,SCOALA GAUJANI
+SB,"SCOALA GENERALA ""CATALIN HAIDAU"" TIRGU-JIU / GJ",1,outside_county_origin,direct_whole_name_match,GJ,103,"SCOALA GENERALA ""CATALIN HAIDAU"" TIRGU-JIU"
+SB,SCOALA GENERALA CINCU / BV,1,outside_county_origin,direct_whole_name_match,BV,CIN,SCOALA GENERALA CINCU
+SB,"SCOALA GENERALA CLASELE I - VIII ""LUCIAN BLAGA"" OC / AB",3,outside_county_origin,direct_whole_name_match,AB,135,"SCOALA GENERALA CLASELE I - VIII ""LUCIAN BLAGA"" OC"
+SB,SCOALA GENERALA CLASELE I - VIII BARBOSI / MS,1,outside_county_origin,direct_whole_name_match,MS,327,SCOALA GENERALA CLASELE I - VIII BARBOSI
+SB,SCOALA GENERALA CLASELE I - VIII CUNTA / AB,1,outside_county_origin,direct_whole_name_match,AB,244,SCOALA GENERALA CLASELE I - VIII CUNTA
+SB,SCOALA GENERALA CLASELE I - VIII DANES / MS,1,outside_county_origin,direct_whole_name_match,MS,201,SCOALA GENERALA CLASELE I - VIII DANES
+SB,SCOALA GENERALA CLASELE I - VIII HADARENI / MS,1,outside_county_origin,direct_whole_name_match,MS,188,SCOALA GENERALA CLASELE I - VIII HADARENI
+SB,SCOALA GENERALA CLASELE I - VIII NR 06 SIGHISOARA / MS,2,outside_county_origin,direct_whole_name_match,MS,123,SCOALA GENERALA CLASELE I - VIII NR 06 SIGHISOARA
+SB,SCOALA GENERALA CLASELE I - VIII NR 1 BLAJ / AB,2,outside_county_origin,direct_whole_name_match,AB,124,SCOALA GENERALA CLASELE I - VIII NR 1 BLAJ
+SB,SCOALA GENERALA CLASELE I - VIII NR.2 SEBES / AB,1,outside_county_origin,direct_whole_name_match,AB,140,SCOALA GENERALA CLASELE I - VIII NR.2 SEBES
+SB,SCOALA GENERALA CLASELE I - VIII SANPETRU DE CAMPI / MS,1,outside_county_origin,direct_whole_name_match,MS,296,SCOALA GENERALA CLASELE I - VIII SANPETRU DE CAMPI
+SB,SCOALA GENERALA CLASELE I - VIII SELEUS DANES / MS,1,outside_county_origin,direct_whole_name_match,MS,203,SCOALA GENERALA CLASELE I - VIII SELEUS DANES
+SB,SCOALA GENERALA CLASELE I - VIII VALEA LARGA / MS,4,outside_county_origin,direct_whole_name_match,MS,314,SCOALA GENERALA CLASELE I - VIII VALEA LARGA
+SB,SCOALA GENERALA CLASELE I - VIII VIISOARA / MS,5,outside_county_origin,direct_whole_name_match,MS,318,SCOALA GENERALA CLASELE I - VIII VIISOARA
+SB,"SCOALA GENERALA CLASELE I-VIII ""DR.PETRU SPAN"" LUP / AB",1,outside_county_origin,direct_whole_name_match,AB,197,"SCOALA GENERALA CLASELE I-VIII ""DR.PETRU SPAN"" LUP"
+SB,SCOALA GENERALA CLASELE I-VIII ARIESENI / AB,1,outside_county_origin,direct_whole_name_match,AB,149,SCOALA GENERALA CLASELE I-VIII ARIESENI
+SB,SCOALA GENERALA CLASELE I-VIII CENADE / AB,1,outside_county_origin,direct_whole_name_match,AB,159,SCOALA GENERALA CLASELE I-VIII CENADE
+SB,SCOALA GENERALA CLASELE I-VIII CERGAU MARE / AB,2,outside_county_origin,direct_whole_name_match,AB,160,SCOALA GENERALA CLASELE I-VIII CERGAU MARE
+SB,SCOALA GENERALA CLASELE I-VIII NR.4 SEBES / AB,2,outside_county_origin,direct_whole_name_match,AB,262,SCOALA GENERALA CLASELE I-VIII NR.4 SEBES
+SB,SCOALA GENERALA CLASELE I-VIII ROSIA DE SECAS / AB,1,outside_county_origin,direct_whole_name_match,AB,222,SCOALA GENERALA CLASELE I-VIII ROSIA DE SECAS
+SB,SCOALA GENERALA CLASELE I-VIII VALEA LUNGA / AB,3,outside_county_origin,direct_whole_name_match,AB,250,SCOALA GENERALA CLASELE I-VIII VALEA LUNGA
+SB,SCOALA GENERALA CLS I - VIII  I. G. DUCA  PETROSAN / HD,1,outside_county_origin,direct_whole_name_match,HD,138,SCOALA GENERALA CLS I - VIII  I. G. DUCA  PETROSAN
+SB,SCOALA GENERALA CLS I - VIII NR 2 SIMERIA / HD,1,outside_county_origin,direct_whole_name_match,HD,214,SCOALA GENERALA CLS I - VIII NR 2 SIMERIA
+SB,SCOALA GENERALA CLS I - VIII NR 2 URICANI / HD,1,outside_county_origin,direct_whole_name_match,HD,159,SCOALA GENERALA CLS I - VIII NR 2 URICANI
+SB,"SCOALA GENERALA CU CL.I-VIII.""TUROCZI MOZES"" TG.SE / CV",1,outside_county_origin,direct_whole_name_match,CV,139,"SCOALA GENERALA CU CL.I-VIII.""TUROCZI MOZES"" TG.SE"
+SB,SCOALA GENERALA CU CLASELE I-VIII  OBIRSIA / OT,1,outside_county_origin,direct_whole_name_match,OT,190,SCOALA GENERALA CU CLASELE I-VIII  OBIRSIA
+SB,SCOALA GENERALA CU CLASELE I-VIII  OSICA DE JOS / OT,1,outside_county_origin,direct_whole_name_match,OT,280,SCOALA GENERALA CU CLASELE I-VIII  OSICA DE JOS
+SB,SCOALA GENERALA CU CLASELE I-VIII  VADASTRA / OT,2,outside_county_origin,direct_whole_name_match,OT,242,SCOALA GENERALA CU CLASELE I-VIII  VADASTRA
+SB,SCOALA GENERALA CU CLASELE I-VIII FERESTRAU-OITUZ / BC,2,outside_county_origin,direct_whole_name_match,BC,279,SCOALA GENERALA CU CLASELE I-VIII FERESTRAU-OITUZ
+SB,SCOALA GENERALA CU CLASELE I-VIII NR  8 ONESTI / BC,1,outside_county_origin,direct_whole_name_match,BC,390,SCOALA GENERALA CU CLASELE I-VIII NR  8 ONESTI
+SB,SCOALA GENERALA NR 2 FAGARAS / BV,1,outside_county_origin,direct_whole_name_match,BV,2FG,SCOALA GENERALA NR 2 FAGARAS
+SB,SCOALA GENERALA NR 7 FAGARAS / BV,1,outside_county_origin,direct_whole_name_match,BV,7FG,SCOALA GENERALA NR 7 FAGARAS
+SB,SCOALA GENERALA UCEA DE JOS / BV,2,outside_county_origin,direct_whole_name_match,BV,UDJ,SCOALA GENERALA UCEA DE JOS
+SB,SCOALA GENERALA VICTORIA / BV,2,outside_county_origin,direct_whole_name_match,BV,VIC,SCOALA GENERALA VICTORIA
+SB,SCOALA GENERALACU CLASELE I-VIII  DOBROTEASA / OT,1,outside_county_origin,direct_whole_name_match,OT,149,SCOALA GENERALACU CLASELE I-VIII  DOBROTEASA
+SB,SCOALA GREBLESTI / VL,1,outside_county_origin,direct_whole_name_match,VL,141,SCOALA GREBLESTI
+SB,SCOALA MLACENI / VL,7,outside_county_origin,direct_whole_name_match,VL,215,SCOALA MLACENI
+SB,SCOALA PERISANI / VL,4,outside_county_origin,direct_whole_name_match,VL,216,SCOALA PERISANI
+SB,SCOALA SERBANESTI / VL,1,outside_county_origin,ambiguous_same_name,VL,212 | 252,SCOALA SERBANESTI | SCOALA SERBANESTI
+SB,SCOALA STANESTI / VL,1,outside_county_origin,direct_whole_name_match,VL,260,SCOALA STANESTI
+SB,SCOALA TITESTI / VL,2,outside_county_origin,direct_whole_name_match,VL,218,SCOALA TITESTI
+SB,SCOALA ZATRENI / VL,1,outside_county_origin,direct_whole_name_match,VL,294,SCOALA ZATRENI
+SJ,GR.SC.MINIER POPESTI / BH,1,outside_county_origin,direct_whole_name_match,BH,287,GR.SC.MINIER POPESTI
+SJ,GRI SUPLACU DE BARCAU / BH,3,outside_county_origin,direct_whole_name_match,BH,312,GRI SUPLACU DE BARCAU
+SJ,SC.CU CLS.I-VIII ALESD / BH,1,outside_county_origin,direct_whole_name_match,BH,134,SC.CU CLS.I-VIII ALESD
+SJ,SC.CU CLS.I-VIII BORUMLACA / BH,2,outside_county_origin,direct_whole_name_match,BH,313,SC.CU CLS.I-VIII BORUMLACA
+SJ,SCOALA CU CLASELE I-VIII NR. 2 DEJ / CJ,1,outside_county_origin,direct_whole_name_match,CJ,154,SCOALA CU CLASELE I-VIII NR. 2 DEJ
+SJ,SCOALA CU CLASELE I-VIII NR.16 CLUJ-NAPOCA / CJ,1,outside_county_origin,direct_whole_name_match,CJ,115,SCOALA CU CLASELE I-VIII NR.16 CLUJ-NAPOCA
+SJ,SCOALA CU CLASELE I-VIII POIENI COM. POIENI / CJ,1,outside_county_origin,direct_whole_name_match,CJ,307,SCOALA CU CLASELE I-VIII POIENI COM. POIENI
+SJ,SCOALA CU CLASELE I-VIII SECUSIGIU / AR,1,outside_county_origin,direct_whole_name_match,AR,181,SCOALA CU CLASELE I-VIII SECUSIGIU
+SJ,SCOALA CU CLS. I - VIII BICAZ / MM,1,outside_county_origin,direct_whole_name_match,MM,167,SCOALA CU CLS. I - VIII BICAZ
+SJ,SCOALA CU CLS. I-VIII NR.2 CAVNIC / MM,1,outside_county_origin,direct_whole_name_match,MM,338,SCOALA CU CLS. I-VIII NR.2 CAVNIC
+SJ,SCOALA CU CLS. I-VIII OARTA DE JOS / MM,1,outside_county_origin,direct_whole_name_match,MM,230,SCOALA CU CLS. I-VIII OARTA DE JOS
+SJ,SCOALA CU CLS. I-VIII OARTA DE SUS / MM,1,outside_county_origin,direct_whole_name_match,MM,231,SCOALA CU CLS. I-VIII OARTA DE SUS
+SJ,SCOALA CU CLS.I-VIII NR 4 SIGHETU MARMATIEI / MM,1,outside_county_origin,direct_whole_name_match,MM,125,SCOALA CU CLS.I-VIII NR 4 SIGHETU MARMATIEI
+SJ,SCOALA GENERALA GIOROCUTA / SM,1,outside_county_origin,direct_whole_name_match,SM,064,SCOALA GENERALA GIOROCUTA
+SJ,SCOALA GENERALA GIURTELECUL HODODULUI / SM,6,outside_county_origin,direct_whole_name_match,SM,065,SCOALA GENERALA GIURTELECUL HODODULUI
+SJ,SCOALA GENERALA HODOD / SM,4,outside_county_origin,direct_whole_name_match,SM,066,SCOALA GENERALA HODOD
+SJ,SCOALA GENERALA LELEI / SM,1,outside_county_origin,direct_whole_name_match,SM,068,SCOALA GENERALA LELEI
+SJ,SCOALA GENERALA TASNAD / SM,1,outside_county_origin,direct_whole_name_match,SM,083,SCOALA GENERALA TASNAD
+SJ,SCOALA PROFESIONALA SUPURUL DE JOS / SM,2,outside_county_origin,direct_whole_name_match,SM,082,SCOALA PROFESIONALA SUPURUL DE JOS
+TL,LICEUL CU PROGRAM DE EDUCATIE FIZICA SI SPORT BACA / BC,1,outside_county_origin,direct_whole_name_match,BC,393,LICEUL CU PROGRAM DE EDUCATIE FIZICA SI SPORT BACA
+TL,"SCOALA CU CLASELE I-VIII ""ION CREANGA"" BRAILA / BR",1,outside_county_origin,direct_whole_name_match,BR,106,"SCOALA CU CLASELE I-VIII ""ION CREANGA"" BRAILA"
+TL,"SCOALA FRUMUSITA ""PETRU RARES"" / GL",1,outside_county_origin,direct_whole_name_match,GL,290,"SCOALA FRUMUSITA ""PETRU RARES"""
+TL,SCOALA GENERALA CU CLASELE I-VIII  STOENESTI / OT,1,outside_county_origin,direct_whole_name_match,OT,222,SCOALA GENERALA CU CLASELE I-VIII  STOENESTI
+TL,SCOALA GENERALA CU CLASELE I-VIII SPRIA / BC,1,outside_county_origin,direct_whole_name_match,BC,207,SCOALA GENERALA CU CLASELE I-VIII SPRIA
+TL,SCOALA GENERALA I-VIII M.KOGALNICEANU / IL,1,outside_county_origin,direct_whole_name_match,IL,130,SCOALA GENERALA I-VIII M.KOGALNICEANU
+TL,scoala cu clasele I-VIII Mihai Viteazu / CT,1,outside_county_origin,direct_whole_name_match,CT,120,scoala cu clasele I-VIII Mihai Viteazu
+VL,"COLEGIUL NATIONAL ""D-NA STANCA"" FAGARAS / BV",1,outside_county_origin,direct_whole_name_match,BV,STA,"COLEGIUL NATIONAL ""D-NA STANCA"" FAGARAS"
+VL,"COLEGIUL NATIONAL VOCATIONAL ""NICOLAE TITULESCU"" S / OT",1,outside_county_origin,direct_whole_name_match,OT,307,"COLEGIUL NATIONAL VOCATIONAL ""NICOLAE TITULESCU"" S"
+VL,GR.SC.CONSTR.MASINI MIRSA / SB,1,outside_county_origin,direct_whole_name_match,SB,251,GR.SC.CONSTR.MASINI MIRSA
+VL,GRUP SCOLAR INDUSTRIAL BAIA DE FIER / GJ,1,outside_county_origin,direct_whole_name_match,GJ,135,GRUP SCOLAR INDUSTRIAL BAIA DE FIER
+VL,GRUP SCOLAR INDUSTRIAL CONSTRUCTII DE MASINI BALS / OT,1,outside_county_origin,direct_whole_name_match,OT,299,GRUP SCOLAR INDUSTRIAL CONSTRUCTII DE MASINI BALS
+VL,LICEUL TEORETIC  VITOMIRESTI / OT,1,outside_county_origin,direct_whole_name_match,OT,304,LICEUL TEORETIC  VITOMIRESTI
+VL,LICEUL TEORETIC IANCU JIANU / OT,2,outside_county_origin,direct_whole_name_match,OT,309,LICEUL TEORETIC IANCU JIANU
+VL,SC. CU CLASELE I-VIII IZVORUL DULCE comuna MEREI / BZ,1,outside_county_origin,direct_whole_name_match,BZ,208,SC. CU CLASELE I-VIII IZVORUL DULCE comuna MEREI
+VL,SC. GEN. CLS. 1-8 LAUNELE / AG,1,outside_county_origin,direct_whole_name_match,AG,236,SC. GEN. CLS. 1-8 LAUNELE
+VL,SC.CU CLS I-VIII TALMACIU / SB,1,outside_county_origin,direct_whole_name_match,SB,225,SC.CU CLS I-VIII TALMACIU
+VL,SC.CU CLS. I - VIII JOITA / GR,1,outside_county_origin,direct_whole_name_match,GR,615,SC.CU CLS. I - VIII JOITA
+VL,SCOALA   GEN.CLS.1-VIII MUSATESTI / AG,3,outside_county_origin,direct_whole_name_match,AG,280,SCOALA   GEN.CLS.1-VIII MUSATESTI
+VL,SCOALA BERBESTI / VL,43,ambiguous_same_directory_name,needs_school_specific_source_review,VL,118 | 184,SCOALA BERBESTI | SCOALA BERBESTI
+VL,SCOALA CLS.1-VII DEDULESTI / AG,1,outside_county_origin,direct_whole_name_match,AG,274,SCOALA CLS.1-VII DEDULESTI
+VL,SCOALA CU CLASELE I - VIII DESA / DJ,1,outside_county_origin,direct_whole_name_match,DJ,180,SCOALA CU CLASELE I - VIII DESA
+VL,SCOALA CU CLASELE I - VIII NR  6 BAILESTI / DJ,1,outside_county_origin,direct_whole_name_match,DJ,253,SCOALA CU CLASELE I - VIII NR  6 BAILESTI
+VL,SCOALA CU CLASELE I - VIII NR 16 CRAIOVA / DJ,1,outside_county_origin,direct_whole_name_match,DJ,260,SCOALA CU CLASELE I - VIII NR 16 CRAIOVA
+VL,SCOALA CU CLASELE I-VIII NR 8 DOROHOI / BT,1,outside_county_origin,direct_whole_name_match,BT,313,SCOALA CU CLASELE I-VIII NR 8 DOROHOI
+VL,SCOALA CU CLASELE I-VIII NR.  12 / B,1,outside_county_origin,direct_whole_name_match,B,034,SCOALA CU CLASELE I-VIII NR.  12
+VL,"SCOALA CU CLASELE I-VIII NR. 111 ""GEORGE BACOVIA"" / B",1,outside_county_origin,direct_whole_name_match,B,206,"SCOALA CU CLASELE I-VIII NR. 111 ""GEORGE BACOVIA"""
+VL,SCOALA CU CLASELE I-VIII SCARISOARA / OT,1,outside_county_origin,direct_whole_name_match,OT,102,SCOALA CU CLASELE I-VIII SCARISOARA
+VL,SCOALA DAESTI / VL,22,ambiguous_same_directory_name,needs_school_specific_source_review,VL,146 | 221,SCOALA DAESTI | SCOALA DAESTI
+VL,SCOALA GEN.CLS.I-VIII SLATINA / AG,2,outside_county_origin,direct_whole_name_match,AG,286,SCOALA GEN.CLS.I-VIII SLATINA
+VL,SCOALA GENERALA ALIMPESTI / GJ,1,outside_county_origin,direct_whole_name_match,GJ,129,SCOALA GENERALA ALIMPESTI
+VL,SCOALA GENERALA CICANESTI / AG,1,outside_county_origin,direct_whole_name_match,AG,219,SCOALA GENERALA CICANESTI
+VL,SCOALA GENERALA CLS I - VIII  ANDREI MURESANU  DEV / HD,1,outside_county_origin,direct_whole_name_match,HD,105,SCOALA GENERALA CLS I - VIII  ANDREI MURESANU  DEV
+VL,"SCOALA GENERALA CLS I - VIII ""I.D.SARBU"" PETRILA / HD",1,outside_county_origin,direct_whole_name_match,HD,153,"SCOALA GENERALA CLS I - VIII ""I.D.SARBU"" PETRILA"
+VL,SCOALA GENERALA CU CLASELE I-VIII  CAZANESTI / OT,2,outside_county_origin,direct_whole_name_match,OT,245,SCOALA GENERALA CU CLASELE I-VIII  CAZANESTI
+VL,SCOALA GENERALA CU CLASELE I-VIII  CUNGREA / OT,1,outside_county_origin,direct_whole_name_match,OT,140,SCOALA GENERALA CU CLASELE I-VIII  CUNGREA
+VL,SCOALA GENERALA CU CLASELE I-VIII  DEJESTI / OT,2,outside_county_origin,direct_whole_name_match,OT,247,SCOALA GENERALA CU CLASELE I-VIII  DEJESTI
+VL,SCOALA GENERALA CU CLASELE I-VIII  GRADINARI / OT,5,outside_county_origin,direct_whole_name_match,OT,163,SCOALA GENERALA CU CLASELE I-VIII  GRADINARI
+VL,SCOALA GENERALA CU CLASELE I-VIII  GRECI / OT,1,outside_county_origin,ambiguous_same_name,OT,197 | 219,SCOALA GENERALA CU CLASELE I-VIII  GRECI | SCOALA GENERALA CU CLASELE I-VIII  GRECI
+VL,SCOALA GENERALA CU CLASELE I-VIII  LELEASCA / OT,1,outside_county_origin,direct_whole_name_match,OT,175,SCOALA GENERALA CU CLASELE I-VIII  LELEASCA
+VL,SCOALA GENERALA CU CLASELE I-VIII  PIRSCOVENI / OT,1,outside_county_origin,direct_whole_name_match,OT,201,SCOALA GENERALA CU CLASELE I-VIII  PIRSCOVENI
+VL,SCOALA GENERALA CU CLASELE I-VIII  SIMBURESTI / OT,1,outside_county_origin,direct_whole_name_match,OT,221,SCOALA GENERALA CU CLASELE I-VIII  SIMBURESTI
+VL,SCOALA GENERALA CU CLASELE I-VIII  SLAVENI / OT,2,outside_county_origin,direct_whole_name_match,OT,162,SCOALA GENERALA CU CLASELE I-VIII  SLAVENI
+VL,SCOALA GENERALA CU CLASELE I-VIII  STREJESTII DE S / OT,1,outside_county_origin,direct_whole_name_match,OT,225,SCOALA GENERALA CU CLASELE I-VIII  STREJESTII DE S
+VL,SCOALA GENERALA CU CLASELE I-VIII BABICIU / OT,1,outside_county_origin,direct_whole_name_match,OT,112,SCOALA GENERALA CU CLASELE I-VIII BABICIU
+VL,SCOALA GENERALA CU CLASELE I-VIII DIENCI / OT,8,outside_county_origin,direct_whole_name_match,OT,295,SCOALA GENERALA CU CLASELE I-VIII DIENCI
+VL,"SCOALA GENERALA CU CLASELE I-VIII NR 11 ""CONSTANTI / OT",1,outside_county_origin,direct_whole_name_match,OT,305,"SCOALA GENERALA CU CLASELE I-VIII NR 11 ""CONSTANTI"
+VL,SCOALA GENERALA CU CLASELE I-VIII OTESTII DE SUS / OT,6,outside_county_origin,direct_whole_name_match,OT,141,SCOALA GENERALA CU CLASELE I-VIII OTESTII DE SUS
+VL,SCOALA GENERALA CU CLASELE I-VIII POGANU / OT,13,outside_county_origin,direct_whole_name_match,OT,291,SCOALA GENERALA CU CLASELE I-VIII POGANU
+VL,SCOALA GENERALA DE 8 ANI DIDESTI / TR,1,outside_county_origin,direct_whole_name_match,TR,170,SCOALA GENERALA DE 8 ANI DIDESTI
+VL,SCOALA GENERALA NR 1 CU CLASELE I-VIII  RUSANESTI / OT,2,outside_county_origin,direct_whole_name_match,OT,215,SCOALA GENERALA NR 1 CU CLASELE I-VIII  RUSANESTI
+VL,SCOALA GENERALA NR 2 CU CLASELE I-VIII  RUSANESTI / OT,2,outside_county_origin,direct_whole_name_match,OT,216,SCOALA GENERALA NR 2 CU CLASELE I-VIII  RUSANESTI
+VL,SCOALA GENERALA NR 6 CU CLASELE I-VIII  CARACAL / OT,1,outside_county_origin,direct_whole_name_match,OT,270,SCOALA GENERALA NR 6 CU CLASELE I-VIII  CARACAL
+VL,SCOALA GENERALA NR.1 PESTISANI / GJ,3,outside_county_origin,direct_whole_name_match,GJ,260,SCOALA GENERALA NR.1 PESTISANI
+VL,SCOALA GENERALA NR.1 POLOVRAGI / GJ,5,outside_county_origin,direct_whole_name_match,GJ,206,SCOALA GENERALA NR.1 POLOVRAGI
+VL,"SCOALA GENERALA RADOSI, CRASNA / GJ",1,outside_county_origin,direct_whole_name_match,GJ,170,"SCOALA GENERALA RADOSI, CRASNA"
+VL,SCOALA GENERALA SAPUNARI COM.MORARESTI / AG,2,outside_county_origin,direct_whole_name_match,AG,275,SCOALA GENERALA SAPUNARI COM.MORARESTI
+VL,SCOALA GENERALA URLUIESTI / AG,2,outside_county_origin,direct_whole_name_match,AG,216,SCOALA GENERALA URLUIESTI
+VL,SCOALA GENERALACU CLASELE I-VIII  DOBROTEASA / OT,9,outside_county_origin,direct_whole_name_match,OT,149,SCOALA GENERALACU CLASELE I-VIII  DOBROTEASA
+VL,SCOALA IZVORU RECE / VL,11,ambiguous_same_directory_name,needs_school_specific_source_review,VL,268 | 283,SCOALA IZVORU RECE | SCOALA IZVORU RECE
+VL,SCOALA MADULARI / VL,15,ambiguous_same_directory_name,needs_school_specific_source_review,VL,138 | 192,SCOALA MADULARI | SCOALA MADULARI
+VL,SCOALA NR.1 PITESTI / AG,1,outside_county_origin,direct_whole_name_match,AG,127,SCOALA NR.1 PITESTI
+VL,SCOALA ROMANI / VL,26,ambiguous_same_directory_name,needs_school_specific_source_review,VL,106 | 179,SCOALA ROMANI | SCOALA ROMANI
+VL,SCOALA SERBANESTI / VL,9,ambiguous_same_directory_name,needs_school_specific_source_review,VL,212 | 252,SCOALA SERBANESTI | SCOALA SERBANESTI
+VL,SCOALA STOENESTI / VL,15,ambiguous_same_directory_name,needs_school_specific_source_review,VL,123 | 266,SCOALA STOENESTI | SCOALA STOENESTI
+VL,SCOALA URSI / VL,17,ambiguous_same_directory_name,needs_school_specific_source_review,VL,222 | 270,SCOALA URSI | SCOALA URSI
+VL,SCOALA VALEA MARE / VL,9,ambiguous_same_directory_name,needs_school_specific_source_review,VL,107 | 287,SCOALA VALEA MARE | SCOALA VALEA MARE
+VN,SC. CU CLASELE I-VIII AL.ODOBESCU comuna BUDA / BZ,2,outside_county_origin,direct_whole_name_match,BZ,154,SC. CU CLASELE I-VIII AL.ODOBESCU comuna BUDA
+VN,SC. CU CLASELE I-VIII PLESI comuna BISOCA / BZ,2,outside_county_origin,direct_whole_name_match,BZ,142,SC. CU CLASELE I-VIII PLESI comuna BISOCA
+VN,SC. CU CLASELE I-VIII VACAREASCA GL. SILISTEA / BZ,1,outside_county_origin,direct_whole_name_match,BZ,188,SC. CU CLASELE I-VIII VACAREASCA GL. SILISTEA
+VN,"SCOALA ""GEORGE CALINESCU"" IASI / IS",1,outside_county_origin,direct_whole_name_match,IS,157,"SCOALA ""GEORGE CALINESCU"" IASI"
+VN,SCOALA COSMESTI-DEAL / GL,3,outside_county_origin,direct_whole_name_match,GL,269,SCOALA COSMESTI-DEAL
+VN,SCOALA COSMESTI-VALE / GL,2,outside_county_origin,direct_whole_name_match,GL,184,SCOALA COSMESTI-VALE
+VN,SCOALA CU CLASE I-VIII JURILOVCA / TL,1,outside_county_origin,direct_whole_name_match,TL,200,SCOALA CU CLASE I-VIII JURILOVCA
+VN,"SCOALA CU CLASELE I-VIII ""VASILE ALECSANDRI"" / BR",1,outside_county_origin,direct_whole_name_match,BR,112,"SCOALA CU CLASELE I-VIII ""VASILE ALECSANDRI"""
+VN,SCOALA CU CLASELE I-VIII BRATULESTI / IS,1,outside_county_origin,direct_whole_name_match,IS,204,SCOALA CU CLASELE I-VIII BRATULESTI
+VN,SCOALA CU CLASELE I-VIII HOCENI / VS,1,outside_county_origin,direct_whole_name_match,VS,175,SCOALA CU CLASELE I-VIII HOCENI
+VN,SCOALA CU CLASELE I-VIII JIRLAU / BR,2,outside_county_origin,direct_whole_name_match,BR,169,SCOALA CU CLASELE I-VIII JIRLAU
+VN,SCOALA CU CLASELE I-VIII MOVILA MIRESII / BR,1,outside_county_origin,direct_whole_name_match,BR,177,SCOALA CU CLASELE I-VIII MOVILA MIRESII
+VN,SCOALA CU CLASELE I-VIII Nr.11  BUZAU / BZ,1,outside_county_origin,direct_whole_name_match,BZ,102,SCOALA CU CLASELE I-VIII Nr.11  BUZAU
+VN,SCOALA FURCENII NOI / GL,1,outside_county_origin,direct_whole_name_match,GL,182,SCOALA FURCENII NOI
+VN,SCOALA FURCENII VECHI / GL,3,outside_county_origin,direct_whole_name_match,GL,183,SCOALA FURCENII VECHI
+VN,SCOALA GENERALA CU CLASELE I-VIII CORNII DE SUS / BC,3,outside_county_origin,direct_whole_name_match,BC,357,SCOALA GENERALA CU CLASELE I-VIII CORNII DE SUS
+VN,SCOALA GENERALA CU CLASELE I-VIII GHERDANA / BC,4,outside_county_origin,direct_whole_name_match,BC,356,SCOALA GENERALA CU CLASELE I-VIII GHERDANA
+VN,SCOALA GENERALA CU CLASELE I-VIII HURUIESTI / BC,8,outside_county_origin,direct_whole_name_match,BC,254,SCOALA GENERALA CU CLASELE I-VIII HURUIESTI
+VN,SCOALA GENERALA CU CLASELE I-VIII NR  1 DEALU MORI / BC,6,outside_county_origin,direct_whole_name_match,BC,223,SCOALA GENERALA CU CLASELE I-VIII NR  1 DEALU MORI
+VN,SCOALA GENERALA CU CLASELE I-VIII NR  1 PODU TURCU / BC,1,outside_county_origin,direct_whole_name_match,BC,379,SCOALA GENERALA CU CLASELE I-VIII NR  1 PODU TURCU
+VN,SCOALA GENERALA CU CLASELE I-VIII NR  1 VALEA SEAC / BC,1,outside_county_origin,ambiguous_same_name,BC,278 | 370,SCOALA GENERALA CU CLASELE I-VIII NR  1 VALEA SEAC | SCOALA GENERALA CU CLASELE I-VIII NR  1 VALEA SEAC
+VN,SCOALA GENERALA CU CLASELE I-VIII SASCUT / BC,4,outside_county_origin,direct_whole_name_match,BC,327,SCOALA GENERALA CU CLASELE I-VIII SASCUT
+VN,SCOALA GENERALA CU CLASELE I-VIII SASCUT-SAT / BC,1,outside_county_origin,direct_whole_name_match,BC,330,SCOALA GENERALA CU CLASELE I-VIII SASCUT-SAT
+VN,SCOALA GENERALA CU CLASELE I-VIII URECHESTI / BC,1,outside_county_origin,direct_whole_name_match,BC,369,SCOALA GENERALA CU CLASELE I-VIII URECHESTI
+VN,SCOALA GENERALA NR 14 BRASOV / BV,1,outside_county_origin,direct_whole_name_match,BV,14B,SCOALA GENERALA NR 14 BRASOV
+VN,SCOALA NR.1 MOVILENI / GL,1,outside_county_origin,direct_whole_name_match,GL,226,SCOALA NR.1 MOVILENI
+VN,"SCOALA NR.10 ""DIMITRIE STURZA"" TECUCI / GL",1,outside_county_origin,direct_whole_name_match,GL,138,"SCOALA NR.10 ""DIMITRIE STURZA"" TECUCI"
+VN,"SCOALA NR.11 ""IORGU IORDAN"" TECUCI / GL",1,outside_county_origin,direct_whole_name_match,GL,289,"SCOALA NR.11 ""IORGU IORDAN"" TECUCI"
+VN,SCOALA NR.2 MATCA / GL,1,outside_county_origin,direct_whole_name_match,GL,221,SCOALA NR.2 MATCA
+VN,SCOALA NR.2 MOVILENI / GL,1,outside_county_origin,direct_whole_name_match,GL,227,SCOALA NR.2 MOVILENI
+VN,SCOALA NR.3 IVESTI / GL,1,outside_county_origin,direct_whole_name_match,GL,212,SCOALA NR.3 IVESTI
+VN,"SCOALA NR.38 ""GRIGORE MOISIL""  GALATI / GL",1,outside_county_origin,direct_whole_name_match,GL,276,"SCOALA NR.38 ""GRIGORE MOISIL""  GALATI"
+VN,SCOALA NR.4 LIESTI / GL,1,outside_county_origin,direct_whole_name_match,GL,219,SCOALA NR.4 LIESTI
+VN,SCOALA UMBRARESTI ( NR.1) / GL,1,outside_county_origin,direct_whole_name_match,GL,262,SCOALA UMBRARESTI ( NR.1)
+VN,scoala sanatoriala Mangalia / CT,1,outside_county_origin,direct_whole_name_match,CT,145,scoala sanatoriala Mangalia

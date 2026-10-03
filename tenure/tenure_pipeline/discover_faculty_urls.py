@@ -120,7 +120,8 @@ PLAN_JSONL  = TP / 'faculty_snapshots_plan.jsonl'
 OUT_JSONL   = TP / 'faculty_url_suggestions.jsonl'
 OUT_CSV     = TP / 'faculty_url_suggestions.csv'
 
-CDX_API     = 'http://web.archive.org/cdx/search/cdx'
+from wayback.cdx_client import CDX_API, count_cdx_captures, query_cdx_collapsed
+
 CDX_HEADERS = {
     'User-Agent': (
         'TenurePipelineBot/1.0 (academic research; '
@@ -282,107 +283,22 @@ def _score_candidate(url: str, count: int, year_min: int, year_max: int,
 
 
 def _cdx_query(url_pattern: str, match_type: str = 'prefix') -> list:
-    """
-    Core CDX API query helper.  Returns a list of dicts:
-        url, count, year_min, year_max, sample_ts
-
-    Parameters
-    ----------
-    url_pattern : str
-        The CDX 'url' parameter.  For matchType=domain pass just the
-        apex domain (vanderbilt.edu).  For prefix pass domain/path/*.
-    match_type : str
-        'prefix'  — matches urls that START WITH url_pattern  (old behaviour)
-        'domain'  — matches ALL subdomains of url_pattern, e.g.
-                    vanderbilt.edu → cs.vanderbilt.edu, engineering.vanderbilt.edu, etc.
-                    This is the KEY to the new algorithm: one query discovers
-                    every subdomain the university has ever used, so we find
-                    cs.vanderbilt.edu even if we only knew engineering.vanderbilt.edu.
-
-    Uses collapse=urlkey so we get ONE row per unique URL (fast).
-    A follow-up count query is done separately for the top candidates.
-    """
-    params = {
-        'url':       url_pattern,
-        'output':    'json',
-        'fl':        'original,timestamp,statuscode',
-        'collapse':  'urlkey',
-        'limit':     str(CDX_LIMIT),
-        'matchType': match_type,
-    }
-    query = CDX_API + '?' + urllib.parse.urlencode(params)
-    req   = urllib.request.Request(query, headers=CDX_HEADERS)
-    try:
-        with urllib.request.urlopen(req, timeout=CDX_TIMEOUT) as resp:
-            raw = json.loads(resp.read().decode('utf-8', errors='replace'))
-    except Exception as exc:
-        print(f'    CDX error [{match_type}] {url_pattern}: {exc}', flush=True)
-        return []
-
-    if not raw or len(raw) < 2:
-        return []
-
-    header = raw[0]   # ['original', 'timestamp', 'statuscode']
-    rows   = raw[1:]
-
-    try:
-        i_url    = header.index('original')
-        i_ts     = header.index('timestamp')
-        i_status = header.index('statuscode')
-    except ValueError:
-        return []
-
-    results = []
-    for row in rows:
-        try:
-            url    = row[i_url]
-            ts     = row[i_ts]
-            status = row[i_status]
-        except IndexError:
-            continue
-
-        if status in ('404', '403', '301', '302'):
-            continue
-        if not url.startswith('http'):
-            continue
-
-        year = int(ts[:4]) if ts and len(ts) >= 4 else 0
-        results.append({
-            'url':            url,
-            'count':          1,          # placeholder; refined below for top N
-            'year_min':       year,
-            'year_max':       year,
-            'sample_ts':      ts,
-        })
-
-    return results
+    """CDX collapsed query — delegates to wayback.cdx_client (shared with Cell 3A)."""
+    return query_cdx_collapsed(
+        url_pattern,
+        match_type=match_type,
+        limit=CDX_LIMIT,
+        timeout=CDX_TIMEOUT,
+        headers=CDX_HEADERS,
+    )
 
 
 def _cdx_count_url(url: str) -> tuple:
-    """
-    Count how many times Wayback captured a specific URL and get year range.
-    Returns (count, year_min, year_max).  Used to refine scores for top candidates.
-    """
-    params = {
-        'url':    url,
-        'output': 'json',
-        'fl':     'timestamp',
-        'limit':  '10000',
-    }
-    query = CDX_API + '?' + urllib.parse.urlencode(params)
-    req   = urllib.request.Request(query, headers=CDX_HEADERS)
-    try:
-        with urllib.request.urlopen(req, timeout=30) as resp:
-            raw = json.loads(resp.read().decode('utf-8', errors='replace'))
-    except Exception:
-        return 1, 0, 0
-
-    if not raw or len(raw) < 2:
+    """Capture count + year span — delegates to wayback.cdx_client."""
+    count, yr_min, yr_max = count_cdx_captures(url, timeout=30, headers=CDX_HEADERS)
+    if count == 0:
         return 0, 0, 0
-
-    timestamps = [row[0] for row in raw[1:] if row]
-    years      = [int(ts[:4]) for ts in timestamps if ts and len(ts) >= 4]
-    return len(timestamps), (min(years) if years else 0), (max(years) if years else 0)
+    return count, yr_min, yr_max
 
 
 def _preflight_cdx_check() -> bool:
