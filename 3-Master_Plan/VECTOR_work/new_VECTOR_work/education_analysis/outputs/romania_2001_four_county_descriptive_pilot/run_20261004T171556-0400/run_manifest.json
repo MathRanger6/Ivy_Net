@@ -1,0 +1,21 @@
+{
+  "run_at_local": "run_20261004T171556-0400",
+  "settings": {
+    "top_tiers": [
+      1,
+      2
+    ],
+    "require_full_programs": true,
+    "combine_program_categories": true,
+    "include_vocational_in_primary": false,
+    "compare_excluding_ambiguous": true,
+    "compare_excluding_vocational": true,
+    "compare_pooled_score_bands": true,
+    "peer_strength_bins": 8,
+    "hero_bins": 16
+  },
+  "decision_log_sha256": "b75e30d0081df9f7db53a431dccf4217389ce4773e5c1ff8e86225251cf98fa3",
+  "source_gate_sha256": "095cf9c87d558f5adcc3a18717c185d27abb7be7d1923bf5afacc9c7b09a5721",
+  "privacy": "aggregate outputs only; individual records retained in private cache",
+  "scope": "four origin counties; 2001 main admissions round; descriptive"
+}

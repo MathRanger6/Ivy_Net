@@ -33,3 +33,7 @@
 13. **Source exception.** One of 12,945 gymnasium applicant rows has no matching saved placement or unassigned report row. It is on the Galați originating gymnasium webpage with source code 186. It remains unresolved, not unsuccessful; Charles retains the final decision on any exclusion or source conclusion.
 
 No four county HERO, Panel 7 or 8 analogue, or congestion result has been calculated under these decisions yet.
+
+## Researcher-run implementation, October 4
+
+The [four-county notebook](../../notebooks/EDUCATION_20261004_Romania_2001_four_county_descriptive_pilot.ipynb) and its [Python companion](../../code/EDUCATION_20261004_romania_four_county_pilot.py) implement the decisions above using the saved Ministry source pages. The notebook exposes all analysis settings in its first code cell and leaves its analysis switch off until Charles turns it on. It prints progress and saves each run in a new timestamped folder under `outputs/romania_2001_four_county_descriptive_pilot/`. The code makes no network requests and does not execute an analysis when imported. Creating and checking these files did not calculate any four-county research result.
