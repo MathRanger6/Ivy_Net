@@ -1,0 +1,5 @@
+county,n_applicants,score_p50,score_p75,score_p90,pooled_score_p50,pooled_score_p75,pooled_score_p90
+AB,3041,6.98,8.01,8.8,6.8,7.77,8.6
+CS,2606,6.65,7.63,8.53,6.8,7.77,8.6
+GL,5345,6.76,7.7,8.53,6.8,7.77,8.6
+TL,1953,6.83,7.78,8.51,6.8,7.77,8.6

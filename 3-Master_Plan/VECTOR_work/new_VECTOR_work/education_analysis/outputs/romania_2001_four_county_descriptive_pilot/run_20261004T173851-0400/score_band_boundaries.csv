@@ -1,0 +1,5 @@
+county,n_applicants,middle_percentile,excellence_start_percentile,top_start_percentile,middle_exam_boundary,excellence_start_exam_boundary,top_start_exam_boundary,pooled_middle_exam_boundary,pooled_excellence_start_exam_boundary,pooled_top_start_exam_boundary
+AB,3041,60,80,95,7.33,8.23,9.16,7.13,8.03,9.01
+CS,2606,60,80,95,7.0,7.93,8.945,7.13,8.03,9.01
+GL,5345,60,80,95,7.1,7.95,8.908000000000001,7.13,8.03,9.01
+TL,1953,60,80,95,7.18,8.01,9.037999999999997,7.13,8.03,9.01

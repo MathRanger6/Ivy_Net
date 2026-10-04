@@ -34,7 +34,6 @@ ROOT = Path(__file__).resolve().parents[1]
 OUTPUTS = ROOT / "outputs/romania_2001_four_county_descriptive_pilot"
 DECISIONS = ROOT / "docs/decisions/EDUCATION_20261002_Romania_four_county_pilot_design_decisions.md"
 SOURCE_GATE = ROOT / "outputs/romania_2001_four_county_source_pilot/program_identity_source_gate.csv"
-BAND_LABELS = ("Lower 50%", "50th–75th", "75th–90th", "Top 10%")
 BAND_COLORS = ("#73afd2", "#999999", "#e58b25", "#a43d4c")
 
 
@@ -49,6 +48,7 @@ class Settings:
     compare_excluding_ambiguous: bool = True
     compare_excluding_vocational: bool = True
     compare_pooled_score_bands: bool = True
+    ai_percentile_cuts: tuple[int, int, int] = (90, 75, 50)
     peer_strength_bins: int = 8
     hero_bins: int = 16
 
@@ -59,6 +59,19 @@ class Settings:
             raise ValueError("top_tiers contains a repeated tier")
         if self.peer_strength_bins < 3 or self.hero_bins < 3:
             raise ValueError("Plot bin counts must be at least three")
+        cuts = self.ai_percentile_cuts
+        if (len(cuts) != 3 or any(type(value) is not int for value in cuts)
+                or not 0 < cuts[2] < cuts[1] < cuts[0] < 100):
+            raise ValueError(
+                "ai_percentile_cuts must be three descending whole-number percentiles, "
+                "for example (90, 75, 50)"
+            )
+
+
+def _band_labels(settings):
+    top, excellence, middle = settings.ai_percentile_cuts
+    return (f"Below {middle}th", f"{middle}th–{excellence}th",
+            f"{excellence}th–{top}th (excellence)", f"Top {100-top}%")
 
 
 def _program_catalog(county):
@@ -203,25 +216,32 @@ def _load_rows(settings):
 def _add_bands(frame, settings):
     """Freeze score bands from every participating applicant, not outcome rows."""
     print("Step 2/4 — defining county and pooled examination-score bands...", flush=True)
+    top, excellence, middle = settings.ai_percentile_cuts
+    top_q, excellence_q, middle_q = (value / 100 for value in (top, excellence, middle))
+    labels = _band_labels(settings)
     first = frame.loc[frame["tier"] == settings.top_tiers[0], ["county", "exam"]]
-    pooled = first["exam"].quantile([0.50, 0.75, 0.90]).to_dict()
+    pooled = first["exam"].quantile([middle_q, excellence_q, top_q]).to_dict()
     boundaries = []
     county_edges = {}
     for county in COUNTIES:
         scores = first.loc[first["county"] == county, "exam"]
-        edges = scores.quantile([0.50, 0.75, 0.90]).to_dict()
+        edges = scores.quantile([middle_q, excellence_q, top_q]).to_dict()
         county_edges[county] = edges
         boundaries.append({"county": county, "n_applicants": len(scores),
-                           "score_p50": edges[0.50], "score_p75": edges[0.75],
-                           "score_p90": edges[0.90],
-                           "pooled_score_p50": pooled[0.50],
-                           "pooled_score_p75": pooled[0.75],
-                           "pooled_score_p90": pooled[0.90]})
+                           "middle_percentile": middle,
+                           "excellence_start_percentile": excellence,
+                           "top_start_percentile": top,
+                           "middle_exam_boundary": edges[middle_q],
+                           "excellence_start_exam_boundary": edges[excellence_q],
+                           "top_start_exam_boundary": edges[top_q],
+                           "pooled_middle_exam_boundary": pooled[middle_q],
+                           "pooled_excellence_start_exam_boundary": pooled[excellence_q],
+                           "pooled_top_start_exam_boundary": pooled[top_q]})
     def assign(scores, edges):
-        return np.select([scores >= edges[0.90], scores >= edges[0.75],
-                          scores >= edges[0.50]],
-                         [BAND_LABELS[3], BAND_LABELS[2], BAND_LABELS[1]],
-                         default=BAND_LABELS[0])
+        return np.select([scores >= edges[top_q], scores >= edges[excellence_q],
+                          scores >= edges[middle_q]],
+                         [labels[3], labels[2], labels[1]],
+                         default=labels[0])
     frame = frame.copy()
     frame["county_band"] = ""
     for county, edges in county_edges.items():
@@ -269,9 +289,37 @@ def _binned(frame, band_column, n_bins):
     return pd.DataFrame(records)
 
 
+def _pooled_binned(frame, band_column, n_bins):
+    """One applicant-weighted panel across counties, with a common peer-score axis."""
+    records = []
+    for tier, group in frame.groupby("tier", sort=False):
+        eligible = group.loc[group["exclusion"] == "included"].copy()
+        if eligible.empty:
+            continue
+        # Unlike the four county panels, these bin edges use all four counties
+        # together. The county count on each point reveals incomplete coverage.
+        eligible["peer_bin"] = pd.qcut(eligible["peer_mean_exam"], q=n_bins,
+                                       labels=False, duplicates="drop")
+        for (band, peer_bin), cell in eligible.groupby([band_column, "peer_bin"], sort=False):
+            if pd.isna(peer_bin):
+                continue
+            records.append({"county": "ALL", "tier": tier, "band": band,
+                            "peer_bin": int(peer_bin) + 1,
+                            "peer_mean_exam": cell["peer_mean_exam"].mean(),
+                            "applicants": len(cell),
+                            "gymnasiums": len(cell[["county", "gymnasium"]].drop_duplicates()),
+                            "counties": cell["county"].nunique(),
+                            "successes": int(cell["success"].sum()),
+                            "success_rate": cell["success"].mean()})
+    return pd.DataFrame(records)
+
+
 def _hero_bins(frame, n_bins):
     records = []
-    for (county, tier), group in frame.groupby(["county", "tier"], sort=False):
+    county_groups = list(frame.groupby(["county", "tier"], sort=False))
+    pooled_groups = [(("ALL", tier), group)
+                     for tier, group in frame.groupby("tier", sort=False)]
+    for (county, tier), group in county_groups + pooled_groups:
         eligible = group.loc[group["exclusion"] == "included"].copy()
         if eligible.empty:
             continue
@@ -289,15 +337,18 @@ def _hero_bins(frame, n_bins):
                                 "bin": int(number) + 1,
                                 "peer_mean_exam": cell["peer_mean_exam"].mean(),
                                 "applicants": len(cell),
-                                "gymnasiums": cell["gymnasium"].nunique(),
+                                "gymnasiums": (len(cell[["county", "gymnasium"]].drop_duplicates())
+                                               if county == "ALL" else cell["gymnasium"].nunique()),
+                                "counties": cell["county"].nunique(),
                                 "successes": int(cell["success"].sum()),
                                 "success_rate": cell["success"].mean()})
     return pd.DataFrame(records)
 
 
-def _plot_hero(bins, tier, path, settings):
-    fig, axes = plt.subplots(4, 2, figsize=(20, 21), sharey=True)
-    for row_number, county in enumerate(COUNTIES):
+def _plot_hero(bins, tier, path, settings, counties=(*COUNTIES, "ALL")):
+    fig, axes = plt.subplots(len(counties), 2, figsize=(20, 5 * len(counties)),
+                             sharey=True, squeeze=False)
+    for row_number, county in enumerate(counties):
         for column_number, (kind, color) in enumerate((
                 ("equal_width", "#a43d4c"), ("quantile", "#356c9b"))):
             axis = axes[row_number, column_number]
@@ -309,10 +360,15 @@ def _plot_hero(bins, tier, path, settings):
             axis.set_xticks(positions, [f"{value:.2f}" for value in data["peer_mean_exam"]],
                             rotation=60, fontsize=7)
             for position, (_, item) in enumerate(data.iterrows()):
-                axis.annotate(f"{item.successes}/{item.applicants}\n{item.gymnasiums} gyms",
+                support = f"{item.gymnasiums} gyms"
+                if county == "ALL":
+                    support += f", {item.counties} counties"
+                axis.annotate(f"{item.successes}/{item.applicants}\n{support}",
                               (position, heights[position]), fontsize=6,
                               xytext=(0, 3), textcoords="offset points", ha="center")
-            axis.set_title(f"{county} · {'equal-width' if kind == 'equal_width' else 'quantile'} bins")
+            location = ("All four counties pooled (applicant-weighted)"
+                        if county == "ALL" else county)
+            axis.set_title(f"{location} · {'equal-width' if kind == 'equal_width' else 'quantile'} bins")
             axis.grid(axis="y", alpha=.2)
             axis.set_axisbelow(True)
             axis.set_xlabel("Mean peer exam score in bin")
@@ -320,34 +376,53 @@ def _plot_hero(bins, tier, path, settings):
                 axis.set_ylabel("Placed in designated program (%)")
     program_rule = "full programs" if settings.require_full_programs else "nonempty programs"
     group_rule = "three combined groups" if settings.combine_program_categories else "six subjects"
+    scope = ("all four counties combined" if counties == ("ALL",)
+             else "four counties and applicant-weighted combination")
     fig.suptitle(f"Romania 2001: selective placement vs gymnasium applicant peer score\n"
-                 f"Top {tier} cutoff tier(s); {program_rule}; {group_rule} — descriptive")
-    fig.text(.5, .01, "Labels: successful placements / applicants; number of distinct gymnasiums. "
-             "Same gymnasium may contribute to more than one bin.", ha="center", fontsize=9)
+                 f"Top {tier} cutoff tier(s); {program_rule}; {group_rule}; {scope} — descriptive")
+    fig.text(.5, .01, "Labels: successful placements / applicants; distinct gymnasiums. "
+             "Pooled bars also show counties represented; county mix may change across bars.",
+             ha="center", fontsize=9)
     fig.tight_layout(rect=[0.02, .03, 1, .96])
     fig.savefig(path, dpi=170)
     plt.close(fig)
 
 
 def _plot_bands(bins, tier, path, band_name, settings):
-    fig, axes = plt.subplots(2, 2, figsize=(17, 11), sharex=True, sharey=True)
-    for axis, county in zip(axes.flat, COUNTIES):
+    fig, axes = plt.subplots(3, 2, figsize=(17, 15), sharex=True, sharey=True)
+    labels = _band_labels(settings)
+    for axis, county in zip(axes.flat, (*COUNTIES, "ALL")):
         county_data = bins.loc[(bins["county"] == county) & (bins["tier"] == tier)]
-        for band, color in zip(BAND_LABELS, BAND_COLORS):
+        for band, color in zip(labels, BAND_COLORS):
             data = county_data.loc[county_data["band"] == band].sort_values("peer_mean_exam")
             if data.empty:
                 continue
             axis.plot(data["peer_mean_exam"], 100 * data["success_rate"],
                       marker="o", color=color, label=band)
-            if band in BAND_LABELS[2:]:
+            if band in labels[2:]:
                 for _, row in data.iterrows():
-                    axis.annotate(f"{row.successes}/{row.applicants}\n{row.gymnasiums} gyms",
+                    support = f"{row.gymnasiums} gyms"
+                    if county == "ALL":
+                        support += f", {row.counties} counties"
+                    axis.annotate(f"{row.successes}/{row.applicants}\n{support}",
                                   (row.peer_mean_exam, 100 * row.success_rate), fontsize=6,
                                   xytext=(0, 7), textcoords="offset points", ha="center",
                                   color=color)
-        axis.set_title(county)
+        axis.set_title("All four counties pooled (applicant-weighted)" if county == "ALL"
+                       else county)
         axis.grid(alpha=.2)
         axis.legend(fontsize=8)
+    axes.flat[-1].axis("off")
+    axes.flat[-1].text(.05, .82, "How to read the fifth panel",
+                       fontsize=13, fontweight="bold", transform=axes.flat[-1].transAxes)
+    axes.flat[-1].text(
+        .05, .62,
+        "Applicants from all four counties are combined within\n"
+        "common peer-score bins. Larger counties contribute more.\n"
+        "County success rates and county mix differ, so this pooled\n"
+        "line is descriptive, not a county-adjusted peer effect.",
+        fontsize=10, va="top", transform=axes.flat[-1].transAxes,
+    )
     program_rule = "full programs" if settings.require_full_programs else "nonempty programs"
     group_rule = "three combined groups" if settings.combine_program_categories else "six subjects"
     fig.suptitle(f"Romania 2001: placement at fixed own-exam bands across peer strength\n"
@@ -355,8 +430,8 @@ def _plot_bands(bins, tier, path, band_name, settings):
     fig.supxlabel("Mean national exam score of other observed gymnasium applicants")
     fig.supylabel("Placed in a designated program (%)")
     fig.text(.5, .01, "Labels on stronger focal bands: successes / applicants; distinct gymnasiums. "
-             "Cells with one gymnasium are descriptive, not replication.", ha="center", fontsize=9)
-    fig.tight_layout(rect=[0.03, .045, 1, .93])
+             "The pooled panel also shows counties represented.", ha="center", fontsize=9)
+    fig.tight_layout(rect=[0.03, .04, 1, .94])
     fig.savefig(path, dpi=170)
     plt.close(fig)
 
@@ -409,6 +484,7 @@ def _summary(frame, chosen, settings):
 
 
 def _write_report(folder, summary, boundaries, settings):
+    top, excellence, middle = settings.ai_percentile_cuts
     lines = ["# Romania 2001 four county descriptive placement pilot", "",
              "This researcher-run analysis uses saved 2001 Romanian Ministry admission webpages for Alba, Caraș-Severin, Galați, and Tulcea. It asks whether actual placement in a designated selective program varies with the examination performance of *other observed admission-round applicants from the same originating gymnasium*. It is descriptive. It does not establish that peers caused placement differences or that all eighth graders are represented.", "",
              "## What counts", "",
@@ -449,12 +525,13 @@ def _write_report(folder, summary, boundaries, settings):
                   "low/high bounds treat the student as a nonsuccess or success, respectively; "
                   "neither status is asserted now.", ""]
     lines += ["", "## Score bands and plots", "",
-              "The 75th–90th percentile and top 10 percent are defined within each originating county from **all recovered admission-round applicants**, before outcome exclusions. A separately saved plot applies pooled four-county boundaries. Ties at a boundary enter the higher band, so actual band sizes may differ slightly from the named percentages. The horizontal axis is the mean national exam score of other observed gymnasium applicants on its original score scale. Figures and bin CSV files show applicant counts and distinct gymnasium counts; one large gymnasium is not many independent environments.", "",
-              "County exam-score boundaries (50th, 75th, and 90th percentiles):", ""]
+              f"The {excellence}th–{top}th percentile band of excellence and top {100-top} percent are defined within each originating county from **all recovered admission-round applicants**, before outcome exclusions. The lower boundary is the {middle}th percentile. A separately saved plot applies pooled four-county boundaries. Ties at a boundary enter the higher band, so actual band sizes may differ slightly from the named percentages. The horizontal axis is the mean national exam score of other observed gymnasium applicants on its original score scale. Figures and bin CSV files show applicant counts and distinct gymnasium counts; one large gymnasium is not many independent environments.", "",
+              f"County exam-score boundaries ({middle}th, {excellence}th, and {top}th percentiles):", ""]
     for row in boundaries.itertuples():
-        lines.append(f"- **{row.county}:** {row.score_p50:.2f}, {row.score_p75:.2f}, {row.score_p90:.2f} "
+        lines.append(f"- **{row.county}:** {row.middle_exam_boundary:.2f}, {row.excellence_start_exam_boundary:.2f}, {row.top_start_exam_boundary:.2f} "
                      f"from {row.n_applicants:,} recovered applicants.")
     lines += ["", "## Limits and sensitivity", "",
+              "Each conditional score-band figure has four county panels and a fifth panel that pools applicants across counties. Each HERO figure likewise has four county rows and a fifth pooled row, with equal-width and equal-number bars. Pooled panels use common peer-score bins and weight each applicant equally, so large counties contribute more. Pooled labels report the number of counties represented. A pooled slope can change because the county mix changes across bins; it is not a county-adjusted peer effect.", "",
               "The ambiguous-program exclusion comparison changes the denominator, not the observed top-program numerator under the frozen six-category/full-program rule. The vocational exclusion comparison changes the described population and cannot reveal who actually applied to selective academic programs. One Galați applicant has no saved outcome; the summary CSV supplies a simple one-case low/high bound. Neither endpoint is asserted as the student's actual result. Source-status counts in the summary can overlap with 'no observed peer'; they are not meant to be added as mutually exclusive exclusions.", "",
               "All source matches rely on printed name plus admission score because the archived personal identifier is masked. Examination scores were measured after time in the gymnasium. Geography, preferences, prior preparation, and other unobserved differences may explain descriptive patterns. Do not interpret a downturn or an upward slope as a causal congestion effect.", "",
               "Every CSV here is free of applicant names and individual applicant rows. The program table includes public program names; the other CSVs contain aggregate counts or score boundaries. The private source pages remain in the Desktop cache. See the four-county design decision log and source-gate report for the exact prior choices and unresolved source item.", ""]
@@ -479,9 +556,14 @@ def run_pilot(settings: Settings = Settings(), *, run: bool = False):
                         exclude_vocational=not settings.include_vocational_in_primary)
     summary = _summary(frame, chosen, settings)
     hero = _hero_bins(primary, settings.hero_bins)
-    bands = _binned(primary, "county_band", settings.peer_strength_bins)
-    pooled_bands = (_binned(primary, "pooled_band", settings.peer_strength_bins)
-                    if settings.compare_pooled_score_bands else pd.DataFrame())
+    bands = pd.concat([
+        _binned(primary, "county_band", settings.peer_strength_bins),
+        _pooled_binned(primary, "county_band", settings.peer_strength_bins),
+    ], ignore_index=True)
+    pooled_bands = (pd.concat([
+        _binned(primary, "pooled_band", settings.peer_strength_bins),
+        _pooled_binned(primary, "pooled_band", settings.peer_strength_bins),
+    ], ignore_index=True) if settings.compare_pooled_score_bands else pd.DataFrame())
     if hero.empty or bands.empty:
         raise ValueError("No supported bins for four-county display")
     stamp = datetime.now().astimezone().strftime("run_%Y%m%dT%H%M%S%z")
@@ -497,6 +579,8 @@ def run_pilot(settings: Settings = Settings(), *, run: bool = False):
         pooled_bands.to_csv(folder / "conditional_bins_pooled_bands.csv", index=False)
     for tier in settings.top_tiers:
         _plot_hero(hero, tier, folder / f"hero_top{tier}.png", settings)
+        _plot_hero(hero, tier, folder / f"hero_combined_top{tier}.png",
+                   settings, counties=("ALL",))
         _plot_bands(bands, tier, folder / f"conditional_county_bands_top{tier}.png",
                     "within-county own-exam bands", settings)
         if not pooled_bands.empty:
