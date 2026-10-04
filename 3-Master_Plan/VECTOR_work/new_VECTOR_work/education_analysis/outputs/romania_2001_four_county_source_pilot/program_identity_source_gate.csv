@@ -1,0 +1,5 @@
+county,gymnasium_applicant_rows,one_local_placement,local_program_unique,local_program_not_found,local_program_ambiguous,confirmed_unassigned,ambiguous_might_be_top1,ambiguous_might_be_top2,placed_other_county,unresolved_or_ambiguous_outcome,no_observed_peer,unique_programs,fully_occupied_programs,program_places,program_admitted,saved_local_placement_rows,program_table_capacity_balanced,program_table_admitted_matches_placements
+AB,3041,2958,2849,0,109,6,0,0,77,0,12,85,55,4325,2977,2977,True,True
+CS,2606,2318,2047,0,271,146,0,0,142,0,10,63,49,3100,2333,2333,True,True
+GL,5345,5072,5072,0,0,195,0,0,77,1,8,74,64,5975,5169,5169,True,True
+TL,1953,1787,1609,0,178,18,0,0,148,0,6,42,29,2650,1794,1794,True,True
