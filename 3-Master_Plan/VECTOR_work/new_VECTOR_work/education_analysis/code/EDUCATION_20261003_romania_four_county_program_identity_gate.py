@@ -70,10 +70,15 @@ def source_programs(manifest, county):
 
 
 def local_placement_rows(manifest, county, progress, programs):
+    # These two counties already have complete county placement lists. Their
+    # extra program pages supply the missing program code, not extra students.
+    # The overlay leaves original records untouched until the complete group
+    # reconciles by both row count and exact name/admission-score membership.
+    from EDUCATION_20261005_romania_AR_SB_program_recovery import attach_verified_program_codes
     complete, gaps = family_status(manifest, "admitted_placements")
     original = saved_rows(manifest, "admitted_placements")
     if complete and not gaps:
-        return original
+        return attach_verified_program_codes(county, original, programs)
     status = progress.get(county, {})
     if status.get("state") != "placement_views_reconciled":
         raise ValueError(f"{county}: placement reports have not cleared source gate")

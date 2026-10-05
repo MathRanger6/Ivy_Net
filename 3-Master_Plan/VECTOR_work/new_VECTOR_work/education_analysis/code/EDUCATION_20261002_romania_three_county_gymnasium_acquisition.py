@@ -27,7 +27,7 @@ from EDUCATION_20261001_romania_four_county_school_report_check import (
 from EDUCATION_20261001_romania_four_county_school_sample import school_directory
 from EDUCATION_20261001_romania_origin_school_name_audit import save_csv
 
-COUNTIES = ("CS", "GL", "TL", "AR", "SB")
+COUNTIES = ("CS", "GL", "TL", "AR", "SB", "B")
 OUT = Path(__file__).resolve().parents[1] / "outputs/romania_2001_four_county_source_pilot"
 DEFAULT_STATUS = OUT / "full_school_view_acquisition_status.csv"
 STATUS = DEFAULT_STATUS

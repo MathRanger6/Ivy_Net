@@ -1,4 +1,4 @@
-"""Researcher-run four-county Romania 2001 descriptive placement pilot.
+"""Researcher-run, county-configurable Romania 2001 descriptive placement pilot.
 
 This module makes no network requests and performs no analysis on import.
 ``run_pilot`` reads verified private source checkpoints, then writes only
@@ -11,6 +11,7 @@ from __future__ import annotations
 import csv
 import hashlib
 import json
+import re
 from collections import Counter, defaultdict
 from dataclasses import asdict, dataclass
 from datetime import datetime
@@ -22,9 +23,9 @@ import pandas as pd
 
 from EDUCATION_20260930_romania_2001_national_acquisition import CACHE
 from EDUCATION_20260930_romania_placements_and_hero import COMBINED_CATEGORIES
-from EDUCATION_20261001_romania_offline_county_source_readiness import placement_status
+from EDUCATION_20261001_romania_offline_county_source_readiness import placement_status, saved_rows
 from EDUCATION_20261002_romania_full_gymnasium_offline_reconciliation import (
-    COUNTIES, all_gymnasium_rows, name_score, saved_national_indexes,
+    all_gymnasium_rows, name_score, saved_national_indexes,
 )
 from EDUCATION_20261003_romania_four_county_program_identity_gate import (
     clean, local_placement_rows, source_programs,
@@ -35,6 +36,10 @@ OUTPUTS = ROOT / "outputs/romania_2001_four_county_descriptive_pilot"
 DECISIONS = ROOT / "docs/decisions/EDUCATION_20261002_Romania_four_county_pilot_design_decisions.md"
 SOURCE_GATE = ROOT / "outputs/romania_2001_four_county_source_pilot/program_identity_source_gate.csv"
 BAND_COLORS = ("#73afd2", "#999999", "#e58b25", "#a43d4c")
+ORIGINAL_COUNTIES = ("AB", "CS", "GL", "TL")
+COUNTY_NAMES = {"AB": "Alba", "CS": "Caraș-Severin", "GL": "Galați", "TL": "Tulcea",
+                "AR": "Arad", "SB": "Sibiu"}
+EXPANSION_GATE = ROOT / "outputs/romania_2001_county_expansion_20261004/AR_SB_program_outcome_gate.csv"
 
 
 @dataclass(frozen=True)
@@ -51,8 +56,13 @@ class Settings:
     ai_percentile_cuts: tuple[int, int, int] = (90, 75, 50)
     peer_strength_bins: int = 8
     hero_bins: int = 16
+    # Explicit scope avoids modifying a shared module's global county list.
+    counties: tuple[str, ...] = ORIGINAL_COUNTIES
 
     def validate(self):
+        if (not self.counties or len(set(self.counties)) != len(self.counties)
+                or not set(self.counties).issubset(COUNTY_NAMES)):
+            raise ValueError("counties must be distinct supported county codes: AB, CS, GL, TL, AR, SB")
         if not self.top_tiers or any(t < 1 or type(t) is not int for t in self.top_tiers):
             raise ValueError("top_tiers must contain positive integers")
         if len(set(self.top_tiers)) != len(self.top_tiers):
@@ -150,22 +160,91 @@ def _classify(key, county, local, national_placements, national_unassigned,
     return "unresolved_outcome", np.nan, False, False
 
 
-def _load_rows(settings):
+def _county_movement(county, gymnasiums, directories, manifest, reports,
+                     national_placements, national_unassigned, origin_by_person):
+    """Describe origin/destination counties before any outcome exclusions.
+
+    Incoming share uses all placements IN the county. Outgoing share uses all
+    observed applicants FROM its gymnasiums. Unknowns are separate, never zero.
+    This observes school locations, not family relocation or student intent.
+    """
+    rows = gymnasiums[county]
+    sizes = Counter(code for code, _key, _comp in rows)
+    outcomes = Counter()
+    for _code, key, _comp in rows:
+        placed, unassigned = national_placements[key], national_unassigned[key]
+        if len(placed) + len(unassigned) != 1:
+            outcomes["origin_outcome_unresolved"] += 1
+        elif unassigned:
+            outcomes["origin_unassigned"] += 1
+        elif placed[0] == county:
+            outcomes["origin_placed_locally"] += 1
+        else:
+            outcomes["outgoing_students"] += 1
+
+    # The county applicant list prints originating-school county suffixes.
+    # Use that evidence for students whose gymnasiums lie beyond our six,
+    # rather than misclassifying every unmatched local signature as incoming.
+    applicant_origins = defaultdict(list)
+    for row in saved_rows(manifest, "candidate_roster"):
+        match = re.search(r"/\s*([A-Z]{1,2})\s*$", clean(row.get("Şcoală")))
+        applicant_origins[name_score(row)].append(match.group(1) if match else None)
+    available_counties = {path.stem for path in (CACHE / "county_manifests").glob("*.json")}
+    destination_counts = Counter()
+    for row in reports:
+        key = name_score(row)
+        printed = applicant_origins.get(key, [])
+        origin = origin_by_person.get(key)
+        if len(printed) > 1:
+            origin = None
+        elif len(printed) == 1 and printed[0] in available_counties:
+            origin = printed[0] if origin is None or origin == printed[0] else None
+        unique_destination = national_placements[key] == [county] and not national_unassigned[key]
+        if origin is None or not unique_destination:
+            destination_counts["destination_origin_unresolved"] += 1
+        elif origin == county:
+            destination_counts["destination_from_own_county"] += 1
+        else:
+            destination_counts["incoming_students"] += 1
+    if sum(outcomes.values()) != len(rows) or sum(destination_counts.values()) != len(reports):
+        raise ValueError(f"{county}: movement categories do not add to their source totals")
+    return {
+        "county": county, "county_name": COUNTY_NAMES[county],
+        "directory_gymnasiums": directories[county], "participating_gymnasiums": len(sizes),
+        "gymnasiums_with_two_or_more_applicants": sum(n >= 2 for n in sizes.values()),
+        "origin_applicants": len(rows), "destination_placements": len(reports),
+        **{key: outcomes[key] for key in ("origin_placed_locally", "outgoing_students",
+                                        "origin_unassigned", "origin_outcome_unresolved")},
+        **{key: destination_counts[key] for key in ("incoming_students", "destination_from_own_county",
+                                                  "destination_origin_unresolved")},
+        "outgoing_pct_of_origin_applicants": 100 * outcomes["outgoing_students"] / len(rows),
+        "incoming_pct_of_destination_placements": (
+            100 * destination_counts["incoming_students"] / len(reports) if reports else np.nan),
+    }
+
+
+def _load_rows(settings, *, source_only=False):
     """Recheck saved sources, then hold personal fields only in local memory."""
     print("Step 1/4 — verifying gymnasium and county source checkpoints...", flush=True)
-    gymnasiums, _ = all_gymnasium_rows()
-    _, national_placements, national_unassigned, _ = saved_national_indexes()
+    gymnasiums, directories = all_gymnasium_rows(settings.counties)
+    _, national_placements, national_unassigned, _ = saved_national_indexes(settings.counties)
     progress = placement_status()
     all_keys = Counter(key for group in gymnasiums.values() for _code, key, _comp in group)
     if None in all_keys or max(all_keys.values()) != 1:
         raise ValueError("Gymnasium printed name-score signatures are incomplete or repeated")
     frames = []
     selected_programs = []
-    for county in COUNTIES:
+    overview = []
+    origin_by_person = {key: county for county, rows in gymnasiums.items() for _code, key, _comp in rows}
+    for county in settings.counties:
         manifest, source_program_rows, catalog = _program_catalog(county)
         reports = local_placement_rows(manifest, county, progress, source_program_rows)
         if len(reports) != sum(p["admitted"] for p in catalog.values()):
             raise ValueError(f"{county}: placement count disagrees with program occupancy")
+        overview.append(_county_movement(county, gymnasiums, directories, manifest, reports,
+                                        national_placements, national_unassigned, origin_by_person))
+        if source_only:
+            continue
         local = defaultdict(list)
         for report in reports:
             key = name_score(report)
@@ -206,11 +285,19 @@ def _load_rows(settings):
                                "ambiguous_exact_program": ambiguous})
         print(f"  {county}: {len(gymnasiums[county]):,} applicant rows; "
               f"{len(catalog)} programs; source counts agree", flush=True)
+    if source_only:
+        return pd.DataFrame(overview)
     frame = pd.DataFrame(frames)
     chosen = pd.DataFrame(selected_programs)
     if frame.empty or chosen.empty:
         raise ValueError("No source-backed analysis rows or qualifying programs")
-    return frame, chosen
+    return frame, chosen, pd.DataFrame(overview)
+
+
+def source_preview(settings):
+    """Read-only county size/movement summary; no scientific outcome plots."""
+    settings.validate()
+    return _load_rows(settings, source_only=True)
 
 
 def _add_bands(frame, settings):
@@ -223,7 +310,7 @@ def _add_bands(frame, settings):
     pooled = first["exam"].quantile([middle_q, excellence_q, top_q]).to_dict()
     boundaries = []
     county_edges = {}
-    for county in COUNTIES:
+    for county in settings.counties:
         scores = first.loc[first["county"] == county, "exam"]
         edges = scores.quantile([middle_q, excellence_q, top_q]).to_dict()
         county_edges[county] = edges
@@ -296,7 +383,7 @@ def _pooled_binned(frame, band_column, n_bins):
         eligible = group.loc[group["exclusion"] == "included"].copy()
         if eligible.empty:
             continue
-        # Unlike the four county panels, these bin edges use all four counties
+        # Unlike the individual county panels, these bin edges use all selected counties
         # together. The county count on each point reveals incomplete coverage.
         eligible["peer_bin"] = pd.qcut(eligible["peer_mean_exam"], q=n_bins,
                                        labels=False, duplicates="drop")
@@ -345,7 +432,8 @@ def _hero_bins(frame, n_bins):
     return pd.DataFrame(records)
 
 
-def _plot_hero(bins, tier, path, settings, counties=(*COUNTIES, "ALL")):
+def _plot_hero(bins, tier, path, settings, counties=None):
+    counties = (*settings.counties, "ALL") if counties is None else counties
     fig, axes = plt.subplots(len(counties), 2, figsize=(20, 5 * len(counties)),
                              sharey=True, squeeze=False)
     for row_number, county in enumerate(counties):
@@ -366,8 +454,8 @@ def _plot_hero(bins, tier, path, settings, counties=(*COUNTIES, "ALL")):
                 axis.annotate(f"{item.successes}/{item.applicants}\n{support}",
                               (position, heights[position]), fontsize=6,
                               xytext=(0, 3), textcoords="offset points", ha="center")
-            location = ("All four counties pooled (applicant-weighted)"
-                        if county == "ALL" else county)
+            location = (f"All {len(settings.counties)} counties pooled (applicant-weighted)"
+                        if county == "ALL" else f"{COUNTY_NAMES[county]} ({county})")
             axis.set_title(f"{location} · {'equal-width' if kind == 'equal_width' else 'quantile'} bins")
             axis.grid(axis="y", alpha=.2)
             axis.set_axisbelow(True)
@@ -376,8 +464,8 @@ def _plot_hero(bins, tier, path, settings, counties=(*COUNTIES, "ALL")):
                 axis.set_ylabel("Placed in designated program (%)")
     program_rule = "full programs" if settings.require_full_programs else "nonempty programs"
     group_rule = "three combined groups" if settings.combine_program_categories else "six subjects"
-    scope = ("all four counties combined" if counties == ("ALL",)
-             else "four counties and applicant-weighted combination")
+    scope = (f"all {len(settings.counties)} counties combined" if counties == ("ALL",)
+             else f"{len(settings.counties)} counties and applicant-weighted combination")
     fig.suptitle(f"Romania 2001: selective placement vs gymnasium applicant peer score\n"
                  f"Top {tier} cutoff tier(s); {program_rule}; {group_rule}; {scope} — descriptive")
     fig.text(.5, .01, "Labels: successful placements / applicants; distinct gymnasiums. "
@@ -389,9 +477,14 @@ def _plot_hero(bins, tier, path, settings, counties=(*COUNTIES, "ALL")):
 
 
 def _plot_bands(bins, tier, path, band_name, settings):
-    fig, axes = plt.subplots(3, 2, figsize=(17, 15), sharex=True, sharey=True)
+    # One panel per county, a combined panel, and a reading guide. Growing the
+    # county list must not silently drop the combined panel from a fixed grid.
+    locations = (*settings.counties, "ALL")
+    n_rows = (len(locations) + 2) // 2
+    fig, axes = plt.subplots(n_rows, 2, figsize=(17, 5 * n_rows), sharex=True, sharey=True,
+                             squeeze=False)
     labels = _band_labels(settings)
-    for axis, county in zip(axes.flat, (*COUNTIES, "ALL")):
+    for axis, county in zip(axes.flat, locations):
         county_data = bins.loc[(bins["county"] == county) & (bins["tier"] == tier)]
         for band, color in zip(labels, BAND_COLORS):
             data = county_data.loc[county_data["band"] == band].sort_values("peer_mean_exam")
@@ -408,20 +501,22 @@ def _plot_bands(bins, tier, path, band_name, settings):
                                   (row.peer_mean_exam, 100 * row.success_rate), fontsize=6,
                                   xytext=(0, 7), textcoords="offset points", ha="center",
                                   color=color)
-        axis.set_title("All four counties pooled (applicant-weighted)" if county == "ALL"
-                       else county)
+        axis.set_title(f"All {len(settings.counties)} counties pooled (applicant-weighted)"
+                       if county == "ALL" else f"{COUNTY_NAMES[county]} ({county})")
         axis.grid(alpha=.2)
         axis.legend(fontsize=8)
-    axes.flat[-1].axis("off")
-    axes.flat[-1].text(.05, .82, "How to read the fifth panel",
-                       fontsize=13, fontweight="bold", transform=axes.flat[-1].transAxes)
-    axes.flat[-1].text(
+    for axis in list(axes.flat)[len(locations):]:
+        axis.axis("off")
+    guide = axes.flat[len(locations)]
+    guide.text(.05, .82, "How to read the combined panel",
+                       fontsize=13, fontweight="bold", transform=guide.transAxes)
+    guide.text(
         .05, .62,
-        "Applicants from all four counties are combined within\n"
+        f"Applicants from all {len(settings.counties)} counties are combined within\n"
         "common peer-score bins. Larger counties contribute more.\n"
         "County success rates and county mix differ, so this pooled\n"
         "line is descriptive, not a county-adjusted peer effect.",
-        fontsize=10, va="top", transform=axes.flat[-1].transAxes,
+        fontsize=10, va="top", transform=guide.transAxes,
     )
     program_rule = "full programs" if settings.require_full_programs else "nonempty programs"
     group_rule = "three combined groups" if settings.combine_program_categories else "six subjects"
@@ -483,10 +578,10 @@ def _summary(frame, chosen, settings):
     return pd.DataFrame(records)
 
 
-def _write_report(folder, summary, boundaries, settings):
+def _write_report(folder, summary, boundaries, settings, overview):
     top, excellence, middle = settings.ai_percentile_cuts
-    lines = ["# Romania 2001 four county descriptive placement pilot", "",
-             "This researcher-run analysis uses saved 2001 Romanian Ministry admission webpages for Alba, Caraș-Severin, Galați, and Tulcea. It asks whether actual placement in a designated selective program varies with the examination performance of *other observed admission-round applicants from the same originating gymnasium*. It is descriptive. It does not establish that peers caused placement differences or that all eighth graders are represented.", "",
+    lines = [f"# Romania 2001: {len(settings.counties)}-county descriptive placement pilot", "",
+             f"This researcher-run analysis uses saved 2001 Romanian Ministry admission webpages for {', '.join(COUNTY_NAMES[c] for c in settings.counties)}. It asks whether actual placement in a designated selective program varies with the examination performance of *other observed admission-round applicants from the same originating gymnasium*. It is descriptive. It does not establish that peers caused placement differences or that all eighth graders are represented.", "",
              "## What counts", "",
              f"This run designates the top {', '.join(map(str, settings.top_tiers))} cumulative cutoff tier(s), separately, in each of the {'three combined groups' if settings.combine_program_categories else 'six original program categories'}, among {'fully occupied' if settings.require_full_programs else 'nonempty'} programs. Under the agreed primary specification, top one is primary and top two is a planned comparison. Actual placement is required. Vacancies, ties, number of winning programs, and the sum of their places are reported separately from the observed success fraction. No applicant preference list is available; the observed fraction is **not institutional K/N**.", "",
              "Primary outcome participants have a confirmed placement in their originating county or are confirmed unassigned, and have at least one observed gymnasium peer. Confirmed placements outside the originating county and the one unresolved outcome are excluded from the outcome denominator but retained as peers. Applicants with more than one possible exact local program are included only when every possible program has the same top-program success label under this run's settings. A comparison omitting those applicants is saved when requested. " + ("Vocationally placed applicants remain in the primary denominator." if settings.include_vocational_in_primary else "This run excludes vocationally placed applicants from the primary denominator; it is not the agreed primary specification."), "",
@@ -501,6 +596,21 @@ def _write_report(folder, summary, boundaries, settings):
                      f"{row.qualifying_programs:,} | {row.qualifying_program_places:,} | "
                      f"{row.ambiguous_exact_program_known_nonsuccess:,} | "
                      f"{row.outside_origin_county:,} | {row.no_observed_peer:,} |")
+    movement_lines = ["## County size and cross-county placements", "",
+        "These counts use all recovered applicants and all saved county placements, before vocational, peer-count, or outcome exclusions. Participating gymnasiums have at least one observed applicant; the directory can also list schools with none. Outgoing means a student from this county's gymnasium was placed in another county. Incoming means a placement here belongs to an applicant from another county's gymnasium. These are school-location changes, not evidence that families moved.", "",
+        "**Outgoing percentages divide by all applicants from the county's gymnasiums. Incoming percentages divide by all placements in the destination county.** They have different denominators and should not be subtracted. Incoming origins are identified from recovered gymnasium pages or the printed originating-school county in the County Applicant View, linked to the placement by name and admission score. Unknown origins/outcomes are reported separately, not counted as stayers.", ""]
+    for row in overview.itertuples():
+        movement_lines.append(
+            f"- **{row.county_name} ({row.county}):** {row.participating_gymnasiums:,} participating gymnasiums "
+            f"({row.gymnasiums_with_two_or_more_applicants:,} with at least two applicants; "
+            f"{row.directory_gymnasiums:,} listed in the directory), {row.origin_applicants:,} applicants. "
+            f"Outgoing: {row.outgoing_students:,} ({row.outgoing_pct_of_origin_applicants:.2f}% of origin applicants). "
+            f"Incoming: {row.incoming_students:,} ({row.incoming_pct_of_destination_placements:.2f}% of "
+            f"{row.destination_placements:,} placements here). "
+            f"Unresolved origin-applicant outcomes: {row.origin_outcome_unresolved:,}; "
+            f"destination placements with unresolved origin/matching: {row.destination_origin_unresolved:,}.")
+    movement_lines += ["", "The full counts, including unassigned applicants and local placements, are saved in `county_size_and_movement.csv`. Lower movement may make the county a more complete view of its selection market; it does not establish causal identification. The county list is not automatically changed in response to these counts or the curves.", ""]
+    lines[4:4] = movement_lines
     if settings.compare_excluding_ambiguous or settings.compare_excluding_vocational:
         lines += ["", "## What changes when we alter the denominator", "",
                   "Each line below uses the **same designated programs** as the primary row. Removing a group changes the people described by the rate; it does not recover anyone's unobserved program preferences.", ""]
@@ -525,13 +635,13 @@ def _write_report(folder, summary, boundaries, settings):
                   "low/high bounds treat the student as a nonsuccess or success, respectively; "
                   "neither status is asserted now.", ""]
     lines += ["", "## Score bands and plots", "",
-              f"The {excellence}th–{top}th percentile band of excellence and top {100-top} percent are defined within each originating county from **all recovered admission-round applicants**, before outcome exclusions. The lower boundary is the {middle}th percentile. A separately saved plot applies pooled four-county boundaries. Ties at a boundary enter the higher band, so actual band sizes may differ slightly from the named percentages. The horizontal axis is the mean national exam score of other observed gymnasium applicants on its original score scale. Figures and bin CSV files show applicant counts and distinct gymnasium counts; one large gymnasium is not many independent environments.", "",
+              f"The {excellence}th–{top}th percentile band of excellence and top {100-top} percent are defined within each originating county from **all recovered admission-round applicants**, before outcome exclusions. The lower boundary is the {middle}th percentile. A separately saved plot applies pooled {len(settings.counties)}-county boundaries. Ties at a boundary enter the higher band, so actual band sizes may differ slightly from the named percentages. The horizontal axis is the mean national exam score of other observed gymnasium applicants on its original score scale. Figures and bin CSV files show applicant counts and distinct gymnasium counts; one large gymnasium is not many independent environments.", "",
               f"County exam-score boundaries ({middle}th, {excellence}th, and {top}th percentiles):", ""]
     for row in boundaries.itertuples():
         lines.append(f"- **{row.county}:** {row.middle_exam_boundary:.2f}, {row.excellence_start_exam_boundary:.2f}, {row.top_start_exam_boundary:.2f} "
                      f"from {row.n_applicants:,} recovered applicants.")
     lines += ["", "## Limits and sensitivity", "",
-              "Each conditional score-band figure has four county panels and a fifth panel that pools applicants across counties. Each HERO figure likewise has four county rows and a fifth pooled row, with equal-width and equal-number bars. Pooled panels use common peer-score bins and weight each applicant equally, so large counties contribute more. Pooled labels report the number of counties represented. A pooled slope can change because the county mix changes across bins; it is not a county-adjusted peer effect.", "",
+              f"Each conditional score-band figure has {len(settings.counties)} county panels and one additional combined panel. Each HERO figure likewise has one row per county plus a combined row, with equal-width and equal-number bars. Pooled panels use common peer-score bins and weight each applicant equally, so large counties contribute more. Pooled labels report the number of counties represented. A pooled slope can change because the county mix changes across bins; it is not a county-adjusted peer effect.", "",
               "The ambiguous-program exclusion comparison changes the denominator, not the observed top-program numerator under the frozen six-category/full-program rule. The vocational exclusion comparison changes the described population and cannot reveal who actually applied to selective academic programs. One Galați applicant has no saved outcome; the summary CSV supplies a simple one-case low/high bound. Neither endpoint is asserted as the student's actual result. Source-status counts in the summary can overlap with 'no observed peer'; they are not meant to be added as mutually exclusive exclusions.", "",
               "All source matches rely on printed name plus admission score because the archived personal identifier is masked. Examination scores were measured after time in the gymnasium. Geography, preferences, prior preparation, and other unobserved differences may explain descriptive patterns. Do not interpret a downturn or an upward slope as a causal congestion effect.", "",
               "Every CSV here is free of applicant names and individual applicant rows. The program table includes public program names; the other CSVs contain aggregate counts or score boundaries. The private source pages remain in the Desktop cache. See the four-county design decision log and source-gate report for the exact prior choices and unresolved source item.", ""]
@@ -544,13 +654,23 @@ def run_pilot(settings: Settings = Settings(), *, run: bool = False):
     if not run:
         print("Analysis is off. Set RUN_ANALYSIS = True in the notebook run cell.", flush=True)
         return None
-    frame, chosen = _load_rows(settings)
+    frame, chosen, overview = _load_rows(settings)
     frame, boundaries = _add_bands(frame, settings)
     if (not settings.combine_program_categories and settings.require_full_programs
             and set(settings.top_tiers).issubset({1, 2})):
-        known = frame.loc[frame["status"] == "local_ambiguous_program"]
-        if (known["success"] != 0).any() or known.groupby("tier").size().min() != 558:
-            raise ValueError("Frozen 558-case source-gate finding did not replicate")
+        # The old 558 total applied only to the original four counties. Compare
+        # each county with its own saved audit, including the new program links.
+        old_gate = pd.read_csv(SOURCE_GATE).set_index("county")
+        expansion = (pd.read_csv(EXPANSION_GATE).set_index(["county", "top_cutoff_tiers"])
+                     if set(settings.counties) - set(ORIGINAL_COUNTIES) else None)
+        for (county, tier), group in frame.groupby(["county", "tier"]):
+            expected = (int(old_gate.loc[county, "local_program_ambiguous"])
+                        if county in ORIGINAL_COUNTIES else
+                        int(expansion.loc[(county, tier), "multiple_possible_programs"]))
+            known = group.loc[group["status"] == "local_ambiguous_program"]
+            if (len(known) != expected or (known["success"] != 0).any()
+                    or group["status"].isin(["mixed_program_success", "unmatched_program"]).any()):
+                raise ValueError(f"{county} top {tier}: current program labels disagree with the saved audit")
     print("Step 3/4 — calculating source-backed denominators and display bins...", flush=True)
     primary = _eligible(frame, settings,
                         exclude_vocational=not settings.include_vocational_in_primary)
@@ -565,12 +685,15 @@ def run_pilot(settings: Settings = Settings(), *, run: bool = False):
         _pooled_binned(primary, "pooled_band", settings.peer_strength_bins),
     ], ignore_index=True) if settings.compare_pooled_score_bands else pd.DataFrame())
     if hero.empty or bands.empty:
-        raise ValueError("No supported bins for four-county display")
+        raise ValueError("No supported bins for the selected counties")
     stamp = datetime.now().astimezone().strftime("run_%Y%m%dT%H%M%S%z")
-    folder = OUTPUTS / stamp
+    output_root = (OUTPUTS if settings.counties == ORIGINAL_COUNTIES else
+                   ROOT / f"outputs/romania_2001_{len(settings.counties)}_county_descriptive_pilot")
+    folder = output_root / stamp
     folder.mkdir(parents=True, exist_ok=False)
     print("Step 4/4 — saving name-free tables, report, and plots...", flush=True)
     summary.to_csv(folder / "summary.csv", index=False)
+    overview.to_csv(folder / "county_size_and_movement.csv", index=False)
     boundaries.to_csv(folder / "score_band_boundaries.csv", index=False)
     chosen.to_csv(folder / "qualifying_programs.csv", index=False)
     hero.to_csv(folder / "hero_bins.csv", index=False)
@@ -585,15 +708,17 @@ def run_pilot(settings: Settings = Settings(), *, run: bool = False):
                     "within-county own-exam bands", settings)
         if not pooled_bands.empty:
             _plot_bands(pooled_bands, tier, folder / f"conditional_pooled_bands_top{tier}.png",
-                        "pooled four-county own-exam bands", settings)
+                        f"pooled {len(settings.counties)}-county own-exam bands", settings)
         print(f"  Saved top-{tier} HERO and conditional figures", flush=True)
     manifest = {"run_at_local": stamp, "settings": asdict(settings),
                 "decision_log_sha256": hashlib.sha256(DECISIONS.read_bytes()).hexdigest(),
                 "source_gate_sha256": hashlib.sha256(SOURCE_GATE.read_bytes()).hexdigest(),
                 "privacy": "aggregate outputs only; individual records retained in private cache",
-                "scope": "four origin counties; 2001 main admissions round; descriptive"}
+                "scope": f"{len(settings.counties)} origin counties; 2001 main admissions round; descriptive"}
+    if set(settings.counties) - set(ORIGINAL_COUNTIES):
+        manifest["expansion_source_gate_sha256"] = hashlib.sha256(EXPANSION_GATE.read_bytes()).hexdigest()
     (folder / "run_manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
-    _write_report(folder, summary, boundaries, settings)
+    _write_report(folder, summary, boundaries, settings, overview)
     print("Completed. Read:", folder / "report.md", flush=True)
     return folder, summary
 

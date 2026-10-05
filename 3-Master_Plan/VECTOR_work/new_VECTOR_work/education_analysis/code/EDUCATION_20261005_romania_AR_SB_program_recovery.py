@@ -150,7 +150,7 @@ def run(*, min_interval=22.0, max_interval=50.0, first_429=600,
                 resume = datetime.now().astimezone() + timedelta(seconds=server_error_wait)
                 say(f"WAIT {server_error_wait:.1f}s: HTTP {client.last_status} recovery after {label}; "
                     f"resume expected {resume:%Y-%m-%d %H:%M:%S %Z}")
-                client._sleep(server_error_wait, reason=f"HTTP {client.last_status} recovery after {label}")
+                client._wait(server_error_wait, reason=f"HTTP {client.last_status} recovery after {label}")
             return None
         raw, effective = result
         try:
@@ -231,7 +231,8 @@ def attach_verified_program_codes(county, reports, programs):
     keys = [name_score(row) for row in reports]
     if None in expected or Counter(expected) != Counter(code_by_person.keys()):
         raise ValueError(f"{county}: program lists do not exactly partition the county placement group")
-    if any(Counter(keys)[key] != 1 for key in code_by_person):
+    key_counts = Counter(keys)
+    if any(key_counts[key] != 1 for key in code_by_person):
         raise ValueError(f"{county}: program student does not match exactly one county placement")
     say(f"{county}: RESOLVED {len(code_by_person)} exact program identities; enrollment and student lists agree")
     return [{**row, "__source_program_code": code_by_person[key]} if key in code_by_person else row

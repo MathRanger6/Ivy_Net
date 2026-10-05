@@ -82,11 +82,11 @@ def alba_school_page(code, relative):
     return value
 
 
-def all_gymnasium_rows():
+def all_gymnasium_rows(counties=None):
     """Verify every directory-listed school page before trusting its rows."""
     result = defaultdict(list)
     counts = {}
-    for county in COUNTIES:
+    for county in (COUNTIES if counties is None else counties):
         directory = school_directory(county)
         for code, (_name, relative) in directory.items():
             if county == "AB":
@@ -105,7 +105,7 @@ def all_gymnasium_rows():
     return result, counts
 
 
-def saved_national_indexes():
+def saved_national_indexes(counties=None):
     """Index saved county reports; never infer absence from an incomplete view."""
     applicants = defaultdict(list)
     placements = defaultdict(list)
@@ -136,7 +136,7 @@ def saved_national_indexes():
         for row in saved_rows(manifest, "unassigned_applicants"):
             if key := name_score(row, "Media admitere"):
                 unassigned[key].append(county)
-        if county in COUNTIES:
+        if county in (COUNTIES if counties is None else counties):
             candidate_complete, candidate_gaps = family_status(manifest, "candidate_roster")
             unassigned_complete, unassigned_gaps = family_status(manifest, "unassigned_applicants")
             if candidate_gaps or unassigned_gaps:
