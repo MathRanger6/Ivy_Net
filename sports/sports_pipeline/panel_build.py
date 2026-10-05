@@ -17,6 +17,10 @@ Plot titles use ``CFG.perf_measure_label``, derived from the **active** (first) 
 ``CFG.perf_metric`` via ``perf_metric.plot_label_for_metric``. Re-export from ``530_sports_pipeline_bkup.ipynb``
 if you need winsorization / filters from the old Cells 5–9 verbatim.
 
+**Sort-only first season at school (planned):** Charles lock 2026-10-04 — raw PPM on first
+``(athlete_id, team_id)`` season for **ranking / ability ventiles**; **do not** feed that into LOO.
+See ``sports/documents/MBB_FIRST_SEASON_AT_SCHOOL_SORT_DECISIONS.md``.
+
 **Outputs:** PNG + CSV under `CFG.exports_dir` (dated filenames).
 """
 

@@ -1,4 +1,4 @@
-"""Finish the 2001 Ministry Gymnasium Applicant Views for CS, GL, and TL.
+"""Acquire 2001 Ministry Gymnasium Applicant Views for selected counties.
 
 This is SOURCE ACQUISITION ONLY. Importing the module or running without --run
 does not contact Wayback. Charles runs it from Cursor; every verified page is
@@ -27,9 +27,10 @@ from EDUCATION_20261001_romania_four_county_school_report_check import (
 from EDUCATION_20261001_romania_four_county_school_sample import school_directory
 from EDUCATION_20261001_romania_origin_school_name_audit import save_csv
 
-COUNTIES = ("CS", "GL", "TL")
+COUNTIES = ("CS", "GL", "TL", "AR", "SB")
 OUT = Path(__file__).resolve().parents[1] / "outputs/romania_2001_four_county_source_pilot"
-STATUS = OUT / "full_school_view_acquisition_status.csv"
+DEFAULT_STATUS = OUT / "full_school_view_acquisition_status.csv"
+STATUS = DEFAULT_STATUS
 EVENTS = PRIVATE / "full_school_view_retrieval_events.jsonl"
 FIELDS = ("county", "gymnasium_code", "status", "applicant_rows", "last_http_status")
 REQUIRED_HEADERS = {"Nume", "Medie Admitere", "Medie Capacitate", "Medie Absolvire"}
@@ -97,7 +98,10 @@ def status_rows(schools, prior):
 
 def write_status(rows):
     """Atomic, name-free progress file for the Cursor notebook's status cell."""
-    save_csv(STATUS, FIELDS, rows)
+    # A scoped AR/SB run must not erase CS/GL/TL progress in a shared file.
+    merged = prior_status()
+    merged.update({(row["county"], row["gymnasium_code"]): row for row in rows})
+    save_csv(STATUS, FIELDS, [merged[key] for key in sorted(merged)])
 
 
 def print_progress(rows, counties, new_pages, attempts):
@@ -136,9 +140,12 @@ def fetch_with_429_cooldowns(client, requested, label, cooldowns):
 
 
 def main(argv=None):
+    global STATUS
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--run", action="store_true", help="contact Wayback for missing pages")
     parser.add_argument("--counties", nargs="+", choices=COUNTIES, default=list(COUNTIES))
+    parser.add_argument("--status-file", default=str(DEFAULT_STATUS),
+                        help="name-free progress CSV; use a separate file for an expansion")
     parser.add_argument("--max-new-pages", type=int, default=500,
                         help="stop after this many newly saved pages")
     parser.add_argument("--max-http-attempts", type=int, default=1500,
@@ -151,6 +158,7 @@ def main(argv=None):
     parser.add_argument("--second-429-cooldown-seconds", type=int, default=1500)
     parser.add_argument("--server-error-wait-seconds", type=float, default=10.0)
     args = parser.parse_args(argv)
+    STATUS = Path(args.status_file).expanduser().resolve()
     if args.max_new_pages < 1 or args.max_http_attempts < 1 or args.max_hours <= 0:
         parser.error("all run limits must be positive")
     if (args.min_interval_seconds <= 0 or args.max_interval_seconds < args.min_interval_seconds

@@ -1,0 +1,5 @@
+county,top_cutoff_tiers,gymnasium_applicants,local_placements,programs,fully_occupied_programs,all_program_places,all_program_admitted,placement_rows,winning_programs,winning_program_places,unique_program_placements,multiple_possible_programs,multiple_programs_certain_success,multiple_programs_certain_nonsuccess,multiple_programs_success_uncertain,program_identity_not_found
+AR,1,3164,2947,87,57,4310,3018,3018,6,300,2673,274,0,125,149,0
+AR,2,3164,2947,87,57,4310,3018,3018,10,500,2673,274,0,125,149,0
+SB,1,3236,3158,93,60,5025,3276,3276,5,250,2597,561,0,561,0,0
+SB,2,3236,3158,93,60,5025,3276,3276,10,500,2597,561,0,447,114,0
