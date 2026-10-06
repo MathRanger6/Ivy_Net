@@ -1,0 +1,65 @@
+---
+description: Enforce incremental write + flush for any long-running pipeline script
+alwaysApply: true
+---
+
+# Incremental Write Rule — Save As You Go
+
+Any script with a **multi-iteration loop** over network I/O or large disk I/O
+**must** write and flush results after each iteration, not batch at the end.
+
+## Why
+
+A 2-hour CDX scrape or HPC snapshot scan that writes only at the end loses
+everything if the job is killed, the connection drops, or Slurm hits the time
+limit.  One `f.flush()` per iteration costs microseconds and saves hours.
+
+## The Pattern
+
+```python
+# ✅ CORRECT — write + flush after every unit of work
+with open(OUT_JSONL, 'a', encoding='utf-8') as f:
+    for item in big_collection:
+        result = expensive_operation(item)   # network / disk
+        f.write(json.dumps(result) + '\n')
+        f.flush()                            # push to OS immediately
+
+# ❌ WRONG — all work lost if killed before the end
+results = []
+for item in big_collection:
+    results.append(expensive_operation(item))
+with open(OUT_JSONL, 'w') as f:
+    json.dump(results, f)
+```
+
+## Always Pair With a Resume/Skip Check
+
+```python
+# Load what's already done
+done = set()
+if OUT_JSONL.exists():
+    with open(OUT_JSONL) as f:
+        for line in f:
+            rec = json.loads(line)
+            done.add(rec['id'])
+
+# Skip already-completed items
+for item in big_collection:
+    if item['id'] in done:
+        continue
+    result = expensive_operation(item)
+    ...
+```
+
+## Examples in This Project
+
+| Script | Unit of work | Checkpoint file |
+|--------|-------------|-----------------|
+| `build_openalex_cache.py` | one author ID | `openalex_snapshot_cache.jsonl` |
+| `discover_faculty_urls.py` | one school | `faculty_url_suggestions.jsonl` |
+
+## When This Rule Does NOT Apply
+
+- Scripts that run in seconds (Stage 7/8/9 pandas transforms)
+- Single atomic writes (config files, small CSVs)
+- Scripts where the output is inherently all-or-nothing (e.g. a plot PNG)

@@ -1,0 +1,257 @@
+{
+  "generated": "2026-08-28",
+  "script": "sports/scripts/pd21_draft_bernoulli_mle.py",
+  "season_min": 2009,
+  "season_max": 2021,
+  "seasons": "2009-2021",
+  "fit_mode": "joint_3param",
+  "gamma_grid_init": [
+    5.0,
+    10.0,
+    20.0
+  ],
+  "gamma_hat": 19.572332081866243,
+  "lambda_hat": 1.3024305834948529,
+  "t_hat": 1.0698967300656186,
+  "loglik_hat": -8865.70116078651,
+  "board_form": "p_i \u221d exp(A_i/t) exp(-\u03bb L^C); logits = A/t - \u03bb L^C",
+  "likelihood": "Bernoulli product; season-wise softmax; K not in formula",
+  "n_player_seasons": 46306,
+  "n_drafted": 1133,
+  "n_seasons": 11,
+  "init": {
+    "gamma": 20.0,
+    "n_player_seasons": 46306,
+    "n_drafted": 1133,
+    "n_seasons": 11,
+    "grid_best": {
+      "lambda": 2.0,
+      "t": 1.0,
+      "loglik": -8868.60556531507,
+      "neg_loglik": 8868.60556531507,
+      "mean_topk_overlap": 14.727272727272727,
+      "mean_topk_recall": 0.13600181240368472,
+      "mean_sum_p_on_drafted": 0.0659045636665266,
+      "per_season_overlap": [
+        31,
+        22,
+        19,
+        14,
+        10,
+        12,
+        12,
+        12,
+        17,
+        11,
+        2
+      ]
+    },
+    "bfgs": null,
+    "loglik_best": -8868.60556531507,
+    "lambda_best": 2.0,
+    "t_best": 1.0
+  },
+  "grid_best_at_gamma_hat": {
+    "lambda": 2.0,
+    "t": 1.0,
+    "loglik": -8868.602924135652,
+    "neg_loglik": 8868.602924135652,
+    "mean_topk_overlap": 14.727272727272727,
+    "mean_topk_recall": 0.13600181240368472,
+    "mean_sum_p_on_drafted": 0.06590545728430103,
+    "per_season_overlap": [
+      31,
+      22,
+      19,
+      14,
+      10,
+      12,
+      12,
+      12,
+      17,
+      11,
+      2
+    ]
+  },
+  "joint_bfgs": {
+    "lambda_hat": 1.3024305834948529,
+    "gamma_hat": 19.572332081866243,
+    "t_hat": 1.0698967300656186,
+    "loglik": -8865.70116078651,
+    "neg_loglik": 8865.70116078651,
+    "success": true,
+    "message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+    "n_iter": 11,
+    "n_eval": 52,
+    "start": {
+      "lambda": 2.0,
+      "gamma": 20.0,
+      "t": 1.0
+    },
+    "diagnostics": {
+      "mean_topk_overlap": 14.181818181818182,
+      "mean_topk_recall": 0.13124640114827346,
+      "mean_sum_p_on_drafted": 0.06250380276419588,
+      "per_season_overlap": [
+        29,
+        19,
+        19,
+        14,
+        10,
+        12,
+        12,
+        12,
+        17,
+        10,
+        2
+      ]
+    }
+  },
+  "fixed_gamma_fit": null,
+  "per_gamma_init": [
+    {
+      "gamma": 5.0,
+      "n_player_seasons": 46306,
+      "n_drafted": 1133,
+      "n_seasons": 11,
+      "grid_best": {
+        "lambda": 2.0,
+        "t": 1.0,
+        "loglik": -8869.884270940463,
+        "neg_loglik": 8869.884270940463,
+        "mean_topk_overlap": 14.363636363636363,
+        "mean_topk_recall": 0.1328827647846371,
+        "mean_sum_p_on_drafted": 0.06602529418370114,
+        "per_season_overlap": [
+          30,
+          19,
+          19,
+          14,
+          10,
+          12,
+          12,
+          12,
+          18,
+          10,
+          2
+        ]
+      },
+      "bfgs": null,
+      "loglik_best": -8869.884270940463,
+      "lambda_best": 2.0,
+      "t_best": 1.0
+    },
+    {
+      "gamma": 10.0,
+      "n_player_seasons": 46306,
+      "n_drafted": 1133,
+      "n_seasons": 11,
+      "grid_best": {
+        "lambda": 2.0,
+        "t": 1.0,
+        "loglik": -8868.679929959848,
+        "neg_loglik": 8868.679929959848,
+        "mean_topk_overlap": 14.181818181818182,
+        "mean_topk_recall": 0.13124640114827346,
+        "mean_sum_p_on_drafted": 0.06593869347076507,
+        "per_season_overlap": [
+          29,
+          19,
+          19,
+          14,
+          10,
+          12,
+          12,
+          12,
+          17,
+          10,
+          2
+        ]
+      },
+      "bfgs": null,
+      "loglik_best": -8868.679929959848,
+      "lambda_best": 2.0,
+      "t_best": 1.0
+    },
+    {
+      "gamma": 20.0,
+      "n_player_seasons": 46306,
+      "n_drafted": 1133,
+      "n_seasons": 11,
+      "grid_best": {
+        "lambda": 2.0,
+        "t": 1.0,
+        "loglik": -8868.60556531507,
+        "neg_loglik": 8868.60556531507,
+        "mean_topk_overlap": 14.727272727272727,
+        "mean_topk_recall": 0.13600181240368472,
+        "mean_sum_p_on_drafted": 0.0659045636665266,
+        "per_season_overlap": [
+          31,
+          22,
+          19,
+          14,
+          10,
+          12,
+          12,
+          12,
+          17,
+          11,
+          2
+        ]
+      },
+      "bfgs": null,
+      "loglik_best": -8868.60556531507,
+      "lambda_best": 2.0,
+      "t_best": 1.0
+    }
+  ],
+  "pd20_reference_points": [
+    {
+      "lambda": 1.5,
+      "t": 1.0,
+      "loglik": -8869.023583098711,
+      "diagnostics": {
+        "mean_topk_overlap": 14.181818181818182,
+        "mean_topk_recall": 0.13124640114827346,
+        "mean_sum_p_on_drafted": 0.06656504083975844,
+        "per_season_overlap": [
+          29,
+          19,
+          19,
+          14,
+          10,
+          12,
+          12,
+          12,
+          17,
+          10,
+          2
+        ]
+      }
+    },
+    {
+      "lambda": 2.0,
+      "t": 1.0,
+      "loglik": -8868.602924135652,
+      "diagnostics": {
+        "mean_topk_overlap": 14.727272727272727,
+        "mean_topk_recall": 0.13600181240368472,
+        "mean_sum_p_on_drafted": 0.06590545728430103,
+        "per_season_overlap": [
+          31,
+          22,
+          19,
+          14,
+          10,
+          12,
+          12,
+          12,
+          17,
+          11,
+          2
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "created": "2026-10-06",
+  "repository_head": "2bd1eb9aaaa614a02ec8bacf07d55d68ad56a2c5",
+  "note": "Working-tree snapshots; individual files may have uncommitted changes. Reference bundle, not runnable closure.",
+  "sources": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "574085ce47b1dd4712b079f9ee71d32b39ae0bb8d5642ea02f93286b94236757",
+      "bytes": 5762
+    },
+    {
+      "path": ".cursor/rules/incremental-writes.mdc",
+      "sha256": "0ba15aee09e63c7f9117e1880b84de457d1fc64588062a8035a08640eb262808",
+      "bytes": 1980
+    },
+    {
+      "path": "3-Master_Plan/BINDING_Selection_is_its_own_step.md",
+      "sha256": "6adc0fec89cf944a7c4cb285d85a5da63ebac1a2f527b58077e095bfb221c221",
+      "bytes": 4318
+    },
+    {
+      "path": "sports/541_grandchild_homophily_assign.py",
+      "sha256": "b6983d0b0a0cedfe3ca439ff830113824dc0f101fe2707f2b042532e745df666",
+      "bytes": 17368
+    },
+    {
+      "path": "sports/tier1_pool_assignment.py",
+      "sha256": "8aa1545a1a84d3b6485b9172f70ef8d5a504bc0c28de5eb673db7698ded2b6d0",
+      "bytes": 68271
+    },
+    {
+      "path": "sports/tier1_sim_config.py",
+      "sha256": "97021a070b24bb78cdc59d577b3f4f78cc1987f4d4c73a1b780d8efde9585b80",
+      "bytes": 16595
+    },
+    {
+      "path": "sports/documents/541_grandchild_homophily_assign_README.md",
+      "sha256": "6443f675f602b0bef2e3aa2eec926a86d3c1248d7a0196038d1af18f93ca028e",
+      "bytes": 4322
+    },
+    {
+      "path": "sports/scripts/pd21_draft_bernoulli_mle.py",
+      "sha256": "53495a1ccd074299f01379fa9704e3126302bafbd50fa3770bcfc0ea7cbc2f71",
+      "bytes": 27743
+    },
+    {
+      "path": "sports/scripts/grandchild_selection_inverted_u_diagnostic.py",
+      "sha256": "cf01d190f353d7ce84dadd12c2672b1ed19cfbe0eba35d67c7144c6a9b8fe900",
+      "bytes": 21210
+    },
+    {
+      "path": "sports/scripts/541_grandchild_rho_sweep.py",
+      "sha256": "7ddfa7c021d567af6e7a7cd7caf442c0f1b38aa5cfb3208138e20cdeb1f0a2cb",
+      "bytes": 14494
+    },
+    {
+      "path": "sports/scripts/grandchild_roster_size_c_sweep.py",
+      "sha256": "ab366bf5ae0bc68c2110eab1ae1acf509ac21d3ce8dd23c110b3a3c58c21b7c4",
+      "bytes": 11107
+    },
+    {
+      "path": "sports/scripts/grandchild_lambda_select_sweep.py",
+      "sha256": "de543a9c64bfbc211fe43877aad0a754da6827824b42361fa4a723d433aa99d6",
+      "bytes": 9886
+    },
+    {
+      "path": "sports/scripts/build_data_story_mosaic.py",
+      "sha256": "de0bcf35ad9582fa5c6c1227ba2dca06b1169505f6f43d4dc569bcb3949174b3",
+      "bytes": 7260
+    },
+    {
+      "path": "sports/scripts/story_page_layout.py",
+      "sha256": "935f4f3e3dec043a8cb17aae99d1aa7efbe97d4f20b7d595ff1a7bc59d32ada1",
+      "bytes": 8085
+    },
+    {
+      "path": "scripts/big_fish_data_story.py",
+      "sha256": "f67f9046027b1cd84f983b44906457eaedb0672da2d0e4208dfab0bd7986a939",
+      "bytes": 57442
+    },
+    {
+      "path": "scripts/DATA_SYNC.md",
+      "sha256": "fdde32ec88b9f0b0fc52852b72414c87b34f5ca12bd5eff2b254682f0028f762",
+      "bytes": 14419
+    },
+    {
+      "path": "scripts/rsync_push_to_hpc.sh",
+      "sha256": "ac0da9ac182bb017c9d712814cfd4e9f95c78402d17090d14706e7b2d0107a05",
+      "bytes": 1225
+    },
+    {
+      "path": "scripts/rsync_pull_from_hpc.sh",
+      "sha256": "83408773043686ff8ec2637ad69f23708d462ee88b3db298d3933995efcb0b36",
+      "bytes": 1128
+    },
+    {
+      "path": "scripts/rsync_hpc_include.sh",
+      "sha256": "a0482ed8189567111a008987de8ba2a890ddd9c058d598ba5326f5df0fa10370",
+      "bytes": 16137
+    },
+    {
+      "path": "sports/outputs/simulation_sweeps/rivanna_stage2_array_faithful_538.slurm",
+      "sha256": "fb68e4859d2438a247efb0324345b549f09132c58401bfa05222f44342ab7b68",
+      "bytes": 1721
+    },
+    {
+      "path": "3-Master_Plan/re_entry/LG_model_desk_reference.md",
+      "sha256": "a811b262b5c2faadb73dbfa0f57a28af90d378b022693308a309d1dd59ad2826",
+      "bytes": 24612
+    },
+    {
+      "path": "3-Master_Plan/VECTOR_work/new_VECTOR_work/NVector_to_SVector_MLE_Bernoulli_response.md",
+      "sha256": "0556a3b1dab4f7de8faf390da6c766209738f3c616746cadc6e7a93ae8f78f14",
+      "bytes": 11131
+    },
+    {
+      "path": "3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/reigning_hero/calibration/mle/REIGNING_PD21_draft_bernoulli_mle_2009_2021_mg10_min20_09_21.json",
+      "sha256": "f516911567833747ad2cf32aaf8cdfaaed6f667e7c719e5974691ed23d6a829e",
+      "bytes": 5594
+    }
+  ]
+}

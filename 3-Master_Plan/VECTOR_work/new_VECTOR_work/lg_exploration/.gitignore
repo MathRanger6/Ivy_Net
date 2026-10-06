@@ -1,0 +1,8 @@
+# Generated simulation products; configure rsync before large runs.
+results/
+checkpoints/
+logs/
+.ipynb_checkpoints/
+**/.ipynb_checkpoints/
+__pycache__/
+**/__pycache__/

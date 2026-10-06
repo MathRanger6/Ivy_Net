@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+# Push a repo subtree: local clone → UVA HPC (run on your Mac).
+#
+# Full sync strategy: see scripts/DATA_SYNC.md
+#
+# Usage:
+#   ./scripts/rsync_push_to_hpc.sh
+#   ./scripts/rsync_push_to_hpc.sh tenure/tenure_pipeline
+#   ./scripts/rsync_push_to_hpc.sh python_packages/dblp-parser
+#   ./scripts/rsync_push_to_hpc.sh sweep       # 537 + 538 sweep scripts (simulation_sweeps/)
+#   ./scripts/rsync_push_to_hpc.sh sweep538-deps  # Tier 1 + empirical_perf_fit.json
+#   ./scripts/rsync_push_to_hpc.sh all    # default project targets; excludes DBLP XML dumps
+# Dry run: DRY_RUN=1 ./scripts/rsync_push_to_hpc.sh
+#
+# Overrides: HPC_USER, HPC_HOST, HPC_REPO
+
+set -euo pipefail
+
+IVY_NET_SCRIPTS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck source=rsync_hpc_include.sh
+source "${IVY_NET_SCRIPTS_DIR}/rsync_hpc_include.sh"
+
+_run() {
+  local target="${1:?}"
+  ivy_rsync_push "${target}"
+}
+
+if [[ "${1:-}" == "all" ]]; then
+  for rel in "${IVY_RSYNC_DEFAULT_TARGETS[@]}"; do
+    _run "${rel}"
+  done
+elif [[ "${1:-}" == "sweep" ]]; then
+  _run "${IVY_RSYNC_SWEEP_TARGET}"
+elif [[ "${1:-}" == "sweep538-deps" ]]; then
+  ivy_rsync_push_faithful_538_deps
+else
+  _run "${1:-tenure/tenure_pipeline}"
+fi
