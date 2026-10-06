@@ -1,0 +1,10 @@
+{
+  "n_players": 2000,
+  "n_teams": 100,
+  "roster_size": 20,
+  "rhos": [0.0, 0.5, 1.0, 2.0, 4.0],
+  "assignment_repetitions": 30,
+  "population_seed": 6102026,
+  "assignment_seed": 6102027,
+  "results_directory": "results/composition_first"
+}
