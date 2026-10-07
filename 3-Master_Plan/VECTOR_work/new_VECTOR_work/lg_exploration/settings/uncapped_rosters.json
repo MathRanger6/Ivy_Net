@@ -1,0 +1,23 @@
+{
+  "n_players": 500,
+  "n_teams": 5,
+  "assignment_repetitions": 30,
+  "rhos": [
+    0.0,
+    0.5,
+    1.0,
+    2.0,
+    4.0
+  ],
+  "talent_distribution": "beta",
+  "weibull_shape": 2.0,
+  "talent_scale": "theoretical_mean_sd",
+  "population_mode": "same",
+  "team_attractor": "mean",
+  "seats_option": false,
+  "initial_centroids": "population_mean",
+  "population_seed": 6102026,
+  "assignment_seed": 6102027,
+  "theta_quantile": 0.9,
+  "results_directory": "results/uncapped_rosters"
+}

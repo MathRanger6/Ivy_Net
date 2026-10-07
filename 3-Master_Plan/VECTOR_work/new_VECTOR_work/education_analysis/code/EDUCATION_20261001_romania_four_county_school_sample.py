@@ -35,7 +35,9 @@ def school_directory(county):
         for relative in saved["discovered_links"]:
             if "raport_candidati_per_scoala" not in relative:
                 continue
-            match = re.search(r"(?:[?&-])cs=(\d+)(?:[&.]|$)", relative, re.I)
+            # The Ministry also used letter-suffixed school codes (for example
+            # Brașov 10B); treating every code as an integer loses that school.
+            match = re.search(r"(?:[?&-])cs=([A-Za-z0-9]+)(?:[&.]|$)", relative, re.I)
             if match:
                 code = match.group(1)
                 if code in links and links[code] != relative:

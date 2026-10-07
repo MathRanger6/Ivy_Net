@@ -1,4 +1,9 @@
-"""Small scientific and resume checks, not a simulation sweep."""
+"""Small validation checks; the rho grid comes from the notebook's saved settings.
+
+Edit rho only in the notebook and run its settings cell to refresh the generated
+settings/composition_scenarios.json snapshot. These checks use that same grid with
+a tiny population; this file is not an experiment-settings interface.
+"""
 import itertools
 import json
 import tempfile
@@ -7,10 +12,24 @@ from pathlib import Path
 from unittest.mock import patch
 
 import numpy as np
+from lg_composition.sorting_plot import plot_sorting_comparison
 from lg_composition.experiment import (
     PROJECT_ROOT, RULES, Settings, assign, assignment_probabilities, describe,
     draw_inputs, load_complete, plot_results, run_experiment, unit_path,
 )
+
+
+def notebook_fixture_settings(**overrides):
+    """Inherit the notebook's exported grid; shrink only validation run sizes."""
+    batch = json.loads((PROJECT_ROOT / "settings/composition_scenarios.json").read_text())
+    teams, roster, repetitions = batch["scenarios"][0]
+    values = dict(n_players=teams * roster, n_teams=teams, roster_size=roster,
+                  assignment_repetitions=repetitions, rhos=batch["rhos"],
+                  population_seed=batch["population_seed"], assignment_seed=batch["assignment_seed"],
+                  results_directory="results/composition_first")
+    values.update(overrides)
+    values["rhos"] = tuple(values["rhos"])
+    return Settings(**values)
 
 
 class CompositionChecks(unittest.TestCase):
@@ -70,7 +89,7 @@ class CompositionChecks(unittest.TestCase):
             self.assertAlmostEqual(total / 24, (2 - 1) / (4 - 1), places=12)
 
     def test_pairing_reproducibility(self):
-        settings = Settings(n_players=40, n_teams=8, roster_size=5)
+        settings = notebook_fixture_settings(n_players=40, n_teams=8, roster_size=5)
         first = draw_inputs(settings, 2)
         repeated = draw_inputs(settings, 2)
         np.testing.assert_array_equal(first[0], repeated[0])
@@ -78,10 +97,12 @@ class CompositionChecks(unittest.TestCase):
         self.assertFalse(np.array_equal(first[0], draw_inputs(settings, 3)[0]))
 
     def test_settings_reject_scope_or_capacity_errors(self):
-        for settings in [Settings(n_players=1999),
-                         Settings(results_directory="../other"),
-                         Settings(results_directory="reference_snapshot/results"),
-                         Settings(rhos=(1., 2.))]:
+        grid_without_baseline = tuple(rho for rho in notebook_fixture_settings().rhos if rho != 0.)
+        wrong_population = notebook_fixture_settings().n_players + 1
+        for settings in [notebook_fixture_settings(n_players=wrong_population),
+                         notebook_fixture_settings(results_directory="../other"),
+                         notebook_fixture_settings(results_directory="reference_snapshot/results"),
+                         notebook_fixture_settings(rhos=grid_without_baseline)]:
             with self.assertRaises(ValueError):
                 settings.validate()
 
@@ -90,20 +111,22 @@ class CompositionChecks(unittest.TestCase):
         parent.mkdir(parents=True, exist_ok=True)
         with tempfile.TemporaryDirectory(dir=parent) as temporary:
             root = Path(temporary)
-            settings = Settings(n_players=60, n_teams=6, roster_size=10,
-                                rhos=(0., .5, 1., 2., 4.), assignment_repetitions=2)
+            settings = notebook_fixture_settings(n_players=60, n_teams=6, roster_size=10,
+                                                 assignment_repetitions=2)
             directory = run_experiment(settings, root, progress=None)
             metadata = json.loads((directory / "run_metadata.json").read_text())
-            self.assertEqual(metadata["newly_computed"], 20)
+            self.assertEqual(metadata["newly_computed"], settings.unit_count)
             # A verified complete resume must perform no fresh assignments.
             with patch("lg_composition.experiment.assign", side_effect=AssertionError("Recomputed")):
                 self.assertEqual(run_experiment(settings, root, progress=None), directory)
             metadata = json.loads((directory / "run_metadata.json").read_text())
-            self.assertEqual(metadata["reused"], 20)
+            self.assertEqual(metadata["reused"], settings.unit_count)
             directory, units = load_complete(settings, root)
-            self.assertEqual(len(units), 20)
+            self.assertEqual(len(units), settings.unit_count)
             figures, plots = plot_results(settings, root)
-            self.assertEqual(len(figures), 5)
+            sorting_figure, _ = plot_sorting_comparison(settings, root)
+            figures["sorting_comparison"] = sorting_figure
+            self.assertEqual(len(figures), 6)
             self.assertTrue(all((plots / (name + ".png")).is_file() for name in figures))
             import matplotlib.pyplot as plt
             for fig in figures.values():

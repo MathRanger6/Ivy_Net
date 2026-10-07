@@ -1,0 +1,25 @@
+{
+  "scenarios": [
+    [
+      100,
+      20,
+      100
+    ]
+  ],
+  "chance_rule": "both",
+  "talent_distribution": "weibull",
+  "weibull_shape": 2.0,
+  "talent_scale": "theoretical_mean_sd",
+  "population_mode": "same",
+  "rhos": [
+    0.0,
+    0.5,
+    1.0,
+    2.0,
+    4.0
+  ],
+  "population_seed": 6102026,
+  "assignment_seed": 6102027,
+  "theta_quantile": 0.9,
+  "results_directory": "results/composition_scenarios"
+}

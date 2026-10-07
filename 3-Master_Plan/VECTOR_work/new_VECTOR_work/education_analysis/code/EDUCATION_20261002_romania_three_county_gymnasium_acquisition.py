@@ -5,6 +5,10 @@ does not contact Wayback. Charles runs it from Cursor; every verified page is
 saved at once under ~/Desktop/VECTOR_temp, outside Dropbox and Git. The 36
 already saved pilot pages are verified and reused. A failed address remains
 unresolved and can be retried on a later run; no absence is inferred.
+
+The county list comes from the saved Ministry directory. Alba's 168 school
+pages were recovered earlier in a separate verified cache, so the default
+national run covers the other 40 counties and skips already saved pilot pages.
 """
 
 import argparse
@@ -19,7 +23,7 @@ from pathlib import Path
 
 from romania_archive_retrieval import ArchiveClient, RetrievalStopped
 from EDUCATION_20260930_romania_2001_national_acquisition import (
-    _payload, archive_url, atomic_json, verified_page,
+    CACHE, _payload, archive_url, atomic_json, verified_page,
 )
 from EDUCATION_20261001_romania_four_county_school_report_check import (
     PRIVATE, PAGES, event, persist_429_cooldown, say, show_429_response,
@@ -27,7 +31,9 @@ from EDUCATION_20261001_romania_four_county_school_report_check import (
 from EDUCATION_20261001_romania_four_county_school_sample import school_directory
 from EDUCATION_20261001_romania_origin_school_name_audit import save_csv
 
-COUNTIES = ("CS", "GL", "TL", "AR", "SB", "B")
+COUNTIES = tuple(row["county_code"] for row in
+                 json.loads((CACHE / "county_directory.json").read_text())["counties"])
+DEFAULT_COUNTIES = tuple(county for county in COUNTIES if county != "AB")
 OUT = Path(__file__).resolve().parents[1] / "outputs/romania_2001_four_county_source_pilot"
 DEFAULT_STATUS = OUT / "full_school_view_acquisition_status.csv"
 STATUS = DEFAULT_STATUS
@@ -62,10 +68,15 @@ def saved_school(county, code, relative):
 
 def expected_schools(counties):
     """Enumerate only codes and links published in saved Ministry directories."""
+    def source_code_order(item):
+        code = item[0]
+        leading_digits = re.match(r"\d+", code)
+        return (0, int(leading_digits.group()), code) if leading_digits else (1, 0, code)
+
     result = []
     for county in counties:
         schools = school_directory(county)
-        for code, (_name, relative) in sorted(schools.items(), key=lambda item: int(item[0])):
+        for code, (_name, relative) in sorted(schools.items(), key=source_code_order):
             result.append((county, code, relative))
     return result
 
@@ -143,7 +154,7 @@ def main(argv=None):
     global STATUS
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--run", action="store_true", help="contact Wayback for missing pages")
-    parser.add_argument("--counties", nargs="+", choices=COUNTIES, default=list(COUNTIES))
+    parser.add_argument("--counties", nargs="+", choices=COUNTIES, default=list(DEFAULT_COUNTIES))
     parser.add_argument("--status-file", default=str(DEFAULT_STATUS),
                         help="name-free progress CSV; use a separate file for an expansion")
     parser.add_argument("--max-new-pages", type=int, default=500,

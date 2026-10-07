@@ -28,3 +28,7 @@ from a different implementation.
 Later SCORE, mosaic and MLE adapters may need further supplied modules; audit
 those stages when requested, report exact missing imports, and keep folder-only
 scope.
+
+Talent-law extension: NumPy Generator.normal/beta/weibull supplies local random
+draws; Python standard-library math.gamma supplies theoretical Weibull moments.
+No external data, new packages or original source modifications are required.
