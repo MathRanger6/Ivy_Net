@@ -1,0 +1,5 @@
+county,directory_schools,gymnasium_score_reports_verified,gymnasium_score_reports_unresolved,score_bearing_applicant_rows,score_rows_without_name_admission_score,same_school_name_score_matches,score_rows_absent_from_school_results,result_rows_absent_from_verified_score_reports,result_only_rows_marked_unassigned,result_only_rows_other_status,result_rows_at_unresolved_gymnasiums
+CT,185,185,0,6507,0,6507,0,0,0,0,0
+PH,259,259,0,6131,0,6131,0,3,3,0,0
+TM,202,201,1,5777,0,5777,0,0,0,0,18
+CJ,145,145,0,4885,0,4885,0,5,5,0,0

@@ -1,5 +1,5 @@
-county,school_result_pages,school_result_directory_schools,school_result_rows,school_result_rows_without_name_score,resident_pages_saved,resident_pages_projected,resident_rows_saved,resident_rows_projected,resident_source_complete,resident_rows_matching_school_results,resident_rows_absent_from_school_results,school_result_rows_absent_from_saved_resident_list,extra_school_results_marked_unassigned,extra_school_results_other_status,incoming_candidate_rows,incoming_admitted_rows,incoming_rejected_rows,incoming_candidate_rows_without_outcome,incoming_outcome_rows_without_candidate,outgoing_admitted_with_destination_county,gymnasium_score_reports_available
-CT,185,185,6507,0,9,14,4500,6507,False,4500,0,2007,,,126,123,3,0,0,43,False
-PH,259,259,6134,0,13,13,6131,6131,True,6131,0,3,3,0,83,82,1,0,0,52,False
-TM,202,202,5795,0,8,12,4000,5795,False,4000,0,1795,,,224,213,11,0,0,15,False
-CJ,145,145,4890,0,10,10,4885,4885,True,4885,0,5,5,0,155,154,1,0,0,50,False
+county,school_result_pages,school_result_directory_schools,school_result_rows,school_result_rows_without_name_score,resident_pages_saved,resident_pages_projected,resident_rows_saved,resident_rows_projected,resident_source_complete,resident_rows_matching_school_results,resident_rows_absent_from_school_results,school_result_rows_absent_from_saved_resident_list,extra_school_results_marked_unassigned,extra_school_results_other_status,incoming_candidate_rows,incoming_admitted_rows,incoming_rejected_rows,incoming_candidate_rows_without_outcome,incoming_outcome_rows_without_candidate,outgoing_admitted_with_destination_county
+CT,185,185,6507,0,9,14,4500,6507,False,4500,0,2007,,,126,123,3,0,0,43
+PH,259,259,6134,0,13,13,6131,6131,True,6131,0,3,3,0,83,82,1,0,0,52
+TM,202,202,5795,0,8,12,4000,5795,False,4000,0,1795,,,224,213,11,0,0,15
+CJ,145,145,4890,0,10,10,4885,4885,True,4885,0,5,5,0,155,154,1,0,0,50

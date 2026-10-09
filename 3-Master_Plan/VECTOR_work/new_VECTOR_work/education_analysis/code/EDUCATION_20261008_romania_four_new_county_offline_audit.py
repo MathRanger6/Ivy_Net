@@ -29,7 +29,7 @@ FIELDS = (
     "extra_school_results_marked_unassigned", "extra_school_results_other_status",
     "incoming_candidate_rows", "incoming_admitted_rows", "incoming_rejected_rows",
     "incoming_candidate_rows_without_outcome", "incoming_outcome_rows_without_candidate",
-    "outgoing_admitted_with_destination_county", "gymnasium_score_reports_available",
+    "outgoing_admitted_with_destination_county",
 )
 
 
@@ -130,7 +130,6 @@ def run():
             "incoming_candidate_rows_without_outcome": count(incoming["incoming_candidates"] - outcomes),
             "incoming_outcome_rows_without_candidate": count(outcomes - incoming["incoming_candidates"]),
             "outgoing_admitted_with_destination_county": sum(n for (origin, _), n in outgoing.items() if origin == county),
-            "gymnasium_score_reports_available": False,
         }
         records.append(record)
         print(f"{county}: {len(school_pages)} school-result pages, {len(result_rows):,} rows; "
@@ -171,10 +170,9 @@ def run():
         "This compares printed name and admission score with multiplicity, not certified person identifiers.", "",
         "The county-wide resident-candidate lists are complete by their source-printed totals in "
         "PH and CJ. CT and TM still have missing archived pages; their saved rows are only a subset "
-        "of their projected lists. All four counties have school-result reports, but the separate "
-        "gymnasium score reports with both examination and school-grade components have not been "
-        "downloaded for these counties. Consequently, this audit cannot yet reproduce the "
-        "seven-county applicant-to-school-result reconciliation or certify peer pools.", "",
+        "of their projected lists. The separate gymnasium score-component reports are checked "
+        "against these school-result reports in the companion "
+        "`gymnasium_result_reconciliation.md` audit. This source-view audit alone does not certify peer pools.", "",
         "## County details", "",
     ]
     for row in records:
@@ -208,8 +206,8 @@ def run():
         f"county: **{sum(incoming_without_origin.values())}** across all eleven cached destinations.", "",
         "## What remains open", "",
         "1. Recover the missing CT and TM resident-candidate pages or retain their URL addresses as unresolved.",
-        "2. Download and verify the gymnasium score-component reports for these four counties "
-        "before matching applicants to their results or constructing peer pools.",
+        "2. Consult the companion gymnasium-to-result audit and retry any gymnasium report "
+        "still listed there as unresolved before certifying complete peer pools.",
         *( ["3. Inspect the mismatching county-pair counts before treating the flows as reconciled."]
            if mismatches else [] ),
         "", "No scientific outcome, HERO plot, program ranking, or congestion analysis was run.", "",
