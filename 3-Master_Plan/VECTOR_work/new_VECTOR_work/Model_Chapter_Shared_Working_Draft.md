@@ -52,15 +52,15 @@ Perfect ranking is a useful starting point, but selection need not reproduce it 
 
 We represent this uncertainty while retaining a fixed number of opportunities. The scores remain those supplied to selection; the identities receiving the K places can vary. At this stage the score is still $A_{i}$. The same selection rule can subsequently operate on a score that also incorporates group composition.
 
-### 4.3.1 How strongly scores influence selection
+### 4.3.1 From a fixed ranking to uncertain winners
 
-A positive selection temperature, $t_{SELECT}$, controls how strongly a score difference favors one individual over another. Low temperature makes selection closely follow the score ranking. High temperature makes that ranking less decisive. This parameter describes uncertainty in selection conditional on the scores; a separate account of how performance is measured would require its own observation model.
+In the benchmark, ranking the scores determines all K winners. To allow imperfect selection while keeping the same number of places, we instead fill those places one at a time. Everyone who has not yet been selected remains eligible for the next place. A higher score makes a person more likely to be chosen, but does not guarantee it. Once someone is chosen, that person leaves the pool; the process stops when K people have been selected.
 
-The subscript distinguishes this selection temperature from the parameter $t_{MLE}$ in the empirical fitting specification introduced in Section 4.8. Their relationship is considered there, after both probability models have been defined.
+We need to specify how much a score advantage matters in each draw. We use a positive parameter, $t_{SELECT}$, called the selection temperature. At a low temperature, even modest score differences strongly favor higher-scoring candidates, so the outcome tends to follow the ranking. At a high temperature, those differences matter less, and lower-scoring candidates have a greater chance of being selected. Temperature governs uncertainty in selection given the scores. It does not model uncertainty in how $A_i$ was measured.
 
 ### 4.3.2 Selecting exactly K individuals without replacement
 
-We draw one individual at a time, favoring higher scores, and remove each selected individual before the next draw. The process ends after K draws. Let $I_{r}$ be the individual selected on draw r. The remaining candidates immediately before that draw are
+To state this rule precisely, let $I_{r}$ be the individual selected on draw r. The remaining candidates immediately before that draw are
 
 $$
 R_{r} = \mathcal{I} \smallsetminus \left\{ I_{1},\ldots,I_{r - 1} \right\},r = 1,\ldots,K
@@ -78,7 +78,7 @@ $$
 Y_{i} = 1\left\{ i \in \left\{ I_{1},\ldots,I_{K} \right\} \right\},\sum_{i \in \mathcal{I}}^{}Y_{i} = K
 $$
 
-The exponential terms are Gibbs weights. Sequential selection using these weights is the Plackett--Luce form of weighted sampling without replacement. The displayed probability describes the next draw, rather than the final marginal probability of belonging to the K winners. Draw order defines the probability distribution and need not represent an observed institutional ranking. [1, 2]
+The exponential terms are Gibbs weights. Sequential selection using these weights is the Plackett--Luce form of weighted sampling without replacement. The displayed probability describes the next draw, rather than the final marginal probability of belonging to the K winners. The model draws winners sequentially to define the probability of each final selected set. This draw sequence is a mathematical device; it does not imply that the institution selected, ranked, or recorded winners in that order. [1]
 
 For an ordered sequence of distinct winners, its probability is the product of the successive conditional probabilities. The probability of an unordered selected set is the sum of those products over every ordering of that set. This distinction becomes important when we turn to fitting: exact-K outcomes cannot be treated as independent Bernoulli decisions with the same likelihood.
 
@@ -87,7 +87,7 @@ For an ordered sequence of distinct winners, its probability is the product of t
 The rule makes the comparison between two remaining candidates explicit. Their next-draw probability ratio is
 
 $$
-\frac{\Pr\left( I_{r} = i| \cdot \right)}{\Pr\left( I_{r} = h| \cdot \right)} = \exp\left( \frac{S_{i} - S_{h}}{t_{SELECT}} \right)
+\frac{\Pr\left(  I_{r} = i| I_{1},...I_{r-1},S \right)}{\Pr\left(  I_{r} = h| I_{1},...I_{r-1},S \right)} = \exp\left( \frac{S_{i} - S_{h}}{t_{SELECT}} \right)
 $$
 
 A given score advantage therefore matters relative to the temperature. As $t_{SELECT}$ approaches zero, selection approaches deterministic top-K when there is no tie at the boundary. Boundary ties require separate treatment; the stochastic limit need not reproduce the deterministic code's fixed ordering. As temperature becomes arbitrarily large, each draw approaches uniform sampling among those remaining, and each person's final inclusion probability approaches $K/N$.
