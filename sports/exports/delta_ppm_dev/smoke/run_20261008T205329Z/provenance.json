@@ -1,0 +1,72 @@
+{
+  "spec": {
+    "season_min": 2009,
+    "season_max": 2021,
+    "use_prebuilt_panel_csv": false,
+    "drop_dash_placeholder_names": true,
+    "min_minutes": 20.0,
+    "min_minutes_first": null,
+    "min_minutes_last": null,
+    "min_team_season_games": 10,
+    "ppm_zero_below_minutes": null,
+    "winsor_lo": 0.01,
+    "winsor_hi": 0.99,
+    "no_poolq_winsor": false,
+    "y_draft_mode": "ever",
+    "dft": false,
+    "restrict_teams_by_draftees": false,
+    "require_two_seasons": true,
+    "exclude_transfer_spells": false,
+    "perf_metric": "ppm",
+    "perf_zscore_within_season": true,
+    "congestion_theta": "all",
+    "out_dir": "sports/exports/delta_ppm_dev/smoke"
+  },
+  "survival": [
+    {
+      "step": "raw_panel",
+      "n_rows_or_athletes": 115488,
+      "notes": ""
+    },
+    {
+      "step": "season_window",
+      "n_rows_or_athletes": 115488,
+      "notes": ""
+    },
+    {
+      "step": "min_team_season_games",
+      "n_rows_or_athletes": 68714,
+      "notes": ""
+    },
+    {
+      "step": "perf_and_loo",
+      "n_rows_or_athletes": 68714,
+      "notes": ""
+    },
+    {
+      "step": "min_minutes_panel",
+      "n_rows_or_athletes": 54582,
+      "notes": ""
+    },
+    {
+      "step": "valid_perf_rows",
+      "n_rows_or_athletes": 54582,
+      "notes": ""
+    },
+    {
+      "step": "athletes_delta_dev",
+      "n_rows_or_athletes": 15927,
+      "notes": ""
+    }
+  ],
+  "meta": {
+    "thetas": {
+      "drafted_median": 0.8921964073172816,
+      "global_median": 0.034405253017734116,
+      "fixed_zero": 0.0
+    },
+    "congestion_theta_mode": "all"
+  },
+  "n_athletes": 15927,
+  "spec_doc": "sports/documents/MBB_DELTA_PPM_DEVELOPMENT_EXPLORATORY_SPEC.md"
+}

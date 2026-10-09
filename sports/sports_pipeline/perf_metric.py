@@ -11,6 +11,7 @@ Cells 3 & 7) map PERF_METRIC → a source column copied into `perf`:
 | User setting   | Panel column filled into `perf` | Requires SR merge file? |
 |----------------|----------------------------------|-------------------------|
 | `"ppm"`        | `ppm` (points / minutes, ESPN box) | No — ESPN box only   |
+| `"points"`     | `points` (season total points, ESPN box) | No              |
 | `"minutes"`    | `minutes` (player-season total)      | No                   |
 | `"bpm"`        | `BPM` (Box Plus/Minus)             | Yes — `bpm_player_season_matched.csv` |
 | `"opm"`        | `OBPM` (offensive BPM)             | Yes (same merge)     |
@@ -42,7 +43,7 @@ if TYPE_CHECKING:
     import pandas as pd
 
 # Canonical keys accepted by legacy `_resolve_perf_metric` in 530 backup.
-PERF_METRIC_BOX_ONLY: tuple[str, ...] = ("ppm", "minutes")
+PERF_METRIC_BOX_ONLY: tuple[str, ...] = ("ppm", "points", "minutes")
 PERF_METRIC_SR: tuple[str, ...] = (
     "bpm",
     "opm",
@@ -62,6 +63,7 @@ _SR_MERGE_PANEL_COLS: frozenset[str] = frozenset(
 # Normalized user input → (short token for logging, panel column name).
 _PERF_MAP: dict[str, tuple[str, str]] = {
     "ppm": ("ppm", "ppm"),
+    "points": ("points", "points"),
     "minutes": ("minutes", "minutes"),
     "bpm": ("bpm", "BPM"),
     "opm": ("obpm", "OBPM"),
@@ -78,6 +80,7 @@ _PERF_MAP: dict[str, tuple[str, str]] = {
 # Human-readable plot / report captions (one row per accepted user key in `_PERF_MAP`).
 _PERF_PLOT_LABELS: dict[str, str] = {
     "ppm": "PPM — points per minute (ESPN box); LOO teammate mean on perf",
+    "points": "Points — season total (ESPN box); LOO teammate mean on perf",
     "minutes": "Minutes — player-season total; LOO teammate mean on perf",
     "bpm": "BPM — Box Plus/Minus (Sports-Reference merge); LOO teammate mean on perf",
     "opm": "OBPM — offensive BPM (Sports-Reference merge); LOO teammate mean on perf",

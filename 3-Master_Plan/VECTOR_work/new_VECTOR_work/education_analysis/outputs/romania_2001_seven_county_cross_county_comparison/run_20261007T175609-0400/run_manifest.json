@@ -1,0 +1,47 @@
+{
+  "settings": {
+    "top_tiers": [
+      1,
+      2
+    ],
+    "require_full_programs": true,
+    "combine_program_categories": false,
+    "include_vocational_in_primary": true,
+    "compare_excluding_ambiguous": true,
+    "compare_excluding_vocational": true,
+    "compare_pooled_score_bands": true,
+    "ai_percentile_cuts": [
+      90,
+      75,
+      50
+    ],
+    "peer_strength_bins": 8,
+    "hero_bins": 16,
+    "counties": [
+      "AB",
+      "CS",
+      "GL",
+      "TL",
+      "AR",
+      "SB",
+      "B"
+    ]
+  },
+  "source_audit": {
+    "home_placed": 38892,
+    "away_placed": 548,
+    "unassigned": 2088,
+    "rank_invariant_program_ambiguity": 1175,
+    "program_rank_mixed": 22,
+    "unassigned_national_key_ambiguity": 5,
+    "destination_catalog_absent": 6,
+    "placement_corrob_extra_unassigned": 2,
+    "origin_applicants": 41561,
+    "destination_counties": 39,
+    "destination_catalogs_unverified": 1,
+    "destination_catalog_county_codes_unverified": "MM"
+  },
+  "private_ledger_saved": true,
+  "private_ledger_path": "/Users/charleslevine/Desktop/VECTOR_temp/romania_2001_outcome_ledger_v1/run_20261007T175609-0400_ledger.csv",
+  "scope": "Seven audited origin counties, Romania 2001 main admissions round"
+}

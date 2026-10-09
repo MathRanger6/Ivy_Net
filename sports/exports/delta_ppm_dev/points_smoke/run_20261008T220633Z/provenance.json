@@ -1,0 +1,175 @@
+{
+  "spec": {
+    "season_min": 2009,
+    "season_max": 2021,
+    "use_prebuilt_panel_csv": false,
+    "drop_dash_placeholder_names": true,
+    "min_minutes": 20.0,
+    "endpoint_minutes": "both",
+    "min_minutes_first": null,
+    "min_minutes_last": null,
+    "min_team_season_games": 10,
+    "ppm_zero_below_minutes": null,
+    "winsor_lo": 0.01,
+    "winsor_hi": 0.99,
+    "no_poolq_winsor": false,
+    "y_draft_mode": "ever",
+    "dft": false,
+    "restrict_teams_by_draftees": false,
+    "require_two_seasons": true,
+    "exclude_transfer_spells": false,
+    "perf_metric": "points",
+    "perf_zscore_within_season": true,
+    "congestion_theta": "all",
+    "fit_curves": "split-quadratic",
+    "out_dir": "sports/exports/delta_ppm_dev/points_smoke"
+  },
+  "survival": [
+    {
+      "step": "raw_panel",
+      "n_rows_or_athletes": 115488,
+      "notes": ""
+    },
+    {
+      "step": "season_window",
+      "n_rows_or_athletes": 115488,
+      "notes": ""
+    },
+    {
+      "step": "min_team_season_games",
+      "n_rows_or_athletes": 68714,
+      "notes": ""
+    },
+    {
+      "step": "perf_and_loo",
+      "n_rows_or_athletes": 68714,
+      "notes": ""
+    },
+    {
+      "step": "min_minutes_panel",
+      "n_rows_or_athletes": 54582,
+      "notes": ""
+    },
+    {
+      "step": "valid_perf_rows",
+      "n_rows_or_athletes": 54582,
+      "notes": ""
+    },
+    {
+      "step": "endpoint_minute_floors",
+      "n_rows_or_athletes": 54582,
+      "notes": "mode=both first>=20.0 last>=20.0"
+    },
+    {
+      "step": "athletes_delta_dev",
+      "n_rows_or_athletes": 15927,
+      "notes": ""
+    }
+  ],
+  "meta": {
+    "thetas": {
+      "drafted_median": 1.7182442121051342,
+      "global_median": -0.002899953009932502,
+      "fixed_zero": 0.0
+    },
+    "congestion_theta_mode": "all",
+    "endpoint_minutes_mode": "both",
+    "endpoint_minute_floors": {
+      "first_ps": 20.0,
+      "last_ps": 20.0
+    },
+    "delta_dev_summary": {
+      "n": 15927,
+      "mean": 0.5435062519522745,
+      "median": 0.37190061251218065,
+      "std": 0.9346114385986409,
+      "share_positive": 0.7131914359264143,
+      "share_negative": 0.28680856407358574,
+      "Y_draft_0": {
+        "n": 15517,
+        "mean": 0.5158769377303155,
+        "share_positive": 0.7069021073661146
+      },
+      "Y_draft_1": {
+        "n": 410,
+        "mean": 1.5891747123965172,
+        "share_positive": 0.9512195121951219
+      }
+    },
+    "quadratic_fits_delta_dev": {
+      "T_j_hat": {
+        "Y_draft_0": {
+          "const": 0.3133657569442649,
+          "x": 0.915411536554934,
+          "x_sq": -0.1877052359107154,
+          "n": 15517
+        },
+        "Y_draft_1": {
+          "const": 0.9737612557558863,
+          "x": 1.8129644117092603,
+          "x_sq": -0.8743628189908781,
+          "n": 410
+        }
+      },
+      "poolq_loo": {
+        "Y_draft_0": {
+          "const": 0.5353596250331983,
+          "x": -0.6490542505582074,
+          "x_sq": -0.9212766285757054,
+          "n": 15517
+        },
+        "Y_draft_1": {
+          "const": 1.6369615768021628,
+          "x": -0.44983736614532654,
+          "x_sq": -1.4914247323434107,
+          "n": 410
+        }
+      },
+      "congestion_viable_drafted_med": {
+        "Y_draft_0": {
+          "const": 0.5244295582402154,
+          "x": 0.13013007488289255,
+          "x_sq": -1.348091413130287,
+          "n": 15517
+        },
+        "Y_draft_1": {
+          "const": 1.5253606302856266,
+          "x": 1.3808991581419723,
+          "x_sq": -4.570948669839255,
+          "n": 410
+        }
+      },
+      "congestion_viable_global_med": {
+        "Y_draft_0": {
+          "const": 0.6404266525637922,
+          "x": 0.13590976135487934,
+          "x_sq": -0.7353895131598726,
+          "n": 15517
+        },
+        "Y_draft_1": {
+          "const": 1.9791090063715797,
+          "x": -1.080801314348832,
+          "x_sq": 0.5872461842692167,
+          "n": 410
+        }
+      },
+      "congestion_viable_z0": {
+        "Y_draft_0": {
+          "const": 0.6409892171866735,
+          "x": 0.12863205672621678,
+          "x_sq": -0.7246321902404366,
+          "n": 15517
+        },
+        "Y_draft_1": {
+          "const": 2.0068420156308693,
+          "x": -1.1867739228320278,
+          "x_sq": 0.6835586683112939,
+          "n": 410
+        }
+      }
+    },
+    "fit_curves": "split-quadratic"
+  },
+  "n_athletes": 15927,
+  "spec_doc": "sports/documents/MBB_DELTA_PPM_DEVELOPMENT_EXPLORATORY_SPEC.md"
+}

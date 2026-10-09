@@ -1,0 +1,157 @@
+{
+  "spec": {
+    "season_min": 2009,
+    "season_max": 2021,
+    "use_prebuilt_panel_csv": false,
+    "drop_dash_placeholder_names": true,
+    "min_minutes": 20.0,
+    "endpoint_minutes": "both",
+    "min_minutes_first": null,
+    "min_minutes_last": null,
+    "min_team_season_games": 10,
+    "ppm_zero_below_minutes": null,
+    "winsor_lo": 0.01,
+    "winsor_hi": 0.99,
+    "no_poolq_winsor": false,
+    "y_draft_mode": "ever",
+    "dft": false,
+    "restrict_teams_by_draftees": false,
+    "require_two_seasons": true,
+    "exclude_transfer_spells": false,
+    "perf_metric": "ppm",
+    "perf_zscore_within_season": true,
+    "congestion_theta": "all",
+    "fit_curves": "split-quadratic",
+    "out_dir": "sports/exports/delta_ppm_dev/fit_smoke"
+  },
+  "survival": [
+    {
+      "step": "raw_panel",
+      "n_rows_or_athletes": 115488,
+      "notes": ""
+    },
+    {
+      "step": "season_window",
+      "n_rows_or_athletes": 115488,
+      "notes": ""
+    },
+    {
+      "step": "min_team_season_games",
+      "n_rows_or_athletes": 68714,
+      "notes": ""
+    },
+    {
+      "step": "perf_and_loo",
+      "n_rows_or_athletes": 68714,
+      "notes": ""
+    },
+    {
+      "step": "min_minutes_panel",
+      "n_rows_or_athletes": 54582,
+      "notes": ""
+    },
+    {
+      "step": "valid_perf_rows",
+      "n_rows_or_athletes": 54582,
+      "notes": ""
+    },
+    {
+      "step": "endpoint_minute_floors",
+      "n_rows_or_athletes": 54582,
+      "notes": "mode=both first>=20.0 last>=20.0"
+    },
+    {
+      "step": "athletes_delta_dev",
+      "n_rows_or_athletes": 15927,
+      "notes": ""
+    }
+  ],
+  "meta": {
+    "thetas": {
+      "drafted_median": 0.8921964073172816,
+      "global_median": 0.034405253017734116,
+      "fixed_zero": 0.0
+    },
+    "congestion_theta_mode": "all",
+    "endpoint_minutes_mode": "both",
+    "endpoint_minute_floors": {
+      "first_ps": 20.0,
+      "last_ps": 20.0
+    },
+    "quadratic_fits_delta_dev": {
+      "T_j_hat": {
+        "Y_draft_0": {
+          "const": 0.1861986163404801,
+          "x": 0.4283235942262285,
+          "x_sq": 0.10047093824317636,
+          "n": 15517
+        },
+        "Y_draft_1": {
+          "const": 0.7427430242176462,
+          "x": -0.05630278337498086,
+          "x_sq": 0.0637334430712012,
+          "n": 410
+        }
+      },
+      "poolq_loo": {
+        "Y_draft_0": {
+          "const": 0.2074496646134966,
+          "x": -0.1373876819698312,
+          "x_sq": 0.20162080174131253,
+          "n": 15517
+        },
+        "Y_draft_1": {
+          "const": 0.7049857367785695,
+          "x": -0.22780676536443006,
+          "x_sq": 0.4156166135018506,
+          "n": 410
+        }
+      },
+      "congestion_viable_drafted_med": {
+        "Y_draft_0": {
+          "const": 0.31887528251711483,
+          "x": -0.9961994492817716,
+          "x_sq": 1.3089814036556808,
+          "n": 15517
+        },
+        "Y_draft_1": {
+          "const": 0.8874428136016514,
+          "x": -1.0016271217459738,
+          "x_sq": -0.6440631507638815,
+          "n": 410
+        }
+      },
+      "congestion_viable_global_med": {
+        "Y_draft_0": {
+          "const": 0.6237078180882796,
+          "x": -1.4067267072469118,
+          "x_sq": 1.1067566684855288,
+          "n": 15517
+        },
+        "Y_draft_1": {
+          "const": 1.1091140161656952,
+          "x": -1.0583521775591647,
+          "x_sq": 0.5948647657655788,
+          "n": 410
+        }
+      },
+      "congestion_viable_z0": {
+        "Y_draft_0": {
+          "const": 0.6114469473577152,
+          "x": -1.310471801972648,
+          "x_sq": 0.9924846033381144,
+          "n": 15517
+        },
+        "Y_draft_1": {
+          "const": 1.341261295908685,
+          "x": -1.8954918508875287,
+          "x_sq": 1.3229229658586188,
+          "n": 410
+        }
+      }
+    },
+    "fit_curves": "split-quadratic"
+  },
+  "n_athletes": 15927,
+  "spec_doc": "sports/documents/MBB_DELTA_PPM_DEVELOPMENT_EXPLORATORY_SPEC.md"
+}

@@ -1,0 +1,37 @@
+{
+  "run_at_local": "run_20261007T140523-0400",
+  "settings": {
+    "top_tiers": [
+      1,
+      2
+    ],
+    "require_full_programs": true,
+    "combine_program_categories": false,
+    "include_vocational_in_primary": true,
+    "compare_excluding_ambiguous": true,
+    "compare_excluding_vocational": true,
+    "compare_pooled_score_bands": true,
+    "ai_percentile_cuts": [
+      90,
+      75,
+      50
+    ],
+    "peer_strength_bins": 8,
+    "hero_bins": 8,
+    "counties": [
+      "AB",
+      "CS",
+      "GL",
+      "TL",
+      "AR",
+      "SB",
+      "B"
+    ]
+  },
+  "decision_log_sha256": "594636e015030fa654b9a1d7fed1c640b0a0f86e9d3c5574a1962cefa1d620a5",
+  "source_gate_sha256": "095cf9c87d558f5adcc3a18717c185d27abb7be7d1923bf5afacc9c7b09a5721",
+  "privacy": "aggregate outputs only; individual records retained in private cache",
+  "scope": "7 origin counties; 2001 main admissions round; descriptive",
+  "expansion_source_gate_sha256": "d4fa4957a32f51eb008634d840c4eb0d6fdf94e25fbefb7665880029afe2adbe",
+  "bucharest_source_gate_sha256": "20cbac2b6d936dc398bca294d5a986ea62bd3167d7519c306beac6825a3aad1b"
+}

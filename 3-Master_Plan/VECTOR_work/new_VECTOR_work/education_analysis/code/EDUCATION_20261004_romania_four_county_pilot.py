@@ -30,6 +30,9 @@ from EDUCATION_20261002_romania_full_gymnasium_offline_reconciliation import (
 from EDUCATION_20261003_romania_four_county_program_identity_gate import (
     clean, local_placement_rows, source_programs,
 )
+from EDUCATION_20261007_romania_bucharest_plot_source_gate import (
+    GATE as BUCHAREST_GATE, verify_bucharest,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUTS = ROOT / "outputs/romania_2001_four_county_descriptive_pilot"
@@ -38,7 +41,7 @@ SOURCE_GATE = ROOT / "outputs/romania_2001_four_county_source_pilot/program_iden
 BAND_COLORS = ("#73afd2", "#999999", "#e58b25", "#a43d4c")
 ORIGINAL_COUNTIES = ("AB", "CS", "GL", "TL")
 COUNTY_NAMES = {"AB": "Alba", "CS": "Caraș-Severin", "GL": "Galați", "TL": "Tulcea",
-                "AR": "Arad", "SB": "Sibiu"}
+                "AR": "Arad", "SB": "Sibiu", "B": "Bucharest–Ilfov"}
 EXPANSION_GATE = ROOT / "outputs/romania_2001_county_expansion_20261004/AR_SB_program_outcome_gate.csv"
 
 
@@ -62,7 +65,7 @@ class Settings:
     def validate(self):
         if (not self.counties or len(set(self.counties)) != len(self.counties)
                 or not set(self.counties).issubset(COUNTY_NAMES)):
-            raise ValueError("counties must be distinct supported county codes: AB, CS, GL, TL, AR, SB")
+            raise ValueError("counties must be distinct supported county codes: AB, CS, GL, TL, AR, SB, B")
         if not self.top_tiers or any(t < 1 or type(t) is not int for t in self.top_tiers):
             raise ValueError("top_tiers must contain positive integers")
         if len(set(self.top_tiers)) != len(self.top_tiers):
@@ -227,7 +230,10 @@ def _load_rows(settings, *, source_only=False):
     """Recheck saved sources, then hold personal fields only in local memory."""
     print("Step 1/4 — verifying gymnasium and county source checkpoints...", flush=True)
     gymnasiums, directories = all_gymnasium_rows(settings.counties)
-    _, national_placements, national_unassigned, _ = saved_national_indexes(settings.counties)
+    # B's older county applicant/unassigned series is incomplete. Its verified
+    # originating-school result pages provide the outcome source instead.
+    index_counties = tuple(county for county in settings.counties if county != "B")
+    _, national_placements, national_unassigned, _ = saved_national_indexes(index_counties)
     progress = placement_status()
     all_keys = Counter(key for group in gymnasiums.values() for _code, key, _comp in group)
     if None in all_keys or max(all_keys.values()) != 1:
@@ -241,8 +247,35 @@ def _load_rows(settings, *, source_only=False):
         reports = local_placement_rows(manifest, county, progress, source_program_rows)
         if len(reports) != sum(p["admitted"] for p in catalog.values()):
             raise ValueError(f"{county}: placement count disagrees with program occupancy")
-        overview.append(_county_movement(county, gymnasiums, directories, manifest, reports,
-                                        national_placements, national_unassigned, origin_by_person))
+        if county == "B":
+            b_outcomes, audit = verify_bucharest(gymnasiums[county], reports,
+                                                 national_placements)
+            if not BUCHAREST_GATE.exists() or json.loads(BUCHAREST_GATE.read_text()) != audit:
+                raise ValueError("B school-result source gate is absent or differs from saved sources")
+            for key, outcome in b_outcomes.items():
+                if outcome == "unassigned":
+                    national_unassigned[key] = ["B"]
+            sizes = Counter(code for code, _key, _comp in gymnasiums[county])
+            overview.append({
+                "county": county, "county_name": COUNTY_NAMES[county],
+                "directory_gymnasiums": directories[county],
+                "participating_gymnasiums": len(sizes),
+                "gymnasiums_with_two_or_more_applicants": sum(n >= 2 for n in sizes.values()),
+                "origin_applicants": audit["origin_applicants"],
+                "destination_placements": audit["local_placement_reports"],
+                "origin_placed_locally": audit["local"],
+                "outgoing_students": audit["external"],
+                "origin_unassigned": audit["unassigned"],
+                "origin_outcome_unresolved": 0,
+                "incoming_students": audit["incoming_admitted"],
+                "destination_from_own_county": audit["local"],
+                "destination_origin_unresolved": 0,
+                "outgoing_pct_of_origin_applicants": 100 * audit["external"] / audit["origin_applicants"],
+                "incoming_pct_of_destination_placements": 100 * audit["incoming_admitted"] / len(reports),
+            })
+        else:
+            overview.append(_county_movement(county, gymnasiums, directories, manifest, reports,
+                                            national_placements, national_unassigned, origin_by_person))
         if source_only:
             continue
         local = defaultdict(list)
@@ -598,7 +631,7 @@ def _write_report(folder, summary, boundaries, settings, overview):
                      f"{row.outside_origin_county:,} | {row.no_observed_peer:,} |")
     movement_lines = ["## County size and cross-county placements", "",
         "These counts use all recovered applicants and all saved county placements, before vocational, peer-count, or outcome exclusions. Participating gymnasiums have at least one observed applicant; the directory can also list schools with none. Outgoing means a student from this county's gymnasium was placed in another county. Incoming means a placement here belongs to an applicant from another county's gymnasium. These are school-location changes, not evidence that families moved.", "",
-        "**Outgoing percentages divide by all applicants from the county's gymnasiums. Incoming percentages divide by all placements in the destination county.** They have different denominators and should not be subtracted. Incoming origins are identified from recovered gymnasium pages or the printed originating-school county in the County Applicant View, linked to the placement by name and admission score. Unknown origins/outcomes are reported separately, not counted as stayers.", ""]
+        "**Outgoing percentages divide by all applicants from the county's gymnasiums. Incoming percentages divide by all placements in the destination county.** They have different denominators and should not be subtracted. Incoming origins are identified from recovered gymnasium pages or the printed originating-school county in the County Applicant View, linked to the placement by name and admission score. For Bucharest, the complete incoming-admitted webpages and per-school results replace its incomplete county-wide applicant and unassigned webpages. Unknown origins/outcomes are reported separately, not counted as stayers.", ""]
     for row in overview.itertuples():
         movement_lines.append(
             f"- **{row.county_name} ({row.county}):** {row.participating_gymnasiums:,} participating gymnasiums "
@@ -664,7 +697,8 @@ def run_pilot(settings: Settings = Settings(), *, run: bool = False):
         expansion = (pd.read_csv(EXPANSION_GATE).set_index(["county", "top_cutoff_tiers"])
                      if set(settings.counties) - set(ORIGINAL_COUNTIES) else None)
         for (county, tier), group in frame.groupby(["county", "tier"]):
-            expected = (int(old_gate.loc[county, "local_program_ambiguous"])
+            expected = (0 if county == "B" else
+                        int(old_gate.loc[county, "local_program_ambiguous"])
                         if county in ORIGINAL_COUNTIES else
                         int(expansion.loc[(county, tier), "multiple_possible_programs"]))
             known = group.loc[group["status"] == "local_ambiguous_program"]
@@ -717,6 +751,8 @@ def run_pilot(settings: Settings = Settings(), *, run: bool = False):
                 "scope": f"{len(settings.counties)} origin counties; 2001 main admissions round; descriptive"}
     if set(settings.counties) - set(ORIGINAL_COUNTIES):
         manifest["expansion_source_gate_sha256"] = hashlib.sha256(EXPANSION_GATE.read_bytes()).hexdigest()
+    if "B" in settings.counties:
+        manifest["bucharest_source_gate_sha256"] = hashlib.sha256(BUCHAREST_GATE.read_bytes()).hexdigest()
     (folder / "run_manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
     _write_report(folder, summary, boundaries, settings, overview)
     print("Completed. Read:", folder / "report.md", flush=True)

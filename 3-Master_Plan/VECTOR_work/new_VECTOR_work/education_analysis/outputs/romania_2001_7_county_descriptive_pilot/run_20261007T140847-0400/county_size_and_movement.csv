@@ -1,0 +1,8 @@
+county,county_name,directory_gymnasiums,participating_gymnasiums,gymnasiums_with_two_or_more_applicants,origin_applicants,destination_placements,origin_placed_locally,outgoing_students,origin_unassigned,origin_outcome_unresolved,incoming_students,destination_from_own_county,destination_origin_unresolved,outgoing_pct_of_origin_applicants,incoming_pct_of_destination_placements
+AB,Alba,168,161,149,3041,2977,2958,77,6,0,19,2958,0,2.532061821769155,0.6382264024185421
+CS,Caraș-Severin,171,143,133,2606,2333,2318,142,146,0,15,2318,0,5.448963929393707,0.6429489927132448
+GL,Galați,190,185,177,5345,5169,5072,77,195,1,97,5072,0,1.440598690364827,1.8765718707680403
+TL,Tulcea,103,91,85,1953,1794,1787,148,18,0,7,1787,0,7.578084997439836,0.39018952062430323
+AR,Arad,136,131,125,3164,3018,2947,43,174,0,71,2947,0,1.359039190897598,2.3525513585155733
+SB,Sibiu,152,144,133,3236,3276,3158,41,37,0,118,3158,0,1.2669962917181705,3.601953601953602
+B,Bucharest–Ilfov,289,275,269,22216,21969,20652,53,1511,0,1317,20652,0,0.238566798703637,5.994810869862079

@@ -1,0 +1,8 @@
+county,score_bearing_school_pages,score_bearing_applicant_rows,school_result_directory_rows,school_result_pages_verified,school_result_rows,same_school_name_score_matches,applicant_rows_absent_from_school_results,result_rows_absent_from_score_pages,result_only_rows_marked_unassigned,result_only_rows_other_status,applicant_rows_with_repeated_county_name_score,incoming_candidate_rows,incoming_admitted_rows,incoming_unassigned_rows,incoming_candidate_without_outcome,incoming_outcome_without_candidate,resident_pages_saved,resident_pages_projected,resident_pages_unresolved,resident_rows_saved,resident_rows_expected,resident_to_school_matches,resident_rows_absent_from_school_pages,school_rows_absent_from_saved_resident_pages,resident_source_complete
+B,289,22216,289,289,22232,22216,0,16,15,1,0,1400,1317,83,0,0,6,45,1,3000,22216,3000,0,19216,False
+AB,168,3041,168,168,3042,3041,0,1,1,0,0,19,19,0,0,0,7,7,0,3041,3041,3041,0,0,True
+CS,171,2606,171,171,2606,2606,0,0,0,0,0,15,15,0,0,0,6,6,0,2606,2606,2606,0,0,True
+GL,190,5345,190,190,5347,5345,0,2,2,0,0,100,97,3,0,0,9,11,1,4500,5345,4500,0,845,False
+TL,103,1953,103,103,1953,1953,0,0,0,0,0,7,7,0,0,0,4,4,0,1953,1953,1953,0,0,True
+AR,136,3164,136,136,3169,3164,0,5,5,0,0,71,71,0,0,0,7,7,0,3164,3164,3164,0,0,True
+SB,152,3236,152,152,3237,3236,0,1,1,0,0,118,118,0,0,0,7,7,0,3236,3236,3236,0,0,True

@@ -1,0 +1,9 @@
+step,n_rows_or_athletes,notes
+raw_panel,115488,
+season_window,115488,
+min_team_season_games,68714,
+perf_and_loo,68714,
+min_minutes_panel,54582,
+valid_perf_rows,54582,
+endpoint_minute_floors,54582,mode=both first>=20.0 last>=20.0
+athletes_delta_dev,15927,

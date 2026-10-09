@@ -1,0 +1,666 @@
+origin,band,peer_bin,state,applicants
+AB,50th–75th,1,other_placed_program,70
+AB,50th–75th,1,top_two_only_anywhere,7
+AB,50th–75th,2,other_placed_program,90
+AB,50th–75th,2,top_two_only_anywhere,5
+AB,50th–75th,3,other_placed_program,63
+AB,50th–75th,3,top_two_only_anywhere,12
+AB,50th–75th,4,other_placed_program,91
+AB,50th–75th,4,top_two_only_anywhere,19
+AB,50th–75th,5,other_placed_program,90
+AB,50th–75th,5,top_one_anywhere,3
+AB,50th–75th,5,top_two_only_anywhere,5
+AB,50th–75th,6,other_placed_program,55
+AB,50th–75th,6,top_one_anywhere,9
+AB,50th–75th,6,top_two_only_anywhere,45
+AB,50th–75th,7,other_placed_program,67
+AB,50th–75th,7,top_two_only_anywhere,13
+AB,50th–75th,8,other_placed_program,93
+AB,50th–75th,8,top_two_only_anywhere,17
+AB,75th–90th (excellence),1,other_placed_program,28
+AB,75th–90th (excellence),1,top_one_anywhere,2
+AB,75th–90th (excellence),1,top_two_only_anywhere,3
+AB,75th–90th (excellence),2,other_placed_program,48
+AB,75th–90th (excellence),2,top_two_only_anywhere,4
+AB,75th–90th (excellence),3,other_placed_program,30
+AB,75th–90th (excellence),3,top_one_anywhere,7
+AB,75th–90th (excellence),3,top_two_only_anywhere,9
+AB,75th–90th (excellence),4,other_placed_program,25
+AB,75th–90th (excellence),4,top_one_anywhere,7
+AB,75th–90th (excellence),4,top_two_only_anywhere,21
+AB,75th–90th (excellence),5,other_placed_program,57
+AB,75th–90th (excellence),5,top_one_anywhere,9
+AB,75th–90th (excellence),5,top_two_only_anywhere,9
+AB,75th–90th (excellence),6,other_placed_program,30
+AB,75th–90th (excellence),6,top_one_anywhere,19
+AB,75th–90th (excellence),6,top_two_only_anywhere,13
+AB,75th–90th (excellence),7,other_placed_program,26
+AB,75th–90th (excellence),7,top_one_anywhere,12
+AB,75th–90th (excellence),7,top_two_only_anywhere,19
+AB,75th–90th (excellence),8,other_placed_program,31
+AB,75th–90th (excellence),8,top_one_anywhere,11
+AB,75th–90th (excellence),8,top_two_only_anywhere,33
+AB,Below 50th,1,other_placed_program,258
+AB,Below 50th,1,top_two_only_anywhere,1
+AB,Below 50th,1,unassigned,2
+AB,Below 50th,2,other_placed_program,210
+AB,Below 50th,2,unassigned,1
+AB,Below 50th,3,other_placed_program,242
+AB,Below 50th,3,top_one_anywhere,1
+AB,Below 50th,3,unassigned,1
+AB,Below 50th,4,other_placed_program,195
+AB,Below 50th,4,top_two_only_anywhere,1
+AB,Below 50th,5,other_placed_program,148
+AB,Below 50th,5,unassigned,1
+AB,Below 50th,6,other_placed_program,148
+AB,Below 50th,6,top_two_only_anywhere,13
+AB,Below 50th,6,unassigned,1
+AB,Below 50th,7,other_placed_program,158
+AB,Below 50th,8,other_placed_program,118
+AB,Top 10%,1,other_placed_program,6
+AB,Top 10%,1,top_one_anywhere,1
+AB,Top 10%,2,other_placed_program,18
+AB,Top 10%,2,top_one_anywhere,2
+AB,Top 10%,3,other_placed_program,7
+AB,Top 10%,3,top_one_anywhere,5
+AB,Top 10%,4,other_placed_program,3
+AB,Top 10%,4,top_one_anywhere,12
+AB,Top 10%,4,top_two_only_anywhere,4
+AB,Top 10%,5,other_placed_program,54
+AB,Top 10%,5,top_one_anywhere,1
+AB,Top 10%,6,other_placed_program,24
+AB,Top 10%,6,top_one_anywhere,19
+AB,Top 10%,6,top_two_only_anywhere,2
+AB,Top 10%,7,other_placed_program,24
+AB,Top 10%,7,top_one_anywhere,47
+AB,Top 10%,7,top_two_only_anywhere,11
+AB,Top 10%,8,other_placed_program,31
+AB,Top 10%,8,top_one_anywhere,35
+AB,Top 10%,8,top_two_only_anywhere,9
+AR,50th–75th,1,other_placed_program,88
+AR,50th–75th,1,top_one_anywhere,2
+AR,50th–75th,1,top_two_only_anywhere,7
+AR,50th–75th,2,other_placed_program,64
+AR,50th–75th,2,top_one_anywhere,3
+AR,50th–75th,2,top_two_only_anywhere,6
+AR,50th–75th,3,other_placed_program,102
+AR,50th–75th,3,top_two_only_anywhere,8
+AR,50th–75th,4,other_placed_program,94
+AR,50th–75th,4,top_one_anywhere,2
+AR,50th–75th,4,top_two_only_anywhere,5
+AR,50th–75th,4,unassigned,1
+AR,50th–75th,5,other_placed_program,96
+AR,50th–75th,5,top_one_anywhere,1
+AR,50th–75th,5,top_two_only_anywhere,4
+AR,50th–75th,5,unassigned,1
+AR,50th–75th,6,other_placed_program,105
+AR,50th–75th,6,top_one_anywhere,2
+AR,50th–75th,6,top_two_only_anywhere,7
+AR,50th–75th,7,other_placed_program,96
+AR,50th–75th,7,top_one_anywhere,4
+AR,50th–75th,7,top_two_only_anywhere,11
+AR,50th–75th,8,other_placed_program,75
+AR,50th–75th,8,top_one_anywhere,1
+AR,50th–75th,8,top_two_only_anywhere,15
+AR,50th–75th,8,unassigned,2
+AR,75th–90th (excellence),1,other_placed_program,14
+AR,75th–90th (excellence),1,top_one_anywhere,13
+AR,75th–90th (excellence),1,top_two_only_anywhere,8
+AR,75th–90th (excellence),2,other_placed_program,27
+AR,75th–90th (excellence),2,top_two_only_anywhere,7
+AR,75th–90th (excellence),3,other_placed_program,37
+AR,75th–90th (excellence),3,top_one_anywhere,8
+AR,75th–90th (excellence),3,top_two_only_anywhere,6
+AR,75th–90th (excellence),4,other_placed_program,52
+AR,75th–90th (excellence),4,top_one_anywhere,7
+AR,75th–90th (excellence),4,top_two_only_anywhere,7
+AR,75th–90th (excellence),5,other_placed_program,43
+AR,75th–90th (excellence),5,top_one_anywhere,24
+AR,75th–90th (excellence),5,top_two_only_anywhere,2
+AR,75th–90th (excellence),6,other_placed_program,31
+AR,75th–90th (excellence),6,top_one_anywhere,17
+AR,75th–90th (excellence),6,top_two_only_anywhere,13
+AR,75th–90th (excellence),7,other_placed_program,42
+AR,75th–90th (excellence),7,top_one_anywhere,12
+AR,75th–90th (excellence),7,top_two_only_anywhere,11
+AR,75th–90th (excellence),8,other_placed_program,44
+AR,75th–90th (excellence),8,top_one_anywhere,27
+AR,75th–90th (excellence),8,top_two_only_anywhere,17
+AR,Below 50th,1,other_placed_program,213
+AR,Below 50th,1,top_one_anywhere,15
+AR,Below 50th,1,unassigned,23
+AR,Below 50th,2,other_placed_program,244
+AR,Below 50th,2,top_one_anywhere,7
+AR,Below 50th,2,unassigned,23
+AR,Below 50th,3,other_placed_program,191
+AR,Below 50th,3,top_one_anywhere,3
+AR,Below 50th,3,unassigned,20
+AR,Below 50th,4,other_placed_program,162
+AR,Below 50th,4,top_one_anywhere,2
+AR,Below 50th,4,unassigned,35
+AR,Below 50th,5,other_placed_program,162
+AR,Below 50th,5,top_one_anywhere,1
+AR,Below 50th,5,unassigned,23
+AR,Below 50th,6,other_placed_program,155
+AR,Below 50th,6,top_one_anywhere,3
+AR,Below 50th,6,unassigned,30
+AR,Below 50th,7,other_placed_program,149
+AR,Below 50th,7,top_one_anywhere,8
+AR,Below 50th,7,unassigned,8
+AR,Below 50th,8,other_placed_program,70
+AR,Below 50th,8,top_one_anywhere,7
+AR,Below 50th,8,unassigned,7
+AR,Top 10%,1,other_placed_program,6
+AR,Top 10%,1,top_one_anywhere,6
+AR,Top 10%,2,other_placed_program,6
+AR,Top 10%,2,top_one_anywhere,4
+AR,Top 10%,2,top_two_only_anywhere,3
+AR,Top 10%,3,other_placed_program,3
+AR,Top 10%,3,top_one_anywhere,8
+AR,Top 10%,3,top_two_only_anywhere,8
+AR,Top 10%,4,other_placed_program,21
+AR,Top 10%,4,top_one_anywhere,5
+AR,Top 10%,4,top_two_only_anywhere,2
+AR,Top 10%,5,other_placed_program,16
+AR,Top 10%,5,top_one_anywhere,12
+AR,Top 10%,5,top_two_only_anywhere,8
+AR,Top 10%,6,other_placed_program,14
+AR,Top 10%,6,top_one_anywhere,8
+AR,Top 10%,6,top_two_only_anywhere,9
+AR,Top 10%,7,other_placed_program,35
+AR,Top 10%,7,top_one_anywhere,8
+AR,Top 10%,7,top_two_only_anywhere,10
+AR,Top 10%,8,other_placed_program,28
+AR,Top 10%,8,top_one_anywhere,75
+AR,Top 10%,8,top_two_only_anywhere,26
+B,50th–75th,1,other_placed_program,576
+B,50th–75th,1,top_one_anywhere,3
+B,50th–75th,1,top_two_only_anywhere,1
+B,50th–75th,2,other_placed_program,673
+B,50th–75th,2,top_one_anywhere,2
+B,50th–75th,3,other_placed_program,659
+B,50th–75th,4,other_placed_program,752
+B,50th–75th,4,top_one_anywhere,3
+B,50th–75th,5,other_placed_program,705
+B,50th–75th,5,top_two_only_anywhere,1
+B,50th–75th,5,unassigned,1
+B,50th–75th,6,other_placed_program,721
+B,50th–75th,6,top_one_anywhere,3
+B,50th–75th,6,unassigned,1
+B,50th–75th,7,other_placed_program,775
+B,50th–75th,7,top_one_anywhere,2
+B,50th–75th,7,top_two_only_anywhere,3
+B,50th–75th,7,unassigned,1
+B,50th–75th,8,other_placed_program,658
+B,50th–75th,8,unassigned,2
+B,75th–90th (excellence),1,other_placed_program,135
+B,75th–90th (excellence),1,top_one_anywhere,6
+B,75th–90th (excellence),1,top_two_only_anywhere,6
+B,75th–90th (excellence),2,other_placed_program,284
+B,75th–90th (excellence),2,top_one_anywhere,10
+B,75th–90th (excellence),2,top_two_only_anywhere,16
+B,75th–90th (excellence),3,other_placed_program,290
+B,75th–90th (excellence),3,top_one_anywhere,10
+B,75th–90th (excellence),3,top_two_only_anywhere,21
+B,75th–90th (excellence),4,other_placed_program,326
+B,75th–90th (excellence),4,top_one_anywhere,7
+B,75th–90th (excellence),4,top_two_only_anywhere,10
+B,75th–90th (excellence),5,other_placed_program,369
+B,75th–90th (excellence),5,top_one_anywhere,9
+B,75th–90th (excellence),5,top_two_only_anywhere,18
+B,75th–90th (excellence),6,other_placed_program,463
+B,75th–90th (excellence),6,top_one_anywhere,20
+B,75th–90th (excellence),6,top_two_only_anywhere,16
+B,75th–90th (excellence),7,other_placed_program,567
+B,75th–90th (excellence),7,top_one_anywhere,28
+B,75th–90th (excellence),7,top_two_only_anywhere,16
+B,75th–90th (excellence),8,other_placed_program,638
+B,75th–90th (excellence),8,top_one_anywhere,23
+B,75th–90th (excellence),8,top_two_only_anywhere,13
+B,Below 50th,1,other_placed_program,1624
+B,Below 50th,1,top_one_anywhere,30
+B,Below 50th,1,top_two_only_anywhere,29
+B,Below 50th,1,unassigned,322
+B,Below 50th,2,other_placed_program,1373
+B,Below 50th,2,top_one_anywhere,32
+B,Below 50th,2,top_two_only_anywhere,25
+B,Below 50th,2,unassigned,232
+B,Below 50th,3,other_placed_program,1347
+B,Below 50th,3,top_one_anywhere,30
+B,Below 50th,3,top_two_only_anywhere,19
+B,Below 50th,3,unassigned,225
+B,Below 50th,4,other_placed_program,1298
+B,Below 50th,4,top_one_anywhere,20
+B,Below 50th,4,top_two_only_anywhere,17
+B,Below 50th,4,unassigned,172
+B,Below 50th,5,other_placed_program,1180
+B,Below 50th,5,top_one_anywhere,21
+B,Below 50th,5,top_two_only_anywhere,24
+B,Below 50th,5,unassigned,181
+B,Below 50th,6,other_placed_program,1029
+B,Below 50th,6,top_one_anywhere,22
+B,Below 50th,6,top_two_only_anywhere,13
+B,Below 50th,6,unassigned,162
+B,Below 50th,7,other_placed_program,857
+B,Below 50th,7,top_one_anywhere,12
+B,Below 50th,7,top_two_only_anywhere,5
+B,Below 50th,7,unassigned,109
+B,Below 50th,8,other_placed_program,570
+B,Below 50th,8,top_one_anywhere,8
+B,Below 50th,8,top_two_only_anywhere,11
+B,Below 50th,8,unassigned,103
+B,Top 10%,1,other_placed_program,32
+B,Top 10%,1,top_one_anywhere,7
+B,Top 10%,1,top_two_only_anywhere,6
+B,Top 10%,2,other_placed_program,87
+B,Top 10%,2,top_one_anywhere,23
+B,Top 10%,2,top_two_only_anywhere,19
+B,Top 10%,3,other_placed_program,110
+B,Top 10%,3,top_one_anywhere,36
+B,Top 10%,3,top_two_only_anywhere,29
+B,Top 10%,4,other_placed_program,127
+B,Top 10%,4,top_one_anywhere,25
+B,Top 10%,4,top_two_only_anywhere,20
+B,Top 10%,5,other_placed_program,184
+B,Top 10%,5,top_one_anywhere,46
+B,Top 10%,5,top_two_only_anywhere,36
+B,Top 10%,6,other_placed_program,224
+B,Top 10%,6,top_one_anywhere,57
+B,Top 10%,6,top_two_only_anywhere,46
+B,Top 10%,7,other_placed_program,285
+B,Top 10%,7,top_one_anywhere,84
+B,Top 10%,7,top_two_only_anywhere,34
+B,Top 10%,8,other_placed_program,503
+B,Top 10%,8,top_one_anywhere,137
+B,Top 10%,8,top_two_only_anywhere,107
+CS,50th–75th,1,other_placed_program,33
+CS,50th–75th,1,top_one_anywhere,3
+CS,50th–75th,1,top_two_only_anywhere,16
+CS,50th–75th,2,other_placed_program,40
+CS,50th–75th,2,top_one_anywhere,9
+CS,50th–75th,2,top_two_only_anywhere,23
+CS,50th–75th,3,other_placed_program,61
+CS,50th–75th,3,top_one_anywhere,9
+CS,50th–75th,3,top_two_only_anywhere,7
+CS,50th–75th,4,other_placed_program,87
+CS,50th–75th,4,top_one_anywhere,3
+CS,50th–75th,4,top_two_only_anywhere,8
+CS,50th–75th,4,unassigned,2
+CS,50th–75th,5,other_placed_program,61
+CS,50th–75th,5,top_one_anywhere,11
+CS,50th–75th,5,top_two_only_anywhere,7
+CS,50th–75th,6,other_placed_program,69
+CS,50th–75th,6,top_one_anywhere,16
+CS,50th–75th,6,top_two_only_anywhere,19
+CS,50th–75th,6,unassigned,1
+CS,50th–75th,7,other_placed_program,58
+CS,50th–75th,7,top_one_anywhere,2
+CS,50th–75th,7,top_two_only_anywhere,16
+CS,50th–75th,7,unassigned,1
+CS,50th–75th,8,other_placed_program,51
+CS,50th–75th,8,top_one_anywhere,10
+CS,50th–75th,8,top_two_only_anywhere,24
+CS,75th–90th (excellence),1,other_placed_program,17
+CS,75th–90th (excellence),1,top_one_anywhere,2
+CS,75th–90th (excellence),1,top_two_only_anywhere,4
+CS,75th–90th (excellence),2,other_placed_program,23
+CS,75th–90th (excellence),2,top_one_anywhere,3
+CS,75th–90th (excellence),2,top_two_only_anywhere,4
+CS,75th–90th (excellence),3,other_placed_program,27
+CS,75th–90th (excellence),3,top_two_only_anywhere,6
+CS,75th–90th (excellence),4,other_placed_program,50
+CS,75th–90th (excellence),4,top_one_anywhere,3
+CS,75th–90th (excellence),5,other_placed_program,47
+CS,75th–90th (excellence),5,top_one_anywhere,4
+CS,75th–90th (excellence),5,top_two_only_anywhere,6
+CS,75th–90th (excellence),6,other_placed_program,44
+CS,75th–90th (excellence),6,top_one_anywhere,4
+CS,75th–90th (excellence),6,top_two_only_anywhere,15
+CS,75th–90th (excellence),7,other_placed_program,38
+CS,75th–90th (excellence),7,top_one_anywhere,3
+CS,75th–90th (excellence),7,top_two_only_anywhere,12
+CS,75th–90th (excellence),8,other_placed_program,51
+CS,75th–90th (excellence),8,top_one_anywhere,10
+CS,75th–90th (excellence),8,top_two_only_anywhere,16
+CS,Below 50th,1,other_placed_program,206
+CS,Below 50th,1,top_one_anywhere,11
+CS,Below 50th,1,top_two_only_anywhere,1
+CS,Below 50th,1,unassigned,29
+CS,Below 50th,2,other_placed_program,159
+CS,Below 50th,2,top_one_anywhere,7
+CS,Below 50th,2,top_two_only_anywhere,2
+CS,Below 50th,2,unassigned,27
+CS,Below 50th,3,other_placed_program,166
+CS,Below 50th,3,top_one_anywhere,4
+CS,Below 50th,3,unassigned,22
+CS,Below 50th,4,other_placed_program,119
+CS,Below 50th,4,top_one_anywhere,1
+CS,Below 50th,4,top_two_only_anywhere,1
+CS,Below 50th,4,unassigned,12
+CS,Below 50th,5,other_placed_program,134
+CS,Below 50th,5,top_one_anywhere,10
+CS,Below 50th,5,top_two_only_anywhere,1
+CS,Below 50th,5,unassigned,14
+CS,Below 50th,6,other_placed_program,108
+CS,Below 50th,6,top_one_anywhere,2
+CS,Below 50th,6,unassigned,15
+CS,Below 50th,7,other_placed_program,111
+CS,Below 50th,7,top_one_anywhere,6
+CS,Below 50th,7,top_two_only_anywhere,1
+CS,Below 50th,7,unassigned,8
+CS,Below 50th,8,other_placed_program,92
+CS,Below 50th,8,top_one_anywhere,6
+CS,Below 50th,8,top_two_only_anywhere,2
+CS,Below 50th,8,unassigned,13
+CS,Top 10%,1,other_placed_program,2
+CS,Top 10%,1,top_one_anywhere,2
+CS,Top 10%,2,other_placed_program,9
+CS,Top 10%,2,top_one_anywhere,13
+CS,Top 10%,2,top_two_only_anywhere,2
+CS,Top 10%,3,other_placed_program,20
+CS,Top 10%,3,top_two_only_anywhere,1
+CS,Top 10%,4,other_placed_program,29
+CS,Top 10%,4,top_one_anywhere,1
+CS,Top 10%,4,top_two_only_anywhere,9
+CS,Top 10%,5,other_placed_program,20
+CS,Top 10%,5,top_one_anywhere,1
+CS,Top 10%,5,top_two_only_anywhere,6
+CS,Top 10%,6,other_placed_program,18
+CS,Top 10%,6,top_one_anywhere,4
+CS,Top 10%,6,top_two_only_anywhere,8
+CS,Top 10%,7,other_placed_program,38
+CS,Top 10%,7,top_one_anywhere,27
+CS,Top 10%,7,top_two_only_anywhere,2
+CS,Top 10%,8,other_placed_program,25
+CS,Top 10%,8,top_one_anywhere,18
+CS,Top 10%,8,top_two_only_anywhere,6
+GL,50th–75th,1,other_placed_program,139
+GL,50th–75th,1,top_two_only_anywhere,2
+GL,50th–75th,2,other_placed_program,166
+GL,50th–75th,2,top_one_anywhere,1
+GL,50th–75th,2,top_two_only_anywhere,1
+GL,50th–75th,3,other_placed_program,171
+GL,50th–75th,3,top_one_anywhere,1
+GL,50th–75th,3,top_two_only_anywhere,4
+GL,50th–75th,4,other_placed_program,156
+GL,50th–75th,4,top_two_only_anywhere,1
+GL,50th–75th,5,other_placed_program,172
+GL,50th–75th,5,top_one_anywhere,1
+GL,50th–75th,6,other_placed_program,201
+GL,50th–75th,6,top_two_only_anywhere,1
+GL,50th–75th,6,unassigned,1
+GL,50th–75th,7,other_placed_program,161
+GL,50th–75th,7,top_one_anywhere,1
+GL,50th–75th,8,other_placed_program,167
+GL,50th–75th,8,top_one_anywhere,1
+GL,50th–75th,8,top_two_only_anywhere,3
+GL,50th–75th,8,unassigned,1
+GL,75th–90th (excellence),1,other_placed_program,51
+GL,75th–90th (excellence),1,top_two_only_anywhere,5
+GL,75th–90th (excellence),2,other_placed_program,67
+GL,75th–90th (excellence),2,top_one_anywhere,1
+GL,75th–90th (excellence),2,top_two_only_anywhere,3
+GL,75th–90th (excellence),3,other_placed_program,53
+GL,75th–90th (excellence),3,top_one_anywhere,4
+GL,75th–90th (excellence),3,top_two_only_anywhere,7
+GL,75th–90th (excellence),4,other_placed_program,94
+GL,75th–90th (excellence),4,top_one_anywhere,3
+GL,75th–90th (excellence),4,top_two_only_anywhere,6
+GL,75th–90th (excellence),5,other_placed_program,87
+GL,75th–90th (excellence),5,top_one_anywhere,3
+GL,75th–90th (excellence),5,top_two_only_anywhere,6
+GL,75th–90th (excellence),6,other_placed_program,104
+GL,75th–90th (excellence),6,top_one_anywhere,4
+GL,75th–90th (excellence),6,top_two_only_anywhere,24
+GL,75th–90th (excellence),7,other_placed_program,107
+GL,75th–90th (excellence),7,top_one_anywhere,2
+GL,75th–90th (excellence),7,top_two_only_anywhere,12
+GL,75th–90th (excellence),8,other_placed_program,131
+GL,75th–90th (excellence),8,top_one_anywhere,3
+GL,75th–90th (excellence),8,top_two_only_anywhere,16
+GL,Below 50th,1,other_placed_program,388
+GL,Below 50th,1,top_one_anywhere,13
+GL,Below 50th,1,top_two_only_anywhere,13
+GL,Below 50th,1,unassigned,43
+GL,Below 50th,2,other_placed_program,360
+GL,Below 50th,2,top_one_anywhere,10
+GL,Below 50th,2,top_two_only_anywhere,9
+GL,Below 50th,2,unassigned,24
+GL,Below 50th,3,other_placed_program,340
+GL,Below 50th,3,top_one_anywhere,6
+GL,Below 50th,3,top_two_only_anywhere,9
+GL,Below 50th,3,unassigned,26
+GL,Below 50th,4,other_placed_program,333
+GL,Below 50th,4,top_one_anywhere,16
+GL,Below 50th,4,top_two_only_anywhere,2
+GL,Below 50th,4,unassigned,15
+GL,Below 50th,5,other_placed_program,313
+GL,Below 50th,5,top_one_anywhere,10
+GL,Below 50th,5,top_two_only_anywhere,4
+GL,Below 50th,5,unassigned,11
+GL,Below 50th,6,other_placed_program,206
+GL,Below 50th,6,top_one_anywhere,6
+GL,Below 50th,6,top_two_only_anywhere,16
+GL,Below 50th,6,unassigned,37
+GL,Below 50th,7,other_placed_program,249
+GL,Below 50th,7,top_one_anywhere,6
+GL,Below 50th,7,top_two_only_anywhere,1
+GL,Below 50th,7,unassigned,18
+GL,Below 50th,8,other_placed_program,127
+GL,Below 50th,8,top_one_anywhere,1
+GL,Below 50th,8,top_two_only_anywhere,14
+GL,Below 50th,8,unassigned,20
+GL,Top 10%,1,other_placed_program,4
+GL,Top 10%,1,top_one_anywhere,1
+GL,Top 10%,1,top_two_only_anywhere,8
+GL,Top 10%,2,other_placed_program,6
+GL,Top 10%,2,top_one_anywhere,9
+GL,Top 10%,2,top_two_only_anywhere,9
+GL,Top 10%,3,other_placed_program,10
+GL,Top 10%,3,top_one_anywhere,14
+GL,Top 10%,3,top_two_only_anywhere,21
+GL,Top 10%,4,other_placed_program,16
+GL,Top 10%,4,top_one_anywhere,10
+GL,Top 10%,4,top_two_only_anywhere,15
+GL,Top 10%,5,other_placed_program,22
+GL,Top 10%,5,top_one_anywhere,16
+GL,Top 10%,5,top_two_only_anywhere,21
+GL,Top 10%,6,other_placed_program,27
+GL,Top 10%,6,top_one_anywhere,15
+GL,Top 10%,6,top_two_only_anywhere,25
+GL,Top 10%,7,other_placed_program,39
+GL,Top 10%,7,top_one_anywhere,39
+GL,Top 10%,7,top_two_only_anywhere,30
+GL,Top 10%,8,other_placed_program,94
+GL,Top 10%,8,top_one_anywhere,52
+GL,Top 10%,8,top_two_only_anywhere,37
+SB,50th–75th,1,other_placed_program,65
+SB,50th–75th,1,top_two_only_anywhere,6
+SB,50th–75th,2,other_placed_program,83
+SB,50th–75th,2,top_one_anywhere,3
+SB,50th–75th,2,top_two_only_anywhere,11
+SB,50th–75th,3,other_placed_program,98
+SB,50th–75th,3,top_one_anywhere,12
+SB,50th–75th,3,unassigned,3
+SB,50th–75th,4,other_placed_program,88
+SB,50th–75th,4,top_one_anywhere,3
+SB,50th–75th,4,top_two_only_anywhere,2
+SB,50th–75th,5,other_placed_program,86
+SB,50th–75th,5,top_one_anywhere,6
+SB,50th–75th,5,top_two_only_anywhere,5
+SB,50th–75th,6,other_placed_program,91
+SB,50th–75th,6,top_one_anywhere,6
+SB,50th–75th,6,top_two_only_anywhere,2
+SB,50th–75th,6,unassigned,3
+SB,50th–75th,7,other_placed_program,111
+SB,50th–75th,7,top_one_anywhere,5
+SB,50th–75th,7,top_two_only_anywhere,2
+SB,50th–75th,8,other_placed_program,111
+SB,50th–75th,8,top_one_anywhere,2
+SB,75th–90th (excellence),1,other_placed_program,16
+SB,75th–90th (excellence),1,top_one_anywhere,8
+SB,75th–90th (excellence),1,top_two_only_anywhere,6
+SB,75th–90th (excellence),2,other_placed_program,29
+SB,75th–90th (excellence),2,top_one_anywhere,7
+SB,75th–90th (excellence),2,top_two_only_anywhere,15
+SB,75th–90th (excellence),3,other_placed_program,26
+SB,75th–90th (excellence),3,top_one_anywhere,16
+SB,75th–90th (excellence),3,top_two_only_anywhere,6
+SB,75th–90th (excellence),4,other_placed_program,39
+SB,75th–90th (excellence),4,top_one_anywhere,14
+SB,75th–90th (excellence),4,top_two_only_anywhere,8
+SB,75th–90th (excellence),5,other_placed_program,42
+SB,75th–90th (excellence),5,top_one_anywhere,7
+SB,75th–90th (excellence),5,top_two_only_anywhere,26
+SB,75th–90th (excellence),6,other_placed_program,43
+SB,75th–90th (excellence),6,top_one_anywhere,15
+SB,75th–90th (excellence),6,top_two_only_anywhere,15
+SB,75th–90th (excellence),7,other_placed_program,53
+SB,75th–90th (excellence),7,top_one_anywhere,13
+SB,75th–90th (excellence),7,top_two_only_anywhere,14
+SB,75th–90th (excellence),8,other_placed_program,48
+SB,75th–90th (excellence),8,top_one_anywhere,15
+SB,75th–90th (excellence),8,top_two_only_anywhere,8
+SB,Below 50th,1,other_placed_program,289
+SB,Below 50th,1,top_two_only_anywhere,1
+SB,Below 50th,1,unassigned,7
+SB,Below 50th,2,other_placed_program,231
+SB,Below 50th,2,top_two_only_anywhere,5
+SB,Below 50th,2,unassigned,2
+SB,Below 50th,3,other_placed_program,205
+SB,Below 50th,3,unassigned,3
+SB,Below 50th,4,other_placed_program,188
+SB,Below 50th,4,top_two_only_anywhere,1
+SB,Below 50th,4,unassigned,5
+SB,Below 50th,5,other_placed_program,203
+SB,Below 50th,5,top_two_only_anywhere,4
+SB,Below 50th,5,unassigned,3
+SB,Below 50th,6,other_placed_program,162
+SB,Below 50th,6,top_two_only_anywhere,6
+SB,Below 50th,6,unassigned,1
+SB,Below 50th,7,other_placed_program,143
+SB,Below 50th,7,unassigned,3
+SB,Below 50th,8,other_placed_program,130
+SB,Below 50th,8,unassigned,7
+SB,Top 10%,1,other_placed_program,3
+SB,Top 10%,1,top_one_anywhere,1
+SB,Top 10%,1,top_two_only_anywhere,1
+SB,Top 10%,2,other_placed_program,10
+SB,Top 10%,2,top_one_anywhere,5
+SB,Top 10%,2,top_two_only_anywhere,4
+SB,Top 10%,3,other_placed_program,12
+SB,Top 10%,3,top_one_anywhere,12
+SB,Top 10%,3,top_two_only_anywhere,7
+SB,Top 10%,4,other_placed_program,37
+SB,Top 10%,4,top_one_anywhere,9
+SB,Top 10%,4,top_two_only_anywhere,9
+SB,Top 10%,5,other_placed_program,15
+SB,Top 10%,5,top_one_anywhere,1
+SB,Top 10%,5,top_two_only_anywhere,6
+SB,Top 10%,6,other_placed_program,21
+SB,Top 10%,6,top_one_anywhere,18
+SB,Top 10%,6,top_two_only_anywhere,18
+SB,Top 10%,7,other_placed_program,20
+SB,Top 10%,7,top_one_anywhere,18
+SB,Top 10%,7,top_two_only_anywhere,21
+SB,Top 10%,8,other_placed_program,7
+SB,Top 10%,8,top_one_anywhere,47
+SB,Top 10%,8,top_two_only_anywhere,28
+TL,50th–75th,1,other_placed_program,23
+TL,50th–75th,1,top_one_anywhere,13
+TL,50th–75th,1,top_two_only_anywhere,2
+TL,50th–75th,2,other_placed_program,37
+TL,50th–75th,2,top_one_anywhere,21
+TL,50th–75th,2,top_two_only_anywhere,5
+TL,50th–75th,3,other_placed_program,42
+TL,50th–75th,3,top_one_anywhere,18
+TL,50th–75th,3,top_two_only_anywhere,5
+TL,50th–75th,4,other_placed_program,57
+TL,50th–75th,4,top_one_anywhere,14
+TL,50th–75th,4,top_two_only_anywhere,8
+TL,50th–75th,5,other_placed_program,22
+TL,50th–75th,5,top_one_anywhere,24
+TL,50th–75th,5,top_two_only_anywhere,16
+TL,50th–75th,6,other_placed_program,29
+TL,50th–75th,6,top_one_anywhere,16
+TL,50th–75th,6,top_two_only_anywhere,15
+TL,50th–75th,7,other_placed_program,36
+TL,50th–75th,7,top_one_anywhere,19
+TL,50th–75th,7,top_two_only_anywhere,11
+TL,50th–75th,8,other_placed_program,22
+TL,50th–75th,8,top_one_anywhere,21
+TL,50th–75th,8,top_two_only_anywhere,15
+TL,75th–90th (excellence),1,other_placed_program,11
+TL,75th–90th (excellence),1,top_one_anywhere,3
+TL,75th–90th (excellence),1,top_two_only_anywhere,3
+TL,75th–90th (excellence),2,other_placed_program,11
+TL,75th–90th (excellence),2,top_one_anywhere,4
+TL,75th–90th (excellence),2,top_two_only_anywhere,5
+TL,75th–90th (excellence),3,other_placed_program,16
+TL,75th–90th (excellence),3,top_one_anywhere,12
+TL,75th–90th (excellence),3,top_two_only_anywhere,11
+TL,75th–90th (excellence),4,other_placed_program,13
+TL,75th–90th (excellence),4,top_one_anywhere,12
+TL,75th–90th (excellence),4,top_two_only_anywhere,8
+TL,75th–90th (excellence),5,other_placed_program,11
+TL,75th–90th (excellence),5,top_one_anywhere,12
+TL,75th–90th (excellence),5,top_two_only_anywhere,7
+TL,75th–90th (excellence),6,other_placed_program,13
+TL,75th–90th (excellence),6,top_one_anywhere,15
+TL,75th–90th (excellence),6,top_two_only_anywhere,21
+TL,75th–90th (excellence),7,other_placed_program,14
+TL,75th–90th (excellence),7,top_one_anywhere,17
+TL,75th–90th (excellence),7,top_two_only_anywhere,19
+TL,75th–90th (excellence),8,other_placed_program,11
+TL,75th–90th (excellence),8,top_one_anywhere,25
+TL,75th–90th (excellence),8,top_two_only_anywhere,17
+TL,Below 50th,1,other_placed_program,173
+TL,Below 50th,1,top_one_anywhere,3
+TL,Below 50th,1,top_two_only_anywhere,7
+TL,Below 50th,1,unassigned,3
+TL,Below 50th,2,other_placed_program,148
+TL,Below 50th,2,top_two_only_anywhere,4
+TL,Below 50th,2,unassigned,1
+TL,Below 50th,3,other_placed_program,106
+TL,Below 50th,3,top_one_anywhere,3
+TL,Below 50th,3,top_two_only_anywhere,13
+TL,Below 50th,3,unassigned,1
+TL,Below 50th,4,other_placed_program,115
+TL,Below 50th,4,top_two_only_anywhere,2
+TL,Below 50th,4,unassigned,4
+TL,Below 50th,5,other_placed_program,106
+TL,Below 50th,5,top_one_anywhere,1
+TL,Below 50th,5,top_two_only_anywhere,16
+TL,Below 50th,5,unassigned,1
+TL,Below 50th,6,other_placed_program,96
+TL,Below 50th,6,top_one_anywhere,1
+TL,Below 50th,6,top_two_only_anywhere,9
+TL,Below 50th,6,unassigned,4
+TL,Below 50th,7,other_placed_program,81
+TL,Below 50th,7,top_one_anywhere,3
+TL,Below 50th,7,top_two_only_anywhere,4
+TL,Below 50th,7,unassigned,4
+TL,Below 50th,8,other_placed_program,55
+TL,Below 50th,8,top_two_only_anywhere,2
+TL,Top 10%,1,other_placed_program,2
+TL,Top 10%,1,top_one_anywhere,2
+TL,Top 10%,2,top_one_anywhere,2
+TL,Top 10%,2,top_two_only_anywhere,4
+TL,Top 10%,3,other_placed_program,2
+TL,Top 10%,3,top_one_anywhere,8
+TL,Top 10%,3,top_two_only_anywhere,6
+TL,Top 10%,4,other_placed_program,2
+TL,Top 10%,4,top_one_anywhere,3
+TL,Top 10%,4,top_two_only_anywhere,6
+TL,Top 10%,5,other_placed_program,1
+TL,Top 10%,5,top_one_anywhere,16
+TL,Top 10%,5,top_two_only_anywhere,9
+TL,Top 10%,6,other_placed_program,3
+TL,Top 10%,6,top_one_anywhere,15
+TL,Top 10%,6,top_two_only_anywhere,6
+TL,Top 10%,7,other_placed_program,4
+TL,Top 10%,7,top_one_anywhere,16
+TL,Top 10%,7,top_two_only_anywhere,15
+TL,Top 10%,8,other_placed_program,1
+TL,Top 10%,8,top_one_anywhere,64
+TL,Top 10%,8,top_two_only_anywhere,11

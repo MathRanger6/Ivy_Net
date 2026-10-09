@@ -1,5 +1,30 @@
 # Bucharest 2001: saved admissions source check
 
+## October 7 update for the seven-county descriptive notebook
+
+The earlier counts below describe the **older county-wide report views** and
+their then-open gap. Charles subsequently recovered the Ministry's separate
+**per-originating-school result webpages**. The new offline plot-source gate
+verifies all 22,216 score-bearing Bucharest applicants against those pages:
+20,652 have one local program placement, 1,511 are marked unassigned, and 53
+were placed outside Bucharest. The 20,652 local records reconcile to the
+separate program-placement reports; 1,317 incoming admissions account for
+the rest of Bucharest's 21,969 local admissions. All local program reports
+identify a unique directory program under the notebook's current top-one and
+top-two definitions. [Aggregate gate counts](B_school_result_plot_source_gate.json).
+
+The result pages have 16 rows beyond the score-bearing applicant cohort;
+they are excluded from the plots. One matched applicant has both a local and
+an unassigned result row on the same school page. The independent local
+placement report corroborates the local result, and the gate records this
+exception explicitly. Printed name and admission score remain provisional
+matching keys because the archive masks personal identifiers. Bucharest's
+resident-candidate page series remains incomplete; the descriptive notebook
+uses the complete school applicant and school-result views, not an assumption
+that the missing resident pages have been recovered. This gate authorizes
+adding B to the existing **descriptive seven-county plot pipeline**, not a
+national outcome or causal analysis. Charles controls running the notebook.
+
 This check reads saved Romanian Ministry admissions webpages without making a web request. It saves aggregate counts only; printed names and scores remain in memory. A printed name and admission score are provisional evidence of a match because the archived personal identifier is masked.
 
 The **Gymnasium Applicant View** has 289 verified originating-school webpages with 22,216 applicant rows. These describe participants in this admissions round, not necessarily every eighth grader at those schools.
