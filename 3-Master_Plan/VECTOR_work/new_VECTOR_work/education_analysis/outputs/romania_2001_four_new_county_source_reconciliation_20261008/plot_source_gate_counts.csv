@@ -1,0 +1,5 @@
+county,applicant_rows,matched_result_rows,ambiguous_or_missing_result_rows,home_placements,away_placements,unassigned,one_program,multiple_programs,no_program_match,top1_label_unresolved,top2_label_unresolved,program_admitted_total,home_plus_incoming_admitted,occupancy_difference,single_applicant_gymnasiums
+CT,6507,6507,0,6213,43,251,5886,327,0,0,0,6336,6336,0,11
+PH,6131,6131,0,5879,52,200,5395,484,0,0,0,5961,5961,0,9
+TM,5795,5795,0,5561,15,219,4264,1297,0,0,191,5774,5774,0,7
+CJ,4885,4885,0,4795,50,40,3937,858,0,0,95,4949,4949,0,9

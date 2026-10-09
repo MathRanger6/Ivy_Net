@@ -10,7 +10,7 @@ from pathlib import Path
 
 from EDUCATION_20261001_romania_four_county_school_sample import school_directory
 from EDUCATION_20261002_romania_three_county_gymnasium_acquisition import saved_school
-from EDUCATION_20261002_romania_full_gymnasium_offline_reconciliation import name_score
+from EDUCATION_20261002_romania_full_gymnasium_offline_reconciliation import components, name_score
 from EDUCATION_20261007_romania_seven_county_new_views_offline_audit import (
     count, marked_unassigned, multiset, rows, school_code,
 )
@@ -22,6 +22,7 @@ OUT = Path(__file__).resolve().parents[1] / "outputs/romania_2001_four_new_count
 FIELDS = (
     "county", "directory_schools", "gymnasium_score_reports_verified",
     "gymnasium_score_reports_unresolved", "score_bearing_applicant_rows",
+    "applicant_rows_with_both_score_components",
     "score_rows_without_name_admission_score", "same_school_name_score_matches",
     "score_rows_absent_from_school_results", "result_rows_absent_from_verified_score_reports",
     "result_only_rows_marked_unassigned", "result_only_rows_other_status",
@@ -51,7 +52,7 @@ def run():
             raise ValueError(f"{county}: school-result and gymnasium directories differ")
 
         matched = score_only = result_only = result_unresolved = 0
-        score_total = no_key = verified = 0
+        score_total = component_total = no_key = verified = 0
         extra_status = Counter()
         for code, (_label, relative) in directory.items():
             page = saved_school(county, code, relative)
@@ -63,6 +64,7 @@ def run():
             verified += 1
             score_rows = page["rows"]
             score_total += len(score_rows)
+            component_total += sum(components(row) is not None for row in score_rows)
             applicants = multiset(score_rows)
             no_key += len(score_rows) - count(applicants)
             results = multiset(result_rows)
@@ -83,6 +85,7 @@ def run():
             "gymnasium_score_reports_verified": verified,
             "gymnasium_score_reports_unresolved": len(directory) - verified,
             "score_bearing_applicant_rows": score_total,
+            "applicant_rows_with_both_score_components": component_total,
             "score_rows_without_name_admission_score": no_key,
             "same_school_name_score_matches": matched,
             "score_rows_absent_from_school_results": score_only,
@@ -112,7 +115,9 @@ def run():
         f"{total('directory_schools')}**. The remaining school codes are **unresolved**, "
         "not assumed to have zero applicants.", "",
         f"The verified reports contain **{total('score_bearing_applicant_rows'):,}** "
-        f"applicant rows. **{total('same_school_name_score_matches'):,}** have a matching "
+        f"applicant rows; **{total('applicant_rows_with_both_score_components'):,}** have both "
+        "the examination score and school-grade average. "
+        f"**{total('same_school_name_score_matches'):,}** have a matching "
         f"row in the corresponding school-result report; **{total('score_rows_absent_from_school_results')}** "
         "do not. Across verified schools, the school-result reports have "
         f"**{total('result_rows_absent_from_verified_score_reports')}** additional rows, "
