@@ -20,9 +20,9 @@ A season followed by an athletic draft offers one concrete illustration. The gen
 
 We summarize the record entering selection by $A_{i}$, the performance characteristic of individual i. A denotes that characteristic in general. The model takes these values as given at the selection stage; it does not simulate their accumulation over time. Depending on the application, $A_{i}$ may be a measured performance statistic or a specified characteristic in a simulation. It need not be innate talent, and a measured value may already reflect earlier environments. Perfect observation in this benchmark means perfect access to the stipulated $A_{i}$, rather than a claim that empirical performance reveals underlying talent without error.
 
-Let I denote the eligible population and N its size. Each individual belongs to one group g(i). Group j has $n_{j}$ members, all groups are nonempty, and their sizes sum to N. Memberships can come directly from observed rosters. We do not yet need a model of how those groups formed.
+Let $\mathcal I$ be the set of eligible individuals, with $N$ members. Index groups by $j$, and let $g(i)$ identify the group containing individual $i$. Group $j$ contains $n_j$ individuals, all groups are nonempty, and their sizes sum to $N$. Memberships can come directly from observed rosters. We do not yet need a model of how those groups formed.
 
-Let K be the number of selection opportunities, with 0 ≤ K ≤ N. The selection fraction $K/N$ describes their scarcity: smaller fractions mean fewer opportunities relative to the eligible population. We generally study 0 \< K \< N, because selecting nobody or everybody leaves no variation in the binary outcome. Fixing K is a modeling assumption; it does not require that every application have an explicitly announced institutional quota.
+Let $K$ be the number of selection opportunities, with $0 ≤ K ≤ N$. The selection fraction $K/N$ describes their scarcity: smaller fractions mean fewer opportunities relative to the eligible population. We generally study $0 < K < N$, because selecting nobody or everybody leaves no variation in the binary outcome. Fixing $K$ is a modeling assumption; it does not require that every application have an explicitly announced institutional quota.
 
 ### 4.2.2 The score and the selection rule
 
@@ -32,7 +32,7 @@ $$
 S_{i} = A_{i}.
 $$
 
-The selection rule chooses the K highest scores. If $W_{K}(S)$ denotes that selected set and $Y_{i}$ records whether individual i is selected, then
+The selection rule chooses the $K$ highest scores. Write $\mathbf S$ for the collection of all individual scores, and let $W_K(\mathbf S)$ denote the resulting set of winners. Let $Y_i$ equal one if individual $i$ is selected and zero otherwise. Using indicator notation, where $1\text{condition}$ equals one when the condition is true and zero otherwise, we write
 
 $$
 Y_{i} = 1\{ i \in \ W_{K}(S)\},\ \ \ \sum_{i \in \ I}Y_{i} = K.
@@ -42,7 +42,7 @@ Thus scoring establishes competitive standing and selection allocates the opport
 
 ### 4.2.3 What group membership does in the benchmark
 
-Groups exist in this first model, but they do not affect who is selected. Reassigning the same individuals among groups leaves their scores and the selected set unchanged. Increasing K instead expands the selected set by moving down the performance ranking, provided the tie convention remains fixed.
+Groups exist in this first model, but they do not affect who is selected. Reassigning the same individuals among groups leaves their scores and the selected set unchanged. Increasing $K$ instead expands the selected set by moving down the performance ranking, provided the tie convention remains fixed.
 
 Group selection rates can nevertheless differ. A group containing many high-performing individuals can produce more selected candidates simply because of its composition. This is the structural reference against which we will evaluate a group effect: different outcomes across groups need not mean that membership changed anyone's competitive standing. Later comparisons at similar $A_{i}$ and experiments on the same individuals and memberships will ask whether an explicit local adjustment changes that conclusion.
 
@@ -50,15 +50,15 @@ Group selection rates can nevertheless differ. A group containing many high-perf
 
 Perfect ranking is a useful starting point, but selection need not reproduce it exactly. Evaluators may observe incomplete records, disagree about candidates, or consider factors outside the model. A stronger record may increase a person's chance of selection without guaranteeing that every higher-performing candidate is chosen ahead of every lower-performing one.
 
-We represent this uncertainty while retaining a fixed number of opportunities. The scores remain those supplied to selection; the identities receiving the K places can vary. At this stage the score is still $A_{i}$. The same selection rule can subsequently operate on a score that also incorporates group composition.
+We represent this uncertainty while retaining a fixed number of opportunities. The scores remain those supplied to selection; the identities receiving the $K$ places can vary. At this stage the score is still $A_{i}$. We will adjust the selection method, not the scoring to introduce this uncertainty.
 
 ### 4.3.1 From a fixed ranking to uncertain winners
 
-In the benchmark, ranking the scores determines all K winners. To allow imperfect selection while keeping the same number of places, we instead fill those places one at a time. Everyone who has not yet been selected remains eligible for the next place. A higher score makes a person more likely to be chosen, but does not guarantee it. Once someone is chosen, that person leaves the pool; the process stops when K people have been selected.
+In the benchmark selection method, ranking the scores determines all $K$ winners. To allow imperfect selection while keeping the same number of places, we instead fill those places one at a time. Everyone who has not yet been selected remains eligible for the next place. A higher score makes a person more likely to be chosen, but does not guarantee it. Once someone is chosen, that person leaves the pool; the process stops when $K$ people have been selected.
 
-We need to specify how much a score advantage matters in each draw. We use a positive parameter, $t_{SELECT}$, called the selection temperature. At a low temperature, even modest score differences strongly favor higher-scoring candidates, so the outcome tends to follow the ranking. At a high temperature, those differences matter less, and lower-scoring candidates have a greater chance of being selected. Temperature governs uncertainty in selection given the scores. It does not model uncertainty in how $A_i$ was measured.
+We need to specify how much a score advantage matters in each draw. We use a positive parameter, $t_{sel}$, called the selection temperature. At a low temperature, even modest score differences strongly favor higher-scoring candidates, so the outcome tends to follow the ranking. At a high temperature, those differences matter less, and lower-scoring candidates have a greater chance of being selected. Temperature governs uncertainty in selection given the scores. It does not model uncertainty in how $A_i$ was measured.
 
-### 4.3.2 Selecting exactly K individuals without replacement
+### 4.3.2 Selecting exactly $K$ individuals without replacement
 
 To state this rule precisely, let $I_{r}$ be the individual selected on draw r. The remaining candidates immediately before that draw are
 
@@ -69,7 +69,7 @@ $$
 For an individual still in $R_{r}$, the probability of being selected next is
 
 $$
-\Pr\left( I_{r} = i|I_{1},\ldots,I_{r - 1},\mathbf{S} \right) = \frac{\exp\left( S_{i}/t_{SELECT} \right)}{\sum_{h \in R_{r}}^{}{\exp\left( S_{h}/t_{SELECT} \right)}}
+\Pr\left( I_{r} = i|I_{1},\ldots,I_{r - 1},\mathbf{S} \right) = \frac{\exp\left( S_{i}/t_{sel} \right)}{\sum_{h \in R_{r}}^{}{\exp\left( S_{h}/t_{sel} \right)}}
 $$
 
 Scores and group memberships remain fixed across draws. Only the set of candidates still eligible to be drawn changes. The final outcome is
@@ -78,19 +78,19 @@ $$
 Y_{i} = 1\left\{ i \in \left\{ I_{1},\ldots,I_{K} \right\} \right\},\sum_{i \in \mathcal{I}}^{}Y_{i} = K
 $$
 
-The exponential terms are Gibbs weights. Sequential selection using these weights is the Plackett--Luce form of weighted sampling without replacement. The displayed probability describes the next draw, rather than the final marginal probability of belonging to the K winners. The model draws winners sequentially to define the probability of each final selected set. This draw sequence is a mathematical device; it does not imply that the institution selected, ranked, or recorded winners in that order. [1]
+The exponential terms are Gibbs weights. Sequential selection using these weights is the Plackett--Luce form of weighted sampling without replacement. The displayed probability describes the next draw, rather than the final marginal probability of belonging to the $K$ winners. The sequential drawing rule lets us calculate the chance that any particular group of $K$ individuals is selected.  This draw sequence is a mathematical device; it does not imply that the institution selected, ranked, or recorded winners in that order. [1]
 
-For an ordered sequence of distinct winners, its probability is the product of the successive conditional probabilities. The probability of an unordered selected set is the sum of those products over every ordering of that set. This distinction becomes important when we turn to fitting: exact-K outcomes cannot be treated as independent Bernoulli decisions with the same likelihood.
+For an ordered sequence of distinct winners, its probability is the product of the successive conditional probabilities. The probability of an unordered selected set is the sum of those products over every ordering of that set. This distinction becomes important when we turn to fitting: exact-$K$ outcomes cannot be treated as independent Bernoulli decisions with the same likelihood.
 
 ### 4.3.3 Limits and score units
 
 The rule makes the comparison between two remaining candidates explicit. Their next-draw probability ratio is
 
 $$
-\frac{\Pr\left(  I_{r} = i| I_{1},...I_{r-1},S \right)}{\Pr\left(  I_{r} = h| I_{1},...I_{r-1},S \right)} = \exp\left( \frac{S_{i} - S_{h}}{t_{SELECT}} \right)
+\frac{\Pr\left(  I_{r} = i| I_{1},...I_{r-1},S \right)}{\Pr\left(  I_{r} = h| I_{1},...I_{r-1},S \right)} = \exp\left( \frac{S_{i} - S_{h}}{t_{sel}} \right)
 $$
 
-A given score advantage therefore matters relative to the temperature. As $t_{SELECT}$ approaches zero, selection approaches deterministic top-K when there is no tie at the boundary. Boundary ties require separate treatment; the stochastic limit need not reproduce the deterministic code's fixed ordering. As temperature becomes arbitrarily large, each draw approaches uniform sampling among those remaining, and each person's final inclusion probability approaches $K/N$.
+A given score advantage therefore matters relative to the temperature. As $t_{sel}$ approaches zero, selection approaches deterministic top-K when there is no tie at the boundary. If candidates tie at the selection boundary, the low-temperature limit need not reproduce the deterministic benchmark’s fixed tie-breaking rule.  As temperature becomes arbitrarily large, each draw approaches uniform sampling among those remaining, and each person's final inclusion probability approaches $K/N$.
 
 Adding the same finite constant to every score leaves all conditional probabilities unchanged. Multiplying every score and the temperature by the same positive constant also preserves them. These properties follow by cancellation in the normalized weights. They establish that score differences, measured relative to temperature, determine the stochastic comparison. Scores can be any finite real numbers, including negative values.
 
@@ -100,9 +100,9 @@ The mathematical definition applies without clipping scores or reducing the stip
 
 The two models so far allow performance and uncertainty to determine selection, but leave group membership irrelevant to an individual's score. They would treat the same person identically after a move to a different group, provided that person's $A_{i}$ stayed unchanged. We now ask whether that is a sufficient account of advancement when individuals work and become visible alongside others.
 
-Strong peers can offer learning, collaboration, and access to productive activities. They can also compete for limited attention, responsibility, and distinction. We isolate this competitive side of the environment while holding the performance values entering selection fixed. A separate developmental benefit function is outside the present specification. Our question is whether local competition can change the standing with which individuals enter a broader selection process, even without reducing their measured performance.
+Strong peers can offer learning, collaboration, and access to productive activities. They can also compete for limited attention, responsibility, and distinction. We isolate this competitive side of the environment while holding the performance values entering selection fixed. A separate developmental benefit function is an additional extension, but outside the present specification. Our question is whether local competition can change the standing with which individuals enter a broader selection process, even without reducing their measured performance.
 
-We use $C_i$ to denote the effective congestion applied to individual $i$. The general score adjustment is
+We need to distinguish how much congestion an individual encounters from how strongly that congestion affects their competitive standing. Let $C_i$ measure the congestion experienced by individual $i$, and let $\lambda\geq0$ control the strength of its effect on the selection score. The adjustment is therefore $\lambda C_i$, giving …
 
 $$
 S_i=A_i-\lambda C_i,\qquad \lambda\geq 0.
@@ -149,17 +149,17 @@ These are relative adjustments. If $A$ is standardized, a negative average raise
 
 Average performance does not distinguish which group members are plausible candidates for an opportunity. Raising the performance of a person far below a relevant level changes the average even if that person remains unlikely to compete for advancement. Two groups can also have the same average while differing in how many members occupy the range from which credible candidates emerge. To represent that distinction, we next ask how much each member contributes to the competitive field.
 
-We introduce a common performance threshold θ around which a member becomes competitively relevant. A sharp cutoff would classify members immediately below and above it very differently. Instead, a smooth transition allows relevance to increase gradually. For member h, define
+We introduce a common performance threshold $\theta$ around which a member becomes competitively relevant. A sharp cutoff would classify members immediately below and above it very differently. Instead, a smooth transition allows relevance to increase gradually. Let $v_h$ represent member $h$’s degree of competitive relevance, on a scale from zero to one. We use a logistic function, denoted by $\sigma$, to make relevance increase smoothly around $\theta$. A positive parameter $\gamma$ controls how abruptly this transition occurs: larger values produce a sharper transition.
 
 $$
 v_{h} = \sigma(\gamma(A_{h} - \theta)) = \frac{1}{1 + \exp\lbrack - \gamma(A_{h} - \theta)\rbrack}.
 $$
 
-Here θ locates the transition and γ \> 0 controls its sharpness. A member at θ contributes one half. Members far below it contribute little, and members far above it contribute nearly one. Saturation expresses the idea that an exceptionally high score does not generate an unlimited competitive burden.
+Here $\theta$ locates the transition and $\gamma$  0 controls its sharpness. A member at $\theta$ contributes one half. Members far below it contribute little, and members far above it contribute nearly one. Saturation expresses the idea that an exceptionally high score does not generate an unlimited competitive burden.
 
-This threshold refers to a common region of competitive relevance. It is not defined by whether a peer individually outperforms the focal person. Nor is it automatically the top-K selection cutoff: θ governs who contributes to local congestion, whereas K governs how many opportunities are awarded across the selection population. Their interaction is examined in Section 4.5.
+This threshold refers to a common region of competitive relevance. It is not defined by whether a peer individually outperforms the focal person. Nor is it automatically the top-K selection cutoff: $\theta$ governs who contributes to local congestion, whereas $K$ governs how many opportunities are awarded across the selection population. Their interaction is examined in Section 4.5.
 
-The smooth transition can represent imprecision in where competitive relevance begins, but γ is not itself an estimated measurement-error variance. Selection temperature concerns uncertainty in choosing winners given scores. The sigmoid concerns how performance contributes to congestion before those scores enter selection. Keeping the two roles explicit allows each assumption to be examined separately.
+The smooth transition can represent imprecision in where competitive relevance begins, but $\gamma$ is not itself an estimated measurement-error variance. Selection temperature concerns uncertainty in choosing winners given scores. The sigmoid concerns how performance contributes to congestion before those scores enter selection. $K$eeping the two roles explicit allows each assumption to be examined separately.
 
 ### 4.4.3 Aggregating competitive relevance into a group adjustment
 
@@ -181,7 +181,7 @@ $$
 
 That alternative averages the transformed contributions $v_h$, whereas $C_{\mathrm{LOO},i}$ in Section 4.4.1 averages performance $A_h$ itself. They are different quantities. We retain the full-group definition for the refined model and the completed experiments described here. The earlier mean-performance specifications are conceptual stepping stones, not algebraically identical forms of the refined score.
 
-For finite inputs and positive γ, $C_{j}$ lies strictly between zero and one. It is a smooth proportion of competitively relevant members. Replicating a group's characteristic distribution at a larger size leaves this mean unchanged. With fixed equal group sizes, number and concentration move together; with unequal sizes, a count and a mean would represent different assumptions about the burden of competition.
+For finite inputs and positive $\gamma$, $C_{j}$ lies strictly between zero and one. It is a smooth proportion of competitively relevant members. Replicating a group's characteristic distribution at a larger size leaves this mean unchanged. With fixed equal group sizes, number and concentration move together; with unequal sizes, a count and a mean would represent different assumptions about the burden of competition.
 
 The refined competitive score is
 
@@ -189,7 +189,7 @@ $$
 S_i=A_i-\lambda C_i=A_i-\lambda C_{g(i)}.
 $$
 
-The coefficient λ ≥ 0 controls the congestion penalty, with λ = 0 recovering the performance-only benchmark. The coefficient in either elementary mean-performance score is not numerically interchangeable with λ here: the elementary measures average $A$, while the refined measure averages competitive relevance. With standardized A and raw $C_{j}$, λ has units of standard deviations of A per unit of mean relevance. Unless an experiment states otherwise, $C_{j}$ is the raw full-group mean above.
+The coefficient $\lambda$ ≥ 0 controls the congestion penalty, with $\lambda$ = 0 recovering the performance-only benchmark. The coefficient in either elementary mean-performance score is not numerically interchangeable with $\lambda$ here: the elementary measures average $A$, while the refined measure averages competitive relevance. With standardized A and raw $C_{j}$, $\lambda$ has units of standard deviations of A per unit of mean relevance. Unless an experiment states otherwise, $C_{j}$ is the raw full-group mean above.
 
 A lower score represents an adverse adjustment to standing in selection; it does not assert that the person's recorded performance or learning declined. Attention, visibility, and sponsorship provide possible substantive channels. Group composition is the structure represented by the model, without separately specifying interpersonal ties or a dynamic influence process for those channels.
 
@@ -207,7 +207,7 @@ $$
 S_{i} - S_{h} = (A_{i} - A_{h}) - \lambda(C_{g(i)} - C_{g(h)}).
 $$
 
-A candidate with a performance advantage can therefore have a lower adjusted score if their group has sufficiently greater congestion. For $A_{i}$ \> $A_{h}$ and $C_{g(i)}$ \> $C_{g(h)}$, the scores coincide at
+A candidate with a performance advantage can therefore have a lower adjusted score if their group has sufficiently greater congestion. For $A_{i}$  $A_{h}$ and $C_{g(i)}$  $C_{g(h)}$, the scores coincide at
 
 $$
 \lambda = \frac{A_{i} - A_{h}}{C_{g(i)} - C_{g(h)}}.
@@ -229,31 +229,31 @@ $$
 \frac{\partial\ v_{h}}{\partial\ A_{h}} = \gamma\ v_{h}(1 - v_{h}).
 $$
 
-Sensitivity is greatest at $A_{h}$ = θ, where it equals γ/4, and declines toward either tail. The threshold determines where the transition occurs; γ determines its sharpness. Increasing γ raises contributions for members above θ and lowers them for members below θ. Its effect on a group's average therefore depends on that group's composition and need not have the same sign in every group.
+Sensitivity is greatest at $A_{h} = \theta$, where it equals $\gamma/4$, and declines toward either tail. The threshold determines where the transition occurs; $\gamma$ determines its sharpness. Increasing $\gamma$ raises contributions for members above $\theta$ and lowers them for members below $\theta$. Its effect on a group's average therefore depends on that group's composition and need not have the same sign in every group.
 
-Two limiting cases help locate the mechanism. As γ approaches zero with finite A and θ, all contributions approach one half, so every group receives the same penalty λ/2. Rankings and the stochastic selection probabilities are then those of the performance-only model. As γ becomes large, contributions approach one above θ and zero below θ, with one half at exact equality. Congestion approaches a threshold-based fraction. Moving θ far below or far above the entire population likewise makes group contributions nearly constant, respectively near one or near zero, leaving little differential penalty across groups.
+Two limiting cases help locate the mechanism. As $\gamma$ approaches zero with finite A and $\theta$, all contributions approach one half, so every group receives the same penalty $\lambda$/2. Rankings and the stochastic selection probabilities are then those of the performance-only model. As $\gamma$ becomes large, contributions approach one above $\theta$ and zero below $\theta$, with one half at exact equality. Congestion approaches a threshold-based fraction. Moving $\theta$ far below or far above the entire population likewise makes group contributions nearly constant, respectively near one or near zero, leaving little differential penalty across groups.
 
-These are consequences of the equations, not findings from a parameter sweep. A useful congestion regime requires heterogeneity in $C_{j}$ as well as a positive λ. A large coefficient cannot create cross-group differences when all groups have identical congestion.
+These are consequences of the equations, not findings from a parameter sweep. A useful congestion regime requires heterogeneity in $C_{j}$ as well as a positive $\lambda$. A large coefficient cannot create cross-group differences when all groups have identical congestion.
 
 ### 4.5.2 Penalty strength and score scale
 
-For λ \> 0, the raw penalty on any candidate lies strictly between zero and λ, and a cross-group penalty difference has magnitude less than λ. At λ = 0, both quantities are zero. Thus a performance advantage greater than λ cannot be reversed by this raw congestion term alone. The practical influence of λ also depends on the observed spread of $C_{j}$. If all groups have nearly equal congestion, the differential penalty may be small even when its common level is large.
+For $\lambda$  0, the raw penalty on any candidate lies strictly between zero and $\lambda$, and a cross-group penalty difference has magnitude less than $\lambda$. At $\lambda$ = 0, both quantities are zero. Thus a performance advantage greater than $\lambda$ cannot be reversed by this raw congestion term alone. The practical influence of $\lambda$ also depends on the observed spread of $C_{j}$. If all groups have nearly equal congestion, the differential penalty may be small even when its common level is large.
 
-For a fixed population, fixed groups, and a fixed threshold, each score is linear in λ. Pairwise rankings can change only at crossing values of the form derived in Section 4.4.4. Between crossing values, deterministic top-K membership remains unchanged. This explains why numerical scores can change continuously while the selected set changes in discrete steps. An increase in penalty strength is not itself evidence that more people have changed selection status.
+For a fixed population, fixed groups, and a fixed threshold, each score is linear in $\lambda$. Pairwise rankings can change only at crossing values of the form derived in Section 4.4.4. Between crossing values, deterministic top-K membership remains unchanged. This explains why numerical scores can change continuously while the selected set changes in discrete steps. An increase in penalty strength is not itself evidence that more people have changed selection status.
 
-Full-group congestion also means that changing $A_{i}$, while keeping the other members and θ fixed, changes both the direct score term and the shared group adjustment. In particular,
+Full-group congestion also means that changing $A_{i}$, while keeping the other members and $\theta$ fixed, changes both the direct score term and the shared group adjustment. In particular,
 
 $$
 \frac{\partial\ S_{i}}{\partial\ A_{i}} = 1 - \frac{\lambda\gamma}{n_{g(i)}}v_{i}(1 - v_{i}).
 $$
 
-A sufficient condition for this derivative to remain positive is λγ \< 4 $n_{g(i)}$. This is a local score calculation under the stated fixed-input conditions, not an empirical restriction we have estimated. It also does not contradict preserved within-group rankings: when $A_{i}$ changes, the same altered $C_{j}$ is applied to every member of that group. The derivative makes clear why the phrase "holding own performance constant" is useful when interpreting an environmental comparison.
+A sufficient condition for this derivative to remain positive is $\lambda\gamma<4 n_{g(i)}$. This is a local score calculation under the stated fixed-input conditions, not an empirical restriction we have estimated. It also does not contradict preserved within-group rankings: when $A_{i}$ changes, the same altered $C_{j}$ is applied to every member of that group. The derivative makes clear why the phrase "holding own performance constant" is useful when interpreting an environmental comparison.
 
 ### 4.5.3 Scarcity and the selection margin
 
-The selection fraction $K/N$ acts on the score distribution after congestion has been computed. Lowering K moves the deterministic boundary upward; it does not change the sigmoid threshold θ unless an experiment explicitly couples those quantities. The experiments discussed below held θ fixed when varying $K/N$. Treating θ and K as independent controls distinguishes who contributes to local congestion from how many people receive the global outcome.
+The selection fraction $K/N$ acts on the score distribution after congestion has been computed. Lowering $K$ moves the deterministic boundary upward; it does not change the sigmoid threshold $\theta$ unless an experiment explicitly couples those quantities. The experiments discussed below held $\theta$ fixed when varying $K/N$. Treating $\theta$ and $K$ as independent controls distinguishes who contributes to local congestion from how many people receive the global outcome.
 
-Holding all scores fixed, lowering K yields a smaller selected set. Holding the same K while changing the congestion penalty asks a different question: which identities replace which others? If two conditions each select K individuals and their winner sets are W and W′, the number of replaced places is
+Holding all scores fixed, lowering $K$ yields a smaller selected set. Holding the same $K$ while changing the congestion penalty asks a different question: which identities replace which others? If two conditions each select $K$ individuals and their winner sets are W and W′, the number of replaced places is
 
 $$
 D = K - |W \cap \ W'| = \frac{|W \bigtriangleup W'|}{2}.
@@ -261,7 +261,7 @@ $$
 
 D counts each lost-and-gained place once. D/K is the fraction of selected places that change. Fewer changed people under scarce selection can coexist with a larger fraction of available places changing hands. Both quantities are needed when assessing how much a mechanism matters.
 
-Under stochastic selection, the total number of winners still equals K in every realization, while their identities vary. Temperature controls that uncertainty; scarcity controls the count. Neither parameter should be interpreted as a substitute for the other. For example, very high temperature produces uniform selection with inclusion probability $K/N$, whereas K = N makes every candidate succeed at every temperature.
+Under stochastic selection, the total number of winners still equals $K$ in every realization, while their identities vary. Temperature controls that uncertainty; scarcity controls the count. Neither parameter should be interpreted as a substitute for the other. For example, very high temperature produces uniform selection with inclusion probability $K/N$, whereas $K = N$ makes every candidate succeed at every temperature.
 
 ### 4.5.4 Why an outcome curve need not have a universal shape
 
@@ -293,13 +293,13 @@ $$
 
 A full group has zero remaining capacity and receives zero probability. The factor $R_{j}^{(m)}$ accounts for available slots; the exponential term favors similarity between $A_{i}$ and the current group centroid. The parameter ρ ≥ 0 controls that similarity preference. This capacity factor belongs to constrained allocation and should not be described as degree-based preferential attachment to already popular groups.
 
-When the first person joins a group, that person's $A_{i}$ becomes its centroid. After every subsequent assignment, the centroid becomes the mean A of its current members. Once assignment ends, $T_{j}$ is the final group mean, including all $n_{j}$ members. Provided total capacity equals N, the sequential procedure assigns every individual and fills every group exactly.
+When the first person joins a group, that person's $A_{i}$ becomes its centroid. After every subsequent assignment, the centroid becomes the mean A of its current members. Once assignment ends, $T_{j}$ is the final group mean, including all $n_{j}$ members. Provided total capacity equals $N$, the sequential procedure assigns every individual and fills every group exactly.
 
-At ρ = 0, assignment probabilities reduce to remaining capacity divided by the total remaining capacity. Choosing a group this way is equivalent to choosing uniformly among the remaining membership slots. Increasing ρ favors currently similar groups, subject to capacity constraints and the history of earlier assignments. Because the centroids evolve, the assignment order and random choices can affect the final partition.
+We introduce a nonnegative similarity-preference parameter $\rho$.  At $\rho = 0$, assignment probabilities reduce to remaining capacity divided by the total remaining capacity. Choosing a group this way is equivalent to choosing uniformly among the remaining membership slots. Increasing $\rho$ gives greater preference to groups whose current mean is closer to the arriving individual's $A_{i}$. Because the centroids evolve, the assignment order and random choices can affect the final partition.
 
 ### 4.6.3 Preference and realized sorting
 
-The parameter ρ governs a generative preference. It does not directly measure the sorting realized in a completed population. We measure that structure using
+The parameter $\rho$ governs a generative preference. It does not directly measure the sorting realized in a completed population.  We summarize realized sorting by $H_{\mathrm{sort}}$, the fraction of total variation in $A$ attributable to differences between group means.
 
 $$
 H_{\text{sort}} = 1 - \frac{\sum_{i}^{}\left( A_{i} - T_{g(i)} \right)^{2}}{\sum_{i}^{}\left( A_{i} - \overline{A} \right)^{2}},
@@ -317,15 +317,15 @@ $$
 
 To see this, write $A_{i}$ − $\overline{A}$ as the sum of $A_{i}$ − $T_{g(i)}$ and $T_{g(i)}$ − $\overline{A}$. The cross terms sum to zero inside each group because deviations from that group's mean sum to zero. Consequently, $H_{sort}$ is the between-group share of total variation and lies between zero and one. If the population has no variation in A, its denominator is zero and the statistic is undefined rather than evidence of perfect or absent sorting.
 
-Nonzero sorting can occur under random assignment in finite groups. With J fixed nonempty group sizes, uniform random allocation of the same N individuals, and positive total variation, the expected index is (J − 1)/(N − 1). One obtains this by applying the finite-population variance of each random group mean and summing its $n_{j}$-weighted squared deviation from $\overline{A}$. This analytic reference applies to the uniform allocation benchmark; a reference ensemble remains useful for variability and for procedures with additional constraints.
+Nonzero sorting can occur under random assignment in finite groups. With J fixed nonempty group sizes, uniform random allocation of the same $N$ individuals, and positive total variation, the expected index is (J − 1)/(N − 1). One obtains this by applying the finite-population variance of each random group mean and summing its $n_{j}$-weighted squared deviation from $\overline{A}$. This analytic reference applies to the uniform allocation benchmark; a reference ensemble remains useful for variability and for procedures with additional constraints.
 
-Realized sorting therefore depends on ρ, the A distribution, roster capacities, and stochastic assignment history. A comparison should report both the chosen preference and the resulting $H_{sort}$, rather than equating ρ = 0 with an observed index of zero. An empirical $H_{sort}$ below a simulated reference does not establish that real assignment was random.
+Realized sorting therefore depends on $\rho$, the A distribution, roster capacities, and stochastic assignment history. A comparison should report both the chosen preference and the resulting $H_{sort}$, rather than equating ρ = 0 with an observed index of zero. An empirical $H_{sort}$ below a simulated reference does not establish that real assignment was random.
 
 ### 4.6.4 Connecting assignment to mechanism experiments
 
 A controlled simulation first assigns individuals, then computes scores on the resulting groups, and finally selects winners. That is the chronological ASSIGN → SCORE → SELECT pipeline. The chapter introduced the components in a different order to establish the advancement mechanism before explaining how its artificial environments are generated.
 
-When comparing penalties on the same assignments, the population, capacities, and groups can be held exactly fixed. When comparing assignment preferences, paired arrival orders and random draws reduce avoidable simulation variation, but they do not hold the resulting groups fixed. Changes in ρ can alter the range of environments, the association between $A_{i}$ and those environments, and winner identities. Those channels must be considered when interpreting a changed success curve.
+When comparing penalties on the same assignments, the population, capacities, and groups can be held exactly fixed. When comparing assignment preferences, paired arrival orders and random draws reduce avoidable simulation variation, but they do not hold the resulting groups fixed. Changes in $\rho$ can alter the range of environments, the association between $A_{i}$ and those environments, and winner identities. Those channels must be considered when interpreting a changed success curve.
 
 ## 4.7 What the completed mechanism experiments establish
 
@@ -333,33 +333,33 @@ The mathematical results identify ways in which local group structure can change
 
 ### 4.7.1 Experimental setting and interpretation
 
-The completed experiments reported here used basketball-derived characteristic distributions and group capacities for 2014, 2015, and 2016, with 100 paired assignments per season. Individual performance was within-season standardized points per minute. The score used raw full-group mean congestion, γ = 10, and a θ fixed at the season's 99th performance percentile. The selection rule was deterministic top-K. Thus these experiments demonstrate behavior of the deterministic member of the model family; they are not results from the unrestricted stochastic SELECT rule. [14]
+The completed experiments reported here used basketball-derived characteristic distributions and group capacities for 2014, 2015, and 2016, with 100 paired assignments per season. Individual performance was within-season standardized points per minute. The score used raw full-group mean congestion, $\gamma = 10$, and a $\theta$ fixed at the season's 99th performance percentile. The selection rule was deterministic top-K. Thus these experiments demonstrate behavior of the deterministic member of the model family; they are not results from the unrestricted stochastic SELECT rule. [14]
 
 The characteristic values came from measured basketball production and should not be relabeled portable or innate talent. The 2015 working population contained 4,267 players on 351 teams. The same athlete can appear in more than one year, and repeated assignments do not create independent empirical populations. These are controlled mechanism experiments, not a held-out prediction exercise or a causal estimate of basketball peer effects.
 
 ### 4.7.2 Congestion can change winners without similarity preference
 
-At approximately 2.7% selection and λ = 1, introducing congestion replaced an average of 1.51--2.21 winners under ρ = 0, depending on season. Under the preferential-assignment condition, the corresponding averages were 4.25--5.61. Congestion therefore changed some winners even without a similarity preference in these configurations. [14]
+At approximately 2.7% selection and $\lambda = 1$, introducing congestion replaced an average of 1.51--2.21 winners under ρ = 0, depending on season. Under the preferential-assignment condition, the corresponding averages were 4.25--5.61. Congestion therefore changed some winners even without a similarity preference in these configurations. [14]
 
 This answers a narrow necessity question. It does not establish that a pronounced rise-and-fall outcome curve appears without assortativity, nor that assortativity is universally required for such a curve. Changing selected identities and changing curve shape are distinct criteria. The approximately 2.7% setting was a domain-motivated scenario derived from a career-exit outcome proportion, not a verified annual capacity for every simulated season.
 
-The penalty's numerical scale helped explain the small initial changes. At λ = 1, its standard deviation was approximately 0.026--0.033, compared with one for standardized performance. The penalty could rearrange close competitors while leaving broad performance differences dominant. A coefficient of one therefore did not mean that congestion and individual performance varied on comparable scales. [15]
+The penalty's numerical scale helped explain the small initial changes. At $\lambda = 1$, its standard deviation was approximately 0.026--0.033, compared with one for standardized performance. The penalty could rearrange close competitors while leaving broad performance differences dominant. A coefficient of one therefore did not mean that congestion and individual performance varied on comparable scales. [15]
 
 ### 4.7.3 Penalty strength and the visibility of the tail
 
-Holding ρ = 1 and selection near 10% fixed, the next comparison varied λ across 0, 1, 2, and 4 on the same saved assignments. At λ = 4, equal-width peer-quality bins displayed a rise and fall in all three seasons, while quantile-bin rates continued to rise. The two displays summarized the same selected outcomes. Quantile bins combined a broad upper-peer-quality region, whereas equal-width bins separated the extreme tail. [16]
+Holding $\rho=1$ and selection near 10% fixed, the next comparison varied $\lambda$ across 0, 1, 2, and 4 on the same saved assignments. At $\lambda = 4$, equal-width peer-quality bins displayed a rise and fall in all three seasons, while quantile-bin rates continued to rise. The two displays summarized the same selected outcomes. Quantile bins combined a broad upper-peer-quality region, whereas equal-width bins separated the extreme tail. [16]
 
-In 2015 at λ = 4, equal-width bins 12--15 had selection rates of approximately 32.3%, 31.8%, 27.8%, and 11.9%. Their mean populations per assignment fell from about 95 to 32, 11, and 2.4. The last bin averaged only 0.26 players per assignment. The upper-tail decline was therefore not solely the last bar, but its outermost estimates were supported by few observations. Figure 4.1 retains the population-count row so that the visual pattern can be judged alongside its support.
+In 2015 at $\lambda = 4$, equal-width bins 12--15 had selection rates of approximately 32.3%, 31.8%, 27.8%, and 11.9%. Their mean populations per assignment fell from about 95 to 32, 11, and 2.4. The last bin averaged only 0.26 players per assignment. The upper-tail decline was therefore not solely the last bar, but its outermost estimates were supported by few observations. Figure 4.1 retains the population-count row so that the visual pattern can be judged alongside its support.
 
 This comparison also explains why binning is part of the scientific interpretation. An absence of a visible downturn in a quantile display does not prove an absence of local tail declines. Conversely, a striking sparse bar does not establish a stable downturn. Empty environments must remain missing support, not be coded as zero success.
 
 ![Figure 4.1](Model_Chapter_assets/media/image1.png)
 
-Figure 4.1 Penalty strength and binning in the 2015 simulation. Rows compare λ = 0, 1, 2, and 4; the final row shows mean player counts per assignment. Assignment preference is ρ = 1 and global selection is near 10%. Equal-width bins are at left and quantile bins at right. The horizontal variable is leave-one-out mean standardized teammate performance. Rates pool selected and eligible counts across 100 assignments. These are simulated outcomes; sparse extreme bins limit interpretation. Source [16].
+Figure 4.1 Penalty strength and binning in the 2015 simulation. Rows compare $\lambda$ = 0, 1, 2, and 4; the final row shows mean player counts per assignment. Assignment preference is $\rho=1$ and global selection is near 10%. Equal-width bins are at left and quantile bins at right. The horizontal variable is leave-one-out mean standardized teammate performance. Rates pool selected and eligible counts across 100 assignments. These are simulated outcomes; sparse extreme bins limit interpretation. Source [16].
 
 ### 4.7.4 Assignment preference and scarcity
 
-A later comparison held λ = 4 fixed and compared ρ = 1 with ρ = 0.05 at selection fractions of 50% and 1%. It reused the same saved paired assignments rather than generating new teams for each scarcity level. Lower preference substantially flattened the relative selection profile and narrowed the occupied range of peer environments. The contrast persisted at 1% selection. Figure 4.2 expresses each bin's rate relative to the achieved overall selection rate, making small absolute probabilities visible on a comparable relative scale. [17]
+A later comparison held $\lambda = 4$ fixed and compared $\rho=1$ with $\rho=0.05$ at selection fractions of 50% and 1%. It reused the same saved paired assignments rather than generating new teams for each scarcity level. Lower preference substantially flattened the relative selection profile and narrowed the occupied range of peer environments. The contrast persisted at 1% selection. Figure 4.2 expresses each bin's rate relative to the achieved overall selection rate, making small absolute probabilities visible on a comparable relative scale. [17]
 
 Winner identities supplied a complementary measure. In 2015, changing preference replaced an average of 57.81 of 2,134 winners at 50% selection, or 2.71%. At 1%, it replaced 10.53 of 43 winners, or 24.49%. Across the three seasons the corresponding changed shares were approximately 2.5--2.7% and 24--27%. Scarcity reduced the absolute number of changed winners while increasing their share of the selected group in this comparison.
 
@@ -367,107 +367,142 @@ These findings do not support the simple hypothesis that extreme scarcity necess
 
 ![Figure 4.2](Model_Chapter_assets/media/image2.png)
 
-Figure 4.2 Assignment preference under two levels of scarcity in the 2015 simulation. The upper two rows show selection near 50%; the lower two show selection near 1%. Red indicates ρ = 1 and teal ρ = 0.05. The penalty is λ = 4 throughout. The vertical scale is each bin's selection rate divided by the achieved overall rate. Crosses indicate unoccupied environments. Quantile groups refer to ranks within their respective assignment distributions, not identical individuals or identical numerical environments. Source [17].
+Figure 4.2 Assignment preference under two levels of scarcity in the 2015 simulation. The upper two rows show selection near 50%; the lower two show selection near 1%. Red indicates $\rho=1$ and teal $\rho=0.05$. The penalty is $\lambda = 4$ throughout. The vertical scale is each bin's selection rate divided by the achieved overall rate. Crosses indicate unoccupied environments. Quantile groups refer to ranks within their respective assignment distributions, not identical individuals or identical numerical environments. Source [17].
 
 ### 4.7.5 What remains to be established
 
 The completed work demonstrates that congestion can change winners without preferential assignment and that assignment preference can shape both outcome profiles and the identities selected. It also demonstrates sensitivity to penalty strength, scarcity, and how the peer-quality axis is summarized. These are conditional findings from declared configurations. They do not prove a universal necessity theorem for assortativity or guarantee a downturn within every high-performance band.
 
-The analytic discussion in Section 4.5 explains the roles of γ, θ, λ, $K/N$, and $t_{SELECT}$. It should not be mistaken for a completed systematic simulation sweep of every parameter. In particular, a controlled comparison of the intended stochastic rule, fixed own-performance bands, and the relevant parameter interactions remains a separate evidentiary task. Any new experiment should address a stated claim that the current mathematics and saved results cannot yet support.
+The analytic discussion in Section 4.5 explains the roles of $\gamma$, $\theta$, $\lambda$, $K/N$, and $t_{sel}$. It should not be mistaken for a completed systematic simulation sweep of every parameter. In particular, a controlled comparison of the intended stochastic rule, fixed own-performance bands, and the relevant parameter interactions remains a separate evidentiary task. Any new experiment should address a stated claim that the current mathematics and saved results cannot yet support.
 
 ## 4.8 The bridge to empirical fitting
 
-The mechanism experiments ask what the specified model can produce. Empirical fitting asks whether a probability model accounts for outcomes on observed populations, what its parameters mean in that setting, and whether those estimates support useful empirical comparisons. Observed rosters allow the fitting stage to begin without generating teams through ASSIGN. This distinction is essential: evaluating parameters on fixed memberships does not jointly estimate the process that created those memberships.
+The simulations described above begin with specified parameter values and examine the outcomes they produce. Empirical fitting approaches the problem from the other direction: given observed performance, group memberships, and outcomes, which parameter values best account for those observations? We use maximum likelihood estimation (MLE) to address this question. The method selects parameter values that make the observed outcomes most probable under a specified probability model.
 
-The completed historical fitting procedure used a season-wise softmax probability specification with an independent Bernoulli working likelihood. It was different from the exact-K without-replacement rule in Section 4.3. In the notation used here, its board logit and probability were
+The completed fitting work used observed basketball rosters, so group membership was an input rather than something generated through the assignment mechanism. It also used a different outcome model from the sequential, exact-$K$ selection rule introduced in Section 4.3. We describe that fitted specification explicitly because its parameter estimates must be interpreted in relation to the probability model that produced them.
 
-$$
-\eta_{is} = \frac{A_{is}}{t_{MLE}} - \lambda_{MLE}C_{g_{s}(i),s}\left( \gamma,\theta_{s} \right)
-$$
+Each observation describes a player in a particular season. Let $s$ index seasons and let $\mathcal I_s$ denote the set of players included in season $s$. For player $i$, $A_{is}$ is performance measured as points per minute and standardized within that season. The group identifier $g_s(i)$ specifies the player’s team in that season. The binary outcome $Y_{is}$ equals one if the player was eventually drafted and zero otherwise. Consequently, a player observed in several seasons can contribute several observations carrying the same eventual-draft outcome; $Y_{is}$ does not indicate that the player was drafted during season $s$.
 
-$$
-p_{is} = \frac{\exp\left( \eta_{is} \right)}{\sum_{h \in \mathcal{I}_{s}}^{}{\exp\left( \eta_{hs} \right)}},\sum_{i \in \mathcal{I}_{s}}^{}p_{is} = 1
-$$
+Congestion was calculated from each observed team roster using the full-group mean of competitive relevance defined in Section 4.4.3. We write $C_{g_s(i),s}(\gamma,\theta_s)$ for the congestion assigned to player $i$ in season $s$. The parameter $\gamma$ controls how sharply competitive relevance increases around the threshold, and $\theta_s$ is the threshold used for that season. The thresholds were calculated before optimization and then held fixed; congestion was recalculated as the fitted value of $\gamma$ changed.
 
-The objective was the Bernoulli log-likelihood
+The fitting procedure combines performance and congestion into an intermediate comparison quantity, denoted by $\eta_{is}$. Two additional positive parameters govern this calculation. The parameter $t_{\mathrm{MLE}}$ divides the performance term, controlling how strongly performance differences enter the comparison. The coefficient $\lambda_{\mathrm{MLE}}$ controls the congestion penalty. The subscript identifies these as parameters of the fitting specification, whose numerical values are not assumed to equal those of the selection model. The fitted comparison quantity is
 
 $$
-\mathcal{l}_{B}(\lambda_{MLE},\gamma,t_{MLE}) = \sum_{s}^{}{\sum_{i \in \mathcal{I}_{s}}^{}\lbrack}Y_{is}\log p_{is} + (1 - Y_{is})\log(1 - p_{is})\rbrack.
+\eta_{is}=\frac{A_{is}}{t_{\mathrm{MLE}}}-\lambda_{\mathrm{MLE}}C_{g_s(i),s}(\gamma,\theta_s).
 $$
 
-The later joint optimization estimated γ, $\lambda_{MLE}$, and $t_{MLE}$. The season thresholds $\theta_{s}$ were constructed before optimization, and assignment preference ρ was outside this outcome likelihood. The saved joint estimates were approximately 19.5723, 1.3024, and 1.0699, respectively. Those are estimates from the historical fitting specification, not fitted parameters of the chapter's exact-K stochastic selection model. Appendix 4A preserves the sample description, exact values, equations, and source record. [4--9]
+The procedure then converts these quantities into positive weights by exponentiating them. Within each season, it divides each player’s weight by the sum of all included players’ weights. This normalization is called a softmax. Writing $p_{is}$ for the resulting modeled probability of a positive outcome gives
+
+$$
+p_{is}=\frac{\exp(\eta_{is})}{\sum_{h\in\mathcal I_s}\exp(\eta_{hs})},
+\qquad
+\sum_{i\in\mathcal I_s}p_{is}=1.
+$$
+
+To evaluate the parameters, the fitting procedure treats each observed outcome as a Bernoulli observation: a positive outcome contributes probability $p_{is}$, while a negative outcome contributes probability $1-p_{is}$. Its working likelihood multiplies these contributions across all player-season observations. Taking logarithms converts that product into a sum. Denoting the Bernoulli log-likelihood by $\ell_B$, the objective is
+
+$$
+\ell_B(\lambda_{\mathrm{MLE}},\gamma,t_{\mathrm{MLE}})=
+\sum_s\sum_{i\in\mathcal I_s}\left[
+    Y_{is}\log p_{is}+(1-Y_{is})\log(1-p_{is})
+    \right].
+$$
+
+The joint optimization estimated $\gamma$, $\lambda_{\mathrm{MLE}}$, and $t_{\mathrm{MLE}}$ by maximizing this objective. Assignment preference $\rho$ was outside the outcome fit because observed team memberships were held fixed. The saved estimates were approximately $\widehat{\gamma}=19.5723$, $\widehat{\lambda}*{\mathrm{MLE}}=1.3024$, and $\widehat{t}*{\mathrm{MLE}}=1.0699$. These estimates belong to the Bernoulli fitting specification described here. They were not obtained by fitting the exact-$K$ selection model. Appendix 4A provides the sample description, numerical implementation details, and supporting source record. [4–9]
 
 Three interpretation issues are consequential. First, the probabilities sum to one within a season, so the working Bernoulli model implies one expected positive outcome per season before numerical clipping. Second, the historical observations are player-season rows with eventual-draft labels, so a person's positive outcome can occur on multiple rows; these are not independent annual selection events merely because the likelihood multiplies their contributions. Third, the threshold used observed positive-label counts in preprocessing. These issues must be addressed before the fitted probabilities are treated as calibrated individual advancement probabilities or the parameters are interpreted as those of an annual fixed-capacity process.
 
-There is also a coefficient-scale distinction: dividing A alone by $t_{MLE}$ is not the same as dividing A − λC by temperature while retaining the same numerical λ. An algebraic reparameterization can match logits for fixed congestion, but it does not turn the Bernoulli likelihood into the likelihood of exact-K selection. No completed exact-K refit has been established in the verified record. [11, 12]
+There is also a coefficient-scale distinction: dividing $A$ alone by $t_{MLE}$ is not the same as dividing $A − \lambda C$ by temperature while retaining the same numerical $\lambda$. An algebraic reparameterization can match logits for fixed congestion, but it does not turn the Bernoulli likelihood into the likelihood of exact-$K$ selection. No completed exact-$K$ refit has been established in the verified record. [11, 12]
 
 The model chapter therefore establishes a mechanism, its mathematical consequences, and the behavior demonstrated by completed simulations. The subsequent empirical treatment must align the eligible population, outcome timing, congestion definition, and selection likelihood before drawing substantive conclusions from fitted parameters. The detailed fitting record is retained below to make that bridge explicit and auditable, while keeping the chapter's main argument centered on competitive congestion and advancement.
 
 ## Appendix 4A Technical qualifications and the historical fitting record
 
+
+
 ### 4A.1 The intended stochastic rule and legacy software
 
-The mathematical rule permits any finite real score. Negative scores still yield positive exponential weights, and adding the same constant to every score leaves every draw probability unchanged. This matters when comparing the definition with legacy code. The shared selection helper first replaces negative scores by zero and sets the draw count to the smaller of $K$ and the number of strictly positive scores. If no score is positive, it returns no selections. It also uses deterministic fallbacks at very small temperatures or when the numerical weights collapse. Consequently, some historical runs through that helper need not follow the unrestricted equation above or return exactly $K$ winners. The cap does not mean that every zero-clipped candidate is excluded: when Gibbs sampling occurs, such candidates receive positive exponential weights. [3]
+The stochastic selection rule in Section 4.3 accepts any finite score, including negative scores, and selects exactly $K$ individuals. A negative score still produces a positive exponential weight. Adding the same constant to every score leaves the selection probabilities unchanged because it preserves all score differences.
 
-The equation above defines the intended model. Establishing which completed runs implement it requires identifying the code version and selection path used in each run, checking whether clipping, capping, or numerical fallbacks were active, and determining whether any reported result changes under an implementation that preserves the stated rule. That verification remains open. It should be completed before describing all legacy stochastic results as realizations of this exact model.
+The selection function used in some earlier simulations includes additional operations. It first replaces negative scores with zero. It then limits the number selected to the smaller of $K$ and the number of strictly positive scores; if no score is positive, it selects nobody. The function also substitutes deterministic selection when the temperature is very small or when the numerical weights cannot support the stochastic calculation. These operations mean that runs using this function may differ from the mathematical rule in Section 4.3. In particular, they may select fewer than $K$ individuals. Replacing negative scores with zero can also change relative selection probabilities by erasing differences among those scores. [3]
 
-### 4A.2 Observational units and the fitted probability model
+The limit on the number selected does not, by itself, exclude every person whose score was replaced with zero. When the function performs stochastic sampling, those individuals still receive positive exponential weights and may be selected.
+
+These differences matter when interpreting figures and results from earlier simulations. Before presenting a historical result as an example of the rule in Section 4.3, we must identify the selection function and code version used, determine whether any of these additional operations affected the run, and check whether implementing the stated rule changes the result. That verification remains open for the earlier stochastic simulations.
+
+### 4A.2 Differences between the stated selection rule and earlier implementations
 
 For season $s$, let $\mathcal{I}_{s}$ denote the player-season observations entering the likelihood. The measured performance quantity $A_{is}$ was points per minute standardized within season by the analysis pipeline. The binary outcome $Y_{is}$ indicated whether the player was ever drafted. The fitting panel retained all eligible player-season observations rather than restricting outcomes to one final-season observation per athlete. Accordingly, the same eventual draft outcome could appear on several rows belonging to one player. These are the observational units of the historical fit; they should not be described as independent annual draft decisions or as distinct draft selections merely because the likelihood multiplies contributions across rows. A revision intended to model annual selection would need to establish a corresponding eligible population and outcome timing. [5]
 
-Congestion was computed on the observed team-season rosters using the full-group definition introduced in Section 4.4.3. With $g_{s}(i)$ denoting the group containing individual $i$ in season $s$, the fitted congestion term was
+Congestion was computed on the observed team-season rosters using the full-group definition introduced in Section 4.4.3. Let $g_s(i)$ identify individual $i$’s group in season $s$, and let $n_{js}$ be the number of individuals included in group $j$ for that season.  Thus, the fitted congestion term was
 
-$$C_{js}\left( \gamma,\theta_{s} \right) = \frac{1}{n_{js}}\sum_{h:g_{s}(h) = j}^{}\sigma\left( \gamma\left( A_{hs} - \theta_{s} \right) \right),\sigma(x) = \frac{1}{1 + \exp( - x)}$$
+$$
+C_{js}\left( \gamma,\theta_{s} \right) = \frac{1}{n_{js}}\sum_{h:g_{s}(h) = j}^{}\sigma\left( \gamma\left( A_{hs} - \theta_{s} \right) \right),\sigma(x) = \frac{1}{1 + \exp( - x)}
+$$
 
-The mean included the focal player as well as the other retained members of the group. In the code this quantity was stored as $\mathtt{pool\_ c\_ smooth\_ team}$ and was often denoted $L^{C}$ in development documents. Here $C_{js}$ denotes the shared congestion of group $j$ in season $s$; the effective congestion applied to individual $i$ is therefore $C_{g_s(i),s}$. This congestion quantity differs from the leave-one-out peer-quality mean used on some HERO horizontal axes. A plot conditioned on peer quality and a likelihood using congestion can coexist, but the two quantities must remain identified separately when interpreting an empirical comparison. [6]
+The mean included the focal player as well as the other retained members of the group. In the code this quantity was stored as $\mathtt{pool c smooth team}$ and was often denoted $L^{C}$ in development documents. Here $C_{js}$ denotes the shared congestion of group $j$ in season $s$; the effective congestion applied to individual $i$ is therefore $C_{g_s(i),s}$. This congestion quantity differs from the leave-one-out peer-quality mean used on some HERO horizontal axes. A plot conditioned on peer quality and a likelihood using congestion can coexist, but the two quantities must remain identified separately when interpreting an empirical comparison. [6]
 
 The intermediate quantity supplied to the probability calculation, called the board logit in the implementation, was
 
-$$\eta_{is} = \frac{A_{is}}{t_{MLE}} - \lambda_{MLE}C_{g_{s}(i),s}\left( \gamma,\theta_{s} \right)$$
+$$
+\eta_{is} = \frac{A_{is}}{t_{MLE}} - \lambda_{MLE}C_{g_{s}(i),s}\left( \gamma,\theta_{s} \right)
+$$
 
 The script converted these quantities to probabilities by applying a softmax function within each season:
 
-$$p_{is} = \frac{\exp\left( \eta_{is} \right)}{\sum_{h \in \mathcal{I}_{s}}^{}{\exp\left( \eta_{hs} \right)}},\sum_{i \in \mathcal{I}_{s}}^{}p_{is} = 1$$
+$$
+p_{is} = \frac{\exp\left( \eta_{is} \right)}{\sum_{h \in \mathcal{I}_{s}}^{}{\exp\left( \eta_{hs} \right)}},\sum_{i \in \mathcal{I}_{s}}^{}p_{is} = 1
+$$
 
 The softmax specifies the probabilities; the Bernoulli model specifies how those probabilities contribute to the likelihood of the observed binary outcomes. The historical likelihood and log-likelihood were
 
-$$\mathcal{L}_{B}(\lambda_{MLE},\gamma,t_{MLE}) = \prod_{s}^{}{\prod_{i \in \mathcal{I}_{s}}^{}p_{is}^{Y_{is}}}(1 - p_{is})^{1 - Y_{is}},$$
+$$
+\mathcal{L}_{B}(\lambda_{MLE},\gamma,t_{MLE}) = \prod_{s}^{}{\prod_{i \in \mathcal{I}_{s}}^{}p_{is}^{Y_{is}}}(1 - p_{is})^{1 - Y_{is}},
+$$
 
-$$\mathcal{l}_{B}(\lambda_{MLE},\gamma,t_{MLE}) = \sum_{s}^{}{\sum_{i \in \mathcal{I}_{s}}^{}\lbrack}Y_{is}\log p_{is} + (1 - Y_{is})\log(1 - p_{is})\rbrack.$$
+$$
+\mathcal{l}_{B}(\lambda_{MLE},\gamma,t_{MLE}) = \sum_{s}^{}{\sum_{i \in \mathcal{I}_{s}}^{}\lbrack}Y_{is}\log p_{is} + (1 - Y_{is})\log(1 - p_{is})\rbrack.
+$$
 
 For numerical evaluation, the implementation clipped each probability to the interval $\left\lbrack 10^{- 15},1 - 10^{- 15} \right\rbrack$ before taking logarithms. It minimized the negative log-likelihood using L-BFGS-B over the logarithms of the positive parameters $\lambda_{MLE}$, $\gamma$, and $t_{MLE}$. Congestion was recomputed as $\gamma$ changed during joint optimization. A separate option held $\gamma$ fixed and optimized the other two parameters. Reported overlap between the highest-probability observations and positive outcomes was a diagnostic, not the objective being optimized. [4]
 
 ### 4A.3 Normalization and threshold construction
 
-The season normalization has a consequential implication. Before numerical clipping, the working independent Bernoulli model, conditional on the thresholds treated as fixed during fitting, satisfies
+We can ask how many positive outcomes this probability model expects in a season. Write $E[\cdot]$ for an expected value under the model, and let $\mathbf A$ and $\mathbf g$ denote the observed performance values and group memberships. Before numerical clipping, and conditional on these inputs and the fixed season threshold $\theta_{s}$, the working Bernoulli model satisfies
 
-$$E\left\lbrack \sum_{i \in \mathcal{I}_{s}}^{}Y_{is}|\mathbf{A},\mathbf{g},\theta_{s} \right\rbrack = \sum_{i \in \mathcal{I}_{s}}^{}p_{is} = 1$$
+$$
+E\left\lbrack \sum_{i \in \mathcal{I}_{s}}^{}Y_{is}|\mathbf{A},\mathbf{g},\theta_{s} \right\rbrack = \sum_{i \in \mathcal{I}_{s}}^{}p_{is} = 1
+$$
 
 The code did not multiply the probabilities by the observed number of positive outcomes, fit a season intercept to that count, or condition the likelihood on selecting exactly $K_{s}$ individuals. This is the historical working Bernoulli specification, but its normalization does not match a season containing many observed positive outcomes. Consequently, the saved probabilities should not be presented as validated individual draft probabilities. What remains to be established is whether this objective is defensible as a working calibration criterion for the intended scientific comparison, or whether a different outcome likelihood and observational unit are required. Neither a satisfactory ranking diagnostic nor a successful optimizer convergence message resolves that question.
 
-The viability threshold $\theta_{s}$ was fixed during optimization, although its value was calculated separately for each season. The preprocessing routine counted positive draft labels among that season's rows with observed performance, used $K_{s}^{Y} = \max\left( 1,\sum_{i}^{}Y_{is} \right)$, and set
+The viability threshold $\theta_s$ was calculated separately for each season and then held fixed during optimization. It was chosen from the season’s observed performance distribution. Let $Q_q$ denote its empirical $q$-quantile—the performance value marking approximately the fraction $q$ of observations at or below it. The preprocessing routine counted positive draft labels among that season’s observations with measured performance and defined $K_s^Y=\max(1,\sum_i Y_{is})$. With $N_s$ denoting the number of observations in that preprocessing population, the threshold was set to
 
-$$\theta_{s} = Q_{1 - K_{s}^{Y}/N_{s}}\left( \left\{ A_{is} \right\} \right)$$
+$$
+\theta_{s} = Q_{1 - K_{s}^{Y}/N_{s}}\left( \left\{ A_{is} \right\} \right)
+$$
 
-where $N_{s}$ and the empirical quantile refer to that preprocessing population. The superscript $Y$ distinguishes this count of positive labels from a separately established institutional capacity. Because the labels describe eventual drafting on player-season rows, their season total is not automatically the number drafted in that calendar year. Thus, the outcome count affected the fit indirectly through the construction of congestion, even though the Bernoulli likelihood imposed no fixed-capacity constraint. The interpretation and timing of this threshold must be revisited if the outcome population is changed. [7]
+The superscript $Y$ distinguishes this count of positive labels from a separately established institutional capacity. Because the labels describe eventual drafting on player-season rows, their season total is not automatically the number drafted in that calendar year. Thus, the outcome count affected the fit indirectly through the construction of congestion, even though the Bernoulli likelihood imposed no fixed-capacity constraint. The interpretation and timing of this threshold must be revisited if the outcome population is changed. [7]
 
-Assignment preference ρ was outside the outcome likelihood because team membership was observed and held fixed. A separate calibration compared simulated and empirical values of the sorting statistic $H_{sort}$. The saved longitudinal result selected $\rho = 0$, at the lower boundary of the assignment calibration. The empirical mean sorting statistic remained below the simulated mean at that boundary, so this result does not establish that actual team assignment was random. It describes the closest setting reported for that calibration. The Gibbs selection temperature was also treated separately: it was swept in simulation, with a replay starting value of one, rather than jointly estimated as part of an exact-$K$ likelihood. [1, 8]
+Assignment preference $\rho$ was outside the outcome likelihood because team membership was observed and held fixed. A separate calibration compared simulated and empirical values of the sorting statistic $H_{sort}$. The saved longitudinal result selected $\rho = 0$, at the lower boundary of the assignment calibration. The empirical mean sorting statistic remained below the simulated mean at that boundary, so this result does not establish that actual team assignment was random. It describes the closest setting reported for that calibration. The Gibbs selection temperature was also treated separately: it was swept in simulation, with a replay starting value of one, rather than jointly estimated as part of an exact-$K$ likelihood. [1, 8]
 
 ### 4A.4 Saved estimates and parameter transfer
 
-The joint fitting artifact saved on 28 August 2026 reports
+A hat denotes an estimated parameter value; for example, $\widehat{\gamma}$ is the estimate of $\gamma$ obtained by fitting the model.  The joint fitting artifact saved on 28 August 2026 reports
 
-$\widehat{\gamma} = 19.57233208$, ${\widehat{\lambda}}_{MLE} = 1.30243058$, ${\widehat{t}}_{MLE} = 1.06989673$,
+$\widehat{\gamma} = 19.57233208$, ${\widehat{\lambda}}*{MLE} = 1.30243058$, ${\widehat{t}}*{MLE} = 1.06989673$,
 
 with log-likelihood -8865.70116079, $46,306$ player-season observations, and $1,133$ positive outcome flags across 11 season batches. The optimizer reported convergence. These are historical point estimates, not evidence by themselves of precise identification, causal effects, or a validated generative selection model. [9]
 
-The run's analysis-window documentation is internally inconsistent. Its filename, saved metadata, and campaign description identify 2009--2021. However, the inspected panel loader constructs a 2011--2021 panel before applying the requested window, which is consistent with the saved total of 11 seasons. We therefore report both the recorded 2009--2021 run label and the implemented 2011--2021 restriction rather than asserting that the fit contains all thirteen seasons. Confirmation of the original run's input seasons and code version remains necessary to finalize its sample description. An earlier 2013--2021 fit, with $\gamma = 18$ fixed, instead reported ${\widehat{\lambda}}_{MLE} = 2.57150065$ and ${\widehat{t}}_{MLE} = 1.06556159$. Those estimates belong to a different fitting specification and should not be merged with the later joint estimates. [5, 9, 10]
+The run's analysis-window documentation is internally inconsistent. Its filename, saved metadata, and campaign description identify 2009--2021. However, the inspected panel loader constructs a 2011--2021 panel before applying the requested window, which is consistent with the saved total of 11 seasons. We therefore report both the recorded 2009--2021 run label and the implemented 2011--2021 restriction rather than asserting that the fit contains all thirteen seasons. Confirmation of the original run's input seasons and code version remains necessary to finalize its sample description. An earlier 2013--2021 fit, with $\gamma = 18$ fixed, instead reported ${\widehat{\lambda}}*{MLE} = 2.57150065$ and ${\widehat{t}}*{MLE} = 1.06556159$. Those estimates belong to a different fitting specification and should not be merged with the later joint estimates. [5, 9, 10]
 
 There is a further distinction between the scale of the fitted logit and the score used in the generative model. In the fitting code, temperature divides measured performance alone; in stochastic SELECT it divides the entire score. Algebraically,
 
-$$\frac{A_{i}}{t_{MLE}} - \lambda_{MLE}C_{g(i)} = \frac{A_{i} - t_{MLE}\lambda_{MLE}C_{g(i)}}{t_{MLE}}$$
+$$
+\frac{A_{i}}{t_{MLE}} - \lambda_{MLE}C_{g(i)} = \frac{A_{i} - t_{MLE}\lambda_{MLE}C_{g(i)}}{t_{MLE}}
+$$
 
-For fixed congestion values, reproducing those same logits with a score of the chapter's form would require a score coefficient $\lambda = t_{MLE}\lambda_{MLE}$ and, for the Gibbs weights, $t_{SELECT} = t_{MLE}$. This identity clarifies the change of parameter scale; it is not a historical decision to equate the two temperatures or evidence that their likelihoods are equivalent. Even ranking by the fitted probabilities need not agree with ranking by $A_{i} - \lambda_{MLE}C_{g(i)}$ when the numerical penalty coefficient is transferred unchanged. [4, 11]
+For fixed congestion values, reproducing those same logits with a score of the chapter's form would require a score coefficient $\lambda = t_{MLE}\lambda_{MLE}$ and, for the Gibbs weights, $t_{sel} = t_{MLE}$. This identity clarifies the change of parameter scale; it is not a historical decision to equate the two temperatures or evidence that their likelihoods are equivalent. Even ranking by the fitted probabilities need not agree with ranking by $A_{i} - \lambda_{MLE}C_{g(i)}$ when the numerical penalty coefficient is transferred unchanged. [4, 11]
 
 An exact-$K$ fit would evaluate the probability of the observed selected set under the without-replacement process. If selection order is unobserved, that probability sums over the possible orders of the selected individuals. It is not the product of the independent Bernoulli contributions used above. Development documents considered such a likelihood, but explicitly retained Bernoulli estimation for the completed fitting procedure. No completed exact-$K$ refit has been established in the verified record. [2, 12]
 
@@ -475,7 +510,7 @@ The empirical bridge consequently remains a separate methodological task. Before
 
 ### 4A.5 Alternative congestion specifications
 
-After introducing the two mean-performance benchmarks, the main chapter uses refined full-group congestion $C_i=C_{g(i)}$, a common threshold, raw congestion, and global selection. A leave-one-out version changes the congestion quantity assigned to each individual. A sum in place of the mean changes the role of group size. Scaling congestion changes the units of λ. Moving the threshold with K couples competitive relevance to the outcome capacity, whereas holding it fixed permits those quantities to be varied independently. These choices require explicit identification wherever their results are compared.
+After introducing the two mean-performance benchmarks, the main chapter uses refined full-group congestion $C_i=C_{g(i)}$, a common threshold, raw congestion, and global selection. A leave-one-out version changes the congestion quantity assigned to each individual. A sum in place of the mean changes the role of group size. Scaling congestion changes the units of $\lambda$. Moving the threshold with $K$ couples competitive relevance to the outcome capacity, whereas holding it fixed permits those quantities to be varied independently. These choices require explicit identification wherever their results are compared.
 
 Earlier implementations explored some of these alternatives. Their existence does not make them interchangeable versions of a single numerical result. The completed experiments in Section 4.7 used the raw full-group mean with a fixed percentile threshold, while the historical fit used season-specific thresholds constructed from outcome counts. The specification, input population, and selection rule must accompany each result; development chronology alone cannot establish equivalence.
 
@@ -493,7 +528,7 @@ The following notes identify the repository sources supporting the implementatio
 
 [5] [ASSORT_20260927_SCOUT_response_selection_population_and_reigning_alignment.md](file:////Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00-%20Dissertation/0-Next_Chapter/Code_and_Data/New%20SQL%20and%20PY%20Code/Cursor%20Workspace%20PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/docs/source_review/ASSORT_20260927_SCOUT_response_selection_population_and_reigning_alignment.md), lines 94--115, documents all-player-season rows and repeated ever-drafted labels. The loader is [sports/scripts/grandchild_selection_inverted_u_diagnostic.py](file:///Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00-%20Dissertation/0-Next_Chapter/Code_and_Data/New%20SQL%20and%20PY%20Code/Cursor%20Workspace%20PDE/sports/scripts/grandchild_selection_inverted_u_diagnostic.py), lines 89--122. It sets within-season standardized points per minute and fixes the initial panel bounds from FULL_PANEL_SEASON_MIN = 2011 and FULL_PANEL_SEASON_MAX = 2021 at lines 46--47. The later requested-window filter cannot restore excluded 2009--2010 rows. Historical input-season provenance remains to be confirmed rather than inferred solely from a filename.
 
-[6] [sports/tier1_pool_assignment.py](file:///Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00-%20Dissertation/0-Next_Chapter/Code_and_Data/New%20SQL%20and%20PY%20Code/Cursor%20Workspace%20PDE/sports/tier1_pool_assignment.py), lines 772--781 and 870--912, implements logistic viability and full-team mean congestion. It clips the logistic argument to \[-500, 500\] for numerical stability. The distinction from the leave-one-out HERO axis also appears in [MBB_empirical_roster_select_replay.md](file:///Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00-%20Dissertation/0-Next_Chapter/Code_and_Data/New%20SQL%20and%20PY%20Code/Cursor%20Workspace%20PDE/3-Master_Plan/re_entry/HEROs_and_PASSes/MBB_empirical_roster_select_replay.md), lines 464--471.
+[6] [sports/tier1_pool_assignment.py](file:///Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00-%20Dissertation/0-Next_Chapter/Code_and_Data/New%20SQL%20and%20PY%20Code/Cursor%20Workspace%20PDE/sports/tier1_pool_assignment.py), lines 772--781 and 870--912, implements logistic viability and full-team mean congestion. It clips the logistic argument to -500, 500 for numerical stability. The distinction from the leave-one-out HERO axis also appears in [MBB_empirical_roster_select_replay.md](file:///Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00-%20Dissertation/0-Next_Chapter/Code_and_Data/New%20SQL%20and%20PY%20Code/Cursor%20Workspace%20PDE/3-Master_Plan/re_entry/HEROs_and_PASSes/MBB_empirical_roster_select_replay.md), lines 464--471.
 
 [7] [sports/scripts/grandchild_selection_inverted_u_diagnostic.py](file:///Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00-%20Dissertation/0-Next_Chapter/Code_and_Data/New%20SQL%20and%20PY%20Code/Cursor%20Workspace%20PDE/sports/scripts/grandchild_selection_inverted_u_diagnostic.py), lines 139--158, specifies the season threshold, positive-outcome count, and max(1, count) guard. The MLE script invokes this routine before attaching congestion. This is a preprocessing rule, not a free threshold estimated by the optimizer.
 
@@ -503,9 +538,9 @@ The following notes identify the repository sources supporting the implementatio
 
 [10] [PD21_draft_bernoulli_mle_2013_2021.json](file:///Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00-%20Dissertation/0-Next_Chapter/Code_and_Data/New%20SQL%20and%20PY%20Code/Cursor%20Workspace%20PDE/3-Master_Plan/re_entry/HEROs_and_PASSes/pd21_mle/PD21_draft_bernoulli_mle_2013_2021.json), lines 2--21, records the fixed-gamma fit: gamma = 18, lambda = 2.571500648851351, t = 1.065561586816066, 38,123 rows, 882 positive flags, and nine seasons. The older [PD21_draft_bernoulli_mle_2011_2021.json](file:///Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00-%20Dissertation/0-Next_Chapter/Code_and_Data/New%20SQL%20and%20PY%20Code/Cursor%20Workspace%20PDE/3-Master_Plan/re_entry/HEROs_and_PASSes/pd21_mle/PD21_draft_bernoulli_mle_2011_2021.json) records a grid-best point with gamma = 10 fixed, lambda = 2, t = 1, and bfgs = null; it must not be substituted for the later joint estimate.
 
-[11] [MBB_empirical_roster_select_replay.md](file:///Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00-%20Dissertation/0-Next_Chapter/Code_and_Data/New%20SQL%20and%20PY%20Code/Cursor%20Workspace%20PDE/3-Master_Plan/re_entry/HEROs_and_PASSes/MBB_empirical_roster_select_replay.md), lines 374--387, explicitly distinguishes A/t - lambda L_C from the Gibbs weight exp(S/t). The coefficient identity in the chapter explains that mismatch algebraically; no equivalence of Bernoulli and exact-K likelihoods is asserted.
+[11] [MBB_empirical_roster_select_replay.md](file:///Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00-%20Dissertation/0-Next_Chapter/Code_and_Data/New%20SQL%20and%20PY%20Code/Cursor%20Workspace%20PDE/3-Master_Plan/re_entry/HEROs_and_PASSes/MBB_empirical_roster_select_replay.md), lines 374--387, explicitly distinguishes A/t - lambda L_C from the Gibbs weight exp(S/t). The coefficient identity in the chapter explains that mismatch algebraically; no equivalence of Bernoulli and exact-$K$ likelihoods is asserted.
 
-[12] [MLE_basics.md](file:///Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00-%20Dissertation/0-Next_Chapter/Code_and_Data/New%20SQL%20and%20PY%20Code/Cursor%20Workspace%20PDE/3-Master_Plan/MLE/MLE_basics.md), lines 208, 244--250, and 420--426, states that empirical fitting ended with the Bernoulli optimization, with no Phase B re-estimation, while describing exact-K estimation as an alternative. The later replay lock in note [1] kept that fitting procedure unchanged.
+[12] [MLE_basics.md](file:///Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00-%20Dissertation/0-Next_Chapter/Code_and_Data/New%20SQL%20and%20PY%20Code/Cursor%20Workspace%20PDE/3-Master_Plan/MLE/MLE_basics.md), lines 208, 244--250, and 420--426, states that empirical fitting ended with the Bernoulli optimization, with no Phase B re-estimation, while describing exact-$K$ estimation as an alternative. The later replay lock in note [1] kept that fitting procedure unchanged.
 
 [13] [VECTOR_PD44_Dissertation_Work_Map_and_Model_Chapter_Outline.md](file:///Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00-%20Dissertation/0-Next_Chapter/Code_and_Data/New%20SQL%20and%20PY%20Code/Cursor%20Workspace%20PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/VECTOR_PD44_Dissertation_Work_Map_and_Model_Chapter_Outline.md), lines 197--201, requires an equivalence argument or justified approximation before claiming parameter transfer and flags implementation verification. The present account includes explicit descriptions of the verified mismatches without resolving them by assumption.
 
@@ -513,6 +548,6 @@ The following notes identify the repository sources supporting the implementatio
 
 [15] ASSORT_20260927_penalty_magnitude_v1_report.md documents the raw penalty scale relative to standardized individual performance. Numerical values quoted in Section 4.7 are taken from the completed report.
 
-[16] ASSORT_20260927_penalty_bars_v1_report.md records the λ = 0, 1, 2, 4 comparison and the bin-support qualification. Figure 4.1 is the saved 2015_penalty_bars.png under assort_analysis/outputs/penalty_bars_v1. The report identifies its specification, code, bin summaries, and execution record.
+[16] ASSORT_20260927_penalty_bars_v1_report.md records the $\lambda$ = 0, 1, 2, 4 comparison and the bin-support qualification. Figure 4.1 is the saved 2015_penalty_bars.png under assort_analysis/outputs/penalty_bars_v1. The report identifies its specification, code, bin summaries, and execution record.
 
-[17] ASSORT_20260927_rho_scarcity_v1_report.md records the paired ρ = 1 versus 0.05 comparison at 50% and 1% selection, including changed-winner counts and their denominators. Figure 4.2 is the saved 2015_relative.png under assort_analysis/outputs/rho_scarcity_v1. The report links the saved rates, population support, identity summaries, and run record.
+[17] ASSORT_20260927_rho_scarcity_v1_report.md records the paired $\rho=1$ versus 0.05 comparison at 50% and 1% selection, including changed-winner counts and their denominators. Figure 4.2 is the saved 2015_relative.png under assort_analysis/outputs/rho_scarcity_v1. The report links the saved rates, population support, identity summaries, and run record.

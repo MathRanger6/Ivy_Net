@@ -1,0 +1,5 @@
+county,county_name,directory_gymnasiums,participating_gymnasiums,gymnasiums_with_two_or_more_applicants,origin_applicants,destination_placements,origin_placed_locally,outgoing_students,origin_unassigned,origin_outcome_unresolved,incoming_students,destination_from_own_county,destination_origin_unresolved,outgoing_pct_of_origin_applicants,incoming_pct_of_destination_placements
+CT,Constanța,185,180,169,6507,6336,6213,43,251,0,123,6213,0,0.66082680190564,1.941287878787879
+PH,Prahova,259,253,244,6131,5961,5879,52,200,0,82,5879,0,0.848148752242701,1.3756081194430465
+TM,Timiș,202,196,189,5795,5774,5561,15,219,0,213,5561,0,0.25884383088869717,3.6889504676134397
+CJ,Cluj,145,142,133,4885,4949,4795,50,40,0,154,4795,0,1.0235414534288638,3.1117397454031117

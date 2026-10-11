@@ -69,6 +69,78 @@ def source_programs(manifest, county):
     return programs
 
 
+def supplemental_program_codes(county, programs):
+    """Read extra program lists without changing the frozen county acquisition.
+
+    These lists corroborate a student's exact destination code. They do not add
+    applicants or placements to the denominator. Every private source must
+    match its recorded hash, archived URL, and directory occupancy count.
+    """
+    folder = CACHE / "supplemental_program_reports" / county
+    if not folder.exists():
+        return {}
+    directory = {code.lstrip("x"): (code, admitted)
+                 for code, _program, _places, admitted, _vacancies, _cutoff in programs}
+    if len(directory) != len(programs):
+        raise ValueError(f"{county}: numeric program codes are not unique")
+    by_person = {}
+    for path in sorted(folder.glob("destination_program_*.html")):
+        numeric = path.stem.removeprefix("destination_program_")
+        if numeric not in directory:
+            raise ValueError(f"{county}: supplemental code {numeric} absent from directory")
+        meta_path = path.with_suffix(".json")
+        if not meta_path.exists():
+            raise ValueError(f"{county}: supplemental source metadata missing for {numeric}")
+        metadata = json.loads(meta_path.read_text())
+        raw = path.read_bytes()
+        effective = metadata.get("effective_url", "")
+        if (hashlib.sha256(raw).hexdigest() != metadata.get("sha256")
+                or f"cj={county}&" not in effective
+                or f"cs={numeric}&" not in effective):
+            raise ValueError(f"{county}: supplemental source identity/hash failed for {numeric}")
+        headings, rows = _extract_rows(raw)
+        code, admitted = directory[numeric]
+        if ({"Nume", "Medie Admitere"} - set(headings)
+                or len(rows) != metadata.get("row_count") or len(rows) != admitted):
+            raise ValueError(f"{county}: supplemental source rows disagree for {numeric}")
+        for row in rows:
+            key = name_score(row)
+            if key is None or key in by_person:
+                raise ValueError(f"{county}: blank or duplicate supplemental person key")
+            by_person[key] = code
+    return by_person
+
+
+def attach_supplemental_program_codes(county, reports, programs):
+    """Overlay verified codes on existing placements; never create new rows."""
+    by_person = supplemental_program_codes(county, programs)
+    if not by_person:
+        return reports
+    counts = Counter(name_score(row) for row in reports)
+    if any(counts[key] != 1 for key in by_person):
+        raise ValueError(f"{county}: supplemental person does not match one placement")
+    directory = {code: tuple(clean(program[field]) for field in
+                              ("Liceu", "Profil", "Specializare"))
+                 for code, program, *_ in programs}
+    resolved = []
+    for row in reports:
+        code = by_person.get(name_score(row))
+        if code is None:
+            resolved.append(row)
+            continue
+        school = clean(row.get("Liceu"))
+        suffix = f" / {county}"
+        if school.endswith(suffix):
+            school = school[:-len(suffix)]
+        identity = (school, clean(row.get("Profil")), clean(row.get("Specializare")))
+        if identity != directory[code]:
+            raise ValueError(f"{county}: supplemental code contradicts placement label")
+        if "__source_program_code" in row and row["__source_program_code"] != code:
+            raise ValueError(f"{county}: conflicting source program codes")
+        resolved.append({**row, "__source_program_code": code})
+    return resolved
+
+
 def local_placement_rows(manifest, county, progress, programs):
     # These two counties already have complete county placement lists. Their
     # extra program pages supply the missing program code, not extra students.
@@ -78,7 +150,8 @@ def local_placement_rows(manifest, county, progress, programs):
     complete, gaps = family_status(manifest, "admitted_placements")
     original = saved_rows(manifest, "admitted_placements")
     if complete and not gaps:
-        return attach_verified_program_codes(county, original, programs)
+        original = attach_verified_program_codes(county, original, programs)
+        return attach_supplemental_program_codes(county, original, programs)
     status = progress.get(county, {})
     if status.get("state") != "placement_views_reconciled":
         raise ValueError(f"{county}: placement reports have not cleared source gate")
@@ -112,7 +185,7 @@ def local_placement_rows(manifest, county, progress, programs):
             if key in combined and "__source_program_code" in combined[key]:
                 raise ValueError(f"{county}: duplicate recovered program row")
             combined[key] = {**row, "__source_program_code": code}
-    return list(combined.values())
+    return attach_supplemental_program_codes(county, list(combined.values()), programs)
 
 
 def run():

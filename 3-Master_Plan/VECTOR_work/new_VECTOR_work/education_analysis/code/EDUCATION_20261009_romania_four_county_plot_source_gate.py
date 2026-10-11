@@ -14,7 +14,7 @@ from EDUCATION_20261001_romania_four_county_school_sample import school_director
 from EDUCATION_20261002_romania_three_county_gymnasium_acquisition import saved_school
 from EDUCATION_20261002_romania_full_gymnasium_offline_reconciliation import name_score
 from EDUCATION_20261003_romania_four_county_program_identity_gate import (
-    clean, local_placement_rows,
+    clean, local_placement_rows, supplemental_program_codes,
 )
 from EDUCATION_20261001_romania_offline_county_source_readiness import placement_status
 from EDUCATION_20261007_romania_seven_county_new_views_offline_audit import (
@@ -39,6 +39,8 @@ def run():
     settings = pilot.Settings()
     progress = placement_status()
     output = []
+    unresolved_top2_groups = Counter()
+    supplemental_source_rows = {}
     for county in COUNTIES:
         schools = school_directory(county)
         saved, missing = rows(county, "school_results", state[county]["school_results"])
@@ -76,6 +78,12 @@ def run():
                 if key in coded_placements:
                     raise ValueError(f"{county}: duplicate coded placement key")
                 coded_placements[key] = placed_row["__source_program_code"]
+        supplemental = supplemental_program_codes(county, programs)
+        supplemental_source_rows[county] = len(supplemental)
+        for key, code in supplemental.items():
+            if key in coded_placements and coded_placements[key] != code:
+                raise ValueError(f"{county}: supplemental and earlier program codes disagree")
+            coded_placements[key] = code
         school_pages = {}
         county_keys = Counter()
         for code, (_school_name, relative) in schools.items():
@@ -130,6 +138,8 @@ def run():
                 for tier in (1, 2):
                     if not options or len({option in winners[tier] for option in options}) != 1:
                         tally[f"top{tier}_label_unresolved"] += 1
+                        if tier == 2 and options:
+                            unresolved_top2_groups[(county, tuple(sorted(options)))] += 1
         tally["program_admitted_total"] = sum(program[3] for program in programs)
         tally["home_plus_incoming_admitted"] = tally["home_placements"] + incoming_count
         tally["occupancy_difference"] = (tally["program_admitted_total"]
@@ -147,7 +157,16 @@ def run():
         writer = csv.DictWriter(stream, FIELDS)
         writer.writeheader()
         writer.writerows(output)
+    with (OUT / "top2_ambiguous_program_groups.csv").open("w", newline="", encoding="utf-8") as stream:
+        writer = csv.writer(stream)
+        writer.writerow(("county", "possible_program_codes", "applicant_rows"))
+        for (county, codes), n in sorted(unresolved_top2_groups.items()):
+            writer.writerow((county, " ".join(codes), n))
     total = lambda field: sum(row[field] for row in output)
+    supplemental_note = ", ".join(
+        f"{county}: {count} verified admitted rows"
+        for county, count in supplemental_source_rows.items() if count
+    )
     lines = [
         "# Romania 2001: four-county program-label source gate", "",
         "This offline check uses saved, hash-verified Ministry pages only. It exports "
@@ -170,6 +189,10 @@ def run():
         f"Top-one labels are unresolved for **{total('top1_label_unresolved')}** "
         f"home placements; top-two for **{total('top2_label_unresolved')}**. "
         "An unresolved label is never coded as a failure by default.", "",
+        *(["Supplemental destination-program reports added to the private source "
+           f"cache contribute {supplemental_note}. These reports identify program "
+           "codes; they do not add students to the applicant denominator.", ""]
+          if supplemental_note else []),
         "## County detail", "",
     ]
     for row in output:
@@ -187,6 +210,11 @@ def run():
         "home-origin placements plus admitted arrivals from other counties. "
         "A nonzero difference requires source review; a zero difference is an "
         "aggregate check, not person-level proof.", "",
+        f"The **{len(unresolved_top2_groups)}** program-code groups responsible for mixed "
+        "top-two labels are listed, with name-free counts, in "
+        "top2_ambiguous_program_groups.csv. Resolving them requires an exact "
+        "program-code source for the affected placements; no choice is inferred "
+        "from the ambiguous school/profile/specialization label.", "",
         "This is a source gate, not a HERO plot, program preference measure, "
         "or national outcome analysis.", "",
     ]

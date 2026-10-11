@@ -1,0 +1,40 @@
+MODEL CHAPTER TRANSFER — 2026-10-09
+
+Edit chapters/model_chapter.tex for Chapter 4 from this point onward.
+Build dissertation/main.tex with LaTeX Workshop; the chapter file includes a
+root directive so building while editing it targets main.tex automatically.
+The Markdown original was read, not modified. It is a snapshot, not a synced
+second master. Re-running a conversion would overwrite later LaTeX edits.
+
+Transferred: all eight sections, chapter-local Appendices 4A and 4B, all 17
+repository source notes, and both original figures with native captions.
+The template style, front matter, committee names, other chapter placeholders,
+global appendix placeholders, and reference database were preserved.
+main.tex includes the chapter file and adds microtype plus emergency stretch
+for long repository filenames. Source-note numbers remain the manuscript's
+local evidence references; they were not invented as external BibTeX entries.
+
+Conversion-only repairs in the LaTeX copy:
+- Corrected the undefined \tehat command to \theta.
+- Restored MLE subscripts where pasted Markdown had asterisks (six instances).
+- Restored braces around the indicator condition in its explanatory sentence.
+- Converted Unicode mathematical characters, including W-prime, to TeX.
+- Allowed line breaks after underscores in long repository filenames.
+- Removed manually typed section/figure numbers where LaTeX supplies them.
+
+Editorial questions retained for review (not silently resolved):
+- 4.4.2: the sentence containing gamma followed by 0 lacks its comparison sign.
+- 4.4.4: the sentence comparing A_i with A_h and the two congestions lacks signs.
+- 4.5.2: the opening lambda followed by 0 lacks its comparison sign.
+- 4.2.2: the prose uses bold S / calligraphic I but the displayed indicator still
+  uses plain S / I; decide on consistency during the next notation pass.
+- 4A.2's current heading describes implementation differences, but its content
+  concerns observational units and the fitting model; review the heading.
+- Title, abstract, acknowledgments, unused chapter/appendix placeholders, and
+  the template's sample bibliography entry still need dissertation content.
+- Repository source links point to this Mac; they need portable citations later.
+
+Validation: MacTeX latexmk/pdflatex compiled successfully. Both captions appear
+in the list of figures as 4.1 and 4.2. Representative chapter, equation, figure,
+appendix, and source-note pages were visually inspected. No overfull boxes or
+unresolved references remained; one harmless underfull text-box message remains.

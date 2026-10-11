@@ -160,3 +160,18 @@ hierarchy_data/**/*.zip
 
 # Always Sequestered
 2-Sequestered/
+
+# Ignore LaTeX build artifacts
+*.aux
+*.log
+*.toc
+*.lof
+*.lot
+*.out
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+*.pdf
+

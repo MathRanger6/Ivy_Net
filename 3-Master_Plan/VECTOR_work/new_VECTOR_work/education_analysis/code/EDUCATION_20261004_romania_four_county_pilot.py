@@ -467,6 +467,8 @@ def _hero_bins(frame, n_bins):
 
 def _plot_hero(bins, tier, path, settings, counties=None):
     counties = (*settings.counties, "ALL") if counties is None else counties
+    equal_county = ("pooling_method" in bins.columns and
+                    bins["pooling_method"].eq("equal_county_within_cell").any())
     fig, axes = plt.subplots(len(counties), 2, figsize=(20, 5 * len(counties)),
                              sharey=True, squeeze=False)
     for row_number, county in enumerate(counties):
@@ -484,11 +486,16 @@ def _plot_hero(bins, tier, path, settings, counties=None):
                 support = f"{item.gymnasiums} gyms"
                 if county == "ALL":
                     support += f", {item.counties} counties"
-                axis.annotate(f"{item.successes}/{item.applicants}\n{support}",
+                label = (f"{item.counties} counties\n{item.applicants} applicants"
+                         if equal_county and county == "ALL" else
+                         f"{item.successes}/{item.applicants}\n{support}")
+                axis.annotate(label,
                               (position, heights[position]), fontsize=6,
                               xytext=(0, 3), textcoords="offset points", ha="center")
-            location = (f"All {len(settings.counties)} counties pooled (applicant-weighted)"
-                        if county == "ALL" else f"{COUNTY_NAMES[county]} ({county})")
+            location = (f"All {len(settings.counties)} counties pooled "
+                        f"({'equal county weight' if equal_county else 'applicant-weighted'})"
+                        if county == "ALL" else
+                        f"{getattr(settings, 'county_names', COUNTY_NAMES)[county]} ({county})")
             axis.set_title(f"{location} · {'equal-width' if kind == 'equal_width' else 'quantile'} bins")
             axis.grid(axis="y", alpha=.2)
             axis.set_axisbelow(True)
@@ -501,18 +508,24 @@ def _plot_hero(bins, tier, path, settings, counties=None):
              else f"{len(settings.counties)} counties and applicant-weighted combination")
     fig.suptitle(f"Romania 2001: selective placement vs gymnasium applicant peer score\n"
                  f"Top {tier} cutoff tier(s); {program_rule}; {group_rule}; {scope} — descriptive")
-    fig.text(.5, .01, "Labels: successful placements / applicants; distinct gymnasiums. "
-             "Pooled bars also show counties represented; county mix may change across bars.",
+    footnote = ("Equal-county bars average the represented county rates; labels give "
+                "county and applicant support, not a success/applicant ratio."
+                if equal_county else
+                "Labels: successful placements / applicants; distinct gymnasiums. "
+                "Pooled bars also show counties represented; county mix may change across bars.")
+    fig.text(.5, .01, footnote,
              ha="center", fontsize=9)
     fig.tight_layout(rect=[0.02, .03, 1, .96])
     fig.savefig(path, dpi=170)
     plt.close(fig)
 
 
-def _plot_bands(bins, tier, path, band_name, settings):
+def _plot_bands(bins, tier, path, band_name, settings, counties=None):
     # One panel per county, a combined panel, and a reading guide. Growing the
     # county list must not silently drop the combined panel from a fixed grid.
-    locations = (*settings.counties, "ALL")
+    locations = (*settings.counties, "ALL") if counties is None else counties
+    equal_county = ("pooling_method" in bins.columns and
+                    bins["pooling_method"].eq("equal_county_within_cell").any())
     n_rows = (len(locations) + 2) // 2
     fig, axes = plt.subplots(n_rows, 2, figsize=(17, 5 * n_rows), sharex=True, sharey=True,
                              squeeze=False)
@@ -530,12 +543,17 @@ def _plot_bands(bins, tier, path, band_name, settings):
                     support = f"{row.gymnasiums} gyms"
                     if county == "ALL":
                         support += f", {row.counties} counties"
-                    axis.annotate(f"{row.successes}/{row.applicants}\n{support}",
+                    annotation = (f"{row.counties} counties\n{row.applicants} applicants"
+                                  if equal_county and county == "ALL" else
+                                  f"{row.successes}/{row.applicants}\n{support}")
+                    axis.annotate(annotation,
                                   (row.peer_mean_exam, 100 * row.success_rate), fontsize=6,
                                   xytext=(0, 7), textcoords="offset points", ha="center",
                                   color=color)
-        axis.set_title(f"All {len(settings.counties)} counties pooled (applicant-weighted)"
-                       if county == "ALL" else f"{COUNTY_NAMES[county]} ({county})")
+        axis.set_title(f"All {len(settings.counties)} counties pooled "
+                       f"({'equal county weight' if equal_county else 'applicant-weighted'})"
+                       if county == "ALL" else
+                       f"{getattr(settings, 'county_names', COUNTY_NAMES)[county]} ({county})")
         axis.grid(alpha=.2)
         axis.legend(fontsize=8)
     for axis in list(axes.flat)[len(locations):]:
@@ -543,12 +561,19 @@ def _plot_bands(bins, tier, path, band_name, settings):
     guide = axes.flat[len(locations)]
     guide.text(.05, .82, "How to read the combined panel",
                        fontsize=13, fontweight="bold", transform=guide.transAxes)
+    guide_text = (
+        f"In each common peer-score bin, each represented county\n"
+        "contributes one success rate with equal weight. Counties\n"
+        "without eligible applicants in a cell are absent. The\n"
+        "county mix can still vary across bins; this is descriptive."
+        if equal_county else
+        f"Applicants from all {len(settings.counties)} counties share peer-score bins.\n"
+        "Each applicant counts once; counties with more applicants\n"
+        "therefore supply more observations. This view defines the\n"
+        "colored own-score bands separately within each county.\n"
+        "County composition can vary across bins; this is descriptive.")
     guide.text(
-        .05, .62,
-        f"Applicants from all {len(settings.counties)} counties are combined within\n"
-        "common peer-score bins. Larger counties contribute more.\n"
-        "County success rates and county mix differ, so this pooled\n"
-        "line is descriptive, not a county-adjusted peer effect.",
+        .05, .62, guide_text,
         fontsize=10, va="top", transform=guide.transAxes,
     )
     program_rule = "full programs" if settings.require_full_programs else "nonempty programs"
@@ -556,9 +581,13 @@ def _plot_bands(bins, tier, path, band_name, settings):
     fig.suptitle(f"Romania 2001: placement at fixed own-exam bands across peer strength\n"
                  f"Top {tier} tier(s); {program_rule}; {group_rule}; {band_name} — descriptive")
     fig.supxlabel("Mean national exam score of other observed gymnasium applicants")
-    fig.supylabel("Placed in a designated program (%)")
-    fig.text(.5, .01, "Labels on stronger focal bands: successes / applicants; distinct gymnasiums. "
-             "The pooled panel also shows counties represented.", ha="center", fontsize=9)
+    fig.supylabel("Mean county placement rate (%)" if equal_county else
+                 "Placed in a designated program (%)")
+    fig.text(.5, .01,
+             ("Equal-county points: mean of represented county rates; labels show county "
+              "and applicant support, not a success/applicant ratio." if equal_county else
+              "Labels on stronger focal bands: successes / applicants; distinct gymnasiums. "
+              "The pooled panel also shows counties represented."), ha="center", fontsize=9)
     fig.tight_layout(rect=[0.03, .04, 1, .94])
     fig.savefig(path, dpi=170)
     plt.close(fig)

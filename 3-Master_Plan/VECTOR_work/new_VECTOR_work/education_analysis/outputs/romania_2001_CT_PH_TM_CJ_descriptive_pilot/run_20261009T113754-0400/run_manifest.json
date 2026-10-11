@@ -1,0 +1,31 @@
+{
+  "run_at_local": "run_20261009T113754-0400",
+  "settings": {
+    "top_tiers": [
+      1,
+      2
+    ],
+    "require_full_programs": true,
+    "combine_program_categories": false,
+    "include_vocational_in_primary": true,
+    "compare_excluding_ambiguous": true,
+    "compare_excluding_vocational": true,
+    "compare_pooled_score_bands": true,
+    "ai_percentile_cuts": [
+      30,
+      20,
+      10
+    ],
+    "peer_strength_bins": 8,
+    "hero_bins": 16,
+    "counties": [
+      "CT",
+      "PH",
+      "TM",
+      "CJ"
+    ]
+  },
+  "source_gate_sha256": "5efd8254e327bb572eb35429975307e10dddda9043e8d2a61500ceed32dbd450",
+  "privacy": "aggregate output only; private source pages remain on Desktop",
+  "scope": "CT/PH/TM/CJ 2001 main admissions round; descriptive"
+}

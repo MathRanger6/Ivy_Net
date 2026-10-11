@@ -1,0 +1,12 @@
+county,n_applicants,middle_percentile,excellence_start_percentile,top_start_percentile,middle_exam_boundary,excellence_start_exam_boundary,top_start_exam_boundary,pooled_middle_exam_boundary,pooled_excellence_start_exam_boundary,pooled_top_start_exam_boundary
+AB,3041,50,75,80,6.98,8.01,8.23,6.93,7.93,8.16
+CS,2606,50,75,80,6.65,7.63,7.93,6.93,7.93,8.16
+GL,5345,50,75,80,6.76,7.7,7.95,6.93,7.93,8.16
+TL,1953,50,75,80,6.83,7.78,8.01,6.93,7.93,8.16
+AR,3164,50,75,80,6.78,7.7,7.9,6.93,7.93,8.16
+SB,3236,50,75,80,6.83,7.83,8.08,6.93,7.93,8.16
+B,22216,50,75,80,7.08,8.1,8.33,6.93,7.93,8.16
+CT,6507,50,75,80,6.86,7.88,8.11,6.93,7.93,8.16
+PH,6131,50,75,80,6.96,7.88,8.1,6.93,7.93,8.16
+TM,5795,50,75,80,6.86,7.88,8.1,6.93,7.93,8.16
+CJ,4885,50,75,80,7.0,8.0,8.21,6.93,7.93,8.16
