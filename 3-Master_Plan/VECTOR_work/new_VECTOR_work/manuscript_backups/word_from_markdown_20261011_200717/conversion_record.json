@@ -1,0 +1,51 @@
+{
+  "source_sha256": "49694d3227ddbc7af02b565052a4a2e828ba1fd9bd8970fc14957afab88ba165",
+  "old_sha256": "22b8ad369ac8467ad5813b5aa96c1a8a3c330f060b90391462561696ebd1e90e",
+  "fixes": [
+    [
+      "\\widehat{\\lambda}*{\\mathrm{MLE}}",
+      "\\widehat{\\lambda}_{\\mathrm{MLE}}",
+      1
+    ],
+    [
+      "\\widehat{t}*{\\mathrm{MLE}}",
+      "\\widehat{t}_{\\mathrm{MLE}}",
+      1
+    ],
+    [
+      "{\\widehat{\\lambda}}*{MLE}",
+      "\\widehat{\\lambda}_{MLE}",
+      2
+    ],
+    [
+      "{\\widehat{t}}*{MLE}",
+      "\\widehat{t}_{MLE}",
+      2
+    ],
+    [
+      "1\\text{condition}",
+      "1\\{\\text{condition}\\}",
+      1
+    ],
+    [
+      "$K$eeping",
+      "Keeping",
+      1
+    ],
+    [
+      "$\\gamma$  0",
+      "$\\gamma>0$",
+      1
+    ],
+    [
+      "For $\\lambda$  0",
+      "For $\\lambda>0$",
+      1
+    ],
+    [
+      "For $A_{i}$  $A_{h}$ and $C_{g(i)}$  $C_{g(h)}$",
+      "For $A_i>A_h$ and $C_{g(i)}>C_{g(h)}$",
+      1
+    ]
+  ]
+}
