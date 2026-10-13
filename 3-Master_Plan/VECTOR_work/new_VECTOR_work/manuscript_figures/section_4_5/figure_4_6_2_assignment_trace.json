@@ -1,0 +1,249 @@
+{
+  "purpose": "Illustrative seeded assignment, not an empirical estimate",
+  "performance_values": [
+    -1.5,
+    -0.9,
+    -0.3,
+    0.3,
+    0.9,
+    1.5
+  ],
+  "capacities": [
+    3,
+    3
+  ],
+  "rho": 2.0,
+  "seed": 42,
+  "population_mean": 0.0,
+  "arrival_order": [
+    "P4",
+    "P3",
+    "P6",
+    "P5",
+    "P2",
+    "P1"
+  ],
+  "history": [
+    {
+      "step": 0,
+      "rosters": [
+        [],
+        []
+      ],
+      "centroids": [
+        0.0,
+        0.0
+      ],
+      "remaining": [
+        3,
+        3
+      ]
+    },
+    {
+      "step": 1,
+      "person": 3,
+      "chosen_group": 1,
+      "before_centroids": [
+        0.0,
+        0.0
+      ],
+      "before_remaining": [
+        3,
+        3
+      ],
+      "probabilities": [
+        0.5,
+        0.5
+      ],
+      "rosters": [
+        [],
+        [
+          3
+        ]
+      ],
+      "centroids": [
+        0.0,
+        0.3
+      ],
+      "remaining": [
+        3,
+        2
+      ]
+    },
+    {
+      "step": 2,
+      "person": 2,
+      "chosen_group": 0,
+      "before_centroids": [
+        0.0,
+        0.3
+      ],
+      "before_remaining": [
+        3,
+        2
+      ],
+      "probabilities": [
+        0.7321317263014413,
+        0.26786827369855865
+      ],
+      "rosters": [
+        [
+          2
+        ],
+        [
+          3
+        ]
+      ],
+      "centroids": [
+        -0.3,
+        0.3
+      ],
+      "remaining": [
+        2,
+        2
+      ]
+    },
+    {
+      "step": 3,
+      "person": 5,
+      "chosen_group": 1,
+      "before_centroids": [
+        -0.3,
+        0.3
+      ],
+      "before_remaining": [
+        2,
+        2
+      ],
+      "probabilities": [
+        0.23147521650098232,
+        0.7685247834990178
+      ],
+      "rosters": [
+        [
+          2
+        ],
+        [
+          3,
+          5
+        ]
+      ],
+      "centroids": [
+        -0.3,
+        0.9
+      ],
+      "remaining": [
+        2,
+        1
+      ]
+    },
+    {
+      "step": 4,
+      "person": 4,
+      "chosen_group": 1,
+      "before_centroids": [
+        -0.3,
+        0.9
+      ],
+      "before_remaining": [
+        2,
+        1
+      ],
+      "probabilities": [
+        0.15357236526205045,
+        0.8464276347379495
+      ],
+      "rosters": [
+        [
+          2
+        ],
+        [
+          3,
+          5,
+          4
+        ]
+      ],
+      "centroids": [
+        -0.3,
+        0.9
+      ],
+      "remaining": [
+        2,
+        0
+      ]
+    },
+    {
+      "step": 5,
+      "person": 1,
+      "chosen_group": 0,
+      "before_centroids": [
+        -0.3,
+        0.9
+      ],
+      "before_remaining": [
+        2,
+        0
+      ],
+      "probabilities": [
+        1.0,
+        0.0
+      ],
+      "rosters": [
+        [
+          2,
+          1
+        ],
+        [
+          3,
+          5,
+          4
+        ]
+      ],
+      "centroids": [
+        -0.6,
+        0.9
+      ],
+      "remaining": [
+        1,
+        0
+      ]
+    },
+    {
+      "step": 6,
+      "person": 0,
+      "chosen_group": 0,
+      "before_centroids": [
+        -0.6,
+        0.9
+      ],
+      "before_remaining": [
+        1,
+        0
+      ],
+      "probabilities": [
+        1.0,
+        0.0
+      ],
+      "rosters": [
+        [
+          2,
+          1,
+          0
+        ],
+        [
+          3,
+          5,
+          4
+        ]
+      ],
+      "centroids": [
+        -0.9,
+        0.9
+      ],
+      "remaining": [
+        0,
+        0
+      ]
+    }
+  ]
+}
