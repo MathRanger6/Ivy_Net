@@ -231,9 +231,17 @@ def fetch(client, relative, label, args):
     return None, True
 
 
+def defer_previous_404(state, relative, retry_previous_http_404):
+    """Defer only recorded HTTP 404s; other errors keep their existing retry policy."""
+    return (not retry_previous_http_404
+            and state.get("unresolved", {}).get(relative) == "HTTP 404")
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--run", action="store_true", help="contact Wayback; preview otherwise")
+    parser.add_argument("--retry-previous-http-404", action="store_true",
+                        help="Retry saved HTTP 404 URLs this run; default leaves them unresolved and skips them")
     parser.add_argument("--counties", nargs="+", choices=COUNTIES, default=["B"])
     parser.add_argument("--families", nargs="+", choices=FAMILIES,
                         default=list(FAMILIES))
@@ -256,12 +264,20 @@ def main(argv=None):
     counties = tuple(dict.fromkeys(args.counties))
     families = tuple(dict.fromkeys(args.families))
     status = load_status()
+    say("PREVIOUS HTTP 404 POLICY: " + (
+        "retry recorded 404 URLs this run" if args.retry_previous_http_404 else
+        "skip recorded 404 URLs; keep them unresolved until retries are enabled"))
     for county in counties:
         for family in families:
             state = family_state(status, county, family)
             discover(state, menu_seeds(county, family), county, family)
             recount_saved(state, county, family)
             say(f"INVENTORY {progress_text(county, family, state)}")
+            deferred = sum(defer_previous_404(state, url, args.retry_previous_http_404)
+                           for url in state["discovered"])
+            if deferred:
+                say(f"DEFERRED {county}/{family}: {deferred} previously recorded HTTP 404 URLs; "
+                    "no requests for these URLs in this run; they remain unresolved")
     if not args.run:
         say("PREVIEW ONLY. No Wayback requests. Incoming series are best acquired first.")
         return
@@ -279,6 +295,7 @@ def main(argv=None):
         random_adaptive_fraction=0.10, pace_redirects=True, jitter_fraction=0.0,
     )
     new_pages = 0
+    skipped_404 = 0
     stopped = False
     for county in counties:
         for family in families:
@@ -298,6 +315,11 @@ def main(argv=None):
                     discover(state, saved["discovered_links"], county, family)
                     continue
                 label = f"{county}/{family}/{index}"
+                if defer_previous_404(state, relative, args.retry_previous_http_404):
+                    skipped_404 += 1
+                    say(f"SKIPPED {label}: previously HTTP 404; retries are OFF; "
+                        f"kept unresolved. No request or wait. URL: {archive_url(relative)}")
+                    continue
                 say(f"REQUEST {label}: {archive_url(relative)}")
                 try:
                     result, third_429 = fetch(client, relative, label, args)
@@ -356,7 +378,9 @@ def main(argv=None):
                 break
         if stopped:
             break
-    say(f"SOURCE-ONLY run complete: {new_pages} newly verified pages. Private status: {STATUS}")
+    say(f"SOURCE-ONLY run complete: {new_pages} newly verified pages; "
+        f"{skipped_404} previously recorded HTTP 404 URLs skipped and still unresolved. "
+        f"Private status: {STATUS}")
 
 
 if __name__ == "__main__":

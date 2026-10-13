@@ -1,307 +1,200 @@
-# PD44 — Dissertation work map and proposed model-chapter outline
+# Dissertation work map and current model chapter outline
 
-**Date:** September 30, 2026  
-**Status:** Proposed writing structure for Charles's review. This is a work map, not a completed chapter or a new analysis plan.  
-**Controlling direction:** PD44 and Charles's accompanying priority update. Earlier education-first and experiment-first plans remain history.
+**Updated:** 13 October 2026. Originally prepared after PD44 on 30 September.  
+**Purpose:** Keep the dissertation’s developing structure, current writing, and possible additional chapters in one place.  
+**Status:** Working plan for Charles. Alex’s documented proposals, Charles’s subsequent decisions, and our proposed next steps are distinguished below. This is not an approved final table of contents.
 
-## 1. The change in direction
+The dissertation connects the science of success with network science: people perform and pursue advancement within groups, and the composition of those groups may affect who receives scarce opportunities. Army, basketball, education, and academic careers supply possible evidence and examples. The dissertation should remain organized around the scientific question rather than become an account of one domain.
 
-**Begin writing the dissertation now, starting with the model chapter.** We already have enough model structure, development history, and completed computational work to explain what we built and why. We do not need to finish national Romania analysis or resolve every empirical discrepancy before writing that explanation.
+Our immediate writing task remains the model chapter. Its current draft now develops the naïve benchmark before adding uncertainty, competitive congestion, and artificial group formation. A separate Levine–Gates (LG) exploration has also developed far enough to warrant reserving a possible chapter, while its eventual claims and place in the dissertation remain open.
 
-Writing now serves two purposes:
+## 1. What Alex proposed
 
-- **Preserve the scientific argument.** Explain the question, each modeling decision, what the existing experiments taught us, and where the explanation remains incomplete.
-- **Expose specific gaps.** If a sentence cannot be supported, write down exactly what is missing. A missing result becomes a bounded question for later review, not permission to launch another sweep.
+### PD44 on 30 September
 
-**Primary source:** `transcripts/20260930_Paper_Directions_44_otter_ai_transcript.docx`. The writing-first instruction begins at 00:00; the model architecture discussion is at approximately 03:56–05:56; the recommendation to start with the model chapter and let writing expose gaps is at 12:01–13:06.
+Alex described three central **content chapters**, with introductory and surrounding material bringing the dissertation to roughly five chapters. His “first,” “second,” and “third” refer to those content chapters, not settled dissertation chapter numbers.
 
-## 2. Dissertation work map
+1. **Establish the empirical phenomenon.** Explain the relationship among individual performance, group environment, and advancement. At 02:52 he recommends bringing together evidence from several datasets, including comparisons among people with similar performance and the band of excellence.
+2. **Develop the model.** Explain its construction, assumptions, parameter behavior, and completed investigations in dissertation-level detail. At 05:56–08:43 he distinguishes this detailed treatment from the much shorter account an eventual paper would contain.
+3. **Connect the model to the evidence.** At 06:31 he identifies maximum likelihood estimation and fitting the model to data as the next content chapter. This is a research destination, not a declaration that the fitting bridge is already complete.
 
-### Foreground: explain the model
+At approximately 09:10–11:31, Alex also supports preserving the Army work on defining success, promotion timing, and survival or competing risks. He suggests that this could become a chapter before the peer-effects discussion. He does not settle its final placement.
 
-**Immediate product:** A dissertation-level model chapter that stands on its own. A reader should understand what goes into the model, what each stage changes, what emerges from it, and what the completed investigations do and do not establish.
+At 12:24 he recommends starting the writing with the model chapter. Writing should reveal specific missing analyses; it should not wait for every empirical problem to be resolved.
 
-**Working sequence:**
+**Primary source:** [PD44 transcript](../../../transcripts/20260930_Paper_Directions_44_otter_ai_transcript.docx).
 
-1. Explain the overall question and ASSIGN → SCORE → SELECT architecture.
-2. Explain assignment, including the Levine–Gates model and its development history.
-3. Explain the congestion score, its assumptions, and the meaning of its parameters.
-4. Explain selection capacity and the distinct deterministic and stochastic selection rules.
-5. Organize existing experiments by the questions they answered.
-6. Identify the remaining bridge from mechanism demonstrations to empirical fitting.
+### PD45 on 7 October and the email on the first draft
 
-Start with the architecture section rather than another data search. Then write the three component sections before polishing the experimental narrative.
+Alex’s later guidance changes the model chapter’s exposition, not the distinction between scoring and selection. PD45 recommends starting with the simplest performance-based selection model and adding complexity as the reader encounters a reason for it. Assignment comes later as a way to construct groups for simulations; the advancement model can begin with groups already observed.
 
-### Background: bounded Romania national acquisition
+His email likewise says not to introduce ASSIGN as an equal part of the scientific model, to reduce repetition, and to move the internal development-history account out of the main scientific narrative. Detailed mathematics still belongs in the dissertation when it explains the model or supports a claim.
 
-**Continue the already authorized data-gathering task using the frozen Alba definitions and existing source-completeness gates.** The work is to recover, checkpoint, and audit sources. It is not permission to retune program categories, eligibility, success definitions, or binning to obtain a desired curve.
+Charles clarified that Alex’s concern about “separating environmental effects from later selection” should not be read as merging SCORE and SELECT into a single operation. They remain mathematically distinct; explaining advancement requires considering their combination.
 
-Before a national outcome analysis can begin, both conditions are required:
+**Sources:** [PD45 transcript](../../../transcripts/20261007_Paper_Directions_45_otter_ai_transcript.docx); Alex’s email reproduced by Charles in this conversation; [the October 8 change memo](Model_Chapter_PD45_Change_Memo_20261008.md). The email is identified as conversational evidence rather than an independently located email file.
 
-- **Source readiness:** Coverage, unresolved pages, duplicates, identifiers, score fields, placement joins, and origin-school applicant populations meet the documented gates. A successful download alone does not meet them. Applicant groups must not silently become claims about all graduating students.
-- **Explicit execution authorization:** Charles approves national outcome analysis after reviewing the source audit.
+### Framing recorded by Charles
 
-This documentation update does not start or restart an acquisition process. Charles's existing notebook workflow remains the execution route.
+[Dissertation Tone](Dissertation%20Tone.docx) records Charles’s account of a conversation with Alex. It emphasizes the bridge between network science and the science of success, the balance of readable narrative with mathematical development, and the need to return from domain examples to the general phenomenon. This is Charles’s written account, not a verbatim transcript.
 
-PD44 also mentions academic-data gathering in parallel at approximately 13:35–14:02. That remark does not start a new tenure acquisition job here.
+## 2. Our current proposed dissertation arrangement
 
-### Preserve: Army outcome and survival methodology
+The following is **our updated planning arrangement for discussion**, not a chapter list approved by Alex. We retain the working label “Chapter 4” for the manuscript already in progress. We should choose final numbers only after deciding whether the Army methods and LG contributions stand alone.
 
-**Keep the work on promotion timing, attrition, censoring, survival, and competing risks in the dissertation map.** Whether it becomes its own chapter or a substantial methods section is still open.
+### Introduction and literature
 
-PD44 explicitly supports retaining this methodological contribution at approximately 09:10–11:31. The journal paper may use only part of it.
+Set out the scientific question and connect work on success, peer environments, group composition, and scarce advancement. Define what the dissertation contributes beyond demonstrating that strong individuals tend to be surrounded by other strong individuals.
 
-Do not collapse the methods into one label. Empirical cumulative-incidence curves, cause-specific Cox models, and Fine–Gray subdistribution models answer different questions. The existing Army documentation distinguishes empirical competing-risk curves from fitted Cox analyses. Fine–Gray was mentioned in the meeting, but its implemented and completed status still needs verification.
+**Basis:** Alex explicitly calls for introduction and literature material in PD44. The wording and scope here are our proposed organization.
 
-### Defer: further model experiments and presentation restructuring
+### Measuring advancement and the empirical phenomenon
 
-No new parameter sweeps, model fitting, national outcome analysis, repository restructuring, or slide rebuilding is authorized by this work map.
+Establish how success is measured and then describe the observed patterns across suitable domains. Explain population definitions, time windows, group membership, performance measures, and which comparisons hold own performance approximately fixed. Describe similarities and differences across domains without assuming all show one identical effect.
 
-A useful writing gap might be: “We cannot yet justify carrying these calibrated coefficients into this replay because the selection probabilities differ.” That points to a particular specification problem. It does not justify searching broadly for a better-looking result.
+**Basis:** This is Alex’s first central content block. Our proposed treatment keeps measurement and source limitations close to the claims they qualify.
 
-## 3. Provisional dissertation arrangement
+**Possible separate Army methods chapter:** Preserve the work on promotion timing, attrition, censoring, survival, and competing risks. If it contains a sufficiently distinct methodological contribution, place it before the empirical peer-effects chapter. Otherwise retain a substantial methods section and appendix. Alex supported the possibility; the separate-chapter decision is still open. Verify which estimators were actually fitted before naming them as completed work.
 
-PD44 suggests three central content blocks:
+### The congestion and advancement model
 
-1. **The empirical phenomenon:** What the existing domain evidence shows about own performance, peer environment, and advancement.
-2. **The model:** How assignment, scoring, and selection can generate different outcomes and curves.
-3. **Connecting model and evidence:** Estimation, fit, interpretation, and eventually supported counterfactuals.
+This is the current **Chapter 4**, described in Section 3 below. Begin with the naïve performance-only benchmark, introduce uncertain selection, develop congestion, examine its mathematics, and then explain how artificial groups are generated.
 
-Introduction/literature and a concluding synthesis could surround those blocks. This is a working interpretation of the discussion, **not an approved final five-chapter table of contents**.
+**Basis:** Alex’s model content block, revised through PD45 and Charles’s subsequent editing decisions. Assignment remains a simulation device within this chapter even if LG receives a separate chapter elsewhere.
 
-The Army outcome-methodology material may precede the empirical-effects discussion or occupy a separate chapter. PD44 raises both the value of this work and flexibility about its placement. We should preserve that option without delaying the model chapter.
+### Possible chapter on LG and group formation
 
-The model-to-data block is currently less settled than the model itself. The dissertation outline should show that honestly rather than promise validated fitting or counterfactual conclusions that have not been established.
+Study how metadata-based attachment preference and prescribed roster capacities produce group composition. Then compare clearly identified alternatives that change the opportunity rule or relax fixed roster sizes.
 
-## 4. Proposed model-chapter outline
+**Basis:** Charles’s later proposal and the separate LG exploration specification. We have not verified an explicit endorsement from Alex of a separate LG chapter. The executive summary calls it a possibility for discussion.
 
-### 4.1. The question and the three-stage architecture
+**Proposed placement:** After the core advancement model and before the model-to-data chapter is a useful working option. It would let the main model chapter explain the assignment algorithm briefly, while the LG chapter develops group formation as its own scientific subject. Placement remains open; avoid duplicating the same derivation and figures in both chapters.
 
-**Main point:** Being in a strong group and receiving a scarce distinction are different events.
+### Connecting the model to evidence
 
-Explain the sequence:
+Explain the historical fitting work, what it estimates, and what is still needed to connect those estimates to the intended model. Distinguish empirical fitting, simulation-based parameter recovery, and counterfactual claims.
 
-- **ASSIGN:** Who ends up with whom?
-- **SCORE:** How does the specified environment enter an individual's modeled score?
-- **SELECT:** Who receives the available opportunities under the stated selection rule?
+**Basis:** Alex’s third central content block. A completed exact-K refit or validated counterfactual analysis is not currently established by the sources reviewed for this map. Chapter 4’s present Section 4.8 introduces this bridge; it need not duplicate an eventual full fitting chapter.
 
-**Why each stage is needed:** Assignment creates the peer environments. Scoring specifies how those environments matter. Selection converts scores into outcomes under a capacity constraint or probability rule. An outcome curve alone cannot tell us which of these stages produced its shape.
+### Synthesis and conclusions
 
-Use a small verbal example: two equally scored individuals can face different environments; even a modest score change can alter who receives the last available place. Then distinguish that example from evidence that real institutions use the same scoring rule.
+Bring the theoretical and empirical contributions together, state their limits, and identify the next scientific questions. A synthesis chapter is our proposed completion of the structure, not a separately verified detailed instruction from Alex in PD44.
 
-Keep the environmental benefits-minus-drawbacks idea, $L=B-D$, separate from an advancement probability. The current subtractive congestion score does not independently estimate both $B$ and $D$.
+This arrangement deliberately leaves the final chapter count open. Adding both Army methods and LG as standalone chapters would expand Alex’s initial rough five-chapter conception; we should make that an explicit discussion rather than silently relabel his original proposal.
 
-**Sources:** `3-Master_Plan/BINDING_Selection_is_its_own_step.md`; `3-Master_Plan/re_entry/02_Three_Kinds_of_Model.md`; PD44, 03:56–05:16.
+## 3. Where the model chapter stands now
 
-### 4.2. What the model treats as individual performance and environment
+The authoritative manuscript is [Model Chapter Shared Working Draft](Model_Chapter_Shared_Working_Draft.docx). The Markdown and LaTeX copies are earlier working versions, not automatic substitutes for Charles’s current Word edits. This map records the current headings and direction; it does not certify that every paragraph is finished.
 
-**Main point:** $A_i$ is the model's specified individual input. When constructed from an observed performance statistic, it is not automatically innate or portable talent.
+### 4.1 Individual performance and success in groups
 
-Explain:
+Introduce the phenomenon in ordinary language and connect it to the dissertation’s network-science question. Establish why later selection matters without presenting every mechanism and parameter before the reader needs them.
 
-- The population and time unit: individual, player-season, career exit, or another explicitly defined unit.
-- The performance measure and its standardization.
-- Group membership, group size, and capacity.
-- Mean peer performance excluding the focal individual, when used as the curve's horizontal axis.
-- The distinction between a peer-performance axis and the congestion quantity actually subtracted from the score.
+### 4.2 Selecting the highest performing individuals
 
-For the recent basketball experiments, standardized season points per minute supplied $A_i$. The experimental population retained those values while assignment changed. That does not reconstruct what each player's performance would actually have been on another team.
+Develop the **naïve benchmark**: measured performance supplies the score, the eligible population contains N individuals, and deterministic selection awards K opportunities to the highest scores. Introduce notation before using it and explain what group membership does and does not change in this benchmark.
 
-**Sources:** `assort_analysis/docs/results/ASSORT_20260927_three_season_mechanism_v1_report.md` and the source/design records it links; `3-Master_Plan/re_entry/LG_model_desk_reference.md`.
+### 4.3 Allowing uncertainty in selection
 
-### 4.3. ASSIGN: the Levine–Gates grouping mechanism
+Explain why winners may differ even when supplied scores are unchanged. Define exact-K sequential selection using Gibbs weights, including the conditional probability of each next draw, removal of selected individuals, temperature, and limiting cases. Selection temperature is distinct from the parameter in the historical fitting equation.
 
-**Main point:** Similarity preference shapes assignments; realized sorting is measured afterward.
+### 4.4 Introducing local competitive congestion
 
-For the documented sequential Grandchild implementation, describe the probability of assigning individual $i$ to group $j$ at the current step:
+Begin with average peer performance as an approximation, then motivate credible competitors and their smooth competitive relevance. Explain the conscious choice to average relevance over the full group, including the focal individual, producing shared roster pressure. Keep group mean T_j, leave-one-out quantities, individual relevance, and shared congestion C_j distinct. Explain why a common group penalty changes cross-group comparisons but cancels in rankings within a group under a fixed local selection quota.
 
-$$
-p_{ij}=
-\frac{R_j\exp[-\rho|A_i-\mu_j|]}
-{\sum_{\ell:R_\ell>0}R_\ell\exp[-\rho|A_i-\mu_\ell|]}.
-$$
+### 4.5 Mathematical behavior and parameter regimes
 
-Here $R_j$ is the number of remaining seats and $\mu_j$ is the current group centroid. Explain the initial-centroid convention, randomized arrival order, immediate centroid updates, and capacity constraints.
+Develop threshold location, transition sharpness, penalty strength, score scale, scarcity, and selection margins. Charles’s later direction emphasizes domains with scarce opportunities and broadly aligned scarcity and relevance thresholds. Mathematically permissible independent changes to K and theta need not receive equal narrative attention. Describe historical experiments according to what they actually held fixed; do not retroactively relabel their designs.
 
-**Plain-language example:** When $\rho=0$, a group with eight remaining seats has twice the assignment probability of a group with four. This is uniform assignment over remaining seats, not uniform selection of a team.
+The figure work now includes illustrations of relevance curves, score crossings and winners, and scarcity changing together with a threshold. Illustrative inputs are not empirical estimates or newly established historical findings.
 
-Then introduce the measured sorting index:
+### 4.6 Generating artificial groups with controlled sorting
 
-$$
-H_{\mathrm{sort}}
-=1-\frac{\sum_j\sum_{i\in j}(A_i-\bar A_j)^2}
-{\sum_i(A_i-\bar A)^2}.
-$$
+Explain fixed roster capacities, sequential metadata-based assignment, evolving group centroids, and measured sorting. The current figure notebook also illustrates assignment step by step. This section supplies enough construction detail to understand the congestion experiments; a possible LG chapter can carry the more extensive group-formation investigation.
 
-Explain why random finite groups generally have a positive index. Input $\rho$ and output $H_{\mathrm{sort}}$ are not interchangeable.
+### 4.7 What the completed mechanism experiments establish
 
-Preserve the history:
+Retain the documented experiments and their scientific limits. Distinguish changed winner identities from a downturn in a plotted curve; report support and sensitivity to binning. Identify settings and implementation versions for figures before treating them as evidence for the current mathematical definition.
 
-- Earlier target-based assignment used a different distance/probability specification.
-- Parent and Child variants were design stages.
-- The implemented Grandchild updates group composition during assignment.
-- The model's similarity concerns performance metadata, rather than node degree alone.
+### 4.8 The bridge to empirical fitting
 
-**Sources:** `3-Master_Plan/re_entry/LG_model_desk_reference.md`; `sports/documents/541_grandchild_homophily_assign_README.md`; `3-Master_Plan/re_entry/model_OPORD.md`. Implementation anchors for detailed equation-to-code verification: `sports/541_grandchild_homophily_assign.py` and `sports/tier1_pool_assignment.py`.
+Explain that historical estimation used observed rosters and a season-wise softmax probability inside an independent Bernoulli likelihood. That fitting model differs from exact-K selection without replacement. The saved joint estimates concern gamma, lambda, and the fitting temperature; threshold construction and assignment calibration require their own explanation. Preserve the unresolved questions about the fitted sample, outcome timing, normalization, and parameter transfer.
 
-### 4.4. SCORE: how the specified congestion penalty operates
+### Appendices 4A and 4B
 
-For the recent full-team smooth-congestion version:
+Appendix 4A retains technical qualifications, the historical fitting record, and consequential differences between earlier implementations and the stated model. Appendix 4B records sources for equations and completed results. Repository provenance supports traceability but does not replace scholarly citations. Keep implementation history out of the main narrative unless it changes how a result must be interpreted.
 
-$$
-v_i=\frac{1}{1+\exp[-\gamma(A_i-\theta)]},
-\qquad
-C_j=\frac{1}{n_j}\sum_{i\in j}v_i,
-\qquad
-S_i=A_i-\lambda C_{g(i)}.
-$$
+## 4. The LG chapter possibility and its present status
 
-**Explain each parameter separately:**
+### Scientific purpose
 
-- **$\gamma$: transition sharpness.** How abruptly a player's contribution rises around the threshold.
-- **$\theta$: transition location.** Where that rise occurs on the performance scale.
-- **$\lambda$: penalty weight.** How strongly the constructed congestion quantity reduces the score.
-- **$C_j$: constructed congestion.** In this version, the mean includes the focal player, and everyone on the team receives the same subtraction.
+The original LG model combines attachment preference based on individual and group metadata with **fixed prescribed roster sizes**. Remaining seats represent available assignment opportunities, not attraction to high degree. A separate chapter could establish what this combination contributes to sorting, variation within and between teams, and the concentration of credible competitors.
 
-For fixed memberships, a shared team penalty preserves score ordering within that team while potentially changing ordering across teams.
+Relaxing fixed rosters changes the model. The exploration should name each alternative and explain its kernel instead of treating every variant as LG.
 
-**Do not merge historical specifications.** Earlier material used leave-one-out congestion. The recent experiment used full-team congestion while retaining leave-one-out peer performance as a plotting variable. Standardizing congestion also changes the meaning of a numerical $\lambda$.
+### What is documented now
 
-Explain why the recent experiments held $\theta$ fixed when changing selection capacity: moving $K$ alone then changes SELECT without also changing SCORE. Other routines coupled $\theta$ to $K/N$; that is a different comparison.
+The October 6 [executive summary](LG_Model_Exploration_Executive_Summary.docx) and [handoff](LG_Model_Exploration_Agent_Handoff.md) set out the proposed study. The newer [LG decision log](lg_exploration/documents/LEO_DECISION_LOG.md) records subsequent implementation and Charles’s approvals. It supersedes the handoff’s statements that the working code has yet to be built.
 
-Include the historical threshold argument near $\lambda\approx4/\gamma$ as an argument whose assumptions must be spelled out, not a universal downturn theorem. A local sigmoid derivative is not by itself a population selection-curve result.
+A working [composition notebook](lg_exploration/notebooks/01_composition_opportunity_rules.ipynb), Python modules, and settings files now exist. The decision log reports completed saved divisions for the first fixed-roster composition comparison. It also records contender-count diagnostics, an uncapped extension, alternative initial attachment signals and mean-versus-sum signals, and an optional one-plus-members opportunity multiplier. That last option introduces a size-dependent preference and must be distinguished from original fixed-roster LG and from uncapped metadata-only assignment.
 
-**Sources:** `3-Master_Plan/re_entry/LG_model_desk_reference.md`; `3-Master_Plan/re_entry/06_Lambda_threshold_and_KN_memo.md`; `3-Master_Plan/re_entry/HEROs_and_PASSes/theta/THETA_KN_sweep_summary.md`; the three-season report.
+This update inspected the implementation inventory and decision record; it did not rerun experiments or independently audit those saved results. The existence of code or a plotting option is not evidence that a scientific conclusion has been established.
 
-### 4.5. SELECT: capacity, ranking, and selection noise
+### Proposed chapter development
 
-**Main point:** A score does not specify selection until the rule and capacity are given.
+1. Define fixed-roster LG and its scientific question.
+2. Explain and compare the assignment opportunity rules while holding populations and relevant constraints constant.
+3. Present verified composition and sorting results with repetitions and uncertainty described correctly.
+4. Treat relaxed capacities and other attachment kernels as explicit extensions, identifying which assumption changes in each comparison.
+5. Connect selected group-formation findings to congestion and advancement only where the scoring and selection analyses have actually been completed.
+6. Use synthetic parameter recovery to diagnose fitting when the generating and fitted probability models are specified and aligned.
 
-For deterministic selection:
+The last two items remain planned stages in the reviewed materials, not completed results certified here. Matching-model recovery should precede claims about fitting data generated under another selection rule. This map does not authorize new sweeps, fits, or high-performance-computing jobs.
 
-$$
-Y_i=\mathbf{1}\{i\text{ is among the }K\text{ highest scores}\},
-\qquad q=K/N,
-$$
+### Decision still needed
 
-with a documented tie rule.
+Charles and Alex should decide whether the verified LG findings support a distinct chapter with its own question and conclusion. Until then, reserve the possibility and preserve the work, while maintaining the short assignment explanation in Chapter 4.
 
-Explain:
+## 5. Empirical work alongside writing
 
-- $N$ is the defined eligible population and $K$ is the number selected.
-- A smaller $K/N$ means greater scarcity.
-- Deterministic top-$K$ has no random selection after scoring.
-- Random assignment can still make outcomes vary across repeated runs.
-- Stochastic selection adds another source of variation; temperature must be defined through the actual probability equation.
+### Romania
 
-The historical Bernoulli calibration and selection of exactly $K$ individuals without replacement are different probability models. Temperature's placement and the scaling of $\lambda$ matter. Do not call calibrated parameters transferable until equivalence or an explicitly justified approximation is established.
+Romania has progressed well beyond the initial Alba-only acquisition described in the September map. Charles has authorized additional county acquisition, reconciliation, and descriptive plots in subsequent work. Sources now include school-level results, admitted and unassigned or rejected lists, and cross-county information. Each source type still needs its own completeness and linkage checks.
 
-The 2.7% used in the recent mechanism experiment was a scenario motivated by the career-exit outcome proportion; it was not the observed annual selection rate of each experimental season.
+The current background priority is to preserve and assess those downloads, keep unresolved records open, and distinguish download progress from reconciliation and eligibility for analysis. A county whose placement reports reconcile is not thereby proven to have a complete origin-school applicant population. Incoming and outgoing students require explicit treatment; an unmatched student must not automatically count as an unsuccessful placement.
 
-**Sources:** `VECTOR_PD41_Assortativity_Scientific_Brief.md`, especially its calibration/replay cautions; the three-season report; historical temperature scripts referenced in the desk reference. The final stochastic equations require direct implementation verification before chapter prose treats them as settled.
+The historical source gates remain relevant, but the September statement that no outcome exploration has been authorized is no longer an adequate description of subsequent county work. Existing descriptive analysis permissions do not constitute blanket permission for a new national outcome model. Charles controls execution and any expansion in scientific scope.
 
-### 4.6. What the completed experiments taught us
+A dedicated [offline county progress notebook](education_analysis/notebooks/EDUCATION_20261013_Romania_2001_county_progress.ipynb) now summarizes acquisition and reconciliation from saved records. Run its settings and refresh cells once, then rerun the refresh cell whenever an updated table is needed. Its role is monitoring, not resolving uncertainty by labeling missing data permanently unavailable. This map does not assert a current complete-county count or restart any worker.
 
-Organize by scientific question, retaining dates and model versions. The following are **findings documented in saved reports**, not freshly rerun results in this update.
+### Army, basketball, and academic careers
 
-1. **Can congestion change winners without similarity preference?** The three-season experiment says yes at its tested settings. Preferential assignment increased the average number changed. This does not establish a downturn without preference.
-2. **Was the initial penalty large enough to visibly reshape the curve?** The penalty audit put the raw congestion subtraction on the scale of individual performance. Later penalty comparisons made the curve's response visible.
-3. **How does the shape depend on the penalty and binning?** The $\lambda=4$, $\rho=1$, 10% selection comparison displayed a rise and decline in equal-width bins; the quantile view differed. The chapter must show support counts and explain the different views.
-4. **Does a low selection fraction make assignment preference irrelevant?** The direct 50% versus 1% comparison did not support that blanket conclusion. Fewer winners changed in absolute number at 1%, but a larger fraction of the small selected set changed.
-5. **How does reduced assignment preference change the environment?** It altered measured sorting and the range of peer environments, as well as the selection profile. Empty extreme bins are missing support, not zero success.
+Preserve domain-specific measurement and methodological work. The dissertation can compare domains without assuming identical outcomes, sampling, or peer definitions. Army survival and competing-risk work remains dissertation-relevant even if an eventual paper compresses it. The historical basketball fitting and mechanism experiments need separate accounts. Further academic-career claims depend on the evidence actually available, not the intended breadth of the eventual dissertation.
 
-Use the existing plot trail as the figure register. Preserve the 50% selection detour and its purpose. Do not describe the chosen $\lambda$ as an estimated optimum or the visually selected downturn as a preregistered discovery.
+## 6. Immediate writing sequence and remaining decisions
 
-**Sources:** `assort_analysis/docs/results/ASSORT_20260927_model_plot_trail.md` and its linked reports: three-season mechanism, selection-rate comparison, penalty magnitude, penalty bars, scarcity bars, selection at 50%, assignment preference at 0.05, and the direct preference/scarcity comparison.
+**Agreed direction:** Continue the current Word model chapter, with readable introductions before mathematical definitions and enough derivation for the committee to assess the claims. Charles’s current edits take precedence over older outlines and status notes. Preserve source records and backups.
 
-### 4.7. Established scope, limits, and the bridge to fitting
+**Our proposed next sequence:**
 
-**We can explain now:** The documented architecture, implemented model families, parameter roles, and bounded conclusions of the saved experiments.
+1. Finish the current pass through Chapter 4, including the distinction between completed experiments and the fitting bridge.
+2. Inventory which empirical figures and claims can support the phenomenon chapter, including their population definitions and unresolved limitations.
+3. Review the LG exploration’s verified results and decide whether its independent contribution warrants a chapter.
+4. Decide the placement of the Army methodological material and the final chapter numbering with Alex.
+5. Address only the specific missing analyses required by a proposed scientific claim. Record the question, what evidence already exists, and the smallest necessary additional investigation.
 
-**We should not claim yet:**
+The immediate scientific questions still include the effect of earlier score clipping and selection caps on reused results; historical fitting-window and outcome-label definitions; threshold and normalization choices; transfer or refitting between probability models; and the empirical interpretation of cross-county student movement. They should remain visible without turning this work map into an authorization for broad experiments.
 
-- Universal necessity of assortative preference for a downturn.
-- That a hump proves congestion.
-- That scarce NBA selection or five-player court capacity explains the empirical basketball curve. The current experiments did not explicitly model five simultaneous court positions.
-- That one calibrated parameter set applies unchanged across likelihoods, selection rules, normalizations, or domains.
-- That the Romania descriptive patterns identify a causal peer penalty.
-- That Army, basketball, tenure, and education share an already verified identical empirical effect.
+## 7. Source register and revision record
 
-End with a short list of specific unresolved bridges. That list should guide later decisions without becoming a new experimental campaign.
+The sources below distinguish direct advisor evidence from our own plans and current artifacts:
 
-## 5. Evidence discipline for drafting
+- **Alex’s direct recorded proposals:** PD44 transcript, especially 00:00–03:35, 06:31, 09:10–11:31, and 12:24; PD45 transcript, especially 02:26–03:35 and 04:16–06:14. The PD45 export is not ordered chronologically.
+- **Advisor email:** The four comments and model introduction reproduced by Charles in this conversation. No separate email file was verified for this update.
+- **Charles’s account of framing:** `Dissertation Tone.docx`.
+- **Current manuscript:** `Model_Chapter_Shared_Working_Draft.docx`, headings inspected on 13 October. Its live content takes priority over the October 8 change memo and earlier Markdown outline.
+- **LG proposed scope:** `LG_Model_Exploration_Executive_Summary.docx` and `LG_Model_Exploration_Agent_Handoff.md`.
+- **LG later decisions and implementation status:** `lg_exploration/documents/LEO_DECISION_LOG.md`, the composition notebook, and the current code/settings inventory. Results were not recomputed or fully audited for this update.
+- **Historical model evidence trail:** `assort_analysis/docs/results/ASSORT_20260927_model_plot_trail.md` and `NVector_to_SVector_MLE_Bernoulli_response.md`. These remain entry points for claim-specific verification, not fresh verification of all their contents in this update.
 
-Use these labels in working prose:
-
-- **Definition or assumption:** We chose a mechanism or outcome rule. Its existence is not evidence that an institution follows it.
-- **Implemented:** A code path exists; execution and scientific validity are separate questions.
-- **Documented completed result:** A saved report records a run and its outputs. Follow its provenance before using an exact figure in the dissertation.
-- **Independently checked:** State which check was done and when. This update read sources; it did not reproduce computations.
-- **Proposed or unresolved:** No supporting completed result is established.
-- **Historically superseded:** Preserve why a previous specification existed and what replaced it.
-
-Use descriptive experiment names alongside historical Pass A/B/C labels. Those labels changed across documents. Likewise, spell out the intended meaning of “Layer B” each time rather than assume a shared meaning.
-
-Keep these unresolved discrepancies visible:
-
-- **Army:** Peer definitions; $H_{\mathrm{sort}}=0.131$ versus approximately 0.255–0.279; Mac/AWS run-to-result mapping; completed component plots versus an unfinished mosaic.
-- **Basketball:** Binned tail behavior versus fitted quadratic curvature; annual versus career-exit outcomes; empirical versus simulated axes; calibration versus replay.
-- **Tenure:** Construction roster versus inference sample versus decision cohort; person-year versus decision-year analyses; completed versus unfinished survival work.
-
-These are provenance tasks for the claims that require them. They do not all have to be solved before the model architecture can be drafted.
-
-## 6. First writing packet and remaining verification
-
-**Recommended first draft:** The chapter opening and Sections 4.1–4.2 above: the motivating question, the three stages, the quantities, and the interpretation of measured performance. Then develop ASSIGN, SCORE, and SELECT in order.
-
-**Retain dissertation detail:** Explain rejected alternatives when they clarify a scientific choice, show equations with verbal interpretation, preserve parameter regimes, and attach each experimental claim to its saved report. Compress later for a paper.
-
-**Targeted verification while writing:**
-
-- Trace each displayed model equation to its actual implementation and version.
-- Recover the precise stochastic calibration/replay equations before asserting parameter comparability.
-- Verify the assumptions and provenance of historical threshold/shape arguments.
-- Identify the completed Army estimator for each figure, especially before using “Fine–Gray.”
-- For every proposed missing analysis, record the unsupported sentence, existing evidence, smallest necessary check, and authorization status.
-
-This is sufficient to begin a chapter. It is not a requirement to finish another suite of experiments first.
-
-## 7. Source register and access limits
-
-All paths are repository-relative unless identified as relative to this VECTOR workspace.
-
-**Primary priority evidence:**
-
-- `transcripts/20260930_Paper_Directions_44_otter_ai_transcript.docx` — read in full. This is the controlling meeting record.
-- Charles's PD44 priority update in this conversation — explicit sequencing, background-acquisition limits, and national-analysis authorization gate.
-
-**Model sources inspected:**
-
-- `3-Master_Plan/BINDING_Selection_is_its_own_step.md`.
-- `3-Master_Plan/re_entry/LG_model_desk_reference.md`.
-- `3-Master_Plan/re_entry/02_Three_Kinds_of_Model.md`.
-- `3-Master_Plan/re_entry/model_OPORD.md`.
-- `sports/documents/541_grandchild_homophily_assign_README.md`.
-- `3-Master_Plan/re_entry/06_Lambda_threshold_and_KN_memo.md` — relevant threshold, congestion-definition, and parameter passages inspected.
-- `3-Master_Plan/re_entry/HEROs_and_PASSes/theta/THETA_KN_sweep_summary.md`.
-
-**VECTOR workspace sources inspected:**
-
-- `VECTOR_CURRENT_STATE.md` — current/historical priority and evidence records.
-- `VECTOR_PD41_Assortativity_Scientific_Brief.md` — relevant specification and unresolved-transfer passages.
-- `assort_analysis/docs/results/ASSORT_20260927_model_plot_trail.md`.
-- `assort_analysis/docs/results/ASSORT_20260927_three_season_mechanism_v1_report.md`.
-- `assort_analysis/docs/results/ASSORT_20260927_rho_scarcity_v1_report.md`.
-- `education_analysis/00_READ_ME_FIRST.md` — status and gate records.
-
-**Army sources inspected:**
-
-- `talent/documents/COX_METHODS_BRIEF.md`.
-- `talent/documents/CR_AND_HR_FOR_DUMMIES.md` — competing-risk/Cox distinction and timing caveats.
-
-**Limits of this update:** No research computation, live acquisition, figure regeneration, or new model experiment was performed. Named code files are implementation anchors for chapter verification, not a claim that every code path was audited here. Saved reports supply the numerical history. Army source refreshes still depend on their authorized environment. No missing source prevents beginning the conceptual model draft.
-
-## 8. Decision for review
-
-**Proposed next step:** Draft the opening architecture section, then the three model components, using the evidence distinctions above. Keep the final dissertation chapter count provisional. Let national acquisition proceed only within its already approved scope, and bring any proposed analysis back for an explicit decision.
-
+**Revision note:** This October 13 version replaces the September 30 work map in place so existing links still work. The preceding Markdown file was backed up under `manuscript_backups/work_map_before_update_*`. The older PDF beside this file has not been regenerated and does not reflect this update. No manuscript prose, research code, or experimental results were changed by this work-map revision.
