@@ -1,0 +1,81 @@
+{
+  "purpose": "Mathematical illustration, not empirical data or fitted parameter values",
+  "theta": 1.0,
+  "gamma": 2.0,
+  "K": 3,
+  "lambda_range": [
+    0.0,
+    2.0
+  ],
+  "boundary_tie_rule": "Lower person number first",
+  "membership_change_lambda": 0.33551000022302285,
+  "within_selected_crossing_lambda": 0.617372228022435,
+  "winner_sets": [
+    {
+      "lambda_interval": [
+        0.0,
+        0.33551000022302285
+      ],
+      "winners": [
+        "P1",
+        "P2",
+        "P4"
+      ]
+    },
+    {
+      "lambda_interval": [
+        0.33551000022302285,
+        0.617372228022435
+      ],
+      "winners": [
+        "P1",
+        "P4",
+        "P7"
+      ]
+    },
+    {
+      "lambda_interval": [
+        0.617372228022435,
+        0.8387750005575583
+      ],
+      "winners": [
+        "P1",
+        "P4",
+        "P7"
+      ]
+    },
+    {
+      "lambda_interval": [
+        0.8387750005575583,
+        1.1023180969227127
+      ],
+      "winners": [
+        "P1",
+        "P4",
+        "P7"
+      ]
+    },
+    {
+      "lambda_interval": [
+        1.1023180969227127,
+        1.8521166840673036
+      ],
+      "winners": [
+        "P1",
+        "P4",
+        "P7"
+      ]
+    },
+    {
+      "lambda_interval": [
+        1.8521166840673036,
+        2.0
+      ],
+      "winners": [
+        "P1",
+        "P4",
+        "P7"
+      ]
+    }
+  ]
+}
