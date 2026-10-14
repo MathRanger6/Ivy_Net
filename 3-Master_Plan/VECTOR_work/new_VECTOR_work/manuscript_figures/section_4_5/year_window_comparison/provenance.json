@@ -1,0 +1,64 @@
+{
+  "summary": [
+    {
+      "plot": "Panel 9: 2009\u20132021 (original)",
+      "n": 22795,
+      "positive_rows": 615,
+      "unit": "players"
+    },
+    {
+      "plot": "Panel 9: 2011\u20132021 (changed)",
+      "n": 19803,
+      "positive_rows": 520,
+      "unit": "players"
+    },
+    {
+      "plot": "Panel 7: 2011\u20132021 (original)",
+      "n": 425,
+      "positive_rows": 143,
+      "unit": "player-seasons"
+    },
+    {
+      "plot": "Panel 7: 2009\u20132021 (changed)",
+      "n": 534,
+      "positive_rows": 175,
+      "unit": "player-seasons"
+    },
+    {
+      "plot": "Panel 8: 2011\u20132021 (original)",
+      "n": 1237,
+      "positive_rows": 330,
+      "unit": "player-seasons"
+    },
+    {
+      "plot": "Panel 8: 2009\u20132021 (changed)",
+      "n": 1546,
+      "positive_rows": 418,
+      "unit": "player-seasons"
+    }
+  ],
+  "saved_sources": [
+    {
+      "path": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/HEROs_and_PASSes/basic_data_plots/CCT_draft_rate_ai_band_poolq_loo_min20_ppm_z2_3_dft.json",
+      "sha256": "3dfe991c80b22c209cbb0a83512623a0d2bb365790580983f94a5e292963d866"
+    },
+    {
+      "path": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/data_story/_compare_0921/CCT_draft_rate_ai_band_poolq_loo_min20_ppm_z2_3_dft.json",
+      "sha256": "3a5716fab4a04150acbcb9aeb90784419441528fc637c65303b4995a3265f1e9"
+    },
+    {
+      "path": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/_DISPOSABLE_elite_pond_loo_twin/ELITE_pond_loo_pw4p7_dft_min20_mg10_top7_ppm_11_21.json",
+      "sha256": "0fe605bff3fb25c2bbb7bc0a8b8e6bd34c0097c7c88442722ade17d0e3890d59"
+    },
+    {
+      "path": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/data_story/_compare_0921/ELITE_pond_loo_pw4p7_dft_min20_mg10_top7_ppm_9_21.json",
+      "sha256": "9822496c95f3c177d7afed769f49cf357d6827cd9648faa9f80b85945e53fc6b"
+    }
+  ],
+  "panel9_method": "Verified original 2009\u20132021 last-season cohort, then retain seasons 2011\u20132021; retain original peer scaling, winsorization and bin boundaries.",
+  "panels7_8_method": "Read previously saved year-window reruns. Keep original rules, not a fixed set of teams, cutoff or bin edges.",
+  "panel8_cutoffs": [
+    1.4935605333531061,
+    1.4997377331260051
+  ]
+}
