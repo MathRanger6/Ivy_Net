@@ -1,0 +1,2 @@
+comparison,tail_minus_comparison_pp,ci95_low_pp,ci95_high_pp,two_sided_p,colleges,players,standard_error_pp,t_degrees_of_freedom,caution
+Raw rate difference,-0.40638606676341865,-7.986409626256903,7.173637492730066,0.9159212576181445,206,525,3.8445983496789,205,Exploratory; few clusters in either region or highly unequal cluster sizes can make inference unreliable.

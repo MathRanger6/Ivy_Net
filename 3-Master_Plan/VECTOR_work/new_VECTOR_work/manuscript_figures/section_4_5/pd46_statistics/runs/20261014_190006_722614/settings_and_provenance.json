@@ -1,0 +1,177 @@
+{
+  "settings": {
+    "years": [
+      2009,
+      2021
+    ],
+    "top_percent": 7.0,
+    "peer_percentiles": [
+      60,
+      80
+    ],
+    "plot_bin_counts": [
+      8,
+      12,
+      16,
+      24
+    ],
+    "split_seed": 46
+  },
+  "cohort_players": 22795,
+  "performance_cutoff": 1.6467441698378573,
+  "peer_cutoffs": [
+    0.05362102117912059,
+    0.21796071833530647
+  ],
+  "band_players": 1596,
+  "cohort_hash": "640137c22423ab3f0330515bb40313c890dddc8598e615e5ad6bc6ad7cc832aa",
+  "source_csv": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/hero/PASS_A_binned_draft_rate_poolq_loo_ew16_allt_min20_mg10_09_21_last_ps_perm_loo_ever_lastps_ew16.csv",
+  "source_metadata": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/_DISPOSABLE_elite_pond_loo_twin/ELITE_pond_loo_pw4p7_allt_min20_mg10_top7_ppm_9_21_last_ps.json",
+  "source_csv_sha256": "5d5ac4fa71eb969d3e2ce55711a0f5afbeddf279e52b3a04c328ec197a4489d9",
+  "population": "One final observed season per player; all eligible teams; minimum 20 minutes and 10 team-season games.",
+  "outcome": "Ever drafted, not draft in this season.",
+  "scaling": "Original within-season performance standardization and peer winsorization retained when restricting years.",
+  "regions": "Player-weighted peer quantiles in the full eligible cohort, before filtering own performance. Ties kept together.",
+  "inference": "Exploratory after inspecting related plots. No correction for historical searches. No causal interpretation.",
+  "peak_tail_test": {
+    "method": "Single-step one-sided max-t college-cluster Rademacher multiplier bootstrap",
+    "repetitions": 9999,
+    "seed": 46,
+    "family_size": 14,
+    "target_start_bin": 14,
+    "contrast": "First bin rate minus pooled rate in the next two bins; positive means decline",
+    "family": "Every start bin 1 through 14, each versus its next two bins pooled by players",
+    "original_bin_edges": [
+      -0.6140188028352481,
+      -0.5353504394726262,
+      -0.4566820761100043,
+      -0.3780137127473824,
+      -0.2993453493847604,
+      -0.2206769860221384,
+      -0.1420086226595165,
+      -0.0633402592968946,
+      0.0153281040657272,
+      0.0939964674283492,
+      0.1726648307909711,
+      0.251333194153593,
+      0.3300015575162149,
+      0.4086699208788368,
+      0.4873382842414587,
+      0.5660066476040807,
+      0.6446750109667025
+    ],
+    "highest_observed_bin": 14,
+    "target_is_an_observed_maximum": true,
+    "colleges_in_band": 348,
+    "critical_value_95": 2.60431276417835,
+    "global_family_p": 0.5958,
+    "maximum_standardized_decline_start_bin": 14,
+    "variance_correction": "G/(G-1), where G counts colleges in the performance band; no further N/(N-p) correction",
+    "bootstrap": "Centered linearized rate differences, common college signs across all comparisons, fixed original standard errors",
+    "interval": "95% simultaneous ONE-SIDED lower bounds; not two-sided confidence intervals; rounding/Monte Carlo may affect boundary decisions",
+    "scope": "Adjusts location search within this fixed 14-comparison family only. Historical band/year/bin-count/tail-width searches are not covered.",
+    "assumptions": "Approximate independence across colleges and adequate effective college/event counts. No own-performance or season adjustment.",
+    "warnings": "Sparse events and few contributing colleges can impair the approximation. Diagnostic thresholds 30 and 10 are cautions, not validity guarantees.",
+    "account_grouping": true,
+    "uncertainty_units": 348,
+    "independent_diagnostic": {
+      "method": "One-sided max-t independent-player Rademacher multiplier bootstrap",
+      "repetitions": 9999,
+      "seed": 46,
+      "family_size": 14,
+      "target_start_bin": 14,
+      "contrast": "First bin rate minus pooled rate in the next two bins; positive means decline",
+      "family": "Every start bin 1 through 14, each versus its next two bins pooled by players",
+      "original_bin_edges": [
+        -0.6140188028352481,
+        -0.5353504394726262,
+        -0.4566820761100043,
+        -0.3780137127473824,
+        -0.2993453493847604,
+        -0.2206769860221384,
+        -0.1420086226595165,
+        -0.0633402592968946,
+        0.0153281040657272,
+        0.0939964674283492,
+        0.1726648307909711,
+        0.251333194153593,
+        0.3300015575162149,
+        0.4086699208788368,
+        0.4873382842414587,
+        0.5660066476040807,
+        0.6446750109667025
+      ],
+      "highest_observed_bin": 14,
+      "target_is_an_observed_maximum": true,
+      "colleges_in_band": 348,
+      "critical_value_95": 2.6520429151236953,
+      "global_family_p": 0.3363,
+      "maximum_standardized_decline_start_bin": 14,
+      "variance_correction": "N/(N-1) for N independent players",
+      "bootstrap": "Centered linearized rate differences, common college signs across all comparisons, fixed original standard errors",
+      "interval": "95% simultaneous ONE-SIDED lower bounds; not two-sided confidence intervals; rounding/Monte Carlo may affect boundary decisions",
+      "scope": "Adjusts location search within this fixed 14-comparison family only. Historical band/year/bin-count/tail-width searches are not covered.",
+      "assumptions": "Each final-season player is independent; no allowance for shared college circumstances.",
+      "warnings": "Sparse events and few contributing colleges can impair the approximation. Diagnostic thresholds 30 and 10 are cautions, not validity guarantees.",
+      "account_grouping": false,
+      "uncertainty_units": 1596
+    }
+  },
+  "panel7": {
+    "source": {
+      "panel": "Original mosaic panel 7",
+      "years": [
+        2011,
+        2021
+      ],
+      "own_performance_band": [
+        2,
+        3
+      ],
+      "min_minutes": 20,
+      "min_team_season_games": 10,
+      "source_file": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/HEROs_and_PASSes/basic_data_plots/CCT_draft_rate_ai_band_poolq_loo_min20_ppm_z2_3_dft.json",
+      "source_sha256": "3dfe991c80b22c209cbb0a83512623a0d2bb365790580983f94a5e292963d866",
+      "cohort_sha256": "926fa9f90931f88321a2d93395d7edb58f96db0afe0f50ea4bbd282b5d15ce1e",
+      "rows": 425,
+      "distinct_players": 358,
+      "positive_rows": 143,
+      "distinct_drafted_players": 117,
+      "colleges": 124,
+      "dependence_groups": 120,
+      "players_at_multiple_colleges": 4,
+      "population": "All eligible player-seasons, restricted to colleges represented by an ever-drafted player in source window.",
+      "bins": "Original within-band rank-based quantile bins; ties follow historical row-order convention.",
+      "outcome": "Ever-drafted label repeated for each included player-season; rates weight player-seasons, not distinct players.",
+      "dependence": "Colleges linked by a shared player IN THIS ANALYSIS BAND are merged into a connected component. All rows from a college stay together across years. Different components are assumed approximately independent.",
+      "verified_original_bin_counts": true
+    }
+  },
+  "saved_at": "2026-10-14T19:00:07.612415-04:00",
+  "completed_tables": [
+    "preview",
+    "original_curve_bins",
+    "first_test",
+    "peak_tail_chosen",
+    "peak_tail_all14",
+    "peak_tail_independent",
+    "peak_tail_population_counts",
+    "peak_tail_four_versions",
+    "panel7_bins",
+    [
+      "panel7_dependence_groups",
+      "panel7_independent",
+      "panel7_four_versions",
+      "panel7_population_counts"
+    ],
+    "all_bin_counts"
+  ],
+  "completed_figures": [
+    "first_comparison",
+    "ranges_on_original_curve",
+    "peak_tail_test",
+    "panel7_fixed_tail",
+    "bin_resolution"
+  ],
+  "analysis_code_sha256": "c441d7ef8e08db16df0f406090a9f4c19a2ce16a68b89d19a1d28964ab015c55"
+}

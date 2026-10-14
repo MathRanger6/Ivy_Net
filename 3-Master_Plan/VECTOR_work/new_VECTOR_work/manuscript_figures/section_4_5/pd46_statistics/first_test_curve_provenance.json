@@ -1,0 +1,29 @@
+{
+  "settings": {
+    "years": [
+      2009,
+      2021
+    ],
+    "top_percent": 7.0,
+    "peer_percentiles": [
+      60,
+      80
+    ]
+  },
+  "cohort_players": 22795,
+  "performance_cutoff": 1.6467441698378573,
+  "peer_cutoffs": [
+    0.05362102117912059,
+    0.21796071833530647
+  ],
+  "band_players": 1596,
+  "cohort_hash": "640137c22423ab3f0330515bb40313c890dddc8598e615e5ad6bc6ad7cc832aa",
+  "source_csv": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/hero/PASS_A_binned_draft_rate_poolq_loo_ew16_allt_min20_mg10_09_21_last_ps_perm_loo_ever_lastps_ew16.csv",
+  "source_metadata": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/_DISPOSABLE_elite_pond_loo_twin/ELITE_pond_loo_pw4p7_allt_min20_mg10_top7_ppm_9_21_last_ps.json",
+  "source_csv_sha256": "5d5ac4fa71eb969d3e2ce55711a0f5afbeddf279e52b3a04c328ec197a4489d9",
+  "population": "One final observed season per player; all eligible teams; minimum 20 minutes and 10 team-season games.",
+  "outcome": "Ever drafted, not draft in this season.",
+  "scaling": "Original within-season performance standardization and peer winsorization retained when restricting years.",
+  "regions": "Player-weighted peer quantiles in the full eligible cohort, before filtering own performance. Ties kept together.",
+  "inference": "Exploratory after inspecting related plots. No correction for historical searches. No causal interpretation."
+}
