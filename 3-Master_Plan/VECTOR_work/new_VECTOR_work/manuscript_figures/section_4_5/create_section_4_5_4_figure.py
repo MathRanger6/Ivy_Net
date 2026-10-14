@@ -143,3 +143,45 @@ def make_figure(panel, reference_edges, *, top_percent=7., n_bins=16,
 if __name__=='__main__':
     p,e=load_verified_cohort()
     make_figure(p,e)
+
+
+def make_year_comparison(panel, reference_edges, *, top_percent=7., n_bins=16,
+                         thin_n=30, save=True, output_dir=HERE):
+    """Original vs shortened years; same all-team, final-season population rules."""
+    edges = reference_edges.copy() if n_bins == 16 else np.linspace(reference_edges[0], reference_edges[-1], n_bins+1)
+    frames = [panel, panel.loc[panel.season.between(2011,2021)].copy()]
+    cuts = [float(f.perf.quantile(1-top_percent/100)) for f in frames]
+    groups = [frames, [f.loc[f.perf >= c] for f,c in zip(frames,cuts)]]
+    years = ['2009–2021', '2011–2021']
+    fig, axes = plt.subplots(2,2,figsize=(16,12))
+    tables=[]
+    for row, pair in enumerate(groups):
+        row_tables=[count_bins(f,edges,f"{'All players' if row==0 else 'Top performance band'}; {year}") for f,year in zip(pair,years)]
+        upper=max(t.ci_high.max()*100 for t in row_tables)*1.12
+        for col,(f,t) in enumerate(zip(pair,row_tables)):
+            ax=axes[row,col];color=['#356d95','#b24b36'][col]
+            label='ALL ELIGIBLE PLAYERS' if row==0 else f'TOP {top_percent:g}% BY INDIVIDUAL PERFORMANCE'
+            status='ORIGINAL' if col==0 else 'YEAR WINDOW CHANGED'
+            ax.set_title(f'{status}: {years[col]}\n{label}\n{len(f):,} distinct players; {int(f.Y_draft.sum()):,} ever drafted',fontsize=12,fontweight='bold',pad=12)
+            ax.plot(t.center,t.rate*100,color=color,lw=1.6)
+            for _,v in t.iterrows():
+                if v.n:
+                    ax.errorbar(v.center,100*v.rate,yerr=[[max(0,100*(v.rate-v.ci_low))],[max(0,100*(v.ci_high-v.rate))]],fmt='o',ms=4,mfc='white' if v.n<thin_n else color,mec=color,ecolor=color,capsize=2,lw=.8)
+                ax.text(v.center,-.12,str(int(v.n)),transform=ax.get_xaxis_transform(),ha='center',va='top',fontsize=8)
+            ax.text(-.02,-.12,'Players',transform=ax.transAxes,ha='right',va='top',fontsize=8)
+            ax.set_ylim(0,upper);ax.set_xlim(edges[0]-.025,edges[-1]+.025)
+            ax.set_ylabel('Players ever drafted (%)')
+            ax.set_xlabel('Average teammate performance (z score; focal player excluded)',labelpad=35)
+            ax.grid(axis='y',alpha=.2);ax.spines[['top','right']].set_visible(False)
+            t['year_window']=years[col];tables.append(t)
+    fig.suptitle('Section 4.5.4: change the years, keep the population rules',fontsize=17,y=.985)
+    fig.text(.5,.943,'ALL FOUR PLOTS: all eligible teams; one final-season observation per player; identical peer-bin boundaries.',ha='center',fontsize=11)
+    fig.text(.5,.018,f'Matching axes within each row. Numbers below points are player counts. Open circles: fewer than {thin_n} players.\nBars: pointwise 95% Wilson intervals, without team-clustering adjustment. Top {top_percent:g}% is recalculated within each year window.\nOwn-performance cutoffs: {cuts[0]:.4f} (2009–2021), {cuts[1]:.4f} (2011–2021). Original peer scaling and winsorization retained.',ha='center',fontsize=10)
+    fig.subplots_adjust(left=.075,right=.98,top=.86,bottom=.14,hspace=.76,wspace=.2)
+    data=pd.concat(tables,ignore_index=True)
+    if save:
+        out=Path(output_dir);stem=f'figure_4_5_4_year_comparison_ew{n_bins}_top{top_percent:g}'
+        fig.savefig(out/(stem+'.png'),dpi=180,facecolor='white')
+        data.to_csv(out/(stem+'_bins.csv'),index=False)
+        (out/(stem+'_provenance.json')).write_text(json.dumps({'year_windows':years,'top_percent':top_percent,'performance_cutoffs':cuts,'bin_edges':edges.tolist(),'population':'All eligible teams; one final-season observation per player','original_peer_scaling_retained':True},indent=2))
+    return fig,data

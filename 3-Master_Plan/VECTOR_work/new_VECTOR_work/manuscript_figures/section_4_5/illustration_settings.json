@@ -1,5 +1,5 @@
 {
-  "purpose": "Mathematical illustration, not empirical data or fitted parameter values",
+  "purpose": "Mathematical illustration, not empirical estimates",
   "theta": 1.0,
   "gamma": 2.0,
   "K": 3,
@@ -7,9 +7,25 @@
     0.0,
     2.0
   ],
+  "figure1": {
+    "performance_range": [
+      -3.0,
+      3.0
+    ],
+    "sharpness_values": [
+      0.5,
+      2.0,
+      8.0
+    ],
+    "fixed_threshold": 0.0,
+    "threshold_values": [
+      -1.0,
+      0.0,
+      1.0
+    ],
+    "fixed_sharpness": 2.0
+  },
   "boundary_tie_rule": "Lower person number first",
-  "membership_change_lambda": 0.33551000022302285,
-  "within_selected_crossing_lambda": 0.617372228022435,
   "winner_sets": [
     {
       "lambda_interval": [
