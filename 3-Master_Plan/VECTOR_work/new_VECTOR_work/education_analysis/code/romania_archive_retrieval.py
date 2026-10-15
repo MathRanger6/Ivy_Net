@@ -85,6 +85,7 @@ class ArchiveClient:
         reuse_recorded_robots_absence=False,
         success_step_seconds=None,
         random_adaptive_fraction=None,
+        success_streak_for_random_speedup=None,
         pace_redirects=True,
         jitter_fraction=JITTER_FRACTION,
     ):
@@ -104,6 +105,13 @@ class ArchiveClient:
             raise ValueError("success_step_seconds must be positive")
         if random_adaptive_fraction is not None and not 0 < random_adaptive_fraction < 1:
             raise ValueError("random_adaptive_fraction must be between zero and one")
+        if success_streak_for_random_speedup is not None:
+            if random_adaptive_fraction is None:
+                raise ValueError(
+                    "success_streak_for_random_speedup requires random_adaptive_fraction"
+                )
+            if success_streak_for_random_speedup < 1:
+                raise ValueError("success_streak_for_random_speedup must be positive")
         if not 0 <= jitter_fraction < 1:
             raise ValueError("jitter_fraction must be between zero and one")
 
@@ -119,6 +127,7 @@ class ArchiveClient:
         self.http_attempts = 0
         self.success_step_seconds = success_step_seconds
         self.random_adaptive_fraction = random_adaptive_fraction
+        self.success_streak_for_random_speedup = success_streak_for_random_speedup
         self.pace_redirects = pace_redirects
         self.jitter_fraction = jitter_fraction
         self.deadline = time.monotonic() + max_runtime_hours * 3600
@@ -293,11 +302,18 @@ class ArchiveClient:
         self.success_streak += 1
         old = self.interval
         if self.random_adaptive_fraction is not None:
-            self.interval = max(
-                self.minimum_interval,
-                self.interval * (1 - random.uniform(0, self.random_adaptive_fraction)),
+            # Immediate random cut is the older pace. A positive streak gate
+            # keeps that same random percentage, but only after several successes.
+            ready = (
+                self.success_streak_for_random_speedup is None
+                or self.success_streak >= self.success_streak_for_random_speedup
             )
-            self.success_streak = 0
+            if ready:
+                self.interval = max(
+                    self.minimum_interval,
+                    self.interval * (1 - random.uniform(0, self.random_adaptive_fraction)),
+                )
+                self.success_streak = 0
         elif self.success_step_seconds is not None:
             self.interval = max(self.minimum_interval, self.interval - self.success_step_seconds)
             self.success_streak = 0
@@ -313,10 +329,16 @@ class ArchiveClient:
         self.success_streak = 0
         self.consecutive_failures += 1
         old = self.interval
-        factor = (
-            1 + random.uniform(0, self.random_adaptive_fraction)
-            if self.random_adaptive_fraction is not None else FAILURE_SLOWDOWN_FACTOR
-        )
+        # A streak gate uses the random percentage only to creep back after
+        # successes. Failures still take the fixed slowdown. Immediate random
+        # mode, with no streak gate, keeps the small random failure bump.
+        if (
+            self.random_adaptive_fraction is not None
+            and self.success_streak_for_random_speedup is None
+        ):
+            factor = 1 + random.uniform(0, self.random_adaptive_fraction)
+        else:
+            factor = FAILURE_SLOWDOWN_FACTOR
         self.interval = min(self.maximum_interval, self.interval * factor)
         if retry_after is not None:
             self.not_before = max(self.not_before, time.time() + retry_after)

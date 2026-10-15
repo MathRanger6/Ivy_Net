@@ -101,21 +101,25 @@ def preview(b):
     return fig,t
 
 
-def test_fixed_tail(b,*,repetitions=9999,seed=46,account_grouping=True):
+def test_fixed_tail(b,*,repetitions=9999,seed=46,account_grouping=True,n_bins=16,target_bin=8):
     """Same centered max-t principle as 4A, but fixed tail and connected clusters."""
     if not isinstance(repetitions,(int,np.integer)) or repetitions<999:
         raise ValueError('Use at least 999 repetitions.')
-    if set(b.curve_bin.unique())!=set(range(1,17)):
-        raise ValueError('All 16 original bins must be represented.')
+    family_size=n_bins-2
+    tail_bins=[n_bins-1,n_bins]
+    if not 1 <= target_bin <= family_size:
+        raise ValueError('Target must precede the fixed final two bins.')
+    if set(b.curve_bin.unique())!=set(range(1,n_bins+1)):
+        raise ValueError('All original bins must be represented.')
     for key in ['athlete_id','team_id']:
         if (b.groupby(key).dependence_group.nunique()>1).any():
             raise ValueError('Dependence grouping splits a player or college.')
     codes,labels=pd.factorize(b.dependence_group if account_grouping else np.arange(len(b)),sort=True);G=len(labels)
     if G<3:raise ValueError('Too few independent groups.')
     y=b.Y_draft.to_numpy(float);binid=b.curve_bin.to_numpy()
-    right=np.isin(binid,[15,16]);nr=int(right.sum());pr=y[right].mean()
-    psi=np.zeros((G,14));records=[]
-    for j in range(14):
+    right=np.isin(binid,tail_bins);nr=int(right.sum());pr=y[right].mean()
+    psi=np.zeros((G,family_size));records=[]
+    for j in range(family_size):
         left=binid==j+1;n=int(left.sum());pl=y[left].mean()
         v=np.zeros(len(b));v[left]=(y[left]-pl)/n;v[right]=-(y[right]-pr)/nr
         psi[:,j]=np.bincount(codes,weights=v,minlength=G)
@@ -126,7 +130,7 @@ def test_fixed_tail(b,*,repetitions=9999,seed=46,account_grouping=True):
         flags=[]
         if min(ca,cb)<30:flags.append('Fewer than 30 dependence groups on at least one side')
         if min(ea,eb)<10:flags.append('Positive outcomes in fewer than 10 dependence groups on at least one side')
-        records.append(dict(start_bin=j+1,comparison=f'Bin {j+1} vs bins 15+16',
+        records.append(dict(start_bin=j+1,comparison=f'Bin {j+1} vs bins {tail_bins[0]}+{tail_bins[1]}',
             first_rows=n,first_positive_rows=int(y[left].sum()),first_distinct_players=a.athlete_id.nunique(),
             first_distinct_drafted_players=a.loc[a.Y_draft==1,'athlete_id'].nunique(),
             tail_rows=nr,tail_positive_rows=int(y[right].sum()),tail_distinct_players=bside.athlete_id.nunique(),
@@ -137,19 +141,19 @@ def test_fixed_tail(b,*,repetitions=9999,seed=46,account_grouping=True):
     t=pd.DataFrame(records);se=np.sqrt(G/(G-1)*np.sum(psi**2,axis=0))
     if not np.isfinite(se).all() or (se<=0).any():raise ValueError('Invalid uncertainty for one or more contrasts; no comparisons omitted.')
     obs=t.decline_pp.to_numpy()/100/se;scaled=np.sqrt(G/(G-1))*psi/se
-    rng=np.random.default_rng(seed);maxima=np.empty(repetitions);single=np.zeros(14,dtype=int)
-    print(f'Panel 7: {repetitions:,} centered bootstrap draws across all 14 fixed-tail comparisons.',flush=True)
+    rng=np.random.default_rng(seed);maxima=np.empty(repetitions);single=np.zeros(family_size,dtype=int)
+    print(f'{repetitions:,} centered bootstrap draws across all {family_size} fixed-tail comparisons.',flush=True)
     for start in range(0,repetitions,500):
         stop=min(start+500,repetitions)
         noise=rng.choice([-1.,1.],size=(stop-start,G))@scaled
         maxima[start:stop]=noise.max(axis=1);single+=(noise>=obs).sum(axis=0)
     t['standard_error_pp']=100*se
     t['unadjusted_one_sided_p']=(single+1)/(repetitions+1)
-    t['adjusted_one_sided_p_all14']=(1+(maxima[:,None]>=obs).sum(axis=0))/(repetitions+1)
+    t[f'adjusted_one_sided_p_all{family_size}']=(1+(maxima[:,None]>=obs).sum(axis=0))/(repetitions+1)
     critical=float(np.quantile(maxima,.95,method='higher'))
     t['simultaneous95_lower_bound_pp']=t.decline_pp-critical*100*se
-    t['monte_carlo_se_approx']=np.sqrt(t.adjusted_one_sided_p_all14*(1-t.adjusted_one_sided_p_all14)/repetitions)
-    method=dict(target='Bin 8 versus bins 15+16 pooled',family='Each bin 1-14 versus the SAME fixed bins 15+16 pooled',
+    t['monte_carlo_se_approx']=np.sqrt(t[f'adjusted_one_sided_p_all{family_size}']*(1-t[f'adjusted_one_sided_p_all{family_size}'])/repetitions)
+    method=dict(target=f'Bin {target_bin} versus bins {tail_bins[0]}+{tail_bins[1]} pooled',family=f'Each bin 1-{family_size} versus the SAME fixed final two bins pooled',family_size=family_size,
         repetitions=int(repetitions),seed=int(seed),dependence_groups=G,critical_value_95=critical,
         method='One-sided single-step max-t Rademacher cluster multiplier bootstrap of centered rate-difference influence functions',
         correction='G/(G-1); original standard errors retained in bootstrap; empirical higher 95th percentile for lower bounds',
@@ -163,7 +167,7 @@ def test_fixed_tail(b,*,repetitions=9999,seed=46,account_grouping=True):
         method['method']='One-sided max-t independent-ROW Rademacher multiplier bootstrap'
         method['assumptions']='Every player-season row is independent, including repeated rows for the same player. Diagnostic only; no college or repeated-player dependence allowance.'
         method['correction']='N/(N-1) for N independent rows'
-    return t.loc[t.start_bin==8].copy(),t,method
+    return t.loc[t.start_bin==target_bin].copy(),t,method
 
 
 def explain(chosen):

@@ -381,13 +381,13 @@ def peak_tail_plot(band, edges):
     return fig
 
 
-def four_way_results(grouped, independent, *, repeated_rows=False):
+def four_way_results(grouped, independent, *, repeated_rows=False, family_size=14):
     """Hold the effect fixed; show exactly which uncertainty/search assumptions change."""
     rows=[]
     for label,t in [('OFF: each player-season independent' if repeated_rows else 'OFF: each player independent',independent),
                     ('ON: colleges + repeated players' if repeated_rows else 'ON: colleges',grouped)]:
         r=t.iloc[0]
-        for adjust,column in [('OFF','unadjusted_one_sided_p'),('ON: 14 locations','adjusted_one_sided_p_all14')]:
+        for adjust,column in [('OFF','unadjusted_one_sided_p'),(f'ON: {family_size} locations',f'adjusted_one_sided_p_all{family_size}')]:
             rows.append({'Grouping allowance':label,'Peak-location adjustment':adjust,
                 'Observed decline (percentage points)':r.decline_pp,
                 'Standard error (percentage points)':r.standard_error_pp,
@@ -416,9 +416,9 @@ def distinct_bin_counts(frame, regions):
     return pd.DataFrame(records)
 
 
-def show_requested_comparison(grouped,independent,counts,*,repeated_rows=False):
+def show_requested_comparison(grouped,independent,counts,*,repeated_rows=False,family_size=14):
     from IPython.display import display
-    four=four_way_results(grouped,independent,repeated_rows=repeated_rows)
+    four=four_way_results(grouped,independent,repeated_rows=repeated_rows,family_size=family_size)
     print('\nTHE SAME DECLINE, FOUR STATISTICAL VERSIONS')
     display(four.round(4))
     print('OFF / OFF is the result without either adjustment. ON / ON includes both. All four use the same observed rates.')

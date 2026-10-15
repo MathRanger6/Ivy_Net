@@ -117,6 +117,8 @@ SUMMARY_FIELDS = (
     "applicant_rows_without_result",
     "result_rows_without_applicant",
     "applicant_component_disagreements",
+    "applicant_repeated_name_score_keys",
+    "applicant_rows_without_name_or_score",
     "next_source_question",
     "plain_summary",
 )
@@ -148,16 +150,75 @@ def _placement_line(county):
     return "placement-status-no-row"
 
 
+CODE_DIR = Path(__file__).resolve().parent
+CODE_FILES = (
+    "EDUCATION_20261014_romania_all_county_offline_reconciliation.py",
+    "EDUCATION_20261001_romania_offline_county_source_readiness.py",
+    "EDUCATION_20260930_romania_2001_national_acquisition.py",
+    "EDUCATION_20261002_romania_full_gymnasium_offline_reconciliation.py",
+    "EDUCATION_20261003_romania_four_county_program_identity_gate.py",
+    "EDUCATION_20261006_romania_school_results_incoming_acquisition.py",
+    "EDUCATION_20261007_romania_seven_county_new_views_offline_audit.py",
+)
+_CODE_TOKEN = None
+
+
+def _code_token():
+    """Hash the reconciliation module and the readers that decide its counts."""
+    global _CODE_TOKEN
+    if _CODE_TOKEN is not None:
+        return _CODE_TOKEN
+    parts = []
+    for name in CODE_FILES:
+        path = CODE_DIR / name
+        if not path.exists():
+            parts.append(f"{name}|MISSING")
+            continue
+        parts.append(f"{name}|{hashlib.sha256(path.read_bytes()).hexdigest()}")
+    _CODE_TOKEN = "code|" + hashlib.sha256("\n".join(parts).encode("utf-8")).hexdigest()
+    return _CODE_TOKEN
+
+
+def _manifest_source_tokens(county):
+    """Size and modification time of every page file the county manifest names."""
+    path = CACHE / "county_manifests" / f"{county}.json"
+    if not path.exists():
+        return ["manifest-pages|MISSING"]
+    try:
+        manifest = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return ["manifest-pages|UNREADABLE"]
+    tokens = []
+    families = manifest.get("families") or {}
+    for family in sorted(families):
+        for page in families[family].get("pages") or []:
+            file_name = page.get("file")
+            if not file_name:
+                tokens.append(f"{family}|NO FILE")
+                continue
+            tokens.append(_stat_token(CACHE / file_name))
+    return tokens
+
+
 def fingerprint_county(county, status):
-    """Size and modification time of this county's checkpoints, plus status text.
+    """Fingerprint the inputs and code that can change this county's counts.
+
+    Includes the placement-status line, the status file's county slice, the
+    county manifest, every source-page file that manifest lists, the School
+    Result, resident, and incoming checkpoints, program-recovery files, School
+    Applicant View files, and a hash of this reconciliation code plus the
+    readers it calls.
 
     A replaced file that keeps both size and modification time will not force
-    another pass. The pass itself still checks saved hashes when it runs.
+    another pass. The pass itself still checks saved content hashes when it
+    runs. A change to a listed source file's size or time, or to the
+    reconciliation code, does force another pass.
     """
-    parts = [_placement_line(county)]
+    parts = [_code_token(), _placement_line(county)]
     state = status.get("counties", {}).get(county, {})
     parts.append(json.dumps(state, sort_keys=True, ensure_ascii=False))
     parts.append(_stat_token(CACHE / "county_manifests" / f"{county}.json"))
+    parts.extend(_manifest_source_tokens(county))
     for family in NEW_FAMILIES:
         folder = views.PAGES / county / family
         if not folder.exists():
@@ -765,6 +826,8 @@ def reconcile_county(county, county_name, status, progress, fingerprint):
                 "matches": "",
                 "applicant_without_result": "",
                 "result_without_applicant": "",
+                "repeated_applicant_keys": "",
+                "rows_without_name_or_score": "",
                 "component_disagreements": "",
                 "note": f"School Applicant View comparison stopped: {exc}",
             }
@@ -775,6 +838,8 @@ def reconcile_county(county, county_name, status, progress, fingerprint):
         record["applicant_rows_without_result"] = applicants["applicant_without_result"]
         record["result_rows_without_applicant"] = applicants["result_without_applicant"]
         record["applicant_component_disagreements"] = applicants["component_disagreements"]
+        record["applicant_repeated_name_score_keys"] = applicants.get("repeated_applicant_keys", "")
+        record["applicant_rows_without_name_or_score"] = applicants.get("rows_without_name_or_score", "")
         if applicants["note"]:
             record["source_notes"].append(applicants["note"])
         if manifest and family_status(manifest, "origin_school_directory")[0]:
@@ -881,7 +946,12 @@ def _plain_summary(record):
         parts.append(
             f"Provisional same-school name-and-score matches: {record['applicant_result_matches']}. "
             f"Applicant rows without a result row: {record['applicant_rows_without_result']}. "
-            f"Result rows without an applicant row: {record['result_rows_without_applicant']}."
+            f"Result rows without an applicant row: {record['result_rows_without_applicant']}. "
+            f"Repeated applicant name-and-score keys inside one school: "
+            f"{record['applicant_repeated_name_score_keys']}. "
+            f"Applicant rows missing a printed name or admission score: "
+            f"{record['applicant_rows_without_name_or_score']}. "
+            "A matching total counts rows. It does not mean each row is a unique person."
         )
     if record["resident_pages_projected"] != "":
         parts.append(
@@ -978,7 +1048,10 @@ def run_counties(counties=None, output_root=None, *, resume=True, force=()):
     force = {code.upper() for code in force}
     say(
         f"Counties in this pass: {len(selected)}. "
-        "Each saved page is hash-checked. Nothing is downloaded."
+        "School Result View, resident, and incoming pages are hash-checked. "
+        "School Applicant View pages are hash-checked when every listed school file exists. "
+        "Original county report pages are hash-checked for the manifest file digest, "
+        "the row digest, and the saved HTML. Nothing is downloaded."
     )
     for index, county in enumerate(selected, 1):
         current = fingerprint_county(county, status)

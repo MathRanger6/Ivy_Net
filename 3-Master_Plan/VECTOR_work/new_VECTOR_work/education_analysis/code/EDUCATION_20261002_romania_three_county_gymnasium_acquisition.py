@@ -21,7 +21,9 @@ import urllib.parse
 from datetime import datetime, timezone
 from pathlib import Path
 
-from romania_archive_retrieval import ArchiveClient, RetrievalStopped
+from romania_archive_retrieval import (
+    SUCCESS_STREAK_TO_SPEED_UP, ArchiveClient, RetrievalStopped,
+)
 from EDUCATION_20260930_romania_2001_national_acquisition import (
     CACHE, _payload, archive_url, atomic_json, verified_page,
 )
@@ -202,9 +204,11 @@ def main(argv=None):
         # Start at the notebook minimum even if an older run saved a slower pace.
         resume_interval_cap_seconds=args.min_interval_seconds,
         reuse_recorded_robots_absence=True,
-        # After a server error, shorten the wait by one second per successful
-        # response instead of jumping most of the way back on the next page.
-        success_step_seconds=1.0,
+        # After a server error, creep back with the older random percentage,
+        # but only after a streak of successful responses. A single saved page
+        # does not erase the slowdown.
+        random_adaptive_fraction=0.10,
+        success_streak_for_random_speedup=SUCCESS_STREAK_TO_SPEED_UP,
         pace_redirects=True, jitter_fraction=0.0,
     )
     # Honor an old generic 429 deadline already saved by the pilot client.
@@ -264,8 +268,8 @@ def main(argv=None):
             break
         if client.last_status in (500, 503):
             # get() already multiplied the pace by 1.75. Push it further so a
-            # 500 is not erased by the next saved page, then creep back by the
-            # one-second success step configured on the client.
+            # 500 is not erased by the next saved page. Later successes creep
+            # back by a random percentage only after a streak.
             slowed = min(
                 args.max_interval_seconds,
                 max(client.interval * 2, client.interval + 20, pace_before * 2, pace_before + 20),
@@ -275,8 +279,9 @@ def main(argv=None):
             client._save_state(f"HTTP {client.last_status} server error")
             say(
                 f"HTTP {client.last_status}. Slowing from {pace_before:.1f}s to {slowed:.1f}s "
-                f"between requests. Each later successful response shortens the wait by 1s, "
-                f"down to the {args.min_interval_seconds:.0f}s minimum."
+                f"between requests. After each {SUCCESS_STREAK_TO_SPEED_UP} later successful "
+                f"responses, including redirects, the wait shortens by a random amount up to "
+                f"10 percent, down to the {args.min_interval_seconds:.0f}s minimum."
             )
             if args.server_error_wait_seconds:
                 say(f"WAIT {args.server_error_wait_seconds:.1f}s after HTTP {client.last_status} "

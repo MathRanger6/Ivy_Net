@@ -16,7 +16,7 @@ from collections import Counter
 from datetime import datetime
 from pathlib import Path
 
-from EDUCATION_20260930_romania_2001_national_acquisition import CACHE, _extract_rows
+from EDUCATION_20260930_romania_2001_national_acquisition import CACHE, _extract_rows, verified_page
 
 ROOT = Path(__file__).resolve().parents[1]
 STATUS = ROOT / "outputs/romania_2001_national_source_recovery/placement_county_status.csv"
@@ -50,14 +50,31 @@ def signature(row, score_field="Medie Admitere"):
 
 
 def saved_rows(manifest, family):
-    """Read only saved, manifest-listed source pages; never request a URL."""
+    """Read manifest-listed pages after file, row, and saved-HTML hash checks.
+
+    Each listed page must match the digest stored on the county manifest, then
+    the row digest and the saved HTML digest inside the checkpoint. A missing
+    page or a digest mismatch stops the read. Row count alone is not enough.
+    """
     result = []
     for page in manifest["families"][family]["pages"]:
-        payload = json.loads((CACHE / page["file"]).read_text())
-        rows = payload["rows"]
-        if payload["row_count"] != len(rows):
-            raise ValueError(f"Saved page row count changed: {page['file']}")
-        result.extend(rows)
+        path = CACHE / page["file"]
+        relative = page.get("relative_source")
+        if not relative:
+            raise ValueError(f"Saved page has no source address: {page.get('file')}")
+        recorded = page.get("sha256")
+        if not recorded:
+            raise ValueError(f"County manifest has no file digest for {page['file']}")
+        if not path.exists():
+            raise ValueError(f"Saved page is missing: {page['file']}")
+        if hashlib.sha256(path.read_bytes()).hexdigest() != recorded:
+            raise ValueError(
+                f"Saved page file digest does not match the county manifest: {page['file']}"
+            )
+        payload = verified_page(path, relative=relative, kind=family)
+        if payload is None:
+            raise ValueError(f"Saved page is missing: {page['file']}")
+        result.extend(payload["rows"])
     return result
 
 
