@@ -1,0 +1,4 @@
+Region,All player-season rows,All distinct players,All distinct colleges,All distinct college-seasons,Ever-drafted rows,Distinct drafted players,Colleges with drafted players,College-seasons with drafted players,Distinct drafted player-seasons
+Peak bin 8,33,31,28,32,15,14,14,15,15
+Tail bins 15-16,66,63,40,53,16,16,11,14,16
+Combined,99,94,55,85,31,30,24,29,31

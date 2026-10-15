@@ -1,0 +1,5 @@
+Grouping allowance,Peak-location adjustment,Observed decline (percentage points),Standard error (percentage points),One-sided p-value
+OFF: each player-season independent,OFF,17.043740573152338,6.438865078523186,0.004
+OFF: each player-season independent,ON: 9 locations,17.043740573152338,6.438865078523186,0.0242
+ON: colleges + repeated players,OFF,17.043740573152338,5.70936598767068,0.0011
+ON: colleges + repeated players,ON: 9 locations,17.043740573152338,5.70936598767068,0.0081

@@ -1,0 +1,72 @@
+{
+  "source": {
+    "panel": 8,
+    "years": [
+      2011,
+      2021
+    ],
+    "own_band": "Top 7%",
+    "cutoff": 1.4935605333531061,
+    "source": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/HEROs_and_PASSes/sports_sandbox/_DISPOSABLE_elite_pond_loo_twin/ELITE_pond_loo_pw4p7_dft_min20_mg10_top7_ppm_11_21.json",
+    "source_sha256": "0fe605bff3fb25c2bbb7bc0a8b8e6bd34c0097c7c88442722ade17d0e3890d59",
+    "cohort_sha256": "7a149c94a19f15f9520cf30958898ae9e49a7edb0e40f77c776d9277d1e869c8",
+    "multi_college_player_seasons": 2,
+    "identity_note": "Two player-seasons have records at different colleges. Preserved to match original curve; source review remains needed.",
+    "rows": 1237,
+    "distinct_players": 926,
+    "positive_rows": 330,
+    "colleges": 136,
+    "dependence_groups": 115,
+    "bin_edges": [
+      -0.6041650561797022,
+      -0.4730329203774076,
+      -0.34190078457511297,
+      -0.21076864877281837,
+      -0.07963651297052374,
+      0.018710951664255765,
+      0.11705841629903527,
+      0.21540588093381477,
+      0.31375334556859424,
+      0.41210081020337375,
+      0.5104482748381532,
+      0.6087957394729328
+    ],
+    "peak_bin": 7,
+    "population": "All eligible player-seasons; colleges represented by an ever-drafted player; minimum 20 minutes and 10 team-season games.",
+    "outcome": "Ever-drafted status, repeated across eligible seasons; not annual selection.",
+    "binning": "Original 4 lower-region and 7 upper-region equal-width intervals.",
+    "code_sha256": "03794e8892e41e5ff24f2f26849a83bcc77d935f8cbec494d21d04bfa4b68801"
+  },
+  "grouped": {
+    "target": "Bin 7 versus bins 10+11 pooled",
+    "family": "Each bin 1-9 versus the SAME fixed final two bins pooled",
+    "family_size": 9,
+    "repetitions": 9999,
+    "seed": 46,
+    "dependence_groups": 115,
+    "critical_value_95": 2.393738586678768,
+    "method": "One-sided single-step max-t Rademacher cluster multiplier bootstrap of centered rate-difference influence functions",
+    "correction": "G/(G-1); original standard errors retained in bootstrap; empirical higher 95th percentile for lower bounds",
+    "assumptions": "Approximate independence between connected college groups; adequate effective group/event counts; conditions on original bins and outcome-filtered cohort.",
+    "limitations": "Exploratory; no adjustment for historical window, band, bin-count, tail-width, panel choice or outcome-based college inclusion. No causal or whole-shape claim.",
+    "code_sha256": "995d1e55089aade4fdd1e60f8d59cdf0a6c6222e55c8d9ba56e42b0dc82e0b8e",
+    "account_grouping": true,
+    "uncertainty_units": 115
+  },
+  "independent": {
+    "target": "Bin 7 versus bins 10+11 pooled",
+    "family": "Each bin 1-9 versus the SAME fixed final two bins pooled",
+    "family_size": 9,
+    "repetitions": 9999,
+    "seed": 46,
+    "dependence_groups": 115,
+    "critical_value_95": 2.346898085899207,
+    "method": "One-sided max-t independent-ROW Rademacher multiplier bootstrap",
+    "correction": "N/(N-1) for N independent rows",
+    "assumptions": "Every player-season row is independent, including repeated rows for the same player. Diagnostic only; no college or repeated-player dependence allowance.",
+    "limitations": "Exploratory; no adjustment for historical window, band, bin-count, tail-width, panel choice or outcome-based college inclusion. No causal or whole-shape claim.",
+    "code_sha256": "995d1e55089aade4fdd1e60f8d59cdf0a6c6222e55c8d9ba56e42b0dc82e0b8e",
+    "account_grouping": false,
+    "uncertainty_units": 1237
+  }
+}
