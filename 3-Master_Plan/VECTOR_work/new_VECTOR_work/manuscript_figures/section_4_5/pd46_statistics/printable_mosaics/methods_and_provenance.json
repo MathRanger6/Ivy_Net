@@ -1,0 +1,81 @@
+{
+  "clipping": "NONE on both axes; raw means of within-season standardized performance.",
+  "quantile_ties": "Original rank-first method: equal values can split by original row order. Charles explicitly chose this on October 15, 2026.",
+  "pending": "Compare rank-first quantiles against tie-preserving quantiles later. Do not silently change method.",
+  "population": "All eligible player-team-season rows, colleges represented by an ever-drafted player in each window. At least 20 player minutes; more than 10 team-season games (legacy implementation).",
+  "outcome": "Ever drafted, not drafted that season. Repeated people retained.",
+  "squid_jackal": "Original 16-quantile-bin proxies: Squid displayed bins 6-8; Jackal bins 14-16. Pooled positive rows / total rows. Applied descriptively to both axes/bands here; not permanent player labels.",
+  "historical_panel8": "Original mixed-width plot uses 4 wider bins below the median and 7 narrower bins above. Its orange means fine upper-region bins, not the Panel 7 Jackal proxy. No mixed-width compression in these four mosaics.",
+  "inference": "No statistical tests executed; no p-values shown.",
+  "runs": {
+    "7_2011": {
+      "rows": 425,
+      "positive_rows": 143,
+      "own_cutoff": [
+        2,
+        3
+      ],
+      "sha256": "d03de99d06eccadf4042b6d97a5a16e3d7ff77a83d2bf45f1ddd0a0d0edaa1fb"
+    },
+    "8_2011": {
+      "rows": 1237,
+      "positive_rows": 330,
+      "own_cutoff": 1.4935605333531061,
+      "sha256": "47321340bed4538d6498da889e5e7e7dbc513e49361a0a6b9e173f7a8ffdb804"
+    },
+    "7_2009": {
+      "rows": 534,
+      "positive_rows": 175,
+      "own_cutoff": [
+        2,
+        3
+      ],
+      "sha256": "f4a3a16868711ba1ba3b12e4d15c0cb730e0162f290c2221a2cca8251db70c50"
+    },
+    "8_2009": {
+      "rows": 1546,
+      "positive_rows": 418,
+      "own_cutoff": 1.4997377331260051,
+      "sha256": "1c90fe5610425843df71e22af39afae1237e4119040af2726d53810b1e166f7a"
+    }
+  },
+  "panel7_shared_EW_edges": [
+    -0.7733736699764621,
+    -0.6777186532229238,
+    -0.5820636364693854,
+    -0.4864086197158471,
+    -0.39075360296230877,
+    -0.29509858620877044,
+    -0.19944356945523212,
+    -0.10378855270169385,
+    -0.008133535948155468,
+    0.08752148080538291,
+    0.18317649755892118,
+    0.27883151431245945,
+    0.37448653106599783,
+    0.4701415478195362,
+    0.5657965645730744,
+    0.6614515813266127,
+    0.757106598080151
+  ],
+  "panel8_shared_EW_edges": [
+    -0.8988327237749256,
+    -0.7953365161589834,
+    -0.691840308543041,
+    -0.5883441009270988,
+    -0.48484789331115646,
+    -0.38135168569521416,
+    -0.2778554780792719,
+    -0.17435927046332955,
+    -0.0708630628473873,
+    0.032633144768554945,
+    0.1361293523844973,
+    0.23962556000043955,
+    0.3431217676163818,
+    0.44661797523232405,
+    0.5501141828482665,
+    0.6536103904642088,
+    0.757106598080151
+  ],
+  "EW_overlays": "Quantile-group member min-to-max score ranges, calculated separately per panel/window/axis; counts retain exact rank-first membership. Shading cannot separate tied boundary values."
+}
