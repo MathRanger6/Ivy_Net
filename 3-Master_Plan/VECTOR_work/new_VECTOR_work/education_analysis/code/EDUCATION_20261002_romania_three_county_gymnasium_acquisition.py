@@ -199,7 +199,12 @@ def main(argv=None):
         minimum_interval_seconds=args.min_interval_seconds,
         maximum_interval_seconds=args.max_interval_seconds, max_runtime_hours=args.max_hours,
         max_http_attempts=args.max_http_attempts,
-        reuse_recorded_robots_absence=True, random_adaptive_fraction=0.10,
+        # Start at the notebook minimum even if an older run saved a slower pace.
+        resume_interval_cap_seconds=args.min_interval_seconds,
+        reuse_recorded_robots_absence=True,
+        # After a server error, shorten the wait by one second per successful
+        # response instead of jumping most of the way back on the next page.
+        success_step_seconds=1.0,
         pace_redirects=True, jitter_fraction=0.0,
     )
     # Honor an old generic 429 deadline already saved by the pilot client.
@@ -215,6 +220,7 @@ def main(argv=None):
         label = f"{county} gymnasium {code}"
         requested = archive_url(relative)
         attempts += 1
+        pace_before = client.interval
         say(f"REQUEST {label}: {requested}")
         try:
             result, third_429 = fetch_with_429_cooldowns(
@@ -257,9 +263,25 @@ def main(argv=None):
             say(f"SAFE STOP after HTTP {client.last_status}; no further requests this run")
             break
         if client.last_status in (500, 503):
-            say(f"WAIT {args.server_error_wait_seconds:.1f}s after HTTP {client.last_status} "
-                "before another request")
-            time.sleep(args.server_error_wait_seconds)
+            # get() already multiplied the pace by 1.75. Push it further so a
+            # 500 is not erased by the next saved page, then creep back by the
+            # one-second success step configured on the client.
+            slowed = min(
+                args.max_interval_seconds,
+                max(client.interval * 2, client.interval + 20, pace_before * 2, pace_before + 20),
+            )
+            client.interval = slowed
+            client.success_streak = 0
+            client._save_state(f"HTTP {client.last_status} server error")
+            say(
+                f"HTTP {client.last_status}. Slowing from {pace_before:.1f}s to {slowed:.1f}s "
+                f"between requests. Each later successful response shortens the wait by 1s, "
+                f"down to the {args.min_interval_seconds:.0f}s minimum."
+            )
+            if args.server_error_wait_seconds:
+                say(f"WAIT {args.server_error_wait_seconds:.1f}s after HTTP {client.last_status} "
+                    "before another request")
+                time.sleep(args.server_error_wait_seconds)
         if attempts % 25 == 0:
             print_progress(rows, counties, new_pages, attempts)
     print_progress(rows, counties, new_pages, attempts)

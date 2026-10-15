@@ -31,9 +31,9 @@ Next source question: Saved page checks finished without a new missing-file gap.
 
 ## ARGES (AG)
 
-ARGES (AG). School Result View: 243 verified school pages plus 1 directory page (page target 244, which includes the directory), 6459 printed rows, 0 unresolved URL addresses, 0 malformed or missing checkpoints. School Applicant View: 0 saved pages of 243 listed schools. Resident applicant list: 7 of 13 projected pages. Incoming lists, verified rows: 175 applicants, 171 admitted, 4 unassigned. Applicant rows without an incoming outcome row: 0. Outcome rows without an incoming applicant row: 0. School Result View rows with another county's destination suffix: 53. Original placement shortfall against occupancy: 4846. Remaining unreconciled shortfall: 0. These counts do not certify the county for a national outcome analysis.
+ARGES (AG). School Result View: 243 verified school pages plus 1 directory page (page target 244, which includes the directory), 6459 printed rows, 0 unresolved URL addresses, 0 malformed or missing checkpoints. School Applicant View: 65 saved pages of 243 listed schools. Resident applicant list: 7 of 13 projected pages. Incoming lists, verified rows: 175 applicants, 171 admitted, 4 unassigned. Applicant rows without an incoming outcome row: 0. Outcome rows without an incoming applicant row: 0. School Result View rows with another county's destination suffix: 53. Original placement shortfall against occupancy: 4846. Remaining unreconciled shortfall: 0. These counts do not certify the county for a national outcome analysis.
 
-Next source question: School Applicant View pages saved: 0 of 243. A gymnasium peer pool cannot be built until the missing pages are saved or explicitly left unresolved.
+Next source question: School Applicant View pages saved: 65 of 243. A gymnasium peer pool cannot be built until the missing pages are saved or explicitly left unresolved.
 
 - origin school directory: 1 saved pages listed in the manifest, 0 unresolved URL addresses, complete flag is true.
 - general county applicant list: 13 saved pages listed in the manifest, 1 unresolved URL addresses, complete flag is false.
@@ -54,7 +54,7 @@ Next source question: School Applicant View pages saved: 0 of 243. A gymnasium p
 - School Result View directory lists 243 schools and 243 school pages were verified.
 - The resident applicant list is incomplete. Counts of rows without a School Result View match describe the saved pages only. People on missing pages are unresolved, not rejected.
 - Program recovery records 97 verified program reports. The original shortfall is 4846. The remaining unreconciled shortfall is 0.
-- School Applicant View pages saved: 0 of 243. 243 listed schools have no saved page. Person comparison with the School Result View waits until those pages exist. Missing pages stay unresolved. They are not treated as empty schools.
+- School Applicant View pages saved: 65 of 243. 178 listed schools have no saved page. Person comparison with the School Result View waits until those pages exist. Missing pages stay unresolved. They are not treated as empty schools.
 
 ## ARAD (AR)
 
@@ -398,9 +398,9 @@ Next source question: Resident applicant list pages saved: 9 of 14. Other views 
 
 ## COVASNA (CV)
 
-COVASNA (CV). School Result View: 95 verified school pages plus 1 directory page (page target 96, which includes the directory), 1484 printed rows, 0 unresolved URL addresses, 0 malformed or missing checkpoints. School Applicant View: 0 saved pages of 95 listed schools. Resident applicant list: 3 of 3 projected pages. Incoming lists, verified rows: 31 applicants, 31 admitted, 0 unassigned. Applicant rows without an incoming outcome row: 0. Outcome rows without an incoming applicant row: 0. School Result View rows with another county's destination suffix: 42. Original placement shortfall against occupancy: 0. Remaining unreconciled shortfall: 0. These counts do not certify the county for a national outcome analysis.
+COVASNA (CV). School Result View: 95 verified school pages plus 1 directory page (page target 96, which includes the directory), 1484 printed rows, 0 unresolved URL addresses, 0 malformed or missing checkpoints. School Applicant View: 6 saved pages of 95 listed schools. Resident applicant list: 3 of 3 projected pages. Incoming lists, verified rows: 31 applicants, 31 admitted, 0 unassigned. Applicant rows without an incoming outcome row: 0. Outcome rows without an incoming applicant row: 0. School Result View rows with another county's destination suffix: 42. Original placement shortfall against occupancy: 0. Remaining unreconciled shortfall: 0. These counts do not certify the county for a national outcome analysis.
 
-Next source question: School Applicant View pages saved: 0 of 95. A gymnasium peer pool cannot be built until the missing pages are saved or explicitly left unresolved.
+Next source question: School Applicant View pages saved: 6 of 95. A gymnasium peer pool cannot be built until the missing pages are saved or explicitly left unresolved.
 
 - origin school directory: 1 saved pages listed in the manifest, 0 unresolved URL addresses, complete flag is true.
 - general county applicant list: 3 saved pages listed in the manifest, 0 unresolved URL addresses, complete flag is true.
@@ -419,7 +419,7 @@ Next source question: School Applicant View pages saved: 0 of 95. A gymnasium pe
 - incoming unassigned list: 1 verified pages, target 1, 0 unresolved URL addresses, 0 malformed or missing checkpoints, 0 files on disk that are not in the status list.
 - School Result View directory lists 95 schools and 95 school pages were verified.
 - The county admitted list matches the occupancy admitted total.
-- School Applicant View pages saved: 0 of 95. 95 listed schools have no saved page. Person comparison with the School Result View waits until those pages exist. Missing pages stay unresolved. They are not treated as empty schools.
+- School Applicant View pages saved: 6 of 95. 89 listed schools have no saved page. Person comparison with the School Result View waits until those pages exist. Missing pages stay unresolved. They are not treated as empty schools.
 
 ## DAMBOVITA (DB)
 

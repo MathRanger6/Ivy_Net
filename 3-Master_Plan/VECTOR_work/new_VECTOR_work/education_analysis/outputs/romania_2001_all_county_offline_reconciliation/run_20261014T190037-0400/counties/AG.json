@@ -1,7 +1,7 @@
 {
   "county": "AG",
   "county_name": "ARGES",
-  "checked_at": "2026-10-14 19:00:37 EDT",
+  "checked_at": "2026-10-15 08:53:22 EDT",
   "source_notes": [
     "origin school directory: 1 saved pages listed in the manifest, 0 unresolved URL addresses, complete flag is true.",
     "general county applicant list: 13 saved pages listed in the manifest, 1 unresolved URL addresses, complete flag is false.",
@@ -22,11 +22,11 @@
     "School Result View directory lists 243 schools and 243 school pages were verified.",
     "The resident applicant list is incomplete. Counts of rows without a School Result View match describe the saved pages only. People on missing pages are unresolved, not rejected.",
     "Program recovery records 97 verified program reports. The original shortfall is 4846. The remaining unreconciled shortfall is 0.",
-    "School Applicant View pages saved: 0 of 243. 243 listed schools have no saved page. Person comparison with the School Result View waits until those pages exist. Missing pages stay unresolved. They are not treated as empty schools."
+    "School Applicant View pages saved: 65 of 243. 178 listed schools have no saved page. Person comparison with the School Result View waits until those pages exist. Missing pages stay unresolved. They are not treated as empty schools."
   ],
   "unresolved_school_result_urls": [],
   "origin_directory_schools": 243,
-  "school_applicant_pages_saved": 0,
+  "school_applicant_pages_saved": 65,
   "school_applicant_pages_expected": 243,
   "school_result_pages_verified": 243,
   "school_result_directory_pages": 1,
@@ -57,8 +57,8 @@
   "applicant_rows_without_result": "",
   "result_rows_without_applicant": "",
   "applicant_component_disagreements": "",
-  "next_source_question": "School Applicant View pages saved: 0 of 243. A gymnasium peer pool cannot be built until the missing pages are saved or explicitly left unresolved.",
-  "plain_summary": "ARGES (AG). School Result View: 243 verified school pages plus 1 directory page (page target 244, which includes the directory), 6459 printed rows, 0 unresolved URL addresses, 0 malformed or missing checkpoints. School Applicant View: 0 saved pages of 243 listed schools. Resident applicant list: 7 of 13 projected pages. Incoming lists, verified rows: 175 applicants, 171 admitted, 4 unassigned. Applicant rows without an incoming outcome row: 0. Outcome rows without an incoming applicant row: 0. School Result View rows with another county's destination suffix: 53. Original placement shortfall against occupancy: 4846. Remaining unreconciled shortfall: 0. These counts do not certify the county for a national outcome analysis.",
+  "next_source_question": "School Applicant View pages saved: 65 of 243. A gymnasium peer pool cannot be built until the missing pages are saved or explicitly left unresolved.",
+  "plain_summary": "ARGES (AG). School Result View: 243 verified school pages plus 1 directory page (page target 244, which includes the directory), 6459 printed rows, 0 unresolved URL addresses, 0 malformed or missing checkpoints. School Applicant View: 65 saved pages of 243 listed schools. Resident applicant list: 7 of 13 projected pages. Incoming lists, verified rows: 175 applicants, 171 admitted, 4 unassigned. Applicant rows without an incoming outcome row: 0. Outcome rows without an incoming applicant row: 0. School Result View rows with another county's destination suffix: 53. Original placement shortfall against occupancy: 4846. Remaining unreconciled shortfall: 0. These counts do not certify the county for a national outcome analysis.",
   "flow_stats": {
     "outgoing_rows_no_suffix": 6406,
     "outgoing_rows_with_other_county_suffix": 53,
