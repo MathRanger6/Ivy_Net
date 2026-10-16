@@ -2174,9 +2174,9 @@ CJ,338,saved_verified,20,
 CJ,340,saved_verified,2,
 CJ,346,saved_verified,38,
 CJ,348,saved_verified,7,
-CL,101,not_yet_attempted,,
-CL,102,not_yet_attempted,,
-CL,103,not_yet_attempted,,
+CL,101,unresolved_http_500,,500
+CL,102,unresolved_http_500,,500
+CL,103,unresolved_http_500,,500
 CL,104,not_yet_attempted,,
 CL,105,not_yet_attempted,,
 CL,106,not_yet_attempted,,
@@ -3937,7 +3937,7 @@ IL,107,saved_verified,0,
 IL,108,saved_verified,28,
 IL,109,saved_verified,25,
 IL,110,unresolved_http_500,,500
-IL,111,not_yet_attempted,,
+IL,111,unresolved_http_500,,500
 IL,112,not_yet_attempted,,
 IL,113,not_yet_attempted,,
 IL,114,not_yet_attempted,,
