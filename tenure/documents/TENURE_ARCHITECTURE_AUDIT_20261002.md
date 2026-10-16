@@ -231,6 +231,16 @@ No. Keep **`RUN_CELL*`** in Cell 0. Refactoring means cells **call `.py` modules
 | Thin notebook cells | 540 cells 3A, 3B, 4 |
 | Stale handoff | `tenure/alex_tenure_handoff/STALE_DO_NOT_EDIT.md` |
 
+## Phase 2b — 3B ops (2026-10-16)
+
+| Item | Location |
+|------|----------|
+| Ops / troubleshooting doc | [`TENURE_WAYBACK_3B_OPS_AND_TROUBLESHOOTING.md`](TENURE_WAYBACK_3B_OPS_AND_TROUBLESHOOTING.md) — slug filter, permanent skip, read-back verify, **fix changelog** |
+| Cell 3B wired to module | `540` thin wrapper → `run_stage3b_from_globals` |
+| Apply → slug hint | `apply_url_updates.py` prints `WAYBACK_SLUGS` after adds |
+
+---
+
 ## Phase 2 implemented (2026-10-02)
 
 | Item | Location |
@@ -248,6 +258,7 @@ No. Keep **`RUN_CELL*`** in Cell 0. Refactoring means cells **call `.py` modules
 
 | Date | Change |
 |------|--------|
+| 2026-10-16 | 3B ops doc; Cell 3B module wrapper; WAYBACK_SLUGS hint on apply |
 | 2026-10-02 | Phase 2: probe, report, rebuild --slug, discover CDX dedupe |
 | 2026-10-02 | Phase 1 code landed; daily wave in SCRAPE dummies |
 | 2026-10-02 | Initial audit (Agent); mirrored from architecture review in chat |

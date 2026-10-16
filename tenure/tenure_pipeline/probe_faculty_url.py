@@ -7,6 +7,9 @@ Usage (from repo root, tenure_net recommended):
   python3 tenure/tenure_pipeline/probe_faculty_url.py --url '...' --slug arizona_state_university --season fall --year 2020
 
 Replaces ad-hoc test_candidates.py / discover TEST_PARSE for a single URL decision.
+
+Requires Python 3.10+ (html_parser uses modern type syntax). macOS ``/usr/bin/python3`` is
+often 3.9 — use ``conda activate tenure_net`` with a 3.10+ env, or e.g. ``python3.11``.
 """
 from __future__ import annotations
 
@@ -15,6 +18,15 @@ import os
 import sys
 import tempfile
 from pathlib import Path
+
+if sys.version_info < (3, 10):
+    sys.exit(
+        "ERROR: Python 3.10+ required for tenure pipeline (you have "
+        f"{sys.version_info.major}.{sys.version_info.minor}).\n"
+        "  macOS /usr/bin/python3 is often 3.9.\n"
+        "  Try:  conda activate tenure_net   # env must be 3.10+\n"
+        "    or:  python3.11 tenure/tenure_pipeline/probe_faculty_url.py --url '...'"
+    )
 
 import html_parser
 import requests

@@ -4,6 +4,8 @@ Stage 3B — Wayback HTML download (shared by 540 notebook and run_stage3b_cli.p
 Fixes (2026-10):
 - Always install via $TMPDIR staging + cp for large HTML and for cloud-sync paths (Dropbox).
 - Skip re-download when the last index row for a local_path is a permanent failure and file still missing.
+
+Ops doc (errors, WAYBACK_SLUGS, changelog): tenure/documents/TENURE_WAYBACK_3B_OPS_AND_TROUBLESHOOTING.md
 """
 from __future__ import annotations
 
@@ -215,6 +217,34 @@ def _install_html_via_temp_staging(dest: Path, content: bytes) -> bool:
         return False
 
 
+def _probe_snapshot_write(root: Path) -> tuple[bool, str]:
+    """Confirm this process can save a large HTML file on the 3B write root.
+
+    The notebook kernel can download from the Internet Archive and then fail
+    ``stat`` on the new Dropbox file (read -1 / stat -1). A normal Terminal
+    process can save the same bytes. Probing first avoids stamping that
+    failure onto every school still in the queue.
+    """
+    payload = b"<!-- tenure stage 3b write probe -->\n" + (b"x" * 200_000)
+    dest = (root / "_write_probe" / "probe.html").resolve()
+    try:
+        return _write_snapshot_html(
+            dest,
+            payload,
+            workspace_fallback=None,
+            write_root_label=str(root),
+        )
+    finally:
+        try:
+            dest.unlink(missing_ok=True)
+        except OSError:
+            pass
+        try:
+            dest.parent.rmdir()
+        except OSError:
+            pass
+
+
 def _should_use_temp_staging(dest: Path, content: bytes) -> bool:
     if len(content) < MIN_HTML_BYTES:
         return False
@@ -223,23 +253,66 @@ def _should_use_temp_staging(dest: Path, content: bytes) -> bool:
     return _is_cloud_sync_path(dest)
 
 
+def _desktop_snapshot_fallback(dest: Path) -> Path | None:
+    """Same relative path under ~/Desktop/faculty_snapshots (already a search root)."""
+    parts = dest.parts
+    if "faculty_snapshots" not in parts:
+        return None
+    i = parts.index("faculty_snapshots")
+    rel = Path(*parts[i + 1 :])
+    if not rel.parts:
+        return None
+    return (Path.home() / "Desktop" / "faculty_snapshots" / rel).resolve()
+
+
+def _kept_after_defender_window(path: Path, content: bytes) -> bool:
+    """Defender quarantines some pages 1–3s after a successful write. Re-read once that window passes."""
+    if b"<script" not in content.lower():
+        return True
+    time.sleep(3.2)
+    try:
+        return path.is_file() and path.read_bytes() == content
+    except OSError:
+        return False
+
+
+def _html_without_scripts(content: bytes) -> bytes | None:
+    """Drop <script> blocks. Microsoft Defender quarantines some archived pages
+    (Trojan:JS/Nemucod) a second after save; the faculty text is outside those scripts.
+    """
+    if b"<script" not in content.lower():
+        return None
+    text = content.decode("utf-8", errors="replace")
+    stripped = re.sub(r"<script\b[\s\S]*?</script>", "", text, flags=re.I)
+    if stripped == text:
+        return None
+    out = stripped.encode("utf-8")
+    if len(out) < MIN_HTML_BYTES:
+        return None
+    return out
+
+
 def _write_snapshot_html(
     dest: Path,
     content: bytes,
     *,
     workspace_fallback: Path | None,
     write_root_label: str,
+    allow_sanitize: bool = True,
 ) -> tuple[bool, str]:
     """Return (ok, error_message)."""
     paths_try = [dest.resolve()]
     if workspace_fallback is not None and workspace_fallback.resolve() != paths_try[0]:
         paths_try.append(workspace_fallback.resolve())
+    desktop = _desktop_snapshot_fallback(dest)
+    if desktop is not None and desktop not in paths_try:
+        paths_try.append(desktop)
 
     for pi, wpx in enumerate(paths_try):
         if _should_use_temp_staging(wpx, content):
-            if _install_html_via_temp_staging(wpx, content):
+            if _install_html_via_temp_staging(wpx, content) and _kept_after_defender_window(wpx, content):
                 return True, ""
-            # fall through to direct write if staging failed
+            # fall through to direct write if staging failed or Defender removed the file
 
         try:
             wpx.parent.mkdir(parents=True, exist_ok=True)
@@ -269,19 +342,48 @@ def _write_snapshot_html(
             return False, err
 
         ok = False
+        unseen_since: float | None = None
         for _ in range(200):
             try:
                 got = wpx.read_bytes()
+                unseen_since = None
                 if got == content and len(got) >= MIN_HTML_BYTES:
                     ok = True
                     break
             except OSError:
-                pass
+                if unseen_since is None:
+                    unseen_since = time.time()
+                elif time.time() - unseen_since > 2.5:
+                    # Defender (or Dropbox) removed the file; stop waiting out the full 10s.
+                    break
             time.sleep(0.05)
         if not ok and _read_bytes_verify_via_subprocess(wpx, content):
             ok = True
-        if ok:
+        if ok and _kept_after_defender_window(wpx, content):
             return True, ""
+
+        if allow_sanitize:
+            cleaned = _html_without_scripts(content)
+            if cleaned:
+                print(
+                    "     NOTE: the saved page was removed (Microsoft Defender flags a script on it). "
+                    "Saving the same page without scripts …",
+                    flush=True,
+                )
+                ok_clean, err_clean = _write_snapshot_html(
+                    wpx,
+                    cleaned,
+                    workspace_fallback=None,
+                    write_root_label=write_root_label,
+                    allow_sanitize=False,
+                )
+                if ok_clean:
+                    return True, ""
+                err = err_clean
+            else:
+                err = ""
+        else:
+            err = ""
 
         try:
             ds = wpx.stat().st_size
@@ -291,10 +393,15 @@ def _write_snapshot_html(
             rlen = len(wpx.read_bytes())
         except OSError:
             rlen = -1
-        err = f"read-back verify failed (expected {len(content)} B; read {rlen} B; stat {ds} B) @ {wpx}"
-        if ds < 0 and rlen < 0:
+        if not err:
+            err = f"read-back verify failed (expected {len(content)} B; read {rlen} B; stat {ds} B) @ {wpx}"
+        if ds < 0 and rlen < 0 and "missing after write" not in err:
             err += f" — missing after write (3B root={write_root_label})."
-        if pi + 1 < len(paths_try) and _should_use_temp_staging(wpx, content):
+        if pi + 1 < len(paths_try):
+            print(
+                "     NOTE: that folder did not keep the file; trying the next save location …",
+                flush=True,
+            )
             continue
         return False, err
 
@@ -463,6 +570,28 @@ def download_plan(
 
     if not to_download:
         print("  Nothing to do — all snapshots already present or permanently skipped.")
+        return
+
+    ok_probe, probe_err = _probe_snapshot_write(faculty_snapshots_write_root)
+    if not ok_probe:
+        prior_fail = 0
+        schools = sorted({r.get("university") or r.get("uni_slug") or "?" for r in to_download})
+        for rec in to_download:
+            prev = last_by_lp.get(rec.get("local_path") or "")
+            err = (prev.get("error") or "") if prev else ""
+            if "read-back verify failed" in err or "write failed" in err:
+                prior_fail += 1
+        shown = ", ".join(schools[:8])
+        more = f" (+{len(schools) - 8} more)" if len(schools) > 8 else ""
+        print()
+        print("  STOP: this process cannot save faculty HTML into the project folder.")
+        print(f"        Probe error: {probe_err}")
+        print(f"        Not downloading {len(to_download)} file(s) for: {shown}{more}.")
+        if prior_fail:
+            print(f"        {prior_fail} of those already failed this same save check on an earlier run.")
+        print("        The notebook kernel does this on Dropbox. A Terminal run can save the files.")
+        print("        Interrupt this cell, then from the project folder run:")
+        print("          ./tenure/run_stage3b.sh")
         return
 
     n_ok = 0
@@ -691,12 +820,61 @@ def append_all_fail_sentinels(*, plan_path: Path, index_path: Path) -> None:
             print(f"    ⚠  {u}")
 
 
+def make_snapshot_file_ok(
+    *,
+    min_bytes: int,
+    faculty_snapshot_search_roots,
+    resolve_faculty_snapshot_path,
+    faculty_snapshot_rel_from_local_path,
+):
+    """Disk check used for 3B skip/resume (≥ min_bytes under any search root)."""
+
+    def ok(lp: str) -> bool:
+        if not lp or not str(lp).strip():
+            return False
+        rel = faculty_snapshot_rel_from_local_path(lp)
+        if rel is None:
+            op = resolve_faculty_snapshot_path(lp)
+            try:
+                if not op.is_file():
+                    return False
+                if op.stat().st_size >= min_bytes:
+                    return True
+                with open(op, "rb") as rf:
+                    return len(rf.read(min_bytes + 1)) >= min_bytes
+            except OSError:
+                return False
+        for root in faculty_snapshot_search_roots():
+            op = (root / rel).resolve()
+            try:
+                if not op.is_file():
+                    continue
+                if op.stat().st_size >= min_bytes:
+                    return True
+                with open(op, "rb") as rf:
+                    if len(rf.read(min_bytes + 1)) >= min_bytes:
+                        return True
+            except OSError:
+                continue
+        return False
+
+    return ok
+
+
 def run_stage3b_from_globals(g: dict) -> None:
     """Entry point after CELL 0 has populated ``g`` (notebook or CLI)."""
     import requests
 
     if not g.get("RUN_CELL3_DOWNLOAD"):
         return
+
+    if "_snapshot_file_ok" not in g:
+        g["_snapshot_file_ok"] = make_snapshot_file_ok(
+            min_bytes=MIN_HTML_BYTES,
+            faculty_snapshot_search_roots=g["faculty_snapshot_search_roots"],
+            resolve_faculty_snapshot_path=g["resolve_faculty_snapshot_path"],
+            faculty_snapshot_rel_from_local_path=g["_faculty_snapshot_rel_from_local_path"],
+        )
     st3_plan = g["STAGE3_PLAN"]
     if not Path(st3_plan).exists():
         print(f"  ERROR: No download plan found at {st3_plan}")

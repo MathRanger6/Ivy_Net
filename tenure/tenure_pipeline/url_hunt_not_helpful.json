@@ -1,0 +1,178 @@
+{
+  "how_to_use": "These are addresses I opened or checked and did not put on the paste list. Each one has a sample Wayback link when I have one, so you can spot-check. If you find a real faculty list I missed, that address can still go in the worksheet column new_url.",
+  "set_aside": [
+    {
+      "university": "Tulane University",
+      "url": "https://sse.tulane.edu/cs/faculty-staff",
+      "names_on_sample": 1,
+      "saved_copies_2000_to_2024": 18,
+      "sample_wayback": "https://web.archive.org/web/20220504022124/https://sse.tulane.edu/cs/faculty-staff",
+      "why": "Menu page. The May 2022 copy has Faculty, Staff, and Adjunct links and no professor names. The real list is the Faculty link, and that address is already on the worksheet."
+    },
+    {
+      "university": "Tulane University",
+      "url": "https://sse.tulane.edu/cs/faculty",
+      "names_on_sample": 10,
+      "saved_copies_2000_to_2024": 13,
+      "sample_wayback": "https://web.archive.org/web/20210123044103/https://sse.tulane.edu/cs/faculty",
+      "why": "This one is a real list (Michael Mislove, Carola Wenk, and others). It is already on the worksheet, with about 1,340 names already read, so there is nothing new to paste."
+    },
+    {
+      "university": "Tulane University",
+      "url": "http://tulane.edu/faculty-staff",
+      "names_on_sample": 30,
+      "saved_copies_2000_to_2024": 74,
+      "sample_wayback": "https://web.archive.org/web/20201007014209/https://tulane.edu/faculty-staff",
+      "why": "Whole-university directory, not the computer science department. The computer science menu links here."
+    },
+    {
+      "university": "Tulane University",
+      "url": "https://sse.tulane.edu/cs/adjunct-faculty",
+      "names_on_sample": 5,
+      "saved_copies_2000_to_2024": 21,
+      "sample_wayback": "https://web.archive.org/web/20220927164514/https://sse.tulane.edu/cs/adjunct-faculty",
+      "why": "Adjunct list, short, not the regular faculty roster."
+    },
+    {
+      "university": "Tulane University",
+      "url": "https://sse.tulane.edu/cs/postdoctoral-fellows",
+      "names_on_sample": 13,
+      "saved_copies_2000_to_2024": 18,
+      "sample_wayback": "https://web.archive.org/web/20230207155758/https://sse.tulane.edu/cs/postdoctoral-fellows",
+      "why": "Postdoctoral fellows, not the regular faculty roster. Worth a look only if you want that group too."
+    },
+    {
+      "university": "Syracuse University",
+      "url": "https://ecs.syracuse.edu/faculty-staff",
+      "names_on_sample": 209,
+      "saved_copies_2000_to_2024": 21,
+      "sample_wayback": "https://web.archive.org/web/20230401203056/https://ecs.syracuse.edu/faculty-staff/",
+      "why": "Whole engineering college directory (biomedical, civil, mechanical, and computer science together), about 209 names. The computer-science filter is already on the worksheet and the name reader found nobody on those saved copies."
+    },
+    {
+      "university": "George Washington University",
+      "url": "http://www.cs.gwu.edu/people/faculty",
+      "names_on_sample": 71,
+      "saved_copies_2000_to_2024": 6,
+      "sample_wayback": "https://web.archive.org/web/20141026120500/http://www.cs.gwu.edu/people/faculty",
+      "why": "Real list, but it is the same address as the https page already on the worksheet. The pipeline treats http and https as the same page."
+    },
+    {
+      "university": "University of Illinois Chicago",
+      "url": "https://cs.uic.edu/faculty-staff/faculty",
+      "names_on_sample": 84,
+      "saved_copies_2000_to_2024": 27,
+      "sample_wayback": "https://web.archive.org/web/20220202214813/https://cs.uic.edu/faculty-staff/faculty/",
+      "why": "Real list, 84 names on the 2022 copy. The http version of this same address is already on the worksheet and has not been downloaded yet. No second paste."
+    },
+    {
+      "university": "Missouri University of Science and Technology",
+      "url": "https://cs.mst.edu/people",
+      "names_on_sample": 21,
+      "saved_copies_2000_to_2024": 3,
+      "sample_wayback": "https://web.archive.org/web/20240617140614/https://cs.mst.edu/people/",
+      "why": "Short parent page, only 3 archive copies. The faculty-directory address already on the worksheet already has about 1,824 names."
+    },
+    {
+      "university": "Baylor University",
+      "url": "https://www.ecs.baylor.edu/departments/computer-science/computer-science-faculty",
+      "names_on_sample": 0,
+      "saved_copies_2000_to_2024": 20,
+      "sample_wayback": "",
+      "why": "Engineering menu, no names. The faculty-directory address is already on the worksheet from earlier today."
+    },
+    {
+      "university": "Oregon State University",
+      "url": "http://www.eecs.oregonstate.edu/faculty/",
+      "names_on_sample": 7,
+      "saved_copies_2000_to_2024": 6,
+      "sample_wayback": "",
+      "why": "Careers blurb, about 7 names. The faculty-and-staff directory you found is the page that paid off, and it is already in use."
+    },
+    {
+      "university": "Binghamton University (SUNY)",
+      "url": "http://www.cs.binghamton.edu/faculty/",
+      "names_on_sample": 0,
+      "saved_copies_2000_to_2024": 4,
+      "sample_wayback": "",
+      "why": "Old folder of individual profile pages, not a roster. The current people page is already on the worksheet."
+    },
+    {
+      "university": "Binghamton University (SUNY)",
+      "url": "http://www.cs.binghamton.edu/people/",
+      "names_on_sample": 0,
+      "saved_copies_2000_to_2024": 0,
+      "sample_wayback": "",
+      "why": "No saved copies in the archive for 2000–2024."
+    },
+    {
+      "university": "George Washington University",
+      "url": "http://www.cs.gwu.edu/faculty/",
+      "names_on_sample": 3,
+      "saved_copies_2000_to_2024": 10,
+      "sample_wayback": "",
+      "why": "About 3 names. Already on the worksheet. The working people/faculty page is a different address and already has names."
+    }
+  ],
+  "archive_lookup_failed_not_a_verdict": [
+    {
+      "university": "University of South Florida",
+      "url": "http://www.cse.usf.edu/people",
+      "why": "The archive index timed out twice. I did not see the page. The longer address people/faculty is already saved: the 2011 copy lists Kenneth Christensen, Dmitry Goldgof, and Lawrence Hall, and the name reader recorded zero names. That saved page is the one to spot-check."
+    },
+    {
+      "university": "University of Denver",
+      "url": "https://ritchieschool.du.edu/about/people",
+      "why": "The archive index failed. Not a judgment on the page. A computer-science faculty page is already on the worksheet with about 2,076 names."
+    },
+    {
+      "university": "Penn State University",
+      "url": "http://www.cse.psu.edu/people",
+      "why": "The archive index failed. Not a judgment on the page. The address people/faculty is already on the worksheet with about 2,256 names."
+    }
+  ],
+  "already_saved_but_name_reader_found_nobody": [
+    {
+      "university": "University of South Florida",
+      "url": "http://www.cse.usf.edu/people/faculty/",
+      "saved_html_files": 10,
+      "names_read": 0,
+      "why": "Already on the worksheet. A 2011 saved copy is a real faculty list. The reader missed it."
+    },
+    {
+      "university": "Texas Tech University",
+      "url": "http://www.cs.ttu.edu/people/faculty/",
+      "saved_html_files": 38,
+      "names_read": 0,
+      "why": "Already on the worksheet. The parent people page, which is in the paste file, did list 34 names."
+    },
+    {
+      "university": "University of Nevada Reno",
+      "url": "http://www.unr.edu/cse/people/faculty",
+      "saved_html_files": 18,
+      "names_read": 0,
+      "why": "Already on the worksheet. The parent people page, which is in the paste file, did list 29 names."
+    },
+    {
+      "university": "Ohio University",
+      "url": "https://www.ohio.edu/engineering/eecs/people",
+      "saved_html_files": 36,
+      "names_read": 0,
+      "why": "Already on the worksheet. The faculty link under it, which is in the paste file, did list 27 names."
+    },
+    {
+      "university": "Syracuse University",
+      "url": "https://ecs.syracuse.edu/faculty-staff/?category=electrical-engineering-and-computer-science&people=",
+      "saved_html_files": 8,
+      "names_read": 0,
+      "why": "Already on the worksheet. This is the computer-science filter. The unfiltered college page listed 209 names and I set that one aside."
+    },
+    {
+      "university": "Clemson University",
+      "url": "http://www.cs.clemson.edu/",
+      "saved_html_files": 44,
+      "names_read": 0,
+      "why": "Department home page, already saved. It links to People/faculty.shtml, which is in the paste file."
+    }
+  ]
+}

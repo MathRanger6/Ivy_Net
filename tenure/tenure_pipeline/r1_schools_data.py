@@ -99,7 +99,8 @@ PILOT_SCHOOLS = [
         "urls"       : [
             "https://www.cs.cmu.edu/people/faculty",
             "http://www.cs.cmu.edu/~faculty/",
-            "http://www.csd.cs.cmu.edu/people"
+            "http://www.csd.cs.cmu.edu/people",
+            "http://www.csd.cs.cmu.edu/people/faculty.html"
         ],
         "notes"      : "SCS houses multiple depts; filtering to CSD. Old directory at ~faculty/",
     },
@@ -553,7 +554,8 @@ PILOT_SCHOOLS = [
             "https://engineering.oregonstate.edu/EECS/About/People",
             "https://eecs.oregonstate.edu/research/people/faculty/",
             "http://www.cs.orst.edu/faculty/",
-            "http://www.eecs.oregonstate.edu/faculty/"
+            "http://www.eecs.oregonstate.edu/faculty/",
+            "http://eecs.oregonstate.edu/people/faculty_staff_dir.html"
         ],
         "notes"      : "EECS dept; old domain was cs.orst.edu before rename to oregonstate.edu/eecs",
     },
@@ -588,7 +590,8 @@ PILOT_SCHOOLS = [
             "http://www.cs.unr.edu/faculty/",
             "http://www.cse.unr.edu/",
             "http://www.cs.unr.edu/",
-            "http://www.unr.edu/cse/people/faculty"
+            "http://www.unr.edu/cse/people/faculty",
+            "http://www.unr.edu/cse/people"
         ],
         "notes"      : "CSE dept; cse.unr.edu domain; old alt was cs.unr.edu; base domains added for CDX wildcard coverage",
     },
@@ -752,7 +755,8 @@ PILOT_SCHOOLS = [
         "urls"       : [
             "https://www.depts.ttu.edu/cs/people/faculty/",
             "http://www.cs.ttu.edu/people/faculty/",
-            "http://www.cs.ttu.edu/faculty/"
+            "http://www.cs.ttu.edu/faculty/",
+            "http://www.cs.ttu.edu/people"
         ],
         "notes"      : "CS in College of Engineering; depts.ttu.edu/cs path; old domain www.cs.ttu.edu",
     },
@@ -822,7 +826,8 @@ PILOT_SCHOOLS = [
             "http://www.cs.clemson.edu/people/faculty/",
             "http://www.cs.clemson.edu/faculty/",
             "http://www.cs.clemson.edu/",
-            "http://clemson.edu/computing/faculty.php"
+            "http://clemson.edu/computing/faculty.php",
+            "http://www.cs.clemson.edu/People/faculty.shtml"
         ],
         "notes"      : "CS in College of Science; old domain www.cs.clemson.edu; base domain added for CDX wildcard coverage",
     },
@@ -1354,7 +1359,8 @@ PILOT_SCHOOLS = [
         "urls"       : [
             "https://www.baylor.edu/cs/index.php?id=6",
             "https://www.ecs.baylor.edu/cs/index.php?id=6",
-            "https://www.ecs.baylor.edu/departments/computer-science/computer-science-faculty"
+            "https://www.ecs.baylor.edu/departments/computer-science/computer-science-faculty",
+            "https://www.ecs.baylor.edu/faculty-directory"
         ],
         "notes"      : "Waco TX; cs.baylor.edu/ homepage was ~1.8KB redirect-only in Wayback \u2014 removed",
     },
@@ -1582,7 +1588,8 @@ PILOT_SCHOOLS = [
         "urls"       : [
             "https://cs.uic.edu/faculty/",
             "http://www.cs.uic.edu/people/faculty/",
-            "http://www.cs.uic.edu/faculty/"
+            "http://www.cs.uic.edu/faculty/",
+            "http://cs.uic.edu/faculty-staff/faculty/"
         ],
         "notes"      : "Chicago IL; UIC is the urban flagship R1 of the U of Illinois system; separate from UIUC; strong data mining/NLP group",
     },
@@ -1763,7 +1770,8 @@ PILOT_SCHOOLS = [
             "https://www.ohio.edu/engineering/eecs/about/contact/faculty",
             "https://www.ohio.edu/engineering/eecs/people",
             "http://www.cs.ohiou.edu/people/faculty/",
-            "http://www.eecs.ohio.edu/faculty/"
+            "http://www.eecs.ohio.edu/faculty/",
+            "https://www.ohio.edu/engineering/eecs/people/faculty"
         ],
         "notes"      : "Athens OH; public R1 (Ohio flagship); EECS dept in Stocker Center; active CS PhD program; strength in distributed systems, AI, networking",
     },

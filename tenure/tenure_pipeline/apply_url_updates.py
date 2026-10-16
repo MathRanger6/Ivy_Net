@@ -358,7 +358,12 @@ def apply_updates() -> None:
         print(f"\n  ✅  Added {len(changed)} new URL(s) to r1_schools_data.py:")
         for uni, url in changed:
             print(f"      {uni}: {url}")
+        slugs = sorted({slugify(uni) for uni, _ in changed})
         print("  → Run Cells 0 → 2 → 3A → 3B → 4 to scrape.")
+        print(
+            f"  → In CELL 0 set WAYBACK_SLUGS = {slugs!r} and re-run Cell 0 "
+            "(so 3A/3B/4 skip the global backlog: MSU, BU, ASU ghosts, …)."
+        )
     else:
         print("\n  No new URLs to add.")
 

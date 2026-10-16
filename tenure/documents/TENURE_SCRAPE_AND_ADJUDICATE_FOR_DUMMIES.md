@@ -1,16 +1,17 @@
 # Tenure pipeline — scrape & adjudicate re-entry (for dummies)
 
-**Last synced:** 2026-10-02  
+**Last synced:** 2026-10-16  
 **Audience:** Charles, returning after a break  
 
-**Architecture (Phase 1 modules):** [`TENURE_ARCHITECTURE_AUDIT_20261002.md`](TENURE_ARCHITECTURE_AUDIT_20261002.md)
+**Architecture (Phase 1 modules):** [`TENURE_ARCHITECTURE_AUDIT_20261002.md`](TENURE_ARCHITECTURE_AUDIT_20261002.md)  
+**3B errors / MSU-BU backlog / read-back verify:** [`TENURE_WAYBACK_3B_OPS_AND_TROUBLESHOOTING.md`](TENURE_WAYBACK_3B_OPS_AND_TROUBLESHOOTING.md)
 
 ---
 
 ## Daily wave (Mac — ~15 min setup + run time)
 
-1. Paste URLs into `url_update_worksheet.csv` → column **`new_url`** → `./apply_url_updates.sh`
-2. **Notebook:** Cell 0 — set `RUN_CELL2`, `RUN_CELL3_CDX`, `RUN_CELL3_DOWNLOAD`, `RUN_CELL4` = `True`; **all other `RUN_CELL*` = `False`**. Optional: `WAYBACK_SLUGS = ["arizona_state_university"]` to limit 3A/3B/4 to those schools.
+1. Paste URLs into `url_update_worksheet.csv` → column **`new_url`** → `./apply_url_updates.sh` (script prints suggested **`WAYBACK_SLUGS`**).
+2. **Notebook:** Cell 0 — set `RUN_CELL2`, `RUN_CELL3_CDX`, `RUN_CELL3_DOWNLOAD`, `RUN_CELL4` = `True`; **all other `RUN_CELL*` = `False`**. Set **`WAYBACK_SLUGS`** to the school(s) you just changed (e.g. `["university_of_minnesota"]`) and **re-run Cell 0** — otherwise 3B tries the **global** missing-file queue (MSU, BU, ASU, …) first.
 3. Run **Cell 0 → 2 → 3A → 3B → 4** (3B can be `python3 tenure/run_stage3b_cli.py` instead).
 4. **CLI alternative (same code):**  
    `python3 tenure/run_wayback_wave.py --slugs arizona_state_university --steps apply,cell2,cdx,download,parse`  
@@ -165,7 +166,7 @@ Cell 0 (flags)
   → Cell 2   school list
   → Cell 3A  CDX discovery (Wayback index queries)     ← needs internet
   → Cell 3A-RETRY  slow CDX retry queue
-  → Cell 3B  HTML download
+  → Cell 3B  HTML download  (see [3B ops / troubleshooting](TENURE_WAYBACK_3B_OPS_AND_TROUBLESHOOTING.md))
   → Cell 3C–3E  rescues (sub-pages, redirects) — usually OFF unless you know you need them
   → Cell 4   parse HTML → faculty records
   → Cell 5   longitudinal panel
@@ -408,6 +409,7 @@ Scraper playbook (nav bars, phonebooks, JS shells): **overview §7**.
 | [`HPC_SETUP_CHECKLIST.md`](HPC_SETUP_CHECKLIST.md) | VPN, conda, three scenarios (Rivanna / Mac / coffee shop) |
 | [`DISCOVER_FACULTY_URLS_GUIDE.md`](DISCOVER_FACULTY_URLS_GUIDE.md) | Algorithm detail for URL discovery script |
 | [`HPC_SLURM_PIPELINE_GUIDE.md`](../HPC_SLURM_PIPELINE_GUIDE.md) | `pipe_job.slurm`, papermill, log paths |
+| [`TENURE_WAYBACK_3B_OPS_AND_TROUBLESHOOTING.md`](TENURE_WAYBACK_3B_OPS_AND_TROUBLESHOOTING.md) | 3B queue, read-back verify, permanent skip, **fix changelog** |
 | [`Pertinent_Thoughts_Tenure.md`](Pertinent_Thoughts_Tenure.md) | QA heuristics (re-verify counts after each scrape) |
 | [`VA_WEEKEND_CHECKLIST.md`](VA_WEEKEND_CHECKLIST.md) | **Historical** example overnight run (Apr 2026) — patterns still valid |
 
@@ -419,5 +421,6 @@ Scraper playbook (nav bars, phonebooks, JS shells): **overview §7**.
 
 | Date | Note |
 |------|------|
+| 2026-10-16 | 3B ops doc; WAYBACK_SLUGS after apply; Cell 3B → `stage3b_download.py` |
 | 2026-09-01 | Created — ordered re-entry doc; Charles returning to expand tenure coverage after SCOUT/COMPASS progress |
 | 2026-09-01 | Clarified: Step 0 is read-only; added **If you are expanding data** as first actionable path; catalogued five candidate sources (A–E) |

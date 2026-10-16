@@ -1,3 +1,5 @@
 {
-    "specstory.outputPath": ".specstory/history"
+    "specstory.outputPath": ".specstory/history",
+    "python.defaultInterpreterPath": "/opt/anaconda3/envs/tenure_net/bin/python",
+    "python.terminal.activateEnvironment": true
 }

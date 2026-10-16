@@ -6,7 +6,8 @@
 
 You found **two promising faculty-directory pages** in the [Wayback Machine](https://web.archive.org/). This guide walks you from those URLs through download and parse — without running heavy OpenAlex or panel stages.
 
-**Read first (short):** [`TENURE_SCRAPE_AND_ADJUDICATE_FOR_DUMMIES.md`](TENURE_SCRAPE_AND_ADJUDICATE_FOR_DUMMIES.md) (daily wave section) and [`tenure/scripts/README.md`](../scripts/README.md) (command list).
+**Read first (short):** [`TENURE_SCRAPE_AND_ADJUDICATE_FOR_DUMMIES.md`](TENURE_SCRAPE_AND_ADJUDICATE_FOR_DUMMIES.md) (daily wave section) and [`tenure/scripts/README.md`](../scripts/README.md) (command list).  
+**If 3B errors confuse you:** [`TENURE_WAYBACK_3B_OPS_AND_TROUBLESHOOTING.md`](TENURE_WAYBACK_3B_OPS_AND_TROUBLESHOOTING.md).
 
 ---
 
@@ -26,7 +27,7 @@ Nothing in this guide adds faculty to the dissertation panel by itself — it on
 | Requirement | Notes |
 |-------------|--------|
 | **Repo** | Clone or open the Cursor workspace that contains `tenure/540_tenure_pipeline.ipynb`. |
-| **Python env** | Use **`tenure_net`** (Python **3.10+**). System `python3` may be too old for `html_parser.py`. |
+| **Python env** | **Python 3.10+** required. macOS **`python3`** (`/usr/bin/python3`) is often **3.9** → `TypeError: unsupported operand type(s) for \|`. Use **`conda activate tenure_net`** (if env is 3.10+) or **`python3.11 tenure/tenure_pipeline/probe_faculty_url.py …`**. |
 | **Network** | CDX and Wayback downloads need internet. |
 | **Do not run daily** | Leave Cells **5–9**, bulk OpenAlex, and `rebuild_plan.py --force` (full wipe) **off** unless Charles asks. |
 

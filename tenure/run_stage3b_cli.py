@@ -84,27 +84,21 @@ def main() -> None:
     nb = json.loads(nb_path.read_text(encoding="utf-8"))
     cells = nb["cells"]
     idx0 = _find_code_cell(cells, "=== CELL 0: IMPORTS & PATH SETUP ===")
-    idx3b = _find_code_cell(cells, "=== CELL 3B: STAGE 3B — WAYBACK HTML DOWNLOAD ===")
-    if idx0 < 0 or idx3b < 0:
-        print(
-            "ERROR: could not locate CELL 0 and/or CELL 3B code cells by marker "
-            f"(cell0={idx0}, cell3b={idx3b})",
-            file=sys.stderr,
-        )
+    if idx0 < 0:
+        print("ERROR: could not locate CELL 0 code cell by marker", file=sys.stderr)
         sys.exit(1)
-    if cells[idx0].get("cell_type") != "code" or cells[idx3b].get("cell_type") != "code":
-        print("ERROR: CELL 0 or 3B is not a code cell", file=sys.stderr)
+    if cells[idx0].get("cell_type") != "code":
+        print("ERROR: CELL 0 is not a code cell", file=sys.stderr)
         sys.exit(1)
 
-    print(f"Using notebook cells: CELL 0 = index {idx0}, CELL 3B = index {idx3b}", flush=True)
-    parts = [
-        _strip_notebook_magics("".join(cells[idx0].get("source", []))),
-        _strip_notebook_magics("".join(cells[idx3b].get("source", []))),
-    ]
+    print(f"Using notebook CELL 0 = index {idx0}; Stage 3B via stage3b_download.py", flush=True)
+    cell0 = _strip_notebook_magics("".join(cells[idx0].get("source", [])))
     prelude = "import matplotlib\nmatplotlib.use('Agg')\n\n"
     g: dict = {"__name__": "__main__", "__file__": str(script)}
-    exec(compile(prelude + parts[0], f"{nb_path}:cell0", "exec"), g, g)
-    exec(compile(parts[1], f"{nb_path}:cell3b", "exec"), g, g)
+    exec(compile(prelude + cell0, f"{nb_path}:cell0", "exec"), g, g)
+    from stage3b_download import run_stage3b_from_globals
+
+    run_stage3b_from_globals(g)
 
 
 if __name__ == "__main__":

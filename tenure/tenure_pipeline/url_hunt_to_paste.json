@@ -1,0 +1,41 @@
+{
+  "how_to_use": "Paste new_url into url_update_worksheet.csv, column new_url, on a row for that university. Do not overwrite the url column. One address at a time is fine. These four are not already on the worksheet.",
+  "candidates": [
+    {
+      "university": "Clemson University",
+      "uni_slug": "clemson_university",
+      "new_url": "http://www.cs.clemson.edu/People/faculty.shtml",
+      "names_on_sample": 38,
+      "saved_copies_2000_to_2024": 7,
+      "sample_wayback": "https://web.archive.org/web/20090226020741/http://www.cs.clemson.edu:80/People/faculty.shtml",
+      "why": "The old department home page links to Faculty/Staff, and that page lists names. The home page itself is already saved and did not yield names."
+    },
+    {
+      "university": "Texas Tech University",
+      "uni_slug": "texas_tech_university",
+      "new_url": "http://www.cs.ttu.edu/people",
+      "names_on_sample": 34,
+      "saved_copies_2000_to_2024": 48,
+      "sample_wayback": "https://web.archive.org/web/20060901124515/http://www.cs.ttu.edu/people/",
+      "why": "People page on the old department site. A nearby address, people/faculty, is already saved and the name reader found nobody there."
+    },
+    {
+      "university": "University of Nevada Reno",
+      "uni_slug": "university_of_nevada_reno",
+      "new_url": "http://www.unr.edu/cse/people",
+      "names_on_sample": 29,
+      "saved_copies_2000_to_2024": 44,
+      "sample_wayback": "https://web.archive.org/web/20211101105628/https://www.unr.edu/cse/people",
+      "why": "People page for computer science and engineering. The longer address people/faculty is already saved and the name reader found nobody there."
+    },
+    {
+      "university": "Ohio University",
+      "uni_slug": "ohio_university",
+      "new_url": "https://www.ohio.edu/engineering/eecs/people/faculty",
+      "names_on_sample": 27,
+      "saved_copies_2000_to_2024": 17,
+      "sample_wayback": "https://web.archive.org/web/20220626061728/https://www.ohio.edu/engineering/eecs/people/faculty",
+      "why": "Faculty link under electrical engineering and computer science. The shorter people page is already saved and the name reader found nobody there. Copies in the archive run about 2020 to 2025."
+    }
+  ]
+}

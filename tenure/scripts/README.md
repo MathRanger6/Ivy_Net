@@ -1,6 +1,15 @@
 # Tenure scripts — entry points
 
-Run from **repository root** unless noted. Prefer conda env **`tenure_net`** for pipeline work.
+Run from **repository root** unless noted. Use the **`.sh` wrappers** (they pick `tenure_net` Python 3.11). Do **not** use macOS `/usr/bin/python3` (3.9).
+
+| Wrapper | Replaces |
+|---------|----------|
+| `./apply_url_updates.sh` | `python3 …/apply_url_updates.py` |
+| `./probe_faculty_url.sh` | `python3 …/probe_faculty_url.py` |
+| `./tenure/run_stage3b.sh` | `python3 tenure/run_stage3b_cli.py` |
+| `./tenure/run_wayback_wave.sh` | `python3 tenure/run_wayback_wave.py` |
+
+Resolver: `tenure/lib/tenure_python.sh`. Cursor/Jupyter: `.vscode/settings.json` → `tenure_net` interpreter + terminal auto-activate.
 
 ## Daily Wayback enrichment
 
@@ -28,4 +37,5 @@ Run from **repository root** unless noted. Prefer conda env **`tenure_net`** for
 
 **Notebook conductor:** [`../540_tenure_pipeline.ipynb`](../540_tenure_pipeline.ipynb) — Cell 0: `run_wayback_url_report()` after parse when `RUN_WAVE_REPORT_AFTER_PARSE` is True.
 
-**GA walkthrough:** [`../documents/GA_GUIDE_NEW_WAYBACK_FACULTY_URLS.md`](../documents/GA_GUIDE_NEW_WAYBACK_FACULTY_URLS.md)
+**GA walkthrough:** [`../documents/GA_GUIDE_NEW_WAYBACK_FACULTY_URLS.md`](../documents/GA_GUIDE_NEW_WAYBACK_FACULTY_URLS.md)  
+**3B troubleshooting (read-back verify, backlog):** [`../documents/TENURE_WAYBACK_3B_OPS_AND_TROUBLESHOOTING.md`](../documents/TENURE_WAYBACK_3B_OPS_AND_TROUBLESHOOTING.md)

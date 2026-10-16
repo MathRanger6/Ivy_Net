@@ -99,7 +99,8 @@ PILOT_SCHOOLS = [
         "urls"       : [
             "https://www.cs.cmu.edu/people/faculty",
             "http://www.cs.cmu.edu/~faculty/",
-            "http://www.csd.cs.cmu.edu/people"
+            "http://www.csd.cs.cmu.edu/people",
+            "http://www.csd.cs.cmu.edu/people/faculty.html"
         ],
         "notes"      : "SCS houses multiple depts; filtering to CSD. Old directory at ~faculty/",
     },
@@ -553,7 +554,8 @@ PILOT_SCHOOLS = [
             "https://engineering.oregonstate.edu/EECS/About/People",
             "https://eecs.oregonstate.edu/research/people/faculty/",
             "http://www.cs.orst.edu/faculty/",
-            "http://www.eecs.oregonstate.edu/faculty/"
+            "http://www.eecs.oregonstate.edu/faculty/",
+            "http://eecs.oregonstate.edu/people/faculty_staff_dir.html"
         ],
         "notes"      : "EECS dept; old domain was cs.orst.edu before rename to oregonstate.edu/eecs",
     },
@@ -1354,7 +1356,8 @@ PILOT_SCHOOLS = [
         "urls"       : [
             "https://www.baylor.edu/cs/index.php?id=6",
             "https://www.ecs.baylor.edu/cs/index.php?id=6",
-            "https://www.ecs.baylor.edu/departments/computer-science/computer-science-faculty"
+            "https://www.ecs.baylor.edu/departments/computer-science/computer-science-faculty",
+            "https://www.ecs.baylor.edu/faculty-directory"
         ],
         "notes"      : "Waco TX; cs.baylor.edu/ homepage was ~1.8KB redirect-only in Wayback \u2014 removed",
     },
@@ -1582,7 +1585,8 @@ PILOT_SCHOOLS = [
         "urls"       : [
             "https://cs.uic.edu/faculty/",
             "http://www.cs.uic.edu/people/faculty/",
-            "http://www.cs.uic.edu/faculty/"
+            "http://www.cs.uic.edu/faculty/",
+            "http://cs.uic.edu/faculty-staff/faculty/"
         ],
         "notes"      : "Chicago IL; UIC is the urban flagship R1 of the U of Illinois system; separate from UIUC; strong data mining/NLP group",
     },
@@ -1665,7 +1669,8 @@ PILOT_SCHOOLS = [
             "https://www.bc.edu/content/bc-web/schools/mcas/departments/computer-science/faculty-and-research.html",
             "http://www.cs.bc.edu/people/faculty/",
             "https://www.bc.edu/bc-web/schools/morrissey/departments/computer-science/people.html",
-            "http://agora.bc.edu/directory/departments/811504.html"
+            "http://agora.bc.edu/directory/departments/811504.html",
+            "http://cs.bc.edu/allpeople"
         ],
         "notes"      : "Chestnut Hill MA; Jesuit private R1; CS in Morrissey College of Arts & Sciences (formerly MCAS); relatively small dept",
     },

@@ -4,4 +4,6 @@
 #   ./apply_url_updates.sh --build-only # just rebuild the worksheet (no URL edits)
 set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-exec python3 "$SCRIPT_DIR/tenure/tenure_pipeline/apply_url_updates.py" "$@"
+# shellcheck source=tenure/lib/tenure_python.sh
+source "$SCRIPT_DIR/tenure/lib/tenure_python.sh"
+exec "$(tenure_python)" "$SCRIPT_DIR/tenure/tenure_pipeline/apply_url_updates.py" "$@"
