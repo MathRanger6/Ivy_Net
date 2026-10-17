@@ -1,5 +1,19 @@
 {
   "how_to_use": "These are addresses I opened or checked and did not put on the paste list. Each one has a sample Wayback link when I have one, so you can spot-check. If you find a real faculty list I missed, that address can still go in the worksheet column new_url.",
+  "spot_check_corrections": [
+    {
+      "university": "Baylor University",
+      "url": "https://www.ecs.baylor.edu/departments/computer-science/computer-science-faculty",
+      "corrected_on": "2026-10-16",
+      "what_was_wrong": "I called this an engineering menu with no names. That was wrong.",
+      "what_it_actually_is": "A computer science faculty page. The live page lists Jean Gao, Benjamin S. Kelley, Eunjee Song, and Matthew Aars. The April 2024 saved copy lists the same kind of roster, with Greg Hamerly as interim chair, plus Matthew Aars, Eunjee Song, Jeff Donahoo, Greg Speegle, and others.",
+      "names_the_reader_already_kept": 23,
+      "name_rows_in_the_name_file": 704,
+      "saved_copies_on_disk": 20,
+      "sample_wayback": "https://web.archive.org/web/20240425103509/https://www.ecs.baylor.edu/departments/computer-science/computer-science-faculty",
+      "worksheet": "This address is already a row on the worksheet. Do not paste it again. The worksheet shows 0 names on this row and 704 names on the older baylor.edu/cs address, which has no saved files. The name file itself points at these 20 saved pages."
+    }
+  ],
   "set_aside": [
     {
       "university": "Tulane University",
@@ -72,14 +86,6 @@
       "saved_copies_2000_to_2024": 3,
       "sample_wayback": "https://web.archive.org/web/20240617140614/https://cs.mst.edu/people/",
       "why": "Short parent page, only 3 archive copies. The faculty-directory address already on the worksheet already has about 1,824 names."
-    },
-    {
-      "university": "Baylor University",
-      "url": "https://www.ecs.baylor.edu/departments/computer-science/computer-science-faculty",
-      "names_on_sample": 0,
-      "saved_copies_2000_to_2024": 20,
-      "sample_wayback": "",
-      "why": "Engineering menu, no names. The faculty-directory address is already on the worksheet from earlier today."
     },
     {
       "university": "Oregon State University",

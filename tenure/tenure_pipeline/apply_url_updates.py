@@ -24,10 +24,18 @@ WHAT THE SCRIPT DOES
     • Otherwise → add the URL to the school's urls list in r1_schools_data.py
 - Rebuilds url_update_worksheet.csv with fresh per-URL stats and status tags.
 
-Each URL row is duplicated with the same school-level totals:
+Each URL row carries school-level totals (same value on every row for that school):
   school_snaps — unique snapshot slots in the plan for this uni_slug (deduped by local_path)
   school_html  — count of *.html under faculty_snapshots/<uni_slug>/ (recursive: legacy/, <source_id>/, …)
-Sort defaults to school_snaps ascending so schools with little or no coverage rise to the top.
+  school_roster_years — calendar years in which this school has at least 8 different people
+  school_repeat_people — people who show up in at least two of those years
+Name counts on a row belong to THAT address, not to the school's first address:
+  n_parsed_recs — person-years (each person once per year) read from this address's saved pages
+  n_people — different people on this address
+  n_roster_years — years with at least 8 people on this address
+  year_span — first and last of those years
+Sort is school_roster_years, then school_repeat_people, then school_snaps, all ascending,
+so schools without a long run of years rise to the top.
 
 STATUS VALUES IN WORKSHEET
 --------------------------
@@ -48,6 +56,10 @@ from pathlib import Path
 from collections import defaultdict
 
 from wayback.paths import faculty_source_id, normalize_faculty_url, slugify
+
+# A year counts as a roster year only when that many different people were read.
+# One or two stray names from a menu page do not make a year of coverage.
+MIN_NAMES_FOR_ROSTER_YEAR = 8
 
 # ── Paths ─────────────────────────────────────────────────────────────────
 TP          = Path(__file__).resolve().parent
@@ -133,21 +145,125 @@ def save_schools(schools: list) -> None:
     SCHOOLS_PY.write_text('\n'.join(lines), encoding='utf-8')
 
 
+def _snapshot_file_exists(local_path: str) -> bool:
+    """Plan paths are stored either under tenure/ or from the repository root."""
+    lp = local_path or ""
+    if (WORKSPACE / lp).exists():
+        return True
+    if lp.startswith("tenure/") and (WORKSPACE.parent / lp).exists():
+        return True
+    return False
+
+
+def _canon_snap_rel(local_path: str) -> str:
+    """Path after faculty_snapshots/, so the two stored prefixes count as one file."""
+    lp = (local_path or "").replace("\\", "/")
+    marker = "faculty_snapshots/"
+    i = lp.find(marker)
+    if i < 0:
+        return lp
+    return lp[i + len(marker):]
+
+
+def _roster_summary(year_to_names: dict) -> dict:
+    """Years with a real list, and how many people appear in more than one of them."""
+    years = sorted(
+        y for y, names in year_to_names.items()
+        if len(names) >= MIN_NAMES_FOR_ROSTER_YEAR
+    )
+    seen = defaultdict(int)
+    for y in years:
+        for name in year_to_names[y]:
+            seen[name] += 1
+    repeat = sum(1 for n in seen.values() if n >= 2)
+    if len(years) >= 2:
+        span = f"{years[0]}-{years[-1]}"
+    elif len(years) == 1:
+        span = str(years[0])
+    else:
+        span = ""
+    person_years = sum(len(names) for names in year_to_names.values())
+    people = set()
+    for names in year_to_names.values():
+        people.update(names)
+    return {
+        "recs": person_years,
+        "people": len(people),
+        "roster_years": len(years),
+        "year_span": span,
+        "repeat_people": repeat,
+    }
+
+
+def _names_by_url(path_to_url: dict):
+    """
+    Read the name file once.
+
+    Duplicate lines that point at the same saved page through two path prefixes
+    are counted once. Each person is counted once per year.
+    """
+    url_years = defaultdict(lambda: defaultdict(set))
+    school_years = defaultdict(lambda: defaultdict(set))
+    seen = set()
+    if PARSED_JSONL.exists():
+        with PARSED_JSONL.open(encoding="utf-8") as f:
+            for line in f:
+                if not line.strip():
+                    continue
+                r = json.loads(line)
+                name = (r.get("name") or "").strip().lower()
+                year = r.get("year")
+                if not name or year is None:
+                    continue
+                try:
+                    year = int(year)
+                except (TypeError, ValueError):
+                    continue
+                rel = _canon_snap_rel(r.get("local_path") or "")
+                key = (rel, year, name)
+                if key in seen:
+                    continue
+                seen.add(key)
+                slug = ""
+                if rel and "/" in rel:
+                    slug = rel.split("/", 1)[0]
+                if not slug:
+                    slug = r.get("uni_slug") or ""
+                if slug:
+                    school_years[slug][year].add(name)
+                nu = path_to_url.get(rel)
+                if nu:
+                    url_years[nu][year].add(name)
+
+    url_stats = {nu: _roster_summary(years) for nu, years in url_years.items()}
+    school_long = {}
+    for slug, years in school_years.items():
+        summary = _roster_summary(years)
+        school_long[slug] = {
+            "roster_years": summary["roster_years"],
+            "repeat_people": summary["repeat_people"],
+            "year_span": summary["year_span"],
+        }
+    return url_stats, school_long
+
+
 # ── Load plan state (URL-level) ────────────────────────────────────────────
 def load_url_stats():
     """
     Returns:
         tried_urls   : set of all source URLs that have been CDX-queried
-        url_html     : url → count of HTML files on disk for that source_url
-        url_parsed   : uni_slug → count of parsed records
-        url_status   : url → 'ok' | 'empty' | 'condemned' | 'untried'
+        url_html     : normalized url → count of HTML files on disk for that source_url
+        url_stats    : normalized url → person-year / roster-year stats for that address
+        url_status   : normalized url → 'ok' | 'empty' | 'condemned' | 'untried'
         school_snaps : uni_slug → count of unique plan rows (by local_path) with n_snaps >= 1
+        school_long  : uni_slug → roster years and people seen in two or more of those years
     """
     tried_urls  = set()
     url_html_raw = defaultdict(int)
     url_status_by_norm = {}   # normalize_faculty_url(u) → status
     _counted_files = set()    # (norm_url, local_path) — plan JSONL may contain duplicate lines
     slug_plan_paths = defaultdict(set)  # uni_slug → set of local_path (deduped snapshot slots)
+    path_to_url = {}  # path after faculty_snapshots/ → normalized source url
 
     if PLAN_JSONL.exists():
         for line in PLAN_JSONL.read_text(encoding='utf-8').splitlines():
@@ -191,56 +307,56 @@ def load_url_stats():
                 nu = normalize_faculty_url(u)
                 url_status_by_norm.setdefault(nu, 'empty')
             # Count HTML files via local_path (aggregate by normalized URL)
-            if n >= 1 and r.get('local_path') and r.get('source_url'):
+            if r.get('local_path') and r.get('source_url'):
                 lp = r['local_path']
                 nu = normalize_faculty_url(r['source_url'])
-                key = (nu, lp)
-                if key in _counted_files:
-                    continue
-                p = WORKSPACE / lp
-                if p.exists():
-                    _counted_files.add(key)
-                    url_html_raw[nu] += 1
+                path_to_url.setdefault(_canon_snap_rel(lp), nu)
+                if n >= 1:
+                    key = (nu, lp)
+                    if key not in _counted_files and _snapshot_file_exists(lp):
+                        _counted_files.add(key)
+                        url_html_raw[nu] += 1
 
     # Also expose tried_urls under normalized keys for apply_updates duplicate detection
     for u in list(tried_urls):
         tried_urls.add(normalize_faculty_url(u))
 
-    # Parsed record counts per slug → attribute to the school's first 'ok' URL
-    url_parsed = defaultdict(int)
-    if PARSED_JSONL.exists():
-        slug_parsed = defaultdict(int)
-        for line in PARSED_JSONL.read_text(encoding='utf-8').splitlines():
-            if not line.strip(): continue
-            r = json.loads(line)
-            slug_parsed[r.get('uni_slug', '')] += 1
-        # Map slug → parsed count; we'll distribute to URLs in the worksheet builder
-        url_parsed = dict(slug_parsed)   # keyed by slug, resolved per-school in build_worksheet
+    url_stats, school_long = _names_by_url(path_to_url)
 
     # Per-row lookups use the school list URL string; bridge via normalize → stats
     url_html = dict(url_html_raw)
     url_status = url_status_by_norm
     school_snaps = {s: len(paths) for s, paths in slug_plan_paths.items() if s}
 
-    return tried_urls, url_html, url_parsed, url_status, school_snaps
+    return tried_urls, url_html, url_stats, url_status, school_snaps, school_long
 
 
 # ── Build worksheet ────────────────────────────────────────────────────────
 def build_worksheet() -> None:
     schools    = load_schools()
-    tried_urls, url_html, slug_parsed, url_status, school_snaps = load_url_stats()
+    tried_urls, url_html, url_stats, url_status, school_snaps, school_long = load_url_stats()
     disk_by_slug = load_disk_html_by_slug()
+
+    # Keep a paste that has not been applied yet.
+    pending_new = {}
+    if WORKSHEET.exists():
+        for old in csv.DictReader(WORKSHEET.open(encoding='utf-8')):
+            pasted = (old.get('new_url') or '').strip()
+            if pasted:
+                pending_new[(old.get('university', ''), old.get('url', ''))] = pasted
 
     rows = []
     for s in schools:
         uni   = s['university']
         slug  = slugify(uni)
         urls  = s.get('urls', [])
-        total_parsed = slug_parsed.get(slug, 0)
 
         disk_total = disk_by_slug.get(slug, 0)
         s_snaps = school_snaps.get(slug, 0)
         s_html = disk_total
+        long = school_long.get(slug, {})
+        s_years = long.get('roster_years', 0)
+        s_repeat = long.get('repeat_people', 0)
 
         for url in urls:
             nu = normalize_faculty_url(url)
@@ -250,29 +366,35 @@ def build_worksheet() -> None:
             # Do not attribute disk files to a primary URL that CDX marked empty (wrong alt URL first).
             if url == urls[0] and n_html == 0 and disk_total > 0 and status != 'empty':
                 n_html = disk_total
-            # Only show parsed count on the first (primary) URL to avoid duplication
-            n_parsed = total_parsed if url == urls[0] else 0
+            st = url_stats.get(nu, {})
             rows.append({
-                'university'    : uni,
-                'dept_name'     : s.get('dept_name', ''),
-                'uni_slug'      : slug,
-                'url'           : url,
-                'n_html_files'  : n_html,
-                'n_parsed_recs' : n_parsed,
-                'status'        : status,
-                'school_snaps'  : s_snaps,
-                'school_html'   : s_html,
-                'new_url'       : '',
+                'university'           : uni,
+                'dept_name'            : s.get('dept_name', ''),
+                'uni_slug'             : slug,
+                'url'                  : url,
+                'n_html_files'         : n_html,
+                'n_parsed_recs'        : st.get('recs', 0),
+                'n_people'             : st.get('people', 0),
+                'n_roster_years'       : st.get('roster_years', 0),
+                'year_span'            : st.get('year_span', ''),
+                'status'               : status,
+                'school_snaps'         : s_snaps,
+                'school_html'          : s_html,
+                'school_roster_years'  : s_years,
+                'school_repeat_people' : s_repeat,
+                'new_url'              : pending_new.get((uni, url), ''),
             })
 
-    # Sort: low school coverage first (same value on every row for that school), then URL status
+    # Thin longitudinal coverage first. Same school totals on every row for that school.
     def sort_key(r):
         order = {'untried': 0, 'empty': 1, 'condemned': 2, 'ok': 3}
         return (
+            int(r['school_roster_years'] or 0),
+            int(r['school_repeat_people'] or 0),
             int(r['school_snaps'] or 0),
             int(r['school_html'] or 0),
             order.get(r['status'], 9),
-            -int(r['n_html_files'] or 0),
+            -int(r['n_roster_years'] or 0),
             r['university'],
             r['url'],
         )
@@ -280,8 +402,9 @@ def build_worksheet() -> None:
     rows.sort(key=sort_key)
 
     fieldnames = ['university', 'dept_name', 'uni_slug', 'url',
-                  'n_html_files', 'n_parsed_recs', 'status',
-                  'school_snaps', 'school_html', 'new_url']
+                  'n_html_files', 'n_parsed_recs', 'n_people', 'n_roster_years',
+                  'year_span', 'status', 'school_snaps', 'school_html',
+                  'school_roster_years', 'school_repeat_people', 'new_url']
     with open(WORKSHEET, 'w', newline='', encoding='utf-8') as f:
         w = csv.DictWriter(f, fieldnames=fieldnames)
         w.writeheader()
@@ -291,8 +414,18 @@ def build_worksheet() -> None:
     n_untried  = sum(1 for r in rows if r['status'] == 'untried')
     n_empty    = sum(1 for r in rows if r['status'] == 'empty')
     n_condemned= sum(1 for r in rows if r['status'] == 'condemned')
+    # One row per school is enough for the longitudinal tally.
+    seen_slugs = set()
+    n_long = 0
+    for r in rows:
+        if r['uni_slug'] in seen_slugs:
+            continue
+        seen_slugs.add(r['uni_slug'])
+        if int(r['school_roster_years'] or 0) >= 8 and int(r['school_repeat_people'] or 0) >= 15:
+            n_long += 1
     print(f"  Worksheet rebuilt: {len(rows)} URL rows across {len(schools)} schools")
     print(f"    ok={n_ok}  untried={n_untried}  empty={n_empty}  condemned={n_condemned}")
+    print(f"    schools with 8+ roster years and 15+ people seen in two of those years: {n_long}")
     print(f"  Output: {WORKSHEET}")
 
 
@@ -312,7 +445,7 @@ def apply_updates() -> None:
         build_worksheet()
         return
 
-    tried_urls, url_html, slug_parsed, url_status, _school_snaps = load_url_stats()
+    tried_urls, url_html, url_stats, url_status, _school_snaps, _school_long = load_url_stats()
     schools = load_schools()
     school_idx = {s['university']: i for i, s in enumerate(schools)}
 
@@ -333,8 +466,8 @@ def apply_updates() -> None:
             status = url_status.get(nn, 'untried')
             if status == 'ok':
                 n_html   = url_html.get(nn, 0)
-                n_parsed = slug_parsed.get(slugify(uni), 0)
-                msg = f"already in urls list — {n_html} HTML files, {n_parsed} parsed records"
+                n_parsed = url_stats.get(nn, {}).get('recs', 0)
+                msg = f"already in urls list — {n_html} HTML files, {n_parsed} person-years on this address"
             elif status == 'empty':
                 msg = "already in urls list — CDX found 0 Wayback snapshots for this URL"
             elif status == 'condemned':

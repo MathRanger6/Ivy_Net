@@ -8,12 +8,13 @@ postdocs, visiting faculty, instructors, research scientists, staff, etc.
 Rank is recorded as metadata when present; records without a recognisable rank
 receive rank='unknown'.
 
-Strategies (all rank-optional except the last):
+Strategies (all rank-optional except 5 and 6):
   Strategy 1  Drupal Views containers  (div/li.views-row, .person-listing)
   Strategy 2  Table rows               (column detection, then name extraction)
   Strategy 3  Div / li person cards    (person-box, PeopleEntry, faculty-card, …)
   Strategy 4  Profile link harvester   (anchors with name-like text in faculty sections)
   Strategy 5  Generic rank-anchor      (rank required — broad fallback)
+  Strategy 6  Name, then rank in running text (paragraph rosters; rank required)
 
 Name formats (cross-cutting — not a separate numbered strategy):
   ``_extract_name()`` tries "First Last" word patterns first, then "Lastname, Firstname"
@@ -499,6 +500,67 @@ def _strategy_profile_links(root) -> list:
                 seen.add(name)
                 records.append(_make_record(name, strategy='strategy_4_profile_links'))
 
+    # A nav item labelled "faculty" can be the only labelled section, while the
+    # roster itself sits in links like /faculty/jane-doe/. If the section scan
+    # found almost nobody, keep links whose address slug is that person's name.
+    if len(records) < 3:
+        for rec in _strategy_slug_matched_profiles(root):
+            if rec['name'] not in seen:
+                seen.add(rec['name'])
+                records.append(rec)
+
+    return records
+
+
+def _original_href_path(href: str) -> str:
+    """Drop a Wayback wrapper so the path is the department's own address."""
+    m = re.search(r'https?://web\.archive\.org/web/\d+[a-z_]*/(https?://.+)', href)
+    if m:
+        href = m.group(1)
+    return href.split('?')[0].split('#')[0]
+
+
+def _strategy_slug_matched_profiles(root) -> list:
+    """
+    Name in the link text, rank optional, and the last path piece is that name.
+
+    Catches SiteOrigin-style cards:
+      <a href=".../faculty/christopher-archibald/">Christopher Archibald</a>
+      Assistant Professor
+    A menu link such as /student-activities/ does not match, because that path
+    is not under a faculty/people directory and the slug is not the link text.
+    """
+    records = []
+    seen = set()
+    dir_re = re.compile(r'/(?:faculty|people|person|profile)(?:/|$)', re.I)
+    for a in root.findall('.//a'):
+        href = a.get('href', '') or ''
+        if href.startswith(('mailto:', 'javascript:', '#', 'tel:')):
+            continue
+        path = _original_href_path(href)
+        if not dir_re.search(path):
+            continue
+        name = _extract_name(_safe_text(a))
+        if not name or name in seen:
+            continue
+        words = [w for w in name.split() if not re.fullmatch(r'[A-Z]\.?', w)]
+        if len(words) < 2:
+            continue
+        seg = [s for s in path.split('/') if s and 'http' not in s]
+        if not seg:
+            continue
+        segc = re.sub(r'[^a-z]', '', seg[-1].lower())
+        namec = re.sub(r'[^a-z]', '', ''.join(words).lower())
+        if len(segc) < 6 or segc != namec:
+            continue
+        rank_raw = ''
+        parent = a.getparent()
+        if parent is not None:
+            m = RANK_RE.search(_el_text(parent))
+            if m:
+                rank_raw = m.group(0)
+        seen.add(name)
+        records.append(_make_record(name, rank_raw, strategy='strategy_4_profile_links'))
     return records
 
 
@@ -539,6 +601,36 @@ def _strategy_generic(root) -> list:
 
 
 # ---------------------------------------------------------------------------
+# Strategy 6 — "Name, Rank" in running text  (rank REQUIRED)
+# One paragraph listing many people, with no card or table per person.
+# Example: "Jonathan D. Cohen, Assistant Research Professor; Ph.D., ..."
+# ---------------------------------------------------------------------------
+def _strategy_name_before_rank(root) -> list:
+    parts = []
+    for node in root.iter():
+        if not isinstance(node.tag, str) or node.tag in SKIP_TAGS:
+            continue
+        if node.text:
+            parts.append(node.text)
+        if node.tail:
+            parts.append(node.tail)
+    text = re.sub(r'\s+', ' ', ' '.join(parts))
+    records = []
+    seen = set()
+    for m in RANK_RE.finditer(text):
+        raw = m.group(0).lower()
+        if not any(k in raw for k in ('professor', 'lecturer', 'instructor')):
+            continue
+        window = text[max(0, m.start() - 80):m.start()]
+        name = _extract_name(window[-50:]) or _extract_name(window)
+        if not name or name.lower() in seen:
+            continue
+        seen.add(name.lower())
+        records.append(_make_record(name, m.group(0), strategy='strategy_6_name_before_rank'))
+    return records
+
+
+# ---------------------------------------------------------------------------
 # Public entry point
 # ---------------------------------------------------------------------------
 _STRATEGIES = [
@@ -548,6 +640,7 @@ _STRATEGIES = [
     ('strategy_3b_alpha_li',     _strategy_alpha_li_cards),
     ('strategy_4_profile_links', _strategy_profile_links),
     ('strategy_5_generic',       _strategy_generic),
+    ('strategy_6_name_before_rank', _strategy_name_before_rank),
 ]
 
 
