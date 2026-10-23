@@ -1,0 +1,15 @@
+{
+  "changed_parts": [
+    "word/numbering.xml",
+    "word/styles.xml"
+  ],
+  "candidate_sha256": "b8cdbb32dbadfe253fa4417eea24193a5fe6a61358e736b8f71ee221550e026c",
+  "preserved_document_xml": true,
+  "removed_style_level_overrides": 3,
+  "removed_numbering_restart_overrides": 4,
+  "all_39_heading_numbers_verified_in_Word": true,
+  "section_4_8_reference_verified": true,
+  "Word_pdf_pages": 68,
+  "backup": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Working_Manuscript_Backups/Model_Chapter_Shared_Working_Draft_20261021_123623_before_subsection_number_repair.docx",
+  "installed_path": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Model_Chapter_Shared_Working_Draft.docx"
+}

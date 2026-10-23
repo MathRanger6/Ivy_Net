@@ -52,6 +52,8 @@ class Settings:
     top_tiers: tuple[int, ...] = (1, 2)
     require_full_programs: bool = True
     combine_program_categories: bool = False
+    # When true, only Matematica-Informatica can be a designated top program.
+    math_cs_only: bool = False
     include_vocational_in_primary: bool = True
     compare_excluding_ambiguous: bool = True
     compare_excluding_vocational: bool = True
@@ -70,6 +72,8 @@ class Settings:
             raise ValueError("top_tiers must contain positive integers")
         if len(set(self.top_tiers)) != len(self.top_tiers):
             raise ValueError("top_tiers contains a repeated tier")
+        if self.math_cs_only and self.combine_program_categories:
+            raise ValueError("MATH_CS_ONLY keeps one subject. Leave category combining off.")
         if self.peer_strength_bins < 3 or self.hero_bins < 3:
             raise ValueError("Plot bin counts must be at least three")
         cuts = self.ai_percentile_cuts
@@ -101,6 +105,28 @@ def _program_catalog(county):
     return manifest, programs, catalog
 
 
+MATH_CS_CATEGORY = "Matematica-Informatica"
+
+
+def _ranking_category(program, settings):
+    """Subject used to rank cutoffs. None means this program cannot be a winner."""
+    if settings.math_cs_only:
+        if program["category"] != MATH_CS_CATEGORY:
+            return None
+        return MATH_CS_CATEGORY
+    if settings.combine_program_categories:
+        return COMBINED_CATEGORIES[program["category"]]
+    return program["category"]
+
+
+def _subject_rule(settings):
+    if settings.math_cs_only:
+        return "math and computer science only"
+    if settings.combine_program_categories:
+        return "three combined groups"
+    return "six subjects"
+
+
 def _winner_codes(catalog, tier, settings):
     by_category = defaultdict(set)
     for program in catalog.values():
@@ -108,16 +134,17 @@ def _winner_codes(catalog, tier, settings):
                 or program["cutoff"] is None
                 or (settings.require_full_programs and program["vacancies"] != 0)):
             continue
-        category = (COMBINED_CATEGORIES[program["category"]]
-                    if settings.combine_program_categories else program["category"])
+        category = _ranking_category(program, settings)
+        if category is None:
+            continue
         by_category[category].add(program["cutoff"])
     thresholds = {category: sorted(scores, reverse=True)[:tier]
                   for category, scores in by_category.items()}
     winners = set()
     for code, program in catalog.items():
-        category = (COMBINED_CATEGORIES[program["category"]]
-                    if settings.combine_program_categories else program["category"])
-        if (program["places"] > 0 and program["admitted"] > 0
+        category = _ranking_category(program, settings)
+        if (category is not None
+                and program["places"] > 0 and program["admitted"] > 0
                 and (not settings.require_full_programs or program["vacancies"] == 0)
                 and program["cutoff"] in thresholds.get(category, [])):
             winners.add(code)
@@ -503,7 +530,7 @@ def _plot_hero(bins, tier, path, settings, counties=None):
             if column_number == 0:
                 axis.set_ylabel("Placed in designated program (%)")
     program_rule = "full programs" if settings.require_full_programs else "nonempty programs"
-    group_rule = "three combined groups" if settings.combine_program_categories else "six subjects"
+    group_rule = _subject_rule(settings)
     scope = (f"all {len(settings.counties)} counties combined" if counties == ("ALL",)
              else f"{len(settings.counties)} counties and applicant-weighted combination")
     fig.suptitle(f"Romania 2001: selective placement vs gymnasium applicant peer score\n"
@@ -577,12 +604,13 @@ def _plot_bands(bins, tier, path, band_name, settings, counties=None):
         fontsize=10, va="top", transform=guide.transAxes,
     )
     program_rule = "full programs" if settings.require_full_programs else "nonempty programs"
-    group_rule = "three combined groups" if settings.combine_program_categories else "six subjects"
+    group_rule = _subject_rule(settings)
     fig.suptitle(f"Romania 2001: placement at fixed own-exam bands across peer strength\n"
                  f"Top {tier} tier(s); {program_rule}; {group_rule}; {band_name} — descriptive")
     fig.supxlabel("Mean national exam score of other observed gymnasium applicants")
-    fig.supylabel("Mean county placement rate (%)" if equal_county else
-                 "Placed in a designated program (%)")
+    placed_label = ("Placed in the top math and computer science program (%)"
+                    if settings.math_cs_only else "Placed in a designated program (%)")
+    fig.supylabel("Mean county placement rate (%)" if equal_county else placed_label)
     fig.text(.5, .01,
              ("Equal-county points: mean of represented county rates; labels show county "
               "and applicant support, not a success/applicant ratio." if equal_county else
@@ -645,7 +673,7 @@ def _write_report(folder, summary, boundaries, settings, overview):
     lines = [f"# Romania 2001: {len(settings.counties)}-county descriptive placement pilot", "",
              f"This researcher-run analysis uses saved 2001 Romanian Ministry admission webpages for {', '.join(COUNTY_NAMES[c] for c in settings.counties)}. It asks whether actual placement in a designated selective program varies with the examination performance of *other observed admission-round applicants from the same originating gymnasium*. It is descriptive. It does not establish that peers caused placement differences or that all eighth graders are represented.", "",
              "## What counts", "",
-             f"This run designates the top {', '.join(map(str, settings.top_tiers))} cumulative cutoff tier(s), separately, in each of the {'three combined groups' if settings.combine_program_categories else 'six original program categories'}, among {'fully occupied' if settings.require_full_programs else 'nonempty'} programs. Under the agreed primary specification, top one is primary and top two is a planned comparison. Actual placement is required. Vacancies, ties, number of winning programs, and the sum of their places are reported separately from the observed success fraction. No applicant preference list is available; the observed fraction is **not institutional K/N**.", "",
+             f"This run designates the top {', '.join(map(str, settings.top_tiers))} cumulative cutoff tier(s), separately, in {_subject_rule(settings)}, among {'fully occupied' if settings.require_full_programs else 'nonempty'} programs. Under the agreed primary specification, top one is primary and top two is a planned comparison. Actual placement is required. Vacancies, ties, number of winning programs, and the sum of their places are reported separately from the observed success fraction. No applicant preference list is available; the observed fraction is **not institutional K/N**.", "",
              "Primary outcome participants have a confirmed placement in their originating county or are confirmed unassigned, and have at least one observed gymnasium peer. Confirmed placements outside the originating county and the one unresolved outcome are excluded from the outcome denominator but retained as peers. Applicants with more than one possible exact local program are included only when every possible program has the same top-program success label under this run's settings. A comparison omitting those applicants is saved when requested. " + ("Vocationally placed applicants remain in the primary denominator." if settings.include_vocational_in_primary else "This run excludes vocationally placed applicants from the primary denominator; it is not the agreed primary specification."), "",
              "## County counts", "",
              "| County | Top tiers | Applicants | Outcome denominator | Selected | Observed % | Winning programs | Places in winning programs | Ambiguous exact program, binary known | Outside county | No observed peer |",

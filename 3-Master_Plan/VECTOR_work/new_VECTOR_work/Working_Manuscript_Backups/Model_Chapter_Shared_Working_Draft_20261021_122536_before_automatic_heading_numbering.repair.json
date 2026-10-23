@@ -1,0 +1,291 @@
+{
+  "headings": [
+    {
+      "paragraph": 1,
+      "number": "4.1",
+      "title": "Individual performance and success in groups",
+      "level": 0,
+      "numId": 18
+    },
+    {
+      "paragraph": 5,
+      "number": "4.2",
+      "title": "Selecting the highest performing individuals",
+      "level": 0,
+      "numId": 18
+    },
+    {
+      "paragraph": 7,
+      "number": "4.2.1",
+      "title": "Performance and the selection population",
+      "level": 1,
+      "numId": 18
+    },
+    {
+      "paragraph": 10,
+      "number": "4.2.2",
+      "title": "The score and the selection rule",
+      "level": 1,
+      "numId": 18
+    },
+    {
+      "paragraph": 18,
+      "number": "4.3",
+      "title": "Allowing uncertainty in selection",
+      "level": 0,
+      "numId": 18
+    },
+    {
+      "paragraph": 20,
+      "number": "4.3.1",
+      "title": "Gibbs-weighted selection without replacement",
+      "level": 1,
+      "numId": 18
+    },
+    {
+      "paragraph": 38,
+      "number": "4.3.2",
+      "title": "Selection temperature and limiting behavior ",
+      "level": 1,
+      "numId": 18
+    },
+    {
+      "paragraph": 50,
+      "number": "4.4",
+      "title": "Introducing local competitive congestion",
+      "level": 0,
+      "numId": 18
+    },
+    {
+      "paragraph": 58,
+      "number": "4.4.1",
+      "title": "A first approximation using average peer performance",
+      "level": 1,
+      "numId": 18
+    },
+    {
+      "paragraph": 91,
+      "number": "4.4.2",
+      "title": "From average peers to credible competitors",
+      "level": 1,
+      "numId": 18
+    },
+    {
+      "paragraph": 100,
+      "number": "4.4.3",
+      "title": "Aggregating competitive relevance into a group adjustment",
+      "level": 1,
+      "numId": 18
+    },
+    {
+      "paragraph": 119,
+      "number": "4.4.4",
+      "title": "How local composition changes global comparisons",
+      "level": 1,
+      "numId": 18
+    },
+    {
+      "paragraph": 133,
+      "number": "4.5",
+      "title": "Mathematical behavior and parameter regimes",
+      "level": 0,
+      "numId": 18
+    },
+    {
+      "paragraph": 135,
+      "number": "4.5.1",
+      "title": "Threshold location and transition sharpness",
+      "level": 1,
+      "numId": 18
+    },
+    {
+      "paragraph": 168,
+      "number": "4.5.2",
+      "title": "Penalty strength and score scale",
+      "level": 1,
+      "numId": 18
+    },
+    {
+      "paragraph": 203,
+      "number": "4.5.3",
+      "title": "Scarcity and the selection margin",
+      "level": 1,
+      "numId": 18
+    },
+    {
+      "paragraph": 219,
+      "number": "4.5.4",
+      "title": "Interpreting selection patterns across group environments",
+      "level": 1,
+      "numId": 18
+    },
+    {
+      "paragraph": 235,
+      "number": "4.6",
+      "title": "Generating artificial groups with controlled sorting",
+      "level": 0,
+      "numId": 18
+    },
+    {
+      "paragraph": 238,
+      "number": "4.6.1",
+      "title": "Representing individuals and groups",
+      "level": 1,
+      "numId": 18
+    },
+    {
+      "paragraph": 245,
+      "number": "4.6.2",
+      "title": "Sequential assignment with evolving centroids",
+      "level": 1,
+      "numId": 18
+    },
+    {
+      "paragraph": 284,
+      "number": "4.6.3",
+      "title": "Measuring the sorting that results",
+      "level": 1,
+      "numId": 18
+    },
+    {
+      "paragraph": 313,
+      "number": "4.6.4",
+      "title": "Using artificial groups to investigate congestion",
+      "level": 1,
+      "numId": 18
+    },
+    {
+      "paragraph": 318,
+      "number": "4.7",
+      "title": "What the completed mechanism experiments establish",
+      "level": 0,
+      "numId": 18
+    },
+    {
+      "paragraph": 320,
+      "number": "4.7.1",
+      "title": "Experimental setting and interpretation",
+      "level": 1,
+      "numId": 18
+    },
+    {
+      "paragraph": 323,
+      "number": "4.7.2",
+      "title": "Congestion can change winners without similarity preference",
+      "level": 1,
+      "numId": 18
+    },
+    {
+      "paragraph": 327,
+      "number": "4.7.3",
+      "title": "Penalty strength and the visibility of the tail",
+      "level": 1,
+      "numId": 18
+    },
+    {
+      "paragraph": 333,
+      "number": "4.7.4",
+      "title": "Assignment preference and scarcity",
+      "level": 1,
+      "numId": 18
+    },
+    {
+      "paragraph": 339,
+      "number": "4.7.5",
+      "title": "What remains to be established",
+      "level": 1,
+      "numId": 18
+    },
+    {
+      "paragraph": 342,
+      "number": "4.8",
+      "title": "The bridge to empirical fitting",
+      "level": 0,
+      "numId": 18
+    },
+    {
+      "paragraph": 360,
+      "number": "Appendix 4A",
+      "title": "Technical qualifications and the historical fitting record",
+      "level": 0,
+      "numId": 19
+    },
+    {
+      "paragraph": 361,
+      "number": "4A.1",
+      "title": "The intended stochastic rule and legacy software",
+      "level": 1,
+      "numId": 19
+    },
+    {
+      "paragraph": 366,
+      "number": "4A.2",
+      "title": "Differences between the stated selection rule and earlier implementations",
+      "level": 1,
+      "numId": 19
+    },
+    {
+      "paragraph": 383,
+      "number": "4A.3",
+      "title": "Normalization and threshold construction",
+      "level": 1,
+      "numId": 19
+    },
+    {
+      "paragraph": 393,
+      "number": "4A.4",
+      "title": "Saved estimates and parameter transfer",
+      "level": 1,
+      "numId": 19
+    },
+    {
+      "paragraph": 404,
+      "number": "4A.5",
+      "title": "Alternative congestion specifications",
+      "level": 1,
+      "numId": 19
+    },
+    {
+      "paragraph": 411,
+      "number": "4A.6",
+      "title": "Expected sorting under random assignment",
+      "level": 1,
+      "numId": 19
+    },
+    {
+      "paragraph": 457,
+      "number": "4A.7",
+      "title": "From competitive relevance to selection outcomes",
+      "level": 1,
+      "numId": 19
+    },
+    {
+      "paragraph": 494,
+      "number": "4A.8",
+      "title": "Why a shared penalty cancels under local selection",
+      "level": 1,
+      "numId": 19
+    },
+    {
+      "paragraph": 503,
+      "number": "Appendix 4B",
+      "title": "Sources for the equations and completed results",
+      "level": 0,
+      "numId": 19
+    }
+  ],
+  "changed_parts": [
+    "word/document.xml",
+    "word/numbering.xml",
+    "word/styles.xml"
+  ],
+  "equation_objects_preserved": 626,
+  "tracked_insertions": 15,
+  "tracked_deletions": 20,
+  "source_sha256": "a7cf22ce0402054f3909103ba8a6001f023dbe4f15b8080d308ed28cecb26989",
+  "candidate_sha256": "f4f379a8b73303c37c8f89e6463df8536e43a13dbf9d05798f24621adc5ebbd4",
+  "backup": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Working_Manuscript_Backups/Model_Chapter_Shared_Working_Draft_20261021_122536_before_automatic_heading_numbering.docx",
+  "installed_path": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Model_Chapter_Shared_Working_Draft.docx",
+  "render_pages": 58,
+  "visual_comparison": "58 pages compared; 26 pixel-identical; changed regions inspected; extracted text differs only at repaired Section 4.8 reference and surrounding tracked-deletion wrapping."
+}

@@ -1,0 +1,22 @@
+{
+  "method": "Uniform random sample without replacement, independent of performance; high-temperature limit",
+  "N": 50,
+  "K": 10,
+  "draws": [
+    {
+      "seed": 2026102204,
+      "selectedIds": [
+        44,
+        4,
+        22,
+        9,
+        49,
+        16,
+        24,
+        36,
+        38,
+        14
+      ]
+    }
+  ]
+}

@@ -1,0 +1,989 @@
+{
+  "note": "Illustrative rearrangement, not a realization of the sequential ASSIGN rule. Players ranked by performance plus seeded Gaussian noise, split into five equal teams, shuffled within teams. Original identities, performance and gray uniforms preserved.",
+  "seed": 20261023,
+  "noise_sd": 1.35,
+  "original_H_sort": 0.10350867755545747,
+  "illustration_H_sort": 0.5718881439285612,
+  "teams": [
+    {
+      "team": 1,
+      "mean_performance": 5.7346900000000005,
+      "players": [
+        {
+          "id": 32,
+          "asset": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_black_v1.png",
+          "selected": false,
+          "performance": 5.9184,
+          "team": null,
+          "position": {
+            "left": 306,
+            "top": 506,
+            "width": 92,
+            "height": 138
+          },
+          "performancePosition": {
+            "left": 322.408,
+            "top": 555.224,
+            "width": 59.184,
+            "height": 88.776
+          }
+        },
+        {
+          "id": 34,
+          "asset": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_east_asian_v1.png",
+          "selected": false,
+          "performance": 5.6122,
+          "team": null,
+          "position": {
+            "left": 402,
+            "top": 506,
+            "width": 92,
+            "height": 138
+          },
+          "performancePosition": {
+            "left": 419.939,
+            "top": 559.817,
+            "width": 56.122,
+            "height": 84.183
+          }
+        },
+        {
+          "id": 15,
+          "asset": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_west_asian_v1.png",
+          "selected": false,
+          "performance": 5.2041,
+          "team": null,
+          "position": {
+            "left": 690,
+            "top": 342,
+            "width": 92,
+            "height": 138
+          },
+          "performancePosition": {
+            "left": 709.9795,
+            "top": 401.9385,
+            "width": 52.041,
+            "height": 78.0615
+          }
+        },
+        {
+          "id": 8,
+          "asset": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_black_v1.png",
+          "selected": false,
+          "performance": 5.5102,
+          "team": null,
+          "position": {
+            "left": 354,
+            "top": 342,
+            "width": 92,
+            "height": 138
+          },
+          "performancePosition": {
+            "left": 372.449,
+            "top": 397.347,
+            "width": 55.102,
+            "height": 82.653
+          }
+        },
+        {
+          "id": 5,
+          "asset": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_deep_v1.png",
+          "selected": false,
+          "performance": 6.0204,
+          "team": null,
+          "position": {
+            "left": 210,
+            "top": 342,
+            "width": 92,
+            "height": 138
+          },
+          "performancePosition": {
+            "left": 225.898,
+            "top": 389.694,
+            "width": 60.204,
+            "height": 90.306
+          }
+        },
+        {
+          "id": 39,
+          "asset": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_black_v1.png",
+          "selected": false,
+          "performance": 5.8163,
+          "team": null,
+          "position": {
+            "left": 642,
+            "top": 506,
+            "width": 92,
+            "height": 138
+          },
+          "performancePosition": {
+            "left": 658.9185,
+            "top": 556.7555,
+            "width": 58.163,
+            "height": 87.2445
+          }
+        },
+        {
+          "id": 35,
+          "asset": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_deep_v1.png",
+          "selected": false,
+          "performance": 6.9388,
+          "team": null,
+          "position": {
+            "left": 450,
+            "top": 506,
+            "width": 92,
+            "height": 138
+          },
+          "performancePosition": {
+            "left": 461.306,
+            "top": 539.918,
+            "width": 69.388,
+            "height": 104.082
+          }
+        },
+        {
+          "id": 41,
+          "asset": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_east_asian_v1.png",
+          "selected": false,
+          "performance": 5.0,
+          "team": null,
+          "position": {
+            "left": 738,
+            "top": 506,
+            "width": 92,
+            "height": 138
+          },
+          "performancePosition": {
+            "left": 759.0,
+            "top": 569.0,
+            "width": 50.0,
+            "height": 75.0
+          }
+        },
+        {
+          "id": 37,
+          "asset": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_west_asian_v1.png",
+          "selected": false,
+          "performance": 6.2245,
+          "team": null,
+          "position": {
+            "left": 546,
+            "top": 506,
+            "width": 92,
+            "height": 138
+          },
+          "performancePosition": {
+            "left": 560.8775,
+            "top": 550.6325,
+            "width": 62.245,
+            "height": 93.3675
+          }
+        },
+        {
+          "id": 18,
+          "asset": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_east_asian_v1.png",
+          "selected": false,
+          "performance": 5.102,
+          "team": null,
+          "position": {
+            "left": 834,
+            "top": 342,
+            "width": 92,
+            "height": 138
+          },
+          "performancePosition": {
+            "left": 854.49,
+            "top": 403.47,
+            "width": 51.02,
+            "height": 76.53
+          }
+        }
+      ]
+    },
+    {
+      "team": 2,
+      "mean_performance": 7.13265,
+      "players": [
+        {
+          "id": 46,
+          "asset": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_black_v1.png",
+          "selected": false,
+          "performance": 6.1224,
+          "team": null,
+          "position": {
+            "left": 978,
+            "top": 506,
+            "width": 92,
+            "height": 138
+          },
+          "performancePosition": {
+            "left": 993.388,
+            "top": 552.164,
+            "width": 61.224,
+            "height": 91.836
+          }
+        },
+        {
+          "id": 11,
+          "asset": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_west_asian_v1.png",
+          "selected": false,
+          "performance": 8.1633,
+          "team": null,
+          "position": {
+            "left": 498,
+            "top": 342,
+            "width": 92,
+            "height": 138
+          },
+          "performancePosition": {
+            "left": 503.1835,
+            "top": 357.5505,
+            "width": 81.633,
+            "height": 122.4495
+          }
+        },
+        {
+          "id": 49,
+          "asset": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_deep_v1.png",
+          "selected": false,
+          "performance": 7.2449,
+          "team": null,
+          "position": {
+            "left": 1122,
+            "top": 506,
+            "width": 92,
+            "height": 138
+          },
+          "performancePosition": {
+            "left": 1131.7755,
+            "top": 535.3265,
+            "width": 72.449,
+            "height": 108.6735
+          }
+        },
+        {
+          "id": 22,
+          "asset": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_fair_v1.png",
+          "selected": false,
+          "performance": 5.4082,
+          "team": null,
+          "position": {
+            "left": 1026,
+            "top": 342,
+            "width": 92,
+            "height": 138
+          },
+          "performancePosition": {
+            "left": 1044.959,
+            "top": 398.877,
+            "width": 54.082,
+            "height": 81.123
+          }
+        },
+        {
+          "id": 3,
+          "asset": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_west_asian_v1.png",
+          "selected": false,
+          "performance": 7.8571,
+          "team": null,
+          "position": {
+            "left": 114,
+            "top": 342,
+            "width": 92,
+            "height": 138
+          },
+          "performancePosition": {
+            "left": 120.7145,
+            "top": 362.1435,
+            "width": 78.571,
+            "height": 117.8565
+          }
+        },
+        {
+          "id": 26,
+          "asset": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_caramel_v1.png",
+          "selected": false,
+          "performance": 9.0816,
+          "team": null,
+          "position": {
+            "left": 18,
+            "top": 506,
+            "width": 92,
+            "height": 138
+          },
+          "performancePosition": {
+            "left": 18.592,
+            "top": 507.776,
+            "width": 90.816,
+            "height": 136.224
+          }
+        },
+        {
+          "id": 12,
+          "asset": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_black_v1.png",
+          "selected": false,
+          "performance": 8.2653,
+          "team": null,
+          "position": {
+            "left": 546,
+            "top": 342,
+            "width": 92,
+            "height": 138
+          },
+          "performancePosition": {
+            "left": 550.6735,
+            "top": 356.0205,
+            "width": 82.653,
+            "height": 123.9795
+          }
+        },
+        {
+          "id": 4,
+          "asset": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_black_v1.png",
+          "selected": false,
+          "performance": 7.0408,
+          "team": null,
+          "position": {
+            "left": 162,
+            "top": 342,
+            "width": 92,
+            "height": 138
+          },
+          "performancePosition": {
+            "left": 172.796,
+            "top": 374.388,
+            "width": 70.408,
+            "height": 105.612
+          }
+        },
+        {
+          "id": 43,
+          "asset": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_fair_v1.png",
+          "selected": false,
+          "performance": 6.4286,
+          "team": null,
+          "position": {
+            "left": 834,
+            "top": 506,
+            "width": 92,
+            "height": 138
+          },
+          "performancePosition": {
+            "left": 847.857,
+            "top": 547.571,
+            "width": 64.286,
+            "height": 96.429
+          }
+        },
+        {
+          "id": 14,
+          "asset": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_east_asian_v1.png",
+          "selected": false,
+          "performance": 5.7143,
+          "team": null,
+          "position": {
+            "left": 642,
+            "top": 342,
+            "width": 92,
+            "height": 138
+          },
+          "performancePosition": {
+            "left": 659.4285,
+            "top": 394.2855,
+            "width": 57.143,
+            "height": 85.7145
+          }
+        }
+      ]
+    },
+    {
+      "team": 3,
+      "mean_performance": 7.48981,
+      "players": [
+        {
+          "id": 17,
+          "asset": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_deep_v1.png",
+          "selected": false,
+          "performance": 6.7347,
+          "team": null,
+          "position": {
+            "left": 786,
+            "top": 342,
+            "width": 92,
+            "height": 138
+          },
+          "performancePosition": {
+            "left": 798.3265,
+            "top": 378.9795,
+            "width": 67.347,
+            "height": 101.0205
+          }
+        },
+        {
+          "id": 45,
+          "asset": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_neutral_v1.png",
+          "selected": false,
+          "performance": 5.3061,
+          "team": null,
+          "position": {
+            "left": 930,
+            "top": 506,
+            "width": 92,
+            "height": 138
+          },
+          "performancePosition": {
+            "left": 949.4695,
+            "top": 564.4085,
+            "width": 53.061,
+            "height": 79.5915
+          }
+        },
+        {
+          "id": 19,
+          "asset": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_west_asian_v1.png",
+          "selected": false,
+          "performance": 9.1837,
+          "team": null,
+          "position": {
+            "left": 882,
+            "top": 342,
+            "width": 92,
+            "height": 138
+          },
+          "performancePosition": {
+            "left": 882.0815,
+            "top": 342.2445,
+            "width": 91.837,
+            "height": 137.7555
+          }
+        },
+        {
+          "id": 16,
+          "asset": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_black_v1.png",
+          "selected": false,
+          "performance": 7.1429,
+          "team": null,
+          "position": {
+            "left": 738,
+            "top": 342,
+            "width": 92,
+            "height": 138
+          },
+          "performancePosition": {
+            "left": 748.2855,
+            "top": 372.8565,
+            "width": 71.429,
+            "height": 107.1435
+          }
+        },
+        {
+          "id": 40,
+          "asset": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_caramel_v1.png",
+          "selected": false,
+          "performance": 8.4694,
+          "team": null,
+          "position": {
+            "left": 690,
+            "top": 506,
+            "width": 92,
+            "height": 138
+          },
+          "performancePosition": {
+            "left": 693.653,
+            "top": 516.959,
+            "width": 84.694,
+            "height": 127.041
+          }
+        },
+        {
+          "id": 1,
+          "asset": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_fair_v1.png",
+          "selected": false,
+          "performance": 7.6531,
+          "team": null,
+          "position": {
+            "left": 18,
+            "top": 342,
+            "width": 92,
+            "height": 138
+          },
+          "performancePosition": {
+            "left": 25.7345,
+            "top": 365.2035,
+            "width": 76.531,
+            "height": 114.7965
+          }
+        },
+        {
+          "id": 24,
+          "asset": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_neutral_v1.png",
+          "selected": false,
+          "performance": 7.9592,
+          "team": null,
+          "position": {
+            "left": 1122,
+            "top": 342,
+            "width": 92,
+            "height": 138
+          },
+          "performancePosition": {
+            "left": 1128.204,
+            "top": 360.612,
+            "width": 79.592,
+            "height": 119.388
+          }
+        },
+        {
+          "id": 13,
+          "asset": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_fair_v1.png",
+          "selected": false,
+          "performance": 8.0612,
+          "team": null,
+          "position": {
+            "left": 594,
+            "top": 342,
+            "width": 92,
+            "height": 138
+          },
+          "performancePosition": {
+            "left": 599.694,
+            "top": 359.082,
+            "width": 80.612,
+            "height": 120.918
+          }
+        },
+        {
+          "id": 25,
+          "asset": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_black_v1.png",
+          "selected": false,
+          "performance": 7.7551,
+          "team": null,
+          "position": {
+            "left": 1170,
+            "top": 342,
+            "width": 92,
+            "height": 138
+          },
+          "performancePosition": {
+            "left": 1177.2245,
+            "top": 363.6735,
+            "width": 77.551,
+            "height": 116.3265
+          }
+        },
+        {
+          "id": 31,
+          "asset": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_neutral_v1.png",
+          "selected": false,
+          "performance": 6.6327,
+          "team": null,
+          "position": {
+            "left": 258,
+            "top": 506,
+            "width": 92,
+            "height": 138
+          },
+          "performancePosition": {
+            "left": 270.8365,
+            "top": 544.5095,
+            "width": 66.327,
+            "height": 99.4905
+          }
+        }
+      ]
+    },
+    {
+      "team": 4,
+      "mean_performance": 7.999989999999999,
+      "players": [
+        {
+          "id": 36,
+          "asset": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_fair_v1.png",
+          "selected": false,
+          "performance": 8.6735,
+          "team": null,
+          "position": {
+            "left": 498,
+            "top": 506,
+            "width": 92,
+            "height": 138
+          },
+          "performancePosition": {
+            "left": 500.6325,
+            "top": 513.8975,
+            "width": 86.735,
+            "height": 130.1025
+          }
+        },
+        {
+          "id": 33,
+          "asset": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_caramel_v1.png",
+          "selected": false,
+          "performance": 8.5714,
+          "team": null,
+          "position": {
+            "left": 354,
+            "top": 506,
+            "width": 92,
+            "height": 138
+          },
+          "performancePosition": {
+            "left": 357.143,
+            "top": 515.429,
+            "width": 85.714,
+            "height": 128.571
+          }
+        },
+        {
+          "id": 9,
+          "asset": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_caramel_v1.png",
+          "selected": false,
+          "performance": 8.8776,
+          "team": null,
+          "position": {
+            "left": 402,
+            "top": 342,
+            "width": 92,
+            "height": 138
+          },
+          "performancePosition": {
+            "left": 403.612,
+            "top": 346.836,
+            "width": 88.776,
+            "height": 133.164
+          }
+        },
+        {
+          "id": 10,
+          "asset": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_east_asian_v1.png",
+          "selected": false,
+          "performance": 7.3469,
+          "team": null,
+          "position": {
+            "left": 450,
+            "top": 342,
+            "width": 92,
+            "height": 138
+          },
+          "performancePosition": {
+            "left": 459.2655,
+            "top": 369.7965,
+            "width": 73.469,
+            "height": 110.2035
+          }
+        },
+        {
+          "id": 21,
+          "asset": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_deep_v1.png",
+          "selected": false,
+          "performance": 7.449,
+          "team": null,
+          "position": {
+            "left": 978,
+            "top": 342,
+            "width": 92,
+            "height": 138
+          },
+          "performancePosition": {
+            "left": 986.755,
+            "top": 368.265,
+            "width": 74.49,
+            "height": 111.735
+          }
+        },
+        {
+          "id": 30,
+          "asset": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_west_asian_v1.png",
+          "selected": false,
+          "performance": 9.7959,
+          "team": null,
+          "position": {
+            "left": 210,
+            "top": 506,
+            "width": 92,
+            "height": 138
+          },
+          "performancePosition": {
+            "left": 207.0205,
+            "top": 497.0615,
+            "width": 97.959,
+            "height": 146.9385
+          }
+        },
+        {
+          "id": 47,
+          "asset": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_caramel_v1.png",
+          "selected": false,
+          "performance": 6.8367,
+          "team": null,
+          "position": {
+            "left": 1026,
+            "top": 506,
+            "width": 92,
+            "height": 138
+          },
+          "performancePosition": {
+            "left": 1037.8165,
+            "top": 541.4495,
+            "width": 68.367,
+            "height": 102.5505
+          }
+        },
+        {
+          "id": 23,
+          "asset": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_west_asian_v1.png",
+          "selected": false,
+          "performance": 9.5918,
+          "team": null,
+          "position": {
+            "left": 1074,
+            "top": 342,
+            "width": 92,
+            "height": 138
+          },
+          "performancePosition": {
+            "left": 1072.041,
+            "top": 336.123,
+            "width": 95.918,
+            "height": 143.877
+          }
+        },
+        {
+          "id": 44,
+          "asset": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_west_asian_v1.png",
+          "selected": false,
+          "performance": 6.5306,
+          "team": null,
+          "position": {
+            "left": 882,
+            "top": 506,
+            "width": 92,
+            "height": 138
+          },
+          "performancePosition": {
+            "left": 895.347,
+            "top": 546.041,
+            "width": 65.306,
+            "height": 97.959
+          }
+        },
+        {
+          "id": 2,
+          "asset": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_east_asian_v1.png",
+          "selected": false,
+          "performance": 6.3265,
+          "team": null,
+          "position": {
+            "left": 66,
+            "top": 342,
+            "width": 92,
+            "height": 138
+          },
+          "performancePosition": {
+            "left": 80.3675,
+            "top": 385.1025,
+            "width": 63.265,
+            "height": 94.8975
+          }
+        }
+      ]
+    },
+    {
+      "team": 5,
+      "mean_performance": 9.14286,
+      "players": [
+        {
+          "id": 50,
+          "asset": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_fair_v1.png",
+          "selected": false,
+          "performance": 9.3878,
+          "team": null,
+          "position": {
+            "left": 1170,
+            "top": 506,
+            "width": 92,
+            "height": 138
+          },
+          "performancePosition": {
+            "left": 1169.061,
+            "top": 503.183,
+            "width": 93.878,
+            "height": 140.817
+          }
+        },
+        {
+          "id": 6,
+          "asset": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_east_asian_v1.png",
+          "selected": false,
+          "performance": 8.9796,
+          "team": null,
+          "position": {
+            "left": 258,
+            "top": 342,
+            "width": 92,
+            "height": 138
+          },
+          "performancePosition": {
+            "left": 259.102,
+            "top": 345.306,
+            "width": 89.796,
+            "height": 134.694
+          }
+        },
+        {
+          "id": 27,
+          "asset": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_east_asian_v1.png",
+          "selected": false,
+          "performance": 9.2857,
+          "team": null,
+          "position": {
+            "left": 66,
+            "top": 506,
+            "width": 92,
+            "height": 138
+          },
+          "performancePosition": {
+            "left": 65.5715,
+            "top": 504.7145,
+            "width": 92.857,
+            "height": 139.2855
+          }
+        },
+        {
+          "id": 29,
+          "asset": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_fair_v1.png",
+          "selected": false,
+          "performance": 8.3673,
+          "team": null,
+          "position": {
+            "left": 162,
+            "top": 506,
+            "width": 92,
+            "height": 138
+          },
+          "performancePosition": {
+            "left": 166.1635,
+            "top": 518.4905,
+            "width": 83.673,
+            "height": 125.5095
+          }
+        },
+        {
+          "id": 38,
+          "asset": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_neutral_v1.png",
+          "selected": false,
+          "performance": 9.4898,
+          "team": null,
+          "position": {
+            "left": 594,
+            "top": 506,
+            "width": 92,
+            "height": 138
+          },
+          "performancePosition": {
+            "left": 592.551,
+            "top": 501.653,
+            "width": 94.898,
+            "height": 142.347
+          }
+        },
+        {
+          "id": 42,
+          "asset": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_deep_v1.png",
+          "selected": false,
+          "performance": 10.0,
+          "team": null,
+          "position": {
+            "left": 786,
+            "top": 506,
+            "width": 92,
+            "height": 138
+          },
+          "performancePosition": {
+            "left": 782.0,
+            "top": 494.0,
+            "width": 100.0,
+            "height": 150.0
+          }
+        },
+        {
+          "id": 28,
+          "asset": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_deep_v1.png",
+          "selected": false,
+          "performance": 9.6939,
+          "team": null,
+          "position": {
+            "left": 114,
+            "top": 506,
+            "width": 92,
+            "height": 138
+          },
+          "performancePosition": {
+            "left": 111.5305,
+            "top": 498.5915,
+            "width": 96.939,
+            "height": 145.4085
+          }
+        },
+        {
+          "id": 20,
+          "asset": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_east_asian_v1.png",
+          "selected": false,
+          "performance": 9.898,
+          "team": null,
+          "position": {
+            "left": 930,
+            "top": 342,
+            "width": 92,
+            "height": 138
+          },
+          "performancePosition": {
+            "left": 926.51,
+            "top": 331.53,
+            "width": 98.98,
+            "height": 148.47
+          }
+        },
+        {
+          "id": 48,
+          "asset": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_east_asian_v1.png",
+          "selected": false,
+          "performance": 8.7755,
+          "team": null,
+          "position": {
+            "left": 1074,
+            "top": 506,
+            "width": 92,
+            "height": 138
+          },
+          "performancePosition": {
+            "left": 1076.1225,
+            "top": 512.3675,
+            "width": 87.755,
+            "height": 131.6325
+          }
+        },
+        {
+          "id": 7,
+          "asset": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_west_asian_v1.png",
+          "selected": false,
+          "performance": 7.551,
+          "team": null,
+          "position": {
+            "left": 306,
+            "top": 342,
+            "width": 92,
+            "height": 138
+          },
+          "performancePosition": {
+            "left": 314.245,
+            "top": 366.735,
+            "width": 75.51,
+            "height": 113.265
+          }
+        }
+      ]
+    }
+  ]
+}

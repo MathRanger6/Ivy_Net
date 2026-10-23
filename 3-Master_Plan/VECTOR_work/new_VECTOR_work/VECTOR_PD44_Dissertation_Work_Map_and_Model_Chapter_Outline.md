@@ -185,6 +185,25 @@ Preserve domain-specific measurement and methodological work. The dissertation c
 
 The immediate scientific questions still include the effect of earlier score clipping and selection caps on reused results; historical fitting-window and outcome-label definitions; threshold and normalization choices; transfer or refitting between probability models; and the empirical interpretation of cross-county student movement. They should remain visible without turning this work map into an authorization for broad experiments.
 
+### NCAA roster pressure comparisons for an evening session
+
+**Added October 21, 2026. First descriptive comparison completed October 23, 2026, at Charles’s request.** The manuscript is unchanged; no additional significance tests were run.
+
+- [x] Build a notebook comparison of the empirical NCAA HERO plots corresponding to basketball mosaic panels 7, 8, and 9. Use actual observed draft outcomes, not simulated winners.
+- [x] First identify each panel’s current population, season window, own-performance bands, peer roster, and outcome definition from the existing notebook. Preserve those definitions within each side-by-side comparison.
+- [x] Compare three horizontal axes: ordinary LOO mean performance, shared roster pressure (the mean competitive relevance of all group members), and LOO roster pressure (the mean competitive relevance of the other members only). LOO roster pressure is distinct from the manuscript’s existing C_LOO,i performance average.
+- [x] Use the same threshold and gamma settings for shared and LOO roster pressure. State the performance scale and threshold rule, and examine a declared range of settings rather than choosing the combination that produces the strongest downturn. Any threshold derived from data should remain fixed within each shared-versus-LOO comparison.
+- [x] Keep binning rules, clipping, performance-band colors, and labels consistent and explicit. State quantile versus equal-width binning and any squid/jackal compression or extension. Common bin edges for shared and LOO roster pressure allow direct comparison on their common scale; ordinary LOO performance has different units. Include observations, drafted players, and contributing groups per bin so changes in support are visible. Mark singleton LOO values as undefined.
+- [x] Export clearly labeled printable comparisons and describe whether peaks, downturns, and differences across performance bands persist, weaken, or move. These are descriptive associations; changing the horizontal axis does not change the observed draft outcomes. Hold off on significance tests and simulated selection comparisons in this first pass.
+
+**Completed first pass:** [NCAA shared versus LOO roster pressure notebook](manuscript_figures/section_4_5/roster_pressure_comparison/NCAA_Shared_vs_LOO_Roster_Pressure.ipynb). It preserves the verified 2009–2021 cohort definitions, calculates pressure before focal-player filtering, and exports quantile and EW mosaics with bin support. EW pressure boundaries are common across the shared and LOO columns; quantile membership is independently recalculated using the original rank-first tie rule. These new figures use 16 bins in every row, without historical mixed-width compression or LOO winsorization. Default theta is the 93rd percentile of full-roster performance and gamma is 2; the declared comparison grid uses theta percentiles 80, 90, and 93 with gamma 0.5, 2, and 8. Source-specific score scaling is retained and stated.
+
+**Initial descriptive observation:** At the default settings, the final-season all-player cohort has a much more pronounced upward relationship under shared roster pressure than under LOO roster pressure. In the high-performance bands, removing the focal individual lowers pressure for every included observation at these settings, but the curves are irregular and tail appearance varies with binning and parameters. This is a comparison of environmental summaries, not evidence of a causal effect or a significance claim. The notebook saves distinct-player and distinct-college-season counts. A separate tie-preserving quantile comparison remains open.
+
+**Question motivating the notebook:** Does the concentration of competitively relevant teammates reveal a pattern that an average of teammate performance obscures, and does excluding the focal player materially change that pattern?
+
+**Starting points:** [Figure notebook](manuscript_figures/section_4_5/Chapter_4_5_Mathematical_Illustrations.ipynb), [PD46 comparisons notebook](manuscript_figures/section_4_5/pd46_statistics/PD46_Draft_Rate_Comparisons.ipynb), and [printable mosaic methods](manuscript_figures/section_4_5/pd46_statistics/printable_mosaics/READ_ME_methods_and_next_steps.md). The October 23 notebook is a separate exploration; these earlier notebooks and their results remain intact.
+
 ## 7. Source register and revision record
 
 The sources below distinguish direct advisor evidence from our own plans and current artifacts:

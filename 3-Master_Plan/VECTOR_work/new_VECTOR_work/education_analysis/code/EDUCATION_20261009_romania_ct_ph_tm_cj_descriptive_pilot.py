@@ -1,4 +1,4 @@
-"""Researcher-run descriptive plots for the eleven source-checked counties.
+"""Researcher-run descriptive plots for the source-checked Romania counties.
 
 This module makes no web requests. Student-level source rows stay in memory;
 only aggregate tables, figures, and a name-free report enter the repository.
@@ -27,9 +27,27 @@ from EDUCATION_20261007_romania_seven_county_new_views_offline_audit import (
 )
 
 NEW_COUNTIES = ("CT", "PH", "TM", "CJ")
-COUNTIES = (*base.COUNTY_NAMES, *NEW_COUNTIES)
+# October 18 reconciliation: complete applicant pages, no unresolved School
+# Result View address, every applicant row matched, remaining placement
+# shortfall 0. Neamț, Bistrița-Năsăud, Suceava, and Maramureș stay out.
+# The notebook lists only the subset whose home labels are single-valued
+# for both cutoff tiers. The others remain requestable and fail closed.
+EXTENDED_COUNTIES = (
+    "AG", "BC", "BH", "BR", "BT", "BV", "BZ", "CL", "CV", "DB", "DJ", "GJ",
+    "GR", "HD", "HR", "IL", "IS", "MH", "MS", "OT", "SJ", "SM", "TR", "VL",
+    "VN", "VS",
+)
+LATER_COUNTIES = NEW_COUNTIES + EXTENDED_COUNTIES
+COUNTIES = (*base.COUNTY_NAMES, *LATER_COUNTIES)
 COUNTY_NAMES = {**base.COUNTY_NAMES,
-                "CT": "Constanța", "PH": "Prahova", "TM": "Timiș", "CJ": "Cluj"}
+                "CT": "Constanța", "PH": "Prahova", "TM": "Timiș", "CJ": "Cluj",
+                "AG": "Argeș", "BC": "Bacău", "BH": "Bihor", "BR": "Brăila",
+                "BT": "Botoșani", "BV": "Brașov", "BZ": "Buzău", "CL": "Călărași",
+                "CV": "Covasna", "DB": "Dâmbovița", "DJ": "Dolj", "GJ": "Gorj",
+                "GR": "Giurgiu", "HD": "Hunedoara", "HR": "Harghita",
+                "IL": "Ialomița", "IS": "Iași", "MH": "Mehedinți", "MS": "Mureș",
+                "OT": "Olt", "SJ": "Sălaj", "SM": "Satu Mare", "TR": "Teleorman",
+                "VL": "Vâlcea", "VN": "Vrancea", "VS": "Vaslui"}
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE_GATE = ROOT / "outputs/romania_2001_four_new_county_source_reconciliation_20261008/plot_source_gate_counts.csv"
 OUTPUTS = ROOT / "outputs/romania_2001_CT_PH_TM_CJ_descriptive_pilot"
@@ -54,6 +72,8 @@ class Settings(base.Settings):
         if (not self.top_tiers or len(set(self.top_tiers)) != len(self.top_tiers)
                 or any(type(t) is not int or t < 1 for t in self.top_tiers)):
             raise ValueError("TOP_TIERS must contain distinct positive integers")
+        if self.math_cs_only and self.combine_program_categories:
+            raise ValueError("MATH_CS_ONLY keeps one subject. Leave category combining off.")
         if self.peer_strength_bins < 3 or self.hero_bins < 3:
             raise ValueError("Plot bin counts must be at least three")
         if (len(self.ai_percentile_cuts) != 3
@@ -83,14 +103,14 @@ def _gate(settings):
 
 
 def _new_source_frames(settings):
-    """Match each new-county applicant within its gymnasium; fail closed."""
+    """Match each later-county applicant within its gymnasium; fail closed."""
     settings.validate()
     gate = _gate(settings)
     state = views.load_status()["counties"]
     progress = placement_status()
     frames, chosen, overview = [], [], []
     for county in settings.counties:
-        if county not in NEW_COUNTIES:
+        if county not in LATER_COUNTIES:
             continue
         print(f"Source check {county}: gymnasium, result, and program pages...", flush=True)
         schools = school_directory(county)
@@ -147,7 +167,7 @@ def _new_source_frames(settings):
                 if score is None:
                     raise ValueError(f"{county} gymnasium {code}: exam score absent")
                 gym_sums[code] += float(score[0])
-        if sum(gym_sizes.values()) != gate.loc[county, "applicant_rows"]:
+        if county in gate.index and sum(gym_sizes.values()) != gate.loc[county, "applicant_rows"]:
             raise ValueError(f"{county}: applicant total differs from saved source gate")
 
         tally = Counter()
@@ -196,11 +216,12 @@ def _new_source_frames(settings):
                                    "peer_count": n_peers, "status": status,
                                    "success": success, "vocational_destination": vocational,
                                    "ambiguous_exact_program": len(options) > 1})
-        expected = gate.loc[county]
-        if (tally["home"] != expected["home_placements"]
-                or tally["away"] != expected["away_placements"]
-                or tally["unassigned"] != expected["unassigned"]):
-            raise ValueError(f"{county}: outcome counts differ from saved source gate")
+        if county in gate.index:
+            expected = gate.loc[county]
+            if (tally["home"] != expected["home_placements"]
+                    or tally["away"] != expected["away_placements"]
+                    or tally["unassigned"] != expected["unassigned"]):
+                raise ValueError(f"{county}: outcome counts differ from saved source gate")
         applicant_n = sum(gym_sizes.values())
         incoming = len(placements) - tally["home"]
         overview.append({"county": county, "county_name": COUNTY_NAMES[county],
@@ -227,7 +248,7 @@ def _source_frames(settings):
     """Join the two source-verified county pipelines without duplicating people."""
     settings.validate()
     earlier = tuple(c for c in settings.counties if c in base.COUNTY_NAMES)
-    newer = tuple(c for c in settings.counties if c in NEW_COUNTIES)
+    newer = tuple(c for c in settings.counties if c in LATER_COUNTIES)
     pieces = []
     if earlier:
         print(f"Checking the earlier {len(earlier)} counties: {', '.join(earlier)}", flush=True)

@@ -1,6 +1,6 @@
 # Romania 2001 four county pilot design decisions
 
-**Decision log, begun October 2 and updated October 4, 2026.** This records choices made in conversation before extending the Alba descriptive analysis to Alba, Caraș-Severin, Galați, and Tulcea. A choice recorded here is not evidence of an empirical effect. Source acquisition and reconciliation are described separately in the [four county source audit](../../outputs/romania_2001_four_county_source_pilot/full_gymnasium_reconciliation.md) and [program identity source gate](../../outputs/romania_2001_four_county_source_pilot/program_identity_source_gate.md).
+**Decision log, begun October 2 and updated October 18, 2026.** This records choices made in conversation before extending the Alba descriptive analysis to Alba, Caraș-Severin, Galați, and Tulcea. A choice recorded here is not evidence of an empirical effect. Source acquisition and reconciliation are described separately in the [four county source audit](../../outputs/romania_2001_four_county_source_pilot/full_gymnasium_reconciliation.md) and [program identity source gate](../../outputs/romania_2001_four_county_source_pilot/program_identity_source_gate.md).
 
 ## Decisions agreed so far
 
@@ -53,3 +53,44 @@ The existing analysis notebook now exposes `COUNTIES = ("AB", "CS", "GL", "TL", 
 Alex's proposed county comparison is included before plotting and in each saved report: listed gymnasiums, gymnasiums with observed applicants, those with at least two applicants, total observed applicants, and incoming/outgoing placements. **Outgoing** is a placement outside the originating gymnasium's county, expressed as a count and percentage of all recovered applicants from that county. **Incoming** is a placement here from an originating gymnasium elsewhere, expressed as a count and percentage of all placements here. These denominators differ. Incoming origins use recovered gymnasium evidence where available and otherwise the printed origin-school county on the matched county applicant record. Missing or contradictory matches remain separately unresolved. Counts describe school locations, not actual household relocation or applicants' motives.
 
 This comparison does not automatically remove students, pick a county, or change the outcome denominator. Outside-county students remain in their original gymnasium's peer calculation. The original unresolved Galați outcome remains unresolved. Lower movement and a larger number of participating gymnasiums are criteria to consider before choosing future counties, not a reason to select whichever county produces a desired curve. No larger county was added beyond AR and SB in this update. Analysis remains researcher-started in Cell 3; preparing these changes did not run new HERO curves.
+
+## Source assessment for a further extension, October 18
+
+The descriptive notebook in use on this date is the eleven-county pilot, `notebooks/EDUCATION_20261009_Romania_2001_all_scraped_counties_descriptive_pilot.ipynb`, with `COUNTIES = ("AB", "CS", "GL", "TL", "AR", "SB", "B", "CT", "PH", "TM", "CJ")`. Its rules are the ones above: the peer pool is the other observed applicants on the same originating-gymnasium page, and the outcome is placement in a designated high-cutoff program. Incomplete resident-applicant lists did not keep Bucharest–Ilfov, Constanța, Galați, or Timiș out of that plot. A missing School Applicant View page does, because the peer pool would be incomplete.
+
+On October 18 the School Applicant View acquisition file recorded 7,384 of 7,385 school pages saved for the 40 counties in that notebook. Alba's 168 pages remain in the earlier verified cache. The one open applicant address is Neamț school 260, still HTTP 404. A same-day retry of the previously recorded HTTP 404 addresses did not recover them. Those addresses stay unresolved. They are not empty schools and not unsuccessful applicants.
+
+The all-county offline reconciliation `outputs/romania_2001_all_county_offline_reconciliation/run_20261018T183820-0400` then compared the saved pages. Where every listed School Applicant View file exists, repeated name-and-score keys are 0, rows missing a printed name or admission score are 0, and exam-component disagreements on unique keys are 0. A matching total counts rows. It does not certify unique people. Cross-county pair counts did not change, because that comparison uses School Result View and incoming lists rather than the new applicant pages: 518 pairs, 500 agreeing in aggregate, and 472 of 489 complete pairs agreeing. Aggregate agreement is not person matching.
+
+**Twenty-six further counties now meet the same operational source checks as the eleven already plotted.** Each has a complete School Applicant View, a School Result View with no unresolved address, every applicant row matched to a result row, and a remaining placement shortfall of 0 after program recovery. Several, like Bucharest–Ilfov and the other earlier counties with recovered placements, still have a nonzero original shortfall against the occupancy total. A few result rows still lack an applicant row. Neither of those facts excluded the existing eleven. The twenty-six are Argeș (AG), Bacău (BC), Bihor (BH), Brăila (BR), Botoșani (BT), Brașov (BV), Buzău (BZ), Călărași (CL), Covasna (CV), Dâmbovița (DB), Dolj (DJ), Gorj (GJ), Giurgiu (GR), Hunedoara (HD), Harghita (HR), Ialomița (IL), Iași (IS), Mehedinți (MH), Mureș (MS), Olt (OT), Sălaj (SJ), Satu Mare (SM), Teleorman (TR), Vâlcea (VL), Vrancea (VN), and Vaslui (VS).
+
+**Four counties stay out of this plot:**
+
+- Neamț (NT): 211 of 212 applicant schools. The same-school comparison did not run.
+- Bistrița-Năsăud (BN): one School Result View address is still HTTP 404, and 19 applicant rows have no result row.
+- Suceava (SV): one School Result View address is still HTTP 404, and 42 applicant rows have no result row.
+- Maramureș (MM): applicant and result row counts match, but the program-identity check disagrees, so the cutoff ranking this plot uses is not settled. This is the same Maramureș program-directory disagreement already left unresolved in the October 7 paired-outcome design.
+
+The fourteen unfinished resident lists remain a separate source. They include some of the original eleven and some of the twenty-six. They are not the peer pool for this plot.
+
+Adding the twenty-six would be a new descriptive run under the saved settings. County mix can change the combined curve without changing an individual county's own panel. It would not be a 41-county national result, and it does not authorize a new outcome definition. This section records the source assessment. It does not itself calculate new curves.
+
+On October 19 the companion `code/EDUCATION_20261009_romania_ct_ph_tm_cj_descriptive_pilot.py` was opened so those twenty-six codes can be requested, and the descriptive notebook lists only the ones the live builder accepts. Constanța, Prahova, Timiș, and Cluj still have to match the saved October 8 source-gate file. Each added county is built by the same live checks: complete School Result View pages, a directory match, placement rows equal to occupied places, a unique name-and-score match, an exam score on every applicant row, and a single top-tier label for both cutoff tiers in the notebook. A county that fails is left out rather than drawn with a hole.
+
+The live builder accepts eleven: Argeș (AG), Brăila (BR), Botoșani (BT), Brașov (BV), Dâmbovița (DB), Dolj (DJ), Gorj (GJ), Ialomița (IL), Olt (OT), Vâlcea (VL), and Vrancea (VN). Those frames were built. Curves were not calculated.
+
+Fifteen stay out of the notebook list:
+
+- Mixed top-1 and top-2 labels: Bihor (BH, 428), Călărași (CL, 96), Covasna (CV, 123 and 222), Hunedoara (HD, 47 and 71), Harghita (HR, 100), Iași (IS, 46 and 389), Mureș (MS, 219 and 444), Sălaj (SJ, 175 and 249), Satu Mare (SM, 99 and 174).
+- Mixed top-1 only: Buzău (BZ, 223).
+- Mixed top-2 only, top-1 already single-valued: Bacău (BC, 49), Giurgiu (GR, 75), Mehedinți (MH, 217).
+- Teleorman (TR): one applicant row does not have a unique result match.
+- Vaslui (VS): recovered program page `destination_program_47` has no saved metadata file, so the placement list does not finish.
+
+`RUN_ANALYSIS` stays off. This paragraph does not calculate curves.
+
+On October 19 a separate module, `code/EDUCATION_20261019_romania_competitor_count_and_cutoff_step.py`, was added for two descriptive checks. It does not replace the top-program outcome. The first check counts other applicants on the same gymnasium page with a strictly higher exam score. The second counts how many filled cutoffs in the destination category sit strictly above the program entered. Outside-county placements stay out of the step average. Charles ran the 22 counties from `notebooks/EDUCATION_20261019_Romania_2001_competitor_count_and_cutoff_step.ipynb`. The saved run is `outputs/romania_2001_competitor_count_and_cutoff_step/run_20261019T132633-0400`.
+
+The same module now also compares gymnasiums that share a town. The outcome is still placement in the top filled program. A town with one gymnasium is left out. The own-score slice is the county 90th percentile up to, but not including, the 95th. The peer measure is a property of the gymnasium: how many of its applicants sit at or above the county 90th percentile. Personal rank is not used. Bucharest is one market. A printed Ilfov locality stays its own town. Towns with fewer than 15 students on either side of the median split are saved in the table and left out of the summary. The run is `outputs/romania_2001_within_town_same_score/run_20261019T134256-0400`. Sixteen towns meet the student floor. Each town counted once, the more crowded gymnasiums place this slice in the top program 3.1 percentage points more often. Weighted by students, the difference is 0.2 points. Mean exams on the two sides match. Bucharest is a 2.6 point decline, 15.4 percent against 12.8 percent. Târgu Jiu has 8 students on the thinner side, so it misses the floor: 2 of 8 against 35 of 87.
+
+Both notebooks now have `MATH_CS_ONLY`, left off. Turning it on keeps one designated program: the highest completely filled math and computer science program in the county. Placement in any other subject stays in the denominator and counts as not selected. The switch has not been run.

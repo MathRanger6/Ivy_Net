@@ -1,0 +1,38 @@
+[
+  {
+    "panel": 9,
+    "file": "ncaa_panel_9_2009_2021_loo.png",
+    "source": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/manuscript_figures/section_4_5/year_window_comparison/panel_9_2009_2021_bins.csv",
+    "source_sha256": "8b7d957ed15ab8c88f4b4a13e436f7ac2c5461aafd6132bc0fd4e3d0c2a9dfa2",
+    "n": 22795,
+    "positive_rows": 615,
+    "population": "All eligible teams; one final-season observation per player",
+    "binning": "16 equal-width bins (EW)",
+    "y_axis_max_percent": 8,
+    "note": "Original saved bin counts and Wilson intervals retained; no new significance tests. LOO mean raw performance, not sigmoid roster pressure."
+  },
+  {
+    "panel": 7,
+    "file": "ncaa_panel_7_2009_2021_loo.png",
+    "source": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/manuscript_figures/section_4_5/year_window_comparison/panel_7_2009_2021_bins.csv",
+    "source_sha256": "9d0e578432b88301dbf2355c50d347e7ed26e204ccf356851e8db6f88755354f",
+    "n": 534,
+    "positive_rows": 175,
+    "population": "Teams with a draftee in 2009\u20132021; all qualifying player-seasons",
+    "binning": "16 quantile bins",
+    "y_axis_max_percent": 65,
+    "note": "Original saved bin counts and Wilson intervals retained; no new significance tests. LOO mean raw performance, not sigmoid roster pressure."
+  },
+  {
+    "panel": 8,
+    "file": "ncaa_panel_8_2009_2021_loo.png",
+    "source": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/manuscript_figures/section_4_5/year_window_comparison/panel_8_2009_2021_bins.csv",
+    "source_sha256": "f375c927891f62ff1d65c3dcc7d5b4a6b3aec2c914c55101af0420e0b1cb03df",
+    "n": 1546,
+    "positive_rows": 418,
+    "population": "Teams with a draftee in 2009\u20132021; all qualifying player-seasons",
+    "binning": "Piecewise EW bins: 4 below the peer median + 7 above",
+    "y_axis_max_percent": 65,
+    "note": "Original saved bin counts and Wilson intervals retained; no new significance tests. LOO mean raw performance, not sigmoid roster pressure."
+  }
+]

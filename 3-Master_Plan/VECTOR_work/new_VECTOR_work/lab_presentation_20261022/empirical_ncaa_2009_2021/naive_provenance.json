@@ -1,0 +1,11 @@
+{
+  "source": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/HEROs_and_PASSes/pass_a/PASS_A_binned_draft_rate_ability_q16_allt_min20_mg10_9_21_last_ps.csv",
+  "source_sha256": "944cb2e06d5c6730de272b41b02ebe170a61489ef5a0025e9761258ffe0130ef",
+  "n": 22795,
+  "drafted": 615,
+  "bins": 16,
+  "binning": "quantile",
+  "axis": "own within-season PPM z score; bin mean",
+  "uncertainty": "Pointwise 95% Wilson from integer counts recovered and checked against saved rates; not cluster-adjusted",
+  "note": "Saved empirical rates unchanged; visual styling matches panels 9, 7, 8."
+}

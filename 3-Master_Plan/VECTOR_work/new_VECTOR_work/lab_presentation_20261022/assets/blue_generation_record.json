@@ -1,0 +1,30 @@
+{
+  "method": "Built-in image generation, reference-based uniform recoloring",
+  "prompt": "Edit only the basketball jersey and shorts in this reference to saturated royal blue (#2463D4), with natural blue shading and the existing dark outlines. Keep the player's EXACT face, skin tone, hairstyle, body, pose, size, proportions, shoes, socks, outline and full-body framing unchanged. White socks and gray shoes stay unchanged. This is the selected version of the SAME player for a scientific slideshow. Genuine transparent background, preserve existing transparency. No numbers, logos, text, props or shadows. Do not redesign the player. Only recolor fabric of jersey and shorts from gray to blue.",
+  "assets": {
+    "fair": {
+      "source": "/Users/charleslevine/.codex/generated_images/01a0caa8-9a69-7af2-b90e-a7d8b712bfce/exec-287958c5-c158-40c1-a723-4fe0225e7193.png",
+      "path": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_fair_blue_v1.png"
+    },
+    "east_asian": {
+      "source": "/Users/charleslevine/.codex/generated_images/01a0caa8-9a69-7af2-b90e-a7d8b712bfce/exec-2c8000e8-ba6c-4a0e-9e72-85c4d3aad5ba.png",
+      "path": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_east_asian_blue_v1.png"
+    },
+    "west_asian": {
+      "source": "/Users/charleslevine/.codex/generated_images/01a0caa8-9a69-7af2-b90e-a7d8b712bfce/exec-8b833870-45ba-4790-b96b-804a3802996a.png",
+      "path": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_west_asian_blue_v1.png"
+    },
+    "neutral": {
+      "source": "/Users/charleslevine/.codex/generated_images/01a0caa8-9a69-7af2-b90e-a7d8b712bfce/exec-61003433-1cc1-4ff9-9e7c-c60dee19c3b5.png",
+      "path": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_neutral_blue_v1.png"
+    },
+    "caramel": {
+      "source": "/Users/charleslevine/.codex/generated_images/01a0caa8-9a69-7af2-b90e-a7d8b712bfce/exec-bb130a85-aa43-4240-a50e-0c8cfe86a391.png",
+      "path": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_caramel_blue_v1.png"
+    },
+    "deep": {
+      "source": "/Users/charleslevine/.codex/generated_images/01a0caa8-9a69-7af2-b90e-a7d8b712bfce/exec-9b39d9e3-6066-471b-be67-10afa694cb59.png",
+      "path": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/assets/player_deep_blue_v1.png"
+    }
+  }
+}

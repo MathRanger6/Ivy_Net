@@ -1,0 +1,17 @@
+{
+  "method": "Built-in image generation",
+  "additionalVariants": [
+    {
+      "asset": "player_fair_v1.png",
+      "prompt": "Edit reference into a distinct adult male basketball player, preserving full-body front-facing stance, gray jersey and shorts, gray shoes, scale and cartoon outline style. Make skin clearly PALE FAIR LIGHT PEACH (#F3D1BC), on face arms hands legs, much lighter than reference. Give him short sandy blond hair and a different natural friendly face. No freckles needed. Crisp flat fills, neutral jersey, no text or number. Fully transparent background, no glow/shadow. One complete player head to shoes."
+    },
+    {
+      "asset": "player_caramel_v1.png",
+      "prompt": "Edit reference to a distinct adult male basketball player cutout. Keep the exact gray basketball uniform, front-facing standing neutral pose, full body including shoes, scale and cartoon line illustration style. Change skin on face neck arms hands legs to warm medium LIGHT BROWN / caramel (#B98560), visibly browner and less orange than reference and lighter than dark brown. Change face to an individual with short wavy dark hair, slightly wider nose and rounded jaw, clean shaven. No text logo number basketball. True transparent background without shadow or glow. Same athletic adult proportions, neutral expression."
+    },
+    {
+      "asset": "player_deep_v1.png",
+      "prompt": "Edit reference into a distinct Black adult male basketball player cutout with very deep dark brown skin (#422A23 base, #634034 highlights), visibly much darker than the reference. Apply consistent deep dark tone to face neck arms hands legs. Short close-cropped coiled black hair, broader facial structure, friendly neutral natural expression. Keep exact neutral light-gray basketball jersey shorts socks and shoes, upright front-facing full body pose, scale, athletic adult proportions and clean cartoon illustration style. No text number logo basketball. Entire shoes visible. Transparent background absolutely no glow or shadow."
+    }
+  ]
+}

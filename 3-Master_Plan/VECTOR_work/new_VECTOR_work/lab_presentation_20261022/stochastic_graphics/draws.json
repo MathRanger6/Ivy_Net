@@ -1,0 +1,54 @@
+{
+  "N": 50,
+  "K": 10,
+  "temperature": 0.6,
+  "scores": "S_i=A_i, illustrative synthetic scores 5 to 10",
+  "method": "Sequential Gibbs sampling without replacement; fixed scores and temperature; weights exp((S_i-max(S))/t)",
+  "draws": [
+    {
+      "seed": 2026102201,
+      "selectedIds": [
+        42,
+        19,
+        28,
+        23,
+        30,
+        20,
+        27,
+        25,
+        9,
+        38
+      ]
+    },
+    {
+      "seed": 2026102202,
+      "selectedIds": [
+        20,
+        50,
+        28,
+        27,
+        29,
+        1,
+        36,
+        42,
+        48,
+        6
+      ]
+    },
+    {
+      "seed": 2026102203,
+      "selectedIds": [
+        42,
+        20,
+        38,
+        30,
+        31,
+        19,
+        40,
+        26,
+        50,
+        36
+      ]
+    }
+  ]
+}
