@@ -1,0 +1,3 @@
+band,n,ever_drafted,not_drafted,draft_rate,ci_low,ci_high,BPM_min,BPM_max,median_ESPN_minutes,median_SR_minutes,under50_ESPN,under100_ESPN,under100_SR,SR_minutes_missing,ESPN_minutes_min,SR_minutes_min,rank_first,rank_last
+Top 3%,579,249,330,0.43005181347150256,0.3903171431374313,0.47070852898291965,8.3,43.3,984.0,984.0,76,91,91,0,20.0,20.0,1,579
+Next 3%,579,112,467,0.19343696027633853,0.16332664525705898,0.2275883374926282,6.6,8.3,963.0,966.0,34,41,41,0,20.0,20.0,580,1158

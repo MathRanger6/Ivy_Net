@@ -1,0 +1,16 @@
+{
+  "source": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/manuscript_figures/section_4_5/roster_pressure_comparison/cache/last.pkl",
+  "source_sha256": "7053a9e5fe03c0e3a0ed32fab636c123d562b237b1b36d1c5be2a8784e3206fd",
+  "n": 178,
+  "ever_drafted": 37,
+  "season_minutes_min": 20.0,
+  "season_minutes_median": 851.0,
+  "season_minutes_max": 1336.0,
+  "under50": 39,
+  "under100": 44,
+  "under100_ever_drafted": 1,
+  "atleast100_n": 134,
+  "atleast100_ever_drafted": 36,
+  "interpretation": "Recorded season totals in saved input, not externally verified complete participation histories. No raw source repair, restandardization, rebinning or permanent threshold change.",
+  "script_sha256": "9f2168021e24870273dbe35bc96872914479218d035ffa9162e9e16a017888d5"
+}

@@ -1,0 +1,12 @@
+{
+  "run_directory": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/manuscript_figures/section_4_5/roster_pressure_comparison/bpm_runs/20261025_183922_308816",
+  "settings": {
+    "theta_quantile": 0.97,
+    "gamma": 6.0,
+    "n_bins": 16,
+    "thin_n": 30,
+    "band_mode": "top_next",
+    "band_fraction": 0.03,
+    "show_squid_jackal": true
+  }
+}

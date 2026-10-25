@@ -1,0 +1,65 @@
+county,tier,peer_mean_exam,applicants,gymnasiums,counties,successes,success_rate,pooling_method,band,peer_bin
+ALL,1,7.287137797221974,1716,189,22,334,0.23890425451256778,equal_county_within_cell,Top 10%,6
+ALL,1,7.278600350276833,2395,224,22,12,0.0056565656565656566,equal_county_within_cell,75th–90th (excellence),6
+ALL,1,7.278361544517545,3290,261,22,0,0.0,equal_county_within_cell,50th–75th,6
+ALL,1,7.273147609110774,4203,349,22,0,0.0,equal_county_within_cell,Below 50th,6
+ALL,1,7.4876187149887015,3555,282,22,0,0.0,equal_county_within_cell,Below 50th,7
+ALL,1,7.89438323753949,3019,159,21,3,0.003675856307435255,equal_county_within_cell,75th–90th (excellence),8
+ALL,1,7.4914830964083245,1973,150,22,347,0.20823069873059483,equal_county_within_cell,Top 10%,7
+ALL,1,7.897595865403949,3030,192,22,0,0.0,equal_county_within_cell,50th–75th,8
+ALL,1,6.243560079334148,7303,1282,22,0,0.0,equal_county_within_cell,Below 50th,1
+ALL,1,6.982460126925812,5017,442,22,0,0.0,equal_county_within_cell,Below 50th,4
+ALL,1,7.980446239385974,3324,140,20,787,0.2771472568430939,equal_county_within_cell,Top 10%,8
+ALL,1,7.85757212477522,2231,218,22,0,0.0,equal_county_within_cell,Below 50th,8
+ALL,1,6.98544873885092,1124,214,22,184,0.16820539612941,equal_county_within_cell,Top 10%,4
+ALL,1,6.984062044761896,1904,255,22,3,0.002671782631902273,equal_county_within_cell,75th–90th (excellence),4
+ALL,1,6.987014214938572,3559,319,22,0,0.0,equal_county_within_cell,50th–75th,4
+ALL,1,7.110063382972817,3627,297,22,0,0.0,equal_county_within_cell,50th–75th,5
+ALL,1,7.108819788646378,4766,388,22,0,0.0,equal_county_within_cell,Below 50th,5
+ALL,1,7.48674940402961,2583,177,22,2,0.0010772678026199154,equal_county_within_cell,75th–90th (excellence),7
+ALL,1,7.485404560061155,3492,226,22,0,0.0,equal_county_within_cell,50th–75th,7
+ALL,1,7.110072339323324,2044,242,22,4,0.002970590446871282,equal_county_within_cell,75th–90th (excellence),5
+ALL,1,6.67421078978241,1483,451,22,2,0.003231616867980505,equal_county_within_cell,75th–90th (excellence),2
+ALL,1,6.676546808505771,3292,564,22,0,0.0,equal_county_within_cell,50th–75th,2
+ALL,1,6.670857867613072,6202,793,22,0,0.0,equal_county_within_cell,Below 50th,2
+ALL,1,6.855503663955207,5399,498,22,0,0.0,equal_county_within_cell,Below 50th,3
+ALL,1,6.676299250890906,627,270,22,95,0.17126788716882538,equal_county_within_cell,Top 10%,2
+ALL,1,6.298688259203743,3002,1107,22,0,0.0,equal_county_within_cell,50th–75th,1
+ALL,1,6.332413232501401,291,217,22,48,0.17540890482066954,equal_county_within_cell,Top 10%,1
+ALL,1,6.862462165089463,3524,372,22,0,0.0,equal_county_within_cell,50th–75th,3
+ALL,1,6.857597380507261,1849,293,22,1,0.0010822510822510823,equal_county_within_cell,75th–90th (excellence),3
+ALL,1,6.865102163307492,831,215,22,127,0.19301910966412528,equal_county_within_cell,Top 10%,3
+ALL,1,6.3168395372188595,1008,618,22,6,0.003171247357293869,equal_county_within_cell,75th–90th (excellence),1
+ALL,1,7.112836841824068,1166,193,22,179,0.1828012733252591,equal_county_within_cell,Top 10%,5
+ALL,2,7.287137797221974,1716,189,22,527,0.36351038526762297,equal_county_within_cell,Top 10%,6
+ALL,2,7.278600350276833,2395,224,22,31,0.02045662467146505,equal_county_within_cell,75th–90th (excellence),6
+ALL,2,7.278361544517545,3290,261,22,0,0.0,equal_county_within_cell,50th–75th,6
+ALL,2,7.273147609110774,4203,349,22,0,0.0,equal_county_within_cell,Below 50th,6
+ALL,2,7.4876187149887015,3555,282,22,0,0.0,equal_county_within_cell,Below 50th,7
+ALL,2,7.89438323753949,3019,159,21,18,0.014174865625668906,equal_county_within_cell,75th–90th (excellence),8
+ALL,2,7.4914830964083245,1973,150,22,548,0.35789101057268025,equal_county_within_cell,Top 10%,7
+ALL,2,7.897595865403949,3030,192,22,0,0.0,equal_county_within_cell,50th–75th,8
+ALL,2,6.243560079334148,7303,1282,22,0,0.0,equal_county_within_cell,Below 50th,1
+ALL,2,6.982460126925812,5017,442,22,0,0.0,equal_county_within_cell,Below 50th,4
+ALL,2,7.980446239385974,3324,140,20,1178,0.40254973751206613,equal_county_within_cell,Top 10%,8
+ALL,2,7.85757212477522,2231,218,22,0,0.0,equal_county_within_cell,Below 50th,8
+ALL,2,6.98544873885092,1124,214,22,350,0.3443346334680761,equal_county_within_cell,Top 10%,4
+ALL,2,6.984062044761896,1904,255,22,43,0.03032862472120962,equal_county_within_cell,75th–90th (excellence),4
+ALL,2,6.987014214938572,3559,319,22,0,0.0,equal_county_within_cell,50th–75th,4
+ALL,2,7.110063382972817,3627,297,22,0,0.0,equal_county_within_cell,50th–75th,5
+ALL,2,7.108819788646378,4766,388,22,0,0.0,equal_county_within_cell,Below 50th,5
+ALL,2,7.48674940402961,2583,177,22,21,0.022904655051011448,equal_county_within_cell,75th–90th (excellence),7
+ALL,2,7.485404560061155,3492,226,22,0,0.0,equal_county_within_cell,50th–75th,7
+ALL,2,7.110072339323324,2044,242,22,13,0.015002676008368606,equal_county_within_cell,75th–90th (excellence),5
+ALL,2,6.67421078978241,1483,451,22,17,0.018481140072049165,equal_county_within_cell,75th–90th (excellence),2
+ALL,2,6.676546808505771,3292,564,22,0,0.0,equal_county_within_cell,50th–75th,2
+ALL,2,6.670857867613072,6202,793,22,0,0.0,equal_county_within_cell,Below 50th,2
+ALL,2,6.855503663955207,5399,498,22,0,0.0,equal_county_within_cell,Below 50th,3
+ALL,2,6.676299250890906,627,270,22,206,0.35709951689279185,equal_county_within_cell,Top 10%,2
+ALL,2,6.298688259203743,3002,1107,22,0,0.0,equal_county_within_cell,50th–75th,1
+ALL,2,6.332413232501401,291,217,22,84,0.3195029161272477,equal_county_within_cell,Top 10%,1
+ALL,2,6.862462165089463,3524,372,22,0,0.0,equal_county_within_cell,50th–75th,3
+ALL,2,6.857597380507261,1849,293,22,22,0.020246805829965495,equal_county_within_cell,75th–90th (excellence),3
+ALL,2,6.865102163307492,831,215,22,232,0.3377770558628368,equal_county_within_cell,Top 10%,3
+ALL,2,6.3168395372188595,1008,618,22,24,0.016829865361077112,equal_county_within_cell,75th–90th (excellence),1
+ALL,2,7.112836841824068,1166,193,22,320,0.3279425267913608,equal_county_within_cell,Top 10%,5
