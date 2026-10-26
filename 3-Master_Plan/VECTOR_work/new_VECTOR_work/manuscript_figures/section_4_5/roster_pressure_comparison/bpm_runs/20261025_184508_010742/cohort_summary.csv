@@ -1,0 +1,4 @@
+cohort,label,observations,drafted_observations,rate,distinct_players,distinct_drafted_players,colleges,team_seasons,under100_minutes,with_missing_teammates,theta,above_theta_observations,above_theta_fraction,equal_theta_observations,below_theta_observations,distinct_players_above_theta,mean_rp_shared,mean_rp_loo
+all,All performance levels,19289,510,0.02643993986209757,19289,510,359,3815,3428,4301,1.901534465326868,537,0.027839701384208618,3,18749,537,0.024183075485704628,0.02325796223108284
+top,Top 2% of raw BPM,386,184,0.47668393782383417,386,184,152,321,76,68,1.901534465326868,386,1.0,0,0,386,0.1619295008819954,0.09509826488882836
+next,Next 2% of raw BPM,386,111,0.28756476683937826,386,111,146,334,31,62,1.901534465326868,151,0.3911917098445596,3,232,151,0.11907200700057356,0.08568814136545057

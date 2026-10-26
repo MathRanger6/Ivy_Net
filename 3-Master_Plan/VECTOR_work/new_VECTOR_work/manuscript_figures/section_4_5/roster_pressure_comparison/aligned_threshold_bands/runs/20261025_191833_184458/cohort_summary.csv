@@ -1,0 +1,4 @@
+cohort,label,observations,drafted,rate,above_theta,equal_theta,below_theta,colleges,team_seasons,under100_minutes,missing_teammates,min_performance,max_performance
+top,Top 2% of BPM z,386,191,0.4948186528497409,386,0,0,150,325,75,68,2.0333128930004127,8.549079093799484
+middle,Top 10% excluding top 2%,1543,250,0.16202203499675957,0,0,1543,266,1023,101,282,1.2849891519314345,2.0309102004548105
+lower,Top 30% excluding top 10%,3858,65,0.016848107827890098,0,0,3858,355,2151,246,726,0.5186972105467936,1.2849891519314345

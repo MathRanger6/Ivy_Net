@@ -1,0 +1,50 @@
+{
+  "experiment": "BPM aligned theta and three nested percentile tiers",
+  "created": "2026-10-25",
+  "status": "specified before plotting",
+  "baseline_run": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/manuscript_figures/section_4_5/roster_pressure_comparison/bpm_runs/20261025_184918_282428",
+  "baseline_settings": {
+    "theta_quantile": 0.98,
+    "gamma": 6.0,
+    "n_bins": 16,
+    "thin_n": 30,
+    "band_mode": "top_next",
+    "band_fraction": 0.02,
+    "show_squid_jackal": true
+  },
+  "metric": "BPM",
+  "theta_quantile": 0.98,
+  "gamma": 6.0,
+  "cumulative_top_fractions": [
+    0.02,
+    0.1,
+    0.3
+  ],
+  "band_names": [
+    "Top 2%",
+    "Top 10% excluding top 2%",
+    "Top 30% excluding top 10%"
+  ],
+  "reference": "Frozen final-season candidates with finite BPM, 2011\u20132021; same candidate identities as the BPM baseline",
+  "performance_scale": "BPM standardized by season on the full eligible available roster, sample SD; theta and band ranks both use these standardized values among final-season candidates",
+  "roster_calculation": "Compute relevance and shared/LOO averages on the full available eligible team-season roster BEFORE focal band filtering",
+  "ties": "Stable source-order rank-first allocation for fixed-count bands, including lower boundaries; report actual number above/equal theta and any split ties",
+  "unchanged": [
+    "source snapshots",
+    "candidate identities",
+    "outcome labels",
+    "gamma=6",
+    "16 quantile and EW bins",
+    "minimum 20 recorded season minutes",
+    "more than 10 team games",
+    "missing BPM exclusions",
+    "no significance tests"
+  ],
+  "changes": [
+    "theta reference changes from roster observations to final-season candidates",
+    "band ranking changes from raw BPM to standardized BPM",
+    "replace adjacent equal-width top/next bands with top 2%, next 8%, next 20%"
+  ],
+  "interpretation": "Joint redesign of reference and bands, not a single-parameter causal comparison. No outcome-based tuning.",
+  "next_step": "Compare plots, then discuss one finding at a time. No 2.5% run or new minutes cutoff in this experiment."
+}

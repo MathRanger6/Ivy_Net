@@ -1,0 +1,12 @@
+{
+  "run_directory": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/manuscript_figures/section_4_5/roster_pressure_comparison/aligned_threshold_bands/runs/20261025_191833_184458",
+  "settings": {
+    "theta_quantile": 0.98,
+    "gamma": 6.0,
+    "upper_band_end": 0.1,
+    "lower_band_end": 0.3,
+    "n_bins": 16,
+    "thin_n": 30,
+    "show_squid_jackal": true
+  }
+}

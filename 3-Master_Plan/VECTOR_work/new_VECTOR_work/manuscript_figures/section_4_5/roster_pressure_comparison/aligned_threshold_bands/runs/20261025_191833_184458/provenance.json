@@ -1,0 +1,218 @@
+{
+  "settings": {
+    "theta_quantile": 0.98,
+    "gamma": 6.0,
+    "upper_band_end": 0.1,
+    "lower_band_end": 0.3,
+    "n_bins": 16,
+    "thin_n": 30,
+    "show_squid_jackal": true
+  },
+  "labels": {
+    "top": "Top 2% of BPM z",
+    "middle": "Top 10% excluding top 2%",
+    "lower": "Top 30% excluding top 10%"
+  },
+  "threshold": 2.03148684666575,
+  "thresholds": {
+    "top": 2.03148684666575,
+    "middle": 2.03148684666575,
+    "lower": 2.03148684666575
+  },
+  "candidate_n": 19289,
+  "candidate_k": 510,
+  "candidate_above_theta": 386,
+  "candidate_equal_theta": 0,
+  "roster_n": 45156,
+  "roster_above_theta": 625,
+  "excluded_undefined_loo": {
+    "top": 0,
+    "middle": 0,
+    "lower": 0
+  },
+  "rank_boundaries": [
+    386,
+    1929,
+    5787
+  ],
+  "top_fractions": [
+    0.02,
+    0.1,
+    0.3
+  ],
+  "boundary_ties": [
+    {
+      "top_fraction": 0.02,
+      "rank": 386,
+      "performance": 2.0333128930004127,
+      "tied_observations": 3,
+      "tied_at_or_above_rank": 3,
+      "tied_below_rank": 0
+    },
+    {
+      "top_fraction": 0.1,
+      "rank": 1929,
+      "performance": 1.2849891519314345,
+      "tied_observations": 10,
+      "tied_at_or_above_rank": 6,
+      "tied_below_rank": 4
+    },
+    {
+      "top_fraction": 0.3,
+      "rank": 5787,
+      "performance": 0.5186972105467936,
+      "tied_observations": 13,
+      "tied_at_or_above_rank": 9,
+      "tied_below_rank": 4
+    }
+  ],
+  "top_band_matches_strict_above_theta": true,
+  "plan": {
+    "experiment": "BPM aligned theta and three nested percentile tiers",
+    "created": "2026-10-25",
+    "status": "specified before plotting",
+    "baseline_run": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/manuscript_figures/section_4_5/roster_pressure_comparison/bpm_runs/20261025_184918_282428",
+    "baseline_settings": {
+      "theta_quantile": 0.98,
+      "gamma": 6.0,
+      "n_bins": 16,
+      "thin_n": 30,
+      "band_mode": "top_next",
+      "band_fraction": 0.02,
+      "show_squid_jackal": true
+    },
+    "metric": "BPM",
+    "theta_quantile": 0.98,
+    "gamma": 6.0,
+    "cumulative_top_fractions": [
+      0.02,
+      0.1,
+      0.3
+    ],
+    "band_names": [
+      "Top 2%",
+      "Top 10% excluding top 2%",
+      "Top 30% excluding top 10%"
+    ],
+    "reference": "Frozen final-season candidates with finite BPM, 2011\u20132021; same candidate identities as the BPM baseline",
+    "performance_scale": "BPM standardized by season on the full eligible available roster, sample SD; theta and band ranks both use these standardized values among final-season candidates",
+    "roster_calculation": "Compute relevance and shared/LOO averages on the full available eligible team-season roster BEFORE focal band filtering",
+    "ties": "Stable source-order rank-first allocation for fixed-count bands, including lower boundaries; report actual number above/equal theta and any split ties",
+    "unchanged": [
+      "source snapshots",
+      "candidate identities",
+      "outcome labels",
+      "gamma=6",
+      "16 quantile and EW bins",
+      "minimum 20 recorded season minutes",
+      "more than 10 team games",
+      "missing BPM exclusions",
+      "no significance tests"
+    ],
+    "changes": [
+      "theta reference changes from roster observations to final-season candidates",
+      "band ranking changes from raw BPM to standardized BPM",
+      "replace adjacent equal-width top/next bands with top 2%, next 8%, next 20%"
+    ],
+    "interpretation": "Joint redesign of reference and bands, not a single-parameter causal comparison. No outcome-based tuning.",
+    "next_step": "Compare plots, then discuss one finding at a time. No 2.5% run or new minutes cutoff in this experiment."
+  },
+  "source_manifest": {
+    "inputs": {
+      "datasets/mbb/mbb_df_player_box.csv": "0f05f4a022054ee9c3b09a3793da49deb907794ede0011ffca29b44b788560a6",
+      "datasets/mbb/athlete_id_draft_lookup.csv": "7adb1174189df0cf926680a8987f9d703e0ff3db59d70faa2fc85ebd0819506b",
+      "datasets/mbb/DO_NOT_ERASE/bpm_player_season_matched.csv": "b9fb97788b97c9ad8f82088da77b2f72155bea38f6be7b877aca334fdf0beaa7",
+      "sports/scripts/pass_a_congestion_conditional.py": "0bfaf000afb46fd3bc950ae0cdfbfd78f0e508ad69ee412d9212c1859810b057",
+      "3-Master_Plan/VECTOR_work/new_VECTOR_work/manuscript_figures/section_4_5/create_section_4_5_4_figure.py": "afd88f823cd1a1a6ea0a714f669f75d47d6404d4c0f9881eff4e3d9ea33456f3",
+      "sports/sports_pipeline/__init__.py": "0f99e6136a006e9eeebb02c91001c112e9ad2fbd29ff9dec7d2db93a5496d937",
+      "sports/sports_pipeline/bpm_merge.py": "6d9aa05c402da57cf949eef15ec5457d9d0259038fd1907e4c9820329fddf069",
+      "sports/sports_pipeline/combine_bridge.py": "6e2f88da96d4733825453e8d56284b2310c2a09c0d459238005cc5b0ea92b655",
+      "sports/sports_pipeline/conductor.py": "cb3f2601a7cb2f4c6bb3af9a7cd7a3d5c5fa045f2e21c6a7cb8ca71c89317c47",
+      "sports/sports_pipeline/config.py": "297f7b2c6cf19b9ad65c95befeb2297808a73acc275e5013f6bf96dd5f24ca16",
+      "sports/sports_pipeline/data_integrity.py": "deb12e4bb0af65a416503dca2e9fac3463d54b3eca9c03c0f18170429b54c11d",
+      "sports/sports_pipeline/dataset_coverage.py": "0a6722caf81736430d9dff0da04246773192199d62f37bba12dd4451839f2403",
+      "sports/sports_pipeline/draft_match.py": "8726050d4d4e39f4102c581c4e1841717622677760cd2876e5c147608afbb76a",
+      "sports/sports_pipeline/empirical_perf_fit.py": "60ce4e7675ae894c50b84c1267990522889c8ec74c7b9ad939e19e0033531115",
+      "sports/sports_pipeline/ingest_box.py": "a24a5b23965b8299165adf7de219102078057988fec774928eb90e2429ad19dc",
+      "sports/sports_pipeline/panel_build.py": "843bc735ff733ad9ceae290df41432139c848eaac6d44862a7297aa77f0d7686",
+      "sports/sports_pipeline/panel_rebuild.py": "b4817c04bfddc8c65d88c5fb4b7ee9a614fb43332621df2f91f60008853e668b",
+      "sports/sports_pipeline/paths.py": "4771fd0c6ef955f1d0478c263f03745a376dee0803f93107e8bcc724477689ac",
+      "sports/sports_pipeline/perf_metric.py": "1be3d1b29e6d41f01163471a01e7e83bc6ead2dff72726ab6b0c7e4b2bb74e94",
+      "sports/sports_pipeline/scrape_bpm.py": "3f213305eb0c81a6850ac67b33df48f9884869194508c83b3b71c758c8f1cc77",
+      "sports/sports_pipeline/sr_bpm.py": "911f2c509c7f3e4cc12e8cc3b70a67a2dbe5059ff08922dc8ddd81f124ba8cc5",
+      "sports/sports_pipeline/tier1_mechanism_vars.py": "62acbfbc93342bb7f66c2b3dbd08214ef469187ec6712ceabf2608e8cd949d90",
+      "sports/sports_pipeline/y_draft_mode.py": "7f559f5c20902ef7978220979e1a7f41e4e885fe6b4d009847e85cb5d06465cd"
+    },
+    "cache_sha256": {
+      "all": "896037cb40bc1dd1c6743806a86484b092e9c1d8de206e767429876c3689f838",
+      "dft": "9aeffa9de5a03e36bffa0a790c54a4c88cd596aaf6b1fe26c50682cfe74b30a9",
+      "last": "7053a9e5fe03c0e3a0ed32fab636c123d562b237b1b36d1c5be2a8784e3206fd"
+    }
+  },
+  "baseline_run": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/manuscript_figures/section_4_5/roster_pressure_comparison/bpm_runs/20261025_184918_282428",
+  "module_hash": "43321cd567be6d09f45203fc9979826b4af9853468a3825629da9c2b3758fa72",
+  "helper_hash": "18ef94f027e49ac16f8bf32391cef8843c627ddfc69570f1df77ed08608c6d81",
+  "pressure_helper_hash": "22a830a0f922ac15e0558e54d6f4c61c6321f9786d0bcd4cf60eb437c00f5d39",
+  "reference_definition": "Same 19,289 final-season candidates as baseline, ranked by within-season standardized BPM; theta calculated on those same values",
+  "pressure_definition": "Sigmoid applied to full available eligible rosters before selecting any band; no averaging only among final-season candidates",
+  "actual_settings_differ_from_plan": false,
+  "equal_width_edges": {
+    "rp_shared": [
+      6.568020942683658e-08,
+      0.024043342653861603,
+      0.048086619627513774,
+      0.07212989660116595,
+      0.09617317357481812,
+      0.1202164505484703,
+      0.1442597275221225,
+      0.16830300449577468,
+      0.19234628146942684,
+      0.216389558443079,
+      0.2404328354167312,
+      0.2644761123903834,
+      0.28851938936403554,
+      0.3125626663376877,
+      0.3366059433113399,
+      0.3606492202849921,
+      0.38469249725864424
+    ],
+    "rp_loo": [
+      6.568020942683658e-08,
+      0.024043342653861603,
+      0.048086619627513774,
+      0.07212989660116595,
+      0.09617317357481812,
+      0.1202164505484703,
+      0.1442597275221225,
+      0.16830300449577468,
+      0.19234628146942684,
+      0.216389558443079,
+      0.2404328354167312,
+      0.2644761123903834,
+      0.28851938936403554,
+      0.3125626663376877,
+      0.3366059433113399,
+      0.3606492202849921,
+      0.38469249725864424
+    ],
+    "loo_performance": [
+      -1.4186477371021697,
+      -1.2202720560396871,
+      -1.0218963749772045,
+      -0.8235206939147219,
+      -0.6251450128522393,
+      -0.42676933178975673,
+      -0.22839365072727413,
+      -0.030017969664791533,
+      0.16835771139769107,
+      0.36673339246017367,
+      0.5651090735226563,
+      0.7634847545851391,
+      0.9618604356476215,
+      1.1602361167101038,
+      1.3586117977725867,
+      1.5569874788350695,
+      1.7553631598975519
+    ]
+  }
+}

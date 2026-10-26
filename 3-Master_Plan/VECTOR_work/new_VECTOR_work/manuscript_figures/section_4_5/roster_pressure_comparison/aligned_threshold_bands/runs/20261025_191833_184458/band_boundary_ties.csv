@@ -1,0 +1,4 @@
+top_fraction,rank,performance,tied_observations,tied_at_or_above_rank,tied_below_rank
+0.02,386,2.0333128930004127,3,3,0
+0.1,1929,1.2849891519314345,10,6,4
+0.3,5787,0.5186972105467936,13,9,4

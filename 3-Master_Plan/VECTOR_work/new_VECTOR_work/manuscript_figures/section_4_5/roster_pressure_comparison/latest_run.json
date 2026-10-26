@@ -1,12 +1,12 @@
 {
-  "run_directory": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/manuscript_figures/section_4_5/roster_pressure_comparison/runs/20261023_135229_519187",
+  "run_directory": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/manuscript_figures/section_4_5/roster_pressure_comparison/runs/20261025_190533_798263",
   "settings": {
     "theta_quantile": 0.98,
-    "gamma": 0.25,
+    "gamma": 6.0,
     "n_bins": 16,
     "sensitivity_quantiles": [
-      0.88,
-      0.92,
+      0.8,
+      0.9,
       0.98
     ],
     "sensitivity_gammas": [
