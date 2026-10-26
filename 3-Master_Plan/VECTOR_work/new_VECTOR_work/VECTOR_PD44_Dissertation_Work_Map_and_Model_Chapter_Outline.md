@@ -1,12 +1,16 @@
 # Dissertation work map and current model chapter outline
 
-**Updated:** 13 October 2026. Originally prepared after PD44 on 30 September.  
-**Purpose:** Keep the dissertation’s developing structure, current writing, and possible additional chapters in one place.  
+**Updated:** 26 October 2026. Originally prepared after PD44 on 30 September; now reconciled with PD47, PD48, PD49, the post-brief discussion, and the saved manuscript and NCAA work.  
+**Purpose:** Keep the dissertation structure, manuscript status, advisor direction, completed investigations, and next scientific tasks in one place.  
 **Status:** Working plan for Charles. Alex’s documented proposals, Charles’s subsequent decisions, and our proposed next steps are distinguished below. This is not an approved final table of contents.
 
 The dissertation connects the science of success with network science: people perform and pursue advancement within groups, and the composition of those groups may affect who receives scarce opportunities. Army, basketball, education, and academic careers supply possible evidence and examples. The dissertation should remain organized around the scientific question rather than become an account of one domain.
 
-Our immediate writing task remains the model chapter. Its current draft now develops the naïve benchmark before adding uncertainty, competitive congestion, and artificial group formation. A separate Levine–Gates (LG) exploration has also developed far enough to warrant reserving a possible chapter, while its eventual claims and place in the dissertation remain open.
+The model chapter has a substantially revised introduction and development of its components, but the later analytical and empirical argument remains unfinished. Alex’s latest request is to show what the model explains: why each ingredient is needed, when a downturn appears, and how its location and curvature change with the parameters. Introducing the ingredients and deriving local sensitivities are foundations for that task, not its completion.
+
+Our current side investigation is the BPM basketball comparison documented in Entry 7 of the [NCAA Evidence Walkthrough](../../re_entry/NCAA_Guided_Walkthrough/NCAA_Evidence_Walkthrough.docx). It has not been inserted into the manuscript. The distinction matters: the working chapter has newer prose, the walkthrough has newer empirical work, and this map connects their status. The separate Levine–Gates (LG) group-formation chapter remains a possibility, not an agreed addition.
+
+**Read this map as the current planning record.** The filename retains PD44 so existing links work. The [transition memo](Transition%20Memo%20for%20Next%20Agent.docx) and October 18 [LOO and HERO methods handoff](20261018_NVector_to_SVector_LOO_and_HERO_Methods_Conclusion.md) remain historical sources. They do not override later decisions or the saved Word manuscript. The memo now contains an additional handoff dated October 25 that acknowledges the live Word document is more current than the October 20 clean copy. Its older clean-copy instruction and section/notation descriptions should not override the current manuscript or our later editing decisions.
 
 ## 1. What Alex proposed
 
@@ -38,6 +42,46 @@ Charles clarified that Alex’s concern about “separating environmental effect
 
 [Dissertation Tone](Dissertation%20Tone.docx) records Charles’s account of a conversation with Alex. It emphasizes the bridge between network science and the science of success, the balance of readable narrative with mathematical development, and the need to return from domain examples to the general phenomenon. This is Charles’s written account, not a verbatim transcript.
 
+### PD47 on 16 October
+
+Alex describes the draft as a substantial foundation but finds its prose too mechanical. At 00:00–03:17, his criterion is that the first sentences of the paragraphs should tell a coherent story on their own. Remove contrasts that only make sense in the history of our conversations. Introduce the situation and the scientific question in the order a new reader encounters them. At 04:13–05:20, he recommends a whole-section flow pass after the paragraph-level content has been settled, using the actual latest text rather than an agent’s remembered version.
+
+At 22:01–24:07, Alex distinguishes unfinished science from unfinished writing. The missing scientific contribution includes fitting back to data and, more importantly, predictions that can be tested. His assessment is not that editing alone will complete the paper.
+
+The timeline discussion at 08:00–18:30 considers a December defense, a January alternative, and possible arrangements for more writing time. These were options to investigate, not an approved extension, confirmed defense date, or verified statement of university requirements. Track administrative decisions separately when Charles confirms them.
+
+**Source:** [PD47 transcript](../../../transcripts/20261016_Paper_directions_47_otter_ai_transcript.docx).
+
+### PD48 on 20 October
+
+Alex explicitly places a possible survival-analysis chapter **later**, after a simpler empirical measure has introduced the phenomenon (00:01–00:37). This supersedes the earlier working suggestion in this map that the detailed Army methods chapter might precede the empirical peer-effects chapter.
+
+At 00:43–03:08, Charles proposes predicting where the HERO pattern should appear, including which own-performance band is relevant under different scarcity conditions. Alex strongly supports this as a prospective contribution while explicitly declining to guarantee that the prediction will succeed. At 03:08–04:48, he also proposes predictions involving system noise and the relationship between observed performance and advancement. These are research goals, not verified cross-domain findings.
+
+**Source:** [PD48 transcript](../../../transcripts/20261020_Paper_Directions48_otter_ai_transcript.docx).
+
+### Feedback after the lab briefing
+
+Alex wants the defense presentation to spend much less time introducing the machinery and much more time on why it is needed and what it teaches. At 00:01–01:48, he suggests reducing the model introduction to roughly a quarter of its briefing length. At each stage, compare the simpler model with the relevant data or target behavior, identify what it misses, and explain why the next ingredient addresses that deficiency. His request is for an evidentiary argument, not an assumption that the audience will infer necessity. At 02:06–03:50, he supports the player graphics and improved narrative while asking for less text and less elementary explanation.
+
+The second part concerns Army reproducibility. At 05:02–09:25, he prioritizes an authorized analysis-ready export when access returns: a table with manufactured person and unit identifiers, score, time, and necessary covariates. Discuss the permitted release with the responsible Army contacts. Hashing is a proposed approach to discuss, not proof of anonymity or authorization to release data. Screenshots alone do not supply the reproducible analysis he wants. No contact, export, or access restoration is claimed here.
+
+**Source:** [post-brief feedback transcript](../../../transcripts/20261022_lab_brief_feedback_otter_ai_transcript.docx). The filename is dated October 22; the transcription header says October 23. We retain that discrepancy rather than silently resolving it.
+
+### PD49 on 23 October
+
+Alex asks us to define the curve the model is meant to explain and why that curve matters scientifically (00:05–03:19). His proposed summaries are the position of its local maximum and the coefficient of its squared term, describing downward curvature. He then asks how model parameters move those quantities. The curve, axis, conditioning, and scale must be specified before those summaries are meaningful.
+
+At 03:19–05:32, he asks for a demonstration of what simpler models cannot produce, preferably analytically. Fitting a quadratic to binned empirical rates is explicitly distinguished from deriving a response from the model. The existing local probability comparisons are useful but do not yet carry the argument through the full selection mechanism.
+
+At 06:05–10:20 and 11:58–12:40, he asks us to substitute the dependence of congestion on own performance into the model and work toward selection-probability curves in own performance and in the chosen group-environment measure. His expectation that higher performance should not lower selection prospects is a conjecture or desired model property to examine, not an established theorem. The current manuscript already identifies parameter regimes where the focal score derivative can be negative; selection probabilities require further analysis of all affected scores and the normalizing denominator.
+
+At 10:28–11:55, Alex challenges the use of different environmental measures across domains. The objective is a common, defensible scientific target and comparable congestion specification, not to select whichever axis yields a downturn in each dataset. Full-group mean, LOO mean, and roster pressure must remain distinct while that choice is unresolved.
+
+At 12:40–15:32, he asks for parameter-dependent curve families and quantitative changes in the peak and curvature. Directly compared curves should share axes. Larger mosaics can remain working diagnostics, but they do not replace a focused comparison in the chapter. At 15:40–16:24, Charles and Alex agree that the old multi-panel figures under discussion are not the intended final presentation. Their removal or replacement remains a manuscript task; agreement to remove is not evidence that removal has occurred.
+
+**Source:** [PD49 transcript](../../../transcripts/20261023_Paper_Directions_49_otter_ai_transcript.docx).
+
 ## 2. Our current proposed dissertation arrangement
 
 The following is **our updated planning arrangement for discussion**, not a chapter list approved by Alex. We retain the working label “Chapter 4” for the manuscript already in progress. We should choose final numbers only after deciding whether the Army methods and LG contributions stand alone.
@@ -54,13 +98,13 @@ Establish how success is measured and then describe the observed patterns across
 
 **Basis:** This is Alex’s first central content block. Our proposed treatment keeps measurement and source limitations close to the claims they qualify.
 
-**Possible separate Army methods chapter:** Preserve the work on promotion timing, attrition, censoring, survival, and competing risks. If it contains a sufficiently distinct methodological contribution, place it before the empirical peer-effects chapter. Otherwise retain a substantial methods section and appendix. Alex supported the possibility; the separate-chapter decision is still open. Verify which estimators were actually fitted before naming them as completed work.
+**Army measurement at this stage:** Introduce a clearly labeled, interpretable empirical outcome measure and its limits. Reserve the fuller treatment of promotion timing, attrition, censoring, survival, and competing risks for a later methodological chapter or substantial later section. PD48 explicitly supports the later placement; the final chapter count and the estimator actually used remain to be verified.
 
 ### The congestion and advancement model
 
 This is the current **Chapter 4**, described in Section 3 below. Begin with the naïve performance-only benchmark, introduce uncertain selection, develop congestion, examine its mathematics, and then explain how artificial groups are generated.
 
-**Basis:** Alex’s model content block, revised through PD45 and Charles’s subsequent editing decisions. Assignment remains a simulation device within this chapter even if LG receives a separate chapter elsewhere.
+**Basis:** Alex’s model content block, revised through PD47–49 and Charles’s subsequent editing decisions. Assignment remains a simulation device within this chapter even if LG receives a separate chapter elsewhere.
 
 ### Possible chapter on LG and group formation
 
@@ -76,55 +120,83 @@ Explain the historical fitting work, what it estimates, and what is still needed
 
 **Basis:** Alex’s third central content block. A completed exact-K refit or validated counterfactual analysis is not currently established by the sources reviewed for this map. Chapter 4’s present Section 4.8 introduces this bridge; it need not duplicate an eventual full fitting chapter.
 
+### Later development of advancement measurement
+
+Return to the simplified empirical outcome and explain what a fuller treatment of time, censoring, promotion and departure changes. This is the later survival-analysis contribution discussed in PD48. It should improve the scientific interpretation rather than repeat the early empirical chapter. Identify the actual historical estimator before attributing existing Army curves or bars to Fine–Gray regression.
+
 ### Synthesis and conclusions
 
 Bring the theoretical and empirical contributions together, state their limits, and identify the next scientific questions. A synthesis chapter is our proposed completion of the structure, not a separately verified detailed instruction from Alex in PD44.
 
 This arrangement deliberately leaves the final chapter count open. Adding both Army methods and LG as standalone chapters would expand Alex’s initial rough five-chapter conception; we should make that an explicit discussion rather than silently relabel his original proposal.
 
-## 3. Where the model chapter stands now
+## 3. What is actually in the current manuscript
 
-The authoritative manuscript is [Model Chapter Shared Working Draft](Model_Chapter_Shared_Working_Draft.docx). The Markdown and LaTeX copies are earlier working versions, not automatic substitutes for Charles’s current Word edits. This map records the current headings and direction; it does not certify that every paragraph is finished.
+The authoritative editing copy is [Model Chapter Shared Working Draft](Model_Chapter_Shared_Working_Draft.docx), inspected on October 26. This review reads current text with tracked deletions excluded and includes Alex’s retained comments; it does not accept changes, resolve comments, or modify the Word file. The Markdown, LaTeX, clean saves and older backups are reference versions. Charles often makes different choices from a proposed paragraph, so always reread the saved working copy.
+
+**Editing agreement:** Normally supply precise, paste-ready text one paragraph at a time, stating exactly what it replaces. Charles edits the working document, keeps comments and Track Changes, and periodically requests a backup before accepting revisions himself. Direct Word editing requires his request. Maintain Verdana 10 pt body, the agreed heading and caption styles, and editable Cambria Math equations and symbols at 11 pt when making such edits. Supply bare LaTeX symbols for copying without added delimiter parentheses. Audit whole-section flow after the paragraph pass.
 
 ### 4.1 Individual performance and success in groups
 
-Introduce the phenomenon in ordinary language and connect it to the dissertation’s network-science question. Establish why later selection matters without presenting every mechanism and parameter before the reader needs them.
+**Present:** A natural-language account of strong peers helping development while intensifying competition for recognition and opportunities; the general scientific question; a simple-to-complex roadmap. This reflects the earlier narrative revisions.
+
+**Still to reconcile:** The roadmap currently says fitting comes before assignment, while the actual sections put assignment in 4.6 and fitting in 4.8. Choose and synchronize the intended order in a later editing pass. More importantly, sharpen the empirical target and why it matters, as requested in PD49, without asserting that the same downturn has already been established in every domain.
 
 ### 4.2 Selecting the highest performing individuals
 
-Develop the **naïve benchmark**: measured performance supplies the score, the eligible population contains N individuals, and deterministic selection awards K opportunities to the highest scores. Introduce notation before using it and explain what group membership does and does not change in this benchmark.
+**Present:** Performance and the eligible population, scarcity, separate SCORE and SELECT operations, and the deterministic top-K benchmark. The two current subsections are “Performance and the selection population” and “The score and the selection rule.”
+
+**Still needed:** Tie this benchmark to the precisely defined empirical/model target. Demonstrating a monotone own-performance rule is not, by itself, a proof about every aggregated team-environment curve. State the population, grouping, conditioning and selection assumptions for any claimed impossibility result.
 
 ### 4.3 Allowing uncertainty in selection
 
-Explain why winners may differ even when supplied scores are unchanged. Define exact-K sequential selection using Gibbs weights, including the conditional probability of each next draw, removal of selected individuals, temperature, and limiting cases. Selection temperature is distinct from the parameter in the historical fitting equation.
+**Present:** “Gibbs-weighted selection without replacement” and “Selection temperature and limiting behavior.” The text introduces weighting before temperature, describes the current eligible pool including the focal candidates, distinguishes next-draw probability from final inclusion among K winners, and identifies the Plackett–Luce form. The probability ratio, limits and score-scale invariances are developed. The opening asks how much a score advantage changes the chance of selection.
+
+**Status:** The substantial collaborative prose pass is present. This is not a claim that every comment has been resolved or that the section is final. Its existing distinction between draw probability and final inclusion must survive the PD49 analytical development.
 
 ### 4.4 Introducing local competitive congestion
 
-Begin with average peer performance as an approximation, then motivate credible competitors and their smooth competitive relevance. Explain the conscious choice to average relevance over the full group, including the focal individual, producing shared roster pressure. Keep group mean T_j, leave-one-out quantities, individual relevance, and shared congestion C_j distinct. Explain why a common group penalty changes cross-group comparisons but cancels in rankings within a group under a fixed local selection quota.
+**Present:** The order is full-group mean T_j, a concise LOO peer-mean definition, then competitive relevance and shared roster pressure. Developmental benefits are acknowledged but outside this fixed-performance model. The text distinguishes descriptive peer measures from congestion used in scoring. Roster pressure is introduced as a third congestion measure; averaging relevance is explained as competitive concentration. The longer LOO material is in Appendix 4A.5. The local-quota cancellation argument is in Appendix 4A.8.
+
+**Where the paragraph-level pass paused:** Around 4.4.3, after the competitive-concentration explanation, at the paragraph beginning “This definition makes a specific modeling choice: congestion is a shared feature of the group environment.” That wording is still present. Our unresolved issue is that sharedness belongs to this roster-pressure specification, not to every possible congestion measure. The later four-measure notation discussion was tabled for the presentation; it is not an adopted renaming scheme.
+
+**Still needed:** State the intended full model in the currently empty “Summary” placeholder, respond to Alex’s request for evidence about the limitations of T_j, and reconcile the earlier three-measure exposition with PD49’s request for one coherent cross-domain target. Do not quietly replace C_LOO,i, rename C_j, or declare a winning measure before that decision.
 
 ### 4.5 Mathematical behavior and parameter regimes
 
-Develop threshold location, transition sharpness, penalty strength, score scale, scarcity, and selection margins. Charles’s later direction emphasizes domains with scarce opportunities and broadly aligned scarcity and relevance thresholds. Mathematically permissible independent changes to K and theta need not receive equal narrative attention. Describe historical experiments according to what they actually held fixed; do not retroactively relabel their designs.
+**Present:** Sigmoid sensitivities and limits; the maximum relevance sensitivity at the threshold; score crossings; the own-performance score derivative and its parameter bound; scarcity and selection margins; and the distinction between the teammate changing pressure and the player near the selection boundary. Appendix 4A.7 carries additional sensitivity-through-selection development. The section also distinguishes changed winners from a downturn and warns that broad ability bands do not fix own performance exactly.
 
-The figure work now includes illustrations of relevance curves, score crossings and winners, and scarcity changing together with a threshold. Illustrative inputs are not empirical estimates or newly established historical findings.
+**Still needed:** The PD49 development from these results to defined selection curves, including how the peak and curvature depend on parameters. The existing derivative of the score and the pairwise next-draw probability ratio do not finish that task. Alex’s comments explicitly request consequences through the full model, clearer lambda tradeoffs, and a possible derivation relating theta to K/N. Such a relationship is not yet established merely by choosing an empirical quantile.
+
+**Figures remain historical:** The text still describes a top-7% PPM comparison in Figure 4-4 and 2011–2021 PPM player-season bands in Figure 4-5, with their original binning and sample definitions. The latest BPM experiments have not replaced them. Keep those populations separate from the final-season BPM cohort until we choose the manuscript figures deliberately.
 
 ### 4.6 Generating artificial groups with controlled sorting
 
-Explain fixed roster capacities, sequential metadata-based assignment, evolving group centroids, and measured sorting. The current figure notebook also illustrates assignment step by step. This section supplies enough construction detail to understand the congestion experiments; a possible LG chapter can carry the more extensive group-formation investigation.
+**Present:** Assignment is introduced as a device for controlled simulations, with fixed capacities, sequential centroid updates, and the H_sort variance decomposition. The random-assignment derivation is retained in Appendix 4A.6. Observed rosters do not require an assignment fit to use the advancement mechanism.
+
+**Still needed:** Carry the revised narrative style through the section and repair remaining draft fragments during the normal editing pass. Keep the brief model-chapter treatment separate from the possible LG chapter. The lab presentation’s graphic success does not settle the scientific necessity of a particular sorting mechanism.
 
 ### 4.7 What the completed mechanism experiments establish
 
-Retain the documented experiments and their scientific limits. Distinguish changed winner identities from a downturn in a plotted curve; report support and sensitivity to binning. Identify settings and implementation versions for figures before treating them as evidence for the current mathematical definition.
+**Present:** Historical deterministic simulations and figures concerning winner replacement, penalty strength, binning, assignment preference and scarcity, with limitations stated. The manuscript still contains the multi-row Figures 4-7 and 4-8. These paragraphs are not evidence that a new, comprehensive parameter exploration has been completed.
+
+**Still needed:** Decide which verified historical comparisons answer the new questions and replace or remove the rejected multi-panel presentation. Put directly compared curve families on shared axes. State evaluation criteria before interpreting simulations. Alex’s comments question the repeated “completed” language; review which claims the exact saved implementation and outputs actually support. Do not discard underlying results merely because their current presentation is unsuitable.
 
 ### 4.8 The bridge to empirical fitting
 
-Explain that historical estimation used observed rosters and a season-wise softmax probability inside an independent Bernoulli likelihood. That fitting model differs from exact-K selection without replacement. The saved joint estimates concern gamma, lambda, and the fitting temperature; threshold construction and assignment calibration require their own explanation. Preserve the unresolved questions about the fitted sample, outcome timing, normalization, and parameter transfer.
+**Present:** A candid account of the historical season-wise softmax/Bernoulli fit, its player-season eventual-draft labels, normalization, threshold preprocessing, and difference from sequential exact-K selection. Saved coefficients are described as belonging to the historical specification; no completed exact-K refit is claimed.
 
-### Appendices 4A and 4B
+**Still needed:** A clear likelihood for the scientific outcome actually being fitted, with observation units, timing, conditioning, capacity and uncertainty specified. Alex asks for the fitting specifics rather than repeated motivation or a second description of the model with renamed parameters. Retain consequential qualifications, put implementation history where it belongs, and do not treat historical coefficients as automatically transferable.
 
-Appendix 4A retains technical qualifications, the historical fitting record, and consequential differences between earlier implementations and the stated model. Appendix 4B records sources for equations and completed results. Repository provenance supports traceability but does not replace scholarly citations. Keep implementation history out of the main narrative unless it changes how a result must be interpreted.
+### Appendices and document maintenance
 
-## 4. The LG chapter possibility and its present status
+Appendix 4A retains implementation qualifications, fitting history, alternative congestion algebra, random sorting, sensitivity through selection, and local-quota cancellation. Appendix 4B is the source register. Charles asked to postpone a full appendix organization pass; that remains open. Preserve scholarly citations as well as repository provenance.
+
+This review also sees out-of-order cached equation labels in 4.4.1. They need a separate field/numbering check when Charles requests it; no equations, captions, comments, numbering or formatting were changed here. Existing comments may remain even where the text addresses them, so neither the comment count nor the section’s existence proves completion.
+
+## 4. The LG chapter possibility and its recorded status
+
+The account below retains the October 13 planning assessment. The decision log still supports the documented distinction between composition experiments and later scoring/selection work. This October 26 update is not a fresh audit of all LG outputs or a new decision to add a chapter.
 
 ### Scientific purpose
 
@@ -138,7 +210,7 @@ The October 6 [executive summary](LG_Model_Exploration_Executive_Summary.docx) a
 
 A working [composition notebook](lg_exploration/notebooks/01_composition_opportunity_rules.ipynb), Python modules, and settings files now exist. The decision log reports completed saved divisions for the first fixed-roster composition comparison. It also records contender-count diagnostics, an uncapped extension, alternative initial attachment signals and mean-versus-sum signals, and an optional one-plus-members opportunity multiplier. That last option introduces a size-dependent preference and must be distinguished from original fixed-roster LG and from uncapped metadata-only assignment.
 
-This update inspected the implementation inventory and decision record; it did not rerun experiments or independently audit those saved results. The existence of code or a plotting option is not evidence that a scientific conclusion has been established.
+The earlier planning assessment inspected the implementation inventory and decision record; this update reread the decision log but did not rerun experiments or independently audit those saved results. The existence of code or a plotting option is not evidence that a scientific conclusion has been established.
 
 ### Proposed chapter development
 
@@ -155,65 +227,70 @@ The last two items remain planned stages in the reviewed materials, not complete
 
 Charles and Alex should decide whether the verified LG findings support a distinct chapter with its own question and conclusion. Until then, reserve the possibility and preserve the work, while maintaining the short assignment explanation in Chapter 4.
 
-## 5. Empirical work alongside writing
+## 5. Empirical work alongside the manuscript
+
+### The NCAA sequence we have actually followed
+
+The [NCAA Evidence Walkthrough](../../re_entry/NCAA_Guided_Walkthrough/NCAA_Evidence_Walkthrough.docx), updated October 25, is our printable experiment journal. It has seven entries and 13 pages. It records the original performance-band overlay, the own-performance curve, the highest-bin subdivision, the low-minutes investigation, narrower BPM bands, peer-environment comparisons, and the aligned-threshold experiment. Its earlier entries remain a record of those earlier settings, not definitions of every later run.
+
+The [PPM shared versus LOO roster-pressure notebook](manuscript_figures/section_4_5/roster_pressure_comparison/NCAA_Shared_vs_LOO_Roster_Pressure.ipynb) preserves the original panel 7/8/9 cohorts. The [BPM companion](manuscript_figures/section_4_5/roster_pressure_comparison/NCAA_Shared_vs_LOO_Roster_Pressure_BPM.ipynb) introduced final-season BPM bands, initially top 3% and next 3%, later top 2% and next 2%. That companion ranks the focal bands by raw BPM while calculating pressure from season-standardized BPM. Its latest saved baseline is `bpm_runs/20261025_184918_282428`, with theta quantile 0.98 and gamma 6.
+
+**Current separate experiment:** [BPM aligned theta and performance bands](manuscript_figures/section_4_5/roster_pressure_comparison/aligned_threshold_bands/NCAA_BPM_Aligned_Theta_Bands.ipynb). At Charles’s request, this starts with BPM alone. Both theta and the band ranks use season-standardized BPM among the same 19,289 final-season candidates. Pressure is still calculated on full available eligible team-season rosters before selecting the focal bands. The three bands are top 2%, top 10% excluding top 2%, and top 30% excluding top 10%.
+
+The saved run `20261025_191833_184458` uses gamma 6, theta quantile 0.98, 16 quantile or equal-width bins, rank-first ties, and no clipping or tail compression. Theta is 2.0315. Exactly 386 candidates exceed it and none equal it. Counts are:
+
+- Top 2%: 386 players, 191 ever drafted, 49.5%.
+- Next 8%: 1,543 players, 250 ever drafted, 16.2%.
+- Next 20%: 3,858 players, 65 ever drafted, 1.7%.
+
+The high-pressure Jackal region has a higher draft rate than the middle Squid region under both pressure definitions in all three bands at these settings. There are local fluctuations, but this comparison does not supply the broad high-pressure downturn we anticipated. No new significance tests were run. The change to standardized ranking replaces 23 members of the previous 386-person top band; the new theta reference and wider lower bands change too. This is not a metric-only or single-parameter comparison.
+
+**Limits that remain visible:** BPM is available for 2011–2021 in these sources, not the full PPM 2009–2021 window. K = 510 counts ever-drafted final-season candidates; K/N = 2.64% is not an observed annual quota. The top, middle and lower bands retain 75, 101 and 246 players with fewer than 100 recorded season minutes. Missing teammate BPM is omitted. A broad band does not hold own performance exactly fixed, and a fixed top percentile is not automatically a set of draft locks or a domain-independent band of excellence. Theta is chosen here, not fitted or set equal to a validated annual capacity.
+
+Quantile bins are formed separately within each band and axis, so the same bin number does not mean the same numerical environment. Equal-width pressure edges are shared. Ties can be split by the agreed rank-first rule. A tie-preserving comparison remains parked for later; it has not silently replaced the requested binning.
+
+For exact results use a named run and its `provenance.json`, not a notebook title or a “latest” pointer alone. The saved PPM settings cell currently says theta quantile 0.97 while its latest-run pointer records 0.98; this map notes the mismatch without rerunning or modifying that separate branch. The original October 23 defaults in the old map are historical, not current settings.
+
+**Evidence:** [aligned-run provenance](manuscript_figures/section_4_5/roster_pressure_comparison/aligned_threshold_bands/runs/20261025_191833_184458/provenance.json), [cohort counts](manuscript_figures/section_4_5/roster_pressure_comparison/aligned_threshold_bands/runs/20261025_191833_184458/cohort_summary.csv), [regional counts](manuscript_figures/section_4_5/roster_pressure_comparison/aligned_threshold_bands/runs/20261025_191833_184458/squid_jackal_counts.csv), and Entry 7 of the walkthrough. No empirical findings in this subsection were inserted into the manuscript by this update.
+
+### Army and the cross-domain comparison
+
+The October 18 [NVector to SVector methods handoff](20261018_NVector_to_SVector_LOO_and_HERO_Methods_Conclusion.md) remains the detailed record of the CODA reconciliation. In the inspected exports, `pool_minus_mean` is own rating minus the peer mean, not the peer mean itself. CODA reports newer direct-LOO plots; the exact outputs and a matching refit still require identification. The inspected time curves accumulate events within bins and the HERO bars summarize their endpoints. Those outputs alone do not establish a Fine–Gray regression.
+
+Charles recalls Fine–Gray work and expected access to the authoritative code and data. That historical-method question remains open until the generating cells, inputs, estimator and output can be matched. Do not infer that access has returned simply because a week has elapsed. The post-brief request for a reproducible, authorized analysis table is a priority when it does. Compare Army, basketball and tenure only after stating each axis, outcome, denominator, time horizon and treatment of unresolved outcomes. Similar shapes do not establish equivalent probabilities or one validated mechanism.
 
 ### Romania
 
-Romania has progressed well beyond the initial Alba-only acquisition described in the September map. Charles has authorized additional county acquisition, reconciliation, and descriptive plots in subsequent work. Sources now include school-level results, admitted and unassigned or rejected lists, and cross-county information. Each source type still needs its own completeness and linkage checks.
+The October 25 [selected-county descriptive report](education_analysis/outputs/romania_2001_all_scraped_counties_descriptive_pilot/run_20261025T164453-0400/report.md) records a 22-county pilot, beyond the acquisition-only account in the earlier map. It distinguishes applicant-weighted and equal-county summaries, records provisional name/score linkage, excludes outside-county placements from the outcome denominator while retaining them as peers, and retains confirmed unassigned applicants in the denominator. Its scope is selected admission-round applicants, not all eighth graders or a national population.
 
-The current background priority is to preserve and assess those downloads, keep unresolved records open, and distinguish download progress from reconciliation and eligibility for analysis. A county whose placement reports reconcile is not thereby proven to have a complete origin-school applicant population. Incoming and outgoing students require explicit treatment; an unmatched student must not automatically count as an unsuccessful placement.
+This update reads the saved report; it does not independently re-audit its county sources or establish a model fit. The report explicitly distinguishes observed success fractions from institutional K/N and descriptive associations from causal effects. LASZLO’s domain work continues separately. No new county work or analysis is launched here.
 
-The historical source gates remain relevant, but the September statement that no outcome exploration has been authorized is no longer an adequate description of subsequent county work. Existing descriptive analysis permissions do not constitute blanket permission for a new national outcome model. Charles controls execution and any expansion in scientific scope.
+## 6. The next scientific and writing sequence
 
-A dedicated [offline county progress notebook](education_analysis/notebooks/EDUCATION_20261013_Romania_2001_county_progress.ipynb) now summarizes acquisition and reconciliation from saved records. Run its settings and refresh cells once, then rerun the refresh cell whenever an updated table is needed. Its role is monitoring, not resolving uncertainty by labeling missing data permanently unavailable. This map does not assert a current complete-county count or restart any worker.
+**Agreed working method:** One question at a time, with a written record of the baseline, change, reason, result and route back. Preserve negative or inconclusive findings. The aim is to learn which explanation the evidence supports, not to tune bands until an expected curve appears.
 
-### Army, basketball, and academic careers
+The following is our proposed implementation of Alex’s direction. It is a plan, not a claim that the analyses have been done or permission to start a broad sweep.
 
-Preserve domain-specific measurement and methodological work. The dissertation can compare domains without assuming identical outcomes, sampling, or peer definitions. Army survival and competing-risk work remains dissertation-relevant even if an eventual paper compresses it. The historical basketball fitting and mechanism experiments need separate accounts. Further academic-career claims depend on the evidence actually available, not the intended breadth of the eventual dissertation.
+1. **Finish interpreting the current BPM comparison.** Start with the top-band shared-versus-LOO pair and its counts. Record what it tells us about the proposed congestion-sensitive band and what remains confounded by performance range, minutes, selection and missingness. Keep the 2.5% alternative, new minutes cutoffs and further significance tests separate until chosen.
+2. **Specify the scientific curve and its success criteria.** Decide the horizontal environment measure, the outcome probability, and whether own performance is fixed, restricted to a band, or averaged over a declared population. Use one coherent definition across domains where the data permit, recording genuine domain differences. For the proposed peak/curvature summaries, specify units and whether curvature means a local second derivative or a quadratic approximation. If no interior peak exists, report that rather than force a maximum or negative squared coefficient.
+3. **Carry the mathematics through selection.** Begin from the score and Gibbs weight, but retain the changing normalizer and all other affected scores when performance changes. Distinguish a conditional next draw from final inclusion after K draws. Fix the other inputs explicitly; a team mean or pressure alone does not determine an entire selection curve without assumptions about the rest of the population. Check monotonicity and any needed parameter restrictions rather than treating Alex’s expectation as a proof. Preserve the difference between the teammate near theta and the focal player near the selection boundary.
+4. **Establish why each added ingredient is needed.** First inventory the existing SCOUT, COMPASS and model experiments against the stated claim. Then use analytic comparisons or the smallest necessary controlled experiment to show what is lost when an ingredient is removed. A changing winner set is not a downturn criterion. Nor does a monotone individual rule settle an aggregated environmental curve without assumptions about sorting and composition.
+5. **Show parameter effects in comparable curve families.** Vary a declared parameter while stating what remains fixed, including the threshold rule when scarcity changes. Put directly compared curves on the same axes and report support, uncertainty and any peak/curvature changes. Keep mosaics as diagnostics where useful. New experiments need their own question and record; the current empirical mosaics do not complete this model-based task.
+6. **Revise the manuscript around that evidence.** Resume the paused 4.4.3 paragraph and model summary, settle terminology without unapproved renaming, then develop 4.5 and 4.7 around the target curves and necessary ingredients. Replace the rejected figure presentation with selected, verified comparisons. Reconcile the opening roadmap with the actual order. Complete the whole-section style pass after content is settled; organize the appendices and field numbering separately.
+7. **Specify fitting and a testable prediction.** Write the likelihood for the chosen observation and selection process, resolve the historical fitting discrepancies, and state a prediction before examining the comparison meant to test it. Threshold/band location and system noise are the candidate families from PD48. An exploratory match after inspecting several plots is not yet an independent prediction test. No completed exact-K refit or cross-domain predictive validation is established by this map.
 
-## 6. Immediate writing sequence and remaining decisions
+### Presentation and scheduling
 
-**Agreed direction:** Continue the current Word model chapter, with readable introductions before mathematical definitions and enough derivation for the committee to assess the claims. Charles’s current edits take precedence over older outlines and status notes. Preserve source records and backups.
-
-**Our proposed next sequence:**
-
-1. Finish the current pass through Chapter 4, including the distinction between completed experiments and the fitting bridge.
-2. Inventory which empirical figures and claims can support the phenomenon chapter, including their population definitions and unresolved limitations.
-3. Review the LG exploration’s verified results and decide whether its independent contribution warrants a chapter.
-4. Decide the placement of the Army methodological material and the final chapter numbering with Alex.
-5. Address only the specific missing analyses required by a proposed scientific claim. Record the question, what evidence already exists, and the smallest necessary additional investigation.
-
-The immediate scientific questions still include the effect of earlier score clipping and selection caps on reused results; historical fitting-window and outcome-label definitions; threshold and normalization choices; transfer or refitting between probability models; and the empirical interpretation of cross-county student movement. They should remain visible without turning this work map into an authorization for broad experiments.
-
-### NCAA roster pressure comparisons for an evening session
-
-**Added October 21, 2026. First descriptive comparison completed October 23, 2026, at Charles’s request.** The manuscript is unchanged; no additional significance tests were run.
-
-- [x] Build a notebook comparison of the empirical NCAA HERO plots corresponding to basketball mosaic panels 7, 8, and 9. Use actual observed draft outcomes, not simulated winners.
-- [x] First identify each panel’s current population, season window, own-performance bands, peer roster, and outcome definition from the existing notebook. Preserve those definitions within each side-by-side comparison.
-- [x] Compare three horizontal axes: ordinary LOO mean performance, shared roster pressure (the mean competitive relevance of all group members), and LOO roster pressure (the mean competitive relevance of the other members only). LOO roster pressure is distinct from the manuscript’s existing C_LOO,i performance average.
-- [x] Use the same threshold and gamma settings for shared and LOO roster pressure. State the performance scale and threshold rule, and examine a declared range of settings rather than choosing the combination that produces the strongest downturn. Any threshold derived from data should remain fixed within each shared-versus-LOO comparison.
-- [x] Keep binning rules, clipping, performance-band colors, and labels consistent and explicit. State quantile versus equal-width binning and any squid/jackal compression or extension. Common bin edges for shared and LOO roster pressure allow direct comparison on their common scale; ordinary LOO performance has different units. Include observations, drafted players, and contributing groups per bin so changes in support are visible. Mark singleton LOO values as undefined.
-- [x] Export clearly labeled printable comparisons and describe whether peaks, downturns, and differences across performance bands persist, weaken, or move. These are descriptive associations; changing the horizontal axis does not change the observed draft outcomes. Hold off on significance tests and simulated selection comparisons in this first pass.
-
-**Completed first pass:** [NCAA shared versus LOO roster pressure notebook](manuscript_figures/section_4_5/roster_pressure_comparison/NCAA_Shared_vs_LOO_Roster_Pressure.ipynb). It preserves the verified 2009–2021 cohort definitions, calculates pressure before focal-player filtering, and exports quantile and EW mosaics with bin support. EW pressure boundaries are common across the shared and LOO columns; quantile membership is independently recalculated using the original rank-first tie rule. These new figures use 16 bins in every row, without historical mixed-width compression or LOO winsorization. Default theta is the 93rd percentile of full-roster performance and gamma is 2; the declared comparison grid uses theta percentiles 80, 90, and 93 with gamma 0.5, 2, and 8. Source-specific score scaling is retained and stated.
-
-**Initial descriptive observation:** At the default settings, the final-season all-player cohort has a much more pronounced upward relationship under shared roster pressure than under LOO roster pressure. In the high-performance bands, removing the focal individual lowers pressure for every included observation at these settings, but the curves are irregular and tail appearance varies with binning and parameters. This is a comparison of environmental summaries, not evidence of a causal effect or a significance claim. The notebook saves distinct-player and distinct-college-season counts. A separate tie-preserving quantile comparison remains open.
-
-**Question motivating the notebook:** Does the concentration of competitively relevant teammates reveal a pattern that an average of teammate performance obscures, and does excluding the focal player materially change that pattern?
-
-**Starting points:** [Figure notebook](manuscript_figures/section_4_5/Chapter_4_5_Mathematical_Illustrations.ipynb), [PD46 comparisons notebook](manuscript_figures/section_4_5/pd46_statistics/PD46_Draft_Rate_Comparisons.ipynb), and [printable mosaic methods](manuscript_figures/section_4_5/pd46_statistics/printable_mosaics/READ_ME_methods_and_next_steps.md). The October 23 notebook is a separate exploration; these earlier notebooks and their results remain intact.
+For the defense, retain the useful player imagery but shorten the machinery and make room for why the model is needed, what fitting reveals, and what predictions survive testing. This is the post-brief presentation direction, not an instruction to strip necessary derivations out of the written dissertation. Administrative dates, committee arrangements and any extension remain to be confirmed by Charles; PD47 discussed possibilities rather than approving a schedule.
 
 ## 7. Source register and revision record
 
-The sources below distinguish direct advisor evidence from our own plans and current artifacts:
+**Direct advisor evidence read for this update:** PD47 (October 16), PD48 (October 20), PD49 (October 23), and the post-brief feedback transcript, linked in Section 1 with relevant timestamps. The PD44/45 account is retained as historical context; later explicit guidance supersedes it where identified. Transcripts are fallible records, not verbatim-certified institutional decisions.
 
-- **Alex’s direct recorded proposals:** PD44 transcript, especially 00:00–03:35, 06:31, 09:10–11:31, and 12:24; PD45 transcript, especially 02:26–03:35 and 04:16–06:14. The PD45 export is not ordered chronologically.
-- **Advisor email:** The four comments and model introduction reproduced by Charles in this conversation. No separate email file was verified for this update.
-- **Charles’s account of framing:** `Dissertation Tone.docx`.
-- **Current manuscript:** `Model_Chapter_Shared_Working_Draft.docx`, headings inspected on 13 October. Its live content takes priority over the October 8 change memo and earlier Markdown outline.
-- **LG proposed scope:** `LG_Model_Exploration_Executive_Summary.docx` and `LG_Model_Exploration_Agent_Handoff.md`.
-- **LG later decisions and implementation status:** `lg_exploration/documents/LEO_DECISION_LOG.md`, the composition notebook, and the current code/settings inventory. Results were not recomputed or fully audited for this update.
-- **Historical model evidence trail:** `assort_analysis/docs/results/ASSORT_20260927_model_plot_trail.md` and `NVector_to_SVector_MLE_Bernoulli_response.md`. These remain entry points for claim-specific verification, not fresh verification of all their contents in this update.
+**Current manuscript evidence:** The saved Word working draft and retained comments, inspected October 26 with deleted text excluded and mathematical text included. Section 3 records present content and remaining requests separately. An advisor’s comment is evidence of a request, not proof that the associated edit is complete. This update does not claim a line-by-line attribution of each revision to a specific meeting.
 
-**Revision note:** This October 13 version replaces the September 30 work map in place so existing links still work. The preceding Markdown file was backed up under `manuscript_backups/work_map_before_update_*`. The older PDF beside this file has not been regenerated and does not reflect this update. No manuscript prose, research code, or experimental results were changed by this work-map revision.
+**Scientific and empirical records:** The October 18 LOO/HERO handoff; the current NCAA walkthrough through Entry 7; PPM and BPM notebook settings and run pointers; aligned BPM run `20261025_191833_184458`; the October 25 Romania selected-county report; and the LG decision log. Saved outputs were read, not recomputed. The historical likelihood and mechanism evidence trails remain [the model plot trail](assort_analysis/docs/results/ASSORT_20260927_model_plot_trail.md) and [the MLE/Bernoulli response](NVector_to_SVector_MLE_Bernoulli_response.md); their existence does not constitute a new validation of all old results.
+
+**Revision record:** The September 30 map was expanded on October 13, and its NCAA comparison note was subsequently updated through October 23 without changing the top-level date. This October 26 revision updates the advisor direction, later placement of survival analysis, actual manuscript status, empirical branch history, and outstanding scientific tasks. It preserves the existing filename and backs up the preceding Markdown under `manuscript_backups/work_map_before_PD47_PD49_update_*`. A source fingerprint record is saved beside that backup to identify what was reviewed. The transition memo changed during this review and was reread; its added October 25 handoff is acknowledged above, while its older section descriptions remain historical.
+
+**Files not edited by this task:** The Word manuscript, comments, tracked changes, equations, captions, notebooks, data, experimental outputs and transition memo. The PDF beside this map has not been regenerated and is not the current planning record. This Markdown is the updated map; the NCAA walkthrough remains the companion experiment journal.
