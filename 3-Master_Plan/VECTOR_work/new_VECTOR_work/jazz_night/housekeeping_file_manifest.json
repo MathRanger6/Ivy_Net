@@ -1,0 +1,870 @@
+[
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/provenance.json",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/provenance.json",
+    "sha256_before": "0d44bf9c61638310d839977bbc562328cb0c70f8d2cd2d8beeef791937e8eefc",
+    "sha256_after": "0d44bf9c61638310d839977bbc562328cb0c70f8d2cd2d8beeef791937e8eefc",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/01_naive_BPM_2011_2021_MG10_min20_EW12.png",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/01_naive_BPM_2011_2021_MG10_min20_EW12.png",
+    "sha256_before": "055f3e28d7fd681ce630732dfb79aab5fec8330d141b58a8f35ee1c0903e38fb",
+    "sha256_after": "055f3e28d7fd681ce630732dfb79aab5fec8330d141b58a8f35ee1c0903e38fb",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/Jazz_Night_Experimental_Walkthrough.md",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/Jazz_Night_Experimental_Walkthrough.md",
+    "sha256_before": "df029a7b2ff0d375d6b9800fcc34c04f80df3731d8daead02b03a74c497ae16b",
+    "sha256_after": "5939c4fe2de5f2183d09ee97e8c7b2ea8e43189a9aa7ebd2daa4e57bb3cdbde1",
+    "content_changed": true
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/01_initial_plot_notes.md",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/01_initial_plot_notes.md",
+    "sha256_before": "5e1dca72240e494efb42f53378e74d37a30160a669001fe0b68cc5670a47de14",
+    "sha256_after": "371b9fe80871bbc55be0190f738e0d899cd7f77a5ce4d322ecd9ea2164b76010",
+    "content_changed": true
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/quantile_split_ties.csv",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/quantile_split_ties.csv",
+    "sha256_before": "999af1d63ed7569a75d5bd04805e4331b8319f5fabb164f943d49b181794fb52",
+    "sha256_after": "999af1d63ed7569a75d5bd04805e4331b8319f5fabb164f943d49b181794fb52",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/JN_progression.md",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/JN_progression.md",
+    "sha256_before": "d70378ed58244350b5129398e0905fac03f440534714b3d1477e0dabe5e8a667",
+    "sha256_after": "68aef6b241168cff5717e7174deae29a77ecc95bbeb7722e99155477a17fb5e4",
+    "content_changed": true
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/build_naive_plot.py",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/build_naive_plot.py",
+    "sha256_before": "ac0b0550baa4cf05a54f305614b40de46ba665d3e2840baf94e4090751950692",
+    "sha256_after": "ac0b0550baa4cf05a54f305614b40de46ba665d3e2840baf94e4090751950692",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/01_naive_BPM_2011_2021_MG10_min20_Q12.png",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/01_naive_BPM_2011_2021_MG10_min20_Q12.png",
+    "sha256_before": "70e5cde54efcc8e4298666626c9ce84fad46ed456eaff742be3d7772f6b83fab",
+    "sha256_after": "70e5cde54efcc8e4298666626c9ce84fad46ed456eaff742be3d7772f6b83fab",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/naive_bin_counts.csv",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/naive_bin_counts.csv",
+    "sha256_before": "9393b78fbf333357a8b9b55cefd79b6ad5ce6a186658f914f13af54e7ced16e8",
+    "sha256_after": "9393b78fbf333357a8b9b55cefd79b6ad5ce6a186658f914f13af54e7ced16e8",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/naive_candidate_membership.csv.gz",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/naive_candidate_membership.csv.gz",
+    "sha256_before": "683afc338d4a361d58a91d0a18b49e4e3921878d21837f770dfd0352abaee3f3",
+    "sha256_after": "683afc338d4a361d58a91d0a18b49e4e3921878d21837f770dfd0352abaee3f3",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/validation.txt",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/validation.txt",
+    "sha256_before": "6633a77db9542ebddb2eb31121b2427f3b110458ee2b1d16e6c774aa73c8cf54",
+    "sha256_after": "6633a77db9542ebddb2eb31121b2427f3b110458ee2b1d16e6c774aa73c8cf54",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/README.md",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/README.md",
+    "sha256_before": "c0f570a3d0dfbec8f95c9b9074c7d7dd6ceb95a0ec9acb587553b7b35425e589",
+    "sha256_after": "2a60aa33e22b7a1b574d1dec008e64861c13f673ec605f1f4038e949f3f8158b",
+    "content_changed": true
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/naive_counts_by_season.csv",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/naive_counts_by_season.csv",
+    "sha256_before": "542ee75bbde52abd8a35d3f8349f2ff54ebb7b1e92f10e3c1462a9b3106668e8",
+    "sha256_after": "542ee75bbde52abd8a35d3f8349f2ff54ebb7b1e92f10e3c1462a9b3106668e8",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/01_naive_BPM_EW12_vs_Q12.png",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/01_naive_BPM_EW12_vs_Q12.png",
+    "sha256_before": "d08c40b801274a6927f8a9f1c2b7ae571ef458d65880e9a3315c756fa5c48833",
+    "sha256_after": "d08c40b801274a6927f8a9f1c2b7ae571ef458d65880e9a3315c756fa5c48833",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/JN01_lock.json",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/JN01_lock.json",
+    "sha256_before": "c4a966e92e6d2ce3ec131d89cf2c7188f628b5fee01dd654674496561088b75b",
+    "sha256_after": "c4a966e92e6d2ce3ec131d89cf2c7188f628b5fee01dd654674496561088b75b",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/04_canonical_naive/provenance.json",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/04_canonical_naive/provenance.json",
+    "sha256_before": "88c1add29704d01427d725454bd246d3f7dbaa00bd734187604ce6086849eec2",
+    "sha256_after": "88c1add29704d01427d725454bd246d3f7dbaa00bd734187604ce6086849eec2",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/04_canonical_naive/canonical_naive_PPM_Q16_2009_2021.png",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/04_canonical_naive/canonical_naive_PPM_Q16_2009_2021.png",
+    "sha256_before": "ca74f900d91316d5ccd2d89d9804ef2a655741d2ca04ff44cd3bc9f0b0413c3f",
+    "sha256_after": "ca74f900d91316d5ccd2d89d9804ef2a655741d2ca04ff44cd3bc9f0b0413c3f",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/04_canonical_naive/canonical_naive_PPM_Q16_2009_2021.svg",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/04_canonical_naive/canonical_naive_PPM_Q16_2009_2021.svg",
+    "sha256_before": "8a6a865217c048ecb920fc48ddaf841bf8c0e178c10e59655f5764229fa6d592",
+    "sha256_after": "8a6a865217c048ecb920fc48ddaf841bf8c0e178c10e59655f5764229fa6d592",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/04_canonical_naive/canonical_player_membership.csv.gz",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/04_canonical_naive/canonical_player_membership.csv.gz",
+    "sha256_before": "a94cbc1b136eb924241bf3d93c56e44ff39aa18e5eabd3c3d13cccbcacaf598a",
+    "sha256_after": "a94cbc1b136eb924241bf3d93c56e44ff39aa18e5eabd3c3d13cccbcacaf598a",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/04_canonical_naive/validation.txt",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/04_canonical_naive/validation.txt",
+    "sha256_before": "5e9eb4f4678d5b9cfa8dceac660038a491a0efd12b5657e7f17b1af699b71a14",
+    "sha256_after": "5e9eb4f4678d5b9cfa8dceac660038a491a0efd12b5657e7f17b1af699b71a14",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/04_canonical_naive/README.md",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/04_canonical_naive/README.md",
+    "sha256_before": "463c04657d207249c70396f75059e56185ebab0ac60d6be4c2c81de45576ec84",
+    "sha256_after": "463c04657d207249c70396f75059e56185ebab0ac60d6be4c2c81de45576ec84",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/04_canonical_naive/plot_style.json",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/04_canonical_naive/plot_style.json",
+    "sha256_before": "aa7d0a3a978403d490298bf09639aa17b83e8768fa64c1df12e96daecbe2165d",
+    "sha256_after": "aa7d0a3a978403d490298bf09639aa17b83e8768fa64c1df12e96daecbe2165d",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/04_canonical_naive/source_canonical_ability_bins.csv",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/04_canonical_naive/source_canonical_ability_bins.csv",
+    "sha256_before": "944cb2e06d5c6730de272b41b02ebe170a61489ef5a0025e9761258ffe0130ef",
+    "sha256_after": "944cb2e06d5c6730de272b41b02ebe170a61489ef5a0025e9761258ffe0130ef",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/04_canonical_naive/canonical_bin_counts.csv",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/04_canonical_naive/canonical_bin_counts.csv",
+    "sha256_before": "f702294aab219c2cf12756d7efd234a238e23bee10c47f774e3ff3339c73d156",
+    "sha256_after": "f702294aab219c2cf12756d7efd234a238e23bee10c47f774e3ff3339c73d156",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/04_canonical_naive/build_figure.py",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/04_canonical_naive/build_figure.py",
+    "sha256_before": "47cf51080776980bcb0d1fd477e838d865ca718529ecf9754602e9ce5db9e8f2",
+    "sha256_after": "47cf51080776980bcb0d1fd477e838d865ca718529ecf9754602e9ce5db9e8f2",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/08_JN03_stochastic_gibbs/JN03_PPM_observed_topK_gibbs_Q16.svg",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/08_JN03_stochastic_gibbs/JN03_PPM_observed_topK_gibbs_Q16.svg",
+    "sha256_before": "1f95b9a3ac8304a0bc6f1572d87407480af9168b582b32d83d050b1ee7711a40",
+    "sha256_after": "1f95b9a3ac8304a0bc6f1572d87407480af9168b582b32d83d050b1ee7711a40",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/08_JN03_stochastic_gibbs/provenance.json",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/08_JN03_stochastic_gibbs/provenance.json",
+    "sha256_before": "c968086c218918197b479ce24f6430224ea6012ed3ff563570b71f72ce760677",
+    "sha256_after": "c968086c218918197b479ce24f6430224ea6012ed3ff563570b71f72ce760677",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/08_JN03_stochastic_gibbs/build_gibbs.py",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/08_JN03_stochastic_gibbs/build_gibbs.py",
+    "sha256_before": "912e96a698c1d65277d13838a28fafc0d646e2ad12338c6c88027a06a290dea7",
+    "sha256_after": "fd480c64db89429b5009c65fdd47e2d3ee95a31e4cc873b53b9534cfaef04520",
+    "content_changed": true
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/08_JN03_stochastic_gibbs/gibbs_t_sweep_bin_rates.csv",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/08_JN03_stochastic_gibbs/gibbs_t_sweep_bin_rates.csv",
+    "sha256_before": "a86242407c9a9460308e2754e39e8eb3e2a2f09d2dafafb6ecaa7e7517d41f08",
+    "sha256_after": "a86242407c9a9460308e2754e39e8eb3e2a2f09d2dafafb6ecaa7e7517d41f08",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/08_JN03_stochastic_gibbs/JN03_PPM_observed_topK_gibbs_Q16.png",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/08_JN03_stochastic_gibbs/JN03_PPM_observed_topK_gibbs_Q16.png",
+    "sha256_before": "70ceb416762d9d9dc44027439ef4eb2bc430466218f1eef8d48c0a6e20545d11",
+    "sha256_after": "70ceb416762d9d9dc44027439ef4eb2bc430466218f1eef8d48c0a6e20545d11",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/08_JN03_stochastic_gibbs/correction_before_after_bin_rates.csv",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/08_JN03_stochastic_gibbs/correction_before_after_bin_rates.csv",
+    "sha256_before": "82b567b8a1ec2304425ac407f8b2853ac82f5bce3a628ce3b8d9bb273870b25e",
+    "sha256_after": "82b567b8a1ec2304425ac407f8b2853ac82f5bce3a628ce3b8d9bb273870b25e",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/08_JN03_stochastic_gibbs/validation.txt",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/08_JN03_stochastic_gibbs/validation.txt",
+    "sha256_before": "0b04fb18c6ffc0a98b80b12e4bb3cee66715f5833b419eed33931ccb35ebab00",
+    "sha256_after": "0b04fb18c6ffc0a98b80b12e4bb3cee66715f5833b419eed33931ccb35ebab00",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/08_JN03_stochastic_gibbs/README.md",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/08_JN03_stochastic_gibbs/README.md",
+    "sha256_before": "031711efdfe181620ce746b4c7ef8d41aad417ff5b25b2ff934fe4c90a75c9de",
+    "sha256_after": "031711efdfe181620ce746b4c7ef8d41aad417ff5b25b2ff934fe4c90a75c9de",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/08_JN03_stochastic_gibbs/check_results.py",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/08_JN03_stochastic_gibbs/check_results.py",
+    "sha256_before": "8d8fbdce3b010d363b1c3a874df8f86d50cc66e519060e1056d9f30ca949efbf",
+    "sha256_after": "8d8fbdce3b010d363b1c3a874df8f86d50cc66e519060e1056d9f30ca949efbf",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/08_JN03_stochastic_gibbs/observed_topK_gibbs_bin_counts.csv",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/08_JN03_stochastic_gibbs/observed_topK_gibbs_bin_counts.csv",
+    "sha256_before": "d7964fa612bafb60b925524351c54c069eb8955e20d368ace82b95eadc757dad",
+    "sha256_after": "d7964fa612bafb60b925524351c54c069eb8955e20d368ace82b95eadc757dad",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/08_JN03_stochastic_gibbs/player_gibbs_inclusion_by_t.csv.gz",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/08_JN03_stochastic_gibbs/player_gibbs_inclusion_by_t.csv.gz",
+    "sha256_before": "2ca59eac843aa141fbbf465d92b011ea9acb1f6bd66e1683a3666217d1b363f8",
+    "sha256_after": "2ca59eac843aa141fbbf465d92b011ea9acb1f6bd66e1683a3666217d1b363f8",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/08_JN03_stochastic_gibbs/superseded_JN03_v1_scores_clipped_to_zero/legacy_selection_excerpt.txt",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/08_JN03_stochastic_gibbs/superseded_JN03_v1_scores_clipped_to_zero/legacy_selection_excerpt.txt",
+    "sha256_before": "8e1279832e736f70a5a476b58c22eaa3977c275792ba35f19f0cd323fc7cfe38",
+    "sha256_after": "8e1279832e736f70a5a476b58c22eaa3977c275792ba35f19f0cd323fc7cfe38",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/08_JN03_stochastic_gibbs/superseded_JN03_v1_scores_clipped_to_zero/SUPERSEDED_JN03_v1_negative_scores_changed_to_zero.svg",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/08_JN03_stochastic_gibbs/superseded_JN03_v1_scores_clipped_to_zero/SUPERSEDED_JN03_v1_negative_scores_changed_to_zero.svg",
+    "sha256_before": "df22f60b3a3783b59fb2394dd672de78dacf2d8cc823d07a47f989c47bf571dd",
+    "sha256_after": "df22f60b3a3783b59fb2394dd672de78dacf2d8cc823d07a47f989c47bf571dd",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/08_JN03_stochastic_gibbs/superseded_JN03_v1_scores_clipped_to_zero/JN03_PPM_observed_topK_gibbs_Q16.svg",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/08_JN03_stochastic_gibbs/superseded_JN03_v1_scores_clipped_to_zero/JN03_PPM_observed_topK_gibbs_Q16.svg",
+    "sha256_before": "476d85377165d1b548d4e4120952fa8fe90e5aafa0809186fc5689c1ceb0f484",
+    "sha256_after": "476d85377165d1b548d4e4120952fa8fe90e5aafa0809186fc5689c1ceb0f484",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/08_JN03_stochastic_gibbs/superseded_JN03_v1_scores_clipped_to_zero/provenance.json",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/08_JN03_stochastic_gibbs/superseded_JN03_v1_scores_clipped_to_zero/provenance.json",
+    "sha256_before": "48be523fa1fde58082746bba4b517d1de1d8f529f8f3563645ca70ec9a63294a",
+    "sha256_after": "48be523fa1fde58082746bba4b517d1de1d8f529f8f3563645ca70ec9a63294a",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/08_JN03_stochastic_gibbs/superseded_JN03_v1_scores_clipped_to_zero/Jazz_Night_Experimental_Walkthrough.md",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/08_JN03_stochastic_gibbs/superseded_JN03_v1_scores_clipped_to_zero/Jazz_Night_Experimental_Walkthrough.md",
+    "sha256_before": "1863ddbee749c5ec62cc8dabf92545d10dfa0d2c7ba918b17a15362700d4de58",
+    "sha256_after": "1863ddbee749c5ec62cc8dabf92545d10dfa0d2c7ba918b17a15362700d4de58",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/08_JN03_stochastic_gibbs/superseded_JN03_v1_scores_clipped_to_zero/build_gibbs.py",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/08_JN03_stochastic_gibbs/superseded_JN03_v1_scores_clipped_to_zero/build_gibbs.py",
+    "sha256_before": "fca302fd870a78c5f9677ee74ef0fd5249930c0a6f4998030f576f7667651de5",
+    "sha256_after": "fca302fd870a78c5f9677ee74ef0fd5249930c0a6f4998030f576f7667651de5",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/08_JN03_stochastic_gibbs/superseded_JN03_v1_scores_clipped_to_zero/START_HERE_SUPERSEDED.md",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/08_JN03_stochastic_gibbs/superseded_JN03_v1_scores_clipped_to_zero/START_HERE_SUPERSEDED.md",
+    "sha256_before": "e4660df9dfd3fa78b850316df5aaa98e78f904abf6c41dee6b86238cc263cfc2",
+    "sha256_after": "e4660df9dfd3fa78b850316df5aaa98e78f904abf6c41dee6b86238cc263cfc2",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/08_JN03_stochastic_gibbs/superseded_JN03_v1_scores_clipped_to_zero/gibbs_t_sweep_bin_rates.csv",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/08_JN03_stochastic_gibbs/superseded_JN03_v1_scores_clipped_to_zero/gibbs_t_sweep_bin_rates.csv",
+    "sha256_before": "8e2ce425c8f26911d5ecf14cca91bee27e3fec26b8068bd1294206f3a08e187f",
+    "sha256_after": "8e2ce425c8f26911d5ecf14cca91bee27e3fec26b8068bd1294206f3a08e187f",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/08_JN03_stochastic_gibbs/superseded_JN03_v1_scores_clipped_to_zero/JN_progression.md",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/08_JN03_stochastic_gibbs/superseded_JN03_v1_scores_clipped_to_zero/JN_progression.md",
+    "sha256_before": "7c8cba56b21e4a0b05edf8a62949b4e5fb04b90506b17f4b7b129fc3533f395f",
+    "sha256_after": "7c8cba56b21e4a0b05edf8a62949b4e5fb04b90506b17f4b7b129fc3533f395f",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/08_JN03_stochastic_gibbs/superseded_JN03_v1_scores_clipped_to_zero/JN03_PPM_observed_topK_gibbs_Q16.png",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/08_JN03_stochastic_gibbs/superseded_JN03_v1_scores_clipped_to_zero/JN03_PPM_observed_topK_gibbs_Q16.png",
+    "sha256_before": "78a403dca0f14b9f8e13bfee36467c69642fb50a421d8dac129e3ecb4bc23775",
+    "sha256_after": "78a403dca0f14b9f8e13bfee36467c69642fb50a421d8dac129e3ecb4bc23775",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/08_JN03_stochastic_gibbs/superseded_JN03_v1_scores_clipped_to_zero/SUPERSEDED_JN03_v1_negative_scores_changed_to_zero.png",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/08_JN03_stochastic_gibbs/superseded_JN03_v1_scores_clipped_to_zero/SUPERSEDED_JN03_v1_negative_scores_changed_to_zero.png",
+    "sha256_before": "31496838bcdf5231bc751058d0d9a63d8e9ff407b42c0ac0e1167adb5aace559",
+    "sha256_after": "31496838bcdf5231bc751058d0d9a63d8e9ff407b42c0ac0e1167adb5aace559",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/08_JN03_stochastic_gibbs/superseded_JN03_v1_scores_clipped_to_zero/validation.txt",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/08_JN03_stochastic_gibbs/superseded_JN03_v1_scores_clipped_to_zero/validation.txt",
+    "sha256_before": "2b9f1befccda893f7f5818a88415ead1e7a1b83e3dc284abeb360ad8488168f6",
+    "sha256_after": "2b9f1befccda893f7f5818a88415ead1e7a1b83e3dc284abeb360ad8488168f6",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/08_JN03_stochastic_gibbs/superseded_JN03_v1_scores_clipped_to_zero/README.md",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/08_JN03_stochastic_gibbs/superseded_JN03_v1_scores_clipped_to_zero/README.md",
+    "sha256_before": "df013cce3a0301f0813e1443cd54fb3113d371f956869a99850394766d135966",
+    "sha256_after": "df013cce3a0301f0813e1443cd54fb3113d371f956869a99850394766d135966",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/08_JN03_stochastic_gibbs/superseded_JN03_v1_scores_clipped_to_zero/observed_topK_gibbs_bin_counts.csv",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/08_JN03_stochastic_gibbs/superseded_JN03_v1_scores_clipped_to_zero/observed_topK_gibbs_bin_counts.csv",
+    "sha256_before": "e6d4c16a11d2c4ca0a33642eb9bb99e74fa9dffce7f7e5fcfb2021d47fe3e2f1",
+    "sha256_after": "e6d4c16a11d2c4ca0a33642eb9bb99e74fa9dffce7f7e5fcfb2021d47fe3e2f1",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/08_JN03_stochastic_gibbs/superseded_JN03_v1_scores_clipped_to_zero/player_gibbs_inclusion_by_t.csv.gz",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/08_JN03_stochastic_gibbs/superseded_JN03_v1_scores_clipped_to_zero/player_gibbs_inclusion_by_t.csv.gz",
+    "sha256_before": "e4ebba9b57f978bb9fa9c478b1a9bd12a12eaa271e4307c31036a9b07b8731aa",
+    "sha256_after": "e4ebba9b57f978bb9fa9c478b1a9bd12a12eaa271e4307c31036a9b07b8731aa",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/06_BPM16_walkthrough_comparison/missing_BPM_final_records.csv.gz",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/06_BPM16_walkthrough_comparison/missing_BPM_final_records.csv.gz",
+    "sha256_before": "24c0f9c0a56ea69fafab6b80cc05d8cbf73dc47ca1b8dec4963e2b778fcda818",
+    "sha256_after": "24c0f9c0a56ea69fafab6b80cc05d8cbf73dc47ca1b8dec4963e2b778fcda818",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/06_BPM16_walkthrough_comparison/provenance.json",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/06_BPM16_walkthrough_comparison/provenance.json",
+    "sha256_before": "1fbfe5eb275a0eb19d252e95b58583d2600f986ca682211d18a07b0cec20a704",
+    "sha256_after": "1fbfe5eb275a0eb19d252e95b58583d2600f986ca682211d18a07b0cec20a704",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/06_BPM16_walkthrough_comparison/Q16_bin_counts.csv",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/06_BPM16_walkthrough_comparison/Q16_bin_counts.csv",
+    "sha256_before": "1b415ea170f0a6b4e7f2d7129fa650a972d66f165f518a93a419fd00624fa77f",
+    "sha256_after": "1b415ea170f0a6b4e7f2d7129fa650a972d66f165f518a93a419fd00624fa77f",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/06_BPM16_walkthrough_comparison/EW16_bin_counts.csv",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/06_BPM16_walkthrough_comparison/EW16_bin_counts.csv",
+    "sha256_before": "8d4d62ce1fd05535f5250ab5d4b12586268c95e299300e24656ac3ec932d0076",
+    "sha256_after": "8d4d62ce1fd05535f5250ab5d4b12586268c95e299300e24656ac3ec932d0076",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/06_BPM16_walkthrough_comparison/naive_BPM_Q16_vs_EW16_same_scale.png",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/06_BPM16_walkthrough_comparison/naive_BPM_Q16_vs_EW16_same_scale.png",
+    "sha256_before": "7b6d50e2421d7f729f0acef2a0d24bbdd28eeffbe7c6ba0527a89376792383d7",
+    "sha256_after": "7b6d50e2421d7f729f0acef2a0d24bbdd28eeffbe7c6ba0527a89376792383d7",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/06_BPM16_walkthrough_comparison/validation.txt",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/06_BPM16_walkthrough_comparison/validation.txt",
+    "sha256_before": "8472541d44291cfbc5079c5dfcdeeecd95ff328c821ad363fdf3d0699764ca39",
+    "sha256_after": "8472541d44291cfbc5079c5dfcdeeecd95ff328c821ad363fdf3d0699764ca39",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/06_BPM16_walkthrough_comparison/README.md",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/06_BPM16_walkthrough_comparison/README.md",
+    "sha256_before": "707990d07c3a76ede729f8e278625003f1d427a7b7747cdf7414c604b572149f",
+    "sha256_after": "707990d07c3a76ede729f8e278625003f1d427a7b7747cdf7414c604b572149f",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/06_BPM16_walkthrough_comparison/naive_BPM_Q16_available_2011_2021.svg",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/06_BPM16_walkthrough_comparison/naive_BPM_Q16_available_2011_2021.svg",
+    "sha256_before": "fb5902e9cf2da9159ead2abba26ee734595c223f2f280bf550654b49ef1f6880",
+    "sha256_after": "fb5902e9cf2da9159ead2abba26ee734595c223f2f280bf550654b49ef1f6880",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/06_BPM16_walkthrough_comparison/naive_BPM_EW16_available_2011_2021.svg",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/06_BPM16_walkthrough_comparison/naive_BPM_EW16_available_2011_2021.svg",
+    "sha256_before": "a590b48585bc0cc83e84a8cb709015eb77052746c3a7aa1c17b16df11464dec4",
+    "sha256_after": "a590b48585bc0cc83e84a8cb709015eb77052746c3a7aa1c17b16df11464dec4",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/06_BPM16_walkthrough_comparison/build_bpm.py",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/06_BPM16_walkthrough_comparison/build_bpm.py",
+    "sha256_before": "c3526eb47f23218a247929d60791eb88bf92b9011b4a22cc860993dc81246187",
+    "sha256_after": "34b5c00827c13670d0e7ea83956c58c171536f0c3519493860bf0defbe9aa63f",
+    "content_changed": true
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/06_BPM16_walkthrough_comparison/BPM_Q16_EW16_player_membership.csv.gz",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/06_BPM16_walkthrough_comparison/BPM_Q16_EW16_player_membership.csv.gz",
+    "sha256_before": "ca4272bb98a29e5a6f2e539b48b708620a140263cd276df0d363c18f3c7665f2",
+    "sha256_after": "ca4272bb98a29e5a6f2e539b48b708620a140263cd276df0d363c18f3c7665f2",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/06_BPM16_walkthrough_comparison/coverage_by_season.csv",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/06_BPM16_walkthrough_comparison/coverage_by_season.csv",
+    "sha256_before": "8f3572b0b9103eeb6d5998ed94ff1460457cf9cea4a7d09559f50bba02f09b97",
+    "sha256_after": "8f3572b0b9103eeb6d5998ed94ff1460457cf9cea4a7d09559f50bba02f09b97",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/06_BPM16_walkthrough_comparison/naive_BPM_EW16_available_2011_2021.png",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/06_BPM16_walkthrough_comparison/naive_BPM_EW16_available_2011_2021.png",
+    "sha256_before": "910ba8ef8da904f660c89f6d7b3fd2ecc416d0e7c705f73d8855a2185ba1e525",
+    "sha256_after": "910ba8ef8da904f660c89f6d7b3fd2ecc416d0e7c705f73d8855a2185ba1e525",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/06_BPM16_walkthrough_comparison/naive_BPM_Q16_available_2011_2021.png",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/06_BPM16_walkthrough_comparison/naive_BPM_Q16_available_2011_2021.png",
+    "sha256_before": "80d40a9c1e5380d9241a81868d4f39cf1c4591415de55e188d717fcacfab2180",
+    "sha256_after": "80d40a9c1e5380d9241a81868d4f39cf1c4591415de55e188d717fcacfab2180",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/03_ppm_all_vs_final_ps/all_ps_quantile_split_ties.csv",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/03_ppm_all_vs_final_ps/all_ps_quantile_split_ties.csv",
+    "sha256_before": "7e0e3f616ceea011a10bff69e5148e963ce4afd93baac47ea43045116ed0fc8b",
+    "sha256_after": "7e0e3f616ceea011a10bff69e5148e963ce4afd93baac47ea43045116ed0fc8b",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/03_ppm_all_vs_final_ps/PPM_Q8_final_vs_all_PS.png",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/03_ppm_all_vs_final_ps/PPM_Q8_final_vs_all_PS.png",
+    "sha256_before": "37e69c078d3a413f3a6e9facf64b41db3b6cdd0c46c4fc47d1205d62997dd92c",
+    "sha256_after": "37e69c078d3a413f3a6e9facf64b41db3b6cdd0c46c4fc47d1205d62997dd92c",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/03_ppm_all_vs_final_ps/provenance.json",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/03_ppm_all_vs_final_ps/provenance.json",
+    "sha256_before": "9eab595b0b85f323ee0842b3558745b15a2e132e731d0ff6cddb3449582d32f6",
+    "sha256_after": "9eab595b0b85f323ee0842b3558745b15a2e132e731d0ff6cddb3449582d32f6",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/03_ppm_all_vs_final_ps/final_ps_quantile_split_ties.csv",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/03_ppm_all_vs_final_ps/final_ps_quantile_split_ties.csv",
+    "sha256_before": "e9195b401e0a7e1c652e1492f51987a762051a6c40f95c747f4d3e3111a81a25",
+    "sha256_after": "e9195b401e0a7e1c652e1492f51987a762051a6c40f95c747f4d3e3111a81a25",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/03_ppm_all_vs_final_ps/all_ps_season_counts.csv",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/03_ppm_all_vs_final_ps/all_ps_season_counts.csv",
+    "sha256_before": "e930f82af044c9bdddc4cdc5c0332b389e5f8eb8fc8ee32b12d9d42a9513fbb1",
+    "sha256_after": "e930f82af044c9bdddc4cdc5c0332b389e5f8eb8fc8ee32b12d9d42a9513fbb1",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/03_ppm_all_vs_final_ps/multi_team_player_seasons_audit.csv",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/03_ppm_all_vs_final_ps/multi_team_player_seasons_audit.csv",
+    "sha256_before": "0c9d18e19c8817ee68a6bce7826d32497cd38b38dd6fe90bdfd545fe4897128a",
+    "sha256_after": "0c9d18e19c8817ee68a6bce7826d32497cd38b38dd6fe90bdfd545fe4897128a",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/03_ppm_all_vs_final_ps/all_ps_membership.csv.gz",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/03_ppm_all_vs_final_ps/all_ps_membership.csv.gz",
+    "sha256_before": "70a3a6d688b07d7f5b946dfd52131f2c46466df593c5722257d66178f95a2f27",
+    "sha256_after": "70a3a6d688b07d7f5b946dfd52131f2c46466df593c5722257d66178f95a2f27",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/03_ppm_all_vs_final_ps/build_comparison.py",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/03_ppm_all_vs_final_ps/build_comparison.py",
+    "sha256_before": "b10368fc4ad7db8e9c5748c4dc19b82ac2e21e16a860e4cd3da5b4cda4967fad",
+    "sha256_after": "a11ec069f7da8b77d3d43079c68012e65c326f48edb92ababdd4244fe4534d2f",
+    "content_changed": true
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/03_ppm_all_vs_final_ps/validation.txt",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/03_ppm_all_vs_final_ps/validation.txt",
+    "sha256_before": "469d0a0e526776bbe7e89619d4c7c8aa17f0248a8c2e597489f963fdfcafcfa0",
+    "sha256_after": "469d0a0e526776bbe7e89619d4c7c8aa17f0248a8c2e597489f963fdfcafcfa0",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/03_ppm_all_vs_final_ps/README.md",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/03_ppm_all_vs_final_ps/README.md",
+    "sha256_before": "60bafc4ba3ad07ac01806d459288f0763b0bda4e092fedae0f2df649e420e385",
+    "sha256_after": "60bafc4ba3ad07ac01806d459288f0763b0bda4e092fedae0f2df649e420e385",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/03_ppm_all_vs_final_ps/PPM_EW8_final_vs_all_PS.png",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/03_ppm_all_vs_final_ps/PPM_EW8_final_vs_all_PS.png",
+    "sha256_before": "753c03bf1f069e725ac07bca4c8c96d8c8e6df5dc558654f3b3f5c312efd493b",
+    "sha256_after": "753c03bf1f069e725ac07bca4c8c96d8c8e6df5dc558654f3b3f5c312efd493b",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/03_ppm_all_vs_final_ps/bin_counts.csv",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/03_ppm_all_vs_final_ps/bin_counts.csv",
+    "sha256_before": "761315f251c7be8a1f65569572b3404ef17796625a598f9cc128790989f211c1",
+    "sha256_after": "761315f251c7be8a1f65569572b3404ef17796625a598f9cc128790989f211c1",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/03_ppm_all_vs_final_ps/final_ps_membership.csv.gz",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/03_ppm_all_vs_final_ps/final_ps_membership.csv.gz",
+    "sha256_before": "4f4de147c8ee4e61a73f881b4cb24bab50e5ced3e9a9ff562daf9020cb44f253",
+    "sha256_after": "4f4de147c8ee4e61a73f881b4cb24bab50e5ced3e9a9ff562daf9020cb44f253",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/03_ppm_all_vs_final_ps/final_ps_season_counts.csv",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/03_ppm_all_vs_final_ps/final_ps_season_counts.csv",
+    "sha256_before": "3efd21ad407281c4092abae70efaec4fd7108578bd875fb1450b63e80c2f3750",
+    "sha256_after": "3efd21ad407281c4092abae70efaec4fd7108578bd875fb1450b63e80c2f3750",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/03_ppm_all_vs_final_ps/PPM_8bins_final_vs_all_PS_mosaic.png",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/03_ppm_all_vs_final_ps/PPM_8bins_final_vs_all_PS_mosaic.png",
+    "sha256_before": "e696e43737c4db1d75f00602f36af652a2cad5718310a00e7fd939cead031c32",
+    "sha256_after": "e696e43737c4db1d75f00602f36af652a2cad5718310a00e7fd939cead031c32",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/07_JN02_deterministic_topK/player_membership_and_topK.csv.gz",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/07_JN02_deterministic_topK/player_membership_and_topK.csv.gz",
+    "sha256_before": "4813cdfd7a419609ef5210198778739c17331d7af1c21f2178cbb0b3886fbe09",
+    "sha256_after": "4813cdfd7a419609ef5210198778739c17331d7af1c21f2178cbb0b3886fbe09",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/07_JN02_deterministic_topK/provenance.json",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/07_JN02_deterministic_topK/provenance.json",
+    "sha256_before": "f3eaf98a2355421694c51da1a995feba71522d9cc6e66f655eb381d222cc18c6",
+    "sha256_after": "f3eaf98a2355421694c51da1a995feba71522d9cc6e66f655eb381d222cc18c6",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/07_JN02_deterministic_topK/validation.txt",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/07_JN02_deterministic_topK/validation.txt",
+    "sha256_before": "3849a324c47572c6cfc73573c398e67631e00317843db60fe3e0fac7796fa81c",
+    "sha256_after": "3849a324c47572c6cfc73573c398e67631e00317843db60fe3e0fac7796fa81c",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/07_JN02_deterministic_topK/README.md",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/07_JN02_deterministic_topK/README.md",
+    "sha256_before": "9fd6ee1fa1ffc3abeb35648c9a14917b0627b987bec4a9834be3902cd7a7b7cf",
+    "sha256_after": "9fd6ee1fa1ffc3abeb35648c9a14917b0627b987bec4a9834be3902cd7a7b7cf",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/07_JN02_deterministic_topK/observed_vs_topK_bin_counts.csv",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/07_JN02_deterministic_topK/observed_vs_topK_bin_counts.csv",
+    "sha256_before": "ca83f3e8a37dc1bfca232a7a5db905b79232ee3ffd710b92aaeede3c22a37b1b",
+    "sha256_after": "ca83f3e8a37dc1bfca232a7a5db905b79232ee3ffd710b92aaeede3c22a37b1b",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/07_JN02_deterministic_topK/JN02_PPM_observed_vs_topK_Q16.png",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/07_JN02_deterministic_topK/JN02_PPM_observed_vs_topK_Q16.png",
+    "sha256_before": "ea6ffbc4eabcc943097f77202b2f94dedb025f04c075dd59d9cc6eddf0fd9bb8",
+    "sha256_after": "ea6ffbc4eabcc943097f77202b2f94dedb025f04c075dd59d9cc6eddf0fd9bb8",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/07_JN02_deterministic_topK/JN02_PPM_observed_vs_topK_Q16.svg",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/07_JN02_deterministic_topK/JN02_PPM_observed_vs_topK_Q16.svg",
+    "sha256_before": "e2339f99c735fbb81bcefa6ed99beee31947cb8715762c00c73f5210194a62c6",
+    "sha256_after": "e2339f99c735fbb81bcefa6ed99beee31947cb8715762c00c73f5210194a62c6",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/07_JN02_deterministic_topK/build_topk.py",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/07_JN02_deterministic_topK/build_topk.py",
+    "sha256_before": "1b289cc1d2d0a9026caed3447419e1d17470ba939b8f5c7e3e22ce71b5abda78",
+    "sha256_after": "35b5085f88ca2169f483b5197d640bec12114384d39dc3200ea08ab98c34f743",
+    "content_changed": true
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/02_eight_bin_comparison/README.md",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/02_eight_bin_comparison/README.md",
+    "sha256_before": "89e5dec33fc0ea39d9b01df8b33fbaef1eef5e094843f39d78861d86c99f7ceb",
+    "sha256_after": "89e5dec33fc0ea39d9b01df8b33fbaef1eef5e094843f39d78861d86c99f7ceb",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/02_eight_bin_comparison/build_eight_bin_plots.py",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/02_eight_bin_comparison/build_eight_bin_plots.py",
+    "sha256_before": "147e62c5b7c249edfcd303f9fbc150d7c4bb4f3358b349ce5e458ce704cf62b1",
+    "sha256_after": "147e62c5b7c249edfcd303f9fbc150d7c4bb4f3358b349ce5e458ce704cf62b1",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/02_eight_bin_comparison/ppm_8bins/naive_PPM_2011_2021_MG10_min20_EW8.png",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/02_eight_bin_comparison/ppm_8bins/naive_PPM_2011_2021_MG10_min20_EW8.png",
+    "sha256_before": "188f761563e6c479705be2e5ce2ed090b5bb6e5d1d6f7a2fba7c7d530e1795ca",
+    "sha256_after": "188f761563e6c479705be2e5ce2ed090b5bb6e5d1d6f7a2fba7c7d530e1795ca",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/02_eight_bin_comparison/ppm_8bins/provenance.json",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/02_eight_bin_comparison/ppm_8bins/provenance.json",
+    "sha256_before": "d60716398298fd011a44b96d14bdbcb02862427881927d1fd73efd2a26bf7d21",
+    "sha256_after": "d60716398298fd011a44b96d14bdbcb02862427881927d1fd73efd2a26bf7d21",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/02_eight_bin_comparison/ppm_8bins/quantile_split_ties.csv",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/02_eight_bin_comparison/ppm_8bins/quantile_split_ties.csv",
+    "sha256_before": "e9195b401e0a7e1c652e1492f51987a762051a6c40f95c747f4d3e3111a81a25",
+    "sha256_after": "e9195b401e0a7e1c652e1492f51987a762051a6c40f95c747f4d3e3111a81a25",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/02_eight_bin_comparison/ppm_8bins/naive_PPM_EW8_vs_Q8.png",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/02_eight_bin_comparison/ppm_8bins/naive_PPM_EW8_vs_Q8.png",
+    "sha256_before": "b59f8a52f2f6298022d2339ab9b4921e579bdb59e9d7c526e5f3104a22b53700",
+    "sha256_after": "b59f8a52f2f6298022d2339ab9b4921e579bdb59e9d7c526e5f3104a22b53700",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/02_eight_bin_comparison/ppm_8bins/naive_bin_counts.csv",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/02_eight_bin_comparison/ppm_8bins/naive_bin_counts.csv",
+    "sha256_before": "f3869f7dafc19c21814e299068ee979b09088ca42c6f4f5b7b2de6874b87ae5e",
+    "sha256_after": "f3869f7dafc19c21814e299068ee979b09088ca42c6f4f5b7b2de6874b87ae5e",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/02_eight_bin_comparison/ppm_8bins/naive_candidate_membership.csv.gz",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/02_eight_bin_comparison/ppm_8bins/naive_candidate_membership.csv.gz",
+    "sha256_before": "2804ba35ead942a9a1ab3630c4fbb1c695bcdc8e3e170272cd28c3f08ac05110",
+    "sha256_after": "2804ba35ead942a9a1ab3630c4fbb1c695bcdc8e3e170272cd28c3f08ac05110",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/02_eight_bin_comparison/ppm_8bins/validation.txt",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/02_eight_bin_comparison/ppm_8bins/validation.txt",
+    "sha256_before": "c4b589dcf3379f96b5864602270d3958134a7d6235185a3ea5ef70074b1eff10",
+    "sha256_after": "c4b589dcf3379f96b5864602270d3958134a7d6235185a3ea5ef70074b1eff10",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/02_eight_bin_comparison/ppm_8bins/naive_PPM_2011_2021_MG10_min20_Q8.png",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/02_eight_bin_comparison/ppm_8bins/naive_PPM_2011_2021_MG10_min20_Q8.png",
+    "sha256_before": "aef3d52c116eb7657b43be3d5636f58e9e314df068c7a1e205c24081f41480a3",
+    "sha256_after": "aef3d52c116eb7657b43be3d5636f58e9e314df068c7a1e205c24081f41480a3",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/02_eight_bin_comparison/ppm_8bins/naive_counts_by_season.csv",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/02_eight_bin_comparison/ppm_8bins/naive_counts_by_season.csv",
+    "sha256_before": "41ce1dbafd0d973b6c07e0ec1da4f53818772227b2e715b4d358bede4f005f84",
+    "sha256_after": "41ce1dbafd0d973b6c07e0ec1da4f53818772227b2e715b4d358bede4f005f84",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/02_eight_bin_comparison/display_before_zoom/ppm_8bins/naive_PPM_2011_2021_MG10_min20_EW8.png",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/02_eight_bin_comparison/display_before_zoom/ppm_8bins/naive_PPM_2011_2021_MG10_min20_EW8.png",
+    "sha256_before": "edf3d827dedaa6861a3f42b091f7eb8d444e9d120de46a63d84afb5d79ac4f45",
+    "sha256_after": "edf3d827dedaa6861a3f42b091f7eb8d444e9d120de46a63d84afb5d79ac4f45",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/02_eight_bin_comparison/display_before_zoom/ppm_8bins/naive_PPM_EW8_vs_Q8.png",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/02_eight_bin_comparison/display_before_zoom/ppm_8bins/naive_PPM_EW8_vs_Q8.png",
+    "sha256_before": "e576c0b0f42caadf84711b243661da8a05654525a3657db526cfb7a7666a0d2f",
+    "sha256_after": "e576c0b0f42caadf84711b243661da8a05654525a3657db526cfb7a7666a0d2f",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/02_eight_bin_comparison/display_before_zoom/ppm_8bins/naive_PPM_2011_2021_MG10_min20_Q8.png",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/02_eight_bin_comparison/display_before_zoom/ppm_8bins/naive_PPM_2011_2021_MG10_min20_Q8.png",
+    "sha256_before": "1fc4d604640ded635347ed1c3636b49e9f0f9cb02d3b6fb693cf597e42a12c5d",
+    "sha256_after": "1fc4d604640ded635347ed1c3636b49e9f0f9cb02d3b6fb693cf597e42a12c5d",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/02_eight_bin_comparison/display_before_zoom/bpm_8bins/naive_BPM_EW8_vs_Q8.png",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/02_eight_bin_comparison/display_before_zoom/bpm_8bins/naive_BPM_EW8_vs_Q8.png",
+    "sha256_before": "00f492e1ee996223cfc90bbaef97936c024bf486865c7fd6d5de67dd07d14c97",
+    "sha256_after": "00f492e1ee996223cfc90bbaef97936c024bf486865c7fd6d5de67dd07d14c97",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/02_eight_bin_comparison/display_before_zoom/bpm_8bins/naive_BPM_2011_2021_MG10_min20_EW8.png",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/02_eight_bin_comparison/display_before_zoom/bpm_8bins/naive_BPM_2011_2021_MG10_min20_EW8.png",
+    "sha256_before": "b2e695994ea3d9512e946feade4e53ee3068c241d9b431fdb3f0adb8b7558589",
+    "sha256_after": "b2e695994ea3d9512e946feade4e53ee3068c241d9b431fdb3f0adb8b7558589",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/02_eight_bin_comparison/display_before_zoom/bpm_8bins/naive_BPM_2011_2021_MG10_min20_Q8.png",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/02_eight_bin_comparison/display_before_zoom/bpm_8bins/naive_BPM_2011_2021_MG10_min20_Q8.png",
+    "sha256_before": "04b1a997f31d470f2897dece0fef4bcb4174f6aee651b9c363aa88d49de933ab",
+    "sha256_after": "04b1a997f31d470f2897dece0fef4bcb4174f6aee651b9c363aa88d49de933ab",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/02_eight_bin_comparison/bpm_8bins/naive_BPM_EW8_vs_Q8.png",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/02_eight_bin_comparison/bpm_8bins/naive_BPM_EW8_vs_Q8.png",
+    "sha256_before": "e0bd7b4915383a1cb151a8872f0888a994ceab65faf6010cff6c9e53f4661913",
+    "sha256_after": "e0bd7b4915383a1cb151a8872f0888a994ceab65faf6010cff6c9e53f4661913",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/02_eight_bin_comparison/bpm_8bins/provenance.json",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/02_eight_bin_comparison/bpm_8bins/provenance.json",
+    "sha256_before": "e3aa8378a954e64b64a4598b8c24cb12ea27e57dbcc288c24bce298bde411259",
+    "sha256_after": "e3aa8378a954e64b64a4598b8c24cb12ea27e57dbcc288c24bce298bde411259",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/02_eight_bin_comparison/bpm_8bins/quantile_split_ties.csv",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/02_eight_bin_comparison/bpm_8bins/quantile_split_ties.csv",
+    "sha256_before": "57f16b7f54eafd4f7f1e783758bf7b4af6bab5ee2d390a6a165bfc89fe03d46d",
+    "sha256_after": "57f16b7f54eafd4f7f1e783758bf7b4af6bab5ee2d390a6a165bfc89fe03d46d",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/02_eight_bin_comparison/bpm_8bins/naive_bin_counts.csv",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/02_eight_bin_comparison/bpm_8bins/naive_bin_counts.csv",
+    "sha256_before": "3eff901b7beb292f0a2856376195fa7a0d7b84bb81bd6991cb642894ff2c4c7b",
+    "sha256_after": "3eff901b7beb292f0a2856376195fa7a0d7b84bb81bd6991cb642894ff2c4c7b",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/02_eight_bin_comparison/bpm_8bins/naive_candidate_membership.csv.gz",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/02_eight_bin_comparison/bpm_8bins/naive_candidate_membership.csv.gz",
+    "sha256_before": "50ab504c86844f65d46240c8fc061fec4d1f860cac6e27085ba5134b849c81f2",
+    "sha256_after": "50ab504c86844f65d46240c8fc061fec4d1f860cac6e27085ba5134b849c81f2",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/02_eight_bin_comparison/bpm_8bins/validation.txt",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/02_eight_bin_comparison/bpm_8bins/validation.txt",
+    "sha256_before": "d5488c2c73049d3747eb21e5290a805a0c7155ab4827c13e3dc58d19708eceba",
+    "sha256_after": "d5488c2c73049d3747eb21e5290a805a0c7155ab4827c13e3dc58d19708eceba",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/02_eight_bin_comparison/bpm_8bins/naive_counts_by_season.csv",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/02_eight_bin_comparison/bpm_8bins/naive_counts_by_season.csv",
+    "sha256_before": "542ee75bbde52abd8a35d3f8349f2ff54ebb7b1e92f10e3c1462a9b3106668e8",
+    "sha256_after": "542ee75bbde52abd8a35d3f8349f2ff54ebb7b1e92f10e3c1462a9b3106668e8",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/02_eight_bin_comparison/bpm_8bins/naive_BPM_2011_2021_MG10_min20_EW8.png",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/02_eight_bin_comparison/bpm_8bins/naive_BPM_2011_2021_MG10_min20_EW8.png",
+    "sha256_before": "d4c19c40bb7dd79cf34fff98e46a9575dabe20f139720452a750be2808dc1659",
+    "sha256_after": "d4c19c40bb7dd79cf34fff98e46a9575dabe20f139720452a750be2808dc1659",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/02_eight_bin_comparison/bpm_8bins/naive_BPM_2011_2021_MG10_min20_Q8.png",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/02_eight_bin_comparison/bpm_8bins/naive_BPM_2011_2021_MG10_min20_Q8.png",
+    "sha256_before": "cb48fa0163a45de1e2af2e6fa920abe4ab60c3c69bed11223f4d75966061de47",
+    "sha256_after": "cb48fa0163a45de1e2af2e6fa920abe4ab60c3c69bed11223f4d75966061de47",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/05_canonical_EW_companion/build_ew.py",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/05_canonical_EW_companion/build_ew.py",
+    "sha256_before": "e547b24022674d5ce91ee3b822630457bd739df99f714fa7208b523fc117a80b",
+    "sha256_after": "b86bdf6e10ef2751f96e00860b6ba20b716a3d7f9859562705f8b6c5c3d03048",
+    "content_changed": true
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/05_canonical_EW_companion/provenance.json",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/05_canonical_EW_companion/provenance.json",
+    "sha256_before": "4dff2880cad2f1b89e8d6aeeff7c16bfff812f6d32a4933d0c17efbca0ac5ab9",
+    "sha256_after": "4dff2880cad2f1b89e8d6aeeff7c16bfff812f6d32a4933d0c17efbca0ac5ab9",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/05_canonical_EW_companion/EW16_bin_counts.csv",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/05_canonical_EW_companion/EW16_bin_counts.csv",
+    "sha256_before": "b5b4e2c2f62fc4b9940887a40f5abdd7db65db62a868a8b0109bdf644896494b",
+    "sha256_after": "b5b4e2c2f62fc4b9940887a40f5abdd7db65db62a868a8b0109bdf644896494b",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/05_canonical_EW_companion/Q16_EW16_player_membership.csv.gz",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/05_canonical_EW_companion/Q16_EW16_player_membership.csv.gz",
+    "sha256_before": "79241eda364cb8fda5bd8b5add0740355be407852e9ee77c99b098de413e3b86",
+    "sha256_after": "79241eda364cb8fda5bd8b5add0740355be407852e9ee77c99b098de413e3b86",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/05_canonical_EW_companion/naive_PPM_Q16_vs_EW16_same_scale.png",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/05_canonical_EW_companion/naive_PPM_Q16_vs_EW16_same_scale.png",
+    "sha256_before": "94ad40a55d7a44ca9a8e7d4dfec4ca64678d016d2b918fd7b4b779b6ecdc97db",
+    "sha256_after": "94ad40a55d7a44ca9a8e7d4dfec4ca64678d016d2b918fd7b4b779b6ecdc97db",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/05_canonical_EW_companion/validation.txt",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/05_canonical_EW_companion/validation.txt",
+    "sha256_before": "09e3395120a33afd16817b3f685382127992726e42c67209e95902b6eb949eff",
+    "sha256_after": "09e3395120a33afd16817b3f685382127992726e42c67209e95902b6eb949eff",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/05_canonical_EW_companion/README.md",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/05_canonical_EW_companion/README.md",
+    "sha256_before": "388e5804aa8f5f9ccbd782d57bbc1976c3b74db90e509606516f181d62e0bb90",
+    "sha256_after": "388e5804aa8f5f9ccbd782d57bbc1976c3b74db90e509606516f181d62e0bb90",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/05_canonical_EW_companion/naive_PPM_EW16_2009_2021.png",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/05_canonical_EW_companion/naive_PPM_EW16_2009_2021.png",
+    "sha256_before": "f9dd5d1db31ec485da6d14d544332ac79e0ebeec2b7f3150e438bfb3d16c20f8",
+    "sha256_after": "f9dd5d1db31ec485da6d14d544332ac79e0ebeec2b7f3150e438bfb3d16c20f8",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/05_canonical_EW_companion/naive_PPM_EW16_2009_2021.svg",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/05_canonical_EW_companion/naive_PPM_EW16_2009_2021.svg",
+    "sha256_before": "6da17433a94de0ec64457d4659de6347a04bef6caf66296f381b3ce6e21f2471",
+    "sha256_after": "6da17433a94de0ec64457d4659de6347a04bef6caf66296f381b3ce6e21f2471",
+    "content_changed": false
+  },
+  {
+    "old": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/Jazz_night.md",
+    "new": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/history/Original_Jazz_Night_Outline.md",
+    "sha256_before": "cb8c52b7470f5961b29ba57344dd31560f3d8b7b6a99a1ca41d2a374fa9513b7",
+    "sha256_after": "cb8c52b7470f5961b29ba57344dd31560f3d8b7b6a99a1ca41d2a374fa9513b7",
+    "content_changed": false
+  }
+]

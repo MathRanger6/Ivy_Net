@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-27",
+  "status": "ready for review, not locked",
+  "source_hashes": {
+    "canonical_player_membership.csv.gz": "a94cbc1b136eb924241bf3d93c56e44ff39aa18e5eabd3c3d13cccbcacaf598a",
+    "canonical_bin_counts.csv": "f702294aab219c2cf12756d7efd234a238e23bee10c47f774e3ff3339c73d156",
+    "observed_vs_topK_bin_counts.csv": "ca83f3e8a37dc1bfca232a7a5db905b79232ee3ffd710b92aaeede3c22a37b1b"
+  },
+  "N": 22795,
+  "K": 615,
+  "score": "S_i = A_i; within-season standardized PPM",
+  "selection": "Gibbs rule D; tier1_pool_assignment.choose_selected",
+  "n_replicates": 12000,
+  "seed_base": 20261027,
+  "t_sweep": [
+    0.08,
+    0.15,
+    0.25,
+    0.4,
+    0.7,
+    1.0,
+    1.5,
+    2.5,
+    5.0
+  ],
+  "t_featured_on_plot": [
+    0.25,
+    0.7,
+    2.5
+  ],
+  "model_fitted": false,
+  "mle_t_sel": null,
+  "scope": "Step 3 illustrative stochastic comparison; Step 4 likelihood fit not run"
+}

@@ -1,0 +1,10 @@
+PASS: JN-01 membership, bins, and observed counts unchanged.
+PASS: every replicate explicitly checked for exactly K distinct selections; aggregate total K*n_rep.
+PASS: negative scores have distinct positive weights; pairwise ratios and common-score-shift invariance checked.
+PASS: uniform scores give uniform weights; all-negative pool still fills K places.
+PASS: top-K matches JN-02 (bin 16 topK rate 0.4319).
+Cold t=0.08 bin-16 gibbs rate 0.4316 (should approach top-K).
+Hot t=5.0 bin-16 gibbs rate 0.0411 (should fall below observed 0.16).
+Each replicate selects exactly K=615 players.
+PASS: original and corrected player identities, scores, outcomes, top-K indicators and bins are identical; all nine temperatures, seeds, counts and source hashes match v1. Each temperature has total mean inclusions 615. Before/after table has 144 matched bin-temperature rows.
+PASS: legacy cold/underflow fallback and capacity cap inactive at all nine temperatures; corrected sampler retains the original weighted-choice algorithm.

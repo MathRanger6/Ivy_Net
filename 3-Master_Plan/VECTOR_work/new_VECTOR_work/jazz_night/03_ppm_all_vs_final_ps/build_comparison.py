@@ -8,7 +8,7 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib.ticker import PercentFormatter
 ROOT=Path('/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE')
-JAZZ=ROOT/'3-Master_Plan/re_entry/jazz_night'
+JAZZ=ROOT/'3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night'
 BASE=ROOT/'3-Master_Plan/VECTOR_work/new_VECTOR_work/manuscript_figures/section_4_5/roster_pressure_comparison/cache'
 OUT=Path(__file__).resolve().parent
 KEYS=['athlete_id','team_id','season']

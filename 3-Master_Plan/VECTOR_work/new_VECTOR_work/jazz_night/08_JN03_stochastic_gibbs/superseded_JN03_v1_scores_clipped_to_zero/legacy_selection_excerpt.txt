@@ -1,0 +1,91 @@
+Source: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/sports/tier1_pool_assignment.py
+SHA256: 8aa1545a1a84d3b6485b9172f70ef8d5a504bc0c28de5eb673db7698ded2b6d0
+Captured at correction, 27 October 2026. Shared source left unchanged.
+
+def choose_selected(
+    rng: np.random.Generator,
+    weights: np.ndarray,
+    k: int,
+    choice: str,
+    *,
+    temperature: float = 1.0,
+) -> np.ndarray:
+    """Boolean mask of length n: True = selected (drafted / advanced).
+
+    What this *is*: the SELECT step. Takes the score vector S_i (= weights) and
+    picks exactly who gets the slot. Score ≠ select — ranking first, then this.
+
+    choice (winner rule)
+      "A" — sample K players without replacement ∝ weights (stochastic)
+      "B" — independent Bernoulli with p ∝ weight (stochastic; expected ~K)
+      "C" — deterministic top K by weight  ← Pass A/B default (winner rule)
+      "D" — Gibbs: w_i ∝ exp(S_i/t), then K draws without replacement (PD20)
+
+    Args
+      weights — S_i from selection_weights (ranking scores; may be negative).
+      k       — how many players get selected (N_SELECTED in config).
+      choice  — "A" / "B" / "C" / "D" as above.
+      temperature — t for rule "D" only; ignored for A/B/C.
+    """
+    n = len(weights)
+    w = np.asarray(weights, dtype=float)
+    w = np.where(np.isfinite(w), w, 0.0)
+    w = np.clip(w, 0.0, None)
+    # n_positive: how many players have a usable positive score (can be picked).
+    n_positive = int(np.count_nonzero(w > 0))
+    if n_positive == 0:
+        return np.zeros(n, dtype=bool)
+    # k_eff: cannot select more people than have positive weight.
+    k_eff = min(int(k), n_positive)
+    if choice == "A":
+        # Stochastic proportional sample without replacement.
+        total = float(w.sum())
+        if total <= 0:
+            p = np.full(n, 1.0 / n)
+        else:
+            p = w / total
+        idx = rng.choice(n, size=k_eff, replace=False, p=p)
+        out = np.zeros(n, dtype=bool)
+        out[idx] = True
+        return out
+    if choice == "B":
+        # Independent coin flips; expected number selected ≈ k_eff.
+        total = float(w.sum())
+        p = w / total if total > 0 else np.full(n, 1.0 / n)
+        return rng.uniform(size=n) < np.minimum(p * k_eff, 1.0)
+    if choice == "C":
+        # Deterministic: the K highest scores win (ties broken by mergesort stability).
+        idx = np.argsort(w, kind="mergesort")[-k_eff:]
+        out = np.zeros(n, dtype=bool)
+        out[idx] = True
+        return out
+    if choice == "D":
+        # PD20 Gibbs SELECT: exp(S/t) weights, then same K-draw skeleton as "A".
+        t = float(temperature)
+        if not np.isfinite(t) or t <= 0:
+            raise ValueError(f"rule D requires positive temperature, got {temperature!r}")
+        if t <= GIBBS_T_MIN:
+            idx = np.argsort(w, kind="mergesort")[-k_eff:]
+            out = np.zeros(n, dtype=bool)
+            out[idx] = True
+            return out
+        g = gibbs_select_weights(w, t)
+        total = float(g.sum())
+        if total <= 0:
+            return np.zeros(n, dtype=bool)
+        p = g / total
+        # Very cold t: Gibbs weights collapse numerically → use top-K (≡ rule C).
+        max_p = float(np.max(p))
+        n_positive_g = int(np.count_nonzero(g > 0))
+        if max_p > 1.0 - 1e-12 or n_positive_g < k_eff:
+            idx = np.argsort(w, kind="mergesort")[-k_eff:]
+            out = np.zeros(n, dtype=bool)
+            out[idx] = True
+            return out
+        k_g = min(k_eff, n_positive_g)
+        idx = rng.choice(n, size=k_g, replace=False, p=p)
+        out = np.zeros(n, dtype=bool)
+        out[idx] = True
+        return out
+    raise ValueError(f"unknown winner_selection {choice!r}")
+

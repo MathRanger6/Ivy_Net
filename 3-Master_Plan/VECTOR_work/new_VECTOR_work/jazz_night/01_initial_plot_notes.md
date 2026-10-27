@@ -1,7 +1,7 @@
 # Jazz night: figures and evidence record
 
 **Started:** 27 October 2026.  
-**Companion outline:** [Jazz_night.md](../Jazz_night.md).
+**Companion outline:** [Jazz_night.md](history/Original_Jazz_Night_Outline.md).
 
 ## Step 1: the empirical naïve plot
 

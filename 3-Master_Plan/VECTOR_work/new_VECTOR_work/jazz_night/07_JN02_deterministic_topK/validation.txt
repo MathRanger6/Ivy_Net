@@ -1,0 +1,1 @@
+PASS: exact locked membership, bins, observed counts and rates; 22,795 unique players; 615 observed outcomes and exactly 615 benchmark selections; ranking uses only performance/source order; all selected in bin 16; 228 observed in bin 16 and 387 below; all values and observed intervals within 0–50%.

@@ -1,0 +1,31 @@
+{
+  "date": "2026-10-27",
+  "status": "ready for review, not locked",
+  "source_hashes": {
+    "canonical_player_membership.csv.gz": "a94cbc1b136eb924241bf3d93c56e44ff39aa18e5eabd3c3d13cccbcacaf598a",
+    "canonical_bin_counts.csv": "f702294aab219c2cf12756d7efd234a238e23bee10c47f774e3ff3339c73d156"
+  },
+  "N": 22795,
+  "K": 615,
+  "score": "S_i=A_i; A_i=within-season standardized PPM",
+  "selection": "one pooled descriptive ranking, descending performance, top 615; stable source-order tie break, never outcome-based",
+  "years": [
+    2009,
+    2021
+  ],
+  "binning": "existing locked Q16 memberships retained exactly",
+  "boundary_selected_perf": 2.1748223353298197,
+  "boundary_unselected_perf": 2.1745060523583257,
+  "tie_at_cutoff": false,
+  "top_bin_observed": 228,
+  "top_bin_benchmark": 615,
+  "top_bin_n": 1424,
+  "observed_below_top_bin": 387,
+  "model_fitted": false,
+  "simulated": false,
+  "scope": "pooled descriptive benchmark, not annual selection pools; not proof of intrinsic randomness",
+  "y_limits": [
+    0,
+    0.5
+  ]
+}

@@ -1,0 +1,5 @@
+PASS: JN-01 membership and observed counts unchanged.
+PASS: top-K matches JN-02 (bin 16 topK rate 0.4319).
+Cold t=0.08 bin-16 gibbs rate 0.4316 (should approach top-K).
+Hot t=5.0 bin-16 gibbs rate 0.0383 (should fall below observed 0.16).
+Each replicate selects exactly K=615 players.

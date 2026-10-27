@@ -2,7 +2,7 @@
 
 **Last synced:** 27 October 2026  
 **Purpose:** This is the standalone outline, with figures, around which Charles and his collaborator will rebuild or edit the manuscript.  
-**Current step:** Step 1 — JN-01 (quantile starter) is LOCKED. Review the new equal-width companion for an early discussion of binning. Subsequent steps remain proposed; no model comparison or fit below has yet been completed for this progression.
+**Current step:** Step 3 — corrected JN-03 version 2 uses the original, unclipped PPM scores. Ready for review, not locked. JN-01 and JN-02 remain LOCKED. The clipping correction and before/after plots are recorded in walkthrough Section 14. No temperature fit has been run.
 
 ## How we will use this document
 
@@ -68,31 +68,83 @@ Players with higher measured performance are more likely to be drafted. Figure J
 
 **Evidence and lock record:** All 22,795 players and 615 drafted labels are accounted for, and Q assignments/counts reproduce the locked source. Exact EW edges, counts, memberships and validation are saved in `05_canonical_EW_companion/`. Charles’s acceptance of this companion is pending.
 
-## Step 2. Build the performance-only benchmark
+## Step 2. Test the performance-only deterministic benchmark
 
-**Status:** Proposed story step; figure not yet built or locked.
+**Status:** Figure JN-02, version 1 — **LOCKED by Charles on 27 October 2026** (approved for the progression). PPM remains the working metric.
 
-**Purpose:** Translate the intuition that better performers should be selected into a simple, explicit rule. Assign the score $S_i=A_i$, then rank candidates and select the top $K$. SCORE and SELECT are separate operations.
+### The question
 
-**Figure to build:** The observed relationship from Step 1 alongside the deterministic benchmark, summarized using the same declared bins and outcomes. Keep observed data visually consistent and distinguish the model prediction clearly.
+What would the observed relationship look like if measured performance alone determined who received the available opportunities?
 
-**What we must specify before calculation:** Who competes in each selection pool, how the outcome is timed, and what $K$ represents. The Step 1 pooled ever-drafted fraction does not establish an annual draft quota. A descriptive pooled benchmark is possible if explicitly defined as such; it must not be presented as a reconstructed annual NBA draft process.
+### The benchmark we actually calculated
 
-**Question for the comparison:** What does strict performance ranking reproduce, and what does it miss? The observed plot alone does not demonstrate the answer. In particular, combining selection pools with different deterministic thresholds can smooth the aggregate relationship.
+Use the same 22,795 players, 2009–2021 records, standardized PPM values and 16 quantile-bin memberships as JN-01. Treat this historical sample as **one pooled descriptive comparison**, with $K=615$ selections, matching the number of ever-drafted players in the sample. Thus $K/N=2.70\%$ describes this pooled allocation; it is not an annual NBA draft quota.
 
-**Transition if supported:** Higher performance favors selection, but strict performance ranking does not adequately describe the observed selections.
+First, **SCORE** assigns $S_i=A_i$. Then **SELECT** ranks those scores and selects the highest 615. The observed outcome supplies the total number of selections, but never determines which players the benchmark selects. A fixed source-order rule would resolve exact performance ties; no tie occurs at the selection boundary in this calculation. No population was simulated and no parameter was fitted.
+
+### The figure
+
+![JN-02: Observed PPM draft rates compared with deterministic top-K selection](07_JN02_deterministic_topK/JN02_PPM_observed_vs_topK_Q16.png)
+
+**Figure JN-02.** Blue bars show observed ever-drafted proportions. Orange bars show the proportions selected by the pooled deterministic top-K benchmark. Both use the identical players and quantile bins, with 615 positive outcomes/selections in total. Only observed rates carry pointwise 95% Wilson intervals, without college-clustering adjustment. The deterministic benchmark is an exact calculation conditional on the declared scores and capacity.
+
+### What the comparison shows
+
+All 615 benchmark selections fall within the highest quantile bin, which contains 1,424 players. Its benchmark selected fraction is therefore **43.2%**, compared with **228 of 1,424 (16.0%) actually ever drafted**. The benchmark selects nobody from bins 1–15, whereas **387 actually drafted players occur in those bins**.
+
+The benchmark assigns each individual a binary selection outcome. The orange bar’s 43.2% does not mean each player has a 43.2% chance: it is the fraction selected within a bin that straddles the deterministic cutoff. The PPM cutoff lies between standardized values 2.174506 and 2.174822, wholly inside bin 16.
+
+This comparison uses a **0–50% vertical scale** to display both series fully. The observed blue bar values and counts are unchanged from JN-01. Its accepted standalone 0–20% figure remains intact.
+
+### Proposed manuscript text
+
+Strict ranking by measured performance concentrates selection more strongly at the upper end than the observed outcomes do. Selecting the 615 highest-scoring players in this pooled sample places every selection in the highest performance bin. In contrast, only 228 of the 615 observed drafted players fall in that bin; the other 387 are distributed across lower-performance bins. Thus, although higher PPM is associated with a higher draft rate, this pooled performance-only deterministic benchmark does not reproduce the observed distribution of drafted players.
+
+### What this establishes, and the transition
+
+The demonstrated failure belongs to **this score and this pooled selection rule**. It does not establish that real decisions are intrinsically random, or rule out deterministic models with additional information or different annual candidate pools. Unmeasured player characteristics, imperfect performance measurement and differences between actual selection pools can also contribute to the mismatch.
+
+The next model step is to allow uncertainty in **SELECT** while keeping **SCORE** at $S_i=A_i$: higher-scoring players can be favored without requiring that every selection come from the highest scores. We will compare that rule against these same observed bars. This figure motivates the comparison; it does not yet show that the stochastic rule fits adequately.
+
+### Evidence and review record
+
+[The JN-02 folder](07_JN02_deterministic_topK/README.md) contains the PNG and scalable SVG, exact observed/benchmark bin counts, player-level membership and selection indicators, source fingerprints, boundary diagnostics and validation. The population, observed outcomes and bins reproduce JN-01 exactly.
+
+**Lock record:** Charles accepted JN-02 for the progression on 27 October 2026.
 
 ## Step 3. Introduce uncertainty in selection
 
-**Status:** Proposed story step; figure not yet built or locked.
+**Status:** Figure JN-03, **corrected version 2 — ready for review, not locked**. Rebuilt 27 October 2026 with original, unclipped scores. The superseded implementation and correction are documented in [walkthrough Section 14](Jazz_Night_Experimental_Walkthrough.md#14-we-introduced-stochastic-selection-then-corrected-a-score-clipping-mistake).
 
-**Purpose:** Address a demonstrated mismatch in Step 2 by allowing higher scores to increase the chance of selection without guaranteeing the ordering of winners. Keep the performance-only score and introduce Gibbs-weighted selection without replacement. Selection temperature controls how strongly score differences matter.
+**Purpose:** Address the Step 2 mismatch by allowing higher scores to increase the chance of selection without guaranteeing that every winner comes from the top of the list. Keep **SCORE** at $S_i=A_i$, including negative standardized PPM values. **SELECT** assigns positive weights $e^{S_i/t_{\mathrm{sel}}}$ and samples $K=615$ distinct candidates without replacement from the same 22,795-player pool.
 
-**Figure to build:** Observed rates, the deterministic benchmark, and stochastic selection frequencies on the same axes and the same declared bins. We can repeatedly select from the observed candidates to estimate model inclusion frequencies; we do not need to invent a new player population for this first comparison.
+### The figure
 
-**Question for the comparison:** Does the probabilistic rule better describe the observed relationship, and what remains unexplained? The exponential Gibbs weight is not itself the final probability of receiving one of $K$ places.
+![Corrected JN-03 v2: Observed, top-K, and Gibbs inclusion frequencies with unclipped scores](08_JN03_stochastic_gibbs/JN03_PPM_observed_topK_gibbs_Q16.png)
 
-**Transition if supported:** Having introduced selection uncertainty, determine how much is supported by the observations.
+**Figure JN-03, corrected v2.** Blue bars: observed ever-drafted rates (JN-01). Orange bars: deterministic top-K fractions (JN-02). Colored lines: Monte Carlo estimates of final inclusion probabilities at illustrative temperatures 0.25, 0.7 and 2.5. Each temperature uses 12,000 repetitions, each selecting exactly 615 distinct players. Population, source records, bins, temperatures, seeds, replication counts and 0–50% scale are unchanged from version 1. Only the unintended zero-clipping of scores was removed.
+
+### What the corrected comparison shows
+
+At temperature 0.25, the highest bin has an estimated inclusion rate of **39.54%**, still close to the deterministic 43.19%. At temperature 0.7, its rate is **21.24%**, while bin 15 receives **6.82%** and bin 1 receives **0.056%**. Increasing temperature to 2.5 reduces the highest-bin rate to **6.00%** and raises the lowest-bin rate to **1.14%**. The finite-temperature curves still favor higher scores; equal inclusion at $K/N\approx2.70\%$ is the infinite-temperature limit, not a claim that temperature 2.5 has already reached it.
+
+The lines estimate final inclusion across complete selections of 615 players. They are not the per-draw probabilities or the exponential weights themselves. None of these temperatures has been fitted. In particular, the corrected temperature-0.7 curve still differs from the observed 16.0% highest-bin rate and the shape in the other bins.
+
+### Proposed manuscript text
+
+Allowing uncertainty in selection distributes opportunities beyond the highest-scoring candidates while preserving an advantage for stronger performance. With the scores fixed, increasing selection temperature reduces the concentration of selections in the highest performance bin and increases inclusion at lower scores. The illustrative curves show how this mechanism changes the predicted relationship; they do not establish which temperature, if any, adequately describes the observed outcomes. That requires a likelihood consistent with the selection rule and the observations.
+
+### Correction record
+
+Version 1 inadvertently used a legacy routine that changed negative scores to zero before calculating Gibbs weights. It therefore simulated weights proportional to $e^{\max(S_i,0)/t_{\mathrm{sel}}}$ rather than the intended $e^{S_i/t_{\mathrm{sel}}}$. Version 2 preserves the original scores. The correction is local to JN-03; other project simulations and the shared legacy routine were not changed. The walkthrough contains both plots and the full explanation, so this progression can remain focused on the corrected model story.
+
+### Transition to Step 4
+
+**How much selection uncertainty is consistent with the observed outcomes when $S_i=A_i$?** Estimate temperature using a likelihood that matches the defined pool and the observed unordered selection outcomes, rather than choosing it by visual fit alone. This remains a pooled descriptive comparison; annual NBA draft pools have not been reconstructed.
+
+### Evidence and review record
+
+[The current JN-03 folder](08_JN03_stochastic_gibbs/README.md) holds the corrected figure, all nine temperature results, player inclusion estimates, before/after bin comparisons, source fingerprints and validation. Every repetition was checked for exactly 615 distinct selections; original scores, identities, outcomes and bins match version 1. Negative-score weight ordering and common-score-shift invariance were also checked. **Next action: Charles reviews corrected JN-03 before lock. Step 4 fitting has not begun.**
 
 ## Step 4. Estimate the performance-only selection temperature
 
@@ -147,3 +199,11 @@ For now, prioritize plots that make the scientific point clear. Before final man
 **27 October 2026:** Charles selected the historical canonical naïve plot as the starting point to reproduce, and requested this standalone progression with figures that can be reviewed and locked. JN-01 version 1 reproduces all 16 canonical data bins in the new visual format. At that point its presentation was ready for review; the subsequent acceptance is recorded below. The manuscript remains unchanged.
 
 **27 October 2026 — first lock:** Charles accepted JN-01 version 1 and requested an EW companion. JN-01 is now LOCKED. The EW16 companion uses the identical population and outcomes and is ready for review; an additional common-scale Q/EW display supports the early binning discussion. No source data or accepted Q16 image was changed.
+
+**27 October 2026 — JN-02 built:** Charles chose to continue with PPM and authorized the pooled deterministic top-K comparison. JN-02 is ready for review, not locked. The same 615 total selections are concentrated entirely in bin 16 under top-K; the data contain 228 drafted players there and 387 below. The expanded 0–50% comparison scale leaves JN-01 unchanged. BPM remains a walkthrough-only experiment. No stochastic model or fit was run.
+
+**27 October 2026 — JN-02 locked; JN-03 built:** Charles accepted JN-02 for the progression. JN-03 adds Gibbs rule D inclusion frequencies (illustrative $t_{\mathrm{sel}}$) on the same cohort and bins. Ready for review; no MLE.
+
+**27 October 2026 — JN-03 corrected to version 2:** Charles authorized removal of unintended zero-clipping of scores. All nine temperatures were rerun with the same cohort, bins, K, repetition counts and seeds. Version 1 is clearly marked superseded and preserved; the walkthrough shows both plots and explains the changes. JN-03 v2 is ready for review, not locked. No fit was run.
+
+**27 October 2026 — manuscript housekeeping:** This progression and all Jazz Night figures now live in `new_VECTOR_work/jazz_night`. Current scientific content, results and lock decisions are unchanged. The [walkthrough](Jazz_Night_Experimental_Walkthrough.md) records the move in Section 15.

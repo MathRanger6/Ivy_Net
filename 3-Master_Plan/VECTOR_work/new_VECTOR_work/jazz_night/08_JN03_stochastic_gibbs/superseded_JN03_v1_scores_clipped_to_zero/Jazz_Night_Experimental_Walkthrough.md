@@ -2,7 +2,7 @@
 
 **Last synced:** 27 October 2026 — canonical starter reproduced; standalone progression created  
 **For:** Charles — a running record to read alongside the figures and return to without retracing the conversation.  
-**Current position:** JN-01 remains the locked PPM quantile starter, with its equal-width companion recorded in Section 11. Section 12 adds BPM versions of both 16-bin plots for exploration in this walkthrough only. The JN progression and locked PPM figures are unchanged.
+**Current position:** Charles chose to continue with PPM. Section 13 records the first deterministic top-K comparison, now JN-02 in the progression and ready for review. JN-01 remains locked; BPM remains a documented side comparison.
 
 This document is the chronological record of the Jazz night experiments. It includes the plots themselves, not just a list of filenames. The separate [Jazz night manuscript outline](../Jazz_night.md) records the scientific story we intend to build. Neither document is the manuscript, and the experiments below have not rewritten it.
 
@@ -339,3 +339,38 @@ The [BPM comparison folder](06_BPM16_walkthrough_comparison/README.md) contains 
 
 
 **Display clarification (27 October 2026):** At Charles’s request, the BPM plots now lead with the years actually used, **2011–2021**, and explicitly annotate **“BPM unavailable for 2009–2010.”** The labels also identify the 514 missing-BPM final records within 2011–2021. The plotted data, rates and counts are unchanged.
+
+
+## 13. We returned to PPM and tested strict performance ranking
+
+**Added: 27 October 2026.** Charles chose to continue with PPM and asked for the next plot in the JN progression: a direct comparison showing what deterministic top-K selection misses.
+
+### What we wanted to learn
+
+The starter shows an increasing observed draft rate with own performance. We asked whether simply selecting the highest-scoring players could reproduce that distribution. We deliberately kept the source population and bins fixed, so the comparison changes the selection rule rather than the empirical target.
+
+### What we did
+
+We used all 22,795 players in the locked 2009–2021 PPM starter, retaining its final eligible records, MG10/min20 filters, within-season standardized PPM and 16 quantile-bin memberships. SCORE sets each score equal to standardized PPM. SELECT ranks the scores and chooses the highest 615, matching the observed count of ever-drafted players.
+
+This is one pooled descriptive benchmark across the historical sample. We did not reconstruct annual NBA draft pools or treat 2.70% as an annual quota. The observed labels determine the total capacity only, never the ranking. Stable source order breaks exact score ties if needed, but the 615th and 616th scores differ here. No simulation, likelihood fit or significance test was performed.
+
+### Here is what we got
+
+![JN-02: Same PPM players and bins, observed outcomes versus deterministic top-K](07_JN02_deterministic_topK/JN02_PPM_observed_vs_topK_Q16.png)
+
+All 615 top-K selections lie in the highest bin, containing 1,424 players: **43.2% selected within that bin**, with zero benchmark selections in every lower bin. The observed highest-bin rate is **228/1,424 = 16.0%**. The other **387 actually drafted players are below that highest bin**. Those observed counts match the locked starter exactly.
+
+The orange rate is a binned fraction, not stochastic individual selection: each benchmark player is either selected or not. The selection threshold falls inside bin 16, between standardized PPM values 2.174506 and 2.174822. Even a deterministic rule can produce an intermediate bar height when a bin spans its cutoff.
+
+### Why the display changed
+
+Both series use a common 0–50% vertical axis so that the 43.2% benchmark bar is fully visible. JN-01’s locked standalone figure remains at 0–20%; its observed values are unchanged here. We retained the observed blue color and added orange for the benchmark, along with a third count row showing benchmark selections. Observed error bars are pointwise 95% Wilson intervals without college-clustering adjustment; the fixed benchmark needs no simulation interval.
+
+### What we learned and what comes next
+
+Strict ranking by PPM in this pooled sample concentrates selections more strongly at the upper end than the observed outcomes. That gives us a specific failure for the next model step to address. It does not prove intrinsic randomness or invalidate every deterministic model: actual pools, omitted selection criteria and measurement limitations could also explain discrepancies.
+
+We will next consider uncertainty in SELECT while retaining the same performance-only SCORE. JN-02 is **ready for review, not yet locked**; no stochastic comparison has been run. The experiment and its proposed manuscript placement are now in Step 2 of [JN_progression.md](JN_progression.md).
+
+Reproduction files are in [07_JN02_deterministic_topK](07_JN02_deterministic_topK/README.md), including exact bin counts, player memberships and top-K indicators, source hashes and validation. This is our current return point; the BPM exploration remains in Section 12.
