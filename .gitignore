@@ -175,3 +175,6 @@ hierarchy_data/**/*.zip
 *.synctex.gz
 *.pdf
 
+# Zotero exports for the introduction: commit the .bib, not attached papers or web snapshots
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/*/files/
+
