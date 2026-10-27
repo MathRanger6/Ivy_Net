@@ -1,0 +1,63 @@
+{
+  "date": "2026-10-27",
+  "question": "Only change final-PS to all-PS, keep PPM, filters and 8 bins",
+  "source_cache_hashes": {
+    "all": "896037cb40bc1dd1c6743806a86484b092e9c1d8de206e767429876c3689f838",
+    "dft": "9aeffa9de5a03e36bffa0a790c54a4c88cd596aaf6b1fe26c50682cfe74b30a9",
+    "last": "7053a9e5fe03c0e3a0ed32fab636c123d562b237b1b36d1c5be2a8784e3206fd"
+  },
+  "source_cache": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/manuscript_figures/section_4_5/roster_pressure_comparison/cache",
+  "script_sha256": "b10368fc4ad7db8e9c5748c4dc19b82ac2e21e16a860e4cd3da5b4cda4967fad",
+  "summary": {
+    "final_ps": {
+      "records": 19803,
+      "unique_players": 19803,
+      "positive_records": 520,
+      "unique_drafted_players": 520,
+      "rate": 0.0262586476796445,
+      "unique_player_seasons": 19803
+    },
+    "all_ps": {
+      "records": 46306,
+      "unique_players": 19803,
+      "positive_records": 1133,
+      "unique_drafted_players": 520,
+      "rate": 0.024467671576037662,
+      "unique_player_seasons": 46233
+    }
+  },
+  "settings": {
+    "seasons": [
+      2011,
+      2021
+    ],
+    "min_total_season_minutes": 20,
+    "min_team_games_exclusive": 10,
+    "colleges": "all",
+    "performance": "PPM standardized with sample SD on full eligible within-season roster, same z-scores for both views",
+    "outcome": "inherited ever-drafted lookup",
+    "EW_edges": [
+      -2.7193730617502085,
+      -1.6151479160174267,
+      -0.5109227702846448,
+      0.593302375448137,
+      1.6975275211809189,
+      2.8017526669137007,
+      3.9059778126464826,
+      5.010202958379264,
+      6.114428104112047
+    ],
+    "Q": "rank-first equal counts separately within each cohort; source-order tie allocation",
+    "display_y_limits": [
+      0,
+      0.35
+    ],
+    "uncertainty": "pointwise Wilson row-independence approximation; does not account for repeated players or college clustering"
+  },
+  "multi_team_player_seasons": 73,
+  "multi_team_players": 71,
+  "multiple_team_interpretation": "Inherited records retained; do not assume transfers or data errors without further audit",
+  "no_model_fitting": true,
+  "no_significance_test": true,
+  "baseline_preserved": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/02_eight_bin_comparison"
+}

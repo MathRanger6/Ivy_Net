@@ -1,0 +1,1 @@
+PASS: frozen source hashes; same unique-player set and ever-drafted labels; unique athlete/team/season keys; same season z-scores; final rows in latest eligible season; exact prior final-PS bin counts/rates/intervals; identical EW boundaries; Q counts differ by at most one; every record and positive accounted for.

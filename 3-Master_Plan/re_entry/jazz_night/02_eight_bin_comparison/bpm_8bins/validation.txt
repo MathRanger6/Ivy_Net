@@ -1,0 +1,1 @@
+PASS: frozen cache fingerprints; reconstructed BPM standardization; candidate identities and outcomes; unique athletes; 2011–2021 and season minutes ≥20; each method totals 19289 and 510; quantile counts differ by at most one.
