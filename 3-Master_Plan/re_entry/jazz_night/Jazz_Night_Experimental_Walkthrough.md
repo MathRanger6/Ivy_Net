@@ -2,7 +2,7 @@
 
 **Last synced:** 27 October 2026 — canonical starter reproduced; standalone progression created  
 **For:** Charles — a running record to read alongside the figures and return to without retracing the conversation.  
-**Current position:** Charles accepted and locked JN-01, the canonical quantile starter. Section 11 adds the requested equal-width companion on the identical data. The [JN progression](JN_progression.md) records the lock and the companion awaiting review.
+**Current position:** JN-01 remains the locked PPM quantile starter, with its equal-width companion recorded in Section 11. Section 12 adds BPM versions of both 16-bin plots for exploration in this walkthrough only. The JN progression and locked PPM figures are unchanged.
 
 This document is the chronological record of the Jazz night experiments. It includes the plots themselves, not just a list of filenames. The separate [Jazz night manuscript outline](../Jazz_night.md) records the scientific story we intend to build. Neither document is the manuscript, and the experiments below have not rewritten it.
 
@@ -284,3 +284,58 @@ The new display uses 0–50% so all observed rates are shown; intervals continui
 **What this adds to the story:** Q bins hold approximate player counts fixed; EW bins hold numerical performance width fixed. They describe the same observations with different resolutions. Bin numbers are not interchangeable between them. The purpose here is to explain the choice, not to select a binning because it guarantees a smooth curve.
 
 **Next action:** Review the EW companion in [JN_progression.md](JN_progression.md), then continue the model progression. Counts, exact boundaries, player memberships and validation are preserved in `05_canonical_EW_companion/`.
+
+
+## 12. We checked BPM in the same standardized 16-bin format
+
+**Added: 27 October 2026. Scope: walkthrough only.** Charles asked to see the same quantile and equal-width plots using BPM, without moving this experiment into the manuscript progression.
+
+### What we wanted to learn
+
+We had established a reusable visual format for the PPM starter. We now wanted to see how the observed own-performance relationship looks when performance is BPM, standardized within season. This is an exploratory comparison, not a decision to replace the PPM starter or to fit a model.
+
+### What stayed fixed, and what had to change
+
+We retained all eligible colleges, MG10 (more than 10 captured team-season games), at least 20 total season minutes, one final eligible record per player, and the ever-drafted outcome. We requested the same 2009–2021 source window and used 16 bins in both versions. As before, the final record is the latest eligible season and, when necessary, the highest-minutes team record in that season.
+
+**BPM is unavailable for every 2009–2010 record in this frozen source.** It is also missing from some later final records. Starting from the canonical PPM sample of 22,795 players and 615 ever drafted, the BPM version includes **19,289 players and 510 ever drafted (2.64%)**, with actual coverage **2011–2021**. The 3,506 excluded final records comprise:
+
+- 2,992 players, including 95 ever drafted, whose final eligible season is 2009 or 2010.
+- 514 players, including 10 ever drafted, whose final eligible season is 2011–2021 but lacks BPM.
+
+We did not substitute an earlier season with BPM for a missing final record. Within-season BPM standardization uses the mean and sample standard deviation across all eligible finite-BPM roster records, before taking the final-record subset. The resulting players and standardized performance values reproduce our earlier Jazz BPM cohort exactly.
+
+Consequently, comparison against the locked 2009–2021 PPM plot changes both the metric and its available population. It does not isolate the effect of changing the metric alone.
+
+### Here is the quantile view
+
+![BPM own performance and ever-drafted proportion in 16 equal-count bins](06_BPM16_walkthrough_comparison/naive_BPM_Q16_available_2011_2021.png)
+
+Each bin contains 1,205 or 1,206 players. Quantile bins split ties in stable source order when necessary; the outcome is not used to allocate ties. The highest bin has **370 drafted out of 1,205 players (30.7%)**. The preceding bins have **93 of 1,206 (7.7%)** and **26 of 1,205 (2.2%)**. The strong rise at the upper end is evident, although the entire series is not strictly monotonic: bin 8 contains one drafted player, while bins 9 and 10 contain none.
+
+The highest PPM quantile bin was 228 of 1,424 (16.0%). The higher BPM endpoint is worth recording, but it does not by itself establish that BPM is the better predictor: the cohort and the people occupying the highest bins differ.
+
+### Here is the equal-width view
+
+![BPM own performance and ever-drafted proportion in 16 equal-width bins](06_BPM16_walkthrough_comparison/naive_BPM_EW16_available_2011_2021.png)
+
+The full standardized BPM range, approximately −12.75 to 8.55, is retained without compression or removal of the tails. Sixteen equal intervals therefore span about 1.331 standardized BPM units each. Bins are displayed at equally spaced categorical positions in both plots; equal-count bins do not represent equal numerical performance intervals.
+
+The EW view reaches **244 drafted out of 522 players (46.7%) in bin 12**. The next bin contains **7 of 28 (25.0%)**. Bins 14–16 have only **3, 1, and 1 players**, respectively, with no drafted players. Those far-right zeros do not establish that extremely high BPM reduces draft prospects. Bin 2 is empty and has no estimated rate.
+
+### Comparing the two binning choices directly
+
+![The BPM quantile and equal-width plots on the same vertical scale](06_BPM16_walkthrough_comparison/naive_BPM_Q16_vs_EW16_same_scale.png)
+
+Both BPM plots use a **0–50% vertical scale**, matching the PPM equal-width companion and the paired PPM display. The locked standalone PPM quantile plot retains its original 0–20% scale. All observed BPM rates fit within the new display; arrows identify uncertainty intervals extending above 50%. Full interval endpoints remain in the saved bin tables. Intervals are pointwise 95% Wilson intervals, without a college-clustering adjustment.
+
+The quantile view concentrates enough players in each bin to show the broad relationship clearly. The equal-width view reveals how unevenly players occupy the numerical BPM range and why the sparse extremes need care. Neither binning choice changes the underlying players or outcomes within this BPM comparison.
+
+### What we keep, and where we return
+
+**This is a documented side comparison, not a change to the manuscript progression.** We have not changed JN_progression.md, the JN-01 lock, the accepted PPM figures, the source data, or the notebooks. No fitting or significance tests were run. Our return point remains the PPM starter and the next step in the model story; any decision to replace that starter should be made explicitly.
+
+The [BPM comparison folder](06_BPM16_walkthrough_comparison/README.md) contains the individual PNG/SVG figures, paired PNG, exact bin counts and intervals, player membership, missing-BPM records, season coverage, source fingerprints, and validation record. This preserves both what we saw and how to reproduce it.
+
+
+**Display clarification (27 October 2026):** At Charles’s request, the BPM plots now lead with the years actually used, **2011–2021**, and explicitly annotate **“BPM unavailable for 2009–2010.”** The labels also identify the 514 missing-BPM final records within 2011–2021. The plotted data, rates and counts are unchanged.

@@ -1,0 +1,48 @@
+{
+  "date": "2026-10-27",
+  "metric": "BPM",
+  "requested_window": [
+    2009,
+    2021
+  ],
+  "available_window": [
+    2011,
+    2021
+  ],
+  "n": 19289,
+  "ever_drafted": 510,
+  "excluded_missing_BPM": 3506,
+  "excluded_drafted": 105,
+  "source_hashes": {
+    "all": "896037cb40bc1dd1c6743806a86484b092e9c1d8de206e767429876c3689f838",
+    "dft": "9aeffa9de5a03e36bffa0a790c54a4c88cd596aaf6b1fe26c50682cfe74b30a9",
+    "last": "7053a9e5fe03c0e3a0ed32fab636c123d562b237b1b36d1c5be2a8784e3206fd"
+  },
+  "source_directory": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/manuscript_figures/section_4_5/roster_pressure_comparison/cache",
+  "standardization": "sample SD (ddof=1) within season over eligible finite-BPM all-PS roster; before final-PS subset",
+  "final_records": "retain canonical selected final record; exclude missing BPM, never substitute earlier season",
+  "Q_rule": "floor((rank(method=first)-1)*16/N)+1; source-order ties split; outcomes never used",
+  "EW_edges": [
+    -12.745072078098085,
+    -11.414187629854487,
+    -10.083303181610889,
+    -8.752418733367291,
+    -7.421534285123693,
+    -6.090649836880095,
+    -4.759765388636497,
+    -3.428880940392899,
+    -2.097996492149301,
+    -0.7671120439057031,
+    0.5637724043378949,
+    1.8946568525814929,
+    3.225541300825091,
+    4.556425749068689,
+    5.887310197312287,
+    7.218194645555885,
+    8.549079093799484
+  ],
+  "uncertainty": "pointwise Wilson 95%, no college-clustering adjustment",
+  "display_ymax": 0.5,
+  "comparison": "available-data comparison, not matched-player metric-only test",
+  "scope": "walkthrough only; locked PPM figures and JN_progression unchanged"
+}
