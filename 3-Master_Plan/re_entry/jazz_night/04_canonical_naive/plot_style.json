@@ -1,0 +1,14 @@
+{
+  "title": "Higher performance is associated with a higher draft rate",
+  "figure_size_inches": [16, 9],
+  "dpi": 240,
+  "observed_color": "#347da3",
+  "y_limits": [0, 0.20],
+  "y_tick_step": 0.025,
+  "font_family": "DejaVu Sans",
+  "show_rate_labels": true,
+  "show_counts": true,
+  "show_wilson_intervals": true,
+  "thin_n": 30,
+  "note": "Display settings only. Cohort and 16 reference bins are verified in build_figure.py; changing bin definitions requires a separately documented analysis."
+}

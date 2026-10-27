@@ -1,8 +1,8 @@
 # Jazz night: what we tried, why we tried it, and what we learned
 
-**Last synced:** 27 October 2026 — updated after SCOUT’s response  
+**Last synced:** 27 October 2026 — canonical starter reproduced; standalone progression created  
 **For:** Charles — a running record to read alongside the figures and return to without retracing the conversation.  
-**Current position:** SCOUT’s response has been incorporated in Section 7. Our plots follow the existing HERO population rules; no numerical correction or population replacement has been identified by this reconciliation. We clarified the final-eligible-season rule, retained the unresolved multiple-team audit, and laid out the smallest next steps in Section 9.
+**Current position:** Charles accepted and locked JN-01, the canonical quantile starter. Section 11 adds the requested equal-width companion on the identical data. The [JN progression](JN_progression.md) records the lock and the companion awaiting review.
 
 This document is the chronological record of the Jazz night experiments. It includes the plots themselves, not just a list of filenames. The separate [Jazz night manuscript outline](../Jazz_night.md) records the scientific story we intend to build. Neither document is the manuscript, and the experiments below have not rewritten it.
 
@@ -221,7 +221,9 @@ The error bars are pointwise 95% Wilson intervals using a working assumption tha
 
 All percentages are based on the inherited ever-drafted lookup, not same-season selection. No likelihood has been fitted, no exponential shape has been established, and no congestion mechanism has been selected by these plots. We are assembling the empirical starting point and making its definitions explicit.
 
-## 9. What we should do next, without starting another uncontrolled branch
+## 9. Our recommendation after SCOUT’s reply, before choosing the canonical starter
+
+**Historical recommendation:** The following was our return point at that stage. Charles’s subsequent choice in Section 10 supersedes the proposed 2011–2021/eight-bin starter; those plots remain supporting exploration.
 
 **Recommended next decision:** Choose the observational unit for the first manuscript figure. My recommendation is to retain **PPM final-PS as the provisional main naïve view**, because each player contributes once to the ever-drafted outcome, and keep **all-PS as the documented companion comparison**. This is a recommendation for Charles, not a decision already made. It does not make the last eligible season a true draft-eligibility date or remove possible follow-up limitations.
 
@@ -229,8 +231,56 @@ Keep the current 2011–2021 window, MG10/min20 filters, eight bins, and 0–35%
 
 Once the observational unit is chosen, settle the comparison between the empirical naïve curve and the performance-only top-K benchmark. **Before running that benchmark, specify the actual selection pool, outcome timing, and meaning of K.** The pooled ever-drafted rate cannot simply be used as an annual quota. The manuscript outline already identifies this requirement; we should resolve it rather than jump straight to fitting temperature or congestion.
 
-The current experimental return point is therefore: **PPM, 2011–2021, eight bins; existing production data rules confirmed; final-PS versus all-PS choice still to be made; no new fits or significance tests.** The preserved figures and their counts remain valid descriptions of their declared snapshots, subject to the audit and uncertainty limitations above.
+The experimental return point at that stage was: **PPM, 2011–2021, eight bins; existing production data rules confirmed; final-PS versus all-PS choice still to be made; no new fits or significance tests.** The preserved figures and their counts remain valid descriptions of their declared snapshots, subject to the audit and uncertainty limitations above.
 
 The complete counts, memberships, settings, source fingerprints, and validation results remain beside each figure. The original 12-bin material is in this folder; eight-bin metric comparisons are in `02_eight_bin_comparison/`; the record-unit comparison is in `03_ppm_all_vs_final_ps/`. The final-PS results in the latter reproduce the preceding output’s counts, rates, and intervals.
 
 Continue this document with a dated entry for each actual next decision or experiment: the question, why we changed something, what changed and stayed fixed, the embedded result, the counts, the interpretation, and the decision or unresolved question. If a future audit changes the data, preserve the earlier figures and show the correction explicitly.
+
+
+## 10. We recovered the canonical starter and made it the first figure in the progression
+
+**27 October 2026.** Charles clarified that the immediate aim was a demonstrative upward own-performance plot from which to develop the model, rather than more exploratory comparisons. SCOUT identified the original Pass A naïve PPM plot. Charles asked us to reproduce it using the same underlying data in a reusable visual format, and then requested a separate **JN progression** document around which to rebuild the manuscript and lock figures one at a time.
+
+### What we used and checked
+
+We recovered the original 16-bin ability CSV and reproduced it from the frozen player-level final-PS source. Every bin count, draft rate, mean performance, and median performance matches the original saved summary. The population is **22,795 players and 615 ever drafted**, covering **2009–2021**, with PPM standardized within season, all eligible colleges, MG10, and at least 20 total recorded season minutes. Final-PS uses the latest eligible season and largest-minutes team record when needed.
+
+This intentionally returns to **2009–2021 and 16 quantile bins**, rather than retaining the earlier Jazz **2011–2021 and eight bins**. Both years and bin count change to recover the established starting figure; this is not a one-factor sensitivity experiment. We did not search new settings to manufacture a rising curve.
+
+### Here is the reproduced starter
+
+![Canonical naïve PPM plot reproduced in the new story format](04_canonical_naive/canonical_naive_PPM_Q16_2009_2021.png)
+
+*Figure 7 / progression figure JN-01. The canonical own-performance result, now in the Jazz night format. Same original bar heights; added counts, percentage labels and pointwise Wilson intervals; 0–20% y-axis.*
+
+The highest bin has **228 drafted players out of 1,424, or 16.0%**. All 16 rates are nondecreasing. This supports the opening observation that higher measured performance is associated with a higher draft rate, rising sharply toward the upper end. No exponential model was fitted. We corrected the original inherited footer, which incorrectly described a teammate-performance axis.
+
+### What we decided about the documents and display
+
+[**JN_progression.md**](JN_progression.md) is now the standalone manuscript story outline with figures, proposed prose, transitions, and lock status. This walkthrough remains the chronological experiment record. Earlier alternatives stay here rather than becoming obligatory detours in the manuscript story.
+
+The new figure is **ready for Charles’s visual review; it is not yet marked LOCKED**. Its verified data, style settings, high-resolution PNG, scalable SVG, memberships and validation are saved in `04_canonical_naive/`. Charles’s acceptance will be recorded in the progression document.
+
+We will preserve a consistent visual structure, but do not impose the current 0–20% scale or 16 bins on every future result regardless of need. If a later comparison requires a change, record why, show all relevant values, and update its paired plots consistently. The final manuscript sequence will receive a standardization pass once its scientific story is established.
+
+**Current next step:** Review and lock JN-01 and its opening message in the progression document, then develop Step 2. No top-K, stochastic selection, fitting, or congestion comparison was run as part of this reproduction.
+
+
+## 11. We locked the quantile starter and added an equal-width companion
+
+**27 October 2026.** Charles accepted the reproduced canonical Q16 opening figure, then requested an EW plot to discuss the difference between the two binning methods early in the story. JN-01 version 1 is now recorded as **LOCKED** in the progression. The new companion awaits review.
+
+We used the exact same 22,795 player records, 615 ever-drafted labels, and season-standardized PPM values. Sixteen EW intervals span the full observed performance range; each is approximately 0.552 standardized PPM units wide. No filters, outcome definitions or performance values changed.
+
+![EW companion to the locked Q16 starter](05_canonical_EW_companion/naive_PPM_EW16_2009_2021.png)
+
+*Figure 8 / progression figure JN-01-EW. Equal-width binning of the locked starter’s population.*
+
+The counts vary from zero to 4,472 players per EW bin, compared with 1,424–1,425 in each quantile bin. The last five EW bins have 28, 16, 5, 0 and 1 players. Bin 14 has two drafted players out of five, or 40%; bin 15 has no observations, so its rate is undefined rather than zero. These sparse bins help explain why the equal-width tail looks less smooth.
+
+The new display uses 0–50% so all observed rates are shown; intervals continuing beyond that range are marked with arrows. We also saved a [common-scale Q/EW comparison](05_canonical_EW_companion/naive_PPM_Q16_vs_EW16_same_scale.png) with both panels on 0–50%. The accepted Q16 standalone plot remains untouched at 0–20%.
+
+**What this adds to the story:** Q bins hold approximate player counts fixed; EW bins hold numerical performance width fixed. They describe the same observations with different resolutions. Bin numbers are not interchangeable between them. The purpose here is to explain the choice, not to select a binning because it guarantees a smooth curve.
+
+**Next action:** Review the EW companion in [JN_progression.md](JN_progression.md), then continue the model progression. Counts, exact boundaries, player memberships and validation are preserved in `05_canonical_EW_companion/`.

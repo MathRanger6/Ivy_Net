@@ -1,0 +1,35 @@
+{
+  "date": "2026-10-27",
+  "source_membership": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/jazz_night/04_canonical_naive/canonical_player_membership.csv.gz",
+  "source_sha256": "a94cbc1b136eb924241bf3d93c56e44ff39aa18e5eabd3c3d13cccbcacaf598a",
+  "n": 22795,
+  "drafted": 615,
+  "bin_count": 16,
+  "EW_edges": [
+    -2.7193730617502085,
+    -2.1672604888838176,
+    -1.6151479160174267,
+    -1.0630353431510358,
+    -0.5109227702846448,
+    0.04118980258174609,
+    0.593302375448137,
+    1.145414948314528,
+    1.6975275211809189,
+    2.24964009404731,
+    2.8017526669137007,
+    3.3538652397800917,
+    3.9059778126464826,
+    4.4580903855128735,
+    5.010202958379264,
+    5.5623155312456545,
+    6.114428104112047
+  ],
+  "population": "identical to locked Q16 canonical starter; 2009\u20132021, final-PS, ALLT, MG10, min20",
+  "uncertainty": "pointwise Wilson, no clustering adjustment",
+  "display_ymax": 0.5,
+  "pair": "Q counts and rates match locked table; only display range enlarged for fair side-by-side comparison",
+  "no_source_or_locked_figure_change": true,
+  "empty_bins": [
+    15
+  ]
+}

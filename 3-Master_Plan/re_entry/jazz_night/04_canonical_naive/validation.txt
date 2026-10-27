@@ -1,0 +1,1 @@
+PASS: source fingerprints; within-season PPM standardization; 22,795 unique players and 615 drafted; all 16 original bin counts, rates, performance means and medians; complete membership accounting; rates nondecreasing; all observed values within displayed y range.

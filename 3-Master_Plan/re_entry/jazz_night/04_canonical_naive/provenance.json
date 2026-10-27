@@ -1,0 +1,47 @@
+{
+  "date": "2026-10-27",
+  "reference_csv": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/re_entry/HEROs_and_PASSes/pass_a/PASS_A_binned_draft_rate_ability_q16_allt_min20_mg10_9_21_last_ps.csv",
+  "reference_csv_sha256": "944cb2e06d5c6730de272b41b02ebe170a61489ef5a0025e9761258ffe0130ef",
+  "cache_sha256": {
+    "all": "896037cb40bc1dd1c6743806a86484b092e9c1d8de206e767429876c3689f838",
+    "dft": "9aeffa9de5a03e36bffa0a790c54a4c88cd596aaf6b1fe26c50682cfe74b30a9",
+    "last": "7053a9e5fe03c0e3a0ed32fab636c123d562b237b1b36d1c5be2a8784e3206fd"
+  },
+  "n_players": 22795,
+  "ever_drafted": 615,
+  "seasons": [
+    2009,
+    2021
+  ],
+  "metric": "PPM standardized within season on eligible full roster with sample SD",
+  "population": "all colleges, final eligible observed season; maximum minutes team if needed",
+  "min_total_recorded_season_minutes": 20,
+  "min_team_captured_games_exclusive": 10,
+  "outcome": "ever drafted",
+  "bins": 16,
+  "binning": "floor((rank(method=first)-1)*16/N); no tying together or outcome-based ordering",
+  "reference_reproduction": "all counts, rates, performance means and medians match within 1e-12",
+  "display_style": {
+    "title": "Higher performance is associated with a higher draft rate",
+    "figure_size_inches": [
+      16,
+      9
+    ],
+    "dpi": 240,
+    "observed_color": "#347da3",
+    "y_limits": [
+      0,
+      0.2
+    ],
+    "y_tick_step": 0.025,
+    "font_family": "DejaVu Sans",
+    "show_rate_labels": true,
+    "show_counts": true,
+    "show_wilson_intervals": true,
+    "thin_n": 30,
+    "note": "Display settings only. Cohort and 16 reference bins are verified in build_figure.py; changing bin definitions requires a separately documented analysis."
+  },
+  "script_sha256": "47cf51080776980bcb0d1fd477e838d865ca718529ecf9754602e9ce5db9e8f2",
+  "no_model_fit": true,
+  "comparison_limit": "Different years and bin count from earlier Jazz 2011\u20132021/Q8; this reproduces the chosen historical anchor, not a one-factor comparison."
+}

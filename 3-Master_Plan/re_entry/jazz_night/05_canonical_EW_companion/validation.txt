@@ -1,0 +1,1 @@
+PASS: identical 22,795 unique players, 615 positive outcomes and performance values; all accounted for in 16 equal-width bins; original Q16 memberships/counts/outcomes reproduced; empty bin retains undefined rate; all observed rates fit 0–50% display.

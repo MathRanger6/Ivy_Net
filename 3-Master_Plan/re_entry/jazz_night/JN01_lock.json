@@ -1,0 +1,22 @@
+{
+  "figure": "JN-01",
+  "version": 1,
+  "status": "LOCKED",
+  "date": "2026-10-27",
+  "user_acceptance": "YES, Can you also make me a n EW plot so I can Early on discuss the differences?",
+  "plot": "04_canonical_naive/canonical_naive_PPM_Q16_2009_2021.png",
+  "plot_sha256": "ca74f900d91316d5ccd2d89d9804ef2a655741d2ca04ff44cd3bc9f0b0413c3f",
+  "bins": 16,
+  "binning": "quantile",
+  "years": [
+    2009,
+    2021
+  ],
+  "y_limits": [
+    0,
+    0.2
+  ],
+  "n": 22795,
+  "drafted": 615,
+  "new_EW_companion_status": "ready for review, not locked"
+}
