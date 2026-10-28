@@ -13,7 +13,7 @@
 |------|------|--------|
 | **0** | Read handoff packet (START_HERE, 01 brief, PD50, Tone, OPENING_PROMPT) | ✓ |
 | **1** | Agree central question | **Revised (peers + organization) — awaiting Charles's OK on wording** |
-| **2** | Agree outline and writing order | **Proposed — awaiting Charles** |
+| **2** | Agree outline and writing order | **Revised 10-28 10:25 — under review (header 3)** |
 | **3** | Agree citation workflow (format; where the bibliography lives) | Open question |
 | **4** | Subsection: science of success | Recommended first |
 | **5** | Subsection: economics (labor and personnel) | Pending |
@@ -65,17 +65,40 @@ The current competitive model holds input performance fixed, so development belo
 
 ---
 
-## Compact outline (writing order, not final presentation order)
+## Outline — revised 2026-10-28 10:25 (header 3 under review; writing order, not final order)
 
-1. **Science of success.** What determines success beyond performance? Performance–success distinction; recognition through networks; careers; collaborators and mentors; teams; cumulative advantage and luck.
-2. **Economics (labor and personnel).** How do others' performances enter one's output and rewards, and what can be identified? Reflection problem; workplace peers; tournaments; superstar competitors; team-production spillovers; up-or-out contracts.
-3. **Network science.** How does local structure shape individual outcomes, and why is influence hard to separate from sorting? Homophily; contagion versus homophily; weak ties and brokerage; team assembly.
-4. **Education.** Do classmates change achievement and transitions, and does rank matter beyond ability? Peer effects; elite and exam schools; Romanian admissions; rank effects.
-5. **Psychology.** How does standing among immediate peers shape self-assessment, effort and others' judgments? Social comparison; frog pond; big-fish-little-pond effect; local dominance; too-much-talent; relative age effects in sport selection.
-6. **Organizational studies.** How do organizational structures allocate advancement? Tournament mobility; vacancy chains and organizational demography; portability of performance; forced-distribution ratings.
-7. **Army (focused).** Rater-profile constraints; randomly assigned peers at service academies; military personnel economics.
-8. **Synthesis.** Organized by channel; established, contested, open; where the HERO question sits; caution about non-monotonic shapes.
-9. **Executive summary.** One page, citations allowed, one-sentence answer.
+**Common template for every disciplinary subsection (2–3 pp.):** (i) the discipline's question and unit of analysis; (ii) findings sorted by channel (development, evaluation, selection) and by source (peers, organization); (iii) how it separates sorting from effects; (iv) what it leaves open for our question. Same four parts everywhere so the synthesis can line them up.
+
+**Domain placement:** no basketball, tenure, or Romania subsection (Tone: not a domain study). Basketball sources go to economics and science of success; tenure to science of success; Romania to education; Army gets the one focused subsection Alex allowed.
+
+Legend: **L** = in Charles's Zotero `FOUNDY_Intro`; **N** = new, to find; ✓ = verified in record; *(Core)* = Charles's tag.
+
+1. **Science of success** — *What decides success beyond performance, and where does the environment enter?* Supplies the performance–success distinction (naïve plot vs HERO), recognition and prestige (evaluation channel), tenure as selection.
+   - L: Barabási 2018 *(Core)*; Wang et al. 2025 overview *(Core)*; Mariani et al. 2024 ✓; Yin et al. 2019 ✓ *(Core)*; Wang, Jones & Wang 2019 *(Core)*; Menger 2024 *(Core)*; Sinatra et al. 2016; Fraiberger et al. 2018; Sekara et al. 2018; Mukherjee et al. 2019; Williams et al. 2019; Salganik, Dodds & Watts 2006; Barabási 2012; Tripodi et al. 2025 ✓; Clauset, Arbesman & Larremore 2015.
+   - N: Yucesoy & Barabási 2016 ✓; Way et al. 2019 ✓; Merton 1968; Fortunato et al. 2018; Wang & Barabási 2021 (book); Li et al. 2019; Ma, Mukherjee & Uzzi 2020; Wuchty, Jones & Uzzi 2007; Liu et al. 2018 (hot streaks); Janosov, Battiston & Sinatra 2020; Pluchino, Biondo & Rapisarda 2018; committee papers (Gates; Murray).
+2. **Economics (labor and personnel)** — *How do others' performance and the organization enter one's output, measured performance and rewards; what can be identified?* Supplies the identification vocabulary and relative-reward mechanisms.
+   - L: Rosen 1981 *(Core)*; Lazear & Rosen 1981; Bandiera, Barankay & Rasul 2005; Mas & Moretti 2009; Guryan, Kroft & Notowidigdo 2009; Hamilton, Nickerson & Owan 2003; Brown 2011; Oberhofer & Schwinner 2017; Kuehn 2023 ✓; Kuehn & Rebessi 2023.
+   - N: Manski 1993 ✓; Arcidiacono, Kinsler & Price 2017; Kahn & Huberman 1988; Azoulay, Graff Zivin & Wang 2010; Waldinger 2012; Borjas & Doran 2015; Bramoullé, Djebbari & Fortin 2009; Angrist 2014; Benson, Li & Shue 2019.
+3. **Network science** — *How does local structure shape individual outcomes, how are organizations represented, and why is influence hard to separate from sorting?*
+   - L: Eckles, Kizilcec & Bakshy 2016; Nikolaev & Mneimneh 2023; Geard & Bullock 2011.
+   - N: McPherson, Smith-Lovin & Cook 2001; Christakis & Fowler 2007; Aral, Muchnik & Sundararajan 2009; Shalizi & Thomas 2011; Newman 2002 (assortative mixing); Granovetter 1973; Burt 1992; Breiger 1974; Feld 1991; Guimerà et al. 2005; Centola 2010; Lazer et al. 2020.
+4. **Education** — *Do classmates and schools change achievement and transitions, and does rank matter beyond ability?*
+   - L: Sacerdote 2001; Duflo, Dupas & Kremer (2008 WP; *AER* 2011); Pop-Eleches & Urquiola 2013 ✓; Elsner & Isphording 2017; Thiemann 2017; Paulsen 2022.
+   - N: Hoxby 2000; Sacerdote 2011 (review); Abdulkadiroğlu, Angrist & Pathak 2014; Murphy & Weinhardt 2020; Denning, Murphy & Weinhardt 2023; Carrell, Fullerton & West 2009; Jackson 2010.
+5. **Psychology** — *How does standing among immediate peers shape self-assessment, effort, and others' judgments?* Library empty; all new.
+   - N: Festinger 1954; Davis 1966; Marsh 1987; Marsh & Hau 2003; Zell & Alicke 2010; Tesser 1988; Swaab et al. 2014 ✓ and Gula et al. 2021 ✓; Musch & Grondin 2001 (relative age); Eden & Shani 1982 (Pygmalion, military); Grant & Schwartz 2011.
+6. **Organizational studies** — *How do organizational structure and local opportunity allocate advancement?*
+   - L: Kram & Isabella 1985 (fix year); Page 2008; Demirkıran & Gençer 2017 (low-tier venue — likely drop).
+   - N: Rosenbaum 1979; White 1970; Stewman & Konda 1983; Kanter 1977; Groysberg, Lee & Nanda 2008; Huckman & Pisano 2006; Scullen, Bergey & Aiman-Smith 2005; Staw & Hoang 1995; Bothner, Kang & Stuart 2007 (competitive crowding); Podolny 1993 (status).
+7. **Army (focused)** — *How do Army evaluation and promotion institutions make an officer's prospects depend on peers and units?*
+   - L: Lyle & Smith 2014; Robinson & Evans 2020 *(Core)*; Evans 2018; Evans & Bae 2019; Evans et al. (WSC 2017); Hicks 1987; Vie et al. 2013, 2015; Saling & Do 2020.
+   - N: AR 623-3 ✓ (cite regulation text); AR 600-8-29; Lyle 2007; Carrell, Sacerdote & West 2013; Spain, Mukunda & Bates 2021; Spain, Lin & Young 2020; Wardynski, Lyle & Colarusso 2010; Colarusso & Lyle 2014; Asch & Warner 2001.
+8. **Synthesis** — channels × sources (peers, organization): established, contested, open. Answers PD49: why the environment curve is the right object, and why its shape carries information (opposing forces make non-monotonicity possible, not necessary). Cautions: Grant & Schwartz 2011; Pierce & Aguinis 2013; Simonsohn 2018.
+9. **Executive summary** — one page, citations allowed, ends in a one-sentence answer.
+
+**Candidate count:** ~45 from library + ~75 new ≈ 120 before verification and pruning.
+
+**Proposed schedule (Alex: good draft by Fri 30 Oct; not past the weekend):** Wed — science of success, then economics; Thu — network science, education; Fri — psychology, organizational studies; Sat — Army, synthesis; Sun — executive summary.
 
 **Boundary decisions to make as we go:** teams in science of success or network science; big-fish-little-pond effect in psychology or education; Army material in its own subsection or distributed.
 
