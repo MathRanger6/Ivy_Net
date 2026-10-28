@@ -290,3 +290,42 @@ _(Written last; see bottom of build log. Placeholder replaced below.)_
 **Channel and source (Assistant judgment).** Elsner & Isphording bear on **development** (beliefs and expectations driving investment). They explicitly raise, but cannot isolate, a **selection** channel: organizations (colleges) admitting on within-school rank, such as top-10% rules. The source is **peers** (cohort composition). This is the clearest education paper flagging that rank effects may partly *be* a selection rule that rewards local standing.
 
 ---
+
+## 8. Elsner, Isphording & Zölitz (2021): Achievement rank affects performance and major choices in college
+
+**Citation.** Elsner, Benjamin, Ingo E. Isphording, and Ulf Zölitz. 2021. "Achievement Rank Affects Performance and Major Choices in College." *Economic Journal* 131(640): 3182–3206. DOI 10.1093/ej/ueab034. The library PDF is the published version, and the page numbers below are journal pages.
+
+**Data and setting.** The Netherlands. One business school with repeated **random assignment** of students to teaching sections (the school is not named in the text I extracted).
+
+- p. 3185: "Our estimation sample consists of five adjacent cohorts who entered the business school between 2009 and 2013."
+- p. 3186: "estimation sample of 3,920 students and 23,526 student-course observations".
+- **Treatment.** Rank in pre-determined GPA within a randomly assigned section (section size about 12.6).
+- **Outcomes.** Course grades, dropout, pass rates, follow-up course choice, math-intensive electives, related major at graduation, graduation, and self-reported earnings from a graduate survey.
+
+**Design.** Randomized section assignment, flexible controls for own GPA, and section (peer group) fixed effects. Dynamic analyses exploit repeated reassignment. Exams are centrally graded. p. 3185: "This, together with the fact that exams are centrally graded, minimises concerns that section teachers may have a direct impact on grades and alleviates the concern that the rank effect may mechanically result from grading on a curve."
+
+**Main findings (verbatim).**
+
+1. Abstract, p. 3182: "By exploiting data with repeated random assignment of students to teaching sections, we find that a higher rank increases performance and the probability of choosing related follow-up courses and majors. We document two types of dynamic effect. First, earlier ranks are less important than later ranks. Second, responses to rank changes are asymmetric: improvements in rank raise performance, while decreases in rank have no effect. Rank effects partially operate through students' expectations about future grades."
+2. p. 3183: "A one SD increase in rank reduces the risk of dropping out of the course by 2.3 percentage points while increasing the chance of passing the course by 3.2 percentage points. It also increases the grade in the respective course by 6.7% of an SD and the grade in a related follow-up course by 4% of an SD."
+3. p. 3200: "we find a strong effect on the probability of graduating in a related major. An increase in rank by one SD increases this probability by 2.2 percentage points. [...] For a one SD increase in rank, the choice probability increases by 3.1 percentage points." (The 3.1 points refer to choosing high-math-intensity electives.)
+4. p. 3200: "While we find a significant positive effect on the probability of graduation, we find neither significant effects on study satisfaction nor earnings."
+5. p. 3204: "Because peers are randomly assigned, this signal carries substantially more noise than signal. Nevertheless, when making important career decisions, students appear to rely on their rank as a heuristic, thereby placing considerable weight on noisy information."
+
+**Mechanism or model.** Verbal: belief formation through rank as a noisy signal, plus asymmetric updating. This is tested with survey measures (expected grades and satisfaction with peer interaction). No formal model is fit.
+
+**On the BFLPE literature (useful for the gap), p. 3203, footnote 16.** "BFLP effects are typically estimated from the negative correlation between own academic self-concept and average peer ability while holding own ability constant. As such, many studies do not explicitly separate the effect of the ordinal rank from the mechanically related confounding effect of average peer quality."
+
+**Separating sorting from effects.** Random assignment to sections removes sorting into peer groups. Rank variation within a given GPA comes from chance section composition.
+
+**Limitations.**
+
+- [single system] p. 3188: "We recognise that our data come from only one institution and that students at this business school may not be representative of the higher education population in other countries." (The authors argue that small-group teaching is common: "63% of OECD institutions use small-group teaching".)
+- [imperfect measure] Earnings, p. 3200: "The earnings data are based on a non-random subsample and are self-reported, which means that they are likely subject to measurement error and selective misreporting."
+- [small data] Moderate size: 3,920 students in one school.
+- [no model of mechanism] / [model not fit to data] The belief mechanism is supported by survey evidence only.
+- [outcome is not selection] Major choice is the student's own choice; the school is non-selective (p. 3188: "the school we study is a non-selective institution").
+
+**Channel and source (Assistant judgment).** **Development** (beliefs, effort, specialization) driven by **peers** (section rank), with the **organization** (random assignment, central grading) holding evaluation fixed. Because peers are randomly assigned, this is the strongest causal "same fish, different pond" design in the set. The finding of asymmetric responses (gains from rank increases, nothing from decreases) is a distinctive dynamic.
+
+---

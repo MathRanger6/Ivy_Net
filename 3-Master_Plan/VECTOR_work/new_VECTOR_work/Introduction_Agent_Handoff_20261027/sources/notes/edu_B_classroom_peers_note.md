@@ -5,7 +5,7 @@
 **Conventions**
 
 - "p. N" = printed journal (or working-paper) page number. "PDF p. M" given when it differs.
-- Quotes are copied from the PDF text layer (`pdftotext -layout`). Hyphenation at line breaks is rejoined; nothing else is changed unless marked `[OCR fix: ...]` (only for the scanned Sacerdote 2001 and Lyle 2007 JSTOR copies, whose text layers contain OCR character errors).
+- Quotes are copied from the PDF text layer (`pdftotext -layout`). Hyphenation at line breaks is rejoined; nothing else is changed unless marked `[OCR fix: ...]` (only for the scanned Sacerdote 2001 JSTOR copy, whose text layer contains OCR character errors). Hoxby 2000's PDF has no usable text layer; it was OCR'd with tesseract, so Hoxby quotes are OCR output checked for obvious errors.
 - Limitation tags: [small data], [imperfect measure], [single system], [no model of mechanism], [model not fit to data], [outcome is not selection].
 - "Channel / source" lines are **assistant judgment**, not the authors' claims. Channels: development (what a person becomes), evaluation (how a performance is measured/perceived), selection (who wins a scarce slot). Sources: peers vs organization.
 
@@ -296,5 +296,84 @@ _(to be written after all papers are read)_
 - [outcome is not selection] outcome = test scores; but the mechanism runs through a downstream *selection* (who sits the grade-8 exit exam), which shapes teacher effort.
 
 **Channel / source (assistant judgment).** Development via peers **and** organization (teacher incentives/targeting). Unusual in giving a mechanism: peer composition changes teacher behavior. Peer exposure under random variation helps top and bottom quartiles but not the middle — peers' effect depends on the organization's evaluation/reward scheme (convex payoffs tied to a later selection exam).
+
+---
+
+## 8. Jackson & Bruegmann (2009) — peer learning among teachers, North Carolina
+
+**Citation (version read).** Jackson, C. Kirabo, and Elias Bruegmann. 2009. "Teaching Students and Teaching Each Other: The Importance of Peer Learning for Teachers." NBER Working Paper 15202 (July 2009). DOI 10.3386/w15202. **Pages = WP printed page numbers** (printed p = PDF p − 2). Published version: *American Economic Journal: Applied Economics* 1(4): 85–108 (2009) — not read here.
+
+**Data / setting.** "We use data on all third-grade through fifth-grade students in North Carolina between 1995 to 2006 from the North Carolina Education Research Data Center." (p. 8). Teacher value-added estimated on pre-sample 1995–2000; effects estimated on 2001–2006 (p. 11). Main regressions ≈ 1.2 million student observations (Table 1, "Observations 1200633", PDF p. 30). Outcome: students' math and reading test-score gains. The "peers" here are **teachers' colleagues** (same school, same grade, same year) (p. 6).
+
+**Design.** Observational, not randomized. Value-added model with teacher peer quality as covariate; teacher-by-school fixed effects (variation only from colleague turnover / reassignment) and school-by-year fixed effects (p. 7). Peer quality measured by (1) observable characteristics and (2) out-of-sample pre-period value-added (p. 2).
+
+**Main findings (verbatim).**
+
+> "we further show that a teacher's students have larger achievement gains in math and reading when she has more effective colleagues (based on estimated value-added from an out-of-sample pre-period). Spillovers are strongest for less-experienced teachers and persist over time, and historical peer quality explains away about twenty percent of the own-teacher effect, results that suggest peer learning." (abstract, p. 1)
+
+> "The coefficient on peer value-added for math in column 3 is 0.0398, suggesting that a one-standard-deviation increase in the mean estimated value-added of a teacher's peers is associated with a 3.98 percent of a standard deviation increase in math test scores. ... For the average teacher with three peers, replacing one peer with another that has one standard deviation higher value-added will increase her students' math test scores by 1.3 percent of a standard deviation." (p. 15)
+
+> "The cumulative effect over three years of having peers with one standard deviation higher effectiveness is 0.078 standard deviations in math and 0.072 standard deviations in reading. Because teachers have about three peers on average, this is about one third of the size of the own-teacher effect" (p. 22)
+
+**Heterogeneity.** "less experienced teachers are generally more responsive to changes in peer quality than more experienced teachers" (p. 22). No evidence reported here of anyone being hurt.
+
+**Model / mechanism.** A verbal theoretical framework distinguishing (1) joint production/shared resources, (2) motivation and effort, (3) peer learning, with testable predictions (persistence; stronger for novices; historical peers explain own effect) (pp. 4–5). Tested by reduced-form patterns, not by fitting a formal model. Authors' limit: "Because all learning explanations could yield the same empirical predictions, we are unable to distinguish a peer learning story from the peer-induced learning story." (p. 6); "Although we acknowledge that we cannot prove peer related learning, we believe these pieces of evidence lend themselves most naturally to a peer related learning interpretation" (pp. 22–23). → [model not fit to data] (verbal model, predictions checked).
+
+**Sorting vs effect.** Fixed effects + falsification tests; explicitly non-random: "Although we are careful to control for a variety of possible confounding influences, we do not have random assignment of students to teachers or of teachers to peers. Because the possibility of spurious correlation remains, we present several specification and falsification tests." (p. 3)
+
+**Evaluation and organization (key for the dissertation).**
+
+> "This paper contributes to the nascent literature questioning the validity of standard value-added models by evaluating the assumption of no spillovers across teachers—a key identification assumption in teacher value-added models. Also, the findings here should give pause to advocates of individual-level merit-based pay because such pay schemes could reduce teachers' incentives to help their colleagues and could undermine peer learning." (pp. 3–4)
+
+> "For example, compensation schemes that reward a teacher's performance relative to her peers may be detrimental to fostering peer learning." (p. 23)
+
+> "we do show that the assumption of no spillovers across teachers is not valid." (p. 23)
+
+**Limitations.**
+
+- [single system] one state; "Although teachers in elementary school may be a somewhat unique group" (p. 23).
+- [imperfect measure] peer quality = estimated value-added (noisy); peers defined narrowly so estimates are "a lower bound" (p. 3, p. 6).
+- [model not fit to data] verbal framework only.
+- No random assignment (p. 3).
+- [outcome is not selection] outcome = students' test-score gains, not teacher promotion/tenure.
+
+**Channel / source (assistant judgment).** Bridges education and workplace: **development** of workers (teachers) via peers (colleagues). Also bears on **evaluation**: individual value-added measures attribute to a teacher output that partly reflects colleagues, so individual-performance evaluation is contaminated by environment. Relative pay schemes (organization) could suppress the peer channel.
+
+---
+
+## 9. Lyle (2007) — randomly assigned companies at West Point
+
+**Citation.** Lyle, David S. 2007. "Estimating and Interpreting Peer and Role Model Effects from Randomly Assigned Social Groups at West Point." *Review of Economics and Statistics* 89(2): 289–299. DOI 10.1162/rest.89.2.289. (Printed p = PDF p + 288. Two-column layout; extracted without `-layout`.)
+
+**Data / setting.** US Military Academy (USMA, West Point), graduating classes 1992–1998, Office of Economic and Manpower Analysis data (admissions, Survey of Incoming Freshmen, cadet and officer personnel records) (p. 291). "data are available for plebes in 252 companies—that is 36 companies over seven years." (p. 291); ~35 plebes per company (p. 290); Table 2 individual regressions N ≈ 8,508–8,555 (p. 293). Army-retention outcome available for 180 companies only (p. 292 fn. 2). Outcomes: two performance (plebe-year academic GPA, math grade) and two choice outcomes (academic major; remaining in the Army past the 5-year obligation) (p. 289).
+
+**Design.** Conditional random assignment ("scrambling"): random number, then shuffling "in an attempt to equalize the means of the eight characteristics with the aim of producing comparable companies" (p. 292). "Not only does 'Uncle Sam' issue a uniform and a 'tight haircut,' but he also issues peers and role models." (p. 292). Peers = other plebes in company; role models = sophomores in company (p. 290).
+
+**Main findings (verbatim).**
+
+> "Estimates of contemporaneous group effects in human capital production are typically positive and significant; however, evidence in this study suggests that occurrences common to a group may account for much of this correlation. Models that address these biases provide little evidence of group effects in academic performance, although there is evidence of group influences in choice outcomes such as the selection of academic major and the decision to remain in the Army." (abstract, p. 289)
+
+> "Comparing column 6 with column 7 reveals that common shocks attributed to the characteristics of the company's upperclassmen reduce the contemporaneous peer effect by almost half ... Consequently, common shocks may account for most or even all of the measured correlation between own and peer GPA." (p. 295)
+
+> "the economic magnitude of the effect is negligible; a one-standard-deviation increase in the average math SAT scores of the peer group affects an individual's math grade by 0.003 points." (p. 296)
+
+- Choice outcomes: "A 10-percentage-point increase in the fraction of role models who intend to study engineering leads to a 1.5-percentage-point increase in the probability that a plebe will choose engineering as a major." (p. 297)
+- "A 10-percentage-point increase in the fraction of peers who anticipated a military career increases the chance of remaining in the military at least six years after graduation by 2.5 percentage points." (p. 298); role models' leadership score: "A 100-point increase in the average LPS of role models results in a 15-percentage-point-higher chance of remaining on active duty six years past graduation" (marginally significant) (p. 298).
+
+**Heterogeneity.** Not a focus; no who-gains/who-loses analysis by ability reported in the sections read.
+
+**Model / mechanism.** Linear-in-means framework (Manski endogenous/exogenous/common shocks); reduced form preferred: "the reduced-form specification in equation (3) provides the most credible method of estimating social group effects." (p. 296). Mechanisms for role-model effects are conjectures (major chosen by end of sophomore year; leadership experience) (pp. 297–298). → [no model of mechanism]
+
+**Sorting vs effect.** Random assignment conditional on 8 scrambling controls; balance tests in Table 2 (p. 292). Separates **common shocks** from peer effects (upperclassmen/company-commander attributes as proxies, p. 295) — the paper's main methodological contribution.
+
+**Limitations.**
+
+- [imperfect measure] Equalizing scrambling limits variation: "It is possible that the scrambling process reduces the variation in average pretreatment ability measures to the extent that no effect is identifiable." (p. 296); scrambling also creates "a mechanically driven negative correlation between the peer SAT score and the individual's GPA" (p. 296 fn. 10). CFW 2009 notes USAFA peer-SAT variance is 49% greater than in Lyle's data (CFW p. 443 fn. 10).
+- [single system] one military academy.
+- [small data] retention outcome for 180 of 252 companies due to Global War on Terror stop-loss (p. 292 fn. 2).
+- [no model of mechanism]
+- [outcome is not selection] Choice outcomes (major, staying in Army) are individual choices, not competitive scarce slots; authors' own call: "research on social relationships other than peers and on measures of outcomes other than academic performance may provide valuable insights" (p. 298).
+
+**Channel / source (assistant judgment).** Development of preferences/choices via peers (plebes) and **role models** (sophomores, an organizationally designated hierarchy). Academic peer effects ≈ zero; effects show up in career choices (retention), which feed later military selection pipelines but are not themselves selection decisions.
 
 ---
