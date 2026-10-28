@@ -376,3 +376,74 @@ Definitions used (from McPherson & Smith-Lovin 1987): "Formally, induced homophi
 **Channel / source (assistant judgment).** Evaluation-adjacent: peers' feedback is a (social) evaluation of a person's output, and receiving more of it changes subsequent production. Source: peers, with the organization (platform) controlling the interface that shapes how much peer evaluation occurs. Methodologically the template for "randomize the peer, not the person."
 
 ---
+
+## 12. Rajkumar, Saint-Jacques, Bojinov, Brynjolfsson & Aral 2022 — A causal test of the strength of weak ties
+
+**Citation.** Rajkumar, Karthik, Guillaume Saint-Jacques, Iavor Bojinov, Erik Brynjolfsson, and Sinan Aral. 2022. "A Causal Test of the Strength of Weak Ties." *Science* 377 (6612): 1304–1310. DOI: 10.1126/science.abl4476.
+
+**Page-number note.** The PDF footers read "Rajkumar et al., Science 377, 1304–1310 (2022) … n of 7"; individual journal page numbers are not printed. Cites below give "p. 1303 + n (n of 7)", which assumes the 7 article pages map in order onto 1304–1310 (assistant inference from the footer; consistent with the 7-page range).
+
+**Data / setting / sample / years.** LinkedIn "People You May Know" (PYMK) recommendation experiments, retrospectively analyzed. "We performed a retrospective analysis of the randomization created by the PYMK experiments conducted by LinkedIn between 2015 and 2019 in two waves. The first wave examined a global experiment conducted in 2015 that had over 4 million experimental subjects and created over 19 million new connections. [...] The second wave spanned every continent and US state, had more than 16 million experimental subjects, created ~2 billion new connections and recorded more than 70 million job applications that led to 600,000 new jobs during the experimental period" (p. 1304, 1 of 7). Outcome "job transmission" = A works at company c, B later works at c at least one year later, and A and B were connected at least one year before B's move (p. 1304, 1 of 7). Tie strength = number of mutual connections, and interaction intensity (messaging).
+
+**Design.** Randomized experiments (A/B tests of a tie-recommendation algorithm) analyzed as intent-to-treat with instrumental variables, compared against ordinary least squares (OLS) on the same data.
+
+**Main findings (verbatim).**
+
+> "The experiments randomly varied the prevalence of weak ties in the networks of over 20 million people over a 5-year period, during which 2 billion new ties and 600,000 new jobs were created. The results provided experimental causal evidence supporting the strength of weak ties and suggested three revisions to the theory. First, the strength of weak ties was nonlinear. Statistical analysis found an inverted U-shaped relationship between tie strength and job transmission such that weaker ties increased job transmission but only to a point, after which there were diminishing marginal returns to tie weakness. [...] Third, the strength of weak ties varied by industry. Whereas weak ties increased job mobility in more digital industries, strong ties increased job mobility in less digital industries." (Abstract, p. 1304, 1 of 7)
+
+> "Although the OLS analysis replicated previous findings of an apparent paradox of weak ties in which strong ties were more strongly correlated with job transmissions, the experimental IV analysis reversed this result and suggested a nonlinear relationship between tie strength and job transmission in which medium strength ties were the most effective in generating job mobility." (p. 1307, 4 of 7)
+
+**Sorting vs. influence.** States the endogeneity problem in labor-market terms: "network ties and labor market outcomes are endogenous, making the causal link between weak ties and job placement elusive. Individuals' labor market outcomes are likely to be determined by and to simultaneously determine their social networks. The evolution of social networks and job trajectories are also likely correlated with unobserved factors such as effort, ability, and sociability, which confound empirical identification of the link between weak ties and jobs." (p. 1304, 1 of 7). Randomizing which ties are recommended breaks this. The OLS-vs-IV reversal on the same data is a concrete demonstration that sorting can flip the sign of an observational network conclusion.
+
+**Limitations (authors' own).**
+
+> "First, although PYMK experiments provided a robust channel through which to introduce experimental variation into the evolution of human social networks, we could not compel LinkedIn users to take these recommendations. Therefore a degree of self selection exists in who acted on the connection recommendations." (p. 1309, 6 of 7)
+
+> "Second, LinkedIn is a professional social network and may be different than other online social networks such as Facebook or offline social relationships such as those originally studied by Granovetter." (p. 1309, 6 of 7) **[single system]**
+
+> "As the statistical power of the node-level analysis was not sufficient to confirm individual differences between the effects of strong, medium, and weak ties in our experiments, we also analyzed these relationships at the more granular edge level." (p. 1307, 4 of 7)
+
+- Job transmission is inferred from self-reported LinkedIn employment histories. **[imperfect measure]** Does not model why a tie helps (information vs. referral vs. advocacy). **[no model of mechanism]**
+- Outcome is job mobility, which is closer to selection than any other paper here, but it is a move between employers, not the outcome of a competition among candidates for a fixed slot; competitors and the employer's decision are not observed. **[outcome is not selection]** (partial; assistant judgment)
+
+**Channel / source (assistant judgment).** Selection-adjacent (access to job opportunities through peers). Source: peers, with the platform (organization) as the party that sets tie formation. Strongest bridge in this cluster from network structure to a labor-market allocation outcome.
+
+---
+
+## 13. Gee, Jones & Burke 2017 — Social networks and labor markets: how strong ties relate to job finding on Facebook's social network
+
+**Citation.** Gee, Laura K., Jason Jones, and Moira Burke. 2017. "Social Networks and Labor Markets: How Strong Ties Relate to Job Finding on Facebook's Social Network." *Journal of Labor Economics* 35 (2): 485–518. DOI: 10.1086/686225. (PDF p. n = printed p. 484 + n.)
+
+**Data / setting / sample / years.** De-identified US Facebook data. Restrictions: US users aged 16–64 who list employer and education and have been on Facebook at least a year; "These restrictions leave 6 million individuals, or about 4% of the US Facebook population. When we connect these 6 million individuals back to their friends, we have a total of 260 million dyads. Of these 6 million people, about 400,000 sequentially work with a pre-existing social tie" (p. 490). Regressions use a random subsample of 1 million dyads (p. 501, fn. 21). Timing: Facebook friendship "is only observable from 2007 onward"; "mean start date (November 2010)" of users' jobs (p. 494; figure caption and footnote text). Tie strength = share of contact (tags, posts, etc.) in the prior year, and number of mutual friends.
+
+**Design.** Observational. Dyad-level regressions with user fixed effects and dyad controls, plus a placebo test that reverses who joined the employer first to bound the causal portion (pp. 501–503, 509).
+
+**Main findings (verbatim).**
+
+> "Using 6 million Facebook users' data, we find evidence for the opposite. We proxy for job help by identifying people who eventually work with a preexisting friend. Using objective tie strength measures and our job help proxy, we find that most people are helped through one of their numerous weak ties but a single stronger tie is significantly more valuable at the margin." (Abstract, p. 485; "preexisting" is hyphenated across a line break in the PDF)
+
+> "For example, increasing the amount of contact with a friend by 10 percentage points increases the likelihood that one will eventually work with that friend by at least 20%." (p. 487)
+
+> "In short, a person is most likely to eventually work with a weak tie because weak ties collectively make up most of a person's social network. However, strengthening an existing tie should increase the probability that one will work with that specific friend." (p. 513)
+
+Framing directly relevant to selection among competitors:
+
+> "If social ties of differing strength benefit more, then this may result in the allocation of a job away from one person and toward another who has the right type of connection (weak or strong) but who is not necessarily a better worker." (p. 486)
+
+**Sorting vs. influence.** Names homophily as a dyad-level confound: "Dyads with higher tie strength may be more likely to be similar (homophily), and so these dyads may be more likely to work at the same employers, even in the absence of actual help through their social networks. Ideally, we would use a dyad fixed effect to control for this source of omitted variable bias, but we only observe each dyad a single time." (pp. 501–502) Takes the network as given: "The network itself is endogenously determined, and the level of tie strength between each dyad is also endogenous. We are most interested in the question of how tie strength affects sequential jobs, so we take the network as given. Our empirical strategy aims to address the second type of endogeneity" (p. 498; footnote marker "18" omitted). User fixed effects absorb individual traits; the placebo reversal is used to bound remaining dyad-level confounding.
+
+**Limitations (authors' own).**
+
+> "We would like to emphasize that these results may not be the true causal effects of tie strength on the likelihood of a sequential job. The principal concern is that tie strength Tik is endogenous, E[Tikeik] ≠ 0." (p. 502) (This is the sentence Rajkumar et al. 2022 quote as motivation; paper 12.)
+
+> "To find the causal impact of tie strength on the likelihood of a sequential job from that friend, one would ideally observe an experiment that randomly assigns first networks and then tie strength. We have found no such experiment" (p. 498)
+
+> "Our sequential job definition is very conservative and cannot measure job help from non-Facebook friends. Additionally Facebook is not primarily a professional social networking website, so we are likely missing many purely professional connections; thus, we think of our 7% rate as a lower bound on the amount of job help in this population." (pp. 492–493) **[imperfect measure]**
+
+- "Facebook users are not a randomly selected sample of the US population." (p. 490) **[single system]**
+- Job help is a proxy (later co-employment), validated by a permutation test and a small survey ("matching the survey-provided friends' names was possible for 63 respondents, or 7,497 dyads", p. 493). **[imperfect measure]** **[no model of mechanism]**
+- The outcome is ending up at a friend's employer, not winning a contested slot against identified rivals; the employer's decision is unobserved. **[outcome is not selection]** (partial; assistant judgment)
+
+**Channel / source (assistant judgment).** Selection (job allocation) via peers; the p. 486 sentence explicitly states the selection-channel worry that network position, not productivity, can decide who gets the job. Evidence is observational and the competing applicants are not observed.
+
+---

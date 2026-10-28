@@ -266,3 +266,63 @@ Prepared 2026-10-28 for the dissertation introduction. Extracts only; not disser
 **Channel / source (my judgment).** Evaluation (status as socially influenced judgment of quality; amplification of small quality differences) — source = peers. The work-organization prediction (inequality higher when individual contributions are hard to disaggregate) ties the amplification strength to organizational task structure (organization). Non-monotone in a sense: reciprocity preference caps the cascade (interior equilibria between equality and winner-take-all). Directly relevant to evaluation feeding selection: status is a zero-sum-ish allocation of finite attention.
 
 ---
+
+## 9. Lazer & Friedman 2007 — The network structure of exploration and exploitation
+
+**Citation.** Lazer, David, and Allan Friedman. 2007. "The Network Structure of Exploration and Exploitation." *Administrative Science Quarterly* 52(4): 667–694. DOI 10.2189/asqu.52.4.667.
+
+**PDF note.** Typeset ASQ PDF. PDF p. = journal p. − 666.
+
+**Data / setting.** Theory/model only. Agent-based simulation: "we assumed a population of 100 actors" (p. 677) on NK landscapes with "N = 20, and K = 5" (p. 678), averaged over "the same 1000 NK spaces" (p. 678); networks: linear, totally connected, random, small-world (plus hub-spoke).
+
+**Design.** Agent-based simulation (emulation of better-performing neighbours + local search).
+
+**Main findings.**
+
+- "We present an agent-based computer simulation model of information sharing in which the less successful emulate the more successful." (abstract, p. 667).
+- Core tradeoff: "Results suggest that when agents are dealing with a complex problem, the more efficient the network at disseminating information, the better the short-run but the lower the long-run performance of the system." (p. 667).
+- **Non-monotonic**: "For intermediate time frames, there is an inverted-U relationship between connectedness and performance, in which both poorly and well-connected systems perform badly, and moderately connected systems perform best." (abstract, p. 667).
+- Two pathways: "An efficient network positively affects information diffusion, which facilitates the spread of effective strategies, but negatively affects information diversity, which is also positively related to performance." (p. 686; PDF p. 20).
+- "Remarkably, the highest performing network in the long run was the slowest, most error prone, and had the longest average path length." (p. 689; PDF p. 23).
+
+**Model?** Yes; simulation only, **not fit to or tested against data**.
+
+**Limitations (authors' own).**
+
+- "As with any purely theory-based research, our results are only as strong as the premises of our approach." (p. 688; PDF p. 22). "Although we would not make managerial recommendations without empirical validation" (p. 689). [model not fit to data]
+- **No competition by assumption**: the setting is "parallel problem solving, in which a set of roughly equivalent agents are all seeking to solve the same problem, and the success of any one or subset of agents has no direct effect on other agents" (p. 668; PDF p. 2); "In game theory terms, one might envision each agent playing a game against nature, in which an individual’s performance against nature has no bearing on other players’ payoffs" (p. 668). They flag the extension: "For example, an assumption that actors are competing would reduce the utility of sharing a solution, while assumptions about the presence of some property rights might increase the incentives for exploration over exploitation." (p. 689; PDF p. 23).
+- Outcome is system-level performance. [outcome is not selection]
+
+**Channel / source (my judgment).** Development (what solutions individuals reach via peers), source = peers; network as organizational design (organization). **Explicitly non-monotonic** (inverted U at intermediate horizons). Explicitly **excludes competition for positions** — a clear gap the dissertation can name.
+
+---
+
+## 10. Mason & Watts 2012 — Collaborative learning in networks
+
+**Citation.** Mason, Winter, and Duncan J. Watts. 2012. "Collaborative Learning in Networks." *Proceedings of the National Academy of Sciences* 109(3): 764–769. DOI 10.1073/pnas.1110069108.
+
+**PDF note.** Typeset PNAS PDF. PDF p. = journal p. − 763.
+
+**Data / setting.** "a series of 256 Web-based experiments in which groups of 16 individuals collectively solved a complex problem and shared information through different communication networks" (abstract, p. 764); Amazon Mechanical Turk; eight fixed-degree (n = 16, k = 3) networks varying in efficiency; 15 rounds per game; 24 baseline (independent) groups (p. 765).
+
+**Design.** Online randomized experiment (network assigned) + comparison agent-based simulations.
+
+**Main findings.**
+
+- "In contrast to prior work, however, we found that efficient networks outperformed inefficient networks, even in a problem space with qualitative properties thought to favor inefficient networks." (abstract, p. 764).
+- Mechanism reversal: "Moreover, we find that inefficient network structures can also decrease exploration, precisely the opposite of what the theory claims they are supposed to accomplish." (p. 769; PDF p. 6).
+- Individual vs. collective: copying "thus, players could improve their success by free-riding on others’ exploration" … "the individual decision to exploit negatively impacted the performance of the collective" (p. 768; PDF p. 5).
+- **Position effect within a group**: "network efficiency affected the distributions of success, and thereby relative individual performance, in two different and conflicting ways" (p. 768); central players — "those who occupied central positions (i.e., with high betweenness or closeness centrality), consistently earned more points than their peers in the same network" (p. 769; PDF p. 6); and "Thus, depending on whether a given individual cares about relative or absolute performance, and assuming that he or she can also choose his or her network position, he or she may prefer to belong to a more or less centralized network, respectively." (p. 769).
+- On models: "agent-based models have, to date, been insufficiently sophisticated and heterogeneous to reflect real human responses to changing circumstances" (p. 769).
+
+**Model?** The experiment tests the Lazer–Friedman prediction; the authors' own simulations reproduce the inefficient-network advantage only for "an intermediate level of myopia" (p. 769). No new model fit to the experimental data.
+
+**Limitations.**
+
+- Authors': "Recognizing that the results of both artificial simulations and artificial experiments should be generalized with caution" (p. 769); landscapes "highly artificial and are likely different from real-world problems in some respects" (p. 766; PDF p. 3).
+- Payoffs are individual and non-rival: "Players were paid in direct proportion to their accumulated points; hence, they were motivated to maximize their individual scores but had no incentive to deceive others" (p. 765; PDF p. 2). No scarce slot / rank-based reward. [outcome is not selection]
+- Small groups (16), short games (15 rounds), one task. [small data] [single system]
+
+**Channel / source (my judgment).** Development (learning from peers), source = peers; the network structure is an organizational choice (organization). Important for selection: position within the group changes **relative** standing even when everyone's absolute payoff is non-rival — the relative-vs-absolute tension is exactly where a scarce-slot selection rule would bite. Contradicts the inverted-U of Lazer & Friedman for humans in this task.
+
+---

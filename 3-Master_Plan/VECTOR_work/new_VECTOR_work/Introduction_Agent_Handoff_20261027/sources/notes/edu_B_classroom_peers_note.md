@@ -202,3 +202,99 @@ _(to be written after all papers are read)_
 **Channel / source (assistant judgment).** Development via peers, with the **organization** controlling group composition. Shows the sign of peer exposure depends on the joint distribution (mean × spread × own ability) — same peer mean can help or hurt. Drop-out/continuation is the closest outcome to selection but is threshold-based.
 
 ---
+
+## 6. Feld & Zölitz (2017) — randomly assigned sections, Maastricht University
+
+**Citation.** Feld, Jan, and Ulf Zölitz. 2017. "Understanding Peer Effects: On the Nature, Estimation, and Channels of Peer Effects." *Journal of Labor Economics* 35(2): 387–428. DOI 10.1086/689472. (Printed p = PDF p + 386.)
+
+**Text-layer caveat.** Minus signs in tables appear as "2" in the text layer (e.g., "2.1449" = −.1449). Restored below.
+
+**Data / setting.** School of Business and Economics (SBE), Maastricht University (Netherlands), academic years 2009–10 to 2011–12. "In total, we have 7,672 students, 395 courses, 3,703 sections, and 39,813 grades in our estimation sample." (p. 400). Sections of 10–15 students "who spend most of their contact hours together in one classroom" (p. 389). Outcome: standardized course grade; peer quality = peers' past GPA. Course-evaluation survey for channels: "38% of the students start filling out the questionnaire" (p. 412).
+
+**Design.** Section assignment by scheduling software ("allocate randomly"; post-2010 stratified by nationality); "The schedulers do not know the students nor do they observe their previous grades." (p. 399); "neither students nor teachers, and not even course coordinators, have any influence on the composition of the sections in our estimation sample." (p. 400). Randomization test with Guryan–Kroft–Notowidigdo leave-me-out correction (p. 404).
+
+**Main findings (verbatim).**
+
+> "While students benefit from better peers on average, low-achieving students are harmed by high-achieving peers. Analyzing students' course evaluations suggests that peer effects are driven by improved group interaction rather than adjustments in teachers' behavior or students' effort." (abstract, p. 387)
+
+> "A one standard deviation increase in the average peer GPA causes an increase of 1.26% of a standard deviation in student grades. This result, however, masks important heterogeneity: low-achieving students are actually harmed by high-achieving peers." (p. 389)
+
+> "In terms of the Dutch grading scale, this estimate means that, for example, an increase of peer GPA from 6.5 to 7.0 is associated with a grade increase from 6.50 to 6.523, a small and economically insignificant effect." (p. 406); corrected for reliability (split-half 0.72) "This increases the estimate to 1.75% of a standard deviation." (p. 406)
+
+**Heterogeneity (who gains, who loses).**
+
+> "The results for high- and middle-GPA students are in line with the linear-in-mean model: high- and middle-GPA students are positively affected by high-GPA peers and negatively affected by low-GPA peers. The results for low-GPA students, however, are noticeably different. The point estimate suggests that low-GPA students are negatively affected by high-GPA peers. They are also negatively affected by peers from their own GPA group—low-GPA peers." (p. 408)
+
+- Table 6 (p. 409): Low GPA × fraction high-GPA peers = −.1449 (p < .10); Low GPA × fraction low-GPA peers = −.1315 (p < .05); High GPA × fraction low-GPA peers = −.1047 (p < .05). Low vs middle difference in response to high peers: F = 5.40, p = .0207.
+- "Overall, the estimated effects are small in magnitude" — e.g., replacing 3 of 15 middle peers with low peers lowers a low-GPA student's grade "by 2.63% of a standard deviation" (p. 408).
+- Conclusion: "These average effects hide important heterogeneity however. While high- and middle-ability students benefit from better peers, low-ability students are harmed by their high-ability peers." (pp. 414–415)
+
+**Model / mechanism.**
+
+- Analytical/Monte Carlo model of **measurement error** in peer regressions (building on Angrist 2014): "We show, both analytically and using Monte Carlo simulations, that in settings where peers are randomly assigned, classical measurement error will only lead to attenuation bias. With systematic student assignment, however, measurement error can lead to substantial overestimation of peer effects. This bias is distinct from selection bias." (p. 388). This is a model of the *estimator*, not of behavior.
+- Behavioral channel evidence is survey-based and caveated: "All results, however, should be interpreted with caution, and we interpret them as providing suggestive evidence." (p. 412). Group interaction effect is linear, so "the inverse U-shaped pattern for low-GPA students we found in Section VII is driven by other unobserved factors." (p. 414) [sic: authors' section reference]
+- Welfare caveat: "Without knowing the process that generates the observed peer effects, however, it is not clear whether this would be welfare enhancing." (p. 415)
+→ [no model of mechanism]
+
+**Sorting vs effect.** Random section assignment by schedulers blind to grades; leave-me-out randomization test; uses pre-treatment peer GPA to avoid reflection.
+
+**Limitations.**
+
+- [single system] one business school.
+- [imperfect measure] ability = past GPA (reliability 0.72, p. 406); evaluation response "is selective. We observe, for example, that students with higher GPAs are more likely to take part in the evaluation" (p. 412).
+- [no model of mechanism] see above; heterogeneous pattern for low-GPA students unexplained (p. 414).
+- [outcome is not selection] outcome = course grades.
+- Effect sizes small (p. 406).
+
+**Channel / source (assistant judgment).** Development via peers (classroom sections), organization assigns. Clear evidence that the **same high-achieving peers help high/middle students and hurt low students**. Measurement-error result bears on *evaluation* of peer effects themselves (estimator bias), relevant to how much reduced-form estimates can be trusted.
+
+---
+
+## 7. Duflo, Dupas & Kremer (2008 WP / 2011 AER) — tracking experiment, Kenya
+
+**Citation (version read).** Duflo, Esther, Pascaline Dupas, and Michael Kremer. 2008 (revised October 2009). "Peer Effects, Teacher Incentives, and the Impact of Tracking: Evidence from a Randomized Evaluation in Kenya." NBER Working Paper 14475. DOI 10.3386/w14475. **Pages below are the working paper's printed page numbers** (printed p = PDF p − 1; abstract is on unnumbered PDF p. 2). Published version: *American Economic Review* 101(5): 1739–1774 (2011) — not read here; published page numbers will differ and the published text may differ from the WP.
+
+**Data / setting.** Western Kenya, Extra Teacher Program (ETP), 2005. "In 2005, 140 primary schools in western Kenya received funds to hire an extra grade one teacher. Of these schools, 121 had a single first-grade class and split their first-grade class into two sections" (p. 2). "The sample frame consists of approximately 10,000 students enrolled in first grade in March 2005." (p. 16); 60 students per school tested; test attrition 18% (p. 16). Outcome: standardized math and language test 18 months after program start, plus follow-up one year after program ended.
+
+**Design.** School-level randomization: "In 60 randomly selected schools, students were assigned to sections based on prior achievement. In the remaining 61 schools, students were randomly assigned to one of the two sections." (p. 2). Within non-tracking schools, random section assignment gives random peer variation; within tracking schools, regression discontinuity at the median.
+
+**Main findings (verbatim).**
+
+> "We find that tracking students by prior achievement raised scores for all students, even those assigned to lower achieving peers. On average, after 18 months, test scores were 0.14 standard deviations higher in tracking schools than in non-tracking schools (0.18 standard deviations higher after controlling for baseline scores and other control variables)." (p. 2)
+
+> "In non-tracking schools, students randomly assigned to academically stronger peers scored higher, consistent with a positive direct effect of academically strong peers." (abstract, WP PDF p. 2)
+
+> "If effects were linear, column 1 would imply that one standard deviation increase in average peer endline test score would increase the test score of a student by 0.52 standard deviations, an effect comparable to that usually found in previous literature, with the exception of Lyle (2007), which finds insignificant peer effects with a similar strategy." (p. 24)
+
+- Persistence: "One year after the program ended, students in tracking schools performed 0.16 standard deviations higher than those in non-tracking schools." (p. 31)
+
+**Heterogeneity / nonlinearity.**
+
+> "the estimated effect is 0.9 standard deviations in the top quartile; insignificant and negative in the middle two quartiles, and 0.5 standard deviations in the bottom quartile." (p. 25)
+
+> "This effect was very strong for students at the top of the distribution, absent for students in the middle of the distribution and positive but not as strong at the bottom of the distribution. Together, these results suggest that peers affect students both directly and indirectly by influencing teacher behavior, in particular teacher effort and choice of target teaching level." (p. 31)
+
+- RD: students near the median "scored similarly on the endline exam whether they were assigned to the top or bottom section" (p. 31).
+- Naive prediction (Proposition 1, pure direct peer effects): tracking "will reduce test scores for those below the median of the original distribution and increase test scores for those above the median" (p. 8) — rejected by the data.
+
+**Model / mechanism — proposed AND tested.**
+
+> "We propose a simple model nesting these effects." (abstract) ... "In the model, students can potentially generate direct student-to-student spillovers as well as indirectly affect both the overall level of teacher effort and teachers' choice of the level at which to target instruction. Teacher choices depend on the distribution of students' test scores in the class as well as on whether the teacher's reward is a linear, concave, or convex function of test scores." (p. 2)
+
+- Testing is by rejecting special cases (propositions), not by structural estimation: "This first set of findings allows us to reject a special case of the model, in which all students benefit from higher-achieving peers but teacher behavior does not respond to class composition." (p. 2); results "are consistent with the assumption that teachers' rewards are a convex function of test scores" (p. 3).
+- Organizational incentive is explicit: teacher incentives "are based on the scores of their students on the national primary school exit exam given at the end of eighth grade. But since many students drop out before then, the teachers have incentives to focus on the students who are likely to take the exam, students at the very top of the first-grade class." (p. 3)
+→ Model proposed and qualitatively tested; **parameters not estimated** [model not fit to data].
+
+**Sorting vs effect.** Randomization of tracking at the school level and of students to sections in non-tracking schools; initial assignment used throughout (p. 24 fn. 14); RD within tracking schools.
+
+**Limitations.**
+
+- [single system] / generalization: "It is impossible to know if the results of this study will generalize until further studies are conducted in different contexts" (p. 5); "caution is needed in generalizing from these results in which teacher ability was held constant between tracking and non-tracking schools." (pp. 32–33)
+- [imperfect measure] baseline = school grade sheets "which are not comparable across schools" (p. 24); linear extrapolation caveat: "the extrapolation to one standard deviation may not actually be legitimate" (p. 24 fn. 15).
+- [small data] for the peer-variation analysis: "we use actual random variation in peer group composition, but have lower sample size" (p. 24).
+- [model not fit to data] see above.
+- [outcome is not selection] outcome = test scores; but the mechanism runs through a downstream *selection* (who sits the grade-8 exit exam), which shapes teacher effort.
+
+**Channel / source (assistant judgment).** Development via peers **and** organization (teacher incentives/targeting). Unusual in giving a mechanism: peer composition changes teacher behavior. Peer exposure under random variation helps top and bottom quartiles but not the middle — peers' effect depends on the organization's evaluation/reward scheme (convex payoffs tied to a later selection exam).
+
+---

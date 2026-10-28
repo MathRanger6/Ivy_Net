@@ -201,3 +201,92 @@ _(Written last; see bottom of build log. Placeholder replaced below.)_
 **Channel and source (Assistant judgment).** Murphy & Weinhardt bear on **development** (confidence and effort, with lasting effects on scores) caused by **peers** (local rank among classmates). This is the cleanest "same fish, different pond" evidence: identical scores, different rank, different later outcomes, measured after the pond has been left. It touches selection only through the pipeline (A-level choice gates university admission).
 
 ---
+
+## 6. Denning, Murphy & Weinhardt (2023): Class rank and long-run outcomes
+
+**Citation.** Denning, Jeffrey T., Richard Murphy, and Felix Weinhardt. 2023. "Class Rank and Long-Run Outcomes." *Review of Economics and Statistics* 105(6): 1426–1441. DOI 10.1162/rest_a_01125. The library PDF is the published version, and the page numbers below are journal pages.
+
+**Data and setting.** Texas, United States. Administrative records from the Texas Education Research Center, linking K–12 records (TEA), public higher education (THECB), and unemployment-insurance earnings (TWC).
+
+- p. 1433: "the primary estimating sample will focus on the thirteen cohorts of 1995 to 2007."
+- p. 1433: "For K–12 and initial college-attended outcomes, we have thirteen cohorts of students who took their third-grade tests between 1995 and 2007, giving 6,117,690 student-subject observations." Earnings at ages 23–27 come from 8 cohorts, 3,597,340 student-subject observations (same page).
+- p. 1427: "we extend the literature by using administrative data on 3 million individuals".
+- **Treatment.** Third-grade rank (ages 8–9) within grade-at-school, based on state test percentile.
+- **Outcomes.** Grade retention, eighth-grade scores, AP courses, high-school graduation, public college enrollment (2-year and 4-year), STEM major, college graduation, and earnings at ages 23–27.
+
+**Design.** Rank conditional on achievement, with school-subject-cohort (class) fixed effects, using idiosyncratic sampling variation in test-score distributions. The paper adds a formal identification discussion.
+
+- p. 1428: "random classroom allocation is not sufficient for the identification of rank effects."
+- p. 1440: "we discuss active sorting, passive sorting, and misspecification of the achievement mapping as potential sources of bias in this literature."
+
+**Main findings (verbatim).**
+
+1. Abstract, p. 1426: "students with a higher third-grade academic rank, conditional on achievement and classroom fixed effects, have higher subsequent test scores, are more likely to take AP classes, graduate from high school, enroll in and graduate from college, and ultimately have higher earnings nineteen years later."
+2. p. 1437: "moving from the 25th to 75th percentile in rank increases the probability of graduating by 4 percentage points." College: "Moving from the 25th to 75th percentile in rank leads to an approximately 4 percentage point increase in college going."
+3. p. 1438: "Low-ranked students have meaningful earnings penalties, earning on average $1,850 per year less than the median-ranked student. High-ranked students see increases in earnings, with the highest-ranked students earning $1,200 more per year on average than the median student."
+4. p. 1440: "We find that a student enrolling in a class where they are at the 75th percentile rather than the 25th in third grade increases their real wages between ages 23 and 27 by $1,500 per annum, or approximately 7%."
+5. p. 1428, the school-choice trade-off: "We find that if parents were to choose schools solely on the basis of mean peer achievement, rank effects would reduce 39% of the potential gains for median-performing students in the state. In contrast, when choosing based on value added, rank effects reduce the gains from choosing a better school only by 12%."
+
+**Mechanism or model.** None. The authors are explicitly agnostic. p. 1427: "In this paper, however, we are agnostic about what is driving the effects. We define the rank effect to include any reactions to the rank of a student by any individual—the student, parents, or teachers."
+
+- p. 1440 hints at an organizational channel: "Some of the effect of rank may come via teacher and administrator interactions with students. We document that students are more likely to be retained in third grade, a decision made not by the student but by teachers, administrators, and families."
+
+**Separating sorting from effects.** Class fixed effects; balance tests on covariates; alternative functional forms; a small-school subsample with one class per grade; and measurement-error arguments. p. 1426 (intro): to the extent test scores are noisy, "our estimates should be interpreted as a lower bound."
+
+**Limitations.**
+
+- [single system] Texas public schools and Texas public colleges only. p. 1433, footnote 19: "We do not observe out-of-state enrollment or enrollment at private institutions in Texas. Hence, if higher rank tends to cause students to leave the state, we will underestimate the effect of rank on college attendance." Footnote 20 makes the same point for out-of-state employment and earnings.
+- [imperfect measure] Rank is measured on a low-stakes test. p. 1434: "we interpret our test score rank measure as a proxy for students' day-to-day academic ranking in their class."
+- [no model of mechanism] Agnostic by design (p. 1427).
+- [outcome is not selection] (partly) College *enrollment* and grade *retention* are observed, but not admission decisions or competition for slots. Retention is a decision made by others (teachers and administrators), so it is the closest outcome to "evaluation by an organization". (Assistant judgment.)
+- On counterfactual re-sorting, p. 1440: "this sort of exercise warrants caution because the changes in classroom distribution may be out of sample for the estimates in this paper (Carrell et al., 2013)."
+- Future work, p. 1440: "Future research should also consider the effect of rank in groups outside school settings."
+
+**Channel and source (Assistant judgment).** Denning et al. bear mainly on **development**, with a possible **evaluation** channel through teacher and administrator retention decisions. The source is **peers** (local rank). The study links "same fish, different pond" all the way to adult earnings. The explicit "better peers versus lower rank" trade-off (39%) is the quantitative version of Davis's frog-pond advice.
+
+---
+
+## 7. Elsner & Isphording (2017): A big fish in a small pond: ability rank and human capital investment
+
+**Citation.** Elsner, Benjamin, and Ingo E. Isphording. 2017. "A Big Fish in a Small Pond: Ability Rank and Human Capital Investment." *Journal of Labor Economics* 35(3): 787–828. DOI 10.1086/690714. The library PDF is the published version, and the page numbers below are journal pages.
+
+**Data and setting.** United States. AddHealth (National Longitudinal Study of Adolescent to Adult Health).
+
+- p. 792: wave 1 was "administered in 1994–95, when students were between 13 and 18 years old". Wave 4 was in 2008–2009.
+- p. 793: "Our final sample comprises 13,645 students in 130 schools and 432 school-cohort combinations."
+- **Ability measure.** Age-specific standardized Peabody Picture Vocabulary Test (PPVT-R). Rank is computed within the school-cohort.
+- **Outcomes.** High-school completion, college attendance, and 4-year degree completion (wave 4). Mechanism variables: perceived intelligence, career expectations, effort, mental distress, and support from others.
+
+**Design.** Within-school, across-cohort variation in cohort composition. p. 788: "We argue that, conditional on attending a given school, the cohort composition is as good as random for a particular student because school entry is determined by a student's birth date and is beyond the influence of parents or students." Robustness: controls for the cohort's mean and variance of ability, school-by-cohort fixed effects, and a subsample in the "right" age cohort.
+
+**Main findings (verbatim).**
+
+1. Abstract, p. 787: "We find that a student's ordinal rank significantly affects educational outcomes later in life. Students with a higher rank are significantly more likely to finish high school and to attend college. Exploring potential channels, we find that students with a higher rank have higher expectations about their future career, as well as a higher perceived intelligence."
+2. p. 788: "An increase in the ordinal rank by one within-school standard deviation increases the likelihood of going to college by 1.2 percentage points."
+3. p. 808: "A one decile increase in the ordinal rank increases the probability of finishing high school by half a percentage point. The coefficient of college attendance is large and statistically significant. A one decile increase in the ordinal rank increases the likelihood of attending college by 1.26 percentage points. The effect on college completion is smaller, and it is imprecisely estimated."
+   - Note: the introduction states the effect per within-school SD, and the results section states it per decile. I report both as written; I did not reconcile them.
+4. p. 819: "Conditional on absolute ability, students with a 10 percentage points higher rank are 0.22 percentage points more likely to believe that they are more intelligent than the average."
+5. p. 822: "The ordinal rank provides students with noisy information about their own ability, which in turn distorts the trade-off between the short-run costs and the long-run benefits from schooling."
+
+**Mechanism or model.** Five candidate mechanisms are listed verbally (p. 789): incomplete information about ability, intrinsic motivation, a responsive environment, tracking, and **selective college admission policies**. These are tested with suggestive mediation regressions. No formal model is fit.
+
+- p. 790: "While we are unable to fully disentangle these mechanisms, we exploit the rich survey information in AddHealth to provide suggestive evidence that some channels are more important than others. We find strong evidence for the expected returns channel."
+
+**Selection into scarce slots, directly addressed (pp. 789–790).** "Finally, the result could be explained by selective college admission policies. Colleges often observe a student's grade point average (GPA) rank within a cohort, which is correlated with our rank measure. If admissions officers give priority to students with a higher rank regardless of the school quality, or if colleges automatically admit the top 10% of a school cohort, then this can explain the effect." Their test, p. 790: "while we have no information on the type of college to which students are admitted, we can exclude the notion that the effect is purely driven by selective college admissions. When we run our baseline model and additionally control for GPA, the effect of the ability rank on educational attainment remains large and statistically significant, indicating that GPA-based college admissions explain only a fraction of the effect."
+
+**Separating sorting from effects.** Comparison is within school and across cohorts. Strategic school-entry delay is checked with an age-cohort subsample. p. 789 on measurement error: "Based on a Monte Carlo experiment, we show that our estimates would be around 20% higher in the absence of measurement error."
+
+**Limitations.**
+
+- [small data] Sample of 13,645 students across 130 schools. Rank is computed from a *sample* of each cohort (stratified random sampling), which introduces measurement error (p. 789).
+- [imperfect measure] Rank is based on a vocabulary test whose scores students do not see. p. 798: "While we cannot directly infer students' knowledge of their exact ranks from the survey, we have two pieces of evidence showing that students have knowledge about their relative ability in their cohort."
+- [no model of mechanism] p. 790: "we are unable to fully disentangle these mechanisms".
+- [outcome is not selection] / admission is not observed. p. 790: "we have no information on the type of college to which students are admitted".
+- [single system] US high schools, a single survey.
+- Authors' caveat, p. 823: "the results should be taken with the caveat that rank is only one input in educational production. Our results reflect local effects, which we obtained by comparing students within the same school but in different cohorts."
+
+**Policy line (zero-sum nature of rank), p. 823.** "It is difficult to think of a Pareto-improving algorithm that reduces this inefficiency by regrouping students into schools because the ordinal rank is a relative measure and improving one student's rank means worsening the rank of another."
+
+**Channel and source (Assistant judgment).** Elsner & Isphording bear on **development** (beliefs and expectations driving investment). They explicitly raise, but cannot isolate, a **selection** channel: organizations (colleges) admitting on within-school rank, such as top-10% rules. The source is **peers** (cohort composition). This is the clearest education paper flagging that rank effects may partly *be* a selection rule that rewards local standing.
+
+---
