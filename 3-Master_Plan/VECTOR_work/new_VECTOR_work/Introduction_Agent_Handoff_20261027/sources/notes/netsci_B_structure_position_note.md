@@ -240,7 +240,7 @@ Prepared 2026-10-28 for the dissertation introduction. Extracts only; not disser
 
 **PDF note.** Typeset AJS PDF. PDF p. = journal p. − 1142.
 
-**Data / setting.** Three small-group sociometric datasets (pp. 1161–62): Bales (1956) verbal-communication task groups of sizes 5–8, each pooled into one "archetypal network" per group size; Blatz (1937) play overtures among the five Dionne quintuplets over ~2 years; Newcomb (1961) fraternity — "each of 17 members ranked the others in terms of how friendly they were, once per week for 15 weeks" (p. 1163; PDF p. 21).
+**Data / setting.** Three small-group sociometric datasets (pp. 1162–63): Bales (1956) verbal-communication task groups of sizes 5–8, each pooled into one "archetypal network" per group size; Blatz (1937) play overtures among the five Dionne quintuplets over ~2 years; Newcomb (1961) fraternity — "each of 17 members ranked the others in terms of how friendly they were, once per week for 15 weeks" (p. 1163; PDF p. 21).
 
 **Design.** Formal game-theoretic model (Nash equilibrium of attachment allocation) with closed-form propositions, tested against observed network data (correlations/regressions of dyad asymmetry on status distance, etc.).
 
@@ -260,7 +260,7 @@ Prepared 2026-10-28 for the dissertation introduction. Extracts only; not disser
 
 - Social-influence parameter not identified: "Although the degree to which social influence (q) shapes status-conferring judgments could not be assessed directly from the data employed here" (p. 1171; PDF p. 29). [model not fit to data]
 - Controls absent: "As a general matter, then, tests of the theory using data from natural settings will need to take fuller account than I have done in the present study of factors beyond sociometric structure." (p. 1169; PDF p. 27). [imperfect measure]
-- Very small groups (5–17 people); fit weak in the smallest: "except in the case of groups small enough to render large correlations commonplace" (p. 1171). Bales pooling: "The result is one network where there were originally a dozen or more, which suppresses variation across groups." (pp. 1162–63). [small data]
+- Very small groups (5–17 people); fit weak in the smallest: "except in the case of groups small enough to render large correlations commonplace" (p. 1171). Bales pooling: "The result is one network where there were originally a dozen or more, which suppresses variation across groups." (p. 1163). [small data]
 - Outcome is attention/attachment (status), not allocation of a formal position. [outcome is not selection]
 
 **Channel / source (my judgment).** Evaluation (status as socially influenced judgment of quality; amplification of small quality differences) — source = peers. The work-organization prediction (inequality higher when individual contributions are hard to disaggregate) ties the amplification strength to organizational task structure (organization). Non-monotone in a sense: reciprocity preference caps the cascade (interior equilibria between equality and winner-take-all). Directly relevant to evaluation feeding selection: status is a zero-sum-ish allocation of finite attention.
@@ -303,7 +303,7 @@ Prepared 2026-10-28 for the dissertation introduction. Extracts only; not disser
 
 **PDF note.** Typeset PNAS PDF. PDF p. = journal p. − 763.
 
-**Data / setting.** "a series of 256 Web-based experiments in which groups of 16 individuals collectively solved a complex problem and shared information through different communication networks" (abstract, p. 764); Amazon Mechanical Turk; eight fixed-degree (n = 16, k = 3) networks varying in efficiency; 15 rounds per game; 24 baseline (independent) groups (p. 765).
+**Data / setting.** "a series of 256 Web-based experiments in which groups of 16 individuals collectively solved a complex problem and shared information through different communication networks" (abstract, p. 764); Amazon Mechanical Turk; eight fixed-degree (n = 16, k = 3) networks varying in efficiency; 15 rounds per game (p. 765); 24 baseline (independent) groups of 16 (p. 766).
 
 **Design.** Online randomized experiment (network assigned) + comparison agent-based simulations.
 
@@ -324,5 +324,226 @@ Prepared 2026-10-28 for the dissertation introduction. Extracts only; not disser
 - Small groups (16), short games (15 rounds), one task. [small data] [single system]
 
 **Channel / source (my judgment).** Development (learning from peers), source = peers; the network structure is an organizational choice (organization). Important for selection: position within the group changes **relative** standing even when everyone's absolute payoff is non-rival — the relative-vs-absolute tension is exactly where a scarce-slot selection rule would bite. Contradicts the inverted-U of Lazer & Friedman for humans in this task.
+
+---
+
+## 11. Granovetter 1973 — The strength of weak ties
+
+**Citation.** Granovetter, Mark S. 1973. "The Strength of Weak Ties." *American Journal of Sociology* 78(6): 1360–1380. (No DOI in bib; JSTOR copy.)
+
+**PDF note.** JSTOR image scan, **no text layer**; text obtained by tesseract OCR (200 dpi). PDF p. 1 is the JSTOR cover; PDF p. = journal p. − 1358 (PDF p. 2 = p. 1360). Quotes were checked against the OCR output; spot-check against the scan before final use.
+
+**Data / setting.** Mostly theoretical argument. Empirical illustration: "a random sample of recent professional, technical, and managerial job changers living in a Boston suburb" (p. 1371); "a random subsample of 100, who were interviewed personally, of the total sample of 282" (fn. 16, p. 1371); tie-strength frequencies reported for N = 54 who found jobs through contacts; information-path lengths for N = 64 (p. 1372).
+
+**Design.** Theory (triadic closure / forbidden triad argument) + small observational survey.
+
+**Main findings.**
+
+- Core proposition: "It is argued that the degree of overlap of two individuals’ friendship networks varies directly with the strength of their tie to one another." (abstract, p. 1360).
+- Definition: "the strength of a tie is a (probably linear) combination of the amount of time, the emotional intensity, the intimacy (mutual confiding), and the reciprocal services which characterize the tie." (p. 1361).
+- Structural consequence: "What is important, rather, is that all bridges are weak ties." (p. 1364; PDF p. 6).
+- Job data: "Of those finding a job through contacts, 16.7% reported that they saw their contact often at the time, 55.6% said occasionally, and 27.8% rarely (N = 54)." (p. 1371; PDF p. 13). Mechanism: "those to whom we are weakly tied are more likely to move in circles different from our own and will thus have access to information different from that which we receive." (p. 1371).
+- Information vs. influence (relevant to selection): those reached via long chains or formal channels "are badly placed and dissatisfied in the labor market, and both receive information without influence." (p. 1372; PDF p. 14).
+- "From the individual’s point of view, then, weak ties are an important resource in making possible mobility opportunity." (p. 1373; PDF p. 15).
+- Macro paradox: "strong ties, breeding local cohesion, lead to overall fragmentation." (p. 1378).
+
+**Model?** Verbal/structural argument (with graph-theoretic notes); not a formal model; job survey is illustrative, not a test of the model.
+
+**Limitations (author's own).**
+
+- "The model offered here is a very limited step in the linking of levels; it is a fragment of a theory." … "My contribution here is mainly, then, exploratory and programmatic" (p. 1378; PDF p. 20).
+- Tie strength measured by contact frequency only: "Although this corresponds only to the first of the four dimensions in my definition" (fn. 15, p. 1371). [imperfect measure]
+- Small N: "The numbers reported are small because they represent a random subsample of 100, who were interviewed personally, of the total sample of 282." (fn. 16, p. 1371). [small data]
+- No baseline: "Since baseline data on acquaintance networks are lacking, this objection remains inconclusive." (fn. 18, p. 1372). [no model of mechanism] (no null for how many job leads should come via weak ties)
+- Outcome is job finding (information access) — close to, but not, selection among competitors; the employer's choice is not observed. [outcome is not selection] (partially)
+
+**Channel / source (my judgment).** Selection-adjacent: access to openings and to "influence" on the hiring decision; source = peers (ties), with group boundaries (clusters of strong ties) shaping what information reaches a candidate. No competition among candidates is modelled; no non-monotonicity.
+
+---
+
+## 12. Breiger 1974 — The duality of persons and groups
+
+**Citation.** Breiger, Ronald L. 1974. "The Duality of Persons and Groups." *Social Forces* 53(2): 181–190. DOI 10.2307/2576011.
+
+**PDF note.** JSTOR image scan, **no text layer**; text by tesseract OCR. PDF p. 1 is the JSTOR cover; PDF p. = journal p. + 1. Quotes checked against OCR; spot-check against the scan.
+
+**Data / setting.** Method paper. Illustrative application to Davis, Gardner & Gardner (1941) "Old City" data — the researchers "compiled a table with eighteen rows—one for each woman—and fourteen columns, one for each “event”" (p. 184; PDF p. 5).
+
+**Design.** Method (matrix formalization of two-mode / affiliation networks and their one-mode projections).
+
+**Main findings.**
+
+- Aim: "A metaphor of classical social theory concerning the “intersection” of persons within groups and of groups within the individual is translated into a set of techniques to aid in empirical analysis of the interpenetration of networks of interpersonal ties and networks of intergroup ties." (abstract, p. 181).
+- Individuality from affiliations (Simmel): "At the same time, the particular patterning of an individual’s affiliations (or the “intersection” of groups within the person) defines his points of reference and (at least partially) determines his individuality." (p. 181).
+- Definition: "Consider a set of individuals and a set of groups such that the value of a tie between any two individuals is defined as the number of groups of which they both are members. The value of a tie between any two groups is defined conversely as the number of persons who belong to both." (pp. 181–82).
+- Core result: "Thus: two distinct matrices, one of person-to-person relations (P) and one of group-to-group relations (G), are uniquely defined by and derivable from a single “translation” matrix (A) of person-to-group affiliations." (p. 183; PDF p. 4). (P = AAᵀ, G = AᵀA, Eqs. 3–4.)
+- Duality: "persons who are actors in one picture (the P matrix) are with equal legitimacy viewed as connections in the dual picture (the G matrix), and conversely for groups." (p. 184).
+- Projection problem: in the Davis data the woman-to-woman matrix is nearly complete ("The ratio 139/153 is 0.91", fn. 6, p. 185) — "Since everyone was connected to virtually everyone else, identification of subgroupings became problematic." (p. 185; PDF p. 6). Working from the dual (event) matrix reduces connectivity "to 30 percent" and recovers Homans's two cliques (p. 185).
+- Competition and status in affiliations (asymmetric extension, quoting Simmel): "“Modern competition is described as the fight of all against all, but at the same time it is the fight of all for all”—and thus results not in the chaos of Hobbes (which necessitates external control) but in an intrinsically ordered interweaving of relations based on “the possibilities of gaining favor and connection.”" (p. 189; PDF p. 10). Asymmetric ties are motivated by "the assumption here being that directors of higher-status corporations are more sought after to lend their prestige to the boards of other corporations" (p. 189).
+
+**Model?** A formal representation (algebra of affiliation matrices), not a generative or statistical model; nothing is fit.
+
+**Limitations.**
+
+- No stated limitations section. Illustration is 18 women × 14 events. [small data] [single system]
+- Representation only; says nothing about how memberships are allocated. [no model of mechanism]
+- [outcome is not selection]
+
+**Channel / source (my judgment).** Foundational for representing the **organization** source: persons and groups as a bipartite structure, with person-person ties derived from co-membership. The asymmetric extension (primary vs. secondary affiliations; status-seeking board appointments) is the closest this paper comes to selection into groups. No non-monotonicity.
+
+---
+
+## 13. Centola & Macy 2007 — Complex contagions and the weakness of long ties
+
+**Citation.** Centola, Damon, and Michael Macy. 2007. "Complex Contagions and the Weakness of Long Ties." *American Journal of Sociology* 113(3): 702–734. DOI 10.1086/521848.
+
+**PDF note.** The library file is a **working-paper draft dated September 12, 2005** (66 pp., double-spaced), **not** the published AJS article; the abstract wording differs from the published version. Printed AJS page numbers **cannot be given** from this file; locations are manuscript pages (= PDF p.). Re-check every quote against the published article before using it in the dissertation.
+
+**Data / setting.** Theory/model only: simulations on Watts–Strogatz ring lattices with random rewiring (e.g., "N = 2000, averaged over 100 realizations", figure captions, ms. pp. 56–58).
+
+**Design.** Analytical argument + agent-based threshold-contagion simulations.
+
+**Main findings.**
+
+- Question: "We test whether this effect of long ties generalizes from simple to complex contagions – those in which the credibility of information or the willingness to adopt an innovation requires independent confirmation from multiple sources." (abstract, ms. p. 2).
+- Result: "we demonstrate that long ties may not only fail to speed up complex contagions, they can even preclude diffusion entirely" (abstract, ms. p. 2).
+- Bridge width, not length: "For complex contagions, the relevant attribute of a bridge is not the length of a dyadic tie but the width of the bridge, measured by the number of short paths between non-neighbors." (ms. p. 37).
+- Caution: "The qualitative differences we discovered between simple and complex contagions should caution network theorists about extrapolating from the spread of disease or information to the spread of participation in political, religious, or cultural movements." (ms. p. 39).
+
+**Model?** Yes; simulation; **not fit to data** (empirical social-movement cases are cited as consistent illustrations).
+
+**Limitations.**
+
+- Simplifying assumptions, stated by the authors: "assuming that every node has equal influence and every tie has equal weight. These assumptions are necessary to identify the structural effects of long ties" (ms. p. 16). Reversible states deferred: "We leave the effects of reversible states to future research." (fn., ms. p. 23). [model not fit to data]
+- [outcome is not selection]
+
+**Channel / source (my judgment).** Development/adoption via peers (source = peers): when an outcome requires reinforcement from multiple contacts, clustered (group-like) structure helps and long ties do not — another case where the "more connection is better" intuition fails. Non-monotonicity: the effect of random rewiring depends on the threshold (helps simple, hurts complex contagions); no competition for slots.
+
+---
+
+## 14a. Burt 1992 — Structural Holes: The Social Structure of Competition (chapter 1 only)
+
+**Citation.** Burt, Ronald S. 1992. *Structural Holes: The Social Structure of Competition*. Cambridge, MA: Harvard University Press. (Bib entry is `@misc` with no publisher/pages; publisher from general knowledge — confirm.) Chapter 1, "The Social Structure of Competition," pp. 8–49.
+
+**PDF note.** The library file contains **only chapter 1** (42 PDF pp.), an image scan with no text layer; text by tesseract OCR (`--psm 6`). PDF p. = book p. − 7 (PDF p. 1 = p. 8). Scan edges are cropped/skewed on some pages, so OCR has scattered errors; quotes below were chosen from clean stretches, with one OCR slip flagged. Spot-check against the scan.
+
+**Data / setting.** Theory (chapter 1 is the conceptual argument; empirical chapters not in file).
+
+**Design.** Theory.
+
+**Main findings.**
+
+- Thesis: "It is a description of the way in which social structure renders competition imperfect by creating entrepreneurial opportunities for certain players and not for others." (p. 8; PDF p. 1).
+- Scope includes selection outcomes: "I refer to opportunities in a broad sense, but I certainly mean to include the obvious examples of job promotions, participation in significant projects, influential access to important decisions, and so on." (p. 9). "The social capital of people aggregates into the social capital of organizations." (p. 9).
+- **Selection among equally able candidates**: "Competition is never perfect. The rules of trade are ambiguous in the aggregate and everywhere negotiable in the particular. The allocation of opportunities is rarely made with respect to a single dimension of abilities needed for a task. Within an acceptable range of needed abilities, there are many people with financial and human capital comparable to your own." … "Criteria other than financial and human capital are used to narrow the pool down to the individual who gets the opportunity. Those other criteria are social capital." … "Of those who are equally qualified, only a select few get the most rewarding opportunities." (p. 10; PDF p. 3).
+- Definition: "Nonredundant contacts are connected by a structural hole. A structural hole is a relationship of nonredundancy between two contacts." (p. 18; PDF p. 11).
+- Forward reference to promotion evidence (ch. 4, not in file): "Promotions in the firm are strongly correlated, and illuminatingly so for women, with the structural holes in a manager’s network." (p. 33; PDF p. 26; OCR reads "ina", corrected to "in a").
+- Benefits are not automatic: "There is no imperative that says players have to take advantage of the benefits provided by structural holes." (p. 37; PDF p. 30).
+
+**Model?** Conceptual model (information and control benefits; tertius gaudens; structural autonomy), formalized in later chapters; no fit in chapter 1.
+
+**Limitations.** Chapter 1 is argument only; evidence deferred to later chapters. [no model of mechanism] is not apt (mechanism is proposed) but [model not fit to data] applies within this chapter. Outcome framed as rate of return, which subsumes promotion. Competition is framed as among "players" in an arena, not explicitly a fixed number of slots.
+
+**Channel / source (my judgment).** **Selection** is explicit: when candidates are comparable on ability, network position (peers' structure) decides who "gets the opportunity" — the clearest statement in this cluster that selection among competitors depends on something other than individual performance. Source = peers (contact network), aggregated to the organization.
+
+---
+
+## 14b. Burt 2004 — Structural holes and good ideas
+
+**Citation.** Burt, Ronald S. 2004. "Structural Holes and Good Ideas." *American Journal of Sociology* 110(2): 349–399. DOI 10.1086/421787.
+
+**PDF note.** Typeset AJS PDF. PDF p. = journal p. − 348. In the text layer the "=" sign is encoded as "p" (e.g., "P p .68"); rendered below as "=".
+
+**Data / setting.** "I draw on data describing 673 managers who ran the supply chain in 2001 for one of America’s largest electronics companies." (p. 359). "Of the 673 managers, 455 completed the network questions (68%)." (p. 360). Personnel records for salary, evaluations, promotion; 455 ideas rated by two senior managers.
+
+**Design.** Observational, cross-sectional network survey + administrative outcomes; regression (salary OLS, ordinal logit for evaluation, logit for promotion); blind idea ratings.
+
+**Main findings.**
+
+- Hypothesis: "The hypothesis in this article is that people who stand near the holes in a social structure are at higher risk of having good ideas." (p. 349). Mechanism: "Opinion and behavior are more homogeneous within than between groups, so people connected across groups are more familiar with alternative ways of thinking and behaving." (abstract, p. 349).
+- Outcomes include evaluation and selection: "Compensation, positive performance evaluations, promotions, and good ideas are disproportionately in the hands of people whose networks span structural holes." (abstract, p. 349). "The between-group brokers are more likely to express ideas, less likely to have ideas dismissed, and more likely to have ideas evaluated as valuable." (p. 349).
+- Promotion: "Managers brokering connections across segregated groups had significantly higher odds of a promotion or above-average salary increase (P = .68 for C = 10). Managers limited to a circle of densely interconnected colleagues had the least chance (P = .28 for C = 100)." (p. 376; PDF p. 28).
+- Rank-dependent returns: "The results of model 1 highlight the third rank of managers as a transition point after which managers enjoyed the salary benefits of brokerage." (fn. 11, p. 371; PDF p. 23).
+- Blind evaluation of ideas: judges received "the ideas—unattributed to their sources—and was asked the question: “How much value could be generated if the idea were well executed?”" (p. 377; PDF p. 29).
+
+**Model?** Theoretical mechanism (vision advantage) + regressions; no generative model.
+
+**Limitations (author's own where possible).**
+
+- "The association cannot be causal. Networks do not act, they are a context for action." (p. 354; PDF p. 6). [no model of mechanism] (for causal identification)
+- "The caution here is that structural holes and brokerage can be found in almost any task, depending on point of view." (p. 354). [imperfect measure]
+- Cross-section: "Disentangling centrality from brokerage would require network and salary data over time" (p. 372; PDF p. 24). [imperfect measure]
+- One company, one function. [single system]
+- Outcome **includes** selection (promotion), but promotion is pooled with above-average raises in the main model and not modelled as competition for a fixed number of openings (my observation).
+
+**Channel / source (my judgment).** Development (better ideas via exposure to diverse groups), evaluation (ideas and job evaluations), and selection (promotion); source = peers (discussion network) across organizational groups (business units). Rank-dependent effect (benefits begin at a transition rank) is a form of non-linearity; not an inverted U.
+
+---
+
+## 15a. Lazer et al. 2009 — Computational social science (key claims only)
+
+**Citation.** Lazer, David, Alex Pentland, Lada Adamic, Sinan Aral, Albert-László Barabási, Devon Brewer, Nicholas Christakis, Noshir Contractor, James Fowler, Myron Gutmann, Tony Jebara, Gary King, Michael Macy, Deb Roy, and Marshall Van Alstyne. 2009. "Computational Social Science." *Science* 323(5915): 721–723. DOI 10.1126/science.1167742.
+
+**PDF note.** The bib lists two attachments; the typeset Science pages (files/322; 4 PDF pp., PDF p. 1 = p. 721) were used. (The other attachment is an NIH author manuscript with different wording — do not mix.)
+
+**Data / design.** Perspective (no data).
+
+**Key claims.**
+
+- Old data base of network theory: "For example, what does existing sociological network theory, built mostly on a foundation of one-time “snapshot” data, typically with only dozens of people, tell us about massively longitudinal data sets of millions of people, including location, financial transactions, and communications?" (p. 722; PDF p. 2). Also: "To date, research on human interactions has relied mainly on one-time, self-reported data on relationships." (p. 722).
+- Position matters: "Similarly, social network Web sites offer a unique opportunity to understand the impact of a person’s position in the network on everything from their tastes to their moods to their health" (p. 722).
+- "In short, a computational social science is emerging that leverages the capacity to collect and analyze data with an unprecedented breadth and depth and scale." (p. 722).
+
+**Limitations / relevance.** Programmatic; flags access/privacy as "the thorniest challenges" (p. 722). Tag for the older literature it critiques: [small data] [imperfect measure].
+
+**Channel / source (my judgment).** Methodological framing only: justifies revisiting position-and-outcome questions with complete, longitudinal administrative data (e.g., full draft/promotion records).
+
+---
+
+## 15b. Lazer et al. 2020 — Computational social science: obstacles and opportunities (key claims only)
+
+**Citation.** Lazer, David M. J., Alex Pentland, Duncan J. Watts, Sinan Aral, Susan Athey, Noshir Contractor, Deen Freelon, Sandra González-Bailón, Gary King, Helen Margetts, Alondra Nelson, Matthew J. Salganik, Markus Strohmaier, Alessandro Vespignani, and Claudia Wagner. 2020. "Computational Social Science: Obstacles and Opportunities." *Science* 369(6507): 1060–1062. DOI 10.1126/science.aaz8170.
+
+**PDF note.** Typeset Science Policy Forum; PDF p. 1 = p. 1060.
+
+**Data / design.** Policy Forum (no data).
+
+**Key claims.**
+
+- Definition: "We define CSS as the development and application of computational methods to complex, typically large-scale, human (sometimes simulated) behavioral data (1)." (p. 1060).
+- Dependence among observations is the point: "Whereas traditional quantitative social science has focused on rows of cases and columns of variables, typically with assumptions of independence among observations, CSS encompasses language, location and movement, networks, images, and video, with the application of statistical models that capture multifarious dependencies within data." (p. 1060).
+- Progress and shortfall: "These studies have greatly improved our understanding of important phenomena, ranging from social inequality to the spread of infectious diseases." … "But the field has also fallen short in important ways." (p. 1060).
+
+**Channel / source (my judgment).** Methodological framing: the "dependencies within data" line is a direct warrant for modelling an individual's selection as dependent on peers rather than as an independent row.
+
+---
+
+## 16a. Nikolaev & Mneimneh 2023 — Affiliation networks with preferential attachment and subsumption (brief)
+
+**Citation.** Nikolaev, Alexey, and Saad Mneimneh. 2023. "Modeling and Analysis of Affiliation Networks with Preferential Attachment and Subsumption." *Physical Review E* 108(1): 014310. DOI 10.1103/PhysRevE.108.014310.
+
+**PDF note.** Typeset PRE; pages are 014310-N (PDF p. N).
+
+**What it models.** A growth model for affiliation (group) networks represented as hypergraphs / simplicial complexes rather than pairwise graphs: "Some networks, however, are better described as groups of nodes rather than a set of pairwise connections. These groups are called affiliations, and the corresponding networks affiliation networks." (abstract, p. 014310-1). Motivation: "When viewed as graphs, affiliation networks do not necessarily exhibit the power law distribution of node degrees that is typically associated with preferential attachment." (p. 014310-1). "Subsumption" = "an affiliation cannot be a subset of another" (p. 014310-1).
+
+**Design / fit.** Analytic + simulation; compared descriptively to KONECT networks (assortativity, clustering; Table II). Not fit: "Although our model was not designed for network replication" (p. 014310-10); framed as a generator: "so the framework also serves as a synthetic generation algorithm for simulation and experimental studies" (p. 014310-1). [model not fit to data] [outcome is not selection]
+
+**Channel / source (my judgment).** Organization representation only (how person–group structures grow with cumulative advantage at the group level). No outcomes, no competition among persons.
+
+---
+
+## 16b. Geard & Bullock 2010 — Competition and the dynamics of group affiliation (brief)
+
+**Citation.** Geard, Nicholas, and Seth Bullock. 2010. "Competition and the Dynamics of Group Affiliation." *Advances in Complex Systems* 13(4): 501–517. DOI 10.1142/S0219525910002712. (PDF filename says 2011; the article itself and the bib say 2010.)
+
+**PDF note.** Typeset ACS PDF. PDF p. = journal p. − 500.
+
+**What it models.** Co-evolution of a social network and multiple, non-exclusive group memberships under finite individual "time and energy" (TAE) capacity: "Given that the resources of individuals are finite, groups can be considered to compete with one another for the time and energy of their members." (abstract, p. 501). Two-way link: "social networks provide the conduits via which groups recruit new members and groups provide the context in which new social ties are formed" (p. 501). Competition is varied via capacity and membership cost (p. 501).
+
+**Findings (simulation).** "Reducing the level of competition between groups (Series A) reduces the level of community structure observed in the social network and increases the level of observed homophily." (p. 513). Diminishing effect: "Most of these gains occur with the initial removal of exclusive membership and further reductions in competition have less impact on group properties." (p. 513). Position: "When individuals have different capacities for group affiliation (Series C), individuals with greater capacity come to occupy more central locations in the social network." (p. 513).
+
+**Design / fit / limitations.** Agent-based simulation; no data. Authors: "the current model omits an explicit description of both an individual’s utility function and a group’s efficacy." (p. 514). [model not fit to data] [outcome is not selection]
+
+**Channel / source (my judgment).** Organization source. Important distinction for the dissertation: here **groups compete for members' time**, not **members competing for slots within a group** — the reverse of the selection problem. Useful as a contrast case.
 
 ---

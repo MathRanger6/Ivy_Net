@@ -1,6 +1,6 @@
 # Education A — Big fish / little pond, ordinal rank, selective schools: source extracts
 
-Compiled 2026-10-28 by research-assistant agent. Source PDFs from the FOUNDY_Intro Zotero library (`FOUNDY_Intro.bib`). Text taken from `pdftotext -layout`. Davis (1966) was re-read with `tesseract` OCR because its JSTOR text layer runs words together. Marsh (1987) has a usable text layer.
+Compiled 2026-10-28 by research-assistant agent. Source PDFs from the FOUNDY_Intro Zotero library (`FOUNDY_Intro.bib`). Text taken from `pdftotext -layout`. Davis (1966) and Marsh (1987) were re-read with `tesseract` OCR on the quoted pages, because their scanned text layers run words together (Davis) or contain OCR noise (Marsh).
 
 **Conventions**
 
@@ -13,7 +13,20 @@ Compiled 2026-10-28 by research-assistant agent. Source PDFs from the FOUNDY_Int
 
 ## ASSISTANT SYNTHESIS (my interpretation, not a quotation)
 
-_(Written last; see bottom of build log. Placeholder replaced below.)_
+1. **The paradigm.** Davis (1966) framed the question as relative deprivation. At equal aptitude, a more selective college gives lower grades, and grades rather than school quality drive career aspirations: "big frogs in little ponds or little frogs in big ponds" (p. 21). Marsh (1987) named it the big-fish-little-pond effect (BFLPE): equally able students have lower academic self-concept, and also lower GPA, in high-ability schools.
+2. **Self-concept replicates widely.** Marsh & Hau (2003) found the effect negative in all 26 countries (mean β = −.20; abstract only). Fang et al. (2018) pooled 33 studies to β = −0.28, but with I² = 99.78%.
+3. **Ordinal rank reframes the paradigm as "same fish, different pond".** Murphy & Weinhardt (England, 2.25 million students), Elsner & Isphording (US AddHealth), Elsner, Isphording & Zölitz (random sections at a Dutch business school), and Denning et al. (Texas, linked to earnings) agree: at identical achievement, a higher local rank raises later scores, confidence, subject or major choice, college going, and earnings.
+4. **Elite-school effects at the admission cutoff conflict.** In US exam schools, effects are near zero for scores and college placement (Abdulkadiroğlu et al. 2014; Dobbie & Fryer 2014, abstract only). In Romania they are small and positive (0.02–0.10 SD; Pop-Eleches & Urquiola 2013), and in Trinidad and Tobago large and positive (Jackson 2010). Rank papers offer lower rank as one reason for the US nulls (Murphy & Weinhardt WP p. 38; Denning et al. p. 1428), but none of the cutoff papers tests this.
+5. **What remains open for selection among competitors for scarce slots:**
+   - Almost every outcome is development (self-concept, scores, own choices), not a selection decision by an organization [outcome is not selection].
+   - Elsner & Isphording explicitly raise admission on within-school rank (for example, top-10% rules) and cannot test it, because admission type is unobserved (p. 790).
+   - Mechanisms are verbal or agnostic [no model of mechanism]. Murphy & Weinhardt derive one sign test from a model but do not fit it [model not fit to data].
+   - Each estimate comes from one country or system [single system].
+   - Early work relies on self-reports and proxies [imperfect measure: Davis's self-reported GPA and retrospective freshman plans; Marsh's self-reported GPA].
+   - Some samples are small or sampled [small data: Elsner & Isphording, 13,645 students with rank computed from sampled cohorts; Marsh, 2,213 boys; Paulsen, 430 players].
+   - Pop-Eleches & Urquiola alone show the **organization** responding to the pond, by sorting teachers within schools.
+
+_Unread or partial sources:_ Marsh & Hau 2003 (no PDF; OpenAlex abstract only) and Dobbie & Fryer 2014 (library PDF is the online appendix; Crossref abstract only). Marsh 1987 and Murphy & Weinhardt 2020 are cited from pre-publication versions (an ERIC manuscript and NBER WP 24958), so their page numbers are **not** journal pages.
 
 ---
 
@@ -327,5 +340,195 @@ _(Written last; see bottom of build log. Placeholder replaced below.)_
 - [outcome is not selection] Major choice is the student's own choice; the school is non-selective (p. 3188: "the school we study is a non-selective institution").
 
 **Channel and source (Assistant judgment).** **Development** (beliefs, effort, specialization) driven by **peers** (section rank), with the **organization** (random assignment, central grading) holding evaluation fixed. Because peers are randomly assigned, this is the strongest causal "same fish, different pond" design in the set. The finding of asymmetric responses (gains from rank increases, nothing from decreases) is a distinctive dynamic.
+
+---
+
+## 9. Pop-Eleches & Urquiola (2013): Going to a better school: effects and behavioral responses
+
+**Citation.** Pop-Eleches, Cristian, and Miguel Urquiola. 2013. "Going to a Better School: Effects and Behavioral Responses." *American Economic Review* 103(4): 1289–1324. DOI 10.1257/aer.103.4.1289.
+
+**Source note.** I used the JSTOR copy of the published article (`files/635/Going_to_a_better_school.pdf`), where journal page = PDF page + 1287 (PDF p. 1 is a JSTOR cover sheet). The library also holds a "Submitted Version", which I did not use for quotes. On p. 1322 the right margin of the scan is cut off, so I took no quotes from that page.
+
+**Data and setting.** Romania. National, centralized high-school admission based on a transition score (national test plus GPA). Students list ranked school/track choices and are assigned subject to slot constraints.
+
+- p. 1290: "this mechanism generates about 2,000 cutoffs".
+- p. 1296: "(i) The 2001-2003 cohorts, for which we linked admissions data with information on whether students took the Baccalaureate exam and how they performed (these cohorts took the exam in 2005-2007)."
+- p. 1297: "These cohorts contain about 334,000 students attending about 800 high schools in 135 towns."
+- **Survey** (2009) in towns with two or three schools. p. 1299: "we randomly sampled 19,878 children (about 65 percent of the total) out of this population. From this target sample, we obtained 12,590 parent and child surveys."
+- **Outcome.** Baccalaureate exam performance. p. 1290: "Passing this exam is a requirement for application to university, and the grade is used by many institutions as a crucial admission criterion." The survey adds teacher assignment, parental help, and students' perceived relative standing and peer interactions.
+
+**Design.** Regression discontinuity at the admission cutoffs, plus survey-based RD estimates of behavioral responses. A conceptual framework extends Todd and Wolpin (2003) with school-side responses (p. 1292).
+
+**Main findings (verbatim).**
+
+1. Abstract, p. 1289: "First, students who have access to higher achievement schools perform better in a (high stakes) graduation test. Second, the stratification of schools by quality in general, and the opportunity to attend a better school in particular, result in significant behavioral responses: (i) teachers sort in a manner consistent with a preference for higher achieving students; (ii) children who make it into more selective schools realize they are relatively weaker and feel marginalized; (iii) parents reduce effort when their children attend a better school."
+2. p. 1291, effect size: "relative to individuals who just miss scoring above a school cutoff, those who succeed display a statistically significant 0.02 to 0.10 standard deviation advantage in Baccalaureate performance." (The first part of the sentence is on p. 1290.) Footnote 4: "In contrast, there is no evidence of an effect on the probability of taking the Baccalaureate exam."
+3. p. 1291, rank and marginalization: "children who just score above a cutoff on average perceive themselves as weaker relative to their peers. [...] Additionally, however, this is associated with greater frequency of negative interactions with peers, providing some evidence that getting into a higher achievement school leads to marginalization."
+4. p. 1291, organizational response: "although students who score just above a cutoff attend schools that on average have more certified teachers, the marginal (actual) teachers assigned to them are not observably different from those assigned to students who score just below the cutoff. In short, more qualified teachers are matched with higher achieving students."
+5. p. 1291, dynamics: "the RD-estimated feelings of stigmatization and reduction in parental help are strongest earlier in students' high school careers, and diminish over time."
+
+**Mechanism or model.** A conceptual production-function framework (pp. 1292–1293) motivates the behavioral responses. It is not estimated structurally; the responses are reduced-form RD estimates. (Assistant judgment.)
+
+**Separating sorting from effects.** RD at admission cutoffs compares students just above and just below each cutoff. p. 1290: "the setting gives students incentives to truthfully reveal their preference rankings."
+
+**Limitations.**
+
+- [single system] p. 1292: "As stated, such behavioral responses and equilibrium effects may well be setting specific." p. 1323: "While the magnitude and even the direction of these responses may reflect institutions that are specific to Romania, their existence reflects that educational markets are complex settings in which several agents interact."
+- [imperfect measure] Behavioral responses come from a survey in a subset of towns with a 63% response rate. p. 1299: "While the resulting sample is not completely representative of the population of these schools".
+- [model not fit to data] The framework is illustrative only.
+- [outcome is not selection] (partly) The Baccalaureate is a gateway to university admission, but admission itself is not observed in the extracted passages. RD estimates are local to marginal admits.
+
+**Channel and source (Assistant judgment).** This paper covers all three channels: **development** (small positive achievement gains); **evaluation**/allocation by the **organization** (teachers sorted toward higher-achieving students *within* schools, so marginal admits do not receive the better teachers); and **peers** (marginal admits feel weaker and marginalized, which is the big-fish effect at an admission cutoff). It is a key bridge: the *selection* event (admission at a cutoff) changes both peer rank and organizational treatment.
+
+---
+
+## 10. Abdulkadiroğlu, Angrist & Pathak (2014): The elite illusion
+
+**Citation.** Abdulkadiroğlu, Atila, Joshua Angrist, and Parag Pathak. 2014. "The Elite Illusion: Achievement Effects at Boston and New York Exam Schools." *Econometrica* 82(1): 137–196. DOI 10.3982/ECTA10266. The library PDF is the published version, and the page numbers below are journal pages. The bib entry has an empty author field (`noauthor_elite_2014`), which should be fixed in the bib.
+
+**Data and setting.** United States, Boston and New York City. The six traditional exam schools: Boston Latin School, Boston Latin Academy, and O'Bryant in Boston; Stuyvesant, Bronx Science, and Brooklyn Tech in NYC.
+
+- p. 143: the Boston sample covers students "who applied for exam school seats in 7th grade from 1997 to 2008 or in 9th grade from 2001 to 2007." Note: these are application years. The 7th-grade years in the appendix tables are 1999–2008, as stated in a table note; the reason for the difference is not explained in the passages I read.
+- p. 165: New York data cover "four 9th grade applicant cohorts (from 2004–2007), with follow-up test score information through 2009."
+- **Outcomes.** MCAS state tests, PSAT, SAT, AP, and college enrollment and selectivity (from National Student Clearinghouse records). Boston admission uses ISEE scores plus GPA under deferred acceptance; NYC uses the SHSAT.
+
+**Design.** Fuzzy regression discontinuity at the admission cutoffs, with exam-school offers used as instruments for peer characteristics (peer achievement and racial composition) in two-stage least squares. The paper builds a sharp RD from a deferred-acceptance match.
+
+**Main findings (verbatim).**
+
+1. Abstract, p. 137: "Successful applicants near admissions cutoffs for the least selective of these schools move from schools with scores near the bottom of the state SAT score distribution to schools with scores near the median. Successful applicants near admissions cutoffs for the most selective of these schools move from above-average schools to schools with students whose scores fall in the extreme upper tail. [...] Our estimates suggest that the marked changes in peer characteristics at exam school admissions cutoffs have little causal effect on test scores or college quality."
+2. p. 142, precision: "Importantly, most of the 2SLS estimates reported here are reasonably precise; we can rule out relatively modest peer composition effects."
+3. p. 163, college: "Table VI, which reports estimated effects on post-secondary outcomes, shows little evidence of a positive exam school treatment effect on college enrollment or quality. Despite the positive grade 10 English and AP score results for some O'Bryant applicants, applicants who clear the O'Bryant cutoff appear to be less likely to attend a competitive college or highly competitive college than they otherwise would have been, though only the nonparametric estimates here are significant."
+4. p. 178: "The results reported here suggest that an exam school education produces only scattered gains for applicants, even among students with baseline scores close to or above the mean in the target school. Because the exam school experience is associated with sharp increases in peer achievement, these results weigh against the importance of peer effects in the education production function. [...] Overall, however, while the exam school students in our samples typically have good outcomes, most of these students would likely have done well without the benefit of an exam school education."
+5. p. 179, on parents' beliefs: "The fact that we find little support for causal peer effects suggests that parents either mistakenly equate attractive peers with high value added, or that they value exam schools for reasons other than their impact on learning."
+
+**Mechanism or model.** The paper has no behavioral model of why the effects are null. It provides an econometric argument that 2SLS is free of omitted-variables bias if resource and curriculum changes are themselves caused by peer composition (p. 142). The paper does not examine rank or big-fish channels in the passages I extracted. (Assistant judgment.)
+
+**On why correlational peer studies find effects (useful for the "imperfect design" gap), p. 178.** "it is worth emphasizing the high risk of specification error in peer analysis. As noted by Manski (2000) and Angrist and Pischke (2009), among others, the relationship between an individual-level variable and any group average of this variable is essentially mechanical. [...] Random assignment to groups fails to solve either of these problems."
+
+**Separating sorting from effects.** RD at admission cutoffs compares near-identical applicants on either side. Applicant-side sorting is held fixed because everyone in the sample applied.
+
+**Limitations.**
+
+- [single system] Two US cities, six schools. p. 178: "Every context is different, and the absence of peer effects in one setting does not prove that such effects are unimportant elsewhere."
+- [imperfect measure] Outcomes are tests and college enrollment/selectivity. p. 178: "Of course, test scores and peer effects are only part of the exam school story. [...] It is also possible that exam school graduates earn higher wages, a question we plan to explore in future work."
+- External validity: RD estimates are local to applicants at the cutoffs. The authors address this partly with a second running variable (p. 179: "information on a second variable with content similar to the running variable facilitates an exploration of the external validity of regression discontinuity estimates").
+- [no model of mechanism] There is no account of why large peer changes produce no effect (for example, offsetting rank effects). Murphy & Weinhardt (WP p. 38) and Denning et al. (p. 1428) later propose rank as one explanation.
+- [outcome is not selection] (partly) "College quality" is the closest outcome to selection: the selectivity of the college attended. Effects on it are null or negative for O'Bryant marginal admits.
+
+**Channel and source (Assistant judgment).** **Development** from **peers**, with the null result at the cutoff. Winning a scarce slot (exam-school admission) did not raise achievement or college placement for marginal winners. This is the core "elite illusion" finding: the elite pond does not make the same fish bigger. It also shows that being selected into an elite organization is not the same as being developed by it.
+
+---
+
+## 11. Dobbie & Fryer (2014): The impact of attending a school with high-achieving peers (ABSTRACT + APPENDIX ONLY)
+
+**Citation.** Dobbie, Will, and Roland G. Fryer Jr. 2014. "The Impact of Attending a School with High-Achieving Peers: Evidence from the New York City Exam Schools." *American Economic Journal: Applied Economics* 6(3): 58–75. DOI 10.1257/app.6.3.58.
+
+**Source status.** The library PDF (`files/793/...`, labeled "Submitted Version") is **only the Online Appendix (dated October 2013)**, with figures, tables, and a data appendix. **The article text is not in the library.** The abstract below is from Crossref (publisher-deposited; it matches the OpenAlex text). It has **no page number**, but the abstract appears on the article's first page, p. 58. I give no article-body quotes.
+
+**Abstract (Crossref, verbatim).** "This paper uses data from three prominent exam high schools in New York City to estimate the impact of attending a school with high-achieving peers on college enrollment and graduation. Our identification strategy exploits sharp discontinuities in the admissions process. Applicants just eligible for an exam school have peers that score 0.17 to 0.36 standard deviations higher on eighth grade state tests and that are 6.4 to 9.5 percentage points less likely to be black or Hispanic. However, exposure to these higher-achieving and more homogeneous peers has little impact on college enrollment, college graduation, or college quality."
+
+**Data and setting (from the Online Appendix).** New York City: Stuyvesant, Bronx Science, and Brooklyn Tech. Admission is by SHSAT score.
+
+- Online Appendix, PDF p. 31: "On the day of the exam, students rank the schools in order of where they want to go. Test results are ranked from the highest score to the lowest, and administrators place students in high schools starting with the students with the highest score. Each student is placed into their most preferred school that still has seats until no seats remain at any SHS."
+- Same page: "SHSAT scores, gender and middle school type were pulled from the NYC test score for 1989 through 2008."
+- **Outcomes** (appendix tables): Regents exams and diplomas, SAT, high-school graduation, and National Student Clearinghouse college enrollment, graduation, and quality. The appendix defines college quality as the midpoint SAT of the college attended.
+- **Sample size.** Not available from the appendix text I read. Check the article.
+
+**Design.** Sharp regression discontinuity at the SHSAT admission cutoffs for each school and cohort.
+
+**Main finding.** Exam-school eligibility at the cutoff has little effect on college enrollment, graduation, or college quality, despite large jumps in peer achievement (0.17–0.36 SD).
+
+**Mechanism or model.** Not determinable from the abstract and appendix. I have no evidence of a formal model.
+
+**Separating sorting from effects.** RD at the admission cutoff.
+
+**Limitations.**
+
+- [single system] Three NYC schools.
+- [outcome is not selection] (partly) College enrollment and quality are *placement* outcomes, which are close to selection into scarce college slots, but they are observed only as attendance.
+- Authors' own stated limitations are **not available**, because I did not read the article text.
+
+**Channel and source (Assistant judgment).** **Development** from **peers**, with a null result at the cutoff, including for *college placement* (a downstream selection outcome). This independently replicates the Abdulkadiroğlu et al. NYC null.
+
+---
+
+## 12. Jackson (2010): Do students benefit from attending better schools? Trinidad and Tobago
+
+**Citation.** Jackson, C. Kirabo. 2010. "Do Students Benefit from Attending Better Schools? Evidence from Rule-based Student Assignments in Trinidad and Tobago." *Economic Journal* 120(549): 1399–1429. DOI 10.1111/j.1468-0297.2010.02371.x. The library PDF is the published version, and the page numbers below are journal pages. The text layer renders apostrophes as "Õ"; I normalized them to ' in quotes.
+
+**Data and setting.** Trinidad and Tobago. National assignment to secondary schools after grade 5, based on SEA scores and students' ranked school choices.
+
+- p. 1403: "The data used come from two sources: the official SEA (Secondary Entrance Assessment) test score data (from 5th grade) for the 2000 cohort and the official 2004 and 2005 CSEC test score data."
+- p. 1404: "Of the 31,593 SEA test takers in 2000, 22,876 students were linked to CSEC examination data five years later (or four years for early takers)."
+- p. 1410: "the final data set used comprises 23,322 students at 98 schools."
+- **Outcomes.** CSEC (end-of-secondary) exam taking, number of exams passed, and obtaining a certificate. p. 1419 defines the certificate as having "passed 5 examinations including mathematics and English – the prerequisite to pursuing tertiary education".
+
+**Design.** Instrumental variables built from the deterministic part of the assignment rule: regression discontinuity at simulated cutoffs, difference-in-differences, and a "full" rule-based instrument. The analysis conditions on incoming scores and school preferences.
+
+- p. 1400 (setting advantage): "there is a national curriculum so that school effects are not confounded with large curricular differences".
+
+**Main findings (verbatim).**
+
+1. Abstract, p. 1399: "I use instrumental variables based on the discontinuities created by the assignment mechanism and exploit rich data which include students' test scores at entry and secondary school preferences to address self-selection bias. I find that attending a better school has large positive effects on examination performance at the end of secondary school. The effects are about twice as large for girls than for boys."
+2. p. 1419: "the clean 2SLS-D based on the non-assisted schools, the 2SLS-DID and the 2SLS-Full models suggest that attending a school where peer test scores are half a standard deviation higher is associated with passing between 0.28 and 0.34 more CSEC examinations."
+3. p. 1419, on the selection-relevant outcome: "attending a school where peer test scores are half a standard deviation higher is associated with being between 5 and 7 percentage points more likely to obtain a certificate. [...] These estimates imply that a student who misses their top choice school would be between 9 and 12 percentage points less likely to obtain the prerequisites to pursue tertiary education."
+4. p. 1419, effect on taking the exam: "suggesting little or no effect on CSEC taking."
+5. p. 1427: "The results indicate that the marginal effect of attending a school with higher-achieving peers is non-linear so that the benefits to attending schools with marginally brighter peers are low at the lower end of the peer achievement distribution."
+
+**Mechanism or model.** None. "Better school" is a bundle of peers and inputs that the paper does not separate. p. 1399: "the quality of school inputs may be endogenous to the quality of peers because schools with bright, motivated students may attract better teachers and may have more affluent alumni networks leading to better facilities and better funding." In the passages I searched, there is no rank or self-concept analysis.
+
+**Separating sorting from effects.** Rule-based instruments; the deterministic portion of the assignment "cannot be manipulated by students or school principals" (p. 1409). The analysis also conditions on stated preferences.
+
+**Limitations.**
+
+- [single system] One small country and one cohort (SEA 2000).
+- [no model of mechanism] Peer effects and school-input effects are confounded by design (p. 1399, quoted above).
+- [imperfect measure] Outcomes are exam-based. Selection into tertiary education is proxied by the certificate prerequisite, not observed directly.
+- [outcome is not selection] (partly) The certificate is an eligibility threshold for tertiary education, which is close to selection. Admission itself is not observed.
+- The author calls for future work on gender, p. 1427: "further research is needed to understand these gender differences better."
+
+**Conflict with the US nulls.** Jackson finds *positive* effects at the cutoff, as Pop-Eleches & Urquiola do (small positive), whereas Abdulkadiroğlu et al. and Dobbie & Fryer find near-zero effects. The policy reading on p. 1428: "the finding that attending a more selective school improves one's outcomes implies that practices that group students by ability will tend to reinforce and exacerbate pre-existing differences in academic achievement."
+
+**Channel and source (Assistant judgment).** **Development** from a bundle of **peers and organization** (school inputs). Winning a more selective slot raises the probability of clearing the next selection threshold (tertiary prerequisites). This is evidence that access to selective organizations can compound into later selection.
+
+---
+
+## 13a. Thiemann (2017): The persistent effects of short-term peer groups in higher education (brief)
+
+**Citation.** Thiemann, Petra. 2017. "The Persistent Effects of Short-Term Peer Groups in Higher Education." IZA Discussion Paper No. 11024 (September 2017). 43 pp. This is a working paper with no journal version in the bib. Page numbers below are the DP's printed page numbers.
+
+**Data and design.** Switzerland, University of St. Gallen. **Random assignment** to freshmen-week teams of about 15–16 students.
+
+- p. 3: "detailed information on academic achievement (grades in mandatory first-year courses, enrollment, dropout, and graduation records) for 8,000 undergraduates (cohorts 2003-2012)."
+- **Selection context**, p. 6: "The first year serves as a selection and orientation period. [...] Academic performance by the end of the first year determines whether students are admitted to the second year. On average, 66% of students pass the first year in their first attempt."
+
+**Findings (verbatim).**
+
+- Abstract (DP abstract page, unnumbered): "Ability peer effects are non-linear, i.e. very high or low levels of average peer ability in a group harm students' grades. These effects are most pronounced for low-ability students."
+- p. 4: "for students in the bottom 10% of the peer ability distribution, increasing peer ability by one standard deviation leads to an increase in first-year GPA by 0.07 standard deviations, a non-negligible effect. Low-ability students are most vulnerable to being in groups with extremely high or extremely low peer ability, indicating that they benefit from positive peer spillovers, but might also suffer from discouragement effects in the presence of high-ability peers."
+
+**Mechanism.** Verbal only ("discouragement effects"). Peer ability is an *imputed* measure (p. 4: "I use an imputed measure of peer ability, which is a weighted combination of a set of characteristics that predict ability").
+
+**Limitations.** [single system] One university. [imperfect measure] Imputed peer ability. [no model of mechanism]. Working paper, so the results are provisional.
+
+**Channel and source (Assistant judgment).** **Development** from **peers**. A non-linear (inverse-U) peer effect in a setting where first-year grades decide **selection into year 2**. The implication is that peers can move a student across an organizational survival threshold.
+
+---
+
+## 13b. Paulsen (2022): Peer effects and human capital accumulation — college and NBA productivity (brief)
+
+**Citation.** Paulsen, Richard J. 2022. "Peer effects and human capital accumulation: Time spent in college and productivity in the National Basketball Association." *Managerial and Decision Economics* 43(8): 3611–3619. DOI 10.1002/mde.3617. The library PDF is the published version.
+
+**Data and design.** All NBA draftees 2006–2014 (the "one-and-done" era). p. 3615: "Over the 9-year draft sample, 430 of the 540 players drafted spent at least 1 year playing college basketball." Regressions of NBA performance and persistence on years in college and a **power-conference indicator** (the peer-quality proxy), controlling for draft position, high-school recruiting ranking, and freshman statistics. Observational.
+
+**Findings (verbatim).**
+
+- Abstract, p. 3611: "Additional years in college are found to have an insignificant impact on persistence in the NBA at various points post draft, a positive impact on early career performance, and a negative impact on midcareer performance, while peer quality does not have a significant impact on performance."
+- p. 3612: "Playing in a power conference is not found to have a significant impact on performance, which suggests that peer quality in college is not an important determinant of NBA success."
+
+**Limitations (Assistant judgment).** [small data] 430 players. [imperfect measure] Peer quality is a binary power-conference indicator. [no model of mechanism]. [single system] NBA only. Selection into college programs and conferences is handled only by controls.
+
+**Channel and source (Assistant judgment).** **Development** from **peers** (college conference), with a null effect on post-selection performance. This bridges education and sports: the "pond" before a draft (a scarce-slot selection event) does not predict post-draft productivity once draft position is controlled. Note that draft position is itself the selection outcome, so controlling for it conditions on selection.
 
 ---

@@ -4,14 +4,22 @@ Source extracts for the dissertation introduction. Built 2026-10-28 from the PDF
 
 **Conventions**
 
-- Quotes are copied verbatim from the PDF text layer. Line-break hyphens introduced by the journal layout (e.g. "con-temporaneous") are rejoined; nothing else is changed. `[...]` marks an omission.
+- Quotes are copied verbatim from the PDF text layer. Line-break hyphens introduced by the journal layout (e.g. "con-temporaneous") are rejoined and typographic ligatures (ﬁ, ﬂ) are written as plain letters; nothing else is changed. `[...]` marks an omission. Omitted footnote / reference superscripts are noted next to the cite. All quotes were machine-checked against `pdftotext` output on 2026-10-28.
 - "p." = printed journal page. When the PDF page differs it is given as "PDF p.".
 - "Channel / source" lines are **assistant judgment**, not the authors' framing. Channels: development (what a person becomes), evaluation (how a performance is measured/perceived), selection (who wins a scarce slot). Sources: peers vs. organization.
 - Limitation tags: [small data], [imperfect measure], [single system], [no model of mechanism], [model not fit to data], [outcome is not selection].
 
 ---
 
-## Assistant synthesis (to be written after all papers are read)
+## ASSISTANT SYNTHESIS (not from the papers; my reading of the cluster)
+
+1. **Established:** outcomes cluster on networks, and some of that clustering is causal peer influence. The cleanest evidence is experimental: Centola 2010 and 2011 (assigned network position and composition), Eckles et al. 2016 (randomized peer behavior), Rajkumar et al. 2022 (randomized tie recommendations, 20M+ people).
+2. **Established:** sorting is large. Homophily structures ties of every type (McPherson et al. 2001), and much of it is *induced* by organizations / foci rather than chosen (Kossinets & Watts 2009). In one large observational network, matching on observables cut the apparent peer effect by more than half (Aral et al. 2009).
+3. **Contested:** the Christakis–Fowler obesity claim. Cohen-Cole & Fletcher attribute it to shared environment; Fowler & Christakis reply that the Framingham estimates sit inside their critics' confidence intervals and that the effect is directional. Shalizi & Thomas show that latent homophily is generically confounded with contagion and can reproduce the directional asymmetry. VanderWeele's sensitivity analysis finds the obesity and smoking estimates moderately robust, with confidence intervals that are fragile.
+4. **Method lesson:** observational network estimates can be wrong in either direction. Aral et al. found overestimates; Eckles et al. found both over- and underestimates; in Rajkumar et al., OLS reversed the IV result on weak ties. Credible separation of "peers changed me" from "I sorted to similar peers / shared their environment" needs randomization or explicit sensitivity bounds.
+5. **Organization as source:** two papers make the organization an active cause, not just a backdrop. In Kossinets & Watts, foci erase the similarity effect on tie formation. In McPherson et al., cross-sectional data misread organizational residues as individual choice (p. 438). Centola 2011 shows that whoever sets network composition changes outcomes.
+6. **Open for a dissertation on selection:** almost every outcome here is development (weight, adoption, posting). The only selection-adjacent outcomes are job mobility (Rajkumar et al.; Gee et al.). Even those do not observe the competitors for a slot or the evaluator's decision, so none separates peer effects on *what a person becomes* from effects on *how they are evaluated* or *who wins a fixed number of slots*. Gee et al. state the selection worry outright (p. 486: a job may go "toward another who has the right type of connection [...] but who is not necessarily a better worker"), but they cannot test it.
+7. **Page-number caveats:** three PDFs are not the typeset versions — Fowler & Christakis 2008 and VanderWeele 2011 (NIH author manuscripts) and Shalizi & Thomas 2011 (arXiv). Their journal page numbers could not be determined, so cite them by manuscript page or verify against the published version. The McPherson et al. bib DOI is wrong (see paper 7).
 
 ---
 
@@ -33,7 +41,7 @@ Source extracts for the dissertation introduction. Built 2026-10-28 from the PDF
 
 **Sorting vs. influence.** Names three explanations explicitly: homophily, shared unobserved contemporaneous events (confounding), and induction:
 
-> "We considered three explanations for the clustering of obese people. First, egos might choose to associate with like alters ("homophily"). Second, egos and alters might share attributes or jointly experience unobserved contemporaneous events that cause their weight to vary at the same time (confounding). Third, alters might exert social influence or peer effects on egos ("induction")." (p. 372)
+> "We considered three explanations for the clustering of obese people. First, egos might choose to associate with like alters ("homophily"). Second, egos and alters might share attributes or jointly experience unobserved contemporaneous events that cause their weight to vary at the same time (confounding). Third, alters might exert social influence or peer effects on egos ("induction")." (p. 372; reference superscripts "21,23,24" after "homophily" omitted)
 
 Strategy: (a) lagged ego outcome and lagged alter outcome, "The use of a lagged independent variable for an alter's weight status controlled for homophily." (p. 373); (b) a directionality test, "if unobserved factors drove the association between the ego's obesity and the alter's obesity, then the directionality of friendship should not have been relevant." (p. 373); (c) null neighbor effect and no distance gradient used to argue against a shared local environment (p. 377).
 
@@ -60,7 +68,7 @@ Strategy: (a) lagged ego outcome and lagged alter outcome, "The use of a lagged 
 
 > "We find that point estimates of the "social network effect" are reduced and become statistically indistinguishable from zero once standard econometric techniques are implemented. We further note the presence of estimation bias resulting from use of an incorrectly specified dynamic model." (Abstract, p. 1382)
 
-> "After controlling for environmental confounding (through school-specific time trends), our estimate falls by over 30% to 0.037. Finally, we control for friendship selection by controlling for individual fixed effects. With this inclusion, the coefficient of interest declines further and becomes statistically indistinguishable from zero." (p. 1386)
+> "After controlling for environmental confounding (through school-specific time trends), our estimate falls by over 30% to 0.037. Finally, we control for friendship selection by controlling for individual fixed effects. With this inclusion, the coefficient of interest declines further and becomes statistically indistinguishable from zero." (p. 1386; footnote marker "20" after "fixed effects" omitted)
 
 > "Though we do not completely rule out the possibility of induction and person-to-person spread of obesity, our results suggest that shared environmental factors can cause the appearance of social network effects." (p. 1386)
 

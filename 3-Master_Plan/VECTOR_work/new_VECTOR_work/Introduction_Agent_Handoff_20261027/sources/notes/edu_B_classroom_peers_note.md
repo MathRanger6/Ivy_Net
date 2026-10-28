@@ -9,17 +9,26 @@
 - Limitation tags: [small data], [imperfect measure], [single system], [no model of mechanism], [model not fit to data], [outcome is not selection].
 - "Channel / source" lines are **assistant judgment**, not the authors' claims. Channels: development (what a person becomes), evaluation (how a performance is measured/perceived), selection (who wins a scarce slot). Sources: peers vs organization.
 
-**Contents (in order written)** — Sacerdote 2001; Hoxby 2000; Carrell, Fullerton & West 2009; Carrell, Sacerdote & West 2013; Booij, Leuven & Oosterbeek 2017; Feld & Zölitz 2017; Duflo, Dupas & Kremer 2008/2011; Jackson & Bruegmann 2009; Lyle 2007; Angrist 2014; Sacerdote 2011 & 2014 (abstract-only).
+**Contents** — numbered as in the request; sections appear in the order written (Hoxby §1 was written after Lyle §9 because its PDF needed OCR): §2 Sacerdote 2001; §3 Carrell, Fullerton & West 2009; §4 Carrell, Sacerdote & West 2013; §5 Booij, Leuven & Oosterbeek 2017; §6 Feld & Zölitz 2017; §7 Duflo, Dupas & Kremer 2008 WP; §8 Jackson & Bruegmann 2009 WP; §9 Lyle 2007; §1 Hoxby 2000 WP; §10 Angrist 2014; §11 Sacerdote 2011 & 2014 (abstract-only).
 
 ---
 
-## Assistant synthesis (8–12 lines; ASSISTANT SYNTHESIS, not source text)
+## Assistant synthesis (ASSISTANT SYNTHESIS, not source text)
 
-_(to be written after all papers are read)_
+1. **Sign and size.** Random or quasi-random peer variation usually gives positive but modest average effects on academic outcomes: about +.05 GPA per SD of roommate GPA at Dartmouth (an outcome-on-outcome correlation; the causal roommate-background effects are "modest"), +.05 grade points per SD of peer SAT-verbal in USAFA squadrons, +1.26% of an SD per SD of peer GPA at Maastricht, and 0.15–0.4 points per point of peer score in Texas cohorts. At West Point the effects are close to zero once common shocks are handled (§§1–3, 6, 9).
+2. **The estimate depends on definition and measurement.** Roommates and dorm floors understate the effect relative to the full assigned cohort (CFW 2009). Measurement error and weak-instrument mechanics can create or inflate "peer effects" (Angrist 2014; Feld & Zölitz 2017) [imperfect measure].
+3. **Averages hide winners and losers.** In Maastricht sections, high-achieving peers help high- and middle-GPA students but hurt low-GPA students (Feld & Zölitz). In Amsterdam, low-ability students gain from able peers only in heterogeneous groups and are hurt by heterogeneity in low-ability groups (Booij et al.). In Kenya, peer gains appear at the top and bottom but not in the middle quartiles (DDK). In Texas, effects are strongest within racial groups (Hoxby).
+4. **The CSW 2013 policy test.** Nonlinear reduced-form estimates from randomly assigned squadrons predicted a +0.053 gain for the bottom third. Implementing them produced −0.061 for that group and +0.082 for middle-ability students.
+5. CSW attribute the reversal to endogenous subgroup formation (homophily in study partners and friends) that their reduced-form model did not contain. They conclude: "Regrettably, we do not now see such a methodology." Angrist instead reads the reversal as evidence that the pre-treatment estimate was spurious. On either reading, reduced-form peer coefficients do not carry over to new group configurations [no model of mechanism].
+6. **Mechanisms are rarely modeled, and the models are not fit.** DDK is the exception: a model of teacher targeting under convex, exam-linked rewards, tested only by rejecting special cases [model not fit to data]. Jackson & Bruegmann use a verbal framework. The rest offer survey correlates or speculation.
+7. **What is left open for selection among competitors for scarce slots:**
+   - Every outcome is a grade, test score, credit count, or individual choice (major, fraternity, staying in the Army); none is a contest for a fixed number of slots [outcome is not selection]. CFW state outright that USAFA has "no explicit grading curves," so one student's gain is not another's loss. Booij et al.'s dropout outcome is an absolute 45-credit threshold.
+   - Each study uses one institution or one state [single system], often with few independent groups (48 tutorial groups; 108 squadrons) [small data].
+   - No study models how peers shift evaluation or rank in a competition. The closest are Jackson & Bruegmann, who show colleagues contaminate individual value-added evaluation, and DDK, where a later selection exam shapes teacher effort.
 
 ---
 
-## 1. Sacerdote (2001) — Dartmouth roommates
+## 2. Sacerdote (2001) — Dartmouth roommates
 
 **Citation.** Sacerdote, Bruce. 2001. "Peer Effects with Random Assignment: Results for Dartmouth Roommates." *Quarterly Journal of Economics* 116(2): 681–704. DOI 10.1162/00335530151144131. (PDF is a scanned JSTOR copy; printed pp. 681–703 = PDF pp. 1–23.)
 
@@ -375,5 +384,105 @@ _(to be written after all papers are read)_
 - [outcome is not selection] Choice outcomes (major, staying in Army) are individual choices, not competitive scarce slots; authors' own call: "research on social relationships other than peers and on measures of outcomes other than academic performance may provide valuable insights" (p. 298).
 
 **Channel / source (assistant judgment).** Development of preferences/choices via peers (plebes) and **role models** (sophomores, an organizationally designated hierarchy). Academic peer effects ≈ zero; effects show up in career choices (retention), which feed later military selection pipelines but are not themselves selection decisions.
+
+---
+
+## 1. Hoxby (2000) — cohort-to-cohort gender and race variation, Texas elementary schools
+
+**Citation.** Hoxby, Caroline. 2000. "Peer Effects in the Classroom: Learning from Gender and Race Variation." NBER Working Paper 7867 (August 2000). DOI 10.3386/w7867. **Pages = WP printed page numbers** (printed p = PDF p − 2; abstract on unnumbered PDF p. 2). **Text source = tesseract OCR** (the PDF's text layer is unreadable); quotes are OCR output, with "|" read as "1" where marked.
+
+**Data / setting.** Texas Schools Microdata Panel (UT-Dallas Texas Schools Project); TAAS state tests, grades 3–6, 1990–91 to 1998–99; "about 3,300 schools in Texas that enrolled third graders and the size of the median cohort was about 80 students" (p. 20). Observations are group averages: "Number of observations is 22,496 in third grade regressions, 19,084 in fourth grade regressions, 14,974 in fifth grade regressions, and 9,743 in sixth grade regressions. An observation is a gender group in a cohort in a school." (Table 5 notes, PDF p. 45). Outcome: reading and math test scores (TAAS reading mean ≈ 29.5 points, SD ≈ 2.3, p. 20).
+
+**Design (quasi-random, not randomized).** Within-school, within-grade variation between adjacent cohorts: "Both strategies depend on the idea that there is some variation in adjacent cohorts' peer composition within a grade within a school that is idiosyncratic and beyond the easy management of parents and schools." (p. 3). Strategy 1: changes in gender/racial shares; Strategy 2: correlated idiosyncratic achievement residuals across groups (p. 4). Specification test: drop schools where "actual years explain more variation (in cohort composition or in achievement) than false, randomly assigned years." (p. 4)
+
+**Main findings (verbatim).**
+
+> "I find that students are affected by the achievement level of their peers: a credibly exogenous change of 1 point in peers' reading scores raises a student's own score between 0.15 and 0.4 points, depending on the specification. Although I find little evidence that peer effects are generally non-linear, I do find that peer effects are stronger intra-race and that some effects do not operate through peers' achievement." (abstract, PDF p. 2) [OCR: "acredibly" → "a credibly"; "|" → "1"]
+
+> "If one translates the peer effect estimates from strategy 1 into test scores, then strategy 1 generates estimates in the range of 0.15 to 0.40. Strategy 2 tends to generate estimates in the range of 0.10 to 0.55." (p. 36)
+
+> "Males' scores rise by 0.0471 points for 10 percentage change in the share of their class that is female. To put this in perspective, an all-female class would score about one-fifth of a standard deviation higher in reading, all else equal." (p. 23)
+
+**Heterogeneity (who gains, who loses).**
+
+> "The translation suggests that the effect of mean peer achievement varies from small (0.092) to substantial (0.676), and that the most substantial effects of mean peer achievement are intra-racial group." (p. 26) — e.g., a 1-point-lower peer mean "lowers a black student's own score by 0.676 points in reading and 0.402 points in math" vs Anglo "0.168 points in reading and 0.092 points in math" (p. 26).
+
+> "In any case, it is clear that the baseline model of peer effects is inadequate: peer effects do not operate solely through peers' mean achievement in the same subject." (pp. 24–25)
+
+- Female share in math: translated effects "so large that they suggest that peer effects do not operate purely through peers' mean achievement in math." (p. 24)
+- Nonlinearity mostly not found: Table 14 quadratic terms "all small (in the range of 0.001 to 0.008) and statistically insignificantly different from zero. These results do not provide any evidence of non-linearities" (p. 34); but female-share effects "tends to be largest in classes that are initially at least 66 percent female" (p. 25).
+
+**Model / mechanism.** Framework = test of the linear "baseline model" (own outcome linear in peers' mean): "Regardless of how one allocates peers, total societal achievement remains the same under the baseline model. In order to give one student a better peer, one must take that peer away from another student; the two effects exactly cancel." (p. 2). Channels listed but not separated: "I make some effort to distinguish among the channels by which peer effects operate, but my primary purpose is to establish the existence and direction of peer effects." (p. 35). Proposed channels for the female effect are speculative ("more female classes may simply have fewer disruptive students or a more learning-oriented culture", p. 24). → [no model of mechanism]
+
+**Sorting vs effect.** Concedes selection into schools and classrooms ("I take for granted that parents choose a school based on its population of peers and that parents and schools manipulate the assignment of students to classes within their grades", p. 3); relies on unpredictable cohort composition + time-trend falsification ("drop if more than random"; "Almost two-thirds of the observations are dropped in this very stringent test for time trends", p. 28). Common shocks probed via between-grade regressions and low-teacher-turnover schools (pp. 31–32).
+
+**Limitations.**
+
+- [imperfect measure] Strategy 2 residual-based: between-grade estimates "are almost certainly underestimates because of attenuation bias and because migration of students limits between-grade correlation" (p. 31); Asian residual coefficients "vary widely, which suggests that measurement error (both classical and due to common shocks) generates a large share of the total variation" (p. 32 fn.). Peer "group" = cohort within grade within school, not the actual classroom.
+- [single system] one state's public schools and one test (TAAS).
+- [small data] for small groups: Native American/Asian results "based on relatively few observations" (p. 26 fn. 18); idiosyncratic variation "is sufficiently uncommon that a large number of observations are needed" (p. 4).
+- [no model of mechanism]
+- [outcome is not selection] outcomes = elementary test scores.
+- Not randomized; identification rests on cohort-composition variation being idiosyncratic.
+
+**Channel / source (assistant judgment).** Development via peers (school cohort). Heterogeneity is by race/gender composition rather than by ability rank; establishes that composition (not just mean) matters, which is the precondition for any reallocation gains.
+
+---
+
+## 10. Angrist (2014) — "The perils of peer effects" (methodological claims only)
+
+**Citation.** Angrist, Joshua D. 2014. "The Perils of Peer Effects." *Labour Economics* 30: 98–108 (pages per Crossref). DOI 10.1016/j.labeco.2014.05.008. **PDF read is the "article in press" version** (pages printed 1–11, volume/pages "xxx"). Page cites below are in-press pages; journal page = in-press page + 97 (**inferred** from 11 pages ↔ 98–108; not checked against the final typeset version).
+
+**Claim 1 — outcome-on-outcome peer regressions are mechanical.**
+
+> "Individual outcomes are highly correlated with group average outcomes, a fact often interpreted as a causal peer effect. Without covariates, however, outcome-on-outcome peer effects are vacuous, either unity or, if the average is defined as a leave-out mean, determined by a generic intraclass correlation coefficient." (abstract, in-press p. 1 / journal p. 98)
+
+> "If the group average in question involves the dependent variable, the estimated peer effect is a mechanical phenomenon, either affirming an identify in the algebra of expectations or providing a measure of group clustering devoid of behavioral content." (in-press p. 1 / p. 98) [sic "identify"]
+
+**Claim 2 — with pre-determined peer covariates, "peer effects" = 2SLS ≠ OLS, which has many non-social causes (weak IV under random small groups; measurement error under systematic grouping).**
+
+> "When pre-determined peer characteristics are introduced as covariates in a model linking individual outcomes with group averages, the question of whether peer effects or social spillovers exist is econometrically identical to that of whether a 2SLS estimator using group dummies to instrument individual characteristics differs from OLS estimates of the effect of these characteristics. The interpretation of results from models that rely solely on chance variation in peer groups is therefore complicated by bias from weak instruments. With systematic variation in group composition, the weak IV issue falls away, but the resulting 2SLS estimates can be expected to exceed the corresponding OLS estimates as a result of measurement error and for other reasons unrelated to social effects." (abstract, in-press p. 1 / p. 98)
+
+> "There are many reasons why 2SLS estimates might differ from the corresponding OLS estimates. While peer effects are on the list of causes behind such divergence, they should not usually be at the top of it." (in-press p. 2 / p. 99)
+
+**Claim 3 — credible designs separate subjects from peers and manipulate peer exposure orthogonally to own traits; these find little.**
+
+> "Research designs that manipulate peer characteristics in a manner unrelated to individual characteristics provide the most compelling evidence on the nature of social spillovers. As an empirical matter, designs of this sort have mostly uncovered little in the way of socially significant causal effects." (abstract, in-press p. 1 / p. 98)
+
+**On Carrell–Sacerdote–West 2013 (directly relevant to the "policy from reduced form" point).**
+
+> "I read these findings as illustrating the proposition that estimates of equations like (20) are unlikely to have predictive value for interventions that change peer groups. The disappointing Carrell et al. (2013) results seem to me more likely to originate in the spurious nature of econometric estimates of peer effects than in endogenous social stratification." (in-press p. 8 / p. 105)
+
+- He notes the motivating CSW estimate is "a large significant estimate for a single group ... estimated in a model with 6 peer interactions," while other specifications give smaller or mixed effects (in-press pp. 8–9 / pp. 105–106).
+
+**On network models.** "In my view, this new literature follows the old in confusing technical questions of identification with the more fundamental question of whether any of the effects that might be identified should be seen as causal." (in-press p. 9 / p. 106)
+
+**Limitation tags (as they bear on the literature he critiques).** [imperfect measure] (measurement error inflates 2SLS); [small data] (many small random groups = weak instruments); [no model of mechanism] (identified parameters "reveal little about human behavior", in-press p. 1).
+
+**Channel / source (assistant judgment).** Bears on **evaluation of the evidence** itself: much reduced-form peer evidence is not behavioral and should not be used to forecast reallocations. Offers a rival reading of CSW 2013 (spurious pre-treatment estimate) vs CSW's own (endogenous subgroup formation) — both readings imply reduced-form peer coefficients are a poor basis for designing groups.
+
+---
+
+## 11. Sacerdote (2011) and Sacerdote (2014) — reviews (ABSTRACT-ONLY; no PDFs)
+
+### 11a. Sacerdote (2011) — Handbook chapter — ABSTRACT ONLY
+
+**Citation.** Sacerdote, Bruce. 2011. "Peer Effects in Education: How Might They Work, How Big Are They and How Much Do We Know Thus Far?" In *Handbook of the Economics of Education*, vol. 3, ed. E. A. Hanushek, S. Machin, and L. Woessmann, 249–277. Elsevier. DOI 10.1016/B978-0-444-53429-3.00004-1. (Editors not in the bib entry; listed from general knowledge — verify.)
+
+**Source of abstract.** Crossref returned no abstract; Semantic Scholar returned `abstract: null` ("elided by the publisher"). Abstract below was taken from the saved ScienceDirect page in the Zotero folder (`files/848/...ScienceDirect.mhtml`), HTML tags stripped. No page number (abstract).
+
+> "This chapter summarizes the recent literature on peer effects in student outcomes at the elementary, secondary, and post-secondary levels. Linear-in-means models find modest sized and statistically significant peer effects in test scores. But the linear-in-means model masks considerable heterogeneity in the effects experienced by different types of students. Using nonlinear models, one prevalent finding is larger peer effects in which high ability students benefit from the presence of other high ability students. Studies that stratify students by race and ability often find that students are affected both by the racial composition of their peers and by the achievement of their same-race peers. At the university level, several studies find modest sized effects from dormmate and roommate background on own academic performance. For both university and high school students, the measured peer effects on 'social' outcomes such as drinking are larger than the effects on academic outcomes. Many authors find substantial peer effects in drinking, drug use, and criminal behavior. This chapter suggest areas for future investigation and data collection." [sic "suggest"]
+
+**Use (assistant judgment).** Review-level support for: modest linear-in-means effects; heterogeneity masked by the mean; social outcomes > academic outcomes. Do not cite specific numbers from this chapter — body not read.
+
+### 11b. Sacerdote (2014) — Annual Review of Economics — ABSTRACT ONLY
+
+**Citation.** Sacerdote, Bruce. 2014. "Experimental and Quasi-Experimental Analysis of Peer Effects: Two Steps Forward?" *Annual Review of Economics* 6: 253–272. DOI 10.1146/annurev-economics-071813-104217. (Volume/pages from Crossref.)
+
+**Source of abstract.** Crossref API (JATS tags stripped).
+
+> "In the past 10 years, there has been an explosion of well-identified studies that measure peer effects across many settings and for many outcomes. The emphasis on natural experiments and randomization is a highly useful one; in more standard observational studies, the self-selection of people into peer groups can make the measurement of peer effects extremely difficult. In the absence of exogenous variation, knowing that people have similar outcomes as their friends, classmates, and coworkers may tell us little about peer effects. I examine the successes, failures, and findings of experimental analyses of peer effects. I draw three broad conclusions. First, even more than in other areas of social science, the size and nature of peer effects estimated are highly context specific; peer effects in student test scores and grades are prominent in some cases and absent in others. That said, there is a pattern across studies suggesting that social outcomes (e.g., crime, drinking behavior) and career choices show larger peer influences than do test scores. Second, researchers have shown that the linear-in-means model of peer effects is often not a good description of the world, although we do not yet have an agreed-upon model to replace it. Third, despite potential temptation, we have not reached the point at which we can reliably use knowledge of peer effects to implement policies that improve outcomes for students and other human subjects."
+
+**Use (assistant judgment).** The three conclusions map directly onto the gap tags: context specificity → [single system]; "we do not yet have an agreed-upon model to replace it" → [no model of mechanism] / [model not fit to data]; policy not reliable → CSW 2013. Note "career choices show larger peer influences than do test scores" — consistent with Lyle 2007 (Army retention) and Sacerdote 2001 (fraternities).
 
 ---
