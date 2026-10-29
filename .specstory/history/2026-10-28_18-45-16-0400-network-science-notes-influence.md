@@ -46,13 +46,6 @@ FINAL RESPONSE to me: the note path, a list of papers covered (and any you could
 
 _**Agent (claude-opus-5-5)**_
 
-<think><details><summary>Thought Process</summary>
-I'll start by parsing the bib file and locating the corresponding PDFs.
-
-</details></think>
-
-_**Agent (claude-opus-5-5)**_
-
 I'll start by parsing the bib file to locate the 13 PDFs.
 
 _**Agent (claude-opus-5-5)**_
@@ -140,13 +133,6 @@ lazear_internal_2004 | I
 … (output truncated)
 ```
 </details></tool-use>
-
-_**Agent (claude-opus-5-5)**_
-
-<think><details><summary>Thought Process</summary>
-I realize I'm missing key sources like Shalizi & Thomas, VanderWeele, Kossinets & Watts, and Centola's work — my search filter was too narrow, so I need to broaden it.
-
-</details></think>
 
 _**Agent (claude-opus-5-5)**_
 
@@ -259,20 +245,6 @@ centola_experimental_2011 | An {Experimental} {Study} of {Homophily} in the {Ado
 
 _**Agent (claude-opus-5-5)**_
 
-<think><details><summary>Thought Process</summary>
-I notice the Shalizi file is marked "Submitted Version," so page numbers might not match the published journal version. I also catch that the McPherson bibliography entry has a DOI belonging to Econometrica rather than the correct source — worth flagging as I continue extracting the full text.
-
-</details></think>
-
-_**Agent (claude-opus-5-5)**_
-
-<think><details><summary>Thought Process</summary>
-All 13 PDFs are confirmed present. I flagged two issues—a likely incorrect DOI for McPherson and a submitted (non-journal) version of Shalizi & Thomas whose page numbers may not align—and I'm now extracting the text.
-
-</details></think>
-
-_**Agent (claude-opus-5-5)**_
-
 <tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
 <summary>Tool use: **run_terminal_command_v2** • Run command: cd &#34;/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/FOUNDY_Intro&#34; &amp;&amp; mkdir -p /tmp/nsA &amp;&amp; 
 cp &#34;files/722/Christakis and Fowler - 2007 - The Spread of Obesity in a Large Social Network over 32 Years.pdf&#34; /tmp/nsA/01.pdf
@@ -316,7 +288,60 @@ for k in ['christakis_spread_2007','shalizi_homophily_2011','mcpherson_birds_200
   i=e.find(k); print(e[i:i+900]); print('----')
 "
 ```
+
+```
+01 pages=10 chars=   61377
+02 pages=6 chars=   35628
+03 pages=8 chars=   45774
+04 pages=6 chars=  110144
+05 pages=27 chars=  129771
+06 pages=13 chars=   63165
+Internal Error: xref num 2 not found but needed, try to reconstruct
+07 pages=31 chars=  112158
+08 pages=46 chars=  129146
+09 pages=5 chars=   53092
+10 pages=5 chars=   55655
+11 pages=7 chars=   78830
+12 pages=8 chars=   77612
+13 pages=34 chars=  101794
+christakis_spread_2007,
+	title = {The {Spread} of {Obesity} in a {Large} {Social} {Network} over 32 {Years}},
+	volume = {357},
+	issn = {0028-4793, 1533-4406},
+	url = {http://www.nejm.org/doi/abs/10.1056/NEJMsa066082},
+	doi = {10.1056/NEJMsa066082},
+	language = {en},
+	number = {4},
+	urldate = {2026-10-28},
+	journal = {New England Journal of Medicine},
+	author = {Christakis, Nicholas A. and Fowler, James H.},
+	month = jul,
+	year = {2007},
+	pages = {370--379},
+	file = {Full Text:files/722/Christakis and Fowler - 2007 - The Spread of Obesity in a Large Social Network over 32 Years.pdf:application/pdf},
+}
+
+@article{shalizi_homophily_2011,
+	title = {Homophily and {Contagion} {Are} {Generically} {Confounded} in {Observational} {Social} {Network} {Studies}},
+	volume = {40},
+	issn = {0049-1241, 1552-8294},
+	url = {https://journals.sagepub.com/doi/10.1177/0049124111404820},
+	doi = {10.1177/0049124
+----
+shalizi_homophily_2011,
+	title = {Homophily and {Contagion} {Are} {Generically} {Confounded} in {Observational} {Social} {Network} {Studies}},
+	volume = {40},
+	issn = {0049-1241, 1552-8294},
+	url = {https://journals.sagepub.com/doi/10.1177/0049124111404820},
+	doi = {10.1177/0049124111404820},
+	abstract = {The authors consider processes on social networks that can potentially involve three factors: homophily, or the formation of social ties due to matching individual traits; social contagion, also known as social influence; and the causal effect of an individual’s covariates on his or her behavior or other measurable responses. The authors show that generically, all of these
+… (output truncated)
+```
 </details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Every PDF has a text layer, so no OCR needed. I'll split each into pages and go paper by paper, starting with Christakis & Fowler 2007.
 
 _**Agent (claude-opus-5-5)**_
 
@@ -339,7 +364,49 @@ for i in ['%02d'%k for k in range(1,14)]:
 EOF
 sed -n '1,140p' 01_p.txt
 ```
+
+```
+
+=====PDFPAGE 1=====
+                                                                   T h e n e w e ng l a n d j o u r na l o f m e dic i n e
+
+
+
+
+                                                                                    special article
+
+
+                                                      The Spread of Obesity in a Large Social
+                                                              Network over 32 Years
+                                                      Nicholas A. Christakis, M.D., Ph.D., M.P.H., and James H. Fowler, Ph.D.
+
+
+                                                                                        A BS T R AC T
+
+
+                                                  Background
+From the Department of Health Care                The prevalence of obesity has increased substantially over the past 30 years. We
+Policy, Harvard Medical School, Boston            performed a quantitative analysis of the nature and extent of the person-to-person
+(N.A.C.); the Department of Medicine, Mt.
+Auburn Hospital, Cambridge, MA (N.A.C.);          spread of obesity as a possible factor contributing to the obesity epidemic.
+the Department of Sociology, Harvard Uni-
+versity, Cambridge, MA (N.A.C.); and the          Methods
+Department of Political Science, Univer-
+sity of California, San Diego, San Diego          We evaluated a densely interconnected social network of 12,067 people assessed
+(J.H.F.). Address reprint requests to Dr.         repeatedly from 1971 to 2003 as part of the Framingham Heart Study. The body-
+Christakis at the Department of Health            mass index was available for all subjects. We used longitudinal statistical models to
+Care Policy, Harvard Medical School, 180
+Longwood Ave., Boston, MA 02115, or at            examine whether weight gain in one person was associated with weight gain in his
+christakis@hcp.med.harvard.edu.                   or her friends, siblings, spouse, and neighbors.
+N Engl J Med 2007;357:370-9.
+Copyright © 
+… (output truncated)
+```
 </details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Christakis & Fowler PDF page n = printed page 369+n. Now pulling the body passages on homophily, the directional-friendship test, and limitations.
 
 _**Agent (claude-opus-5-5)**_
 
@@ -347,6 +414,33 @@ _**Agent (claude-opus-5-5)**_
 <summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; grep -n -i -E &#34;PDFPAGE|homophil|mutual|ego-perceived|limitation|unobserved|confound|shared environment|171%|three degrees|lagged|causal&#34; 01_p.txt | head -80</summary>
 ```bash
 cd /tmp/nsA && grep -n -i -E "PDFPAGE|homophil|mutual|ego-perceived|limitation|unobserved|confound|shared environment|171%|three degrees|lagged|causal" 01_p.txt | head -80
+```
+
+```
+2:=====PDFPAGE 1=====
+38:                                                  all time points, and the clusters extended to three degrees of separation. These
+63:=====PDFPAGE 2=====
+116:the influence of sex, smoking behavior, and geo-             Homophily: The tendency for people to choose relationships with people
+130:=====PDFPAGE 3=====
+169:       of the egos, an immediate neighbor also partici-             to associate with like alters (“homophily”).21,23,24
+171:       neighbors yielded similar results.                           or jointly experience unobserved contemporane-
+173:       nected through friendship to another person in               same time (confounding). Third, alters might
+176:       ego. Because friendship identifications are direc-           induction of obesity from homophily requires
+178:       ships: an “ego-perceived friendship,” in which an            the emergence of ties between people (“nodes”)
+181:       an ego as a friend; and a “mutual friendship,” in            index).25
+185:       the strongest effects occurring in mutual friend-            examination or time point (t + 1) was a function of
+186:       ships, followed by ego-perceived friendships, fol-           various attributes, such as the ego’s age, sex, and
+194:=====PDFPAGE 4=====
+201:used generalized estimating equations to account              ables or unobserved events might explain the as-
+206:    The use of a time-lagged dependent variable               if unobserved factors drove the association be-
+207:(lagged to the previous examination) eliminated               tween the ego’s obesity and the alter’s obesity,
+212:use of a lagged independent variable for an alter’s           the spread of obesity by adding variables for the
+213:weight status controlled for homophily.25 The                 smoking status of egos and alters at times t and
+238:=====PDFPAGE 5=====
+289:=====PDFPAGE 6=====
+406:=====PDFPAGE 7=====
+411:                                                           
+… (output truncated)
 ```
 </details></tool-use>
 
@@ -357,7 +451,33 @@ _**Agent (claude-opus-5-5)**_
 ```bash
 cd /tmp/nsA && sed -n '160,237p;406,560p' 01_p.txt
 ```
+
+```
+       and death were available from separate Framing-              (see the Supplementary Appendix, available with
+       ham Heart Study files.                                       the full text of this article at www.nejm.org).
+           Overall, there were 38,611 observed social and               We defined obesity as a body-mass index (the
+       family ties to the 5124 egos, yielding an average            weight in kilograms divided by the square of
+       of 7.5 ties per ego (not including neighbors). For           the height in meters) of 30 or more. Analyses in
+       example, 83% of the spouses of egos were direct­             which the body-mass index was a continuous var­
+       ly and repeatedly observed at the time of exami-             iable did not yield different results.
+       nation, and 87% percent of egos with siblings                    We considered three explanations for the clus-
+       had at least one sibling in the network. For 10%             tering of obese people. First, egos might choose
+       of the egos, an immediate neighbor also partici-             to associate with like alters (“homophily”).21,23,24
+       pated in the study; more expansive definitions of            Second, egos and alters might share attributes
+       neighbors yielded similar results.                           or jointly experience unobserved contemporane-
+           A total of 45% of the 5124 egos were con-                ous events that cause their weight to vary at the
+       nected through friendship to another person in               same time (confounding). Third, alters might
+       the network. There were 3604 unique, observed                exert social influence or peer effects on egos
+       friendships, for an average of 0.7 friendship tie per        (“induction”). Distinguishing the interpersonal
+       ego. Because friendship identifications are direc-           induction of obesity from homophily requires
+       tional, we studied three diff
+… (output truncated)
+```
 </details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Now the Christakis & Fowler limitations paragraph (printed page 378).
 
 _**Agent (claude-opus-5-5)**_
 
@@ -366,4 +486,3710 @@ _**Agent (claude-opus-5-5)**_
 ```bash
 cd /tmp/nsA && sed -n '562,605p' 01_p.txt
 ```
+
+```
+=====PDFPAGE 9=====
+                                         T h e n e w e ng l a n d j o u r na l o f m e dic i n e
+
+
+
+       weight and then may accept weight gain in him-                       that provide peer support — that is, that modify
+       self or herself. This weight gain in an ego might,                   the person’s social network — are more success-
+       in turn, be determined by various behaviors that                     ful than those that do not.34,35,38,39 People are
+       an ego chooses to evince, and these behaviors                        connected, and so their health is connected.40,41
+       need not be the same behaviors that an alter                         Consequently, medical and public health interven­
+       evinces. The observation that geographic distance                    tions might be more cost-effective than initially
+       does not modify the effect of an alter’s obesity                     supposed, since health improvements in one per-
+       also provides support for the concept that norms                     son might spread to others.42 The observation
+       may be particularly relevant here. Behavioral ef-                    that people are embedded in social networks sug-
+       fects might rely more on the frequency of contact                    gests that both bad and good behaviors might
+       (which one might reasonably expect to be attenu-                     spread over a range of social ties. This highlights
+       ated with distance), whereas norms might not.                        the necessity of approaching obesity not only as
+          The spread of obesity in social networks ap-                      a clinical problem but also as a public health
+       pears to be a factor in the obesity epidemic. Yet                    problem.
+       the relevance of social influence also suggests                         Supported by a grant from the National Institutes of Health
+                                   
+… (output truncated)
+```
 </details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Paper 1 is done. I'll create the note file with a header and append the Christakis & Fowler section; I'll add the synthesis at the top once all 13 are read.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: ls &#34;/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/&#34; 2&gt;&amp;1 | head; date &#39;+%Y-%m-%d %H:%M&#39;</summary>
+```bash
+ls "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/" 2>&1 | head; date '+%Y-%m-%d %H:%M'
+```
+
+```
+PD47_PD49_transcripts_note.md
+mariani_collective_2024_note.md
+model_chapter_JAZZ_draft_20261027_note.md
+wang_gates_barabasi_2025_overview_note.md
+2026-10-28 18:46
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2"><details>
+<summary>Tool use: **edit_file_v2** • Edit file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_A_influence_homophily_note.md</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Before moving on, checking my claim about how friendships were recorded on the tracking sheets.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; sed -n &#39;130,159p&#39; 01_p.txt</summary>
+```bash
+cd /tmp/nsA && sed -n '130,159p' 01_p.txt
+```
+
+```
+=====PDFPAGE 3=====
+                                      T h e n e w e ng l a n d j o u r na l o f m e dic i n e
+
+
+
+       to the study participants to facilitate follow-up.           lowed by alter-perceived friendships. Our reason-
+       These sheets contain valuable, previously unused             ing was that the person making the identification
+       social-network information because they system-              esteems the other person and may wish to emu-
+       atically and comprehensively identify relatives and          late him or her.
+       friends named by the ego. The tracking sheets                   We included only persons older than 21 years
+       provide complete information about all first-order           of age at any observation point and subsequently.
+       relatives (parents, spouses, siblings, and children),        At the inception of the study, 53% of the egos
+       whether they are alive or dead, and at least one             were women, the mean age of the egos was 38
+       “close friend” at each of seven exam­inations be-            years (range, 21 to 70), and their mean educa-
+       tween 1971 and 2003. The examinations took                   tional level was 13.6 years (range, no education
+       place during 3-year periods centered in 1973, 1981,          to ≥17 years of education).
+       1985, 1989, 1992, 1997, and 1999. Detailed home                 The study data are available from the Framing-
+       addresses were also record­ed at each time point;            ham Heart Study. The study was approved by the
+       we used this information to calculate the geo-               institutional review board at Harvard Medical
+       graphic distance between people.                             School; all subjects provided written informed
+           Many of the named alters on these sheets also            consent.
+       were members of Framingham Heart Study co-
+       horts. This newly computerized database thus                 St
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Fixing the tie-measurement limitation to use the authors' actual wording ("at least one 'close friend'") instead of my paraphrase.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2"><details>
+<summary>Tool use: **edit_file_v2** • Edit file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_A_influence_homophily_note.md</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; sed -n &#39;1,200p&#39; 02_p.txt</summary>
+```bash
+cd /tmp/nsA && sed -n '1,200p' 02_p.txt
+```
+
+```
+
+=====PDFPAGE 1=====
+                                                         Journal of Health Economics 27 (2008) 1382–1387
+
+
+
+                                                          Contents lists available at ScienceDirect
+
+
+                                                   Journal of Health Economics
+                                       journal homepage: www.elsevier.com/locate/econbase
+
+
+
+
+Is obesity contagious? Social networks vs. environmental factors in the
+obesity epidemic夽,夽夽
+Ethan Cohen-Cole a,1 , Jason M. Fletcher b,∗
+a
+    Federal Reserve Bank of Boston, 600 Atlantic Avenue, Boston, MA 02210, United States
+b
+    Yale University, School of Public Health, Division of Health Policy and Administration, 60 College Street, New Haven, CT 06510, United States
+
+
+
+
+a r t i c l e            i n f o                         a b s t r a c t
+
+Article history:                                         This note’s aim is to investigate the sensitivity of Christakis and Fowler’s claim [Christakis,
+Received 12 December 2007                                N., Fowler, J., 2007. The spread of obesity in a large social network over 32 years. The New
+Received in revised form 16 April 2008
+                                                         England Journal of Medicine 357, 370–379] that obesity has spread through social networks.
+Accepted 25 April 2008
+                                                         It is well known in the economics literature that failure to include contextual effects can
+Available online 9 May 2008
+                                                         lead to spurious inference on “social network effects.” We replicate the NEJM results using
+                                                         their speciﬁcation and a complementary dataset. We ﬁnd that point estimates of the “social
+JEL classiﬁcation:
+D10                                                      network effect” are reduced and become statistically indistinguishable from ze
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Cohen-Cole & Fletcher use Add Health (not Framingham) for their replication — worth noting. Reading their results and conclusion.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; sed -n &#39;200,420p&#39; 02_p.txt | grep -v &#34;^\s*$&#34;</summary>
+```bash
+cd /tmp/nsA && sed -n '200,420p' 02_p.txt | grep -v "^\s*$"
+```
+
+```
+their friend, spouse, neighbor does so. Because the two individuals are directly connected, they may inﬂuence each other
+for a variety of reasons. Contextual inﬂuences, on the other hand, reﬂect the shared surroundings of the members of a
+group that could lead to similar weight outcomes.13 Without detailed information on an individual’s characteristics, choices,
+preferences, and environment, it is difﬁcult to discern whether two friends’ simultaneous weight gain is attributable to their
+friendship or to an exposure of a common environmental factor (Manski, 1993; Durlauf, 2004).
+4. Empirical methods
+4.1. CF speciﬁcation and replication
+    CF use data on obesity status for an individual (in their terminology, an “Ego”) at a given point in time and estimate its
+relationship to the obesity status of a friend, spouse or relative (an “Alter”) as well as its relationship to the Ego’s age, gender,
+educational level, and past obesity status. The CF speciﬁcation uses the BMI of an Ego (i) who lives in community (c) at time
+(t + 1)14 as a function of the individual’s previous BMI, the individual’s measured characteristics (X), Alter’s (j) current and
+previous BMI, and an unobserved error term:
+              ego                                               ego        ego       ego
+         BMIic,t+1 = 1 BMIalter          alter
+                           ic,t+1 + 2 BMIjc,t + 3 BMIic,t + ˇXic,t+1 + εic,t+1                                                                          (1)
+This type of model has three features that can, and regularly do, impact inference. First, if unmeasured community-level
+variables, which we will denote cc,t+1 , are positively correlated with individuals’ BMIs, this will bias the estimate of the social
+network effect. Critically, the absence of a relevant contextual variable can lead to spurious inference on the endogenous
+ 12
+    Studies of peer effects often focus on school and college settings because of the frequent and repeated contact among
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Writing the Cohen-Cole & Fletcher section (printed pages = journal pages in footer; PDF p. 1 = p. 1382).
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cat &gt;&gt; &#34;/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_A_influence_homophily_note.md&#34; &lt;&lt;&#39;EOF&#39;
+
+## 2. Cohen-Cole &amp; Fletcher 2008 — Is obesity contagious? Social networks vs. environmental factors
+
+**Citation.** Cohen-Cole, Ethan, and Jason M. Fletcher. 2008. &#34;Is Obesity Contagious? Social Networks vs. Environmental Factors in the Obesity Epidemic.&#34; *Journal of Health Economics* 27 (5): 1382–1387. DOI: 10.1016/j.jhealeco.2008.04.005. (PDF p. n = printed p. 1381 + n.)
+
+**Data / setting / sample / years.** Not Framingham. They re-run the Christakis–Fowler (CF) specification on the National Longitudinal Study of Adolescent Health (Add Health), &#34;a national sample of 7–12th graders in 1994/1995&#34; followed into early adulthood (p. 1383). &#34;[W]e have information on friends for approximately 5000 individuals, nearly 2000 of whom are followed over time along with at least one same-sex friend. [...] This sample size gives us nearly 4000 person-year observations, slightly larger than the 3000 used by CF.&#34; (p. 1383). Table 1: &#34;analysis sample N = 1988; two observations per person&#34; (p. 1384). Community = the high school attended (p. 1385, fn. 18).
+
+**Design.** Observational re-analysis / robustness check (econometric). Replicate CF&#39;s logit and OLS on Add Health, then add school-specific time trends (contextual / environmental confounders) and individual fixed effects (friend selection).
+
+**Main findings (verbatim).**
+
+&gt; &#34;We find that point estimates of the &#34;social network effect&#34; are reduced and become statistically indistinguishable from zero once standard econometric techniques are implemented. We further note the presence of estimation bias resulting from use of an incorrectly specified dynamic model.&#34; (Abstract, p. 1382)
+
+&gt; &#34;After controlling for environmental confounding (through school-specific time trends), our estimate falls by over 30% to 0.037. Finally, we control for friendship selection by controlling for individual fixed effects. With this inclusion, the coefficient of interest declines further and becomes statistically indistinguishable from zero.&#34; (p. 1386)
+
+&gt; &#34;Though we do not completely rule out the possibility of induction and person-to-person spread of obesity, our results suggest that shared environmental factors can cause the appearance of social network effects.&#34; (p. 1386)
+
+Replication baseline for context: &#34;we find the odds that an Ego becomes obese increase by 80% if his or her Alter is also obese. Broadly, this is in line with the CF finding of 71% for same-sex friends.&#34; (p. 1385)
+
+**Sorting vs. influence.** Uses Manski&#39;s (1993) three-way split and maps it onto CF&#39;s terms:
+
+&gt; &#34;The first is that individuals could choose their friends based on factors associated with weight or weight trajectories. In economics, this is typically referred to as selection (CF as homophily). [...] Second, individuals may adjust behavior because of exposure to common influences. These effects are typically referred to as contextual influences (CF as confounding). [...] Finally, individuals may alter their behavior as others in their group change theirs. Economists are now generally labeling this an endogenous social effect (CF as social network effects).&#34; (p. 1383)
+
+Critique of CF&#39;s controls: &#34;Their claim is that &#34;the use of a lagged independent variable for an Alter&#39;s weight status controlled for homophily.&#34; Unless selection is conditioned only on this variable, this statement is spurious.&#34; (p. 1385). On the directionality test: &#34;Since CF never directly control for environmental factors, we view their results using directionality of friendship nominations as suggestive rather than conclusive.&#34; (p. 1385).
+
+**Limitations.**
+
+- Different dataset from the one they critique (adolescents in schools vs. adults in Framingham); the authors acknowledge &#34;comparing results across datasets that are quite different in design and focus is usually fraught with difficultly&#34; (p. 1386; &#34;difficultly&#34; is the printed spelling). **[single system]**
+- One friend per ego: &#34;We select only one friend to be consistent with CF.&#34; (p. 1383, fn. 10). **[imperfect measure]**
+- School-specific trends are a coarse proxy for environment: &#34;Though one, in principle, would want many more controls to account for additional contextual effects, we will note shortly that the endogenous effect vanishes even with this relatively simple characterization.&#34; (p. 1386)
+- Null result is a loss of significance, not an estimate of zero (point estimate 0.033 with CI −0.043 to 0.109 in Table 3, p. 1386). (assistant reading)
+- Health outcome. **[outcome is not selection]**
+
+**Channel / source (assistant judgment).** Development, with the key move being to attribute similarity to the shared environment (school / community) rather than peers. Source: organization/environment (the school as context) vs. peers. Useful as the canonical &#34;context, not contagion&#34; counter-reading.
+
+---
+EOF</summary>
+```bash
+cat >> "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_A_influence_homophily_note.md" <<'EOF'
+
+## 2. Cohen-Cole & Fletcher 2008 — Is obesity contagious? Social networks vs. environmental factors
+
+**Citation.** Cohen-Cole, Ethan, and Jason M. Fletcher. 2008. "Is Obesity Contagious? Social Networks vs. Environmental Factors in the Obesity Epidemic." *Journal of Health Economics* 27 (5): 1382–1387. DOI: 10.1016/j.jhealeco.2008.04.005. (PDF p. n = printed p. 1381 + n.)
+
+**Data / setting / sample / years.** Not Framingham. They re-run the Christakis–Fowler (CF) specification on the National Longitudinal Study of Adolescent Health (Add Health), "a national sample of 7–12th graders in 1994/1995" followed into early adulthood (p. 1383). "[W]e have information on friends for approximately 5000 individuals, nearly 2000 of whom are followed over time along with at least one same-sex friend. [...] This sample size gives us nearly 4000 person-year observations, slightly larger than the 3000 used by CF." (p. 1383). Table 1: "analysis sample N = 1988; two observations per person" (p. 1384). Community = the high school attended (p. 1385, fn. 18).
+
+**Design.** Observational re-analysis / robustness check (econometric). Replicate CF's logit and OLS on Add Health, then add school-specific time trends (contextual / environmental confounders) and individual fixed effects (friend selection).
+
+**Main findings (verbatim).**
+
+> "We find that point estimates of the "social network effect" are reduced and become statistically indistinguishable from zero once standard econometric techniques are implemented. We further note the presence of estimation bias resulting from use of an incorrectly specified dynamic model." (Abstract, p. 1382)
+
+> "After controlling for environmental confounding (through school-specific time trends), our estimate falls by over 30% to 0.037. Finally, we control for friendship selection by controlling for individual fixed effects. With this inclusion, the coefficient of interest declines further and becomes statistically indistinguishable from zero." (p. 1386)
+
+> "Though we do not completely rule out the possibility of induction and person-to-person spread of obesity, our results suggest that shared environmental factors can cause the appearance of social network effects." (p. 1386)
+
+Replication baseline for context: "we find the odds that an Ego becomes obese increase by 80% if his or her Alter is also obese. Broadly, this is in line with the CF finding of 71% for same-sex friends." (p. 1385)
+
+**Sorting vs. influence.** Uses Manski's (1993) three-way split and maps it onto CF's terms:
+
+> "The first is that individuals could choose their friends based on factors associated with weight or weight trajectories. In economics, this is typically referred to as selection (CF as homophily). [...] Second, individuals may adjust behavior because of exposure to common influences. These effects are typically referred to as contextual influences (CF as confounding). [...] Finally, individuals may alter their behavior as others in their group change theirs. Economists are now generally labeling this an endogenous social effect (CF as social network effects)." (p. 1383)
+
+Critique of CF's controls: "Their claim is that "the use of a lagged independent variable for an Alter's weight status controlled for homophily." Unless selection is conditioned only on this variable, this statement is spurious." (p. 1385). On the directionality test: "Since CF never directly control for environmental factors, we view their results using directionality of friendship nominations as suggestive rather than conclusive." (p. 1385).
+
+**Limitations.**
+
+- Different dataset from the one they critique (adolescents in schools vs. adults in Framingham); the authors acknowledge "comparing results across datasets that are quite different in design and focus is usually fraught with difficultly" (p. 1386; "difficultly" is the printed spelling). **[single system]**
+- One friend per ego: "We select only one friend to be consistent with CF." (p. 1383, fn. 10). **[imperfect measure]**
+- School-specific trends are a coarse proxy for environment: "Though one, in principle, would want many more controls to account for additional contextual effects, we will note shortly that the endogenous effect vanishes even with this relatively simple characterization." (p. 1386)
+- Null result is a loss of significance, not an estimate of zero (point estimate 0.033 with CI −0.043 to 0.109 in Table 3, p. 1386). (assistant reading)
+- Health outcome. **[outcome is not selection]**
+
+**Channel / source (assistant judgment).** Development, with the key move being to attribute similarity to the shared environment (school / community) rather than peers. Source: organization/environment (the school as context) vs. peers. Useful as the canonical "context, not contagion" counter-reading.
+
+---
+EOF
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; sed -n &#39;1,400p&#39; 03_p.txt | grep -v &#34;^\s*$&#34; | head -330</summary>
+```bash
+cd /tmp/nsA && sed -n '1,400p' 03_p.txt | grep -v "^\s*$" | head -330
+```
+
+```
+=====PDFPAGE 1=====
+                            NIH Public Access
+                            Author Manuscript
+                            J Health Econ. Author manuscript; available in PMC 2009 September 1.
+                           Published in final edited form as:
+NIH-PA Author Manuscript
+                            J Health Econ. 2008 September ; 27(5): 1400–1405. doi:10.1016/j.jhealeco.2008.07.001.
+                           Estimating Peer Effects on Health in Social Networks : A Response
+                           to Cohen-Cole and Fletcher; Trogdon, Nonnemaker, Pais
+                           J.H. Fowler, PhD and
+                           Department of Political Science, University of California, San Diego
+                           N.A. Christakis, MD, PhD
+                           Department of Health Care Policy, Harvard Medical School, Boston, MA
+                           Department of Sociology, Harvard University, Cambridge, MA
+                                              In July of 2007, we published a paper in the New England Journal of Medicine that used
+                                              dynamic data over 32 years from the Framingham Heart Study Social Network (FHS-Net) to
+NIH-PA Author Manuscript
+                                              study the conditions under which obesity might spread from person to person (Christakis and
+                                              Fowler 2007, hereafter, CF). We found that obese persons formed clusters in the network at
+                                              all time points and that these clusters extended to three degrees of separation (e.g., to a person’s
+                                              friend’s friend’s friend). Moreover, statistical analyses suggested that the clusters were not
+                                              solely attributable to the selective formation of social ties among obese persons. A person’s
+                                            
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Fowler & Christakis 2008 is the NIH author manuscript, so only manuscript page numbers ("Page n") are available, not journal pages 1400–1405. Reading the truncated middle (pages 2–4).
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; awk &#39;/=====PDFPAGE 2=====/,/=====PDFPAGE 5=====/&#39; 03_p.txt | grep -v &#34;^\s*$&#34; | sed -n &#39;30,200p&#39;</summary>
+```bash
+cd /tmp/nsA && awk '/=====PDFPAGE 2=====/,/=====PDFPAGE 5=====/' 03_p.txt | grep -v "^\s*$" | sed -n '30,200p'
+```
+
+```
+                                                   We attempted to replicate the CCF results but were unable to do so, even after several efforts
+                                                   to acquire information about specific details of CCF’s modeling choices from CCF. We first
+                                                   relied on their manuscript and supplement, but it gives an incomplete description of the model;
+                                                   for example, it was unclear how income data were imputed. We then contacted CCF to ask for
+                                                   the code they used to generate their results. They were unwilling to share this code.
+                                                   We therefore wrote new code to analyze the AddHealth data to replicate their results; we sent
+                                                   it to them and asked them to comment. A brief response from CCF stated that a “difference in
+                                                   our approaches is that we ‘lock in’ Wave 1 friends—that is, we do not allow individuals to
+NIH-PA Author Manuscript
+                                                   switch friends over time.” This is an important and noteworthy omission from their description
+                                                   in the paper since Add Health (like the FHS-Net data) contains dynamic information about
+                                                   friendships at later waves, yet they chose instead to ignore this information and rely on a
+                                                   static representation of that data. This will cause them to assume some individuals continue to
+                                                   be friends when, in fact, they are not. This assumption by CCF stacks the deck against finding
+                                                   an effect, since it essentially adds “random” non-friend 
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Checking the response's tables for sample sizes.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; awk &#39;/=====PDFPAGE 7=====/,0&#39; 03_p.txt | grep -v &#34;^\s*$&#34;</summary>
+```bash
+cd /tmp/nsA && awk '/=====PDFPAGE 7=====/,0' 03_p.txt | grep -v "^\s*$"
+```
+
+```
+=====PDFPAGE 7=====
+                                                                       NIH-PA Author Manuscript                               NIH-PA Author Manuscript                                NIH-PA Author Manuscript
+                                                                                                                                              Table 1
+                                                                                          Replication of Add Health Results Show School Trends Do Not Matter and Show Evidence of Directional Effects
+                                                                                                      Model 1: Alter is the Named Friend     Model 2: Effect of Named Friend with School   Model 3: Alter is the Person who Named the Friend
+                                                                                                                                                                Trends
+                                                                                                     Coef.            S.E.             p      Coef.               S.E.              p          Coef.              S.E.               p
+                                                                         Contemporaneous
+                                                                         Alter BMI                  0.033            0.014           0.022     0.033             0.014           0.020        0.002               0.014            0.900
+                                                                         Alter Previous BMI         −0.004           0.015           0.762    −0.005             0.015           0.759        0.002               0.015            0.908
+                                                                         Ego Previous BMI           0.952            0.015           0.000     0.952             0.015           0.000        0.937               0.016            0.000
+  
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cat &gt;&gt; &#34;/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_A_influence_homophily_note.md&#34; &lt;&lt;&#39;EOF&#39;
+
+## 3. Fowler &amp; Christakis 2008 — Estimating peer effects on health in social networks: a response
+
+**Citation.** Fowler, J. H., and N. A. Christakis. 2008. &#34;Estimating Peer Effects on Health in Social Networks: A Response to Cohen-Cole and Fletcher; and Trogdon, Nonnemaker, and Pais.&#34; *Journal of Health Economics* 27 (5): 1400–1405. DOI: 10.1016/j.jhealeco.2008.07.001.
+
+**PAGE-NUMBER WARNING.** The PDF in the library is the **NIH Public Access author manuscript** (PMC), not the typeset article. It carries only manuscript page numbers (&#34;Page 1&#34; … &#34;Page 8&#34;). Journal page numbers 1400–1405 **could not be determined** from this file. All page cites below are &#34;MS p.&#34; = manuscript page = PDF page. Wording may differ slightly from the published version.
+
+**Data / setting / sample / years.** Two datasets. (a) Add Health re-analysis using all observed friendships and wave-updated friendship data (Waves 1–3): Table 1 N = 8,504 (models 1–2) and 4,742 (model 3) (MS p. 7). (b) Framingham Heart Study Social Network (FHS-Net) re-estimated with ego fixed effects: Table 2 N = 2,396, &#34;843 Fixed Effects Not Shown&#34; (MS p. 8). Population contrast stated by the authors: &#34;Unlike the FHS-Net, which followed adults over a 32-year period (average age 38 in 1971), AddHealth followed adolescents over a 7-year period (average age 16 in 1995).&#34; (MS p. 1)
+
+**Design.** Observational re-analysis and rebuttal. Re-estimates on Add Health with and without school trends; directionality test (named friend → namer vs. namer → named friend); fixed-effects re-estimation on Framingham.
+
+**Main findings (verbatim).**
+
+&gt; &#34;What is crucial to note here, however, is that the Framingham estimates actually fall inside the confidence intervals of the CCF results for all five specifications. That is, CCF cannot reject the null hypothesis that the Framingham estimates are the true values.&#34; (MS p. 2)
+
+&gt; &#34;In model 3 of Table 1, we show that there is no evidence that named friends are influenced by namers (p=0.90), confirming our results in the FHS-Net and providing additional evidence in favor of the causal interpretation regarding social influence in weight behaviors.&#34; (MS p. 3)
+
+&gt; &#34;Table 2 shows that when we include fixed effects in our FHS-Net analyses, we find a significant influence of friend&#39;s BMI on ego&#39;s BMI, and the size of the effect is about the same at 0.05.&#34; (MS p. 4)
+
+Replication dispute: &#34;We attempted to replicate the CCF results but were unable to do so [...] We then contacted CCF to ask for the code they used to generate their results. They were unwilling to share this code.&#34; (MS p. 2). They report that Cohen-Cole &amp; Fletcher (CCF) &#34;&#39;lock in&#39; Wave 1 friends&#34; and argue &#34;This assumption by CCF stacks the deck against finding an effect&#34; (MS p. 2).
+
+**Sorting vs. influence.** Defends three identification arguments: (1) directionality, &#34;If contextual effects are spuriously driving the relationship between ego and alter, then there is no reason to expect a directional result.&#34; (MS p. 3); (2) no distance decay, &#34;We specifically find that the relationship does not decay with physical distance, even up to hundreds of miles away (Fig. 3 in CF).&#34; (MS p. 3); (3) homophily, &#34;In short, this model conditions on the initial weights of the two parties connected via a tie. Additional Monte Carlo simulation results documenting that homophily (ranging from no homophily to complete homophily) does not result in bias in the estimates of induction in this model specification are available at the authors&#39; websites.&#34; (MS p. 4)
+
+**Limitations.**
+
+- Still observational; concedes the general difficulty: &#34;causal inference in dyads, let alone in broader social networks, is difficult (Manski 1993).&#34; (MS p. 1). The directionality argument is the one Shalizi &amp; Thomas (paper 5) later show is not sufficient in general. (assistant cross-reference)
+- The homophily argument assumes selection is on observed initial weight; the simulations are cited but not in the paper (&#34;available at the authors&#39; websites&#34;). **[imperfect measure]**
+- They acknowledge their Framingham time controls &#34;might not capture regional variation within time blocks&#34; (MS p. 4).
+- Health outcome. **[outcome is not selection]**
+
+**Channel / source (assistant judgment).** Development; source: peers. The exchange is useful mainly as evidence that the peer-vs-context split was contested on the same data with competing specifications and no design-based resolution.
+
+---
+EOF
+cd /tmp/nsA &amp;&amp; sed -n &#39;1,140p&#39; 04_p.txt | grep -v &#34;^\s*$&#34;</summary>
+```bash
+cat >> "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_A_influence_homophily_note.md" <<'EOF'
+
+## 3. Fowler & Christakis 2008 — Estimating peer effects on health in social networks: a response
+
+**Citation.** Fowler, J. H., and N. A. Christakis. 2008. "Estimating Peer Effects on Health in Social Networks: A Response to Cohen-Cole and Fletcher; and Trogdon, Nonnemaker, and Pais." *Journal of Health Economics* 27 (5): 1400–1405. DOI: 10.1016/j.jhealeco.2008.07.001.
+
+**PAGE-NUMBER WARNING.** The PDF in the library is the **NIH Public Access author manuscript** (PMC), not the typeset article. It carries only manuscript page numbers ("Page 1" … "Page 8"). Journal page numbers 1400–1405 **could not be determined** from this file. All page cites below are "MS p." = manuscript page = PDF page. Wording may differ slightly from the published version.
+
+**Data / setting / sample / years.** Two datasets. (a) Add Health re-analysis using all observed friendships and wave-updated friendship data (Waves 1–3): Table 1 N = 8,504 (models 1–2) and 4,742 (model 3) (MS p. 7). (b) Framingham Heart Study Social Network (FHS-Net) re-estimated with ego fixed effects: Table 2 N = 2,396, "843 Fixed Effects Not Shown" (MS p. 8). Population contrast stated by the authors: "Unlike the FHS-Net, which followed adults over a 32-year period (average age 38 in 1971), AddHealth followed adolescents over a 7-year period (average age 16 in 1995)." (MS p. 1)
+
+**Design.** Observational re-analysis and rebuttal. Re-estimates on Add Health with and without school trends; directionality test (named friend → namer vs. namer → named friend); fixed-effects re-estimation on Framingham.
+
+**Main findings (verbatim).**
+
+> "What is crucial to note here, however, is that the Framingham estimates actually fall inside the confidence intervals of the CCF results for all five specifications. That is, CCF cannot reject the null hypothesis that the Framingham estimates are the true values." (MS p. 2)
+
+> "In model 3 of Table 1, we show that there is no evidence that named friends are influenced by namers (p=0.90), confirming our results in the FHS-Net and providing additional evidence in favor of the causal interpretation regarding social influence in weight behaviors." (MS p. 3)
+
+> "Table 2 shows that when we include fixed effects in our FHS-Net analyses, we find a significant influence of friend's BMI on ego's BMI, and the size of the effect is about the same at 0.05." (MS p. 4)
+
+Replication dispute: "We attempted to replicate the CCF results but were unable to do so [...] We then contacted CCF to ask for the code they used to generate their results. They were unwilling to share this code." (MS p. 2). They report that Cohen-Cole & Fletcher (CCF) "'lock in' Wave 1 friends" and argue "This assumption by CCF stacks the deck against finding an effect" (MS p. 2).
+
+**Sorting vs. influence.** Defends three identification arguments: (1) directionality, "If contextual effects are spuriously driving the relationship between ego and alter, then there is no reason to expect a directional result." (MS p. 3); (2) no distance decay, "We specifically find that the relationship does not decay with physical distance, even up to hundreds of miles away (Fig. 3 in CF)." (MS p. 3); (3) homophily, "In short, this model conditions on the initial weights of the two parties connected via a tie. Additional Monte Carlo simulation results documenting that homophily (ranging from no homophily to complete homophily) does not result in bias in the estimates of induction in this model specification are available at the authors' websites." (MS p. 4)
+
+**Limitations.**
+
+- Still observational; concedes the general difficulty: "causal inference in dyads, let alone in broader social networks, is difficult (Manski 1993)." (MS p. 1). The directionality argument is the one Shalizi & Thomas (paper 5) later show is not sufficient in general. (assistant cross-reference)
+- The homophily argument assumes selection is on observed initial weight; the simulations are cited but not in the paper ("available at the authors' websites"). **[imperfect measure]**
+- They acknowledge their Framingham time controls "might not capture regional variation within time blocks" (MS p. 4).
+- Health outcome. **[outcome is not selection]**
+
+**Channel / source (assistant judgment).** Development; source: peers. The exchange is useful mainly as evidence that the peer-vs-context split was contested on the same data with competing specifications and no design-based resolution.
+
+---
+EOF
+cd /tmp/nsA && sed -n '1,140p' 04_p.txt | grep -v "^\s*$"
+```
+
+```
+=====PDFPAGE 1=====
+                                                                                                                                                  Distinguishing influence-based contagion from
+                                                                                                                                                  homophily-driven diffusion in dynamic networks
+                                                                                                                                                  Sinan Arala,b,1, Lev Muchnika, and Arun Sundararajana
+                                                                                                                                                  aInformation, Operations and Management Sciences Department, Stern School of Business, New York University, Kaufmann Management Center, 44 West
+                                                                                                                                                  4th Street, New York, NY 10012; and bCenter for Digital Business, Sloan School of Management, Massachusetts Institute of Technology, 5 Cambridge
+                                                                                                                                                  Center–NE25, Cambridge, MA 02142
+                                                                                                                                                  Edited by Matthew O. Jackson, Stanford University, Stanford, CA, and accepted by the Editorial Board October 6, 2009 (received for review August 4, 2009)
+                                                                                                                                                  Node characteristics and behaviors are often correlated with the               As more of a perceived contagion is explained by homophily rather
+                                            
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+The two-column PNAS layout interleaves badly; re-extracting Aral et al. in reading order (no `-layout`) to grep cleanly.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; for i in 04 09 10 11 12; do pdftotext $i.pdf ${i}_r.txt; python3 - $i &lt;&lt;&#39;EOF&#39;
+import sys
+i=sys.argv[1]
+pages=open(i+&#39;_r.txt&#39;,encoding=&#39;utf-8&#39;,errors=&#39;replace&#39;).read().split(&#39;\f&#39;)
+with open(i+&#39;_rp.txt&#39;,&#39;w&#39;) as f:
+    for n,p in enumerate(pages,1): f.write(f&#39;\n=====PDFPAGE {n}=====\n&#39;+p)
+EOF
+done
+grep -n -E &#34;PDFPAGE|PNAS|2154[0-9]|27.4 million|300|&gt;50%|matched sample|unobserv|limitation|caveat|cannot|latent|propensity&#34; 04_rp.txt | grep -v &#34;Downloaded&#34; | head -60</summary>
+```bash
+cd /tmp/nsA && for i in 04 09 10 11 12; do pdftotext $i.pdf ${i}_r.txt; python3 - $i <<'EOF'
+import sys
+i=sys.argv[1]
+pages=open(i+'_r.txt',encoding='utf-8',errors='replace').read().split('\f')
+with open(i+'_rp.txt','w') as f:
+    for n,p in enumerate(pages,1): f.write(f'\n=====PDFPAGE {n}=====\n'+p)
+EOF
+done
+grep -n -E "PDFPAGE|PNAS|2154[0-9]|27.4 million|300|>50%|matched sample|unobserv|limitation|caveat|cannot|latent|propensity" 04_rp.txt | grep -v "Downloaded" | head -60
+```
+
+```
+2:=====PDFPAGE 1=====
+19:Here we develop a dynamic matched sample estimation framework
+22:of 27.4 million users, using data on the day-by-day adoption of a
+24:by 300 –700%, and that homophily explains >50% of the perceived
+63:21544 –21549 兩 PNAS 兩 December 22, 2009 兩 vol. 106 兩 no. 51
+94:Here we develop a matched sample estimation framework to
+103:traffic among 27.4 million users of Yahoo.com (Fig. 1) with (ii) data
+107:This article is a PNAS Direct Submission. M.O.J. is a guest editor invited by the Editorial Board.
+116:=====PDFPAGE 2=====
+138:who have adopted are highly predictive of one’s propensity to adopt
+175:PNAS 兩 December 22, 2009 兩 vol. 106 兩 no. 51 兩 21545
+178:=====PDFPAGE 3=====
+202:typically signal unobserved reasons why these shocks should be
+210:causal peer influence effects (37) is complicated by the unobservability problem
+219:Toward this end we adapt matched sample estimation (2, 38) for use in
+228:We created a dynamic matched sample of treated and untreated nodes over
+234:propensity to have been treated at time t, using a logistic regression of the
+248:performed daily, weekly, and biweekly matched sample tests over the
+249:4-month period. We dropped matched pairs for which the distance of pro21546 兩 www.pnas.org兾cgi兾doi兾10.1073兾pnas.0908800106
+252:of propensity score differences. For all treated nodes i, (@i, Tit ⫽ 1) we chose
+256:correlated latent homophily, contrasting them on the sole dimension of their
+265:used to compute estimates of the propensity of a user to be treated, i.e., the
+266:likelihood to have had a friend who had adopted R days earlier. Once propensity
+270:for which the distance of propensity scores exceeded two standard deviations of
+271:the observed distribution of propensity score differences. Influence estimates are
+275:friends adopting Go on the same day. Full details regarding propensity score
+302:more adopter friends (filled circles). The random matching estimates are 7 times greater than our matched sample estimates for t
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; sed -n &#39;1,30p;90,112p;178,232p;300,378p;397,452p&#39; 04_rp.txt | grep -v Downloaded</summary>
+```bash
+cd /tmp/nsA && sed -n '1,30p;90,112p;178,232p;300,378p;397,452p' 04_rp.txt | grep -v Downloaded
+```
+
+```
+
+=====PDFPAGE 1=====
+
+Distinguishing influence-based contagion from
+homophily-driven diffusion in dynamic networks
+Sinan Arala,b,1, Lev Muchnika, and Arun Sundararajana
+aInformation, Operations and Management Sciences Department, Stern School of Business, New York University, Kaufmann Management Center, 44 West
+
+4th Street, New York, NY 10012; and bCenter for Digital Business, Sloan School of Management, Massachusetts Institute of Technology, 5 Cambridge
+Center–NE25, Cambridge, MA 02142
+Edited by Matthew O. Jackson, Stanford University, Stanford, CA, and accepted by the Editorial Board October 6, 2009 (received for review August 4, 2009)
+
+Node characteristics and behaviors are often correlated with the
+structure of social networks over time. While evidence of this type of
+assortative mixing and temporal clustering of behaviors among
+linked nodes is used to support claims of peer influence and social
+contagion in networks, homophily may also explain such evidence.
+Here we develop a dynamic matched sample estimation framework
+to distinguish influence and homophily effects in dynamic networks,
+and we apply this framework to a global instant messaging network
+of 27.4 million users, using data on the day-by-day adoption of a
+mobile service application and users’ longitudinal behavioral, demographic, and geographic data. We find that previous methods overestimate peer influence in product adoption decisions in this network
+by 300 –700%, and that homophily explains >50% of the perceived
+behavioral contagion. These findings and methods are essential to
+both our understanding of the mechanisms that drive contagions in
+networks and our knowledge of how to propagate or combat them
+in domains as diverse as epidemiology, marketing, development
+economics, and public health.
+dynamic matching estimation 兩 peer influence 兩 social
+their interactions. On one hand, linked nodes may directly influence
+one another to exhibit similar outcomes, creating viral contagions.
+On the other hand,
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Aral et al. pages map as PDF p. n = 21543 + n. Grabbing the data description (dates, adopters) from page 2.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; sed -n &#39;112,177p&#39; 04_rp.txt | grep -v Downloaded; grep -n -i -E &#34;adopter|5-month|1.6|million|users&#34; 04_rp.txt | head -30</summary>
+```bash
+cd /tmp/nsA && sed -n '112,177p' 04_rp.txt | grep -v Downloaded; grep -n -i -E "adopter|5-month|1.6|million|users" 04_rp.txt | head -30
+```
+
+```
+
+www.pnas.org兾cgi兾doi兾10.1073兾pnas.0908800106
+
+
+=====PDFPAGE 2=====
+Fig. 1. Diffusion of Yahoo! Go over time. (A–C and D–F) Two subgraphs of the
+Yahoo! IM network colored by adoption states on July 4 (the Go launch date),
+August 10, and October 29, 2007. For animations of the diffusion of Yahoo! Go
+over time see Movies S1 and S2.
+
+launched in July 2007 (Yahoo! Go) (Fig. 2A), and (iii) precise
+attribute and dynamic behavioral data on users’ demographics,
+geographic location, mobile device type and usage, and per-day
+page views of different types of content (e.g., sports, weather, news,
+finance, and photo sharing) from desktop, mobile, and Go platforms. Much of these data, such as mobile device usage and page
+views of different types of content, provide fine-grained proxies for
+individuals’ tastes and preferences. The complete set of covariates
+includes 40 time-varying and 6 time-invariant individual and network characteristics. Taken together, the sampled users of the IM
+
+Evidence of Assortative Mixing and Temporal Clustering
+We observe strong evidence of both assortative mixing and temporal clustering in Go adoption. At the end of the 5-month period,
+adopters have a 5-fold higher percentage of adopters in their local
+networks (t ⫺ stat ⫽ 100.12, p ⬍ 0.001; k.s. ⫺ stat ⫽ 0.06, p ⬍ 0.001)
+and receive a 5-fold higher percentage of messages from adopters
+than nonadopters (t ⫺ stat ⫽ 88.30, p ⬍ 0.001; k.s. ⫺ stat ⫽ 0.17,
+p ⬍ 0.001). Both the number and percentage of one’s local network
+who have adopted are highly predictive of one’s propensity to adopt
+(Logistic: ␤(#) ⫽ 0.153, p ⬍ 0.001; ␤(%) ⫽ 1.268, p ⬍ 0.001), and to
+adopt earlier (Hazard Rate: ␤(#) ⫽ 0.10, p ⬍ 0.001; ␤(%) ⫽ 0.003,
+p ⬍ 0.001). The likelihood of adoption increases dramatically with
+the number of adopter friends (Fig. 2C), and correspondingly,
+adopters are more likely to have more adopter friends (Fig. 2B),
+mirroring prior evidence on product adoption in networks (29).
+Adoption decisions among friends a
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cat &gt;&gt; &#34;/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_A_influence_homophily_note.md&#34; &lt;&lt;&#39;EOF&#39;
+
+## 4. Aral, Muchnik &amp; Sundararajan 2009 — Distinguishing influence-based contagion from homophily-driven diffusion in dynamic networks
+
+**Citation.** Aral, Sinan, Lev Muchnik, and Arun Sundararajan. 2009. &#34;Distinguishing Influence-Based Contagion from Homophily-Driven Diffusion in Dynamic Networks.&#34; *Proceedings of the National Academy of Sciences* 106 (51): 21544–21549. DOI: 10.1073/pnas.0908800106. (PDF p. n = printed p. 21543 + n.)
+
+**Data / setting / sample / years.** Yahoo! instant-messaging (IM) network: &#34;the global network of daily instant messaging (IM) traffic among 27.4 million users of Yahoo.com&#34; combined with &#34;data on the day-by-day adoption of a mobile service application launched in July 2007 (Yahoo! Go)&#34; (pp. 21544–21545). Covariates: &#34;40 time-varying and 6 time-invariant individual and network characteristics&#34; (p. 21545). Adoption window: Fig. 2 covers &#34;July 1 to October 29, 2007&#34; (p. 21545); the text refers to &#34;the 5-month period&#34; (p. 21545). Network: &#34;⬎14 billion page views and sent 3.9 billion messages over 89.3 million distinct relationships&#34; (p. 21545).
+
+**Design.** Observational; dynamic propensity-score matched sampling. Treatment = having 1, 2, 3, or 4+ adopter friends; treated users matched to untreated users with the same estimated likelihood of treatment given observables (p. 21546). Compared with &#34;random matching&#34; (no adjustment for homophily).
+
+**Main findings (verbatim).**
+
+&gt; &#34;We find that previous methods overestimate peer influence in product adoption decisions in this network by 300 –700%, and that homophily explains &gt;50% of the perceived behavioral contagion.&#34; (Abstract, p. 21544; spacing around the en dash as printed)
+
+&gt; &#34;Over half of the cumulative adoption of treated users (those with at least one adopter friend) can be attributed to homophily effects (Fig. 4 A and B). The remaining adoption events (49.8%) represent the upper bound of influence effects established by our matched sample estimates.&#34; (p. 21547)
+
+&gt; &#34;Comparisons to random therefore incorrectly imply that influence grows superlinearly with the number of adopter friends, whereas there is simply greater homophily in larger groups of adopters.&#34; (p. 21547)
+
+**Sorting vs. influence.** Treats homophily as selection bias in a treatment-effects frame: &#34;Homophily in this case creates a selection bias because treatments are not randomly assigned: adopters are more likely to be treated because of similarity with their neighbors.&#34; (p. 21546). Matching on observables yields an upper bound on influence: &#34;This procedure establishes upper bounds on the degree to which influence (rather than homophily) explains assortative mixing and temporal clustering in networks.&#34; (p. 21546). Also notes heterogeneity: stronger ties and denser local networks raise adoption &#34;controlling for homophily&#34; (p. 21547).
+
+**Limitations (authors&#39; own).**
+
+&gt; &#34;Although the matching process accounts for homophily on all observed characteristics and those unobserved or latent characteristics that are correlated with what we observe, unobserved and uncorrelated latent homophily and unobserved confounding factors or contextual effects (such as correlated exposure to advertising among friends or information from common unobserved friends) may also contribute to assortative mixing and temporal clustering.&#34; (p. 21548) **[imperfect measure]**
+
+- One product, one platform: &#34;Yahoo! Go 2.0 does not exhibit direct network externalities [...] We suspect that peer influence effects differ for products with direct network externalities&#34; (p. 21548). **[single system]**
+- No tie-formation model: &#34;extending these methods to account for selection processes could prove useful in cases where selection effects are more prevalent&#34; (p. 21548). **[no model of mechanism]**
+- Outcome is product adoption. **[outcome is not selection]**
+
+**Channel / source (assistant judgment).** Development in a weak sense (adoption of a behavior/product). Source: peers. The relevant contribution is quantitative: naive peer estimates in big observational networks can be several-fold too large because of sorting.
+
+---
+EOF
+cd /tmp/nsA &amp;&amp; grep -n -E &#34;PDFPAGE|Abstract|generically|confound|identif|Theorem|latent|Christakis|Framingham|cannot|bound|conclusion|Conclusion&#34; 05_p.txt | head -90</summary>
+```bash
+cat >> "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_A_influence_homophily_note.md" <<'EOF'
+
+## 4. Aral, Muchnik & Sundararajan 2009 — Distinguishing influence-based contagion from homophily-driven diffusion in dynamic networks
+
+**Citation.** Aral, Sinan, Lev Muchnik, and Arun Sundararajan. 2009. "Distinguishing Influence-Based Contagion from Homophily-Driven Diffusion in Dynamic Networks." *Proceedings of the National Academy of Sciences* 106 (51): 21544–21549. DOI: 10.1073/pnas.0908800106. (PDF p. n = printed p. 21543 + n.)
+
+**Data / setting / sample / years.** Yahoo! instant-messaging (IM) network: "the global network of daily instant messaging (IM) traffic among 27.4 million users of Yahoo.com" combined with "data on the day-by-day adoption of a mobile service application launched in July 2007 (Yahoo! Go)" (pp. 21544–21545). Covariates: "40 time-varying and 6 time-invariant individual and network characteristics" (p. 21545). Adoption window: Fig. 2 covers "July 1 to October 29, 2007" (p. 21545); the text refers to "the 5-month period" (p. 21545). Network: "⬎14 billion page views and sent 3.9 billion messages over 89.3 million distinct relationships" (p. 21545).
+
+**Design.** Observational; dynamic propensity-score matched sampling. Treatment = having 1, 2, 3, or 4+ adopter friends; treated users matched to untreated users with the same estimated likelihood of treatment given observables (p. 21546). Compared with "random matching" (no adjustment for homophily).
+
+**Main findings (verbatim).**
+
+> "We find that previous methods overestimate peer influence in product adoption decisions in this network by 300 –700%, and that homophily explains >50% of the perceived behavioral contagion." (Abstract, p. 21544; spacing around the en dash as printed)
+
+> "Over half of the cumulative adoption of treated users (those with at least one adopter friend) can be attributed to homophily effects (Fig. 4 A and B). The remaining adoption events (49.8%) represent the upper bound of influence effects established by our matched sample estimates." (p. 21547)
+
+> "Comparisons to random therefore incorrectly imply that influence grows superlinearly with the number of adopter friends, whereas there is simply greater homophily in larger groups of adopters." (p. 21547)
+
+**Sorting vs. influence.** Treats homophily as selection bias in a treatment-effects frame: "Homophily in this case creates a selection bias because treatments are not randomly assigned: adopters are more likely to be treated because of similarity with their neighbors." (p. 21546). Matching on observables yields an upper bound on influence: "This procedure establishes upper bounds on the degree to which influence (rather than homophily) explains assortative mixing and temporal clustering in networks." (p. 21546). Also notes heterogeneity: stronger ties and denser local networks raise adoption "controlling for homophily" (p. 21547).
+
+**Limitations (authors' own).**
+
+> "Although the matching process accounts for homophily on all observed characteristics and those unobserved or latent characteristics that are correlated with what we observe, unobserved and uncorrelated latent homophily and unobserved confounding factors or contextual effects (such as correlated exposure to advertising among friends or information from common unobserved friends) may also contribute to assortative mixing and temporal clustering." (p. 21548) **[imperfect measure]**
+
+- One product, one platform: "Yahoo! Go 2.0 does not exhibit direct network externalities [...] We suspect that peer influence effects differ for products with direct network externalities" (p. 21548). **[single system]**
+- No tie-formation model: "extending these methods to account for selection processes could prove useful in cases where selection effects are more prevalent" (p. 21548). **[no model of mechanism]**
+- Outcome is product adoption. **[outcome is not selection]**
+
+**Channel / source (assistant judgment).** Development in a weak sense (adoption of a behavior/product). Source: peers. The relevant contribution is quantitative: naive peer estimates in big observational networks can be several-fold too large because of sorting.
+
+---
+EOF
+cd /tmp/nsA && grep -n -E "PDFPAGE|Abstract|generically|confound|identif|Theorem|latent|Christakis|Framingham|cannot|bound|conclusion|Conclusion" 05_p.txt | head -90
+```
+
+```
+2:=====PDFPAGE 1=====
+21:                                                                               Abstract
+26:                                               surable responses. We show that, generically, all of these are confounded
+30:                                               ple examples, that asymmetries in regression coefficients cannot identify
+45:                                            2.1 Contagion Effects are Nonparametrically Unidentifiable . . . . . 6
+51:=====PDFPAGE 2=====
+61:5 Conclusion: Towards Responsible Just-So Story-Telling                                      20
+88:       sity, which also leads them to jump off bridges (latent homophily, on an
+102:=====PDFPAGE 3=====
+117:More precisely, latent homophily and contagion are generically confounded with
+118:each other (section 2), and any direct contagion effects cannot be nonparametri-
+119:cally identified from observational data2 . To identify contagion effects, we need
+121:us rule out latent homophily as a causal factor. It has been proposed that
+130:show that it confounds inferences for relationships between homophilous traits
+138:   2 We remind the reader of the relevant sense of “identification” (Manski, 2007).     We have
+142:P (M ). A functional θ of the data-generating process is identifiable if it depends on M only
+144:is unidentifiable. If θ is identifiable only when M is restricted to a finitely parameterized
+145:family, then θ is parametrically identifiable (within that family). If θ is identifiable without
+146:such a restriction, it is non-parametrically identifiable. See further Pearl (2009b, ch. 3) on
+147:identification of causal effects from observables.
+154:=====PDFPAGE 4=====
+156:In our framework the random variable Xi is a collection of unchanging latent
+168:code is available from http://www.stat.cmu.edu/~cshalizi/homophily-confounding/.
+181:    More puzzling are situations such as the investigation of Christakis and
+185:Christakis (2008). It is natural to ask how much 
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; sed -n &#39;1,40p;102,135p;603,660p&#39; 05_p.txt</summary>
+```bash
+cd /tmp/nsA && sed -n '1,40p;102,135p;603,660p' 05_p.txt
+```
+
+```
+
+=====PDFPAGE 1=====
+                                              Homophily and Contagion Are Generically
+                                             Confounded in Observational Social Network
+                                                             Studies
+
+
+
+
+arXiv:1004.4704v3 [stat.AP] 30 Nov 2010
+                                                                      Cosma Rohilla Shalizi
+                                                         Department of Statistics, Carnegie Mellon University
+                                                                           Santa Fe Institute
+
+                                                                        Andrew C. Thomas
+                                                         Department of Statistics, Carnegie Mellon University
+
+                                           Draft begun 13 November 2009, last LATEX’d November 26, 2024
+
+
+                                                                               Abstract
+                                                   We consider processes on social networks that can potentially involve
+                                               three factors: homophily, or the formation of social ties due to matching
+                                               individual traits; social contagion, also known as social influence; and the
+                                               causal effect of an individual’s covariates on their behavior or other mea-
+                                               surable responses. We show that, generically, all of these are confounded
+                                               with each other. Distinguishing them from one another requires strong as-
+                                               sumptions on the parametrization of the social process or on the adequacy
+                                               of the covariates used (or both). In particular we demonstrate, with sim-
+                            
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Now the Shalizi & Thomas toy-model setup (pp. 9–10), section 4, and the conclusion.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; grep -n -E &#34;^\s*[0-9](\.[0-9])?\s+[A-Z]&#34; 05_p.txt | head -30; sed -n &#39;415,445p;796,815p&#39; 05_p.txt</summary>
+```bash
+cd /tmp/nsA && grep -n -E "^\s*[0-9](\.[0-9])?\s+[A-Z]" 05_p.txt | head -30; sed -n '415,445p;796,815p' 05_p.txt
+```
+
+```
+39:                                          1 Introduction: “If your friend jumped off a bridge, would you
+41:                                            1.1 Notation, Terminology, Conventions . . . . . . . . . . . . . . . . 4
+43:                                          2 How Homophily and Individual-Level Causation Look Like Con-
+45:                                            2.1 Contagion Effects are Nonparametrically Unidentifiable . . . . . 6
+46:                                            2.2 The Argument from Asymmetry . . . . . . . . . . . . . . . . . .  8
+52:3 How Contagion and Homophily Look Like Causation At The
+54:  3.1 Simulation Model . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+56:4 Constructive Responses                                                     15
+57:  4.1 Identifying Contagion from Non-Neighbors . . . . . . . . . . . . . 17
+58:  4.2 Bounds . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+59:  4.3 Network Clustering . . . . . . . . . . . . . . . . . . . . . . . . . . 19
+61:5 Conclusion: Towards Responsible Just-So Story-Telling                                      20
+64:1     Introduction: “If your friend jumped off a
+90:   1 Analogies between the spread of ideas and behaviors — especially disliked ideas and
+138:   2 We remind the reader of the relevant sense of “identification” (Manski, 2007).     We have
+155:1.1      Notation, Terminology, Conventions
+171:2      How Homophily and Individual-Level Causa-
+193:    3 There are however claims in the medical literature (Atkinson, 2007) that certain viruses
+199:   4 Sperber (1996, ch. 5) is a detailed and subtle exploration of just how powerful the latter
+264:2.1     Contagion Effects are Nonparametrically Unidentifi-
+296:   5 The results of this investigation hold even if this assumption is dropped, or if the time
+300:   6 The result will go through so long as Y (t ) is influenced by X for at least one t , and
+347:    7 In particular, making all of the relations b
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; grep -n &#34;Towards Responsible&#34; 05_p.txt; awk &#39;/=====PDFPAGE 20=====/,/=====PDFPAGE 22=====/&#39; 05_p.txt | grep -v &#34;^\s*$&#34; | head -90; grep -n -E &#34;n = |400|1000 nodes|individuals \(nodes\)&#34; 05_p.txt | head</summary>
+```bash
+cd /tmp/nsA && grep -n "Towards Responsible" 05_p.txt; awk '/=====PDFPAGE 20=====/,/=====PDFPAGE 22=====/' 05_p.txt | grep -v "^\s*$" | head -90; grep -n -E "n = |400|1000 nodes|individuals \(nodes\)" 05_p.txt | head
+```
+
+```
+61:5 Conclusion: Towards Responsible Just-So Story-Telling                                      20
+1735:5     Conclusion: Towards Responsible Just-So Story-
+=====PDFPAGE 20=====
+or manifest, will tend to produce a network built primarily of homogeneous clus-
+ters, also called, in this context, “communities” or “modules”. Inversely, such
+clusters will tend to consist of nodes with the same value of the homophilous
+trait.
+    The topic of community discovery — essentially, dividing graphs into ho-
+mogeneous, densely inter-connected clusters of nodes, with minimal connection
+between clusters — has been thoroughly explored in the recent literature (ex-
+plicitly in Girvan and Newman (2002); Newman and Girvan (2003); Bickel and
+Chen (2009); Porter et al. (2009); Fortunato (2010), implicitly in much smaller
+clusters in Elwert and Christakis (2008)). A natural idea would be to first estab-
+lish the existence of these clusters, to note the memberships of each individual
+in the chosen model, call this estimate Ĉi , and to control for Ĉi when looking
+for evidence of contagion or influence.
+    By the arguments we have presented so far, such control-by-clustering will
+generally be unable to eliminate the confounding18 . However, in conjunction
+with the bounds approach mentioned above, conditioning on estimated commu-
+nity memberships might still noticeably reduce the confounding. On the other
+hand, misspecification of the block structure may make the problem worse —
+consider the cases where the generating mechanism may be a mixed-membership
+block model (Airoldi et al., 2008) or “role” model (Reichardt and White, 2007)
+but communities are “discovered” assuming a simple modular network struc-
+ture. Estimating the damage due to misspecification in this case is a goal of
+future research.
+5     Conclusion: Towards Responsible Just-So Story-
+      Telling
+We have seen that when there is latent homophily, contagion effects are uniden-
+tifiable, and even the presence of contagion can
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Writing the Shalizi & Thomas section (cited by arXiv page, with a note that the journal abstract wording differs slightly per the bib).
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cat &gt;&gt; &#34;/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_A_influence_homophily_note.md&#34; &lt;&lt;&#39;EOF&#39;
+
+## 5. Shalizi &amp; Thomas 2011 — Homophily and contagion are generically confounded in observational social network studies
+
+**Citation.** Shalizi, Cosma Rohilla, and Andrew C. Thomas. 2011. &#34;Homophily and Contagion Are Generically Confounded in Observational Social Network Studies.&#34; *Sociological Methods &amp; Research* 40 (2): 211–239. DOI: 10.1177/0049124111404820.
+
+**PAGE-NUMBER WARNING.** The library PDF is the **arXiv preprint** (arXiv:1004.4704v3 [stat.AP], 30 Nov 2010; 27 pp.), not the typeset journal article. Journal page numbers 211–239 **could not be determined** from this file. Cites below are &#34;arXiv p.&#34; (the page number printed at the foot of the preprint, which equals the PDF page). Wording differs slightly from the journal version: the bib&#39;s abstract (journal version) reads &#34;The authors consider [...] on his or her behavior&#34;, where the preprint reads &#34;We consider [...] on their behavior&#34;. If Charles quotes this paper, check against the published version.
+
+**Data / setting / sample / years.** No empirical data. Theoretical argument with causal graphs plus toy simulations; the main toy network has n = 400 nodes, each with one declared friend, mimicking the Christakis–Fowler setup (arXiv pp. 9–10), and is regenerated 5,000 times (arXiv p. 10).
+
+**Design.** Theoretical / proof (identification argument using directed acyclic graphs and d-separation) plus simulation.
+
+**Main findings (verbatim).**
+
+&gt; &#34;We show that, generically, all of these are confounded with each other. Distinguishing them from one another requires strong assumptions on the parametrization of the social process or on the adequacy of the covariates used (or both). In particular we demonstrate, with simple examples, that asymmetries in regression coefficients cannot identify causal effects, and that very simple models of imitation (a form of social contagion) can produce substantial correlations between an individual&#39;s enduring traits and their choices, even when there is no intrinsic affinity between them.&#34; (Abstract, arXiv p. 1)
+
+&gt; &#34;More precisely, latent homophily and contagion are generically confounded with each other (section 2), and any direct contagion effects cannot be nonparametrically identified from observational data. To identify contagion effects, we need either strong parametric assumptions or strong substantive knowledge that lets us rule out latent homophily as a causal factor.&#34; (arXiv p. 3; footnote marker &#34;2&#34; after &#34;data&#34; omitted)
+
+&gt; &#34;This is the result of the type that was cited in Christakis and Fowler (2007); Fowler and Christakis (2008) but produced without any network interaction. [...] It is evident from the histogram that this null distribution is not centered at zero, and about 77% of the sample values are positive, even though there is really no effect. Thus, latent homophilous variables can produce a substantial apparent contagion effect, including the asymmetry expected of actual contagion.&#34; (arXiv p. 12; footnote marker &#34;11&#34; omitted)
+
+&gt; &#34;We have seen that when there is latent homophily, contagion effects are unidentifiable, and even the presence of contagion cannot be distinguished observationally from a causal effect of the homophilous trait.&#34; (Conclusion, arXiv p. 20)
+
+**Sorting vs. influence.** This is the formal statement that sorting on an unobserved trait and influence cannot be separated by observational data without strong assumptions. It directly targets the Christakis–Fowler directionality (asymmetry) argument and shows a latent-homophily model reproduces &#34;mutual &gt; named &gt; namer&#34; (arXiv p. 12). Constructive options offered (section 4): identifying contagion via non-neighbors, partial-identification bounds, and conditioning on detected network communities, the last with a caveat: &#34;such control-by-clustering will generally be unable to eliminate the confounding&#34; (arXiv p. 20). Burden statement: &#34;this still places the burden on the investigator to pursue as many possible latent factors as may be present — an extremely onerous task in a multi-decade observational study — or to work exclusively with experimental data&#34; (arXiv p. 12).
+
+**Limitations.**
+
+- Negative / identification result; toy parameter values are illustrative: &#34;The parameter values in this model were not chosen to maximize either the apparent contagion effect or its asymmetry, merely to demonstrate their presence.&#34; (arXiv p. 12) **[model not fit to data]**
+- Says nothing about the size of contagion in any real system. (assistant reading) **[no model of mechanism]** for any specific outcome.
+- **[outcome is not selection]** (generic behavior Y).
+
+**Channel / source (assistant judgment).** Method-level; applies to any peer-effect claim in development or evaluation. Most relevant implication for the dissertation: observational similarity among people who share an environment cannot by itself be attributed to peers, which motivates designs where the environment is assigned or the mechanism is modeled explicitly.
+
+---
+EOF
+cd /tmp/nsA &amp;&amp; sed -n &#39;1,80p&#39; 06_p.txt | grep -v &#34;^\s*$&#34;; grep -n -E &#34;PDFPAGE|Sociological Methods|^\s*2[0-9][0-9]\s*$|limitation|Christakis|Framingham|smoking|obesity|bias factor|sensitivity parameter&#34; 06_p.txt | head -80</summary>
+```bash
+cat >> "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_A_influence_homophily_note.md" <<'EOF'
+
+## 5. Shalizi & Thomas 2011 — Homophily and contagion are generically confounded in observational social network studies
+
+**Citation.** Shalizi, Cosma Rohilla, and Andrew C. Thomas. 2011. "Homophily and Contagion Are Generically Confounded in Observational Social Network Studies." *Sociological Methods & Research* 40 (2): 211–239. DOI: 10.1177/0049124111404820.
+
+**PAGE-NUMBER WARNING.** The library PDF is the **arXiv preprint** (arXiv:1004.4704v3 [stat.AP], 30 Nov 2010; 27 pp.), not the typeset journal article. Journal page numbers 211–239 **could not be determined** from this file. Cites below are "arXiv p." (the page number printed at the foot of the preprint, which equals the PDF page). Wording differs slightly from the journal version: the bib's abstract (journal version) reads "The authors consider [...] on his or her behavior", where the preprint reads "We consider [...] on their behavior". If Charles quotes this paper, check against the published version.
+
+**Data / setting / sample / years.** No empirical data. Theoretical argument with causal graphs plus toy simulations; the main toy network has n = 400 nodes, each with one declared friend, mimicking the Christakis–Fowler setup (arXiv pp. 9–10), and is regenerated 5,000 times (arXiv p. 10).
+
+**Design.** Theoretical / proof (identification argument using directed acyclic graphs and d-separation) plus simulation.
+
+**Main findings (verbatim).**
+
+> "We show that, generically, all of these are confounded with each other. Distinguishing them from one another requires strong assumptions on the parametrization of the social process or on the adequacy of the covariates used (or both). In particular we demonstrate, with simple examples, that asymmetries in regression coefficients cannot identify causal effects, and that very simple models of imitation (a form of social contagion) can produce substantial correlations between an individual's enduring traits and their choices, even when there is no intrinsic affinity between them." (Abstract, arXiv p. 1)
+
+> "More precisely, latent homophily and contagion are generically confounded with each other (section 2), and any direct contagion effects cannot be nonparametrically identified from observational data. To identify contagion effects, we need either strong parametric assumptions or strong substantive knowledge that lets us rule out latent homophily as a causal factor." (arXiv p. 3; footnote marker "2" after "data" omitted)
+
+> "This is the result of the type that was cited in Christakis and Fowler (2007); Fowler and Christakis (2008) but produced without any network interaction. [...] It is evident from the histogram that this null distribution is not centered at zero, and about 77% of the sample values are positive, even though there is really no effect. Thus, latent homophilous variables can produce a substantial apparent contagion effect, including the asymmetry expected of actual contagion." (arXiv p. 12; footnote marker "11" omitted)
+
+> "We have seen that when there is latent homophily, contagion effects are unidentifiable, and even the presence of contagion cannot be distinguished observationally from a causal effect of the homophilous trait." (Conclusion, arXiv p. 20)
+
+**Sorting vs. influence.** This is the formal statement that sorting on an unobserved trait and influence cannot be separated by observational data without strong assumptions. It directly targets the Christakis–Fowler directionality (asymmetry) argument and shows a latent-homophily model reproduces "mutual > named > namer" (arXiv p. 12). Constructive options offered (section 4): identifying contagion via non-neighbors, partial-identification bounds, and conditioning on detected network communities, the last with a caveat: "such control-by-clustering will generally be unable to eliminate the confounding" (arXiv p. 20). Burden statement: "this still places the burden on the investigator to pursue as many possible latent factors as may be present — an extremely onerous task in a multi-decade observational study — or to work exclusively with experimental data" (arXiv p. 12).
+
+**Limitations.**
+
+- Negative / identification result; toy parameter values are illustrative: "The parameter values in this model were not chosen to maximize either the apparent contagion effect or its asymmetry, merely to demonstrate their presence." (arXiv p. 12) **[model not fit to data]**
+- Says nothing about the size of contagion in any real system. (assistant reading) **[no model of mechanism]** for any specific outcome.
+- **[outcome is not selection]** (generic behavior Y).
+
+**Channel / source (assistant judgment).** Method-level; applies to any peer-effect claim in development or evaluation. Most relevant implication for the dissertation: observational similarity among people who share an environment cannot by itself be attributed to peers, which motivates designs where the environment is assigned or the mechanism is modeled explicitly.
+
+---
+EOF
+cd /tmp/nsA && sed -n '1,80p' 06_p.txt | grep -v "^\s*$"; grep -n -E "PDFPAGE|Sociological Methods|^\s*2[0-9][0-9]\s*$|limitation|Christakis|Framingham|smoking|obesity|bias factor|sensitivity parameter" 06_p.txt | head -80
+```
+
+```
+=====PDFPAGE 1=====
+                               NIH Public Access
+                               Author Manuscript
+                               Sociol Methods Res. Author manuscript; available in PMC 2015 January 09.
+                           Published in final edited form as:
+NIH-PA Author Manuscript
+                            Sociol Methods Res. 2011 May ; 40(2): 240–255. doi:10.1177/0049124111404821.
+                           Sensitivity analysis for contagion effects in social networks
+                           Tyler J. VanderWeele1
+                           Abstract
+                                 Analyses of social network data have suggested that obesity, smoking, happiness and loneliness all
+                                 travel through social networks. Individuals exert “contagion effects” on one another through social
+                                 ties and association. These analyses have come under critique because of the possibility that
+                                 homophily from unmeasured factors may explain these statistical associations and because similar
+                                 findings can be obtained when the same methodology is applied to height, acne and head-aches,
+                                 for which the conclusion of contagion effects seems somewhat less plausible. We use sensitivity
+                                 analysis techniques to assess the extent to which supposed contagion effects for obesity, smoking,
+NIH-PA Author Manuscript
+                                 happiness and loneliness might be explained away by homophily or confounding and the extent to
+                                 which the critique using analysis of data on height, acne and head-aches is relevant. Sensitivity
+                                 analyses suggest that contagion effects for obesity and smoking cessation are reasonably robust to
+                                 possible latent homophily or environmental confoundin
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+VanderWeele 2011 is also an NIH author manuscript (journal pp. 240–255 not mappable). Reading the obesity application and the discussion.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; awk &#39;/=====PDFPAGE 6=====/,/=====PDFPAGE 11=====/&#39; 06_p.txt | grep -v &#34;^\s*$&#34; | grep -v &#34;NIH-PA Author Manuscript\s*$&#34; | sed -n &#39;1,260p&#39;</summary>
+```bash
+cd /tmp/nsA && awk '/=====PDFPAGE 6=====/,/=====PDFPAGE 11=====/' 06_p.txt | grep -v "^\s*$" | grep -v "NIH-PA Author Manuscript\s*$" | sed -n '1,260p'
+```
+
+```
+=====PDFPAGE 6=====
+                           VanderWeele                                                                                                Page 6
+                                         most attention in the literature. However, we will occasionally comment also on some of the
+                                         other relationships.
+                                         Using data from the Framingham Heart Study (Dawber, 1980; Feinlib et al., 1975),
+                                         Christakis and Fowler (2007) found that an individual’s chances of being obese (body mass
+                                         index>30) increased by 57% (95% CI: 6% – 123%) if he or she had a friend who was obese
+                                         a given interval. They controlled for an ego’s age, sex and education level, the ego’s obesity
+                                         status at the previous time point and the alter’s obesity status at the previous time point.
+                                         Adjustment for the alter’s lagged obesity status was intended to control for homophily. As
+                                         noted by Shalizi and Thomas (2011), if there is an unmeasured factor that explains both the
+                                         formation of friendship ties and affects the likelihood of becoming obese at each period,
+                                         then the analyses of Christakis and Fowler may be biased, even after control for the alter’s
+                                         lagged obesity. Such an unmeasured factor may effectively confound the relationship
+                                         between the alter’s current obesity and the ego’s current obesity; estimates of the effect may
+                                         be non-zero due to such confounding even if there is in fact no effect.
+                                         Using sensitivity analysis we can assess the ext
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Reading the truncated middle (happiness, loneliness, and the acne/height/headache placebo results).
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; awk &#39;/=====PDFPAGE 7=====/,/=====PDFPAGE 10=====/&#39; 06_p.txt | grep -v &#34;^\s*$&#34; | grep -v &#34;NIH-PA Author Manuscript\s*$&#34; | sed -n &#39;30,120p&#39;</summary>
+```bash
+cd /tmp/nsA && awk '/=====PDFPAGE 7=====/,/=====PDFPAGE 10=====/' 06_p.txt | grep -v "^\s*$" | grep -v "NIH-PA Author Manuscript\s*$" | sed -n '30,120p'
+```
+
+```
+                                         However, for both obesity and smoking, there are other contagion effect estimates (in the
+                                         case of obesity, that for a mutual friend; in the case of smoking cessation, that for a spouse)
+                                         for which both the estimate itself and the confidence interval would require very strong
+                                         confounding by latent homophily to completely explain away.
+                                         We now turn to the analyses concerning happiness (Fowler and Christakis, 2008a) and
+                                         loneliness (Cacioppo et al., 2009). In the social network analyses (Fowler and Christakis,
+                                         2008a), happiness was defined as having reported the maximum answers on all four
+                                         questions about positive affect on the Center for Epidemiological Studies Depression scale
+                                         (CES-D; Radloff, 1977). Loneliness was measured as the number of days an individual felt
+                                         lonely the previous week as reported in a question on the CES-D (Radloff, 1977; Cacioppo
+                                         et al., 2009). For happiness, Fowler and Christakis (2008a) find that a friend who lives
+                                         within one mile who is happy increases the probability that the ego is happy by 25% (95%
+                                         CI: 1% to 57%). Here, if a latent factor U increased the likelihood of an ego’s being happy
+                                         1.8-fold and if the prevalence of U for the ego amongst the group with the alter was or was
+                                         not happy were 0.7 and 0.3 (the same values initially used for obesity) this would reduce the
+                                          Sociol Methods Res. Author 
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cat &gt;&gt; &#34;/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_A_influence_homophily_note.md&#34; &lt;&lt;&#39;EOF&#39;
+
+## 6. VanderWeele 2011 — Sensitivity analysis for contagion effects in social networks
+
+**Citation.** VanderWeele, Tyler J. 2011. &#34;Sensitivity Analysis for Contagion Effects in Social Networks.&#34; *Sociological Methods &amp; Research* 40 (2): 240–255. DOI: 10.1177/0049124111404821.
+
+**PAGE-NUMBER WARNING.** The library PDF is the **NIH Public Access author manuscript** (PMC, &#34;available in PMC 2015 January 09&#34;), with manuscript pages &#34;Page 1&#34; … ; journal pages 240–255 **could not be determined** from this file. Cites below are &#34;MS p.&#34; (= PDF page). Typos in the manuscript (e.g. &#34;Folwer&#34;, &#34;have increase likelihood&#34;) are reproduced as printed.
+
+**Data / setting / sample / years.** No new data. Re-analyzes published estimates: Christakis &amp; Fowler on obesity (2007) and smoking (2008), Fowler &amp; Christakis on happiness (2008), Cacioppo, Fowler &amp; Christakis on loneliness (2009), all Framingham; and Cohen-Cole &amp; Fletcher&#39;s (2008, *BMJ*) placebo estimates for headaches, acne, and height (Add Health).
+
+**Design.** Methodological: sensitivity analysis (bias-factor formulas) for an unmeasured binary factor U that drives tie formation (latent homophily) or is a shared environment. Asks how strong U must be to &#34;explain away&#34; each published estimate.
+
+**Main findings (verbatim).**
+
+&gt; &#34;Sensitivity analyses suggest that contagion effects for obesity and smoking cessation are reasonably robust to possible latent homophily or environmental confounding; those for happiness and loneliness are somewhat less so. Supposed effects for height, acne and head-aches are all easily explained away by latent homophily and confounding.&#34; (Abstract, MS p. 1)
+
+&gt; &#34;For example, to completely explain away the estimate of 57% the unmeasured factor U would have to have increase likelihood of obesity by 3-fold and have a prevalence of 0.7 in friendships in which the alter was obese and only 0.25 in friendships in which the alter was not obese. Although the latent factor U would have to be very strongly related to current obesity [...], the latent U, as can also be seen in Table 1, would need to only be modestly related to obesity to bring down the confidence interval so as to include 0%.&#34; (MS p. 6)
+
+&gt; &#34;It should be noted that an estimate that can easily be explained away by an unmeasured factor does not mean that there is no social influence but only that one probably ought not draw that conclusion from the data at hand.&#34; (MS p. 10)
+
+Worked example: a U with 1.8-fold effect and prevalence 0.7 vs. 0.3 &#34;would reduce the estimate of the effect of the alter&#39;s obesity on the ego&#39;s obesity from an increase of 57% (95% CI: 6% to 123%) to an increase of 25% (95 CI: −16% to 77%).&#34; (MS p. 6; &#34;95 CI&#34; as printed)
+
+**Sorting vs. influence.** Accepts Shalizi &amp; Thomas&#39;s point that latent homophily biases the Christakis–Fowler estimates even after lagged controls (MS p. 6), and replaces the yes/no identification question with a &#34;how much confounding would it take&#34; question. Notes the same U can represent &#34;a shared environmental factor for the ego and the alter&#34; (MS p. 6). Strongest-surviving estimates: mutual friend for obesity (171%) and spouse for smoking cessation (MS p. 7).
+
+**Limitations (author&#39;s own).**
+
+&gt; &#34;Perhaps most importantly, in attempting to reason about whether latent homophily might explain away a contagion effect estimate we have had to make decisions regarding whether homophily of a particular magnitude is or is not plausible. Without studies providing precise measures of such homophily it is difficult to know what levels might be sufficiently large to be considered implausible.&#34; (MS p. 9) **[imperfect measure]**
+
+&gt; &#34;Another limitation of the sensitivity analyses here were the assumptions that the latent factor U was binary and that its effects on the ego&#39;s being obese were the same irrespective of whether or not the alter was obese [...]. Such assumptions are likely unrealistic.&#34; (MS p. 9) **[model not fit to data]**
+
+- Inherits the Framingham data and estimates. **[single system]** **[outcome is not selection]**
+
+**Channel / source (assistant judgment).** Method-level, development channel; source: peers vs. shared environment (U can be either). Useful framing for the dissertation: when design cannot separate sorting from influence, report how strong unobserved sorting would need to be.
+
+---
+EOF
+cd /tmp/nsA &amp;&amp; sed -n &#39;1,120p&#39; 07_p.txt | grep -v &#34;^\s*$&#34; | head -100</summary>
+```bash
+cat >> "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_A_influence_homophily_note.md" <<'EOF'
+
+## 6. VanderWeele 2011 — Sensitivity analysis for contagion effects in social networks
+
+**Citation.** VanderWeele, Tyler J. 2011. "Sensitivity Analysis for Contagion Effects in Social Networks." *Sociological Methods & Research* 40 (2): 240–255. DOI: 10.1177/0049124111404821.
+
+**PAGE-NUMBER WARNING.** The library PDF is the **NIH Public Access author manuscript** (PMC, "available in PMC 2015 January 09"), with manuscript pages "Page 1" … ; journal pages 240–255 **could not be determined** from this file. Cites below are "MS p." (= PDF page). Typos in the manuscript (e.g. "Folwer", "have increase likelihood") are reproduced as printed.
+
+**Data / setting / sample / years.** No new data. Re-analyzes published estimates: Christakis & Fowler on obesity (2007) and smoking (2008), Fowler & Christakis on happiness (2008), Cacioppo, Fowler & Christakis on loneliness (2009), all Framingham; and Cohen-Cole & Fletcher's (2008, *BMJ*) placebo estimates for headaches, acne, and height (Add Health).
+
+**Design.** Methodological: sensitivity analysis (bias-factor formulas) for an unmeasured binary factor U that drives tie formation (latent homophily) or is a shared environment. Asks how strong U must be to "explain away" each published estimate.
+
+**Main findings (verbatim).**
+
+> "Sensitivity analyses suggest that contagion effects for obesity and smoking cessation are reasonably robust to possible latent homophily or environmental confounding; those for happiness and loneliness are somewhat less so. Supposed effects for height, acne and head-aches are all easily explained away by latent homophily and confounding." (Abstract, MS p. 1)
+
+> "For example, to completely explain away the estimate of 57% the unmeasured factor U would have to have increase likelihood of obesity by 3-fold and have a prevalence of 0.7 in friendships in which the alter was obese and only 0.25 in friendships in which the alter was not obese. Although the latent factor U would have to be very strongly related to current obesity [...], the latent U, as can also be seen in Table 1, would need to only be modestly related to obesity to bring down the confidence interval so as to include 0%." (MS p. 6)
+
+> "It should be noted that an estimate that can easily be explained away by an unmeasured factor does not mean that there is no social influence but only that one probably ought not draw that conclusion from the data at hand." (MS p. 10)
+
+Worked example: a U with 1.8-fold effect and prevalence 0.7 vs. 0.3 "would reduce the estimate of the effect of the alter's obesity on the ego's obesity from an increase of 57% (95% CI: 6% to 123%) to an increase of 25% (95 CI: −16% to 77%)." (MS p. 6; "95 CI" as printed)
+
+**Sorting vs. influence.** Accepts Shalizi & Thomas's point that latent homophily biases the Christakis–Fowler estimates even after lagged controls (MS p. 6), and replaces the yes/no identification question with a "how much confounding would it take" question. Notes the same U can represent "a shared environmental factor for the ego and the alter" (MS p. 6). Strongest-surviving estimates: mutual friend for obesity (171%) and spouse for smoking cessation (MS p. 7).
+
+**Limitations (author's own).**
+
+> "Perhaps most importantly, in attempting to reason about whether latent homophily might explain away a contagion effect estimate we have had to make decisions regarding whether homophily of a particular magnitude is or is not plausible. Without studies providing precise measures of such homophily it is difficult to know what levels might be sufficiently large to be considered implausible." (MS p. 9) **[imperfect measure]**
+
+> "Another limitation of the sensitivity analyses here were the assumptions that the latent factor U was binary and that its effects on the ego's being obese were the same irrespective of whether or not the alter was obese [...]. Such assumptions are likely unrealistic." (MS p. 9) **[model not fit to data]**
+
+- Inherits the Framingham data and estimates. **[single system]** **[outcome is not selection]**
+
+**Channel / source (assistant judgment).** Method-level, development channel; source: peers vs. shared environment (U can be either). Useful framing for the dissertation: when design cannot separate sorting from influence, report how strong unobserved sorting would need to be.
+
+---
+EOF
+cd /tmp/nsA && sed -n '1,120p' 07_p.txt | grep -v "^\s*$" | head -100
+```
+
+```
+=====PDFPAGE 1=====
+Birds of a Feather: Homophily in Social Networks
+Author(s): Miller McPherson, Lynn Smith-Lovin and James M. Cook
+Source: Annual Review of Sociology, Vol. 27 (2001), pp. 415-444
+Published by: Annual Reviews
+Stable URL: http://www.jstor.org/stable/2678628
+Accessed: 12-01-2017 18:34 UTC
+JSTOR is a not-for-profit service that helps scholars, researchers, and students discover, use, and build upon a wide range of content in a trusted
+digital archive. We use information technology and tools to increase productivity and facilitate new forms of scholarship. For more information about
+JSTOR, please contact support@jstor.org.
+Your use of the JSTOR archive indicates your acceptance of the Terms & Conditions of Use, available at
+http://about.jstor.org/terms
+                     Annual Reviews is collaborating with JSTOR to digitize, preserve and extend access to Annual Review of
+                     Sociology
+                                      This content downloaded from 129.10.179.237 on Thu, 12 Jan 2017 18:34:43 UTC
+                                                        All use subject to http://about.jstor.org/terms
+=====PDFPAGE 2=====
+                                                                   Annu. Rev. Sociol. 2001. 27:415-44
+                                              Copyright ? 2001 by Annual Reviews. All rights reserved
+BIRDS OF A FEATHER: Homophily
+in Social Networks
+   Miller McPherson', Lynn Smith-Lovin', and
+   James M Cook2
+   'Department of Sociology, University of Arizona, Tucson, Arizona 85721;
+   e-mail: mcpherson@u.arizona.edu; smithlov@u.arizona.edu
+   2Department of Sociology, Duke University, Durham, North Carolina 27708;
+   e-mail: jcook@soc.duke.edu
+   Key Words human ecology, voluntary associations, organizations
+   * Abstract Similarity breeds connection. This principle-the homophily princi-
+   ple-structures network ties of every type, including marriage, friendship, work,
+   advice, support, information transfer, ex
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; grep -n -i -E &#34;PDFPAGE|baseline homophily|inbreeding|induced|choice homophily|foci|Feld|organizations|influence|selection|causal|cross-sectional|limitation|we know|work|workplace|Kalleberg&#34; 07_p.txt | head -120</summary>
+```bash
+cd /tmp/nsA && grep -n -i -E "PDFPAGE|baseline homophily|inbreeding|induced|choice homophily|foci|Feld|organizations|influence|selection|causal|cross-sectional|limitation|we know|work|workplace|Kalleberg" 07_p.txt | head -120
+```
+
+```
+2:=====PDFPAGE 1=====
+3:Birds of a Feather: Homophily in Social Networks
+31:=====PDFPAGE 2=====
+39:in Social Networks
+51:   Key Words human ecology, voluntary associations, organizations
+54:   ple-structures network ties of every type, including marriage, friendship, work,
+56:   lationship. The result is that people's personal networks are homogeneous with regard
+62:   that order. Geographic propinquity, families, organizations, and isomorphic positions
+66:   research on: (a) the basic ecological processes that link organizations, associations,
+68:   of multiplex ties on the patterns of homophily; and (c) the dynamics of network change
+69:   over time through which networks and other social entities co-evolve.
+91:=====PDFPAGE 3=====
+101:    works will tend to be localized. Homophily implies that distance in terms of
+102:   social characteristics translates into network distance, the number of relationships
+104:   also implies that any social entity that depends to a substantial degree on networks
+109:    of social networks, voluntary associations, social capital (at the individual and
+110:    community levels), social movements, culture, organizations, and a variety of
+111:    substantive topics that are affected by network processes. Because the principle of
+115:    types of network relationships that researchers have found to be homophilous,
+131:    similarity of two nodes2 in a network and the probability of a tie between them
+134:   of group formation and network ties in the 1920s and 1930s (e.g., Bott 1928,
+141:   not) to other nodes through relational ties in a network.
+149:=====PDFPAGE 4=====
+150:                                          HOMOPHILY IN SOCIAL NETWORKS 417
+156:       The classic citation in the sociological literature seems to be Lazarsfeld &
+157:    Merton's (1954) study of friendship process in Hilltown and Craftown. Lazarsfeld
+158:    & Merton drew on the theoretical work of Simmel (1971) and Park & Burgess
+160:    network researchers and lin
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; sed -n &#39;180,195p;228,240p;268,300p&#39; 07_p.txt; grep -n -i -E &#34;selection|influence|socialization|causal|longitudinal|dynamic|tie dissolution|dissolve|foci of activity|organizational&#34; 07_p.txt | sed -n &#39;1,200p&#39; | awk -F: &#39;$1&gt;560&#39;</summary>
+```bash
+cd /tmp/nsA && sed -n '180,195p;228,240p;268,300p' 07_p.txt; grep -n -i -E "selection|influence|socialization|causal|longitudinal|dynamic|tie dissolution|dissolve|foci of activity|organizational" 07_p.txt | sed -n '1,200p' | awk -F: '$1>560'
+```
+
+```
+    As issues of race and school desegregation dominated the US political arena, many
+    researchers focused on the extent of informal segregation in newly desegregated
+    schools, buses, and other public places (see review in Schofeld 1995). While ob-
+    servation of relationships eventually lagged behind the study of prejudice and
+    other attitudinal measures, researchers found strongly homophilous association
+    patterns by race and ethnicity (although these behavioral patterns were sometimes
+    weaker than the attitudinal prejudice). A second tradition began with the strong
+    assumption that peer groups were an important source of influence on people's be-
+    havior (especially among adolescents). Whether the focus was positive influence
+    (e.g., of college aspirations) or negative influence (e.g., of deviant subcultures),
+    cross-sectional association between some individual characteristic and the corre-
+    sponding characteristics of that individual's friends were used as evidence for the
+    potency of peer context.
+
+
+
+     in the work force more generally (Campbell 1988, Lin et al 1981a,b, Ibarra &
+     Smith-Lovin 1997), or on the interconnected resources necessary to accomplish
+    tasks in the business world (e.g., Aldrich et al 1989, 1996, Burt 1998). As studies
+    moved back to the context of social organizations, longitudinal data occasionally
+    became available to sort out the effects of selection, socialization, and attrition
+     (Hallinan & Smith 1985, Matsueda & Heimer 1987, Podolny & Baron 1997; see
+    review in Burt 2000).
+
+
+
+Types of Relationships
+    Researchers have studied homophily in relationships that range from the closest
+    ties of marriage (see review in Kalmijn 1998) and the strong relationships of
+
+    is one of the central insights of the approach. Others discuss homophily as a devi-
+    ation from what a baseline model of random assortment would predict. Here, the
+    concept represents a bias that leads simila
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; sed -n &#39;800,860p;995,1012p;1080,1095p;1215,1240p;1345,1390p&#39; 07_p.txt | grep -v &#34;^\s*$&#34;; grep -n &#34;PDFPAGE\|HOMOPHILY IN SOCIAL NETWORKS\|MCPHERSON \* SMITH&#34; 07_p.txt | sed -n &#39;20,70p&#39;</summary>
+```bash
+cd /tmp/nsA && sed -n '800,860p;995,1012p;1080,1095p;1215,1240p;1345,1390p' 07_p.txt | grep -v "^\s*$"; grep -n "PDFPAGE\|HOMOPHILY IN SOCIAL NETWORKS\|MCPHERSON \* SMITH" 07_p.txt | sed -n '20,70p'
+```
+
+```
+    BEHAVIOR A long tradition in the literature on adolescence demonstrates the ten-
+    dency of teenagers to associate with others who share their behavior patterns, either
+    of achievement or delinquence. Traditionally, these patterns were interpreted as
+    evidence of peer influence. As your mother always told you, hanging out with the
+    wrong crowd could get you into trouble. Longitudinal data first became available
+    in the 1970s, and this led to a rather decisive shift in the interpretation of behav-
+    ioral homophily. Cohen (1977) and Kandel (1978) demonstrated that both positive
+    behaviors of school achievement and negative behaviors like smoking marijuana
+    were homophilous more because of selection into relationships with similar others
+    than because of behavioral influence within friendship cliques. There also was
+    a slight tendency for relationships to disband when behavioral similarity did not
+    support them. Later, Billy et al (1984) showed the same patterns for adolescent
+    sexual behavior.
+       Among adults, behavioral homophily has been studied along two dimen-
+    sions. Verbrugge (1977) noted a mover-stayer pattern in Altneustadt (German)
+    friendships, with residential stability predicting friendship formation about as
+    strongly as did sex, nationality, or religion. Knoke (1990) found homophily of
+    political behavior and practice, with stronger shared political orientations pre-
+    dicting more behavioral involvement, especially within the context of voluntary
+    associations.
+    ATTITUDES, ABILITIES, BELIEFS, AND ASPIRATIONS Having established that homo-
+   phily exists on a wide array of sociodemographic and behavioral dimensions, we
+    finally turn to the arena where most people spontaneously recognize that similarity
+   breeds fellowship: value homophily. An extensive experimental literature in social
+   psychology established that attitude, belief, and value similarity lead to attraction
+   and interact
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Page mapping confirmed (PDF p. n = printed p. 413 + n). Writing the McPherson section, including the DOI flag.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cat &gt;&gt; &#34;/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_A_influence_homophily_note.md&#34; &lt;&lt;&#39;EOF&#39;
+
+## 7. McPherson, Smith-Lovin &amp; Cook 2001 — Birds of a feather: homophily in social networks
+
+**Citation.** McPherson, Miller, Lynn Smith-Lovin, and James M. Cook. 2001. &#34;Birds of a Feather: Homophily in Social Networks.&#34; *Annual Review of Sociology* 27: 415–444. JSTOR stable URL: http://www.jstor.org/stable/2678628. (PDF is a JSTOR scan with a cover sheet: PDF p. n = printed p. 413 + n.)
+
+**BIB ERROR — check before citing.** The bib entry `mcpherson_birds_2001` has `doi = {10.3982/ECTA7195}`, which is an *Econometrica* DOI prefix and is not this article. The PDF itself shows no DOI. The commonly cited DOI for this article is 10.1146/annurev.soc.27.1.415, but that is **not verified from the PDF**; confirm before use. The bib also has `number = {2001}` and a garbled title field (it contains JSTOR boilerplate).
+
+**Text-layer note.** The JSTOR text layer renders em-dashes as hyphens (e.g. &#34;This principle-the homophily principle-structures&#34;). Quotes below reproduce the text layer and mark these with &#34;[—]&#34; where a dash is clearly meant.
+
+**Data / setting / sample / years.** Literature review (Annual Review). No new data; reviews roughly a century of studies (from 1920s group-formation studies through the late 1990s) on marriage, friendship, work, advice, support, discussion networks, and voluntary associations.
+
+**Design.** Review / synthesis.
+
+**Main findings (verbatim).**
+
+&gt; &#34;Similarity breeds connection. This principle[—]the homophily principle[—]structures network ties of every type, including marriage, friendship, work, advice, support, information transfer, exchange, comembership, and other types of relationship. [...] Homophily in race and ethnicity creates the strongest divides in our personal environments, with age, religion, education, occupation, and gender following in roughly that order. Geographic propinquity, families, organizations, and isomorphic positions in social systems all create contexts in which homophilous relations form.&#34; (Abstract, p. 415)
+
+&gt; &#34;We review all of these variants in the work below, attempting to distinguish between homophily effects that are created by the demography of the potential tie pool as baseline homophily and homophily measured as explicitly over and above the opportunity set as inbreeding homophily.&#34; (p. 419; footnote marker &#34;5&#34; omitted)
+
+&gt; &#34;The social homogeneity of most organizational foci creates a strong baseline homophily in networks that are formed there. Feld (1982) found that organizational foci produced ties that were twice as homogeneous as would be expected by chance.&#34; (p. 433)
+
+On selection vs. influence for behaviors and values:
+
+&gt; &#34;Longitudinal data first became available in the 1970s, and this led to a rather decisive shift in the interpretation of behavioral homophily. Cohen (1977) and Kandel (1978) demonstrated that both positive behaviors of school achievement and negative behaviors like smoking marijuana were homophilous more because of selection into relationships with similar others than because of behavioral influence within friendship cliques.&#34; (p. 428)
+
+&gt; &#34;At any rate, selection almost certainly trumps influence or attrition in this domain as well.&#34; (p. 429, on value/attitude homophily)
+
+**Sorting vs. influence.** Central contribution is to decompose sorting itself: baseline homophily (driven by who is in the opportunity pool, e.g. the organization&#39;s composition) vs. inbreeding homophily (preference over and above the pool). Organizations (&#34;foci&#34;: school, work, voluntary groups) create much of the baseline: &#34;School, work, and voluntary organizational foci provide the great majority of ties that are not kin&#34; (p. 431). Reports that, where longitudinal evidence exists, selection outweighs influence for behaviors and attitudes (pp. 428–429).
+
+**Limitations (authors&#39; own).**
+
+&gt; &#34;Still, cross-sectional data on networks can never answer the important questions about the extent to which network patterns, including homophily, are created by selective tie formation or selective tie dissolution. While we have evidence that both processes are important, we have little comprehensive information of how the two processes interrelated or about their relative strength of the two processes are highly tentative.&#34; (pp. 437–438; grammar as printed) **[imperfect measure]**
+
+&gt; &#34;Analyses of cross-sectional data often leave such long-term effects of organizational environments misclassified as individual choice or (more appropriately) as unexplained variance, when in fact they are the systematic residues of past foci.&#34; (p. 438)
+
+- Review of mostly cross-sectional studies; no unifying model. **[no model of mechanism]** **[model not fit to data]** **[outcome is not selection]** (ties, not competitive outcomes; though the review touches job-search and workplace networks, e.g. pp. 421–422).
+
+**Channel / source (assistant judgment).** Bears on the sorting step that precedes all three channels; strongest link is to source = organization (foci set the opportunity pool, hence baseline homophily). The p. 438 quote is directly usable for the dissertation argument that organizational environment gets misread as individual choice.
+
+---
+EOF
+cd /tmp/nsA &amp;&amp; sed -n &#39;1,90p&#39; 08_p.txt | grep -v &#34;^\s*$&#34;</summary>
+```bash
+cat >> "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_A_influence_homophily_note.md" <<'EOF'
+
+## 7. McPherson, Smith-Lovin & Cook 2001 — Birds of a feather: homophily in social networks
+
+**Citation.** McPherson, Miller, Lynn Smith-Lovin, and James M. Cook. 2001. "Birds of a Feather: Homophily in Social Networks." *Annual Review of Sociology* 27: 415–444. JSTOR stable URL: http://www.jstor.org/stable/2678628. (PDF is a JSTOR scan with a cover sheet: PDF p. n = printed p. 413 + n.)
+
+**BIB ERROR — check before citing.** The bib entry `mcpherson_birds_2001` has `doi = {10.3982/ECTA7195}`, which is an *Econometrica* DOI prefix and is not this article. The PDF itself shows no DOI. The commonly cited DOI for this article is 10.1146/annurev.soc.27.1.415, but that is **not verified from the PDF**; confirm before use. The bib also has `number = {2001}` and a garbled title field (it contains JSTOR boilerplate).
+
+**Text-layer note.** The JSTOR text layer renders em-dashes as hyphens (e.g. "This principle-the homophily principle-structures"). Quotes below reproduce the text layer and mark these with "[—]" where a dash is clearly meant.
+
+**Data / setting / sample / years.** Literature review (Annual Review). No new data; reviews roughly a century of studies (from 1920s group-formation studies through the late 1990s) on marriage, friendship, work, advice, support, discussion networks, and voluntary associations.
+
+**Design.** Review / synthesis.
+
+**Main findings (verbatim).**
+
+> "Similarity breeds connection. This principle[—]the homophily principle[—]structures network ties of every type, including marriage, friendship, work, advice, support, information transfer, exchange, comembership, and other types of relationship. [...] Homophily in race and ethnicity creates the strongest divides in our personal environments, with age, religion, education, occupation, and gender following in roughly that order. Geographic propinquity, families, organizations, and isomorphic positions in social systems all create contexts in which homophilous relations form." (Abstract, p. 415)
+
+> "We review all of these variants in the work below, attempting to distinguish between homophily effects that are created by the demography of the potential tie pool as baseline homophily and homophily measured as explicitly over and above the opportunity set as inbreeding homophily." (p. 419; footnote marker "5" omitted)
+
+> "The social homogeneity of most organizational foci creates a strong baseline homophily in networks that are formed there. Feld (1982) found that organizational foci produced ties that were twice as homogeneous as would be expected by chance." (p. 433)
+
+On selection vs. influence for behaviors and values:
+
+> "Longitudinal data first became available in the 1970s, and this led to a rather decisive shift in the interpretation of behavioral homophily. Cohen (1977) and Kandel (1978) demonstrated that both positive behaviors of school achievement and negative behaviors like smoking marijuana were homophilous more because of selection into relationships with similar others than because of behavioral influence within friendship cliques." (p. 428)
+
+> "At any rate, selection almost certainly trumps influence or attrition in this domain as well." (p. 429, on value/attitude homophily)
+
+**Sorting vs. influence.** Central contribution is to decompose sorting itself: baseline homophily (driven by who is in the opportunity pool, e.g. the organization's composition) vs. inbreeding homophily (preference over and above the pool). Organizations ("foci": school, work, voluntary groups) create much of the baseline: "School, work, and voluntary organizational foci provide the great majority of ties that are not kin" (p. 431). Reports that, where longitudinal evidence exists, selection outweighs influence for behaviors and attitudes (pp. 428–429).
+
+**Limitations (authors' own).**
+
+> "Still, cross-sectional data on networks can never answer the important questions about the extent to which network patterns, including homophily, are created by selective tie formation or selective tie dissolution. While we have evidence that both processes are important, we have little comprehensive information of how the two processes interrelated or about their relative strength of the two processes are highly tentative." (pp. 437–438; grammar as printed) **[imperfect measure]**
+
+> "Analyses of cross-sectional data often leave such long-term effects of organizational environments misclassified as individual choice or (more appropriately) as unexplained variance, when in fact they are the systematic residues of past foci." (p. 438)
+
+- Review of mostly cross-sectional studies; no unifying model. **[no model of mechanism]** **[model not fit to data]** **[outcome is not selection]** (ties, not competitive outcomes; though the review touches job-search and workplace networks, e.g. pp. 421–422).
+
+**Channel / source (assistant judgment).** Bears on the sorting step that precedes all three channels; strongest link is to source = organization (foci set the opportunity pool, hence baseline homophily). The p. 438 quote is directly usable for the dissertation argument that organizational environment gets misread as individual choice.
+
+---
+EOF
+cd /tmp/nsA && sed -n '1,90p' 08_p.txt | grep -v "^\s*$"
+```
+
+```
+=====PDFPAGE 1=====
+Origins of Homophily in an Evolving Social
+Network1
+Gueorgi Kossinets
+Google Inc.
+Duncan J. Watts
+Yahoo! Research
+      The authors investigate the origins of homophily in a large university
+      community, using network data in which interactions, attributes,
+      and affiliations are all recorded over time. The analysis indicates
+      that highly similar pairs do show greater than average propensity
+      to form new ties; however, it also finds that tie formation is heavily
+      biased by triadic closure and focal closure, which effectively con-
+      strain the opportunities among which individuals may select. In the
+      case of triadic closure, moreover, selection to “friend of a friend”
+      status is determined by an analogous combination of individual
+      preference and structural proximity. The authors conclude that the
+      dynamic interplay of choice homophily and induced homophily,
+      compounded over many “generations” of biased selection of similar
+      individuals to structurally proximate positions, can amplify even a
+      modest preference for similar others, via a cumulative advantage–
+      like process, to produce striking patterns of observed homophily.
+INTRODUCTION
+The “homophily principle”—the observed tendency of “like to associate
+with like”—is one of the most striking and robust empirical regularities
+of social life (Lazarsfeld and Merton 1954; Laumann 1966; Verbrugge
+1977; McPherson and Smith-Lovin 1987; Marsden 1988; Burt 1991; Mc-
+1
+  We thank the AJS reviewers for helpful comments. This research was supported in
+part by the Institute for Social and Economic Research and Policy at Columbia Uni-
+versity, the James S. McDonnell Foundation, and the National Science Foundation
+(grant no. SES 0339023). Portions of this research were completed while the authors
+were in the Department of Sociology at Columbia University. Direct correspondence
+to Gueorgi Kossinets, Google Inc., 1600 Amphitheatre Parkway, Mountai
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Kossinets & Watts: PDF p. n = printed p. 404 + n. Searching for data details, the choice vs. induced homophily results, and limitations.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; grep -n -i -E &#34;PDFPAGE|e-mail|email|30,|semester|academic year|individuals|induced homophily|choice homophily|limitation|caveat|cannot|amplif|cumulative|we conclude|in summary|generaliz|single&#34; 08_p.txt | head -120</summary>
+```bash
+cd /tmp/nsA && grep -n -i -E "PDFPAGE|e-mail|email|30,|semester|academic year|individuals|induced homophily|choice homophily|limitation|caveat|cannot|amplif|cumulative|we conclude|in summary|generaliz|single" 08_p.txt | head -120
+```
+
+```
+2:=====PDFPAGE 1=====
+19:      strain the opportunities among which individuals may select. In the
+23:      dynamic interplay of choice homophily and induced homophily,
+25:      individuals to structurally proximate positions, can amplify even a
+26:      modest preference for similar others, via a cumulative advantage–
+43:ifornia 94043. E-mail: gk297@columbia.edu
+50:=====PDFPAGE 2=====
+63:time, that is, individuals selectively form new ties, while allowing other,
+68:what grounds, then, do individuals selectively make or break some ties
+89:words, the observation that individuals interact preferentially with similar
+99:=====PDFPAGE 3=====
+103:cluding many others (Feld 1981, 1982; Ibarra 1993). Individuals, more-
+109:even if individuals select into these environments for reasons that are
+116:will generally exhibit gender homophily, even if individuals in both pro-
+120:mechanisms by which homophily arises—namely, choice homophily and
+121:induced homophily (McPherson and Smith-Lovin 1987)—corresponding
+125:logical preferences, it should be called choice homophily, and to the extent
+129:1981), it should be labeled induced homophily.3 Although clear in prin-
+133:out of choices made by the very individuals whose subsequent friendship
+139:  A third possibility is that individuals who are acquainted will become more similar
+145:  Formally, induced homophily is the level of homophily expected from random mixing
+146:within groups given group assignments, and choice homophily is the level of homophily
+147:in excess of induced homophily (McPherson and Smith-Lovin 1987).
+151:=====PDFPAGE 4=====
+167:portunities presented to individuals on account of their group member-
+173:of individuals to structurally proximate positions is itself a consequence
+179:school, and the only individuals who are in a position to pick and choose
+189: In order to account for the effects of biased sorting of individuals among groups,
+195:would be classified as choice homophily (which clearly generates homo
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; sed -n &#39;99,150p;251,262p&#39; 08_p.txt | grep -v &#34;^\s*$&#34;; grep -n -E &#34;^(DISCUSSION|CONCLUSION|Discussion|Conclusion)|DISCUSSION|CONCLUSION&#34; 08_p.txt</summary>
+```bash
+cd /tmp/nsA && sed -n '99,150p;251,262p' 08_p.txt | grep -v "^\s*$"; grep -n -E "^(DISCUSSION|CONCLUSION|Discussion|Conclusion)|DISCUSSION|CONCLUSION" 08_p.txt
+```
+
+```
+=====PDFPAGE 3=====
+                                                             Origins of Homophily
+expose him or her to some potential acquaintances, while effectively ex-
+cluding many others (Feld 1981, 1982; Ibarra 1993). Individuals, more-
+over, are not uniformly distributed in terms of race, ethnicity, wealth,
+gender, or age either in space (Liben-Nowell et al. 2005) or across orga-
+nizations (McPherson and Smith-Lovin 1982), but rather are sorted into
+shared environments, such as schools, workplaces, or neighborhoods, that
+are frequently more homogeneous than the population at large. Thus,
+even if individuals select into these environments for reasons that are
+unrelated to whom they would like to meet, the combination of structural
+constraint on the available choices that are plausibly available to them
+and the concomitant homogeneity of those choices will nevertheless gen-
+erate strong patterns of homophily. If, for example, high school teachers
+are disproportionately female, and investment bankers are disproportion-
+ately male, then the resulting pattern of interactions in their workplaces
+will generally exhibit gender homophily, even if individuals in both pro-
+fessions select among their available work colleagues without regard to
+gender.
+   Broadly speaking, therefore, we can identify two theoretically distinct
+mechanisms by which homophily arises—namely, choice homophily and
+induced homophily (McPherson and Smith-Lovin 1987)—corresponding
+to what Mayhew (1980) called “individualistic” and “structuralist” views
+of the world, respectively.2 That is, to the extent that some observed
+prevalence of homophilous ties can be attributed to individual, psycho-
+logical preferences, it should be called choice homophily, and to the extent
+that it can be shown to arise as a consequence of the homogeneity of
+structural opportunities for interaction, as in neighborhoods, schools,
+workplaces, voluntary organizations, and even friendship circles (Feld
+1981), it should b
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; awk &#39;NR&gt;=1300 &amp;&amp; NR&lt;=1640&#39; 08_p.txt | grep -v &#34;^\s*$&#34; | grep -n &#34;&#34; | sed -n &#39;1,400p&#39; | cut -c1-200 | awk &#39;NR&gt;=1&#39; | head -260</summary>
+```bash
+cd /tmp/nsA && awk 'NR>=1300 && NR<=1640' 08_p.txt | grep -v "^\s*$" | grep -n "" | sed -n '1,400p' | cut -c1-200 | awk 'NR>=1' | head -260
+```
+
+```
+1:        21   ...   dij p 1; F1 p 0        100      .049 (.377)    .90      1.05
+2:        22   ...   dij p 2; F1 p 0      3,627      .565 (.100)    .00      1.76**
+3:        23   ...   dij p 3; F1 p 0     47,933      .671 (.040)    .00      1.96**
+4:        24   ...   dij p 4; F1 p 0    148,975      .980 (.050)    .00      2.66**
+5:        25   ...   dij ≥ 5; F1 p 0    199,115     1.186 (.094)    .00      3.28**
+6:        26   ...   dij p 1; F1 p 1         84      .304 (.375)    .42      1.36
+7:        27   ...   dij p 2; F1 p 1        765      .036 (.085)    .67      1.04
+8:        28   ...   dij p 3; F1 p 1      1,924      .278 (.054)    .00      1.32**
+9:        29   ...   dij p 4; F1 p 1        816      .283 (.069)    .00      1.33**
+10:        30   ...   dij ≥ 5; F1 p 1        343      .226 (.109)    .04      1.25*
+11:          Note.—F1 p 1 denotes a shared focus in semester 1 (fall); F1 p 0 denotes no
+12:        shared focus in fall.
+13:          ⫹
+14:            P ! .10.
+15:          * P ! .05.
+16:          ** P ! .01.
+17:mogeneity is in part a consequence of the relative homogeneity of their
+18:larger surroundings.
+19:   Next, we consider how similarity affects the probability, pSF (i, j), that
+20:two individuals, who either do or do not share a focus in the fall semester,
+21:will have a shared implicit focus (defined as before as being at the 99th
+22:percentile of jointly received bulk e-mails) in the spring semester.34 As we
+23:would expect from our previous results, model 19 (table 5) shows that
+24:pairs who were similar in the fall semester are far more likely to share a
+25:focus in the spring semester—the odds ratio is approximately 2.6, meaning
+26:that highly similar pairs are about 300 times as likely to share an implicit
+27:focus as nonsimilar pairs and 45 times as likely as pairs with average
+28:similarity. When we account for previous structural proximity, however,
+29:we find that the picture is slightly different from our previous results.
+30:Sp
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Reading the rest of the Kossinets & Watts discussion for stated limitations.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; awk &#39;NR&gt;=1300 &amp;&amp; NR&lt;=1700&#39; 08_p.txt | grep -v &#34;^\s*$&#34; | sed -n &#39;261,330p&#39;</summary>
+```bash
+cd /tmp/nsA && awk 'NR>=1300 && NR<=1700' 08_p.txt | grep -v "^\s*$" | sed -n '261,330p'
+```
+
+```
+large network (Watts 1999); moreover, in bridging previously distant, and
+presumably different, parts of a network (Granovetter 1973), these ties
+can also be expected to exert a natural brake on homophily. Thus, while
+even a weak preference for similar others may lead, over time, to striking
+patterns of homophilous relations, networks that are already highly hom-
+ophilous will experience great difficulty in becoming more homophilous
+still. And finally, the use of e-mail as a means of professional communi-
+cation suggests that people in the university community must to some
+extent interact with each other, regardless of similarity, simply in the
+                                                                         437
+=====PDFPAGE 34=====
+American Journal of Sociology
+course of doing their jobs. Thus, the community could never become
+completely homophilous unless it so happened that actors altered their
+formal organizational positions so as to align their professional needs
+precisely along our recorded dimensions of homophily—an unlikely event,
+particularly over the relatively short time scale spanned by our data set.
+   Although it is interesting in its own right, we conclude by emphasizing
+that our question regarding the origins of homophily is just one particular
+instantiation of a more general class of “structure versus agency” (Emir-
+bayer and Goodwin 1994) questions that have been debated over the
+years by advocates of “structuralism,” on the one hand, and “individu-
+alism,” on the other (Mayhew 1980). Given any empirical regularity of a
+sociological nature—whether patterns of homophily, choices of occupa-
+tion, wealth distributions, or educational attainment—one can always ask
+to what extent the observed outcome reflects the preferences and inten-
+tions of the individuals themselves and to what extent it is a consequence
+of the social-organizational structure in which they are embedded. In this
+broader context, our finding that both structure and agency mat
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cat &gt;&gt; &#34;/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_A_influence_homophily_note.md&#34; &lt;&lt;&#39;EOF&#39;
+
+## 8. Kossinets &amp; Watts 2009 — Origins of homophily in an evolving social network
+
+**Citation.** Kossinets, Gueorgi, and Duncan J. Watts. 2009. &#34;Origins of Homophily in an Evolving Social Network.&#34; *American Journal of Sociology* 115 (2): 405–450. DOI: 10.1086/599247. (PDF p. n = printed p. 404 + n.)
+
+**Data / setting / sample / years.** &#34;[T]he population of 30,396 undergraduate and graduate students, faculty, and staff in a large U.S. university, who used their university e-mail accounts to both send and receive messages during one academic year.&#34; (p. 410). Merged (1) e-mail logs, (2) individual attributes (status, gender, age, department, years in community), (3) course registration / affiliations by semester (p. 410). Network built from 7,156,162 single-recipient messages (p. 411). Year of data not stated in the excerpts I read; the paper describes it only as &#34;one academic year&#34;.
+
+**Design.** Observational, longitudinal (daily network snapshots). Estimates probabilities of tie formation, of entering a shared focus (class / implicit group), and of tie dissolution as functions of pairwise similarity, conditional on network distance and shared foci.
+
+**Main findings (verbatim).**
+
+&gt; &#34;The analysis indicates that highly similar pairs do show greater than average propensity to form new ties; however, it also finds that tie formation is heavily biased by triadic closure and focal closure, which effectively constrain the opportunities among which individuals may select. [...] The authors conclude that the dynamic interplay of choice homophily and induced homophily, compounded over many &#34;generations&#34; of biased selection of similar individuals to structurally proximate positions, can amplify even a modest preference for similar others, via a cumulative advantage–like process, to produce striking patterns of observed homophily.&#34; (Abstract, p. 405)
+
+&gt; &#34;In terms of our contrast between choice and induced homophily, therefore, we conclude that homophily observed in our population cannot be unequivocally attributed to either stylized mechanism but appears to depend on both in significant ways. [...] As we observe, however, the vast majority of new ties form between individuals who already share a friend or a group, and once these conditions are met, similarity loses much, and in some cases all, of its effect.&#34; (p. 436)
+
+&gt; &#34;Shared social foci, in other words, not only increase the likelihood of tie formation, but also decrease the rate of dissolution [...]. In both cases, moreover, the impact of sharing a focus eliminates the impact of similarity.&#34; (p. 434)
+
+Definitions used (from McPherson &amp; Smith-Lovin 1987): &#34;Formally, induced homophily is the level of homophily expected from random mixing within groups given group assignments, and choice homophily is the level of homophily in excess of induced homophily&#34; (p. 407, fn. 3).
+
+**Sorting vs. influence.** Explicitly sets influence aside: &#34;A third possibility is that individuals who are acquainted will become more similar over time via a process of social influence. However, the attributes we consider here are either not malleable (e.g., gender and age) or else do not change appreciably on the time scale of interest (e.g., academic major); thus, although social influence is no doubt important in many contexts, we do not consider it here.&#34; (p. 407, fn. 2). Splits sorting into individual choice vs. structure (organization/foci), and notes that structure is itself partly chosen: &#34;structural constraints that may initially appear exogenous are in fact generated endogenously and act effectively as proxies for unobserved individual preferences.&#34; (p. 435). Workplace example of purely induced homophily: &#34;If, for example, high school teachers are disproportionately female, and investment bankers are disproportionately male, then the resulting pattern of interactions in their workplaces will generally exhibit gender homophily, even if individuals in both professions select among their available work colleagues without regard to gender.&#34; (p. 407)
+
+**Limitations (authors&#39; own).**
+
+&gt; &#34;As we have already indicated, our data clearly lack some attributes, like race and socioeconomic status, that might be more salient with respect to the choice of interaction partners than the available variables. Moreover, the university community in question may be relatively homogeneous on some dimensions, particularly educational background, in comparison to other kinds of communities.&#34; (p. 438) **[imperfect measure] [single system]**
+
+&gt; &#34;A business firm, for example, attempting to coordinate the activity of many departments to achieve a single, coherent goal, may display quite different patterns of interactions than a university community.&#34; (p. 439)
+
+- The amplification claim is speculative and untested: &#34;we speculate that even a relatively weak preference for homophilous relationships will tend to be amplified over time&#34; and &#34;A thorough answer to this question would require the use of simulation models [...]. Although such an extensive simulation exercise is beyond the scope of this article, it is certainly conceivable&#34; (pp. 436–437). **[no model of mechanism] [model not fit to data]**
+- One academic year of e-mail as a proxy for social ties. **[imperfect measure]** Outcome is tie formation. **[outcome is not selection]**
+
+**Channel / source (assistant judgment).** Upstream of all three channels: how the peer set is assembled. Source: organization (classes / foci create the opportunity set) interacting with peer choice. Directly supports the dissertation claim that the organization shapes who one&#39;s peers are, so peer and organization sources are not independent.
+
+---
+EOF
+cd /tmp/nsA &amp;&amp; sed -n &#39;1,120p&#39; 09_rp.txt</summary>
+```bash
+cat >> "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_A_influence_homophily_note.md" <<'EOF'
+
+## 8. Kossinets & Watts 2009 — Origins of homophily in an evolving social network
+
+**Citation.** Kossinets, Gueorgi, and Duncan J. Watts. 2009. "Origins of Homophily in an Evolving Social Network." *American Journal of Sociology* 115 (2): 405–450. DOI: 10.1086/599247. (PDF p. n = printed p. 404 + n.)
+
+**Data / setting / sample / years.** "[T]he population of 30,396 undergraduate and graduate students, faculty, and staff in a large U.S. university, who used their university e-mail accounts to both send and receive messages during one academic year." (p. 410). Merged (1) e-mail logs, (2) individual attributes (status, gender, age, department, years in community), (3) course registration / affiliations by semester (p. 410). Network built from 7,156,162 single-recipient messages (p. 411). Year of data not stated in the excerpts I read; the paper describes it only as "one academic year".
+
+**Design.** Observational, longitudinal (daily network snapshots). Estimates probabilities of tie formation, of entering a shared focus (class / implicit group), and of tie dissolution as functions of pairwise similarity, conditional on network distance and shared foci.
+
+**Main findings (verbatim).**
+
+> "The analysis indicates that highly similar pairs do show greater than average propensity to form new ties; however, it also finds that tie formation is heavily biased by triadic closure and focal closure, which effectively constrain the opportunities among which individuals may select. [...] The authors conclude that the dynamic interplay of choice homophily and induced homophily, compounded over many "generations" of biased selection of similar individuals to structurally proximate positions, can amplify even a modest preference for similar others, via a cumulative advantage–like process, to produce striking patterns of observed homophily." (Abstract, p. 405)
+
+> "In terms of our contrast between choice and induced homophily, therefore, we conclude that homophily observed in our population cannot be unequivocally attributed to either stylized mechanism but appears to depend on both in significant ways. [...] As we observe, however, the vast majority of new ties form between individuals who already share a friend or a group, and once these conditions are met, similarity loses much, and in some cases all, of its effect." (p. 436)
+
+> "Shared social foci, in other words, not only increase the likelihood of tie formation, but also decrease the rate of dissolution [...]. In both cases, moreover, the impact of sharing a focus eliminates the impact of similarity." (p. 434)
+
+Definitions used (from McPherson & Smith-Lovin 1987): "Formally, induced homophily is the level of homophily expected from random mixing within groups given group assignments, and choice homophily is the level of homophily in excess of induced homophily" (p. 407, fn. 3).
+
+**Sorting vs. influence.** Explicitly sets influence aside: "A third possibility is that individuals who are acquainted will become more similar over time via a process of social influence. However, the attributes we consider here are either not malleable (e.g., gender and age) or else do not change appreciably on the time scale of interest (e.g., academic major); thus, although social influence is no doubt important in many contexts, we do not consider it here." (p. 407, fn. 2). Splits sorting into individual choice vs. structure (organization/foci), and notes that structure is itself partly chosen: "structural constraints that may initially appear exogenous are in fact generated endogenously and act effectively as proxies for unobserved individual preferences." (p. 435). Workplace example of purely induced homophily: "If, for example, high school teachers are disproportionately female, and investment bankers are disproportionately male, then the resulting pattern of interactions in their workplaces will generally exhibit gender homophily, even if individuals in both professions select among their available work colleagues without regard to gender." (p. 407)
+
+**Limitations (authors' own).**
+
+> "As we have already indicated, our data clearly lack some attributes, like race and socioeconomic status, that might be more salient with respect to the choice of interaction partners than the available variables. Moreover, the university community in question may be relatively homogeneous on some dimensions, particularly educational background, in comparison to other kinds of communities." (p. 438) **[imperfect measure] [single system]**
+
+> "A business firm, for example, attempting to coordinate the activity of many departments to achieve a single, coherent goal, may display quite different patterns of interactions than a university community." (p. 439)
+
+- The amplification claim is speculative and untested: "we speculate that even a relatively weak preference for homophilous relationships will tend to be amplified over time" and "A thorough answer to this question would require the use of simulation models [...]. Although such an extensive simulation exercise is beyond the scope of this article, it is certainly conceivable" (pp. 436–437). **[no model of mechanism] [model not fit to data]**
+- One academic year of e-mail as a proxy for social ties. **[imperfect measure]** Outcome is tie formation. **[outcome is not selection]**
+
+**Channel / source (assistant judgment).** Upstream of all three channels: how the peer set is assembled. Source: organization (classes / foci create the opportunity set) interacting with peer choice. Directly supports the dissertation claim that the organization shapes who one's peers are, so peer and organization sources are not independent.
+
+---
+EOF
+cd /tmp/nsA && sed -n '1,120p' 09_rp.txt
+```
+
+```
+
+=====PDFPAGE 1=====
+REPORTS
+G. Hunt, A. Miller, T. Olszewski, and P. Wagner for their
+suggestions; M. Kosnik and A. Miller for reviews; and
+M. Foote for verifying that my subsampling algorithms
+were programmed correctly. Numerous contributors to the
+Paleobiology Database made this study possible, and
+I am particularly grateful to M. Clapham, A. Hendy, and
+W. Kiessling for recent contributions. Research described
+
+here was funded by donations from anonymous private
+individuals having no connection to it. This is Paleobiology
+Database publication 117.
+
+Supporting Online Material
+www.sciencemag.org/cgi/content/full/329/5996/1191/DC1
+Materials and Methods
+
+The Spread of Behavior in an Online
+Social Network Experiment
+Damon Centola
+
+M
+
+Sloan School of Management, Massachusetts Institute of
+Technology, Cambridge, MA 02142, USA. E-mail: dcentola@
+mit.edu
+
+1194
+
+through social networks, an empirical test of
+these predictions has not been possible, because
+it requires the ability to independently vary the
+topological structure of a social network (12).
+I tested the effects of network structure on
+diffusion using a controlled experimental approach.
+I studied the spread of a health behavior through
+a network-embedded population by creating an
+Internet-based health community, containing 1528
+participants recruited from health-interest World
+Wide Web sites (13).
+Each participant created an anonymous online
+profile, including an avatar, a user name, and a set
+of health interests. They were then matched with
+other participants in the study—referred to as
+“health buddies”—as members of an online health
+community. Participants could not contact their
+health buddies directly, but they could receive
+emails from the study informing them of their
+health buddies’ activities. To preserve anonymity
+and to prevent people from trying to identify
+
+22 March 2010; accepted 30 June 2010
+10.1126/science.1189910
+
+friends who may have also signed up for the study
+(or from trying to contact health 
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Centola 2010 PDF p. 1 = printed p. 1194. Reading abstract, results, and caveats.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; sed -n &#39;120,400p&#39; 09_rp.txt | grep -v &#34;^\s*$&#34; | grep -v Downloaded</summary>
+```bash
+cd /tmp/nsA && sed -n '120,400p' 09_rp.txt | grep -v "^\s*$" | grep -v Downloaded
+```
+
+```
+of health behavior through artificially structured online communities. Individual adoption was
+much more likely when participants received social reinforcement from multiple neighbors
+in the social network. The behavior spread farther and faster across clustered-lattice networks than
+across corresponding random networks.
+any behaviors spread through social
+contact (1–3). As a result, the network
+structure of who is connected to whom
+can critically affect the extent to which a behavior diffuses across a population (2–8). There are
+two competing hypotheses about how network
+structure affects diffusion. The “strength of weak
+ties” hypothesis predicts that networks with
+many “long ties” (e.g., “small-world” topologies)
+will spread a social behavior farther and more
+quickly than a network in which ties are highly
+clustered (4–6). This hypothesis treats the spread
+of behavior as a simple contagion, such as disease or information: A single contact with an
+“infected” individual is usually sufficient to transmit the behavior (2). The power of long ties is
+that they reduce the redundancy of the diffusion
+process by connecting people whose friends do
+not know each other, thereby allowing a behavior
+to rapidly spread to other areas of the network
+(3–5). The ideal case for this lack of redundancy
+is a “random” network, in which, in expectation
+for a large population, each of an individual’s
+ties reaches out to different neighborhoods (4, 9).
+The other hypothesis states that, unlike disease,
+social behavior is a complex contagion: People
+usually require contact with multiple sources of
+“infection” before being convinced to adopt a behavior (2). This hypothesis predicts that because
+clustered networks have more redundant ties,
+which provide social reinforcement for adoption,
+they will better promote the diffusion of behaviors across large populations (2, 7). Despite the
+scientific (6, 7, 10) and practical (1, 2, 11) importance of understanding the spread of behavior
+Figs. S1 to S9
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+The figure text is noisy; grepping the Centola 2010 results and caveats directly.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; grep -n -E &#34;PDFPAGE|%|percent|faster|farther|reinforc|generaliz|limitation|caution|real-world|online|homophily|not likely|future&#34; 09_rp.txt | grep -v Downloaded | awk -F: &#39;$1&gt;230&#39; | head -60</summary>
+```bash
+cd /tmp/nsA && grep -n -E "PDFPAGE|%|percent|faster|farther|reinforc|generaliz|limitation|caution|real-world|online|homophily|not likely|future" 09_rp.txt | grep -v Downloaded | awk -F: '$1>230' | head -60
+```
+
+```
+364:the more reinforcing signals a participant received.
+449:adoption from receiving k – 1 signals. The 95%
+452:of an additional signal on the likelihood of adoption is significant if the 95% confidence interval
+460:=====PDFPAGE 3=====
+484:average, the behavior reached 53.77% of the
+485:clustered networks, whereas only 38.26% of
+490:nodes/s) was more than four times faster than
+503:and density, are relevant factors affecting behavioral diffusion (2, 7). This suggests important avenues for future research.
+636:receiving second, third, and fourth reinforcing
+647:To investigate the effects of social reinforcement
+657:to D, respectively). Though less than 15% of
+659:to the forum, more than 30% of participants receiving two signals made return visits, and 40%
+668:was a significant effect of social reinforcement on
+673:on the behaviors that I could test. A key limitation
+680:this, I expect that the need for social reinforcement would be greater for adopting these health
+682:study. Consequently, the diffusion of real-world
+718:=====PDFPAGE 4=====
+860:homophily and strong interpersonal affect in
+865:expect that these reinforcing factors would amplify the observed effects of clustered social
+876:not only is individual adoption improved by reinforcing signals that come from clustered social
+897:=====PDFPAGE 5=====
+903:View the article online
+926:=====PDFPAGE 6=====
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; sed -n &#39;460,505p;625,720p;850,900p&#39; 09_rp.txt | grep -v &#34;^\s*$&#34; | grep -v Downloaded</summary>
+```bash
+cd /tmp/nsA && sed -n '460,505p;625,720p;850,900p' 09_rp.txt | grep -v "^\s*$" | grep -v Downloaded
+```
+
+```
+=====PDFPAGE 3=====
+REPORTS
+A
+B
+1
+1
+0.9
+0.9
+0.8
+0.8
+F(x)
+F(x)
+in the random networks (open triangles). On
+average, the behavior reached 53.77% of the
+clustered networks, whereas only 38.26% of
+the population adopted in the random networks
+(13). I also found that the behavior diffused
+more quickly in the clustered networks than in
+the random networks. The average rate of diffusion in the clustered networks (0.2820 × 10–3
+nodes/s) was more than four times faster than
+that of the random condition (0.0643 × 10–3
+nodes/s). Differences in both the success and
+the rate of diffusion between network conditions
+are statistically significant (P < 0.01 using the
+Wilcoxon rank sum–Mann-Whitney U test) (13).
+The experimental findings were qualitatively
+the same across different network and neighborhood sizes. However, networks with a greater
+degree (Z = 8) performed better than those with
+a lower degree (Z = 6). Although this finding is
+consistent with the hypothesis that more redundant ties between neighborhoods can improve
+the global spread of behavior, it may also indicate
+that other topological features, such as degree
+and density, are relevant factors affecting behavioral diffusion (2, 7). This suggests important avenues for future research.
+At the individual level, the results (Fig. 3)
+show that redundant signals significantly increased the likelihood of adoption; social rein-
+3 SEPTEMBER 2010
+VOL 329
+SCIENCE
+forcement from multiple health buddies made
+participants much more willing to adopt the behavior. Figure 3 compares the baseline likelihood
+of adoption after receiving one social signal to
+the increased likelihood of adoption for nodes
+receiving second, third, and fourth reinforcing
+signals. Participants were significantly more likely
+to adopt after receiving a second signal than
+after receiving only one signal (P < 0.001 using
+the Cox proportional hazards model). Receiving
+a third signal also significantly increased the likelihood of adoption, but with a smaller margi
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Verifying which printed page each Centola 2010 passage sits on, using the layout extraction.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; for s in &#34;53.77&#34; &#34;A key limitation&#34; &#34;N = 98&#34; &#34;An important assumption&#34; &#34;four advantages&#34; &#34;1528&#34; &#34;eliminates the possibility for social ties&#34; &#34;spread farther and faster&#34;; do echo &#34;== $s: $(grep -n &#34;$s&#34; 09_p.txt | head -2)&#34;; done; grep -n &#34;PDFPAGE&#34; 09_p.txt</summary>
+```bash
+cd /tmp/nsA && for s in "53.77" "A key limitation" "N = 98" "An important assumption" "four advantages" "1528" "eliminates the possibility for social ties" "spread farther and faster"; do echo "== $s: $(grep -n "$s" 09_p.txt | head -2)"; done; grep -n "PDFPAGE" 09_p.txt
+```
+
+```
+== 53.77: 200:       cise time series of the spread of the behavior           average, the behavior reached 53.77% of the            participants much more willing to adopt the be-
+== A key limitation: 257:                  0.9                                                   0.9                                            on the behaviors that I could test. A key limitation
+== N = 98: 189:shown, including (A) N = 98, Z = 6, (B to D) N = 128, Z = 6, and (E and F) N = 144, Z = 8. The success                                                                hazards model are shown by error bars. The effect
+212:       of the experiment: (i) N = 98, Z = 6; (ii) N = 128,      Wilcoxon rank sum–Mann-Whitney U test) (13).           model) (13). Additional signals had no significant
+== An important assumption: 
+== four advantages: 96:occupants of the immediately adjacent nodes in                                          There are four advantages of this experi-                                     and thereby identifies the effects of network
+== 1528: 53:       many “long ties” (e.g., “small-world” topologies)               Internet-based health community, containing 1528                    dundant ties that linked each node’s neighbors to
+== eliminates the possibility for social ties: 95:to occupy a single node in one network. The                                         buted to the effects of network topology.                                         eliminates the possibility for social ties to change
+== spread farther and faster: 35:       in the social network. The behavior spread farther and faster across clustered-lattice networks than                                health buddies. The forum was populated with ini-
+2:=====PDFPAGE 1=====
+90:=====PDFPAGE 2=====
+197:=====PDFPAGE 3=====
+280:=====PDFPAGE 4=====
+380:=====PDFPAGE 5=====
+423:=====PDFPAGE 6=====
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; sed -n &#39;280,300p&#39; 09_p.txt | cut -c1-140; sed -n &#39;255,262p&#39; 09_p.txt | cut -c100-260</summary>
+```bash
+cd /tmp/nsA && sed -n '280,300p' 09_p.txt | cut -c1-140; sed -n '255,262p' 09_p.txt | cut -c100-260
+```
+
+```
+=====PDFPAGE 4=====
+                                                                                                                                            
+nication with their health buddies or information      and spread more quickly in clustered networks                    14. S. Maslov, K. Sn
+about their identities. This allowed me to isolate     than in random networks (Fig. 2). Whereas lo-                    15. S. Maslov, K. Sn
+                                                                                                                            and Networks, S.
+the effects of network topology on the dynamics        cally clustered ties may be redundant for simple                     (Wiley-VCH, Wein
+of diffusion without the presence of confounding       contagions, like information or disease (4, 6, 24),              16. J. M. McPherson,
+variables. However, it also raises the question of     they can be highly efficient for promoting behav-                    Sociol. 27, 415 
+what the strength of the effects of network to-        ioral diffusion. On the basis of these findings, I               17. P. Hedstrom, Am.
+                                                                                                                        18. D. McAdam, R. Pa
+pology would be when allowed to interact with          predict that public health interventions aimed at                    (1993).
+the effects of interpersonal relationships. An im-     the spread of new health behaviors (for instance,                19. L. F. Berkman, I
+portant assumption of this study is that the effects   improved diet, regular exercise, condom use, or                      Univ. Press, New
+of network topology will not be overwhelmed by         needle exchange) may do better to target clustered               20. D. Centola, J. C
+                                                                                                                            J. Conf. Resl. 5
+individuals’ ex
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Pages confirmed. Writing the Centola 2010 section.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cat &gt;&gt; &#34;/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_A_influence_homophily_note.md&#34; &lt;&lt;&#39;EOF&#39;
+
+## 9. Centola 2010 — The spread of behavior in an online social network experiment
+
+**Citation.** Centola, Damon. 2010. &#34;The Spread of Behavior in an Online Social Network Experiment.&#34; *Science* 329 (5996): 1194–1197. DOI: 10.1126/science.1185231. (PDF p. 1 = printed p. 1194, which it shares with the end of the preceding article; PDF p. n = printed p. 1193 + n for pp. 1–4.)
+
+**Data / setting / sample / years.** &#34;an Internet-based health community, containing 1528 participants recruited from health-interest World Wide Web sites&#34; (p. 1194). Six independent trials, each a matched pair of networks (clustered lattice vs. random rewiring), so 12 diffusion processes (p. 1195). Network sizes &#34;(i) N = 98, Z = 6; (ii) N = 128, Z = 6; and (iii) N = 144, Z = 8&#34; where Z = number of &#34;health buddies&#34;; each trial ran &#34;3 weeks (~1.8 million seconds)&#34; (p. 1196). Behavior: registering for an online health forum. Year: published 2010 (received 22 March 2010 per the page header shown at p. 1194 belongs to the preceding article; experiment dates not stated in the main text).
+
+**Design.** Randomized experiment: participants randomly assigned to network position and condition; network topology fixed by the experimenter.
+
+**Main findings (verbatim).**
+
+&gt; &#34;Individual adoption was much more likely when participants received social reinforcement from multiple neighbors in the social network. The behavior spread farther and faster across clustered-lattice networks than across corresponding random networks.&#34; (Abstract, p. 1194)
+
+&gt; &#34;On average, the behavior reached 53.77% of the clustered networks, whereas only 38.26% of the population adopted in the random networks (13).&#34; (p. 1196)
+
+&gt; &#34;Participants were significantly more likely to adopt after receiving a second signal than after receiving only one signal (P &lt; 0.001 using the Cox proportional hazards model).&#34; (p. 1196)
+
+**Sorting vs. influence.** Removes sorting by design: &#34;(i) The present study isolates the effects of network topology, independent of frequently co-occurring factors such as homophily (3, 16), geographic proximity (17), and interpersonal affect (4, 18), which are easily conflated with the effects of topological structure in observational studies&#34; and &#34;(iii) This study eliminates the possibility for social ties to change and thereby identifies the effects of network structure on the dynamics of diffusion without the confounding effects of homophilous tie formation (1, 20).&#34; (p. 1195)
+
+**Limitations (author&#39;s own).**
+
+&gt; &#34;As with all experiments, design choices that aided my control of the study also put constraints on the behaviors that I could test. A key limitation of my design is that, unlike in my experiment, adopting a new health behavior is often extremely difficult in the real world.&#34; (p. 1196)
+
+&gt; &#34;The modest range of population sizes tested and the correspondingly narrow range of degrees were due to the challenges of recruiting large numbers of people simultaneously.&#34; (p. 1196) **[small data]**
+
+&gt; &#34;An important assumption of this study is that the effects of network topology will not be overwhelmed by individuals&#39; exposure to other social factors.&#34; (p. 1197)
+
+- Anonymous, no direct communication between buddies (p. 1197); artificial online setting. **[single system]** Low-cost behavior; outcome is adoption. **[outcome is not selection]**
+
+**Channel / source (assistant judgment).** Development (adoption of a behavior) via peers; the structure of the peer network (clustering, redundancy), not just peer attributes, changes outcomes. Organization acts only as the experimenter who sets the network, which is a useful analogy: the organization that designs the network can shift outcomes.
+
+---
+EOF
+cd /tmp/nsA &amp;&amp; grep -n &#34;PDFPAGE&#34; 10_p.txt; sed -n &#39;1,90p&#39; 10_rp.txt | grep -v &#34;^\s*$&#34; | grep -v Downloaded</summary>
+```bash
+cat >> "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_A_influence_homophily_note.md" <<'EOF'
+
+## 9. Centola 2010 — The spread of behavior in an online social network experiment
+
+**Citation.** Centola, Damon. 2010. "The Spread of Behavior in an Online Social Network Experiment." *Science* 329 (5996): 1194–1197. DOI: 10.1126/science.1185231. (PDF p. 1 = printed p. 1194, which it shares with the end of the preceding article; PDF p. n = printed p. 1193 + n for pp. 1–4.)
+
+**Data / setting / sample / years.** "an Internet-based health community, containing 1528 participants recruited from health-interest World Wide Web sites" (p. 1194). Six independent trials, each a matched pair of networks (clustered lattice vs. random rewiring), so 12 diffusion processes (p. 1195). Network sizes "(i) N = 98, Z = 6; (ii) N = 128, Z = 6; and (iii) N = 144, Z = 8" where Z = number of "health buddies"; each trial ran "3 weeks (~1.8 million seconds)" (p. 1196). Behavior: registering for an online health forum. Year: published 2010 (received 22 March 2010 per the page header shown at p. 1194 belongs to the preceding article; experiment dates not stated in the main text).
+
+**Design.** Randomized experiment: participants randomly assigned to network position and condition; network topology fixed by the experimenter.
+
+**Main findings (verbatim).**
+
+> "Individual adoption was much more likely when participants received social reinforcement from multiple neighbors in the social network. The behavior spread farther and faster across clustered-lattice networks than across corresponding random networks." (Abstract, p. 1194)
+
+> "On average, the behavior reached 53.77% of the clustered networks, whereas only 38.26% of the population adopted in the random networks (13)." (p. 1196)
+
+> "Participants were significantly more likely to adopt after receiving a second signal than after receiving only one signal (P < 0.001 using the Cox proportional hazards model)." (p. 1196)
+
+**Sorting vs. influence.** Removes sorting by design: "(i) The present study isolates the effects of network topology, independent of frequently co-occurring factors such as homophily (3, 16), geographic proximity (17), and interpersonal affect (4, 18), which are easily conflated with the effects of topological structure in observational studies" and "(iii) This study eliminates the possibility for social ties to change and thereby identifies the effects of network structure on the dynamics of diffusion without the confounding effects of homophilous tie formation (1, 20)." (p. 1195)
+
+**Limitations (author's own).**
+
+> "As with all experiments, design choices that aided my control of the study also put constraints on the behaviors that I could test. A key limitation of my design is that, unlike in my experiment, adopting a new health behavior is often extremely difficult in the real world." (p. 1196)
+
+> "The modest range of population sizes tested and the correspondingly narrow range of degrees were due to the challenges of recruiting large numbers of people simultaneously." (p. 1196) **[small data]**
+
+> "An important assumption of this study is that the effects of network topology will not be overwhelmed by individuals' exposure to other social factors." (p. 1197)
+
+- Anonymous, no direct communication between buddies (p. 1197); artificial online setting. **[single system]** Low-cost behavior; outcome is adoption. **[outcome is not selection]**
+
+**Channel / source (assistant judgment).** Development (adoption of a behavior) via peers; the structure of the peer network (clustering, redundancy), not just peer attributes, changes outcomes. Organization acts only as the experimenter who sets the network, which is a useful analogy: the organization that designs the network can shift outcomes.
+
+---
+EOF
+cd /tmp/nsA && grep -n "PDFPAGE" 10_p.txt; sed -n '1,90p' 10_rp.txt | grep -v "^\s*$" | grep -v Downloaded
+```
+
+```
+2:=====PDFPAGE 1=====
+95:=====PDFPAGE 2=====
+203:=====PDFPAGE 3=====
+288:=====PDFPAGE 4=====
+386:=====PDFPAGE 5=====
+413:=====PDFPAGE 6=====
+=====PDFPAGE 1=====
+REPORTS
+Acknowledgments: We thank the Deutsche Forschungsgemeinschaft (grants WE2039/8-1, RI525/17-1, KU683/9-1, and
+KU683/12-1) and the U.S. NSF Paleoclimate Program for
+financial support, the Alfred Wegener Institute for Polar and
+Marine Research for logistic support, J. Rethemeyer for
+conducting part of the AMS 14C measurements, B. Weninger
+for discussing the 14C data, D. Sprenk for assisting
+with the graphics, and A. Holzapfel for editorial work
+(all from Univ. of Cologne).
+Figs. S1 to S5
+Tables S1 and S2
+References
+Supporting Online Material
+www.sciencemag.org/cgi/content/full/334/6060/1265/DC1
+Materials and Methods
+SOM Text
+3 June 2011; accepted 18 October 2011
+10.1126/science.1209299
+An Experimental Study of Homophily
+in the Adoption of Health Behavior
+Damon Centola
+ocial networks are a primary channel for
+the spread of health behaviors (1–3). However, it is not just the existence of social
+ties between individuals that matters for diffusion. Just as important are the demographic composition of the population and the distribution of
+individual characteristics throughout the social
+network (4–6). Homophily—the tendency of social contacts to be similar to one another—can
+affect the extent of a behavior’s adoption in a
+population (7–12). At the dyadic level, research
+on diffusion has suggested that homophilous ties
+can promote the spread of behavior between
+individuals (11–13). This is because actors are
+more likely to be influenced by alters who are
+similar to themselves. However, research on social influence has also suggested that the effects
+of status can interact with those of homophily
+(12, 14, 15). Homophily among high-status
+individuals may help to promote diffusion, but
+low-status individuals may be more likely to be
+influenced by heterophilous ties to high-status
+S
+Number of Adopters
+Sloan Scho
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Centola 2011: PDF p. n = printed p. 1268 + n. Finding the abstract, sample, results, and caveats.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; grep -n -i -E &#34;PDFPAGE|participants|diet|abstract|homophilous networks|homophily (significantly|increased)|BMI|obese|limitation|future|caution|generaliz|710|%&#34; 10_rp.txt | grep -v Downloaded | head -70</summary>
+```bash
+cd /tmp/nsA && grep -n -i -E "PDFPAGE|participants|diet|abstract|homophilous networks|homophily (significantly|increased)|BMI|obese|limitation|future|caution|generaliz|710|%" 10_rp.txt | grep -v Downloaded | head -70
+```
+
+```
+2:=====PDFPAGE 1=====
+75:This network thesis has important implications for obese members of a population because
+210:independently varied. We found that homophily significantly increased overall adoption of a new health
+213:obese individuals both receiving less exposure
+216:lower levels of adoption (8, 9, 16, 18). By contrast, populations in which obese individuals are
+221:use of health innovations among the obese
+231:ones: Are obese individuals simply less likely
+243:networking environment composed of 710 participants, all of whom were recruited from an
+280:=====PDFPAGE 2=====
+288:also receiving notifications about the diet diary.
+303:adopters across all homophilous networks was
+328:Obese Individuals
+330:Non-Obese Individuals
+342:Obese Individuals
+348:Non-Obese Individuals
+363:Obese Individuals
+365:Non-Obese Individuals
+367:Fig. 2. (A to E) Exposure and adoption for obese
+368:and non-obese individuals in both experimental
+370:are shown for all trials. Homophilous networks
+410:Obese Individuals
+412:Non-Obese Individuals
+422:among the “obese” (i.e., BMI ≥ 30) and “nonobese” (BMI < 30) members of the population.
+424:greater number of non-obese than obese individuals adopted the behavior (P < 0.05, Mann-Whitney
+426:high ratio of non-obese to obese individuals in
+428:fraction of obese adopters was significantly greater
+429:than the fraction of non-obese adopters (P < 0.05)
+430:(Fig. 2B), indicating that relative to their population sizes, homophilous networks promoted greater
+431:uptake of the behavior among obese individuals
+432:than among non-obese individuals. By contrast,
+434:(Fig. 2A) and the fraction (Fig. 2B) of non-obese
+436:obese adopters (P < 0.05). Not one obese individual signed up for the diet diary in the unstructured networks, which suggests that obese
+440:homophily significantly increased adoption both
+441:among the obese (P < 0.01) and non-obese (P <
+443:U test). Among non-obese individuals, adoption
+444:levels more than doubled in the homophilous netw
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; sed -n &#39;200,260p;280,310p;636,660p&#39; 10_rp.txt | grep -v &#34;^\s*$&#34; | grep -v Downloaded; grep -n -i -E &#34;PDFPAGE|limitation|future|caution|generaliz|real world|real-world|one caveat|however, it|We note&#34; 10_rp.txt | awk -F: &#39;$1&gt;600&#39;</summary>
+```bash
+cd /tmp/nsA && sed -n '200,260p;280,310p;636,660p' 10_rp.txt | grep -v "^\s*$" | grep -v Downloaded; grep -n -i -E "PDFPAGE|limitation|future|caution|generaliz|real world|real-world|one caveat|however, it|We note" 10_rp.txt | awk -F: '$1>600'
+```
+
+```
+How does the composition of a population affect the adoption of health behaviors and innovations?
+Homophily—similarity of social contacts—can increase dyadic-level influence, but it can also force less
+healthy individuals to interact primarily with one another, thereby excluding them from interactions
+with healthier, more influential, early adopters. As a result, an important network-level effect of
+homophily is that the people who are most in need of a health innovation may be among the least
+likely to adopt it. Despite the importance of this thesis, confounding factors in observational data have
+made it difficult to test empirically. We report results from a controlled experimental study on the
+spread of a health innovation through fixed social networks in which the level of homophily was
+independently varied. We found that homophily significantly increased overall adoption of a new health
+behavior, especially among those most in need of it.
+obese individuals both receiving less exposure
+to valuable health innovations and having fewer
+sources of positive social influence, resulting in
+lower levels of adoption (8, 9, 16, 18). By contrast, populations in which obese individuals are
+better socially connected to healthier individuals
+should provide greater access to health innovations (5, 6, 11, 20) and more social support for
+adopting new behaviors (7, 8, 16, 21), thereby
+increasing both overall levels of adoption and the
+use of health innovations among the obese
+population (8, 9, 21, 22).
+An empirical test of these individual and
+network-level effects of homophily has proven
+difficult because homophily in observational data
+is usually confounded with other relevant factors
+such as the topological structure of social networks (5, 11, 23), interpersonal affect in relationships (12, 24), and shared history and frequency
+of interaction among connected individuals
+(11, 12, 24). Moreover, individual-level factors
+can be difficult to distinguish from relational
+ones: Are o
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; sed -n &#39;688,760p&#39; 10_rp.txt | grep -v &#34;^\s*$&#34; | grep -v Downloaded; grep -n &#34;five trials\|10 networks\|N = \|each network\|Z = &#34; 10_rp.txt | head</summary>
+```bash
+cd /tmp/nsA && sed -n '688,760p' 10_rp.txt | grep -v "^\s*$" | grep -v Downloaded; grep -n "five trials\|10 networks\|N = \|each network\|Z = " 10_rp.txt | head
+```
+
+```
+=====PDFPAGE 4=====
+REPORTS
+design of online health communities, where the
+structure of social relations can be explicitly
+determined on the basis of individuals’ health
+characteristics.
+References and Notes
+Specialized Face Learning Is
+Associated with Individual
+Recognition in Paper Wasps
+Michael J. Sheehan* and Elizabeth A. Tibbetts
+We demonstrate that the evolution of facial recognition in wasps is associated with specialized
+face-learning abilities. Polistes fuscatus can differentiate among normal wasp face images more
+rapidly and accurately than nonface images or manipulated faces. A close relative lacking facial
+recognition, Polistes metricus, however, lacks specialized face learning. Similar specializations for
+face learning are found in primates and other mammals, although P. fuscatus represents an
+independent evolution of specialization. Convergence toward face specialization in distant taxa as
+well as divergence among closely related taxa with different recognition behavior suggests that
+specialized cognition is surprisingly labile and may be adaptively shaped by species-specific
+selective pressures such as face recognition.
+he cognitive mechanisms underlying learning abilities are surprisingly similar across
+taxa as diverse as mammals, birds, insects,
+and mollusks (1). Although the mechanisms that
+underlie learning are broadly generalized across
+animals, there is increasing evidence that learning
+abilities are adaptively shaped by species’ ecology
+and can be highly specialized (2). One of the most
+striking examples of specialized cognition is specialized face learning found in some mammals,
+including humans (3–5). Individual face recognition is an important aspect of human social
+T
+Department of Ecology and Evolutionary Biology, University of
+Michigan, Ann Arbor, MI 48109, USA.
+*To whom correspondence should be addressed. E-mail:
+mic@umich.edu
+1272
+interactions, and our brains process the images of
+normal conspecific faces differently than any other
+image
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; sed -n &#39;484,500p;600,636p&#39; 10_rp.txt | grep -v &#34;^\s*$&#34; | grep -v Downloaded; grep -n &#34;four principal advances&#34; 10_p.txt; awk &#39;/four principal advances/,0&#39; 10_p.txt | head -60 | cut -c1-80</summary>
+```bash
+cd /tmp/nsA && sed -n '484,500p;600,636p' 10_rp.txt | grep -v "^\s*$" | grep -v Downloaded; grep -n "four principal advances" 10_p.txt; awk '/four principal advances/,0' 10_p.txt | head -60 | cut -c1-80
+```
+
+```
+Participants arriving to the study were randomized to one of the two experimental conditions—a
+homophilous population condition and an unstructured population condition—that were distinguished
+only by the clustering of health characteristics in
+the social network neighborhoods. The occupants
+of the immediately adjacent nodes in the network
+(i.e., the network neighbors) constituted a participant’s health buddies. All networks in the study
+had the same size (N = 72), neighborhood structure (hexagonal lattice network, clustering coefficient = 0.4), and degree distribution (Z = 6), which
+ensured that every individual within and between
+conditions had an identical number of health buddies (28). Random assignment of subjects to experimental conditions ensured that each network
+in the study had equivalent distributions of individual characteristics. Consequently, at the start of the
+study, the only difference between conditions was
+the level of homophily within the social networks.
+We report results from five independent trials
+of this experimental design. Each trial consisted
+of two social networks, one from each experimental condition. All five trials of the study ran
+concurrently for 7 weeks.
+Participants in the study made decisions about
+partially similar individuals, who bridge diverse
+social clusters, may be effective in transmitting
+behavior across heterogeneous populations.
+In sum, we found not only that exposure and
+adoption levels were greatest in homophilous
+networks, but that the most effective social environment for increasing the “willingness” of
+obese individuals to adopt the behavior was the
+one in which they interacted with others with
+similar health characteristics. With respect to the
+design of interventions and the promotion of new
+health innovations, our results indicate that
+homophilous ties can increase access to health
+innovations better than providing direct access to
+diverse individuals across a community. These
+findings may be particularly import
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; for s in &#34;did not permit causal&#34; &#34;two primary conclusions&#34; &#34;more than 3 times&#34; &#34;710 participants&#34; &#34;N = 72&#34; &#34;Homophily thus not only&#34; &#34;may be a function of social&#34; &#34;In sum, we found&#34;; do echo &#34;== $s: $(grep -n &#34;$s&#34; 10_p.txt | cut -d: -f1)&#34;; done</summary>
+```bash
+cd /tmp/nsA && for s in "did not permit causal" "two primary conclusions" "more than 3 times" "710 participants" "N = 72" "Homophily thus not only" "may be a function of social" "In sum, we found"; do echo "== $s: $(grep -n "$s" 10_p.txt | cut -d: -f1)"; done
+```
+
+```
+== did not permit causal: 
+== two primary conclusions: 
+== more than 3 times: 125
+== 710 participants: 
+== N = 72: 132
+== Homophily thus not only: 205
+== may be a function of social: 251
+== In sum, we found: 262
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; grep -n &#34;permit causal\|primary con\|710 par\|710&#34; 10_p.txt | head</summary>
+```bash
+cd /tmp/nsA && grep -n "permit causal\|primary con\|710 par\|710" 10_p.txt | head
+```
+
+```
+64:low-status individuals may be more likely to be                             novation (15, 17).                                                    networking environment composed of 710 par-
+236:novation. A significantly greater number (P < 0.01)                         Our findings suggest two primary conclu-            that the lack of “wide bridges” in social networks
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; grep -n &#34;Our experimental design\|causal identification&#34; 10_p.txt</summary>
+```bash
+cd /tmp/nsA && grep -n "Our experimental design\|causal identification" 10_p.txt
+```
+
+```
+209:equal to the number of non-obese adopters in the                            Our experimental design did not permit caus-        simple fact of homophilous relations can pro-
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Centola 2011 pages confirmed (abstract and sample on p. 1269; design and main result on p. 1270; conclusions and caveat on p. 1271). Writing the section.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cat &gt;&gt; &#34;/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_A_influence_homophily_note.md&#34; &lt;&lt;&#39;EOF&#39;
+
+## 10. Centola 2011 — An experimental study of homophily in the adoption of health behavior
+
+**Citation.** Centola, Damon. 2011. &#34;An Experimental Study of Homophily in the Adoption of Health Behavior.&#34; *Science* 334 (6060): 1269–1272. DOI: 10.1126/science.1207055. (PDF p. n = printed p. 1268 + n; p. 1269 is shared with the end of the preceding article and p. 1272 with the start of the following one.)
+
+**Data / setting / sample / years.** &#34;a World Wide Web social networking environment composed of 710 participants, all of whom were recruited from an online fitness program&#34; (p. 1269). Five trials, each a pair of networks (homophilous vs. unstructured), i.e. 10 networks; &#34;All networks in the study had the same size (N = 72), neighborhood structure (hexagonal lattice network, clustering coefficient = 0.4), and degree distribution (Z = 6)&#34;; &#34;All five trials of the study ran concurrently for 7 weeks.&#34; (p. 1270). Behavior: adopting an Internet-based diet diary. Homophily defined on gender, age, and BMI (p. 1270). Calendar dates of the experiment not given in the main text.
+
+**Design.** Randomized experiment. Topology held fixed; only the sorting of participants (homophilous vs. random placement on the same lattice) varied.
+
+**Main findings (verbatim).**
+
+&gt; &#34;Despite the importance of this thesis, confounding factors in observational data have made it difficult to test empirically. We report results from a controlled experimental study on the spread of a health innovation through fixed social networks in which the level of homophily was independently varied. We found that homophily significantly increased overall adoption of a new health behavior, especially among those most in need of it.&#34; (Abstract, p. 1269)
+
+&gt; &#34;At the end of week 7, the total number of adopters across all homophilous networks was more than 3 times the total number of adopters in the unstructured networks.&#34; (p. 1270)
+
+&gt; &#34;Our findings suggest that obese individuals may be more dependent than healthier individuals on the composition of their social networks for making decisions about adopting health behaviors. This indicates that low adoption levels of health innovations among less healthy individuals (7, 8, 16, 20) may be a function of social environment rather than a baseline reluctance for adoption (25, 26).&#34; (p. 1271)
+
+**Sorting vs. influence.** Turns homophily from a confound into the treatment. The design separates &#34;who your neighbors are&#34; (sorting, set by the experimenter) from network topology and from individual traits: &#34;Are obese individuals simply less likely to adopt a health behavior, or is it their social environment that reduces their likelihood of adoption (25, 26)? Addressing these difficulties requires the ability to independently control the degree of homophily in a social network while simultaneously holding the topology of the network, and the distribution of individual- and population-level parameters, constant.&#34; (p. 1269)
+
+**Limitations.**
+
+&gt; &#34;Our experimental design did not permit causal identification at the individual level; however, dyadic-level analyses of the correlations between homophilous ties and the likelihood of behavior spread indicate that partial overlap on traits between neighbors may be sufficient to significantly increase the likelihood of transmission (28) (fig. S11). Although these correlations do not imply causal effects of specific traits, they do suggest that a minimal level of overlapping characteristics between social contacts may improve the spread of behaviors through social networks&#34; (p. 1271) **[no model of mechanism]** (the paper fits a simple threshold-style model in the supplement, Fig. 3 / eq. S1, p. 1271)
+
+- Low counts: &#34;Despite low overall levels of adoption&#34; (p. 1270); 10 networks of 72. **[small data]**
+- Online, anonymous, single platform; low-cost behavior. **[single system]** **[outcome is not selection]**
+
+**Channel / source (assistant judgment).** Development via peers, but the lever is the *composition* of the peer environment, which an organization can set. The cleanest experimental evidence in this cluster that the same individual behaves differently depending on who they are placed among, i.e. the environment, not only the individual, predicts the outcome.
+
+---
+EOF
+cd /tmp/nsA &amp;&amp; sed -n &#39;1,60p&#39; 11_rp.txt | grep -v &#34;^\s*$&#34; | grep -v Downloaded; grep -n &#34;PDFPAGE\|PNAS |\|PNAS 兩\|73[12][0-9]&#34; 11_rp.txt | head -20</summary>
+```bash
+cat >> "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_A_influence_homophily_note.md" <<'EOF'
+
+## 10. Centola 2011 — An experimental study of homophily in the adoption of health behavior
+
+**Citation.** Centola, Damon. 2011. "An Experimental Study of Homophily in the Adoption of Health Behavior." *Science* 334 (6060): 1269–1272. DOI: 10.1126/science.1207055. (PDF p. n = printed p. 1268 + n; p. 1269 is shared with the end of the preceding article and p. 1272 with the start of the following one.)
+
+**Data / setting / sample / years.** "a World Wide Web social networking environment composed of 710 participants, all of whom were recruited from an online fitness program" (p. 1269). Five trials, each a pair of networks (homophilous vs. unstructured), i.e. 10 networks; "All networks in the study had the same size (N = 72), neighborhood structure (hexagonal lattice network, clustering coefficient = 0.4), and degree distribution (Z = 6)"; "All five trials of the study ran concurrently for 7 weeks." (p. 1270). Behavior: adopting an Internet-based diet diary. Homophily defined on gender, age, and BMI (p. 1270). Calendar dates of the experiment not given in the main text.
+
+**Design.** Randomized experiment. Topology held fixed; only the sorting of participants (homophilous vs. random placement on the same lattice) varied.
+
+**Main findings (verbatim).**
+
+> "Despite the importance of this thesis, confounding factors in observational data have made it difficult to test empirically. We report results from a controlled experimental study on the spread of a health innovation through fixed social networks in which the level of homophily was independently varied. We found that homophily significantly increased overall adoption of a new health behavior, especially among those most in need of it." (Abstract, p. 1269)
+
+> "At the end of week 7, the total number of adopters across all homophilous networks was more than 3 times the total number of adopters in the unstructured networks." (p. 1270)
+
+> "Our findings suggest that obese individuals may be more dependent than healthier individuals on the composition of their social networks for making decisions about adopting health behaviors. This indicates that low adoption levels of health innovations among less healthy individuals (7, 8, 16, 20) may be a function of social environment rather than a baseline reluctance for adoption (25, 26)." (p. 1271)
+
+**Sorting vs. influence.** Turns homophily from a confound into the treatment. The design separates "who your neighbors are" (sorting, set by the experimenter) from network topology and from individual traits: "Are obese individuals simply less likely to adopt a health behavior, or is it their social environment that reduces their likelihood of adoption (25, 26)? Addressing these difficulties requires the ability to independently control the degree of homophily in a social network while simultaneously holding the topology of the network, and the distribution of individual- and population-level parameters, constant." (p. 1269)
+
+**Limitations.**
+
+> "Our experimental design did not permit causal identification at the individual level; however, dyadic-level analyses of the correlations between homophilous ties and the likelihood of behavior spread indicate that partial overlap on traits between neighbors may be sufficient to significantly increase the likelihood of transmission (28) (fig. S11). Although these correlations do not imply causal effects of specific traits, they do suggest that a minimal level of overlapping characteristics between social contacts may improve the spread of behaviors through social networks" (p. 1271) **[no model of mechanism]** (the paper fits a simple threshold-style model in the supplement, Fig. 3 / eq. S1, p. 1271)
+
+- Low counts: "Despite low overall levels of adoption" (p. 1270); 10 networks of 72. **[small data]**
+- Online, anonymous, single platform; low-cost behavior. **[single system]** **[outcome is not selection]**
+
+**Channel / source (assistant judgment).** Development via peers, but the lever is the *composition* of the peer environment, which an organization can set. The cleanest experimental evidence in this cluster that the same individual behaves differently depending on who they are placed among, i.e. the environment, not only the individual, predicts the outcome.
+
+---
+EOF
+cd /tmp/nsA && sed -n '1,60p' 11_rp.txt | grep -v "^\s*$" | grep -v Downloaded; grep -n "PDFPAGE\|PNAS |\|PNAS 兩\|73[12][0-9]" 11_rp.txt | head -20
+```
+
+```
+=====PDFPAGE 1=====
+Estimating peer effects in networks with peer
+encouragement designs
+Dean Ecklesa,b,1, René F. Kizilcecb,c, and Eytan Bakshyb
+a
+Sloan School of Management, Massachusetts Institute of Technology, Cambridge, MA 02139; bFacebook, Menlo Park, CA 94025; and cDepartment of
+Communication, Stanford University, Stanford, CA 94305
+Edited by Richard M. Shiffrin, Indiana University, Bloomington, IN, and approved April 15, 2016 (received for review June 15, 2015)
+Peer effects, in which the behavior of an individual is affected by
+the behavior of their peers, are central to social science. Because
+peer effects are often confounded with homophily and common
+external causes, recent work has used randomized experiments to
+estimate effects of specific peer behaviors. These experiments
+have often relied on the experimenter being able to randomly
+modulate mechanisms by which peer behavior is transmitted to a
+focal individual. We describe experimental designs that instead
+randomly assign individuals’ peers to encouragements to behaviors that directly affect those individuals. We illustrate this method
+with a large peer encouragement design on Facebook for estimating the effects of receiving feedback from peers on posts shared
+by focal individuals. We find evidence for substantial effects of
+receiving marginal feedback on multiple behaviors, including giving feedback to others and continued posting. These findings provide experimental evidence for the role of behaviors directed at
+specific individuals in the adoption and continued use of communication technologies. In comparison, observational estimates differ
+substantially, both underestimating and overestimating effects,
+suggesting that researchers and policy makers should be cautious
+in relying on them.
+social interactions
+| social networks | causal inference | experimental design
+S
+ocial interactions among people enable the spread of information, preferences, and behavior, including technology
+adoption. Despite the
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Eckles et al.: PDF p. n = printed p. 7315 + n. Pulling sample size, dates, estimates, and the observational-vs-experimental comparison.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; grep -n -i -E &#34;million|users|individuals were|2012|2013|2014|weeks|%|observational estimates|underestimat|overestimat|limitation|exclusion restriction|complier|instrument|caveat|cannot|generaliz&#34; 11_rp.txt | head -80</summary>
+```bash
+cd /tmp/nsA && grep -n -i -E "million|users|individuals were|2012|2013|2014|weeks|%|observational estimates|underestimat|overestimat|limitation|exclusion restriction|complier|instrument|caveat|cannot|generaliz" 11_rp.txt | head -80
+```
+
+```
+24:specific individuals in the adoption and continued use of communication technologies. In comparison, observational estimates differ
+25:substantially, both underestimating and overestimating effects,
+39:absence (3–5) and can substantially overestimate them (6).
+69:is associated with higher rates of sharing; in particular, new users
+176:Plausibility of the Exclusion Restriction. This DAG encodes an exclusion restriction (Assumption 1): All effects of the peer
+184:many ways. In peer encouragement designs, however, the exclusion restriction assumption is often particularly plausible for a
+191:can increase the plausibility of the exclusion restriction and increase statistical power.
+216:materials by the randomized encouragement (i.e., for compliers).
+217:For this purpose, the encouragement is treated as an instrumental variable (IV); that is, it is assumed that the encouragement
+219:behavior of interest. This complete mediation or exclusion restriction can be stated as follows. Define the potential outcomes
+222:Assumption 1. (Exclusion restriction). Suppose Yi ðdi , zi Þ = Yi ðdi , zi′Þ
+226:and zi , Zi ∈ Z. The exclusion restriction is then combined
+262:such violations of the exclusion restriction would be less likely to
+269:generally use the number or fraction of assigned peers as the instrument. This instrument is then necessarily correlated for all
+280:instrument is no longer correlated within groups or in the network. This design choice can substantially change power; simulations on small-world networks demonstrate the ego-specific design
+281:reducing true SEs by 20% to over 90% (SI Appendix, Simulations
+301:Facebook product teams frequently randomly assign some users
+398:increasing feedback received by 172%); thus, sensitivity analysis
+409:instruments simply increases precision in estimating γ; because
+411:effect of a 1% increase in Di in terms of percent change in Yi. To
+424:0.2–1.3% (Fig. 3A), Fð3, 4.9e7Þ = 519, p < 1e-12. Adding the two
+435:large effects of re
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; sed -n &#39;430,445p;580,630p;700,740p;770,782p&#39; 11_rp.txt | grep -v &#34;^\s*$&#34;</summary>
+```bash
+cd /tmp/nsA && sed -n '430,445p;580,630p;700,740p;770,782p' 11_rp.txt | grep -v "^\s*$"
+```
+
+```
+us to estimate effects of receiving feedback on multiple ego behaviors. We focus on results from a first-stage specification as in
+Fig. 3A, with all three main effects (black points in Fig. 4).
+Receiving additional feedback is expected to have the largest
+effects on “reply” behaviors by the ego, such as commenting on
+their own posts and liking comments on their posts. We estimate
+large effects of receiving feedback on both of these ego behaviors, such that a 10% increase in feedback received causes a
+9.6% increase in comments (self) and a 10.5% increase in likes
+(self). Although unsurprising, these estimates can help put the
+magnitude of effects on other ego behaviors in perspective.
+Effects on other ego behaviors are more important for understanding the spread of feedback and sharing behaviors. Receiving additional feedback also causes egos to give others more
+feedback, in terms of both likes and comments separately: Receiving 10% more feedback causes egos to give others 1.1%
+more likes and 1.1% more comments. Thus, causing one individual to receive more feedback will cause them to give more
+feedback to their peers, potentially creating desirable feedback
+loops. As expected, these effects are substantially smaller than
+PNAS | July 5, 2016 | vol. 113 | no. 27 | 7319
+quartiles of prior feedback received.
+on the reply behaviors, but are less than an order of magnitude
+smaller. Furthermore, when egos receive more feedback, they
+also share more new posts during the experiment: A 10% increase in feedback causes a 0.7% increase in creating new posts.
+We also computed estimates with other first-stage specifications: only the conversation salience factor, only the two encourage initiation factors, and a high-dimensional specification.
+Specifically, to potentially use heterogeneity in the true first-stage
+model, we fit a lasso (i.e., L1 penalized) first-stage model (53, 54)
+with both factors, interactions, and interactions with the stratumdefining variables, with the selecte
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Eckles et al. pages confirmed (estimates p. 7319; observational comparison p. 7320; limitations and methods p. 7321). Writing the section.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cat &gt;&gt; &#34;/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_A_influence_homophily_note.md&#34; &lt;&lt;&#39;EOF&#39;
+
+## 11. Eckles, Kizilcec &amp; Bakshy 2016 — Estimating peer effects in networks with peer encouragement designs
+
+**Citation.** Eckles, Dean, René F. Kizilcec, and Eytan Bakshy. 2016. &#34;Estimating Peer Effects in Networks with Peer Encouragement Designs.&#34; *Proceedings of the National Academy of Sciences* 113 (27): 7316–7322. DOI: 10.1073/pnas.1511201113. (PDF p. n = printed p. 7315 + n.)
+
+**Data / setting / sample / years.** Facebook field experiment. &#34;The peer encouragement design ran for 3 wk between September and October 2012. The egos in the data analyzed are 48.9 million Facebook users globally [...]. Approximately 905 million Facebook users were peers of the egos and used the web interface.&#34; (p. 7321)
+
+**Design.** Randomized field experiment, analyzed with instrumental variables (IV). Peers (not the focal person) are randomly encouraged, via small interface changes, to give feedback on the focal person&#39;s posts; the encouragement is the instrument for feedback received. Key identifying assumption is an exclusion restriction (the encouragement affects the ego only through peer behavior) (pp. 7317–7318).
+
+**Main findings (verbatim).**
+
+&gt; &#34;Because peer effects are often confounded with homophily and common external causes, recent work has used randomized experiments to estimate effects of specific peer behaviors. [...] We find evidence for substantial effects of receiving marginal feedback on multiple behaviors, including giving feedback to others and continued posting. [...] In comparison, observational estimates differ substantially, both underestimating and overestimating effects, suggesting that researchers and policy makers should be cautious in relying on them.&#34; (Abstract, p. 7316)
+
+&gt; &#34;Receiving 10% more feedback causes egos to give others 1.1% more likes and 1.1% more comments.&#34; (p. 7319); &#34;A 10% increase in feedback causes a 0.7% increase in creating new posts.&#34; (p. 7320)
+
+&gt; &#34;For the main outcomes of interest (posting and feedback to others), the observational coefficient estimates are 317–498% larger. On the other hand, they appear to underestimate reply behaviors by 36% and 68% for comments and likes, respectively. That is, in contrast to claims that observational estimates can upper bound true peer effects (6), the sign of the implied large-sample bias of the observational estimators varies across outcomes.&#34; (p. 7320)
+
+**Sorting vs. influence.** Names the confounds: &#34;There are many causes of correlated behaviors in networks that make it difficult to identify peer effects, including selective tie formation [i.e., homophily (7)], unobserved correlated external causes, and prior peer effects (4, 8, 9).&#34; (p. 7316). Randomizing peers&#39; behavior removes both sorting and shared environment from the estimate. The p. 7320 result directly qualifies Aral et al. (paper 4): reference (6) is the &#34;upper bound&#34; claim, and the bias of observational estimates is shown to go in either direction. (Cross-reference is assistant reading; the PDF&#39;s ref. 6 should be checked if this is cited.)
+
+**Limitations (authors&#39; own).**
+
+&gt; &#34;One limitation of this experiment is that it does not elucidate the mechanisms by which receiving feedback affects egos or distinguish different types of feedback.&#34; (p. 7321) **[no model of mechanism]**
+
+&gt; &#34;The plausibility of a key assumption in our model, the exclusion restriction, partly depends on encouragements being minimal. However, encouragements that produce minimal variation can result in imprecise IV estimates; even studies with hundreds of thousands of observations will often suffer from the instruments being too weak (63).&#34; (p. 7321)
+
+- Estimand is encouragement-specific (effect for egos whose peers respond to the nudge) (p. 7321). One platform, one behavior. **[single system]** **[outcome is not selection]**
+
+**Channel / source (assistant judgment).** Evaluation-adjacent: peers&#39; feedback is a (social) evaluation of a person&#39;s output, and receiving more of it changes subsequent production. Source: peers, with the organization (platform) controlling the interface that shapes how much peer evaluation occurs. Methodologically the template for &#34;randomize the peer, not the person.&#34;
+
+---
+EOF
+cd /tmp/nsA &amp;&amp; grep -n &#34;PDFPAGE\|Science\b.*20\|1304\|1305\|1306\|1307\|1308\|1309\|1310&#34; 12_rp.txt | head -20; sed -n &#39;1,80p&#39; 12_rp.txt | grep -v &#34;^\s*$&#34; | grep -v Downloaded</summary>
+```bash
+cat >> "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_A_influence_homophily_note.md" <<'EOF'
+
+## 11. Eckles, Kizilcec & Bakshy 2016 — Estimating peer effects in networks with peer encouragement designs
+
+**Citation.** Eckles, Dean, René F. Kizilcec, and Eytan Bakshy. 2016. "Estimating Peer Effects in Networks with Peer Encouragement Designs." *Proceedings of the National Academy of Sciences* 113 (27): 7316–7322. DOI: 10.1073/pnas.1511201113. (PDF p. n = printed p. 7315 + n.)
+
+**Data / setting / sample / years.** Facebook field experiment. "The peer encouragement design ran for 3 wk between September and October 2012. The egos in the data analyzed are 48.9 million Facebook users globally [...]. Approximately 905 million Facebook users were peers of the egos and used the web interface." (p. 7321)
+
+**Design.** Randomized field experiment, analyzed with instrumental variables (IV). Peers (not the focal person) are randomly encouraged, via small interface changes, to give feedback on the focal person's posts; the encouragement is the instrument for feedback received. Key identifying assumption is an exclusion restriction (the encouragement affects the ego only through peer behavior) (pp. 7317–7318).
+
+**Main findings (verbatim).**
+
+> "Because peer effects are often confounded with homophily and common external causes, recent work has used randomized experiments to estimate effects of specific peer behaviors. [...] We find evidence for substantial effects of receiving marginal feedback on multiple behaviors, including giving feedback to others and continued posting. [...] In comparison, observational estimates differ substantially, both underestimating and overestimating effects, suggesting that researchers and policy makers should be cautious in relying on them." (Abstract, p. 7316)
+
+> "Receiving 10% more feedback causes egos to give others 1.1% more likes and 1.1% more comments." (p. 7319); "A 10% increase in feedback causes a 0.7% increase in creating new posts." (p. 7320)
+
+> "For the main outcomes of interest (posting and feedback to others), the observational coefficient estimates are 317–498% larger. On the other hand, they appear to underestimate reply behaviors by 36% and 68% for comments and likes, respectively. That is, in contrast to claims that observational estimates can upper bound true peer effects (6), the sign of the implied large-sample bias of the observational estimators varies across outcomes." (p. 7320)
+
+**Sorting vs. influence.** Names the confounds: "There are many causes of correlated behaviors in networks that make it difficult to identify peer effects, including selective tie formation [i.e., homophily (7)], unobserved correlated external causes, and prior peer effects (4, 8, 9)." (p. 7316). Randomizing peers' behavior removes both sorting and shared environment from the estimate. The p. 7320 result directly qualifies Aral et al. (paper 4): reference (6) is the "upper bound" claim, and the bias of observational estimates is shown to go in either direction. (Cross-reference is assistant reading; the PDF's ref. 6 should be checked if this is cited.)
+
+**Limitations (authors' own).**
+
+> "One limitation of this experiment is that it does not elucidate the mechanisms by which receiving feedback affects egos or distinguish different types of feedback." (p. 7321) **[no model of mechanism]**
+
+> "The plausibility of a key assumption in our model, the exclusion restriction, partly depends on encouragements being minimal. However, encouragements that produce minimal variation can result in imprecise IV estimates; even studies with hundreds of thousands of observations will often suffer from the instruments being too weak (63)." (p. 7321)
+
+- Estimand is encouragement-specific (effect for egos whose peers respond to the nudge) (p. 7321). One platform, one behavior. **[single system]** **[outcome is not selection]**
+
+**Channel / source (assistant judgment).** Evaluation-adjacent: peers' feedback is a (social) evaluation of a person's output, and receiving more of it changes subsequent production. Source: peers, with the organization (platform) controlling the interface that shapes how much peer evaluation occurs. Methodologically the template for "randomize the peer, not the person."
+
+---
+EOF
+cd /tmp/nsA && grep -n "PDFPAGE\|Science\b.*20\|1304\|1305\|1306\|1307\|1308\|1309\|1310" 12_rp.txt | head -20; sed -n '1,80p' 12_rp.txt | grep -v "^\s*$" | grep -v Downloaded
+```
+
+```
+2:=====PDFPAGE 1=====
+55:Rajkumar et al., Science 377, 1304–1310 (2022)
+162:=====PDFPAGE 2=====
+179:Rajkumar et al., Science 377, 1304–1310 (2022)
+425:=====PDFPAGE 3=====
+578:mobility, and (iii) variation created by observRajkumar et al., Science 377, 1304–1310 (2022)
+643:=====PDFPAGE 4=====
+646:Rajkumar et al., Science 377, 1304–1310 (2022)
+836:=====PDFPAGE 5=====
+961:Rajkumar et al., Science 377, 1304–1310 (2022)
+1047:=====PDFPAGE 6=====
+1050:Rajkumar et al., Science 377, 1304–1310 (2022)
+1221:=====PDFPAGE 7=====
+1235:5. D. Centola, Science 329, 1194–1197 (2010).
+1241:Rajkumar et al., Science 377, 1304–1310 (2022)
+1367:=====PDFPAGE 8=====
+1379:Science (ISSN 1095-9203) is published by the American Association for the Advancement of Science. 1200 New York Avenue NW,
+1398:=====PDFPAGE 9=====
+=====PDFPAGE 1=====
+RES EARCH
+REPO R T
+◥
+SOCIAL NETWORKS
+A causal test of the strength of weak ties
+Karthik Rajkumar1, Guillaume Saint-Jacques1, Iavor Bojinov2, Erik Brynjolfsson3,4, Sinan Aral5*
+T
+he Strength of Weak Ties (1) is one of the
+most influential social theories of the
+past century, underpinning networked
+theories of information diffusion (2, 3),
+social contagion (4, 5), social movements
+(6), industry structure (7), influence maximization (8), and human cooperation (9, 10). It
+argues that infrequent, arms-length relationships, known as “weak ties,” provide more new
+employment opportunities (11), promotions
+and greater wage increases (12), creativity
+(13), innovation (14, 15), productivity (16), and
+performance (17) because they deliver more
+novel information than strong ties. Weak ties
+are thought to provide access to diverse, novel
+information because they connect us to disparate and diverse parts of the human social
+network (18–24). In addition to productivity,
+performance, innovation, and other benefits,
+weak ties are thought to be specifically well
+suited to deliver new employment opportunities because they provide novel labor market
+information, making job mobilit
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Rajkumar et al.: PDF p. n = printed p. 1303 + n. Locating the abstract, sample (20M+ members, 2 billion ties, 600,000 jobs), the inverted-U result, and limitations.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; grep -n -i -E &#34;PDFPAGE|million|billion|600,000|inverted|nonlinear|moderately|mutual|digital|industr|limitation|caveat|cannot|external validity|generaliz|job application|job transmission|2015|2019&#34; 12_rp.txt | grep -v &#34;^[0-9]*:[0-9]*\. &#34; | head -70</summary>
+```bash
+cd /tmp/nsA && grep -n -i -E "PDFPAGE|million|billion|600,000|inverted|nonlinear|moderately|mutual|digital|industr|limitation|caveat|cannot|external validity|generaliz|job application|job transmission|2015|2019" 12_rp.txt | grep -v "^[0-9]*:[0-9]*\. " | head -70
+```
+
+```
+2:=====PDFPAGE 1=====
+21:(6), industry structure (7), influence maximization (8), and human cooperation (9, 10). It
+63:social networks to job transmission makes measurement of the relationship between weak ties
+79:The experiments randomly varied the prevalence of strong and weak ties in the professional networks of over 20 million LinkedIn
+99:varied the prevalence of weak ties in the networks of over 20 million people over a 5-year period, during which
+100:2 billion new ties and 600,000 new jobs were created. The results provided experimental causal evidence
+102:ties was nonlinear. Statistical analysis found an inverted U-shaped relationship between tie strength and job
+103:transmission such that weaker ties increased job transmission but only to a point, after which there were
+105:number of mutual connections displayed varying effects. Moderately weak ties (measured by mutual
+107:strength of weak ties varied by industry. Whereas weak ties increased job mobility in more digital industries,
+108:strong ties increased job mobility in less digital industries.
+115:of mutual connections between the ego and
+120:between 2015 and 2019 in two waves.
+122:conducted in 2015 that had over 4 million experimental subjects and created over 19 million
+123:new connections. We collected edge-level observations of tie strength and job transmission
+126:took place worldwide in 2019. The second
+128:had more than 16 million experimental subjects, created ~2 billion new connections and
+129:recorded more than 70 million job applications that led to 600,000 new jobs during the
+131:were collected both at the node level (in 2019),
+134:2015), where each observation corresponds to
+137:We analyzed labor market mobility by measuring both job applications and job transmissions. Job applications are simply the
+140:an experiment. In accordance with the literature (25, 26), we consider a job transmission to
+153:between two people and the number of mutual
+158:measured mutual friendship by counting the
+16
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; sed -n &#39;79,161p&#39; 12_rp.txt | grep -v &#34;^\s*$&#34; | grep -v Downloaded; grep -n -i -E &#34;limitation|caveat|PYMK|algorithm|we note|future work|generaliz|LinkedIn members may|external&#34; 12_rp.txt | awk -F: &#39;$1&gt;160 &amp;&amp; $1&lt;1230&#39;</summary>
+```bash
+cd /tmp/nsA && sed -n '79,161p' 12_rp.txt | grep -v "^\s*$" | grep -v Downloaded; grep -n -i -E "limitation|caveat|PYMK|algorithm|we note|future work|generaliz|LinkedIn members may|external" 12_rp.txt | awk -F: '$1>160 && $1<1230'
+```
+
+```
+The experiments randomly varied the prevalence of strong and weak ties in the professional networks of over 20 million LinkedIn
+members by adjusting the platform’s People You
+May Know (PYMK) algorithm, which recommends new connections to members (Fig. 1A
+illustrates the experimental design). LinkedIn’s
+PYMK algorithm is an ensemble machine learning model comprising the following: (i) a model
+for estimating the propensity of an ego (i.e.,
+a focal member) to send a connection invite
+to an alter (i.e., a member the focal member
+is not currently connected with), (ii) a model
+estimating the alter’s propensity to accept an
+16 September 2022
+1 of 7
+The authors analyzed data from multiple large-scale randomized experiments on LinkedIn’s People You May
+Know algorithm, which recommends new connections to LinkedIn members, to test the extent to which weak
+ties increased job mobility in the world’s largest professional social network. The experiments randomly
+varied the prevalence of weak ties in the networks of over 20 million people over a 5-year period, during which
+2 billion new ties and 600,000 new jobs were created. The results provided experimental causal evidence
+supporting the strength of weak ties and suggested three revisions to the theory. First, the strength of weak
+ties was nonlinear. Statistical analysis found an inverted U-shaped relationship between tie strength and job
+transmission such that weaker ties increased job transmission but only to a point, after which there were
+diminishing marginal returns to tie weakness. Second, weak ties measured by interaction intensity and the
+number of mutual connections displayed varying effects. Moderately weak ties (measured by mutual
+connections) and the weakest ties (measured by interaction intensity) created the most job mobility. Third, the
+strength of weak ties varied by industry. Whereas weak ties increased job mobility in more digital industries,
+strong ties increased job mobility in less digital industries.
+invite 
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Rajkumar's PDF footers read "n of 7" rather than journal page numbers; I'll cite both (article page 1 of 7 = p. 1304). Reading the inverted-U passage and the limitations.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; sed -n &#39;755,795p;1050,1160p&#39; 12_rp.txt | grep -v &#34;^\s*$&#34; | grep -v Downloaded</summary>
+```bash
+cd /tmp/nsA && sed -n '755,795p;1050,1160p' 12_rp.txt | grep -v "^\s*$" | grep -v Downloaded
+```
+
+```
+instrumental variables (IV) analysis. Dots represent point estimates of the effects and bars
+represent standard errors. Figure 3A displays
+the results of our OLS and experimental estimates of the effect of weak and strong ties on
+job transmissions at the node level. Although
+the OLS analysis replicated previous findings
+of an apparent paradox of weak ties in which
+strong ties were more strongly correlated with
+job transmissions, the experimental IV analysis reversed this result and suggested a nonlinear relationship between tie strength and
+job transmission in which medium strength
+ties were the most effective in generating job
+mobility. As the statistical power of the nodelevel analysis was not sufficient to confirm individual differences between the effects of
+strong, medium, and weak ties in our experiments, we also analyzed these relationships at
+the more granular edge level.
+Figure 3B displays the results of our OLS
+and experimental estimates of the effect of the
+strength of a newly added tie, measured by the
+number of mutual connections between LinkedIn
+members before treatment, on the probability of a job transmission between them after
+treatment at the edge level. Although the OLS
+estimates again replicated previous correlational research demonstrating the paradox of
+weak ties and showed that strong ties were
+more strongly correlated with an increased
+probability of a job transmission through the
+tie, the experimental IV results mirrored the
+node-level experimental results and revealed a
+more nuanced correspondence—namely that
+there was an inverted U-shaped relationship
+between tie strength and the likelihood of a
+job transmission. At low levels of mutual
+friendship adding new ties with more mutual
+friends caused the probability of a job transmission to go up. However, adding ties with
+0.004
+0.004
+0.003
+0.003
+0.002
+0.002
+Rajkumar et al., Science 377, 1304–1310 (2022)
+the causal effects of strong and weak ties on
+job mobility in a global sample and across
+mul
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; grep -n &#34;PDFPAGE\|of 7&#34; 12_p.txt | head -20; for s in &#34;between 2015 and 2019&#34; &#34;inverted U-shaped relationship&#34; &#34;not without limitations&#34; &#34;Second, LinkedIn is a professional&#34; &#34;600,000 new jobs&#34; &#34;endogenous, making&#34;; do echo &#34;== $s: $(grep -n &#34;$s&#34; 12_p.txt | cut -d: -f1 | tr &#39;\n&#39; &#39; &#39;)&#34;; done</summary>
+```bash
+cd /tmp/nsA && grep -n "PDFPAGE\|of 7" 12_p.txt | head -20; for s in "between 2015 and 2019" "inverted U-shaped relationship" "not without limitations" "Second, LinkedIn is a professional" "600,000 new jobs" "endogenous, making"; do echo "== $s: $(grep -n "$s" 12_p.txt | cut -d: -f1 | tr '\n' ' ')"; done
+```
+
+```
+2:=====PDFPAGE 1=====
+88:Rajkumar et al., Science 377, 1304–1310 (2022)            16 September 2022                                                                                      1 of 7
+90:=====PDFPAGE 2=====
+204:Rajkumar et al., Science 377, 1304–1310 (2022)   16 September 2022                                                                                                                       2 of 7
+206:=====PDFPAGE 3=====
+306:Rajkumar et al., Science 377, 1304–1310 (2022)                             16 September 2022                                                                                                                                   3 of 7
+308:=====PDFPAGE 4=====
+411:Rajkumar et al., Science 377, 1304–1310 (2022)   16 September 2022                                                                                                                             4 of 7
+413:=====PDFPAGE 5=====
+527:Rajkumar et al., Science 377, 1304–1310 (2022)                     16 September 2022                                                                                                                                                      5 of 7
+529:=====PDFPAGE 6=====
+603:Rajkumar et al., Science 377, 1304–1310 (2022)   16 September 2022                                                                                      6 of 7
+605:=====PDFPAGE 7=====
+676:Rajkumar et al., Science 377, 1304–1310 (2022)               16 September 2022                                                                                                                             7 of 7
+678:=====PDFPAGE 8=====
+723:=====PDFPAGE 9=====
+== between 2015 and 2019: 21 
+== inverted U-shaped relationship: 23 403 505 610 
+== not without limitations: 535 
+== Second, LinkedIn is a professional: 569 
+== 600,000 new jobs: 21 45 
+== endogenous, making: 53 
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Pages confirmed. Writing the Rajkumar section.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cat &gt;&gt; &#34;/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_A_influence_homophily_note.md&#34; &lt;&lt;&#39;EOF&#39;
+
+## 12. Rajkumar, Saint-Jacques, Bojinov, Brynjolfsson &amp; Aral 2022 — A causal test of the strength of weak ties
+
+**Citation.** Rajkumar, Karthik, Guillaume Saint-Jacques, Iavor Bojinov, Erik Brynjolfsson, and Sinan Aral. 2022. &#34;A Causal Test of the Strength of Weak Ties.&#34; *Science* 377 (6612): 1304–1310. DOI: 10.1126/science.abl4476.
+
+**Page-number note.** The PDF footers read &#34;Rajkumar et al., Science 377, 1304–1310 (2022) … n of 7&#34;; individual journal page numbers are not printed. Cites below give &#34;p. 1303 + n (n of 7)&#34;, which assumes the 7 article pages map in order onto 1304–1310 (assistant inference from the footer; consistent with the 7-page range).
+
+**Data / setting / sample / years.** LinkedIn &#34;People You May Know&#34; (PYMK) recommendation experiments, retrospectively analyzed. &#34;We performed a retrospective analysis of the randomization created by the PYMK experiments conducted by LinkedIn between 2015 and 2019 in two waves. The first wave examined a global experiment conducted in 2015 that had over 4 million experimental subjects and created over 19 million new connections. [...] The second wave spanned every continent and US state, had more than 16 million experimental subjects, created ~2 billion new connections and recorded more than 70 million job applications that led to 600,000 new jobs during the experimental period&#34; (p. 1304, 1 of 7). Outcome &#34;job transmission&#34; = A works at company c, B later works at c at least one year later, and A and B were connected at least one year before B&#39;s move (p. 1304, 1 of 7). Tie strength = number of mutual connections, and interaction intensity (messaging).
+
+**Design.** Randomized experiments (A/B tests of a tie-recommendation algorithm) analyzed as intent-to-treat with instrumental variables, compared against ordinary least squares (OLS) on the same data.
+
+**Main findings (verbatim).**
+
+&gt; &#34;The experiments randomly varied the prevalence of weak ties in the networks of over 20 million people over a 5-year period, during which 2 billion new ties and 600,000 new jobs were created. The results provided experimental causal evidence supporting the strength of weak ties and suggested three revisions to the theory. First, the strength of weak ties was nonlinear. Statistical analysis found an inverted U-shaped relationship between tie strength and job transmission such that weaker ties increased job transmission but only to a point, after which there were diminishing marginal returns to tie weakness. [...] Third, the strength of weak ties varied by industry. Whereas weak ties increased job mobility in more digital industries, strong ties increased job mobility in less digital industries.&#34; (Abstract, p. 1304, 1 of 7)
+
+&gt; &#34;Although the OLS analysis replicated previous findings of an apparent paradox of weak ties in which strong ties were more strongly correlated with job transmissions, the experimental IV analysis reversed this result and suggested a nonlinear relationship between tie strength and job transmission in which medium strength ties were the most effective in generating job mobility.&#34; (p. 1307, 4 of 7)
+
+**Sorting vs. influence.** States the endogeneity problem in labor-market terms: &#34;network ties and labor market outcomes are endogenous, making the causal link between weak ties and job placement elusive. Individuals&#39; labor market outcomes are likely to be determined by and to simultaneously determine their social networks. The evolution of social networks and job trajectories are also likely correlated with unobserved factors such as effort, ability, and sociability, which confound empirical identification of the link between weak ties and jobs.&#34; (p. 1304, 1 of 7). Randomizing which ties are recommended breaks this. The OLS-vs-IV reversal on the same data is a concrete demonstration that sorting can flip the sign of an observational network conclusion.
+
+**Limitations (authors&#39; own).**
+
+&gt; &#34;First, although PYMK experiments provided a robust channel through which to introduce experimental variation into the evolution of human social networks, we could not compel LinkedIn users to take these recommendations. Therefore a degree of self selection exists in who acted on the connection recommendations.&#34; (p. 1309, 6 of 7)
+
+&gt; &#34;Second, LinkedIn is a professional social network and may be different than other online social networks such as Facebook or offline social relationships such as those originally studied by Granovetter.&#34; (p. 1309, 6 of 7) **[single system]**
+
+&gt; &#34;As the statistical power of the node-level analysis was not sufficient to confirm individual differences between the effects of strong, medium, and weak ties in our experiments, we also analyzed these relationships at the more granular edge level.&#34; (p. 1307, 4 of 7)
+
+- Job transmission is inferred from self-reported LinkedIn employment histories. **[imperfect measure]** Does not model why a tie helps (information vs. referral vs. advocacy). **[no model of mechanism]**
+- Outcome is job mobility, which is closer to selection than any other paper here, but it is a move between employers, not the outcome of a competition among candidates for a fixed slot; competitors and the employer&#39;s decision are not observed. **[outcome is not selection]** (partial; assistant judgment)
+
+**Channel / source (assistant judgment).** Selection-adjacent (access to job opportunities through peers). Source: peers, with the platform (organization) as the party that sets tie formation. Strongest bridge in this cluster from network structure to a labor-market allocation outcome.
+
+---
+EOF
+cd /tmp/nsA &amp;&amp; sed -n &#39;1,120p&#39; 13_p.txt | grep -v &#34;^\s*$&#34;</summary>
+```bash
+cat >> "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_A_influence_homophily_note.md" <<'EOF'
+
+## 12. Rajkumar, Saint-Jacques, Bojinov, Brynjolfsson & Aral 2022 — A causal test of the strength of weak ties
+
+**Citation.** Rajkumar, Karthik, Guillaume Saint-Jacques, Iavor Bojinov, Erik Brynjolfsson, and Sinan Aral. 2022. "A Causal Test of the Strength of Weak Ties." *Science* 377 (6612): 1304–1310. DOI: 10.1126/science.abl4476.
+
+**Page-number note.** The PDF footers read "Rajkumar et al., Science 377, 1304–1310 (2022) … n of 7"; individual journal page numbers are not printed. Cites below give "p. 1303 + n (n of 7)", which assumes the 7 article pages map in order onto 1304–1310 (assistant inference from the footer; consistent with the 7-page range).
+
+**Data / setting / sample / years.** LinkedIn "People You May Know" (PYMK) recommendation experiments, retrospectively analyzed. "We performed a retrospective analysis of the randomization created by the PYMK experiments conducted by LinkedIn between 2015 and 2019 in two waves. The first wave examined a global experiment conducted in 2015 that had over 4 million experimental subjects and created over 19 million new connections. [...] The second wave spanned every continent and US state, had more than 16 million experimental subjects, created ~2 billion new connections and recorded more than 70 million job applications that led to 600,000 new jobs during the experimental period" (p. 1304, 1 of 7). Outcome "job transmission" = A works at company c, B later works at c at least one year later, and A and B were connected at least one year before B's move (p. 1304, 1 of 7). Tie strength = number of mutual connections, and interaction intensity (messaging).
+
+**Design.** Randomized experiments (A/B tests of a tie-recommendation algorithm) analyzed as intent-to-treat with instrumental variables, compared against ordinary least squares (OLS) on the same data.
+
+**Main findings (verbatim).**
+
+> "The experiments randomly varied the prevalence of weak ties in the networks of over 20 million people over a 5-year period, during which 2 billion new ties and 600,000 new jobs were created. The results provided experimental causal evidence supporting the strength of weak ties and suggested three revisions to the theory. First, the strength of weak ties was nonlinear. Statistical analysis found an inverted U-shaped relationship between tie strength and job transmission such that weaker ties increased job transmission but only to a point, after which there were diminishing marginal returns to tie weakness. [...] Third, the strength of weak ties varied by industry. Whereas weak ties increased job mobility in more digital industries, strong ties increased job mobility in less digital industries." (Abstract, p. 1304, 1 of 7)
+
+> "Although the OLS analysis replicated previous findings of an apparent paradox of weak ties in which strong ties were more strongly correlated with job transmissions, the experimental IV analysis reversed this result and suggested a nonlinear relationship between tie strength and job transmission in which medium strength ties were the most effective in generating job mobility." (p. 1307, 4 of 7)
+
+**Sorting vs. influence.** States the endogeneity problem in labor-market terms: "network ties and labor market outcomes are endogenous, making the causal link between weak ties and job placement elusive. Individuals' labor market outcomes are likely to be determined by and to simultaneously determine their social networks. The evolution of social networks and job trajectories are also likely correlated with unobserved factors such as effort, ability, and sociability, which confound empirical identification of the link between weak ties and jobs." (p. 1304, 1 of 7). Randomizing which ties are recommended breaks this. The OLS-vs-IV reversal on the same data is a concrete demonstration that sorting can flip the sign of an observational network conclusion.
+
+**Limitations (authors' own).**
+
+> "First, although PYMK experiments provided a robust channel through which to introduce experimental variation into the evolution of human social networks, we could not compel LinkedIn users to take these recommendations. Therefore a degree of self selection exists in who acted on the connection recommendations." (p. 1309, 6 of 7)
+
+> "Second, LinkedIn is a professional social network and may be different than other online social networks such as Facebook or offline social relationships such as those originally studied by Granovetter." (p. 1309, 6 of 7) **[single system]**
+
+> "As the statistical power of the node-level analysis was not sufficient to confirm individual differences between the effects of strong, medium, and weak ties in our experiments, we also analyzed these relationships at the more granular edge level." (p. 1307, 4 of 7)
+
+- Job transmission is inferred from self-reported LinkedIn employment histories. **[imperfect measure]** Does not model why a tie helps (information vs. referral vs. advocacy). **[no model of mechanism]**
+- Outcome is job mobility, which is closer to selection than any other paper here, but it is a move between employers, not the outcome of a competition among candidates for a fixed slot; competitors and the employer's decision are not observed. **[outcome is not selection]** (partial; assistant judgment)
+
+**Channel / source (assistant judgment).** Selection-adjacent (access to job opportunities through peers). Source: peers, with the platform (organization) as the party that sets tie formation. Strongest bridge in this cluster from network structure to a labor-market allocation outcome.
+
+---
+EOF
+cd /tmp/nsA && sed -n '1,120p' 13_p.txt | grep -v "^\s*$"
+```
+
+```
+=====PDFPAGE 1=====
+    Social Networks and Labor Markets:
+       How Strong Ties Relate to Job
+           Finding on Facebook’s
+              Social Network
+                        Laura K. Gee, Tufts University
+                     Jason Jones, Stony Brook University
+                             Moira Burke, Facebook
+    Social networks are important for ﬁnding jobs, but which ties are
+    most useful? Granovetter has suggested that “weak ties” are more
+    valuable than “strong ties,” since strong ties have redundant infor-
+    mation, while weak ties have new information. Using 6 million
+    Facebook users’ data, we ﬁnd evidence for the opposite. We proxy
+    for job help by identifying people who eventually work with a pre-
+    existing friend. Using objective tie strength measures and our job
+    help proxy, we ﬁnd that most people are helped through one of
+    their numerous weak ties but a single stronger tie is signiﬁcantly
+    more valuable at the margin.
+   We would like to thank James Fowler, who has been instrumental throughout
+this project. We would also like to thank Jim Andreoni, Julie Cullen, Gordon Dahl,
+Philip Babcock, Shane Greenstein, Leah Lakdawala, Yannis Ioannides, Kelsey Jack,
+George Norman, Melissa McInerney, Marshall Van Alstyne, and numerous semi-
+nar participants for their helpful comments during the writing of this paper. A spe-
+cial thanks to the people at Facebook, especially Cameron Marlow and Dean
+Eckles. Contact the corresponding author, Laura K. Gee, at laura.gee@tufts.edu.
+Information concerning access to the data used in this article is available as supple-
+mentary material online.
+  [ Journal of Labor Economics, 2017, vol. 35, no. 2]
+  © 2017 by The University of Chicago. All rights reserved. 0734-306X/2017/3502-0002$10.00
+  Submitted April 27, 2015; Accepted January 13, 2016; Electronically published January 26, 2017
+                                                485
+=====PDFPAGE 2=====
+486                                    
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Gee et al.: PDF p. n = printed p. 484 + n. Searching for sample years, the job-help proxy caveats, homophily handling, and the placebo test.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; grep -n -i -E &#34;PDFPAGE|homophil|placebo|limitation|caveat|cannot|unable|proxy|20(0[0-9]|1[0-5])|United States|U\.S\.|6 million|mutual|referr|conclusion&#34; 13_p.txt | head -100</summary>
+```bash
+cd /tmp/nsA && grep -n -i -E "PDFPAGE|homophil|placebo|limitation|caveat|cannot|unable|proxy|20(0[0-9]|1[0-5])|United States|U\.S\.|6 million|mutual|referr|conclusion" 13_p.txt | head -100
+```
+
+```
+2:=====PDFPAGE 1=====
+17:    mation, while weak ties have new information. Using 6 million
+18:    Facebook users’ data, we ﬁnd evidence for the opposite. We proxy
+21:    help proxy, we ﬁnd that most people are helped through one of
+39:  Submitted April 27, 2015; Accepted January 13, 2016; Electronically published January 26, 2017
+44:=====PDFPAGE 2=====
+52:over and higher productivity (Burks et al. 2015). Previous theoretical, ex-
+56:(e.g., Calvo-Armengol and Jackson 2004; Bayer, Ross, and Topa 2008; Bea-
+57:man 2012). Although there is an average improvement, very little is known
+65:users. We are unable to directly observe if these 6 million users were helped
+66:by any of their friends, so we create a proxy variable for job help by iden-
+78:2014). In our paper, we measure tie strength either as the number of times
+79:two people interact in a year or as the number of mutual friends they share.
+81:mutual friends. Using these tie strength measures, our ﬁndings reconcile
+90:   See Marsden and Gorman (2001), Ioannides and Loury (2004), Jackson (2011),
+91:Munshi (2011), and Topa (2011).
+93:=====PDFPAGE 3=====
+111:tie strength is endogenous, we also use a placebo test through which we ar-
+120:through formal referral programs or through more informal means, such
+122:for an interview. In the United States, between 15% and 23% of workers
+125:grams encouraging referrals (Rees 1966; Granovetter 1973; Ioannides and
+126:Loury 2004; Topa 2011; Burks et al. 2015).
+127:   Although this paper will concentrate on the United States, the use of so-
+140:ties result in higher income (Tassier 2006).
+142:=====PDFPAGE 4=====
+147:Yakubovich (2005) ﬁnds that self-reported weaker ties are most helpful in
+150:between different groups or across structural holes (Burt 2004), thus offer-
+152:(2004) capture this same dynamic in a model in which when an unemployed
+166:of strong ties, such as geographic distance (Bayer et al. 2008), length of ten-
+167:ure at a previously shared workplace (Cingano and 
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; sed -n &#39;262,285p;370,412p;650,682p&#39; 13_p.txt | grep -v &#34;^\s*$&#34;; grep -n -i -E &#34;homophil|placebo|endogen|limitation|caution|causal|conclu|selection&#34; 13_p.txt | awk -F: &#39;$1&gt;682&#39; | head -50</summary>
+```bash
+cd /tmp/nsA && sed -n '262,285p;370,412p;650,682p' 13_p.txt | grep -v "^\s*$"; grep -n -i -E "homophil|placebo|endogen|limitation|caution|causal|conclu|selection" 13_p.txt | awk -F: '$1>682' | head -50
+```
+
+```
+   Facebook users are not a randomly selected sample of the US population.
+However, in the United States, over 54% of adults have a Facebook ac-
+count, and 40% of social network users have “friended” their closest friends
+on social networking websites (Hampton et al. 2011; Bakshy et al. 2012;
+Burke and Kraut 2013). We restrict our analysis to users and friends who
+list employer information and who have been on Facebook for at least
+1 year. These requirements allow us to measure if a person sequentially be-
+gins to work at the same ﬁrm as a friend, which we believe is a proxy for
+receiving help from that friend in the job search process (as explained in
+Subsecs. II.A and II.B). We only use US Facebook users. We remove com-
+mon nonemployers that people list in their employer information, such as
+“stay at home parent” (see Appendix Section 1.1; the appendix is available
+online). We use those ages 16–64, so individuals are of working age. Finally,
+we restrict the sample to those who list some education on Facebook, be-
+cause the lack of education may simply mean that a person has chosen not
+to self-report this information. These restrictions leave 6 million individuals,
+or about 4% of the US Facebook population. When we connect these 6 mil-
+lion individuals back to their friends, we have a total of 260 million dyads.
+Of these 6 million people, about 400,000 sequentially work with a pre-
+existing social tie, which we believe is a proxy for getting help from that
+tie (explained in Sec. II.A).
+   All our analysis involves de-identiﬁed data and takes place at the dyad
+level. This allows us to use a random sample of dyads, making an assump-
+of a sequential job requires us to restrict the sample to those who list an em-
+ployer and have been on Facebook at least 1 year since the user’s most re-
+cent start date. All Facebook data were anonymized and analyzed in aggre-
+gate.
+   Using this sequential job measure, we found that 7% of the 6 million
+users, about 400,000 users overal
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; sed -n &#39;815,830p;858,870p&#39; 13_p.txt | grep -v &#34;^\s*$&#34;; grep -n &#34;Conclusion\|CONCLUSION\|V\. \|VI\. &#34; 13_p.txt | head; grep -n &#34;PDFPAGE&#34; 13_p.txt | sed -n &#39;14,40p&#39; | tr &#39;\n&#39; &#39; &#39;</summary>
+```bash
+cd /tmp/nsA && sed -n '815,830p;858,870p' 13_p.txt | grep -v "^\s*$"; grep -n "Conclusion\|CONCLUSION\|V\. \|VI\. " 13_p.txt | head; grep -n "PDFPAGE" 13_p.txt | sed -n '14,40p' | tr '\n' ' '
+```
+
+```
+The user ﬁxed effect, Ei, controls for all observable and unobservable attri-
+butes about the individual. For example, an extroverted individual may be
+more likely to have a sequential job and have higher levels of tie strength.
+With the inclusion of Ei, the variation in tie strength, Tik, comes from var-
+iations within a user’s friendships instead of across all dyads.
+   Additionally, dyad-level variables may affect tie strength and the likeli-
+hood of a sequential job. Dyads with higher tie strength may be more likely
+to be similar (homophily), and so these dyads may be more likely to work at
+the same employers, even in the absence of actual help through their so-
+   21
+      Clearly eik is not independent and identically distributed because we have mul-
+tiple observations within each individual i that are not independent of each other, so
+we have clustered our standard errors at the user level. There is the additional worry
+that eik for individual i may be correlated with ejh; however, the use of a random sub-
+sample of only 1 million dyads mitigates this concern. The Facebook network is
+user ﬁxed effect and dyad-level controls, which are computed from differ-
+ences between the user- and friend-level variables.
+    To conﬁrm the Conditional Weak Ties Hypothesis, we would need the
+coefﬁcients on the tie strength measures, b in equation (2), to be negative.
+We would like to emphasize that these results may not be the true causal
+effects of tie strength on the likelihood of a sequential job. The principal
+concern is that tie strength Tik is endogenous, E[Tikeik] ≠ 0. Even with this
+endogeneity, we can conﬁdently make statements about the correlation be-
+tween tie strength and the likelihood of a sequential job after controlling for
+unobservable individual heterogeneity and observable dyad heterogeneity.
+    It is not clear which direction our estimates of b will be biased. For exam-
+ple, a dyad made up of two economists who work in the same subﬁeld might
+be more lik
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; sed -n &#39;1287,1345p&#39; 13_p.txt | grep -v &#34;^\s*$&#34;; sed -n &#39;1136,1150p&#39; 13_p.txt | grep -v &#34;^\s*$&#34;</summary>
+```bash
+cd /tmp/nsA && sed -n '1287,1345p' 13_p.txt | grep -v "^\s*$"; sed -n '1136,1150p' 13_p.txt | grep -v "^\s*$"
+```
+
+```
+=====PDFPAGE 28=====
+512                                                                        Gee et al.
+   It is interesting that we ﬁnd such robust support for a positive relation-
+ship between tie strength and the likelihood of a sequential job because
+there is a strong intuitive argument for the importance of novel information
+from a weak tie. As another proxy for novel information, we use whether a
+friend was formed through a pre-existing friend, and we ﬁnd that non-
+friend-of-friends are generally more positively correlated with the likeli-
+hood of a sequential job but that the relationship is not statistically signif-
+icant (Appendix Section 1.6 and appendix table 7).
+                           V. Concluding Remarks
+   One of the most inﬂuential claims in the literature about social networks
+and labor markets has been Granovetter’s “strength of weak ties” result.
+Granovetter’s empirical work found that most jobs came from a weak rather
+than a stronger tie, but his data did not allow him to disentangle if this meant
+that weak ties are more useful collectively or individually or both. We re-
+examine that result in further depth using two different hypotheses based
+on the information that is available for analysis. We use a proxy for job help
+by identifying users who eventually work at the same employer as a pre-
+existing friend. And we use two objective tie strength measures: amount
+of contact and number of mutual friends. With these data, we ﬁnd, like
+the original paper, support for the Descriptive Weak Ties Hypothesis,
+which ﬁnds that collectively most jobs came from weak rather than strong
+ties. We also ﬁnd that the majority of job seekers began working with a
+weaker rather than a stronger tie. However, the distribution of tie strength
+in the population at large is also highly skewed toward weak ties, so weak
+ties are collectively important because weak ties are numerous in social net-
+works.
+   We test our second hypothesis, the Conditional Weak Ties Hypo
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; sed -n &#39;448,456p;500,508p&#39; 13_p.txt</summary>
+```bash
+cd /tmp/nsA && sed -n '448,456p;500,508p' 13_p.txt
+```
+
+```
+   FIG. 1.—Sequential job examples. This ﬁgure shows two examples of the time-
+line of events where a user would be identiﬁed as having obtained a sequential job
+from a friend. We are ambivalent about the timing of Facebook friendship as com-
+pared to a friend’s start date, because the time of Facebook friendship is only ob-
+servable from 2007 onward, whereas the start date can take values before 2007. The
+ﬁgure shows the time period contact-based tie strength is measured over, as well as
+the point in time mutual friends are measured. A color version of this ﬁgure is avail-
+able online.
+
+      Consider user A with friends B and C. If A tagged B two times last year and C
+six times last year, we would say that 25% (2=ð2 1 6Þ) of user A’s tags were to B
+and that the remaining 75% were to C. The denominator uses friends we observe
+in our data rather than all Facebook friends (e.g., only US users, ages 16–64). At the
+mean start date (November 2010) for the 6 million US users with education and em-
+ployer information, the modes of communication, from most to least used, were
+Comment, Like, Message, Wall Post, Tag, Poke, and Chat. In addition to scaled
+tie strength, we have done the same analysis using the raw number of tags and posts.
+For this test, the distributions are similar (appendix ﬁgure 4), and the regression re-
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Writing the Gee, Jones & Burke section (the last paper).
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cat &gt;&gt; &#34;/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_A_influence_homophily_note.md&#34; &lt;&lt;&#39;EOF&#39;
+
+## 13. Gee, Jones &amp; Burke 2017 — Social networks and labor markets: how strong ties relate to job finding on Facebook&#39;s social network
+
+**Citation.** Gee, Laura K., Jason Jones, and Moira Burke. 2017. &#34;Social Networks and Labor Markets: How Strong Ties Relate to Job Finding on Facebook&#39;s Social Network.&#34; *Journal of Labor Economics* 35 (2): 485–518. DOI: 10.1086/686225. (PDF p. n = printed p. 484 + n.)
+
+**Data / setting / sample / years.** De-identified US Facebook data. Restrictions: US users aged 16–64 who list employer and education and have been on Facebook at least a year; &#34;These restrictions leave 6 million individuals, or about 4% of the US Facebook population. When we connect these 6 million individuals back to their friends, we have a total of 260 million dyads. Of these 6 million people, about 400,000 sequentially work with a pre-existing social tie&#34; (p. 490). Regressions use a random subsample of 1 million dyads (p. 501, fn. 21). Timing: Facebook friendship &#34;is only observable from 2007 onward&#34;; &#34;mean start date (November 2010)&#34; of users&#39; jobs (p. 494; figure caption and footnote text). Tie strength = share of contact (tags, posts, etc.) in the prior year, and number of mutual friends.
+
+**Design.** Observational. Dyad-level regressions with user fixed effects and dyad controls, plus a placebo test that reverses who joined the employer first to bound the causal portion (pp. 501–503, 509).
+
+**Main findings (verbatim).**
+
+&gt; &#34;Using 6 million Facebook users&#39; data, we find evidence for the opposite. We proxy for job help by identifying people who eventually work with a preexisting friend. Using objective tie strength measures and our job help proxy, we find that most people are helped through one of their numerous weak ties but a single stronger tie is significantly more valuable at the margin.&#34; (Abstract, p. 485; &#34;preexisting&#34; is hyphenated across a line break in the PDF)
+
+&gt; &#34;For example, increasing the amount of contact with a friend by 10 percentage points increases the likelihood that one will eventually work with that friend by at least 20%.&#34; (p. 487)
+
+&gt; &#34;In short, a person is most likely to eventually work with a weak tie because weak ties collectively make up most of a person&#39;s social network. However, strengthening an existing tie should increase the probability that one will work with that specific friend.&#34; (p. 513)
+
+Framing directly relevant to selection among competitors:
+
+&gt; &#34;If social ties of differing strength benefit more, then this may result in the allocation of a job away from one person and toward another who has the right type of connection (weak or strong) but who is not necessarily a better worker.&#34; (p. 486)
+
+**Sorting vs. influence.** Names homophily as a dyad-level confound: &#34;Dyads with higher tie strength may be more likely to be similar (homophily), and so these dyads may be more likely to work at the same employers, even in the absence of actual help through their social connection&#34; (p. 501; the phrase after &#34;their so-&#34; continues on the next line; check the PDF if quoting the tail). Takes the network as given: &#34;The network itself is endogenously determined, and the level of tie strength between each dyad is also endogenous. We are most interested in the question of how tie strength affects sequential jobs, so we take the network as given. Our empirical strategy aims to address the second type of endogeneity&#34; (p. 498; footnote marker &#34;18&#34; omitted). User fixed effects absorb individual traits; the placebo reversal is used to bound remaining dyad-level confounding.
+
+**Limitations (authors&#39; own).**
+
+&gt; &#34;We would like to emphasize that these results may not be the true causal effects of tie strength on the likelihood of a sequential job. The principal concern is that tie strength Tik is endogenous, E[Tikeik] ≠ 0.&#34; (p. 502) (This is the sentence Rajkumar et al. 2022 quote as motivation; paper 12.)
+
+&gt; &#34;To find the causal impact of tie strength on the likelihood of a sequential job from that friend, one would ideally observe an experiment that randomly assigns first networks and then tie strength. We have found no such experiment&#34; (p. 498)
+
+&gt; &#34;Our sequential job definition is very conservative and cannot measure job help from non-Facebook friends. Additionally Facebook is not primarily a professional social networking website, so we are likely missing many purely professional connections; thus, we think of our 7% rate as a lower bound on the amount of job help in this population.&#34; (pp. 492–493) **[imperfect measure]**
+
+- &#34;Facebook users are not a randomly selected sample of the US population.&#34; (p. 490) **[single system]**
+- Job help is a proxy (later co-employment), validated by a permutation test and a small survey (&#34;matching the survey-provided friends&#39; names was possible for 63 respondents, or 7,497 dyads&#34;, p. 493). **[imperfect measure]** **[no model of mechanism]**
+- The outcome is ending up at a friend&#39;s employer, not winning a contested slot against identified rivals; the employer&#39;s decision is unobserved. **[outcome is not selection]** (partial; assistant judgment)
+
+**Channel / source (assistant judgment).** Selection (job allocation) via peers; the p. 486 sentence explicitly states the selection-channel worry that network position, not productivity, can decide who gets the job. Evidence is observational and the competing applicants are not observed.
+
+---
+EOF
+echo done</summary>
+```bash
+cat >> "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_A_influence_homophily_note.md" <<'EOF'
+
+## 13. Gee, Jones & Burke 2017 — Social networks and labor markets: how strong ties relate to job finding on Facebook's social network
+
+**Citation.** Gee, Laura K., Jason Jones, and Moira Burke. 2017. "Social Networks and Labor Markets: How Strong Ties Relate to Job Finding on Facebook's Social Network." *Journal of Labor Economics* 35 (2): 485–518. DOI: 10.1086/686225. (PDF p. n = printed p. 484 + n.)
+
+**Data / setting / sample / years.** De-identified US Facebook data. Restrictions: US users aged 16–64 who list employer and education and have been on Facebook at least a year; "These restrictions leave 6 million individuals, or about 4% of the US Facebook population. When we connect these 6 million individuals back to their friends, we have a total of 260 million dyads. Of these 6 million people, about 400,000 sequentially work with a pre-existing social tie" (p. 490). Regressions use a random subsample of 1 million dyads (p. 501, fn. 21). Timing: Facebook friendship "is only observable from 2007 onward"; "mean start date (November 2010)" of users' jobs (p. 494; figure caption and footnote text). Tie strength = share of contact (tags, posts, etc.) in the prior year, and number of mutual friends.
+
+**Design.** Observational. Dyad-level regressions with user fixed effects and dyad controls, plus a placebo test that reverses who joined the employer first to bound the causal portion (pp. 501–503, 509).
+
+**Main findings (verbatim).**
+
+> "Using 6 million Facebook users' data, we find evidence for the opposite. We proxy for job help by identifying people who eventually work with a preexisting friend. Using objective tie strength measures and our job help proxy, we find that most people are helped through one of their numerous weak ties but a single stronger tie is significantly more valuable at the margin." (Abstract, p. 485; "preexisting" is hyphenated across a line break in the PDF)
+
+> "For example, increasing the amount of contact with a friend by 10 percentage points increases the likelihood that one will eventually work with that friend by at least 20%." (p. 487)
+
+> "In short, a person is most likely to eventually work with a weak tie because weak ties collectively make up most of a person's social network. However, strengthening an existing tie should increase the probability that one will work with that specific friend." (p. 513)
+
+Framing directly relevant to selection among competitors:
+
+> "If social ties of differing strength benefit more, then this may result in the allocation of a job away from one person and toward another who has the right type of connection (weak or strong) but who is not necessarily a better worker." (p. 486)
+
+**Sorting vs. influence.** Names homophily as a dyad-level confound: "Dyads with higher tie strength may be more likely to be similar (homophily), and so these dyads may be more likely to work at the same employers, even in the absence of actual help through their social connection" (p. 501; the phrase after "their so-" continues on the next line; check the PDF if quoting the tail). Takes the network as given: "The network itself is endogenously determined, and the level of tie strength between each dyad is also endogenous. We are most interested in the question of how tie strength affects sequential jobs, so we take the network as given. Our empirical strategy aims to address the second type of endogeneity" (p. 498; footnote marker "18" omitted). User fixed effects absorb individual traits; the placebo reversal is used to bound remaining dyad-level confounding.
+
+**Limitations (authors' own).**
+
+> "We would like to emphasize that these results may not be the true causal effects of tie strength on the likelihood of a sequential job. The principal concern is that tie strength Tik is endogenous, E[Tikeik] ≠ 0." (p. 502) (This is the sentence Rajkumar et al. 2022 quote as motivation; paper 12.)
+
+> "To find the causal impact of tie strength on the likelihood of a sequential job from that friend, one would ideally observe an experiment that randomly assigns first networks and then tie strength. We have found no such experiment" (p. 498)
+
+> "Our sequential job definition is very conservative and cannot measure job help from non-Facebook friends. Additionally Facebook is not primarily a professional social networking website, so we are likely missing many purely professional connections; thus, we think of our 7% rate as a lower bound on the amount of job help in this population." (pp. 492–493) **[imperfect measure]**
+
+- "Facebook users are not a randomly selected sample of the US population." (p. 490) **[single system]**
+- Job help is a proxy (later co-employment), validated by a permutation test and a small survey ("matching the survey-provided friends' names was possible for 63 respondents, or 7,497 dyads", p. 493). **[imperfect measure]** **[no model of mechanism]**
+- The outcome is ending up at a friend's employer, not winning a contested slot against identified rivals; the employer's decision is unobserved. **[outcome is not selection]** (partial; assistant judgment)
+
+**Channel / source (assistant judgment).** Selection (job allocation) via peers; the p. 486 sentence explicitly states the selection-channel worry that network position, not productivity, can decide who gets the job. Evidence is observational and the competing applicants are not observed.
+
+---
+EOF
+echo done
+```
+
+```
+done
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Verifying two Gee page/quote details before the synthesis: the end of the homophily sentence and the page of the "November 2010" line.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; grep -n -A4 &#34;Dyads with higher tie strength&#34; 13_p.txt | grep -v &#34;^\S*-\s*$&#34;; awk &#39;NR&gt;=840 &amp;&amp; NR&lt;=846&#39; 13_p.txt</summary>
+```bash
+cd /tmp/nsA && grep -n -A4 "Dyads with higher tie strength" 13_p.txt | grep -v "^\S*-\s*$"; awk 'NR>=840 && NR<=846' 13_p.txt
+```
+
+```
+821:hood of a sequential job. Dyads with higher tie strength may be more likely
+822-to be similar (homophily), and so these dyads may be more likely to work at
+823-the same employers, even in the absence of actual help through their so-
+825-   21
+=====PDFPAGE 18=====
+502                                                                         Gee et al.
+
+cial networks. Ideally, we would use a dyad ﬁxed effect to control for this
+source of omitted variable bias, but we only observe each dyad a single time.
+The Facebook data, however, have a rich set of dyad-level control variables
+that are predictive in decision making (Holzer 1987; Leicht and Marx 1997;
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+My Gee homophily quote had the wrong ending ("social connection"); the printed text is "social networks" and it crosses onto p. 502. Fixing that and the page for the November 2010 line.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2"><details>
+<summary>Tool use: **edit_file_v2** • Edit file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_A_influence_homophily_note.md</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2"><details>
+<summary>Tool use: **edit_file_v2** • Edit file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_A_influence_homophily_note.md</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+All 13 sections are written. Before the synthesis, I'll machine-check every quoted string in the note against the raw PDF text, so any transcription slip shows up.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; for i in 01 02 03 04 05 06 07 08 09 10 11 12 13; do pdftotext $i.pdf ${i}_raw.txt 2&gt;/dev/null; done; cat &gt; check.py &lt;&lt;&#39;EOF&#39;
+import re,unicodedata
+note=open(&#39;/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_A_influence_homophily_note.md&#39;,encoding=&#39;utf-8&#39;).read()
+def norm(s):
+    s=unicodedata.normalize(&#39;NFKC&#39;,s)
+    s=s.replace(&#39;\u2019&#39;,&#34;&#39;&#34;).replace(&#39;\u2018&#39;,&#34;&#39;&#34;).replace(&#39;\u201c&#39;,&#39;&#34;&#39;).replace(&#39;\u201d&#39;,&#39;&#34;&#39;).replace(&#39;``&#39;,&#39;&#34;&#39;).replace(&#34;&#39;&#39;&#34;,&#39;&#34;&#39;)
+    s=re.sub(r&#39;-\s*\n\s*&#39;,&#39;&#39;,s)   # dehyphenate line breaks
+    s=re.sub(r&#39;[\u2010-\u2015\-]&#39;,&#39;-&#39;,s)
+    s=s.replace(&#39;⫺&#39;,&#39;-&#39;).replace(&#39;⬎&#39;,&#39;&gt;&#39;).replace(&#39;⬍&#39;,&#39;&lt;&#39;).replace(&#39;⫽&#39;,&#39;=&#39;)
+    s=re.sub(r&#39;\s+&#39;,&#39; &#39;,s)
+    s=s.replace(&#39;-&#39;,&#39;&#39;)  # drop hyphens entirely to avoid soft-hyphen mismatch
+    s=s.replace(&#39;&#34;&#39;,&#39;&#39;).replace(&#34;&#39;&#34;,&#39;&#39;)
+    return s.lower()
+secs=re.split(r&#39;\n## (\d+)\. &#39;,note)
+res=[]
+for k in range(1,len(secs),2):
+    n=int(secs[k]); body=secs[k+1]
+    src=norm(open(&#39;%02d_raw.txt&#39;%n,encoding=&#39;utf-8&#39;,errors=&#39;replace&#39;).read())
+    src2=norm(open(&#39;%02d.txt&#39;%n,encoding=&#39;utf-8&#39;,errors=&#39;replace&#39;).read())
+    quotes=re.findall(r&#39;&#34;([^&#34;]{30,}?)&#34;&#39;,body)
+    for q in quotes:
+        q2=q.replace(&#39;[—]&#39;,&#39;-&#39;)
+        parts=[p for p in re.split(r&#39;\[\.\.\.\]|\[[^\]]*\]&#39;,q2)]
+        bad=[]
+        for p in parts:
+            p=norm(p).strip(&#39; .,;&#39;)
+            if len(p)&lt;12: continue
+            if p not in src and p not in src2: bad.append(p[:90])
+        if bad: res.append((n,q[:70],bad))
+for r in res: print(r)
+print(&#39;checked&#39;)
+EOF
+python3 check.py</summary>
+```bash
+cd /tmp/nsA && for i in 01 02 03 04 05 06 07 08 09 10 11 12 13; do pdftotext $i.pdf ${i}_raw.txt 2>/dev/null; done; cat > check.py <<'EOF'
+import re,unicodedata
+note=open('/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_A_influence_homophily_note.md',encoding='utf-8').read()
+def norm(s):
+    s=unicodedata.normalize('NFKC',s)
+    s=s.replace('\u2019',"'").replace('\u2018',"'").replace('\u201c','"').replace('\u201d','"').replace('``','"').replace("''",'"')
+    s=re.sub(r'-\s*\n\s*','',s)   # dehyphenate line breaks
+    s=re.sub(r'[\u2010-\u2015\-]','-',s)
+    s=s.replace('⫺','-').replace('⬎','>').replace('⬍','<').replace('⫽','=')
+    s=re.sub(r'\s+',' ',s)
+    s=s.replace('-','')  # drop hyphens entirely to avoid soft-hyphen mismatch
+    s=s.replace('"','').replace("'",'')
+    return s.lower()
+secs=re.split(r'\n## (\d+)\. ',note)
+res=[]
+for k in range(1,len(secs),2):
+    n=int(secs[k]); body=secs[k+1]
+    src=norm(open('%02d_raw.txt'%n,encoding='utf-8',errors='replace').read())
+    src2=norm(open('%02d.txt'%n,encoding='utf-8',errors='replace').read())
+    quotes=re.findall(r'"([^"]{30,}?)"',body)
+    for q in quotes:
+        q2=q.replace('[—]','-')
+        parts=[p for p in re.split(r'\[\.\.\.\]|\[[^\]]*\]',q2)]
+        bad=[]
+        for p in parts:
+            p=norm(p).strip(' .,;')
+            if len(p)<12: continue
+            if p not in src and p not in src2: bad.append(p[:90])
+        if bad: res.append((n,q[:70],bad))
+for r in res: print(r)
+print('checked')
+EOF
+python3 check.py
+```
+
+```
+(1, '; 12,067 egos plus alters connected at some point, 1971–2003. Ties rec', ['12,067 egos plus alters connected at some point, 19712003. ties reconstructed from archive'])
+(1, '). Second, egos and alters might share attributes or jointly experienc', ['). second, egos and alters might share attributes or jointly experience unobserved contemp'])
+(1, ' (p. 372)\n\nStrategy: (a) lagged ego outcome and lagged alter outcome, ', ['(p. 372) strategy: (a) lagged ego outcome and lagged alter outcome'])
+(1, ' (p. 373); (b) a directionality test, ', ['(p. 373); (b) a directionality test'])
+(1, ' (p. 373); (c) null neighbor effect and no distance gradient used to a', ['(p. 373); (c) null neighbor effect and no distance gradient used to argue against a shared'])
+(1, ' (p. 377) **[no model of mechanism]**\n- Single cohort in one town; fri', ['**  single cohort in one town; friendship ties come from administrative followup tracking '])
+(1, ' at each of seven examinations between 1971 and 2003', ['at each of seven examinations between 1971 and 2003'])
+(2, 'After controlling for environmental confounding (through school-specif', ['after controlling for environmental confounding (through schoolspecific time trends), our '])
+(2, ' (p. 1385). On the directionality test: ', ['(p. 1385). on the directionality test:'])
+(2, ' (p. 1385).\n\n**Limitations.**\n\n- Different dataset from the one they c', ['(p. 1385). **limitations.**  different dataset from the one they critique (adolescents in '])
+(2, ' is the printed spelling). **[single system]**\n- One friend per ego: ', ['is the printed spelling). **', '**  one friend per ego:'])
+(2, ' (p. 1383, fn. 10). **[imperfect measure]**\n- School-specific trends a', ['(p. 1383, fn. 10). **', '**  schoolspecific trends are a coarse proxy for environment:'])
+(2, ' (p. 1386)\n- Null result is a loss of significance, not an estimate of', ['(p. 1386)  null result is a loss of significance, not an estimate of zero (point estimate ', '** **channel / sou
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; cat &gt; check2.py &lt;&lt;&#39;EOF&#39;
+import re,unicodedata,difflib
+note=open(&#39;/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_A_influence_homophily_note.md&#39;,encoding=&#39;utf-8&#39;).read()
+def norm(s):
+    s=unicodedata.normalize(&#39;NFKC&#39;,s)
+    for a,b in [(&#39;\u2019&#39;,&#34;&#39;&#34;),(&#39;\u2018&#39;,&#34;&#39;&#34;),(&#39;\u201c&#39;,&#39;&#34;&#39;),(&#39;\u201d&#39;,&#39;&#34;&#39;),(&#39;⫺&#39;,&#39;-&#39;),(&#39;⬎&#39;,&#39;&gt;&#39;),(&#39;⬍&#39;,&#39;&lt;&#39;),(&#39;⫽&#39;,&#39;=&#39;),(&#39;兩&#39;,&#39;|&#39;),(&#39;…&#39;,&#39;...&#39;)]: s=s.replace(a,b)
+    s=re.sub(r&#39;-\s*\n\s*&#39;,&#39;&#39;,s)
+    s=re.sub(r&#39;[\u2010-\u2015\-]&#39;,&#39;&#39;,s)
+    s=re.sub(r&#39;\s+&#39;,&#39; &#39;,s).replace(&#39;&#34;&#39;,&#39;&#39;).replace(&#34;&#39;&#34;,&#39;&#39;)
+    return s.lower()
+secs=re.split(r&#39;\n## (\d+)\. &#39;,note)
+tot=0
+for k in range(1,len(secs),2):
+    n=int(secs[k]); body=secs[k+1]
+    src=norm(open(&#39;%02d_raw.txt&#39;%n,encoding=&#39;utf-8&#39;,errors=&#39;replace&#39;).read())
+    quotes=[]
+    for line in body.split(&#39;\n&#39;):
+        if line.startswith(&#39;&gt; &#34;&#39;):
+            quotes.append(line[3:line.rfind(&#39;&#34;&#39;)])
+    # inline quotes immediately followed by a page cite
+    for m in re.finditer(r&#39;&#34;((?:[^&#34;]|&#34;[^&#34;]{1,40}&#34;)+?)&#34;\s*\((?:Abstract, )?(?:p\.|pp\.|MS p\.|arXiv p\.)&#39;,body):
+        quotes.append(m.group(1))
+    for q in quotes:
+        tot+=1
+        q2=q.replace(&#39;[—]&#39;,&#39;-&#39;)
+        for p in re.split(r&#39;\[\.\.\.\]|\[[^\]]*\]&#39;,q2):
+            p=norm(p).strip(&#39; .,;&#39;)
+            if len(p)&lt;15 or p in src: continue
+            sm=difflib.SequenceMatcher(None,src,p,autojunk=False)
+            mt=sm.find_longest_match(0,len(src),0,len(p))
+            # take window
+            st=max(0,mt.a-mt.b-5); win=src[st:st+len(p)+40]
+            print(f&#39;## paper {n}: NOT EXACT\n  NOTE: {p[:300]}\n  PDF : {win[:340]}\n&#39;)
+print(&#39;quotes checked:&#39;,tot)
+EOF
+python3 check2.py</summary>
+```bash
+cd /tmp/nsA && cat > check2.py <<'EOF'
+import re,unicodedata,difflib
+note=open('/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_A_influence_homophily_note.md',encoding='utf-8').read()
+def norm(s):
+    s=unicodedata.normalize('NFKC',s)
+    for a,b in [('\u2019',"'"),('\u2018',"'"),('\u201c','"'),('\u201d','"'),('⫺','-'),('⬎','>'),('⬍','<'),('⫽','='),('兩','|'),('…','...')]: s=s.replace(a,b)
+    s=re.sub(r'-\s*\n\s*','',s)
+    s=re.sub(r'[\u2010-\u2015\-]','',s)
+    s=re.sub(r'\s+',' ',s).replace('"','').replace("'",'')
+    return s.lower()
+secs=re.split(r'\n## (\d+)\. ',note)
+tot=0
+for k in range(1,len(secs),2):
+    n=int(secs[k]); body=secs[k+1]
+    src=norm(open('%02d_raw.txt'%n,encoding='utf-8',errors='replace').read())
+    quotes=[]
+    for line in body.split('\n'):
+        if line.startswith('> "'):
+            quotes.append(line[3:line.rfind('"')])
+    # inline quotes immediately followed by a page cite
+    for m in re.finditer(r'"((?:[^"]|"[^"]{1,40}")+?)"\s*\((?:Abstract, )?(?:p\.|pp\.|MS p\.|arXiv p\.)',body):
+        quotes.append(m.group(1))
+    for q in quotes:
+        tot+=1
+        q2=q.replace('[—]','-')
+        for p in re.split(r'\[\.\.\.\]|\[[^\]]*\]',q2):
+            p=norm(p).strip(' .,;')
+            if len(p)<15 or p in src: continue
+            sm=difflib.SequenceMatcher(None,src,p,autojunk=False)
+            mt=sm.find_longest_match(0,len(src),0,len(p))
+            # take window
+            st=max(0,mt.a-mt.b-5); win=src[st:st+len(p)+40]
+            print(f'## paper {n}: NOT EXACT\n  NOTE: {p[:300]}\n  PDF : {win[:340]}\n')
+print('quotes checked:',tot)
+EOF
+python3 check2.py
+```
+
+```
+## paper 1: NOT EXACT
+  NOTE: we considered three explanations for the clustering of obese people. first, egos might choose to associate with like alters (homophily). second, egos and alters might share attributes or jointly experience unobserved contemporaneous events that cause their weight to vary at the same time (confoundin
+  PDF : considered three explanations for the clustering of obese people. first, egos might choose to associate with like alters (homophily).21,23,24 second, egos and alters might share attributes or jointly experience unobserved contemporaneous events that cause their weight to vary at the same time (confounding). third, alters might exert socia
+
+## paper 1: NOT EXACT
+  NOTE: we considered three explanations for the clustering of obese people. first, egos might choose to associate with like alters (homophily). second, egos and alters might share attributes or jointly experience unobserved contemporaneous events that cause their weight to vary at the same time (confoundin
+  PDF : considered three explanations for the clustering of obese people. first, egos might choose to associate with like alters (homophily).21,23,24 second, egos and alters might share attributes or jointly experience unobserved contemporaneous events that cause their weight to vary at the same time (confounding). third, alters might exert socia
+
+## paper 1: NOT EXACT
+  NOTE: and at least one close friend at each of seven examinations between 1971 and 2003
+  PDF : ead, and at least one close friend at each of seven exam­inations between 1971 and 2003. the examinations took place duri
+
+## paper 2: NOT EXACT
+  NOTE: after controlling for environmental confounding (through schoolspecific time trends), our estimate falls by over 30% to 0.037. finally, we control for friendship selection by controlling for individual fixed effects. with this inclusion, the coefficient of interest declines further and becomes stati
+  PDF : s.19 after controlling for environmental confounding (th
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; grep -n -A2 &#34;their numerous weak ties&#34; 13_raw.txt | cat -A | cut -c1-120</summary>
+```bash
+cd /tmp/nsA && grep -n -A2 "their numerous weak ties" 13_raw.txt | cat -A | cut -c1-120
+```
+
+```
+cat: illegal option -- A
+usage: cat [-belnstuv] [file ...]
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; grep -n -A2 &#34;their numerous weak ties&#34; 13_raw.txt | cat -v | cut -c1-120</summary>
+```bash
+cd /tmp/nsA && grep -n -A2 "their numerous weak ties" 13_raw.txt | cat -v | cut -c1-120
+```
+
+```
+cut: stdin: Illegal byte sequence
+14:their numerous weak ties but a single stronger tie is signi
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; python3 -c &#34;
+t=open(&#39;13_raw.txt&#39;,encoding=&#39;utf-8&#39;,errors=&#39;replace&#39;).read(); i=t.find(&#39;their numerous weak&#39;); print(repr(t[i:i+120]))&#34;</summary>
+```bash
+cd /tmp/nsA && python3 -c "
+t=open('13_raw.txt',encoding='utf-8',errors='replace').read(); i=t.find('their numerous weak'); print(repr(t[i:i+120]))"
+```
+
+```
+'their numerous weak ties but a single stronger tie is signiﬁcantly\nmore valuable at the margin.\n\nWe would like to thank '
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; python3 - &lt;&lt;&#39;EOF&#39;
+exec(open(&#39;check2.py&#39;).read().split(&#39;secs=&#39;)[0])
+src=norm(open(&#39;13_raw.txt&#39;,encoding=&#39;utf-8&#39;,errors=&#39;replace&#39;).read())
+q=&#39;Using 6 million Facebook users\&#39; data, we find evidence for the opposite. We proxy for job help by identifying people who eventually work with a preexisting friend. Using objective tie strength measures and our job help proxy, we find that most people are helped through one of their numerous weak ties but a single stronger tie is significantly more valuable at the margin.&#39;
+p=norm(q).strip(&#39; .&#39;)
+import difflib
+i=src.find(p[:60]); print(i)
+s=src[i:i+len(p)+5]
+for a,b in zip(s,p):
+    pass
+for k,(a,b) in enumerate(zip(s,p)):
+    if a!=b: print(k,repr(s[k-20:k+20]),repr(p[k-20:k+20])); break
+EOF</summary>
+```bash
+cd /tmp/nsA && python3 - <<'EOF'
+exec(open('check2.py').read().split('secs=')[0])
+src=norm(open('13_raw.txt',encoding='utf-8',errors='replace').read())
+q='Using 6 million Facebook users\' data, we find evidence for the opposite. We proxy for job help by identifying people who eventually work with a preexisting friend. Using objective tie strength measures and our job help proxy, we find that most people are helped through one of their numerous weak ties but a single stronger tie is significantly more valuable at the margin.'
+p=norm(q).strip(' .')
+import difflib
+i=src.find(p[:60]); print(i)
+s=src[i:i+len(p)+5]
+for a,b in zip(s,p):
+    pass
+for k,(a,b) in enumerate(zip(s,p)):
+    if a!=b: print(k,repr(s[k-20:k+20]),repr(p[k-20:k+20])); break
+EOF
+```
+
+```
+431
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="unknown" data-tool-name="ripgrep_raw_search"><details>
+<summary>Tool use: **ripgrep_raw_search**</summary>
+
+Parameters:
+
+```json
+{
+  "caseInsensitive": false,
+  "outputMode": "content",
+  "path": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_A_influence_homophily_note.md",
+  "pattern": "Using 6 million Facebook"
+}
+```
+Additional data:
+
+```json
+{
+  "isPruned": true,
+  "outputMode": "content",
+  "path": "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_A_influence_homophily_note.md",
+  "pattern": "Using 6 million Facebook",
+  "topFiles": [
+    {
+      "matchCount": 1,
+      "uri": "3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_A_influence_homophily_note.md"
+    }
+  ],
+  "totalFiles": 1,
+  "totalMatches": 1
+}
+```
+Status: **completed**
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2"><details>
+<summary>Tool use: **edit_file_v2** • Edit file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_A_influence_homophily_note.md</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2"><details>
+<summary>Tool use: **edit_file_v2** • Edit file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_A_influence_homophily_note.md</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2"><details>
+<summary>Tool use: **edit_file_v2** • Edit file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_A_influence_homophily_note.md</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2"><details>
+<summary>Tool use: **edit_file_v2** • Edit file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_A_influence_homophily_note.md</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Final checks: banned words, a re-run of the quote checker after the edits, and confirming no other file changed.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsA &amp;&amp; N=&#34;/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_A_influence_homophily_note.md&#34;; grep -n -i -E &#34;delve|testament&#34; &#34;$N&#34;; echo &#34;banned-count: $?&#34;; python3 check2.py | grep -c &#34;NOT EXACT&#34;; wc -l &#34;$N&#34;; cd &#34;/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE&#34; &amp;&amp; git status --porcelain -- 3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/ | head</summary>
+```bash
+cd /tmp/nsA && N="/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_A_influence_homophily_note.md"; grep -n -i -E "delve|testament" "$N"; echo "banned-count: $?"; python3 check2.py | grep -c "NOT EXACT"; wc -l "$N"; cd "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE" && git status --porcelain -- 3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/ | head
+```
+
+```
+banned-count: 1
+28
+     457 /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_A_influence_homophily_note.md
+ M 3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/edu_A_bigfish_rank_selective_note.md
+ M 3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_A_influence_homophily_note.md
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd &#34;/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE&#34; &amp;&amp; F=3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_A_influence_homophily_note.md; git log --oneline -3 -- &#34;$F&#34;; git show HEAD:&#34;$F&#34; | head -30; git show HEAD:&#34;$F&#34; | wc -l</summary>
+```bash
+cd "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE" && F=3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_A_influence_homophily_note.md; git log --oneline -3 -- "$F"; git show HEAD:"$F" | head -30; git show HEAD:"$F" | wc -l
+```
+
+```
+ae0f344 Update educational peer effects notes with new findings and clarifications
+1bc663a Enhance educational peer effects notes and expand literature coverage
+53d3c81 Enhance dissertation research notes and outline revisions
+# Network-science background, cluster A: influence (contagion) vs. homophily (sorting)
+
+Source extracts for the dissertation introduction. Built 2026-10-28 from the PDFs listed in `FOUNDY_Intro.bib` (text via `pdftotext -layout`; all 13 PDFs had a text layer, no OCR used).
+
+**Conventions**
+
+- Quotes are copied verbatim from the PDF text layer. Line-break hyphens introduced by the journal layout (e.g. "con-temporaneous") are rejoined; nothing else is changed. `[...]` marks an omission.
+- "p." = printed journal page. When the PDF page differs it is given as "PDF p.".
+- "Channel / source" lines are **assistant judgment**, not the authors' framing. Channels: development (what a person becomes), evaluation (how a performance is measured/perceived), selection (who wins a scarce slot). Sources: peers vs. organization.
+- Limitation tags: [small data], [imperfect measure], [single system], [no model of mechanism], [model not fit to data], [outcome is not selection].
+
+---
+
+## Assistant synthesis (to be written after all papers are read)
+
+---
+
+## 1. Christakis & Fowler 2007 — The spread of obesity in a large social network over 32 years
+
+**Citation.** Christakis, Nicholas A., and James H. Fowler. 2007. "The Spread of Obesity in a Large Social Network over 32 Years." *New England Journal of Medicine* 357 (4): 370–379. DOI: 10.1056/NEJMsa066082. (PDF p. 1 = printed p. 370; PDF p. n = printed p. 369 + n.)
+
+**Data / setting / sample / years.** Framingham Heart Study, Offspring Cohort as 5,124 "egos"; 12,067 egos plus alters connected at some point, 1971–2003. Ties reconstructed from archived handwritten administrative tracking sheets (friends, siblings, spouses, neighbors). 38,611 observed social and family ties to the 5,124 egos; 3,604 unique observed frien
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="unknown" data-tool-name="update_current_step"><details>
+<summary>Tool use: **update_current_step**</summary>
+An unknown error occurred
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+I read all 13 papers and wrote the note here:
+
+`3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_A_influence_homophily_note.md`
+
+All 13 PDFs had a text layer, so no OCR was needed. I machine-checked all 186 quotes against the PDF text. The only differences are omitted footnote or reference superscripts and quotes that run across a page break; the note marks each of those next to the cite.
+
+**Papers covered (none unreadable):**
+1. Christakis & Fowler 2007 (NEJM)
+2. Cohen-Cole & Fletcher 2008 (J Health Econ). Their replication uses Add Health data, not Framingham.
+3. Fowler & Christakis 2008, response to Cohen-Cole & Fletcher.
+4. Aral, Muchnik & Sundararajan 2009 (PNAS)
+5. Shalizi & Thomas 2011
+6. VanderWeele 2011
+7. McPherson, Smith-Lovin & Cook 2001
+8. Kossinets & Watts 2009 (AJS)
+9. Centola 2010 (Science)
+10. Centola 2011 (Science)
+11. Eckles, Kizilcec & Bakshy 2016, "Estimating peer effects in networks with peer encouragement designs" (PNAS)
+12. Rajkumar et al. 2022 (Science)
+13. Gee, Jones & Burke 2017 (J Labor Econ)
+
+**Page-number problems:**
+- **No journal pages for three papers.** These PDFs aren't the typeset versions, so their journal page numbers couldn't be determined. Fowler & Christakis 2008 and VanderWeele 2011 are NIH author manuscripts; Shalizi & Thomas 2011 is the arXiv preprint. They're cited by manuscript page, and the arXiv wording differs slightly from the journal version.
+- **Rajkumar et al.** Each page footer reads "n of 7", so the journal pages 1304–1310 are my inference from that range.
+- **Bib error.** The McPherson et al. entry has a wrong DOI (10.3982/ECTA7195, an Econometrica-style number). The PDF gives none; the one usually cited (10.1146/annurev.soc.27.1.415) is unverified.
+
+**Five quotes to spot-check:**
+1. Shalizi & Thomas, arXiv p. 3 (footnote marker after "data" omitted): "More precisely, latent homophily and contagion are generically confounded with each other (section 2), and any direct contagion effects cannot be nonparametrically identified from observational data. To identify contagion effects, we need either strong parametric assumptions or strong substantive knowledge that lets us rule out latent homophily as a causal factor."
+2. Cohen-Cole & Fletcher, p. 1382 (abstract): "We find that point estimates of the "social network effect" are reduced and become statistically indistinguishable from zero once standard econometric techniques are implemented."
+3. Kossinets & Watts, p. 436: "As we observe, however, the vast majority of new ties form between individuals who already share a friend or a group, and once these conditions are met, similarity loses much, and in some cases all, of its effect."
+4. Eckles et al., p. 7320: "For the main outcomes of interest (posting and feedback to others), the observational coefficient estimates are 317–498% larger. On the other hand, they appear to underestimate reply behaviors by 36% and 68% for comments and likes, respectively."
+5. Gee et al., p. 486: "If social ties of differing strength benefit more, then this may result in the allocation of a job away from one person and toward another who has the right type of connection (weak or strong) but who is not necessarily a better worker."
+
+For your selection question, the main gap is that almost every outcome in this cluster is development (weight, adopting a behavior, posting). Only Gee et al. and Rajkumar et al. reach something like selection (getting a job), and neither observes the other candidates or the employer's decision. The synthesis at the top of the note covers this in more detail.

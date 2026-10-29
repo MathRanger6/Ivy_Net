@@ -49,13 +49,6 @@ FINAL RESPONSE to me: the note path, papers covered (and any you could not read,
 
 _**Agent (claude-opus-5-5)**_
 
-<think><details><summary>Thought Process</summary>
-I'll update the step and start parsing the bib file.
-
-</details></think>
-
-_**Agent (claude-opus-5-5)**_
-
 I'll start by parsing the bib file to locate each PDF, then extract text and build the note paper by paper.
 
 _**Agent (claude-opus-5-5)**_
@@ -100,7 +93,50 @@ for e in ents:
         print('KEY',e.split('\n')[0]); print(' T',title[:100]); print(' A',(auth.group(1) if auth else '')[:120]); print(' F',f.group(1) if f else None)
 EOF
 ```
+
+```
+FOUNDY_Intro.bib
+files
+158
+KEY @article{granovetter_strength_1973,
+ T The {Strength} of {Weak} {Ties}
+ A Granovetter, Mark
+ F Attachment:files/325/Granovetter - Unknown - The Strength of Weak Ties.pdf:application/pdf
+KEY @article{gee_social_2017,
+ T Social {Networks} and {Labor} {Markets}: {How} {Strong} {Ties} {Relate} to {Job} {Finding} on {Faceb
+ A Gee, Laura K. and Jones, Jason and Burke, Moira
+ F PDF:files/778/Gee et al. - 2017 - Social Networks and Labor Markets How Strong Ties Relate to Job Finding on Facebook's Social Networ.pdf:application/pdf
+KEY @article{centola_complex_2007,
+ T Complex {Contagions} and the {Weakness} of {Long} {Ties}
+ A Centola, Damon and Macy, Michael
+ F Attachment:files/337/Centola, Macy - 2007 - Complex Contagions and the Weakness of Long Ties.pdf:application/pdf
+KEY @article{burt_structural_2004,
+ T Structural {Holes} and {Good} {Ideas}
+ A Burt, Ronald S.
+ F Attachment:files/340/Burt - 2004 - Structural Holes and Good Ideas.pdf:application/pdf
+KEY @misc{burt_structural_1992,
+ T Structural {Holes}: {The} {Social} {Structure} of {Competition}
+ A Burt, Ronald S
+ F Attachment:files/342/Burt - 1992 - Structural Holes The Social Structure of Competition.pdf:application/pdf
+KEY @article{barabasi_emergence_1999,
+ T Emergence of scaling in random networks
+ A Barabási, Albert-László and Albert, Réka
+ F Submitted Version:files/466/Barabási and Albert - Emergence of Scaling in Random Networks.pdf:application/pdf
+KEY @article{clauset_systematic_2015,
+ T Systematic inequality and hierarchy in faculty hiring networks
+ A Clauset, Aaron and Arbesman, Samuel and Larremore, Daniel B.
+ F Full Text PDF:files/388/Clauset et al. - 2015 - Systematic inequality and hierarchy in faculty hir.pdf:application/pdf
+KEY @incollection{wang_40_2025,
+ T 40: {An} overview of the science of success
+ A Wang, Xindi and Gates, Alexander J. and Barabási, Albert-László
+ F Full Text PDF:files/580/Wang et al. - 2025 - 40 An overview of the science of success.pdf:application/pd
+… (output truncated)
+```
 </details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+All PDFs located. Now extracting text from all of them into a scratch directory outside the repo.
 
 _**Agent (claude-opus-5-5)**_
 
@@ -141,6 +177,40 @@ for e in ents:
     print(k.group(1), pages.group(1) if pages else '?', len(open(out).read()))
 EOF
 ```
+
+```
+granovetter_strength_1973 31 31
+centola_complex_2007 66 108292
+burt_structural_2004 51 162730
+burt_structural_1992 42 42
+barabasi_emergence_1999 11 24108
+clauset_systematic_2015 6 53821
+nikolaev_modeling_2023 16 126278
+geard_competition_2010 17 61610
+uzzi_collaboration_2005 58 168700
+newman_assortative_2002 5 40359
+feld_why_1991 14 35806
+guimera_team_2005 13 60453
+colizza_detecting_2006 6 46915
+mason_collaborative_2012 6 48991
+lazer_network_2007 28 125550
+gould_origins_2002 36 105643
+breiger_duality_1974 11 11
+lazer_computational_2020 4 34967
+lazer_computational_2009 9 31201
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Granovetter 1973, Burt 1992, and Breiger 1974 have no text layer; I'll OCR them in the background while reading the others.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /tmp/nsB/feld_why_1991.txt</summary>
+
 </details></tool-use>
 
 _**Agent (claude-opus-5-5)**_
@@ -164,11 +234,3900 @@ for spec in "granovetter_strength_1973|files/325/Granovetter - Unknown - The Str
 done; echo DONE ) > /tmp/nsB/ocr.log 2>&1 &
 echo started
 ```
+
+```
+/opt/homebrew/bin/tesseract
+/opt/homebrew/bin/pdftoppm
+started
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Feld has a usable text layer. Now pulling bib metadata (volume, pages, DOI) for all entries.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd &#34;/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/FOUNDY_Intro&#34; &amp;&amp; python3 - &lt;&lt;&#39;EOF&#39;
+import re
+t=open(&#39;FOUNDY_Intro.bib&#39;,encoding=&#39;utf-8&#39;).read()
+ents=re.split(r&#39;\n(?=@)&#39;,t)
+want=[&#39;granovetter_strength_1973&#39;,&#39;centola_complex_2007&#39;,&#39;burt_structural_2004&#39;,&#39;burt_structural_1992&#39;,&#39;barabasi_emergence_1999&#39;,&#39;clauset_systematic_2015&#39;,&#39;nikolaev_modeling_2023&#39;,&#39;geard_competition_2010&#39;,&#39;uzzi_collaboration_2005&#39;,&#39;newman_assortative_2002&#39;,&#39;feld_why_1991&#39;,&#39;guimera_team_2005&#39;,&#39;colizza_detecting_2006&#39;,&#39;mason_collaborative_2012&#39;,&#39;lazer_network_2007&#39;,&#39;gould_origins_2002&#39;,&#39;breiger_duality_1974&#39;,&#39;lazer_computational_2020&#39;,&#39;lazer_computational_2009&#39;]
+for e in ents:
+    k=re.match(r&#39;@\w+\{([^,]+),&#39;,e)
+    if not k or k.group(1) not in want: continue
+    d={}
+    for f in [&#39;author&#39;,&#39;year&#39;,&#39;date&#39;,&#39;title&#39;,&#39;journal&#39;,&#39;journaltitle&#39;,&#39;volume&#39;,&#39;number&#39;,&#39;pages&#39;,&#39;doi&#39;,&#39;publisher&#39;,&#39;url&#39;]:
+        m=re.search(r&#39;\n\s*&#39;+f+r&#39;\s*=\s*\{(.+?)\},?\n&#39;,e,re.S)
+        if m: d[f]=re.sub(r&#39;\s+&#39;,&#39; &#39;,m.group(1))[:300]
+    print(k.group(1)); [print(&#39;  &#39;,a,&#39;:&#39;,b) for a,b in d.items()]
+EOF</summary>
+```bash
+cd "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/FOUNDY_Intro" && python3 - <<'EOF'
+import re
+t=open('FOUNDY_Intro.bib',encoding='utf-8').read()
+ents=re.split(r'\n(?=@)',t)
+want=['granovetter_strength_1973','centola_complex_2007','burt_structural_2004','burt_structural_1992','barabasi_emergence_1999','clauset_systematic_2015','nikolaev_modeling_2023','geard_competition_2010','uzzi_collaboration_2005','newman_assortative_2002','feld_why_1991','guimera_team_2005','colizza_detecting_2006','mason_collaborative_2012','lazer_network_2007','gould_origins_2002','breiger_duality_1974','lazer_computational_2020','lazer_computational_2009']
+for e in ents:
+    k=re.match(r'@\w+\{([^,]+),',e)
+    if not k or k.group(1) not in want: continue
+    d={}
+    for f in ['author','year','date','title','journal','journaltitle','volume','number','pages','doi','publisher','url']:
+        m=re.search(r'\n\s*'+f+r'\s*=\s*\{(.+?)\},?\n',e,re.S)
+        if m: d[f]=re.sub(r'\s+',' ',m.group(1))[:300]
+    print(k.group(1)); [print('  ',a,':',b) for a,b in d.items()]
+EOF
+```
+
+```
+granovetter_strength_1973
+   author : Granovetter, Mark
+   year : 1973
+   title : The {Strength} of {Weak} {Ties}
+   journal : American Journal of Sociology
+   volume : 78
+   number : 6
+   pages : 1360--1380
+centola_complex_2007
+   author : Centola, Damon and Macy, Michael
+   year : 2007
+   title : Complex {Contagions} and the {Weakness} of {Long} {Ties}
+   journal : American Journal of Sociology
+   volume : 113
+   number : 3
+   pages : 702--734
+   doi : 10.1086/521848
+   url : http://www.journals.uchicago.edu/doi/10.1086/521848
+burt_structural_2004
+   author : Burt, Ronald S.
+   year : 2004
+   title : Structural {Holes} and {Good} {Ideas}
+   journal : American Journal of Sociology
+   volume : 110
+   number : 2
+   pages : 349--99
+   doi : 10.1086/421787
+   url : http://www.journals.uchicago.edu/doi/10.1086/421787
+burt_structural_1992
+   author : Burt, Ronald S
+   year : 1992
+   title : Structural {Holes}: {The} {Social} {Structure} of {Competition}
+barabasi_emergence_1999
+   author : Barabási, Albert-László and Albert, Réka
+   year : 1999
+   title : Emergence of scaling in random networks
+   journal : Science (New York, N.Y.)
+   volume : 286
+   number : 5439
+   pages : 509--12
+   doi : 10.1126/science.286.5439.509
+   publisher : American Association for the Advancement of Science
+   url : http://www.ncbi.nlm.nih.gov/pubmed/10521342 http://arxiv.org/abs/cond-mat/9910332%0Ahttp://dx.doi.org/10.1126/science.286.5439.509
+clauset_systematic_2015
+   author : Clauset, Aaron and Arbesman, Samuel and Larremore, Daniel B.
+   year : 2015
+   title : Systematic inequality and hierarchy in faculty hiring networks
+   journal : Science Advances
+   volume : 1
+   number : 1
+   pages : e1400005
+   doi : 10.1126/sciadv.1400005
+   publisher : American Association for the Advancement of Science
+   url : https://www.science.org/doi/10.1126/sciadv.1400005
+nikolaev_modeling_2023
+   author : Nikolaev, Alexey and Mneimneh, Saad
+   year : 2023
+   title : Modeling and analysis of affiliation ne
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+I'll build a small helper that reports which PDF page a quoted phrase sits on, so I can verify every quote and its page against the extracted text.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2"><details>
+<summary>Tool use: **edit_file_v2** • Edit file: /tmp/nsB/q.py</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; python3 q.py feld_why_1991 &#34;mean number of friends of friends is always greater than the mean number of friends of individuals&#34; &#34;those with 40 friends show up in each of 40 individual friendship networks and thus can make 40 people feel relatively deprived, while those with only one friend show up in only one friendship network and can make only that one person feel relatively advantaged&#34; &#34;of the 146 girls who have any mutual friends, 80 have fewer friends than the mean among their friends while 41 have more; 25 have the same as the mean among their friends&#34; &#34;then 74% of the individuals would find themselves to be relatively deprived&#34; &#34;if friendships are primarily established through one focus or a few foci of activity (Feld 1981), then individuals might have numbers of friends similar to the numbers their own friends have&#34; &#34;Individuals who find themselves associated with people with more friends than they have may conclude that they themselves are below average and somehow inadequate&#34; &#34;the mean among friends increases with the variance among individuals, with a given mean among individuals&#34; &#34;Friendship is not only a source of satisfaction and security; it is also a way that individuals evaluate themselves and others&#34; &#34;There has been little study of how people determine what is an adequate number of friends&#34;; cat ocr.log; ls ocr | wc -l</summary>
+```bash
+cd /tmp/nsB && python3 q.py feld_why_1991 "mean number of friends of friends is always greater than the mean number of friends of individuals" "those with 40 friends show up in each of 40 individual friendship networks and thus can make 40 people feel relatively deprived, while those with only one friend show up in only one friendship network and can make only that one person feel relatively advantaged" "of the 146 girls who have any mutual friends, 80 have fewer friends than the mean among their friends while 41 have more; 25 have the same as the mean among their friends" "then 74% of the individuals would find themselves to be relatively deprived" "if friendships are primarily established through one focus or a few foci of activity (Feld 1981), then individuals might have numbers of friends similar to the numbers their own friends have" "Individuals who find themselves associated with people with more friends than they have may conclude that they themselves are below average and somehow inadequate" "the mean among friends increases with the variance among individuals, with a given mean among individuals" "Friendship is not only a source of satisfaction and security; it is also a way that individuals evaluate themselves and others" "There has been little study of how people determine what is an adequate number of friends"; cat ocr.log; ls ocr | wc -l
+```
+
+```
+OK   [1, 2] | mean number of friends of friends is always greater than the mean number of frie
+OK   [2] | those with 40 friends show up in each of 40 individual friendship networks and t
+OK   [3] | of the 146 girls who have any mutual friends, 80 have fewer friends than the mea
+OK   [6] | then 74% of the individuals would find themselves to be relatively deprived
+OK   [11] | if friendships are primarily established through one focus or a few foci of acti
+OK   [13] | Individuals who find themselves associated with people with more friends than th
+OK   [7] | the mean among friends increases with the variance among individuals, with a giv
+OK   [1] | Friendship is not only a source of satisfaction and security; it is also a way t
+OK   [1] | There has been little study of how people determine what is an adequate number o
+      19
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Feld quotes all verified (PDF page = journal page − 1463). Starting the note file with a header and the Feld section.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2"><details>
+<summary>Tool use: **edit_file_v2** • Edit file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_B_structure_position_note.md</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; grep -n -i -E &#34;assortat|disassort|we find|social networks|biological|technological|table|r = |coefficient&#34; newman_assortative_2002.txt | head -80</summary>
+```bash
+cd /tmp/nsB && grep -n -i -E "assortat|disassort|we find|social networks|biological|technological|table|r = |coefficient" newman_assortative_2002.txt | head -80
+```
+
+```
+1:                                                                                                 Assortative mixing in networks
+10:                                                                         A network is said to show assortative mixing if the nodes in the network that have many connec-
+11:                                                                      tions tend to be connected to other nodes with many connections. We define a measure of assortative
+12:                                                                      mixing for networks and use it to show that social networks are often assortatively mixed, but that
+13:                                                                      technological and biological networks tend to be disassortative. We propose a model of an assortative
+15:                                                                      find that assortative networks tend to percolate more easily than their disassortative counterparts
+20:                                                         tices joined together by edges—including social networks,        interested not in the total degree of such a vertex, but in
+21:                                                         computer networks, and biological networks [1, 2, 3]. A          the remaining degree—the number of edges leaving the
+40:                                                         vertex depend also on the degree of the source vertex. In           In a network with no assortative (or disassortative)
+41:                                                         the real world on the other hand such dependencies are           mixing ejk takes the value qj qk . If there is assortative
+42:                                                         common. Many networks show “assortative mixing” on               mixing, ejk will differ from this value and the amount
+43:                                                         their degrees, i.e., a preference fo
+… (output truncated)
+```
 </details></tool-use>
 
 _**Agent (claude-opus-5-5)**_
 
 <tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
-<summary>Tool use: **read_file_v2** • Read file: /tmp/nsB/feld_why_1991.txt</summary>
+<summary>Tool use: **read_file_v2** • Read file: /tmp/nsB/newman_assortative_2002.txt</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /tmp/nsB/newman_assortative_2002.txt</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+The `-layout` text interleaves two-column papers, which breaks phrase checks; I'll also extract reading-order text and verify against both.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd &#34;/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/FOUNDY_Intro&#34; &amp;&amp; python3 - &lt;&lt;&#39;EOF&#39;
+import re,subprocess
+t=open(&#39;FOUNDY_Intro.bib&#39;,encoding=&#39;utf-8&#39;).read()
+for e in re.split(r&#39;\n(?=@)&#39;,t):
+    k=re.match(r&#39;@\w+\{([^,]+),&#39;,e)
+    if not k: continue
+    k=k.group(1)
+    import os
+    if not os.path.exists(f&#39;/tmp/nsB/{k}.txt&#39;): continue
+    f=re.search(r&#39;file\s*=\s*\{(.+?)\}&#39;,e,re.S).group(1)
+    pdf=[p.replace(&#39;\\;&#39;,&#39;;&#39;) for p in re.findall(r&#39;:(files/[^:]+\.pdf):application/pdf&#39;,f)][-1]
+    subprocess.run([&#39;pdftotext&#39;,pdf,f&#39;/tmp/nsB/{k}_raw.txt&#39;])
+EOF
+ls /tmp/nsB; sed -n 76,90p /tmp/nsB/newman_assortative_2002.txt</summary>
+```bash
+cd "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/FOUNDY_Intro" && python3 - <<'EOF'
+import re,subprocess
+t=open('FOUNDY_Intro.bib',encoding='utf-8').read()
+for e in re.split(r'\n(?=@)',t):
+    k=re.match(r'@\w+\{([^,]+),',e)
+    if not k: continue
+    k=k.group(1)
+    import os
+    if not os.path.exists(f'/tmp/nsB/{k}.txt'): continue
+    f=re.search(r'file\s*=\s*\{(.+?)\}',e,re.S).group(1)
+    pdf=[p.replace('\\;',';') for p in re.findall(r':(files/[^:]+\.pdf):application/pdf',f)][-1]
+    subprocess.run(['pdftotext',pdf,f'/tmp/nsB/{k}_raw.txt'])
+EOF
+ls /tmp/nsB; sed -n 76,90p /tmp/nsB/newman_assortative_2002.txt
+```
+
+```
+barabasi_emergence_1999.txt
+barabasi_emergence_1999_raw.txt
+breiger_duality_1974.txt
+breiger_duality_1974_raw.txt
+burt_structural_1992.txt
+burt_structural_1992_raw.txt
+burt_structural_2004.txt
+burt_structural_2004_raw.txt
+centola_complex_2007.txt
+centola_complex_2007_raw.txt
+clauset_systematic_2015.txt
+clauset_systematic_2015_raw.txt
+colizza_detecting_2006.txt
+colizza_detecting_2006_raw.txt
+feld_why_1991.txt
+feld_why_1991_raw.txt
+geard_competition_2010.txt
+geard_competition_2010_raw.txt
+gould_origins_2002.txt
+gould_origins_2002_raw.txt
+granovetter_strength_1973.txt
+granovetter_strength_1973_raw.txt
+guimera_team_2005.txt
+guimera_team_2005_raw.txt
+lazer_computational_2009.txt
+lazer_computational_2009_raw.txt
+lazer_computational_2020.txt
+lazer_computational_2020_raw.txt
+lazer_network_2007.txt
+lazer_network_2007_raw.txt
+mason_collaborative_2012.txt
+mason_collaborative_2012_raw.txt
+newman_assortative_2002.txt
+newman_assortative_2002_raw.txt
+nikolaev_modeling_2023.txt
+nikolaev_modeling_2023_raw.txt
+ocr
+ocr.log
+q.py
+uzzi_collaboration_2005.txt
+uzzi_collaboration_2005_raw.txt
+
+                      network                              n            r     For the random graph, since edges are placed at ran-
+                      physics coauthorshipa           52 909        0.363   dom without regard to vertex degree it follows trivially
+                      biology coauthorshipa        1 520 251        0.127
+
+
+
+
+real-world networks
+                                                                            that r = 0 in the limit of large graph size. The model
+                      mathematics coauthorshipb      253 339        0.120
+                                                                            of Callaway et al. however, although apparently similar
+                      film actor collaborationsc     449 913        0.208
+                                                                            in construction, gives a markedly different result. From
+        
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2"><details>
+<summary>Tool use: **edit_file_v2** • Edit file: /tmp/nsB/q.py</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; python3 q.py newman_assortative_2002 &#34;A network is said to show assortative mixing if the nodes in the network that have many connections tend to be connected to other nodes with many connections.&#34; &#34;use it to show that social networks are often assortatively mixed, but that technological and biological networks tend to be disassortative&#34; &#34;of the social networks studied (the top five entries in the table) all have significant assortative mixing, which accords with accepted wisdom within the sociological community&#34; &#34;Since these networks show significant disassortative mixing however (Table I), it is clear that the model is incomplete. It is an interesting open question what type of network evolution processes could explain the values of r observed in real-world networks.&#34; &#34;The core group of an assortatively mixed network could form&#34; &#34;Within this model we find that assortative networks percolate more easily and that they are also more robust to removal of their highest degree vertices&#34; &#34;which is simply the Pearson correlation coefficient of the degrees at either end of an edge&#34;; grep -n -A4 &#34;core group of an assortatively&#34; newman_assortative_2002_raw.txt; grep -n -B2 -A3 &#34;Pearson&#34; newman_assortative_2002_raw.txt; head -8 newman_assortative_2002_raw.txt</summary>
+```bash
+cd /tmp/nsB && python3 q.py newman_assortative_2002 "A network is said to show assortative mixing if the nodes in the network that have many connections tend to be connected to other nodes with many connections." "use it to show that social networks are often assortatively mixed, but that technological and biological networks tend to be disassortative" "of the social networks studied (the top five entries in the table) all have significant assortative mixing, which accords with accepted wisdom within the sociological community" "Since these networks show significant disassortative mixing however (Table I), it is clear that the model is incomplete. It is an interesting open question what type of network evolution processes could explain the values of r observed in real-world networks." "The core group of an assortatively mixed network could form" "Within this model we find that assortative networks percolate more easily and that they are also more robust to removal of their highest degree vertices" "which is simply the Pearson correlation coefficient of the degrees at either end of an edge"; grep -n -A4 "core group of an assortatively" newman_assortative_2002_raw.txt; grep -n -B2 -A3 "Pearson" newman_assortative_2002_raw.txt; head -8 newman_assortative_2002_raw.txt
+```
+
+```
+OK   [1] | A network is said to show assortative mixing if the nodes in the network that ha
+OK   [1] | use it to show that social networks are often assortatively mixed, but that tech
+OK   [2] | of the social networks studied (the top five entries in the table) all have sign
+OK   [2] | Since these networks show significant disassortative mixing however (Table I), i
+OK   [3] | The core group of an assortatively mixed network could form
+OK   [4] | Within this model we find that assortative networks percolate more easily and th
+MISS [] | which is simply the Pearson correlation coefficient of the degrees at either end
+405:core group of an assortatively mixed network could form
+406-a “reservoir” for disease, sustaining an epidemic even in
+407-cases in which the network is not sufficiently dense on average for the disease to persist. On the other hand, one
+408-
+409-4
+106-jk
+107-
+108:which is simply the Pearson correlation coefficient of the
+109-degrees at either ends of an edge and lies in the range
+110-−1 ≤ r ≤ 1 [35]. For the practical purpose of evaluating
+111-r on an observed network, we can rewrite (3) as
+Assortative mixing in networks
+M. E. J. Newman
+
+arXiv:cond-mat/0205405v1 [cond-mat.dis-nn] 20 May 2002
+
+Department of Physics, University of Michigan, Ann Arbor, MI 48109–1120 and
+Santa Fe Institute, 1399 Hyde Park Road, Santa Fe, NM 87501
+A network is said to show assortative mixing if the nodes in the network that have many connections tend to be connected to other nodes with many connections. We define a measure of assortative
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Newman verified (note: the PDF is the arXiv preprint, so printed PRL page numbers aren't available). Appending Newman, then moving to Barabási–Albert and Colizza.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_B_structure_position_note.md</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2"><details>
+<summary>Tool use: **edit_file_v2** • Edit file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_B_structure_position_note.md</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; head -c 3000 barabasi_emergence_1999_raw.txt; echo; grep -n -i -E &#34;growth|preferential|scale-free|power.law|rich get|older|competition|fitness|γ|gamma|actor|www|citation|power grid&#34; barabasi_emergence_1999_raw.txt | head -60</summary>
+```bash
+cd /tmp/nsB && head -c 3000 barabasi_emergence_1999_raw.txt; echo; grep -n -i -E "growth|preferential|scale-free|power.law|rich get|older|competition|fitness|γ|gamma|actor|www|citation|power grid" barabasi_emergence_1999_raw.txt | head -60
+```
+
+```
+arXiv:cond-mat/9910332v1 [cond-mat.dis-nn] 21 Oct 1999
+
+Emergence of Scaling in Random Networks
+Albert-László Barabási∗ and Réka Albert
+Department of Physics, University of Notre-Dame, Notre-Dame, IN 46556
+
+Systems as diverse as genetic networks or the world wide web are best described as
+networks with complex topology. A common property of many large networks is that the
+vertex connectivities follow a scale-free power-law distribution. This feature is found to be
+a consequence of the two generic mechanisms that networks expand continuously by the
+addition of new vertices, and new vertices attach preferentially to already well connected
+sites. A model based on these two ingredients reproduces the observed stationary scalefree distributions, indicating that the development of large networks is governed by robust
+self-organizing phenomena that go beyond the particulars of the individual systems.
+
+∗ alb@nd.edu
+
+1
+
+The inability of contemporary science to describe systems composed of non-identical
+elements that have diverse and nonlocal interactions currently limits advances in many disciplines, ranging from molecular biology to computer science (1). The difficulty in describing
+these systems lies partly in their topology: many of them form rather complex networks,
+whose vertices are the elements of the system and edges represent the interactions between
+them. For example, living systems form a huge genetic network, whose vertices are proteins
+and genes, the edges representing the chemical interactions between them (2). At a different
+organizational level, a large network is formed by the nervous system, whose vertices are
+the nerve cells, connected by axons (3). But equally complex networks occur in social science, where vertices are individuals or organizations, and the edges characterize the social
+interaction between them (4), or describe the world wide web (www), whose vertices are
+HTML documents connected by links pointing from one page to another (5, 6). Due
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /tmp/nsB/barabasi_emergence_1999_raw.txt</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; python3 q.py barabasi_emergence_1999 &#34;This feature is found to be a consequence of the two generic mechanisms that networks expand continuously by the addition of new vertices, and new vertices attach preferentially to already well connected sites.&#34; &#34;For example, a new actor is cast most likely in a supporting role, with more established, well known actors.&#34; &#34;Thus older (smaller ti ) vertices increase their connectivity at the expense of the younger (larger ti ) ones, leading with time to some vertices that are highly connected, a ”rich-gets-richer” phenomenon&#34; &#34;Similar mechanisms could explain the origin of the social and economic disparities governing competitive systems, since the scale-free inhomogeneities are the inevitable consequence of self-organization due to the local decisions made by the individual vertices, based on information that is biased towards the more visible (richer) vertices, irrespective of the nature and the origin of this visibility.&#34; &#34;the proposed model cannot be expected to account for all aspects of the studied networks&#34; &#34;a scaling property that could be directly tested once time-resolved data on network connectivity becomes available&#34; &#34;Actor collaboration graph with N = 212, 250 vertices&#34;; grep -n -A3 &#34;FIG. 1&#34; barabasi_emergence_1999_raw.txt</summary>
+```bash
+cd /tmp/nsB && python3 q.py barabasi_emergence_1999 "This feature is found to be a consequence of the two generic mechanisms that networks expand continuously by the addition of new vertices, and new vertices attach preferentially to already well connected sites." "For example, a new actor is cast most likely in a supporting role, with more established, well known actors." "Thus older (smaller ti ) vertices increase their connectivity at the expense of the younger (larger ti ) ones, leading with time to some vertices that are highly connected, a ”rich-gets-richer” phenomenon" "Similar mechanisms could explain the origin of the social and economic disparities governing competitive systems, since the scale-free inhomogeneities are the inevitable consequence of self-organization due to the local decisions made by the individual vertices, based on information that is biased towards the more visible (richer) vertices, irrespective of the nature and the origin of this visibility." "the proposed model cannot be expected to account for all aspects of the studied networks" "a scaling property that could be directly tested once time-resolved data on network connectivity becomes available" "Actor collaboration graph with N = 212, 250 vertices"; grep -n -A3 "FIG. 1" barabasi_emergence_1999_raw.txt
+```
+
+```
+OK   [1] | This feature is found to be a consequence of the two generic mechanisms that net
+OK   [5] | For example, a new actor is cast most likely in a supporting role, with more est
+OK   [6] | Thus older (smaller ti ) vertices increase their connectivity at the expense of 
+OK   [8] | Similar mechanisms could explain the origin of the social and economic dispariti
+OK   [7] | the proposed model cannot be expected to account for all aspects of the studied 
+OK   [6] | a scaling property that could be directly tested once time-resolved data on netw
+OK   [10] | Actor collaboration graph with N = 212, 250 vertices
+380:FIG. 1. The distribution function of connectivities for various large networks. (A) Actor collaboration graph with N = 212, 250 vertices and average connectivity hki = 28.78; (B) World wide
+381-web, N = 325, 729, hki = 5.46 (6); (C) Powergrid data, N = 4, 941, hki = 2.67. The dashed lines
+382-have slopes (A) γactor = 2.3, (B) γwww = 2.1 and (C) γpower = 4.
+383-
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; head -c 2500 colizza_detecting_2006_raw.txt; echo; grep -n -i -E &#34;rich.club|ρ|rho|null|uncorrelated|scientific collaboration|airport|internet|protein|we find|absence|degree&#34; colizza_detecting_2006_raw.txt | head -80</summary>
+```bash
+cd /tmp/nsB && head -c 2500 colizza_detecting_2006_raw.txt; echo; grep -n -i -E "rich.club|ρ|rho|null|uncorrelated|scientific collaboration|airport|internet|protein|we find|absence|degree" colizza_detecting_2006_raw.txt | head -80
+```
+
+```
+LETTERS
+
+Detecting rich-club ordering in complex
+networks
+V. COLIZZA, A. FLAMMINI, M. A. SERRANO AND A. VESPIGNANI*
+School of Informatics and Department of Physics, Indiana University, Bloomington, 47406 Indiana, USA
+* e-mail: alexv@indiana.edu
+
+Published online: 15 January 2006; doi:10.1038/nphys209
+
+ncovering the hidden regularities and organizational
+principles of networks arising in physical systems
+ranging from the molecular level to the scale of large
+communication infrastructures is the key issue in understanding
+their fabric and dynamical properties1–5 . The ‘rich-club’
+phenomenon refers to the tendency of nodes with high
+centrality, the dominant elements of the system, to form
+tightly interconnected communities, and it is one of the
+crucial properties accounting for the formation of dominant
+communities in both computer and social sciences4–8 . Here, we
+provide the analytical expression and the correct null models that
+allow for a quantitative discussion of the rich-club phenomenon.
+The presented analysis enables the measurement of the rich-club
+ordering and its relation with the function and dynamics of
+networks in examples drawn from the biological, social and
+technological domains.
+The informatics revolution has made it possible for a wide range
+of large-scale, rapidly evolving networks, such as transportation,
+technological, social and biological networks, to be analysed1–5 .
+Although these networks are extremely diﬀerent in their function
+and attributes, the analysis of their fabric provides evidence of
+several shared regularities, suggesting general and common selforganizing principles beyond the speciﬁc details of the individual
+systems. In this context, the statistical physics approach has
+been exploited as a very convenient strategy because of its deep
+connection with statistical graph theory and because of its power
+to quantitatively characterize macroscopic phenomena in terms
+of the microscopic dynamics of the various systems1–4,9 . As an
+initial
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /tmp/nsB/colizza_detecting_2006_raw.txt</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; sed -n 326,520p colizza_detecting_2006_raw.txt</summary>
+```bash
+cd /tmp/nsB && sed -n 326,520p colizza_detecting_2006_raw.txt
+```
+
+```
+uncorrelated network with ﬁnite size is not always realizable owing
+
+Table 1 Basic topological properties of the analysed datasets. We considered four
+real-world networks: (a) the protein interaction network12,22 of the yeast
+Saccharomyces cerevisiae collected with different experimental techniques and
+documented at the database of interacting proteins (http://dip.doe-mbi.ucla.edu/);
+(b) the scientiﬁc collaboration network23,24 extracted from the electronic database
+e-print archive in the area of condensed matter physics
+(http://xxx.lanl.gov/archive/cond-mat/), from 1995 to 1998, in which nodes
+represent scientists and a connection exists if they coauthored at least one paper
+in the archive; (c) the network of worldwide air transportation25,26 representing
+the International Air Transport Association (http://www.iata.org/) database of
+airport pairs connected by direct ﬂights for the year 2002; (d) the Internet network
+at the autonomous system4 level4,10,27,28,29 from data collected by the Oregon
+Route Views project (http://www.routeviews.org/) in May 2001, in which nodes
+represent Internet service providers and edges connections among those. The
+sizes of the networks in number of nodes and edges are shown, along with the
+average degree k and the maximum degree value kmax . We also give the value
+for the corresponding structural cutoff, ks , in the uncorrelated case16 .
+
+Number of nodes
+Number of links
+k
+kmax
+
+ks = kN
+
+Protein
+interactions
+
+Scientiﬁc
+collaborations
+
+Air
+transportation
+
+Internet
+
+4,713
+14,846
+6.3
+282
+172
+
+15,179
+43,011
+5.7
+97
+294
+
+3,880
+18,810
+9.7
+318
+194
+
+11,174
+23,409
+4.2
+2,389
+216
+
+to structural constraints. Indeed, any ﬁnite-size random network
+presents a structural cutoﬀ value ks over which the requirement of
+the lack of dangling edges introduces the presence of multiple and
+self-connections, and/or degree–degree correlations16,17 . Networks
+with bounded degree distributions and ﬁnite second moment k2 
+present a kmax that is below the str
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; sed -n 520,700p colizza_detecting_2006_raw.txt</summary>
+```bash
+cd /tmp/nsB && sed -n 520,700p colizza_detecting_2006_raw.txt
+```
+
+```
+1.0
+0.5
+
+1.5
+
+ρran (k )
+
+ρran (k )
+
+ρran (k )
+
+BA
+
+1.5
+
+1.5
+
+1.0
+0.5
+
+0.0
+100
+
+101
+
+102
+k
+
+102
+
+1.0
+0.5
+
+0.0 0
+10
+
+101
+
+k
+
+102
+k
+
+103
+
+0.0
+100
+
+101
+
+102
+
+103
+
+k
+
+Figure 2 Assessment for the presence of the rich-club phenomenon in the networks under study. φ(k) is compared with the null hypothesis provided by the maximally
+random network with φ ran (k). The ratio ρ ran = φ/φ ran is plotted as a function of the degree k and compared with the baseline value equal to 1. If ρ(k) > 1 (<1) the
+network shows the presence (absence) of the rich-club phenomenon with respect to the random case. The protein interaction network, the Internet map at the autonomous
+system level and the scientiﬁc collaboration network show clear behaviours as explained in the main text. The worldwide air transportation network shows a mild rich-club
+ordering with ρ ran (k) > 1. The ER and MR network models show a ratio ρ ran (k) = 1 for all k, as expected, whereas the BA model shows a mixing behaviour with values
+above 1 for very high degrees.
+
+networks. We ﬁnd a clearly opposite result in the decreasing
+behaviour of the rich-club spectrum for the protein interaction
+network and the Internet map at the autonomous system level. In
+both cases, this evidence provides interesting information about the
+system structure and function.
+The lack of rich-club ordering in the protein interaction
+network indicates that proteins with large numbers of interactions
+are presiding over diﬀerent functions and thus, in general, are
+coordinating speciﬁc functional modules (whose detailed analysis
+requires speciﬁc tools19 ). Figure 3 shows portions of the protein
+interaction network and the scientiﬁc collaboration network
+including the club of N >k nodes (N >k = 29 and N >k = 35
+for the protein interactions, N >k = 30 and N >k = 36 for the
+scientiﬁc collaboration) and the connections among them. The
+network representations clearly show the presence of a rich-club
+phenomenon in the scientiﬁc collaboration network, where 
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; python3 q.py colizza_detecting_2006 &#34;The ‘rich-club’ phenomenon refers to the tendency of nodes with high centrality, the dominant elements of the system, to form tightly interconnected communities&#34; &#34;In a social context, for example, a rich-club coefficient increasing with the degree k indicates the dominance of an ‘oligarchy’ of highly connected and mutually communicating individuals, as opposed to a structure consisting of many loosely connected and relatively independent subcommunities.&#34; &#34;Indeed, even in the case of the&#34; &#34;This implies that the increase of φ(k) is a natural consequence of the fact that vertices with high degree have a larger probability of sharing edges than low-degree vertices.&#34; &#34;we identify a strong rich-club ordering in the scientific collaboration network, providing support to the idea that the elite formed by more influential scientists tends to form collaborative groups within specific domains&#34; &#34;the rich-club phenomenon is not necessarily associated with assortative mixing&#34; &#34;the concept of rich-club ordering should be generalized to evaluate the richness of vertices not just in terms of their degree but in terms of the actual traffic or intensity of interactions handled&#34; &#34;a detailed account of the evaluation of the weighted rich-club effect will be provided elsewhere&#34;; sed -n 270,290p colizza_detecting_2006_raw.txt</summary>
+```bash
+cd /tmp/nsB && python3 q.py colizza_detecting_2006 "The ‘rich-club’ phenomenon refers to the tendency of nodes with high centrality, the dominant elements of the system, to form tightly interconnected communities" "In a social context, for example, a rich-club coefficient increasing with the degree k indicates the dominance of an ‘oligarchy’ of highly connected and mutually communicating individuals, as opposed to a structure consisting of many loosely connected and relatively independent subcommunities." "Indeed, even in the case of the" "This implies that the increase of φ(k) is a natural consequence of the fact that vertices with high degree have a larger probability of sharing edges than low-degree vertices." "we identify a strong rich-club ordering in the scientific collaboration network, providing support to the idea that the elite formed by more influential scientists tends to form collaborative groups within specific domains" "the rich-club phenomenon is not necessarily associated with assortative mixing" "the concept of rich-club ordering should be generalized to evaluate the richness of vertices not just in terms of their degree but in terms of the actual traffic or intensity of interactions handled" "a detailed account of the evaluation of the weighted rich-club effect will be provided elsewhere"; sed -n 270,290p colizza_detecting_2006_raw.txt
+```
+
+```
+OK   [1] | The ‘rich-club’ phenomenon refers to the tendency of nodes with high centrality,
+OK   [1] | In a social context, for example, a rich-club coefficient increasing with the de
+OK   [3] | Indeed, even in the case of the
+OK   [3] | This implies that the increase of φ(k) is a natural consequence of the fact that
+OK   [3] | we identify a strong rich-club ordering in the scientific collaboration network,
+OK   [1] | the rich-club phenomenon is not necessarily associated with assortative mixing
+OK   [4] | the concept of rich-club ordering should be generalized to evaluate the richness
+OK   [5] | a detailed account of the evaluation of the weighted rich-club effect will be pr
+As is evident from Fig. 1, the monotonic increase of φ(k) is
+a feature shared by all of the analysed datasets. This behaviour
+is claimed to provide evidence of the rich-club phenomenon as
+φ(k) progressively increases in vertices with increasing degree
+(see, for example, ref. 7 for the Internet case, where a diﬀerent
+representation of the function is adopted with φ deﬁned in terms of
+the rank r of nodes sorted by decreasing degree values). However, a
+monotonic increase of φ(k) does not necessarily imply the presence
+of the rich-club phenomenon. Indeed, even in the case of the
+ER graph, a completely random network, we ﬁnd an increasing
+rich-club coeﬃcient. This implies that the increase of φ(k) is a
+natural consequence of the fact that vertices with high degree have
+a larger probability of sharing edges than low-degree vertices. This
+feature is therefore imposed by construction and does not represent
+a signature of any particular organizing principle or structure, as
+is clear in the ER case. A simple inspection of the φ(k) trend
+is therefore potentially misleading in the discrimination of the
+rich-club phenomenon.
+To ﬁnd opportune baselines for the detection of the rich-club
+phenomenon, we focus on the theoretical analysis of φ(k). In
+the Methods section, we derive an expression for the rich-club
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Barabási–Albert and Colizza verified (Colizza PDF page = journal page − 109; Barabási file is again the arXiv preprint). Appending both.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2"><details>
+<summary>Tool use: **edit_file_v2** • Edit file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_B_structure_position_note.md</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; cat ocr.log; ls ocr | sed &#39;s/-[0-9]*.png//&#39; | sort | uniq -c; head -c 3500 clauset_systematic_2015_raw.txt</summary>
+```bash
+cd /tmp/nsB && cat ocr.log; ls ocr | sed 's/-[0-9]*.png//' | sort | uniq -c; head -c 3500 clauset_systematic_2015_raw.txt
+```
+
+```
+  19 granovetter_strength_1973
+RESEARCH ARTICLE
+NETWORK SCIENCES
+
+Systematic inequality and hierarchy in faculty
+hiring networks
+
+2015 © The Authors, some rights reserved;
+exclusive licensee American Association for
+the Advancement of Science. Distributed
+under a Creative Commons Attribution
+Non-Commercial License 4.0 (CC BY-NC).
+10.1126/sciadv.1400005
+
+Aaron Clauset,1,2,3* Samuel Arbesman,4 Daniel B. Larremore5,6
+
+INTRODUCTION
+Faculty hiring is a ubiquitous feature of academic disciplines, the result
+of which—who hires whose graduates as faculty—shapes nearly every
+aspect of academic life, including scholarly productivity, research priorities, resource allocation, educational outcomes, and the career trajectories of individual scholars (1–4). Despite these fundamental roles, a
+clear and systematic understanding of the common patterns and efficiencies of faculty hiring across disciplines is lacking.
+From the institutional perspective, faculty hiring is an implicit assessment: when an institution u hires as faculty the graduate of another
+institution v, u makes a positive assessment of the quality of v’s teaching and research programs. Similarly, when an individual accepts a job
+offer from u, he or she makes a positive assessment of u’s quality. As a
+collection of such pairwise assessments, a discipline’s faculty hiring
+network (Fig. 1) represents a collective assessment (5) of its own
+educational and research outcomes. When institutions are unequally
+successful in faculty placement, achieving more placements at other
+successful institutions implies a more positive collective assessment of
+that institution’s outcomes.
+Differential success rates in such competitions are a hallmark of social hierarchy, which may emerge from either physical dominance or
+social prestige mechanisms (6). Among academic institutions, physical
+dominance may be neglected, leaving social prestige, in which less
+prestigious institutions seek to emulate the successful behaviors of
+more prestigio
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; grep -n -i -E &#34;19,|faculty|25%|percent|% of|only [0-9]|gender|women|productiv|merit|minimum violation|prestige hierarchy|steeply|move down|mobility|limitation|caveat|cannot|we do not|future work|causal&#34; clauset_systematic_2015_raw.txt | head -120</summary>
+```bash
+cd /tmp/nsB && grep -n -i -E "19,|faculty|25%|percent|% of|only [0-9]|gender|women|productiv|merit|minimum violation|prestige hierarchy|steeply|move down|mobility|limitation|caveat|cannot|we do not|future work|causal" clauset_systematic_2015_raw.txt | head -120
+```
+
+```
+4:Systematic inequality and hierarchy in faculty
+17:Faculty hiring is a ubiquitous feature of academic disciplines, the result
+18:of which—who hires whose graduates as faculty—shapes nearly every
+19:aspect of academic life, including scholarly productivity, research priorities, resource allocation, educational outcomes, and the career trajectories of individual scholars (1–4). Despite these fundamental roles, a
+20:clear and systematic understanding of the common patterns and efficiencies of faculty hiring across disciplines is lacking.
+21:From the institutional perspective, faculty hiring is an implicit assessment: when an institution u hires as faculty the graduate of another
+24:collection of such pairwise assessments, a discipline’s faculty hiring
+27:successful in faculty placement, achieving more placements at other
+35:(7, 8). In this context, prestige in faculty hiring is an operational variable that encompasses differences in both scholastic merit and nonmeritocratic factors such as social status or geography. If such factors
+36:are irrelevant, then prestige is equivalent to merit. More realistically,
+37:nonmeritocratic factors play a role, and the greater their importance,
+38:the lesser the correlation between prestige and merit.
+57:collaborations, graduate admissions, or faculty hiring. Such rankings
+59:like reputation, wealth, and “selectivity,” rather than educational outputs. In contrast, faculty hiring networks simultaneously represent interactions and expert assessments of outcomes, which enables an effective,
+62:roles of merit and status.
+63:Here, we investigate the structure of faculty hiring networks using
+64:complete and hand-curated data on the placements of nearly 19,000
+65:tenure-track or tenured faculty, among 461 North American departmental
+69:broad basis for characterizing general patterns in faculty placement in academia. Institutions in our sample were selected from comprehensive
+71:in our data, a faculty member must have received his or her 
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; sed -n 60,75p clauset_systematic_2015_raw.txt; echo ----; sed -n 480,500p clauset_systematic_2015_raw.txt; echo ----; sed -n 530,570p clauset_systematic_2015_raw.txt; grep -c $&#39;\f&#39; clauset_systematic_2015_raw.txt</summary>
+```bash
+cd /tmp/nsB && sed -n 60,75p clauset_systematic_2015_raw.txt; echo ----; sed -n 480,500p clauset_systematic_2015_raw.txt; echo ----; sed -n 530,570p clauset_systematic_2015_raw.txt; grep -c $'\f' clauset_systematic_2015_raw.txt
+```
+
+```
+quantitative approach by which to characterize the impact of prestige,
+identify large-scale patterns in hiring, and shed light on the relative
+roles of merit and status.
+Here, we investigate the structure of faculty hiring networks using
+complete and hand-curated data on the placements of nearly 19,000
+tenure-track or tenured faculty, among 461 North American departmental
+or school-level academic units, in the disciplines of computer science,
+business, and history (see Supplementary Materials and table S1). These
+disciplines represent highly distinct scholastic traditions, which provide a
+broad basis for characterizing general patterns in faculty placement in academia. Institutions in our sample were selected from comprehensive
+lists of Ph.D.-granting academic units within each discipline. To be present
+in our data, a faculty member must have received his or her doctorate
+from and held at the time of sampling a faculty position at one of the
+in-sample institutions. Of the faculty sampled, 86% met these criteria,
+indicating a nearly closed doctoral ecosystem among these institutions.
+To these data, we apply a novel network-based technique for extracting a prestige hierarchy that best explains the observed hiring decisions.
+----
+Clauset et al. Sci. Adv. 2015;1:e1400005
+
+12 February 2015
+
+criticized methods of the U.S. News & World Report and the NRC (10, 11),
+among others. Rather than choose an arbitrary weighting of arbitrary factors, a prestige hierarchy extracted from a faculty hiring
+network uses the collective assessments of research and education
+outcomes by many semi-independent groups of experts—the faculty themselves. Additionally, faculty hiring is a costly and highly decentralized process, the results of which are generally readily available
+to the public. These factors suggest that the data on which a prestige
+hierarchy depends are likely to be more robust to corruption by selfserving institutional manipulation, a known problem for U.S. News &
+World Report
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; python3 q.py clauset_systematic_2015 &#34;From the institutional perspective, faculty hiring is an implicit assessment&#34; &#34;In this context, prestige in faculty hiring is an operational variable that encompasses differences in both scholastic merit and nonmeritocratic factors such as social status or geography.&#34; &#34;nearly 19,000 tenure-track or tenured faculty, among 461 North American departmental or school-level academic units, in the disciplines of computer science, business, and history&#34; &#34;with only 25% of institutions producing 71 to 86% of all tenure-track faculty&#34; &#34;only 9 to 14% of faculty are placed at institutions more prestigious than their doctorate&#34; &#34;Under a meritocracy, the observed placement rates would imply that faculty with doctorates from the top 10 units are inherently two to six times more productive than faculty with doctorates from the third 10 units.&#34; &#34;Despite the confounded nature of merit and social status within measurable prestige, the observed hierarchies are sufficiently steep that attributing their structure to differences in merit alone seems implausible.&#34; &#34;However, the specific mechanisms that produce and maintain these hierarchies remain unclear&#34; &#34;A proper study of this phenomenon would require detailed data on the characteristics of the research, mentoring, institutional resources, and other factors that are not part of the present study.&#34; &#34;median placement for women graduating from the top 15% of units is 12 to 18% worse than for men from the same institutions&#34; &#34;Across disciplines, prestige hierarchies make the most accurate predictions of faculty placement, with AUCs ranging from 0.58 to 0.67&#34; &#34;Differential success rates in such competitions are a hallmark of social hierarchy&#34; &#34;faculty place an average of 27 to 47 ranks below their doctorate&#34;; grep -n -B3 -A6 &#34;only 25%&#34; clauset_systematic_2015_raw.txt | head; grep -n -B2 -A3 &#34;27 to 47&#34; clauset_systematic_2015.txt</summary>
+```bash
+cd /tmp/nsB && python3 q.py clauset_systematic_2015 "From the institutional perspective, faculty hiring is an implicit assessment" "In this context, prestige in faculty hiring is an operational variable that encompasses differences in both scholastic merit and nonmeritocratic factors such as social status or geography." "nearly 19,000 tenure-track or tenured faculty, among 461 North American departmental or school-level academic units, in the disciplines of computer science, business, and history" "with only 25% of institutions producing 71 to 86% of all tenure-track faculty" "only 9 to 14% of faculty are placed at institutions more prestigious than their doctorate" "Under a meritocracy, the observed placement rates would imply that faculty with doctorates from the top 10 units are inherently two to six times more productive than faculty with doctorates from the third 10 units." "Despite the confounded nature of merit and social status within measurable prestige, the observed hierarchies are sufficiently steep that attributing their structure to differences in merit alone seems implausible." "However, the specific mechanisms that produce and maintain these hierarchies remain unclear" "A proper study of this phenomenon would require detailed data on the characteristics of the research, mentoring, institutional resources, and other factors that are not part of the present study." "median placement for women graduating from the top 15% of units is 12 to 18% worse than for men from the same institutions" "Across disciplines, prestige hierarchies make the most accurate predictions of faculty placement, with AUCs ranging from 0.58 to 0.67" "Differential success rates in such competitions are a hallmark of social hierarchy" "faculty place an average of 27 to 47 ranks below their doctorate"; grep -n -B3 -A6 "only 25%" clauset_systematic_2015_raw.txt | head; grep -n -B2 -A3 "27 to 47" clauset_systematic_2015.txt
+```
+
+```
+OK   [1] | From the institutional perspective, faculty hiring is an implicit assessment
+OK   [1] | In this context, prestige in faculty hiring is an operational variable that enco
+OK   [1] | nearly 19,000 tenure-track or tenured faculty, among 461 North American departme
+MISS [] | with only 25% of institutions producing 71 to 86% of all tenure-track faculty
+MISS [] | only 9 to 14% of faculty are placed at institutions more prestigious than their 
+MISS [] | Under a meritocracy, the observed placement rates would imply that faculty with 
+OK   [5] | Despite the confounded nature of merit and social status within measurable prest
+OK   [5] | However, the specific mechanisms that produce and maintain these hierarchies rem
+OK   [5] | A proper study of this phenomenon would require detailed data on the characteris
+MISS [] | median placement for women graduating from the top 15% of units is 12 to 18% wor
+OK   [4] | Across disciplines, prestige hierarchies make the most accurate predictions of f
+OK   [1] | Differential success rates in such competitions are a hallmark of social hierarc
+MISS [] | faculty place an average of 27 to 47 ranks below their doctorate
+126-Across the sampled disciplines, we find
+127-that faculty production (number of facStanford
+128-Washington
+129:ulty placed) is highly skewed, with only 25%
+130-of institutions producing 71 to 86% of all
+131-Princeton
+132-Carnegie Mellon
+133-Yale
+134-tenure-track faculty (table S2; this and subsequent ranges indicate the range of a given
+135-quantity across the three disciplines, unn
+166-
+167-    If faculty placement overall followed a perfect social hierarchy, then doctoral institution. Across disciplines, we find that faculty place an
+168:no faculty would be hired at an institution more prestigious than their average of 27 to 47 ranks below their doctorate (Fig. 3). The median
+169-doctorate (6). The extent to which a particular hiring network exhibits change of 21 to 35 is smaller, indicating a sizable right skew in 
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Some Clauset sentences are interrupted by figure labels in both extractions; I'll try `pdftotext -raw` to confirm them cleanly.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd &#34;/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/FOUNDY_Intro&#34; &amp;&amp; pdftotext -raw &#34;files/388/Clauset et al. - 2015 - Systematic inequality and hierarchy in faculty hir.pdf&#34; /tmp/nsB/clauset_rawmode.txt &amp;&amp; cd /tmp/nsB &amp;&amp; cp clauset_rawmode.txt clauset2_raw.txt &amp;&amp; cp clauset_systematic_2015.txt clauset2.txt &amp;&amp; python3 q.py clauset2 &#34;with only 25% of institutions producing 71 to 86% of all tenure-track faculty&#34; &#34;only 9 to 14% of faculty are placed at institutions more prestigious than their doctorate&#34; &#34;Under a meritocracy, the observed placement rates would imply that faculty with doctorates from the top 10 units are inherently two to six times more productive than faculty with doctorates from the third 10 units.&#34; &#34;median placement for women graduating from the top 15% of units is 12 to 18% worse than for men from the same institutions&#34; &#34;faculty place an average of 27 to 47 ranks below their doctorate&#34; &#34;The magnitude of these differences makes a pure meritocracy seem implausible, suggesting the influence of nonmeritocratic factors like social status.&#34;</summary>
+```bash
+cd "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/FOUNDY_Intro" && pdftotext -raw "files/388/Clauset et al. - 2015 - Systematic inequality and hierarchy in faculty hir.pdf" /tmp/nsB/clauset_rawmode.txt && cd /tmp/nsB && cp clauset_rawmode.txt clauset2_raw.txt && cp clauset_systematic_2015.txt clauset2.txt && python3 q.py clauset2 "with only 25% of institutions producing 71 to 86% of all tenure-track faculty" "only 9 to 14% of faculty are placed at institutions more prestigious than their doctorate" "Under a meritocracy, the observed placement rates would imply that faculty with doctorates from the top 10 units are inherently two to six times more productive than faculty with doctorates from the third 10 units." "median placement for women graduating from the top 15% of units is 12 to 18% worse than for men from the same institutions" "faculty place an average of 27 to 47 ranks below their doctorate" "The magnitude of these differences makes a pure meritocracy seem implausible, suggesting the influence of nonmeritocratic factors like social status."
+```
+
+```
+MISS [] | with only 25% of institutions producing 71 to 86% of all tenure-track faculty
+OK   [3] | only 9 to 14% of faculty are placed at institutions more prestigious than their 
+OK   [2] | Under a meritocracy, the observed placement rates would imply that faculty with 
+OK   [3] | median placement for women graduating from the top 15% of units is 12 to 18% wor
+OK   [3] | faculty place an average of 27 to 47 ranks below their doctorate
+OK   [2] | The magnitude of these differences makes a pure meritocracy seem implausible, su
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; grep -n -B2 -A4 &#34;only 25%&#34; clauset_rawmode.txt</summary>
+```bash
+cd /tmp/nsB && grep -n -B2 -A4 "only 25%" clauset_rawmode.txt
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; grep -n -B3 -A6 &#34;highly skewed&#34; clauset_rawmode.txt</summary>
+```bash
+cd /tmp/nsB && grep -n -B3 -A6 "highly skewed" clauset_rawmode.txt
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; grep -n -i -B3 -A6 &#34;skewed&#34; clauset_rawmode.txt | head -40</summary>
+```bash
+cd /tmp/nsB && grep -n -i -B3 -A6 "skewed" clauset_rawmode.txt | head -40
+```
+
+```
+111-RESULTS
+112-Across the sampled disciplines, we find
+113-that faculty production (number of fac-
+114:ultyplaced) is highlyskewed,withonly25%
+115-of institutions producing 71 to 86% of all
+116-tenure-track faculty (table S2;this and sub-
+117-sequentrangesindicatetherangeofagiven
+118-quantity across the three disciplines, un-
+119-less otherwise noted). The number of fac-
+120-ulty within an academic unit (number of
+121-faculty hired, that is, the unit’s size) is also
+122:skewed, with some units being two to three
+123-times larger than others. Business schools
+124-are especially large, generally containing
+125-several internal departments, with a mean
+126-size of 70 faculty members who received
+127-their doctorates from other within-sample
+128-units, whereas computer science and his-
+--
+343-history (top to bottom) showing central positions for institutions in the top 15% of prestige ranks (high-
+344-lighted; vertex size proportional to ko). (B and C) Estimated probability density functions for relative
+345-change in prestige (doctoral to faculty institution) for (B) the top 15% and (C) the remaining institutions,
+346:showing a common but right-skewed structure.
+347-RESEARCH ARTICLE
+348-Clauset et al. Sci. Adv. 2015;1:e1400005 12 February 2015 3 of 6
+349-Downloaded from https://www.science.org at University of Virginia on April 18, 2024from which we calculate a distribution of rank changes relative to doc-
+350-toral rank for each faculty in our sample. The predictive accuracy of
+351-each measure is then quantified by its area under the curve (AUC)
+352-score (16) for the placements of the assistant professors in our sample.
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; python3 q.py clauset2 &#34;Across disciplines, we find that faculty hiring follows a common and steeply hierarchical structure that reflects profound social inequality.&#34; &#34;Furthermore, doctoral prestige alone better predicts ultimate placement than a U.S. News &amp; World Report rank&#34; &#34;How many meritorious research careers are derailed by the faculty job market’s preference for prestigious doctorates?&#34; &#34;the extracted hierarchies are&#34; ; grep -n -A4 &#34;only 9 to 14&#34; clauset_rawmode.txt; grep -n -B1 -A5 &#34;Furthermore, the extracted hierar&#34; clauset_rawmode.txt</summary>
+```bash
+cd /tmp/nsB && python3 q.py clauset2 "Across disciplines, we find that faculty hiring follows a common and steeply hierarchical structure that reflects profound social inequality." "Furthermore, doctoral prestige alone better predicts ultimate placement than a U.S. News & World Report rank" "How many meritorious research careers are derailed by the faculty job market’s preference for prestigious doctorates?" "the extracted hierarchies are" ; grep -n -A4 "only 9 to 14" clauset_rawmode.txt; grep -n -B1 -A5 "Furthermore, the extracted hierar" clauset_rawmode.txt
+```
+
+```
+OK   [1] | Across disciplines, we find that faculty hiring follows a common and steeply hie
+OK   [1] | Furthermore, doctoral prestige alone better predicts ultimate placement than a U
+OK   [5] | How many meritorious research careers are derailed by the faculty job market’s p
+OK   [3] | the extracted hierarchies are
+256-9 to 14% of faculty are placed at institutions more prestigious than
+257:their doctorate (r = 0.86 to 0.91). Furthermore, the extracted hierar-
+258-chies are 19 to 33% stronger than expected from the observed in-
+259-equality in faculty production rates alone (Monte Carlo, P < 10−5
+260-; see
+261-SupplementaryMaterials),indicatingaspe-
+262-cific and significant preference for hiring
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; grep -n &#34;of 6&#34; clauset_rawmode.txt; grep -n -E &#34;Under a meritoc|Across disciplines, we find steep&#34; clauset_rawmode.txt</summary>
+```bash
+cd /tmp/nsB && grep -n "of 6" clauset_rawmode.txt; grep -n -E "Under a meritoc|Across disciplines, we find steep" clauset_rawmode.txt
+```
+
+```
+106:Clauset et al. Sci. Adv. 2015;1:e1400005 12 February 2015 1 of 6
+227:Clauset et al. Sci. Adv. 2015;1:e1400005 12 February 2015 2 of 6
+348:Clauset et al. Sci. Adv. 2015;1:e1400005 12 February 2015 3 of 6
+457:Clauset et al. Sci. Adv. 2015;1:e1400005 12 February 2015 4 of 6
+578:Clauset et al. Sci. Adv. 2015;1:e1400005 12 February 2015 5 of 6
+703:Clauset et al. Sci. Adv. 2015;1:e1400005 12 February 2015 6 of 6
+156:ferences in the production of scholarship. Under a meritoc-
+255:Across disciplines, we find steep prestige hierarchies, in which only
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; grep -n -E &#34;A proper study|specific mechanisms that|confounded nature|How many meritorious|small world|AUCs ranging&#34; clauset_rawmode.txt</summary>
+```bash
+cd /tmp/nsB && grep -n -E "A proper study|specific mechanisms that|confounded nature|How many meritorious|small world|AUCs ranging" clauset_rawmode.txt
+```
+
+```
+359:dictions of faculty placement, with AUCs ranging from 0.58 to 0.67
+382:tions literally perceive a “small world” (20) as compared to faculty
+462:faculty placement. Despite the confounded nature of merit and social
+485:zational science (8, 25–31). However, the specific mechanisms that
+504:hiring across academia. A proper study of this phenomenon would re-
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Clauset verified with page locations ("p. N of 6" in the Science Advances article-number format). Appending Clauset.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2"><details>
+<summary>Tool use: **edit_file_v2** • Edit file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_B_structure_position_note.md</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; head -c 4000 guimera_team_2005_raw.txt; echo; grep -n -i -E &#34;incumbent|newcomer|giant component|impact factor|broadway|musical|four fields|social psychology|economics|ecology|astronomy|1877|1990|2000|limitation|caution&#34; guimera_team_2005_raw.txt | head -80</summary>
+```bash
+cd /tmp/nsB && head -c 4000 guimera_team_2005_raw.txt; echo; grep -n -i -E "incumbent|newcomer|giant component|impact factor|broadway|musical|four fields|social psychology|economics|ecology|astronomy|1877|1990|2000|limitation|caution" guimera_team_2005_raw.txt | head -80
+```
+
+```
+NIH Public Access
+Author Manuscript
+Science. Author manuscript; available in PMC 2007 December 10.
+
+NIH-PA Author Manuscript
+
+Published in final edited form as:
+Science. 2005 April 29; 308(5722): 697–702.
+
+Team Assembly Mechanisms Determine Collaboration Network
+Structure and Team Performance
+Roger Guimerà1,*, Brian Uzzi2,*, Jarrett Spiro3, and Luís A. Nunes Amaral1,†
+1Department of Chemical and Biological Engineering, Northwestern University, Evanston, IL 60208, USA.
+2Kellogg School of Management and Department of Sociology, Northwestern University, Evanston, IL 60208,
+USA.
+3Graduate School of Business, Stanford University, Stanford, CA 94305, USA.
+
+Abstract
+
+NIH-PA Author Manuscript
+
+Agents in creative enterprises are embedded in networks that inspire, support, and evaluate their
+work. Here, we investigate how the mechanisms by which creative teams self-assemble determine
+the structure of these collaboration networks. We propose a model for the self-assembly of creative
+teams that has its basis in three parameters: team size, the fraction of newcomers in new productions,
+and the tendency of incumbents to repeat previous collaborations. The model suggests that the
+emergence of a large connected community of practitioners can be described as a phase transition.
+We find that team assembly mechanisms determine both the structure of the collaboration network
+and team performance for teams derived from both artistic and scientific fields.
+
+NIH-PA Author Manuscript
+
+Teams are assembled because of the need to incorporate individuals with different ideas, skills,
+and resources. Creativity is spurred when proven innovations in one domain are introduced
+into a new domain, solving old problems and inspiring fresh thinking (1-4). However, research
+shows that the right balance of diversity on a team is elusive. Although diversity may potentially
+spur creativity, it typically promotes conflict and miscommunication (5-7). It also runs counter
+to the security most individuals expe
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; sed -n 70,82p guimera_team_2005_raw.txt; echo ----; sed -n 108,125p guimera_team_2005_raw.txt; echo -----; sed -n 236,290p guimera_team_2005_raw.txt; echo ----; sed -n 340,356p guimera_team_2005_raw.txt</summary>
+```bash
+cd /tmp/nsB && sed -n 70,82p guimera_team_2005_raw.txt; echo ----; sed -n 108,125p guimera_team_2005_raw.txt; echo -----; sed -n 236,290p guimera_team_2005_raw.txt; echo ----; sed -n 340,356p guimera_team_2005_raw.txt
+```
+
+```
+we considered all 2258 productions in the period from 1877 to 1990 (12,13). Productions are
+defined as musical shows that were performed at least once in Broadway. The team members
+comprise individuals responsible for composing the music, writing the libretto and the lyrics,
+designing the choreography, directing, and producing the show, but not the actors that
+performed in it. For each of the scientific disciplines, we considered all collaborations that
+resulted in publications in recognized journals within the fields studied (14): seven social
+psychology journals, nine economics journals, 10 ecology journals, and six astronomy journals
+(Table 2). Collaboration networks (15-19) were then built for each of the journals
+independently and for the whole discipline by merging the data from the journals within a
+discipline (Materials and Methods).
+
+NIH-PA Author Manuscript
+
+----
+more diverse reservoir of knowledge. At the same time and for the same reasons, the way teams
+are organized into a larger network affects the likelihood of breakthroughs occuring in a given
+field.
+The agents composing a team may be classified according to their experience. Some agents
+are newcomers, that is, rookies, with little experience and unseasoned skills. Other agents are
+incumbents. They are established persons with a track record, a reputation, and identifiable
+talents. The differentiation of agents into newcomers and incumbents results in four possible
+types of links within a team: (i) newcomer-newcomer, (ii) newcomer-incumbent, (iii)
+incumbent-incumbent, and (iv) repeat incumbent-incumbent. The distribution of different
+types of links reflects the team's underlying diversity. For example, if teams have a
+preponderance of repeat incumbent-incumbent links, it is less likely that they will have
+innovative ideas because their shared experiences tend to homogenize their pool of knowledge.
+
+Science. Author manuscript; available in PMC 2007 December 10.
+
+Guimerà et al.
+
+Page 3
+-----
+data but 
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; python3 q.py guimera_team_2005 &#34;Agents in creative enterprises are embedded in networks that inspire, support, and evaluate their work.&#34; &#34;We find that team assembly mechanisms determine both the structure of the collaboration network and team performance for teams derived from both artistic and scientific fields.&#34; &#34;we considered all 2258 productions in the period from 1877 to 1990&#34; &#34;Higher values of p indicate fewer opportunities for newcomers to enter a field.&#34; &#34;The result for p implies that successful teams have a higher fraction of incumbents, who contribute expertise and know-how to the team, whereas the result for q implies that teams that are less diverse typically have lower levels of performance.&#34; &#34;Teams publishing in journals with a high-impact factor typically give rise to a large giant component, whereas teams publishing in low-impact journals typically form small isolated clusters.&#34; &#34;Surprisingly, neither p, q, or S were significantly correlated with impact factor in astronomy.&#34; &#34;Whether these differences are caused by the needs imposed by the creative enterprise itself or to historical or other reasons is a question that we cannot answer conclusively.&#34; &#34;The value of q must be obtained numerically by simulating the model with different tentative values of q until the fraction fR of repeat incumbent-incumbent links predicted by the model coincides with the value measured from the data.&#34; &#34;four out of the five creative networks we consider are very close to the tipping line at which an invisible college emerges&#34; &#34;Successful teams evolve toward a size that is large enough to enable specialization and effective division of labor among teammates but small enough to avoid overwhelming costs of group coordination&#34; &#34;We used each journal&#39;s impact factor as a proxy for the typical quality of teams&#39; output.&#34;; grep -n -B2 -A12 &#34;^Table 1&#34; guimera_team_2005_raw.txt | head -60</summary>
+```bash
+cd /tmp/nsB && python3 q.py guimera_team_2005 "Agents in creative enterprises are embedded in networks that inspire, support, and evaluate their work." "We find that team assembly mechanisms determine both the structure of the collaboration network and team performance for teams derived from both artistic and scientific fields." "we considered all 2258 productions in the period from 1877 to 1990" "Higher values of p indicate fewer opportunities for newcomers to enter a field." "The result for p implies that successful teams have a higher fraction of incumbents, who contribute expertise and know-how to the team, whereas the result for q implies that teams that are less diverse typically have lower levels of performance." "Teams publishing in journals with a high-impact factor typically give rise to a large giant component, whereas teams publishing in low-impact journals typically form small isolated clusters." "Surprisingly, neither p, q, or S were significantly correlated with impact factor in astronomy." "Whether these differences are caused by the needs imposed by the creative enterprise itself or to historical or other reasons is a question that we cannot answer conclusively." "The value of q must be obtained numerically by simulating the model with different tentative values of q until the fraction fR of repeat incumbent-incumbent links predicted by the model coincides with the value measured from the data." "four out of the five creative networks we consider are very close to the tipping line at which an invisible college emerges" "Successful teams evolve toward a size that is large enough to enable specialization and effective division of labor among teammates but small enough to avoid overwhelming costs of group coordination" "We used each journal's impact factor as a proxy for the typical quality of teams' output."; grep -n -B2 -A12 "^Table 1" guimera_team_2005_raw.txt | head -60
+```
+
+```
+OK   [1] | Agents in creative enterprises are embedded in networks that inspire, support, a
+OK   [1] | We find that team assembly mechanisms determine both the structure of the collab
+OK   [2] | we considered all 2258 productions in the period from 1877 to 1990
+OK   [3] | Higher values of p indicate fewer opportunities for newcomers to enter a field.
+OK   [5] | The result for p implies that successful teams have a higher fraction of incumbe
+OK   [5] | Teams publishing in journals with a high-impact factor typically give rise to a 
+OK   [5] | Surprisingly, neither p, q, or S were significantly correlated with impact facto
+OK   [5] | Whether these differences are caused by the needs imposed by the creative enterp
+OK   [6] | The value of q must be obtained numerically by simulating the model with differe
+OK   [4] | four out of the five creative networks we consider are very close to the tipping
+OK   [1] | Successful teams evolve toward a size that is large enough to enable specializat
+OK   [4] | We used each journal's impact factor as a proxy for the typical quality of teams
+497-
+498-NIH-PA Author Manuscript
+499:Table 1
+500-
+501-NIH-PA Author Manuscript
+502-
+503-NIH-PA Author Manuscript
+504-
+505-BMI
+506-Social psychology
+507-Economics
+508-Ecology
+509-Astronomy
+510-
+511-Field
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Guimerà verified (author-manuscript pages only). Now Uzzi & Spiro 2005.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; head -c 2500 uzzi_collaboration_2005_raw.txt; echo; grep -n -i -E &#34;inverted|U-shaped|curvilinear|parabolic|threshold|up to a point|bliss|2,092|474|1945|1989|small world Q|Q is|financial|critic|limitation|future research|caveat&#34; uzzi_collaboration_2005_raw.txt | head -80</summary>
+```bash
+cd /tmp/nsB && head -c 2500 uzzi_collaboration_2005_raw.txt; echo; grep -n -i -E "inverted|U-shaped|curvilinear|parabolic|threshold|up to a point|bliss|2,092|474|1945|1989|small world Q|Q is|financial|critic|limitation|future research|caveat" uzzi_collaboration_2005_raw.txt | head -80
+```
+
+```
+Collaboration and Creativity: The Small
+World Problem1
+Brian Uzzi
+Northwestern University
+Jarrett Spiro
+Stanford University
+
+Small world networks have received disproportionate notice in diverse fields because of their suspected effect on system dynamics.
+The authors analyzed the small world network of the creative artists
+who made Broadway musicals from 1945 to 1989. Using original
+arguments, new statistical methods, and tests of construct validity,
+they found that the varying “small world” properties of the systemiclevel network of these artists affected their creativity in terms of the
+financial and artistic performance of the musicals they produced.
+The small world network effect was parabolic; performance
+increased up to a threshold, after which point the positive effects
+reversed.
+Creativity aids problem solving, innovation, and aesthetics, yet our understanding of it is still forming. We know that creativity is spurred when
+diverse ideas are united or when creative material in one domain inspires
+or forces fresh thinking in another. These structural preconditions suggest
+1
+Our thanks go out to Duncan Watts, Huggy Rao, Peter Murmann, Ron Burt, Matt
+Bothner, Frank Dobbin, Bruce Kogut, Lee Fleming, David Stark, John Padgett, Dan
+Diermeier, Stuart Oken, Jerry Davis, Woody Powell, workshop participants at the
+University of Chicago, the University of California at Los Angeles, Harvard University,
+Cornell University, and New York University, the Northwestern University Institute
+for Complex Organizations (NICO), and the excellent AJS reviewers, especially the
+reviewer who provided a remarkable 15, single-spaced pages of superb commentary.
+We particularly wish to thank Mark Newman for his advice and help in developing
+and interpreting the bipartite-affiliation network statistics. We also wish to give very
+special thanks to the Santa Fe Institute for creating a rich collaborative environment
+wherein these ideas first emerged, and to John Padgett, the organizer of the 
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; grep -n -i -E &#34;bipartite|affiliation network|team-level|unit of analysis|conclusion|discussion|we found|our results|limitation|generaliz|future|cannot|caution|one industry|single|homogen|same people|rewiring|random network&#34; uzzi_collaboration_2005_raw.txt | sed -n 1,90p</summary>
+```bash
+cd /tmp/nsB && grep -n -i -E "bipartite|affiliation network|team-level|unit of analysis|conclusion|discussion|we found|our results|limitation|generaliz|future|cannot|caution|one industry|single|homogen|same people|rewiring|random network" uzzi_collaboration_2005_raw.txt | sed -n 1,90p
+```
+
+```
+27:reviewer who provided a remarkable 15, single-spaced pages of superb commentary.
+29:and interpreting the bipartite-affiliation network statistics. We also wish to give very
+81:to the conclusion that small worlds might account for how quickly ideas
+85:flow through disciplines—a conclusion echoing Fleming, King, and Juba’s
+120:homogenize the pool of material available to different groups, while at
+144:for examining bipartite-affiliation networks. Occurring often in social life,
+145:bipartite-affiliation networks occur when actors collaborate within project
+147:network. Bipartite-affiliation networks are distinctive in that all actors in
+206:Bacon, which does a better job of capturing a key feature of bipartite networks by
+233:of Cambridge, but when we looked at the roster, we found to our pleased
+246:Small World Theory for Bipartite (Affiliation) Networks
+275:for bipartite networks. As noted above, bipartite networks are widespread
+279:Bipartite networks have a special structure: all members on the same
+283:team memberships. Figure 1 illustrates a theoretical bipartite network
+285:A key structural implication of the unipartite projection of the bipartite
+287:random network because of the pervasiveness of fully linked cliques.
+293:a single actor and indicates how many of an actor’s ties are tied to each other, an
+309:Fig. 1.—Bipartite-affiliation network and its unipartite projection. Top row represents
+316:for their bipartite structure, the level of clustering in the network was
+317:not appreciably greater than would be expected in a random bipartite
+318:network of the same size—suggesting that the CC of the one-mode projection from a bipartite network could be a misleading indicator of a small
+321:model for correcting the estimates of the CC and PL in random bipartite
+322:networks. They reasoned that the “true” clustering in a bipartite network
+328:a bipartite network where all actors are part of only one team—no actors
+329:are members of multiple teams. In the un
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; sed -n 140,160p uzzi_collaboration_2005_raw.txt; echo ----; sed -n 640,700p uzzi_collaboration_2005_raw.txt; echo -----; sed -n 2736,2810p uzzi_collaboration_2005_raw.txt; echo ----; sed -n 2960,2990p uzzi_collaboration_2005_raw.txt</summary>
+```bash
+cd /tmp/nsB && sed -n 140,160p uzzi_collaboration_2005_raw.txt; echo ----; sed -n 640,700p uzzi_collaboration_2005_raw.txt; echo -----; sed -n 2736,2810p uzzi_collaboration_2005_raw.txt; echo ----; sed -n 2960,2990p uzzi_collaboration_2005_raw.txt
+```
+
+```
+also contain rare failure data on musicals that died in preproduction—a
+condition similar to knowing about coauthors’ papers that never made
+publication but that produced the same tie-building (or tie-breaking) consequences as published papers—which enables us to avoid underestimating key relations in the network (Wasserman and Faust 1994).
+To bolster the strength of our inferences, we use a new statistical model
+for examining bipartite-affiliation networks. Occurring often in social life,
+bipartite-affiliation networks occur when actors collaborate within project
+groups—for example, directors on the same board within the wider network of interlocks or authors on the same paper within the wider citation
+network. Bipartite-affiliation networks are distinctive in that all actors in
+the network are part of at least one fully linked cluster (e.g., all directors
+on the same board are linked directly to each other), which affects critical
+social dynamics as well as artificially inflates key small world network
+statistics. We use the Newman, Strogatz, and Watts (2001) method to
+adjust properly for these unique network dynamics.
+We begin by describing the original Milgram thesis and finding, which
+illustrates the basis of the small world concept, and then develop our
+conceptual model with a focus on the mechanisms by which variation in
+a small world affects behavior. We then turn to applying the abstract
+small world model to the case of the Broadway musical industry with an
+eye to developing testable conjectures about performance and to testing
+the construct validity of our small world mechanisms.
+
+----
+into a cluster (Portes and Sensenbrenner 1993) or promote recruitment
+by homophily, minimizing diversity and reproducing rather than advancing existing ways of thinking (McPherson, Smith-Lovin, and Cook
+2001). Expectations of reciprocity intensify an actor’s exclusive involvement with certain others at the cost of forming new ties with persons who
+have a fresh artistic view 
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; python3 q.py uzzi_collaboration_2005 &#34;The small world network effect was parabolic; performance increased up to a threshold, after which point the positive effects reversed.&#34; &#34;Bipartite-affiliation networks are distinctive in that all actors in the network are part of at least one fully linked cluster (e.g., all directors on the same board are linked directly to each other), which affects critical social dynamics as well as artificially inflates key small world network statistics.&#34; &#34;The ideas most likely to flow can be conventional rather than fresh ideas because of the common information effect and because newcomers find it harder to land “slots” on productions.&#34; &#34;Our data include the population of all 2,092 people who worked on 474 musicals of new material produced for Broadway from 1945 to 1989.&#34; &#34;our sample also includes data on 49 shows that died in preproduction&#34; &#34;Small world networks do benefit performance but only up to a threshold, after which the positive effects of small worlds reverse.&#34; &#34;Our conceptualization of how a small world affects behavior was specific to bipartite-affiliation networks. We did not speculate on how our theory would change for unipartite theories, a natural direction for future research.&#34; &#34;If small world networks can have positive and negative impacts, how do they arise and evolve?&#34; &#34;Although these connections between history and our quantitative model are somewhat speculative&#34; &#34;Thus, while collaboration happens between direct relations, the small world influences lower-level mechanisms such as actors’ egocentric webs (Burt 2004)&#34; &#34;In this industry, financial and artistic success are correlated 0.56&#34; &#34;These data are not available for 1982 to 1989&#34; &#34;In our model, we control for competition and production size. We cannot&#34;; sed -n 1223,1230p uzzi_collaboration_2005_raw.txt; sed -n 769,775p uzzi_collaboration_2005_raw.txt</summary>
+```bash
+cd /tmp/nsB && python3 q.py uzzi_collaboration_2005 "The small world network effect was parabolic; performance increased up to a threshold, after which point the positive effects reversed." "Bipartite-affiliation networks are distinctive in that all actors in the network are part of at least one fully linked cluster (e.g., all directors on the same board are linked directly to each other), which affects critical social dynamics as well as artificially inflates key small world network statistics." "The ideas most likely to flow can be conventional rather than fresh ideas because of the common information effect and because newcomers find it harder to land “slots” on productions." "Our data include the population of all 2,092 people who worked on 474 musicals of new material produced for Broadway from 1945 to 1989." "our sample also includes data on 49 shows that died in preproduction" "Small world networks do benefit performance but only up to a threshold, after which the positive effects of small worlds reverse." "Our conceptualization of how a small world affects behavior was specific to bipartite-affiliation networks. We did not speculate on how our theory would change for unipartite theories, a natural direction for future research." "If small world networks can have positive and negative impacts, how do they arise and evolve?" "Although these connections between history and our quantitative model are somewhat speculative" "Thus, while collaboration happens between direct relations, the small world influences lower-level mechanisms such as actors’ egocentric webs (Burt 2004)" "In this industry, financial and artistic success are correlated 0.56" "These data are not available for 1982 to 1989" "In our model, we control for competition and production size. We cannot"; sed -n 1223,1230p uzzi_collaboration_2005_raw.txt; sed -n 769,775p uzzi_collaboration_2005_raw.txt
+```
+
+```
+OK   [1] | The small world network effect was parabolic; performance increased up to a thre
+OK   [4] | Bipartite-affiliation networks are distinctive in that all actors in the network
+OK   [18] | The ideas most likely to flow can be conventional rather than fresh ideas becaus
+OK   [19] | Our data include the population of all 2,092 people who worked on 474 musicals o
+OK   [19] | our sample also includes data on 49 shows that died in preproduction
+OK   [46] | Small world networks do benefit performance but only up to a threshold, after wh
+OK   [47] | Our conceptualization of how a small world affects behavior was specific to bipa
+OK   [52] | If small world networks can have positive and negative impacts, how do they aris
+OK   [51] | Although these connections between history and our quantitative model are somewh
+OK   [19] | Thus, while collaboration happens between direct relations, the small world infl
+OK   [22] | In this industry, financial and artistic success are correlated 0.56
+OK   [21] | These data are not available for 1982 to 1989
+OK   [30] | In our model, we control for competition and production size. We cannot
+In our model, we control for competition and production size. We cannot
+control for the anticipated hit quality of the show. However, this factor
+is unlikely to create a systematic bias because of the difficulty of predicting
+a hit show (Rosenberg and Harburg 1992). Thus, this variable may correlate with factors other than theater goers’ convenience, but probably
+in unsystematic ways.
+We included the standard economic control variables for this industry
+(Vogel 2001). To control for changes in sources of revenue, we included
+the variable inflation-adjusted ticket price, where tickets are the main
+on a five-point critics’ scale: pan (⫺2), unfavorable (⫺1), mixed (0), favorable (⫹1), and rave (⫹2). For each musical, we averaged the reviews,
+which resulted in score ranges from ⫺2 (all pan reviews) to ⫹2 (all rave
+reviews). These data are not available f
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Uzzi & Spiro verified (PDF page = journal page − 446). It includes a notable passage about newcomers finding it harder to land "slots." Appending Guimerà and Uzzi.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2"><details>
+<summary>Tool use: **edit_file_v2** • Edit file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_B_structure_position_note.md</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; head -c 3000 gould_origins_2002_raw.txt; echo; grep -n -i -E &#34;hypothes|data|sample|study|asymmetr|symmetry|self-reinforc|social influence|quality|status|attachment|we find|test|limitation|caveat|cannot|future&#34; gould_origins_2002_raw.txt | head -100</summary>
+```bash
+cd /tmp/nsB && head -c 3000 gould_origins_2002_raw.txt; echo; grep -n -i -E "hypothes|data|sample|study|asymmetr|symmetry|self-reinforc|social influence|quality|status|attachment|we find|test|limitation|caveat|cannot|future" gould_origins_2002_raw.txt | head -100
+```
+
+```
+The Origins of Status Hierarchies: A Formal
+Theory and Empirical Test1
+Roger V. Gould
+Yale University
+
+This article offers a formal theoretical model of the emergence of
+hierarchy that bridges the division between individualistic and structuralist accounts of inequality. In the model, actors reproduce status
+hierarchies by adjusting their own status-conferring gestures according to collective attributions. These collective attributions are
+just the aggregate of individual gestures, leading to a self-reinforcing
+status ranking. Winner-take-all hierarchies are discouraged, however, when people prefer reciprocation of their status-conferring actions. The model therefore depicts a status ranking as an equilibrium
+resulting from individual responses to the trade-off between social
+influence and the distaste for making unreciprocated gestures. Analysis of the model generates several precise predictions about the
+patterns that social networks should exhibit at equilibrium. Data
+on interaction in task groups, friendship ratings in a fraternity, and
+play in a set of infant quintuplets is used to show that the formal
+theory makes unusually accurate predictions about network
+structure.
+Differentiation among individuals and groups with respect to various
+valued outcomes is a core topic for social science. A major reason, apart
+from the distrust of inequality that many social scientists share, is the
+near-universality of the phenomenon: across a wide range of scales and
+contexts, actors are sorted into social positions that carry unequal rewards,
+obligations, and expectations. For example, small groups regularly differentiate into a few core members who contribute actively to conversation
+1
+
+The author gratefully acknowledges the support of the National Science Foundation
+(SBR-9876550), and the comments of Peter Bearman, Ronald S. Burt, James Fearon,
+Chip Heath, and the AJS reviewers on an earlier version of this article. In addition,
+Vincent Buskens offered invaluable advice an
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; sed -n 140,160p gould_origins_2002_raw.txt; echo ----; sed -n 240,275p gould_origins_2002_raw.txt; echo ----; grep -n -i -E &#34;^conclusion|^discussion|limitation|one must|caution|should be noted|admittedly|small groups|Bales|Newcomb|quintuplet|17 |members|groups of|N =|n =&#34; gould_origins_2002_raw.txt | head -60</summary>
+```bash
+cd /tmp/nsB && sed -n 140,160p gould_origins_2002_raw.txt; echo ----; sed -n 240,275p gould_origins_2002_raw.txt; echo ----; grep -n -i -E "^conclusion|^discussion|limitation|one must|caution|should be noted|admittedly|small groups|Bales|Newcomb|quintuplet|17 |members|groups of|N =|n =" gould_origins_2002_raw.txt | head -60
+```
+
+```
+Although the distinction often goes unnoticed, it is one thing to call for
+a particular kind of theory and quite another to construct one. Having
+done the former in the foregoing, my aim in the remainder of this article
+is the latter. According to the theory proposed here, the reason positions
+with greater and lesser advantage exist is that judgments about relative
+quality are socially influenced. Socially influenced judgments amplify underlying differences, so that actors who objectively rank above the mean
+on some abstract quality dimension are overvalued while those ranking
+below the mean are undervalued—relative to the baseline scenario, in
+which social influence does not operate. Amplification occurs because
+observable interactions expressing judgments of quality are also cues to
+other actors seeking guidance for their own judgments.
+As a result, even if judgments are ultimately shaped by the underlying
+qualities of individuals, the benefits those judgments determine are exaggerated on one end of the scale and diminished on the other. At the
+same time, the advantageous positions individuals on the high end occupy
+are not, in this theory, consciously created or defended by anyone: each
+individual contributes to the creation of structural positions simply by
+allowing the judgments of others to influence his or her own.
+1146
+
+Status Hierarchies
+Note that the mechanism just sketched succinctly captures much of
+----
+absence of underlying variation in individual attributes. Although it may
+not be obvious, it turns out (and I will demonstrate this formally in the
+next section) that the only equilibria possible when there are absolutely
+no underlying differences across individuals are one in which everyone
+is ranked equally and one in which one actor receives attention while all
+others receive none. In other words, if self-reinforcing attributions are the
+only mechanism operating, the only stable outcomes are radical equality
+or radical inequality. In the presence of 
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; sed -n 870,912p gould_origins_2002_raw.txt; echo ----; sed -n 965,980p gould_origins_2002_raw.txt; echo -----; sed -n 1125,1300p gould_origins_2002_raw.txt</summary>
+```bash
+cd /tmp/nsB && sed -n 870,912p gould_origins_2002_raw.txt; echo ----; sed -n 965,980p gould_origins_2002_raw.txt; echo -----; sed -n 1125,1300p gould_origins_2002_raw.txt
+```
+
+```
+permitted to vary in the number of attachments they direct toward others,
+attachments should be permitted to vary in weight (as opposed to being
+dichotomous), and i’s tie to j must not be assumed to be equal to j’s tie
+to i.
+Two studies for which data are available meet all three criteria. One
+is Robert F. Bales’s (1956) study of verbal communication in task groups
+of various sizes; the second is William Blatz’s (1937) intensive study of
+the Dionne quintuplets between the ages of two and three. Bales and his
+colleagues counted the number of times each member of each group verbally addressed each other member. They then combined the results from
+multiple groups into a single, archetypal network (one for each group size)
+1162
+
+Status Hierarchies
+by imposing an equivalence across groups between the most talkative
+members, the second-most talkative, and so on. The result is one network
+where there were originally a dozen or more, which suppresses variation
+across groups. At the same time, this procedure has the virtue of washing
+out idiosyncratic differences among individuals, leaving a record of interaction patterns that is in some sense a purer representation of social
+structure than any of the original interaction matrices.
+Blatz and his colleagues observed physical interactions among the
+Dionne quintuplets at regular intervals over a period of nearly two years,
+recording the number of times each of the children approached each of
+the others in a way that suggested an invitation to play. One of the most
+appealing features of this data source is the fact that the individuals
+involved were genetically identical. The fact that the quintuplets nonetheless sorted themselves, at an early age, into clearly differentiated status
+positions, as reflected in sharply varying frequencies of play overtures,
+offers prima facie evidence that the model I am proposing captures an
+important property of status hierarchies: that they can emerge even in
+the presence of minimal exogenous 
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; python3 q.py gould_origins_2002 &#34;In the model, actors reproduce status hierarchies by adjusting their own status-conferring gestures according to collective attributions.&#34; &#34;Winner-take-all hierarchies are discouraged, however, when people prefer reciprocation of their status-conferring actions.&#34; &#34;Socially influenced judgments amplify underlying differences, so that actors who objectively rank above the mean on some abstract quality dimension are overvalued while those ranking below the mean are undervalued—relative to the baseline scenario, in which social influence does not operate.&#34; &#34;In other words, if self-reinforcing attributions are the only mechanism operating, the only stable outcomes are radical equality or radical inequality.&#34; &#34;In other words, it can simultaneously be true, as economistic models suggest, that competitive processes distribute rewards as a function of individual qualities, and, as sociological models propose, that these rewards are nevertheless filtered through structural positions that distribute advantage unevenly.&#34; &#34;each of 17 members ranked the others in terms of how friendly they were, once per week for 15 weeks&#34; &#34;As a general matter, then, tests of the theory using data from natural settings will need to take fuller account than I have done in the present study of factors beyond sociometric structure.&#34; &#34;Sociometric data from a range of settings exhibited impressive consistency with these predictions, except in the case of groups small enough to render large correlations commonplace.&#34; &#34;Although the degree to which social influence (q) shapes status-conferring judgments could not be assessed directly from the data employed here&#34; &#34;In the context of work organizations, for instance, q should be higher (implying greater status inequality for sufficiently low s) when it is difficult to disaggregate group achievements into individual contributions.&#34; &#34;that they can emerge even in the presence of minimal exogenous differences among actors&#34; &#34;Both kinds of scholarship therefore tend to treat network data as determined exogenously, which is to say by some process that is not explicitly modeled.&#34; &#34;The result is one network where there were originally a dozen or more, which suppresses variation across groups.&#34;</summary>
+```bash
+cd /tmp/nsB && python3 q.py gould_origins_2002 "In the model, actors reproduce status hierarchies by adjusting their own status-conferring gestures according to collective attributions." "Winner-take-all hierarchies are discouraged, however, when people prefer reciprocation of their status-conferring actions." "Socially influenced judgments amplify underlying differences, so that actors who objectively rank above the mean on some abstract quality dimension are overvalued while those ranking below the mean are undervalued—relative to the baseline scenario, in which social influence does not operate." "In other words, if self-reinforcing attributions are the only mechanism operating, the only stable outcomes are radical equality or radical inequality." "In other words, it can simultaneously be true, as economistic models suggest, that competitive processes distribute rewards as a function of individual qualities, and, as sociological models propose, that these rewards are nevertheless filtered through structural positions that distribute advantage unevenly." "each of 17 members ranked the others in terms of how friendly they were, once per week for 15 weeks" "As a general matter, then, tests of the theory using data from natural settings will need to take fuller account than I have done in the present study of factors beyond sociometric structure." "Sociometric data from a range of settings exhibited impressive consistency with these predictions, except in the case of groups small enough to render large correlations commonplace." "Although the degree to which social influence (q) shapes status-conferring judgments could not be assessed directly from the data employed here" "In the context of work organizations, for instance, q should be higher (implying greater status inequality for sufficiently low s) when it is difficult to disaggregate group achievements into individual contributions." "that they can emerge even in the presence of minimal exogenous differences among actors" "Both kinds of scholarship therefore tend to treat network data as determined exogenously, which is to say by some process that is not explicitly modeled." "The result is one network where there were originally a dozen or more, which suppresses variation across groups."
+```
+
+```
+OK   [1] | In the model, actors reproduce status hierarchies by adjusting their own status-
+OK   [1] | Winner-take-all hierarchies are discouraged, however, when people prefer recipro
+OK   [4] | Socially influenced judgments amplify underlying differences, so that actors who
+OK   [7] | In other words, if self-reinforcing attributions are the only mechanism operatin
+MISS [] | In other words, it can simultaneously be true, as economistic models suggest, th
+OK   [21] | each of 17 members ranked the others in terms of how friendly they were, once pe
+OK   [27] | As a general matter, then, tests of the theory using data from natural settings 
+OK   [29] | Sociometric data from a range of settings exhibited impressive consistency with 
+OK   [29] | Although the degree to which social influence (q) shapes status-conferring judgm
+MISS [] | In the context of work organizations, for instance, q should be higher (implying
+OK   [21] | that they can emerge even in the presence of minimal exogenous differences among
+OK   [30] | Both kinds of scholarship therefore tend to treat network data as determined exo
+OK   [21] | The result is one network where there were originally a dozen or more, which sup
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; python3 q.py gould_origins_2002 &#34;In other words, it can simultaneously be true, as economistic models suggest, that competitive processes distribute rewards as a function of&#34; &#34;individual qualities, and, as sociological models propose, that these rewards are nevertheless filtered through structural positions that distribute advantage unevenly.&#34; &#34;In the context of work organizations, for in&#34; &#34;stance, q should be higher (implying greater status inequality for sufficiently low s) when it is difficult to disaggregate group achievements into individual contributions.&#34;</summary>
+```bash
+cd /tmp/nsB && python3 q.py gould_origins_2002 "In other words, it can simultaneously be true, as economistic models suggest, that competitive processes distribute rewards as a function of" "individual qualities, and, as sociological models propose, that these rewards are nevertheless filtered through structural positions that distribute advantage unevenly." "In the context of work organizations, for in" "stance, q should be higher (implying greater status inequality for sufficiently low s) when it is difficult to disaggregate group achievements into individual contributions."
+```
+
+```
+OK   [28] | In other words, it can simultaneously be true, as economistic models suggest, th
+OK   [29] | individual qualities, and, as sociological models propose, that these rewards ar
+OK   [29] | In the context of work organizations, for in
+OK   [30] | stance, q should be higher (implying greater status inequality for sufficiently 
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Gould verified (PDF page = journal page − 1142). Appending Gould.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2"><details>
+<summary>Tool use: **edit_file_v2** • Edit file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_B_structure_position_note.md</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; cat ocr.log; ls ocr | sed &#39;s/-[0-9]*.png//&#39; | sort | uniq -c; grep -c &#34;PDFPAGE&#34; granovetter_strength_1973.txt breiger_duality_1974.txt burt_structural_1992.txt</summary>
+```bash
+cd /tmp/nsB && cat ocr.log; ls ocr | sed 's/-[0-9]*.png//' | sort | uniq -c; grep -c "PDFPAGE" granovetter_strength_1973.txt breiger_duality_1974.txt burt_structural_1992.txt
+```
+
+```
+  19 granovetter_strength_1973
+granovetter_strength_1973.txt:0
+breiger_duality_1974.txt:0
+burt_structural_1992.txt:0
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+The background OCR job appears to have died after rendering 19 pages. I'll rerun it with `nohup` so it survives.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; head -c 3000 lazer_network_2007_raw.txt; echo; grep -n -i -E &#34;efficient|inefficient|long run|short run|tradeoff|trade-off|NK|simulation|agents|limitation|future research|caveat|we found|our results|conclusion|diversity|fully connected|linear&#34; lazer_network_2007_raw.txt | head -80</summary>
+```bash
+cd /tmp/nsB && head -c 3000 lazer_network_2007_raw.txt; echo; grep -n -i -E "efficient|inefficient|long run|short run|tradeoff|trade-off|NK|simulation|agents|limitation|future research|caveat|we found|our results|conclusion|diversity|fully connected|linear" lazer_network_2007_raw.txt | head -80
+```
+
+```
+The Network Structure
+of Exploration and
+Exploitation
+David Lazer
+Allan Friedman
+Harvard University
+
+Whether as team members brainstorming or cultures
+experimenting with new technologies, problem solvers
+communicate and share ideas. This paper examines how
+the structure of communication networks among actors
+can affect system-level performance. We present an
+agent-based computer simulation model of information
+sharing in which the less successful emulate the more
+successful. Results suggest that when agents are dealing
+with a complex problem, the more efficient the network
+at disseminating information, the better the short-run but
+the lower the long-run performance of the system. The
+dynamic underlying this result is that an inefficient network maintains diversity in the system and is thus better
+for exploration than an efficient network, supporting a
+more thorough search for solutions in the long run. For
+intermediate time frames, there is an inverted-U relationship between connectedness and performance, in which
+both poorly and well-connected systems perform badly,
+and moderately connected systems perform best. This
+curvilinear relationship between connectivity and group
+performance can be seen in several diverse instances of
+organizational and social behavior.•
+We live in a smaller world today than ever before, with more
+distant linkages that rapidly spread information from one corner of the globe to the other. Perhaps as a result, the last
+decade has witnessed a massive surge of interest in networks, both among academics (Borgatti and Foster, 2003)
+and in popular culture. Services to increase the efficiency
+with which we exploit our personal networks have proliferated, and armies of consultants have emerged to improve the
+efficiency of organizational networks. Implicit in this discourse is the idea that the more connected we are, the better: silos are to be eliminated, and the boundaryless organization is the wave of the future. Technologies that enable
+distant 
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: pgrep -fl &#34;pdftoppm|tesseract&#34; ; cd &#34;/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/FOUNDY_Intro&#34; &amp;&amp; cat &gt; /tmp/nsB/ocr.sh &lt;&lt;&#39;EOF&#39;
+#!/bin/bash
+cd &#34;$1&#34;
+for spec in &#34;breiger_duality_1974|files/775/Breiger - 1974 - The Duality of Persons and Groups.pdf&#34; &#34;granovetter_strength_1973|files/325/Granovetter - Unknown - The Strength of Weak Ties.pdf&#34; &#34;burt_structural_1992|files/342/Burt - 1992 - Structural Holes The Social Structure of Competition.pdf&#34;; do
+ k=&#34;${spec%%|*}&#34;; p=&#34;${spec#*|}&#34;
+ rm -f /tmp/nsB/ocr/$k-*.png
+ pdftoppm -r 200 -png &#34;$p&#34; /tmp/nsB/ocr/$k
+ out=/tmp/nsB/$k.ocr.tmp; : &gt; $out
+ for img in $(ls /tmp/nsB/ocr/$k-*.png | sort -V); do echo &#34;=== PDFPAGE $(basename $img .png)&#34; &gt;&gt; $out; tesseract &#34;$img&#34; - 2&gt;/dev/null &gt;&gt; $out; done
+ mv $out /tmp/nsB/$k.txt; echo &#34;done $k&#34;
+done
+echo ALLDONE
+EOF
+chmod +x /tmp/nsB/ocr.sh &amp;&amp; nohup /tmp/nsB/ocr.sh &#34;$PWD&#34; &gt; /tmp/nsB/ocr.log 2&gt;&amp;1 &amp;
+sleep 2; cat /tmp/nsB/ocr.log; pgrep -fl &#34;pdftoppm|tesseract|ocr.sh&#34;</summary>
+```bash
+pgrep -fl "pdftoppm|tesseract" ; cd "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/FOUNDY_Intro" && cat > /tmp/nsB/ocr.sh <<'EOF'
+#!/bin/bash
+cd "$1"
+for spec in "breiger_duality_1974|files/775/Breiger - 1974 - The Duality of Persons and Groups.pdf" "granovetter_strength_1973|files/325/Granovetter - Unknown - The Strength of Weak Ties.pdf" "burt_structural_1992|files/342/Burt - 1992 - Structural Holes The Social Structure of Competition.pdf"; do
+ k="${spec%%|*}"; p="${spec#*|}"
+ rm -f /tmp/nsB/ocr/$k-*.png
+ pdftoppm -r 200 -png "$p" /tmp/nsB/ocr/$k
+ out=/tmp/nsB/$k.ocr.tmp; : > $out
+ for img in $(ls /tmp/nsB/ocr/$k-*.png | sort -V); do echo "=== PDFPAGE $(basename $img .png)" >> $out; tesseract "$img" - 2>/dev/null >> $out; done
+ mv $out /tmp/nsB/$k.txt; echo "done $k"
+done
+echo ALLDONE
+EOF
+chmod +x /tmp/nsB/ocr.sh && nohup /tmp/nsB/ocr.sh "$PWD" > /tmp/nsB/ocr.log 2>&1 &
+sleep 2; cat /tmp/nsB/ocr.log; pgrep -fl "pdftoppm|tesseract|ocr.sh"
+```
+
+```
+6882 /bin/bash /tmp/nsB/ocr.sh /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/FOUNDY_Intro
+6887 pdftoppm -r 200 -png files/775/Breiger - 1974 - The Duality of Persons and Groups.pdf /tmp/nsB/ocr/breiger_duality_1974
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; grep -n -i -E &#34;DISCUSSION|CONCLUSION|limitation|real-world|empirical|laborator|caveat|not capture|we did not|we have not|assum|fragment|ignore|one could|does not&#34; lazer_network_2007_raw.txt | sed -n 1,80p</summary>
+```bash
+cd /tmp/nsB && grep -n -i -E "DISCUSSION|CONCLUSION|limitation|real-world|empirical|laborator|caveat|not capture|we did not|we have not|assum|fragment|ignore|one could|does not" lazer_network_2007_raw.txt | sed -n 1,80p
+```
+
+```
+56:alone. The authors also acknowledge support from NSF grant #0131923. Any opinions, findings, and conclusions or recommendations expressed in this paper are
+72:with the research out of the Small Group Network Laboratory
+112:and does not work.
+157:superior outcome. A common assumption is that of incremental search, which sets this limit to a single dimension
+159:myopic search is typically implemented through an assumption that agents can only make incremental changes to their
+169:assumes that people can only clearly evaluate one change in
+171:example, they might get stuck at not doing A, B, and C. Further, if one assumes that synergies among human activities
+183:themselves as much as how individuals solve problems collectively. We assume that individuals affect collective success through a network of peers, in which the activities of a
+194:The assumptions underlying the idea of networked parallel
+196:assumptions of the diffusion and information cascade literatures. Like the organizational network structure literature
+197:above, these literatures generally assume that individuals
+206:network-level (e.g., who talks with whom) correlates of adoption decisions, it does not examine the systemic consequences for success of how networks tie together individual
+223:system under the assumption that people observe adoption
+237:solving perspective we present here is in assumptions about
+241:solving is based on the assumption that agents are purposively seeking out novel signals directly from the environment at the same time that those signals are propagating
+259:and exploitation. March (1991) implicitly assumed a hubspoke communication structure, in which individuals learn
+269:code, assuming that individuals learn directly from each other
+277:handle the combinatorics of system dynamics. Empirical
+279:practical challenges of studying real-world systems. Agentbased modeling, a particular type of simulation modeling, is
+282:with a set of simple assumptions about agents’ behavior
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; sed -n 1169,1200p lazer_network_2007_raw.txt; echo ----; sed -n 1273,1360p lazer_network_2007_raw.txt</summary>
+```bash
+cd /tmp/nsB && sed -n 1169,1200p lazer_network_2007_raw.txt; echo ----; sed -n 1273,1360p lazer_network_2007_raw.txt
+```
+
+```
+DISCUSSION AND CONCLUSION
+The preceding analyses provided multiple layers of reinforcing results pointing to a single core insight: the more efficient
+the network at disseminating information—as determined by
+the network configuration, the velocity of information over
+existing ties, and the fidelity of transmission—the better the
+system performs in the long run and the worse in the short
+run. More generally, these results highlight a tradeoff
+between maintaining the diversity necessary for obtaining
+high performance in a system and the rapid dissemination of
+high-performing strategies. Diversity has been found to be
+beneficial to system performance in a variety of settings
+(Page, 2007), including small-group performance (Nemeth,
+1985), democratic deliberation (Sunstein, 2003), entrepreneurial systems (Florida, 2002), and elite decision making
+(George, 1972; Janis, 1972). In parallel with these findings is
+a body of research in the various literatures on knowledge
+sharing (Wenger, McDermott, and Snyder, 2002) and diffusion (Rogers, 2003) that highlights the performance benefits
+to the system of spreading information about high-quality
+strategies. But the research on institutional isomorphism
+(DiMaggio and Powell, 1983) and social influence (Friedkin,
+1998; Lazer, 2001) highlights a necessary corollary to this
+mimetic process—that imitation reduces the diversity present in a system, which, as discussed, leads to lower
+performance.
+Our analyses thus capture both positive and negative pathways through which the network configuration affects performance. An efficient network positively affects information diffusion, which facilitates the spread of effective strategies,
+but negatively affects information diversity, which is also positively related to performance. These relationships are depicted in figure 12.
+The results of our simulation have implications for empirical
+work on the relationship between systemic networks and
+performance. The current literature does not inc
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; python3 q.py lazer_network_2007 &#34;Results suggest that when agents are dealing with a complex problem, the more efficient the network at disseminating information, the better the short-run but the lower the long-run performance of the system.&#34; &#34;For intermediate time frames, there is an inverted-U relationship between connectedness and performance, in which both poorly and well-connected systems perform badly, and moderately connected systems perform best.&#34; &#34;simulation, we assumed a population of 100 actors who&#34; &#34;NK model, we assumed N = 20, and K = 5&#34; &#34;As with any purely theory-based research, our results are only as strong as the premises of our approach.&#34; &#34;For example, an assumption that actors are competing would reduce the utility of sharing a solution, while assumptions about the presence of some property rights might increase the incentives for exploration over exploitation.&#34; &#34;Remarkably, the highest performing network in the long run was the slowest, most error prone, and had the longest average path length.&#34; &#34;Although we would not make managerial recommendations without empirical validation&#34; &#34;a problem in which the performance&#34; &#34;the simulation was run on the same 1000 NK spaces&#34;; grep -n -B3 -A6 &#34;roughly equivalent agents&#34; lazer_network_2007_raw.txt</summary>
+```bash
+cd /tmp/nsB && python3 q.py lazer_network_2007 "Results suggest that when agents are dealing with a complex problem, the more efficient the network at disseminating information, the better the short-run but the lower the long-run performance of the system." "For intermediate time frames, there is an inverted-U relationship between connectedness and performance, in which both poorly and well-connected systems perform badly, and moderately connected systems perform best." "simulation, we assumed a population of 100 actors who" "NK model, we assumed N = 20, and K = 5" "As with any purely theory-based research, our results are only as strong as the premises of our approach." "For example, an assumption that actors are competing would reduce the utility of sharing a solution, while assumptions about the presence of some property rights might increase the incentives for exploration over exploitation." "Remarkably, the highest performing network in the long run was the slowest, most error prone, and had the longest average path length." "Although we would not make managerial recommendations without empirical validation" "a problem in which the performance" "the simulation was run on the same 1000 NK spaces"; grep -n -B3 -A6 "roughly equivalent agents" lazer_network_2007_raw.txt
+```
+
+```
+OK   [1] | Results suggest that when agents are dealing with a complex problem, the more ef
+OK   [1] | For intermediate time frames, there is an inverted-U relationship between connec
+OK   [11] | simulation, we assumed a population of 100 actors who
+OK   [12] | NK model, we assumed N = 20, and K = 5
+OK   [22] | As with any purely theory-based research, our results are only as strong as the 
+OK   [23] | For example, an assumption that actors are competing would reduce the utility of
+OK   [23] | Remarkably, the highest performing network in the long run was the slowest, most
+OK   [23] | Although we would not make managerial recommendations without empirical validati
+MISS [] | a problem in which the performance
+OK   [12] | the simulation was run on the same 1000 NK spaces
+104-promising approaches could share their ideas with others? Or
+105-would it be better to let things just slowly and inefficiently
+106-diffuse? This scenario is an example of what we label parallel
+107:problem solving, in which a set of roughly equivalent agents
+108-are all seeking to solve the same problem, and the success
+109-of any one or subset of agents has no direct effect on other
+110-agents. In game theory terms, one might envision each agent
+111-playing a game against nature, in which an individual’s performance against nature has no bearing on other players’ payoffs, and players can learn from each other about what does
+112-and does not work.
+113-This is clearly an ideal type, but there are many phenomena
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; python3 q.py lazer_network_2007 &#34;problem solving, in which a set of roughly equivalent agents are all seeking to solve the same problem, and the success of any one or subset of agents has no direct effect on other agents.&#34; &#34;In game theory terms, one might envision each agent playing a game against nature, in which an individual’s performance against nature has no bearing on other players’ payoffs&#34; &#34;An efficient network positively affects information diffusion, which facilitates the spread of effective strategies, but negatively affects information diversity, which is also positively related to performance.&#34; &#34;We present an agent-based computer simulation model of information sharing in which the less successful emulate the more successful.&#34;</summary>
+```bash
+cd /tmp/nsB && python3 q.py lazer_network_2007 "problem solving, in which a set of roughly equivalent agents are all seeking to solve the same problem, and the success of any one or subset of agents has no direct effect on other agents." "In game theory terms, one might envision each agent playing a game against nature, in which an individual’s performance against nature has no bearing on other players’ payoffs" "An efficient network positively affects information diffusion, which facilitates the spread of effective strategies, but negatively affects information diversity, which is also positively related to performance." "We present an agent-based computer simulation model of information sharing in which the less successful emulate the more successful."
+```
+
+```
+OK   [2] | problem solving, in which a set of roughly equivalent agents are all seeking to 
+OK   [2] | In game theory terms, one might envision each agent playing a game against natur
+OK   [20] | An efficient network positively affects information diffusion, which facilitates
+OK   [1] | We present an agent-based computer simulation model of information sharing in wh
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Lazer & Friedman verified (PDF page = journal page − 666). Now Mason & Watts.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; head -c 3500 mason_collaborative_2012_raw.txt; echo; grep -n -i -E &#34;participants|Amazon|mechanical turk|sessions|16 |networks|clustering|explor|copy|lazer|contrary|limitation|caution|caveat|real world|artificial|future&#34; mason_collaborative_2012_raw.txt | head -80</summary>
+```bash
+cd /tmp/nsB && head -c 3500 mason_collaborative_2012_raw.txt; echo; grep -n -i -E "participants|Amazon|mechanical turk|sessions|16 |networks|clustering|explor|copy|lazer|contrary|limitation|caution|caveat|real world|artificial|future" mason_collaborative_2012_raw.txt | head -80
+```
+
+```
+Collaborative learning in networks
+Winter Masona,1 and Duncan J. Wattsb,1
+a
+
+Stevens Institute of Technology, Hoboken, NJ 07030; and bYahoo! Research, New York, NY 10018
+
+Edited by Kenneth Wachter, University of California, Berkeley, CA, and approved November 3, 2011 (received for review June 27, 2011)
+
+Complex problems in science, business, and engineering typically
+require some tradeoff between exploitation of known solutions
+and exploration for novel ones, where, in many cases, information
+about known solutions can also disseminate among individual
+problem solvers through formal or informal networks. Prior research on complex problem solving by collectives has found the
+counterintuitive result that inefﬁcient networks, meaning networks that disseminate information relatively slowly, can perform
+better than efﬁcient networks for problems that require extended
+exploration. In this paper, we report on a series of 256 Web-based
+experiments in which groups of 16 individuals collectively solved
+a complex problem and shared information through different
+communication networks. As expected, we found that collective
+exploration improved average success over independent exploration because good solutions could diffuse through the network. In
+contrast to prior work, however, we found that efﬁcient networks
+outperformed inefﬁcient networks, even in a problem space with
+qualitative properties thought to favor inefﬁcient networks. We
+explain this result in terms of individual-level explore-exploit
+decisions, which we ﬁnd were inﬂuenced by the network structure
+as well as by strategic considerations and the relative payoff
+between maxima. We conclude by discussing implications for realworld problem solving and possible extensions.
+collaboration
+
+| diffusion | exploration-exploitation trade off
+
+M
+
+any problems that arise in science, business, and engineering are “complex” in the sense that they require optimization along multiple dimensions, where changes in one dimension
+can h
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; grep -n -i -E &#34;Discussion|real-world|in practice|strategic|free.rid|compet|incentive|zero-sum|our results|generaliz|limited|caution&#34; mason_collaborative_2012_raw.txt | head -40; grep -c $&#39;\f&#39; mason_collaborative_2012_raw.txt</summary>
+```bash
+cd /tmp/nsB && grep -n -i -E "Discussion|real-world|in practice|strategic|free.rid|compet|incentive|zero-sum|our results|generaliz|limited|caution" mason_collaborative_2012_raw.txt | head -40; grep -c $'\f' mason_collaborative_2012_raw.txt
+```
+
+```
+26:as well as by strategic considerations and the relative payoff
+76:experiments in a physical laboratory limited the size and variability of the networks considered as well as the complexity of the
+79:simulation results or generalize to other scenarios.
+93:Several of our results are consistent with prior theorizing about
+122:maximize their individual scores but had no incentive to deceive others (see
+128:the landscapes in question were designed explicitly to favor exploration. Rather, we argue the difference in our results stems
+275:and are likely different from real-world problems in some respects. Thus, it is
+317:check that our results were not biased by participant dropout, we also
+523:thus, players could improve their success by free-riding on others’ exploration. On the other hand, Fig. 6B shows that the more
+614:15. Mason WA, Watts DJ (2009) Financial Incentives and the Performance of Crowds,
+628:22. Burt RS (1992) Structural Holes: The Social Structure of Competition (Harvard Univ
+652:Discussion
+653:Our results reinforce certain conclusions from the literature on
+683:artiﬁcial experiments should be generalized with caution, we
+685:First, the result that networked searchers outperform independent searchers appears relevant to real-world problems, such
+686:as drug development, where competitive pressures lead ﬁrms to
+688:considerable beneﬁts to collective performance that our results
+699:actual human search strategies (more discussion is provided in SI
+711:our results therefore imply that efﬁcient information ﬂow can only
+6
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; sed -n 110,130p mason_collaborative_2012_raw.txt; echo ---; sed -n 270,282p mason_collaborative_2012_raw.txt; echo ---; sed -n 515,530p mason_collaborative_2012_raw.txt; echo ----; sed -n 652,720p mason_collaborative_2012_raw.txt</summary>
+```bash
+cd /tmp/nsB && sed -n 110,130p mason_collaborative_2012_raw.txt; echo ---; sed -n 270,282p mason_collaborative_2012_raw.txt; echo ---; sed -n 515,530p mason_collaborative_2012_raw.txt; echo ----; sed -n 652,720p mason_collaborative_2012_raw.txt
+```
+
+```
+This article contains supporting information online at www.pnas.org/lookup/suppl/doi:10.
+1073/pnas.1110069108/-/DCSupplemental.
+
+www.pnas.org/cgi/doi/10.1073/pnas.1110069108
+
+map in search of hidden “oil ﬁelds.” The players had 15 rounds to explore
+the map, either by entering grid coordinates by hand or by clicking directly
+on the map. On each round after the ﬁrst, players were shown the history of
+their searched locations and payoffs, as well as the history of searched
+locations and payoffs of three “collaborators” who were assigned in
+a manner described in the “Networks” section. Players were paid in direct
+proportion to their accumulated points; hence, they were motivated to
+maximize their individual scores but had no incentive to deceive others (see
+SI Text and Figs. S1 and S2 for more details).
+
+networks (11–13). We note that although our problem spaces
+differ in some respects from prior work, they exhibit the essential
+features thought to advantage inefﬁcient networks (11); indeed,
+the landscapes in question were designed explicitly to favor exploration. Rather, we argue the difference in our results stems
+from assumptions in the agent-based models that, although
+plausible and seemingly innocuous, turn out to misrepresent real
+---
+maximum value was 100.
+In its details, our method differs from other methods of generating ﬁtness
+landscapes, such as March’s exploration-exploitation model (3, 8, 13) and the
+N-K model (1, 2, 11), which generate N-dimensional problem spaces. We
+note, however, that all such models of ﬁtness landscapes are highly artiﬁcial
+and are likely different from real-world problems in some respects. Thus, it is
+more important to capture the general qualitative features of complex
+problems than to replicate any particular ﬁtness landscape. To satisfy this
+requirement, we chose ω ∈ (3, 7) and ρ = 0.7, which generates landscapes
+with many peaks in the range between 30 and 50 and a single dominant
+peak with maximum of 100 that corresponds to an un
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; sed -n 528,545p mason_collaborative_2012_raw.txt; sed -n 720,735p mason_collaborative_2012_raw.txt; python3 q.py mason_collaborative_2012 &#34;In this paper, we report on a series of 256 Web-based experiments in which groups of 16 individuals collectively solved a complex problem and shared information through different communication networks.&#34; &#34;In contrast to prior work, however, we found that efficient networks outperformed inefficient networks, even in a problem space with qualitative properties thought to favor inefficient networks.&#34; &#34;Players were paid in direct proportion to their accumulated points; hence, they were motivated to maximize their individual scores but had no incentive to deceive others&#34; &#34;thus, players could improve their success by free-riding on others’ exploration.&#34; &#34;the individual decision to exploit negatively impacted the performance of the collective&#34; &#34;Recognizing that the results of both artificial simulations and artificial experiments should be generalized with caution&#34; &#34;Moreover, we find that inefficient network structures can also decrease exploration, precisely the opposite of what the theory claims they are supposed to accomplish.&#34; &#34;those who occupied central positions (i.e., with high betweenness or closeness centrality), consistently earned more points than their peers in the same network&#34; &#34;our finding that individuals benefit from occupying central positions is reminiscent of long-standing ideas about the benefits of centrality (21) and bridging (22)&#34; &#34;all such models of fitness landscapes are highly artificial and are likely different from real-world problems in some respects&#34; &#34;agent-based models have, to date, been insufficiently sophisticated and heterogeneous to reflect real human responses to changing circumstances&#34;</summary>
+```bash
+cd /tmp/nsB && sed -n 528,545p mason_collaborative_2012_raw.txt; sed -n 720,735p mason_collaborative_2012_raw.txt; python3 q.py mason_collaborative_2012 "In this paper, we report on a series of 256 Web-based experiments in which groups of 16 individuals collectively solved a complex problem and shared information through different communication networks." "In contrast to prior work, however, we found that efficient networks outperformed inefficient networks, even in a problem space with qualitative properties thought to favor inefficient networks." "Players were paid in direct proportion to their accumulated points; hence, they were motivated to maximize their individual scores but had no incentive to deceive others" "thus, players could improve their success by free-riding on others’ exploration." "the individual decision to exploit negatively impacted the performance of the collective" "Recognizing that the results of both artificial simulations and artificial experiments should be generalized with caution" "Moreover, we find that inefficient network structures can also decrease exploration, precisely the opposite of what the theory claims they are supposed to accomplish." "those who occupied central positions (i.e., with high betweenness or closeness centrality), consistently earned more points than their peers in the same network" "our finding that individuals benefit from occupying central positions is reminiscent of long-standing ideas about the benefits of centrality (21) and bridging (22)" "all such models of fitness landscapes are highly artificial and are likely different from real-world problems in some respects" "agent-based models have, to date, been insufficiently sophisticated and heterogeneous to reflect real human responses to changing circumstances"
+```
+
+```
+Network Structure. Finally, in addition to affecting the average
+
+success of group members, network efﬁciency affected the distributions of success, and thereby relative individual performance,
+in two different and conﬂicting ways. First, as Fig. 7 shows, the
+
+Min Avg Clustering
+
+Node
+
+●
+
+Best
+Max Var Constraint
+
+●
+
+Median
+
+points earned for centralized networks. Thus, depending on
+whether a given individual cares about relative or absolute performance, and assuming that he or she can also choose his or her
+network position, he or she may prefer to belong to a more or less
+centralized network, respectively.
+
+OK   [1] | In this paper, we report on a series of 256 Web-based experiments in which group
+OK   [1] | In contrast to prior work, however, we found that efficient networks outperforme
+OK   [2] | Players were paid in direct proportion to their accumulated points; hence, they 
+OK   [5] | thus, players could improve their success by free-riding on others’ exploration.
+OK   [5] | the individual decision to exploit negatively impacted the performance of the co
+OK   [6] | Recognizing that the results of both artificial simulations and artificial exper
+OK   [6] | Moreover, we find that inefficient network structures can also decrease explorat
+OK   [6] | those who occupied central positions (i.e., with high betweenness or closeness c
+OK   [6] | our finding that individuals benefit from occupying central positions is reminis
+OK   [3] | all such models of fitness landscapes are highly artificial and are likely diffe
+OK   [6] | agent-based models have, to date, been insufficiently sophisticated and heteroge
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; python3 q.py mason_collaborative_2012 &#34;network efficiency affected the distributions of success, and thereby relative individual performance, in two different and conflicting ways&#34; &#34;Thus, depending on whether a given individual cares about relative or absolute performance, and assuming that he or she can also choose his or her network position, he or she may prefer to belong to a more or less centralized network, respectively.&#34; &#34;the average number of points earned for individuals in decentralized networks was comparable to the most points earned for centralized networks&#34;</summary>
+```bash
+cd /tmp/nsB && python3 q.py mason_collaborative_2012 "network efficiency affected the distributions of success, and thereby relative individual performance, in two different and conflicting ways" "Thus, depending on whether a given individual cares about relative or absolute performance, and assuming that he or she can also choose his or her network position, he or she may prefer to belong to a more or less centralized network, respectively." "the average number of points earned for individuals in decentralized networks was comparable to the most points earned for centralized networks"
+```
+
+```
+OK   [5] | network efficiency affected the distributions of success, and thereby relative i
+OK   [6] | Thus, depending on whether a given individual cares about relative or absolute p
+OK   [6] | the average number of points earned for individuals in decentralized networks wa
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Mason & Watts verified (PDF page = journal page − 763). Appending Lazer & Friedman and Mason & Watts.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2"><details>
+<summary>Tool use: **edit_file_v2** • Edit file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_B_structure_position_note.md</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; cat ocr.log; head -c 2500 centola_complex_2007_raw.txt; echo; grep -n -i -E &#34;complex contagion|simple contagion|long ties|weak ties|threshold|bridge width|wide bridge|limitation|empirical|future research|caveat|we do not|conclusion&#34; centola_complex_2007_raw.txt | head -70</summary>
+```bash
+cd /tmp/nsB && cat ocr.log; head -c 2500 centola_complex_2007_raw.txt; echo; grep -n -i -E "complex contagion|simple contagion|long ties|weak ties|threshold|bridge width|wide bridge|limitation|empirical|future research|caveat|we do not|conclusion" centola_complex_2007_raw.txt | head -70
+```
+
+```
+done breiger_duality_1974
+Complex Contagion and the Weakness of Long Ties
+
+Damon Centola and Michael Macy
+Cornell University
+
+September 12, 2005
+
+Complex Contagion and the Weakness of Long Ties
+
+Abstract
+The strength of weak ties is that they tend to be long – they connect socially distant
+locations. Recent research on “small worlds” shows that remarkably few long ties are
+needed to give large and highly clustered populations the “degrees of separation” of a
+random network, in which information can rapidly diffuse. We test whether this effect of
+long ties generalizes from simple to complex contagions – those in which the credibility
+of information or the willingness to adopt an innovation requires independent
+confirmation from multiple sources. Using Watts and Strogatz’s original small world
+model, we demonstrate that long ties may not only fail to speed up complex contagions,
+they can even preclude diffusion entirely. Results suggest that the spread of collective
+actions, social movements, and risky innovations benefit not from ties that are long but
+from bridges that are wide enough to transmit strong social reinforcement. Balance
+theory shows how wide bridges might also form in evolving networks, but this turns out
+to have surprisingly little effect on the propagation of complex contagions. We find that
+hybrid contagions, which have high thresholds for some nodes and low-thresholds for
+others, can propagate on perturbed networks if the latter are sufficiently numerous.
+However, for purely complex contagions, propagation depends decisively on wide
+bridges, a characteristic feature of spatial networks. This may account in part for the
+widely observed tendency for social movements to diffuse spatially.
+
+2
+“All politics is local.”
+– Rep. Tip O’Neil, former Speaker of the
+U.S. House of Representatives
+Pundits and activists have recently discovered the Internet as a medium with
+unprecedented opportunities for mass mobilization (Tilly 2004). The Internet is a scale
+fr
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+The Centola & Macy file is a 2005 working-paper draft, not the published AJS article, so I'll cite manuscript pages and flag that. Breiger OCR is done; checking Centola's conclusion first.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; grep -n -i -E &#34;^discussion|^conclusion|limitation|empirical test|future|we have not|caveat|important to note|rewiring|small world model|N = |n = |population of&#34; centola_complex_2007_raw.txt | head -50</summary>
+```bash
+cd /tmp/nsB && grep -n -i -E "^discussion|^conclusion|limitation|empirical test|future|we have not|caveat|important to note|rewiring|small world model|N = |n = |population of" centola_complex_2007_raw.txt | head -50
+```
+
+```
+335:be dramatically increased by randomly rewiring a few local network ties, making them
+593:complex contagion. We leave the effects of reversible states to future research.
+594:11 Newman and Watts (1999) show that adding ties to a regular lattice is more robust than the rewiring
+596:components forming at high values of p. For the computational experiments below, we use the rewiring
+613:by a random network at p≈ 0.1. Figure 3 confirms a key insight of the small world model
+622:Figure 4 shows the effect of random rewiring (p = 0.1, constant density) on the
+650:13 We therefore simplify subsequent figures by reporting only the effects of rewiring ties, holding density
+705:Newman and Watts (1999) small world model, in which random bridge ties are added to
+761:effective bridges, the rewiring process erodes the structure of the local neighborhoods.
+778:for smaller networks (N = 2000) of the same density, even a moderate fraction of
+845:Even with these caveats, the experiments with vulnerable nodes suggest how
+866:Discussion
+923:Conclusion
+992:intuitions generated by the small world model can be highly misleading. Higher
+995:effect. Our findings clearly suggest the need for future studies of social diffusion to take
+1255:rewiring on the extent of propagation. More generally, the expected effect is determined
+1468:Figure 3. Random ties increase the rate of simple contagions (N = 2000, averaged
+1477:Figure 4. Random ties inhibit minimally complex contagions (τ = 2, τ = 2/z, N = 2000,
+1497:τ = 2/z, N = 2000, averaged over 100 realizations). The frequency of cascades for
+1504:(τ = 3, N = 2000, averaged over 100 realizations). The rate and frequency of complex
+1512:targeted (τ = 0.25, N = 2000, averaged over 100 realizations). For β = 0 (solid line) ties
+1521:Figure 8. Perturbation promotes propagation of hybrid contagions (τ = 2, N = 2000,
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; sed -n 866,1000p centola_complex_2007_raw.txt</summary>
+```bash
+cd /tmp/nsB && sed -n 866,1000p centola_complex_2007_raw.txt
+```
+
+```
+Discussion
+If targeted perturbation and vulnerable nodes do not explain the spread of complex
+contagions, the question remains: How do we account for the rapid diffusion of
+participation in costly collective actions or the adoption of risky innovations? The
+answer, we suggest, is spatial diffusion.
+Rep. Tip O’Neil’s insight that “all politics is local” quickly became an aphorism
+because it resonated with experience in widely divergent political cultures, from ethnic
+enclaves to high tech boom towns. Our experiments with complex contagions suggest
+that politics is local not only because of the parochial attitudes of ethnic voters but also
+because political influence involves relatively high thresholds and therefore depends on
+the wide bridges that characterize spatial networks.
+The local influence principle applies not only to electoral politics but also to the
+mobilization of social movements. Beginning with McAdam’s (1988) seminal study of
+Freedom Summer, a consistent finding in social movement research is that recruitment is
+local. Participation in collective action and social movements seems to spread most
+effectively in populations that are spatially clustered.
+
+34
+A recent example is Hedstrom’s (1994) study of the early labor movement in
+Sweden, in which he shows that participation spread locally, from one residential
+neighborhood to another. Other studies have also found that social movements tend to
+spread along spatial contours. In China, the dormitory housing arrangements structured
+social ties in a way that allowed for easy diffusion of student dissent (Zhao 1998).
+Similarly, in France, the close quarters of inner city settlements promoted the emergence
+of violent revolts (Gould 1996). Further, Rogers and Kincaid (1984) show that the
+diffusion of birth control technology follows spatial patterns of adoption in Korean
+villages, and Whyte (1954) argues that the diffusion of product adoption in Philadelphia
+followed spatial residential patterns.
+An obvious e
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; python3 q.py centola_complex_2007 &#34;We test whether this effect of long ties generalizes from simple to complex contagions – those in which the credibility of information or the willingness to adopt an innovation requires independent confirmation from multiple sources.&#34; &#34;we demonstrate that long ties may not only fail to speed up complex contagions, they can even preclude diffusion entirely&#34; &#34;For complex contagions, the relevant attribute of a bridge is not the length of a dyadic tie but the width of the bridge, measured by the number of short paths between non-neighbors.&#34; &#34;The qualitative differences we discovered between simple and complex contagions should caution network theorists about extrapolating from the spread of disease or information to the spread of participation in political, religious, or cultural movements.&#34; &#34;Random ties inhibit minimally complex contagions&#34; &#34;We leave the effects of reversible states to future research.&#34; &#34;These assumptions are necessary to identify the structural effects of long ties&#34;; grep -n -B2 -A6 &#34;Even with these caveats&#34; centola_complex_2007_raw.txt; sed -n 1000,1010p centola_complex_2007_raw.txt; grep -n -B4 &#34;These assumptions are necessary&#34; centola_complex_2007_raw.txt</summary>
+```bash
+cd /tmp/nsB && python3 q.py centola_complex_2007 "We test whether this effect of long ties generalizes from simple to complex contagions – those in which the credibility of information or the willingness to adopt an innovation requires independent confirmation from multiple sources." "we demonstrate that long ties may not only fail to speed up complex contagions, they can even preclude diffusion entirely" "For complex contagions, the relevant attribute of a bridge is not the length of a dyadic tie but the width of the bridge, measured by the number of short paths between non-neighbors." "The qualitative differences we discovered between simple and complex contagions should caution network theorists about extrapolating from the spread of disease or information to the spread of participation in political, religious, or cultural movements." "Random ties inhibit minimally complex contagions" "We leave the effects of reversible states to future research." "These assumptions are necessary to identify the structural effects of long ties"; grep -n -B2 -A6 "Even with these caveats" centola_complex_2007_raw.txt; sed -n 1000,1010p centola_complex_2007_raw.txt; grep -n -B4 "These assumptions are necessary" centola_complex_2007_raw.txt
+```
+
+```
+OK   [2] | We test whether this effect of long ties generalizes from simple to complex cont
+OK   [2] | we demonstrate that long ties may not only fail to speed up complex contagions, 
+OK   [37] | For complex contagions, the relevant attribute of a bridge is not the length of 
+OK   [39] | The qualitative differences we discovered between simple and complex contagions 
+OK   [56] | Random ties inhibit minimally complex contagions
+OK   [23] | We leave the effects of reversible states to future research.
+OK   [16] | These assumptions are necessary to identify the structural effects of long ties
+843-maximum threshold increases (e.g., from 2/z to 3/z), so too does the critical mass of
+844-vulnerable nodes required to trigger a successful cascade.
+845:Even with these caveats, the experiments with vulnerable nodes suggest how
+846-hybrid contagions can spread, even when a majority of nodes have high thresholds.
+847-Adding a relatively small fraction (15-20%) of nodes with very low thresholds (τi = 0 or
+848-
+849-τi = 1) allows the network to benefit from the addition of a relatively small number of
+850-random ties (e.g. p ≈ 0.1), and vice versa. Just as it takes very few random ties for simple
+851-contagions to propagate on a regular lattice about as easily as on a purely random graph,
+participation in political, religious, or cultural movements. These movements may not
+benefit from “the strength of weak ties” and may even be hampered by processes of
+global integration that stretch social ties out much “longer” while making them “thinner.”
+Interestingly, these results may have important implications for the development
+of public health policies that aim to prevent the spread of infectious diseases. The
+channels along which disease can spread the quickest may well be similar to the channels
+along which preventative information can propagate the fastest. However, our study
+
+39
+suggests that these may not be the best pathways for effecting social change. Health
+reform, especiall
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Centola & Macy verified against the draft. Now reading the Breiger OCR text.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /tmp/nsB/breiger_duality_1974.txt</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+The OCR text came back empty; testing tesseract directly on one page image.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: ls -la /tmp/nsB/ocr | head; tesseract /tmp/nsB/ocr/breiger_duality_1974-01.png stdout 2&gt;&amp;1 | head -30</summary>
+```bash
+ls -la /tmp/nsB/ocr | head; tesseract /tmp/nsB/ocr/breiger_duality_1974-01.png stdout 2>&1 | head -30
+```
+
+```
+total 9880
+drwxr-xr-x  24 charleslevine  wheel     768 Oct 28 18:51 .
+drwxr-xr-x  47 charleslevine  wheel    1504 Oct 28 18:51 ..
+-rw-r--r--   1 charleslevine  wheel   87298 Oct 28 18:51 breiger_duality_1974-01.png
+-rw-r--r--   1 charleslevine  wheel  322109 Oct 28 18:51 breiger_duality_1974-02.png
+-rw-r--r--   1 charleslevine  wheel  199023 Oct 28 18:51 breiger_duality_1974-03.png
+-rw-r--r--   1 charleslevine  wheel  341745 Oct 28 18:51 breiger_duality_1974-04.png
+-rw-r--r--   1 charleslevine  wheel  351996 Oct 28 18:51 breiger_duality_1974-05.png
+-rw-r--r--   1 charleslevine  wheel  378629 Oct 28 18:51 breiger_duality_1974-06.png
+-rw-r--r--   1 charleslevine  wheel  216251 Oct 28 18:51 breiger_duality_1974-07.png
+Error in fopenReadStream: failed to open locally with tail breiger_duality_1974-01.png for filename /tmp/nsB/ocr/breiger_duality_1974-01.png
+Leptonica Error in findFileFormat: image file not found: /tmp/nsB/ocr/breiger_duality_1974-01.png
+Error in fopenReadStream: failed to open locally with tail �PNG for filename �PNG
+Leptonica Error in pixRead: image file not found: �PNG
+Image file �PNG cannot be read!
+Error during processing.
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Leptonica (tesseract's image library) rewrites `/tmp` paths on macOS; I'll use the `/private/tmp` path and restart the OCR job.
+
+_**Agent (claude-opus-5-5)**_
+
+I'll stop only the specific OCR job I started (by its PID) rather than matching by name.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: pgrep -fl &#34;/tmp/nsB&#34; ; tesseract /private/tmp/nsB/ocr/breiger_duality_1974-01.png stdout 2&gt;/dev/null | head -20</summary>
+```bash
+pgrep -fl "/tmp/nsB" ; tesseract /private/tmp/nsB/ocr/breiger_duality_1974-01.png stdout 2>/dev/null | head -20
+```
+
+```
+The Duality of Persons and Groups
+
+Ronald L. Breiger
+
+Social Forces, Vol. 53, No. 2, Special Issue (Dec., 1974), 181-190.
+
+Stable URL:
+http://links.jstor.org/sici?sici=0037-7732%28 1974 12%2953%3A2%3C 181%3ATDOPAG%3E2.0.CO%3B2-B
+
+Your use of the JSTOR archive indicates your acceptance of JSTOR’s Terms and Conditions of Use, available at
+http://www .jstor.org/about/terms.html. JSTOR’s Terms and Conditions of Use provides, in part, that unless you
+have obtained prior permission, you may not download an entire issue of a journal or multiple copies of articles, and
+you may use content in the JSTOR archive only for your personal, non-commercial use.
+
+Each copy of any part of a JSTOR transmission must contain the same copyright notice that appears on the screen or
+printed page of such transmission.
+
+Social Forces is published by University of North Carolina Press. Please contact the publisher for further
+permissions regarding the use of this work, Publisher contact information may be obtained at
+http://www .jstor.org/journals/uncpress.html.
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+OCR works with the `/private/tmp` path. Checking whether the old job is still running, then relaunching it with the fixed path.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cat /tmp/nsB/ocr.log; pgrep -fl &#34;ocr.sh|pdftoppm|tesseract&#34;</summary>
+```bash
+cat /tmp/nsB/ocr.log; pgrep -fl "ocr.sh|pdftoppm|tesseract"
+```
+
+```
+done breiger_duality_1974
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Background jobs don't survive here, so I'll run OCR in the foreground, one paper at a time, starting with Breiger (pages already rendered).
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /private/tmp/nsB &amp;&amp; out=breiger_duality_1974.txt; : &gt; $out; for i in $(seq -w 1 11); do echo &#34;=== PDFPAGE breiger_duality_1974-$i&#34; &gt;&gt; $out; tesseract /private/tmp/nsB/ocr/breiger_duality_1974-$i.png stdout 2&gt;/dev/null &gt;&gt; $out; done; wc -c $out</summary>
+```bash
+cd /private/tmp/nsB && out=breiger_duality_1974.txt; : > $out; for i in $(seq -w 1 11); do echo "=== PDFPAGE breiger_duality_1974-$i" >> $out; tesseract /private/tmp/nsB/ocr/breiger_duality_1974-$i.png stdout 2>/dev/null >> $out; done; wc -c $out
+```
+
+```
+   38944 breiger_duality_1974.txt
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /tmp/nsB/breiger_duality_1974.txt</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd &#34;/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/FOUNDY_Intro&#34; &amp;&amp; for spec in &#34;granovetter_strength_1973|files/325/Granovetter - Unknown - The Strength of Weak Ties.pdf&#34;; do k=&#34;${spec%%|*}&#34;; p=&#34;${spec#*|}&#34;; pdftoppm -r 200 -png &#34;$p&#34; /private/tmp/nsB/ocr/$k; out=/private/tmp/nsB/$k.txt; : &gt; $out; for img in $(ls /private/tmp/nsB/ocr/$k-*.png | sort -V); do echo &#34;=== PDFPAGE $(basename $img .png)&#34; &gt;&gt; $out; tesseract &#34;$img&#34; stdout 2&gt;/dev/null &gt;&gt; $out; done; wc -c $out; done</summary>
+```bash
+cd "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/FOUNDY_Intro" && for spec in "granovetter_strength_1973|files/325/Granovetter - Unknown - The Strength of Weak Ties.pdf"; do k="${spec%%|*}"; p="${spec#*|}"; pdftoppm -r 200 -png "$p" /private/tmp/nsB/ocr/$k; out=/private/tmp/nsB/$k.txt; : > $out; for img in $(ls /private/tmp/nsB/ocr/$k-*.png | sort -V); do echo "=== PDFPAGE $(basename $img .png)" >> $out; tesseract "$img" stdout 2>/dev/null >> $out; done; wc -c $out; done
+```
+
+```
+   86524 /private/tmp/nsB/granovetter_strength_1973.txt
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Breiger OCR is clean (PDF page = journal page + 1, because of a JSTOR cover page). It even includes a Simmel passage on competition. Verifying quotes against the OCR text.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; python3 q.py breiger_duality_1974 &#34;A metaphor of classical social theory concerning the “intersection” of persons within groups and of groups within the individual is translated into a set of techniques to aid in empirical analysis of the interpenetration of networks of interpersonal ties and networks of intergroup ties.&#34; &#34;At the same time, the particular patterning of an individual’s affiliations (or the “intersection” of groups within the person) defines his points of reference and (at least partially) determines his individuality.&#34; &#34;Consider a set of individuals and a set of groups such that the value of a tie between any two individuals is defined as the number of groups of which they both are members.&#34; &#34;fined conversely as the number of persons who belong to both.&#34; &#34;Thus: two distinct matrices, one of person-to-person relations (P) and one of group-to-group relations (G), are uniquely defined by and derivable from a single “translation” matrix (A) of person-to-group affiliations.&#34; &#34;I fundamentally agree that there are two types of social ties: membership and _ social-relations.&#34; &#34;persons who are actors in one picture (the P matrix) are with equal legitimacy viewed as connections in the dual picture (the G matrix), and conversely for groups.&#34; &#34;Since everyone was connected to virtually everyone else, identification of subgroupings became problematic.&#34; &#34;The ratio 139/153 is 0.91.&#34; &#34;Inspection of P2 will show that connectivity has been significantly reduced to 30 percent&#34; &#34;is the fight of all for all”—and thus results not in the chaos of Hobbes (which necessitates external control) but in an intrinsically ordered interweaving of relations based on “the possibilities of gaining favor and connection.”&#34; &#34;“Modern competition is described as the fight of all against all, but at the same time it&#34; &#34;the assumption here being that directors of higher-status corporations are more sought after to lend their prestige to the boards of other corporations&#34; &#34;The researchers were aware that they could derive the woman-to-woman relations from A, but they chose not to do so.&#34; &#34;compiled a table with eighteen rows—one for each woman—and fourteen columns, one for each “event”&#34;</summary>
+```bash
+cd /tmp/nsB && python3 q.py breiger_duality_1974 "A metaphor of classical social theory concerning the “intersection” of persons within groups and of groups within the individual is translated into a set of techniques to aid in empirical analysis of the interpenetration of networks of interpersonal ties and networks of intergroup ties." "At the same time, the particular patterning of an individual’s affiliations (or the “intersection” of groups within the person) defines his points of reference and (at least partially) determines his individuality." "Consider a set of individuals and a set of groups such that the value of a tie between any two individuals is defined as the number of groups of which they both are members." "fined conversely as the number of persons who belong to both." "Thus: two distinct matrices, one of person-to-person relations (P) and one of group-to-group relations (G), are uniquely defined by and derivable from a single “translation” matrix (A) of person-to-group affiliations." "I fundamentally agree that there are two types of social ties: membership and _ social-relations." "persons who are actors in one picture (the P matrix) are with equal legitimacy viewed as connections in the dual picture (the G matrix), and conversely for groups." "Since everyone was connected to virtually everyone else, identification of subgroupings became problematic." "The ratio 139/153 is 0.91." "Inspection of P2 will show that connectivity has been significantly reduced to 30 percent" "is the fight of all for all”—and thus results not in the chaos of Hobbes (which necessitates external control) but in an intrinsically ordered interweaving of relations based on “the possibilities of gaining favor and connection.”" "“Modern competition is described as the fight of all against all, but at the same time it" "the assumption here being that directors of higher-status corporations are more sought after to lend their prestige to the boards of other corporations" "The researchers were aware that they could derive the woman-to-woman relations from A, but they chose not to do so." "compiled a table with eighteen rows—one for each woman—and fourteen columns, one for each “event”"
+```
+
+```
+OK   [2] | A metaphor of classical social theory concerning the “intersection” of persons w
+OK   [2] | At the same time, the particular patterning of an individual’s affiliations (or 
+OK   [2] | Consider a set of individuals and a set of groups such that the value of a tie b
+OK   [3] | fined conversely as the number of persons who belong to both.
+MISS [] | Thus: two distinct matrices, one of person-to-person relations (P) and one of gr
+OK   [4] | I fundamentally agree that there are two types of social ties: membership and _ 
+OK   [5] | persons who are actors in one picture (the P matrix) are with equal legitimacy v
+OK   [6] | Since everyone was connected to virtually everyone else, identification of subgr
+OK   [6] | The ratio 139/153 is 0.91.
+OK   [6] | Inspection of P2 will show that connectivity has been significantly reduced to 3
+OK   [10] | is the fight of all for all”—and thus results not in the chaos of Hobbes (which 
+OK   [10] | “Modern competition is described as the fight of all against all, but at the sam
+OK   [10] | the assumption here being that directors of higher-status corporations are more 
+OK   [5] | The researchers were aware that they could derive the woman-to-woman relations f
+OK   [5] | compiled a table with eighteen rows—one for each woman—and fourteen columns, one
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Breiger confirmed (the one miss is a real hyphen at a line break, visible in the OCR above). Now Granovetter.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; grep -n &#34;=== PDFPAGE&#34; granovetter_strength_1973.txt | head -40; grep -n -i -E &#34;strength of a|combination of|bridge|forbidden|job|Newton|282|professional|technical|managerial|weak ties|local bridge|macro|micro|limitation|caution|caveat|I have not|beyond the scope|AMERICAN JOURNAL&#34; granovetter_strength_1973.txt | head -90</summary>
+```bash
+cd /tmp/nsB && grep -n "=== PDFPAGE" granovetter_strength_1973.txt | head -40; grep -n -i -E "strength of a|combination of|bridge|forbidden|job|Newton|282|professional|technical|managerial|weak ties|local bridge|macro|micro|limitation|caution|caveat|I have not|beyond the scope|AMERICAN JOURNAL" granovetter_strength_1973.txt | head -90
+```
+
+```
+1:=== PDFPAGE granovetter_strength_1973-01
+33:=== PDFPAGE granovetter_strength_1973-02
+82:=== PDFPAGE granovetter_strength_1973-03
+136:=== PDFPAGE granovetter_strength_1973-04
+188:=== PDFPAGE granovetter_strength_1973-05
+234:=== PDFPAGE granovetter_strength_1973-06
+287:=== PDFPAGE granovetter_strength_1973-07
+323:=== PDFPAGE granovetter_strength_1973-08
+377:=== PDFPAGE granovetter_strength_1973-09
+427:=== PDFPAGE granovetter_strength_1973-10
+479:=== PDFPAGE granovetter_strength_1973-11
+532:=== PDFPAGE granovetter_strength_1973-12
+584:=== PDFPAGE granovetter_strength_1973-13
+639:=== PDFPAGE granovetter_strength_1973-14
+693:=== PDFPAGE granovetter_strength_1973-15
+745:=== PDFPAGE granovetter_strength_1973-16
+796:=== PDFPAGE granovetter_strength_1973-17
+848:=== PDFPAGE granovetter_strength_1973-18
+899:=== PDFPAGE granovetter_strength_1973-19
+949:=== PDFPAGE granovetter_strength_1973-20
+1020:=== PDFPAGE granovetter_strength_1973-21
+1114:=== PDFPAGE granovetter_strength_1973-22
+1174:=== PDFPAGE granovetter_strength_1973-23
+1201:=== PDFPAGE granovetter_strength_1973-24
+1249:=== PDFPAGE granovetter_strength_1973-25
+1301:=== PDFPAGE granovetter_strength_1973-26
+1353:=== PDFPAGE granovetter_strength_1973-27
+1406:=== PDFPAGE granovetter_strength_1973-28
+1457:=== PDFPAGE granovetter_strength_1973-29
+1506:=== PDFPAGE granovetter_strength_1973-30
+1555:=== PDFPAGE granovetter_strength_1973-31
+2:The Strength of Weak Ties
+6:American Journal of Sociology, Volume 78, Issue 6 (May, 1973), 1360-1380.
+19:American Journal of Sociology is published by University of Chicago Press. Please contact the publisher for further
+23:American Journal of Sociology
+34:The Strength of Weak Ties’
+39:Analysis of social networks is suggested as a tool for linking micro
+40:and macro levels of sociological theory. The procedure is illustrated
+41:by elaboration of the macro implications of one aspect of small-scale
+47:cohesive power of weak ties. Most network models deal, implicitly,
+49:defined groups. Empha
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; sed -n 33,50p granovetter_strength_1973.txt; echo ----; sed -n 100,112p granovetter_strength_1973.txt; echo ----; sed -n 245,270p granovetter_strength_1973.txt; echo ---; sed -n 585,640p granovetter_strength_1973.txt; echo ----; sed -n 694,705p granovetter_strength_1973.txt; grep -n -i -E &#34;^CONCLUSION|Conclusion|cross-sectional|not measured|tentative|speculative|only a|untested|no data&#34; granovetter_strength_1973.txt</summary>
+```bash
+cd /tmp/nsB && sed -n 33,50p granovetter_strength_1973.txt; echo ----; sed -n 100,112p granovetter_strength_1973.txt; echo ----; sed -n 245,270p granovetter_strength_1973.txt; echo ---; sed -n 585,640p granovetter_strength_1973.txt; echo ----; sed -n 694,705p granovetter_strength_1973.txt; grep -n -i -E "^CONCLUSION|Conclusion|cross-sectional|not measured|tentative|speculative|only a|untested|no data" granovetter_strength_1973.txt
+```
+
+```
+=== PDFPAGE granovetter_strength_1973-02
+The Strength of Weak Ties’
+
+Mark S. Granovetter
+Johns Hopkins University
+
+Analysis of social networks is suggested as a tool for linking micro
+and macro levels of sociological theory. The procedure is illustrated
+by elaboration of the macro implications of one aspect of small-scale
+interaction: the strength of dyadic ties. It is argued that the degree
+of overlap of two individuals’ friendship networks varies directly
+with the strength of their tie to one another. The impact of this
+principle on diffusion of influence and information, mobility oppor-
+tunity, and community organization is explored. Stress is laid on the
+cohesive power of weak ties. Most network models deal, implicitly,
+with strong ties, thus confining their applicability to small, well-
+defined groups. Emphasis on weak ties lends itself to discussion of
+relations between groups and to analysis of segments of social struc-
+----
+for models; mathematical arguments, leads, and references are suggested
+mostly in footnotes.
+
+THE STRENGTH OF TIES
+
+Most intuitive notions of the “strength” of an interpersonal tie should be
+satisfied by the following definition: the strength of a tie is a (probably
+linear) combination of the amount of time, the emotional intensity, the
+intimacy (mutual confiding), and the reciprocal services which characterize
+the tie.2 Each of these is somewhat independent of the other, though the
+set is obviously highly intracorrelated. Discussion of operational measures
+of and weights attaching to each of the four elements is postponed to future
+empirical studies. It is sufficient for the present purpose if most of us can
+----
+the triad pictured in figure 1 is not analyzed, but it is implied that processes
+of cognitive balance tended to eliminate it.
+
+The significance of this triad’s absence can be shown by using the
+concept of a “bridge”; this is a line in a network which provides the only
+path between two points (Harary, Norman, and Cartwright 1965,
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; sed -n 640,693p granovetter_strength_1973.txt; echo ----; sed -n 942,1000p granovetter_strength_1973.txt; grep -n -E &#34;^1[34][0-9][0-9]$&#34; granovetter_strength_1973.txt | head -30</summary>
+```bash
+cd /tmp/nsB && sed -n 640,693p granovetter_strength_1973.txt; echo ----; sed -n 942,1000p granovetter_strength_1973.txt; grep -n -E "^1[34][0-9][0-9]$" granovetter_strength_1973.txt | head -30
+```
+
+```
+American Journal of Sociology
+
+(Granovetter 1970, pp. 76-80). Usually such ties had not even been very
+strong when first forged. For work-related ties, respondents almost invari-
+ably said that they never saw the person in a nonwork context.17 Chance
+meetings or mutual friends operated to reactivate such ties. It is remarkable
+that people receive crucial information from individuals whose very exis-
+tence they have forgotten.18
+
+I also asked respondents where their contacts got the information they
+transmitted. In most cases, I traced the information to its initial source.
+IT had expected that, as in the diffusion of rumors or diseases, long paths
+would be involved. But in 39.1% of the cases information came directly
+from the prospective employer, whom the respondent already knew; 45.3%
+said that there was one intermediary between himself and the employer;
+12.5% reported two; and 3.1% more than two (N = 64). This suggests
+that for some important purposes it may be sufficient to discuss, as I have,
+the egocentric network made up of ego, his contacts, and their contacts.
+Had long information paths been involved, large numbers might have found
+out about any given job, and no particular tie would have been crucial.
+Such a model of job-information flow actually does correspond to the
+economists’ model of a “perfect” labor market. But those few who did
+acquire information through paths with more than one intermediary tended
+to be young and under the threat of unemployment; influence was much
+less likely to have been exerted by their contact on their behalf. These
+respondents were, in fact, more similar to those using formal intermediaries
+(agencies, advertisements) than to those hearing through short paths:
+both of the former are badly placed and dissatisfied in the labor market,
+and both receive information without influence. Just as reading about a
+job in the newspaper affords one no recommendation in applying for it,
+neither does it to have heard about it fifth hand.
+
+
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; sed -n 343,352p granovetter_strength_1973.txt; python3 q.py granovetter_strength_1973 &#34;It is argued that the degree of overlap of two individuals’ friendship networks varies directly with the strength of their tie to one another.&#34; &#34;the strength of a tie is a (probably linear) combination of the amount of time, the emotional intensity, the intimacy (mutual confiding), and the reciprocal services which characterize the tie.&#34; &#34;What is important, rather, is that all bridges are weak ties.&#34; &#34;Of those finding a job through contacts, 16.7% reported that they saw their contact often at the time, 55.6% said occasionally, and 27.8% rarely (N = 54).&#34; &#34;The numbers reported are small because they represent a random subsample of 100, who were interviewed personally, of the total sample of 282.&#34; &#34;Although this corresponds only to the first of the four dimensions in my definition&#34; &#34;Since baseline data on acquaintance networks are lacking, this objection remains inconclusive.&#34; &#34;From the individual’s point of view, then, weak ties are an important resource in making possible mobility opportunity.&#34; &#34;both of the former are badly placed and dissatisfied in the labor market, and both receive information without influence.&#34; &#34;The model offered here is a very limited step in the linking of levels; it is a fragment of a theory.&#34; &#34;strong ties, breeding local cohesion, lead to overall fragmentation.&#34; &#34;My contribution here is mainly, then, exploratory and programmatic&#34; &#34;those to whom we are weakly tied are more likely to move in circles different from our own and will thus have access to information different from that which we receive.&#34; &#34;The major implication intended by this paper is that the personal experience of individuals is closely bound up with larger-scale aspects of social structure, well beyond the purview or control of particular individuals.&#34;</summary>
+```bash
+cd /tmp/nsB && sed -n 343,352p granovetter_strength_1973.txt; python3 q.py granovetter_strength_1973 "It is argued that the degree of overlap of two individuals’ friendship networks varies directly with the strength of their tie to one another." "the strength of a tie is a (probably linear) combination of the amount of time, the emotional intensity, the intimacy (mutual confiding), and the reciprocal services which characterize the tie." "What is important, rather, is that all bridges are weak ties." "Of those finding a job through contacts, 16.7% reported that they saw their contact often at the time, 55.6% said occasionally, and 27.8% rarely (N = 54)." "The numbers reported are small because they represent a random subsample of 100, who were interviewed personally, of the total sample of 282." "Although this corresponds only to the first of the four dimensions in my definition" "Since baseline data on acquaintance networks are lacking, this objection remains inconclusive." "From the individual’s point of view, then, weak ties are an important resource in making possible mobility opportunity." "both of the former are badly placed and dissatisfied in the labor market, and both receive information without influence." "The model offered here is a very limited step in the linking of levels; it is a fragment of a theory." "strong ties, breeding local cohesion, lead to overall fragmentation." "My contribution here is mainly, then, exploratory and programmatic" "those to whom we are weakly tied are more likely to move in circles different from our own and will thus have access to information different from that which we receive." "The major implication intended by this paper is that the personal experience of individuals is closely bound up with larger-scale aspects of social structure, well beyond the purview or control of particular individuals."
+```
+
+```
+that the above claims could easily be put to test. But this is not so, for
+several reasons. To begin with, though most diffusion studies find that
+personal contacts are crucial, many undertake no sociometric investigation.
+(Rogers [1962] discusses this point.) When sociometric techniques are
+used, they tend to discourage the naming of those weakly tied to the
+respondent by sharply limiting the numbers of choices allowed. Hence, the
+proposed importance of weak ties in diffusion is not measured. Even when
+more sociometric information is collected there is almost never an attempt
+to directly retrace the exact interpersonal paths traversed by an (idea,
+rumor, or) innovation. More commonly, the time when each individual
+OK   [2] | It is argued that the degree of overlap of two individuals’ friendship networks 
+OK   [3] | the strength of a tie is a (probably linear) combination of the amount of time, 
+OK   [6] | What is important, rather, is that all bridges are weak ties.
+OK   [13] | Of those finding a job through contacts, 16.7% reported that they saw their cont
+OK   [13] | The numbers reported are small because they represent a random subsample of 100,
+OK   [13] | Although this corresponds only to the first of the four dimensions in my definit
+OK   [14] | Since baseline data on acquaintance networks are lacking, this objection remains
+OK   [15] | From the individual’s point of view, then, weak ties are an important resource i
+OK   [14] | both of the former are badly placed and dissatisfied in the labor market, and bo
+OK   [20] | The model offered here is a very limited step in the linking of levels; it is a 
+OK   [20] | strong ties, breeding local cohesion, lead to overall fragmentation.
+OK   [20] | My contribution here is mainly, then, exploratory and programmatic
+OK   [13] | those to whom we are weakly tied are more likely to move in circles different fr
+OK   [19] | The major implication intended by this paper is that the personal experience of 
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Granovetter verified (OCR; PDF page = journal page − 1358). Starting the Burt 1992 OCR in the foreground while appending Granovetter, Breiger, and Centola & Macy.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2"><details>
+<summary>Tool use: **edit_file_v2** • Edit file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_B_structure_position_note.md</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd &#34;/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/FOUNDY_Intro&#34; &amp;&amp; k=burt_structural_1992; p=&#34;files/342/Burt - 1992 - Structural Holes The Social Structure of Competition.pdf&#34;; pdftoppm -r 200 -png &#34;$p&#34; /private/tmp/nsB/ocr/$k; out=/private/tmp/nsB/$k.txt; : &gt; $out; for img in $(ls /private/tmp/nsB/ocr/$k-*.png | sort -V); do echo &#34;=== PDFPAGE $(basename $img .png)&#34; &gt;&gt; $out; tesseract &#34;$img&#34; stdout 2&gt;/dev/null &gt;&gt; $out; done; wc -c $out</summary>
+```bash
+cd "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/FOUNDY_Intro" && k=burt_structural_1992; p="files/342/Burt - 1992 - Structural Holes The Social Structure of Competition.pdf"; pdftoppm -r 200 -png "$p" /private/tmp/nsB/ocr/$k; out=/private/tmp/nsB/$k.txt; : > $out; for img in $(ls /private/tmp/nsB/ocr/$k-*.png | sort -V); do echo "=== PDFPAGE $(basename $img .png)" >> $out; tesseract "$img" stdout 2>/dev/null >> $out; done; wc -c $out
+```
+
+```
+  100825 /private/tmp/nsB/burt_structural_1992.txt
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Burt 1992 OCR finished. Checking its structure (it should be just the introduction/chapter 1).
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; python3 q.py centola_complex_2007 &#34;N = 2000, averaged over 100 realizations&#34;; for i in 01 02 03 04 05 06 10 20 30 42; do echo &#34;== $i&#34;; awk -v p=&#34;=== PDFPAGE burt_structural_1992-$i&#34; &#39;$0==p{f=1;next} /^=== PDFPAGE/{f=0} f&#39; burt_structural_1992.txt | head -6; done</summary>
+```bash
+cd /tmp/nsB && python3 q.py centola_complex_2007 "N = 2000, averaged over 100 realizations"; for i in 01 02 03 04 05 06 10 20 30 42; do echo "== $i"; awk -v p="=== PDFPAGE burt_structural_1992-$i" '$0==p{f=1;next} /^=== PDFPAGE/{f=0} f' burt_structural_1992.txt | head -6; done
+```
+
+```
+OK   [56, 57, 58] | N = 2000, averaged over 100 realizations
+== 01
+l
+
+The Social Structure
+
+of Competition
+
+== 02
+The Social Structure of Competition 9
+
+You have friends, colleagues, and more general contacts through whom
+you receive opportunities to use your financial and human capital. I refer
+to opportunities in a broad sense, but I certainly mean to include the
+obvious examples of job promotions, p articipation in significant projects,
+== 03
+10 Structural Holes
+
+opportunities—the leadership position:
+rial skills. The investment to make yo!
+
+—you get to apply your manage-
+== 04
+The Social St)
+
+ructure of Competition Il
+
+WHO AND HOW
+The competitive arena has a social struc!
+== 05
+12 Structural Holes
+
+party tend to have friends affiliated with th
+developed from this line of work describes
+available to any one person in a populat
+sources available to individuals socially p
+== 06
+The Social Structure of Competition Tf,
+
+parameters of social capital that generaliz! beyond the specific individu-
+
+als connected by a relationship.
+
+== 10
+The Social Structure of Competition 17
+
+NN 7
+
+\/
+
+== 20
+The Social St
+
+ucture of Competition 27
+
+Figure 1.6 Structural holes
+
+== 30
+The Social Str
+
+ucture of Competition 37
+
+holes and rates of return. Consider Figure
+
+== 42
+The Social Structure of Competition 49
+
+omy. Players with relationships free of structural holes at their own end
+and rich in structural holes at the other end dre structurally autonomous.
+These are the players best positioned for the information and control
+benefits that a network can provide. Structural autonomy summarizes
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+The Burt 1992 file is chapter 1 only ("The Social Structure of Competition," pp. 8–49; PDF page = book page − 7). Searching it for key passages.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; grep -n -i -E &#34;structural hole is|separation between nonredundant|nonredundant contacts|tertius|rate of return|imperfect|competition is|competitive arena|social capital is|entrepreneur|opportunit|who gets|promotion|bridge|redundan&#34; burt_structural_1992.txt | head -90</summary>
+```bash
+cd /tmp/nsB && grep -n -i -E "structural hole is|separation between nonredundant|nonredundant contacts|tertius|rate of return|imperfect|competition is|competitive arena|social capital is|entrepreneur|opportunit|who gets|promotion|bridge|redundan" burt_structural_1992.txt | head -90
+```
+
+```
+8:A player brings capital to the competitive arena and walks away with
+12:plied by the going rate of return, equa
+18:the investment. You invest a million dollars. The going rate of return is
+25:The rate of return is keyed to the si
+33:. Rate of return is an opportunity
+42:way in which social structure renders competition imperfect by creating
+43:entrepreneurial opportunities for certain players and not for others.!
+45:Opportunity
+49:A player brings at least three kinds of capital to the competitive arena.
+74:you receive opportunities to use your financial and human capital. I refer
+75:to opportunities in a broad sense, but I certainly mean to include the
+76:obvious examples of job promotions, p articipation in significant projects,
+101:Social capital is different on both counts. First, it is a thing owned
+107:social capital concerns rate of return in the market production equation.
+111:Social capital is the final arbiter of competitive success. The capital
+113:product is as rewarding as the opportunities to sell the product at a profit.
+119:opportunities—the leadership position:
+125:the-art research facilities is as valuable as the opportunities—the proj-
+128:More accurately, social capital is as
+132:rate of return because capital moves fi
+134:vestments. When competition is imp
+155:mportant as competition is imper-
+172:competitive arena, which makes
+175:Competition is never perfect. The rules of trade are ambiguous in the
+178:opportunities is rarely made with resp'
+198:opportunities. Of the products that a’
+205:gets the opportunity. Those other
+223:The competitive arena has a social struc!
+369:Social capital is at once the resources contacts hold and the structure of
+407:provide high opportunity knows whom to include in the network. Even
+441:Opportunities spring up everywhere: new institutions and projects that
+447:know, and who gets to participate in the
+452:hese opportunities, when they
+458:more rewarding opportunities.
+488:you up to date on developing opportuniti
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; sed -n 36,50p burt_structural_1992.txt; echo ----; sed -n 98,115p burt_structural_1992.txt; echo ----; sed -n 170,225p burt_structural_1992.txt; echo -----; sed -n 815,840p burt_structural_1992.txt</summary>
+```bash
+cd /tmp/nsB && sed -n 36,50p burt_structural_1992.txt; echo ----; sed -n 98,115p burt_structural_1992.txt; echo ----; sed -n 170,225p burt_structural_1992.txt; echo -----; sed -n 815,840p burt_structural_1992.txt
+```
+
+```
+r has a network of contacts in the
+of the player’s network and the
+social structure of the arena pro-
+g higher rates of return on invest-
+
+ment. This chapter is about that advantage. It is a description of the
+way in which social structure renders competition imperfect by creating
+entrepreneurial opportunities for certain players and not for others.!
+
+Opportunity
+
+d Capital
+
+A player brings at least three kinds of capital to the competitive arena.
+
+----
+materials and production facilities. Human capital is needed to craft the
+raw materials into a competitive product.
+
+Social capital is different on both counts. First, it is a thing owned
+jointly by the parties to a relationship. No one player has exclusive own-
+ership rights to social capital. If you) or your partner in a relationship
+withdraws, the connection, with whatever social capital it contained, dis-
+solves. If a firm treats a cluster of customers poorly and they leave, the
+social capital represented by the firm-cluster relationship is lost. Second,
+social capital concerns rate of return in the market production equation.
+Through relations with colleagues, friends, and clients come the opportu-
+nities to transform financial and human capital into profit.
+
+Social capital is the final arbiter of competitive success. The capital
+invested to bring your organization to the point of producing a superb
+product is as rewarding as the opportunities to sell the product at a profit.
+The investment to make you a skilled manager is as valuable as the
+
+----
+cd
+
+competitive arena, which makes
+cal as financial and human capital.
+
+Competition is never perfect. The rules of trade are ambiguous in the
+
+aggregate and everywhere negotiable
+opportunities is rarely made with resp'
+needed for a task. Within an accepta'
+
+n the particular. The allocation of
+ct to a single dimension of abilities
+ble range of needed abilities, there
+
+are many people with financial and human capital comparable to your
+
+own. Whatever you bring to a produ
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+The Burt 1992 OCR is scrambled on some pages (the scan is cropped/skewed). Re-running tesseract on key pages with a different page-segmentation mode.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /private/tmp/nsB/ocr &amp;&amp; for i in 01 03 11; do echo &#34;=== $i&#34;; tesseract burt_structural_1992-$i.png stdout --psm 6 2&gt;/dev/null; done</summary>
+```bash
+cd /private/tmp/nsB/ocr && for i in 01 03 11; do echo "=== $i"; tesseract burt_structural_1992-$i.png stdout --psm 6 2>/dev/null; done
+```
+
+```
+=== 01
+1
+
+The Social Structur
+of Competition
+
+A player brings capital to the competitive arena and walks away with \
+profit determined by the rate of returr) where the capital was invested. |
+The market production equation predicts profit: invested capital, multi- |
+plied by the going rate of return, equals the profit to be expected from
+
+the investment. You invest a million dollars. The going rate of return is j
+10 percent. The profit is one hundred t ousand dollars. Investments cre-
+
+ate an ability to produce a competitive product. For example, capital is
+
+invested to build and operate a factory. Rate of return is an opportunity
+
+to profit from the investment.
+
+The rate of return is keyed to the spcial structure of the competitive
+
+arena and is the focus here. Each player has a network of contacts in the
+
+arena. Something about the structure) of the player’s network and the
+
+location of the player’s contacts in the social structure of the arena pro-
+
+vides a competitive advantage in getting higher rates of return on invest-
+
+ment. This chapter is about that advantage. It is a description of the
+
+way in which social structure renders competition imperfect by creating
+entrepreneurial opportunities for certain players and not for others.! |
+
+Opportunity and Capital
+
+A player brings at least three kinds o capital to the competitive arena.
+
+Other distinctions can be made, but three are sufficient here. First, the
+
+player has financial capital: cash in hand, reserves in the bank, invest-
+
+ments coming due, lines of credit. Second, the player has human capital.
+
+Your natural qualities—charm, health, intelligence, and looks—com-
+
+bined with the skills you have acquired in formal education and job expe-
+
+rience give you abilities to excel at certain tasks.
+
+Third, the player has social capita relationships with other players.
+=== 03
+'
+10 Structural Holes |
+opportunities—the leadership positions—you get to apply your manage-
+rial skills. The investment to make you a skilled
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+`--psm 6` gives much cleaner text. Re-running the whole Burt chapter with that mode.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /private/tmp/nsB &amp;&amp; out=burt_structural_1992.txt; : &gt; $out; for img in $(ls ocr/burt_structural_1992-*.png | sort -V); do echo &#34;=== PDFPAGE $(basename $img .png)&#34; &gt;&gt; $out; tesseract &#34;$img&#34; stdout --psm 6 2&gt;/dev/null &gt;&gt; $out; done; wc -c $out; grep -n -i -E &#34;tertius|promotion|rate of return|who gets|structural autonomy|competition is|caveat|limitation|hypothes|data&#34; $out | head -60</summary>
+```bash
+cd /private/tmp/nsB && out=burt_structural_1992.txt; : > $out; for img in $(ls ocr/burt_structural_1992-*.png | sort -V); do echo "=== PDFPAGE $(basename $img .png)" >> $out; tesseract "$img" stdout --psm 6 2>/dev/null >> $out; done; wc -c $out; grep -n -i -E "tertius|promotion|rate of return|who gets|structural autonomy|competition is|caveat|limitation|hypothes|data" $out | head -60
+```
+
+```
+  100628 burt_structural_1992.txt
+10:plied by the going rate of return, equals the profit to be expected from
+12:the investment. You invest a million dollars. The going rate of return is j
+17:invested to build and operate a factory. Rate of return is an opportunity
+21:The rate of return is keyed to the spcial structure of the competitive
+62:obvious examples of job promotions, participation in significant projects,
+93:social capital concerns rate of return in the market production equation.
+109:More accurately, social capital is as important as competition is imper-
+112:rate of return because capital moves freely from low-yield to high-yield
+114:vestments. When competition is imperfect, capital is less mobile and
+119:replacing them with new people. Rate of return depends on the relations
+127:Competition is never perfect. The rules of trade are ambiguous in the
+137:the pool down to the individual who gets the opportunity. Those other
+276:know, and who gets to participate in them. Players with a network opti-
+380:; competition is imperfect. The question is not whether to trust, but whom
+830:promotion move up a hierarchy. Chains of opportunity move down.
+1030:Control and the Tertius Gaudens
+1032:opportunities, when they know,| and who gets to participate in them.
+1045:TERTIUS GAUDENS
+1047:‘Sometimes you will emerge su¢cessful from negotiation as the tertius
+1049:gaudens. Taken from the work af Georg Simmel, the tertius role is usefu
+1055:The tertius gaudens is “the thir who benefits’’ (Simmel, 1923:154, 232)
+1080:tition. In some situations, emerging as the tertius depends on creating
+1159:in a spirit of partnership and goodwill. The tertius imagery rang true for
+1165:at her level, in her firm. Promotions in the firm are strongly correlated, and
+1172:one else. The tertius strategies can be applied to control with severe
+1185:thority, the tertius negotiates for favorable |terms.
+1191:tween contacts by the tertius. One bidder is informed of a competitive
+1192:offer in the 
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /private/tmp/nsB &amp;&amp; sed -n 55,70p burt_structural_1992.txt; echo ----; sed -n 1045,1062p burt_structural_1992.txt; echo ----; sed -n 1155,1175p burt_structural_1992.txt; echo ---; sed -n 1345,1410p burt_structural_1992.txt; echo ---; sed -n 1715,1760p burt_structural_1992.txt</summary>
+```bash
+cd /private/tmp/nsB && sed -n 55,70p burt_structural_1992.txt; echo ----; sed -n 1045,1062p burt_structural_1992.txt; echo ----; sed -n 1155,1175p burt_structural_1992.txt; echo ---; sed -n 1345,1410p burt_structural_1992.txt; echo ---; sed -n 1715,1760p burt_structural_1992.txt
+```
+
+```
+
+}
+
+. The Social Structure of Competition 9
+You have friends, colleagues, and more general contacts through whom
+you receive opportunities to use your financial and human capital. I refer
+to opportunities in a broad sense, but I certainly mean to include the
+obvious examples of job promotions, participation in significant projects,
+influential access to important decisions, and so on. The social capital of
+people aggregates into the social capital of organizations. Ina firm provid-
+ing services—for example, advertising, brokerage, or consulting—there
+are people valued for their ability to deliver a quality product. Then there
+are ‘‘rainmakers,”’ valued for their ability to deliver clients. Those who
+deliver the product do the work, and the rainmakers make it possible for
+all to profit from the work. The former represent the financial and human
+capital of the firm. The latter represent its social capital. More generally,
+----
+TERTIUS GAUDENS
+
+‘Sometimes you will emerge su¢cessful from negotiation as the tertius
+
+gaudens. Taken from the work af Georg Simmel, the tertius role is usefu
+
+here because it defines successful negotiation in terms of the social struc
+ture of the situation in which egotiation is successful. The role is thi
+heart of Simmel’s (1922) later alysis of the freedom an individual de
+rives from conflicting group affiliations (see Coser, 1975, for elaboration)
+The tertius gaudens is “the thir who benefits’’ (Simmel, 1923:154, 232)
+The phrase survives in an Italian proverb, Far i due litiganti, il terz
+———
+=== PDFPAGE burt_structural_1992-24
+1
+Es The Social Siructure of Competition 31
+gode (Between two fighters, the third ber efits), and, to the north, in a
+more jovial Dutch wording, de lachende derde (the laughing third).* Ter-
+----
+=== PDFPAGE burt_structural_1992-26
+'
+
+The Social Structure of Competition 33 |
+in a spirit of partnership and goodwill. The tertius imagery rang true for
+many firms she knew of, but not her own.
+
+The reasoning is good. The 
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; python3 q.py burt_structural_1992 &#34;It is a description of the way in which social structure renders competition imperfect by creating entrepreneurial opportunities for certain players and not for others.&#34; &#34;I refer to opportunities in a broad sense, but I certainly mean to include the obvious examples of job promotions, participation in significant projects, influential access to important decisions, and so on.&#34; &#34;Competition is never perfect. The rules of trade are ambiguous in the aggregate and everywhere negotiable in the particular. The allocation of opportunities is rarely made with respect to a single dimension of abilities needed for a task. Within an acceptable range of needed abilities, there are many people with financial and human capital comparable to your own.&#34; &#34;Criteria other than financial and human capital are used to narrow the pool down to the individual who gets the opportunity. Those other criteria are social capital.&#34; &#34;Of those who are equally qualified, only a select few get the most rewarding opportunities.&#34; &#34;contacts. Nonredundant contacts are connected by a structural hole. A&#34; &#34;structural hole is a relationship of nonredundancy between two contacts.&#34; &#34;Promotions in the firm are strongly correlated, and illuminatingly so for women, with the structural holes ina manager’s network.&#34; &#34;There is no imperative that says players have to take advantage of the benefits provided by structural holes.&#34; &#34;Social capital is the final arbiter of competitive success.&#34; &#34;The social capital of people aggregates into the social capital of organizations.&#34; &#34;This chapter contains the core argument of the book.&#34;</summary>
+```bash
+cd /tmp/nsB && python3 q.py burt_structural_1992 "It is a description of the way in which social structure renders competition imperfect by creating entrepreneurial opportunities for certain players and not for others." "I refer to opportunities in a broad sense, but I certainly mean to include the obvious examples of job promotions, participation in significant projects, influential access to important decisions, and so on." "Competition is never perfect. The rules of trade are ambiguous in the aggregate and everywhere negotiable in the particular. The allocation of opportunities is rarely made with respect to a single dimension of abilities needed for a task. Within an acceptable range of needed abilities, there are many people with financial and human capital comparable to your own." "Criteria other than financial and human capital are used to narrow the pool down to the individual who gets the opportunity. Those other criteria are social capital." "Of those who are equally qualified, only a select few get the most rewarding opportunities." "contacts. Nonredundant contacts are connected by a structural hole. A" "structural hole is a relationship of nonredundancy between two contacts." "Promotions in the firm are strongly correlated, and illuminatingly so for women, with the structural holes ina manager’s network." "There is no imperative that says players have to take advantage of the benefits provided by structural holes." "Social capital is the final arbiter of competitive success." "The social capital of people aggregates into the social capital of organizations." "This chapter contains the core argument of the book."
+```
+
+```
+OK   [1] | It is a description of the way in which social structure renders competition imp
+OK   [2] | I refer to opportunities in a broad sense, but I certainly mean to include the o
+OK   [3] | Competition is never perfect. The rules of trade are ambiguous in the aggregate 
+OK   [3] | Criteria other than financial and human capital are used to narrow the pool down
+OK   [3] | Of those who are equally qualified, only a select few get the most rewarding opp
+OK   [11] | contacts. Nonredundant contacts are connected by a structural hole. A
+OK   [11] | structural hole is a relationship of nonredundancy between two contacts.
+OK   [26] | Promotions in the firm are strongly correlated, and illuminatingly so for women,
+OK   [30] | There is no imperative that says players have to take advantage of the benefits 
+OK   [2] | Social capital is the final arbiter of competitive success.
+OK   [2] | The social capital of people aggregates into the social capital of organizations
+OK   [38] | This chapter contains the core argument of the book.
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Burt 1992 verified. Now Burt 2004 (AJS).
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; head -c 3000 burt_structural_2004_raw.txt; echo; grep -n -i -E &#34;673|supply.chain|Raytheon|managers|salary|evaluation|promot|good idea|dismissed|constraint|vision advantage|brokerage|limitation|caveat|cannot|causal|endogen|future research|selection&#34; burt_structural_2004_raw.txt | head -100</summary>
+```bash
+cd /tmp/nsB && head -c 3000 burt_structural_2004_raw.txt; echo; grep -n -i -E "673|supply.chain|Raytheon|managers|salary|evaluation|promot|good idea|dismissed|constraint|vision advantage|brokerage|limitation|caveat|cannot|causal|endogen|future research|selection" burt_structural_2004_raw.txt | head -100
+```
+
+```
+Structural Holes and Good Ideas1
+Ronald S. Burt
+University of Chicago
+
+This article outlines the mechanism by which brokerage provides
+social capital. Opinion and behavior are more homogeneous within
+than between groups, so people connected across groups are more
+familiar with alternative ways of thinking and behaving. Brokerage
+across the structural holes between groups provides a vision of options otherwise unseen, which is the mechanism by which brokerage
+becomes social capital. I review evidence consistent with the hypothesis, then look at the networks around managers in a large
+American electronics company. The organization is rife with structural holes, and brokerage has its expected correlates. Compensation,
+positive performance evaluations, promotions, and good ideas are
+disproportionately in the hands of people whose networks span
+structural holes. The between-group brokers are more likely to express ideas, less likely to have ideas dismissed, and more likely to
+have ideas evaluated as valuable. I close with implications for creativity and structural change.
+The hypothesis in this article is that people who stand near the holes in
+a social structure are at higher risk of having good ideas. The argument
+is that opinion and behavior are more homogeneous within than between
+groups, so people connected across groups are more familiar with alter1
+Portions of this material were presented as the 2003 Coleman Lecture at the University
+of Chicago, at the Harvard-MIT workshop on economic sociology, in workshops at
+the University of California at Berkeley, the University of Chicago, the University of
+Kentucky, the Russell Sage Foundation, the Stanford Graduate School of Business,
+the University of Texas at Dallas, Universiteit Utrecht, and the “Social Aspects of
+Rationality” conference at the 2003 meetings of the American Sociological Association.
+I am grateful to Christina Hardy for her assistance on the manuscript and to several
+colleagues for comments affecting the
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; sed -n 200,222p burt_structural_2004_raw.txt; echo ----; grep -n -i -E &#34;salary|compensation|evaluation|promoted|good ideas|dismissed|expected value|management judged|returns to brokerage|nonlinear|diminish|curvilinear|threshold|conclusion|summary&#34; burt_structural_2004_raw.txt | sed -n 1,80p</summary>
+```bash
+cd /tmp/nsB && sed -n 200,222p burt_structural_2004_raw.txt; echo ----; grep -n -i -E "salary|compensation|evaluation|promoted|good ideas|dismissed|expected value|management judged|returns to brokerage|nonlinear|diminish|curvilinear|threshold|conclusion|summary" burt_structural_2004_raw.txt | sed -n 1,80p
+```
+
+```
+brokerage, but note in the figure 1 insert box how James connects a
+northern and southern segment of cluster B. Within his immediate environment, James has strong ties to both segments and so is positioned
+to broker their integration. The caution here is that structural holes and
+brokerage can be found in almost any task, depending on point of view.
+That caution stated, there is abundant and accumulating empirical
+evidence of increased returns to brokerage—in terms of more positive
+performance evaluations, faster promotions, higher compensation, and
+more successful teams (e.g., see Burt [2000, 2002] for review and Lin
+[2002] for broader context). There are also returns of a less desirable kind,
+such as success in organized crime (Williams 1998; Morselli 2003), fraud
+(Tillman and Indergaard 1999), or corporate misgovernance (Mitchell
+2003, on Enron and Worldcom). Whatever the returns, constructive or
+corrosive, the issue in this article is not whether brokerage yields returns;
+at issue is the mechanism by which brokerage yields its documented
+returns.
+Evidence on the mechanism is not abundant. Initial research established
+the social capital potential of brokerage by focusing on aggregate and
+contingent returns to brokerage. The association cannot be causal. Networks do not act, they are a context for action. The next phase of work
+is to understand the information arbitrage by which people acting as
+brokers harvest the value buried in structural holes. Padgett and Ansell’s
+(1993) description of robust action is an exemplar. More generally, the
+354
+
+----
+1:Structural Holes and Good Ideas1
+11:American electronics company. The organization is rife with structural holes, and brokerage has its expected correlates. Compensation,
+12:positive performance evaluations, promotions, and good ideas are
+14:structural holes. The between-group brokers are more likely to express ideas, less likely to have ideas dismissed, and more likely to
+17:a social structure are at higher risk of 
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; sed -n 1113,1132p burt_structural_2004_raw.txt; echo ----; grep -n -i -E &#34;^Promotion|promotion|idea value|value of ideas|judged|dismiss|two senior|discussion$&#34; burt_structural_2004_raw.txt | sed -n 1,40p</summary>
+```bash
+cd /tmp/nsB && sed -n 1113,1132p burt_structural_2004_raw.txt; echo ----; grep -n -i -E "^Promotion|promotion|idea value|value of ideas|judged|dismiss|two senior|discussion$" burt_structural_2004_raw.txt | sed -n 1,40p
+```
+
+```
+* P ! .05.
+** P ! .001.
+
+first rank, nor for managers in the second rank. However, the slope increases with job rank, showing a stronger salary association with brokerage in the higher ranks as a manager becomes more the author of his
+or her own job and as success depends more on reading the organization
+to identify valuable projects and know who can be brought together to
+implement the projects (cf. Burt 1997).11 Salary in model 1 decreases for
+first-rank managers by $7 with a one-point increase in network constraint.
+The decrease is larger for managers in the second rank (add $19 to the
+11
+Model 2 is the same as model 1 except it is estimated from the data on managers
+who had two or more discussion partners. The results of model 1 highlight the third
+rank of managers as a transition point after which managers enjoyed the salary benefits
+of brokerage. I looked through the third-rank managers to see where salary benefits
+were accumulating. Initially, I thought seniority would be a key. Managers who had
+been in the third rank for a while could have been playing a senior manager role and
+so perhaps compensated for that. The answer was more simple. Third-rank managers
+involved in the informal discussion network showed the salary benefits of brokerage.
+Model 2 shows the same pattern of salary correlates as model 1, except the salary of
+third-rank managers is significantly correlated with network constraint.
+----
+12:positive performance evaluations, promotions, and good ideas are
+14:structural holes. The between-group brokers are more likely to express ideas, less likely to have ideas dismissed, and more likely to
+206:performance evaluations, faster promotions, higher compensation, and
+463:the industry. Age turned out to be more strongly correlated with performance and idea value, so I use age as the control for work experience.
+579:social isolate. Two senior managers were isolates. The largest concentration was among first-rank managers, where it is easy to imagine a lo
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; sed -n 1286,1300p burt_structural_2004_raw.txt; echo ----; sed -n 1335,1345p burt_structural_2004_raw.txt; echo ----; grep -n -i -E &#34;CONCLUSION|implication|creativity|bias|judges|caveat|limitation|reverse|causal|cross-section|one company|single&#34; burt_structural_2004_raw.txt | sed -n 1,50p</summary>
+```bash
+cd /tmp/nsB && sed -n 1286,1300p burt_structural_2004_raw.txt; echo ----; sed -n 1335,1345p burt_structural_2004_raw.txt; echo ----; grep -n -i -E "CONCLUSION|implication|creativity|bias|judges|caveat|limitation|reverse|causal|cross-section|one company|single" burt_structural_2004_raw.txt | sed -n 1,50p
+```
+
+```
+Model 4 in table 1 shows the brokerage association with promotion.
+The more interconnected a manager’s discussion contacts last year, the
+lower the probability of being promoted or receiving an above-average
+pay increase this year (⫺.022 coefficient, ⫺3.7 test statistic). The association is consistent across job ranks (negligible slope adjustments). The
+only significant control variable again is age. Holding age constant, the
+graph to the right in figure 4 shows how the probability predicted by
+model 4 changes with network constraint. The odds were good for being
+promoted or for receiving an above-average raise between the two years
+observed (42%). Managers brokering connections across segregated groups
+had significantly higher odds of a promotion or above-average salary
+increase (P p .68 for C p 10). Managers limited to a circle of densely
+interconnected colleagues had the least chance (P p .28 for C p 100).
+Adding a dummy variable distinguishing the 193 social isolates does not
+change the prediction (⫺1.4 test statistic). The same conclusion holds if
+the logit model is used to predict promotion to a higher job rank (⫺3.4
+----
+Two senior managers evaluated the ideas. Each led one of the company’s largest business units, and they were geographically distant from
+one another. Both judges were prominent for their experience in running
+the supply chain for their respective businesses. Each was given a list of
+the ideas—unattributed to their sources—and was asked the question:
+“How much value could be generated if the idea were well executed?”
+The answer scale ranged from one (“low value or can’t say”) to five (“value
+could be high”).15
+Table 2 lists four illustrative ideas. The first two, judged high-value,
+propose extending supply-chain operations into exogenous sources of inefficiency. Supply-chain managers were widely viewed by company engineers as administrative assistants who executed equipment orders. Engineers were deemed better informed about alternative vendor
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; python3 q.py burt_structural_2004 &#34;Compensation, positive performance evaluations, promotions, and good ideas are disproportionately in the hands of people whose networks span structural holes.&#34; &#34;The between-group brokers are more likely to express ideas, less likely to have ideas dismissed, and more likely to have ideas evaluated as valuable.&#34; &#34;Opinion and behavior are more homogeneous within than between groups, so people connected across groups are more familiar with alternative ways of thinking and behaving.&#34; &#34;The association cannot be causal. Networks do not act, they are a context for action.&#34; &#34;I draw on data describing 673 managers who ran the supply chain in&#34; &#34;Of the 673 managers, 455 completed the network questions (68%).&#34; &#34;Managers brokering connections across segregated groups had significantly higher odds of a promotion or above-average salary increase (P p .68 for C p 10). Managers limited to a circle of densely interconnected colleagues had the least chance (P p .28 for C p 100).&#34; &#34;The results of model 1 highlight the third rank of managers as a transition point after which managers enjoyed the salary benefits of brokerage.&#34; &#34;The caution here is that structural holes and brokerage can be found in almost any task, depending on point of view.&#34; &#34;Disentangling centrality from brokerage would require network and salary data over time to see how the two&#34; &#34;the ideas—unattributed to their sources—and was asked the question: “How much value could be generated if the idea were well executed?”&#34; &#34;The hypothesis in this article is that people who stand near the holes in a social structure are at higher risk of having good ideas.&#34;; grep -n -B1 -A3 &#34;I draw on data describing 673&#34; burt_structural_2004_raw.txt</summary>
+```bash
+cd /tmp/nsB && python3 q.py burt_structural_2004 "Compensation, positive performance evaluations, promotions, and good ideas are disproportionately in the hands of people whose networks span structural holes." "The between-group brokers are more likely to express ideas, less likely to have ideas dismissed, and more likely to have ideas evaluated as valuable." "Opinion and behavior are more homogeneous within than between groups, so people connected across groups are more familiar with alternative ways of thinking and behaving." "The association cannot be causal. Networks do not act, they are a context for action." "I draw on data describing 673 managers who ran the supply chain in" "Of the 673 managers, 455 completed the network questions (68%)." "Managers brokering connections across segregated groups had significantly higher odds of a promotion or above-average salary increase (P p .68 for C p 10). Managers limited to a circle of densely interconnected colleagues had the least chance (P p .28 for C p 100)." "The results of model 1 highlight the third rank of managers as a transition point after which managers enjoyed the salary benefits of brokerage." "The caution here is that structural holes and brokerage can be found in almost any task, depending on point of view." "Disentangling centrality from brokerage would require network and salary data over time to see how the two" "the ideas—unattributed to their sources—and was asked the question: “How much value could be generated if the idea were well executed?”" "The hypothesis in this article is that people who stand near the holes in a social structure are at higher risk of having good ideas."; grep -n -B1 -A3 "I draw on data describing 673" burt_structural_2004_raw.txt
+```
+
+```
+OK   [1] | Compensation, positive performance evaluations, promotions, and good ideas are d
+OK   [1] | The between-group brokers are more likely to express ideas, less likely to have 
+OK   [1] | Opinion and behavior are more homogeneous within than between groups, so people 
+OK   [6] | The association cannot be causal. Networks do not act, they are a context for ac
+OK   [11] | I draw on data describing 673 managers who ran the supply chain in
+OK   [12] | Of the 673 managers, 455 completed the network questions (68%).
+OK   [28] | Managers brokering connections across segregated groups had significantly higher
+OK   [23] | The results of model 1 highlight the third rank of managers as a transition poin
+OK   [6] | The caution here is that structural holes and brokerage can be found in almost a
+OK   [24] | Disentangling centrality from brokerage would require network and salary data ov
+OK   [29] | the ideas—unattributed to their sources—and was asked the question: “How much va
+OK   [1] | The hypothesis in this article is that people who stand near the holes in a soci
+423-To study the hypothesis at the level of individual people proposing ideas,
+424:I draw on data describing 673 managers who ran the supply chain in
+425-2001 for one of America’s largest electronics companies. Here, as in most
+426-walks of life, people vary in the quality of their ideas. The study population
+427-was going through a leadership change triggered by exogenous events.
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Burt 2004 verified (PDF page = journal page − 348). Appending both Burt entries.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2"><details>
+<summary>Tool use: **edit_file_v2** • Edit file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_B_structure_position_note.md</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; head -c 5000 lazer_computational_2009_raw.txt</summary>
+```bash
+cd /tmp/nsB && head -c 5000 lazer_computational_2009_raw.txt
+```
+
+```
+NIH Public Access
+Author Manuscript
+Science. Author manuscript; available in PMC 2009 September 16.
+
+NIH-PA Author Manuscript
+
+Published in final edited form as:
+Science. 2009 February 6; 323(5915): 721–723. doi:10.1126/science.1167742.
+
+Life in the network: the coming age of computational social
+science
+David Lazer,
+Harvard University
+Alex (Sandy) Pentland,
+MIT
+Lada Adamic,
+University of Michigan
+Sinan Aral,
+NYU
+
+NIH-PA Author Manuscript
+
+Albert Laszlo Barabasi,
+Northeastern University
+Devon Brewer,
+Interdisciplinary Scientific Research
+Nicholas Christakis,
+Harvard University
+Noshir Contractor,
+Northwestern University
+James Fowler,
+UCSD
+Myron Gutmann,
+University of Michigan
+Tony Jebara,
+Columbia University
+
+NIH-PA Author Manuscript
+
+Gary King,
+Harvard University
+Michael Macy,
+Cornell University
+Deb Roy, and
+MIT
+Marshall Van Alstyne
+Boston University
+We live life in the network. When we wake up in the morning, we check our e-mail, make a
+quick phone call, walk outside (our movements captured by a high definition video camera),
+get on the bus (swiping our RFID mass transit cards) or drive (using a transponder to zip through
+the tolls). We arrive at the airport, making sure to purchase a sandwich with a credit card before
+boarding the plane, and check our BlackBerries shortly before takeoff. Or we visit the doctor
+or the car mechanic, generating digital records of what our medical or automotive problems
+are. We post blog entries confiding to the world our thoughts and feelings, or maintain personal
+
+Lazer et al.
+
+Page 2
+
+NIH-PA Author Manuscript
+
+social network profiles revealing our friendships and our tastes. Each of these transactions
+leaves digital breadcrumbs which, when pulled together, offer increasingly comprehensive
+pictures of both individuals and groups, with the potential of transforming our understanding
+of our lives, organizations, and societies in a fashion that was barely conceivable just a few
+years ago.
+The capacity to collect and analyze massive am
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+This is the NIH manuscript; the bib also lists a second attachment for Lazer 2009, which may be the typeset version. Checking it.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd &#34;/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/FOUNDY_Intro&#34; &amp;&amp; pdfinfo &#34;files/322/Lazer et al. - 2009 - Computational social science.pdf&#34; | grep Pages; pdftotext &#34;files/322/Lazer et al. - 2009 - Computational social science.pdf&#34; /tmp/nsB/lazer2009pub_raw.txt; cp /tmp/nsB/lazer2009pub_raw.txt /tmp/nsB/lazer2009pub.txt; head -c 1500 /tmp/nsB/lazer2009pub_raw.txt; echo; grep -n -E &#34;^72[123]|SCIENCE VOL|www.sciencemag&#34; /tmp/nsB/lazer2009pub_raw.txt | head</summary>
+```bash
+cd "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/FOUNDY_Intro" && pdfinfo "files/322/Lazer et al. - 2009 - Computational social science.pdf" | grep Pages; pdftotext "files/322/Lazer et al. - 2009 - Computational social science.pdf" /tmp/nsB/lazer2009pub_raw.txt; cp /tmp/nsB/lazer2009pub_raw.txt /tmp/nsB/lazer2009pub.txt; head -c 1500 /tmp/nsB/lazer2009pub_raw.txt; echo; grep -n -E "^72[123]|SCIENCE VOL|www.sciencemag" /tmp/nsB/lazer2009pub_raw.txt | head
+```
+
+```
+Pages:           4
+PERSPECTIVES
+biogeographic patterns. Their study, too, is
+centered on a large database, but in this case it
+is entirely of living organisms, the marine
+bivalves. Over 28,000 records of bivalve genera and subgenera from 322 locations around
+the world have now been compiled by these
+authors, giving a global record of some 854
+genera and subgenera and 5132 species. No
+fossils are included in the database, but
+because bivalves have a good fossil record, it is
+possible to estimate accurately the age of origin of almost all extant genera. It is then possible to plot a backward survivorship curve (8)
+for each of the 27 global bivalve provinces (9).
+On the basis of these curves, Krug et al. find
+that origination rates of marine bivalves in-
+
+creased significantly almost everywhere immediately after the K-Pg mass extinction event.
+The highest K-Pg origination rates all occurred
+in tropical and warm-temperate regions. A distinct pulse of bivalve diversification in the early
+Cenozoic was concentrated mainly in tropical
+and subtropical regions (see the figure).
+The steepest part of the global backward
+survivorship curve for bivalves lies between 65
+and 50 million years ago, pointing to a major
+biodiversification event in the Paleogene (65 to
+23 million years ago) that is perhaps not yet
+captured in Alroy et al.’s database (5, 7). The
+jury is still out on what may have caused this
+event. But we should not lose sight of the fact
+that the steep rise to prominence of many mod-
+
+References
+
+116:www.sciencemag.org
+126:721
+130:722
+234:www.sciencemag.org
+331:www.sciencemag.org/cgi/content/full/323/5915/721/DC1
+447:www.sciencemag.org
+457:723
+485:http://www.sciencemag.org/help/reprints-and-permissions
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+The typeset Science version is available; I'll use it for page numbers.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; sed -n 100,340p lazer2009pub_raw.txt</summary>
+```bash
+cd /tmp/nsB && sed -n 100,340p lazer2009pub_raw.txt
+```
+
+```
+Institute of Technology, Cambridge, MA, USA. 3University
+of Michigan, Ann Arbor, MI, USA. 4New York University,
+New York, NY, USA. 5Northeastern University, Boston, MA,
+USA. 6Interdisciplinary Scientific Research, Seattle, WA,
+USA. 7Northwestern University, Evanston, IL, USA.
+8University of California–San Diego, La Jolla, CA, USA.
+9Columbia University, New York, NY, USA 10Cornell
+University, Ithaca, NY, USA. 11Boston University, Boston,
+MA, USA. E-mail: david_lazer@harvard.edu. Complete
+affiliations are listed in the supporting online material.
+
+Data from the blogosphere. Shown is a link structure within a community of political blogs (from 2004),
+where red nodes indicate conservative blogs, and blue liberal. Orange links go from liberal to conservative,
+and purple ones from conservative to liberal. The size of each blog reflects the number of other blogs that
+link to it. [Reproduced from (8) with permission from the Association for Computing Machinery]
+
+www.sciencemag.org
+
+SCIENCE
+
+VOL 323
+
+Published by AAAS
+
+6 FEBRUARY 2009
+
+721
+
+PERSPECTIVES
+
+722
+
+otherwise be impossible or unacceptable (11).
+Similarly, social network Web sites offer a
+unique opportunity to understand the impact of
+a person’s position in the network on everything
+from their tastes to their moods to their health
+(12), whereas Natural Language Processing
+offers increased capacity to organize and analyze the vast amounts of text from the Internet
+and other sources (13).
+In short, a computational social science is
+emerging that leverages the capacity to collect
+and analyze data with an unprecedented
+breadth and depth and scale. Substantial barriers, however, might limit progress. Existing
+ways of conceiving human behavior were
+developed without access to terabytes of data
+describing minute-by-minute interactions and
+locations of entire populations of individuals.
+For example, what does existing sociological
+network theory, built mostly on a foundation of
+one-time “snapshot” data, typically with only
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; sed -n 60,100p lazer2009pub_raw.txt; python3 q.py lazer2009pub &#34;To date, research on human interactions has relied mainly on one-time, self-reported data on relationships.&#34; &#34;In short, a computational social science is emerging that leverages the capacity to collect and analyze data with an unprecedented breadth and depth and scale.&#34; &#34;For example, what does existing sociological network theory, built mostly on a foundation of one-time “snapshot” data, typically with only dozens of people, tell us about massively longitudinal data sets of millions of people, including location, financial transactions, and communications?&#34; &#34;Similarly, social network Web sites offer a unique opportunity to understand the impact of a person’s position in the network on everything from their tastes to their moods to their health&#34; &#34;Perhaps the thorniest challenges exist on the data side, with respect to access and privacy.&#34; &#34;721&#34; &#34;722&#34;</summary>
+```bash
+cd /tmp/nsB && sed -n 60,100p lazer2009pub_raw.txt; python3 q.py lazer2009pub "To date, research on human interactions has relied mainly on one-time, self-reported data on relationships." "In short, a computational social science is emerging that leverages the capacity to collect and analyze data with an unprecedented breadth and depth and scale." "For example, what does existing sociological network theory, built mostly on a foundation of one-time “snapshot” data, typically with only dozens of people, tell us about massively longitudinal data sets of millions of people, including location, financial transactions, and communications?" "Similarly, social network Web sites offer a unique opportunity to understand the impact of a person’s position in the network on everything from their tastes to their moods to their health" "Perhaps the thorniest challenges exist on the data side, with respect to access and privacy." "721" "722"
+```
+
+```
+phone calls from almost any location, swipe transit cards to use public transportation, and make purchases with credit
+cards. Our movements in public places may be
+captured by video cameras, and our medical
+records stored as digital files. We may post blog
+entries accessible to anyone, or maintain friendships through online social networks. Each of
+these transactions leaves digital traces that can
+be compiled into comprehensive pictures of
+both individual and group behavior, with the
+potential to transform our understanding of our
+lives, organizations, and societies.
+The capacity to collect and analyze massive
+amounts of data has transformed such fields as
+biology and physics. But the emergence of a
+data-driven “computational social science” has
+been much slower. Leading journals in economics, sociology, and political science show
+little evidence of this field. But computational
+social science is occurring—in Internet companies such as Google and Yahoo, and in govern-
+
+W
+
+ment agencies such as the U.S. National Security Agency. Computational social science could
+become the exclusive domain of private companies and government agencies. Alternatively,
+there might emerge a privileged set of academic researchers presiding over private data
+from which they produce papers that cannot be
+
+critiqued or replicated. Neither scenario will
+serve the long-term public interest of accumulating, verifying, and disseminating knowledge.
+What value might a computational social
+science—based in an open academic environment—offer society, by enhancing understanding of individuals and collectives? What are the
+
+Downloaded from http://science.sciencemag.org/ on March 25, 2018
+
+SOCIAL SCIENCE
+
+ern floral and faunal groups in the Cenozoic
+may bear no simple relationship to climate or
+any other type of environmental change (10, 11).
+
+1Harvard University, Cambridge, MA, USA. 2Massachusetts
+
+Institute of Technology, Cambridge, MA, USA. 3University
+OK   [2] | To date, research on human interact
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Lazer 2009 verified on the typeset pages (721–723). Now Lazer 2020.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; head -c 6000 lazer_computational_2020_raw.txt; grep -n -E &#34;^106[012]$|SCIENCE sciencemag|28 AUGUST 2020&#34; lazer_computational_2020_raw.txt | head</summary>
+```bash
+cd /tmp/nsB && head -c 6000 lazer_computational_2020_raw.txt; grep -n -E "^106[012]$|SCIENCE sciencemag|28 AUGUST 2020" lazer_computational_2020_raw.txt | head
+```
+
+```
+INSIGHTS
+
+P OLICY FORUM
+SOCIAL SCIENCE
+
+Computational social science:
+Obstacles and opportunities
+Data sharing, research ethics, and incentives must improve
+
+T
+
+he field of computational social science (CSS) has exploded in prominence over the past decade, with
+thousands of papers published using observational data, experimental
+designs, and large-scale simulations
+that were once unfeasible or unavailable
+to researchers. These studies have greatly
+improved our understanding of important
+phenomena, ranging from social inequality to the spread of infectious diseases. The
+institutions supporting CSS in the academy have also grown substantially, as evidenced by the proliferation of conferences,
+workshops, and summer schools across the
+globe, across disciplines, and across sources
+of data. But the field has also fallen short in
+important ways. Many institutional structures around the field—including research
+ethics, pedagogy, and data infrastructure—
+are still nascent. We suggest opportunities
+to address these issues, especially in improving the alignment between the organization of the 20th-century university and
+the intellectual requirements of the field.
+We define CSS as the development and
+application of computational methods to
+complex, typically large-scale, human (sometimes simulated) behavioral data (1). Its intellectual antecedents include research on
+spatial data, social networks, and human
+coding of text and images. Whereas traditional quantitative social science has focused
+on rows of cases and columns of variables,
+typically with assumptions of independence
+among observations, CSS encompasses language, location and movement, networks,
+images, and video, with the application of
+statistical models that capture multifarious
+
+dependencies within data. A loosely connected intellectual community of social scientists, computer scientists, statistical physicists, and others has coalesced under this
+umbrella phrase.
+MISALIGNMENT OF UNIVERSITIES
+Generally, incentives 
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; python3 q.py lazer_computational_2020 &#34;These studies have greatly improved our understanding of important phenomena, ranging from social inequality to the spread of infectious diseases.&#34; &#34;But the field has also fallen short in important ways.&#34; &#34;We define CSS as the development and application of computational methods to complex, typically large-scale, human (sometimes simulated) behavioral data (1).&#34; &#34;Whereas traditional quantitative social science has focused on rows of cases and columns of variables, typically with assumptions of independence among observations, CSS encompasses language, location and movement, networks, images, and video, with the application of statistical models that capture multifarious dependencies within data.&#34; &#34;Similarly, university promotion procedures tend to underappreciate multidisciplinary scholars.&#34;; grep -n -i -E &#34;mechanism|theory|explan|causal|measurement|generaliz|predict&#34; lazer_computational_2020_raw.txt | head -30</summary>
+```bash
+cd /tmp/nsB && python3 q.py lazer_computational_2020 "These studies have greatly improved our understanding of important phenomena, ranging from social inequality to the spread of infectious diseases." "But the field has also fallen short in important ways." "We define CSS as the development and application of computational methods to complex, typically large-scale, human (sometimes simulated) behavioral data (1)." "Whereas traditional quantitative social science has focused on rows of cases and columns of variables, typically with assumptions of independence among observations, CSS encompasses language, location and movement, networks, images, and video, with the application of statistical models that capture multifarious dependencies within data." "Similarly, university promotion procedures tend to underappreciate multidisciplinary scholars."; grep -n -i -E "mechanism|theory|explan|causal|measurement|generaliz|predict" lazer_computational_2020_raw.txt | head -30
+```
+
+```
+OK   [1] | These studies have greatly improved our understanding of important phenomena, ra
+OK   [1] | But the field has also fallen short in important ways.
+OK   [1] | We define CSS as the development and application of computational methods to com
+OK   [1] | Whereas traditional quantitative social science has focused on rows of cases and
+OK   [1] | Similarly, university promotion procedures tend to underappreciate multidiscipli
+54:are few mechanisms to bring them together.
+110:The value proposition for private companies is different and there has been predictably less progress. Data possessed by
+139:susceptibility of data availability to arbitrary and unpredictable changes by private
+148:fully articulate clear principles and mechanisms for collecting and analyzing digital
+229:goals—whether to predict the spread of disease, shine a light on societal issues of equity
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Lazer 2020 verified (PDF p. 1 = p. 1060). Appending both Lazer entries, then reading Nikolaev & Mneimneh and Geard & Bullock.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2"><details>
+<summary>Tool use: **edit_file_v2** • Edit file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_B_structure_position_note.md</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; head -c 3500 nikolaev_modeling_2023_raw.txt; echo; echo =====; head -c 3500 geard_competition_2010_raw.txt</summary>
+```bash
+cd /tmp/nsB && head -c 3500 nikolaev_modeling_2023_raw.txt; echo; echo =====; head -c 3500 geard_competition_2010_raw.txt
+```
+
+```
+PHYSICAL REVIEW E 108, 014310 (2023)
+
+Modeling and analysis of affiliation networks with preferential attachment and subsumption
+Alexey Nikolaev
+1
+
+1
+
+and Saad Mneimneh1,2
+
+Department of Computer Science, The Graduate Center of CUNY, 365 5th Avenue, New York, New York 10016, USA
+2
+Department of Computer Science, Hunter College of CUNY, 695 Park Avenue, New York, New York 10065, USA
+(Received 13 April 2022; revised 5 April 2023; accepted 19 May 2023; published 31 July 2023)
+Preferential attachment describes a variety of graph-based models in which a network grows incrementally
+via the sequential addition of new nodes and edges, and where existing nodes acquire new neighbors at a rate
+proportional to their degree. Some networks, however, are better described as groups of nodes rather than a
+set of pairwise connections. These groups are called affiliations, and the corresponding networks affiliation
+networks. When viewed as graphs, affiliation networks do not necessarily exhibit the power law distribution
+of node degrees that is typically associated with preferential attachment. We propose a preferential attachment
+mechanism for affiliation networks that highlights the power law characteristic of these networks when presented
+as hypergraphs and simplicial complexes. The two representations capture affiliations in similar ways, but the
+latter offers an intrinsic feature of the model called subsumption, where an affiliation cannot be a subset of
+another. Our model of preferential attachment has interesting features, both algorithmic and analytic, including
+implicit preferential attachment (node sampling does not require knowledge of node degrees), a locality property
+where the neighbors of a newly added node are also neighbors, the emergence of a power law distribution
+of degrees (defined in hypergraphs and simplicial complexes rather than at a graph level), implicit deletion
+of affiliations (through subsumption in the case of simplicial complexes), and to some extent a 
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; head -c 3500 geard_competition_2010_raw.txt; echo; grep -n -i -E &#34;real|data|dataset|empirical|compar|fit|limitation|future&#34; nikolaev_modeling_2023_raw.txt | head -30</summary>
+```bash
+cd /tmp/nsB && head -c 3500 geard_competition_2010_raw.txt; echo; grep -n -i -E "real|data|dataset|empirical|compar|fit|limitation|future" nikolaev_modeling_2023_raw.txt | head -30
+```
+
+```
+August 31, 2010 11:38 WSPC/S0219-5259 169-ACS 00271
+
+Advances in Complex Systems, Vol. 13, No. 4 (2010) 501–517
+c World Scientiﬁc Publishing Company
+
+DOI: 10.1142/S0219525910002712
+
+COMPETITION AND THE DYNAMICS
+OF GROUP AFFILIATION
+
+NICHOLAS GEARD∗ and SETH BULLOCK†
+School of Electronics and Computer Science,
+University of Southampton, Southampton,
+SO17 1BJ, United Kingdom
+∗nlg@ecs.soton.ac.uk
+†sgb@ecs.soton.ac.uk
+Received 19 March 2010
+Revised 17 June 2010
+How can we understand the interaction between the social network topology of a population and the patterns of group aﬃliation in that population? Each aspect inﬂuences the
+other: social networks provide the conduits via which groups recruit new members and
+groups provide the context in which new social ties are formed. Given that the resources
+of individuals are ﬁnite, groups can be considered to compete with one another for the
+time and energy of their members. Such competition is likely to have an impact on the
+way in which social structure and group aﬃliation co-evolve. While many social simulation models exhibit group formation as a part of their behaviour (e.g., opinion clusters
+or converged cultures), models that explicitly focus on group aﬃliation are less common.
+We describe and explore the behaviour of a model in which, distinct from most current
+models, individual nodes can belong to multiple groups simultaneously. By varying the
+capacity of individuals to belong to groups, and the costs associated with group membership, we explore the eﬀect of diﬀerent levels of competition on population structure
+and group dynamics.
+Keywords: Social networks; group aﬃliation; simulation.
+
+1. Introduction
+Groups are an important social phenomenon, representing an intermediate level of
+organization between individuals and society as a whole. Many types of groups can
+be identiﬁed, centered around professional, recreational, social, political, charitable
+and other interests. Groups have aims, often related to furthering 
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; sed -n 1006,1015p nikolaev_modeling_2023_raw.txt; sed -n 1314,1340p nikolaev_modeling_2023_raw.txt; grep -n -E &#34;^(IX|X|XI)\. |CONCLUSION&#34; nikolaev_modeling_2023_raw.txt</summary>
+```bash
+cd /tmp/nsB && sed -n 1006,1015p nikolaev_modeling_2023_raw.txt; sed -n 1314,1340p nikolaev_modeling_2023_raw.txt; grep -n -E "^(IX|X|XI)\. |CONCLUSION" nikolaev_modeling_2023_raw.txt
+```
+
+```
+VIII. SOME EMPIRICAL PROPERTIES
+OF THE NETWORKS
+
+In this section, we discuss the average distance, the clustering coefficient, and the assortativity of our generated
+networks, thus highlighting some of their features in resembling real-world networks.
+A. Average distance
+
+We use the standard definition of distance between two
+nodes in the skeleton graph of the network. To compute all
+pairwise distances, an exact solution can be found by performing “breadth first search” from each node, which requires
+D. Assortativity and clustering coefficient in real networks
+
+Table II shows the assortativity and the clustering coefficient for several networks from the KONECT collection [52]
+obtained in the following way: Bipartite graphs are converted
+
+to their affiliation network equivalent, where edge (u, v) in
+the bipartite graph means that node u belongs affiliation v.
+Directed and undirected graphs are converted to their neighborhood affiliation network, where all neighbors of node
+u in the graph (not including u itself) make one affiliation.
+Each of the obtained affiliation networks is then interpreted
+as a hypergraph and as a simplicial complex. For simplicity,
+we did not check for duplicate hyperedges in the resulting
+hypergraphs.
+In addition to Table II, Figs. 11 and 12 provide a comparison among the assortativity of the KONECT networks in
+Table II and that of our generated networks for several values
+of α, c, and . Finally, Table III summarizes the general effect
+of α, c, and  on different properties.
+IX. GUIDELINES FOR GENERATING NETWORKS WITH
+GIVEN PROPERTIES
+
+Although our model was not designed for network replication, its parameters α, , and Pc are flexible enough to generate
+networks with some desired properties. In general, α controls
+the exponent γ of the power law in P(k) ∝ k −γ , Pc determines
+the affiliation size distribution P(s), and  can fine tune P(k)
+and P(s) [since it affects P(s) in hypergraphs and both P(k)
+and P(s) in simplicial complexes].
+
+1331:I
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; sed -n 1654,1700p nikolaev_modeling_2023_raw.txt; python3 q.py nikolaev_modeling_2023 &#34;Some networks, however, are better described as groups of nodes rather than a set of pairwise connections. These groups are called affiliations, and the corresponding networks affiliation networks.&#34; &#34;When viewed as graphs, affiliation networks do not necessarily exhibit the power law distribution of node degrees that is typically associated with preferential attachment.&#34; &#34;By varying the parameters of the model, the generated affiliation networks can resemble different types of real-world examples, so the framework also serves as a synthetic generation algorithm for simulation and experimental studies.&#34; &#34;Although our model was not designed for network replication&#34; &#34;where an affiliation cannot be a subset of another&#34;</summary>
+```bash
+cd /tmp/nsB && sed -n 1654,1700p nikolaev_modeling_2023_raw.txt; python3 q.py nikolaev_modeling_2023 "Some networks, however, are better described as groups of nodes rather than a set of pairwise connections. These groups are called affiliations, and the corresponding networks affiliation networks." "When viewed as graphs, affiliation networks do not necessarily exhibit the power law distribution of node degrees that is typically associated with preferential attachment." "By varying the parameters of the model, the generated affiliation networks can resemble different types of real-world examples, so the framework also serves as a synthetic generation algorithm for simulation and experimental studies." "Although our model was not designed for network replication" "where an affiliation cannot be a subset of another"
+```
+
+```
+X. CONCLUSION
+
+Real-world networks that do not appear to be scale free
+when given as graphs can still exhibit scale-free properties
+if seen as affiliation networks based on hypergraphs or simplicial complexes. This suggests that the inherent pairwise
+relations among the nodes in a graph may be insufficient
+in capturing the growth of these networks, which prompts
+the search for new models of network growth targeted at
+affiliation networks. To that end, we propose an extension to
+the preferential attachment mechanism to generate affiliation
+networks with a power law in the tail of the distribution of
+node degrees. Our model uses implicit preferential attachment
+and introduces the concept of locality, where the neighbors
+of newly added nodes are also neighbors. In addition, and by
+considering simplicial complexes as an underlying structure
+for the affiliation network, our model allows the subsumption of existing affiliations when a newly created affiliation
+becomes their superset. We present a theoretical analysis of
+the node degree and affiliation size distributions P(k) and P(s)
+respectively. While the replication of networks is not the main
+goal of our generation algorithm, we provide experimental
+evidence that the algorithm produces a distribution tail of the
+form P(k) ∝ k −γ , where γ > 2 can be chosen, and that it
+has enough flexibility to make P(s) close enough to a given
+distribution. We also include an experimental study of average
+distance, clustering coefficient, and assortativity. Overall, we
+show that the model is rich enough to provide new ways of
+controlling network growth in practice, while still providing
+interesting theory. Therefore, our model can be used as a
+basis for explaining the formation of real-world networks, as
+
+014310-11
+
+ALEXEY NIKOLAEV AND SAAD MNEIMNEH
+
+PHYSICAL REVIEW E 108, 014310 (2023)
+
+well as for creating new synthetic networks with some desired
+properties.
+The source code and documentation for the algorithm described in Sec. IV 
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; grep -n -i -E &#34;^[0-9]\. |^[0-9]\.[0-9]\. |capacity|cost|exclusiv|compet|result|we find|found that|limitation|future work|empirical|data&#34; geard_competition_2010_raw.txt | sed -n 1,90p</summary>
+```bash
+cd /tmp/nsB && grep -n -i -E "^[0-9]\. |^[0-9]\.[0-9]\. |capacity|cost|exclusiv|compet|result|we find|found that|limitation|future work|empirical|data" geard_competition_2010_raw.txt | sed -n 1,90p
+```
+
+```
+8:COMPETITION AND THE DYNAMICS
+22:of individuals are ﬁnite, groups can be considered to compete with one another for the
+23:time and energy of their members. Such competition is likely to have an impact on the
+28:capacity of individuals to belong to groups, and the costs associated with group membership, we explore the eﬀect of diﬀerent levels of competition on population structure
+32:1. Introduction
+40:may be exclusive, in that membership in one group precludes membership in other
+41:groups of that type, while others are non-exclusive: a single individual may be a
+62:a single individual can be actively involved. As a result, groups must compete with
+77:exclusive. In this paper, we explore the implications of relaxing this constraint and
+80:level dynamics. We then describe a minimal non-exclusive group (NEG) model of
+82:investigate the eﬀect that varying the intensity of competition has on population
+86:2. Theoretical Basis: Sociological Perspectives on Social Groups
+93:Competition and the Dynamics of Group Aﬃliation
+124:cleavages that may result in conﬂict or inequality, bringing together individuals
+133:most group recruitment occurs via network ties, the result is homogeneous groups.
+157:3. Existing Models: Opinions, Cultures and Groups
+165:inter-group competition.
+167:3.1. Opinion dynamics
+178:to two (or more) opinions co-existing in a population. Opinions are exclusive —
+180:competition between opinions is intrinsic to the model: one opinion’s gain of an
+187:Competition and the Dynamics of Group Aﬃliation
+193:3.2. Cultural evolution
+199:and hence do not interact). Axelrod found that the number of stable cultures varied
+206:3.3. Group aﬃliation
+215:are diﬀerentiated by the cost they demand of their followers, and the extent to which
+216:they proscribe participation in secular activities. The simulations found that the
+219:activities proscribed and the consequent reduction in lifespan. While church membership is exclusive in this model, individuals can participate
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; sed -n 276,300p geard_competition_2010_raw.txt; echo ---; sed -n 400,412p geard_competition_2010_raw.txt; echo ----; grep -n -E &#34;^7\. |Discussion|Conclusion&#34; geard_competition_2010_raw.txt</summary>
+```bash
+cd /tmp/nsB && sed -n 276,300p geard_competition_2010_raw.txt; echo ---; sed -n 400,412p geard_competition_2010_raw.txt; echo ----; grep -n -E "^7\. |Discussion|Conclusion" geard_competition_2010_raw.txt
+```
+
+```
+of a group will depend on its ability to attract new members and retain existing
+members.
+• From the perspective of an individual, groups are distinguished only by the
+sociodemographic composition of their members and are otherwise equivalent
+and interchangeable with respect to the beneﬁts they provide.
+By temporarily setting aside considerations of individual utility and group eﬃcacy, we can focus more clearly on the eﬀect that competition has on the interaction
+between group dynamics and social structure. The following section translates these
+assumptions into a simulation model. In the ﬁnal section of the paper, we discuss
+some of the limitations that arise from the assumptions made here, and how they
+could be mitigated in future models.
+5. Non-Exclusive Group Model: Description
+We consider a network of n nodes and m undirected edges, representing individuals
+and the social ties between them. Each node i has a trait vector of dimension d,
+representing that individual’s location in social space [42], a list of aﬃliated groups,
+and a ‘time and energy’ (TAE) capacity. Trait values are bounded between zero and
+one and are uniformly distributed. The social distance between two individuals is
+deﬁned as the Euclidean distance between their trait vectors.
+Each group has a TAE cost associated with being a member. The number of
+groups with which a node can be aﬃliated is limited by its TAE capacity. For
+example, a node with TAE capacity of two could be simultaneously aﬃliated with
+two groups with TAE cost of one, or one group with TAE cost of two. The social
+distance between an individual i and a group g is deﬁned as the mean social distance
+between i and the set of i’s neighbors belonging to g.
+Two classes of process act on the network. The ﬁrst class aﬀects social structure:
+edges may be rewired either to nodes sharing a common state, or at random. The
+---
+at least two individuals) at the end of the simulation run. Mean group size is the
+mean size of live groups at the e
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; sed -n 786,860p geard_competition_2010_raw.txt</summary>
+```bash
+cd /tmp/nsB && sed -n 786,860p geard_competition_2010_raw.txt
+```
+
+```
+7. Discussion
+Patterns of group aﬃliation and the structure of social ties in a population interact in a non-trivial fashion. In this paper, we have explored the eﬀect of varying
+levels of competition on the dynamics of group aﬃliation using a simple coevolutionary model. By allowing individual nodes to belong to multiple groups, we have
+moved beyond the type of exclusive group aﬃliation associated with existing opinion dynamics and cultural evolution models. By altering the capacity of individuals
+to belong to multiple groups, and the costs associated with group membership, we
+have been able to explore interactions between social network evolution and group
+aﬃliation dynamics under diﬀerent competitive conditions. In this section, we summarize our observations of the NEG model behavior and relate them to back to
+our theoretical concerns. We then describe a possible domain for a more concrete
+instantiation of the model: the social networks connecting university students and
+their aﬃliations with clubs and societies. Evaluating the current model from this
+perspective, we suggest several ways in which the assumptions and design could be
+reﬁned in future model designs.
+Our observations may be summarized as follows:
+• Reducing the level of competition between groups (Series A) reduces the level
+of community structure observed in the social network and increases the level of
+observed homophily. These changes may be related by the fact that decreasing
+community structure increases the possibility of an individual being exposed to
+groups to which they are more closely aligned in sociodemographic space.
+• A greater number of larger and more long-lived groups are sustained by populations when competition is decreased (Series A). Most of these gains occur with
+the initial removal of exclusive membership and further reductions in competition
+have less impact on group properties.
+• When groups have diﬀerent costs of aﬃliation (Series B), less costly groups are
+maintained in gre
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; python3 q.py geard_competition_2010 &#34;Given that the resources of individuals are finite, groups can be considered to compete with one another for the time and energy of their members.&#34; &#34;social networks provide the conduits via which groups recruit new members and groups provide the context in which new social ties are formed&#34; &#34;By varying the capacity of individuals to belong to groups, and the costs associated with group membership, we explore the effect of different levels of competition on population structure and group dynamics.&#34; &#34;When individuals have different capacities for group affiliation (Series C), individuals with greater capacity come to occupy more central locations in the social network.&#34; &#34;Reducing the level of competition between groups (Series A) reduces the level of community structure observed in the social network and increases the level of observed homophily.&#34; &#34;the current model omits an explicit description of both an individual’s utility function and a group’s efficacy.&#34; &#34;Most of these gains occur with the initial removal of exclusive membership and further reductions in competition have less impact on group properties.&#34; &#34;Groups are an important social phenomenon, representing an intermediate level of organization between individuals and society as a whole.&#34;; grep -c $&#39;\f&#39; geard_competition_2010_raw.txt</summary>
+```bash
+cd /tmp/nsB && python3 q.py geard_competition_2010 "Given that the resources of individuals are finite, groups can be considered to compete with one another for the time and energy of their members." "social networks provide the conduits via which groups recruit new members and groups provide the context in which new social ties are formed" "By varying the capacity of individuals to belong to groups, and the costs associated with group membership, we explore the effect of different levels of competition on population structure and group dynamics." "When individuals have different capacities for group affiliation (Series C), individuals with greater capacity come to occupy more central locations in the social network." "Reducing the level of competition between groups (Series A) reduces the level of community structure observed in the social network and increases the level of observed homophily." "the current model omits an explicit description of both an individual’s utility function and a group’s efficacy." "Most of these gains occur with the initial removal of exclusive membership and further reductions in competition have less impact on group properties." "Groups are an important social phenomenon, representing an intermediate level of organization between individuals and society as a whole."; grep -c $'\f' geard_competition_2010_raw.txt
+```
+
+```
+OK   [1] | Given that the resources of individuals are finite, groups can be considered to 
+OK   [1] | social networks provide the conduits via which groups recruit new members and gr
+OK   [1] | By varying the capacity of individuals to belong to groups, and the costs associ
+OK   [13] | When individuals have different capacities for group affiliation (Series C), ind
+OK   [13] | Reducing the level of competition between groups (Series A) reduces the level of
+OK   [14] | the current model omits an explicit description of both an individual’s utility 
+OK   [13] | Most of these gains occur with the initial removal of exclusive membership and f
+OK   [1] | Groups are an important social phenomenon, representing an intermediate level of
+17
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Both verified (Geard: PDF page = journal page − 500; Nikolaev: article-number pages 014310-N). Appending the final section.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2"><details>
+<summary>Tool use: **edit_file_v2** • Edit file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_B_structure_position_note.md</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2"><details>
+<summary>Tool use: **edit_file_v2** • Edit file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_B_structure_position_note.md</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Before writing the synthesis, I'm verifying a handful of secondary quotes and page claims I haven't string-checked yet.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/nsB &amp;&amp; python3 q.py clauset2 &#34;without directly modeling the characteristics or preferences of individuals or institutions&#34; &#34;indicating a nearly closed doctoral ecosystem among these institutions&#34;; python3 q.py guimera_team_2005 &#34;has a probability, p, of being drawn from the pool of incumbents and a probability, 1 – p, of being drawn from the pool of newcomers&#34; &#34;a “universal” set of optimal values might exist&#34;; python3 q.py gould_origins_2002 &#34;Two studies for which data are available meet all three criteria.&#34; &#34;can emerge even in the presence of minimal exogenous differences among actors&#34;; python3 q.py mason_collaborative_2012 &#34;The players had 15 rounds to explore&#34; &#34;of 24 baseline experiments, in which groups of 16 individuals searched the&#34; &#34;it arose only when agents searched with an intermediate level of myopia&#34;; python3 q.py newman_assortative_2002 &#34;which is simply the Pearson correlation coefficient of the degrees at either ends of an edge&#34;; python3 q.py burt_structural_2004 &#34;2001 for one of America’s largest electronics companies&#34;; python3 q.py barabasi_emergence_1999 &#34;a power-law with exponent γcite = 3&#34;; python3 q.py uzzi_collaboration_2005 &#34;dropping our N for artistic success from 435 to 315&#34;; python3 q.py feld_why_1991 &#34;it is reasonable to suppose that individuals use the number of friends that their friends have as one basis of comparison&#34;</summary>
+```bash
+cd /tmp/nsB && python3 q.py clauset2 "without directly modeling the characteristics or preferences of individuals or institutions" "indicating a nearly closed doctoral ecosystem among these institutions"; python3 q.py guimera_team_2005 "has a probability, p, of being drawn from the pool of incumbents and a probability, 1 – p, of being drawn from the pool of newcomers" "a “universal” set of optimal values might exist"; python3 q.py gould_origins_2002 "Two studies for which data are available meet all three criteria." "can emerge even in the presence of minimal exogenous differences among actors"; python3 q.py mason_collaborative_2012 "The players had 15 rounds to explore" "of 24 baseline experiments, in which groups of 16 individuals searched the" "it arose only when agents searched with an intermediate level of myopia"; python3 q.py newman_assortative_2002 "which is simply the Pearson correlation coefficient of the degrees at either ends of an edge"; python3 q.py burt_structural_2004 "2001 for one of America’s largest electronics companies"; python3 q.py barabasi_emergence_1999 "a power-law with exponent γcite = 3"; python3 q.py uzzi_collaboration_2005 "dropping our N for artistic success from 435 to 315"; python3 q.py feld_why_1991 "it is reasonable to suppose that individuals use the number of friends that their friends have as one basis of comparison"
+```
+
+```
+OK   [3] | without directly modeling the characteristics or preferences of individuals or i
+OK   [1] | indicating a nearly closed doctoral ecosystem among these institutions
+OK   [3] | has a probability, p, of being drawn from the pool of incumbents and a probabili
+OK   [5] | a “universal” set of optimal values might exist
+OK   [20] | Two studies for which data are available meet all three criteria.
+OK   [21] | can emerge even in the presence of minimal exogenous differences among actors
+OK   [2] | The players had 15 rounds to explore
+OK   [3] | of 24 baseline experiments, in which groups of 16 individuals searched the
+OK   [6] | it arose only when agents searched with an intermediate level of myopia
+OK   [1] | which is simply the Pearson correlation coefficient of the degrees at either end
+OK   [11] | 2001 for one of America’s largest electronics companies
+OK   [3] | a power-law with exponent γcite = 3
+OK   [21] | dropping our N for artistic success from 435 to 315
+OK   [1] | it is reasonable to suppose that individuals use the number of friends that thei
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Two page corrections needed (Mason & Watts baseline groups are on p. 766; Gould's datasets span pp. 1162–63). Fixing them.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2"><details>
+<summary>Tool use: **edit_file_v2** • Edit file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_B_structure_position_note.md</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2"><details>
+<summary>Tool use: **edit_file_v2** • Edit file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_B_structure_position_note.md</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2"><details>
+<summary>Tool use: **edit_file_v2** • Edit file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/netsci_B_structure_position_note.md</summary>
 
 </details></tool-use>
