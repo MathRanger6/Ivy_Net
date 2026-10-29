@@ -16,9 +16,9 @@
 | **2** | Agree outline and writing order | ✓ (10-28 10:36) |
 | **3** | Agree citation workflow (format; where the bibliography lives) | Open question |
 | **4** | Subsection: science of success | **→ DRAFT v1 for Charles's comments** (10-28 11:40: `Introduction_Agent_Handoff_20261027/drafts/01_science_of_success_DRAFT.md`, 1,275 words). Economics draft v1 also done (13:50, `drafts/02_economics_DRAFT.md`) |
-| **5** | Subsection: economics (labor and personnel) | Pending |
-| **6** | Subsection: network science | Pending |
-| **7** | Subsection: education | Pending |
+| **5** | Subsection: economics (labor and personnel) | **→ DRAFT v1 for Charles's comments** (10-28 13:50, `drafts/02_economics_DRAFT.md`). Open: multiple-prize tournament check |
+| **6** | Subsection: network science | **→ DRAFT v1 for Charles's comments** (10-28 19:10, `drafts/03_network_science_DRAFT.md`, ~1,600 words of text) |
+| **7** | Subsection: education (bigger; big-fish storyline per PD51) | **→ DRAFT v1 for Charles's comments** (10-28 19:10, `drafts/04_education_DRAFT.md`, ~2,500 words of text) |
 | **8** | Subsection: psychology | Pending |
 | **9** | Subsection: organizational studies | Pending |
 | **10** | Focused subsection: Army | Pending |
@@ -264,3 +264,4 @@ Legend: **L** = in Charles's Zotero `FOUNDY_Intro`; **N** = new, to find; ✓ = 
 - **2026-10-28 18:05** — Export 169 entries (149 PDFs). Block D, Jackson & Bruegmann 2009, Baldwin 1996, Peck 1994 now in. 12 network-science duplicates appeared (same DOIs, mostly one copy without PDF); asked Charles to merge → 157 unique. Only DA PAM 600-3 (optional) and the Gates/Murray line remain unticked.
 - **2026-10-28 18:15** — **Library complete.** Export 157 entries, 147 PDFs, no duplicate titles or DOIs; DA PAM 600-3 in (official title confirmed from PDF: *Officer Professional Development and Career Management*, 3 Apr 2019). 10 items without PDFs (7 papers/books, 3 others); none blocks drafting.
 - **2026-10-28 18:30** — Export 157 entries, 148 PDFs. Added PDFs: Wang & Barabási 2021 (preprint), Doeringer & Piore, Yin 2024 dissertation. Stray `w15202.pdf` web-snapshot item to delete. 7 without PDF: Sacerdote 2011/2014, Marsh & Hau 2003, Eden & Shani 1982, Hicks 1987 (DTIC down), Page 2008, Kanter 1977.
+- **2026-10-28 19:10** — Charles asked for the next two sections to print for the car. Four helper notes written from PDFs (`sources/notes/netsci_A_influence_homophily_note.md`, `netsci_B_structure_position_note.md`, `edu_A_bigfish_rank_selective_note.md`, `edu_B_classroom_peers_note.md`). The netsci B retry hit a Cursor billing error ("unpaid invoice"), but the first run's note was complete; new helpers are blocked until the invoice is paid. **Network science draft v1** (`drafts/03_network_science_DRAFT.md`) and **education draft v1** (`drafts/04_education_DRAFT.md`, opens with Davis 1966 frog pond) written; all 33 direct quotations string-checked against PDF text, and the Davis pp. 20–21 quote checked against the page image. Burt 1992 p. 10 paraphrased (cropped scan). Flags in each draft's notes: working-paper or manuscript pages (Marsh 1987, Murphy & Weinhardt, Duflo et al., Jackson & Bruegmann, Hoxby, Shalizi & Thomas, Guimerà), abstract-only sources (Marsh & Hau, Dobbie & Fryer, Sacerdote 2014), bib fixes (McPherson DOI; Abdulkadiroğlu authors), Stouffer 1949 not in the library.
