@@ -1,0 +1,99 @@
+208 ABRAHAM TESSER
+
+than after they have undergone a success experience. This finding suggest that
+BIRGing is in the service of self-evaluation maintenance.
+
+Cialdini and Richardson (1980) explain BIRGing in terms of Heider’s (1958)
+balance theory. The argument is that if a person is in a positive unit relation with
+a positively evaluated entity, then balance forces will lead the person to be
+positively evaluated. As a further test of this explanation, they reasoned that if a
+person is in a negative relation with another entity, to the extent that the entity
+was negatively evaluated, balance forces would cause the person to be positively
+evaluated. In an experiment designed to test this idea subjects were given either a
+success or failure experience and were then given an opportunity to rate (compli-
+ment or ‘“‘blast’’) their own university (positive association) or a rival university
+(negative association). Consistent with the balance theory prediction, the tenden-
+cy to compliment one’s own university and blast the rival university increased
+with prior threat to self-evaluation.
+
+The BIRGing research and theorizing is quite consistent with the SEM model.
+However, the BIRGing research is more generally interpreted in terms of self-
+presentation rather than private self-evaluation. Further, there is no relevance
+parameter in the BIRGing approach and it deals only with the reflection half of
+the SEM model. On the basis of the research reviewed here, I would argue that a
+more complete picture must include both reflection and comparison processes
+and a way of weighting these processes, i.e., a relevance parameter.
+
+VII. SEM and Emotion: The Epistemological
+Status of Self-Evaluation
+
+Previous research intended as direct tests of the model has focused only on
+indicants of performance, closeness, and relevance. There has been no attempt to
+measure ‘‘self-evaluation.’’ We viewed self-evaluation as
+
+. . . a hypothetical construct, a theoretical fiction which is used to organize and make
+comprehensible the relationships among the variables that have empirical indicants, i.e.,
+relevance, performance, closeness. Similarly, self-evaluation maintenance is viewed as a
+hypothetical process much like ‘‘dissonance reduction’’ is viewed as a hypothetical
+process in dissonance theory. Neither dissonance reduction nor self-evaluation mainte-
+nance is directly measured or observed, but both models are testable because they make
+specific predictions concerning the observable antecedents and observable consequences
+of the hypothesized process. (Tesser & Campbell, 1983, pp. 8-9).
+
+This assumption has served us well. The model seems to do a good job of
+accounting for the behaviors in its purview. However, the research has advanced
+to the stage that tests of this assumption are warranted. If self-evaluation pro-
+
+SELF-EVALUATION MAINTENANCE MODEL 209
+
+EMOTIONAL BEHAVIOR
+
+EMOTION
+
+Arousal
+Affect
+
+ANTECEDENT
+CONDITIONS
+
+BEHAVIORAL
+ADJUSTMENT
+
+SEM
+PROCESSES
+
+Relevance J Relevance
+Performance Reflection Performance
+Closeness Comparison Closeness
+
+/
+\ UNRELATED THREATS W
+
+~ Prey; oa
+
+Fig. 6. Schematic representation of the operation of the self-evaluation maintenance model
+showing antecedent conditions which produce changes in reflection/comparison. The operation of
+reflection/comparison is accompanied by emotion and results in behavioral adjustment. See text for a
+more complete description.
+
+cesses are real how might they be detected? I believe that the operation of these
+processes is often relatively fast and, even more importantly, outside of con-
+scious awareness (see Tesser, 1986, section on ‘‘awareness’’). Therefore, self-
+
+reports regarding the ‘‘self-esteem’’ may have limited utility. However, there is
+
+a more promising possibility. If these processes are real, they should manifest
+themselves in changes in affect/arousal. Threats to self-evaluation should result
+in negative affect, while promises to self-evaluation should lead to positive
+affect.
+
+I have tried to illustrate some of these ideas in Fig. 6. The figure is really not
+as complicated as it appears. The circle on the left labeled Antecedent Conditions
+represents combinations of relevance, performance, and closeness. These com-
+biinations of relevance, performance, and closeness should either threaten self-
+evaluation through comparison or promise a gain in self-evaluation through
+reflection. That is, they should cause changes in the hypothetical self-evaluation
+maintenance processes. The snowman-like figure in the center represents the
+self-evaluation maintenance processes. While the reflection and comparison pro-
+cesses are not directly observable, the emotions associated with these are. That
+
