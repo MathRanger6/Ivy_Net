@@ -6,6 +6,8 @@
 
 **Do first:** section 1 (science of success, being written today).
 
+**Status 2026-10-30 11:23 export:** 158 entries, 149 with PDFs, no duplicate titles or DOIs. Every wanted-list item is in the library. New since 10-28: Stouffer et al. 1949 (both volumes, searchable text) and the Eden & Shani 1982 PDF. **Without PDF (6):** Marsh & Hau 2003 (requested), Sacerdote 2011, Sacerdote 2014, Kanter 1977, Page 2008, Hicks 1987 (HTML only; DTIC). **Zotero fixes:** (1) McPherson et al. 2001: title is JSTOR cover-page text and DOI is wrong. Correct values (Crossref-verified): title *Birds of a Feather: Homophily in Social Networks*, *Annual Review of Sociology* 27: 415–444, DOI 10.1146/annurev.soc.27.1.415. (2) Empty authors: Abdulkadiroğlu, Angrist & Pathak 2014 (*The Elite Illusion*) and Carrell, Sacerdote & West 2013 (*From Natural Variation to Optimal Policy?*). (3) Delete the stray `w15202.pdf` web-snapshot item. **Caddies paper:** possibly Sacerdote 2001 (Dartmouth roommates, already in); Charles has emailed David Lazer.
+
 ---
 
 ## ★ FINAL BATCH — everything still missing (2026-10-28 16:45)
