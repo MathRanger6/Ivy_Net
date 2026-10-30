@@ -15,12 +15,12 @@
 | **1** | Agree central question | ✓ (10-28: environment = peers + organization; shape sub-question added) |
 | **2** | Agree outline and writing order | ✓ (10-28 10:36) |
 | **3** | Agree citation workflow (format; where the bibliography lives) | Open question |
-| **4** | Subsection: science of success | **→ DRAFT v1 for Charles's comments** (10-28 11:40: `Introduction_Agent_Handoff_20261027/drafts/01_science_of_success_DRAFT.md`, 1,275 words). Economics draft v1 also done (13:50, `drafts/02_economics_DRAFT.md`) |
-| **5** | Subsection: economics (labor and personnel) | **→ DRAFT v1 for Charles's comments** (10-28 13:50, `drafts/02_economics_DRAFT.md`). Open: multiple-prize tournament check |
+| **4** | Subsection: science of success | **→ DRAFT v1 for Charles's comments** (10-28; Menger 2024 integrated 10-30: `drafts/01_science_of_success_DRAFT.md`, ~1,420 words). **Re-print this one.** |
+| **5** | Subsection: economics (labor and personnel) | **→ DRAFT v1 for Charles's comments** (10-28; Menger on Rosen added 10-30, `drafts/02_economics_DRAFT.md`). Open: multiple-prize tournament check. **Re-print this one.** |
 | **6** | Subsection: network science | **→ DRAFT v1 for Charles's comments** (10-28 19:10, `drafts/03_network_science_DRAFT.md`, ~1,600 words of text) |
 | **7** | Subsection: education (bigger; big-fish storyline per PD51) | **→ DRAFT v1 for Charles's comments** (10-28 19:10, `drafts/04_education_DRAFT.md`, ~2,500 words of text) |
-| **8** | Subsection: psychology | **→ DRAFT v1 for Charles's comments** (10-30 12:55 consolidated, `drafts/05_psychology_DRAFT.md`, ~2,400 words of text) |
-| **9** | Subsection: organizational studies | Pending |
+| **8** | Subsection: psychology | **→ DRAFT v1 for Charles's comments** (10-30; Menger on Musch/Grondin added 10-30, `drafts/05_psychology_DRAFT.md`). **Re-print this one.** |
+| **9** | Subsection: organizational studies | **→ DRAFT v1 for Charles's comments** (10-30; Menger on Stewman added 10-30, `drafts/06_organizational_studies_DRAFT.md`). **Re-print this one.** |
 | **10** | Focused subsection: Army | Pending |
 | **11** | Synthesis | Pending |
 | **12** | Executive summary (no more than one page) | Pending |
@@ -32,6 +32,36 @@
 > "Why would you ever write probability of individual success over a property … of the team?" (PD50, about 05:10)
 
 The executive summary must end with a one-sentence answer to *why this curve and this phenomenon* (PD50, about 13:45). It is not an abstract of findings.
+
+**Justification (open — Charles 15:27: keep working; 15:33: do not treat local vs global as an absolute).**
+
+What is known, not assumed:
+
+| Step | Where it typically happens |
+|------|----------------------------|
+| Assignment (or self-assignment) | Local: the work group / organization |
+| Development and performance | Local: people work together |
+| Scoring | Often local; sometimes also global (external letters, national rankings, client polls) |
+| Selection | Often or usually global; some domains have strong local input (tenure) |
+
+Draft A (15:15): Success is allocated among competitors in a local pool. … *[“local pool” overclaims]*
+
+Draft B (15:30, after Menger): Talent is attributed after the fact from relative rankings among competitors; success is a scarce slot allocated in that same local pool. … *[same problem: “same local pool”]*
+
+Draft C (15:33): People are assigned, develop, and perform in a work environment, and they are often scored there. Talent and measured performance are already relative to that environment (Menger). Selection into scarce positions is often made on a wider field, sometimes with local input. An individual's chance of the slot cannot be read from performance treated as a portable personal trait, because the score was produced in one setting and the slot may be allocated in another.
+
+One-sentence closer in play (avoids “local pool”): *Because measured performance is produced in a work environment and success is a scarce slot that may be allocated on a wider field, an individual's chance of it cannot be read from performance treated as a portable trait.*
+
+Draft D (15:43, Charles; tightened 15:49): The work is not “how mentors make individuals” (done) and not “how individual talent makes the organization” (done; too-much-talent). It is how peers and the work environment affect **measured performance produced in an environment**, and therefore the individual’s retention, assignment, and success — which is what an organization needs if it is to keep people and employ them well.
+
+- **Print phrase:** measured performance produced in an environment (performance net of setting).
+- **Keep in quotes for Charles to reuse:** “expression of individual talent.”
+- **Claim, not overclaim:** the world does not currently have portable talent measures. This dissertation does not supply a validated separator of person from setting. It starts in that direction.
+- **Ranger Regiment:** a communication example to FOUNDY, not a claim that the introduction is an Army study.
+
+**Dialed back 15:54 (Charles):** drop the algorithmic separator; that is a later project. Keep “expression of individual talent” in quotes for reuse. Print claim is only: measured performance is produced in an environment; that is understudied, under-modeled, and under-reported. No claim that this dissertation separates person from setting.
+
+Closer in play: *Because measured performance is produced in a work environment, an individual's chance of success cannot be read from that performance treated as a portable trait.*
 
 ---
 
@@ -278,5 +308,50 @@ Legend: **L** = in Charles's Zotero `FOUNDY_Intro`; **N** = new, to find; ✓ = 
   - Gap from five limitations.
 
   All text-layer quotes checked per page. Next: organizational studies.
+- **2026-10-30 13:10** — **Organizational studies draft v1** (`drafts/06_organizational_studies_DRAFT.md`). Two helpers wrote `sources/notes/org_A_opportunity_structure_note.md` (Rosenbaum 1979; White 1970 ch. 1, 6, 10, 12, 13; Stewman & Konda 1983; Podolny 1993; Doeringer & Piore) and `org_B_performance_evaluation_note.md` (Groysberg, Lee & Nanda 2008; Huckman & Pisano 2006; Scullen, Bergey & Aiman-Smith 2005; Staw & Hoang 1995; Bothner, Kang & Stuart 2007). FOUNDY read Kanter 1977 *AJS* (proportions; tokens) directly. Paragraphs:
+  - Vacancies create opportunity (White; Doeringer & Piore).
+  - Demography sets the odds of promotion; competitors are the denominator (Stewman & Konda).
+  - Sequential selection (Rosenbaum; Staw & Hoang).
+  - Performance belongs partly to the organization (Groysberg; Huckman & Pisano).
+  - Relative evaluation and status (Scullen; Podolny).
+  - Group composition and evaluation (Kanter).
+  - Crowding by nearby rivals (Bothner).
+  - Sorting versus effects.
+  - Gap from five limitations: the selection step is assumed or uses one attribute; competitors are counts, not quality; one system each; outcomes mostly not selection; the only score-then-select model is not fit to data.
+
+  All quotations are string-checked against the PDF text with printed pages confirmed. Flags: Doeringer & Piore PDF is the 1970 ERIC report (paraphrased only); OCR pages in Groysberg p. 1224 and Huckman & Pisano p. 482 (findings only, no quotations); White ch. 2–5 not in the library. Next: Army (Saturday).
+- **2026-10-30 13:55** — Charles read the Notes for Charles in drafts 01–05. Library now has 164 entries. **Notes updated in all five drafts; draft text unchanged**, with proposed replacement wording in the notes.
+  - **Decisions.**
+    - Incorporate Menger 2024 and Tripodi et al. 2025 in science of success (pending; FOUNDY to draft).
+    - Keep both mentions of Uzzi & Spiro and Rajkumar.
+    - Save Davis's Military Police sentence for the Army section.
+  - **Resolved.**
+    - Manski item (c) = correlated effects, now OCR'd on p. 533.
+    - Burt 1992 p. 10 is not cropped (a vertical scan line breaks the text layer); quotable, wording given in note 2 of the network science draft.
+    - Dobbie & Fryer published PDF (p. 58 supports the claim).
+    - Murphy & Weinhardt published PDF (change to "almost 2.3 million," p. 2778).
+    - Zell & Alicke 2009 Ns (Study 4, N = 309; Study 5, N = 73, 79%), plus a wording fix that separates the two samples.
+    - McPherson and Abdulkadiroğlu bib fixes done; Stouffer in the library.
+  - **Still open.**
+    - Duflo file is the 2010 revised manuscript, attached to the 2008 entry (suggest moving it to the *AER* 2011 entry).
+    - Jackson & Bruegmann *AEJ* entry has the appendix only (cite the working paper for the p. 23 quotes, or get the *AEJ* text).
+    - Festinger file added 10-30 is the same scan with no text layer, and it created a duplicate entry.
+    - Marsh & Hau and Sacerdote 2014 still abstract only.
+- **2026-10-30 14:45** — Charles ran Acrobat Paper Capture on Festinger 1954 (`files/922`; Producer: Adobe Acrobat 26 Paper Capture Plug-in; 11,444 words). Duplicate Zotero entry gone. Six quotations sit on the cited pages; OCR has typical scan slips (`eyeryone`, `<.ompare`). Remaining **image-only PDFs** (same treatment would help): Tesser 1988, Manski 1993, Burt 1992 ch. 1, Baker et al. 1994, Granovetter 1973, Breiger 1974.
+- **2026-10-30 14:55** — Charles Paper-Captured the six remaining image-only PDFs. All six now have text layers (Tesser 18,960w; Manski 6,743w, item (c) matches p. 533; Burt 16,041w, scan-line still drops letters; Baker 14,672w; Granovetter 13,535w; Breiger 7,206w). Notes in drafts 02, 03, and 05 updated. No image-only PDFs left in the library.
+- **2026-10-30 15:10** — Library 165 entries. Lazear & Oyer 2004 now has the *Labour Economics* PDF (snapshot being deleted). Page *The Difference* still has no PDF; the source article is Hong & Page 2004, *PNAS* (not in the library; not cited in drafts). Distinct works **cited in the six draft bodies: ~110**. Alex’s 100–200 target still has Army + synthesis to come.
+- **2026-10-30 15:15** — Charles asked for a justification of the work, now. Candidate one-sentence parked under Alex line (not agreed). Core: success is allocated in a local pool; environment both develops and ranks; prior work rarely measures who is selected, and almost never in more than one system.
+- **2026-10-30 15:27** — Charles: Menger changed how he views talent; keep working on the justification (15:23 “agreed” undone). Menger 2024 read from `files/547`: talent is attributed a posteriori from relative rankings; ordinal gaps leave magnitude indeterminate; slight early gaps among competitors come to look like intrinsic quality. Fold into science of success when that draft is next edited.
+- **2026-10-30 15:33** — Charles: do not treat local vs global as an absolute. Known: assign, perform, and often score in the work environment; select often globally, with local input in some domains (tenure). Draft C of the justification parked under Alex line.
+- **2026-10-30 15:43** — Charles: Draft D. Not mentor→individual (done) and not talent→org success (done). Peers/environment → **expression** of talent → individual retention, assignment, success, which orgs need in order to keep and employ people. Aim: more portable reading than raw local scores. Ranger-cohort masking as Army illustration. “Potential” flagged (Menger). Intro still not an Army study.
+- **2026-10-30 15:49** — Print phrase = measured performance produced in an environment. Keep “expression of individual talent” in quotes for Charles to reuse. Claim: current scores are not portable talent; we do not have a separator; we should go in that direction. Ranger story was to brief FOUNDY, not to set the paper’s identity.
+- **2026-10-30 15:54** — Charles: separator language is muddy and is a later project. Dial back to: environment influences measured performance; that is understudied/modeled/reported. FOUNDY re-read all six subsection drafts before Charles prints to annotate. Drafts never contained the separator claim. Print.
+- **2026-10-30 16:05** — Charles pointed FOUNDY at `docs/Menger/Companion_Docs/` (companion-volume method; Menger was the first paper). Protocol: `docs/Menger/Companion_Volume_Creation_Protocol_v2.md`. Deep structure (Lessons Learned + Appendix A): Difference → Comparison → Ranking → Opportunity → Amplification → Inequality. Charles (16:05): the sentence “talent may refer to the way difference is converted into hierarchy and inequality” (journal p. 15) “REALLY shows the brilliance of his read.” Now quoted in `drafts/01_science_of_success_DRAFT.md` as the landing of the Menger block; closing supply sentence recasts it as talent naming the conversion of difference into hierarchy. Re-print 01. Method available for later seminal papers (not summaries: think-WITH editions).
+- **2026-10-30 16:00** — Menger (2024) integrated before print. Charles: he is too big to belong only in science of success. Four homes, each earned:
+  - **01 science of success** (home): recognition paragraph — talent is retro-dicted from relative ranking (14); quality gradient (19); ordinal magnitude indeterminate (20); slight gap read as intrinsic quality (22). Closing supply sentence names him.
+  - **02 economics**: Rosen Superstars sentence — demand-side account of talent (20).
+  - **06 organizational studies**: after Stewman's "brightness" — contests cause divergence even when abilities similar (20); slight gap as essence (22). Quotes Menger, not Rosenbaum 1989 (not in library).
+  - **05 psychology**: after Musch and Grondin's "most talented in their age group" — one sentence on retro-diction (14).
+  Not in network science or education. Pages from journal PDF `files/598`. Re-print 01, 02, 05, 06. Synthesis still carries him. Tripodi still pending.
 - **2026-10-30 11:23–11:53** — Bib rechecked three times. Final: 158 entries, 151 PDFs, no duplicates. Charles fixed McPherson (title, DOI, author case; issue field still reads "2001"), both empty-author entries (Abdulkadiroğlu 2014; Carrell, Sacerdote & West 2013), and deleted w15202. Added Stouffer et al. 1949 (2 vols, searchable), the Eden & Shani PDF, and Kanter 1977 *AJS* "Some Effects of Proportions on Group Life" (DOI 10.1086/226425, PDF), which substitutes for the book's argument. Without PDF: Marsh & Hau (requested), Sacerdote 2011/2014, Kanter book, Page 2008, Hicks 1987 (DTIC down). Caddies paper possibly Sacerdote 2001; Charles has emailed Lazer.
 - **2026-10-30 12:07** — Billing block cleared; two helpers wrote `sources/notes/psych_A_comparison_expectancy_note.md` (Festinger, Stouffer vol. 1 ch. 4 and 6, Zell & Alicke, Tesser, Eden & Shani) and `psych_B_talent_relativeage_curves_note.md` (Swaab, Gula, Musch & Grondin, Grant & Schwartz, Pierce & Aguinis, Simonsohn). **Psychology draft v1** (`drafts/05_psychology_DRAFT.md`): question and unit (Festinger); local comparison set = competitors (Festinger, Zell & Alicke); relative deprivation (Stouffer MP vs Air Corps, p. 251); rivals act on performance (Tesser); organizational expectancy (Eden & Shani; selection switched off, p. 197); relative age effect as selection from an organizationally defined pool (Musch & Grondin); curve shape is empirical (Swaab vs Simonsohn and Gula); gap from four limitations. All 42 quotations verified: 27 against the PDF text, 15 by fresh OCR of page images. Note 4 flags for Charles that any HERO-plot peak claim needs a two-lines test or model comparison.

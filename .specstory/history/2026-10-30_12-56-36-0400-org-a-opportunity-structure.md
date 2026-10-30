@@ -40,13 +40,6 @@ A concise summary (≤ 400 words): for each source, 2–3 strongest quotes with 
 
 _**Agent (claude-opus-5-5)**_
 
-<think><details><summary>Thought Process</summary>
-I should start efficiently by updating my current step, then navigate to the base directory to check the PDF files and their page counts.
-
-</details></think>
-
-_**Agent (claude-opus-5-5)**_
-
 I'll start by checking the source PDFs and their text layers, then build the note one source at a time.
 
 _**Agent (claude-opus-5-5)**_
@@ -122,13 +115,6 @@ Pages:           44
 
 _**Agent (claude-opus-5-5)**_
 
-<think><details><summary>Thought Process</summary>
-Let me peek at an existing note to check the format for consistency first.
-
-</details></think>
-
-_**Agent (claude-opus-5-5)**_
-
 Text layers exist for all but possibly Doeringer & Piore (ERIC scan). Let me glance at a sibling note for format, and dump Rosenbaum text.
 
 _**Agent (claude-opus-5-5)**_
@@ -164,13 +150,6 @@ I/O Error: Couldn't open file 'files/832/Rosenbaum - 1979 - Tournament Mobility 
 … (output truncated)
 ```
 </details></tool-use>
-
-_**Agent (claude-opus-5-5)**_
-
-<think><details><summary>Thought Process</summary>
-I'm wondering if the working directory actually persisted, since the file open is failing even though the glob worked earlier — maybe it's a write permission issue with /tmp being outside the sandbox's allowed workspace, so I should stick to writing within the workspace scratch area instead.
-
-</details></think>
 
 _**Agent (claude-opus-5-5)**_
 
@@ -240,15 +219,21 @@ for c in 843 842 840 841 839 844; do dump files/$c/*.pdf /tmp/orgA/white_$c.txt;
      792 /tmp/orgA/white_843.txt
     1635 /tmp/orgA/white_842.txt
     1783 /tmp/orgA/white_840.txt
+    1440 /tmp/orgA/white_841.txt
+     728 /tmp/orgA/white_839.txt
+     249 /tmp/orgA/white_844.txt
 
 ```
 </details></tool-use>
 
 _**Agent (claude-opus-5-5)**_
 
+Now I'll create the output file with the header, then read Rosenbaum and check Crossref metadata in parallel.
+
+_**Agent (claude-opus-5-5)**_
+
 <tool-use data-tool-type="write" data-tool-name="edit_file_v2"><details>
 <summary>Tool use: **edit_file_v2** • Edit file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/org_A_opportunity_structure_note.md</summary>
-Status: **loading**
 
 </details></tool-use>
 
@@ -276,4 +261,1681 @@ for it in json.load(sys.stdin)['message']['items']:
 import json,sys
 m=json.load(sys.stdin)['message']; print(m.get('DOI'),m.get('title'),m.get('publisher'),m.get('page'),m.get('issued'),m.get('type'))"; done
 ```
+
+```
+10.2307/2392495 ['Tournament Mobility: Career Patterns in a Corporation'] ['Administrative Science Quarterly'] 24 2 220 [[1979, 6]]
+10.1086/226972 ['Organizational Career Mobility: Promotion Chances in a Corporation During Periods of Growth and Contraction'] ['American Journal of Sociology'] 85 1 21-48 [[1979, 7]]
+10.1086/227728 ['Careers and Organizational Labor Markets: Demographic Models of Organizational Behavior'] ['American Journal of Sociology'] 88 4 637-685 [[1983, 1]]
+10.2307/2392789 ['Demographic Models of Internal Labor Markets'] ['Administrative Science Quarterly'] 31 2 212 [[1986, 6]]
+10.1515/9781400837878 ['Status Signals'] None None None None [[2010, 12, 31]]
+10.2307/j.ctt7sbsh ['Status Signals'] None None None None [[2010, 12, 16]]
+10.4159/harvard.9780674437203 ['Chains of Opportunity'] Harvard University Press None {'date-parts': [[1970, 12, 31]]} edited-book
+10.4159/harvard.9780674437203.c2 ['Chapter 1. Logic of Opportunity'] Harvard University Press 1-20 {'date-parts': [[1970, 12, 31]]} book-chapter
+
+```
 </details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Rosenbaum is fully read (printed page = PDF page + 218; Crossref confirms ASQ 24(2), DOI 10.2307/2392495). I'll write the Rosenbaum section now.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cat &gt;&gt; &#34;/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/org_A_opportunity_structure_note.md&#34; &lt;&lt;&#39;EOF&#39;
+
+## 1. Rosenbaum (1979): Tournament mobility
+
+**Citation.** Rosenbaum, James E. 1979. &#34;Tournament Mobility: Career Patterns in a Corporation.&#34; *Administrative Science Quarterly* 24(2): 220–241. DOI 10.2307/2392495 (JSTOR stable 2392495). Crossref confirms volume 24, issue 2, first page 220, June 1979; the last page (241) is from the PDF. The PDF is a 23-page JSTOR file; PDF p. 1 is the JSTOR cover, so **printed page = PDF page + 218** (PDF p. 2 = p. 220).
+
+**Data and setting.** United States. One large, anonymous, investor-owned corporation (10,000–15,000 employees), complete computerized personnel records, 1962–1975. Unit: the employee, measured only by organizational level (5 of 8 levels used). N = 671 employees who entered at the bottom level in 1960–1962 and stayed through 1975. Only five snapshots (1962, 1965, 1969, 1972, 1975).
+
+- p. 224: &#34;This study investigates changes in employees&#39; level in a large corporation over a 13-year period from 1962 to 1975. The corporation employed between 10,000 and 15,000 employees in the period studied&#34;.
+- p. 225: &#34;The sample studied is composed of the employees who entered the corporation between 1960 and 1962 and who remained with it through at least 1975. This permits the analysis of 13 years of career mobility for the newcomer cohort of 671 employees who began in the same starting level.&#34;
+- p. 225: &#34;Personnel records were available only for the years 1962, 1965, 1969, 1972, and 1975, permitting analyses of three-year intervals for all but one period.&#34;
+
+**Design.** Descriptive cohort analysis. A &#34;career tree&#34; (Figure 2, p. 230) traces every path. Path independence (the Markov assumption) is tested with three-way tables (Time 1 level × Time 3 level, controlling Time 2 level) using Goodman&#39;s tau-b/tau-c, and early-promotion hypotheses with 2 × 2 chi-square tests (Table 4, p. 233).
+
+- p. 225: &#34;The aim is descriptive analysis, not causal inference. These analyses do not seek to assert that early career paths cause later career mobility. Rather they seek to ascertain whether early career paths are related to later career mobility.&#34;
+- p. 226: &#34;Given the aim of this paper, nonparametric statistical techniques are quite appropriate for the analyses.&#34;
+
+**Main findings (verbatim).**
+
+- p. 220 (abstract): &#34;The empirical analysis supports the tournament model, finding that mobility in the earliest period of one&#39;s career has an unequivocal relationship with many of the most important parameters of one&#39;s later career: career ceilings, career floors, and probabilities of promotion and demotion in each successive period.&#34;
+- pp. 222–223: &#34;In the tournament mobility model, careers are conceptualized as a sequence of competitions, each of which has implications for an individual&#39;s mobility chances in all subsequent selections. [...] Winners have the opportunity to compete for high levels, but they have no assurance of attaining them; losers are permitted to compete only for low levels or are denied the opportunity to compete any further at all. [...] The tournament results in a progressively greater winnowing down of the winner&#39;s cohort at each successive stage.&#34;
+- p. 233: &#34;Employees who are promoted to foreman in the initial period have a very clear advantage in reaching lower management (81 percent versus 33 percent), an advantage that is not merely a function of having one more year to get there.&#34;
+- p. 233: &#34;Just over one-third of this group attained middle management, while none of the 128 employees who attained foreman after the first interval attained middle management in their first 13 years. As Table 4E indicates, this association is highly significant; here is social structure in action.&#34;
+- p. 234: &#34;These disadvantages are so extensive, that it seems reasonable to conclude that employees not promoted in the first period are no longer competing in the same system with employees who were promoted in the first period.&#34;
+- p. 238: &#34;These findings suggest that an employee&#39;s career is not a series of equal contests. Early competitions are more strongly associated with career outcomes than later competitions&#34;.
+
+Supporting numbers (Table 4, p. 233): of 67 employees promoted in the first period, 47 were promoted again in the second period, versus 128 of 604 not promoted in the first period (χ² = 69.4, p &lt; .001). Path independence is rejected for foremen (1965 foremen, p = .02; p. 228) but not for lower managers. The career-floor hypothesis is not significant (Table 4F; p. 234). Winners must keep winning (Hypothesis 5): &#34;Of the ten foremen not promoted in the second period, only one was promoted in the next two periods&#34; (p. 235).
+
+**Mechanism / model.** The tournament model is a verbal, ideal-type model (a reformulation of Turner&#39;s contest/sponsored mobility). It is **not formalized and not fit to data**; the hypotheses are tested one at a time as associations. The timing of &#34;competitions&#34; is assumed, not estimated.
+
+- p. 231: &#34;Quite arbitrarily, for the sake of this analysis, it was assumed that &#34;competitions&#34; occur roughly every three to four years, and that an individual has &#34;lost&#34; the &#34;competition&#34; if he was not promoted during the three-four year period.&#34;
+- p. 236: &#34;Although the empirical tests of the hypotheses do not make the tournament model itself necessarily correct, its usefulness stems from its heuristic value for suggesting a comprehensible mechanism underlying the empirical relationships.&#34;
+- p. 237, n. 15: &#34;It is most likely to occur in organizations which are &#34;pyramid&#34; shaped, i.e., organizations which have declining numbers of individuals at higher levels. However, it is not clear that this is either a necessary or sufficient structural condition for tournament mobility.&#34;
+- Speculated feedback (pp. 236–237): &#34;a tournament model is likely to create self-fulfilling prophecies (Rosenthal and Jacobson, 1968) in which early winners are seen as &#34;high-potential people&#34; who can do no wrong and who are given additional opportunities and challenges, while those who do not win in the early competition are given little or no chance to prove themselves again (Rosenbaum, 1976). The early winners will receive a challenging socialization process which will help them to develop themselves further, while the others will receive a custodial socialization process&#34;.
+
+**Separating sorting from effects.** Not attempted. Rosenbaum says explicitly that early promotion may only mark earlier sorting (education, initial placement, signals) and that vacancy chains and cohort/period effects are not examined.
+
+- p. 238, n. 16: &#34;One cannot infer that the first period necessarily &#34;caused&#34; this selection. The cause of the selection might have occurred much earlier, acting via an employee&#39;s initial job placement, education or school performance, or other categorical &#34;signals&#34; (Spence, 1974). Promotion rates may also be influenced by vacancy chains, by period effects caused by company growth or contraction, or by differences in the quality of new cohorts due to tight or loose labor markets. None of these possibilities has been examined here&#34;.
+- p. 225: &#34;if they are related to later careers then they are clearly visible signals which may influence the way employees are regarded and treated by others.&#34;
+- (Assistant judgment) The sample keeps only employees who stayed through 1975, so exits (a selection outcome in their own right) are conditioned away.
+
+**Limitations (tagged).**
+
+- [single system] p. 238: &#34;It must be stressed, however, that this study tests path independence in a particular situation: studying individual mobility within a single organization.&#34; Also p. 225, n. 7: &#34;I had to promise to protect the anonymity of the firm. Consequently, I cannot elaborate this description any further.&#34;
+- [small data] p. 229: &#34;little can be inferred with certainty because the total number of promotions from this level is small.&#34; One cohort of 671, five snapshots; levels above 4 cannot be analyzed (p. 235).
+- [imperfect measure] Level is the only variable used (p. 225: &#34;The only information selected for the present analyses was the level category&#34;); no performance, ratings, or demographics. p. 231, n. 12: &#34;Since this analysis does not take account of kinds of status attainment other than promotions, it clearly oversimplifies&#34;.
+- [no model of mechanism] [model not fit to data] The tournament is a heuristic, not a fitted model (p. 236, quoted above); competition timing is assumed &#34;arbitrarily&#34; (p. 231).
+- Outcome **is** selection (promotion), so [outcome is not selection] does **not** apply.
+
+**Channel / source (Assistant judgment).** Primarily **SELECTION**: sequential, path-dependent winnowing of a cohort, so the history of past selections conditions eligibility for later ones. Rosenbaum speculates on **EVALUATION** (early wins as visible &#34;signals&#34; and labels, p. 225, p. 236) and **DEVELOPMENT** (challenging versus custodial socialization, p. 237), but tests neither. Source of the environment effect: the organization&#39;s rules and pyramid shape; peers enter only as the cohort being winnowed.
+
+---
+EOF
+echo ok</summary>
+```bash
+cat >> "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/org_A_opportunity_structure_note.md" <<'EOF'
+
+## 1. Rosenbaum (1979): Tournament mobility
+
+**Citation.** Rosenbaum, James E. 1979. "Tournament Mobility: Career Patterns in a Corporation." *Administrative Science Quarterly* 24(2): 220–241. DOI 10.2307/2392495 (JSTOR stable 2392495). Crossref confirms volume 24, issue 2, first page 220, June 1979; the last page (241) is from the PDF. The PDF is a 23-page JSTOR file; PDF p. 1 is the JSTOR cover, so **printed page = PDF page + 218** (PDF p. 2 = p. 220).
+
+**Data and setting.** United States. One large, anonymous, investor-owned corporation (10,000–15,000 employees), complete computerized personnel records, 1962–1975. Unit: the employee, measured only by organizational level (5 of 8 levels used). N = 671 employees who entered at the bottom level in 1960–1962 and stayed through 1975. Only five snapshots (1962, 1965, 1969, 1972, 1975).
+
+- p. 224: "This study investigates changes in employees' level in a large corporation over a 13-year period from 1962 to 1975. The corporation employed between 10,000 and 15,000 employees in the period studied".
+- p. 225: "The sample studied is composed of the employees who entered the corporation between 1960 and 1962 and who remained with it through at least 1975. This permits the analysis of 13 years of career mobility for the newcomer cohort of 671 employees who began in the same starting level."
+- p. 225: "Personnel records were available only for the years 1962, 1965, 1969, 1972, and 1975, permitting analyses of three-year intervals for all but one period."
+
+**Design.** Descriptive cohort analysis. A "career tree" (Figure 2, p. 230) traces every path. Path independence (the Markov assumption) is tested with three-way tables (Time 1 level × Time 3 level, controlling Time 2 level) using Goodman's tau-b/tau-c, and early-promotion hypotheses with 2 × 2 chi-square tests (Table 4, p. 233).
+
+- p. 225: "The aim is descriptive analysis, not causal inference. These analyses do not seek to assert that early career paths cause later career mobility. Rather they seek to ascertain whether early career paths are related to later career mobility."
+- p. 226: "Given the aim of this paper, nonparametric statistical techniques are quite appropriate for the analyses."
+
+**Main findings (verbatim).**
+
+- p. 220 (abstract): "The empirical analysis supports the tournament model, finding that mobility in the earliest period of one's career has an unequivocal relationship with many of the most important parameters of one's later career: career ceilings, career floors, and probabilities of promotion and demotion in each successive period."
+- pp. 222–223: "In the tournament mobility model, careers are conceptualized as a sequence of competitions, each of which has implications for an individual's mobility chances in all subsequent selections. [...] Winners have the opportunity to compete for high levels, but they have no assurance of attaining them; losers are permitted to compete only for low levels or are denied the opportunity to compete any further at all. [...] The tournament results in a progressively greater winnowing down of the winner's cohort at each successive stage."
+- p. 233: "Employees who are promoted to foreman in the initial period have a very clear advantage in reaching lower management (81 percent versus 33 percent), an advantage that is not merely a function of having one more year to get there."
+- p. 233: "Just over one-third of this group attained middle management, while none of the 128 employees who attained foreman after the first interval attained middle management in their first 13 years. As Table 4E indicates, this association is highly significant; here is social structure in action."
+- p. 234: "These disadvantages are so extensive, that it seems reasonable to conclude that employees not promoted in the first period are no longer competing in the same system with employees who were promoted in the first period."
+- p. 238: "These findings suggest that an employee's career is not a series of equal contests. Early competitions are more strongly associated with career outcomes than later competitions".
+
+Supporting numbers (Table 4, p. 233): of 67 employees promoted in the first period, 47 were promoted again in the second period, versus 128 of 604 not promoted in the first period (χ² = 69.4, p < .001). Path independence is rejected for foremen (1965 foremen, p = .02; p. 228) but not for lower managers. The career-floor hypothesis is not significant (Table 4F; p. 234). Winners must keep winning (Hypothesis 5): "Of the ten foremen not promoted in the second period, only one was promoted in the next two periods" (p. 235).
+
+**Mechanism / model.** The tournament model is a verbal, ideal-type model (a reformulation of Turner's contest/sponsored mobility). It is **not formalized and not fit to data**; the hypotheses are tested one at a time as associations. The timing of "competitions" is assumed, not estimated.
+
+- p. 231: "Quite arbitrarily, for the sake of this analysis, it was assumed that "competitions" occur roughly every three to four years, and that an individual has "lost" the "competition" if he was not promoted during the three-four year period."
+- p. 236: "Although the empirical tests of the hypotheses do not make the tournament model itself necessarily correct, its usefulness stems from its heuristic value for suggesting a comprehensible mechanism underlying the empirical relationships."
+- p. 237, n. 15: "It is most likely to occur in organizations which are "pyramid" shaped, i.e., organizations which have declining numbers of individuals at higher levels. However, it is not clear that this is either a necessary or sufficient structural condition for tournament mobility."
+- Speculated feedback (pp. 236–237): "a tournament model is likely to create self-fulfilling prophecies (Rosenthal and Jacobson, 1968) in which early winners are seen as "high-potential people" who can do no wrong and who are given additional opportunities and challenges, while those who do not win in the early competition are given little or no chance to prove themselves again (Rosenbaum, 1976). The early winners will receive a challenging socialization process which will help them to develop themselves further, while the others will receive a custodial socialization process".
+
+**Separating sorting from effects.** Not attempted. Rosenbaum says explicitly that early promotion may only mark earlier sorting (education, initial placement, signals) and that vacancy chains and cohort/period effects are not examined.
+
+- p. 238, n. 16: "One cannot infer that the first period necessarily "caused" this selection. The cause of the selection might have occurred much earlier, acting via an employee's initial job placement, education or school performance, or other categorical "signals" (Spence, 1974). Promotion rates may also be influenced by vacancy chains, by period effects caused by company growth or contraction, or by differences in the quality of new cohorts due to tight or loose labor markets. None of these possibilities has been examined here".
+- p. 225: "if they are related to later careers then they are clearly visible signals which may influence the way employees are regarded and treated by others."
+- (Assistant judgment) The sample keeps only employees who stayed through 1975, so exits (a selection outcome in their own right) are conditioned away.
+
+**Limitations (tagged).**
+
+- [single system] p. 238: "It must be stressed, however, that this study tests path independence in a particular situation: studying individual mobility within a single organization." Also p. 225, n. 7: "I had to promise to protect the anonymity of the firm. Consequently, I cannot elaborate this description any further."
+- [small data] p. 229: "little can be inferred with certainty because the total number of promotions from this level is small." One cohort of 671, five snapshots; levels above 4 cannot be analyzed (p. 235).
+- [imperfect measure] Level is the only variable used (p. 225: "The only information selected for the present analyses was the level category"); no performance, ratings, or demographics. p. 231, n. 12: "Since this analysis does not take account of kinds of status attainment other than promotions, it clearly oversimplifies".
+- [no model of mechanism] [model not fit to data] The tournament is a heuristic, not a fitted model (p. 236, quoted above); competition timing is assumed "arbitrarily" (p. 231).
+- Outcome **is** selection (promotion), so [outcome is not selection] does **not** apply.
+
+**Channel / source (Assistant judgment).** Primarily **SELECTION**: sequential, path-dependent winnowing of a cohort, so the history of past selections conditions eligibility for later ones. Rosenbaum speculates on **EVALUATION** (early wins as visible "signals" and labels, p. 225, p. 236) and **DEVELOPMENT** (challenging versus custodial socialization, p. 237), but tests neither. Source of the environment effect: the organization's rules and pyramid shape; peers enter only as the cohort being winnowed.
+
+---
+EOF
+echo ok
+```
+
+```
+ok
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Rosenbaum section saved. Now White's *Chains of Opportunity*: TOC and chapter 1 first.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="unknown" data-tool-name="update_current_step"><details>
+<summary>Tool use: **update_current_step**</summary>
+An unknown error occurred
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /tmp/orgA/white_844.txt</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /tmp/orgA/white_843.txt</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Chapter 1 runs pp. 1–20 and printed pages match PDF pages. Next, chapter 10 (attributes) and chapter 13 (use and meaning).
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /tmp/orgA/white_840.txt</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Chapter 10 (pp. 249–282) has the key "random selection" and "careers are by-products" passages. Now chapter 13 and the openings of the other two chapters.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /tmp/orgA/white_839.txt</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/orgA; head -60 white_842.txt; echo ======; head -60 white_841.txt; echo =====; grep -n -i -E &#34;fit|test|predict|chi|satisf|agree&#34; white_842.txt | head -60</summary>
+```bash
+cd /tmp/orgA; head -60 white_842.txt; echo ======; head -60 white_841.txt; echo =====; grep -n -i -E "fit|test|predict|chi|satisf|agree" white_842.txt | head -60
+```
+
+```
+######## PDF p. 1
+Chapter 6
+Models for
+Three Organizations Compared
+
+In this chapter vacancy chains in two other churches, the Methodist
+and Presbyterian (more and less centralized than the Episcopal
+church, respectively) are analyzed to explore the range of applicability of the Markov chain models. Optimum choice of strata is a
+major focus of attention. Three different hierarchic criteria for
+stratification are tested: (1) the salary of the incumbent, which reflects attributes of both man and job; (2) the current operating
+budget of the parish; and, of course, (3) the job size in number of
+members. Location of optimal cutting points between strata is investigated systematically for the job-size criterion, and the interrelation between cutting points used with the different criteria is
+assessed using regression techniques.
+Three Methodist churches merged in 1940, but all data in this
+chapter is for the Methodist Episcopal church, North, before
+merger. In the light of the unusual behavior of (plain) Episcopal
+vacancy chains during the depression years of 1933-1934, the later
+sample of Methodist vacancy chains was drawn from their minutes
+for 1936 and 1937. Estimates of transition parameters for vacancies
+in 1936-1937 will be compared with estimates from one earlier
+sample, drawn for the years 1922-1923 used also for the Episcopal
+church.
+Only the Northern embodiment of the Presbyterian church (which
+has yet to recombine) is treated. Estimates and observations from a
+recent sample of vacancy chains, for 1959-1960, are compared with
+those from the earlier period of 1922-1923. The sample sizes are
+small, and the analysis is not as elaborate as those for the Methodist
+and Episcopal churches.
+Smaller samples of chains for Methodist and Presbyterian
+churches yield estimates as reliable as those for larger Episcopal
+samples. Indexes in both Methodist and Presbyterian annuals include names of clergy who have died, withdrawn, and so on, for one
+additional year (they appear in
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/orgA; grep -n &#34;######## PDF&#34; white_842.txt | tail -3; sed -n &#39;1450,1635p&#39; white_842.txt; echo &#34;-----&#34;; head -80 white_841.txt</summary>
+```bash
+cd /tmp/orgA; grep -n "######## PDF" white_842.txt | tail -3; sed -n '1450,1635p' white_842.txt; echo "-----"; head -80 white_841.txt
+```
+
+```
+1521:######## PDF p. 20
+1563:######## PDF p. 21
+1605:######## PDF p. 22
+/ c = 2.17
+
+O
+49.8
+23.0
+15.5
+4.7
+3.6
+2.4
+0.6
+0
+0.5
+0
+Νκ = 20.933
+(49)
+Jc = 2.03
+
+* The predictions made are the same as in Table 4.13. The transition probabilities
+used are those from moves in that year alone, shown in Table 6.10.
+b
+In addition to the sample reported in Appendix C there is included here the
+sample drawn to increase the number of observations in Table 6.10 as explained in
+note 3 to this chapter.
+
+such strata might conform better to the desired patterns. The distribution of Presbyterian jobs by number of members does have lower
+percentages in the bottom stratum and higher percentages above 300
+than in the other two churches, suggesting a need for redefinition of
+
+140
+
+######## PDF p. 19
+strata. However, analysis has suggested that the coding rules may be
+inappropriate, and no choice of strata could influence that distortion.
+No systematic reexamination of coding rules for the Presbyterian
+church has been attempted. It would be more fruitful to do so while
+developing rules for applying the vacancy model to still other
+churches or organizations. (The problem of allowable durations for
+vacancies arises again in a new form in Section 7.7, where the actual
+intervals between a vacancy's moves are treated as a stochastic
+variable, with a mean rate that may depend on the stratum.) Throughout these first six chapters, only the sequential order of a vacancy's
+moves is considered, so that prolonged duration of a vacancy has
+no effect on estimated transition probabilities except when it entails
+coding as a transition to the empty state.
+Since the estimated transition probabilities are not constant, predictions of chain lengths will be based on the parameters for that
+year. Only overall distributions are reported in Table 6.11 because
+there are too few chains to justify separate tabulations for chain
+lengths by stratum of origin. The fit is good, but for these overall
+length distributions 
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Chapter 6 (pp. 123–144) gives the fit-to-data verdicts. A quick scan of chapter 12 for the elite and localism findings:
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/orgA; grep -n -i -E &#34;elite|bishop|inbreed|conclu|PDF p&#34; white_841.txt | head -80</summary>
+```bash
+cd /tmp/orgA; grep -n -i -E "elite|bishop|inbreed|conclu|PDF p" white_841.txt | head -80
+```
+
+```
+1:######## PDF p. 1
+3:Localism, Elites, and Tenure Networks
+8:elite subsystems are woven into the fabrics of the clergies. Particularism of these kinds can be explicated only from patterns in moves
+13:missing is insight into "inbreeding" in the system; that is, tendencies
+18:developed appropriate for measures of inbreeding. Dynamics is no
+38:######## PDF p. 2
+40:traditions, elites, and localism may depend on direct interaction
+80:######## PDF p. 3
+81:12. Localism, Elites, Tenures
+281:######## PDF p. 4
+451:######## PDF p. 5
+452:12. Localism, Elites, Tenures
+475:be seen by, say, the bishop, has been slighted by the weighting procedure. The raw distribution corresponds to what a diocesan might
+493:######## PDF p. 6
+668:######## PDF p. 7
+669:12. Localism, Elites, Tenures
+672:difficult actual estimations would be.5 The issue of inbreeding in a
+706:by less than 10 percent. The same conclusions can also be reached
+711:######## PDF p. 8
+721:Bishops versus Priests: Chains and Careers
+723:Filling the job left vacant by a newly elected bishop has a cachet that
+727:of Principal Diocesan Bishops Incumbent in 1962
+780:seventy-seven chains containing the promotions to principal bishop
+788:######## PDF p. 9
+789:12. Localism, Elites, Tenures
+800:top strata, which is much like that observed for bishops. It may also
+801:be that the bishops' chains reflect a new kind of interaction in mobility. An elite subsystem of men and jobs may be hidden within the
+813:assistant bishops without succession rights—and missionary bishops
+814:—elected by the House of Bishops rather than a diocesan convention
+816:bishoprics appeared, not counting coadjutors, and in another four
+817:appeared ; altogether fourteen subsidiary bishoprics appeared in the
+818:seventy-seven chains. Moves among bishoprics will probably increase
+831:######## PDF p. 10
+836:Careers furnish more decisive evidence for the existence of an elite
+837:subsystem. Table 12.5 compares careers of the seventy-seven bishops
+838:Tabl
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /tmp/orgA/white_841.txt</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+I have what I need from White. Let me confirm chapter DOIs/pages and Podolny's metadata on Crossref before writing.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: for d in 10.4159/harvard.9780674437203.c8 10.4159/harvard.9780674437203.c14 10.4159/harvard.9780674437203.c16 10.4159/harvard.9780674437203.c17 10.1086/230091; do curl -s https://api.crossref.org/works/$d | python3 -c &#34;
+import json,sys
+m=json.load(sys.stdin)[&#39;message&#39;]; print(m.get(&#39;DOI&#39;),m.get(&#39;title&#39;),m.get(&#39;container-title&#39;),m.get(&#39;volume&#39;),m.get(&#39;issue&#39;),m.get(&#39;page&#39;),m.get(&#39;issued&#39;),[a.get(&#39;family&#39;) for a in m.get(&#39;author&#39;,[])])&#34;; done</summary>
+```bash
+for d in 10.4159/harvard.9780674437203.c8 10.4159/harvard.9780674437203.c14 10.4159/harvard.9780674437203.c16 10.4159/harvard.9780674437203.c17 10.1086/230091; do curl -s https://api.crossref.org/works/$d | python3 -c "
+import json,sys
+m=json.load(sys.stdin)['message']; print(m.get('DOI'),m.get('title'),m.get('container-title'),m.get('volume'),m.get('issue'),m.get('page'),m.get('issued'),[a.get('family') for a in m.get('author',[])])"; done
+```
+
+```
+10.4159/harvard.9780674437203.c8 ['Chapter 6. Models for Three Organizations Compared'] ['Chains of Opportunity'] None None 123-144 {'date-parts': [[1970, 12, 31]]} []
+10.4159/harvard.9780674437203.c14 ['Chapter 10. Careers, Attributes, and Replacements : Refining the Markov Chain'] ['Chains of Opportunity'] None None 249-282 {'date-parts': [[1970, 12, 31]]} []
+10.4159/harvard.9780674437203.c16 ['Chapter 12. Localism, Elites, and Tenure Networks'] ['Chains of Opportunity'] None None 298-316 {'date-parts': [[1970, 12, 31]]} []
+10.4159/harvard.9780674437203.c17 ['Chapter 13. Use and Meaning of Vacancy Models'] ['Chains of Opportunity'] None None 317-330 {'date-parts': [[1970, 12, 31]]} []
+10.1086/230091 ['A Status-Based Model of Market Competition'] ['American Journal of Sociology'] 98 4 829-872 {'date-parts': [[1993, 1]]} ['Podolny']
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Writing the White section now (Crossref confirms all six chapter DOIs and page ranges; the `c8` file is chapter 6, pp. 123–144).
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cat &gt;&gt; &#34;/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/org_A_opportunity_structure_note.md&#34; &lt;&lt;&#39;EOF&#39;
+
+## 2. White (1970): Chains of opportunity (vacancy chains)
+
+**Citation.** White, Harrison C. 1970. *Chains of Opportunity: System Models of Mobility in Organizations*. Cambridge, MA: Harvard University Press. DOI 10.4159/harvard.9780674437203. Chapters read (titles and page ranges checked in the PDFs and against Crossref chapter records; printed page = book page, no offset):
+
+| File | Chapter | Printed pages | Chapter DOI |
+|---|---|---|---|
+| `843/…c2.pdf` | Ch. 1, &#34;Logic of Opportunity&#34; | 1–20 | 10.4159/harvard.9780674437203.c2 |
+| `842/…c8.pdf` | Ch. 6, &#34;Models for Three Organizations Compared&#34; | 123–144 | 10.4159/harvard.9780674437203.c8 |
+| `840/…c14.pdf` | Ch. 10, &#34;Careers, Attributes, and Replacements: Refining the Markov Chain&#34; | 249–282 | 10.4159/harvard.9780674437203.c14 |
+| `841/…c16.pdf` | Ch. 12, &#34;Localism, Elites, and Tenure Networks&#34; | 298–316 | 10.4159/harvard.9780674437203.c16 |
+| `839/…c17.pdf` | Ch. 13, &#34;Use and Meaning of Vacancy Models&#34; | 317–330 | 10.4159/harvard.9780674437203.c17 |
+| `844/…toc.pdf` | Contents | xi–xv | — |
+
+Chapters 2–5 (the core model statement, coding rules, and the main Episcopal tests) are **not** in the library, so the model&#39;s formal details and the main fit statistics below come from how chapters 6, 10, and 13 describe them.
+
+**Data and setting.** United States. Three national Protestant clergies, the main source being the Episcopal church, plus the Methodist Episcopal church (North) and the Presbyterian church (North). The data are official annual registers and clerical directories, from which vacancy chains were traced job by job. The unit is the **vacancy move** (and the chain it forms), not the person. The sampled years named in the chapters read are: Episcopal 1912–1955 (p. 143); Methodist 1922–1923 and 1936–1937, and Presbyterian 1922–1923 and 1959–1960 (p. 123).
+
+- p. 5: &#34;Churches and their priesthoods are surely the oldest example, and they are the main empirical basis for the work reported here.&#34;
+- p. 20: Part I &#34;develops and applies a class of stratified probability models of vacancy chains for data spread over fifty years in three systems of men and jobs.&#34;
+- p. 257: &#34;The systems of jobs for which vacancy chain models were designed may not exhibit more than a thousand or so moves a year. In any case, only samples of a hundred or so moves in a year were drawn for any of the clergies studied.&#34;
+- The seniority analysis uses 456 observed replacements (p. 275; Table 10.4, p. 276).
+
+**Design.** The model is built and tested as a system. Chains are traced from registers, vacancy transition probabilities among job strata (strata defined by parish size in members) are estimated, and predicted chain-length distributions and amounts of mobility are compared with observed ones across decades and across the three churches. Individual attributes (seniority) are then added to test for &#34;replacement&#34; and &#34;quota&#34; effects.
+
+- p. 2: &#34;The strategy is to deal primarily with the overall structure of events in a mobility process rather than with the individual&#39;s motives. [...] A given event is usually caused in some sense by events remote from both it and the participants. These indirect structural effects are the target. Official records of the organizations studied are the source of data.&#34;
+
+**Main findings (verbatim).**
+
+- p. 1: &#34;Conflicts among individuals over opportunities are central to many theories in social science. Less often noted is the regenerative nature of much opportunity. When one man buys a new car another man can acquire the first man&#39;s trade-in and, in turn, pass on his old car, and so on.&#34;
+- p. 1: &#34;Mobility among fixed jobs is highly constrained; movements must dovetail in order to maintain the fixed numbers of occupants. Mobility is enmeshed in a network of contingencies.&#34;
+- p. 16: &#34;The chain of movements of men is a series of pulls of a man out of one job into a more attractive one. It is natural to call this pull chain a vacancy chain; the vacancy is moving from the job appearing earliest in the chain to the one appearing last, whereas the dual series of men change jobs in the direction opposite to the flow of cause and effect. The beginning event—creation of a vacancy as through death of an incumbent—causes the chain; it generates the opportunity to move seized by the new incumbent, whose departure in turn generates a new opportunity, and so on.&#34;
+- p. 249: &#34;Men&#39;s careers are by-products, not generators, of mobility in the vacancy model.&#34;
+- p. 271: &#34;The vacancy model with random selection is a model of pure achievement in that sense. Where transition probabilities based on stratification by jobs predict mobility volume and career evolution, there is no role left for men&#39;s attributes. [...] It is difficult to see how to assign causal importance to a man&#39;s background characteristics in his mobility experience in such a system.&#34;
+- p. 277: &#34;Seniority differences between predecessor and replacement in vacancy chains are distributed nearly randomly. There is little evidence for replacement effects in the attribute of seniority.&#34; And p. 281: &#34;these last two sections suggest that it may not be very important to distinguish men by attributes when applying the Markov chain model to a large system. Random selection of men seems a reasonable first approximation.&#34;
+
+Further passages on why individual attributes do not determine mobility:
+
+- p. 18: &#34;The planning of careers, either by the individual or the company, will not be a realistic endeavor except as it is keyed to the vacancy chains which are the operational constraint on mobility.&#34;
+- p. 255: &#34;if the vacancy chain model is correct, careers are a poor way to assess mobility. Men&#39;s careers cut across the natural grain of mobility flows.&#34;
+- p. 281: &#34;It is vacancies, not men, that are free to move between categories according to fixed transition probabilities. Careers of men are chaotic by-products of the dynamics of vacancies over long periods&#34;.
+- p. 317: &#34;A system evolves by its own logic, neither controlled by putative central authorities nor amenable to manipulation by its members. [...] Mobility is neither a simple addition of local events nor the combination of men&#39;s careers.&#34;
+- p. 326: &#34;New jobs create mobility rather than mobility calling forth new jobs as in turnover models.&#34;
+
+Centralization and elites:
+
+- p. 141: &#34;the main question posed about, and the reason for, choosing the Methodist church was the effects of centralized authority on mobility. The answer seems to be that the effects are slight.&#34;
+- p. 308 (bishops): &#34;Only 6.5 percent of the bishops&#39; careers had lengths of 4 or less or 10 or greater, whereas 55 percent of either sample of priests had careers that short or that long.&#34; p. 309: &#34;there is no evidence for an unusual degree of overlap in jobs between careers and vacancy chains.&#34; p. 310: &#34;If there is an elite subsystem, it must take a different form from reservation of earmarked jobs for promising young men.&#34;
+
+**Mechanism / model.** Yes, a **formal stochastic model, estimated and tested against data.** It is a Markov chain on *vacancies* among job strata, with termination probabilities (recruitment from outside, or abolition of a job). The predicted quantities are chain lengths and the &#34;multiplier matrix&#34; \((I-Q)^{-1}\) linking boundary events (deaths, retirements, new jobs) to total internal moves.
+
+- p. 326: &#34;Current amounts of internal movement are predicted from current sizes of a compound stream of transactions with the environment, namely, deaths of men plus births of jobs. [...] Parameters estimated from the data enter the prediction formula after a nonlinear transformation, as the multiplier matrix, the inverse matrix \((I - Q)^{-1}\).&#34;
+- Fit: p. 141: &#34;A simple Markov chain model works about as well for the Methodist church as it did for the Episcopal church, with the same definitions of three strata by job size.&#34; p. 144: the Presbyterian model &#34;was consistent with data in each separate period, it lacked stability over time and, thus, does not seem very useful.&#34; p. 140: &#34;The fit is good, but for these overall length distributions the binomial model would do as well.&#34;
+- Selection rule is **assumed random within a stratum** (the selection step is not modeled): p. 249: &#34;The simplest assumption, random selection, is made about allocation of calls to men within a stratum, partly because no mechanism for distinguishing between men has been built into the vacancy model thus far.&#34; p. 250: &#34;Principles for selection of the men &#34;displaced&#34; by vacancy arrivals in a stratum are not built in to the vacancy model.&#34;
+- p. 321: &#34;Prediction of transition probabilities from first principles appears much more difficult. Interaction among overlapping negotiations must be considered as well as the criteria used in a given negotiation between candidate and vacant job.&#34;
+
+**Separating sorting from effects.** Not framed that way. White&#39;s claim is about the **locus of causation**: opportunity originates in exogenous vacancy creation and propagates through the job structure. Who fills each slot is treated as random within strata, and the replacement and quota tests (pp. 268–281) check whether attributes add predictive power beyond job stratum. Only seniority could be tested; the attribute data were otherwise too poor.
+
+- p. 257: &#34;Unfortunately, the information on personal attributes did not prove very rewarding.&#34; p. 258: &#34;The most interesting and relevant data is on education [...] However the data was too incomplete and unreliable to be useful.&#34;
+- (Assistant judgment) &#34;Random selection fits&#34; is a statement about aggregate flows among strata. It does not show that merit or peers are irrelevant to *which* candidate wins a given call, because the test has little power for that question.
+
+**Limitations (tagged).**
+
+- [single system] One class of organization: p. 320: &#34;To establish vacancy models as an approach with wide relevance, however, it is essential to go beyond one class of organizations.&#34; p. 319: &#34;Private corporations present a considerable challenge for vacancy models since little information on personnel is published systematically and the records are regarded as confidential.&#34;
+- [small data] p. 257: &#34;only samples of a hundred or so moves in a year were drawn&#34;; p. 258: &#34;The Markov chain is not an appropriate technique for analyzing mobility among a large number of states&#34;.
+- [imperfect measure] Attributes of men are unreliable (pp. 257–258, quoted above); job strata are defined by parish size; vacancy durations can only be &#34;inferred roughly&#34; from annual registers (p. 267).
+- [no model of mechanism] for the **selection step**: random selection is assumed (pp. 249–250). Ch. 12 adds that networks are left out: p. 298: &#34;Vacancy chain models are blind to particular ties among men. Moves between jobs for particular individuals are shaped by networks of acquaintances and sponsors which evolve over long periods in overlapping neighborhoods.&#34;
+- The vacancy model **is** fit to data, so [model not fit to data] does not apply to it. It does apply to the selection rule, which is assumed rather than fitted (Assistant judgment).
+- [outcome is not selection] Partly. The outcome is moves and chain lengths, which are mobility opportunities rather than contested selection among identified rivals (Assistant judgment).
+- p. 328: &#34;The models would be more cogent, particularly the postulates about constant transition probabilities for vacancies, if membership could be defined on criteria independent of matching and movement.&#34;
+
+**Channel / source (Assistant judgment).** Purely **SELECTION**, and specifically the **supply of scarce slots**: how many openings arise, at which level, and how they propagate. White separates &#34;how many slots open and where&#34; from &#34;who gets each slot&#34;, and models only the first. Source: the organization&#39;s job structure and its boundary events (deaths, retirements, new jobs). Peers enter only as competitors for the same vacancy, and as a network that White says his model ignores (ch. 12). For the dissertation, this is a direct precedent for treating the slot-generation process as separate from the scoring and selection of individuals.
+
+---
+EOF
+echo ok</summary>
+```bash
+cat >> "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/org_A_opportunity_structure_note.md" <<'EOF'
+
+## 2. White (1970): Chains of opportunity (vacancy chains)
+
+**Citation.** White, Harrison C. 1970. *Chains of Opportunity: System Models of Mobility in Organizations*. Cambridge, MA: Harvard University Press. DOI 10.4159/harvard.9780674437203. Chapters read (titles and page ranges checked in the PDFs and against Crossref chapter records; printed page = book page, no offset):
+
+| File | Chapter | Printed pages | Chapter DOI |
+|---|---|---|---|
+| `843/…c2.pdf` | Ch. 1, "Logic of Opportunity" | 1–20 | 10.4159/harvard.9780674437203.c2 |
+| `842/…c8.pdf` | Ch. 6, "Models for Three Organizations Compared" | 123–144 | 10.4159/harvard.9780674437203.c8 |
+| `840/…c14.pdf` | Ch. 10, "Careers, Attributes, and Replacements: Refining the Markov Chain" | 249–282 | 10.4159/harvard.9780674437203.c14 |
+| `841/…c16.pdf` | Ch. 12, "Localism, Elites, and Tenure Networks" | 298–316 | 10.4159/harvard.9780674437203.c16 |
+| `839/…c17.pdf` | Ch. 13, "Use and Meaning of Vacancy Models" | 317–330 | 10.4159/harvard.9780674437203.c17 |
+| `844/…toc.pdf` | Contents | xi–xv | — |
+
+Chapters 2–5 (the core model statement, coding rules, and the main Episcopal tests) are **not** in the library, so the model's formal details and the main fit statistics below come from how chapters 6, 10, and 13 describe them.
+
+**Data and setting.** United States. Three national Protestant clergies, the main source being the Episcopal church, plus the Methodist Episcopal church (North) and the Presbyterian church (North). The data are official annual registers and clerical directories, from which vacancy chains were traced job by job. The unit is the **vacancy move** (and the chain it forms), not the person. The sampled years named in the chapters read are: Episcopal 1912–1955 (p. 143); Methodist 1922–1923 and 1936–1937, and Presbyterian 1922–1923 and 1959–1960 (p. 123).
+
+- p. 5: "Churches and their priesthoods are surely the oldest example, and they are the main empirical basis for the work reported here."
+- p. 20: Part I "develops and applies a class of stratified probability models of vacancy chains for data spread over fifty years in three systems of men and jobs."
+- p. 257: "The systems of jobs for which vacancy chain models were designed may not exhibit more than a thousand or so moves a year. In any case, only samples of a hundred or so moves in a year were drawn for any of the clergies studied."
+- The seniority analysis uses 456 observed replacements (p. 275; Table 10.4, p. 276).
+
+**Design.** The model is built and tested as a system. Chains are traced from registers, vacancy transition probabilities among job strata (strata defined by parish size in members) are estimated, and predicted chain-length distributions and amounts of mobility are compared with observed ones across decades and across the three churches. Individual attributes (seniority) are then added to test for "replacement" and "quota" effects.
+
+- p. 2: "The strategy is to deal primarily with the overall structure of events in a mobility process rather than with the individual's motives. [...] A given event is usually caused in some sense by events remote from both it and the participants. These indirect structural effects are the target. Official records of the organizations studied are the source of data."
+
+**Main findings (verbatim).**
+
+- p. 1: "Conflicts among individuals over opportunities are central to many theories in social science. Less often noted is the regenerative nature of much opportunity. When one man buys a new car another man can acquire the first man's trade-in and, in turn, pass on his old car, and so on."
+- p. 1: "Mobility among fixed jobs is highly constrained; movements must dovetail in order to maintain the fixed numbers of occupants. Mobility is enmeshed in a network of contingencies."
+- p. 16: "The chain of movements of men is a series of pulls of a man out of one job into a more attractive one. It is natural to call this pull chain a vacancy chain; the vacancy is moving from the job appearing earliest in the chain to the one appearing last, whereas the dual series of men change jobs in the direction opposite to the flow of cause and effect. The beginning event—creation of a vacancy as through death of an incumbent—causes the chain; it generates the opportunity to move seized by the new incumbent, whose departure in turn generates a new opportunity, and so on."
+- p. 249: "Men's careers are by-products, not generators, of mobility in the vacancy model."
+- p. 271: "The vacancy model with random selection is a model of pure achievement in that sense. Where transition probabilities based on stratification by jobs predict mobility volume and career evolution, there is no role left for men's attributes. [...] It is difficult to see how to assign causal importance to a man's background characteristics in his mobility experience in such a system."
+- p. 277: "Seniority differences between predecessor and replacement in vacancy chains are distributed nearly randomly. There is little evidence for replacement effects in the attribute of seniority." And p. 281: "these last two sections suggest that it may not be very important to distinguish men by attributes when applying the Markov chain model to a large system. Random selection of men seems a reasonable first approximation."
+
+Further passages on why individual attributes do not determine mobility:
+
+- p. 18: "The planning of careers, either by the individual or the company, will not be a realistic endeavor except as it is keyed to the vacancy chains which are the operational constraint on mobility."
+- p. 255: "if the vacancy chain model is correct, careers are a poor way to assess mobility. Men's careers cut across the natural grain of mobility flows."
+- p. 281: "It is vacancies, not men, that are free to move between categories according to fixed transition probabilities. Careers of men are chaotic by-products of the dynamics of vacancies over long periods".
+- p. 317: "A system evolves by its own logic, neither controlled by putative central authorities nor amenable to manipulation by its members. [...] Mobility is neither a simple addition of local events nor the combination of men's careers."
+- p. 326: "New jobs create mobility rather than mobility calling forth new jobs as in turnover models."
+
+Centralization and elites:
+
+- p. 141: "the main question posed about, and the reason for, choosing the Methodist church was the effects of centralized authority on mobility. The answer seems to be that the effects are slight."
+- p. 308 (bishops): "Only 6.5 percent of the bishops' careers had lengths of 4 or less or 10 or greater, whereas 55 percent of either sample of priests had careers that short or that long." p. 309: "there is no evidence for an unusual degree of overlap in jobs between careers and vacancy chains." p. 310: "If there is an elite subsystem, it must take a different form from reservation of earmarked jobs for promising young men."
+
+**Mechanism / model.** Yes, a **formal stochastic model, estimated and tested against data.** It is a Markov chain on *vacancies* among job strata, with termination probabilities (recruitment from outside, or abolition of a job). The predicted quantities are chain lengths and the "multiplier matrix" \((I-Q)^{-1}\) linking boundary events (deaths, retirements, new jobs) to total internal moves.
+
+- p. 326: "Current amounts of internal movement are predicted from current sizes of a compound stream of transactions with the environment, namely, deaths of men plus births of jobs. [...] Parameters estimated from the data enter the prediction formula after a nonlinear transformation, as the multiplier matrix, the inverse matrix \((I - Q)^{-1}\)."
+- Fit: p. 141: "A simple Markov chain model works about as well for the Methodist church as it did for the Episcopal church, with the same definitions of three strata by job size." p. 144: the Presbyterian model "was consistent with data in each separate period, it lacked stability over time and, thus, does not seem very useful." p. 140: "The fit is good, but for these overall length distributions the binomial model would do as well."
+- Selection rule is **assumed random within a stratum** (the selection step is not modeled): p. 249: "The simplest assumption, random selection, is made about allocation of calls to men within a stratum, partly because no mechanism for distinguishing between men has been built into the vacancy model thus far." p. 250: "Principles for selection of the men "displaced" by vacancy arrivals in a stratum are not built in to the vacancy model."
+- p. 321: "Prediction of transition probabilities from first principles appears much more difficult. Interaction among overlapping negotiations must be considered as well as the criteria used in a given negotiation between candidate and vacant job."
+
+**Separating sorting from effects.** Not framed that way. White's claim is about the **locus of causation**: opportunity originates in exogenous vacancy creation and propagates through the job structure. Who fills each slot is treated as random within strata, and the replacement and quota tests (pp. 268–281) check whether attributes add predictive power beyond job stratum. Only seniority could be tested; the attribute data were otherwise too poor.
+
+- p. 257: "Unfortunately, the information on personal attributes did not prove very rewarding." p. 258: "The most interesting and relevant data is on education [...] However the data was too incomplete and unreliable to be useful."
+- (Assistant judgment) "Random selection fits" is a statement about aggregate flows among strata. It does not show that merit or peers are irrelevant to *which* candidate wins a given call, because the test has little power for that question.
+
+**Limitations (tagged).**
+
+- [single system] One class of organization: p. 320: "To establish vacancy models as an approach with wide relevance, however, it is essential to go beyond one class of organizations." p. 319: "Private corporations present a considerable challenge for vacancy models since little information on personnel is published systematically and the records are regarded as confidential."
+- [small data] p. 257: "only samples of a hundred or so moves in a year were drawn"; p. 258: "The Markov chain is not an appropriate technique for analyzing mobility among a large number of states".
+- [imperfect measure] Attributes of men are unreliable (pp. 257–258, quoted above); job strata are defined by parish size; vacancy durations can only be "inferred roughly" from annual registers (p. 267).
+- [no model of mechanism] for the **selection step**: random selection is assumed (pp. 249–250). Ch. 12 adds that networks are left out: p. 298: "Vacancy chain models are blind to particular ties among men. Moves between jobs for particular individuals are shaped by networks of acquaintances and sponsors which evolve over long periods in overlapping neighborhoods."
+- The vacancy model **is** fit to data, so [model not fit to data] does not apply to it. It does apply to the selection rule, which is assumed rather than fitted (Assistant judgment).
+- [outcome is not selection] Partly. The outcome is moves and chain lengths, which are mobility opportunities rather than contested selection among identified rivals (Assistant judgment).
+- p. 328: "The models would be more cogent, particularly the postulates about constant transition probabilities for vacancies, if membership could be defined on criteria independent of matching and movement."
+
+**Channel / source (Assistant judgment).** Purely **SELECTION**, and specifically the **supply of scarce slots**: how many openings arise, at which level, and how they propagate. White separates "how many slots open and where" from "who gets each slot", and models only the first. Source: the organization's job structure and its boundary events (deaths, retirements, new jobs). Peers enter only as competitors for the same vacancy, and as a network that White says his model ignores (ch. 12). For the dissertation, this is a direct precedent for treating the slot-generation process as separate from the scoring and selection of individuals.
+
+---
+EOF
+echo ok
+```
+
+```
+ok
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Two page cites need tightening (a quote spans pp. 326–327, another pp. 309–310, and "The fit is good" is on p. 141 not 140). Fixing those.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2"><details>
+<summary>Tool use: **edit_file_v2** • Edit file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/org_A_opportunity_structure_note.md</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2"><details>
+<summary>Tool use: **edit_file_v2** • Edit file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/org_A_opportunity_structure_note.md</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+White section saved. Now Stewman & Konda (49-page PDF); I'll start with the opening pages to find the page offset and the core argument.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="unknown" data-tool-name="update_current_step"><details>
+<summary>Tool use: **update_current_step**</summary>
+An unknown error occurred
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /tmp/orgA/stewman.txt</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Printed page = PDF page + 636 (pp. 637–685). Continuing through the results sections.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /tmp/orgA/stewman.txt</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/orgA; grep -n -E &#34;^######## PDF|^[A-H]\. |^I[VX]\.|^V\.|^VI\.|CONCLU|SUMMARY|Accelera|Star|N = |cohorts? of&#34; stewman.txt | sed -n &#39;1,200p&#39;</summary>
+```bash
+cd /tmp/orgA; grep -n -E "^######## PDF|^[A-H]\. |^I[VX]\.|^V\.|^VI\.|CONCLU|SUMMARY|Accelera|Star|N = |cohorts? of" stewman.txt | sed -n '1,200p'
+```
+
+```
+1:######## PDF p. 1
+401:A. HierarchicalRatios and OrganizationalVenturis
+2049:V..0 ..
+2437:B. Managerial Preferences
+2592:N = 204
+2597:N = 46
+2603:N = 23'
+3051:C. Stars or Exceptional Persons
+3067:Stardom as Reflected in Mean Waiting Time before Promotion
+3080:Stardom as Reflected in Managerial Preferences
+3555:Chances of Reaching the Top: Stars
+3758:D. Cohorts
+3790:Four CareerAccelerationPrinciples
+3919:Tests of the Acceleration Principles
+3924:only. Aggregating cohorts into small (S), N = 30-49, medium (M), N =
+3925:50-79, and large (L), N = 80+ (see the three right-hand columns), we find
+4222:NOTE.-Small: N = 30-49; medium: N = 50-79; large: N =80 +.
+4302:IV. SAMPLING BIAS: RETROSPECTIVE AND PANEL DATA
+4941:VI...........
+4971:V. CONCLUSION
+5028:5. Accelerationprinciples for small cohorts: (a) if two cohorts experience
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/orgA; awk &#39;NR&gt;=2000 &amp;&amp; NR&lt;=5204&#39; stewman.txt | grep -v -E &#39;^\s*$&#39; | awk &#39;length($0)&gt;25 || /PDF p/&#39; &gt; stew_text2.txt; wc -l stew_text2.txt</summary>
+```bash
+cd /tmp/orgA; awk 'NR>=2000 && NR<=5204' stewman.txt | grep -v -E '^\s*$' | awk 'length($0)>25 || /PDF p/' > stew_text2.txt; wc -l stew_text2.txt
+```
+
+```
+     737 stew_text2.txt
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /tmp/orgA/stew_text2.txt</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/orgA; awk &#39;NR&gt;=1590&#39; stewman.txt | grep -v -E &#39;^\s*$&#39; | awk &#39;length($0)&gt;30 || /PDF p/&#39; &gt; stew_text2.txt; wc -l stew_text2.txt</summary>
+```bash
+cd /tmp/orgA; awk 'NR>=1590' stewman.txt | grep -v -E '^\s*$' | awk 'length($0)>30 || /PDF p/' > stew_text2.txt; wc -l stew_text2.txt
+```
+
+```
+     765 stew_text2.txt
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Most of Stewman & Konda is read. I need exact wording for a few passages that my line filter clipped (footnotes and the conclusion's footnote on how many organizations each finding rests on).
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/orgA; for p in &#34;In the 1980 article&#34; &#34;For most items in the following list&#34; &#34;selection estimates \(X&#34; &#34;mortality is 4&#34; &#34;growing very fast \(&#34; &#34;Thus once again there&#34; &#34;However, one set of plausible&#34; &#34;but the underlying structures&#34; &#34;the bulk of recruits&#34; &#34;as well as from careerstreams&#34; &#34;detailed mathematical analysis&#34; &#34;fixed and a cohort&#34; &#34;talented individuals&#34; &#34;a 2 to 1&#34; ; do echo &#34;=== $p&#34;; grep -n -A6 -E &#34;$p&#34; stewman.txt | head -12; done</summary>
+```bash
+cd /tmp/orgA; for p in "In the 1980 article" "For most items in the following list" "selection estimates \(X" "mortality is 4" "growing very fast \(" "Thus once again there" "However, one set of plausible" "but the underlying structures" "the bulk of recruits" "as well as from careerstreams" "detailed mathematical analysis" "fixed and a cohort" "talented individuals" "a 2 to 1" ; do echo "=== $p"; grep -n -A6 -E "$p" stewman.txt | head -12; done
+```
+
+```
+=== In the 1980 article
+2464:14 In the 1980 articlewe were interestedin predictingstaff flowsand thereforeestimated
+2465-the managerialpreferencedistributionfrom1950-59data and tested the modelfor 1960-69
+2466-staff flows.
+2467-
+2468-660
+2469-
+2470-######## PDF p. 25
+=== For most items in the following list
+5053:For most items in the following list, the number of OLMs on which the finding rests is
+5054-given in parentheses.
+5055-
+5056-682
+5057-
+5058-######## PDF p. 47
+5059-OrganizationalLabor Markets
+=== selection estimates \(X
+2453:10. The selection estimates (X's) per grade form a probability distribution
+2454-of managerial preferences across seniority levels, and they operate when
+2455-there is an available vacancy. We point out three aspects of these data:
+2456-(1) the higher the grade, the narrower the selection band; (2) with the
+2457-exception of grade 2, the higher the grade, the higher the peaks of the
+2458-13 We have also examinedresults holding the promotiondifferences(6's) constant and
+2459-looking at necessaryshifts in exit probabilitiesor grade ratios, for careerpaths having
+=== mortality is 4
+5048:4. Growth effects far outweigh mortality effects (mortality is 470 of
+5049-growth) (one OLM).
+5050-5. Unless an organization's labor market is growing very fast ( O%100)
+5051-or the organization is a new one with a young labor force, we generally
+5052-21
+5053-For most items in the following list, the number of OLMs on which the finding rests is
+5054-given in parentheses.
+=== growing very fast \(
+5050:5. Unless an organization's labor market is growing very fast ( O%100)
+5051-or the organization is a new one with a young labor force, we generally
+5052-21
+5053-For most items in the following list, the number of OLMs on which the finding rests is
+5054-given in parentheses.
+5055-
+5056-682
+=== Thus once again there
+3941:Thus once again there is an even further advantage for the stayers in small
+3942-cohorts. The effects of exits from the OLM may be seen by comp
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Writing the Stewman & Konda section (AJS 88(4): 637–685, DOI 10.1086/227728, confirmed on Crossref).
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cat &gt;&gt; &#34;/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/org_A_opportunity_structure_note.md&#34; &lt;&lt;&#39;EOF&#39;
+
+## 3. Stewman &amp; Konda (1983): Careers and organizational labor markets
+
+**Citation.** Stewman, Shelby, and Suresh L. Konda. 1983. &#34;Careers and Organizational Labor Markets: Demographic Models of Organizational Behavior.&#34; *American Journal of Sociology* 88(4): 637–685. DOI 10.1086/227728. Crossref confirms volume 88, issue 4, pp. 637–685, January 1983. The PDF is the 49-page article, with no cover page; **printed page = PDF page + 636**. Several tables and figures (pp. 654, 674, 678) did not survive text extraction, so I quote only numbers that appear in the prose.
+
+**Data and setting.** United States. Managerial &#34;organizational labor markets&#34; (OLMs) in four organizations: a private firm (data from Young and Vassiliou 1974), a state police force (the authors&#39; own data), a military hierarchy (Forbes 1971), and the top of the U.S. federal civil service (GS 15–18). Grade ratios and vacancy chains are compared across these. Everything on managerial preferences, stars, and cohorts uses **one** organization, the state police (OLM 2): all recruitment cohorts, 1934–1970, five grades. The unit is the individual career within grade × seniority cells, with promotions counted against vacancies.
+
+- p. 641: &#34;The data for the analysis of grade ratios and vacancy chains pertain to managerial OLMs in four organizations-a private corporation, a state police force, a military unit, and the U.S. Civil Service. [...] In the remainder of the analysis, the data are limited to the lower level and managerial hierarchy of the state police organization and include all recruitment cohorts and the full labor market processes (i.e., continuous organizational operations) from 1934 to 1970. The organizations were chosen, not to provide an exhaustive range or a sampling, but because of the availability of data.&#34;
+- Counts in the text: 18 entry cohorts, 1934–1960, grouped as small (N = 30–49), medium (50–79), and large (80+) (p. 673); 641 careers ending in grade 1 without promotion (p. 666); 95 people reaching G4, of whom 54 reached G5 (p. 667).
+
+**Design.** An analytic supply-and-demand (vacancy) model, combined with descriptive tests. Predicted orderings of promotion chances across grades come from grade ratios, and are checked against observed promotion probabilities in three OLMs. In OLM 2, careers are decomposed by gateway, by highest grade attained (&#34;stars&#34;), and by cohort size. Retrospective and panel samples are compared with the full labor-market data to measure sampling bias.
+
+**Main findings (verbatim).**
+
+- p. 637 (abstract): &#34;It is commonly held that an individual&#39;s career prospects decline the higher he or she rises in an organization. In many cases this is not true; this paper identifies four organizational microstructures and two triggering mechanisms that provide clues for assessing one&#39;s career prospects in different organizations. The four microstructures are grade ratios, vacancy chains, managerial selection preferences, and cohort size. Growth and exit rates are important triggering mechanisms prompting these microstructures into action.&#34;
+- p. 650: &#34;We point out that, contrary to commonly held opinion, a pyramidal grade structure does not imply declining career chances as one proceeds up the hierarchy.&#34; The test: &#34;Of the eight comparisons, seven are in the expected direction&#34; (p. 650). Only the military OLM shows &#34;the &#34;traditional&#34; declining promotion chances&#34; (p. 651).
+- p. 655: &#34;Even at the low growth rate of 3%, growth generally accounts for 20% or more of the promotion probability. Thus, should an organization shift from 3% growth to no growth, a drop of 20% or more in promotion chances may be expected. And for organizations dropping from a 10% growth rate to no growth, a decrease in promotion chances in the range of 40%-70% is indicated.&#34; Also p. 655: &#34;In OLM 2, mortality accounted for 2% of entering vacancies over a 21-year period, while growth generated 54% of the vacancies.&#34; And p. 656: &#34;unless an organization&#39;s labor market is growing very fast or the organization is a new one with a young labor force, we generally expect exit effects on promotion to be greater than those of growth.&#34;
+- p. 662: &#34;Thus, when the structures reinforce one another, over 90% of the careers accelerate, in contrast to the 54% doing so when the structures oppose one another.&#34;
+- pp. 666, 668 (baseline odds in OLM 2): &#34;we find a 36% chance of reaching grade 2, a 26% chance to reach grade 3, a 10% chance of being promoted as high as grade 4, and a 5% chance of reaching the top&#34; (p. 666). &#34;[O]nce he passes the Venturi at gateway 4, the chances change dramatically to 57%, or from 1 in 5 to better than even&#34; (p. 668).
+- p. 672 (cohort → star): &#34;Moreover, part of the star characteristic attributed to the individuals in these cases should instead be attributed to a cohort effect. It is easy to understand how the creation of a star in the form of a cohort effect might become attached to or identified with the person, for cohorts are not directly observable, only individual stars are. The &#34;brightness&#34; attributed to the star is therefore not a product of the individual&#39;s genius alone but is, in part, and perhaps in large part, a reflection of the underlying social process or social structure.&#34;
+
+Cohort evidence (OLM 2):
+
+- p. 671: &#34;for any two cohorts experiencing the same sequence of vacancies-whether the vacancies are increasing, fixed, decreasing, or oscillating-the smaller cohort will have more chances of promotion at each seniority level and will therefore move earlier.&#34;
+- p. 673: &#34;we find that 27% of the individuals in small cohorts have reached G2, 15% of those from medium sized cohorts have done so, and 20% of those from large cohorts, that is, S &gt; L &gt; M. [...] The relation is not monotone but parabolic&#34;. Time to reach G5 (p. 675): &#34;For small cohorts, it is 21 years; for large ones, 23 years; and for medium-sized ones, 25 years&#34;.
+- p. 675: &#34;the acceleration principles do not appear to carry over in terms of proportion of staff eventually reaching either the first promotion, G2, or the top, G5. The proportions are almost identical. Thus, for this OLM the cohort accelerators work in terms of speedier career mobility, with all of its associated recognition, but the relative turtles eventually also get there.&#34;
+
+**Mechanism / model.** Yes, a **formal vacancy-driven promotion model** (from Konda and Stewman 1980, built on White 1970 and Bartholomew 1973), and it is **partly fit to data**. The selection step is explicit: the chance of promotion is vacancies times a managerial preference weight, divided by the competitors at the same seniority.
+
+- p. 642: &#34;in the second type of process, an individual&#39;s probability of promotion is conditional on the number of available job vacancies, a managerial preference distribution on attributes, given a vacancy and the individual&#39;s relative attribute standing in comparison with the other persons being considered to fill a vacancy. Hence, if the managerial preferences are stable, a person&#39;s promotion chances will depend on the ratio of that person and his competitors to the number of job vacancies.&#34;
+- p. 644: &#34;Promotions are assumed to be conditional on (1) the number of vacancies in the grade, vj(t); (2) a managerial selection probability distribution Xji(s), where s represents seniority within grade i; and (3) the number of persons in grade i with seniority s at time t, ni(s, t).&#34; Equation (1) is garbled in the text layer; it reads as \(p_{ij}(s,t) = v_j(t)\,\lambda_{ji}(s)/n_i(s,t)\). The OCR renders λ as &#34;X&#34;, and I reconstructed the equation from the definitions given.
+- Vacancies propagate (pp. 648–649, eqs. 2–3): promotion from grade i equals the sum over higher grades of grade ratio × (exit probability + growth allocation × growth rate). The paper calls this the &#34;multiple grade ratio&#34; (MGR).
+- Fit and estimation: the preference distribution is **estimated** from data. p. 660: &#34;we include the 1950-70 managerial preference estimates, which capture 99% of the career selections for the organizational staff working in 1970&#34;; and n. 14 (p. 660): &#34;In the 1980 article we were interested in predicting staff flows and therefore estimated the managerial preference distribution from 1950-59 data and tested the model for 1960-69 staff flows.&#34; In this paper the cross-organization tests are **ordinal sign predictions** (seven of eight correct), not a likelihood fit.
+- External hiring (p. 664): &#34;while exits and growth increase promotion chances, external recruitment decreases them and a shift in external recruitment will negate a corresponding, equivalent shift in either exits or growth.&#34;
+- Side note: n. 4 (p. 642) says &#34;Rosenbaum (1979) tested no model&#34;. This refers to Rosenbaum&#39;s 1979 *AJS* paper on growth and contraction, not the *ASQ* tournament paper in §1, but the same judgment applies to both.
+
+**Separating sorting from effects.** Partial, and argued more than identified. The authors set individual heterogeneity (&#34;stars&#34;) against structural effects and argue that part of the apparent star quality is a cohort-size effect. They do not separate the two statistically, and they concede that talent varies across cohorts.
+
+- p. 665: &#34;The structural effects are clearly still operating alongside the individual heterogeneity.&#34;
+- p. 673: &#34;the acceleration effect assumes an equal talent distribution in order for the selections on experience (X&#39;s) to hold. And these data indicate that the 1942 cohort, which had no differences in age distribution or military leaves from surrounding cohorts, simply did not have its share of talented individuals.&#34;
+- Sampling as an identification problem (p. 680): &#34;we must sample from the structures. Such a conclusion seems quite elementary, but it is not often heeded in social science research. The result is that individual variation is treated at length, but the underlying structures are not identified.&#34; Measured bias (p. 680): &#34;Prospective or panel data, on the other hand, produce extremely large selection biases (48%-49%) as well as quite large promotion biases (24%-30%).&#34;
+
+**Limitations (tagged).**
+
+- [single system] Stars, cohorts, and preferences rest on one state police OLM. The conclusion marks this item by item (p. 682): &#34;For most items in the following list, the number of OLMs on which the finding rests is given in parentheses&#34;; findings 9–19 are each &#34;(one OLM)&#34;. Organizations were chosen &#34;because of the availability of data&#34; (p. 641).
+- [small data] 18 cohorts of 30 to 80+ entrants; G5 results rest on few completed careers (p. 675): &#34;With completed careers predominant in only 4 small cohorts, 2 large ones, and 1 medium-sized one, we caution against generalizing about the equality of percentages at G5.&#34;
+- [imperfect measure] Seniority within grade is the only attribute in the preference distribution. &#34;Stardom&#34; is defined after the fact by the highest grade reached (p. 665: &#34;ranking stardom by the highest grade attained&#34;). Exit probabilities for OLM 1 are backed out from the model (Table 6 note, p. 651: &#34;we have used eq. (3) to estimate them&#34;).
+- [model not fit to data] Partly. The cross-organization tests are sign predictions from grade ratios. Full estimation and out-of-sample testing are in Konda and Stewman (1980), not here (p. 660, n. 14).
+- [no model of mechanism] Does not apply to the structure. It does apply to *why* managers prefer certain seniorities, and to the &#34;star halo&#34;, which is described but not modeled (p. 672) (Assistant judgment).
+- The outcome **is** selection (promotion against vacancies), so [outcome is not selection] does not apply.
+
+**Channel / source (Assistant judgment).** Mainly **SELECTION**, with an explicit two-part form that matches the dissertation&#39;s &#34;score, then select&#34;. Structure fixes the number of slots (vacancies from exits, growth, and chains, filtered by grade ratios). A preference distribution then scores candidates (here by seniority), and the result is divided by the number of competitors. **Peers** enter directly as the denominator, \(n_i(s,t)\): the size of one&#39;s own cohort changes one&#39;s chance at a fixed level of merit. The star-halo argument (p. 672) touches **EVALUATION**: an early, cohort-driven promotion is read as individual brilliance. This is the closest of the five sources to a fitted, multi-level model of selection among competitors, but it covers one organization and uses seniority as the only score.
+
+---
+EOF
+echo ok</summary>
+```bash
+cat >> "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/org_A_opportunity_structure_note.md" <<'EOF'
+
+## 3. Stewman & Konda (1983): Careers and organizational labor markets
+
+**Citation.** Stewman, Shelby, and Suresh L. Konda. 1983. "Careers and Organizational Labor Markets: Demographic Models of Organizational Behavior." *American Journal of Sociology* 88(4): 637–685. DOI 10.1086/227728. Crossref confirms volume 88, issue 4, pp. 637–685, January 1983. The PDF is the 49-page article, with no cover page; **printed page = PDF page + 636**. Several tables and figures (pp. 654, 674, 678) did not survive text extraction, so I quote only numbers that appear in the prose.
+
+**Data and setting.** United States. Managerial "organizational labor markets" (OLMs) in four organizations: a private firm (data from Young and Vassiliou 1974), a state police force (the authors' own data), a military hierarchy (Forbes 1971), and the top of the U.S. federal civil service (GS 15–18). Grade ratios and vacancy chains are compared across these. Everything on managerial preferences, stars, and cohorts uses **one** organization, the state police (OLM 2): all recruitment cohorts, 1934–1970, five grades. The unit is the individual career within grade × seniority cells, with promotions counted against vacancies.
+
+- p. 641: "The data for the analysis of grade ratios and vacancy chains pertain to managerial OLMs in four organizations-a private corporation, a state police force, a military unit, and the U.S. Civil Service. [...] In the remainder of the analysis, the data are limited to the lower level and managerial hierarchy of the state police organization and include all recruitment cohorts and the full labor market processes (i.e., continuous organizational operations) from 1934 to 1970. The organizations were chosen, not to provide an exhaustive range or a sampling, but because of the availability of data."
+- Counts in the text: 18 entry cohorts, 1934–1960, grouped as small (N = 30–49), medium (50–79), and large (80+) (p. 673); 641 careers ending in grade 1 without promotion (p. 666); 95 people reaching G4, of whom 54 reached G5 (p. 667).
+
+**Design.** An analytic supply-and-demand (vacancy) model, combined with descriptive tests. Predicted orderings of promotion chances across grades come from grade ratios, and are checked against observed promotion probabilities in three OLMs. In OLM 2, careers are decomposed by gateway, by highest grade attained ("stars"), and by cohort size. Retrospective and panel samples are compared with the full labor-market data to measure sampling bias.
+
+**Main findings (verbatim).**
+
+- p. 637 (abstract): "It is commonly held that an individual's career prospects decline the higher he or she rises in an organization. In many cases this is not true; this paper identifies four organizational microstructures and two triggering mechanisms that provide clues for assessing one's career prospects in different organizations. The four microstructures are grade ratios, vacancy chains, managerial selection preferences, and cohort size. Growth and exit rates are important triggering mechanisms prompting these microstructures into action."
+- p. 650: "We point out that, contrary to commonly held opinion, a pyramidal grade structure does not imply declining career chances as one proceeds up the hierarchy." The test: "Of the eight comparisons, seven are in the expected direction" (p. 650). Only the military OLM shows "the "traditional" declining promotion chances" (p. 651).
+- p. 655: "Even at the low growth rate of 3%, growth generally accounts for 20% or more of the promotion probability. Thus, should an organization shift from 3% growth to no growth, a drop of 20% or more in promotion chances may be expected. And for organizations dropping from a 10% growth rate to no growth, a decrease in promotion chances in the range of 40%-70% is indicated." Also p. 655: "In OLM 2, mortality accounted for 2% of entering vacancies over a 21-year period, while growth generated 54% of the vacancies." And p. 656: "unless an organization's labor market is growing very fast or the organization is a new one with a young labor force, we generally expect exit effects on promotion to be greater than those of growth."
+- p. 662: "Thus, when the structures reinforce one another, over 90% of the careers accelerate, in contrast to the 54% doing so when the structures oppose one another."
+- pp. 666, 668 (baseline odds in OLM 2): "we find a 36% chance of reaching grade 2, a 26% chance to reach grade 3, a 10% chance of being promoted as high as grade 4, and a 5% chance of reaching the top" (p. 666). "[O]nce he passes the Venturi at gateway 4, the chances change dramatically to 57%, or from 1 in 5 to better than even" (p. 668).
+- p. 672 (cohort → star): "Moreover, part of the star characteristic attributed to the individuals in these cases should instead be attributed to a cohort effect. It is easy to understand how the creation of a star in the form of a cohort effect might become attached to or identified with the person, for cohorts are not directly observable, only individual stars are. The "brightness" attributed to the star is therefore not a product of the individual's genius alone but is, in part, and perhaps in large part, a reflection of the underlying social process or social structure."
+
+Cohort evidence (OLM 2):
+
+- p. 671: "for any two cohorts experiencing the same sequence of vacancies-whether the vacancies are increasing, fixed, decreasing, or oscillating-the smaller cohort will have more chances of promotion at each seniority level and will therefore move earlier."
+- p. 673: "we find that 27% of the individuals in small cohorts have reached G2, 15% of those from medium sized cohorts have done so, and 20% of those from large cohorts, that is, S > L > M. [...] The relation is not monotone but parabolic". Time to reach G5 (p. 675): "For small cohorts, it is 21 years; for large ones, 23 years; and for medium-sized ones, 25 years".
+- p. 675: "the acceleration principles do not appear to carry over in terms of proportion of staff eventually reaching either the first promotion, G2, or the top, G5. The proportions are almost identical. Thus, for this OLM the cohort accelerators work in terms of speedier career mobility, with all of its associated recognition, but the relative turtles eventually also get there."
+
+**Mechanism / model.** Yes, a **formal vacancy-driven promotion model** (from Konda and Stewman 1980, built on White 1970 and Bartholomew 1973), and it is **partly fit to data**. The selection step is explicit: the chance of promotion is vacancies times a managerial preference weight, divided by the competitors at the same seniority.
+
+- p. 642: "in the second type of process, an individual's probability of promotion is conditional on the number of available job vacancies, a managerial preference distribution on attributes, given a vacancy and the individual's relative attribute standing in comparison with the other persons being considered to fill a vacancy. Hence, if the managerial preferences are stable, a person's promotion chances will depend on the ratio of that person and his competitors to the number of job vacancies."
+- p. 644: "Promotions are assumed to be conditional on (1) the number of vacancies in the grade, vj(t); (2) a managerial selection probability distribution Xji(s), where s represents seniority within grade i; and (3) the number of persons in grade i with seniority s at time t, ni(s, t)." Equation (1) is garbled in the text layer; it reads as \(p_{ij}(s,t) = v_j(t)\,\lambda_{ji}(s)/n_i(s,t)\). The OCR renders λ as "X", and I reconstructed the equation from the definitions given.
+- Vacancies propagate (pp. 648–649, eqs. 2–3): promotion from grade i equals the sum over higher grades of grade ratio × (exit probability + growth allocation × growth rate). The paper calls this the "multiple grade ratio" (MGR).
+- Fit and estimation: the preference distribution is **estimated** from data. p. 660: "we include the 1950-70 managerial preference estimates, which capture 99% of the career selections for the organizational staff working in 1970"; and n. 14 (p. 660): "In the 1980 article we were interested in predicting staff flows and therefore estimated the managerial preference distribution from 1950-59 data and tested the model for 1960-69 staff flows." In this paper the cross-organization tests are **ordinal sign predictions** (seven of eight correct), not a likelihood fit.
+- External hiring (p. 664): "while exits and growth increase promotion chances, external recruitment decreases them and a shift in external recruitment will negate a corresponding, equivalent shift in either exits or growth."
+- Side note: n. 4 (p. 642) says "Rosenbaum (1979) tested no model". This refers to Rosenbaum's 1979 *AJS* paper on growth and contraction, not the *ASQ* tournament paper in §1, but the same judgment applies to both.
+
+**Separating sorting from effects.** Partial, and argued more than identified. The authors set individual heterogeneity ("stars") against structural effects and argue that part of the apparent star quality is a cohort-size effect. They do not separate the two statistically, and they concede that talent varies across cohorts.
+
+- p. 665: "The structural effects are clearly still operating alongside the individual heterogeneity."
+- p. 673: "the acceleration effect assumes an equal talent distribution in order for the selections on experience (X's) to hold. And these data indicate that the 1942 cohort, which had no differences in age distribution or military leaves from surrounding cohorts, simply did not have its share of talented individuals."
+- Sampling as an identification problem (p. 680): "we must sample from the structures. Such a conclusion seems quite elementary, but it is not often heeded in social science research. The result is that individual variation is treated at length, but the underlying structures are not identified." Measured bias (p. 680): "Prospective or panel data, on the other hand, produce extremely large selection biases (48%-49%) as well as quite large promotion biases (24%-30%)."
+
+**Limitations (tagged).**
+
+- [single system] Stars, cohorts, and preferences rest on one state police OLM. The conclusion marks this item by item (p. 682): "For most items in the following list, the number of OLMs on which the finding rests is given in parentheses"; findings 9–19 are each "(one OLM)". Organizations were chosen "because of the availability of data" (p. 641).
+- [small data] 18 cohorts of 30 to 80+ entrants; G5 results rest on few completed careers (p. 675): "With completed careers predominant in only 4 small cohorts, 2 large ones, and 1 medium-sized one, we caution against generalizing about the equality of percentages at G5."
+- [imperfect measure] Seniority within grade is the only attribute in the preference distribution. "Stardom" is defined after the fact by the highest grade reached (p. 665: "ranking stardom by the highest grade attained"). Exit probabilities for OLM 1 are backed out from the model (Table 6 note, p. 651: "we have used eq. (3) to estimate them").
+- [model not fit to data] Partly. The cross-organization tests are sign predictions from grade ratios. Full estimation and out-of-sample testing are in Konda and Stewman (1980), not here (p. 660, n. 14).
+- [no model of mechanism] Does not apply to the structure. It does apply to *why* managers prefer certain seniorities, and to the "star halo", which is described but not modeled (p. 672) (Assistant judgment).
+- The outcome **is** selection (promotion against vacancies), so [outcome is not selection] does not apply.
+
+**Channel / source (Assistant judgment).** Mainly **SELECTION**, with an explicit two-part form that matches the dissertation's "score, then select". Structure fixes the number of slots (vacancies from exits, growth, and chains, filtered by grade ratios). A preference distribution then scores candidates (here by seniority), and the result is divided by the number of competitors. **Peers** enter directly as the denominator, \(n_i(s,t)\): the size of one's own cohort changes one's chance at a fixed level of merit. The star-halo argument (p. 672) touches **EVALUATION**: an early, cohort-driven promotion is read as individual brilliance. This is the closest of the five sources to a fitted, multi-level model of selection among competitors, but it covers one organization and uses seniority as the only score.
+
+---
+EOF
+echo ok
+```
+
+```
+ok
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Stewman & Konda saved. Now Podolny (1993).
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="unknown" data-tool-name="update_current_step"><details>
+<summary>Tool use: **update_current_step**</summary>
+An unknown error occurred
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/orgA; grep -v -E &#39;^\s*$&#39; podolny.txt | awk &#39;length($0)&gt;30 || /PDF p/&#39; &gt; pod2.txt; wc -l pod2.txt</summary>
+```bash
+cd /tmp/orgA; grep -v -E '^\s*$' podolny.txt | awk 'length($0)>30 || /PDF p/' > pod2.txt; wc -l pod2.txt
+```
+
+```
+    1469 pod2.txt
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /tmp/orgA/pod2.txt</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Printed page = PDF page + 828. Continuing with Podolny's status measure, regressions, and conclusion.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /tmp/orgA/pod2.txt</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/orgA; grep -n -B2 -A4 -E &#34;does drop from|Bonacich|eigenvector|underbid the$|underbid the latter|the following condition|1,200 percent|inequality \(1\)&#34; podolny.txt | head -80; sed -n &#39;/######## PDF p. 41/,/######## PDF p. 43/p&#39; podolny.txt | grep -v -E &#39;^\s*$&#39; | head -90</summary>
+```bash
+cd /tmp/orgA; grep -n -B2 -A4 -E "does drop from|Bonacich|eigenvector|underbid the$|underbid the latter|the following condition|1,200 percent|inequality \(1\)" podolny.txt | head -80; sed -n '/######## PDF p. 41/,/######## PDF p. 43/p' podolny.txt | grep -v -E '^\s*$' | head -90
+```
+
+```
+1470-banks. If we refer back to table 3, we see that the difference in status
+1471-between, for example, second-ranked First Boston and fourteenthranked Kidder Peabody is 1.03 . The difference between these two banks
+1472:translates into an ability or willingness of the former to underbid the
+1473-latter by eight basis points.
+1474--
+1475-
+1476-858
+--
+2081-Column B of table 3 presents the results. The most noteworthy finding
+2082-is that the effect of status remains significant even after the inclusion of
+2083:the variable for volume, though the apparent status effect does drop from
+2084-862
+2085-
+2086-######## PDF p. 35
+2087-Status-based Model
+--
+2197-latter.
+2198-Considered in conjunction with the results from columns A and B in
+2199:table 3, we observe that higher-status banks on average underbid the
+2200-lower-status banks; however, for the larger issues, the latter must underbid the former, and, as the qualitative evidence suggests, they must do so
+2201-from a relatively disadvantageous cost structure. The result is significant
+2202-because it illustrates the fact that for the larger, more difficult issues,
+2203-status is relevant not only to the investor and potential syndicate members but to the issuer's decision as well.
+--
+2371-######## PDF p. 42
+2372-American Journal of Sociology
+2373:status measures for relational data on status, Bonacich's (1987) c(a, 13)
+2374-measure. Formally, the measure is defined as follows:
+2375-L
+2376-
+2377-_00
+--
+2412-of Business, Stanford, Calif.
+2413-
+2414:17 Bonacich's c(ot, 1) measure can alternatively be one of centrality or status. Bonacich
+2415-(1987) notes that the interpretation of the measure is contingent upon the nature of the
+2416-ties. If the ties are symmetrical, the measure is more appropriately one of centrality; if
+2417-the ties are asymmetrical, the measure is more appropriately interpreted as one of
+2418-status.
+--
+2432-Data." American Sociological Review 48:386-98.
+2433-Blau, Peter M. (1964) 1989. Exchange 
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/orgA; sed -n &#39;2086,2100p&#39; podolny.txt; grep -n -A12 &#34;span covered by the SDC data base&#34; podolny.txt | head -20</summary>
+```bash
+cd /tmp/orgA; sed -n '2086,2100p' podolny.txt; grep -n -A12 "span covered by the SDC data base" podolny.txt | head -20
+```
+
+```
+######## PDF p. 35
+Status-based Model
+- .080 to -.062.
+The volume coefficient is negative and statistically
+significant at the .05 level. The relative magnitudes of the volume and
+status coefficients provide insight into how much a lower-status bank
+would have to exceed a higher-status bank in annual volume in order to
+bid the same as the higher-status actor. The status coefficient is 10 times
+that of the coefficient for volume history, implying that a given bank
+would theoretically have to underwrite exp(10) = 22026.5 times the volume of a bank one unit higher in status in order to compensate for the
+preexisting status differential. When considered in these terms, the .6
+unit difference in status between fifth-ranked Salomon Brothers and
+sixth-ranked Lehman Kuhn Loeb clearly seems impenetrable to a strategy of "eating" deals to signal quality. Even a .005 unit difference in
+status, such as that between seventh-ranked Paine Webber and eighthranked Prudential Bache Securities, seems difficult to overcome simply
+by increasing volume.
+2307:span covered by the SDC data base. During this period, there were 180
+2308-tombstones for investment grade debt issues. Having established the status of banks in this initial period, we can explore how the flow of issuers
+2309-becomes distributed across the status positions in the following years.
+2310-One might argue that to assess the effects of status in the later years
+2311-of our sample, we should collect not just the 1981 data, but also data
+2312-from the following years. However, there are two reasons not to do so,
+2313-one practical and the other theoretical. Practically, collection of such
+2314-additional data imposes considerable cost and time demands, and there
+2315-are good reasons to suspect that the returns from such additional data
+2316-collection would be small. The fact that major shifts in status position
+2317-are relatively rare events means that changes in any given bank's status
+2318-over this period are likely 
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/orgA; grep -n -B1 -A4 &#34;ASSUMPTION 3&#34; podolny.txt; grep -n -B3 -A6 &#34;reproduces the hierarchical ordering&#34; podolny.txt; grep -n -B2 -A3 &#34;outcomes than prior status|positions in the market one year|sociological lens with which&#34; podolny.txt</summary>
+```bash
+cd /tmp/orgA; grep -n -B1 -A4 "ASSUMPTION 3" podolny.txt; grep -n -B3 -A6 "reproduces the hierarchical ordering" podolny.txt; grep -n -B2 -A3 "outcomes than prior status|positions in the market one year|sociological lens with which" podolny.txt
+```
+
+```
+272-ASSUMPTION 2.-Market status is a signal of quality on which consumers can and do rely for their decisions.
+273:ASSUMPTION 3.-A
+274-producer's relations with others in the market
+275-mediates the relationship between status and quality by creating inertial
+276-tendencies in the formation of exchange relations and by biasing evaluation in the direction of the status of those to whom the producer is tied.
+277-
+1079-prices charged by a high-status producer and a low-status producer, Sh
+1080-and s, are the status of the two producers, and 0 is the premium that a
+1081-buyer is willing to pay for each unit increment in status, then the pricing
+1082:mechanism reproduces the hierarchical ordering in the market to the
+1083-extent that
+1084-Ph < Pl +
+1085-
+1086-0(sh
+1087-
+1088--
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Writing the Podolny section (AJS 98(4): 829–872, DOI 10.1086/230091, confirmed).
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cat &gt;&gt; &#34;/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/org_A_opportunity_structure_note.md&#34; &lt;&lt;&#39;EOF&#39;
+
+## 4. Podolny (1993): A status-based model of market competition
+
+**Citation.** Podolny, Joel M. 1993. &#34;A Status-Based Model of Market Competition.&#34; *American Journal of Sociology* 98(4): 829–872. DOI 10.1086/230091. Crossref confirms volume 98, issue 4, pp. 829–872, January 1993; the PDF footer reads &#34;AJS Volume 98 Number 4 (January 1993): 829-72&#34;. The PDF has 44 pages with no cover; **printed page = PDF page + 828**. Table 3 (the regressions) and the status-score table did not survive extraction, so coefficients are quoted only from the prose.
+
+**Data and setting.** United States, investment-grade corporate debt underwriting, 1982–1987, from the Securities Data Corporation (SDC) database. The unit is the **security offering** (a bank–issuer transaction); the actors are investment banks (producers). Status was measured once, from the 1981 *Wall Street Journal* &#34;tombstone&#34; advertisements.
+
+- p. 850: &#34;Data for an examination of the investment grade debt market are drawn from the SDC data base between 1982 and 1987. These data contain extensive information on all of the corporate security offerings underwritten by investment banks over that period.&#34;
+- p. 853: &#34;Of the 3,541 investment grade offerings listed in the SDC data base between 1982 and 1987, information is available on percentage spread for 2,782 of the issues.&#34;
+- p. 868: &#34;I collected the tombstone ads which appeared in the Wall Street Journal in 1981, the year before the six-year span covered by the SDC data base. During this period, there were 180 tombstones for investment grade debt issues.&#34; And p. 869: &#34;170 banks appeared in more than three syndicates.&#34;
+
+**Design.** Theory first, then one case chosen as a hard test. The dependent variable is the percentage spread (the price). The key regressor is bank status: a Bonacich \(c(\alpha,\beta)\) score from the matrix of how often bank *i* is listed above bank *j* in tombstone brackets (Appendix, pp. 869–870). OLS models control for offering size, bond rating, client history, competitive bidding, and convertibility, with a Berk two-stage correction for the nonrandom missing spreads (p. 853). The status effect is then tested against a &#34;first-order&#34; quality signal, the prior 12 months&#39; lead-manager volume (VOLHIST), and in interaction with offering size.
+
+- p. 849: the case is chosen because &#34;there are several features of the investment banking context that would seem to minimize the significance of status processes. Hence, if the relevance of status can be demonstrated in this context, we may presume that it should be relevant in other&#34; markets. (This sentence spans pp. 847–848; &#34;markets&#34; completes it.)
+
+**Main findings (verbatim).**
+
+- p. 830: &#34;I define a producer&#39;s status in the market as the perceived quality of that producer&#39;s products in relation to the perceived quality of that producer&#39;s competitors&#39; products.&#34;
+- p. 831: &#34;More critical is a second view of market status as a signal of the underlying quality of a firm&#39;s products. If an actor is uncertain of the actual quality of the goods that confront her in the market, [...] then the regard that other market participants have for a given producer is a fairly strong indicator of the quality of&#34; its products.
+- p. 837: &#34;A second consequence of the loose linkage between status and quality is that access to certain rewards in the market becomes entirely mediated by the position one occupies in the status order. Just as access to the highest salary in a firm is contingent upon occupying a position at the top of the organizational hierarchy, so access to the highest quality manuscripts in the academic book market, for example, is contingent upon occupying a position high in the status order.&#34;
+- pp. 841–842 (Matthew effect): &#34;the Matthew effect refers to the fact that higher-status actors obtain greater recognition and rewards for performing a given task and lower-status actors receive correspondingly less.&#34; And p. 841: &#34;the substantive implication of the sociological view is that not only does actual quality determine perceived quality, but the latter has a reciprocal effect on the former.&#34;
+- p. 858: &#34;STATUS has a statistically significant and negative impact on price at the .01 level. A unit change in STATUS leads to a reduction in spread of .080.&#34; For First Boston versus Kidder Peabody (a status gap of 1.03) this &#34;translates into an ability or willingness of the former to underbid the latter by eight basis points.&#34;
+- pp. 862–863: &#34;the effect of status remains significant even after the inclusion of the variable for volume, though the apparent status effect does drop from -.080 to -.062.&#34; p. 863: &#34;a lower-status bank cannot simply buy its way into a high-status niche by increasing its volume over the short term.&#34;
+
+Also:
+
+- p. 865: with the status × size interaction, &#34;the effect of status becomes positive when the offering is greater than $140 million.&#34; So status carries a price *premium* on large, risky issues and a cost advantage on ordinary ones.
+- p. 867: &#34;Status is, therefore, not simply an epiphenomenal reflection of quality. Rather, status exerts a strong influence on market outcomes by providing producers with different incentives to invest in quality and placing constraints on their ability to expand outside their niche in the market.&#34;
+- p. 841 (the SBO Seidman example): &#34;Even though SBO Seidman was fully capable of performing the audit, its request to present a bid to the corporation was denied. Only the Big Six were invited.&#34; This is status as a gate on **who may compete**.
+
+**Mechanism / model.** A verbal model built on three stated assumptions, with &#34;minimal formalism&#34; (one inequality). It is **not structurally fit**; regressions test its sign predictions.
+
+- p. 835: &#34;ASSUMPTION 1.-Producer quality is an unobservable prior to the consummation of a transaction. ASSUMPTION 2.-Market status is a signal of quality on which consumers can and do rely for their decisions. ASSUMPTION 3.-A producer&#39;s relations with others in the market mediates the relationship between status and quality by creating inertial tendencies in the formation of exchange relations and by biasing evaluation in the direction of the status of those to whom the producer is tied.&#34;
+- p. 853 (eq. 1): the pricing mechanism &#34;reproduces the hierarchical ordering in the market to the extent that \(p_h &lt; p_l + \theta(s_h - s_l)\)&#34;, where θ is &#34;the premium that a buyer is willing to pay for each unit increment in status&#34;.
+- Cost mechanism (p. 840): &#34;given two producers at a particular point in time, the costs for a given quality output will be lower for the higher-status producer than the lower-status producer as long as the second core assumption-that status is indeed a signal of quality-is valid.&#34;
+
+**Separating sorting from effects.** Partial. Bank quality is never observed directly. Podolny&#39;s strategy is to (a) fix status before the outcome window (1981 scores against 1982–87 outcomes), (b) control for offering characteristics, and (c) control for recent volume as the best first-order quality signal. He acknowledges that the volume control is ambiguous.
+
+- p. 869: &#34;Even if the data were easily obtainable, a reliance upon the 1981 status scores is preferable to contemporaneous status scores. Status is relevant to market outcomes because it is decoupled from quality shifts.&#34;
+- p. 862: &#34;interpretation of a coefficient for volume history cannot be unambiguous. To the extent that economies of scale are relevant, the volume history measure summarizes such effects&#34;.
+- p. 837: &#34;The probable impact of status on costs is obscured by the fact that higher-status producers are generally of higher quality and higher-quality goods are often more costly to produce. Therefore, the zero-order relationship between status and costs is often positive. However, if one controls for the quality of the good, it follows from the view of status as a signal of quality that the effect of status on costs is negative.&#34;
+- (Assistant judgment) &#34;Status affects rewards independent of quality&#34; is supported conditional on volume and on issue-level controls, not on a direct measure of bank quality. The status effect could still partly reflect unmeasured persistent quality.
+
+**Limitations (tagged).**
+
+- [single system] p. 866: &#34;Of course, we would need to be careful about drawing any strong inferences about scope conditions on the basis of one case.&#34; One market, one country, six years.
+- [imperfect measure] Status is measured once (1981) from bank-to-bank rankings rather than from issuers&#39; views. p. 869: &#34;One might argue that a drawback of this data is that the derived status scores are based more on the banks&#39; perceptions of each other than on the perceptions of the issuers.&#34; Spread is missing for 759 of 3,541 offerings, non-randomly (p. 853: &#34;the pattern of missing information is not random&#34;). There is no direct measure of quality.
+- [model not fit to data] The verbal model is tested by sign and interaction predictions in reduced-form OLS; no structural estimation.
+- [no model of mechanism] Does not apply in general (the cost and transaction mechanism is explicit), but it does apply to **mobility**. p. 846: &#34;I also ignore the dynamics of mobility that occur even after the market structure is established. [...] The model is far from a complete account as it does not directly address such dynamic issues.&#34;
+- [outcome is not selection] Mostly applies. The outcome is the price (spread) on deals already won, not who is chosen. Selection appears only in anecdotes (SBO Seidman, p. 841) and in the claim that higher status can &#34;win the deal by just underbidding the competitor closest in status&#34; (p. 853) (Assistant judgment).
+
+**Channel / source (Assistant judgment).** Mainly **EVALUATION**: status is a socially constructed, network-transmitted signal that changes how equal performance is perceived and rewarded (the Matthew effect). It also feeds **SELECTION**, both at the gate (who is invited to bid) and in the bid (lower costs let high-status actors win), and **DEVELOPMENT** (status shapes incentives to invest in quality, p. 841: perceived quality &#34;has a reciprocal effect on&#34; actual quality). The source is peers and affiliations: status &#34;flows through&#34; ties to prominent others (p. 833). The units are firms in a market, not individuals in an organization, so carrying this over to promotion is an analogy and is not tested here.
+
+---
+EOF
+echo ok</summary>
+```bash
+cat >> "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/org_A_opportunity_structure_note.md" <<'EOF'
+
+## 4. Podolny (1993): A status-based model of market competition
+
+**Citation.** Podolny, Joel M. 1993. "A Status-Based Model of Market Competition." *American Journal of Sociology* 98(4): 829–872. DOI 10.1086/230091. Crossref confirms volume 98, issue 4, pp. 829–872, January 1993; the PDF footer reads "AJS Volume 98 Number 4 (January 1993): 829-72". The PDF has 44 pages with no cover; **printed page = PDF page + 828**. Table 3 (the regressions) and the status-score table did not survive extraction, so coefficients are quoted only from the prose.
+
+**Data and setting.** United States, investment-grade corporate debt underwriting, 1982–1987, from the Securities Data Corporation (SDC) database. The unit is the **security offering** (a bank–issuer transaction); the actors are investment banks (producers). Status was measured once, from the 1981 *Wall Street Journal* "tombstone" advertisements.
+
+- p. 850: "Data for an examination of the investment grade debt market are drawn from the SDC data base between 1982 and 1987. These data contain extensive information on all of the corporate security offerings underwritten by investment banks over that period."
+- p. 853: "Of the 3,541 investment grade offerings listed in the SDC data base between 1982 and 1987, information is available on percentage spread for 2,782 of the issues."
+- p. 868: "I collected the tombstone ads which appeared in the Wall Street Journal in 1981, the year before the six-year span covered by the SDC data base. During this period, there were 180 tombstones for investment grade debt issues." And p. 869: "170 banks appeared in more than three syndicates."
+
+**Design.** Theory first, then one case chosen as a hard test. The dependent variable is the percentage spread (the price). The key regressor is bank status: a Bonacich \(c(\alpha,\beta)\) score from the matrix of how often bank *i* is listed above bank *j* in tombstone brackets (Appendix, pp. 869–870). OLS models control for offering size, bond rating, client history, competitive bidding, and convertibility, with a Berk two-stage correction for the nonrandom missing spreads (p. 853). The status effect is then tested against a "first-order" quality signal, the prior 12 months' lead-manager volume (VOLHIST), and in interaction with offering size.
+
+- p. 849: the case is chosen because "there are several features of the investment banking context that would seem to minimize the significance of status processes. Hence, if the relevance of status can be demonstrated in this context, we may presume that it should be relevant in other" markets. (This sentence spans pp. 847–848; "markets" completes it.)
+
+**Main findings (verbatim).**
+
+- p. 830: "I define a producer's status in the market as the perceived quality of that producer's products in relation to the perceived quality of that producer's competitors' products."
+- p. 831: "More critical is a second view of market status as a signal of the underlying quality of a firm's products. If an actor is uncertain of the actual quality of the goods that confront her in the market, [...] then the regard that other market participants have for a given producer is a fairly strong indicator of the quality of" its products.
+- p. 837: "A second consequence of the loose linkage between status and quality is that access to certain rewards in the market becomes entirely mediated by the position one occupies in the status order. Just as access to the highest salary in a firm is contingent upon occupying a position at the top of the organizational hierarchy, so access to the highest quality manuscripts in the academic book market, for example, is contingent upon occupying a position high in the status order."
+- pp. 841–842 (Matthew effect): "the Matthew effect refers to the fact that higher-status actors obtain greater recognition and rewards for performing a given task and lower-status actors receive correspondingly less." And p. 841: "the substantive implication of the sociological view is that not only does actual quality determine perceived quality, but the latter has a reciprocal effect on the former."
+- p. 858: "STATUS has a statistically significant and negative impact on price at the .01 level. A unit change in STATUS leads to a reduction in spread of .080." For First Boston versus Kidder Peabody (a status gap of 1.03) this "translates into an ability or willingness of the former to underbid the latter by eight basis points."
+- pp. 862–863: "the effect of status remains significant even after the inclusion of the variable for volume, though the apparent status effect does drop from -.080 to -.062." p. 863: "a lower-status bank cannot simply buy its way into a high-status niche by increasing its volume over the short term."
+
+Also:
+
+- p. 865: with the status × size interaction, "the effect of status becomes positive when the offering is greater than $140 million." So status carries a price *premium* on large, risky issues and a cost advantage on ordinary ones.
+- p. 867: "Status is, therefore, not simply an epiphenomenal reflection of quality. Rather, status exerts a strong influence on market outcomes by providing producers with different incentives to invest in quality and placing constraints on their ability to expand outside their niche in the market."
+- p. 841 (the SBO Seidman example): "Even though SBO Seidman was fully capable of performing the audit, its request to present a bid to the corporation was denied. Only the Big Six were invited." This is status as a gate on **who may compete**.
+
+**Mechanism / model.** A verbal model built on three stated assumptions, with "minimal formalism" (one inequality). It is **not structurally fit**; regressions test its sign predictions.
+
+- p. 835: "ASSUMPTION 1.-Producer quality is an unobservable prior to the consummation of a transaction. ASSUMPTION 2.-Market status is a signal of quality on which consumers can and do rely for their decisions. ASSUMPTION 3.-A producer's relations with others in the market mediates the relationship between status and quality by creating inertial tendencies in the formation of exchange relations and by biasing evaluation in the direction of the status of those to whom the producer is tied."
+- p. 853 (eq. 1): the pricing mechanism "reproduces the hierarchical ordering in the market to the extent that \(p_h < p_l + \theta(s_h - s_l)\)", where θ is "the premium that a buyer is willing to pay for each unit increment in status".
+- Cost mechanism (p. 840): "given two producers at a particular point in time, the costs for a given quality output will be lower for the higher-status producer than the lower-status producer as long as the second core assumption-that status is indeed a signal of quality-is valid."
+
+**Separating sorting from effects.** Partial. Bank quality is never observed directly. Podolny's strategy is to (a) fix status before the outcome window (1981 scores against 1982–87 outcomes), (b) control for offering characteristics, and (c) control for recent volume as the best first-order quality signal. He acknowledges that the volume control is ambiguous.
+
+- p. 869: "Even if the data were easily obtainable, a reliance upon the 1981 status scores is preferable to contemporaneous status scores. Status is relevant to market outcomes because it is decoupled from quality shifts."
+- p. 862: "interpretation of a coefficient for volume history cannot be unambiguous. To the extent that economies of scale are relevant, the volume history measure summarizes such effects".
+- p. 837: "The probable impact of status on costs is obscured by the fact that higher-status producers are generally of higher quality and higher-quality goods are often more costly to produce. Therefore, the zero-order relationship between status and costs is often positive. However, if one controls for the quality of the good, it follows from the view of status as a signal of quality that the effect of status on costs is negative."
+- (Assistant judgment) "Status affects rewards independent of quality" is supported conditional on volume and on issue-level controls, not on a direct measure of bank quality. The status effect could still partly reflect unmeasured persistent quality.
+
+**Limitations (tagged).**
+
+- [single system] p. 866: "Of course, we would need to be careful about drawing any strong inferences about scope conditions on the basis of one case." One market, one country, six years.
+- [imperfect measure] Status is measured once (1981) from bank-to-bank rankings rather than from issuers' views. p. 869: "One might argue that a drawback of this data is that the derived status scores are based more on the banks' perceptions of each other than on the perceptions of the issuers." Spread is missing for 759 of 3,541 offerings, non-randomly (p. 853: "the pattern of missing information is not random"). There is no direct measure of quality.
+- [model not fit to data] The verbal model is tested by sign and interaction predictions in reduced-form OLS; no structural estimation.
+- [no model of mechanism] Does not apply in general (the cost and transaction mechanism is explicit), but it does apply to **mobility**. p. 846: "I also ignore the dynamics of mobility that occur even after the market structure is established. [...] The model is far from a complete account as it does not directly address such dynamic issues."
+- [outcome is not selection] Mostly applies. The outcome is the price (spread) on deals already won, not who is chosen. Selection appears only in anecdotes (SBO Seidman, p. 841) and in the claim that higher status can "win the deal by just underbidding the competitor closest in status" (p. 853) (Assistant judgment).
+
+**Channel / source (Assistant judgment).** Mainly **EVALUATION**: status is a socially constructed, network-transmitted signal that changes how equal performance is perceived and rewarded (the Matthew effect). It also feeds **SELECTION**, both at the gate (who is invited to bid) and in the bid (lower costs let high-status actors win), and **DEVELOPMENT** (status shapes incentives to invest in quality, p. 841: perceived quality "has a reciprocal effect on" actual quality). The source is peers and affiliations: status "flows through" ties to prominent others (p. 833). The units are firms in a market, not individuals in an organization, so carrying this over to promotion is an analogy and is not tested here.
+
+---
+EOF
+echo ok
+```
+
+```
+ok
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/orgA; grep -n -A3 &#34;have for a given producer is a fairly strong indicator&#34; podolny.txt; grep -n -B2 -A8 &#34;should be relevant in other&#34; podolny.txt | head -30</summary>
+```bash
+cd /tmp/orgA; grep -n -A3 "have for a given producer is a fairly strong indicator" podolny.txt; grep -n -B2 -A8 "should be relevant in other" podolny.txt | head -30
+```
+
+```
+98:have for a given producer is a fairly strong indicator of the quality of
+99-that producer's output.
+100-This conception of status is compatible with the formal economic understanding of signals. According to Spence (1974), a signal is any observable indicator, of a quality or qualities, that meets two criteria: (1) the
+101-indicator must be at least partially manipulable by the actor and (2) the
+837-investment banking context that would seem to minimize the significance
+838-of status processes. Hence, if the relevance of status can be demonstrated
+839:in this context, we may presume that it should be relevant in other
+840-contexts as well.
+841-
+842-12 This observation leads to the hypothesis that
+843-markets in which status is positively
+844-correlated with profits will be more stable than markets in which status is inversely
+845-correlated with profits. For the purposes of testing such a hypothesis, stability can be
+846-defined in terms of factors such as shifting market share, changes in relative product
+847-quality, or differences in buying patterns.
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2"><details>
+<summary>Tool use: **edit_file_v2** • Edit file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/org_A_opportunity_structure_note.md</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2"><details>
+<summary>Tool use: **edit_file_v2** • Edit file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/org_A_opportunity_structure_note.md</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Podolny saved. Now Doeringer & Piore: an ERIC scan, so I'll check whether the text layer is usable and find the table of contents.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="unknown" data-tool-name="update_current_step"><details>
+<summary>Tool use: **update_current_step**</summary>
+An unknown error occurred
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: B=&#34;/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/FOUNDY_Intro&#34;; f=&#34;$B/files/899/Doeringer and Piore - 1971 - Internal Labor Markets and Manpower Analysis.pdf&#34;; for i in $(seq 1 14); do echo &#34;######## PDF p. $i&#34;; pdftotext -layout -f $i -l $i &#34;$f&#34; - 2&gt;/dev/null | head -60; done</summary>
+```bash
+B="/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/FOUNDY_Intro"; f="$B/files/899/Doeringer and Piore - 1971 - Internal Labor Markets and Manpower Analysis.pdf"; for i in $(seq 1 14); do echo "######## PDF p. $i"; pdftotext -layout -f $i -l $i "$f" - 2>/dev/null | head -60; done
+```
+
+```
+######## PDF p. 1
+                           DOCUMENT RESUME
+ED 048 457                                                  VT 012 300
+
+AUTHOR           Doeringer, Peter B.; Piore, Michael J.
+TITLE            Internal Labor Markets and Manpower Analysis.
+INSTITUTION      Harvard Univ., Cambridge, Mass.; Massachusetts Inst.
+                 of Tech., Cambridge.
+SPONS AGENCY     Manpower Administration (DOL), Washington, D.C.
+                 Office of Manpower Research.
+PUB DATE         May 70
+NOTE             344p.
+
+EDRS PRICE       EDRS Price MF-$0.65 HC-$13.16
+DESCRIPTORS      *Business, Disadvantaged Groups, *Economic Research,
+                 Employment Opportunities, *Labor Economics, *Labor
+                 Market, Models, *Unemployment
+ABSTRACT
+                 Using data gathered in a series of interviews with
+management and union officials in over 75 companies between 1964 and
+1969, this report analyzes the concept of the internal labor market
+and describes its relevance for federal manpower policy. The
+management interviews, which were mostly in personnel, industrial
+engineering, and operations areas of manufacturing companies, were
+supplemented by data on the disadvantaged provided by civil rights,
+poverty, and manpower agencies. The report utilizes the framework
+established in the study to show that the internal market does not
+imply inefficiency and may represent an improvement in dealing with
+structural unemployment. (BH)
+######## PDF p. 2
+                       .4
+/..   .118-1`;   003
+######## PDF p. 3
+      INTERNAL LABOR MARKETS
+
+                 AND
+
+         MANPOWER ANALYSIS
+
+
+
+
+         PETER B. DOERINGER
+  Assistant Professor of Economics
+         Harvard University
+
+         MICHAEL J. PIORE
+  Associate Profe s sor of Economics
+Massachusetts Institute of Technology
+
+
+              ',Jay 1970
+######## PDF p. 4
+        This research was prepared under a contract with
+the Office of Manpower Research, U.S. Department of
+Labor, under the authority
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: B=&#34;/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/FOUNDY_Intro&#34;; f=&#34;$B/files/899/Doeringer and Piore - 1971 - Internal Labor Markets and Manpower Analysis.pdf&#34;; for i in $(seq 15 120); do t=$(pdftotext -f $i -l $i &#34;$f&#34; - 2&gt;/dev/null); if echo &#34;$t&#34; | grep -q -i -E &#34;CHAPTER|mobility cluster|port[s]? of entry&#34;; then echo &#34;PDF $i: $(echo &#34;$t&#34; | grep -i -E -m3 &#39;CHAPTER|mobility cluster|port[s]? of entry&#39; | tr &#39;\n&#39; &#39;|&#39;)&#34;; fi; done</summary>
+```bash
+B="/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/FOUNDY_Intro"; f="$B/files/899/Doeringer and Piore - 1971 - Internal Labor Markets and Manpower Analysis.pdf"; for i in $(seq 15 120); do t=$(pdftotext -f $i -l $i "$f" - 2>/dev/null); if echo "$t" | grep -q -i -E "CHAPTER|mobility cluster|port[s]? of entry"; then echo "PDF $i: $(echo "$t" | grep -i -E -m3 'CHAPTER|mobility cluster|port[s]? of entry' | tr '\n' '|')"; fi; done
+```
+
+```
+PDF 22: at the beginning of this Chapter.|
+PDF 25: offered in the final chapter.|
+PDF 26: Chapter II|This chapter is devoted to an examination of those forces responsible for the existence of internal labor markets and for the determination of the rules which govern within them.|first section of the chapter.|
+PDF 50: it will be seen in later chapters, has important implications for|
+PDF 61: It has been argued in this Chapter that internal labor markets are a|
+PDF 64: CHAPTER III|The analysis in this chapter,|
+PDF 66: by (A) the proportion of ports of entry or exit,' (the job classifi-|Ports of Entry|mobility cluster to another.|
+PDF 68: port of entry.|
+PDF 76: Mobility Clusters|connected to internal mobility clusters, the grouping of jobs within|
+PDF 77: Jobs within mobility clusters share one or more of the following elements:|These mobility clusters are closely related to the concept of the|20ther factors can also determine the shape of internal mobility clusters. Prior to the passage of Title VII of the Civil Rights|
+PDF 78: In the enterprise, the dimensions of the mobility clusters may|Mobility clusters have both a vertical and a horizontal dimension.|In enterprist< internal markets, broad mobility clusters are|
+PDF 79: The narrowest type of mobility cluster in|For managerial and technical jobs, mobility clusters may embrace|mobility clusters are less common bluecollar workers, appearing most|
+PDF 83: workers move within a mobility cluster depend upon such factors as|
+PDF 89: features reflect the forces identified in Chapter II as responsible|
+PDF 90: design jobs and arrange them in mobility clusters which reduce such|
+PDF 91: internal mobility clusters often emerge.|
+PDF 92: minimal cost jobs serving as ports of entry and exit.|jobs are designed and placed into mobility clusters that are consistent|
+PDF 93: therefore favor broad mobility clusters with wide geographic and|
+PDF 96: Chapters V-VI.|
+PDF 97: tom has been developed in the preceding chapter and need n
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Chapter III runs PDF pp. 64–101. I'll extract it plus the rest of chapter I (PDF pp. 15–25).
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: B=&#34;/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/FOUNDY_Intro&#34;; f=&#34;$B/files/899/Doeringer and Piore - 1971 - Internal Labor Markets and Manpower Analysis.pdf&#34;; : &gt; /tmp/orgA/dp.txt; for i in $(seq 15 25) $(seq 64 101); do echo &#34;######## PDF p. $i&#34; &gt;&gt; /tmp/orgA/dp.txt; pdftotext -f $i -l $i &#34;$f&#34; - 2&gt;/dev/null | grep -v -E &#39;^\s*$&#39; &gt;&gt; /tmp/orgA/dp.txt; done; wc -l /tmp/orgA/dp.txt</summary>
+```bash
+B="/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/FOUNDY_Intro"; f="$B/files/899/Doeringer and Piore - 1971 - Internal Labor Markets and Manpower Analysis.pdf"; : > /tmp/orgA/dp.txt; for i in $(seq 15 25) $(seq 64 101); do echo "######## PDF p. $i" >> /tmp/orgA/dp.txt; pdftotext -f $i -l $i "$f" - 2>/dev/null | grep -v -E '^\s*$' >> /tmp/orgA/dp.txt; done; wc -l /tmp/orgA/dp.txt
+```
+
+```
+    1651 /tmp/orgA/dp.txt
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /tmp/orgA/dp.txt</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /tmp/orgA/dp.txt</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /tmp/orgA/dp.txt</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /tmp/orgA/dp.txt</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Chapter III is read. Quick Crossref check on whether the 1971 Heath book has a DOI:
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: curl -s &#34;https://api.crossref.org/works?query.bibliographic=Doeringer+Piore+Internal+Labor+Markets+and+Manpower+Analysis&amp;rows=5&#34; | python3 -c &#34;
+import json,sys
+for it in json.load(sys.stdin)[&#39;message&#39;][&#39;items&#39;]:
+  print(it.get(&#39;DOI&#39;), it.get(&#39;type&#39;), it.get(&#39;title&#39;), it.get(&#39;publisher&#39;), it.get(&#39;issued&#39;,{}).get(&#39;date-parts&#39;), [a.get(&#39;family&#39;) for a in it.get(&#39;author&#39;,[])])&#34;</summary>
+```bash
+curl -s "https://api.crossref.org/works?query.bibliographic=Doeringer+Piore+Internal+Labor+Markets+and+Manpower+Analysis&rows=5" | python3 -c "
+import json,sys
+for it in json.load(sys.stdin)['message']['items']:
+  print(it.get('DOI'), it.get('type'), it.get('title'), it.get('publisher'), it.get('issued',{}).get('date-parts'), [a.get('family') for a in it.get('author',[])])"
+```
+
+```
+10.1201/9781003069720 book ['Internal Labor Markets and Manpower Analysis'] Routledge [[2020, 8, 20]] ['Doeringer', 'Piore']
+10.4324/9781003069720 book ['Internal Labor Markets and Manpower Analysis'] Routledge [[2020, 8, 26]] ['Doeringer', 'Piore']
+10.4324/9781003069720-9 book-chapter ['Racial Discrimination in Internal Labor Markets'] Routledge [[2020, 8, 26]] ['Doeringer', 'Piore']
+10.1201/9781003069720-4 book-chapter ['The Allocative Structure of Internal Labor Markets'] Routledge [[2020, 8, 20]] ['Doeringer', 'Piore']
+10.4324/9781003069720-7 book-chapter ['Manpower Adjustment and Labor Market Imbalances'] Routledge [[2020, 8, 26]] ['Doeringer', 'Piore']
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cat &gt;&gt; &#34;/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/org_A_opportunity_structure_note.md&#34; &lt;&lt;&#39;EOF&#39;
+
+## 5. Doeringer &amp; Piore (1971): Internal labor markets
+
+**Citation.** Doeringer, Peter B., and Michael J. Piore. 1971. *Internal Labor Markets and Manpower Analysis*. Lexington, MA: D. C. Heath. No DOI for the 1971 edition (Crossref returns none). There is a Routledge reissue (2020), DOI 10.4324/9781003069720; its chapter 3 is &#34;The Allocative Structure of Internal Labor Markets&#34; (DOI 10.1201/9781003069720-4).
+
+**Important: the library PDF is not the 1971 book.** It is the ERIC copy (ED 048 457, 335 PDF pages) of the May 1970 report to the U.S. Department of Labor, Office of Manpower Research (title page: &#34;May 1970&#34;; ERIC resume: &#34;PUB DATE May 70&#34;). Pages are numbered by chapter in the typescript (e.g., &#34;III.20&#34;). I cite them as **MS III.20 (PDF p. 83)**. These are **not** the page numbers of the 1971 Heath edition, so any quotation in the dissertation should be re-checked against the published book. The text layer is ERIC&#39;s OCR. It is readable but noisy; I fixed obvious OCR slips and mark my insertions with square brackets. No fresh OCR was needed.
+
+Chapters read (located from the table of contents, PDF p. 5): Ch. I &#34;Introduction&#34; (MS I.1–I.14, PDF pp. 8–25) and Ch. III, headed in the text &#34;The Allocative Structure of Internal Labor Markets&#34; (the TOC calls it &#34;The Structure of the Internal Labor Market&#34;; MS III.1–III.38, PDF pp. 64–101). Chapters II and IV–IX were not read.
+
+**Data and setting.** United States, mostly blue-collar manufacturing. Open-ended interviews with managers and union officials at more than 75 companies, 1964–1969, plus contacts with civil rights, poverty, and manpower agencies. No systematic sample.
+
+- MS I.13 (PDF p. 24): &#34;The concepts developed in this volume are derived primarily from a series of interviews with management and union officials in over seventy-five companies during the period from 1964 to 1969.&#34;
+- MS I.14 (PDF p. 25): &#34;Personal contacts and cooperation took precedence over a scientific sampling procedure, but an attempt was made to select a heterogeneous group of plants. [...] Some of this data is presented for illustrative purposes but, on the whole, it is too fragmented to support any generally valid conclusions.&#34;
+- MS III.1–III.2 (PDF pp. 64–65): &#34;Table 1 suggests that about 80% of the employed labor force works in internal labor markets&#34; (Table 1, derived from Phelps 1967, puts &#34;Structured&#34; employment at 81.4% for 1965).
+
+**Design.** Conceptual and typological, from field interviews: a classification of allocative structures (openness, scope, priority rules) and an account of the forces that shape them (efficiency and turnover costs, worker interests, custom).
+
+**Main findings and definitions (verbatim).**
+
+- MS I.1a–I.2 (PDF pp. 9–10), the definition: &#34;The central concept around which the manuscript is organized is that of the internal labor market[,] an administrative unit, such as a manufacturing plant, within which the pricing and allocation of labor is governed by a set of administrative rules and procedures. The internal market, governed by administrative rules, is to be distinguished from the external labor market of conventional economic theory where pricing, allocating, and training decisions are governed directly by economic variables.&#34;
+- MS I.2 (PDF p. 10), ports of entry: &#34;These two markets are interconnected, however, and movement between them occurs at certain jobs classifications which constitute ports of entry and exit to and from an internal labor market. The remainder of the jobs within the internal market are filled by the promotion or transfer of workers who have already gained entry to it. Consequently, these jobs are shielded from the direct influences of competitive forces in the external labor market.&#34;
+- MS I.3 (PDF p. 11), job ladders: &#34;the predominant pattern appears to be one in which production jobs are arranged in seniority districts or lines of progression. Entry job classifications tend to lie at the bottom of these lines and vacancies in other jobs are usually filled by the promotion of workers from the next lowest job classification in the line of progression. [...] promotions to non-entry jobs and layoffs are generally governed by relatively fixed standards of seniority and ability.&#34;
+- MS I.4 (PDF p. 12), managers: &#34;The parallel to blue collar, manufacturing markets is strongest for managerial employments, where jobs also tend to be organized in lines of progression. Managerial workers enter large corporations as trainees or lower level supervisors. From these classifications their internal career ladders stretch to plant manager or to a series of positions in the corporate management hierarchy.&#34; Also: &#34;Other contrasts include the stress placed upon ability in the rules governing promotions, often to the exclusion of seniority&#34;.
+- MS III.13–III.14 (PDF pp. 76–77), mobility clusters: &#34;entry ports are typically connected to internal mobility clusters, the grouping of jobs within which an employee is customarily upgraded, downgraded, transferred and laid off.&#34;
+- MS III.20 (PDF p. 83), promotion rules: &#34;The rules which determine the priority or ranking by which workers move within a mobility cluster depend upon such factors as ability, seniority, and frequency of work. [...] Although some enterprise internal labor markets rely exclusively upon either seniority or ability in deciding priorities for internal movement, most employ some combination of the two.&#34; And MS III.21–III.22 (PDF pp. 84–85): &#34;Most promotions and lateral transfers, however, are determined by ability factors as well as seniority. The emphasis upon ability varies from complete reliance upon merit and ability to automatic promotion of the most senior employee, subject only to his ability to perform the job after a trial period.&#34;
+
+Further rules relevant to selection:
+
+- MS III.3 (PDF p. 66), the three dimensions: &#34;(1) the degree of openness to the external labor market as measured by (A) the proportion of ports of entry or exit, (the job classifications connecting the internal and [external] labor markets), and (B) the restrictiveness of the criteria for entry; (2) the scope--size, geographical, and occupational--of the internal labor market; and (3) the rules which determine the priorities for distributing workers among the jobs within the internal market.&#34;
+- MS III.3 (PDF p. 66): &#34;All jobs within closed internal markets are filled internally through transfer or upgrading from a single entry job classification.&#34;
+- MS III.23–III.24 (PDF pp. 86–87), posting and bidding (who is in the candidate pool): &#34;These are rules for notifying workers of internal vacancies and for allowing them to select opportunities for internal movement. [...] Such procedures determine the group of applicants to which management will apply the selection criteria described above when filling a particular internal vacancy.&#34;
+- MS III.22 (PDF p. 85), the &#34;float line&#34;: &#34;seniority exclusively determines internal movement among job classifications below a certain job grade, and ability governs movement above that grade.&#34;
+- MS III.31 (PDF p. 94): &#34;Rules which limit entry and which allocate jobs on the basis of seniority related criteria protect the worker from the competition of those outside the market or those entering the market after him.&#34;
+- MS III.35 (PDF p. 98), on the competitor pool: shortened promotion lines lead &#34;workers to refuse assignment to jobs in these lines in anticipation of vacancies at the bottom of longer lines with greater opportunities for advancement. The efficient solution to this problem is to merge the shortened progression lines with other lines in the plant. However, this is generally resisted by workers in preferred lines who fear the competition of senior workers from whom they would otherwise be insulated.&#34;
+- MS III.37 (PDF p. 100), summary: &#34;Each internal labor market structure reflects a compromise between managements&#39; concern with efficiency and workers&#39; interests in enhancing job security and advancement opportunity. [...] Priorities for internal movement combine ability and seniority in varying ways, also according to training and retraining costs.&#34;
+
+**Mechanism / model.** Verbal and institutional. Structures arise from turnover and training costs (efficiency), worker interests in security and advancement, and custom (MS III.26–III.36, PDF pp. 89–99). There is **no formal model**, and the authors say the concept cannot be tested quantitatively with available data.
+
+- MS I.7 (PDF p. 16): &#34;the utility of the internal labor market as an analytical construct does not hinge upon the existence of administrative rules. It depends rather upon the rigidity of the rules which define the boundaries of internal markets and govern pricing and allocation within them.&#34;
+- MS I.8 (PDF p. 17): &#34;the requisite measures of neoclassical economic variables are unavailable at the micro-economic level and the administrative rules which govern internal labor markets in practice cannot be defined with sufficient precision to permit quantitative testing of their compatability. As a result, the case for the internal labor market must rest on less satisfactory heuristic evidence.&#34;
+
+**Separating sorting from effects.** Not addressed. One footnote bears on what &#34;ability&#34; means in promotion. MS III.20–III.21, n. 2 (PDF pp. 83–84): &#34;Because of on-the-job training seniority and ability are generally correlated.&#34; It then quotes Healy (1955): &#34;in an industry in which semi-skilled jobs predominate, clearly [discernible] differences in ability among a large group of employees is so [slight] that they do [not] govern the selection of persons for promotion.&#34; Also MS III.36 (PDF p. 99): custom &#34;biases management in favor of ability as a selection criterion even when seniority and ability are almost perfectly correlated.&#34;
+
+**Limitations (tagged).**
+
+- [no model of mechanism] [model not fit to data] Heuristic evidence only (MS I.8, quoted above).
+- [small data] [imperfect measure] Purposive interviews, with quantitative data &#34;too fragmented to support any generally valid conclusions&#34; (MS I.14).
+- [single system] Mainly blue-collar U.S. manufacturing in the 1960s. MS I.3 (PDF p. 11): &#34;because the research upon which this volume is based focussed primarily upon blue collar employment in manufacturing, the concepts and applications presented have particular relevance for this sector.&#34;
+- The object **is** the rules of selection (entry, promotion, and layoff priorities), so [outcome is not selection] does not apply. But no selection outcome is measured.
+
+**Channel / source (Assistant judgment).** **SELECTION**, as a set of rules. Doeringer and Piore supply the vocabulary for the &#34;select&#34; step: who is eligible (ports of entry, mobility clusters), who is in the pool for a vacancy (posting and bidding), and the ranking rule (seniority, ability, or a float line mixing the two). They also link rules to **DEVELOPMENT** (on-the-job training along lines of progression, MS III.28–III.29) and to the **peer** environment (workers resist merging lines to avoid &#34;the competition of senior workers&#34;, MS III.35). The source is the organization&#39;s administrative rules, shaped by technology and bargaining.
+
+---
+
+## 6. Kanter (1977), *Men and Women of the Corporation*
+
+No PDF is available in the library. It is cited secondhand by Rosenbaum (1979, e.g., pp. 222–225), but it has not been read for this note and **must not be quoted** until a copy is checked.
+
+---
+EOF
+echo ok</summary>
+```bash
+cat >> "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/org_A_opportunity_structure_note.md" <<'EOF'
+
+## 5. Doeringer & Piore (1971): Internal labor markets
+
+**Citation.** Doeringer, Peter B., and Michael J. Piore. 1971. *Internal Labor Markets and Manpower Analysis*. Lexington, MA: D. C. Heath. No DOI for the 1971 edition (Crossref returns none). There is a Routledge reissue (2020), DOI 10.4324/9781003069720; its chapter 3 is "The Allocative Structure of Internal Labor Markets" (DOI 10.1201/9781003069720-4).
+
+**Important: the library PDF is not the 1971 book.** It is the ERIC copy (ED 048 457, 335 PDF pages) of the May 1970 report to the U.S. Department of Labor, Office of Manpower Research (title page: "May 1970"; ERIC resume: "PUB DATE May 70"). Pages are numbered by chapter in the typescript (e.g., "III.20"). I cite them as **MS III.20 (PDF p. 83)**. These are **not** the page numbers of the 1971 Heath edition, so any quotation in the dissertation should be re-checked against the published book. The text layer is ERIC's OCR. It is readable but noisy; I fixed obvious OCR slips and mark my insertions with square brackets. No fresh OCR was needed.
+
+Chapters read (located from the table of contents, PDF p. 5): Ch. I "Introduction" (MS I.1–I.14, PDF pp. 8–25) and Ch. III, headed in the text "The Allocative Structure of Internal Labor Markets" (the TOC calls it "The Structure of the Internal Labor Market"; MS III.1–III.38, PDF pp. 64–101). Chapters II and IV–IX were not read.
+
+**Data and setting.** United States, mostly blue-collar manufacturing. Open-ended interviews with managers and union officials at more than 75 companies, 1964–1969, plus contacts with civil rights, poverty, and manpower agencies. No systematic sample.
+
+- MS I.13 (PDF p. 24): "The concepts developed in this volume are derived primarily from a series of interviews with management and union officials in over seventy-five companies during the period from 1964 to 1969."
+- MS I.14 (PDF p. 25): "Personal contacts and cooperation took precedence over a scientific sampling procedure, but an attempt was made to select a heterogeneous group of plants. [...] Some of this data is presented for illustrative purposes but, on the whole, it is too fragmented to support any generally valid conclusions."
+- MS III.1–III.2 (PDF pp. 64–65): "Table 1 suggests that about 80% of the employed labor force works in internal labor markets" (Table 1, derived from Phelps 1967, puts "Structured" employment at 81.4% for 1965).
+
+**Design.** Conceptual and typological, from field interviews: a classification of allocative structures (openness, scope, priority rules) and an account of the forces that shape them (efficiency and turnover costs, worker interests, custom).
+
+**Main findings and definitions (verbatim).**
+
+- MS I.1a–I.2 (PDF pp. 9–10), the definition: "The central concept around which the manuscript is organized is that of the internal labor market[,] an administrative unit, such as a manufacturing plant, within which the pricing and allocation of labor is governed by a set of administrative rules and procedures. The internal market, governed by administrative rules, is to be distinguished from the external labor market of conventional economic theory where pricing, allocating, and training decisions are governed directly by economic variables."
+- MS I.2 (PDF p. 10), ports of entry: "These two markets are interconnected, however, and movement between them occurs at certain jobs classifications which constitute ports of entry and exit to and from an internal labor market. The remainder of the jobs within the internal market are filled by the promotion or transfer of workers who have already gained entry to it. Consequently, these jobs are shielded from the direct influences of competitive forces in the external labor market."
+- MS I.3 (PDF p. 11), job ladders: "the predominant pattern appears to be one in which production jobs are arranged in seniority districts or lines of progression. Entry job classifications tend to lie at the bottom of these lines and vacancies in other jobs are usually filled by the promotion of workers from the next lowest job classification in the line of progression. [...] promotions to non-entry jobs and layoffs are generally governed by relatively fixed standards of seniority and ability."
+- MS I.4 (PDF p. 12), managers: "The parallel to blue collar, manufacturing markets is strongest for managerial employments, where jobs also tend to be organized in lines of progression. Managerial workers enter large corporations as trainees or lower level supervisors. From these classifications their internal career ladders stretch to plant manager or to a series of positions in the corporate management hierarchy." Also: "Other contrasts include the stress placed upon ability in the rules governing promotions, often to the exclusion of seniority".
+- MS III.13–III.14 (PDF pp. 76–77), mobility clusters: "entry ports are typically connected to internal mobility clusters, the grouping of jobs within which an employee is customarily upgraded, downgraded, transferred and laid off."
+- MS III.20 (PDF p. 83), promotion rules: "The rules which determine the priority or ranking by which workers move within a mobility cluster depend upon such factors as ability, seniority, and frequency of work. [...] Although some enterprise internal labor markets rely exclusively upon either seniority or ability in deciding priorities for internal movement, most employ some combination of the two." And MS III.21–III.22 (PDF pp. 84–85): "Most promotions and lateral transfers, however, are determined by ability factors as well as seniority. The emphasis upon ability varies from complete reliance upon merit and ability to automatic promotion of the most senior employee, subject only to his ability to perform the job after a trial period."
+
+Further rules relevant to selection:
+
+- MS III.3 (PDF p. 66), the three dimensions: "(1) the degree of openness to the external labor market as measured by (A) the proportion of ports of entry or exit, (the job classifications connecting the internal and [external] labor markets), and (B) the restrictiveness of the criteria for entry; (2) the scope--size, geographical, and occupational--of the internal labor market; and (3) the rules which determine the priorities for distributing workers among the jobs within the internal market."
+- MS III.3 (PDF p. 66): "All jobs within closed internal markets are filled internally through transfer or upgrading from a single entry job classification."
+- MS III.23–III.24 (PDF pp. 86–87), posting and bidding (who is in the candidate pool): "These are rules for notifying workers of internal vacancies and for allowing them to select opportunities for internal movement. [...] Such procedures determine the group of applicants to which management will apply the selection criteria described above when filling a particular internal vacancy."
+- MS III.22 (PDF p. 85), the "float line": "seniority exclusively determines internal movement among job classifications below a certain job grade, and ability governs movement above that grade."
+- MS III.31 (PDF p. 94): "Rules which limit entry and which allocate jobs on the basis of seniority related criteria protect the worker from the competition of those outside the market or those entering the market after him."
+- MS III.35 (PDF p. 98), on the competitor pool: shortened promotion lines lead "workers to refuse assignment to jobs in these lines in anticipation of vacancies at the bottom of longer lines with greater opportunities for advancement. The efficient solution to this problem is to merge the shortened progression lines with other lines in the plant. However, this is generally resisted by workers in preferred lines who fear the competition of senior workers from whom they would otherwise be insulated."
+- MS III.37 (PDF p. 100), summary: "Each internal labor market structure reflects a compromise between managements' concern with efficiency and workers' interests in enhancing job security and advancement opportunity. [...] Priorities for internal movement combine ability and seniority in varying ways, also according to training and retraining costs."
+
+**Mechanism / model.** Verbal and institutional. Structures arise from turnover and training costs (efficiency), worker interests in security and advancement, and custom (MS III.26–III.36, PDF pp. 89–99). There is **no formal model**, and the authors say the concept cannot be tested quantitatively with available data.
+
+- MS I.7 (PDF p. 16): "the utility of the internal labor market as an analytical construct does not hinge upon the existence of administrative rules. It depends rather upon the rigidity of the rules which define the boundaries of internal markets and govern pricing and allocation within them."
+- MS I.8 (PDF p. 17): "the requisite measures of neoclassical economic variables are unavailable at the micro-economic level and the administrative rules which govern internal labor markets in practice cannot be defined with sufficient precision to permit quantitative testing of their compatability. As a result, the case for the internal labor market must rest on less satisfactory heuristic evidence."
+
+**Separating sorting from effects.** Not addressed. One footnote bears on what "ability" means in promotion. MS III.20–III.21, n. 2 (PDF pp. 83–84): "Because of on-the-job training seniority and ability are generally correlated." It then quotes Healy (1955): "in an industry in which semi-skilled jobs predominate, clearly [discernible] differences in ability among a large group of employees is so [slight] that they do [not] govern the selection of persons for promotion." Also MS III.36 (PDF p. 99): custom "biases management in favor of ability as a selection criterion even when seniority and ability are almost perfectly correlated."
+
+**Limitations (tagged).**
+
+- [no model of mechanism] [model not fit to data] Heuristic evidence only (MS I.8, quoted above).
+- [small data] [imperfect measure] Purposive interviews, with quantitative data "too fragmented to support any generally valid conclusions" (MS I.14).
+- [single system] Mainly blue-collar U.S. manufacturing in the 1960s. MS I.3 (PDF p. 11): "because the research upon which this volume is based focussed primarily upon blue collar employment in manufacturing, the concepts and applications presented have particular relevance for this sector."
+- The object **is** the rules of selection (entry, promotion, and layoff priorities), so [outcome is not selection] does not apply. But no selection outcome is measured.
+
+**Channel / source (Assistant judgment).** **SELECTION**, as a set of rules. Doeringer and Piore supply the vocabulary for the "select" step: who is eligible (ports of entry, mobility clusters), who is in the pool for a vacancy (posting and bidding), and the ranking rule (seniority, ability, or a float line mixing the two). They also link rules to **DEVELOPMENT** (on-the-job training along lines of progression, MS III.28–III.29) and to the **peer** environment (workers resist merging lines to avoid "the competition of senior workers", MS III.35). The source is the organization's administrative rules, shaped by technology and bargaining.
+
+---
+
+## 6. Kanter (1977), *Men and Women of the Corporation*
+
+No PDF is available in the library. It is cited secondhand by Rosenbaum (1979, e.g., pp. 222–225), but it has not been read for this note and **must not be quoted** until a copy is checked.
+
+---
+EOF
+echo ok
+```
+
+```
+ok
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+All five sources are saved. Last step: replacing the placeholder with the synthesis at the top.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="unknown" data-tool-name="update_current_step"><details>
+<summary>Tool use: **update_current_step**</summary>
+An unknown error occurred
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2"><details>
+<summary>Tool use: **edit_file_v2** • Edit file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/org_A_opportunity_structure_note.md</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Checking the synthesis's page cites against the per-source sections already in the note:
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: F=&#34;/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/org_A_opportunity_structure_note.md&#34;; rg -n &#34;signal|high-potential|cohorts|680|48|police|128|p\. 236|p\. 225|enmeshed|hundred&#34; &#34;$F&#34; | cut -c1-260; rg -n -i &#34;signal|high.potential&#34; /tmp/orgA/rosen.txt | head -20; rg -n &#34;enmeshed&#34; /tmp/orgA/white_*.txt</summary>
+```bash
+F="/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/org_A_opportunity_structure_note.md"; rg -n "signal|high-potential|cohorts|680|48|police|128|p\. 236|p\. 225|enmeshed|hundred" "$F" | cut -c1-260; rg -n -i "signal|high.potential" /tmp/orgA/rosen.txt | head -20; rg -n "enmeshed" /tmp/orgA/white_*.txt
+```
+
+```
+16:1. **Opportunity comes from vacancies, not from people.** White (1970) shows that in systems of fixed jobs, mobility is "enmeshed in a network of contingencies" (p. 1). A death, retirement, or new job creates a vacancy that moves *down* a chain while people
+17:2. **Organizational demography sets the odds at a fixed level of merit.** Stewman & Konda (1983) turn the vacancy idea into promotion probabilities: grade ratios, multiplied up by vacancy chains and triggered by exits and growth. A pyramid does not imply fa
+18:3. **Selection is sequential and path dependent.** In Rosenbaum's (1979) corporate cohort (N = 671), people promoted in the first three years reached lower management far more often (81% vs. 33%, p. 233). None of the 128 later foremen reached middle managem
+20:5. **Status decouples reward from quality.** Podolny (1993) treats status as a socially transmitted *signal* of unobservable quality. Holding offering characteristics and recent volume fixed, higher-status banks still underbid lower-status ones (status coef
+21:6. **A shared, untested claim: some of what looks like individual merit is position.** Rosenbaum's early winners become visible "signals" and "high-potential people" (pp. 225, 236). Stewman & Konda argue that part of a "star's" brightness "should instead be
+28:- **Each source covers essentially one system:** one anonymous firm (Rosenbaum); three Protestant clergies (White); one state police force for every individual-level result (Stewman & Konda); one securities market (Podolny); and blue-collar 1960s manufactur
+29:- **The samples are small or purposive:** a cohort of 671 with five snapshots; about 100 vacancy moves per sampled year; 18 police cohorts; and interviews at "over seventy-five companies" with no sampling frame [small data].
+30:- **Sorting is not separated from effects.** Rosenbaum says early selection may just reflect prior sorting (p. 238, n. 16). Stewman & Konda concede that talent varies by cohort (p. 673). Podolny has no d
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/orgA; for p in 225 236; do q=$((p-218)); echo &#34;--- printed $p (PDF $q)&#34;; pdftotext -f $q -l $q &#34;$(ls &#34;/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/FOUNDY_Intro/files/&#34;*/*osenbaum*.pdf 2&gt;/dev/null | head -1)&#34; - 2&gt;/dev/null | rg -i -n &#34;signal|potential&#34; ; done; ls &#34;/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/FOUNDY_Intro/files/&#34;*/ | rg -i rosen</summary>
+```bash
+cd /tmp/orgA; for p in 225 236; do q=$((p-218)); echo "--- printed $p (PDF $q)"; pdftotext -f $q -l $q "$(ls "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/FOUNDY_Intro/files/"*/*osenbaum*.pdf 2>/dev/null | head -1)" - 2>/dev/null | rg -i -n "signal|potential" ; done; ls "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/FOUNDY_Intro/files/"*/ | rg -i rosen
+```
+
+```
+--- printed 225 (PDF 7)
+78:would identify highly visible social signalling cues about individuals' career futures (Spence, 1 974). Because of the diversity of selection criteria and irregularity of their application
+86:are related to later careers then they are clearly visible signals which may influence the way employees are regarded
+--- printed 236 (PDF 18)
+53:winners are seen as "high-potential people" who can do no
+Lazear and Rosen - 1981 - Rank-Order Tournaments as Optimum Labor Contracts.pdf
+Rosen - 1981 - The Economics of Superstars.pdf
+Rosenbaum - 1979 - Tournament Mobility Career Patterns in a Corporation.pdf
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Both Rosenbaum cites check out. One more: the panel-bias figure I attributed to Stewman & Konda p. 680.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: F=&#34;/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/org_A_opportunity_structure_note.md&#34;; rg -n -o &#34;.{0,200}(4[89]%|bias).{0,200}&#34; &#34;$F&#34;; rg -n &#34;4[89]%|percent|bias&#34; /tmp/orgA/stew_text2.txt /tmp/orgA/stewman.txt | rg -i &#34;bias|panel|4[89]&#34; | head</summary>
+```bash
+F="/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/org_A_opportunity_structure_note.md"; rg -n -o ".{0,200}(4[89]%|bias).{0,200}" "$F"; rg -n "4[89]%|percent|bias" /tmp/orgA/stew_text2.txt /tmp/orgA/stewman.txt | rg -i "bias|panel|4[89]" | head
+```
+
+```
+30:. 16). Stewman & Konda concede that talent varies by cohort (p. 673). Podolny has no direct measure of quality. Survivor-only samples (Rosenbaum) and one-point samples (Stewman & Konda measure 20–50% bias, p. 680) distort selection estimates [imperfect measure].
+172: In OLM 2, careers are decomposed by gateway, by highest grade attained ("stars"), and by cohort size. Retrospective and panel samples are compared with the full labor-market data to measure sampling bias.
+202:eems quite elementary, but it is not often heeded in social science research. The result is that individual variation is treated at length, but the underlying structures are not identified." Measured bias (p. 680): "Prospective or panel data, on the other hand, produce extremely large selection biases (48%-49%) as well as quite large promotion biases (24%-30%)."
+248:ions. ASSUMPTION 3.-A producer's relations with others in the market mediates the relationship between status and quality by creating inertial tendencies in the formation of exchange relations and by biasing evaluation in the direction of the status of those to whom the producer is tied."
+311:te, clearly [discernible] differences in ability among a large group of employees is so [slight] that they do [not] govern the selection of persons for promotion." Also MS III.36 (PDF p. 99): custom "biases management in favor of ability as a selection criterion even when seniority and ability are almost perfectly correlated."
+/tmp/orgA/stew_text2.txt:524:one-point sample to be biased and, more significantly, because of the
+/tmp/orgA/stew_text2.txt:526:themselves to be biased. Hence, we conclude that one-point samples give
+/tmp/orgA/stew_text2.txt:541:examine the biases produced at the second promotion gateway (G2 -> G3)
+/tmp/orgA/stew_text2.txt:549:parameters for both 10 and 20 years. To examine the nature of bias, we
+/tmp/orgA/stew_text2.txt:568:selection biases (48%-49%) as well as quite large promotion biases (24%30%). At 10 years the errorf
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+The "20–50%" figure in the synthesis was wrong; the paper reports panel-sample biases of 48–49% and 24–30%. Fixing it:
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2"><details>
+<summary>Tool use: **edit_file_v2** • Edit file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/org_A_opportunity_structure_note.md</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="unknown" data-tool-name="update_current_step"><details>
+<summary>Tool use: **update_current_step**</summary>
+An unknown error occurred
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+The note is finished: `sources/notes/org_A_opportunity_structure_note.md`, with the synthesis at the top, five source sections and a Kanter line. That is the only file I wrote. The biggest verification problem is that the Doeringer & Piore PDF is the 1970 report, not the 1971 book, so its page numbers don't match the published edition.
+
+**Rosenbaum 1979** (DOI 10.2307/2392495)
+- p. 233: "81 percent versus 33 percent."
+- p. 234: early losers "are no longer competing in the same system."
+- p. 238: careers are "not a series of equal contests."
+- **Model:** verbal tournament only, not fit to data.
+- **Tags:** [single system] (one firm, N = 671), [imperfect measure] (job level is the only variable), [no model of mechanism], [model not fit to data].
+- Page 238, note 16, says early promotion may only reflect earlier sorting.
+
+**White 1970** (chapter DOIs are in the note)
+- p. 249: "Men's careers are by-products, not generators, of mobility."
+- p. 281: "Random selection of men seems a reasonable first approximation."
+- **Model:** a formal Markov model of vacancy chains, fit to three clergies. It assumes selection is random.
+- **Tags:** [small data] (about 100 moves per sampled year), [single system], [no model of mechanism] for who gets selected.
+- **Verification:** Chapters 2–5 are not in the library. The multiplier matrix on pp. 326–327 came out garbled in the text layer, so I rebuilt it from the definitions and flagged that.
+
+**Stewman & Konda 1983** (DOI 10.1086/227910)
+- p. 650: a "pyramidal grade structure does not imply declining career chances."
+- p. 672: part of a "star's" brightness is a cohort effect.
+- p. 675: "turtles eventually also get there."
+- **Model:** formal (promotion chance = vacancies × managerial preference ÷ number of competitors). It is partly fit, with seniority as the only score, plus sign predictions across organizations.
+- **Tags:** [single system] (one police force for all individual-level results), [small data] (18 cohorts), [imperfect measure].
+- **Verification:** The tables on pp. 654, 674 and 678 and equation 1 came out garbled. Only numbers stated in the prose are quoted.
+
+**Podolny 1993** (DOI 10.1086/230091)
+- p. 831: status is a "signal of the underlying quality."
+- p. 863: a lower-status bank "cannot simply buy its way" into a high-status niche.
+- p. 867: status is "not simply an epiphenomenal reflection" of quality.
+- **Model:** verbal model plus ordinary regressions, not structurally fit.
+- **Tags:** [outcome is not selection] (the outcome is price), [single system], [imperfect measure] (quality is never observed).
+
+**Doeringer & Piore 1971**
+- MS I.2: "ports of entry and exit."
+- MS I.3: promotions are "governed by relatively fixed standards of seniority and ability."
+- MS III.24: posting rules "determine the group of applicants."
+- **Model:** none; the authors call their evidence "heuristic" (MS I.8).
+- **Tags:** [small data], [imperfect measure], [no model of mechanism], [model not fit to data], [single system].
+- **Verification:**
+  - The PDF is ERIC ED 048 457, the May 1970 report to the Department of Labor, so I cite typescript pages (e.g. MS III.20) plus PDF pages.
+  - Re-check every quote against the 1971 Heath book; the Routledge 2020 reissue is DOI 10.4324/9781003069720.
+  - The text is ERIC's OCR. I fixed obvious slips and put my insertions in brackets.
+
+**Kanter 1977:** no PDF. Marked not available and not to be quoted.
+
+**Other checks:**
+- All metadata were checked on Crossref.
+- Crossref gives only Rosenbaum's first page; the last page comes from the PDF.
+- No fresh OCR was needed for any source.

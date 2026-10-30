@@ -39,13 +39,6 @@ A concise summary (≤ 400 words): for each source, 2–3 strongest quotes with 
 
 _**Agent (claude-opus-5-5)**_
 
-<think><details><summary>Thought Process</summary>
-Let me get started efficiently and set things up first.
-
-</details></think>
-
-_**Agent (claude-opus-5-5)**_
-
 I'll start by checking the source PDFs and extracting their text page by page.
 
 _**Agent (claude-opus-5-5)**_
@@ -116,13 +109,6 @@ Through simulation we investigate how chara
 
 _**Agent (claude-opus-5-5)**_
 
-<think><details><summary>Thought Process</summary>
-Since all pages have text layers, I'll dump each to a temp file with page markers, and quickly check an existing note first to match the established convention.
-
-</details></think>
-
-_**Agent (claude-opus-5-5)**_
-
 All five PDFs have text layers. I'll dump them page by page to temp files and glance at an existing note for format.
 
 _**Agent (claude-opus-5-5)**_
@@ -132,23 +118,44 @@ _**Agent (claude-opus-5-5)**_
 ```bash
 cd "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/FOUNDY_Intro/" && mkdir -p /tmp/orgB && for d in 846 833 836 834 838; do f=$(ls files/$d/*.pdf); n=$(pdfinfo "$f" | awk '/Pages/{print $2}'); : > /tmp/orgB/$d.txt; for p in $(seq 1 $n); do echo "######## PDF PAGE $p" >> /tmp/orgB/$d.txt; pdftotext -f $p -l $p "$f" - >> /tmp/orgB/$d.txt; done; wc -l /tmp/orgB/$d.txt; done; head -60 ../notes/edu_B_classroom_peers_note.md
 ```
+
+```
+    3112 /tmp/orgB/846.txt
+    2548 /tmp/orgB/833.txt
+    1881 /tmp/orgB/836.txt
+    1922 /tmp/orgB/834.txt
+    3226 /tmp/orgB/838.txt
+# Education B — classroom / roommate / cohort peer effects: source note
+
+**Purpose:** verbatim, page-cited extracts for the EDUCATION background subsection of the dissertation introduction. Not dissertation prose.
+
+**Conventions**
+
+- "p. N" = printed journal (or working-paper) page number. "PDF p. M" given when it differs.
+- Quotes are copied from the PDF text layer (`pdftotext -layout`). Hyphenation at line breaks is rejoined; nothing else is changed unless marked `[OCR fix: ...]` (only for the scanned Sacerdote 2001 JSTOR copy, whose text layer contains OCR character errors). Hoxby 2000's PDF has no usable text layer; it was OCR'd with tesseract, so Hoxby quotes are OCR output checked for obvious errors.
+- Limitation tags: [small data], [imperfect measure], [single system], [no model of mechanism], [model not fit to data], [outcome is not selection].
+- "Channel / source" lines are **assistant judgment**, not the authors' claims. Channels: development (what a person becomes), evaluation (how a performance is measured/perceived), selection (who wins a scarce slot). Sources: peers vs organization.
+
+**Contents** — numbered as in the request; sections appear in the order written (Hoxby §1 was written after Lyle §9 because its PDF needed OCR): §2 Sacerdote 2001; §3 Carrell, Fullerton & West 2009; §4 Carrell, Sacerdote & West 2013; §5 Booij, Leuven & Oosterbeek 2017; §6 Feld & Zölitz 2017; §7 Duflo, Dupas & Kremer 2008 WP; §8 Jackson & Bruegmann 2009 WP; §9 Lyle 2007; §1 Hoxby 2000 WP; §10 Angrist 2014; §11 Sacerdote 2011 & 2014 (abstract-only).
+
+---
+
+## Assistant synthesis (ASSISTANT SYNTHESIS, not source text)
+
+1. **Sign and size.** Random or quasi-random peer variation usually gives positive but modest average effects on academic outcomes: about +.05 GPA per SD of roommate GPA at Dartmouth (an outcome-on-outcome correlation; the causal
+… (output truncated)
+```
 </details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+I'll create the output file with the header now, verify metadata through Crossref, and start reading Groysberg et al.
 
 _**Agent (claude-opus-5-5)**_
 
 <tool-use data-tool-type="write" data-tool-name="edit_file_v2"><details>
 <summary>Tool use: **edit_file_v2** • Edit file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/org_B_performance_evaluation_note.md</summary>
-Status: **loading**
 
-</details></tool-use>
-
-_**Agent (claude-opus-5-5)**_
-
-<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
-<summary>Tool use: **run_terminal_command_v2** • Run command: for d in 10.1287/mnsc.1070.0809 10.1287/mnsc.1050.0464 10.1111/j.1744-6570.2005.00361.x 10.2307/2393794 10.2189/asqu.52.2.208; do curl -s -m 20 &#34;https://api.crossref.org/works/$d&#34; | python3 -c &#34;import sys,json; m=json.load(sys.stdin)[&#39;message&#39;]; print(m[&#39;DOI&#39;], &#39;|&#39;, m[&#39;title&#39;][0], &#39;|&#39;, m.get(&#39;container-title&#39;), m.get(&#39;volume&#39;), m.get(&#39;issue&#39;), m.get(&#39;page&#39;), m.get(&#39;issued&#39;), [a.get(&#39;family&#39;) for a in m.get(&#39;author&#39;,[])])&#34; || echo &#34;FAIL $d&#34;; done</summary>
-```bash
-for d in 10.1287/mnsc.1070.0809 10.1287/mnsc.1050.0464 10.1111/j.1744-6570.2005.00361.x 10.2307/2393794 10.2189/asqu.52.2.208; do curl -s -m 20 "https://api.crossref.org/works/$d" | python3 -c "import sys,json; m=json.load(sys.stdin)['message']; print(m['DOI'], '|', m['title'][0], '|', m.get('container-title'), m.get('volume'), m.get('issue'), m.get('page'), m.get('issued'), [a.get('family') for a in m.get('author',[])])" || echo "FAIL $d"; done
-```
 </details></tool-use>
 
 _**Agent (claude-opus-5-5)**_
@@ -161,8 +168,771 @@ _**Agent (claude-opus-5-5)**_
 _**Agent (claude-opus-5-5)**_
 
 <tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: for d in 10.1287/mnsc.1070.0809 10.1287/mnsc.1050.0464 10.1111/j.1744-6570.2005.00361.x 10.2307/2393794 10.2189/asqu.52.2.208; do curl -s -m 20 &#34;https://api.crossref.org/works/$d&#34; | python3 -c &#34;import sys,json; m=json.load(sys.stdin)[&#39;message&#39;]; print(m[&#39;DOI&#39;], &#39;|&#39;, m[&#39;title&#39;][0], &#39;|&#39;, m.get(&#39;container-title&#39;), m.get(&#39;volume&#39;), m.get(&#39;issue&#39;), m.get(&#39;page&#39;), m.get(&#39;issued&#39;), [a.get(&#39;family&#39;) for a in m.get(&#39;author&#39;,[])])&#34; || echo &#34;FAIL $d&#34;; done</summary>
+```bash
+for d in 10.1287/mnsc.1070.0809 10.1287/mnsc.1050.0464 10.1111/j.1744-6570.2005.00361.x 10.2307/2393794 10.2189/asqu.52.2.208; do curl -s -m 20 "https://api.crossref.org/works/$d" | python3 -c "import sys,json; m=json.load(sys.stdin)['message']; print(m['DOI'], '|', m['title'][0], '|', m.get('container-title'), m.get('volume'), m.get('issue'), m.get('page'), m.get('issued'), [a.get('family') for a in m.get('author',[])])" || echo "FAIL $d"; done
+```
+
+```
+10.1287/mnsc.1070.0809 | Can They Take It With Them? The Portability of Star Knowledge Workers' Performance | ['Management Science'] 54 7 1213-1230 {'date-parts': [[2008, 7]]} ['Groysberg', 'Lee', 'Nanda']
+10.1287/mnsc.1050.0464 | The Firm Specificity of Individual Performance: Evidence from Cardiac Surgery | ['Management Science'] 52 4 473-488 {'date-parts': [[2006, 4]]} ['Huckman', 'Pisano']
+10.1111/j.1744-6570.2005.00361.x | FORCED DISTRIBUTION RATING SYSTEMS AND THE IMPROVEMENT OF WORKFORCE POTENTIAL: A BASELINE SIMULATION | ['Personnel Psychology'] 58 1 1-32 {'date-parts': [[2005, 2, 15]]} ['SCULLEN', 'BERGEY', 'AIMAN‐SMITH']
+10.2307/2393794 | Sunk Costs in the NBA: Why Draft Order Affects Playing Time and Survival in Professional Basketball | ['Administrative Science Quarterly'] 40 3 474 {'date-parts': [[1995, 9]]} ['Staw', 'Hoang']
+10.2189/asqu.52.2.208 | Competitive Crowding and Risk Taking in a Tournament: Evidence from NASCAR Racing | ['Administrative Science Quarterly'] 52 2 208-247 {'date-parts': [[2007, 6]]} ['Bothner', 'Kang', 'Stuart']
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+The Groysberg text layer looks like an OCR'd JSTOR scan with interleaved columns. I'll read the results pages in `-layout` mode to keep the columns separate.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
 <summary>Tool use: **run_terminal_command_v2** • Run command: cd &#34;/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/FOUNDY_Intro/&#34; &amp;&amp; f=$(ls files/846/*.pdf); for p in $(seq 9 19); do echo &#34;######## PDF PAGE $p&#34;; pdftotext -layout -f $p -l $p &#34;$f&#34; - | rg -v &#34;This content downloaded|199.111|All use subject&#34;; done &gt; /tmp/orgB/846L.txt; wc -l /tmp/orgB/846L.txt</summary>
 ```bash
 cd "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/FOUNDY_Intro/" && f=$(ls files/846/*.pdf); for p in $(seq 9 19); do echo "######## PDF PAGE $p"; pdftotext -layout -f $p -l $p "$f" - | rg -v "This content downloaded|199.111|All use subject"; done > /tmp/orgB/846L.txt; wc -l /tmp/orgB/846L.txt
 ```
+
+```
+     910 /tmp/orgB/846L.txt
+
+```
 </details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /tmp/orgB/846L.txt</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Groysberg's printed page 1224 (PDF p. 13) is garbled in layout mode; I'll read the raw version of that page.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: awk &#39;/######## PDF PAGE 13$/{f=1} /######## PDF PAGE 14$/{f=0} f&#39; /tmp/orgB/846.txt | tr &#39;\n&#39; &#39; &#39; | sed &#39;s/  */ /g&#39; | fold -w 200</summary>
+```bash
+awk '/######## PDF PAGE 13$/{f=1} /######## PDF PAGE 14$/{f=0} f' /tmp/orgB/846.txt | tr '\n' ' ' | sed 's/  */ /g' | fold -w 200
+```
+
+```
+######## PDF PAGE 13 Groysberg, Lee, and Nanda: Can They Take It With Them? The Portability of Star Knowledge Workers' Performance 1224 Management Science 54(7), pp. 1213-1230, ?2008 INFORMS Table 3 E
+ffect of Switching Firms on Ranked Analysts' Short-Term and Long-Term Performance by Direction and Type of Move 1988-1996 ordered probit regressions Category Rank(i + 1) Rank(? + 2) Rank(f + 3) Rank(f
+ + 4) Rank(f + 5) Independent variable Moving to a weaker firm Firm capability direction Coefficient -0.338* -0.407* -0.312* -0.590** -0.480* Robust std. err. (0.163) (0.172) (0.191) (0.212) (0.280) N
+ 90 Moving 81 to 64 a 48 32 comparable firm Coefficient -0.409*** -0.250* -0.199 -0.064 -0.137 Robust std. err. (0.099) (0.121) (0.132) (0.145) (0.163) N 209 Moving 176 to a 145 better 122 98 firm Coe
+fficient -0.144 -0.083 -0.187 -0.128 -0.358 Robust std. err. (0.148) (0.164) (0.167) (0.191) (0.247) N 67 64 55 45 35 Coworker move solo Moving Coefficient -0.440*** -0.270** -0.269** -0.167 -0.242* R
+obust std. err. (0.086) (0.097) (0.103) (0.118) (0.146) N 266 Moving 233 in 195 157 124 teams Coefficient -0.033 -0.149 -0.070 -0.267 -0.275 Robust std. err. (0.132) (0.170) (0.188) (0.204) (0.206) N 
+100 Notes. This table firm, move (the a < examines firms **p with analysts 58 if < and 0.01, 41 ranked firm, variable). short-term 0.05, 69 comparable Coworkermove analysts' *p to 88 This < move table
+ long-term ***p analys or repo perform 0.001, tp < 0 Team Movement weaker capabilities. R who and put, Long-Term stay these an for five years. Stars who Next, we switch exami solo or with a t capabili
+ties exhibit no significant formance (Rankt long-term performance. For this Rankt+5).skills Ranke the loss of firm-specific as immediate declin in performance might have bee new at least five year emp
+loyers' valuable capabil no significant eff years at a new firm, however, an ranked analys to better firmsof are unable to out finding suggests did not move. Star analysts who league or team
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+The text layer on Groysberg p. 1224 is unreadable, so I'll OCR that one page with tesseract.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd &#34;/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/FOUNDY_Intro/&#34; &amp;&amp; f=$(ls files/846/*.pdf); pdftoppm -r 250 -png -f 13 -l 13 &#34;$f&#34; /tmp/orgB/g13 &amp;&amp; ls /tmp/orgB/g13* &amp;&amp; tesseract /tmp/orgB/g13-13.png - 2&gt;/dev/null | sed -n &#39;1,200p&#39;</summary>
+```bash
+cd "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/FOUNDY_Intro/" && f=$(ls files/846/*.pdf); pdftoppm -r 250 -png -f 13 -l 13 "$f" /tmp/orgB/g13 && ls /tmp/orgB/g13* && tesseract /tmp/orgB/g13-13.png - 2>/dev/null | sed -n '1,200p'
+```
+
+```
+/tmp/orgB/g13-13.png
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: which tesseract; ls /opt/homebrew/bin/tesseract /usr/local/bin/tesseract 2&gt;&amp;1; tesseract /tmp/orgB/g13-13.png /tmp/orgB/g13 2&gt;&amp;1 | tail -3; ls -la /tmp/orgB/</summary>
+```bash
+which tesseract; ls /opt/homebrew/bin/tesseract /usr/local/bin/tesseract 2>&1; tesseract /tmp/orgB/g13-13.png /tmp/orgB/g13 2>&1 | tail -3; ls -la /tmp/orgB/
+```
+
+```
+/opt/homebrew/bin/tesseract
+ls: /usr/local/bin/tesseract: No such file or directory
+/opt/homebrew/bin/tesseract
+Leptonica Error in pixRead: image file not found: �PNG
+Image file �PNG cannot be read!
+Error during processing.
+total 2544
+drwxr-xr-x   10 charleslevine  wheel     320 Oct 30 12:57 .
+drwxrwxrwt  117 root           wheel    3744 Oct 30 12:57 ..
+-rw-r--r--    1 charleslevine  wheel   85594 Oct 30 12:57 833.txt
+-rw-r--r--    1 charleslevine  wheel   71179 Oct 30 12:57 834.txt
+-rw-r--r--    1 charleslevine  wheel   91316 Oct 30 12:57 836.txt
+-rw-r--r--    1 charleslevine  wheel  127975 Oct 30 12:57 838.txt
+-rw-r--r--    1 charleslevine  wheel   98980 Oct 30 12:57 846.txt
+-rw-r--r--    1 charleslevine  wheel   84842 Oct 30 12:57 846L.txt
+-rw-r--r--    1 charleslevine  wheel  668296 Oct 30 12:57 g13-13.png
+-rw-r--r--    1 charleslevine  wheel       0 Oct 30 12:57 g13.txt
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Tesseract can't read the PNG here, so I'll convert it to TIFF; failing that, I'll view the page image directly.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd /tmp/orgB &amp;&amp; sips -s format tiff g13-13.png --out g13.tif &gt;/dev/null &amp;&amp; tesseract g13.tif g13ocr 2&gt;&amp;1 | tail -2; wc -c g13ocr.txt 2&gt;/dev/null</summary>
+```bash
+cd /tmp/orgB && sips -s format tiff g13-13.png --out g13.tif >/dev/null && tesseract g13.tif g13ocr 2>&1 | tail -2; wc -c g13ocr.txt 2>/dev/null
+```
+
+```
+    4978 g13ocr.txt
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /tmp/orgB/g13ocr.txt</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+I have what I need for Groysberg et al.; writing that section now.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/org_B_performance_evaluation_note.md</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2"><details>
+<summary>Tool use: **edit_file_v2** • Edit file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/org_B_performance_evaluation_note.md</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+I claimed the abstract wording was checked against the page image, so I'll actually do that by OCR-ing PDF p. 2.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd &#34;/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/FOUNDY_Intro/&#34; &amp;&amp; f=$(ls files/846/*.pdf); pdftoppm -r 250 -png -f 2 -l 2 &#34;$f&#34; /tmp/orgB/g02 &amp;&amp; cd /tmp/orgB &amp;&amp; sips -s format tiff g02-02.png --out g02.tif &gt;/dev/null &amp;&amp; tesseract g02.tif g02ocr &gt;/dev/null 2&gt;&amp;1; sed -n &#39;1,30p&#39; g02ocr.txt</summary>
+```bash
+cd "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/FOUNDY_Intro/" && f=$(ls files/846/*.pdf); pdftoppm -r 250 -png -f 2 -l 2 "$f" /tmp/orgB/g02 && cd /tmp/orgB && sips -s format tiff g02-02.png --out g02.tif >/dev/null && tesseract g02.tif g02ocr >/dev/null 2>&1; sed -n '1,30p' g02ocr.txt
+```
+
+```
+MANAGEMENT SCIENCE
+
+Vol. 54, No. 7, July 2008, pp. 1213-1230
+ISSN 0025-1909 | EISSN 1526-5501 | 08 | 5407 | 1213
+
+ormss
+
+pot 10.1287 /mnsc.1070.0809
+©2008 INFORMS
+
+Can They Take It With Them? The Portability of
+Star Knowledge Workers’ Performance
+
+Boris Groysberg, Linda-Eling Lee
+
+Harvard Business School, Harvard University, Boston, Massachusetts 02163
+{bgroysberg@hbs.edu, llee@hbs.edu}
+
+Ashish Nanda
+
+Harvard Law School, Harvard University, Cambridge, Massachusetts 02138,
+ananda@law.harvard.edu
+
+his paper examines the portability of star security analysts’ performance. Star analysts who switched
+
+employers experienced an immediate decline in performance that persisted for at least five years. This
+decline was most pronounced among star analysts who moved to firms with lesser capabilities and those who
+moved solo, without other team members. Star analysts who moved between two firms with equivalent capa-
+bilities also exhibited a drop in performance, but only for two years. Those who switched to firms with better
+capabilities and those who moved with other team members exhibited no significant decline in short-term or
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Abstract confirmed by OCR. I'll fix the note's wording to say how it was checked, then move to Huckman & Pisano.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2"><details>
+<summary>Tool use: **edit_file_v2** • Edit file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/org_B_performance_evaluation_note.md</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2"><details>
+<summary>Tool use: **edit_file_v2** • Edit file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/org_B_performance_evaluation_note.md</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="unknown" data-tool-name="update_current_step"><details>
+<summary>Tool use: **update_current_step**</summary>
+An unknown error occurred
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd &#34;/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/FOUNDY_Intro/&#34; &amp;&amp; f=$(ls files/833/*.pdf); for p in $(seq 2 17); do echo &#34;######## PDF PAGE $p&#34;; pdftotext -layout -f $p -l $p &#34;$f&#34; - | rg -v &#34;This content downloaded|^\s*[0-9.]+ on |All use subject&#34;; done &gt; /tmp/orgB/833L.txt; wc -l /tmp/orgB/833L.txt</summary>
+```bash
+cd "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/FOUNDY_Intro/" && f=$(ls files/833/*.pdf); for p in $(seq 2 17); do echo "######## PDF PAGE $p"; pdftotext -layout -f $p -l $p "$f" - | rg -v "This content downloaded|^\s*[0-9.]+ on |All use subject"; done > /tmp/orgB/833L.txt; wc -l /tmp/orgB/833L.txt
+```
+
+```
+    1245 /tmp/orgB/833L.txt
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /tmp/orgB/833L.txt</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /tmp/orgB/833L.txt</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: awk &#39;/######## PDF PAGE 11$/{f=1} /######## PDF PAGE 12$/{f=0} f&#39; /tmp/orgB/833.txt | sed -n &#39;60,200p&#39; | tr &#39;\n&#39; &#39; &#39; | sed &#39;s/  */ /g&#39; | fold -w 220</summary>
+```bash
+awk '/######## PDF PAGE 11$/{f=1} /######## PDF PAGE 12$/{f=0} f' /tmp/orgB/833.txt | sed -n '60,200p' | tr '\n' ' ' | sed 's/  */ /g' | fold -w 220
+```
+
+```
+are in the predicted positive direction. main finding points that, only Our 0.001 percentage cant at conventional levels. from this regression, however, is that the coefficient on TOTCASE is negative and that estimate is
+ not Thethe strongest vidence of firm formance is that the coefficient on sensitive to the use of three-month quality measures, six-month quality measures, and?as suggested by only significantly different from z Column 1
+?the absence of lagged quality measures. nificantly different from the OTH the 1% 6 level. This 3 result, which The analysis in Columns 4 through of Table repeats that in Columns 1 through 3 with the excep tom of Table 4
+, implies that surg tion that surgeon volume in the prior given hospitalquarter affects is her outcome replaced by surgeon volume in the current quarter nificantly more than does her vol (TOTCASEs ). We note that the res
+ults are similar to tals. The relative magnitude and sig those using volume from the prior key quarter. coefficients?as well as the si difference between them?does no Hospital-Specific Surgeon Volume fully as we add cont
+rols for surg The results of our test for hospital-specificity sur quarter (Co quality for the in prior geon performance?as described in (4)?appear six months (Columnin 3).16 Finally robust to the use of case volume meas
+ur Table 4. Column 1 decomposes a surgeon's total volume into those performed at hospital h (HOSP CASE) and those occurring elsewhere (OTHCASE). 16 As in our results using total surgeon v Both coefficients are negative, 
+inclusion but that HOSPCASE ofon various measures of surgeon ingfully affect the is much coefficients on HOSPC is significant at 1%, while that on OTHCASE check, we regress the one-quarter change smaller in magnitude and
+ insignificant at conven quarter change in a surgeon's risk-adjusted tional levels. The marginal effect for HOSPCASE is hospital and fixed effects for the time perio slightly larger than, although similar in magnitude, t
+o this regr
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Huckman & Pisano's printed p. 482 is garbled too; I'll OCR it.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd &#34;/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/FOUNDY_Intro/&#34; &amp;&amp; f=$(ls files/833/*.pdf); pdftoppm -r 250 -png -f 11 -l 11 &#34;$f&#34; /tmp/orgB/h11 &amp;&amp; cd /tmp/orgB &amp;&amp; sips -s format tiff h11-11.png --out h11.tif &gt;/dev/null &amp;&amp; tesseract h11.tif h11ocr &gt;/dev/null 2&gt;&amp;1; sed -n &#39;/ity measures/,$p&#39; h11ocr.txt</summary>
+```bash
+cd "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/FOUNDY_Intro/" && f=$(ls files/833/*.pdf); pdftoppm -r 250 -png -f 11 -l 11 "$f" /tmp/orgB/h11 && cd /tmp/orgB && sips -s format tiff h11-11.png --out h11.tif >/dev/null && tesseract h11.tif h11ocr >/dev/null 2>&1; sed -n '/ity measures/,$p' h11ocr.txt
+```
+
+```
+ity measures. We note that while the coefficients on
+both controls are statistically insignificant, they are
+in the predicted positive direction. Our main finding
+from this regression, however, is that the coefficient
+on TOTCASE is negative and that the estimate is not
+sensitive to the use of three-month quality measures,
+six-month quality measures, and—as suggested by
+Column 1—the absence of lagged quality measures.
+
+The analysis in Columns 4 through 6 of Table 3
+repeats that in Columns 1 through 3 with the excep-
+tion that surgeon volume in the prior quarter is
+replaced by surgeon volume in the current quarter
+(TOTCASE, ,). We note that the results are similar to
+those using volume from the prior quarter.
+
+Hospital-Specific Surgeon Volume
+
+The results of our test for hospital-specificity in sur-
+geon performance—as described in (4)—appear in
+Table 4. Column 1 decomposes a surgeon’s total case
+volume into those performed at hospital h (HOSP-
+CASE) and those occurring elsewhere (OTHCASE).
+Both coefficients are negative, but that on HOSPCASE
+is significant at 1%, while that on OTHCASE is much
+smaller in magnitude and insignificant at conven-
+tional levels. The marginal effect for HOSPCASE is
+slightly larger than, although similar in magnitude, to
+that on TOTCASE in Table 3—an increase of one case
+per quarter is associated with a 0.018 percentage point
+
+decline in the mortality rate. For OTHCASE, a simi-
+lar increase of one case is correlated with a decline of
+only 0.001 percentage points that, again, is insignifi-
+cant at conventional levels.
+
+The strongest evidence of firm specificity in per-
+formance is that the coefficient on HOSPCASE is not
+only significantly different from zero, but is also sig-
+nificantly different from the OTHCASE coefficient at
+the 1% level. This result, which appears at the bot-
+tom of Table 4, implies that surgeon’s volume at a
+given hospital affects her outcome at that hospital sig-
+nificantly more than does her volume at other hospi-
+tals
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Writing the Huckman & Pisano section now.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cat &gt;&gt; &#34;/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/org_B_performance_evaluation_note.md&#34; &lt;&lt;&#39;EOF&#39;
+
+## 2. Huckman &amp; Pisano (2006) — firm specificity of cardiac surgeons&#39; performance
+
+**Citation.** Huckman, Robert S., and Gary P. Pisano. 2006. &#34;The Firm Specificity of Individual Performance: Evidence from Cardiac Surgery.&#34; *Management Science* 52(4): 473–488. DOI 10.1287/mnsc.1050.0464. (JSTOR copy: printed p. N = PDF p. N − 471; e.g., p. 473 = PDF p. 2.)
+
+**Text-layer note.** Printed p. 482 (PDF p. 11) has interleaved columns in the text layer; quotes from that page are from a tesseract OCR of the page image. All other pages read cleanly with `pdftotext -layout`.
+
+**Data / setting.** Pennsylvania (US), every coronary artery bypass graft (CABG) patient in 1994–1995, from the Pennsylvania Health Care Cost Containment Council (PHC4): &#34;38,577 procedures performed by 203 surgeons operating at 43 hospitals&#34; (p. 477). Regression samples 28,173–34,173 cases after lags (fn. 6, p. 477). Unit: patient, nested in surgeon × hospital × quarter. Key variation: surgeons who &#34;split&#34; cases across hospitals: &#34;roughly 30% of the cardiac surgeons in the sample were splitters during the average quarter&#34; (p. 478). Outcome: in-hospital death; mean 3.1% (Table 2, p. 481).
+
+**Design.** Patient-level logistic regression of death on the surgeon&#39;s prior-quarter volume *at this hospital* (HOSPCASE) and *at other hospitals* (OTHCASE), with prior-quarter surgeon and hospital risk-adjusted mortality (RAMR), patient clinical risk factors, quarter fixed effects, standard errors clustered by surgeon (eqs. 3–4, p. 479). The test: &#34;if the performance of surgeons were not at all firm specific, then one would expect volume at Hospitals A and B to have identical effects on the surgeon&#39;s outcomes at Hospital A&#34; (p. 479). Advantage claimed: they &#34;examine a given worker across several firms at a single time, thereby avoiding the need to control for factors, such as increased experience or changes in required job tasks&#34; (p. 474).
+
+**Main findings (verbatim).**
+
+&gt; &#34;Using patient mortality as an outcome measure, we find that the quality of a surgeon&#39;s performance at a given hospital improves significantly with increases in his or her recent procedure volume at that hospital but does not significantly improve with increases in his or her volume at other hospitals. Our findings suggest that surgeon performance is not fully portable across hospitals (i.e., some portion of performance is firm specific).&#34; (abstract, p. 473)
+
+&gt; &#34;an increase of one case per quarter is associated with a 0.018 percentage point decline in the mortality rate. For OTHCASE, a similar increase of one case is correlated with a decline of only 0.001 percentage points that, again, is insignificant at conventional levels.&#34; (p. 482; tesseract OCR)
+
+&gt; &#34;The strongest evidence of firm specificity in performance is that the coefficient on HOSPCASE is not only significantly different from zero, but is also significantly different from the OTHCASE coefficient at the 1% level.&#34; (p. 482; tesseract OCR)
+
+- Table 4 (p. 483): HOSPCASE −0.0103 (SE 0.0023) vs OTHCASE −0.0003 (SE 0.0037), N = 34,173; marginal effects −0.018% vs −0.001% at a predicted mortality of 1.76%. (Assistant computation: one extra local case per quarter ≈ 1% relative reduction in predicted mortality.) Splitters only (Table 5, p. 484): N = 10,150, HOSPCASE −0.0112 vs OTHCASE −0.0007; difference significant at 6% (11% with six-month quality lags).
+
+&gt; &#34;This finding points to the importance of familiarity—above and beyond influence—in explaining the hospital-specific performance of surgeons.&#34; (p. 484)
+
+&gt; &#34;Regardless of whether our results are due to matching or increased familiarity over time, they still highlight the key point that the performance of pivotal freelancers does depend on organizational context.&#34; (p. 486)
+
+**Peers / competition inside the hospital.** Influence is defined relative to the other surgeons at the same hospital: a high-volume surgeon may &#34;command preferential access—relative to other cardiac surgeons—to the hospital&#39;s resources&#34; (p. 476); &#34;To the extent that cardiac surgeons compete for resources in terms of operating room scheduling or team members, they thus compete against one another.&#34; (p. 480) Influence proxies: SHARE (surgeon&#39;s share of hospital CABG volume) and CITATIONS (share of the hospital&#39;s CABG citations). Both have the predicted negative sign but are insignificant, and the HOSPCASE–OTHCASE gap survives (Table 6, p. 485; text p. 484).
+
+**Mechanism / model.** No formal model. Verbal mechanisms are (1) familiarity with hospital-specific assets and teams (tacit knowledge) and (2) influence over hospital resources relative to other surgeons (pp. 475–476). The regressions test which proxy carries the effect. The authors call the mechanism evidence &#34;preliminary&#34; (abstract, p. 473) and say &#34;The specific nature of these key organizational assets—which may be specific employees, team structures, or operating routines—represents an area for further research.&#34; (p. 485)
+
+**Separating sorting from effects.**
+- Patient sorting to better surgeons: handled by PHC4 risk adjustment, because &#34;higher quality surgeons may attract patients with more severe forms of coronary disease&#34; (p. 477).
+- Reverse causality (bad outcomes cause less volume): volumes are lagged one quarter &#34;To reduce concerns regarding the direction of causality&#34; (p. 479). Footnote 16 (p. 482) regresses the change in HOSPCASE on the change in surgeon RAMR; the coefficient &#34;is very low (−0.30) and is insignificant&#34; (fn. 16, p. 483).
+- Why surgeons split is not observed: &#34;The PHC4 data does not provide information as to which, if any, of the above factors explain splitting behavior. As such, this paper focuses on the effects, rather than the causes, of this activity.&#34; (p. 477)
+- Match quality vs. learning is not separated: cumulative volume &#34;would help us separate volume-outcome effects due to increased familiarity over time from similar effects due to an idiosyncratically good match between a surgeon and a hospital. While pure matching could theoretically explain our result, practical examples of pure matching are rare in this setting.&#34; (p. 486)
+
+**Limitations (tagged).**
+- [single system] &#34;our results are based on only one type of freelance worker. It is, therefore, possible that the pattern of organization-specific performance that we identify for cardiac surgeons may not be as strong in other settings.&#34; (p. 485) Also one state.
+- [small data] Two years only; &#34;our analysis might benefit from a deeper panel with additional years of data for each surgeon and hospital&#34; (p. 486). The splitters-only sample is about 10,000 cases, and significance falls to 6–11% (p. 483).
+- [imperfect measure] Recent (quarterly) volume rather than cumulative experience (p. 486). Data are identified only by calendar quarter, so within-quarter splitting is assumed even (fn. 11, p. 478). Influence proxies &#34;would benefit from additional proxies for surgeon influence&#34; (p. 486); SHARE &#34;may be correlated with our measure of familiarity (HOSPCASE)&#34; (p. 480).
+- [no model of mechanism] Familiarity vs. influence vs. match quality are only partly separated (quotes above).
+- [outcome is not selection] The outcome is patient mortality, a performance measure. Nobody is selected into a slot. (Assistant judgment: the influence story is a within-hospital competition for scarce operating rooms and teams, but it is proxied, not studied as an allocation.)
+
+**Channel / source (Assistant judgment).** Main channel: **development / production**. A surgeon&#39;s skill is partly specific to the hospital&#39;s teams and assets. Source: **organization** (hospital assets, staff) and **peers** in two forms: non-surgeon team members (familiarity) and competing surgeons at the same hospital (influence over scarce resources). Relevance to evaluation: because public &#34;report cards&#34; rate surgeons, a surgeon&#39;s measured quality depends on where they operate, so an evaluation that treats performance as a personal trait mixes person and organization. The authors also note that surgeons cannot easily see this themselves: &#34;a surgeon who does a large number of procedures in a given period may not be able to distinguish a 1% mortality rate from a 3% rate.&#34; (p. 485)
+
+---
+EOF
+echo ok</summary>
+```bash
+cat >> "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/org_B_performance_evaluation_note.md" <<'EOF'
+
+## 2. Huckman & Pisano (2006) — firm specificity of cardiac surgeons' performance
+
+**Citation.** Huckman, Robert S., and Gary P. Pisano. 2006. "The Firm Specificity of Individual Performance: Evidence from Cardiac Surgery." *Management Science* 52(4): 473–488. DOI 10.1287/mnsc.1050.0464. (JSTOR copy: printed p. N = PDF p. N − 471; e.g., p. 473 = PDF p. 2.)
+
+**Text-layer note.** Printed p. 482 (PDF p. 11) has interleaved columns in the text layer; quotes from that page are from a tesseract OCR of the page image. All other pages read cleanly with `pdftotext -layout`.
+
+**Data / setting.** Pennsylvania (US), every coronary artery bypass graft (CABG) patient in 1994–1995, from the Pennsylvania Health Care Cost Containment Council (PHC4): "38,577 procedures performed by 203 surgeons operating at 43 hospitals" (p. 477). Regression samples 28,173–34,173 cases after lags (fn. 6, p. 477). Unit: patient, nested in surgeon × hospital × quarter. Key variation: surgeons who "split" cases across hospitals: "roughly 30% of the cardiac surgeons in the sample were splitters during the average quarter" (p. 478). Outcome: in-hospital death; mean 3.1% (Table 2, p. 481).
+
+**Design.** Patient-level logistic regression of death on the surgeon's prior-quarter volume *at this hospital* (HOSPCASE) and *at other hospitals* (OTHCASE), with prior-quarter surgeon and hospital risk-adjusted mortality (RAMR), patient clinical risk factors, quarter fixed effects, standard errors clustered by surgeon (eqs. 3–4, p. 479). The test: "if the performance of surgeons were not at all firm specific, then one would expect volume at Hospitals A and B to have identical effects on the surgeon's outcomes at Hospital A" (p. 479). Advantage claimed: they "examine a given worker across several firms at a single time, thereby avoiding the need to control for factors, such as increased experience or changes in required job tasks" (p. 474).
+
+**Main findings (verbatim).**
+
+> "Using patient mortality as an outcome measure, we find that the quality of a surgeon's performance at a given hospital improves significantly with increases in his or her recent procedure volume at that hospital but does not significantly improve with increases in his or her volume at other hospitals. Our findings suggest that surgeon performance is not fully portable across hospitals (i.e., some portion of performance is firm specific)." (abstract, p. 473)
+
+> "an increase of one case per quarter is associated with a 0.018 percentage point decline in the mortality rate. For OTHCASE, a similar increase of one case is correlated with a decline of only 0.001 percentage points that, again, is insignificant at conventional levels." (p. 482; tesseract OCR)
+
+> "The strongest evidence of firm specificity in performance is that the coefficient on HOSPCASE is not only significantly different from zero, but is also significantly different from the OTHCASE coefficient at the 1% level." (p. 482; tesseract OCR)
+
+- Table 4 (p. 483): HOSPCASE −0.0103 (SE 0.0023) vs OTHCASE −0.0003 (SE 0.0037), N = 34,173; marginal effects −0.018% vs −0.001% at a predicted mortality of 1.76%. (Assistant computation: one extra local case per quarter ≈ 1% relative reduction in predicted mortality.) Splitters only (Table 5, p. 484): N = 10,150, HOSPCASE −0.0112 vs OTHCASE −0.0007; difference significant at 6% (11% with six-month quality lags).
+
+> "This finding points to the importance of familiarity—above and beyond influence—in explaining the hospital-specific performance of surgeons." (p. 484)
+
+> "Regardless of whether our results are due to matching or increased familiarity over time, they still highlight the key point that the performance of pivotal freelancers does depend on organizational context." (p. 486)
+
+**Peers / competition inside the hospital.** Influence is defined relative to the other surgeons at the same hospital: a high-volume surgeon may "command preferential access—relative to other cardiac surgeons—to the hospital's resources" (p. 476); "To the extent that cardiac surgeons compete for resources in terms of operating room scheduling or team members, they thus compete against one another." (p. 480) Influence proxies: SHARE (surgeon's share of hospital CABG volume) and CITATIONS (share of the hospital's CABG citations). Both have the predicted negative sign but are insignificant, and the HOSPCASE–OTHCASE gap survives (Table 6, p. 485; text p. 484).
+
+**Mechanism / model.** No formal model. Verbal mechanisms are (1) familiarity with hospital-specific assets and teams (tacit knowledge) and (2) influence over hospital resources relative to other surgeons (pp. 475–476). The regressions test which proxy carries the effect. The authors call the mechanism evidence "preliminary" (abstract, p. 473) and say "The specific nature of these key organizational assets—which may be specific employees, team structures, or operating routines—represents an area for further research." (p. 485)
+
+**Separating sorting from effects.**
+- Patient sorting to better surgeons: handled by PHC4 risk adjustment, because "higher quality surgeons may attract patients with more severe forms of coronary disease" (p. 477).
+- Reverse causality (bad outcomes cause less volume): volumes are lagged one quarter "To reduce concerns regarding the direction of causality" (p. 479). Footnote 16 (p. 482) regresses the change in HOSPCASE on the change in surgeon RAMR; the coefficient "is very low (−0.30) and is insignificant" (fn. 16, p. 483).
+- Why surgeons split is not observed: "The PHC4 data does not provide information as to which, if any, of the above factors explain splitting behavior. As such, this paper focuses on the effects, rather than the causes, of this activity." (p. 477)
+- Match quality vs. learning is not separated: cumulative volume "would help us separate volume-outcome effects due to increased familiarity over time from similar effects due to an idiosyncratically good match between a surgeon and a hospital. While pure matching could theoretically explain our result, practical examples of pure matching are rare in this setting." (p. 486)
+
+**Limitations (tagged).**
+- [single system] "our results are based on only one type of freelance worker. It is, therefore, possible that the pattern of organization-specific performance that we identify for cardiac surgeons may not be as strong in other settings." (p. 485) Also one state.
+- [small data] Two years only; "our analysis might benefit from a deeper panel with additional years of data for each surgeon and hospital" (p. 486). The splitters-only sample is about 10,000 cases, and significance falls to 6–11% (p. 483).
+- [imperfect measure] Recent (quarterly) volume rather than cumulative experience (p. 486). Data are identified only by calendar quarter, so within-quarter splitting is assumed even (fn. 11, p. 478). Influence proxies "would benefit from additional proxies for surgeon influence" (p. 486); SHARE "may be correlated with our measure of familiarity (HOSPCASE)" (p. 480).
+- [no model of mechanism] Familiarity vs. influence vs. match quality are only partly separated (quotes above).
+- [outcome is not selection] The outcome is patient mortality, a performance measure. Nobody is selected into a slot. (Assistant judgment: the influence story is a within-hospital competition for scarce operating rooms and teams, but it is proxied, not studied as an allocation.)
+
+**Channel / source (Assistant judgment).** Main channel: **development / production**. A surgeon's skill is partly specific to the hospital's teams and assets. Source: **organization** (hospital assets, staff) and **peers** in two forms: non-surgeon team members (familiarity) and competing surgeons at the same hospital (influence over scarce resources). Relevance to evaluation: because public "report cards" rate surgeons, a surgeon's measured quality depends on where they operate, so an evaluation that treats performance as a personal trait mixes person and organization. The authors also note that surgeons cannot easily see this themselves: "a surgeon who does a large number of procedures in a given period may not be able to distinguish a 1% mortality rate from a 3% rate." (p. 485)
+
+---
+EOF
+echo ok
+```
+
+```
+ok
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2"><details>
+<summary>Tool use: **edit_file_v2** • Edit file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/org_B_performance_evaluation_note.md</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="unknown" data-tool-name="update_current_step"><details>
+<summary>Tool use: **update_current_step**</summary>
+An unknown error occurred
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /tmp/orgB/836.txt</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /tmp/orgB/836.txt</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /tmp/orgB/836.txt</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /tmp/orgB/836.txt</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Writing the Scullen et al. section now.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/org_B_performance_evaluation_note.md</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="unknown" data-tool-name="update_current_step"><details>
+<summary>Tool use: **update_current_step**</summary>
+An unknown error occurred
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2"><details>
+<summary>Tool use: **edit_file_v2** • Edit file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/org_B_performance_evaluation_note.md</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd &#34;/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/FOUNDY_Intro/&#34; &amp;&amp; f=$(ls files/834/*.pdf); for p in $(seq 2 22); do echo &#34;######## PDF PAGE $p&#34;; pdftotext -f $p -l $p &#34;$f&#34; - | rg -v &#34;This content downloaded|^\s*[0-9.]+ on |All use subject&#34; ; done &gt; /tmp/orgB/834c.txt; wc -l /tmp/orgB/834c.txt</summary>
+```bash
+cd "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/FOUNDY_Intro/" && f=$(ls files/834/*.pdf); for p in $(seq 2 22); do echo "######## PDF PAGE $p"; pdftotext -f $p -l $p "$f" - | rg -v "This content downloaded|^\s*[0-9.]+ on |All use subject" ; done > /tmp/orgB/834c.txt; wc -l /tmp/orgB/834c.txt
+```
+
+```
+    1858 /tmp/orgB/834c.txt
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /tmp/orgB/834c.txt</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /tmp/orgB/834c.txt</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Writing the Staw & Hoang section now.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="unknown" data-tool-name="update_current_step"><details>
+<summary>Tool use: **update_current_step**</summary>
+An unknown error occurred
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2"><details>
+<summary>Tool use: **edit_file_v2** • Edit file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/org_B_performance_evaluation_note.md</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /tmp/orgB/838.txt</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /tmp/orgB/838.txt</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+I need the Bothner appendix with the formal model.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="unknown" data-tool-name="ripgrep_raw_search"><details>
+<summary>Tool use: **ripgrep_raw_search**</summary>
+
+Parameters:
+
+```json
+{
+  "caseInsensitive": false,
+  "outputMode": "content",
+  "path": "/tmp/orgB/838.txt",
+  "pattern": "APPENDIX|Appendix"
+}
+```
+Additional data:
+
+```json
+{
+  "isPruned": true,
+  "outputMode": "content",
+  "path": "/tmp/orgB/838.txt",
+  "pattern": "APPENDIX|Appendix",
+  "topFiles": [
+    {
+      "matchCount": 3,
+      "uri": "/tmp/orgB/838.txt"
+    }
+  ],
+  "totalFiles": 1,
+  "totalMatches": 3
+}
+```
+Status: **completed**
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file_v2"><details>
+<summary>Tool use: **read_file_v2** • Read file: /tmp/orgB/838.txt</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Writing the Bothner et al. section now.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2"><details>
+<summary>Tool use: **edit_file_v2** • Edit file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/org_B_performance_evaluation_note.md</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+All five sections are written. Spot-checking page numbers turned up three small citation errors (Huckman p. 477 should be 478; two Groysberg ranges), which I'll fix before writing the synthesis.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2"><details>
+<summary>Tool use: **edit_file_v2** • Edit file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/org_B_performance_evaluation_note.md</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2"><details>
+<summary>Tool use: **edit_file_v2** • Edit file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/org_B_performance_evaluation_note.md</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2"><details>
+<summary>Tool use: **edit_file_v2** • Edit file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/org_B_performance_evaluation_note.md</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2"><details>
+<summary>Tool use: **edit_file_v2** • Edit file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/org_B_performance_evaluation_note.md</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="unknown" data-tool-name="update_current_step"><details>
+<summary>Tool use: **update_current_step**</summary>
+An unknown error occurred
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="write" data-tool-name="edit_file_v2"><details>
+<summary>Tool use: **edit_file_v2** • Edit file: /Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/org_B_performance_evaluation_note.md</summary>
+
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+Final check of the note for the banned words and structure.
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="shell" data-tool-name="run_terminal_command_v2"><details>
+<summary>Tool use: **run_terminal_command_v2** • Run command: cd &#34;/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/&#34; &amp;&amp; rg -n -i &#34;delve|testament&#34; org_B_performance_evaluation_note.md; rg -n &#34;^## |^\*\*Contents&#34; org_B_performance_evaluation_note.md; wc -w org_B_performance_evaluation_note.md; git -C &#34;../../../../../..&#34; status --porcelain | head</summary>
+```bash
+cd "/Users/charleslevine/Library/CloudStorage/Dropbox/1-Documents/00- Dissertation/0-Next_Chapter/Code_and_Data/New SQL and PY Code/Cursor Workspace PDE/3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/notes/" && rg -n -i "delve|testament" org_B_performance_evaluation_note.md; rg -n "^## |^\*\*Contents" org_B_performance_evaluation_note.md; wc -w org_B_performance_evaluation_note.md; git -C "../../../../../.." status --porcelain | head
+```
+
+```
+13:**Contents** — §1 Groysberg, Lee & Nanda 2008; §2 Huckman & Pisano 2006; §3 Scullen, Bergey & Aiman-Smith 2005; §4 Staw & Hoang 1995; §5 Bothner, Kang & Stuart 2007.
+17:## Assistant synthesis (ASSISTANT SYNTHESIS, not source text)
+38:## 1. Groysberg, Lee & Nanda (2008) — portability of star security analysts' performance
+84:## 2. Huckman & Pisano (2006) — firm specificity of cardiac surgeons' performance
+129:## 3. Scullen, Bergey & Aiman-Smith (2005) — forced distribution ("rank and yank") simulation
+176:## 4. Staw & Hoang (1995) — sunk costs and NBA draft order
+218:## 5. Bothner, Kang & Stuart (2007) — competitive crowding and risk taking in NASCAR
+    8309 org_B_performance_evaluation_note.md
+warning: could not open directory 'datasets/mbb/': Operation not permitted
+warning: could not open directory 'tenure/tenure_pipeline/dblp_parsed/': Operation not permitted
+M  .specstory/history/2026-10-27_15-40-25-0400-foundy.md
+A  .specstory/history/2026-10-30_12-56-36-0400-org-a-opportunity-structure.md
+A  .specstory/history/2026-10-30_12-56-53-0400-org-b-performance-evaluation.md
+M  .specstory/history/statistics.json
+M  3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/drafts/05_psychology_DRAFT.md
+M  3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/FOUNDY_Intro/FOUNDY_Intro.bib
+D  3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/_ocr_tmp/f118.txt
+D  3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/_ocr_tmp/f120.txt
+D  3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/_ocr_tmp/f125.txt
+D  3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/_ocr_tmp/f127.txt
+
+```
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+<tool-use data-tool-type="unknown" data-tool-name="update_current_step"><details>
+<summary>Tool use: **update_current_step**</summary>
+An unknown error occurred
+</details></tool-use>
+
+_**Agent (claude-opus-5-5)**_
+
+I wrote `sources/notes/org_B_performance_evaluation_note.md`: synthesis at the top, then one section per source. All five citations match Crossref. Only Bothner et al. and Scullen et al. have formal models, and neither is fit to data.
+
+**Groysberg, Lee & Nanda 2008** (*Management Science* 54(7): 1213–1230)
+- "Star analysts who switched employers experienced an immediate decline in performance that persisted for at least five years" (p. 1213).
+- Chance of first rank at t+1 falls from 0.106 to 0.056 for movers (p. 1222). It is 0.053 for solo movers versus 0.100 for those who moved with teammates (p. 1224).
+- "The performance of an outstanding worker is not owned by the worker alone; it is a property of the worker/firm combination" (p. 1226).
+- No formal model. Tags: [single system], [imperfect measure], [no model of mechanism], [small data] for some subgroups.
+
+**Huckman & Pisano 2006** (*Management Science* 52(4): 473–488)
+- Each extra case at the same hospital lowers mortality by 0.018 percentage points; cases at other hospitals lower it by 0.001, which is not significant (p. 482).
+- "surgeon performance is not fully portable across hospitals" (p. 473). Familiarity matters "above and beyond influence" (p. 484).
+- No formal model. Tags: [single system], [small data], [imperfect measure], [no model of mechanism], [outcome is not selection].
+
+**Scullen, Bergey & Aiman-Smith 2005** (*Personnel Psychology* 58(1): 1–32)
+- Average gain is 0.44 SD. Annual gains fall from about 16% to about 1% by year 10 and stop after year 20 (pp. 11, 20).
+- Ranking is within groups of 10: "workers who are fired from the better groups would have been retained if they had worked in some of the poorer groups" (p. 4).
+- The share fired and voluntary turnover matter most; rater reliability matters little (year-30 correlation .12, p. 19).
+- Formal simulation, not calibrated to any firm. Parameters come from meta-analyses. Tags: [model not fit to data], partly [outcome is not selection].
+
+**Staw & Hoang 1995** (*Administrative Science Quarterly* 40(3): 474–494)
+- Each later draft pick costs up to 23 minutes of playing time in year 2, and a second-round pick gets 552 fewer minutes (p. 481).
+- A first-round pick stays about 3.3 years longer, and a second-round pick is 72% more likely to be traded (pp. 484, 486).
+- Draft order predicts performance only in years 2–3 (p. 488).
+- No formal model. Tags: [small data] (241 and 275 players), [single system], [imperfect measure]. This is the only study whose outcomes are selections into scarce positions.
+
+**Bothner, Kang & Stuart 2007** (*Administrative Science Quarterly* 52(2): 208–247)
+- Crowding from below is the number of lower-ranked drivers who could pass the driver in the next race (p. 219).
+- One SD more crowding from below raises the odds of crashing by 19% (p. 227). The effect is +70% when ranks are stable versus +29% when they churn (p. 233).
+- The appendix model uses illustrative parameter values and only checks signs. Tags: [single system], [imperfect measure], [model not fit to data], [outcome is not selection].
+
+**Verification problems**
+- The JSTOR text layers for Groysberg p. 1224 (and its abstract) and Huckman & Pisano p. 482 were unreadable, so I OCR'd those pages with tesseract and flagged the quotes taken from them.
+- Crossref lists only the first page (474) for Staw & Hoang; the end page 494 comes from the PDF.
+- Greek letters and square-root signs missing from the text layers were restored and marked.
+- Groysberg's correction for who chooses to move is in an online supplement that isn't in the PDF, so I couldn't verify it.
