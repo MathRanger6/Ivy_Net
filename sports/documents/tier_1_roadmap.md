@@ -2,7 +2,7 @@
 
 **Location:** `sports/documents/tier_1_roadmap.md` (alongside other sports-facing notes; not a duplicate of theory memos in `5-Manuscript`.)
 
-**Notebook:** `sports/535_sports_tier_1.ipynb`
+**Notebook:** `sports/archive/535_sports_tier_1.ipynb`
 
 **Alex-sequenced modeling notebooks:** `sports/538_alex_tier1_model_and_fit.ipynb` (empirical + generative CELL 10–12); **`sports/538D_development.ipynb`** (modular lab, June 2026 generative work). `537` remains the **frozen** legacy simulation lab.
 
@@ -25,11 +25,11 @@ Optional depth (broader VECTOR notes): `Vector_Master_Theory_and_Modeling_Notes*
 
 ## Where We Have Been / Where We Are Going
 
-Keep this section open while working in `535_sports_tier_1.ipynb`. Green items are done/validated; black/default items are next work or open decisions.
+Keep this section open while working in `sports/archive/535_sports_tier_1.ipynb`. Green items are done/validated; black/default items are next work or open decisions.
 
 ### Done / Validated
 
-- <span style="color: green;">DONE — Mechanical notebook structure:</span> `535_sports_tier_1.ipynb` now follows the named-cell pattern: markdown header, then code cell with matching first comment line.
+- <span style="color: green;">DONE — Mechanical notebook structure:</span> `sports/archive/535_sports_tier_1.ipynb` now follows the named-cell pattern: markdown header, then code cell with matching first comment line.
 - <span style="color: green;">DONE — CELL 0 switchboard:</span> run gates and main knobs live in CELL 0 (`RUN_CELL1`–`RUN_CELL4`, `PERF_METRIC`, `PRIMARY_POOL_MODE`, `COMPUTE_WEIGHTED_CROWDING`, etc.).
 - <span style="color: green;">DONE — 530 source-of-truth workflow:</span> exact 530 reproduction requires running `530_sports_pipeline.ipynb` from scratch with `use_prebuilt_panel_csv=False` and `export_panel_after_run=True`, then loading the refreshed `datasets/mbb/player_season_panel_530.csv` in 535.
 - <span style="color: green;">DONE — Reproduced the reduced-form phenomenon:</span> with the refreshed 530 panel, `poolq_loo` binned bars reproduce the inverted-U / top-bin-drop pattern.

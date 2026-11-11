@@ -365,3 +365,227 @@ not the fixed-roster remaining-seats rule: that multiplicity falls as capacity i
 consumed, while this one rises with realized membership. Settings, titles,
 filenames, checkpoints and theoretical rho=0 roster references distinguish the
 option. Only deterministic probability checks were performed; no experiment ran.
+
+## 2026-11-10: Review of A-bar versus equally spaced initialization
+
+Charles explicitly authorized new experiments for this review. The saved-run
+inventory contains 58 historical metadata records. No matched historical pair
+isolated A-bar versus equally spaced initialization. Recomputed team sizes,
+means, and H_sort from 800 checkpoints across three key historical runs agree
+with their saved results (see verified_historical_metrics.json).
+
+The historical capped, one-opportunity, normal-talent A-bar run with 100 teams
+of 20 players had mean H_sort approximately 0.050 at rho=0 and 0.787 at rho=4.
+Thus common initial signals did not prevent substantial sorting. Historical
+uncapped Beta runs with initial signals 0, 0.1, ..., 0.9 had rho=4 H_sort of
+0.070 on the original scale versus 0.862 on the theoretically standardized
+scale. This is not an initialization comparison: scale changes both effective
+homophily strength and the placement of that numerical initial-signal grid.
+
+New paired comparison: 2,000 players, 10 teams capped at 200, one opportunity
+per nonfull team, actual-member mean attractor, first member replaces the
+initial signal. Compare common realized A-bar with equally spaced signals
+from realized minimum to maximum talent. Use 30 assignment repetitions,
+rho=[0,0.5,1,2,4], and one fixed population each for standard normal and
+theoretically standardized Beta(2,2). Arrival orders and choice uniforms are
+paired between initializers. All capacities were filled; rho=0 assignments
+were identical between initializers. The A-bar branch at repetition zero for
+each law/rho exactly matched the existing fixed-roster assignment routine.
+
+At rho=4, mean H_sort was 0.738 (A-bar) versus 0.658 (spaced) for normal talent,
+and 0.769 versus 0.763 for Beta talent. A-bar therefore generated hierarchy
+without requiring spaced starts; spaced starts were not consistently superior.
+Under A-bar at rho=4, a random player on a lower-mean team exceeded a random
+player on the next-higher-mean team about 28% (normal) or 29% (Beta) of the time,
+averaged over adjacent teams ranked within each division. Hierarchy coexisted
+with player-level overlap. H_sort itself is a variance ratio, not an overlap
+percentage. These findings are conditional on the two fixed populations and
+equal capacities; they do not validate a choice for empirical unequal rosters.
+The chapter's initialization choice remains open pending Charles's decision.
+
+Reproduction: code/review_initialization.py --run-paired.
+Evidence: results/initialization_review_20261110/; paired run:
+paired-e01d2b753f4c (specification, checkpoints, metrics, PNG and PDF).
+
+## 2026-11-10: Proposed assignment chapter experiment plan
+
+Status: proposed for Charles's review; this entry authorizes no new simulations.
+Current conversation decisions supersede the October handoff where they differ.
+The chapter briefly introduces the final model, builds from simple mechanisms
+through controlled experiments, and returns to the final specification.
+Hierarchy and player-level overlap are primary; individual experiments may
+emphasize roster concentration. SCORE and SELECT receive a brief bridge only.
+
+### Agreed common design
+
+N=2,000; J=100; capped baseline capacities=20 each; standard-normal A_i.
+All teams start empty at realized A-bar. The first member replaces this signal;
+subsequent attraction uses the mean of actual members. Each nonfull team gets
+one opportunity. Remaining-seat multiplicity is an alternative toggle.
+Use rho=[0,0.5,1,2,4], with additional values proposed only after inspecting
+transitions. Do not assume H_sort increases monotonically at high rho.
+Initial comparisons use 30 paired assignment repetitions; principal comparisons
+expand to 100. Reuse already compatible 100-repetition results rather than
+discarding 70. Fresh-population validation uses 30 independent populations,
+with 10 paired assignments per population per selected setting.
+
+Pair populations, arrival orders, and choice uniforms between alternatives
+within each repetition. The same random inputs do not imply identical teams.
+Keep population and assignment seeds separate. For fresh populations, calculate
+paired contrasts within population and summarize over populations; do not
+treat all 300 assignments as 300 independent population draws.
+
+### Proposed comparisons and figures
+
+E1 Baseline homophily and emergent hierarchy
+Vary rho only. Plot ranked final team mean (y) against within-division team
+rank (x), one color per rho; pair with H_sort versus rho and an overlap
+diagnostic versus rho. Show the rho=0 reference: (J-1)/(N-1)=99/1999.
+Rank teams separately within each realization; named-team averages across
+repetitions can conceal a hierarchy that emerges with different identities.
+Use a predesignated repetition for distribution examples, not a cherry-picked
+most hierarchical realization. Normal one-opportunity 100-repetition results
+already exist at precisely this N/J/capacity/rho grid.
+
+E2 Initialization
+Compare A-bar with linspace(min A,max A,J), changing nothing else, across rho.
+Plot both H_sort curves and both adjacent-team mixing curves on common axes.
+At selected rho, show ranked means and population-supported within-team
+distributions. The 10-team capped paired review is valid supporting evidence,
+but a matched 100-team comparison is missing. Trajectories for 100 teams need
+a readable supplementary display rather than silently changing J to 10.
+
+E3 Opportunity rule under fixed rosters
+Compare one opportunity per nonfull team with remaining-seat opportunities,
+using the same population, capacities, centroids, orders, uniforms, and rho.
+Plot actual H_sort and overlap for both rules; paired differences are secondary.
+Both 100-repetition baseline runs exist. Metadata matches; before publication,
+verify pairing and recompute metrics for the seat branch as well as the
+previously checked one-opportunity branch. This may need analysis of saved
+checkpoints, not new assignment simulations.
+
+E4 Distribution shape
+Compare normal, Beta(2,2), uniform(0,1), and Weibull(shape=2,scale=1), transformed
+using theoretical mean and SD. Retain original draws. Beta is the priority
+alternative, not an established empirical fit. Plot one curve per law for
+H_sort versus rho and overlap versus rho, preceded by input-distribution
+panels. Means/SDs are matched theoretically, not forced equal in each sample.
+Common population quantiles across laws are a proposed coupling for new runs;
+otherwise use explicit independent population streams and shared assignment
+draws. Do not label different laws as the same population.
+Normal and Weibull capped runs exist; full matched provenance and Beta/uniform
+coverage require checking. A completed four-law controlled comparison has not
+been established by the inventory.
+
+E5 Removing the cap
+Compare cap20 with no cap at fixed N=2,000 and J=100, mean attraction,
+A-bar initialization and one opportunity per eligible team. Vary only capping
+within each rho. Use roster PMF/CDF or survival curves with colors for rho,
+and companion H_sort/overlap summaries. The capped roster distribution is a
+point mass at 20. Report empty teams, largest-team share, top-10-team share,
+and roster-size Gini. Empty teams count in size diagnostics but have no
+observed mean; singleton within-team variance is zero.
+Historical uncapped normal N=2,000/J=100 runs exist, but compatibility and
+paired seeds with the chapter baseline remain to be established.
+
+E6 Adding membership reinforcement
+Within the uncapped mean-attractor model, compare one opportunity with n_j+1
+opportunities, leaving every copy at the same team mean. Plot roster survival
+curves, concentration versus rho, and the highest-rho circle display with area
+proportional to membership and a common diverging mean-color scale.
+Label this as a distinct reinforcement extension. Neither remaining-seat
+weighting nor homophily alone is this mechanism. Large teams do not establish
+a power law or equivalence to BA: team count is fixed here.
+Existing reinforcement runs use other distributions or team counts; the
+matched normal N=2,000/J=100 comparison is missing.
+
+E7 Mean versus sum attraction
+Within the uncapped, one-opportunity model compare mean with sum, across rho,
+holding the initial empty-team signal at A-bar in both branches. The first
+member replaces it in both. Compare H_sort, overlap, and roster concentration;
+show attractor trajectories for a prespecified readable subset if needed.
+Always calculate final team means separately from sum attractors.
+Historical examples often change scale, initial signals, or team count as
+well; they do not isolate this toggle at our baseline. The old initial value
+of 1 is a separate choice, not silently bundled with changing the attractor.
+
+E8 Units and scaling
+Use a compact analytic demonstration and a deterministic equivalence check
+rather than a full simulation sweep. For mean attraction, shifting every A_i
+and initial signal equally preserves distances; multiplying them by a>0
+requires rho_new=rho_old/a to preserve probabilities. Compare original versus
+standardized values at unchanged rho only as an explicit units comparison.
+Sum attraction is not generally translation invariant because its shift grows
+with membership. This explains why original-scale historical results cannot
+be pooled indiscriminately with standardized results.
+
+### Measurement and uncertainty
+
+H_sort is one player-weighted between/total variance ratio per division,
+not an overlap fraction. Complement it with mean within-team variance and
+adjacent-team inversion: sort nonempty teams by final actual-member mean,
+calculate P(A_lower>A_upper) for independently drawn members of each adjacent
+pair (half weight for ties), and average across pairs. State pair weighting;
+compare with rho=0 rather than declaring 0.5 an exact finite-sample baseline.
+This diagnostic describes ranking overlap, not the area of intersecting
+densities. Also show selected team distributions so the reader can see shapes.
+
+Use consistent rho colors from light at zero to dark at maximum. On plots with
+rho on x, color identifies the toggle or distribution instead. Use common axes,
+bins, and color limits within comparisons. Label curves as repetition means
+and bands explicitly as variation (SD) or uncertainty intervals, never both.
+Distinguish conditional assignment variation from variation across populations.
+Save inputs, assignments, configuration/source hashes, summaries, and plot
+filenames identifying settings. Save an A_i plot once per unique population
+configuration, not once per opportunity-rule branch.
+
+### Reuse and remaining evidence
+
+Historical inventory: results/initialization_review_20261110/historical_inventory.json.
+Previously recomputed checks:
+results/initialization_review_20261110/verified_historical_metrics.json.
+Exact normal baseline:
+results/composition_scenarios/one_J100_r20_reps100/composition-96667ec378b7-d39e35e837ee.
+Remaining-seat counterpart:
+results/composition_scenarios/seats_J100_r20_reps100/composition-96667ec378b7-d39e35e837ee.
+Both metadata records declare 500 complete divisions (5 rho x 100 assignments)
+and shared population/order/uniform pairing. The earlier checkpoint review
+validated the one-opportunity branch. A saved completion flag is not by itself
+full scientific validation of every output.
+Paired initialization evidence:
+results/initialization_review_20261110/paired-e01d2b753f4c
+uses 10 teams capped at 200, not the chapter baseline.
+Inventory records include duplicated copies/settings and older schemas;
+58 records must not be described as 58 independent experiments.
+
+### Staging and chapter allocation
+
+First audit/replot reusable E1/E3 checkpoints, then run only missing E2 and E4
+comparisons after approval. Next isolate the uncapped E5-E7 mechanisms.
+Promote central comparisons to 100 assignments, then validate the main claims
+with 30 populations x 10 assignments. Extra rho values are adaptive exploratory
+follow-ups; confirm any highlighted transition in fresh populations.
+
+Proposed 28-34 page allocation: 3 pages for the final-model preview and notation;
+3 for measurement/design; 7-9 for baseline, initialization and opportunity rule;
+4-5 for shapes and units; 6-8 for caps, reinforcement and sum attraction;
+3-4 for robustness, return to final model, and the short SCORE/SELECT bridge.
+Aim for 8-10 main multi-panel figures, with detailed checks in supplementary
+material. This is a planning budget, not a rendered page count.
+
+Optional later comparisons, not required for the first chapter pass:
+- Equal roster sizes r=[10,20,40,80] at fixed N, with J=N/r explicitly changing
+  and a separate random reference for each J.
+- Common excess caps [20,40,100,400,2000,20000] at fixed N,J, comparing one
+  versus remaining-seat opportunity rules. This isolates capacity effects and
+  illustrates convergence as a common cap becomes very large. Excess capacity
+  is a separate variable-roster model; the fixed-roster engine must not be
+  used by merely changing a cap setting.
+- Empirical cap-vector check after the league/cohort and eligible population
+  are selected; preserve total N and compare against an appropriately matched
+  equal-size reference. No empirical input has been chosen for this plan.
+
+The existing model manuscript uses remaining-seat multiplicity in its displayed
+ASSIGN equation. Reconciliation with the selected one-opportunity baseline is
+an eventual manuscript task; the source manuscript remains untouched.
+

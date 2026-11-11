@@ -1,0 +1,189 @@
+current_path,proposed_path,status,files,note
+3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis/,3-Master_Plan/VECTOR_work/new_VECTOR_work/assort_analysis  (stays),STAYS,620,124 MB; leave in place
+3-Master_Plan/VECTOR_work/new_VECTOR_work/education_analysis/,3-Master_Plan/VECTOR_work/new_VECTOR_work/education_analysis  (stays),STAYS,2548,"1 GB code and data; leave in place, add pointer README"
+3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night/,3-Master_Plan/VECTOR_work/new_VECTOR_work/jazz_night  (stays),STAYS,127,127 files; leave in place
+3-Master_Plan/VECTOR_work/new_VECTOR_work/lg_exploration/,3-Master_Plan/VECTOR_work/new_VECTOR_work/lg_exploration  (stays),STAYS,13189,"956 MB, 13,000 files; leave in place"
+3-Master_Plan/VECTOR_work/new_VECTOR_work/manuscript_figures/,3-Master_Plan/VECTOR_work/new_VECTOR_work/manuscript_figures  (stays),STAYS,886,319 MB; figures built by notebooks with relative paths; leave in place
+3-Master_Plan/VECTOR_work/new_VECTOR_work/convert_manuscript_md_to_pdf.sh,5-Manuscript/00_Front_matter_and_formatting/convert_manuscript_md_to_pdf.sh,SCRIPT,1,move in stage 3; other files point at it
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Assortativity_MBB_issues.docx,5-Manuscript/05_Assignment/notes/Assortativity_MBB_issues.docx,MOVE,1,Chapter 5
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Chapter_5_Survival_Model_outline.md,5-Manuscript/_archive/Chapter_5_Survival_Model_outline.md,MOVE,1,Old chapter numbering; archive under 5-Manuscript (Charles: keep in 5)
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Charles_to_VECTOR_Army_band_and_theta_Sep24.md,5-Manuscript/04_Model/notes/Charles_to_VECTOR_Army_band_and_theta_Sep24.md,COPY,1,Copy for Ch.4 notes; original stays in new_VECTOR_work
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Charles_to_VECTOR_Army_band_and_theta_Sep24.pdf,5-Manuscript/04_Model/notes/Charles_to_VECTOR_Army_band_and_theta_Sep24.pdf,COPY,1,Copy for Ch.4 notes; original stays in new_VECTOR_work
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Education_Transitions_and_Congestion_Review.md,5-Manuscript/03_Data_and_Empirics/notes/Education_Transitions_and_Congestion_Review.md,MOVE,1,Chapter 3 education notes or Chapter 2 literature?
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Education_Transitions_and_Congestion_Review.pdf,5-Manuscript/03_Data_and_Empirics/notes/Education_Transitions_and_Congestion_Review.pdf,MOVE,1,Chapter 3 education notes or Chapter 2 literature?
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Scholar_Fine_Gray_and_Army_HERO_Explained.md,5-Manuscript/03_Data_and_Empirics/notes/Scholar_Fine_Gray_and_Army_HERO_Explained.md,MOVE,1,Army survival and HERO explainer; survival is out of scope for now
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Scholar_Fine_Gray_and_Army_HERO_Explained.pdf,5-Manuscript/03_Data_and_Empirics/notes/Scholar_Fine_Gray_and_Army_HERO_Explained.pdf,MOVE,1,Army survival and HERO explainer; survival is out of scope for now
+3-Master_Plan/VECTOR_work/new_VECTOR_work/collab_test.docx,,DELETE,1,Charles: delete (test file)
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/drafts/00_Intro_Lit_Rev_Draft.docx,5-Manuscript/02_Literature_Review/drafts/00_Intro_Lit_Rev_Draft.docx,MOVE_LAST,1,MASTER Word file with live Zotero fields; close Word first
+3-Master_Plan/VECTOR_work/new_VECTOR_work/20261018_CODA_Response_NVector_Army_LOO_Questions.md,5-Manuscript/04_Model/notes/20261018_CODA_Response_NVector_Army_LOO_Questions.md,MOVE,1,"Army LOO round, decided for Chapter 4 prominence"
+3-Master_Plan/VECTOR_work/new_VECTOR_work/20261018_NVector_LOO_Repository_Audit.docx,5-Manuscript/04_Model/notes/20261018_NVector_LOO_Repository_Audit.docx,MOVE,1,"Army LOO round, decided for Chapter 4 prominence"
+3-Master_Plan/VECTOR_work/new_VECTOR_work/20261018_NVector_LOO_Repository_Audit.md,5-Manuscript/04_Model/notes/20261018_NVector_LOO_Repository_Audit.md,MOVE,1,"Army LOO round, decided for Chapter 4 prominence"
+3-Master_Plan/VECTOR_work/new_VECTOR_work/20261018_NVector_Questions_for_CODA_LOO.docx,5-Manuscript/04_Model/notes/20261018_NVector_Questions_for_CODA_LOO.docx,MOVE,1,"Army LOO round, decided for Chapter 4 prominence"
+3-Master_Plan/VECTOR_work/new_VECTOR_work/20261018_NVector_Questions_for_CODA_LOO.md,5-Manuscript/04_Model/notes/20261018_NVector_Questions_for_CODA_LOO.md,MOVE,1,"Army LOO round, decided for Chapter 4 prominence"
+3-Master_Plan/VECTOR_work/new_VECTOR_work/20261018_NVector_to_SVector_LOO_and_HERO_Methods_Conclusion.md,5-Manuscript/04_Model/notes/20261018_NVector_to_SVector_LOO_and_HERO_Methods_Conclusion.md,MOVE,1,"Army LOO round, decided for Chapter 4 prominence"
+3-Master_Plan/VECTOR_work/new_VECTOR_work/20261018_Query_to_NVector.docx,5-Manuscript/04_Model/notes/20261018_Query_to_NVector.docx,MOVE,1,"Army LOO round, decided for Chapter 4 prominence"
+3-Master_Plan/VECTOR_work/new_VECTOR_work/20261027_Request_to_SCOUT_MBB_Lessons_for_Jazz_Night.md,5-Manuscript/04_Model/notes/20261027_Request_to_SCOUT_MBB_Lessons_for_Jazz_Night.md,MOVE,1,Jazz Night request and SCOUT response
+3-Master_Plan/VECTOR_work/new_VECTOR_work/20261027_SCOUT_Response_MBB_Lessons_for_Jazz_Night.md,5-Manuscript/04_Model/notes/20261027_SCOUT_Response_MBB_Lessons_for_Jazz_Night.md,MOVE,1,Jazz Night request and SCOUT response
+3-Master_Plan/VECTOR_work/new_VECTOR_work/20261109_CODA_Response_Ch3_raw_to_dataframes.md,5-Manuscript/03_Data_and_Empirics/notes/20261109_CODA_Response_Ch3_raw_to_dataframes.md,MOVE,1,"Chapter 3 Q&A, handoff, kickoff"
+3-Master_Plan/VECTOR_work/new_VECTOR_work/20261109_Ch3_Questions_for_CODA_raw_to_dataframes.md,5-Manuscript/03_Data_and_Empirics/notes/20261109_Ch3_Questions_for_CODA_raw_to_dataframes.md,MOVE,1,"Chapter 3 Q&A, handoff, kickoff"
+3-Master_Plan/VECTOR_work/new_VECTOR_work/20261109_Ch3_executive_summary_DRAFT.md,5-Manuscript/03_Data_and_Empirics/drafts/20261109_Ch3_executive_summary_DRAFT.md,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/20261109_Charles_to_FOUNDY_Ch3_kickoff.md,5-Manuscript/03_Data_and_Empirics/notes/20261109_Charles_to_FOUNDY_Ch3_kickoff.md,MOVE,1,"Chapter 3 Q&A, handoff, kickoff"
+3-Master_Plan/VECTOR_work/new_VECTOR_work/20261109_FOUNDY_Handoff_Chapter3_data_empirics.md,5-Manuscript/03_Data_and_Empirics/notes/20261109_FOUNDY_Handoff_Chapter3_data_empirics.md,MOVE,1,"Chapter 3 Q&A, handoff, kickoff"
+3-Master_Plan/VECTOR_work/new_VECTOR_work/20261109_FOUNDY_Handoff_Chapter3_data_empirics.pdf,5-Manuscript/03_Data_and_Empirics/notes/20261109_FOUNDY_Handoff_Chapter3_data_empirics.pdf,MOVE,1,"Chapter 3 Q&A, handoff, kickoff"
+3-Master_Plan/VECTOR_work/new_VECTOR_work/20261109_FOUNDY_Response_Ch3_Army_data_questions.md,5-Manuscript/03_Data_and_Empirics/notes/20261109_FOUNDY_Response_Ch3_Army_data_questions.md,MOVE,1,"Chapter 3 Q&A, handoff, kickoff"
+3-Master_Plan/VECTOR_work/new_VECTOR_work/COMPASS_to_VECTOR_MLE_Bernoulli_response.md,5-Manuscript/04_Model/notes/COMPASS_to_VECTOR_MLE_Bernoulli_response.md,MOVE,1,agent mail about the model chapter
+3-Master_Plan/VECTOR_work/new_VECTOR_work/COMPASS_to_VECTOR_Model_Chapter_First_Draft_review.md,5-Manuscript/04_Model/notes/COMPASS_to_VECTOR_Model_Chapter_First_Draft_review.md,MOVE,1,agent mail about the model chapter
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Clean_Manuscript_Saves/,5-Manuscript/04_Model/backups/Clean_Manuscript_Saves,MOVE,2,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Dataset Suggestions for Replication.html,5-Manuscript/03_Data_and_Empirics/notes/Dataset Suggestions for Replication.html,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Dissertation Tone.docx,5-Manuscript/00_Front_matter_and_formatting/Dissertation Tone.docx,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Dissertation_Manuscript_Styles.dotx,5-Manuscript/00_Front_matter_and_formatting/Dissertation_Manuscript_Styles.dotx,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/JAZZ_Model_Chapter_Shared_Working_Draft.pdf,5-Manuscript/04_Model/drafts/JAZZ_Model_Chapter_Shared_Working_Draft.pdf,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/LASZLO_ROMANIA_HANDOFF.md,5-Manuscript/03_Data_and_Empirics/notes/LASZLO_ROMANIA_HANDOFF.md,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/LG Model exploration.docx,5-Manuscript/05_Assignment/notes/LG Model exploration.docx,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/LG_Model_Exploration_Agent_Handoff.md,5-Manuscript/05_Assignment/notes/LG_Model_Exploration_Agent_Handoff.md,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/LG_Model_Exploration_Executive_Summary.docx,5-Manuscript/05_Assignment/notes/LG_Model_Exploration_Executive_Summary.docx,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/LG_Model_Exploration_Handoff.zip,5-Manuscript/05_Assignment/notes/LG_Model_Exploration_Handoff.zip,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/LG_Model_Exploration_Source_Manifest.json,5-Manuscript/05_Assignment/notes/LG_Model_Exploration_Source_Manifest.json,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/LG_Model_Exploration_for_Alex.docx,5-Manuscript/05_Assignment/notes/LG_Model_Exploration_for_Alex.docx,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Model_Chapter_4_5_3_and_4_8_NVector_Draft_20261005.docx,5-Manuscript/04_Model/drafts/Model_Chapter_4_5_3_and_4_8_NVector_Draft_20261005.docx,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Model_Chapter_4_5_3_and_4_8_NVector_Draft_20261005.md,5-Manuscript/04_Model/drafts/Model_Chapter_4_5_3_and_4_8_NVector_Draft_20261005.md,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Model_Chapter_First_Draft.docx,5-Manuscript/04_Model/drafts/Model_Chapter_First_Draft.docx,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Model_Chapter_First_Draft.pdf,5-Manuscript/04_Model/drafts/Model_Chapter_First_Draft.pdf,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Model_Chapter_PD45_Change_Memo_20261008.md,5-Manuscript/04_Model/notes/Model_Chapter_PD45_Change_Memo_20261008.md,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Model_Chapter_PD45_Narrative_Reframe_20261007.md,5-Manuscript/04_Model/notes/Model_Chapter_PD45_Narrative_Reframe_20261007.md,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Model_Chapter_Second_Draft.docx,5-Manuscript/04_Model/drafts/Model_Chapter_Second_Draft.docx,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Model_Chapter_Second_Draft.pdf,5-Manuscript/04_Model/drafts/Model_Chapter_Second_Draft.pdf,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Model_Chapter_Second_Draft_ASSIGN_and_SCORE_Revisions.docx,5-Manuscript/04_Model/drafts/Model_Chapter_Second_Draft_ASSIGN_and_SCORE_Revisions.docx,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Model_Chapter_Shared_Working_Draft.docx,5-Manuscript/04_Model/drafts/Model_Chapter_Shared_Working_Draft.docx,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Model_Chapter_Shared_Working_Draft.md,5-Manuscript/04_Model/drafts/Model_Chapter_Shared_Working_Draft.md,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Model_Chapter_Shared_Working_Draft.pdf,5-Manuscript/04_Model/drafts/Model_Chapter_Shared_Working_Draft.pdf,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Model_Chapter_Shared_Working_Draft_before_C_notation_20261008_130728.md,5-Manuscript/04_Model/backups/Model_Chapter_Shared_Working_Draft_before_C_notation_20261008_130728.md,MOVE,1,dated backup
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Model_Chapter_Shared_Working_Draft_before_citation_render_fix_20261008.md,5-Manuscript/04_Model/backups/Model_Chapter_Shared_Working_Draft_before_citation_render_fix_20261008.md,MOVE,1,dated backup
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Model_Chapter_Shared_Working_Draft_before_narrative_revision_20261008_115202.docx,5-Manuscript/04_Model/backups/Model_Chapter_Shared_Working_Draft_before_narrative_revision_20261008_115202.docx,MOVE,1,dated backup
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Model_Chapter_Shared_Working_Draft_manuscript.pdf,5-Manuscript/04_Model/drafts/Model_Chapter_Shared_Working_Draft_manuscript.pdf,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Model_Chapter_Working_Draft_5Oct.docx,5-Manuscript/04_Model/drafts/Model_Chapter_Working_Draft_5Oct.docx,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Model_Chapter_Working_Outline.docx,5-Manuscript/04_Model/drafts/Model_Chapter_Working_Outline.docx,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Model_Chapter_Working_Outline_text.docx,5-Manuscript/04_Model/drafts/Model_Chapter_Working_Outline_text.docx,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Model_Chapter_Working_bipartite_text.docx,5-Manuscript/04_Model/drafts/Model_Chapter_Working_bipartite_text.docx,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Model_Chapter_assets/,5-Manuscript/04_Model/figures/Model_Chapter_assets,MOVE,2,2 files
+3-Master_Plan/VECTOR_work/new_VECTOR_work/NELS_HSandB_issues.docx,5-Manuscript/03_Data_and_Empirics/notes/NELS_HSandB_issues.docx,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/NVector_to_SVector_MLE_Bernoulli_response.md,5-Manuscript/04_Model/notes/NVector_to_SVector_MLE_Bernoulli_response.md,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/START_HERE_MANUSCRIPT.md,5-Manuscript/00_Project_wide/START_HERE_MANUSCRIPT.md,MOVE,1,update the pointer first
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Scholar_EDUCATION_20260928_Public_Options_Romania_Audit_v2.md,5-Manuscript/03_Data_and_Empirics/notes/Scholar_EDUCATION_20260928_Public_Options_Romania_Audit_v2.md,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Scholar_EDUCATION_20260928_Romania_Public_Schema_Audit.md,5-Manuscript/03_Data_and_Empirics/notes/Scholar_EDUCATION_20260928_Romania_Public_Schema_Audit.md,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Scholar_VECTOR_Education_Dataset_Search_Bounded_Shortlist.md,5-Manuscript/03_Data_and_Empirics/notes/Scholar_VECTOR_Education_Dataset_Search_Bounded_Shortlist.md,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Transition Memo for Next Agent.docx,5-Manuscript/00_Project_wide/Transition Memo for Next Agent.docx,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/VECTOR_CURRENT_STATE.md,5-Manuscript/00_Project_wide/VECTOR_CURRENT_STATE.md,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/VECTOR_CURRENT_STATE.pdf,5-Manuscript/00_Project_wide/VECTOR_CURRENT_STATE.pdf,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/VECTOR_PD41_Assortativity_Scientific_Brief.md,5-Manuscript/05_Assignment/notes/VECTOR_PD41_Assortativity_Scientific_Brief.md,MOVE,1,assortativity brief
+3-Master_Plan/VECTOR_work/new_VECTOR_work/VECTOR_PD41_Assortativity_Scientific_Brief.pdf,5-Manuscript/05_Assignment/notes/VECTOR_PD41_Assortativity_Scientific_Brief.pdf,MOVE,1,assortativity brief
+3-Master_Plan/VECTOR_work/new_VECTOR_work/VECTOR_PD44_Dissertation_Work_Map_and_Model_Chapter_Outline.md,5-Manuscript/00_Project_wide/VECTOR_PD44_Dissertation_Work_Map_and_Model_Chapter_Outline.md,MOVE,1,work map and chapter outline
+3-Master_Plan/VECTOR_work/new_VECTOR_work/VECTOR_PD44_Dissertation_Work_Map_and_Model_Chapter_Outline.pdf,5-Manuscript/00_Project_wide/VECTOR_PD44_Dissertation_Work_Map_and_Model_Chapter_Outline.pdf,MOVE,1,work map and chapter outline
+3-Master_Plan/VECTOR_work/new_VECTOR_work/VECTOR_STANDING_REPOSITORY_AUTHORITY.md,5-Manuscript/00_Project_wide/VECTOR_STANDING_REPOSITORY_AUTHORITY.md,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/VECTOR_STANDING_REPOSITORY_AUTHORITY.pdf,5-Manuscript/00_Project_wide/VECTOR_STANDING_REPOSITORY_AUTHORITY.pdf,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Working_Manuscript_Backups/,5-Manuscript/04_Model/backups/Working_Manuscript_Backups,MOVE,5,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/formatting/,5-Manuscript/00_Front_matter_and_formatting/formatting,MOVE,9,"9 files, 222 MB"
+3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation.pptx,5-Manuscript/_presentations/lab_presentation.pptx,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/lab_presentation_20261022/,5-Manuscript/_presentations/lab_presentation_20261022,MOVE,69,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/manuscript_backups/,5-Manuscript/04_Model/backups/manuscript_backups,MOVE,35,"35 files, 77 MB"
+3-Master_Plan/VECTOR_work/new_VECTOR_work/pdf_styles_manuscript.css,5-Manuscript/00_Front_matter_and_formatting/pdf_styles_manuscript.css,MOVE,1,check scripts that read it
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/01_Introduction_Orientation_Brief.md,5-Manuscript/02_Literature_Review/notes/01_Introduction_Orientation_Brief.md,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/02_PD50_Advisor_Conversation.docx,5-Manuscript/02_Literature_Review/notes/02_PD50_Advisor_Conversation.docx,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/OPENING_PROMPT.md,5-Manuscript/02_Literature_Review/notes/OPENING_PROMPT.md,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/START_HERE.md,5-Manuscript/02_Literature_Review/notes/START_HERE.md,MOVE,1,Introduction agent handoff
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/_archive_superseded/,5-Manuscript/02_Literature_Review/_archive/from_handoff_superseded,MOVE,2,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/background_nonbinding/,5-Manuscript/02_Literature_Review/notes/background_nonbinding,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/,5-Manuscript/02_Literature_Review/sources,MOVE,505,includes sources/notes (the section notes)
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/drafts/.DS_Store,5-Manuscript/02_Literature_Review/drafts/.DS_Store,MOVE,1,"literature review section drafts, executive summaries"
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/drafts/000-Scholar_GPT_Introduction.docx,5-Manuscript/01_Introduction/drafts/000-Scholar_GPT_Introduction.docx,MOVE,1,Ch.1 material per Charles
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/drafts/000-Scholar_GPT_Introduction.pdf,5-Manuscript/01_Introduction/drafts/000-Scholar_GPT_Introduction.pdf,MOVE,1,Ch.1 material per Charles
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/drafts/00_Intro_Lit_Rev_Draft (Charles Levine's conflicted copy 2026-11-02).docx,5-Manuscript/02_Literature_Review/backups/00_Intro_Lit_Rev_Draft (Charles Levine's conflicted copy 2026-11-02).docx,MOVE,1,Dropbox backup; sequester in backups/ per Charles
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/drafts/00_Introduction_Frame_one_page.md,5-Manuscript/01_Introduction/drafts/00_Introduction_Frame_one_page.md,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/drafts/00_Introduction_Frame_one_page.pdf,5-Manuscript/01_Introduction/drafts/00_Introduction_Frame_one_page.pdf,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/drafts/00_Introduction_Frame_one_page_manuscript.pdf,5-Manuscript/01_Introduction/drafts/00_Introduction_Frame_one_page_manuscript.pdf,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/drafts/01_annotated.pdf,5-Manuscript/02_Literature_Review/drafts/01_annotated.pdf,MOVE,1,"literature review section drafts, executive summaries"
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/drafts/01_science_of_success_DRAFT.md,5-Manuscript/02_Literature_Review/drafts/01_science_of_success_DRAFT.md,MOVE,1,"literature review section drafts, executive summaries"
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/drafts/01_science_of_success_DRAFT.pdf,5-Manuscript/02_Literature_Review/drafts/01_science_of_success_DRAFT.pdf,MOVE,1,"literature review section drafts, executive summaries"
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/drafts/01_science_of_success_DRAFT_manuscript.pdf,5-Manuscript/02_Literature_Review/drafts/01_science_of_success_DRAFT_manuscript.pdf,MOVE,1,"literature review section drafts, executive summaries"
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/drafts/02_economics_DRAFT.md,5-Manuscript/02_Literature_Review/drafts/02_economics_DRAFT.md,MOVE,1,"literature review section drafts, executive summaries"
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/drafts/02_economics_DRAFT_manuscript.pdf,5-Manuscript/02_Literature_Review/drafts/02_economics_DRAFT_manuscript.pdf,MOVE,1,"literature review section drafts, executive summaries"
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/drafts/03_network_science_DRAFT.md,5-Manuscript/02_Literature_Review/drafts/03_network_science_DRAFT.md,MOVE,1,"literature review section drafts, executive summaries"
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/drafts/03_network_science_DRAFT_manuscript.pdf,5-Manuscript/02_Literature_Review/drafts/03_network_science_DRAFT_manuscript.pdf,MOVE,1,"literature review section drafts, executive summaries"
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/drafts/04_education_DRAFT.md,5-Manuscript/02_Literature_Review/drafts/04_education_DRAFT.md,MOVE,1,"literature review section drafts, executive summaries"
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/drafts/04_education_DRAFT_manuscript.pdf,5-Manuscript/02_Literature_Review/drafts/04_education_DRAFT_manuscript.pdf,MOVE,1,"literature review section drafts, executive summaries"
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/drafts/05_psychology_DRAFT.md,5-Manuscript/02_Literature_Review/drafts/05_psychology_DRAFT.md,MOVE,1,"literature review section drafts, executive summaries"
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/drafts/05_psychology_DRAFT_manuscript.pdf,5-Manuscript/02_Literature_Review/drafts/05_psychology_DRAFT_manuscript.pdf,MOVE,1,"literature review section drafts, executive summaries"
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/drafts/06_organizational_studies_DRAFT.md,5-Manuscript/02_Literature_Review/drafts/06_organizational_studies_DRAFT.md,MOVE,1,"literature review section drafts, executive summaries"
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/drafts/06_organizational_studies_DRAFT_manuscript.pdf,5-Manuscript/02_Literature_Review/drafts/06_organizational_studies_DRAFT_manuscript.pdf,MOVE,1,"literature review section drafts, executive summaries"
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/drafts/07_army_DRAFT.md,5-Manuscript/02_Literature_Review/drafts/07_army_DRAFT.md,MOVE,1,"literature review section drafts, executive summaries"
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/drafts/08_synthesis_DRAFT.md,5-Manuscript/02_Literature_Review/drafts/08_synthesis_DRAFT.md,MOVE,1,"literature review section drafts, executive summaries"
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/drafts/09_introduction_rewrite_DRAFT.md,5-Manuscript/01_Introduction/drafts/09_introduction_rewrite_DRAFT.md,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/drafts/10_executive_summary_DRAFT.md,5-Manuscript/02_Literature_Review/drafts/10_executive_summary_DRAFT.md,MOVE,1,"literature review section drafts, executive summaries"
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/drafts/10_executive_summary_DRAFT_manuscript.pdf,5-Manuscript/02_Literature_Review/drafts/10_executive_summary_DRAFT_manuscript.pdf,MOVE,1,"literature review section drafts, executive summaries"
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/drafts/10_executive_summary_draft.docx,5-Manuscript/02_Literature_Review/drafts/10_executive_summary_draft.docx,MOVE,1,"literature review section drafts, executive summaries"
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/drafts/11_executive_summary_PD54.md,5-Manuscript/02_Literature_Review/drafts/11_executive_summary_PD54.md,MOVE,1,"literature review section drafts, executive summaries"
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/drafts/BFLP_literature_Scholar_GPT.pdf,5-Manuscript/02_Literature_Review/sources/BFLP_literature_Scholar_GPT.pdf,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/drafts/College_of_Science_Guidance/,5-Manuscript/00_Front_matter_and_formatting/guidance/College_of_Science_Guidance,MOVE,4,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/drafts/Exec Summary Outline v2.docx,5-Manuscript/02_Literature_Review/notes/Exec Summary Outline v2.docx,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/drafts/Exec Summary Outline.docx,5-Manuscript/02_Literature_Review/notes/Exec Summary Outline.docx,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/drafts/HIGHLIGHT COLOR CODES.docx,5-Manuscript/02_Literature_Review/notes/HIGHLIGHT COLOR CODES.docx,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/drafts/HIGHLIGHT COLOR CODES.pdf,5-Manuscript/02_Literature_Review/notes/HIGHLIGHT COLOR CODES.pdf,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/drafts/Highlight_color_codes.pdf,5-Manuscript/02_Literature_Review/notes/Highlight_color_codes.pdf,MOVE,1,
+"3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/drafts/Introduction to Talent, Performance, and Success.docx","5-Manuscript/01_Introduction/drafts/Introduction to Talent, Performance, and Success.docx",MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/drafts/Manuscript_Template.dotx,5-Manuscript/00_Front_matter_and_formatting/Manuscript_Template.dotx,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/drafts/Old Intro.docx,5-Manuscript/01_Introduction/drafts/Old Intro.docx,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/drafts/QUOTES.docx,5-Manuscript/02_Literature_Review/notes/QUOTES.docx,MOVE,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/drafts/backups/,5-Manuscript/02_Literature_Review/backups/from_handoff_drafts,MOVE,3,renamed to avoid merging with other backups
+3-Master_Plan/VECTOR_work/20261016_Completion_Thoughts.docx,5-Manuscript/00_Project_wide/20261016_Completion_Thoughts.docx,MOVE,1,
+3-Master_Plan/VECTOR_work/ASSIGN_Dynamic_to_OneShot_Model.pdf,3-Master_Plan/VECTOR_work/archive/2026_08-09_planning/ASSIGN_Dynamic_to_OneShot_Model.pdf,MOVE,1,older Aug-Sep VECTOR_work root material; stays under VECTOR_work per Charles
+3-Master_Plan/VECTOR_work/COMPASS_BRIEF_ASSIGN_GRANDCHILD.md,3-Master_Plan/VECTOR_work/archive/2026_08-09_planning/COMPASS_BRIEF_ASSIGN_GRANDCHILD.md,MOVE,1,older Aug-Sep VECTOR_work root material; stays under VECTOR_work per Charles
+3-Master_Plan/VECTOR_work/COMPASS_DETAILED_ASSIGN_GRANDCHILD_INSTRUCTIONS.md,3-Master_Plan/VECTOR_work/archive/2026_08-09_planning/COMPASS_DETAILED_ASSIGN_GRANDCHILD_INSTRUCTIONS.md,MOVE,1,older Aug-Sep VECTOR_work root material; stays under VECTOR_work per Charles
+3-Master_Plan/VECTOR_work/COMPASS_DETAILED_ASSIGN_GRANDCHILD_INSTRUCTIONS.pdf,3-Master_Plan/VECTOR_work/archive/2026_08-09_planning/COMPASS_DETAILED_ASSIGN_GRANDCHILD_INSTRUCTIONS.pdf,MOVE,1,older Aug-Sep VECTOR_work root material; stays under VECTOR_work per Charles
+3-Master_Plan/VECTOR_work/COMPASS_Dissertation_Core_Deck_Materials_Questionnaire.md,3-Master_Plan/VECTOR_work/archive/2026_08-09_planning/COMPASS_Dissertation_Core_Deck_Materials_Questionnaire.md,MOVE,1,older Aug-Sep VECTOR_work root material; stays under VECTOR_work per Charles
+3-Master_Plan/VECTOR_work/COMPASS_Dissertation_Core_Deck_Materials_Questionnaire.pdf,3-Master_Plan/VECTOR_work/archive/2026_08-09_planning/COMPASS_Dissertation_Core_Deck_Materials_Questionnaire.pdf,MOVE,1,older Aug-Sep VECTOR_work root material; stays under VECTOR_work per Charles
+3-Master_Plan/VECTOR_work/COMPASS_Dissertation_Core_Deck_Materials_Questionnaire_COMPASS_draft.md,3-Master_Plan/VECTOR_work/archive/2026_08-09_planning/COMPASS_Dissertation_Core_Deck_Materials_Questionnaire_COMPASS_draft.md,MOVE,1,older Aug-Sep VECTOR_work root material; stays under VECTOR_work per Charles
+3-Master_Plan/VECTOR_work/COMPASS_Dissertation_Core_Deck_Materials_Questionnaire_COMPASS_draft.pdf,3-Master_Plan/VECTOR_work/archive/2026_08-09_planning/COMPASS_Dissertation_Core_Deck_Materials_Questionnaire_COMPASS_draft.pdf,MOVE,1,older Aug-Sep VECTOR_work root material; stays under VECTOR_work per Charles
+3-Master_Plan/VECTOR_work/Dissertation_Storyboard/,3-Master_Plan/VECTOR_work/archive/2026_08-09_planning/Dissertation_Storyboard,MOVE,5,older Aug-Sep VECTOR_work root material; stays under VECTOR_work per Charles
+3-Master_Plan/VECTOR_work/Quayle_Brief_for_Alex.pptx,3-Master_Plan/VECTOR_work/archive/2026_08-09_planning/Quayle_Brief_for_Alex.pptx,MOVE,1,older Aug-Sep VECTOR_work root material; stays under VECTOR_work per Charles
+3-Master_Plan/VECTOR_work/Quayle_One_Page_Formula_Concept_Sheet.md,3-Master_Plan/VECTOR_work/archive/2026_08-09_planning/Quayle_One_Page_Formula_Concept_Sheet.md,MOVE,1,older Aug-Sep VECTOR_work root material; stays under VECTOR_work per Charles
+3-Master_Plan/VECTOR_work/Quayle_One_Page_Formula_Concept_Sheet.pdf,3-Master_Plan/VECTOR_work/archive/2026_08-09_planning/Quayle_One_Page_Formula_Concept_Sheet.pdf,MOVE,1,older Aug-Sep VECTOR_work root material; stays under VECTOR_work per Charles
+3-Master_Plan/VECTOR_work/VECTOR_Alex_ASSIGN_Configuration_Model_Response.md,3-Master_Plan/VECTOR_work/archive/2026_08-09_planning/VECTOR_Alex_ASSIGN_Configuration_Model_Response.md,MOVE,1,older Aug-Sep VECTOR_work root material; stays under VECTOR_work per Charles
+3-Master_Plan/VECTOR_work/VECTOR_Alex_ASSIGN_Configuration_Model_Response.pdf,3-Master_Plan/VECTOR_work/archive/2026_08-09_planning/VECTOR_Alex_ASSIGN_Configuration_Model_Response.pdf,MOVE,1,older Aug-Sep VECTOR_work root material; stays under VECTOR_work per Charles
+3-Master_Plan/VECTOR_work/VECTOR_Bipartite_Assortative_Formation_Model.md,3-Master_Plan/VECTOR_work/archive/2026_08-09_planning/VECTOR_Bipartite_Assortative_Formation_Model.md,MOVE,1,older Aug-Sep VECTOR_work root material; stays under VECTOR_work per Charles
+3-Master_Plan/VECTOR_work/VECTOR_Bipartite_Assortative_Formation_Model.pdf,3-Master_Plan/VECTOR_work/archive/2026_08-09_planning/VECTOR_Bipartite_Assortative_Formation_Model.pdf,MOVE,1,older Aug-Sep VECTOR_work root material; stays under VECTOR_work per Charles
+3-Master_Plan/VECTOR_work/VECTOR_One_Page_Homophilic_Initial_League_Model.md,3-Master_Plan/VECTOR_work/archive/2026_08-09_planning/VECTOR_One_Page_Homophilic_Initial_League_Model.md,MOVE,1,older Aug-Sep VECTOR_work root material; stays under VECTOR_work per Charles
+3-Master_Plan/VECTOR_work/VECTOR_One_Page_Homophilic_Initial_League_Model.pdf,3-Master_Plan/VECTOR_work/archive/2026_08-09_planning/VECTOR_One_Page_Homophilic_Initial_League_Model.pdf,MOVE,1,older Aug-Sep VECTOR_work root material; stays under VECTOR_work per Charles
+3-Master_Plan/VECTOR_work/VECTOR_Saracco_Bomiriya_ASSIGN_Reading_Guide.md,3-Master_Plan/VECTOR_work/archive/2026_08-09_planning/VECTOR_Saracco_Bomiriya_ASSIGN_Reading_Guide.md,MOVE,1,older Aug-Sep VECTOR_work root material; stays under VECTOR_work per Charles
+3-Master_Plan/VECTOR_work/VECTOR_Saracco_Bomiriya_ASSIGN_Reading_Guide.pdf,3-Master_Plan/VECTOR_work/archive/2026_08-09_planning/VECTOR_Saracco_Bomiriya_ASSIGN_Reading_Guide.pdf,MOVE,1,older Aug-Sep VECTOR_work root material; stays under VECTOR_work per Charles
+3-Master_Plan/VECTOR_work/agent_handoffs/,3-Master_Plan/VECTOR_work/archive/2026_08-09_planning/agent_handoffs,MOVE,5,older Aug-Sep VECTOR_work root material; stays under VECTOR_work per Charles
+3-Master_Plan/VECTOR_work/handoff_upload_no_repo/,3-Master_Plan/VECTOR_work/archive/2026_08-09_planning/handoff_upload_no_repo,MOVE,13,older Aug-Sep VECTOR_work root material; stays under VECTOR_work per Charles
+5-Manuscript/05_Model_Nesting_Note_v1.md,5-Manuscript/_paper_track/05_Model_Nesting_Note_v1.md,MOVE,1,"older paper-style track (Dakota feedback, Alex briefing v4, numbered notes)"
+5-Manuscript/05_Model_Nesting_Note_v1.pdf,5-Manuscript/_paper_track/05_Model_Nesting_Note_v1.pdf,MOVE,1,"older paper-style track (Dakota feedback, Alex briefing v4, numbered notes)"
+5-Manuscript/10_Manuscript_ink_map.md,5-Manuscript/_paper_track/10_Manuscript_ink_map.md,MOVE,1,"older paper-style track (Dakota feedback, Alex briefing v4, numbered notes)"
+5-Manuscript/10_Manuscript_ink_map.pdf,5-Manuscript/_paper_track/10_Manuscript_ink_map.pdf,MOVE,1,"older paper-style track (Dakota feedback, Alex briefing v4, numbered notes)"
+5-Manuscript/11_Dakota_feedback_decision_points.md,5-Manuscript/_paper_track/11_Dakota_feedback_decision_points.md,MOVE,1,"older paper-style track (Dakota feedback, Alex briefing v4, numbered notes)"
+5-Manuscript/11_Dakota_feedback_decision_points.pdf,5-Manuscript/_paper_track/11_Dakota_feedback_decision_points.pdf,MOVE,1,"older paper-style track (Dakota feedback, Alex briefing v4, numbered notes)"
+5-Manuscript/12_Manuscript_staging_prose.md,5-Manuscript/_paper_track/12_Manuscript_staging_prose.md,MOVE,1,"older paper-style track (Dakota feedback, Alex briefing v4, numbered notes)"
+5-Manuscript/12_Manuscript_staging_prose.pdf,5-Manuscript/_paper_track/12_Manuscript_staging_prose.pdf,MOVE,1,"older paper-style track (Dakota feedback, Alex briefing v4, numbered notes)"
+5-Manuscript/Manuscript_working_outline_v1.docx,5-Manuscript/_paper_track/Manuscript_working_outline_v1.docx,MOVE,1,"older paper-style track (Dakota feedback, Alex briefing v4, numbered notes)"
+5-Manuscript/advancement_under_constrained_distinction_dakota_feedback_v03.rtf,5-Manuscript/_paper_track/advancement_under_constrained_distinction_dakota_feedback_v03.rtf,MOVE,1,"older paper-style track (Dakota feedback, Alex briefing v4, numbered notes)"
+5-Manuscript/alex_gates_briefing_structure_outline_v4.docx,5-Manuscript/_paper_track/alex_gates_briefing_structure_outline_v4.docx,MOVE,1,"older paper-style track (Dakota feedback, Alex briefing v4, numbered notes)"
+5-Manuscript/alex_gates_briefing_structure_outline_v4.md,5-Manuscript/_paper_track/alex_gates_briefing_structure_outline_v4.md,MOVE,1,"older paper-style track (Dakota feedback, Alex briefing v4, numbered notes)"
+5-Manuscript/dakota_murray_v03_response.eml,5-Manuscript/_paper_track/dakota_murray_v03_response.eml,MOVE,1,"older paper-style track (Dakota feedback, Alex briefing v4, numbered notes)"
+5-Manuscript/dakota_murray_v03_response.pdf,5-Manuscript/_paper_track/dakota_murray_v03_response.pdf,MOVE,1,"older paper-style track (Dakota feedback, Alex briefing v4, numbered notes)"
+5-Manuscript/hons-2026-slides.pdf,5-Manuscript/_paper_track/hons-2026-slides.pdf,MOVE,1,"older paper-style track (Dakota feedback, Alex briefing v4, numbered notes)"
+5-Manuscript/manuscript_background/,5-Manuscript/_paper_track/manuscript_background,MOVE,0,
+5-Manuscript/manuscript_guidance/,5-Manuscript/00_Front_matter_and_formatting/guidance,MOVE,11,
+5-Manuscript/obsolete/,5-Manuscript/_archive/from_5-Manuscript_obsolete/obsolete,MOVE,73,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/.DS_Store,,JUNK,1,Finder file; ignore
+3-Master_Plan/VECTOR_work/new_VECTOR_work/~$261018_Queryto_NVector.docx,,JUNK,1,Word lock file; delete
+3-Master_Plan/VECTOR_work/new_VECTOR_work/~$del_Chapter_Shared_Working_Draft.docx,,JUNK,1,Word lock file; delete
+3-Master_Plan/VECTOR_work/new_VECTOR_work/~$lab_presentation.pptx,,JUNK,1,Word lock file; delete
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/.DS_Store,,JUNK,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/drafts/~$0-Scholar_GPT_Introduction.docx,,JUNK,1,Word lock file; delete
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/drafts/~$_Intro_Lit_Rev_Draft.docx,,JUNK,1,Word lock file; delete
+3-Master_Plan/VECTOR_work/.DS_Store,,JUNK,1,
+5-Manuscript/.DS_Store,,JUNK,1,
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/,,EXPANDED,560,see rows under the handoff folder
+3-Master_Plan/VECTOR_work/new_VECTOR_work/,,EXPANDED,18131,see rows under new_VECTOR_work
+3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/03_Dissertation_Tone.docx,5-Manuscript/_archive/handoff_dupes/03_Dissertation_Tone.docx,DEDUPE,1,same as Dissertation Tone.docx; keep one in 00_Front_matter after compare
