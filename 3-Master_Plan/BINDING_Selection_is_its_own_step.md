@@ -12,7 +12,7 @@
 
 | Separation | Keep apart | Objects |
 |------------|------------|---------|
-| **1. Environment vs advancement** | Peer help/hurt vs who gets the scarce slot | **`L_net = B − D`** vs score + winner rule |all
+| **1. Environment vs advancement** | Peer help/hurt vs who gets the scarce slot | **`L_net = B − D`** vs score + winner rule |
 | **2. Scoring vs selection** | How we **rank** vs how we **pick winners** | **`S_i`** (λ) vs **top K** (later: stochastic draw) |
 | **3. Hero vs equations** | Empirical outcome plot vs generative rules | Layer A curve ≠ Alex score |
 
