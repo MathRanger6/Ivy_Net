@@ -27,11 +27,12 @@ chmod +x talent/re_entry/*.py talent/re_entry/*.sh
 `pipeline_config.py`: `POOL_GROUPING_MODE = 'active_at_eval_thru'`.  
 Restart kernel → Cell 0 → `reload_pipeline_config()`.
 
-## Smoke
+## Smoke (after Cells 0–11 with Phase 1–2 config)
 
 ```bash
 ./talent/re_entry/army_basic_plots.py --all
-./talent/re_entry/army_hero_slide_plot.py
+python talent/re_entry/army_hero_slide_plot.py --axis b3 --direction fwd --scale z
+python talent/re_entry/army_hero_grid_runner.py --quick
 ```
 
 See `talent/re_entry/AWS_UPLOAD_CHECKLIST.md` for full BDP.

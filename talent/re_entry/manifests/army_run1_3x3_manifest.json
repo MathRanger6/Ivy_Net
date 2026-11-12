@@ -30,7 +30,7 @@
         "(CCT z∈[1,2] Q8 · elite top20% PW3+5)",
         "",
         "Reigning tag:",
-        "ew8_z_pool_minus_mean_snr_fwd_run1"
+        "b3_fwd_z_ew8_full_run1"
       ]
     },
     {
@@ -73,11 +73,11 @@
     {
       "type": "image",
       "title": "9 · HERO (pool LOO · promotion rate)",
-      "path": "talent/re_entry/output/hero/ARMY_HERO_ew8_z_pool_minus_mean_snr_fwd_run1.png"
+      "path": "talent/re_entry/output/hero/ARMY_HERO_b3_fwd_z_ew8_full_run1.png"
     }
   ],
   "verdict": {
-    "hero_reigning": "ew8_z_pool_minus_mean_snr_fwd_run1",
+    "hero_reigning": "b3_fwd_z_ew8_full_run1",
     "peer_pool": "senior-rater pool minus mean (forward SNR)",
     "panels_7_8": "CCT z[1,2] Q8 · elite top20% PW3+5 — see act2 JSON sidecars",
     "panel_5": "pool interval overlap — POOL_GROUPING_MODE grain · H_sort if 541 module present"

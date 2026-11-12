@@ -45,7 +45,11 @@ RUN_CR_PLOT_DEFAULTS = {
 # Quadratics: set in one place here via quadratic_bases. Order of operations (in Cell 10.5): raw → square → then z-score the square if RUN_SCALE is 'z'.
 # combined_effect_base: which quadratic gets the 12.6A plot (must be in quadratic_bases); default is quadratic_bases[0].
 RUN_PROFILE = {
+    # Cox model: legacy aliases (POOL_MINUS_MEAN_* = pool_minus_loo_*)
     'tv_vars': [TB_RATIO_SNR_COL, POOL_MINUS_MEAN_SNR_COL],
+    # Cell 10.5: global z for B1/B2/B3 SNR fwd+bwd on feather (HERO); not all enter Cox formula
+    'extra_standardize_cols': list(POOL_PEER_INFLUENCE_SNR_COLS)
+    + [TB_RATIO_FWD_SNR_COL, TB_RATIO_BWD_SNR_COL],
     'quadratic_bases': [TB_RATIO_SNR_COL, POOL_MINUS_MEAN_SNR_COL],
     'combined_effect_base': POOL_MINUS_MEAN_SNR_COL,  # 12.6A plot: pool minus mean (not TB ratio)
     'interaction_name': 'star_pool_interaction',

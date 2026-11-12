@@ -273,6 +273,21 @@ Z_POOL_MINUS_MEAN_RTR_COL = f"{Z_PREFIX}{POOL_MINUS_MEAN_RTR_COL}"
 Z_POOL_MINUS_MEAN_SNR_COL = f"{Z_PREFIX}{POOL_MINUS_MEAN_SNR_COL}"
 Z_POOL_TB_RATIO_RANK_PCT_RTR_COL = f"{Z_PREFIX}{POOL_TB_RATIO_RANK_PCT_RTR_COL}"
 Z_POOL_TB_RATIO_RANK_PCT_SNR_COL = f"{Z_PREFIX}{POOL_TB_RATIO_RANK_PCT_SNR_COL}"
+# B1/B2/B3 peer-influence axes (SNR) — Cell 10.5 global z for HERO / BoE plots
+POOL_PEER_INFLUENCE_SNR_COLS = [
+    POOL_MEAN_FWD_SNR_COL,
+    POOL_MEAN_BWD_SNR_COL,
+    POOL_LOO_FWD_SNR_COL,
+    POOL_LOO_BWD_SNR_COL,
+    POOL_MINUS_LOO_FWD_SNR_COL,
+    POOL_MINUS_LOO_BWD_SNR_COL,
+]
+Z_POOL_MEAN_FWD_SNR_COL = f"{Z_PREFIX}{POOL_MEAN_FWD_SNR_COL}"
+Z_POOL_MEAN_BWD_SNR_COL = f"{Z_PREFIX}{POOL_MEAN_BWD_SNR_COL}"
+Z_POOL_LOO_FWD_SNR_COL = f"{Z_PREFIX}{POOL_LOO_FWD_SNR_COL}"
+Z_POOL_LOO_BWD_SNR_COL = f"{Z_PREFIX}{POOL_LOO_BWD_SNR_COL}"
+Z_POOL_MINUS_LOO_FWD_SNR_COL = f"{Z_PREFIX}{POOL_MINUS_LOO_FWD_SNR_COL}"
+Z_POOL_MINUS_LOO_BWD_SNR_COL = f"{Z_PREFIX}{POOL_MINUS_LOO_BWD_SNR_COL}"
 
 # Default pool context signal (use minus-mean by default)
 POOL_CONTEXT_RTR_COL = POOL_MINUS_MEAN_RTR_COL
@@ -612,10 +627,14 @@ COLUMN_CONFIG = {
 # as the model inputs in CELL 12.
 STANDARDIZE_CONFIG = {
     'enabled': True,         # Set True to create z_columns in CELL 10
-    'cols': [TB_RATIO_SNR_COL,
-             POOL_MINUS_MEAN_SNR_COL,
-             POOL_TB_RATIO_RANK_PCT_SNR_COL,
-            ],              # Explicit list of columns to standardize (empty = use model cols)
+    'cols': [
+        TB_RATIO_SNR_COL,
+        TB_RATIO_FWD_SNR_COL,
+        TB_RATIO_BWD_SNR_COL,
+        POOL_MINUS_MEAN_SNR_COL,
+        POOL_TB_RATIO_RANK_PCT_SNR_COL,
+        *POOL_PEER_INFLUENCE_SNR_COLS,
+    ],                       # Explicit list of columns to standardize (empty = use model cols)
     'exclude_cols': [        # Columns to never standardize
         'pid_pde', 'start_time', 'stop_time', 'event'
     ],
@@ -690,6 +709,8 @@ SPLINE_CONFIG = {
 # RUN_SCALE: 'raw' | 'z'
 # RUN_PROFILE: dict with
 #   - tv_vars: list of raw column names (e.g. [TB_RATIO_SNR_COL, POOL_MINUS_MEAN_SNR_COL])
+#   - extra_standardize_cols: raw cols to z-score in Cell 10.5 but not add to Cox linear terms
+#     (e.g. POOL_PEER_INFLUENCE_SNR_COLS for B1/B2/B3 HERO axes)
 #   - quadratic_bases: list of raw columns that get a squared term — this is the one place
 #     that sets which variables get quadratic coefficients when using the run profile
 #     (e.g. [POOL_MINUS_MEAN_SNR_COL] or [TB_RATIO_SNR_COL, POOL_MINUS_MEAN_SNR_COL])
@@ -735,7 +756,13 @@ def expand_run_profile(run_scale, run_profile):
     left_col = linear_cols[0] if len(linear_cols) >= 1 else tv_vars[0]
     right_col = linear_cols[1] if len(linear_cols) >= 2 else (tv_vars[1] if len(tv_vars) >= 2 else None)
 
-    _cfg.STANDARDIZE_CONFIG['cols'] = list(tv_vars) if use_z else []
+    if use_z:
+        extra_std = run_profile.get('extra_standardize_cols') or []
+        _cfg.STANDARDIZE_CONFIG['cols'] = list(
+            dict.fromkeys(list(tv_vars) + list(extra_std))
+        )
+    else:
+        _cfg.STANDARDIZE_CONFIG['cols'] = []
     # When RUN_SCALE is 'z', Cell 12 must load df_pipeline_10_5_cox_zscored so z_ columns exist
     if use_z:
         _cfg.STANDARDIZE_CONFIG['use_for_model'] = True
