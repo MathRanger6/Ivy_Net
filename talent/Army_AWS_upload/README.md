@@ -1,9 +1,5 @@
-# UVA OneDrive → Army VDI → PDE
+# Army upload bundles (Mac staging)
 
-Upload **`VANTAGE_UPTOPDE_20261112_b13.zip`** (B1–B3 Phase 1–3) to your **Up to PDE** OneDrive folder.  
-Older **`VANTAGE_UPTOPDE_20261112.zip`** is superseded for pool-mean / HERO work.
+**Tonight:** see **[`UPLOAD_NOW.md`](UPLOAD_NOW.md)** — one zip to OneDrive **Up to PDE**.
 
-On the **Army virtual desktop:** download, unzip, read **`README_TRANSFER.md`** in this folder.
-
-- **`ship_shape/`** → deploy to 520 workspace root  
-- **`archive_peer_scrub/`** → reference only  
+Canonical build source on disk: `DOD_SAFE_20261112/` (repo folder name only; **not** on the zip).

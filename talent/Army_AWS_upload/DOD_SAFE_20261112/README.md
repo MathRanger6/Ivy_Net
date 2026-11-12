@@ -1,9 +1,10 @@
 # UVA OneDrive → Army VDI → PDE
 
-Upload **`VANTAGE_UPTOPDE_20261112_b13.zip`** (B1–B3 Phase 1–3) to your **Up to PDE** OneDrive folder.  
-Older **`VANTAGE_UPTOPDE_20261112.zip`** is superseded for pool-mean / HERO work.
+Upload **`VANTAGE_UPTOPDE_20261112_b13_FULL.zip`** to **Up to PDE**.
 
-On the **Army virtual desktop:** download, unzip, read **`README_TRANSFER.md`** in this folder.
+Unzip → **`ship_shape/`** + **`archive_peer_scrub/`** + **`provisional_next/`** + this README (flat at zip root).
 
-- **`ship_shape/`** → deploy to 520 workspace root  
-- **`archive_peer_scrub/`** → reference only  
+Deploy **`ship_shape/`** for smoke; **`provisional_next/`** is diff-only after smoke (do not overwrite live files during smoke).
+
+- **`ship_shape/`** → 520 workspace root  
+- **`archive_peer_scrub/`** → reference only (Nov 2026 Vantage snapshot)  
