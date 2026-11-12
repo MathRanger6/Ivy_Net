@@ -901,7 +901,7 @@ CR_TB_STRATIFY_CONFIG = {
 # ENHANCED PLOT FEATURES (automatic):
 # - Descriptive filenames: Auto-generated from plot configuration (includes plot type, variable,
 #   grouping, binning method, filter status, and date range)
-# - Enhanced titles: Human-readable titles with variable and grouping information
+# - Enhanced titles: Human-readable titles with variable and grouping informationKAC
 # - Subtitles: Configuration details (bins, sample size, filter status)
 # - Enhanced legends: Statistics for each group (N, averages, ranges, final CIF)
 # - Configuration boxes: Text box in bottom-right corner with full configuration details
