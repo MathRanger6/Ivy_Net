@@ -4,7 +4,8 @@
 #
 # Usage:
 #   1. Cmd+Q Cursor (fully quit).
-#   2. ./scripts/clear_cursor_stale_inline_diffs_pde.sh
+#   2. bash scripts/clear_cursor_stale_inline_diffs_pde.sh
+#      (Use bash — Dropbox often strips the executable bit on ./scripts/…)
 #   3. Reopen the project.
 
 set -euo pipefail
