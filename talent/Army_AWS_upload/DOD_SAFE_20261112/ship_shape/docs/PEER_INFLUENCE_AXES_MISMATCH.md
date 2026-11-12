@@ -217,5 +217,7 @@ This revision uses local code and saved records, not a new analysis of Army data
 
 **11 November handoff:** Vantage 520 is running. Added the COMPASS task (B1–B3 HERO and Band of Excellence on one frozen run; B4 later). Updated the sentences that still said no Vantage run existed and that new runs were not authorized. No new figures were produced for this edit.
 
+**12 November 2026 (Charles + Alex — plot layer, not axis relabel):** Agreed on roles of **competing-risks CIF** (timing + cumulative promotion; feeds cross-domain **promoted yes/no HERO**; **terminal peer bin** is incomplete for path stories) and **Cox partial effects / interaction surfaces** (instantaneous hazard vs **current** peer pressure; **worth doing if December time**). **Stretch:** instantaneous hazard vs **running cumulative peer-pressure** (TB-ratio-style path aggregate) — high dissertation value if buildable in December. Detail: [`ARMY_promotion_plots_CR_vs_Cox_partial_effects.md`](ARMY_promotion_plots_CR_vs_Cox_partial_effects.md) § Charles + Alex alignment. **B4 roster pressure** remains **after** B1–B3 comparison per above.
+
 The [previous memo](../VECTOR_work/new_VECTOR_work/manuscript_backups/peer_axes_before_B1_B4_20261110.md) is retained for history. Its B labels and proposed raw-sum roster-pressure definition are superseded by this revision.
 

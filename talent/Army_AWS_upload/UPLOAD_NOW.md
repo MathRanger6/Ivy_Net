@@ -1,24 +1,19 @@
-# Upload tonight (OneDrive → Up to PDE)
+# Upload in the next few minutes
 
-**One file for PDE / virtual desktop:**
+**One file → OneDrive “Up to PDE”:**
 
-| File | Size (approx) | Put in OneDrive |
-|------|---------------|-----------------|
-| **`VANTAGE_UPTOPDE_20261112_b13_FULL.zip`** | ~4.8 MB | **Up to PDE** folder |
+`VANTAGE_UPTOPDE_20261112_b13_FULL.zip` (~5 MB)
 
-After unzip on VDI you get **`README.md`**, **`README_TRANSFER.md`**, **`ship_shape/`**, **`archive_peer_scrub/`**, **`provisional_next/`** (no extra wrapper folder).
+Includes everything for **smoke + tonight on VDI** (no second upload until tomorrow).
 
-## You do not upload
+| In the zip | Purpose |
+|------------|---------|
+| `ship_shape/` | Deploy to 520 root |
+| `provisional_next/` | Post-smoke config/notebook diffs |
+| `continue_tonight/` | Edit working docs (e.g. `Peer_Context_prep_for_battle.md`) |
+| `CONTINUE_ON_VDI.md` | Where to work after smoke |
+| `archive_peer_scrub/` | Reference snapshot |
 
-- `VANTAGE_UPTOPDE_20261112.zip` — old bundle (superseded)
-- `VANTAGE_UPTOPDE_20261112_b13.zip` — ship_shape only, incomplete
-- Loose `VANTAGE_REPLACE_20261112/` — already inside `ship_shape` in the zip
-- Repo-only folders under `Army_AWS_upload/` that are not the zip above
+**On VDI:** unzip to a **staging folder** (keep it); do not delete after deploy.
 
-## Smoke on VDI (after copy)
-
-1. Deploy **`ship_shape/`** → 520 workspace root (`README_TRANSFER.md`).
-2. Cell 0: `pipeline_config_div_name`
-3. Cells 0–11, then `python talent/re_entry/army_hero_grid_runner.py --quick`
-
-**Mac:** keep working in Cursor; pull Vantage results back after smoke.
+**Not uploaded:** full `3-Master_Plan/` tree, Mac-only Cursor scripts, git `.specstory/`.
