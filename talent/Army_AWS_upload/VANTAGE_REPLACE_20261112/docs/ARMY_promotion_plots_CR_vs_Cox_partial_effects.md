@@ -91,8 +91,43 @@ Same frozen feather; same `POOL_GROUPING_MODE = 'active_at_eval_thru'`.
 
 ---
 
+## Charles + Alex alignment (2026-11-12)
+
+Shared understanding after CR / partial-effects pedagogy. **Not** a change to B1–B4 definitions in [`PEER_INFLUENCE_AXES_MISMATCH.md`](PEER_INFLUENCE_AXES_MISMATCH.md).
+
+### Competing-risks CIF (Cell 11)
+
+| Point | Agreement |
+|-------|-----------|
+| **Story A** | Curves show **early promotion** vs **eventual lower cumulative promotion** across terminal-peer bins (e.g. hard ponds that accelerate timing but cap attainment). |
+| **Story B** | CIF logic **feeds** the cross-domain **promoted yes/no histograms** (HERO / binned promotion rates) — that layer is the **main comparative story** across Army, basketball, tenure. |
+| **Limit** | **Binning on final peer pressure only** drops most of the multi-quarter path (101st → easy unit before board). **Acknowledged by both** — not dismissed, but labeled. |
+
+**Role:** Keep CR + HERO on the **terminal B1–B3** campaign; prose states the limitation.
+
+### Partial effects + interaction surfaces (Cell 12.6 / 12.7)
+
+| Point | Agreement |
+|-------|-----------|
+| **What they show** | **Instantaneous** modeled promotion **hazard** vs **current** peer standing (quarterly x in the TV Cox fit), holding other modeled inputs at typical values. |
+| **Verdict** | **Strong step in the right direction** — can **stand alone** in the dissertation. |
+| **Priority** | Alex: **produce if time allows** (December bandwidth). |
+
+### Stretch goal — cumulative peer pressure × hazard (Charles + Alex)
+
+**Idea:** Plot **instantaneous promotion risk** against a **running cumulative peer-pressure statistic** built from **all quarters up to then** — **parallel to cumulative TB ratio** (forward cumulative own performance), but for **peer context** (B2 or B3 path-aggregate, definitional work needed).
+
+| | |
+|--|--|
+| **Why** | Bridges “final bin only” CIF and “current quarter only” partial effect — honors **path** without re-binning CIF every quarter. |
+| **Status** | **Not implemented** in 520 today. **Ideal if December time allows** — both judge it **high impact** for Ch.3. |
+| **Engineering** | Likely new column(s) per officer-quarter (cumulative mean/max of LOO pool or minus-mean) + new plot spec or exported series for hazard overlay — **spec before code**. |
+
+---
+
 ## Revision log
 
 | Date | Note |
 |------|------|
 | 2026-11-12 | Authored from Charles + CODA thread (CIF pedagogy, 101st sorting, ship-shape bundle) |
+| 2026-11-12 | Charles + Alex alignment: CR/HERO role, partial effects priority, cumulative peer-pressure × hazard stretch goal |

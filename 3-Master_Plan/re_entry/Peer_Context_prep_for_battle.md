@@ -8,6 +8,23 @@ This memo inventories repo Army **code** (no data), checks alignment with recent
 
 ---
 
+## YOU ARE HERE (2026-11-12, afternoon)
+
+| Step | Task | Status |
+|------|------|--------|
+| 0 | Ship-shape + OneDrive bundle (`VANTAGE_UPTOPDE_20261112.zip`) | **Submitted** |
+| 1 | **Cursor:** Cell 5 + naming + std + `re_entry` histogram grid runner | **In progress** (local-first) |
+| 2 | **Vantage:** full **Cells 0–11** once, then histogram grid smoke | **Next** after re-upload |
+| 3 | Competing-risks grid (same bin recipe) after columns validate | **After histogram first** |
+| 4 | Army porch **panels 7–9** + cross-domain bin parity (tenure/sports) | **Later** (mean / loo / minus language shared) |
+| 5 | Partial effects / 12.7; cumulative peer × hazard; **B4** roster pressure | **December** |
+
+**Plot strategy (Alex lock):** [`ARMY_promotion_plots_CR_vs_Cox_partial_effects.md`](ARMY_promotion_plots_CR_vs_Cox_partial_effects.md). **This sprint:** common ground on **mean / loo / minus**, **8·12·16 × Q/EW**, **full vs boe** cohort tags — not full BDP first.
+
+**One-sentence line:** Materialize peer **mean / loo / minus** (forward + backward, z-scored), mirror-upload, **full pipeline once**, histogram loop with shared filenames, then survival plots.
+
+---
+
 ## 1. Army code in the repo (no data) — what you have
 
 **Canonical working tree** (per [`../../talent/documents/README_Talent_Layout_Symlinks_And_AWS_Export.md`](../../talent/documents/README_Talent_Layout_Symlinks_And_AWS_Export.md)):
@@ -69,7 +86,7 @@ Confirm or supply when ready:
 3. **What’s already on Vantage today** — Full Mac sync of `pipeline_config` + `add_cum_oer_metrics_mod_working`, or still April-ish code?
 4. **Run of record** — Name/path of the frozen feather for the **B1–B3** comparison (`df_pipeline_11_cox_analysis.feather` or archived `*_run2_thru.feather`?). Drives whether we only touch plots vs re-run Cells 0–11.
 5. **`pipeline_config_div_name` vs base** — Notebook Cell 0 sets `pip_config_file = 'pipeline_config_div_name'`. Confirm that override doesn’t **clobber** `POOL_GROUPING_MODE` on Vantage.
-6. **Band of Excellence for this sprint** — Implement own–TB=0 filter in HERO/BoE now, or HERO full sample first then BoE pass?
+6. ~~Band of Excellence~~ — **Done:** both `full` and `boe` via plot toggle + filename tag.
 7. **Any Vantage-only modules** beyond `functionsG` that 520 touches in your current run.
 
 ---
@@ -91,7 +108,34 @@ Confirm or supply when ready:
 | **A** | **`functionsG.py`** → pull from Vantage into Cursor first (see download column below). |
 | **B** | **Not** editing from `Army_AWS_download/` export notebooks. Download **latest live Vantage** copies, diff against `talent/talent_pipeline/`, agree on winner, then upload from Cursor only if needed. |
 | **C** | Full **520 Cells 0–11** run still to nail down later. **This sprint:** focus **Cell 7+** in the notebook plus plot/mosaic stack (`talent/re_entry/`). Cells 0–6 helpers upload only when re-pool or full rebuild is in scope. |
-| **D** | *(still open)* Finish line v1: **B1/B2/B3 axis alignment** first vs **Band of Excellence** in the same pass? |
+| **D** | **Resolved (2026-11-12):** B1–B3 column work first; **BoE** = plot-time toggle (`full` vs `boe` stems), not duplicate feather columns. B4 roster pressure does **not** supersede BoE (axis vs cohort). |
+
+---
+
+## 6b. Charles decisions — B1–B3 histogram campaign (2026-11-12)
+
+| Topic | Decision |
+|--------|----------|
+| **Workflow** | Edit in Cursor → re-upload bundle → mirror on Vantage; troubleshoot there. |
+| **Data** | One Cell 11 feather; **not** three feathers. **First Vantage pass: full Cells 0–11.** Later: partial reruns when only plots/cohorts change. |
+| **Column semantics** | **mean** = full-group pool top-block average including self; **loo** = pool average without self; **minus** = own minus stated pool reference (`minus_loo` first). **Cell 5: single pass** — same peer aggregation emits `pool_mean_*` + `pool_loo_*` + `pool_minus_loo_*` (not two `exclude_self` passes). New names + old-name aliases one transition. |
+| **Directions** | Compute **forward and backward** senior-rater peer columns in Cell 5 up front (provenance + local plotting later). |
+| **Z-scores** | All three axes z-scored in Cell 10.5 **global over Cox interval rows** (winsorize as today) — not pool-local, not by snapshot date. **Hold for sprint;** snapshot- or era-specific z can be added later as separate columns. |
+| **Histograms first** | Bin grid **8 / 12 / 16 × quantile + equal width** × three axes × fwd/bwd × **`full` and `boe`**. Competing risks after smoke. |
+| **BoE** | Toggle in plot runner — drop own `tb_ratio_fwd_snr == 0` at last snapshot ([`BAND_OF_EXCELLENCE_ARMY_PORCH.md`](../../talent/re_entry/BAND_OF_EXCELLENCE_ARMY_PORCH.md)). **Do not** precompute duplicate columns for BoE on/off. |
+| **Peer TB=0 in pool** | If both policies needed without re-pool: two **column families** (pool math), not a BoE issue. |
+| **Runner** | Loop bundle with filename convention, e.g. `ARMY_HERO_b2_fwd_z_ew12_full.png` / `…_boe.png` (domain prefix swappable for tenure/sports). |
+| **Cross-domain** | Standardize most porch plots across domains; **Army exception** = survival (competing risks). Army also gets **panels 7–9** on same bin/cohort recipe when ready. |
+
+**Naming target (SNR forward example):** `pool_mean_snr_fwd`, `pool_loo_snr_fwd`, `pool_minus_loo_snr_fwd` + matching `z_*` (exact strings to lock when implementing; retire misleading `pool_tb_ratio_mean_*` / `pool_minus_mean_*` via aliases).
+
+**Proposed old → new map (implement with aliases):**
+
+| Axis | Old (misleading) | New |
+|------|------------------|-----|
+| B1 | *(missing)* | `pool_mean_snr_fwd` (etc.) |
+| B2 | `pool_tb_ratio_mean_snr_fwd` | `pool_loo_snr_fwd` |
+| B3 | `pool_minus_mean_snr_fwd` | `pool_minus_loo_snr_fwd` |
 
 ---
 
@@ -172,4 +216,7 @@ Confirm or supply when ready:
 | 2026-11-11 | §3 + `more_functions.py`: supplement-to-`functionsG` note (Charles) |
 | 2026-11-11 | §8–§9 Vantage layout lock + mirror-coding checklist (Charles) |
 | 2026-11-12 | Vantage peer-scrub archived under `talent/Army_AWS_download/20261111_TALNET_peer_scrub/` (+ zip); `functionsG.py` ingested; file-by-file verdict = Cursor canonical except `functionsG` from download |
-| 2026-11-12 | Upload bundle: `talent/Army_AWS_upload/VANTAGE_PEER_CONTEXT_REPLACE_20261112.zip` + staged tree `VANTAGE_REPLACE_20261112/` (includes `docs/` — start `INDEX_FOR_AGENTS.md`; CR vs partial effects: `ARMY_promotion_plots_CR_vs_Cox_partial_effects.md` also in `3-Master_Plan/re_entry/`) |
+| 2026-11-12 | **Transfer zip (OneDrive → Army VDI → PDE):** `talent/Army_AWS_upload/VANTAGE_UPTOPDE_20261112.zip`; inside: `ship_shape/` = deploy, `archive_peer_scrub/` = reference only |
+| 2026-11-12 | Alex + Charles plot alignment captured in `ARMY_promotion_plots_CR_vs_Cox_partial_effects.md`; YOU ARE HERE updated |
+| 2026-11-12 | B1–B3 Q&A locked: mean/loo/minus naming, Cell 5 include-self mean, z all axes, fwd+bwd, histogram grid runner, BoE toggle, full 0–11 on Vantage first pass — §6b |
+| 2026-11-12 | Phase 1 Cell 5: **single pass** for mean + loo (Charles) |
