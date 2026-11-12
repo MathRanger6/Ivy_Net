@@ -213,20 +213,40 @@ CUM_EVALS_RTR_COL = f"cum_evals_{TB_MODE_SELF}_rtr"
 CUM_EVALS_SNR_COL = f"cum_evals_{TB_MODE_SELF}_snr"
 Z_TB_RATIO_RTR_COL = f"{Z_PREFIX}{TB_RATIO_RTR_COL}"
 Z_TB_RATIO_SNR_COL = f"{Z_PREFIX}{TB_RATIO_SNR_COL}"
-POOL_TB_RATIO_MEAN_RTR_COL = f"pool_tb_ratio_mean_rtr_{TB_MODE_POOL}"
-POOL_TB_RATIO_MEAN_SNR_COL = f"pool_tb_ratio_mean_snr_{TB_MODE_POOL}"
-POOL_MINUS_MEAN_RTR_COL = f"pool_minus_mean_rtr_{TB_MODE_POOL}"
-POOL_MINUS_MEAN_SNR_COL = f"pool_minus_mean_snr_{TB_MODE_POOL}"
+# Canonical Cell 5 peer columns: mean = full pool incl. self; loo = excl. self; minus = own − loo
+POOL_MEAN_FWD_RTR_COL = "pool_mean_rtr_fwd"
+POOL_MEAN_FWD_SNR_COL = "pool_mean_snr_fwd"
+POOL_MEAN_BWD_RTR_COL = "pool_mean_rtr_bwd"
+POOL_MEAN_BWD_SNR_COL = "pool_mean_snr_bwd"
+POOL_LOO_FWD_RTR_COL = "pool_loo_rtr_fwd"
+POOL_LOO_FWD_SNR_COL = "pool_loo_snr_fwd"
+POOL_LOO_BWD_RTR_COL = "pool_loo_rtr_bwd"
+POOL_LOO_BWD_SNR_COL = "pool_loo_snr_bwd"
+POOL_MINUS_LOO_FWD_RTR_COL = "pool_minus_loo_rtr_fwd"
+POOL_MINUS_LOO_FWD_SNR_COL = "pool_minus_loo_snr_fwd"
+POOL_MINUS_LOO_BWD_RTR_COL = "pool_minus_loo_rtr_bwd"
+POOL_MINUS_LOO_BWD_SNR_COL = "pool_minus_loo_snr_bwd"
+POOL_MEAN_RTR_COL = f"pool_mean_rtr_{TB_MODE_POOL}"
+POOL_MEAN_SNR_COL = f"pool_mean_snr_{TB_MODE_POOL}"
+POOL_LOO_RTR_COL = f"pool_loo_rtr_{TB_MODE_POOL}"
+POOL_LOO_SNR_COL = f"pool_loo_snr_{TB_MODE_POOL}"
+POOL_MINUS_LOO_RTR_COL = f"pool_minus_loo_rtr_{TB_MODE_POOL}"
+POOL_MINUS_LOO_SNR_COL = f"pool_minus_loo_snr_{TB_MODE_POOL}"
+# Legacy aliases (same feather values as loo / minus_loo after Cell 5)
+POOL_TB_RATIO_MEAN_RTR_COL = POOL_LOO_RTR_COL
+POOL_TB_RATIO_MEAN_SNR_COL = POOL_LOO_SNR_COL
+POOL_MINUS_MEAN_RTR_COL = POOL_MINUS_LOO_RTR_COL
+POOL_MINUS_MEAN_SNR_COL = POOL_MINUS_LOO_SNR_COL
 POOL_SIZE_RTR_COL = f"pool_size_rtr_{TB_MODE_POOL}"
 POOL_SIZE_SNR_COL = f"pool_size_snr_{TB_MODE_POOL}"
-POOL_TB_RATIO_MEAN_FWD_RTR_COL = "pool_tb_ratio_mean_rtr_fwd"
-POOL_TB_RATIO_MEAN_FWD_SNR_COL = "pool_tb_ratio_mean_snr_fwd"
-POOL_TB_RATIO_MEAN_BWD_RTR_COL = "pool_tb_ratio_mean_rtr_bwd"
-POOL_TB_RATIO_MEAN_BWD_SNR_COL = "pool_tb_ratio_mean_snr_bwd"
-POOL_MINUS_MEAN_FWD_RTR_COL = "pool_minus_mean_rtr_fwd"
-POOL_MINUS_MEAN_FWD_SNR_COL = "pool_minus_mean_snr_fwd"
-POOL_MINUS_MEAN_BWD_RTR_COL = "pool_minus_mean_rtr_bwd"
-POOL_MINUS_MEAN_BWD_SNR_COL = "pool_minus_mean_snr_bwd"
+POOL_TB_RATIO_MEAN_FWD_RTR_COL = POOL_LOO_FWD_RTR_COL
+POOL_TB_RATIO_MEAN_FWD_SNR_COL = POOL_LOO_FWD_SNR_COL
+POOL_TB_RATIO_MEAN_BWD_RTR_COL = POOL_LOO_BWD_RTR_COL
+POOL_TB_RATIO_MEAN_BWD_SNR_COL = POOL_LOO_BWD_SNR_COL
+POOL_MINUS_MEAN_FWD_RTR_COL = POOL_MINUS_LOO_FWD_RTR_COL
+POOL_MINUS_MEAN_FWD_SNR_COL = POOL_MINUS_LOO_FWD_SNR_COL
+POOL_MINUS_MEAN_BWD_RTR_COL = POOL_MINUS_LOO_BWD_RTR_COL
+POOL_MINUS_MEAN_BWD_SNR_COL = POOL_MINUS_LOO_BWD_SNR_COL
 POOL_SIZE_FWD_RTR_COL = "pool_size_rtr_fwd"
 POOL_SIZE_FWD_SNR_COL = "pool_size_snr_fwd"
 POOL_SIZE_BWD_RTR_COL = "pool_size_rtr_bwd"
@@ -471,7 +491,19 @@ COLUMN_CONFIG = {
         TB_RATIO_BWD_RTR_COL,
         TB_RATIO_BWD_SNR_COL,
 
-        # Pool means / minus-means / sizes (forward + backward)
+        # Pool mean / loo / minus_loo / sizes (forward + backward)
+        POOL_MEAN_FWD_RTR_COL,
+        POOL_MEAN_FWD_SNR_COL,
+        POOL_MEAN_BWD_RTR_COL,
+        POOL_MEAN_BWD_SNR_COL,
+        POOL_LOO_FWD_RTR_COL,
+        POOL_LOO_FWD_SNR_COL,
+        POOL_LOO_BWD_RTR_COL,
+        POOL_LOO_BWD_SNR_COL,
+        POOL_MINUS_LOO_FWD_RTR_COL,
+        POOL_MINUS_LOO_FWD_SNR_COL,
+        POOL_MINUS_LOO_BWD_RTR_COL,
+        POOL_MINUS_LOO_BWD_SNR_COL,
         POOL_TB_RATIO_MEAN_FWD_RTR_COL,
         POOL_TB_RATIO_MEAN_FWD_SNR_COL,
         POOL_TB_RATIO_MEAN_BWD_RTR_COL,
@@ -506,6 +538,12 @@ COLUMN_CONFIG = {
         CUM_EVALS_SNR_COL,
         TB_RATIO_RTR_COL,
         TB_RATIO_SNR_COL,
+        POOL_MEAN_RTR_COL,
+        POOL_MEAN_SNR_COL,
+        POOL_LOO_RTR_COL,
+        POOL_LOO_SNR_COL,
+        POOL_MINUS_LOO_RTR_COL,
+        POOL_MINUS_LOO_SNR_COL,
         POOL_TB_RATIO_MEAN_RTR_COL,
         POOL_TB_RATIO_MEAN_SNR_COL,
         POOL_MINUS_MEAN_RTR_COL,
@@ -858,7 +896,7 @@ CR_TB_STRATIFY_CONFIG = {
 # - Each plot is a dictionary with required keys: 'name', 'variable', 'group_by', 'plot_type'
 # - Optional keys: 'bin_continuous', 'n_bins', 'bin_method', 'min_group_size', 
 #   'use_time_varying', 'filter_zero_oer', 'filter_nan_variable', 'filter_nan_group_by'
-# - Add plot dictionaries to the 'plots' list to generate them
+# - Add plot dictionaries to the 'plots' list to generate themclicking on keep all changes does nothing since it keep wanting to pull up 
 #
 # ENHANCED PLOT FEATURES (automatic):
 # - Descriptive filenames: Auto-generated from plot configuration (includes plot type, variable,

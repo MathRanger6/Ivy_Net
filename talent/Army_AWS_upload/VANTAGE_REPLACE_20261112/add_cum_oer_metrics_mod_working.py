@@ -3,8 +3,8 @@ OER assignment and pool metrics (forward/backward only).
 
 This module provides:
 - assign_oer_to_snapshots_fast(): build individual fwd/bwd cumulative metrics and ratios
-- add_pool_means_and_sizes(): compute pool means/minus-means/sizes for fwd+bwd
-- add_pool_ranks_pct_zscores(): compute pool rank/pct/z for fwd+bwd
+- add_pool_means_and_sizes(): pool mean (incl. self), pool loo, own minus loo, sizes — fwd+bwd
+- add_pool_ranks_pct_zscores(): compute pool rank/pct/z for fwd+bwd (legacy; skip when not needed)
 """
 
 import pandas as pd
@@ -308,6 +308,21 @@ def _peer_value_for_pool(series, exclude_peer_tb_zero):
     return vals
 
 
+def _assign_pool_peer_columns(df, value_col, prefix, suffix, pool_mean, pool_loo, pool_size):
+    """Write canonical mean / loo / minus_loo and legacy alias columns."""
+    pfx = f"{prefix}_{suffix}"
+    own = pd.to_numeric(df[value_col], errors="coerce")
+    minus_loo = own - pool_loo
+
+    df[f"pool_mean_{pfx}"] = pool_mean
+    df[f"pool_loo_{pfx}"] = pool_loo
+    df[f"pool_minus_loo_{pfx}"] = minus_loo
+    df[f"pool_size_{pfx}"] = pool_size
+    # Legacy names (one transition): LOO mean was mislabeled pool_tb_ratio_mean; minus was vs LOO.
+    df[f"pool_tb_ratio_mean_{pfx}"] = pool_loo
+    df[f"pool_minus_mean_{pfx}"] = minus_loo
+
+
 def _add_pool_mean_size(
     df,
     group_cols,
@@ -318,27 +333,35 @@ def _add_pool_mean_size(
     exclude_self,
     exclude_peer_tb_zero=False,
 ):
+    # exclude_self kept for API compatibility; mean + loo always computed in one pass.
+    del exclude_self
     pool_val = _peer_value_for_pool(df[value_col], exclude_peer_tb_zero)
     work = df.copy()
     work['_pool_val'] = pool_val
     count = work.groupby(group_cols, observed=True)['_pool_val'].transform('count')
     sum_vals = work.groupby(group_cols, observed=True)['_pool_val'].transform('sum')
     is_self = pool_val.notna().astype(int)
+    own = pool_val.to_numpy(dtype=float, copy=False)
 
-    if exclude_self:
-        denom = count - is_self
-        numer = sum_vals - pool_val.fillna(0)
-    else:
-        denom = count
-        numer = sum_vals
+    cnt = count.to_numpy(dtype=float, copy=False)
+    s = sum_vals.to_numpy(dtype=float, copy=False)
 
-    mean = np.where(denom > 0, numer / denom, np.nan)
-    mean = np.where(denom >= pool_min_size, mean, np.nan)
-    size = np.where(denom >= pool_min_size, denom, np.nan)
+    with np.errstate(divide='ignore', invalid='ignore'):
+        pool_mean = np.where(cnt >= pool_min_size, s / cnt, np.nan)
+        loo_denom = cnt - is_self.to_numpy(dtype=float, copy=False)
+        loo_numer = s - np.nan_to_num(own, nan=0.0)
+        pool_loo = np.where(loo_denom >= pool_min_size, loo_numer / loo_denom, np.nan)
+        pool_size = np.where(loo_denom >= pool_min_size, loo_denom, np.nan)
 
-    df[f'pool_size_{prefix}_{suffix}'] = size
-    df[f'pool_tb_ratio_mean_{prefix}_{suffix}'] = mean
-    df[f'pool_minus_mean_{prefix}_{suffix}'] = df[value_col] - mean
+    _assign_pool_peer_columns(
+        df,
+        value_col,
+        prefix,
+        suffix,
+        pool_mean,
+        pool_loo,
+        pool_size,
+    )
     return df
 
 
@@ -378,12 +401,15 @@ def _add_pool_mean_size_active_at_anchor(
     exclude_peer_tb_zero=False,
 ):
     """
-    LOO pool stats where peers = officers under the same rater whose OER window
+    Pool mean + LOO where peers = officers under the same rater whose OER window
     covers anchor_col (e.g. eval_thru_dt_bwd = moment SNR writes the OER).
+    Single cross-aggregation: full mean includes self; LOO = (sum - own) / (cnt - 1).
     """
+    del exclude_self
     out = df.copy()
     n = len(out)
     mean_arr = np.full(n, np.nan, dtype=float)
+    loo_arr = np.full(n, np.nan, dtype=float)
     size_arr = np.full(n, np.nan, dtype=float)
 
     use_cols = []
@@ -427,22 +453,40 @@ def _add_pool_mean_size_active_at_anchor(
             (cross[anchor_col] >= cross['_peer_strt'])
             & (cross[anchor_col] <= cross['_peer_thru'])
         ]
-        if exclude_self:
-            cross = cross[cross[pid_col] != cross['_peer_pid']]
         if not cross.empty:
             agg = cross.groupby('_ix', sort=False).agg(
                 pool_sum=('_peer_val', 'sum'),
                 pool_cnt=('_peer_val', 'count'),
             )
-            ok = agg['pool_cnt'] >= pool_min_size
-            ix_ok = agg.index[ok].to_numpy(dtype=int, copy=False)
-            cnt_ok = agg.loc[ok, 'pool_cnt'].to_numpy(dtype=float)
-            mean_arr[ix_ok] = agg.loc[ok, 'pool_sum'].to_numpy() / cnt_ok
-            size_arr[ix_ok] = cnt_ok
+            own_by_ix = (
+                left.set_index('_ix')[value_col]
+                .reindex(agg.index)
+                .to_numpy(dtype=float, copy=False)
+            )
+            cnt = agg['pool_cnt'].to_numpy(dtype=float, copy=False)
+            s = agg['pool_sum'].to_numpy(dtype=float, copy=False)
 
-    out[f'pool_size_{prefix}_{suffix}'] = size_arr
-    out[f'pool_tb_ratio_mean_{prefix}_{suffix}'] = mean_arr
-    out[f'pool_minus_mean_{prefix}_{suffix}'] = out[value_col] - mean_arr
+            ix_all = agg.index.to_numpy(dtype=int, copy=False)
+            with np.errstate(divide='ignore', invalid='ignore'):
+                ok_mean = cnt >= pool_min_size
+                mean_arr[ix_all[ok_mean]] = s[ok_mean] / cnt[ok_mean]
+
+                loo_denom = cnt - 1.0
+                ok_loo = loo_denom >= pool_min_size
+                loo_numer = s - np.nan_to_num(own_by_ix, nan=0.0)
+                loo_vals = np.where(ok_loo, loo_numer / loo_denom, np.nan)
+                loo_arr[ix_all] = loo_vals
+                size_arr[ix_all] = np.where(ok_loo, loo_denom, np.nan)
+
+    _assign_pool_peer_columns(
+        out,
+        value_col,
+        prefix,
+        suffix,
+        mean_arr,
+        loo_arr,
+        size_arr,
+    )
     return out
 
 
@@ -529,6 +573,10 @@ def add_pool_means_and_sizes(
     print(f"   • add_pool_means_and_sizes: POOL_GROUPING_MODE={mode}")
     if exclude_peer_tb_zero:
         print("   • add_pool_means_and_sizes: POOL_EXCLUDE_PEER_TB_ZERO=True (peers with tb_ratio==0 dropped from pools)")
+    print(
+        "   • add_pool_means_and_sizes: writing pool_mean_*, pool_loo_*, pool_minus_loo_* "
+        "(legacy pool_tb_ratio_mean_* = pool_loo_*, pool_minus_mean_* = pool_minus_loo_*)"
+    )
     df = df_in.copy()
     pool_kw = dict(
         pool_grouping_mode=mode,
@@ -580,7 +628,9 @@ def _add_pool_ranks(df, group_cols, value_col, prefix, suffix, pool_min_size, ra
     rank = df.groupby(group_cols)[value_col].rank(ascending=rank_ascending, method=rank_method)
     rank_pct = df.groupby(group_cols)[value_col].rank(ascending=rank_ascending, method=rank_method, pct=True)
     std = df.groupby(group_cols)[value_col].transform('std')
-    mean_col = f'pool_tb_ratio_mean_{prefix}_{suffix}'
+    mean_col = f'pool_loo_{prefix}_{suffix}'
+    if mean_col not in df.columns:
+        mean_col = f'pool_tb_ratio_mean_{prefix}_{suffix}'
     mean = df[mean_col] if mean_col in df.columns else df.groupby(group_cols)[value_col].transform('mean')
 
     size_col = f'pool_size_{prefix}_{suffix}'

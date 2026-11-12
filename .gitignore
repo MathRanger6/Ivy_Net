@@ -27,6 +27,9 @@ build/
 Thumbs.db
 *.swp
 *.swo
+# Microsoft Office lock files (~$…) — transient; may contain display name / machine id
+~$*
+**/~$*
 
 # --- Tenure pipeline: large / binary / sync-heavy (disk + rsync, not Git) ---
 # HTML snapshot tree — grows to 10s of GB as URL coverage + school count expand

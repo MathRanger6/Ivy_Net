@@ -13,7 +13,7 @@ This memo inventories repo Army **code** (no data), checks alignment with recent
 | Step | Task | Status |
 |------|------|--------|
 | 0 | Ship-shape + OneDrive bundle (`VANTAGE_UPTOPDE_20261112.zip`) | **Submitted** |
-| 1 | **Cursor:** Cell 5 + naming + std + `re_entry` histogram grid runner | **In progress** (local-first) |
+| 1 | **Cursor:** Cell 5 + naming + std + `re_entry` histogram grid runner | **Phase 1 done** — Cell 5 mean/loo/minus_loo + config |
 | 2 | **Vantage:** full **Cells 0–11** once, then histogram grid smoke | **Next** after re-upload |
 | 3 | Competing-risks grid (same bin recipe) after columns validate | **After histogram first** |
 | 4 | Army porch **panels 7–9** + cross-domain bin parity (tenure/sports) | **Later** (mean / loo / minus language shared) |
