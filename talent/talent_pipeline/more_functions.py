@@ -1,6 +1,9 @@
 """
 Utility functions for Army personnel data analysis pipeline.
 This module provides functions for database connections, data I/O, timing, and logging.
+
+Supplements ``functionsG`` only — import explicitly where needed. ``520`` Cell 0 uses
+``from functionsG import *``; this file does not replace ``functionsG``.
 """
 
 import pandas as pd

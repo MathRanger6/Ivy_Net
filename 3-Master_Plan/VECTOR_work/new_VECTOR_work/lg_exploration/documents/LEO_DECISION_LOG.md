@@ -589,3 +589,61 @@ The existing model manuscript uses remaining-seat multiplicity in its displayed
 ASSIGN equation. Reconciliation with the selected one-opportunity baseline is
 an eventual manuscript task; the source manuscript remains untouched.
 
+## 2026-11-11: Roster-size sweep promoted to core chapter experiment
+
+Charles selected option B: include the equal-roster-size sweep in the main
+experiment plan rather than treating it as an optional later comparison.
+Keep N=2,000 and reuse the same players across settings, with J=N/r. Thus this
+comparison changes the partition size and number of teams together; it does
+not isolate roster size at fixed J. Retain A-bar initialization, mean attraction,
+one opportunity per nonfull team, and the agreed rho grid and repetition stages.
+Proposed figures: H_sort versus rho with a colored line per roster size,
+corresponding random references (J-1)/(N-1), excess above those references,
+and adjacent-team overlap. Ranked-mean comparisons should use relative team
+rank because J differs. Exact roster-size grid remains to be confirmed.
+No new simulations or changes to notebook settings were made for this update.
+
+### Approved grid and completed saved-evidence stage
+
+Charles confirmed r=[10,20,40,80,100], J=[200,100,50,25,20], N=2,000,
+and authorized verifying/replotting existing results before missing experiments
+in stages. The remaining roster-grid decision above is now resolved.
+code/chapter_saved_review.py and notebooks/02_chapter_saved_review.ipynb
+provide reproducible analysis of saved checkpoints without assignment simulation.
+All 1,000 checkpoints in the matched normal baseline one/seats runs passed
+complete-grid, ID, capacity, population-seed, arrival-order and choice-uniform
+checks. Recomputed means, variances and H_sort agree with stored values;
+H_sort also agrees with saved CSV summaries. This is a checkpoint audit, not
+a replay proving every historical assignment choice followed its kernel.
+At rho=4: one H_sort=0.787119; seats=0.808762; paired difference=0.021642
+with conditional SE=0.001661. Adjacent-team inversion is 0.468238 versus
+0.466369. Adjacent ranks among 100 teams need not be widely separated even
+when total between-team sorting is strong. These are conditional results for
+one fixed normal population; they are not fresh-population robustness results.
+Derived PNG/PDF figures and audit_report.json, including source hashes, are
+in results/chapter_saved_review_20261111. Hierarchy and opportunity figures
+were visually inspected; script and notebook cells compile. No historical
+results or working-notebook settings were changed. Inventory finds only r=20
+among the approved N=2,000 capped roster sizes; r=10,40,80,100 remain new work.
+
+### Completed five-size paired roster sweep
+
+Charles authorized running the missing roster sizes and plotting all five.
+code/chapter_roster_sweep.py and notebooks/03_chapter_roster_sizes.ipynb now
+provide resumable execution with visible roster/rho/repetition/seed settings.
+Run results/chapter_roster_sweep/102f2dbd3ce8 contains 750 divisions: 600 new
+assignments for r=10,40,80,100 and 150 imported r=20 assignments (first 30
+repetitions at each rho). Same normal population, arrival orders and uniforms
+are paired across all settings. Source kernel hashes match the imported run.
+Every roster filled its capacity. Independent final means agree with online
+centroids for new assignments. Re-execution for a caption correction resumed
+all 750 checkpoints, checked their inputs, and generated zero new assignments.
+PNG/PDF figures show all five sizes together: H_sort, excess above random,
+within-team variance, adjacent-team inversion, and ranked means by rho.
+One unique input-population plot is included. Figure layouts were inspected.
+At rho=4, H_sort means for r=10,20,40,80,100 are respectively
+0.797576,0.787248,0.780129,0.781744,0.769165. Lower/moderate rho displays larger
+size differences. Interpret adjacent-team inversion alongside changing J:
+adjacent ranks span different portions of the team distribution. All findings
+are conditional on one fixed population, with 30 assignment repetitions.
+

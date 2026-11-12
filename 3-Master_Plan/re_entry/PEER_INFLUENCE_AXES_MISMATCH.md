@@ -1,8 +1,20 @@
 # Peer context axes across domains
 
-**Revised:** 10 November 2026  
+**Revised:** 10 November 2026; handoff status 11 November 2026  
 **For:** Charles, CODA and COMPASS; Chapter 3 empirical alignment  
 **Purpose:** Distinguish full-group performance, leave-one-out peer performance, relative standing and sigmoid-based roster pressure before comparing the Army, basketball and tenure figures.
+
+## Handoff status (11 November 2026)
+
+Charles has the Army **520** pipeline running on **Vantage**. He is provisioning the mosaic code next. This memo’s axis definitions are unchanged. What changed is permission to produce the comparison.
+
+**COMPASS task now:** Specify HERO plots and Band of Excellence plots for **B1, B2, and B3** on **one frozen 520 run**. Same officers, same peer-group membership, same outcome, same filters. CODA and Charles execute the plots on Vantage. COMPASS does not own the Army notebook.
+
+**Not this task:** Choosing the axis because one curve looks more like an inverted U. Integrating **B4** into the Army code. The survival chapter and the LG assignment chapter are separate decisions and do not change these axis definitions.
+
+**B4 comes after** the B1–B3 comparison, and only once theta, gamma, the performance scale, and self-inclusion are written down. B4 needs each peer’s performance, not only a stored mean.
+
+**Band of Excellence** is a sample restriction (the band where scarce distinction is at stake), not a fifth axis. See `talent/re_entry/BAND_OF_EXCELLENCE_ARMY_PORCH.md`. Report B1, B2, and B3 both on the full eligible sample (HERO) and inside the declared band (BoE). Do not switch the peer definition when switching the sample.
 
 ## What needs correcting
 
@@ -10,7 +22,7 @@ The historical Army figure and the documented basketball and tenure figures do n
 
 The previous memo also used “peer mean” too loosely and described roster pressure as though we had not yet defined it. The manuscript already defines shared roster pressure as the **average of sigmoid-transformed competitive relevance**, and the basketball comparison implements both shared and leave-one-out versions. A raw sum of peer performance is not that construct.
 
-This revision separates four axes. It does not choose the measure that gives the strongest-looking curve, declare roster pressure empirically superior, or authorize new runs. The scientific question determines which measure belongs in a comparison.
+This revision separates four axes. It does not choose the measure that gives the strongest-looking curve, or declare roster pressure empirically superior. The 10 November text did not itself run anything. The 11 November handoff above authorizes the B1–B3 comparison on the live 520 run. The scientific question still determines which measure belongs in a comparison.
 
 **Label change:** The previous memo’s B1 becomes **B2** below; its B2 becomes **B3**. Its proposed B3 is replaced by the properly specified **B4**. **B1** now means the full-group mean T_j. These labels organize this memo; they do not rename production columns or manuscript notation.
 
@@ -127,7 +139,7 @@ The current Mac helper explicitly calculates pool_minus_mean as own performance 
 
 The March plot provenance audit identifies the historical figure family with this difference axis. The March and April exported helpers implement legacy snapshot-by-rater grouping; the current Mac config selects active_at_eval_thru. A local config is evidence of available settings, not proof of what ran on AWS or Vantage.
 
-No live Vantage run, exported dataframe or newly constructed Army B4 has been validated in this revision. The presence of an old feather file on the offline machine is not assumed.
+As of 11 November 2026 the 520 pipeline runs on Vantage. That does not mean a B1 or B2 HERO has been produced, and no Army B4 has been validated. The March figure remains the historical B3 result. The presence of an old feather file on the offline machine is not assumed.
 
 ### Basketball
 
@@ -159,7 +171,7 @@ The axis comparison should use one frozen membership definition first. A later c
 
 ## Recommended comparison before wider reruns
 
-The recommendation is to use **B2, the LOO peer mean**, for the first direct peer-strength comparison across the documented domains, while retaining **B1, full-group T_j**, as an explicit comparison and **B3** as the distinct relative-performance result. This is a recommendation for Charles and Alex, not a newly locked decision. B4 remains the model-based candidate to investigate.
+Charles has authorized that comparison on the live 520 run (see the handoff status). Use **B2, the LOO peer mean**, as the peer-strength axis to line up with the documented basketball and tenure figures. Retain **B1, full-group T_j**, as an explicit comparison and **B3** as the distinct relative-performance result already in the historical Army figure. Which axis the dissertation treats as primary is still not locked. B4 remains the model-based candidate to investigate after this comparison.
 
 1. Identify one Army run of record and reproduce Figure A and the historical B3 figure with their actual filters, outcomes and denominators.
 2. On the same focal sample and same underlying peer membership, calculate or verify B1 and B2. Preserve the original raw values and document any standardization.
@@ -185,7 +197,7 @@ A final-row-per-officer extract with only A_i, a peer mean and a difference may 
 
 ## What remains to decide
 
-Charles and Alex should settle the near-term peer-strength display, the authoritative Army membership/time definition, and whether B4-shared or B4-LOO is the empirical question to test next. They should also settle any threshold calibration before interpreting B4 across domains.
+The near-term display is settled: HERO and Band of Excellence plots for B1, B2, and B3 on one frozen 520 run. Still open: the authoritative Army membership and time definition for that run, and, after the comparison, whether B4-shared or B4-LOO is the empirical question and how theta and gamma are set. Do not interpret B4 across domains before that calibration is written down.
 
 The Army March result remains a relative-performance finding. Its role in the dissertation can be preserved without treating it as the same axis as the basketball and tenure peer-mean findings. Roster pressure is a precisely defined candidate explanation; it has not been established as the universal replacement for those empirical measures.
 
@@ -202,6 +214,8 @@ This revision uses local code and saved records, not a new analysis of Army data
 - [Tenure HERO provenance](HEROs_and_PASSes/tenure_sandbox/hero/HERO_tenure_q16_decision_dept_loo_infHM_provenance.json).
 
 **10 November revision:** At Charles’s request, separated T_j from LOO peer mean, reassigned all B labels consistently, restored the sigmoid-average definition and existing shared/LOO implementation, and removed the proposed rule of choosing an axis by the strength of its curve. Preserved the Army provenance caveats. No manuscript, data, code or figures were changed, and no models were run.
+
+**11 November handoff:** Vantage 520 is running. Added the COMPASS task (B1–B3 HERO and Band of Excellence on one frozen run; B4 later). Updated the sentences that still said no Vantage run existed and that new runs were not authorized. No new figures were produced for this edit.
 
 The [previous memo](../VECTOR_work/new_VECTOR_work/manuscript_backups/peer_axes_before_B1_B4_20261110.md) is retained for history. Its B labels and proposed raw-sum roster-pressure definition are superseded by this revision.
 
