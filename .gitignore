@@ -181,3 +181,14 @@ hierarchy_data/**/*.zip
 # Zotero exports for the introduction: commit the .bib, not attached papers or web snapshots
 3-Master_Plan/VECTOR_work/new_VECTOR_work/Introduction_Agent_Handoff_20261027/sources/*/files/
 
+
+# Raw Army export archives contain database credentials; retain locally only.
+/talent/Army_AWS_download/20261111_TALNET_peer_scrub.zip
+/talent/Army_AWS_upload/VANTAGE_UPTOPDE_20261112.zip
+/talent/Army_AWS_upload/VANTAGE_UPTOPDE_20261112_b13.zip
+/talent/Army_AWS_upload/VANTAGE_UPTOPDE_20261112_b13_FULL.zip
+
+# Local environment variants must not carry credentials into Git.
+.env.*
+!.env.example
+!.env.template

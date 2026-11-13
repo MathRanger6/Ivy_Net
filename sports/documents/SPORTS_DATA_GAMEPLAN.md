@@ -4,6 +4,8 @@
 
 **Lineage:** The original narrative came from **`../../1-Various_PDE_and_Chat_stuff/4-coding_stuff/SPORTS DATA Flow.docx`**. Historical **cell-level** run order for the retired multi-notebook layout is preserved in **`obsolete_documents/sports_gameplan_old/Scout_College_Basketball_Notebook_Workflow_How_To_bkup.md`**; a **successor** how-to may be added here once the new conductor exists. Until then, treat **this** file as the source of truth for **intent**.
 
+**Chapter 3 provenance (file-level, not pipeline intent):** [`5-Manuscript/03_Data_and_Empirics/notes/20261113_MBB_DATA_SOURCES_register.md`](../../5-Manuscript/03_Data_and_Empirics/notes/20261113_MBB_DATA_SOURCES_register.md) — what each frozen CSV is, ESPN box **2003–2025** on disk vs HERO window **2009–2021**, and TK download dates.
+
 ---
 
 ## Working agreement (process)

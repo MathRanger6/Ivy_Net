@@ -150,31 +150,29 @@ def load_feather(file_name,load_dir='./big_dfs',show=True,log=None):
     return df
     
 def run_pp():
-    pp = "XXXXXXXXXX"
-    return pp
+    """Read the database password from the execution environment."""
+    return os.environ["PGPASSWORD"]
+
 
 def get_params():
-    params_dict = { 'host':'XXXXXXXXXX',
-                    'port':'XXXXXXXXXX',
-                  'dbname':'XXXXXXXXXX',
-                    'user':'XXXXXXXXXX',
-                'password':run_pp()}
-    return params_dict
+    """Read connection settings without storing credentials in source control."""
+    return {
+        "host": os.environ["PGHOST"],
+        "port": os.environ.get("PGPORT", "5432"),
+        "dbname": os.environ["PGDATABASE"],
+        "user": os.environ["PGUSER"],
+        "password": run_pp(),
+    }
+
 
 def get_db_connection_info():
-    """
-    Returns both:
-    - params: a dictionary for pycopg2.connect(**params)
-    - conn_str: a SQLAlchemy-compatible connection string for Modin or SQLAlchemy
-    """
+    """Return psycopg connection parameters and a SQLAlchemy connection URL."""
     from urllib.parse import quote_plus
-    params = { 'host':'XXXXXXXXXX',
-                'port':'XXXXXXXXXX',
-              'dbname':'XXXXXXXXXX',
-                'user':'XXXXXXXXXX',
-                'password':run_pp()}
-    conn_str = (f"postgresl://{params['user']}:{quote_plus(params['password'])}"
-                f"@{params['host']}:{params['port']}/{params['dbname']}")
+    params = get_params()
+    conn_str = (
+        f"postgresql://{quote_plus(params['user'])}:{quote_plus(params['password'])}"
+        f"@{params['host']}:{params['port']}/{quote_plus(params['dbname'])}"
+    )
     return params, conn_str
         
         

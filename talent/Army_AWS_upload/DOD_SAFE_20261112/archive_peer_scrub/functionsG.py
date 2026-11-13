@@ -150,32 +150,29 @@ def load_feather(file_name,load_dir='./big_dfs',show=True,log=None):
     return df
     
 def run_pp():
-#     pp = "Even!M0re!In!2024"
-    pp = "temp4you"
-    return pp
+    """Read the database password from the execution environment."""
+    return os.environ["PGPASSWORD"]
+
 
 def get_params():
-    params_dict = { 'host':'cpdea-prod.cyrne4ul6ab8.us-gov-west-1.rds.amazonaws.com',
-                    'port':'5432',
-                  'dbname':'cpdeaprod',
-                    'user':'an_levinec',
-                'password':run_pp()}
-    return params_dict
+    """Read connection settings without storing credentials in source control."""
+    return {
+        "host": os.environ["PGHOST"],
+        "port": os.environ.get("PGPORT", "5432"),
+        "dbname": os.environ["PGDATABASE"],
+        "user": os.environ["PGUSER"],
+        "password": run_pp(),
+    }
+
 
 def get_db_connection_info():
-    """
-    Returns both:
-    - params: a dictionary for pycopg2.connect(**params)
-    - conn_str: a SQLAlchemy-compatible connection string for Modin or SQLAlchemy
-    """
+    """Return psycopg connection parameters and a SQLAlchemy connection URL."""
     from urllib.parse import quote_plus
-    params = { 'host':'cpdea-prod.cyrne4ul6ab8.us-gov-west-1.rds.amazonaws.com',
-                'port':'5432',
-              'dbname':'cpdeaprod',
-                'user':'an_levinec',
-                'password':run_pp()}
-    conn_str = (f"postgresl://{params['user']}:{quote_plus(params['password'])}"
-                f"@{params['host']}:{params['port']}/{params['dbname']}")
+    params = get_params()
+    conn_str = (
+        f"postgresql://{quote_plus(params['user'])}:{quote_plus(params['password'])}"
+        f"@{params['host']}:{params['port']}/{quote_plus(params['dbname'])}"
+    )
     return params, conn_str
         
         
@@ -1021,7 +1018,12 @@ def check_table(table_name,show=True,engine=None):
         pp = run_pp()
         safe_pw = quote_plus(pp)
         params_dict = get_params()
-        conn_str = f"postgresql+psycopg2://an_levinec:{safe_pw}@cpdea-prod.cyrne4ul6ab8.us-gov-west-1.rds.amazonaws.com:5432/cpdeaprod"
+        conn_str = (
+            f"postgresql+psycopg2://{quote_plus(__import__('os').environ['PGUSER'])}:"
+            f"{quote_plus(__import__('os').environ['PGPASSWORD'])}@"
+            f"{__import__('os').environ['PGHOST']}:{__import__('os').environ.get('PGPORT', '5432')}/"
+            f"{quote_plus(__import__('os').environ['PGDATABASE'])}"
+        )
         engine = create_engine(conn_str)
 
     with engine.connect() as conn:

@@ -17,7 +17,12 @@ pp = run_pp()
 from urllib.parse import quote_plus
 safe_pw = quote_plus(pp)
 params_dict = get_params()
-conn_str = f"postgresql+psycopg2://an_levinec:{safe_pw}@cpdea-prod.cyrne4ul6ab8.us-gov-west-1.rds.amazonaws.com:5432/cpdeaprod"
+conn_str = (
+    f"postgresql+psycopg2://{quote_plus(__import__('os').environ['PGUSER'])}:"
+    f"{quote_plus(__import__('os').environ['PGPASSWORD'])}@"
+    f"{__import__('os').environ['PGHOST']}:{__import__('os').environ.get('PGPORT', '5432')}/"
+    f"{quote_plus(__import__('os').environ['PGDATABASE'])}"
+)
 
 #  === Create SQLAlchemy Engine ---
 engine = create_engine(conn_str)
