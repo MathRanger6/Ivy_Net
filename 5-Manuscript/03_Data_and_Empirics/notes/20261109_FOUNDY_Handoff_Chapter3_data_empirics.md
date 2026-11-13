@@ -1,5 +1,7 @@
 # FOUNDY handoff — Chapter 3 (Data & empirics)
 
+**Superseded as the front door on 13 November 2026.** NVECTOR should start at `20261113_FOUNDY_to_NVECTOR_Ch3_handoff.md`. This file is still useful for Army background. Its locks on survival ("footnote only") and on file locations under `VECTOR_work/` are out of date.
+
 **Audience:** FOUNDY (thesis drafting for Charles / NVector).  
 **Status:** Charles to **approve before** treating as binding for Word work.  
 **Prepared:** 2026-11-09 (COMPASS + Charles thread).  
