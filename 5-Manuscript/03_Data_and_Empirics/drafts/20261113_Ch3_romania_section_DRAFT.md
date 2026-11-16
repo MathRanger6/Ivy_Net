@@ -4,6 +4,8 @@ NVECTOR | 13 November 2026 | DRAFT for Charles
 
 Section numbers are placeholders until the chapter is assembled.
 
+**OPEN — chapter analysis specification:** Final counties and sample counts; within-county versus cross-county outcome coverage; subject categories, cutoff tiers, and exclusions; primary peer measure; own-performance bands; binning, pooling weights, and uncertainty reporting; and the figures and descriptive conclusions to retain. Existing analyses described below do not settle these choices. No downturn or common cross-domain shape is assumed.
+
 ## X.1 Why this system fits
 
 Romanian high-school admissions provide a setting in which individual academic performance, the school environment, and access to educational opportunities can be examined together. The 2001 records identify applicants’ national examination scores, school-awarded grades, originating schools, and subsequent placement into high-school programs. Applicants from the same originating school form an observed peer group, while placement records show who entered programs with high admission cutoffs. These linked records allow us to ask whether applicants with comparable examination performance differ in their likelihood of entering those programs according to the measured performance of the other applicants from their school.
@@ -53,3 +55,27 @@ The group is the set of observed applicants from the same originating school in 
 Peer context is measured through the examination performance of those applicants. The full-group mean describes the average performance of the observed school cohort, including the focal applicant. The leave-one-out mean describes the other applicants from that school and can therefore differ between individuals in the same group. Both measures appear in the existing Romanian comparisons. Keeping them distinct allows us to compare a shared school characteristic with the academic environment surrounding a particular applicant.
 
 Advancement is defined as actual placement in a designated set of selective high-school programs. The existing analyses identify these programs through admission-cutoff tiers within county and subject category, comparing entry into the highest tier with entry into the highest two tiers combined. Under the full-occupancy specification, only programs that filled their offered places qualify for this ranking. The outcome therefore records access to a specified selective destination; the geographic coverage, subject categories, and number of included tiers determine which opportunities count.
+
+## X.6 What this system cannot give us
+
+The comparisons describe associations between school environments and subsequent placement, but do not identify the causal contribution of peers. Students attending different originating schools may also differ in family circumstances, geography, educational preferences, and prior achievement. Comparing applicants with similar examination scores narrows one measured difference without making their circumstances equivalent. Because the examination follows years of schooling, this comparison also cannot recover the full developmental contribution of the school environment.
+
+The reconstructed peer groups represent observed admission applicants rather than complete school cohorts. Students who did not participate in the recorded allocation round, followed another educational route, or were absent from the surviving reports may be missing. Such omissions could change both the measured composition of a school and the applicants represented in its placement rate. Conclusions therefore apply to the recovered applicant populations and covered locations; broader coverage requires separate evidence.
+
+The absence of preference lists limits what placement can reveal about competition. An applicant who entered a less selective program may have preferred its subject, location, or other characteristics. The records cannot establish that every applicant sought a place in the programs designated as successful destinations. Consequently, even where program capacities are known, the observed success rate does not identify the ratio of available places to the applicants who actually competed for them.
+
+Admission cutoffs measure realized entrance selectivity rather than educational quality or later benefit. A high cutoff identifies a program entered by applicants with high admission scores, but does not establish how much that program improves learning or subsequent opportunities. Rankings defined within county and subject category are also relative to those settings: the highest-ranked programs in two counties need not have equal cutoffs. The outcome examined here is access to a specified selective destination in the recorded admission round, not the longer-term consequences of attending it.
+
+## X.7 Descriptive results
+
+The descriptive comparisons begin with the relationship between an applicant’s own examination performance and selective placement. Applicants are grouped by examination score, and the proportion entering the designated programs is calculated within each group. This establishes how closely the measured performance used throughout the analysis corresponds to the advancement outcome.
+
+**[OPEN: Select the own-performance figure, confirm its sample and outcome definition, and describe the observed relationship with counts and uncertainty.]**
+
+The next comparison examines placement rates across school peer environments. Using the same outcome definition and eligible applicants allows this relationship to be read alongside the own-performance comparison. The distinction matters because an overall association between peer performance and placement can also reflect differences in the examination performance of the applicants attending those schools.
+
+**[OPEN: Select the primary peer measure and matching figure. Specify binning and pooling weights, then report the observed pattern without presuming a downturn.]**
+
+Comparisons within examination-score bands then examine whether applicants with similar measured achievement have different placement rates across peer environments. Each band provides a separate view of that relationship, allowing its shape and magnitude to differ across levels of individual performance. Applicant and school counts are needed alongside these comparisons, particularly where few observations support the extremes of the peer distribution.
+
+**[OPEN: Select the performance bands and corresponding figures. Report the supported differences, their uncertainty, and any sensitivity to the peer measure or sample definition.]**
